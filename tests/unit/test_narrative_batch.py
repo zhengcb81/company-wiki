@@ -40,7 +40,7 @@ class Reader:
     def describe_version(self, ref):
         return dict(self.metadata)
 
-    def read_policy_sha256(self):
+    def read_policy_sha256(self, ref=None):
         return "b" * 64
 
 
@@ -134,7 +134,7 @@ def test_batch_identity_includes_catalog_metadata_and_read_policy():
     reader.metadata["title"] = "New captured title"
     assert module.build_batch_events(request, reader, now="2026-10-03T10:00:00Z").input_hash != first.input_hash
     reader.metadata["title"] = "Company call"
-    reader.read_policy_sha256 = lambda: "c" * 64
+    reader.read_policy_sha256 = lambda ref=None: "c" * 64
     assert module.build_batch_events(request, reader, now="2026-10-03T10:00:00Z").input_hash != first.input_hash
 
 

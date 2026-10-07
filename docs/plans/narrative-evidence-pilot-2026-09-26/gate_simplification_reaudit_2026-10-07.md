@@ -180,7 +180,15 @@ StockInfoDLSimple 的 provider host、include/exclude 是来源发现和过滤�
 
 **先写反例并并入G2B一次联调：**新steady无snapshot/binding仍可latest明确下载一次，再请求复用零fetch；旧expired/stale签收不影响相同范围有效请求；不同旧TTL并发仍最多一fetch/canonical。无intent/真实歧义/错身份期次/未来公开零fetch；假SHA/PDF、越界、未计量响应、实际超byte/time/cost不入库；provider unavailable/提交或最终再解析失败不能报completed。真实离线subprocess核FF v1/v2→ET/CWP一致、预算不重置、pathless与计数保留。复用close_gap FC801/804、download_authorization/gap_plan/acquisition/canonical_writer/adapter_process/ensure_paused/source_operation_v2及FF FC802/S3/v2责任包；删除签收本身的旧期待，保留资源/身份/SHA/幂等反例。不为此重复paid HTTP。
 
-### G2-13 / P0：构造Store暗含整库深检和全量补种
+### G2-01b 本次实施约定（2026-10-07）
+
+- 查询选源继续保留全局schema2；新exact `read_policy_sha256(ref)`采用schema3，绑定SourceRef、可见来源身份/期间/公开日和该source已登记根的有效准入/选择规则。排除物理DB/root路径、无关根、采集说明和退休权限标签；实际open仍逐次执行当前路径包含、准入、SHA/长度校验。
+- 新批次用`narrative-run-binding/2`，保存每document的scoped pin及其汇总SHA；事件/任务、storage baseline和费用仍为原始不可变绑定。公开SourceRef和SourceExport v2形状保持，显式schema2旧pin只能与当前全局投影相等时使用。
+- 旧`binding/1`+schema2没有原根规则，只剩不可逆全局SHA：全局未变时比较同一source其余事实并继续读取原事件；全局改变时明确`BATCH_READ_POLICY_CHANGED`，不伪造旧投影、不签新旧账、不自动重跑。缺binding/schema1仍解释为不可证明。
+- TDD：9个合同反例首先因缺scoped API真实RED；真实CLI一次完整完成后旧binding/1与新binding/2不符真实RED。首轮CLI测试错误地查询`finite-cli`而实际夹具为`cli-e2e`，已修正并重跑，夹具错误不计产品RED。计划补丁一次整行上下文不匹配，无写入，改用明确标题插入。
+- 集中验收覆盖无关根新增、顺序变化、DB及原件根真实迁址、坏字节、实际准入规则变化、binding map损坏、旧pin兼容、终态恢复零新模型/费用/事件/数据库写和测试根清理；不加入日常长E2E、不复验已绿G2-13。
+
+### G2-13 / P0：构造Store暗含整库深检和全量补种（实施记录）
 
 **当前：b202d07已正常推送；精确CI37597724658全步骤GREEN/79秒。** [实际验收](harness_lanes/results/g2_store_initialization_acceptance_2026-10-07.json)：132初始责任项、54最终责任/两CLI；普通构造0深检、显式/new/升级各一轮，Catalog当前0DDL/seed，真实升级原子回滚；账目按当前run校验，不靠整库体检避免隐式转换。01b仍pending，不代表whole G2A完成。以下为原问题和实施合同。
 
@@ -243,4 +251,4 @@ MAIN 是唯一集成与生产变更负责人。此表是施工顺序，不是新
 
 ## Next Step
 
-**本次审计与核心93ac5a5已正常推送、精确CI37590638806全部步骤绿90秒。** 全G2A还含Store轻初始化/scoped pin/旧家族清理，不能用核心子集代替。目标服务paused；明确恢复后先G2-13/P0轻初始化TDD→01b→P0-B两仓日常门和CWP/FF latest单请求→P1家族/工程清单→集中G2A/B→R2。不重跑已绿核心长包、不自动启动付费批次，不把审计/核心修复冒称全面完成。
+**目标active；核心93ac5a5与Store13/b202d07均已发布并精确CI绿。** MAIN现收口发布01b scoped pin/binding2（52责任与双样本实际CLI迁址39.31秒绿），随后12/CWP和FF latest单请求→P1家族/清单→G2A/B→R2。两仓日常门/RF工具三卡用户已分派、待交接；不占其独占写集。没有新增小节点签收、不重复已绿长包、不自动启动付费批次，不把本子集冒称全面完成。

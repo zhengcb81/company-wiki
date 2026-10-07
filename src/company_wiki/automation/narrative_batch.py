@@ -6,6 +6,7 @@ from dataclasses import asdict, dataclass
 from datetime import datetime, timedelta, timezone
 import json
 from pathlib import Path
+import re
 import stat
 import time
 from typing import Any
@@ -20,7 +21,9 @@ from company_wiki.source_catalog.narrative_artifact_store import (
 )
 from company_wiki.source_catalog.narrative_language import detect_narrative_language
 from company_wiki.source_catalog.source_reader import SourceVersionReader
-from company_wiki.source_catalog.source_read_policy import READ_POLICY_FINGERPRINT_SCHEMA_VERSION
+from company_wiki.source_catalog.source_read_policy import (
+    EXACT_READ_POLICY_FINGERPRINT_SCHEMA_VERSION, READ_POLICY_FINGERPRINT_SCHEMA_VERSION,
+)
 
 from .models import Event, Job, JobStatus, RuntimeState, canonical_json, canonical_json_hash
 from .narrative_batch_request import NarrativeBatchRequest
@@ -79,7 +82,6 @@ def _check_preparation_deadline(deadline: float | None) -> None:
 def _current_sources(request, reader, *, deadline=None):
     """Read current identity/period and exact version admission without writing."""
     _check_preparation_deadline(deadline)
-    policy = reader.read_policy_sha256()
     payloads = []
     source_facts = []
     for ref in request.sources:
@@ -87,6 +89,7 @@ def _current_sources(request, reader, *, deadline=None):
         current = reader.query_ref(ref.document_id, ref.source_id, ref.content_sha256)
         if asdict(current) != ref.to_dict():
             raise ValueError("SOURCE_REF_CHANGED")
+        policy = reader.read_policy_sha256(current)
         metadata = reader.describe_version(current)
         _check_preparation_deadline(deadline)
         kind = metadata["document_kind"]
@@ -147,12 +150,15 @@ def _execution_versions(request):
 
 
 def _frozen_binding(request, binding):
+    policies = {payload.source_ref.document_id: payload.expected_read_policy_sha256
+                for event in binding.events
+                for payload in [SourceRevisionEventPayload.from_dict(json.loads(event.payload_json))]}
     return canonical_json({
-        "schema_version": "narrative-run-binding/1", "request_sha256": request.request_sha256,
+        "schema_version": "narrative-run-binding/2", "request_sha256": request.request_sha256,
         "execution_versions": _execution_versions(request),
-        "read_policy_schema_version": READ_POLICY_FINGERPRINT_SCHEMA_VERSION,
-        "read_policy_sha256": SourceRevisionEventPayload.from_dict(
-            json.loads(binding.events[0].payload_json)).expected_read_policy_sha256,
+        "read_policy_schema_version": EXACT_READ_POLICY_FINGERPRINT_SCHEMA_VERSION,
+        "read_policy_sha256": canonical_json_hash(policies),
+        "source_read_policies": policies,
         "source_facts": list(binding.source_facts),
     })
 
@@ -163,8 +169,11 @@ def _resume_binding(request, reader, store, runs, run, *, deadline, prepared_sou
         raise BatchResumeError("BATCH_LEGACY_BINDING_UNVERIFIABLE")
     try:
         frozen = json.loads(run.binding_json)
-        if (not isinstance(frozen, dict) or frozen.get("schema_version") != "narrative-run-binding/1"
-                or frozen.get("read_policy_schema_version") != "2.0"):
+        if not isinstance(frozen, dict):
+            raise BatchResumeError("BATCH_LEGACY_BINDING_UNVERIFIABLE")
+        schema_pair = (frozen.get("schema_version"), frozen.get("read_policy_schema_version"))
+        scoped = schema_pair == ("narrative-run-binding/2", EXACT_READ_POLICY_FINGERPRINT_SCHEMA_VERSION)
+        if not scoped and schema_pair != ("narrative-run-binding/1", READ_POLICY_FINGERPRINT_SCHEMA_VERSION):
             raise BatchResumeError("BATCH_LEGACY_BINDING_UNVERIFIABLE")
         if frozen["request_sha256"] != request.request_sha256:
             raise BatchResumeError("BATCH_REQUEST_CHANGED")
@@ -183,9 +192,20 @@ def _resume_binding(request, reader, store, runs, run, *, deadline, prepared_sou
                     request.max_tokens, request.max_micro_usd,
                     min(len(request.sources) * request.max_final_bytes, request.max_persistent_bytes))):
             raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
-        if (frozen["read_policy_schema_version"] != READ_POLICY_FINGERPRINT_SCHEMA_VERSION
-                or frozen["read_policy_sha256"] != reader.read_policy_sha256()):
-            raise BatchResumeError("BATCH_READ_POLICY_CHANGED")
+        documents = {ref.document_id for ref in request.sources}
+        if scoped:
+            policies = frozen["source_read_policies"]
+            if (not isinstance(policies, dict) or set(policies) != documents
+                    or any(not isinstance(pin, str) or not re.fullmatch(r"[0-9a-f]{64}", pin)
+                           for pin in policies.values())
+                    or frozen["read_policy_sha256"] != canonical_json_hash(policies)):
+                raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
+        else:
+            # An old digest contains no recoverable per-root rules. Retain its
+            # original interpretation and never re-sign events/usage/baseline.
+            if frozen["read_policy_sha256"] != reader.read_policy_sha256():
+                raise BatchResumeError("BATCH_READ_POLICY_CHANGED")
+            policies = {document: frozen["read_policy_sha256"] for document in documents}
         jobs = store.list_jobs(job_ids=run.job_ids)
         members = runs.job_bindings(run.run_id)
         if (len(jobs) != len(request.sources) * len(_NARRATIVE_JOB_TYPES)
@@ -202,7 +222,7 @@ def _resume_binding(request, reader, store, runs, run, *, deadline, prepared_sou
             if (event.input_hash != payload.input_hash
                     or event.policy_version != "narrative-batch/1:" + run.input_hash
                     or event.subject_id != payload.source_ref.document_id
-                    or payload.expected_read_policy_sha256 != frozen["read_policy_sha256"]
+                    or payload.expected_read_policy_sha256 != policies.get(payload.source_ref.document_id)
                     or event.event_id != "narrative-batch-" + canonical_json_hash(
                         {"run": run.input_hash, "source": payload.source_ref.document_id})):
                 raise BatchResumeError("BATCH_FROZEN_MEMBERSHIP_INVALID")
@@ -221,10 +241,19 @@ def _resume_binding(request, reader, store, runs, run, *, deadline, prepared_sou
             if prepared_sources is None else prepared_sources)
         if current_facts != tuple(frozen["source_facts"]):
             raise BatchResumeError("BATCH_SOURCE_FACTS_CHANGED")
+        if set(by_document) != documents:
+            raise BatchResumeError("BATCH_FROZEN_MEMBERSHIP_INVALID")
         ordered_events = []
         for current in current_payloads:
             saved_event, saved = by_document[current.source_ref.document_id]
-            if saved.to_dict() != current.to_dict():
+            saved_wire, current_wire = saved.to_dict(), current.to_dict()
+            if scoped and saved.expected_read_policy_sha256 != current.expected_read_policy_sha256:
+                raise BatchResumeError("BATCH_READ_POLICY_CHANGED")
+            # Only the pin's interpretation differs when opening a schema-2
+            # history under current code. Every source/payload fact must match.
+            saved_wire.pop("expected_read_policy_sha256")
+            current_wire.pop("expected_read_policy_sha256")
+            if saved_wire != current_wire:
                 raise BatchResumeError("BATCH_SOURCE_FACTS_CHANGED")
             ordered_events.append(saved_event)
         return BatchEvents(run.input_hash, tuple(ordered_events), current_facts), versions, jobs

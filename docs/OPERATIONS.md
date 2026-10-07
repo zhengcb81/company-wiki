@@ -42,6 +42,10 @@ SourceRef / SourceExport v2 不暴露物理路径。原文 reader 输出真实�
 
 不要共享旧 LLMClient 到多个线程。新 Worker 用隔离子进程，每个子进程持自己的客户端；Store 统一租约、generation、预算预留和 outbox。恢复时使用原 run 和原请求，不为逃避 unknown usage 新建预算账。只在 final 可见且恢复材料已无需要后清临时正文。
 
+已选来源用`SourceVersionReader.read_policy_sha256(ref)`生成schema3精确读取pin：只绑定该文档来源事实和相关根有效读取规则，不绑定资料库/原件的物理路径或无关根。移动既有DB/objects及同SHA原件后，当前配置仍须指向正确位置；每次open重新核验路径包含、准入、实际SHA和长度。新批次保存binding/2的逐document pin，终态恢复复用原事件、摘要、费用与storage baseline，零新模型调用。
+
+无参数`read_policy_sha256()`仍是schema2全局选源身份；旧binding/1只有不可逆全局SHA，当前全局规则相等时按原绑定读取，改变时返回`BATCH_READ_POLICY_CHANGED`。旧记录不自动改签/重跑/重置费用；没有binding或schema1旧pin则明确不可验证。查询候选与exact读取的两种身份不能混用。
+
 旧 derived/span 与生产库收缩已经完成，见[正式结果](plans/narrative-evidence-pilot-2026-09-26/harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json)。不要重新执行旧清理脚本或全库解析。原件、来源版本/撤回事实、新 final 保留。维护工具说明在 [legacy_storage](../tools/legacy_storage/README.md)，未知对象不自动删除。
 
 `worker-status`、`worker-stop`、`startup-status`、`uninstall-startup` 只清理既存旧任务，不启动常驻转换。旧 cron 包装器已删除。

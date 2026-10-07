@@ -22,7 +22,7 @@ from .prompt_injection import (
     PromptInjectionReviewError,
     read_prompt_injection_review,
 )
-from .source_read_policy import source_read_policy_sha256
+from .source_read_policy import exact_source_read_policy_sha256, source_read_policy_sha256
 from .reader import CatalogReaderUnavailable
 from .runtime_policy import RuntimePolicyError, load_runtime_policy
 from .scanner import R4_PROVENANCE_KEY
@@ -48,6 +48,11 @@ _ERROR_STATUSES = frozenset(
 )
 _SUPPORTED_READ_PURPOSES = frozenset(
     {"preview", "filing_reuse", "source_export", "narrative_derivation"}
+)
+_EXACT_SOURCE_FACT_FIELDS = (
+    "document_kind", "canonical_entity_id", "market", "security_id",
+    "fiscal_year", "fiscal_period", "period_end", "published_date", "form_type",
+    "title", "language",
 )
 
 
@@ -146,10 +151,8 @@ class SourceVersionReader:
             raise TypeError("catalog must be SourceCatalog")
         self.catalog = catalog
 
-    def _resolver_and_read_policy(
-        self, expected_read_policy_sha256: str | None = None
-    ) -> tuple[SourceResolver, str]:
-        """Pin current effective read rules for one operation."""
+    def _read_context(self) -> tuple[SourceResolver, dict[str, Any] | None, str]:
+        """Load and validate one visibility snapshot for facts and read policy."""
         policy_path = self.catalog.config.catalog_dir / "runtime_policy.json"
         policy = None
         if policy_path.exists():
@@ -166,21 +169,54 @@ class SourceVersionReader:
                 if policy.get("policy_hash") != current_policy_hash:
                     raise SourceReadError("blocked", "runtime_policy_mismatch")
         read_policy_sha256 = source_read_policy_sha256(self.catalog.config, policy)
+        resolver = SourceResolver(self.catalog, runtime_policy=policy)
+        return resolver, policy, read_policy_sha256
+
+    def _resolver_and_read_policy(
+        self, expected_read_policy_sha256: str | None = None, *, ref: SourceRef | None = None,
+    ) -> tuple[SourceResolver, str]:
+        """Check either the scoped pin or an unchanged explicit legacy pin."""
+        resolver, policy, read_policy_sha256 = self._read_context()
         if expected_read_policy_sha256 is not None:
             if not isinstance(expected_read_policy_sha256, str) or not _SHA256.fullmatch(
                 expected_read_policy_sha256
             ):
                 raise SourceReadError("blocked", "invalid_read_policy_pin")
             if expected_read_policy_sha256 != read_policy_sha256:
-                raise SourceReadError("blocked", "read_policy_mismatch")
-        return SourceResolver(self.catalog, runtime_policy=policy), read_policy_sha256
+                if ref is None or expected_read_policy_sha256 != self._exact_read_policy(
+                    ref, resolver, policy
+                ):
+                    raise SourceReadError("blocked", "read_policy_mismatch")
+                read_policy_sha256 = expected_read_policy_sha256
+        return resolver, read_policy_sha256
 
     def _resolver_for_request(self) -> SourceResolver:
         return self._resolver_and_read_policy()[0]
 
-    def read_policy_sha256(self) -> str:
-        """Return a pathless pin for a subsequent exact-version open."""
-        return self._resolver_and_read_policy()[1]
+    def read_policy_sha256(self, ref: SourceRef | None = None) -> str:
+        """Return scoped schema-3 identity, or global schema-2 selection identity.
+
+        No-argument calls retain their existing selection/legacy semantics.
+        Physical location is resolved and actual bytes checked again on open.
+        """
+        resolver, policy, global_pin = self._read_context()
+        if ref is None:
+            return global_pin
+        return self._exact_read_policy(ref, resolver, policy)
+
+    def _exact_read_policy(
+        self, ref: SourceRef, resolver: SourceResolver, runtime_policy: dict[str, Any] | None,
+    ) -> str:
+        metadata = self._describe_version(ref, resolver)
+        try:
+            locations = self.catalog.reader.exact_source_locations(ref.document_id, ref.source_id)
+        except (CatalogReaderUnavailable, sqlite3.Error):
+            raise SourceReadError("unavailable", "catalog_unavailable") from None
+        return exact_source_read_policy_sha256(
+            self.catalog.config, runtime_policy, source_ref=asdict(ref),
+            source_facts={field: metadata.get(field) for field in _EXACT_SOURCE_FACT_FIELDS},
+            registered_root_ids=(location["root_id"] for location in locations),
+        )
 
     def _candidate_pages(
         self, request: SourceRequest, *, include_unknown_publication: bool = False
@@ -354,6 +390,12 @@ class SourceVersionReader:
         Only explicit capture fields are exported.  A scanner title derived
         from a filename is deliberately not promoted into a source title.
         """
+        return self._describe_version(ref, self._resolver_for_request())
+
+    def _describe_version(
+        self, ref: SourceRef, resolver: SourceResolver,
+    ) -> dict[str, str | int | None]:
+        """Project facts under the same validated visibility as the scoped pin."""
         if not isinstance(ref, SourceRef):
             raise TypeError("ref must be SourceRef")
         if self.query_ref(ref.document_id, ref.source_id, ref.content_sha256) != ref:
@@ -367,7 +409,6 @@ class SourceVersionReader:
         shared, problem = metadata_state(row["metadata_json"])
         if problem is not None:
             raise SourceReadError("blocked", "metadata_unreadable")
-        resolver = self._resolver_for_request()
         provenance = shared.get(R4_PROVENANCE_KEY)
         if provenance is not None:
             if not isinstance(provenance, dict) or not isinstance(
@@ -620,7 +661,7 @@ class SourceVersionReader:
         if current != ref:
             raise SourceReadError("unavailable", "source_ref_changed")
         resolver, read_policy_sha256 = self._resolver_and_read_policy(
-            expected_read_policy_sha256
+            expected_read_policy_sha256, ref=ref,
         )
         try:
             version_row = self.catalog.reader.exact_source_version(ref.document_id)

@@ -1,0 +1,38 @@
+{
+  "schema": "cwp-main-node-receipt/1",
+  "node": "G2-01b exact source-scoped read and immutable batch resume",
+  "date": "2026-10-07",
+  "status": "accepted_locally_publication_pending",
+  "baseline_head": "018d10eb2a392412512bc9df12fec34c199be36e",
+  "versions": {"global_selection_read_policy": "2.0", "exact_source_read_policy": "3.0", "new_batch_binding": "narrative-run-binding/2"},
+  "tdd": {"initial_contract_signature_red": 9, "actual_completed_cli_old_binding_schema_red": 1, "consumer_scope_receipt_red": 4},
+  "tests": {
+    "initial_responsibility_and_actual_cli": {"passed": 24, "seconds": 12.45},
+    "expanded_responsibility_before_golden_sync": {"passed": 167, "failed": 1, "seconds": 103.30, "failure": "pre-existing stale golden provenance"},
+    "final_both_binding_versions_source_facts_and_golden": {"passed": 52, "seconds": 18.81},
+    "actual_cli_source_scope": {"passed": 2, "seconds": 39.31, "samples": ["synthetic TXT and policy fixture", "real Microsoft Q4 FY2026 TXT bytes, isolated Acme metadata"], "external_posts": 0, "local_posts_per_sample": 1, "resume_additional_posts": 0},
+    "consumer_contracts_after_scope_fix": {"passed": 60, "failed": 1, "seconds": 21.98, "failure": "old test comparing current exact receipt to global selection pin"},
+    "corrected_generation_lineage_test": {"passed": 1, "seconds": 1.42},
+    "ruff_complete_ci_scope": "passed", "mypy_read_policy_reader_transport": "passed", "git_diff_check": "passed"
+  },
+  "proved": [
+    "Unrelated root addition/order does not change exact source identity; global selection identity still changes",
+    "Actual catalog DB/objects and registered raw root relocation reuse the same completed run/artifacts/ledger/storage baseline",
+    "Relevant source facts and read rules remain bound; actual bad bytes/admission failure cannot reuse or enter artifacts",
+    "Scoped bundle consumers for TXT/JSON/PDF/skip keep the same bytes, current source-scoped receipt and verified locators across unrelated root changes",
+    "Schema-2 history with unchanged global rules retains original events/input identity/membership/usage; changed global rules or unknown legacy binding are explicitly refused without re-signing",
+    "Actual production config/database and the read-only transcript remain unchanged; only isolated test roots and intended source/docs/goldens are written"
+  ],
+  "golden_sync": {"changed": ["span.parser_version 0.1.0 to 0.1.1", "summary.model.prompt_version 1.3.0 to 1.6.0", "versions.parser", "versions.prompt", "versions.selector 0.3.1 to 0.4.2"], "source_span_ids_hashes_locators_structured_fields_summary_semantics": "unchanged", "golden_related_hashes": "updated together by existing guarded refresh tool"},
+  "protected": {
+    "production_db_sha256": "0081ee5c3daf85abd71253e6069d08b1cdde46fe216326c10f0bf897a6a6bb62",
+    "source_catalog_config_sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "owner_source_acquisition_sha256": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+    "runtime_policy_sha256": "722f8344ee3764609ff51fda6109334b873fb26846f000934d49437269ee96f6",
+    "real_transcript_bytes": 66324,
+    "real_transcript_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a"
+  },
+  "cleanup": {"own_test_roots_restored_absent": [".tmp-g2-exact-red", ".tmp-g2-exact-r2", ".tmp-g2-exact-g1", ".tmp-g2-exact-resp", ".tmp-g2-exact-compat", ".tmp-g2-exact-accept", ".tmp-g2-exact-real", ".tmp-g2-exact-e2e", ".tmp-g2-exact-cons", ".tmp-g2-exact-wire", ".tmp-g2-exact-lineage"], "own_diagnostic_script_removed": true, "measured_residual_test_bytes_removed": 63268991, "raw_originals_deleted": 0},
+  "errors": ["First CLI fixture queried finite-cli rather than actual cli-e2e; corrected before product schema RED", "Identity fixture changed metadata top-level rather than visible acquisition fields; corrected, not product RED", "Real-TXT policy negative used 4096 bytes below actual size; tested allowing changed limit based on real size and independent 1-byte rejection", "Fixture import Ruff F811 corrected with alias and collection verified", "Guessed old golden/receipt paths and Markdown patch contexts failed without writes; used actual file inventory/precise paths"],
+  "limits": ["Not whole G2A/G2B or all PWF completion", "Legacy global SHA does not reconstruct old per-root rules; no silent migration or paid restart", "No vendor/model quality or production metadata claims", "Dayu/IQS and three external harness write sets untouched", "No new approval/permission/wire DTO fields or daily long E2E"]
+}

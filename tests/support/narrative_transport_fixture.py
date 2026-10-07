@@ -59,7 +59,7 @@ class TransportFixture:
 @contextmanager
 def published_fixture(
     tmp_path: Path, *, kind: str = "txt", published: bool = True,
-    source_spec: dict[str, object] | None = None,
+    source_spec: dict[str, object] | None = None, scoped_policy: bool = False,
 ) -> Iterator[TransportFixture]:
     """Create only scratch raw/catalog, publish through the real three-job DAG.
 
@@ -118,7 +118,7 @@ def published_fixture(
         value = {
             "schema_version": "source-revision-event/2.0",
             "source_ref": source_ref.to_dict(),
-            "expected_read_policy_sha256": reader.read_policy_sha256(),
+            "expected_read_policy_sha256": reader.read_policy_sha256(source if scoped_policy else None),
             "source_metadata": {
                 "source_class": "transcript" if transcript else "filing",
                 "title": metadata["title"], "document_kind": metadata["document_kind"],

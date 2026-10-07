@@ -1,5 +1,13 @@
 # Progress：激进简化实施
 
+## 最新：G2-01b精确来源/消费接线实际验收（2026-10-07）
+
+scoped schema3/binding2、reader→batch→storage baseline→Narrative transport已打通。24初始绿、52最终新旧绑定/身份/运输golden责任绿；双样本正式CLI（合成和真实微软TXT66324B只读复制）39.31秒绿：无关根新增、DB/objects和原件根迁址仍同run/原final/原账目，恢复零新增HTTP；有关规则变化、真byte超限、坏原文、绑定损坏均真实拒绝。
+
+四新增消费者scope收据反例真实RED，修运输当前读取pin后60责任项绿；旧generation lineage测试仍比较global与新exact，改为当前exact pin随实际priority变化、原bundle lineage不变，唯一失败项1.42秒绿。Ruff全CI范围、三源mypy/diff绿。五golden provenance仅版本变化，source/span ID/hash/locator/structured/summary内容不变。
+
+11 own test根和自身诊断脚本恢复absent，残余临时63268991B精确清理；原件删除0，生产DB/三配置/真实TXT保护通过，付费供应商POST0、预算不变。详见[验收收据](harness_lanes/results/g2_exact_source_binding_acceptance_2026-10-07.json)。准备正常提交/推送/精确CI，不冒称已发布或whole G2A完成；三外包仍待交接。下一12/CWP-FF latest单请求。
+
 ## 最新：G2-13责任与真实恢复CLI收口，三外包已分派（2026-10-07）
 
 初始结构/扫描行为11RED/6PASS→17GREEN，132责任项13.31秒绿。账目夹具纠正.record后真实3RED→最终54责任/两实际CLI27.86秒绿；终态SQLite authorizer禁止深检/DDL/数据写仍completed、零worker/零新增HTTP，执行版本恢复保持原账。Ruff/三源mypy/diff绿；生产只读metadata确认当前schema兼容，DB/四文件前后保持。6own tmp精确清回absent，41509985B临时材料，无原件删除/生产写/付费/外仓代码写。
@@ -1312,3 +1320,9 @@ R2系统性节点：有限登记与全库发现分离，三adapter不重复算SH
 四主PWF只读交叉审查修正恢复顺序/paused与历史active冲突、R2重复施工文字，并补齐01b版本迁移、SW实际framework文件/CWP入口/CI/hook清单/两安装副本同步写集；commit仅静态，N4历史节点不复跑。本轮另有PowerShell rg路径通配符无效、默认沙箱读自身tmp拒绝、gh不在PATH、benchmark local.json未创建的检查失误，均未写生产；后续用-g目录匹配、实际OS账号和公开GitHub Actions API，不创建本机根配置。不将API/工具缺失当项目数据错误。
 
 源码所有写者freeze后正常commit 93ac5a534e24ecbf9e1fc873f88bd106278f2fd6，静态pre-commit全绿，owner配置stash恢复且SHA3609…保持。正常短pre-push绿并推origin/master（含前序审计文档294cacf），精确CI37590638806正在执行；不能拿2cad90d旧CI替代。九原件/DB完整bytes/五保护文件/steady264B现场指纹复核全保持。MAIN最后五自身tmp路径恢复absent、清70425437B，前九路径33984318B另计；AUTO18独占根与最后窄修根absent。这些只是临时测试副本，不计生产清理收益。源码/root only owner config dirty，paid POST0。
+
+## G2-01b 精确来源绑定集中施工（2026-10-07，尚未发布）
+
+9合同API RED、1真实CLI旧binding schema RED（首轮错误run_id夹具已纠正）；新schema3 reader/binding2实施后24初始责任/实际CLI绿12.45秒。扩展原责任168项167pass/1运输golden旧版本fail103.30秒：实读差异仅5版本provenance，所有source/span ID/sha/locator/structured/summary相同；按既有refresh工具同步嵌入span.parser_version和五文件hash，52最终新旧绑定/来源事实/golden项18.81秒绿。新旧绑定均参数化保留原events/预算，不把不可逆旧全局SHA当成可推导的scoped历史。source身份反例首次错写metadata顶层4夹具失败，改acquisition后绿，非产品RED。
+
+真实微软TXT66324B只读复制到owned根，完成正式CLI和真实DB/raw root迁址、零再HTTP后，负例4096B竟小于真实raw，正确返回root_admission_denied而测试期待policy changed；已按实际size+4096构造仍准入的规则变化，并独立增加1B真拒绝，集中双样本E2E在跑。此错误是测试尺寸假定，未放宽正确性或源码。r6_protected_inputs前后核原件/生产DB/config。没有外发、生产写、外仓写或付费预算变化。golden旧文件猜测路径、findings概括标题和文档整行补丁定位错误均无写，已改按实际清单/目标路径。

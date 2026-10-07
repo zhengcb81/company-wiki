@@ -17,3 +17,8 @@ The refresh command permits provenance changes only (versions, prompt version an
 Replay response hash). It refuses source/span/summary semantic changes so those
 must be inspected. It updates the bundle, reference, read request, receipt and
 metadata hashes together. It is a developer action, not a daily CI step.
+
+Span `parser_version` may change as provenance; span ID, SHA, locator, original
+text and structured fields must still match exactly. The 2026-10-07 refresh
+only updates parser 0.1.0→0.1.1, selector 0.3.1→0.4.2 and prompt 1.3.0→1.6.0;
+all source, span and summary semantics are unchanged.

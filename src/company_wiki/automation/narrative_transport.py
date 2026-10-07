@@ -197,7 +197,10 @@ class NarrativeTransportReader:
         )
         bundle = _bound_bundle(version, data, reference)
         # The generation pin remains lineage. Current policy governs this read.
-        opened = self._reader.open_version(current, purpose="source_export")
+        read_pin = self._reader.read_policy_sha256(current)
+        opened = self._reader.open_version(
+            current, purpose="source_export", expected_read_policy_sha256=read_pin,
+        )
         if (
             opened.document_id != source.document_id or opened.source_id != source.source_id
             or opened.content_sha256 != source.content_sha256
@@ -211,7 +214,7 @@ class NarrativeTransportReader:
         self._current_ref(source)
         if self._reader.describe_version(current) != manifest:
             raise NarrativeTransportError("blocked", "source_metadata_changed")
-        if self._reader.read_policy_sha256() != opened.source_read_policy_sha256:
+        if self._reader.read_policy_sha256(current) != opened.source_read_policy_sha256:
             raise NarrativeTransportError("blocked", "read_policy_mismatch")
         receipt = {
             "schema_version": NARRATIVE_READ_RECEIPT_SCHEMA,

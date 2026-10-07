@@ -34,6 +34,10 @@ def main() -> None:
             bundle["expected_read_policy_sha256"] = "f" * 64
             prior = json.loads((directory / "bundle.json").read_bytes())
             prior["versions"] = bundle["versions"]
+            # Span parser_version is provenance too. Keep its identity, hash,
+            # locator, source text and all structured semantics exact.
+            for old_span, span in zip(prior["evidence_spans"], bundle["evidence_spans"], strict=True):
+                old_span["parser_version"] = span["parser_version"]
             for field in ("prompt_version", "response_sha256"):
                 prior["summary"]["model"][field] = bundle["summary"]["model"][field]
             assert prior == bundle, "source/span/summary semantics changed; inspect before updating golden"

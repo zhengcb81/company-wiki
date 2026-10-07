@@ -12,6 +12,7 @@ from company_wiki.automation.models import canonical_json
 from company_wiki.automation.narrative_contracts import NarrativeBundle
 from company_wiki.automation.narrative_transport import NarrativeTransportReader
 from company_wiki.automation.narrative_transport_contracts import NarrativeReadRequest, NarrativeTransportError
+from company_wiki.source_catalog import RootSpec
 from company_wiki.source_catalog.narrative_artifact_store import NarrativeArtifactDraft
 from company_wiki.source_contract import EvidenceSpan
 from support.narrative_transport_fixture import published_fixture
@@ -38,6 +39,25 @@ def test_duplicate_byte_bindings_cannot_hide_an_unbound_transcript_span(tmp_path
 
 def _request(fixture, reference, **kwargs):
     return NarrativeReadRequest.from_dict(fixture.read_request(reference, **kwargs))
+
+
+@pytest.mark.parametrize("kind", ["txt", "json", "pdf", "skip"])
+def test_scoped_bundle_consumer_keeps_verified_content_after_unrelated_root_addition(tmp_path, kind):
+    with published_fixture(tmp_path, kind=kind, scoped_policy=True) as fixture:
+        transport = NarrativeTransportReader(fixture.artifacts, fixture.reader)
+        reference = transport.reference(fixture.source_ref)
+        first = transport.read(_request(fixture, reference))
+        expected_pin = json.loads(fixture.payload)["expected_read_policy_sha256"]
+        global_pin = fixture.reader.read_policy_sha256()
+        fixture.catalog.config = replace(fixture.catalog.config, roots=fixture.catalog.config.roots + (
+            RootSpec("unrelated", fixture.root / "unrelated", "directory"),))
+        assert fixture.reader.read_policy_sha256() != global_pin
+        second = transport.read(_request(fixture, reference))
+        assert second.data == first.data == fixture.payload
+        assert second.receipt["source_read_policy_sha256"] == expected_pin
+        assert second.receipt["replay_status"] == "verified"
+        assert second.receipt["locator_count"] == first.receipt["locator_count"]
+        assert str(fixture.root) not in json.dumps(second.receipt)
 
 
 def _copy_version(fixture, payload: bytes, *, visible: bool = True):
@@ -71,7 +91,9 @@ def test_read_returns_exact_persisted_bytes_and_current_receipt(tmp_path: Path, 
         assert result.receipt["status"] == "ok"
         assert result.receipt["narrative_ref"] == reference.to_dict()
         assert result.receipt["as_of_date"] == "2026-09-01"
-        assert result.receipt["source_read_policy_sha256"] == fixture.reader.read_policy_sha256()
+        current = fixture.reader.query_ref(fixture.source_ref.document_id, fixture.source_ref.source_id,
+                                           fixture.source_ref.content_sha256)
+        assert result.receipt["source_read_policy_sha256"] == fixture.reader.read_policy_sha256(current)
         assert result.receipt["selection_status"] == bundle["selection"]["status"]
         assert result.receipt["quality_status"] == bundle["quality_status"]
         assert result.receipt["locator_count"] == len(bundle["evidence_spans"])
@@ -233,12 +255,15 @@ def test_generation_policy_is_lineage_and_current_read_policy_controls_read(tmp_
         transport = NarrativeTransportReader(fixture.artifacts, fixture.reader)
         reference = transport.reference(fixture.source_ref)
         old_policy = fixture.reader.read_policy_sha256()
+        current = fixture.reader.query_ref(fixture.source_ref.document_id, fixture.source_ref.source_id,
+                                           fixture.source_ref.content_sha256)
+        old_read_policy = fixture.reader.read_policy_sha256(current)
         root = fixture.catalog.config.roots[0]
         fixture.catalog.config = replace(
             fixture.catalog.config, roots=(replace(root, priority=root.priority + 1),),
         )
-        current_policy = fixture.reader.read_policy_sha256()
-        assert current_policy != old_policy
+        current_policy = fixture.reader.read_policy_sha256(current)
+        assert current_policy != old_read_policy
         result = transport.read(_request(fixture, reference))
         assert result.receipt["source_read_policy_sha256"] == current_policy
         assert json.loads(result.data)["expected_read_policy_sha256"] == old_policy

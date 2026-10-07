@@ -120,7 +120,7 @@ raise SystemExit(main())
             assert (root / "run-work/storage-baseline.json").read_bytes() == baseline
             frozen = json.loads(run.binding_json)
             assert frozen["request_sha256"] == request.request_sha256
-            assert frozen["read_policy_schema_version"] == "2.0"
+            assert frozen["read_policy_schema_version"] == "3.0"
             assert frozen["execution_versions"]["prompt"] == "1.6.0"
             assert frozen["execution_versions"]["model_request_schema"] == "narrative-model-request/1.3"
             assert set(frozen["execution_versions"]["handlers"].values()) == {"1.1.0"}
