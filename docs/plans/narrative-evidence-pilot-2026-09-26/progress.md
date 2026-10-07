@@ -1,5 +1,9 @@
 # Progress：激进简化实施
 
+## 2026-10-07 日期实证提交发布
+
+a8f2513ef4c4814fa4329a3bbf506342edb69c81正常提交/push绿并同步master；精确CWP CI37558926678 attempt1全job/step success，job112591530802/73秒。本仓CI未增加跨仓长节点，集成反例为显式opt-in；实证JSON保留current_consumers_red_isolated_proposal_green_not_merged，与本仓CI success严格分开。当前仅用户source_acquisition.yaml dirty，RF/StockWiki没有代码写入。外仓落地问题仍pending；总体active，非暂停或完成。
+
 ## 2026-10-07 日期提案GREEN、保护/清理完成
 
 同六CLI独立副本6 passed/25.17秒，Ruff绿；未来公开仍拒绝、早/晚下载均能与CWP精选证据逐条相等，原语言与当前版本正常。RF六模块逐测试只读导出，StockWiki168个已提交Python共1717590B+已提交provider配置只在tmp；不读取本机密钥，不外发。首次测试在导出exec返回running session后提前启动且缺config/llm_providers.yaml，三StockWiki环境失败；等待真实导出terminal、补必要已提交配置后CLI help0再跑原六例GREEN。保存真实current/proposal分开的小JSON及可审查两diff，七自身根清回absent、RF三日志和StockWikiclean保持。PWF仍维持两仓owner只读，已异步询问是否隔离落地；两互斥卡仅prepared/not-dispatched。整体目标active，不冒称已修当前消费者。

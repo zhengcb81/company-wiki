@@ -10,6 +10,8 @@
 
 ## 当前恢复点（2026-10-07）
 
+本次日期缺口实证/测试/提案已推a8f2513，精确CWP CI37558926678 attempt1全部job/step success/73秒；此绿仅证明本仓正常回归，当前RF/StockWiki两例真实RED仍待授权落地。原件、owner与用户配置不变，七tmp根absent，下一仅按日期实施单推进，不重新做已绿业务/模型节点。
+
 - **完整核查发现两个真实下游日期门，尚未生产落地。** 当前RF6e6b817a/StockWiki3fe5008会拒绝“8月公开、9月下载、as-of9月1日”的有效叙述来源，CWP相同原件verified正常。六真实CLI4pass/2fail；最小隔离副本改用公开日截止后六例25.17秒全绿，未来公开仍拒绝。两仓owner零写；已提交可审查提案及[具体细则](final_consumer_asof_alignment_2026-10-07.md)，异步询问是否允许两仓隔离落地，两张互斥卡尚未派发。本缺口解决前不把G1/S3跨仓整体或整个目标标complete。
 
 - **完整核查发现的准备deadline缺口已修复并发布。** 代码7aa88ae，精确CI37557509249 attempt1全部job/step success/73秒。五功能反例RED后57责任项/12.58秒及五真实CLI/35.78秒绿，47源mypy与CI Ruff绿；到期后停止新的准备读取/任务/HTTP，旧付费账保留，正常配置与恢复保持。十自身测试路径absent，生产17表/九原件/用户配置/RF owner复核不变，DB222408704B。没有扩大供应商/权限/预算或日常长测；[正式收据](harness_lanes/results/final_batch_deadline_acceptance_2026-10-07.json)。整体目标active，下一完整核查剩余外仓公开接口和要求逐项闭合。

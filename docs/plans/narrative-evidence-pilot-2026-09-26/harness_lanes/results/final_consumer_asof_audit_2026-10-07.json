@@ -238,5 +238,20 @@
       "after_absent": true
     }
   ],
-  "cleanup_bytes": 1767176
+  "cleanup_bytes": 1767176,
+  "evidence_code_sha": "a8f2513ef4c4814fa4329a3bbf506342edb69c81",
+  "cwp_evidence_ci": {
+    "run_id": 37558926678,
+    "head_sha": "a8f2513ef4c4814fa4329a3bbf506342edb69c81",
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "all_jobs_and_steps_success": true,
+    "jobs": [
+      {
+        "id": 112591530802,
+        "seconds": 73
+      }
+    ]
+  }
 }

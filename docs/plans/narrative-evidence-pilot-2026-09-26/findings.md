@@ -1,5 +1,7 @@
 # Findings：当前事实与待验证项
 
+日期反例和修正提案a8f2513已推，精确CWP CI37558926678全部步骤成功/73秒。生产消费者仍4pass/2fail，CWP回归绿不能代替外仓落地；授权问题pending，两个互斥卡仍未派发。七临时根已恢复，provider/翻译/下载/原件修改0。
+
 ## 2026-10-07 下游日期缺口已实证
 
 六正式当前消费者CLI25.36秒4pass/2fail，仅late_download在RF/StockWiki真实返回source_after_as_of；同CWP verified原件可读。两个最小独立副本保留UTC合法性与未来公开拒绝，同六CLI25.17秒全绿、Ruff绿。当前外仓代码未改；G1/S3跨仓整体因此不complete。七隔离根已清，来源正文/DB/copy代码不留，正式小JSON+两diff/互斥卡保留。已请求用户确认外仓只读边界的落地方式，答复前不依赖授权推进。初次提案导出未terminal且缺CLI默认provider配置的三环境失败已明记，不当产品RED；采用完整副本后验证。
