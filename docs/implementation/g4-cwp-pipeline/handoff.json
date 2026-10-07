@@ -1,0 +1,187 @@
+{
+  "schema_version": "g4-handoff/1",
+  "lane": "G4-CWP-PIPELINE",
+  "base_commit": "5930a644453ed46494c2c83c5ecfb97767fa9492",
+  "implementation_head": "306ecf9b2ef17da6952512226a9f623c107eff08",
+  "delivery_branch": "codex/g4-cwp-pipeline",
+  "worktree": "C:/Users/郑曾波/Projects/_g4/CWP-PIPELINE/company-wiki",
+  "commits": [
+    {
+      "sha": "306ecf9b2ef17da6952512226a9f623c107eff08",
+      "role": "implementation",
+      "subject": "Retire frozen pipeline gate family and stub full_pipeline entry"
+    },
+    {
+      "sha": "4797a601f4e28ae432f6a7c1bd6e990d25117552",
+      "role": "handoff",
+      "subject": "Document G4-CWP-PIPELINE retirement handoff"
+    }
+  ],
+  "changed_paths": [
+    ".planning/g4-cwp-pipeline/consolidated_receipt.txt",
+    ".planning/g4-cwp-pipeline/fast_contracts_direct_receipt.txt",
+    ".planning/g4-cwp-pipeline/green_misc_receipt.txt",
+    ".planning/g4-cwp-pipeline/red_receipt.txt",
+    ".planning/g4-cwp-pipeline/unit_suite_receipt.txt",
+    "config/pipeline_rules.yaml",
+    "docs/implementation/g4-cwp-pipeline/HANDOFF.md",
+    "docs/implementation/g4-cwp-pipeline/findings.md",
+    "docs/implementation/g4-cwp-pipeline/handoff.json",
+    "docs/implementation/g4-cwp-pipeline/main_wiring.md",
+    "docs/implementation/g4-cwp-pipeline/progress.md",
+    "docs/implementation/g4-cwp-pipeline/retirement_map.json",
+    "docs/implementation/g4-cwp-pipeline/task_plan.md",
+    "scripts/full_pipeline.py",
+    "scripts/gate_system/__init__.py",
+    "scripts/gate_system/base.py",
+    "scripts/gate_system/config_loader.py",
+    "scripts/gate_system/diagnostics.py",
+    "scripts/gate_system/gates/data_contract_gate.py",
+    "scripts/gate_system/gates/extraction_quality_gate.py",
+    "scripts/gate_system/gates/financial_analyst_gate.py",
+    "scripts/gate_system/gates/llm_output_gate.py",
+    "scripts/gate_system/gates/wiki_integrity_gate.py",
+    "scripts/gate_system/registry.py",
+    "scripts/gate_system/retry.py",
+    "src/company_wiki/deployment.py",
+    "tests/integration/test_g4_pipeline_retirement_e2e.py",
+    "tests/unit/test_deployment.py",
+    "tests/unit/test_g4_pipeline_retirement.py",
+    "tests/unit/test_gate_system.py",
+    "tests/unit/test_legacy_entrypoint_simplification.py",
+    "tests/unit/test_writer_freeze.py"
+  ],
+  "tests": [
+    {
+      "command": "python -B -m pytest -q -p no:cacheprovider tests/unit/test_g4_pipeline_retirement.py tests/unit/test_deployment.py (RED, before implementation)",
+      "exit_code": 1,
+      "seconds": 5,
+      "passed": 27,
+      "failed": 17,
+      "skipped": 0,
+      "evidence": ".planning/g4-cwp-pipeline/red_receipt.txt"
+    },
+    {
+      "command": "python -B -m pytest -q -p no:cacheprovider tests/unit/test_g4_pipeline_retirement.py tests/integration/test_g4_pipeline_retirement_e2e.py tests/unit/test_deployment.py tests/unit/test_legacy_entrypoint_simplification.py tests/unit/test_writer_freeze.py tests/integration/test_full_pipeline.py",
+      "exit_code": 0,
+      "seconds": 31,
+      "passed": 185,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": ".planning/g4-cwp-pipeline/consolidated_receipt.txt"
+    },
+    {
+      "command": "python -B -m pytest -q -p no:cacheprovider tests/unit",
+      "exit_code": 0,
+      "seconds": 127,
+      "passed": 1916,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": ".planning/g4-cwp-pipeline/unit_suite_receipt.txt"
+    },
+    {
+      "command": "python -B -m pytest -q -p no:cacheprovider tests/contract/test_legacy_caller_reachability.py",
+      "exit_code": 0,
+      "seconds": 3,
+      "passed": 26,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": ".planning/g4-cwp-pipeline/green_misc_receipt.txt"
+    },
+    {
+      "command": "python -B -m pytest -q -p no:cacheprovider tests/integration/test_g4_pipeline_retirement_e2e.py",
+      "exit_code": 0,
+      "seconds": 4,
+      "passed": 13,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": ".planning/g4-cwp-pipeline/green_misc_receipt.txt"
+    },
+    {
+      "command": "ruff check src tests/unit tests/contract tests/e2e scripts tests/integration && python -m compileall -q src scripts tests && config_doctor --structure-only && python scripts/host_assumption_guard.py (lint/static gate, not pytest)",
+      "exit_code": 0,
+      "seconds": 30,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": ".planning/g4-cwp-pipeline/green_misc_receipt.txt"
+    },
+    {
+      "command": "python -B -m pytest -q -p no:cacheprovider --timeout=180 <pre_push_gate FAST_CONTRACT_CASES 12 个用例逐个直跑>（等价于 pre-push gate 的用例集，绕开其 basetemp 路径前置检查；gate 本体见 remaining）",
+      "exit_code": 0,
+      "seconds": 9,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": ".planning/g4-cwp-pipeline/fast_contracts_direct_receipt.txt"
+    }
+  ],
+  "behavior_changes": [
+    "scripts/full_pipeline.py：377 行旧编排实现删除，改为 stdlib+writer_policy 退役 stub；main(argv=None)->int 打印退休说明并返回 78",
+    "direct CLI（无参数/--help/旧 stage/--no-gates/--dry-run/--gate-log/未知 flag）在普通启动与 python -S 下一律 exit 78，输出 LEGACY_PIPELINE_RETIRED + LEGACY WRITER BLOCKED - PERMANENTLY RETIRED 与现行来源 CLI 说明，无授权/review/恢复提示",
+    "import full_pipeline 在普通与 -S 启动下静默，零配置/LLM/网络/目录/子进程/写入初始化；旧授权环境变量不改变任何结果",
+    "scripts/gate_system/**（11 文件）与 config/pipeline_rules.yaml 整体删除，find_spec('gate_system') 为 None",
+    "tests/unit/test_gate_system.py 删除；来源价值反例由 tests/integration/test_full_pipeline.py 等现行接口测试承担",
+    "PRE_GUARD_CRASH[(full_pipeline.py,nosite)] 例外移除：该入口现在真正 exit 78 而非 import 崩溃",
+    "test_writer_freeze：full_pipeline 不再计入金融 orchestrator 清单；移除 len(guarded)>=49 人造数量门，改为无固定数字的『冻结或现行入口』行为检查",
+    "generate_retirement_report()：4 条 legacy_entries status 改为 retired，replacement/reason 只推荐现行来源 CLI（company-wiki-source-catalog/-read/-query/-export-v2 与有限叙述说明），不再推荐 scheduler.py/ingest.py/migration.py"
+  ],
+  "compatibility": [
+    "退役报告小 dict 形状与 generated_at/current_stage/legacy_entries/failure_drills/metrics_history 字段保留；rollback 仍为『不支持环境变量回退；使用替代入口』",
+    "writer_policy.PERMANENTLY_RETIRED_SCRIPTS 分类不变（full_pipeline.py 永久退休，环境变量不能放行）；common.require_legacy_writer_permission('full_pipeline.py') 仍为 False",
+    "共享标记 LEGACY WRITER BLOCKED / PERMANENTLY RETIRED 与 enforce_direct_cli direct-CLI guard 沿用，tests/contract/test_legacy_caller_reachability.py 与 tests/unit/test_common.py 未改动且保持绿色",
+    "tests/integration/test_full_pipeline.py（真实 PDF classify→extract→validate，页数/max_pages/质量分）未删除、未改名认定"
+  ],
+  "protected_state": {
+    "original_repo": "C:/Users/郑曾波/Projects/company-wiki 未触碰（收尾 git status 与开工一致，G2 获取线脏区原样）",
+    "protected_files_unchanged": [
+      "scripts/common.py",
+      "scripts/writer_policy.py",
+      ".pre-commit-config.yaml",
+      ".githooks/pre-commit",
+      ".githooks/pre-push",
+      ".github/workflows/ci.yml",
+      "tools/pre_push_gate.py",
+      "pyproject.toml",
+      "pytest.ini",
+      "config/source_catalog.yaml",
+      "config/source_acquisition.yaml"
+    ],
+    "not_touched": [
+      "MAIN source_catalog 线与获取测试",
+      "G3 维护后端与测试",
+      "source reader/store/scanner/canonical writer/AUTO",
+      "总 PWF 与生产 companies/raw/SQLite",
+      "别仓与安装副本",
+      "artifacts/gates 历史审计快照"
+    ],
+    "hooks_skipped": 0,
+    "merged_to_master": false
+  },
+  "cleanup": {
+    "roots": [
+      "%TEMP%/cw4p-<hex12>（集成/E2E 唯一 owned 根，每轮运行随机后缀，先记 absent，finally 删除）"
+    ],
+    "restored": true,
+    "verification": "green_misc_receipt.txt 末尾 leftover check 输出 none；测试目录恢复原状，删除前校验绝对路径含 TEMP 且非 symlink/junction"
+  },
+  "external_effects": {
+    "network_requests": 0,
+    "model_posts": 0,
+    "raw_deleted": 0,
+    "production_writes": 0
+  },
+  "remaining": [
+    "docs/GATE_SYSTEM.md 与 docs/使用说明书.md 仍描述已删除的 Gate 族（超本包写集，建议 MAIN 删除或改写为来源 CLI 口径）",
+    "scripts/test_framework.py:109,139 与 scripts/batch_process.py:110 仍以子进程命令引用 scripts/full_pipeline.py（二者自身被冻结不可执行；若执行则 stub 返回 78）",
+    "scripts/stage1_extract.py、scripts/stage2_structure.py 旧阶段脚本仍在（mixed-frozen），stage3-6 在永久退休清单；后续整族退休交 MAIN",
+    "docs/DEPLOYMENT.md 对已不存在 scripts/ingest.py 的引用为先于本包的历史遗留",
+    "新 worktree 缺未跟踪 .source_catalog 运行目录导致 config_doctor 全量模式 rc=1（先于本包的环境状态差异；--structure-only 通过）",
+    "分支未推远端（未跳 hook）：pre_push_gate.py --fast-contracts-only 在卡指定 worktree 路径下结构性失败——basetemp 落在 PROJECT_ROOT/tmp/pp<8hex>（64 字符）超其 60 字符上限，pytest 未运行即红；可复现命令 python tools/pre_push_gate.py --fast-contracts-only → FAILED: pytest basetemp exceeds the 60-character limit。该 gate 为保护文件，本包不改、不 --no-verify；其 12 个用例直接运行 12 passed（fast_contracts_direct_receipt.txt）。交 MAIN 于短路径合并或按主机假设协议修 basetemp 落点",
+    "全项目发布需 MAIN 统一接线后执行；本包不宣称全项目发布通过"
+  ],
+  "main_integration": {
+    "retirement_map": "retirement_map.json",
+    "wiring": "main_wiring.md"
+  }
+}

@@ -28,6 +28,7 @@ from writer_policy import (
     SOURCE_WORKFLOW_TOOL_ALLOWLIST,
     PERMANENTLY_RETIRED_SCRIPTS,
     is_legacy_script_cli,
+    legacy_script_execution_allowed,
 )
 
 
@@ -76,30 +77,53 @@ def test_explicit_guard_blocks_a_legacy_maintenance_writer() -> None:
     assert "LEGACY WRITER BLOCKED" in completed.stdout
 
 
+def _has_direct_cli(tree: ast.Module) -> bool:
+    return any(
+        isinstance(node, ast.If)
+        and "__name__" in ast.unparse(node.test)
+        and "__main__" in ast.unparse(node.test)
+        for node in tree.body
+    )
+
+
 def test_every_direct_writer_cli_has_an_explicit_guard() -> None:
     writer_pattern = re.compile(r"\.write_text\s*\(|\.unlink\s*\(|os\.replace\s*\(")
-    explicit_orchestrators = {"scheduler.py", "full_pipeline.py", "batch_ingest.py"}
+    explicit_orchestrators = {"scheduler.py", "batch_ingest.py"}
     missing: list[str] = []
-    guarded: list[str] = []
     for path in sorted(SCRIPTS.glob("*.py")):
         if path.name in CONTROL_TOOL_ALLOWLIST | SOURCE_WORKFLOW_TOOL_ALLOWLIST:
             continue
         source = path.read_text(encoding="utf-8-sig")
         tree = ast.parse(source)
-        has_direct_cli = any(
-            isinstance(node, ast.If)
-            and "__name__" in ast.unparse(node.test)
-            and "__main__" in ast.unparse(node.test)
-            for node in tree.body
-        )
         is_writer = writer_pattern.search(source) is not None
-        if has_direct_cli and (is_writer or path.name in explicit_orchestrators):
+        if _has_direct_cli(tree) and (is_writer or path.name in explicit_orchestrators):
             if "enforce_direct_cli" not in source:
                 missing.append(path.name)
-            else:
-                guarded.append(path.name)
     assert not missing, f"direct writer CLIs without fail-closed guard: {missing}"
-    assert len(guarded) >= 49, "writer inventory unexpectedly shrank; inspect the scanner"
+
+
+def test_direct_writer_clis_are_frozen_or_current_entries() -> None:
+    writer_pattern = re.compile(r"\.write_text\s*\(|\.unlink\s*\(|os\.replace\s*\(")
+    explicit_orchestrators = {"scheduler.py", "batch_ingest.py"}
+    offenders: list[str] = []
+    for path in sorted(SCRIPTS.glob("*.py")):
+        source = path.read_text(encoding="utf-8-sig")
+        tree = ast.parse(source)
+        if not _has_direct_cli(tree):
+            continue
+        name = path.name
+        if name in CONTROL_TOOL_ALLOWLIST | SOURCE_WORKFLOW_TOOL_ALLOWLIST:
+            if legacy_script_execution_allowed(name) is not True:
+                offenders.append(f"{name}: current entry not runnable")
+            continue
+        is_writer = writer_pattern.search(source) is not None
+        if not is_writer and name not in explicit_orchestrators:
+            continue
+        if legacy_script_execution_allowed(name) is not False:
+            offenders.append(f"{name}: writer entry not frozen")
+        elif "enforce_direct_cli" not in source:
+            offenders.append(f"{name}: frozen entry without explicit guard")
+    assert not offenders, offenders
 
 
 @pytest.mark.parametrize("script_name", ["ingest_v2.py", "scheduler.py"])

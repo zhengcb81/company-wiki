@@ -1,0 +1,185 @@
+{
+  "schema_version": "g4-retirement-map/1",
+  "lane": "G4-CWP-PIPELINE",
+  "base_commit": "5930a644453ed46494c2c83c5ecfb97767fa9492",
+  "entries": [
+    {
+      "path": "scripts/full_pipeline.py (旧 Gate 编排实现，377 行)",
+      "old_responsibility": "统一 Pipeline 入口：module-level 导入 common/gate_system/5 个 Gate，argparse 驱动 stage1-6 子进程，Gate0-5 检查、诊断重试、生成 dashboard",
+      "production_or_test_callers": [
+        "scripts/test_framework.py:109,139（子进程调用，自身 mixed-frozen，不可执行）",
+        "scripts/batch_process.py:110（子进程调用，自身 PERMANENTLY_RETIRED，不可执行）",
+        "src/company_wiki/deployment.py:219（退役报告条目）",
+        "scripts/writer_policy.py:76（永久退休分类）",
+        "scripts/common.py:130 require_legacy_writer_permission（保护文件，不改）"
+      ],
+      "disposition": "retired",
+      "reason": "旧金融/研究 Pipeline 入口整体退休，仅保留 stdlib 薄退役 stub（main(argv)->int 返回 78，direct CLI exit 78 含 -S）；不 import common/Config/Gate/金融 writer",
+      "replacement_test": "tests/unit/test_g4_pipeline_retirement.py；tests/integration/test_g4_pipeline_retirement_e2e.py"
+    },
+    {
+      "path": "scripts/gate_system/__init__.py",
+      "old_responsibility": "Gate 系统包出口：re-export Gate/GateResult/PipelineContext/GateRegistry/DiagnosticsEngine/RetryOrchestrator/load_pipeline_rules",
+      "production_or_test_callers": [
+        "scripts/full_pipeline.py（唯一生产 caller，已随本包变更为 stub）",
+        "tests/unit/test_gate_system.py（已删除）"
+      ],
+      "disposition": "retired",
+      "reason": "无现行 import 链；全新 find_spec 探测全部为 None（tests/unit/test_g4_pipeline_retirement.py::test_gate_family_is_no_longer_importable）",
+      "replacement_test": "tests/unit/test_g4_pipeline_retirement.py"
+    },
+    {
+      "path": "scripts/gate_system/base.py",
+      "old_responsibility": "Gate 基类、GateResult(passed/failed/needs_review) 状态机、PipelineContext 文档类型路由与数据缓存、工厂函数",
+      "production_or_test_callers": [
+        "scripts/full_pipeline.py",
+        "scripts/gate_system/gates/*.py",
+        "tests/unit/test_gate_system.py（TestGateResult/TestPipelineContext/TestFactoryFunctions/TestGateBase）"
+      ],
+      "disposition": "retired",
+      "reason": "评审状态机/固定分数/human_review 语义属于投资研究评审（StockWiki 职责），上游无合法等价接口，不重建 GateResult/GateRegistry 兼容层",
+      "replacement_test": null
+    },
+    {
+      "path": "scripts/gate_system/config_loader.py",
+      "old_responsibility": "从多个候选路径加载并验证 config/pipeline_rules.yaml（Gate0-5 规则路由）",
+      "production_or_test_callers": [
+        "scripts/gate_system/registry.py:14",
+        "tests/unit/test_gate_system.py::TestConfigLoader"
+      ],
+      "disposition": "retired",
+      "reason": "配置文件同步退休；无其他消费者（config_doctor 只校验 config/source_catalog.yaml，已验证）",
+      "replacement_test": null
+    },
+    {
+      "path": "scripts/gate_system/diagnostics.py",
+      "old_responsibility": "Gate 失败根因诊断：json_parse_error/unit_mismatch/自定义 root_cause 规则与 fix_hint",
+      "production_or_test_callers": [
+        "scripts/gate_system/registry.py:15",
+        "tests/unit/test_gate_system.py::TestDiagnosticsEngine"
+      ],
+      "disposition": "retired",
+      "reason": "诊断对象是旧评审 Gate 的失败（含人工升级路由），无现行 Gate 失败面",
+      "replacement_test": null
+    },
+    {
+      "path": "scripts/gate_system/retry.py",
+      "old_responsibility": "RetryOrchestrator：重试决策、max_retries、同根因限制、human_review 升级、review 队列语义",
+      "production_or_test_callers": [
+        "scripts/gate_system/registry.py:16",
+        "tests/unit/test_gate_system.py::TestRetryOrchestrator"
+      ],
+      "disposition": "retired",
+      "reason": "人工签收/human_review 升级属于被移除的审批空壳，按卡禁止保留 disabled 审批层",
+      "replacement_test": null
+    },
+    {
+      "path": "scripts/gate_system/registry.py",
+      "old_responsibility": "GateRegistry.load() 读 pipeline_rules.yaml、动态导入 gates、按 doc_type 跑 Gate、执行日志",
+      "production_or_test_callers": [
+        "scripts/full_pipeline.py:40-54",
+        "tests/unit/test_gate_system.py::TestGateRegistry"
+      ],
+      "disposition": "retired",
+      "reason": "唯一生产 caller 已退休；无其他入口",
+      "replacement_test": "tests/unit/test_g4_pipeline_retirement.py::test_gate_family_is_no_longer_importable"
+    },
+    {
+      "path": "scripts/gate_system/gates/extraction_quality_gate.py",
+      "old_responsibility": "Gate 1：提取文本长度/quality_score/扫描页占比阈值检查（依赖 pipeline_rules 阈值与 GateResult 打分）",
+      "production_or_test_callers": [
+        "scripts/full_pipeline.py:46",
+        "scripts/gate_system/registry.py（动态导入）"
+      ],
+      "disposition": "preserved_in_current_test",
+      "reason": "其中有来源价值的反例（页数、max_pages、提取质量分、坏 doc_type 置信度）由现行解析/选择接口继续验证；阈值路由与 GateResult 打分部分随族退休",
+      "replacement_test": "tests/integration/test_full_pipeline.py::test_synthetic_pdf_runs_through_classify_extract_validate；tests/integration/test_full_pipeline.py::test_extraction_max_pages_is_enforced；tests/unit/test_pdf_classify.py（classify doc_type/置信度/skip）；tests/integration/test_stage1_extract.py"
+    },
+    {
+      "path": "scripts/gate_system/gates/data_contract_gate.py",
+      "old_responsibility": "Gate 2：结构化输出必填字段契约（revenue/net_profit 等金融字段）",
+      "production_or_test_callers": [
+        "scripts/full_pipeline.py:47",
+        "scripts/gate_system/registry.py（动态导入）"
+      ],
+      "disposition": "retired",
+      "reason": "金融字段契约属于分析产物评审，非来源事实；上游只保留原文/解析质量契约",
+      "replacement_test": null
+    },
+    {
+      "path": "scripts/gate_system/gates/llm_output_gate.py",
+      "old_responsibility": "Gate 3.x：LLM 输出 JSON 格式、幻觉、逻辑一致性检查（含 JSON repair）",
+      "production_or_test_callers": [
+        "scripts/full_pipeline.py:48-52",
+        "scripts/gate_system/registry.py（动态导入）"
+      ],
+      "disposition": "retired",
+      "reason": "LLM 分析输出评审属于旧研究 writer 链；现行叙述 Worker 有独立 verify 契约，不复用旧 Gate",
+      "replacement_test": null
+    },
+    {
+      "path": "scripts/gate_system/gates/financial_analyst_gate.py",
+      "old_responsibility": "Gate 4.5：LLM 金融分析师深度审查，approval_threshold 固定分数 + 人工签收",
+      "production_or_test_callers": [
+        "scripts/full_pipeline.py:53",
+        "scripts/gate_system/registry.py（动态导入）"
+      ],
+      "disposition": "retired",
+      "reason": "固定投资评分与人工签收是职责边界明令移除的旧金融 writer 语义",
+      "replacement_test": null
+    },
+    {
+      "path": "scripts/gate_system/gates/wiki_integrity_gate.py",
+      "old_responsibility": "Gate 5：legacy Wiki 页面完整性/来源计数检查",
+      "production_or_test_callers": [
+        "scripts/full_pipeline.py:54",
+        "scripts/gate_system/registry.py（动态导入）"
+      ],
+      "disposition": "retired",
+      "reason": "legacy Wiki writer 已冻结，Wiki 完整性评审不再是 canonical 产品目标",
+      "replacement_test": null
+    },
+    {
+      "path": "config/pipeline_rules.yaml",
+      "old_responsibility": "Gate0-5 规则配置：doc_type 路由、阈值、failure_action（diagnose_then_retry_or_human/human_review/skip）、approval_threshold、escalation",
+      "production_or_test_callers": [
+        "scripts/gate_system/config_loader.py:18-21（唯一配置消费者）",
+        "tests/unit/test_gate_system.py::TestConfigLoader"
+      ],
+      "disposition": "retired",
+      "reason": "与 Gate 族同批退休；无其他消费者（rg 全仓核对）",
+      "replacement_test": "tests/unit/test_g4_pipeline_retirement.py::test_pipeline_rules_config_is_retired"
+    },
+    {
+      "path": "tests/unit/test_gate_system.py (框架/配置/重试/人工评审断言组)",
+      "old_responsibility": "GateResult 状态、PipelineContext、工厂函数、DiagnosticsEngine、RetryOrchestrator、pipeline_rules 加载/验证、GateRegistry 注册执行",
+      "production_or_test_callers": [
+        "pytest tests/unit（CI/本地收集）",
+        "docs/GATE_SYSTEM.md:278,281（文档引用，超出本包写集）"
+      ],
+      "disposition": "retired",
+      "reason": "全部断言对象（旧 Gate 类、固定分数、human_review 升级、旧配置路由）随族删除；不重新维持 Gate 类",
+      "replacement_test": null
+    },
+    {
+      "path": "tests/unit/test_gate_system.py (来源质量反例部分)",
+      "old_responsibility": "间接覆盖提取质量/文档类型等来源行为（经 Gate 1 与 config 阈值）",
+      "production_or_test_callers": [
+        "pytest tests/unit"
+      ],
+      "disposition": "preserved_in_current_test",
+      "reason": "页数、max_pages、提取质量、classify 坏输入等来源价值反例已由现行公开接口测试承担，不重复抄现成测试（D3：不新建 test_g4_preserved_source_behavior.py 空壳）",
+      "replacement_test": "tests/integration/test_full_pipeline.py（两项真实 PDF 提取责任，集中命令内继续运行）；tests/unit/test_pdf_classify.py；tests/integration/test_stage1_extract.py"
+    }
+  ],
+  "preserved_contract_notes": [
+    "tests/contract/test_legacy_caller_reachability.py（不在本包写集）要求每个永久退休脚本源码含 'enforce_direct_cli' 字面量——stub 保留共享 direct-CLI guard 调用，测试 26 passed 保持绿色",
+    "tests/unit/test_common.py:190 与 tests/contract/test_legacy_caller_reachability.py:177 依赖 common.require_legacy_writer_permission('full_pipeline.py') 为 False——common/writer_policy 均为保护文件，未改动",
+    "writer_policy.PERMANENTLY_RETIRED_SCRIPTS 仍含 full_pipeline.py（保护文件），策略层不随 stub 变化"
+  ],
+  "outside_write_set_observed": [
+    "scripts/stage1_extract.py、scripts/stage2_structure.py：旧 Pipeline 阶段脚本（stage3-6 在 PERMANENTLY_RETIRED，stage1/2 属 mixed-frozen），不在本包写集，保持现状交 MAIN",
+    "scripts/test_framework.py、scripts/batch_process.py：仍以子进程命令形式引用 scripts/full_pipeline.py；二者自身被冻结不可执行，交 MAIN 决定后续整族处理",
+    "docs/GATE_SYSTEM.md、docs/使用说明书.md：文档仍描述已删除的 Gate 族，交 MAIN 改写/删除"
+  ]
+}
