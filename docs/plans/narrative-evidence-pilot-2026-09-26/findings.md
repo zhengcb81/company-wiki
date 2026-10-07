@@ -1,5 +1,11 @@
 # Findings：当前事实与待验证项
 
+## G2-08 FF系统安装修复、真实闭包接线完成（2026-10-07）
+
+目标active。G5三包已验收并线发布；G2-12实际FF→ET→CWP链与获取实现已发布。本轮G2-08 FF安装系统修复完成：工具26e0e60/指导main211a56f已推，精确CI37696236234success；集中26责任项无警告，补9/12定点验证不相加。真实安装按入口闭包显式8文件、两物理目标各6差异，共12更新，实际入口help/只读check通过、重复0写；未选配置/输出/其他文件及18个owner/生产保护SHA不变，原件删除0。RF旧strict_targets/coverage/mtime漏项经当前源码核对已在G3修复，不重做、不重冻baseline。见[G2-08正式验收](g2_ff_installation_acceptance_2026-10-07.md)。下一步为G2十四组当前证据/指导与最后A/B节点核对，只补未覆盖的当下行为；之后R2→R3→R5，R4不迁移决策保持。全部PWF尚未完成，不用安装或试点通过冒充完成；下方paused/待安装/三文件等为历史估计，当前状态以页首为准。
+
+安装任务的“工具支持指定文件”不等于“原三文件足以升级已有副本”。实际两副本均缺process_transport/process_tree，另transport旧；显式8文件闭包/实际12写修复，工具本身不暗增scope。FF scripts Git tree未变，兼容manifest已有5001dcb pin仍准确描述消费运行库，避免不必要邻仓重签。RF G3代码确认旧quality/mtime问题已修，历史pending应退为记录。
+
 ## 最新G5正式验收事实（2026-10-07）
 
 目标active。G5三包已由MAIN验收、合入实际执行分支并推送：CWP master057f1cd、SID v2-clean-rewrite47e1059、RF main436fed68；配套FF main5001dcb也已发布。CWP2048责任项、SID163项、RF定点安装33项及兼容24项全部通过；FF391项通过/4项跳过，三个有workflow的仓库精确源码CI均success，SID无workflow。RF实际安装按8文件、3逻辑入口/2物理目录完成，重复写入0；18个owner/生产保护文件SHA全部不变。G2-12真实FF→ET→CWP链与获取实现已发布。G2仍需FF安装工具保留用户文件的系统修复、三文件定点同步及剩余A/B指导收口，之后R2→R3→R5；不能把三包完成等同全部PWF完成。见[G5正式验收](g5_main_acceptance_2026-10-07.md)。下方旧ready/未创建/待CI/paused文字为历史时点，不重派已交付卡。

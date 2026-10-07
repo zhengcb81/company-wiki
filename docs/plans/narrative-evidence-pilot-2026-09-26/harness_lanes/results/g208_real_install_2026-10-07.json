@@ -1,0 +1,71 @@
+{
+  "schema_version": "g208-real-install/1",
+  "status": "passed",
+  "published_source_head": "211a56ff1b1f7b5c5d1809b17a60e9a2af1ce6e8",
+  "tool_implementation_head": "26e0e603369ac90ac9b45bed08dc34ef4e98466b",
+  "scope": [
+    "SKILL.md",
+    "scripts/fetch_filing.py",
+    "scripts/ff_process_transport.py",
+    "scripts/ff_process_tree.py",
+    "scripts/ff_v2_envelope.py",
+    "scripts/filing_contracts.py",
+    "scripts/transcript_companion.py",
+    "scripts/transcript_tool_transport.py"
+  ],
+  "source_sha256": {
+    "SKILL.md": "14113c8aa58206c32b68b1128b243684b0fd9e8972568f54913b9e408c0bb671",
+    "scripts/fetch_filing.py": "256a0be66417147b7c10dca3297e2efaa1976a2a43fd7adb098c666cc0178142",
+    "scripts/ff_process_transport.py": "d02b55273ce0f6f0e8392fd4785179da67ebf1a998da5b896d4adc509036c77e",
+    "scripts/ff_process_tree.py": "4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f",
+    "scripts/ff_v2_envelope.py": "fd39b64927adb3b7a810047ad431c98f61a66dc6f7dce84ea8c0bd4d6a170034",
+    "scripts/filing_contracts.py": "a16e44ce43e3035938905c8618d422f13807085722bae250d7de42330f3f9fbb",
+    "scripts/transcript_companion.py": "0fc2c13bcde5e4c57d86a6be67f9eef37ebe740bbb0c2244067a7e8201253336",
+    "scripts/transcript_tool_transport.py": "a2515bbe83c8be938f382e11643e5ee7aa7c2c257cbb3d3b66dd846c642ae2d9"
+  },
+  "logical_surfaces": 3,
+  "physical_targets": 2,
+  "actual_written": 12,
+  "apply_receipt": "g208_apply_2026-10-07.json",
+  "help_checks": [
+    {
+      "physical_target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+      "command": "actual installed fetch_filing.py --help",
+      "exit_code": 0
+    },
+    {
+      "physical_target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+      "command": "actual installed fetch_filing.py --help",
+      "exit_code": 0
+    }
+  ],
+  "readonly_check_exit": 0,
+  "repeat_written": 0,
+  "unselected_stat_inventory_unchanged": true,
+  "protected_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_acquisition.yaml": "04b0f8d0f0bba8020fa17eed0430d25473844c2c674001a0aa98fddf8a5bd019",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\catalog.sqlite3": "0081ee5c3daf85abd71253e6069d08b1cdde46fe216326c10f0bf897a6a6bb62",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\runtime_policy.json": "722f8344ee3764609ff51fda6109334b873fb26846f000934d49437269ee96f6",
+    "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite\\README.md": "974b9f2eec5a680206c9c18a9e6151c7dbd2946be6b1302fb13d9e5e218e1f89",
+    "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite\\config_template.json": "d35cf7c7b24e9fcf75eba3dc94d721cc05b2ae8438a673b512a40012e9d796fc",
+    "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite\\main.py": "3aa0cc8400126d575af9b088e4f6a29486f66a196bf19d38dd5e74d37df77d2c",
+    "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite\\src\\browser.py": "ac55d0a3ae84d6361423612ec0565dc46787907d1bb64ff3c057fc996f217ae1",
+    "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite\\src\\downloader.py": "14238f8ab5df830caad3a9011addcde089197297cf72ea52b353de3e100e6637",
+    "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite\\src\\logger.py": "72b22c63b48099cbf89836b7da4ee41c85ff9fc623c23c8fad0c97f507b63769",
+    "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite\\src\\mapping.py": "40d9114a2feb24800f5e665282bf1244212e72fc0773a9b7a6171a0b1b30482a",
+    "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite\\src\\models.py": "b280c14eddeee78ae7ab5d116d4e2be7145a5f3bdbdc742c7a0268f2e696395d",
+    "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite\\tests\\e2e\\official_e2e_test.py": "e56e1ef5cfcea9e89022f816d7ccfa923f0a039af60c2511ba9ed3c5fe4d3242",
+    "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite\\tests\\unit\\test_downloader.py": "8dbed9a7cfc55bbab3aeb755557307b2027bb820a6ad06ef3eed252f7ceef213",
+    "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite\\tests\\unit\\test_official_e2e_contract.py": "453eed3e3c177eb45ff5d02d0fbd555b43ea93cb2ed6f7b02384f1c20a59b2ae",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "f297e2b887a4dc279a1012c23fb50b77c25f6237e970b22278037d42f24869c8",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf"
+  },
+  "protected_files_unchanged": true,
+  "config_or_output_deleted": 0,
+  "raw_deleted": 0,
+  "provider_or_model_calls": 0,
+  "dayu_iqs_writes": 0,
+  "closure_note": "Real installed copies lack ff_process_transport.py and ff_process_tree.py; preserve exact --file semantics and choose the complete current entrypoint import closure explicitly."
+}

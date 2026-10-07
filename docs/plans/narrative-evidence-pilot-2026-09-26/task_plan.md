@@ -1,6 +1,6 @@
 # 公司来源平台：当前总计划
 
-**当前进度（2026-10-07最新验收）：**目标active。G5三包已由MAIN验收、合入实际执行分支并推送：CWP master057f1cd、SID v2-clean-rewrite47e1059、RF main436fed68；配套FF main5001dcb也已发布。CWP2048责任项、SID163项、RF定点安装33项及兼容24项全部通过；FF391项通过/4项跳过，三个有workflow的仓库精确源码CI均success，SID无workflow。RF实际安装按8文件、3逻辑入口/2物理目录完成，重复写入0；18个owner/生产保护文件SHA全部不变。G2-12真实FF→ET→CWP链与获取实现已发布。G2仍需FF安装工具保留用户文件的系统修复、三文件定点同步及剩余A/B指导收口，之后R2→R3→R5；不能把三包完成等同全部PWF完成。见[G5正式验收](g5_main_acceptance_2026-10-07.md)。下方旧ready/未创建/待CI/paused文字为历史时点，不重派已交付卡。
+**当前进度（2026-10-07最新验收）：**目标active。G5三包已验收并线发布；G2-12实际FF→ET→CWP链与获取实现已发布。本轮G2-08 FF安装系统修复完成：工具26e0e60/指导main211a56f已推，精确CI37696236234success；集中26责任项无警告，补9/12定点验证不相加。真实安装按入口闭包显式8文件、两物理目标各6差异，共12更新，实际入口help/只读check通过、重复0写；未选配置/输出/其他文件及18个owner/生产保护SHA不变，原件删除0。RF旧strict_targets/coverage/mtime漏项经当前源码核对已在G3修复，不重做、不重冻baseline。见[G2-08正式验收](g2_ff_installation_acceptance_2026-10-07.md)。下一步为G2十四组当前证据/指导与最后A/B节点核对，只补未覆盖的当下行为；之后R2→R3→R5，R4不迁移决策保持。全部PWF尚未完成，不用安装或试点通过冒充完成；下方paused/待安装/三文件等为历史估计，当前状态以页首为准。
 
 **G5当前结论：**[三卡总包](harness_lanes/g5_parallel_packages_2026-10-07.md)已全部交付、验收、并线和发布，不再分派。三个交接工作树保留；MAIN实际安装和兼容pin接线已完成。详细commit/测试/CI/保护/未做范围见[G5正式验收](g5_main_acceptance_2026-10-07.md)。
 
@@ -130,7 +130,7 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 | 阶段 | 状态 | 下一责任 |
 |---|---|---|
-| G2门禁全面补漏/P0 | in_progress；目标服务active | 核心/13/01b及G2–G5成果已发布；12实际链已通过并发布，RF真实定点安装完成。MAIN剩余FF installer/三文件安装与G2A/B指导收口 |
+| G2门禁全面补漏/P0 | in_progress；目标服务active | 核心/13/01b及G2–G5成果已发布；12实际链已通过并发布，RF真实定点安装完成。FF installer与真实8文件安装已完成；MAIN剩余G2十四组证据/指导及A/B收口 |
 | R0完整对账 | complete | 已确认真实生产metadata/分类/ET登记缺口；已完成核心不重做 |
 | R1融资文档正式分类 | complete | 66ce0467已发布，真实两PDF CLI与分类责任包绿，精确CI37578307854绿 |
 | R2真实生产来源/预算准备 | in_progress；生产步骤顺延G2后 | 全库发现/有限登记/AUTO范围代码2cad90d已推且精确CI绿；G2先清旧控制面，再核公开日/retired/ET，不猜metadata |
@@ -140,6 +140,6 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 ## Next Step
 
-MAIN先按G2-08以TDD修复FF正式installer删除manifest外用户文件的问题，增加指定文件/只差异写/零写plan/准确恢复能力；再从已发布版本定点同步SKILL.md、fetch_filing.py、filing_contracts.py并验证实际安装入口。不要运行旧整套删除式installer。见[门禁实施单](gate_simplification_reaudit_2026-10-07.md)。
+MAIN核G2十四组当前代码/发布/安装/证据与两大节点A/B的覆盖矩阵；已完成的核心、13/01b、G2/G3/G4/G5、获取和安装复用绿色证据，只补尚未覆盖的当前IR/TXT及正式消费者CLI行为，并同步当前指导。G2节点收口后进入R2真实metadata/ET登记，不重跑付费、全量扫描或已绿长包。
 
 G2/G3/G4/G5已验收并线发布，不重派。新任务沿用现有合同和累计预算，原件保留、Dayu/IQS零写。G2收口后R2生产准备→R3正式运行与消费者→R5发布收口；R4决策已完成，不重复已绿长包或付费。

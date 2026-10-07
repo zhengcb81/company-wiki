@@ -1,0 +1,53 @@
+{
+  "schema_version": "ff-install-result/1",
+  "status": "completed",
+  "scope": [
+    "SKILL.md",
+    "scripts/fetch_filing.py",
+    "scripts/ff_process_transport.py",
+    "scripts/ff_process_tree.py",
+    "scripts/ff_v2_envelope.py",
+    "scripts/filing_contracts.py",
+    "scripts/transcript_companion.py",
+    "scripts/transcript_tool_transport.py"
+  ],
+  "targets": [
+    {
+      "physical_target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+      "destinations": [
+        "C:\\Users\\郑曾波\\.agents\\skills",
+        "C:\\Users\\郑曾波\\.claude\\skills"
+      ],
+      "written": [
+        "SKILL.md",
+        "scripts/fetch_filing.py",
+        "scripts/ff_process_transport.py",
+        "scripts/ff_process_tree.py",
+        "scripts/filing_contracts.py",
+        "scripts/transcript_tool_transport.py"
+      ],
+      "not_written": [],
+      "conflicts": [],
+      "preserved_config": [],
+      "errors": []
+    },
+    {
+      "physical_target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+      "destinations": [
+        "C:\\Users\\郑曾波\\.codex\\skills"
+      ],
+      "written": [
+        "SKILL.md",
+        "scripts/fetch_filing.py",
+        "scripts/ff_process_transport.py",
+        "scripts/ff_process_tree.py",
+        "scripts/filing_contracts.py",
+        "scripts/transcript_tool_transport.py"
+      ],
+      "not_written": [],
+      "conflicts": [],
+      "preserved_config": [],
+      "errors": []
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # G2：门禁与权限全面补漏及优先实施单
 
-**当前状态覆盖（2026-10-07最新验收）：**目标active。G5三包已由MAIN验收、合入实际执行分支并推送：CWP master057f1cd、SID v2-clean-rewrite47e1059、RF main436fed68；配套FF main5001dcb也已发布。CWP2048责任项、SID163项、RF定点安装33项及兼容24项全部通过；FF391项通过/4项跳过，三个有workflow的仓库精确源码CI均success，SID无workflow。RF实际安装按8文件、3逻辑入口/2物理目录完成，重复写入0；18个owner/生产保护文件SHA全部不变。G2-12真实FF→ET→CWP链与获取实现已发布。G2仍需FF安装工具保留用户文件的系统修复、三文件定点同步及剩余A/B指导收口，之后R2→R3→R5；不能把三包完成等同全部PWF完成。见[G5正式验收](g5_main_acceptance_2026-10-07.md)。下方旧ready/未创建/待CI/paused文字为历史时点，不重派已交付卡。
+**当前状态覆盖（2026-10-07最新验收）：**目标active。G5三包已验收并线发布；G2-12实际FF→ET→CWP链与获取实现已发布。本轮G2-08 FF安装系统修复完成：工具26e0e60/指导main211a56f已推，精确CI37696236234success；集中26责任项无警告，补9/12定点验证不相加。真实安装按入口闭包显式8文件、两物理目标各6差异，共12更新，实际入口help/只读check通过、重复0写；未选配置/输出/其他文件及18个owner/生产保护SHA不变，原件删除0。RF旧strict_targets/coverage/mtime漏项经当前源码核对已在G3修复，不重做、不重冻baseline。见[G2-08正式验收](g2_ff_installation_acceptance_2026-10-07.md)。下一步为G2十四组当前证据/指导与最后A/B节点核对，只补未覆盖的当下行为；之后R2→R3→R5，R4不迁移决策保持。全部PWF尚未完成，不用安装或试点通过冒充完成；下方paused/待安装/三文件等为历史估计，当前状态以页首为准。
 
 **最新G3验收（2026-10-07）：**三个包已接收并补齐MAIN接线，两个本地主线已并入。RF `ab7a7a44`已正常推远端main（107快测绿）；CWP接线代码`b2c9e66`随`4bde75a`已正常推master，115责任用例最终绿、1921单元绿；精确CI37665222739成功84秒，RF精确CI37664909065成功31秒。详情见[g3_main_acceptance](g3_main_acceptance_2026-10-07.md)。G3不再派发；G2-04旧维护退休已完成，R4依据现有注册重复上界决定不做对象化迁移（不是释放空间）。RF真实用户安装未同步；G2-12/其他G2、R2元数据生产应用、R3和R5仍未完成。目标服务保持paused，本次仅执行用户明确要求的G3验收，并未恢复总目标/付费/生产批次。
 
@@ -139,6 +139,12 @@ CWP `df7d7ba`已并入master/推远端；211责任用例绿，精确CI3767339382
 
 **2026-10-07实际接线补漏：**统一单请求v1/v2及FF→ET→CWP实际链已绿，5001dcb已并入main并推；安装只需已发布SKILL.md、fetch_filing.py、filing_contracts.py三文件。只读核旧`tools/sync_installs_b3.py`发现`sync()`会遍历target删除所有manifest外文件（含用户配置/output/密钥的风险），因此禁止拿此工具做当前整套同步。MAIN按本节原定三文件定点同步并保护其他文件；旧installer的清理方式加入本节系统修复：TDD证明已有用户文件/配置/输出保持、按选择且只写差异/幂等、失败清理/准确结果、零自动安装，再升级正式工具。该发现不影响G5-RF已通过的独立定点installer，不改Dayu/IQS或扩大发包范围，不增加人工许可。
 
+**本轮实施细则：**复用clean `cwp-lanes-20261005/ff-main-integration@5001dcb`，只改FF既有installer、相关测试、CI中这一个短责任包和当前安装指导。保留`sync/installation_diff/main`调用形状，增加重复`--file`、零写`--plan`与单JSON输出；不新增人工许可/清单签收。目标端仅选中文件参与读取/差异/写入，manifest外残留、缓存、输出与已存在的用户config均保留；缺失config仅初始化模板。安装根别名合并为同一物理目标，所选文件的子路径链接/越界拒绝，避免把别名当作扫删许可。源文件实际SHA、目标并发变化与临时文件清理由工具自身负责。
+
+**TDD与集中验收：**先证明旧代码会删用户文件、误将缺安装称MATCH、缺少定点plan/partial恢复；再覆盖选择/幂等、错误scope零写、源变化/目标并发变化拒绝、中途失败如实written/not_written、重复只补剩余、临时恢复。最后仅一次新包+既有安装surface集中测试和真实CLI三tmp目标E2E；发布后从已提交FF运行工具，仅同步SKILL.md、fetch_filing.py、filing_contracts.py到实际物理目标，未选文件size/mtime与生产/owner保护SHA不变，真实help/只读入口与重复0写。三个项目既有获取/供应链已绿，不为安装工具再重跑支付模型或全仓长测试。
+
+**实际安装前新证据（覆盖上文三文件估计）：**26e0e60工具已并入main/推送，CI37696236234成功。当前两物理安装都缺`ff_process_transport.py`和`ff_process_tree.py`，只更三文件会留下坏入口。MAIN按实际fetch_filing的仓内import闭包显式选择SKILL及7个runtime模块，共8个文件；未选config/reference/旧et_v2_contract及其他文件保留。不修改工具`--file`为自动扩大写集，不把全安装MATCH当门；闭包中已相同的文件0写。通过实际安装help/只读check和重复0写完成本节；源脚本库接口未变，不重跑付费或原获取链。
+
 **最新分工：**[G5-RF-INSTALL](harness_lanes/g5_rf_selective_installation.md)已正式验收并入RF main436fed68，精确CI绿；真实安装8文件/3逻辑入口/2物理目录已完成，重复写0，config/output未变。此前“24文件”是未识别.claude别名时的历史估计，实际16个物理文件写入。FF v1单意图实现已发布，三文件安装和FF正式installer系统修复仍归MAIN。
 
 **v2 正确；v1 残留需 caller 审计。** 旧 `--allow-download` 与 request authorization 兼容仍在，不能算到 v2 单意图上。两份安装技能已推荐 v2，但 legacy 附录和摘要会让较弱模型反复询问授权。
@@ -149,7 +155,7 @@ CWP `df7d7ba`已并入master/推远端；211责任用例绿，精确CI3767339382
 
 **验收：**正式 FF→ET→CWP 离线链走三个真实 CLI、复用零 provider、语言/SHA/清理正确；相同 intent 的库与 CLI 一致，未来公开和预算拒绝仍明确。使用既有链测试入口，不新增十套 request contract。
 
-**三外线交付后MAIN具体补漏：**RF六个工程测试引用repo-only tools，三安装副本本次只按用户具体授权定点同步18文件；不能据此声称安装内工程全包可运行或全MATCH。G2-08先查实际技能caller，再明确工程tools/tests属于仓库验证职责，用户技能所需代码/配置/引用才进入安装表；不盲目复制第二套签收或整套工程目录。RF `uc.quality.strict_targets`的旧workflow字面解析、coverage 84→0仍当弱化的旧ratchet、checkout mtime被误作事实完整性，均已有真实报告，归MAIN P1：先核当前caller/默认CLI，退休无职责的资格判断，保留实际指定SHA/size/配置/工具异常反例，不改owner日志或重冻历史manifest，不反向恢复coverage数字门。
+**当前RF遗漏复核结论（2026-10-07）：**原uc.quality.strict_targets旧workflow字面解析已由G3改成CI委托工具AST；coverage数字漂移由quality_report仅诊断；uc.manifest.verify默认check_mtime=False/CLI off，保留真实SHA/size错误。G3已发布并验收，不再列重复施工或重冻历史baseline。RF工程tools/tests留仓、运行闭包包装与真实8文件安装已在G3/G5完成；未声称安装内工程全包或全部文件MATCH。下方旧pending为审计时点。
 
 RF历史工具与包装已由[G3-RF-ASSURANCE](harness_lanes/g3_rf_assurance_and_packaging.md)完成；真实三副本仍MAIN定点处理，工具选择范围/失败事实补齐归G5。FF v1/安装与当前latest获取仍MAIN，不与该卡共享写集。
 
@@ -232,8 +238,8 @@ MAIN 是唯一集成与生产变更负责人。此表是施工顺序，不是新
 | 1 | G2-00 steady现场迁移/默认新库收敛 | 当前policy、旧小snapshot、真实读和16断言 | 现场complete；默认核心93ac5a5已推，精确CI37590638806全部步骤绿90秒 |
 | 2 | G2-01 effective read pin + G2-02 AUTO机器错误/版本恢复 + G2-11派生质量状态 | 版本化读取语义、同AUTO单库恢复、单处质量诊断 | 核心责任/E2E已收口、93ac5a5已推，精确CI37590638806全部步骤绿90秒；不等于完整A |
 | 3 | G2-13日常Store轻初始化 → G2-01b精确来源scoped pin | 去除隐含整库检查/补种及无关root对精确批次的阻断 | 两项均已发布/精确CI绿；13=b202d07、01b=22dcc927；不等同整个G2A |
-| 4 | G2-06 StockWiki/G2-10 StockQA日常工程门 + G2-12 CWP/FF统一latest单请求 | 各仓独占目录，MAIN接线；共享ensure事务/唯一intent、工具/CI/hook/默认配置同步 | SW/StockQA已验收并主线；SQA0f8fbfa已推、精确日常CI及文档构建/部署均绿；MAIN12的13新反例已绿，旧测试/CLI/FF/跨进程仍pending，不发布半成品 |
-| 5 | G2-03/04/07 CWP旧家族/公开维护/检查清单、G2-05 RF可选工具、G2-08安装/v1、G2-09能力文案 | CLI/import/package/清单/安装及指导同步；不启用raw破坏入口 | RF工具已验收并线推/CI29秒绿、定点安装同步完成；MAIN P1补旧uc.quality workflow解析/coverage数值/mtime漂移及repo-only测试包装职责；其余按P0-B后续，不恢复旧签收 |
+| 4 | G2-06 StockWiki/G2-10 StockQA日常工程门 + G2-12 CWP/FF统一latest单请求 | 各仓独占目录，MAIN接线；共享ensure事务/唯一intent、工具/CI/hook/默认配置同步 | SW/StockQA已验收并主线；SQA0f8fbfa已推、精确日常CI及文档构建/部署均绿；MAIN12已发布a06a3bf/FF5001dcb，实际三CLI链与四binary reader通过；新的安装工具/用户副本也已完成，最后B覆盖矩阵待核 |
+| 5 | G2-03/04/07 CWP旧家族/公开维护/检查清单、G2-05 RF可选工具、G2-08安装/v1、G2-09能力文案 | CLI/import/package/清单/安装及指导同步；不启用raw破坏入口 | CWP G3/G4/G5旧家族已退休；RF G3旧quality/mtime/包装修复及G5实际安装完成，FF G2-08工具/实际8文件安装完成。余下当前指导/能力文案与A/B整体覆盖待核，不恢复旧签收 |
 | 大节点 A | CWP最终写集完成后的当前链集中责任/E2E | isolated真实IR PDF/英文TXT；read/有限登记/零模型skip/loopback；现场小对照 | pending；核心子集先收口发布，复用已绿202/历史节点，不等同整个A完成 |
 | 大节点 B | 三仓离线链 + 当前消费者 + 发布 | FF→ET→CWP、RF/SW 读取；每仓对应代码 CI；保护/临时根清理 | pending；不重复付费模型 |
 | 6 | 回 R2 metadata/有限登记 → R3 → R4 → R5 | 原目标全部待办继续；G2 非缩减目标 | pending |
@@ -270,4 +276,4 @@ MAIN 是唯一集成与生产变更负责人。此表是施工顺序，不是新
 
 ## Next Step
 
-**目标active，G5三包已验收并线发布。** MAIN下一步为G2-08 FF正式installer的用户文件保留/定点同步，再核剩余G2A/B和当前指导。核心93ac5a5、Store b202d07、scoped pin22dcc927、G2-12 a06a3bf与三包成果均复用已绿证据，不重复付费或长包，不新增小节点签收。
+**目标active，G5及G2-08已验收并线发布/实际安装完成。** MAIN下一步为G2十四组当前证据/指导与最后A/B节点核对，只补未覆盖的真实行为。RF G3旧quality/mtime/包装修复已核当前源码，不重做或重冻；两节点收口后R2→R3→R5，未给commit新增长测试或人工签收。

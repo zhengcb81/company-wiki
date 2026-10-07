@@ -1,5 +1,15 @@
 # Progress：激进简化实施
 
+## 2026-10-08：G2-08验收目录恢复
+
+18个owned测试临时条目恢复absent，实测1631381B/751文件；18个owner/生产保护SHA不变，raw删除0。清单先落盘，汇总的PowerShell属性问题按保留逐条值重算，无数据丢失。五个历史根留待R5确认。
+
+## G2-08 FF系统安装修复、真实闭包接线完成（2026-10-07）
+
+目标active。G5三包已验收并线发布；G2-12实际FF→ET→CWP链与获取实现已发布。本轮G2-08 FF安装系统修复完成：工具26e0e60/指导main211a56f已推，精确CI37696236234success；集中26责任项无警告，补9/12定点验证不相加。真实安装按入口闭包显式8文件、两物理目标各6差异，共12更新，实际入口help/只读check通过、重复0写；未选配置/输出/其他文件及18个owner/生产保护SHA不变，原件删除0。RF旧strict_targets/coverage/mtime漏项经当前源码核对已在G3修复，不重做、不重冻baseline。见[G2-08正式验收](g2_ff_installation_acceptance_2026-10-07.md)。下一步为G2十四组当前证据/指导与最后A/B节点核对，只补未覆盖的当下行为；之后R2→R3→R5，R4不迁移决策保持。全部PWF尚未完成，不用安装或试点通过冒充完成；下方paused/待安装/三文件等为历史估计，当前状态以页首为准。
+
+TDD初始8RED/8pass/2symlink权限skip，修复后25pass但链接命令GBK解码线程warning；改按bytes捕获后26pass/4.658秒/-W error。补“.”scope后9pass/1.382秒；正常commit host检查对非法drive fixture和fallback误报，改PureWindowsPath/真实unsupported才skip，12pass/1.689秒，无新白名单或绕hook。正常FF commit/prepush/push通过。原三文件估计遗漏两缺失process模块和旧transport，已按真实8文件闭包接线，双help0/readonly0/repeat0，完整未选stat及18 SHA保持。一个Git只读命令误在冒号后留空格，改准确5001dcb:scripts与HEAD:scripts验证相同；一次猜RF manifest_verify.py不存在，按实际列表定位manifest.py，无缺失代码被略过。
+
 ## G5三包正式验收、并线和发布（2026-10-07）
 
 目标active。G5三包已由MAIN验收、合入实际执行分支并推送：CWP master057f1cd、SID v2-clean-rewrite47e1059、RF main436fed68；配套FF main5001dcb也已发布。CWP2048责任项、SID163项、RF定点安装33项及兼容24项全部通过；FF391项通过/4项跳过，三个有workflow的仓库精确源码CI均success，SID无workflow。RF实际安装按8文件、3逻辑入口/2物理目录完成，重复写入0；18个owner/生产保护文件SHA全部不变。G2-12真实FF→ET→CWP链与获取实现已发布。G2仍需FF安装工具保留用户文件的系统修复、三文件定点同步及剩余A/B指导收口，之后R2→R3→R5；不能把三包完成等同全部PWF完成。见[G5正式验收](g5_main_acceptance_2026-10-07.md)。下方旧ready/未创建/待CI/paused文字为历史时点，不重派已交付卡。

@@ -1,0 +1,149 @@
+{
+  "schema_version": "g208-temp-cleanup/1",
+  "status": "restored_absent",
+  "event_date": "2026-10-08",
+  "guard": "Exact owned paths inside CWP/.planning; no tracked or reparse entries; inventory persisted before native PowerShell removal",
+  "entries": [
+    {
+      "name": "g208-src",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g208-src",
+      "bytes": 25342,
+      "files": 2,
+      "removed": true
+    },
+    {
+      "name": "g208g",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g208g",
+      "bytes": 774750,
+      "files": 236,
+      "removed": true
+    },
+    {
+      "name": "g208h",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g208h",
+      "bytes": 774842,
+      "files": 244,
+      "removed": true
+    },
+    {
+      "name": "g208p",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g208p",
+      "bytes": 932,
+      "files": 76,
+      "removed": true
+    },
+    {
+      "name": "g208r",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g208r",
+      "bytes": 1833,
+      "files": 127,
+      "removed": true
+    },
+    {
+      "name": "g208v",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g208v",
+      "bytes": 666,
+      "files": 54,
+      "removed": true
+    },
+    {
+      "name": "g208-apply.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g208-apply.json",
+      "bytes": 1520,
+      "files": 1,
+      "removed": true
+    },
+    {
+      "name": "g208-apply.py",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g208-apply.py",
+      "bytes": 4340,
+      "files": 1,
+      "removed": true
+    },
+    {
+      "name": "g208-ci-poll.py",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g208-ci-poll.py",
+      "bytes": 2205,
+      "files": 1,
+      "removed": true
+    },
+    {
+      "name": "g208-ci.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g208-ci.json",
+      "bytes": 5275,
+      "files": 1,
+      "removed": true
+    },
+    {
+      "name": "g208-final.xml",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g208-final.xml",
+      "bytes": 4036,
+      "files": 1,
+      "removed": true
+    },
+    {
+      "name": "g208-green.xml",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g208-green.xml",
+      "bytes": 3885,
+      "files": 1,
+      "removed": true
+    },
+    {
+      "name": "g208-plan.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g208-plan.json",
+      "bytes": 3784,
+      "files": 1,
+      "removed": true
+    },
+    {
+      "name": "g208-portable.xml",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g208-portable.xml",
+      "bytes": 2043,
+      "files": 1,
+      "removed": true
+    },
+    {
+      "name": "g208-real-install.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g208-real-install.json",
+      "bytes": 5285,
+      "files": 1,
+      "removed": true
+    },
+    {
+      "name": "g208-red.xml",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g208-red.xml",
+      "bytes": 9191,
+      "files": 1,
+      "removed": true
+    },
+    {
+      "name": "g208-state.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g208-state.json",
+      "bytes": 9824,
+      "files": 1,
+      "removed": true
+    },
+    {
+      "name": "g208-validation.xml",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g208-validation.xml",
+      "bytes": 1628,
+      "files": 1,
+      "removed": true
+    }
+  ],
+  "measured_bytes": 1631381,
+  "protected_files_checked": 18,
+  "protected_files_unchanged": true,
+  "raw_deleted": 0,
+  "owner_files_deleted": 0,
+  "preserved_history_roots": [
+    "g2-latest-red",
+    "g2cliR",
+    "g2g2",
+    "g2g3",
+    "g2r2"
+  ],
+  "preserved_delivery_worktrees": true,
+  "measured_files": 751,
+  "aggregation_note": "The PowerShell inventory recorded per-entry bytes/files before deletion; Measure-Object did not aggregate ordered dictionary properties. Totals recomputed from the preserved inventory, not estimated."
+}

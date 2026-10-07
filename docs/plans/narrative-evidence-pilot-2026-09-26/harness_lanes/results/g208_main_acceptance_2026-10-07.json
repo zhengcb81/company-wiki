@@ -1,0 +1,80 @@
+{
+  "schema_version": "g208-main-acceptance/1",
+  "status": "verified_merged_published_installed",
+  "implementation_commit": "26e0e603369ac90ac9b45bed08dc34ef4e98466b",
+  "published_head": "211a56ff1b1f7b5c5d1809b17a60e9a2af1ce6e8",
+  "tests": {
+    "red": [
+      {
+        "tests": "18",
+        "failures": "8",
+        "errors": "0",
+        "skipped": "2",
+        "time": "1.782"
+      }
+    ],
+    "green": [
+      {
+        "tests": "25",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "7.794"
+      }
+    ],
+    "final": [
+      {
+        "tests": "26",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "4.658"
+      }
+    ],
+    "validation": [
+      {
+        "tests": "9",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "1.382"
+      }
+    ],
+    "portable": [
+      {
+        "tests": "12",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "1.689"
+      }
+    ]
+  },
+  "tests_overlap_do_not_add": true,
+  "warning_resolution": "Windows mklink output captured as bytes; final 26 passed with -W error, subsequent 12 portability cases passed with -W error; no production changes",
+  "hook_resolution": "Foreign invalid scope built with PureWindowsPath; unsupported link filesystem skips only if both supported methods unavailable; actual Windows junction cases passed, no allowlist or hook bypass",
+  "ci_receipt": "g208_exact_ci_2026-10-07.json",
+  "real_install_receipt": "g208_real_install_2026-10-07.json",
+  "plan_receipt": "g208_plan_2026-10-07.json",
+  "apply_receipt": "g208_apply_2026-10-07.json",
+  "source_scripts_tree_before": "19a85a4fc9bb093687459acacaeba15be889d5fe",
+  "source_scripts_tree_after": "19a85a4fc9bb093687459acacaeba15be889d5fe",
+  "compatibility_note": "Only repository installer/tests/CI and skill docs changed; runtime scripts tree is identical to the current RF manifest FF pin5001dcb, so no sibling repinning or source API requalification is required for this installation change.",
+  "rfg3_residual_reaudit": {
+    "strict_targets": "Current source follows CI delegated Python AST, not old workflow command text",
+    "coverage_floor": "uc.quality_report reports frozen threshold differences diagnostically",
+    "mtime": "uc.manifest.verify defaults check_mtime=False; CLI default off; actual SHA/size still checked",
+    "evidence": "Previously accepted G3 implementation e9f9405 and published RF ab7a7a44; no new code edit/re-run or frozen baseline overwrite"
+  },
+  "raw_deleted": 0,
+  "provider_model_posts": 0,
+  "dayu_iqs_writes": 0,
+  "remaining": [
+    "G2 current 14-group evidence/guidance and final A/B nodes",
+    "R2 production metadata and ET registration",
+    "R3 production final/skip and current consumers",
+    "R5 final plan and Git closure"
+  ],
+  "temp_cleanup_receipt": "g208_temp_cleanup_2026-10-08.json",
+  "temp_cleanup_status": "restored_absent"
+}

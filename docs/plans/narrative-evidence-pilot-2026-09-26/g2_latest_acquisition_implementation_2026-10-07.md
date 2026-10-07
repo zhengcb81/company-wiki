@@ -1,6 +1,6 @@
 # G2-12：一次请求、一次发现、一个获取事务
 
-**当前验收（2026-10-07）：**目标active。G5三包已由MAIN验收、合入实际执行分支并推送：CWP master057f1cd、SID v2-clean-rewrite47e1059、RF main436fed68；配套FF main5001dcb也已发布。CWP2048责任项、SID163项、RF定点安装33项及兼容24项全部通过；FF391项通过/4项跳过，三个有workflow的仓库精确源码CI均success，SID无workflow。RF实际安装按8文件、3逻辑入口/2物理目录完成，重复写入0；18个owner/生产保护文件SHA全部不变。G2-12真实FF→ET→CWP链与获取实现已发布。G2仍需FF安装工具保留用户文件的系统修复、三文件定点同步及剩余A/B指导收口，之后R2→R3→R5；不能把三包完成等同全部PWF完成。见[G5正式验收](g5_main_acceptance_2026-10-07.md)。下方旧ready/未创建/待CI/paused文字为历史时点，不重派已交付卡。
+**当前验收（2026-10-07）：**目标active。G5三包已验收并线发布；G2-12实际FF→ET→CWP链与获取实现已发布。本轮G2-08 FF安装系统修复完成：工具26e0e60/指导main211a56f已推，精确CI37696236234success；集中26责任项无警告，补9/12定点验证不相加。真实安装按入口闭包显式8文件、两物理目标各6差异，共12更新，实际入口help/只读check通过、重复0写；未选配置/输出/其他文件及18个owner/生产保护SHA不变，原件删除0。RF旧strict_targets/coverage/mtime漏项经当前源码核对已在G3修复，不重做、不重冻baseline。见[G2-08正式验收](g2_ff_installation_acceptance_2026-10-07.md)。下一步为G2十四组当前证据/指导与最后A/B节点核对，只补未覆盖的当下行为；之后R2→R3→R5，R4不迁移决策保持。全部PWF尚未完成，不用安装或试点通过冒充完成；下方paused/待安装/三文件等为历史估计，当前状态以页首为准。
 
 锁键不含TTL/hash/请求caps；同target互斥覆盖暂存到真实最终解析，不同target能并行。canonical短锁等待使用同一实际deadline，staged SHA只核一次；可恢复kill和已入库复用责任保持。CloseGap是公共ensure薄包装；FF旧scope随第一次ensure传递，临时scope文件finally删除，无二次发现/下载。内部gap诊断按实际交易终态投影，不再令已完成v2请求伪装GAP。Python3.10无add_note时保留原清理异常与失败journal，责任测试绿。以下旧“paused/尚未联调/自然年猜测”为历史施工记录。
 

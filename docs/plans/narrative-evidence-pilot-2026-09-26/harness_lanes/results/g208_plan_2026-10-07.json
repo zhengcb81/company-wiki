@@ -1,0 +1,78 @@
+{
+  "schema_version": "ff-install-plan/1",
+  "scope": [
+    "SKILL.md",
+    "scripts/fetch_filing.py",
+    "scripts/ff_process_transport.py",
+    "scripts/ff_process_tree.py",
+    "scripts/ff_v2_envelope.py",
+    "scripts/filing_contracts.py",
+    "scripts/transcript_companion.py",
+    "scripts/transcript_tool_transport.py"
+  ],
+  "source_sha256": {
+    "SKILL.md": "14113c8aa58206c32b68b1128b243684b0fd9e8972568f54913b9e408c0bb671",
+    "scripts/fetch_filing.py": "256a0be66417147b7c10dca3297e2efaa1976a2a43fd7adb098c666cc0178142",
+    "scripts/ff_process_transport.py": "d02b55273ce0f6f0e8392fd4785179da67ebf1a998da5b896d4adc509036c77e",
+    "scripts/ff_process_tree.py": "4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f",
+    "scripts/ff_v2_envelope.py": "fd39b64927adb3b7a810047ad431c98f61a66dc6f7dce84ea8c0bd4d6a170034",
+    "scripts/filing_contracts.py": "a16e44ce43e3035938905c8618d422f13807085722bae250d7de42330f3f9fbb",
+    "scripts/transcript_companion.py": "0fc2c13bcde5e4c57d86a6be67f9eef37ebe740bbb0c2244067a7e8201253336",
+    "scripts/transcript_tool_transport.py": "a2515bbe83c8be938f382e11643e5ee7aa7c2c257cbb3d3b66dd846c642ae2d9"
+  },
+  "targets": [
+    {
+      "physical_target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+      "destinations": [
+        "C:\\Users\\郑曾波\\.agents\\skills",
+        "C:\\Users\\郑曾波\\.claude\\skills"
+      ],
+      "needs_update": [
+        "SKILL.md",
+        "scripts/fetch_filing.py",
+        "scripts/ff_process_transport.py",
+        "scripts/ff_process_tree.py",
+        "scripts/filing_contracts.py",
+        "scripts/transcript_tool_transport.py"
+      ],
+      "preserved_config": [],
+      "before_sha256": {
+        "SKILL.md": "f6d7cf1d11a3983e5a84804af8d827bd0161a820f59e378583974e4e242afa92",
+        "scripts/fetch_filing.py": "ef7ad1743b7e663d025f3a1b35565bbb61d9455012a2f707050bce2aa668352c",
+        "scripts/ff_process_transport.py": null,
+        "scripts/ff_process_tree.py": null,
+        "scripts/ff_v2_envelope.py": "fd39b64927adb3b7a810047ad431c98f61a66dc6f7dce84ea8c0bd4d6a170034",
+        "scripts/filing_contracts.py": "88af9aea8d473c4d195f558e4cda7ed3aaf328e08ed3ef2b096ea08f58971651",
+        "scripts/transcript_companion.py": "0fc2c13bcde5e4c57d86a6be67f9eef37ebe740bbb0c2244067a7e8201253336",
+        "scripts/transcript_tool_transport.py": "957653a5548bc82fa168b4b86f4606273a3676475283afde6034063413ad002b"
+      },
+      "errors": []
+    },
+    {
+      "physical_target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+      "destinations": [
+        "C:\\Users\\郑曾波\\.codex\\skills"
+      ],
+      "needs_update": [
+        "SKILL.md",
+        "scripts/fetch_filing.py",
+        "scripts/ff_process_transport.py",
+        "scripts/ff_process_tree.py",
+        "scripts/filing_contracts.py",
+        "scripts/transcript_tool_transport.py"
+      ],
+      "preserved_config": [],
+      "before_sha256": {
+        "SKILL.md": "f6d7cf1d11a3983e5a84804af8d827bd0161a820f59e378583974e4e242afa92",
+        "scripts/fetch_filing.py": "ef7ad1743b7e663d025f3a1b35565bbb61d9455012a2f707050bce2aa668352c",
+        "scripts/ff_process_transport.py": null,
+        "scripts/ff_process_tree.py": null,
+        "scripts/ff_v2_envelope.py": "fd39b64927adb3b7a810047ad431c98f61a66dc6f7dce84ea8c0bd4d6a170034",
+        "scripts/filing_contracts.py": "88af9aea8d473c4d195f558e4cda7ed3aaf328e08ed3ef2b096ea08f58971651",
+        "scripts/transcript_companion.py": "0fc2c13bcde5e4c57d86a6be67f9eef37ebe740bbb0c2244067a7e8201253336",
+        "scripts/transcript_tool_transport.py": "957653a5548bc82fa168b4b86f4606273a3676475283afde6034063413ad002b"
+      },
+      "errors": []
+    }
+  ]
+}
