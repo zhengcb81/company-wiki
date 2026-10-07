@@ -120,7 +120,7 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 | 阶段 | 状态 | 下一责任 |
 |---|---|---|
-| G2门禁全面补漏/P0 | in_progress；目标服务active | 14组+scoped pin；现场steady及核心93ac5a5已推，精确CI37590638806全部步骤绿90秒；MAIN13责任/CLI已绿待发布，下一01b；SW/StockQA/RF三卡用户已分派待交接；CWP/FF latest/P0-B及其余家族pending；只两个大节点 |
+| G2门禁全面补漏/P0 | in_progress；目标服务active | 14组+scoped pin；现场steady及核心93ac5a5已推，精确CI37590638806全部步骤绿90秒；MAIN13已发布/精确CI绿，下一01b；SW/StockQA/RF三卡用户已分派待交接；CWP/FF latest/P0-B及其余家族pending；只两个大节点 |
 | R0完整对账 | complete | 已确认真实生产metadata/分类/ET登记缺口；已完成核心不重做 |
 | R1融资文档正式分类 | complete | 66ce0467已发布，真实两PDF CLI与分类责任包绿，精确CI37578307854绿 |
 | R2真实生产来源/预算准备 | in_progress；生产步骤顺延G2后 | 全库发现/有限登记/AUTO范围代码2cad90d已推且精确CI绿；G2先清旧控制面，再核公开日/retired/ET，不猜metadata |
@@ -130,4 +130,4 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 ## Next Step
 
-G2-13轻初始化/选中账目校验已通过责任与实际CLI节点，正在正常发布；MAIN下一施工为[G2-01b精确读pin](gate_simplification_reaudit_2026-10-07.md)→CWP/FF latest单请求/P0-B→其余P1及G2A/B→R2/R3。三外线按[新并行总包](harness_lanes/g2_parallel_packages_2026-10-07.md)独立运行，MAIN收到交接后统一合入/发布；等待外线不阻断MAIN13/01b，未收到交接不能报完成。不重跑已绿核心大包、不改模型预算、不重派已交卡、不宣布全部完成。
+G2-13轻初始化/选中账目校验已正常推送b202d07，精确CI37597724658全步骤绿79秒；MAIN下一施工为[G2-01b精确读pin](gate_simplification_reaudit_2026-10-07.md)→CWP/FF latest单请求/P0-B→其余P1及G2A/B→R2/R3。三外线按[新并行总包](harness_lanes/g2_parallel_packages_2026-10-07.md)独立运行，MAIN收到交接后统一合入/发布；等待外线不阻断MAIN13/01b，未收到交接不能报完成。不重跑已绿核心大包、不改模型预算、不重派已交卡、不宣布全部完成。

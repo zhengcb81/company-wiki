@@ -1,0 +1,103 @@
+{
+  "schema_version": "g2-store-initialization-exact-ci/1",
+  "observed_at_utc": "2026-10-07T09:05:27.5055528Z",
+  "source_commit": "b202d07b1d271748c77f1b20fc520ea65eb277c2",
+  "run_id": 37597724658,
+  "run_attempt": 1,
+  "url": "https://github.com/zhengcb81/company-wiki/actions/runs/37597724658",
+  "status": "completed",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "id": 112714315754,
+      "name": "Fast checks (Python 3.12)",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-07T09:01:29Z",
+      "completed_at": "2026-10-07T09:02:48Z",
+      "seconds": 79.0,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Set up Python 3.12",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Ruff lint",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Strict type check on contract modules",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compileall and config doctor",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Unit tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Unit test failure summary",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Focused contract tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Focused contract failure summary",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "CLI smoke test",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Scan for hardcoded secrets",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Set up Python 3.12",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ]
+}

@@ -182,7 +182,7 @@ StockInfoDLSimple 的 provider host、include/exclude 是来源发现和过滤�
 
 ### G2-13 / P0：构造Store暗含整库深检和全量补种
 
-**当前：责任与真实恢复CLI已GREEN，待正常发布/精确CI。** [实际验收](harness_lanes/results/g2_store_initialization_acceptance_2026-10-07.json)：132初始责任项、54最终责任/两CLI；普通构造0深检、显式/new/升级各一轮，Catalog当前0DDL/seed，真实升级原子回滚；账目按当前run校验，不靠整库体检避免隐式转换。01b仍pending，不代表whole G2A完成。以下为原问题和实施合同。
+**当前：b202d07已正常推送；精确CI37597724658全步骤GREEN/79秒。** [实际验收](harness_lanes/results/g2_store_initialization_acceptance_2026-10-07.json)：132初始责任项、54最终责任/两CLI；普通构造0深检、显式/new/升级各一轮，Catalog当前0DDL/seed，真实升级原子回滚；账目按当前run校验，不靠整库体检避免隐式转换。01b仍pending，不代表whole G2A完成。以下为原问题和实施合同。
 
 **实际调用链存在系统性重复扫描；次数是结构审计，不冒称实测生产耗时。** 当前v5库每次`AutomationStore.__init__→migrate_database→_validate_current_readonly→_require_expected_structure`做一轮`PRAGMA integrity_check/foreign_key_check`；`NarrativeRunStore.__init__→validate_database`做两轮，因为后者重复检查。完成run的零worker恢复、每个worker启动/重启均构造两种Store，仍有三轮整库检查；失败CLI新构造RunStore又两轮。同一RunStore的`budget_snapshot`只是按run_id查询，没有每次深检，不能误报。
 
@@ -204,7 +204,7 @@ MAIN 是唯一集成与生产变更负责人。此表是施工顺序，不是新
 |---|---|---|---|
 | 1 | G2-00 steady现场迁移/默认新库收敛 | 当前policy、旧小snapshot、真实读和16断言 | 现场complete；默认核心93ac5a5已推，精确CI37590638806全部步骤绿90秒 |
 | 2 | G2-01 effective read pin + G2-02 AUTO机器错误/版本恢复 + G2-11派生质量状态 | 版本化读取语义、同AUTO单库恢复、单处质量诊断 | 核心责任/E2E已收口、93ac5a5已推，精确CI37590638806全部步骤绿90秒；不等于完整A |
-| 3 | G2-13日常Store轻初始化 → G2-01b精确来源scoped pin | 去除隐含整库检查/补种及无关root对精确批次的阻断 | 13责任/真实CLI已绿待发布，01b仍pending/P0；先于R2，沿用同一G2A集中节点 |
+| 3 | G2-13日常Store轻初始化 → G2-01b精确来源scoped pin | 去除隐含整库检查/补种及无关root对精确批次的阻断 | 13已发布/精确CI绿，01b仍pending/P0；先于R2，沿用同一G2A集中节点 |
 | 4 | G2-06 StockWiki/G2-10 StockQA日常工程门 + G2-12 CWP/FF统一latest单请求 | 各仓独占目录，MAIN接线；共享ensure事务/唯一intent、工具/CI/hook/默认配置同步 | P0-B；SW/StockQA用户已分派待交接；MAIN独占12 |
 | 5 | G2-03/04/07 CWP旧家族/公开维护/检查清单、G2-05 RF可选工具、G2-08安装/v1、G2-09能力文案 | CLI/import/package/清单/安装及指导同步；不启用raw破坏入口 | P1；RF新卡用户已分派待交接，其余由MAIN按P0/P0-B后续；不恢复旧签收 |
 | 大节点 A | CWP最终写集完成后的当前链集中责任/E2E | isolated真实IR PDF/英文TXT；read/有限登记/零模型skip/loopback；现场小对照 | pending；核心子集先收口发布，复用已绿202/历史节点，不等同整个A完成 |
