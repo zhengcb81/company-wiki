@@ -6,6 +6,8 @@
 
 MAIN继续未提交G2-12，外线不触碰CLI/FF/指纹/hook/生产/安装/总PWF。上批G2三卡已完成，不重派；新卡ready尚未分派。更新all_pwf/task_plan/findings/README/G2/parallel导航，修复旧待交接及01b pending顶部文字。开发责任/TDD、完工一个集中节点、MAIN在既有G2A/B接线，不增加小步签收。4文件链接/ready/代码围栏/交接/TDD/清理标签检查0问题，git diff --check绿；首次标签检查RF正文虽已有RED步骤但无TDD字样，补标题后通过。原owner配置SHA3609e707及三个未提交核心文件/新合同测试指纹已记录供提交后核。正常文档commit/push随后执行，不将未完成代码或owner配置入提交。
 
+**发布结果：**施工卡和11份相关文档正常commit `321c97dfdd6ed1695780a7bee930fe8cc2908dc7`，已推origin/master；正常pre-commit按实际文档写集skip无关静态项，pre-push现成fast contract smoke GREEN，无绕过hook。提交/推送后五个保护文件SHA与此前完全一致；工作树仍仅owner配置、三个G2-12核心修改和一个新合同测试，未混入提交。纯文档`[skip ci]`不新跑长CI，未创建外部工作树或启动harness。一次批量文档patch因progress标题不符原子拒绝，实读正确标题后重贴，不影响代码。
+
 ## 最新：三外线正式验收/并线/发布全部完成（2026-10-07）
 
 SW master0b489190为本地主线，无remote。RF main1a2f9428已推，精确CI37608673031/job112750312883全部steps绿29秒。SQA master0f8fbfa已推，修复后精确CI37609783778/job112753964115全部实际steps绿35秒；Documentation37609783853构建job112753964763绿21秒、部署job112754114941绿7秒。正常commit/hooks/merge/push，未绕过失败；旧4757088文档RED保留事实，但不覆盖已修复结果。每个job/step与精确SHA收据已保存[g2_parallel_exact_ci](harness_lanes/results/g2_parallel_exact_ci_2026-10-07.json)。三卡/并行总包/总计划/G2实施顺序已同步，不重派三包、不重跑外线已绿full。

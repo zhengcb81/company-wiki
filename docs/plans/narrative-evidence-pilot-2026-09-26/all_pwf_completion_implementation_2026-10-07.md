@@ -2,7 +2,7 @@
 
 ## 用户目标与当前基线
 
-用户要求完成全部PWF计划内容并逐步实施。当前CWP master5930a644、RF main1a2f9428、StockWiki master0b48919（无remote）、StockQA master0f8fbfa；已发布代码的精确CI和本地责任见总task_plan/交接收据。先前16项有界验收继续有效。目标服务active，继续下列次序。MAIN独占总计划/共享接口/生产/合入，各大节点一次，不增签收或小节点门。
+用户要求完成全部PWF计划内容并逐步实施。当前冻结施工基线CWP5930a644、已验收RF main1a2f9428、StockWiki master0b48919（无remote）、StockQA master0f8fbfa；后续纯文档HEAD见Git，不要求因导航提交更换源码基线。已发布代码的精确CI和本地责任见总task_plan/交接收据。先前16项有界验收继续有效。目标服务active，继续下列次序。MAIN独占总计划/共享接口/生产/合入，各大节点一次，不增签收或小节点门。
 
 **当前并行：**[上一批G2三卡](harness_lanes/g2_parallel_packages_2026-10-07.md)均已验收并线，SW本地主线、RF/SQA远端主线及精确CI绿，不重新分派。用户现要求新包，[G3总包](harness_lanes/g3_parallel_packages_2026-10-07.md)提供RF历史质量/包装、CWP维护后端、来源事实/内部空间只读调查三卡，ready可同时分派，未代用户启动；各独占新工作树和互不重叠写集。MAIN继续12及公共接线，生产/技能安装/总PWF/并线仍MAIN负责。G3不新增小节点门、不缩R2–R5。
 
