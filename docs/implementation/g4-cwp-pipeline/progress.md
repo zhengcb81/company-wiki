@@ -60,4 +60,11 @@
 |--------|------|------|
 | `306ecf9b2ef17da6952512226a9f623c107eff08` | implementation | Retire frozen pipeline gate family and stub full_pipeline entry |
 | `4797a601f4e28ae432f6a7c1bd6e990d25117552` | handoff 文档 | Document G4-CWP-PIPELINE retirement handoff |
-| （本文件与 handoff.json 所在提交） | 交接数据 | handoff.json 不写自身尚未生成的 SHA（按卡） |
+| `1693d2bd1dd02d919c24689599fc0520a6c520c6` | 交接数据 | Record G4-CWP-PIPELINE handoff data and green receipts |
+| （本文件与 main_wiring/HANDOFF/handoff.json 修正所在提交） | push-blocker 记录 | handoff.json 不写自身尚未生成的 SHA（按卡） |
+
+### Push 尝试记录（未跳 hook）
+
+- `git push -u origin codex/g4-cwp-pipeline` → pre-push hook 红：`FAILED: pytest basetemp exceeds the 60-character limit: C:\...\_g4\CWP-PIPELINE\company-wiki\tmp\ppd9w7n1d0`（`pre_push_gate.py:113-117`，basetemp=PROJECT_ROOT/tmp/pp<8hex>=64 字符 > 脚本 60 上限；卡指定 worktree 根 50 字符所致，与本包变更无关）。
+- 未使用 `--no-verify`、未改 `tools/pre_push_gate.py`（保护文件）。同一 gate 的 12 个 FAST_CONTRACT_CASES **直跑 12 passed**（`.planning/g4-cwp-pipeline/fast_contracts_direct_receipt.txt`）。
+- 交付方式：本地分支 `codex/g4-cwp-pipeline`；与 G3 两个 lane（`codex/g3-cwp-maint`/`codex/g3-source-facts`，远端不存在）一致，交 MAIN 短路径合并或修 gate 落点。

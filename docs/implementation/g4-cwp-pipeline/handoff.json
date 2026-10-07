@@ -104,6 +104,15 @@
       "failed": 0,
       "skipped": 0,
       "evidence": ".planning/g4-cwp-pipeline/green_misc_receipt.txt"
+    },
+    {
+      "command": "python -B -m pytest -q -p no:cacheprovider --timeout=180 <pre_push_gate FAST_CONTRACT_CASES 12 个用例逐个直跑>（等价于 pre-push gate 的用例集，绕开其 basetemp 路径前置检查；gate 本体见 remaining）",
+      "exit_code": 0,
+      "seconds": 9,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": ".planning/g4-cwp-pipeline/fast_contracts_direct_receipt.txt"
     }
   ],
   "behavior_changes": [
@@ -167,6 +176,7 @@
     "scripts/stage1_extract.py、scripts/stage2_structure.py 旧阶段脚本仍在（mixed-frozen），stage3-6 在永久退休清单；后续整族退休交 MAIN",
     "docs/DEPLOYMENT.md 对已不存在 scripts/ingest.py 的引用为先于本包的历史遗留",
     "新 worktree 缺未跟踪 .source_catalog 运行目录导致 config_doctor 全量模式 rc=1（先于本包的环境状态差异；--structure-only 通过）",
+    "分支未推远端（未跳 hook）：pre_push_gate.py --fast-contracts-only 在卡指定 worktree 路径下结构性失败——basetemp 落在 PROJECT_ROOT/tmp/pp<8hex>（64 字符）超其 60 字符上限，pytest 未运行即红；可复现命令 python tools/pre_push_gate.py --fast-contracts-only → FAILED: pytest basetemp exceeds the 60-character limit。该 gate 为保护文件，本包不改、不 --no-verify；其 12 个用例直接运行 12 passed（fast_contracts_direct_receipt.txt）。交 MAIN 于短路径合并或按主机假设协议修 basetemp 落点",
     "全项目发布需 MAIN 统一接线后执行；本包不宣称全项目发布通过"
   ],
   "main_integration": {

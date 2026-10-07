@@ -85,3 +85,4 @@
 
 - 本 worktree 缺原仓的未跟踪 `.source_catalog` 运行目录 → `config_doctor` **全量**模式 rc=1（先于本包的工作树状态差异，与 G4 变更无关）；commit hook 使用的 `--structure-only` 实跑 rc=0。
 - LSP 对 `scripts/`、`tests/` 内 import 的“could not be resolved”为未挂 sys.path 的既有环境噪音；以 ruff/compileall/pytest 实跑为准。
+- **分支未推远端（未跳 hook）**：`.githooks/pre-push` 的 `pre_push_gate.py --fast-contracts-only` 把 basetemp 建在 `PROJECT_ROOT/tmp/pp<8hex>`，本卡指定 worktree 根（50 字符）使 basetemp=64 字符，超过脚本自带 60 字符上限，gate 在运行 pytest 前即红。可复现：`python tools/pre_push_gate.py --fast-contracts-only` → `FAILED: pytest basetemp exceeds the 60-character limit: ...\company-wiki\tmp\ppds2wrrht`。该共享 gate 属保护文件，本包不改、不 `--no-verify`；同一 gate 的 12 个用例直接运行 **12 passed**（`.planning/g4-cwp-pipeline/fast_contracts_direct_receipt.txt`）。交付方式为本地分支 `codex/g4-cwp-pipeline`，交 MAIN 在短路径合并或按主机假设协议修 gate 落点（与 G3 两个 lane 未推远端一致）。
