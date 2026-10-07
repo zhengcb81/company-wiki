@@ -6,6 +6,8 @@ import json
 from dataclasses import asdict
 from pathlib import Path
 
+import pytest
+
 from company_wiki.automation.narrative_transport import NarrativeTransportReader
 from company_wiki.automation.narrative_transport_contracts import NarrativeReadRequest
 from company_wiki.automation.narrative_contracts import SourceRefValue
@@ -13,7 +15,7 @@ from company_wiki.automation.narrative_run_store import NarrativeRunStore
 from company_wiki.source_catalog.narrative_artifact_store import (
     LocalNarrativeObjectStore, NarrativeArtifactStore,
 )
-from company_wiki.source_catalog.narrative_evidence import NARRATIVE_SELECTOR_VERSION
+from company_wiki.source_catalog.narrative_evidence import NARRATIVE_PARSER_VERSION, NARRATIVE_SELECTOR_VERSION
 from integration import test_narrative_batch_cli_e2e as cli_fixtures
 from support import narrative_batch_fixtures as batch_fixtures
 
@@ -23,7 +25,7 @@ protected_inputs = cli_fixtures.r6_protected_inputs
 REPO = Path(__file__).resolve().parents[2]
 
 
-def _upgrade_launcher(root, monkeypatch):
+def _upgrade_launcher(root, monkeypatch, version_kind):
     bootstrap = root / "upgrade-bootstrap"
     bootstrap.mkdir()
     (bootstrap / "sitecustomize.py").write_text('''
@@ -31,7 +33,8 @@ import os
 from company_wiki.source_catalog import narrative_evidence
 from company_wiki.automation import narrative_batch_request, narrative_select
 for module in (narrative_evidence, narrative_batch_request, narrative_select):
-    module.NARRATIVE_SELECTOR_VERSION = os.environ["CWP_N6_TEST_UPGRADE_VERSION"]
+    setattr(module, "NARRATIVE_" + os.environ["CWP_N6_TEST_UPGRADE_KIND"].upper() + "_VERSION",
+            os.environ["CWP_N6_TEST_UPGRADE_VERSION"])
 ''', encoding="utf-8")
     launcher = root / "upgrade.py"
     launcher.write_text('''
@@ -49,13 +52,16 @@ if __name__ == "__main__":
         args[args.index("--work-dir") + 1] = os.environ["CWP_N6_TEST_UPGRADE_WORK_DIR"]
     raise SystemExit(main(args))
 ''', encoding="utf-8")
-    version = NARRATIVE_SELECTOR_VERSION + ".n6-test-next"
+    current = NARRATIVE_PARSER_VERSION if version_kind == "parser" else NARRATIVE_SELECTOR_VERSION
+    version = current + ".n6-test-next"
+    monkeypatch.setenv("CWP_N6_TEST_UPGRADE_KIND", version_kind)
     monkeypatch.setenv("CWP_N6_TEST_UPGRADE_VERSION", version)
     return launcher, version
 
 
+@pytest.mark.parametrize("version_kind", ["selector", "parser"])
 def test_real_batches_keep_old_generation_and_create_separate_upgraded_jobs(
-    tmp_path_factory, loopback_model_server, monkeypatch, protected_inputs,
+    tmp_path_factory, loopback_model_server, monkeypatch, protected_inputs, version_kind,
 ):
     protected_inputs([])
     policies = [source for source in batch_fixtures.source_documents() if source[3] == "ir_policy"]
@@ -89,9 +95,10 @@ def test_real_batches_keep_old_generation_and_create_separate_upgraded_jobs(
                 },
             })
             old_bytes = transport.read(request).data
-            assert json.loads(old_bytes)["versions"]["selector"] == NARRATIVE_SELECTOR_VERSION
+            original_version = NARRATIVE_PARSER_VERSION if version_kind == "parser" else NARRATIVE_SELECTOR_VERSION
+            assert json.loads(old_bytes)["versions"][version_kind] == original_version
             jobs_before = tuple(state.store.list_jobs())
-            launcher, upgraded_version = _upgrade_launcher(root, monkeypatch)
+            launcher, upgraded_version = _upgrade_launcher(root, monkeypatch, version_kind)
             rejected_process, rejected = cli_fixtures._invoke(state, launcher=launcher)
             assert rejected_process.returncode != 0 and rejected["status"] == "failed"
             assert runs.get_run("cli-e2e") == old_run
@@ -116,7 +123,7 @@ def test_real_batches_keep_old_generation_and_create_separate_upgraded_jobs(
                 **request.to_dict(), "narrative_ref": new_reference.to_dict(),
             }))
             new_bundle = json.loads(new_read.data)
-            assert new_bundle["versions"]["selector"] == upgraded_version
+            assert new_bundle["versions"][version_kind] == upgraded_version
             assert new_bundle["selection"]["status"] == "skipped_no_narrative"
             assert new_bundle["summary"]["status"] == "summary_not_needed"
             assert transport.read(request).data == old_bytes

@@ -10,6 +10,7 @@ from pathlib import Path
 from company_wiki.source_contract import EvidenceSpan
 
 from .narrative_document import NarrativeUnit
+from .narrative_pdf_qa import QA_FRAGMENT_VERSION
 
 
 RoundtripKey = tuple[str, str, str, str]
@@ -145,6 +146,13 @@ def _available_units(
 
 def _qa_fragment_matches(unit: NarrativeUnit, span: EvidenceSpan) -> bool:
     expected = span.structured_value
+    if QA_FRAGMENT_VERSION in {unit.parser_version, span.parser_version}:
+        if unit.parser_name != span.parser_name or unit.parser_version != span.parser_version:
+            return False
+        if any(unit.metadata.get(key) != expected.get(key) for key in (
+            "cell_fragment_sha256", "qa_group_id", "qa_question_number", "qa_state",
+        )):
+            return False
     return bool(
         unit.metadata.get("cell_sha256") == expected.get("cell_sha256")
         and unit.metadata.get("cell_fragment_start")

@@ -88,3 +88,18 @@ MAIN master3ffafed，N6代码e8c645e/CI37547043642全绿53秒；selector0.4.0、
 ## 本节点实际发布
 
 代码9bf25a5f4d7339d24ed75661a22036f1e7068eb9已推master，精确CI37550268890 attempt1全部step/job成功、job112563794701/71秒。正常commit/pre-push绿，14个本次tmp路径恢复absent，原件/用户配置/RF owner与运行源码指纹保持。收据s7_operating_main_acceptance_2026-10-07.json状态published_exact_ci_passed。上文等待/准备状态已被本节完成事实覆盖；下节点IR0.1.1仍未实施，S7总目标继续in_progress。
+
+## 2026-10-07 IR0.1.1实际实施（覆盖前述尚未开始）
+
+当前新默认parser0.1.1/selector仍0.4.1；明确0.1.0走全部原QA解析/ID/关联/回放逻辑。新模块负责marker与精确trim范围，_make_unit新pin QA身份加范围/role，现linker按source/parser/language及相邻页配对、仅同cell顺序多句继承；新pin回放核fragment SHA、QA group/number/state。既有Reader/VersionPins传播复用统一常量，不改公开v2合同或RF文件。
+
+当前责任26新用例+91原相关项117通过/1.68秒，5源mypy与相关Ruff绿。真实S07/S08/S09正式链及冻结旧final9、实际AUTO selector/parser两种升级共12通过/52.16秒。新IR E2E明确检查原G-S08-01占比full与G-S08-05/06套话clean，TXT原G-S09-05仍full，未翻译。新旧批次工作键、job IDs、artifact refs隔离；旧ref字节不变，resume零额外调用。隔离Acme身份与本地HTTP确定性响应，不能冒充真实供应商质量。全九/Unit集中运行后填最终收据；无需外仓修改或人签。
+
+
+## 2026-10-07 IR集中本地验收收口
+
+最终九文档400.944秒：required27/33不变、761定位零失败、角色/情态混淆0、精选66215→62953B（少3262B），负例命中点3→1、噪声span3→2、重复4不变；S08两套话clean、占比事实仍full。optional3/17→2/17：G-S07-07是投资者提问，内容包括研发占比及PI/PEEK等新品验证/性能担忧，并非只是财务数字；原管理层答复实读为泛研发布局/长期开发/财务同比增长。旧整答案混合得到current_business_progress并挂问题，新句级解析没有具体进展入选，因此问题退出精选。记录这个问答上下文取舍，不把投资者担忧冒作公司已确认事实，不泛化允许丢实际业务动态；原件保留，原golden不改。三条先前optional取舍仍可查。
+
+全Unit一次1688通过/10失败/140.93秒，均为英文测试把默认写死0.1.0；补显式旧TXT pin与新默认的文本/角色/定位同等并回放旧pin，不削业务断言。相关143复验1.35秒绿，新QA含29项；全CI范围Ruff及45源mypy绿。真实节点/冻结9/两种实际升级12项52.16秒绿，不重复长套件。全九报告和IR小收据保存，9原件/两配置/RF三owner/10运行源码SHA不变；10个自身tmp根、包装文件/脚本/缓存全部恢复absent（全Unit临时逻辑58,364,951B已删除）。日常CI没有加入全九或真实长E2E。
+
+正常发布准备，精确CI未完成前不冒称published。后续仍须处理应用句与募投表联系；S7不complete。receipt生成脚本首次补丁上下文不匹配、没有修改，随后修正；UTF-8显式配置继续执行。

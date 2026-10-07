@@ -1,0 +1,228 @@
+{
+  "schema_version": "s7-followup-quality-node/1",
+  "status": "local_passed_pending_publish",
+  "base": "6906bbba258decab97e5f63dd6887f768267a411",
+  "code_sha": null,
+  "parser": "0.1.1",
+  "selector": "0.4.1",
+  "rf_head": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
+  "red": {
+    "initial_signature_stage": {
+      "failed": 18,
+      "passed": 6
+    },
+    "genuine_product_stage": {
+      "failed": 12,
+      "passed": 12
+    },
+    "revalidated_remaining": {
+      "failed": 7,
+      "passed": 17,
+      "seconds": 0.72
+    },
+    "whole_unit_before_stale_version_fix": {
+      "failed": 10,
+      "passed": 1688,
+      "seconds": 140.93,
+      "reason": "English test asserted global default must forever equal 0.1.0; new pin required by spec"
+    }
+  },
+  "green": {
+    "responsibility": {
+      "passed": 143,
+      "seconds": 1.35
+    },
+    "real_ir_business_old_final_and_two_version_upgrades": {
+      "passed": 12,
+      "seconds": 52.16,
+      "original_samples": [
+        "S07",
+        "S08",
+        "S09"
+      ],
+      "business_quote_assertions": 4,
+      "negative_assertions": [
+        "G-S08-05",
+        "G-S08-06"
+      ],
+      "identity_metadata": "isolated Acme fixture",
+      "loopback_http_posts": 3,
+      "old_final_cases": 9,
+      "actual_auto_upgrade_cases": [
+        "selector",
+        "parser"
+      ]
+    }
+  },
+  "static": {
+    "ruff": "CI scope and affected integration files passed",
+    "mypy": "5 affected and complete 45 CI source modules passed",
+    "diff_check": "passed"
+  },
+  "quality": {
+    "before": {
+      "documents": 9,
+      "golden_points": 86,
+      "required_points": 33,
+      "required_matched": 27,
+      "optional_points": 17,
+      "optional_matched": 3,
+      "negative_points": 36,
+      "negative_points_hit": 3,
+      "selected_span_count": 764,
+      "selected_in_scope": 218,
+      "judged_in_scope": 50,
+      "noise_spans": 3,
+      "role_confusion": 0,
+      "modality_confusion": 0,
+      "duplicate_span_count": 4,
+      "selected_utf8_bytes": 66215,
+      "locator_roundtrip_verified": 764,
+      "locator_roundtrip_failed": 0,
+      "required_coverage_rate": 0.8182,
+      "optional_coverage_rate": 0.1765,
+      "selected_noise_rate": 0.06,
+      "duplicate_ratio": 0.0052
+    },
+    "after": {
+      "documents": 9,
+      "golden_points": 86,
+      "required_points": 33,
+      "required_matched": 27,
+      "optional_points": 17,
+      "optional_matched": 2,
+      "negative_points": 36,
+      "negative_points_hit": 1,
+      "selected_span_count": 761,
+      "selected_in_scope": 215,
+      "judged_in_scope": 49,
+      "noise_spans": 2,
+      "role_confusion": 0,
+      "modality_confusion": 0,
+      "duplicate_span_count": 4,
+      "selected_utf8_bytes": 62953,
+      "locator_roundtrip_verified": 761,
+      "locator_roundtrip_failed": 0,
+      "required_coverage_rate": 0.8182,
+      "optional_coverage_rate": 0.1176,
+      "selected_noise_rate": 0.0408,
+      "duplicate_ratio": 0.0053
+    },
+    "required_full_regressions_from_0_4_1": [],
+    "optional_full_regressions_from_0_4_1": [
+      "G-S07-07"
+    ],
+    "optional_tradeoff": {
+      "id": "G-S07-07",
+      "old": "full",
+      "new": "miss",
+      "role": "investor_question",
+      "question_content": "R&D ratio and PI/PEEK/material validation/performance bottleneck concerns",
+      "old_inclusion": "linked_question_context of a whole answer with generic product layout, financial growth and future intentions",
+      "new_inclusion_policy": "questions accompany selected business answers; separate generic/financial answer sentences are not concrete progress",
+      "management_response": "generic ongoing R&D/product development, no specific validation completion or operational milestone",
+      "not_a_confirmed_company_fact": true,
+      "original_retained": true,
+      "not_a_general_permission_to_drop_business_facts": true
+    },
+    "remaining_required": [
+      "G-S01-01",
+      "G-S04-03",
+      "G-S06-01",
+      "G-S06-03",
+      "G-S09-01",
+      "G-S09-03"
+    ],
+    "noise_points": [
+      "G-S01-11"
+    ],
+    "elapsed_seconds": 400.944,
+    "temp_peak_bytes": 60374,
+    "golden_modified": false,
+    "limits_modified": false,
+    "full_report": "docs\\plans\\narrative-evidence-pilot-2026-09-26\\harness_lanes\\results\\s7_ir_quality_2026-10-07.json",
+    "previous_optional_tradeoffs": [
+      "G-S02-06 static subsidiary role",
+      "G-S05-05 pure financial projection"
+    ],
+    "s7_status": "in_progress"
+  },
+  "protected": {
+    "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "config\\source_acquisition.yaml": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "0aee073f56c133786365ab96899edf4d91c0f9e1a0e13ab61b2a6bffd8316270",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf"
+  },
+  "raw": {
+    "S01": {
+      "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "byte_size": 9165875
+    },
+    "S02": {
+      "sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "byte_size": 6361468
+    },
+    "S03": {
+      "sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "byte_size": 217264
+    },
+    "S04": {
+      "sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "byte_size": 11211796
+    },
+    "S05": {
+      "sha256": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+      "byte_size": 5595592
+    },
+    "S06": {
+      "sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+      "byte_size": 4756322
+    },
+    "S07": {
+      "sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "byte_size": 153851
+    },
+    "S08": {
+      "sha256": "f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+      "byte_size": 414544
+    },
+    "S09": {
+      "sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "byte_size": 66324
+    }
+  },
+  "runtime_source_sha256": {
+    "src/company_wiki/source_catalog/n6_candidate_completion.py": "71cd2996d3cc3a6fa9a4309a7246df2914511717178401d81d68dd00e02391cb",
+    "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": "6aebb4c33e199e0844a5dae6647366a67e88e13f790c4ee937f4061f9274dadb",
+    "src/company_wiki/source_catalog/narrative_candidates.py": "b70e3a23a3f498953de6c0adc7fec88048610bef488acfd7c3f9a62bea654d54",
+    "src/company_wiki/source_catalog/narrative_context.py": "4f4749cd3df6c6a16d31e9ea5327beb5cee9d0895c6e25ef2df19404fde69e4e",
+    "src/company_wiki/source_catalog/narrative_group_candidates.py": "38d8fb00efe4a74e3a846d31b22c961f397df802b58ab54bdd74812d570bd197",
+    "src/company_wiki/source_catalog/narrative_neighbors.py": "3c6f735fd034caef8074b4f70673b0708be00e9bb6415043fd6cfd4b958a1ade",
+    "src/company_wiki/source_catalog/narrative_budget.py": "54f43180972196e3ba9ecdd80eee211fc4dcbfe98e75035cb6a4ca334418a5d7",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "5e05c04cff801bbc19f2e15137f50b58ac2befcffd5b04199f8ab8cc98613124",
+    "src/company_wiki/source_catalog/narrative_pdf_qa.py": "f06ff742370f8d68b18f283869b31a223dffced7d1472bf489baad153312a5b1",
+    "src/company_wiki/source_catalog/narrative_replay.py": "02f6a812ff929dc403b06881487cac5db49c59f10061cdec75b5e2f403184390"
+  },
+  "published_git_blob_sha256": {},
+  "vendor_calls": 0,
+  "downloads": 0,
+  "translations": 0,
+  "cost_micro_usd": 0,
+  "raw_deleted": 0,
+  "external_tree_writes": 0,
+  "daily_ci_long_tests_added": 0,
+  "scratch_restore": {
+    "tmp/s7ir-e1": true,
+    "tmp/s7ir-u1": true,
+    "tmp/s7ir-r1": true,
+    "tmp/s7ir-pkg": true,
+    "tmp/s7ir-report.json": true,
+    "tmp/s7ir-scratch": true,
+    "tmp/s7ir-state.json": true,
+    "tmp/s7ir_run.py": true,
+    "tmp/s7ir_accept.py": true,
+    "tmp/s7ir-m1": true
+  },
+  "ci": null
+}

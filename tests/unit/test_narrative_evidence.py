@@ -249,7 +249,8 @@ def test_transcript_parser_excludes_editorial_and_keeps_qa_question_context() ->
     assert "management" in roles
     assert "analyst" in roles  # context, never management attribution
     assert any("too early to speculate" in (span.raw_text or "") for span in package.evidence_spans)
-    assert all(span.parser_version == "0.1.0" for span in package.evidence_spans)
+    assert all(span.parser_version == narrative_evidence_module.NARRATIVE_PARSER_VERSION
+               for span in package.evidence_spans)
     verified, failed = verify_transcript_evidence_spans(
         text,
         source_id=source_id,

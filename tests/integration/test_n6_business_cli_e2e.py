@@ -16,7 +16,7 @@ import sys
 
 import pytest
 
-from benchmarks.narrative_document_types.evaluator import match_positive
+from benchmarks.narrative_document_types.evaluator import match_negative, match_positive
 from company_wiki.source_contract import EvidenceSpan
 from integration import test_narrative_batch_cli_e2e as cli_fixtures
 from integration.test_narrative_runtime_e2e import (
@@ -89,7 +89,8 @@ def _sources(real):
     return sources, originals, raw_by_sample
 
 
-def _exercise(tmp_path_factory, server, monkeypatch, capture, *, real, probes=None, queries=None):
+def _exercise(tmp_path_factory, server, monkeypatch, capture, *, real, probes=None, queries=None,
+              negative_probes=None):
     rf_value = os.environ.get("CWP_RF_PROJECT_ROOT")
     if not rf_value:
         pytest.skip("requires explicit read-only committed RF checkout")
@@ -199,6 +200,9 @@ def _exercise(tmp_path_factory, server, monkeypatch, capture, *, real, probes=No
                         assert _original_byte_probe(point, raw, bundle, spans)["result"] == "full"
                 if real:
                     for point in golden["samples"][sample_id]["points"]:
+                        if negative_probes and point["golden_id"] in negative_probes.get(sample_id, set()):
+                            match = match_negative(point, spans)
+                            assert match["result"] == "clean", (point["golden_id"], match)
                         if point["golden_id"] not in probes[sample_id]:
                             continue
                         match = (_original_byte_probe(point, raw_by_sample[sample_id], bundle, spans)

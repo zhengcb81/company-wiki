@@ -45,11 +45,11 @@ NON_BUSINESS = (
 )
 
 
-def _select(text):
+def _select(text, *, parser_version=NARRATIVE_PARSER_VERSION):
     digest = hashlib.sha256(text.encode("utf-8")).hexdigest()
     source_id = source_id_for_sha256(digest)
     parsed = parse_transcript_text(
-        text, source_id=source_id, source_sha256=digest, language="en"
+        text, source_id=source_id, source_sha256=digest, language="en", parser_version=parser_version
     )
     package = select_narrative_evidence(
         parsed,
@@ -75,7 +75,7 @@ def test_actual_english_business_milestone_is_selected_with_unchanged_text_and_l
     assert span.coordinates.paragraph_index == 1
     assert span.coordinates.char_start == 0
     assert span.coordinates.char_end == len(sentence)
-    assert span.parser_version == NARRATIVE_PARSER_VERSION == "0.1.0"
+    assert span.parser_version == NARRATIVE_PARSER_VERSION
     assert parsed.coverage_complete
     verified, failed = verify_transcript_evidence_spans(
         text,
@@ -146,8 +146,19 @@ def test_english_financial_table_remains_dropped_and_business_milestone_stays_se
     assert package.evidence_spans[0].coordinates.page_number == 1
 
 
-def test_recall_semantics_are_versioned_without_changing_source_parser():
-    # English milestone recall started in 0.2.0; later recall improvements
-    # retain the same parser/locators and are covered by the behavior tests.
+def test_recall_semantics_are_versioned_and_legacy_txt_locators_stay_unchanged():
+    # PDF Q&A may upgrade the shared parser pin; TXT source attribution,
+    # source wording and coordinates still replay identically under the old pin.
     assert tuple(int(part) for part in NARRATIVE_SELECTOR_VERSION.split(".")) >= (0, 2, 0)
-    assert NARRATIVE_PARSER_VERSION == "0.1.0"
+    text = f"Full Conference Call Transcript\nCEO: {BUSINESS[0]}\n"
+    _, current, source_id, digest = _select(text)
+    _, legacy, _, _ = _select(text, parser_version="0.1.0")
+    assert current.evidence_spans and legacy.evidence_spans
+    assert [(s.raw_text, s.coordinates, s.structured_value['source_role']) for s in current.evidence_spans] == [
+        (s.raw_text, s.coordinates, s.structured_value['source_role']) for s in legacy.evidence_spans
+    ]
+    assert all(s.parser_version == '0.1.0' for s in legacy.evidence_spans)
+    verified, failed = verify_transcript_evidence_spans(
+        text, source_id=source_id, source_sha256=digest, evidence_spans=legacy.evidence_spans,
+    )
+    assert verified == tuple(s.span_id for s in legacy.evidence_spans) and failed == ()

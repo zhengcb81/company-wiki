@@ -33,6 +33,7 @@ from .narrative_group_candidates import (
 from .narrative_finalize import finalize_selection
 from .narrative_neighbors import NeighborRules, enrich_neighbor_context
 from .narrative_pdf_groups import PdfGroupRules, build_pdf_context_groups
+from .narrative_pdf_qa import QA_FRAGMENT_VERSION, pdf_qa_parts, question_markers
 from .narrative_replay import (
     prepare_pdf_replay,
     prepare_pdf_replay_bytes,
@@ -47,7 +48,7 @@ from .narrative_routing import (
 
 
 NARRATIVE_PARSER_NAME = "selective_narrative_parser"
-NARRATIVE_PARSER_VERSION = "0.1.0"
+NARRATIVE_PARSER_VERSION = QA_FRAGMENT_VERSION
 NARRATIVE_SELECTOR_NAME = "select_narrative_evidence"
 # 0.4.1 preserves specific operating/industry meaning and atomic fact sentences.
 # 0.4.0 completes bounded business facts and preserves discourse boundaries.
@@ -406,15 +407,21 @@ def _make_unit(
     canonical_text = unicodedata.normalize("NFC", raw_text.replace("\r\n", "\n")).strip()
     if not canonical_text:
         raise ValueError("cannot create a narrative unit from blank text")
-    identity = json.dumps(
-        {
+    identity_fields: dict[str, Any] = {
             "coordinates": coordinates.locator(),
             "parser_name": NARRATIVE_PARSER_NAME,
             "parser_version": parser_version,
             "source_id": source_id,
             "text_sha256": hashlib.sha256(canonical_text.encode("utf-8")).hexdigest(),
             "unit_kind": unit_kind,
-        },
+        }
+    if parser_version == QA_FRAGMENT_VERSION and unit_kind == "pdf_table_qa_fragment":
+        identity_fields["cell_fragment_range"] = (
+            metadata.get("cell_fragment_start"), metadata.get("cell_fragment_end")
+        )
+        identity_fields["source_role"] = source_role
+    identity = json.dumps(
+        identity_fields,
         ensure_ascii=False,
         sort_keys=True,
         separators=(",", ":"),
@@ -453,8 +460,12 @@ def _sentence_fragments(text: str) -> list[tuple[int, int, str]]:
     return fragments or [(0, len(text), text)]
 
 
-def _pdf_qa_parts(text: str, *, group_prefix: str) -> list[dict[str, Any]]:
+def _pdf_qa_parts(
+    text: str, *, group_prefix: str, parser_version: str = NARRATIVE_PARSER_VERSION,
+) -> list[dict[str, Any]]:
     """Split repeated investor Q&A markers inside one extracted table cell."""
+    if parser_version == QA_FRAGMENT_VERSION:
+        return pdf_qa_parts(text, group_prefix=group_prefix)
     questions = list(_QA_QUESTION.finditer(text))
     if not questions:
         return _unpaired_pdf_qa_parts(text)
@@ -553,6 +564,35 @@ class _CrossPageQaLinker:
     output: list[NarrativeUnit]
     pending_index: int | None = None
     continuation_indices: list[int] = field(default_factory=list)
+    last_answer_index: int | None = None
+
+    @staticmethod
+    def compatible(left: NarrativeUnit, right: NarrativeUnit) -> bool:
+        if QA_FRAGMENT_VERSION not in {left.parser_version, right.parser_version}:
+            return True  # replay the historical linking policy unchanged
+        lp, rp = left.coordinates.page_number, right.coordinates.page_number
+        return bool(
+            left.source_id == right.source_id and left.language == right.language
+            and left.parser_name == right.parser_name and left.parser_version == right.parser_version
+            and lp is not None and rp is not None and 0 <= rp - lp <= 1
+        )
+
+    def continue_answer(self, index: int, unit: NarrativeUnit) -> bool:
+        if self.last_answer_index is None or unit.parser_version != QA_FRAGMENT_VERSION:
+            return False
+        previous = self.output[self.last_answer_index]
+        if not (
+            self.compatible(previous, unit) and previous.coordinates == unit.coordinates
+            and previous.metadata.get("cell_sha256") == unit.metadata.get("cell_sha256")
+            and unit.metadata["cell_fragment_start"] >= previous.metadata["cell_fragment_end"]
+        ):
+            return False
+        metadata = dict(unit.metadata)
+        for key in ("qa_group_id", "qa_question_number", "qa_state"):
+            metadata[key] = previous.metadata.get(key)
+        self.output[index] = replace(unit, metadata=metadata)
+        self.last_answer_index = index
+        return True
 
     def mark_orphan(self, index: int) -> None:
         item = self.output[index]
@@ -588,11 +628,25 @@ class _CrossPageQaLinker:
         answer_meta = dict(unit.metadata)
         answer_meta["qa_group_id"] = group_id
         answer_meta["qa_state"] = "answer_paired_cross_page"
+        if unit.parser_version == QA_FRAGMENT_VERSION:
+            answer_meta["qa_question_number"] = question.metadata.get("qa_question_number")
+            self.last_answer_index = index
+            for continuation_index in self.continuation_indices:
+                continuation = self.output[continuation_index]
+                metadata = dict(continuation.metadata)
+                metadata["qa_question_number"] = question.metadata.get("qa_question_number")
+                self.output[continuation_index] = replace(continuation, metadata=metadata)
         self.output[index] = replace(unit, metadata=answer_meta)
         self.clear_pending()
 
     def consume(self, index: int, unit: NarrativeUnit) -> None:
         state = unit.metadata.get("qa_state")
+        if state != "answer_continuation":
+            self.last_answer_index = None
+        if self.pending_index is not None and state in {"question_continuation", "answer_continuation"}:
+            anchor = self.continuation_indices[-1] if self.continuation_indices else self.pending_index
+            if not self.compatible(self.output[anchor], unit):
+                self.orphan_pending()
         if state == "question_unanswered":
             self.orphan_pending()
             self.pending_index = index
@@ -600,6 +654,9 @@ class _CrossPageQaLinker:
             self.continuation_indices.append(index)
         elif state == "answer_continuation":
             if self.pending_index is None:
+                if self.continue_answer(index, unit):
+                    return
+                self.last_answer_index = None
                 metadata = dict(unit.metadata)
                 metadata["qa_state"] = "orphan_answer_needs_review"
                 self.output[index] = replace(unit, metadata=metadata)
@@ -670,7 +727,7 @@ def _pdf_table_scan_pages(
     selected = {
         number
         for number, blocks in state.page_blocks
-        if _table_scan_signal("\n".join(item[2] for item in blocks))
+        if _table_scan_signal("\n".join(item[2] for item in blocks), parser_version=state.parser_version)
     }
     for page_number in tuple(selected):
         selected.update(
@@ -686,7 +743,7 @@ def _emit_pdf_text_units(
     state: _PdfParseState, page_number: int, blocks: Sequence[tuple[int, tuple[float, ...], str]]
 ) -> bool:
     qa_page = any(
-        _QA_QUESTION.search(text) or _QA_ANSWER.search(text)
+        _has_pdf_question(text, state.parser_version) or _QA_ANSWER.search(text)
         for _block_no, _bbox, text in blocks
     )
     paragraph_no = 0
@@ -748,7 +805,7 @@ def _emit_pdf_row(
         if not cell:
             continue
         group_prefix = f"p{page_number}:t{table_index}:r{row_index}:c{column_index}"
-        fragments = _pdf_qa_parts(cell, group_prefix=group_prefix)
+        fragments = _pdf_qa_parts(cell, group_prefix=group_prefix, parser_version=state.parser_version)
         if not fragments:
             continue
         qa_created = True
@@ -1292,9 +1349,13 @@ def _topics(text: str) -> tuple[str, ...]:
     )
 
 
-def _table_scan_signal(text: str) -> bool:
+def _has_pdf_question(text: str, parser_version: str) -> bool:
+    return bool(question_markers(text)) if parser_version == QA_FRAGMENT_VERSION else bool(_QA_QUESTION.search(text))
+
+
+def _table_scan_signal(text: str, *, parser_version: str = NARRATIVE_PARSER_VERSION) -> bool:
     """Limit expensive table discovery to pages with specific business events."""
-    if _QA_QUESTION.search(text) or _QA_ANSWER.search(text):
+    if _has_pdf_question(text, parser_version) or _QA_ANSWER.search(text):
         return True
     topics = _topics(text)
     if not topics:
