@@ -912,3 +912,8 @@ build_batch_events确用request中selector/parser/prompt hash划新身份；正�
 S7后续实证：G-S06-03完整达产quote已在同原件page7 p12—17入选且原情态保留；page43缺口为canonical去重，不为golden复刻重复。G-S06-04两片段一句分组先修为原子组，但泛industry预算仍会挤掉，于是只给量化事实独立类别。G-S01-05识别将达后candidate full，预算仍miss；不增加96/160，按量化行业类别修。S04page34 intro p14/15与具体募投表row1/2真实存在，但抽取顺序中法律段落p17—22插在正文intro与表之前：下一实现不能按索引近邻认定联系。完整报告s7_gap_stage_after_operating_rules_2026-10-07.json明确是声明表页诊断，不是default/full-table正式验收。
 
 本轮quality实测业务解释26/29、原required27/33，不能拿解释子集或canonical另页替代正式golden。两optional退步均有明确原句：主要负责公司海外的销售（静态主体表职责）及项目预计年营业收入/净利润（纯效益数值预测），低于已实现采用/订单/具体收购/量化行业动态的优先级。保留optional退步证据与原始资料，调整收据质量审查口径为required/business无退步+optional透明具体取舍，不修改原benchmark/evaluator/产品断言，也不为最大化所有optional扩大切片预算。
+
+
+## 2026-10-07 S7经营节点发布收尾
+
+S7最终发布证据：9bf25a5/CI37550268890全部步骤绿71秒，真实业务节点零供应商调用并恢复测试根。空间不因本轮扩大：九文档精选66195→66215B，只多20B；7诊断/质量/收据总354203B（最后补CI字段后略增），14个临时路径恢复absent。未改变96/160、原86点/33分母、原件或任何外仓owner文件；业务必需覆盖21→27，optional退步2项保留原结果。

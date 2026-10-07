@@ -10,14 +10,14 @@
 
 ## 当前恢复点（2026-10-07）
 
-- **当前施工：S7经营语义集中节点已本地通过，准备正常提交推送。** 按[后续实施单](s7_followup_quality_implementation_2026-10-07.md)完成具体经营reason、量化行业独立类别和有界未完句合组；selector0.4.1、parser仍0.1.0。293责任项/3.60秒、真实S01/S02/S06正式链路7点/97.74秒及既有节点/旧final/generation11项通过。完整九文档27/33（原21/33），764定位全绿、必需旧full无退步；optional5/17→3/17的两项取舍完整保留，不能宣称所有旧full无回退。精选66215B（原66195B）、重复4（原3）。S04募投上下文与S08数字问答解析仍未施工，S7不complete。详见[s7节点收据](harness_lanes/results/s7_operating_main_acceptance_2026-10-07.json)。
+- **当前施工：S7经营语义集中节点已发布：9bf25a5，精确CI37550268890全部步骤绿/71秒。** 按[后续实施单](s7_followup_quality_implementation_2026-10-07.md)完成具体经营reason、量化行业独立类别和有界未完句合组；selector0.4.1、parser仍0.1.0。293责任项/3.60秒、真实S01/S02/S06正式链路7点/97.74秒及既有节点/旧final/generation11项通过。完整九文档27/33（原21/33），764定位全绿、必需旧full无退步；optional5/17→3/17的两项取舍完整保留，不能宣称所有旧full无回退。精选66215B（原66195B）、重复4（原3）。S04募投上下文与S08数字问答解析仍未施工，S7不complete。详见[s7节点收据](harness_lanes/results/s7_operating_main_acceptance_2026-10-07.json)。
 
-- **最新：N6三包全部实际并线/推送。** 候选merge e8c645e、精确CI37547043642全部步骤成功/job53秒；共享selector0.4.0。269短责任项+11真实/兼容/升级组合通过，完整九文档21/33、旧full无回退、重复48→3、764定位全通过。S7剩余9个业务点与IR混合cell/重复噪声，继续施工，不重派已交卡。最新验收/保护/发布证据见[n6集中验收](n6_candidate_main_acceptance_2026-10-07.md)。
+- **N6交付已完成（此前节点证据）。** 三包实际并线/推送，候选merge e8c645e、精确CI37547043642全部步骤成功/job53秒；当时selector0.4.0、269责任项+11真实/兼容/升级通过、九文档21/33。当前质量与剩余项以上方S7节点及下方Next Step为准，不重派已交卡；[N6收据](n6_candidate_main_acceptance_2026-10-07.md)保留历史保护/发布事实。
 
 - DOCSET真实merge `58b74d07dd4f8b589c134ef9060a689864a8c089`已推master，精确CI37528050044一次成功/75秒；43不同责任case和真实9样本已接收，工具完成而质量required12/33仍待改。MAIN先行兼容/业务标准已发布`0947cea63140d515620f563daf2058f4520cd6a3`、精确CI37532408169一次成功/80秒，无运行代码变更。RAW-DUP a41244a/CI57秒、R6 eae2dd4/CI59秒等已完成证据不重跑。
 - RF 正式 main `6e6b817a1a6e4567293a4dcb835815f3be508a03`，已有默认 v2 与真实原文读取验收；FF main `758e8f4`，ET 本地/真实远端 main 已快进到 `2b9fb84660f98ce27a05709a7e31342ab044b4d2`，包含 N5-ET-TXT。不要重派已完成交付。
 - 当前 RF 正常用户上下文有三份 owner daily/weekly/manifest 日志修改，本线不改；旧 rf-impl WIP 保存在独立分支。本机 CWP `config/source_acquisition.yaml` 是用户改动，SHA `3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01`，不暂存、不覆盖。
-- S4 修复后真实电话会 run10 已完成：20 条摘要、15 条管理层陈述、46 个定位全部回放，RF 正式读取通过；六类业务主题精选6/6、短摘要5/6，GPU效率未单列，不能声称穷尽。完成审计发现R6具体缺口，现已TDD修复并发布/精确CI绿，S4关闭；其余核心证据不重做。N5-RAW-DUP完整交付已集中修正/51项绿，已合入master a41244a并推远端、精确CI37523080920/57秒绿；DOCSET已接收并推58b74d0/CI75秒绿，当前required12/33按S7/N6整改，整体目标active。
+- S4 修复后真实电话会 run10 已完成：20 条摘要、15 条管理层陈述、46 个定位全部回放，RF 正式读取通过；六类业务主题精选6/6、短摘要5/6，GPU效率未单列，不能声称穷尽。完成审计发现R6具体缺口，现已TDD修复并发布/精确CI绿，S4关闭；其余核心证据不重做。N5-RAW-DUP完整交付已集中修正/51项绿，已合入master a41244a并推远端、精确CI37523080920/57秒绿；DOCSET已接收并推58b74d0/CI75秒绿；初测12/33已被最新S7的27/33覆盖，整体目标active。
 
 ## 已批准预算与配置
 
@@ -49,7 +49,7 @@ python -B tools/n4c_live_preflight.py --rf-root 'C:/Users/郑曾波/Projects/rev
 | S4 N4C与R6实际效果 | complete | 四类真实final/RF读取与run10业务复核完成；R6 TDD→184责任测试→正式离线E2E/RF→代码eae2dd4/CI59秒绿，保留好claim，坏片段不进入产物，不重跑真实模型 |
 | S5 逐 caller 与派生清理 | complete | 旧全文 writer/消费者退出；生产 7104 旧文件、8191 handle 退休；原件与来源事实保持 |
 | S6 DB 收缩与收尾 | complete | 1490530 旧 span 删除；DB 3055841280→222408704 B；说明/控制/短 smoke 已发布，精确 CI 绿 |
-| S7 N5-DOCSET质量对照与整改 | in_progress | 工具已集中修正/43不同case通过；已测0.3.2真实9样本required12/33、744定位全回放，不能认为语义完成。[S7细则](s7_document_quality_implementation_2026-10-06.md)按候选完整上下文→固定预算去重/排序→一次质量节点执行，不扩预算/改golden凑绿 |
+| S7 N5-DOCSET质量对照与整改 | in_progress | DOCSET和N6三包已并线；0.4.1九样本27/33、764定位全回放、293责任项与真实7业务点通过，2个optional取舍保留。下节点数字IR parser0.1.1及剩余应用/募投联系见[最新实施单](s7_followup_quality_implementation_2026-10-07.md)；不扩预算/改golden凑绿 |
 | 可选原件 exact-SHA 去重 | 不阻 S0–S6 完成 | 先只读实证收益，保留来源/location 版本；未测重复 raw 不计节省，不自动删原件 |
 
 [完成证据与真实缺口](main_completion_evidence_2026-10-06.md)分别说明 fixture/真实模型/消费者读取的证明范围。生产清理净释放 **5659443210 B**，原件删除 **0**，17 表事实及四份真实 raw 前后读取一致；正式证据：[生产存储收据](harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json)。没有完整恢复 46GB 备份演练。
@@ -94,7 +94,7 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 ## Next Step
 
-**本轮先发布S7 selector0.4.1，再进入IR parser0.1.1节点。** N6三线验收、实际并线和推送已完成，不重派。新S7正式年报/半年报/可转债7业务点及原节点/旧final/升级已验证，完整九样本27/33；两处optional取舍保持可见。发布前收据中的code_sha/ci必须实际填实读结果，不能把local_verified状态误当已推。下一IR版本传播和责任测试包均在[S7细则](s7_followup_quality_implementation_2026-10-07.md)最后一节；修复数字问答混合cell与两条套话，不改原golden。提交不跑长pytest，日常CI没有加入大基准或真实长E2E。
+**S7 selector0.4.1已发布，下一进入IR parser0.1.1节点。** N6三线验收、实际并线和推送已完成，不重派。新S7正式年报/半年报/可转债7业务点及原节点/旧final/升级已验证，完整九样本27/33；两处optional取舍保持可见。发布收据已实读记录代码9bf25a5、精确CI37550268890全部步骤绿/71秒；不重跑已验节点。下一IR版本传播和责任测试包均在[S7细则](s7_followup_quality_implementation_2026-10-07.md)最后一节；修复数字问答混合cell与两条套话，不改原golden。提交不跑长pytest，日常CI没有加入大基准或真实长E2E。
 
 首次组合全表403.731秒实测18/33（旧12/33）、764定位零失败、重复3（旧48）。已保留初次报告；其中年报G04发生回退及EPI正式E2E失败，MAIN按句理由/组、忙页分类offer、完整fact reasons及工程时间表责任修正，最终集中复验已完成：21/33、可选5/17、764定位零失败、重复3、精选66195B、372.044秒，旧required/optional full均无回退。不用手推覆盖或旧CI替代。原golden/86点/33分母、parser0.1.0、原件与96/160限额不变。**N6实现合入与S7全部业务质量完成分别记录。**
 
@@ -104,7 +104,7 @@ S7后续按最终逐点差距处理，不重派已交三包：
 
 本项目不把“每个optional旧full必须永久保持”设为自动发布门：本轮G-S02-06静态海外销售主体职责、G-S05-05项目营收/利润测算退步，已查原句并按“业务动态优先、财务工具负责纯数值”明确记录。原标注、全部必需业务断言与定位真实性不变；以后optional退步仍逐项说明，不能用此项泛化为允许丢订单/产能/项目进展。
 
-1. 先修真实融资/招股项目与行业描述剩余候选或排序问题；按同原件parsed→candidate→selected定位责任，新增跨公司合成反例，修具体经营事实，不为纯财务/provider缺口扩大正文范围或切片配额。最终业务remaining9：S01 G01/G03/G05、S02 G02/G03、S04 G03（项目引导上下文）、S06 G02/G03/G04；原required剩余12另含3个纯金额/正文外scope点，仍按原33分母报告。
+1. 剩余选择问题只针对S01全球应用前句及S04募投intro/具体项目表联系，按同原件parsed→candidate→selected和PDF视觉位置定位，新增一般性责任反例。S06 G03已canonical保留在同原件page7，不复制page43重复原文以凑golden；正式miss保留。纯财务/provider缺口不扩大正文范围或切片配额。
 2. 修IR数字编号问题/多问答混合cell：S08现有0.1.0 parser把“4：/5：”和两条套话留在一个219字orphan_answer单元。先测试数值口径、提问/答复角色、原始cell字符范围、负例和旧final回放；评估最小可回放片段与parser版本传播。不能删整条有价值占比或屏蔽noise/needs_review，不能跨仓改RF合同。
 3. 最终针对改变的格式跑责任测试和真实入口大节点；只有具体剩余风险才重跑全九样本，不每个helper重跑。业务覆盖未完成仍列remaining，不拿全定位绿冒充语义完成。
 

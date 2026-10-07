@@ -1,8 +1,8 @@
 {
   "schema_version": "s7-followup-quality-node/1",
-  "status": "local_verified_ready_to_publish",
+  "status": "published_exact_ci_passed",
   "base": "3ffafed4dc05dd3c397f8841fd3829a4e77d9244",
-  "code_sha": null,
+  "code_sha": "9bf25a5f4d7339d24ed75661a22036f1e7068eb9",
   "selector_version": "0.4.1",
   "parser_version": "0.1.0",
   "red": {
@@ -1118,6 +1118,94 @@
     ]
   },
   "ci": {
-    "status": "pending_publish"
+    "run_id": 37550268890,
+    "run_attempt": 1,
+    "status": "all_jobs_and_steps_passed",
+    "head_sha": "9bf25a5f4d7339d24ed75661a22036f1e7068eb9",
+    "jobs": [
+      {
+        "seconds": 71.0,
+        "conclusion": "success",
+        "id": 112563794701,
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success"
+          },
+          {
+            "name": "Set up Python 3.12",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install dependencies",
+            "conclusion": "success"
+          },
+          {
+            "name": "Ruff lint",
+            "conclusion": "success"
+          },
+          {
+            "name": "Strict type check on contract modules",
+            "conclusion": "success"
+          },
+          {
+            "name": "Compileall and config doctor",
+            "conclusion": "success"
+          },
+          {
+            "name": "Unit tests",
+            "conclusion": "success"
+          },
+          {
+            "name": "Unit test failure summary",
+            "conclusion": "success"
+          },
+          {
+            "name": "Focused contract tests",
+            "conclusion": "success"
+          },
+          {
+            "name": "Focused contract failure summary",
+            "conclusion": "success"
+          },
+          {
+            "name": "CLI smoke test",
+            "conclusion": "success"
+          },
+          {
+            "name": "Scan for hardcoded secrets",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Set up Python 3.12",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ],
+        "name": "Fast checks (Python 3.12)"
+      }
+    ],
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/37550268890"
+  },
+  "published_git_blob_sha256": {
+    "src/company_wiki/source_catalog/n6_candidate_completion.py": "638500fd208127b221181844d948b97cec5347780a70051904efe843d105c14f",
+    "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": "1d781c1eaf7afc2dcca4054f97066798e7f70211be43fc2748b1e3dc0d0378c2",
+    "src/company_wiki/source_catalog/narrative_candidates.py": "0c8840a79465a517a77098c234f8b7aff772a211079b1fbb94657f737461245a",
+    "src/company_wiki/source_catalog/narrative_context.py": "abd8436b1d517c2e6e7aafb0b21586609e7c378b36ebb282b625d57a3cfdb893",
+    "src/company_wiki/source_catalog/narrative_group_candidates.py": "254ea539eaf629e2908d0532ce66c4e6d3c97f246282ce89286339e167d86259",
+    "src/company_wiki/source_catalog/narrative_neighbors.py": "58141948589363fda799daacee13fdf1c2e1b1b014b8ba9f503f6b45a9c23f24",
+    "src/company_wiki/source_catalog/narrative_budget.py": "63fc00a8e7b77df72dd0e58c308c0eed98acd092666fd47c8723eff89a758027",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "dfd5e051ad6f90ef659b412033a841eb75c0ce57d5d45f03599e757ac7a60b87"
   }
 }

@@ -1133,3 +1133,8 @@ S7分层报告确认8个真实选取缺口、1个同原件page7 canonical新增�
 正式默认解析首轮1失败/11通过/149.92秒（G-S01-03），年报默认探针23.338秒指向泛并购策略/整合风险误占具体交易类别；新增3负例其中2RED后具体交易需对象，49相关项0.77秒绿、最终293项3.60秒及全Ruff/8模块mypy绿。仅新S7节点第二轮83.28秒已过购买quote但误用收购词面query失败，测试按原字购买修正并加source wording前置断言，不修改产品检索或golden。第三轮真实S01/S02/S06全部7点→正式Worker/outbox/RF/search/exact/resume1项97.74秒通过（0 vendor/下载/翻译，3本地POST）。原旧节点+冻结9+实际升级1通过保留，不逐helper重跑；最终全九集中report尚在跑。S08原cell实读219字符及4/5标记已调查，parser0.1.1传播/旧0.1.0兼容/真实QA责任包已补入细则，留下一节点，不在运行中改源码。
 
 最终完整九文档436.885秒：required27/33（原21/33），optional3/17（原5/17），764定位零失败，3噪声仍在、重复4（原3）、精选66215B（原66195B）、scratch60374B。收据生成首次拒绝两optional回退，实读原quote：S02海外销售主体静态职责、S05项目营收/利润测算；按业务动态优先目标记录具体取舍，不改golden/正式断言，不设所有optional永久保持硬门。required旧full无回退，剩余6正式required中3业务/context：S01应用句、S04项目intro、S06同原件canonical另页（page7全句已保留）。原33分母/所有结果继续保存。PWF当前恢复点/next已更新；下一parser0.1.1接口细则明确，S7尚未complete。正常发布准备。
+
+
+## 2026-10-07 S7经营节点发布收尾
+
+实际代码提交9bf25a5f4d7339d24ed75661a22036f1e7068eb9已推master；正常commit/pre-push绿，精确CI37550268890 attempt1全部job/step success，job112563794701/71秒。用户source_acquisition SHA3609e707仍独立dirty，RF6e6b817a三owner保护不变，14个本次tmp根/脚本恢复absent；7小报告合计354203B，不存整份正文。运行8源码SHA与published Git blob SHA分别记录，避免换行差异误报。N6三线已接收发布，本轮S7增加6必需点到27/33，optional两处取舍公开、必需旧full无退步；S7仍in_progress，下一按细则先IR parser0.1.1 TDD/旧pin兼容，再剩余应用与募投视觉联系。

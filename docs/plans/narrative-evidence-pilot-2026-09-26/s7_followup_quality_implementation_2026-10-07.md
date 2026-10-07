@@ -83,3 +83,8 @@ MAIN master3ffafed，N6代码e8c645e/CI37547043642全绿53秒；selector0.4.0、
 - 单元/集成：新0.1.1实际cell split→selector保留占比、排除套话；旧0.1.0同cell输出保持完整219字符orphan；旧published/frozen final ID/字节/hash及旧pin回放不变；AUTO升级使用不同generation且resume不重复模型调用。
 - 大节点真实E2E：原S07+S08两类IR经过正式Worker/outbox、原语言final、RF正式读取、search/exact及resume；模拟模型零供应商费用；S08产品结构事实仍full，套话不靠删整cell避测。S01/S02/S06和TXT已通过业务节点的合同不因parser升级失效，按明确影响选短复验。
 - 最后全九报告一次，原golden/33分母不改；记录新旧parser的定位数、role confusion、两条S08噪声与所有原full回退。原件/配置/RF owner SHA不变，独立测试根恢复absent。正常commit/push核精确CI，日常CI不加入全九/真实长E2E。
+
+
+## 本节点实际发布
+
+代码9bf25a5f4d7339d24ed75661a22036f1e7068eb9已推master，精确CI37550268890 attempt1全部step/job成功、job112563794701/71秒。正常commit/pre-push绿，14个本次tmp路径恢复absent，原件/用户配置/RF owner与运行源码指纹保持。收据s7_operating_main_acceptance_2026-10-07.json状态published_exact_ci_passed。上文等待/准备状态已被本节完成事实覆盖；下节点IR0.1.1仍未实施，S7总目标继续in_progress。
