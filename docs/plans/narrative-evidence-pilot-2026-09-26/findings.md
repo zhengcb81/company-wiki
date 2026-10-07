@@ -1,5 +1,9 @@
 # Findings：当前事实与待验证项
 
+## 2026-10-07 隔离日期修复获授权
+
+用户明确“授权隔离修复并线”，前置条件解除，目标active。只读核RF6e6b817a/三owner日志、StockWiki3fe5008 clean/无remote、FF与ET不动。MAIN创建两独占worktree，先责任TDD，再大节点/跨仓六CLI和正常主线并线；不改owner未提交文件、IQS或原件，不再请求同一许可。
+
 ## 2026-10-07 剩余前提复核
 
 两消费者实际生产日期缺口未变化；RF/StockWiki现PWF归属仍只读，日期修复的落地方式异步问题无答复。不存在需要继续轮询的活进程、未结束导出或CI；当前已无必要且授权独立的施工。维持未完成并转目标blocked，收到明确答复再恢复，不通过修改源日期或仅调整测试来绕开缺口。
@@ -981,3 +985,15 @@ S7最终发布证据：9bf25a5/CI37550268890全部步骤绿71秒，真实业务�
 本节点精确CI37555504675对应aa52cbd，全部步骤成功/81秒；不是此前IR提交绿灯。依赖安装26秒、Unit35秒，本次既有简化CI仍一平台一Python，无真实全表/外发矩阵增加。正式发布与测试恢复证据已完整，可进入原目标逐项核查；核查单只归集已有证据与真正缺口，不增人工签收或要求重复旧大节点。
 
 完整目标核查实读：CWP ed2dc51仅用户配置dirty，RF6e6b817a三owner保持。正式narrative_batch._final_documents实际调用终态压缩；Supervisor P1为mixed1、P2 compute1/model1、P4 compute3/model1，子进程factory各自创建客户端和SourceVersionReader。不是所有模型并发4。准备阶段当前deadline在_run_owned才开始计，build_batch_events及逐原件open前后没有剩余时间检查；这是需TDD验证的资源预算缺口，不新增人工门。下一仅针对准备超时和停止读取下一来源验证，已绿S7全九/付费/kill大包不重复。
+
+## 2026-10-07 授权实施与主线验收
+
+用户“授权隔离修复并线”已执行。RF `e241389adeda37bc9cbb53d7831063718552a936` 正常快进 main、推送 origin/main，精确 CI 37574397700/job112639930230 全部步骤成功，用时30秒。StockWiki `9f552a6741dd093dc760ad6965458989cd027251` 正常快进本地 master；本仓没有远端，不声称已推送或有远端CI。
+
+两仓先各获得2个真实语义RED（晚下载和公开日等于cutoff），再最小修改日期判断，保留 UTC/公开日/身份/期间/SHA/locator反例；没有改原件、公开wire或golden。RF责任58pass/1skip、快速门107pass及正常push门107pass；StockWiki责任113pass/1skip。StockWiki集中大节点首跑934pass/15skip/1个Windows长路径环境失败，同一失败用例改独立短测试根后1pass：共935个不同用例绿，coverage总81%、UI75.56%，不是单次全套全绿。未重跑全部长测。
+
+当前CWP→实际两仓主线正式CLI六例6pass/29.63秒，逐条证据一致，RF只导出现场已提交HEAD，删除临时提案覆盖入口。这是日期合同的本地Replay E2E，不冒称新增付费模型或真实供应商下载；两个消费者自己的未来/未知公开日等分支另由责任包证明。
+
+本次两个独立worktree和三个测试根恢复absent，移除136471537 B临时代码/测试资料，不计为生产清理收益。九原件SHA/size/mtime、生产DB完整SHA及六个配置/owner文件指纹保持。RF三owner日志和CWP source_acquisition用户修改不暂存、不覆盖；StockWiki owner工作树clean，quick-scan/IQS未改。两套安装技能仅在校验旧主线字节后同步本次两文件，其他本地内容保留，不宣称整套安装完全一致。
+
+完整[主线验收收据](harness_lanes/results/final_asof_implementation_2026-10-07.json)、[RF独立交接](harness_lanes/results/final_rf_asof_handoff_2026-10-07.json)、[StockWiki独立交接](harness_lanes/results/final_stockwiki_asof_handoff_2026-10-07.json)。历史RED/提案GREEN收据保留，不能替代本次实际主线结果。CWP本次测试/文档正常提交推送并记录对应代码CI后，完成最后发布收尾。

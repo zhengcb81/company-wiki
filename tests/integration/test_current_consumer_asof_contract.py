@@ -16,7 +16,6 @@ from tools.n4c_live_preflight import consumer_bootstrap
 
 protected_inputs = cli.r6_protected_inputs
 REPO = Path(__file__).resolve().parents[2]
-RF_HEAD = '6e6b817a1a6e4567293a4dcb835815f3be508a03'
 
 
 @pytest.mark.parametrize('consumer', ['rf', 'stockwiki'])
@@ -28,6 +27,9 @@ def test_current_consumer_uses_publication_date_not_local_download_date(
     sw = os.environ.get('CWP_STOCKWIKI_PROJECT_ROOT')
     if not rf or not sw:
         pytest.skip('explicit read-only RF and StockWiki roots required')
+    rf_head = subprocess.check_output(
+        ['git', '-C', rf, 'rev-parse', 'HEAD'], text=True, timeout=10,
+    ).strip()
     protected_inputs([Path(rf)/'assurance/runs'/name for name in
                       ('daily_alert.jsonl', 'weekly_alert.jsonl', 'weekly_manifest.json')])
     with published_fixture(tmp_path, kind='txt', source_spec={'sidecar_overrides': {
@@ -54,12 +56,7 @@ def test_current_consumer_uses_publication_date_not_local_download_date(
         if consumer == 'rf':
             exported = fixture.root/'rf'
             exported.mkdir()
-            consumer_bootstrap(Path(rf), RF_HEAD, exported)
-            proposal = os.environ.get('CWP_ASOF_RF_PROPOSAL_FILE')
-            if proposal:
-                candidate = Path(proposal).resolve()
-                assert candidate.is_relative_to(REPO.resolve()/'tmp') and candidate.is_file()
-                (exported/'company_wiki_narrative_contracts.py').write_bytes(candidate.read_bytes())
+            consumer_bootstrap(Path(rf), rf_head, exported)
             argv = [sys.executable, '-B', str(exported/'narrative_source_preparation.py'),
                     '--company-wiki-catalog-config', str(fixture.config_path)]
         else:
@@ -76,6 +73,7 @@ def test_current_consumer_uses_publication_date_not_local_download_date(
             output = Path(report_dir)
             assert output.is_dir() and output.resolve().is_relative_to(REPO.resolve()/'tmp')
             report = {'consumer':consumer, 'case':case, 'as_of':request['as_of_date'],
+                      'rf_export_head':rf_head,
                       'producer_code':producer.returncode,'consumer_code':downstream.returncode,
                       'producer_receipt':json.loads(producer.stderr),
                       'consumer_diagnostic':json.loads(downstream.stderr) if downstream.stderr else None}

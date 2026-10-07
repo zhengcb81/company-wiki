@@ -1,6 +1,6 @@
 # StockWiki 独立施工卡：叙述来源公开日合同对齐
 
-状态：最小提案已实证GREEN，尚未批准外仓落地/未派发。唯一写入StockWiki独立worktree，本卡不接触当前quick-scan/IQS项目、identity数据或原件。CWP/RF/其他仓只读，写集与RF日期卡不重叠。
+状态：MAIN已完成并线与验收，不再分派。实际交接见[小收据](results/final_stockwiki_asof_handoff_2026-10-07.json)；下列基线/施工顺序保留为历史实施说明。
 
 ## 基线与语义
 
@@ -19,3 +19,15 @@ StockWiki master3fe5008，CWP848cacf/运行7aa88ae。8月1日公开、9月2日�
 schema=cwp-consumer-asof-handoff/1，consumer=stockwiki；base_head/branch/code_head/changed_paths/public_wire_changed=false；red与green真实命令、计数和秒数；preserved_refusals（future_publication、unknown_publication、invalid_utc、identity、period、SHA）；owner状态/HEAD前后；原件和当前项目配置SHA保护；测试新根清理；主线集成SHA及本仓正式门/远端CI（若本仓无该CI则明确，不造成功）；remaining。小JSON及一页Markdown，不保存来源正文或API密钥。
 
 未获跨仓实施授权或未实际集成前，不把本卡或独立副本GREEN称为已经修好当前StockWiki。
+
+## 2026-10-07 授权实施与主线验收
+
+用户“授权隔离修复并线”已执行。RF `e241389adeda37bc9cbb53d7831063718552a936` 正常快进 main、推送 origin/main，精确 CI 37574397700/job112639930230 全部步骤成功，用时30秒。StockWiki `9f552a6741dd093dc760ad6965458989cd027251` 正常快进本地 master；本仓没有远端，不声称已推送或有远端CI。
+
+两仓先各获得2个真实语义RED（晚下载和公开日等于cutoff），再最小修改日期判断，保留 UTC/公开日/身份/期间/SHA/locator反例；没有改原件、公开wire或golden。RF责任58pass/1skip、快速门107pass及正常push门107pass；StockWiki责任113pass/1skip。StockWiki集中大节点首跑934pass/15skip/1个Windows长路径环境失败，同一失败用例改独立短测试根后1pass：共935个不同用例绿，coverage总81%、UI75.56%，不是单次全套全绿。未重跑全部长测。
+
+当前CWP→实际两仓主线正式CLI六例6pass/29.63秒，逐条证据一致，RF只导出现场已提交HEAD，删除临时提案覆盖入口。这是日期合同的本地Replay E2E，不冒称新增付费模型或真实供应商下载；两个消费者自己的未来/未知公开日等分支另由责任包证明。
+
+本次两个独立worktree和三个测试根恢复absent，移除136471537 B临时代码/测试资料，不计为生产清理收益。九原件SHA/size/mtime、生产DB完整SHA及六个配置/owner文件指纹保持。RF三owner日志和CWP source_acquisition用户修改不暂存、不覆盖；StockWiki owner工作树clean，quick-scan/IQS未改。两套安装技能仅在校验旧主线字节后同步本次两文件，其他本地内容保留，不宣称整套安装完全一致。
+
+完整[主线验收收据](results/final_asof_implementation_2026-10-07.json)、[RF独立交接](results/final_rf_asof_handoff_2026-10-07.json)、[StockWiki独立交接](results/final_stockwiki_asof_handoff_2026-10-07.json)。历史RED/提案GREEN收据保留，不能替代本次实际主线结果。CWP本次测试/文档正常提交推送并记录对应代码CI后，完成最后发布收尾。

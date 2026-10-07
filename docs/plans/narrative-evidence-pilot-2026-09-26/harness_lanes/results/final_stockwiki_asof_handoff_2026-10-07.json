@@ -1,0 +1,111 @@
+{
+  "schema_version": "cwp-consumer-asof-handoff/1",
+  "consumer": "stockwiki",
+  "status": "main_passed",
+  "base_head": "3fe5008c1ea18c363296121b8b0ee3a7b2db2212",
+  "branch": "codex/stockwiki-asof-20261007",
+  "code_head": "9f552a6741dd093dc760ad6965458989cd027251",
+  "main_integration_sha": "9f552a6741dd093dc760ad6965458989cd027251",
+  "changed_paths": [
+    "stockwiki/_narrative_bundle.py",
+    "tests/test_narrative_source.py",
+    "docs/narrative_source_consumer.md"
+  ],
+  "public_wire_changed": false,
+  "red": {
+    "genuine_failed": 2,
+    "seconds": 0.31
+  },
+  "green": {
+    "passed": 113,
+    "skipped": 1,
+    "seconds": 17.12,
+    "command": "pytest tests/test_narrative_source.py tests/test_narrative_source_cli.py tests/test_narrative_process.py tests/test_source_export_v2_reader.py tests/test_source_export_v2_cli.py",
+    "ruff": "passed"
+  },
+  "major_node": {
+    "passed_first_run": 934,
+    "skipped": 15,
+    "failed_first_run": 1,
+    "seconds_full": 212.64,
+    "environment_failure": "Windows MAX_PATH while copying real sidecar under long worktree basetemp, before semantic assertion",
+    "failed_case_short_root_passed": 1,
+    "seconds_short_root": 5.72,
+    "distinct_cases_green_across_runs": 935,
+    "coverage_total_percent": 81,
+    "ui_coverage_percent": 75.56,
+    "framework": "passed,12 baseline warnings",
+    "full_suite_repeated": false
+  },
+  "actual_main_e2e": {
+    "passed": 6,
+    "seconds": 29.63,
+    "shared_receipt": "final_asof_implementation_2026-10-07.json"
+  },
+  "preserved_refusals": [
+    "future_publication",
+    "unknown_publication",
+    "invalid_publication",
+    "invalid_utc",
+    "identity",
+    "period",
+    "SHA",
+    "locator"
+  ],
+  "protected": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_acquisition.yaml": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "0aee073f56c133786365ab96899edf4d91c0f9e1a0e13ab61b2a6bffd8316270",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf",
+    "C:\\Users\\郑曾波\\Projects\\StockWiki\\config\\llm_providers.yaml": "8cb7013f8b172be68bdd7d36c40829338b73d769e4e1bdea0562d11b6b9d03ba"
+  },
+  "cleanup": [
+    {
+      "initial": "absent",
+      "final": "absent",
+      "files": 458,
+      "logical_bytes_removed": 12233415.0,
+      "kind": "self_owned_merged_code_and_test_checkout",
+      "path": "C:\\Users\\郑曾波\\Projects\\cwp-lanes-20261007\\rf-asof"
+    },
+    {
+      "initial": "absent",
+      "final": "absent",
+      "files": 4133,
+      "logical_bytes_removed": 124227228.0,
+      "kind": "self_owned_merged_code_and_test_checkout",
+      "path": "C:\\Users\\郑曾波\\Projects\\cwp-lanes-20261007\\stockwiki-asof"
+    },
+    {
+      "initial": "absent",
+      "final": "absent",
+      "files": 0,
+      "logical_bytes_removed": 0,
+      "kind": "self_owned_test_root",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\fca-main"
+    },
+    {
+      "initial": "absent",
+      "final": "absent",
+      "files": 6,
+      "logical_bytes_removed": 10894.0,
+      "kind": "self_owned_test_root",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\fca-main-report"
+    },
+    {
+      "initial": "absent",
+      "final": "absent",
+      "files": 0,
+      "logical_bytes_removed": 0,
+      "kind": "self_owned_test_root",
+      "path": "C:\\cwt\\sa7"
+    }
+  ],
+  "ci": {
+    "ci_claimed": false,
+    "configured": false,
+    "acceptance": "local_master"
+  },
+  "remaining": []
+}

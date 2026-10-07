@@ -1,0 +1,378 @@
+{
+  "schema_version": "consumer-asof-main-acceptance/1",
+  "status": "main_integrated_actual_e2e_green_rf_ci_green_cleanup_complete_pending_cwp_publication",
+  "authorization": "用户：授权隔离修复并线",
+  "rf_base": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
+  "stockwiki_base": "3fe5008c1ea18c363296121b8b0ee3a7b2db2212",
+  "worktrees": {
+    "rf": "C:\\Users\\郑曾波\\Projects\\cwp-lanes-20261007\\rf-asof",
+    "stockwiki": "C:\\Users\\郑曾波\\Projects\\cwp-lanes-20261007\\stockwiki-asof"
+  },
+  "protected_before": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_acquisition.yaml": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "0aee073f56c133786365ab96899edf4d91c0f9e1a0e13ab61b2a6bffd8316270",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf",
+    "C:\\Users\\郑曾波\\Projects\\StockWiki\\config\\llm_providers.yaml": "8cb7013f8b172be68bdd7d36c40829338b73d769e4e1bdea0562d11b6b9d03ba"
+  },
+  "calls": {
+    "supplier_http": 0,
+    "model_posts": 0
+  },
+  "public_wire_changed": false,
+  "raw_modified": false,
+  "red": {
+    "rf": {
+      "genuine_failed": 2,
+      "seconds": 0.19,
+      "initial_fixture_errors": 2,
+      "error": "missing parent tmp directory, corrected before semantic RED"
+    },
+    "stockwiki": {
+      "genuine_failed": 2,
+      "seconds": 0.31
+    },
+    "rule": "valid late download, including publication exactly on cutoff, rejected source_after_as_of"
+  },
+  "green": {
+    "rf_responsibility": {
+      "passed": 58,
+      "skipped": 1,
+      "seconds": 12.12,
+      "command": "pytest tests/test_company_wiki_narrative_reader.py tests/test_company_wiki_narrative_process.py",
+      "ruff": "passed"
+    },
+    "stockwiki_responsibility": {
+      "passed": 113,
+      "skipped": 1,
+      "seconds": 17.12,
+      "command": "pytest tests/test_narrative_source.py tests/test_narrative_source_cli.py tests/test_narrative_process.py tests/test_source_export_v2_reader.py tests/test_source_export_v2_cli.py",
+      "ruff": "passed"
+    },
+    "rf_normal_gate": {
+      "passed": 107,
+      "seconds": 25.01,
+      "ruff": "passed",
+      "mypy_sources": 7,
+      "explicit_pre_commit_files": "passed"
+    },
+    "stockwiki_full_node": {
+      "passed_first_run": 934,
+      "skipped": 15,
+      "failed_first_run": 1,
+      "seconds_full": 212.64,
+      "environment_failure": "Windows MAX_PATH while copying real sidecar under long worktree basetemp, before semantic assertion",
+      "failed_case_short_root_passed": 1,
+      "seconds_short_root": 5.72,
+      "distinct_cases_green_across_runs": 935,
+      "coverage_total_percent": 81,
+      "ui_coverage_percent": 75.56,
+      "framework": "passed,12 baseline warnings",
+      "full_suite_repeated": false
+    }
+  },
+  "errors": [
+    "RF RED fixture initially lacked tmp parent: 2 setup errors; corrected then 2 genuine failures.",
+    "StockWiki first responsibility run: 83 passed/31 setup errors from missing tmp parent; corrected and same 114 cases passed/skipped.",
+    "New StockWiki metadata assertion corrected to existing public DTO manifest field before GREEN.",
+    "RF sparse checkout initially omitted .githooks; restored committed hooks and ran normal amended commit plus explicit changed-file pre-commit successfully.",
+    "RF first normal fast gate: 105 pass/2 environment failures because worktree siblings missing; supplied existing FF_V2_CODE_ROOT/CWP_V2_CODE_ROOT then107pass.",
+    "StockWiki full node one Windows long-path copy failure; same case under initially absent C:/cwt/sa7 passed, same-code coverage appended.",
+    "Attempted git push origin main from CWP cwd: refspec nonexistent, no push occurred; retried in RF owner directory with normal hook."
+  ],
+  "cwp_test_update": "Remove frozen RF6e6b817a pin and prototype override; export requested repository current committed HEAD and retain all semantic/body equality controls.",
+  "rf_code_sha": "e241389adeda37bc9cbb53d7831063718552a936",
+  "stockwiki_code_sha": "9f552a6741dd093dc760ad6965458989cd027251",
+  "main_integration": "both_fast_forward_with_protected_owner_files_unchanged",
+  "installed_rf": {
+    "method": "atomic update of only the two changed files after matching prior main Git bytes; existing other files preserved",
+    "updated": [
+      {
+        "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_contracts.py",
+        "before_sha256": "4296d9b613d67ca1e3153ff6c9e0f1e51ac319333fb5b5d28bef7388f1af6ea5",
+        "after_sha256": "7e074ed3334b8095ef1dfb6c40c670acc221e5757accd0df2522e90f41e27d9a"
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\tests\\test_company_wiki_narrative_reader.py",
+        "before_sha256": "3fe4cda0c8d1fe4bcd9d08fdda46230020dffe5673c4b543d41f7cd330c6a15c",
+        "after_sha256": "a11cfd4af2726d9f393aa7f0a30160468f0a75922421009673f4be7f7731bad4"
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_contracts.py",
+        "before_sha256": "4296d9b613d67ca1e3153ff6c9e0f1e51ac319333fb5b5d28bef7388f1af6ea5",
+        "after_sha256": "7e074ed3334b8095ef1dfb6c40c670acc221e5757accd0df2522e90f41e27d9a"
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\tests\\test_company_wiki_narrative_reader.py",
+        "before_sha256": "3fe4cda0c8d1fe4bcd9d08fdda46230020dffe5673c4b543d41f7cd330c6a15c",
+        "after_sha256": "a11cfd4af2726d9f393aa7f0a30160468f0a75922421009673f4be7f7731bad4"
+      }
+    ],
+    "existing_other_content_diff_files": 5,
+    "whole_installation_parity_claimed": false
+  },
+  "actual_main_e2e": {
+    "passed": 6,
+    "failed": 0,
+    "seconds": 29.63,
+    "command": "pytest tests/integration/test_current_consumer_asof_contract.py (explicit current main RF/StockWiki roots, no proposal override)",
+    "cases": [
+      {
+        "consumer": "rf",
+        "case": "early_download",
+        "producer_code": 0,
+        "consumer_code": 0,
+        "rf_export_head": "e241389adeda37bc9cbb53d7831063718552a936",
+        "replay_status": "verified",
+        "published_date": "2026-08-01",
+        "retrieved_at": "2026-08-02T00:00:00Z",
+        "consumer_diagnostic": null
+      },
+      {
+        "consumer": "rf",
+        "case": "future_publication",
+        "producer_code": 2,
+        "consumer_code": 2,
+        "rf_export_head": "e241389adeda37bc9cbb53d7831063718552a936",
+        "replay_status": null,
+        "published_date": null,
+        "retrieved_at": null,
+        "consumer_diagnostic": {
+          "reason": "source_after_as_of",
+          "schema_version": "revenue-narrative-refusal/1",
+          "status": "blocked"
+        }
+      },
+      {
+        "consumer": "rf",
+        "case": "late_download",
+        "producer_code": 0,
+        "consumer_code": 0,
+        "rf_export_head": "e241389adeda37bc9cbb53d7831063718552a936",
+        "replay_status": "verified",
+        "published_date": "2026-08-01",
+        "retrieved_at": "2026-09-02T00:00:00Z",
+        "consumer_diagnostic": null
+      },
+      {
+        "consumer": "stockwiki",
+        "case": "early_download",
+        "producer_code": 0,
+        "consumer_code": 0,
+        "rf_export_head": "e241389adeda37bc9cbb53d7831063718552a936",
+        "replay_status": "verified",
+        "published_date": "2026-08-01",
+        "retrieved_at": "2026-08-02T00:00:00Z",
+        "consumer_diagnostic": null
+      },
+      {
+        "consumer": "stockwiki",
+        "case": "future_publication",
+        "producer_code": 2,
+        "consumer_code": 2,
+        "rf_export_head": "e241389adeda37bc9cbb53d7831063718552a936",
+        "replay_status": null,
+        "published_date": null,
+        "retrieved_at": null,
+        "consumer_diagnostic": {
+          "error_code": "producer_refused",
+          "reason": "source_after_as_of"
+        }
+      },
+      {
+        "consumer": "stockwiki",
+        "case": "late_download",
+        "producer_code": 0,
+        "consumer_code": 0,
+        "rf_export_head": "e241389adeda37bc9cbb53d7831063718552a936",
+        "replay_status": "verified",
+        "published_date": "2026-08-01",
+        "retrieved_at": "2026-09-02T00:00:00Z",
+        "consumer_diagnostic": null
+      }
+    ],
+    "evidence_spans_exact_equal": true,
+    "ruff": "passed",
+    "test_version": "current committed RF HEAD, StockWiki actual main files",
+    "metadata_fixture": true,
+    "real_provider_quality_claimed": false
+  },
+  "protected_after": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_acquisition.yaml": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "0aee073f56c133786365ab96899edf4d91c0f9e1a0e13ab61b2a6bffd8316270",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf",
+    "C:\\Users\\郑曾波\\Projects\\StockWiki\\config\\llm_providers.yaml": "8cb7013f8b172be68bdd7d36c40829338b73d769e4e1bdea0562d11b6b9d03ba"
+  },
+  "protected_unchanged": true,
+  "cleanup": [
+    {
+      "initial": "absent",
+      "final": "absent",
+      "files": 458,
+      "logical_bytes_removed": 12233415.0,
+      "kind": "self_owned_merged_code_and_test_checkout",
+      "path": "C:\\Users\\郑曾波\\Projects\\cwp-lanes-20261007\\rf-asof"
+    },
+    {
+      "initial": "absent",
+      "final": "absent",
+      "files": 4133,
+      "logical_bytes_removed": 124227228.0,
+      "kind": "self_owned_merged_code_and_test_checkout",
+      "path": "C:\\Users\\郑曾波\\Projects\\cwp-lanes-20261007\\stockwiki-asof"
+    },
+    {
+      "initial": "absent",
+      "final": "absent",
+      "files": 0,
+      "logical_bytes_removed": 0,
+      "kind": "self_owned_test_root",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\fca-main"
+    },
+    {
+      "initial": "absent",
+      "final": "absent",
+      "files": 6,
+      "logical_bytes_removed": 10894.0,
+      "kind": "self_owned_test_root",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\fca-main-report"
+    },
+    {
+      "initial": "absent",
+      "final": "absent",
+      "files": 0,
+      "logical_bytes_removed": 0,
+      "kind": "self_owned_test_root",
+      "path": "C:\\cwt\\sa7"
+    }
+  ],
+  "rf_ci": {
+    "run_id": 37574397700,
+    "jobs": [
+      {
+        "conclusion": "success",
+        "seconds": 30.0,
+        "id": 112639930230,
+        "name": "verify",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/setup-python@v5",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install dependencies",
+            "conclusion": "success"
+          },
+          {
+            "name": "Fetch pinned source dependencies",
+            "conclusion": "success"
+          },
+          {
+            "name": "Shared local and CI checks",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/setup-python@v5",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ],
+    "run_attempt": 1,
+    "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/37574397700",
+    "all_jobs_and_executed_steps_success": true,
+    "head_sha": "e241389adeda37bc9cbb53d7831063718552a936",
+    "conclusion": "success"
+  },
+  "stockwiki_remote": {
+    "ci_claimed": false,
+    "configured": false,
+    "acceptance": "local_master"
+  },
+  "final_protection": {
+    "protected": {
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_acquisition.yaml": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "0aee073f56c133786365ab96899edf4d91c0f9e1a0e13ab61b2a6bffd8316270",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf",
+      "C:\\Users\\郑曾波\\Projects\\StockWiki\\config\\llm_providers.yaml": "8cb7013f8b172be68bdd7d36c40829338b73d769e4e1bdea0562d11b6b9d03ba"
+    },
+    "database": {
+      "sha256": "0081ee5c3daf85abd71253e6069d08b1cdde46fe216326c10f0bf897a6a6bb62",
+      "size": 222408704,
+      "mtime_ns": 1791248158420833300
+    },
+    "nine_raw": {
+      "S01": {
+        "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "byte_size": 9165875,
+        "mtime_ns": 1775986949114724400
+      },
+      "S02": {
+        "sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "byte_size": 6361468,
+        "mtime_ns": 1775986992765548800
+      },
+      "S03": {
+        "sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "byte_size": 217264,
+        "mtime_ns": 1779046989673803600
+      },
+      "S04": {
+        "sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "byte_size": 11211796,
+        "mtime_ns": 1776287132568457600
+      },
+      "S05": {
+        "sha256": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+        "byte_size": 5595592,
+        "mtime_ns": 1671984894000000000
+      },
+      "S06": {
+        "sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+        "byte_size": 4756322,
+        "mtime_ns": 1664747887000000000
+      },
+      "S07": {
+        "sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "byte_size": 153851,
+        "mtime_ns": 1779228233262998600
+      },
+      "S08": {
+        "sha256": "f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+        "byte_size": 414544,
+        "mtime_ns": 1780086651533168000
+      },
+      "S09": {
+        "sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "byte_size": 66324,
+        "mtime_ns": 1788471885465276900
+      }
+    },
+    "unchanged": true,
+    "production_writes": 0,
+    "copies_or_backups_created": 0
+  },
+  "cleanup_logical_bytes": 136471537.0,
+  "cleanup_production_savings_claimed": false
+}

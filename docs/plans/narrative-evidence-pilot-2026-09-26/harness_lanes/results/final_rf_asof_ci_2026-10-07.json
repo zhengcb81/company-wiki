@@ -1,0 +1,54 @@
+{
+  "run_id": 37574397700,
+  "jobs": [
+    {
+      "conclusion": "success",
+      "seconds": 30.0,
+      "id": 112639930230,
+      "name": "verify",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install dependencies",
+          "conclusion": "success"
+        },
+        {
+          "name": "Fetch pinned source dependencies",
+          "conclusion": "success"
+        },
+        {
+          "name": "Shared local and CI checks",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "run_attempt": 1,
+  "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/37574397700",
+  "all_jobs_and_executed_steps_success": true,
+  "head_sha": "e241389adeda37bc9cbb53d7831063718552a936",
+  "conclusion": "success"
+}

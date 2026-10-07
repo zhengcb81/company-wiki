@@ -1,13 +1,12 @@
-# 原目标逐项核查与剩余施工
+# 原目标逐项核查与主线验收
 
-> 2026-10-07：核查已执行，16项中14项在下述明确范围内有实现及验收证据；A12/A13部分成立，但当前RF/StockWiki的两处日期判断不符合约定。**整体目标blocked：等待外仓实施方式答复，不能宣布完成。** 这是一份完成范围记录，不新增人工签收或日常长测试。
+> 2026-10-07：16项在下述明确范围内已有实现及验收证据。原A12/A13两处日期语义缺口已获授权、TDD修复、实际主线六CLI验收；最后CWP提交/精确CI发布收尾。不是全历史资料和自动投资研究均已生产运行的声明，不新增人工签收或日常长测试。
 
 ## 当前权威状态
 
-- CWP检查基线 `1fb3cff6c1e32c01bfa5adbb4365b382a4d40b8b`；selector0.4.2/parser0.1.1代码 `aa52cbd`，准备deadline代码 `7aa88ae`，均为当前主线祖先且已有精确代码CI。
-- RF `6e6b817a`：三份daily/weekly/manifest owner日志dirty；StockWiki `3fe5008`：工作树clean、独立quick-scan项目在推进。本次只读，没有进入其施工队列。
-- FF `758e8f4`、ET `2b9fb84`与正式验收交付一致。CWP唯一既有用户修改仍是 `config/source_acquisition.yaml`，SHA3609e707；本次不暂存、不覆盖。
-- 当前核查小收据：[final_scope_acceptance](harness_lanes/results/final_scope_acceptance_2026-10-07.json)。包含实际HEAD/status、八个已验收CWP节点的祖先关系、十一份既有收据的SHA与状态、五个受保护文件当前SHA。不是又跑了一遍全部测试。
+RF main/远端 e241389，精确CI全部步骤绿30秒；StockWiki本地master9f552a6、无远端。RF三日志与CWP用户source_acquisition修改保留，StockWiki clean。既有运行代码aa52cbd/7aa88ae及FF758e8f4/ET2b9fb84证据仍有效。
+
+[本次实际主线验收](harness_lanes/results/final_asof_implementation_2026-10-07.json)及两个独立交接收据取代“未落地”的当前状态；[此前只读核查](harness_lanes/results/final_scope_acceptance_2026-10-07.json)与历史RED收据只作历史保留。九原件、生产DB及六保护文件不变，全部本次临时根恢复absent。
 
 ## 核查方法
 
@@ -30,11 +29,11 @@
 | A09 kill/失联/ACK丢失可恢复、幂等、跨批隔离 | 已证实故障范围 | 正式batch recovery实际杀协调器、阻断首次HTTP返回，再按原run恢复；cross-run原件/外国任务不变；outbox租约过期旧token失效；prepared/ACK后进程退出重协调；`test_reservation_reconciliation_tolerates_lost_commit_acknowledgement`先真commit再抛超时，重试不重复计费 | 外部响应丢失时费用未知仍保留预留，不承诺供应商exactly-once退款；不能把普通resume当kill证据。已读n4c_prompt_node的14个不同正式用例收据 |
 | A10 时间/token/费用/空间总上限、终态降容 | 已证实明确边界 | 一套AUTO budget事务；未知usage/超限实际usage持久；BatchStorageBudget统计DB/WAL/objects/work并排除原件；final2MiB、增量1GiB、scratch2GiB；deadline7aa88ae的57责任／五CLI；terminal integration核final读前后相等、三attempt正文压缩、第二次no-op、费用/job/effect/outbox不变 | deadline协作式，已开始同步I/O及收尾不能瞬间打断。active/retry/prepared/未ACK不能提前压缩；费用是配置代理而非供应商账单 |
 | A11 FF调用ET、公司目录统一保存TXT、不翻译并进入处理 | 已证实离线契约及本地复用 | FF→ET→CWP真实三仓CLI/supervisor/worker/serializer/import/query/open，只在provider HTTP seam确定性替换；P5-FF发布758e8f4；ET2b9fb84的92项、10goldens，43真实旧TXT只读audit；TXT直接解析无PDF转换 | 不冒称免费网络已下载；FMP真实402是套餐边界。43旧TXT标legacy_unverified，不伪造历史下载收据；新下载才写SHA/期次sidecar |
-| A12 RF/StockWiki/其他消费者通过抽象接口消费 | **部分成立，日期语义不符合** | RF默认pathless v2与真实原件读；StockWiki公开narrative CLI自有DTO；G-C迁根/hash/身份/期间/skip证据；当前六CLI普通早下载可读且spans逐条相等 | RF、StockWiki仍误拒“8月公开、9月下载、as-of9月1日”；两例真实RED。IQS有独立项目不改；不宣称RF全部预测计算或StockWiki自动研究同步已完成 |
-| A13 去掉多余人工权限、门禁、审计签收 | **部分成立，两个下载日门残留** | 46项清单/G1实现及诊断故障测试；private/public人工许可、prompt/review/待修复提案、release人工签收、签名/TTL、shadow/WU退出；reader稀疏collector/URL/capture诊断不阻断 | CWP/FF/ET相关清理已完成；当前两消费者重复日期限制待修。SHA/身份/期次/公开日期/原件路径保护/预算/事务属各层自动正确性，保留 |
+| A12 RF/StockWiki/其他消费者通过抽象接口消费 | 已证实约定消费范围 | RF默认pathless v2与真实原件读；StockWiki公开narrative CLI自有DTO；G-C迁根/hash/身份/期间/skip证据；当前六CLI普通早下载可读且spans逐条相等 | 原两例真实RED现由RF e241389/StockWiki9f552a6修复，实际六CLI6pass；IQS有独立项目不改；不宣称RF全部预测计算或StockWiki自动研究同步已完成 |
+| A13 去掉多余人工权限、门禁、审计签收 | 已证实约定精简范围 | 46项清单/G1实现及诊断故障测试；private/public人工许可、prompt/review/待修复提案、release人工签收、签名/TTL、shadow/WU退出；reader稀疏collector/URL/capture诊断不阻断 | CWP/FF/ET相关清理完成；两消费者重复下载日限制已取消，公开日/格式反例保留。SHA/身份/期次/公开日期/原件路径保护/预算/事务属各层自动正确性，保留 |
 | A14 降空间、原件不丢、不过度备份演练 | 已证实处置范围 | S5/S6生产净释放5659443210B、raw删除0；DB3055841280→222408704B；当前只读17表count/digest＋九raw SHA/size/mtime对已发布基线一致。N6 footprint单根逻辑24365900191B，raw约96.3% | 不恢复完整46GB备份演练；云占位1007跳过、物理allocated未知；raw exact-SHA去重可选，不计未实读/未删除的节省 |
-| A15 E2E独立测试根、结束恢复原样 | 已证实已执行节点 | N4/R6/S7/deadline/日期反例各自finally与保护fixture；本次已读terminal/fault样例；各正式收据记录根absent、原件/生产/用户/owner不变 | 只清自身新路径，不清未知owner目录。本轮仅读既有文件/写小文档收据，没有新增测试根或原件副本 |
-| A16 TDD、各层单元/集成/E2E、大节点验收、快CI和及时并线 | 已证实已发布节点 | S7真实8功能RED→200责任项＋11真实/兼容/升级绿；deadline5功能RED→57责任＋五CLI；N6三包实际祖先与精确CI；当前hooks/workflow实读 | commit静态、不跑pytest；CI单Ubuntu3.12全Unit＋短合同、5分钟上限，近期精确代码CI53–83秒；长九样本/真实模型不进日常CI。CI绿不抵销A12/A13实际RED |
+| A15 E2E独立测试根、结束恢复原样 | 已证实已执行节点 | N4/R6/S7/deadline/日期反例各自finally与保护fixture；本次已读terminal/fault样例；各正式收据记录根absent、原件/生产/用户/owner不变 | 只清自身新路径，不清未知owner目录。本轮授权隔离修复的两个worktree/三个测试根已恢复absent，原件和生产指纹不变 |
+| A16 TDD、各层单元/集成/E2E、大节点验收、快CI和及时并线 | 已证实已发布节点 | S7真实8功能RED→200责任项＋11真实/兼容/升级绿；deadline5功能RED→57责任＋五CLI；N6三包实际祖先与精确CI；当前hooks/workflow实读 | commit静态、不跑pytest；CI单Ubuntu3.12全Unit＋短合同、5分钟上限，近期精确代码CI53–83秒；长九样本/真实模型不进日常CI。原A12/A13实际RED已TDD修复与当前两仓正式CLI验收 |
 
 ## 证据导航
 
@@ -46,15 +45,16 @@
 6. [生产空间处置](harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json)，[当前只读来源事实](harness_lanes/results/final_current_source_facts_2026-10-07.json)，[单根footprint](harness_lanes/results/n6_footprint_main_scan_2026-10-06.json)。
 7. [当前两消费者RED／隔离副本GREEN](harness_lanes/results/final_consumer_asof_audit_2026-10-07.json)。CWP证据代码a8f2513对应CI37558926678全步骤success/73秒，**仅证明本仓回归，不证明外仓已修复**。
 
-## 唯一剩余已证施工：对齐消费者公开日期规则
+## 2026-10-07 授权实施与主线验收
 
-依照[日期实施单](final_consumer_asof_alignment_2026-10-07.md)，只改两仓叙述manifest的时间判断：公开日决定as-of资格，下载时间仍作合法格式校验。最小临时副本同六CLI6/6通过；尚未写两仓，更未并线。正常合入后必须由当前真实消费者同六CLI绿来替代proposal证据。
+用户“授权隔离修复并线”已执行。RF `e241389adeda37bc9cbb53d7831063718552a936` 正常快进 main、推送 origin/main，精确 CI 37574397700/job112639930230 全部步骤成功，用时30秒。StockWiki `9f552a6741dd093dc760ad6965458989cd027251` 正常快进本地 master；本仓没有远端，不声称已推送或有远端CI。
 
-PWF当前规定两owner工作树只读，StockWiki另有项目，已发出一次异步选择“授权隔离worktree修复并线”或“交owner”。**尚未收到答复，不能假定时间经过就有授权。** 这里不是要求对每份原件或helper人工签收，而是外仓归属的待决实施方式。答复后：
+两仓先各获得2个真实语义RED（晚下载和公开日等于cutoff），再最小修改日期判断，保留 UTC/公开日/身份/期间/SHA/locator反例；没有改原件、公开wire或golden。RF责任58pass/1skip、快速门107pass及正常push门107pass；StockWiki责任113pass/1skip。StockWiki集中大节点首跑934pass/15skip/1个Windows长路径环境失败，同一失败用例改独立短测试根后1pass：共935个不同用例绿，coverage总81%、UI75.56%，不是单次全套全绿。未重跑全部长测。
 
-1. 新鲜核两仓HEAD/status及计划，按两张独占卡隔离落地，不动owner未提交文件、IQS/quick-scan或原件。
-2. 各仓先补责任RED，再实现；保留未来/未知公开日、非法日期、SHA/身份/期间/证据反例。大节点一次责任包/正常hooks，按主线当时实际基线合入。
-3. 当前CWP→两仓正式六CLI通过，测试根恢复、保护指纹保持；正常提交推送，并记录实际代码CI或明确无远端。**不重跑九文档或付费模型。**
-4. 将A12/A13真实缺口关闭后复核本表变动范围，再决定目标完成。原件保留与上述公开能力边界不变。
+当前CWP→实际两仓主线正式CLI六例6pass/29.63秒，逐条证据一致，RF只导出现场已提交HEAD，删除临时提案覆盖入口。这是日期合同的本地Replay E2E，不冒称新增付费模型或真实供应商下载；两个消费者自己的未来/未知公开日等分支另由责任包证明。
 
-独立卡：[RF](harness_lanes/revenue_forecast_asof_alignment.md)、[StockWiki](harness_lanes/stockwiki_asof_alignment.md)，均prepared/not-dispatched。没有其他已证必要施工待办；可选raw去重、全历史资料生产处理、自动研究流程或新增provider不会被混入本轮收口。
+本次两个独立worktree和三个测试根恢复absent，移除136471537 B临时代码/测试资料，不计为生产清理收益。九原件SHA/size/mtime、生产DB完整SHA及六个配置/owner文件指纹保持。RF三owner日志和CWP source_acquisition用户修改不暂存、不覆盖；StockWiki owner工作树clean，quick-scan/IQS未改。两套安装技能仅在校验旧主线字节后同步本次两文件，其他本地内容保留，不宣称整套安装完全一致。
+
+完整[主线验收收据](harness_lanes/results/final_asof_implementation_2026-10-07.json)、[RF独立交接](harness_lanes/results/final_rf_asof_handoff_2026-10-07.json)、[StockWiki独立交接](harness_lanes/results/final_stockwiki_asof_handoff_2026-10-07.json)。历史RED/提案GREEN收据保留，不能替代本次实际主线结果。CWP本次测试/文档正常提交推送并记录对应代码CI后，完成最后发布收尾。
+
+无其他已证必要施工待办。可选raw去重、全历史资料生产处理或自动投资研究不混入本轮收口。

@@ -1,5 +1,9 @@
 # Progress：激进简化实施
 
+## 2026-10-07 隔离日期修复获授权
+
+用户明确“授权隔离修复并线”，前置条件解除，目标active。只读核RF6e6b817a/三owner日志、StockWiki3fe5008 clean/无remote、FF与ET不动。MAIN创建两独占worktree，先责任TDD，再大节点/跨仓六CLI和正常主线并线；不改owner未提交文件、IQS或原件，不再请求同一许可。
+
 ## 2026-10-07 受阻审计收口
 
 上一目标轮为progress：逐项范围核查与唯一Next Step已推f259f44，正常短推送门绿，用户配置SHA3609e707不变。本轮只读重新确认两仓状态/归属约束：RF三owner日志、StockWiki clean且独立项目；未收到此前外仓隔离修复或交owner的选择。该待答条件在日期提案、完整核查、本轮复核连续存在；没有活进程/CI需要等待，不把会话等待称verified wait。可独立完成的必要工作已经结束，当前为no progress/真实受阻，按目标规则标blocked，不重复长测/小节点计划或发同一问题。不会完成目标，也不是用户请求暂停。RF根AGENTS.md不存在，本轮仅记录，StockWiki AGENTS已读，未写外仓。
@@ -1224,3 +1228,15 @@ N6交付再次实读确认f31cc0d已是本地与真实远端master5f8a3ef祖先�
 ## 2026-10-07 应用/募投节点发布完成
 
 aa52cbd82b5f21eea54929cadab520f16a0a9df9正常commit/pre-push绿并推master，真实远端一致；精确CI37555504675 attempt1全部job/step success，job112580676245/81秒（其中Unit35秒、依赖26秒）。全Unit与短合同绿，未增加日常长测。正式收据published_exact_ci_passed，补实际运行源码及Git blob SHA。用户配置SHA3609e707保持独立dirty，外仓/原件零写；新六tmp路径absent。总PWF新增final_scope_audit_2026-10-07.md，下一唯一动作按完整原要求核现状和覆盖，不再重复本节点；整体目标active，S7实施/发布完成但整体完成尚未证实。
+
+## 2026-10-07 授权实施与主线验收
+
+用户“授权隔离修复并线”已执行。RF `e241389adeda37bc9cbb53d7831063718552a936` 正常快进 main、推送 origin/main，精确 CI 37574397700/job112639930230 全部步骤成功，用时30秒。StockWiki `9f552a6741dd093dc760ad6965458989cd027251` 正常快进本地 master；本仓没有远端，不声称已推送或有远端CI。
+
+两仓先各获得2个真实语义RED（晚下载和公开日等于cutoff），再最小修改日期判断，保留 UTC/公开日/身份/期间/SHA/locator反例；没有改原件、公开wire或golden。RF责任58pass/1skip、快速门107pass及正常push门107pass；StockWiki责任113pass/1skip。StockWiki集中大节点首跑934pass/15skip/1个Windows长路径环境失败，同一失败用例改独立短测试根后1pass：共935个不同用例绿，coverage总81%、UI75.56%，不是单次全套全绿。未重跑全部长测。
+
+当前CWP→实际两仓主线正式CLI六例6pass/29.63秒，逐条证据一致，RF只导出现场已提交HEAD，删除临时提案覆盖入口。这是日期合同的本地Replay E2E，不冒称新增付费模型或真实供应商下载；两个消费者自己的未来/未知公开日等分支另由责任包证明。
+
+本次两个独立worktree和三个测试根恢复absent，移除136471537 B临时代码/测试资料，不计为生产清理收益。九原件SHA/size/mtime、生产DB完整SHA及六个配置/owner文件指纹保持。RF三owner日志和CWP source_acquisition用户修改不暂存、不覆盖；StockWiki owner工作树clean，quick-scan/IQS未改。两套安装技能仅在校验旧主线字节后同步本次两文件，其他本地内容保留，不宣称整套安装完全一致。
+
+完整[主线验收收据](harness_lanes/results/final_asof_implementation_2026-10-07.json)、[RF独立交接](harness_lanes/results/final_rf_asof_handoff_2026-10-07.json)、[StockWiki独立交接](harness_lanes/results/final_stockwiki_asof_handoff_2026-10-07.json)。历史RED/提案GREEN收据保留，不能替代本次实际主线结果。CWP本次测试/文档正常提交推送并记录对应代码CI后，完成最后发布收尾。

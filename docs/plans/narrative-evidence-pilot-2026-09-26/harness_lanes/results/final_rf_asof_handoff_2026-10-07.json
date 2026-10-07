@@ -1,0 +1,154 @@
+{
+  "schema_version": "cwp-consumer-asof-handoff/1",
+  "consumer": "rf",
+  "status": "main_passed",
+  "base_head": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
+  "branch": "codex/rf-asof-20261007",
+  "code_head": "e241389adeda37bc9cbb53d7831063718552a936",
+  "main_integration_sha": "e241389adeda37bc9cbb53d7831063718552a936",
+  "changed_paths": [
+    "scripts/company_wiki_narrative_contracts.py",
+    "tests/test_company_wiki_narrative_reader.py"
+  ],
+  "public_wire_changed": false,
+  "red": {
+    "genuine_failed": 2,
+    "seconds": 0.19,
+    "initial_fixture_errors": 2,
+    "error": "missing parent tmp directory, corrected before semantic RED"
+  },
+  "green": {
+    "passed": 58,
+    "skipped": 1,
+    "seconds": 12.12,
+    "command": "pytest tests/test_company_wiki_narrative_reader.py tests/test_company_wiki_narrative_process.py",
+    "ruff": "passed"
+  },
+  "major_node": {
+    "passed": 107,
+    "seconds": 25.01,
+    "ruff": "passed",
+    "mypy_sources": 7,
+    "explicit_pre_commit_files": "passed"
+  },
+  "actual_main_e2e": {
+    "passed": 6,
+    "seconds": 29.63,
+    "shared_receipt": "final_asof_implementation_2026-10-07.json"
+  },
+  "preserved_refusals": [
+    "future_publication",
+    "unknown_publication",
+    "invalid_publication",
+    "invalid_utc",
+    "identity",
+    "period",
+    "SHA",
+    "locator"
+  ],
+  "protected": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_acquisition.yaml": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "0aee073f56c133786365ab96899edf4d91c0f9e1a0e13ab61b2a6bffd8316270",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf",
+    "C:\\Users\\郑曾波\\Projects\\StockWiki\\config\\llm_providers.yaml": "8cb7013f8b172be68bdd7d36c40829338b73d769e4e1bdea0562d11b6b9d03ba"
+  },
+  "cleanup": [
+    {
+      "initial": "absent",
+      "final": "absent",
+      "files": 458,
+      "logical_bytes_removed": 12233415.0,
+      "kind": "self_owned_merged_code_and_test_checkout",
+      "path": "C:\\Users\\郑曾波\\Projects\\cwp-lanes-20261007\\rf-asof"
+    },
+    {
+      "initial": "absent",
+      "final": "absent",
+      "files": 4133,
+      "logical_bytes_removed": 124227228.0,
+      "kind": "self_owned_merged_code_and_test_checkout",
+      "path": "C:\\Users\\郑曾波\\Projects\\cwp-lanes-20261007\\stockwiki-asof"
+    },
+    {
+      "initial": "absent",
+      "final": "absent",
+      "files": 0,
+      "logical_bytes_removed": 0,
+      "kind": "self_owned_test_root",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\fca-main"
+    },
+    {
+      "initial": "absent",
+      "final": "absent",
+      "files": 6,
+      "logical_bytes_removed": 10894.0,
+      "kind": "self_owned_test_root",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\fca-main-report"
+    },
+    {
+      "initial": "absent",
+      "final": "absent",
+      "files": 0,
+      "logical_bytes_removed": 0,
+      "kind": "self_owned_test_root",
+      "path": "C:\\cwt\\sa7"
+    }
+  ],
+  "ci": {
+    "run_id": 37574397700,
+    "jobs": [
+      {
+        "conclusion": "success",
+        "seconds": 30.0,
+        "id": 112639930230,
+        "name": "verify",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/setup-python@v5",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install dependencies",
+            "conclusion": "success"
+          },
+          {
+            "name": "Fetch pinned source dependencies",
+            "conclusion": "success"
+          },
+          {
+            "name": "Shared local and CI checks",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/setup-python@v5",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ],
+    "run_attempt": 1,
+    "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/37574397700",
+    "all_jobs_and_executed_steps_success": true,
+    "head_sha": "e241389adeda37bc9cbb53d7831063718552a936",
+    "conclusion": "success"
+  },
+  "remaining": []
+}
