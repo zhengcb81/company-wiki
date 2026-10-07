@@ -1,5 +1,9 @@
 # Progress：激进简化实施
 
+## 2026-10-07 N6-CANDIDATE再次查收
+
+正式交接f31cc0d与merge e8c645e已为当前主线祖先；真实远端master ed2dc51，CI37547043642实时查询全部步骤success。本次47责任case/0.79秒绿，独立tmp/n6-rcheck前后absent，11份相关源码与S7已发布Git blob一致。仅更新PWF，不重复合并、九样本或付费测试，其他准备阶段deadline未提交代码独立保留。本次文档patch第一次以不存在的progress标题为上下文被原子拒绝，未写任何文件；读取真实标题后一次正确应用。SHA初查比较了CRLF工作副本与LF Git blob导致8项假差异，改为HEAD/发布blob及换行归一的工作副本比较全部一致，源码未改。
+
 ## 2026-10-06 — N4C两家真实批次与N5三包
 
 - MiMo run05已终态failed/362.258s：年报P01实际摘要20claims/96locators、RF read0、quality verified；招股P04两次MODEL_TIMEOUT后返回计量但SUMMARY_INVALID，无final；policy skip/RF read0/0LLM。DeepSeek run06 completed/48.427s：IR13claims/11locators与英文电话会14claims/14locators，RF read0、完整引用回放、原语言通过；IR needs_review仅质量诊断。receipt中中文实际无U+FFFD，shell显示乱码来自stdout编码，不改原文。

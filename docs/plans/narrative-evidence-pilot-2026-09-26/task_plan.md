@@ -10,6 +10,8 @@
 
 ## 当前恢复点（2026-10-07）
 
+- **N6-CANDIDATE最新查收复核通过。** f31cc0d/e8c645e均已在当前主线，远端master ed2dc51；实时精确CI37547043642全部步骤success。本次四文件短包47项/0.79秒绿，tmp/n6-rcheck恢复absent，11份相关源代码与已发布S7 Git blob一致。详见[N6验收单最新复核](n6_candidate_main_acceptance_2026-10-07.md)。本次不重合并、不重跑九样本；整体Next Step保持完整目标核查，准备阶段deadline未提交改动仍属该核查的独立未完成修复。
+
 - **当前最新完成：客户采用/募投上下文selector0.4.2已发布aa52cbd，精确CI37555504675全部步骤绿/81秒。** 200责任项/1.65秒、CI全范围Ruff/47源mypy、正式真实S01/S04/S09消费者链+旧final9/selector升级11项122.26秒通过；完整九文档364.548秒29/33、761定位零失败、旧full零回退、精选63073B/+120B。当前默认S06 page7 canonical原句full。重复4→6的募投引导上下文取舍保留，原86点/33分母及96/160不变。六自身tmp根恢复absent、原件/RF/用户配置保护保持，0供应商/下载/翻译。详见[实施单](s7_adoption_fundraising_implementation_2026-10-07.md)及[正式收据](harness_lanes/results/s7_adoption_fundraising_main_acceptance_2026-10-07.json)。整体目标仍active，下一完整需求核查，不再重跑本节点。
 
 - **当前最新完成：IR parser0.1.1已发布c1295b1，精确CI37552600440全部步骤绿/75秒。** selector0.4.1不变；143责任项/1.35秒、45个CI源mypy/Ruff绿，真实S07/S08/S09正式链/冻结旧final9/两种AUTO升级12项52.16秒绿，CI全Unit及短合同全绿。完整九文档27/33、761定位零失败、精选62953B、IR两套话clean；optional3/17→2/17的一条泛答提问取舍保留。11个自身临时路径已恢复absent，原件/用户配置/RF6e6b817a保护不变，0供应商/下载/翻译。详见[IR发布收据](harness_lanes/results/s7_ir_main_acceptance_2026-10-07.json)。S7整体仍in_progress。

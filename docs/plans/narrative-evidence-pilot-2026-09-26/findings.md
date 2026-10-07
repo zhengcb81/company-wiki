@@ -1,5 +1,9 @@
 # Findings：当前事实与待验证项
 
+## 2026-10-07 N6-CANDIDATE查收事实
+
+该卡已完成实际合并和远端发布，交接f31cc0d/merge e8c645e均为master祖先，实时精确CI37547043642全绿；本次47短测试通过。原卡交付阶段21/33与后续S7的29/33属于不同版本测量，分别保留。不能拿外线HANDOFF引用的历史DOCSET CI37528050044验收候选代码。Git blob SHA与Windows CRLF工作副本SHA不是同一比较域；11相关源码按正确域全部与已发布aa52cbd一致。
+
 ## N4C真实结果与新并行范围（2026-10-06）
 
 - MiMo年报真实summary/consumer通过，招股两次timeout+SUMMARY_INVALID；DeepSeek IR/英文电话会真实完成。故真实能力不是全部失败，也不是四类已过；需针对招股摘要合同继续调查。现只有通用安全错误信息，原invalid draft随finally清理，不能凭记忆推断是哪一条规则。已知actualusage与unknown全部计入，剩23892tokens小于原请求24863最坏预留，不能直接盲重试。
@@ -951,3 +955,5 @@ S7最终发布证据：9bf25a5/CI37550268890全部步骤绿71秒，真实业务�
 0.4.2完整九文档29/33，原required/optional full零回退，精选+120B、761定位全绿。剩余四个正式required miss：纯融资金额G-S06-01、同原件其他页已canonical的产能G-S06-03、正文外provider G-S09-01、纯财务guidance G-S09-03；不得改golden分母。canonical另页在当前默认pipeline已重新验证2span full，不能只沿用旧版本证据。新6重复中S04增加2，评价器仅比较原文，不比较事件/表头语境；现去重层按整组、表头和角色保守处理，不能仅用字符串相同拆掉完整募投联系。具体重复诊断另记，不将低比例或省空间当假零重复。
 
 本节点精确CI37555504675对应aa52cbd，全部步骤成功/81秒；不是此前IR提交绿灯。依赖安装26秒、Unit35秒，本次既有简化CI仍一平台一Python，无真实全表/外发矩阵增加。正式发布与测试恢复证据已完整，可进入原目标逐项核查；核查单只归集已有证据与真正缺口，不增人工签收或要求重复旧大节点。
+
+完整目标核查实读：CWP ed2dc51仅用户配置dirty，RF6e6b817a三owner保持。正式narrative_batch._final_documents实际调用终态压缩；Supervisor P1为mixed1、P2 compute1/model1、P4 compute3/model1，子进程factory各自创建客户端和SourceVersionReader。不是所有模型并发4。准备阶段当前deadline在_run_owned才开始计，build_batch_events及逐原件open前后没有剩余时间检查；这是需TDD验证的资源预算缺口，不新增人工门。下一仅针对准备超时和停止读取下一来源验证，已绿S7全九/付费/kill大包不重复。
