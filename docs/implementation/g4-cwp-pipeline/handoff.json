@@ -19,6 +19,7 @@
   ],
   "changed_paths": [
     ".planning/g4-cwp-pipeline/consolidated_receipt.txt",
+    ".planning/g4-cwp-pipeline/fast_contracts_direct_receipt.txt",
     ".planning/g4-cwp-pipeline/green_misc_receipt.txt",
     ".planning/g4-cwp-pipeline/red_receipt.txt",
     ".planning/g4-cwp-pipeline/unit_suite_receipt.txt",
