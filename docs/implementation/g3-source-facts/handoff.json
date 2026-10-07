@@ -1,0 +1,205 @@
+{
+  "schema_version": "g3-handoff/1",
+  "lane": "G3-SOURCE-FACTS",
+  "card": "docs/plans/narrative-evidence-pilot-2026-09-26/harness_lanes/g3_source_metadata_and_raw_space.md",
+  "base": "5930a644453ed46494c2c83c5ecfb97767fa9492",
+  "head": "8856d98f951f11aacae44cc8b7e6133bff6eeb9c",
+  "head_note": "head is the last commit known when this record was written; only the commit that lands this very edit can follow it (git log --oneline shows the trailing docs commit)",
+  "branch": "codex/g3-source-facts",
+  "worktree": "C:/Users/郑曾波/Projects/_g3/SOURCE-FACTS/company-wiki",
+  "commits": [
+    "fdde475f28f2b998de085f743b9c7cebba24e777 feat: add G3 read-only source facts and company_raw space decision",
+    "fe6d00cc89d7b9936b9df46238cca68bb55e82e8 chore: drop unused imports in the G3 evidence package",
+    "193f692fcbd7d13855a5bd9518890c001368bb47 docs: record G3 lane handoff with observed evidence",
+    "8856d98f951f11aacae44cc8b7e6133bff6eeb9c test: validate G3 deliverable contracts"
+  ],
+  "changed_paths": [
+    "docs/implementation/g3-source-facts/HANDOFF.md",
+    "docs/implementation/g3-source-facts/evidence_index.md",
+    "docs/implementation/g3-source-facts/findings.md",
+    "docs/implementation/g3-source-facts/metadata_proposals.json",
+    "docs/implementation/g3-source-facts/progress.md",
+    "docs/implementation/g3-source-facts/raw_space_decision.json",
+    "docs/implementation/g3-source-facts/task_plan.md",
+    "tools/g3_source_facts/__init__.py",
+    "tools/g3_source_facts/budget.py",
+    "tools/g3_source_facts/catalog_probe.py",
+    "tools/g3_source_facts/cli.py",
+    "tools/g3_source_facts/data/evidence_input.json",
+    "tools/g3_source_facts/hash_and_cover.py",
+    "tools/g3_source_facts/metadata_bound.py",
+    "tools/g3_source_facts/proposals.py",
+    "tools/g3_source_facts/raw_space.py",
+    "tools/g3_source_facts/report.py",
+    "tools/g3_source_facts/tests/conftest.py",
+    "tools/g3_source_facts/tests/test_budget.py",
+    "tools/g3_source_facts/tests/test_catalog_probe.py",
+    "tools/g3_source_facts/tests/test_proposal_rules.py",
+    "tools/g3_source_facts/tests/test_raw_space_rules.py",
+    "tools/g3_source_facts/tests/test_rawdup_config_filter.py",
+    "tools/g3_source_facts/tests/test_report_writer.py"
+  ],
+  "tests": [
+    {
+      "command": "python -m pytest -q tools/g3_source_facts/tests",
+      "exit": 0,
+      "seconds": 7.2,
+      "counts": {
+        "passed": 55,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0
+      }
+    },
+    {
+      "command": "ruff check tools/g3_source_facts",
+      "exit": 0,
+      "seconds": 1.0,
+      "counts": {
+        "errors": 0
+      }
+    },
+    {
+      "command": "python tools/g3_source_facts/metadata_bound.py",
+      "exit": 0,
+      "seconds": 2.0,
+      "counts": {
+        "content_hashes_with_internal_copies": 52,
+        "registered_upper_bound_bytes": 98845393,
+        "reproduces_recorded_value": true
+      }
+    }
+  ],
+  "real_read_only_runs": [
+    {
+      "command": "python tools/raw_duplicate_audit/cli.py scan --config <lane scratch investigation_source_catalog.yaml> --project-root <live CWP root> --output <lane scratch rawdup_scan_report.json> --max-groups 20 --max-read-bytes 268435456 --deadline-seconds 120 --max-detail-rows 100",
+      "exit": 0,
+      "seconds": 49.457,
+      "input_report_sha256": "b828f3cb96189fdaadea33edf5ad2c3ce282bb73e1809576b3e5e98484498b1f",
+      "status": "succeeded",
+      "read_bytes": 0,
+      "limits_hit": [
+        "detail_rows"
+      ]
+    },
+    {
+      "command": "python tools/raw_duplicate_audit/cli.py verify --config <lane scratch investigation_source_catalog.yaml> --project-root <live CWP root> --output <lane scratch rawdup_verify_report.json> --max-groups 20 --max-read-bytes 268435456 --deadline-seconds 120 --max-detail-rows 100",
+      "exit": 0,
+      "seconds": 60.011,
+      "input_report_sha256": "9fdcd53e44aa5000f92cdbd9c4bc98c88adddc0e96dec3b975b25e72bfe360ce",
+      "status": "succeeded",
+      "read_bytes": 122369272,
+      "read_files": 40,
+      "limits_hit": [
+        "max_groups",
+        "detail_rows"
+      ],
+      "note": "report inputs were scratch-only and were deleted after their facts were copied into the deliverables; re-running the recorded command reproduces them"
+    }
+  ],
+  "protected_state": {
+    "production_config": {
+      "path": "config/source_catalog.yaml",
+      "sha256_before": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "sha256_after": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "unchanged": true
+    },
+    "nine_samples": {
+      "register": "benchmarks/narrative_document_types/samples.json",
+      "bytes_and_sha_match_before": true,
+      "bytes_and_sha_match_after": true,
+      "count": 9
+    },
+    "catalog_database": {
+      "open_mode": "file:...?mode=ro + PRAGMA query_only=ON, one read transaction",
+      "session_total_changes": 0,
+      "schema_version": "1.2.0",
+      "file_bytes_before": 222408704,
+      "file_bytes_after": 222408704,
+      "wal_bytes": 0,
+      "shm_bytes": 32768,
+      "whole_database_counts": {
+        "sources": 43112,
+        "locations": 46606,
+        "documents": 23530
+      },
+      "locations_by_status": {
+        "active": 25048,
+        "missing": 6,
+        "quarantined": 1,
+        "retired": 21551
+      },
+      "sample_locations_after": {
+        "S01": "retired",
+        "S02": "retired",
+        "S03": "retired",
+        "S04": "retired",
+        "S05": "active",
+        "S06": "active",
+        "S07": "active",
+        "S08": "active",
+        "S08_published_date": "2023-12-31 (unchanged)"
+      }
+    },
+    "concurrent_writes": "the main CWP worktree carries another lane's uncommitted changes (config/source_acquisition.yaml, src/company_wiki/source_catalog/acquisition*.py, close_gap.py, one contract test); this lane never touched, locked or wrote them",
+    "lane_writes_outside_write_set": 0
+  },
+  "cleanup": {
+    "scratch": ".planning/g3-source-facts (fixtures, extracted cover pages, temporary analysis scripts, RAW-DUP raw reports, investigation config) deleted",
+    "tmp_copy_restore": "no tmp/render copies were kept; pytest tmp dirs are basetemp-managed",
+    "not_committed": [
+      "原文 PDF/TXT/整页 HTML",
+      "渲染页与抽页文本",
+      "RAW-DUP 本机绝对路径 local-output（未生成）",
+      "机器绝对路径清单",
+      "密钥（conftest 显式清除并禁网）"
+    ],
+    "git_status_after": "only docs/implementation/g3-source-facts/handoff.json staged for the final record commit"
+  },
+  "remaining": [
+    "MAIN 复核 metadata_proposals.json 当前事实后，经正式 metadata/scanner 迁移入口应用 S05-S07 三项 update_metadata（本卡不写生产）",
+    "S08 published_date 冲突需先取得一手公开日或经正式入口豁免，才能迁移 security_id",
+    "S09 需由 MAIN 决定 legacy 登记路径或重新授权获取 provider receipt；本卡不导入、不翻译、不重抓",
+    "S01-S04 若评估恢复，必须走正式 restore 入口并附本卡已核 source_url/公开日；文件仍在不构成恢复依据",
+    "company_raw 空间收益不足且 allocation 不可证：无迁移；如日后重开，重跑 recorded command"
+  ],
+  "external_effects": {
+    "public_http_requests": 15,
+    "public_http_response_bytes": 102400,
+    "downloads": 0,
+    "read_bytes": 236198380,
+    "read_budget_bytes": 536870912,
+    "raw_dup_round_read_bytes": 122369272,
+    "raw_dup_round_limit_bytes": 268435456,
+    "model_posts": 0,
+    "production_writes": 0,
+    "raw_deleted": 0,
+    "network_note": "CNINFO fulltext/hisAnnouncement retrieval only (13) plus 2 SZSE official API attempts that returned 500 and were abandoned; single response <= 12 KiB; no full PDF was downloaded to prove a publication date; no LLM, no paid service, no API key"
+  },
+  "main_integration": {
+    "reports": [
+      "docs/implementation/g3-source-facts/metadata_proposals.json (g3-metadata-proposals/1)",
+      "docs/implementation/g3-source-facts/raw_space_decision.json (g3-raw-space-decision/1)"
+    ],
+    "supporting": [
+      "docs/implementation/g3-source-facts/evidence_index.md",
+      "docs/implementation/g3-source-facts/HANDOFF.md",
+      "docs/implementation/g3-source-facts/findings.md"
+    ],
+    "formal_write_entries_required": [
+      "metadata proposals: existing scanner/metadata migration entrance (document_kind/source_type/security_id/published_date only; source_id and document_id stay)",
+      "S09 registration: company-wiki-transcript-import (transcript_import_cli:main -> run_import -> transcript_import.import_transcript_tool_result) with a genuine provider receipt decision by MAIN",
+      "S01-S04 restore: formal document restore entrance only, with an explicit restore/supersession record"
+    ],
+    "expected_change_scope": [
+      "documents.document_kind/source_type/metadata_json.acquisition.security_id/published_date for S05-S07 only",
+      "no location moves, no byte changes, no root/config change, no raw deletion"
+    ],
+    "do_not": [
+      "do not execute this report directly",
+      "do not feed lane file paths to downstream research layers",
+      "do not read whole_database diagnostics as company_raw figures",
+      "do not add 5.66 GB or 46 G historical cleanups to this card's result"
+    ]
+  }
+}

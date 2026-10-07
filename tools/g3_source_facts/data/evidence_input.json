@@ -1,0 +1,724 @@
+{
+  "schema_version": "g3-evidence-input/1",
+  "catalog_observation": {
+    "config_path": "config/source_catalog.yaml",
+    "config_sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "catalog_dir": "${PROJECT_ROOT}/.source_catalog",
+    "database_file": "catalog.sqlite3 (222408704 bytes, -wal 0 bytes, -shm 32768 bytes)",
+    "schema_version": "1.2.0",
+    "open_mode": "file:...?mode=ro + PRAGMA query_only=ON, one read transaction, total_changes=0",
+    "roots": [
+      "company_raw",
+      "dayu_portfolio",
+      "dropbox_stock",
+      "future_lake"
+    ],
+    "whole_database_counts": {
+      "scope": "whole_database",
+      "sources": 43112,
+      "locations_by_root": {
+        "company_raw": 33092,
+        "dayu_portfolio": 3660,
+        "dropbox_stock": 9853,
+        "future_lake": 1
+      }
+    },
+    "security_master": {
+      "file": ".source_catalog/security_master/cn.json",
+      "record_count": 6137,
+      "source_name": "cninfo",
+      "source_url": "https://www.cninfo.com.cn/new/data/szse_stock.json"
+    },
+    "frozen_sample_register": "benchmarks/narrative_document_types/samples.json (S01-S09)",
+    "notes": [
+      "g1_sample_manifest.json P01-P09 are early aliases and are not used as production ids",
+      "publication dates taken from the cninfo adjunctUrl path date, which equals the Beijing date of announcementTime for every hit",
+      "no PDF was downloaded to prove a publication date; only listing metadata was read"
+    ]
+  },
+  "budget_charges": [
+    {
+      "label": "hash+nine-originals+cover-pages",
+      "bytes": 75886072
+    }
+  ],
+  "items": [
+    {
+      "sample_id": "S01",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "source_version_id": null,
+      "location_id": "urn:company-wiki:location:sha256:c99590b373d511d2c8d54df26c8ab79d86d611655bac683abbc8628eeb543e49",
+      "registered": true,
+      "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "registered_content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "retired": true,
+      "retired_reason": "legacy sidecar lacks source_url; batch governance Phase 15.6 (F13)",
+      "restore_record": false,
+      "superseded": false,
+      "current": {
+        "document_kind": "annual_report",
+        "source_type": "regulatory_filing",
+        "security_id": "688012",
+        "market": "CN",
+        "published_date": null,
+        "source_status": "retired"
+      },
+      "proposed": {},
+      "evidence": [
+        {
+          "field": "content_sha256",
+          "url": null,
+          "locator": "loc:stream-sha256",
+          "observed_value": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "status": "verified"
+        },
+        {
+          "field": "published_date",
+          "url": "http://static.cninfo.com.cn/finalpage/2026-03-31/1225062431.PDF",
+          "locator": "cninfo:announcementId=1225062431;adjunctUrl=finalpage/2026-03-31/1225062431.PDF",
+          "observed_value": "2026-03-31",
+          "status": "verified"
+        },
+        {
+          "field": "security_id",
+          "url": "https://www.cninfo.com.cn/new/data/szse_stock.json",
+          "locator": "security_master:cn/688012",
+          "observed_value": "688012",
+          "status": "verified"
+        },
+        {
+          "field": "source_url",
+          "url": "http://static.cninfo.com.cn/finalpage/2026-03-31/1225062431.PDF",
+          "locator": "cninfo:announcementId=1225062431",
+          "observed_value": "http://static.cninfo.com.cn/finalpage/2026-03-31/1225062431.PDF",
+          "status": "verified"
+        },
+        {
+          "field": "period_label",
+          "url": null,
+          "locator": "cover:S01-p1",
+          "observed_value": "2025年年度报告",
+          "status": "verified"
+        },
+        {
+          "field": "source_status",
+          "url": null,
+          "locator": "catalog:document_retire_audit",
+          "observed_value": "retired (phase-15.6-governance 2026-08-01; reconcile-retire-20260806 2026-08-07)",
+          "status": "verified"
+        },
+        {
+          "field": "official_size_kb",
+          "url": "http://static.cninfo.com.cn/finalpage/2026-03-31/1225062431.PDF",
+          "locator": "cninfo:announcementId=1225062431.adjunctSize",
+          "observed_value": "8952 KB vs 9165875 bytes",
+          "status": "verified"
+        }
+      ],
+      "main_request": "retired: 文件仍在且 digest 与登记一致，退休原因=legacy sidecar lacks source_url（旧派生退休，非撤回/被替代，无 supersession/restore 记录）。若要恢复必须走正式 restore 入口并附上本项已核 source_url 与 published_date=2026-03-31；本卡不申请、不执行恢复。"
+    },
+    {
+      "sample_id": "S02",
+      "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "source_version_id": null,
+      "location_id": "urn:company-wiki:location:sha256:259514bd70955d4f7114c84674624c270ea1759856aa263c654d5fc530c01d68",
+      "registered": true,
+      "content_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "registered_content_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "retired": true,
+      "retired_reason": "legacy sidecar lacks source_url; batch governance Phase 15.6 (F13)",
+      "restore_record": false,
+      "superseded": false,
+      "current": {
+        "document_kind": "semi_annual_report",
+        "source_type": "regulatory_filing",
+        "security_id": "688012",
+        "market": "CN",
+        "published_date": null,
+        "source_status": "retired"
+      },
+      "proposed": {},
+      "evidence": [
+        {
+          "field": "content_sha256",
+          "url": null,
+          "locator": "loc:stream-sha256",
+          "observed_value": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+          "status": "verified"
+        },
+        {
+          "field": "published_date",
+          "url": "http://static.cninfo.com.cn/finalpage/2025-08-29/1224606011.PDF",
+          "locator": "cninfo:announcementId=1224606011;adjunctUrl=finalpage/2025-08-29/1224606011.PDF",
+          "observed_value": "2025-08-29",
+          "status": "verified"
+        },
+        {
+          "field": "security_id",
+          "url": null,
+          "locator": "cover:S02-p1",
+          "observed_value": "688012",
+          "status": "verified"
+        },
+        {
+          "field": "source_url",
+          "url": "http://static.cninfo.com.cn/finalpage/2025-08-29/1224606011.PDF",
+          "locator": "cninfo:announcementId=1224606011",
+          "observed_value": "http://static.cninfo.com.cn/finalpage/2025-08-29/1224606011.PDF",
+          "status": "verified"
+        },
+        {
+          "field": "source_status",
+          "url": null,
+          "locator": "catalog:document_retire_audit",
+          "observed_value": "retired (phase-15.6-governance 2026-08-01; reconcile-retire-20260806 2026-08-07)",
+          "status": "verified"
+        },
+        {
+          "field": "official_size_kb",
+          "url": "http://static.cninfo.com.cn/finalpage/2025-08-29/1224606011.PDF",
+          "locator": "cninfo:announcementId=1224606011.adjunctSize",
+          "observed_value": "6213 KB vs 6361468 bytes",
+          "status": "verified"
+        }
+      ],
+      "main_request": "retired: 同 S01 的旧派生退休；恢复须经正式 restore 入口并附 source_url 与 published_date=2025-08-29；本卡不恢复。"
+    },
+    {
+      "sample_id": "S03",
+      "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "document_id": "urn:company-wiki:document:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "source_version_id": null,
+      "location_id": "urn:company-wiki:location:sha256:99287847c0603973d1a0dac4fbb0b569c17bf0d79e7816511c55a6572a99c4b4",
+      "registered": true,
+      "content_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "registered_content_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "retired": true,
+      "retired_reason": "legacy sidecar lacks source_url; batch governance Phase 15.6 (F13)",
+      "restore_record": false,
+      "superseded": false,
+      "current": {
+        "document_kind": "quarterly_report",
+        "source_type": "regulatory_filing",
+        "security_id": "688012",
+        "market": "CN",
+        "published_date": null,
+        "source_status": "retired"
+      },
+      "proposed": {},
+      "evidence": [
+        {
+          "field": "content_sha256",
+          "url": null,
+          "locator": "loc:stream-sha256",
+          "observed_value": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "status": "verified"
+        },
+        {
+          "field": "published_date",
+          "url": "http://static.cninfo.com.cn/finalpage/2026-04-28/1225215453.PDF",
+          "locator": "cninfo:announcementId=1225215453;adjunctUrl=finalpage/2026-04-28/1225215453.PDF",
+          "observed_value": "2026-04-28",
+          "status": "verified"
+        },
+        {
+          "field": "security_id",
+          "url": null,
+          "locator": "cover:S03-p1",
+          "observed_value": "688012",
+          "status": "verified"
+        },
+        {
+          "field": "source_url",
+          "url": "http://static.cninfo.com.cn/finalpage/2026-04-28/1225215453.PDF",
+          "locator": "cninfo:announcementId=1225215453",
+          "observed_value": "http://static.cninfo.com.cn/finalpage/2026-04-28/1225215453.PDF",
+          "status": "verified"
+        },
+        {
+          "field": "source_status",
+          "url": null,
+          "locator": "catalog:document_retire_audit",
+          "observed_value": "retired (phase-15.6-governance 2026-08-01; reconcile-retire-20260806 2026-08-07)",
+          "status": "verified"
+        },
+        {
+          "field": "official_size_kb",
+          "url": "http://static.cninfo.com.cn/finalpage/2026-04-28/1225215453.PDF",
+          "locator": "cninfo:announcementId=1225215453.adjunctSize",
+          "observed_value": "213 KB vs 217264 bytes",
+          "status": "verified"
+        }
+      ],
+      "main_request": "retired: 同 S01 的旧派生退休；恢复须经正式 restore 入口并附 source_url 与 published_date=2026-04-28；本卡不恢复。"
+    },
+    {
+      "sample_id": "S04",
+      "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "source_version_id": null,
+      "location_id": "urn:company-wiki:location:sha256:f86358acc1f0a1d8b8b3e1c60e334730a62af4e7a039c472366cba0770dcb26e",
+      "registered": true,
+      "content_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "registered_content_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "retired": true,
+      "retired_reason": "legacy sidecar lacks source_url; batch governance Phase 15.6 (F13)",
+      "restore_record": false,
+      "superseded": false,
+      "current": {
+        "document_kind": "prospectus",
+        "source_type": "prospectus",
+        "security_id": "688012",
+        "market": "CN",
+        "published_date": null,
+        "source_status": "retired"
+      },
+      "proposed": {},
+      "evidence": [
+        {
+          "field": "content_sha256",
+          "url": null,
+          "locator": "loc:stream-sha256",
+          "observed_value": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+          "status": "verified"
+        },
+        {
+          "field": "published_date",
+          "url": "http://static.cninfo.com.cn/finalpage/2019-07-16/1206447929.PDF",
+          "locator": "cninfo:announcementId=1206447929;adjunctUrl=finalpage/2019-07-16/1206447929.PDF",
+          "observed_value": "2019-07-16",
+          "status": "verified"
+        },
+        {
+          "field": "security_id",
+          "url": "https://www.cninfo.com.cn/new/data/szse_stock.json",
+          "locator": "security_master:cn/688012",
+          "observed_value": "688012",
+          "status": "verified"
+        },
+        {
+          "field": "source_url",
+          "url": "http://static.cninfo.com.cn/finalpage/2019-07-16/1206447929.PDF",
+          "locator": "cninfo:announcementId=1206447929",
+          "observed_value": "http://static.cninfo.com.cn/finalpage/2019-07-16/1206447929.PDF",
+          "status": "verified"
+        },
+        {
+          "field": "source_status",
+          "url": null,
+          "locator": "catalog:document_retire_audit",
+          "observed_value": "retired (phase-15.6-governance 2026-08-01; reconcile-retire-20260806 2026-08-07)",
+          "status": "verified"
+        },
+        {
+          "field": "official_size_kb",
+          "url": "http://static.cninfo.com.cn/finalpage/2019-07-16/1206447929.PDF",
+          "locator": "cninfo:announcementId=1206447929.adjunctSize",
+          "observed_value": "10950 KB vs 11211796 bytes",
+          "status": "verified"
+        }
+      ],
+      "main_request": "retired: 同 S01 的旧派生退休；恢复须经正式 restore 入口并附 source_url 与 published_date=2019-07-16；本卡不恢复。"
+    },
+    {
+      "sample_id": "S05",
+      "source_id": "urn:company-wiki:source:sha256:cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+      "document_id": "urn:company-wiki:document:sha256:cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+      "source_version_id": null,
+      "location_id": "urn:company-wiki:location:sha256:e2766a0b2847823e9d7ea201d94035cfa6458069983939b8492c61b1fd3b6743",
+      "registered": true,
+      "content_sha256": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+      "registered_content_sha256": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+      "retired": false,
+      "retired_reason": null,
+      "restore_record": false,
+      "superseded": false,
+      "current": {
+        "document_kind": "other",
+        "source_type": "other",
+        "security_id": "三角防务",
+        "market": "CN",
+        "published_date": null,
+        "source_status": "active"
+      },
+      "proposed": {
+        "document_kind": "equity_offering_prospectus",
+        "source_type": "prospectus",
+        "security_id": "300775",
+        "published_date": "2022-11-30"
+      },
+      "evidence": [
+        {
+          "field": "content_sha256",
+          "url": null,
+          "locator": "loc:stream-sha256",
+          "observed_value": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+          "status": "verified"
+        },
+        {
+          "field": "document_title",
+          "url": null,
+          "locator": "cover:S05-p1",
+          "observed_value": "向特定对象发行股票并在创业板上市募集说明书（注册稿）",
+          "status": "verified"
+        },
+        {
+          "field": "security_id",
+          "url": null,
+          "locator": "cover:S05-p1",
+          "observed_value": "300775",
+          "status": "verified"
+        },
+        {
+          "field": "security_id",
+          "url": "https://www.cninfo.com.cn/new/data/szse_stock.json",
+          "locator": "security_master:cn/300775",
+          "observed_value": "300775",
+          "status": "verified"
+        },
+        {
+          "field": "published_date",
+          "url": "http://static.cninfo.com.cn/finalpage/2022-11-30/1215243407.PDF",
+          "locator": "cninfo:announcementId=1215243407;adjunctUrl=finalpage/2022-11-30/1215243407.PDF",
+          "observed_value": "2022-11-30",
+          "status": "verified"
+        },
+        {
+          "field": "cover_date",
+          "url": null,
+          "locator": "cover:S05-p1",
+          "observed_value": "2022-10",
+          "status": "verified"
+        },
+        {
+          "field": "official_size_kb",
+          "url": "http://static.cninfo.com.cn/finalpage/2022-11-30/1215243407.PDF",
+          "locator": "cninfo:announcementId=1215243407.adjunctSize",
+          "observed_value": "5465 KB vs 5595592 bytes",
+          "status": "verified"
+        },
+        {
+          "field": "r1_family",
+          "url": null,
+          "locator": "catalog:document_kind enum (scanner.py financing family)",
+          "observed_value": "equity_offering_prospectus / source_type=prospectus",
+          "status": "verified"
+        }
+      ],
+      "main_request": "按 R1 正式融资族重分类（不换 source_id/document_id、不重下载），并把显示名 security_id 改为 300775、补 published_date=2022-11-30；封面月份 2022-10 只作 cover_date，不作公开日。"
+    },
+    {
+      "sample_id": "S06",
+      "source_id": "urn:company-wiki:source:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+      "document_id": "urn:company-wiki:document:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+      "source_version_id": null,
+      "location_id": "urn:company-wiki:location:sha256:0491e2e7c390d6d2de394b866d26cf58e0670df621d55bc9223250e903a421b6",
+      "registered": true,
+      "content_sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+      "registered_content_sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+      "retired": false,
+      "retired_reason": null,
+      "restore_record": false,
+      "superseded": false,
+      "current": {
+        "document_kind": "other",
+        "source_type": "other",
+        "security_id": "华锐精密",
+        "market": "CN",
+        "published_date": null,
+        "source_status": "active"
+      },
+      "proposed": {
+        "document_kind": "convertible_bond_prospectus",
+        "source_type": "prospectus",
+        "security_id": "688059",
+        "published_date": "2022-06-22"
+      },
+      "evidence": [
+        {
+          "field": "content_sha256",
+          "url": null,
+          "locator": "loc:stream-sha256",
+          "observed_value": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+          "status": "verified"
+        },
+        {
+          "field": "document_title",
+          "url": null,
+          "locator": "cover:S06-p1",
+          "observed_value": "向不特定对象发行可转换公司债券募集说明书",
+          "status": "verified"
+        },
+        {
+          "field": "security_id",
+          "url": null,
+          "locator": "cover:S06-p1",
+          "observed_value": "688059",
+          "status": "verified"
+        },
+        {
+          "field": "security_id",
+          "url": "https://www.cninfo.com.cn/new/data/szse_stock.json",
+          "locator": "security_master:cn/688059",
+          "observed_value": "688059",
+          "status": "verified"
+        },
+        {
+          "field": "published_date",
+          "url": "http://static.cninfo.com.cn/finalpage/2022-06-22/1213777070.PDF",
+          "locator": "cninfo:announcementId=1213777070;adjunctUrl=finalpage/2022-06-22/1213777070.PDF",
+          "observed_value": "2022-06-22",
+          "status": "verified"
+        },
+        {
+          "field": "cover_date",
+          "url": null,
+          "locator": "cover:S06-p1",
+          "observed_value": "2022-06",
+          "status": "verified"
+        },
+        {
+          "field": "official_size_kb",
+          "url": "http://static.cninfo.com.cn/finalpage/2022-06-22/1213777070.PDF",
+          "locator": "cninfo:announcementId=1213777070.adjunctSize",
+          "observed_value": "4646 KB vs 4756322 bytes",
+          "status": "verified"
+        },
+        {
+          "field": "r1_family",
+          "url": null,
+          "locator": "catalog:document_kind enum (scanner.py financing family)",
+          "observed_value": "convertible_bond_prospectus / source_type=prospectus",
+          "status": "verified"
+        }
+      ],
+      "main_request": "按 R1 正式融资族重分类（不换 source_id/document_id、不重下载），并把显示名 security_id 改为 688059、补 published_date=2022-06-22。"
+    },
+    {
+      "sample_id": "S07",
+      "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "document_id": "urn:company-wiki:document:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "source_version_id": null,
+      "location_id": "urn:company-wiki:location:sha256:37ae3cfbab9eada6a06e9ff83fe5749018fe9b7ed95dc5dbfc8ba15714f32124",
+      "registered": true,
+      "content_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "registered_content_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "retired": false,
+      "retired_reason": null,
+      "restore_record": false,
+      "superseded": false,
+      "current": {
+        "document_kind": "investor_relations",
+        "source_type": "investor_relations",
+        "security_id": "万润股份",
+        "market": "CN",
+        "published_date": null,
+        "source_status": "active"
+      },
+      "proposed": {
+        "security_id": "002643"
+      },
+      "evidence": [
+        {
+          "field": "content_sha256",
+          "url": null,
+          "locator": "loc:stream-sha256",
+          "observed_value": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+          "status": "verified"
+        },
+        {
+          "field": "security_id",
+          "url": null,
+          "locator": "cover:S07-p1",
+          "observed_value": "002643",
+          "status": "verified"
+        },
+        {
+          "field": "security_id",
+          "url": "https://www.cninfo.com.cn/new/data/szse_stock.json",
+          "locator": "security_master:cn/002643",
+          "observed_value": "002643",
+          "status": "verified"
+        },
+        {
+          "field": "activity_date",
+          "url": null,
+          "locator": "activity:2026-05-15",
+          "observed_value": "2026-05-15",
+          "status": "verified"
+        },
+        {
+          "field": "document_title",
+          "url": null,
+          "locator": "cover:S07-p1",
+          "observed_value": "中节能万润股份有限公司投资者关系活动记录表 编号：20260515",
+          "status": "verified"
+        },
+        {
+          "field": "published_date",
+          "url": null,
+          "locator": "cninfo:hisAnnouncement/query?stock=002643&seDate=2026-05-15~2026-07-31",
+          "observed_value": null,
+          "status": "unknown"
+        }
+      ],
+      "main_request": "元数据可核的有价值 IR：身份改 002643；published_date 保持 unknown（CNINFO SZSE 公告通道 2026-05-15~2026-07-31 共 17 条无此记录表，SZSE 官方 API 500，来源访问已按预算停止）。pathless SourceRef 建议见 evidence_index.md。"
+    },
+    {
+      "sample_id": "S08",
+      "source_id": "urn:company-wiki:source:sha256:f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+      "document_id": "urn:company-wiki:document:sha256:f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+      "source_version_id": null,
+      "location_id": "urn:company-wiki:location:sha256:a4b0e73e471fe322be2f37da60a67b35f290a04d1404a65ef41f4cc41b01d160",
+      "registered": true,
+      "content_sha256": "f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+      "registered_content_sha256": "f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+      "retired": false,
+      "retired_reason": null,
+      "restore_record": false,
+      "superseded": false,
+      "current": {
+        "document_kind": "investor_relations",
+        "source_type": "investor_relations",
+        "security_id": "周大生",
+        "market": "CN",
+        "published_date": "2023-12-31",
+        "source_status": "active"
+      },
+      "proposed": {
+        "security_id": "002867"
+      },
+      "evidence": [
+        {
+          "field": "content_sha256",
+          "url": null,
+          "locator": "loc:stream-sha256",
+          "observed_value": "f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+          "status": "verified"
+        },
+        {
+          "field": "security_id",
+          "url": null,
+          "locator": "cover:S08-p1",
+          "observed_value": "002867",
+          "status": "verified"
+        },
+        {
+          "field": "security_id",
+          "url": "https://www.cninfo.com.cn/new/data/szse_stock.json",
+          "locator": "security_master:cn/002867",
+          "observed_value": "002867",
+          "status": "verified"
+        },
+        {
+          "field": "activity_date",
+          "url": null,
+          "locator": "activity:2023-06-26/2023-06-28",
+          "observed_value": "2023-06-26",
+          "status": "verified"
+        },
+        {
+          "field": "published_date",
+          "url": null,
+          "locator": "cninfo:hisAnnouncement/query?stock=002867&seDate=2023-06-25~2023-07-31",
+          "observed_value": null,
+          "status": "unknown"
+        },
+        {
+          "field": "published_date",
+          "url": null,
+          "locator": "catalog:documents.published_date",
+          "observed_value": "2023-12-31",
+          "status": "unverified"
+        }
+      ],
+      "main_request": "先解决 published_date 冲突：登记值 2023-12-31 与原件活动日 2023-06-26~28 不相容，且一手公告通道查无此记录表（已按预算停止重试）。冲突未解前不迁移 security_id；解法须经正式入口，本卡不写生产。"
+    },
+    {
+      "sample_id": "S09",
+      "source_id": null,
+      "document_id": null,
+      "source_version_id": null,
+      "location_id": null,
+      "registered": false,
+      "content_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "registered_content_sha256": null,
+      "retired": false,
+      "retired_reason": null,
+      "restore_record": false,
+      "superseded": false,
+      "current": {},
+      "proposed": {
+        "document_kind": "investor_call_transcript",
+        "entity": "Microsoft",
+        "market": "US",
+        "security_id": "MSFT",
+        "language": "en",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q4",
+        "call_date": "2026-07-29"
+      },
+      "evidence": [
+        {
+          "field": "content_sha256",
+          "url": null,
+          "locator": "loc:stream-sha256",
+          "observed_value": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+          "status": "verified"
+        },
+        {
+          "field": "security_id",
+          "url": null,
+          "locator": "txt:header",
+          "observed_value": "MSFT",
+          "status": "verified"
+        },
+        {
+          "field": "fiscal_period",
+          "url": null,
+          "locator": "txt:header",
+          "observed_value": "Q4 2026",
+          "status": "verified"
+        },
+        {
+          "field": "language",
+          "url": null,
+          "locator": "txt:body",
+          "observed_value": "en",
+          "status": "verified"
+        },
+        {
+          "field": "call_date",
+          "url": null,
+          "locator": "txt:body:Wednesday, July 29, 2026 at 5:30 p.m. ET",
+          "observed_value": "2026-07-29",
+          "status": "verified"
+        },
+        {
+          "field": "source_url",
+          "url": "https://www.fool.com/earnings/call-transcripts/2026/08/07/microsoft-msft-q4-2026-earnings-call-transcript/",
+          "locator": "txt:header:url",
+          "observed_value": "https://www.fool.com/earnings/call-transcripts/2026/08/07/microsoft-msft-q4-2026-earnings-call-transcript/",
+          "status": "unverified"
+        },
+        {
+          "field": "published_date",
+          "url": null,
+          "locator": "txt:header:url-path",
+          "observed_value": "2026-08-07",
+          "status": "unverified"
+        },
+        {
+          "field": "provider_receipt",
+          "url": null,
+          "locator": "txt:header:Scraped=2026-09-03T22:44:45.464617",
+          "observed_value": null,
+          "status": "unverified"
+        }
+      ],
+      "main_request": "现有 ET 导入/复用接口的最小请求：入口=company-wiki-transcript-import（company_wiki.source_catalog.transcript_import_cli:main → run_import → transcript_import.import_transcript_tool_result(raw_result, request=SourceRequest(entity=Microsoft, document_kind=investor_call_transcript, market=US, security_id=MSFT, fiscal_year=2026, fiscal_period=Q4, language=en), candidate=DownloadCandidate, writer=CanonicalSourceWriter, now=...)），读取侧定位 source_reader.lookup_transcript_import（source_query_cli）。最小载荷：本 TXT 66324 字节 / sha 4ac3b4f0…7852a / mime text/plain，source_url 用 header 自带 fool.com 链接，会议日 2026-07-29。缺口：目录内无 provider 回执（同目录只有 txt/bilingual/interleaved 三件，无 sidecar/receipt），故 provider receipt 只能标 legacy_unverified——不补写假历史回执、不因已有译文而拒绝、不翻译不重抓；DownloadReceipt 结构性缺口由 MAIN 决定走正式 legacy 登记路径还是重新授权获取。本卡不执行导入。"
+    }
+  ]
+}
