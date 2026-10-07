@@ -234,10 +234,31 @@ def test_cli_resolve_command_uses_reader() -> None:
 
 def test_write_paths_still_use_store() -> None:
     text = (SRC / "service.py").read_text(encoding="utf-8")
-    # write entrypoints keep passing self.store
-    assert text.count("self.store,") >= 4
     tree = ast.parse(text)
     for node in ast.walk(tree):
         if isinstance(node, ast.FunctionDef) and node.name == "store":
             calls = _calls_in(node)
             assert "CatalogStore" in calls, "store property must construct the writer"
+
+
+def test_public_scan_persists_sources_and_reader_observes_them(seeded):
+    import hashlib
+
+    db, config = seeded
+    raw = config.roots[0].path / 'Example' / 'raw'
+    raw.mkdir(parents=True)
+    document = raw / 'new-source.md'
+    content = '# Company source\nNew product was introduced.\n'
+    document.write_text(content, encoding='utf-8')
+    expected_sha = hashlib.sha256(document.read_bytes()).hexdigest()
+    catalog = SourceCatalog(config)
+    try:
+        catalog.scan(v2_scan_shadow=False)
+        assert catalog._store is not None
+        row = catalog.reader.fetchone(
+            'SELECT content_sha256 FROM sources WHERE content_sha256 = ?', (expected_sha,)
+        )
+        assert row is not None
+        assert row['content_sha256'] == expected_sha
+    finally:
+        catalog.close()

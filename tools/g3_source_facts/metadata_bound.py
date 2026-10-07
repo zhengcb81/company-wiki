@@ -1,7 +1,8 @@
 """Registered-metadata upper bound for company_raw-internal duplicates.
 
 Pure catalog aggregation in one read-only transaction: no file is opened, no
-byte is read, nothing is written. The result is the *registered logical*
+raw byte is read, and the database is never written. Only an explicitly
+requested report output is written. The result is the *registered logical*
 redundancy (n_internal_copies - 1) x byte_size per content hash, which the
 RAW-DUP row cap alone cannot show (only 45 of 3531 groups are detailed there).
 """
@@ -13,29 +14,10 @@ from pathlib import Path
 import sqlite3
 
 
-def _git_common_dir() -> Path:
-    import subprocess
-
-    result = subprocess.run(
-        ["git", "rev-parse", "--path-format=absolute", "--git-common-dir"],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    return Path(result.stdout.strip())
-
-
-REPO = Path(__file__).resolve().parents[2]
-LIVE = _git_common_dir().parent
-LIVE_DB = LIVE / ".source_catalog" / "catalog.sqlite3"
-OUT = REPO / ".planning" / "g3-source-facts" / "scratch" / "metadata_bound.json"
-ROOT_ID = "company_raw"
-
-
-def main() -> int:
-    if not LIVE_DB.exists():
-        raise SystemExit("live catalog database missing")
-    uri = "file:" + LIVE_DB.resolve().as_posix() + "?mode=ro"
+def registered_bound(database_path: Path, *, root_id: str) -> dict:
+    """Aggregate one caller-selected existing database/root, without discovery."""
+    path = database_path.resolve(strict=True)
+    uri = path.as_uri() + '?mode=ro'
     con = sqlite3.connect(uri, uri=True, timeout=10.0)
     try:
         con.row_factory = sqlite3.Row
@@ -52,7 +34,7 @@ def main() -> int:
              WHERE l.source_id IS NOT NULL AND l.relative_path <> ''
              GROUP BY s.content_sha256, s.byte_size
             """,
-            {"root": ROOT_ID},
+            {"root": root_id},
         ).fetchall()
         schema = con.execute(
             "SELECT value FROM catalog_meta WHERE key='schema_version'"
@@ -60,7 +42,7 @@ def main() -> int:
         location_status = con.execute(
             "SELECT location_status, COUNT(*) AS n FROM locations WHERE root_id = :root "
             "GROUP BY location_status",
-            {"root": ROOT_ID},
+            {"root": root_id},
         ).fetchall()
         con.execute("COMMIT")
     finally:
@@ -72,7 +54,7 @@ def main() -> int:
     mixed = [r for r in multi if r["n_total"] > r["n_internal"]]
     mixed_upper = sum((r["n_internal"] - 1) * r["byte_size"] for r in mixed)
     payload = {
-        "scope": ROOT_ID,
+        "scope": root_id,
         "source": "catalog metadata aggregation (read-only, 0 file reads)",
         "database_schema_version": schema,
         "total_changes": total_changes,
@@ -87,8 +69,25 @@ def main() -> int:
             "registered logical bound, not an allocated or releasable byte claim"
         ),
     }
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
+    payload['allocated_bytes'] = None
+    payload['releasable_bytes'] = None
+    return payload
+
+
+def main(argv=None) -> int:
+    import argparse
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--database', required=True, type=Path)
+    parser.add_argument('--root-id', required=True)
+    parser.add_argument('--output', type=Path)
+    args = parser.parse_args(argv)
+    if args.output and args.output.resolve() == args.database.resolve():
+        parser.error('report output must differ from the input database')
+    payload = registered_bound(args.database, root_id=args.root_id)
+    if args.output:
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding='utf-8')
     print(json.dumps(payload, ensure_ascii=False))
     return 0
 

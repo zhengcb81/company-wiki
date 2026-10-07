@@ -28,7 +28,7 @@ from .control import WorkerController
 from .duplicate_cleanup import DuplicateCleanupService
 from .reconcile_retire_state import ReconcileRetireStateService
 from .extraction_quality import ExtractionQualityService
-from .focus_cleanup import FocusScopeCleanupService
+from .maintenance_retirement import RetiredMaintenanceError
 from .portfolio_promoter import (
     PromotionIdentity,
     promote_all_for_entity,
@@ -144,6 +144,9 @@ def _read_recent_worker_events(catalog_dir: Path) -> dict[str, Any]:
     return out
 
 
+RETIRED_MAINTENANCE_COMMANDS = ('focus-cleanup', 'archive-retired-evidence', 'prune-retired-evidence', 'duplicate-preview', 'duplicate-recycle')
+
+
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="company-wiki-source-catalog",
@@ -199,18 +202,6 @@ def _parser() -> argparse.ArgumentParser:
         help="limit the number of derived files to audit (0=all)",
     )
     subparsers.add_parser("status", help="show catalog counts")
-
-    focus_cleanup = subparsers.add_parser(
-        "focus-cleanup",
-        help="dry-run or apply the exact dropbox_stock/重点关注 admission cleanup",
-    )
-    focus_cleanup.add_argument("--root-id", required=True)
-    focus_cleanup.add_argument("--relative-prefix", required=True)
-    focus_cleanup.add_argument("--apply", action="store_true")
-    focus_cleanup.add_argument("--confirmation-token")
-    focus_cleanup.add_argument("--snapshot-path", type=Path)
-    focus_cleanup.add_argument("--receipt-path", type=Path)
-    focus_cleanup.add_argument("--archive-dir", type=Path)
 
     documents_cmd = subparsers.add_parser(
         "documents", help="manage catalog documents (retire, ...)"
@@ -287,17 +278,6 @@ def _parser() -> argparse.ArgumentParser:
     reconcile_retire.add_argument("--apply", action="store_true")
 
     subparsers.add_parser(
-        "archive-retired-evidence",
-        help="export retired documents' evidence spans to gzip JSONL (Phase 2.1)",
-    )
-
-    prune_retired = subparsers.add_parser(
-        "prune-retired-evidence",
-        help="physically delete retired evidence spans after retention window (dry-run default)",
-    )
-    prune_retired.add_argument("--apply", action="store_true")
-
-    subparsers.add_parser(
         "size-report",
         help="read-only catalog size / disk-health report (Phase 4 monitoring)",
     )
@@ -325,19 +305,6 @@ def _parser() -> argparse.ArgumentParser:
         action="store_true",
         help="also list semantic (same-text, different-bytes) groups; review-only, not recyclable",
     )
-
-    duplicate_preview = subparsers.add_parser(
-        "duplicate-preview",
-        help="revalidate one indexed noncanonical exact-copy and issue a confirmation token",
-    )
-    duplicate_preview.add_argument("--location-id", required=True)
-
-    duplicate_recycle = subparsers.add_parser(
-        "duplicate-recycle",
-        help="move one revalidated exact-copy location to the Windows Recycle Bin",
-    )
-    duplicate_recycle.add_argument("--location-id", required=True)
-    duplicate_recycle.add_argument("--confirmation-token", required=True)
 
     resolve = subparsers.add_parser(
         "resolve",
@@ -583,6 +550,16 @@ def _parser() -> argparse.ArgumentParser:
         required=True,
         help="path to policy JSON (steady schema 2.0 or historical 1.0; snapshot_sha256 optional)",
     )
+    # Compatibility names return a named retirement; they are absent from help.
+    for command in RETIRED_MAINTENANCE_COMMANDS:
+        subparsers.add_parser(command, help=argparse.SUPPRESS, add_help=False)
+    subparsers._choices_actions = [
+        action for action in subparsers._choices_actions
+        if action.dest not in RETIRED_MAINTENANCE_COMMANDS
+    ]
+    subparsers.metavar = '{' + ','.join(
+        name for name in subparsers.choices if name not in RETIRED_MAINTENANCE_COMMANDS
+    ) + '}'
     return parser
 
 
@@ -783,7 +760,18 @@ def main(argv: Sequence[str] | None = None) -> int:
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     if hasattr(sys.stderr, "reconfigure"):
         sys.stderr.reconfigure(encoding="utf-8", errors="replace")
-    args = _parser().parse_args(argv)
+    parser = _parser()
+    args, unknown = parser.parse_known_args(argv)
+    if args.command in RETIRED_MAINTENANCE_COMMANDS:
+        error = RetiredMaintenanceError(args.command)
+        print(json.dumps({
+            'status': 'failed', 'error_type': 'maintenance_operation_retired',
+            'error_code': error.code, 'operation': error.operation,
+            'error': str(error), 'retryable': False,
+        }, ensure_ascii=False), file=sys.stderr)
+        return 1
+    if unknown:
+        parser.error('unrecognized arguments: ' + ' '.join(unknown))
     config_path = args.config.resolve(strict=True)
     project_root = config_path.parents[1]
     config = load_catalog_config(config_path, project_root=project_root)
@@ -894,38 +882,6 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
         elif args.command == "status":
             result = get_catalog().status()
-        elif args.command == "focus-cleanup":
-            cleanup = FocusScopeCleanupService(get_catalog())
-            receipt_path = args.receipt_path
-            snapshot_path = args.snapshot_path
-            if receipt_path is not None and not receipt_path.is_absolute():
-                receipt_path = (project_root / receipt_path).resolve(strict=False)
-            if snapshot_path is not None and not snapshot_path.is_absolute():
-                snapshot_path = (project_root / snapshot_path).resolve(strict=False)
-            if args.apply:
-                if (
-                    not args.confirmation_token
-                    or snapshot_path is None
-                    or receipt_path is None
-                ):
-                    raise ValueError(
-                        "--apply requires --confirmation-token, --snapshot-path, "
-                        "and --receipt-path"
-                    )
-                result = cleanup.apply(
-                    root_id=args.root_id,
-                    relative_prefix=args.relative_prefix,
-                    confirmation_token=args.confirmation_token,
-                    snapshot_path=snapshot_path,
-                    receipt_path=receipt_path,
-                    archive_dir=args.archive_dir,
-                )
-            else:
-                result = cleanup.preview(
-                    root_id=args.root_id,
-                    relative_prefix=args.relative_prefix,
-                    receipt_path=receipt_path,
-                )
         elif args.command == "documents":
             if getattr(args, "document_action", None) == "retire":
                 from .store import retire_document
@@ -1021,21 +977,6 @@ def main(argv: Sequence[str] | None = None) -> int:
             result = ReconcileRetireStateService(get_catalog().config).reconcile(
                 apply=args.apply
             )
-        elif args.command == "archive-retired-evidence":
-            from .archive_retired_evidence import archive_retired_evidence
-
-            result = archive_retired_evidence(
-                config.database_path,
-                project_root / "source_manifests",
-            )
-        elif args.command == "prune-retired-evidence":
-            from .prune_retired_evidence import prune_retired_evidence
-
-            result = prune_retired_evidence(
-                get_catalog().config,
-                project_root / "source_manifests",
-                apply=args.apply,
-            )
         elif args.command == "size-report":
             from .catalog_size_report import catalog_size_report
 
@@ -1052,13 +993,6 @@ def main(argv: Sequence[str] | None = None) -> int:
                 limit=args.limit,
                 offset=args.offset,
                 include_semantic=args.include_semantic,
-            )
-        elif args.command == "duplicate-preview":
-            result = DuplicateCleanupService(get_catalog()).preview(args.location_id)
-        elif args.command == "duplicate-recycle":
-            result = DuplicateCleanupService(get_catalog()).recycle(
-                args.location_id,
-                confirmation_token=args.confirmation_token,
             )
         elif args.command == "resolve":
             from .acquisition_journal import AcquisitionJournal

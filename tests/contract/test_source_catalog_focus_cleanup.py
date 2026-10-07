@@ -315,7 +315,7 @@ def test_focus_cleanup_cli_fails_closed_as_retired(tmp_path: Path, capsys):
     assert not dry_receipt.exists()
     assert catalog.store.fetchone("SELECT count(*) AS n FROM locations")["n"] == before
 
-    # cli.py still enforces its own --apply guard surface (MAIN's write set)
+    # --apply is also retired, without the old permit checks
     exit_code = cli.main(
         [
             "--config",
@@ -330,8 +330,8 @@ def test_focus_cleanup_cli_fails_closed_as_retired(tmp_path: Path, capsys):
     )
     error = json.loads(capsys.readouterr().err)
     assert exit_code == 1
-    assert error["error_type"] == "fatal"
-    assert "requires" in error["error"]
+    assert error["error_type"] == "maintenance_operation_retired"
+    assert error["error_code"] == "MAINTENANCE_OPERATION_RETIRED"
     assert catalog.store.fetchone("SELECT count(*) AS n FROM locations")["n"] == before
 
     # --apply with every guard supplied still fails closed as retired, 0 writes
