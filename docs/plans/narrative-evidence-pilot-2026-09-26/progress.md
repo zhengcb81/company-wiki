@@ -10,6 +10,8 @@
 
 文档收口：三G4文件链接/围栏/交接JSON/最小budget四字段及字符串cost全通过，G4-CWP与MAIN/G3维护源码集0交叉，G4根仍不存在，git diff --check绿。记录12个owner/MAIN未提交保护文件SHA用于正常提交前后核，不stage它们。一次多文件patch的progress句子不是完整行导致原子拒绝，删除不匹配hunk后成功，无部分写入；本次没有执行pytest或生产步骤。正常提交仅本次卡与导航/状态文档。
 
+**发布结果：**14份卡/导航正常commit `12ba61b27068fc3726dfa680cb2cdb75ef33675b`已推origin/master；正常pre-commit跳过不相关代码项、pre-push现成fast contract smoke GREEN，未跳hook，纯文档不新跑长CI。核全部tracked未提交diff与该次pre-commit保存patch字节完全相同，owner配置SHA3609e707保持；新未跟踪测试/五pytest目录未stage/删除，G2-12实施单未混入。初次12文件SHA临时收据放sandbox TEMP，后续调用不可见，不能称完成12个完整字节前后证明；改以实际hook patch/owner SHA/status证明本次提交保护范围，未伪造缺失收据。尚未创建G4工作树或启动harness，目标维持paused。
+
 ## 最新：G2-12新增真实反例与责任修复（2026-10-07）
 
 上一goal turn为进展：G3三个独立包已正式推远端，不重定义总目标。本轮继续MAIN获取线，已核G3白名单不占acquisition/close_gap/CLI/FF。新增5个行为RED、旧13pass，根因为美港/季度错误自然年提示、误配暂存到原件根、清理失败重复成功journal；系统修复后18pass/3.40秒。保留原件，旧CloseGap重复步骤docstring/未调用helper已删除；新测试绿色不等于旧责任与G2联调收口。
