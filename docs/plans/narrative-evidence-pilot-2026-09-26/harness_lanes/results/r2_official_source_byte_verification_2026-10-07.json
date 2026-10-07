@@ -1,0 +1,18 @@
+[
+  {
+    "url": "https://static.cninfo.com.cn/finalpage/2026-03-31/1225062431.PDF",
+    "http_status": 200,
+    "bytes": 9165875,
+    "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+    "expected_prefix_match": true,
+    "raw_written": false
+  },
+  {
+    "url": "https://static.cninfo.com.cn/finalpage/2026-05-15/1225310977.PDF",
+    "http_status": 200,
+    "bytes": 153851,
+    "sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+    "expected_prefix_match": true,
+    "raw_written": false
+  }
+]

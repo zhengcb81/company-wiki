@@ -17,6 +17,7 @@ from pathlib import Path
 
 from .common import _walk_files
 from .interface import NormalizedCandidate
+from ..source_group_scope import SourceRegistrationScope, filing_group_key
 
 
 def enrich_dayu_metadata(path: Path, metadata: dict) -> dict:
@@ -92,12 +93,7 @@ def construct_edgar_url(metadata: dict) -> str | None:
 
 def _group_key(relative: str) -> str:
     """v1 group-key rule: ticker/filings/{filing-id} (+ .rejections)."""
-    parts = Path(relative).parts
-    if len(parts) >= 3 and parts[1] == "filings":
-        if len(parts) >= 4 and parts[2] == ".rejections":
-            return str(Path(*parts[:4]).as_posix())
-        return str(Path(*parts[:3]).as_posix())
-    return relative
+    return filing_group_key(relative)
 
 
 class DayuAdapter:
@@ -106,10 +102,13 @@ class DayuAdapter:
     adapter_id = "dayu_filing_v1"
     version = "1.0.0"
 
-    def enumerate(self, root_path: Path, *, limit: int | None = None) -> list[NormalizedCandidate]:
+    def enumerate(self, root_path: Path, *, limit: int | None = None,
+                  relative_paths: set[str] | None = None, compute_hash: bool = True) -> list[NormalizedCandidate]:
         candidates: list[NormalizedCandidate] = []
         groups: dict[str, list[Path]] = {}
-        for path in sorted(_walk_files(root_path)):
+        paths_to_visit = (_selected_dayu_paths(root_path, relative_paths)
+                          if relative_paths is not None else sorted(_walk_files(root_path)))
+        for path in paths_to_visit:
             groups.setdefault(
                 _group_key(path.relative_to(root_path).as_posix()), []
             ).append(path)
@@ -196,7 +195,7 @@ class DayuAdapter:
                     role = "original_attachment"
                 candidates.append(NormalizedCandidate(
                     relative_path=path.relative_to(root_path).as_posix(),
-                    content_sha256=_sha256_file(path),
+                    content_sha256=_sha256_file(path) if compute_hash else "",
                     group_key=group_key,
                     role=role,
                     normalized=metadata,
@@ -206,8 +205,14 @@ class DayuAdapter:
         return candidates
 
 
+def _selected_dayu_paths(root: Path, paths: set[str]) -> list[Path]:
+    scope = SourceRegistrationScope("dayu", frozenset(paths))
+    return scope.filing_paths(root, _walk_files)
+
+
 def _sha256_file(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    with path.open("rb") as stream:
+        return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
 __all__ = ["DayuAdapter", "construct_edgar_url", "enrich_dayu_metadata"]

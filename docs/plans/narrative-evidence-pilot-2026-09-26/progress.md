@@ -1250,3 +1250,9 @@ aa52cbd82b5f21eea54929cadab520f16a0a9df9正常commit/pre-push绿并推master，�
 新行为10真实RED/6pass；只修分类后迁移仍2RED，调查merge后仅对同原SHA、未声明的other/other成对细化，不覆盖日期、已声明分类或retired状态。责任45pass/4.27秒；实际S05/S06 PDF公共CLI首次/旧other迁移/重扫2pass/7.67秒，原件/生产DB/用户配置及RF日志保护通过。Ruff绿；scanner1.0.1。真实CLI首轮schema与Windows编码错误已修，不计产品RED；先前两个猜测测试文件不存在已按实际责任包读取。没有生产迁移或模型调用。发布/清理仍待完成。
 
 只读追溯S01旧retire原因是legacy sidecar缺source_url（2026-08-01），不是撤回；原sidecar只有market/security/title。须核官方同SHA来源再经restore入口处理，不能全库复活。
+
+## R2 有限来源登记
+
+R1代码66ce046已推master，精确CI37578307854全部步骤绿79秒。准备生产时发现canonical import全根扫描，现按实际效率缺口TDD添加单根relative_paths入口，保留source/metadata完整组，不hash/改未选来源，不执行missing sweep、不冒写根完整扫描水位。company_raw直接列明确原件/sidecar，不走全raw目录。首轮6签名RED及1测试夹具漏raw错误；修fixture后有限行为和契约验证。R1六测试根已恢复absent。官方两PDF流式核SHA完全相同，共9319726B网络读取、0保存，公开元数据准备有真实依据。新增执行细则已先记录。
+
+R2系统性节点：有限登记与全库发现分离，三adapter不重复算SHA，sidecar SHA变更不能绕缓存；AUTO按SQL范围查任务，终态同run不spawn。steady2.0退役六flag/epoch/cohort，保留16条已生效及legacy verified事实，补旧capture且SHA不符/未生效断言不进入。202责任项pass/64.81秒（含两真实融资PDF与配置三provider本地HTTP，不是付费供应商）；全部写集Ruff绿/新模块mypy2绿。14测试根恢复absent，移除121909495B临时副本，不计生产空间收益；生产DB与两配置完整SHA保持。当前代码待提交/精确CI，现场旧canary未迁移，不将R2生产步骤标完成。

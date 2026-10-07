@@ -369,6 +369,44 @@ def _originals(state):
     return {path: path.read_bytes() for path in (state.root / "companies").rglob("*") if path.is_file()}
 
 
+def test_completed_resume_starts_zero_children_and_reads_only_bound_jobs(
+    tmp_path_factory, loopback_model_server,
+):
+    with isolated_batch_directory(tmp_path_factory) as root:
+        state = _prepare(root, loopback_model_server.endpoint, one_source=True)
+        try:
+            first, expected = _invoke(state)
+            assert first.returncode == 0 and expected["status"] == "completed", first.stderr
+            launcher = root / "resume_without_children.py"
+            launcher.write_text('''import sys
+from company_wiki.automation.store import AutomationStore
+from company_wiki.automation.supervisor import AutomationSupervisor
+from company_wiki.automation.narrative_batch_cli import main
+
+original = AutomationStore.list_jobs
+def scoped(self, **kwargs):
+    if not kwargs.get("job_ids") and not kwargs.get("event_ids"):
+        raise AssertionError("batch must not load whole task database")
+    return original(self, **kwargs)
+def forbidden(self):
+    raise AssertionError("completed resume must not start child processes")
+AutomationStore.list_jobs = scoped
+AutomationSupervisor.start = forbidden
+if __name__ == "__main__":
+    raise SystemExit(main(sys.argv[1:]))
+''', encoding="utf-8")
+            originals = _originals(state)
+            resumed, actual = _invoke(state, launcher=launcher)
+            assert resumed.returncode == 0 and actual["status"] == "completed", resumed.stderr
+            assert actual["documents"] == expected["documents"]
+            assert actual["budget"] == expected["budget"]
+            assert len(loopback_model_server.requests) == 1
+            assert_originals_and_foreign_jobs_untouched(state, originals,
+                output=first.stdout + first.stderr + resumed.stdout + resumed.stderr)
+        finally:
+            state.catalog.close()
+
+
 @pytest.mark.parametrize("sparse_metadata", [False, True])
 def test_cli_p2_publishes_two_languages_and_skips_policy_without_model_call(
     tmp_path_factory, loopback_model_server, sparse_metadata

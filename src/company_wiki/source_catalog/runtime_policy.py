@@ -40,6 +40,9 @@ def snapshot_hash(snapshot: dict[str, Any]) -> str:
 
 def resolver_visibility_projection(snapshot: dict[str, Any]) -> dict[str, Any]:
     """Return only the activation fields that affect source resolution."""
+    if snapshot.get("schema_version") == "2.0":
+        return {"reader": "steady", "current_epoch": None,
+                "active_cohorts": (), "legacy_bridge_allowed": True}
     flags = snapshot.get("flags", {})
     return {
         "reader": "v2" if flags.get("v2_resolve_active") else "v1",
@@ -54,6 +57,18 @@ def validate_snapshot(snapshot: dict[str, Any]) -> list[str]:
     problems: list[str] = []
     if not isinstance(snapshot, dict):
         return ["snapshot must be an object"]
+    if snapshot.get("schema_version") == "2.0":
+        allowed = {"schema_version", "mode", "policy_hash", "updated_at", "snapshot_sha256"}
+        if set(snapshot) - allowed:
+            problems.append("steady snapshot cannot contain rollout controls or unknown fields")
+        if snapshot.get("mode") != "steady":
+            problems.append("schema 2.0 mode must be steady")
+        policy_hash = snapshot.get("policy_hash")
+        if not isinstance(policy_hash, str) or len(policy_hash) != 64 or any(c not in _HEX for c in policy_hash):
+            problems.append("policy_hash must be a lowercase SHA-256")
+        if not isinstance(snapshot.get("updated_at"), str) or not snapshot["updated_at"].strip():
+            problems.append("updated_at must be non-empty text")
+        return problems
     if snapshot.get("schema_version") != RUNTIME_POLICY_SCHEMA_VERSION:
         problems.append(
             f"schema_version must be {RUNTIME_POLICY_SCHEMA_VERSION!r} "
@@ -194,13 +209,15 @@ def save_runtime_policy_cas(
                 f"!= expected {str(expected_hash)[:12]}... (concurrent change?)"
             )
     built = build_snapshot(snapshot)
+    if expected_hash == built["snapshot_sha256"]:
+        return built["snapshot_sha256"]
     _atomic_write(target, built)
     return built["snapshot_sha256"]
 
 
 def reader_mode(snapshot: dict[str, Any]) -> str:
     """Return the effective reader: 'v2' only when v2_resolve_active is on."""
-    return "v2" if snapshot.get("flags", {}).get("v2_resolve_active") else "v1"
+    return resolver_visibility_projection(snapshot)["reader"]
 
 
 __all__ = [

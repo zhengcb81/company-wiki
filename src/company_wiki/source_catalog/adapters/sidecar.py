@@ -17,6 +17,7 @@ import re
 from pathlib import Path
 
 from .interface import NormalizedCandidate
+from ..source_group_scope import SourceRegistrationScope
 
 SIDECAR_SCHEMA_VERSION = "1.0"
 #: The legacy metadata CONTAINERS.  FC-502: the sidecar adapter builds its normalized output
@@ -40,10 +41,13 @@ class SidecarFilingAdapter:
         self._suffix = sidecar_suffix
 
     def enumerate(
-        self, root_path: Path, *, limit: int | None = None
+        self, root_path: Path, *, limit: int | None = None,
+        relative_paths: set[str] | None = None, compute_hash: bool = True
     ) -> list[NormalizedCandidate]:
         candidates: list[NormalizedCandidate] = []
-        for path in sorted(root_path.rglob("*")):
+        paths = (SourceRegistrationScope(self.adapter_id, frozenset(relative_paths)).paired_paths(root_path, self._suffix)
+                 if relative_paths is not None else sorted(root_path.rglob("*")))
+        for path in paths:
             if not path.is_file():
                 continue
             if path.name.endswith(self._suffix):
@@ -53,7 +57,7 @@ class SidecarFilingAdapter:
                 candidates.append(
                     NormalizedCandidate(
                         relative_path=path.relative_to(root_path).as_posix(),
-                        content_sha256=_sha256_file(path),
+                        content_sha256=_sha256_file(path) if compute_hash else "",
                         group_key=path.relative_to(root_path).as_posix(),
                         role="original_primary",
                         normalized={},
@@ -62,12 +66,12 @@ class SidecarFilingAdapter:
                 )
                 continue
             sidecar_payload = _parse_sidecar(sidecar)
-            problems = _validate_sidecar(sidecar_payload, path)
+            problems = _validate_sidecar(sidecar_payload, path, verify_hash=compute_hash)
             role = "original_primary" if not problems else "indexed_only"
             candidates.append(
                 NormalizedCandidate(
                     relative_path=path.relative_to(root_path).as_posix(),
-                    content_sha256=_sha256_file(path),
+                    content_sha256=_sha256_file(path) if compute_hash else "",
                     group_key=path.relative_to(root_path).as_posix(),
                     role=role,
                     normalized=_normalized_from_sidecar(sidecar_payload, path),
@@ -87,7 +91,7 @@ def _parse_sidecar(path: Path) -> dict:
     return payload if isinstance(payload, dict) else {"_parse_error": True}
 
 
-def _validate_sidecar(payload: dict, primary: Path) -> list[str]:
+def _validate_sidecar(payload: dict, primary: Path, *, verify_hash: bool = True) -> list[str]:
     """Return remediation reasons; [] = complete sidecar."""
     problems: list[str] = []
     if payload.get("_parse_error"):
@@ -105,7 +109,7 @@ def _validate_sidecar(payload: dict, primary: Path) -> list[str]:
             problems.append(f"missing_provenance:{field}")
     # DBX-03: the declared content hash must match the primary file bytes
     declared = payload.get("content_sha256")
-    if declared:
+    if declared and verify_hash:
         actual = _sha256_file(primary)
         if declared != actual:
             problems.append("content_hash_mismatch")
@@ -211,4 +215,5 @@ def _normalized_from_sidecar(payload: dict, primary: Path) -> dict:
 
 
 def _sha256_file(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    with path.open("rb") as stream:
+        return hashlib.file_digest(stream, "sha256").hexdigest()

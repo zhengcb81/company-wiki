@@ -174,6 +174,14 @@ class SourceCatalog:
                 v2_scan_shadow=v2_scan_shadow,
             )
 
+    def register_sources(self, *, root_id: str, relative_paths: set[str]) -> ScanReport:
+        """Register explicit groups without full-root discovery or reconciliation."""
+        from .registration_scope import SourceRegistrationScope, register_catalog_sources
+
+        scope = SourceRegistrationScope(root_id, frozenset(relative_paths))
+        with CatalogOperationLock(self.config.catalog_dir, operation="source_registration"):
+            return register_catalog_sources(self.config, self.store, scope)
+
     def backfill_text_fingerprints(
         self,
         *,

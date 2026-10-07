@@ -47,7 +47,7 @@ def test_real_financing_pdf_rescans_keep_raw_and_source_identity(
     env = {**os.environ, "PYTHONPATH": os.pathsep.join((str(REPO / "src"), str(REPO / "scripts"))),
            "PYTHONDONTWRITEBYTECODE": "1", "PYTHONUTF8": "1"}
     argv = [sys.executable, "-B", "-m", "company_wiki.source_catalog.cli", "--config", str(config),
-            "scan", "--root-id", "company_raw"]
+            "register", "--root-id", "company_raw", "--relative-path", target.relative_to(tmp_path / "companies").as_posix()]
     database = tmp_path / ".source_catalog/catalog.sqlite3"
     identity = ("urn:company-wiki:document:sha256:" + sample["sha256"],
                 "urn:company-wiki:source:sha256:" + sample["sha256"])

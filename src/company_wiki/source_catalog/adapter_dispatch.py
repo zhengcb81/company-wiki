@@ -81,6 +81,7 @@ def scan_root_via_adapter(
     company_names: tuple[str, ...],
     *,
     progress: Any = None,
+    relative_paths: set[str] | None = None,
 ) -> list[Any]:
     """Run the root's registered adapter and return scanner candidates.
 
@@ -90,7 +91,9 @@ def scan_root_via_adapter(
     path is unchanged.
     """
     adapter = adapter_for(root)
-    candidates = adapter.enumerate(root.path)
+    # Discovery is layout/metadata work. The scanner owns manifest byte
+    # verification; adapter digests were discarded here and caused double I/O.
+    candidates = adapter.enumerate(root.path, relative_paths=relative_paths, compute_hash=False)
     converted = []
     for item in candidates:
         if not isinstance(item, NormalizedCandidate):

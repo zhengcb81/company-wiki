@@ -271,8 +271,7 @@ def _run_owned(request, catalog, project_root, config_path, db_path, work_dir, *
     gate = store.read_runtime_gate()
     if gate.desired_state is RuntimeState.ENABLED and previous is None:
         raise ValueError("AUTOMATION_RUNTIME_ALREADY_ENABLED")
-    if previous is not None and any(job.status is JobStatus.RUNNING and job.job_id not in previous.job_ids
-                                    for job in store.list_jobs()):
+    if previous is not None and store.has_running_jobs_outside_scope(previous.job_ids):
         raise ValueError("AUTOMATION_FOREIGN_WORKER_ACTIVE")
     status = "partial"
     generation = None
@@ -297,7 +296,7 @@ def _run_owned(request, catalog, project_root, config_path, db_path, work_dir, *
                     event.input_hash, event.payload_json, event.policy_version, event.subject_id):
                 raise RunConflictError("batch event changed")
             scheduler.materialize_event(stored)
-        job_ids = tuple(job.job_id for job in store.list_jobs() if job.created_from_event_id in event_ids)
+        job_ids = tuple(job.job_id for job in store.list_jobs(event_ids=tuple(event_ids)))
         run = runs.create_run(run_id=request.run_id, input_hash=binding.input_hash, job_ids=job_ids,
             model_id=request.model_options["model_id"], prompt_version=NARRATIVE_PROMPT_VERSION,
             pricing_version=request.pricing_version,
@@ -324,7 +323,12 @@ def _run_owned(request, catalog, project_root, config_path, db_path, work_dir, *
                 generation = runs.activate_run(
                     request.run_id, expected_generation=current.control_generation, updated_at=_now(),
                 ).control_generation
-        if not run.blocked and time.monotonic() < deadline:
+        terminal = {JobStatus.SUCCEEDED, JobStatus.DEAD_LETTER, JobStatus.BLOCKED_HUMAN, JobStatus.CANCELLED}
+        current_jobs = store.list_jobs(job_ids=run.job_ids)
+        if len(current_jobs) != len(run.job_ids):
+            raise RunConflictError("batch run job disappeared")
+        needs_workers = any(job.status not in terminal for job in current_jobs)
+        if not run.blocked and needs_workers and time.monotonic() < deadline:
             supervisor.start()
         while time.monotonic() < deadline:
             current_gate = store.read_runtime_gate()
@@ -349,11 +353,10 @@ def _run_owned(request, catalog, project_root, config_path, db_path, work_dir, *
                 lease_until=(datetime.now(timezone.utc) + timedelta(seconds=30)).strftime("%Y-%m-%dT%H:%M:%SZ"),
                 expected_generation=generation)
             dispatcher.reconcile_prepared(activated_at=now)
-            read_jobs = tuple(store.get_job(job_id) for job_id in run.job_ids)
-            if any(job is None for job in read_jobs):
+            jobs = store.list_jobs(job_ids=run.job_ids)
+            if len(jobs) != len(run.job_ids):
                 raise RunConflictError("batch run job disappeared")
-            jobs = tuple(job for job in read_jobs if job is not None)
-            if all(job.status in {JobStatus.SUCCEEDED, JobStatus.DEAD_LETTER, JobStatus.BLOCKED_HUMAN, JobStatus.CANCELLED} for job in jobs):
+            if all(job.status in terminal for job in jobs):
                 status = "completed" if all(job.status is JobStatus.SUCCEEDED for job in jobs) else "failed"
                 if any(job.last_error_code == "MODEL_BUDGET_DENIED" for job in jobs):
                     status = "budget_exhausted"
@@ -394,7 +397,7 @@ def _run_owned(request, catalog, project_root, config_path, db_path, work_dir, *
 
 def _final_documents(request, binding, store, runs, artifacts):
     documents = []
-    all_jobs = store.list_jobs()
+    all_jobs = store.list_jobs(event_ids=tuple(event.event_id for event in binding.events))
     for event in binding.events:
         ref = SourceRevisionEventPayload.from_dict(json.loads(event.payload_json)).source_ref
         jobs = tuple(job for job in all_jobs if job.created_from_event_id == event.event_id)

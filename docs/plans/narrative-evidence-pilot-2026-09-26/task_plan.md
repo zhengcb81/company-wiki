@@ -108,12 +108,12 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 | 阶段 | 状态 | 下一责任 |
 |---|---|---|
 | R0完整对账 | complete | 已确认真实生产metadata/分类/ET登记缺口；已完成核心不重做 |
-| R1融资文档正式分类 | in_progress | Unit先RED→scanner最小实现→隔离扫描/幂等责任节点 |
-| R2真实生产来源/预算准备 | pending | 核公开日/retired原因/ET导入，生成可恢复真实请求，不猜metadata |
+| R1融资文档正式分类 | complete | 66ce0467已发布，真实两PDF CLI与分类责任包绿，精确CI37578307854绿 |
+| R2真实生产来源/预算准备 | in_progress | 系统性分离全库发现/有限登记/AUTO范围；清理旧canary遗留，核公开日/retired/ET，不猜metadata |
 | R3正式生产与跨仓消费 | pending | 有价值final+零模型skip、真实ref/search/exact/消费者/同run恢复/空间 |
 | R4原件去重决策 | pending | 只核CWP内部真实收益，原件不丢、外部根不动 |
 | R5PWF与发布收口 | pending | 历史Git、简化当前入口、正常并线/push/精确CI |
 
 ## Next Step
 
-先完成R1融资文档分类TDD。生产S05/S06仍other，核心分类映射未落地；不重派已交卡、不改模型预算或原件。之后R2准备真实生产来源及完整请求预算，必要增量在具体请求可审查后询问。目标active，全部R阶段完成前不关闭。
+执行[R2系统性效率细则](r2_systemic_efficiency_implementation_2026-10-07.md)：有限登记与适配器重复SHA已修复；继续AUTO范围查询/终态恢复、旧canary统一退役及生产来源准备，再集中验收发布。生产S05/S06分类仍待有限登记；不重派已交卡、不改模型配置或原件。具体真实请求预算不足时一次说明必要增量。目标active，全部R阶段完成前不关闭。

@@ -166,6 +166,12 @@ def _parser() -> argparse.ArgumentParser:
     scan.add_argument(
         "--root-id", action="append", help="scan only this configured root; repeatable"
     )
+    register = subparsers.add_parser("register", help="register explicit source groups without root discovery")
+    register.add_argument("--root-id", required=True)
+    register.add_argument(
+        "--relative-path", action="append",
+        required=True, help="source group within --root-id; repeatable; no missing sweep",
+    )
 
     fingerprint_backfill = subparsers.add_parser(
         "fingerprint-backfill",
@@ -575,7 +581,7 @@ def _parser() -> argparse.ArgumentParser:
         "--file",
         type=Path,
         required=True,
-        help="path to a snapshot payload JSON (schema 1.0; snapshot_sha256 optional)",
+        help="path to policy JSON (steady schema 2.0 or historical 1.0; snapshot_sha256 optional)",
     )
     return parser
 
@@ -868,6 +874,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             result: Any = get_catalog().scan(
                 dry_run=args.dry_run,
                 root_ids=set(args.root_id) if args.root_id else None,
+            )
+        elif args.command == "register":
+            result = get_catalog().register_sources(
+                root_id=args.root_id, relative_paths=set(args.relative_path),
             )
         elif args.command == "fingerprint-backfill":
             result = get_catalog().backfill_text_fingerprints(limit=args.limit)

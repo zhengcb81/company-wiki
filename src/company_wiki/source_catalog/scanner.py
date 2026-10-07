@@ -36,6 +36,7 @@ from .adapters.common import (
 )
 from .models import CatalogConfig, DOCUMENT_EXTENSIONS, SCANNER_VERSION, RootSpec, ScanReport
 from .store import CatalogStore, canonical_json, metadata_object, metadata_state
+from .registration_scope import SourceRegistrationScope, existing_group_locations
 
 
 _DATE_RE = re.compile(r"(?<!\d)(20\d{2})[-_.年](0[1-9]|1[0-2]|[1-9])[-_.月](0[1-9]|[12]\d|3[01]|[1-9])")
@@ -66,7 +67,6 @@ class _ObservedFile:
     reused: bool
     error: str | None
     known_error: bool = False
-
 
 def _utc_now() -> str:
     return datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
@@ -296,16 +296,22 @@ def _scan_root_v1(
     progress: Callable[..., None] | None = None,
     master_identity: dict[str, tuple[str, str]] | None = None,
     portfolio_urls: dict[str, str] | None = None,
+    relative_paths: set[str] | None = None,
 ) -> tuple[list[_Candidate], int, int]:
     candidates: list[_Candidate] = []
     excluded = 0
     policy_excluded = 0
     if root.kind == "company_raw":
         companies = sorted(
-            (item for item in root.path.iterdir() if item.is_dir()),
+            ({root.path / value.split("/", 1)[0] for value in relative_paths}
+             if relative_paths is not None else {item for item in root.path.iterdir() if item.is_dir()}),
             key=lambda item: item.name,
         )
         for company_index, company in enumerate(companies, start=1):
+            if relative_paths is not None and not any(
+                value.startswith(company.name + "/raw/") for value in relative_paths
+            ):
+                continue
             raw = company / "raw"
             if not raw.is_dir():
                 continue
@@ -316,7 +322,9 @@ def _scan_root_v1(
                     total=len(companies),
                     detail=f"enumerating root {root.root_id}",
                 )
-            paths = sorted(_walk_files(raw))
+            paths = (SourceRegistrationScope(root.root_id, frozenset(relative_paths)).company_paths(
+                root.path, company.name, _ACQUISITION_SIDECAR_SUFFIX)
+                     if relative_paths is not None else sorted(_walk_files(raw)))
             sidecars = {
                 str(path)[: -len(_ACQUISITION_SIDECAR_SUFFIX)]: path
                 for path in paths
@@ -395,8 +403,10 @@ def _scan_root_v1(
                     )
                 )
     elif root.kind == "directory":
+        entries = (SourceRegistrationScope(root.root_id, frozenset(relative_paths)).directory_entries(
+            root.path, _ACQUISITION_SIDECAR_SUFFIX) if relative_paths is not None else os.walk(root.path))
         for directory_index, (current, directories, files) in enumerate(
-            os.walk(root.path),
+            entries,
             start=1,
         ):
             directories[:] = [name for name in directories if name not in _SKIP_DIRS]
@@ -525,7 +535,9 @@ def _scan_root_v1(
                     policy_excluded += 1
     else:
         raw_groups: dict[str, list[Path]] = defaultdict(list)
-        for file_index, path in enumerate(_walk_files(root.path), start=1):
+        paths_to_visit = (SourceRegistrationScope(root.root_id, frozenset(relative_paths)).filing_paths(
+            root.path, _walk_files) if relative_paths is not None else _walk_files(root.path))
+        for file_index, path in enumerate(paths_to_visit, start=1):
             if progress is not None and file_index % 100 == 1:
                 progress(
                     current_path=str(path.resolve(strict=False)),
@@ -698,7 +710,11 @@ def _observe_file(
                 manifest = SourceManifest.from_dict(manifest_payload)
             except (KeyError, TypeError, ValueError):
                 manifest = None
-            if manifest is not None:
+            if manifest is not None and (
+                candidate.role != "original_primary"
+                or not candidate.group_metadata.get("content_sha256")
+                or manifest.content_sha256 == candidate.group_metadata["content_sha256"]
+            ):
                 return _ObservedFile(
                     candidate,
                     manifest.source_id,
@@ -826,6 +842,7 @@ def _scan_catalog_impl(
     *,
     dry_run: bool = False,
     root_ids: set[str] | None = None,
+    relative_paths: set[str] | None = None,
     progress: Callable[..., None] | None = None,
     v2_scan_shadow: bool = False,
     run_id: str | None = None,
@@ -849,7 +866,7 @@ def _scan_catalog_impl(
             _begin_scan_run(store, run_id, scan_time)
 
     master_identity = _load_security_master_identity(config.catalog_dir)
-    portfolio_urls = _load_dayu_portfolio_urls(config)
+    portfolio_urls = {} if relative_paths is not None else _load_dayu_portfolio_urls(config)
     strategies: list[tuple[str, str]] = []
     for root in selected_roots:
         if not root.path.is_dir():
@@ -882,6 +899,7 @@ def _scan_catalog_impl(
                 master_identity=master_identity,
                 portfolio_urls=portfolio_urls,
                 v2_scan_shadow=use_adapter,
+                **({"relative_paths": relative_paths} if relative_paths is not None else {}),
             )
         except ScannerFacadeError as exc:
             # B.VR-ba1 F-BA1-04 (P2): now that an adapter-declared root ALWAYS dispatches
@@ -902,6 +920,8 @@ def _scan_catalog_impl(
                     }
                 )
             continue
+        if relative_paths is not None:
+            candidates = SourceRegistrationScope(root.root_id, frozenset(relative_paths)).select_groups(candidates)
         files_seen += len(candidates)
         files_excluded += excluded
         policy_excluded += policy_count
@@ -912,21 +932,19 @@ def _scan_catalog_impl(
                 """INSERT INTO roots(root_id,path,kind,priority,last_scan_run,last_scanned_at)
                 VALUES(?,?,?,?,?,?) ON CONFLICT(root_id) DO UPDATE SET
                 path=excluded.path,kind=excluded.kind,priority=excluded.priority,
-                last_scan_run=excluded.last_scan_run,last_scanned_at=excluded.last_scanned_at""",
-                (root.root_id, str(root.path.resolve()), root.kind, root.priority, run_id, scan_time),
+                last_scan_run=excluded.last_scan_run,last_scanned_at=excluded.last_scanned_at
+                WHERE ?""",
+                (root.root_id, str(root.path.resolve()), root.kind, root.priority,
+                 run_id if relative_paths is None else None,
+                 scan_time if relative_paths is None else None, relative_paths is None),
             )
         groups: dict[str, list[_Candidate]] = defaultdict(list)
         for candidate in candidates:
             groups[candidate.group_key].append(candidate)
-        existing_locations = {
-            row["relative_path"]: row
-            for row in store.fetchall(
-                """SELECT relative_path,source_id,document_id,observed_size,observed_mtime_ns,
-                manifest_json,location_status,error
-                FROM locations WHERE root_id=?""",
-                (root.root_id,),
-            )
-        }
+        existing_locations = existing_group_locations(
+            store, root.root_id,
+            {item.relative_path for item in candidates} if relative_paths is not None else None,
+        )
         group_items = sorted(
             groups.items(),
             key=lambda item: (
@@ -1186,11 +1204,12 @@ def _scan_catalog_impl(
                         "DELETE FROM documents WHERE document_id=?",
                         (obsolete_document_id,),
                     )
-        with store.transaction() as connection:
-            connection.execute(
-                "UPDATE locations SET location_status='missing' WHERE root_id=? AND last_seen_run<>? AND location_status<>'missing'",
-                (root.root_id, run_id),
-            )
+        if relative_paths is None:
+            with store.transaction() as connection:
+                connection.execute(
+                    "UPDATE locations SET location_status='missing' WHERE root_id=? AND last_seen_run<>? AND location_status<>'missing'",
+                    (root.root_id, run_id),
+                )
 
     if dry_run:
         return ScanReport(
@@ -2008,10 +2027,15 @@ def scan_catalog(
     *,
     dry_run: bool = False,
     root_ids: set[str] | None = None,
+    relative_paths: set[str] | None = None,
     progress: Callable[..., None] | None = None,
     v2_scan_shadow: bool = False,
     zero_diff_rounds: int | None = None,
 ) -> ScanReport:
+    if relative_paths is not None:
+        if not root_ids or len(root_ids) != 1:
+            raise ValueError("registration requires exactly one root_id")
+        SourceRegistrationScope(next(iter(root_ids)), frozenset(relative_paths))
     if dry_run and v2_scan_shadow:
         # FC-305: production dry shadow with v2 requires the two-round
         # zero-diff gate.  The caller records one entry per shadow round;
@@ -2028,6 +2052,7 @@ def scan_catalog(
             store,
             dry_run=True,
             root_ids=root_ids,
+            relative_paths=relative_paths,
             progress=progress,
             v2_scan_shadow=v2_scan_shadow,
         )
@@ -2044,6 +2069,7 @@ def scan_catalog(
                 store,
                 dry_run=False,
                 root_ids=root_ids,
+                relative_paths=relative_paths,
                 progress=progress,
                 v2_scan_shadow=v2_scan_shadow,
                 run_id=run_id,
@@ -2071,6 +2097,7 @@ def scan_root_strategy(
     master_identity: dict[str, tuple[str, str]] | None = None,
     portfolio_urls: dict[str, str] | None = None,
     v2_scan_shadow: bool = False,
+    relative_paths: set[str] | None = None,
 ) -> tuple[list[_Candidate], int, int]:
     """WU-500 + FC-302: scanner facade seam.  Default = v1 with identical
     behavior; v2 shadow dispatches through the registered adapter
@@ -2080,7 +2107,8 @@ def scan_root_strategy(
         from .adapter_dispatch import AdapterDispatchError, scan_root_via_adapter
 
         try:
-            candidates = scan_root_via_adapter(root, company_names, progress=progress)
+            candidates = scan_root_via_adapter(root, company_names, progress=progress,
+                **({"relative_paths": relative_paths} if relative_paths is not None else {}))
         except AdapterDispatchError as exc:
             raise ScannerFacadeError(f"v2 scanner unavailable (fail closed): {exc}")
         except Exception as exc:  # adapter runtime failure -> fail closed, no v1 fallback
@@ -2095,4 +2123,5 @@ def scan_root_strategy(
         progress=progress,
         master_identity=master_identity,
         portfolio_urls=portfolio_urls,
+        **({"relative_paths": relative_paths} if relative_paths is not None else {}),
     )

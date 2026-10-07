@@ -111,6 +111,8 @@ def _visibility_sql(
     """
     if reader == "v1":
         return "visibility_state='legacy'", ()
+    if reader == "steady":
+        return "visibility_state IN ('legacy','active')", ()
     if reader == "v2":
         if not current_epoch or not active_cohorts:
             return "1=0", ()  # fail closed

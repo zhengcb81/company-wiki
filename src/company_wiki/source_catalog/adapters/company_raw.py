@@ -18,6 +18,7 @@ from .common import (
     _walk_files,
 )
 from .interface import NormalizedCandidate
+from ..source_group_scope import SourceRegistrationScope
 
 
 class CompanyRawAdapter:
@@ -29,16 +30,20 @@ class CompanyRawAdapter:
     def __init__(self, *, portfolio_urls: dict[str, str] | None = None):
         self._portfolio_urls = portfolio_urls or {}
 
-    def enumerate(self, root_path: Path, *, limit: int | None = None) -> list[NormalizedCandidate]:
+    def enumerate(self, root_path: Path, *, limit: int | None = None,
+                  relative_paths: set[str] | None = None, compute_hash: bool = True) -> list[NormalizedCandidate]:
         candidates: list[NormalizedCandidate] = []
         for company in sorted(
-            (item for item in root_path.iterdir() if item.is_dir()),
+            ({root_path / value.split("/", 1)[0] for value in relative_paths}
+             if relative_paths is not None else {item for item in root_path.iterdir() if item.is_dir()}),
             key=lambda item: item.name,
         ):
             raw = company / "raw"
             if not raw.is_dir():
                 continue
-            paths = sorted(_walk_files(raw))
+            paths = (SourceRegistrationScope(self.adapter_id, frozenset(relative_paths)).company_paths(
+                root_path, company.name, _ACQUISITION_SIDECAR_SUFFIX)
+                if relative_paths is not None else sorted(_walk_files(raw)))
             sidecars = {
                 str(path)[: -len(_ACQUISITION_SIDECAR_SUFFIX)]: path
                 for path in paths
@@ -73,7 +78,7 @@ class CompanyRawAdapter:
                     metadata["security_id"] = str(metadata["ticker"])
                 candidates.append(NormalizedCandidate(
                     relative_path=relative,
-                    content_sha256=_sha256_file(path),
+                    content_sha256=_sha256_file(path) if compute_hash else "",
                     group_key=relative,
                     role="original_primary",
                     normalized=metadata,
@@ -83,7 +88,7 @@ class CompanyRawAdapter:
                 if sidecar is not None:
                     candidates.append(NormalizedCandidate(
                         relative_path=_relative(sidecar, root_path),
-                        content_sha256=_sha256_file(sidecar),
+                        content_sha256=_sha256_file(sidecar) if compute_hash else "",
                         group_key=relative,
                         role="metadata",
                         normalized=metadata,
@@ -95,7 +100,7 @@ class CompanyRawAdapter:
                 relative = _relative(sidecar, root_path)
                 candidates.append(NormalizedCandidate(
                     relative_path=relative,
-                    content_sha256=_sha256_file(sidecar),
+                    content_sha256=_sha256_file(sidecar) if compute_hash else "",
                     group_key=relative[: -len(_ACQUISITION_SIDECAR_SUFFIX)],
                     role="metadata",
                     normalized=_load_acquisition_metadata(sidecar),
@@ -106,4 +111,5 @@ class CompanyRawAdapter:
 
 
 def _sha256_file(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    with path.open("rb") as stream:
+        return hashlib.file_digest(stream, "sha256").hexdigest()

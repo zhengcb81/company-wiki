@@ -1206,6 +1206,9 @@ def _source_metadata(
                 active_cohorts=active_cohorts,
             )
             if v2:
+                if reader == "steady":
+                    capture = _source_metadata(document, legacy_bridge_allowed=True)
+                    return {**capture, **v2}
                 return v2
     if not legacy_bridge_allowed:
         return {}
@@ -2202,6 +2205,9 @@ def _v2_assertion_metadata(
     if reader == "v1":
         visibility = "visibility_state='legacy'"
         params: tuple[Any, ...] = (source_id,)
+    elif reader == "steady":
+        visibility = "visibility_state IN ('active','legacy')"
+        params = (source_id,)
     elif reader == "v2":
         if not current_epoch or not active_cohorts:
             return None  # fail closed: epoch/cohort must be pinned
@@ -2213,12 +2219,19 @@ def _v2_assertion_metadata(
         params = (source_id, current_epoch, *active_cohorts)
     else:
         raise ValueError(f"unknown reader {reader!r}")
+    extra_columns = ", period_end, language, published_at, entity" if reader == "steady" else ""
+    hash_match = (
+        " AND content_sha256=(SELECT content_sha256 FROM sources WHERE sources.source_id=?)"
+        if reader == "steady" else ""
+    )
+    if reader == "steady":
+        params = (*params, source_id)
     row = store.fetchone(
         f"""SELECT evidence_json, fiscal_year, fiscal_period, document_kind,
                   form_type, provider, provider_document_id, source_url,
-                  security_id, market, content_sha256
+                  security_id, market, content_sha256 {extra_columns}
            FROM source_metadata_assertions
-           WHERE source_id=? AND decision='verified' AND {visibility}
+           WHERE source_id=? AND decision='verified' AND {visibility} {hash_match}
            ORDER BY created_at DESC LIMIT 1""",
         params,
     )
@@ -2241,4 +2254,7 @@ def _v2_assertion_metadata(
         "content_sha256": row["content_sha256"],
         "evidence": evidence,
     }
+    if reader == "steady":
+        metadata.update({"period_end": row["period_end"], "language": row["language"],
+                         "published_at": row["published_at"], "display_name": row["entity"]})
     return {k: v for k, v in metadata.items() if v is not None}

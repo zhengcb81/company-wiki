@@ -986,20 +986,47 @@ class AutomationStore:
         finally:
             conn.close()
 
-    def list_jobs(self, *, status: JobStatus | None = None) -> tuple[Job, ...]:
+    def list_jobs(
+        self, *, status: JobStatus | None = None,
+        job_ids: tuple[str, ...] | None = None,
+        event_ids: tuple[str, ...] | None = None,
+    ) -> tuple[Job, ...]:
+        """Select finite scopes in SQL; explicit empty scopes select nothing."""
+        if job_ids == () or event_ids == ():
+            return ()
+        clauses: list[str] = []
+        params: list[str] = []
+        if status is not None:
+            clauses.append("status = ?")
+            params.append(status.value)
+        for column, scope in (("job_id", job_ids), ("created_from_event_id", event_ids)):
+            if scope is not None:
+                values = tuple(sorted(set(scope)))
+                clauses.append(f"{column} IN ({','.join('?' for _ in values)})")
+                params.extend(values)
         conn = self._connect()
         try:
             base = f"SELECT {_JOB_COLS} FROM jobs"
-            if status is not None:
-                rows = conn.execute(
-                    base + " WHERE status = ? ORDER BY priority DESC, created_at ASC, job_id ASC",
-                    (status.value,),
-                ).fetchall()
-            else:
-                rows = conn.execute(
-                    base + " ORDER BY priority DESC, created_at ASC, job_id ASC"
-                ).fetchall()
+            if clauses:
+                base += " WHERE " + " AND ".join(clauses)
+            rows = conn.execute(
+                base + " ORDER BY priority DESC, created_at ASC, job_id ASC", params,
+            ).fetchall()
             return tuple(_job_from_row(r) for r in rows)
+        finally:
+            conn.close()
+
+    def has_running_jobs_outside_scope(self, job_ids: tuple[str, ...]) -> bool:
+        """Detect a foreign active worker without loading its job payload."""
+        params = [JobStatus.RUNNING.value]
+        query = "SELECT 1 FROM jobs WHERE status = ?"
+        values = tuple(sorted(set(job_ids)))
+        if values:
+            query += f" AND job_id NOT IN ({','.join('?' for _ in values)})"
+            params.extend(values)
+        conn = self._connect()
+        try:
+            return conn.execute(query + " LIMIT 1", params).fetchone() is not None
         finally:
             conn.close()
 

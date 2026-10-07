@@ -82,3 +82,21 @@ python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml ex
 `worker-status`、`worker-stop`、`startup-status`、`uninstall-startup` 仅用于检查和收尾既存旧进程/任务，不启动新常驻转换。旧全文generators已退出生产安装包；历史夹具只在tests/support准备，不能从生产代码恢复旧writer。
 
 RF默认SourceRef v2迁移、CWP旧正文读者退出及质量语义已经完成。生产`.source_catalog/derived`的7104文件已清零、1490530旧span已删除，8191旧handle退休；来源库约222MB，原件及17表来源事实保持。见[正式结果](plans/narrative-evidence-pilot-2026-09-26/harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json)。不要求把所有历史来源重新跑一次模型，N4C真实批次仍按主计划推进。
+
+### 只登记指定原文
+
+新增原件或修补已核实的来源元数据时，使用单根有限登记。它保留所选文件整个来源/sidecar组，只查询所选位置，不遍历外根，不将未选文件标missing，也不推进完整扫描水位。relative-path使用根内正斜线相对路径；不接受空范围或越界路径。完整根盘点仍使用原scan。
+
+```powershell
+python -B -m company_wiki.source_catalog.cli --config config/source_catalog.yaml register --root-id company_raw --relative-path "公司名/raw/文件.pdf"
+```
+
+canonical import自动使用此入口；消费者仍仅使用SourceRef，不操作物理路径。
+
+### 结束历史灰度切换
+
+当前来源库使用runtime-policy schema 2.0 `steady`：仅保存`schema_version`、`mode`、根配置`policy_hash`、`updated_at`和自身`snapshot_sha256`，没有六个灰度flag、epoch/cohort权限条件。用既有`runtime-policy apply --file <payload.json>`原子CAS迁移；原始assertion/location/activation审计不删除，配置hash与字节SHA复核仍保留。
+
+steady读取已生效的active/legacy verified断言（hash须匹配当前来源），排除shadow/candidate/rejected。已验证断言字段优先，旧capture只补缺项；原件不因缺人工审查而不可读。历史schema 1.0仍可解释旧迁移测试/记录，生产不再以它控制新流程。
+
+有限叙述批次在AUTO SQL层按event/job IDs查询；已完成的同run恢复验证原文/产物和费用，但不启动子进程或重发模型请求。一个文档的发现、登记与读取不触发全库盘点。

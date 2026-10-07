@@ -1,0 +1,61 @@
+{
+  "schema_version": "r2-systemic-efficiency-acceptance/1",
+  "date": "2026-10-07",
+  "status": "local_green_publication_pending",
+  "node": {
+    "passed": 202,
+    "seconds": 64.81,
+    "responsibilities": [
+      "finite SQL/location discovery",
+      "canonical source import and dedup",
+      "configured adapter single authoritative hash",
+      "sidecar hash mismatch including cache reuse",
+      "two actual financing PDFs via register CLI",
+      "steady policy with active/legacy verified SHA-bound assertions",
+      "no shadow/candidate/rejected override",
+      "existing source read pins and current bytes",
+      "scoped AUTO SQL queries",
+      "completed resume zero child starts and zero extra model calls",
+      "configured three-provider loopback workers",
+      "P2 two-language summaries and zero-model procedural skip"
+    ]
+  },
+  "ruff": "all_changed_python_green",
+  "mypy": "2_new_layer_modules_green",
+  "tdd": {
+    "auto_real_red": 4,
+    "steady_real_red": 5,
+    "sidecar_reuse_real_red": 1,
+    "fixture_errors_corrected": [
+      "import test-module under importlib",
+      "VerifiedContent data field"
+    ]
+  },
+  "protected_unchanged": {
+    "config/source_catalog.yaml": true,
+    "config/source_acquisition.yaml": true,
+    ".source_catalog/catalog.sqlite3": true
+  },
+  "paid_provider_posts": 0,
+  "production_migration": "pending, old canary still present until exact code CI",
+  "cleanup": {
+    "test_roots_absent": [
+      "r2-system",
+      "r2-adapter-red",
+      "r2-adapter-green",
+      "r2-node",
+      "r2-reuse-red",
+      "r2-reuse-green",
+      "r2-auto-red",
+      "r2-auto-red2",
+      "r2-auto-green",
+      "r2-policy-red",
+      "r2-policy-green",
+      "r2-policy-green2",
+      "r2-policy-node",
+      "r2-main-node"
+    ],
+    "production_space_saving": 0,
+    "removed_logical_test_bytes": 121909495
+  }
+}

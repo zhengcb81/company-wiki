@@ -1,6 +1,6 @@
 {
   "schema_version": "r1-financing-scanner-acceptance/1",
-  "status": "local_green_publication_pending",
+  "status": "published_exact_ci_green",
   "scanner_version": "1.0.1",
   "classification_and_refinement_red": {
     "failed": 10,
@@ -53,5 +53,7 @@
     ],
     "removed_logical_test_bytes": 30525858,
     "production_space_saving": 0
-  }
+  },
+  "code_sha": "66ce0467b337bcde6cf25f3f4c73e6d2a6c18ab4",
+  "ci_run_id": 37578307854
 }

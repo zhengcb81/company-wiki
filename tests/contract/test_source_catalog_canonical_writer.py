@@ -459,12 +459,12 @@ def test_ensure_service_records_download_and_later_zero_call_reuse(tmp_path):
     assert "reused_before_download" in attempts_csv
 
 
-def test_writer_post_import_rescan_follows_snapshot_v2_flag(tmp_path, monkeypatch):
-    """GP-002 O1: the post-import rescan inside CanonicalSourceWriter must
-    follow the activation snapshot's v2_scan_shadow — once v2 is activated
-    there must not be a second catalog writer still scanning v1 semantics
-    (a v1-only scan inside a v2-activated directory would be a parity
-    blind spot)."""
+def test_writer_registers_exact_group_with_declared_adapter_not_root_rescan(tmp_path, monkeypatch):
+    """Every new import uses the shared finite registration boundary.
+
+    The root's configured adapter is retained. A rollout snapshot never
+    converts one imported source into a complete root-discovery operation.
+    """
     import json
 
     from company_wiki.source_catalog import (
@@ -497,19 +497,20 @@ def test_writer_post_import_rescan_follows_snapshot_v2_flag(tmp_path, monkeypatc
     )
     request, candidate, receipt, staged = _staged_contract(tmp_path)
 
-    observed: list[bool | None] = []
-    original = cw_module.scan_catalog
+    observed = []
+    original = cw_module.register_catalog_sources
 
     def spy(*args, **kwargs):
-        observed.append(kwargs.get("v2_scan_shadow"))
+        observed.append(args[2])
         return original(*args, **kwargs)
 
-    monkeypatch.setattr(cw_module, "scan_catalog", spy)
+    monkeypatch.setattr(cw_module, "register_catalog_sources", spy)
     imported = CanonicalSourceWriter(catalog).import_staged(
         request, candidate, receipt
     )
     assert imported.status is CanonicalImportStatus.IMPORTED_NEW
-    assert observed and all(flag is True for flag in observed), (
-        f"canonical writer rescan must follow snapshot v2_scan_shadow "
-        f"(got {observed})"
-    )
+    assert len(observed) == 1
+    assert observed[0].root_id == "company_raw"
+    assert observed[0].relative_paths == frozenset({
+        Path(imported.canonical_path).relative_to(catalog.config.roots[0].path).as_posix()})
+    assert imported.resolution.matches[0].content_sha256 == receipt.content_sha256

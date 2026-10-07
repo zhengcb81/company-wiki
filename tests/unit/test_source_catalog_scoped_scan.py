@@ -1,0 +1,126 @@
+"""A single import must not rehash or retire the rest of the data lake."""
+
+from dataclasses import replace
+from pathlib import Path
+
+import pytest
+
+from company_wiki.source_catalog.models import CatalogConfig, RootSpec
+from company_wiki.source_catalog.scanner import scan_catalog
+from company_wiki.source_catalog.store import CatalogStore
+
+
+def _lake(tmp_path):
+    root = tmp_path / "companies"
+    directory = root / "示例公司" / "raw"
+    directory.mkdir(parents=True)
+    first, second = directory / "2025年年度报告.pdf", directory / "2025年半年度报告.pdf"
+    first.write_bytes(b"%PDF first")
+    second.write_bytes(b"%PDF second")
+    config = CatalogConfig(project_root=tmp_path, catalog_dir=tmp_path / ".source_catalog",
+                           roots=(RootSpec("company_raw", root, "company_raw"),))
+    return config, first, second
+
+
+@pytest.mark.parametrize("root_kind", ["company_raw", "directory", "dayu_portfolio"])
+def test_scoped_scan_does_not_rehash_touch_or_mark_unselected_locations_missing(tmp_path, monkeypatch, root_kind):
+    from company_wiki.source_catalog import scanner
+
+    config, first, second = _lake(tmp_path)
+    config = replace(config, roots=(replace(config.roots[0], kind=root_kind),))
+    store = CatalogStore(config.database_path)
+    scan_catalog(config, store)
+    untouched = dict(store.fetchone("SELECT * FROM locations WHERE relative_path=?",
+                                    (second.relative_to(config.roots[0].path).as_posix(),)))
+    root_before = dict(store.fetchone("SELECT * FROM roots WHERE root_id='company_raw'"))
+    second.unlink()  # A finite request cannot infer that another document was deleted.
+    first.write_bytes(b"%PDF first revised")
+    observed = []
+    original = scanner._observe_file
+
+    def observe(candidate, **kwargs):
+        observed.append(candidate.path)
+        return original(candidate, **kwargs)
+
+    monkeypatch.setattr(scanner, "_observe_file", observe)
+    def no_walk(_root):
+        raise AssertionError("finite company scan must not walk the whole raw directory")
+    original_walk = scanner._walk_files
+    monkeypatch.setattr(scanner, "_walk_files", no_walk)
+    def no_external_metadata(_config):
+        raise AssertionError("explicit registration must not discover Dayu metadata")
+    monkeypatch.setattr(scanner, "_load_dayu_portfolio_urls", no_external_metadata)
+    fetched = []
+    original_fetch = store.fetchall
+    def fetch(sql, params=()):
+        if "relative_path,source_id,document_id" in sql:
+            assert "relative_path IN" in sql
+            fetched.append(params)
+        return original_fetch(sql, params)
+    monkeypatch.setattr(store, "fetchall", fetch)
+    relative = first.relative_to(config.roots[0].path).as_posix()
+    report = scan_catalog(config, store, root_ids={"company_raw"}, relative_paths={relative})
+    assert report.errors == 0 and report.files_seen == 1 and report.files_hashed == 1
+    assert observed == [first]
+    assert dict(store.fetchone("SELECT * FROM locations WHERE location_id=?",
+                              (untouched["location_id"],))) == untouched
+    assert dict(store.fetchone("SELECT * FROM roots WHERE root_id='company_raw'")) == root_before
+    repeated = scan_catalog(config, store, root_ids={"company_raw"}, relative_paths={relative})
+    assert repeated.files_hashed == 0 and repeated.files_reused == 1
+    assert all(tuple(params) == ("company_raw", relative) for params in fetched)
+    monkeypatch.setattr(scanner, "_walk_files", original_walk)
+    monkeypatch.undo()
+    # Only a complete root scan is allowed to discover missing originals.
+    scan_catalog(config, store)
+    assert store.fetchone("SELECT location_status FROM locations WHERE location_id=?",
+                          (untouched["location_id"],))["location_status"] == "missing"
+
+
+@pytest.mark.parametrize("paths", [set(), {"../outside.pdf"}, {"/absolute.pdf"},
+                                   {"host_absolute"}, {"示例公司\\file.pdf"}])
+def test_invalid_finite_scope_rejected_before_catalog_created(tmp_path, paths):
+    config, _, _ = _lake(tmp_path)
+    if paths == {"host_absolute"}:
+        paths = {(Path(tmp_path.anchor) / "absolute.pdf").as_posix()}
+    with pytest.raises(ValueError):
+        scan_catalog(config, None, dry_run=True, root_ids={"company_raw"}, relative_paths=paths)
+    assert not config.catalog_dir.exists()
+
+
+def test_finite_scope_requires_one_root_and_an_existing_candidate(tmp_path):
+    config, _, _ = _lake(tmp_path)
+    with pytest.raises(ValueError):
+        scan_catalog(config, None, dry_run=True, relative_paths={"示例公司/missing.pdf"})
+    with pytest.raises(ValueError):
+        scan_catalog(config, None, dry_run=True, root_ids={"company_raw"},
+                     relative_paths={"示例公司/missing.pdf"})
+    assert not config.catalog_dir.exists()
+
+
+def test_finite_scan_keeps_the_complete_source_metadata_group(tmp_path):
+    config, first, _ = _lake(tmp_path)
+    first.with_name(first.name + ".source.json").write_text(
+        '{"filing_date":"2026-03-31","market":"CN","security_id":"688012"}', encoding="utf-8")
+    store = CatalogStore(config.database_path)
+    relative = first.relative_to(config.roots[0].path).as_posix()
+    report = scan_catalog(config, store, root_ids={"company_raw"}, relative_paths={relative})
+    assert report.files_seen == 2 and report.errors == 0
+    row = store.fetchone("SELECT published_date FROM documents")
+    assert row["published_date"] == "2026-03-31"
+    assert store.fetchone("SELECT COUNT(*) AS n FROM locations")["n"] == 2
+    assert store.fetchone("SELECT COUNT(*) AS n FROM documents")["n"] == 1
+
+
+def test_registration_service_uses_configured_reader_without_old_rollout_scan(tmp_path, monkeypatch):
+    from company_wiki.source_catalog import service
+    config, first, _ = _lake(tmp_path)
+    def obsolete_snapshot(_directory):
+        raise AssertionError("registration cannot use an old discovery rollout switch")
+    monkeypatch.setattr(service, "v2_scan_shadow_from_snapshot", obsolete_snapshot)
+    catalog = service.SourceCatalog(config)
+    try:
+        result = catalog.register_sources(root_id="company_raw", relative_paths={
+            first.relative_to(config.roots[0].path).as_posix()})
+        assert result.files_seen == 1 and result.errors == 0
+    finally:
+        catalog.close()

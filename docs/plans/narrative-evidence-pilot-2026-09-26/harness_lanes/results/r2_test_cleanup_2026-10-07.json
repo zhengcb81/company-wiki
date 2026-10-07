@@ -1,0 +1,20 @@
+{
+  "test_roots_absent": [
+    "r2-system",
+    "r2-adapter-red",
+    "r2-adapter-green",
+    "r2-node",
+    "r2-reuse-red",
+    "r2-reuse-green",
+    "r2-auto-red",
+    "r2-auto-red2",
+    "r2-auto-green",
+    "r2-policy-red",
+    "r2-policy-green",
+    "r2-policy-green2",
+    "r2-policy-node",
+    "r2-main-node"
+  ],
+  "production_space_saving": 0,
+  "removed_logical_test_bytes": 121909495
+}

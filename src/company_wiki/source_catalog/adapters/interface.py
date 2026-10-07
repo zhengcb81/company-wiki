@@ -19,7 +19,7 @@ class NormalizedCandidate:
     """Source-independent filing facts produced by an adapter."""
 
     relative_path: str
-    content_sha256: str
+    content_sha256: str  # empty only for compute_hash=False discovery; never a source identity
     group_key: str
     role: str  # primary | sidecar | markdown | summary | sections
     normalized: dict = field(default_factory=dict)
@@ -32,8 +32,15 @@ class SourceAdapter(Protocol):
     adapter_id: str
     version: str
 
-    def enumerate(self, root_path, *, limit: int | None = None) -> list[NormalizedCandidate]:
-        """Stable-sorted file groups with roles; never touches the DB."""
+    def enumerate(self, root_path, *, limit: int | None = None,
+                  relative_paths: set[str] | None = None,
+                  compute_hash: bool = True) -> list[NormalizedCandidate]:
+        """Stable file groups; explicit scope avoids discovery, scanner verifies bytes.
+
+        Direct callers keep hashed candidates by default. The scanner chooses
+        compute_hash=False because it generates the authoritative manifest and
+        validates declared sidecar SHA against the actual bytes itself.
+        """
         ...
 
 

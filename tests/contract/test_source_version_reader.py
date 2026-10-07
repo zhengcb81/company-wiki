@@ -144,6 +144,51 @@ def _fixture(tmp_path: Path, *, three_roots: bool = False,
     return catalog, tuple(paths), tuple(roots), dict(row)
 
 
+@pytest.mark.parametrize("visibility,decision,assertion_sha", [
+    ("active", "verified", SHA), ("legacy", "verified", SHA),
+    ("shadow", "verified", SHA), ("active", "rejected", SHA),
+    ("active", "verified", OTHER_SHA), ("legacy", "verified", OTHER_SHA),
+])
+def test_steady_policy_keeps_activated_facts_and_legacy_capture_without_canary(
+    tmp_path, visibility, decision, assertion_sha,
+):
+    catalog, paths, _, ids = _fixture(tmp_path)
+    try:
+        reader = SourceVersionReader(catalog)
+        ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
+        with catalog.store.transaction() as conn:
+            row = conn.execute("SELECT metadata_json FROM documents WHERE document_id=?",
+                               (ref.document_id,)).fetchone()
+            metadata = json.loads(row[0])
+            metadata["acquisition"]["source_title"] = "Explicit captured title"
+            conn.execute("UPDATE documents SET metadata_json=? WHERE document_id=?",
+                         (json.dumps(metadata), ref.document_id))
+            conn.execute("""INSERT INTO source_metadata_assertions
+                (assertion_id,source_id,document_id,content_sha256,evidence_basis,evidence_json,
+                 decision,created_at,created_by,schema_version,visibility_state,activation_epoch,cohort,
+                 market,security_id,fiscal_year,period_end,language)
+                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+                ("steady-a", ref.source_id, ref.document_id, assertion_sha, "verified_bytes", "{}", decision,
+                 "2026-10-07T00:00:00Z", "test", "2.0", visibility, "old-canary", "old-cohort",
+                 "US", "ACME", 2024, "2024-12-31", "en"))
+        snapshot = build_snapshot({"schema_version": "2.0", "mode": "steady",
+            "policy_hash": export_policy_2x(catalog.config)[0], "updated_at": "2026-10-07T00:00:00Z"})
+        (catalog.config.catalog_dir / "runtime_policy.json").write_text(json.dumps(snapshot), encoding="utf-8")
+        manifest = reader.describe_version(ref)
+        assert manifest["title"] == "Explicit captured title"
+        accepted = visibility in {"active", "legacy"} and decision == "verified" and assertion_sha == SHA
+        assert manifest["fiscal_year"] == (2024 if accepted else 2025)
+        assert manifest["period_end"] == ("2024-12-31" if accepted else "2025-12-31")
+        assert manifest["language"] == ("en" if accepted else None)
+        assert manifest["source_url"] == "https://sec.gov/x/2025"
+        assert reader.open_version(ref, purpose="preview").data == BODY
+        paths[0].write_bytes(OTHER)
+        with pytest.raises(SourceReadError):
+            reader.open_version(ref, purpose="preview")
+    finally:
+        catalog.close()
+
+
 def test_exact_ref_contains_no_location_and_delivers_verified_bytes(tmp_path):
     catalog, paths, _, ids = _fixture(tmp_path)
     reader = SourceVersionReader(catalog)

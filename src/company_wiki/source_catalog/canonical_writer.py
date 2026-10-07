@@ -18,7 +18,7 @@ from company_wiki.source_contract import source_id_for_sha256
 from .acquisition import DownloadCandidate, DownloadReceipt
 from .lock import CatalogOperationLock
 from .resolver import ResolutionResult, ResolutionStatus, SourceRequest, SourceResolver
-from .scanner import scan_catalog
+from .registration_scope import SourceRegistrationScope, register_catalog_sources
 from .service import SourceCatalog
 from .store import canonical_json, metadata_state
 
@@ -243,12 +243,10 @@ class CanonicalSourceWriter:
             # the root's declared adapter when it has one, otherwise the
             # legacy scanner that can actually read the root.  Non-import
             # scans keep following GP-002 unchanged.
-            scan_catalog(
-                self.catalog.config,
-                self.catalog.store,
-                dry_run=False,
-                root_ids={self.company_root.root_id},
-                v2_scan_shadow=bool(self.company_root.adapter_id),
+            register_catalog_sources(
+                self.catalog.config, self.catalog.store,
+                SourceRegistrationScope(self.company_root.root_id,
+                    frozenset({destination.relative_to(self.company_root.path).as_posix()})),
             )
             exact_request = SourceRequest(
                 entity=request.entity,

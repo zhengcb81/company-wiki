@@ -23,13 +23,17 @@
 
 ## R1 正式融资文档分类（零费用，先TDD）
 
-**Status:** in_progress
+**Status:** complete
+
+代码66ce046已推master，精确CI37578307854全部job/step绿79秒；责任45pass与真实两PDF公共CLI2pass，六新测试根已恢复absent。
 
 实际scanner._classification只认识普通prospectus，未识别equity_offering_prospectus/convertible_bond_prospectus。生产S05/S06为other。先用独立当前schema目录/原件夹具建立反例：显式sidecar融资类型、精确“股票募集说明书/可转换公司债券募集说明书”标题（大小写.PDF）、一般债券募集文件、broker点评及最高优先级sidecar；含“发行股票董事会公告”等不能误当招股。保持SourceType.PROSPECTUS现有族（实际枚举PROSPECTUS）、source/document ID按原SHA不变，不为了分类重下载。新增行为先真实RED，再最小scanner实现，集中责任测试及扫描二次幂等。生产元数据迁移属于R2，不能拿Unit绿说生产已改。
 
 ## R2 生产来源准备与请求编制（零模型）
 
-**Status:** pending
+**Status:** in_progress
+
+实际CanonicalSourceWriter每次新增文件会全扫company_raw，扫描器没有按文件入口，且全扫描会将未seen位置标missing。先TDD增加单根显式relative_paths有限登记：保留相同group完整成员，未选组及根完整扫描水位不改，不做missing sweep；拒绝空集/越界/未命中。常规全扫描行为保留。canonical import只登记刚写入文件所在组，生产来源元数据更新复用此正式有限扫描，不patch扫描器、不全库23GB重扫。集中责任/CLI隔离验收后才生产登记。
 
 1. 只读核实际来源、位置/版本、acquisition sidecar与原件；S01–S04retired原因按正式journal/scan记录追溯，不能因文件在就复活撤回版本。S05/S06以明确来源类型迁移，不改raw或source SHA；S08表中活动日期与published_date2023-12-31冲突须记录，不能直接抄文件名为公开日。
 2. 原文日期/证券/期间以官方公告元数据、可复核来源记录为依据，经现有SourceCatalog写入口更新或登记。缺公开日保持unknown，禁止临时fixture进生产。只修首批实际请求来源；不先全库metadata/全文回填。

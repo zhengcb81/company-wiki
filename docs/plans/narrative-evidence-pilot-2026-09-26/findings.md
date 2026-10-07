@@ -1013,3 +1013,9 @@ S7最终发布证据：9bf25a5/CI37550268890全部步骤绿71秒，真实业务�
 新行为10真实RED/6pass；只修分类后迁移仍2RED，调查merge后仅对同原SHA、未声明的other/other成对细化，不覆盖日期、已声明分类或retired状态。责任45pass/4.27秒；实际S05/S06 PDF公共CLI首次/旧other迁移/重扫2pass/7.67秒，原件/生产DB/用户配置及RF日志保护通过。Ruff绿；scanner1.0.1。真实CLI首轮schema与Windows编码错误已修，不计产品RED；先前两个猜测测试文件不存在已按实际责任包读取。没有生产迁移或模型调用。发布/清理仍待完成。
 
 只读追溯S01旧retire原因是legacy sidecar缺source_url（2026-08-01），不是撤回；原sidecar只有market/security/title。须核官方同SHA来源再经restore入口处理，不能全库复活。
+
+## R2 有限来源登记
+
+R1代码66ce046已推master，精确CI37578307854全部步骤绿79秒。准备生产时发现canonical import全根扫描，现按实际效率缺口TDD添加单根relative_paths入口，保留source/metadata完整组，不hash/改未选来源，不执行missing sweep、不冒写根完整扫描水位。company_raw直接列明确原件/sidecar，不走全raw目录。首轮6签名RED及1测试夹具漏raw错误；修fixture后有限行为和契约验证。R1六测试根已恢复absent。官方两PDF流式核SHA完全相同，共9319726B网络读取、0保存，公开元数据准备有真实依据。新增执行细则已先记录。
+
+2026-10-07 R2续：真实旧canary配置仍存在，六flag中legacy_bridge关闭，导致legacy来源capture字段隐藏；人工门清理不等于运行迁移清理完成。将全入口收口、统一退役、同旧snapshot隔离复现纳入系统性步骤。AUTO同样发现全库list_jobs及终态resume无效spawn，按SQL范围与0spawn计数测试，不用删除字节验证提速。
