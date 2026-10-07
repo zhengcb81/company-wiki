@@ -1,0 +1,311 @@
+{
+  "schema_version": "s7-duplicate-diagnosis/1",
+  "scope": "actual default prospectus; not full-table benchmark",
+  "selector": "0.4.2",
+  "groups": [
+    {
+      "text": "中微公司基于在半导体制造设备产业多年积累的专业技术，涉足半导体集成",
+      "spans": [
+        {
+          "schema_version": "1.0.0",
+          "span_id": "urn:company-wiki:evidence-span:sha256:3c12df3b2b8bf47bda0dab6715d2f92c13e9b7799bbbc4df22a7199bee8c425b",
+          "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+          "locator": "loc:v1/page:114/paragraph:10",
+          "coordinates": {
+            "page_number": 114,
+            "paragraph_index": 10,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "raw_text": "中微公司基于在半导体制造设备产业多年积累的专业技术，涉足半导体集成",
+          "structured_value": {
+            "bbox": [
+              114.0199966430664,
+              330.9019775390625,
+              505.3399963378906,
+              342.9019775390625
+            ],
+            "block_char_end": 33,
+            "block_char_start": 0,
+            "block_sha256": "62fd204222356f5ab15b274109089136baf4513103593486e2f428ee95afb852",
+            "pdf_block": 10,
+            "language": "zh",
+            "selection_reasons": [
+              "business_narrative_signal",
+              "pdf_visual_context_group",
+              "progress_or_change_language",
+              "specific_business_event",
+              "specific_emerging_business_positioning",
+              "business_section_context"
+            ],
+            "source_role": "company_filing",
+            "text_sha256": "62fd204222356f5ab15b274109089136baf4513103593486e2f428ee95afb852",
+            "topics": [
+              "capacity_projects",
+              "products_rd"
+            ],
+            "unit_kind": "pdf_text_block",
+            "selection_group_id": "urn:company-wiki:context-group:sha256:4fc9720199a9035dcedac0e94aaf226046fd4ae08f4211309d16246c4bdab0b9"
+          },
+          "parser_name": "selective_narrative_parser",
+          "parser_version": "0.1.1",
+          "output_sha256": "91111253f5dae7ed07302bae3a896c440d2e8fdf8b8222701bbb5d0bdac2c4b0",
+          "parse_status": "parsed",
+          "quality_flags": []
+        },
+        {
+          "schema_version": "1.0.0",
+          "span_id": "urn:company-wiki:evidence-span:sha256:83b73c0647ef60eca02351ae51242c9dc009f278d6227051d2cbd02e68276ea2",
+          "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+          "locator": "loc:v1/page:122/paragraph:30",
+          "coordinates": {
+            "page_number": 122,
+            "paragraph_index": 30,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "raw_text": "中微公司基于在半导体制造设备产业多年积累的专业技术，涉足半导体集成",
+          "structured_value": {
+            "bbox": [
+              114.0199966430664,
+              697.7919921875,
+              505.3399963378906,
+              709.7919921875
+            ],
+            "block_char_end": 33,
+            "block_char_start": 0,
+            "block_sha256": "62fd204222356f5ab15b274109089136baf4513103593486e2f428ee95afb852",
+            "pdf_block": 24,
+            "language": "zh",
+            "selection_reasons": [
+              "business_narrative_signal",
+              "pdf_visual_context_group",
+              "progress_or_change_language",
+              "specific_emerging_business_positioning"
+            ],
+            "source_role": "company_filing",
+            "text_sha256": "62fd204222356f5ab15b274109089136baf4513103593486e2f428ee95afb852",
+            "topics": [
+              "new_business"
+            ],
+            "unit_kind": "pdf_text_block",
+            "selection_group_id": "urn:company-wiki:context-group:sha256:e83bc175130ff7926dbc319d4682238cfbe83d7fe11616a5ae6af8169f87efc2"
+          },
+          "parser_name": "selective_narrative_parser",
+          "parser_version": "0.1.1",
+          "output_sha256": "75aa26f40b2340e1bb15cc2f5be5b30ce803bedd656b921ee326fefaf5375eb7",
+          "parse_status": "parsed",
+          "quality_flags": []
+        }
+      ]
+    },
+    {
+      "text": "本次向社会公众公开发行新股的募集资金扣除发行费用后将按轻重缓急顺",
+      "spans": [
+        {
+          "schema_version": "1.0.0",
+          "span_id": "urn:company-wiki:evidence-span:sha256:0f28aa63f94af6ad3d6ddf75d0dc5f474a97ec9cd23889d145781ca3b48eb734",
+          "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+          "locator": "loc:v1/page:34/paragraph:14",
+          "coordinates": {
+            "page_number": 34,
+            "paragraph_index": 14,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "raw_text": "本次向社会公众公开发行新股的募集资金扣除发行费用后将按轻重缓急顺",
+          "structured_value": {
+            "bbox": [
+              114.0199966430664,
+              404.34197998046875,
+              505.4598693847656,
+              416.34197998046875
+            ],
+            "block_char_end": 32,
+            "block_char_start": 0,
+            "block_sha256": "1fc4011b5554fb6bf79acccbd31169e381afb635c2f336f5a32db8d59dfc79aa",
+            "pdf_block": 13,
+            "language": "zh",
+            "selection_reasons": [
+              "business_narrative_signal",
+              "pdf_visual_context_group",
+              "project_plan_or_status",
+              "concrete_fundraising_project",
+              "fundraising_table_context"
+            ],
+            "source_role": "company_filing",
+            "text_sha256": "1fc4011b5554fb6bf79acccbd31169e381afb635c2f336f5a32db8d59dfc79aa",
+            "topics": [
+              "capacity_projects"
+            ],
+            "unit_kind": "pdf_text_block",
+            "selection_group_id": "urn:company-wiki:fundraising-context:sha256:239805557b42eb61ce58d290e88f5e4e66c051255ec5ade49a33f4374b82826b"
+          },
+          "parser_name": "selective_narrative_parser",
+          "parser_version": "0.1.1",
+          "output_sha256": "5ecdf2a7879b08a5fe05931015281b6c1867d1d724b07a3a0163390f820a208b",
+          "parse_status": "parsed",
+          "quality_flags": []
+        },
+        {
+          "schema_version": "1.0.0",
+          "span_id": "urn:company-wiki:evidence-span:sha256:d3ea2f75e519ab795d3d930985ae247efe1a787e30a81558263ddd3866dd8f4d",
+          "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+          "locator": "loc:v1/page:353/paragraph:5",
+          "coordinates": {
+            "page_number": 353,
+            "paragraph_index": 5,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "raw_text": "本次向社会公众公开发行新股的募集资金扣除发行费用后将按轻重缓急顺",
+          "structured_value": {
+            "bbox": [
+              114.0199966430664,
+              200.55198669433594,
+              505.4598693847656,
+              212.55198669433594
+            ],
+            "block_char_end": 32,
+            "block_char_start": 0,
+            "block_sha256": "1fc4011b5554fb6bf79acccbd31169e381afb635c2f336f5a32db8d59dfc79aa",
+            "pdf_block": 5,
+            "language": "zh",
+            "selection_reasons": [
+              "business_narrative_signal",
+              "pdf_visual_context_group",
+              "project_plan_or_status",
+              "concrete_fundraising_project",
+              "fundraising_table_context"
+            ],
+            "source_role": "company_filing",
+            "text_sha256": "1fc4011b5554fb6bf79acccbd31169e381afb635c2f336f5a32db8d59dfc79aa",
+            "topics": [
+              "capacity_projects"
+            ],
+            "unit_kind": "pdf_text_block",
+            "selection_group_id": "urn:company-wiki:fundraising-context:sha256:961eefbefd668cad4cf8cc63341a93e63932d24eeccae5f61de581fb35001458"
+          },
+          "parser_name": "selective_narrative_parser",
+          "parser_version": "0.1.1",
+          "output_sha256": "92f618527c16eb965a9e27e6301b65ec3f150ad9460184115cd36e60e9b5c7e2",
+          "parse_status": "parsed",
+          "quality_flags": []
+        }
+      ]
+    },
+    {
+      "text": "序投资于以下项目：",
+      "spans": [
+        {
+          "schema_version": "1.0.0",
+          "span_id": "urn:company-wiki:evidence-span:sha256:82216ce182f207b1f2b09e9fc5796d34c07103591dd066081faf2117fc431510",
+          "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+          "locator": "loc:v1/page:34/paragraph:15",
+          "coordinates": {
+            "page_number": 34,
+            "paragraph_index": 15,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "raw_text": "序投资于以下项目：",
+          "structured_value": {
+            "bbox": [
+              90.02400207519531,
+              428.3179931640625,
+              201.0500030517578,
+              441.60198974609375
+            ],
+            "block_char_end": 9,
+            "block_char_start": 0,
+            "block_sha256": "89c1c00ede080007703efbd827135b2bcf936bf4671a272fd441b875f44e1130",
+            "pdf_block": 14,
+            "language": "zh",
+            "selection_reasons": [
+              "business_narrative_signal",
+              "pdf_visual_context_group",
+              "project_plan_or_status",
+              "concrete_fundraising_project",
+              "fundraising_table_context"
+            ],
+            "source_role": "company_filing",
+            "text_sha256": "89c1c00ede080007703efbd827135b2bcf936bf4671a272fd441b875f44e1130",
+            "topics": [
+              "capacity_projects"
+            ],
+            "unit_kind": "pdf_text_block",
+            "selection_group_id": "urn:company-wiki:fundraising-context:sha256:239805557b42eb61ce58d290e88f5e4e66c051255ec5ade49a33f4374b82826b"
+          },
+          "parser_name": "selective_narrative_parser",
+          "parser_version": "0.1.1",
+          "output_sha256": "fdde210fc9995a58430af6c91dbff82a2ba27f99861ee572a07a654d916ba527",
+          "parse_status": "parsed",
+          "quality_flags": []
+        },
+        {
+          "schema_version": "1.0.0",
+          "span_id": "urn:company-wiki:evidence-span:sha256:c3e79ef3bf9807e3ed88af4a2be69ee85e83e6f2dbf6d4b2206e85511d77d47f",
+          "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+          "locator": "loc:v1/page:353/paragraph:6",
+          "coordinates": {
+            "page_number": 353,
+            "paragraph_index": 6,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "raw_text": "序投资于以下项目：",
+          "structured_value": {
+            "bbox": [
+              90.02400207519531,
+              224.52796936035156,
+              201.0500030517578,
+              237.8119659423828
+            ],
+            "block_char_end": 9,
+            "block_char_start": 0,
+            "block_sha256": "89c1c00ede080007703efbd827135b2bcf936bf4671a272fd441b875f44e1130",
+            "pdf_block": 6,
+            "language": "zh",
+            "selection_reasons": [
+              "business_narrative_signal",
+              "pdf_visual_context_group",
+              "project_plan_or_status",
+              "concrete_fundraising_project",
+              "fundraising_table_context"
+            ],
+            "source_role": "company_filing",
+            "text_sha256": "89c1c00ede080007703efbd827135b2bcf936bf4671a272fd441b875f44e1130",
+            "topics": [
+              "capacity_projects"
+            ],
+            "unit_kind": "pdf_text_block",
+            "selection_group_id": "urn:company-wiki:fundraising-context:sha256:961eefbefd668cad4cf8cc63341a93e63932d24eeccae5f61de581fb35001458"
+          },
+          "parser_name": "selective_narrative_parser",
+          "parser_version": "0.1.1",
+          "output_sha256": "e53545f87aeec595848ee60105297fff7b20e0fa81a1d76e529ab0298c52491b",
+          "parse_status": "parsed",
+          "quality_flags": []
+        }
+      ]
+    }
+  ]
+}

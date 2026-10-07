@@ -10,6 +10,8 @@
 
 ## 当前恢复点（2026-10-07）
 
+- **当前施工：客户采用/募投上下文selector0.4.2本地验收通过，待发布。** 200责任项/1.65秒、CI全范围Ruff/47源mypy、正式真实S01/S04/S09消费者链+旧final9/selector升级11项122.26秒通过；完整九文档364.548秒29/33、761定位零失败、旧full零回退、精选63073B/+120B。当前默认S06 page7 canonical原句full。重复4→6的募投引导上下文取舍保留，原86点/33分母及96/160不变。六自身tmp根恢复absent、原件/RF/用户配置保护保持，0供应商/下载/翻译。详见[实施单](s7_adoption_fundraising_implementation_2026-10-07.md)及[本地收据](harness_lanes/results/s7_adoption_fundraising_main_acceptance_2026-10-07.json)。
+
 - **当前最新完成：IR parser0.1.1已发布c1295b1，精确CI37552600440全部步骤绿/75秒。** selector0.4.1不变；143责任项/1.35秒、45个CI源mypy/Ruff绿，真实S07/S08/S09正式链/冻结旧final9/两种AUTO升级12项52.16秒绿，CI全Unit及短合同全绿。完整九文档27/33、761定位零失败、精选62953B、IR两套话clean；optional3/17→2/17的一条泛答提问取舍保留。11个自身临时路径已恢复absent，原件/用户配置/RF6e6b817a保护不变，0供应商/下载/翻译。详见[IR发布收据](harness_lanes/results/s7_ir_main_acceptance_2026-10-07.json)。S7整体仍in_progress。
 
 - **此前完成：S7经营语义集中节点已发布：9bf25a5，精确CI37550268890全部步骤绿/71秒。** 按[后续实施单](s7_followup_quality_implementation_2026-10-07.md)完成具体经营reason、量化行业独立类别和有界未完句合组；selector0.4.1、parser仍0.1.0。293责任项/3.60秒、真实S01/S02/S06正式链路7点/97.74秒及既有节点/旧final/generation11项通过。完整九文档27/33（原21/33），764定位全绿、必需旧full无退步；optional5/17→3/17的两项取舍完整保留，不能宣称所有旧full无回退。精选66215B（原66195B）、重复4（原3）。当时S04及S08仍未施工；S08现已由上述IR发布节点完成，S7不complete。详见[s7节点收据](harness_lanes/results/s7_operating_main_acceptance_2026-10-07.json)。
@@ -96,7 +98,7 @@ TDD 框住具体公开行为。只在 N4 A/B/C、存储迁移等大节点集中�
 
 ## Next Step
 
-**下一唯一施工动作：先核RF状态，按现分层证据修S01应用事实的预算优先级，再处理S04募投引导句与同页具体项目表的视觉/结构联系。** IR0.1.1发布及精确CI已完成，不重复IR施工或12项已绿长测。两个问题先写一般性责任反例再实现，不提高96/160、不改原86点/33分母；只在这组质量变化的大节点复验相关真实链及完整九文档。其余四个required miss保持透明：S06另页已有canonical产能、纯融资金额和两个provider/guidance边界。
+**下一唯一施工动作：正常提交推送selector0.4.2节点，核精确代码SHA的CI，再做原目标完整需求审计。** 本单正式真实入口、九文档、canonical风险与测试根恢复均已验证，不重跑已绿长节点，不提高96/160、不改原86点/33分母。四个required miss保持透明：S06另页canonical产能（当前默认full）、纯融资金额和两个provider/guidance边界。不能只凭九样本定位绿宣布整体目标complete。
 
 selector0.4.1经营节点9bf25a5与parser0.1.1 IR节点c1295b1均已推主线且精确CI绿。旧0.1.0结果按旧pin读取，新版本进入现AUTO generation，不共享第二任务库；原文范围/SHA/角色核验属于自动正确性检查，不需要人工签收。当前与后续以本节上方唯一施工动作和最新收据为准。
 

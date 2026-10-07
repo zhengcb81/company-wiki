@@ -1,0 +1,121 @@
+{
+  "schema_version": "s7-canonical-business-fact/1",
+  "sample": "S06",
+  "golden": "G-S06-03",
+  "scope": "actual default selector retains same-source canonical page7; official page43 golden unchanged",
+  "selector": "0.4.2",
+  "parser": "0.1.1",
+  "quote": "本次募投项目达产后，公司预计新增精密数控刀体产品50 万件和各类高效钻削刀具140 万支",
+  "quote_sha256": "0d400f1390555b171ae9c0f6f4d540b7106d7126df6b570d7510e9230bff5653",
+  "source_sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+  "match": {
+    "result": "full",
+    "matched_span_ids": [
+      "urn:company-wiki:evidence-span:sha256:3c970421aff561e7edf96e7b51a81ecd9ea9fcc86d1b1f28a094b1c25a35b3e8",
+      "urn:company-wiki:evidence-span:sha256:2bf40ccaeda7a1b320e1bedad091d37dee86ddc895c944244d424a6d41e33cf6"
+    ],
+    "matched_roles": [
+      "company_filing"
+    ],
+    "coverage_ratio": 1.0
+  },
+  "seconds": 17.848,
+  "canonical_spans": [
+    {
+      "schema_version": "1.0.0",
+      "span_id": "urn:company-wiki:evidence-span:sha256:3c970421aff561e7edf96e7b51a81ecd9ea9fcc86d1b1f28a094b1c25a35b3e8",
+      "source_id": "urn:company-wiki:source:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+      "locator": "loc:v1/page:7/paragraph:16",
+      "coordinates": {
+        "page_number": 7,
+        "paragraph_index": 16,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "本次募投项目达产后，公司预计新增精密数控刀体产品50",
+      "structured_value": {
+        "bbox": [
+          89.90399932861328,
+          358.1180114746094,
+          496.8999938964844,
+          371.4020080566406
+        ],
+        "block_char_end": 34,
+        "block_char_start": 8,
+        "block_sha256": "a40b48adfa2ffc88232fa51593a366cdccc78cd122be2c372bbdcd64034e58df",
+        "pdf_block": 13,
+        "language": "zh",
+        "selection_reasons": [
+          "business_narrative_signal",
+          "project_plan_or_status",
+          "progress_or_change_language",
+          "specific_business_event"
+        ],
+        "source_role": "company_filing",
+        "text_sha256": "735142aed860bf9f5c97e1fe3913e1dff76af80582146e6040cfe26b413fe883",
+        "topics": [
+          "capacity_projects"
+        ],
+        "unit_kind": "pdf_text_block",
+        "selection_group_id": "urn:company-wiki:context-group:sha256:0a5f3863c970f5921830f1d9ee075e0f59923b95f35106aa55d8015c237506a8"
+      },
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1",
+      "output_sha256": "7705eec7bd49bdb1b3d657140e8c5df73b4039bcaa1833ee461a1f11dac4754c",
+      "parse_status": "parsed",
+      "quality_flags": []
+    },
+    {
+      "schema_version": "1.0.0",
+      "span_id": "urn:company-wiki:evidence-span:sha256:2bf40ccaeda7a1b320e1bedad091d37dee86ddc895c944244d424a6d41e33cf6",
+      "source_id": "urn:company-wiki:source:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+      "locator": "loc:v1/page:7/paragraph:17",
+      "coordinates": {
+        "page_number": 7,
+        "paragraph_index": 17,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "万件和各类高效钻削刀具140 万支。",
+      "structured_value": {
+        "bbox": [
+          89.90399932861328,
+          381.51800537109375,
+          284.92999267578125,
+          394.802001953125
+        ],
+        "block_char_end": 18,
+        "block_char_start": 0,
+        "block_sha256": "c6c9af072e0b959f0632ee7ff0304f99163d75edb54d08560c9458871ec1eaca",
+        "pdf_block": 14,
+        "language": "zh",
+        "selection_reasons": [
+          "business_narrative_signal",
+          "pdf_visual_context_group",
+          "progress_or_change_language",
+          "specific_business_event",
+          "project_plan_or_status",
+          "project_section_context"
+        ],
+        "source_role": "company_filing",
+        "text_sha256": "c6c9af072e0b959f0632ee7ff0304f99163d75edb54d08560c9458871ec1eaca",
+        "topics": [
+          "capacity_projects"
+        ],
+        "unit_kind": "pdf_text_block",
+        "selection_group_id": "urn:company-wiki:context-group:sha256:0a5f3863c970f5921830f1d9ee075e0f59923b95f35106aa55d8015c237506a8"
+      },
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1",
+      "output_sha256": "e31c4f29d325fe8065009ba39b8e3d6fb1d3dfe82a43788b4ccba7b3483ce121",
+      "parse_status": "parsed",
+      "quality_flags": []
+    }
+  ]
+}

@@ -34,6 +34,7 @@ from .narrative_finalize import finalize_selection
 from .narrative_neighbors import NeighborRules, enrich_neighbor_context
 from .narrative_pdf_groups import PdfGroupRules, build_pdf_context_groups
 from .narrative_pdf_qa import QA_FRAGMENT_VERSION, pdf_qa_parts, question_markers
+from .narrative_project_context import enrich_fundraising_table_context
 from .narrative_replay import (
     prepare_pdf_replay,
     prepare_pdf_replay_bytes,
@@ -50,6 +51,7 @@ from .narrative_routing import (
 NARRATIVE_PARSER_NAME = "selective_narrative_parser"
 NARRATIVE_PARSER_VERSION = QA_FRAGMENT_VERSION
 NARRATIVE_SELECTOR_NAME = "select_narrative_evidence"
+# 0.4.2 separates customer adoption and binds visual fundraising project rows.
 # 0.4.1 preserves specific operating/industry meaning and atomic fact sentences.
 # 0.4.0 completes bounded business facts and preserves discourse boundaries.
 # 0.3.3 adds context-safe whole-group dedup and fixed-budget category fairness.
@@ -59,7 +61,7 @@ NARRATIVE_SELECTOR_NAME = "select_narrative_evidence"
 # and keeps unrecognized business documents reviewable. The version also pins
 # batch generation identity, so old selection results cannot be silently reused.
 # Parsing, source bytes and locator construction remain unchanged.
-NARRATIVE_SELECTOR_VERSION = "0.4.1"
+NARRATIVE_SELECTOR_VERSION = "0.4.2"
 _FINANCIAL_TERMS = re.compile(
     r"资产负债表|利润表|现金流量表|每股收益|归母净利润|营业收入|营业成本|"
     r"货币资金|应收账款|存货|固定资产|加权平均|基本每股|稀释每股|"
@@ -1577,11 +1579,20 @@ def select_narrative_evidence(
             table_of_contents=_TABLE_OF_CONTENTS,
         ),
     )
+    projects = enrich_fundraising_table_context(
+        parsed.units, pdf_groups, initial_candidates=neighbors.candidates,
+        initial_group_ids=neighbors.group_ids,
+    )
+    previous_ids = {candidate.unit.unit_id for candidate in neighbors.candidates}
+    dropped_financial -= sum(
+        assess_unit(candidate.unit, _candidate_rules()).dropped_financial
+        for candidate in projects.candidates if candidate.unit.unit_id not in previous_ids
+    )
     return finalize_selection(
         parsed,
         route,
-        neighbors.candidates,
-        group_ids=neighbors.group_ids,
+        projects.candidates,
+        group_ids=projects.group_ids,
         heading_pattern=_HEADING_ONLY,
         dropped_financial_count=dropped_financial,
     )

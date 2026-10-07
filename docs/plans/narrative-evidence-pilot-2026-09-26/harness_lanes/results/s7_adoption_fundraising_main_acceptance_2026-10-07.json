@@ -1,0 +1,202 @@
+{
+  "schema_version": "s7-adoption-fundraising-node/1",
+  "status": "local_passed_awaiting_publication",
+  "base": "5f8a3ef3625ece16e13f2d2d121bee5c90b268c9",
+  "code_sha": null,
+  "selector": "0.4.2",
+  "parser": "0.1.1",
+  "rf_head": "6e6b817a1a6e4567293a4dcb835815f3be508a03",
+  "red": {
+    "genuine_functional_failed": 8,
+    "passed": 18,
+    "post_implementation_test_expectation_failure": "StopIteration: selected product correctly absent from drop diagnostics; replaced with oversized atomic group diagnostic and retained product-selected assertion"
+  },
+  "green": {
+    "responsibility_cases": 200,
+    "seconds": 1.65,
+    "new_cases": 28,
+    "real_business_frozen_compat_selector_upgrade_cases": 11,
+    "seconds_combined": 122.26,
+    "frozen_final_cases": 9,
+    "actual_selector_upgrade_cases": 1,
+    "real_business_goldens": [
+      "G-S01-01",
+      "G-S01-02",
+      "G-S01-03",
+      "G-S01-04",
+      "G-S01-05",
+      "G-S04-03",
+      "G-S04-04",
+      "G-S09-05"
+    ],
+    "project_group": "RF read real page34 introduction2 + named purpose rows2; excludes finance/total",
+    "legal_negative": "G-S04-08 clean",
+    "mypy_sources": 47,
+    "ruff": "complete CI scope + new integration passed"
+  },
+  "quality": {
+    "previous_totals": {
+      "documents": 9,
+      "golden_points": 86,
+      "required_points": 33,
+      "required_matched": 27,
+      "optional_points": 17,
+      "optional_matched": 2,
+      "negative_points": 36,
+      "negative_points_hit": 1,
+      "selected_span_count": 761,
+      "selected_in_scope": 215,
+      "judged_in_scope": 49,
+      "noise_spans": 2,
+      "role_confusion": 0,
+      "modality_confusion": 0,
+      "duplicate_span_count": 4,
+      "selected_utf8_bytes": 62953,
+      "locator_roundtrip_verified": 761,
+      "locator_roundtrip_failed": 0,
+      "required_coverage_rate": 0.8182,
+      "optional_coverage_rate": 0.1176,
+      "selected_noise_rate": 0.0408,
+      "duplicate_ratio": 0.0053
+    },
+    "current_totals": {
+      "documents": 9,
+      "golden_points": 86,
+      "required_points": 33,
+      "required_matched": 29,
+      "optional_points": 17,
+      "optional_matched": 2,
+      "negative_points": 36,
+      "negative_points_hit": 1,
+      "selected_span_count": 761,
+      "selected_in_scope": 220,
+      "judged_in_scope": 54,
+      "noise_spans": 2,
+      "role_confusion": 0,
+      "modality_confusion": 0,
+      "duplicate_span_count": 6,
+      "selected_utf8_bytes": 63073,
+      "locator_roundtrip_verified": 761,
+      "locator_roundtrip_failed": 0,
+      "required_coverage_rate": 0.8788,
+      "optional_coverage_rate": 0.1176,
+      "selected_noise_rate": 0.037,
+      "duplicate_ratio": 0.0079
+    },
+    "regressions": [],
+    "remaining_required": [
+      "G-S06-01",
+      "G-S06-03",
+      "G-S09-01",
+      "G-S09-03"
+    ],
+    "seconds": 364.548,
+    "scratch_peak_bytes": 60374,
+    "golden_or_denominator_changed": false,
+    "quota_changed": false,
+    "full_report": "docs\\plans\\narrative-evidence-pilot-2026-09-26\\harness_lanes\\results\\s7_adoption_fundraising_quality_2026-10-07.json"
+  },
+  "protected": {
+    "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "config\\source_acquisition.yaml": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "0aee073f56c133786365ab96899edf4d91c0f9e1a0e13ab61b2a6bffd8316270",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf"
+  },
+  "raw": {
+    "S01": {
+      "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "byte_size": 9165875,
+      "mtime_ns": 1775986949114724400
+    },
+    "S02": {
+      "sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "byte_size": 6361468,
+      "mtime_ns": 1775986992765548800
+    },
+    "S03": {
+      "sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "byte_size": 217264,
+      "mtime_ns": 1779046989673803600
+    },
+    "S04": {
+      "sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "byte_size": 11211796,
+      "mtime_ns": 1776287132568457600
+    },
+    "S05": {
+      "sha256": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+      "byte_size": 5595592,
+      "mtime_ns": 1671984894000000000
+    },
+    "S06": {
+      "sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+      "byte_size": 4756322,
+      "mtime_ns": 1664747887000000000
+    },
+    "S07": {
+      "sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "byte_size": 153851,
+      "mtime_ns": 1779228233262998600
+    },
+    "S08": {
+      "sha256": "f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+      "byte_size": 414544,
+      "mtime_ns": 1780086651533168000
+    },
+    "S09": {
+      "sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "byte_size": 66324,
+      "mtime_ns": 1788471885465276900
+    }
+  },
+  "runtime_source_sha256": {
+    "src/company_wiki/source_catalog/n6_candidate_completion.py": "71cd2996d3cc3a6fa9a4309a7246df2914511717178401d81d68dd00e02391cb",
+    "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": "3cd5484b6af057260c3a5c51cbce643300a4e501aef55188dc56dfc6d7806adf",
+    "src/company_wiki/source_catalog/narrative_budget.py": "e0768818b6dd82020300126a2e32bbb43ece422dac369595fc4c6ec4237e83d5",
+    "src/company_wiki/source_catalog/narrative_candidates.py": "b70e3a23a3f498953de6c0adc7fec88048610bef488acfd7c3f9a62bea654d54",
+    "src/company_wiki/source_catalog/narrative_context.py": "4f4749cd3df6c6a16d31e9ea5327beb5cee9d0895c6e25ef2df19404fde69e4e",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "556ebb17b1657131e20cd951778073903fc707c307ae20f34d1aaf2053a058de",
+    "src/company_wiki/source_catalog/narrative_group_candidates.py": "38d8fb00efe4a74e3a846d31b22c961f397df802b58ab54bdd74812d570bd197",
+    "src/company_wiki/source_catalog/narrative_neighbors.py": "3c6f735fd034caef8074b4f70673b0708be00e9bb6415043fd6cfd4b958a1ade",
+    "src/company_wiki/source_catalog/narrative_pdf_qa.py": "f06ff742370f8d68b18f283869b31a223dffced7d1472bf489baad153312a5b1",
+    "src/company_wiki/source_catalog/narrative_project_context.py": "918bc36a7a5de03c9163855eff2a216cb15099a9896d78d60f5af22a5422f65e",
+    "src/company_wiki/source_catalog/narrative_replay.py": "02f6a812ff929dc403b06881487cac5db49c59f10061cdec75b5e2f403184390"
+  },
+  "calls": {
+    "loopback_model_posts": 3,
+    "supplier_http": 0,
+    "downloads": 0,
+    "translations": 0,
+    "paid_tokens": 0
+  },
+  "scope": "real source bytes; isolated Acme identity/period metadata and deterministic local HTTP model; not a supplier-quality benchmark or production final",
+  "cleanup": {
+    "tmp/s7pf": "restored absent",
+    "tmp/s7pr-e1": "restored absent",
+    "tmp/s7pr-mypy": "restored absent",
+    "tmp/s7pr-pkg": "restored absent",
+    "tmp/s7pr-q": "restored absent",
+    "tmp/s7pr-quality.json": "restored absent"
+  },
+  "ci": null,
+  "notes": [
+    "Full-nine wrapper output path rejected before parsing; reran with output under tmp, then saved only <=2MiB report.",
+    "No daily long tests or human approval gates added."
+  ],
+  "canonical_capacity": {
+    "result": "full",
+    "report": "s7_canonical_capacity_2026-10-07.json",
+    "seconds": 17.848,
+    "page": 7,
+    "spans": 2
+  },
+  "duplication": {
+    "selected_utf8_increase": 120,
+    "diagnostic": "s7_fundraising_duplicate_diagnosis_2026-10-07.json",
+    "after": 6,
+    "changed_sample": "S04",
+    "before": 4,
+    "added": "same two introduction fragments at pages34 and353 in different whole project contexts"
+  }
+}

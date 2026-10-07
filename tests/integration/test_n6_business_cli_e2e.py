@@ -90,7 +90,7 @@ def _sources(real):
 
 
 def _exercise(tmp_path_factory, server, monkeypatch, capture, *, real, probes=None, queries=None,
-              negative_probes=None):
+              negative_probes=None, inspect_spans=None):
     rf_value = os.environ.get("CWP_RF_PROJECT_ROOT")
     if not rf_value:
         pytest.skip("requires explicit read-only committed RF checkout")
@@ -182,6 +182,8 @@ def _exercise(tmp_path_factory, server, monkeypatch, capture, *, real, probes=No
                 spans = [EvidenceSpan.from_dict(span) for span in context["evidence_spans"]]
                 assert spans and context["read_receipt"]["locator_count"] == len(spans)
                 assert context["read_receipt"]["replay_status"] == "verified"
+                if inspect_spans is not None:
+                    inspect_spans(sample_id, spans)
                 bundle = None
                 if kind == "investor_call_transcript":
                     # RF verifies bindings but deliberately omits them from its

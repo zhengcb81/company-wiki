@@ -1,0 +1,2273 @@
+{
+  "schema_version": "s7-budget-layout-diagnosis/1",
+  "base": "5f8a3ef",
+  "parser": "0.1.1",
+  "selector": "0.4.1",
+  "protected": {
+    "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "config\\source_acquisition.yaml": "3609e707466eeb3e0f685e14f2637c6afa39ba900edef1be4814433a43300a01",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "0aee073f56c133786365ab96899edf4d91c0f9e1a0e13ab61b2a6bffd8316270",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf"
+  },
+  "scope": "default annual; prospectus table34 diagnostic only",
+  "documents": [
+    {
+      "sample": "S01",
+      "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "budget": {
+        "count": 400,
+        "limit": 96,
+        "selected_categories": {
+          "project_timeline": 8,
+          "named_product_milestone": 2,
+          "product_milestone": 7,
+          "event": 20,
+          "operating_milestone": 16,
+          "quantified_industry": 3,
+          "risk": 4,
+          "other": 2,
+          "positioning": 16,
+          "project": 8,
+          "industry": 8,
+          "corporate_development": 2
+        },
+        "items": [
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:d118a65c44121d4709814d87df14ef9d796453a467c6e536c5c8f6027d6a1876",
+            "group": "urn:company-wiki:context-group:sha256:eaed17dc969fe7150bc35fa4f3cf19346d0a9ca981a7ab678b109030ed9ed832:operating-fact:6",
+            "page": [
+              "page",
+              40
+            ],
+            "locator": "loc:v1/page:40/paragraph:36",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "公",
+            "metadata": {
+              "bbox": [
+                89.87999725341797,
+                586.8963012695312,
+                531.3665161132812,
+                600.606689453125
+              ],
+              "block_char_end": 47,
+              "block_char_start": 46,
+              "block_sha256": "71ca7f13a72c4afe0148936f2b3af66b0a3bdf3e4a5fe3e84bf17befe809fb2d",
+              "pdf_block": 27
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "pdf_visual_context_group",
+              "applied_operating_milestone",
+              "specific_business_event",
+              "progress_or_change_language"
+            ],
+            "score": 20,
+            "selected": true,
+            "drop": null,
+            "category": "operating_milestone"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:86b1806a02e60453dbbe0edd8cc2c55dc98284d2d1a9b7aed16650d06ac3fe5b",
+            "group": "urn:company-wiki:context-group:sha256:67faa0cd031805c73fb98af20313e9f5a1535d3aaacb6728b8d132d183f21854:operating-fact:3",
+            "page": [
+              "page",
+              48
+            ],
+            "locator": "loc:v1/page:48/paragraph:37",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "公司在上",
+            "metadata": {
+              "bbox": [
+                89.87999725341797,
+                652.4172973632812,
+                531.3651123046875,
+                666.127685546875
+              ],
+              "block_char_end": 47,
+              "block_char_start": 43,
+              "block_sha256": "7c7a1b36012bc2e3625da2195dc7b65d1ba29fc509a4ad916740797f25eb573e",
+              "pdf_block": 29
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "pdf_visual_context_group",
+              "applied_operating_milestone",
+              "specific_business_event",
+              "progress_or_change_language"
+            ],
+            "score": 20,
+            "selected": true,
+            "drop": null,
+            "category": "operating_milestone"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:692682cbbf645069b62d0e47078aa2864947da8bbeded2366234641daca07969",
+            "group": "urn:company-wiki:context-group:sha256:105b4deb59af2403db449ffc6ffe333a462562d4b1b2d338849b2f1913c0d2f1:operating-fact:1",
+            "page": [
+              "page",
+              32
+            ],
+            "locator": "loc:v1/page:32/paragraph:8",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "在海外先进的3 纳米",
+            "metadata": {
+              "bbox": [
+                89.87999725341797,
+                458.8562927246094,
+                531.4894409179688,
+                472.5666809082031
+              ],
+              "block_char_end": 44,
+              "block_char_start": 34,
+              "block_sha256": "3c70bb0cf75099b3159bbcf2c8810412cc78cfced1541e58cb1c2f37c3f8e1f4",
+              "pdf_block": 7
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "pdf_visual_context_group",
+              "applied_operating_milestone",
+              "specific_business_event"
+            ],
+            "score": 18,
+            "selected": true,
+            "drop": null,
+            "category": "operating_milestone"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:c7d72cb87acb2be503bd2c9da30e62e67258ebb6e21a524db026ac9aaea99b35",
+            "group": "urn:company-wiki:context-group:sha256:105b4deb59af2403db449ffc6ffe333a462562d4b1b2d338849b2f1913c0d2f1:operating-fact:4",
+            "page": [
+              "page",
+              32
+            ],
+            "locator": "loc:v1/page:32/paragraph:23",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "公司硅和锗硅外延EPI 设备已",
+            "metadata": {
+              "bbox": [
+                89.87999725341797,
+                663.0963134765625,
+                531.3682250976562,
+                676.8067016601562
+              ],
+              "block_char_end": 44,
+              "block_char_start": 29,
+              "block_sha256": "e5b770d16badf74d6f3ab05a224fc5b6013c48aa12e71d92aedf750ed6ec44d8",
+              "pdf_block": 17
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "pdf_visual_context_group",
+              "specific_business_event",
+              "progress_or_change_language"
+            ],
+            "score": 17,
+            "selected": false,
+            "drop": "budget_full",
+            "category": "event"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:75d89c5d54165cca6559878f9d3cc00bd6605e4b54c2e20809851695e6608ef5",
+            "group": "urn:company-wiki:context-group:sha256:62fb694fc22b649a47da96588b40036718ef062565043d0a80fa4d7ba74561c2:operating-fact:0",
+            "page": [
+              "page",
+              42
+            ],
+            "locator": "loc:v1/page:42/paragraph:11",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "公司主要产品的进展情况如下：",
+            "metadata": {
+              "bbox": [
+                110.87999725341797,
+                238.870361328125,
+                257.7653503417969,
+                249.3203582763672
+              ],
+              "block_char_end": 14,
+              "block_char_start": 0,
+              "block_sha256": "b7f479f31551eab6e2ec60ea8d512a64f425f425b617fb3cebbbc71992fb0ca4",
+              "pdf_block": 9
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "pdf_visual_context_group",
+              "applied_operating_milestone",
+              "specific_business_event",
+              "progress_or_change_language"
+            ],
+            "score": 17,
+            "selected": true,
+            "drop": null,
+            "category": "operating_milestone"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:7305b97ad504343927bd59eaeb1078163ad210e56d207ffa404c9f023acf12f2",
+            "group": "urn:company-wiki:context-group:sha256:62fb694fc22b649a47da96588b40036718ef062565043d0a80fa4d7ba74561c2:operating-fact:0",
+            "page": [
+              "page",
+              42
+            ],
+            "locator": "loc:v1/page:42/paragraph:12",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "（1）CCP 刻蚀设备",
+            "metadata": {
+              "bbox": [
+                110.87999725341797,
+                257.7373046875,
+                201.48910522460938,
+                271.44769287109375
+              ],
+              "block_char_end": 11,
+              "block_char_start": 0,
+              "block_sha256": "0eb80583ecaea708ec14cbc4fb51a5d90af311bdda9f18841f6859331ee95496",
+              "pdf_block": 10
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "pdf_visual_context_group",
+              "applied_operating_milestone",
+              "specific_business_event",
+              "progress_or_change_language"
+            ],
+            "score": 17,
+            "selected": true,
+            "drop": null,
+            "category": "operating_milestone"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:a8f5715893351321b46036efa543c66cb258cdce65bcb706a9a0be6cd2823367",
+            "group": "urn:company-wiki:context-group:sha256:62fb694fc22b649a47da96588b40036718ef062565043d0a80fa4d7ba74561c2:operating-fact:0",
+            "page": [
+              "page",
+              42
+            ],
+            "locator": "loc:v1/page:42/paragraph:13",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "公司CCP 刻蚀设备中双反应台Primo D-RIE、Primo AD-RIE、Primo AD-RIEe，单反应台Primo",
+            "metadata": {
+              "bbox": [
+                110.87999725341797,
+                278.1372985839844,
+                531.4234619140625,
+                291.8476867675781
+              ],
+              "block_char_end": 63,
+              "block_char_start": 0,
+              "block_sha256": "9b63f7b858571ebccbf9a4e56db567fd96b5c1938523ba4bbb6572d01534605e",
+              "pdf_block": 11
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "pdf_visual_context_group",
+              "applied_operating_milestone",
+              "specific_business_event",
+              "progress_or_change_language"
+            ],
+            "score": 17,
+            "selected": true,
+            "drop": null,
+            "category": "operating_milestone"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:0d5ae6e47614a5ad98b5c6530d76688bb621c97edc359d201c07d7b256bb8ced",
+            "group": "urn:company-wiki:context-group:sha256:62fb694fc22b649a47da96588b40036718ef062565043d0a80fa4d7ba74561c2:operating-fact:0",
+            "page": [
+              "page",
+              42
+            ],
+            "locator": "loc:v1/page:42/paragraph:15",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "运超过1000 个反应台。",
+            "metadata": {
+              "bbox": [
+                89.87999725341797,
+                319.0563049316406,
+                531.3690795898438,
+                332.7666931152344
+              ],
+              "block_char_end": 13,
+              "block_char_start": 0,
+              "block_sha256": "301ee3976f70c8de05b00964293282fe02c57cfa2892d2981cb28574a561cb20",
+              "pdf_block": 13
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "pdf_visual_context_group",
+              "applied_operating_milestone",
+              "specific_business_event",
+              "progress_or_change_language"
+            ],
+            "score": 17,
+            "selected": true,
+            "drop": null,
+            "category": "operating_milestone"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:d2b6d5933486d59577a80dc8cb53a38689a36fb6bb89b96f1880888a8caad87d",
+            "group": "urn:company-wiki:context-group:sha256:1c1aa96e066ea16746bd6d9c56e46d82f6f943d4db5b2906497e929164ceb734:operating-fact:0",
+            "page": [
+              "page",
+              52
+            ],
+            "locator": "loc:v1/page:52/paragraph:35",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "在3D NAND 芯片制造环节，公司的等离子体刻蚀设",
+            "metadata": {
+              "bbox": [
+                89.87999725341797,
+                566.4962768554688,
+                531.3606567382812,
+                580.2066650390625
+              ],
+              "block_char_end": 45,
+              "block_char_start": 19,
+              "block_sha256": "ff223250a5d2d0fd789fb929a04932640d1f31dae393a3fe7407dcbf458ee433",
+              "pdf_block": 26
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "pdf_visual_context_group",
+              "applied_operating_milestone",
+              "specific_business_event",
+              "progress_or_change_language"
+            ],
+            "score": 17,
+            "selected": true,
+            "drop": null,
+            "category": "operating_milestone"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:a94be5504a1532096d93480b80a15e9dbfbd6b98d453d1a97f20badb408c320a",
+            "group": "urn:company-wiki:context-group:sha256:1c1aa96e066ea16746bd6d9c56e46d82f6f943d4db5b2906497e929164ceb734:operating-fact:0",
+            "page": [
+              "page",
+              52
+            ],
+            "locator": "loc:v1/page:52/paragraph:37",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "备和工艺；",
+            "metadata": {
+              "bbox": [
+                89.87999725341797,
+                607.2963256835938,
+                530.50390625,
+                621.0067138671875
+              ],
+              "block_char_end": 5,
+              "block_char_start": 0,
+              "block_sha256": "edcd66413055de11a3eefbf22e3617ef509859d11c645e359ef3246474fde458",
+              "pdf_block": 28
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "pdf_visual_context_group",
+              "applied_operating_milestone",
+              "specific_business_event",
+              "progress_or_change_language"
+            ],
+            "score": 17,
+            "selected": true,
+            "drop": null,
+            "category": "operating_milestone"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:cceea62fe736a893343f830baea1f58550b683d413ca60182bb7e2f1e34b84a3",
+            "group": "urn:company-wiki:context-group:sha256:105b4deb59af2403db449ffc6ffe333a462562d4b1b2d338849b2f1913c0d2f1:operating-fact:1",
+            "page": [
+              "page",
+              32
+            ],
+            "locator": "loc:v1/page:32/paragraph:9",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "芯片生产线及下一代更先进的生产线上，公司的CCP 刻蚀设备均实现了批量销售。",
+            "metadata": {
+              "bbox": [
+                89.87999725341797,
+                479.3773193359375,
+                531.489990234375,
+                493.08770751953125
+              ],
+              "block_char_end": 38,
+              "block_char_start": 0,
+              "block_sha256": "6712c4de0d9429bfb278a356e803117658eaf5abc5e60690eaa2b425c9a57005",
+              "pdf_block": 8
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "applied_operating_milestone",
+              "specific_business_event"
+            ],
+            "score": 16,
+            "selected": true,
+            "drop": null,
+            "category": "operating_milestone"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:0618507f74c6302162162959fb1950158a734d6bef407e01051f11663415162a",
+            "group": "urn:company-wiki:context-group:sha256:105b4deb59af2403db449ffc6ffe333a462562d4b1b2d338849b2f1913c0d2f1:operating-fact:2",
+            "page": [
+              "page",
+              32
+            ],
+            "locator": "loc:v1/page:32/paragraph:15",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "受益",
+            "metadata": {
+              "bbox": [
+                89.87999725341797,
+                540.5773315429688,
+                531.3666381835938,
+                554.2877197265625
+              ],
+              "block_char_end": 48,
+              "block_char_start": 46,
+              "block_sha256": "a7a8c4e12058df1c5a4bc9ba503d12eea47028901a29c11f73c449fe777a27d5",
+              "pdf_block": 11
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "pdf_visual_context_group",
+              "specific_business_event",
+              "progress_or_change_language"
+            ],
+            "score": 15,
+            "selected": false,
+            "drop": "budget_full",
+            "category": "event"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:1e00386cadb06074ca3c69da94a829a2b4b48b90076a27b98459b016052c08e5",
+            "group": "urn:company-wiki:context-group:sha256:105b4deb59af2403db449ffc6ffe333a462562d4b1b2d338849b2f1913c0d2f1:operating-fact:2",
+            "page": [
+              "page",
+              32
+            ],
+            "locator": "loc:v1/page:32/paragraph:17",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "丰富等优势，2025 年公司CCP 和ICP 刻蚀设备的销售增长和在国内主要客户芯片生产线上市占",
+            "metadata": {
+              "bbox": [
+                89.87999725341797,
+                581.3773193359375,
+                531.47802734375,
+                595.0877075195312
+              ],
+              "block_char_end": 48,
+              "block_char_start": 0,
+              "block_sha256": "e02f3049e7c13e93d4e0a379e05d12744cba77e854c8d2714b218f8d26a9f56c",
+              "pdf_block": 13
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "pdf_visual_context_group",
+              "specific_business_event",
+              "progress_or_change_language"
+            ],
+            "score": 15,
+            "selected": false,
+            "drop": "budget_full",
+            "category": "event"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:678b190e53ab21646068dd73dc40812611fbef7314f07663cda51aee3be64af3",
+            "group": "urn:company-wiki:context-group:sha256:105b4deb59af2403db449ffc6ffe333a462562d4b1b2d338849b2f1913c0d2f1:operating-fact:2",
+            "page": [
+              "page",
+              32
+            ],
+            "locator": "loc:v1/page:32/paragraph:18",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "率不断提升。",
+            "metadata": {
+              "bbox": [
+                89.87999725341797,
+                603.4293212890625,
+                152.76834106445312,
+                613.8793334960938
+              ],
+              "block_char_end": 6,
+              "block_char_start": 0,
+              "block_sha256": "a8ede2e6ded381a93eb9f0a9c0acd086c557dbb3b3c1aead92a40fd03ad1deee",
+              "pdf_block": 14
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "pdf_visual_context_group",
+              "specific_business_event",
+              "progress_or_change_language"
+            ],
+            "score": 15,
+            "selected": false,
+            "drop": "budget_full",
+            "category": "event"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:c1587ca2b064c206d05a0f64cf520f1bd4c310c60f0db1a0dfd2dc1b07603975",
+            "group": "urn:company-wiki:context-group:sha256:105b4deb59af2403db449ffc6ffe333a462562d4b1b2d338849b2f1913c0d2f1:sentence:17:18",
+            "page": [
+              "page",
+              32
+            ],
+            "locator": "loc:v1/page:32/paragraph:20",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "场并获得重复性订单。",
+            "metadata": {
+              "bbox": [
+                89.87999725341797,
+                642.6962890625,
+                531.4837646484375,
+                656.4066772460938
+              ],
+              "block_char_end": 10,
+              "block_char_start": 0,
+              "block_sha256": "0600f2c0aa2f55cdbbf58f02ca2ba3e0a64b6fe39bf3bc416577d79bedf1fede",
+              "pdf_block": 16
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "pdf_visual_context_group",
+              "progress_or_change_language",
+              "specific_business_event"
+            ],
+            "score": 15,
+            "selected": false,
+            "drop": "budget_full",
+            "category": "event"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:e0fc9d1f570ae5d5b07554e1a022aaa396184bbb18530faa41f77343d7f6e33d",
+            "group": "urn:company-wiki:context-group:sha256:62fb694fc22b649a47da96588b40036718ef062565043d0a80fa4d7ba74561c2:operating-fact:0",
+            "page": [
+              "page",
+              42
+            ],
+            "locator": "loc:v1/page:42/paragraph:14",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "HD-RIE 等产品已广泛应用于国内外一线客户的生产线，2025 年继续保持高速增长态势，单年付",
+            "metadata": {
+              "bbox": [
+                89.87999725341797,
+                298.65631103515625,
+                531.3619384765625,
+                312.36669921875
+              ],
+              "block_char_end": 48,
+              "block_char_start": 0,
+              "block_sha256": "5f83bafa7410522ff731f6490a97b8055a6acfdf0096717309a41e53f38c29ae",
+              "pdf_block": 12
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "applied_operating_milestone",
+              "specific_business_event",
+              "progress_or_change_language",
+              "current_business_progress"
+            ],
+            "score": 15,
+            "selected": true,
+            "drop": null,
+            "category": "operating_milestone"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:49c2d4f2b8b231d29de1643bbaebd69a48709eb13dd90d4207d89845aa920994",
+            "group": "urn:company-wiki:context-group:sha256:d56b4f52c7a514e6855128f27be33c56bacc9b00af4152dcd5a095888b4423b2:operating-fact:1",
+            "page": [
+              "page",
+              29
+            ],
+            "locator": "loc:v1/page:29/paragraph:4",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "中微公司的等离子体刻蚀设备已被广泛应用于国内和国际一",
+            "metadata": {
+              "bbox": [
+                89.87999725341797,
+                98.22935485839844,
+                531.4719848632812,
+                108.67935180664062
+              ],
+              "block_char_end": 42,
+              "block_char_start": 16,
+              "block_sha256": "22ab31e77096c9ed9cd765b46c180870cca80decd1f00ac9269b8c2dc7663279",
+              "pdf_block": 3
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "applied_operating_milestone",
+              "specific_business_event"
+            ],
+            "score": 13,
+            "selected": true,
+            "drop": null,
+            "category": "operating_milestone"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:64bcf3076726ba188d72ca203fb2f93becde8fd95f2e3085c5a735df942792f6",
+            "group": "urn:company-wiki:context-group:sha256:105b4deb59af2403db449ffc6ffe333a462562d4b1b2d338849b2f1913c0d2f1:operating-fact:0",
+            "page": [
+              "page",
+              32
+            ],
+            "locator": "loc:v1/page:32/paragraph:7",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "公司刻蚀设备已应用于全球先进的3 纳米及以下集成电路加工制造生产线。",
+            "metadata": {
+              "bbox": [
+                89.87999725341797,
+                458.8562927246094,
+                531.4894409179688,
+                472.5666809082031
+              ],
+              "block_char_end": 34,
+              "block_char_start": 0,
+              "block_sha256": "3c70bb0cf75099b3159bbcf2c8810412cc78cfced1541e58cb1c2f37c3f8e1f4",
+              "pdf_block": 7
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "applied_operating_milestone",
+              "specific_business_event"
+            ],
+            "score": 13,
+            "selected": false,
+            "drop": "budget_full",
+            "category": "operating_milestone"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:0884bb031a75374eb49f5805ea7840b86e44656d89c8c0666122229049d83a79",
+            "group": "urn:company-wiki:context-group:sha256:eaed17dc969fe7150bc35fa4f3cf19346d0a9ca981a7ab678b109030ed9ed832:operating-fact:5",
+            "page": [
+              "page",
+              40
+            ],
+            "locator": "loc:v1/page:40/paragraph:35",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "公司位于南昌的约14 万平方米的生产和研发基地已于2023 年7 月正式投入使用；",
+            "metadata": {
+              "bbox": [
+                89.87999725341797,
+                586.8963012695312,
+                531.3665161132812,
+                600.606689453125
+              ],
+              "block_char_end": 46,
+              "block_char_start": 5,
+              "block_sha256": "71ca7f13a72c4afe0148936f2b3af66b0a3bdf3e4a5fe3e84bf17befe809fb2d",
+              "pdf_block": 27
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "applied_operating_milestone",
+              "specific_business_event"
+            ],
+            "score": 13,
+            "selected": true,
+            "drop": null,
+            "category": "operating_milestone"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:e3c9b1f7f1770f10d4bfbcd990b9b2a6703fdc902b278c1108e8dd3cc381b77b",
+            "group": "urn:company-wiki:context-group:sha256:eaed17dc969fe7150bc35fa4f3cf19346d0a9ca981a7ab678b109030ed9ed832:operating-fact:6",
+            "page": [
+              "page",
+              40
+            ],
+            "locator": "loc:v1/page:40/paragraph:37",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "司在上海临港的约18 万平方米的生产和研发基地已于2024 年8 月正式投入使用，临港二期约20",
+            "metadata": {
+              "bbox": [
+                89.87999725341797,
+                607.2963256835938,
+                531.4249877929688,
+                621.0067138671875
+              ],
+              "block_char_end": 48,
+              "block_char_start": 0,
+              "block_sha256": "d3765884af47a15dd11c54f4efb37cfb6910214bd612783dc5f7ab18b642d88f",
+              "pdf_block": 28
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "applied_operating_milestone",
+              "specific_business_event"
+            ],
+            "score": 13,
+            "selected": true,
+            "drop": null,
+            "category": "operating_milestone"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:6492c5ff1f9b3d8bea82b5e88a2c6a4e17d8f7515dd3a7bedab5302d762bae45",
+            "group": "urn:company-wiki:context-group:sha256:67faa0cd031805c73fb98af20313e9f5a1535d3aaacb6728b8d132d183f21854:operating-fact:3",
+            "page": [
+              "page",
+              48
+            ],
+            "locator": "loc:v1/page:48/paragraph:38",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "海临港的约18 万平方米的生产和研发基地已于2024 年8 月正式投入使用，临港二期约20 万平方",
+            "metadata": {
+              "bbox": [
+                89.87999725341797,
+                672.9373168945312,
+                531.4892578125,
+                686.647705078125
+              ],
+              "block_char_end": 49,
+              "block_char_start": 0,
+              "block_sha256": "2bb59297afdfe279a1bba4a4507a1c3c7e0ce481f818a4a4726f60a2cc4d91ce",
+              "pdf_block": 30
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "applied_operating_milestone",
+              "specific_business_event"
+            ],
+            "score": 13,
+            "selected": true,
+            "drop": null,
+            "category": "operating_milestone"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:1d25dfd268d321546763770ea9a2d75fb40bf6805f230829c7f768ab368d0ab9",
+            "group": "urn:company-wiki:context-group:sha256:105b4deb59af2403db449ffc6ffe333a462562d4b1b2d338849b2f1913c0d2f1:operating-fact:4",
+            "page": [
+              "page",
+              32
+            ],
+            "locator": "loc:v1/page:32/paragraph:24",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "顺利运付客户端进行量产验证，并且获得客户高度认可。",
+            "metadata": {
+              "bbox": [
+                89.87999725341797,
+                685.1503295898438,
+                352.3209533691406,
+                695.600341796875
+              ],
+              "block_char_end": 25,
+              "block_char_start": 0,
+              "block_sha256": "4022686c43bcf68423a1f951ae3aa316121feaa80f7380ed1657b88bcc0e2ee3",
+              "pdf_block": 18
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "specific_business_event",
+              "progress_or_change_language"
+            ],
+            "score": 12,
+            "selected": false,
+            "drop": "budget_full",
+            "category": "event"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:ac4ef8750562375cd94eded41b47db53d55f81081b95db825e5d3541fddc639c",
+            "group": "urn:company-wiki:context-group:sha256:105b4deb59af2403db449ffc6ffe333a462562d4b1b2d338849b2f1913c0d2f1:operating-fact:3",
+            "page": [
+              "page",
+              32
+            ],
+            "locator": "loc:v1/page:32/paragraph:22",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "沉积设备也将陆续进入市场，能够覆盖全部类别的先进金属应用；",
+            "metadata": {
+              "bbox": [
+                89.87999725341797,
+                663.0963134765625,
+                531.3682250976562,
+                676.8067016601562
+              ],
+              "block_char_end": 29,
+              "block_char_start": 0,
+              "block_sha256": "e5b770d16badf74d6f3ab05a224fc5b6013c48aa12e71d92aedf750ed6ec44d8",
+              "pdf_block": 17
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "specific_business_event",
+              "progress_or_change_language",
+              "current_industry_context"
+            ],
+            "score": 11,
+            "selected": false,
+            "drop": "budget_full",
+            "category": "event"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:08ee30a4f74a954c646346cbc5834524b69a6794d2e159aa0bc3663e5404eac2",
+            "group": "urn:company-wiki:context-group:sha256:d56b4f52c7a514e6855128f27be33c56bacc9b00af4152dcd5a095888b4423b2:operating-fact:1",
+            "page": [
+              "page",
+              29
+            ],
+            "locator": "loc:v1/page:29/paragraph:5",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "线客户，从65 纳米到3 纳米及更先进工艺的众多刻蚀应用。",
+            "metadata": {
+              "bbox": [
+                89.87999725341797,
+                117.09629821777344,
+                531.3645629882812,
+                130.80670166015625
+              ],
+              "block_char_end": 29,
+              "block_char_start": 0,
+              "block_sha256": "ca784a88b561c82ff79b88644ccedf1deb1195e58d0128db513367e8bbdd8685",
+              "pdf_block": 4
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "specific_business_event",
+              "applied_operating_milestone"
+            ],
+            "score": 10,
+            "selected": true,
+            "drop": null,
+            "category": "operating_milestone"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:d91b944d148a73937b9e7f09d2f33eeafeaa9b1f6fa76e82a102340231cfbc40",
+            "group": "urn:company-wiki:context-group:sha256:105b4deb59af2403db449ffc6ffe333a462562d4b1b2d338849b2f1913c0d2f1:operating-fact:2",
+            "page": [
+              "page",
+              32
+            ],
+            "locator": "loc:v1/page:32/paragraph:16",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "于公司完整的单台和双台刻蚀设备布局、核心技术持续突破、产品升级快速迭代、刻蚀应用覆盖",
+            "metadata": {
+              "bbox": [
+                89.87999725341797,
+                562.5103149414062,
+                531.4719848632812,
+                572.9603271484375
+              ],
+              "block_char_end": 42,
+              "block_char_start": 0,
+              "block_sha256": "e50f9d40dc9f79215246f5bc2691f174ff5a8ad263a6b24545a876cbf1812c52",
+              "pdf_block": 12
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "specific_business_event",
+              "progress_or_change_language"
+            ],
+            "score": 9,
+            "selected": false,
+            "drop": "budget_full",
+            "category": "event"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:aa87d4c22a715021d9c249b2c8e54ab1ffb38e77657731442766aae10ffb7d67",
+            "group": "urn:company-wiki:context-group:sha256:105b4deb59af2403db449ffc6ffe333a462562d4b1b2d338849b2f1913c0d2f1:operating-fact:3",
+            "page": [
+              "page",
+              32
+            ],
+            "locator": "loc:v1/page:32/paragraph:21",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "其中，薄膜设备累计出货量已突破300 个反应台，其他二十多种导体薄膜",
+            "metadata": {
+              "bbox": [
+                89.87999725341797,
+                642.6962890625,
+                531.4837646484375,
+                656.4066772460938
+              ],
+              "block_char_end": 44,
+              "block_char_start": 10,
+              "block_sha256": "0600f2c0aa2f55cdbbf58f02ca2ba3e0a64b6fe39bf3bc416577d79bedf1fede",
+              "pdf_block": 16
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "current_industry_context",
+              "specific_business_event"
+            ],
+            "score": 8,
+            "selected": false,
+            "drop": "budget_full",
+            "category": "event"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:0241f6e808ea519a16870f1857a68bc8a05cedd90a9f9f3f6ea9ec8f84203dec",
+            "group": "urn:company-wiki:context-group:sha256:105b4deb59af2403db449ffc6ffe333a462562d4b1b2d338849b2f1913c0d2f1:operating-fact:5",
+            "page": [
+              "page",
+              32
+            ],
+            "locator": "loc:v1/page:32/paragraph:25",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "在MOCVD 领域，用于氮化镓基LED 外延生产的设备已在行业领先客户生产线上大规模投",
+            "metadata": {
+              "bbox": [
+                110.87999725341797,
+                704.017333984375,
+                531.35986328125,
+                717.7277221679688
+              ],
+              "block_char_end": 43,
+              "block_char_start": 0,
+              "block_sha256": "392b9d7ddb7dc567d0f3217f5d9ff11c775849ecac2cc3ea24f61e3c73a1a953",
+              "pdf_block": 19
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "pdf_visual_context_group",
+              "specific_business_event"
+            ],
+            "score": 4,
+            "selected": false,
+            "drop": "budget_full",
+            "category": "event"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:19298d5f98b85bde5a7d60135023e543e9c077a58732aa6582089cae0b35b828",
+            "group": "urn:company-wiki:context-group:sha256:105b4deb59af2403db449ffc6ffe333a462562d4b1b2d338849b2f1913c0d2f1:operating-fact:5",
+            "page": [
+              "page",
+              32
+            ],
+            "locator": "loc:v1/page:32/paragraph:26",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "入量产，自2017 年起已经成为氮化镓基LED 市场份额最大的MOCVD 设备供应商，牢牢占据行",
+            "metadata": {
+              "bbox": [
+                89.87999725341797,
+                724.4172973632812,
+                531.488525390625,
+                738.127685546875
+              ],
+              "block_char_end": 48,
+              "block_char_start": 0,
+              "block_sha256": "80af969ab24d808fe31174c244e5d468b0ec04cbd320a937893aedbbde830eae",
+              "pdf_block": 20
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "pdf_visual_context_group",
+              "specific_business_event"
+            ],
+            "score": 4,
+            "selected": false,
+            "drop": "budget_full",
+            "category": "event"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:fdfa6c35d693da3c9f2f947c23245fce90ab5fc188f3cce9ff4e27241adbe519",
+            "group": "urn:company-wiki:context-group:sha256:105b4deb59af2403db449ffc6ffe333a462562d4b1b2d338849b2f1913c0d2f1:sentence:17:18",
+            "page": [
+              "page",
+              32
+            ],
+            "locator": "loc:v1/page:32/paragraph:19",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "公司近两年新开发的LPCVD 薄膜设备和ALD 薄膜设备，目前已有多款新型设备产品进入市",
+            "metadata": {
+              "bbox": [
+                110.87999725341797,
+                622.2963256835938,
+                531.4846801757812,
+                636.0067138671875
+              ],
+              "block_char_end": 44,
+              "block_char_start": 0,
+              "block_sha256": "aa9df4b54f668adc4529a99bbf4f8c04bbe29ed81ddbaaee09451f70fe1fd098",
+              "pdf_block": 15
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "progress_or_change_language",
+              "current_business_progress"
+            ],
+            "score": 3,
+            "selected": false,
+            "drop": "budget_full",
+            "category": "other"
+          }
+        ]
+      },
+      "parsed_page": [
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:2217dd64192ee48251de14eb98f7fb690d2c85556933238b821cea9bb63dde93",
+          "locator": "loc:v1/page:32/paragraph:0",
+          "kind": "pdf_text_block",
+          "text": "中微半导体设备（上海）股份有限公司2025 年年度报告",
+          "metadata": {
+            "bbox": [
+              200.8800048828125,
+              42.65599822998047,
+              419.3999938964844,
+              54.697998046875
+            ],
+            "block_char_end": 27,
+            "block_char_start": 0,
+            "block_sha256": "3fbb1081b838c7af787c7c330d9be0d72025a82336757e01ca7cf7fdcae0e950",
+            "pdf_block": 0
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:00c3997ccbfffc4cb2c70d0f1d3f60ff6e701dd6072c1be3f0dd475ca57b004b",
+          "locator": "loc:v1/page:32/paragraph:1",
+          "kind": "pdf_text_block",
+          "text": "32 / 259",
+          "metadata": {
+            "bbox": [
+              295.44000244140625,
+              769.615966796875,
+              325.7927551269531,
+              781.7769775390625
+            ],
+            "block_char_end": 8,
+            "block_char_start": 0,
+            "block_sha256": "a5d51eca7b2b524660886a567c0bc841adec5ababf1224a6132bbaa31034495c",
+            "pdf_block": 1
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:f902b538925d8d19efe59e506aa607c47d671540c28d59a6212018b5fb8c1806",
+          "locator": "loc:v1/page:32/paragraph:2",
+          "kind": "pdf_text_block",
+          "text": "2、公司所处的行业地位分析及其变化情况",
+          "metadata": {
+            "bbox": [
+              89.87999725341797,
+              378.67034912109375,
+              289.9294128417969,
+              389.1203308105469
+            ],
+            "block_char_end": 19,
+            "block_char_start": 0,
+            "block_sha256": "7a30ba927caad73d40998ac371300d69c95826e012b5f8744a5dc404fe89db3d",
+            "pdf_block": 3
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:55cd4daaffd215f3669fbab527cadbd67a0249d8f25a39669546e182f99dbeaa",
+          "locator": "loc:v1/page:32/paragraph:3",
+          "kind": "pdf_text_block",
+          "text": "目前半导体设备市场主要由欧美、日本等国家的企业所占据。",
+          "metadata": {
+            "bbox": [
+              110.87999725341797,
+              399.1893615722656,
+              531.4727172851562,
+              409.63934326171875
+            ],
+            "block_char_end": 27,
+            "block_char_start": 0,
+            "block_sha256": "0924d74d1e266bfe6c2fc9aee4afb0b272e45f92f57471d9408b085cbe633c5d",
+            "pdf_block": 4
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:68a1b38d80737e0bb4511c5953f82952aecace46f063d207ad2ed98cfb889f60",
+          "locator": "loc:v1/page:32/paragraph:4",
+          "kind": "pdf_text_block",
+          "text": "近年来我国半导体设备行业整",
+          "metadata": {
+            "bbox": [
+              110.87999725341797,
+              399.1893615722656,
+              531.4727172851562,
+              409.63934326171875
+            ],
+            "block_char_end": 40,
+            "block_char_start": 27,
+            "block_sha256": "0924d74d1e266bfe6c2fc9aee4afb0b272e45f92f57471d9408b085cbe633c5d",
+            "pdf_block": 4
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:18c9f744eb8267c86493a80a2356324a00984251611e16bd1c9014c36e00a876",
+          "locator": "loc:v1/page:32/paragraph:5",
+          "kind": "pdf_text_block",
+          "text": "体水平不断提高。",
+          "metadata": {
+            "bbox": [
+              89.87999725341797,
+              419.58935546875,
+              173.76759338378906,
+              430.0393371582031
+            ],
+            "block_char_end": 8,
+            "block_char_start": 0,
+            "block_sha256": "c48214ba53e3c988f076e407619f4986bf01139e383e826f18594bcf40b22efb",
+            "pdf_block": 5
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:6dcf6b1d2f4f31f7aadda74246295a53772b2b50e3361b51a8687ee31cb912b6",
+          "locator": "loc:v1/page:32/paragraph:6",
+          "kind": "pdf_text_block",
+          "text": "在刻蚀设备方面，全球刻蚀设备市场呈现垄断格局，海外少数几家公司占据主要市场份额；",
+          "metadata": {
+            "bbox": [
+              110.87999725341797,
+              439.9893493652344,
+              531.4727172851562,
+              450.4393310546875
+            ],
+            "block_char_end": 40,
+            "block_char_start": 0,
+            "block_sha256": "5d309df61cf6c0866a6fa792a0d5c0e9591807a348a1fdcf554a0574d020eb5e",
+            "pdf_block": 6
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:64bcf3076726ba188d72ca203fb2f93becde8fd95f2e3085c5a735df942792f6",
+          "locator": "loc:v1/page:32/paragraph:7",
+          "kind": "pdf_text_block",
+          "text": "公司刻蚀设备已应用于全球先进的3 纳米及以下集成电路加工制造生产线。",
+          "metadata": {
+            "bbox": [
+              89.87999725341797,
+              458.8562927246094,
+              531.4894409179688,
+              472.5666809082031
+            ],
+            "block_char_end": 34,
+            "block_char_start": 0,
+            "block_sha256": "3c70bb0cf75099b3159bbcf2c8810412cc78cfced1541e58cb1c2f37c3f8e1f4",
+            "pdf_block": 7
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:692682cbbf645069b62d0e47078aa2864947da8bbeded2366234641daca07969",
+          "locator": "loc:v1/page:32/paragraph:8",
+          "kind": "pdf_text_block",
+          "text": "在海外先进的3 纳米",
+          "metadata": {
+            "bbox": [
+              89.87999725341797,
+              458.8562927246094,
+              531.4894409179688,
+              472.5666809082031
+            ],
+            "block_char_end": 44,
+            "block_char_start": 34,
+            "block_sha256": "3c70bb0cf75099b3159bbcf2c8810412cc78cfced1541e58cb1c2f37c3f8e1f4",
+            "pdf_block": 7
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:cceea62fe736a893343f830baea1f58550b683d413ca60182bb7e2f1e34b84a3",
+          "locator": "loc:v1/page:32/paragraph:9",
+          "kind": "pdf_text_block",
+          "text": "芯片生产线及下一代更先进的生产线上，公司的CCP 刻蚀设备均实现了批量销售。",
+          "metadata": {
+            "bbox": [
+              89.87999725341797,
+              479.3773193359375,
+              531.489990234375,
+              493.08770751953125
+            ],
+            "block_char_end": 38,
+            "block_char_start": 0,
+            "block_sha256": "6712c4de0d9429bfb278a356e803117658eaf5abc5e60690eaa2b425c9a57005",
+            "pdf_block": 8
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:e23d3a2bdcc6345a771f58dbf09b8b7b357074778645893968850313b3b0ed76",
+          "locator": "loc:v1/page:32/paragraph:10",
+          "kind": "pdf_text_block",
+          "text": "公司的ICP 双",
+          "metadata": {
+            "bbox": [
+              89.87999725341797,
+              479.3773193359375,
+              531.489990234375,
+              493.08770751953125
+            ],
+            "block_char_end": 46,
+            "block_char_start": 38,
+            "block_sha256": "6712c4de0d9429bfb278a356e803117658eaf5abc5e60690eaa2b425c9a57005",
+            "pdf_block": 8
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:e7303d7ac51679ec611c62c06b93861a2e61872b6614019dba01a60e711aff7b",
+          "locator": "loc:v1/page:32/paragraph:11",
+          "kind": "pdf_text_block",
+          "text": "台机Primo Twin-Star®，反应台之间刻蚀速度控制的最好精度已达到每分钟0.2A（0.02 纳米，即",
+          "metadata": {
+            "bbox": [
+              89.87999725341797,
+              499.7773132324219,
+              530.6500244140625,
+              513.4877319335938
+            ],
+            "block_char_end": 55,
+            "block_char_start": 0,
+            "block_sha256": "f59893c4bf963b88d8401715f546c7c6096cebcf37d6e63e5107e8f550cb04e3",
+            "pdf_block": 9
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:806d617e7a7bb40be94ee02e796c7574dadd443afbd30b55bdec9bf027c112a4",
+          "locator": "loc:v1/page:32/paragraph:12",
+          "kind": "pdf_text_block",
+          "text": "20 皮米），这一刻蚀精度在氧化硅、氮化硅和多晶硅等薄膜的刻蚀工艺上，均得到了验证。",
+          "metadata": {
+            "bbox": [
+              89.87999725341797,
+              520.1773071289062,
+              531.369873046875,
+              533.8876953125
+            ],
+            "block_char_end": 42,
+            "block_char_start": 0,
+            "block_sha256": "2b8c57fa815ca2c005f9f994e6dc2bd48b25e5dccb3357fe20629cf7b83e5234",
+            "pdf_block": 10
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:fc7e1a0446691e1868a1cec575cfe6f739c3b5a532c5efb13184ede39a4d11d6",
+          "locator": "loc:v1/page:32/paragraph:13",
+          "kind": "pdf_text_block",
+          "text": "该精",
+          "metadata": {
+            "bbox": [
+              89.87999725341797,
+              520.1773071289062,
+              531.369873046875,
+              533.8876953125
+            ],
+            "block_char_end": 44,
+            "block_char_start": 42,
+            "block_sha256": "2b8c57fa815ca2c005f9f994e6dc2bd48b25e5dccb3357fe20629cf7b83e5234",
+            "pdf_block": 10
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:ef26844d8b449eb1404fdd677a0961ede2f6b4850b3376a9b9213287473e65e8",
+          "locator": "loc:v1/page:32/paragraph:14",
+          "kind": "pdf_text_block",
+          "text": "度约等于硅原子直径2.5 埃的十分之一，是人类头发丝平均直径的350 万到500 万分之一。",
+          "metadata": {
+            "bbox": [
+              89.87999725341797,
+              540.5773315429688,
+              531.3666381835938,
+              554.2877197265625
+            ],
+            "block_char_end": 46,
+            "block_char_start": 0,
+            "block_sha256": "a7a8c4e12058df1c5a4bc9ba503d12eea47028901a29c11f73c449fe777a27d5",
+            "pdf_block": 11
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:0618507f74c6302162162959fb1950158a734d6bef407e01051f11663415162a",
+          "locator": "loc:v1/page:32/paragraph:15",
+          "kind": "pdf_text_block",
+          "text": "受益",
+          "metadata": {
+            "bbox": [
+              89.87999725341797,
+              540.5773315429688,
+              531.3666381835938,
+              554.2877197265625
+            ],
+            "block_char_end": 48,
+            "block_char_start": 46,
+            "block_sha256": "a7a8c4e12058df1c5a4bc9ba503d12eea47028901a29c11f73c449fe777a27d5",
+            "pdf_block": 11
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:d91b944d148a73937b9e7f09d2f33eeafeaa9b1f6fa76e82a102340231cfbc40",
+          "locator": "loc:v1/page:32/paragraph:16",
+          "kind": "pdf_text_block",
+          "text": "于公司完整的单台和双台刻蚀设备布局、核心技术持续突破、产品升级快速迭代、刻蚀应用覆盖",
+          "metadata": {
+            "bbox": [
+              89.87999725341797,
+              562.5103149414062,
+              531.4719848632812,
+              572.9603271484375
+            ],
+            "block_char_end": 42,
+            "block_char_start": 0,
+            "block_sha256": "e50f9d40dc9f79215246f5bc2691f174ff5a8ad263a6b24545a876cbf1812c52",
+            "pdf_block": 12
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:1e00386cadb06074ca3c69da94a829a2b4b48b90076a27b98459b016052c08e5",
+          "locator": "loc:v1/page:32/paragraph:17",
+          "kind": "pdf_text_block",
+          "text": "丰富等优势，2025 年公司CCP 和ICP 刻蚀设备的销售增长和在国内主要客户芯片生产线上市占",
+          "metadata": {
+            "bbox": [
+              89.87999725341797,
+              581.3773193359375,
+              531.47802734375,
+              595.0877075195312
+            ],
+            "block_char_end": 48,
+            "block_char_start": 0,
+            "block_sha256": "e02f3049e7c13e93d4e0a379e05d12744cba77e854c8d2714b218f8d26a9f56c",
+            "pdf_block": 13
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:678b190e53ab21646068dd73dc40812611fbef7314f07663cda51aee3be64af3",
+          "locator": "loc:v1/page:32/paragraph:18",
+          "kind": "pdf_text_block",
+          "text": "率不断提升。",
+          "metadata": {
+            "bbox": [
+              89.87999725341797,
+              603.4293212890625,
+              152.76834106445312,
+              613.8793334960938
+            ],
+            "block_char_end": 6,
+            "block_char_start": 0,
+            "block_sha256": "a8ede2e6ded381a93eb9f0a9c0acd086c557dbb3b3c1aead92a40fd03ad1deee",
+            "pdf_block": 14
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:fdfa6c35d693da3c9f2f947c23245fce90ab5fc188f3cce9ff4e27241adbe519",
+          "locator": "loc:v1/page:32/paragraph:19",
+          "kind": "pdf_text_block",
+          "text": "公司近两年新开发的LPCVD 薄膜设备和ALD 薄膜设备，目前已有多款新型设备产品进入市",
+          "metadata": {
+            "bbox": [
+              110.87999725341797,
+              622.2963256835938,
+              531.4846801757812,
+              636.0067138671875
+            ],
+            "block_char_end": 44,
+            "block_char_start": 0,
+            "block_sha256": "aa9df4b54f668adc4529a99bbf4f8c04bbe29ed81ddbaaee09451f70fe1fd098",
+            "pdf_block": 15
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:c1587ca2b064c206d05a0f64cf520f1bd4c310c60f0db1a0dfd2dc1b07603975",
+          "locator": "loc:v1/page:32/paragraph:20",
+          "kind": "pdf_text_block",
+          "text": "场并获得重复性订单。",
+          "metadata": {
+            "bbox": [
+              89.87999725341797,
+              642.6962890625,
+              531.4837646484375,
+              656.4066772460938
+            ],
+            "block_char_end": 10,
+            "block_char_start": 0,
+            "block_sha256": "0600f2c0aa2f55cdbbf58f02ca2ba3e0a64b6fe39bf3bc416577d79bedf1fede",
+            "pdf_block": 16
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:aa87d4c22a715021d9c249b2c8e54ab1ffb38e77657731442766aae10ffb7d67",
+          "locator": "loc:v1/page:32/paragraph:21",
+          "kind": "pdf_text_block",
+          "text": "其中，薄膜设备累计出货量已突破300 个反应台，其他二十多种导体薄膜",
+          "metadata": {
+            "bbox": [
+              89.87999725341797,
+              642.6962890625,
+              531.4837646484375,
+              656.4066772460938
+            ],
+            "block_char_end": 44,
+            "block_char_start": 10,
+            "block_sha256": "0600f2c0aa2f55cdbbf58f02ca2ba3e0a64b6fe39bf3bc416577d79bedf1fede",
+            "pdf_block": 16
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:ac4ef8750562375cd94eded41b47db53d55f81081b95db825e5d3541fddc639c",
+          "locator": "loc:v1/page:32/paragraph:22",
+          "kind": "pdf_text_block",
+          "text": "沉积设备也将陆续进入市场，能够覆盖全部类别的先进金属应用；",
+          "metadata": {
+            "bbox": [
+              89.87999725341797,
+              663.0963134765625,
+              531.3682250976562,
+              676.8067016601562
+            ],
+            "block_char_end": 29,
+            "block_char_start": 0,
+            "block_sha256": "e5b770d16badf74d6f3ab05a224fc5b6013c48aa12e71d92aedf750ed6ec44d8",
+            "pdf_block": 17
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:c7d72cb87acb2be503bd2c9da30e62e67258ebb6e21a524db026ac9aaea99b35",
+          "locator": "loc:v1/page:32/paragraph:23",
+          "kind": "pdf_text_block",
+          "text": "公司硅和锗硅外延EPI 设备已",
+          "metadata": {
+            "bbox": [
+              89.87999725341797,
+              663.0963134765625,
+              531.3682250976562,
+              676.8067016601562
+            ],
+            "block_char_end": 44,
+            "block_char_start": 29,
+            "block_sha256": "e5b770d16badf74d6f3ab05a224fc5b6013c48aa12e71d92aedf750ed6ec44d8",
+            "pdf_block": 17
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:1d25dfd268d321546763770ea9a2d75fb40bf6805f230829c7f768ab368d0ab9",
+          "locator": "loc:v1/page:32/paragraph:24",
+          "kind": "pdf_text_block",
+          "text": "顺利运付客户端进行量产验证，并且获得客户高度认可。",
+          "metadata": {
+            "bbox": [
+              89.87999725341797,
+              685.1503295898438,
+              352.3209533691406,
+              695.600341796875
+            ],
+            "block_char_end": 25,
+            "block_char_start": 0,
+            "block_sha256": "4022686c43bcf68423a1f951ae3aa316121feaa80f7380ed1657b88bcc0e2ee3",
+            "pdf_block": 18
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:0241f6e808ea519a16870f1857a68bc8a05cedd90a9f9f3f6ea9ec8f84203dec",
+          "locator": "loc:v1/page:32/paragraph:25",
+          "kind": "pdf_text_block",
+          "text": "在MOCVD 领域，用于氮化镓基LED 外延生产的设备已在行业领先客户生产线上大规模投",
+          "metadata": {
+            "bbox": [
+              110.87999725341797,
+              704.017333984375,
+              531.35986328125,
+              717.7277221679688
+            ],
+            "block_char_end": 43,
+            "block_char_start": 0,
+            "block_sha256": "392b9d7ddb7dc567d0f3217f5d9ff11c775849ecac2cc3ea24f61e3c73a1a953",
+            "pdf_block": 19
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:19298d5f98b85bde5a7d60135023e543e9c077a58732aa6582089cae0b35b828",
+          "locator": "loc:v1/page:32/paragraph:26",
+          "kind": "pdf_text_block",
+          "text": "入量产，自2017 年起已经成为氮化镓基LED 市场份额最大的MOCVD 设备供应商，牢牢占据行",
+          "metadata": {
+            "bbox": [
+              89.87999725341797,
+              724.4172973632812,
+              531.488525390625,
+              738.127685546875
+            ],
+            "block_char_end": 48,
+            "block_char_start": 0,
+            "block_sha256": "80af969ab24d808fe31174c244e5d468b0ec04cbd320a937893aedbbde830eae",
+            "pdf_block": 20
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:eca640cf5d98b091f0550b6cfdbd87c73c89c83d1564165d5d1cefd06a7c36f7",
+          "locator": "loc:v1/page:32/paragraph:27",
+          "kind": "pdf_text_block",
+          "text": "业内的领先地位。",
+          "metadata": {
+            "bbox": [
+              89.87999725341797,
+              744.8173217773438,
+              531.4249877929688,
+              758.5277099609375
+            ],
+            "block_char_end": 8,
+            "block_char_start": 0,
+            "block_sha256": "8e9f28adcd3aba05a1adb05d13550c9e1caa7ae0bc3708c50fa5c1448233fc63",
+            "pdf_block": 21
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:c8f9f7c9b7eb255acade31e11731dc5872fafa99a6c9cf5e90acb2af30d3b297",
+          "locator": "loc:v1/page:32/paragraph:28",
+          "kind": "pdf_text_block",
+          "text": "公司在Micro-LED 和高端显示领域的MOCVD 设备开发上取得了良好进展，2025",
+          "metadata": {
+            "bbox": [
+              89.87999725341797,
+              744.8173217773438,
+              531.4249877929688,
+              758.5277099609375
+            ],
+            "block_char_end": 52,
+            "block_char_start": 8,
+            "block_sha256": "8e9f28adcd3aba05a1adb05d13550c9e1caa7ae0bc3708c50fa5c1448233fc63",
+            "pdf_block": 21
+          }
+        }
+      ]
+    },
+    {
+      "sample": "S04",
+      "sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "budget": {
+        "count": 885,
+        "limit": 160,
+        "selected_categories": {
+          "product_milestone": 4,
+          "operating_milestone": 9,
+          "corporate_development": 11,
+          "fundraising_project": 2,
+          "quantified_industry": 2,
+          "industry": 17,
+          "risk": 12,
+          "event": 49,
+          "operating_status": 16,
+          "positioning": 7,
+          "project": 15,
+          "other": 16
+        },
+        "items": [
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:f2153465022c8324771e0c7c13e0371b865e42cd431c57f752988bb9632bd866",
+            "group": "urn:company-wiki:context-group:sha256:327848f13f2caca65902b91b1bd613af61aaab7f522a2b8cfd8ff2d78191c7bb:operating-fact:0",
+            "page": [
+              "page",
+              34
+            ],
+            "locator": "loc:v1/page:34/paragraph:14",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "本次向社会公众公开发行新股的募集资金扣除发行费用后将按轻重缓急顺",
+            "metadata": {
+              "bbox": [
+                114.0199966430664,
+                404.34197998046875,
+                505.4598693847656,
+                416.34197998046875
+              ],
+              "block_char_end": 32,
+              "block_char_start": 0,
+              "block_sha256": "1fc4011b5554fb6bf79acccbd31169e381afb635c2f336f5a32db8d59dfc79aa",
+              "pdf_block": 13
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "pdf_visual_context_group",
+              "project_plan_or_status"
+            ],
+            "score": 4,
+            "selected": false,
+            "drop": "budget_full",
+            "category": "project"
+          },
+          {
+            "id": "urn:company-wiki:narrative-unit:sha256:27b84458e3d2bba1023e3f67d888a28ad7a99c22883801b42a6e626d9b9da2d2",
+            "group": "urn:company-wiki:context-group:sha256:327848f13f2caca65902b91b1bd613af61aaab7f522a2b8cfd8ff2d78191c7bb:operating-fact:0",
+            "page": [
+              "page",
+              34
+            ],
+            "locator": "loc:v1/page:34/paragraph:15",
+            "kind": "pdf_text_block",
+            "role": "company_filing",
+            "text": "序投资于以下项目：",
+            "metadata": {
+              "bbox": [
+                90.02400207519531,
+                428.3179931640625,
+                201.0500030517578,
+                441.60198974609375
+              ],
+              "block_char_end": 9,
+              "block_char_start": 0,
+              "block_sha256": "89c1c00ede080007703efbd827135b2bcf936bf4671a272fd441b875f44e1130",
+              "pdf_block": 14
+            },
+            "reasons": [
+              "business_narrative_signal",
+              "pdf_visual_context_group",
+              "project_plan_or_status"
+            ],
+            "score": 4,
+            "selected": false,
+            "drop": "budget_full",
+            "category": "project"
+          }
+        ]
+      },
+      "parsed_page": [
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:f61c8c47df631bbac161bf4c1728b3c59e3894e41b51ffb790ae54ffb301a8d4",
+          "locator": "loc:v1/page:34/paragraph:0",
+          "kind": "pdf_text_block",
+          "text": "中微半导体设备（上海）股份有限公司 \n \n \n \n \n \n \n \n       招股说明书",
+          "metadata": {
+            "bbox": [
+              90.02400207519531,
+              43.46097946166992,
+              504.9100036621094,
+              53.423980712890625
+            ],
+            "block_char_end": 45,
+            "block_char_start": 0,
+            "block_sha256": "24fdfa708a0cbe3329fdd8f8e63ed60c1a006dc3872f80a3ff4dc291377fd8b8",
+            "pdf_block": 0
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:d48a03374efdd716b1741d7f27aba41543081553736f1e82c90180062439ef54",
+          "locator": "loc:v1/page:34/paragraph:1",
+          "kind": "pdf_text_block",
+          "text": "1-1-34",
+          "metadata": {
+            "bbox": [
+              285.6499938964844,
+              782.156982421875,
+              311.8999938964844,
+              792.1199340820312
+            ],
+            "block_char_end": 6,
+            "block_char_start": 0,
+            "block_sha256": "1d03513b51479f4ff5d32f116781330706fd3e941b2a2b048bf4608e4ccf8868",
+            "pdf_block": 1
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:0b308c97d4a1de56bf19cda1598a10594ad1f33d03e9b8d5493bee9c1306f789",
+          "locator": "loc:v1/page:34/paragraph:2",
+          "kind": "pdf_text_block",
+          "text": "流、性能创新的产品和优良的服务，努力提高市场份额，为股东实现持续增长的",
+          "metadata": {
+            "bbox": [
+              90.02400207519531,
+              78.25199890136719,
+              505.343994140625,
+              90.25199890136719
+            ],
+            "block_char_end": 35,
+            "block_char_start": 0,
+            "block_sha256": "8f598a5a14b50c8c17ad9c2674b1048a2c0ae5c2d6e66d817a80515949d44b99",
+            "pdf_block": 2
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:165f479fdae8634b68ede03db5afb4f22287bf2d2a333c40e689a923dc80f0e6",
+          "locator": "loc:v1/page:34/paragraph:3",
+          "kind": "pdf_text_block",
+          "text": "投资回报，为员工提供更好的职业发展平台。",
+          "metadata": {
+            "bbox": [
+              90.02400207519531,
+              102.75199890136719,
+              505.2240295410156,
+              114.75199890136719
+            ],
+            "block_char_end": 20,
+            "block_char_start": 0,
+            "block_sha256": "b32e76cbbcfd17e850c1dfe6b339c45c2bc570ff2646d867540a5ce713c4837d",
+            "pdf_block": 3
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:8f5978f03d2a914cdedfbd4507904cbf3774faec65fe4df26ee9c424379e569c",
+          "locator": "loc:v1/page:34/paragraph:4",
+          "kind": "pdf_text_block",
+          "text": "公司将紧紧抓住半导体产业发展的",
+          "metadata": {
+            "bbox": [
+              90.02400207519531,
+              102.75199890136719,
+              505.2240295410156,
+              114.75199890136719
+            ],
+            "block_char_end": 35,
+            "block_char_start": 20,
+            "block_sha256": "b32e76cbbcfd17e850c1dfe6b339c45c2bc570ff2646d867540a5ce713c4837d",
+            "pdf_block": 3
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:ab0f7e66786244828762e0c6076a27982ace7e08cc5d0f0f71367f01295b9e08",
+          "locator": "loc:v1/page:34/paragraph:5",
+          "kind": "pdf_text_block",
+          "text": "机遇，不断提升技术水平和市场竞争力，引领国内半导体设备和技术的发展。",
+          "metadata": {
+            "bbox": [
+              90.02400207519531,
+              126.72798156738281,
+              501.1000061035156,
+              140.01197814941406
+            ],
+            "block_char_end": 34,
+            "block_char_start": 0,
+            "block_sha256": "7e22c890c8207ef6975ad74a0fc7b4f0a9c2cd5a733da4c9341cb05b0cbdecfc",
+            "pdf_block": 4
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:cf012f61dabd73342a6c6b2017df1170fe6d69e2b0a0ae074007a6c66439108e",
+          "locator": "loc:v1/page:34/paragraph:6",
+          "kind": "pdf_text_block",
+          "text": "中微公司将围绕自身核心竞争力，通过自主创新、有机生长，结合适当的兼",
+          "metadata": {
+            "bbox": [
+              114.0199966430664,
+              159.7519989013672,
+              505.3399963378906,
+              171.7519989013672
+            ],
+            "block_char_end": 33,
+            "block_char_start": 0,
+            "block_sha256": "10c2a5a2e6b821d19cfb1a5b1b855b8be968aac79f9d91a5d27ec5dc09c82048",
+            "pdf_block": 5
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:8d32f5127267d8d2016760c9470243127724fd1f596ee4b4e08c47cb38c253b8",
+          "locator": "loc:v1/page:34/paragraph:7",
+          "kind": "pdf_text_block",
+          "text": "并收购策略，不断推动企业健康发展，力争在未来十年发展成为国际一流的半导",
+          "metadata": {
+            "bbox": [
+              90.02400207519531,
+              184.2319793701172,
+              505.2200012207031,
+              196.2319793701172
+            ],
+            "block_char_end": 35,
+            "block_char_start": 0,
+            "block_sha256": "2f34c2c28160471e6fb71829f1dd3d721e46b7c53f9691362ff642dcfaa25a49",
+            "pdf_block": 6
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:a4636c0c04534647b1efd347ea6aafa35f5bf875fc6fe0f0bfe501ed2723757a",
+          "locator": "loc:v1/page:34/paragraph:8",
+          "kind": "pdf_text_block",
+          "text": "体设备公司。",
+          "metadata": {
+            "bbox": [
+              90.02400207519531,
+              208.3279571533203,
+              165.02000427246094,
+              221.61195373535156
+            ],
+            "block_char_end": 6,
+            "block_char_start": 0,
+            "block_sha256": "bfcf5718ca6a7dffe77ffc0bedacfa3bc16af9ec868fb74d2b62cec1ad7608fb",
+            "pdf_block": 7
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:f11c4451c561c75113dbeb88304335878909d745bf27b8e6337fea54c9c4e357",
+          "locator": "loc:v1/page:34/paragraph:9",
+          "kind": "pdf_text_block",
+          "text": "五、发行人选择的具体上市标准",
+          "metadata": {
+            "bbox": [
+              90.02400207519531,
+              243.21495056152344,
+              303.79998779296875,
+              259.8199462890625
+            ],
+            "block_char_end": 14,
+            "block_char_start": 0,
+            "block_sha256": "f43cc023106ec0a3014eb381543660d2e30c8ddc2c1b6a597ea57a59e48fc937",
+            "pdf_block": 8
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:7a1258cbd3bde056f047280e716ec375f20945b2642c769b82312d0bbf122da9",
+          "locator": "loc:v1/page:34/paragraph:10",
+          "kind": "pdf_text_block",
+          "text": "发行人选择的上市标准为《上海证券交易所科创板股票上市规则》第二章",
+          "metadata": {
+            "bbox": [
+              114.0199966430664,
+              281.6780090332031,
+              508.4200134277344,
+              294.9620056152344
+            ],
+            "block_char_end": 32,
+            "block_char_start": 0,
+            "block_sha256": "9f5da6678f43e7adc50772cbbd847bb389cac255fee8f44305c5dc66d242b9f1",
+            "pdf_block": 9
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:8539117f784d7a9a3745698041ff90b265746fe6a52bdf3af71c11991bcaac8c",
+          "locator": "loc:v1/page:34/paragraph:11",
+          "kind": "pdf_text_block",
+          "text": "2.1.2 中规定的第（四）条：预计市值不低于人民币30 亿元，且最近一年营业收",
+          "metadata": {
+            "bbox": [
+              90.02400207519531,
+              306.1579895019531,
+              505.49798583984375,
+              319.4419860839844
+            ],
+            "block_char_end": 40,
+            "block_char_start": 0,
+            "block_sha256": "dba86e3575de7f330eb2be3b9a1a3fce277ef08cf42d12b1fa92f1744eb617dc",
+            "pdf_block": 10
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:0c1518c7f1d2d7e4ded314e0e2949005f28d2d3bc0b8a1ccb03d32219135fd53",
+          "locator": "loc:v1/page:34/paragraph:12",
+          "kind": "pdf_text_block",
+          "text": "入不低于人民币3 亿元。",
+          "metadata": {
+            "bbox": [
+              90.02400207519531,
+              330.51800537109375,
+              225.0500030517578,
+              343.802001953125
+            ],
+            "block_char_end": 12,
+            "block_char_start": 0,
+            "block_sha256": "44eef06b4e0e99fd02ea8b8d20d7a2609a756d41de1e999bdd7e3fd8cf1d493a",
+            "pdf_block": 11
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:73227e7cf7b7e4eed5b9f90428f5a186e0747cfad5d2ffccbe2a448e5b6371ec",
+          "locator": "loc:v1/page:34/paragraph:13",
+          "kind": "pdf_text_block",
+          "text": "六、募集资金用途",
+          "metadata": {
+            "bbox": [
+              90.02400207519531,
+              365.5249938964844,
+              213.8000030517578,
+              382.1299743652344
+            ],
+            "block_char_end": 8,
+            "block_char_start": 0,
+            "block_sha256": "c1c52a58e87a2b9cf6e9eff697a043667a6ec995acc457943bfa584a7cb821e3",
+            "pdf_block": 12
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:f2153465022c8324771e0c7c13e0371b865e42cd431c57f752988bb9632bd866",
+          "locator": "loc:v1/page:34/paragraph:14",
+          "kind": "pdf_text_block",
+          "text": "本次向社会公众公开发行新股的募集资金扣除发行费用后将按轻重缓急顺",
+          "metadata": {
+            "bbox": [
+              114.0199966430664,
+              404.34197998046875,
+              505.4598693847656,
+              416.34197998046875
+            ],
+            "block_char_end": 32,
+            "block_char_start": 0,
+            "block_sha256": "1fc4011b5554fb6bf79acccbd31169e381afb635c2f336f5a32db8d59dfc79aa",
+            "pdf_block": 13
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:27b84458e3d2bba1023e3f67d888a28ad7a99c22883801b42a6e626d9b9da2d2",
+          "locator": "loc:v1/page:34/paragraph:15",
+          "kind": "pdf_text_block",
+          "text": "序投资于以下项目：",
+          "metadata": {
+            "bbox": [
+              90.02400207519531,
+              428.3179931640625,
+              201.0500030517578,
+              441.60198974609375
+            ],
+            "block_char_end": 9,
+            "block_char_start": 0,
+            "block_sha256": "89c1c00ede080007703efbd827135b2bcf936bf4671a272fd441b875f44e1130",
+            "pdf_block": 14
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:3ab35a567d3bfca5d80c39e3beee76c27f647c787cce5fc3a0decf2f23e609b0",
+          "locator": "loc:v1/page:34/paragraph:16",
+          "kind": "pdf_text_block",
+          "text": "单位：万元",
+          "metadata": {
+            "bbox": [
+              452.8599853515625,
+              457.7010192871094,
+              508.0600280761719,
+              469.39093017578125
+            ],
+            "block_char_end": 5,
+            "block_char_start": 0,
+            "block_sha256": "75294fb7ac29fafde896026574cf6004084a9a43580acdfca2e2c51c664719e4",
+            "pdf_block": 15
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:d84347d6c044dd9c1d5550c6e6b49ad72e648a311b461402228b4ddc6e8b2a46",
+          "locator": "loc:v1/page:34/paragraph:17",
+          "kind": "pdf_text_block",
+          "text": "公司已按照《公司法》、《证券法》、《上海证券交易所科创板股票上市规则》",
+          "metadata": {
+            "bbox": [
+              114.0199966430664,
+              594.56201171875,
+              511.2439880371094,
+              606.56201171875
+            ],
+            "block_char_end": 35,
+            "block_char_start": 0,
+            "block_sha256": "cc9979d685f5953fa898bf4bcb4d7fab39b2e0eba7ddf8660408e2317424f101",
+            "pdf_block": 16
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:d4b1ec8fc13794a37ae2a86b88aa8b5aac16471e7e86eac24a4ac1aa6b9c4ac9",
+          "locator": "loc:v1/page:34/paragraph:18",
+          "kind": "pdf_text_block",
+          "text": "《上海证券交易所上市公司募集资金管理办法》等法律、法规、规范性文件及《公",
+          "metadata": {
+            "bbox": [
+              90.02400207519531,
+              619.0419921875,
+              505.3319396972656,
+              631.0419921875
+            ],
+            "block_char_end": 36,
+            "block_char_start": 0,
+            "block_sha256": "4beef4bd61c240bfb1cebe9709bbd0c198c974a2bb8e908341771597d26b5447",
+            "pdf_block": 17
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:65baba0ca07d3c848bd48f62511a4bc9e701ef97bfb00539f4eedc6f662dbda6",
+          "locator": "loc:v1/page:34/paragraph:19",
+          "kind": "pdf_text_block",
+          "text": "司章程》的规定制定《募集资金管理办法》，对募集资金的专户存储、使用、投",
+          "metadata": {
+            "bbox": [
+              90.02400207519531,
+              643.552001953125,
+              504.99603271484375,
+              655.552001953125
+            ],
+            "block_char_end": 35,
+            "block_char_start": 0,
+            "block_sha256": "39f93d8df6632148ac0e8ed6279b498df5882ebe83d286fe8c927f399db1ca93",
+            "pdf_block": 18
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:127c99c68f6565797cc25902e8172d444798ecbafb11da0b6cd4ea3a2eb2fdc6",
+          "locator": "loc:v1/page:34/paragraph:20",
+          "kind": "pdf_text_block",
+          "text": "向变更、管理和监督进行了明确的规定。",
+          "metadata": {
+            "bbox": [
+              90.02400207519531,
+              667.9119873046875,
+              505.25,
+              679.9119873046875
+            ],
+            "block_char_end": 18,
+            "block_char_start": 0,
+            "block_sha256": "a9b7082c6257ed73760dba31eb16a1a7a732248aa70fdae5d931fa52ab6862a6",
+            "pdf_block": 19
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:a069c6258b4fbaf90fbe09ae49678424e57ac104221e4095ae24f6a4176c2ac7",
+          "locator": "loc:v1/page:34/paragraph:21",
+          "kind": "pdf_text_block",
+          "text": "本次募集资金将严格按照规定存储在董",
+          "metadata": {
+            "bbox": [
+              90.02400207519531,
+              667.9119873046875,
+              505.25,
+              679.9119873046875
+            ],
+            "block_char_end": 35,
+            "block_char_start": 18,
+            "block_sha256": "a9b7082c6257ed73760dba31eb16a1a7a732248aa70fdae5d931fa52ab6862a6",
+            "pdf_block": 19
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:2aab85b3336c6d1cb5f6041dbd354c43fb3a295fea37e5826baf9d1defa76855",
+          "locator": "loc:v1/page:34/paragraph:22",
+          "kind": "pdf_text_block",
+          "text": "事会指定的专门账户集中管理，专款专用，规范使用募集资金。",
+          "metadata": {
+            "bbox": [
+              90.02400207519531,
+              692.0079345703125,
+              573.1199951171875,
+              705.2919311523438
+            ],
+            "block_char_end": 28,
+            "block_char_start": 0,
+            "block_sha256": "355c1e63e6e56d4411b2b9e099beb032259fb7549bd3e57954ce3d1da554a044",
+            "pdf_block": 20
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:043a0f2da7e382e3553264a3c907746bfbea250e101e148dfd29ab0d5126e312",
+          "locator": "loc:v1/page:34/paragraph:23",
+          "kind": "pdf_text_block",
+          "text": "序号 \n募集资金运用方向 \n项目总投资 \n拟投入募集资金",
+          "metadata": {
+            "bbox": [
+              90.98400115966797,
+              480.74102783203125,
+              504.1000061035156,
+              492.43096923828125
+            ],
+            "block_char_end": 28,
+            "block_char_start": 0,
+            "block_sha256": "f81c7accac599fb5d371a771612ccf6dbd74b29ad6413e37c23dfc72547da512",
+            "pdf_block": 21
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:7ec5197365e6ab3e2076d45f92ab912e5761052cd34d4911d40587076d0e5b5f",
+          "locator": "loc:v1/page:34/paragraph:24",
+          "kind": "pdf_text_block",
+          "text": "1 \n高端半导体设备扩产升级项目 \n40,058.96 \n40,000.00",
+          "metadata": {
+            "bbox": [
+              98.90399932861328,
+              501.2610168457031,
+              508.0600280761719,
+              513.0709228515625
+            ],
+            "block_char_end": 38,
+            "block_char_start": 0,
+            "block_sha256": "c0638302e110fc4cc66e6fe1cff359c426566399e99df6ec95e329d7674cc722",
+            "pdf_block": 22
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:b59577d7191427582daed4575e584af06a8b12a182d8fb8c7a235be583c63287",
+          "locator": "loc:v1/page:34/paragraph:25",
+          "kind": "pdf_text_block",
+          "text": "2 \n技术研发中心建设升级项目 \n40,097.22 \n40,000.00",
+          "metadata": {
+            "bbox": [
+              98.90399932861328,
+              521.9010620117188,
+              508.0600280761719,
+              533.7109375
+            ],
+            "block_char_end": 37,
+            "block_char_start": 0,
+            "block_sha256": "fb821b1515142b8ae510a68c131d5eb810dd9bd9114ea1d0a2ab6f79d8a29961",
+            "pdf_block": 23
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:4ff6eb6556e316b97dcb3781252e781916316af121954a6bdf030c35db362f24",
+          "locator": "loc:v1/page:34/paragraph:26",
+          "kind": "pdf_text_block",
+          "text": "3 \n补充流动资金 \n20,000.00 \n20,000.00",
+          "metadata": {
+            "bbox": [
+              98.90399932861328,
+              542.4210205078125,
+              508.0600280761719,
+              554.2308959960938
+            ],
+            "block_char_end": 31,
+            "block_char_start": 0,
+            "block_sha256": "51a7c34e4ad67359731d28f359524e5f8ffef896c9979170e7c3360f4f23d550",
+            "pdf_block": 24
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:c749377fd08deca991f5ddac62cad909fe67c4287000ea1fa54cf555dec2a3f3",
+          "locator": "loc:v1/page:34/paragraph:27",
+          "kind": "pdf_text_block",
+          "text": "合计 \n100,156.18 \n100,000.00",
+          "metadata": {
+            "bbox": [
+              194.69000244140625,
+              563.1810302734375,
+              508.0600280761719,
+              574.8709106445312
+            ],
+            "block_char_end": 26,
+            "block_char_start": 0,
+            "block_sha256": "d2a0e1bac2b4f180c207e91fef6a633c3d7a31ec69c18f88e98e8f2d3815aa53",
+            "pdf_block": 25
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:2ffe6bbd040438d4a9e2ec5cfefce6d0f62b7ab77e684047aeab824391eebf31",
+          "locator": "loc:v1/page:34/table:0/row:0",
+          "kind": "pdf_table_row",
+          "text": "序号 | 募集资金运用方向 | 项目总投资 | 拟投入募集资金",
+          "metadata": {
+            "bbox": [
+              84.55854589288884,
+              475.58197428385415,
+              510.8854619806463,
+              579.6100006103516
+            ],
+            "row_cells": [
+              "序号",
+              "募集资金运用方向",
+              "项目总投资",
+              "拟投入募集资金"
+            ],
+            "table_headers": [
+              "序号",
+              "募集资金运用方向",
+              "项目总投资",
+              "拟投入募集资金"
+            ]
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:524d67f9115a37b91a271c4d85cacb861e775fb27207ede62cf1bf22826c01d9",
+          "locator": "loc:v1/page:34/table:0/row:1",
+          "kind": "pdf_table_row",
+          "text": "1 | 高端半导体设备扩产升级项目 | 40,058.96 | 40,000.00",
+          "metadata": {
+            "bbox": [
+              84.55854589288884,
+              475.58197428385415,
+              510.8854619806463,
+              579.6100006103516
+            ],
+            "row_cells": [
+              "1",
+              "高端半导体设备扩产升级项目",
+              "40,058.96",
+              "40,000.00"
+            ],
+            "table_headers": [
+              "序号",
+              "募集资金运用方向",
+              "项目总投资",
+              "拟投入募集资金"
+            ]
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:a8b8e08b2e86215d5c0ec0ac79d5a5872cc8e876e89a8ad82e2f94c3b487c68c",
+          "locator": "loc:v1/page:34/table:0/row:2",
+          "kind": "pdf_table_row",
+          "text": "2 | 技术研发中心建设升级项目 | 40,097.22 | 40,000.00",
+          "metadata": {
+            "bbox": [
+              84.55854589288884,
+              475.58197428385415,
+              510.8854619806463,
+              579.6100006103516
+            ],
+            "row_cells": [
+              "2",
+              "技术研发中心建设升级项目",
+              "40,097.22",
+              "40,000.00"
+            ],
+            "table_headers": [
+              "序号",
+              "募集资金运用方向",
+              "项目总投资",
+              "拟投入募集资金"
+            ]
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:f293d88e41cfde3dc6de0d369117085452f1bf8510f2b29f2ed4171022e3f717",
+          "locator": "loc:v1/page:34/table:0/row:3",
+          "kind": "pdf_table_row",
+          "text": "3 | 补充流动资金 | 20,000.00 | 20,000.00",
+          "metadata": {
+            "bbox": [
+              84.55854589288884,
+              475.58197428385415,
+              510.8854619806463,
+              579.6100006103516
+            ],
+            "row_cells": [
+              "3",
+              "补充流动资金",
+              "20,000.00",
+              "20,000.00"
+            ],
+            "table_headers": [
+              "序号",
+              "募集资金运用方向",
+              "项目总投资",
+              "拟投入募集资金"
+            ]
+          }
+        },
+        {
+          "id": "urn:company-wiki:narrative-unit:sha256:17039ea1f2980c3486f634cf522b0cf1c47c2e2c6f3b20c620645798575cb5c7",
+          "locator": "loc:v1/page:34/table:0/row:4",
+          "kind": "pdf_table_row",
+          "text": "合计 | 100,156.18 | 100,000.00",
+          "metadata": {
+            "bbox": [
+              84.55854589288884,
+              475.58197428385415,
+              510.8854619806463,
+              579.6100006103516
+            ],
+            "row_cells": [
+              "合计",
+              "",
+              "100,156.18",
+              "100,000.00"
+            ],
+            "table_headers": [
+              "序号",
+              "募集资金运用方向",
+              "项目总投资",
+              "拟投入募集资金"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "seconds": 33.485
+}

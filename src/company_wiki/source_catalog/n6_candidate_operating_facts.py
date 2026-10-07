@@ -137,6 +137,12 @@ _ADOPTION_MILESTONE = re.compile(
     rf"|{_OBJECT}[^。；]{{0,32}}(?:实现了|实现|完成)(?:批量销售|交付使用)",
     re.IGNORECASE,
 )
+_CUSTOMER_ADOPTION = re.compile(
+    r"(?:设备|产品|平台|系统|技术)[^。；，]{0,32}(?:已|已经)[^。；，]{0,12}"
+    r"(?:应用于|应用在)[^。；，]{0,40}(?:客户|生产线|产线|终端)"
+    r"|(?:设备|产品|平台|系统|技术)[^。；，]{0,32}(?:实现了|实现)批量销售",
+    re.IGNORECASE,
+)
 _INDUSTRY_OUTLOOK = re.compile(
     r"(?:行业|产业|市场|全球|国际)[^。；]{0,100}(?:规模|销售额|出货量|装机量)"
     r"[^。；]{0,30}(?:预计|有望|将|预测)[^。；]{0,20}"
@@ -167,6 +173,8 @@ _DETECTOR_SIGNALS: tuple[
 ] = (
     (_PROJECT_TIMELINE, ("capacity_projects",), ("project_execution_timeline", "project_plan_or_status"), 4),
     (_ADOPTION_MILESTONE, ("core_business",), ("applied_operating_milestone",), 3),
+    # Classification only: one adoption action must not gain duplicate score.
+    (_CUSTOMER_ADOPTION, ("core_business",), ("customer_adoption_milestone",), 0),
     (_INDUSTRY_OUTLOOK, ("industry_dynamics",), ("quantified_industry_outlook", "current_industry_context"), 3),
     (_QUANTIFIED_INDUSTRY_CHANGE, ("industry_dynamics",), ("quantified_industry_change", "current_industry_context"), 3),
     (_CONCRETE_PROJECT_USE, ("capacity_projects",), ("concrete_fundraising_project", "project_plan_or_status"), 3),
