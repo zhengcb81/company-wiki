@@ -1,13 +1,13 @@
 {
   "schema_version": "all-pwf-plan-inventory/2",
-  "status": "R5A_complete_navigation_and_cleanup_ready_for_normal_publication_R3_and_final_R5_pending",
+  "status": "R5A_complete_published_navigation_and_cleanup_R3_and_final_R5_pending",
   "previous_inventory": "all_pwf_inventory_2026-10-07.json",
   "historical_archive_commit": "6dd56011a7d49e2b8c147f2163b0708074f9edd7",
   "items": [
     {
       "path": "all_pwf_completion_implementation_2026-10-07.md",
       "title": "# 全部PWF：实际实施与完成条件",
-      "sha256": "9f827e9321de5edb0f61b03883259723f505c6b487e4e7a9914abd9692a622d8",
+      "sha256": "aba2c61053a00265198b76f8227f820acb742405681fa5a40113cca73391506d",
       "role": "current_entry_or_current_evidence",
       "unchecked_items": 0
     },
@@ -742,7 +742,7 @@
     {
       "path": "progress.md",
       "title": "# Progress：当前执行记录",
-      "sha256": "b8622b289aaa4313a27eced9975ab4dc7acd7631171a4b15cae671ee0ab6f050",
+      "sha256": "3e1f9a355cb3bfe2fc0797b8e8202fb89203639595798efaeaa18fbbfad9889f",
       "role": "current_entry_or_current_evidence",
       "unchecked_items": 0
     },
@@ -770,7 +770,7 @@
     {
       "path": "r5_cleanup_and_navigation_implementation_2026-10-08.md",
       "title": "# R5：当前入口、历史临时材料及最终交接",
-      "sha256": "8866620cdd6da238aeeda5a72ae2f49b936f9c3df679691fca1aa84b5abc38f3",
+      "sha256": "8f4d6e02d5198c7c205f8e530e4a742b29a45e3d2492af1e8a57c2c73be20ae9",
       "role": "current_entry_or_current_evidence",
       "unchecked_items": 0
     },
@@ -902,7 +902,7 @@
     }
   ],
   "verification": {
-    "current_local_links_checked": 100,
+    "current_local_links_checked": 103,
     "missing_current_links": 0,
     "historical_top_notices_checked": 120,
     "R3_post_count": 0,

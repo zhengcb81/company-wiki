@@ -1,0 +1,145 @@
+{
+  "schema_version": "r5-readonly-repository-state/1",
+  "status": "R5A_published_R3_and_final_R5_pending",
+  "observed_at_utc": "2026-10-08T00:37:07.370332+00:00",
+  "method": "Git metadata/status with GIT_OPTIONAL_LOCKS=0; live ls-remote heads, no fetch/reset/clean or external writes",
+  "repositories": [
+    {
+      "repo": "CWP",
+      "relative_to_projects": "company-wiki",
+      "branch": "master",
+      "head": "117dbaab9d5939f9f8cd562379f72aecb22ad034",
+      "dirty_paths": [],
+      "tracking": "origin/master",
+      "tracking_ahead_behind": [
+        0,
+        0
+      ],
+      "remote_head": "117dbaab9d5939f9f8cd562379f72aecb22ad034",
+      "remote_equals_HEAD": true
+    },
+    {
+      "repo": "RF",
+      "relative_to_projects": "revenue-forecast",
+      "branch": "main",
+      "head": "436fed68d8ba334ae568de296636904c5cc3e6cf",
+      "dirty_paths": [
+        " M assurance/runs/daily_alert.jsonl",
+        " M assurance/runs/weekly_alert.jsonl",
+        " M assurance/runs/weekly_manifest.json"
+      ],
+      "tracking": "origin/main",
+      "tracking_ahead_behind": [
+        0,
+        0
+      ],
+      "remote_head": "436fed68d8ba334ae568de296636904c5cc3e6cf",
+      "remote_equals_HEAD": true
+    },
+    {
+      "repo": "FF",
+      "relative_to_projects": "filing-fetch",
+      "branch": "main",
+      "head": "211a56ff1b1f7b5c5d1809b17a60e9a2af1ce6e8",
+      "dirty_paths": [
+        "?? config/FMP_API_KEY.txt"
+      ],
+      "tracking": "origin/main",
+      "tracking_ahead_behind": [
+        0,
+        0
+      ],
+      "remote_head": "211a56ff1b1f7b5c5d1809b17a60e9a2af1ce6e8",
+      "remote_equals_HEAD": true
+    },
+    {
+      "repo": "SID",
+      "relative_to_projects": "StockInfoDLSimple/v2-clean-rewrite",
+      "branch": "v2-clean-rewrite",
+      "head": "47e10593ec1c152f1e613cc1f14813267c9b396b",
+      "dirty_paths": [
+        " M README.md",
+        " M config_template.json",
+        " M main.py",
+        " M src/browser.py",
+        " M src/downloader.py",
+        " M src/logger.py",
+        " M src/mapping.py",
+        " M src/models.py",
+        " M tests/e2e/official_e2e_test.py",
+        " M tests/unit/test_downloader.py",
+        " M tests/unit/test_official_e2e_contract.py",
+        "?? a_share_companies.txt",
+        "?? companies.txt",
+        "?? scripts/"
+      ],
+      "tracking": "origin/v2-clean-rewrite",
+      "tracking_ahead_behind": [
+        0,
+        0
+      ],
+      "remote_head": "47e10593ec1c152f1e613cc1f14813267c9b396b",
+      "remote_equals_HEAD": true
+    },
+    {
+      "repo": "ET",
+      "relative_to_projects": "earnings-transcripts/earnings-transcripts",
+      "branch": "main",
+      "head": "2b9fb84660f98ce27a05709a7e31342ab044b4d2",
+      "dirty_paths": [
+        "?? .workbuddy-ai/",
+        "?? eval_results.json"
+      ],
+      "tracking": "origin/main",
+      "tracking_ahead_behind": [
+        0,
+        0
+      ],
+      "remote_head": "2b9fb84660f98ce27a05709a7e31342ab044b4d2",
+      "remote_equals_HEAD": true
+    },
+    {
+      "repo": "StockWiki",
+      "relative_to_projects": "StockWiki",
+      "branch": "master",
+      "head": "9f9e0afe16a327b475cb7a6e3d40bd1578bb9b0f",
+      "dirty_paths": [
+        "?? docs/handoff/SW-REPAIR-02/",
+        "?? runs/swr02-acceptance-20261007/"
+      ],
+      "tracking": null,
+      "remote_head": null,
+      "previous_consumer_acceptance_head": "04dfc5190589a8bbe224a47e94b045779c884b80",
+      "changes_since_previous_acceptance": [
+        "docs/quick-scan-backup-restore.md",
+        "docs/ui.md",
+        "stockwiki/quick_scan_backup.py",
+        "stockwiki/quick_scan_backup_manifest.py",
+        "stockwiki/quick_scan_profiles.py",
+        "stockwiki/quick_scan_query.py",
+        "stockwiki/quick_scan_rows.py",
+        "stockwiki/ui_static/app.js",
+        "stockwiki/ui_static/index.html",
+        "stockwiki/ui_static/styles.css",
+        "tests/test_e2e_quick_scan_ui.py",
+        "tests/test_swr_backup.py",
+        "tests/test_swr_cases.py",
+        "tests/test_swr_profiles.py",
+        "tests/test_swr_query.py"
+      ]
+    }
+  ],
+  "stockwiki_new_head_scope": "Independent quick-scan SW-REPAIR-02 commit; original source-reader acceptance remains at 04dfc51. R3 must consume current committed 9f9e0af without claiming it was tested at the old acceptance node. No rerun of independent quick-scan work.",
+  "source_ci_reused": {
+    "CWP_head": "6ae7ddcc6d5fa974bb7e9a74210b1910f0960fda",
+    "run": 37705927320,
+    "conclusion": "success"
+  },
+  "write_scope": "Only this CWP PWF receipt",
+  "other_repository_writes": 0,
+  "Dayu_and_IQS_touched": false,
+  "owner_WIP_and_key_contents_read_or_changed": false,
+  "R3_model_POST": 0,
+  "token_increment_reply": "pending",
+  "not_a_permission_gate": true
+}

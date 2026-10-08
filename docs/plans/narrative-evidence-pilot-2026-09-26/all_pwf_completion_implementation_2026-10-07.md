@@ -41,7 +41,7 @@ python -B scripts/narrative_batch_configured.py --llm-provider deepseek --projec
 一次R3大节点（用真实输出和当前已提交消费者）：
 
 1. source facts/ref实际匹配，至少一个有价值业务final和真制度skipped_no_narrative/模型0；新production final确实非0。原语言/no translation；逐claim核来源支持、经营主题和说话角色，完整locator回放；partial/needs_review是诊断，不需人工签收。
-2. 正式NarrativeRef/reference/read/list/search/exact及RF/StockWiki当前主线消费者读取相同版本/证据。使用已提交package/config，不混owner WIP。CWP不写下游研究目录；未知公开日的as-of请求诚实拒绝，不为消费伪造日期。
+2. 正式NarrativeRef/reference/read/list/search/exact及RF/StockWiki当前主线消费者读取相同版本/证据。使用已提交package/config，不混owner WIP。[最新只读核对](harness_lanes/results/r5_readonly_repositories_2026-10-08.json)的RF为436fed68，StockWiki已由独立quick-scan线推进9f9e0af；执行时读取实际HEAD，不把历史04dfc51消费证明算成新版本通过，不重做独立quick-scan工作。CWP不写下游研究目录；未知公开日的as-of请求诚实拒绝，不为消费伪造日期。
 3. 相同request/run重复执行：ref/final/对象不变、模型新增POST0、费用不重复、终态临时正文收敛。复用已绿kill/ACK/源变反例，不在生产造坏数据。
 4. 实测objects/final/AUTO/catalog DB-WAL/恢复facts/log/scratch峰值及终态占用；单final2MiB、持久增量1GiB、scratch2GiB现限保持。记录provider usage或未知预留，现金账单未知不假称0费。
 5. 测试消费者/只读联调资料用独立短目录，测试结束恢复absent；正式生产成功final保留。核原件/config/owner保护，正常提交/push及对应代码CI（没有源码变化不重复CI）。

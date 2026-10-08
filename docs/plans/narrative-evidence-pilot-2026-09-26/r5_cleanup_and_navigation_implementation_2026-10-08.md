@@ -18,6 +18,7 @@
 - [归属与保护盘点](harness_lanes/results/r5_temporary_ownership_2026-10-08.json)
 - [实际删除与保护结果](harness_lanes/results/r5_owned_cleanup_2026-10-08.json)
 - [当前计划目录与链接结果](harness_lanes/results/all_pwf_inventory_2026-10-08.json)
+- [正常发布后的跨仓只读核对](harness_lanes/results/r5_readonly_repositories_2026-10-08.json)：A提交117dbaa；CWP/RF/FF/SID/ET实时远端一致，StockWiki无remote且独立quick-scan已推进9f9e0af。历史消费证明对应04dfc51，R3需用当前已提交版；owner文件保留，未介入独立项目。
 
 ## B. R3之后的最终验收（仍待做）
 

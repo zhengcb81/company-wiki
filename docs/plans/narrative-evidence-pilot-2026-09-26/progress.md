@@ -10,6 +10,8 @@
 
 当前三PWF入口和完整实施单压缩重复状态，历史固定到已推送6dd5601；所有历史卡顶层导航指向唯一task_plan。R5B最终完成审计/最新各仓Git/发布仍待R3真实节点，不能标全目标complete。
 
+R5A已正常提交/push为117dbaa，静态钩子与短pre-push绿，CWP干净/远端0–0。随后[只读仓库核对](harness_lanes/results/r5_readonly_repositories_2026-10-08.json)确认RF436fed68、FF211a56ff、SID执行分支47e10593、ET2b9fb846与实时远端相等；owner日志/配置/密钥文件保留。StockWiki无remote，已由独立quick-scan线提交推进至9f9e0af，剩余交接资料保留；R3使用此当前已提交版，旧04dfc51消费证明不冒充9f9e0af测试，不介入独立quick-scan施工。
+
 ## 最近大节点验收（不重复）
 
 | 节点 | 证据/结果 |
