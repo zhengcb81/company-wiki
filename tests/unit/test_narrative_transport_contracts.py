@@ -75,7 +75,7 @@ def test_nested_source_ref_is_not_weakened(mutation) -> None:
         NarrativeRef.from_dict(payload)
 
 
-@pytest.mark.parametrize("date", ["2026-02-30", "20260901", "2026-09-01T00:00:00Z", None])
+@pytest.mark.parametrize("date", ["2026-02-30", "20260901", "2026-09-01T00:00:00Z", ""])
 def test_read_request_requires_real_iso_calendar_date(date) -> None:
     payload = _request()
     payload["as_of_date"] = date

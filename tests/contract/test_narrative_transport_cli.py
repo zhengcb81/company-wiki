@@ -25,7 +25,7 @@ READ_RECEIPT_KEYS = {
 }
 
 
-def _cli(fixture, operation: str, payload: dict | bytes):
+def _cli(fixture, operation: str, payload: dict | bytes, *, argv_extra: tuple[str, ...] = ()):
     env = os.environ.copy()
     env["PYTHONPATH"] = str(REPO / "src")
     env["PYTHONDONTWRITEBYTECODE"] = "1"
@@ -34,7 +34,7 @@ def _cli(fixture, operation: str, payload: dict | bytes):
     data = json.dumps(payload).encode("utf-8") if isinstance(payload, dict) else payload
     return subprocess.run(
         [sys.executable, "-m", "company_wiki.source_catalog.narrative_transport_cli",
-         "--config", str(fixture.config_path), "--operation", operation],
+         "--config", str(fixture.config_path), "--operation", operation, *argv_extra],
         input=data, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
         cwd=fixture.root, env=env, timeout=30, check=False,
     )
@@ -127,6 +127,60 @@ def test_unknown_publication_json_refuses_historical_cli_read(tmp_path: Path) ->
         assert result.returncode == 2
         assert result.stdout == b""
         assert json.loads(result.stderr)["status"] != "ok"
+
+
+def test_current_read_unknown_publication_preserves_history_and_evidence(tmp_path: Path) -> None:
+    with published_fixture(tmp_path) as fixture:
+        with fixture.catalog.store.transaction() as connection:
+            connection.execute("UPDATE documents SET published_date=NULL")
+        reference = _reference(fixture)
+        request = {"schema_version": "narrative-read-request/1", "narrative_ref": reference,
+                   "as_of_date": None, "expected_source": dict(fixture.expected_source)}
+        result = _cli(fixture, "read", request)
+        assert result.returncode == 0, result.stderr.decode()
+        assert result.stdout == fixture.payload
+        receipt = json.loads(result.stderr)
+        assert receipt["as_of_date"] is None
+        assert receipt["manifest"]["published_date"] is None
+        assert receipt["replay_status"] == "verified"
+        spans = json.loads(fixture.payload)["evidence_spans"]
+        listed = _cli(fixture, "evidence-list", request)
+        assert listed.returncode == 0, listed.stderr.decode()
+        assert json.loads(listed.stdout)["items"] == spans
+        lookup = _cli(fixture, "evidence-lookup", request,
+                      argv_extra=("--span-id", spans[0]["span_id"]))
+        assert lookup.returncode == 0, lookup.stderr.decode()
+        assert json.loads(lookup.stdout)["items"] == [spans[0]]
+        search = _cli(fixture, "evidence-search", request,
+                      argv_extra=("--query", "new product"))
+        assert search.returncode == 0, search.stderr.decode()
+        assert json.loads(search.stdout)["items"]
+        for response in (listed, lookup, search):
+            assert json.loads(response.stderr)["as_of_date"] is None
+        historical = _cli(fixture, "read", dict(request, as_of_date="2026-10-08"))
+        assert historical.returncode == 2 and historical.stdout == b""
+        assert json.loads(historical.stderr)["reason"] == "source_publication_unknown"
+
+
+def test_current_read_still_checks_identity_and_original_bytes(tmp_path: Path) -> None:
+    with published_fixture(tmp_path) as fixture:
+        reference = _reference(fixture)
+        request = {"schema_version": "narrative-read-request/1", "narrative_ref": reference,
+                   "as_of_date": None, "expected_source": dict(fixture.expected_source)}
+        request["expected_source"]["security_id"] = "WRONG"
+        wrong = _cli(fixture, "read", request)
+        assert wrong.returncode == 2 and wrong.stdout == b""
+        assert json.loads(wrong.stderr)["reason"] == "source_identity_mismatch"
+        request["expected_source"] = dict(fixture.expected_source)
+        assert _cli(fixture, "read", request).returncode == 0
+        original = fixture.raw_path.read_bytes()
+        try:
+            fixture.raw_path.write_bytes(original + b"tampered")
+            bad = _cli(fixture, "read", request)
+            assert bad.returncode == 2 and bad.stdout == b""
+            assert json.loads(bad.stderr)["reason"] != "invalid_request"
+        finally:
+            fixture.raw_path.write_bytes(original)
 
 
 def test_missing_catalog_cli_does_not_create_or_migrate_storage(tmp_path: Path) -> None:

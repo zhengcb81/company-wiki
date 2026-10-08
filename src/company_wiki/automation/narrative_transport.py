@@ -95,7 +95,8 @@ def _require_manifest(
         for key, value in request.expected_source.items()
     ):
         raise NarrativeTransportError("blocked", "source_identity_mismatch")
-    _require_historical_source(manifest, request.as_of_date)
+    if request.as_of_date is not None:
+        _require_historical_source(manifest, request.as_of_date)
 
 
 def _bound_bundle(

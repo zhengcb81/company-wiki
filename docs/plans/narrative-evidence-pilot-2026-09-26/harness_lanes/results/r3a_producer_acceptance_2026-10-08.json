@@ -1,0 +1,98 @@
+{
+  "schema_version": "r3a-current-material-producer/1",
+  "status": "producer_local_verified_consumers_pending",
+  "interface": {
+    "schema": "narrative-read-request/1",
+    "required_fields_unchanged": true,
+    "current": "as_of_date is explicit null",
+    "historical": "ISO date still requires known publication at or before cutoff",
+    "null_missing_or_invalid_date_fallback": false
+  },
+  "test_suites": {
+    "r3a-red.xml": [
+      {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "9",
+        "skipped": "0",
+        "tests": "9",
+        "time": "5.333",
+        "timestamp": "2026-10-08T01:42:54.147005+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    ],
+    "r3a-red-os.xml": [
+      {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "2",
+        "skipped": "0",
+        "tests": "9",
+        "time": "10.864",
+        "timestamp": "2026-10-08T01:44:19.209310+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    ],
+    "r3a-producer.xml": [
+      {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "26",
+        "time": "27.071",
+        "timestamp": "2026-10-08T01:46:37.184766+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    ],
+    "r3a-unit.xml": [
+      {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "38",
+        "time": "0.692",
+        "timestamp": "2026-10-08T01:48:14.327117+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    ]
+  },
+  "counting_note": "26 responsibility cases include 10 new pure unit cases; 38 later unit cases overlap those 10. Do not sum overlapping suites as unique cases.",
+  "initial_failures": {
+    "sandbox": "9 fixture errors before interface test; normal OS fixed atomic rename PermissionError without changing runtime",
+    "product_RED": "2 failures and 7 passed before nullable mode implementation",
+    "test_maintenance": "old invalid None case now valid explicit current mode, replaced with empty-string negative and new null positive; date/hash/identity oracles retained; malformed cutoff checks moved to pure units to avoid seven expensive runtime fixtures"
+  },
+  "interface_behaviors_verified": [
+    "unknown publication current exact read",
+    "current evidence-list/search/lookup and null receipt",
+    "unknown publication historical refusal",
+    "wrong security identity refused",
+    "raw tamper refused and fixture original restored",
+    "old dated golden and CLI regression passed"
+  ],
+  "boundary": "synthetic raw and local Replay model fixture; no real provider or live summary quality claimed",
+  "paid_model_POST": 0,
+  "provider_HTTP": 0,
+  "translation": 0,
+  "production_writes": 0,
+  "production_database_after": {
+    "bytes": 222408704,
+    "mtime_ns": 1791248158420833300
+  },
+  "protected_files_verified_unchanged": 26,
+  "production_AUTO_absent": true,
+  "RF_SW_changes": 0,
+  "remaining": [
+    "RF and StockWiki request/receipt/DTO updates in independent clean worktrees",
+    "current three-repository CLI node and consumer responsibility tests",
+    "normal publication and exact source CI",
+    "R3 live requires pending cumulative token increment; final/resume/space/semantic node still unexecuted"
+  ],
+  "errors": [
+    "PowerShell literal wildcard operand corrected to -g; no data loss",
+    "initial guessed unit path absent; actual transport contract file read",
+    "apply_patch rejected duplicate delete/add operation for one new file before any source change; corrected with sequential operations"
+  ]
+}

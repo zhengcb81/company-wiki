@@ -4,6 +4,10 @@
 
 ## 最新进展：R5零费用部分
 
+本目标轮继续实际推进[R3A](r3_current_material_read_implementation_2026-10-08.md)：发现公开日未知会连普通叙述阅读一起阻断，先TDD修producer，明确null当前模式与ISO历史模式。正常OS产品2RED后，当前38单测/0.70秒与26CLI责任/27.08秒绿（10项重叠不双算），Ruff/mypy绿；历史未知日期、身份/SHA仍拒绝。26保护SHA/DB stat保持、七owned目标恢复absent/21916B清理、付费POST0。RF/SW及三仓联调pending，live预算增额仍未答。
+
+夹具沙箱9失败源于WinError5原子rename，不算产品RED；正常OS后才进入接口。非法日期矩阵改为纯DTO单测，避免七次重复DAG；旧None非法断言按明确新语义改为空字符串反例/null正例，没有更改历史日期/hash/identity oracle。补丁一次重复delete/add被拒、一次findings标题不匹配被拒，均在实际源变更前拒绝，再按真实内容修正。
+
 上一目标轮有实际进展：6ae7ddc正常提交/push/精确CI37705927320全部步骤success（78秒），R2生产正式4restore/九facts/ET TXT完成，文档6dd5601已推远端。R3 token增量未答，本轮先实施不依赖模型的R5A。
 
 只读调查五G2、cw-retire-r1、pilot和canary演练，共8根。五G2/cw夹具文档最大514B，属于closed测试；canary PDF40966288B和companies原件实读同SHA，来源原件保持。8个精确untracked删除目标先持久化清单、检验包含/无reparse/tracked0、正常OS活进程引用0、每文件exclusive open，再原生LiteralPath删除；清119913476B/1123文件、全部absent。26原件/config/原侧录/pilot保护SHA保持，生产DB size/mtime不变，原件删除0/模型0/未知usage清账0。pilot461338B和canary tracked历史保留，tmp/pdfs、外包交接、owner不动。
@@ -32,4 +36,4 @@ R2初始夹具缺SHA/reader清理、错误test路径0执行、JUnit xunit2警告
 
 ## Next Step
 
-本轮R5A文档/清理收据随正常文档提交发布；A已完成，不重做盘点和删除。token增量答复后优先R3唯一生产batch，预算不答不POST。正式final/零模型skip/当前消费者/locator/同run恢复/空间一次大节点，然后R5B完整要求审计和最终Git发布。目标保持active。
+R5A已发布，不重做盘点和删除。完成R3A的producer正常发布/精确CI与RF/SW当前模式及三仓节点；R3A和token增量答复俱齐再做R3唯一生产batch，预算不答不POST。正式final/零模型skip/当前消费者/locator/同run恢复/空间一次大节点，然后R5B完整要求审计和最终Git发布。目标保持active。

@@ -30,6 +30,8 @@ R3模型尚未POST，production final0。现生产TXT49段/10873B HTTP，完整1
 
 ## 已知错误与限制
 
+R3A新发现：原NarrativeReadRequest/producer/RF/SW均强制ISO日期与已知公开日，所以前一份R3方案的“当前普通读取+未知日期不造假”不能实际成立；历史fixture日期消费绿不能代替此生产能力。新增[R3A](r3_current_material_read_implementation_2026-10-08.md)，显式null仅表示当前资料；指定历史日期仍严格校验公开日。CWP本地38单测/26责任包/mypy/Ruff已绿，RF/SW与当前三仓节点pending。费用/模型配置和正式batch不变。
+
 产品RED：缺事实公开接口、重新登记的假分类冲突、旧host固定SHA门；均有当前GREEN与源码CI。夹具/调用错误：错路径、缺expected SHA/reader关闭、xunit2 record_property、退休后query_ref，均独立记录，不当产品失败。额外--strict旧Any错误不是配置CI门，实际配置mypy绿。Windowsbrace/CIM沙箱错误改显式文件列表/正常OS只读查询；删除前每文件exclusive open检查，无当前匹配进程。完整过程见Git历史及R2/R5收据，不隐去费用/timeout/truncation风险。
 
 FMP真实402只证明套餐边界，不是下载成功；未实测现金账单硬限额不冒称支持。SW无remote、SID维护执行分支，邻仓owner WIP和Dayu外部限制仍真实，最终Git核对待R5。不为这些状态重造人工签收。

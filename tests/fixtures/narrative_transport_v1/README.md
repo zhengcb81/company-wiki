@@ -22,3 +22,13 @@ Span `parser_version` may change as provenance; span ID, SHA, locator, original
 text and structured fields must still match exactly. The 2026-10-07 refresh
 only updates parser 0.1.0→0.1.1, selector 0.3.1→0.4.2 and prompt 1.3.0→1.6.0;
 all source, span and summary semantics are unchanged.
+
+## Current material and historical availability
+
+`narrative-read-request/1` keeps its four required fields. An explicit
+`as_of_date: null` reads currently available source material without claiming
+historical availability. The receipt echoes null and retains the true or unknown
+publication date. An ISO date continues to require a known publication date no
+later than that cutoff. Missing, empty, or malformed dates do not select current
+mode. Source identity, original/artifact hashes, and locator replay apply in both
+modes. Existing dated golden files remain unchanged.

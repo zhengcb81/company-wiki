@@ -106,7 +106,7 @@ class NarrativeRef:
 class NarrativeReadRequest:
     schema_version: str
     narrative_ref: NarrativeRef
-    as_of_date: str
+    as_of_date: str | None
     expected_source: dict[str, str | int | None]
 
     @classmethod
@@ -117,12 +117,15 @@ class NarrativeReadRequest:
         if item["schema_version"] != NARRATIVE_READ_REQUEST_SCHEMA:
             raise NarrativeContractError("unsupported narrative read request schema")
         cutoff = item["as_of_date"]
-        if not isinstance(cutoff, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", cutoff):
-            raise NarrativeContractError("as_of_date must be an ISO date")
-        try:
-            date.fromisoformat(cutoff)
-        except ValueError as exc:
-            raise NarrativeContractError("as_of_date must be an ISO date") from exc
+        # Explicit null requests current material, without a historical claim.
+        # The field remains mandatory; malformed dates never imply this mode.
+        if cutoff is not None:
+            if not isinstance(cutoff, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", cutoff):
+                raise NarrativeContractError("as_of_date must be an ISO date or null")
+            try:
+                date.fromisoformat(cutoff)
+            except ValueError as exc:
+                raise NarrativeContractError("as_of_date must be an ISO date or null") from exc
         return cls(
             NARRATIVE_READ_REQUEST_SCHEMA,
             NarrativeRef.from_dict(item["narrative_ref"]), cutoff,

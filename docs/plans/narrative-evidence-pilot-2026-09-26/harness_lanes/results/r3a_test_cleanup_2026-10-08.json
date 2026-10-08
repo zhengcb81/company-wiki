@@ -1,0 +1,51 @@
+{
+  "schema_version": "r3a-owned-test-cleanup/1",
+  "items": [
+    {
+      "relative_path": ".planning/r3ar",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3ar",
+      "files": 0,
+      "bytes": null
+    },
+    {
+      "relative_path": ".planning/r3ao",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3ao",
+      "files": 0,
+      "bytes": null
+    },
+    {
+      "relative_path": ".planning/r3ag",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3ag",
+      "files": 0,
+      "bytes": null
+    },
+    {
+      "relative_path": ".planning/r3a-red.xml",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3a-red.xml",
+      "files": 1,
+      "bytes": 8881.0
+    },
+    {
+      "relative_path": ".planning/r3a-red-os.xml",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3a-red-os.xml",
+      "files": 1,
+      "bytes": 2699.0
+    },
+    {
+      "relative_path": ".planning/r3a-producer.xml",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3a-producer.xml",
+      "files": 1,
+      "bytes": 4248.0
+    },
+    {
+      "relative_path": ".planning/r3a-unit.xml",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3a-unit.xml",
+      "files": 1,
+      "bytes": 6088.0
+    }
+  ],
+  "original_deleted": 0,
+  "production_writes": 0,
+  "test_evidence_saved": "r3a_producer_acceptance_2026-10-08.json",
+  "status": "restored_absent"
+}
