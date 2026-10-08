@@ -146,3 +146,5 @@ P0大节点签收：RF候选72ce94c160bbb5b9399c8716307588b443a72a83的三公司
 P0发布收尾：72ce94c1已推origin/main，正常pre-push的125项检查通过；[精确SHA远端CI](https://github.com/zhengcb81/revenue-forecast/actions/runs/37820231186)成功。两份现存技能副本定点同步共8文件，配置/output及未选择文件保持不变，剩余漂移0。独立RF工作树只剩本次五个pytest生成目录，核对TEMP绝对边界、HEAD及无reparse后清理并移除已合并分支；主仓仍只有原owner三日志和output未提交，原件删除0。
 
 P1下载层基础责任组件完成：8个RED实证后修复actual usage、两维原子计账、精确adapter版本和hard-timeout最后完整checkpoint；未知最终用量不自动重试，预算usage_complete=false保留未结算状态。新增同步/异步HTTPX包裹覆盖redirect/retry/error body/HEAD/gzip/late chunk/slow drip/限时退避。79项责任及既有公共入库合同正常OS12.19秒通过，新增真实子进程hard-kill保留usage证明。达到额度时仍可完成本地验真/入库，只有新provider请求拒绝。Dayu桥和真实两个市场仍未完成，不能把基础组件绿记为P1全绿。
+
+335df5d3已提交推送，远端CI37822907874收集失败；本机单独/全量收集都绿，取得真实日志后证实requirements入口漏声明HTTPX、openai当前改依赖httpx2。先新增直接依赖一致性RED，再修两安装入口；快速push只增加这条静态责任检查，等待修复SHA远端验证。没有删除新功能测试。

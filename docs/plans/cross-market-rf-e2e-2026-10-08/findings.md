@@ -2,6 +2,8 @@
 
 ## Phase6 P1预算与桥接共用层（实施中）
 
+- 基础组件335df5d3发布后远端CI在collect阶段缺httpx，具体日志已取证。本机有包导致局部和全量collect未暴露；CI只安装requirements.txt，我只加pyproject直接依赖，且2026-10当前openai 3.26.1的传递依赖已为httpx2，不再保证httpx。根因是双安装入口声明漂移/错误依赖传递包。新增所有直接runtime依赖须出现在CI requirements的责任测试，先RED再补显式HTTPX声明，并将这个毫秒级静态检查纳入现有快速push集合；不删除HTTP测试、不扩大普通commit完整E2E。
+
 - 最小RED共8失败/1通过，实证：无效cost已经改变byte计数，byte超额报告丢掉cost和实际bytes，hard-timeout丢stderr usage，失败响应信任错误adapter version，bytes耗尽仍能发新请求。原两个测试将actual usage错当成预约量；先记录独立反例后改其计数期望，超额拒绝仍保留。失败账不能抹去已经下载的流量或发生的费用。
 - 修正为两维先校验、完整实际计量后再拒绝；剩余额度不负数，失败账允许恢复超额实际值。timeout只取最后完整同名/同版本progress，不累加重复checkpoint；硬杀无法证明最终读/flush完整，明确usage_complete=false、计量为已知下界，不冒称全量零费用。
 - CWP-owned HTTPX同步/异步transport在全部HTTP状态、重定向和重试的stream计量，强制identity并拒绝服务器无视此要求，避免解压后原件大于计量。拒绝已知超长body，HEAD资源长度不当作body。未知长度最多最后一底层chunk超额，记录实际值后终止；sync阻塞仍须父进程hard deadline，不能声称chunk检查可以中断阻塞socket。接口依据[HTTPX官方transport文档](https://www.python-httpx.org/advanced/transports/)。
