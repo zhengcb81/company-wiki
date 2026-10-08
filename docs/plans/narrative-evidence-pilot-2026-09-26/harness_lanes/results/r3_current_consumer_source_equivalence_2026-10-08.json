@@ -1,0 +1,8 @@
+{
+  "schema_version": "r3-consumer-source-equivalence/1",
+  "tested_head": "1ebe012adcdeab371d0dedfd04b89e11e1ee2fd4",
+  "current_head": "6d1dddbc1289a17a2fb91d40a0d4f57494fa1bfd",
+  "runtime_source_diff_paths": [],
+  "independent_owner_delivery_only": true,
+  "repeated_live_node_required": false
+}

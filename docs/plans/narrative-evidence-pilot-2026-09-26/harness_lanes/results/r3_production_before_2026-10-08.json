@@ -1,0 +1,924 @@
+{
+  "schema_version": "r3-production-before/1",
+  "status": "captured_before_first_production_run",
+  "head": "3f576c78fe90f605eff19f821453a917922e84e6",
+  "counts": {
+    "documents": 23531,
+    "sources": 43114
+  },
+  "narrative_counts": {
+    "narrative_artifact_versions": 0
+  },
+  "catalog_files": [
+    {
+      "relative_path": "acquisition_attempts.jsonl",
+      "bytes": 52003
+    },
+    {
+      "relative_path": "acquisition_attempts.jsonl.acquire",
+      "bytes": 1
+    },
+    {
+      "relative_path": "catalog.db",
+      "bytes": 0
+    },
+    {
+      "relative_path": "catalog.sqlite3",
+      "bytes": 222408704
+    },
+    {
+      "relative_path": "catalog.sqlite3-shm",
+      "bytes": 32768
+    },
+    {
+      "relative_path": "catalog.sqlite3-wal",
+      "bytes": 1240152
+    },
+    {
+      "relative_path": "control_center.log",
+      "bytes": 21402
+    },
+    {
+      "relative_path": "fc204_apply_receipt_2026-08-10.json",
+      "bytes": 1244
+    },
+    {
+      "relative_path": "fc204_baseline_2026-08-10.json",
+      "bytes": 1157
+    },
+    {
+      "relative_path": "legacy_periods.json",
+      "bytes": 11971
+    },
+    {
+      "relative_path": "operation.lock.acquire",
+      "bytes": 1
+    },
+    {
+      "relative_path": "paused_acquisition.log",
+      "bytes": 2233
+    },
+    {
+      "relative_path": "runtime_policy.json",
+      "bytes": 264
+    },
+    {
+      "relative_path": "worker_console.log",
+      "bytes": 102373
+    },
+    {
+      "relative_path": "worker_control.json",
+      "bytes": 178
+    },
+    {
+      "relative_path": "worker_launcher.lock",
+      "bytes": 0
+    },
+    {
+      "relative_path": "worker_launcher_events.jsonl",
+      "bytes": 1192897
+    },
+    {
+      "relative_path": "worker_process_events.jsonl",
+      "bytes": 211888
+    },
+    {
+      "relative_path": "worker_state.json",
+      "bytes": 2461
+    },
+    {
+      "relative_path": "live_canary/cn_byd_fy2024.json",
+      "bytes": 142
+    },
+    {
+      "relative_path": "live_canary/cn_moutai_fy2024_control.json",
+      "bytes": 145
+    },
+    {
+      "relative_path": "live_canary/hk_meituan_fy2024.json",
+      "bytes": 139
+    },
+    {
+      "relative_path": "live_canary/us_nvidia_fy2025.json",
+      "bytes": 162
+    },
+    {
+      "relative_path": "security_master/cn.json",
+      "bytes": 2294033
+    },
+    {
+      "relative_path": "security_master/hk.json",
+      "bytes": 1062358
+    },
+    {
+      "relative_path": "security_master/us.json",
+      "bytes": 3121004
+    },
+    {
+      "relative_path": "waves/r1_apply.json",
+      "bytes": 476
+    },
+    {
+      "relative_path": "waves/r1_before.txt",
+      "bytes": 119
+    },
+    {
+      "relative_path": "waves/r1_rollback.json",
+      "bytes": 438
+    },
+    {
+      "relative_path": "waves/r2_apply.json",
+      "bytes": 478
+    },
+    {
+      "relative_path": "waves/r2_rollback.json",
+      "bytes": 479
+    },
+    {
+      "relative_path": "waves/r8_apply.json",
+      "bytes": 477
+    },
+    {
+      "relative_path": "waves/r8_eq.err",
+      "bytes": 0
+    },
+    {
+      "relative_path": "waves/r8_equivalence.json",
+      "bytes": 11049
+    },
+    {
+      "relative_path": "waves/r8_rollback.json",
+      "bytes": 478
+    },
+    {
+      "relative_path": "staging/11e058c918801558bc1f485e0203d70743ee97803caffb403ded6f9fed4db827/fil_cn_1150bddaa31781ae85c3ebabd815246af3bb4d93.pdf",
+      "bytes": 4386772
+    },
+    {
+      "relative_path": "staging/1eb6c299311836a2be1bf989e399c54ffa061513a532a9f5748ee742ab6d1838/msft-20260630.htm",
+      "bytes": 8585621
+    },
+    {
+      "relative_path": "staging/2bdfb95f50ca083998bf4aec978f83083cc6575d26771764b07dfb3d3590af07/msft-20260630.htm",
+      "bytes": 8585615
+    },
+    {
+      "relative_path": "staging/39e122afdd8f4af818d5899cedb7de85a3a4f1028dec9915d87396ad6d16a441/1223127191__2024年年度报告.pdf",
+      "bytes": 14285291
+    },
+    {
+      "relative_path": "staging/4f3b38537df1c07667d98f7817a4f0522c2d93600bf6afc7a94c0ada00caf66f/fil_cn_48ec0d41eb244001f0f3795438c351495c196ada.pdf",
+      "bytes": 4826662
+    },
+    {
+      "relative_path": "staging/c3bd1015cabfd8f6a0abb2509e5122fe0fb2f419f1e9cd5a5160d8b95bbf9419/1222881496__2024年年度报告.pdf",
+      "bytes": 10092140
+    },
+    {
+      "relative_path": "staging/cf4d7291e7108186bd310b657f4bb194721602ec017feff99087ed837d590790/fil_cn_77bbc7baa8d40db79701d64df72a6219e0087be9.pdf",
+      "bytes": 4405561
+    },
+    {
+      "relative_path": "staging/e2a15fdf002fe079d7fb91ebb0ef0ff0b19815137ea3ff01d26b3478b380cb86/goog-20251231.htm",
+      "bytes": 2616499
+    },
+    {
+      "relative_path": "snapshot-cleanup/b26c0c427a5fd31ef72d965c/intent.json",
+      "bytes": 477
+    },
+    {
+      "relative_path": "snapshot-cleanup/b26c0c427a5fd31ef72d965c/receipt.json",
+      "bytes": 730
+    },
+    {
+      "relative_path": "retirement/20260926T170825Z-4a9c67e1/consumer_audit.json",
+      "bytes": 2969
+    },
+    {
+      "relative_path": "retirement/20260926T170825Z-4a9c67e1/cutover-intent.json",
+      "bytes": 1431
+    },
+    {
+      "relative_path": "retirement/20260926T170825Z-4a9c67e1/cutover.json",
+      "bytes": 629
+    },
+    {
+      "relative_path": "retirement/20260926T170825Z-4a9c67e1/delete-intent.json",
+      "bytes": 628
+    },
+    {
+      "relative_path": "retirement/20260926T170825Z-4a9c67e1/evidence_audit.json",
+      "bytes": 672
+    },
+    {
+      "relative_path": "retirement/20260926T170825Z-4a9c67e1/prepared.json",
+      "bytes": 4288
+    },
+    {
+      "relative_path": "retirement/20260926T170825Z-4a9c67e1/retired.json",
+      "bytes": 1113
+    },
+    {
+      "relative_path": "retirement/20260926T170825Z-4a9c67e1/smoke_1.json",
+      "bytes": 686
+    },
+    {
+      "relative_path": "retirement/20260926T170825Z-4a9c67e1/smoke_2.json",
+      "bytes": 686
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/manifest.json",
+      "bytes": 58597
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802-second/manifest.json",
+      "bytes": 36
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0000-af80a8a039ca",
+      "bytes": 97
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0001-c3fabdfbb9b5",
+      "bytes": 100
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0002-9babb23f98c6",
+      "bytes": 100
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0003-7179adb46252",
+      "bytes": 103
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0004-2965cf116e40",
+      "bytes": 97
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0005-92500dc69a4c",
+      "bytes": 111
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0006-ee230b097b94",
+      "bytes": 127
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0007-8864385d3e17",
+      "bytes": 138
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0008-b1d1fd19376b",
+      "bytes": 145
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0009-25776a4725ee",
+      "bytes": 127
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0010-a4572fd9f8c8",
+      "bytes": 120
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0011-bd5b30f8dabe",
+      "bytes": 116
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0012-2ba34448cd4e",
+      "bytes": 111
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0013-3194661e27c8",
+      "bytes": 116
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0014-c4cb12614d42",
+      "bytes": 140
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0015-699bbc8aa38e",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0016-e276e70b8b20",
+      "bytes": 119
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0017-7caf6246c16c",
+      "bytes": 119
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0018-4021785665c6",
+      "bytes": 119
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0019-a9bd6739d2ae",
+      "bytes": 119
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0020-b70b0d77d267",
+      "bytes": 119
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0021-ad99f82a5a8e",
+      "bytes": 119
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0022-d82941e25209",
+      "bytes": 119
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0023-f9f1b28ce221",
+      "bytes": 119
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0024-43281a7911c5",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0025-124f62bd186f",
+      "bytes": 91
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0026-a41089c38df9",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0027-5868bc94096b",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0028-0a64f8e83419",
+      "bytes": 91
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0029-42291973a0be",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0030-80e454c9a688",
+      "bytes": 91
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0031-36d87c0f04e9",
+      "bytes": 102
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0032-c5c30d2c95ee",
+      "bytes": 91
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0033-1f6abdfded7f",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0034-8ea72c0c251d",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0035-32858e4bc351",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0036-3f1cedce87d1",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0037-c235985133d4",
+      "bytes": 102
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0038-1be542088cc2",
+      "bytes": 91
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0039-b620f6c2f8de",
+      "bytes": 85
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0040-733751bfd4a9",
+      "bytes": 99
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0041-06cd4a77ca08",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0042-eec7fb64e0a4",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0043-f13cd44a2b32",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0044-300ba43d28f0",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0045-ab6a1631356c",
+      "bytes": 108
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0046-abe38ee7ed15",
+      "bytes": 91
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0047-c0120b779fcf",
+      "bytes": 120
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0048-0da9934e52dd",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0049-01954d6acec2",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0050-ca0adbe94045",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0051-3c53e626b216",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0052-ba9a7e3f56cd",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0053-d77958f290ba",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0054-253e565bf1fb",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0055-217205a15647",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0056-a5eb104665cd",
+      "bytes": 102
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0057-185e809b2b1d",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0058-80ebe93c795e",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0059-03d67abdfd6c",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0060-1ccb339f769b",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0061-ffe07069d5e9",
+      "bytes": 139
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0062-81237cf88b8a",
+      "bytes": 146
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0063-f2946bbfa546",
+      "bytes": 125
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0064-76fe831974c9",
+      "bytes": 125
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0065-3acb921e2d49",
+      "bytes": 125
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0066-a16c8e25e743",
+      "bytes": 132
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0067-60b73d4966ef",
+      "bytes": 124
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0068-fd893725973f",
+      "bytes": 124
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0069-b5efd49c4539",
+      "bytes": 124
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0070-559be854ff1f",
+      "bytes": 124
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0071-294b420b39ca",
+      "bytes": 124
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0072-3d8d91ce11d1",
+      "bytes": 105
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0073-f69040adcd3c",
+      "bytes": 102
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0074-fb3c801095b5",
+      "bytes": 108
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0075-085c3b043b07",
+      "bytes": 113
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0076-51ee2206e626",
+      "bytes": 130
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0077-0323eec8fd57",
+      "bytes": 151
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0078-ec68fe61ff83",
+      "bytes": 123
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0079-1b103f53246d",
+      "bytes": 130
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0080-6ef0977b7e73",
+      "bytes": 123
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0081-e5ef268d8c83",
+      "bytes": 718
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0082-e42f12ba73b1",
+      "bytes": 1966
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0083-8b73c866155e",
+      "bytes": 14485
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0084-9d407de242d3",
+      "bytes": 2704
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0085-67695e726134",
+      "bytes": 856
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0086-0fabee1c3599",
+      "bytes": 2101
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0087-ef86d400a7f1",
+      "bytes": 4237
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0088-7772b2a181b9",
+      "bytes": 2328
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0089-7137768e5f01",
+      "bytes": 718
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0090-33e14263c711",
+      "bytes": 1938
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0091-6a7fde765016",
+      "bytes": 6363
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0092-38358bbf24b0",
+      "bytes": 718
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0093-dfa7d7523497",
+      "bytes": 1792
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0094-53d38f2cd226",
+      "bytes": 6439
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0095-b454b8309329",
+      "bytes": 2686
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0096-28c35ff7b21a",
+      "bytes": 742
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0097-9c6f9f25e054",
+      "bytes": 1906
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0098-288db9769d1a",
+      "bytes": 5393
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0099-80f08e759fbb",
+      "bytes": 2606
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0100-765f51170ffb",
+      "bytes": 704
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0101-06e6528e8efb",
+      "bytes": 2145
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0102-bab8282653f1",
+      "bytes": 7623
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0103-e415ce5830bd",
+      "bytes": 3180
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0104-094d1c0d1207",
+      "bytes": 718
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0105-ab9fb78abf85",
+      "bytes": 1988
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0106-094d1c0d1207",
+      "bytes": 718
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0107-030af26a5a98",
+      "bytes": 3380
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0108-8bd414a9d873",
+      "bytes": 2569
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0109-030af26a5a98",
+      "bytes": 3380
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0110-62efa13ad8a7",
+      "bytes": 4630
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0111-2a6490d2d8d4",
+      "bytes": 2450
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0112-62efa13ad8a7",
+      "bytes": 4630
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0113-a43770d9a51a",
+      "bytes": 4907
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0114-a43770d9a51a",
+      "bytes": 4907
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0115-320c86d57393",
+      "bytes": 704
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0116-320c86d57393",
+      "bytes": 704
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0117-c6da2e51b674",
+      "bytes": 1931
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0118-c6da2e51b674",
+      "bytes": 1931
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0119-fde3f4037753",
+      "bytes": 718
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0120-fde3f4037753",
+      "bytes": 718
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0121-7d3e5e1b362f",
+      "bytes": 6145
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0122-7d3e5e1b362f",
+      "bytes": 6145
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0123-e06b3d223583",
+      "bytes": 5879
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0124-e06b3d223583",
+      "bytes": 5879
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0125-501db445062e",
+      "bytes": 1182
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0126-501db445062e",
+      "bytes": 1182
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0127-8d47a448ece8",
+      "bytes": 793
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0128-8d47a448ece8",
+      "bytes": 793
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0129-acd729759c69",
+      "bytes": 704
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0130-acd729759c69",
+      "bytes": 704
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0131-65da7c556868",
+      "bytes": 718
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0132-65da7c556868",
+      "bytes": 718
+    },
+    {
+      "relative_path": "focus_cleanup_archive/20260802/files/0133-2fc5a412f9d3",
+      "bytes": 7089
+    },
+    {
+      "relative_path": "artifacts/gates/reconcile-retire-20260807T080844Z.jsonl",
+      "bytes": 1120487
+    },
+    {
+      "relative_path": "archive-cleanup/36058098a1755efc3229bf02/intent.json",
+      "bytes": 2551
+    },
+    {
+      "relative_path": "archive-cleanup/36058098a1755efc3229bf02/receipt.json",
+      "bytes": 3369
+    }
+  ],
+  "catalog_total_logical_bytes": 290919532,
+  "protected_files": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "bytes": 866,
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_acquisition.yaml",
+      "bytes": 1204,
+      "sha256": "04b0f8d0f0bba8020fa17eed0430d25473844c2c674001a0aa98fddf8a5bd019"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog_worker.yaml",
+      "bytes": 2234,
+      "sha256": "04fe21b45969a556437e0936d88aebcefe62692f344a56831e9060a4a87b5bf8"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml",
+      "bytes": 3602,
+      "sha256": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\n4c-20261004-pilot-a\\automation.sqlite3",
+      "bytes": 425984,
+      "sha256": "7b483d45f7155094bc6e94dfffae950f75f4d8bd762281199b4e7b05b0c10a9a"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\n4c-20261004-pilot-a\\request.json",
+      "bytes": 2378,
+      "sha256": "c544215c61b38957a49d7d00fed2f577fa6d85f92b8c826136985877525b529a"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\中微公司：2025年年度报告.pdf",
+      "bytes": 9165875,
+      "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\中微公司：2025年年度报告.pdf.source.json",
+      "bytes": 107,
+      "sha256": "4808a404e85141d86862e14895338715b59279acbcd6ee628ef30cc5a4378516"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\中微公司：2025年半年度报告.pdf",
+      "bytes": 6361468,
+      "sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\中微公司：2025年半年度报告.pdf.source.json",
+      "bytes": 110,
+      "sha256": "4ecde6686b85edda50803831f7b3784fae55733815eb526e647be23dec6040b7"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\中微公司：2026年第一季度报告.pdf",
+      "bytes": 217264,
+      "sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\中微公司：2026年第一季度报告.pdf.source.json",
+      "bytes": 113,
+      "sha256": "f3ce03d18cc9fb5b1e22b5a4d33fe276851f383ea022cbb5c9456b493064bb7b"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\prospectus\\中微公司：首次公开发行股票并在科创板上市招股说明书.pdf",
+      "bytes": 11211796,
+      "sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\prospectus\\中微公司：首次公开发行股票并在科创板上市招股说明书.pdf.source.json",
+      "bytes": 148,
+      "sha256": "b2418087e66b1d117fce874cae8cbb505d5ad15fd17d94d7b556ad2557235631"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\三角防务\\raw\\research\\三角防务：西安三角防务股份有限公司向特定对象发行股票并在创业板上市募集说明书（注册稿）.PDF",
+      "bytes": 5595592,
+      "sha256": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\三角防务\\raw\\research\\三角防务：西安三角防务股份有限公司向特定对象发行股票并在创业板上市募集说明书（注册稿）.PDF.source.json",
+      "bytes": 208,
+      "sha256": "b34ace23f1651c606ab6d646202445d407c6a50db932ad65995312cd5e1a40bb"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\华锐精密\\raw\\research\\华锐精密：向不特定对象发行可转换公司债券证券募集说明书.PDF",
+      "bytes": 4756322,
+      "sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\华锐精密\\raw\\research\\华锐精密：向不特定对象发行可转换公司债券证券募集说明书.PDF.source.json",
+      "bytes": 160,
+      "sha256": "ddd6e9aa083c3424b9b5981b1804c22bb3cde36d09c3f247e1309bc259416d22"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\万润股份\\raw\\research\\万润股份：投资者关系活动记录表20260515.pdf",
+      "bytes": 153851,
+      "sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\万润股份\\raw\\research\\万润股份：投资者关系活动记录表20260515.pdf.source.json",
+      "bytes": 132,
+      "sha256": "9be2b0baa27fd93342977e7050bc44e35113215fd40751d11e0c408ca0eac443"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\周大生\\raw\\research\\周大生：2023年6月26日-6月28日投资者关系活动记录表.pdf",
+      "bytes": 414544,
+      "sha256": "f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\周大生\\raw\\research\\周大生：2023年6月26日-6月28日投资者关系活动记录表.pdf.source.json",
+      "bytes": 179,
+      "sha256": "e1a40f1a8b880c87eeab18e69e1a45936db76ca839c26d4517f58e00eca147e1"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcripts\\MSFT\\MSFT_Q4_2026_earnings_call.txt",
+      "bytes": 66324,
+      "sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\Microsoft\\raw\\transcripts\\MSFT_Q4_2026_earnings_call.txt",
+      "bytes": 66324,
+      "sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\Microsoft\\raw\\transcripts\\MSFT_Q4_2026_earnings_call.txt.source.json",
+      "bytes": 589,
+      "sha256": "5243361e7850261723908aca6e489822e9bda9222f50392756ff4c91071f5754"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中信建投\\raw\\financial_reports\\中信建投：中信建投证券股份有限公司2021年年度报告（可视版）.pdf",
+      "bytes": 40966288,
+      "sha256": "ece692912201b018575b914db98e48db23f50429f2476d0aa028022a716ae5f2"
+    }
+  ],
+  "owner_protected_count": 342,
+  "production_AUTO_absent": true,
+  "workdir_absent": true,
+  "live_POST_before": 0,
+  "model_config": "existing Config.load deepseek-flash; key not recorded"
+}

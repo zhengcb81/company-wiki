@@ -1,0 +1,80 @@
+{
+  "schema_version": "r3-exact-source-ci/1",
+  "status": "success",
+  "repository": "company-wiki",
+  "head_sha": "6cd9b6d7ca4faee3348fdd8afcf70bf7e3d6a5fb",
+  "run_id": 37736338454,
+  "url": "https://github.com/zhengcb81/company-wiki/actions/runs/37736338454",
+  "jobs": [
+    {
+      "name": "Fast checks (Python 3.12)",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Set up Python 3.12",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install dependencies",
+          "conclusion": "success"
+        },
+        {
+          "name": "Ruff lint",
+          "conclusion": "success"
+        },
+        {
+          "name": "Strict type check on contract modules",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compileall and config doctor",
+          "conclusion": "success"
+        },
+        {
+          "name": "Unit tests",
+          "conclusion": "success"
+        },
+        {
+          "name": "Unit test failure summary",
+          "conclusion": "success"
+        },
+        {
+          "name": "Focused contract tests",
+          "conclusion": "success"
+        },
+        {
+          "name": "Focused contract failure summary",
+          "conclusion": "success"
+        },
+        {
+          "name": "CLI smoke test",
+          "conclusion": "success"
+        },
+        {
+          "name": "Scan for hardcoded secrets",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Set up Python 3.12",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ]
+}

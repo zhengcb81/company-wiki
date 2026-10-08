@@ -1,0 +1,49 @@
+{
+  "schema_version": "r3-production-live-batch/1",
+  "status": "completed",
+  "run_id": "r3-20261008-production-deepseek-01",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "model_configuration_unchanged": true,
+  "request_sha256": "c795dbacb7f72460bf95177c61744c9e949c931c9adf88b7dca35591503553b7",
+  "new_provider_posts": 1,
+  "policy_document_provider_posts": 0,
+  "formal_visible_artifacts": [
+    {
+      "artifact_version_id": "narrative-1470a1dfb43b493ab6c9a0232c4bde8f",
+      "object_key": "objects/sha256/e0/e05169b488a97f1dc3483e8d1f9c51b524cc9241bd96790df2551a31b8c5d4e8.json",
+      "byte_size": 1457,
+      "content_sha256": "e05169b488a97f1dc3483e8d1f9c51b524cc9241bd96790df2551a31b8c5d4e8",
+      "selection_status": "skipped_no_narrative",
+      "quality_status": "skipped_no_narrative"
+    },
+    {
+      "artifact_version_id": "narrative-c3adcaeffde5454180d054b647fabfbd",
+      "object_key": "objects/sha256/94/9422a93c959795d25403bccc5d3a56e7fbe86ee48460f27ded2fad5e5fe4a91a.json",
+      "byte_size": 106792,
+      "content_sha256": "9422a93c959795d25403bccc5d3a56e7fbe86ee48460f27ded2fad5e5fe4a91a",
+      "selection_status": "selected",
+      "quality_status": "verified"
+    }
+  ],
+  "actual_usage": {
+    "input_tokens": 2431,
+    "output_tokens": 7068,
+    "total_tokens": 9499,
+    "estimated_micro_usd": 10235,
+    "new_unknown": 0
+  },
+  "cumulative": {
+    "tokens": 199534,
+    "estimated_micro_usd": 110737,
+    "historical_unknown_reservations": 7,
+    "historical_fx_guard_micro_usd": 2764,
+    "token_cap": 220000,
+    "cost_cap_micro_usd": 10000000,
+    "remaining_tokens": 20466,
+    "remaining_micro_usd_after_fx": 9886499
+  },
+  "scratch_peak_bytes": 106792,
+  "persistent_added_bytes_reported": 588029,
+  "cash_invoice_not_verified": true
+}

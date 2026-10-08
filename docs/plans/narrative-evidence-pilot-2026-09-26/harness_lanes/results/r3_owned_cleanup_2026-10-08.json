@@ -1,0 +1,160 @@
+{
+  "schema_version": "r3-owned-test-cleanup/1",
+  "status": "restored_absent",
+  "targets": [
+    {
+      "type": "git_worktree",
+      "path": "C:\\Users\\郑曾波\\Projects\\_r3b\\rf",
+      "files": 304,
+      "bytes": 3315747,
+      "owned_by_this_turn": true,
+      "implementation_branch_reachable_from_main": true,
+      "tracked_changes": 0,
+      "untracked_unignored_files": 0,
+      "restored_absent": true
+    },
+    {
+      "type": "git_worktree",
+      "path": "C:\\Users\\郑曾波\\Projects\\_r3b\\sw",
+      "files": 2144,
+      "bytes": 91231530,
+      "owned_by_this_turn": true,
+      "implementation_branch_reachable_from_main": true,
+      "tracked_changes": 0,
+      "untracked_unignored_files": 0,
+      "restored_absent": true
+    },
+    {
+      "type": "ephemeral_acceptance_copy",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3_verify.py",
+      "bytes": 8036,
+      "files": 1,
+      "proof_retained_as_thin_results": true,
+      "restored_absent": true
+    },
+    {
+      "type": "ephemeral_acceptance_copy",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3-live-request.json",
+      "bytes": 1008,
+      "files": 1,
+      "proof_retained_as_thin_results": true,
+      "restored_absent": true
+    },
+    {
+      "type": "ephemeral_acceptance_copy",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3-live-bundle.json",
+      "bytes": 168936,
+      "files": 1,
+      "proof_retained_as_thin_results": true,
+      "restored_absent": true
+    },
+    {
+      "type": "ephemeral_acceptance_copy",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3b-rf-red.xml",
+      "bytes": 241,
+      "files": 1,
+      "proof_retained_as_thin_results": true,
+      "restored_absent": true
+    },
+    {
+      "type": "ephemeral_acceptance_copy",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3b-sw-red.xml",
+      "bytes": 7600,
+      "files": 1,
+      "proof_retained_as_thin_results": true,
+      "restored_absent": true
+    },
+    {
+      "type": "ephemeral_acceptance_copy",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3b-rf-red-os.xml",
+      "bytes": 5262,
+      "files": 1,
+      "proof_retained_as_thin_results": true,
+      "restored_absent": true
+    },
+    {
+      "type": "ephemeral_acceptance_copy",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3b-sw-red-os.xml",
+      "bytes": 5130,
+      "files": 1,
+      "proof_retained_as_thin_results": true,
+      "restored_absent": true
+    },
+    {
+      "type": "ephemeral_acceptance_copy",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3b-rf-green.xml",
+      "bytes": 241,
+      "files": 1,
+      "proof_retained_as_thin_results": true,
+      "restored_absent": true
+    },
+    {
+      "type": "ephemeral_acceptance_copy",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3b-sw-green.xml",
+      "bytes": 26935,
+      "files": 1,
+      "proof_retained_as_thin_results": true,
+      "restored_absent": true
+    },
+    {
+      "type": "ephemeral_acceptance_copy",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3b-rf-green-os.xml",
+      "bytes": 13706,
+      "files": 1,
+      "proof_retained_as_thin_results": true,
+      "restored_absent": true
+    },
+    {
+      "type": "ephemeral_acceptance_copy",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3c-cwp-red.xml",
+      "bytes": 1332,
+      "files": 1,
+      "proof_retained_as_thin_results": true,
+      "restored_absent": true
+    },
+    {
+      "type": "ephemeral_acceptance_copy",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3c-rf-red.xml",
+      "bytes": 2980,
+      "files": 1,
+      "proof_retained_as_thin_results": true,
+      "restored_absent": true
+    },
+    {
+      "type": "ephemeral_acceptance_copy",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3c-sw-red.xml",
+      "bytes": 4663,
+      "files": 1,
+      "proof_retained_as_thin_results": true,
+      "restored_absent": true
+    },
+    {
+      "type": "ephemeral_acceptance_copy",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3c-cwp-green.xml",
+      "bytes": 7038,
+      "files": 1,
+      "proof_retained_as_thin_results": true,
+      "restored_absent": true
+    },
+    {
+      "type": "ephemeral_acceptance_copy",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3c-rf-green.xml",
+      "bytes": 12768,
+      "files": 1,
+      "proof_retained_as_thin_results": true,
+      "restored_absent": true
+    },
+    {
+      "type": "ephemeral_acceptance_copy",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3c-sw-green.xml",
+      "bytes": 27394,
+      "files": 1,
+      "proof_retained_as_thin_results": true,
+      "restored_absent": true
+    }
+  ],
+  "total_logical_removed_bytes": 94840547,
+  "raw_deleted": 0,
+  "production_final_AUTO_usage_preserved": true,
+  "other_owner_roots_untouched": true
+}

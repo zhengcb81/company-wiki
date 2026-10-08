@@ -1,55 +1,30 @@
 # Progress：当前执行记录
 
-**2026-10-08｜等待必要预算答复，未全部完成。** 历史逐轮日志见[6dd5601完整progress](https://github.com/zhengcb81/company-wiki/blob/6dd56011a7d49e2b8c147f2163b0708074f9edd7/docs/plans/narrative-evidence-pilot-2026-09-26/progress.md)；不复制归档，不从历史下一步重启已绿节点。当前入口[task_plan](task_plan.md)。
+**2026-10-08｜R3生产已验收、完整PWF实质审计完成，最后文档提交推送。** 历史逐轮日志见[6dd5601](https://github.com/zhengcb81/company-wiki/blob/6dd56011a7d49e2b8c147f2163b0708074f9edd7/docs/plans/narrative-evidence-pilot-2026-09-26/progress.md)，当前状态取[task_plan](task_plan.md)。
 
-## 当前预算阻塞核对
+## 本次实际完成
 
-上一目标轮是progress：R3A实现/真实原件公共CLI/主线合并/安装/精确CI已发布。本轮只读核对没有改变生产完成状态，不算新进度或verified process wait：同request19193token需预留、余9965、差9228；AUTO/work-dir仍absent，生产DB stat/26保护不变，真实POST0。同一必要增额答复缺失已连续producer轮、consumer并线轮和本轮出现；其他独立任务已做完，R5B需要尚未产生的R3事实。阻塞核对通过，保存[收据](harness_lanes/results/r3_budget_blocked_audit_2026-10-08.json)及当前PWF后调用目标服务blocked；不把状态文档更新当生产完成进度。原scope、旧费用/unknown、既有模型配置和外发授权保持，收到既有答复后恢复R3→R5B。
+1. 用户批准220000累计tokens，费用随后提高至$10。保存授权/运行前baseline；按既有Config字面参数执行正式有限batch，DeepSeek1POST、9499tokens/10235microUSD，两个正式visible工件。没有改配置、译文、原件或旧账。
+2. 真生产消费复现两个遗漏：nullable采集时间（RF/SW各2 RED）、未知登记语言与派生语言（CWP/RF/SW各1 RED）。保留非法时间/已知语言冲突、哈希/身份/日期/定位负例。责任包：采集时间RF80pass/2 Windows POSIX skip、SW74pass；语言CWP44pass、RF76pass/1 POSIX skip、SW77pass；各包重叠不累加成独立case数。Ruff/类型及SW现行static门绿，不重复全仓/全九长测。
+3. 修复并线：RF d775c1a0→343e2de2 main正常推送；最新依赖pin7cf337e指CWP6cd9b6d，normal pre-push107pass/23.29秒、精确CI37737193724全success。SW55fb1a8修复和独立交接753dfca保留合并，后续语言1ebe012快进；独立交接最新6d1dddb未改consumer源码，无remote。CWP6cd9b6d正常commit/push，精确CI37736338454全步骤success。
+4. 正式CWP→RF/StockWiki公共CLI真实节点通过：生产日期/身份不是fixture，20claims/49证据与零模型制度skip；reference/read/list/search/exact，三仓历史unknown拒绝，所有定位回放和DTO相等，临时consumer根finally恢复。逐条读20claims及引用，16管理层/4问题，六经营主题覆盖、事实/展望未混淆。
+5. 字面相同run/request恢复，6任务succeeded、attempt仍6、reservation仍1，新增POST/token/费用/对象0。26 raw/config/pilot保护保持；终态只有212B日志/基线，无永久全文或provider原始响应。新总逻辑588030B、scratch峰106792B；正式final/AUTO保留。
+6. 一个接口文件定点同步2物理RF技能，480未选文件SHA保持，重复0写/.claude别名相同。当前owned2工作树+16验收临时文件恢复absent，共94840547B，提交保留在主线。没有触碰他人的清理目标。
+7. 全部11计划家族与原A01–A16继任对账通过；新实施责任为空，边界/miss透明。八仓只读HEAD/远端/owner状态核对，不回退SID/SQA等独立WIP，不写Dayu/IQS。当前PWF及最终导航更新，最后纯文档发布待做。
 
-## 最新进展：R3A消费者与三仓接线
+## 错误与处理（不隐去）
 
-本目标轮继续实际施工：独立RF/SW先各4产品RED后，责任包RF67pass/1skip、SW68pass/0skip，Ruff及SW static-only绿。Windows skip是POSIX executable-provider CLI smoke，单列。四真实原件公共CLI节点1pass/0skip/49.98秒，current null/unknown成功，各源CWP/RF/SW历史unknown均拒绝；真制度0模型、本地loopback3、同run新增0、付费0/生产写入0，fixture根恢复absent。
+- 真实产品：未知采集时间与语言误拒绝有独立RED；统一元数据责任后GREEN。语义受引用支持不等于官方来源发布日期已证实。
+- 脚本/工具：起始sys.path缺tools，已补；RF no-checkout沙箱Git非worktree导致首次0执行，正常OS只在owned空工作树检出后才获得真实RED。若干猜测测试/脚本名不存在，只读/0执行后按真实清单纠正；不是产品RED。
+- 制度draft=null导致验收汇总脚本报错，之前正式三仓调用已过；只改汇总并完成薄收据，0模型。未改测试oracle或数据以冒充通过。
+- SW同时有独立交接提交，ff-only分叉；只读确认接口无重叠后正常merge保留两方。独立owner后清runs/改交接日志，旧342基线不能再要求全不变；如实记录其变化与我们的不重叠写集。
+- GitBlob与工作区CRLF导致旧owner日志字节比较不适用，另有owner新内容；未据此回退/清理。沙箱Git读取Permission denied改正常OS；失败查询不算已通过。
+- 正常CWP/RF hooks临时stash未暂存PWF/owner修改并已恢复；未skip hooks。RF提交静态、push短包；全九/真实模型不入日常CI。
 
-RF main快进c672a5e并正常推送，短pre-push107pass/16.71秒+mypy/Ruff绿，精确CI37712024241全success。SW master快进42fba06，无remote，独立owner交接保持。RF依赖pin使用已发布producer4c5590a，真实布局兼容19pass；隔离位置9次WinError267不是产品RED。一个RF接口文件同步两物理副本，480未选文件SHA保持/重复零写。342 owner及26原件/config/账目保持，生产DB stat不变/AUTO仍absent。
+## 既有节点（不重做）
 
-两个我创建的工作树已合入后删除91161217B副本；RF通过稀疏检出避免再复制约4.7万tracked历史planning记录，不清主仓历史。精确测试临时材料已恢复absent，收据留PWF；PowerShell Split-Path不兼容参数集错误已记录，Python预先绝对父路径校验和.NET事后复核均确认范围，没有扩大清理。CWP联调测试与当前PWF待正常发布/精确CI；live token增额仍未答，生产final0。
-
-随后CWP联调测试及PWF正常提交/push f0ad6b9，短commit/pre-push绿，精确CI37712551891所有步骤success，R3A complete。CI是既有快包，四真实原件CLI节点是本地显式执行，不借CI冒称每push跑真实节点。收口文档复用这次源码绿，无额外pytest。live增额仍未答，目标不complete。
-
-## 已发布producer与R5零费用部分（不重跑）
-
-本目标轮继续实际推进[R3A](r3_current_material_read_implementation_2026-10-08.md)：发现公开日未知会连普通叙述阅读一起阻断，先TDD修producer，明确null当前模式与ISO历史模式。正常OS产品2RED后，当前38单测/0.70秒与26CLI责任/27.08秒绿（10项重叠不双算），Ruff/mypy绿；历史未知日期、身份/SHA仍拒绝。26保护SHA/DB stat保持、七owned目标恢复absent/21916B清理、付费POST0。RF/SW及三仓联调pending，live预算增额仍未答。
-
-Producer源码已正常提交/push4c5590a，精确CI37710026917全部success、80秒；[收据](harness_lanes/results/r3a_exact_source_ci_2026-10-08.json)区分producer与待做consumer/live范围。源码绿已证实，不重复该节点。
-
-夹具沙箱9失败源于WinError5原子rename，不算产品RED；正常OS后才进入接口。非法日期矩阵改为纯DTO单测，避免七次重复DAG；旧None非法断言按明确新语义改为空字符串反例/null正例，没有更改历史日期/hash/identity oracle。补丁一次重复delete/add被拒、一次findings标题不匹配被拒，均在实际源变更前拒绝，再按真实内容修正。
-
-上一目标轮有实际进展：6ae7ddc正常提交/push/精确CI37705927320全部步骤success（78秒），R2生产正式4restore/九facts/ET TXT完成，文档6dd5601已推远端。R3 token增量未答，本轮先实施不依赖模型的R5A。
-
-只读调查五G2、cw-retire-r1、pilot和canary演练，共8根。五G2/cw夹具文档最大514B，属于closed测试；canary PDF40966288B和companies原件实读同SHA，来源原件保持。8个精确untracked删除目标先持久化清单、检验包含/无reparse/tracked0、正常OS活进程引用0、每文件exclusive open，再原生LiteralPath删除；清119913476B/1123文件、全部absent。26原件/config/原侧录/pilot保护SHA保持，生产DB size/mtime不变，原件删除0/模型0/未知usage清账0。pilot461338B和canary tracked历史保留，tmp/pdfs、外包交接、owner不动。
-
-当前三PWF入口和完整实施单压缩重复状态，历史固定到已推送6dd5601；所有历史卡顶层导航指向唯一task_plan。R5B最终完成审计/最新各仓Git/发布仍待R3真实节点，不能标全目标complete。
-
-R5A已正常提交/push为117dbaa，静态钩子与短pre-push绿，CWP干净/远端0–0。随后[只读仓库核对](harness_lanes/results/r5_readonly_repositories_2026-10-08.json)确认RF436fed68、FF211a56ff、SID执行分支47e10593、ET2b9fb846与实时远端相等；owner日志/配置/密钥文件保留。StockWiki无remote，已由独立quick-scan线提交推进至9f9e0af，剩余交接资料保留；R3使用此当前已提交版，旧04dfc51消费证明不冒充9f9e0af测试，不介入独立quick-scan施工。
-
-## 最近大节点验收（不重复）
-
-| 节点 | 证据/结果 |
-|---|---|
-| G2–G5交付及MAIN接线 | G5 CWP2048/SID163/RF定点安装33+兼容24，配套FF391pass/4skip（子测试另计）；有workflow仓精确CI绿。G2最后实际IR/TXT/制度/错标题、当前RF/SW、resume0POST均绿，50e42f2发布 |
-| R2来源事实 | 18产品RED后绿、重登假冲突1RED后修；当前101责任15.08秒/零skip，真实九原件E2E1项4.75秒/零skip，Ruff/配置mypy绿 |
-| R2生产 | documents23530→23531、sources43112→43114、locations46606→46608、assertions22→31、restore1→5、retire19000不变；重复0新增。原件/sidecar/config/未选文档/水位保持 |
-| R2空间/测试清理 | 正式TXT66324B+metadata589B；DB主222408704B，WAL1240152B。owned21临时条目68812548B/1393文件全absent，另真实lake副本37943036B在E2E finally删除，不双算 |
-| S5/S6/S7/旧真实N4C | 5659443210B生产净释放/原件0删；九样本29/33、761回放；run10真实20claims/46locators/原语言/实际usage/恢复、试点根清。保留已发布证明范围 |
-
-完整收据见[R2](r2_source_preparation_implementation_2026-10-08.md)、[G2](g2_consolidated_node_2026-10-08.md)、[G5](g5_main_acceptance_2026-10-07.md)、[R5卡](r5_cleanup_and_navigation_implementation_2026-10-08.md)。
-
-## 错误与处理
-
-R2初始夹具缺SHA/reader清理、错误test路径0执行、JUnit xunit2警告、退休后query_ref，不冒充产品RED；真实缺接口/重登假冲突有独立RED。optional --strict暴露未改reader旧Any，按当前CI命令mypy绿，不新加门或改无关reader。gh缺失用GitHub官方只读API核精确SHA结果。
-
-本轮PowerShell brace expansion不支持，改明确路径；沙箱CIM资源不可访问，正常OS权威查询匹配0，再独占打开每文件证明无占用。没有把失败的查询[]当通过，没有删tracked历史或未知pilot账目；错误与删除清单保存在R5收据。
+R2四restore/九facts/TXT正式登记、R3A显式current null、G2十四组/A-B、G3–G5所有发包、S7固定29/33、S5/S6净释放5659443210B均有已发布权威证据。R5A8临时根清119913476B，历史pilot/usage/原件保持。详[完整实施单](all_pwf_completion_implementation_2026-10-07.md)、[最终对账](r5_full_closeout_2026-10-08.md)，不从旧卡paused/预算pending重启。
 
 ## Next Step
 
-R5A、R3A及精确源码CI已完成，不重做已绿责任/三仓/安装/CI节点。当前阻塞为既有token增量答复缺失；答复齐备再做R3唯一生产batch，预算不答不POST。使用current null请求，不伪造日期。正式final/零模型skip/当前消费者/locator/同run恢复/空间一次大节点，然后R5B完整要求审计和最终Git发布。当前阻塞核对通过，发布后目标服务blocked，不mark complete，也不新增人工签收要求。
+正常commit/push本次R3/R5文档与小收据，验证本地/实际远端一致和CWP干净，再更新最终发布状态并将原目标complete。无需再调用模型或重复已绿节点。

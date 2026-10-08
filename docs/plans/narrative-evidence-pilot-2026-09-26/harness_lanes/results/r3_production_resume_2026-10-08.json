@@ -1,0 +1,85 @@
+{
+  "schema_version": "r3-production-terminal-resume/1",
+  "status": "passed",
+  "run_id": "r3-20261008-production-deepseek-01",
+  "same_literal_request": true,
+  "new_model_reservations": 0,
+  "new_attempts": 0,
+  "additional_tokens": 0,
+  "additional_micro_usd": 0,
+  "same_artifacts_and_verified_objects": [
+    {
+      "artifact_version_id": "narrative-1470a1dfb43b493ab6c9a0232c4bde8f",
+      "object_key": "objects/sha256/e0/e05169b488a97f1dc3483e8d1f9c51b524cc9241bd96790df2551a31b8c5d4e8.json",
+      "byte_size": 1457,
+      "content_sha256": "e05169b488a97f1dc3483e8d1f9c51b524cc9241bd96790df2551a31b8c5d4e8",
+      "selection_status": "skipped_no_narrative",
+      "quality_status": "skipped_no_narrative"
+    },
+    {
+      "artifact_version_id": "narrative-c3adcaeffde5454180d054b647fabfbd",
+      "object_key": "objects/sha256/94/9422a93c959795d25403bccc5d3a56e7fbe86ee48460f27ded2fad5e5fe4a91a.json",
+      "byte_size": 106792,
+      "content_sha256": "9422a93c959795d25403bccc5d3a56e7fbe86ee48460f27ded2fad5e5fe4a91a",
+      "selection_status": "selected",
+      "quality_status": "verified"
+    }
+  ],
+  "source_counts_unchanged": {
+    "sources": 43114,
+    "documents": 23531,
+    "locations": 46608,
+    "source_metadata_assertions": 31,
+    "document_retire_audit": 19000,
+    "document_restore_audit": 5
+  },
+  "jobs": [
+    {
+      "job_id": "17bf451abafab39c",
+      "job_type": "source.narrative_select",
+      "status": "succeeded",
+      "last_error_code": null
+    },
+    {
+      "job_id": "65ec00dd2a9b40e5",
+      "job_type": "source.narrative_summarize",
+      "status": "succeeded",
+      "last_error_code": null
+    },
+    {
+      "job_id": "6695fb48faec0407",
+      "job_type": "source.narrative_verify",
+      "status": "succeeded",
+      "last_error_code": null
+    },
+    {
+      "job_id": "bb9008310821a448",
+      "job_type": "source.narrative_verify",
+      "status": "succeeded",
+      "last_error_code": null
+    },
+    {
+      "job_id": "c1131779beb5309c",
+      "job_type": "source.narrative_summarize",
+      "status": "succeeded",
+      "last_error_code": null
+    },
+    {
+      "job_id": "f786bf65281e9a82",
+      "job_type": "source.narrative_select",
+      "status": "succeeded",
+      "last_error_code": null
+    }
+  ],
+  "scratch_peak_bytes_on_resume": 0,
+  "persistent_added_bytes_reported": 588029,
+  "usage": {
+    "input_tokens": 2431,
+    "output_tokens": 7068,
+    "total_tokens": 9499,
+    "estimated_micro_usd": 10235,
+    "new_unknown": 0
+  },
+  "historical_unknown_reservations_preserved": 7,
+  "estimate_not_cash_invoice": true
+}

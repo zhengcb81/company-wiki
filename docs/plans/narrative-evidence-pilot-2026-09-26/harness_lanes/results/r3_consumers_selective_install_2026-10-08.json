@@ -1,0 +1,137 @@
+{
+  "schema_version": "r3-selective-consumer-install/1",
+  "status": "applied_repeat_unchanged",
+  "plan": {
+    "canonical": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+    "schema": "rf-install-plan/1",
+    "selected": [
+      "scripts/company_wiki_narrative_contracts.py"
+    ],
+    "targets": [
+      {
+        "destination": "C:\\Users\\郑曾波\\.agents\\skills",
+        "files": [
+          {
+            "before_sha256": "002f935253f935ac48228f5edec73df732cd5e857c428e215bd56029a8173972",
+            "operation": "replace",
+            "path": "scripts/company_wiki_narrative_contracts.py",
+            "size": 26169,
+            "source_sha256": "11fef2a81ff60940fc97cb918b17f0ce64e67b74fbc76a9f53c237fc07d178d3"
+          }
+        ],
+        "installed": true,
+        "selected_drift": 1,
+        "target": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+        "unselected_drift": 0
+      },
+      {
+        "destination": "C:\\Users\\郑曾波\\.codex\\skills",
+        "files": [
+          {
+            "before_sha256": "002f935253f935ac48228f5edec73df732cd5e857c428e215bd56029a8173972",
+            "operation": "replace",
+            "path": "scripts/company_wiki_narrative_contracts.py",
+            "size": 26169,
+            "source_sha256": "11fef2a81ff60940fc97cb918b17f0ce64e67b74fbc76a9f53c237fc07d178d3"
+          }
+        ],
+        "installed": true,
+        "selected_drift": 1,
+        "target": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+        "unselected_drift": 0
+      }
+    ]
+  },
+  "apply": {
+    "mode": "apply",
+    "schema": "rf-install-result/1",
+    "selected": [
+      "scripts/company_wiki_narrative_contracts.py"
+    ],
+    "status": "completed",
+    "targets": [
+      {
+        "conflicts": [],
+        "destination": "C:\\Users\\郑曾波\\.agents\\skills",
+        "drifted": [],
+        "failed": [],
+        "remaining_selected_drift": 0,
+        "remaining_unselected_drift": 0,
+        "selected": [
+          "scripts/company_wiki_narrative_contracts.py"
+        ],
+        "status": "completed",
+        "target": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+        "unchanged": [],
+        "written": [
+          "scripts/company_wiki_narrative_contracts.py"
+        ]
+      },
+      {
+        "conflicts": [],
+        "destination": "C:\\Users\\郑曾波\\.codex\\skills",
+        "drifted": [],
+        "failed": [],
+        "remaining_selected_drift": 0,
+        "remaining_unselected_drift": 0,
+        "selected": [
+          "scripts/company_wiki_narrative_contracts.py"
+        ],
+        "status": "completed",
+        "target": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+        "unchanged": [],
+        "written": [
+          "scripts/company_wiki_narrative_contracts.py"
+        ]
+      }
+    ]
+  },
+  "repeat": {
+    "mode": "apply",
+    "schema": "rf-install-result/1",
+    "selected": [
+      "scripts/company_wiki_narrative_contracts.py"
+    ],
+    "status": "completed",
+    "targets": [
+      {
+        "conflicts": [],
+        "destination": "C:\\Users\\郑曾波\\.agents\\skills",
+        "drifted": [],
+        "failed": [],
+        "remaining_selected_drift": 0,
+        "remaining_unselected_drift": 0,
+        "selected": [
+          "scripts/company_wiki_narrative_contracts.py"
+        ],
+        "status": "completed",
+        "target": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+        "unchanged": [
+          "scripts/company_wiki_narrative_contracts.py"
+        ],
+        "written": []
+      },
+      {
+        "conflicts": [],
+        "destination": "C:\\Users\\郑曾波\\.codex\\skills",
+        "drifted": [],
+        "failed": [],
+        "remaining_selected_drift": 0,
+        "remaining_unselected_drift": 0,
+        "selected": [
+          "scripts/company_wiki_narrative_contracts.py"
+        ],
+        "status": "completed",
+        "target": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+        "unchanged": [
+          "scripts/company_wiki_narrative_contracts.py"
+        ],
+        "written": []
+      }
+    ]
+  },
+  "unchanged_unselected_file_count": 480,
+  "unselected_sha_unchanged": true,
+  "selected_final_sha256": "11fef2a81ff60940fc97cb918b17f0ce64e67b74fbc76a9f53c237fc07d178d3",
+  "claude_alias_resolves_to_agents": true
+}

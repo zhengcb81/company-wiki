@@ -1,0 +1,117 @@
+{
+  "schema_version": "r3-production-acceptance/1",
+  "status": "passed",
+  "producer_head": "6cd9b6d7ca4faee3348fdd8afcf70bf7e3d6a5fb",
+  "consumer_heads": {
+    "RF": "343e2de2b1a401e24f32e0db98c911eecd0ae653",
+    "StockWiki": "1ebe012adcdeab371d0dedfd04b89e11e1ee2fd4"
+  },
+  "tdd": {
+    "r3b-rf-red-os.xml": {
+      "tests": 6,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 1.421,
+      "skips": []
+    },
+    "r3b-sw-red-os.xml": {
+      "tests": 6,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 1.372,
+      "skips": []
+    },
+    "r3b-rf-green-os.xml": {
+      "tests": 82,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2,
+      "seconds": 13.744,
+      "skips": [
+        "test_posix_cli_smoke_uses_own_nonblocking_transport",
+        "test_detached_pipe_holder_cannot_hang_local_reader_host"
+      ]
+    },
+    "r3b-sw-green.xml": {
+      "tests": 74,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 6.748,
+      "skips": []
+    },
+    "r3c-cwp-red.xml": {
+      "tests": 3,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 1.769,
+      "skips": []
+    },
+    "r3c-rf-red.xml": {
+      "tests": 3,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 1.024,
+      "skips": []
+    },
+    "r3c-sw-red.xml": {
+      "tests": 3,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.987,
+      "skips": []
+    },
+    "r3c-cwp-green.xml": {
+      "tests": 44,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 17.397,
+      "skips": []
+    },
+    "r3c-rf-green.xml": {
+      "tests": 77,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "seconds": 3.13,
+      "skips": [
+        "test_posix_cli_smoke_uses_own_nonblocking_transport"
+      ]
+    },
+    "r3c-sw-green.xml": {
+      "tests": 77,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 3.285,
+      "skips": []
+    }
+  },
+  "responsibility_static_checks": "CWP Ruff; RF Ruff, actual pre-push mypy 7 files/107 tests; StockWiki scripts/checks.py --static-only all passed",
+  "real_production_cli_consumption": true,
+  "original_metadata_not_fabricated": true,
+  "originals_unchanged": true,
+  "nullable_collection_time_preserved": true,
+  "null_registered_language_distinct_from_parser_detected_language": true,
+  "present_invalid_or_conflicting_metadata_still_rejected": true,
+  "historical_publication_unknown_refused_by_all_three": true,
+  "semantic_review": "r3_production_semantic_review_2026-10-08.json",
+  "usage": "r3_production_live_batch_2026-10-08.json",
+  "resume": "r3_production_resume_2026-10-08.json",
+  "space": "r3_production_space_protection_2026-10-08.json",
+  "actual_installs": "r3_consumers_selective_install_2026-10-08.json",
+  "cwp_exact_ci": "r3_cwp_exact_ci_2026-10-08.json",
+  "rf_exact_ci": "r3_rf_exact_ci_2026-10-08.json",
+  "known_tool_errors": "bootstrap sys.path; sparse checkout initially not materialized in sandbox; guessed file paths caused 0 execution; producer unknown registered language was a product RED; summary draft=null was only receipt-script bug after successful CLI calls; independent SW owner update made ff-only diverge, preserved by merge; old owner baseline changed by concurrent delivery, recorded honestly. No paid rerun.",
+  "owned_cleanup_pending": false,
+  "owned_cleanup": "r3_owned_cleanup_2026-10-08.json",
+  "final_rf_head": "7cf337e1e07b4b3b536050f43e8e652f1c8cc58c",
+  "final_rf_producer_pin_ci": "r3_production_acceptance_2026-10-08.json",
+  "current_stockwiki_source_equivalence": "r3_current_consumer_source_equivalence_2026-10-08.json"
+}

@@ -1,0 +1,442 @@
+{
+  "schema_version": "r3-real-semantic-review/1",
+  "status": "passed_bounded_review",
+  "method": "Read all 20 generated claims against their actual cited raw_text; speaker roles from structured_value.source_role; no new model call.",
+  "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+  "artifact_sha256": "9422a93c959795d25403bccc5d3a56e7fbe86ee48460f27ded2fad5e5fe4a91a",
+  "claims": [
+    {
+      "claim_id": "c1",
+      "claim_type": "analyst_question",
+      "modality": "question",
+      "source_roles": [
+        "analyst"
+      ],
+      "evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:bf94016b54ed5b73fafe9610eccdd2354c89cdc7417dfc0554b8dc29a136b30f",
+        "urn:company-wiki:evidence-span:sha256:8af8e3503cebdc0d93bf5e2bcb8afccb142eb3d3a2d85b924ec68d28ef65d011",
+        "urn:company-wiki:evidence-span:sha256:f57e73b2309ce7f310d32097ef12478e371ede63768b7a15bb4e1b5e777fa992"
+      ],
+      "locators": [
+        "loc:v1/paragraph:122/chars:13-188",
+        "loc:v1/paragraph:122/chars:224-404",
+        "loc:v1/paragraph:122/chars:405-534"
+      ],
+      "source_supported_after_reading_claim_and_all_cited_spans": true,
+      "role_and_modality_preserved": true
+    },
+    {
+      "claim_id": "c2",
+      "claim_type": "company_statement",
+      "modality": "actual",
+      "source_roles": [
+        "management"
+      ],
+      "evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:6b340b90b37544e082110b6b7e8a18a7aa47921987ddf9530e6ba9074823e047",
+        "urn:company-wiki:evidence-span:sha256:2db57d7447025b1b29a68d650b0ce9cd5e8627fe23fe348214ee0507fd9f642b"
+      ],
+      "locators": [
+        "loc:v1/paragraph:72/chars:2551-2579",
+        "loc:v1/paragraph:72/chars:3200-3423"
+      ],
+      "source_supported_after_reading_claim_and_all_cited_spans": true,
+      "role_and_modality_preserved": true
+    },
+    {
+      "claim_id": "c3",
+      "claim_type": "company_statement",
+      "modality": "actual",
+      "source_roles": [
+        "management"
+      ],
+      "evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:97324056af2d20594b10f2bf388c5129c3c064c570232fbc7b100f43c4db4640",
+        "urn:company-wiki:evidence-span:sha256:11785b24daf6ead2b07c7e00d7155f962d121af232b9adb706a007cdf7d288ee"
+      ],
+      "locators": [
+        "loc:v1/paragraph:72/chars:1408-1617",
+        "loc:v1/paragraph:72/chars:3800-3905"
+      ],
+      "source_supported_after_reading_claim_and_all_cited_spans": true,
+      "role_and_modality_preserved": true
+    },
+    {
+      "claim_id": "c4",
+      "claim_type": "company_statement",
+      "modality": "actual",
+      "source_roles": [
+        "management"
+      ],
+      "evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:ca6b4dd15adec072eda99f43b60b9d8134fffde90b03207211858119ccfca1b3",
+        "urn:company-wiki:evidence-span:sha256:167877a34a5ae359cc77d677b32fa236030ed12c4b96ed7e08d9bdc21d5019a8",
+        "urn:company-wiki:evidence-span:sha256:1f89c4a506ab0d33d775a1778ee533feac763f56689ea30d48393715fe5c5288"
+      ],
+      "locators": [
+        "loc:v1/paragraph:72/chars:6563-6663",
+        "loc:v1/paragraph:72/chars:6840-6923",
+        "loc:v1/paragraph:72/chars:7094-7202"
+      ],
+      "source_supported_after_reading_claim_and_all_cited_spans": true,
+      "role_and_modality_preserved": true
+    },
+    {
+      "claim_id": "c5",
+      "claim_type": "company_statement",
+      "modality": "actual",
+      "source_roles": [
+        "management"
+      ],
+      "evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:5441ac75075a8bfe14c4a147ac3e1a25ff59f2636ac183516bcf56f88b2deab8"
+      ],
+      "locators": [
+        "loc:v1/paragraph:72/chars:5530-5814"
+      ],
+      "source_supported_after_reading_claim_and_all_cited_spans": true,
+      "role_and_modality_preserved": true
+    },
+    {
+      "claim_id": "c6",
+      "claim_type": "company_statement",
+      "modality": "actual",
+      "source_roles": [
+        "management"
+      ],
+      "evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:92af987a736519526f1bb4ddf73d97998eafb092b98132a6c66efa6c33b77a60",
+        "urn:company-wiki:evidence-span:sha256:7941d238a1eb75acbadfe4a71ad9287ebac18d061be9a1efd4720a1903e6232c",
+        "urn:company-wiki:evidence-span:sha256:fc3b91c2266e7a04d6eb25409d6e1bdb913d3cb6484a878801da61eb8c0f8f15"
+      ],
+      "locators": [
+        "loc:v1/paragraph:72/chars:5230-5375",
+        "loc:v1/paragraph:72/chars:5815-5941",
+        "loc:v1/paragraph:72/chars:6370-6483"
+      ],
+      "source_supported_after_reading_claim_and_all_cited_spans": true,
+      "role_and_modality_preserved": true
+    },
+    {
+      "claim_id": "c7",
+      "claim_type": "company_statement",
+      "modality": "actual",
+      "source_roles": [
+        "management"
+      ],
+      "evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:981176164f574c8ee3fc29412a12a16a5de1ced839b3a45af9fa5fdc5b344fe5",
+        "urn:company-wiki:evidence-span:sha256:1cc33508bd030bc53ef800db0505bc67eab3e3f4c2815f0e650c6d18c748c1ce"
+      ],
+      "locators": [
+        "loc:v1/paragraph:72/chars:7595-7749",
+        "loc:v1/paragraph:95/chars:4733-4862"
+      ],
+      "source_supported_after_reading_claim_and_all_cited_spans": true,
+      "role_and_modality_preserved": true
+    },
+    {
+      "claim_id": "c8",
+      "claim_type": "company_statement",
+      "modality": "actual",
+      "source_roles": [
+        "management"
+      ],
+      "evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:6a536c154ead4684b6175babfd8e29df1cb8c83725cbf77eb547889354f8eb4c",
+        "urn:company-wiki:evidence-span:sha256:ed739991abff9f858cf08bbd6389705d88c0ccaaaa2ff933cea1cb274ea85f12",
+        "urn:company-wiki:evidence-span:sha256:c063310bc1f7b591aa702eb92c4e9f9bd6f3557069560de4e15501fd90166c70"
+      ],
+      "locators": [
+        "loc:v1/paragraph:72/chars:8530-8626",
+        "loc:v1/paragraph:72/chars:8782-8849",
+        "loc:v1/paragraph:72/chars:9100-9389"
+      ],
+      "source_supported_after_reading_claim_and_all_cited_spans": true,
+      "role_and_modality_preserved": true
+    },
+    {
+      "claim_id": "c9",
+      "claim_type": "company_statement",
+      "modality": "actual",
+      "source_roles": [
+        "management"
+      ],
+      "evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:99a332c528da5d5590e675ec3177374d504ba75b74f8386f24c7cc47d739c650"
+      ],
+      "locators": [
+        "loc:v1/paragraph:72/chars:7996-8161"
+      ],
+      "source_supported_after_reading_claim_and_all_cited_spans": true,
+      "role_and_modality_preserved": true
+    },
+    {
+      "claim_id": "c10",
+      "claim_type": "company_statement",
+      "modality": "actual",
+      "source_roles": [
+        "management"
+      ],
+      "evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:771250c5ee3f11292c38b9466782e24006233da9ecebfb7041ff8603fadecd5f",
+        "urn:company-wiki:evidence-span:sha256:53a182574127028a412bcb7d9ffdf1640cb98cf0ff5c9ba53da07d68073e49bb"
+      ],
+      "locators": [
+        "loc:v1/paragraph:72/chars:616-776",
+        "loc:v1/paragraph:72/chars:945-1079"
+      ],
+      "source_supported_after_reading_claim_and_all_cited_spans": true,
+      "role_and_modality_preserved": true
+    },
+    {
+      "claim_id": "c11",
+      "claim_type": "company_statement",
+      "modality": "forecast",
+      "source_roles": [
+        "management"
+      ],
+      "evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:53a182574127028a412bcb7d9ffdf1640cb98cf0ff5c9ba53da07d68073e49bb"
+      ],
+      "locators": [
+        "loc:v1/paragraph:72/chars:945-1079"
+      ],
+      "source_supported_after_reading_claim_and_all_cited_spans": true,
+      "role_and_modality_preserved": true
+    },
+    {
+      "claim_id": "c12",
+      "claim_type": "company_statement",
+      "modality": "actual",
+      "source_roles": [
+        "management"
+      ],
+      "evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:44bdf915b56f526298205ec25786433a914d064e036d0bbd18af08c87fa1175b",
+        "urn:company-wiki:evidence-span:sha256:61fa6ff1ee9820beaf072b237b63be47655be8c0eb2a87fdd8da3a52a000e206",
+        "urn:company-wiki:evidence-span:sha256:667390c86c3e3fb7ec83a3516b7f59a3e7169b6b839b56b23bb3a52f2ac26c10",
+        "urn:company-wiki:evidence-span:sha256:29ad67dfd27624d24bd88ec51824d2058ade14e938c763d710d1f41c5e054e84"
+      ],
+      "locators": [
+        "loc:v1/paragraph:131/chars:65-184",
+        "loc:v1/paragraph:131/chars:775-918",
+        "loc:v1/paragraph:136/chars:91-205",
+        "loc:v1/paragraph:95/chars:6489-6544"
+      ],
+      "source_supported_after_reading_claim_and_all_cited_spans": true,
+      "role_and_modality_preserved": true
+    },
+    {
+      "claim_id": "c13",
+      "claim_type": "company_statement",
+      "modality": "actual",
+      "source_roles": [
+        "management"
+      ],
+      "evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:f7039453f5f2bb6fb9a1d9a3e4771a850a8ba6001d8b04a52c7c6733bce66991",
+        "urn:company-wiki:evidence-span:sha256:4db96357da3f6a6eb691326be0dd5df46fc0d7cd3b10f783fdc35ef5726e38ee"
+      ],
+      "locators": [
+        "loc:v1/paragraph:72/chars:1197-1291",
+        "loc:v1/paragraph:72/chars:832-944"
+      ],
+      "source_supported_after_reading_claim_and_all_cited_spans": true,
+      "role_and_modality_preserved": true
+    },
+    {
+      "claim_id": "c14",
+      "claim_type": "company_statement",
+      "modality": "actual",
+      "source_roles": [
+        "management"
+      ],
+      "evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:6295f5a682f8fff878bc9027b8a203f2d4659a4e4b5a9a835bef8af9f6a54158",
+        "urn:company-wiki:evidence-span:sha256:21a8bc1a901080a78b133c32bbbb0d4a252c0f768cd3e9cd983f07073dd17597",
+        "urn:company-wiki:evidence-span:sha256:14cc10d9ef3713b109989bcbdc23a744617f2c46573e6f006bb7b9347099ec08"
+      ],
+      "locators": [
+        "loc:v1/paragraph:146/chars:1467-1586",
+        "loc:v1/paragraph:72/chars:10354-10522",
+        "loc:v1/paragraph:72/chars:10523-10651"
+      ],
+      "source_supported_after_reading_claim_and_all_cited_spans": true,
+      "role_and_modality_preserved": true
+    },
+    {
+      "claim_id": "c15",
+      "claim_type": "company_statement",
+      "modality": "forecast",
+      "source_roles": [
+        "management"
+      ],
+      "evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:52e1ee0c04dec34d57ac25901903a80e50b5198ff5711f0157bedf809cfe5de3"
+      ],
+      "locators": [
+        "loc:v1/paragraph:95/chars:13092-13339"
+      ],
+      "source_supported_after_reading_claim_and_all_cited_spans": true,
+      "role_and_modality_preserved": true
+    },
+    {
+      "claim_id": "c16",
+      "claim_type": "analyst_question",
+      "modality": "question",
+      "source_roles": [
+        "analyst"
+      ],
+      "evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:5041552376d771a855aa1bdcb3d6d51e38ddb7dbb65e922056bb8cd5f41f2150",
+        "urn:company-wiki:evidence-span:sha256:7445f96b994fb480ae5b3cf3b2e6ba8c37c7889998f054ae9c8441565fac460f",
+        "urn:company-wiki:evidence-span:sha256:d8ebe121b24372db7cc462f5defb9ce5174d9c65c346e969a28d26529b48714d"
+      ],
+      "locators": [
+        "loc:v1/paragraph:130/chars:0-241",
+        "loc:v1/paragraph:130/chars:242-284",
+        "loc:v1/paragraph:130/chars:285-367"
+      ],
+      "source_supported_after_reading_claim_and_all_cited_spans": true,
+      "role_and_modality_preserved": true
+    },
+    {
+      "claim_id": "c17",
+      "claim_type": "company_statement",
+      "modality": "forecast",
+      "source_roles": [
+        "management"
+      ],
+      "evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:03d0f117699e21ca53c8f938b31bed331b7ee3e4abf90491e736a7faf407df9d"
+      ],
+      "locators": [
+        "loc:v1/paragraph:95/chars:14127-14336"
+      ],
+      "source_supported_after_reading_claim_and_all_cited_spans": true,
+      "role_and_modality_preserved": true
+    },
+    {
+      "claim_id": "c18",
+      "claim_type": "analyst_question",
+      "modality": "question",
+      "source_roles": [
+        "analyst"
+      ],
+      "evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:edc742b449b9d3cb07b3b970c88dd1238156cd16316e328ccbb83ef2128851e9",
+        "urn:company-wiki:evidence-span:sha256:cd6e781b01025a55685aa290faf1ffe7f26e8ea2f4e4103ea408356a50be9478"
+      ],
+      "locators": [
+        "loc:v1/paragraph:135/chars:252-387",
+        "loc:v1/paragraph:135/chars:388-639"
+      ],
+      "source_supported_after_reading_claim_and_all_cited_spans": true,
+      "role_and_modality_preserved": true
+    },
+    {
+      "claim_id": "c19",
+      "claim_type": "analyst_question",
+      "modality": "question",
+      "source_roles": [
+        "analyst"
+      ],
+      "evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:ef322a3c27c6ba8509aa59a4e2544786cb486daee5bfcac20c64c8f3c066508b",
+        "urn:company-wiki:evidence-span:sha256:c963100b5f9160169baea54e6d6540c240889a1cc311f5e5fa3d5a5b30ceee95",
+        "urn:company-wiki:evidence-span:sha256:0b390f40b9a1a13f0c14e9df1bf14b2a96b847e9c847700dbc01473d6f02f738"
+      ],
+      "locators": [
+        "loc:v1/paragraph:145/chars:191-304",
+        "loc:v1/paragraph:145/chars:305-389",
+        "loc:v1/paragraph:145/chars:390-637"
+      ],
+      "source_supported_after_reading_claim_and_all_cited_spans": true,
+      "role_and_modality_preserved": true
+    },
+    {
+      "claim_id": "c20",
+      "claim_type": "company_statement",
+      "modality": "actual",
+      "source_roles": [
+        "management"
+      ],
+      "evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:257a9aedc7334902dc49ee4364900b0103365e357708fd027909a9432ec4ae4b"
+      ],
+      "locators": [
+        "loc:v1/paragraph:136/chars:1335-1522"
+      ],
+      "source_supported_after_reading_claim_and_all_cited_spans": true,
+      "role_and_modality_preserved": true
+    }
+  ],
+  "counts": {
+    "analyst_question": 4,
+    "company_statement": 16
+  },
+  "modalities": {
+    "question": 4,
+    "actual": 13,
+    "forecast": 3
+  },
+  "themes": {
+    "new_data_centers": {
+      "evidence": true,
+      "summary": true,
+      "claim_ids": [
+        "c10",
+        "c11"
+      ]
+    },
+    "new_models": {
+      "evidence": true,
+      "summary": true,
+      "claim_ids": [
+        "c2",
+        "c3"
+      ]
+    },
+    "customer_adoption": {
+      "evidence": true,
+      "summary": true,
+      "claim_ids": [
+        "c4",
+        "c5",
+        "c6"
+      ]
+    },
+    "gpu_delivery_efficiency": {
+      "evidence": true,
+      "summary": true,
+      "claim_ids": [
+        "c13"
+      ]
+    },
+    "copilot_paid_seats": {
+      "evidence": true,
+      "summary": true,
+      "claim_ids": [
+        "c7",
+        "c8"
+      ]
+    },
+    "monetization_change": {
+      "evidence": true,
+      "summary": true,
+      "claim_ids": [
+        "c14",
+        "c15"
+      ]
+    }
+  },
+  "summary_exhaustive": false,
+  "selected_evidence_count": 49,
+  "language": "en",
+  "translate": false,
+  "historical_publication_unknown": true,
+  "original_provenance": "legacy_unverified; source support is not proof of official publication or historical as-of eligibility",
+  "zero_model_calls_for_review": true,
+  "difference_from_run10": "This real production run has 16 company statements/4 analyst questions; all six scoped business themes, including GPU delivery efficiency, appear in the summary. The earlier run10 result 15/5 and five themes is not copied as this run."
+}

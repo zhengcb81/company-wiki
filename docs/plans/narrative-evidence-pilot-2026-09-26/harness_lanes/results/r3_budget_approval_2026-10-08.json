@@ -1,0 +1,35 @@
+{
+  "schema_version": "r3-budget-approval/1",
+  "date": "2026-10-08",
+  "human_authorization": [
+    "批准 the explicitly quoted 220000 tokens and continuation request",
+    "给你10 dollar的预算"
+  ],
+  "cumulative_token_cap": 220000,
+  "cumulative_cost_cap_micro_usd": 10000000,
+  "superseded_cost_cap_micro_usd": 120000,
+  "prior_charged_tokens": 190035,
+  "prior_charged_micro_usd": 100502,
+  "historical_unknown_reservations": 7,
+  "historical_fx_guard_micro_usd": 2764,
+  "remaining_tokens": 29965,
+  "remaining_micro_usd_after_fx": 9896734,
+  "single_batch_tokens": 19193,
+  "single_batch_micro_usd": 14591,
+  "request_file_sha256": "c795dbacb7f72460bf95177c61744c9e949c931c9adf88b7dca35591503553b7",
+  "run_id": "r3-20261008-production-deepseek-01",
+  "configured_options": {
+    "model_id": "deepseek-flash",
+    "endpoint": "https://api.deepseek.com/chat/completions",
+    "api_key_env": "DEEPSEEK_API_KEY",
+    "max_output_tokens": 8192,
+    "temperature": 1.0,
+    "output_token_field": "max_tokens"
+  },
+  "provider_data_authorization": "existing explicit Microsoft S09 selected business excerpts to api.deepseek.com for original-language summary remains effective; no new data/provider request",
+  "raw_config_pilot_protected": 26,
+  "production_AUTO_absent_before": true,
+  "production_workdir_absent_before": true,
+  "model_generation_or_pricing_changed": false,
+  "status": "approved_ready_for_literal_configured_request"
+}

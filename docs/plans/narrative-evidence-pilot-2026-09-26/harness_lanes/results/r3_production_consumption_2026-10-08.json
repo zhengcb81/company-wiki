@@ -1,0 +1,194 @@
+{
+  "schema_version": "r3-real-production-consumption/1",
+  "status": "passed",
+  "fixture_identity_or_dates": false,
+  "real_provider": "DeepSeek Flash",
+  "consumer_heads": {
+    "RF": "343e2de2b1a401e24f32e0db98c911eecd0ae653",
+    "StockWiki": "1ebe012adcdeab371d0dedfd04b89e11e1ee2fd4"
+  },
+  "documents": [
+    {
+      "source_ref": {
+        "schema_version": "2.0",
+        "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "content_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "byte_size": 66324,
+        "mime_type": "text/plain"
+      },
+      "narrative_ref": {
+        "artifact_sha256": "9422a93c959795d25403bccc5d3a56e7fbe86ee48460f27ded2fad5e5fe4a91a",
+        "artifact_version_id": "narrative-c3adcaeffde5454180d054b647fabfbd",
+        "byte_size": 106792,
+        "schema_version": "narrative-ref/1",
+        "source_ref": {
+          "byte_size": 66324,
+          "content_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+          "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+          "mime_type": "text/plain",
+          "schema_version": "2.0",
+          "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a"
+        }
+      },
+      "read_receipt": {
+        "as_of_date": null,
+        "locator_count": 49,
+        "manifest": {
+          "byte_size": 66324,
+          "canonical_entity_id": null,
+          "collector_name": null,
+          "collector_version": null,
+          "content_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+          "display_name": "Microsoft",
+          "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+          "document_kind": "investor_call_transcript",
+          "fiscal_period": "Q4",
+          "fiscal_year": 2026,
+          "form_type": null,
+          "language": "en",
+          "market": "US",
+          "mime_type": "text/plain",
+          "period_end": null,
+          "provider": null,
+          "provider_document_id": null,
+          "published_date": null,
+          "retrieved_at": null,
+          "security_id": "MSFT",
+          "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+          "source_url": null,
+          "title": null
+        },
+        "narrative_ref": {
+          "artifact_sha256": "9422a93c959795d25403bccc5d3a56e7fbe86ee48460f27ded2fad5e5fe4a91a",
+          "artifact_version_id": "narrative-c3adcaeffde5454180d054b647fabfbd",
+          "byte_size": 106792,
+          "schema_version": "narrative-ref/1",
+          "source_ref": {
+            "byte_size": 66324,
+            "content_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+            "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+            "mime_type": "text/plain",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a"
+          }
+        },
+        "quality_status": "verified",
+        "read_at": "2026-10-08T06:14:42.565033+00:00",
+        "replay_status": "verified",
+        "schema_version": "narrative-read-receipt/1",
+        "selection_status": "selected",
+        "source_read_policy_sha256": "97eb9fb8e90d721b038504f3db224f45aa4130b02acac8b1228a752df7f531a0",
+        "status": "ok"
+      },
+      "selection_status": "selected",
+      "summary_status": "completed",
+      "quality_status": "verified",
+      "claim_count": 20,
+      "source_language": "en",
+      "translate": false,
+      "consumers_match": true,
+      "list_count": 49,
+      "exact_lookup_modes": [
+        "--span-id",
+        "--locator"
+      ],
+      "historical_refusals": [
+        "CWP",
+        "RF",
+        "StockWiki"
+      ]
+    },
+    {
+      "source_ref": {
+        "schema_version": "2.0",
+        "document_id": "urn:company-wiki:document:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+        "source_id": "urn:company-wiki:source:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+        "content_sha256": "76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+        "byte_size": 167252,
+        "mime_type": "application/pdf"
+      },
+      "narrative_ref": {
+        "artifact_sha256": "e05169b488a97f1dc3483e8d1f9c51b524cc9241bd96790df2551a31b8c5d4e8",
+        "artifact_version_id": "narrative-1470a1dfb43b493ab6c9a0232c4bde8f",
+        "byte_size": 1457,
+        "schema_version": "narrative-ref/1",
+        "source_ref": {
+          "byte_size": 167252,
+          "content_sha256": "76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+          "document_id": "urn:company-wiki:document:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+          "mime_type": "application/pdf",
+          "schema_version": "2.0",
+          "source_id": "urn:company-wiki:source:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678"
+        }
+      },
+      "read_receipt": {
+        "as_of_date": null,
+        "locator_count": 0,
+        "manifest": {
+          "byte_size": 167252,
+          "canonical_entity_id": null,
+          "collector_name": null,
+          "collector_version": null,
+          "content_sha256": "76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+          "display_name": null,
+          "document_id": "urn:company-wiki:document:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+          "document_kind": "investor_relations",
+          "fiscal_period": null,
+          "fiscal_year": null,
+          "form_type": null,
+          "language": null,
+          "market": "CN",
+          "mime_type": "application/pdf",
+          "period_end": null,
+          "provider": null,
+          "provider_document_id": null,
+          "published_date": null,
+          "retrieved_at": null,
+          "security_id": "688012",
+          "source_id": "urn:company-wiki:source:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+          "source_url": null,
+          "title": "中微公司：投资者关系管理办法（2025年8月）"
+        },
+        "narrative_ref": {
+          "artifact_sha256": "e05169b488a97f1dc3483e8d1f9c51b524cc9241bd96790df2551a31b8c5d4e8",
+          "artifact_version_id": "narrative-1470a1dfb43b493ab6c9a0232c4bde8f",
+          "byte_size": 1457,
+          "schema_version": "narrative-ref/1",
+          "source_ref": {
+            "byte_size": 167252,
+            "content_sha256": "76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+            "document_id": "urn:company-wiki:document:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+            "mime_type": "application/pdf",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678"
+          }
+        },
+        "quality_status": "skipped_no_narrative",
+        "read_at": "2026-10-08T06:15:03.605862+00:00",
+        "replay_status": "verified",
+        "schema_version": "narrative-read-receipt/1",
+        "selection_status": "skipped_no_narrative",
+        "source_read_policy_sha256": "837951b01ca678ae5f092c55bc683756e370a671de60993d0b8d9997c72a46ab",
+        "status": "ok"
+      },
+      "selection_status": "skipped_no_narrative",
+      "summary_status": "summary_not_needed",
+      "quality_status": "skipped_no_narrative",
+      "claim_count": 0,
+      "source_language": "zh",
+      "translate": false,
+      "consumers_match": true,
+      "list_count": 0,
+      "exact_lookup_modes": [],
+      "historical_refusals": [
+        "CWP",
+        "RF",
+        "StockWiki"
+      ]
+    }
+  ],
+  "temporary_consumer_root_restored_absent": true,
+  "model_calls_during_consumption": 0,
+  "downstream_state_writes": 0
+}

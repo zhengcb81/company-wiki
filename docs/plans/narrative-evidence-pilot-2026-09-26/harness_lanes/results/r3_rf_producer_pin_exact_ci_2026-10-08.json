@@ -1,0 +1,53 @@
+{
+  "schema_version": "r3-rf-producer-pin-exact-ci/1",
+  "status": "success",
+  "head_sha": "7cf337e1e07b4b3b536050f43e8e652f1c8cc58c",
+  "run_id": 37737193724,
+  "url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/37737193724",
+  "producer_pin": "6cd9b6d7ca4faee3348fdd8afcf70bf7e3d6a5fb",
+  "runtime_source_identical_to_real_node": "343e2de2b1a401e24f32e0db98c911eecd0ae653",
+  "jobs": [
+    {
+      "name": "verify",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install dependencies",
+          "conclusion": "success"
+        },
+        {
+          "name": "Fetch pinned source dependencies",
+          "conclusion": "success"
+        },
+        {
+          "name": "Shared local and CI checks",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ]
+}

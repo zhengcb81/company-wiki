@@ -1,0 +1,178 @@
+{
+  "schema_version": "r3-before-terminal-resume/1",
+  "run_id": "r3-20261008-production-deepseek-01",
+  "model_reservations": [
+    {
+      "attempt_id": "f6ef53f2770f4903a275095984206010",
+      "run_id": "r3-20261008-production-deepseek-01",
+      "job_id": "c1131779beb5309c",
+      "request_sha256": "d90c899333f415fc3e82d37dafbbb6e5da93b8f72be79f9f9ea17b9902c13fa1",
+      "input_tokens_bound": 11001,
+      "max_output_tokens": 8192,
+      "output_bytes_bound": 2097152,
+      "reserved_micro_usd": 14590,
+      "usage_status": "known",
+      "input_tokens": 2431,
+      "output_tokens": 7068,
+      "estimated_micro_usd": 10235,
+      "response_sha256": "f08a35f66f703f1311544859ce14d5fdc2dee7897de6b46904dc187a600346ad",
+      "error_code": null,
+      "output_bytes": 106792,
+      "output_sha256": "9422a93c959795d25403bccc5d3a56e7fbe86ee48460f27ded2fad5e5fe4a91a",
+      "reserved_at": "2026-10-08T05:50:19Z",
+      "usage_settled_at": "2026-10-08T05:50:49Z",
+      "output_settled_at": "2026-10-08T05:50:51Z"
+    }
+  ],
+  "attempt_count": 6,
+  "run": {
+    "run_id": "r3-20261008-production-deepseek-01",
+    "input_hash": "63568a8ac8b4ddcddd952bd6847a049bcb4864ef8364612fec6bebd35c793f75",
+    "scope_sha256": "99c8647c243c47de2cad1e0e71ee8a48af973709f73e9ed75ba89cd10f6ca7b0",
+    "model_id": "deepseek-flash",
+    "prompt_version": "1.6.0",
+    "pricing_version": "deepseek-cn-full-peak-fx-floor6-proxy-2026-10-06",
+    "input_micro_usd_per_million_tokens": 333334,
+    "output_micro_usd_per_million_tokens": 1333334,
+    "max_tokens": 19193,
+    "max_micro_usd": 14591,
+    "max_output_bytes": 4194304,
+    "state": "open",
+    "block_reason": null,
+    "created_at": "2026-10-08T05:50:15Z",
+    "updated_at": "2026-10-08T05:50:15Z",
+    "last_runtime_generation": 2,
+    "binding_json": "{\"execution_versions\":{\"adapter\":\"openai-compatible-http/1\",\"handlers\":{\"source.narrative_select\":\"1.1.0\",\"source.narrative_summarize\":\"1.1.0\",\"source.narrative_verify\":\"1.1.0\"},\"model_request_schema\":\"narrative-model-request/1.3\",\"parser\":\"0.1.1\",\"prompt\":\"1.6.0\",\"selector\":\"0.4.2\"},\"read_policy_schema_version\":\"3.0\",\"read_policy_sha256\":\"72a7871702c6dba3985c83ba0da5b25face63d7fb58e90d7da0fe430e606e7d3\",\"request_sha256\":\"2affb6954da94d388c99c7c63b00157b671fa3c3be60491b784f3aa8e147872b\",\"schema_version\":\"narrative-run-binding/2\",\"source_facts\":[{\"canonical_entity_id\":null,\"document_id\":\"urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a\",\"fiscal_period\":\"Q4\",\"fiscal_year\":2026,\"form_type\":null,\"market\":\"US\",\"period_end\":null,\"published_date\":null,\"security_id\":\"MSFT\"},{\"canonical_entity_id\":null,\"document_id\":\"urn:company-wiki:document:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678\",\"fiscal_period\":null,\"fiscal_year\":null,\"form_type\":null,\"market\":\"CN\",\"period_end\":null,\"published_date\":null,\"security_id\":\"688012\"}],\"source_read_policies\":{\"urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a\":\"97eb9fb8e90d721b038504f3db224f45aa4130b02acac8b1228a752df7f531a0\",\"urn:company-wiki:document:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678\":\"837951b01ca678ae5f092c55bc683756e370a671de60993d0b8d9997c72a46ab\"}}"
+  },
+  "jobs_columns": [
+    "job_id",
+    "job_key",
+    "job_type",
+    "subject_type",
+    "subject_id",
+    "input_hash",
+    "policy_version",
+    "handler_version",
+    "risk_class",
+    "status",
+    "priority",
+    "not_before",
+    "max_attempts",
+    "created_from_event_id",
+    "created_at",
+    "updated_at",
+    "last_error_code",
+    "last_error_detail"
+  ],
+  "source_counts": {
+    "sources": 43114,
+    "documents": 23531,
+    "locations": 46608,
+    "source_metadata_assertions": 31,
+    "document_retire_audit": 19000,
+    "document_restore_audit": 5
+  },
+  "artifact_columns": [
+    "artifact_version_id",
+    "work_key",
+    "effect_id",
+    "document_id",
+    "source_id",
+    "source_sha256",
+    "artifact_role",
+    "object_key",
+    "content_sha256",
+    "byte_size",
+    "producer_name",
+    "producer_version",
+    "policy_sha256",
+    "selection_status",
+    "quality_status",
+    "metadata_json",
+    "status",
+    "created_at",
+    "activated_at"
+  ],
+  "artifacts": [
+    {
+      "artifact_version_id": "narrative-1470a1dfb43b493ab6c9a0232c4bde8f",
+      "work_key": "fc72ae4baf312899234c6ea48d7f88f620d70fe0ae77c710c3e22549f7fcd7da",
+      "effect_id": "eff-ebd9efa830d6c9049f627c1e599796ca",
+      "document_id": "urn:company-wiki:document:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+      "source_id": "urn:company-wiki:source:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+      "source_sha256": "76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+      "artifact_role": "narrative_bundle",
+      "object_key": "objects/sha256/e0/e05169b488a97f1dc3483e8d1f9c51b524cc9241bd96790df2551a31b8c5d4e8.json",
+      "content_sha256": "e05169b488a97f1dc3483e8d1f9c51b524cc9241bd96790df2551a31b8c5d4e8",
+      "byte_size": 1457,
+      "producer_name": "company_wiki.narrative_bundle",
+      "producer_version": "1.0.0",
+      "policy_sha256": "837951b01ca678ae5f092c55bc683756e370a671de60993d0b8d9997c72a46ab",
+      "selection_status": "skipped_no_narrative",
+      "quality_status": "skipped_no_narrative",
+      "metadata_json": "{\"bundle_schema\":\"narrative-bundle/2.0\",\"summary_status\":\"summary_not_needed\"}",
+      "status": "visible",
+      "created_at": "2026-10-08T05:50:15Z",
+      "activated_at": "2026-10-08T05:50:50Z"
+    },
+    {
+      "artifact_version_id": "narrative-c3adcaeffde5454180d054b647fabfbd",
+      "work_key": "ac6e44c8d054553aa4f59acaa60bb55c9b7157e4ceb2eba4ecfdbff63c4ae6c4",
+      "effect_id": "eff-44e3893d16a6e45a8390f5e5930426db",
+      "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "artifact_role": "narrative_bundle",
+      "object_key": "objects/sha256/94/9422a93c959795d25403bccc5d3a56e7fbe86ee48460f27ded2fad5e5fe4a91a.json",
+      "content_sha256": "9422a93c959795d25403bccc5d3a56e7fbe86ee48460f27ded2fad5e5fe4a91a",
+      "byte_size": 106792,
+      "producer_name": "company_wiki.narrative_bundle",
+      "producer_version": "1.0.0",
+      "policy_sha256": "97eb9fb8e90d721b038504f3db224f45aa4130b02acac8b1228a752df7f531a0",
+      "selection_status": "selected",
+      "quality_status": "verified",
+      "metadata_json": "{\"bundle_schema\":\"narrative-bundle/2.0\",\"summary_status\":\"completed\"}",
+      "status": "visible",
+      "created_at": "2026-10-08T05:50:15Z",
+      "activated_at": "2026-10-08T05:50:50Z"
+    }
+  ],
+  "scratch_files": [
+    {
+      "path": "storage-baseline.json",
+      "bytes": 125
+    },
+    {
+      "path": "logs\\compute-1.stderr.log",
+      "bytes": 0
+    },
+    {
+      "path": "logs\\compute-1.stdout.log",
+      "bytes": 0
+    },
+    {
+      "path": "logs\\compute-2.stderr.log",
+      "bytes": 0
+    },
+    {
+      "path": "logs\\compute-2.stdout.log",
+      "bytes": 87
+    },
+    {
+      "path": "logs\\compute-3.stderr.log",
+      "bytes": 0
+    },
+    {
+      "path": "logs\\compute-3.stdout.log",
+      "bytes": 0
+    },
+    {
+      "path": "logs\\model-1.stderr.log",
+      "bytes": 0
+    },
+    {
+      "path": "logs\\model-1.stdout.log",
+      "bytes": 0
+    }
+  ]
+}

@@ -1,0 +1,200 @@
+{
+  "schema_version": "r5b-full-requirements-audit/1",
+  "status": "all_implementation_requirements_verified_final_docs_publish_pending",
+  "families": [
+    {
+      "family": "G1/G2门禁与权限",
+      "state": "verified_in_agreed_scope",
+      "result": "14组/A-B及G1继任措施均发布，人工许可/review/签收/canary退出；保留字节与资源正确性。",
+      "evidence": [
+        {
+          "path": "harness_lanes/results/g2_consolidated_node_2026-10-08.json",
+          "observed_status": "verified_published"
+        },
+        {
+          "path": "harness_lanes/results/g2_single_intent_main_acceptance_2026-10-07.json",
+          "observed_status": "verified_merged_published"
+        },
+        {
+          "path": "harness_lanes/results/g5_main_acceptance_2026-10-07.json",
+          "observed_status": "verified_merged_published"
+        }
+      ]
+    },
+    {
+      "family": "原设计/W0/W2-W6/E4/M3/AUTO/G-C",
+      "state": "verified_in_agreed_scope",
+      "result": "同一AUTO、分层来源接口、有界并发、kill/ACK/outbox恢复；R3实际生产组合通过。",
+      "evidence": [
+        {
+          "path": "harness_lanes/results/n4c_prompt_node_2026-10-06.json",
+          "observed_status": "published_green"
+        },
+        {
+          "path": "harness_lanes/results/r3_production_acceptance_2026-10-08.json",
+          "observed_status": "passed"
+        }
+      ]
+    },
+    {
+      "family": "W1来源类型/ET/融资/IR",
+      "state": "verified_in_agreed_scope",
+      "result": "九原件事实与融资分类/TXT正式登记；current模式保留真实unknown，不伪造公开日期。",
+      "evidence": [
+        {
+          "path": "harness_lanes/results/r2_production_source_application_2026-10-08.json",
+          "observed_status": "applied_verified"
+        },
+        {
+          "path": "harness_lanes/results/r3_production_consumption_2026-10-08.json",
+          "observed_status": "passed"
+        }
+      ]
+    },
+    {
+      "family": "S7/N5 DOCSET/N6",
+      "state": "verified_in_agreed_scope",
+      "result": "九样本29/33与761回放；四miss/optional/重复6透明。R3新20claims逐条实读受支持，16管理层/4问题，六主题。",
+      "evidence": [
+        {
+          "path": "harness_lanes/results/s7_adoption_fundraising_main_acceptance_2026-10-07.json",
+          "observed_status": "published_exact_ci_passed"
+        },
+        {
+          "path": "harness_lanes/results/r3_production_semantic_review_2026-10-08.json",
+          "observed_status": "passed_bounded_review"
+        }
+      ]
+    },
+    {
+      "family": "N4/S4/R6真实模型",
+      "state": "verified_in_agreed_scope",
+      "result": "原四类真实模型及局部容错已验收；真实正式final0缺口现由2visible工件补齐。",
+      "evidence": [
+        {
+          "path": "harness_lanes/results/n4c_live_business_review_2026-10-06.json",
+          "observed_status": "real_bounded_summary_verified"
+        },
+        {
+          "path": "harness_lanes/results/r6_partial_summary_node_2026-10-06.json",
+          "observed_status": "accepted_published_exact_ci_green"
+        },
+        {
+          "path": "harness_lanes/results/r3_production_live_batch_2026-10-08.json",
+          "observed_status": "completed"
+        }
+      ]
+    },
+    {
+      "family": "F0-F5/S5/S6/D旧派生空间",
+      "state": "verified_in_agreed_scope",
+      "result": "生产历史净释放5659443210B/raw0；本批仅新增588030逻辑B，没有恢复完整46G备份。",
+      "evidence": [
+        {
+          "path": "harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json",
+          "observed_status": "succeeded"
+        },
+        {
+          "path": "harness_lanes/results/r3_production_space_protection_2026-10-08.json",
+          "observed_status": "passed"
+        },
+        {
+          "path": "harness_lanes/results/r3_owned_cleanup_2026-10-08.json",
+          "observed_status": "restored_absent"
+        }
+      ]
+    },
+    {
+      "family": "N5 RAW-DUP/R4取舍",
+      "state": "verified_in_agreed_scope",
+      "result": "G3正式已读重复extra36191979B/allocation未知；不迁移原件对象化是基于收益的完成决策。",
+      "evidence": []
+    },
+    {
+      "family": "FF/ET/所有外包及并线",
+      "state": "verified_in_agreed_scope",
+      "result": "已发包约定范围已接收；当前来源消费者/真实安装通过，八仓真实执行分支与owner归属已核。",
+      "evidence": [
+        {
+          "path": "harness_lanes/results/g4_main_acceptance_2026-10-07.json",
+          "observed_status": "accepted_published"
+        },
+        {
+          "path": "harness_lanes/results/g5_main_acceptance_2026-10-07.json",
+          "observed_status": "verified_merged_published"
+        },
+        {
+          "path": "harness_lanes/results/p5_ff_main_acceptance_2026-10-05.json",
+          "observed_status": "accepted_main"
+        },
+        {
+          "path": "harness_lanes/results/p5_rf_main_acceptance_2026-10-06.json",
+          "observed_status": "published_green"
+        },
+        {
+          "path": "harness_lanes/results/r3_production_acceptance_2026-10-08.json",
+          "observed_status": "passed"
+        },
+        {
+          "path": "harness_lanes/results/r5b_final_repository_state_2026-10-08.json",
+          "observed_status": "observed"
+        }
+      ]
+    },
+    {
+      "family": "FMP/Koyfin/SeekingAlpha/ET比较",
+      "state": "verified_in_agreed_scope",
+      "result": "采购/能力/按月调用量调查已完成；免费身份/发现能力与402区分，未购买订阅或强加provider。",
+      "evidence": []
+    },
+    {
+      "family": "完整投资研究/预测边界",
+      "state": "verified_in_agreed_scope",
+      "result": "本计划完成来源消费接口；全预测算法/研究state是下游责任，未宣称已运行全投资研究。",
+      "evidence": [
+        {
+          "path": "harness_lanes/results/r3_production_consumption_2026-10-08.json",
+          "observed_status": "passed"
+        }
+      ]
+    },
+    {
+      "family": "R7快CI/TDD/R8 PWF/R5导航",
+      "state": "verified_in_agreed_scope",
+      "result": "责任层TDD、真实大节点、原件保护与短日常CI；不加逐helper签收或全九日常CI。最终文档发布待本轮commit/push。",
+      "evidence": [
+        {
+          "path": "harness_lanes/results/r3_cwp_exact_ci_2026-10-08.json",
+          "observed_status": "success"
+        },
+        {
+          "path": "harness_lanes/results/r3_rf_exact_ci_2026-10-08.json",
+          "observed_status": "success"
+        },
+        {
+          "path": "harness_lanes/results/r3_owned_cleanup_2026-10-08.json",
+          "observed_status": "restored_absent"
+        }
+      ]
+    }
+  ],
+  "A01_A16_predecessor": "final_scope_audit_2026-10-07.md; preserved agreed scope; R2/R3/G2 successor evidence supersedes old pending.",
+  "original_inventory": "harness_lanes/results/all_pwf_inventory_2026-10-07.json",
+  "current_scope_not_reduced": true,
+  "not_exhaustive_all_historical_processing_or_full_research": true,
+  "R4_source": "../../implementation/g3-source-facts/MAIN_ACCEPTANCE.md",
+  "providers_source": [
+    "provider_cost_and_capability_2026-09-27.md",
+    "earnings_transcripts_vs_platforms_2026-09-27.md"
+  ],
+  "explicit_limits": [
+    "S7 29/33, not 33/33; three misses are pure financing amount/provider-outside-body/guidance; G-S06-03 required locator miss while canonical same-source capacity is selected elsewhere.",
+    "Optional 2/17 and duplicate 6/761 are retained, not erased.",
+    "Unknown S07/S08/S09 dates have no historical as-of eligibility; legacy transcripts are not fabricated official download receipts.",
+    "Budget is configured proxy; provider cash invoice and physical allocated/releasable raw duplicate bytes remain unknown.",
+    "Windows POSIX skips remain skips; no claim of measured four-model concurrency.",
+    "External owner WIP remains in SID/SQA/ET/etc; no restore/clean or independent IQS/Dayu modifications."
+  ],
+  "all_pwf_required_new_implementation_remaining": [],
+  "remaining_action": "Commit/push current CWP PWF and receipts, verify current remote HEAD and documentation consistency; then goal complete."
+}

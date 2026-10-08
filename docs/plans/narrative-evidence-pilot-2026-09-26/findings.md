@@ -1,41 +1,29 @@
-# Findings：当前事实、风险与证明范围
+# Findings：当前事实与证明范围
 
-**2026-10-08，等待必要预算答复。** 本页只放当前事实；历史完整调查见[6dd5601完整findings](https://github.com/zhengcb81/company-wiki/blob/6dd56011a7d49e2b8c147f2163b0708074f9edd7/docs/plans/narrative-evidence-pilot-2026-09-26/findings.md)。施工状态只取[task_plan](task_plan.md)。
+**2026-10-08｜R3生产与R5完整实质审计完成，最后文档发布待做。** 当前状态取[task_plan](task_plan.md)；历史完整调查在[6dd5601](https://github.com/zhengcb81/company-wiki/blob/6dd56011a7d49e2b8c147f2163b0708074f9edd7/docs/plans/narrative-evidence-pilot-2026-09-26/findings.md)。
 
-## 架构与门禁
+## 架构与精简
 
-CWP只维护immutable来源、解析/质量、精选业务描述、证据定位与只读export；StockWiki独占研究状态。SourceRef/Export v2/NarrativeRef隔离存储目录。现有AUTO统一预算、lease/generation/outbox，子进程客户端隔离、有限多文档P4；不新造队列或全量永久MD。Dayu/IQS不写，CN维护SID简易执行分支。
+来源层负责raw/版本/SHA/locator/质量，消费者通过pathless SourceRef/Export v2/NarrativeRef读来源，不操作底层目录。CWP不保存投资研究state；RF/StockWiki各负责自己的语义。一套AUTO、独立模型子进程、有界多文档P4，不重造reader/队列。G2十四组及A/B全发布：人工许可、review receipt、签收、private/public、canary、固定SHA人工许可表退出；保留真实SHA/身份/期间/历史公开日/locator、路径归属、事务与资源限制。[完整对账](r5_full_closeout_2026-10-08.md)。
 
-G2十四组与A/B已发布，[最终验收](g2_consolidated_node_2026-10-08.md)证明steady、旧canary/签收/人工review/工程长门退出。固定SHA许可表已删除；真实reader开字节SHA及身份/期间/公开日/版本/资源限额保留。RF/FF真实定点安装和重复0写已验收，不重做。旧卡中要求review/签字/双下载许可的文字是历史，不反过来覆盖用户简化授权。
+## R3真实生产
 
-## 来源事实与真实质量
+既定正式请求r3-20261008-production-deepseek-01成功：微软原语言TXT106792B final、真制度1457B skip，只有1实际DeepSeek POST；20claims、49原文证据、16管理层/4分析师问题、13actual/3forecast/4question。所有claim逐条受引用支持；六个重点经营主题均在短摘要，仍非全文穷尽质量声明。原件provenance legacy_unverified和未知公开日期没有被伪造。[生产](r3_production_acceptance_2026-10-08.md)、[语义](harness_lanes/results/r3_production_semantic_review_2026-10-08.json)。
 
-R2正式4restore/九事实/TXT统一登记完成；[生产应用](harness_lanes/results/r2_production_source_application_2026-10-08.json)逐项记录六表差异。S05/S06融资类型，S07/S08证券身份，S01–S04官方日期与期间已校正；S07/S08/S09公开日unknown，不从活动、会议或URL日期捏造。旧ET TXT66324B保持原语言/SHA，sidecar589B明确legacy_unverified和无历史HTTP receipt。未选文档/根水位/原采集声明保持。
+真实CLI首次暴露nullable采集时间、登记语言被误当身份冲突。三个读取层现保持未知原登记值和独立派生语言，不依靠新开关或来源白名单。有值错误/已知冲突仍拒绝；显式null当前阅读与ISO历史公开日规则分开。三仓公共read/list/search/exact、49定位、同证据DTO与制度skip都通过，历史unknown均拒绝。同run恢复6任务终态、0新attempt/POST/token/费用、相同工件/hash。[总收据](harness_lanes/results/r3_production_acceptance_2026-10-08.json)。
 
-SourceCatalog.record_source_facts单事务追加事实+查询投影，缺键不改/null明确unknown；相同观察时间变化不重复，64KiB累计证据/2048字符事实有界。重登同capture继续用有效事实，新真正矛盾仍拒绝。当前101责任/真实九原件E2E绿，6ae7ddc/精确CI37705927320绿。
+累计199534tokens/估算110737microUSD；220000/$10已授权，余20466tokens/9886499microUSD（扣旧FX2764），历史unknown7不退。既有DeepSeek/MiMo配置、价格与资料范围不变，现金账单未知。不会为消费重跑付费摘要。
 
-S7当前selector0.4.2/parser0.1.1/prompt1.6.0，九样本29/33 required、761定位回放；四miss解释、optional取舍、重复6保留，不改golden凑分。旧N4C真实run10有20 claims/46locators/99479B、15管理层/5分析师，六主题证据覆盖/五主题短摘要覆盖；全部是隔离数据，不能当R3已生产。
+## 空间与归属
 
-## 空间及本轮归属
+历史S5/S6生产净释放5659443210B、raw0、DB222408704B。新R3主DB不增，仅WAL+57680B、AUTO389120B/SHM32768B、两个final108249B、work212B及锁1B，共588030逻辑B；CLI内部报588029B，差1B为owner lock。scratch峰106792B。当前每final2MiB/持久1GiB/scratch2GiB均通过，实际allocated未知。[测量](harness_lanes/results/r3_production_space_protection_2026-10-08.json)。
 
-S5/S6生产净释放5659443210B、原件0删除，DB222408704B；R2主文件不增长，WAL1240152B是合法小事务，TXT/metadata新增66913B。R4已登记内部逻辑重复上界98845393B，实读额外36191979B，allocation/releasable未知，因此不做收益不足的对象化，不声称释放GB。
+R5A清8根119913476B；R3A清工作树91161217B；本次R3清自己2工作树+16文件94840547B。三项是测试/代码副本，单列不重复加到旧生产净释放。26原件/config/侧录/历史pilot SHA保持，formal AUTO/成功final与未知费用历史保留。邻仓owner只能检查归属不覆盖：StockWiki独立交接提交753dfca/6d1dddb并清自己runs；旧342基线不能再宣称全未变。我们的四消费者提交只改接口/测试，与owner不重叠。SID/SQA等独立WIP保留，Dayu/IQS0写。
 
-R5已读8根：五G2及cw-retire-r1是closed pytest夹具；canary PDF与companies原件实读同SHA，删其untracked副本和catalog缓存，保留tracked历史4文件。合计119913476B/1123文件，26保护SHA及生产DB stat不变；[归属](harness_lanes/results/r5_temporary_ownership_2026-10-08.json)、[清理](harness_lanes/results/r5_owned_cleanup_2026-10-08.json)。旧pilot461338B含未知usage/recovery事实，保留整根；tmp/pdfs和外包交接/owner不动。逻辑字节不等同allocation承诺。
+## 有意保留的边界
 
-## 真正剩余与预算
+S7九原件仍29/33/761定位零错、optional2/17、重复6。四miss是纯金额、另页canonical产能定位、正文外provider、纯guidance，原golden/分母保留；不称33/33。R4实读重复extra34.5MiB/allocation未知，证据决定不对象化。FMP真实402只证明当前套餐限制；Koyfin/SeekingAlpha调查不等于自动化provider或购买。P4计算3/模型1，不称实测四模型并发；Windows POSIX skip不计通过。原scope是有界来源平台能力，不是全历史已处理或投资研究自动化。
 
-R3模型尚未POST，production final0。现生产TXT49段/10873B HTTP，完整19193token/14591microUSD；当前余9965token，220000累计token增量待答，费用上限0.12不变。历史190035/100502/unknown7/FX2764照计，未知usage不退款。模型配置不改；不重新要求已明确的同资料向DeepSeek外发授权。
+## 发布
 
-正式AUTO路径.source_catalog/automation.sqlite3目前未创建，是现有AUTO实现的首次生产实例，work-dir.source_catalog/r3；历史tmp pilot不是第二生产队列。当前请求不能说明已经有final或完整预测。R3须真实有限批次/当前消费者/恢复/真实空间一次大节点，随后R5逐条完整审计及正常发布。
-
-R3A发布后的当前只读核对：AUTO/work-dir仍absent，生产DB stat/26保护保持，正式request及配置未改。需19193token、余9965、差9228；200000→220000请求尚无答复。同一缺口连续出现在producer轮、consumer并线轮、本轮；没有已确认live R3进程可等待。其他独立部分已完成，现在不能通过换run、降低配置、裁正文、重做已绿包或写未执行计划来替代生产证据。[阻塞收据](harness_lanes/results/r3_budget_blocked_audit_2026-10-08.json)保留旧unknown/费用，目标服务发布后设blocked，收到既有必要预算答复后按原R3→R5B恢复。
-
-## 已知错误与限制
-
-R3A发现原NarrativeReadRequest/producer/RF/SW均强制ISO日期与已知公开日，所以前一份R3方案的“当前普通读取+未知日期不造假”不能实际成立；历史fixture日期消费绿不能代替此生产能力。[R3A](r3_current_material_read_implementation_2026-10-08.md)现complete：显式null仅表示当前资料，指定历史日期仍严格校验公开日。CWP38单测/26责任包及源码CI绿；RF67pass/1个Windows skip，SW68pass/0skip；四真实原件公共CLI节点1pass/0skip/49.98秒，本地loopback3、恢复新增0、真实provider0。RF main c672a5e已推/精确CI37712024241全绿，SW master42fba06本地已合入，无remote。CWP联调测试f0ad6b9已推/精确CI37712551891全绿，live仍0，费用/模型配置和正式batch不变。
-
-RF仓跟踪约4.7万历史planning文件，复制整仓工作树会制造无用副本。本次明确归属的隔离RF工作树使用Git稀疏检出，最终仅295文件/3144753B；两个已合入工作树现已移除91161217B副本，不删主仓历史。342 owner文件保持，RF一个接口文件定点安装的480未选文件保持/重复零写。兼容测试原以固定兄弟路径找仓，在隔离位置9次WinError267，实际三仓布局19绿，不改oracle迁就错误目录。测试清理的PowerShell Split-Path参数集错误有先前Python边界检查和后续.NET父目录/absent复核，不隐去该错误。
-
-产品RED：缺事实公开接口、重新登记的假分类冲突、旧host固定SHA门；均有当前GREEN与源码CI。夹具/调用错误：错路径、缺expected SHA/reader关闭、xunit2 record_property、退休后query_ref，均独立记录，不当产品失败。额外--strict旧Any错误不是配置CI门，实际配置mypy绿。Windowsbrace/CIM沙箱错误改显式文件列表/正常OS只读查询；删除前每文件exclusive open检查，无当前匹配进程。完整过程见Git历史及R2/R5收据，不隐去费用/timeout/truncation风险。
-
-FMP真实402只证明套餐边界，不是下载成功；未实测现金账单硬限额不冒称支持。SW无remote、SID维护执行分支，邻仓owner WIP和Dayu外部限制仍真实，最终Git核对待R5。不为这些状态重造人工签收。
+CWP6cd9b6d精确CI37736338454全success；RF7cf337e依赖当前producer、精确CI37737193724全success；实际消费测试343e2de源码与7cf相同。SW1ebe012被独立6d1dddb推进，consumer源码逐字相同，无远端。[八仓只读状态](harness_lanes/results/r5b_final_repository_state_2026-10-08.json)。最终纯文档提交复用这些源码绿，最后发布完成才关闭目标。

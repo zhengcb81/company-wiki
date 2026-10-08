@@ -1,0 +1,192 @@
+{
+  "schema_version": "r3-production-space-protection/1",
+  "status": "passed",
+  "catalog_total_logical_bytes_before": 290919532,
+  "catalog_total_logical_bytes_after": 291507562,
+  "total_logical_delta_bytes": 588030,
+  "changed_paths": [
+    {
+      "relative_path": "automation.sqlite3",
+      "before_bytes": 0,
+      "after_bytes": 389120,
+      "delta": 389120
+    },
+    {
+      "relative_path": "automation.sqlite3-shm",
+      "before_bytes": 0,
+      "after_bytes": 32768,
+      "delta": 32768
+    },
+    {
+      "relative_path": "automation.sqlite3-wal",
+      "before_bytes": 0,
+      "after_bytes": 0,
+      "delta": 0
+    },
+    {
+      "relative_path": "automation.sqlite3.batch-owner.lock",
+      "before_bytes": 0,
+      "after_bytes": 1,
+      "delta": 1
+    },
+    {
+      "relative_path": "catalog.sqlite3-wal",
+      "before_bytes": 1240152,
+      "after_bytes": 1297832,
+      "delta": 57680
+    },
+    {
+      "relative_path": "objects/sha256/94/9422a93c959795d25403bccc5d3a56e7fbe86ee48460f27ded2fad5e5fe4a91a.json",
+      "before_bytes": 0,
+      "after_bytes": 106792,
+      "delta": 106792
+    },
+    {
+      "relative_path": "objects/sha256/e0/e05169b488a97f1dc3483e8d1f9c51b524cc9241bd96790df2551a31b8c5d4e8.json",
+      "before_bytes": 0,
+      "after_bytes": 1457,
+      "delta": 1457
+    },
+    {
+      "relative_path": "r3/logs/compute-1.stderr.log",
+      "before_bytes": 0,
+      "after_bytes": 0,
+      "delta": 0
+    },
+    {
+      "relative_path": "r3/logs/compute-1.stdout.log",
+      "before_bytes": 0,
+      "after_bytes": 0,
+      "delta": 0
+    },
+    {
+      "relative_path": "r3/logs/compute-2.stderr.log",
+      "before_bytes": 0,
+      "after_bytes": 0,
+      "delta": 0
+    },
+    {
+      "relative_path": "r3/logs/compute-2.stdout.log",
+      "before_bytes": 0,
+      "after_bytes": 87,
+      "delta": 87
+    },
+    {
+      "relative_path": "r3/logs/compute-3.stderr.log",
+      "before_bytes": 0,
+      "after_bytes": 0,
+      "delta": 0
+    },
+    {
+      "relative_path": "r3/logs/compute-3.stdout.log",
+      "before_bytes": 0,
+      "after_bytes": 0,
+      "delta": 0
+    },
+    {
+      "relative_path": "r3/logs/model-1.stderr.log",
+      "before_bytes": 0,
+      "after_bytes": 0,
+      "delta": 0
+    },
+    {
+      "relative_path": "r3/logs/model-1.stdout.log",
+      "before_bytes": 0,
+      "after_bytes": 0,
+      "delta": 0
+    },
+    {
+      "relative_path": "r3/storage-baseline.json",
+      "before_bytes": 0,
+      "after_bytes": 125,
+      "delta": 125
+    }
+  ],
+  "cli_reported_persistent_added_bytes": 588029,
+  "cli_scratch_peak_bytes": 106792,
+  "final_objects_total_bytes": 108249,
+  "max_one_final_bytes": 106792,
+  "terminal_workdir_logical_bytes": 212,
+  "terminal_workdir_files": [
+    {
+      "relative_path": "r3/logs/compute-1.stderr.log",
+      "bytes": 0
+    },
+    {
+      "relative_path": "r3/logs/compute-1.stdout.log",
+      "bytes": 0
+    },
+    {
+      "relative_path": "r3/logs/compute-2.stderr.log",
+      "bytes": 0
+    },
+    {
+      "relative_path": "r3/logs/compute-2.stdout.log",
+      "bytes": 87
+    },
+    {
+      "relative_path": "r3/logs/compute-3.stderr.log",
+      "bytes": 0
+    },
+    {
+      "relative_path": "r3/logs/compute-3.stdout.log",
+      "bytes": 0
+    },
+    {
+      "relative_path": "r3/logs/model-1.stderr.log",
+      "bytes": 0
+    },
+    {
+      "relative_path": "r3/logs/model-1.stdout.log",
+      "bytes": 0
+    },
+    {
+      "relative_path": "r3/storage-baseline.json",
+      "bytes": 125
+    }
+  ],
+  "raw_deleted": 0,
+  "raw_config_pilot_files_sha_unchanged": 26,
+  "owner_baseline_files_compared": 342,
+  "owner_files_identical": 16,
+  "independent_stockwiki_owner_changes": {
+    "count": 326,
+    "changed_count": 5,
+    "removed_test_files_count": 321,
+    "samples": [
+      {
+        "relative_path": "docs/handoff/SW-REPAIR-02/logs/check_full.log",
+        "state": "changed"
+      },
+      {
+        "relative_path": "docs/handoff/SW-REPAIR-02/logs/check_static_only.log",
+        "state": "changed"
+      },
+      {
+        "relative_path": "docs/handoff/SW-REPAIR-02/planning/findings.md",
+        "state": "changed"
+      },
+      {
+        "relative_path": "docs/handoff/SW-REPAIR-02/planning/progress.md",
+        "state": "changed"
+      },
+      {
+        "relative_path": "docs/handoff/SW-REPAIR-02/planning/task_plan.md",
+        "state": "changed"
+      },
+      {
+        "relative_path": "runs/swr02-acceptance-20261007/export-manifest.json",
+        "state": "absent"
+      }
+    ],
+    "evidence": "StockWiki/docs/handoff/SW-REPAIR-02/planning/progress.md explicitly records cleanup of runs/swr02-acceptance-*; independent owner committed 753dfca and is updating delivery logs now. These are not our deletion targets; do not claim all 342 unchanged."
+  },
+  "our_commits_disjoint_from_owner_files": true,
+  "stockwiki_owner_wip_preserved": true,
+  "allocation_bytes_unknown": true,
+  "limits": {
+    "final_bytes": 2097152,
+    "persistent_delta_bytes": 1073741824,
+    "scratch_peak_bytes": 2147483648
+  }
+}
