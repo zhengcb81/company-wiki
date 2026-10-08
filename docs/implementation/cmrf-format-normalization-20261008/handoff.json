@@ -1,0 +1,172 @@
+{
+  "schema_version": "cmrf-lane-handoff/1",
+  "lane_id": "R6-FORMAT",
+  "status": "ready_for_main",
+  "repository": "C:/Users/郑曾波/Projects/_harness_worktrees/cmrf-20261008/cwp-formats",
+  "baseline_commit": "eaad25a4bb2e6bbe5a8e110ec629dde4c5ddbda2",
+  "branch": "codex/cmrf-format-normalization-20261008",
+  "commits": [
+    "9bf5dead63bb1316d41683a1c8a0e3df89892dd8"
+  ],
+  "head": "9bf5dead63bb1316d41683a1c8a0e3df89892dd8",
+  "files": [
+    {
+      "path": "src/company_wiki/document_normalization/__init__.py",
+      "sha256": "fcb160e478ac8883f61db767832754cd23bcabffec5718e111d8c0d181987332"
+    },
+    {
+      "path": "src/company_wiki/document_normalization/assets.py",
+      "sha256": "519f1ac85c0cabf7f688d605926b1eb747cc0d158a5753e36f1c113bf2ab5674"
+    },
+    {
+      "path": "src/company_wiki/document_normalization/document.py",
+      "sha256": "2cc6d730a000ce95d3bb18179c87972d8c10a9f4152f5c3348c7ffe19713198a"
+    },
+    {
+      "path": "src/company_wiki/document_normalization/errors.py",
+      "sha256": "4343b04ea87cd10641ccfafb8fe10da796f85b81e887bb0529446994acb8b1ba"
+    },
+    {
+      "path": "src/company_wiki/document_normalization/html_parser.py",
+      "sha256": "1b97f0676dab632edf72015c174ca10adfad7249fc323f9a9f56a89421da769b"
+    },
+    {
+      "path": "src/company_wiki/document_normalization/limits.py",
+      "sha256": "3e3990a9d784f0d8ccc686f9aedd35d860a07a6f5dfb7c7af486a3ca0dff1867"
+    },
+    {
+      "path": "src/company_wiki/document_normalization/pptx_parser.py",
+      "sha256": "b65509a2fe846473a30efcdf4462a4f2b80b615c6a8d1074a45b5d97c92b9cec"
+    },
+    {
+      "path": "src/company_wiki/document_normalization/replay.py",
+      "sha256": "e78f48c5087ed5efdce9b0b34ba7f7e1253d552f4413a24e8612b65e2fd07b95"
+    },
+    {
+      "path": "src/company_wiki/document_normalization/text.py",
+      "sha256": "58415d0faa6985efb64d81f55041dcb3edad90859456020e1b38b61bfe6523fe"
+    },
+    {
+      "path": "src/company_wiki/document_normalization/units.py",
+      "sha256": "86a26ee1bf375b57462cb85543cb9464835d701701dfd5365bcf975347c816e7"
+    },
+    {
+      "path": "tests/document_normalization/conftest.py",
+      "sha256": "343c070a466c53a55863b39906f76e70d48bc13c13ce79a4929296460310c8bc"
+    },
+    {
+      "path": "tests/document_normalization/test_limits.py",
+      "sha256": "4428e175b001d448f6881bbb3f104f860a23b7b100b5c8e355ee4ddc75201e26"
+    },
+    {
+      "path": "tests/document_normalization/test_html.py",
+      "sha256": "4a8d09ff77258e1479e4b8db4911ffbaf56815ee78da17827b8cce519d8d76b2"
+    },
+    {
+      "path": "tests/document_normalization/test_pptx.py",
+      "sha256": "de7a23570cfbe3fd20b70f8d70b38457105da9742d9f5c67fbb51dfca2e0de9d"
+    },
+    {
+      "path": "tests/document_normalization/test_replay_and_determinism.py",
+      "sha256": "abe13fda0d5889cbd8fa5afa3cd21b397d2edd123cd72cbaa76f2b04b32c177e"
+    },
+    {
+      "path": "tests/document_normalization/run_real_originals.py",
+      "sha256": "55b96afeb8d24658912035e5d1137171fa1fb9e0d0d3fe2c9ee7cb0e50a2c6e8"
+    },
+    {
+      "path": "docs/implementation/cmrf-format-normalization-20261008/task_plan.md",
+      "sha256": "2a4ee8823623d4d8dc3c7f495e3c875ef4bc43b0a490381d279ae8c7cd61ad14"
+    },
+    {
+      "path": "docs/implementation/cmrf-format-normalization-20261008/findings.md",
+      "sha256": "05538ad6056a53d7ba8ec798de70d052735dd71a9664fe296297cf50821457cb"
+    },
+    {
+      "path": "docs/implementation/cmrf-format-normalization-20261008/progress.md",
+      "sha256": "f9db90a39fc5ec8df02e614419cee5705a74b76023ab9a0d27bac0070527dfc4"
+    },
+    {
+      "path": "docs/implementation/cmrf-format-normalization-20261008/HANDOFF.md",
+      "sha256": "ab1b98867658b6f2389e605cd4393e518c66dc2c4ea0e51e33792fc0a4aacdad"
+    },
+    {
+      "path": "docs/implementation/cmrf-format-normalization-20261008/real_originals_report.json",
+      "sha256": "6859a08a2ac9225b38777ec8901eb2de6cf2103d2f39d3e494163a13f16ea88c"
+    }
+  ],
+  "interfaces": [
+    {
+      "name": "company_wiki.document_normalization.normalize_document",
+      "version": "1.0.0",
+      "path": "src/company_wiki/document_normalization/__init__.py",
+      "example": "tests/document_normalization/test_html.py::TestExclusionAndVisibility"
+    },
+    {
+      "name": "company_wiki.document_normalization.replay_unit",
+      "version": "1.0.0",
+      "path": "src/company_wiki/document_normalization/replay.py",
+      "example": "tests/document_normalization/test_replay_and_determinism.py::TestReplayVerificationHtml"
+    },
+    {
+      "name": "company_wiki.document_normalization.NormalizationLimits",
+      "version": "1.0.0",
+      "path": "src/company_wiki/document_normalization/limits.py",
+      "example": "tests/document_normalization/test_limits.py"
+    },
+    {
+      "name": "company_wiki.document_normalization.OpaqueAsset",
+      "version": "1.0.0",
+      "path": "src/company_wiki/document_normalization/assets.py",
+      "example": "tests/document_normalization/test_pptx.py::TestMediaAndGaps"
+    }
+  ],
+  "tests": {
+    "red": [
+      {
+        "command": "python -B -m pytest tests/document_normalization -q -p no:cacheprovider  # with src/company_wiki/document_normalization removed (baseline state)",
+        "exit_code": 4,
+        "mechanism": "baseline has no document_normalization package; canonical worker accepts only application/pdf (automation/narrative_select.py:300), so HTML/PPTX parsing is entirely absent"
+      }
+    ],
+    "green": [
+      {
+        "command": "python -B -m pytest tests/document_normalization -q -p no:cacheprovider",
+        "exit_code": 0,
+        "passed": 64,
+        "seconds": 11.45
+      }
+    ],
+    "e2e": [
+      {
+        "command": "python -B tests/document_normalization/run_real_originals.py --html <microsoft_10-K_2025.htm> --html-sha256 99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe --pptx <objects/c0/c02f...2cd4> --pptx-sha256 c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4 --output docs/implementation/cmrf-format-normalization-20261008/real_originals_report.json",
+        "mode": "real_original",
+        "status": "PASS",
+        "report": "docs/implementation/cmrf-format-normalization-20261008/real_originals_report.json"
+      }
+    ]
+  },
+  "isolation": {
+    "test_roots": [
+      "tests/document_normalization/ (in-memory fixtures only; no temp dirs created)"
+    ],
+    "initial_state": "clean worktree at baseline eaad25a4, sparse checkout",
+    "restored": true,
+    "retained_bytes": 0,
+    "originals_changed": 0,
+    "production_configs_changed": 0
+  },
+  "model_calls": 0,
+  "limitations": [
+    "no OCR/vision credentials: image content unread (named partial); sealed 71-check expectations untouched",
+    "HTML replay_unit re-parses the full document (~5-8s on the real 8.1MB 10-K); batch replay should parse once and match locators",
+    "html.parser backend pinned; deadline checks are cooperative per node/slide/member",
+    "unit.language is 'und' (pure parsing makes no language decision)"
+  ],
+  "main_actions": [
+    "route text/html + pptx mime types in automation/narrative_select.py to normalize_document (currently application/pdf only)",
+    "consume opaque image assets under existing model budget/AUTO selection; do not treat parse success as image text read",
+    "route table cells using table_class financial/unknown heuristic flags (parser keeps both)",
+    "provide NarrativeUnit.to_evidence_span wiring in the narrative pipeline (example verified in tests)"
+  ]
+}
