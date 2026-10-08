@@ -67,8 +67,9 @@ locator schema `cwp-html-dom/1` / `cwp-pptx-shape/1`、metadata
 
 - 基线:`eaad25a4bb2e6bbe5a8e110ec629dde4c5ddbda2`(与 worktrees.json 一致)
 - 分支:`codex/cmrf-format-normalization-20261008`(独立 worktree,sparse)
-- 交付提交:见 handoff.json `commits`;HEAD 同 `head`;无未提交遗留文件
-  (docs 内五个文件 + 源码/测试全部入库)。
+- 交付提交:代码/测试/docs = `9bf5dead`(handoff.json 的 `commits`/`head` 即此);
+  本 HANDOFF 与 handoff.json 随其后的 manifest 提交入库,以 `git log` 为准。
+  工作树干净,无未提交遗留文件。
 
 ## 4. 测试账
 
