@@ -1,6 +1,6 @@
 # 公司来源平台：唯一当前施工入口
 
-**2026-10-08｜全部约定实施及最终实质验收完成；R5仅余文档提交推送。** R3正式生产、语义、跨仓消费、恢复、空间、清理均通过；[完整要求对账](r5_full_closeout_2026-10-08.md)覆盖全部计划家族。模型累计上限220000 tokens/$10，旧费用与unknown保留；无需再批准。完成最终发布后才将目标设complete。
+**2026-10-08｜全部PWF约定内容完成。** R3正式生产、语义、跨仓消费、恢复、空间、清理均通过；[完整要求对账](r5_full_closeout_2026-10-08.md)覆盖全部计划家族。模型累计上限220000 tokens/$10，旧费用与unknown保留；无需再批准。完成检查点34141d3d已正常推送、实际远端HEAD相等/CWP干净；本次仅发布最终状态。
 
 ## Goal与边界
 
@@ -23,7 +23,7 @@ MAIN负责共享接口/生产/总PWF/并线。Dayu零代码修改，IQS独立项
 | R2正式来源事实/TXT | complete | [细则](r2_source_preparation_implementation_2026-10-08.md)：四restore、九facts、TXT66324B+589B，重复0新增，精确源码CI绿 |
 | R3正式生产与当前消费 | complete | [正式验收](r3_production_acceptance_2026-10-08.md)：2 visible、1模型POST、20claims/49证据、三仓公共CLI、制度0模型、同run新增0、空间588030B、原件保护 |
 | R4可选原件对象化 | complete：证据决定不迁移 | [G3事实](../../implementation/g3-source-facts/MAIN_ACCEPTANCE.md)：实读extra34.5MiB、allocation未知；不为小收益迁引用或删原件 |
-| R5导航/清理/完整发布 | in_progress：实质审计complete，最后文档发布 | [最终对账](r5_full_closeout_2026-10-08.md)、[R5细则](r5_cleanup_and_navigation_implementation_2026-10-08.md)；全部家族已核，最后commit/push待完成 |
+| R5导航/清理/完整发布 | complete：实质审计与正常发布完成 | [最终对账](r5_full_closeout_2026-10-08.md)、[R5细则](r5_cleanup_and_navigation_implementation_2026-10-08.md)；全部家族已核，[发布检查点](harness_lanes/results/r5b_publication_checkpoint_2026-10-08.json)已验证远端/CWP干净 |
 
 ## 最新生产事实与预算
 
@@ -35,7 +35,7 @@ CWP源码6cd9b6d/CI37736338454，RF源码343e2de及依赖pin7cf337e/CI3773719372
 
 ## Next Step
 
-正常提交/push这次R3/R5 PWF与薄收据，确认CWP实际远端HEAD与本地一致、工作树只含可解释资料；更新最终发布状态并将原目标complete。全部必要新增实施项为空。不启动新外包/无限worker/原件删除/订阅采购。未来新增工作须有新具体需求。
+无必要施工剩余。原PWF及全部引用约定内容完成；[完整最终对账](r5_full_closeout_2026-10-08.md)、[正常发布检查点](harness_lanes/results/r5b_publication_checkpoint_2026-10-08.json)为交接入口。仅提交此完成状态后核最终远端并关闭原目标，不再启动模型/无限worker或新外包。未来新增需求另立具体任务，原件/final/AUTO/旧usage和独立owner资料保留。
 
 ## 导航
 

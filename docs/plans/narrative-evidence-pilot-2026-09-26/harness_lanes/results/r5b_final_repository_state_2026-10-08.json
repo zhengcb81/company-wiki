@@ -493,5 +493,8 @@
   "external_owner_WIP_preserved": true,
   "SW_remote_not_available": true,
   "SID_old_main_not_maintained": true,
-  "CWP_final_documentation_publish_pending": true
+  "CWP_final_documentation_publish_pending": false,
+  "final_publication_checkpoint": "r5b_publication_checkpoint_2026-10-08.json",
+  "RF_final_dependency_pin_head": "7cf337e1",
+  "RF_final_dependency_pin_exact_CI": "r3_rf_producer_pin_exact_ci_2026-10-08.json"
 }

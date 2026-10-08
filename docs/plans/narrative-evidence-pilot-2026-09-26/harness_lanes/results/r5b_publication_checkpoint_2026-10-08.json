@@ -1,0 +1,18 @@
+{
+  "schema_version": "r5b-publication-checkpoint/1",
+  "status": "published_verified_clean",
+  "head": "34141d3d2de3e2554aac6df3b4fbf1233d2505a8",
+  "actual_remote_HEAD": "34141d3d2de3e2554aac6df3b4fbf1233d2505a8",
+  "dirty_paths": [],
+  "observed_at_utc": "2026-10-08T06:29:42.436391+00:00",
+  "all_implementation_remaining": [],
+  "source_ci_reused": {
+    "CWP": "6cd9b6d7ca4faee3348fdd8afcf70bf7e3d6a5fb",
+    "CWP_CI": 37736338454,
+    "RF": "7cf337e1",
+    "RF_CI": 37737193724
+  },
+  "new_model_calls_during_final_publication": 0,
+  "independent_owner_repositories_reset_or_cleaned": false,
+  "final_status_documentation_commit_will_follow": true
+}

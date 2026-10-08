@@ -1,6 +1,6 @@
 # Findings：当前事实与证明范围
 
-**2026-10-08｜R3生产与R5完整实质审计完成，最后文档发布待做。** 当前状态取[task_plan](task_plan.md)；历史完整调查在[6dd5601](https://github.com/zhengcb81/company-wiki/blob/6dd56011a7d49e2b8c147f2163b0708074f9edd7/docs/plans/narrative-evidence-pilot-2026-09-26/findings.md)。
+**2026-10-08｜R3生产与R5完整审计/发布完成。** 当前状态取[task_plan](task_plan.md)；历史完整调查在[6dd5601](https://github.com/zhengcb81/company-wiki/blob/6dd56011a7d49e2b8c147f2163b0708074f9edd7/docs/plans/narrative-evidence-pilot-2026-09-26/findings.md)。
 
 ## 架构与精简
 
@@ -26,4 +26,4 @@ S7九原件仍29/33/761定位零错、optional2/17、重复6。四miss是纯金�
 
 ## 发布
 
-CWP6cd9b6d精确CI37736338454全success；RF7cf337e依赖当前producer、精确CI37737193724全success；实际消费测试343e2de源码与7cf相同。SW1ebe012被独立6d1dddb推进，consumer源码逐字相同，无远端。[八仓只读状态](harness_lanes/results/r5b_final_repository_state_2026-10-08.json)。最终纯文档提交复用这些源码绿，最后发布完成才关闭目标。
+CWP6cd9b6d精确CI37736338454全success；RF7cf337e依赖当前producer、精确CI37737193724全success；实际消费测试343e2de源码与7cf相同。SW1ebe012被独立6d1dddb推进，consumer源码逐字相同，无远端。[八仓只读状态](harness_lanes/results/r5b_final_repository_state_2026-10-08.json)。最终文档检查点34141d3d已推送、实际远端相等、CWP干净，最终状态提交复用这些源码绿；关闭原目标。

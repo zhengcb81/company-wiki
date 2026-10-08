@@ -1,6 +1,6 @@
 # Progress：当前执行记录
 
-**2026-10-08｜R3生产已验收、完整PWF实质审计完成，最后文档提交推送。** 历史逐轮日志见[6dd5601](https://github.com/zhengcb81/company-wiki/blob/6dd56011a7d49e2b8c147f2163b0708074f9edd7/docs/plans/narrative-evidence-pilot-2026-09-26/progress.md)，当前状态取[task_plan](task_plan.md)。
+**2026-10-08｜R3生产已验收、完整PWF审计与正常发布完成。** 历史逐轮日志见[6dd5601](https://github.com/zhengcb81/company-wiki/blob/6dd56011a7d49e2b8c147f2163b0708074f9edd7/docs/plans/narrative-evidence-pilot-2026-09-26/progress.md)，当前状态取[task_plan](task_plan.md)。
 
 ## 本次实际完成
 
@@ -10,7 +10,7 @@
 4. 正式CWP→RF/StockWiki公共CLI真实节点通过：生产日期/身份不是fixture，20claims/49证据与零模型制度skip；reference/read/list/search/exact，三仓历史unknown拒绝，所有定位回放和DTO相等，临时consumer根finally恢复。逐条读20claims及引用，16管理层/4问题，六经营主题覆盖、事实/展望未混淆。
 5. 字面相同run/request恢复，6任务succeeded、attempt仍6、reservation仍1，新增POST/token/费用/对象0。26 raw/config/pilot保护保持；终态只有212B日志/基线，无永久全文或provider原始响应。新总逻辑588030B、scratch峰106792B；正式final/AUTO保留。
 6. 一个接口文件定点同步2物理RF技能，480未选文件SHA保持，重复0写/.claude别名相同。当前owned2工作树+16验收临时文件恢复absent，共94840547B，提交保留在主线。没有触碰他人的清理目标。
-7. 全部11计划家族与原A01–A16继任对账通过；新实施责任为空，边界/miss透明。八仓只读HEAD/远端/owner状态核对，不回退SID/SQA等独立WIP，不写Dayu/IQS。当前PWF及最终导航更新，最后纯文档发布待做。
+7. 全部11计划家族与原A01–A16继任对账通过；新实施责任为空，边界/miss透明。八仓只读HEAD/远端/owner状态核对，不回退SID/SQA等独立WIP，不写Dayu/IQS。当前PWF及最终导航更新；检查点34141d3d已正常commit/push，实际远端相等/CWP干净，最终完成状态随本次发布。
 
 ## 错误与处理（不隐去）
 
@@ -27,4 +27,4 @@ R2四restore/九facts/TXT正式登记、R3A显式current null、G2十四组/A-B�
 
 ## Next Step
 
-正常commit/push本次R3/R5文档与小收据，验证本地/实际远端一致和CWP干净，再更新最终发布状态并将原目标complete。无需再调用模型或重复已绿节点。
+无必要施工剩余。原完整PWF约定内容完成，[最终对账](r5_full_closeout_2026-10-08.md)与[发布检查点](harness_lanes/results/r5b_publication_checkpoint_2026-10-08.json)齐备；提交最终状态后核远端并关闭原目标。不再重复已绿节点或付费生成。

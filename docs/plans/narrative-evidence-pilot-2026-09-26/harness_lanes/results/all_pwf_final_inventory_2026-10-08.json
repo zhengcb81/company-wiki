@@ -1,19 +1,19 @@
 {
   "schema_version": "all-pwf-plan-inventory/3",
-  "status": "all_agreed_implementation_verified_final_docs_publish_pending",
+  "status": "all_agreed_PWF_complete_published_checkpoint_verified",
   "items": [
     {
       "path": "README.md",
       "title": "# 本计划目录导航",
       "role": "current_entry_or_current_evidence",
-      "sha256": "a90f2c9a0f5a1d7a4cb08fec75211747d3523bf70209cdb63c52ce991a4ad0fd",
+      "sha256": "c3ab38880e1cdc04d0fca30628ec3da68c7fb359aad569764431764e8c533bd7",
       "unchecked_items": 0
     },
     {
       "path": "all_pwf_completion_implementation_2026-10-07.md",
       "title": "# 全部PWF：实际实施与完成条件",
       "role": "current_entry_or_current_evidence",
-      "sha256": "91668a1487e8e35da8be4d21143f08d5413b27d6fa66c0dfffd9f342cdd6f05e",
+      "sha256": "6bb2137e96abb35d7b624bf6bf13b59e1640023a5329c2bf52a364e964dea018",
       "unchecked_items": 0
     },
     {
@@ -118,7 +118,7 @@
       "path": "findings.md",
       "title": "# Findings：当前事实与证明范围",
       "role": "current_entry_or_current_evidence",
-      "sha256": "0f8dbfa5443767a475fcd3e9318c7cecee46ada3d9fa049402bd3ca43887b96c",
+      "sha256": "e094db32328808f275e04fe318cd3f5c6dfead3b26db58ba080e71bae3689990",
       "unchecked_items": 0
     },
     {
@@ -748,7 +748,7 @@
       "path": "progress.md",
       "title": "# Progress：当前执行记录",
       "role": "current_entry_or_current_evidence",
-      "sha256": "3520ac48ef3877d575190daf0e376849b4cb3a431e0d85c5da9e74ba9831d2fe",
+      "sha256": "b79c0ce09c180120cc4089cde2c8341fb42fa66d9d7eceaf090f1e29648ffb00",
       "unchecked_items": 0
     },
     {
@@ -790,14 +790,14 @@
       "path": "r5_cleanup_and_navigation_implementation_2026-10-08.md",
       "title": "# R5：当前入口、历史临时材料及最终交接",
       "role": "current_entry_or_current_evidence",
-      "sha256": "ecb9e864b26899b7136b6e3961fe7a8f94857cfe9877f3f4e1d03f633d5ceba9",
+      "sha256": "a899e998161cdfe61214f5ac0e715bd51c86057ed575250df6a762673e3ab131",
       "unchecked_items": 0
     },
     {
       "path": "r5_full_closeout_2026-10-08.md",
       "title": "# R5B：完整PWF最终对账",
       "role": "current_entry_or_current_evidence",
-      "sha256": "3f395592cef5e3a011b9a164e043243167973c33e85fd25840d7390b46dc430b",
+      "sha256": "07f238174b1e6a32e75d0004b8726f8b5779774864784bd22e9fc5b6291cb4b0",
       "unchecked_items": 0
     },
     {
@@ -888,7 +888,7 @@
       "path": "task_plan.md",
       "title": "# 公司来源平台：唯一当前施工入口",
       "role": "current_entry_or_current_evidence",
-      "sha256": "e97551f289111c33cf672bd12cd10342609e650aa49c8393449f295ed0ea97b6",
+      "sha256": "5869c53724a1e42a3682188d4e3d23bd0ce847f682cbb246c7441bf4077a507c",
       "unchecked_items": 0
     },
     {
@@ -933,5 +933,6 @@
     "all_implementation_remaining": []
   },
   "historical_archive_commit": "6dd56011a7d49e2b8c147f2163b0708074f9edd7",
-  "not_a_permission_or_hash_gate": true
+  "not_a_permission_or_hash_gate": true,
+  "publication_checkpoint": "r5b_publication_checkpoint_2026-10-08.json"
 }

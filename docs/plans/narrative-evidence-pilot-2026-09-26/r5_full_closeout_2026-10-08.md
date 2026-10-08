@@ -1,6 +1,6 @@
 # R5B：完整PWF最终对账
 
-**2026-10-08：全部必要实施和实质验收已完成；最后文档提交推送待做。** 当前状态只取[task_plan](task_plan.md)。此表承接原102项计划目录和[原A01–A16核查](final_scope_audit_2026-10-07.md)，没有缩减成功定义，也不把外包“完成”直接当MAIN验收。
+**2026-10-08：全部必要实施、实质验收及正常发布完成。** 当前状态只取[task_plan](task_plan.md)。此表承接原102项计划目录和[原A01–A16核查](final_scope_audit_2026-10-07.md)，没有缩减成功定义，也不把外包“完成”直接当MAIN验收。
 
 ## 所有计划家族 → 当前证据
 
@@ -16,7 +16,7 @@
 | FF/ET/早期及G2–G5全部发包 | [G3](g3_main_acceptance_2026-10-07.md)/[G4](g4_main_acceptance_2026-10-07.md)/[G5](g5_main_acceptance_2026-10-07.md)、FF→ET→CWP离线契约链、[真实主线消费](harness_lanes/results/r3_production_consumption_2026-10-08.json)/定点安装；约定交付已验收并线 |
 | FMP/平台比较/免费provider取舍 | [能力与月调用预算](provider_cost_and_capability_2026-09-27.md)、[原ET比较](earnings_transcripts_vs_platforms_2026-09-27.md)：免费能力与402清楚，无价值不加provider、不采购订阅 |
 | 投资研究/预测职责 | CWP SourceRef/Export v2/NarrativeRef；RF/StockWiki自产source DTO通过。完整预测计算/研究writer不属CWP，不冒称全投资研究生产完成 |
-| R7快CI/TDD/R8 PWF/R5收口 | 各责任层单元/集成和真实大节点、精确源码CI，当前入口/历史导航/薄证据；不增加每helper签收。八仓Git核对/owned测试副本清理完成，最后文档发布待做 |
+| R7快CI/TDD/R8 PWF/R5收口 | 各责任层单元/集成和真实大节点、精确源码CI，当前入口/历史导航/薄证据；不增加每helper签收。八仓Git核对/owned测试副本清理完成，检查点34141d3d已正常发布，实际远端相等/CWP干净 |
 
 [结构化完整对账](harness_lanes/results/r5b_full_requirements_audit_2026-10-08.json)明确旧G4“remaining”等由G2/R2/R3继任消解，不重启退休任务。当前新增实施remaining为空。
 
@@ -32,6 +32,6 @@
 
 R5A清8 owned根119913476B、R3A清工作树91161217B，本次[R3清理](harness_lanes/results/r3_owned_cleanup_2026-10-08.json)94840547B；分别记账，均不作为旧生产净释放重复累加。生产raw/final/AUTO与历史未知usage保持。其他harness测试目录只由其owner清，不宣称自己清空了共享TEMP。
 
-## 最后一步
+## 完成与后续
 
-正常提交/push当前CWP PWF/薄收据，并只读确认实际远端HEAD相等、CWP干净；纯文档复用CWP6cd9b6d/CI37736338454及RF7cf337e/CI37737193724，不再做长测试或付费调用。完成后更新发布记录和原目标complete。没有新人工许可/签收。
+[正常发布检查点](harness_lanes/results/r5b_publication_checkpoint_2026-10-08.json)记录34141d3d已推、实际远端HEAD相等和CWP干净；无新增模型/原件删除/邻仓owner操作。源码精确CI与真实节点已完成，本次纯文档状态提交复用绿色结果。原目标全部约定内容完成，无必要实施remaining；未来新需求另立任务，不恢复退休writer/许可/签收。

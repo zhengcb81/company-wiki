@@ -1,6 +1,6 @@
 # 全部PWF：实际实施与完成条件
 
-**当前2026-10-08：全部约定实施及实质验收完成，最后文档提交推送。** R0–R4与R3A正式收口，R3真实生产/语义/消费/恢复/空间通过，R5A/B实质审计通过。[最终完整对账](r5_full_closeout_2026-10-08.md)覆盖本表全部家族和原A01–A16要求；必要新增实施remaining为空。当前状态只取[task_plan](task_plan.md)。历史完整范围固定在[6dd5601](https://github.com/zhengcb81/company-wiki/blob/6dd56011a7d49e2b8c147f2163b0708074f9edd7/docs/plans/narrative-evidence-pilot-2026-09-26/all_pwf_completion_implementation_2026-10-07.md)，不将旧pending当当前指令。
+**当前2026-10-08：全部约定实施、验收与正常发布完成。** R0–R4与R3A正式收口，R3真实生产/语义/消费/恢复/空间通过，R5A/B实质审计通过，检查点34141d3d已推/远端一致/CWP干净。[最终完整对账](r5_full_closeout_2026-10-08.md)覆盖本表全部家族和原A01–A16要求；必要新增实施remaining为空。当前状态只取[task_plan](task_plan.md)。历史完整范围固定在[6dd5601](https://github.com/zhengcb81/company-wiki/blob/6dd56011a7d49e2b8c147f2163b0708074f9edd7/docs/plans/narrative-evidence-pilot-2026-09-26/all_pwf_completion_implementation_2026-10-07.md)，不将旧pending当当前指令。
 
 ## 全部计划家族与证明范围
 
@@ -16,7 +16,7 @@
 | FF/ET/各外包及多仓并线 | [G3](g3_main_acceptance_2026-10-07.md)、[G4](g4_main_acceptance_2026-10-07.md)、[G5](g5_main_acceptance_2026-10-07.md)及早期收据已发布；当前接口/定点安装完成 | R3当前consumer验收/R5八仓只读核对已完成；owner保留、Dayu/IQS0写 |
 | FMP及Koyfin/SeekingAlpha/旧ET比较 | [费用/能力调查](provider_cost_and_capability_2026-09-27.md)、[电话会比较](earnings_transcripts_vs_platforms_2026-09-27.md)、真实402边界；无价值不加provider | 不冒称付费能力或现金账单硬预算已实测；不因原全计划强行新增订阅/provider |
 | 完整投资研究/预测 | 现PWF只要求来源reader/adapter，CWP上游不能生成投资state | R3实际readonly消费，不假称全预测算法已跑或CWP正式研究writer |
-| R7快CI/TDD与R8 PWF | 正常静态commit/短push/单Ubuntu Unit+精选合同，源码精确CI绿；当前三入口已压缩 | 只在大的剩余节点测试/审计；R5B最终requirements→evidence已通过，最后文档发布待做 |
+| R7快CI/TDD与R8 PWF | 正常静态commit/短push/单Ubuntu Unit+精选合同，源码精确CI绿；当前三入口已压缩 | 只在大的剩余节点测试/审计；R5B最终requirements→evidence已通过，检查点34141d3d已发布；本次仅提交最终状态 |
 
 原102项目录与当前增量目录保留为导航，不是hash许可或新签收。[历史入口目录](harness_lanes/results/all_pwf_inventory_2026-10-07.json)中的旧unchecked/paused按上述后继方案对账，不重新执行退休命令。
 
@@ -52,6 +52,6 @@ python -B scripts/narrative_batch_configured.py --llm-provider deepseek --projec
 
 ## R5 最终PWF/主线发布收口
 
-**Status: in_progress，A/B实质审计已完成，最后文档发布待做。** [R5细则](r5_cleanup_and_navigation_implementation_2026-10-08.md)：当前三入口/README/实施单压缩、120历史卡顶层当前导航，完整历史固定6dd5601；8 owned临时根先归属/无占用/无reparse/tracked0再删119913476B/1123文件，26 SHA/生产DB stat保持。pilot预算/恢复事实、原件/外包交接/owner保留。
+**Status: complete，A/B实质审计与正常发布完成。** [R5细则](r5_cleanup_and_navigation_implementation_2026-10-08.md)：当前三入口/README/实施单压缩、120历史卡顶层当前导航，完整历史固定6dd5601；8 owned临时根先归属/无占用/无reparse/tracked0再删119913476B/1123文件，26 SHA/生产DB stat保持。pilot预算/恢复事实、原件/外包交接/owner保留。
 
 B已检查本页各家族和具体R3要求→authoritative证据→当前结果，见[完整对账](r5_full_closeout_2026-10-08.md)。R3真实生产已完成；旧raw去重和完整投资研究边界保持，不扩大或縮减scope。最终只读各仓HEAD/执行分支/远端、owner脏树归属、保护/新产物/临时目录/有效source refs；SID简易执行分支与SW无remote不伪报成所有main远端齐平。正常commit/push，源码精确CI对应actual SHA，纯文档复用已绿。目标服务只有全scope证据齐全才complete；不能因额度或卡交付完成而停成完成。
