@@ -1,0 +1,464 @@
+{
+  "number": 0,
+  "source_id": "src_call",
+  "locator": "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+  "excerpt": "In Azure and other cloud services, revenue grew 43%, against a prior year that included accelerating growth. Customer demand continues to exceed available capacity. Revenue growth was ahead of expectations driven by efficiency gains across our CPU and GPU fleet as well as process improvements to enable earlier delivery of new capacity. That additional in-quarter capacity for Azure was quickly monetized. Results also benefited from stronger-than-e",
+  "claim_count": 11,
+  "first_claim": "claim_3_azure_growth_low_2027"
+}
+{
+  "number": 1,
+  "source_id": "src_call",
+  "locator": "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+  "excerpt": "M365 Commercial cloud revenue increased 16% on an adjusted basis when normalized for the prior-year comparable that benefited from 2 points of in-period revenue recognition. And on a reported basis, revenue growth was 14%. Building on our Copilot momentum from Q3, net paid seat adds more than doubled sequentially, with paid seats now over 30 million. Premium offerings, including Copilot, E5, and early traction in E7, drove ARPU growth this quarte",
+  "claim_count": 10,
+  "first_claim": "claim_17_microsoft_365_cloud_growth_low_2027"
+}
+{
+  "number": 2,
+  "source_id": "src_call",
+  "locator": "Official complete FY26Q4 call.txt lines [237, 244]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+  "excerpt": "M365 Commercial products revenue increased 19%, ahead of expectations driven by large, long-duration M365 contracts that resulted in higher in-period revenue recognition from the Windows Commercial on-premises component.\nIn our on-premises server business, revenue was relatively unchanged year-over-year and was down 1% in constant currency. Results were ahead of expectations primarily driven by renewals with higher in-period revenue recognition f",
+  "claim_count": 10,
+  "first_claim": "claim_31_productivity_and_server_licensing_growth_low_2027"
+}
+{
+  "number": 3,
+  "source_id": "src_call",
+  "locator": "Official complete FY26Q4 call.txt lines [191, 192, 193, 240]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+  "excerpt": "In healthcare, we are on pace to automate over 100 million patient encounters this calendar year, including 28 million this quarter, up 2X year-over-year.\nMass General Brigham rolled out Dragon Copilot to over 4,000 providers after a study found ambient AI reduced burnout by 21%.\nAnd in science, Microsoft Discovery, now broadly available, provides a comprehensive platform for building and governing agentic workflows for science and engineering.\nD",
+  "claim_count": 10,
+  "first_claim": "claim_42_industry_solutions_growth_low_2027"
+}
+{
+  "number": 4,
+  "source_id": "src_call",
+  "locator": "Official complete FY26Q4 call.txt lines [198, 199, 200, 201, 202]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+  "excerpt": "To help customers capture that opportunity, this month we launched the Microsoft Frontier Co., the largest outcome-driven engineering organization in the industry.\nWe will embed 6,000 industry and engineering experts with customers to co-design, co-innovate, and continuously improve AI systems at scale.\nWe have been testing this model over the past year, completing over 330 projects across 164 customers, including many of the world’s leading comp",
+  "claim_count": 10,
+  "first_claim": "claim_53_frontier_and_support_services_growth_low_2027"
+}
+{
+  "number": 5,
+  "source_id": "src_call",
+  "locator": "Official complete FY26Q4 call.txt lines [208, 239, 248]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+  "excerpt": "In search and advertising, Bing and Edge have both taken share for five straight years.\nLinkedIn revenue increased 12% and 10% in constant currency primarily driven by Marketing Solutions.\nSearch advertising revenue ex-TAC increased 10% and 9% in constant currency with growth driven by higher revenue per search across Edge and Bing, as well as higher volume, though growth was impacted by third-party partnerships.",
+  "claim_count": 10,
+  "first_claim": "claim_67_search_and_advertising_growth_low_2027"
+}
+{
+  "number": 6,
+  "source_id": "src_call",
+  "locator": "Official complete FY26Q4 call.txt lines [204, 249, 279]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+  "excerpt": "When it comes to XBOX, we are making the necessary decisions required across our content portfolio, platform, and operations to reset the business for long-term growth.\nAnd in XBOX, revenue decreased 10% and 11% in constant currency. XBOX content and services revenue decreased 10% against a prior-year comparable that benefited from strong first-party content performance.\nAnd in XBOX content and services, we expect revenue to decline in the mid-si",
+  "claim_count": 10,
+  "first_claim": "claim_78_xbox_growth_low_2027"
+}
+{
+  "number": 7,
+  "source_id": "src_call",
+  "locator": "Official complete FY26Q4 call.txt lines [247, 256, 277]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+  "excerpt": "Windows OEM and Devices revenue decreased 7% and Windows OEM decreased 5% driven by lower PC market demand and a high prior-year comparable that benefited from Windows 10 end of support. Results were ahead of expectations as OEM and channel partners continued to build inventory given increasing component prices.\nGrowth in Windows OEM and Devices will be impacted by lower PC market demand as higher component costs increase device pricing, a prior-",
+  "claim_count": 10,
+  "first_claim": "claim_89_windows_oem_and_devices_growth_low_2027"
+}
+{
+  "number": 8,
+  "source_id": "src_call",
+  "locator": "Complete official call.txt lines [317, 268]; exact paragraphs, evidence-node scope explicitly limited",
+  "excerpt": "Thanks, Brent. First, there are still constraints in the system. I think we’ve continued to say, I think now, for a number of quarters, that demand continues to exceed available supply, and that certainly remains true. You can even see it, I think, in some of the pricing that’s occurring in the spot market for assets.\nIn M365 Commercial cloud, we expect growth of approximately 16% in constant currency on an adjusted basis which normalizes for the",
+  "claim_count": 1,
+  "first_claim": "claim_103_cloud_ai_contrary"
+}
+{
+  "number": 9,
+  "source_id": "src_call",
+  "locator": "Complete official call.txt lines [191, 198, 199, 200, 240]; exact paragraphs, evidence-node scope explicitly limited",
+  "excerpt": "In healthcare, we are on pace to automate over 100 million patient encounters this calendar year, including 28 million this quarter, up 2X year-over-year.\nTo help customers capture that opportunity, this month we launched the Microsoft Frontier Co., the largest outcome-driven engineering organization in the industry.\nWe will embed 6,000 industry and engineering experts with customers to co-design, co-innovate, and continuously improve AI systems ",
+  "claim_count": 1,
+  "first_claim": "claim_105_enterprise_migration_company"
+}
+{
+  "number": 10,
+  "source_id": "src_call",
+  "locator": "Complete official call.txt lines [240]; exact paragraphs, evidence-node scope explicitly limited",
+  "excerpt": "Dynamics 365 revenue increased 13% and 12% in constant currency against a strong prior-year comparable. Bookings growth in ERP remains healthy, while CRM continued to moderate with longer sales cycles.",
+  "claim_count": 11,
+  "first_claim": "claim_106_enterprise_migration_contrary"
+}
+{
+  "number": 11,
+  "source_id": "src_call",
+  "locator": "Complete official call.txt lines [248, 239]; exact paragraphs, evidence-node scope explicitly limited",
+  "excerpt": "Search advertising revenue ex-TAC increased 10% and 9% in constant currency with growth driven by higher revenue per search across Edge and Bing, as well as higher volume, though growth was impacted by third-party partnerships.\nLinkedIn revenue increased 12% and 10% in constant currency primarily driven by Marketing Solutions.",
+  "claim_count": 1,
+  "first_claim": "claim_107_advertising_company"
+}
+{
+  "number": 12,
+  "source_id": "src_call",
+  "locator": "Complete official call.txt lines [278]; exact paragraphs, evidence-node scope explicitly limited",
+  "excerpt": "Search advertising revenue ex-TAC growth should be in the mid-single digits, down sequentially due to the impact of third-party partnerships. Growth will continue to be driven by consistent trends in revenue per search and volume.",
+  "claim_count": 1,
+  "first_claim": "claim_108_advertising_contrary"
+}
+{
+  "number": 13,
+  "source_id": "src_call",
+  "locator": "Complete official call.txt lines [256, 249, 279]; exact paragraphs, evidence-node scope explicitly limited",
+  "excerpt": "Growth in Windows OEM and Devices will be impacted by lower PC market demand as higher component costs increase device pricing, a prior-year comparable that benefited from Windows 10 end-of-support, and elevated inventory levels. As a result, we expect revenue to decline in the high-teens for the fiscal year.\nAnd in XBOX, revenue decreased 10% and 11% in constant currency. XBOX content and services revenue decreased 10% against a prior-year compa",
+  "claim_count": 1,
+  "first_claim": "claim_109_consumer_cycle_company"
+}
+{
+  "number": 14,
+  "source_id": "src_call",
+  "locator": "Complete official call.txt lines [205]; exact paragraphs, evidence-node scope explicitly limited",
+  "excerpt": "We have the best IP in the industry, and talented studios around the world, and believe we can bring these strengths together and expect to return the business to growth in fiscal 2027.",
+  "claim_count": 11,
+  "first_claim": "claim_110_consumer_cycle_contrary"
+}
+{
+  "number": 15,
+  "source_id": "src_presentation",
+  "locator": "PPT17 As Restated all8 annual rows and total; normalized visual table transcription, historical scale/changes only",
+  "excerpt": "Azure: FY2025 72610, FY2026 101938; Microsoft 365 cloud: FY2025 84605, FY2026 100299; Productivity and server licensing: FY2025 35391, FY2026 37285; Industry solutions: FY2025 18417, FY2026 20345; Frontier and support services: FY2025 7760, FY2026 8260; Search and advertising: FY2025 22171, FY2026 24835; XBOX: FY2025 23455, FY2026 21790; Windows OEM and devices: FY2025 17315, FY2026 17087; consolidated FY2025 281724, FY2026 331839 USDmillion.",
+  "claim_count": 1,
+  "first_claim": "claim_122_company_fy27_double_digit"
+}
+{
+  "number": 16,
+  "source_id": "src_call",
+  "locator": "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/4",
+  "excerpt": "xpected GitHub Copilot consumption following the June business model change to align pricing with usage and value.\nWhen you think about being able to deliver better, the first thing we focus on, and I tried to talk a little bit about it in my prepared remarks, is efficiency, being able to get more out of everything that we’ve got in the fleet. That applies to efficiency gains in the CPU fleet. It’s going to be efficiency gains in the GPU fleet.\nW",
+  "claim_count": 10,
+  "first_claim": "claim_3_azure_growth_low_2027_part2"
+}
+{
+  "number": 17,
+  "source_id": "src_call",
+  "locator": "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment3/4",
+  "excerpt": "e saw a good work this quarter, in particular, from our engineering teams to make as much of that available as we could. And because of the supply demand imbalance we’ve been talking about, when we can make efficiency gains, they are quickly monetized in quarter. And I think that dynamic certainly impacted the quarter positively.\nI would also say some of the process improvements we’ve made to make sure both CPUs and GPUs, just the lead time from ",
+  "claim_count": 10,
+  "first_claim": "claim_3_azure_growth_low_2027_part3"
+}
+{
+  "number": 18,
+  "source_id": "src_call",
+  "locator": "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment4/4",
+  "excerpt": "how quickly we can get things to simplify it tremendously plugged in, was also improved over the past 90 days. And so, those improvements, again, are very quickly monetized when we’re able to do that.",
+  "claim_count": 10,
+  "first_claim": "claim_3_azure_growth_low_2027_part4"
+}
+{
+  "number": 19,
+  "source_id": "src_presentation",
+  "locator": "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+  "excerpt": "Azure; Fiscal Year 2025 $72,610; Fiscal Year 2026 $101,938. ($ in millions).",
+  "claim_count": 9,
+  "first_claim": "v2_history_azure_growth_low_2027"
+}
+{
+  "number": 20,
+  "source_id": "src_call",
+  "locator": "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+  "excerpt": "Thanks, Brent. First, there are still constraints in the system. I think we’ve continued to say, I think now, for a number of quarters, that demand continues to exceed available supply, and that certainly remains true. You can even see it, I think, in some of the pricing that’s occurring in the spot market for assets.\nCurrently, the situation is obviously that demand exceeds available supply in a relatively extreme moment, but when you start to t",
+  "claim_count": 10,
+  "first_claim": "v2_constraint_azure_growth_low_2027"
+}
+{
+  "number": 21,
+  "source_id": "src_call",
+  "locator": "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment2/4",
+  "excerpt": "hink about over the duration, I try to remind people, a lot of the expense, especially you see it in CapEx, you’ve seen our CapEx really pivot toward what I would call and do call short-lived assets, which really, that’s CPUs and GPUs that have relatively shorter lead times. And so, if the demand environment changes, you just slow down what is, in fact, the largest component and the driver of COGS.\nWhen it comes to the pricing question, I think t",
+  "claim_count": 10,
+  "first_claim": "v2_constraint_azure_growth_low_2027_part2"
+}
+{
+  "number": 22,
+  "source_id": "src_call",
+  "locator": "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment3/4",
+  "excerpt": "hat’s really impacting everybody equivalently in so many ways. What we’ve been trying to do, of course, at this point is to just make sure that we’re doing the best efficiency work we can so we can continue to give customers great value. We’re reminding people that frankly, the cloud offers tremendous benefits versus having to make these purchases as servers on-prem yourself, or the price increases are even more hard for customers. The cloud stil",
+  "claim_count": 10,
+  "first_claim": "v2_constraint_azure_growth_low_2027_part3"
+}
+{
+  "number": 23,
+  "source_id": "src_call",
+  "locator": "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment4/4",
+  "excerpt": "l provides a great ROI in those types of situations.",
+  "claim_count": 10,
+  "first_claim": "v2_constraint_azure_growth_low_2027_part4"
+}
+{
+  "number": 24,
+  "source_id": "src_presentation",
+  "locator": "PPT21 adjusted FY27Q1 outlook row for Azure; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion",
+  "excerpt": "Growth of 44% to 45% in constant currency, with FX expected to decrease revenue by less than 1 point",
+  "claim_count": 9,
+  "first_claim": "v2_context_azure_growth_low_2027"
+}
+{
+  "number": 25,
+  "source_id": "src_call",
+  "locator": "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/4",
+  "excerpt": "r. And paid M365 Commercial seats grew 6% year-over-year with installed base expansion across all customer segments, though primarily in our small and medium business and frontline worker offerings.\nM365 consumer cloud revenue increased 24% and 22% in constant currency, again driven by ARPU growth. And M365 consumer subscriptions grew 7%.\nAnd then the other one is the business model. We now have this perceived business model. And so, we also now ",
+  "claim_count": 10,
+  "first_claim": "claim_17_microsoft_365_cloud_growth_low_2027_part2"
+}
+{
+  "number": 26,
+  "source_id": "src_call",
+  "locator": "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment3/4",
+  "excerpt": "have the usage business model. It’s seat plus usage. We’re already seeing the ARPU growth that comes from things like E7, but really as we deliver more value to customer and customer outcomes at the enterprise level.\nIn fact, if I think about historically, Office compared to what Copilot is, is much more narrower. This is the first time where you really have an enterprise-wide tool, which has a both per-seat and usage-based pricing. The TAM is mu",
+  "claim_count": 10,
+  "first_claim": "claim_17_microsoft_365_cloud_growth_low_2027_part3"
+}
+{
+  "number": 27,
+  "source_id": "src_call",
+  "locator": "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment4/4",
+  "excerpt": "ch more expansive. We’re going to be very, very focused on driving customer value and then expanding with it.",
+  "claim_count": 10,
+  "first_claim": "claim_17_microsoft_365_cloud_growth_low_2027_part4"
+}
+{
+  "number": 28,
+  "source_id": "src_presentation",
+  "locator": "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+  "excerpt": "Microsoft 365 cloud; Fiscal Year 2025 $84,605; Fiscal Year 2026 $100,299. ($ in millions).",
+  "claim_count": 9,
+  "first_claim": "v2_history_microsoft_365_cloud_growth_low_2027"
+}
+{
+  "number": 29,
+  "source_id": "src_call",
+  "locator": "Complete official call.txt lines [268]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+  "excerpt": "In M365 Commercial cloud, we expect growth of approximately 16% in constant currency on an adjusted basis which normalizes for the prior-year comparable that benefited from 1 point of in-period revenue recognition, or 15% on a reported basis. Sequential growth from our momentum in Copilot, E5, and E7, is mitigated a bit by the lower ARPU new seat adds in frontline worker and small and medium business SKUs. With the premium SKU momentum and the in",
+  "claim_count": 10,
+  "first_claim": "v2_constraint_microsoft_365_cloud_growth_low_2027"
+}
+{
+  "number": 30,
+  "source_id": "src_call",
+  "locator": "Complete official call.txt lines [268]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment2/2",
+  "excerpt": "creased monetization opportunity from adding usage-based billing products alongside per-seat licensing in July, we expect to see acceleration in M365 Commercial cloud revenue growth through this fiscal year.",
+  "claim_count": 10,
+  "first_claim": "v2_constraint_microsoft_365_cloud_growth_low_2027_part2"
+}
+{
+  "number": 31,
+  "source_id": "src_presentation",
+  "locator": "PPT21 adjusted FY27Q1 outlook row for Microsoft 365 cloud; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion",
+  "excerpt": "Growth of approximately 17% in constant currency; Growth of approximately 18% in constant currency when adjusting for prior-year in-period revenue recognition",
+  "claim_count": 9,
+  "first_claim": "v2_context_microsoft_365_cloud_growth_low_2027"
+}
+{
+  "number": 32,
+  "source_id": "src_call",
+  "locator": "Official complete FY26Q4 call.txt lines [237, 244]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+  "excerpt": "rom the mix of contracts.",
+  "claim_count": 10,
+  "first_claim": "claim_31_productivity_and_server_licensing_growth_low_2027_part2"
+}
+{
+  "number": 33,
+  "source_id": "src_presentation",
+  "locator": "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+  "excerpt": "Productivity and server licensing; Fiscal Year 2025 $35,391; Fiscal Year 2026 $37,285. ($ in millions).",
+  "claim_count": 9,
+  "first_claim": "v2_history_productivity_and_server_licensing_growth_low_2027"
+}
+{
+  "number": 34,
+  "source_id": "src_call",
+  "locator": "Complete official call.txt lines [255, 275]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+  "excerpt": "First some reminders. In both the M365 Commercial products and Server products KPIs, we are lapping higher transactional purchasing from the timing of product launches and expect revenue from both to decline in the mid-single digits for the full fiscal year.\nIn our on-premises server business, we expect revenue to decline in the low to mid-single digits, with ongoing customer shift to cloud offerings and the prior-year comparable noted earlier.",
+  "claim_count": 11,
+  "first_claim": "v2_constraint_productivity_and_server_licensing_growth_low_2027"
+}
+{
+  "number": 35,
+  "source_id": "src_presentation",
+  "locator": "PPT21 adjusted FY27Q1 outlook row for Productivity and server licensing; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion",
+  "excerpt": "Decline in low-single digits",
+  "claim_count": 9,
+  "first_claim": "v2_context_productivity_and_server_licensing_growth_low_2027"
+}
+{
+  "number": 36,
+  "source_id": "src_call",
+  "locator": "Official complete FY26Q4 call.txt lines [191, 192, 193, 240]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+  "excerpt": "ynamics 365 revenue increased 13% and 12% in constant currency against a strong prior-year comparable. Bookings growth in ERP remains healthy, while CRM continued to moderate with longer sales cycles.",
+  "claim_count": 10,
+  "first_claim": "claim_42_industry_solutions_growth_low_2027_part2"
+}
+{
+  "number": 37,
+  "source_id": "src_presentation",
+  "locator": "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+  "excerpt": "Industry solutions; Fiscal Year 2025 $18,417; Fiscal Year 2026 $20,345. ($ in millions).",
+  "claim_count": 9,
+  "first_claim": "v2_history_industry_solutions_growth_low_2027"
+}
+{
+  "number": 38,
+  "source_id": "src_presentation",
+  "locator": "PPT21 adjusted FY27Q1 outlook row for Industry solutions; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion",
+  "excerpt": "Growth in high-single digits",
+  "claim_count": 9,
+  "first_claim": "v2_context_industry_solutions_growth_low_2027"
+}
+{
+  "number": 39,
+  "source_id": "src_call",
+  "locator": "Official complete FY26Q4 call.txt lines [198, 199, 200, 201, 202]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+  "excerpt": "anies across industries.\nFor example, our FDE teams worked with Novo Nordisk to build an agent that helps analyze clinical data while meeting its strict compliance requirements.\nAnd we partnered with LSEG to embed AI into LSEG Workspace, helping finance professionals ask complex questions and quickly find answers across structured and unstructured financial content.",
+  "claim_count": 10,
+  "first_claim": "claim_53_frontier_and_support_services_growth_low_2027_part2"
+}
+{
+  "number": 40,
+  "source_id": "src_presentation",
+  "locator": "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+  "excerpt": "Frontier and support services; Fiscal Year 2025 $7,760; Fiscal Year 2026 $8,260. ($ in millions).",
+  "claim_count": 9,
+  "first_claim": "v2_history_frontier_and_support_services_growth_low_2027"
+}
+{
+  "number": 41,
+  "source_id": "src_call",
+  "locator": "Complete official call.txt lines [200]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+  "excerpt": "We have been testing this model over the past year, completing over 330 projects across 164 customers, including many of the world’s leading companies across industries.",
+  "claim_count": 10,
+  "first_claim": "v2_constraint_frontier_and_support_services_growth_low_2027"
+}
+{
+  "number": 42,
+  "source_id": "src_presentation",
+  "locator": "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+  "excerpt": "Search and advertising; Fiscal Year 2025 $22,171; Fiscal Year 2026 $24,835. ($ in millions).",
+  "claim_count": 9,
+  "first_claim": "v2_history_search_and_advertising_growth_low_2027"
+}
+{
+  "number": 43,
+  "source_id": "src_call",
+  "locator": "Complete official call.txt lines [248, 278]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+  "excerpt": "Search advertising revenue ex-TAC increased 10% and 9% in constant currency with growth driven by higher revenue per search across Edge and Bing, as well as higher volume, though growth was impacted by third-party partnerships.\nSearch advertising revenue ex-TAC growth should be in the mid-single digits, down sequentially due to the impact of third-party partnerships. Growth will continue to be driven by consistent trends in revenue per search and volume.",
+  "claim_count": 10,
+  "first_claim": "v2_constraint_search_and_advertising_growth_low_2027"
+}
+{
+  "number": 44,
+  "source_id": "src_presentation",
+  "locator": "PPT21 adjusted FY27Q1 outlook row for Search and advertising; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion",
+  "excerpt": "Growth in mid- to high-single digits",
+  "claim_count": 9,
+  "first_claim": "v2_context_search_and_advertising_growth_low_2027"
+}
+{
+  "number": 45,
+  "source_id": "src_call",
+  "locator": "Official complete FY26Q4 call.txt lines [204, 249, 279]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+  "excerpt": "ngle digits. Hardware revenue should decline year-over-year.",
+  "claim_count": 10,
+  "first_claim": "claim_78_xbox_growth_low_2027_part2"
+}
+{
+  "number": 46,
+  "source_id": "src_presentation",
+  "locator": "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+  "excerpt": "XBOX; Fiscal Year 2025 $23,455; Fiscal Year 2026 $21,790. ($ in millions).",
+  "claim_count": 9,
+  "first_claim": "v2_history_xbox_growth_low_2027"
+}
+{
+  "number": 47,
+  "source_id": "src_presentation",
+  "locator": "PPT21 adjusted FY27Q1 outlook row for XBOX; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion",
+  "excerpt": "Content and services revenue expected to decline in mid-single digits; Hardware revenue should decline year-over-year",
+  "claim_count": 9,
+  "first_claim": "v2_context_xbox_growth_low_2027"
+}
+{
+  "number": 48,
+  "source_id": "src_call",
+  "locator": "Official complete FY26Q4 call.txt lines [247, 256, 277]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+  "excerpt": "year comparable that benefited from Windows 10 end-of-support, and elevated inventory levels. As a result, we expect revenue to decline in the high-teens for the fiscal year.\nWindows OEM and Devices revenue should decline in the low twenties driven by the market dynamics noted earlier. As in prior quarters, the range of potential outcomes remains wider than normal.",
+  "claim_count": 10,
+  "first_claim": "claim_89_windows_oem_and_devices_growth_low_2027_part2"
+}
+{
+  "number": 49,
+  "source_id": "src_presentation",
+  "locator": "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+  "excerpt": "Windows OEM and devices; Fiscal Year 2025 $17,315; Fiscal Year 2026 $17,087. ($ in millions).",
+  "claim_count": 9,
+  "first_claim": "v2_history_windows_oem_and_devices_growth_low_2027"
+}
+{
+  "number": 50,
+  "source_id": "src_call",
+  "locator": "Complete official call.txt lines [247]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+  "excerpt": "Windows OEM and Devices revenue decreased 7% and Windows OEM decreased 5% driven by lower PC market demand and a high prior-year comparable that benefited from Windows 10 end of support. Results were ahead of expectations as OEM and channel partners continued to build inventory given increasing component prices.",
+  "claim_count": 10,
+  "first_claim": "v2_constraint_windows_oem_and_devices_growth_low_2027"
+}
+{
+  "number": 51,
+  "source_id": "src_presentation",
+  "locator": "PPT21 adjusted FY27Q1 outlook row for Windows OEM and devices; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion",
+  "excerpt": "Decline in low-twenties",
+  "claim_count": 9,
+  "first_claim": "v2_context_windows_oem_and_devices_growth_low_2027"
+}
+{
+  "number": 52,
+  "source_id": "src_call",
+  "locator": "Complete official call.txt lines [243, 236]; exact paragraphs, evidence-node scope explicitly limited; checked-context fragment2/3",
+  "excerpt": "xpected GitHub Copilot consumption following the June business model change to align pricing with usage and value.\nM365 Commercial cloud revenue increased 16% on an adjusted basis when normalized for the prior-year comparable that benefited from 2 points of in-period revenue recognition. And on a reported basis, revenue growth was 14%. Building on our Copilot momentum from Q3, net paid seat adds more than doubled sequentially, with paid seats now",
+  "claim_count": 1,
+  "first_claim": "claim_102_cloud_ai_company_part2"
+}
+{
+  "number": 53,
+  "source_id": "src_call",
+  "locator": "Complete official call.txt lines [243, 236]; exact paragraphs, evidence-node scope explicitly limited; checked-context fragment3/3",
+  "excerpt": " over 30 million. Premium offerings, including Copilot, E5, and early traction in E7, drove ARPU growth this quarter. And paid M365 Commercial seats grew 6% year-over-year with installed base expansion across all customer segments, though primarily in our small and medium business and frontline worker offerings.",
+  "claim_count": 1,
+  "first_claim": "claim_102_cloud_ai_company_part3"
+}
+{
+  "number": 54,
+  "source_id": "src_call",
+  "locator": "Complete official call.txt lines [317, 268]; exact paragraphs, evidence-node scope explicitly limited; checked-context fragment2/3",
+  "excerpt": " prior-year comparable that benefited from 1 point of in-period revenue recognition, or 15% on a reported basis. Sequential growth from our momentum in Copilot, E5, and E7, is mitigated a bit by the lower ARPU new seat adds in frontline worker and small and medium business SKUs. With the premium SKU momentum and the increased monetization opportunity from adding usage-based billing products alongside per-seat licensing in July, we expect to see a",
+  "claim_count": 1,
+  "first_claim": "claim_103_cloud_ai_contrary_part2"
+}
+{
+  "number": 55,
+  "source_id": "src_call",
+  "locator": "Complete official call.txt lines [317, 268]; exact paragraphs, evidence-node scope explicitly limited; checked-context fragment3/3",
+  "excerpt": "cceleration in M365 Commercial cloud revenue growth through this fiscal year.",
+  "claim_count": 1,
+  "first_claim": "claim_103_cloud_ai_contrary_part3"
+}
+{
+  "number": 56,
+  "source_id": "src_call",
+  "locator": "Complete official call.txt lines [191, 198, 199, 200, 240]; exact paragraphs, evidence-node scope explicitly limited; checked-context fragment2/2",
+  "excerpt": "at scale.\nWe have been testing this model over the past year, completing over 330 projects across 164 customers, including many of the world’s leading companies across industries.\nDynamics 365 revenue increased 13% and 12% in constant currency against a strong prior-year comparable. Bookings growth in ERP remains healthy, while CRM continued to moderate with longer sales cycles.",
+  "claim_count": 1,
+  "first_claim": "claim_105_enterprise_migration_company_part2"
+}
+{
+  "number": 57,
+  "source_id": "src_call",
+  "locator": "Complete official call.txt lines [256, 249, 279]; exact paragraphs, evidence-node scope explicitly limited; checked-context fragment2/2",
+  "excerpt": "rable that benefited from strong first-party content performance.\nAnd in XBOX content and services, we expect revenue to decline in the mid-single digits. Hardware revenue should decline year-over-year.",
+  "claim_count": 1,
+  "first_claim": "claim_109_consumer_cycle_company_part2"
+}

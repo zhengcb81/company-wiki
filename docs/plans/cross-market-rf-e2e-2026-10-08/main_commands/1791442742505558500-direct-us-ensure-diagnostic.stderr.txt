@@ -1,0 +1,1 @@
+{"error": "adapter dayu-sec-cli does not support bounded acquisition", "error_type": "fatal", "retryable": false, "status": "failed"}

@@ -1,0 +1,500 @@
+{
+  "schema_version": "1.0",
+  "company": "Tencent Holdings Limited",
+  "market": "HK",
+  "security_id": "00700",
+  "agent_id": "/root/rf_hk_execution",
+  "as_of_date": "2026-10-08",
+  "started_at": "2026-10-08T06:50:30.842440+00:00",
+  "ended_at": "2026-10-08T07:29:47.887451+00:00",
+  "skill_root": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+  "runtime_version": "4.1.0",
+  "runtime_file_sha256": {
+    "scripts/asset_ownership.py": "2dc8931451b88f410de5011bac2e80cc74f838e11e94c5627170a6e0ab891ed0",
+    "scripts/commercial_terms.py": "6596d4492fcfb31cb73efaf75fb482d90156f2fbc91ab29be272e24745546005",
+    "scripts/company_wiki_narrative_contracts.py": "11fef2a81ff60940fc97cb918b17f0ce64e67b74fbc76a9f53c237fc07d178d3",
+    "scripts/company_wiki_narrative_posix.py": "669d268667d9e08a3d98ee1eec44ecc26fb4f142dd6d7310191169deba5dc852",
+    "scripts/company_wiki_narrative_process.py": "9664696ac23699ecf6b234cec3aa93ce475127d36a4bddf680edb711ccf92e3d",
+    "scripts/company_wiki_narrative_reader.py": "8ff1cf553a8849330a41f74ae27bfcacd2515186b5fa58168cead91b6cfa7508",
+    "scripts/company_wiki_narrative_tree.py": "561f921d20636532ec13d4c2a116af120a88a2b56e55de6fbadf61f137bef8ba",
+    "scripts/company_wiki_source.py": "b223974e94ffb6d91e0e927b252e1fbc67a590fc910c3da10600d292d48d4470",
+    "scripts/company_wiki_source_reader_v2.py": "5f5bfd11cbc880c30f2766d8d6c78366d4e32f677ba9a517914a0df5f95faed1",
+    "scripts/company_wiki_source_v2.py": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+    "scripts/confidence_policy.py": "a2444c1ebb7f7ed9144e0db0199d1055da20b126b3026f90e114c55817ed822f",
+    "scripts/filing_fetch_client.py": "b16f85962173fc6a2757ed88fae7074a458ab28bbe1a21f6ec5fbf83a44f3446",
+    "scripts/fix_hashes.py": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+    "scripts/generate_input_template.py": "f7c57911d5f85204b04d07de02fdcf9bcdb2315cf0236181cd727986292870b1",
+    "scripts/internal_flow.py": "05814b9286889088278fc5cf0c47a40452026bbc926f8f382db7e70de38a1355",
+    "scripts/lint_input.py": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+    "scripts/mine_year_operation.py": "602255c766897dcabf8c5107c0ba3116686aab7dca683066fdffc70b88628986",
+    "scripts/mixed_recognition.py": "04ed62e0b61af523818aeff961cebc34eadc3df4b1b7756e5a32c9f8e432f232",
+    "scripts/model_extensions.py": "c5c15d782834546cf1d58a0a9c2d664db79898b6cc9517c657bcfac743ce2f92",
+    "scripts/model_registry.py": "62f864b9ab3f144eacff43448897d2c31abc217e17ed3b0e3f58894cdd985081",
+    "scripts/narrative_source_preparation.py": "4d848e286ca318f427d9001bb6243b98d9f91886f7931d7eb4796cf4cc4c2e72",
+    "scripts/processed_artifact_canary.py": "19869b02cb370add57b5910d360e3ae864b870a2825d76894ea36530a9ccacfc",
+    "scripts/processing_demand.py": "fcdfcad8ebd1fc20febf3c157dcd20ad92708fd69d00373ef9a943e5a820afc1",
+    "scripts/publication_registry.py": "29aaae4f9864d9c4dbb92720744daa49315a2980dfa158b0e3666cb86d886344",
+    "scripts/reconciliation.py": "c4b69e4ee1f3dc9822aed05b9facfd5bb44575b6b51b706dede46277ee5996f5",
+    "scripts/revenue_backtest.py": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+    "scripts/revenue_constraints.py": "6ce99c1d59fa3858213e31bf9dadc351591ef0eda006d957f07cf1a839e57374",
+    "scripts/revenue_core.py": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+    "scripts/revenue_forecast.py": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+    "scripts/revenue_publication.py": "bc2bb4a33e36ed9ad82bc4ffe33e57de8999002c2c7910b9c8b9d1565678fcd0",
+    "scripts/revenue_report.py": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+    "scripts/rolling_backtest.py": "80de3bfbf47d1dc6b59fc8de94733f996463edb5d749923b6ab7039875d4ec8b",
+    "scripts/schema_compatibility.py": "2fe8ffe2090300fbe81e130e21cf0b213faefc63ba0a6831894c9025db963352",
+    "scripts/schema_fields.py": "54276494dcb280b23791c3a7614eb2090997a68e1116d78f6efdf02edf52a01c",
+    "scripts/schema_optin.py": "6a3e01ea8ab95e5d705ff21c86274db6fc16b3569a19d74c2d1558cd3cf6b3a3",
+    "scripts/source_preparation.py": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+    "scripts/trust_anchor.py": "9abdcec55a524574b55e0111f513338f79a486f536985d036b94b4a71ba1310c",
+    "scripts/__init__.py": "f7343866b80251c3d2105c6d34446898784ef6272ed9310dfee7cbecf8db3459",
+    "scripts/analysis/confidence.py": "235b38e4586f15bb8908a2db53abc0724ad9e0ed79bb15e508f948ebeaa0e283",
+    "scripts/analysis/sensitivity.py": "abb1f71f4b306739760e241672cc98e57ae8253f9bf90202cf06031d67f0373d",
+    "scripts/analysis/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "scripts/contracts/constants.py": "3ad7332e4a76e7e3e2a9a8a1ab73828584ed8b19b32327479a0f79636b2f3462",
+    "scripts/contracts/document.py": "c2df0a229116392968152ee547818567ab40ba3813a270f68fabbfb9ea207c0d",
+    "scripts/contracts/evidence.py": "eb1edea913b3b4f6f8f9c7a3f84e07d464bdf0b33e7e6e9aba5664b6cb5ba683",
+    "scripts/contracts/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "scripts/forecast/calc.py": "853baa0bb208c91be0c3983d9256cb42b76f61221b19ad11c11bc37db79ae049",
+    "scripts/forecast/segments.py": "7b0dac5d5b6f19aba2305a7cb5d9d0ecddb1e5a31a6833285c5f81259018f002",
+    "scripts/research/coverage.py": "ae6519cc18fea823dcc9d5e47956a2aea6da3270f1041b28d7bf1b783cd4b470",
+    "scripts/research/drivers.py": "45e3d58853c6757a0a49701d495ffb9e3e9cb0dafc2e819432cdd28af6e90e18",
+    "scripts/research/targets.py": "1c885deaf4168bacbd7d445ec6e76da93193132fce3b6ca67fbed4e6c910c48b",
+    "scripts/research/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "SKILL.md": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf"
+  },
+  "runtime_comparison_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\after_protected_and_runtime.json",
+  "output_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700",
+  "status": "partial",
+  "forecast_status": "formal_validated",
+  "independent_review": "pending; no self-acceptance",
+  "step_matrix_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\skill_step_matrix.json",
+  "command_index": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\index.jsonl",
+  "process_trace_dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\processes",
+  "sources": [
+    {
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "bytes": 4428270,
+      "published_date": "2026-04-09",
+      "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+      "request_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_annual_2025_no_language.json",
+      "response_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\annual-2025-1791443836885749200.response.json",
+      "resolution_outcome": "reused_existing",
+      "downloads": 0,
+      "provider": "CWP verified existing original",
+      "raw_path": null,
+      "trace": {
+        "source_ref": {
+          "byte_size": 4428270,
+          "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "mime_type": "application/pdf",
+          "schema_version": "2.0",
+          "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+        },
+        "read_receipt": {
+          "byte_size": 4428270,
+          "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+          "read_at": "2026-10-08T07:17:16.814783+00:00",
+          "review": {
+            "evidence_sha256": null,
+            "policy_hash": null,
+            "reviewed_at": null,
+            "source_sha256": null,
+            "status": "not_reviewed"
+          },
+          "schema_version": "2.1",
+          "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+          "status": "ok"
+        },
+        "source_manifest": {
+          "byte_size": 4428270,
+          "canonical_entity_id": null,
+          "collector_name": null,
+          "collector_version": null,
+          "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "display_name": null,
+          "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "document_kind": "annual_report",
+          "fiscal_period": null,
+          "fiscal_year": 2025,
+          "form_type": null,
+          "language": "zh",
+          "market": "HK",
+          "mime_type": "application/pdf",
+          "period_end": null,
+          "provider": null,
+          "provider_document_id": null,
+          "published_date": "2026-04-09",
+          "retrieved_at": null,
+          "security_id": "00700",
+          "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+          "title": "腾讯：2025年年度报告"
+        },
+        "source_candidate": {
+          "resolution_outcome": "reused_existing",
+          "download_events": 0
+        }
+      }
+    },
+    {
+      "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+      "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+      "sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+      "bytes": 5241364,
+      "published_date": "2025-04-08",
+      "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0408/2025040800668_c.pdf",
+      "request_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_annual_2024_no_language.json",
+      "response_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\annual-2024-1791443168017116000.response.json",
+      "resolution_outcome": "reused_existing",
+      "downloads": 0,
+      "provider": "CWP verified existing original",
+      "raw_path": null,
+      "trace": {
+        "source_ref": {
+          "byte_size": 5241364,
+          "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "mime_type": "application/pdf",
+          "schema_version": "2.0",
+          "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0"
+        },
+        "read_receipt": {
+          "byte_size": 5241364,
+          "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+          "read_at": "2026-10-08T07:06:07.868776+00:00",
+          "review": {
+            "evidence_sha256": null,
+            "policy_hash": null,
+            "reviewed_at": null,
+            "source_sha256": null,
+            "status": "not_reviewed"
+          },
+          "schema_version": "2.1",
+          "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+          "status": "ok"
+        },
+        "source_manifest": {
+          "byte_size": 5241364,
+          "canonical_entity_id": null,
+          "collector_name": null,
+          "collector_version": null,
+          "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "display_name": null,
+          "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "document_kind": "annual_report",
+          "fiscal_period": null,
+          "fiscal_year": 2024,
+          "form_type": null,
+          "language": "zh",
+          "market": "HK",
+          "mime_type": "application/pdf",
+          "period_end": null,
+          "provider": null,
+          "provider_document_id": null,
+          "published_date": "2025-04-08",
+          "retrieved_at": null,
+          "security_id": "00700",
+          "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0408/2025040800668_c.pdf",
+          "title": "腾讯：2024年年度报告"
+        },
+        "source_candidate": {
+          "resolution_outcome": "reused_existing",
+          "download_events": 0
+        }
+      }
+    },
+    {
+      "source_id": "tencent_h1_2026_official",
+      "document_id": null,
+      "sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "bytes": 5135808,
+      "published_date": "2026-08-12",
+      "url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "request_path": null,
+      "response_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\supplemental_capture_receipts.json",
+      "resolution_outcome": "official_website_supplement_capture",
+      "downloads": 1,
+      "provider": "official website supplemental, not FF/Dayu/ET",
+      "raw_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\interim_2026_official.pdf",
+      "trace": {}
+    },
+    {
+      "source_id": "tencent_results_2q2026",
+      "document_id": null,
+      "sha256": "64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+      "bytes": 412297,
+      "published_date": "2026-08-12",
+      "url": "https://www.tencent.com/wp-content/uploads/2026/08/Tencent-Announces-2026-Second-Quarter-Results.pdf",
+      "request_path": null,
+      "response_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\supplemental_capture_receipts.json",
+      "resolution_outcome": "official_website_supplement_capture",
+      "downloads": 1,
+      "provider": "official website supplemental, not FF/Dayu/ET",
+      "raw_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\results_2q2026.pdf",
+      "trace": {}
+    },
+    {
+      "source_id": "netease_results_2q2026",
+      "document_id": null,
+      "sha256": "ba4cd2d0507d5d3211d642a8f6d45aba11e0ac245f5757d58e525223ebde4c98",
+      "bytes": 909908,
+      "published_date": "2026-08-20",
+      "url": "https://ir.netease.com/news-releases/news-release-details/netease-announces-second-quarter-and-interim-2026-unaudited",
+      "request_path": null,
+      "response_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\supplemental_capture_receipts.json",
+      "resolution_outcome": "official_website_supplement_capture",
+      "downloads": 1,
+      "provider": "official website supplemental, not FF/Dayu/ET",
+      "raw_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\netease_2q2026.html",
+      "trace": {}
+    },
+    {
+      "source_id": "tencent_corporate_overview_sep2026",
+      "document_id": null,
+      "sha256": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+      "bytes": 1676729,
+      "published_date": "2026-09-16",
+      "url": "https://www.tencent.com/wp-content/uploads/2026/09/Corporate-Overview-2Q26-20260916.pdf",
+      "request_path": null,
+      "response_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\ir_capture_receipt.json",
+      "resolution_outcome": "official_website_supplement_capture",
+      "downloads": 1,
+      "provider": "official website supplemental, not FF/Dayu/ET",
+      "raw_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\corporate_overview_20260916.pdf",
+      "trace": {}
+    }
+  ],
+  "artifacts": [
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\annual_2024_cover.png",
+      "sha256": "c4fb241510872edf921a9b4b94e90600336e472a9718b3cad1f6f43e35501c8e",
+      "bytes": 155489,
+      "role": "preserved source or intermediate/versioned research audit artifact"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\annual_2024_pages.json",
+      "sha256": "54c0415ecced69425716bd601cde01a4de55a3e785ea8b5a00ea8601b89d68e3",
+      "bytes": 489149,
+      "role": "preserved source or intermediate/versioned research audit artifact"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\annual_2025_pages.json",
+      "sha256": "a7083f3f9903a1737e9324f4c7a6560c5edf4a4899f0a029e74805f638614d1c",
+      "bytes": 495087,
+      "role": "preserved source or intermediate/versioned research audit artifact"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\corporate_overview_20260916.pdf",
+      "sha256": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+      "bytes": 1676729,
+      "role": "preserved source or intermediate/versioned research audit artifact"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\corporate_overview_pages.json",
+      "sha256": "8f627606a5f719059a3618d38123608b7d157ca9cc77c50c9ec52a5144d5729e",
+      "bytes": 23864,
+      "role": "preserved source or intermediate/versioned research audit artifact"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast-v1.json",
+      "sha256": "6796b643ec444950eed608f3e87250931b92d0c2f13d0aa27d8a922ea9a5c220",
+      "bytes": 429594,
+      "role": "preserved source or intermediate/versioned research audit artifact"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast-v1.md",
+      "sha256": "48c412c766ffe8d3da359e52f2e25762584b520c36d0cfad8debaa4871a4ca99",
+      "bytes": 57816,
+      "role": "preserved source or intermediate/versioned research audit artifact"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast.json",
+      "sha256": "1c10deb1b93769632c553e51155def18afb4b1adfe8331c0eb511d52478ab3de",
+      "bytes": 428931,
+      "role": "final forecast/input/snapshot/registry"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast.md",
+      "sha256": "1d152804ffd09e4e7b0d49215563a097a09b569e0af70e35cd91d30ffba1823b",
+      "bytes": 58089,
+      "role": "final forecast/input/snapshot/registry"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input-v1.json",
+      "sha256": "da71c4b0787861c29f40369dd457799e3925e9d65f215e6cb2c546f2c2509e74",
+      "bytes": 192717,
+      "role": "preserved source or intermediate/versioned research audit artifact"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input.json",
+      "sha256": "13078fd040fefcc8382f9ddd43d0044821aaf3bcfaecd80f36615cefb14476f1",
+      "bytes": 192154,
+      "role": "final forecast/input/snapshot/registry"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\interim_2026_official.pdf",
+      "sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "bytes": 5135808,
+      "role": "preserved source or intermediate/versioned research audit artifact"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\interim_2026_official_pages.json",
+      "sha256": "bf8085cf67605d6830e870676626e9e61a460c6bf1852dd7a329ef1a68847ba9",
+      "bytes": 213250,
+      "role": "preserved source or intermediate/versioned research audit artifact"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\netease_2q2026.html",
+      "sha256": "ba4cd2d0507d5d3211d642a8f6d45aba11e0ac245f5757d58e525223ebde4c98",
+      "bytes": 909908,
+      "role": "preserved source or intermediate/versioned research audit artifact"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\presentation_2q2026.pdf",
+      "sha256": "0b749a74c4e5af449a27c76c69cff824e525794e14d5fbe0bfee927e6013029b",
+      "bytes": 987,
+      "role": "preserved source or intermediate/versioned research audit artifact"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\publications.jsonl",
+      "sha256": "00265bb86cad76ece54247b7e2d26a8c2ba0b9fd2255b9cdc2cdf44a798adaf9",
+      "bytes": 4634,
+      "role": "final forecast/input/snapshot/registry"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\results_2q2026.pdf",
+      "sha256": "64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+      "bytes": 412297,
+      "role": "preserved source or intermediate/versioned research audit artifact"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\results_2q2026_pages.json",
+      "sha256": "c221750ae71480f6f918a3e358844a56c015f1f70194faac20a558e4f6a618a0",
+      "bytes": 24573,
+      "role": "preserved source or intermediate/versioned research audit artifact"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\snapshot-v2.json",
+      "sha256": "688de832c85f3eaf8a70957549b4c6a0afc006c65f203a05f480612eb1d0e794",
+      "bytes": 651923,
+      "role": "final forecast/input/snapshot/registry"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\snapshot.json",
+      "sha256": "879b70b7fb84faaaf50e2d41cc9f428b9ed0118f302e3b27a0ee68ef3bcaff94",
+      "bytes": 653289,
+      "role": "preserved source or intermediate/versioned research audit artifact"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\template.json",
+      "sha256": "3702539c8ed026199bce7599cfe1d2097d60de7e14c67a156856be9f1a70656a",
+      "bytes": 88188,
+      "role": "preserved source or intermediate/versioned research audit artifact"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\template_growth.json",
+      "sha256": "87551edf4b538171b7b5b51177f0dca2b4537eddc7d70c72398bbd7a7cde53d7",
+      "bytes": 86928,
+      "role": "preserved source or intermediate/versioned research audit artifact"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\tencent_announcements_index.html",
+      "sha256": "93782c3b7eb7a3558113b07c8ffd32f07ead78ad08d80331db9d8563571f6156",
+      "bytes": 184217,
+      "role": "preserved source or intermediate/versioned research audit artifact"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\tencent_results_index.html",
+      "sha256": "e7ac34c8e6826016c6b6a482ab6fa658328492ab67d88268c4e8bd8476714559",
+      "bytes": 186626,
+      "role": "preserved source or intermediate/versioned research audit artifact"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\TRUST_BOUNDARY.md",
+      "sha256": "ee2b7aa34132f3d50c31bef90441375f8ba258c4b7db54afc82d680eaf7f1a66",
+      "bytes": 767,
+      "role": "final forecast/input/snapshot/registry"
+    }
+  ],
+  "facts_index_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\fact_checks.json",
+  "communication_coverage_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\communication_coverage.json",
+  "defects": [
+    {
+      "id": "HK-LEGACY-METADATA",
+      "status": "repaired via CWP public source-facts",
+      "detail": "Legacy annual acquisition missed fiscal_year/language; bytes verified before append-only facts, original and sidecar untouched."
+    },
+    {
+      "id": "DAYU-BOUNDED-CAPABILITY",
+      "status": "blocked",
+      "detail": "Missing H1 financial acquisition cannot run within required40MiB/180sec/$0 until provider supports bound interface; no budget removal or external code edit."
+    },
+    {
+      "id": "MIXED-RECOGNITION",
+      "status": "MAIN repaired and tested; actual input green",
+      "detail": "Old runtime could not express aggregate mixed contract accounting honestly; minimal direct-recognized fallback enum extension, no artificialprogress1."
+    },
+    {
+      "id": "Q2-EARNINGS-DECK-BROKEN",
+      "status": "unavailable",
+      "detail": "OfficialAugust12 earnings PPT link returns987byteHTML; September16 later corporate presentation actually captured24pages."
+    }
+  ],
+  "gaps": [
+    "Five disclosed economic streams use direct_growth fallback. Gaming payer counts/annual ARPPU, monetizable ad impressions/CPM, FinTech TPV/net take-rate and Cloud/FinTech revenue split unavailable; complexity penalty retained.",
+    "Games domestic and international annual paragraphs are rounded: do not force the rounded 164.2+77.4bn into the exact 241532m ledger or invent reconciliation. Geographic dynamics reflected qualitatively; exact combined Games modeled.",
+    "mixed recognition and presentation describe actual aggregate contract variety, not one contract policy. Forecast annual IFRS revenue is already recognized; no second progress multiplier or transaction-volume gross/net conversion. Mix undisclosed.",
+    "Dayu-backed missing H1 download is BLOCKED under 40MiB/180sec/$0 budgets because provider lacks bounded-download capability. Official website supplemental captured separately; FF acquisition cannot be certified complete.",
+    "Latest Q2 2026 call unavailable: FF exact FY2026/Q2 companion returns provider_unavailable zero_cost_budget, provider_calls0; official webcast link 404. No call transcript read and no statement that management has no undisclosed target.",
+    "Latest Q2 earnings PPT official link returns HTTP200 text/html987 bytes. September corporate overview captured/read as later strategy presentation; August12 exact earnings PPT unavailable; September16 Corporate Overview is latest official dated investor-kit presentation and is checked separately.",
+    "Announcement index exposes September7–October7 only; complete April9–October8 interval not captured. No inference that all material announcements or management revenue targets were found.",
+    "External independent market share/TAM and revenue-capable GPU quantities unavailable. NetEase benchmark is company-specific, not whole-industry growth or Tencent market share.",
+    "No future actual revenue exists for full FY2026/2027/2028 at as-of. Snapshot frozen; evaluate/backtest/historical accuracy credit not manufactured.",
+    "No signed external host receipts/publication authority configured; capture/event hashes bind artifacts but do not establish independent attestation."
+  ],
+  "calls_and_cost": {
+    "external_paid_llm_calls": 0,
+    "cost_usd": "0.00",
+    "fmp_provider_calls": 0,
+    "ff_dayu_successful_new_downloads": 0,
+    "official_supplement_downloads": "Separately receipted; not counted as FF acquisition success",
+    "per_download_budget": {
+      "max_bytes": 41943040,
+      "timeout_seconds": 180,
+      "max_cost_usd": "0.00"
+    },
+    "publication_registry_env": "REVENUE_PUBLICATION_REGISTRY",
+    "publication_registry_effective_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\publications.jsonl"
+  },
+  "owned_cleanup": {
+    "production_raw_deleted": 0,
+    "test_roots": [
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700"
+    ],
+    "disposition": "Keep all evidence until independent review completes; MAIN owns later bounded cleanup. No test write to production config or false restore claim."
+  },
+  "unchanged_originals": {
+    "all_raw_and_config_unchanged": true,
+    "checked_count": 41,
+    "all_protected_count_including_runtime": 47,
+    "runtime_changes_expected_owner": "MAIN approved source_preparation.py diagnostic fix; installed/canonical current runtime all match. Initial runtime before/after retained separately.",
+    "details_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\after_protected_and_runtime.json"
+  },
+  "CWP_initial_processing": {
+    "canonical_worker_narrative": "NOT_RUN",
+    "reuse_receipt_parser_llm_counts": "null, not fabricated0",
+    "actual_task_local_parse": "PyMuPDF original-language page extraction, retained in TEMP",
+    "virtualization": "actual pathless SourceRefv2 verified read, source/document/hash/bytes/mime/period proof; filename only audit locator"
+  }
+}

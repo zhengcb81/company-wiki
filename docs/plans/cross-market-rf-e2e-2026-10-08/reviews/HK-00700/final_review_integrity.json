@@ -1,0 +1,432 @@
+{
+  "serialization_status": "PASS",
+  "checks": 33,
+  "facts": 145,
+  "findings": 13,
+  "open_findings": 12,
+  "protected_raw_config": 41,
+  "emitting_artifacts": 25,
+  "completed_review_command_pairs": 30,
+  "active_finalization_command": [
+    "1791447315304469100-finalize-independent-hk-review"
+  ],
+  "emitted": [
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\annual_2024_cover.png",
+      "sha256": "c4fb241510872edf921a9b4b94e90600336e472a9718b3cad1f6f43e35501c8e",
+      "byte_size": 155489
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\annual_2024_pages.json",
+      "sha256": "54c0415ecced69425716bd601cde01a4de55a3e785ea8b5a00ea8601b89d68e3",
+      "byte_size": 489149
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\annual_2025_pages.json",
+      "sha256": "a7083f3f9903a1737e9324f4c7a6560c5edf4a4899f0a029e74805f638614d1c",
+      "byte_size": 495087
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\corporate_overview_20260916.pdf",
+      "sha256": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+      "byte_size": 1676729
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\corporate_overview_pages.json",
+      "sha256": "8f627606a5f719059a3618d38123608b7d157ca9cc77c50c9ec52a5144d5729e",
+      "byte_size": 23864
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast-v1.json",
+      "sha256": "6796b643ec444950eed608f3e87250931b92d0c2f13d0aa27d8a922ea9a5c220",
+      "byte_size": 429594
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast-v1.md",
+      "sha256": "48c412c766ffe8d3da359e52f2e25762584b520c36d0cfad8debaa4871a4ca99",
+      "byte_size": 57816
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast.json",
+      "sha256": "1c10deb1b93769632c553e51155def18afb4b1adfe8331c0eb511d52478ab3de",
+      "byte_size": 428931
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast.md",
+      "sha256": "1d152804ffd09e4e7b0d49215563a097a09b569e0af70e35cd91d30ffba1823b",
+      "byte_size": 58089
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input-v1.json",
+      "sha256": "da71c4b0787861c29f40369dd457799e3925e9d65f215e6cb2c546f2c2509e74",
+      "byte_size": 192717
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input.json",
+      "sha256": "13078fd040fefcc8382f9ddd43d0044821aaf3bcfaecd80f36615cefb14476f1",
+      "byte_size": 192154
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\interim_2026_official.pdf",
+      "sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "byte_size": 5135808
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\interim_2026_official_pages.json",
+      "sha256": "bf8085cf67605d6830e870676626e9e61a460c6bf1852dd7a329ef1a68847ba9",
+      "byte_size": 213250
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\netease_2q2026.html",
+      "sha256": "ba4cd2d0507d5d3211d642a8f6d45aba11e0ac245f5757d58e525223ebde4c98",
+      "byte_size": 909908
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\presentation_2q2026.pdf",
+      "sha256": "0b749a74c4e5af449a27c76c69cff824e525794e14d5fbe0bfee927e6013029b",
+      "byte_size": 987
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\publications.jsonl",
+      "sha256": "00265bb86cad76ece54247b7e2d26a8c2ba0b9fd2255b9cdc2cdf44a798adaf9",
+      "byte_size": 4634
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\results_2q2026.pdf",
+      "sha256": "64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+      "byte_size": 412297
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\results_2q2026_pages.json",
+      "sha256": "c221750ae71480f6f918a3e358844a56c015f1f70194faac20a558e4f6a618a0",
+      "byte_size": 24573
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\snapshot-v2.json",
+      "sha256": "688de832c85f3eaf8a70957549b4c6a0afc006c65f203a05f480612eb1d0e794",
+      "byte_size": 651923
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\snapshot.json",
+      "sha256": "879b70b7fb84faaaf50e2d41cc9f428b9ed0118f302e3b27a0ee68ef3bcaff94",
+      "byte_size": 653289
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\template.json",
+      "sha256": "3702539c8ed026199bce7599cfe1d2097d60de7e14c67a156856be9f1a70656a",
+      "byte_size": 88188
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\template_growth.json",
+      "sha256": "87551edf4b538171b7b5b51177f0dca2b4537eddc7d70c72398bbd7a7cde53d7",
+      "byte_size": 86928
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\tencent_announcements_index.html",
+      "sha256": "93782c3b7eb7a3558113b07c8ffd32f07ead78ad08d80331db9d8563571f6156",
+      "byte_size": 184217
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\tencent_results_index.html",
+      "sha256": "e7ac34c8e6826016c6b6a482ab6fa658328492ab67d88268c4e8bd8476714559",
+      "byte_size": 186626
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\TRUST_BOUNDARY.md",
+      "sha256": "ee2b7aa34132f3d50c31bef90441375f8ba258c4b7db54afc82d680eaf7f1a66",
+      "byte_size": 767
+    }
+  ],
+  "protected": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\config\\company_wiki.json",
+      "sha256": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20190726-中信建投-腾讯控股-0700.HK-如何描绘“聚变中的恒星”.pdf",
+      "sha256": "56b9b1c6edd2ded17e9fb90f51a6401b9d4a0c05b7985bf7dd343b7451adf830"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20200122-国信证券-腾讯控股-0700[1].HK-金融科技：引领腾讯下一个十年.pdf",
+      "sha256": "2617cbbe35f143d9f62afd3df8907d9544edc417aee5b3ec1f46d4d7a95a0a3c"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20200326-华创证券-海外科技互联网行业深度研究报告：复盘腾讯，股价的驱动力来自何方？.pdf",
+      "sha256": "c117c87458f26faf3c6b08c67e191aea71b712a7c0efdcbf71906c4867474234"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210310-东吴证券-腾讯控股-0700.HK-解析视频号意义与商业化概览.pdf",
+      "sha256": "d54dd6b8d31f3ae90e438d83b65fa76b016d7e84520d4f7ae648b35fbce87893"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210310-招商证券-腾讯控股-0700.HK-深度探析腾讯的产品、生态、流量、商业化及增长空间.pdf",
+      "sha256": "d3ae572246b5f3fa751ece9b9f956f6fcbaa3af9cbc4b9201848364f6437e2f7"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210318-广发证券-腾讯控股-0700.HK-数字内容持续精进，夯实和延展“社交+内容”战略.pdf",
+      "sha256": "c1aa48a0c43e4f820d2220a9907792a2f05ee05774804023a1d6b68addc2e221"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210323-天风证券-传媒行业腾讯专题深度一：视频号，社会里，每个人.pdf",
+      "sha256": "05c6eac06564afc4379b5b65b2ba25f81081a47322cf866e5421af4f7fcf8692"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210526-申万宏源-腾讯控股-0700.HK-深度报告：社交与精品内容铸基，产业赋能正起步.pdf",
+      "sha256": "faa1869d9e76a6d445df60600b82bab95951503f90be2db36b804e875f2b48fc"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210616-西部证券-腾讯控股-0700.HK-首次覆盖：游戏增长稳健，视频号和2B业务进一步打开空间.pdf",
+      "sha256": "45f32ea442c25478b0aa6748d6a277169773aa8a0574ce1591f3f9765fc7cc9a"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210715-西部证券-腾讯控股-0700.HK-跟踪报告：加大游戏研发投入，“开启”元宇宙，看好腾讯布局.pdf",
+      "sha256": "21bd6906bd71d68230c3ed4ae13e8870a414e0bc29560682c4b4ca85cf23ce28"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210811-光大证券-腾讯控股-0700.HK-视频号系列报告之一：视频号的入局，平平无奇还是弯道超车？.pdf",
+      "sha256": "5626d1c9367068c81d646f9a3b916dbfbdcea91e2512f29362c32f3c70746074"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210916-国金证券-腾讯控股-0700.HK-复盘历次“大跌”：曾经的“担忧”还在吗？.pdf",
+      "sha256": "ccc4a068c56b4213a8300f41f07bda990ee9e8f3645e859b94c28f31f8052a4f"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20211220-东兴证券-传媒行业腾讯系列研究之7：腾讯专题，微信的本质价值是分发.pdf",
+      "sha256": "2aa9fbd0ffc103ddf2d09423428a68b54e7721439887a52b9e3bc111ebadf21c"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20211228-德邦证券-腾讯控股-0700.HK-深度复盘~如何理解腾讯游戏的护城河？.pdf",
+      "sha256": "d00d4b2a97366710042b1c3ed77a58d165cfb917e454db9f43a5e9ec2cf983e2"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20220118-东兴证券-腾讯控股-0700.HK-中概互联网复盘系列报告之三：腾讯控股2021年复盘，股价韧性强于市，强监管无碍微信价值.pdf",
+      "sha256": "5a46dfc31d5dfd0496db924e2d5dd8f6b4b3c144cd33725ea589fe503980f3f4"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20220410-中泰证券-腾讯控股-0700.HK-前瞻布局，突破求新.pdf",
+      "sha256": "4c9e68963e174c31908e527b04174da9634e7acb23bde45bcf6dddc9badaeb2c"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20220418-华西证券-腾讯控股-0700.HK-社交+内容生态壁垒已成，技术服务驱动新增长.pdf",
+      "sha256": "2c3eba443e6e7a46b4aaedb84ecae13b3ae4f87f7a6c0f4df2b107bb9205c0be"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20220518-东北证券-腾讯控股-0700.HK-超级APP构筑核心竞争优势，产业互联网驱动公司成长.pdf",
+      "sha256": "d495667e896d40813d5324fe24c5deb5f7f1926ed4cb6a93a8fcc97ee7736b49"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20220809-广发证券-媒体Ⅱ行业：腾讯会议，Zoom为借鉴的视频会议产品迭代与商业化路径探讨.pdf",
+      "sha256": "b41c0b421a5f6b9aadd211433ed27a26d304470151be2026c83c530a1fb8a210"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20221010-信达证券-腾讯控股-0700.HK-首次覆盖报告：优质的生态，进击的巨人.pdf",
+      "sha256": "c183c261125f9946c16c9ba1102243621d7163dd3d8bdbddcb79055358714760"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20221110-德邦证券-腾讯控股-0700.HK-深度跟踪报告：各业务当前的逻辑与变化.pdf",
+      "sha256": "62cd05c9c61ca7e819e3f6cfb270ad952613bc64951fb8dde7e08db178578936"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20230217-中信建投-腾讯控股-0700.HK-试析云服务的成长与格局之困.pdf",
+      "sha256": "57dccf7dcaa51f081ce8420de8b090e6e873e83d12fe295d9edda4f02dded83f"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20230322-腾讯-2022年第四季度及全年业绩发布会（英译中）.pdf",
+      "sha256": "0300267e6d28a318c8e6555bf7beefccec2ab23d8eb828ebc7a0e95f552d1b61"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20230420-天风证券-腾讯控股-0700.HK-腾讯AI战略、布局、大模型及应用跟踪.pdf",
+      "sha256": "734da71f76bea358df1f22057211fae7dd83b36878ac276c28dcc3d1961de1d5"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20230517-腾讯-2023年第一季度业绩发布会（英译中）.pdf",
+      "sha256": "e76540e42a9037b779ec954bb6784dff7afd1e90df0643318f7f135c386cfc31"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20230725-国泰君安-腾讯控股-0700.HK-公司更新报告：视频号电商全面发力，生态及商业化空间广阔.pdf",
+      "sha256": "37f2dc43409b58c2827a1661f6a2ca734e342ec1f662ae618fc5db2bacb22e3e"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20250122-海通证券-信息服务行业深度报告：走最适合自身的AI发展之路，善于“扬长”的腾讯.pdf",
+      "sha256": "c093d9d2c788005d2bd9d7a5f5a8ab345adf5a4a619ceebd04d1405b5d24d939"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20250915-华泰证券-腾讯控股-0700.HK-腾讯广告：AI和微信生态驱动商业化升级.pdf",
+      "sha256": "cf46a51a71de02148e324e22329b69ad252e8ff7310189bcb94bcb80b46891c6"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20260131-国联民生证券-计算机行业深度报告：被低估的腾讯AI“野望”.pdf",
+      "sha256": "f6b2e5e631bf14ec23bf08702c5d9db371e1ac99486eaf63984df128f161bfce"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\【互联网】腾讯2021Q2业绩会纪要20210818.pdf",
+      "sha256": "0f7552767ac4fac7e8f30f353306d02ec0996f134e9889a56e1b4fa4fc899680"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯2019n.pdf",
+      "sha256": "fd6aaa4f59351447c7bc78032ef2dbb7f3d381bf120ea7d1383c3de052e4f82e"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯2020n.pdf",
+      "sha256": "bba24aaa10948ea37f7c7a8a96dcd79200842ffbfb3c1c8f64a182a6b3698d48"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯2021n.pdf",
+      "sha256": "70574582c616da1727590fc247c4caa40a7ee98ab83896d05638e9a630b50341"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯2022n.PDF",
+      "sha256": "48705cdd72b57ca1b7ff9d15f3c101fcd6633688d6a3a3b221852087d2be64fc"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯SSV许浩碳中和纪要202203.pdf",
+      "sha256": "a9f047c4bc9cfacb7956e90d2c66b4e9e9e50b3e4a8e7316c0b81ffd69c6014f"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯交流纪要20220406.pdf",
+      "sha256": "d865f9774748f56396933c13c076d734ba09fb84467472564fbd8b5d1528f232"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯控股交流纪要20220323.pdf",
+      "sha256": "fafaf9fed1ace161f824811a462412474c6f67273837288b30fecd46daaa8328"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\financial_reports\\annual\\腾讯：2024年年度报告.pdf",
+      "sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\financial_reports\\annual\\腾讯：2025年年度报告.pdf",
+      "sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+    }
+  ],
+  "commands": [
+    {
+      "id": "1791444759255454000-independent-full-input-inventory",
+      "returncode": 0
+    },
+    {
+      "id": "1791444780103454400-independent-ledger-artifact-runtime-audit",
+      "returncode": 0
+    },
+    {
+      "id": "1791444783756374200-independent-original-pdf-extraction",
+      "returncode": 0
+    },
+    {
+      "id": "1791444788041325900-read-model-schema-freeze-contracts",
+      "returncode": 0
+    },
+    {
+      "id": "1791444918244486600-all69-claims-original-locator-and-hash-audit",
+      "returncode": 0
+    },
+    {
+      "id": "1791445007072446700-independent-strong-validation-cli-replay-all-arithmetic",
+      "returncode": 0
+    },
+    {
+      "id": "1791445105299618100-independent-rf-ff-cwp-2025-readonly-reuse",
+      "returncode": 0
+    },
+    {
+      "id": "1791445112118527800-independent-rf-ff-cwp-2024-readonly-reuse",
+      "returncode": 0
+    },
+    {
+      "id": "1791445152083656500-independent-bounded-official-live-source-sha-check",
+      "returncode": 0
+    },
+    {
+      "id": "1791445301795878000-independent-pypdf-and-poppler-context-table-review",
+      "returncode": 0
+    },
+    {
+      "id": "1791445596191731400-independent-official-annual-archive-discovery",
+      "returncode": 0
+    },
+    {
+      "id": "1791445596672914800-independent-alternate-mupdf-original-visual-context",
+      "returncode": 0
+    },
+    {
+      "id": "1791445651136835900-independent-source-facts-protected-registry-inventory",
+      "returncode": 0
+    },
+    {
+      "id": "1791445651504336300-independent-traditional-chinese-official-annual-archive",
+      "returncode": 0
+    },
+    {
+      "id": "1791445689647605900-independent-protected-input-check-inventory",
+      "returncode": 0
+    },
+    {
+      "id": "1791445689651282300-independent-publication-registry-readonly-inventory",
+      "returncode": 1
+    },
+    {
+      "id": "1791445689675696100-independent-official-2025-annual-original-sha-receipt",
+      "returncode": 0
+    },
+    {
+      "id": "1791445906149798700-independent-current-registry-chain-and-artifact-anchor",
+      "returncode": 1
+    },
+    {
+      "id": "1791445906162385400-independent-output-shapes-manual-comparison",
+      "returncode": 0
+    },
+    {
+      "id": "1791445906162493400-independent-protected-original-current-sha-audit",
+      "returncode": 0
+    },
+    {
+      "id": "1791445958209126000-independent-corrected-registry-chain-and-artifact-anchor",
+      "returncode": 1
+    },
+    {
+      "id": "1791445977471925100-independent-registry-chain-published-forecast-snapshot-and-cli",
+      "returncode": 0
+    },
+    {
+      "id": "1791446022602071200-independent-nine-dimensions-six-communications-all-roots",
+      "returncode": 0
+    },
+    {
+      "id": "1791446334429866700-independent-main-registry-fix-closure",
+      "returncode": 0
+    },
+    {
+      "id": "1791446474426386500-independent-full-original-management-target-search-context",
+      "returncode": 0
+    },
+    {
+      "id": "1791446474436184800-independent-current-producer-sourcefacts-raw-locations-derived-status",
+      "returncode": 0
+    },
+    {
+      "id": "1791446474470287600-independent-all-output-bridges-growth-allocation-ranking",
+      "returncode": 0
+    },
+    {
+      "id": "1791446596754312900-independent-producer-retired-artifact-physical-sha-and-quality",
+      "returncode": 0
+    },
+    {
+      "id": "1791447134419107400-serialize-independent-hk-review",
+      "returncode": 0
+    },
+    {
+      "id": "1791447283454960500-finalize-independent-hk-review",
+      "returncode": 1
+    }
+  ],
+  "report_sha256": {
+    "review.md": "f5c49efc0e3c1280ca29236b4dc6c9128df5ab25d3fb474fe438cf7ad085d8e8",
+    "review.json": "c7703c8c50a562bdf7383b13fd3caafc0d4a33409b741e92d91a575e10791683"
+  }
+}

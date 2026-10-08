@@ -1,0 +1,4 @@
+[main 08673cf8] fix: repair source contracts and registry audit from cross-market E2E
+ 16 files changed, 326 insertions(+), 11 deletions(-)
+ create mode 100644 tests/test_mixed_aggregate_recognition.py
+ create mode 100644 tests/test_registry_artifact_audit.py

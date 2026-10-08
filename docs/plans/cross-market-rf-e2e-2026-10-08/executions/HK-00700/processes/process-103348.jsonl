@@ -1,0 +1,2 @@
+{"timestamp_utc": "2026-10-08T08:57:33.082938+00:00", "pid": 103348, "ppid": 31756, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\publication_registry.py", "audit", "--result", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v4\\forecast.json"], "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v4"}}
+{"timestamp_utc": "2026-10-08T08:57:33.137587+00:00", "pid": 103348, "ppid": 31756, "event": "python_exit", "data": {}}

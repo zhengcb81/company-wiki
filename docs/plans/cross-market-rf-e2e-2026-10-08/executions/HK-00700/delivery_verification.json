@@ -1,0 +1,363 @@
+{
+  "timestamp_utc": "2026-10-08T07:24:47.876266+00:00",
+  "strong_input_required_validator": "PASS",
+  "snapshot_validator": "PASS",
+  "same_result_markdown": "PASS",
+  "independent_segment_consolidation_cagr": "PASS",
+  "recognized_revenue_transform": "mixed no second transformation",
+  "all_base_assumptions_sensitivity": 15,
+  "independent_paths": [
+    {
+      "segment": "Games",
+      "scenario": "low",
+      "independent_annual_revenue": {
+        "2026": 258439.24000000002,
+        "2027": 268776.80960000004,
+        "2028": 274152.34579200007
+      }
+    },
+    {
+      "segment": "Games",
+      "scenario": "base",
+      "independent_annual_revenue": {
+        "2026": 265685.2,
+        "2027": 289596.868,
+        "2028": 312764.61744000006
+      }
+    },
+    {
+      "segment": "Games",
+      "scenario": "high",
+      "independent_annual_revenue": {
+        "2026": 277761.8,
+        "2027": 316648.45200000005,
+        "2028": 354646.2662400001
+      }
+    },
+    {
+      "segment": "SocialNetworks",
+      "scenario": "low",
+      "independent_annual_revenue": {
+        "2026": 125194.02,
+        "2027": 121438.1994,
+        "2028": 119009.43541199999
+      }
+    },
+    {
+      "segment": "SocialNetworks",
+      "scenario": "base",
+      "independent_annual_revenue": {
+        "2026": 127749.0,
+        "2027": 130303.98,
+        "2028": 134213.0994
+      }
+    },
+    {
+      "segment": "SocialNetworks",
+      "scenario": "high",
+      "independent_annual_revenue": {
+        "2026": 132858.96,
+        "2027": 139501.908,
+        "2028": 146477.00340000002
+      }
+    },
+    {
+      "segment": "MarketingServices",
+      "scenario": "low",
+      "independent_annual_revenue": {
+        "2026": 162369.76,
+        "2027": 175359.34080000003,
+        "2028": 185880.90124800004
+      }
+    },
+    {
+      "segment": "MarketingServices",
+      "scenario": "base",
+      "independent_annual_revenue": {
+        "2026": 173967.6,
+        "2027": 203542.092,
+        "2028": 232037.98488000003
+      }
+    },
+    {
+      "segment": "MarketingServices",
+      "scenario": "high",
+      "independent_annual_revenue": {
+        "2026": 179766.52,
+        "2027": 221112.8196,
+        "2028": 265335.38352
+      }
+    },
+    {
+      "segment": "FinTechBusinessServices",
+      "scenario": "low",
+      "independent_annual_revenue": {
+        "2026": 240906.75,
+        "2027": 250543.02000000002,
+        "2028": 260564.74080000003
+      }
+    },
+    {
+      "segment": "FinTechBusinessServices",
+      "scenario": "base",
+      "independent_annual_revenue": {
+        "2026": 250084.15000000002,
+        "2027": 275092.56500000006,
+        "2028": 302601.8215000001
+      }
+    },
+    {
+      "segment": "FinTechBusinessServices",
+      "scenario": "high",
+      "independent_annual_revenue": {
+        "2026": 259261.55,
+        "2027": 298150.7825,
+        "2028": 342873.39987499994
+      }
+    },
+    {
+      "segment": "Others",
+      "scenario": "low",
+      "independent_annual_revenue": {
+        "2026": 9288.55,
+        "2027": 9288.55,
+        "2028": 9288.55
+      }
+    },
+    {
+      "segment": "Others",
+      "scenario": "base",
+      "independent_annual_revenue": {
+        "2026": 11307.8,
+        "2027": 12438.58,
+        "2028": 13433.6664
+      }
+    },
+    {
+      "segment": "Others",
+      "scenario": "high",
+      "independent_annual_revenue": {
+        "2026": 12923.2,
+        "2027": 15507.84,
+        "2028": 17834.016
+      }
+    }
+  ],
+  "consolidated": {
+    "low": {
+      "2026": 796198.3200000001,
+      "2027": 825405.9198000001,
+      "2028": 848895.9732520002
+    },
+    "base": {
+      "2026": 828793.7500000001,
+      "2027": 910974.085,
+      "2028": 995051.1896200002
+    },
+    "high": {
+      "2026": 862572.03,
+      "2027": 990921.8021,
+      "2028": 1127166.069035
+    }
+  },
+  "H1_implied_H2_checks": [
+    {
+      "segment": "Games",
+      "scenario": "low",
+      "FY2025": 241532,
+      "H1_2025": 118654,
+      "H2_2025": 122878,
+      "H1_2026": 130115,
+      "FY2026_forecast": 258439.24000000002,
+      "implied_H2_2026": 128324.24000000002,
+      "implied_H2_yoy": 0.04432233597552049,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "Games",
+      "scenario": "base",
+      "FY2025": 241532,
+      "H1_2025": 118654,
+      "H2_2025": 122878,
+      "H1_2026": 130115,
+      "FY2026_forecast": 265685.2,
+      "implied_H2_2026": 135570.2,
+      "implied_H2_yoy": 0.10329106919057929,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "Games",
+      "scenario": "high",
+      "FY2025": 241532,
+      "H1_2025": 118654,
+      "H2_2025": 122878,
+      "H1_2026": 130115,
+      "FY2026_forecast": 277761.8,
+      "implied_H2_2026": 147646.8,
+      "implied_H2_yoy": 0.2015722912156772,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "SocialNetworks",
+      "scenario": "low",
+      "FY2025": 127749,
+      "H1_2025": 64847,
+      "H2_2025": 62902,
+      "H1_2026": 64409,
+      "FY2026_forecast": 125194.02,
+      "implied_H2_2026": 60785.020000000004,
+      "implied_H2_yoy": -0.033655209691265675,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "SocialNetworks",
+      "scenario": "base",
+      "FY2025": 127749,
+      "H1_2025": 64847,
+      "H2_2025": 62902,
+      "H1_2026": 64409,
+      "FY2026_forecast": 127749.0,
+      "implied_H2_2026": 63340.0,
+      "implied_H2_yoy": 0.006963212616450942,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "SocialNetworks",
+      "scenario": "high",
+      "FY2025": 127749,
+      "H1_2025": 64847,
+      "H2_2025": 62902,
+      "H1_2026": 64409,
+      "FY2026_forecast": 132858.96,
+      "implied_H2_2026": 68449.95999999999,
+      "implied_H2_yoy": 0.0882000572318844,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "MarketingServices",
+      "scenario": "low",
+      "FY2025": 144973,
+      "H1_2025": 67615,
+      "H2_2025": 77358,
+      "H1_2026": 81736,
+      "FY2026_forecast": 162369.76,
+      "implied_H2_2026": 80633.76000000001,
+      "implied_H2_yoy": 0.04234545877608009,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "MarketingServices",
+      "scenario": "base",
+      "FY2025": 144973,
+      "H1_2025": 67615,
+      "H2_2025": 77358,
+      "H1_2026": 81736,
+      "FY2026_forecast": 173967.6,
+      "implied_H2_2026": 92231.6,
+      "implied_H2_yoy": 0.1922697070761914,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "MarketingServices",
+      "scenario": "high",
+      "FY2025": 144973,
+      "H1_2025": 67615,
+      "H2_2025": 77358,
+      "H1_2026": 81736,
+      "FY2026_forecast": 179766.52,
+      "implied_H2_2026": 98030.51999999999,
+      "implied_H2_yoy": 0.2672318312262467,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "FinTechBusinessServices",
+      "scenario": "low",
+      "FY2025": 229435,
+      "H1_2025": 110443,
+      "H2_2025": 118992,
+      "H1_2026": 120171,
+      "FY2026_forecast": 240906.75,
+      "implied_H2_2026": 120735.75,
+      "implied_H2_yoy": 0.014654346510689864,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "FinTechBusinessServices",
+      "scenario": "base",
+      "FY2025": 229435,
+      "H1_2025": 110443,
+      "H2_2025": 118992,
+      "H1_2026": 120171,
+      "FY2026_forecast": 250084.15000000002,
+      "implied_H2_2026": 129913.15000000002,
+      "implied_H2_yoy": 0.09178053986822654,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "FinTechBusinessServices",
+      "scenario": "high",
+      "FY2025": 229435,
+      "H1_2025": 110443,
+      "H2_2025": 118992,
+      "H1_2026": 120171,
+      "FY2026_forecast": 259261.55,
+      "implied_H2_2026": 139090.55,
+      "implied_H2_yoy": 0.168906733225763,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "Others",
+      "scenario": "low",
+      "FY2025": 8077,
+      "H1_2025": 2967,
+      "H2_2025": 5110,
+      "H1_2026": 4812,
+      "FY2026_forecast": 9288.55,
+      "implied_H2_2026": 4476.549999999999,
+      "implied_H2_yoy": -0.12396281800391407,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "Others",
+      "scenario": "base",
+      "FY2025": 8077,
+      "H1_2025": 2967,
+      "H2_2025": 5110,
+      "H1_2026": 4812,
+      "FY2026_forecast": 11307.8,
+      "implied_H2_2026": 6495.799999999999,
+      "implied_H2_yoy": 0.27119373776908007,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "Others",
+      "scenario": "high",
+      "FY2025": 8077,
+      "H1_2025": 2967,
+      "H2_2025": 5110,
+      "H1_2026": 4812,
+      "FY2026_forecast": 12923.2,
+      "implied_H2_2026": 8111.200000000001,
+      "implied_H2_yoy": 0.5873189823874756,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    }
+  ],
+  "publication_registry_effective_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\publications.jsonl",
+  "signer": "No fabricated external signature; preserve actual engine receipts",
+  "future_actual_backtest": "NOT_APPLICABLE: full FY2026–2028 actuals unavailable as of 2026-10-08"
+}

@@ -1,0 +1,36 @@
+{
+  "input_canonical_sha256": "311d36e8e935b3363c6b7e2b54a31bbbc0dad043da81767cca14c36c8cbb8dfd",
+  "input_file_sha256": "1fadabef5208df3438ea5202ba4524bb4d0fdfe9e923b0759c24dca8ff4165a3",
+  "embedded_input_result_equal": true,
+  "registry_rows": [
+    {
+      "artifact_type": "forecast",
+      "tuple_match": "PASS",
+      "input_sha256": "311d36e8e935b3363c6b7e2b54a31bbbc0dad043da81767cca14c36c8cbb8dfd",
+      "result_sha256": "b5be5ee10f10671276a0b9cb163e7e53332d2af22d650529ae47ee23e5b36cba",
+      "receipt_sha256": "7076110b7263348df9c83dbafec90aadbe199de82b9b741a9a0feefadfec872c",
+      "line_sha256": "f3bd4164271b903144c12059cf69f24e5b8e2280db515d7e5c9e27b8cd5ca633",
+      "artifact_id": null
+    },
+    {
+      "artifact_type": "forecast",
+      "tuple_match": "PASS",
+      "input_sha256": "311d36e8e935b3363c6b7e2b54a31bbbc0dad043da81767cca14c36c8cbb8dfd",
+      "result_sha256": "b5be5ee10f10671276a0b9cb163e7e53332d2af22d650529ae47ee23e5b36cba",
+      "receipt_sha256": "7076110b7263348df9c83dbafec90aadbe199de82b9b741a9a0feefadfec872c",
+      "line_sha256": "120fa9888296a52f43ba21fe025e4a3e6efb59343310a5a656001746a51a191b",
+      "artifact_id": null
+    },
+    {
+      "artifact_type": "snapshot",
+      "tuple_match": "PASS",
+      "input_sha256": "311d36e8e935b3363c6b7e2b54a31bbbc0dad043da81767cca14c36c8cbb8dfd",
+      "result_sha256": "187de7a0fe8b6be142b8090c433e705136078da7c1917c8e21e837058bbc0f04",
+      "receipt_sha256": "7076110b7263348df9c83dbafec90aadbe199de82b9b741a9a0feefadfec872c",
+      "line_sha256": "bc962c46e80b5c919ceb3a4473140e1f0970a33de4af6969476f97863ff1a133",
+      "artifact_id": "168cc12b933faea7298a1c64a00aa65ab2adb4a7cab26af7826e0e7165ce923a"
+    }
+  ],
+  "chain": "PASS",
+  "scope": "Independent tuple check separate from CLI audit limited scope; byte-file hashes and canonical payload hashes are distinct."
+}

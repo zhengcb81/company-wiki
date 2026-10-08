@@ -1,0 +1,2249 @@
+{
+  "schema_version": "1.0",
+  "task": "cross-market-rf-e2e-2026-10-08",
+  "original_temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008",
+  "durable_output_root": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08",
+  "artifacts": [
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\3539.8c87283a5b464230.chunk.js",
+      "relative_path": "CN-688012/3539.8c87283a5b464230.chunk.js",
+      "sha256": "96314568f7f681c28479d0ce6d34c7bca248441f6b3437a176bc5e43094f36e7",
+      "byte_size": 153089,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\96\\96314568f7f681c28479d0ce6d34c7bca248441f6b3437a176bc5e43094f36e7"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\4811.7d3ee828b5dd6682.chunk.js",
+      "relative_path": "CN-688012/4811.7d3ee828b5dd6682.chunk.js",
+      "sha256": "8d73193ce771af3be95a16113c99aa622ca7834d5c4ae6d63d40e90108a43ae9",
+      "byte_size": 28838,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\8d\\8d73193ce771af3be95a16113c99aa622ca7834d5c4ae6d63d40e90108a43ae9"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\5994.05e109e0d3541aa9.chunk.js",
+      "relative_path": "CN-688012/5994.05e109e0d3541aa9.chunk.js",
+      "sha256": "fe9a81a9242d87bbcb1d5df45675694ac1e96a868875266fba1a1b72e3d785ec",
+      "byte_size": 153140,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\fe\\fe9a81a9242d87bbcb1d5df45675694ac1e96a868875266fba1a1b72e3d785ec"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\9252.8f9ada5b80359fdc.chunk.js",
+      "relative_path": "CN-688012/9252.8f9ada5b80359fdc.chunk.js",
+      "sha256": "b05cfbd1e08b6f4616eb38db5ec03d55f997b232a167ade5a657ccb4e9253af0",
+      "byte_size": 21632,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\b0\\b05cfbd1e08b6f4616eb38db5ec03d55f997b232a167ade5a657ccb4e9253af0"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\annual2025.pdf",
+      "relative_path": "CN-688012/annual2025.pdf",
+      "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "byte_size": 9165875,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\d6\\d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\annual2025_https_verified.pdf",
+      "relative_path": "CN-688012/annual2025_https_verified.pdf",
+      "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "byte_size": 9165875,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\d6\\d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\annual2025_pages.json",
+      "relative_path": "CN-688012/annual2025_pages.json",
+      "sha256": "da51b679d768037696d472ab7b3705e4cde945849c42c5d1892b485facda74b5",
+      "byte_size": 493996,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\da\\da51b679d768037696d472ab7b3705e4cde945849c42c5d1892b485facda74b5"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\forecast.json",
+      "relative_path": "CN-688012/forecast.json",
+      "sha256": "a7b2797fecb8edb1b2ba2641b3d65c7996e938427fc01eed1f8e513aa7be420d",
+      "byte_size": 491060,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\a7\\a7b2797fecb8edb1b2ba2641b3d65c7996e938427fc01eed1f8e513aa7be420d"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\forecast.md",
+      "relative_path": "CN-688012/forecast.md",
+      "sha256": "f6bca82bf5fd5b1db373685da4bd910f510ffcc1d780070b6ab747c6d37a8a83",
+      "byte_size": 91014,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\f6\\f6bca82bf5fd5b1db373685da4bd910f510ffcc1d780070b6ab747c6d37a8a83"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\half2026.pdf",
+      "relative_path": "CN-688012/half2026.pdf",
+      "sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "byte_size": 3149962,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\18\\182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\half2026_current.pdf",
+      "relative_path": "CN-688012/half2026_current.pdf",
+      "sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "byte_size": 3149962,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\18\\182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\half2026_current_pages.json",
+      "relative_path": "CN-688012/half2026_current_pages.json",
+      "sha256": "d2379ec03e8a6dd2a341bc8ba8ef990ffb9e81542c7b9015d9a886772a699be7",
+      "byte_size": 403572,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\d2\\d2379ec03e8a6dd2a341bc8ba8ef990ffb9e81542c7b9015d9a886772a699be7"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\half2026_pages.json",
+      "relative_path": "CN-688012/half2026_pages.json",
+      "sha256": "d2379ec03e8a6dd2a341bc8ba8ef990ffb9e81542c7b9015d9a886772a699be7",
+      "byte_size": 403572,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\d2\\d2379ec03e8a6dd2a341bc8ba8ef990ffb9e81542c7b9015d9a886772a699be7"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\input.json",
+      "relative_path": "CN-688012/input.json",
+      "sha256": "3dcce43a05deb2faf92236af8c1b979c07334a34d5b7debb30d25057ab611746",
+      "byte_size": 228626,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\3d\\3dcce43a05deb2faf92236af8c1b979c07334a34d5b7debb30d25057ab611746"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\model_template.json",
+      "relative_path": "CN-688012/model_template.json",
+      "sha256": "cb94a73bee7b25333a7bc729bbce57b22fe638258f2717e8d2e69d98668842ef",
+      "byte_size": 68733,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\cb\\cb94a73bee7b25333a7bc729bbce57b22fe638258f2717e8d2e69d98668842ef"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\publications.jsonl",
+      "relative_path": "CN-688012/publications.jsonl",
+      "sha256": "a6596924e9ad1657b0d0c10d54ac6018e4e69d20104872574136d613390cb3c3",
+      "byte_size": 4634,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\a6\\a6596924e9ad1657b0d0c10d54ac6018e4e69d20104872574136d613390cb3c3"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\q12026.pdf",
+      "relative_path": "CN-688012/q12026.pdf",
+      "sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "byte_size": 217264,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\ab\\ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\q12026_pages.json",
+      "relative_path": "CN-688012/q12026_pages.json",
+      "sha256": "5aefa6e3593eb9b7aa49b466ad6f0c056d96d2d979ba687b457657128ee616f5",
+      "byte_size": 28831,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\5a\\5aefa6e3593eb9b7aa49b466ad6f0c056d96d2d979ba687b457657128ee616f5"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\recent_cninfo_metadata.json",
+      "relative_path": "CN-688012/recent_cninfo_metadata.json",
+      "sha256": "45a2b871e31258fbd21771a182468e7a8682fbe88ccb84f2656b31a5f5982834",
+      "byte_size": 18775,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\45\\45a2b871e31258fbd21771a182468e7a8682fbe88ccb84f2656b31a5f5982834"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow2026.html",
+      "relative_path": "CN-688012/roadshow2026.html",
+      "sha256": "076f6b7c7511f2faa69e71486ea052987350d365a34d8ffb36a1754f3cfb15fd",
+      "byte_size": 2996,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\07\\076f6b7c7511f2faa69e71486ea052987350d365a34d8ffb36a1754f3cfb15fd"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow_app_script.html",
+      "relative_path": "CN-688012/roadshow_app_script.html",
+      "sha256": "739d5de1eee84162c572ff1a8284bd1af73ad8a46351716d5e0f4ac7e0dd868a",
+      "byte_size": 920102,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\73\\739d5de1eee84162c572ff1a8284bd1af73ad8a46351716d5e0f4ac7e0dd868a"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow_precollect_questions.json",
+      "relative_path": "CN-688012/roadshow_precollect_questions.json",
+      "sha256": "ef191dd32a1f1f37c6bd9e76dab9ca398d6beae1e2731295e69563b807826569",
+      "byte_size": 89,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\ef\\ef191dd32a1f1f37c6bd9e76dab9ca398d6beae1e2731295e69563b807826569"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow_precollect_questions_page1.json",
+      "relative_path": "CN-688012/roadshow_precollect_questions_page1.json",
+      "sha256": "f890ba0c4f075797188a93205f2346d3f838f17a2d802a3c8ed11d84c02cfaf0",
+      "byte_size": 5085,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\f8\\f890ba0c4f075797188a93205f2346d3f838f17a2d802a3c8ed11d84c02cfaf0"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow_precollect_questions_page10.json",
+      "relative_path": "CN-688012/roadshow_precollect_questions_page10.json",
+      "sha256": "784217fbfdddc06cd53235b3bef8159250b1d4209761092577d35ebb0f313234",
+      "byte_size": 3871,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\78\\784217fbfdddc06cd53235b3bef8159250b1d4209761092577d35ebb0f313234"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow_precollect_questions_page2.json",
+      "relative_path": "CN-688012/roadshow_precollect_questions_page2.json",
+      "sha256": "931e8438c367edc75d4bae274c1b77273eb310efcd01edfc647b721e546a328c",
+      "byte_size": 4364,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\93\\931e8438c367edc75d4bae274c1b77273eb310efcd01edfc647b721e546a328c"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow_precollect_questions_page3.json",
+      "relative_path": "CN-688012/roadshow_precollect_questions_page3.json",
+      "sha256": "118abcaa9883bd2aab23fd2b89d856d56e338a307972a51a6faa308192c9acb7",
+      "byte_size": 3947,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\11\\118abcaa9883bd2aab23fd2b89d856d56e338a307972a51a6faa308192c9acb7"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow_precollect_questions_page4.json",
+      "relative_path": "CN-688012/roadshow_precollect_questions_page4.json",
+      "sha256": "621eeef81cc7e5a80ed3231d9d24c07f123d52de3f92251a629b11b0d7aa4357",
+      "byte_size": 4538,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\62\\621eeef81cc7e5a80ed3231d9d24c07f123d52de3f92251a629b11b0d7aa4357"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow_precollect_questions_page5.json",
+      "relative_path": "CN-688012/roadshow_precollect_questions_page5.json",
+      "sha256": "08d2f438308d015d83a3afeef324c886757c512dc6c226b862f85c02f85fbc78",
+      "byte_size": 3915,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\08\\08d2f438308d015d83a3afeef324c886757c512dc6c226b862f85c02f85fbc78"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow_precollect_questions_page6.json",
+      "relative_path": "CN-688012/roadshow_precollect_questions_page6.json",
+      "sha256": "fe5138e7b8270629a4cd4dd34cf9b22127244bb63800d203b878f1fddb6b56f1",
+      "byte_size": 6657,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\fe\\fe5138e7b8270629a4cd4dd34cf9b22127244bb63800d203b878f1fddb6b56f1"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow_precollect_questions_page7.json",
+      "relative_path": "CN-688012/roadshow_precollect_questions_page7.json",
+      "sha256": "9c29223f4e1fbff9b3c6811a61741dc7d447bf2ea9cdcf3e8985d344a915e2dc",
+      "byte_size": 5421,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\9c\\9c29223f4e1fbff9b3c6811a61741dc7d447bf2ea9cdcf3e8985d344a915e2dc"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow_precollect_questions_page8.json",
+      "relative_path": "CN-688012/roadshow_precollect_questions_page8.json",
+      "sha256": "badbf360188e86033e368ab41c12a61503d1045d54aec0cb9b97a621ff1690b6",
+      "byte_size": 5154,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\ba\\badbf360188e86033e368ab41c12a61503d1045d54aec0cb9b97a621ff1690b6"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow_precollect_questions_page9.json",
+      "relative_path": "CN-688012/roadshow_precollect_questions_page9.json",
+      "sha256": "d4c4b239fb71f572ed6af815629e853b3e10004f03a553d1ee100afd17e8d659",
+      "byte_size": 4433,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\d4\\d4c4b239fb71f572ed6af815629e853b3e10004f03a553d1ee100afd17e8d659"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow_public_questions.json",
+      "relative_path": "CN-688012/roadshow_public_questions.json",
+      "sha256": "520684e158f0f10191be84c435cb5600fff0a6cbea8d41442dfee9647d497d6f",
+      "byte_size": 557100,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\52\\520684e158f0f10191be84c435cb5600fff0a6cbea8d41442dfee9647d497d6f"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\semi_web_open_snapshot.json",
+      "relative_path": "CN-688012/semi_web_open_snapshot.json",
+      "sha256": "3da627dd2754e73dc70e974dccfdb356e09de9d92d594da2c8879a4e7a2a0e8d",
+      "byte_size": 15691,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\3d\\3da627dd2754e73dc70e974dccfdb356e09de9d92d594da2c8879a4e7a2a0e8d"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\snapshot.json",
+      "relative_path": "CN-688012/snapshot.json",
+      "sha256": "b041cb7d400b9abacf64391a6b662cdc30caeffe41e4559355f2979b87f39856",
+      "byte_size": 670590,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\b0\\b041cb7d400b9abacf64391a6b662cdc30caeffe41e4559355f2979b87f39856"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\snapshot_v2.json",
+      "relative_path": "CN-688012/snapshot_v2.json",
+      "sha256": "8768495ec9b6df68bb9ab57cfc63c924023ca1b6ca38949a923cba6ec39484e5",
+      "byte_size": 748108,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\87\\8768495ec9b6df68bb9ab57cfc63c924023ca1b6ca38949a923cba6ec39484e5"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\template.json",
+      "relative_path": "CN-688012/template.json",
+      "sha256": "f402ae086026a72d55aeed49eda6f5ea9cbfb63f237c10688a3bd163a6cd53ef",
+      "byte_size": 85740,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\f4\\f402ae086026a72d55aeed49eda6f5ea9cbfb63f237c10688a3bd163a6cd53ef"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\trust_boundary.md",
+      "relative_path": "CN-688012/trust_boundary.md",
+      "sha256": "042dc7cf66e64b8e0939db30fe59d652038610c359185b53e42a5cb07dfa7670",
+      "byte_size": 638,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\04\\042dc7cf66e64b8e0939db30fe59d652038610c359185b53e42a5cb07dfa7670"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v1\\forecast.json",
+      "relative_path": "CN-688012/v1/forecast.json",
+      "sha256": "eb3dfb9fb0849b781d74a7046eb7d1950ff8b3d419c000b0452e1f7e8997c09b",
+      "byte_size": 440640,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\eb\\eb3dfb9fb0849b781d74a7046eb7d1950ff8b3d419c000b0452e1f7e8997c09b"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v1\\forecast.md",
+      "relative_path": "CN-688012/v1/forecast.md",
+      "sha256": "963ea5a374f324aadf59b38092ad032328fb504ffe8016b7bc8334fa8595f801",
+      "byte_size": 80899,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\96\\963ea5a374f324aadf59b38092ad032328fb504ffe8016b7bc8334fa8595f801"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v1\\input.json",
+      "relative_path": "CN-688012/v1/input.json",
+      "sha256": "22ffd99fd7ea452debc59d16e6f39938adff41a75a57316c1b1ac7d5fc9c1aac",
+      "byte_size": 203621,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\22\\22ffd99fd7ea452debc59d16e6f39938adff41a75a57316c1b1ac7d5fc9c1aac"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v1\\snapshot.json",
+      "relative_path": "CN-688012/v1/snapshot.json",
+      "sha256": "b041cb7d400b9abacf64391a6b662cdc30caeffe41e4559355f2979b87f39856",
+      "byte_size": 670590,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\b0\\b041cb7d400b9abacf64391a6b662cdc30caeffe41e4559355f2979b87f39856"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482880.pdf",
+      "relative_path": "CN-688012/v3/announcements/1225482880.pdf",
+      "sha256": "f05bb880cd2324cf1b0cbb06780a00003c4846438d09b4e3825de710af0067aa",
+      "byte_size": 309696,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\f0\\f05bb880cd2324cf1b0cbb06780a00003c4846438d09b4e3825de710af0067aa"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482880_pages.json",
+      "relative_path": "CN-688012/v3/announcements/1225482880_pages.json",
+      "sha256": "eb924faa49b36d6003799f78163333248725efb3a09e94cc64026e991b1e0b53",
+      "byte_size": 20922,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\eb\\eb924faa49b36d6003799f78163333248725efb3a09e94cc64026e991b1e0b53"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482882.pdf",
+      "relative_path": "CN-688012/v3/announcements/1225482882.pdf",
+      "sha256": "231e464bb176196daff17f0f7281ee8a3c656ae5e92f29f15285dbe371e7e73a",
+      "byte_size": 214671,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\23\\231e464bb176196daff17f0f7281ee8a3c656ae5e92f29f15285dbe371e7e73a"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482882_pages.json",
+      "relative_path": "CN-688012/v3/announcements/1225482882_pages.json",
+      "sha256": "5ef968b0588cbd6463c1b4ca661237ef3d90af423a701ac2631ae354094fdc1f",
+      "byte_size": 29577,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\5e\\5ef968b0588cbd6463c1b4ca661237ef3d90af423a701ac2631ae354094fdc1f"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482893.pdf",
+      "relative_path": "CN-688012/v3/announcements/1225482893.pdf",
+      "sha256": "a2e4d45ff51d85162531eaa11e68f2f7fef2dd4018d1ad8845ac522ea20f8471",
+      "byte_size": 131468,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\a2\\a2e4d45ff51d85162531eaa11e68f2f7fef2dd4018d1ad8845ac522ea20f8471"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482893_pages.json",
+      "relative_path": "CN-688012/v3/announcements/1225482893_pages.json",
+      "sha256": "6579f5c0e962b4ab0b35535533a99f317023f4151458ee01ff9ac393cb28a2db",
+      "byte_size": 5903,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\65\\6579f5c0e962b4ab0b35535533a99f317023f4151458ee01ff9ac393cb28a2db"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482894.pdf",
+      "relative_path": "CN-688012/v3/announcements/1225482894.pdf",
+      "sha256": "74fc4afd9a509136b96a8e38f12b30192a48c3d44f8a2174b97abbce18ee6d03",
+      "byte_size": 131654,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\74\\74fc4afd9a509136b96a8e38f12b30192a48c3d44f8a2174b97abbce18ee6d03"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482894_pages.json",
+      "relative_path": "CN-688012/v3/announcements/1225482894_pages.json",
+      "sha256": "6f9da39cb4f7443e7360a6ff5fd95d3867581dadf42f70043d902572c13b540b",
+      "byte_size": 8045,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\6f\\6f9da39cb4f7443e7360a6ff5fd95d3867581dadf42f70043d902572c13b540b"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482911.pdf",
+      "relative_path": "CN-688012/v3/announcements/1225482911.pdf",
+      "sha256": "9a9e6584fdee35342059b37c5645c3b55d143f3145af595c77f82230c0ccc0c3",
+      "byte_size": 160451,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\9a\\9a9e6584fdee35342059b37c5645c3b55d143f3145af595c77f82230c0ccc0c3"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482911_pages.json",
+      "relative_path": "CN-688012/v3/announcements/1225482911_pages.json",
+      "sha256": "6b9477291617e7977d42a7c832a0287c082182658935b2ff2225f32708df2f09",
+      "byte_size": 9629,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\6b\\6b9477291617e7977d42a7c832a0287c082182658935b2ff2225f32708df2f09"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482916.pdf",
+      "relative_path": "CN-688012/v3/announcements/1225482916.pdf",
+      "sha256": "16cd0b8ebdb8e2d4c42d14b120087216278a9938d863fadc54b669835a7f3f4b",
+      "byte_size": 456202,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\16\\16cd0b8ebdb8e2d4c42d14b120087216278a9938d863fadc54b669835a7f3f4b"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482916_pages.json",
+      "relative_path": "CN-688012/v3/announcements/1225482916_pages.json",
+      "sha256": "70a95f706d25276e44644aa6a550cb6ac3875b6f93ce69b0710325b359d160bf",
+      "byte_size": 9740,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\70\\70a95f706d25276e44644aa6a550cb6ac3875b6f93ce69b0710325b359d160bf"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482917.pdf",
+      "relative_path": "CN-688012/v3/announcements/1225482917.pdf",
+      "sha256": "b7b72c3e07eccad9a2781a928ce135851ef37ef3c1ff8ba1aae6aae96c605685",
+      "byte_size": 141036,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\b7\\b7b72c3e07eccad9a2781a928ce135851ef37ef3c1ff8ba1aae6aae96c605685"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482917_pages.json",
+      "relative_path": "CN-688012/v3/announcements/1225482917_pages.json",
+      "sha256": "3d91ae3278fb0c611577f816f321ed10719837f5c3286db943c42f6ca5945815",
+      "byte_size": 5986,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\3d\\3d91ae3278fb0c611577f816f321ed10719837f5c3286db943c42f6ca5945815"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482918.pdf",
+      "relative_path": "CN-688012/v3/announcements/1225482918.pdf",
+      "sha256": "4b34335aa53528abe783eeea0af05bfc38e74a3c76fc7acfbc8be9b5f3acfaca",
+      "byte_size": 128476,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\4b\\4b34335aa53528abe783eeea0af05bfc38e74a3c76fc7acfbc8be9b5f3acfaca"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482918_pages.json",
+      "relative_path": "CN-688012/v3/announcements/1225482918_pages.json",
+      "sha256": "2e121b3e21490178ac26ff1fa97031487b3d142f216ce106601d12703e1a2e08",
+      "byte_size": 7400,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\2e\\2e121b3e21490178ac26ff1fa97031487b3d142f216ce106601d12703e1a2e08"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225582793.pdf",
+      "relative_path": "CN-688012/v3/announcements/1225582793.pdf",
+      "sha256": "13675a986cfc976f3ea9d8f4abe82d1ae8058904b556620e0439269cceda9566",
+      "byte_size": 131041,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\13\\13675a986cfc976f3ea9d8f4abe82d1ae8058904b556620e0439269cceda9566"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225582793_pages.json",
+      "relative_path": "CN-688012/v3/announcements/1225582793_pages.json",
+      "sha256": "e1e9edf293fea4435100f58cb76bce36a58bb8f93b648d80ab80f6b597a89f11",
+      "byte_size": 5475,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\e1\\e1e9edf293fea4435100f58cb76bce36a58bb8f93b648d80ab80f6b597a89f11"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\forecast.json",
+      "relative_path": "CN-688012/v3/forecast.json",
+      "sha256": "1913f5e376590c9a5d77999f8d9c4072a3114e5fc58288ac25f11b31b4ebdea1",
+      "byte_size": 614314,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\CN-688012\\forecast.json"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\forecast.md",
+      "relative_path": "CN-688012/v3/forecast.md",
+      "sha256": "890795ee5cb5706834d81a8fea85a840fa7f765bbe51717ea550faf1098871eb",
+      "byte_size": 108159,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\CN-688012\\forecast.md"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\input.json",
+      "relative_path": "CN-688012/v3/input.json",
+      "sha256": "478ae3345e6011079929c05f01b8adec959c974581c703239271c1f9ba4e7ea4",
+      "byte_size": 288840,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\CN-688012\\input.json"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\publications.jsonl",
+      "relative_path": "CN-688012/v3/publications.jsonl",
+      "sha256": "3767a08d72cf31c66fa153aebc7341207768afd1646876fe1aba5c8998a17947",
+      "byte_size": 2286,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\37\\3767a08d72cf31c66fa153aebc7341207768afd1646876fe1aba5c8998a17947"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\snapshot.json",
+      "relative_path": "CN-688012/v3/snapshot.json",
+      "sha256": "bd7ec3a23f2331f48e937be62e1d960e687f9c9ae10a4e6c70a305f67f423741",
+      "byte_size": 938504,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\CN-688012\\snapshot.json"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\annual-p218.png",
+      "relative_path": "CN-688012-review/annual-p218.png",
+      "sha256": "715143872000098d8437ef8503e7122673d106f87a8fcb6970964a74d7952e8d",
+      "byte_size": 270398,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\annual-p219.png",
+      "relative_path": "CN-688012-review/annual-p219.png",
+      "sha256": "4a7003621c3075217c7a06dda9679805ac9dcaafefd03b1503118d50044b593d",
+      "byte_size": 241589,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\annual-p25.png",
+      "relative_path": "CN-688012-review/annual-p25.png",
+      "sha256": "d0a66e498ca03aec5324560c2e5fb8063a94576261a5d0c0aa41b85a47d6bb1c",
+      "byte_size": 372727,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\annual-p65.png",
+      "relative_path": "CN-688012-review/annual-p65.png",
+      "sha256": "904959d2fc627770eb505177ac7e9256729abd034c1bff13f2bbee092b54455e",
+      "byte_size": 329526,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\annual.pdf",
+      "relative_path": "CN-688012-review/annual.pdf",
+      "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "byte_size": 9165875,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\d6\\d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\forecast.json",
+      "relative_path": "CN-688012-review/forecast.json",
+      "sha256": "a7b2797fecb8edb1b2ba2641b3d65c7996e938427fc01eed1f8e513aa7be420d",
+      "byte_size": 491060,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\a7\\a7b2797fecb8edb1b2ba2641b3d65c7996e938427fc01eed1f8e513aa7be420d"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\forecast.md",
+      "relative_path": "CN-688012-review/forecast.md",
+      "sha256": "f6bca82bf5fd5b1db373685da4bd910f510ffcc1d780070b6ab747c6d37a8a83",
+      "byte_size": 91014,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\f6\\f6bca82bf5fd5b1db373685da4bd910f510ffcc1d780070b6ab747c6d37a8a83"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\half-p176.png",
+      "relative_path": "CN-688012-review/half-p176.png",
+      "sha256": "d61ed44c007bba042489270c2ccd051b0fd865e9f88ca34e2956d6bc281a32a2",
+      "byte_size": 273897,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\half-p177.png",
+      "relative_path": "CN-688012-review/half-p177.png",
+      "sha256": "44367521080505ca56c02ddc13a611aca98cad05161e443b0d20d8ee5e98b239",
+      "byte_size": 397352,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\half.pdf",
+      "relative_path": "CN-688012-review/half.pdf",
+      "sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "byte_size": 3149962,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\18\\182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\independent_sse_api.json",
+      "relative_path": "CN-688012-review/independent_sse_api.json",
+      "sha256": "520684e158f0f10191be84c435cb5600fff0a6cbea8d41442dfee9647d497d6f",
+      "byte_size": 557100,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\52\\520684e158f0f10191be84c435cb5600fff0a6cbea8d41442dfee9647d497d6f"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\input.json",
+      "relative_path": "CN-688012-review/input.json",
+      "sha256": "3dcce43a05deb2faf92236af8c1b979c07334a34d5b7debb30d25057ab611746",
+      "byte_size": 228626,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\3d\\3dcce43a05deb2faf92236af8c1b979c07334a34d5b7debb30d25057ab611746"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\publications.jsonl",
+      "relative_path": "CN-688012-review/publications.jsonl",
+      "sha256": "7cb6d506842fe5524f86e9f458cede70c9959d9ec85624f43a4b14554607f728",
+      "byte_size": 710,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\7c\\7cb6d506842fe5524f86e9f458cede70c9959d9ec85624f43a4b14554607f728"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\v3\\1225482894-p4.png",
+      "relative_path": "CN-688012-review/v3/1225482894-p4.png",
+      "sha256": "9175c5f03000226a90274903aa5275c933249af8bef5d43ad8c2eddabfcede11",
+      "byte_size": 172332,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\v3\\1225482911-p4.png",
+      "relative_path": "CN-688012-review/v3/1225482911-p4.png",
+      "sha256": "de97ce2110f430c1f55d6494e3f5fc3ede35ccbe5de0d8d0c97196b8219baf9d",
+      "byte_size": 212748,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\v3\\1225482917-p2.png",
+      "relative_path": "CN-688012-review/v3/1225482917-p2.png",
+      "sha256": "a64155ed9fce8afa1ce2dbc43be545627a749542769383ca97b42e379c0c538d",
+      "byte_size": 172519,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\v3\\1225482918-p3.png",
+      "relative_path": "CN-688012-review/v3/1225482918-p3.png",
+      "sha256": "42a009729edae5b952f84db4e450fdf7c2668385007ee1ef64c6ac71c58ba417",
+      "byte_size": 214483,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\v3\\forecast.json",
+      "relative_path": "CN-688012-review/v3/forecast.json",
+      "sha256": "1913f5e376590c9a5d77999f8d9c4072a3114e5fc58288ac25f11b31b4ebdea1",
+      "byte_size": 614314,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\CN-688012\\forecast.json"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\v3\\forecast.md",
+      "relative_path": "CN-688012-review/v3/forecast.md",
+      "sha256": "890795ee5cb5706834d81a8fea85a840fa7f765bbe51717ea550faf1098871eb",
+      "byte_size": 108159,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\CN-688012\\forecast.md"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\v3\\input.json",
+      "relative_path": "CN-688012-review/v3/input.json",
+      "sha256": "478ae3345e6011079929c05f01b8adec959c974581c703239271c1f9ba4e7ea4",
+      "byte_size": 288840,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\CN-688012\\input.json"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\v3\\publications.jsonl",
+      "relative_path": "CN-688012-review/v3/publications.jsonl",
+      "sha256": "2160f0f1d4124abbfbf675d348edcf0f4def70ec2c9005de8b7a4cc137370bfd",
+      "byte_size": 710,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\21\\2160f0f1d4124abbfbf675d348edcf0f4def70ec2c9005de8b7a4cc137370bfd"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\annual_2024_cover.png",
+      "relative_path": "HK-00700/annual_2024_cover.png",
+      "sha256": "c4fb241510872edf921a9b4b94e90600336e472a9718b3cad1f6f43e35501c8e",
+      "byte_size": 155489,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\annual_2024_pages.json",
+      "relative_path": "HK-00700/annual_2024_pages.json",
+      "sha256": "54c0415ecced69425716bd601cde01a4de55a3e785ea8b5a00ea8601b89d68e3",
+      "byte_size": 489149,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\54\\54c0415ecced69425716bd601cde01a4de55a3e785ea8b5a00ea8601b89d68e3"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\annual_2025_pages.json",
+      "relative_path": "HK-00700/annual_2025_pages.json",
+      "sha256": "a7083f3f9903a1737e9324f4c7a6560c5edf4a4899f0a029e74805f638614d1c",
+      "byte_size": 495087,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\a7\\a7083f3f9903a1737e9324f4c7a6560c5edf4a4899f0a029e74805f638614d1c"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\corporate_overview_20260916.pdf",
+      "relative_path": "HK-00700/corporate_overview_20260916.pdf",
+      "sha256": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+      "byte_size": 1676729,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\a9\\a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\corporate_overview_pages.json",
+      "relative_path": "HK-00700/corporate_overview_pages.json",
+      "sha256": "8f627606a5f719059a3618d38123608b7d157ca9cc77c50c9ec52a5144d5729e",
+      "byte_size": 23864,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\8f\\8f627606a5f719059a3618d38123608b7d157ca9cc77c50c9ec52a5144d5729e"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast-v1.json",
+      "relative_path": "HK-00700/forecast-v1.json",
+      "sha256": "6796b643ec444950eed608f3e87250931b92d0c2f13d0aa27d8a922ea9a5c220",
+      "byte_size": 429594,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\67\\6796b643ec444950eed608f3e87250931b92d0c2f13d0aa27d8a922ea9a5c220"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast-v1.md",
+      "relative_path": "HK-00700/forecast-v1.md",
+      "sha256": "48c412c766ffe8d3da359e52f2e25762584b520c36d0cfad8debaa4871a4ca99",
+      "byte_size": 57816,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\48\\48c412c766ffe8d3da359e52f2e25762584b520c36d0cfad8debaa4871a4ca99"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast.json",
+      "relative_path": "HK-00700/forecast.json",
+      "sha256": "1c10deb1b93769632c553e51155def18afb4b1adfe8331c0eb511d52478ab3de",
+      "byte_size": 428931,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\1c\\1c10deb1b93769632c553e51155def18afb4b1adfe8331c0eb511d52478ab3de"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast.md",
+      "relative_path": "HK-00700/forecast.md",
+      "sha256": "1d152804ffd09e4e7b0d49215563a097a09b569e0af70e35cd91d30ffba1823b",
+      "byte_size": 58089,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\1d\\1d152804ffd09e4e7b0d49215563a097a09b569e0af70e35cd91d30ffba1823b"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input-v1.json",
+      "relative_path": "HK-00700/input-v1.json",
+      "sha256": "da71c4b0787861c29f40369dd457799e3925e9d65f215e6cb2c546f2c2509e74",
+      "byte_size": 192717,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\da\\da71c4b0787861c29f40369dd457799e3925e9d65f215e6cb2c546f2c2509e74"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input.json",
+      "relative_path": "HK-00700/input.json",
+      "sha256": "13078fd040fefcc8382f9ddd43d0044821aaf3bcfaecd80f36615cefb14476f1",
+      "byte_size": 192154,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\13\\13078fd040fefcc8382f9ddd43d0044821aaf3bcfaecd80f36615cefb14476f1"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\interim_2026_official.pdf",
+      "relative_path": "HK-00700/interim_2026_official.pdf",
+      "sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "byte_size": 5135808,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\41\\4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\interim_2026_official_pages.json",
+      "relative_path": "HK-00700/interim_2026_official_pages.json",
+      "sha256": "bf8085cf67605d6830e870676626e9e61a460c6bf1852dd7a329ef1a68847ba9",
+      "byte_size": 213250,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\bf\\bf8085cf67605d6830e870676626e9e61a460c6bf1852dd7a329ef1a68847ba9"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\netease_2q2026.html",
+      "relative_path": "HK-00700/netease_2q2026.html",
+      "sha256": "ba4cd2d0507d5d3211d642a8f6d45aba11e0ac245f5757d58e525223ebde4c98",
+      "byte_size": 909908,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\ba\\ba4cd2d0507d5d3211d642a8f6d45aba11e0ac245f5757d58e525223ebde4c98"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\presentation_2q2026.pdf",
+      "relative_path": "HK-00700/presentation_2q2026.pdf",
+      "sha256": "0b749a74c4e5af449a27c76c69cff824e525794e14d5fbe0bfee927e6013029b",
+      "byte_size": 987,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\0b\\0b749a74c4e5af449a27c76c69cff824e525794e14d5fbe0bfee927e6013029b"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\publications.jsonl",
+      "relative_path": "HK-00700/publications.jsonl",
+      "sha256": "00265bb86cad76ece54247b7e2d26a8c2ba0b9fd2255b9cdc2cdf44a798adaf9",
+      "byte_size": 4634,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\00\\00265bb86cad76ece54247b7e2d26a8c2ba0b9fd2255b9cdc2cdf44a798adaf9"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\results_2q2026.pdf",
+      "relative_path": "HK-00700/results_2q2026.pdf",
+      "sha256": "64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+      "byte_size": 412297,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\64\\64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\results_2q2026_pages.json",
+      "relative_path": "HK-00700/results_2q2026_pages.json",
+      "sha256": "c221750ae71480f6f918a3e358844a56c015f1f70194faac20a558e4f6a618a0",
+      "byte_size": 24573,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\c2\\c221750ae71480f6f918a3e358844a56c015f1f70194faac20a558e4f6a618a0"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\review-HK-00700-rf_hk_independent_review-v3\\cli.stderr.txt",
+      "relative_path": "HK-00700/review-HK-00700-rf_hk_independent_review-v3/cli.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\e3\\e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\review-HK-00700-rf_hk_independent_review-v3\\cli.stdout.txt",
+      "relative_path": "HK-00700/review-HK-00700-rf_hk_independent_review-v3/cli.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\e3\\e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\review-HK-00700-rf_hk_independent_review-v3\\forecast.json",
+      "relative_path": "HK-00700/review-HK-00700-rf_hk_independent_review-v3/forecast.json",
+      "sha256": "3ea402d2494e1a754de8cb1f406797d1d3f366622d4c3c6cc8621d18a7524f61",
+      "byte_size": 1094149,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\3e\\3ea402d2494e1a754de8cb1f406797d1d3f366622d4c3c6cc8621d18a7524f61"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\review-HK-00700-rf_hk_independent_review-v3\\forecast.md",
+      "relative_path": "HK-00700/review-HK-00700-rf_hk_independent_review-v3/forecast.md",
+      "sha256": "cf4ea50602e2ad79037e666ee6e390421fe5b1f6d57f46dfa9c87c55e176a7d5",
+      "byte_size": 170196,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\cf\\cf4ea50602e2ad79037e666ee6e390421fe5b1f6d57f46dfa9c87c55e176a7d5"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\review-HK-00700-rf_hk_independent_review-v3\\input.json",
+      "relative_path": "HK-00700/review-HK-00700-rf_hk_independent_review-v3/input.json",
+      "sha256": "c791b85406f62552e9eb9cba2a1adf8cbf36447ff432164c9e53a8426814fc87",
+      "byte_size": 524854,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\c7\\c791b85406f62552e9eb9cba2a1adf8cbf36447ff432164c9e53a8426814fc87"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\review-HK-00700-rf_hk_independent_review-v3\\publications.jsonl",
+      "relative_path": "HK-00700/review-HK-00700-rf_hk_independent_review-v3/publications.jsonl",
+      "sha256": "223fb5a410ea36b751b57e898c1e90a565ed8bcae95ee05175bab0164f6fe7dc",
+      "byte_size": 710,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\22\\223fb5a410ea36b751b57e898c1e90a565ed8bcae95ee05175bab0164f6fe7dc"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\review-HK-00700-rf_hk_independent_review-v4\\cli.stderr.txt",
+      "relative_path": "HK-00700/review-HK-00700-rf_hk_independent_review-v4/cli.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\e3\\e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\review-HK-00700-rf_hk_independent_review-v4\\cli.stdout.txt",
+      "relative_path": "HK-00700/review-HK-00700-rf_hk_independent_review-v4/cli.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\e3\\e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\review-HK-00700-rf_hk_independent_review-v4\\forecast.json",
+      "relative_path": "HK-00700/review-HK-00700-rf_hk_independent_review-v4/forecast.json",
+      "sha256": "7d6fc7037ba34bc57a4f80dcef688f2f239db6a58c9aa7ee77cc00a5b1b4d27a",
+      "byte_size": 1095377,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\HK-00700\\forecast.json"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\review-HK-00700-rf_hk_independent_review-v4\\forecast.md",
+      "relative_path": "HK-00700/review-HK-00700-rf_hk_independent_review-v4/forecast.md",
+      "sha256": "2d3478d32179a81d46563a2533d47d39e9537929ce4c3b816528b8326137a111",
+      "byte_size": 170792,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\HK-00700\\forecast.md"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\review-HK-00700-rf_hk_independent_review-v4\\input.json",
+      "relative_path": "HK-00700/review-HK-00700-rf_hk_independent_review-v4/input.json",
+      "sha256": "71990a6e6d2b4fd489a7c31b80c1892b3470ae96cabdfefc1693a01e978d1b5b",
+      "byte_size": 525466,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\HK-00700\\input.json"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\review-HK-00700-rf_hk_independent_review-v4\\publications.jsonl",
+      "relative_path": "HK-00700/review-HK-00700-rf_hk_independent_review-v4/publications.jsonl",
+      "sha256": "543bfc14448f3a89211f7458626761a17e19b2e6f919b8c639bad2409de341ff",
+      "byte_size": 710,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\54\\543bfc14448f3a89211f7458626761a17e19b2e6f919b8c639bad2409de341ff"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\snapshot-v2.json",
+      "relative_path": "HK-00700/snapshot-v2.json",
+      "sha256": "688de832c85f3eaf8a70957549b4c6a0afc006c65f203a05f480612eb1d0e794",
+      "byte_size": 651923,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\68\\688de832c85f3eaf8a70957549b4c6a0afc006c65f203a05f480612eb1d0e794"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\snapshot.json",
+      "relative_path": "HK-00700/snapshot.json",
+      "sha256": "879b70b7fb84faaaf50e2d41cc9f428b9ed0118f302e3b27a0ee68ef3bcaff94",
+      "byte_size": 653289,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\87\\879b70b7fb84faaaf50e2d41cc9f428b9ed0118f302e3b27a0ee68ef3bcaff94"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\template.json",
+      "relative_path": "HK-00700/template.json",
+      "sha256": "3702539c8ed026199bce7599cfe1d2097d60de7e14c67a156856be9f1a70656a",
+      "byte_size": 88188,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\37\\3702539c8ed026199bce7599cfe1d2097d60de7e14c67a156856be9f1a70656a"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\template_growth.json",
+      "relative_path": "HK-00700/template_growth.json",
+      "sha256": "87551edf4b538171b7b5b51177f0dca2b4537eddc7d70c72398bbd7a7cde53d7",
+      "byte_size": 86928,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\87\\87551edf4b538171b7b5b51177f0dca2b4537eddc7d70c72398bbd7a7cde53d7"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\tencent_announcements_index.html",
+      "relative_path": "HK-00700/tencent_announcements_index.html",
+      "sha256": "93782c3b7eb7a3558113b07c8ffd32f07ead78ad08d80331db9d8563571f6156",
+      "byte_size": 184217,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\93\\93782c3b7eb7a3558113b07c8ffd32f07ead78ad08d80331db9d8563571f6156"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\tencent_results_index.html",
+      "relative_path": "HK-00700/tencent_results_index.html",
+      "sha256": "e7ac34c8e6826016c6b6a482ab6fa658328492ab67d88268c4e8bd8476714559",
+      "byte_size": 186626,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\e7\\e7ac34c8e6826016c6b6a482ab6fa658328492ab67d88268c4e8bd8476714559"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\TRUST_BOUNDARY.md",
+      "relative_path": "HK-00700/TRUST_BOUNDARY.md",
+      "sha256": "ee2b7aa34132f3d50c31bef90441375f8ba258c4b7db54afc82d680eaf7f1a66",
+      "byte_size": 767,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\ee\\ee2b7aa34132f3d50c31bef90441375f8ba258c4b7db54afc82d680eaf7f1a66"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\context_inventory.json",
+      "relative_path": "HK-00700/v3/context_inventory.json",
+      "sha256": "4b3cf75d053ebad5ff0c55d6bbc09d69a27b49464e947d3e5528e3fc2c3cafd9",
+      "byte_size": 61525,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\4b\\4b3cf75d053ebad5ff0c55d6bbc09d69a27b49464e947d3e5528e3fc2c3cafd9"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\forecast.json",
+      "relative_path": "HK-00700/v3/forecast.json",
+      "sha256": "3ea402d2494e1a754de8cb1f406797d1d3f366622d4c3c6cc8621d18a7524f61",
+      "byte_size": 1094149,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\3e\\3ea402d2494e1a754de8cb1f406797d1d3f366622d4c3c6cc8621d18a7524f61"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\forecast.md",
+      "relative_path": "HK-00700/v3/forecast.md",
+      "sha256": "cf4ea50602e2ad79037e666ee6e390421fe5b1f6d57f46dfa9c87c55e176a7d5",
+      "byte_size": 170196,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\cf\\cf4ea50602e2ad79037e666ee6e390421fe5b1f6d57f46dfa9c87c55e176a7d5"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\FY2025_page_1_visual.png",
+      "relative_path": "HK-00700/v3/FY2025_page_1_visual.png",
+      "sha256": "828d4fa6241f9e21bac3ece50db278819394b74e6b5be3c0a66f951655c0aeb2",
+      "byte_size": 329629,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\FY2025_page_4_visual.png",
+      "relative_path": "HK-00700/v3/FY2025_page_4_visual.png",
+      "sha256": "874d39e45fcf76c60303509b8ec92e0a2e2fd3c26e86f9aaf1d9d15749eafc0d",
+      "byte_size": 184195,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\input.json",
+      "relative_path": "HK-00700/v3/input.json",
+      "sha256": "c791b85406f62552e9eb9cba2a1adf8cbf36447ff432164c9e53a8426814fc87",
+      "byte_size": 524854,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\c7\\c791b85406f62552e9eb9cba2a1adf8cbf36447ff432164c9e53a8426814fc87"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\official_auth_0.bin",
+      "relative_path": "HK-00700/v3/official_auth_0.bin",
+      "sha256": "1d56c1549bda2f9f71b9a6cb09f771c361f1a2d340cadc46053bb55db0c56a2b",
+      "byte_size": 2057,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\1d\\1d56c1549bda2f9f71b9a6cb09f771c361f1a2d340cadc46053bb55db0c56a2b"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\official_auth_1.bin",
+      "relative_path": "HK-00700/v3/official_auth_1.bin",
+      "sha256": "a15d020198d688deaff63f47610e18951a71382d70e377623e3e4da101fb6fa0",
+      "byte_size": 193637,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\a1\\a15d020198d688deaff63f47610e18951a71382d70e377623e3e4da101fb6fa0"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\official_auth_2.bin",
+      "relative_path": "HK-00700/v3/official_auth_2.bin",
+      "sha256": "0bffc0570f8c2322d91b9c694c3107e0ef84e98624bc263f9f94e71f751173ca",
+      "byte_size": 982,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\0b\\0bffc0570f8c2322d91b9c694c3107e0ef84e98624bc263f9f94e71f751173ca"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\publications.jsonl",
+      "relative_path": "HK-00700/v3/publications.jsonl",
+      "sha256": "596fcf974f7174f714e400478394626b1868d92a3ac2c3501b17d5ff042c146b",
+      "byte_size": 2286,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\59\\596fcf974f7174f714e400478394626b1868d92a3ac2c3501b17d5ff042c146b"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\snapshot.json",
+      "relative_path": "HK-00700/v3/snapshot.json",
+      "sha256": "20c2657a8f2bfeb2d999665c7219a0164f93bb5f9feb38689f0376ff997573d2",
+      "byte_size": 1686000,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\20\\20c2657a8f2bfeb2d999665c7219a0164f93bb5f9feb38689f0376ff997573d2"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v4\\forecast.json",
+      "relative_path": "HK-00700/v4/forecast.json",
+      "sha256": "7d6fc7037ba34bc57a4f80dcef688f2f239db6a58c9aa7ee77cc00a5b1b4d27a",
+      "byte_size": 1095377,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\HK-00700\\forecast.json"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v4\\forecast.md",
+      "relative_path": "HK-00700/v4/forecast.md",
+      "sha256": "2d3478d32179a81d46563a2533d47d39e9537929ce4c3b816528b8326137a111",
+      "byte_size": 170792,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\HK-00700\\forecast.md"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v4\\input.json",
+      "relative_path": "HK-00700/v4/input.json",
+      "sha256": "71990a6e6d2b4fd489a7c31b80c1892b3470ae96cabdfefc1693a01e978d1b5b",
+      "byte_size": 525466,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\HK-00700\\input.json"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v4\\publications.jsonl",
+      "relative_path": "HK-00700/v4/publications.jsonl",
+      "sha256": "bd7f8ed7ce69d13e5a4ff6728d7bfe763771b8df87fd015e43c17249349c1b6a",
+      "byte_size": 2286,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\bd\\bd7f8ed7ce69d13e5a4ff6728d7bfe763771b8df87fd015e43c17249349c1b6a"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v4\\snapshot.json",
+      "relative_path": "HK-00700/v4/snapshot.json",
+      "sha256": "0382c543df010fe9620fb813d2f470770142327634a4b4be51d39f7fc5b47796",
+      "byte_size": 1687845,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\HK-00700\\snapshot.json"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\cli.stderr.txt",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/cli.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\e3\\e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\cli.stdout.txt",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/cli.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\e3\\e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\corp-page-12-mupdf.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/corp-page-12-mupdf.png",
+      "sha256": "bac444a40fe572fa9f7b668741b943d3313a68626f4fb1164ce2cc8a3bc8e3fc",
+      "byte_size": 210203,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\corp-page-12.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/corp-page-12.png",
+      "sha256": "0d1f4927d7618ce2ee183a8c3c04a51fc7b4085c213cb37709828fdb1f2dfb4c",
+      "byte_size": 239881,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\corp-page-15-mupdf.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/corp-page-15-mupdf.png",
+      "sha256": "f95a447a69f8fc0b88cc6864da7b468473a24063a42cc781f4a11f658cf58de1",
+      "byte_size": 180340,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\corp-page-15.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/corp-page-15.png",
+      "sha256": "aaa2293fe77fb6b0ede0bfea8b778fcbe24b0e547f79168254fe93393b97f8f1",
+      "byte_size": 218582,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\forecast.json",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/forecast.json",
+      "sha256": "1c10deb1b93769632c553e51155def18afb4b1adfe8331c0eb511d52478ab3de",
+      "byte_size": 428931,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\1c\\1c10deb1b93769632c553e51155def18afb4b1adfe8331c0eb511d52478ab3de"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\forecast.md",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/forecast.md",
+      "sha256": "1d152804ffd09e4e7b0d49215563a097a09b569e0af70e35cd91d30ffba1823b",
+      "byte_size": 58089,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\1d\\1d152804ffd09e4e7b0d49215563a097a09b569e0af70e35cd91d30ffba1823b"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\fy2024-page-1-mupdf.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2024-page-1-mupdf.png",
+      "sha256": "c9ba46187292953979d3b5be70b883c56ccb7d549f815918142aafb7b3e42f41",
+      "byte_size": 657465,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\fy2024-page-1.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2024-page-1.png",
+      "sha256": "09580cd4e2b39474b26ed21f8d8fceaaebf1077ff5d7a0fa4c0f4c71a7e0d118",
+      "byte_size": 737059,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\fy2024-page-188-mupdf.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2024-page-188-mupdf.png",
+      "sha256": "3cfe3643486eca445e939f98f51b777023b6d36930ede647d0aa38dbe6886f22",
+      "byte_size": 81440,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\fy2024-page-188.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2024-page-188.png",
+      "sha256": "b8d3c634b65dae945a11b9c73d76a67c10064d3cbadc1e106b3a9164eab90e4e",
+      "byte_size": 37007,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\fy2025-page-165-mupdf.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2025-page-165-mupdf.png",
+      "sha256": "3a5a067a4fce46eb5a35e46c4d979f06a732f3c092231624d5bde0ebd319d3ab",
+      "byte_size": 174710,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\fy2025-page-165.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2025-page-165.png",
+      "sha256": "246d4acd4937d0a235c977621ecde08ad27244509800fae45bf0c12c42c42d43",
+      "byte_size": 14467,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\fy2025-page-166-mupdf.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2025-page-166-mupdf.png",
+      "sha256": "2b1388a0820a9922c8e443a42bcf1993d6454527fa42ac1e551997eb6f96cb6e",
+      "byte_size": 165426,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\fy2025-page-166.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2025-page-166.png",
+      "sha256": "88dc411d800e5de32237d541a6d12840a59bd6623ccb616daf0426fbddbbd44d",
+      "byte_size": 14655,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\fy2025-page-167-mupdf.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2025-page-167-mupdf.png",
+      "sha256": "645bf613b0416017efc3949e6d8ed0fee818684bc552dca945bbfac79e855f26",
+      "byte_size": 163621,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\fy2025-page-167.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2025-page-167.png",
+      "sha256": "e88e0aff6d9a0c6730f58445bb43bf6baeb34c44a12dafd79d741b0060dd2ec9",
+      "byte_size": 17108,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\fy2025-page-196-mupdf.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2025-page-196-mupdf.png",
+      "sha256": "9dca7ec9435f63d5ed80fa6b3d692a39efe8140e51a91d052d8feeb2bb066a0b",
+      "byte_size": 81947,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\fy2025-page-196.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2025-page-196.png",
+      "sha256": "d0832cd841813aa6570bb62b5d134a1624dfbf3d99ed1eabb7e7eb1a3620df7c",
+      "byte_size": 37040,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\fy2025-page-4-mupdf.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2025-page-4-mupdf.png",
+      "sha256": "659a1a4b80ed725a70c148cccbf7dfb37b0d3d5455bfd23e9cf92bd53f30aace",
+      "byte_size": 233426,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\fy2025-page-4.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2025-page-4.png",
+      "sha256": "b060b845880f8a5b2c83293ce78701452fdd369fc4ffaa991478f1d86e7c111a",
+      "byte_size": 235171,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\fy2025-page-80-mupdf.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2025-page-80-mupdf.png",
+      "sha256": "cca598cd401277be0c120bd958e218f45ebe29699a88568e144b9a0dd14b3291",
+      "byte_size": 189935,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\fy2025-page-80.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2025-page-80.png",
+      "sha256": "224b5775370a33f842f08f0675276845b6aacd42ace847509a1307ec9b6d0a2f",
+      "byte_size": 94658,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\h1-page-10-mupdf.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/h1-page-10-mupdf.png",
+      "sha256": "1b5093077771997598c31cd76493021793feca807693053b41298f6cf4516a8a",
+      "byte_size": 175788,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\h1-page-10.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/h1-page-10.png",
+      "sha256": "687175c0a21035a41df10b7331b431f8669cf3bf832979a1ea49333475b2ef63",
+      "byte_size": 317940,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\h1-page-47-mupdf.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/h1-page-47-mupdf.png",
+      "sha256": "c4d1e7d9408da7d7574cf8a4a84af8062eb6786c8c8ec28d3c181b42218fee78",
+      "byte_size": 75787,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\h1-page-47.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/h1-page-47.png",
+      "sha256": "95ce1b2fd8ca1bf8558191b27f4f6dcd87f86e0ffe78296f43ea9e74d9cd5f66",
+      "byte_size": 109458,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\h1-page-6-mupdf.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/h1-page-6-mupdf.png",
+      "sha256": "4e8dfb8dd957a48a54373c62c03d4319aefaa550bf74b75b3a2f9e58a99b6dad",
+      "byte_size": 172046,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\h1-page-6.png",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/h1-page-6.png",
+      "sha256": "5cfc51281bbc60773609bc756bd0511cc643cda2d3c0d3a18533043751d73588",
+      "byte_size": 302403,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\input.json",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/input.json",
+      "sha256": "13078fd040fefcc8382f9ddd43d0044821aaf3bcfaecd80f36615cefb14476f1",
+      "byte_size": 192154,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\13\\13078fd040fefcc8382f9ddd43d0044821aaf3bcfaecd80f36615cefb14476f1"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\official-archive-annual-2025.pdf",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/official-archive-annual-2025.pdf",
+      "sha256": "ddd66d73b87c9b988f10c87b2b623c2d31c34c5f667cb845a058074979f3e976",
+      "byte_size": 986,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\dd\\ddd66d73b87c9b988f10c87b2b623c2d31c34c5f667cb845a058074979f3e976"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\official-financial-reports-zhhk.html",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/official-financial-reports-zhhk.html",
+      "sha256": "a15d020198d688deaff63f47610e18951a71382d70e377623e3e4da101fb6fa0",
+      "byte_size": 193637,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\a1\\a15d020198d688deaff63f47610e18951a71382d70e377623e3e4da101fb6fa0"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\official-financial-reports.html",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/official-financial-reports.html",
+      "sha256": "58861ba68e0994c35dccd13534527a8a8bd8e310a596c35195337adde801ab68",
+      "byte_size": 188540,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\58\\58861ba68e0994c35dccd13534527a8a8bd8e310a596c35195337adde801ab68"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\review-HK-00700-rf_hk_independent_review\\publications.jsonl",
+      "relative_path": "review-HK-00700-rf_hk_independent_review/publications.jsonl",
+      "sha256": "cfaa1110ac343f86c0baead8f62101ed0826685ae5fa8e757c55b938e6788b28",
+      "byte_size": 710,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\cf\\cfaa1110ac343f86c0baead8f62101ed0826685ae5fa8e757c55b938e6788b28"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ancillary_page_receipts.json",
+      "relative_path": "US-MSFT/ancillary_page_receipts.json",
+      "sha256": "60d658010de3a9ff80ee854d95c31387e80edfc77146b53bd73c2fce08a792da",
+      "byte_size": 2171,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\60\\60d658010de3a9ff80ee854d95c31387e80edfc77146b53bd73c2fce08a792da"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\aws.html",
+      "relative_path": "US-MSFT/aws.html",
+      "sha256": "d83bb386a7d20107ec1480472490dab56ab83122e4e7f569fd1f36608c96e5a4",
+      "byte_size": 647411,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\d8\\d83bb386a7d20107ec1480472490dab56ab83122e4e7f569fd1f36608c96e5a4"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\aws.txt",
+      "relative_path": "US-MSFT/aws.txt",
+      "sha256": "767c7f293d5173f8309f8d59575dda9270f4be0e6d3a36ff1b4e65e377bcdf20",
+      "byte_size": 41705,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\76\\767c7f293d5173f8309f8d59575dda9270f4be0e6d3a36ff1b4e65e377bcdf20"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\call.html",
+      "relative_path": "US-MSFT/call.html",
+      "sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+      "byte_size": 273436,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\bd\\bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\call.txt",
+      "relative_path": "US-MSFT/call.txt",
+      "sha256": "3a745885a320953f89ab817b052b8b4472a563353e58d2e1053aaa26026ad379",
+      "byte_size": 61518,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\3a\\3a745885a320953f89ab817b052b8b4472a563353e58d2e1053aaa26026ad379"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\forecast.json",
+      "relative_path": "US-MSFT/forecast.json",
+      "sha256": "46c0c6ce0c71f27899ed4544012566489c8efef1d37826194048683732a36906",
+      "byte_size": 616785,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\46\\46c0c6ce0c71f27899ed4544012566489c8efef1d37826194048683732a36906"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\forecast.md",
+      "relative_path": "US-MSFT/forecast.md",
+      "sha256": "4ccd4ff3e59ed0fc72af32850b35479dce595b1b641c140a2fb54d1675588511",
+      "byte_size": 63936,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\4c\\4ccd4ff3e59ed0fc72af32850b35479dce595b1b641c140a2fb54d1675588511"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\fy2025_consumer_temporary_text.txt",
+      "relative_path": "US-MSFT/fy2025_consumer_temporary_text.txt",
+      "sha256": "4083d988beff6119c77fd1579607b87c9d45cf3d5ac768653eb285ba7941b0a7",
+      "byte_size": 320880,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\fy2025_verified_raw.html",
+      "relative_path": "US-MSFT/fy2025_verified_raw.html",
+      "sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "byte_size": 8158067,
+      "storage": "company_wiki_verified_raw",
+      "source_ref": {
+        "byte_size": 8158067,
+        "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "mime_type": "text/html",
+        "schema_version": "2.0",
+        "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"
+      }
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\fy2027_failed_office_viewer.html",
+      "relative_path": "US-MSFT/fy2027_failed_office_viewer.html",
+      "sha256": "ab1a37d0ca7c2440b2bc724a7dc52b34c4a5e059d42f7f815c4c98974a595238",
+      "byte_size": 6049,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\ab\\ab1a37d0ca7c2440b2bc724a7dc52b34c4a5e059d42f7f815c4c98974a595238"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\fy2027_segments_metrics.pptx",
+      "relative_path": "US-MSFT/fy2027_segments_metrics.pptx",
+      "sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "byte_size": 4016522,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\c0\\c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\fy2027_segments_metrics_text.json",
+      "relative_path": "US-MSFT/fy2027_segments_metrics_text.json",
+      "sha256": "d886434234ccd9d7ed4fc320c2ef3d5189376a9f84390a7542dbf2ba86a086b5",
+      "byte_size": 1470,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\d8\\d886434234ccd9d7ed4fc320c2ef3d5189376a9f84390a7542dbf2ba86a086b5"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\independent_arithmetic_and_groups.json",
+      "relative_path": "US-MSFT/independent_arithmetic_and_groups.json",
+      "sha256": "b5a9e13747c2de0814b5d76d698a0d1896746dcc9e0e94d46916ed320ce8ab3f",
+      "byte_size": 1436,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\b5\\b5a9e13747c2de0814b5d76d698a0d1896746dcc9e0e94d46916ed320ce8ab3f"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\input.json",
+      "relative_path": "US-MSFT/input.json",
+      "sha256": "d872a864d1f7220c5635974b262b2b63378c1885998754ed8010134f8c7ae32e",
+      "byte_size": 279630,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\d8\\d872a864d1f7220c5635974b262b2b63378c1885998754ed8010134f8c7ae32e"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\metrics.html",
+      "relative_path": "US-MSFT/metrics.html",
+      "sha256": "cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+      "byte_size": 198175,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\cf\\cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\metrics.txt",
+      "relative_path": "US-MSFT/metrics.txt",
+      "sha256": "5ff37bbb98650ef5ef8f539b43f0be0961e67de2b4130dfce9fb8868b3c36be7",
+      "byte_size": 9397,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\5f\\5ff37bbb98650ef5ef8f539b43f0be0961e67de2b4130dfce9fb8868b3c36be7"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\official_ir_home.html",
+      "relative_path": "US-MSFT/official_ir_home.html",
+      "sha256": "8242459fa10239a68bef0d5e0cde3398bf1b4fdcf32993e3229992dfa48a8c42",
+      "byte_size": 294458,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\82\\8242459fa10239a68bef0d5e0cde3398bf1b4fdcf32993e3229992dfa48a8c42"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image1.png",
+      "relative_path": "US-MSFT/ppt_images/image1.png",
+      "sha256": "5905a318d9a9450f59bc747fe54b74789331ba9c79f1458ad138ead04c85ea1d",
+      "byte_size": 64310,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image10.png",
+      "relative_path": "US-MSFT/ppt_images/image10.png",
+      "sha256": "3c6ae574cf44b87cd6c9989485f46c0d3a2d6e6a562d6e9585d74d7cb0083120",
+      "byte_size": 31464,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image11.png",
+      "relative_path": "US-MSFT/ppt_images/image11.png",
+      "sha256": "e9655692b713891b74bf0d939a33c80e52b4fb5cc812edd3cd96bc5018d501db",
+      "byte_size": 211082,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image12.png",
+      "relative_path": "US-MSFT/ppt_images/image12.png",
+      "sha256": "5e936afdad9d5d4bed10da5acaf9f8f8722e2103f3d862cb978f836d4c70324e",
+      "byte_size": 219127,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image13.png",
+      "relative_path": "US-MSFT/ppt_images/image13.png",
+      "sha256": "2f5c8513b8e0b0b042d162ca3f9fa15838dbfb90dbf4776b74fee02ae2cc6580",
+      "byte_size": 327545,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image14.png",
+      "relative_path": "US-MSFT/ppt_images/image14.png",
+      "sha256": "89e14395a3b31a38f8939aafe0340acc38d1ff671b69d4092ffaaaaea8538ebe",
+      "byte_size": 34428,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image15.png",
+      "relative_path": "US-MSFT/ppt_images/image15.png",
+      "sha256": "be4bd936032ccb5e834089539231e13be50ed9829371bb3e126835a19e4290eb",
+      "byte_size": 204167,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image16.png",
+      "relative_path": "US-MSFT/ppt_images/image16.png",
+      "sha256": "628f04243fe62d4017ef378b37cea206f24b3072e50c1be189b05a2cc995b41e",
+      "byte_size": 263589,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image17.png",
+      "relative_path": "US-MSFT/ppt_images/image17.png",
+      "sha256": "3eb1d7fe082c7d171ccc5cca60a5f67790ac8c43490d7aa7697a8aff81496b56",
+      "byte_size": 307392,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image18.png",
+      "relative_path": "US-MSFT/ppt_images/image18.png",
+      "sha256": "05d04cf705fb19cfb12feb1382e9a9b668a563f9323ddc2a79b8d327949cef91",
+      "byte_size": 234059,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image19.png",
+      "relative_path": "US-MSFT/ppt_images/image19.png",
+      "sha256": "3c8fe61ba4645d7c80d14617cdf544a173d12b36fb51d010757b926f2aa6bf22",
+      "byte_size": 36004,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image2.png",
+      "relative_path": "US-MSFT/ppt_images/image2.png",
+      "sha256": "21fa303719942f41d3cd824d215a5cbcf5fc16264b81a510e3a9139d8f261328",
+      "byte_size": 113145,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image20.png",
+      "relative_path": "US-MSFT/ppt_images/image20.png",
+      "sha256": "c295779702745c971e9f813214cea10155e11c03d3329ba6b45a7cee9d657359",
+      "byte_size": 301835,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image21.png",
+      "relative_path": "US-MSFT/ppt_images/image21.png",
+      "sha256": "fa3b238c348236c19d17948f68815f56250a946a3bbe93d755a207441c12bddf",
+      "byte_size": 316564,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image22.png",
+      "relative_path": "US-MSFT/ppt_images/image22.png",
+      "sha256": "ab6bfc42d20c2745a0c5d5b7d5a989b71cbe66fbd349640dccca88cde2796f44",
+      "byte_size": 36887,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image3.png",
+      "relative_path": "US-MSFT/ppt_images/image3.png",
+      "sha256": "bab94b03d91f18ca1b90dba0766ba779a4d0285837de73ee710782865bef3670",
+      "byte_size": 94166,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image4.png",
+      "relative_path": "US-MSFT/ppt_images/image4.png",
+      "sha256": "33e54faabef297663755363b6358653237e55f8261889f6142ac44f7a24a41cb",
+      "byte_size": 204190,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image5.png",
+      "relative_path": "US-MSFT/ppt_images/image5.png",
+      "sha256": "1fbfbd03dedb94ba792541ac17dc9cbef23ab590e74bd4488807b8c58981c659",
+      "byte_size": 259559,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image6.png",
+      "relative_path": "US-MSFT/ppt_images/image6.png",
+      "sha256": "ede74c44e22b5f29efba64c10e9f53b2024e15998c6c73f180a25c5e215e9f97",
+      "byte_size": 30930,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image7.png",
+      "relative_path": "US-MSFT/ppt_images/image7.png",
+      "sha256": "d4edf0903db8d061555fc3d0a99409f21c9f034fe8e31df59a37ae69de5f31ea",
+      "byte_size": 331246,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image8.png",
+      "relative_path": "US-MSFT/ppt_images/image8.png",
+      "sha256": "8eee7ba448c14c20e22e2b2f5daa280e4138181d6f38911c060e291ab23ecc5e",
+      "byte_size": 112551,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image9.png",
+      "relative_path": "US-MSFT/ppt_images/image9.png",
+      "sha256": "a818ff4b319b716d75d29a5d76c79d25b3648c90eb3cb4df15119f03e018171e",
+      "byte_size": 220244,
+      "storage": "regenerable_intermediate_not_retained",
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\publications.jsonl",
+      "relative_path": "US-MSFT/publications.jsonl",
+      "sha256": "420ef6f274bc648207081675cfd91920cde7d58e27d6fb93fdeaf780f55f8b97",
+      "byte_size": 5406,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\42\\420ef6f274bc648207081675cfd91920cde7d58e27d6fb93fdeaf780f55f8b97"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\reporting_groups.json",
+      "relative_path": "US-MSFT/reporting_groups.json",
+      "sha256": "4610cf2f4f495d80d4308d75e75eca433c7f801ef5235d8b66f710a712f25d14",
+      "byte_size": 542,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\46\\4610cf2f4f495d80d4308d75e75eca433c7f801ef5235d8b66f710a712f25d14"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\results.html",
+      "relative_path": "US-MSFT/results.html",
+      "sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+      "byte_size": 808850,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\8d\\8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\results.txt",
+      "relative_path": "US-MSFT/results.txt",
+      "sha256": "64f5b4443e283f86b9ecf9fe22f742e1b0b965ece4a497da15399e00eb7b645e",
+      "byte_size": 34613,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\64\\64f5b4443e283f86b9ecf9fe22f742e1b0b965ece4a497da15399e00eb7b645e"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\snapshot.json",
+      "relative_path": "US-MSFT/snapshot.json",
+      "sha256": "ac029a2961a01f8d9d9f752bf6253535a45b3f7c3c61e594c6501928b755e0e2",
+      "byte_size": 945323,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\ac\\ac029a2961a01f8d9d9f752bf6253535a45b3f7c3c61e594c6501928b755e0e2"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\template.json",
+      "relative_path": "US-MSFT/template.json",
+      "sha256": "b996f75a9f9af39ef6d03a47cb5414089cbe05375cd0a53841860cb67051642f",
+      "byte_size": 59937,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\b9\\b996f75a9f9af39ef6d03a47cb5414089cbe05375cd0a53841860cb67051642f"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\TRUST_BOUNDARY.md",
+      "relative_path": "US-MSFT/TRUST_BOUNDARY.md",
+      "sha256": "8f244161147eecb9d22196623b618163a4a8ff0c77fffbe0eca33b4493e69f4c",
+      "byte_size": 1793,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\8f\\8f244161147eecb9d22196623b618163a4a8ff0c77fffbe0eca33b4493e69f4c"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\forecast.json",
+      "relative_path": "US-MSFT/v2/forecast.json",
+      "sha256": "4447f9c5390a429ba5f304bf496af36f24ae6d8354b3a4fea890223d0a27c605",
+      "byte_size": 1799560,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\US-MSFT\\forecast.json"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\forecast.md",
+      "relative_path": "US-MSFT/v2/forecast.md",
+      "sha256": "649b9d16741e0089f5ac6996813e0fa518b0d4c04bb7787c183a41269b6c1bec",
+      "byte_size": 280916,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\US-MSFT\\forecast.md"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\input.json",
+      "relative_path": "US-MSFT/v2/input.json",
+      "sha256": "1fadabef5208df3438ea5202ba4524bb4d0fdfe9e923b0759c24dca8ff4165a3",
+      "byte_size": 869139,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\US-MSFT\\input.json"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\publications.jsonl",
+      "relative_path": "US-MSFT/v2/publications.jsonl",
+      "sha256": "132beb8eb7249d8b74ded75b6e1a00dabddb14546941d35914d16e65fcf6b3a4",
+      "byte_size": 2286,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\13\\132beb8eb7249d8b74ded75b6e1a00dabddb14546941d35914d16e65fcf6b3a4"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\snapshot.json",
+      "relative_path": "US-MSFT/v2/snapshot.json",
+      "sha256": "3127098e5ee041e3d17fa2fefeef47cc69ba90c321d68d4a44e6bc4c8e33c74e",
+      "byte_size": 2766975,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\US-MSFT\\snapshot.json"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\strategy_reopen_web.json",
+      "relative_path": "US-MSFT/v2/strategy_reopen_web.json",
+      "sha256": "bb32dab3510c3193b9922d8c6bee67e11e381b52365f50d5d4125c243c7b1d02",
+      "byte_size": 18147,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\bb\\bb32dab3510c3193b9922d8c6bee67e11e381b52365f50d5d4125c243c7b1d02"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\TRUST_BOUNDARY.md",
+      "relative_path": "US-MSFT/v2/TRUST_BOUNDARY.md",
+      "sha256": "ec2230f7bcabd8329f469d7317173260bb4fc787181238e8b74f014b0c0f7702",
+      "byte_size": 2126,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\ec\\ec2230f7bcabd8329f469d7317173260bb4fc787181238e8b74f014b0c0f7702"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_benchmark_open.json",
+      "relative_path": "US-MSFT/web_benchmark_open.json",
+      "sha256": "8862009c811e92cb0549577e521b6f83d5d5c69018881f11b6b97dc038d518b6",
+      "byte_size": 32850,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\88\\8862009c811e92cb0549577e521b6f83d5d5c69018881f11b6b97dc038d518b6"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_benchmark_policy.json",
+      "relative_path": "US-MSFT/web_benchmark_policy.json",
+      "sha256": "4a53af497727ccfaba951bfe22e18386298557ea82124484782a240da8f43652",
+      "byte_size": 34434,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\4a\\4a53af497727ccfaba951bfe22e18386298557ea82124484782a240da8f43652"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_call_metrics.json",
+      "relative_path": "US-MSFT/web_call_metrics.json",
+      "sha256": "d835d1be5b2d13a08213e8e634fd088fd846707b365b3ff55aec3a149adaf28d",
+      "byte_size": 32524,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\d8\\d835d1be5b2d13a08213e8e634fd088fd846707b365b3ff55aec3a149adaf28d"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_call_rest_and_segments.json",
+      "relative_path": "US-MSFT/web_call_rest_and_segments.json",
+      "sha256": "59cb0ea5041995ef54de8976fc6485ced070154b3a5d214cc93f947ddfeba8a1",
+      "byte_size": 37050,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\59\\59cb0ea5041995ef54de8976fc6485ced070154b3a5d214cc93f947ddfeba8a1"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_call_tail_strategy_sec.json",
+      "relative_path": "US-MSFT/web_call_tail_strategy_sec.json",
+      "sha256": "6f25a99a6ff04e7bd44ffb4605092297013de4b02ea5403ceb163412e4c241da",
+      "byte_size": 38385,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\6f\\6f25a99a6ff04e7bd44ffb4605092297013de4b02ea5403ceb163412e4c241da"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_material_announcements.json",
+      "relative_path": "US-MSFT/web_material_announcements.json",
+      "sha256": "a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+      "byte_size": 39253,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\a5\\a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_primary_initial.json",
+      "relative_path": "US-MSFT/web_primary_initial.json",
+      "sha256": "8ea35eab0b8ab75c9b94eb8231eca5ffa5493d161b34ba77bc891555cb53ce86",
+      "byte_size": 27557,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\8e\\8ea35eab0b8ab75c9b94eb8231eca5ffa5493d161b34ba77bc891555cb53ce86"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_q4_call_and_ir.json",
+      "relative_path": "US-MSFT/web_q4_call_and_ir.json",
+      "sha256": "272e4523ca03280dcaff410a76662639b931c61bebc6401ee2f5cec8ca43cd7c",
+      "byte_size": 24972,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\27\\272e4523ca03280dcaff410a76662639b931c61bebc6401ee2f5cec8ca43cd7c"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_search26.json",
+      "relative_path": "US-MSFT/web_search26.json",
+      "sha256": "9bdc31e116d118dc8eb46ffe887b9a4a87c3f38eb0aa2acf077ae8e30dc01d16",
+      "byte_size": 28196,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\9b\\9bdc31e116d118dc8eb46ffe887b9a4a87c3f38eb0aa2acf077ae8e30dc01d16"
+    },
+    {
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_segment_research.json",
+      "relative_path": "US-MSFT/web_segment_research.json",
+      "sha256": "83c1e1a705bb26b3563ddb5cc1ebc6bc151fdac2f6b5770c279effbb2ab0267b",
+      "byte_size": 33200,
+      "storage": "retained_object",
+      "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\83\\83c1e1a705bb26b3563ddb5cc1ebc6bc151fdac2f6b5770c279effbb2ab0267b"
+    }
+  ],
+  "latest_deliverables": [
+    {
+      "company": "CN-688012",
+      "file": "input.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\CN-688012\\input.json",
+      "sha256": "478ae3345e6011079929c05f01b8adec959c974581c703239271c1f9ba4e7ea4",
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\input.json"
+    },
+    {
+      "company": "CN-688012",
+      "file": "forecast.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\CN-688012\\forecast.json",
+      "sha256": "1913f5e376590c9a5d77999f8d9c4072a3114e5fc58288ac25f11b31b4ebdea1",
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\forecast.json"
+    },
+    {
+      "company": "CN-688012",
+      "file": "forecast.md",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\CN-688012\\forecast.md",
+      "sha256": "890795ee5cb5706834d81a8fea85a840fa7f765bbe51717ea550faf1098871eb",
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\forecast.md"
+    },
+    {
+      "company": "CN-688012",
+      "file": "snapshot.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\CN-688012\\snapshot.json",
+      "sha256": "bd7ec3a23f2331f48e937be62e1d960e687f9c9ae10a4e6c70a305f67f423741",
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\snapshot.json"
+    },
+    {
+      "company": "HK-00700",
+      "file": "input.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\HK-00700\\input.json",
+      "sha256": "71990a6e6d2b4fd489a7c31b80c1892b3470ae96cabdfefc1693a01e978d1b5b",
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v4\\input.json"
+    },
+    {
+      "company": "HK-00700",
+      "file": "forecast.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\HK-00700\\forecast.json",
+      "sha256": "7d6fc7037ba34bc57a4f80dcef688f2f239db6a58c9aa7ee77cc00a5b1b4d27a",
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v4\\forecast.json"
+    },
+    {
+      "company": "HK-00700",
+      "file": "forecast.md",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\HK-00700\\forecast.md",
+      "sha256": "2d3478d32179a81d46563a2533d47d39e9537929ce4c3b816528b8326137a111",
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v4\\forecast.md"
+    },
+    {
+      "company": "HK-00700",
+      "file": "snapshot.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\HK-00700\\snapshot.json",
+      "sha256": "0382c543df010fe9620fb813d2f470770142327634a4b4be51d39f7fc5b47796",
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v4\\snapshot.json"
+    },
+    {
+      "company": "US-MSFT",
+      "file": "input.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\US-MSFT\\input.json",
+      "sha256": "1fadabef5208df3438ea5202ba4524bb4d0fdfe9e923b0759c24dca8ff4165a3",
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\input.json"
+    },
+    {
+      "company": "US-MSFT",
+      "file": "forecast.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\US-MSFT\\forecast.json",
+      "sha256": "4447f9c5390a429ba5f304bf496af36f24ae6d8354b3a4fea890223d0a27c605",
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\forecast.json"
+    },
+    {
+      "company": "US-MSFT",
+      "file": "forecast.md",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\US-MSFT\\forecast.md",
+      "sha256": "649b9d16741e0089f5ac6996813e0fa518b0d4c04bb7787c183a41269b6c1bec",
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\forecast.md"
+    },
+    {
+      "company": "US-MSFT",
+      "file": "snapshot.json",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\US-MSFT\\snapshot.json",
+      "sha256": "3127098e5ee041e3d17fa2fefeef47cc69ba90c321d68d4a44e6bc4c8e33c74e",
+      "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\snapshot.json"
+    }
+  ],
+  "unique_object_bytes": 56798301,
+  "unique_object_count": 146,
+  "temp_logical_bytes": 110034773,
+  "cwp_raw_bytes_not_duplicated": 8158067,
+  "regenerable_intermediate_bytes_not_retained": 12539811,
+  "raw_cwp_refs": [
+    {
+      "byte_size": 4428270,
+      "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "mime_type": "application/pdf",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+    },
+    {
+      "byte_size": 5241364,
+      "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+      "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+      "mime_type": "application/pdf",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0"
+    },
+    {
+      "byte_size": 8158067,
+      "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "mime_type": "text/html",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"
+    }
+  ],
+  "source_originals_deleted": false,
+  "current_producer_verification": [
+    {
+      "source_ref": {
+        "byte_size": 4428270,
+        "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "mime_type": "application/pdf",
+        "schema_version": "2.0",
+        "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      },
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.source_reader_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+        "--document-id",
+        "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "--source-id",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "--content-sha256",
+        "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "--purpose",
+        "filing_reuse"
+      ],
+      "returncode": 0,
+      "verified_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "verified_byte_size": 4428270,
+      "producer_receipt": {
+        "byte_size": 4428270,
+        "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "manifest": {
+          "byte_size": 4428270,
+          "canonical_entity_id": null,
+          "collector_name": null,
+          "collector_version": null,
+          "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "display_name": null,
+          "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "document_kind": "annual_report",
+          "fiscal_period": null,
+          "fiscal_year": 2025,
+          "form_type": null,
+          "language": "zh",
+          "market": "HK",
+          "mime_type": "application/pdf",
+          "period_end": null,
+          "provider": null,
+          "provider_document_id": null,
+          "published_date": "2026-04-09",
+          "retrieved_at": null,
+          "security_id": "00700",
+          "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+          "title": "腾讯：2025年年度报告"
+        },
+        "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+        "read_at": "2026-10-08T09:09:32.087931+00:00",
+        "review": {
+          "evidence_sha256": null,
+          "policy_hash": null,
+          "reviewed_at": null,
+          "source_sha256": null,
+          "status": "not_reviewed"
+        },
+        "schema_version": "2.1",
+        "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+        "status": "ok"
+      }
+    },
+    {
+      "source_ref": {
+        "byte_size": 5241364,
+        "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "mime_type": "application/pdf",
+        "schema_version": "2.0",
+        "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0"
+      },
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.source_reader_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+        "--document-id",
+        "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "--source-id",
+        "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "--content-sha256",
+        "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "--purpose",
+        "filing_reuse"
+      ],
+      "returncode": 0,
+      "verified_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+      "verified_byte_size": 5241364,
+      "producer_receipt": {
+        "byte_size": 5241364,
+        "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "manifest": {
+          "byte_size": 5241364,
+          "canonical_entity_id": null,
+          "collector_name": null,
+          "collector_version": null,
+          "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "display_name": null,
+          "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "document_kind": "annual_report",
+          "fiscal_period": null,
+          "fiscal_year": 2024,
+          "form_type": null,
+          "language": "zh",
+          "market": "HK",
+          "mime_type": "application/pdf",
+          "period_end": null,
+          "provider": null,
+          "provider_document_id": null,
+          "published_date": "2025-04-08",
+          "retrieved_at": null,
+          "security_id": "00700",
+          "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0408/2025040800668_c.pdf",
+          "title": "腾讯：2024年年度报告"
+        },
+        "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+        "read_at": "2026-10-08T09:09:32.660381+00:00",
+        "review": {
+          "evidence_sha256": null,
+          "policy_hash": null,
+          "reviewed_at": null,
+          "source_sha256": null,
+          "status": "not_reviewed"
+        },
+        "schema_version": "2.1",
+        "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+        "status": "ok"
+      }
+    },
+    {
+      "source_ref": {
+        "byte_size": 8158067,
+        "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "mime_type": "text/html",
+        "schema_version": "2.0",
+        "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"
+      },
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.source_reader_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+        "--document-id",
+        "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "--source-id",
+        "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "--content-sha256",
+        "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "--purpose",
+        "filing_reuse"
+      ],
+      "returncode": 0,
+      "verified_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "verified_byte_size": 8158067,
+      "producer_receipt": {
+        "byte_size": 8158067,
+        "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "manifest": {
+          "byte_size": 8158067,
+          "canonical_entity_id": null,
+          "collector_name": null,
+          "collector_version": null,
+          "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+          "display_name": null,
+          "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+          "document_kind": "annual_report",
+          "fiscal_period": null,
+          "fiscal_year": 2025,
+          "form_type": "10-K",
+          "language": null,
+          "market": "US",
+          "mime_type": "text/html",
+          "period_end": null,
+          "provider": null,
+          "provider_document_id": null,
+          "published_date": "2025-07-30",
+          "retrieved_at": null,
+          "security_id": "MSFT",
+          "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+          "title": "Microsoft 10-K FY2025"
+        },
+        "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+        "read_at": "2026-10-08T09:09:33.238306+00:00",
+        "review": {
+          "evidence_sha256": null,
+          "policy_hash": null,
+          "reviewed_at": null,
+          "source_sha256": null,
+          "status": "not_reviewed"
+        },
+        "schema_version": "2.1",
+        "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+        "status": "ok"
+      }
+    }
+  ],
+  "temp_cleanup": "not_performed_by_this_script",
+  "historical_path_resolution": "Use this index. Never rewrite historical input, snapshot, receipt or execution manifest bytes."
+}

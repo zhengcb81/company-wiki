@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\reviews\HK-00700\finish_checks_hk.py", line 70, in <module>
+    assert any(q['artifact_type']=='snapshot' and q['input_sha256']==s['input_sha256'] and q['artifact_id']==s['snapshot_id'] and q['result_sha256']==canonical_sha256(s) for q in entries)
+           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

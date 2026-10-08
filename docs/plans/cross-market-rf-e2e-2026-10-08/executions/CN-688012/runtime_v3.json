@@ -1,0 +1,75 @@
+{
+  "skill_root": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+  "engine_version": "4.1.0",
+  "runtime_files": [
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+      "sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_forecast.py",
+      "repo_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "installed_repo_equal": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_core.py",
+      "sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_core.py",
+      "repo_sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "installed_repo_equal": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_report.py",
+      "sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_report.py",
+      "repo_sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+      "installed_repo_equal": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_backtest.py",
+      "sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_backtest.py",
+      "repo_sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "installed_repo_equal": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+      "sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+      "repo_sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+      "installed_repo_equal": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_source_v2.py",
+      "sha256": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_source_v2.py",
+      "repo_sha256": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+      "installed_repo_equal": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\publication_registry.py",
+      "sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\publication_registry.py",
+      "repo_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+      "installed_repo_equal": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\lint_input.py",
+      "sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\lint_input.py",
+      "repo_sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "installed_repo_equal": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\fix_hashes.py",
+      "sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\fix_hashes.py",
+      "repo_sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "installed_repo_equal": true
+    }
+  ],
+  "environment": {
+    "REVENUE_PUBLICATION_REGISTRY": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\publications.jsonl",
+    "CWP_AUDIT_PROCESS_DIR": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\processes",
+    "PYTHONPATH_prepend": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\process_trace"
+  },
+  "configuration_changes": "None; subprocessonlyenvironment"
+}

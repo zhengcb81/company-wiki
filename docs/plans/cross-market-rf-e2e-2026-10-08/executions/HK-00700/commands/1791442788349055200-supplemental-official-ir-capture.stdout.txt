@@ -1,0 +1,1035 @@
+{"url": "https://www.tencent.com/wp-content/uploads/2026/09/Corporate-Overview-2Q26-20260916.pdf", "final_url": "https://www.tencent.com/wp-content/uploads/2026/09/Corporate-Overview-2Q26-20260916.pdf", "status_code": 200, "download_bytes": 1676729, "sha256": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389", "raw_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\corporate_overview_20260916.pdf", "pages": 24, "published_date": "2026-09-16", "publication_date_basis": "official investor-kit link+dated filename Sep2026 title; exact day is website filename asserted, not inferred mtime", "tool": "requests.get streamed", "supplemental_route": "official IR presentation, not financial-filing route", "max_bytes": 41943040, "timeout_seconds": 180, "cost_usd": "0.00", "elapsed_seconds": 1.1121600000042235}
+
+PDF PAGE 1 
+ Sep 2026
+CORPORATE OVERVIEW
+
+
+PDF PAGE 2 
+ 2
+1. Business Overview
+2.
+Financials
+
+
+PDF PAGE 3 
+ Recurring Innovations and Breakthroughs
+1998.11
+Tencent 
+is founded
+2004.06
+Tencent is 
+listed on 
+Hong Kong
+Stock Exchange
+2009.12 
+Tencent
+annual revenue 
+exceeds
+RMB 10 billion
+Tencent 
+announces Open
+Platform Strategy
+2011.06
+2018.01
+Combined monthly 
+active users of 
+Weixin and WeChat
+surpasses 1 billion
+2019.11
+Tencent 
+announces new 
+mission and vision: 
+Value for Users, 
+Tech for Good
+3
+2020.02
+Tencent Meeting 
+became most-used 
+standalone cloud-based 
+video conferencing 
+solution in China
+2012.05
+Tencent forms six 
+business groups to 
+embrace mobile 
+Internet opportunities
+Tencent announces 
+strategic upgrade to 
+embrace the era of
+Industrial Internet
+2018.09
+2011.01
+Weixin/WeChat
+is launched
+QQ is launched
+1999.02
+Weixin Video 
+Accounts is 
+launched
+2020.01
+2017.01
+Weixin Mini 
+Programs is 
+launched
+Weixin Mini 
+Games is 
+launched
+2017.12
+2013.08
+Weixin Pay is 
+launched
+QQ.com is 
+launched
+2003.11
+Tencent’s proprietary 
+foundation model Hy is 
+launched
+2023.09
+Weixin Red
+Packet is
+launched
+2014.01
+2024.05
+Tencent’s AI 
+chatbot Yuanbao is 
+launched
+Weixin Mini 
+Shops is 
+launched
+2024.08
+2026.08
+Hy4 preview 
+version is launched
+2026.06
+WorkBuddy &  
+CodeBuddy became 
+#1 AI office  
+productivity service
+
+
+PDF PAGE 4 
+ Resilient Growth through Cycles
+4
+Market Cap
+(In billion USD)
+1.1
+1.4
+2.8
+3.8
+7.2
+12.4
+19.6
+28.5
+43.9
+60.4
+78.9
+102.9
+151.9
+237.8
+312.7
+377.3
+482.1
+560.1
+554.6
+609.0
+660.3
+751.8
+0.5
+0.5
+1.3
+1.9
+3.7
+6.8
+10.8
+14.0
+18.4
+21.7
+32.7
+45.8
+66.9
+95.9
+118.3
+147.4
+183.3
+194.8
+189.0
+235.5
+277.0
+336.4
+0
+250
+500
+750
+1,000
+2004
+2005
+2006
+2007
+2008
+2009
+2010
+2011
+2012
+2013
+2014
+2015
+2016
+2017
+2018
+2019
+2020
+2021
+2022
+2023
+2024
+2025
+657x
+Revenue Growth1
+707x
+Adjusted EBITDA Growth2 786x
+Share Price Appreciation3
+IPO 
+(16 June 2004)
+Market Cap:
+US$ 0.8 billion4
+Financial crisis 
+(2008)(5)
+Revenue Growth: 87%
+Adj. EBITDA Growth: 96%
+Game approval suspension 
+(2018)(5)
+Revenue Growth: 32%
+Adj. EBITDA Growth: 23%
+COVID-19 & Fintech 
+regulatory tightening 
+(2020)(5)
+Revenue Growth: 28%
+Adj. EBITDA Growth: 24%
+Tightened antitrust regulations 
+& Game approval suspension 
+(2021)(5)
+Revenue Growth: 16%
+Adj. EBITDA Growth: 6%
+What we have achieved since our listing in 2004…
+1.
+Growth of 2025 revenues over 2004 revenues.
+2.
+Growth of 2025 Adjusted EBITDA over 2004 Adjusted EBITDA. Adjusted EBITDA consists of EBITDA plus equity-settled share-based compensation expenses
+3.
+Growth of market capitalisation on Dec 31, 2025 over market capitalisation at IPO on June 16, 2004
+4.
+Based on market capitalisation at IPO on June 16, 2004
+5.
+YoY growth from 2007 to 2008 for financial crisis; YoY growth from 2017 to 2018 for game approval suspension; YoY growth from 2019 to 2020 for the COVID-19 pandemic; YoY growth from 2020 to 2021 for tightened antitrust regulations and game approval suspension
+Sources: Bloomberg
+Revenues (RMB billion)
+Adjusted EBITDA (RMB billion)
+Market Cap (USD billion)
+
+
+PDF PAGE 5 
+ Weixin & WeChat
+• #1 mobile community
+• MAU at 1,439m
+QQ
+• Mobile devices MAU at
+520m
+Mobile Payment
+• #1 by MAU & DAU
+Mobile Browser
+• #1 by MAU
+Language Input
+• #1 by MAU
+Leading Ecosystem Built on Best-in-class Products, Now 
+Enhancing with AI
+Games
+Communications
+& Social Networks
+Utilities
+5
+1.
+All rankings above refer to China market, unless otherwise stated. Company data and QuestMobile, 2Q2026
+2.
+IDC Quarterly Public Cloud Services Tracker, 1Q2026
+3.
+WorkBuddy & CodeBuddy - Analysys, June 2026
+PaaS
+• #2 by revenue2
+SaaS
+• #1 productivity office software 
+mobile applications by total 
+user time spent
+AI productivity tool
+• #1 by monthly interactions on 
+PC3
+China
+• #1 by users and revenue
+Global
+• #1 by revenue
+Video
+• #1 by paid subscriptions
+Music
+• #1 by paid subscriptions
+Literature 
+• #1 by users’ paid revenue
+FinTech
+Digital 
+Content
+
+
+PDF PAGE 6 
+ 6
+Our Key Franchises are Resilient in Age of AI
+Criteria for Product/Service Resilience to AI
+Our Key Franchises Possess a lot of Resilience Criteria, and are Highly Defensible
+• Network
+effects
+mean
+human
+users gravitate to services with
+most human users
+• Internal
+data,
+not
+available
+on
+world wide web
+Communications
+• Multi-player games (especially PvP
+games) present massive network
+effects
+• Evergreen games cultivate strong IP
+• AI not currently capable of creating
+innovative gameplay-centric games
+due to difficulty in providing balance,
+and generating consistent outcomes
+from similar inputs
+Games
+•
+Network effects (consumer to consumer, consumer to content creator, consumer to business)
+•
+Depth and value added along supply chain
+•
+Regulatory environment and license requirements
+•
+Scarce/unique resource (physical property or intellectual property)
+•
+Low take rate compared to value provided or switching cost
+•
+Private data versus public data
+• Heavily regulated and licensed
+• Require rails into multitude of partner
+banks, merchants, and consumers
+• Payment platforms have significant
+network effects
+• Low take rate versus global peers
+FinTech
+
+
+PDF PAGE 7 
+ AI Empowers New Initiatives
+7
+•
+New AI initiatives – built robust foundation and accelerating growth; potential to generate substantial returns on upside from franchise
+products (e.g., Hy, WorkBuddy, Xiaowei); clear downside protection as most of investment is in AI infrastructure, which we can choose to
+rent externally at attractive prices via Tencent Cloud if needed
+Tencent
+AI
+Leading in productivity AI – WorkBuddy & CodeBuddy
+2
+Accelerating progress – Hy foundation model
+1
+Driving broader adoption of consumer AI – Xiaowei & Yuanbao
+3
+Investing in AI infrastructure – for internal use cases and for Tencent Cloud
+4
+
+
+PDF PAGE 8 
+ Hy Foundation Model:  Accelerating Progress
+8
+Big Step Up versus Hy3 preview
+• Based
+on
+feedback
+collected
+on
+50+
+products, we further improved the quality and
+diversity of post-training data while scaling up
+RL training
+• Improved
+across
+task
+completion
+rate,
+hallucination rate, and multi-turn question
+error rate
+Stronger Agent Capabilities
+• In productivity scenarios such as coding,
+office work, financial modeling, and front-end
+design, Hy3 now serves as a reliable, cost-
+effective
+model
+option
+for
+everyday
+WorkBuddy tasks
+• Advantage
+most
+substantial
+in
+front-end
+development, user interface
+design,
+data
+analysis,
+and
+software
+development
+&
+deployment
+More Reliable Product Experience
+• Widely usable in multiple agentic use cases
+• Implemented fine-grained data cleaning and
+training constraints to reduce hallucination
+rate
+• Improved long-dialogue performance through
+joint optimisation of SFT and RL
+Token Usage Increased Significantly
+A Leading Model in its Size
+Hy3's production version is a stepping-stone toward Hy family of models attaining SOTA capabilities in future, while providing users with cost performance
+efficiency today
+• Ranked top 3 on OpenRouter by token usage
+• Hy3 daily token usage ~7x compared to Hy3 preview across all channels
+during paid period, reflecting accelerated external customer demand
+• Hy3 significantly outperforms similar-sized models, while rivaling flagship
+open-source
+models
+with
+substantially
+larger
+parameter
+sizes,
+demonstrating higher intelligence density
+
+
+PDF PAGE 9 
+ Hy Foundation Model:  Co-design Flywheel
+9
+Deep Product Integration
+Established a System for Fast Model Iteration
+•
+Scaling more powerful RL to substantially upgrade models after pre-training is done
+•
+Upgrading Hy’s multi-modal capabilities
+•
+Training a larger parameter model, Hy4, to be released later this year
+•
+Accelerating technical iteration and pushing boundaries of model intelligence, toward SOTA level capabilities
+Increases task success rate
+and
+cut
+time-to-completion,
+particularly for complex agent
+workflows
+Delivers
+leading
+execution
+quality in information retrieval,
+data
+processing,
+document
+workflows,
+and
+everyday
+decision-making
+Enhances quality and efficiency
+in AI teammate creation and
+code
+review
+for
+games
+including Peacekeeper Elite
+Deployed
+in
+multiple
+high-
+frequency scenarios, including
+powering AI assistant in Official
+Accounts and developer tools
+for Mini Programs
+•
+By continuously feeding real-world product usage and domain feedback into model training, model-product co-design approach allows Hy to validate
+model accuracy and identify edge cases, enabling faster model iteration and sustained performance gains
+Return Consideration
+•
+Build a large and valuable AI native business that consists of applications, own model, and compute
+WorkBuddy
+Yuanbao
+Games
+Weixin
+
+
+PDF PAGE 10 
+ WorkBuddy & CodeBuddy: Leading in Productivity AI
+1.
+Source: millions of interactions in June 2026, Analysys
+10
+Return 
+Consideration 
+Fast-growing 
+Usage
+Attractive 
+Features
+Unlocks huge opportunity in productivity market, including coding, and existing office work scenarios 
+Current focus on market education and extending leadership position; economics to improve over time with higher 
+paying penetration and lower token costs
+Provides new way to monetise existing enterprise relationships
+Remote control via 
+Weixin and WeCom, 
+in addition to PC
+High retention rates
+Increasingly vibrant 
+developer ecosystem
+High willingness to pay for 
+tokens via subscriptions 
+and top-ups
+Rapid user growth
+Access to 70k+ skills 
+from Tencent Cloud’s  
+Skillhub and ability to 
+interact with Tencent
+products
+Robust harness 
+engineering and 
+wide range of model 
+availability 
+Transaction execution 
+capabilities by 
+embedding SkillPay + 
+Weixin Pay inside 
+task flow
+27.5 
+12.8 
+7.9 
+3.5 
+1.6 
+1.6 
+1.3 
+1.2 
+1.1 
+0.9 
+WorkBuddy &
+CodeBuddy
+Trae IDE
+(Domestic)
+QoderWork
+QClaw
+Coze
+Marvis
+Wukong
+LobsterAI
+AutoClaw
+MiniMax agent
+#1 among PC-based AI-native Office Agents in China
+
+
+PDF PAGE 11 
+ 11
+1.
+In 2Q2026; MAU for Weixin and WeChat combined  
+2.
+In 2Q2026
+Weixin Ecosystem Uniquely Suited for Agentic AI Deployment 
+at Scale
+Video Accounts
+#2 short video service by 
+DAU in China; total time 
+spent grew over 20% YoY2
+Mini Programs
+Ecosystem of millions of 
+Mini Programs of 
+products and services
+Mini Shops
+Platform for indexed and 
+standardised merchandise 
+with notable GMV growth
+Chat
+Over 1.4 billion MAU1 and 
+highest daily usage frequency 
+among all major applications
+Xiaowei
+Released prototype to deliver embedded and context-aware AI experience by leveraging Weixin’s social graph, knowledge graph, 
+merchant reach and payment functionality
+Built with Weixin customised model WeLM that focus on user privacy, Weixin use cases and inference efficiency
+Content personalization helps users derive insight from diverse Weixin content, and services & transactions enablement leverages 
+Mini Programs ecosystem to lay groundwork for agent-to-agent transaction loop
+Currently requires user intervention and multi-step confirmations as safety measures 
+Working to fulfill user needs in Weixin’s environment through broader phased rollout in future
+Return consideration: Upgrade Weixin for AI era with well controlled cost, accelerating growth and monetisation of Weixin ecosystem
+Integrating Fundamental Communications with High-Quality Content and Services
+Xiaowei – Consumer Agentic AI in Weixin
+Only search engine with 
+access to personal content, 
+proprietary Weixin content, 
+and open internet content
+Weixin Search
+
+
+PDF PAGE 12 
+ 12
+Mini Programs
+Weixin Search
+Video Accounts
+Increased Inventories
+AI-powered AdTech Upgrades
+2025
+2023
+2026
+Scaled up foundation model
+• Matching relevant ads with receptive users enables 
+higher ad conversion
+Deployed generative AI capabilities
+• Automating ad production and ad content approval, and 
+accelerating content to market
+Automated ad campaign solution AIM+
+• Facilitating advertisers to execute and iterate media buying 
+campaigns across full range of inventory; powering 30%+ of total 
+marketing services spend from advertisers
+Marketing Services – Clear Proof Point for AI Enhancing 
+Revenue and Profitability
+More effective campaign execution and 
+higher ROI for advertisers
+20% FY2023 – 2025 
+revenue CAGR 
+Enhanced utilisation of Tencent’s ad inventories 
+and AI-driven ad monetisation efficiency
+50%+ segment gross margin for 
+12 consecutive quarters
+
+
+PDF PAGE 13 
+ ►#1 by global game revenue – RMB242 billion games segment revenue in 2025
+►Globally successful – International markets contributing 32% of games segment revenue in 2025 
+►In-house expertise across value chain – Multiple successful in-house studios each possessing strong development, publishing and operation capabilities
+►Partner of choice – Long term win-win relationships with emerging studios and category leaders
+Successful New Releases Layer onto Sustained Performance of Evergreen Games1
+Honour of Kings
+CrossFire Mobile
+Naruto Mobile
+Clash Royale
+Brawl Stars
+Peacekeeper Elite
+VALORANT
+Delta Force
+2015
+2016
+2018
+2019
+2020
+2024
+In-house Studios
+Emerging Studios 
+Category Leading Partners
+1. Evergreen games refer to domestic and international games surpassing average quarterly DAU of 5 million for mobile or 2 million for PC, and generating over RMB4 billion annual gross receipts
+13
+Games – Robust Performance from Evergreen Games and 
+Success from New Games, with Monetisation Uplift from AI
+Pioneer in AI 
+Application in 
+Games
+•
+Generative AI accelerates content production speed and scale, providing uplift to monetisation
+•
+AI powered virtual teammates provide coaching and support, enhancing user experience
+•
+AI enabled CRM tools boost user acquisition, engagement and retention
+
+
+PDF PAGE 14 
+ Commercial payment service
+Consumer lending facilitation
+Wealth management platform
+FinTech – Market Leader Operating at Scale in Data 
+Intensive Domains Suitable for Future AI Deployment
+14
+A distribution channel primarily for licensed financial institutions to originate short-term consumption related 
+loans to our payment service users
+Early stage in deploying AI to enhance credit scoring process, and further reduce non-performing loan rates
+A leading platform for wealth management solutions, serving the mass market
+Average assets per user and number of users both increasing year-on-year
+#1 mobile payment provider in China
+Resilient revenue growth due to increasing number of transactions, as we add more online and offline use cases
+
+
+PDF PAGE 15 
+ 15
+FY21
+FY22
+FY23
+FY24
+FY25
+Cloud services adjusted operating profit/(loss)
+•
+We are a leading cloud service provider, leveraging our understanding of 
+software to support substantial “internal cloud needs” as well as 
+external customers across industries and worldwide
+•
+We started to focus on high-quality cloud revenue growth in 2022, and 
+delivered RMB5 billion adjusted operating profit in 2025, despite 
+constrained availability of GPUs and our decision to prioritise internal AI 
+use cases
+•
+Tencent Cloud now offers full-stack AI agent solutions so that 
+customers can integrate our security infrastructure, skillhubs and 
+Weixin/QQ/WeCom control interfaces into their choice of models and 
+agents. To serve internal AI use cases and demand from external 
+customers for Tencent Cloud AI infrastructure and solutions, we are 
+increasing our GPU capacity during course of 2026 and beyond
+•
+Tencent Cloud’s international business grew revenue rapidly YoY in 
+1H26, capturing rising demand from international customers who are 
+adopting multi-cloud and hybrid strategies to achieve greater flexibility, 
+performance and data sovereignty
+RMB5 billion
+0
+Tencent Cloud – Becoming an Evergreen Business with 
+Procurement of GPUs Unlocking AI Revenue
+
+
+PDF PAGE 16 
+ 16
+2. Financials
+
+
+PDF PAGE 17 
+ 19%
+18%
+17%
+16%
+21%
+21%
+22%
+22%
+9%
+9%
+10%
+10%
+17%
+18%
+19%
+20%
+33%
+32%
+31%
+30%
+609.0
+660.3
+751.8
+788.5
+2023
+2024
+2025
+LTM June 2026²
+Total Revenue and Segmental Breakdown
+(In billion RMB)
+1.
+Starting 3Q2024, we renamed this revenue segment from 'Online Advertising' to 'Marketing Services' to better represent the breadth of our marketing solutions and accompanying technology services 
+across our online marketing properties
+2.
+Last twelve month ended June 30, 2026 
+2023-2025 CAGR 11%
+17
+Segment
+Consumer-driven
+• Digital content subscriptions 
+• Membership privileges subscriptions
+• Virtual item sales
+• Platform service fees
+Social Networks
+Enterprise-driven
+• Social Networks: Video Accounts, Moments, Mini 
+Programs, Official Accounts, Weixin Search
+• Content Platforms: video, music, news
+• Mobile Ad Network
+Marketing Services1
+Enterprise and consumer-driven
+• Payment, wealth management, consumer loans
+• Cloud
+• eCommerce technology service fees
+• AI productivity services subscriptions
+FinTech and Business Services
+High Quality and Sustainable Growth across Diversified 
+Revenue Streams
+Consumer-driven
+• Virtual item sales
+• Season Pass
+• Copy sales
+Domestic Games
+International Games
+
+
+PDF PAGE 18 
+ 235.5
+277.0
+336.4
+350.7
+167.0
+155.3
+182.6
+135.4
+2023
+2024
+2025
+LTM June 2026³
+Adjusted EBITDA
+FCF
+1.
+Adjusted EBITDA consists of EBITDA plus equity-settled share-based compensation expenses
+2.
+Starting from 2020, free cash flow was adjusted by subtracting payments for media content and lease liabilities, in addition to subtracting payments for capital expenditure from operating cash flow 
+3.
+Last twelve month ended June 30, 2026 
+4.
+FCF Conversion = FCF / Adjusted EBITDA; In 2025
+Adjusted EBITDA1 and Free Cash Flow (FCF)2
+(In billion RMB)
+Key Metrics
+20%
+Adj. EBITDA 
+2023-2025 CAGR
+45%
+Adj. EBITDA Margin
+2025
+54%
+FCF Conversion4
+2025
+39%
+Adj. EBITDA 
+Margin
+Expanding Margins and Strong Cash Flow Generation
+42%
+45%
+44%
+18
+
+
+PDF PAGE 19 
+ 1.
+Gross debt consists of borrowings and notes payable; Adjusted EBITDA consists of EBITDA plus equity-settled share-based compensation expenses 
+2.
+Last twelve month ended June 30, 2026
+3.
+Total capitalisation consists of gross debt plus total equity (book value)
+19
+Prudent Capital Management and Robust Credit Metrics
+28.5%
+24.3%
+23.8%
+27.0%
+2023
+2024
+2025
+Jun 30, 2026
+Adjusted EBITDA / Interest expense
+Net cash position (in billion RMB)
+Gross debt / Adjusted EBITDA1
+Gross debt / Total capitalisation3
+19.8x
+22.3x
+25.0x
+27.2x
+2023
+2024
+2025
+LTM June 2026²
+1.5x
+1.2x
+1.2x
+1.3x
+2023
+2024
+2025
+LTM June 2026²
+54.7
+76.8
+107.1
+58.2
+2023
+2024
+2025
+LTM Mar 2026
+June 30, 2026
+June 30, 2026
+
+
+PDF PAGE 20 
+ 31.3
+36.0
+43.1
+44.9
+2023
+2024
+2025
+LTM June 2026
+Strong Cashflow and Ample Liquid Assets Support 
+Shareholder Return and Investment
+1.
+As at June 30, 2026, USD1 to RMB6.8109, USD1 to HKD7.8417
+2.
+Investment portfolio consists of: a) our shareholdings (including those held via special purpose vehicles, fair value on an attribute basis) in listed investee companies (excluding subsidiaries) (defined as “Listed 
+Investees”); and b) our shareholdings in unlisted investees companies (excluding subsidiaries) (defined as “Unlisted Investees”)
+3.
+Based on closing share price on dispatch date(s) for JD.com (March 25, 2022) and Meituan (March 24, 2023)
+(In billion USD)
+Robust operating cash flow generation1
+(In billion USD)
+Sizeable cash and investment portfolio1,2
+75 
+72 
+56 
+Total cash
+Investments
+Unlisted Investees - carrying value
+Listed Investees - fair value
+Total cash
+128
+Cash dividend paid
+Share repurchase
+Distribution in kind3
+2.9
+4.1
+5.3
+6.1
+6.3 
+14.4 
+10.3 
+8.7 
+16.9 
+2023
+2024
+2025
+LTM June2026
+(In billion USD)
+20
+Return of capital to shareholders1
+Capital Expenditure1
+(In billion USD)
+3.4
+10.7
+11.3
+17.2
+2023
+2024
+2025
+LTM June 2026
+
+
+PDF PAGE 21 
+ 21
+3. Tech for Good
+
+
+PDF PAGE 22 
+ Basic Science
+Education 
+Innovation
+Rural 
+Revitalisation
+Carbon 
+Neutrality
+FEW1
+Provision
+Technology for Senior 
+Citizens and Public Welfare
+Assisting with 
+Public Emergencies
+Sustainable 
+Social Value
+Harnessing our Technology and Platform to Create Social 
+Value
+Established Sustainable Social Value Org (SSV) in Apr 2021, to deploy 
+social value initiatives in a professional and entrepreneurial way
+22
+Pursue long-term social value leveraging our technology and products:
+• Facilitate philanthropic digitalisation by providing capital, technology and 
+resources
+• Fund basic scientific research with a commitment of RMB10 billion over 10 
+years via New Cornerstone Investigator Programme
+• Building a public AED emergency response platform leveraging IoT 
+solutions and Weixin Mini Programs
+• Support rural revitalisation by nurturing administrative and business talents 
+in rural areas
+• Leverage digital tools and user reach to help preserve cultural heritage e.g., 
+assisting the successful inclusion of Beijing Central Axis into UNESCO World 
+Heritage List
+Contributed to common prosperity with new commitment in Aug 2021
+1. Food, Energy and Water
+Philanthropy 
+Platform
+Digitalisation of 
+Culture
+Enhanced Community 
+Accessibility
+
+
+PDF PAGE 23 
+ •
+Committed to achieving Carbon 
+Neutrality in our own operations and 
+supply chain, and shifting to 100% 
+renewable energy by 2030
+•
+Net-zero target by 2050 and absolute 
+greenhouse gas emission reduction 
+targets are validated by SBTi
+•
+Published our Biodiversity 
+Statement, outlining our commitment 
+to developing businesses in an eco-
+friendly way
+Environment
+Our ESG Commitment and Approach
+Social
+• Our Giving for Good campaign 
+promoted charity as part of everyday 
+life, by leveraging our social network, 
+digital tools and offline partners, 
+users engaged in over 530 million 
+philanthropic acts in 2025
+• Signed up to the Women’s 
+Empowerment Principles 
+• Signed AI Safety Commitment to 
+demonstrate commitment to AI risk 
+management and governance
+Governance
+• Enhanced board independence and 
+diversity with 63% INED and 25% 
+female representation
+• Uphold corporate integrity through 
+implementation of Sunshine Code of 
+Conduct and anti-fraud policy
+• Joined the United Nations Global 
+Compact as signatory in Aug 2023
+23
+1.
+By Institutional Investor in 2026, in Asia (ex-Japan) Internet sector, combined votes from sell-side and buy-side 
+2.
+Out of 100, the lower the better, as of July 17, 2026
+3.
+Out of 100, the higher the better, as of July 1, 2026
+Integrate sustainable social value creation into operations and product development
+MSCI ESG Rating: A   |   Sustainalytics ESG risk score: 17.3 – Low Risk2
+|   S&P Global ESG Score: 613 
+Industry Recognition 
+1st in Best ESG1 for 6 consecutive years and 1st in Best Company Board1
+
+
+PDF PAGE 24 
+ Tencent Holdings Limited
+Corporate Overview
+Thank you!
+https://www.tencent.com/ir
+

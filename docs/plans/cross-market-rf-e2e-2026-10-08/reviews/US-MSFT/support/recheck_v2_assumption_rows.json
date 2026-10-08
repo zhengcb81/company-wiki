@@ -1,0 +1,2630 @@
+[
+  {
+    "parameter_id": "azure_growth_low_2027",
+    "stream": "azure",
+    "year": 2027,
+    "scenario": "low",
+    "value_ratio": 0.3,
+    "independent_history_FY25_FY26_USDmillion": [
+      72610,
+      101938
+    ],
+    "independent_history_growth": 0.4039113069825093,
+    "claim_ids": [
+      "claim_3_azure_growth_low_2027",
+      "claim_3_azure_growth_low_2027_part2",
+      "claim_3_azure_growth_low_2027_part3",
+      "claim_3_azure_growth_low_2027_part4",
+      "v2_history_azure_growth_low_2027",
+      "v2_constraint_azure_growth_low_2027",
+      "v2_constraint_azure_growth_low_2027_part2",
+      "v2_constraint_azure_growth_low_2027_part3",
+      "v2_constraint_azure_growth_low_2027_part4",
+      "v2_context_azure_growth_low_2027"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/4",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment3/4",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment4/4",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment2/4",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment3/4",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment4/4",
+      "PPT21 adjusted FY27Q1 outlook row for Azure; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Capacity live dates and CPU/GPU efficiencies support consumed paid usage. Actual supply limits and demand/pricing uncertainty constrain delivery. Annual reported 30/38/45 choices differ from Q1 44–45 CC; FY28/29 fade conditional."
+  },
+  {
+    "parameter_id": "azure_growth_low_2028",
+    "stream": "azure",
+    "year": 2028,
+    "scenario": "low",
+    "value_ratio": 0.22,
+    "independent_history_FY25_FY26_USDmillion": [
+      72610,
+      101938
+    ],
+    "independent_history_growth": 0.4039113069825093,
+    "claim_ids": [
+      "claim_4_azure_growth_low_2028",
+      "claim_4_azure_growth_low_2028_part2",
+      "claim_4_azure_growth_low_2028_part3",
+      "claim_4_azure_growth_low_2028_part4",
+      "v2_history_azure_growth_low_2028",
+      "v2_constraint_azure_growth_low_2028",
+      "v2_constraint_azure_growth_low_2028_part2",
+      "v2_constraint_azure_growth_low_2028_part3",
+      "v2_constraint_azure_growth_low_2028_part4",
+      "v2_context_azure_growth_low_2028"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/4",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment3/4",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment4/4",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment2/4",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment3/4",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment4/4",
+      "PPT21 adjusted FY27Q1 outlook row for Azure; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Capacity live dates and CPU/GPU efficiencies support consumed paid usage. Actual supply limits and demand/pricing uncertainty constrain delivery. Annual reported 30/38/45 choices differ from Q1 44–45 CC; FY28/29 fade conditional."
+  },
+  {
+    "parameter_id": "azure_growth_low_2029",
+    "stream": "azure",
+    "year": 2029,
+    "scenario": "low",
+    "value_ratio": 0.16,
+    "independent_history_FY25_FY26_USDmillion": [
+      72610,
+      101938
+    ],
+    "independent_history_growth": 0.4039113069825093,
+    "claim_ids": [
+      "claim_5_azure_growth_low_2029",
+      "claim_5_azure_growth_low_2029_part2",
+      "claim_5_azure_growth_low_2029_part3",
+      "claim_5_azure_growth_low_2029_part4",
+      "v2_history_azure_growth_low_2029",
+      "v2_constraint_azure_growth_low_2029",
+      "v2_constraint_azure_growth_low_2029_part2",
+      "v2_constraint_azure_growth_low_2029_part3",
+      "v2_constraint_azure_growth_low_2029_part4",
+      "v2_context_azure_growth_low_2029"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/4",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment3/4",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment4/4",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment2/4",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment3/4",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment4/4",
+      "PPT21 adjusted FY27Q1 outlook row for Azure; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Capacity live dates and CPU/GPU efficiencies support consumed paid usage. Actual supply limits and demand/pricing uncertainty constrain delivery. Annual reported 30/38/45 choices differ from Q1 44–45 CC; FY28/29 fade conditional."
+  },
+  {
+    "parameter_id": "azure_growth_base_2027",
+    "stream": "azure",
+    "year": 2027,
+    "scenario": "base",
+    "value_ratio": 0.38,
+    "independent_history_FY25_FY26_USDmillion": [
+      72610,
+      101938
+    ],
+    "independent_history_growth": 0.4039113069825093,
+    "claim_ids": [
+      "claim_6_azure_growth_base_2027",
+      "claim_6_azure_growth_base_2027_part2",
+      "claim_6_azure_growth_base_2027_part3",
+      "claim_6_azure_growth_base_2027_part4",
+      "v2_history_azure_growth_base_2027",
+      "v2_constraint_azure_growth_base_2027",
+      "v2_constraint_azure_growth_base_2027_part2",
+      "v2_constraint_azure_growth_base_2027_part3",
+      "v2_constraint_azure_growth_base_2027_part4",
+      "v2_context_azure_growth_base_2027"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/4",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment3/4",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment4/4",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment2/4",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment3/4",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment4/4",
+      "PPT21 adjusted FY27Q1 outlook row for Azure; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Capacity live dates and CPU/GPU efficiencies support consumed paid usage. Actual supply limits and demand/pricing uncertainty constrain delivery. Annual reported 30/38/45 choices differ from Q1 44–45 CC; FY28/29 fade conditional."
+  },
+  {
+    "parameter_id": "azure_growth_base_2028",
+    "stream": "azure",
+    "year": 2028,
+    "scenario": "base",
+    "value_ratio": 0.3,
+    "independent_history_FY25_FY26_USDmillion": [
+      72610,
+      101938
+    ],
+    "independent_history_growth": 0.4039113069825093,
+    "claim_ids": [
+      "claim_7_azure_growth_base_2028",
+      "claim_7_azure_growth_base_2028_part2",
+      "claim_7_azure_growth_base_2028_part3",
+      "claim_7_azure_growth_base_2028_part4",
+      "v2_history_azure_growth_base_2028",
+      "v2_constraint_azure_growth_base_2028",
+      "v2_constraint_azure_growth_base_2028_part2",
+      "v2_constraint_azure_growth_base_2028_part3",
+      "v2_constraint_azure_growth_base_2028_part4",
+      "v2_context_azure_growth_base_2028"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/4",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment3/4",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment4/4",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment2/4",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment3/4",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment4/4",
+      "PPT21 adjusted FY27Q1 outlook row for Azure; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Capacity live dates and CPU/GPU efficiencies support consumed paid usage. Actual supply limits and demand/pricing uncertainty constrain delivery. Annual reported 30/38/45 choices differ from Q1 44–45 CC; FY28/29 fade conditional."
+  },
+  {
+    "parameter_id": "azure_growth_base_2029",
+    "stream": "azure",
+    "year": 2029,
+    "scenario": "base",
+    "value_ratio": 0.24,
+    "independent_history_FY25_FY26_USDmillion": [
+      72610,
+      101938
+    ],
+    "independent_history_growth": 0.4039113069825093,
+    "claim_ids": [
+      "claim_8_azure_growth_base_2029",
+      "claim_8_azure_growth_base_2029_part2",
+      "claim_8_azure_growth_base_2029_part3",
+      "claim_8_azure_growth_base_2029_part4",
+      "v2_history_azure_growth_base_2029",
+      "v2_constraint_azure_growth_base_2029",
+      "v2_constraint_azure_growth_base_2029_part2",
+      "v2_constraint_azure_growth_base_2029_part3",
+      "v2_constraint_azure_growth_base_2029_part4",
+      "v2_context_azure_growth_base_2029"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/4",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment3/4",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment4/4",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment2/4",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment3/4",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment4/4",
+      "PPT21 adjusted FY27Q1 outlook row for Azure; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Capacity live dates and CPU/GPU efficiencies support consumed paid usage. Actual supply limits and demand/pricing uncertainty constrain delivery. Annual reported 30/38/45 choices differ from Q1 44–45 CC; FY28/29 fade conditional."
+  },
+  {
+    "parameter_id": "azure_growth_high_2027",
+    "stream": "azure",
+    "year": 2027,
+    "scenario": "high",
+    "value_ratio": 0.45,
+    "independent_history_FY25_FY26_USDmillion": [
+      72610,
+      101938
+    ],
+    "independent_history_growth": 0.4039113069825093,
+    "claim_ids": [
+      "claim_9_azure_growth_high_2027",
+      "claim_9_azure_growth_high_2027_part2",
+      "claim_9_azure_growth_high_2027_part3",
+      "claim_9_azure_growth_high_2027_part4",
+      "v2_history_azure_growth_high_2027",
+      "v2_constraint_azure_growth_high_2027",
+      "v2_constraint_azure_growth_high_2027_part2",
+      "v2_constraint_azure_growth_high_2027_part3",
+      "v2_constraint_azure_growth_high_2027_part4",
+      "v2_context_azure_growth_high_2027"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/4",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment3/4",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment4/4",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment2/4",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment3/4",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment4/4",
+      "PPT21 adjusted FY27Q1 outlook row for Azure; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Capacity live dates and CPU/GPU efficiencies support consumed paid usage. Actual supply limits and demand/pricing uncertainty constrain delivery. Annual reported 30/38/45 choices differ from Q1 44–45 CC; FY28/29 fade conditional."
+  },
+  {
+    "parameter_id": "azure_growth_high_2028",
+    "stream": "azure",
+    "year": 2028,
+    "scenario": "high",
+    "value_ratio": 0.38,
+    "independent_history_FY25_FY26_USDmillion": [
+      72610,
+      101938
+    ],
+    "independent_history_growth": 0.4039113069825093,
+    "claim_ids": [
+      "claim_10_azure_growth_high_2028",
+      "claim_10_azure_growth_high_2028_part2",
+      "claim_10_azure_growth_high_2028_part3",
+      "claim_10_azure_growth_high_2028_part4",
+      "v2_history_azure_growth_high_2028",
+      "v2_constraint_azure_growth_high_2028",
+      "v2_constraint_azure_growth_high_2028_part2",
+      "v2_constraint_azure_growth_high_2028_part3",
+      "v2_constraint_azure_growth_high_2028_part4",
+      "v2_context_azure_growth_high_2028"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/4",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment3/4",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment4/4",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment2/4",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment3/4",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment4/4",
+      "PPT21 adjusted FY27Q1 outlook row for Azure; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Capacity live dates and CPU/GPU efficiencies support consumed paid usage. Actual supply limits and demand/pricing uncertainty constrain delivery. Annual reported 30/38/45 choices differ from Q1 44–45 CC; FY28/29 fade conditional."
+  },
+  {
+    "parameter_id": "azure_growth_high_2029",
+    "stream": "azure",
+    "year": 2029,
+    "scenario": "high",
+    "value_ratio": 0.3,
+    "independent_history_FY25_FY26_USDmillion": [
+      72610,
+      101938
+    ],
+    "independent_history_growth": 0.4039113069825093,
+    "claim_ids": [
+      "claim_11_azure_growth_high_2029",
+      "claim_11_azure_growth_high_2029_part2",
+      "claim_11_azure_growth_high_2029_part3",
+      "claim_11_azure_growth_high_2029_part4",
+      "v2_history_azure_growth_high_2029",
+      "v2_constraint_azure_growth_high_2029",
+      "v2_constraint_azure_growth_high_2029_part2",
+      "v2_constraint_azure_growth_high_2029_part3",
+      "v2_constraint_azure_growth_high_2029_part4",
+      "v2_context_azure_growth_high_2029"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/4",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment3/4",
+      "Official complete FY26Q4 call.txt lines [243, 318, 319, 320]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment4/4",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment2/4",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment3/4",
+      "Complete official call.txt lines [317, 332, 337]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment4/4",
+      "PPT21 adjusted FY27Q1 outlook row for Azure; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Capacity live dates and CPU/GPU efficiencies support consumed paid usage. Actual supply limits and demand/pricing uncertainty constrain delivery. Annual reported 30/38/45 choices differ from Q1 44–45 CC; FY28/29 fade conditional."
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_low_2027",
+    "stream": "microsoft_365_cloud",
+    "year": 2027,
+    "scenario": "low",
+    "value_ratio": 0.12,
+    "independent_history_FY25_FY26_USDmillion": [
+      84605,
+      100299
+    ],
+    "independent_history_growth": 0.18549731103362688,
+    "claim_ids": [
+      "claim_17_microsoft_365_cloud_growth_low_2027",
+      "claim_17_microsoft_365_cloud_growth_low_2027_part2",
+      "claim_17_microsoft_365_cloud_growth_low_2027_part3",
+      "claim_17_microsoft_365_cloud_growth_low_2027_part4",
+      "v2_history_microsoft_365_cloud_growth_low_2027",
+      "v2_constraint_microsoft_365_cloud_growth_low_2027",
+      "v2_constraint_microsoft_365_cloud_growth_low_2027_part2",
+      "v2_context_microsoft_365_cloud_growth_low_2027"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/4",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment3/4",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment4/4",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [268]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "Complete official call.txt lines [268]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment2/2",
+      "PPT21 adjusted FY27Q1 outlook row for Microsoft 365 cloud; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Paid Copilot and premium mix plus delivered consumption support monetization. Lower-ARPU new seats offset mix; period-end seats/commercial subset are not whole annual cloud. Future fade conditional on paid adoption and retention."
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_low_2028",
+    "stream": "microsoft_365_cloud",
+    "year": 2028,
+    "scenario": "low",
+    "value_ratio": 0.1,
+    "independent_history_FY25_FY26_USDmillion": [
+      84605,
+      100299
+    ],
+    "independent_history_growth": 0.18549731103362688,
+    "claim_ids": [
+      "claim_18_microsoft_365_cloud_growth_low_2028",
+      "claim_18_microsoft_365_cloud_growth_low_2028_part2",
+      "claim_18_microsoft_365_cloud_growth_low_2028_part3",
+      "claim_18_microsoft_365_cloud_growth_low_2028_part4",
+      "v2_history_microsoft_365_cloud_growth_low_2028",
+      "v2_constraint_microsoft_365_cloud_growth_low_2028",
+      "v2_constraint_microsoft_365_cloud_growth_low_2028_part2",
+      "v2_context_microsoft_365_cloud_growth_low_2028"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/4",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment3/4",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment4/4",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [268]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "Complete official call.txt lines [268]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment2/2",
+      "PPT21 adjusted FY27Q1 outlook row for Microsoft 365 cloud; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Paid Copilot and premium mix plus delivered consumption support monetization. Lower-ARPU new seats offset mix; period-end seats/commercial subset are not whole annual cloud. Future fade conditional on paid adoption and retention."
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_low_2029",
+    "stream": "microsoft_365_cloud",
+    "year": 2029,
+    "scenario": "low",
+    "value_ratio": 0.08,
+    "independent_history_FY25_FY26_USDmillion": [
+      84605,
+      100299
+    ],
+    "independent_history_growth": 0.18549731103362688,
+    "claim_ids": [
+      "claim_19_microsoft_365_cloud_growth_low_2029",
+      "claim_19_microsoft_365_cloud_growth_low_2029_part2",
+      "claim_19_microsoft_365_cloud_growth_low_2029_part3",
+      "claim_19_microsoft_365_cloud_growth_low_2029_part4",
+      "v2_history_microsoft_365_cloud_growth_low_2029",
+      "v2_constraint_microsoft_365_cloud_growth_low_2029",
+      "v2_constraint_microsoft_365_cloud_growth_low_2029_part2",
+      "v2_context_microsoft_365_cloud_growth_low_2029"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/4",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment3/4",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment4/4",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [268]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "Complete official call.txt lines [268]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment2/2",
+      "PPT21 adjusted FY27Q1 outlook row for Microsoft 365 cloud; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Paid Copilot and premium mix plus delivered consumption support monetization. Lower-ARPU new seats offset mix; period-end seats/commercial subset are not whole annual cloud. Future fade conditional on paid adoption and retention."
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_base_2027",
+    "stream": "microsoft_365_cloud",
+    "year": 2027,
+    "scenario": "base",
+    "value_ratio": 0.17,
+    "independent_history_FY25_FY26_USDmillion": [
+      84605,
+      100299
+    ],
+    "independent_history_growth": 0.18549731103362688,
+    "claim_ids": [
+      "claim_20_microsoft_365_cloud_growth_base_2027",
+      "claim_20_microsoft_365_cloud_growth_base_2027_part2",
+      "claim_20_microsoft_365_cloud_growth_base_2027_part3",
+      "claim_20_microsoft_365_cloud_growth_base_2027_part4",
+      "v2_history_microsoft_365_cloud_growth_base_2027",
+      "v2_constraint_microsoft_365_cloud_growth_base_2027",
+      "v2_constraint_microsoft_365_cloud_growth_base_2027_part2",
+      "v2_context_microsoft_365_cloud_growth_base_2027"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/4",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment3/4",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment4/4",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [268]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "Complete official call.txt lines [268]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment2/2",
+      "PPT21 adjusted FY27Q1 outlook row for Microsoft 365 cloud; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Paid Copilot and premium mix plus delivered consumption support monetization. Lower-ARPU new seats offset mix; period-end seats/commercial subset are not whole annual cloud. Future fade conditional on paid adoption and retention."
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_base_2028",
+    "stream": "microsoft_365_cloud",
+    "year": 2028,
+    "scenario": "base",
+    "value_ratio": 0.16,
+    "independent_history_FY25_FY26_USDmillion": [
+      84605,
+      100299
+    ],
+    "independent_history_growth": 0.18549731103362688,
+    "claim_ids": [
+      "claim_21_microsoft_365_cloud_growth_base_2028",
+      "claim_21_microsoft_365_cloud_growth_base_2028_part2",
+      "claim_21_microsoft_365_cloud_growth_base_2028_part3",
+      "claim_21_microsoft_365_cloud_growth_base_2028_part4",
+      "v2_history_microsoft_365_cloud_growth_base_2028",
+      "v2_constraint_microsoft_365_cloud_growth_base_2028",
+      "v2_constraint_microsoft_365_cloud_growth_base_2028_part2",
+      "v2_context_microsoft_365_cloud_growth_base_2028"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/4",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment3/4",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment4/4",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [268]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "Complete official call.txt lines [268]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment2/2",
+      "PPT21 adjusted FY27Q1 outlook row for Microsoft 365 cloud; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Paid Copilot and premium mix plus delivered consumption support monetization. Lower-ARPU new seats offset mix; period-end seats/commercial subset are not whole annual cloud. Future fade conditional on paid adoption and retention."
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_base_2029",
+    "stream": "microsoft_365_cloud",
+    "year": 2029,
+    "scenario": "base",
+    "value_ratio": 0.14,
+    "independent_history_FY25_FY26_USDmillion": [
+      84605,
+      100299
+    ],
+    "independent_history_growth": 0.18549731103362688,
+    "claim_ids": [
+      "claim_22_microsoft_365_cloud_growth_base_2029",
+      "claim_22_microsoft_365_cloud_growth_base_2029_part2",
+      "claim_22_microsoft_365_cloud_growth_base_2029_part3",
+      "claim_22_microsoft_365_cloud_growth_base_2029_part4",
+      "v2_history_microsoft_365_cloud_growth_base_2029",
+      "v2_constraint_microsoft_365_cloud_growth_base_2029",
+      "v2_constraint_microsoft_365_cloud_growth_base_2029_part2",
+      "v2_context_microsoft_365_cloud_growth_base_2029"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/4",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment3/4",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment4/4",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [268]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "Complete official call.txt lines [268]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment2/2",
+      "PPT21 adjusted FY27Q1 outlook row for Microsoft 365 cloud; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Paid Copilot and premium mix plus delivered consumption support monetization. Lower-ARPU new seats offset mix; period-end seats/commercial subset are not whole annual cloud. Future fade conditional on paid adoption and retention."
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_high_2027",
+    "stream": "microsoft_365_cloud",
+    "year": 2027,
+    "scenario": "high",
+    "value_ratio": 0.22,
+    "independent_history_FY25_FY26_USDmillion": [
+      84605,
+      100299
+    ],
+    "independent_history_growth": 0.18549731103362688,
+    "claim_ids": [
+      "claim_23_microsoft_365_cloud_growth_high_2027",
+      "claim_23_microsoft_365_cloud_growth_high_2027_part2",
+      "claim_23_microsoft_365_cloud_growth_high_2027_part3",
+      "claim_23_microsoft_365_cloud_growth_high_2027_part4",
+      "v2_history_microsoft_365_cloud_growth_high_2027",
+      "v2_constraint_microsoft_365_cloud_growth_high_2027",
+      "v2_constraint_microsoft_365_cloud_growth_high_2027_part2",
+      "v2_context_microsoft_365_cloud_growth_high_2027"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/4",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment3/4",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment4/4",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [268]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "Complete official call.txt lines [268]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment2/2",
+      "PPT21 adjusted FY27Q1 outlook row for Microsoft 365 cloud; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Paid Copilot and premium mix plus delivered consumption support monetization. Lower-ARPU new seats offset mix; period-end seats/commercial subset are not whole annual cloud. Future fade conditional on paid adoption and retention."
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_high_2028",
+    "stream": "microsoft_365_cloud",
+    "year": 2028,
+    "scenario": "high",
+    "value_ratio": 0.21,
+    "independent_history_FY25_FY26_USDmillion": [
+      84605,
+      100299
+    ],
+    "independent_history_growth": 0.18549731103362688,
+    "claim_ids": [
+      "claim_24_microsoft_365_cloud_growth_high_2028",
+      "claim_24_microsoft_365_cloud_growth_high_2028_part2",
+      "claim_24_microsoft_365_cloud_growth_high_2028_part3",
+      "claim_24_microsoft_365_cloud_growth_high_2028_part4",
+      "v2_history_microsoft_365_cloud_growth_high_2028",
+      "v2_constraint_microsoft_365_cloud_growth_high_2028",
+      "v2_constraint_microsoft_365_cloud_growth_high_2028_part2",
+      "v2_context_microsoft_365_cloud_growth_high_2028"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/4",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment3/4",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment4/4",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [268]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "Complete official call.txt lines [268]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment2/2",
+      "PPT21 adjusted FY27Q1 outlook row for Microsoft 365 cloud; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Paid Copilot and premium mix plus delivered consumption support monetization. Lower-ARPU new seats offset mix; period-end seats/commercial subset are not whole annual cloud. Future fade conditional on paid adoption and retention."
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_high_2029",
+    "stream": "microsoft_365_cloud",
+    "year": 2029,
+    "scenario": "high",
+    "value_ratio": 0.19,
+    "independent_history_FY25_FY26_USDmillion": [
+      84605,
+      100299
+    ],
+    "independent_history_growth": 0.18549731103362688,
+    "claim_ids": [
+      "claim_25_microsoft_365_cloud_growth_high_2029",
+      "claim_25_microsoft_365_cloud_growth_high_2029_part2",
+      "claim_25_microsoft_365_cloud_growth_high_2029_part3",
+      "claim_25_microsoft_365_cloud_growth_high_2029_part4",
+      "v2_history_microsoft_365_cloud_growth_high_2029",
+      "v2_constraint_microsoft_365_cloud_growth_high_2029",
+      "v2_constraint_microsoft_365_cloud_growth_high_2029_part2",
+      "v2_context_microsoft_365_cloud_growth_high_2029"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/4",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment3/4",
+      "Official complete FY26Q4 call.txt lines [236, 238, 361, 362]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment4/4",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [268]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "Complete official call.txt lines [268]; constraint/opposing gaming expectation; scope stated in parameter rationale; checked-context fragment2/2",
+      "PPT21 adjusted FY27Q1 outlook row for Microsoft 365 cloud; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Paid Copilot and premium mix plus delivered consumption support monetization. Lower-ARPU new seats offset mix; period-end seats/commercial subset are not whole annual cloud. Future fade conditional on paid adoption and retention."
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_low_2027",
+    "stream": "productivity_and_server_licensing",
+    "year": 2027,
+    "scenario": "low",
+    "value_ratio": -0.08,
+    "independent_history_FY25_FY26_USDmillion": [
+      35391,
+      37285
+    ],
+    "independent_history_growth": 0.05351643073097678,
+    "claim_ids": [
+      "claim_31_productivity_and_server_licensing_growth_low_2027",
+      "claim_31_productivity_and_server_licensing_growth_low_2027_part2",
+      "v2_history_productivity_and_server_licensing_growth_low_2027",
+      "v2_constraint_productivity_and_server_licensing_growth_low_2027",
+      "v2_context_productivity_and_server_licensing_growth_low_2027"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [237, 244]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [237, 244]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [255, 275]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Productivity and server licensing; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Actual in-period recognition/renewals explain prior positive growth; cloud migration and launch comparables explain conditional decline. New mixed stream cannot use old product midpoint. FY28/29 normalization conditional."
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_low_2028",
+    "stream": "productivity_and_server_licensing",
+    "year": 2028,
+    "scenario": "low",
+    "value_ratio": -0.06,
+    "independent_history_FY25_FY26_USDmillion": [
+      35391,
+      37285
+    ],
+    "independent_history_growth": 0.05351643073097678,
+    "claim_ids": [
+      "claim_32_productivity_and_server_licensing_growth_low_2028",
+      "claim_32_productivity_and_server_licensing_growth_low_2028_part2",
+      "v2_history_productivity_and_server_licensing_growth_low_2028",
+      "v2_constraint_productivity_and_server_licensing_growth_low_2028",
+      "v2_context_productivity_and_server_licensing_growth_low_2028"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [237, 244]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [237, 244]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [255, 275]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Productivity and server licensing; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Actual in-period recognition/renewals explain prior positive growth; cloud migration and launch comparables explain conditional decline. New mixed stream cannot use old product midpoint. FY28/29 normalization conditional."
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_low_2029",
+    "stream": "productivity_and_server_licensing",
+    "year": 2029,
+    "scenario": "low",
+    "value_ratio": -0.05,
+    "independent_history_FY25_FY26_USDmillion": [
+      35391,
+      37285
+    ],
+    "independent_history_growth": 0.05351643073097678,
+    "claim_ids": [
+      "claim_33_productivity_and_server_licensing_growth_low_2029",
+      "claim_33_productivity_and_server_licensing_growth_low_2029_part2",
+      "v2_history_productivity_and_server_licensing_growth_low_2029",
+      "v2_constraint_productivity_and_server_licensing_growth_low_2029",
+      "v2_context_productivity_and_server_licensing_growth_low_2029"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [237, 244]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [237, 244]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [255, 275]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Productivity and server licensing; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Actual in-period recognition/renewals explain prior positive growth; cloud migration and launch comparables explain conditional decline. New mixed stream cannot use old product midpoint. FY28/29 normalization conditional."
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_base_2027",
+    "stream": "productivity_and_server_licensing",
+    "year": 2027,
+    "scenario": "base",
+    "value_ratio": -0.05,
+    "independent_history_FY25_FY26_USDmillion": [
+      35391,
+      37285
+    ],
+    "independent_history_growth": 0.05351643073097678,
+    "claim_ids": [
+      "claim_34_productivity_and_server_licensing_growth_base_2027",
+      "claim_34_productivity_and_server_licensing_growth_base_2027_part2",
+      "v2_history_productivity_and_server_licensing_growth_base_2027",
+      "v2_constraint_productivity_and_server_licensing_growth_base_2027",
+      "v2_context_productivity_and_server_licensing_growth_base_2027"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [237, 244]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [237, 244]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [255, 275]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Productivity and server licensing; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Actual in-period recognition/renewals explain prior positive growth; cloud migration and launch comparables explain conditional decline. New mixed stream cannot use old product midpoint. FY28/29 normalization conditional."
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_base_2028",
+    "stream": "productivity_and_server_licensing",
+    "year": 2028,
+    "scenario": "base",
+    "value_ratio": -0.03,
+    "independent_history_FY25_FY26_USDmillion": [
+      35391,
+      37285
+    ],
+    "independent_history_growth": 0.05351643073097678,
+    "claim_ids": [
+      "claim_35_productivity_and_server_licensing_growth_base_2028",
+      "claim_35_productivity_and_server_licensing_growth_base_2028_part2",
+      "v2_history_productivity_and_server_licensing_growth_base_2028",
+      "v2_constraint_productivity_and_server_licensing_growth_base_2028",
+      "v2_context_productivity_and_server_licensing_growth_base_2028"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [237, 244]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [237, 244]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [255, 275]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Productivity and server licensing; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Actual in-period recognition/renewals explain prior positive growth; cloud migration and launch comparables explain conditional decline. New mixed stream cannot use old product midpoint. FY28/29 normalization conditional."
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_base_2029",
+    "stream": "productivity_and_server_licensing",
+    "year": 2029,
+    "scenario": "base",
+    "value_ratio": -0.02,
+    "independent_history_FY25_FY26_USDmillion": [
+      35391,
+      37285
+    ],
+    "independent_history_growth": 0.05351643073097678,
+    "claim_ids": [
+      "claim_36_productivity_and_server_licensing_growth_base_2029",
+      "claim_36_productivity_and_server_licensing_growth_base_2029_part2",
+      "v2_history_productivity_and_server_licensing_growth_base_2029",
+      "v2_constraint_productivity_and_server_licensing_growth_base_2029",
+      "v2_context_productivity_and_server_licensing_growth_base_2029"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [237, 244]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [237, 244]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [255, 275]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Productivity and server licensing; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Actual in-period recognition/renewals explain prior positive growth; cloud migration and launch comparables explain conditional decline. New mixed stream cannot use old product midpoint. FY28/29 normalization conditional."
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_high_2027",
+    "stream": "productivity_and_server_licensing",
+    "year": 2027,
+    "scenario": "high",
+    "value_ratio": -0.02,
+    "independent_history_FY25_FY26_USDmillion": [
+      35391,
+      37285
+    ],
+    "independent_history_growth": 0.05351643073097678,
+    "claim_ids": [
+      "claim_37_productivity_and_server_licensing_growth_high_2027",
+      "claim_37_productivity_and_server_licensing_growth_high_2027_part2",
+      "v2_history_productivity_and_server_licensing_growth_high_2027",
+      "v2_constraint_productivity_and_server_licensing_growth_high_2027",
+      "v2_context_productivity_and_server_licensing_growth_high_2027"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [237, 244]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [237, 244]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [255, 275]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Productivity and server licensing; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Actual in-period recognition/renewals explain prior positive growth; cloud migration and launch comparables explain conditional decline. New mixed stream cannot use old product midpoint. FY28/29 normalization conditional."
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_high_2028",
+    "stream": "productivity_and_server_licensing",
+    "year": 2028,
+    "scenario": "high",
+    "value_ratio": 0,
+    "independent_history_FY25_FY26_USDmillion": [
+      35391,
+      37285
+    ],
+    "independent_history_growth": 0.05351643073097678,
+    "claim_ids": [
+      "claim_38_productivity_and_server_licensing_growth_high_2028",
+      "claim_38_productivity_and_server_licensing_growth_high_2028_part2",
+      "v2_history_productivity_and_server_licensing_growth_high_2028",
+      "v2_constraint_productivity_and_server_licensing_growth_high_2028",
+      "v2_context_productivity_and_server_licensing_growth_high_2028"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [237, 244]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [237, 244]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [255, 275]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Productivity and server licensing; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Actual in-period recognition/renewals explain prior positive growth; cloud migration and launch comparables explain conditional decline. New mixed stream cannot use old product midpoint. FY28/29 normalization conditional."
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_high_2029",
+    "stream": "productivity_and_server_licensing",
+    "year": 2029,
+    "scenario": "high",
+    "value_ratio": 0.01,
+    "independent_history_FY25_FY26_USDmillion": [
+      35391,
+      37285
+    ],
+    "independent_history_growth": 0.05351643073097678,
+    "claim_ids": [
+      "claim_39_productivity_and_server_licensing_growth_high_2029",
+      "claim_39_productivity_and_server_licensing_growth_high_2029_part2",
+      "v2_history_productivity_and_server_licensing_growth_high_2029",
+      "v2_constraint_productivity_and_server_licensing_growth_high_2029",
+      "v2_context_productivity_and_server_licensing_growth_high_2029"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [237, 244]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [237, 244]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [255, 275]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Productivity and server licensing; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Actual in-period recognition/renewals explain prior positive growth; cloud migration and launch comparables explain conditional decline. New mixed stream cannot use old product midpoint. FY28/29 normalization conditional."
+  },
+  {
+    "parameter_id": "industry_solutions_growth_low_2027",
+    "stream": "industry_solutions",
+    "year": 2027,
+    "scenario": "low",
+    "value_ratio": 0.05,
+    "independent_history_FY25_FY26_USDmillion": [
+      18417,
+      20345
+    ],
+    "independent_history_growth": 0.10468588803822554,
+    "claim_ids": [
+      "claim_42_industry_solutions_growth_low_2027",
+      "claim_42_industry_solutions_growth_low_2027_part2",
+      "v2_history_industry_solutions_growth_low_2027",
+      "v2_constraint_industry_solutions_growth_low_2027",
+      "v2_context_industry_solutions_growth_low_2027"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [191, 192, 193, 240]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [191, 192, 193, 240]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [240]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Industry solutions; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "ERP strength and delivered healthcare usage support expansion; CRM moderation and longer sales cycles oppose it. Encounters lack fee bridge. Annual whole stream differs from industry-cloud quarterly guide."
+  },
+  {
+    "parameter_id": "industry_solutions_growth_low_2028",
+    "stream": "industry_solutions",
+    "year": 2028,
+    "scenario": "low",
+    "value_ratio": 0.04,
+    "independent_history_FY25_FY26_USDmillion": [
+      18417,
+      20345
+    ],
+    "independent_history_growth": 0.10468588803822554,
+    "claim_ids": [
+      "claim_43_industry_solutions_growth_low_2028",
+      "claim_43_industry_solutions_growth_low_2028_part2",
+      "v2_history_industry_solutions_growth_low_2028",
+      "v2_constraint_industry_solutions_growth_low_2028",
+      "v2_context_industry_solutions_growth_low_2028"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [191, 192, 193, 240]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [191, 192, 193, 240]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [240]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Industry solutions; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "ERP strength and delivered healthcare usage support expansion; CRM moderation and longer sales cycles oppose it. Encounters lack fee bridge. Annual whole stream differs from industry-cloud quarterly guide."
+  },
+  {
+    "parameter_id": "industry_solutions_growth_low_2029",
+    "stream": "industry_solutions",
+    "year": 2029,
+    "scenario": "low",
+    "value_ratio": 0.03,
+    "independent_history_FY25_FY26_USDmillion": [
+      18417,
+      20345
+    ],
+    "independent_history_growth": 0.10468588803822554,
+    "claim_ids": [
+      "claim_44_industry_solutions_growth_low_2029",
+      "claim_44_industry_solutions_growth_low_2029_part2",
+      "v2_history_industry_solutions_growth_low_2029",
+      "v2_constraint_industry_solutions_growth_low_2029",
+      "v2_context_industry_solutions_growth_low_2029"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [191, 192, 193, 240]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [191, 192, 193, 240]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [240]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Industry solutions; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "ERP strength and delivered healthcare usage support expansion; CRM moderation and longer sales cycles oppose it. Encounters lack fee bridge. Annual whole stream differs from industry-cloud quarterly guide."
+  },
+  {
+    "parameter_id": "industry_solutions_growth_base_2027",
+    "stream": "industry_solutions",
+    "year": 2027,
+    "scenario": "base",
+    "value_ratio": 0.09,
+    "independent_history_FY25_FY26_USDmillion": [
+      18417,
+      20345
+    ],
+    "independent_history_growth": 0.10468588803822554,
+    "claim_ids": [
+      "claim_45_industry_solutions_growth_base_2027",
+      "claim_45_industry_solutions_growth_base_2027_part2",
+      "v2_history_industry_solutions_growth_base_2027",
+      "v2_constraint_industry_solutions_growth_base_2027",
+      "v2_context_industry_solutions_growth_base_2027"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [191, 192, 193, 240]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [191, 192, 193, 240]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [240]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Industry solutions; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "ERP strength and delivered healthcare usage support expansion; CRM moderation and longer sales cycles oppose it. Encounters lack fee bridge. Annual whole stream differs from industry-cloud quarterly guide."
+  },
+  {
+    "parameter_id": "industry_solutions_growth_base_2028",
+    "stream": "industry_solutions",
+    "year": 2028,
+    "scenario": "base",
+    "value_ratio": 0.09,
+    "independent_history_FY25_FY26_USDmillion": [
+      18417,
+      20345
+    ],
+    "independent_history_growth": 0.10468588803822554,
+    "claim_ids": [
+      "claim_46_industry_solutions_growth_base_2028",
+      "claim_46_industry_solutions_growth_base_2028_part2",
+      "v2_history_industry_solutions_growth_base_2028",
+      "v2_constraint_industry_solutions_growth_base_2028",
+      "v2_context_industry_solutions_growth_base_2028"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [191, 192, 193, 240]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [191, 192, 193, 240]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [240]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Industry solutions; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "ERP strength and delivered healthcare usage support expansion; CRM moderation and longer sales cycles oppose it. Encounters lack fee bridge. Annual whole stream differs from industry-cloud quarterly guide."
+  },
+  {
+    "parameter_id": "industry_solutions_growth_base_2029",
+    "stream": "industry_solutions",
+    "year": 2029,
+    "scenario": "base",
+    "value_ratio": 0.08,
+    "independent_history_FY25_FY26_USDmillion": [
+      18417,
+      20345
+    ],
+    "independent_history_growth": 0.10468588803822554,
+    "claim_ids": [
+      "claim_47_industry_solutions_growth_base_2029",
+      "claim_47_industry_solutions_growth_base_2029_part2",
+      "v2_history_industry_solutions_growth_base_2029",
+      "v2_constraint_industry_solutions_growth_base_2029",
+      "v2_context_industry_solutions_growth_base_2029"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [191, 192, 193, 240]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [191, 192, 193, 240]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [240]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Industry solutions; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "ERP strength and delivered healthcare usage support expansion; CRM moderation and longer sales cycles oppose it. Encounters lack fee bridge. Annual whole stream differs from industry-cloud quarterly guide."
+  },
+  {
+    "parameter_id": "industry_solutions_growth_high_2027",
+    "stream": "industry_solutions",
+    "year": 2027,
+    "scenario": "high",
+    "value_ratio": 0.13,
+    "independent_history_FY25_FY26_USDmillion": [
+      18417,
+      20345
+    ],
+    "independent_history_growth": 0.10468588803822554,
+    "claim_ids": [
+      "claim_48_industry_solutions_growth_high_2027",
+      "claim_48_industry_solutions_growth_high_2027_part2",
+      "v2_history_industry_solutions_growth_high_2027",
+      "v2_constraint_industry_solutions_growth_high_2027",
+      "v2_context_industry_solutions_growth_high_2027"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [191, 192, 193, 240]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [191, 192, 193, 240]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [240]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Industry solutions; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "ERP strength and delivered healthcare usage support expansion; CRM moderation and longer sales cycles oppose it. Encounters lack fee bridge. Annual whole stream differs from industry-cloud quarterly guide."
+  },
+  {
+    "parameter_id": "industry_solutions_growth_high_2028",
+    "stream": "industry_solutions",
+    "year": 2028,
+    "scenario": "high",
+    "value_ratio": 0.13,
+    "independent_history_FY25_FY26_USDmillion": [
+      18417,
+      20345
+    ],
+    "independent_history_growth": 0.10468588803822554,
+    "claim_ids": [
+      "claim_49_industry_solutions_growth_high_2028",
+      "claim_49_industry_solutions_growth_high_2028_part2",
+      "v2_history_industry_solutions_growth_high_2028",
+      "v2_constraint_industry_solutions_growth_high_2028",
+      "v2_context_industry_solutions_growth_high_2028"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [191, 192, 193, 240]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [191, 192, 193, 240]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [240]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Industry solutions; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "ERP strength and delivered healthcare usage support expansion; CRM moderation and longer sales cycles oppose it. Encounters lack fee bridge. Annual whole stream differs from industry-cloud quarterly guide."
+  },
+  {
+    "parameter_id": "industry_solutions_growth_high_2029",
+    "stream": "industry_solutions",
+    "year": 2029,
+    "scenario": "high",
+    "value_ratio": 0.12,
+    "independent_history_FY25_FY26_USDmillion": [
+      18417,
+      20345
+    ],
+    "independent_history_growth": 0.10468588803822554,
+    "claim_ids": [
+      "claim_50_industry_solutions_growth_high_2029",
+      "claim_50_industry_solutions_growth_high_2029_part2",
+      "v2_history_industry_solutions_growth_high_2029",
+      "v2_constraint_industry_solutions_growth_high_2029",
+      "v2_context_industry_solutions_growth_high_2029"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [191, 192, 193, 240]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [191, 192, 193, 240]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [240]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Industry solutions; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "ERP strength and delivered healthcare usage support expansion; CRM moderation and longer sales cycles oppose it. Encounters lack fee bridge. Annual whole stream differs from industry-cloud quarterly guide."
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_low_2027",
+    "stream": "frontier_and_support_services",
+    "year": 2027,
+    "scenario": "low",
+    "value_ratio": 0.02,
+    "independent_history_FY25_FY26_USDmillion": [
+      7760,
+      8260
+    ],
+    "independent_history_growth": 0.06443298969072164,
+    "claim_ids": [
+      "claim_53_frontier_and_support_services_growth_low_2027",
+      "claim_53_frontier_and_support_services_growth_low_2027_part2",
+      "v2_history_frontier_and_support_services_growth_low_2027",
+      "v2_constraint_frontier_and_support_services_growth_low_2027"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [198, 199, 200, 201, 202]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [198, 199, 200, 201, 202]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [200]; constraint/opposing gaming expectation; scope stated in parameter rationale"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Completed 330 projects/164 customers support activity/capability; planned 6000 experts is not realized billed capacity. No fee/utilization/backlog bridge; completed-project disclosure is scope constraint, not observed declining demand. All nine paid-delivery paths conditional."
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_low_2028",
+    "stream": "frontier_and_support_services",
+    "year": 2028,
+    "scenario": "low",
+    "value_ratio": 0.02,
+    "independent_history_FY25_FY26_USDmillion": [
+      7760,
+      8260
+    ],
+    "independent_history_growth": 0.06443298969072164,
+    "claim_ids": [
+      "claim_54_frontier_and_support_services_growth_low_2028",
+      "claim_54_frontier_and_support_services_growth_low_2028_part2",
+      "v2_history_frontier_and_support_services_growth_low_2028",
+      "v2_constraint_frontier_and_support_services_growth_low_2028"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [198, 199, 200, 201, 202]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [198, 199, 200, 201, 202]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [200]; constraint/opposing gaming expectation; scope stated in parameter rationale"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Completed 330 projects/164 customers support activity/capability; planned 6000 experts is not realized billed capacity. No fee/utilization/backlog bridge; completed-project disclosure is scope constraint, not observed declining demand. All nine paid-delivery paths conditional."
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_low_2029",
+    "stream": "frontier_and_support_services",
+    "year": 2029,
+    "scenario": "low",
+    "value_ratio": 0.01,
+    "independent_history_FY25_FY26_USDmillion": [
+      7760,
+      8260
+    ],
+    "independent_history_growth": 0.06443298969072164,
+    "claim_ids": [
+      "claim_55_frontier_and_support_services_growth_low_2029",
+      "claim_55_frontier_and_support_services_growth_low_2029_part2",
+      "v2_history_frontier_and_support_services_growth_low_2029",
+      "v2_constraint_frontier_and_support_services_growth_low_2029"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [198, 199, 200, 201, 202]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [198, 199, 200, 201, 202]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [200]; constraint/opposing gaming expectation; scope stated in parameter rationale"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Completed 330 projects/164 customers support activity/capability; planned 6000 experts is not realized billed capacity. No fee/utilization/backlog bridge; completed-project disclosure is scope constraint, not observed declining demand. All nine paid-delivery paths conditional."
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_base_2027",
+    "stream": "frontier_and_support_services",
+    "year": 2027,
+    "scenario": "base",
+    "value_ratio": 0.06,
+    "independent_history_FY25_FY26_USDmillion": [
+      7760,
+      8260
+    ],
+    "independent_history_growth": 0.06443298969072164,
+    "claim_ids": [
+      "claim_56_frontier_and_support_services_growth_base_2027",
+      "claim_56_frontier_and_support_services_growth_base_2027_part2",
+      "v2_history_frontier_and_support_services_growth_base_2027",
+      "v2_constraint_frontier_and_support_services_growth_base_2027"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [198, 199, 200, 201, 202]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [198, 199, 200, 201, 202]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [200]; constraint/opposing gaming expectation; scope stated in parameter rationale"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Completed 330 projects/164 customers support activity/capability; planned 6000 experts is not realized billed capacity. No fee/utilization/backlog bridge; completed-project disclosure is scope constraint, not observed declining demand. All nine paid-delivery paths conditional."
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_base_2028",
+    "stream": "frontier_and_support_services",
+    "year": 2028,
+    "scenario": "base",
+    "value_ratio": 0.05,
+    "independent_history_FY25_FY26_USDmillion": [
+      7760,
+      8260
+    ],
+    "independent_history_growth": 0.06443298969072164,
+    "claim_ids": [
+      "claim_57_frontier_and_support_services_growth_base_2028",
+      "claim_57_frontier_and_support_services_growth_base_2028_part2",
+      "v2_history_frontier_and_support_services_growth_base_2028",
+      "v2_constraint_frontier_and_support_services_growth_base_2028"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [198, 199, 200, 201, 202]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [198, 199, 200, 201, 202]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [200]; constraint/opposing gaming expectation; scope stated in parameter rationale"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Completed 330 projects/164 customers support activity/capability; planned 6000 experts is not realized billed capacity. No fee/utilization/backlog bridge; completed-project disclosure is scope constraint, not observed declining demand. All nine paid-delivery paths conditional."
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_base_2029",
+    "stream": "frontier_and_support_services",
+    "year": 2029,
+    "scenario": "base",
+    "value_ratio": 0.04,
+    "independent_history_FY25_FY26_USDmillion": [
+      7760,
+      8260
+    ],
+    "independent_history_growth": 0.06443298969072164,
+    "claim_ids": [
+      "claim_58_frontier_and_support_services_growth_base_2029",
+      "claim_58_frontier_and_support_services_growth_base_2029_part2",
+      "v2_history_frontier_and_support_services_growth_base_2029",
+      "v2_constraint_frontier_and_support_services_growth_base_2029"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [198, 199, 200, 201, 202]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [198, 199, 200, 201, 202]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [200]; constraint/opposing gaming expectation; scope stated in parameter rationale"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Completed 330 projects/164 customers support activity/capability; planned 6000 experts is not realized billed capacity. No fee/utilization/backlog bridge; completed-project disclosure is scope constraint, not observed declining demand. All nine paid-delivery paths conditional."
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_high_2027",
+    "stream": "frontier_and_support_services",
+    "year": 2027,
+    "scenario": "high",
+    "value_ratio": 0.09,
+    "independent_history_FY25_FY26_USDmillion": [
+      7760,
+      8260
+    ],
+    "independent_history_growth": 0.06443298969072164,
+    "claim_ids": [
+      "claim_59_frontier_and_support_services_growth_high_2027",
+      "claim_59_frontier_and_support_services_growth_high_2027_part2",
+      "v2_history_frontier_and_support_services_growth_high_2027",
+      "v2_constraint_frontier_and_support_services_growth_high_2027"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [198, 199, 200, 201, 202]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [198, 199, 200, 201, 202]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [200]; constraint/opposing gaming expectation; scope stated in parameter rationale"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Completed 330 projects/164 customers support activity/capability; planned 6000 experts is not realized billed capacity. No fee/utilization/backlog bridge; completed-project disclosure is scope constraint, not observed declining demand. All nine paid-delivery paths conditional."
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_high_2028",
+    "stream": "frontier_and_support_services",
+    "year": 2028,
+    "scenario": "high",
+    "value_ratio": 0.08,
+    "independent_history_FY25_FY26_USDmillion": [
+      7760,
+      8260
+    ],
+    "independent_history_growth": 0.06443298969072164,
+    "claim_ids": [
+      "claim_60_frontier_and_support_services_growth_high_2028",
+      "claim_60_frontier_and_support_services_growth_high_2028_part2",
+      "v2_history_frontier_and_support_services_growth_high_2028",
+      "v2_constraint_frontier_and_support_services_growth_high_2028"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [198, 199, 200, 201, 202]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [198, 199, 200, 201, 202]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [200]; constraint/opposing gaming expectation; scope stated in parameter rationale"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Completed 330 projects/164 customers support activity/capability; planned 6000 experts is not realized billed capacity. No fee/utilization/backlog bridge; completed-project disclosure is scope constraint, not observed declining demand. All nine paid-delivery paths conditional."
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_high_2029",
+    "stream": "frontier_and_support_services",
+    "year": 2029,
+    "scenario": "high",
+    "value_ratio": 0.07,
+    "independent_history_FY25_FY26_USDmillion": [
+      7760,
+      8260
+    ],
+    "independent_history_growth": 0.06443298969072164,
+    "claim_ids": [
+      "claim_61_frontier_and_support_services_growth_high_2029",
+      "claim_61_frontier_and_support_services_growth_high_2029_part2",
+      "v2_history_frontier_and_support_services_growth_high_2029",
+      "v2_constraint_frontier_and_support_services_growth_high_2029"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [198, 199, 200, 201, 202]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [198, 199, 200, 201, 202]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [200]; constraint/opposing gaming expectation; scope stated in parameter rationale"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Completed 330 projects/164 customers support activity/capability; planned 6000 experts is not realized billed capacity. No fee/utilization/backlog bridge; completed-project disclosure is scope constraint, not observed declining demand. All nine paid-delivery paths conditional."
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_low_2027",
+    "stream": "search_and_advertising",
+    "year": 2027,
+    "scenario": "low",
+    "value_ratio": 0.03,
+    "independent_history_FY25_FY26_USDmillion": [
+      22171,
+      24835
+    ],
+    "independent_history_growth": 0.12015696179694202,
+    "claim_ids": [
+      "claim_67_search_and_advertising_growth_low_2027",
+      "v2_history_search_and_advertising_growth_low_2027",
+      "v2_constraint_search_and_advertising_growth_low_2027",
+      "v2_context_search_and_advertising_growth_low_2027"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [208, 239, 248]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [248, 278]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Search and advertising; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Monetized volume/yield and LinkedIn marketing support demand; partnerships constrain distribution. Annual gross/mixed stream differs from quarterly exTAC net metric. Later fade remains assumption."
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_low_2028",
+    "stream": "search_and_advertising",
+    "year": 2028,
+    "scenario": "low",
+    "value_ratio": 0.02,
+    "independent_history_FY25_FY26_USDmillion": [
+      22171,
+      24835
+    ],
+    "independent_history_growth": 0.12015696179694202,
+    "claim_ids": [
+      "claim_68_search_and_advertising_growth_low_2028",
+      "v2_history_search_and_advertising_growth_low_2028",
+      "v2_constraint_search_and_advertising_growth_low_2028",
+      "v2_context_search_and_advertising_growth_low_2028"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [208, 239, 248]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [248, 278]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Search and advertising; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Monetized volume/yield and LinkedIn marketing support demand; partnerships constrain distribution. Annual gross/mixed stream differs from quarterly exTAC net metric. Later fade remains assumption."
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_low_2029",
+    "stream": "search_and_advertising",
+    "year": 2029,
+    "scenario": "low",
+    "value_ratio": 0.01,
+    "independent_history_FY25_FY26_USDmillion": [
+      22171,
+      24835
+    ],
+    "independent_history_growth": 0.12015696179694202,
+    "claim_ids": [
+      "claim_69_search_and_advertising_growth_low_2029",
+      "v2_history_search_and_advertising_growth_low_2029",
+      "v2_constraint_search_and_advertising_growth_low_2029",
+      "v2_context_search_and_advertising_growth_low_2029"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [208, 239, 248]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [248, 278]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Search and advertising; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Monetized volume/yield and LinkedIn marketing support demand; partnerships constrain distribution. Annual gross/mixed stream differs from quarterly exTAC net metric. Later fade remains assumption."
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_base_2027",
+    "stream": "search_and_advertising",
+    "year": 2027,
+    "scenario": "base",
+    "value_ratio": 0.08,
+    "independent_history_FY25_FY26_USDmillion": [
+      22171,
+      24835
+    ],
+    "independent_history_growth": 0.12015696179694202,
+    "claim_ids": [
+      "claim_70_search_and_advertising_growth_base_2027",
+      "v2_history_search_and_advertising_growth_base_2027",
+      "v2_constraint_search_and_advertising_growth_base_2027",
+      "v2_context_search_and_advertising_growth_base_2027"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [208, 239, 248]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [248, 278]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Search and advertising; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Monetized volume/yield and LinkedIn marketing support demand; partnerships constrain distribution. Annual gross/mixed stream differs from quarterly exTAC net metric. Later fade remains assumption."
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_base_2028",
+    "stream": "search_and_advertising",
+    "year": 2028,
+    "scenario": "base",
+    "value_ratio": 0.07,
+    "independent_history_FY25_FY26_USDmillion": [
+      22171,
+      24835
+    ],
+    "independent_history_growth": 0.12015696179694202,
+    "claim_ids": [
+      "claim_71_search_and_advertising_growth_base_2028",
+      "v2_history_search_and_advertising_growth_base_2028",
+      "v2_constraint_search_and_advertising_growth_base_2028",
+      "v2_context_search_and_advertising_growth_base_2028"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [208, 239, 248]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [248, 278]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Search and advertising; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Monetized volume/yield and LinkedIn marketing support demand; partnerships constrain distribution. Annual gross/mixed stream differs from quarterly exTAC net metric. Later fade remains assumption."
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_base_2029",
+    "stream": "search_and_advertising",
+    "year": 2029,
+    "scenario": "base",
+    "value_ratio": 0.06,
+    "independent_history_FY25_FY26_USDmillion": [
+      22171,
+      24835
+    ],
+    "independent_history_growth": 0.12015696179694202,
+    "claim_ids": [
+      "claim_72_search_and_advertising_growth_base_2029",
+      "v2_history_search_and_advertising_growth_base_2029",
+      "v2_constraint_search_and_advertising_growth_base_2029",
+      "v2_context_search_and_advertising_growth_base_2029"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [208, 239, 248]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [248, 278]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Search and advertising; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Monetized volume/yield and LinkedIn marketing support demand; partnerships constrain distribution. Annual gross/mixed stream differs from quarterly exTAC net metric. Later fade remains assumption."
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_high_2027",
+    "stream": "search_and_advertising",
+    "year": 2027,
+    "scenario": "high",
+    "value_ratio": 0.12,
+    "independent_history_FY25_FY26_USDmillion": [
+      22171,
+      24835
+    ],
+    "independent_history_growth": 0.12015696179694202,
+    "claim_ids": [
+      "claim_73_search_and_advertising_growth_high_2027",
+      "v2_history_search_and_advertising_growth_high_2027",
+      "v2_constraint_search_and_advertising_growth_high_2027",
+      "v2_context_search_and_advertising_growth_high_2027"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [208, 239, 248]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [248, 278]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Search and advertising; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Monetized volume/yield and LinkedIn marketing support demand; partnerships constrain distribution. Annual gross/mixed stream differs from quarterly exTAC net metric. Later fade remains assumption."
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_high_2028",
+    "stream": "search_and_advertising",
+    "year": 2028,
+    "scenario": "high",
+    "value_ratio": 0.11,
+    "independent_history_FY25_FY26_USDmillion": [
+      22171,
+      24835
+    ],
+    "independent_history_growth": 0.12015696179694202,
+    "claim_ids": [
+      "claim_74_search_and_advertising_growth_high_2028",
+      "v2_history_search_and_advertising_growth_high_2028",
+      "v2_constraint_search_and_advertising_growth_high_2028",
+      "v2_context_search_and_advertising_growth_high_2028"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [208, 239, 248]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [248, 278]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Search and advertising; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Monetized volume/yield and LinkedIn marketing support demand; partnerships constrain distribution. Annual gross/mixed stream differs from quarterly exTAC net metric. Later fade remains assumption."
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_high_2029",
+    "stream": "search_and_advertising",
+    "year": 2029,
+    "scenario": "high",
+    "value_ratio": 0.1,
+    "independent_history_FY25_FY26_USDmillion": [
+      22171,
+      24835
+    ],
+    "independent_history_growth": 0.12015696179694202,
+    "claim_ids": [
+      "claim_75_search_and_advertising_growth_high_2029",
+      "v2_history_search_and_advertising_growth_high_2029",
+      "v2_constraint_search_and_advertising_growth_high_2029",
+      "v2_context_search_and_advertising_growth_high_2029"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [208, 239, 248]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [248, 278]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Search and advertising; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Monetized volume/yield and LinkedIn marketing support demand; partnerships constrain distribution. Annual gross/mixed stream differs from quarterly exTAC net metric. Later fade remains assumption."
+  },
+  {
+    "parameter_id": "xbox_growth_low_2027",
+    "stream": "xbox",
+    "year": 2027,
+    "scenario": "low",
+    "value_ratio": -0.1,
+    "independent_history_FY25_FY26_USDmillion": [
+      23455,
+      21790
+    ],
+    "independent_history_growth": -0.07098699637603922,
+    "claim_ids": [
+      "claim_78_xbox_growth_low_2027",
+      "claim_78_xbox_growth_low_2027_part2",
+      "v2_history_xbox_growth_low_2027",
+      "v2_constraint_xbox_growth_low_2027",
+      "v2_context_xbox_growth_low_2027"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [204, 249, 279]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [204, 249, 279]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [205]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for XBOX; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Actual decline/reset supports downside; CEO FY27 positive expectation is genuine contrary evidence. Low/base openly disagree; high agrees direction. FY28/29 recovery requires delivered paid content; unverified launch/adoption bridge disclosed."
+  },
+  {
+    "parameter_id": "xbox_growth_low_2028",
+    "stream": "xbox",
+    "year": 2028,
+    "scenario": "low",
+    "value_ratio": -0.05,
+    "independent_history_FY25_FY26_USDmillion": [
+      23455,
+      21790
+    ],
+    "independent_history_growth": -0.07098699637603922,
+    "claim_ids": [
+      "claim_79_xbox_growth_low_2028",
+      "claim_79_xbox_growth_low_2028_part2",
+      "v2_history_xbox_growth_low_2028",
+      "v2_constraint_xbox_growth_low_2028",
+      "v2_context_xbox_growth_low_2028"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [204, 249, 279]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [204, 249, 279]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [205]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for XBOX; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Actual decline/reset supports downside; CEO FY27 positive expectation is genuine contrary evidence. Low/base openly disagree; high agrees direction. FY28/29 recovery requires delivered paid content; unverified launch/adoption bridge disclosed."
+  },
+  {
+    "parameter_id": "xbox_growth_low_2029",
+    "stream": "xbox",
+    "year": 2029,
+    "scenario": "low",
+    "value_ratio": 0,
+    "independent_history_FY25_FY26_USDmillion": [
+      23455,
+      21790
+    ],
+    "independent_history_growth": -0.07098699637603922,
+    "claim_ids": [
+      "claim_80_xbox_growth_low_2029",
+      "claim_80_xbox_growth_low_2029_part2",
+      "v2_history_xbox_growth_low_2029",
+      "v2_constraint_xbox_growth_low_2029",
+      "v2_context_xbox_growth_low_2029"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [204, 249, 279]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [204, 249, 279]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [205]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for XBOX; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Actual decline/reset supports downside; CEO FY27 positive expectation is genuine contrary evidence. Low/base openly disagree; high agrees direction. FY28/29 recovery requires delivered paid content; unverified launch/adoption bridge disclosed."
+  },
+  {
+    "parameter_id": "xbox_growth_base_2027",
+    "stream": "xbox",
+    "year": 2027,
+    "scenario": "base",
+    "value_ratio": -0.04,
+    "independent_history_FY25_FY26_USDmillion": [
+      23455,
+      21790
+    ],
+    "independent_history_growth": -0.07098699637603922,
+    "claim_ids": [
+      "claim_81_xbox_growth_base_2027",
+      "claim_81_xbox_growth_base_2027_part2",
+      "v2_history_xbox_growth_base_2027",
+      "v2_constraint_xbox_growth_base_2027",
+      "v2_context_xbox_growth_base_2027"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [204, 249, 279]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [204, 249, 279]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [205]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for XBOX; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Actual decline/reset supports downside; CEO FY27 positive expectation is genuine contrary evidence. Low/base openly disagree; high agrees direction. FY28/29 recovery requires delivered paid content; unverified launch/adoption bridge disclosed."
+  },
+  {
+    "parameter_id": "xbox_growth_base_2028",
+    "stream": "xbox",
+    "year": 2028,
+    "scenario": "base",
+    "value_ratio": 0.02,
+    "independent_history_FY25_FY26_USDmillion": [
+      23455,
+      21790
+    ],
+    "independent_history_growth": -0.07098699637603922,
+    "claim_ids": [
+      "claim_82_xbox_growth_base_2028",
+      "claim_82_xbox_growth_base_2028_part2",
+      "v2_history_xbox_growth_base_2028",
+      "v2_constraint_xbox_growth_base_2028",
+      "v2_context_xbox_growth_base_2028"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [204, 249, 279]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [204, 249, 279]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [205]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for XBOX; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Actual decline/reset supports downside; CEO FY27 positive expectation is genuine contrary evidence. Low/base openly disagree; high agrees direction. FY28/29 recovery requires delivered paid content; unverified launch/adoption bridge disclosed."
+  },
+  {
+    "parameter_id": "xbox_growth_base_2029",
+    "stream": "xbox",
+    "year": 2029,
+    "scenario": "base",
+    "value_ratio": 0.04,
+    "independent_history_FY25_FY26_USDmillion": [
+      23455,
+      21790
+    ],
+    "independent_history_growth": -0.07098699637603922,
+    "claim_ids": [
+      "claim_83_xbox_growth_base_2029",
+      "claim_83_xbox_growth_base_2029_part2",
+      "v2_history_xbox_growth_base_2029",
+      "v2_constraint_xbox_growth_base_2029",
+      "v2_context_xbox_growth_base_2029"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [204, 249, 279]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [204, 249, 279]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [205]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for XBOX; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Actual decline/reset supports downside; CEO FY27 positive expectation is genuine contrary evidence. Low/base openly disagree; high agrees direction. FY28/29 recovery requires delivered paid content; unverified launch/adoption bridge disclosed."
+  },
+  {
+    "parameter_id": "xbox_growth_high_2027",
+    "stream": "xbox",
+    "year": 2027,
+    "scenario": "high",
+    "value_ratio": 0.02,
+    "independent_history_FY25_FY26_USDmillion": [
+      23455,
+      21790
+    ],
+    "independent_history_growth": -0.07098699637603922,
+    "claim_ids": [
+      "claim_84_xbox_growth_high_2027",
+      "claim_84_xbox_growth_high_2027_part2",
+      "v2_history_xbox_growth_high_2027",
+      "v2_constraint_xbox_growth_high_2027",
+      "v2_context_xbox_growth_high_2027"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [204, 249, 279]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [204, 249, 279]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [205]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for XBOX; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Actual decline/reset supports downside; CEO FY27 positive expectation is genuine contrary evidence. Low/base openly disagree; high agrees direction. FY28/29 recovery requires delivered paid content; unverified launch/adoption bridge disclosed."
+  },
+  {
+    "parameter_id": "xbox_growth_high_2028",
+    "stream": "xbox",
+    "year": 2028,
+    "scenario": "high",
+    "value_ratio": 0.08,
+    "independent_history_FY25_FY26_USDmillion": [
+      23455,
+      21790
+    ],
+    "independent_history_growth": -0.07098699637603922,
+    "claim_ids": [
+      "claim_85_xbox_growth_high_2028",
+      "claim_85_xbox_growth_high_2028_part2",
+      "v2_history_xbox_growth_high_2028",
+      "v2_constraint_xbox_growth_high_2028",
+      "v2_context_xbox_growth_high_2028"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [204, 249, 279]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [204, 249, 279]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [205]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for XBOX; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Actual decline/reset supports downside; CEO FY27 positive expectation is genuine contrary evidence. Low/base openly disagree; high agrees direction. FY28/29 recovery requires delivered paid content; unverified launch/adoption bridge disclosed."
+  },
+  {
+    "parameter_id": "xbox_growth_high_2029",
+    "stream": "xbox",
+    "year": 2029,
+    "scenario": "high",
+    "value_ratio": 0.08,
+    "independent_history_FY25_FY26_USDmillion": [
+      23455,
+      21790
+    ],
+    "independent_history_growth": -0.07098699637603922,
+    "claim_ids": [
+      "claim_86_xbox_growth_high_2029",
+      "claim_86_xbox_growth_high_2029_part2",
+      "v2_history_xbox_growth_high_2029",
+      "v2_constraint_xbox_growth_high_2029",
+      "v2_context_xbox_growth_high_2029"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [204, 249, 279]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [204, 249, 279]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [205]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for XBOX; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Actual decline/reset supports downside; CEO FY27 positive expectation is genuine contrary evidence. Low/base openly disagree; high agrees direction. FY28/29 recovery requires delivered paid content; unverified launch/adoption bridge disclosed."
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_low_2027",
+    "stream": "windows_oem_and_devices",
+    "year": 2027,
+    "scenario": "low",
+    "value_ratio": -0.23,
+    "independent_history_FY25_FY26_USDmillion": [
+      17315,
+      17087
+    ],
+    "independent_history_growth": -0.013167773606699407,
+    "claim_ids": [
+      "claim_89_windows_oem_and_devices_growth_low_2027",
+      "claim_89_windows_oem_and_devices_growth_low_2027_part2",
+      "v2_history_windows_oem_and_devices_growth_low_2027",
+      "v2_constraint_windows_oem_and_devices_growth_low_2027",
+      "v2_context_windows_oem_and_devices_growth_low_2027"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [247, 256, 277]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [247, 256, 277]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [247]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Windows OEM and devices; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Component-price, inventory and demand/comparable pressure support downside direction. Inventory is supporting headwind, not contrary recovery. No observed stabilization source at asof; later recovery explicitly conditional and annual high-teens wording is not a precise -18% target."
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_low_2028",
+    "stream": "windows_oem_and_devices",
+    "year": 2028,
+    "scenario": "low",
+    "value_ratio": -0.1,
+    "independent_history_FY25_FY26_USDmillion": [
+      17315,
+      17087
+    ],
+    "independent_history_growth": -0.013167773606699407,
+    "claim_ids": [
+      "claim_90_windows_oem_and_devices_growth_low_2028",
+      "claim_90_windows_oem_and_devices_growth_low_2028_part2",
+      "v2_history_windows_oem_and_devices_growth_low_2028",
+      "v2_constraint_windows_oem_and_devices_growth_low_2028",
+      "v2_context_windows_oem_and_devices_growth_low_2028"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [247, 256, 277]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [247, 256, 277]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [247]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Windows OEM and devices; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Component-price, inventory and demand/comparable pressure support downside direction. Inventory is supporting headwind, not contrary recovery. No observed stabilization source at asof; later recovery explicitly conditional and annual high-teens wording is not a precise -18% target."
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_low_2029",
+    "stream": "windows_oem_and_devices",
+    "year": 2029,
+    "scenario": "low",
+    "value_ratio": -0.05,
+    "independent_history_FY25_FY26_USDmillion": [
+      17315,
+      17087
+    ],
+    "independent_history_growth": -0.013167773606699407,
+    "claim_ids": [
+      "claim_91_windows_oem_and_devices_growth_low_2029",
+      "claim_91_windows_oem_and_devices_growth_low_2029_part2",
+      "v2_history_windows_oem_and_devices_growth_low_2029",
+      "v2_constraint_windows_oem_and_devices_growth_low_2029",
+      "v2_context_windows_oem_and_devices_growth_low_2029"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [247, 256, 277]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [247, 256, 277]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [247]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Windows OEM and devices; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Component-price, inventory and demand/comparable pressure support downside direction. Inventory is supporting headwind, not contrary recovery. No observed stabilization source at asof; later recovery explicitly conditional and annual high-teens wording is not a precise -18% target."
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_base_2027",
+    "stream": "windows_oem_and_devices",
+    "year": 2027,
+    "scenario": "base",
+    "value_ratio": -0.18,
+    "independent_history_FY25_FY26_USDmillion": [
+      17315,
+      17087
+    ],
+    "independent_history_growth": -0.013167773606699407,
+    "claim_ids": [
+      "claim_92_windows_oem_and_devices_growth_base_2027",
+      "claim_92_windows_oem_and_devices_growth_base_2027_part2",
+      "v2_history_windows_oem_and_devices_growth_base_2027",
+      "v2_constraint_windows_oem_and_devices_growth_base_2027",
+      "v2_context_windows_oem_and_devices_growth_base_2027"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [247, 256, 277]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [247, 256, 277]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [247]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Windows OEM and devices; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Component-price, inventory and demand/comparable pressure support downside direction. Inventory is supporting headwind, not contrary recovery. No observed stabilization source at asof; later recovery explicitly conditional and annual high-teens wording is not a precise -18% target."
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_base_2028",
+    "stream": "windows_oem_and_devices",
+    "year": 2028,
+    "scenario": "base",
+    "value_ratio": -0.03,
+    "independent_history_FY25_FY26_USDmillion": [
+      17315,
+      17087
+    ],
+    "independent_history_growth": -0.013167773606699407,
+    "claim_ids": [
+      "claim_93_windows_oem_and_devices_growth_base_2028",
+      "claim_93_windows_oem_and_devices_growth_base_2028_part2",
+      "v2_history_windows_oem_and_devices_growth_base_2028",
+      "v2_constraint_windows_oem_and_devices_growth_base_2028",
+      "v2_context_windows_oem_and_devices_growth_base_2028"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [247, 256, 277]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [247, 256, 277]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [247]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Windows OEM and devices; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Component-price, inventory and demand/comparable pressure support downside direction. Inventory is supporting headwind, not contrary recovery. No observed stabilization source at asof; later recovery explicitly conditional and annual high-teens wording is not a precise -18% target."
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_base_2029",
+    "stream": "windows_oem_and_devices",
+    "year": 2029,
+    "scenario": "base",
+    "value_ratio": 0,
+    "independent_history_FY25_FY26_USDmillion": [
+      17315,
+      17087
+    ],
+    "independent_history_growth": -0.013167773606699407,
+    "claim_ids": [
+      "claim_94_windows_oem_and_devices_growth_base_2029",
+      "claim_94_windows_oem_and_devices_growth_base_2029_part2",
+      "v2_history_windows_oem_and_devices_growth_base_2029",
+      "v2_constraint_windows_oem_and_devices_growth_base_2029",
+      "v2_context_windows_oem_and_devices_growth_base_2029"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [247, 256, 277]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [247, 256, 277]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [247]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Windows OEM and devices; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Component-price, inventory and demand/comparable pressure support downside direction. Inventory is supporting headwind, not contrary recovery. No observed stabilization source at asof; later recovery explicitly conditional and annual high-teens wording is not a precise -18% target."
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_high_2027",
+    "stream": "windows_oem_and_devices",
+    "year": 2027,
+    "scenario": "high",
+    "value_ratio": -0.13,
+    "independent_history_FY25_FY26_USDmillion": [
+      17315,
+      17087
+    ],
+    "independent_history_growth": -0.013167773606699407,
+    "claim_ids": [
+      "claim_95_windows_oem_and_devices_growth_high_2027",
+      "claim_95_windows_oem_and_devices_growth_high_2027_part2",
+      "v2_history_windows_oem_and_devices_growth_high_2027",
+      "v2_constraint_windows_oem_and_devices_growth_high_2027",
+      "v2_context_windows_oem_and_devices_growth_high_2027"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [247, 256, 277]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [247, 256, 277]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [247]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Windows OEM and devices; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Component-price, inventory and demand/comparable pressure support downside direction. Inventory is supporting headwind, not contrary recovery. No observed stabilization source at asof; later recovery explicitly conditional and annual high-teens wording is not a precise -18% target."
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_high_2028",
+    "stream": "windows_oem_and_devices",
+    "year": 2028,
+    "scenario": "high",
+    "value_ratio": 0.03,
+    "independent_history_FY25_FY26_USDmillion": [
+      17315,
+      17087
+    ],
+    "independent_history_growth": -0.013167773606699407,
+    "claim_ids": [
+      "claim_96_windows_oem_and_devices_growth_high_2028",
+      "claim_96_windows_oem_and_devices_growth_high_2028_part2",
+      "v2_history_windows_oem_and_devices_growth_high_2028",
+      "v2_constraint_windows_oem_and_devices_growth_high_2028",
+      "v2_context_windows_oem_and_devices_growth_high_2028"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [247, 256, 277]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [247, 256, 277]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [247]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Windows OEM and devices; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Component-price, inventory and demand/comparable pressure support downside direction. Inventory is supporting headwind, not contrary recovery. No observed stabilization source at asof; later recovery explicitly conditional and annual high-teens wording is not a precise -18% target."
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_high_2029",
+    "stream": "windows_oem_and_devices",
+    "year": 2029,
+    "scenario": "high",
+    "value_ratio": 0.05,
+    "independent_history_FY25_FY26_USDmillion": [
+      17315,
+      17087
+    ],
+    "independent_history_growth": -0.013167773606699407,
+    "claim_ids": [
+      "claim_97_windows_oem_and_devices_growth_high_2029",
+      "claim_97_windows_oem_and_devices_growth_high_2029_part2",
+      "v2_history_windows_oem_and_devices_growth_high_2029",
+      "v2_constraint_windows_oem_and_devices_growth_high_2029",
+      "v2_context_windows_oem_and_devices_growth_high_2029"
+    ],
+    "locators": [
+      "Official complete FY26Q4 call.txt lines [247, 256, 277]; operating mechanism; July old perimeter reconciled using PPT7/8/13",
+      "Official complete FY26Q4 call.txt lines [247, 256, 277]; operating mechanism; July old perimeter reconciled using PPT7/8/13; checked-context fragment2/2",
+      "PPT17 As Restated, FY2025/FY2026 annual row; manually checked image17.png; normalized two-cell visual transcription",
+      "Complete official call.txt lines [247]; constraint/opposing gaming expectation; scope stated in parameter rationale",
+      "PPT21 adjusted FY27Q1 outlook row for Windows OEM and devices; named subset/CC/exTAC qualifications in parameter rationale; no annual conversion"
+    ],
+    "history": "PASS",
+    "mechanism": "PASS",
+    "constraint_or_honest_evidence_gap": "PASS",
+    "quarter_and_scope_limits": "PASS",
+    "scenario_year_annotation": "PASS",
+    "analyst_range_status": "CONDITIONAL_ASSUMPTION_ACCEPTABLE",
+    "future_claim_is_not_source_numeric_fact": true,
+    "verdict": "PASS",
+    "independent_semantic_review": "Component-price, inventory and demand/comparable pressure support downside direction. Inventory is supporting headwind, not contrary recovery. No observed stabilization source at asof; later recovery explicitly conditional and annual high-teens wording is not a precise -18% target."
+  }
+]

@@ -1,0 +1,4 @@
+error: 2 validation problem(s) found:
+[sources]
+  - unsupported source_type for src_results: company_disclosure
+  - gate could not complete: KeyError: 'company_disclosure'

@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "timestamp_utc": "2026-10-08T07:49:12.788251+00:00",
+  "status": "PASS execution verification; not independent acceptance",
+  "strong_validator": "validate_published_forecast(result, original_input)",
+  "markdown": "byte-identical to render_markdown of the same JSON",
+  "arithmetic": [
+    {
+      "scenario": "low",
+      "year": 2026,
+      "independent_sum": 13522.402094920999,
+      "engine_total": 13522.402094920999,
+      "check": "PASS"
+    },
+    {
+      "scenario": "low",
+      "year": 2027,
+      "independent_sum": 14223.2840083265,
+      "engine_total": 14223.2840083265,
+      "check": "PASS"
+    },
+    {
+      "scenario": "low",
+      "year": 2028,
+      "independent_sum": 14489.165921732001,
+      "engine_total": 14489.165921732001,
+      "check": "PASS"
+    },
+    {
+      "scenario": "base",
+      "year": 2026,
+      "independent_sum": 16195.847835137502,
+      "engine_total": 16195.847835137502,
+      "check": "PASS"
+    },
+    {
+      "scenario": "base",
+      "year": 2027,
+      "independent_sum": 20590.957402165,
+      "engine_total": 20590.957402165,
+      "check": "PASS"
+    },
+    {
+      "scenario": "base",
+      "year": 2028,
+      "independent_sum": 24800.866969192502,
+      "engine_total": 24800.866969192502,
+      "check": "PASS"
+    },
+    {
+      "scenario": "high",
+      "year": 2026,
+      "independent_sum": 18747.8116619485,
+      "engine_total": 18747.8116619485,
+      "check": "PASS"
+    },
+    {
+      "scenario": "high",
+      "year": 2027,
+      "independent_sum": 26020.866969192502,
+      "engine_total": 26020.866969192502,
+      "check": "PASS"
+    },
+    {
+      "scenario": "high",
+      "year": 2028,
+      "independent_sum": 33436.804189842005,
+      "engine_total": 33436.804189842005,
+      "check": "PASS"
+    }
+  ],
+  "snapshot": "PASS: explicit-version frozen input and complete economic result match; both input bindings independently strong-validated",
+  "publication_registry": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\publications.jsonl",
+  "attestation_status": "unattested",
+  "registry_entries": 6,
+  "artifacts": [
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\input.json",
+      "sha256": "3dcce43a05deb2faf92236af8c1b979c07334a34d5b7debb30d25057ab611746"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\forecast.json",
+      "sha256": "a7b2797fecb8edb1b2ba2641b3d65c7996e938427fc01eed1f8e513aa7be420d"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\forecast.md",
+      "sha256": "f6bca82bf5fd5b1db373685da4bd910f510ffcc1d780070b6ab747c6d37a8a83"
+    }
+  ]
+}

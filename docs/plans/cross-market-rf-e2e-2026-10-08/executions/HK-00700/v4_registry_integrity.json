@@ -1,0 +1,62 @@
+{
+  "chain": "PASS",
+  "forecast_and_snapshot_anchors": "PASS",
+  "registry": {
+    "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v4\\publications.jsonl",
+    "bytes": 2286,
+    "sha256": "bd7f8ed7ce69d13e5a4ff6728d7bfe763771b8df87fd015e43c17249349c1b6a",
+    "role": "v4 isolated append-only publication registry"
+  },
+  "entries": [
+    {
+      "artifact_id": null,
+      "artifact_type": "forecast",
+      "engine_version": "4.1.0",
+      "input_sha256": "6968c5c4767854af4554bc805f6344443290ea15af520ead0bfd63bb73d96712",
+      "input_summary_sha256": "04c9cc76c3c1d4c628ae9f5954bcbdbe63c861642c4c021e6d547bc67dceaa35",
+      "line_sha256": "35c50a3c9e9d566cfcf6a0bbc62d375bb2d7257a888c216cf6de02d1625697a0",
+      "note": "run_forecast formal",
+      "prev_line_sha256": null,
+      "publisher": "revenue-forecast",
+      "receipt_sha256": "bbd514d084ece6f597f5688a802615ad6d60ba716603e89a415bdb4a8c6fd76d",
+      "registered_at": "2026-10-08T08:57:24.074506+00:00",
+      "result_sha256": "0f0fa1a3586368713ecba43c630cfb3c4c468c815592eceadb957c7652c88e09",
+      "schema_version": "3.7",
+      "validation_status": "validated"
+    },
+    {
+      "artifact_id": null,
+      "artifact_type": "forecast",
+      "engine_version": "4.1.0",
+      "input_sha256": "6968c5c4767854af4554bc805f6344443290ea15af520ead0bfd63bb73d96712",
+      "input_summary_sha256": "04c9cc76c3c1d4c628ae9f5954bcbdbe63c861642c4c021e6d547bc67dceaa35",
+      "line_sha256": "679401f4ab769d1e5822f4b2e2439c888b9ea9398e1b9c65113ef4574b389a7a",
+      "note": "run_forecast formal",
+      "prev_line_sha256": "35c50a3c9e9d566cfcf6a0bbc62d375bb2d7257a888c216cf6de02d1625697a0",
+      "publisher": "revenue-forecast",
+      "receipt_sha256": "bbd514d084ece6f597f5688a802615ad6d60ba716603e89a415bdb4a8c6fd76d",
+      "registered_at": "2026-10-08T08:57:29.577266+00:00",
+      "result_sha256": "0f0fa1a3586368713ecba43c630cfb3c4c468c815592eceadb957c7652c88e09",
+      "schema_version": "3.7",
+      "validation_status": "validated"
+    },
+    {
+      "artifact_id": "72a206d8b0a8afd95da9424d20613655a92948d01340b424696840afe6b18c10",
+      "artifact_type": "snapshot",
+      "engine_version": "4.1.0",
+      "input_sha256": "6968c5c4767854af4554bc805f6344443290ea15af520ead0bfd63bb73d96712",
+      "input_summary_sha256": "04c9cc76c3c1d4c628ae9f5954bcbdbe63c861642c4c021e6d547bc67dceaa35",
+      "line_sha256": "180e0a24f52b9b7f4202149323bd27cdfe048cfa4304bc9f95cff58f3c763bf9",
+      "note": "revenue_backtest create",
+      "prev_line_sha256": "679401f4ab769d1e5822f4b2e2439c888b9ea9398e1b9c65113ef4574b389a7a",
+      "publisher": "revenue-forecast",
+      "receipt_sha256": "bbd514d084ece6f597f5688a802615ad6d60ba716603e89a415bdb4a8c6fd76d",
+      "registered_at": "2026-10-08T08:57:29.982240+00:00",
+      "result_sha256": "ea650f7e5eb535f1a5db96e2a097f52f776050c5d5d6ed7eaf4d5b83ef564eac",
+      "schema_version": "3.7"
+    }
+  ],
+  "actual_audit_exit": 0,
+  "actual_audit_stdout": "",
+  "scope": "No old v3 or installation registry writes"
+}

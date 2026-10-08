@@ -1,0 +1,487 @@
+[
+  {
+    "parameter_id": "reported_total",
+    "numeric_unchanged": true,
+    "kind": "reported_fact",
+    "value": 12384.63826811,
+    "definition": "Consolidated external FY2025 recognized revenue",
+    "rationale": "Original CNY yuan /1,000,000; reconciled to annual p218",
+    "claim_ids": [
+      "claim_reported_total"
+    ]
+  },
+  {
+    "parameter_id": "equipment_base",
+    "numeric_unchanged": true,
+    "kind": "reported_fact",
+    "value": 10527.0,
+    "definition": "FY2025 dedicated equipment revenue, disclosed rounded to 105.27亿元",
+    "rationale": "Disclosed rounded magnitude; approximately ±0.5 CNY million, not false precision",
+    "claim_ids": [
+      "claim_equipment_base"
+    ]
+  },
+  {
+    "parameter_id": "aftermarket_base",
+    "numeric_unchanged": true,
+    "kind": "derived_fact",
+    "value": 1857.6382681100004,
+    "definition": "Unsplit non-equipment mathematical residual: group total minus rounded dedicated-equipment revenue",
+    "rationale": "Derived subtraction, not a disclosed spares/services amount; business classification and any recurring share unknown; inherits rounded equipment numerator.",
+    "claim_ids": []
+  },
+  {
+    "parameter_id": "cmp_base",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 0,
+    "definition": "FY2025 incremental CMP revenue included in AMEC consolidation",
+    "rationale": "CMP was acquired in 2026; zero incremental consolidation in FY2025 does NOT mean CMP standalone revenue zero",
+    "claim_ids": [
+      "claim_cmp_base"
+    ]
+  },
+  {
+    "parameter_id": "equipment_units_2025",
+    "numeric_unchanged": true,
+    "kind": "reported_fact",
+    "value": 1240,
+    "definition": "Dedicated-equipment chambers sold; not all produced or shipped chambers",
+    "rationale": "Annual physical-sales disclosure; accepted-chamber forecast is a proxy, not a shipment-to-revenue identity proven by the table",
+    "claim_ids": [
+      "claim_equipment_units_2025"
+    ]
+  },
+  {
+    "parameter_id": "equipment_weighted_unit_revenue_2025",
+    "numeric_unchanged": true,
+    "kind": "derived_fact",
+    "value": 8.489516129032259,
+    "definition": "Rounded recognized equipment revenue per reported chamber, weighted product/configuration mix proxy",
+    "rationale": "Not a quoted SKU ASP; rounded numerator limits precision",
+    "claim_ids": []
+  },
+  {
+    "parameter_id": "equipment_units_low_2026",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 1395,
+    "definition": "Assumed chambers achieving revenue recognition in calendar fiscal year; legacy AMEC operations excluding acquired CMP",
+    "rationale": "Conditional scenario, not a probability band. Global WFE forecast is an outside reference, not copied into AMEC. Customer concentration, client capex, qualification-to-acceptance, price mix and production execution can all change revenue. Base year-on-year unit growth is 30.6%/26.5%/22.0%, starting from 2025 sold 1240; product qualification and domestic process coverage justify a premium to industry benchmark, but no specific capacity ceiling is reported. Low imposes concentrated-client capex/acceptance delays; high requires successful film and packaging ramps. September10 official capacity plan supports expansion direction; 600,000m² current/900,000m² five-year plan and Guangzhou/Chengdu2027H1 commissioning are not converted mechanically into accepted chamber units or guaranteed revenue. Checked annual p219 customerA concentration is39.99% vs22.15%; concentration increases vulnerability to a customer-specific pause. This fact does not reveal the client capex plan or quantify this assumed future chamber path. Company1225482911 p4 delays full HQ/R&D use to2027-12 with some floors already usable. Quantities retain independent conditional assumptions, not an instantaneous capacity conversion. No published chambers/year ceiling supports a mechanical numerical haircut.",
+    "claim_ids": [
+      "claim_equipment_units_low_2026",
+      "claim_ir_equipment_units_low_2026",
+      "claim_concentration_equipment_units_low_2026",
+      "claim_capacity_equipment_units_low_2026"
+    ]
+  },
+  {
+    "parameter_id": "equipment_unit_revenue_low_2026",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 8.2,
+    "definition": "Assumed recognized weighted revenue per chamber, mix and discounts included; legacy AMEC operations excluding acquired CMP",
+    "rationale": "Independent pricing/mix assumption near rounded 2025 proxy 8.4895; low continuing discounts, high richer advanced equipment mix. No segment SKU price or client contract is known.",
+    "claim_ids": [
+      "claim_equipment_unit_revenue_low_2026"
+    ]
+  },
+  {
+    "parameter_id": "aftermarket_revenue_low_2026",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 2043.4020949210005,
+    "definition": "Analyst-assumed annual recognized non-equipment mathematical residual; no disclosed product/service disaggregation",
+    "rationale": "Transparent direct_revenue fallback on FY2025 total minus rounded dedicated-equipment revenue (1857.63826811m, rounding inherited). The group describes after-sales support and digital/gas purification activities, but their revenue allocations within this residual are unknown. Retained conditional low/base/high amounts are analyst stress assumptions, not a measured fleet, attach rate, renewal curve or quantified repeat-purchase forecast. No claim that the entire residual is aftermarket; no separate capacity or service-lag transform.",
+    "claim_ids": [
+      "claim_aftermarket_revenue_low_2026"
+    ]
+  },
+  {
+    "parameter_id": "cmp_revenue_low_2026",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 40,
+    "definition": "Assumed incremental external CMP revenue included after control, full consolidated revenue not ownership multiplied",
+    "rationale": "2026 June–December after purchase on May31; June actual only1.29190208m. No mechanical 7/12 conversion of annual performance commitment; wide ramp/acceptance uncertainty. Low includes integration/qualification delays; high requires customer conversions.",
+    "claim_ids": [
+      "claim_cmp_revenue_low_2026"
+    ]
+  },
+  {
+    "parameter_id": "equipment_units_low_2027",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 1470,
+    "definition": "Assumed chambers achieving revenue recognition in calendar fiscal year; legacy AMEC operations excluding acquired CMP",
+    "rationale": "Conditional scenario, not a probability band. Global WFE forecast is an outside reference, not copied into AMEC. Customer concentration, client capex, qualification-to-acceptance, price mix and production execution can all change revenue. Base year-on-year unit growth is 30.6%/26.5%/22.0%, starting from 2025 sold 1240; product qualification and domestic process coverage justify a premium to industry benchmark, but no specific capacity ceiling is reported. Low imposes concentrated-client capex/acceptance delays; high requires successful film and packaging ramps. September10 official capacity plan supports expansion direction; 600,000m² current/900,000m² five-year plan and Guangzhou/Chengdu2027H1 commissioning are not converted mechanically into accepted chamber units or guaranteed revenue. Checked annual p219 customerA concentration is39.99% vs22.15%; concentration increases vulnerability to a customer-specific pause. This fact does not reveal the client capex plan or quantify this assumed future chamber path. Company1225482911 p4 delays full HQ/R&D use to2027-12 with some floors already usable. Quantities retain independent conditional assumptions, not an instantaneous capacity conversion. No published chambers/year ceiling supports a mechanical numerical haircut.",
+    "claim_ids": [
+      "claim_equipment_units_low_2027",
+      "claim_ir_equipment_units_low_2027",
+      "claim_concentration_equipment_units_low_2027",
+      "claim_capacity_equipment_units_low_2027"
+    ]
+  },
+  {
+    "parameter_id": "equipment_unit_revenue_low_2027",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 8.1,
+    "definition": "Assumed recognized weighted revenue per chamber, mix and discounts included; legacy AMEC operations excluding acquired CMP",
+    "rationale": "Independent pricing/mix assumption near rounded 2025 proxy 8.4895; low continuing discounts, high richer advanced equipment mix. No segment SKU price or client contract is known.",
+    "claim_ids": [
+      "claim_equipment_unit_revenue_low_2027"
+    ]
+  },
+  {
+    "parameter_id": "aftermarket_revenue_low_2027",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 2136.2840083265,
+    "definition": "Analyst-assumed annual recognized non-equipment mathematical residual; no disclosed product/service disaggregation",
+    "rationale": "Transparent direct_revenue fallback on FY2025 total minus rounded dedicated-equipment revenue (1857.63826811m, rounding inherited). The group describes after-sales support and digital/gas purification activities, but their revenue allocations within this residual are unknown. Retained conditional low/base/high amounts are analyst stress assumptions, not a measured fleet, attach rate, renewal curve or quantified repeat-purchase forecast. No claim that the entire residual is aftermarket; no separate capacity or service-lag transform.",
+    "claim_ids": [
+      "claim_aftermarket_revenue_low_2027"
+    ]
+  },
+  {
+    "parameter_id": "cmp_revenue_low_2027",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 180,
+    "definition": "Assumed incremental external CMP revenue included after control, full consolidated revenue not ownership multiplied",
+    "rationale": "Full-year CMP operating ramp assumption. Independently benchmarked to seller annual commitment, not forced to meet it. Intra-group transactions would require elimination if evidence emerges. Low includes integration/qualification delays; high requires customer conversions.",
+    "claim_ids": [
+      "claim_cmp_revenue_low_2027"
+    ]
+  },
+  {
+    "parameter_id": "equipment_units_low_2028",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 1500,
+    "definition": "Assumed chambers achieving revenue recognition in calendar fiscal year; legacy AMEC operations excluding acquired CMP",
+    "rationale": "Conditional scenario, not a probability band. Global WFE forecast is an outside reference, not copied into AMEC. Customer concentration, client capex, qualification-to-acceptance, price mix and production execution can all change revenue. Base year-on-year unit growth is 30.6%/26.5%/22.0%, starting from 2025 sold 1240; product qualification and domestic process coverage justify a premium to industry benchmark, but no specific capacity ceiling is reported. Low imposes concentrated-client capex/acceptance delays; high requires successful film and packaging ramps. September10 official capacity plan supports expansion direction; 600,000m² current/900,000m² five-year plan and Guangzhou/Chengdu2027H1 commissioning are not converted mechanically into accepted chamber units or guaranteed revenue. Checked annual p219 customerA concentration is39.99% vs22.15%; concentration increases vulnerability to a customer-specific pause. This fact does not reveal the client capex plan or quantify this assumed future chamber path. Company1225482911 p4 delays full HQ/R&D use to2027-12 with some floors already usable. Quantities retain independent conditional assumptions, not an instantaneous capacity conversion. No published chambers/year ceiling supports a mechanical numerical haircut.",
+    "claim_ids": [
+      "claim_equipment_units_low_2028",
+      "claim_ir_equipment_units_low_2028",
+      "claim_concentration_equipment_units_low_2028",
+      "claim_capacity_equipment_units_low_2028"
+    ]
+  },
+  {
+    "parameter_id": "equipment_unit_revenue_low_2028",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 8.0,
+    "definition": "Assumed recognized weighted revenue per chamber, mix and discounts included; legacy AMEC operations excluding acquired CMP",
+    "rationale": "Independent pricing/mix assumption near rounded 2025 proxy 8.4895; low continuing discounts, high richer advanced equipment mix. No segment SKU price or client contract is known.",
+    "claim_ids": [
+      "claim_equipment_unit_revenue_low_2028"
+    ]
+  },
+  {
+    "parameter_id": "aftermarket_revenue_low_2028",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 2229.1659217320002,
+    "definition": "Analyst-assumed annual recognized non-equipment mathematical residual; no disclosed product/service disaggregation",
+    "rationale": "Transparent direct_revenue fallback on FY2025 total minus rounded dedicated-equipment revenue (1857.63826811m, rounding inherited). The group describes after-sales support and digital/gas purification activities, but their revenue allocations within this residual are unknown. Retained conditional low/base/high amounts are analyst stress assumptions, not a measured fleet, attach rate, renewal curve or quantified repeat-purchase forecast. No claim that the entire residual is aftermarket; no separate capacity or service-lag transform.",
+    "claim_ids": [
+      "claim_aftermarket_revenue_low_2028"
+    ]
+  },
+  {
+    "parameter_id": "cmp_revenue_low_2028",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 260,
+    "definition": "Assumed incremental external CMP revenue included after control, full consolidated revenue not ownership multiplied",
+    "rationale": "Full-year CMP operating ramp assumption. Independently benchmarked to seller annual commitment, not forced to meet it. Intra-group transactions would require elimination if evidence emerges. Low includes integration/qualification delays; high requires customer conversions.",
+    "claim_ids": [
+      "claim_cmp_revenue_low_2028"
+    ]
+  },
+  {
+    "parameter_id": "equipment_units_base_2026",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 1620,
+    "definition": "Assumed chambers achieving revenue recognition in calendar fiscal year; legacy AMEC operations excluding acquired CMP",
+    "rationale": "Conditional scenario, not a probability band. Global WFE forecast is an outside reference, not copied into AMEC. Customer concentration, client capex, qualification-to-acceptance, price mix and production execution can all change revenue. Base year-on-year unit growth is 30.6%/26.5%/22.0%, starting from 2025 sold 1240; product qualification and domestic process coverage justify a premium to industry benchmark, but no specific capacity ceiling is reported. Low imposes concentrated-client capex/acceptance delays; high requires successful film and packaging ramps. September10 official capacity plan supports expansion direction; 600,000m² current/900,000m² five-year plan and Guangzhou/Chengdu2027H1 commissioning are not converted mechanically into accepted chamber units or guaranteed revenue. Checked annual p219 customerA concentration is39.99% vs22.15%; concentration increases vulnerability to a customer-specific pause. This fact does not reveal the client capex plan or quantify this assumed future chamber path. Company1225482911 p4 delays full HQ/R&D use to2027-12 with some floors already usable. Quantities retain independent conditional assumptions, not an instantaneous capacity conversion. No published chambers/year ceiling supports a mechanical numerical haircut.",
+    "claim_ids": [
+      "claim_equipment_units_base_2026",
+      "claim_ir_equipment_units_base_2026",
+      "claim_concentration_equipment_units_base_2026",
+      "claim_capacity_equipment_units_base_2026"
+    ]
+  },
+  {
+    "parameter_id": "equipment_unit_revenue_base_2026",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 8.49,
+    "definition": "Assumed recognized weighted revenue per chamber, mix and discounts included; legacy AMEC operations excluding acquired CMP",
+    "rationale": "Independent pricing/mix assumption near rounded 2025 proxy 8.4895; low continuing discounts, high richer advanced equipment mix. No segment SKU price or client contract is known.",
+    "claim_ids": [
+      "claim_equipment_unit_revenue_base_2026"
+    ]
+  },
+  {
+    "parameter_id": "aftermarket_revenue_base_2026",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 2322.0478351375004,
+    "definition": "Analyst-assumed annual recognized non-equipment mathematical residual; no disclosed product/service disaggregation",
+    "rationale": "Transparent direct_revenue fallback on FY2025 total minus rounded dedicated-equipment revenue (1857.63826811m, rounding inherited). The group describes after-sales support and digital/gas purification activities, but their revenue allocations within this residual are unknown. Retained conditional low/base/high amounts are analyst stress assumptions, not a measured fleet, attach rate, renewal curve or quantified repeat-purchase forecast. No claim that the entire residual is aftermarket; no separate capacity or service-lag transform.",
+    "claim_ids": [
+      "claim_aftermarket_revenue_base_2026"
+    ]
+  },
+  {
+    "parameter_id": "cmp_revenue_base_2026",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 120,
+    "definition": "Assumed incremental external CMP revenue included after control, full consolidated revenue not ownership multiplied",
+    "rationale": "2026 June–December after purchase on May31; June actual only1.29190208m. No mechanical 7/12 conversion of annual performance commitment; wide ramp/acceptance uncertainty. Low includes integration/qualification delays; high requires customer conversions.",
+    "claim_ids": [
+      "claim_cmp_revenue_base_2026"
+    ]
+  },
+  {
+    "parameter_id": "equipment_units_base_2027",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 2050,
+    "definition": "Assumed chambers achieving revenue recognition in calendar fiscal year; legacy AMEC operations excluding acquired CMP",
+    "rationale": "Conditional scenario, not a probability band. Global WFE forecast is an outside reference, not copied into AMEC. Customer concentration, client capex, qualification-to-acceptance, price mix and production execution can all change revenue. Base year-on-year unit growth is 30.6%/26.5%/22.0%, starting from 2025 sold 1240; product qualification and domestic process coverage justify a premium to industry benchmark, but no specific capacity ceiling is reported. Low imposes concentrated-client capex/acceptance delays; high requires successful film and packaging ramps. September10 official capacity plan supports expansion direction; 600,000m² current/900,000m² five-year plan and Guangzhou/Chengdu2027H1 commissioning are not converted mechanically into accepted chamber units or guaranteed revenue. Checked annual p219 customerA concentration is39.99% vs22.15%; concentration increases vulnerability to a customer-specific pause. This fact does not reveal the client capex plan or quantify this assumed future chamber path. Company1225482911 p4 delays full HQ/R&D use to2027-12 with some floors already usable. Quantities retain independent conditional assumptions, not an instantaneous capacity conversion. No published chambers/year ceiling supports a mechanical numerical haircut.",
+    "claim_ids": [
+      "claim_equipment_units_base_2027",
+      "claim_ir_equipment_units_base_2027",
+      "claim_concentration_equipment_units_base_2027",
+      "claim_capacity_equipment_units_base_2027"
+    ]
+  },
+  {
+    "parameter_id": "equipment_unit_revenue_base_2027",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 8.49,
+    "definition": "Assumed recognized weighted revenue per chamber, mix and discounts included; legacy AMEC operations excluding acquired CMP",
+    "rationale": "Independent pricing/mix assumption near rounded 2025 proxy 8.4895; low continuing discounts, high richer advanced equipment mix. No segment SKU price or client contract is known.",
+    "claim_ids": [
+      "claim_equipment_unit_revenue_base_2027"
+    ]
+  },
+  {
+    "parameter_id": "aftermarket_revenue_base_2027",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 2786.4574021650005,
+    "definition": "Analyst-assumed annual recognized non-equipment mathematical residual; no disclosed product/service disaggregation",
+    "rationale": "Transparent direct_revenue fallback on FY2025 total minus rounded dedicated-equipment revenue (1857.63826811m, rounding inherited). The group describes after-sales support and digital/gas purification activities, but their revenue allocations within this residual are unknown. Retained conditional low/base/high amounts are analyst stress assumptions, not a measured fleet, attach rate, renewal curve or quantified repeat-purchase forecast. No claim that the entire residual is aftermarket; no separate capacity or service-lag transform.",
+    "claim_ids": [
+      "claim_aftermarket_revenue_base_2027"
+    ]
+  },
+  {
+    "parameter_id": "cmp_revenue_base_2027",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 400,
+    "definition": "Assumed incremental external CMP revenue included after control, full consolidated revenue not ownership multiplied",
+    "rationale": "Full-year CMP operating ramp assumption. Independently benchmarked to seller annual commitment, not forced to meet it. Intra-group transactions would require elimination if evidence emerges. Low includes integration/qualification delays; high requires customer conversions.",
+    "claim_ids": [
+      "claim_cmp_revenue_base_2027"
+    ]
+  },
+  {
+    "parameter_id": "equipment_units_base_2028",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 2500,
+    "definition": "Assumed chambers achieving revenue recognition in calendar fiscal year; legacy AMEC operations excluding acquired CMP",
+    "rationale": "Conditional scenario, not a probability band. Global WFE forecast is an outside reference, not copied into AMEC. Customer concentration, client capex, qualification-to-acceptance, price mix and production execution can all change revenue. Base year-on-year unit growth is 30.6%/26.5%/22.0%, starting from 2025 sold 1240; product qualification and domestic process coverage justify a premium to industry benchmark, but no specific capacity ceiling is reported. Low imposes concentrated-client capex/acceptance delays; high requires successful film and packaging ramps. September10 official capacity plan supports expansion direction; 600,000m² current/900,000m² five-year plan and Guangzhou/Chengdu2027H1 commissioning are not converted mechanically into accepted chamber units or guaranteed revenue. Checked annual p219 customerA concentration is39.99% vs22.15%; concentration increases vulnerability to a customer-specific pause. This fact does not reveal the client capex plan or quantify this assumed future chamber path. Company1225482911 p4 delays full HQ/R&D use to2027-12 with some floors already usable. Quantities retain independent conditional assumptions, not an instantaneous capacity conversion. No published chambers/year ceiling supports a mechanical numerical haircut.",
+    "claim_ids": [
+      "claim_equipment_units_base_2028",
+      "claim_ir_equipment_units_base_2028",
+      "claim_concentration_equipment_units_base_2028",
+      "claim_capacity_equipment_units_base_2028"
+    ]
+  },
+  {
+    "parameter_id": "equipment_unit_revenue_base_2028",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 8.4,
+    "definition": "Assumed recognized weighted revenue per chamber, mix and discounts included; legacy AMEC operations excluding acquired CMP",
+    "rationale": "Independent pricing/mix assumption near rounded 2025 proxy 8.4895; low continuing discounts, high richer advanced equipment mix. No segment SKU price or client contract is known.",
+    "claim_ids": [
+      "claim_equipment_unit_revenue_base_2028"
+    ]
+  },
+  {
+    "parameter_id": "aftermarket_revenue_base_2028",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 3250.8669691925006,
+    "definition": "Analyst-assumed annual recognized non-equipment mathematical residual; no disclosed product/service disaggregation",
+    "rationale": "Transparent direct_revenue fallback on FY2025 total minus rounded dedicated-equipment revenue (1857.63826811m, rounding inherited). The group describes after-sales support and digital/gas purification activities, but their revenue allocations within this residual are unknown. Retained conditional low/base/high amounts are analyst stress assumptions, not a measured fleet, attach rate, renewal curve or quantified repeat-purchase forecast. No claim that the entire residual is aftermarket; no separate capacity or service-lag transform.",
+    "claim_ids": [
+      "claim_aftermarket_revenue_base_2028"
+    ]
+  },
+  {
+    "parameter_id": "cmp_revenue_base_2028",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 550,
+    "definition": "Assumed incremental external CMP revenue included after control, full consolidated revenue not ownership multiplied",
+    "rationale": "Full-year CMP operating ramp assumption. Independently benchmarked to seller annual commitment, not forced to meet it. Intra-group transactions would require elimination if evidence emerges. Low includes integration/qualification delays; high requires customer conversions.",
+    "claim_ids": [
+      "claim_cmp_revenue_base_2028"
+    ]
+  },
+  {
+    "parameter_id": "equipment_units_high_2026",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 1800,
+    "definition": "Assumed chambers achieving revenue recognition in calendar fiscal year; legacy AMEC operations excluding acquired CMP",
+    "rationale": "Conditional scenario, not a probability band. Global WFE forecast is an outside reference, not copied into AMEC. Customer concentration, client capex, qualification-to-acceptance, price mix and production execution can all change revenue. Base year-on-year unit growth is 30.6%/26.5%/22.0%, starting from 2025 sold 1240; product qualification and domestic process coverage justify a premium to industry benchmark, but no specific capacity ceiling is reported. Low imposes concentrated-client capex/acceptance delays; high requires successful film and packaging ramps. September10 official capacity plan supports expansion direction; 600,000m² current/900,000m² five-year plan and Guangzhou/Chengdu2027H1 commissioning are not converted mechanically into accepted chamber units or guaranteed revenue. Checked annual p219 customerA concentration is39.99% vs22.15%; concentration increases vulnerability to a customer-specific pause. This fact does not reveal the client capex plan or quantify this assumed future chamber path. Company1225482911 p4 delays full HQ/R&D use to2027-12 with some floors already usable. Quantities retain independent conditional assumptions, not an instantaneous capacity conversion. No published chambers/year ceiling supports a mechanical numerical haircut.",
+    "claim_ids": [
+      "claim_equipment_units_high_2026",
+      "claim_ir_equipment_units_high_2026",
+      "claim_concentration_equipment_units_high_2026",
+      "claim_capacity_equipment_units_high_2026"
+    ]
+  },
+  {
+    "parameter_id": "equipment_unit_revenue_high_2026",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 8.9,
+    "definition": "Assumed recognized weighted revenue per chamber, mix and discounts included; legacy AMEC operations excluding acquired CMP",
+    "rationale": "Independent pricing/mix assumption near rounded 2025 proxy 8.4895; low continuing discounts, high richer advanced equipment mix. No segment SKU price or client contract is known.",
+    "claim_ids": [
+      "claim_equipment_unit_revenue_high_2026"
+    ]
+  },
+  {
+    "parameter_id": "aftermarket_revenue_high_2026",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 2507.811661948501,
+    "definition": "Analyst-assumed annual recognized non-equipment mathematical residual; no disclosed product/service disaggregation",
+    "rationale": "Transparent direct_revenue fallback on FY2025 total minus rounded dedicated-equipment revenue (1857.63826811m, rounding inherited). The group describes after-sales support and digital/gas purification activities, but their revenue allocations within this residual are unknown. Retained conditional low/base/high amounts are analyst stress assumptions, not a measured fleet, attach rate, renewal curve or quantified repeat-purchase forecast. No claim that the entire residual is aftermarket; no separate capacity or service-lag transform.",
+    "claim_ids": [
+      "claim_aftermarket_revenue_high_2026"
+    ]
+  },
+  {
+    "parameter_id": "cmp_revenue_high_2026",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 220,
+    "definition": "Assumed incremental external CMP revenue included after control, full consolidated revenue not ownership multiplied",
+    "rationale": "2026 June–December after purchase on May31; June actual only1.29190208m. No mechanical 7/12 conversion of annual performance commitment; wide ramp/acceptance uncertainty. Low includes integration/qualification delays; high requires customer conversions.",
+    "claim_ids": [
+      "claim_cmp_revenue_high_2026"
+    ]
+  },
+  {
+    "parameter_id": "equipment_units_high_2027",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 2500,
+    "definition": "Assumed chambers achieving revenue recognition in calendar fiscal year; legacy AMEC operations excluding acquired CMP",
+    "rationale": "Conditional scenario, not a probability band. Global WFE forecast is an outside reference, not copied into AMEC. Customer concentration, client capex, qualification-to-acceptance, price mix and production execution can all change revenue. Base year-on-year unit growth is 30.6%/26.5%/22.0%, starting from 2025 sold 1240; product qualification and domestic process coverage justify a premium to industry benchmark, but no specific capacity ceiling is reported. Low imposes concentrated-client capex/acceptance delays; high requires successful film and packaging ramps. September10 official capacity plan supports expansion direction; 600,000m² current/900,000m² five-year plan and Guangzhou/Chengdu2027H1 commissioning are not converted mechanically into accepted chamber units or guaranteed revenue. Checked annual p219 customerA concentration is39.99% vs22.15%; concentration increases vulnerability to a customer-specific pause. This fact does not reveal the client capex plan or quantify this assumed future chamber path. Company1225482911 p4 delays full HQ/R&D use to2027-12 with some floors already usable. Quantities retain independent conditional assumptions, not an instantaneous capacity conversion. No published chambers/year ceiling supports a mechanical numerical haircut.",
+    "claim_ids": [
+      "claim_equipment_units_high_2027",
+      "claim_ir_equipment_units_high_2027",
+      "claim_concentration_equipment_units_high_2027",
+      "claim_capacity_equipment_units_high_2027"
+    ]
+  },
+  {
+    "parameter_id": "equipment_unit_revenue_high_2027",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 8.9,
+    "definition": "Assumed recognized weighted revenue per chamber, mix and discounts included; legacy AMEC operations excluding acquired CMP",
+    "rationale": "Independent pricing/mix assumption near rounded 2025 proxy 8.4895; low continuing discounts, high richer advanced equipment mix. No segment SKU price or client contract is known.",
+    "claim_ids": [
+      "claim_equipment_unit_revenue_high_2027"
+    ]
+  },
+  {
+    "parameter_id": "aftermarket_revenue_high_2027",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 3250.8669691925006,
+    "definition": "Analyst-assumed annual recognized non-equipment mathematical residual; no disclosed product/service disaggregation",
+    "rationale": "Transparent direct_revenue fallback on FY2025 total minus rounded dedicated-equipment revenue (1857.63826811m, rounding inherited). The group describes after-sales support and digital/gas purification activities, but their revenue allocations within this residual are unknown. Retained conditional low/base/high amounts are analyst stress assumptions, not a measured fleet, attach rate, renewal curve or quantified repeat-purchase forecast. No claim that the entire residual is aftermarket; no separate capacity or service-lag transform.",
+    "claim_ids": [
+      "claim_aftermarket_revenue_high_2027"
+    ]
+  },
+  {
+    "parameter_id": "cmp_revenue_high_2027",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 520,
+    "definition": "Assumed incremental external CMP revenue included after control, full consolidated revenue not ownership multiplied",
+    "rationale": "Full-year CMP operating ramp assumption. Independently benchmarked to seller annual commitment, not forced to meet it. Intra-group transactions would require elimination if evidence emerges. Low includes integration/qualification delays; high requires customer conversions.",
+    "claim_ids": [
+      "claim_cmp_revenue_high_2027"
+    ]
+  },
+  {
+    "parameter_id": "equipment_units_high_2028",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 3250,
+    "definition": "Assumed chambers achieving revenue recognition in calendar fiscal year; legacy AMEC operations excluding acquired CMP",
+    "rationale": "Conditional scenario, not a probability band. Global WFE forecast is an outside reference, not copied into AMEC. Customer concentration, client capex, qualification-to-acceptance, price mix and production execution can all change revenue. Base year-on-year unit growth is 30.6%/26.5%/22.0%, starting from 2025 sold 1240; product qualification and domestic process coverage justify a premium to industry benchmark, but no specific capacity ceiling is reported. Low imposes concentrated-client capex/acceptance delays; high requires successful film and packaging ramps. September10 official capacity plan supports expansion direction; 600,000m² current/900,000m² five-year plan and Guangzhou/Chengdu2027H1 commissioning are not converted mechanically into accepted chamber units or guaranteed revenue. Checked annual p219 customerA concentration is39.99% vs22.15%; concentration increases vulnerability to a customer-specific pause. This fact does not reveal the client capex plan or quantify this assumed future chamber path. Company1225482911 p4 delays full HQ/R&D use to2027-12 with some floors already usable. Quantities retain independent conditional assumptions, not an instantaneous capacity conversion. No published chambers/year ceiling supports a mechanical numerical haircut.",
+    "claim_ids": [
+      "claim_equipment_units_high_2028",
+      "claim_ir_equipment_units_high_2028",
+      "claim_concentration_equipment_units_high_2028",
+      "claim_capacity_equipment_units_high_2028"
+    ]
+  },
+  {
+    "parameter_id": "equipment_unit_revenue_high_2028",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 8.8,
+    "definition": "Assumed recognized weighted revenue per chamber, mix and discounts included; legacy AMEC operations excluding acquired CMP",
+    "rationale": "Independent pricing/mix assumption near rounded 2025 proxy 8.4895; low continuing discounts, high richer advanced equipment mix. No segment SKU price or client contract is known.",
+    "claim_ids": [
+      "claim_equipment_unit_revenue_high_2028"
+    ]
+  },
+  {
+    "parameter_id": "aftermarket_revenue_high_2028",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 4086.804189842001,
+    "definition": "Analyst-assumed annual recognized non-equipment mathematical residual; no disclosed product/service disaggregation",
+    "rationale": "Transparent direct_revenue fallback on FY2025 total minus rounded dedicated-equipment revenue (1857.63826811m, rounding inherited). The group describes after-sales support and digital/gas purification activities, but their revenue allocations within this residual are unknown. Retained conditional low/base/high amounts are analyst stress assumptions, not a measured fleet, attach rate, renewal curve or quantified repeat-purchase forecast. No claim that the entire residual is aftermarket; no separate capacity or service-lag transform.",
+    "claim_ids": [
+      "claim_aftermarket_revenue_high_2028"
+    ]
+  },
+  {
+    "parameter_id": "cmp_revenue_high_2028",
+    "numeric_unchanged": true,
+    "kind": "analyst_assumption",
+    "value": 750,
+    "definition": "Assumed incremental external CMP revenue included after control, full consolidated revenue not ownership multiplied",
+    "rationale": "Full-year CMP operating ramp assumption. Independently benchmarked to seller annual commitment, not forced to meet it. Intra-group transactions would require elimination if evidence emerges. Low includes integration/qualification delays; high requires customer conversions.",
+    "claim_ids": [
+      "claim_cmp_revenue_high_2028"
+    ]
+  }
+]

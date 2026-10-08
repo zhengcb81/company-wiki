@@ -1,0 +1,16 @@
+error: 13 validation problem(s) found:
+[growth_driver_tree]
+  - claim claim_growth_driver_evergreen_and_launch_monetization_61 does not support growth_driver:evergreen_and_launch_monetization_checked
+  - evergreen_and_launch_monetization found counterevidence requires a contrary evidence node
+  - claim claim_growth_driver_paid_social_stabilization_62 does not support growth_driver:paid_social_stabilization_checked
+  - paid_social_stabilization found counterevidence requires a contrary evidence node
+  - claim claim_growth_driver_ai_ad_matching_and_inventory_63 does not support growth_driver:ai_ad_matching_and_inventory_checked
+  - ai_ad_matching_and_inventory found counterevidence requires a contrary evidence node
+  - claim claim_growth_driver_payments_and_cloud_conversion_64 does not support growth_driver:payments_and_cloud_conversion_checked
+  - payments_and_cloud_conversion found counterevidence requires a contrary evidence node
+  - claim claim_growth_driver_residual_normalization_65 does not support growth_driver:residual_normalization_checked
+[management_targets]
+  - not_available communication requires search_description: latest_earnings_call
+  - not_available management communication cannot contain source_ids: latest_investor_presentation
+  - not_available communication requires search_description: latest_investor_presentation
+  - not_available communication requires search_description: material_announcements_since_last_filing

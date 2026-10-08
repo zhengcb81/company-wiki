@@ -1,0 +1,104 @@
+{"cmd": ["C:\\Miniconda\\python.exe", "-B", "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\v2\\input.json", "--validate-only", "--verbose"], "returncode": 0, "stdout": "valid\r\n", "stderr": ""}
+{"cmd": ["C:\\Miniconda\\python.exe", "-B", "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\v2\\input.json", "--output", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\v2\\forecast.json", "--markdown", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\v2\\forecast.md"], "returncode": 0, "stdout": "", "stderr": ""}
+{"cmd": ["C:\\Miniconda\\python.exe", "-B", "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_backtest.py", "create", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\v2\\input.json", "--version", "2026-10-08-MSFT-v2", "--output", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\v2\\snapshot.json"], "returncode": 0, "stdout": "", "stderr": ""}
+SUCCESS independent runtime and arithmetic
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\publication_registry.py",
+    "audit",
+    "--result",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\forecast.json"
+  ],
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "",
+  "original_unchanged": true,
+  "original_hashes": {
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\forecast.json": "4447f9c5390a429ba5f304bf496af36f24ae6d8354b3a4fea890223d0a27c605",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\snapshot.json": "3127098e5ee041e3d17fa2fefeef47cc69ba90c321d68d4a44e6bc4c8e33c74e",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\publications.jsonl": "132beb8eb7249d8b74ded75b6e1a00dabddb14546941d35914d16e65fcf6b3a4"
+  },
+  "forecast_publication": {
+    "receipt_schema_version": "1.0",
+    "schema_version": "3.7",
+    "engine_version": "4.1.0",
+    "validated_input_sha256": "311d36e8e935b3363c6b7e2b54a31bbbc0dad043da81767cca14c36c8cbb8dfd",
+    "validated_payload_sha256": "56a44da2c2c24e9792ac9bcb0b33b33b90a8cf431b7553cf3f1970845b524c35",
+    "validator_version": "4.1.0",
+    "gate_ids": [
+      "output_recomputation",
+      "sensitivity_shock_recomputation"
+    ],
+    "verification_context_sha256": "410ec21f66c718575ef883020d01b2b3644f3ab284916ab8c2849038457c7188",
+    "formal_output_mode": "formal",
+    "freeform_override_allowed": false,
+    "attestation_status": "unattested",
+    "receipt_sha256": "4b30f1bc36f39811778abda9673cc3ac4e86d64f7fb7f3d719dddcc9e97b6374"
+  },
+  "snapshot_keys": [
+    "company_name",
+    "as_of_date",
+    "forecast_version",
+    "input_sha256",
+    "forecast_result_sha256",
+    "engine_version",
+    "forecast_schema_version",
+    "snapshot_schema_version",
+    "snapshot_id",
+    "input_document",
+    "forecast_result"
+  ],
+  "snapshot_receipt": null,
+  "registry": [
+    {
+      "artifact_id": null,
+      "artifact_type": "forecast",
+      "engine_version": "4.1.0",
+      "input_sha256": "311d36e8e935b3363c6b7e2b54a31bbbc0dad043da81767cca14c36c8cbb8dfd",
+      "input_summary_sha256": "649f95b782b5b4e136764a9753db0dc95a4d1313dc458c1ce4b5d06a57d75cc7",
+      "line_sha256": "f3bd4164271b903144c12059cf69f24e5b8e2280db515d7e5c9e27b8cd5ca633",
+      "note": "run_forecast formal",
+      "prev_line_sha256": null,
+      "publisher": "revenue-forecast",
+      "receipt_sha256": "7076110b7263348df9c83dbafec90aadbe199de82b9b741a9a0feefadfec872c",
+      "registered_at": "2026-10-08T08:29:18.112236+00:00",
+      "result_sha256": "b5be5ee10f10671276a0b9cb163e7e53332d2af22d650529ae47ee23e5b36cba",
+      "schema_version": "3.7",
+      "validation_status": "validated"
+    },
+    {
+      "artifact_id": null,
+      "artifact_type": "forecast",
+      "engine_version": "4.1.0",
+      "input_sha256": "311d36e8e935b3363c6b7e2b54a31bbbc0dad043da81767cca14c36c8cbb8dfd",
+      "input_summary_sha256": "649f95b782b5b4e136764a9753db0dc95a4d1313dc458c1ce4b5d06a57d75cc7",
+      "line_sha256": "120fa9888296a52f43ba21fe025e4a3e6efb59343310a5a656001746a51a191b",
+      "note": "run_forecast formal",
+      "prev_line_sha256": "f3bd4164271b903144c12059cf69f24e5b8e2280db515d7e5c9e27b8cd5ca633",
+      "publisher": "revenue-forecast",
+      "receipt_sha256": "7076110b7263348df9c83dbafec90aadbe199de82b9b741a9a0feefadfec872c",
+      "registered_at": "2026-10-08T08:30:33.008705+00:00",
+      "result_sha256": "b5be5ee10f10671276a0b9cb163e7e53332d2af22d650529ae47ee23e5b36cba",
+      "schema_version": "3.7",
+      "validation_status": "validated"
+    },
+    {
+      "artifact_id": "168cc12b933faea7298a1c64a00aa65ab2adb4a7cab26af7826e0e7165ce923a",
+      "artifact_type": "snapshot",
+      "engine_version": "4.1.0",
+      "input_sha256": "311d36e8e935b3363c6b7e2b54a31bbbc0dad043da81767cca14c36c8cbb8dfd",
+      "input_summary_sha256": "649f95b782b5b4e136764a9753db0dc95a4d1313dc458c1ce4b5d06a57d75cc7",
+      "line_sha256": "bc962c46e80b5c919ceb3a4473140e1f0970a33de4af6969476f97863ff1a133",
+      "note": "revenue_backtest create",
+      "prev_line_sha256": "120fa9888296a52f43ba21fe025e4a3e6efb59343310a5a656001746a51a191b",
+      "publisher": "revenue-forecast",
+      "receipt_sha256": "7076110b7263348df9c83dbafec90aadbe199de82b9b741a9a0feefadfec872c",
+      "registered_at": "2026-10-08T08:30:33.365837+00:00",
+      "result_sha256": "187de7a0fe8b6be142b8090c433e705136078da7c1917c8e21e837058bbc0f04",
+      "schema_version": "3.7"
+    }
+  ],
+  "scope": "audit checks publication chain, generation conflict and registered anchor; strong input-bound validation above checks semantic/model output separately"
+}

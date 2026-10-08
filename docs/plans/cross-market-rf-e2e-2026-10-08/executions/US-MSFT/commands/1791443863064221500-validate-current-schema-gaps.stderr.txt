@@ -1,0 +1,11 @@
+error: 9 validation problem(s) found:
+[growth_driver_tree]
+  - claim claim_102_cloud_ai does not support growth_driver:cloud_ai_company
+  - claim claim_103_cloud_ai does not support growth_driver:cloud_ai_contrary
+  - claim claim_104_cloud_ai does not support growth_driver:cloud_ai_peer
+  - claim claim_105_enterprise_migration does not support growth_driver:enterprise_migration_company
+  - claim claim_106_enterprise_migration does not support growth_driver:enterprise_migration_contrary
+  - claim claim_107_advertising does not support growth_driver:advertising_company
+  - claim claim_108_advertising does not support growth_driver:advertising_contrary
+  - claim claim_109_consumer_cycle does not support growth_driver:consumer_cycle_company
+  - claim claim_110_consumer_cycle does not support growth_driver:consumer_cycle_contrary

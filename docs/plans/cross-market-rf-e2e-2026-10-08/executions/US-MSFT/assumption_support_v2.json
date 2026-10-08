@@ -1,0 +1,1784 @@
+[
+  {
+    "parameter_id": "azure_growth_low_2027",
+    "old_claim_id": "claim_3_azure_growth_low_2027",
+    "new_claim_ids": [
+      "claim_3_azure_growth_low_2027",
+      "claim_3_azure_growth_low_2027_part2",
+      "claim_3_azure_growth_low_2027_part3",
+      "claim_3_azure_growth_low_2027_part4",
+      "v2_history_azure_growth_low_2027",
+      "v2_constraint_azure_growth_low_2027",
+      "v2_constraint_azure_growth_low_2027_part2",
+      "v2_constraint_azure_growth_low_2027_part3",
+      "v2_constraint_azure_growth_low_2027_part4",
+      "v2_context_azure_growth_low_2027"
+    ],
+    "historical_growth_calculated": 0.4039113069825093,
+    "mechanism_call_lines": [
+      243,
+      318,
+      319,
+      320
+    ],
+    "constraint_call_lines": [
+      317,
+      332,
+      337
+    ],
+    "perimeter_limits": "New Azure excludes GitHub/developer/security and healthcare shifted in FY27. The Q1 44–45% constant-currency guide and FX less-than1point drag are quarterly context, with no valid equation to annual reported growth. Demand is not delivery; annual rate depends on capacity live dates, monetized usage, pricing and FX.",
+    "analyst_range_and_fade": "FY27 low30/base38/high45% bracket weaker capacity conversion versus continued efficient delivery. These are independent annual reported choices informed by restated FY26 40.4% growth, not a same-basis conservative bound from quarter CC guidance. FY28/29 assume incremental delivered usage remains positive but growth moderates on a larger revenue base and normalization of early capacity gains; no dated company target proves this fade.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "azure_growth_low_2028",
+    "old_claim_id": "claim_4_azure_growth_low_2028",
+    "new_claim_ids": [
+      "claim_4_azure_growth_low_2028",
+      "claim_4_azure_growth_low_2028_part2",
+      "claim_4_azure_growth_low_2028_part3",
+      "claim_4_azure_growth_low_2028_part4",
+      "v2_history_azure_growth_low_2028",
+      "v2_constraint_azure_growth_low_2028",
+      "v2_constraint_azure_growth_low_2028_part2",
+      "v2_constraint_azure_growth_low_2028_part3",
+      "v2_constraint_azure_growth_low_2028_part4",
+      "v2_context_azure_growth_low_2028"
+    ],
+    "historical_growth_calculated": 0.4039113069825093,
+    "mechanism_call_lines": [
+      243,
+      318,
+      319,
+      320
+    ],
+    "constraint_call_lines": [
+      317,
+      332,
+      337
+    ],
+    "perimeter_limits": "New Azure excludes GitHub/developer/security and healthcare shifted in FY27. The Q1 44–45% constant-currency guide and FX less-than1point drag are quarterly context, with no valid equation to annual reported growth. Demand is not delivery; annual rate depends on capacity live dates, monetized usage, pricing and FX.",
+    "analyst_range_and_fade": "FY27 low30/base38/high45% bracket weaker capacity conversion versus continued efficient delivery. These are independent annual reported choices informed by restated FY26 40.4% growth, not a same-basis conservative bound from quarter CC guidance. FY28/29 assume incremental delivered usage remains positive but growth moderates on a larger revenue base and normalization of early capacity gains; no dated company target proves this fade.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "azure_growth_low_2029",
+    "old_claim_id": "claim_5_azure_growth_low_2029",
+    "new_claim_ids": [
+      "claim_5_azure_growth_low_2029",
+      "claim_5_azure_growth_low_2029_part2",
+      "claim_5_azure_growth_low_2029_part3",
+      "claim_5_azure_growth_low_2029_part4",
+      "v2_history_azure_growth_low_2029",
+      "v2_constraint_azure_growth_low_2029",
+      "v2_constraint_azure_growth_low_2029_part2",
+      "v2_constraint_azure_growth_low_2029_part3",
+      "v2_constraint_azure_growth_low_2029_part4",
+      "v2_context_azure_growth_low_2029"
+    ],
+    "historical_growth_calculated": 0.4039113069825093,
+    "mechanism_call_lines": [
+      243,
+      318,
+      319,
+      320
+    ],
+    "constraint_call_lines": [
+      317,
+      332,
+      337
+    ],
+    "perimeter_limits": "New Azure excludes GitHub/developer/security and healthcare shifted in FY27. The Q1 44–45% constant-currency guide and FX less-than1point drag are quarterly context, with no valid equation to annual reported growth. Demand is not delivery; annual rate depends on capacity live dates, monetized usage, pricing and FX.",
+    "analyst_range_and_fade": "FY27 low30/base38/high45% bracket weaker capacity conversion versus continued efficient delivery. These are independent annual reported choices informed by restated FY26 40.4% growth, not a same-basis conservative bound from quarter CC guidance. FY28/29 assume incremental delivered usage remains positive but growth moderates on a larger revenue base and normalization of early capacity gains; no dated company target proves this fade.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "azure_growth_base_2027",
+    "old_claim_id": "claim_6_azure_growth_base_2027",
+    "new_claim_ids": [
+      "claim_6_azure_growth_base_2027",
+      "claim_6_azure_growth_base_2027_part2",
+      "claim_6_azure_growth_base_2027_part3",
+      "claim_6_azure_growth_base_2027_part4",
+      "v2_history_azure_growth_base_2027",
+      "v2_constraint_azure_growth_base_2027",
+      "v2_constraint_azure_growth_base_2027_part2",
+      "v2_constraint_azure_growth_base_2027_part3",
+      "v2_constraint_azure_growth_base_2027_part4",
+      "v2_context_azure_growth_base_2027"
+    ],
+    "historical_growth_calculated": 0.4039113069825093,
+    "mechanism_call_lines": [
+      243,
+      318,
+      319,
+      320
+    ],
+    "constraint_call_lines": [
+      317,
+      332,
+      337
+    ],
+    "perimeter_limits": "New Azure excludes GitHub/developer/security and healthcare shifted in FY27. The Q1 44–45% constant-currency guide and FX less-than1point drag are quarterly context, with no valid equation to annual reported growth. Demand is not delivery; annual rate depends on capacity live dates, monetized usage, pricing and FX.",
+    "analyst_range_and_fade": "FY27 low30/base38/high45% bracket weaker capacity conversion versus continued efficient delivery. These are independent annual reported choices informed by restated FY26 40.4% growth, not a same-basis conservative bound from quarter CC guidance. FY28/29 assume incremental delivered usage remains positive but growth moderates on a larger revenue base and normalization of early capacity gains; no dated company target proves this fade.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "azure_growth_base_2028",
+    "old_claim_id": "claim_7_azure_growth_base_2028",
+    "new_claim_ids": [
+      "claim_7_azure_growth_base_2028",
+      "claim_7_azure_growth_base_2028_part2",
+      "claim_7_azure_growth_base_2028_part3",
+      "claim_7_azure_growth_base_2028_part4",
+      "v2_history_azure_growth_base_2028",
+      "v2_constraint_azure_growth_base_2028",
+      "v2_constraint_azure_growth_base_2028_part2",
+      "v2_constraint_azure_growth_base_2028_part3",
+      "v2_constraint_azure_growth_base_2028_part4",
+      "v2_context_azure_growth_base_2028"
+    ],
+    "historical_growth_calculated": 0.4039113069825093,
+    "mechanism_call_lines": [
+      243,
+      318,
+      319,
+      320
+    ],
+    "constraint_call_lines": [
+      317,
+      332,
+      337
+    ],
+    "perimeter_limits": "New Azure excludes GitHub/developer/security and healthcare shifted in FY27. The Q1 44–45% constant-currency guide and FX less-than1point drag are quarterly context, with no valid equation to annual reported growth. Demand is not delivery; annual rate depends on capacity live dates, monetized usage, pricing and FX.",
+    "analyst_range_and_fade": "FY27 low30/base38/high45% bracket weaker capacity conversion versus continued efficient delivery. These are independent annual reported choices informed by restated FY26 40.4% growth, not a same-basis conservative bound from quarter CC guidance. FY28/29 assume incremental delivered usage remains positive but growth moderates on a larger revenue base and normalization of early capacity gains; no dated company target proves this fade.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "azure_growth_base_2029",
+    "old_claim_id": "claim_8_azure_growth_base_2029",
+    "new_claim_ids": [
+      "claim_8_azure_growth_base_2029",
+      "claim_8_azure_growth_base_2029_part2",
+      "claim_8_azure_growth_base_2029_part3",
+      "claim_8_azure_growth_base_2029_part4",
+      "v2_history_azure_growth_base_2029",
+      "v2_constraint_azure_growth_base_2029",
+      "v2_constraint_azure_growth_base_2029_part2",
+      "v2_constraint_azure_growth_base_2029_part3",
+      "v2_constraint_azure_growth_base_2029_part4",
+      "v2_context_azure_growth_base_2029"
+    ],
+    "historical_growth_calculated": 0.4039113069825093,
+    "mechanism_call_lines": [
+      243,
+      318,
+      319,
+      320
+    ],
+    "constraint_call_lines": [
+      317,
+      332,
+      337
+    ],
+    "perimeter_limits": "New Azure excludes GitHub/developer/security and healthcare shifted in FY27. The Q1 44–45% constant-currency guide and FX less-than1point drag are quarterly context, with no valid equation to annual reported growth. Demand is not delivery; annual rate depends on capacity live dates, monetized usage, pricing and FX.",
+    "analyst_range_and_fade": "FY27 low30/base38/high45% bracket weaker capacity conversion versus continued efficient delivery. These are independent annual reported choices informed by restated FY26 40.4% growth, not a same-basis conservative bound from quarter CC guidance. FY28/29 assume incremental delivered usage remains positive but growth moderates on a larger revenue base and normalization of early capacity gains; no dated company target proves this fade.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "azure_growth_high_2027",
+    "old_claim_id": "claim_9_azure_growth_high_2027",
+    "new_claim_ids": [
+      "claim_9_azure_growth_high_2027",
+      "claim_9_azure_growth_high_2027_part2",
+      "claim_9_azure_growth_high_2027_part3",
+      "claim_9_azure_growth_high_2027_part4",
+      "v2_history_azure_growth_high_2027",
+      "v2_constraint_azure_growth_high_2027",
+      "v2_constraint_azure_growth_high_2027_part2",
+      "v2_constraint_azure_growth_high_2027_part3",
+      "v2_constraint_azure_growth_high_2027_part4",
+      "v2_context_azure_growth_high_2027"
+    ],
+    "historical_growth_calculated": 0.4039113069825093,
+    "mechanism_call_lines": [
+      243,
+      318,
+      319,
+      320
+    ],
+    "constraint_call_lines": [
+      317,
+      332,
+      337
+    ],
+    "perimeter_limits": "New Azure excludes GitHub/developer/security and healthcare shifted in FY27. The Q1 44–45% constant-currency guide and FX less-than1point drag are quarterly context, with no valid equation to annual reported growth. Demand is not delivery; annual rate depends on capacity live dates, monetized usage, pricing and FX.",
+    "analyst_range_and_fade": "FY27 low30/base38/high45% bracket weaker capacity conversion versus continued efficient delivery. These are independent annual reported choices informed by restated FY26 40.4% growth, not a same-basis conservative bound from quarter CC guidance. FY28/29 assume incremental delivered usage remains positive but growth moderates on a larger revenue base and normalization of early capacity gains; no dated company target proves this fade.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "azure_growth_high_2028",
+    "old_claim_id": "claim_10_azure_growth_high_2028",
+    "new_claim_ids": [
+      "claim_10_azure_growth_high_2028",
+      "claim_10_azure_growth_high_2028_part2",
+      "claim_10_azure_growth_high_2028_part3",
+      "claim_10_azure_growth_high_2028_part4",
+      "v2_history_azure_growth_high_2028",
+      "v2_constraint_azure_growth_high_2028",
+      "v2_constraint_azure_growth_high_2028_part2",
+      "v2_constraint_azure_growth_high_2028_part3",
+      "v2_constraint_azure_growth_high_2028_part4",
+      "v2_context_azure_growth_high_2028"
+    ],
+    "historical_growth_calculated": 0.4039113069825093,
+    "mechanism_call_lines": [
+      243,
+      318,
+      319,
+      320
+    ],
+    "constraint_call_lines": [
+      317,
+      332,
+      337
+    ],
+    "perimeter_limits": "New Azure excludes GitHub/developer/security and healthcare shifted in FY27. The Q1 44–45% constant-currency guide and FX less-than1point drag are quarterly context, with no valid equation to annual reported growth. Demand is not delivery; annual rate depends on capacity live dates, monetized usage, pricing and FX.",
+    "analyst_range_and_fade": "FY27 low30/base38/high45% bracket weaker capacity conversion versus continued efficient delivery. These are independent annual reported choices informed by restated FY26 40.4% growth, not a same-basis conservative bound from quarter CC guidance. FY28/29 assume incremental delivered usage remains positive but growth moderates on a larger revenue base and normalization of early capacity gains; no dated company target proves this fade.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "azure_growth_high_2029",
+    "old_claim_id": "claim_11_azure_growth_high_2029",
+    "new_claim_ids": [
+      "claim_11_azure_growth_high_2029",
+      "claim_11_azure_growth_high_2029_part2",
+      "claim_11_azure_growth_high_2029_part3",
+      "claim_11_azure_growth_high_2029_part4",
+      "v2_history_azure_growth_high_2029",
+      "v2_constraint_azure_growth_high_2029",
+      "v2_constraint_azure_growth_high_2029_part2",
+      "v2_constraint_azure_growth_high_2029_part3",
+      "v2_constraint_azure_growth_high_2029_part4",
+      "v2_context_azure_growth_high_2029"
+    ],
+    "historical_growth_calculated": 0.4039113069825093,
+    "mechanism_call_lines": [
+      243,
+      318,
+      319,
+      320
+    ],
+    "constraint_call_lines": [
+      317,
+      332,
+      337
+    ],
+    "perimeter_limits": "New Azure excludes GitHub/developer/security and healthcare shifted in FY27. The Q1 44–45% constant-currency guide and FX less-than1point drag are quarterly context, with no valid equation to annual reported growth. Demand is not delivery; annual rate depends on capacity live dates, monetized usage, pricing and FX.",
+    "analyst_range_and_fade": "FY27 low30/base38/high45% bracket weaker capacity conversion versus continued efficient delivery. These are independent annual reported choices informed by restated FY26 40.4% growth, not a same-basis conservative bound from quarter CC guidance. FY28/29 assume incremental delivered usage remains positive but growth moderates on a larger revenue base and normalization of early capacity gains; no dated company target proves this fade.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_low_2027",
+    "old_claim_id": "claim_17_microsoft_365_cloud_growth_low_2027",
+    "new_claim_ids": [
+      "claim_17_microsoft_365_cloud_growth_low_2027",
+      "claim_17_microsoft_365_cloud_growth_low_2027_part2",
+      "claim_17_microsoft_365_cloud_growth_low_2027_part3",
+      "claim_17_microsoft_365_cloud_growth_low_2027_part4",
+      "v2_history_microsoft_365_cloud_growth_low_2027",
+      "v2_constraint_microsoft_365_cloud_growth_low_2027",
+      "v2_constraint_microsoft_365_cloud_growth_low_2027_part2",
+      "v2_context_microsoft_365_cloud_growth_low_2027"
+    ],
+    "historical_growth_calculated": 0.18549731103362688,
+    "mechanism_call_lines": [
+      236,
+      238,
+      361,
+      362
+    ],
+    "constraint_call_lines": [
+      268
+    ],
+    "perimeter_limits": "Whole annual stream includes consumer and newly moved developer/security cloud. Commercial-only growth/paid period-end seats, premium-SKU mix and Q1 CC guide do not equal its annual recognized revenue. No paid-user average or realized ARPU was disclosed for this perimeter.",
+    "analyst_range_and_fade": "FY27 low12/base17/high22% express weak versus sustained premium/consumption adoption around restated whole-cloud FY26 growth18.6%; later paths retain explicit paid-monetization uncertainty, not a conversion of commercial-quarter targets. FY28/29 assume paid deployment and usage monetize, with slower growth as the base expands and new lower-ARPU seats dilute mix. Rollout/preview timing alone does not establish adoption, usage billing or retention.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_low_2028",
+    "old_claim_id": "claim_18_microsoft_365_cloud_growth_low_2028",
+    "new_claim_ids": [
+      "claim_18_microsoft_365_cloud_growth_low_2028",
+      "claim_18_microsoft_365_cloud_growth_low_2028_part2",
+      "claim_18_microsoft_365_cloud_growth_low_2028_part3",
+      "claim_18_microsoft_365_cloud_growth_low_2028_part4",
+      "v2_history_microsoft_365_cloud_growth_low_2028",
+      "v2_constraint_microsoft_365_cloud_growth_low_2028",
+      "v2_constraint_microsoft_365_cloud_growth_low_2028_part2",
+      "v2_context_microsoft_365_cloud_growth_low_2028"
+    ],
+    "historical_growth_calculated": 0.18549731103362688,
+    "mechanism_call_lines": [
+      236,
+      238,
+      361,
+      362
+    ],
+    "constraint_call_lines": [
+      268
+    ],
+    "perimeter_limits": "Whole annual stream includes consumer and newly moved developer/security cloud. Commercial-only growth/paid period-end seats, premium-SKU mix and Q1 CC guide do not equal its annual recognized revenue. No paid-user average or realized ARPU was disclosed for this perimeter.",
+    "analyst_range_and_fade": "FY27 low12/base17/high22% express weak versus sustained premium/consumption adoption around restated whole-cloud FY26 growth18.6%; later paths retain explicit paid-monetization uncertainty, not a conversion of commercial-quarter targets. FY28/29 assume paid deployment and usage monetize, with slower growth as the base expands and new lower-ARPU seats dilute mix. Rollout/preview timing alone does not establish adoption, usage billing or retention.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_low_2029",
+    "old_claim_id": "claim_19_microsoft_365_cloud_growth_low_2029",
+    "new_claim_ids": [
+      "claim_19_microsoft_365_cloud_growth_low_2029",
+      "claim_19_microsoft_365_cloud_growth_low_2029_part2",
+      "claim_19_microsoft_365_cloud_growth_low_2029_part3",
+      "claim_19_microsoft_365_cloud_growth_low_2029_part4",
+      "v2_history_microsoft_365_cloud_growth_low_2029",
+      "v2_constraint_microsoft_365_cloud_growth_low_2029",
+      "v2_constraint_microsoft_365_cloud_growth_low_2029_part2",
+      "v2_context_microsoft_365_cloud_growth_low_2029"
+    ],
+    "historical_growth_calculated": 0.18549731103362688,
+    "mechanism_call_lines": [
+      236,
+      238,
+      361,
+      362
+    ],
+    "constraint_call_lines": [
+      268
+    ],
+    "perimeter_limits": "Whole annual stream includes consumer and newly moved developer/security cloud. Commercial-only growth/paid period-end seats, premium-SKU mix and Q1 CC guide do not equal its annual recognized revenue. No paid-user average or realized ARPU was disclosed for this perimeter.",
+    "analyst_range_and_fade": "FY27 low12/base17/high22% express weak versus sustained premium/consumption adoption around restated whole-cloud FY26 growth18.6%; later paths retain explicit paid-monetization uncertainty, not a conversion of commercial-quarter targets. FY28/29 assume paid deployment and usage monetize, with slower growth as the base expands and new lower-ARPU seats dilute mix. Rollout/preview timing alone does not establish adoption, usage billing or retention.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_base_2027",
+    "old_claim_id": "claim_20_microsoft_365_cloud_growth_base_2027",
+    "new_claim_ids": [
+      "claim_20_microsoft_365_cloud_growth_base_2027",
+      "claim_20_microsoft_365_cloud_growth_base_2027_part2",
+      "claim_20_microsoft_365_cloud_growth_base_2027_part3",
+      "claim_20_microsoft_365_cloud_growth_base_2027_part4",
+      "v2_history_microsoft_365_cloud_growth_base_2027",
+      "v2_constraint_microsoft_365_cloud_growth_base_2027",
+      "v2_constraint_microsoft_365_cloud_growth_base_2027_part2",
+      "v2_context_microsoft_365_cloud_growth_base_2027"
+    ],
+    "historical_growth_calculated": 0.18549731103362688,
+    "mechanism_call_lines": [
+      236,
+      238,
+      361,
+      362
+    ],
+    "constraint_call_lines": [
+      268
+    ],
+    "perimeter_limits": "Whole annual stream includes consumer and newly moved developer/security cloud. Commercial-only growth/paid period-end seats, premium-SKU mix and Q1 CC guide do not equal its annual recognized revenue. No paid-user average or realized ARPU was disclosed for this perimeter.",
+    "analyst_range_and_fade": "FY27 low12/base17/high22% express weak versus sustained premium/consumption adoption around restated whole-cloud FY26 growth18.6%; later paths retain explicit paid-monetization uncertainty, not a conversion of commercial-quarter targets. FY28/29 assume paid deployment and usage monetize, with slower growth as the base expands and new lower-ARPU seats dilute mix. Rollout/preview timing alone does not establish adoption, usage billing or retention.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_base_2028",
+    "old_claim_id": "claim_21_microsoft_365_cloud_growth_base_2028",
+    "new_claim_ids": [
+      "claim_21_microsoft_365_cloud_growth_base_2028",
+      "claim_21_microsoft_365_cloud_growth_base_2028_part2",
+      "claim_21_microsoft_365_cloud_growth_base_2028_part3",
+      "claim_21_microsoft_365_cloud_growth_base_2028_part4",
+      "v2_history_microsoft_365_cloud_growth_base_2028",
+      "v2_constraint_microsoft_365_cloud_growth_base_2028",
+      "v2_constraint_microsoft_365_cloud_growth_base_2028_part2",
+      "v2_context_microsoft_365_cloud_growth_base_2028"
+    ],
+    "historical_growth_calculated": 0.18549731103362688,
+    "mechanism_call_lines": [
+      236,
+      238,
+      361,
+      362
+    ],
+    "constraint_call_lines": [
+      268
+    ],
+    "perimeter_limits": "Whole annual stream includes consumer and newly moved developer/security cloud. Commercial-only growth/paid period-end seats, premium-SKU mix and Q1 CC guide do not equal its annual recognized revenue. No paid-user average or realized ARPU was disclosed for this perimeter.",
+    "analyst_range_and_fade": "FY27 low12/base17/high22% express weak versus sustained premium/consumption adoption around restated whole-cloud FY26 growth18.6%; later paths retain explicit paid-monetization uncertainty, not a conversion of commercial-quarter targets. FY28/29 assume paid deployment and usage monetize, with slower growth as the base expands and new lower-ARPU seats dilute mix. Rollout/preview timing alone does not establish adoption, usage billing or retention.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_base_2029",
+    "old_claim_id": "claim_22_microsoft_365_cloud_growth_base_2029",
+    "new_claim_ids": [
+      "claim_22_microsoft_365_cloud_growth_base_2029",
+      "claim_22_microsoft_365_cloud_growth_base_2029_part2",
+      "claim_22_microsoft_365_cloud_growth_base_2029_part3",
+      "claim_22_microsoft_365_cloud_growth_base_2029_part4",
+      "v2_history_microsoft_365_cloud_growth_base_2029",
+      "v2_constraint_microsoft_365_cloud_growth_base_2029",
+      "v2_constraint_microsoft_365_cloud_growth_base_2029_part2",
+      "v2_context_microsoft_365_cloud_growth_base_2029"
+    ],
+    "historical_growth_calculated": 0.18549731103362688,
+    "mechanism_call_lines": [
+      236,
+      238,
+      361,
+      362
+    ],
+    "constraint_call_lines": [
+      268
+    ],
+    "perimeter_limits": "Whole annual stream includes consumer and newly moved developer/security cloud. Commercial-only growth/paid period-end seats, premium-SKU mix and Q1 CC guide do not equal its annual recognized revenue. No paid-user average or realized ARPU was disclosed for this perimeter.",
+    "analyst_range_and_fade": "FY27 low12/base17/high22% express weak versus sustained premium/consumption adoption around restated whole-cloud FY26 growth18.6%; later paths retain explicit paid-monetization uncertainty, not a conversion of commercial-quarter targets. FY28/29 assume paid deployment and usage monetize, with slower growth as the base expands and new lower-ARPU seats dilute mix. Rollout/preview timing alone does not establish adoption, usage billing or retention.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_high_2027",
+    "old_claim_id": "claim_23_microsoft_365_cloud_growth_high_2027",
+    "new_claim_ids": [
+      "claim_23_microsoft_365_cloud_growth_high_2027",
+      "claim_23_microsoft_365_cloud_growth_high_2027_part2",
+      "claim_23_microsoft_365_cloud_growth_high_2027_part3",
+      "claim_23_microsoft_365_cloud_growth_high_2027_part4",
+      "v2_history_microsoft_365_cloud_growth_high_2027",
+      "v2_constraint_microsoft_365_cloud_growth_high_2027",
+      "v2_constraint_microsoft_365_cloud_growth_high_2027_part2",
+      "v2_context_microsoft_365_cloud_growth_high_2027"
+    ],
+    "historical_growth_calculated": 0.18549731103362688,
+    "mechanism_call_lines": [
+      236,
+      238,
+      361,
+      362
+    ],
+    "constraint_call_lines": [
+      268
+    ],
+    "perimeter_limits": "Whole annual stream includes consumer and newly moved developer/security cloud. Commercial-only growth/paid period-end seats, premium-SKU mix and Q1 CC guide do not equal its annual recognized revenue. No paid-user average or realized ARPU was disclosed for this perimeter.",
+    "analyst_range_and_fade": "FY27 low12/base17/high22% express weak versus sustained premium/consumption adoption around restated whole-cloud FY26 growth18.6%; later paths retain explicit paid-monetization uncertainty, not a conversion of commercial-quarter targets. FY28/29 assume paid deployment and usage monetize, with slower growth as the base expands and new lower-ARPU seats dilute mix. Rollout/preview timing alone does not establish adoption, usage billing or retention.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_high_2028",
+    "old_claim_id": "claim_24_microsoft_365_cloud_growth_high_2028",
+    "new_claim_ids": [
+      "claim_24_microsoft_365_cloud_growth_high_2028",
+      "claim_24_microsoft_365_cloud_growth_high_2028_part2",
+      "claim_24_microsoft_365_cloud_growth_high_2028_part3",
+      "claim_24_microsoft_365_cloud_growth_high_2028_part4",
+      "v2_history_microsoft_365_cloud_growth_high_2028",
+      "v2_constraint_microsoft_365_cloud_growth_high_2028",
+      "v2_constraint_microsoft_365_cloud_growth_high_2028_part2",
+      "v2_context_microsoft_365_cloud_growth_high_2028"
+    ],
+    "historical_growth_calculated": 0.18549731103362688,
+    "mechanism_call_lines": [
+      236,
+      238,
+      361,
+      362
+    ],
+    "constraint_call_lines": [
+      268
+    ],
+    "perimeter_limits": "Whole annual stream includes consumer and newly moved developer/security cloud. Commercial-only growth/paid period-end seats, premium-SKU mix and Q1 CC guide do not equal its annual recognized revenue. No paid-user average or realized ARPU was disclosed for this perimeter.",
+    "analyst_range_and_fade": "FY27 low12/base17/high22% express weak versus sustained premium/consumption adoption around restated whole-cloud FY26 growth18.6%; later paths retain explicit paid-monetization uncertainty, not a conversion of commercial-quarter targets. FY28/29 assume paid deployment and usage monetize, with slower growth as the base expands and new lower-ARPU seats dilute mix. Rollout/preview timing alone does not establish adoption, usage billing or retention.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_high_2029",
+    "old_claim_id": "claim_25_microsoft_365_cloud_growth_high_2029",
+    "new_claim_ids": [
+      "claim_25_microsoft_365_cloud_growth_high_2029",
+      "claim_25_microsoft_365_cloud_growth_high_2029_part2",
+      "claim_25_microsoft_365_cloud_growth_high_2029_part3",
+      "claim_25_microsoft_365_cloud_growth_high_2029_part4",
+      "v2_history_microsoft_365_cloud_growth_high_2029",
+      "v2_constraint_microsoft_365_cloud_growth_high_2029",
+      "v2_constraint_microsoft_365_cloud_growth_high_2029_part2",
+      "v2_context_microsoft_365_cloud_growth_high_2029"
+    ],
+    "historical_growth_calculated": 0.18549731103362688,
+    "mechanism_call_lines": [
+      236,
+      238,
+      361,
+      362
+    ],
+    "constraint_call_lines": [
+      268
+    ],
+    "perimeter_limits": "Whole annual stream includes consumer and newly moved developer/security cloud. Commercial-only growth/paid period-end seats, premium-SKU mix and Q1 CC guide do not equal its annual recognized revenue. No paid-user average or realized ARPU was disclosed for this perimeter.",
+    "analyst_range_and_fade": "FY27 low12/base17/high22% express weak versus sustained premium/consumption adoption around restated whole-cloud FY26 growth18.6%; later paths retain explicit paid-monetization uncertainty, not a conversion of commercial-quarter targets. FY28/29 assume paid deployment and usage monetize, with slower growth as the base expands and new lower-ARPU seats dilute mix. Rollout/preview timing alone does not establish adoption, usage billing or retention.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_low_2027",
+    "old_claim_id": "claim_31_productivity_and_server_licensing_growth_low_2027",
+    "new_claim_ids": [
+      "claim_31_productivity_and_server_licensing_growth_low_2027",
+      "claim_31_productivity_and_server_licensing_growth_low_2027_part2",
+      "v2_history_productivity_and_server_licensing_growth_low_2027",
+      "v2_constraint_productivity_and_server_licensing_growth_low_2027",
+      "v2_context_productivity_and_server_licensing_growth_low_2027"
+    ],
+    "historical_growth_calculated": 0.05351643073097678,
+    "mechanism_call_lines": [
+      237,
+      244
+    ],
+    "constraint_call_lines": [
+      255,
+      275
+    ],
+    "perimeter_limits": "New stream combines server/M365 commercial and consumer licenses. July full-year mid-single decline applies named old product KPIs, not a precise-5% new aggregate. Q1 new low-single decline is quarter-only; in-period long-contract/control-transfer timing causes seasonality.",
+    "analyst_range_and_fade": "FY27 low-8/base-5/high-2% are analyst downside/central/less-severe ranges after FY26 recognized licensing growth5.35%, considering launch-comparable reversals and actual renewal timing. Base-5 is not a sourced midpoint of mid-single. FY28/29 assume launch comparables normalize while cloud migration continues. Smaller declines or high-case slight growth require new licensing/renewal delivery, not merely cloud TAM; no supporting multi-year license guidance exists.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_low_2028",
+    "old_claim_id": "claim_32_productivity_and_server_licensing_growth_low_2028",
+    "new_claim_ids": [
+      "claim_32_productivity_and_server_licensing_growth_low_2028",
+      "claim_32_productivity_and_server_licensing_growth_low_2028_part2",
+      "v2_history_productivity_and_server_licensing_growth_low_2028",
+      "v2_constraint_productivity_and_server_licensing_growth_low_2028",
+      "v2_context_productivity_and_server_licensing_growth_low_2028"
+    ],
+    "historical_growth_calculated": 0.05351643073097678,
+    "mechanism_call_lines": [
+      237,
+      244
+    ],
+    "constraint_call_lines": [
+      255,
+      275
+    ],
+    "perimeter_limits": "New stream combines server/M365 commercial and consumer licenses. July full-year mid-single decline applies named old product KPIs, not a precise-5% new aggregate. Q1 new low-single decline is quarter-only; in-period long-contract/control-transfer timing causes seasonality.",
+    "analyst_range_and_fade": "FY27 low-8/base-5/high-2% are analyst downside/central/less-severe ranges after FY26 recognized licensing growth5.35%, considering launch-comparable reversals and actual renewal timing. Base-5 is not a sourced midpoint of mid-single. FY28/29 assume launch comparables normalize while cloud migration continues. Smaller declines or high-case slight growth require new licensing/renewal delivery, not merely cloud TAM; no supporting multi-year license guidance exists.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_low_2029",
+    "old_claim_id": "claim_33_productivity_and_server_licensing_growth_low_2029",
+    "new_claim_ids": [
+      "claim_33_productivity_and_server_licensing_growth_low_2029",
+      "claim_33_productivity_and_server_licensing_growth_low_2029_part2",
+      "v2_history_productivity_and_server_licensing_growth_low_2029",
+      "v2_constraint_productivity_and_server_licensing_growth_low_2029",
+      "v2_context_productivity_and_server_licensing_growth_low_2029"
+    ],
+    "historical_growth_calculated": 0.05351643073097678,
+    "mechanism_call_lines": [
+      237,
+      244
+    ],
+    "constraint_call_lines": [
+      255,
+      275
+    ],
+    "perimeter_limits": "New stream combines server/M365 commercial and consumer licenses. July full-year mid-single decline applies named old product KPIs, not a precise-5% new aggregate. Q1 new low-single decline is quarter-only; in-period long-contract/control-transfer timing causes seasonality.",
+    "analyst_range_and_fade": "FY27 low-8/base-5/high-2% are analyst downside/central/less-severe ranges after FY26 recognized licensing growth5.35%, considering launch-comparable reversals and actual renewal timing. Base-5 is not a sourced midpoint of mid-single. FY28/29 assume launch comparables normalize while cloud migration continues. Smaller declines or high-case slight growth require new licensing/renewal delivery, not merely cloud TAM; no supporting multi-year license guidance exists.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_base_2027",
+    "old_claim_id": "claim_34_productivity_and_server_licensing_growth_base_2027",
+    "new_claim_ids": [
+      "claim_34_productivity_and_server_licensing_growth_base_2027",
+      "claim_34_productivity_and_server_licensing_growth_base_2027_part2",
+      "v2_history_productivity_and_server_licensing_growth_base_2027",
+      "v2_constraint_productivity_and_server_licensing_growth_base_2027",
+      "v2_context_productivity_and_server_licensing_growth_base_2027"
+    ],
+    "historical_growth_calculated": 0.05351643073097678,
+    "mechanism_call_lines": [
+      237,
+      244
+    ],
+    "constraint_call_lines": [
+      255,
+      275
+    ],
+    "perimeter_limits": "New stream combines server/M365 commercial and consumer licenses. July full-year mid-single decline applies named old product KPIs, not a precise-5% new aggregate. Q1 new low-single decline is quarter-only; in-period long-contract/control-transfer timing causes seasonality.",
+    "analyst_range_and_fade": "FY27 low-8/base-5/high-2% are analyst downside/central/less-severe ranges after FY26 recognized licensing growth5.35%, considering launch-comparable reversals and actual renewal timing. Base-5 is not a sourced midpoint of mid-single. FY28/29 assume launch comparables normalize while cloud migration continues. Smaller declines or high-case slight growth require new licensing/renewal delivery, not merely cloud TAM; no supporting multi-year license guidance exists.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_base_2028",
+    "old_claim_id": "claim_35_productivity_and_server_licensing_growth_base_2028",
+    "new_claim_ids": [
+      "claim_35_productivity_and_server_licensing_growth_base_2028",
+      "claim_35_productivity_and_server_licensing_growth_base_2028_part2",
+      "v2_history_productivity_and_server_licensing_growth_base_2028",
+      "v2_constraint_productivity_and_server_licensing_growth_base_2028",
+      "v2_context_productivity_and_server_licensing_growth_base_2028"
+    ],
+    "historical_growth_calculated": 0.05351643073097678,
+    "mechanism_call_lines": [
+      237,
+      244
+    ],
+    "constraint_call_lines": [
+      255,
+      275
+    ],
+    "perimeter_limits": "New stream combines server/M365 commercial and consumer licenses. July full-year mid-single decline applies named old product KPIs, not a precise-5% new aggregate. Q1 new low-single decline is quarter-only; in-period long-contract/control-transfer timing causes seasonality.",
+    "analyst_range_and_fade": "FY27 low-8/base-5/high-2% are analyst downside/central/less-severe ranges after FY26 recognized licensing growth5.35%, considering launch-comparable reversals and actual renewal timing. Base-5 is not a sourced midpoint of mid-single. FY28/29 assume launch comparables normalize while cloud migration continues. Smaller declines or high-case slight growth require new licensing/renewal delivery, not merely cloud TAM; no supporting multi-year license guidance exists.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_base_2029",
+    "old_claim_id": "claim_36_productivity_and_server_licensing_growth_base_2029",
+    "new_claim_ids": [
+      "claim_36_productivity_and_server_licensing_growth_base_2029",
+      "claim_36_productivity_and_server_licensing_growth_base_2029_part2",
+      "v2_history_productivity_and_server_licensing_growth_base_2029",
+      "v2_constraint_productivity_and_server_licensing_growth_base_2029",
+      "v2_context_productivity_and_server_licensing_growth_base_2029"
+    ],
+    "historical_growth_calculated": 0.05351643073097678,
+    "mechanism_call_lines": [
+      237,
+      244
+    ],
+    "constraint_call_lines": [
+      255,
+      275
+    ],
+    "perimeter_limits": "New stream combines server/M365 commercial and consumer licenses. July full-year mid-single decline applies named old product KPIs, not a precise-5% new aggregate. Q1 new low-single decline is quarter-only; in-period long-contract/control-transfer timing causes seasonality.",
+    "analyst_range_and_fade": "FY27 low-8/base-5/high-2% are analyst downside/central/less-severe ranges after FY26 recognized licensing growth5.35%, considering launch-comparable reversals and actual renewal timing. Base-5 is not a sourced midpoint of mid-single. FY28/29 assume launch comparables normalize while cloud migration continues. Smaller declines or high-case slight growth require new licensing/renewal delivery, not merely cloud TAM; no supporting multi-year license guidance exists.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_high_2027",
+    "old_claim_id": "claim_37_productivity_and_server_licensing_growth_high_2027",
+    "new_claim_ids": [
+      "claim_37_productivity_and_server_licensing_growth_high_2027",
+      "claim_37_productivity_and_server_licensing_growth_high_2027_part2",
+      "v2_history_productivity_and_server_licensing_growth_high_2027",
+      "v2_constraint_productivity_and_server_licensing_growth_high_2027",
+      "v2_context_productivity_and_server_licensing_growth_high_2027"
+    ],
+    "historical_growth_calculated": 0.05351643073097678,
+    "mechanism_call_lines": [
+      237,
+      244
+    ],
+    "constraint_call_lines": [
+      255,
+      275
+    ],
+    "perimeter_limits": "New stream combines server/M365 commercial and consumer licenses. July full-year mid-single decline applies named old product KPIs, not a precise-5% new aggregate. Q1 new low-single decline is quarter-only; in-period long-contract/control-transfer timing causes seasonality.",
+    "analyst_range_and_fade": "FY27 low-8/base-5/high-2% are analyst downside/central/less-severe ranges after FY26 recognized licensing growth5.35%, considering launch-comparable reversals and actual renewal timing. Base-5 is not a sourced midpoint of mid-single. FY28/29 assume launch comparables normalize while cloud migration continues. Smaller declines or high-case slight growth require new licensing/renewal delivery, not merely cloud TAM; no supporting multi-year license guidance exists.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_high_2028",
+    "old_claim_id": "claim_38_productivity_and_server_licensing_growth_high_2028",
+    "new_claim_ids": [
+      "claim_38_productivity_and_server_licensing_growth_high_2028",
+      "claim_38_productivity_and_server_licensing_growth_high_2028_part2",
+      "v2_history_productivity_and_server_licensing_growth_high_2028",
+      "v2_constraint_productivity_and_server_licensing_growth_high_2028",
+      "v2_context_productivity_and_server_licensing_growth_high_2028"
+    ],
+    "historical_growth_calculated": 0.05351643073097678,
+    "mechanism_call_lines": [
+      237,
+      244
+    ],
+    "constraint_call_lines": [
+      255,
+      275
+    ],
+    "perimeter_limits": "New stream combines server/M365 commercial and consumer licenses. July full-year mid-single decline applies named old product KPIs, not a precise-5% new aggregate. Q1 new low-single decline is quarter-only; in-period long-contract/control-transfer timing causes seasonality.",
+    "analyst_range_and_fade": "FY27 low-8/base-5/high-2% are analyst downside/central/less-severe ranges after FY26 recognized licensing growth5.35%, considering launch-comparable reversals and actual renewal timing. Base-5 is not a sourced midpoint of mid-single. FY28/29 assume launch comparables normalize while cloud migration continues. Smaller declines or high-case slight growth require new licensing/renewal delivery, not merely cloud TAM; no supporting multi-year license guidance exists.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_high_2029",
+    "old_claim_id": "claim_39_productivity_and_server_licensing_growth_high_2029",
+    "new_claim_ids": [
+      "claim_39_productivity_and_server_licensing_growth_high_2029",
+      "claim_39_productivity_and_server_licensing_growth_high_2029_part2",
+      "v2_history_productivity_and_server_licensing_growth_high_2029",
+      "v2_constraint_productivity_and_server_licensing_growth_high_2029",
+      "v2_context_productivity_and_server_licensing_growth_high_2029"
+    ],
+    "historical_growth_calculated": 0.05351643073097678,
+    "mechanism_call_lines": [
+      237,
+      244
+    ],
+    "constraint_call_lines": [
+      255,
+      275
+    ],
+    "perimeter_limits": "New stream combines server/M365 commercial and consumer licenses. July full-year mid-single decline applies named old product KPIs, not a precise-5% new aggregate. Q1 new low-single decline is quarter-only; in-period long-contract/control-transfer timing causes seasonality.",
+    "analyst_range_and_fade": "FY27 low-8/base-5/high-2% are analyst downside/central/less-severe ranges after FY26 recognized licensing growth5.35%, considering launch-comparable reversals and actual renewal timing. Base-5 is not a sourced midpoint of mid-single. FY28/29 assume launch comparables normalize while cloud migration continues. Smaller declines or high-case slight growth require new licensing/renewal delivery, not merely cloud TAM; no supporting multi-year license guidance exists.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "industry_solutions_growth_low_2027",
+    "old_claim_id": "claim_42_industry_solutions_growth_low_2027",
+    "new_claim_ids": [
+      "claim_42_industry_solutions_growth_low_2027",
+      "claim_42_industry_solutions_growth_low_2027_part2",
+      "v2_history_industry_solutions_growth_low_2027",
+      "v2_constraint_industry_solutions_growth_low_2027",
+      "v2_context_industry_solutions_growth_low_2027"
+    ],
+    "historical_growth_calculated": 0.10468588803822554,
+    "mechanism_call_lines": [
+      191,
+      192,
+      193,
+      240
+    ],
+    "constraint_call_lines": [
+      240
+    ],
+    "perimeter_limits": "New stream includes Dynamics, LinkedIn Talent/Sales, healthcare cloud and products. Industry-cloud subset12%reported/10%CC and new quarter high-single do not determine combined annual recognized revenue. Patient encounters/utilization do not specify fees, contract mix or recognized sales.",
+    "analyst_range_and_fade": "FY27 low5/base9/high13% surround reduced versus durable delivered expansion after new-perimeter FY26 growth10.47%, balancing ERP strength/healthcare usage against disclosed CRM moderation and longer sales cycles. FY28/29 assume ERP/healthcare delivered adoption persists while CRM and customer implementation cycles limit acceleration. Changes are conditional forecast ranges; no quantified cohort, fee or renewal bridge is available.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "industry_solutions_growth_low_2028",
+    "old_claim_id": "claim_43_industry_solutions_growth_low_2028",
+    "new_claim_ids": [
+      "claim_43_industry_solutions_growth_low_2028",
+      "claim_43_industry_solutions_growth_low_2028_part2",
+      "v2_history_industry_solutions_growth_low_2028",
+      "v2_constraint_industry_solutions_growth_low_2028",
+      "v2_context_industry_solutions_growth_low_2028"
+    ],
+    "historical_growth_calculated": 0.10468588803822554,
+    "mechanism_call_lines": [
+      191,
+      192,
+      193,
+      240
+    ],
+    "constraint_call_lines": [
+      240
+    ],
+    "perimeter_limits": "New stream includes Dynamics, LinkedIn Talent/Sales, healthcare cloud and products. Industry-cloud subset12%reported/10%CC and new quarter high-single do not determine combined annual recognized revenue. Patient encounters/utilization do not specify fees, contract mix or recognized sales.",
+    "analyst_range_and_fade": "FY27 low5/base9/high13% surround reduced versus durable delivered expansion after new-perimeter FY26 growth10.47%, balancing ERP strength/healthcare usage against disclosed CRM moderation and longer sales cycles. FY28/29 assume ERP/healthcare delivered adoption persists while CRM and customer implementation cycles limit acceleration. Changes are conditional forecast ranges; no quantified cohort, fee or renewal bridge is available.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "industry_solutions_growth_low_2029",
+    "old_claim_id": "claim_44_industry_solutions_growth_low_2029",
+    "new_claim_ids": [
+      "claim_44_industry_solutions_growth_low_2029",
+      "claim_44_industry_solutions_growth_low_2029_part2",
+      "v2_history_industry_solutions_growth_low_2029",
+      "v2_constraint_industry_solutions_growth_low_2029",
+      "v2_context_industry_solutions_growth_low_2029"
+    ],
+    "historical_growth_calculated": 0.10468588803822554,
+    "mechanism_call_lines": [
+      191,
+      192,
+      193,
+      240
+    ],
+    "constraint_call_lines": [
+      240
+    ],
+    "perimeter_limits": "New stream includes Dynamics, LinkedIn Talent/Sales, healthcare cloud and products. Industry-cloud subset12%reported/10%CC and new quarter high-single do not determine combined annual recognized revenue. Patient encounters/utilization do not specify fees, contract mix or recognized sales.",
+    "analyst_range_and_fade": "FY27 low5/base9/high13% surround reduced versus durable delivered expansion after new-perimeter FY26 growth10.47%, balancing ERP strength/healthcare usage against disclosed CRM moderation and longer sales cycles. FY28/29 assume ERP/healthcare delivered adoption persists while CRM and customer implementation cycles limit acceleration. Changes are conditional forecast ranges; no quantified cohort, fee or renewal bridge is available.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "industry_solutions_growth_base_2027",
+    "old_claim_id": "claim_45_industry_solutions_growth_base_2027",
+    "new_claim_ids": [
+      "claim_45_industry_solutions_growth_base_2027",
+      "claim_45_industry_solutions_growth_base_2027_part2",
+      "v2_history_industry_solutions_growth_base_2027",
+      "v2_constraint_industry_solutions_growth_base_2027",
+      "v2_context_industry_solutions_growth_base_2027"
+    ],
+    "historical_growth_calculated": 0.10468588803822554,
+    "mechanism_call_lines": [
+      191,
+      192,
+      193,
+      240
+    ],
+    "constraint_call_lines": [
+      240
+    ],
+    "perimeter_limits": "New stream includes Dynamics, LinkedIn Talent/Sales, healthcare cloud and products. Industry-cloud subset12%reported/10%CC and new quarter high-single do not determine combined annual recognized revenue. Patient encounters/utilization do not specify fees, contract mix or recognized sales.",
+    "analyst_range_and_fade": "FY27 low5/base9/high13% surround reduced versus durable delivered expansion after new-perimeter FY26 growth10.47%, balancing ERP strength/healthcare usage against disclosed CRM moderation and longer sales cycles. FY28/29 assume ERP/healthcare delivered adoption persists while CRM and customer implementation cycles limit acceleration. Changes are conditional forecast ranges; no quantified cohort, fee or renewal bridge is available.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "industry_solutions_growth_base_2028",
+    "old_claim_id": "claim_46_industry_solutions_growth_base_2028",
+    "new_claim_ids": [
+      "claim_46_industry_solutions_growth_base_2028",
+      "claim_46_industry_solutions_growth_base_2028_part2",
+      "v2_history_industry_solutions_growth_base_2028",
+      "v2_constraint_industry_solutions_growth_base_2028",
+      "v2_context_industry_solutions_growth_base_2028"
+    ],
+    "historical_growth_calculated": 0.10468588803822554,
+    "mechanism_call_lines": [
+      191,
+      192,
+      193,
+      240
+    ],
+    "constraint_call_lines": [
+      240
+    ],
+    "perimeter_limits": "New stream includes Dynamics, LinkedIn Talent/Sales, healthcare cloud and products. Industry-cloud subset12%reported/10%CC and new quarter high-single do not determine combined annual recognized revenue. Patient encounters/utilization do not specify fees, contract mix or recognized sales.",
+    "analyst_range_and_fade": "FY27 low5/base9/high13% surround reduced versus durable delivered expansion after new-perimeter FY26 growth10.47%, balancing ERP strength/healthcare usage against disclosed CRM moderation and longer sales cycles. FY28/29 assume ERP/healthcare delivered adoption persists while CRM and customer implementation cycles limit acceleration. Changes are conditional forecast ranges; no quantified cohort, fee or renewal bridge is available.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "industry_solutions_growth_base_2029",
+    "old_claim_id": "claim_47_industry_solutions_growth_base_2029",
+    "new_claim_ids": [
+      "claim_47_industry_solutions_growth_base_2029",
+      "claim_47_industry_solutions_growth_base_2029_part2",
+      "v2_history_industry_solutions_growth_base_2029",
+      "v2_constraint_industry_solutions_growth_base_2029",
+      "v2_context_industry_solutions_growth_base_2029"
+    ],
+    "historical_growth_calculated": 0.10468588803822554,
+    "mechanism_call_lines": [
+      191,
+      192,
+      193,
+      240
+    ],
+    "constraint_call_lines": [
+      240
+    ],
+    "perimeter_limits": "New stream includes Dynamics, LinkedIn Talent/Sales, healthcare cloud and products. Industry-cloud subset12%reported/10%CC and new quarter high-single do not determine combined annual recognized revenue. Patient encounters/utilization do not specify fees, contract mix or recognized sales.",
+    "analyst_range_and_fade": "FY27 low5/base9/high13% surround reduced versus durable delivered expansion after new-perimeter FY26 growth10.47%, balancing ERP strength/healthcare usage against disclosed CRM moderation and longer sales cycles. FY28/29 assume ERP/healthcare delivered adoption persists while CRM and customer implementation cycles limit acceleration. Changes are conditional forecast ranges; no quantified cohort, fee or renewal bridge is available.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "industry_solutions_growth_high_2027",
+    "old_claim_id": "claim_48_industry_solutions_growth_high_2027",
+    "new_claim_ids": [
+      "claim_48_industry_solutions_growth_high_2027",
+      "claim_48_industry_solutions_growth_high_2027_part2",
+      "v2_history_industry_solutions_growth_high_2027",
+      "v2_constraint_industry_solutions_growth_high_2027",
+      "v2_context_industry_solutions_growth_high_2027"
+    ],
+    "historical_growth_calculated": 0.10468588803822554,
+    "mechanism_call_lines": [
+      191,
+      192,
+      193,
+      240
+    ],
+    "constraint_call_lines": [
+      240
+    ],
+    "perimeter_limits": "New stream includes Dynamics, LinkedIn Talent/Sales, healthcare cloud and products. Industry-cloud subset12%reported/10%CC and new quarter high-single do not determine combined annual recognized revenue. Patient encounters/utilization do not specify fees, contract mix or recognized sales.",
+    "analyst_range_and_fade": "FY27 low5/base9/high13% surround reduced versus durable delivered expansion after new-perimeter FY26 growth10.47%, balancing ERP strength/healthcare usage against disclosed CRM moderation and longer sales cycles. FY28/29 assume ERP/healthcare delivered adoption persists while CRM and customer implementation cycles limit acceleration. Changes are conditional forecast ranges; no quantified cohort, fee or renewal bridge is available.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "industry_solutions_growth_high_2028",
+    "old_claim_id": "claim_49_industry_solutions_growth_high_2028",
+    "new_claim_ids": [
+      "claim_49_industry_solutions_growth_high_2028",
+      "claim_49_industry_solutions_growth_high_2028_part2",
+      "v2_history_industry_solutions_growth_high_2028",
+      "v2_constraint_industry_solutions_growth_high_2028",
+      "v2_context_industry_solutions_growth_high_2028"
+    ],
+    "historical_growth_calculated": 0.10468588803822554,
+    "mechanism_call_lines": [
+      191,
+      192,
+      193,
+      240
+    ],
+    "constraint_call_lines": [
+      240
+    ],
+    "perimeter_limits": "New stream includes Dynamics, LinkedIn Talent/Sales, healthcare cloud and products. Industry-cloud subset12%reported/10%CC and new quarter high-single do not determine combined annual recognized revenue. Patient encounters/utilization do not specify fees, contract mix or recognized sales.",
+    "analyst_range_and_fade": "FY27 low5/base9/high13% surround reduced versus durable delivered expansion after new-perimeter FY26 growth10.47%, balancing ERP strength/healthcare usage against disclosed CRM moderation and longer sales cycles. FY28/29 assume ERP/healthcare delivered adoption persists while CRM and customer implementation cycles limit acceleration. Changes are conditional forecast ranges; no quantified cohort, fee or renewal bridge is available.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "industry_solutions_growth_high_2029",
+    "old_claim_id": "claim_50_industry_solutions_growth_high_2029",
+    "new_claim_ids": [
+      "claim_50_industry_solutions_growth_high_2029",
+      "claim_50_industry_solutions_growth_high_2029_part2",
+      "v2_history_industry_solutions_growth_high_2029",
+      "v2_constraint_industry_solutions_growth_high_2029",
+      "v2_context_industry_solutions_growth_high_2029"
+    ],
+    "historical_growth_calculated": 0.10468588803822554,
+    "mechanism_call_lines": [
+      191,
+      192,
+      193,
+      240
+    ],
+    "constraint_call_lines": [
+      240
+    ],
+    "perimeter_limits": "New stream includes Dynamics, LinkedIn Talent/Sales, healthcare cloud and products. Industry-cloud subset12%reported/10%CC and new quarter high-single do not determine combined annual recognized revenue. Patient encounters/utilization do not specify fees, contract mix or recognized sales.",
+    "analyst_range_and_fade": "FY27 low5/base9/high13% surround reduced versus durable delivered expansion after new-perimeter FY26 growth10.47%, balancing ERP strength/healthcare usage against disclosed CRM moderation and longer sales cycles. FY28/29 assume ERP/healthcare delivered adoption persists while CRM and customer implementation cycles limit acceleration. Changes are conditional forecast ranges; no quantified cohort, fee or renewal bridge is available.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_low_2027",
+    "old_claim_id": "claim_53_frontier_and_support_services_growth_low_2027",
+    "new_claim_ids": [
+      "claim_53_frontier_and_support_services_growth_low_2027",
+      "claim_53_frontier_and_support_services_growth_low_2027_part2",
+      "v2_history_frontier_and_support_services_growth_low_2027",
+      "v2_constraint_frontier_and_support_services_growth_low_2027"
+    ],
+    "historical_growth_calculated": 0.06443298969072164,
+    "mechanism_call_lines": [
+      198,
+      199,
+      200,
+      201,
+      202
+    ],
+    "constraint_call_lines": [
+      200
+    ],
+    "perimeter_limits": "New-name stream is unchanged Enterprise/partner services.6000 experts and330 completed projects/164 customers are delivery/capability facts, not billed volumes, rates or future backlog. Support/consulting is recognized as service is delivered; fee/milestone and renewal bridges remain missing.",
+    "analyst_range_and_fade": "FY27 low2/base6/high9% are conditional paid-delivery paths around FY26 actual growth6.44%; project examples support capability, not the exact future rate. The observed completed-project scale constrains claims of explosive new revenue, but is not an observed declining-demand counterexample. FY28/29 assume steady paid implementation/support attach with gradual slower growth as the base expands. Low case assumes poor conversion of engagements to payable delivery; high case assumes stronger attach. No headcount-times-rate forecast is fabricated.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_low_2028",
+    "old_claim_id": "claim_54_frontier_and_support_services_growth_low_2028",
+    "new_claim_ids": [
+      "claim_54_frontier_and_support_services_growth_low_2028",
+      "claim_54_frontier_and_support_services_growth_low_2028_part2",
+      "v2_history_frontier_and_support_services_growth_low_2028",
+      "v2_constraint_frontier_and_support_services_growth_low_2028"
+    ],
+    "historical_growth_calculated": 0.06443298969072164,
+    "mechanism_call_lines": [
+      198,
+      199,
+      200,
+      201,
+      202
+    ],
+    "constraint_call_lines": [
+      200
+    ],
+    "perimeter_limits": "New-name stream is unchanged Enterprise/partner services.6000 experts and330 completed projects/164 customers are delivery/capability facts, not billed volumes, rates or future backlog. Support/consulting is recognized as service is delivered; fee/milestone and renewal bridges remain missing.",
+    "analyst_range_and_fade": "FY27 low2/base6/high9% are conditional paid-delivery paths around FY26 actual growth6.44%; project examples support capability, not the exact future rate. The observed completed-project scale constrains claims of explosive new revenue, but is not an observed declining-demand counterexample. FY28/29 assume steady paid implementation/support attach with gradual slower growth as the base expands. Low case assumes poor conversion of engagements to payable delivery; high case assumes stronger attach. No headcount-times-rate forecast is fabricated.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_low_2029",
+    "old_claim_id": "claim_55_frontier_and_support_services_growth_low_2029",
+    "new_claim_ids": [
+      "claim_55_frontier_and_support_services_growth_low_2029",
+      "claim_55_frontier_and_support_services_growth_low_2029_part2",
+      "v2_history_frontier_and_support_services_growth_low_2029",
+      "v2_constraint_frontier_and_support_services_growth_low_2029"
+    ],
+    "historical_growth_calculated": 0.06443298969072164,
+    "mechanism_call_lines": [
+      198,
+      199,
+      200,
+      201,
+      202
+    ],
+    "constraint_call_lines": [
+      200
+    ],
+    "perimeter_limits": "New-name stream is unchanged Enterprise/partner services.6000 experts and330 completed projects/164 customers are delivery/capability facts, not billed volumes, rates or future backlog. Support/consulting is recognized as service is delivered; fee/milestone and renewal bridges remain missing.",
+    "analyst_range_and_fade": "FY27 low2/base6/high9% are conditional paid-delivery paths around FY26 actual growth6.44%; project examples support capability, not the exact future rate. The observed completed-project scale constrains claims of explosive new revenue, but is not an observed declining-demand counterexample. FY28/29 assume steady paid implementation/support attach with gradual slower growth as the base expands. Low case assumes poor conversion of engagements to payable delivery; high case assumes stronger attach. No headcount-times-rate forecast is fabricated.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_base_2027",
+    "old_claim_id": "claim_56_frontier_and_support_services_growth_base_2027",
+    "new_claim_ids": [
+      "claim_56_frontier_and_support_services_growth_base_2027",
+      "claim_56_frontier_and_support_services_growth_base_2027_part2",
+      "v2_history_frontier_and_support_services_growth_base_2027",
+      "v2_constraint_frontier_and_support_services_growth_base_2027"
+    ],
+    "historical_growth_calculated": 0.06443298969072164,
+    "mechanism_call_lines": [
+      198,
+      199,
+      200,
+      201,
+      202
+    ],
+    "constraint_call_lines": [
+      200
+    ],
+    "perimeter_limits": "New-name stream is unchanged Enterprise/partner services.6000 experts and330 completed projects/164 customers are delivery/capability facts, not billed volumes, rates or future backlog. Support/consulting is recognized as service is delivered; fee/milestone and renewal bridges remain missing.",
+    "analyst_range_and_fade": "FY27 low2/base6/high9% are conditional paid-delivery paths around FY26 actual growth6.44%; project examples support capability, not the exact future rate. The observed completed-project scale constrains claims of explosive new revenue, but is not an observed declining-demand counterexample. FY28/29 assume steady paid implementation/support attach with gradual slower growth as the base expands. Low case assumes poor conversion of engagements to payable delivery; high case assumes stronger attach. No headcount-times-rate forecast is fabricated.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_base_2028",
+    "old_claim_id": "claim_57_frontier_and_support_services_growth_base_2028",
+    "new_claim_ids": [
+      "claim_57_frontier_and_support_services_growth_base_2028",
+      "claim_57_frontier_and_support_services_growth_base_2028_part2",
+      "v2_history_frontier_and_support_services_growth_base_2028",
+      "v2_constraint_frontier_and_support_services_growth_base_2028"
+    ],
+    "historical_growth_calculated": 0.06443298969072164,
+    "mechanism_call_lines": [
+      198,
+      199,
+      200,
+      201,
+      202
+    ],
+    "constraint_call_lines": [
+      200
+    ],
+    "perimeter_limits": "New-name stream is unchanged Enterprise/partner services.6000 experts and330 completed projects/164 customers are delivery/capability facts, not billed volumes, rates or future backlog. Support/consulting is recognized as service is delivered; fee/milestone and renewal bridges remain missing.",
+    "analyst_range_and_fade": "FY27 low2/base6/high9% are conditional paid-delivery paths around FY26 actual growth6.44%; project examples support capability, not the exact future rate. The observed completed-project scale constrains claims of explosive new revenue, but is not an observed declining-demand counterexample. FY28/29 assume steady paid implementation/support attach with gradual slower growth as the base expands. Low case assumes poor conversion of engagements to payable delivery; high case assumes stronger attach. No headcount-times-rate forecast is fabricated.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_base_2029",
+    "old_claim_id": "claim_58_frontier_and_support_services_growth_base_2029",
+    "new_claim_ids": [
+      "claim_58_frontier_and_support_services_growth_base_2029",
+      "claim_58_frontier_and_support_services_growth_base_2029_part2",
+      "v2_history_frontier_and_support_services_growth_base_2029",
+      "v2_constraint_frontier_and_support_services_growth_base_2029"
+    ],
+    "historical_growth_calculated": 0.06443298969072164,
+    "mechanism_call_lines": [
+      198,
+      199,
+      200,
+      201,
+      202
+    ],
+    "constraint_call_lines": [
+      200
+    ],
+    "perimeter_limits": "New-name stream is unchanged Enterprise/partner services.6000 experts and330 completed projects/164 customers are delivery/capability facts, not billed volumes, rates or future backlog. Support/consulting is recognized as service is delivered; fee/milestone and renewal bridges remain missing.",
+    "analyst_range_and_fade": "FY27 low2/base6/high9% are conditional paid-delivery paths around FY26 actual growth6.44%; project examples support capability, not the exact future rate. The observed completed-project scale constrains claims of explosive new revenue, but is not an observed declining-demand counterexample. FY28/29 assume steady paid implementation/support attach with gradual slower growth as the base expands. Low case assumes poor conversion of engagements to payable delivery; high case assumes stronger attach. No headcount-times-rate forecast is fabricated.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_high_2027",
+    "old_claim_id": "claim_59_frontier_and_support_services_growth_high_2027",
+    "new_claim_ids": [
+      "claim_59_frontier_and_support_services_growth_high_2027",
+      "claim_59_frontier_and_support_services_growth_high_2027_part2",
+      "v2_history_frontier_and_support_services_growth_high_2027",
+      "v2_constraint_frontier_and_support_services_growth_high_2027"
+    ],
+    "historical_growth_calculated": 0.06443298969072164,
+    "mechanism_call_lines": [
+      198,
+      199,
+      200,
+      201,
+      202
+    ],
+    "constraint_call_lines": [
+      200
+    ],
+    "perimeter_limits": "New-name stream is unchanged Enterprise/partner services.6000 experts and330 completed projects/164 customers are delivery/capability facts, not billed volumes, rates or future backlog. Support/consulting is recognized as service is delivered; fee/milestone and renewal bridges remain missing.",
+    "analyst_range_and_fade": "FY27 low2/base6/high9% are conditional paid-delivery paths around FY26 actual growth6.44%; project examples support capability, not the exact future rate. The observed completed-project scale constrains claims of explosive new revenue, but is not an observed declining-demand counterexample. FY28/29 assume steady paid implementation/support attach with gradual slower growth as the base expands. Low case assumes poor conversion of engagements to payable delivery; high case assumes stronger attach. No headcount-times-rate forecast is fabricated.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_high_2028",
+    "old_claim_id": "claim_60_frontier_and_support_services_growth_high_2028",
+    "new_claim_ids": [
+      "claim_60_frontier_and_support_services_growth_high_2028",
+      "claim_60_frontier_and_support_services_growth_high_2028_part2",
+      "v2_history_frontier_and_support_services_growth_high_2028",
+      "v2_constraint_frontier_and_support_services_growth_high_2028"
+    ],
+    "historical_growth_calculated": 0.06443298969072164,
+    "mechanism_call_lines": [
+      198,
+      199,
+      200,
+      201,
+      202
+    ],
+    "constraint_call_lines": [
+      200
+    ],
+    "perimeter_limits": "New-name stream is unchanged Enterprise/partner services.6000 experts and330 completed projects/164 customers are delivery/capability facts, not billed volumes, rates or future backlog. Support/consulting is recognized as service is delivered; fee/milestone and renewal bridges remain missing.",
+    "analyst_range_and_fade": "FY27 low2/base6/high9% are conditional paid-delivery paths around FY26 actual growth6.44%; project examples support capability, not the exact future rate. The observed completed-project scale constrains claims of explosive new revenue, but is not an observed declining-demand counterexample. FY28/29 assume steady paid implementation/support attach with gradual slower growth as the base expands. Low case assumes poor conversion of engagements to payable delivery; high case assumes stronger attach. No headcount-times-rate forecast is fabricated.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_high_2029",
+    "old_claim_id": "claim_61_frontier_and_support_services_growth_high_2029",
+    "new_claim_ids": [
+      "claim_61_frontier_and_support_services_growth_high_2029",
+      "claim_61_frontier_and_support_services_growth_high_2029_part2",
+      "v2_history_frontier_and_support_services_growth_high_2029",
+      "v2_constraint_frontier_and_support_services_growth_high_2029"
+    ],
+    "historical_growth_calculated": 0.06443298969072164,
+    "mechanism_call_lines": [
+      198,
+      199,
+      200,
+      201,
+      202
+    ],
+    "constraint_call_lines": [
+      200
+    ],
+    "perimeter_limits": "New-name stream is unchanged Enterprise/partner services.6000 experts and330 completed projects/164 customers are delivery/capability facts, not billed volumes, rates or future backlog. Support/consulting is recognized as service is delivered; fee/milestone and renewal bridges remain missing.",
+    "analyst_range_and_fade": "FY27 low2/base6/high9% are conditional paid-delivery paths around FY26 actual growth6.44%; project examples support capability, not the exact future rate. The observed completed-project scale constrains claims of explosive new revenue, but is not an observed declining-demand counterexample. FY28/29 assume steady paid implementation/support attach with gradual slower growth as the base expands. Low case assumes poor conversion of engagements to payable delivery; high case assumes stronger attach. No headcount-times-rate forecast is fabricated.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_low_2027",
+    "old_claim_id": "claim_67_search_and_advertising_growth_low_2027",
+    "new_claim_ids": [
+      "claim_67_search_and_advertising_growth_low_2027",
+      "v2_history_search_and_advertising_growth_low_2027",
+      "v2_constraint_search_and_advertising_growth_low_2027",
+      "v2_context_search_and_advertising_growth_low_2027"
+    ],
+    "historical_growth_calculated": 0.12015696179694202,
+    "mechanism_call_lines": [
+      208,
+      239,
+      248
+    ],
+    "constraint_call_lines": [
+      248,
+      278
+    ],
+    "perimeter_limits": "New annual gross/mixed advertising stream includes LinkedIn Marketing/Premium. Restated exTAC annual14% and quarter mid-to-high-single are net KPI/context, not a same-basis growth rate for the entire recognized stream. Volume/yield, TAC and principal-agent mix are not quantified separately.",
+    "analyst_range_and_fade": "FY27 low3/base8/high12% bracket partnership drag versus continued monetized yield/volume after new annual stream FY26 growth12.01%; all remain analyst annual gross/mixed recognized ranges, not exTAC-to-gross conversions. FY28/29 assume demand/yield persists at moderating growth while partnership effects constrain distribution. No extrapolation of share gains or engagement counts directly into revenue.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_low_2028",
+    "old_claim_id": "claim_68_search_and_advertising_growth_low_2028",
+    "new_claim_ids": [
+      "claim_68_search_and_advertising_growth_low_2028",
+      "v2_history_search_and_advertising_growth_low_2028",
+      "v2_constraint_search_and_advertising_growth_low_2028",
+      "v2_context_search_and_advertising_growth_low_2028"
+    ],
+    "historical_growth_calculated": 0.12015696179694202,
+    "mechanism_call_lines": [
+      208,
+      239,
+      248
+    ],
+    "constraint_call_lines": [
+      248,
+      278
+    ],
+    "perimeter_limits": "New annual gross/mixed advertising stream includes LinkedIn Marketing/Premium. Restated exTAC annual14% and quarter mid-to-high-single are net KPI/context, not a same-basis growth rate for the entire recognized stream. Volume/yield, TAC and principal-agent mix are not quantified separately.",
+    "analyst_range_and_fade": "FY27 low3/base8/high12% bracket partnership drag versus continued monetized yield/volume after new annual stream FY26 growth12.01%; all remain analyst annual gross/mixed recognized ranges, not exTAC-to-gross conversions. FY28/29 assume demand/yield persists at moderating growth while partnership effects constrain distribution. No extrapolation of share gains or engagement counts directly into revenue.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_low_2029",
+    "old_claim_id": "claim_69_search_and_advertising_growth_low_2029",
+    "new_claim_ids": [
+      "claim_69_search_and_advertising_growth_low_2029",
+      "v2_history_search_and_advertising_growth_low_2029",
+      "v2_constraint_search_and_advertising_growth_low_2029",
+      "v2_context_search_and_advertising_growth_low_2029"
+    ],
+    "historical_growth_calculated": 0.12015696179694202,
+    "mechanism_call_lines": [
+      208,
+      239,
+      248
+    ],
+    "constraint_call_lines": [
+      248,
+      278
+    ],
+    "perimeter_limits": "New annual gross/mixed advertising stream includes LinkedIn Marketing/Premium. Restated exTAC annual14% and quarter mid-to-high-single are net KPI/context, not a same-basis growth rate for the entire recognized stream. Volume/yield, TAC and principal-agent mix are not quantified separately.",
+    "analyst_range_and_fade": "FY27 low3/base8/high12% bracket partnership drag versus continued monetized yield/volume after new annual stream FY26 growth12.01%; all remain analyst annual gross/mixed recognized ranges, not exTAC-to-gross conversions. FY28/29 assume demand/yield persists at moderating growth while partnership effects constrain distribution. No extrapolation of share gains or engagement counts directly into revenue.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_base_2027",
+    "old_claim_id": "claim_70_search_and_advertising_growth_base_2027",
+    "new_claim_ids": [
+      "claim_70_search_and_advertising_growth_base_2027",
+      "v2_history_search_and_advertising_growth_base_2027",
+      "v2_constraint_search_and_advertising_growth_base_2027",
+      "v2_context_search_and_advertising_growth_base_2027"
+    ],
+    "historical_growth_calculated": 0.12015696179694202,
+    "mechanism_call_lines": [
+      208,
+      239,
+      248
+    ],
+    "constraint_call_lines": [
+      248,
+      278
+    ],
+    "perimeter_limits": "New annual gross/mixed advertising stream includes LinkedIn Marketing/Premium. Restated exTAC annual14% and quarter mid-to-high-single are net KPI/context, not a same-basis growth rate for the entire recognized stream. Volume/yield, TAC and principal-agent mix are not quantified separately.",
+    "analyst_range_and_fade": "FY27 low3/base8/high12% bracket partnership drag versus continued monetized yield/volume after new annual stream FY26 growth12.01%; all remain analyst annual gross/mixed recognized ranges, not exTAC-to-gross conversions. FY28/29 assume demand/yield persists at moderating growth while partnership effects constrain distribution. No extrapolation of share gains or engagement counts directly into revenue.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_base_2028",
+    "old_claim_id": "claim_71_search_and_advertising_growth_base_2028",
+    "new_claim_ids": [
+      "claim_71_search_and_advertising_growth_base_2028",
+      "v2_history_search_and_advertising_growth_base_2028",
+      "v2_constraint_search_and_advertising_growth_base_2028",
+      "v2_context_search_and_advertising_growth_base_2028"
+    ],
+    "historical_growth_calculated": 0.12015696179694202,
+    "mechanism_call_lines": [
+      208,
+      239,
+      248
+    ],
+    "constraint_call_lines": [
+      248,
+      278
+    ],
+    "perimeter_limits": "New annual gross/mixed advertising stream includes LinkedIn Marketing/Premium. Restated exTAC annual14% and quarter mid-to-high-single are net KPI/context, not a same-basis growth rate for the entire recognized stream. Volume/yield, TAC and principal-agent mix are not quantified separately.",
+    "analyst_range_and_fade": "FY27 low3/base8/high12% bracket partnership drag versus continued monetized yield/volume after new annual stream FY26 growth12.01%; all remain analyst annual gross/mixed recognized ranges, not exTAC-to-gross conversions. FY28/29 assume demand/yield persists at moderating growth while partnership effects constrain distribution. No extrapolation of share gains or engagement counts directly into revenue.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_base_2029",
+    "old_claim_id": "claim_72_search_and_advertising_growth_base_2029",
+    "new_claim_ids": [
+      "claim_72_search_and_advertising_growth_base_2029",
+      "v2_history_search_and_advertising_growth_base_2029",
+      "v2_constraint_search_and_advertising_growth_base_2029",
+      "v2_context_search_and_advertising_growth_base_2029"
+    ],
+    "historical_growth_calculated": 0.12015696179694202,
+    "mechanism_call_lines": [
+      208,
+      239,
+      248
+    ],
+    "constraint_call_lines": [
+      248,
+      278
+    ],
+    "perimeter_limits": "New annual gross/mixed advertising stream includes LinkedIn Marketing/Premium. Restated exTAC annual14% and quarter mid-to-high-single are net KPI/context, not a same-basis growth rate for the entire recognized stream. Volume/yield, TAC and principal-agent mix are not quantified separately.",
+    "analyst_range_and_fade": "FY27 low3/base8/high12% bracket partnership drag versus continued monetized yield/volume after new annual stream FY26 growth12.01%; all remain analyst annual gross/mixed recognized ranges, not exTAC-to-gross conversions. FY28/29 assume demand/yield persists at moderating growth while partnership effects constrain distribution. No extrapolation of share gains or engagement counts directly into revenue.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_high_2027",
+    "old_claim_id": "claim_73_search_and_advertising_growth_high_2027",
+    "new_claim_ids": [
+      "claim_73_search_and_advertising_growth_high_2027",
+      "v2_history_search_and_advertising_growth_high_2027",
+      "v2_constraint_search_and_advertising_growth_high_2027",
+      "v2_context_search_and_advertising_growth_high_2027"
+    ],
+    "historical_growth_calculated": 0.12015696179694202,
+    "mechanism_call_lines": [
+      208,
+      239,
+      248
+    ],
+    "constraint_call_lines": [
+      248,
+      278
+    ],
+    "perimeter_limits": "New annual gross/mixed advertising stream includes LinkedIn Marketing/Premium. Restated exTAC annual14% and quarter mid-to-high-single are net KPI/context, not a same-basis growth rate for the entire recognized stream. Volume/yield, TAC and principal-agent mix are not quantified separately.",
+    "analyst_range_and_fade": "FY27 low3/base8/high12% bracket partnership drag versus continued monetized yield/volume after new annual stream FY26 growth12.01%; all remain analyst annual gross/mixed recognized ranges, not exTAC-to-gross conversions. FY28/29 assume demand/yield persists at moderating growth while partnership effects constrain distribution. No extrapolation of share gains or engagement counts directly into revenue.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_high_2028",
+    "old_claim_id": "claim_74_search_and_advertising_growth_high_2028",
+    "new_claim_ids": [
+      "claim_74_search_and_advertising_growth_high_2028",
+      "v2_history_search_and_advertising_growth_high_2028",
+      "v2_constraint_search_and_advertising_growth_high_2028",
+      "v2_context_search_and_advertising_growth_high_2028"
+    ],
+    "historical_growth_calculated": 0.12015696179694202,
+    "mechanism_call_lines": [
+      208,
+      239,
+      248
+    ],
+    "constraint_call_lines": [
+      248,
+      278
+    ],
+    "perimeter_limits": "New annual gross/mixed advertising stream includes LinkedIn Marketing/Premium. Restated exTAC annual14% and quarter mid-to-high-single are net KPI/context, not a same-basis growth rate for the entire recognized stream. Volume/yield, TAC and principal-agent mix are not quantified separately.",
+    "analyst_range_and_fade": "FY27 low3/base8/high12% bracket partnership drag versus continued monetized yield/volume after new annual stream FY26 growth12.01%; all remain analyst annual gross/mixed recognized ranges, not exTAC-to-gross conversions. FY28/29 assume demand/yield persists at moderating growth while partnership effects constrain distribution. No extrapolation of share gains or engagement counts directly into revenue.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_high_2029",
+    "old_claim_id": "claim_75_search_and_advertising_growth_high_2029",
+    "new_claim_ids": [
+      "claim_75_search_and_advertising_growth_high_2029",
+      "v2_history_search_and_advertising_growth_high_2029",
+      "v2_constraint_search_and_advertising_growth_high_2029",
+      "v2_context_search_and_advertising_growth_high_2029"
+    ],
+    "historical_growth_calculated": 0.12015696179694202,
+    "mechanism_call_lines": [
+      208,
+      239,
+      248
+    ],
+    "constraint_call_lines": [
+      248,
+      278
+    ],
+    "perimeter_limits": "New annual gross/mixed advertising stream includes LinkedIn Marketing/Premium. Restated exTAC annual14% and quarter mid-to-high-single are net KPI/context, not a same-basis growth rate for the entire recognized stream. Volume/yield, TAC and principal-agent mix are not quantified separately.",
+    "analyst_range_and_fade": "FY27 low3/base8/high12% bracket partnership drag versus continued monetized yield/volume after new annual stream FY26 growth12.01%; all remain analyst annual gross/mixed recognized ranges, not exTAC-to-gross conversions. FY28/29 assume demand/yield persists at moderating growth while partnership effects constrain distribution. No extrapolation of share gains or engagement counts directly into revenue.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "xbox_growth_low_2027",
+    "old_claim_id": "claim_78_xbox_growth_low_2027",
+    "new_claim_ids": [
+      "claim_78_xbox_growth_low_2027",
+      "claim_78_xbox_growth_low_2027_part2",
+      "v2_history_xbox_growth_low_2027",
+      "v2_constraint_xbox_growth_low_2027",
+      "v2_context_xbox_growth_low_2027"
+    ],
+    "historical_growth_calculated": -0.07098699637603922,
+    "mechanism_call_lines": [
+      204,
+      249,
+      279
+    ],
+    "constraint_call_lines": [
+      205
+    ],
+    "perimeter_limits": "Xbox perimeter unchanged: content/services and hardware. FY26 total declined7.1% and Q4 old total declined10%; future content/hardware decline statements are quarter-only. CEO expects total gaming FY27 growth, a genuine opposing annual expectation. Base-4% openly disagrees.",
+    "analyst_range_and_fade": "FY27 low-10/base-4/high2% express failed/partial/successful reset after actual annual decline, with high case allowing the management-positive annual direction; no cases are forced to the management expectation. FY28/29 base2/4% and high8/8% require successful content/platform reset and paid monetization; no verified launch schedule, delivery fees or cohort retention proves that recovery. Low-5/0% keeps reset ineffective. These are conditional choices.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "xbox_growth_low_2028",
+    "old_claim_id": "claim_79_xbox_growth_low_2028",
+    "new_claim_ids": [
+      "claim_79_xbox_growth_low_2028",
+      "claim_79_xbox_growth_low_2028_part2",
+      "v2_history_xbox_growth_low_2028",
+      "v2_constraint_xbox_growth_low_2028",
+      "v2_context_xbox_growth_low_2028"
+    ],
+    "historical_growth_calculated": -0.07098699637603922,
+    "mechanism_call_lines": [
+      204,
+      249,
+      279
+    ],
+    "constraint_call_lines": [
+      205
+    ],
+    "perimeter_limits": "Xbox perimeter unchanged: content/services and hardware. FY26 total declined7.1% and Q4 old total declined10%; future content/hardware decline statements are quarter-only. CEO expects total gaming FY27 growth, a genuine opposing annual expectation. Base-4% openly disagrees.",
+    "analyst_range_and_fade": "FY27 low-10/base-4/high2% express failed/partial/successful reset after actual annual decline, with high case allowing the management-positive annual direction; no cases are forced to the management expectation. FY28/29 base2/4% and high8/8% require successful content/platform reset and paid monetization; no verified launch schedule, delivery fees or cohort retention proves that recovery. Low-5/0% keeps reset ineffective. These are conditional choices.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "xbox_growth_low_2029",
+    "old_claim_id": "claim_80_xbox_growth_low_2029",
+    "new_claim_ids": [
+      "claim_80_xbox_growth_low_2029",
+      "claim_80_xbox_growth_low_2029_part2",
+      "v2_history_xbox_growth_low_2029",
+      "v2_constraint_xbox_growth_low_2029",
+      "v2_context_xbox_growth_low_2029"
+    ],
+    "historical_growth_calculated": -0.07098699637603922,
+    "mechanism_call_lines": [
+      204,
+      249,
+      279
+    ],
+    "constraint_call_lines": [
+      205
+    ],
+    "perimeter_limits": "Xbox perimeter unchanged: content/services and hardware. FY26 total declined7.1% and Q4 old total declined10%; future content/hardware decline statements are quarter-only. CEO expects total gaming FY27 growth, a genuine opposing annual expectation. Base-4% openly disagrees.",
+    "analyst_range_and_fade": "FY27 low-10/base-4/high2% express failed/partial/successful reset after actual annual decline, with high case allowing the management-positive annual direction; no cases are forced to the management expectation. FY28/29 base2/4% and high8/8% require successful content/platform reset and paid monetization; no verified launch schedule, delivery fees or cohort retention proves that recovery. Low-5/0% keeps reset ineffective. These are conditional choices.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "xbox_growth_base_2027",
+    "old_claim_id": "claim_81_xbox_growth_base_2027",
+    "new_claim_ids": [
+      "claim_81_xbox_growth_base_2027",
+      "claim_81_xbox_growth_base_2027_part2",
+      "v2_history_xbox_growth_base_2027",
+      "v2_constraint_xbox_growth_base_2027",
+      "v2_context_xbox_growth_base_2027"
+    ],
+    "historical_growth_calculated": -0.07098699637603922,
+    "mechanism_call_lines": [
+      204,
+      249,
+      279
+    ],
+    "constraint_call_lines": [
+      205
+    ],
+    "perimeter_limits": "Xbox perimeter unchanged: content/services and hardware. FY26 total declined7.1% and Q4 old total declined10%; future content/hardware decline statements are quarter-only. CEO expects total gaming FY27 growth, a genuine opposing annual expectation. Base-4% openly disagrees.",
+    "analyst_range_and_fade": "FY27 low-10/base-4/high2% express failed/partial/successful reset after actual annual decline, with high case allowing the management-positive annual direction; no cases are forced to the management expectation. FY28/29 base2/4% and high8/8% require successful content/platform reset and paid monetization; no verified launch schedule, delivery fees or cohort retention proves that recovery. Low-5/0% keeps reset ineffective. These are conditional choices.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "xbox_growth_base_2028",
+    "old_claim_id": "claim_82_xbox_growth_base_2028",
+    "new_claim_ids": [
+      "claim_82_xbox_growth_base_2028",
+      "claim_82_xbox_growth_base_2028_part2",
+      "v2_history_xbox_growth_base_2028",
+      "v2_constraint_xbox_growth_base_2028",
+      "v2_context_xbox_growth_base_2028"
+    ],
+    "historical_growth_calculated": -0.07098699637603922,
+    "mechanism_call_lines": [
+      204,
+      249,
+      279
+    ],
+    "constraint_call_lines": [
+      205
+    ],
+    "perimeter_limits": "Xbox perimeter unchanged: content/services and hardware. FY26 total declined7.1% and Q4 old total declined10%; future content/hardware decline statements are quarter-only. CEO expects total gaming FY27 growth, a genuine opposing annual expectation. Base-4% openly disagrees.",
+    "analyst_range_and_fade": "FY27 low-10/base-4/high2% express failed/partial/successful reset after actual annual decline, with high case allowing the management-positive annual direction; no cases are forced to the management expectation. FY28/29 base2/4% and high8/8% require successful content/platform reset and paid monetization; no verified launch schedule, delivery fees or cohort retention proves that recovery. Low-5/0% keeps reset ineffective. These are conditional choices.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "xbox_growth_base_2029",
+    "old_claim_id": "claim_83_xbox_growth_base_2029",
+    "new_claim_ids": [
+      "claim_83_xbox_growth_base_2029",
+      "claim_83_xbox_growth_base_2029_part2",
+      "v2_history_xbox_growth_base_2029",
+      "v2_constraint_xbox_growth_base_2029",
+      "v2_context_xbox_growth_base_2029"
+    ],
+    "historical_growth_calculated": -0.07098699637603922,
+    "mechanism_call_lines": [
+      204,
+      249,
+      279
+    ],
+    "constraint_call_lines": [
+      205
+    ],
+    "perimeter_limits": "Xbox perimeter unchanged: content/services and hardware. FY26 total declined7.1% and Q4 old total declined10%; future content/hardware decline statements are quarter-only. CEO expects total gaming FY27 growth, a genuine opposing annual expectation. Base-4% openly disagrees.",
+    "analyst_range_and_fade": "FY27 low-10/base-4/high2% express failed/partial/successful reset after actual annual decline, with high case allowing the management-positive annual direction; no cases are forced to the management expectation. FY28/29 base2/4% and high8/8% require successful content/platform reset and paid monetization; no verified launch schedule, delivery fees or cohort retention proves that recovery. Low-5/0% keeps reset ineffective. These are conditional choices.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "xbox_growth_high_2027",
+    "old_claim_id": "claim_84_xbox_growth_high_2027",
+    "new_claim_ids": [
+      "claim_84_xbox_growth_high_2027",
+      "claim_84_xbox_growth_high_2027_part2",
+      "v2_history_xbox_growth_high_2027",
+      "v2_constraint_xbox_growth_high_2027",
+      "v2_context_xbox_growth_high_2027"
+    ],
+    "historical_growth_calculated": -0.07098699637603922,
+    "mechanism_call_lines": [
+      204,
+      249,
+      279
+    ],
+    "constraint_call_lines": [
+      205
+    ],
+    "perimeter_limits": "Xbox perimeter unchanged: content/services and hardware. FY26 total declined7.1% and Q4 old total declined10%; future content/hardware decline statements are quarter-only. CEO expects total gaming FY27 growth, a genuine opposing annual expectation. Base-4% openly disagrees.",
+    "analyst_range_and_fade": "FY27 low-10/base-4/high2% express failed/partial/successful reset after actual annual decline, with high case allowing the management-positive annual direction; no cases are forced to the management expectation. FY28/29 base2/4% and high8/8% require successful content/platform reset and paid monetization; no verified launch schedule, delivery fees or cohort retention proves that recovery. Low-5/0% keeps reset ineffective. These are conditional choices.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "xbox_growth_high_2028",
+    "old_claim_id": "claim_85_xbox_growth_high_2028",
+    "new_claim_ids": [
+      "claim_85_xbox_growth_high_2028",
+      "claim_85_xbox_growth_high_2028_part2",
+      "v2_history_xbox_growth_high_2028",
+      "v2_constraint_xbox_growth_high_2028",
+      "v2_context_xbox_growth_high_2028"
+    ],
+    "historical_growth_calculated": -0.07098699637603922,
+    "mechanism_call_lines": [
+      204,
+      249,
+      279
+    ],
+    "constraint_call_lines": [
+      205
+    ],
+    "perimeter_limits": "Xbox perimeter unchanged: content/services and hardware. FY26 total declined7.1% and Q4 old total declined10%; future content/hardware decline statements are quarter-only. CEO expects total gaming FY27 growth, a genuine opposing annual expectation. Base-4% openly disagrees.",
+    "analyst_range_and_fade": "FY27 low-10/base-4/high2% express failed/partial/successful reset after actual annual decline, with high case allowing the management-positive annual direction; no cases are forced to the management expectation. FY28/29 base2/4% and high8/8% require successful content/platform reset and paid monetization; no verified launch schedule, delivery fees or cohort retention proves that recovery. Low-5/0% keeps reset ineffective. These are conditional choices.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "xbox_growth_high_2029",
+    "old_claim_id": "claim_86_xbox_growth_high_2029",
+    "new_claim_ids": [
+      "claim_86_xbox_growth_high_2029",
+      "claim_86_xbox_growth_high_2029_part2",
+      "v2_history_xbox_growth_high_2029",
+      "v2_constraint_xbox_growth_high_2029",
+      "v2_context_xbox_growth_high_2029"
+    ],
+    "historical_growth_calculated": -0.07098699637603922,
+    "mechanism_call_lines": [
+      204,
+      249,
+      279
+    ],
+    "constraint_call_lines": [
+      205
+    ],
+    "perimeter_limits": "Xbox perimeter unchanged: content/services and hardware. FY26 total declined7.1% and Q4 old total declined10%; future content/hardware decline statements are quarter-only. CEO expects total gaming FY27 growth, a genuine opposing annual expectation. Base-4% openly disagrees.",
+    "analyst_range_and_fade": "FY27 low-10/base-4/high2% express failed/partial/successful reset after actual annual decline, with high case allowing the management-positive annual direction; no cases are forced to the management expectation. FY28/29 base2/4% and high8/8% require successful content/platform reset and paid monetization; no verified launch schedule, delivery fees or cohort retention proves that recovery. Low-5/0% keeps reset ineffective. These are conditional choices.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_low_2027",
+    "old_claim_id": "claim_89_windows_oem_and_devices_growth_low_2027",
+    "new_claim_ids": [
+      "claim_89_windows_oem_and_devices_growth_low_2027",
+      "claim_89_windows_oem_and_devices_growth_low_2027_part2",
+      "v2_history_windows_oem_and_devices_growth_low_2027",
+      "v2_constraint_windows_oem_and_devices_growth_low_2027",
+      "v2_context_windows_oem_and_devices_growth_low_2027"
+    ],
+    "historical_growth_calculated": -0.013167773606699407,
+    "mechanism_call_lines": [
+      247,
+      256,
+      277
+    ],
+    "constraint_call_lines": [
+      247
+    ],
+    "perimeter_limits": "New stream includes small Other reclassification; devices/OEM demand and elevated inventory, component prices and Windows10-end-support comparable drive headwinds. Management high-teens is retained wording; base-18% is an independent assumption. Q1 low20s is not an annual bridge.",
+    "analyst_range_and_fade": "FY27 low-23/base-18/high-13% explicitly bracket severe versus milder annual headwinds. Management wording informs direction only, not an invented exact18% target. FY26 annual-1.32% is historical context, not proof of future decline magnitude. FY28/29 stabilization assumes inventories normalize and component/comparable pressure eases. There is no observed Windows recovery evidence at asof; low continues declines, base moves-3/0%, high3/5%, all conditional.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_low_2028",
+    "old_claim_id": "claim_90_windows_oem_and_devices_growth_low_2028",
+    "new_claim_ids": [
+      "claim_90_windows_oem_and_devices_growth_low_2028",
+      "claim_90_windows_oem_and_devices_growth_low_2028_part2",
+      "v2_history_windows_oem_and_devices_growth_low_2028",
+      "v2_constraint_windows_oem_and_devices_growth_low_2028",
+      "v2_context_windows_oem_and_devices_growth_low_2028"
+    ],
+    "historical_growth_calculated": -0.013167773606699407,
+    "mechanism_call_lines": [
+      247,
+      256,
+      277
+    ],
+    "constraint_call_lines": [
+      247
+    ],
+    "perimeter_limits": "New stream includes small Other reclassification; devices/OEM demand and elevated inventory, component prices and Windows10-end-support comparable drive headwinds. Management high-teens is retained wording; base-18% is an independent assumption. Q1 low20s is not an annual bridge.",
+    "analyst_range_and_fade": "FY27 low-23/base-18/high-13% explicitly bracket severe versus milder annual headwinds. Management wording informs direction only, not an invented exact18% target. FY26 annual-1.32% is historical context, not proof of future decline magnitude. FY28/29 stabilization assumes inventories normalize and component/comparable pressure eases. There is no observed Windows recovery evidence at asof; low continues declines, base moves-3/0%, high3/5%, all conditional.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_low_2029",
+    "old_claim_id": "claim_91_windows_oem_and_devices_growth_low_2029",
+    "new_claim_ids": [
+      "claim_91_windows_oem_and_devices_growth_low_2029",
+      "claim_91_windows_oem_and_devices_growth_low_2029_part2",
+      "v2_history_windows_oem_and_devices_growth_low_2029",
+      "v2_constraint_windows_oem_and_devices_growth_low_2029",
+      "v2_context_windows_oem_and_devices_growth_low_2029"
+    ],
+    "historical_growth_calculated": -0.013167773606699407,
+    "mechanism_call_lines": [
+      247,
+      256,
+      277
+    ],
+    "constraint_call_lines": [
+      247
+    ],
+    "perimeter_limits": "New stream includes small Other reclassification; devices/OEM demand and elevated inventory, component prices and Windows10-end-support comparable drive headwinds. Management high-teens is retained wording; base-18% is an independent assumption. Q1 low20s is not an annual bridge.",
+    "analyst_range_and_fade": "FY27 low-23/base-18/high-13% explicitly bracket severe versus milder annual headwinds. Management wording informs direction only, not an invented exact18% target. FY26 annual-1.32% is historical context, not proof of future decline magnitude. FY28/29 stabilization assumes inventories normalize and component/comparable pressure eases. There is no observed Windows recovery evidence at asof; low continues declines, base moves-3/0%, high3/5%, all conditional.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_base_2027",
+    "old_claim_id": "claim_92_windows_oem_and_devices_growth_base_2027",
+    "new_claim_ids": [
+      "claim_92_windows_oem_and_devices_growth_base_2027",
+      "claim_92_windows_oem_and_devices_growth_base_2027_part2",
+      "v2_history_windows_oem_and_devices_growth_base_2027",
+      "v2_constraint_windows_oem_and_devices_growth_base_2027",
+      "v2_context_windows_oem_and_devices_growth_base_2027"
+    ],
+    "historical_growth_calculated": -0.013167773606699407,
+    "mechanism_call_lines": [
+      247,
+      256,
+      277
+    ],
+    "constraint_call_lines": [
+      247
+    ],
+    "perimeter_limits": "New stream includes small Other reclassification; devices/OEM demand and elevated inventory, component prices and Windows10-end-support comparable drive headwinds. Management high-teens is retained wording; base-18% is an independent assumption. Q1 low20s is not an annual bridge.",
+    "analyst_range_and_fade": "FY27 low-23/base-18/high-13% explicitly bracket severe versus milder annual headwinds. Management wording informs direction only, not an invented exact18% target. FY26 annual-1.32% is historical context, not proof of future decline magnitude. FY28/29 stabilization assumes inventories normalize and component/comparable pressure eases. There is no observed Windows recovery evidence at asof; low continues declines, base moves-3/0%, high3/5%, all conditional.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_base_2028",
+    "old_claim_id": "claim_93_windows_oem_and_devices_growth_base_2028",
+    "new_claim_ids": [
+      "claim_93_windows_oem_and_devices_growth_base_2028",
+      "claim_93_windows_oem_and_devices_growth_base_2028_part2",
+      "v2_history_windows_oem_and_devices_growth_base_2028",
+      "v2_constraint_windows_oem_and_devices_growth_base_2028",
+      "v2_context_windows_oem_and_devices_growth_base_2028"
+    ],
+    "historical_growth_calculated": -0.013167773606699407,
+    "mechanism_call_lines": [
+      247,
+      256,
+      277
+    ],
+    "constraint_call_lines": [
+      247
+    ],
+    "perimeter_limits": "New stream includes small Other reclassification; devices/OEM demand and elevated inventory, component prices and Windows10-end-support comparable drive headwinds. Management high-teens is retained wording; base-18% is an independent assumption. Q1 low20s is not an annual bridge.",
+    "analyst_range_and_fade": "FY27 low-23/base-18/high-13% explicitly bracket severe versus milder annual headwinds. Management wording informs direction only, not an invented exact18% target. FY26 annual-1.32% is historical context, not proof of future decline magnitude. FY28/29 stabilization assumes inventories normalize and component/comparable pressure eases. There is no observed Windows recovery evidence at asof; low continues declines, base moves-3/0%, high3/5%, all conditional.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_base_2029",
+    "old_claim_id": "claim_94_windows_oem_and_devices_growth_base_2029",
+    "new_claim_ids": [
+      "claim_94_windows_oem_and_devices_growth_base_2029",
+      "claim_94_windows_oem_and_devices_growth_base_2029_part2",
+      "v2_history_windows_oem_and_devices_growth_base_2029",
+      "v2_constraint_windows_oem_and_devices_growth_base_2029",
+      "v2_context_windows_oem_and_devices_growth_base_2029"
+    ],
+    "historical_growth_calculated": -0.013167773606699407,
+    "mechanism_call_lines": [
+      247,
+      256,
+      277
+    ],
+    "constraint_call_lines": [
+      247
+    ],
+    "perimeter_limits": "New stream includes small Other reclassification; devices/OEM demand and elevated inventory, component prices and Windows10-end-support comparable drive headwinds. Management high-teens is retained wording; base-18% is an independent assumption. Q1 low20s is not an annual bridge.",
+    "analyst_range_and_fade": "FY27 low-23/base-18/high-13% explicitly bracket severe versus milder annual headwinds. Management wording informs direction only, not an invented exact18% target. FY26 annual-1.32% is historical context, not proof of future decline magnitude. FY28/29 stabilization assumes inventories normalize and component/comparable pressure eases. There is no observed Windows recovery evidence at asof; low continues declines, base moves-3/0%, high3/5%, all conditional.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_high_2027",
+    "old_claim_id": "claim_95_windows_oem_and_devices_growth_high_2027",
+    "new_claim_ids": [
+      "claim_95_windows_oem_and_devices_growth_high_2027",
+      "claim_95_windows_oem_and_devices_growth_high_2027_part2",
+      "v2_history_windows_oem_and_devices_growth_high_2027",
+      "v2_constraint_windows_oem_and_devices_growth_high_2027",
+      "v2_context_windows_oem_and_devices_growth_high_2027"
+    ],
+    "historical_growth_calculated": -0.013167773606699407,
+    "mechanism_call_lines": [
+      247,
+      256,
+      277
+    ],
+    "constraint_call_lines": [
+      247
+    ],
+    "perimeter_limits": "New stream includes small Other reclassification; devices/OEM demand and elevated inventory, component prices and Windows10-end-support comparable drive headwinds. Management high-teens is retained wording; base-18% is an independent assumption. Q1 low20s is not an annual bridge.",
+    "analyst_range_and_fade": "FY27 low-23/base-18/high-13% explicitly bracket severe versus milder annual headwinds. Management wording informs direction only, not an invented exact18% target. FY26 annual-1.32% is historical context, not proof of future decline magnitude. FY28/29 stabilization assumes inventories normalize and component/comparable pressure eases. There is no observed Windows recovery evidence at asof; low continues declines, base moves-3/0%, high3/5%, all conditional.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_high_2028",
+    "old_claim_id": "claim_96_windows_oem_and_devices_growth_high_2028",
+    "new_claim_ids": [
+      "claim_96_windows_oem_and_devices_growth_high_2028",
+      "claim_96_windows_oem_and_devices_growth_high_2028_part2",
+      "v2_history_windows_oem_and_devices_growth_high_2028",
+      "v2_constraint_windows_oem_and_devices_growth_high_2028",
+      "v2_context_windows_oem_and_devices_growth_high_2028"
+    ],
+    "historical_growth_calculated": -0.013167773606699407,
+    "mechanism_call_lines": [
+      247,
+      256,
+      277
+    ],
+    "constraint_call_lines": [
+      247
+    ],
+    "perimeter_limits": "New stream includes small Other reclassification; devices/OEM demand and elevated inventory, component prices and Windows10-end-support comparable drive headwinds. Management high-teens is retained wording; base-18% is an independent assumption. Q1 low20s is not an annual bridge.",
+    "analyst_range_and_fade": "FY27 low-23/base-18/high-13% explicitly bracket severe versus milder annual headwinds. Management wording informs direction only, not an invented exact18% target. FY26 annual-1.32% is historical context, not proof of future decline magnitude. FY28/29 stabilization assumes inventories normalize and component/comparable pressure eases. There is no observed Windows recovery evidence at asof; low continues declines, base moves-3/0%, high3/5%, all conditional.",
+    "future_value_unchanged": true
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_high_2029",
+    "old_claim_id": "claim_97_windows_oem_and_devices_growth_high_2029",
+    "new_claim_ids": [
+      "claim_97_windows_oem_and_devices_growth_high_2029",
+      "claim_97_windows_oem_and_devices_growth_high_2029_part2",
+      "v2_history_windows_oem_and_devices_growth_high_2029",
+      "v2_constraint_windows_oem_and_devices_growth_high_2029",
+      "v2_context_windows_oem_and_devices_growth_high_2029"
+    ],
+    "historical_growth_calculated": -0.013167773606699407,
+    "mechanism_call_lines": [
+      247,
+      256,
+      277
+    ],
+    "constraint_call_lines": [
+      247
+    ],
+    "perimeter_limits": "New stream includes small Other reclassification; devices/OEM demand and elevated inventory, component prices and Windows10-end-support comparable drive headwinds. Management high-teens is retained wording; base-18% is an independent assumption. Q1 low20s is not an annual bridge.",
+    "analyst_range_and_fade": "FY27 low-23/base-18/high-13% explicitly bracket severe versus milder annual headwinds. Management wording informs direction only, not an invented exact18% target. FY26 annual-1.32% is historical context, not proof of future decline magnitude. FY28/29 stabilization assumes inventories normalize and component/comparable pressure eases. There is no observed Windows recovery evidence at asof; low continues declines, base moves-3/0%, high3/5%, all conditional.",
+    "future_value_unchanged": true
+  }
+]

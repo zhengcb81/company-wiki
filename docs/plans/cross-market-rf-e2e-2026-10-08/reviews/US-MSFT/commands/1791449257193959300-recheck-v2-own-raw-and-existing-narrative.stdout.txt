@@ -1,0 +1,21 @@
+[
+  "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\aws.html",
+  "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\aws.txt",
+  "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\call.html",
+  "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\call.txt",
+  "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\forecast.json",
+  "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\forecast.md",
+  "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\independent_sourceprep_response.json",
+  "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\input.json",
+  "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\metrics.html",
+  "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\metrics.txt",
+  "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\presentation.pptx",
+  "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\producer_fy2025.html",
+  "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\producer_fy2025.txt",
+  "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\publications.jsonl",
+  "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\request_fy2025_reuse.json",
+  "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\results.html",
+  "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\results.txt",
+  "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\snapshot.json",
+  "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\v2"
+]

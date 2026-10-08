@@ -1,0 +1,1 @@
+{"runtime": 51, "registry_audit": 0, "registry_chain": 3, "unchanged_old_numbers": true, "recognition": 5, "node_mappings": 9, "rationales": 45, "asof_bounds": 3, "initial_review_preserved": true}

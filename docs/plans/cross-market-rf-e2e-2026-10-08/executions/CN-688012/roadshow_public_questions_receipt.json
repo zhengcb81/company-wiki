@@ -1,0 +1,25 @@
+{
+  "url": "https://roadshow.sseinfo.com/base-service/api/pub/v1/question_answer/answer_question_page",
+  "request": {
+    "pageNo": 1,
+    "pageSize": 200,
+    "questionTypeList": [
+      2,
+      3,
+      4
+    ],
+    "activityId": 40766,
+    "askTypes": [
+      1
+    ]
+  },
+  "endpoint_basis": "literal public endpoint and parameter fields inspected from actual roadshow_app_script.html",
+  "response_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow_public_questions.json",
+  "status": 200,
+  "bytes": 557100,
+  "sha256": "520684e158f0f10191be84c435cb5600fff0a6cbea8d41442dfee9647d497d6f",
+  "elapsed_seconds": 8.642125400001532,
+  "captured_at": "2026-10-08T07:40:10.937989+00:00",
+  "cost_usd": 0,
+  "credentials_used": false
+}

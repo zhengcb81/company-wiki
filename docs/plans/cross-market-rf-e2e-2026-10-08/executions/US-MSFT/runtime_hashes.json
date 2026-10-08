@@ -1,0 +1,27 @@
+{
+  "scripts/source_preparation.py": {
+    "installed_sha": "19e329c56265b46a96a33886b4eabb52fbadda4564b995cbb114e0ac2cd034e6",
+    "repo_sha": "19e329c56265b46a96a33886b4eabb52fbadda4564b995cbb114e0ac2cd034e6",
+    "same": true
+  },
+  "scripts/revenue_core.py": {
+    "installed_sha": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+    "repo_sha": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+    "same": true
+  },
+  "scripts/revenue_forecast.py": {
+    "installed_sha": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+    "repo_sha": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+    "same": true
+  },
+  "scripts/company_wiki_source_reader_v2.py": {
+    "installed_sha": "da88f295ddcc34205803492ea3c7c476b6464478b94b6f6db7dfb61c7e35d65e",
+    "repo_sha": "da88f295ddcc34205803492ea3c7c476b6464478b94b6f6db7dfb61c7e35d65e",
+    "same": true
+  },
+  "scripts/company_wiki_source_v2.py": {
+    "installed_sha": "4de2cdfd17e448d4e3e1dfea284356ac4bf92f668d8b228107e09590aec2155e",
+    "repo_sha": "4de2cdfd17e448d4e3e1dfea284356ac4bf92f668d8b228107e09590aec2155e",
+    "same": true
+  }
+}

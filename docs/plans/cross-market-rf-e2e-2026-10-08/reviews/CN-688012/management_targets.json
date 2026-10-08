@@ -1,0 +1,134 @@
+[
+  {
+    "target_id": "CMP_annual_2026",
+    "statement": "中微众硅在2026年度实现的合并报表范围营业收入不低于28,000.00万元",
+    "metric_name": "CMP consolidated annual revenue commitment by transaction sellers",
+    "metric_definition": "Full-year target company consolidated revenue independently audited under performance compensation agreement; not group AMEC revenue",
+    "target_period": "FY2026",
+    "raw_unit": "万元",
+    "raw_currency": "CNY",
+    "raw_scale": "ten_thousand",
+    "raw_target_value": 28000,
+    "measurement_basis": "annual_period",
+    "measurement_periods": [
+      "FY2026"
+    ],
+    "measurement_rationale": "Original says 在2026年度、2027年度和2028年度实现...分别; per-year amount. Cumulative compensation test elsewhere does not change annual target amounts.",
+    "materiality": "material",
+    "commitment_strength": "goal",
+    "scope": {
+      "type": "segment",
+      "name": "CMP"
+    },
+    "perimeter_status": "mismatch",
+    "perimeter_notes": "2026 annual standalone target includes pre-acquisition periods; model is only June–December consolidated contribution.",
+    "comparison": "at_least",
+    "treatment": "unmodeled_data_gap",
+    "comparison_value": null,
+    "comparison_currency": "CNY",
+    "comparison_scale": "million",
+    "normalization_rationale": "万元 /100 equals CNY million; no FX. No unsupported partial-year prorating.",
+    "mapped_parameter_ids": [],
+    "mapped_scenarios": [],
+    "claim_ids": [
+      "claim_CMP_annual_2026"
+    ],
+    "rationale": "Seller compensation commitment is an independent reference, not a guaranteed revenue guidance or forced base scenario."
+  },
+  {
+    "target_id": "CMP_annual_2027",
+    "statement": "中微众硅在2027年度实现的合并报表范围营业收入不低于43,000.00万元",
+    "metric_name": "CMP consolidated annual revenue commitment by transaction sellers",
+    "metric_definition": "Full-year target company consolidated revenue independently audited under performance compensation agreement; not group AMEC revenue",
+    "target_period": "FY2027",
+    "raw_unit": "万元",
+    "raw_currency": "CNY",
+    "raw_scale": "ten_thousand",
+    "raw_target_value": 43000,
+    "measurement_basis": "annual_period",
+    "measurement_periods": [
+      "FY2027"
+    ],
+    "measurement_rationale": "Original says 在2026年度、2027年度和2028年度实现...分别; per-year amount. Cumulative compensation test elsewhere does not change annual target amounts.",
+    "materiality": "material",
+    "commitment_strength": "goal",
+    "scope": {
+      "type": "segment",
+      "name": "CMP"
+    },
+    "perimeter_status": "matched",
+    "perimeter_notes": "Full-year post-control external CMP revenue assumed comparable; unidentified internal transactions remain a reconciliation risk.",
+    "comparison": "at_least",
+    "treatment": "independent_benchmark",
+    "comparison_value": 430.0,
+    "comparison_currency": "CNY",
+    "comparison_scale": "million",
+    "normalization_rationale": "万元 /100 equals CNY million; no FX. No unsupported partial-year prorating.",
+    "mapped_parameter_ids": [
+      "cmp_revenue_low_2027",
+      "cmp_revenue_base_2027",
+      "cmp_revenue_high_2027"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "claim_ids": [
+      "claim_CMP_annual_2027"
+    ],
+    "rationale": "Seller compensation commitment is an independent reference, not a guaranteed revenue guidance or forced base scenario.",
+    "benchmark_rationale": "Independent analyst CMP operating paths are compared against seller annual commitment under matching full-year scope; under-attainment is reported as computed, never forced up.",
+    "benchmark_claim_ids": [
+      "claim_benchmark_CMP_annual_2027"
+    ]
+  },
+  {
+    "target_id": "CMP_annual_2028",
+    "statement": "中微众硅在2028年度实现的合并报表范围营业收入不低于58,000.00万元",
+    "metric_name": "CMP consolidated annual revenue commitment by transaction sellers",
+    "metric_definition": "Full-year target company consolidated revenue independently audited under performance compensation agreement; not group AMEC revenue",
+    "target_period": "FY2028",
+    "raw_unit": "万元",
+    "raw_currency": "CNY",
+    "raw_scale": "ten_thousand",
+    "raw_target_value": 58000,
+    "measurement_basis": "annual_period",
+    "measurement_periods": [
+      "FY2028"
+    ],
+    "measurement_rationale": "Original says 在2026年度、2027年度和2028年度实现...分别; per-year amount. Cumulative compensation test elsewhere does not change annual target amounts.",
+    "materiality": "material",
+    "commitment_strength": "goal",
+    "scope": {
+      "type": "segment",
+      "name": "CMP"
+    },
+    "perimeter_status": "matched",
+    "perimeter_notes": "Full-year post-control external CMP revenue assumed comparable; unidentified internal transactions remain a reconciliation risk.",
+    "comparison": "at_least",
+    "treatment": "independent_benchmark",
+    "comparison_value": 580.0,
+    "comparison_currency": "CNY",
+    "comparison_scale": "million",
+    "normalization_rationale": "万元 /100 equals CNY million; no FX. No unsupported partial-year prorating.",
+    "mapped_parameter_ids": [
+      "cmp_revenue_low_2028",
+      "cmp_revenue_base_2028",
+      "cmp_revenue_high_2028"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "claim_ids": [
+      "claim_CMP_annual_2028"
+    ],
+    "rationale": "Seller compensation commitment is an independent reference, not a guaranteed revenue guidance or forced base scenario.",
+    "benchmark_rationale": "Independent analyst CMP operating paths are compared against seller annual commitment under matching full-year scope; under-attainment is reported as computed, never forced up.",
+    "benchmark_claim_ids": [
+      "claim_benchmark_CMP_annual_2028"
+    ]
+  }
+]

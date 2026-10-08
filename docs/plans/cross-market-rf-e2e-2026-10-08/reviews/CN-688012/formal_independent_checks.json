@@ -1,0 +1,10 @@
+{
+  "strong_original_input": "PASS",
+  "exact_markdown": "PASS",
+  "immutable_snapshot_v2": "PASS",
+  "same_snapshot_input": "PASS",
+  "all_economic_payload": "PASS",
+  "confidence_component_sum_matches": true,
+  "actual_score": 65.59226677110698,
+  "historical_accuracy_observations": 0
+}

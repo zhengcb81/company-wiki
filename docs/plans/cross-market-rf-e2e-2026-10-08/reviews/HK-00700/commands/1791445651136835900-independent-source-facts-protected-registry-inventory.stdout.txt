@@ -1,0 +1,565 @@
+db_readonly_documents.json [
+  {
+    "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+    "primary_source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+    "title": "腾讯：2024年年度报告",
+    "source_type": "regulatory_filing",
+    "document_kind": "annual_report",
+    "published_date": "2025-04-08",
+    "source_status": "active",
+    "metadata_priority": 10,
+    "metadata_json": "{\"acquisition\": {\"market\": \"HK\", \"published_date\": \"2025-04-08\", \"security_id\": \"00700\", \"source_title\": \"腾讯：2024年年度报告\", \"source_url\": \"https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0408/2025040800668_c.pdf\"}, \"dayu_meta\": null, \"group_key\": \"腾讯/raw/financial_reports/annual/腾讯：2024年年度报告.pdf\", \"root_id\": \"company_raw\", \"scanner_version\": \"1.0.0\", \"prompt_injection_review\": {\"schema_version\": \"1.0\", \"status\": \"not_detected\", \"reviewer\": \"policy-reviewer-fc906c\", \"reviewed_at\": \"2026-08-12T00:38:20Z\", \"evidence_sha256\": \"bae136f28bc930780710ed17839d890121a2642274c6612f50ed0f912daa978d\"}}",
+    "text_fingerprint": "49b844f2f83a5de3ae65b434b34ef47fb67ad69c4949d749d5dc4614cb9863dc",
+    "first_seen_at": "2026-07-26T10:31:10Z",
+    "last_seen_at": "2026-08-20T21:26:55Z"
+  },
+  {
+    "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+    "primary_source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+    "title": "腾讯：2025年年度报告",
+    "source_type": "regulatory_filing",
+    "document_kind": "annual_report",
+    "published_date": "2026-04-09",
+    "source_status": "active",
+    "metadata_priority": 10,
+    "metadata_json": "{\"acquisition\": {\"market\": \"HK\", \"published_date\": \"2026-04-09\", \"security_id\": \"00700\", \"source_title\": \"腾讯：2025年年度报告\", \"source_url\": \"https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf\"}, \"dayu_meta\": null, \"group_key\": \"腾讯/raw/financial_reports/annual/腾讯：2025年年度报告.pdf\", \"root_id\": \"company_raw\", \"scanner_version\": \"1.0.0\", \"prompt_injection_review\": {\"schema_version\": \"1.0\", \"status\": \"not_detected\", \"reviewer\": \"policy-reviewer-fc906c\", \"reviewed_at\": \"2026-08-12T00:38:20Z\", \"evidence_sha256\": \"f5c8311e4920494fbb7d7f56796019eddc72683c89076632becacead80a470b1\"}}",
+    "text_fingerprint": "da98e28c45ba260070a7937495a377e22e0fef52eeec2d8bfd7fa2c1f50a15cb",
+    "first_seen_at": "2026-07-26T10:31:10Z",
+    "last_seen_at": "2026-08-20T21:26:55Z"
+  }
+]
+source_facts_2024.request.json {
+  "source_ref": {
+    "schema_version": "2.0",
+    "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+    "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+    "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+    "byte_size": 5241364,
+    "mime_type": "application/pdf"
+  },
+  "facts": {
+    "fiscal_year": 2024,
+    "language": "zh"
+  },
+  "evidence": {
+    "fiscal_year": {
+      "locator": "PDF page 1 cover and financial summary PDF page 4",
+      "value": 2024,
+      "observation": "Cover explicitly 2024 年報; financial summary year column 2024. 2024 cover visually rendered and inspected."
+    },
+    "language": {
+      "locator": "PDF page 1 cover; PDF page 4 financial summary; audited revenue note",
+      "value": "zh",
+      "observation": "Traditional Chinese cover 年報 and Chinese financial-summary and revenue-note body; original-language flag only, no translation."
+    }
+  }
+}
+source_facts_2024.response.json {"assertion_id": "sa-d5fa952b082b48b2a5088f7c40e5f2e6", "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0", "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0", "status": "recorded"}
+
+source_facts_2025.request.json {
+  "source_ref": {
+    "schema_version": "2.0",
+    "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+    "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+    "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+    "byte_size": 4428270,
+    "mime_type": "application/pdf"
+  },
+  "facts": {
+    "fiscal_year": 2025,
+    "language": "zh"
+  },
+  "evidence": {
+    "fiscal_year": {
+      "locator": "PDF page 1 cover and financial summary PDF page 4",
+      "value": 2025,
+      "observation": "Cover explicitly 2025 年報; financial summary year column 2025. 2024 cover visually rendered and inspected."
+    },
+    "language": {
+      "locator": "PDF page 1 cover; PDF page 4 financial summary; audited revenue note",
+      "value": "zh",
+      "observation": "Traditional Chinese cover 年報 and Chinese financial-summary and revenue-note body; original-language flag only, no translation."
+    }
+  }
+}
+source_facts_2025.response.json {"assertion_id": "sa-f5cc0cf223e6460596a950f65d89f054", "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7", "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7", "status": "recorded"}
+
+source_facts_receipts.json [
+  {
+    "timestamp_utc": "2026-10-08T07:05:24.241499+00:00",
+    "command": [
+      "C:\\Miniconda\\python.exe",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "source-facts",
+      "--request",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2024.request.json"
+    ],
+    "returncode": 0,
+    "request_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2024.request.json",
+    "raw_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\financial_reports\\annual\\腾讯：2024年年度报告.pdf",
+    "raw_before_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+    "raw_after_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+    "raw_unchanged": true,
+    "response": "{\"assertion_id\": \"sa-d5fa952b082b48b2a5088f7c40e5f2e6\", \"document_id\": \"urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0\", \"source_id\": \"urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0\", \"status\": \"recorded\"}\n",
+    "stderr": ""
+  },
+  {
+    "timestamp_utc": "2026-10-08T07:05:24.936004+00:00",
+    "command": [
+      "C:\\Miniconda\\python.exe",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "source-facts",
+      "--request",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2025.request.json"
+    ],
+    "returncode": 0,
+    "request_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2025.request.json",
+    "raw_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\financial_reports\\annual\\腾讯：2025年年度报告.pdf",
+    "raw_before_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+    "raw_after_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+    "raw_unchanged": true,
+    "response": "{\"assertion_id\": \"sa-f5cc0cf223e6460596a950f65d89f054\", \"document_id\": \"urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7\", \"source_id\": \"urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7\", \"status\": \"recorded\"}\n",
+    "stderr": ""
+  }
+]
+deterministic_local_parse.json [
+  {
+    "year": 2025,
+    "original": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\financial_reports\\annual\\腾讯：2025年年度报告.pdf",
+    "sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+    "pages": 282,
+    "parsed_pages_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\annual_2025_pages.json",
+    "matched_pages": [
+      4,
+      6,
+      8,
+      9,
+      10,
+      13,
+      14,
+      17,
+      78,
+      122,
+      123,
+      130,
+      141,
+      165,
+      166,
+      167,
+      168,
+      193,
+      194,
+      195,
+      196,
+      197,
+      198,
+      223,
+      224,
+      266,
+      277
+    ]
+  },
+  {
+    "year": 2024,
+    "original": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\financial_reports\\annual\\腾讯：2024年年度报告.pdf",
+    "sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+    "pages": 274,
+    "parsed_pages_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\annual_2024_pages.json",
+    "matched_pages": [
+      4,
+      8,
+      9,
+      10,
+      13,
+      14,
+      17,
+      76,
+      116,
+      117,
+      124,
+      158,
+      159,
+      160,
+      161,
+      185,
+      186,
+      187,
+      188,
+      189,
+      190,
+      215,
+      216,
+      258,
+      269
+    ]
+  }
+]
+delivery_verification.json {
+  "timestamp_utc": "2026-10-08T07:24:47.876266+00:00",
+  "strong_input_required_validator": "PASS",
+  "snapshot_validator": "PASS",
+  "same_result_markdown": "PASS",
+  "independent_segment_consolidation_cagr": "PASS",
+  "recognized_revenue_transform": "mixed no second transformation",
+  "all_base_assumptions_sensitivity": 15,
+  "independent_paths": [
+    {
+      "segment": "Games",
+      "scenario": "low",
+      "independent_annual_revenue": {
+        "2026": 258439.24000000002,
+        "2027": 268776.80960000004,
+        "2028": 274152.34579200007
+      }
+    },
+    {
+      "segment": "Games",
+      "scenario": "base",
+      "independent_annual_revenue": {
+        "2026": 265685.2,
+        "2027": 289596.868,
+        "2028": 312764.61744000006
+      }
+    },
+    {
+      "segment": "Games",
+      "scenario": "high",
+      "independent_annual_revenue": {
+        "2026": 277761.8,
+        "2027": 316648.45200000005,
+        "2028": 354646.2662400001
+      }
+    },
+    {
+      "segment": "SocialNetworks",
+      "scenario": "low",
+      "independent_annual_revenue": {
+        "2026": 125194.02,
+        "2027": 121438.1994,
+        "2028": 119009.43541199999
+      }
+    },
+    {
+      "segment": "SocialNetworks",
+      "scenario": "base",
+      "independent_annual_revenue": {
+        "2026": 127749.0,
+        "2027": 130303.98,
+        "2028": 134213.0994
+      }
+    },
+    {
+      "segment": "SocialNetworks",
+      "scenario": "high",
+      "independent_annual_revenue": {
+        "2026": 132858.96,
+        "2027": 139501.908,
+        "2028": 146477.00340000002
+      }
+    },
+    {
+      "segment": "MarketingServices",
+      "scenario": "low",
+      "independent_annual_revenue": {
+        "2026": 162369.76,
+        "2027": 175359.34080000003,
+        "2028": 185880.90124800004
+      }
+    },
+    {
+      "segment": "MarketingServices",
+      "scenario": "base",
+      "independent_annual_revenue": {
+        "2026": 173967.6,
+        "2027": 203542.092,
+        "2028": 232037.98488000003
+      }
+    },
+    {
+      "segment": "MarketingServices",
+      "scenario": "high",
+      "independent_annual_revenue": {
+        "2026": 179766.52,
+        "2027": 221112.8196,
+        "2028": 265335.38352
+      }
+    },
+    {
+      "segment": "FinTechBusinessServices",
+      "scenario": "low",
+      "independent_annual_revenue": {
+        "2026": 240906.75,
+        "2027": 250543.02000000002,
+        "2028": 260564.74080000003
+      }
+    },
+    {
+      "segment": "FinTechBusinessServices",
+      "scenario": "base",
+      "independent_annual_revenue": {
+        "2026": 250084.15000000002,
+        "2027": 275092.56500000006,
+        "2028": 302601.8215000001
+      }
+    },
+    {
+      "segment": "FinTechBusinessServices",
+      "scenario": "high",
+      "independent_annual_revenue": {
+        "2026": 259261.55,
+        "2027": 298150.7825,
+        "2028": 342873.39987499994
+      }
+    },
+    {
+      "segment": "Others",
+      "scenario": "low",
+      "independent_annual_revenue": {
+        "2026": 9288.55,
+        "2027": 9288.55,
+        "2028": 9288.55
+      }
+    },
+    {
+      "segment": "Others",
+      "scenario": "base",
+      "independent_annual_revenue": {
+        "2026": 11307.8,
+        "2027": 12438.58,
+        "2028": 13433.6664
+      }
+    },
+    {
+      "segment": "Others",
+      "scenario": "high",
+      "independent_annual_revenue": {
+        "2026": 12923.2,
+        "2027": 15507.84,
+        "2028": 17834.016
+      }
+    }
+  ],
+  "consolidated": {
+    "low": {
+      "2026": 796198.3200000001,
+      "2027": 825405.9198000001,
+      "2028": 848895.9732520002
+    },
+    "base": {
+      "2026": 828793.7500000001,
+      "2027": 910974.085,
+      "2028": 995051.1896200002
+    },
+    "high": {
+      "2026": 862572.03,
+      "2027": 990921.8021,
+      "2028": 1127166.069035
+    }
+  },
+  "H1_implied_H2_checks": [
+    {
+      "segment": "Games",
+      "scenario": "low",
+      "FY2025": 241532,
+      "H1_2025": 118654,
+      "H2_2025": 122878,
+      "H1_2026": 130115,
+      "FY2026_forecast": 258439.24000000002,
+      "implied_H2_2026": 128324.24000000002,
+      "implied_H2_yoy": 0.04432233597552049,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "Games",
+      "scenario": "base",
+      "FY2025": 241532,
+      "H1_2025": 118654,
+      "H2_2025": 122878,
+      "H1_2026": 130115,
+      "FY2026_forecast": 265685.2,
+      "implied_H2_2026": 135570.2,
+      "implied_H2_yoy": 0.10329106919057929,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "Games",
+      "scenario": "high",
+      "FY2025": 241532,
+      "H1_2025": 118654,
+      "H2_2025": 122878,
+      "H1_2026": 130115,
+      "FY2026_forecast": 277761.8,
+      "implied_H2_2026": 147646.8,
+      "implied_H2_yoy": 0.2015722912156772,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "SocialNetworks",
+      "scenario": "low",
+      "FY2025": 127749,
+      "H1_2025": 64847,
+      "H2_2025": 62902,
+      "H1_2026": 64409,
+      "FY2026_forecast": 125194.02,
+      "implied_H2_2026": 60785.020000000004,
+      "implied_H2_yoy": -0.033655209691265675,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "SocialNetworks",
+      "scenario": "base",
+      "FY2025": 127749,
+      "H1_2025": 64847,
+      "H2_2025": 62902,
+      "H1_2026": 64409,
+      "FY2026_forecast": 127749.0,
+      "implied_H2_2026": 63340.0,
+      "implied_H2_yoy": 0.006963212616450942,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "SocialNetworks",
+      "scenario": "high",
+      "FY2025": 127749,
+      "H1_2025": 64847,
+      "H2_2025": 62902,
+      "H1_2026": 64409,
+      "FY2026_forecast": 132858.96,
+      "implied_H2_2026": 68449.95999999999,
+      "implied_H2_yoy": 0.0882000572318844,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "MarketingServices",
+      "scenario": "low",
+      "FY2025": 144973,
+      "H1_2025": 67615,
+      "H2_2025": 77358,
+      "H1_2026": 81736,
+      "FY2026_forecast": 162369.76,
+      "implied_H2_2026": 80633.76000000001,
+      "implied_H2_yoy": 0.04234545877608009,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "MarketingServices",
+      "scenario": "base",
+      "FY2025": 144973,
+      "H1_2025": 67615,
+      "H2_2025": 77358,
+      "H1_2026": 81736,
+      "FY2026_forecast": 173967.6,
+      "implied_H2_2026": 92231.6,
+      "implied_H2_yoy": 0.1922697070761914,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "MarketingServices",
+      "scenario": "high",
+      "FY2025": 144973,
+      "H1_2025": 67615,
+      "H2_2025": 77358,
+      "H1_2026": 81736,
+      "FY2026_forecast": 179766.52,
+      "implied_H2_2026": 98030.51999999999,
+      "implied_H2_yoy": 0.2672318312262467,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "FinTechBusinessServices",
+      "scenario": "low",
+      "FY2025": 229435,
+      "H1_2025": 110443,
+      "H2_2025": 118992,
+      "H1_2026": 120171,
+      "FY2026_forecast": 240906.75,
+      "implied_H2_2026": 120735.75,
+      "implied_H2_yoy": 0.014654346510689864,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "FinTechBusinessServices",
+      "scenario": "base",
+      "FY2025": 229435,
+      "H1_2025": 110443,
+      "H2_2025": 118992,
+      "H1_2026": 120171,
+      "FY2026_forecast": 250084.15000000002,
+      "implied_H2_2026": 129913.15000000002,
+      "implied_H2_yoy": 0.09178053986822654,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "FinTechBusinessServices",
+      "scenario": "high",
+      "FY2025": 229435,
+      "H1_2025": 110443,
+      "H2_2025": 118992,
+      "H1_2026": 120171,
+      "FY2026_forecast": 259261.55,
+      "implied_H2_2026": 139090.55,
+      "implied_H2_yoy": 0.168906733225763,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "Others",
+      "scenario": "low",
+      "FY2025": 8077,
+      "H1_2025": 2967,
+      "H2_2025": 5110,
+      "H1_2026": 4812,
+      "FY2026_forecast": 9288.55,
+      "implied_H2_2026": 4476.549999999999,
+      "implied_H2_yoy": -0.12396281800391407,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "Others",
+      "scenario": "base",
+      "FY2025": 8077,
+      "H1_2025": 2967,
+      "H2_2025": 5110,
+      "H1_2026": 4812,
+      "FY2026_forecast": 11307.8,
+      "implied_H2_2026": 6495.799999999999,
+      "implied_H2_yoy": 0.27119373776908007,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    },
+    {
+      "segment": "Others",
+      "scenario": "high",
+      "FY2025": 8077,
+      "H1_2025": 2967,
+      "H2_2025": 5110,
+      "H1_2026": 4812,
+      "FY2026_forecast": 12923.2,
+      "implied_H2_2026": 8111.200000000001,
+      "implied_H2_yoy": 0.5873189823874756,
+      "unit": "CNY million",
+      "check": "Non-negative residual; seasonal compare uses H2, not twice H1."
+    }
+  ],
+  "publication_registry_effective_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\publications.jsonl",
+  "signer": "No fabricated external signature; preserve actual engine receipts",
+  "future_actual_backtest": "NOT_APPLICABLE: full FY2026–2028 actuals unavailable as of 2026-10-08"
+}

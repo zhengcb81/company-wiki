@@ -1,0 +1,2 @@
+{"timestamp_utc": "2026-10-08T07:17:57.296087+00:00", "pid": 100096, "ppid": 51364, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["-m", "fetch", "--staging-dir", "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\staging\\1eb03fa96210f8402a05a8fa4981921b454c1ecb3aac8e04d19319397483caa4"], "cwd": "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite"}}
+{"timestamp_utc": "2026-10-08T07:17:59.050768+00:00", "pid": 100096, "ppid": 51364, "event": "python_exit", "data": {}}

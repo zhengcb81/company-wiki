@@ -1,0 +1,12 @@
+{
+  "timestamp_utc": "2026-10-08T09:10:13.9556324Z",
+  "exact_owned_temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008",
+  "removed_temp_files": 237,
+  "removed_temp_bytes": 110034773,
+  "durable_retained_unique_bytes": 56798301,
+  "original_source_bytes_preserved": true,
+  "production_originals_deleted": 0,
+  "archive_index": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\delivery_archive_index.json",
+  "task_temp_root_absent_after_cleanup": true,
+  "full_production_backup_restore_exercise": false
+}

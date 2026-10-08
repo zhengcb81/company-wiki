@@ -1,0 +1,26 @@
+{
+  "source_ref": {
+    "schema_version": "2.0",
+    "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+    "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+    "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+    "byte_size": 4428270,
+    "mime_type": "application/pdf"
+  },
+  "facts": {
+    "fiscal_year": 2025,
+    "language": "zh"
+  },
+  "evidence": {
+    "fiscal_year": {
+      "locator": "PDF page 1 cover and financial summary PDF page 4",
+      "value": 2025,
+      "observation": "FY2025 original PDF pages 1 and 4 rendered to owned TEMP/v3 and visually inspected on 2026-10-08. Cover reads 2025 年報; financial-summary current column reads 二零二五年 and income 751,766 人民幣百萬元. This new observation corrects the old copied 2024 visual-check sentence; old assertion/receipt retained."
+    },
+    "language": {
+      "locator": "PDF page 1 cover; PDF page 4 financial summary; audited revenue note",
+      "value": "zh",
+      "observation": "FY2025 original cover reads 騰訊控股有限公司 / 2025 年報; financial-summary current-year labels and financial-statement notes are Traditional Chinese. Rendered FY2025 pages 1 and 4 inspected; no translation."
+    }
+  }
+}

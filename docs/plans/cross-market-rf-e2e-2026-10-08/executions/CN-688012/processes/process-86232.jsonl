@@ -1,0 +1,3 @@
+{"timestamp_utc": "2026-10-08T07:06:03.518630+00:00", "pid": 86232, "ppid": 16776, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["docs/plans/cross-market-rf-e2e-2026-10-08/executions/CN-688012/sid_discover.py", "semi_annual_report", "2026"], "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"}}
+{"timestamp_utc": "2026-10-08T07:06:03.541667+00:00", "pid": 86232, "ppid": 16776, "event": "subprocess_spawn", "data": {"executable": null, "argv": "C:\\Miniconda\\python.exe -B -m src.company_wiki_adapter_cli discover --config config.json", "cwd": "C:/Users/郑曾波/Projects/StockInfoDLSimple/v2-clean-rewrite"}}
+{"timestamp_utc": "2026-10-08T07:06:04.721377+00:00", "pid": 86232, "ppid": 16776, "event": "python_exit", "data": {}}

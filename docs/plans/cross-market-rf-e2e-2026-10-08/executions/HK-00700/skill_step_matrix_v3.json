@@ -1,0 +1,178 @@
+{
+  "schema_version": "1.0",
+  "skill_root": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+  "as_of_date": "2026-10-08",
+  "steps": [
+    {
+      "step": "0",
+      "name": "Nine-dimensional coverage",
+      "status": "done",
+      "evidence": "input.json:research_coverage; six model-linked, three explicit gaps",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "implemented_pending_independent_review"
+    },
+    {
+      "step": "1",
+      "name": "Freeze information set",
+      "status": "done",
+      "evidence": "before.json; dated original captures; as_of2026-10-08; no future FY actuals",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_claim_binding_index.json"
+      ],
+      "v3_status": "done_with_explicit_publication_uncertainty"
+    },
+    {
+      "step": "1A",
+      "name": "Management communications and targets",
+      "status": "partial",
+      "evidence": "communication_coverage.json; four checked categories; call/fullannouncement interval unavailable; no absent-target assertion",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "partial_supply_communication_canonical_processing"
+    },
+    {
+      "step": "1B",
+      "name": "Independent reference and route comparison",
+      "status": "done_with_gaps",
+      "evidence": "model_research_decisions.json; primary NetEase release; historical2022 contraction; candidate identity models rejected explicitly for unavailable denominators",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "implemented_pending_independent_review"
+    },
+    {
+      "step": "2",
+      "name": "History and base",
+      "status": "done",
+      "evidence": "fact_checks.json; FY2024 and2025 separate audited notes reconcile all five curves; FY2021–25 history",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "implemented_pending_independent_review"
+    },
+    {
+      "step": "3",
+      "name": "Register sources and parameters",
+      "status": "done",
+      "evidence": "actual RF source-preparation→FF→CWP pathless refs; capture/raw/claim/parameter binding; 51 parameters and69 claims",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "partial_supply_communication_canonical_processing"
+    },
+    {
+      "step": "4",
+      "name": "Split revenue curves",
+      "status": "done",
+      "evidence": "Five exact economic streams; Games+Social reconcile VAS; precise domestic/overseas split unavailable, not invented",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "implemented_pending_independent_review"
+    },
+    {
+      "step": "5",
+      "name": "Recognized revenue",
+      "status": "done",
+      "evidence": "Note2.22 PDF165–168 policies; true mixed metadata and already-recognized direct_growth; MAIN minimal extension green; no artificial progress/gross assumption",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "implemented_pending_independent_review"
+    },
+    {
+      "step": "6",
+      "name": "Driver scenarios",
+      "status": "done_with_gaps",
+      "evidence": "45 distinct annual low/base/high assumptions; missing eligible operating denominators disclosed; Fallback reduces explicit-model confidence",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "implemented_pending_independent_review"
+    },
+    {
+      "step": "6A",
+      "name": "Causal revenue driver tree",
+      "status": "done",
+      "evidence": "Five roots map actual Base parameters; analyst allocation weight1 each; real contrary nodes Games/Social/FBS; Marketing/Others data-gap counterevidence",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "implemented_pending_independent_review"
+    },
+    {
+      "step": "7",
+      "name": "Aggregate and bridge",
+      "status": "done",
+      "evidence": "delivery_verification.json independent arithmetic, total/CAGR/delta, all paths ordered; no doublecount or rounded gaming geography fake bridge",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "implemented_pending_independent_review"
+    },
+    {
+      "step": "8",
+      "name": "Sensitivity and theme",
+      "status": "done",
+      "evidence": "15 Base assumptions all tested±3percentagepoints; no requested separate theme, N/A",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "implemented_pending_independent_review"
+    },
+    {
+      "step": "9",
+      "name": "Confidence",
+      "status": "done",
+      "evidence": "Actual formal runtime confidence/gaps; not accuracy probability; no synthetic historical backtest credit",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "implemented_pending_independent_review"
+    },
+    {
+      "step": "10",
+      "name": "Validate and deliver",
+      "status": "done",
+      "evidence": "template/lint/hash/validate-only/forecast; strong input-required rederive; same-result Markdown; TRUST_BOUNDARY.md",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "implemented_pending_independent_review"
+    },
+    {
+      "step": "11",
+      "name": "Freeze and backtest",
+      "status": "done_freeze_evaluation_not_applicable",
+      "evidence": "snapshot-v2.json immutable; strong snapshot validation; no FY2026–2028 actuals available, evaluate N/A",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "implemented_pending_independent_review"
+    }
+  ],
+  "supply_chain_status": "partial: Dayu bounded financial acquisition failed, supplemental route not mislabeled; CWP Worker narrative not run",
+  "audit_status": "Independent reviewer pending, execution checks are not self acceptance",
+  "version": "v3",
+  "status": "partial_pending_independent_review",
+  "research_output_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3"
+}

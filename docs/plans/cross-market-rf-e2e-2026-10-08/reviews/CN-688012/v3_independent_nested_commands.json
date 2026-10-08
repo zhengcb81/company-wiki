@@ -1,0 +1,89 @@
+[
+  {
+    "command": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+      "--company-wiki-catalog-config",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml"
+    ],
+    "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+    "started_at": "2026-10-08T08:47:18.391121+00:00",
+    "ended_at": "2026-10-08T08:47:22.140643+00:00",
+    "elapsed_seconds": 3.749519800010603,
+    "returncode": 0,
+    "stdout_bytes": 4608,
+    "stdout_sha256": "9e8bc7582a794cfc4842041dc890904aee158501f2fc2372fa0ed9663033ea0f",
+    "stderr_bytes": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "command": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.source_reader_cli",
+      "--config",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "--document-id",
+      "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "--source-id",
+      "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "--content-sha256",
+      "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "--purpose",
+      "filing_reuse"
+    ],
+    "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "started_at": "2026-10-08T08:47:22.145902+00:00",
+    "ended_at": "2026-10-08T08:47:22.851121+00:00",
+    "elapsed_seconds": 0.7052212999988114,
+    "returncode": 0,
+    "stdout_bytes": 3149962,
+    "stdout_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+    "stderr_bytes": 1608,
+    "stderr_sha256": "11f2f656d37dfaa65748710470c72a641249d1b7e3ba6c4d1e248b9de1880585"
+  },
+  {
+    "command": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\v3\\input.json",
+      "--output",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\v3\\forecast.json",
+      "--markdown",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\v3\\forecast.md"
+    ],
+    "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\v3",
+    "started_at": "2026-10-08T08:47:23.190100+00:00",
+    "ended_at": "2026-10-08T08:47:23.736078+00:00",
+    "elapsed_seconds": 0.5459801999968477,
+    "returncode": 0,
+    "stdout_bytes": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_bytes": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "command": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\publication_registry.py",
+      "audit",
+      "--result",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\forecast.json",
+      "--result",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\snapshot.json"
+    ],
+    "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+    "started_at": "2026-10-08T08:47:23.767502+00:00",
+    "ended_at": "2026-10-08T08:47:23.924791+00:00",
+    "elapsed_seconds": 0.15729070000816137,
+    "returncode": 0,
+    "stdout_bytes": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_bytes": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

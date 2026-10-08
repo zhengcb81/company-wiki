@@ -1,0 +1,87 @@
+{
+  "coverage": [
+    {
+      "category": "latest_annual_filing",
+      "status": "checked",
+      "source_ids": [
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "checked_date": "2026-10-08",
+      "conclusion": "FY2025 audited annual and exact Note6(b), accounting and management discussion read. Overseas10bnUSD is a historical achievement, not future recognized-revenue guidance.",
+      "material_revenue_target_ids": []
+    },
+    {
+      "category": "latest_results_release",
+      "status": "checked",
+      "source_ids": [
+        "tencent_results_2q2026",
+        "tencent_h1_2026_official"
+      ],
+      "checked_date": "2026-10-08",
+      "conclusion": "Latest announced Q2/H1 2026 results read. AI application usage/willingness and GPU procurement are qualitative execution statements; no numeric recognized-revenue target entered.",
+      "material_revenue_target_ids": []
+    },
+    {
+      "category": "latest_earnings_call",
+      "status": "not_available",
+      "source_ids": [],
+      "checked_date": "2026-10-08",
+      "conclusion": "No latest call transcript read; do not infer absence of management targets from missing call.",
+      "material_revenue_target_ids": [],
+      "rationale": "Exact FF FY2026/Q2 companion unavailable at zero cost and official webcast404; neither route yields call body.",
+      "search_description": "latest_earnings_call Tencent official results/calendar/announcements and FF exact period reviewed, as-of2026-10-08; limits described in rationale.",
+      "search_event": {
+        "query_scope": "latest_earnings_call Tencent official results/calendar/announcements and FF exact period, as-of2026-10-08",
+        "query_time": "2026-10-08T07:19:04.198674+00:00",
+        "event_ids": [
+          "ff_latest_companion.response.json",
+          "web:turn233view0"
+        ],
+        "generated_by": "/root/rf_hk_execution",
+        "event_sha256": "a85251a8197e9674e901dd912a2ecb5be1c8ee342690b7669aec825bf42c5807"
+      }
+    },
+    {
+      "category": "latest_investor_presentation",
+      "status": "checked",
+      "source_ids": [
+        "tencent_corporate_overview_sep2026"
+      ],
+      "checked_date": "2026-10-08",
+      "conclusion": "Latest dated presentation linked in official investor kit is September16 Corporate Overview, captured/read24pages. Same original also covers strategy; this does not claim the unavailable August12 Q2 earnings deck was read.",
+      "material_revenue_target_ids": []
+    },
+    {
+      "category": "latest_strategy_communication",
+      "status": "checked",
+      "source_ids": [
+        "tencent_corporate_overview_sep2026"
+      ],
+      "checked_date": "2026-10-08",
+      "conclusion": "September corporate overview read: GPU procurement/AI deployment/market education and monetization mechanisms; qualitative strategy is not a quantified revenue target.",
+      "material_revenue_target_ids": []
+    },
+    {
+      "category": "material_announcements_since_last_filing",
+      "status": "not_available",
+      "source_ids": [],
+      "checked_date": "2026-10-08",
+      "conclusion": "Recent official index reviewed but entire interval April9–October8 not available in first-page body.",
+      "material_revenue_target_ids": [],
+      "rationale": "Partial official index onlySeptember7–October7 cannot prove exhaustive management targets or material filings coverage. No absent-target conclusion.",
+      "search_description": "material_announcements_since_last_filing Tencent official results/calendar/announcements and FF exact period reviewed, as-of2026-10-08; limits described in rationale.",
+      "search_event": {
+        "query_scope": "material_announcements_since_last_filing Tencent official results/calendar/announcements and FF exact period, as-of2026-10-08",
+        "query_time": "2026-10-08T07:19:04.198722+00:00",
+        "event_ids": [
+          "web:turn211view1",
+          "supplemental_capture_receipts.json:tencent_announcements_index"
+        ],
+        "generated_by": "/root/rf_hk_execution",
+        "event_sha256": "3d2e353ecee6d206a3b3bdc98846454b67f15e793a3c6f439b42d051d67b4d2c"
+      }
+    }
+  ],
+  "management_targets": [],
+  "ledger_scope": "Latest September official investor presentation and strategy are same original. No quantified recognized-revenue guidance identified in read originals; call/fullannouncementinterval still unavailable, not asserted absent."
+}

@@ -1,0 +1,4 @@
+error: 2 validation problem(s) found:
+[sources]
+  - unsupported source_type for semi_wfe_20260714: industry_primary
+  - gate could not complete: KeyError: 'industry_primary'

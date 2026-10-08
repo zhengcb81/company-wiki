@@ -1,0 +1,192 @@
+[
+  {
+    "dimension": "company_foundation",
+    "status": "modeled_driver",
+    "conclusion": "Consolidated external revenue, China-heavy physical equipment portfolio; acquired CMP is a new perimeter.",
+    "revenue_mechanism": "Consolidated external revenue, China-heavy physical equipment portfolio; acquired CMP is a new perimeter.",
+    "rationale": "Supported mechanisms map to actual base path; numerical magnitudes are conditional analyst assumptions. Short history, no hard throughput capacity and composite timing are disclosed. Official September10 site/overseas/supply-chain replies read; plant area and cumulative overseas deliveries are not annual recognized revenue.",
+    "parameter_ids": [
+      "reported_total",
+      "equipment_base",
+      "equipment_units_base_2026",
+      "equipment_units_base_2027",
+      "equipment_units_base_2028",
+      "equipment_unit_revenue_base_2026",
+      "equipment_unit_revenue_base_2027",
+      "equipment_unit_revenue_base_2028",
+      "cmp_revenue_base_2026",
+      "cmp_revenue_base_2027",
+      "cmp_revenue_base_2028"
+    ],
+    "source_ids": [
+      "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "amec_sse_results_qa_20260910"
+    ]
+  },
+  {
+    "dimension": "growth_curve",
+    "status": "modeled_driver",
+    "conclusion": "Mature etch plus commercializing film/CMP. Three annual historical totals are insufficient to estimate a full cycle; no historical statistical accuracy claim.",
+    "revenue_mechanism": "Mature etch plus commercializing film/CMP. Three annual historical totals are insufficient to estimate a full cycle; no historical statistical accuracy claim.",
+    "rationale": "Supported mechanisms map to actual base path; numerical magnitudes are conditional analyst assumptions. Short history, no hard throughput capacity and composite timing are disclosed. Official September10 site/overseas/supply-chain replies read; plant area and cumulative overseas deliveries are not annual recognized revenue.",
+    "parameter_ids": [
+      "equipment_units_base_2026",
+      "equipment_units_base_2027",
+      "equipment_units_base_2028",
+      "equipment_unit_revenue_base_2026",
+      "equipment_unit_revenue_base_2027",
+      "equipment_unit_revenue_base_2028",
+      "cmp_revenue_base_2026",
+      "cmp_revenue_base_2027",
+      "cmp_revenue_base_2028"
+    ],
+    "source_ids": [
+      "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "amec_sse_results_qa_20260910"
+    ]
+  },
+  {
+    "dimension": "industry_market",
+    "status": "modeled_driver",
+    "conclusion": "Outside WFE 23.1%/21.8%/14.1% reference does not mechanically identify AMEC growth; China moderation is counterevidence.",
+    "revenue_mechanism": "Outside WFE 23.1%/21.8%/14.1% reference does not mechanically identify AMEC growth; China moderation is counterevidence.",
+    "rationale": "Supported mechanisms map to actual base path; numerical magnitudes are conditional analyst assumptions. Short history, no hard throughput capacity and composite timing are disclosed. Official September10 site/overseas/supply-chain replies read; plant area and cumulative overseas deliveries are not annual recognized revenue.",
+    "parameter_ids": [
+      "equipment_units_base_2026",
+      "equipment_units_base_2027",
+      "equipment_units_base_2028",
+      "equipment_unit_revenue_base_2026",
+      "equipment_unit_revenue_base_2027",
+      "equipment_unit_revenue_base_2028"
+    ],
+    "source_ids": [
+      "semi_wfe_20260714",
+      "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+    ]
+  },
+  {
+    "dimension": "competition",
+    "status": "modeled_driver",
+    "conclusion": "Client discounts and international peer technology competition constrain weighted price; no precise future market share invented.",
+    "revenue_mechanism": "Client discounts and international peer technology competition constrain weighted price; no precise future market share invented.",
+    "rationale": "Supported mechanisms map to actual base path; numerical magnitudes are conditional analyst assumptions. Short history, no hard throughput capacity and composite timing are disclosed. Official September10 site/overseas/supply-chain replies read; plant area and cumulative overseas deliveries are not annual recognized revenue.",
+    "parameter_ids": [
+      "equipment_unit_revenue_base_2026",
+      "equipment_unit_revenue_base_2027",
+      "equipment_unit_revenue_base_2028"
+    ],
+    "source_ids": [
+      "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "amec_sse_results_qa_20260910"
+    ]
+  },
+  {
+    "dimension": "capacity",
+    "status": "modeled_driver",
+    "conclusion": "1240 sold vs1660 produced and1010 inventory chambers in FY2025; inventory is not infinite immediately acceptable capacity. No measured FY2026–28 hard capacity ceiling.",
+    "revenue_mechanism": "1240 sold vs1660 produced and1010 inventory chambers in FY2025; inventory is not infinite immediately acceptable capacity. No measured FY2026–28 hard capacity ceiling.",
+    "rationale": "Supported mechanisms map to actual base path; numerical magnitudes are conditional analyst assumptions. Short history, no hard throughput capacity and composite timing are disclosed. Official September10 site/overseas/supply-chain replies read; plant area and cumulative overseas deliveries are not annual recognized revenue.",
+    "parameter_ids": [
+      "equipment_units_base_2026",
+      "equipment_units_base_2027",
+      "equipment_units_base_2028",
+      "equipment_unit_revenue_base_2026",
+      "equipment_unit_revenue_base_2027",
+      "equipment_unit_revenue_base_2028"
+    ],
+    "source_ids": [
+      "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "amec_sse_results_qa_20260910"
+    ]
+  },
+  {
+    "dimension": "technology",
+    "status": "modeled_driver",
+    "conclusion": "H1 film/ICP repeat orders and validation expand process coverage; alpha/beta validation is not guaranteed recognized sales.",
+    "revenue_mechanism": "H1 film/ICP repeat orders and validation expand process coverage; alpha/beta validation is not guaranteed recognized sales.",
+    "rationale": "Supported mechanisms map to actual base path; numerical magnitudes are conditional analyst assumptions. Short history, no hard throughput capacity and composite timing are disclosed. Official September10 site/overseas/supply-chain replies read; plant area and cumulative overseas deliveries are not annual recognized revenue.",
+    "parameter_ids": [
+      "equipment_units_base_2026",
+      "equipment_units_base_2027",
+      "equipment_units_base_2028",
+      "equipment_unit_revenue_base_2026",
+      "equipment_unit_revenue_base_2027",
+      "equipment_unit_revenue_base_2028",
+      "cmp_revenue_base_2026",
+      "cmp_revenue_base_2027",
+      "cmp_revenue_base_2028"
+    ],
+    "source_ids": [
+      "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "amec_sse_results_qa_20260910"
+    ]
+  },
+  {
+    "dimension": "policy",
+    "status": "modeled_driver",
+    "conclusion": "Export restrictions and critical component availability can delay accepted output; low case includes disruption, no unsupported legal-rule forecast.",
+    "revenue_mechanism": "Export restrictions and critical component availability can delay accepted output; low case includes disruption, no unsupported legal-rule forecast.",
+    "rationale": "Supported mechanisms map to actual base path; numerical magnitudes are conditional analyst assumptions. Short history, no hard throughput capacity and composite timing are disclosed. Official September10 site/overseas/supply-chain replies read; plant area and cumulative overseas deliveries are not annual recognized revenue.",
+    "parameter_ids": [
+      "equipment_units_base_2026",
+      "equipment_units_base_2027",
+      "equipment_units_base_2028",
+      "equipment_unit_revenue_base_2026",
+      "equipment_unit_revenue_base_2027",
+      "equipment_unit_revenue_base_2028"
+    ],
+    "source_ids": [
+      "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "amec_sse_results_qa_20260910"
+    ]
+  },
+  {
+    "dimension": "customers",
+    "status": "modeled_driver",
+    "conclusion": "Customer A39.99% FY2025 vs22.15% FY2024; client capex concentration raises low-case risk.",
+    "revenue_mechanism": "Customer A39.99% FY2025 vs22.15% FY2024; client capex concentration raises low-case risk.",
+    "rationale": "Supported mechanisms map to actual base path; numerical magnitudes are conditional analyst assumptions. Short history, no hard throughput capacity and composite timing are disclosed. Official September10 site/overseas/supply-chain replies read; plant area and cumulative overseas deliveries are not annual recognized revenue.",
+    "parameter_ids": [
+      "equipment_units_base_2026",
+      "equipment_units_base_2027",
+      "equipment_units_base_2028",
+      "equipment_unit_revenue_base_2026",
+      "equipment_unit_revenue_base_2027",
+      "equipment_unit_revenue_base_2028"
+    ],
+    "source_ids": [
+      "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "amec_sse_results_qa_20260910"
+    ]
+  },
+  {
+    "dimension": "demand",
+    "status": "modeled_driver",
+    "conclusion": "Chamber acceptance drives equipment; installed fleet supports residual spares/services but no measured fleet or attach rate.",
+    "revenue_mechanism": "Chamber acceptance drives equipment; installed fleet supports residual spares/services but no measured fleet or attach rate.",
+    "rationale": "Supported mechanisms map to actual base path; numerical magnitudes are conditional analyst assumptions. Short history, no hard throughput capacity and composite timing are disclosed. Official September10 site/overseas/supply-chain replies read; plant area and cumulative overseas deliveries are not annual recognized revenue.",
+    "parameter_ids": [
+      "equipment_units_base_2026",
+      "equipment_units_base_2027",
+      "equipment_units_base_2028",
+      "equipment_unit_revenue_base_2026",
+      "equipment_unit_revenue_base_2027",
+      "equipment_unit_revenue_base_2028",
+      "aftermarket_revenue_base_2026",
+      "aftermarket_revenue_base_2027",
+      "aftermarket_revenue_base_2028"
+    ],
+    "source_ids": [
+      "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "amec_sse_results_qa_20260910"
+    ]
+  }
+]

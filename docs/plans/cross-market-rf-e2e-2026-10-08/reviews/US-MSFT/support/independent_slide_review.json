@@ -1,0 +1,138 @@
+{
+  "source_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+  "method": "Independent view_image of every original image1..22; fresh official OOXML media bytes matched all inspected originals. No OCR claims.",
+  "slides": [
+    {
+      "slide": 1,
+      "image": "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/ppt_images/image1.png",
+      "status": "PASS",
+      "review": "Title: FY27 Segments and Investor Metrics, September 2026."
+    },
+    {
+      "slide": 2,
+      "image": "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/ppt_images/image2.png",
+      "status": "PASS",
+      "review": "Forward-looking statement disclaimer."
+    },
+    {
+      "slide": 3,
+      "image": "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/ppt_images/image3.png",
+      "status": "PASS",
+      "review": "Agenda and rounding/prior-period comparison conventions."
+    },
+    {
+      "slide": 4,
+      "image": "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/ppt_images/image4.png",
+      "status": "PASS",
+      "review": "FY27 reporting changes from three legacy segments to Agents and Infra / Devices and Consumer."
+    },
+    {
+      "slide": 5,
+      "image": "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/ppt_images/image5.png",
+      "status": "PASS",
+      "review": "Economic rationale: pure consumption Azure, developer/security in M365, business-process industry solutions, combined advertising."
+    },
+    {
+      "slide": 6,
+      "image": "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/ppt_images/image6.png",
+      "status": "PASS",
+      "review": "Segment-change divider."
+    },
+    {
+      "slide": 7,
+      "image": "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/ppt_images/image7.png",
+      "status": "PASS",
+      "review": "Agents and Infra product transfers: GitHub/developer/security to M365, healthcare/life sciences to industry solutions, license aggregation, frontier/support rename."
+    },
+    {
+      "slide": 8,
+      "image": "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/ppt_images/image8.png",
+      "status": "PASS",
+      "review": "Devices and Consumer transfers: LinkedIn Marketing/Premium to search and advertising; Xbox unchanged; Windows/devices with Other."
+    },
+    {
+      "slide": 9,
+      "image": "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/ppt_images/image9.png",
+      "status": "PASS",
+      "review": "Full legacy-to-new segment map."
+    },
+    {
+      "slide": 10,
+      "image": "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/ppt_images/image10.png",
+      "status": "PASS",
+      "review": "Metric-change divider."
+    },
+    {
+      "slide": 11,
+      "image": "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/ppt_images/image11.png",
+      "status": "PASS",
+      "review": "M365 seat/developer and advertising ex-TAC metric perimeter changes."
+    },
+    {
+      "slide": 12,
+      "image": "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/ppt_images/image12.png",
+      "status": "PASS",
+      "review": "Complete new investor metric grouping."
+    },
+    {
+      "slide": 13,
+      "image": "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/ppt_images/image13.png",
+      "status": "PASS",
+      "review": "Definitions: bookings/RPO are not recognized revenue; Microsoft Cloud excludes consumer; paid seats are period-end; Azure consumption; ex-TAC is a different KPI."
+    },
+    {
+      "slide": 14,
+      "image": "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/ppt_images/image14.png",
+      "status": "PASS",
+      "review": "History divider."
+    },
+    {
+      "slide": 15,
+      "image": "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/ppt_images/image15.png",
+      "status": "PASS",
+      "review": "Restated reporting groups FY25 Agents218783 Devices62941; FY26 Agents268127 Devices63712."
+    },
+    {
+      "slide": 16,
+      "image": "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/ppt_images/image16.png",
+      "status": "PASS",
+      "review": "Old reported three-segment totals FY25 120810/106265/54649, FY26 139996/137791/54052; company totals unchanged."
+    },
+    {
+      "slide": 17,
+      "image": "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/ppt_images/image17.png",
+      "status": "PASS",
+      "review": "Eight mutually exclusive external product streams with FY25/FY26 annual and quarterly revenue, USD million. Other absorbed in Windows/devices and licensing."
+    },
+    {
+      "slide": 18,
+      "image": "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/ppt_images/image18.png",
+      "status": "PASS",
+      "review": "Restated investor metrics: annual Azure40%; M365 commercial18% reported/15%CC, paid seats7%; category metrics must retain their own perimeter."
+    },
+    {
+      "slide": 19,
+      "image": "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/ppt_images/image19.png",
+      "status": "PASS",
+      "review": "Guidance divider."
+    },
+    {
+      "slide": 20,
+      "image": "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/ppt_images/image20.png",
+      "status": "PASS",
+      "review": "Mechanical reclassification of July29 Q1 guidance: total89.85-90.95B unchanged, Agents75.15-75.75B, Devices14.7-15.2B; FX and non-revenue guidance retain limits."
+    },
+    {
+      "slide": 21,
+      "image": "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/ppt_images/image21.png",
+      "status": "PASS",
+      "review": "Adjusted FY27Q1 Azure44-45%CC, M365 commercial17%CC /18%CC adjusted; qualitative licensing/industry/ad/Xbox/Windows guidance retained without invented midpoints."
+    },
+    {
+      "slide": 22,
+      "image": "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/ppt_images/image22.png",
+      "status": "PASS",
+      "review": "Copyright/closing."
+    }
+  ]
+}

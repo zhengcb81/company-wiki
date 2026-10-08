@@ -1,0 +1,91 @@
+{
+  "recorded_at": "2026-10-08T07:29:47.887451+00:00",
+  "timestamp_precision": "Tool reference IDs preserve action ordering; journal entry time is recording time, not fabricated exact browser execution time. Grouped backfill after actual research; streamed HTTP captures have exact independently logged timestamps.",
+  "actions": [
+    {
+      "action": "Tencent official results/investors latest disclosures",
+      "source_urls": [
+        "https://www.tencent.com/investors/results/",
+        "https://www.tencent.com/Investors/"
+      ],
+      "tool_reference_ids": [
+        "turn207view0",
+        "turn207view1",
+        "turn229view1"
+      ]
+    },
+    {
+      "action": "Latest official Q2/H1 financial original and releases",
+      "source_urls": [
+        "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+        "https://www.tencent.com/wp-content/uploads/2026/08/Tencent-Announces-2026-Second-Quarter-Results.pdf",
+        "https://www.tencent.com/wp-content/uploads/2026/08/E700_IRA.pdf"
+      ],
+      "tool_reference_ids": [
+        "turn208view0",
+        "turn208view3",
+        "turn210view1",
+        "turn220view1",
+        "turn230view0",
+        "turn230view1"
+      ]
+    },
+    {
+      "action": "Official presentation and strategy originals",
+      "source_urls": [
+        "https://www.tencent.com/investors/investor-kit-calendar/",
+        "https://www.tencent.com/wp-content/uploads/2026/09/Corporate-Overview-2Q26-20260916.pdf",
+        "https://static.www.tencent.com/website-2026-upload/2Q26-earnings-PPT_20260812_1800-88b183.pdf"
+      ],
+      "tool_reference_ids": [
+        "turn210view2",
+        "turn211view0",
+        "turn216view0",
+        "turn208view1"
+      ]
+    },
+    {
+      "action": "Official announcement index and board date",
+      "source_urls": [
+        "https://www.tencent.com/investors/announcements/",
+        "https://www.tencent.com/wp-content/uploads/2026/09/E700_BM.pdf"
+      ],
+      "tool_reference_ids": [
+        "turn210view3",
+        "turn211view1",
+        "turn216view2"
+      ]
+    },
+    {
+      "action": "Independent primary NetEase comparator actual open",
+      "source_urls": [
+        "https://ir.netease.com/news-releases/news-release-details/netease-announces-second-quarter-and-interim-2026-unaudited"
+      ],
+      "tool_reference_ids": [
+        "turn225search2",
+        "turn229view0"
+      ]
+    },
+    {
+      "action": "Official call unavailable",
+      "source_urls": [
+        "https://webcast.tencent.com/fj2pa6"
+      ],
+      "tool_reference_ids": [
+        "turn208view2",
+        "turn233view0"
+      ]
+    },
+    {
+      "action": "Read-only announcement pagination probes unavailable",
+      "source_urls": [
+        "https://www.tencent.com/investors/announcements/?_paged=2",
+        "https://www.tencent.com/investors/announcements/?_news_years=2026&_all_news_months=august"
+      ],
+      "tool_reference_ids": [
+        "turn236view0",
+        "turn236view1"
+      ]
+    }
+  ]
+}

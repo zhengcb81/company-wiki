@@ -1,0 +1,1 @@
+{"verdict": "PARTIAL", "facts": 161, "claims": 77, "parameters": 42, "semantic_claim_fail": 16, "checks": 31, "findings": ["CN-01", "CN-02", "CN-03", "CN-04"], "input_sha256": "3dcce43a05deb2faf92236af8c1b979c07334a34d5b7debb30d25057ab611746"}

@@ -1,0 +1,869 @@
+[
+  {
+    "action": "official_index",
+    "requested_url": "https://www.tencent.com/investors/financial-reports/",
+    "final_url": "https://www.tencent.com/investors/financial-reports/",
+    "status": 200,
+    "accessed_at": "2026-10-08T07:46:37.106924+00:00",
+    "bytes": 188540,
+    "sha256": "58861ba68e0994c35dccd13534527a8a8bd8e310a596c35195337adde801ab68",
+    "content_type": "text/html; charset=UTF-8",
+    "links": [
+      {
+        "text": "Skip to main content",
+        "url": "https://www.tencent.com/investors/financial-reports/#main",
+        "parent_context": "Skip to main content Who we are Who we are Overview See how teamwork, leadership and global reach bring Tencent's vision and values to life. Our story Our management team Our vision & mission Back Who we are Who we are Overview See how teamwork, leadership and global reach bring Tencent's vision and values to life. Our story Our management team Our vision & mission Back What we create What we create Overview Discover the full range of products and services Tencent offers to consumers and businesses now, and what we’re planning for the future. For consumers For consumers Overview Weixin/WeChat Tencent Games Back For business For business Overview Tencent Cloud Marketing Solutions Back For the future Everything we create Back What we create What we create Overview Discover the full range of products and services Tencent offers to consumers and businesses now, and what we’re planning for the future. For consumers Weixin/WeChat Tencent Games For business Tencent Cloud Marketing Solutions For the future Everything we create Back Our actions Our actions Overview Tencent leverages technology to promote environmental sustainability, address social concerns, and support transparent corporate governance. Environmental Social Governance Reports Back Our actions Our actions Overview Tencent leverages technology to promote environmental sustainability, address social concerns, and support transparent corporate governance. Environmental Social Governance Reports Back Investors Investors Ov"
+      },
+      {
+        "text": "",
+        "url": "https://www.tencent.com",
+        "parent_context": ""
+      },
+      {
+        "text": "Who we are",
+        "url": "https://www.tencent.com/who-we-are/",
+        "parent_context": "Who we are Who we are Overview See how teamwork, leadership and global reach bring Tencent's vision and values to life. Our story Our management team Our vision & mission Back"
+      },
+      {
+        "text": "Overview",
+        "url": "https://www.tencent.com/who-we-are/who-we-are",
+        "parent_context": "Overview See how teamwork, leadership and global reach bring Tencent's vision and values to life."
+      },
+      {
+        "text": "Our story",
+        "url": "https://www.tencent.com/who-we-are/our-story",
+        "parent_context": "Our story"
+      },
+      {
+        "text": "Our management team",
+        "url": "https://www.tencent.com/our-team",
+        "parent_context": "Our management team"
+      },
+      {
+        "text": "Our vision & mission",
+        "url": "https://www.tencent.com/our-vision",
+        "parent_context": "Our vision & mission"
+      },
+      {
+        "text": "Who we are",
+        "url": "https://www.tencent.com/who-we-are/",
+        "parent_context": "Who we are Who we are Overview See how teamwork, leadership and global reach bring Tencent's vision and values to life. Our story Our management team Our vision & mission Back"
+      },
+      {
+        "text": "Overview",
+        "url": "https://www.tencent.com/who-we-are",
+        "parent_context": "Overview"
+      },
+      {
+        "text": "Our story",
+        "url": "https://www.tencent.com/who-we-are/our-story",
+        "parent_context": "Our story"
+      },
+      {
+        "text": "Our management team",
+        "url": "https://www.tencent.com/who-we-are/our-team",
+        "parent_context": "Our management team"
+      },
+      {
+        "text": "Our vision & mission",
+        "url": "https://www.tencent.com/who-we-are/our-vision",
+        "parent_context": "Our vision & mission"
+      },
+      {
+        "text": "What we create",
+        "url": "https://www.tencent.com/what-we-create/",
+        "parent_context": "What we create What we create Overview Discover the full range of products and services Tencent offers to consumers and businesses now, and what we’re planning for the future. For consumers For consumers Overview Weixin/WeChat Tencent Games Back For business For business Overview Tencent Cloud Marketing Solutions Back For the future Everything we create Back"
+      },
+      {
+        "text": "Overview",
+        "url": "https://www.tencent.com/what-we-create",
+        "parent_context": "Overview Discover the full range of products and services Tencent offers to consumers and businesses now, and what we’re planning for the future."
+      },
+      {
+        "text": "For consumers",
+        "url": "https://www.tencent.com/what-we-create/for-consumers",
+        "parent_context": "For consumers For consumers Overview Weixin/WeChat Tencent Games Back"
+      },
+      {
+        "text": "Overview",
+        "url": "https://www.tencent.com/what-we-create/for-consumers/",
+        "parent_context": "Overview"
+      },
+      {
+        "text": "Weixin/WeChat",
+        "url": "https://www.tencent.com/products/weixin-wechat/",
+        "parent_context": "Weixin/WeChat"
+      },
+      {
+        "text": "Tencent Games",
+        "url": "https://www.tencent.com/products/tencent-games/",
+        "parent_context": "Tencent Games"
+      },
+      {
+        "text": "For business",
+        "url": "https://www.tencent.com/what-we-create/for-business",
+        "parent_context": "For business For business Overview Tencent Cloud Marketing Solutions Back"
+      },
+      {
+        "text": "Overview",
+        "url": "https://www.tencent.com/what-we-create/for-business/",
+        "parent_context": "Overview"
+      },
+      {
+        "text": "Tencent Cloud",
+        "url": "https://www.tencent.com/products/tencent-cloud/",
+        "parent_context": "Tencent Cloud"
+      },
+      {
+        "text": "Marketing Solutions",
+        "url": "https://www.tencent.com/products/tencent-marketing-solution/",
+        "parent_context": "Marketing Solutions"
+      },
+      {
+        "text": "For the future",
+        "url": "https://www.tencent.com/what-we-create/for-the-future",
+        "parent_context": "For the future"
+      },
+      {
+        "text": "Everything we create",
+        "url": "https://www.tencent.com/what-we-create/everything-we-create",
+        "parent_context": "Everything we create"
+      },
+      {
+        "text": "What we create",
+        "url": "https://www.tencent.com/what-we-create/",
+        "parent_context": "What we create What we create Overview Discover the full range of products and services Tencent offers to consumers and businesses now, and what we’re planning for the future. For consumers Weixin/WeChat Tencent Games For business Tencent Cloud Marketing Solutions For the future Everything we create Back"
+      },
+      {
+        "text": "Overview",
+        "url": "https://www.tencent.com/what-we-create/",
+        "parent_context": "Overview"
+      },
+      {
+        "text": "For consumers",
+        "url": "https://www.tencent.com/what-we-create/for-consumers/",
+        "parent_context": "For consumers"
+      },
+      {
+        "text": "Weixin/WeChat",
+        "url": "https://www.tencent.com/products/weixin-wechat/",
+        "parent_context": "Weixin/WeChat"
+      },
+      {
+        "text": "Tencent Games",
+        "url": "https://www.tencent.com/products/tencent-games/",
+        "parent_context": "Tencent Games"
+      },
+      {
+        "text": "For business",
+        "url": "https://www.tencent.com/what-we-create/for-business/",
+        "parent_context": "For business"
+      },
+      {
+        "text": "Tencent Cloud",
+        "url": "https://www.tencent.com/products/tencent-cloud/",
+        "parent_context": "Tencent Cloud"
+      },
+      {
+        "text": "Marketing Solutions",
+        "url": "https://www.tencent.com/products/tencent-marketing-solution/",
+        "parent_context": "Marketing Solutions"
+      },
+      {
+        "text": "For the future",
+        "url": "https://www.tencent.com/what-we-create/for-the-future/",
+        "parent_context": "For the future"
+      },
+      {
+        "text": "Everything we create",
+        "url": "https://www.tencent.com/what-we-create/everything-we-create/",
+        "parent_context": "Everything we create"
+      },
+      {
+        "text": "Our actions",
+        "url": "https://www.tencent.com/our-actions/",
+        "parent_context": "Our actions Our actions Overview Tencent leverages technology to promote environmental sustainability, address social concerns, and support transparent corporate governance. Environmental Social Governance Reports Back"
+      },
+      {
+        "text": "Overview",
+        "url": "https://www.tencent.com/our-actions/",
+        "parent_context": "Overview Tencent leverages technology to promote environmental sustainability, address social concerns, and support transparent corporate governance."
+      },
+      {
+        "text": "Environmental",
+        "url": "https://www.tencent.com/our-actions/environmental/",
+        "parent_context": "Environmental"
+      },
+      {
+        "text": "Social",
+        "url": "https://www.tencent.com/our-actions/social/",
+        "parent_context": "Social"
+      },
+      {
+        "text": "Governance",
+        "url": "https://www.tencent.com/our-actions/governance/",
+        "parent_context": "Governance"
+      },
+      {
+        "text": "Reports",
+        "url": "https://www.tencent.com/our-actions/reports/",
+        "parent_context": "Reports"
+      },
+      {
+        "text": "Our actions",
+        "url": "https://www.tencent.com/our-actions/",
+        "parent_context": "Our actions Our actions Overview Tencent leverages technology to promote environmental sustainability, address social concerns, and support transparent corporate governance. Environmental Social Governance Reports Back"
+      },
+      {
+        "text": "Overview",
+        "url": "https://www.tencent.com/our-actions/",
+        "parent_context": "Overview"
+      },
+      {
+        "text": "Environmental",
+        "url": "https://www.tencent.com/our-actions/environmental/",
+        "parent_context": "Environmental"
+      },
+      {
+        "text": "Social",
+        "url": "https://www.tencent.com/our-actions/social/",
+        "parent_context": "Social"
+      },
+      {
+        "text": "Governance",
+        "url": "https://www.tencent.com/our-actions/governance/",
+        "parent_context": "Governance"
+      },
+      {
+        "text": "Reports",
+        "url": "https://www.tencent.com/our-actions/reports/",
+        "parent_context": "Reports"
+      },
+      {
+        "text": "Investors",
+        "url": "https://www.tencent.com/investors/",
+        "parent_context": "Investors Investors Overview Creating long-term value for investors with an open and pragmatic approach. Results & announcements Results & announcements Results Investor news Financial reports Announcements Back Investor kit & calendar Equity & bond information Shareholder information Our actions Our actions Overview Environmental Social Governance Reports Back Back"
+      },
+      {
+        "text": "Overview",
+        "url": "https://www.tencent.com/investors/",
+        "parent_context": "Overview Creating long-term value for investors with an open and pragmatic approach."
+      },
+      {
+        "text": "Results & announcements",
+        "url": "https://www.tencent.com/investors/",
+        "parent_context": "Results & announcements Results & announcements Results Investor news Financial reports Announcements Back"
+      },
+      {
+        "text": "Results",
+        "url": "https://www.tencent.com/investors/results/",
+        "parent_context": "Results"
+      },
+      {
+        "text": "Investor news",
+        "url": "https://www.tencent.com/investors/investor-news/",
+        "parent_context": "Investor news"
+      },
+      {
+        "text": "Financial reports",
+        "url": "https://www.tencent.com/investors/financial-reports/",
+        "parent_context": "Financial reports"
+      },
+      {
+        "text": "Announcements",
+        "url": "https://www.tencent.com/investors/announcements/",
+        "parent_context": "Announcements"
+      },
+      {
+        "text": "Investor kit & calendar",
+        "url": "https://www.tencent.com/investors/investor-kit-calendar/",
+        "parent_context": "Investor kit & calendar"
+      },
+      {
+        "text": "Equity & bond information",
+        "url": "https://www.tencent.com/investors/equity-bond-information/",
+        "parent_context": "Equity & bond information"
+      },
+      {
+        "text": "Shareholder information",
+        "url": "https://www.tencent.com/investors/shareholder-information/",
+        "parent_context": "Shareholder information"
+      },
+      {
+        "text": "Our actions",
+        "url": "https://www.tencent.com/our-actions/",
+        "parent_context": "Our actions Our actions Overview Environmental Social Governance Reports Back"
+      },
+      {
+        "text": "Overview",
+        "url": "https://www.tencent.com/our-actions/",
+        "parent_context": "Overview"
+      },
+      {
+        "text": "Environmental",
+        "url": "https://www.tencent.com/our-actions/environmental/",
+        "parent_context": "Environmental"
+      },
+      {
+        "text": "Social",
+        "url": "https://www.tencent.com/our-actions/social/",
+        "parent_context": "Social"
+      },
+      {
+        "text": "Governance",
+        "url": "https://www.tencent.com/our-actions/governance/",
+        "parent_context": "Governance"
+      },
+      {
+        "text": "Reports",
+        "url": "https://www.tencent.com/our-actions/reports/",
+        "parent_context": "Reports"
+      },
+      {
+        "text": "Investors",
+        "url": "https://www.tencent.com/investors/",
+        "parent_context": "Investors Investors Overview Creating long-term value for investors with an open and pragmatic approach. Results & announcements Results Investor news Financial reports Announcements Investor kit & calendar Equity & bond information Shareholder information Our actions Environmental Social Governance Reports Back"
+      },
+      {
+        "text": "Overview",
+        "url": "https://www.tencent.com/investors/",
+        "parent_context": "Overview"
+      },
+      {
+        "text": "Results",
+        "url": "https://www.tencent.com/investors/results/",
+        "parent_context": "Results"
+      },
+      {
+        "text": "Investor news",
+        "url": "https://www.tencent.com/investors/investor-news/",
+        "parent_context": "Investor news"
+      },
+      {
+        "text": "Financial reports",
+        "url": "https://www.tencent.com/investors/financial-reports/",
+        "parent_context": "Financial reports"
+      },
+      {
+        "text": "Announcements",
+        "url": "https://www.tencent.com/investors/announcements/",
+        "parent_context": "Announcements"
+      },
+      {
+        "text": "Investor kit & calendar",
+        "url": "https://www.tencent.com/investors/investor-kit-calendar/",
+        "parent_context": "Investor kit & calendar"
+      },
+      {
+        "text": "Equity & bond information",
+        "url": "https://www.tencent.com/investors/equity-bond-information/",
+        "parent_context": "Equity & bond information"
+      },
+      {
+        "text": "Shareholder information",
+        "url": "https://www.tencent.com/investors/shareholder-information/",
+        "parent_context": "Shareholder information"
+      },
+      {
+        "text": "Our actions",
+        "url": "https://www.tencent.com/our-actions/",
+        "parent_context": "Our actions"
+      },
+      {
+        "text": "Environmental",
+        "url": "https://www.tencent.com/our-actions/environmental/",
+        "parent_context": "Environmental"
+      },
+      {
+        "text": "Social",
+        "url": "https://www.tencent.com/our-actions/social/",
+        "parent_context": "Social"
+      },
+      {
+        "text": "Governance",
+        "url": "https://www.tencent.com/our-actions/governance/",
+        "parent_context": "Governance"
+      },
+      {
+        "text": "Reports",
+        "url": "https://www.tencent.com/our-actions/reports/",
+        "parent_context": "Reports"
+      },
+      {
+        "text": "Newsroom",
+        "url": "https://www.tencent.com/newsroom/",
+        "parent_context": "Newsroom Newsroom Overview Stay up to date on all the latest news and events from Tencent. All news Media resources Events news Back"
+      },
+      {
+        "text": "Overview",
+        "url": "https://www.tencent.com/newsroom/",
+        "parent_context": "Overview Stay up to date on all the latest news and events from Tencent."
+      },
+      {
+        "text": "All news",
+        "url": "https://www.tencent.com/newsroom/all-news/",
+        "parent_context": "All news"
+      },
+      {
+        "text": "Media resources",
+        "url": "https://www.tencent.com/newsroom/media-resources/",
+        "parent_context": "Media resources"
+      },
+      {
+        "text": "Events news",
+        "url": "https://www.tencent.com/newsroom/events/",
+        "parent_context": "Events news"
+      },
+      {
+        "text": "Newsroom",
+        "url": "https://www.tencent.com/newsroom/",
+        "parent_context": "Newsroom Newsroom Overview Stay up to date on all the latest news and events from Tencent. All news Media resources Events news Back"
+      },
+      {
+        "text": "Overview",
+        "url": "https://www.tencent.com/newsroom/",
+        "parent_context": "Overview"
+      },
+      {
+        "text": "All news",
+        "url": "https://www.tencent.com/newsroom/all-news/",
+        "parent_context": "All news"
+      },
+      {
+        "text": "Media resources",
+        "url": "https://www.tencent.com/newsroom/media-resources",
+        "parent_context": "Media resources"
+      },
+      {
+        "text": "Events news",
+        "url": "https://www.tencent.com/newsroom/events/",
+        "parent_context": "Events news"
+      },
+      {
+        "text": "Careers",
+        "url": "https://careers.tencent.com/en-us/home.html",
+        "parent_context": "Careers"
+      },
+      {
+        "text": "简",
+        "url": "https://www.tencent.com/zh-cn/investors/financial-reports/",
+        "parent_context": "简"
+      },
+      {
+        "text": "EN",
+        "url": "https://www.tencent.com/investors/financial-reports/",
+        "parent_context": "EN"
+      },
+      {
+        "text": "繁",
+        "url": "https://www.tencent.com/zh-hk/investors/financial-reports/",
+        "parent_context": "繁"
+      },
+      {
+        "text": "",
+        "url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+        "parent_context": ""
+      },
+      {
+        "text": "2026 Interim Report",
+        "url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+        "parent_context": "2026 Interim Report"
+      },
+      {
+        "text": "View",
+        "url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+        "parent_context": "2026 Interim Report View"
+      },
+      {
+        "text": "",
+        "url": "https://static.www.tencent.com/uploads/2026/04/09/62d786fcf3d3c8cb7e54791ee95439ac.pdf",
+        "parent_context": ""
+      },
+      {
+        "text": "2025 Annual Report",
+        "url": "https://static.www.tencent.com/uploads/2026/04/09/62d786fcf3d3c8cb7e54791ee95439ac.pdf",
+        "parent_context": "2025 Annual Report"
+      },
+      {
+        "text": "View",
+        "url": "https://static.www.tencent.com/uploads/2026/04/09/62d786fcf3d3c8cb7e54791ee95439ac.pdf",
+        "parent_context": "2025 Annual Report View"
+      },
+      {
+        "text": "",
+        "url": "https://static.www.tencent.com/uploads/2025/08/26/d1d2fb988f5e910e254b3abb41dadb0f.pdf",
+        "parent_context": ""
+      },
+      {
+        "text": "2025 Interim Report",
+        "url": "https://static.www.tencent.com/uploads/2025/08/26/d1d2fb988f5e910e254b3abb41dadb0f.pdf",
+        "parent_context": "2025 Interim Report"
+      },
+      {
+        "text": "View",
+        "url": "https://static.www.tencent.com/uploads/2025/08/26/d1d2fb988f5e910e254b3abb41dadb0f.pdf",
+        "parent_context": "2025 Interim Report View"
+      },
+      {
+        "text": "",
+        "url": "https://static.www.tencent.com/uploads/2025/04/08/1132b72b565389d1b913aea60a648d73.pdf",
+        "parent_context": ""
+      },
+      {
+        "text": "2024 Annual Report",
+        "url": "https://static.www.tencent.com/uploads/2025/04/08/1132b72b565389d1b913aea60a648d73.pdf",
+        "parent_context": "2024 Annual Report"
+      },
+      {
+        "text": "View",
+        "url": "https://static.www.tencent.com/uploads/2025/04/08/1132b72b565389d1b913aea60a648d73.pdf",
+        "parent_context": "2024 Annual Report View"
+      },
+      {
+        "text": "",
+        "url": "https://static.www.tencent.com/uploads/2024/08/27/b4be8f6abc923f2bce5fe6ee766648c8.pdf",
+        "parent_context": ""
+      },
+      {
+        "text": "2024 Interim Report",
+        "url": "https://static.www.tencent.com/uploads/2024/08/27/b4be8f6abc923f2bce5fe6ee766648c8.pdf",
+        "parent_context": "2024 Interim Report"
+      },
+      {
+        "text": "View",
+        "url": "https://static.www.tencent.com/uploads/2024/08/27/b4be8f6abc923f2bce5fe6ee766648c8.pdf",
+        "parent_context": "2024 Interim Report View"
+      },
+      {
+        "text": "",
+        "url": "https://static.www.tencent.com/uploads/2024/04/08/e95c902973fc282be3b3e285c6245281.pdf",
+        "parent_context": ""
+      },
+      {
+        "text": "2023 Annual Report",
+        "url": "https://static.www.tencent.com/uploads/2024/04/08/e95c902973fc282be3b3e285c6245281.pdf",
+        "parent_context": "2023 Annual Report"
+      },
+      {
+        "text": "View",
+        "url": "https://static.www.tencent.com/uploads/2024/04/08/e95c902973fc282be3b3e285c6245281.pdf",
+        "parent_context": "2023 Annual Report View"
+      },
+      {
+        "text": "",
+        "url": "https://static.www.tencent.com/uploads/2023/08/29/e52fe16910b6e500fabf46bf4011bfad.PDF",
+        "parent_context": ""
+      },
+      {
+        "text": "2023 Interim Report",
+        "url": "https://static.www.tencent.com/uploads/2023/08/29/e52fe16910b6e500fabf46bf4011bfad.PDF",
+        "parent_context": "2023 Interim Report"
+      },
+      {
+        "text": "View",
+        "url": "https://static.www.tencent.com/uploads/2023/08/29/e52fe16910b6e500fabf46bf4011bfad.PDF",
+        "parent_context": "2023 Interim Report View"
+      },
+      {
+        "text": "",
+        "url": "https://static.www.tencent.com/uploads/2023/04/06/214dce4c5312264800b20cfab64861ba.pdf",
+        "parent_context": ""
+      },
+      {
+        "text": "2022 Annual Report",
+        "url": "https://static.www.tencent.com/uploads/2023/04/06/214dce4c5312264800b20cfab64861ba.pdf",
+        "parent_context": "2022 Annual Report"
+      },
+      {
+        "text": "View",
+        "url": "https://static.www.tencent.com/uploads/2023/04/06/214dce4c5312264800b20cfab64861ba.pdf",
+        "parent_context": "2022 Annual Report View"
+      },
+      {
+        "text": "2",
+        "url": "https://www.tencent.com/investors/financial-reports/page/2/",
+        "parent_context": "1 2 3 … 6 Next »"
+      },
+      {
+        "text": "3",
+        "url": "https://www.tencent.com/investors/financial-reports/page/3/",
+        "parent_context": "1 2 3 … 6 Next »"
+      },
+      {
+        "text": "6",
+        "url": "https://www.tencent.com/investors/financial-reports/page/6/",
+        "parent_context": "1 2 3 … 6 Next »"
+      },
+      {
+        "text": "Next »",
+        "url": "https://www.tencent.com/investors/financial-reports/page/2/",
+        "parent_context": "1 2 3 … 6 Next »"
+      },
+      {
+        "text": "Privacy Policy",
+        "url": "https://www.tencent.com/privacy-policy/",
+        "parent_context": "By submitting this form, I confirm that I have read and agree to the Privacy Policy of this website."
+      },
+      {
+        "text": "Contact us",
+        "url": "https://www.tencent.com/contact/#contact-us",
+        "parent_context": "Contact us"
+      },
+      {
+        "text": "Home",
+        "url": "https://www.tencent.com/",
+        "parent_context": "Home"
+      },
+      {
+        "text": "Investors",
+        "url": "https://www.tencent.com/investors/",
+        "parent_context": "Investors"
+      },
+      {
+        "text": "",
+        "url": "https://www.tencent.com",
+        "parent_context": ""
+      },
+      {
+        "text": "",
+        "url": "https://www.linkedin.com/company/tencentglobal",
+        "parent_context": ""
+      },
+      {
+        "text": "",
+        "url": "https://twitter.com/TencentGlobal",
+        "parent_context": ""
+      },
+      {
+        "text": "",
+        "url": "https://www.tencent.com/investors/financial-reports/",
+        "parent_context": ""
+      },
+      {
+        "text": "Who we are",
+        "url": "https://www.tencent.com/who-we-are/",
+        "parent_context": "Who we are"
+      },
+      {
+        "text": "Our story",
+        "url": "https://www.tencent.com/who-we-are/our-story/",
+        "parent_context": "Our story"
+      },
+      {
+        "text": "Our management team",
+        "url": "https://www.tencent.com/who-we-are/our-team",
+        "parent_context": "Our management team"
+      },
+      {
+        "text": "Our vision and mission",
+        "url": "https://www.tencent.com/who-we-are/our-vision/",
+        "parent_context": "Our vision and mission"
+      },
+      {
+        "text": "What we create",
+        "url": "https://www.tencent.com/what-we-create/",
+        "parent_context": "What we create"
+      },
+      {
+        "text": "For consumers",
+        "url": "https://www.tencent.com/what-we-create/for-consumers/",
+        "parent_context": "For consumers"
+      },
+      {
+        "text": "For business",
+        "url": "https://www.tencent.com/what-we-create/for-business/",
+        "parent_context": "For business"
+      },
+      {
+        "text": "For the future",
+        "url": "https://www.tencent.com/what-we-create/for-the-future/",
+        "parent_context": "For the future"
+      },
+      {
+        "text": "Everything we create",
+        "url": "https://www.tencent.com/what-we-create/everything-we-create/",
+        "parent_context": "Everything we create"
+      },
+      {
+        "text": "Our actions",
+        "url": "https://www.tencent.com/our-actions/",
+        "parent_context": "Our actions"
+      },
+      {
+        "text": "Environmental",
+        "url": "https://www.tencent.com/our-actions/environmental",
+        "parent_context": "Environmental"
+      },
+      {
+        "text": "Social",
+        "url": "https://www.tencent.com/our-actions/social",
+        "parent_context": "Social"
+      },
+      {
+        "text": "Governance",
+        "url": "https://www.tencent.com/our-actions/governance",
+        "parent_context": "Governance"
+      },
+      {
+        "text": "Reports",
+        "url": "https://www.tencent.com/our-actions/reports/",
+        "parent_context": "Reports"
+      },
+      {
+        "text": "Investors",
+        "url": "https://www.tencent.com/investors/",
+        "parent_context": "Investors"
+      },
+      {
+        "text": "Results",
+        "url": "https://www.tencent.com/investors/results/",
+        "parent_context": "Results"
+      },
+      {
+        "text": "Investor news",
+        "url": "https://www.tencent.com/investors/investor-news/",
+        "parent_context": "Investor news"
+      },
+      {
+        "text": "Financial reports",
+        "url": "https://www.tencent.com/investors/financial-reports/",
+        "parent_context": "Financial reports"
+      },
+      {
+        "text": "Announcements",
+        "url": "https://www.tencent.com/investors/announcements/",
+        "parent_context": "Announcements"
+      },
+      {
+        "text": "Investor kit & calendar",
+        "url": "https://www.tencent.com/investors/investor-kit-calendar/",
+        "parent_context": "Investor kit & calendar"
+      },
+      {
+        "text": "Equity & bond information",
+        "url": "https://www.tencent.com/investors/equity-bond-information/",
+        "parent_context": "Equity & bond information"
+      },
+      {
+        "text": "Shareholder information",
+        "url": "https://www.tencent.com/investors/shareholder-information/",
+        "parent_context": "Shareholder information"
+      },
+      {
+        "text": "Newsroom",
+        "url": "https://www.tencent.com/newsroom/",
+        "parent_context": "Newsroom"
+      },
+      {
+        "text": "All news",
+        "url": "https://www.tencent.com/newsroom/all-news/",
+        "parent_context": "All news"
+      },
+      {
+        "text": "Media resources",
+        "url": "https://www.tencent.com/newsroom/media-resources/",
+        "parent_context": "Media resources"
+      },
+      {
+        "text": "Events",
+        "url": "https://www.tencent.com/newsroom/events/",
+        "parent_context": "Events"
+      },
+      {
+        "text": "Careers",
+        "url": "https://careers.tencent.com/en-us/home.html",
+        "parent_context": "Careers"
+      },
+      {
+        "text": "Contact",
+        "url": "https://www.tencent.com/contact/",
+        "parent_context": "Contact"
+      },
+      {
+        "text": "简",
+        "url": "https://www.tencent.com/zh-cn/investors/financial-reports/",
+        "parent_context": "简"
+      },
+      {
+        "text": "EN",
+        "url": "https://www.tencent.com/investors/financial-reports/",
+        "parent_context": "EN"
+      },
+      {
+        "text": "繁",
+        "url": "https://www.tencent.com/zh-hk/investors/financial-reports/",
+        "parent_context": "繁"
+      },
+      {
+        "text": "Service agreement",
+        "url": "https://www.tencent.com/term-of-service/",
+        "parent_context": "Service agreement"
+      },
+      {
+        "text": "Cookie policy",
+        "url": "https://www.tencent.com/cookie-policy/",
+        "parent_context": "Cookie policy"
+      },
+      {
+        "text": "Privacy policy",
+        "url": "https://www.tencent.com/privacy-policy/",
+        "parent_context": "Privacy policy"
+      },
+      {
+        "text": "Intellectual property rights",
+        "url": "https://ipr.tencent.com/",
+        "parent_context": "Intellectual property rights"
+      },
+      {
+        "text": "Legal statement",
+        "url": "https://www.tencent.com/legal-statement/",
+        "parent_context": "Legal statement"
+      },
+      {
+        "text": "Integrity policy",
+        "url": "https://www.tencent.com/integrity-policy/",
+        "parent_context": "Integrity policy"
+      },
+      {
+        "text": "Site map",
+        "url": "https://www.tencent.com/sitemap/",
+        "parent_context": "Site map"
+      },
+      {
+        "text": "粤网文[2023]2882-203号",
+        "url": "https://www.qq.com/culture.shtml",
+        "parent_context": "粤网文[2023]2882-203号"
+      },
+      {
+        "text": "粤B2-20090059-1",
+        "url": "https://beian.miit.gov.cn/",
+        "parent_context": "粤B2-20090059-1"
+      },
+      {
+        "text": "粤公网安备 44030502008569号",
+        "url": "https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030502008569",
+        "parent_context": "粤公网安备 44030502008569号"
+      },
+      {
+        "text": "营业执照",
+        "url": "https://h5.news.qq.com/static/business-license.html",
+        "parent_context": "营业执照"
+      },
+      {
+        "text": "Cookies政策",
+        "url": "https://www.tencent.com/cookie-policy')",
+        "parent_context": "欢迎来到Tencent.com！我们希望使用分析型Cookies和类似技术 (“Cookies”) 来改善我们的网站。Cookies收集的信息不会识别您个人。有关我们使用的Cookies的类型以及您的偏好选项（包括如何更改您的偏好设置）的更多信息，请查看此处的 Cookies政策 。"
+      },
+      {
+        "text": "Cookies政策",
+        "url": "https://www.tencent.com/cookie-policy",
+        "parent_context": "歡迎來到Tencent.com！我們希望使用分析型Cookies和類似技術 (“Cookies”) 來改善我們的網站。Cookies收集的信息不會識別您個人。有關我們使用的Cookies的類型以及您的偏好選項（包括如何更改您的偏好設置）的更多信息，請查看此處的 Cookies政策 。"
+      },
+      {
+        "text": "here",
+        "url": "https://www.tencent.com/cookie-policy",
+        "parent_context": "Welcome to Tencent.com! We would like to use analytics cookies and other similar tracking technologies (“Cookies”) to help us improve our website. The Cookies collect information in a way that does not directly identify anyone. For more information about the Cookies we use and your options (including how to change your preferences), see\n                          our cookies policy here ."
+      }
+    ]
+  }
+]

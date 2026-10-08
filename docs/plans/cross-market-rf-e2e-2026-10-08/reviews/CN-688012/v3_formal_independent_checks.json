@@ -1,0 +1,25 @@
+{
+  "strong_original_input": "PASS",
+  "exact_markdown": "PASS",
+  "snapshot_same_input_and_economic_payload": "PASS",
+  "independent_fresh_cli_whole_json_equal": true,
+  "independent_fresh_markdown_bytes_equal": true,
+  "registry_audit": "PASS",
+  "confidence_score": 65.38058062293638,
+  "confidence_components_sum_matches": true,
+  "source_ref": {
+    "byte_size": 3149962,
+    "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+    "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+    "mime_type": "application/pdf",
+    "schema_version": "2.0",
+    "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+  },
+  "current_source_url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482884.PDF",
+  "current_published_date": "2026-08-20",
+  "download_calls": 0,
+  "raw_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+  "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\v3",
+  "input_sha256": "478ae3345e6011079929c05f01b8adec959c974581c703239271c1f9ba4e7ea4",
+  "forecast_sha256": "1913f5e376590c9a5d77999f8d9c4072a3114e5fc58288ac25f11b31b4ebdea1"
+}

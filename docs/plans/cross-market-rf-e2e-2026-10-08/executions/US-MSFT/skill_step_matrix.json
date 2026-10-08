@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0",
+  "status": "partial",
+  "steps": [
+    {
+      "step": "0",
+      "status": "complete",
+      "performed": "Nine dimensions; eight modeled and policy gap",
+      "evidence": "input.json:research_coverage"
+    },
+    {
+      "step": "1",
+      "status": "complete",
+      "performed": "Identity/date/currency/FY/version frozen; sources after October8 excluded",
+      "evidence": "input.json; snapshot.json"
+    },
+    {
+      "step": "1A",
+      "status": "partial",
+      "performed": "Full call, release,22-slide presentation and recent strategy; latest annual download failed and qualitative target runtime gap",
+      "evidence": "communication_coverage.json"
+    },
+    {
+      "step": "1B",
+      "status": "partial",
+      "performed": "AWS directional independent reference, company counterevidence; non-cloud roots have limited triangulation",
+      "evidence": "input.json:growth_driver_tree; aws.html"
+    },
+    {
+      "step": "2",
+      "status": "complete",
+      "performed": "FY24/25/26 annual total and FY25/26 restated eight-stream history reconciled",
+      "evidence": "input.json:historical_revenue; image15/16/17.png"
+    },
+    {
+      "step": "3",
+      "status": "partial",
+      "performed": "RF→FF→CWP existingFY24/25 reuse and actual raw read succeed; newFY26 ensure and ET fail; HTML canonical narrative not run",
+      "evidence": "request_*response/stderr; fy2025_source_read_receipt.json; html_temporary_parse_receipt.json; et_*response.json"
+    },
+    {
+      "step": "4",
+      "status": "complete_with_fallback",
+      "performed": "Eight mutually exclusive economic streams map to two FY27 reporting groups; all direct_growth openly fallback",
+      "evidence": "input.json:segments; reporting_groups.json"
+    },
+    {
+      "step": "5",
+      "status": "partial",
+      "performed": "Recognized annual aggregate; honest mixed boundaries, no RPO acceleration; FY25 policy may be superseded by unavailable FY26 filing",
+      "evidence": "input.json:recognition; fy2025_consumer_temporary_text.txt"
+    },
+    {
+      "step": "6",
+      "status": "complete_with_assumptions",
+      "performed": "Three annual paths perstream; all future rates explicit conditional analyst assumptions, no probabilities",
+      "evidence": "input.json:parameters; fact_checks.json"
+    },
+    {
+      "step": "6A",
+      "status": "complete_with_limitations",
+      "performed": "Four roots/leading indicators/falsifiers/counterevidence; attribution allocation, not proved causality",
+      "evidence": "input.json:growth_driver_tree"
+    },
+    {
+      "step": "7",
+      "status": "complete",
+      "performed": "Perstream then two reporting groups then company; no duplicated cloud or RPO; signed company adjustment zero",
+      "evidence": "independent_arithmetic_and_groups.json"
+    },
+    {
+      "step": "8",
+      "status": "complete_with_limitations",
+      "performed": "Eight unique firstyear base growth shocks; later years not comprehensively shocked; theme analysis not requested",
+      "evidence": "input.json:sensitivity_tests; forecast.json"
+    },
+    {
+      "step": "9",
+      "status": "complete",
+      "performed": "Low evidence/workflow score; explicit model and historical accuracy credit zero; not probability",
+      "evidence": "forecast.json:confidence"
+    },
+    {
+      "step": "10",
+      "status": "complete_technical",
+      "performed": "Actual template/lint/hashcheck/validate-only/formal/strong/render and independent arithmetic; semantic acceptance separate",
+      "evidence": "formal_validation.json; preflight_and_immutability.json; commands/index.jsonl"
+    },
+    {
+      "step": "11",
+      "status": "complete",
+      "performed": "Actual immutable v1 snapshot before FY27+actuals; duplicate-write rejected; future actual evaluate N/A",
+      "evidence": "snapshot.json; preflight_and_immutability.json"
+    }
+  ],
+  "never_performed": [
+    "Successful downloaded_new/repeat newfiling zero-download",
+    "CWP canonical selective narrative for SEC HTML",
+    "Successful FF→ET fetched TXT/import",
+    "Future actual backtest evaluation"
+  ],
+  "independent_review": "pending"
+}

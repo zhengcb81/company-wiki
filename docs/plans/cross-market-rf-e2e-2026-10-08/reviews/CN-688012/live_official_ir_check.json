@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "url": "https://roadshow.sseinfo.com/base-service/api/pub/v1/question_answer/answer_question_page",
+  "http_status": 200,
+  "bytes": 557100,
+  "sha256": "520684e158f0f10191be84c435cb5600fff0a6cbea8d41442dfee9647d497d6f",
+  "all_records": 195,
+  "selected_exact_company": 8,
+  "all_selected_reply_contents_equal": true,
+  "credentials_used": false,
+  "cost_usd": 0,
+  "raw_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\independent_sse_api.json",
+  "captured_at": "2026-10-08T08:03:49.026928+00:00"
+}

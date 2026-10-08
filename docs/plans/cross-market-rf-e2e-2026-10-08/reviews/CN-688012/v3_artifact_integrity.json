@@ -1,0 +1,334 @@
+[
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482880.pdf",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482880_pages.json",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482882.pdf",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482882_pages.json",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482893.pdf",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482893_pages.json",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482894.pdf",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482894_pages.json",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482911.pdf",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482911_pages.json",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482916.pdf",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482916_pages.json",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482917.pdf",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482917_pages.json",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482918.pdf",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482918_pages.json",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225582793.pdf",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225582793_pages.json",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\forecast.json",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\forecast.md",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\input.json",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\publications.jsonl",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\snapshot.json",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\announcement_triage_v3.json",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791447950172428200-v3-protect-originals.stderr.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791447950172428200-v3-protect-originals.stdout.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791447960515666300-v3-official-material-announcements.stderr.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791447960515666300-v3-official-material-announcements.stdout.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448071698723100-v3-prepare-half-source-url-fact.stderr.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448071698723100-v3-prepare-half-source-url-fact.stdout.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448083706980100-v3-half-append-only-url-source-facts.stderr.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448083706980100-v3-half-append-only-url-source-facts.stdout.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448098298712100-v3-half2026-corrected-url-reuse.stderr.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448098298712100-v3-half2026-corrected-url-reuse.stdout.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448378051799200-v3-build-reviewed-input.stderr.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448378051799200-v3-build-reviewed-input.stdout.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448418198398300-v3-build-correct-original-boundaries.stderr.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448418198398300-v3-build-correct-original-boundaries.stdout.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448432250639300-v3-lint.stderr.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448432250639300-v3-lint.stdout.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448433060383700-v3-hashcheck.stderr.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448433060383700-v3-hashcheck.stdout.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448434716674200-v3-validate.stderr.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448434716674200-v3-validate.stdout.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448515176079900-v3-build-final-context-bindings.stderr.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448515176079900-v3-build-final-context-bindings.stdout.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448546157685400-v3-final-input.stderr.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448546157685400-v3-final-input.stdout.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448548917116300-v3-validate-final.stderr.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448548917116300-v3-validate-final.stdout.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448569445707900-v3-formal-engine-markdown.stderr.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448569445707900-v3-formal-engine-markdown.stdout.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448572672317000-v3-immutable-snapshot.stderr.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448572672317000-v3-immutable-snapshot.stdout.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448675223579600-v3-lint-final.stderr.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448675223579600-v3-lint-final.stdout.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448675802832400-v3-strong-render-calc-snapshot-protection.stderr.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448675802832400-v3-strong-render-calc-snapshot-protection.stdout.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448676334417000-v3-hashcheck-final.stderr.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448676334417000-v3-hashcheck-final.stdout.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448676745158400-v3-publication-registry-audit.stderr.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448676745158400-v3-publication-registry-audit.stdout.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448912778309700-v3-finalize-engineering-handoff.stderr.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448912778309700-v3-finalize-engineering-handoff.stdout.txt",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\index.jsonl",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\communication_coverage_v3.json",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\events.jsonl",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\fact_checks_v3.json",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\formal_verification_v3.json",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\repair_v3.json",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\repair_v3.md",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\runtime_v3.json",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\skill_step_matrix_v3.json",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\v3_build_input.py",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\v3_fetch_announcements.py",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\v3_finalize.py",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\v3_initialize.py",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\v3_input_repair_receipt.json",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\v3_prepare_url_fact.py",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\v3_protected_v2.json",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\v3_run_tool.py",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\v3_seal_manifest.py",
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\v3_verify_formal.py",
+    "status": "PASS"
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "schema_version": "2.0",
+  "company_query": "00700",
+  "market": "HK",
+  "document_kind": "semi_annual_report",
+  "mode": "exact",
+  "fiscal_year": 2026,
+  "as_of_date": "2026-10-08",
+  "filing_intent": "fetch_if_missing",
+  "language": "zh",
+  "companion_transcript": {
+    "intent": "reuse_only",
+    "fiscal_year": 2026,
+    "fiscal_quarter": 2
+  },
+  "fiscal_period": "H1",
+  "acquisition_limits": {
+    "max_bytes": 41943040,
+    "timeout_seconds": 180,
+    "max_cost_usd": "0.00"
+  }
+}

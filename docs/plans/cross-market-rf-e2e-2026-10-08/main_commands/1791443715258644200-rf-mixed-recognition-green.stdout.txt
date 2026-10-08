@@ -1,0 +1,33 @@
+....F.......................F...................................         [100%]
+================================== FAILURES ===================================
+______________________ test_mixed_rejects_activity_model ______________________
+
+    def test_mixed_rejects_activity_model():
+        data = mixed_document()
+        for scenario in data["segments"][0]["scenarios"].values():
+            scenario["model"] = "unit_sales"
+        # Validate the accounting boundary before trying incompatible driver IDs.
+        from forecast.segments import validate_recognition_metadata
+        with pytest.raises(ForecastInputError, match="direct_growth/direct_revenue"):
+            validate_recognition_metadata(data["segments"][0],
+                {s["source_id"]: s for s in data["sources"]},
+>               {c["claim_id"]: c for c in data["claims"]})
+                                           ^^^^^^^^^^^^^^
+E           KeyError: 'claims'
+
+tests\test_mixed_aggregate_recognition.py:67: KeyError
+_________________________ test_c3_presentations_exact _________________________
+
+    def test_c3_presentations_exact():
+>       assert PRESENTATIONS == {"gross", "net"}
+E       AssertionError: assert {'gross', 'mixed', 'net'} == {'gross', 'net'}
+E         
+E         Extra items in the left set:
+E         'mixed'
+E         Use -v to get more diff
+
+tests\test_zr707_mixed_recognition.py:137: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_mixed_aggregate_recognition.py::test_mixed_rejects_activity_model
+FAILED tests/test_zr707_mixed_recognition.py::test_c3_presentations_exact - A...
+2 failed, 62 passed in 2.05s

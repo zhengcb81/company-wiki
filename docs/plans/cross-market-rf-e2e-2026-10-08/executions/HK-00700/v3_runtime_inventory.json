@@ -1,0 +1,365 @@
+{
+  "engine_version": "4.1.0",
+  "schema_version": "3.7",
+  "current_runtime": [
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\asset_ownership.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\asset_ownership.py",
+      "installed_sha256": "2dc8931451b88f410de5011bac2e80cc74f838e11e94c5627170a6e0ab891ed0",
+      "canonical_sha256": "2dc8931451b88f410de5011bac2e80cc74f838e11e94c5627170a6e0ab891ed0",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\commercial_terms.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\commercial_terms.py",
+      "installed_sha256": "6596d4492fcfb31cb73efaf75fb482d90156f2fbc91ab29be272e24745546005",
+      "canonical_sha256": "6596d4492fcfb31cb73efaf75fb482d90156f2fbc91ab29be272e24745546005",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_contracts.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_narrative_contracts.py",
+      "installed_sha256": "11fef2a81ff60940fc97cb918b17f0ce64e67b74fbc76a9f53c237fc07d178d3",
+      "canonical_sha256": "11fef2a81ff60940fc97cb918b17f0ce64e67b74fbc76a9f53c237fc07d178d3",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_posix.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_narrative_posix.py",
+      "installed_sha256": "669d268667d9e08a3d98ee1eec44ecc26fb4f142dd6d7310191169deba5dc852",
+      "canonical_sha256": "669d268667d9e08a3d98ee1eec44ecc26fb4f142dd6d7310191169deba5dc852",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_process.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_narrative_process.py",
+      "installed_sha256": "9664696ac23699ecf6b234cec3aa93ce475127d36a4bddf680edb711ccf92e3d",
+      "canonical_sha256": "9664696ac23699ecf6b234cec3aa93ce475127d36a4bddf680edb711ccf92e3d",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_reader.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_narrative_reader.py",
+      "installed_sha256": "8ff1cf553a8849330a41f74ae27bfcacd2515186b5fa58168cead91b6cfa7508",
+      "canonical_sha256": "8ff1cf553a8849330a41f74ae27bfcacd2515186b5fa58168cead91b6cfa7508",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_tree.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_narrative_tree.py",
+      "installed_sha256": "561f921d20636532ec13d4c2a116af120a88a2b56e55de6fbadf61f137bef8ba",
+      "canonical_sha256": "561f921d20636532ec13d4c2a116af120a88a2b56e55de6fbadf61f137bef8ba",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_source.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_source.py",
+      "installed_sha256": "b223974e94ffb6d91e0e927b252e1fbc67a590fc910c3da10600d292d48d4470",
+      "canonical_sha256": "b223974e94ffb6d91e0e927b252e1fbc67a590fc910c3da10600d292d48d4470",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_source_reader_v2.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_source_reader_v2.py",
+      "installed_sha256": "5f5bfd11cbc880c30f2766d8d6c78366d4e32f677ba9a517914a0df5f95faed1",
+      "canonical_sha256": "5f5bfd11cbc880c30f2766d8d6c78366d4e32f677ba9a517914a0df5f95faed1",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_source_v2.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_source_v2.py",
+      "installed_sha256": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+      "canonical_sha256": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\confidence_policy.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\confidence_policy.py",
+      "installed_sha256": "a2444c1ebb7f7ed9144e0db0199d1055da20b126b3026f90e114c55817ed822f",
+      "canonical_sha256": "a2444c1ebb7f7ed9144e0db0199d1055da20b126b3026f90e114c55817ed822f",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_fetch_client.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\filing_fetch_client.py",
+      "installed_sha256": "b16f85962173fc6a2757ed88fae7074a458ab28bbe1a21f6ec5fbf83a44f3446",
+      "canonical_sha256": "b16f85962173fc6a2757ed88fae7074a458ab28bbe1a21f6ec5fbf83a44f3446",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\fix_hashes.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\fix_hashes.py",
+      "installed_sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "canonical_sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\generate_input_template.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\generate_input_template.py",
+      "installed_sha256": "f7c57911d5f85204b04d07de02fdcf9bcdb2315cf0236181cd727986292870b1",
+      "canonical_sha256": "f7c57911d5f85204b04d07de02fdcf9bcdb2315cf0236181cd727986292870b1",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\internal_flow.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\internal_flow.py",
+      "installed_sha256": "05814b9286889088278fc5cf0c47a40452026bbc926f8f382db7e70de38a1355",
+      "canonical_sha256": "05814b9286889088278fc5cf0c47a40452026bbc926f8f382db7e70de38a1355",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\lint_input.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\lint_input.py",
+      "installed_sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "canonical_sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\mine_year_operation.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\mine_year_operation.py",
+      "installed_sha256": "602255c766897dcabf8c5107c0ba3116686aab7dca683066fdffc70b88628986",
+      "canonical_sha256": "602255c766897dcabf8c5107c0ba3116686aab7dca683066fdffc70b88628986",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\mixed_recognition.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\mixed_recognition.py",
+      "installed_sha256": "04ed62e0b61af523818aeff961cebc34eadc3df4b1b7756e5a32c9f8e432f232",
+      "canonical_sha256": "04ed62e0b61af523818aeff961cebc34eadc3df4b1b7756e5a32c9f8e432f232",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\model_extensions.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\model_extensions.py",
+      "installed_sha256": "c5c15d782834546cf1d58a0a9c2d664db79898b6cc9517c657bcfac743ce2f92",
+      "canonical_sha256": "c5c15d782834546cf1d58a0a9c2d664db79898b6cc9517c657bcfac743ce2f92",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\model_registry.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\model_registry.py",
+      "installed_sha256": "62f864b9ab3f144eacff43448897d2c31abc217e17ed3b0e3f58894cdd985081",
+      "canonical_sha256": "62f864b9ab3f144eacff43448897d2c31abc217e17ed3b0e3f58894cdd985081",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\narrative_source_preparation.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\narrative_source_preparation.py",
+      "installed_sha256": "4d848e286ca318f427d9001bb6243b98d9f91886f7931d7eb4796cf4cc4c2e72",
+      "canonical_sha256": "4d848e286ca318f427d9001bb6243b98d9f91886f7931d7eb4796cf4cc4c2e72",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\processed_artifact_canary.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\processed_artifact_canary.py",
+      "installed_sha256": "19869b02cb370add57b5910d360e3ae864b870a2825d76894ea36530a9ccacfc",
+      "canonical_sha256": "19869b02cb370add57b5910d360e3ae864b870a2825d76894ea36530a9ccacfc",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\processing_demand.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\processing_demand.py",
+      "installed_sha256": "fcdfcad8ebd1fc20febf3c157dcd20ad92708fd69d00373ef9a943e5a820afc1",
+      "canonical_sha256": "fcdfcad8ebd1fc20febf3c157dcd20ad92708fd69d00373ef9a943e5a820afc1",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\publication_registry.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\publication_registry.py",
+      "installed_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+      "canonical_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\reconciliation.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\reconciliation.py",
+      "installed_sha256": "c4b69e4ee1f3dc9822aed05b9facfd5bb44575b6b51b706dede46277ee5996f5",
+      "canonical_sha256": "c4b69e4ee1f3dc9822aed05b9facfd5bb44575b6b51b706dede46277ee5996f5",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_backtest.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_backtest.py",
+      "installed_sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "canonical_sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_constraints.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_constraints.py",
+      "installed_sha256": "6ce99c1d59fa3858213e31bf9dadc351591ef0eda006d957f07cf1a839e57374",
+      "canonical_sha256": "6ce99c1d59fa3858213e31bf9dadc351591ef0eda006d957f07cf1a839e57374",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_core.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_core.py",
+      "installed_sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "canonical_sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_forecast.py",
+      "installed_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "canonical_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_publication.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_publication.py",
+      "installed_sha256": "bc2bb4a33e36ed9ad82bc4ffe33e57de8999002c2c7910b9c8b9d1565678fcd0",
+      "canonical_sha256": "bc2bb4a33e36ed9ad82bc4ffe33e57de8999002c2c7910b9c8b9d1565678fcd0",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_report.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_report.py",
+      "installed_sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+      "canonical_sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\rolling_backtest.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\rolling_backtest.py",
+      "installed_sha256": "80de3bfbf47d1dc6b59fc8de94733f996463edb5d749923b6ab7039875d4ec8b",
+      "canonical_sha256": "80de3bfbf47d1dc6b59fc8de94733f996463edb5d749923b6ab7039875d4ec8b",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\schema_compatibility.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\schema_compatibility.py",
+      "installed_sha256": "2fe8ffe2090300fbe81e130e21cf0b213faefc63ba0a6831894c9025db963352",
+      "canonical_sha256": "2fe8ffe2090300fbe81e130e21cf0b213faefc63ba0a6831894c9025db963352",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\schema_fields.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\schema_fields.py",
+      "installed_sha256": "54276494dcb280b23791c3a7614eb2090997a68e1116d78f6efdf02edf52a01c",
+      "canonical_sha256": "54276494dcb280b23791c3a7614eb2090997a68e1116d78f6efdf02edf52a01c",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\schema_optin.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\schema_optin.py",
+      "installed_sha256": "6a3e01ea8ab95e5d705ff21c86274db6fc16b3569a19d74c2d1558cd3cf6b3a3",
+      "canonical_sha256": "6a3e01ea8ab95e5d705ff21c86274db6fc16b3569a19d74c2d1558cd3cf6b3a3",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+      "installed_sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+      "canonical_sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\trust_anchor.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\trust_anchor.py",
+      "installed_sha256": "9abdcec55a524574b55e0111f513338f79a486f536985d036b94b4a71ba1310c",
+      "canonical_sha256": "9abdcec55a524574b55e0111f513338f79a486f536985d036b94b4a71ba1310c",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\__init__.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\__init__.py",
+      "installed_sha256": "f7343866b80251c3d2105c6d34446898784ef6272ed9310dfee7cbecf8db3459",
+      "canonical_sha256": "f7343866b80251c3d2105c6d34446898784ef6272ed9310dfee7cbecf8db3459",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\analysis\\confidence.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\analysis\\confidence.py",
+      "installed_sha256": "235b38e4586f15bb8908a2db53abc0724ad9e0ed79bb15e508f948ebeaa0e283",
+      "canonical_sha256": "235b38e4586f15bb8908a2db53abc0724ad9e0ed79bb15e508f948ebeaa0e283",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\analysis\\sensitivity.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\analysis\\sensitivity.py",
+      "installed_sha256": "abb1f71f4b306739760e241672cc98e57ae8253f9bf90202cf06031d67f0373d",
+      "canonical_sha256": "abb1f71f4b306739760e241672cc98e57ae8253f9bf90202cf06031d67f0373d",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\analysis\\__init__.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\analysis\\__init__.py",
+      "installed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "canonical_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\constants.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\constants.py",
+      "installed_sha256": "3ad7332e4a76e7e3e2a9a8a1ab73828584ed8b19b32327479a0f79636b2f3462",
+      "canonical_sha256": "3ad7332e4a76e7e3e2a9a8a1ab73828584ed8b19b32327479a0f79636b2f3462",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\document.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\document.py",
+      "installed_sha256": "c2df0a229116392968152ee547818567ab40ba3813a270f68fabbfb9ea207c0d",
+      "canonical_sha256": "c2df0a229116392968152ee547818567ab40ba3813a270f68fabbfb9ea207c0d",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\evidence.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\evidence.py",
+      "installed_sha256": "eb1edea913b3b4f6f8f9c7a3f84e07d464bdf0b33e7e6e9aba5664b6cb5ba683",
+      "canonical_sha256": "eb1edea913b3b4f6f8f9c7a3f84e07d464bdf0b33e7e6e9aba5664b6cb5ba683",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\__init__.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\__init__.py",
+      "installed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "canonical_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\forecast\\calc.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\forecast\\calc.py",
+      "installed_sha256": "853baa0bb208c91be0c3983d9256cb42b76f61221b19ad11c11bc37db79ae049",
+      "canonical_sha256": "853baa0bb208c91be0c3983d9256cb42b76f61221b19ad11c11bc37db79ae049",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\forecast\\segments.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\forecast\\segments.py",
+      "installed_sha256": "7b0dac5d5b6f19aba2305a7cb5d9d0ecddb1e5a31a6833285c5f81259018f002",
+      "canonical_sha256": "7b0dac5d5b6f19aba2305a7cb5d9d0ecddb1e5a31a6833285c5f81259018f002",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\coverage.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\coverage.py",
+      "installed_sha256": "ae6519cc18fea823dcc9d5e47956a2aea6da3270f1041b28d7bf1b783cd4b470",
+      "canonical_sha256": "ae6519cc18fea823dcc9d5e47956a2aea6da3270f1041b28d7bf1b783cd4b470",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\drivers.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\drivers.py",
+      "installed_sha256": "45e3d58853c6757a0a49701d495ffb9e3e9cb0dafc2e819432cdd28af6e90e18",
+      "canonical_sha256": "45e3d58853c6757a0a49701d495ffb9e3e9cb0dafc2e819432cdd28af6e90e18",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\targets.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\targets.py",
+      "installed_sha256": "1c885deaf4168bacbd7d445ec6e76da93193132fce3b6ca67fbed4e6c910c48b",
+      "canonical_sha256": "1c885deaf4168bacbd7d445ec6e76da93193132fce3b6ca67fbed4e6c910c48b",
+      "matches_canonical": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\__init__.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\__init__.py",
+      "installed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "canonical_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches_canonical": true
+    }
+  ],
+  "mismatches": [],
+  "owner": "MAIN; HK did not write runtime/config/installation"
+}

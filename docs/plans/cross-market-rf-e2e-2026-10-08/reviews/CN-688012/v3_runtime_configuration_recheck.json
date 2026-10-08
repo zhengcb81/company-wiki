@@ -1,0 +1,120 @@
+{
+  "runtime": [
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+      "sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_forecast.py",
+      "repo_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "installed_repo_equal": true,
+      "current_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "current_repo_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_core.py",
+      "sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_core.py",
+      "repo_sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "installed_repo_equal": true,
+      "current_sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "current_repo_sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_report.py",
+      "sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_report.py",
+      "repo_sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+      "installed_repo_equal": true,
+      "current_sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+      "current_repo_sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_backtest.py",
+      "sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_backtest.py",
+      "repo_sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "installed_repo_equal": true,
+      "current_sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "current_repo_sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+      "sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+      "repo_sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+      "installed_repo_equal": true,
+      "current_sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+      "current_repo_sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_source_v2.py",
+      "sha256": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_source_v2.py",
+      "repo_sha256": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+      "installed_repo_equal": true,
+      "current_sha256": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+      "current_repo_sha256": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\publication_registry.py",
+      "sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\publication_registry.py",
+      "repo_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+      "installed_repo_equal": true,
+      "current_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+      "current_repo_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\lint_input.py",
+      "sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\lint_input.py",
+      "repo_sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "installed_repo_equal": true,
+      "current_sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "current_repo_sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\fix_hashes.py",
+      "sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\fix_hashes.py",
+      "repo_sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "installed_repo_equal": true,
+      "current_sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "current_repo_sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "status": "PASS"
+    }
+  ],
+  "configuration": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "current_sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\SKILL.md",
+      "sha256": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf",
+      "current_sha256": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\config\\company_wiki.json",
+      "sha256": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+      "current_sha256": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\config\\company_wiki.json",
+      "sha256": "73917689a14c1b17e69066b0837b0ad3ac1062c440243bc58fef34eb3e043ab0",
+      "current_sha256": "73917689a14c1b17e69066b0837b0ad3ac1062c440243bc58fef34eb3e043ab0",
+      "status": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "runtime_version": "4.1.0",
+  "schema_version": "3.7",
+  "runtime_files": [
+    {
+      "relative_path": "SKILL.md",
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\SKILL.md",
+      "installed_sha256": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\SKILL.md",
+      "canonical_sha256": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf",
+      "identical": true
+    },
+    {
+      "relative_path": "scripts/revenue_forecast.py",
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+      "installed_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_forecast.py",
+      "canonical_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "identical": true
+    },
+    {
+      "relative_path": "scripts/source_preparation.py",
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+      "installed_sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+      "canonical_sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+      "identical": true
+    },
+    {
+      "relative_path": "scripts/revenue_core.py",
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_core.py",
+      "installed_sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_core.py",
+      "canonical_sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "identical": true
+    },
+    {
+      "relative_path": "scripts/revenue_report.py",
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_report.py",
+      "installed_sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_report.py",
+      "canonical_sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+      "identical": true
+    },
+    {
+      "relative_path": "scripts/revenue_backtest.py",
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_backtest.py",
+      "installed_sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_backtest.py",
+      "canonical_sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "identical": true
+    },
+    {
+      "relative_path": "scripts/publication_registry.py",
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\publication_registry.py",
+      "installed_sha256": "29aaae4f9864d9c4dbb92720744daa49315a2980dfa158b0e3666cb86d886344",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\publication_registry.py",
+      "canonical_sha256": "29aaae4f9864d9c4dbb92720744daa49315a2980dfa158b0e3666cb86d886344",
+      "identical": true
+    },
+    {
+      "relative_path": "scripts/contracts/constants.py",
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\constants.py",
+      "installed_sha256": "3ad7332e4a76e7e3e2a9a8a1ab73828584ed8b19b32327479a0f79636b2f3462",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\constants.py",
+      "canonical_sha256": "3ad7332e4a76e7e3e2a9a8a1ab73828584ed8b19b32327479a0f79636b2f3462",
+      "identical": true
+    },
+    {
+      "relative_path": "scripts/forecast/segments.py",
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\forecast\\segments.py",
+      "installed_sha256": "7b0dac5d5b6f19aba2305a7cb5d9d0ecddb1e5a31a6833285c5f81259018f002",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\forecast\\segments.py",
+      "canonical_sha256": "7b0dac5d5b6f19aba2305a7cb5d9d0ecddb1e5a31a6833285c5f81259018f002",
+      "identical": true
+    }
+  ],
+  "required_reference_inventory": [
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\backtesting.md",
+      "sha256": "84336ecb1373baecf079949155f891121e70612ad150811532c129c556055196",
+      "reading_basis": "Required RF reference read during this executor run; SHA inventoried at finalization"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\data-governance.md",
+      "sha256": "36ebb6975847b405f4bac19ca5617a1c030aa57ca4888bfd2276061b45708503",
+      "reading_basis": "Required RF reference read during this executor run; SHA inventoried at finalization"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\growth-driver-tree.md",
+      "sha256": "ce3b57f69dfe269f868187adbf24b1579d5e822dc88cabaf0378c16e8f32c621",
+      "reading_basis": "Required RF reference read during this executor run; SHA inventoried at finalization"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\input-construction.md",
+      "sha256": "c7ef79311c0be7f1bb63a1ff4213044d8a1f44024b53ade7b9688ebdbdab2d20",
+      "reading_basis": "Required RF reference read during this executor run; SHA inventoried at finalization"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\input-schema.md",
+      "sha256": "0866413d921612f8892b7efd46153fa0bb4d98b4be1719fa6facd3555f95318d",
+      "reading_basis": "Required RF reference read during this executor run; SHA inventoried at finalization"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\management-targets.md",
+      "sha256": "85ae3dcaa49d0ee16a35f87f21a13ca16bfed1261c2f0742e9b74d71463c9c15",
+      "reading_basis": "Required RF reference read during this executor run; SHA inventoried at finalization"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\model-library.md",
+      "sha256": "9b335522a5e956424260cca379e640eb484d52d0688cf3d44486d06ff4f1e921",
+      "reading_basis": "Required RF reference read during this executor run; SHA inventoried at finalization"
+    }
+  ],
+  "configuration": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "baseline_sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "current_sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\SKILL.md",
+      "baseline_sha256": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf",
+      "current_sha256": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\config\\company_wiki.json",
+      "baseline_sha256": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+      "current_sha256": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\config\\company_wiki.json",
+      "baseline_sha256": "73917689a14c1b17e69066b0837b0ad3ac1062c440243bc58fef34eb3e043ab0",
+      "current_sha256": "73917689a14c1b17e69066b0837b0ad3ac1062c440243bc58fef34eb3e043ab0",
+      "unchanged": true
+    }
+  ],
+  "actual_environment": {
+    "TEMP": "C:\\Users\\郑曾波\\AppData\\Local\\Temp",
+    "output_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012",
+    "REVENUE_PUBLICATION_REGISTRY": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\publications.jsonl",
+    "CWP_AUDIT_PROCESS_DIR": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\processes",
+    "PYTHONPATH_prefix": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\process_trace"
+  },
+  "note": "Only non-secret isolation variables inventoried; no signer configured"
+}

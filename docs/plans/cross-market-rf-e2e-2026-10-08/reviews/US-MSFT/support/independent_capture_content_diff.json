@@ -1,0 +1,29 @@
+[
+  {
+    "source": "call",
+    "normalized_equal": false,
+    "normalized_sha256": "4add93e3f6deb6e9fa87734c5fa605fd3c8b953508f423700fa01d4af5f02c89",
+    "word_edits": [
+      "- 9113a250dbfb0d250b7dd2da450b7260",
+      "+ 581574ffa0831881709110197eaabecd"
+    ]
+  },
+  {
+    "source": "results",
+    "normalized_equal": false,
+    "normalized_sha256": "dcf012fc5ccf4e71587aacc30672ebb73add1260b6af475b218402cd24cc9e51",
+    "word_edits": [
+      "- 2d38c467dac1d47ea80f8e9dcf804cb5",
+      "+ 79665474e8985a00669c6fdcd53f86ca"
+    ]
+  },
+  {
+    "source": "metrics",
+    "normalized_equal": false,
+    "normalized_sha256": "b96afdccde2ea5a3297c02a2ce0200cfe0f38dbab30d45987d55247a7ac01b3b",
+    "word_edits": [
+      "- 93604bc908ec9a93a5448a5959d422a3",
+      "+ c66a88844a18ead026da1ded5036d728"
+    ]
+  }
+]

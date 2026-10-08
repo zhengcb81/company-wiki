@@ -1,0 +1,96 @@
+{
+  "label": "us-v2-build-from-review",
+  "returncode": 0,
+  "stdout": "{\"version\": \"2026-10-08-MSFT-v2\", \"claims\": 346, \"future_parameters\": 72, \"us07\": \"BLOCKED\"}\n",
+  "stderr": ""
+}
+{
+  "label": "us-v2-lint",
+  "returncode": 0,
+  "stdout": "ok: no findings\n",
+  "stderr": ""
+}
+{
+  "label": "us-v2-hash",
+  "returncode": 0,
+  "stdout": "ok: no hash drift\n",
+  "stderr": ""
+}
+{
+  "label": "us-v2-validate",
+  "returncode": 2,
+  "stdout": "",
+  "stderr": "error: 84 validation problem(s) found:\n[evidence_claims]\n  - claim_3_azure_growth_low_2027.excerpt must contain 10-500 characters\n  - claim_4_azure_growth_low_2028.excerpt must contain 10-500 characters\n  - claim_5_azure_growth_low_2029.excerpt must contain 10-500 characters\n  - claim_6_azure_growth_base_2027.excerpt must contain 10-500 characters\n  - claim_7_azure_growth_base_2028.excerpt must contain 10-500 characters\n  - claim_8_azure_growth_base_2029.excerpt must contain 10-500 characters\n  - claim_9_azure_growth_high_2027.excerpt must contain 10-500 characters\n  - claim_10_azure_growth_high_2028.excerpt must contain 10-500 characters\n  - claim_11_azure_growth_high_2029.excerpt must contain 10-500 characters\n  - claim_17_microsoft_365_cloud_growth_low_2027.excerpt must contain 10-500 characters\n  - claim_18_microsoft_365_cloud_growth_low_2028.excerpt must contain 10-500 characters\n  - claim_19_microsoft_365_cloud_growth_low_2029.excerpt must contain 10-500 characters\n  - claim_20_microsoft_365_cloud_growth_base_2027.excerpt must contain 10-500 characters\n  - claim_21_microsoft_365_cloud_growth_base_2028.excerpt must contain 10-500 characters\n  - claim_22_microsoft_365_cloud_growth_base_2029.excerpt must contain 10-500 characters\n  - claim_23_microsoft_365_cloud_growth_high_2027.excerpt must contain 10-500 characters\n  - claim_24_microsoft_365_cloud_growth_high_2028.excerpt must contain 10-500 characters\n  - claim_25_microsoft_365_cloud_growth_high_2029.excerpt must contain 10-500 characters\n  - claim_42_industry_solutions_growth_low_2027.excerpt must contain 10-500 characters\n  - claim_43_industry_solutions_growth_low_2028.excerpt must contain 10-500 characters\n  - claim_44_industry_solutions_growth_low_2029.excerpt must contain 10-500 characters\n  - claim_45_industry_solutions_growth_base_2027.excerpt must contain 10-500 characters\n  - claim_46_industry_solutions_growth_base_2028.excerpt must contain 10-500 characters\n  - claim_47_industry_solutions_growth_base_2029.excerpt must contain 10-500 characters\n  - claim_48_industry_solutions_growth_high_2027.excerpt must contain 10-500 characters\n  - claim_49_industry_solutions_growth_high_2028.excerpt must contain 10-500 characters\n  - claim_50_industry_solutions_growth_high_2029.excerpt must contain 10-500 characters\n  - claim_53_frontier_and_support_services_growth_low_2027.excerpt must contain 10-500 characters\n  - claim_54_frontier_and_support_services_growth_low_2028.excerpt must contain 10-500 characters\n  - claim_55_frontier_and_support_services_growth_low_2029.excerpt must contain 10-500 characters\n  - claim_56_frontier_and_support_services_growth_base_2027.excerpt must contain 10-500 characters\n  - claim_57_frontier_and_support_services_growth_base_2028.excerpt must contain 10-500 characters\n  - claim_58_frontier_and_support_services_growth_base_2029.excerpt must contain 10-500 characters\n  - claim_59_frontier_and_support_services_growth_high_2027.excerpt must contain 10-500 characters\n  - claim_60_frontier_and_support_services_growth_high_2028.excerpt must contain 10-500 characters\n  - claim_61_frontier_and_support_services_growth_high_2029.excerpt must contain 10-500 characters\n  - claim_78_xbox_growth_low_2027.excerpt must contain 10-500 characters\n  - claim_79_xbox_growth_low_2028.excerpt must contain 10-500 characters\n  - claim_80_xbox_growth_low_2029.excerpt must contain 10-500 characters\n  - claim_81_xbox_growth_base_2027.excerpt must contain 10-500 characters\n  - claim_82_xbox_growth_base_2028.excerpt must contain 10-500 characters\n  - claim_83_xbox_growth_base_2029.excerpt must contain 10-500 characters\n  - claim_84_xbox_growth_high_2027.excerpt must contain 10-500 characters\n  - claim_85_xbox_growth_high_2028.excerpt must contain 10-500 characters\n  - claim_86_xbox_growth_high_2029.excerpt must contain 10-500 characters\n  - claim_89_windows_oem_and_devices_growth_low_2027.excerpt must contain 10-500 characters\n  - claim_90_windows_oem_and_devices_growth_low_2028.excerpt must contain 10-500 characters\n  - claim_91_windows_oem_and_devices_growth_low_2029.excerpt must contain 10-500 characters\n  - claim_92_windows_oem_and_devices_growth_base_2027.excerpt must contain 10-500 characters\n  - claim_93_windows_oem_and_devices_growth_base_2028.excerpt must contain 10-500 characters\n  - claim_94_windows_oem_and_devices_growth_base_2029.excerpt must contain 10-500 characters\n  - claim_95_windows_oem_and_devices_growth_high_2027.excerpt must contain 10-500 characters\n  - claim_96_windows_oem_and_devices_growth_high_2028.excerpt must contain 10-500 characters\n  - claim_97_windows_oem_and_devices_growth_high_2029.excerpt must contain 10-500 characters\n  - claim_102_cloud_ai_company.excerpt must contain 10-500 characters\n  - claim_103_cloud_ai_contrary.excerpt must contain 10-500 characters\n  - claim_105_enterprise_migration_company.excerpt must contain 10-500 characters\n  - claim_109_consumer_cycle_company.excerpt must contain 10-500 characters\n  - v2_constraint_azure_growth_low_2027.excerpt must contain 10-500 characters\n  - v2_constraint_azure_growth_low_2028.excerpt must contain 10-500 characters\n  - v2_constraint_azure_growth_low_2029.excerpt must contain 10-500 characters\n  - v2_constraint_azure_growth_base_2027.excerpt must contain 10-500 characters\n  - v2_constraint_azure_growth_base_2028.excerpt must contain 10-500 characters\n  - v2_constraint_azure_growth_base_2029.excerpt must contain 10-500 characters\n  - v2_constraint_azure_growth_high_2027.excerpt must contain 10-500 characters\n  - v2_constraint_azure_growth_high_2028.excerpt must contain 10-500 characters\n  - v2_constraint_azure_growth_high_2029.excerpt must contain 10-500 characters\n  - v2_constraint_microsoft_365_cloud_growth_low_2027.excerpt must contain 10-500 characters\n  - v2_constraint_microsoft_365_cloud_growth_low_2028.excerpt must contain 10-500 characters\n  - v2_constraint_microsoft_365_cloud_growth_low_2029.excerpt must contain 10-500 characters\n  - v2_constraint_microsoft_365_cloud_growth_base_2027.excerpt must contain 10-500 characters\n  - v2_constraint_microsoft_365_cloud_growth_base_2028.excerpt must contain 10-500 characters\n  - v2_constraint_microsoft_365_cloud_growth_base_2029.excerpt must contain 10-500 characters\n  - v2_constraint_microsoft_365_cloud_growth_high_2027.excerpt must contain 10-500 characters\n  - v2_constraint_microsoft_365_cloud_growth_high_2028.excerpt must contain 10-500 characters\n  - v2_constraint_microsoft_365_cloud_growth_high_2029.excerpt must contain 10-500 characters\n  - v2_benchmark_mechanism_azure.excerpt must contain 10-500 characters\n  - v2_benchmark_constraint_azure.excerpt must contain 10-500 characters\n  - v2_benchmark_mechanism_microsoft_365_cloud.excerpt must contain 10-500 characters\n  - v2_benchmark_constraint_microsoft_365_cloud.excerpt must contain 10-500 characters\n  - v2_benchmark_mechanism_industry_solutions.excerpt must contain 10-500 characters\n  - v2_benchmark_mechanism_frontier_and_support_services.excerpt must contain 10-500 characters\n  - v2_benchmark_mechanism_xbox.excerpt must contain 10-500 characters\n  - v2_benchmark_mechanism_windows_oem_and_devices.excerpt must contain 10-500 characters\n"
+}
+{
+  "label": "us-v2-build-bounded-excerpt-fragments",
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\repair_msft_v2.py\", line 235, in <module>\n    if a=='build':build()\n                  ~~~~~^^\n  File \"C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\repair_msft_v2.py\", line 72, in build\n    downside=add_claim('v2_constraint_'+pid,pid,'parameter','src_call',text(s['contrary']),f'Complete official call.txt lines {s[\"contrary\"]}; constraint/opposing gaming expectation; scope stated in parameter rationale')\n  File \"C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\repair_msft_v2.py\", line 51, in add_claim\n    return set_claim(cid,sid,excerpt,locator)\n  File \"C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\repair_msft_v2.py\", line 39, in set_claim\n    if len(chunks)>1 and len(chunks[-1])<10:chunks[-2]+=chunks.pop()\n                                            ~~~~~~^^^^\nIndexError: list assignment index out of range\n"
+}
+{
+  "label": "us-v2-build-complete-excerpt-fragments",
+  "returncode": 0,
+  "stdout": "{\"version\": \"2026-10-08-MSFT-v2\", \"claims\": 502, \"future_parameters\": 72, \"us07\": \"BLOCKED\"}\n",
+  "stderr": ""
+}
+{
+  "label": "us-v2-final-lint",
+  "returncode": 0,
+  "stdout": "ok: no findings\n",
+  "stderr": ""
+}
+{
+  "label": "us-v2-final-hash",
+  "returncode": 0,
+  "stdout": "ok: no hash drift\n",
+  "stderr": ""
+}
+{
+  "label": "us-v2-final-validate",
+  "returncode": 0,
+  "stdout": "valid\n",
+  "stderr": ""
+}
+{
+  "label": "us-v2-final-forecast",
+  "returncode": 0,
+  "stdout": "",
+  "stderr": ""
+}
+{
+  "label": "us-v2-snapshot",
+  "returncode": 0,
+  "stdout": "",
+  "stderr": ""
+}
+{
+  "label": "us-v2-registry",
+  "returncode": 2,
+  "stdout": "",
+  "stderr": "usage: publication_registry.py [-h] {lookup,audit} ...\npublication_registry.py: error: unrecognized arguments: --registry C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\publications.jsonl\n"
+}
+{
+  "label": "us-v2-final-registry",
+  "returncode": 0,
+  "stdout": "",
+  "stderr": ""
+}
+{
+  "label": "us-v2-final-verify",
+  "returncode": 0,
+  "stdout": "{\"strong\": \"PASS\", \"render\": \"PASS\", \"arithmetic\": \"PASS\", \"snapshot\": \"PASS\", \"v1_unchanged\": true, \"confidence\": 50.21721120270234, \"sensitivity_count\": 8}\n",
+  "stderr": ""
+}
+{
+  "label": "us-v2-handoff",
+  "returncode": 0,
+  "stdout": "{\"manifest\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\executions\\\\US-MSFT\\\\manifest_v2.json\", \"claims\": 502, \"qualitative_targets\": 33, \"v1_unchanged\": true, \"independent_review\": \"pending\", \"us07\": \"BLOCKED\"}\n",
+  "stderr": ""
+}
+{
+  "label": "us-v2-final-handoff-scoped-ledger",
+  "returncode": 0,
+  "stdout": "{\"manifest\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\executions\\\\US-MSFT\\\\manifest_v2.json\", \"claims\": 502, \"qualitative_targets\": 33, \"v1_unchanged\": true, \"independent_review\": \"pending\", \"us07\": \"BLOCKED\"}\n",
+  "stderr": ""
+}

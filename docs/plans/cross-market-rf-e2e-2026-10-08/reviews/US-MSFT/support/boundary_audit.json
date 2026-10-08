@@ -1,0 +1,36 @@
+{
+  "baseline_timestamp": "2026-10-08T06:48:16.1740531Z",
+  "configuration": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "baseline_sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "current_sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\SKILL.md",
+      "baseline_sha256": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf",
+      "current_sha256": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\config\\company_wiki.json",
+      "baseline_sha256": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+      "current_sha256": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\config\\company_wiki.json",
+      "baseline_sha256": "73917689a14c1b17e69066b0837b0ad3ac1062c440243bc58fef34eb3e043ab0",
+      "current_sha256": "73917689a14c1b17e69066b0837b0ad3ac1062c440243bc58fef34eb3e043ab0",
+      "unchanged": true
+    }
+  ],
+  "executor_artifacts": {
+    "input.json": "d872a864d1f7220c5635974b262b2b63378c1885998754ed8010134f8c7ae32e",
+    "forecast.json": "46c0c6ce0c71f27899ed4544012566489c8efef1d37826194048683732a36906",
+    "forecast.md": "4ccd4ff3e59ed0fc72af32850b35479dce595b1b641c140a2fb54d1675588511",
+    "snapshot.json": "ac029a2961a01f8d9d9f752bf6253535a45b3f7c3c61e594c6501928b755e0e2"
+  },
+  "limitations": "File SHA comparison confirms these files only; other agents own WIP and global-store audits. This reviewer does not assert a global store before/after snapshot."
+}

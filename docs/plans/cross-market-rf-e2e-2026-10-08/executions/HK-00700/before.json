@@ -1,0 +1,280 @@
+{
+  "created_at": "2026-10-08T06:50:30.842440+00:00",
+  "output_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700",
+  "protected": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "bytes": 866,
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\config\\company_wiki.json",
+      "bytes": 1443,
+      "sha256": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20190726-中信建投-腾讯控股-0700.HK-如何描绘“聚变中的恒星”.pdf",
+      "bytes": 5069323,
+      "sha256": "56b9b1c6edd2ded17e9fb90f51a6401b9d4a0c05b7985bf7dd343b7451adf830"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20200122-国信证券-腾讯控股-0700[1].HK-金融科技：引领腾讯下一个十年.pdf",
+      "bytes": 3561962,
+      "sha256": "2617cbbe35f143d9f62afd3df8907d9544edc417aee5b3ec1f46d4d7a95a0a3c"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20200326-华创证券-海外科技互联网行业深度研究报告：复盘腾讯，股价的驱动力来自何方？.pdf",
+      "bytes": 1814308,
+      "sha256": "c117c87458f26faf3c6b08c67e191aea71b712a7c0efdcbf71906c4867474234"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210310-东吴证券-腾讯控股-0700.HK-解析视频号意义与商业化概览.pdf",
+      "bytes": 1959164,
+      "sha256": "d54dd6b8d31f3ae90e438d83b65fa76b016d7e84520d4f7ae648b35fbce87893"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210310-招商证券-腾讯控股-0700.HK-深度探析腾讯的产品、生态、流量、商业化及增长空间.pdf",
+      "bytes": 5010221,
+      "sha256": "d3ae572246b5f3fa751ece9b9f956f6fcbaa3af9cbc4b9201848364f6437e2f7"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210318-广发证券-腾讯控股-0700.HK-数字内容持续精进，夯实和延展“社交+内容”战略.pdf",
+      "bytes": 9770974,
+      "sha256": "c1aa48a0c43e4f820d2220a9907792a2f05ee05774804023a1d6b68addc2e221"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210323-天风证券-传媒行业腾讯专题深度一：视频号，社会里，每个人.pdf",
+      "bytes": 1422828,
+      "sha256": "05c6eac06564afc4379b5b65b2ba25f81081a47322cf866e5421af4f7fcf8692"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210526-申万宏源-腾讯控股-0700.HK-深度报告：社交与精品内容铸基，产业赋能正起步.pdf",
+      "bytes": 2894271,
+      "sha256": "faa1869d9e76a6d445df60600b82bab95951503f90be2db36b804e875f2b48fc"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210616-西部证券-腾讯控股-0700.HK-首次覆盖：游戏增长稳健，视频号和2B业务进一步打开空间.pdf",
+      "bytes": 5265600,
+      "sha256": "45f32ea442c25478b0aa6748d6a277169773aa8a0574ce1591f3f9765fc7cc9a"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210715-西部证券-腾讯控股-0700.HK-跟踪报告：加大游戏研发投入，“开启”元宇宙，看好腾讯布局.pdf",
+      "bytes": 2743613,
+      "sha256": "21bd6906bd71d68230c3ed4ae13e8870a414e0bc29560682c4b4ca85cf23ce28"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210811-光大证券-腾讯控股-0700.HK-视频号系列报告之一：视频号的入局，平平无奇还是弯道超车？.pdf",
+      "bytes": 2808533,
+      "sha256": "5626d1c9367068c81d646f9a3b916dbfbdcea91e2512f29362c32f3c70746074"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210916-国金证券-腾讯控股-0700.HK-复盘历次“大跌”：曾经的“担忧”还在吗？.pdf",
+      "bytes": 1894992,
+      "sha256": "ccc4a068c56b4213a8300f41f07bda990ee9e8f3645e859b94c28f31f8052a4f"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20211220-东兴证券-传媒行业腾讯系列研究之7：腾讯专题，微信的本质价值是分发.pdf",
+      "bytes": 1447729,
+      "sha256": "2aa9fbd0ffc103ddf2d09423428a68b54e7721439887a52b9e3bc111ebadf21c"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20211228-德邦证券-腾讯控股-0700.HK-深度复盘~如何理解腾讯游戏的护城河？.pdf",
+      "bytes": 3090034,
+      "sha256": "d00d4b2a97366710042b1c3ed77a58d165cfb917e454db9f43a5e9ec2cf983e2"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20220118-东兴证券-腾讯控股-0700.HK-中概互联网复盘系列报告之三：腾讯控股2021年复盘，股价韧性强于市，强监管无碍微信价值.pdf",
+      "bytes": 696712,
+      "sha256": "5a46dfc31d5dfd0496db924e2d5dd8f6b4b3c144cd33725ea589fe503980f3f4"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20220410-中泰证券-腾讯控股-0700.HK-前瞻布局，突破求新.pdf",
+      "bytes": 2006765,
+      "sha256": "4c9e68963e174c31908e527b04174da9634e7acb23bde45bcf6dddc9badaeb2c"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20220418-华西证券-腾讯控股-0700.HK-社交+内容生态壁垒已成，技术服务驱动新增长.pdf",
+      "bytes": 3213800,
+      "sha256": "2c3eba443e6e7a46b4aaedb84ecae13b3ae4f87f7a6c0f4df2b107bb9205c0be"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20220518-东北证券-腾讯控股-0700.HK-超级APP构筑核心竞争优势，产业互联网驱动公司成长.pdf",
+      "bytes": 7317578,
+      "sha256": "d495667e896d40813d5324fe24c5deb5f7f1926ed4cb6a93a8fcc97ee7736b49"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20220809-广发证券-媒体Ⅱ行业：腾讯会议，Zoom为借鉴的视频会议产品迭代与商业化路径探讨.pdf",
+      "bytes": 2776032,
+      "sha256": "b41c0b421a5f6b9aadd211433ed27a26d304470151be2026c83c530a1fb8a210"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20221010-信达证券-腾讯控股-0700.HK-首次覆盖报告：优质的生态，进击的巨人.pdf",
+      "bytes": 3883303,
+      "sha256": "c183c261125f9946c16c9ba1102243621d7163dd3d8bdbddcb79055358714760"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20221110-德邦证券-腾讯控股-0700.HK-深度跟踪报告：各业务当前的逻辑与变化.pdf",
+      "bytes": 1041925,
+      "sha256": "62cd05c9c61ca7e819e3f6cfb270ad952613bc64951fb8dde7e08db178578936"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20230217-中信建投-腾讯控股-0700.HK-试析云服务的成长与格局之困.pdf",
+      "bytes": 3710155,
+      "sha256": "57dccf7dcaa51f081ce8420de8b090e6e873e83d12fe295d9edda4f02dded83f"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20230322-腾讯-2022年第四季度及全年业绩发布会（英译中）.pdf",
+      "bytes": 5536448,
+      "sha256": "0300267e6d28a318c8e6555bf7beefccec2ab23d8eb828ebc7a0e95f552d1b61"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20230420-天风证券-腾讯控股-0700.HK-腾讯AI战略、布局、大模型及应用跟踪.pdf",
+      "bytes": 2021939,
+      "sha256": "734da71f76bea358df1f22057211fae7dd83b36878ac276c28dcc3d1961de1d5"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20230517-腾讯-2023年第一季度业绩发布会（英译中）.pdf",
+      "bytes": 5023752,
+      "sha256": "e76540e42a9037b779ec954bb6784dff7afd1e90df0643318f7f135c386cfc31"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20230725-国泰君安-腾讯控股-0700.HK-公司更新报告：视频号电商全面发力，生态及商业化空间广阔.pdf",
+      "bytes": 3480889,
+      "sha256": "37f2dc43409b58c2827a1661f6a2ca734e342ec1f662ae618fc5db2bacb22e3e"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20250122-海通证券-信息服务行业深度报告：走最适合自身的AI发展之路，善于“扬长”的腾讯.pdf",
+      "bytes": 4345299,
+      "sha256": "c093d9d2c788005d2bd9d7a5f5a8ab345adf5a4a619ceebd04d1405b5d24d939"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20250915-华泰证券-腾讯控股-0700.HK-腾讯广告：AI和微信生态驱动商业化升级.pdf",
+      "bytes": 2988749,
+      "sha256": "cf46a51a71de02148e324e22329b69ad252e8ff7310189bcb94bcb80b46891c6"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20260131-国联民生证券-计算机行业深度报告：被低估的腾讯AI“野望”.pdf",
+      "bytes": 1461411,
+      "sha256": "f6b2e5e631bf14ec23bf08702c5d9db371e1ac99486eaf63984df128f161bfce"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\【互联网】腾讯2021Q2业绩会纪要20210818.pdf",
+      "bytes": 580652,
+      "sha256": "0f7552767ac4fac7e8f30f353306d02ec0996f134e9889a56e1b4fa4fc899680"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯2019n.pdf",
+      "bytes": 3054766,
+      "sha256": "fd6aaa4f59351447c7bc78032ef2dbb7f3d381bf120ea7d1383c3de052e4f82e"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯2020n.pdf",
+      "bytes": 2822568,
+      "sha256": "bba24aaa10948ea37f7c7a8a96dcd79200842ffbfb3c1c8f64a182a6b3698d48"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯2021n.pdf",
+      "bytes": 5687326,
+      "sha256": "70574582c616da1727590fc247c4caa40a7ee98ab83896d05638e9a630b50341"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯2022n.PDF",
+      "bytes": 5564762,
+      "sha256": "48705cdd72b57ca1b7ff9d15f3c101fcd6633688d6a3a3b221852087d2be64fc"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯SSV许浩碳中和纪要202203.pdf",
+      "bytes": 675094,
+      "sha256": "a9f047c4bc9cfacb7956e90d2c66b4e9e9e50b3e4a8e7316c0b81ffd69c6014f"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯交流纪要20220406.pdf",
+      "bytes": 556577,
+      "sha256": "d865f9774748f56396933c13c076d734ba09fb84467472564fbd8b5d1528f232"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯控股交流纪要20220323.pdf",
+      "bytes": 547111,
+      "sha256": "fafaf9fed1ace161f824811a462412474c6f67273837288b30fecd46daaa8328"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\financial_reports\\annual\\腾讯：2024年年度报告.pdf",
+      "bytes": 5241364,
+      "sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\financial_reports\\annual\\腾讯：2025年年度报告.pdf",
+      "bytes": 4428270,
+      "sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+      "bytes": 15414,
+      "sha256": "19e329c56265b46a96a33886b4eabb52fbadda4564b995cbb114e0ac2cd034e6"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+      "bytes": 5324,
+      "sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_core.py",
+      "bytes": 25879,
+      "sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_report.py",
+      "bytes": 73973,
+      "sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_backtest.py",
+      "bytes": 29070,
+      "sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\SKILL.md",
+      "bytes": 27599,
+      "sha256": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf"
+    }
+  ],
+  "runtime_comparison": [
+    {
+      "file": "scripts/source_preparation.py",
+      "installed_sha": "19e329c56265b46a96a33886b4eabb52fbadda4564b995cbb114e0ac2cd034e6",
+      "repo_sha": "19e329c56265b46a96a33886b4eabb52fbadda4564b995cbb114e0ac2cd034e6",
+      "same": true
+    },
+    {
+      "file": "scripts/revenue_forecast.py",
+      "installed_sha": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "repo_sha": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "same": true
+    },
+    {
+      "file": "scripts/revenue_core.py",
+      "installed_sha": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "repo_sha": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "same": true
+    },
+    {
+      "file": "scripts/revenue_report.py",
+      "installed_sha": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+      "repo_sha": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+      "same": true
+    },
+    {
+      "file": "scripts/revenue_backtest.py",
+      "installed_sha": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "repo_sha": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "same": true
+    },
+    {
+      "file": "SKILL.md",
+      "installed_sha": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf",
+      "repo_sha": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf",
+      "same": true
+    }
+  ],
+  "superseded_sandbox_output_root": "C:\\Users\\郑曾波\\AppData\\Local\\Packages\\sandbox.{74977d94-c8ec-46fa-98bb-58ad24c18989}\\AC\\Temp\\cwp-rf-e2e-20261008\\HK-00700"
+}

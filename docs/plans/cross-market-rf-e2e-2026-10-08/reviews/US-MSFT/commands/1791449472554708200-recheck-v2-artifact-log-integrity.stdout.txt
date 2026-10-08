@@ -1,0 +1,802 @@
+{
+  "artifacts": [
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\forecast.json",
+      "bytes": 1799560,
+      "sha256": "4447f9c5390a429ba5f304bf496af36f24ae6d8354b3a4fea890223d0a27c605",
+      "pass": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\forecast.md",
+      "bytes": 280916,
+      "sha256": "649b9d16741e0089f5ac6996813e0fa518b0d4c04bb7787c183a41269b6c1bec",
+      "pass": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\input.json",
+      "bytes": 869139,
+      "sha256": "1fadabef5208df3438ea5202ba4524bb4d0fdfe9e923b0759c24dca8ff4165a3",
+      "pass": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\publications.jsonl",
+      "bytes": 2286,
+      "sha256": "132beb8eb7249d8b74ded75b6e1a00dabddb14546941d35914d16e65fcf6b3a4",
+      "pass": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\snapshot.json",
+      "bytes": 2766975,
+      "sha256": "3127098e5ee041e3d17fa2fefeef47cc69ba90c321d68d4a44e6bc4c8e33c74e",
+      "pass": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\strategy_reopen_web.json",
+      "bytes": 18147,
+      "sha256": "bb32dab3510c3193b9922d8c6bee67e11e381b52365f50d5d4125c243c7b1d02",
+      "pass": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\TRUST_BOUNDARY.md",
+      "bytes": 2126,
+      "sha256": "ec2230f7bcabd8329f469d7317173260bb4fc787181238e8b74f014b0c0f7702",
+      "pass": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\repair_v2.json",
+      "bytes": 985469,
+      "sha256": "8b966f10a23c2ee9d8d07c676d2d0ae0b484e9113f99b2e540d78589efd955fb",
+      "pass": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\repair_v2.md",
+      "bytes": 2232,
+      "sha256": "28d7114a3f227a84a69bf2f75326a8772150734ad67c091606848102d65ab6d4",
+      "pass": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\fact_checks_v2.json",
+      "bytes": 700070,
+      "sha256": "b23367a2dbd48ffb03e8e6aed5812d7b3a6b71f2c4535cb2225ea60361c7c440",
+      "pass": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\qualitative_targets_v2.json",
+      "bytes": 58370,
+      "sha256": "12c468cc6ff83a9ed9eb7504eaac309ebdb09bbb2b2dbaf1a05cfc0e50dfa96b",
+      "pass": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\assumption_support_v2.json",
+      "bytes": 111123,
+      "sha256": "83dc17ce191eef01a701ef9a9dc73d2c898222bb71d1ab85ace1183e5ab1851c",
+      "pass": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\claim_contexts_v2.json",
+      "bytes": 265969,
+      "sha256": "d4e3464ba5dfc5648164578e8230a2dab69b589acd39ca102402d32c9f760dc3",
+      "pass": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\validation_v2.json",
+      "bytes": 12368,
+      "sha256": "ecdb97ba949eb02988348832595aab4bec29331d6337c36e234e40e470d31eca",
+      "pass": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\skill_step_matrix_v2.json",
+      "bytes": 6736,
+      "sha256": "579bc2289f7b3b24948210d826cecb7d3621b0ed2bcc9e4c6e154d5c9de2f1a5",
+      "pass": true
+    }
+  ],
+  "logs": [
+    {
+      "id": "1791442232272441700-initialize",
+      "label": "initialize",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "init"
+      ]
+    },
+    {
+      "id": "1791442245710731100-reuse-fy2025",
+      "label": "reuse-fy2025",
+      "returncode": 3,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "prepare",
+        "request_fy2025_reuse.json"
+      ]
+    },
+    {
+      "id": "1791442315932578800-legacy-requests",
+      "label": "legacy-requests",
+      "returncode": 1,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "legacy-requests"
+      ]
+    },
+    {
+      "id": "1791442319130050500-reuse-fy2025-legacy",
+      "label": "reuse-fy2025-legacy",
+      "returncode": 3,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "prepare",
+        "request_fy2025_reuse_legacy.json"
+      ]
+    },
+    {
+      "id": "1791442360710826700-legacy-requests-repair",
+      "label": "legacy-requests-repair",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "legacy-requests"
+      ]
+    },
+    {
+      "id": "1791442363888805300-reuse-fy2026-legacy",
+      "label": "reuse-fy2026-legacy",
+      "returncode": 3,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "prepare",
+        "request_fy2026_reuse_legacy.json"
+      ]
+    },
+    {
+      "id": "1791442370705931100-template",
+      "label": "template",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "C:/Users/郑曾波/.agents/skills/revenue-forecast/scripts/generate_input_template.py",
+        "--name",
+        "Microsoft",
+        "--base-year",
+        "2026",
+        "--forecast-years",
+        "2027",
+        "2028",
+        "2029",
+        "--segments",
+        "Productivity and Business Processes",
+        "Intelligent Cloud",
+        "More Personal Computing",
+        "--currency",
+        "USD",
+        "--unit",
+        "million",
+        "--output",
+        "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/template.json"
+      ]
+    },
+    {
+      "id": "1791442398164187200-fetch-fy2026-legacy",
+      "label": "fetch-fy2026-legacy",
+      "returncode": 3,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "prepare",
+        "request_fy2026_fetch_legacy.json"
+      ]
+    },
+    {
+      "id": "1791442421321083400-ff-fy2025-inspect",
+      "label": "ff-fy2025-inspect",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "C:/Users/郑曾波/Projects/filing-fetch/scripts/fetch_filing.py",
+        "--request-file",
+        "C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/request_fy2025_reuse.json"
+      ]
+    },
+    {
+      "id": "1791442562153378100-producer-raw-read",
+      "label": "producer-raw-read",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "raw-read"
+      ]
+    },
+    {
+      "id": "1791442653948378500-official-presentation-href",
+      "label": "official-presentation-href",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "aux-ir"
+      ]
+    },
+    {
+      "id": "1791442710444963500-official-presentation",
+      "label": "official-presentation",
+      "returncode": 1,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "aux-presentation"
+      ]
+    },
+    {
+      "id": "1791442714300841300-html-temporary-parse",
+      "label": "html-temporary-parse",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "parse-html"
+      ]
+    },
+    {
+      "id": "1791442737872418900-reuse-fy2025-after-main-fix",
+      "label": "reuse-fy2025-after-main-fix",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "prepare",
+        "request_fy2025_reuse.json"
+      ]
+    },
+    {
+      "id": "1791442978492793300-official-presentation-cdn",
+      "label": "official-presentation-cdn",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "aux-presentation"
+      ]
+    },
+    {
+      "id": "1791443254272574100-capture-opened-ancillary-pages",
+      "label": "capture-opened-ancillary-pages",
+      "returncode": 1,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "capture-pages"
+      ]
+    },
+    {
+      "id": "1791443286264640900-capture-opened-ancillary-pages-resume",
+      "label": "capture-opened-ancillary-pages-resume",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "capture-pages"
+      ]
+    },
+    {
+      "id": "1791443495417649000-build-independent-input",
+      "label": "build-independent-input",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/build_msft_input.py"
+      ]
+    },
+    {
+      "id": "1791443510680137400-lint-input",
+      "label": "lint-input",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "C:/Users/郑曾波/.agents/skills/revenue-forecast/scripts/lint_input.py",
+        "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/input.json"
+      ]
+    },
+    {
+      "id": "1791443527941085100-sync-capture-claim-hashes",
+      "label": "sync-capture-claim-hashes",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "C:/Users/郑曾波/.agents/skills/revenue-forecast/scripts/fix_hashes.py",
+        "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/input.json"
+      ]
+    },
+    {
+      "id": "1791443530724435900-validate-input-collect-all",
+      "label": "validate-input-collect-all",
+      "returncode": 2,
+      "pass": true,
+      "command": [
+        "python",
+        "C:/Users/郑曾波/.agents/skills/revenue-forecast/scripts/revenue_forecast.py",
+        "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/input.json",
+        "--validate-only",
+        "--verbose"
+      ]
+    },
+    {
+      "id": "1791443660106621400-reuse-fy2024",
+      "label": "reuse-fy2024",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "prepare",
+        "request_fy2024_reuse.json"
+      ]
+    },
+    {
+      "id": "1791443666588935900-preserve-webtool-events",
+      "label": "preserve-webtool-events",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "register-web"
+      ]
+    },
+    {
+      "id": "1791443702740486300-exact-et-fmp-discovery",
+      "label": "exact-et-fmp-discovery",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "et-discover"
+      ]
+    },
+    {
+      "id": "1791443758087987900-exact-et-fmp-entitlement-probe",
+      "label": "exact-et-fmp-entitlement-probe",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "et-probe"
+      ]
+    },
+    {
+      "id": "1791443771245355400-build-mixed-recognition-input",
+      "label": "build-mixed-recognition-input",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/build_msft_input.py"
+      ]
+    },
+    {
+      "id": "1791443860335514500-build-causal-input",
+      "label": "build-causal-input",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/build_msft_input.py"
+      ]
+    },
+    {
+      "id": "1791443863064221500-validate-current-schema-gaps",
+      "label": "validate-current-schema-gaps",
+      "returncode": 2,
+      "pass": true,
+      "command": [
+        "python",
+        "C:/Users/郑曾波/.agents/skills/revenue-forecast/scripts/revenue_forecast.py",
+        "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/input.json",
+        "--validate-only",
+        "--verbose"
+      ]
+    },
+    {
+      "id": "1791443899082027200-build-contract-aligned-input",
+      "label": "build-contract-aligned-input",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/build_msft_input.py"
+      ]
+    },
+    {
+      "id": "1791443901920636800-validate-contract-aligned-input",
+      "label": "validate-contract-aligned-input",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "C:/Users/郑曾波/.agents/skills/revenue-forecast/scripts/revenue_forecast.py",
+        "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/input.json",
+        "--validate-only",
+        "--verbose"
+      ]
+    },
+    {
+      "id": "1791443978356812800-emit-formal-json-markdown",
+      "label": "emit-formal-json-markdown",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "forecast"
+      ]
+    },
+    {
+      "id": "1791444044322242500-build-raw-guidance-units",
+      "label": "build-raw-guidance-units",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/build_msft_input.py"
+      ]
+    },
+    {
+      "id": "1791444047538644000-emit-corrected-formal",
+      "label": "emit-corrected-formal",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "forecast"
+      ]
+    },
+    {
+      "id": "1791444051706378900-strong-validate-formal",
+      "label": "strong-validate-formal",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "strong-check"
+      ]
+    },
+    {
+      "id": "1791444108573624800-finalize-versioned-input",
+      "label": "finalize-versioned-input",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/build_msft_input.py"
+      ]
+    },
+    {
+      "id": "1791444111610079900-formal-versioned-output",
+      "label": "formal-versioned-output",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "forecast"
+      ]
+    },
+    {
+      "id": "1791444115693457100-freeze-before-future-actuals",
+      "label": "freeze-before-future-actuals",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "snapshot"
+      ]
+    },
+    {
+      "id": "1791444119381523000-strong-check-with-snapshot",
+      "label": "strong-check-with-snapshot",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "strong-check"
+      ]
+    },
+    {
+      "id": "1791444707566803200-frozen-final-preflight",
+      "label": "frozen-final-preflight",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/finish_msft.py",
+        "checks"
+      ]
+    },
+    {
+      "id": "1791444730390484700-finalize-us-handoff",
+      "label": "finalize-us-handoff",
+      "returncode": 1,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/finish_msft.py",
+        "handoff"
+      ]
+    },
+    {
+      "id": "1791444753253223200-finalize-us-handoff-corrected-index",
+      "label": "finalize-us-handoff-corrected-index",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/finish_msft.py",
+        "handoff"
+      ]
+    },
+    {
+      "id": "1791444813386343500-seal-us-handoff-source-paths",
+      "label": "seal-us-handoff-source-paths",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/finish_msft.py",
+        "handoff"
+      ]
+    },
+    {
+      "id": "1791448024372205700-us-v2-build-from-review",
+      "label": "us-v2-build-from-review",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "build"
+      ]
+    },
+    {
+      "id": "1791448037465436300-us-v2-lint",
+      "label": "us-v2-lint",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "lint"
+      ]
+    },
+    {
+      "id": "1791448040587453700-us-v2-hash",
+      "label": "us-v2-hash",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "hash"
+      ]
+    },
+    {
+      "id": "1791448043861311500-us-v2-validate",
+      "label": "us-v2-validate",
+      "returncode": 2,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "validate"
+      ]
+    },
+    {
+      "id": "1791448119950000400-us-v2-build-bounded-excerpt-fragments",
+      "label": "us-v2-build-bounded-excerpt-fragments",
+      "returncode": 1,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "build"
+      ]
+    },
+    {
+      "id": "1791448137610709500-us-v2-build-complete-excerpt-fragments",
+      "label": "us-v2-build-complete-excerpt-fragments",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "build"
+      ]
+    },
+    {
+      "id": "1791448147608204000-us-v2-final-lint",
+      "label": "us-v2-final-lint",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "lint"
+      ]
+    },
+    {
+      "id": "1791448150596878500-us-v2-final-hash",
+      "label": "us-v2-final-hash",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "hash"
+      ]
+    },
+    {
+      "id": "1791448153488866500-us-v2-final-validate",
+      "label": "us-v2-final-validate",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "validate"
+      ]
+    },
+    {
+      "id": "1791448157089831600-us-v2-final-forecast",
+      "label": "us-v2-final-forecast",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "forecast"
+      ]
+    },
+    {
+      "id": "1791448231969143300-us-v2-snapshot",
+      "label": "us-v2-snapshot",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "snapshot"
+      ]
+    },
+    {
+      "id": "1791448236102858800-us-v2-registry",
+      "label": "us-v2-registry",
+      "returncode": 2,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "registry"
+      ]
+    },
+    {
+      "id": "1791448259786973700-us-v2-final-registry",
+      "label": "us-v2-final-registry",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "registry"
+      ]
+    },
+    {
+      "id": "1791448262721646400-us-v2-final-verify",
+      "label": "us-v2-final-verify",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "verify"
+      ]
+    },
+    {
+      "id": "1791448409219693800-us-v2-handoff",
+      "label": "us-v2-handoff",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "handoff"
+      ]
+    },
+    {
+      "id": "1791448487730163100-us-v2-final-handoff-scoped-ledger",
+      "label": "us-v2-final-handoff-scoped-ledger",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "handoff"
+      ]
+    }
+  ],
+  "starts": 58,
+  "finishes": 58,
+  "unpaired": [],
+  "validation_original_hashes": null
+}

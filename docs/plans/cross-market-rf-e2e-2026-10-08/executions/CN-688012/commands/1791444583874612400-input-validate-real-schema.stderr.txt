@@ -1,0 +1,63 @@
+error: 59 validation problem(s) found:
+[evidence_claims]
+  - claim_history_2023.excerpt must contain 10-500 characters
+  - claim_history_2024.excerpt must contain 10-500 characters
+  - claim_history_2025.excerpt must contain 10-500 characters
+  - claim_cmp_base.excerpt must contain 10-500 characters
+  - claim_equipment_units_low_2026.excerpt must contain 10-500 characters
+  - claim_aftermarket_revenue_low_2026.excerpt must contain 10-500 characters
+  - claim_cmp_revenue_low_2026.excerpt must contain 10-500 characters
+  - claim_equipment_units_low_2027.excerpt must contain 10-500 characters
+  - claim_aftermarket_revenue_low_2027.excerpt must contain 10-500 characters
+  - claim_cmp_revenue_low_2027.excerpt must contain 10-500 characters
+  - claim_equipment_units_low_2028.excerpt must contain 10-500 characters
+  - claim_aftermarket_revenue_low_2028.excerpt must contain 10-500 characters
+  - claim_cmp_revenue_low_2028.excerpt must contain 10-500 characters
+  - claim_equipment_units_base_2026.excerpt must contain 10-500 characters
+  - claim_aftermarket_revenue_base_2026.excerpt must contain 10-500 characters
+  - claim_cmp_revenue_base_2026.excerpt must contain 10-500 characters
+  - claim_equipment_units_base_2027.excerpt must contain 10-500 characters
+  - claim_aftermarket_revenue_base_2027.excerpt must contain 10-500 characters
+  - claim_cmp_revenue_base_2027.excerpt must contain 10-500 characters
+  - claim_equipment_units_base_2028.excerpt must contain 10-500 characters
+  - claim_aftermarket_revenue_base_2028.excerpt must contain 10-500 characters
+  - claim_cmp_revenue_base_2028.excerpt must contain 10-500 characters
+  - claim_equipment_units_high_2026.excerpt must contain 10-500 characters
+  - claim_aftermarket_revenue_high_2026.excerpt must contain 10-500 characters
+  - claim_cmp_revenue_high_2026.excerpt must contain 10-500 characters
+  - claim_equipment_units_high_2027.excerpt must contain 10-500 characters
+  - claim_aftermarket_revenue_high_2027.excerpt must contain 10-500 characters
+  - claim_cmp_revenue_high_2027.excerpt must contain 10-500 characters
+  - claim_equipment_units_high_2028.excerpt must contain 10-500 characters
+  - claim_aftermarket_revenue_high_2028.excerpt must contain 10-500 characters
+  - claim_cmp_revenue_high_2028.excerpt must contain 10-500 characters
+  - claim_recognition_Aftermarket.excerpt must contain 10-500 characters
+  - claim_recognition_CMP.excerpt must contain 10-500 characters
+  - claim_benchmark_CMP_annual_2027.excerpt must contain 10-500 characters
+  - claim_benchmark_CMP_annual_2028.excerpt must contain 10-500 characters
+  - claim_driver_core_etch_acceptance.excerpt must contain 10-500 characters
+  - claim_contrary_core_etch_acceptance.excerpt must contain 10-500 characters
+  - claim_contrary_films_packaging.excerpt must contain 10-500 characters
+  - claim_driver_afterm_support.excerpt must contain 10-500 characters
+  - claim_contrary_afterm_support.excerpt must contain 10-500 characters
+  - claim_contrary_cmp_ramp.excerpt must contain 10-500 characters
+[research_coverage]
+  - company_foundation modeled_driver requires source_ids
+  - company_foundation must map to a base or reported revenue parameter
+  - growth_curve modeled_driver requires source_ids
+  - industry_market modeled_driver requires source_ids
+  - competition modeled_driver requires source_ids
+  - capacity modeled_driver requires source_ids
+  - technology modeled_driver requires source_ids
+  - policy modeled_driver requires source_ids
+  - customers modeled_driver requires source_ids
+  - demand modeled_driver requires source_ids
+[growth_driver_tree]
+  - claim claim_driver_core_etch_acceptance does not support growth_driver:e_core_etch_acceptance
+  - claim claim_contrary_core_etch_acceptance does not support growth_driver:contra_core_etch_acceptance
+  - claim claim_driver_films_packaging does not support growth_driver:e_films_packaging
+  - claim claim_contrary_films_packaging does not support growth_driver:contra_films_packaging
+  - claim claim_driver_afterm_support does not support growth_driver:e_afterm_support
+  - claim claim_contrary_afterm_support does not support growth_driver:contra_afterm_support
+  - claim claim_driver_cmp_ramp does not support growth_driver:e_cmp_ramp
+  - claim claim_contrary_cmp_ramp does not support growth_driver:contra_cmp_ramp

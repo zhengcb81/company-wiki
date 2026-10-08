@@ -1,0 +1,1 @@
+{"verdict": "PARTIAL", "model_acceptance": "ACCEPT_WITH_LIMITATIONS", "closures": {"CN-01": "CLOSED", "CN-02": "CLOSED", "CN-03": "CLOSED_WITH_VISIBLE_GAPS", "CN-04": "CLOSED"}, "claims": 106, "parameters": 42, "triage": 19, "pdf_pages": 59, "new_blocking_findings": 0, "all_material_targets_complete": false}

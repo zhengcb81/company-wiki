@@ -1,0 +1,101 @@
+{
+  "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+  "source_type": "regulatory_filing",
+  "title": "Microsoft 10-K FY2025",
+  "publisher": "company-wiki",
+  "url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+  "published_date": "2025-07-30",
+  "accessed_date": "2026-10-08",
+  "page_or_section": "1",
+  "capture": {
+    "capture_schema_version": "1.0",
+    "capture_method": "local_document",
+    "tool_name": "company-wiki-source-version-reader",
+    "tool_call_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe|2026-10-08T06:59:01.280502+00:00",
+    "captured_date": "2026-10-08",
+    "snapshot_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+    "content_treatment": "untrusted_data_only",
+    "prompt_injection_status": "not_reviewed",
+    "host_receipt": {
+      "host_receipt_schema_version": "1.0",
+      "issuer": "company-wiki",
+      "environment": "host-runtime",
+      "tool_name": "company-wiki-source-version-reader",
+      "action": "verified_read",
+      "event_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "timestamp": "2026-10-08T06:59:01.280502+00:00",
+      "receipt_sha256": "a9e9055684ce9623a48d67df3debfdcd87cb4f0a3f38bc00a4c9d0c28ef2837e"
+    },
+    "receipt_sha256": "62a99b87c4b4374c38fddd9c6162f3f4126b46a46aff79db1c35ab64203b3c8b"
+  },
+  "company_wiki_trace": {
+    "source_ref": {
+      "byte_size": 8158067,
+      "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "mime_type": "text/html",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"
+    },
+    "read_receipt": {
+      "byte_size": 8158067,
+      "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+      "read_at": "2026-10-08T06:59:01.280502+00:00",
+      "review": {
+        "evidence_sha256": null,
+        "policy_hash": null,
+        "reviewed_at": null,
+        "source_sha256": null,
+        "status": "not_reviewed"
+      },
+      "schema_version": "2.1",
+      "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+      "status": "ok"
+    },
+    "source_manifest": {
+      "byte_size": 8158067,
+      "canonical_entity_id": null,
+      "collector_name": null,
+      "collector_version": null,
+      "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "display_name": null,
+      "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "document_kind": "annual_report",
+      "fiscal_period": null,
+      "fiscal_year": 2025,
+      "form_type": "10-K",
+      "language": null,
+      "market": "US",
+      "mime_type": "text/html",
+      "period_end": null,
+      "provider": null,
+      "provider_document_id": null,
+      "published_date": "2025-07-30",
+      "retrieved_at": null,
+      "security_id": "MSFT",
+      "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+      "title": "Microsoft 10-K FY2025"
+    },
+    "source_candidate": {
+      "resolution_outcome": "reused_existing",
+      "download_events": 0
+    }
+  },
+  "reuse_receipt": {
+    "parser_calls": null,
+    "llm_calls": null,
+    "download_calls": 0,
+    "outcome": "reused_existing",
+    "policy_hash": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+    "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+    "prompt_injection_status": "not_reviewed",
+    "artifact_read": [],
+    "producer_events": [],
+    "artifact_read_events": [],
+    "artifact_failed_events": []
+  }
+}

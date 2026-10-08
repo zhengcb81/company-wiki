@@ -1,0 +1,38 @@
+[
+  {
+    "announcement_id": "1225482894",
+    "pdf_page": 4,
+    "raw_sha256": "74fc4afd9a509136b96a8e38f12b30192a48c3d44f8a2174b97abbce18ee6d03",
+    "image": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\v3\\1225482894-p4.png",
+    "image_sha256": "9175c5f03000226a90274903aa5275c933249af8bef5d43ad8c2eddabfcede11",
+    "status": "PASS visual_read",
+    "independent_observation": "投资350000万元和达产后属地销售300000万元两项不同，7年内修饰专利，未给销售年期。"
+  },
+  {
+    "announcement_id": "1225482911",
+    "pdf_page": 4,
+    "raw_sha256": "9a9e6584fdee35342059b37c5645c3b55d143f3145af595c77f82230c0ccc0c3",
+    "image": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\v3\\1225482911-p4.png",
+    "image_sha256": "de97ce2110f430c1f55d6494e3f5fc3ede35ccbe5de0d8d0c97196b8219baf9d",
+    "status": "PASS visual_read",
+    "independent_observation": "已完工/部分楼层可用与全体预定可用2027年12月并存，不是立即全量生产能力。"
+  },
+  {
+    "announcement_id": "1225482918",
+    "pdf_page": 3,
+    "raw_sha256": "4b34335aa53528abe783eeea0af05bfc38e74a3c76fc7acfbc8be9b5f3acfaca",
+    "image": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\v3\\1225482918-p3.png",
+    "image_sha256": "42a009729edae5b952f84db4e450fdf7c2668385007ee1ef64c6ac71c58ba417",
+    "status": "PASS visual_read",
+    "independent_observation": "上海众硅2025营业收入24411.88万元列，单位万元；不是AMEC FY2025并表收入。"
+  },
+  {
+    "announcement_id": "1225482917",
+    "pdf_page": 2,
+    "raw_sha256": "b7b72c3e07eccad9a2781a928ce135851ef37ef3c1ff8ba1aae6aae96c605685",
+    "image": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\v3\\1225482917-p2.png",
+    "image_sha256": "a64155ed9fce8afa1ce2dbc43be545627a749542769383ca97b42e379c0c538d",
+    "status": "PASS visual_read",
+    "independent_observation": "客户2/3旧90000+新增20000=预计110000万元，H1已发生48979万元；预计额度不能当收入指导。"
+  }
+]

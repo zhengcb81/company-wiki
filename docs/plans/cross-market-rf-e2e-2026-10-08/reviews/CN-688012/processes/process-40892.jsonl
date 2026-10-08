@@ -1,0 +1,2 @@
+{"timestamp_utc": "2026-10-08T08:03:31.597576+00:00", "pid": 40892, "ppid": 1028, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["-m", "--config", "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml", "identify", "--query", "688012", "--market", "CN"], "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"}}
+{"timestamp_utc": "2026-10-08T08:03:32.590211+00:00", "pid": 40892, "ppid": 1028, "event": "python_exit", "data": {}}

@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.0",
+  "stages": [
+    {
+      "removed_files": [
+        {
+          "bytes": 14626,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\rf_fix_stage\\company_wiki_source_reader_v2.py",
+          "sha256": "5f5bfd11cbc880c30f2766d8d6c78366d4e32f677ba9a517914a0df5f95faed1"
+        },
+        {
+          "bytes": 15515,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\rf_fix_stage\\company_wiki_source_v2.py",
+          "sha256": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053"
+        },
+        {
+          "bytes": 14697,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\rf_fix_stage\\filing_fetch_client.py",
+          "sha256": "b16f85962173fc6a2757ed88fae7074a458ab28bbe1a21f6ec5fbf83a44f3446"
+        },
+        {
+          "bytes": 16126,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\rf_fix_stage\\source_preparation.py",
+          "sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d"
+        },
+        {
+          "bytes": 7572,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\rf_fix_stage\\test_company_wiki_source_reader_v2.py",
+          "sha256": "66f22e82ad94923ba58148952562b4de10aa8ae503c97a2504fe01de919f57d6"
+        },
+        {
+          "bytes": 8383,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\rf_fix_stage\\test_company_wiki_source_v2.py",
+          "sha256": "29f9c542138babc7a17d807c0fb388d62cff3b9aecfcb7e132b0f83155915a76"
+        },
+        {
+          "bytes": 18962,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\rf_fix_stage\\test_filing_fetch_client.py",
+          "sha256": "b973bf98fa5cc2020ed25bb876019b8e6a20757e0c90ac4be5eaa97b9f37371c"
+        },
+        {
+          "bytes": 15188,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\rf_fix_stage\\test_source_preparation.py",
+          "sha256": "3d97d242f3da4cc25af0685d662c5aa34e891d1de61493427e54d8245b7e0fec"
+        }
+      ],
+      "restored_absent": true,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\rf_fix_stage"
+    },
+    {
+      "removed_files": [
+        {
+          "bytes": 36577,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\second_fix_stage\\cninfo_api.py",
+          "sha256": "96aad298e79de955ee885e1f44fc95ae4fdcc9bf6621306ef31bd1f8adb3960d"
+        },
+        {
+          "bytes": 5310,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\second_fix_stage\\constants.py",
+          "sha256": "3ad7332e4a76e7e3e2a9a8a1ab73828584ed8b19b32327479a0f79636b2f3462"
+        },
+        {
+          "bytes": 29773,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\second_fix_stage\\segments.py",
+          "sha256": "7b0dac5d5b6f19aba2305a7cb5d9d0ecddb1e5a31a6833285c5f81259018f002"
+        }
+      ],
+      "restored_absent": true,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\second_fix_stage"
+    },
+    {
+      "removed_files": [
+        {
+          "bytes": 21150,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\second_test_stage\\test_cninfo_api.py",
+          "sha256": "0867f94a730e07c6a78435cbd522c9ce1db46926f310c97421318105447c63fd"
+        },
+        {
+          "bytes": 3481,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\second_test_stage\\test_mixed_aggregate_recognition.py",
+          "sha256": "c90904a603194be64a207fbba29c436eff334b795bf84d31def906449bf642d5"
+        }
+      ],
+      "restored_absent": true,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\second_test_stage"
+    }
+  ],
+  "scope": "Only MAIN-created patch staging copies; raw/research/review files untouched"
+}

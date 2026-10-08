@@ -1,0 +1,331 @@
+{
+  "strong_input_required": "PASS",
+  "same_json_renderer": "PASS",
+  "independent_annual_arithmetic": "PASS",
+  "independent_all8_sensitivity_units_requested_effective_clamps_terminals": "PASS",
+  "snapshot": "PASS",
+  "frozen_v1_unchanged": true,
+  "frozen_before_sha256": {
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\input.json": "d872a864d1f7220c5635974b262b2b63378c1885998754ed8010134f8c7ae32e",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\forecast.json": "46c0c6ce0c71f27899ed4544012566489c8efef1d37826194048683732a36906",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\forecast.md": "4ccd4ff3e59ed0fc72af32850b35479dce595b1b641c140a2fb54d1675588511",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\snapshot.json": "ac029a2961a01f8d9d9f752bf6253535a45b3f7c3c61e594c6501928b755e0e2",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\manifest.json": "2845d8906d3e140a1eb7fa28ddf4981b1610d3c1037f0b6d49de4da2e73b4201"
+  },
+  "frozen_after_sha256": {
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\input.json": "d872a864d1f7220c5635974b262b2b63378c1885998754ed8010134f8c7ae32e",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\forecast.json": "46c0c6ce0c71f27899ed4544012566489c8efef1d37826194048683732a36906",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\forecast.md": "4ccd4ff3e59ed0fc72af32850b35479dce595b1b641c140a2fb54d1675588511",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\snapshot.json": "ac029a2961a01f8d9d9f752bf6253535a45b3f7c3c61e594c6501928b755e0e2",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\manifest.json": "2845d8906d3e140a1eb7fa28ddf4981b1610d3c1037f0b6d49de4da2e73b4201"
+  },
+  "annual_paths": {
+    "low": {
+      "2027": 367291.97,
+      "2028": 404859.94000000006,
+      "2029": 439422.28412
+    },
+    "base": {
+      "2027": 386128.21,
+      "2028": 450353.0705999999,
+      "2029": 517490.86276199995
+    },
+    "high": {
+      "2027": 403614.12,
+      "2028": 494471.221,
+      "2029": 593733.1183770001
+    }
+  },
+  "sensitivities": [
+    {
+      "name": "Azure FY27 growth ±5pp",
+      "parameter_id": "azure_growth_base_2027",
+      "shock_type": "percentage_point",
+      "shock_value": 0.05,
+      "requested_values": {
+        "down": 0.33,
+        "up": 0.43
+      },
+      "effective_values": {
+        "down": 0.33,
+        "up": 0.43
+      },
+      "clamped": {
+        "down": false,
+        "up": false
+      },
+      "baseline_terminal_revenue": 517490.86276199995,
+      "down_terminal_revenue": 509274.659962,
+      "up_terminal_revenue": 525707.065562,
+      "max_absolute_terminal_impact": 8216.202800000086,
+      "max_relative_terminal_impact": 0.015877000718713778
+    },
+    {
+      "name": "Microsoft 365 cloud FY27 growth ±5pp",
+      "parameter_id": "microsoft_365_cloud_growth_base_2027",
+      "shock_type": "percentage_point",
+      "shock_value": 0.05,
+      "requested_values": {
+        "down": 0.12000000000000001,
+        "up": 0.22000000000000003
+      },
+      "effective_values": {
+        "down": 0.12000000000000001,
+        "up": 0.22000000000000003
+      },
+      "clamped": {
+        "down": false,
+        "up": false
+      },
+      "baseline_terminal_revenue": 517490.86276199995,
+      "down_terminal_revenue": 510859.092882,
+      "up_terminal_revenue": 524122.632642,
+      "max_absolute_terminal_impact": 6631.769880000036,
+      "max_relative_terminal_impact": 0.012815240533145537
+    },
+    {
+      "name": "Productivity and server licensing FY27 growth ±5pp",
+      "parameter_id": "productivity_and_server_licensing_growth_base_2027",
+      "shock_type": "percentage_point",
+      "shock_value": 0.05,
+      "requested_values": {
+        "down": -0.1,
+        "up": 0.0
+      },
+      "effective_values": {
+        "down": -0.1,
+        "up": 0.0
+      },
+      "clamped": {
+        "down": false,
+        "up": false
+      },
+      "baseline_terminal_revenue": 517490.86276199995,
+      "down_terminal_revenue": 515718.70671199996,
+      "up_terminal_revenue": 519263.01881199994,
+      "max_absolute_terminal_impact": 1772.1560499999905,
+      "max_relative_terminal_impact": 0.0034245166002380713
+    },
+    {
+      "name": "Industry solutions FY27 growth ±5pp",
+      "parameter_id": "industry_solutions_growth_base_2027",
+      "shock_type": "percentage_point",
+      "shock_value": 0.05,
+      "requested_values": {
+        "down": 0.039999999999999994,
+        "up": 0.14
+      },
+      "effective_values": {
+        "down": 0.039999999999999994,
+        "up": 0.14
+      },
+      "clamped": {
+        "down": false,
+        "up": false
+      },
+      "baseline_terminal_revenue": 517490.86276199995,
+      "down_terminal_revenue": 516293.3560619999,
+      "up_terminal_revenue": 518688.369462,
+      "max_absolute_terminal_impact": 1197.5067000000272,
+      "max_relative_terminal_impact": 0.0023140634669539554
+    },
+    {
+      "name": "Frontier and support services FY27 growth ±5pp",
+      "parameter_id": "frontier_and_support_services_growth_base_2027",
+      "shock_type": "percentage_point",
+      "shock_value": 0.05,
+      "requested_values": {
+        "down": 0.009999999999999995,
+        "up": 0.11
+      },
+      "effective_values": {
+        "down": 0.009999999999999995,
+        "up": 0.11
+      },
+      "clamped": {
+        "down": false,
+        "up": false
+      },
+      "baseline_terminal_revenue": 517490.86276199995,
+      "down_terminal_revenue": 517039.86676199996,
+      "up_terminal_revenue": 517941.85876199993,
+      "max_absolute_terminal_impact": 450.99599999998463,
+      "max_relative_terminal_impact": 0.0008715052428034907
+    },
+    {
+      "name": "Search and advertising FY27 growth ±5pp",
+      "parameter_id": "search_and_advertising_growth_base_2027",
+      "shock_type": "percentage_point",
+      "shock_value": 0.05,
+      "requested_values": {
+        "down": 0.03,
+        "up": 0.13
+      },
+      "effective_values": {
+        "down": 0.03,
+        "up": 0.13
+      },
+      "clamped": {
+        "down": false,
+        "up": false
+      },
+      "baseline_terminal_revenue": 517490.86276199995,
+      "down_terminal_revenue": 516082.46991199994,
+      "up_terminal_revenue": 518899.25561199995,
+      "max_absolute_terminal_impact": 1408.3928500000038,
+      "max_relative_terminal_impact": 0.00272158013087033
+    },
+    {
+      "name": "XBOX FY27 growth ±5pp",
+      "parameter_id": "xbox_growth_base_2027",
+      "shock_type": "percentage_point",
+      "shock_value": 0.05,
+      "requested_values": {
+        "down": -0.09,
+        "up": 0.010000000000000002
+      },
+      "effective_values": {
+        "down": -0.09,
+        "up": 0.010000000000000002
+      },
+      "clamped": {
+        "down": false,
+        "up": false
+      },
+      "baseline_terminal_revenue": 517490.86276199995,
+      "down_terminal_revenue": 516335.12116199994,
+      "up_terminal_revenue": 518646.6043619999,
+      "max_absolute_terminal_impact": 1155.7416000000085,
+      "max_relative_terminal_impact": 0.0022333565347057104
+    },
+    {
+      "name": "Windows OEM and devices FY27 growth ±5pp",
+      "parameter_id": "windows_oem_and_devices_growth_base_2027",
+      "shock_type": "percentage_point",
+      "shock_value": 0.05,
+      "requested_values": {
+        "down": -0.22999999999999998,
+        "up": -0.13
+      },
+      "effective_values": {
+        "down": -0.22999999999999998,
+        "up": -0.13
+      },
+      "clamped": {
+        "down": false,
+        "up": false
+      },
+      "baseline_terminal_revenue": 517490.86276199995,
+      "down_terminal_revenue": 516662.14326199994,
+      "up_terminal_revenue": 518319.58226199995,
+      "max_absolute_terminal_impact": 828.7195000000065,
+      "max_relative_terminal_impact": 0.0016014186136096944
+    }
+  ],
+  "independent_sensitivity_checks": [
+    {
+      "parameter_id": "azure_growth_base_2027",
+      "ratio_delta": 0.05,
+      "down_terminal": 509274.6599619999,
+      "up_terminal": 525707.0655619999,
+      "clamped": false,
+      "status": "PASS"
+    },
+    {
+      "parameter_id": "microsoft_365_cloud_growth_base_2027",
+      "ratio_delta": 0.05,
+      "down_terminal": 510859.09288199997,
+      "up_terminal": 524122.6326419999,
+      "clamped": false,
+      "status": "PASS"
+    },
+    {
+      "parameter_id": "productivity_and_server_licensing_growth_base_2027",
+      "ratio_delta": 0.05,
+      "down_terminal": 515718.70671199996,
+      "up_terminal": 519263.01881199994,
+      "clamped": false,
+      "status": "PASS"
+    },
+    {
+      "parameter_id": "industry_solutions_growth_base_2027",
+      "ratio_delta": 0.05,
+      "down_terminal": 516293.3560619999,
+      "up_terminal": 518688.369462,
+      "clamped": false,
+      "status": "PASS"
+    },
+    {
+      "parameter_id": "frontier_and_support_services_growth_base_2027",
+      "ratio_delta": 0.05,
+      "down_terminal": 517039.86676199996,
+      "up_terminal": 517941.85876199993,
+      "clamped": false,
+      "status": "PASS"
+    },
+    {
+      "parameter_id": "search_and_advertising_growth_base_2027",
+      "ratio_delta": 0.05,
+      "down_terminal": 516082.46991199994,
+      "up_terminal": 518899.25561199995,
+      "clamped": false,
+      "status": "PASS"
+    },
+    {
+      "parameter_id": "xbox_growth_base_2027",
+      "ratio_delta": 0.05,
+      "down_terminal": 516335.12116199994,
+      "up_terminal": 518646.60436199995,
+      "clamped": false,
+      "status": "PASS"
+    },
+    {
+      "parameter_id": "windows_oem_and_devices_growth_base_2027",
+      "ratio_delta": 0.05,
+      "down_terminal": 516662.14326199994,
+      "up_terminal": 518319.58226199995,
+      "clamped": false,
+      "status": "PASS"
+    }
+  ],
+  "confidence": {
+    "score": 50.21721120270234,
+    "rating": "low",
+    "components": {
+      "verified_claim_quality": 14.000000000000005,
+      "verified_claim_coverage": 25.0,
+      "source_freshness": 8.108605601351165,
+      "revenue_weighted_explicit_models": 0.0,
+      "historical_accuracy": 0.0,
+      "revenue_weighted_sensitivity_coverage": 3.1086056013511643
+    },
+    "driver_evidence_coverage": 1.0,
+    "sensitivity_concentration": 0.3793000644169136,
+    "historical_accuracy": {
+      "wape": null,
+      "observations": 0
+    },
+    "quality_gates": {
+      "base_reconciliation": true,
+      "recognition_contract": true,
+      "scenario_consistency": true,
+      "research_coverage": true,
+      "management_target_coverage": true,
+      "growth_driver_tree": true
+    },
+    "limitations": [
+      "No immutable historical backtest record",
+      "One or more segments use a direct fallback model",
+      "Research coverage contains 1 material data gap(s)",
+      "Confidence is an evidence/workflow score, not a calibrated forecast probability",
+      "Management target coverage contains 10 unmodeled material/contextual target(s)",
+      "Growth driver enterprise_migration is not triangulated across two evidence types and sources",
+      "Growth driver advertising is not triangulated across two evidence types and sources",
+      "Growth driver consumer_cycle is not triangulated across two evidence types and sources"
+    ]
+  },
+  "confidence_note": "Score legitimately unchanged after actual full recomputation: identical linear first-year shocks scale all impacts proportionally; concentration and covered revenue weights are unchanged. Sensitivity intervals changed100fold. Score does not certify exact future rate evidence.",
+  "input_sha256": "1fadabef5208df3438ea5202ba4524bb4d0fdfe9e923b0759c24dca8ff4165a3",
+  "forecast_sha256": "4447f9c5390a429ba5f304bf496af36f24ae6d8354b3a4fea890223d0a27c605",
+  "acceptance": "executor technical checks; independent review pending; US07 BLOCKED"
+}

@@ -1,0 +1,125 @@
+{
+  "strong_original": "PASS",
+  "snapshot_original": "PASS",
+  "renderer_original": "PASS",
+  "independent_cli": "PASS",
+  "deterministic_fields": {
+    "company_name": true,
+    "as_of_date": true,
+    "currency": true,
+    "unit": true,
+    "fiscal_year_end": true,
+    "base_year": true,
+    "forecast_years": true,
+    "historical_revenue": true,
+    "revenue_constraints": true,
+    "constraint_audit": true,
+    "base_revenue": true,
+    "segments": true,
+    "consolidated_forecast": true,
+    "schema_version": true,
+    "engine_version": true,
+    "research_coverage": true,
+    "management_target_coverage": true,
+    "scenario_probabilities": true,
+    "probability_weighted_forecast": true,
+    "growth_driver_analysis": true,
+    "sensitivities": true,
+    "theme_analysis": true,
+    "confidence": true,
+    "forecast_version": true,
+    "data_gaps": true,
+    "input_sha256": true,
+    "input_document": true,
+    "disconfirming_indicators": true,
+    "parameter_trace": true,
+    "sources": true,
+    "evidence_claims": true,
+    "historical_accuracy_records": true
+  },
+  "runtime": {
+    "SKILL.md": {
+      "installed_sha256": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf",
+      "repo_sha256": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf",
+      "matches_manifest": true
+    },
+    "scripts/revenue_core.py": {
+      "installed_sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "repo_sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "matches_manifest": true
+    },
+    "scripts/revenue_forecast.py": {
+      "installed_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "repo_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "matches_manifest": true
+    },
+    "scripts/source_preparation.py": {
+      "installed_sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+      "repo_sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+      "matches_manifest": true
+    },
+    "scripts/company_wiki_source.py": {
+      "installed_sha256": "b223974e94ffb6d91e0e927b252e1fbc67a590fc910c3da10600d292d48d4470",
+      "repo_sha256": "b223974e94ffb6d91e0e927b252e1fbc67a590fc910c3da10600d292d48d4470",
+      "matches_manifest": true
+    },
+    "scripts/company_wiki_source_v2.py": {
+      "installed_sha256": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+      "repo_sha256": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+      "matches_manifest": true
+    },
+    "scripts/company_wiki_source_reader_v2.py": {
+      "installed_sha256": "5f5bfd11cbc880c30f2766d8d6c78366d4e32f677ba9a517914a0df5f95faed1",
+      "repo_sha256": "5f5bfd11cbc880c30f2766d8d6c78366d4e32f677ba9a517914a0df5f95faed1",
+      "matches_manifest": true
+    },
+    "scripts/contracts/constants.py": {
+      "installed_sha256": "3ad7332e4a76e7e3e2a9a8a1ab73828584ed8b19b32327479a0f79636b2f3462",
+      "repo_sha256": "3ad7332e4a76e7e3e2a9a8a1ab73828584ed8b19b32327479a0f79636b2f3462",
+      "matches_manifest": true
+    },
+    "scripts/forecast/segments.py": {
+      "installed_sha256": "7b0dac5d5b6f19aba2305a7cb5d9d0ecddb1e5a31a6833285c5f81259018f002",
+      "repo_sha256": "7b0dac5d5b6f19aba2305a7cb5d9d0ecddb1e5a31a6833285c5f81259018f002",
+      "matches_manifest": true
+    },
+    "scripts/revenue_backtest.py": {
+      "installed_sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "repo_sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "matches_manifest": true
+    },
+    "scripts/revenue_report.py": {
+      "installed_sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+      "repo_sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+      "matches_manifest": true
+    },
+    "scripts/lint_input.py": {
+      "installed_sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "repo_sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "matches_manifest": true
+    },
+    "scripts/fix_hashes.py": {
+      "installed_sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "repo_sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "matches_manifest": true
+    },
+    "scripts/publication_registry.py": {
+      "installed_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+      "repo_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+      "matches_manifest": true
+    }
+  },
+  "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\v2",
+  "original_hash_before": {
+    "input.json": "1fadabef5208df3438ea5202ba4524bb4d0fdfe9e923b0759c24dca8ff4165a3",
+    "forecast.json": "4447f9c5390a429ba5f304bf496af36f24ae6d8354b3a4fea890223d0a27c605",
+    "forecast.md": "649b9d16741e0089f5ac6996813e0fa518b0d4c04bb7787c183a41269b6c1bec",
+    "snapshot.json": "3127098e5ee041e3d17fa2fefeef47cc69ba90c321d68d4a44e6bc4c8e33c74e"
+  },
+  "original_hash_after": {
+    "input.json": "1fadabef5208df3438ea5202ba4524bb4d0fdfe9e923b0759c24dca8ff4165a3",
+    "forecast.json": "4447f9c5390a429ba5f304bf496af36f24ae6d8354b3a4fea890223d0a27c605",
+    "forecast.md": "649b9d16741e0089f5ac6996813e0fa518b0d4c04bb7787c183a41269b6c1bec",
+    "snapshot.json": "3127098e5ee041e3d17fa2fefeef47cc69ba90c321d68d4a44e6bc4c8e33c74e"
+  }
+}

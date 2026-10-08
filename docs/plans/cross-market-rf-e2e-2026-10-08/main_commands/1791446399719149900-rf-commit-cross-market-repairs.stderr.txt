@@ -1,0 +1,6 @@
+[WARNING] Unstaged files detected.
+[INFO] Stashing unstaged files to C:\Users\郑曾波\.cache\pre-commit\patch1791446401-107748.
+ruff check (WU-1.2, mirrors CI).......................................................Passed
+mypy public contracts (FC-1204-c, mirrors CI).........................................Passed
+host assumption guard (FC-1307-a, mirrors the CI contract test).......................Passed
+[INFO] Restored changes from C:\Users\郑曾波\.cache\pre-commit\patch1791446401-107748.

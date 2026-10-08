@@ -1,0 +1,148 @@
+[
+  {
+    "target_id": "CMP_annual_2026",
+    "status": "PASS",
+    "treatment": "unmodeled_data_gap",
+    "raw_value": 28000.0,
+    "raw_unit": "万元",
+    "measurement_basis": "annual_period",
+    "measurement_periods": [
+      "FY2026"
+    ],
+    "perimeter_status": "mismatch",
+    "independent_scenario_checks": {},
+    "scope": {
+      "type": "segment",
+      "name": "CMP"
+    }
+  },
+  {
+    "target_id": "CMP_annual_2027",
+    "status": "PASS",
+    "treatment": "independent_benchmark",
+    "raw_value": 43000.0,
+    "raw_unit": "万元",
+    "measurement_basis": "annual_period",
+    "measurement_periods": [
+      "FY2027"
+    ],
+    "perimeter_status": "matched",
+    "independent_scenario_checks": {
+      "low": {
+        "measurement_basis": "annual_period",
+        "measurement_periods": [
+          "FY2027"
+        ],
+        "modeled_period_values": {
+          "FY2027": 180.0
+        },
+        "modeled_value": 180.0,
+        "target_value": 430.0,
+        "attainment_ratio": 0.4186046511627907,
+        "meets_target": false
+      },
+      "base": {
+        "measurement_basis": "annual_period",
+        "measurement_periods": [
+          "FY2027"
+        ],
+        "modeled_period_values": {
+          "FY2027": 400.0
+        },
+        "modeled_value": 400.0,
+        "target_value": 430.0,
+        "attainment_ratio": 0.9302325581395349,
+        "meets_target": false
+      },
+      "high": {
+        "measurement_basis": "annual_period",
+        "measurement_periods": [
+          "FY2027"
+        ],
+        "modeled_period_values": {
+          "FY2027": 520.0
+        },
+        "modeled_value": 520.0,
+        "target_value": 430.0,
+        "attainment_ratio": 1.2093023255813953,
+        "meets_target": true
+      }
+    },
+    "scope": {
+      "type": "segment",
+      "name": "CMP"
+    }
+  },
+  {
+    "target_id": "CMP_annual_2028",
+    "status": "PASS",
+    "treatment": "independent_benchmark",
+    "raw_value": 58000.0,
+    "raw_unit": "万元",
+    "measurement_basis": "annual_period",
+    "measurement_periods": [
+      "FY2028"
+    ],
+    "perimeter_status": "matched",
+    "independent_scenario_checks": {
+      "low": {
+        "measurement_basis": "annual_period",
+        "measurement_periods": [
+          "FY2028"
+        ],
+        "modeled_period_values": {
+          "FY2028": 260.0
+        },
+        "modeled_value": 260.0,
+        "target_value": 580.0,
+        "attainment_ratio": 0.4482758620689655,
+        "meets_target": false
+      },
+      "base": {
+        "measurement_basis": "annual_period",
+        "measurement_periods": [
+          "FY2028"
+        ],
+        "modeled_period_values": {
+          "FY2028": 550.0
+        },
+        "modeled_value": 550.0,
+        "target_value": 580.0,
+        "attainment_ratio": 0.9482758620689655,
+        "meets_target": false
+      },
+      "high": {
+        "measurement_basis": "annual_period",
+        "measurement_periods": [
+          "FY2028"
+        ],
+        "modeled_period_values": {
+          "FY2028": 750.0
+        },
+        "modeled_value": 750.0,
+        "target_value": 580.0,
+        "attainment_ratio": 1.293103448275862,
+        "meets_target": true
+      }
+    },
+    "scope": {
+      "type": "segment",
+      "name": "CMP"
+    }
+  },
+  {
+    "target_id": "LingangPhaseII_local_sales_at_maturity",
+    "status": "PASS",
+    "treatment": "unmodeled_data_gap",
+    "raw_value": 300000.0,
+    "raw_unit": "万元",
+    "measurement_basis": "ambiguous",
+    "measurement_periods": [],
+    "perimeter_status": "mismatch",
+    "independent_scenario_checks": {},
+    "scope": {
+      "type": "custom",
+      "name": "Lingang PhaseII local contribution sales"
+    }
+  }
+]

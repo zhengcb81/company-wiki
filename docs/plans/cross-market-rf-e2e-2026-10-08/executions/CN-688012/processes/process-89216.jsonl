@@ -1,0 +1,2 @@
+{"timestamp_utc": "2026-10-08T07:17:55.151436+00:00", "pid": 89216, "ppid": 51364, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["-m", "discover"], "cwd": "C:\\Users\\郑曾波\\Projects\\StockInfoDLSimple\\v2-clean-rewrite"}}
+{"timestamp_utc": "2026-10-08T07:17:57.168235+00:00", "pid": 89216, "ppid": 51364, "event": "python_exit", "data": {}}

@@ -1,0 +1,1263 @@
+{
+  "history": [
+    {
+      "year": 2024,
+      "value": 245122,
+      "source_ids": [
+        "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"
+      ],
+      "claim_ids": [
+        "claim_99_historical_revenue_2024"
+      ]
+    },
+    {
+      "year": 2025,
+      "value": 281724,
+      "source_ids": [
+        "src_results"
+      ],
+      "claim_ids": [
+        "claim_100_historical_revenue_2025"
+      ]
+    },
+    {
+      "year": 2026,
+      "value": 331839,
+      "source_ids": [
+        "src_results"
+      ],
+      "claim_ids": [
+        "claim_101_historical_revenue_2026"
+      ]
+    }
+  ],
+  "segments": {
+    "Azure|low": {
+      "annual_revenue": {
+        "2027": 132519.4,
+        "2028": 161673.66799999998,
+        "2029": 187541.45487999995
+      },
+      "increment": 85603.45487999995,
+      "cagr": 0.22533185511453002
+    },
+    "Microsoft 365 cloud|low": {
+      "annual_revenue": {
+        "2027": 112334.88,
+        "2028": 123568.36800000002,
+        "2029": 133453.83744000003
+      },
+      "increment": 33154.83744000003,
+      "cagr": 0.09987877451962679
+    },
+    "Productivity and server licensing|low": {
+      "annual_revenue": {
+        "2027": 34302.200000000004,
+        "2028": 32244.068000000003,
+        "2029": 30631.8646
+      },
+      "increment": -6653.135399999999,
+      "cagr": -0.06341665895205406
+    },
+    "Industry solutions|low": {
+      "annual_revenue": {
+        "2027": 21362.25,
+        "2028": 22216.74,
+        "2029": 22883.2422
+      },
+      "increment": 2538.2422000000006,
+      "cagr": 0.03996794773012424
+    },
+    "Frontier and support services|low": {
+      "annual_revenue": {
+        "2027": 8425.2,
+        "2028": 8593.704000000002,
+        "2029": 8679.641040000002
+      },
+      "increment": 419.64104000000225,
+      "cagr": 0.01665571369847685
+    },
+    "Search and advertising|low": {
+      "annual_revenue": {
+        "2027": 25580.05,
+        "2028": 26091.650999999998,
+        "2029": 26352.567509999997
+      },
+      "increment": 1517.5675099999971,
+      "cagr": 0.019967319214357238
+    },
+    "XBOX|low": {
+      "annual_revenue": {
+        "2027": 19611.0,
+        "2028": 18630.45,
+        "2029": 18630.45
+      },
+      "increment": -3159.5499999999993,
+      "cagr": -0.050878004197067006
+    },
+    "Windows OEM and devices|low": {
+      "annual_revenue": {
+        "2027": 13156.99,
+        "2028": 11841.291,
+        "2029": 11249.226449999998
+      },
+      "increment": -5837.773550000002,
+      "cagr": -0.13006738532220652
+    },
+    "Azure|base": {
+      "annual_revenue": {
+        "2027": 140674.44,
+        "2028": 182876.772,
+        "2029": 226767.19728
+      },
+      "increment": 124829.19728,
+      "cagr": 0.3054133245454078
+    },
+    "Microsoft 365 cloud|base": {
+      "annual_revenue": {
+        "2027": 117349.82999999999,
+        "2028": 136125.80279999998,
+        "2029": 155183.415192
+      },
+      "increment": 54884.415191999986,
+      "cagr": 0.15659923514391116
+    },
+    "Productivity and server licensing|base": {
+      "annual_revenue": {
+        "2027": 35420.75,
+        "2028": 34358.1275,
+        "2029": 33670.96495
+      },
+      "increment": -3614.0350499999986,
+      "cagr": -0.03341406408115222
+    },
+    "Industry solutions|base": {
+      "annual_revenue": {
+        "2027": 22176.050000000003,
+        "2028": 24171.894500000006,
+        "2029": 26105.646060000006
+      },
+      "increment": 5760.646060000006,
+      "cagr": 0.086656420711269
+    },
+    "Frontier and support services|base": {
+      "annual_revenue": {
+        "2027": 8755.6,
+        "2028": 9193.380000000001,
+        "2029": 9561.115200000002
+      },
+      "increment": 1301.115200000002,
+      "cagr": 0.04996825300838603
+    },
+    "Search and advertising|base": {
+      "annual_revenue": {
+        "2027": 26821.800000000003,
+        "2028": 28699.326000000005,
+        "2029": 30421.285560000008
+      },
+      "increment": 5586.2855600000075,
+      "cagr": 0.06996884644498325
+    },
+    "XBOX|base": {
+      "annual_revenue": {
+        "2027": 20918.399999999998,
+        "2028": 21336.767999999996,
+        "2029": 22190.238719999998
+      },
+      "increment": 400.23871999999756,
+      "cagr": 0.006085557531990915
+    },
+    "Windows OEM and devices|base": {
+      "annual_revenue": {
+        "2027": 14011.340000000002,
+        "2028": 13590.999800000001,
+        "2029": 13590.999800000001
+      },
+      "increment": -3496.0001999999986,
+      "cagr": -0.07346493021134026
+    },
+    "Azure|high": {
+      "annual_revenue": {
+        "2027": 147810.1,
+        "2028": 203977.938,
+        "2029": 265171.3194
+      },
+      "increment": 163233.31939999998,
+      "cagr": 0.3752980070329024
+    },
+    "Microsoft 365 cloud|high": {
+      "annual_revenue": {
+        "2027": 122364.78,
+        "2028": 148061.38379999998,
+        "2029": 176193.04672199997
+      },
+      "increment": 75894.04672199997,
+      "cagr": 0.20660203690487933
+    },
+    "Productivity and server licensing|high": {
+      "annual_revenue": {
+        "2027": 36539.3,
+        "2028": 36539.3,
+        "2029": 36904.69300000001
+      },
+      "increment": -380.3069999999934,
+      "cagr": -0.0034116259554705097
+    },
+    "Industry solutions|high": {
+      "annual_revenue": {
+        "2027": 22989.85,
+        "2028": 25978.530499999997,
+        "2029": 29095.95416
+      },
+      "increment": 8750.954160000001,
+      "cagr": 0.12665678519551804
+    },
+    "Frontier and support services|high": {
+      "annual_revenue": {
+        "2027": 9003.400000000001,
+        "2028": 9723.672000000002,
+        "2029": 10404.329040000002
+      },
+      "increment": 2144.3290400000024,
+      "cagr": 0.07996913492039148
+    },
+    "Search and advertising|high": {
+      "annual_revenue": {
+        "2027": 27815.200000000004,
+        "2028": 30874.872000000007,
+        "2029": 33962.35920000001
+      },
+      "increment": 9127.359200000014,
+      "cagr": 0.10996996915749868
+    },
+    "XBOX|high": {
+      "annual_revenue": {
+        "2027": 22225.8,
+        "2028": 24003.864,
+        "2029": 25924.173120000003
+      },
+      "increment": 4134.173120000003,
+      "cagr": 0.05961775703900063
+    },
+    "Windows OEM and devices|high": {
+      "annual_revenue": {
+        "2027": 14865.69,
+        "2028": 15311.6607,
+        "2029": 16077.243735000002
+      },
+      "increment": -1009.7562649999982,
+      "cagr": -0.020099621399700007
+    }
+  },
+  "company": {
+    "low": {
+      "annual_revenue": {
+        "2027": 367291.97,
+        "2028": 404859.94000000006,
+        "2029": 439422.28412
+      },
+      "reporting_groups": {
+        "Agents and Infra": {
+          "2027": 308943.93,
+          "2028": 348296.548,
+          "2029": 383190.04016
+        },
+        "Devices and Consumer": {
+          "2027": 58348.04,
+          "2028": 56563.39199999999,
+          "2029": 56232.24395999999
+        }
+      },
+      "cagr": 0.09812442243569786,
+      "increment": 107583.28412000003
+    },
+    "base": {
+      "annual_revenue": {
+        "2027": 386128.21,
+        "2028": 450353.0705999999,
+        "2029": 517490.86276199995
+      },
+      "reporting_groups": {
+        "Agents and Infra": {
+          "2027": 324376.67,
+          "2028": 386725.97679999995,
+          "2029": 451288.33868199994
+        },
+        "Devices and Consumer": {
+          "2027": 61751.54,
+          "2028": 63627.0938,
+          "2029": 66202.52408
+        }
+      },
+      "cagr": 0.15964507172665,
+      "increment": 185651.86276199995
+    },
+    "high": {
+      "annual_revenue": {
+        "2027": 403614.12,
+        "2028": 494471.221,
+        "2029": 593733.1183770001
+      },
+      "reporting_groups": {
+        "Agents and Infra": {
+          "2027": 338707.43,
+          "2028": 424280.8243,
+          "2029": 517769.34232199995
+        },
+        "Devices and Consumer": {
+          "2027": 64906.69,
+          "2028": 70190.39670000001,
+          "2029": 75963.77605500001
+        }
+      },
+      "cagr": 0.21400725702614687,
+      "increment": 261894.1183770001
+    }
+  },
+  "ordering": [
+    {
+      "segment": "Azure",
+      "year": 2027,
+      "values": [
+        132519.4,
+        140674.44,
+        147810.1
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "Azure",
+      "year": 2028,
+      "values": [
+        161673.66799999998,
+        182876.772,
+        203977.938
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "Azure",
+      "year": 2029,
+      "values": [
+        187541.45487999995,
+        226767.19728,
+        265171.3194
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "Microsoft 365 cloud",
+      "year": 2027,
+      "values": [
+        112334.88,
+        117349.82999999999,
+        122364.78
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "Microsoft 365 cloud",
+      "year": 2028,
+      "values": [
+        123568.36800000002,
+        136125.80279999998,
+        148061.38379999998
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "Microsoft 365 cloud",
+      "year": 2029,
+      "values": [
+        133453.83744000003,
+        155183.415192,
+        176193.04672199997
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "Productivity and server licensing",
+      "year": 2027,
+      "values": [
+        34302.200000000004,
+        35420.75,
+        36539.3
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "Productivity and server licensing",
+      "year": 2028,
+      "values": [
+        32244.068000000003,
+        34358.1275,
+        36539.3
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "Productivity and server licensing",
+      "year": 2029,
+      "values": [
+        30631.8646,
+        33670.96495,
+        36904.69300000001
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "Industry solutions",
+      "year": 2027,
+      "values": [
+        21362.25,
+        22176.050000000003,
+        22989.85
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "Industry solutions",
+      "year": 2028,
+      "values": [
+        22216.74,
+        24171.894500000006,
+        25978.530499999997
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "Industry solutions",
+      "year": 2029,
+      "values": [
+        22883.2422,
+        26105.646060000006,
+        29095.95416
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "Frontier and support services",
+      "year": 2027,
+      "values": [
+        8425.2,
+        8755.6,
+        9003.400000000001
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "Frontier and support services",
+      "year": 2028,
+      "values": [
+        8593.704000000002,
+        9193.380000000001,
+        9723.672000000002
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "Frontier and support services",
+      "year": 2029,
+      "values": [
+        8679.641040000002,
+        9561.115200000002,
+        10404.329040000002
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "Search and advertising",
+      "year": 2027,
+      "values": [
+        25580.05,
+        26821.800000000003,
+        27815.200000000004
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "Search and advertising",
+      "year": 2028,
+      "values": [
+        26091.650999999998,
+        28699.326000000005,
+        30874.872000000007
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "Search and advertising",
+      "year": 2029,
+      "values": [
+        26352.567509999997,
+        30421.285560000008,
+        33962.35920000001
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "XBOX",
+      "year": 2027,
+      "values": [
+        19611.0,
+        20918.399999999998,
+        22225.8
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "XBOX",
+      "year": 2028,
+      "values": [
+        18630.45,
+        21336.767999999996,
+        24003.864
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "XBOX",
+      "year": 2029,
+      "values": [
+        18630.45,
+        22190.238719999998,
+        25924.173120000003
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "Windows OEM and devices",
+      "year": 2027,
+      "values": [
+        13156.99,
+        14011.340000000002,
+        14865.69
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "Windows OEM and devices",
+      "year": 2028,
+      "values": [
+        11841.291,
+        13590.999800000001,
+        15311.6607
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "Windows OEM and devices",
+      "year": 2029,
+      "values": [
+        11249.226449999998,
+        13590.999800000001,
+        16077.243735000002
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "company",
+      "year": 2027,
+      "values": [
+        367291.97,
+        386128.21,
+        403614.12
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "company",
+      "year": 2028,
+      "values": [
+        404859.94000000006,
+        450353.0705999999,
+        494471.221
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "company",
+      "year": 2029,
+      "values": [
+        439422.28412,
+        517490.86276199995,
+        593733.1183770001
+      ],
+      "status": "PASS"
+    }
+  ],
+  "sensitivity": [
+    {
+      "name": "Azure FY27 growth ±5pp",
+      "parameter_id": "azure_growth_base_2027",
+      "stored_shock": 0.05,
+      "named_shock_ratio": 0.05,
+      "semantic_status": "PASS",
+      "down_actual": 509274.659962,
+      "down_intended_5pp": 509274.659962,
+      "up_actual": 525707.065562,
+      "up_intended_5pp": 525707.065562
+    },
+    {
+      "name": "Microsoft 365 cloud FY27 growth ±5pp",
+      "parameter_id": "microsoft_365_cloud_growth_base_2027",
+      "stored_shock": 0.05,
+      "named_shock_ratio": 0.05,
+      "semantic_status": "PASS",
+      "down_actual": 510859.09288199997,
+      "down_intended_5pp": 510859.0928819999,
+      "up_actual": 524122.632642,
+      "up_intended_5pp": 524122.632642
+    },
+    {
+      "name": "Productivity and server licensing FY27 growth ±5pp",
+      "parameter_id": "productivity_and_server_licensing_growth_base_2027",
+      "stored_shock": 0.05,
+      "named_shock_ratio": 0.05,
+      "semantic_status": "PASS",
+      "down_actual": 515718.70671199996,
+      "down_intended_5pp": 515718.70671199996,
+      "up_actual": 519263.01881199994,
+      "up_intended_5pp": 519263.01881199994
+    },
+    {
+      "name": "Industry solutions FY27 growth ±5pp",
+      "parameter_id": "industry_solutions_growth_base_2027",
+      "stored_shock": 0.05,
+      "named_shock_ratio": 0.05,
+      "semantic_status": "PASS",
+      "down_actual": 516293.356062,
+      "down_intended_5pp": 516293.356062,
+      "up_actual": 518688.369462,
+      "up_intended_5pp": 518688.369462
+    },
+    {
+      "name": "Frontier and support services FY27 growth ±5pp",
+      "parameter_id": "frontier_and_support_services_growth_base_2027",
+      "stored_shock": 0.05,
+      "named_shock_ratio": 0.05,
+      "semantic_status": "PASS",
+      "down_actual": 517039.86676199996,
+      "down_intended_5pp": 517039.86676199996,
+      "up_actual": 517941.85876199993,
+      "up_intended_5pp": 517941.85876199993
+    },
+    {
+      "name": "Search and advertising FY27 growth ±5pp",
+      "parameter_id": "search_and_advertising_growth_base_2027",
+      "stored_shock": 0.05,
+      "named_shock_ratio": 0.05,
+      "semantic_status": "PASS",
+      "down_actual": 516082.46991199994,
+      "down_intended_5pp": 516082.46991199994,
+      "up_actual": 518899.25561199995,
+      "up_intended_5pp": 518899.25561199995
+    },
+    {
+      "name": "XBOX FY27 growth ±5pp",
+      "parameter_id": "xbox_growth_base_2027",
+      "stored_shock": 0.05,
+      "named_shock_ratio": 0.05,
+      "semantic_status": "PASS",
+      "down_actual": 516335.12116199994,
+      "down_intended_5pp": 516335.12116199994,
+      "up_actual": 518646.6043619999,
+      "up_intended_5pp": 518646.6043619999
+    },
+    {
+      "name": "Windows OEM and devices FY27 growth ±5pp",
+      "parameter_id": "windows_oem_and_devices_growth_base_2027",
+      "stored_shock": 0.05,
+      "named_shock_ratio": 0.05,
+      "semantic_status": "PASS",
+      "down_actual": 516662.14326199994,
+      "down_intended_5pp": 516662.14326199994,
+      "up_actual": 518319.58226199995,
+      "up_intended_5pp": 518319.58226199995
+    }
+  ],
+  "growth_driver_analysis": {
+    "status": "modeled",
+    "top_drivers": [
+      {
+        "driver_id": "cloud_ai",
+        "title": "Cloud usage and Copilot mix",
+        "thesis": "Usage delivery and enterprise paid monetization, constrained by GPUs and budgets.",
+        "estimated_base_terminal_increment": 179713.61247199998,
+        "share_of_positive_driver_increment": 0.9521370835459249,
+        "segment_names": [
+          "Azure",
+          "Microsoft 365 cloud"
+        ],
+        "causal_chain": [
+          "Enterprise workloads and paid Copilot deployments create demand, not yet revenue",
+          "Capacity live dates and CPU/GPU efficiency permit Azure consumed usage; paid tiers plus delivered usage monetize M365",
+          "Azure recognizes consumed services and M365 subscription/usage service delivery under policy; no RPO or period-end-seat multiplication",
+          "Direct annual growth fallback approximates these separate paid-delivery flows without undisclosed volume/price data"
+        ],
+        "evidence_status": "triangulated",
+        "leading_indicators": [
+          "Azure delivered usage/capacity timing and pricing, qualitative quarterly diagnostic without modeled threshold",
+          "M365 commercial premium mix and paid deployment/consumption; commercial subset and period-end seats are not whole annual cloud",
+          "Restated annual external Azure and whole M365cloud revenue in USD"
+        ],
+        "falsifiers": [
+          "FY2027 restated annual reported Azure growth below low-case30% would reject the chosen sustained-demand/delivery magnitude; below that is not simply a quarter CC miss",
+          "FY2027 whole Microsoft365cloud annual recognized growth below low-case12% would reject the chosen paid-monetization magnitude; use same restated perimeter",
+          "No quantified quarterly falsifier: capacity/usage shifts are diagnostics until a same-perimeter quarterly model exists"
+        ],
+        "rank": 1
+      },
+      {
+        "driver_id": "advertising",
+        "title": "Advertising usage and monetized mix",
+        "thesis": "Search/ad usage and yield increase, but third-party partnerships and the LinkedIn perimeter prevent extrapolating old net KPI as gross revenue.",
+        "estimated_base_terminal_increment": 5586.2855600000075,
+        "share_of_positive_driver_increment": 0.029596587413665318,
+        "segment_names": [
+          "Search and advertising"
+        ],
+        "causal_chain": [
+          "Bing/Edge monetized search volume/yield and LinkedIn Marketing/Premium paid activity support demand",
+          "Distribution partnerships and TAC influence monetized reach/net yield and therefore constrain annual sales",
+          "Advertising delivery/actions and subscription service delivery recognize the reported gross/mixed annual stream; exTAC KPI is distinct",
+          "Direct recognized growth fallback combines flows without inventing searches, CPM, TAC or principal-agent conversion"
+        ],
+        "evidence_status": "limited",
+        "leading_indicators": [
+          "Monetized search volume and revenue per search with third-party partnership effects, qualitative diagnostics",
+          "LinkedIn Marketing/Premium paid activity on new scope, not LinkedIn total membership",
+          "Restated annual Search/advertising recognized revenue; distinguish exTAC net KPI"
+        ],
+        "falsifiers": [
+          "FY2027 same-perimeter annual recognized Search/advertising growth below low-case3% rejects the positive monetization magnitude",
+          "A disclosed loss of distribution/paid ad demand that stops monetized delivery would challenge the mechanism; no numeric threshold claimed without source",
+          "A low quarterly exTAC print alone is not a same-basis annual gross falsifier"
+        ],
+        "rank": 2
+      },
+      {
+        "driver_id": "enterprise_migration",
+        "title": "Enterprise solutions and cloud migration",
+        "thesis": "Enterprise migration expands services but cannibalizes licenses; signed pipeline and cohort margins are unavailable.",
+        "estimated_base_terminal_increment": 3447.72621000001,
+        "share_of_positive_driver_increment": 0.018266329040409847,
+        "segment_names": [
+          "Productivity and server licensing",
+          "Industry solutions",
+          "Frontier and support services"
+        ],
+        "causal_chain": [
+          "Cloud migration and launch comparables reduce delivered product/license revenue as a distinct negative curve",
+          "ERP/healthcare workflows and delivered consulting/support engagements generate separate positive industry/services activity",
+          "License control transfers/in-period allocations and delivered services/cloud usage determine recognized annual flows; their mix is undisclosed",
+          "Sum licensing negative and industry/support conditional positive curves on the FY27 restated perimeter; direct fallback does not infer fees from projects"
+        ],
+        "evidence_status": "limited",
+        "leading_indicators": [
+          "ERP bookings versus CRM implementation-cycle moderation, diagnostic only",
+          "Actually billable Frontier/support delivery and renewals; completed projects/headcount alone lack fee bridge",
+          "Same-perimeter annual licensing, industry solutions and Frontier/support revenue separately"
+        ],
+        "falsifiers": [
+          "FY2027 Industry solutions annual growth below low-case5% or Frontier/support below2% rejects the positive expansion magnitude on each named flow",
+          "FY2027 annual licensing growth above high-case-2% weakens the negative migration/comparable severity; stronger negative growth reinforces headwind rather than falsifies it",
+          "No quarter threshold or assumed fee per project; future annual flow disclosures must match new perimeter"
+        ],
+        "rank": 3
+      }
+    ],
+    "headwinds": [
+      {
+        "driver_id": "consumer_cycle",
+        "title": "Device and content reset",
+        "thesis": "PC inventories, component prices and XBOX reset create headwinds; no arbitrary AI uplift in Windows.",
+        "estimated_base_terminal_increment": -3095.761480000001,
+        "share_of_positive_driver_increment": 0.0,
+        "segment_names": [
+          "XBOX",
+          "Windows OEM and devices"
+        ],
+        "causal_chain": [
+          "PC component prices, lower demand, inventory and end-support comparable lower OEM/device delivered transactions",
+          "Xbox weak content comparable and reset constrain content/services and hardware separately; annual positive gaming expectation is contrary evidence",
+          "OEM licenses/devices recognize control-transfer deliveries and gaming recognizes content/control or delivered subscriptions, aggregated mixed",
+          "FY27 negative Windows/Xbox paths and later conditional stabilization are annual direct fallback; no unproved AI TAM or launch uplift"
+        ],
+        "evidence_status": "limited",
+        "leading_indicators": [
+          "OEM/channel inventory and pricing/comparable developments, qualitative diagnostics only",
+          "Paid gaming content/hardware delivery and actual reset outcomes; annual management expectation alone is not actual recovery",
+          "Same-perimeter annual Xbox and WindowsOEM/devices recognized revenue, independently"
+        ],
+        "falsifiers": [
+          "FY2027 Xbox annual recognized growth above high-case+2% rejects the chosen negative FY27 gaming severity; below-low-10% reinforces the headwind and challenges range, not its negative direction",
+          "FY2027 WindowsOEM/devices annual growth above high-case-13% rejects the assumed negative PC severity; gaming recovery says nothing about Windows",
+          "For FY2028/29 Xbox base+2/+4% and Windows-3/0%, continued annual declines below those respective conditional stabilization paths reject that recovery assumption; no quarterly threshold is claimed"
+        ],
+        "rank": 1
+      }
+    ],
+    "drivers": [
+      {
+        "driver_id": "cloud_ai",
+        "title": "Cloud usage and Copilot mix",
+        "thesis": "Usage delivery and enterprise paid monetization, constrained by GPUs and budgets.",
+        "causal_chain": [
+          "Enterprise workloads and paid Copilot deployments create demand, not yet revenue",
+          "Capacity live dates and CPU/GPU efficiency permit Azure consumed usage; paid tiers plus delivered usage monetize M365",
+          "Azure recognizes consumed services and M365 subscription/usage service delivery under policy; no RPO or period-end-seat multiplication",
+          "Direct annual growth fallback approximates these separate paid-delivery flows without undisclosed volume/price data"
+        ],
+        "parameter_ids": [
+          "azure_growth_base_2027",
+          "azure_growth_base_2028",
+          "azure_growth_base_2029",
+          "microsoft_365_cloud_growth_base_2027",
+          "microsoft_365_cloud_growth_base_2028",
+          "microsoft_365_cloud_growth_base_2029"
+        ],
+        "segment_attribution": [
+          {
+            "segment_name": "Azure",
+            "weight": 1.0
+          },
+          {
+            "segment_name": "Microsoft 365 cloud",
+            "weight": 1.0
+          }
+        ],
+        "horizon": {
+          "start_year": 2027,
+          "end_year": 2029
+        },
+        "persistence": "multi_year_structural",
+        "persistence_rationale": "Usage delivery and enterprise paid monetization, constrained by GPUs and budgets.",
+        "evidence_nodes": [
+          {
+            "evidence_id": "cloud_ai_company",
+            "evidence_type": "company_operating_disclosure",
+            "inference_distance": "one_step",
+            "conclusion": "Usage delivery and enterprise paid monetization, constrained by GPUs and budgets.",
+            "claim_ids": [
+              "claim_102_cloud_ai_company",
+              "claim_102_cloud_ai_company_part2",
+              "claim_102_cloud_ai_company_part3"
+            ],
+            "source_ids": [
+              "src_call"
+            ]
+          },
+          {
+            "evidence_id": "cloud_ai_contrary",
+            "evidence_type": "company_counterevidence",
+            "inference_distance": "contrary",
+            "conclusion": "This observed constraint weakens magnitude or continuation; wide scenarios and future fades remain analyst judgment.",
+            "claim_ids": [
+              "claim_103_cloud_ai_contrary",
+              "claim_103_cloud_ai_contrary_part2",
+              "claim_103_cloud_ai_contrary_part3"
+            ],
+            "source_ids": [
+              "src_call"
+            ]
+          },
+          {
+            "evidence_id": "cloud_ai_peer",
+            "evidence_type": "independent_peer_cloud_demand",
+            "inference_distance": "analogical",
+            "conclusion": "AWS Q2 cloud37% corroborates category demand; AWS annualized169B is not MSFT annual revenue and not used numerically.",
+            "claim_ids": [
+              "claim_104_cloud_ai_peer"
+            ],
+            "source_ids": [
+              "src_aws"
+            ]
+          }
+        ],
+        "evidence_types": [
+          "company_operating_disclosure",
+          "independent_peer_cloud_demand"
+        ],
+        "evidence_source_ids": [
+          "src_call",
+          "src_aws"
+        ],
+        "evidence_status": "triangulated",
+        "leading_indicators": [
+          "Azure delivered usage/capacity timing and pricing, qualitative quarterly diagnostic without modeled threshold",
+          "M365 commercial premium mix and paid deployment/consumption; commercial subset and period-end seats are not whole annual cloud",
+          "Restated annual external Azure and whole M365cloud revenue in USD"
+        ],
+        "falsifiers": [
+          "FY2027 restated annual reported Azure growth below low-case30% would reject the chosen sustained-demand/delivery magnitude; below that is not simply a quarter CC miss",
+          "FY2027 whole Microsoft365cloud annual recognized growth below low-case12% would reject the chosen paid-monetization magnitude; use same restated perimeter",
+          "No quantified quarterly falsifier: capacity/usage shifts are diagnostics until a same-perimeter quarterly model exists"
+        ],
+        "counterevidence_status": "found",
+        "counterevidence_rationale": "Explicit constraints opened in full official call and Q&A; contrary nodes bind those observations. Independent customer-budget/usage data insufficient; search is not exhaustive.",
+        "terminal_increment_by_segment": [
+          {
+            "segment_name": "Azure",
+            "weight": 1.0,
+            "terminal_incremental_revenue": 124829.19728
+          },
+          {
+            "segment_name": "Microsoft 365 cloud",
+            "weight": 1.0,
+            "terminal_incremental_revenue": 54884.415191999986
+          }
+        ],
+        "estimated_base_terminal_increment": 179713.61247199998,
+        "share_of_positive_driver_increment": 0.9521370835459249
+      },
+      {
+        "driver_id": "enterprise_migration",
+        "title": "Enterprise solutions and cloud migration",
+        "thesis": "Enterprise migration expands services but cannibalizes licenses; signed pipeline and cohort margins are unavailable.",
+        "causal_chain": [
+          "Cloud migration and launch comparables reduce delivered product/license revenue as a distinct negative curve",
+          "ERP/healthcare workflows and delivered consulting/support engagements generate separate positive industry/services activity",
+          "License control transfers/in-period allocations and delivered services/cloud usage determine recognized annual flows; their mix is undisclosed",
+          "Sum licensing negative and industry/support conditional positive curves on the FY27 restated perimeter; direct fallback does not infer fees from projects"
+        ],
+        "parameter_ids": [
+          "productivity_and_server_licensing_growth_base_2027",
+          "productivity_and_server_licensing_growth_base_2028",
+          "productivity_and_server_licensing_growth_base_2029",
+          "industry_solutions_growth_base_2027",
+          "industry_solutions_growth_base_2028",
+          "industry_solutions_growth_base_2029",
+          "frontier_and_support_services_growth_base_2027",
+          "frontier_and_support_services_growth_base_2028",
+          "frontier_and_support_services_growth_base_2029"
+        ],
+        "segment_attribution": [
+          {
+            "segment_name": "Productivity and server licensing",
+            "weight": 1.0
+          },
+          {
+            "segment_name": "Industry solutions",
+            "weight": 1.0
+          },
+          {
+            "segment_name": "Frontier and support services",
+            "weight": 1.0
+          }
+        ],
+        "horizon": {
+          "start_year": 2027,
+          "end_year": 2029
+        },
+        "persistence": "multi_year_structural",
+        "persistence_rationale": "Enterprise migration expands services but cannibalizes licenses; signed pipeline and cohort margins are unavailable.",
+        "evidence_nodes": [
+          {
+            "evidence_id": "enterprise_migration_company",
+            "evidence_type": "company_operating_disclosure",
+            "inference_distance": "one_step",
+            "conclusion": "Observed delivered Frontier projects and healthcare/ERP adoption support service/industry capability and activity, not exact future sales. Licensing has a separate negative path from cloud migration and launch comparables.",
+            "claim_ids": [
+              "claim_105_enterprise_migration_company",
+              "claim_105_enterprise_migration_company_part2"
+            ],
+            "source_ids": [
+              "src_call"
+            ]
+          },
+          {
+            "evidence_id": "enterprise_migration_contrary",
+            "evidence_type": "company_counterevidence",
+            "inference_distance": "contrary",
+            "conclusion": "CRM bookings moderation and longer sales cycles oppose sustained enterprise solutions expansion. This is actual contrary context for Industry solutions; it is not a claimed direct Frontier backlog decline.",
+            "claim_ids": [
+              "claim_106_enterprise_migration_contrary"
+            ],
+            "source_ids": [
+              "src_call"
+            ]
+          },
+          {
+            "evidence_id": "enterprise_migration_license_headwind",
+            "evidence_type": "company_license_migration_headwind",
+            "inference_distance": "one_step",
+            "conclusion": "Negative license curve is a distinct component: migration/comparable headwinds lower recognized product revenue; do not use it as positive service evidence.",
+            "claim_ids": [
+              "v2_license_headwind"
+            ],
+            "source_ids": [
+              "src_call"
+            ]
+          }
+        ],
+        "evidence_types": [
+          "company_operating_disclosure",
+          "company_license_migration_headwind"
+        ],
+        "evidence_source_ids": [
+          "src_call"
+        ],
+        "evidence_status": "limited",
+        "leading_indicators": [
+          "ERP bookings versus CRM implementation-cycle moderation, diagnostic only",
+          "Actually billable Frontier/support delivery and renewals; completed projects/headcount alone lack fee bridge",
+          "Same-perimeter annual licensing, industry solutions and Frontier/support revenue separately"
+        ],
+        "falsifiers": [
+          "FY2027 Industry solutions annual growth below low-case5% or Frontier/support below2% rejects the positive expansion magnitude on each named flow",
+          "FY2027 annual licensing growth above high-case-2% weakens the negative migration/comparable severity; stronger negative growth reinforces headwind rather than falsifies it",
+          "No quarter threshold or assumed fee per project; future annual flow disclosures must match new perimeter"
+        ],
+        "counterevidence_status": "found",
+        "counterevidence_rationale": "Explicit constraints opened in full official call and Q&A; contrary nodes bind those observations. Independent customer-budget/usage data insufficient; search is not exhaustive.",
+        "terminal_increment_by_segment": [
+          {
+            "segment_name": "Productivity and server licensing",
+            "weight": 1.0,
+            "terminal_incremental_revenue": -3614.0350499999986
+          },
+          {
+            "segment_name": "Industry solutions",
+            "weight": 1.0,
+            "terminal_incremental_revenue": 5760.646060000006
+          },
+          {
+            "segment_name": "Frontier and support services",
+            "weight": 1.0,
+            "terminal_incremental_revenue": 1301.115200000002
+          }
+        ],
+        "estimated_base_terminal_increment": 3447.72621000001,
+        "share_of_positive_driver_increment": 0.018266329040409847
+      },
+      {
+        "driver_id": "advertising",
+        "title": "Advertising usage and monetized mix",
+        "thesis": "Search/ad usage and yield increase, but third-party partnerships and the LinkedIn perimeter prevent extrapolating old net KPI as gross revenue.",
+        "causal_chain": [
+          "Bing/Edge monetized search volume/yield and LinkedIn Marketing/Premium paid activity support demand",
+          "Distribution partnerships and TAC influence monetized reach/net yield and therefore constrain annual sales",
+          "Advertising delivery/actions and subscription service delivery recognize the reported gross/mixed annual stream; exTAC KPI is distinct",
+          "Direct recognized growth fallback combines flows without inventing searches, CPM, TAC or principal-agent conversion"
+        ],
+        "parameter_ids": [
+          "search_and_advertising_growth_base_2027",
+          "search_and_advertising_growth_base_2028",
+          "search_and_advertising_growth_base_2029"
+        ],
+        "segment_attribution": [
+          {
+            "segment_name": "Search and advertising",
+            "weight": 1.0
+          }
+        ],
+        "horizon": {
+          "start_year": 2027,
+          "end_year": 2029
+        },
+        "persistence": "uncertain",
+        "persistence_rationale": "Search/ad usage and yield increase, but third-party partnerships and the LinkedIn perimeter prevent extrapolating old net KPI as gross revenue.",
+        "evidence_nodes": [
+          {
+            "evidence_id": "advertising_company",
+            "evidence_type": "company_operating_disclosure",
+            "inference_distance": "one_step",
+            "conclusion": "Search/ad usage and yield increase, but third-party partnerships and the LinkedIn perimeter prevent extrapolating old net KPI as gross revenue.",
+            "claim_ids": [
+              "claim_107_advertising_company"
+            ],
+            "source_ids": [
+              "src_call"
+            ]
+          },
+          {
+            "evidence_id": "advertising_contrary",
+            "evidence_type": "company_counterevidence",
+            "inference_distance": "contrary",
+            "conclusion": "This observed constraint weakens magnitude or continuation; wide scenarios and future fades remain analyst judgment.",
+            "claim_ids": [
+              "claim_108_advertising_contrary"
+            ],
+            "source_ids": [
+              "src_call"
+            ]
+          }
+        ],
+        "evidence_types": [
+          "company_operating_disclosure"
+        ],
+        "evidence_source_ids": [
+          "src_call"
+        ],
+        "evidence_status": "limited",
+        "leading_indicators": [
+          "Monetized search volume and revenue per search with third-party partnership effects, qualitative diagnostics",
+          "LinkedIn Marketing/Premium paid activity on new scope, not LinkedIn total membership",
+          "Restated annual Search/advertising recognized revenue; distinguish exTAC net KPI"
+        ],
+        "falsifiers": [
+          "FY2027 same-perimeter annual recognized Search/advertising growth below low-case3% rejects the positive monetization magnitude",
+          "A disclosed loss of distribution/paid ad demand that stops monetized delivery would challenge the mechanism; no numeric threshold claimed without source",
+          "A low quarterly exTAC print alone is not a same-basis annual gross falsifier"
+        ],
+        "counterevidence_status": "found",
+        "counterevidence_rationale": "Explicit constraints opened in full official call and Q&A; contrary nodes bind those observations. Independent customer-budget/usage data insufficient; search is not exhaustive.",
+        "terminal_increment_by_segment": [
+          {
+            "segment_name": "Search and advertising",
+            "weight": 1.0,
+            "terminal_incremental_revenue": 5586.2855600000075
+          }
+        ],
+        "estimated_base_terminal_increment": 5586.2855600000075,
+        "share_of_positive_driver_increment": 0.029596587413665318
+      },
+      {
+        "driver_id": "consumer_cycle",
+        "title": "Device and content reset",
+        "thesis": "PC inventories, component prices and XBOX reset create headwinds; no arbitrary AI uplift in Windows.",
+        "causal_chain": [
+          "PC component prices, lower demand, inventory and end-support comparable lower OEM/device delivered transactions",
+          "Xbox weak content comparable and reset constrain content/services and hardware separately; annual positive gaming expectation is contrary evidence",
+          "OEM licenses/devices recognize control-transfer deliveries and gaming recognizes content/control or delivered subscriptions, aggregated mixed",
+          "FY27 negative Windows/Xbox paths and later conditional stabilization are annual direct fallback; no unproved AI TAM or launch uplift"
+        ],
+        "parameter_ids": [
+          "xbox_growth_base_2027",
+          "xbox_growth_base_2028",
+          "xbox_growth_base_2029",
+          "windows_oem_and_devices_growth_base_2027",
+          "windows_oem_and_devices_growth_base_2028",
+          "windows_oem_and_devices_growth_base_2029"
+        ],
+        "segment_attribution": [
+          {
+            "segment_name": "XBOX",
+            "weight": 1.0
+          },
+          {
+            "segment_name": "Windows OEM and devices",
+            "weight": 1.0
+          }
+        ],
+        "horizon": {
+          "start_year": 2027,
+          "end_year": 2029
+        },
+        "persistence": "cyclical",
+        "persistence_rationale": "PC inventories, component prices and XBOX reset create headwinds; no arbitrary AI uplift in Windows.",
+        "evidence_nodes": [
+          {
+            "evidence_id": "consumer_cycle_company",
+            "evidence_type": "company_operating_disclosure",
+            "inference_distance": "one_step",
+            "conclusion": "PC inventories, component prices and XBOX reset create headwinds; no arbitrary AI uplift in Windows.",
+            "claim_ids": [
+              "claim_109_consumer_cycle_company",
+              "claim_109_consumer_cycle_company_part2"
+            ],
+            "source_ids": [
+              "src_call"
+            ]
+          },
+          {
+            "evidence_id": "consumer_cycle_contrary",
+            "evidence_type": "company_counterevidence",
+            "inference_distance": "contrary",
+            "conclusion": "CEO FY27 gaming return-to-growth expectation directly opposes negative FY27 Xbox base thesis; gaming only, not Windows. It is expectation, not delivered recovery. No Windows stabilization counterevidence found asof.",
+            "claim_ids": [
+              "claim_110_consumer_cycle_contrary"
+            ],
+            "source_ids": [
+              "src_call"
+            ]
+          }
+        ],
+        "evidence_types": [
+          "company_operating_disclosure"
+        ],
+        "evidence_source_ids": [
+          "src_call"
+        ],
+        "evidence_status": "limited",
+        "leading_indicators": [
+          "OEM/channel inventory and pricing/comparable developments, qualitative diagnostics only",
+          "Paid gaming content/hardware delivery and actual reset outcomes; annual management expectation alone is not actual recovery",
+          "Same-perimeter annual Xbox and WindowsOEM/devices recognized revenue, independently"
+        ],
+        "falsifiers": [
+          "FY2027 Xbox annual recognized growth above high-case+2% rejects the chosen negative FY27 gaming severity; below-low-10% reinforces the headwind and challenges range, not its negative direction",
+          "FY2027 WindowsOEM/devices annual growth above high-case-13% rejects the assumed negative PC severity; gaming recovery says nothing about Windows",
+          "For FY2028/29 Xbox base+2/+4% and Windows-3/0%, continued annual declines below those respective conditional stabilization paths reject that recovery assumption; no quarterly threshold is claimed"
+        ],
+        "counterevidence_status": "found",
+        "counterevidence_rationale": "Actual annual gaming-positive management expectation binds contrary node. It can weaken Xbox headwind magnitude; cannot prove Windows recovery. Windows stabilization in FY28/29 is an explicit evidence gap.",
+        "terminal_increment_by_segment": [
+          {
+            "segment_name": "XBOX",
+            "weight": 1.0,
+            "terminal_incremental_revenue": 400.23871999999756
+          },
+          {
+            "segment_name": "Windows OEM and devices",
+            "weight": 1.0,
+            "terminal_incremental_revenue": -3496.0001999999986
+          }
+        ],
+        "estimated_base_terminal_increment": -3095.761480000001,
+        "share_of_positive_driver_increment": 0.0
+      }
+    ],
+    "unattributed_company_adjustments": 0.0,
+    "reconciliation": {
+      "driver_attributed_segment_increment": 185651.862762,
+      "segment_increment_total": 185651.862762,
+      "unattributed_company_adjustments": 0.0,
+      "company_increment_total": 185651.862762,
+      "difference": 0.0
+    }
+  },
+  "confidence": {
+    "score": 50.21721120270234,
+    "rating": "low",
+    "components": {
+      "verified_claim_quality": 14.000000000000005,
+      "verified_claim_coverage": 25.0,
+      "source_freshness": 8.108605601351165,
+      "revenue_weighted_explicit_models": 0.0,
+      "historical_accuracy": 0.0,
+      "revenue_weighted_sensitivity_coverage": 3.1086056013511643
+    },
+    "driver_evidence_coverage": 1.0,
+    "sensitivity_concentration": 0.3793000644169136,
+    "historical_accuracy": {
+      "wape": null,
+      "observations": 0
+    },
+    "quality_gates": {
+      "base_reconciliation": true,
+      "recognition_contract": true,
+      "scenario_consistency": true,
+      "research_coverage": true,
+      "management_target_coverage": true,
+      "growth_driver_tree": true
+    },
+    "limitations": [
+      "No immutable historical backtest record",
+      "One or more segments use a direct fallback model",
+      "Research coverage contains 1 material data gap(s)",
+      "Confidence is an evidence/workflow score, not a calibrated forecast probability",
+      "Management target coverage contains 10 unmodeled material/contextual target(s)",
+      "Growth driver enterprise_migration is not triangulated across two evidence types and sources",
+      "Growth driver advertising is not triangulated across two evidence types and sources",
+      "Growth driver consumer_cycle is not triangulated across two evidence types and sources"
+    ]
+  },
+  "independent_driver_allocations": {
+    "cloud_ai": 179713.61247199998,
+    "enterprise_migration": 3447.72621000001,
+    "advertising": 5586.2855600000075,
+    "consumer_cycle": -3095.761480000001
+  }
+}

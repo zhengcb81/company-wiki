@@ -1,0 +1,396 @@
+{
+  "database": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\catalog.sqlite3",
+  "read_mode": "ro/query_only",
+  "accessed_at": "2026-10-08T08:03:16.887683+00:00",
+  "rows": {
+    "artifacts": [
+      {
+        "artifact_id": "urn:company-wiki:artifact:sha256:9ea5297b4d7b36f822b1ed69844e01b7ef0e629e6321b336ad5df5d8275f0189",
+        "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "artifact_role": "normalized",
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\derived\\70\\70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0\\normalized.md",
+        "content_sha256": "bae136f28bc930780710ed17839d890121a2642274c6612f50ed0f912daa978d",
+        "byte_size": 1079024,
+        "mime_type": "text/markdown",
+        "generator_name": "source_catalog_normalizer",
+        "generator_version": "1.0.0",
+        "status": "retired",
+        "error": null,
+        "metadata_json": "{\"parser_name\": \"pdf_page_aware_core\", \"parser_version\": \"1.26.7\", \"quality_flags\": [\"empty_output\"], \"schema_version\": \"1.0\", \"span_count\": 8775}",
+        "created_at": "2026-08-12T00:32:18Z",
+        "schema_version": "1.0",
+        "source_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0"
+      },
+      {
+        "artifact_id": "urn:company-wiki:artifact:sha256:55646b1f1e34f03e674e8f69877ec4009d5990ca4c87e737baf5b58035fa6ef4",
+        "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "artifact_role": "summary",
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\derived\\70\\70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0\\summary.md",
+        "content_sha256": "b18534d784bbe2a9c70e02663596035590656dacd593dec9566377ceb54bc07f",
+        "byte_size": 3695,
+        "mime_type": "text/markdown",
+        "generator_name": "source_catalog_llm_summary",
+        "generator_version": "1.0.0",
+        "status": "retired",
+        "error": null,
+        "metadata_json": "{\"input_chars\": 120017, \"input_truncated\": true, \"model\": \"MiniMax-M3\", \"prompt_version\": \"1.0.0\", \"provider\": \"minimax\", \"quality_status\": \"llm_generated_unverified\", \"schema_version\": \"1.0\", \"summary_method\": \"llm\", \"total_tokens\": 51329}",
+        "created_at": "2026-08-12T00:51:41Z",
+        "schema_version": "1.0",
+        "source_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0"
+      },
+      {
+        "artifact_id": "urn:company-wiki:artifact:sha256:c574a4e4ec65a4fab10b010096002ff2ed0eb3bd17a573cccc77a5f95b6337f6",
+        "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "artifact_role": "normalized",
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\derived\\d1\\d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7\\normalized.md",
+        "content_sha256": "f5c8311e4920494fbb7d7f56796019eddc72683c89076632becacead80a470b1",
+        "byte_size": 1099726,
+        "mime_type": "text/markdown",
+        "generator_name": "source_catalog_normalizer",
+        "generator_version": "1.0.0",
+        "status": "retired",
+        "error": null,
+        "metadata_json": "{\"parser_name\": \"pdf_page_aware_core\", \"parser_version\": \"1.26.7\", \"quality_flags\": [], \"schema_version\": \"1.0\", \"span_count\": 8997}",
+        "created_at": "2026-08-12T00:34:30Z",
+        "schema_version": "1.0",
+        "source_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      }
+    ],
+    "document_entities": [
+      {
+        "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "entity_id": "company-name:腾讯",
+        "confidence": 1.0,
+        "method": "company_raw_path"
+      },
+      {
+        "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "entity_id": "company-name:腾讯",
+        "confidence": 1.0,
+        "method": "company_raw_path"
+      }
+    ],
+    "document_fingerprint_state": [
+      {
+        "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "source_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "status": "completed",
+        "attempt_count": 1,
+        "terminal_reason": null,
+        "last_error_code": null,
+        "last_error_message_redacted": null,
+        "normalizer_version": "1.0.0",
+        "last_attempt_at": "2026-08-07T10:02:21Z",
+        "next_retry_at": null,
+        "updated_at": "2026-08-07T10:02:21Z"
+      },
+      {
+        "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "source_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "status": "completed",
+        "attempt_count": 1,
+        "terminal_reason": null,
+        "last_error_code": null,
+        "last_error_message_redacted": null,
+        "normalizer_version": "1.0.0",
+        "last_attempt_at": "2026-08-07T12:52:12Z",
+        "next_retry_at": null,
+        "updated_at": "2026-08-07T12:52:12Z"
+      }
+    ],
+    "documents": [
+      {
+        "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "primary_source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "title": "腾讯：2024年年度报告",
+        "source_type": "regulatory_filing",
+        "document_kind": "annual_report",
+        "published_date": "2025-04-08",
+        "source_status": "active",
+        "metadata_priority": 10,
+        "metadata_json": "{\"acquisition\": {\"market\": \"HK\", \"published_date\": \"2025-04-08\", \"security_id\": \"00700\", \"source_title\": \"腾讯：2024年年度报告\", \"source_url\": \"https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0408/2025040800668_c.pdf\"}, \"dayu_meta\": null, \"group_key\": \"腾讯/raw/financial_reports/annual/腾讯：2024年年度报告.pdf\", \"root_id\": \"company_raw\", \"scanner_version\": \"1.0.0\", \"prompt_injection_review\": {\"schema_version\": \"1.0\", \"status\": \"not_detected\", \"reviewer\": \"policy-reviewer-fc906c\", \"reviewed_at\": \"2026-08-12T00:38:20Z\", \"evidence_sha256\": \"bae136f28bc930780710ed17839d890121a2642274c6612f50ed0f912daa978d\"}}",
+        "text_fingerprint": "49b844f2f83a5de3ae65b434b34ef47fb67ad69c4949d749d5dc4614cb9863dc",
+        "first_seen_at": "2026-07-26T10:31:10Z",
+        "last_seen_at": "2026-08-20T21:26:55Z"
+      },
+      {
+        "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "primary_source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "title": "腾讯：2025年年度报告",
+        "source_type": "regulatory_filing",
+        "document_kind": "annual_report",
+        "published_date": "2026-04-09",
+        "source_status": "active",
+        "metadata_priority": 10,
+        "metadata_json": "{\"acquisition\": {\"market\": \"HK\", \"published_date\": \"2026-04-09\", \"security_id\": \"00700\", \"source_title\": \"腾讯：2025年年度报告\", \"source_url\": \"https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf\"}, \"dayu_meta\": null, \"group_key\": \"腾讯/raw/financial_reports/annual/腾讯：2025年年度报告.pdf\", \"root_id\": \"company_raw\", \"scanner_version\": \"1.0.0\", \"prompt_injection_review\": {\"schema_version\": \"1.0\", \"status\": \"not_detected\", \"reviewer\": \"policy-reviewer-fc906c\", \"reviewed_at\": \"2026-08-12T00:38:20Z\", \"evidence_sha256\": \"f5c8311e4920494fbb7d7f56796019eddc72683c89076632becacead80a470b1\"}}",
+        "text_fingerprint": "da98e28c45ba260070a7937495a377e22e0fef52eeec2d8bfd7fa2c1f50a15cb",
+        "first_seen_at": "2026-07-26T10:31:10Z",
+        "last_seen_at": "2026-08-20T21:26:55Z"
+      }
+    ],
+    "llm_summary_failures": [
+      {
+        "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "generator_name": "source_catalog_llm_summary",
+        "generator_version": "1.0.0",
+        "failure_scope": "permanent_document",
+        "error": "LLMSummaryError: LLM response is not valid JSON",
+        "attempt_count": 1,
+        "retry_after": 1818039861.5459414,
+        "first_failed_at": 1786503861.5459414,
+        "last_failed_at": 1786503861.5459414
+      }
+    ],
+    "locations": [
+      {
+        "location_id": "urn:company-wiki:location:sha256:955268463d77a84a6f56fd099297271bc0b707f927269bfada789e9e2736b28b",
+        "root_id": "company_raw",
+        "relative_path": "腾讯/raw/financial_reports/annual/腾讯：2024年年度报告.pdf",
+        "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\financial_reports\\annual\\腾讯：2024年年度报告.pdf",
+        "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "role": "original_primary",
+        "location_status": "active",
+        "observed_size": 5241364,
+        "observed_mtime_ns": 1784587449003367500,
+        "last_seen_run": "scan-444ea251bbc747ccaf0e67013d219f7e",
+        "manifest_json": "{\"byte_size\":5241364,\"collector_name\":\"filesystem-catalog-company_raw\",\"collector_version\":\"1.0.0\",\"content_sha256\":\"70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0\",\"entity_ids\":[\"company-name:腾讯\"],\"immutable_status\":\"verified\",\"mime_type\":\"application/pdf\",\"original_path\":\"腾讯/raw/financial_reports/annual/腾讯：2024年年度报告.pdf\",\"published_date\":null,\"retrieved_at\":\"2026-07-26T10:31:10Z\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0\",\"source_type\":\"regulatory_filing\"}",
+        "metadata_json": "{\"group_key\":\"腾讯/raw/financial_reports/annual/腾讯：2024年年度报告.pdf\",\"source_status\":\"active\"}",
+        "error": null
+      },
+      {
+        "location_id": "urn:company-wiki:location:sha256:cbe6fbd4fe6b545287940350f06e527194e8f78aaa1545fddd0743147c4a6332",
+        "root_id": "company_raw",
+        "relative_path": "腾讯/raw/financial_reports/annual/腾讯：2024年年度报告.pdf.source.json",
+        "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\financial_reports\\annual\\腾讯：2024年年度报告.pdf.source.json",
+        "source_id": "urn:company-wiki:source:sha256:3de23e983477744e260f01cb3b3804160ed2f8be32773116278dc8226e66e9c6",
+        "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "role": "metadata",
+        "location_status": "active",
+        "observed_size": 235,
+        "observed_mtime_ns": 1784663877918585500,
+        "last_seen_run": "scan-444ea251bbc747ccaf0e67013d219f7e",
+        "manifest_json": "{\"byte_size\":235,\"collector_name\":\"filesystem-catalog-company_raw\",\"collector_version\":\"1.0.0\",\"content_sha256\":\"3de23e983477744e260f01cb3b3804160ed2f8be32773116278dc8226e66e9c6\",\"entity_ids\":[\"company-name:腾讯\"],\"immutable_status\":\"verified\",\"mime_type\":\"application/json\",\"original_path\":\"腾讯/raw/financial_reports/annual/腾讯：2024年年度报告.pdf.source.json\",\"published_date\":null,\"retrieved_at\":\"2026-07-26T10:31:10Z\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:3de23e983477744e260f01cb3b3804160ed2f8be32773116278dc8226e66e9c6\",\"source_type\":\"other\"}",
+        "metadata_json": "{\"group_key\":\"腾讯/raw/financial_reports/annual/腾讯：2024年年度报告.pdf\",\"source_status\":\"active\"}",
+        "error": null
+      },
+      {
+        "location_id": "urn:company-wiki:location:sha256:e13489043ab4d496ca9a5bf73ea6b8f7092462acd887fa1ebc9e56cfd8325b23",
+        "root_id": "company_raw",
+        "relative_path": "腾讯/raw/financial_reports/annual/腾讯：2025年年度报告.pdf",
+        "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\financial_reports\\annual\\腾讯：2025年年度报告.pdf",
+        "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "role": "original_primary",
+        "location_status": "active",
+        "observed_size": 4428270,
+        "observed_mtime_ns": 1784587428755113900,
+        "last_seen_run": "scan-444ea251bbc747ccaf0e67013d219f7e",
+        "manifest_json": "{\"byte_size\":4428270,\"collector_name\":\"filesystem-catalog-company_raw\",\"collector_version\":\"1.0.0\",\"content_sha256\":\"d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7\",\"entity_ids\":[\"company-name:腾讯\"],\"immutable_status\":\"verified\",\"mime_type\":\"application/pdf\",\"original_path\":\"腾讯/raw/financial_reports/annual/腾讯：2025年年度报告.pdf\",\"published_date\":null,\"retrieved_at\":\"2026-07-26T10:31:10Z\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7\",\"source_type\":\"regulatory_filing\"}",
+        "metadata_json": "{\"group_key\":\"腾讯/raw/financial_reports/annual/腾讯：2025年年度报告.pdf\",\"source_status\":\"active\"}",
+        "error": null
+      },
+      {
+        "location_id": "urn:company-wiki:location:sha256:24553eb26636bcbaff7a76003f43abe2003494c180b6b8598e0eaaca59ecdb38",
+        "root_id": "company_raw",
+        "relative_path": "腾讯/raw/financial_reports/annual/腾讯：2025年年度报告.pdf.source.json",
+        "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\financial_reports\\annual\\腾讯：2025年年度报告.pdf.source.json",
+        "source_id": "urn:company-wiki:source:sha256:bd6a1e02db2daff436fe4041d03e185f3adace165b157793a8fddf9b44423bc1",
+        "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "role": "metadata",
+        "location_status": "active",
+        "observed_size": 235,
+        "observed_mtime_ns": 1784663877918585500,
+        "last_seen_run": "scan-444ea251bbc747ccaf0e67013d219f7e",
+        "manifest_json": "{\"byte_size\":235,\"collector_name\":\"filesystem-catalog-company_raw\",\"collector_version\":\"1.0.0\",\"content_sha256\":\"bd6a1e02db2daff436fe4041d03e185f3adace165b157793a8fddf9b44423bc1\",\"entity_ids\":[\"company-name:腾讯\"],\"immutable_status\":\"verified\",\"mime_type\":\"application/json\",\"original_path\":\"腾讯/raw/financial_reports/annual/腾讯：2025年年度报告.pdf.source.json\",\"published_date\":null,\"retrieved_at\":\"2026-07-26T10:31:10Z\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:bd6a1e02db2daff436fe4041d03e185f3adace165b157793a8fddf9b44423bc1\",\"source_type\":\"other\"}",
+        "metadata_json": "{\"group_key\":\"腾讯/raw/financial_reports/annual/腾讯：2025年年度报告.pdf\",\"source_status\":\"active\"}",
+        "error": null
+      }
+    ],
+    "producer_events": [
+      {
+        "event_id": "pe-urn:company-wiki:artifact:sha256:9ea5297b4d7b36f822b1ed69844e01b7ef0e629e6321b336ad5df5d8275f0189-F2DE61E4DC5B5A2D",
+        "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "artifact_role": "normalized",
+        "producer_name": "source_catalog_normalizer",
+        "producer_version": "1.0.0",
+        "event_type": "parser",
+        "created_at": "2026-08-12 00:32:18"
+      },
+      {
+        "event_id": "pe-urn:company-wiki:artifact:sha256:55646b1f1e34f03e674e8f69877ec4009d5990ca4c87e737baf5b58035fa6ef4-96082CFF616A89A6",
+        "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "artifact_role": "summary",
+        "producer_name": "source_catalog_llm_summary",
+        "producer_version": "1.0.0",
+        "event_type": "llm",
+        "created_at": "2026-08-12 00:51:41"
+      },
+      {
+        "event_id": "pe-urn:company-wiki:artifact:sha256:c574a4e4ec65a4fab10b010096002ff2ed0eb3bd17a573cccc77a5f95b6337f6-4B984B939207BD18",
+        "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "artifact_role": "normalized",
+        "producer_name": "source_catalog_normalizer",
+        "producer_version": "1.0.0",
+        "event_type": "parser",
+        "created_at": "2026-08-12 00:34:30"
+      }
+    ],
+    "source_metadata_assertions": [
+      {
+        "assertion_id": "sa-d5fa952b082b48b2a5088f7c40e5f2e6",
+        "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "entity": null,
+        "market": "HK",
+        "security_id": "00700",
+        "document_kind": "annual_report",
+        "form_type": null,
+        "fiscal_year": 2024,
+        "fiscal_period": null,
+        "provider": null,
+        "provider_document_id": null,
+        "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0408/2025040800668_c.pdf",
+        "filing_date": null,
+        "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "evidence_basis": "source-facts",
+        "evidence_json": "{\"source_fact_evidence\":{\"fiscal_year\":{\"locator\":\"PDF page 1 cover and financial summary PDF page 4\",\"observation\":\"Cover explicitly 2024 年報; financial summary year column 2024. 2024 cover visually rendered and inspected.\",\"value\":2024},\"language\":{\"locator\":\"PDF page 1 cover; PDF page 4 financial summary; audited revenue note\",\"observation\":\"Traditional Chinese cover 年報 and Chinese financial-summary and revenue-note body; original-language flag only, no translation.\",\"value\":\"zh\"}},\"source_fact_patch\":{\"fiscal_year\":2024,\"language\":\"zh\"}}",
+        "decision": "verified",
+        "supersedes_assertion_id": null,
+        "created_at": "2026-10-08T07:05:24.168025+00:00",
+        "created_by": "automated-source-facts",
+        "schema_version": "1.0.0",
+        "published_at": "2025-04-08",
+        "accepted_at": null,
+        "period_end": null,
+        "language": "zh",
+        "is_amended": null,
+        "revision_id": null,
+        "adapter_id": null,
+        "adapter_version": null,
+        "normalized_sha256": null,
+        "normalization_status": null,
+        "visibility_state": "legacy",
+        "activation_epoch": null,
+        "cohort": null
+      },
+      {
+        "assertion_id": "sa-f5cc0cf223e6460596a950f65d89f054",
+        "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "entity": null,
+        "market": "HK",
+        "security_id": "00700",
+        "document_kind": "annual_report",
+        "form_type": null,
+        "fiscal_year": 2025,
+        "fiscal_period": null,
+        "provider": null,
+        "provider_document_id": null,
+        "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+        "filing_date": null,
+        "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "evidence_basis": "source-facts",
+        "evidence_json": "{\"source_fact_evidence\":{\"fiscal_year\":{\"locator\":\"PDF page 1 cover and financial summary PDF page 4\",\"observation\":\"Cover explicitly 2025 年報; financial summary year column 2025. 2024 cover visually rendered and inspected.\",\"value\":2025},\"language\":{\"locator\":\"PDF page 1 cover; PDF page 4 financial summary; audited revenue note\",\"observation\":\"Traditional Chinese cover 年報 and Chinese financial-summary and revenue-note body; original-language flag only, no translation.\",\"value\":\"zh\"}},\"source_fact_patch\":{\"fiscal_year\":2025,\"language\":\"zh\"}}",
+        "decision": "verified",
+        "supersedes_assertion_id": null,
+        "created_at": "2026-10-08T07:05:24.868196+00:00",
+        "created_by": "automated-source-facts",
+        "schema_version": "1.0.0",
+        "published_at": "2026-04-09",
+        "accepted_at": null,
+        "period_end": null,
+        "language": "zh",
+        "is_amended": null,
+        "revision_id": null,
+        "adapter_id": null,
+        "adapter_version": null,
+        "normalized_sha256": null,
+        "normalization_status": null,
+        "visibility_state": "legacy",
+        "activation_epoch": null,
+        "cohort": null
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "byte_size": 5241364,
+        "mime_type": "application/pdf",
+        "first_seen_at": "2026-07-26T10:31:10Z"
+      },
+      {
+        "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "byte_size": 4428270,
+        "mime_type": "application/pdf",
+        "first_seen_at": "2026-07-26T10:31:10Z"
+      }
+    ]
+  },
+  "artifact_checks": [
+    {
+      "artifact_id": "urn:company-wiki:artifact:sha256:9ea5297b4d7b36f822b1ed69844e01b7ef0e629e6321b336ad5df5d8275f0189",
+      "role": "normalized",
+      "status": "retired",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\derived\\70\\70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0\\normalized.md",
+      "exists": false,
+      "registered_sha256": "bae136f28bc930780710ed17839d890121a2642274c6612f50ed0f912daa978d",
+      "current_sha256": null,
+      "current_bytes": null,
+      "metadata": {
+        "parser_name": "pdf_page_aware_core",
+        "parser_version": "1.26.7",
+        "quality_flags": [
+          "empty_output"
+        ],
+        "schema_version": "1.0",
+        "span_count": 8775
+      }
+    },
+    {
+      "artifact_id": "urn:company-wiki:artifact:sha256:55646b1f1e34f03e674e8f69877ec4009d5990ca4c87e737baf5b58035fa6ef4",
+      "role": "summary",
+      "status": "retired",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\derived\\70\\70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0\\summary.md",
+      "exists": false,
+      "registered_sha256": "b18534d784bbe2a9c70e02663596035590656dacd593dec9566377ceb54bc07f",
+      "current_sha256": null,
+      "current_bytes": null,
+      "metadata": {
+        "input_chars": 120017,
+        "input_truncated": true,
+        "model": "MiniMax-M3",
+        "prompt_version": "1.0.0",
+        "provider": "minimax",
+        "quality_status": "llm_generated_unverified",
+        "schema_version": "1.0",
+        "summary_method": "llm",
+        "total_tokens": 51329
+      }
+    },
+    {
+      "artifact_id": "urn:company-wiki:artifact:sha256:c574a4e4ec65a4fab10b010096002ff2ed0eb3bd17a573cccc77a5f95b6337f6",
+      "role": "normalized",
+      "status": "retired",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\derived\\d1\\d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7\\normalized.md",
+      "exists": false,
+      "registered_sha256": "f5c8311e4920494fbb7d7f56796019eddc72683c89076632becacead80a470b1",
+      "current_sha256": null,
+      "current_bytes": null,
+      "metadata": {
+        "parser_name": "pdf_page_aware_core",
+        "parser_version": "1.26.7",
+        "quality_flags": [],
+        "schema_version": "1.0",
+        "span_count": 8997
+      }
+    }
+  ]
+}

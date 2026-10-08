@@ -1,0 +1,1005 @@
+
+### C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\executions\US-MSFT
+[
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\build_msft_input.py",
+    "bytes": 26288
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\communication_coverage.json",
+    "bytes": 43721
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\communication_coverage.md",
+    "bytes": 1576
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\et_discover_response.json",
+    "bytes": 188
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\et_discover_stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\et_standalone_probe_response.json",
+    "bytes": 176
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\et_standalone_probe_response.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\events.jsonl",
+    "bytes": 32695
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\execution_report.md",
+    "bytes": 2924
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\fact_checks.json",
+    "bytes": 205621
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\finish_msft.py",
+    "bytes": 25125
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\forecast_stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\forecast_stdout.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\formal_validation.json",
+    "bytes": 458
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\frozen_validate_only_stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\frozen_validate_only_stdout.txt",
+    "bytes": 7
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\fy2025_source_read_receipt.json",
+    "bytes": 1552
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\hash_check_stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\hash_check_stdout.txt",
+    "bytes": 19
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\html_temporary_parse_receipt.json",
+    "bytes": 332
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\immutable_duplicate_stderr.txt",
+    "bytes": 122
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\immutable_duplicate_stdout.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\initial_context.json",
+    "bytes": 410
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\lane_tools.py",
+    "bytes": 16640
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\lint_stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\lint_stdout.txt",
+    "bytes": 17
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\manifest.json",
+    "bytes": 45268
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\official_presentation_links.json",
+    "bytes": 251
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\operating_fact_checks.json",
+    "bytes": 9166
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\preflight_and_immutability.json",
+    "bytes": 4046
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\presentation_capture_receipt.json",
+    "bytes": 550
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\request_fy2024_reuse.json",
+    "bytes": 226
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\request_fy2024_reuse_legacy.json",
+    "bytes": 192
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\request_fy2024_reuse_response.json",
+    "bytes": 4582
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\request_fy2024_reuse_stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\request_fy2025_reuse.json",
+    "bytes": 226
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\request_fy2025_reuse_legacy.json",
+    "bytes": 192
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\request_fy2025_reuse_legacy_response.json",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\request_fy2025_reuse_legacy_stderr.txt",
+    "bytes": 92
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\request_fy2025_reuse_response.json",
+    "bytes": 4582
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\request_fy2025_reuse_stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\request_fy2026_fetch.json",
+    "bytes": 621
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\request_fy2026_fetch_legacy.json",
+    "bytes": 310
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\request_fy2026_fetch_legacy_response.json",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\request_fy2026_fetch_legacy_stderr.txt",
+    "bytes": 188
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\request_fy2026_reuse.json",
+    "bytes": 226
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\request_fy2026_reuse_legacy.json",
+    "bytes": 192
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\request_fy2026_reuse_legacy_response.json",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\request_fy2026_reuse_legacy_stderr.txt",
+    "bytes": 215
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\runtime_hashes.json",
+    "bytes": 1197
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\runtime_hashes_final.json",
+    "bytes": 2659
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\skill_step_matrix.json",
+    "bytes": 4287
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\snapshot_stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\snapshot_stdout.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\strong-check_stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\strong-check_stdout.txt",
+    "bytes": 98
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\validate_msft.py",
+    "bytes": 2662
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442232272441700-initialize.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442232272441700-initialize.stdout.txt",
+    "bytes": 416
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442245710731100-reuse-fy2025.stderr.txt",
+    "bytes": 208
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442245710731100-reuse-fy2025.stdout.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442315932578800-legacy-requests.stderr.txt",
+    "bytes": 1079
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442315932578800-legacy-requests.stdout.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442319130050500-reuse-fy2025-legacy.stderr.txt",
+    "bytes": 92
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442319130050500-reuse-fy2025-legacy.stdout.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442360710826700-legacy-requests-repair.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442360710826700-legacy-requests-repair.stdout.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442363888805300-reuse-fy2026-legacy.stderr.txt",
+    "bytes": 215
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442363888805300-reuse-fy2026-legacy.stdout.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442370705931100-template.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442370705931100-template.stdout.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442398164187200-fetch-fy2026-legacy.stderr.txt",
+    "bytes": 188
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442398164187200-fetch-fy2026-legacy.stdout.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442421321083400-ff-fy2025-inspect.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442421321083400-ff-fy2025-inspect.stdout.txt",
+    "bytes": 1047
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442562153378100-producer-raw-read.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442562153378100-producer-raw-read.stdout.txt",
+    "bytes": 227
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442653948378500-official-presentation-href.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442653948378500-official-presentation-href.stdout.txt",
+    "bytes": 60
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442710444963500-official-presentation.stderr.txt",
+    "bytes": 632
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442710444963500-official-presentation.stdout.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442714300841300-html-temporary-parse.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442714300841300-html-temporary-parse.stdout.txt",
+    "bytes": 311
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442737872418900-reuse-fy2025-after-main-fix.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442737872418900-reuse-fy2025-after-main-fix.stdout.txt",
+    "bytes": 4582
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442978492793300-official-presentation-cdn.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442978492793300-official-presentation-cdn.stdout.txt",
+    "bytes": 520
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443254272574100-capture-opened-ancillary-pages.stderr.txt",
+    "bytes": 858
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443254272574100-capture-opened-ancillary-pages.stdout.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443286264640900-capture-opened-ancillary-pages-resume.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443286264640900-capture-opened-ancillary-pages-resume.stdout.txt",
+    "bytes": 2048
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443495417649000-build-independent-input.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443495417649000-build-independent-input.stdout.txt",
+    "bytes": 157
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443510680137400-lint-input.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443510680137400-lint-input.stdout.txt",
+    "bytes": 17
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443527941085100-sync-capture-claim-hashes.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443527941085100-sync-capture-claim-hashes.stdout.txt",
+    "bytes": 19
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443530724435900-validate-input-collect-all.stderr.txt",
+    "bytes": 176
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443530724435900-validate-input-collect-all.stdout.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443660106621400-reuse-fy2024.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443660106621400-reuse-fy2024.stdout.txt",
+    "bytes": 4582
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443666588935900-preserve-webtool-events.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443666588935900-preserve-webtool-events.stdout.txt",
+    "bytes": 25
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443702740486300-exact-et-fmp-discovery.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443702740486300-exact-et-fmp-discovery.stdout.txt",
+    "bytes": 188
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443758087987900-exact-et-fmp-entitlement-probe.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443758087987900-exact-et-fmp-entitlement-probe.stdout.txt",
+    "bytes": 176
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443771245355400-build-mixed-recognition-input.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443771245355400-build-mixed-recognition-input.stdout.txt",
+    "bytes": 157
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443860335514500-build-causal-input.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443860335514500-build-causal-input.stdout.txt",
+    "bytes": 157
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443863064221500-validate-current-schema-gaps.stderr.txt",
+    "bytes": 848
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443863064221500-validate-current-schema-gaps.stdout.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443899082027200-build-contract-aligned-input.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443899082027200-build-contract-aligned-input.stdout.txt",
+    "bytes": 157
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443901920636800-validate-contract-aligned-input.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443901920636800-validate-contract-aligned-input.stdout.txt",
+    "bytes": 7
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443978356812800-emit-formal-json-markdown.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443978356812800-emit-formal-json-markdown.stdout.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444044322242500-build-raw-guidance-units.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444044322242500-build-raw-guidance-units.stdout.txt",
+    "bytes": 157
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444047538644000-emit-corrected-formal.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444047538644000-emit-corrected-formal.stdout.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444051706378900-strong-validate-formal.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444051706378900-strong-validate-formal.stdout.txt",
+    "bytes": 104
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444108573624800-finalize-versioned-input.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444108573624800-finalize-versioned-input.stdout.txt",
+    "bytes": 157
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444111610079900-formal-versioned-output.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444111610079900-formal-versioned-output.stdout.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444115693457100-freeze-before-future-actuals.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444115693457100-freeze-before-future-actuals.stdout.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444119381523000-strong-check-with-snapshot.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444119381523000-strong-check-with-snapshot.stdout.txt",
+    "bytes": 98
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444707566803200-frozen-final-preflight.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444707566803200-frozen-final-preflight.stdout.txt",
+    "bytes": 2697
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444730390484700-finalize-us-handoff.stderr.txt",
+    "bytes": 640
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444730390484700-finalize-us-handoff.stdout.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444753253223200-finalize-us-handoff-corrected-index.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444753253223200-finalize-us-handoff-corrected-index.stdout.txt",
+    "bytes": 310
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444813386343500-seal-us-handoff-source-paths.stderr.txt",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444813386343500-seal-us-handoff-source-paths.stdout.txt",
+    "bytes": 310
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\index.jsonl",
+    "bytes": 60940
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-100528.jsonl",
+    "bytes": 806
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-103456.jsonl",
+    "bytes": 1782
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-105256.jsonl",
+    "bytes": 567
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-107408.jsonl",
+    "bytes": 492
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-11996.jsonl",
+    "bytes": 444
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-25160.jsonl",
+    "bytes": 893
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-32388.jsonl",
+    "bytes": 1774
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-34496.jsonl",
+    "bytes": 559
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-41728.jsonl",
+    "bytes": 1765
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-42740.jsonl",
+    "bytes": 489
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-44628.jsonl",
+    "bytes": 1765
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-46728.jsonl",
+    "bytes": 845
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-52140.jsonl",
+    "bytes": 683
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-56420.jsonl",
+    "bytes": 527
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-62356.jsonl",
+    "bytes": 538
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-62412.jsonl",
+    "bytes": 559
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-63028.jsonl",
+    "bytes": 741
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-67060.jsonl",
+    "bytes": 442
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-67968.jsonl",
+    "bytes": 491
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-69296.jsonl",
+    "bytes": 741
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-69936.jsonl",
+    "bytes": 848
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-71400.jsonl",
+    "bytes": 681
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-85164.jsonl",
+    "bytes": 741
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-90716.jsonl",
+    "bytes": 802
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-91568.jsonl",
+    "bytes": 890
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes\\process-93100.jsonl",
+    "bytes": 490
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\__pycache__\\lane_tools.cpython-313.pyc",
+    "bytes": 28702
+  }
+]
+
+### C:\Users\郑曾波\AppData\Local\Temp\cwp-rf-e2e-20261008\US-MSFT
+[
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ancillary_page_receipts.json",
+    "bytes": 2171
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\aws.html",
+    "bytes": 647411
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\aws.txt",
+    "bytes": 41705
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\call.html",
+    "bytes": 273436
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\call.txt",
+    "bytes": 61518
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\forecast.json",
+    "bytes": 616785
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\forecast.md",
+    "bytes": 63936
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\fy2025_consumer_temporary_text.txt",
+    "bytes": 320880
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\fy2025_verified_raw.html",
+    "bytes": 8158067
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\fy2027_failed_office_viewer.html",
+    "bytes": 6049
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\fy2027_segments_metrics.pptx",
+    "bytes": 4016522
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\fy2027_segments_metrics_text.json",
+    "bytes": 1470
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\independent_arithmetic_and_groups.json",
+    "bytes": 1436
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\input.json",
+    "bytes": 279630
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\metrics.html",
+    "bytes": 198175
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\metrics.txt",
+    "bytes": 9397
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\official_ir_home.html",
+    "bytes": 294458
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\publications.jsonl",
+    "bytes": 5406
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\reporting_groups.json",
+    "bytes": 542
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\results.html",
+    "bytes": 808850
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\results.txt",
+    "bytes": 34613
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\snapshot.json",
+    "bytes": 945323
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\template.json",
+    "bytes": 59937
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\TRUST_BOUNDARY.md",
+    "bytes": 1793
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_benchmark_open.json",
+    "bytes": 32850
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_benchmark_policy.json",
+    "bytes": 34434
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_call_metrics.json",
+    "bytes": 32524
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_call_rest_and_segments.json",
+    "bytes": 37050
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_call_tail_strategy_sec.json",
+    "bytes": 38385
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_material_announcements.json",
+    "bytes": 39253
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_primary_initial.json",
+    "bytes": 27557
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_q4_call_and_ir.json",
+    "bytes": 24972
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_search26.json",
+    "bytes": 28196
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_segment_research.json",
+    "bytes": 33200
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image1.png",
+    "bytes": 64310
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image10.png",
+    "bytes": 31464
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image11.png",
+    "bytes": 211082
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image12.png",
+    "bytes": 219127
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image13.png",
+    "bytes": 327545
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image14.png",
+    "bytes": 34428
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image15.png",
+    "bytes": 204167
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image16.png",
+    "bytes": 263589
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image17.png",
+    "bytes": 307392
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image18.png",
+    "bytes": 234059
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image19.png",
+    "bytes": 36004
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image2.png",
+    "bytes": 113145
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image20.png",
+    "bytes": 301835
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image21.png",
+    "bytes": 316564
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image22.png",
+    "bytes": 36887
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image3.png",
+    "bytes": 94166
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image4.png",
+    "bytes": 204190
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image5.png",
+    "bytes": 259559
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image6.png",
+    "bytes": 30930
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image7.png",
+    "bytes": 331246
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image8.png",
+    "bytes": 112551
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\ppt_images\\image9.png",
+    "bytes": 220244
+  }
+]
+
+### input.json topkeys
+[
+  "schema_version",
+  "company_name",
+  "as_of_date",
+  "currency",
+  "unit",
+  "fiscal_year_end",
+  "base_year",
+  "forecast_years",
+  "sources",
+  "parameters",
+  "evidence_claims",
+  "segments",
+  "reported_total_revenue_parameter_id",
+  "base_adjustment_parameter_ids",
+  "historical_revenue",
+  "research_coverage",
+  "management_communication_coverage",
+  "growth_driver_tree",
+  "forecast_version",
+  "management_targets",
+  "data_gaps",
+  "sensitivity_tests"
+]
+
+### forecast.json topkeys
+[
+  "company_name",
+  "as_of_date",
+  "currency",
+  "unit",
+  "fiscal_year_end",
+  "base_year",
+  "forecast_years",
+  "historical_revenue",
+  "revenue_constraints",
+  "constraint_audit",
+  "base_revenue",
+  "segments",
+  "consolidated_forecast",
+  "schema_version",
+  "engine_version",
+  "research_coverage",
+  "management_target_coverage",
+  "scenario_probabilities",
+  "probability_weighted_forecast",
+  "growth_driver_analysis",
+  "sensitivities",
+  "theme_analysis",
+  "confidence",
+  "forecast_version",
+  "data_gaps",
+  "input_sha256",
+  "input_document",
+  "disconfirming_indicators",
+  "parameter_trace",
+  "sources",
+  "evidence_claims",
+  "historical_accuracy_records",
+  "workflow_compliance_receipt",
+  "publication_receipt",
+  "result_sha256"
+]
+
+### snapshot.json topkeys
+[
+  "company_name",
+  "as_of_date",
+  "forecast_version",
+  "input_sha256",
+  "forecast_result_sha256",
+  "engine_version",
+  "forecast_schema_version",
+  "snapshot_schema_version",
+  "snapshot_id",
+  "input_document",
+  "forecast_result"
+]
+
+### fact_checks.json topkeys
+list
+
+### communication_coverage.json topkeys
+[
+  "schema_version",
+  "as_of_date",
+  "formal_categories",
+  "latest_filing_semantics",
+  "all_presentation_slides_read",
+  "complete_call_read",
+  "numeric_targets",
+  "qualitative_targets",
+  "future_excluded",
+  "semantic_status"
+]

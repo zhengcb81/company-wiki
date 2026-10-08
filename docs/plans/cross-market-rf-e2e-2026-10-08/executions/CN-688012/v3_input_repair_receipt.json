@@ -1,0 +1,322 @@
+{
+  "forecast_version": "2026-10-08-cn688012-v3",
+  "changed_claim_ids": [
+    "claim_aftermarket_revenue_low_2026",
+    "claim_aftermarket_revenue_low_2027",
+    "claim_aftermarket_revenue_low_2028",
+    "claim_aftermarket_revenue_base_2026",
+    "claim_aftermarket_revenue_base_2027",
+    "claim_aftermarket_revenue_base_2028",
+    "claim_aftermarket_revenue_high_2026",
+    "claim_aftermarket_revenue_high_2027",
+    "claim_aftermarket_revenue_high_2028",
+    "claim_driver_afterm_support",
+    "claim_residual_platform_context",
+    "claim_residual_h1_service_context",
+    "claim_residual_h1_other_business",
+    "claim_residual_boundary_annual",
+    "claim_concentration_equipment_units_low_2026",
+    "claim_concentration_equipment_units_low_2027",
+    "claim_concentration_equipment_units_low_2028",
+    "claim_concentration_equipment_units_base_2026",
+    "claim_concentration_equipment_units_base_2027",
+    "claim_concentration_equipment_units_base_2028",
+    "claim_concentration_equipment_units_high_2026",
+    "claim_concentration_equipment_units_high_2027",
+    "claim_concentration_equipment_units_high_2028",
+    "claim_outside_wfe_2027_2028",
+    "claim_china_moderation_core_etch_acceptance",
+    "claim_china_moderation_films_packaging",
+    "claim_driver_tsv_packaging",
+    "claim_contrary_core_etch_acceptance",
+    "claim_contrary_films_packaging",
+    "claim_contrary_afterm_support",
+    "claim_contrary_cmp_ramp",
+    "claim_hq_delay_core_etch_acceptance",
+    "claim_hq_delay_films_packaging",
+    "claim_capacity_equipment_units_low_2026",
+    "claim_capacity_equipment_units_low_2027",
+    "claim_capacity_equipment_units_low_2028",
+    "claim_capacity_equipment_units_base_2026",
+    "claim_capacity_equipment_units_base_2027",
+    "claim_capacity_equipment_units_base_2028",
+    "claim_capacity_equipment_units_high_2026",
+    "claim_capacity_equipment_units_high_2027",
+    "claim_capacity_equipment_units_high_2028",
+    "claim_LingangPhaseII_local_sales_at_maturity"
+  ],
+  "claims_total": 106,
+  "sources_total": 12,
+  "new_targets": [
+    "LingangPhaseII_local_sales_at_maturity"
+  ],
+  "new_h1_response_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448098298712100-v3-half2026-corrected-url-reuse.stdout.txt",
+  "new_h1_url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482884.PDF",
+  "full_context": {
+    "claim_aftermarket_revenue_low_2026": {
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p53, sales/service network; direction only, residual composition unknown",
+      "full_checked_context": "半导体设备制造商的售后服务尤为关键，关系到设备能否在客户生产线上正常、稳定地运行。\n随着半导体制造环节向亚洲转移，相较于国际竞争对手，公司在地域上更接近主流客户，能提供\n快捷的技术支持和客户维护。\n公司良好的产品性能表现以及专业售后服务能力已在业内树立了良好的品牌形象。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_aftermarket_revenue_low_2027": {
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p53, sales/service network; direction only, residual composition unknown",
+      "full_checked_context": "半导体设备制造商的售后服务尤为关键，关系到设备能否在客户生产线上正常、稳定地运行。\n随着半导体制造环节向亚洲转移，相较于国际竞争对手，公司在地域上更接近主流客户，能提供\n快捷的技术支持和客户维护。\n公司良好的产品性能表现以及专业售后服务能力已在业内树立了良好的品牌形象。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_aftermarket_revenue_low_2028": {
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p53, sales/service network; direction only, residual composition unknown",
+      "full_checked_context": "半导体设备制造商的售后服务尤为关键，关系到设备能否在客户生产线上正常、稳定地运行。\n随着半导体制造环节向亚洲转移，相较于国际竞争对手，公司在地域上更接近主流客户，能提供\n快捷的技术支持和客户维护。\n公司良好的产品性能表现以及专业售后服务能力已在业内树立了良好的品牌形象。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_aftermarket_revenue_base_2026": {
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p53, sales/service network; direction only, residual composition unknown",
+      "full_checked_context": "半导体设备制造商的售后服务尤为关键，关系到设备能否在客户生产线上正常、稳定地运行。\n随着半导体制造环节向亚洲转移，相较于国际竞争对手，公司在地域上更接近主流客户，能提供\n快捷的技术支持和客户维护。\n公司良好的产品性能表现以及专业售后服务能力已在业内树立了良好的品牌形象。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_aftermarket_revenue_base_2027": {
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p53, sales/service network; direction only, residual composition unknown",
+      "full_checked_context": "半导体设备制造商的售后服务尤为关键，关系到设备能否在客户生产线上正常、稳定地运行。\n随着半导体制造环节向亚洲转移，相较于国际竞争对手，公司在地域上更接近主流客户，能提供\n快捷的技术支持和客户维护。\n公司良好的产品性能表现以及专业售后服务能力已在业内树立了良好的品牌形象。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_aftermarket_revenue_base_2028": {
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p53, sales/service network; direction only, residual composition unknown",
+      "full_checked_context": "半导体设备制造商的售后服务尤为关键，关系到设备能否在客户生产线上正常、稳定地运行。\n随着半导体制造环节向亚洲转移，相较于国际竞争对手，公司在地域上更接近主流客户，能提供\n快捷的技术支持和客户维护。\n公司良好的产品性能表现以及专业售后服务能力已在业内树立了良好的品牌形象。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_aftermarket_revenue_high_2026": {
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p53, sales/service network; direction only, residual composition unknown",
+      "full_checked_context": "半导体设备制造商的售后服务尤为关键，关系到设备能否在客户生产线上正常、稳定地运行。\n随着半导体制造环节向亚洲转移，相较于国际竞争对手，公司在地域上更接近主流客户，能提供\n快捷的技术支持和客户维护。\n公司良好的产品性能表现以及专业售后服务能力已在业内树立了良好的品牌形象。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_aftermarket_revenue_high_2027": {
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p53, sales/service network; direction only, residual composition unknown",
+      "full_checked_context": "半导体设备制造商的售后服务尤为关键，关系到设备能否在客户生产线上正常、稳定地运行。\n随着半导体制造环节向亚洲转移，相较于国际竞争对手，公司在地域上更接近主流客户，能提供\n快捷的技术支持和客户维护。\n公司良好的产品性能表现以及专业售后服务能力已在业内树立了良好的品牌形象。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_aftermarket_revenue_high_2028": {
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p53, sales/service network; direction only, residual composition unknown",
+      "full_checked_context": "半导体设备制造商的售后服务尤为关键，关系到设备能否在客户生产线上正常、稳定地运行。\n随着半导体制造环节向亚洲转移，相较于国际竞争对手，公司在地域上更接近主流客户，能提供\n快捷的技术支持和客户维护。\n公司良好的产品性能表现以及专业售后服务能力已在业内树立了良好的品牌形象。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_driver_afterm_support": {
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p53, actual after-sales context; no quantitative recurring revenue",
+      "full_checked_context": "半导体设备制造商的售后服务尤为关键，关系到设备能否在客户生产线上正常、稳定地运行。\n随着半导体制造环节向亚洲转移，相较于国际竞争对手，公司在地域上更接近主流客户，能提供\n快捷的技术支持和客户维护。\n公司良好的产品性能表现以及专业售后服务能力已在业内树立了良好的品牌形象。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_residual_platform_context": {
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p48, digital platform business; classification within residual unknown",
+      "full_checked_context": "子公司中微汇链基于多年来在中微公司沉淀的业务管理经验以及在高科技制造领域多家企业\n的数字化服务实践经验，研发和推广数字化运营体系及产品，专注服务以集成电路为代表的高科\n技制造行业与行业内企业。\n汇链推出的“We”系列数字化产品为提升企业从研发、制造，到质量、售后的管理能力，助力\n企业融入产业生态，为高科技制造产业打造企业间协同互信、资源共享的生态型平台We-Linkin。\n目前，中微汇链产品已涵盖超80+个场景应用、超900+项微服务功能。\n基于半导体产业数字化领域的战略布局，专注为中国半导体设备、核心零部件及特种材料领\n域的科创型、高成长性企业，提供端到端的数字化运营整体解决方案。以“研发运营一体化、运营\n管理指标化”为核心理念的产业数字合伙人，致力于帮助客户将技术创新高效、可靠地转化为市场\n成功与可持续增长。汇链科技已成功服务超过50 家半导体领域的科创企业，产业链数字化解决方\n案覆盖率85%。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_residual_h1_service_context": {
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "2026H1 PDF p23, professional after-sales support; no revenue magnitude",
+      "full_checked_context": "半导体设备制造商的售后服务尤为关键，关系到设备能否在客户生产线上正常、稳定地运行。\n随着半导体制造环节向亚洲转移，相较于国际竞争对手，公司在地域上更接近主流客户，能提供\n快捷的技术支持和客户维护。\n公司良好的产品性能表现以及专业售后服务能力已在业内树立了良好的品牌形象。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_residual_h1_other_business": {
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "2026H1 PDF p19, purification and digital platform businesses; their assignment to residual unknown",
+      "full_checked_context": "子公司中微惠创利用分子筛的吸附原理的化学反应器，开发制造了工业用大型净化设备。设\n备可根据客户的要求灵活配置不同处理规模的系统，提供给客户可靠、稳定、安全和节能的净化\n解决方案。中微惠创与德国DAS 环境专家有限公司签订战略合作协议后，双方秉承协议内容按\n计划实施，在半导体行业尾气处理设备领域展开紧密的合作，目前已经生产制造的净化设备顺利\n地应用在各个客户端，共同推动环保科技行业的发展。此外，中微惠创还在积极探索新能源领域\n的相关研究。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_residual_boundary_annual": {
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p65, whole semiconductor equipment related revenue and rounded dedicated-equipment subset",
+      "full_checked_context": "报告期内，公司半导体设备收入实现增长36.62%，其中专用设备实现收入105.27 亿元，同比增\n长34.76%，公司整体盈利水平持续提高。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_concentration_equipment_units_low_2026": {
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p219, customer A concentration, FY2025 39.99% / FY2024 22.15%",
+      "full_checked_context": "于2025 年度，本集团自客户A 取得的营业收入占本集团营业收入的比重超过10%，金额为\n4,952,154,981.39 元(2024 年度：2,008,083,977.69 元)，占本集团营业收入的39.99% (2024 年度：\n22.15%)。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_concentration_equipment_units_low_2027": {
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p219, customer A concentration, FY2025 39.99% / FY2024 22.15%",
+      "full_checked_context": "于2025 年度，本集团自客户A 取得的营业收入占本集团营业收入的比重超过10%，金额为\n4,952,154,981.39 元(2024 年度：2,008,083,977.69 元)，占本集团营业收入的39.99% (2024 年度：\n22.15%)。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_concentration_equipment_units_low_2028": {
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p219, customer A concentration, FY2025 39.99% / FY2024 22.15%",
+      "full_checked_context": "于2025 年度，本集团自客户A 取得的营业收入占本集团营业收入的比重超过10%，金额为\n4,952,154,981.39 元(2024 年度：2,008,083,977.69 元)，占本集团营业收入的39.99% (2024 年度：\n22.15%)。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_concentration_equipment_units_base_2026": {
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p219, customer A concentration, FY2025 39.99% / FY2024 22.15%",
+      "full_checked_context": "于2025 年度，本集团自客户A 取得的营业收入占本集团营业收入的比重超过10%，金额为\n4,952,154,981.39 元(2024 年度：2,008,083,977.69 元)，占本集团营业收入的39.99% (2024 年度：\n22.15%)。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_concentration_equipment_units_base_2027": {
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p219, customer A concentration, FY2025 39.99% / FY2024 22.15%",
+      "full_checked_context": "于2025 年度，本集团自客户A 取得的营业收入占本集团营业收入的比重超过10%，金额为\n4,952,154,981.39 元(2024 年度：2,008,083,977.69 元)，占本集团营业收入的39.99% (2024 年度：\n22.15%)。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_concentration_equipment_units_base_2028": {
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p219, customer A concentration, FY2025 39.99% / FY2024 22.15%",
+      "full_checked_context": "于2025 年度，本集团自客户A 取得的营业收入占本集团营业收入的比重超过10%，金额为\n4,952,154,981.39 元(2024 年度：2,008,083,977.69 元)，占本集团营业收入的39.99% (2024 年度：\n22.15%)。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_concentration_equipment_units_high_2026": {
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p219, customer A concentration, FY2025 39.99% / FY2024 22.15%",
+      "full_checked_context": "于2025 年度，本集团自客户A 取得的营业收入占本集团营业收入的比重超过10%，金额为\n4,952,154,981.39 元(2024 年度：2,008,083,977.69 元)，占本集团营业收入的39.99% (2024 年度：\n22.15%)。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_concentration_equipment_units_high_2027": {
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p219, customer A concentration, FY2025 39.99% / FY2024 22.15%",
+      "full_checked_context": "于2025 年度，本集团自客户A 取得的营业收入占本集团营业收入的比重超过10%，金额为\n4,952,154,981.39 元(2024 年度：2,008,083,977.69 元)，占本集团营业收入的39.99% (2024 年度：\n22.15%)。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_concentration_equipment_units_high_2028": {
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p219, customer A concentration, FY2025 39.99% / FY2024 22.15%",
+      "full_checked_context": "于2025 年度，本集团自客户A 取得的营业收入占本集团营业收入的比重超过10%，金额为\n4,952,154,981.39 元(2024 年度：2,008,083,977.69 元)，占本集团营业收入的39.99% (2024 年度：\n22.15%)。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_outside_wfe_2027_2028": {
+      "source_id": "semi_wfe_20260714",
+      "locator": "Actual opened official SEMI 2026-07-14 original line168, WFE forecast2027/2028",
+      "full_checked_context": "WFE segment sales are projected to expand 21.8% in 2027 and 14.1% in 2028 to reach the $200 billion mark, as manufacturers accelerate capacity expansion and technology migration for AI-related workloads.",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_china_moderation_core_etch_acceptance": {
+      "source_id": "semi_wfe_20260714",
+      "locator": "Actual opened official SEMI2026-07-14 original line181, China 2026 growth moderation",
+      "full_checked_context": "China, Taiwan and Korea are expected to remain the top three destinations for equipment spending through 2028. China is projected to maintain the leading position over the forecast period, though growth is expected to moderate in 2026 following elevated investment levels in recent years. In Taiwan, spending is supported by leading-edge capacity builds for AI and high-performance computing, while Korea’s equipment spending is driven by advanced memory technologies, including HBM.",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_china_moderation_films_packaging": {
+      "source_id": "semi_wfe_20260714",
+      "locator": "Actual opened official SEMI2026-07-14 original line181, China 2026 growth moderation",
+      "full_checked_context": "China, Taiwan and Korea are expected to remain the top three destinations for equipment spending through 2028. China is projected to maintain the leading position over the forecast period, though growth is expected to moderate in 2026 following elevated investment levels in recent years. In Taiwan, spending is supported by leading-edge capacity builds for AI and high-performance computing, while Korea’s equipment spending is driven by advanced memory technologies, including HBM.",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_driver_tsv_packaging": {
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "2026H1 PDF p16, TSV equipment in wafer-level/2.5D packaging and 3D via qualification",
+      "full_checked_context": "报告期内，公司ICP 刻蚀设备类中的8 英寸Primo TSV 2G 200E 和12 英寸深硅刻蚀设备\nPrimo TSV 2G 在晶圆级先进封装、2.5D 封装和微机电系统芯片生产线等成熟市场继续获得重复\n订单的同时，在12 英寸的3D 芯片的硅通孔刻蚀工艺上得到成功验证，并在欧洲客户12 英寸微\n机电系统芯片产线上获得认证的机会，这些新工艺的验证为公司Primo TSV 2G 刻蚀设备拓展了\n新的市场。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_contrary_core_etch_acceptance": {
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "2026H1 PDF p32, complete relevant risk block",
+      "full_checked_context": "近年来，受复杂的国际形势影响，半导体器件供应链持续紧张，公司部分关键零部件和进口\n的材料采购周期较长。公司对关键零部件供应商采取多厂商策略支持零部件及时供应。若未来上\n游供应链产能紧张形势延续，将对公司设备交期产生不利影响，进而影响公司销售。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_contrary_films_packaging": {
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "2026H1 PDF p33, complete relevant risk block",
+      "full_checked_context": "4、研发投入不足导致技术被赶超或替代的风险\n公司所处的半导体设备行业属于技术密集型行业，半导体关键设备的研发涉及等离子体物\n理、射频及微波学、结构化学、微观分子动力学、光谱及能谱学、真空机械传输等多种科学技术\n及工程领域学科知识的综合应用，具有产品技术升级快、研发投入大、研发周期长、研发风险高\n等特点。\n国外领先的半导体设备公司均在研发方面投入巨额资金。公司研发投入总额与国外领先的半\n导体公司有相当大的差距。如果公司未来研发资金投入不足，不能满足技术升级需要，可能导致\n公司技术被赶超或替代的风险，对公司未来的经营业绩产生不利影响。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_contrary_afterm_support": {
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "2026H1 PDF p33, complete relevant risk block",
+      "full_checked_context": "4、研发投入不足导致技术被赶超或替代的风险\n公司所处的半导体设备行业属于技术密集型行业，半导体关键设备的研发涉及等离子体物\n理、射频及微波学、结构化学、微观分子动力学、光谱及能谱学、真空机械传输等多种科学技术\n及工程领域学科知识的综合应用，具有产品技术升级快、研发投入大、研发周期长、研发风险高\n等特点。\n国外领先的半导体设备公司均在研发方面投入巨额资金。公司研发投入总额与国外领先的半\n导体公司有相当大的差距。如果公司未来研发资金投入不足，不能满足技术升级需要，可能导致\n公司技术被赶超或替代的风险，对公司未来的经营业绩产生不利影响。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_contrary_cmp_ramp": {
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "2026H1 PDF p33, complete relevant risk block",
+      "full_checked_context": "（2）并购风险\n公司强调稳健发展，坚持实施内生性增长与外延式并购相结合的发展策略。虽然公司未来并\n购时将继续秉承审慎原则，相应制定整合计划，防范并购风险，但若出现宏观经济波动、市场竞\n争加剧、地缘政治环境变化、被并购公司业绩低于预期或协同效应未显现等情形，将对公司的经\n营业绩产生不利影响。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_hq_delay_core_etch_acceptance": {
+      "source_id": "amec_cninfo_1225482911",
+      "locator": "Company disclosure1225482911 PDF p4, full-use date delayed to December2027",
+      "full_checked_context": "中微临港总部和研发中心项目原计划实施周期5 年，项目计划分以下阶段实\n施完成，包括:前期准备、基地建设、设备购置与安装、员工招聘以及试运营。自\n募集资金到位以来，公司一直积极推进募投项目的实施，并根据实际情况，审慎\n规划资金的使用。截至本公告披露日，“中微临港总部和研发中心项目”主体建\n筑工程已顺利完工，部分功能楼层已完成内部装潢并可投入前期使用。为匹配后\n续业务扩容节奏以及研发人员分批入驻的统筹安排，剩余楼层将采取分批次装修、\n分阶段投用的精细化推进模式。为保障项目建成后整体运营效能与研发承载能力\n达到最优标准，经公司审慎评估与统筹规划，拟将该募投项目整体达到全面预定\n可使用状态的时间顺延至2027 年12 月。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_hq_delay_films_packaging": {
+      "source_id": "amec_cninfo_1225482911",
+      "locator": "Company disclosure1225482911 PDF p4, full-use date delayed to December2027",
+      "full_checked_context": "中微临港总部和研发中心项目原计划实施周期5 年，项目计划分以下阶段实\n施完成，包括:前期准备、基地建设、设备购置与安装、员工招聘以及试运营。自\n募集资金到位以来，公司一直积极推进募投项目的实施，并根据实际情况，审慎\n规划资金的使用。截至本公告披露日，“中微临港总部和研发中心项目”主体建\n筑工程已顺利完工，部分功能楼层已完成内部装潢并可投入前期使用。为匹配后\n续业务扩容节奏以及研发人员分批入驻的统筹安排，剩余楼层将采取分批次装修、\n分阶段投用的精细化推进模式。为保障项目建成后整体运营效能与研发承载能力\n达到最优标准，经公司审慎评估与统筹规划，拟将该募投项目整体达到全面预定\n可使用状态的时间顺延至2027 年12 月。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_capacity_equipment_units_low_2026": {
+      "source_id": "amec_cninfo_1225482911",
+      "locator": "Company1225482911 PDF p4, delayed full-use timing vs assumed accepted units",
+      "full_checked_context": "中微临港总部和研发中心项目原计划实施周期5 年，项目计划分以下阶段实\n施完成，包括:前期准备、基地建设、设备购置与安装、员工招聘以及试运营。自\n募集资金到位以来，公司一直积极推进募投项目的实施，并根据实际情况，审慎\n规划资金的使用。截至本公告披露日，“中微临港总部和研发中心项目”主体建\n筑工程已顺利完工，部分功能楼层已完成内部装潢并可投入前期使用。为匹配后\n续业务扩容节奏以及研发人员分批入驻的统筹安排，剩余楼层将采取分批次装修、\n分阶段投用的精细化推进模式。为保障项目建成后整体运营效能与研发承载能力\n达到最优标准，经公司审慎评估与统筹规划，拟将该募投项目整体达到全面预定\n可使用状态的时间顺延至2027 年12 月。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_capacity_equipment_units_low_2027": {
+      "source_id": "amec_cninfo_1225482911",
+      "locator": "Company1225482911 PDF p4, delayed full-use timing vs assumed accepted units",
+      "full_checked_context": "中微临港总部和研发中心项目原计划实施周期5 年，项目计划分以下阶段实\n施完成，包括:前期准备、基地建设、设备购置与安装、员工招聘以及试运营。自\n募集资金到位以来，公司一直积极推进募投项目的实施，并根据实际情况，审慎\n规划资金的使用。截至本公告披露日，“中微临港总部和研发中心项目”主体建\n筑工程已顺利完工，部分功能楼层已完成内部装潢并可投入前期使用。为匹配后\n续业务扩容节奏以及研发人员分批入驻的统筹安排，剩余楼层将采取分批次装修、\n分阶段投用的精细化推进模式。为保障项目建成后整体运营效能与研发承载能力\n达到最优标准，经公司审慎评估与统筹规划，拟将该募投项目整体达到全面预定\n可使用状态的时间顺延至2027 年12 月。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_capacity_equipment_units_low_2028": {
+      "source_id": "amec_cninfo_1225482911",
+      "locator": "Company1225482911 PDF p4, delayed full-use timing vs assumed accepted units",
+      "full_checked_context": "中微临港总部和研发中心项目原计划实施周期5 年，项目计划分以下阶段实\n施完成，包括:前期准备、基地建设、设备购置与安装、员工招聘以及试运营。自\n募集资金到位以来，公司一直积极推进募投项目的实施，并根据实际情况，审慎\n规划资金的使用。截至本公告披露日，“中微临港总部和研发中心项目”主体建\n筑工程已顺利完工，部分功能楼层已完成内部装潢并可投入前期使用。为匹配后\n续业务扩容节奏以及研发人员分批入驻的统筹安排，剩余楼层将采取分批次装修、\n分阶段投用的精细化推进模式。为保障项目建成后整体运营效能与研发承载能力\n达到最优标准，经公司审慎评估与统筹规划，拟将该募投项目整体达到全面预定\n可使用状态的时间顺延至2027 年12 月。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_capacity_equipment_units_base_2026": {
+      "source_id": "amec_cninfo_1225482911",
+      "locator": "Company1225482911 PDF p4, delayed full-use timing vs assumed accepted units",
+      "full_checked_context": "中微临港总部和研发中心项目原计划实施周期5 年，项目计划分以下阶段实\n施完成，包括:前期准备、基地建设、设备购置与安装、员工招聘以及试运营。自\n募集资金到位以来，公司一直积极推进募投项目的实施，并根据实际情况，审慎\n规划资金的使用。截至本公告披露日，“中微临港总部和研发中心项目”主体建\n筑工程已顺利完工，部分功能楼层已完成内部装潢并可投入前期使用。为匹配后\n续业务扩容节奏以及研发人员分批入驻的统筹安排，剩余楼层将采取分批次装修、\n分阶段投用的精细化推进模式。为保障项目建成后整体运营效能与研发承载能力\n达到最优标准，经公司审慎评估与统筹规划，拟将该募投项目整体达到全面预定\n可使用状态的时间顺延至2027 年12 月。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_capacity_equipment_units_base_2027": {
+      "source_id": "amec_cninfo_1225482911",
+      "locator": "Company1225482911 PDF p4, delayed full-use timing vs assumed accepted units",
+      "full_checked_context": "中微临港总部和研发中心项目原计划实施周期5 年，项目计划分以下阶段实\n施完成，包括:前期准备、基地建设、设备购置与安装、员工招聘以及试运营。自\n募集资金到位以来，公司一直积极推进募投项目的实施，并根据实际情况，审慎\n规划资金的使用。截至本公告披露日，“中微临港总部和研发中心项目”主体建\n筑工程已顺利完工，部分功能楼层已完成内部装潢并可投入前期使用。为匹配后\n续业务扩容节奏以及研发人员分批入驻的统筹安排，剩余楼层将采取分批次装修、\n分阶段投用的精细化推进模式。为保障项目建成后整体运营效能与研发承载能力\n达到最优标准，经公司审慎评估与统筹规划，拟将该募投项目整体达到全面预定\n可使用状态的时间顺延至2027 年12 月。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_capacity_equipment_units_base_2028": {
+      "source_id": "amec_cninfo_1225482911",
+      "locator": "Company1225482911 PDF p4, delayed full-use timing vs assumed accepted units",
+      "full_checked_context": "中微临港总部和研发中心项目原计划实施周期5 年，项目计划分以下阶段实\n施完成，包括:前期准备、基地建设、设备购置与安装、员工招聘以及试运营。自\n募集资金到位以来，公司一直积极推进募投项目的实施，并根据实际情况，审慎\n规划资金的使用。截至本公告披露日，“中微临港总部和研发中心项目”主体建\n筑工程已顺利完工，部分功能楼层已完成内部装潢并可投入前期使用。为匹配后\n续业务扩容节奏以及研发人员分批入驻的统筹安排，剩余楼层将采取分批次装修、\n分阶段投用的精细化推进模式。为保障项目建成后整体运营效能与研发承载能力\n达到最优标准，经公司审慎评估与统筹规划，拟将该募投项目整体达到全面预定\n可使用状态的时间顺延至2027 年12 月。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_capacity_equipment_units_high_2026": {
+      "source_id": "amec_cninfo_1225482911",
+      "locator": "Company1225482911 PDF p4, delayed full-use timing vs assumed accepted units",
+      "full_checked_context": "中微临港总部和研发中心项目原计划实施周期5 年，项目计划分以下阶段实\n施完成，包括:前期准备、基地建设、设备购置与安装、员工招聘以及试运营。自\n募集资金到位以来，公司一直积极推进募投项目的实施，并根据实际情况，审慎\n规划资金的使用。截至本公告披露日，“中微临港总部和研发中心项目”主体建\n筑工程已顺利完工，部分功能楼层已完成内部装潢并可投入前期使用。为匹配后\n续业务扩容节奏以及研发人员分批入驻的统筹安排，剩余楼层将采取分批次装修、\n分阶段投用的精细化推进模式。为保障项目建成后整体运营效能与研发承载能力\n达到最优标准，经公司审慎评估与统筹规划，拟将该募投项目整体达到全面预定\n可使用状态的时间顺延至2027 年12 月。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_capacity_equipment_units_high_2027": {
+      "source_id": "amec_cninfo_1225482911",
+      "locator": "Company1225482911 PDF p4, delayed full-use timing vs assumed accepted units",
+      "full_checked_context": "中微临港总部和研发中心项目原计划实施周期5 年，项目计划分以下阶段实\n施完成，包括:前期准备、基地建设、设备购置与安装、员工招聘以及试运营。自\n募集资金到位以来，公司一直积极推进募投项目的实施，并根据实际情况，审慎\n规划资金的使用。截至本公告披露日，“中微临港总部和研发中心项目”主体建\n筑工程已顺利完工，部分功能楼层已完成内部装潢并可投入前期使用。为匹配后\n续业务扩容节奏以及研发人员分批入驻的统筹安排，剩余楼层将采取分批次装修、\n分阶段投用的精细化推进模式。为保障项目建成后整体运营效能与研发承载能力\n达到最优标准，经公司审慎评估与统筹规划，拟将该募投项目整体达到全面预定\n可使用状态的时间顺延至2027 年12 月。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_capacity_equipment_units_high_2028": {
+      "source_id": "amec_cninfo_1225482911",
+      "locator": "Company1225482911 PDF p4, delayed full-use timing vs assumed accepted units",
+      "full_checked_context": "中微临港总部和研发中心项目原计划实施周期5 年，项目计划分以下阶段实\n施完成，包括:前期准备、基地建设、设备购置与安装、员工招聘以及试运营。自\n募集资金到位以来，公司一直积极推进募投项目的实施，并根据实际情况，审慎\n规划资金的使用。截至本公告披露日，“中微临港总部和研发中心项目”主体建\n筑工程已顺利完工，部分功能楼层已完成内部装潢并可投入前期使用。为匹配后\n续业务扩容节奏以及研发人员分批入驻的统筹安排，剩余楼层将采取分批次装修、\n分阶段投用的精细化推进模式。为保障项目建成后整体运营效能与研发承载能力\n达到最优标准，经公司审慎评估与统筹规划，拟将该募投项目整体达到全面预定\n可使用状态的时间顺延至2027 年12 月。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    },
+    "claim_LingangPhaseII_local_sales_at_maturity": {
+      "source_id": "amec_cninfo_1225482894",
+      "locator": "Company1225482894 PDF p4, investment and at-maturity local sales, period/perimeter ambiguous",
+      "full_checked_context": "项目总投资人民币350,000 万元（以下币种同），其中固定资产总投资170,000\n万元，投资强度2,428 万元/亩。项目达产后可实现属地贡献销售收入300,000 万\n元。7 年内，获得专利数300 个，预计人员入驻1500-2000 人，其中研发人员600-\n800 人。",
+      "check": "Exact original opened text; rationale_support supports stated context/direction only and does not extract future parameter magnitudes"
+    }
+  },
+  "retained_numeric_assumptions": true,
+  "new_material_gaps": [
+    "Residual composition/renewal calibration unavailable",
+    "PhaseII targetyear/measurement/perimeter unclear",
+    "1225482880 equityincentive revenueconditions mention withoutnumeric/year original schedule; not yet obtained"
+  ],
+  "status": "constructed, pending formal validation and independent review"
+}

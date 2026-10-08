@@ -1,0 +1,2 @@
+{"timestamp_utc": "2026-10-08T07:19:03.851320+00:00", "pid": 90552, "ppid": 103288, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["docs/plans/cross-market-rf-e2e-2026-10-08/executions/CN-688012/research_pages.py", "half2026", "--keywords", "6691287", "6,691,287", "28,000", "1,291,902", "专用设备实现收入"], "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"}}
+{"timestamp_utc": "2026-10-08T07:19:03.901327+00:00", "pid": 90552, "ppid": 103288, "event": "python_exit", "data": {}}

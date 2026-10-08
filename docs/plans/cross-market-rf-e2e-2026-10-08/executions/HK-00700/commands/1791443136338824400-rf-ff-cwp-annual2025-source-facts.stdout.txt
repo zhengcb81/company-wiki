@@ -1,0 +1,103 @@
+{"actual_command": ["C:\\Miniconda\\python.exe", "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py", "--request-file", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_annual_2025_no_language.json", "--company-wiki-catalog-config", "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml", "--timeout-seconds", "180"], "environment_overrides": {"REVENUE_PUBLICATION_REGISTRY": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\publications.jsonl", "CWP_AUDIT_PROCESS_DIR": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\processes", "PYTHONPATH": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\process_trace;"}}
+{
+  "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+  "source_type": "regulatory_filing",
+  "title": "腾讯：2025年年度报告",
+  "publisher": "company-wiki",
+  "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+  "published_date": "2026-04-09",
+  "accessed_date": "2026-10-08",
+  "page_or_section": "1",
+  "capture": {
+    "capture_schema_version": "1.0",
+    "capture_method": "local_document",
+    "tool_name": "company-wiki-source-version-reader",
+    "tool_call_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7|2026-10-08T07:05:42.214641+00:00",
+    "captured_date": "2026-10-08",
+    "snapshot_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+    "content_treatment": "untrusted_data_only",
+    "prompt_injection_status": "not_reviewed",
+    "host_receipt": {
+      "host_receipt_schema_version": "1.0",
+      "issuer": "company-wiki",
+      "environment": "host-runtime",
+      "tool_name": "company-wiki-source-version-reader",
+      "action": "verified_read",
+      "event_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "timestamp": "2026-10-08T07:05:42.214641+00:00",
+      "receipt_sha256": "1160a7d8abf01a5c916123e0fdf863b64fce5ce3c449f34cf720e895e853abf7"
+    },
+    "receipt_sha256": "0393c586965e52759cd21a00706ce3b401feba559ba7db842a02835e67777b9d"
+  },
+  "company_wiki_trace": {
+    "source_ref": {
+      "byte_size": 4428270,
+      "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "mime_type": "application/pdf",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+    },
+    "read_receipt": {
+      "byte_size": 4428270,
+      "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+      "read_at": "2026-10-08T07:05:42.214641+00:00",
+      "review": {
+        "evidence_sha256": null,
+        "policy_hash": null,
+        "reviewed_at": null,
+        "source_sha256": null,
+        "status": "not_reviewed"
+      },
+      "schema_version": "2.1",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+      "status": "ok"
+    },
+    "source_manifest": {
+      "byte_size": 4428270,
+      "canonical_entity_id": null,
+      "collector_name": null,
+      "collector_version": null,
+      "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "display_name": null,
+      "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "document_kind": "annual_report",
+      "fiscal_period": null,
+      "fiscal_year": 2025,
+      "form_type": null,
+      "language": "zh",
+      "market": "HK",
+      "mime_type": "application/pdf",
+      "period_end": null,
+      "provider": null,
+      "provider_document_id": null,
+      "published_date": "2026-04-09",
+      "retrieved_at": null,
+      "security_id": "00700",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+      "title": "腾讯：2025年年度报告"
+    },
+    "source_candidate": {
+      "resolution_outcome": "reused_existing",
+      "download_events": 0
+    }
+  },
+  "reuse_receipt": {
+    "parser_calls": null,
+    "llm_calls": null,
+    "download_calls": 0,
+    "outcome": "reused_existing",
+    "policy_hash": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+    "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+    "prompt_injection_status": "not_reviewed",
+    "artifact_read": [],
+    "producer_events": [],
+    "artifact_read_events": [],
+    "artifact_failed_events": []
+  }
+}
+

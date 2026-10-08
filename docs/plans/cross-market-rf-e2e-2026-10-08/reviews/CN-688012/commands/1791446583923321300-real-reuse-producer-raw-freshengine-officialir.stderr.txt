@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\reviews\CN-688012\live_chain_and_determinism.py", line 18, in <module>
+    q=run([sys.executable,'-B',str(S/'scripts'/'source_preparation.py'),'--company-wiki-catalog-config',str(C/'config'/'source_catalog.yaml')],S,json.dumps(req).encode())
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\reviews\CN-688012\live_chain_and_determinism.py", line 13, in run
+    if q.returncode:print(q.stderr.decode());raise RuntimeError('subprocess failed')
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: subprocess failed

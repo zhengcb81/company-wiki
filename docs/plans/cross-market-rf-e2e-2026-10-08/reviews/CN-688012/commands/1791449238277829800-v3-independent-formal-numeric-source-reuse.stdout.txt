@@ -1,0 +1,1 @@
+{"status": "PASS", "new_executor_command_pairs": 20, "nonzero_attempts": 3, "numericrows": 9, "sensitivity": 4, "current_url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482884.PDF", "download_calls": 0, "whole_json_equal": true}

@@ -1,0 +1,1186 @@
+
+# REF research-coverage
+# Nine-dimension revenue research coverage
+
+Use this layer before numerical forecasting. Its purpose is to prevent omitted research, not to add points to CAGR or confidence.
+
+The nine dimensions test coverage, not research depth or economic validity. Read [buy-side-methodology.md](buy-side-methodology.md) for independent benchmarks, falsifiable hypotheses, model-risk review and forecast evaluation, and [industry-lifecycle-routing.md](industry-lifecycle-routing.md) for segment-level industry and lifecycle routing. Those research standards are not additional runtime gates unless explicitly implemented.
+
+This layer is necessary but not sufficient for forward statements. Complete the separate management-communication and target ledger in `management-targets.md`; do not hide a dated management target inside the generic `growth_curve` narrative.
+
+It is also not the growth-driver explanation. The nine dimensions are a flat omission gate; the separate `growth_driver_tree` selects the material causal mechanisms, links them to Base parameters, branches into checked evidence and counterevidence, and ranks them by modeled revenue increment.
+
+## Required dimensions
+
+| Dimension | Question | Typical revenue mapping |
+|---|---|---|
+| `company_foundation` | What is the reported revenue perimeter and segment base? | reported total, segment base, signed base adjustments |
+| `growth_curve` | Which operating variables create the forecast path? | volume, price, customers, activity, utilization, backlog conversion |
+| `industry_market` | Does the addressable market constrain or support modeled demand? | eligible demand or market-share driver, never TAM alone |
+| `competition` | How does competition change share, price, win rate, or retention? | units, price, bookings, churn, conversion |
+| `capacity` | What can actually be delivered and recognized? | commissioned capacity, utilization, billable hours, stores |
+| `technology` | Does technology change yield, acceptance, price, or adoption timing? | yield, unit revenue, launch timing, customer qualification |
+| `policy` | Does policy create a traceable order, tariff, approval, or restriction? | bookings, approved volume, tariff, recognition timing |
+| `customers` | Which customer behaviors drive revenue? | customers, ARPU, retention, concentration-adjusted orders |
+| `demand` | What end demand converts into recognized revenue? | units, usage, activity, bookings followed by conversion |
+
+## Allowed statuses
+
+- `modeled_driver`: the conclusion maps to one or more parameters actually used by the revenue graph.
+- `data_gap`: the dimension is material but evidence is insufficient. It may list partially modeled parameters, but must state the remaining gap.
+- `immaterial`: the dimension is not material to the stated forecast horizon and must explain why. It cannot map parameters.
+
+## Record schema
+
+```json
+{
+  "dimension": "capacity",
+  "status": "modeled_driver",
+  "conclusion": "Commissioned lines cap 2027 shipments",
+  "revenue_mechanism": "commissioned capacity × utilization × yield × unit revenue",
+  "parameter_ids": ["capacity_2027_base", "utilization_2027_base"],
+  "source_ids": ["fy2025_filing", "capacity_release"],
+  "rationale": "Optional for modeled_driver; required for data_gap or immaterial"
+}
+```
+
+Provide exactly one record for each required dimension.
+
+## Hard gates
+
+- A `modeled_driver` parameter must exist and be used by the reported/base bridge, a segment scenario, recognition carry-in, or a company forecast adjustment.
+- `company_foundation` must map to at least one reported or base parameter.
+- `growth_curve` must map to at least one forecast driver, recognition carry-in, or forecast adjustment.
+- A `modeled_driver` record requires source IDs. Parameter-level facts and assumptions retain their own evidence identities.
+- A `data_gap` or `immaterial` record requires a rationale.
+- An `immaterial` record cannot hide a parameter used by the model.
+- Every `data_gap` conclusion is copied into the standard forecast `data_gaps` output.
+
+## Causal discipline
+
+Do not convert a research narrative directly into CAGR. Translate it through an operating identity:
+
+```text
+policy or market change
+→ customer budget or demand
+→ orders / users / activity
+→ deliverable capacity and timing
+→ accounting recognition
+→ revenue
+```
+
+Do not force all nine dimensions into the formula. A well-supported `immaterial` conclusion is preferable to an invented driver.
+
+## Depth review: connect evidence to a falsifiable forecast
+
+For each material dimension, review the following before assigning its status. This checklist is an analyst responsibility; the runtime does not understand the underlying economics merely because the record is complete.
+
+| Dimension | Quantitative cross-check | Qualitative challenge |
+|---|---|---|
+| `company_foundation` | Reported versus comparable history, organic/FX/M&A bridge, gross/net and recognition basis | Is reported growth caused by perimeter or accounting changes? |
+| `growth_curve` | Segment stage, observed unit economics, saturation/replacement/decline limits | What ends the current mechanism, and when would the model need changing? |
+| `industry_market` | Served demand, eligible customers, comparable penetration and cycle history | Does the reference class include failed entrants and delayed adoption? |
+| `competition` | Same-customer retention, net price, win/loss, substitute price/performance | Could share gains be temporary subsidies or channel loading? |
+| `capacity` | Commissioned capacity, time in service, bottlenecks, available inventory | Is supply actually qualified, staffed, financed and deliverable? |
+| `technology` | Qualification time, yield, performance at commercial scale, obsolescence | Does a lab/demo advantage survive customers' total-cost and reliability tests? |
+| `policy` | Eligible budget, legal implementation, tariff/approval and fulfillment dates | Is the policy enacted and executable, or only an announcement? |
+| `customers` | Concentration, contract duration, additions, churn, usage and purchasing cadence | Who decides and pays; can customers postpone, cancel or substitute? |
+| `demand` | Sell-through, repeat purchase, inventory, bookings quality and cancellations | Is apparent demand pull-forward, restocking or recurring consumption? |
+
+For material claims record an alternative explanation, the affected parameter and period, a leading indicator, and a falsifier with an observable trigger. Map these into the existing growth-driver tree and parameter evidence rather than creating a parallel source ledger. Distinguish independent evidence from repeated versions of one original announcement.
+
+Prioritize gaps by potential revenue impact and decision sensitivity, not by the number of missing fields. Use the existing `rationale` to explain why a gap could alter volume, price, timing or model choice and what evidence would resolve it. Unknown does not mean zero impact; it also does not justify inserting an arbitrary downside number.
+
+## Lifecycle and changing-business review
+
+Assign lifecycle at product/segment level in the research rationale: pre-revenue, commercialization, expansion, maturity, cyclical recovery/contraction, decline, or transformation. These are research labels, not new enum values. Preserve the original schema statuses.
+
+- For pre-revenue streams, investigate launch prerequisites and explicit zero-revenue years; never infer a CAGR from zero.
+- For mature streams, explain replacement, retention, net pricing and market limits instead of assuming persistent new-customer growth.
+- For cyclical streams, compare quantities, price, inventory and utilization over a relevant cycle; a rebound from a depressed base is not automatically structural growth.
+- For declining streams, include customer loss, patent expiry, closures and residual service demand. Negative revenue growth is a valid forecast result.
+- For transformation, separate old/new streams and account for customer migration and cannibalization exactly once.
+
+## Custom dimensions
+
+The nine core dimensions are required. For resource-business forecasts (mineral reserves, drug pipeline, land bank, capacity plan), additional custom dimensions may be added to capture domain-specific research:
+
+| Custom dimension | Use when |
+|---|---|
+| `reserves` | 地质储量、资源分级、储量寿命 |
+| `processing` | 回收率、选冶能力、冶金复杂度 |
+| `regulatory_permits` | 采矿权、环保审批、土地使用权 |
+| `pipeline` | 药物管线阶段、临床试验进展 |
+| `land_bank` | 土地储备构成、开发权、规划条件 |
+| `installed_base` | 设备、客户或门店存量及更新/服务机会 |
+| `channel_inventory` | 生产、进货、动销与渠道库存变化 |
+| `lifecycle_transition` | 商业化、成熟、衰退或新旧业务迁移 |
+| `reference_class` | 同类成功/失败样本与外部基准的可比性 |
+
+Custom dimensions follow the same schema as core dimensions (status, conclusion, revenue_mechanism, parameter_ids, source_ids, rationale). They do not replace core dimensions. The engine outputs custom dimensions after the nine core ones.
+
+
+# REF buy-side-methodology
+# 买方收入预测方法：从可检验假设到可复核路径
+
+本文件定义研究标准和人工审查步骤。它不扩大 revenue-forecast 的收入边界，不替代既有来源、参数、会计、签名和发布契约，也不意味着这些研究步骤已成为代码门槛。已执行的约束以验证器和测试为准；研究备忘中的新字段不能直接写入正式 JSON。
+
+## 1. 先冻结问题，再建立独立基准
+
+在用管理层远期目标确定参数前，记录研究对象、信息日、收入口径、预测年限及最重要的三个不确定性，并保存独立基准的推导。区分“未来可能发生什么”“需要满足什么才能达到目标”和“当前证据支持什么”。按业务分部选择生命周期，不能用上市时间、公司规模或公司整体增长率代替业务阶段。
+
+建立两条互相检验的路径：
+
+- **内部路径**：客户或资产存量 → 活动量 → 供给与交付 → 净实现价格 → 会计确认。
+- **外部基准**：同口径市场需求、可比企业渗透/留存/爬坡、历史周期、替代品价格与渠道库存。先列入组条件，再选样本；保留失败、退市、延期和未商业化样本，解释幸存者偏差。
+
+两条路径不一致时，研究差异，不取简单平均。市场总量只能约束可服务需求；市场份额需要渠道、产品、价格、产能或客户证据。管理层目标作为随后核对的基准，不自动成为 Base 或 High。管理目标的可执行记录方式见 [management-targets.md](management-targets.md)。
+
+## 2. 建立收入口径与历史桥
+
+按报告口径对齐币种、财年、并表范围、总额/净额、持续经营、一次性收入和分部重分类。保留原始历史和可比历史的桥，不覆盖原始值。至少两期历史是运行时最低要求，不能视为足够估计周期、季节性或长期趋势；通常争取三至五年、可得时八至十二个季度，周期企业争取覆盖完整周期。数据不足则减少自由参数和缩短明确预测期。
+
+检查销量与出货、终端动销与渠道进货、付费用户与活跃用户、合同金额与履约、ARR 与年度收入、系统销售额与加盟费。季度合计年度时核对财年、额外周、汇率和分部重述。收购、处置、汇率、价格、数量、组合和确认时点分别解释，只能在一个桥接位置入账。
+
+收入确认以适用准则及公司政策为依据，不能仅凭业务模型名称决定。IFRS 15 的合同与履约义务框架要求把经营活动映射到控制权转移或履约进度；它支持此处的确认桥，并不证明分析师的需求假设。[IFRS Foundation：IFRS 15](https://www.ifrs.org/issued-standards/list-of-standards/ifrs-15-revenue-from-contracts-with-customers/)
+
+## 3. 把定性判断落到参数和反证
+
+每个重大假设写一张研究卡。卡片是研究备忘模板；正式值仍进入已有参数、claim、growth_driver_tree、research_coverage 和 data_gaps 字段。
+
+| 研究卡项目 | 应回答的问题 |
+|---|---|
+| 命题与替代解释 | 哪个事实支持什么变化？相同事实还能由库存、季节、促销或会计变更解释吗？ |
+| 传导机制 | 谁改变采购/使用行为，通过什么合同或渠道，在多久以后影响哪个参数？ |
+| 基准与量级 | 历史、同类样本或可验证单位经济关系支持多大变化？为何本企业不同？ |
+| 适用范围 | 哪个产品、客户、地区、年度和情景？是否已经包含在价格或留存率里？ |
+| 证据与依赖 | 原始来源是谁？多条新闻是否复述同一订单或管理层发言？ |
+| 反证与触发 | 出现什么可观察阈值将改变数值、延迟时间或撤销假设？何时检查？ |
+| 未解不确定性 | 哪一条证据缺口会改变结果，缺口可能影响多大收入？ |
+
+不要把“技术领先”“品牌强”“政策支持”“优秀管理层”直接转为增长率加点。以下转换是研究要求，数值仍需独立证据：
+
+| 定性观察 | 可验证机制与参数 | 常见反证 |
+|---|---|---|
+| 更换系统成本高 | 同一客户群的毛留存率、到期续约、净缩减；区分锁定与真实使用 | 留存高但席位和用量下降，价格补贴维系 |
+| 产品性能提升 | 客户验证 → 中标/转化率 → 可交付量；校正价格与产品组合 | 评测好但验证延期，渠道缺失，替代品降价 |
+| 提价能力 | 同口径净价、折扣、退货、留存与销量弹性的组合 | 标价提高但返利加大、量下降或应收拉长 |
+| 新产能扩张 | 投产时间、良率、利用率、瓶颈及订单覆盖 | 设备已装但认证、员工、能源或需求不足 |
+| 政策催化 | 适用客户、预算拨付、审批、招标和履约时点 | 政策未执行、补贴递减、客户提前采购 |
+| 第二增长曲线 | 新旧产品分开，迁移客户、蚕食率、停产与渠道迁移 | 新业务增量来自原业务转移，旧业务流失更快 |
+
+来源独立性和因果方向必须人工判断：多个不同 URL 不保证独立；历史相关性不证明新增供给创造需求。证据评分用于定位薄弱处，不能替代反证搜索。
+
+## 4. 最小充分模型与逐层交叉验证
+
+先选能重构历史的最少参数模型，再因明确误差来源增加结构。逐层检查：
+
+1. **维度**：存量、期内流量和价格分母一致；年度、月度、人次、人数、吨矿石和吨金属不能互换。
+2. **存量流量**：客户、订单、AUM、储量、产能的开期、流入、流出、关期衔接；流出是否真的产生收入。
+3. **期间权重**：新客、开店、投产、交付在年内何时发生；期初期末平均只在均匀变动时近似成立。
+4. **商业约束**：需求、供应、渠道和履约能力的最小值，及跨分部共用瓶颈；受限收入不能凭空转移到其他业务。
+5. **会计桥**：交易额、数量、账单、合同负债和履约之间的转换；避免经营模型已确认收入后再乘一次进度。
+6. **独立复核**：用历史单位收入、销量隐含市场份额、可用容量和外部基准检查隐含假设。
+
+每个模型的适用和失效条件见 [model-library.md](model-library.md)。更多公式并不自动提高准确率。现有显式模型评分是一项结构性指标，不是样本外优势的证明。
+
+## 5. 让情景表达机制，而不是上下浮动百分比
+
+每个情景给出一套内部一致的需求、价格、供给、竞争与确认假设。低情景不等于把所有参数都减小：资产收益率下降与资金成本下降、价格下降与销量上升可能相反；风险因素的联动需要有经济解释。识别渠道去库存、订单取消、法规审批或关键客户流失等离散冲击，避免只测试小幅连续扰动。
+
+保持正式低/中/高路径每年不交叉的既有契约。现实中的延期后追赶、周期转折或新旧产品替代可能产生交叉路径；用独立、有版本的压力分析记录这些路径，不能静默重排年度值，拼成没有连贯经营机制的情景。不同企业/行业不应共用无依据的固定概率。
+
+Low/High 是条件情景边界。未定义概率分布和验证标称覆盖率时，不称为 80% 或 95% 预测区间。情景概率、参数不确定性、流程置信评分是不同概念。[Hyndman 与 Athanasopoulos：预测分布与区间](https://otexts.com/fpp3/prediction-intervals.html)
+
+## 6. 区分会计分解、分配和因果推断
+
+现有增长树用分析师权重分配分部净增量。这是解释性分配，不是通过数据识别的因果贡献，也不是关闭某驱动后重新计算出的增量。权重和为一只能证明分配闭合。分部净增量为零时，该算法无法展示相互抵消的正负机制；净增量为负时，权重的符号不等于收入影响方向。
+
+优先用可重算桥解释量价变化。例如 R=Q×P 时，可以采用 Q 的贡献 ΔQ×(P0+P1)/2 与 P 的贡献 ΔP×(Q0+Q1)/2，两者精确加总为 ΔR；这是对交互项的对称分配，仍非因果识别。更多驱动可在研究中比较顺序桥或 Shapley 分配，但必须披露基准、交互分配方式和受约束重算逻辑。现有引擎未提供通用 Shapley/因果估计接口，不能声称已运行。
+
+单参数敏感性回答局部模型影响；把所有敏感性相加会重复计算交互。主题反事实须明确“无主题”世界中需求、价格、容量的联动变化，不可只把主题收入标签改名。
+
+## 7. 衡量准确性，先守住信息时点
+
+使用预测冻结时确实可获得的数据构建滚动预测起点；每个起点重新估计可调参数。比较同一公司、口径、货币、信息截止日和预测期限；不能拿短期重估结果评价早期长期预测，也不能把事后重述历史混入原始可见信息。时间顺序的交叉验证用于检验预测未来的能力。[Hyndman 与 Athanasopoulos：时间序列交叉验证](https://otexts.com/fpp3/tscv.html)
+
+研究复核同时看绝对误差、方向偏差、规模加权误差、不同期限和不同阶段的误差；零收入或小基数企业不依赖百分比误差。与固定收入、季节性朴素值或过去可用趋势等简易基准比较，基准复杂度必须匹配可用历史。样本内拟合不能证明预测准确。[Hyndman 与 Athanasopoulos：样本外准确性评估](https://otexts.com/fpp3/accuracy.html)
+
+每次复盘把误差拆为需求/数量、净价/组合、时点、并表/汇率、会计口径与模型遗漏。用当时可见信息区分“执行错误”“假设错误”“合理但未实现的风险”，保留原预测，不用新叙事重写历史。小样本、同一公司重叠预测和共同宏观冲击会降低独立样本数；不要把它们当独立成功次数。
+
+## 8. 研究审查与机器门槛的边界
+
+| 项目 | 当前责任 |
+|---|---|
+| 来源日期/哈希、参数身份、公式、存量连续性、情景顺序、发布重算 | 运行时执行相应既有验证；以实际代码和模型契约为准 |
+| 原始来源是否真实、搜索是否充分、同源材料识别、经济因果 | 研究者复核，主机凭据只能加强来源行为保证 |
+| 外部基准选择、生命周期判断、失败样本、管理目标可信度 | 研究标准；已有字段登记支持证据与缺口，不新增伪代码门槛 |
+| 参数校准、复杂模型优于朴素基准、概率区间校准 | 必须有匹配信息集的实证记录；没有记录就明确尚未验证 |
+| 置信评分 | 证据和流程指标，不能解释为达成概率、准确率或投资胜率 |
+
+交付前优先解决可能改变结论的大额缺口。剩余缺口进入正式 data_gaps/limitations；若缺口属于运行时硬门槛则保持阻断，若只是研究标准未满足则按实际状态披露，不能虚称代码验证通过即完成经济审查。盈利、现金流、治理评级、估值与仓位判断仍由对应 invest-* 模块处理。
+
+
+# REF industry-lifecycle-routing
+# 行业、公司类型与生命周期路由
+
+先确定收入合同与经营恒等式，再选择行业视角和生命周期覆盖。本表是研究路由，不是新的 schema 枚举；阶段、证据和风险须映射到已有 research_coverage、参数、增长树与缺口。模型存在不等于行业全部会计细节已被实现。
+
+## 路由顺序
+
+1. 确认会计主体、并表范围、分部外部收入、总额/净额及确认政策。
+2. 区分客户、交易、产能、交付、合同服务、资源或资产收费等经济单位。
+3. 按产品/业务而非整个公司判定阶段；同一公司可以同时有成熟现金业务、商业化新产品和衰退旧产品。
+4. 选择最少充分模型；只有可证实的业务差异才拆分。分部合计须与报告收入闭合。
+5. 应用下面的阶段修正与行业检查，再核对模型的已实现限制。
+
+## 生命周期覆盖
+
+| 阶段 | 主导问题 | 建模要求 | 重点反证/指标 |
+|---|---|---|---|
+| 预收入/研发/在建 | 是否、何时具备销售与确认条件？ | 明示零收入期、许可/试验/认证/投产节点；分清成功条件路径与概率加权期望；不从零基数计算 CAGR | 审批失败、试验终止、认证延迟、资金或工程进度导致的时间变化 |
+| 初次商业化 | 试用是否转化持续付费？ | 资格客户→转化→可交付→净价；首单、试用、赠品与复购分开；按上市时间折算 | 客户验证、真实付费、退款、折扣、复购、渠道备货 |
+| 扩张/快速增长 | 新客、新店、新地域能否复制？ | 新旧客户/门店/资产群分开，产能和销售能力约束；避免成熟收入水平即时赋给新增资产 | 新客质量下降、销售周期拉长、同店蚕食、扩张延期 |
+| 成熟/饱和 | 存量续约、替换、价格和组合贡献多少？ | 分解保有、替换周期、净流失与净价格；市场上限须可服务而非总体 TAM | 渗透率见顶、替代品、客户用量收缩、折扣与返利 |
+| 周期顶/底与复苏 | 库存和价格处于哪一段，转折是否可验证？ | 用多期周期基准，分开数量、净价、利用率与渠道库存；不把顶点利润/收入增速直线外推 | 库销比、订单取消、交期、供给投放、期现价差 |
+| 衰退/收缩/退出 | 下降来自结构替代还是可逆周期？ | 明确客户流失、专利到期、停产、关店、处置及尾部服务；保持非负和边界条件 | 加速替代、渠道退出、合同终止、残余需求低于预期 |
+| 转型/重组 | 新收入是否只是旧收入迁移？ | 新旧业务独立路径和迁移桥；按受控范围处理并表变化；新业务增长扣除蚕食 | 旧业务提前下滑、新业务毛留存低、重复计算系统销售 |
+
+预收入企业的收入模型不评价资金是否充足，但现金约束若影响上市/投产日期，应把已验证时点假设放入收入路径，并将现金消耗分析交给 invest-financials。零基数、重大重组或会计变更下，绝对收入和逐年里程碑通常比 CAGR 更有意义。
+
+## 行业与业务机制矩阵
+
+下表模型 ID 均来自可执行模型库；新增高级结构或行业专属转换只有在 [model-library.md](model-library.md) 明列实现时才能调用。现有模型无法表达的阶段/桥接，应拆分业务、提供有证据的 derived 参数或使用透明的 direct_revenue 回退，不能杜撰驱动名。
+
+| 行业/公司类型 | 可用基础路由 | 阶段修正 | 必查收入边界 |
+|---|---|---|---|
+| SaaS、信息服务、通信订阅 | subscription / cohort_subscription / subscription_arr_bridge | 扩张期新客时点；成熟期留存、席位/用量收缩；转型期许可迁移 | ARR、账单、RPO 与确认收入；NRR 包含扩张后不再重复加算 |
+| 云计算、AI 推理/API、数据中心 | usage_platform / capacity_utilization / subscription | 初期可用容量与客户爬坡；成熟期利用率、价格下降与服务组合 | GPU 数量不是计费时长；分开托管、租赁、转售与服务净额 |
+| 半导体、电子、汽车、装备 | unit_sales / capacity_utilization / delivery_pipeline / inventory_sellthrough / installed_base_aftermarket | 验证、良率、车型/节点上市；周期库存；成熟替换需求 | 出货与终端销售、寄售、退货、售后与软件分摊 |
+| 航空航运、物流、酒店旅游 | transport / services / real_estate_rental | 可供座公里/吨公里/房晚与利用率，运力投放和季节性 | 运量单位与收益率分母匹配；附加费、退款与代理佣金 |
+| 零售、餐饮、加盟、消费品 | retail_franchise / store_cohorts / unit_sales / inventory_sellthrough | 新店爬坡、同店、闭店、迁移与渠道库存 | 系统销售额不等于加盟收入；自营/加盟/供应链避免重复 |
+| 电商、支付、交易所、出行平台 | usage_platform | 用户×频次×客单或交易额；成熟期净费率和补贴变化 | GMV/TPV 与净收入；本金、利息、商家补贴、principal/agent |
+| 广告媒体、社交平台 | advertising | 活跃、时长、广告负载、填充、广告主需求 | 广告展示口径、无效流量、流量获取成本是否净额呈列 |
+| 游戏、内容、教育 | gaming / subscription / services | 新品/学期群组、留存、递延确认与旧产品衰退 | MAU 与付费者重复；虚拟物品、课时和充值不等于收入 |
+| 工程、军工、航天、软件实施 | project_backlog / delivery_pipeline / services | 研发认证→订单→履约；固定工期、取消与变更 | backlog 必须是未确认合同余额；按进度或验收确认不重复 |
+| 矿业、油气、林业与农业 | resource / reserve_depletion / capacity_utilization | 建设爬坡、品位下降、枯竭、产量/价格周期 | 吨矿石/金属、回收率、payability、库存、权益产量与并表收入 |
+| 发电、公用事业、管网、基础设施 | infrastructure / capacity_utilization / renewable_generation | 投运时间、负荷/资源禀赋、退役、费率重设 | 电量、容量服务与附加费分开；regulated 允许收入不等于售电额 |
+| 地产开发、物业、REIT | delivery_pipeline / project_backlog / real_estate_rental | 开发、预售、交付、租约到期与空置恢复 | 土储/合同销售不是确认收入；物业管理、租金与资产出售分开 |
+| 药品、疫苗、医疗器械 | commercial_launch / licensing_commercial / unit_sales / milestone_royalty / installed_base_aftermarket | 研发/审批/医保/渗透；专利到期后的量价侵蚀 | 患者×疗程与净实现价；折扣退货；里程碑是否满足确认条件 |
+| 医院、诊断、医药研发服务 | services / unit_sales / project_backlog | 床位/设备/人员爬坡、就诊量、病例或订单组合 | gross billings 与净收入、医保结算、试验阶段与履约义务 |
+| 银行、消费金融、券商 | bank_revenue / usage_platform / asset_management | 资产重定价、存款期限与资金成本；交易活动周期 | 净利息口径、日均资产负债、非息收入、负值分项的合法范围 |
+| 资管、财富管理 | asset_management / aum_fee_bridge | 存量 AUM、净流入、市场回报和收费档位 | 收费 AUM 与总 AUM；业绩费门槛/结晶时点，不用固定 AUM 百分比代替 |
+| 保险/再保险 | insurance_service / direct_revenue | 新单与存续服务群组、续期/退保及合同边界 | IFRS 17 保险服务收入不等于保费；财险/寿险/再保险不可套统一系数 |
+| 分销、贸易、大宗中间商 | unit_sales / usage_platform | 周转、交易量和价格、去库存；总额转净额 | 主体/代理判断、促销返利、受托交易；大宗价格抬高收入不等于份额提升 |
+| 多业务集团、控股、收购整合 | 按业务组合以上模型，加明确 company adjustments | 收购/出售生效时间、新旧口径可比桥 | 合并范围、权益法、不同比例持股不等于随意按持股比例缩放营业收入 |
+
+`finite_adoption` 横跨多个行业，仅适用于可核验的首次采用/一次成交池；客户复购和售后收入应独立建模。新扩展模型的确切驱动、首年余额锚点和不支持事项见 [extended-models.md](extended-models.md)，不能从行业名称推定参数。
+
+IFRS 17 把保险收入与保险财务损益分别呈列，并排除收入中的投资组成部分；其计量不是简单的“保费×确认率”。本路由只说明安全建模边界。[IFRS Foundation：IFRS 17](https://www.ifrs.org/issued-standards/list-of-standards/ifrs-17-insurance-contracts/)
+
+## 公司特殊情况的横向覆盖
+
+| 公司情形 | 处理方法 |
+|---|---|
+| 客户高度集中、单项目、单产品 | 按重要客户/合同/产品拆分；续约、取消和延迟用离散情景；不假定独立风险可以相互抵消 |
+| 小公司、披露不足、历史短 | 优先透明简单模型和宽情景，显式列缺口；不能为提高显式模型评分制造无依据参数 |
+| 跨国公司、通胀或汇率剧变 | 当地币种量价与汇率桥分开；同一效应不得同时进净价和公司调整；按适用报告政策核对 |
+| 并购驱动、剥离、分拆、反向收购 | 保存 reported 和 comparable 历史，标注合并生效期间；有机增长从可复核桥计算 |
+| 政府预算、监管定价、合同上限 | 从预算落实、招标、费率决定和履约时间传导；政策口号不构成订单 |
+| 两边市场、免费转付费、新商业模式 | 区分用户侧与付费侧；网络效应必须落到转化/频次/留存，迁移不同时计作新客与旧客扩张 |
+
+## 覆盖状态如何对外表达
+
+“可路由到既有公式”“需要显式转换/拆分”“需 direct_revenue 回退”是研究表达，不是可靠性排名。只有运行了具体模型、输入通过对应契约并发布验证结果，才可称该次预测已执行。上述矩阵不宣称自动处理完整银行资产负债表、精算 IFRS 17、药物联合成功概率、统计生命周期识别或季度内排程；这些仍需领域研究、额外验证或其他模块。
+
+
+# REF growth-driver-tree
+# Causal revenue growth-driver tree
+
+## Purpose
+
+The forecast formulas answer **how much revenue** each segment produces. The growth-driver tree answers **why the Base path could happen, what evidence supports it, and what would disprove it**.
+
+Keep the first view short: normally three to five positive drivers, ranked by allocated terminal revenue increment. Keep the underlying tree complete and auditable. If only one or two material drivers are supportable, show one or two; never manufacture entries to reach a display count. A causal thesis is a testable economic explanation; the allocation formula below does not statistically identify its causal effect.
+
+## Universal causal structure
+
+Do not force companies into an industry taxonomy. Start with the company's economic identity and trace a material mechanism through whichever stages apply:
+
+```text
+external condition or company action
+→ offer / capability / capacity / distribution change
+→ customer eligibility, adoption, retention, usage, price, or mix
+→ delivered activity under real constraints
+→ accounting recognition
+→ segment revenue
+→ company revenue
+```
+
+Common candidate lenses include market expansion, share gain or substitution, product/category/geography/customer/channel expansion, price or mix, capacity and utilization, installed-base monetization, retention and usage, backlog conversion, regulation, acquisitions, and business-model transitions. These are prompts for discovery, not allowed-value enums and not automatic conclusions.
+
+Build the chain from the model in both directions:
+
+1. Starting from the segment formula, ask what real-world facts determine each Base parameter.
+2. Starting from researched catalysts, ask which volume, price, mix, customer, activity, utilization, backlog, or recognition parameter would change.
+3. Reject a story that cannot meet in the middle.
+
+## Evidence branches and inference distance
+
+Each root has one or more evidence nodes. `evidence_type` is an analyst-defined label so the framework remains industry-neutral. Useful labels may describe company execution, customer demand, product competitiveness, channel availability, capacity, market structure, regulation, or independent operating indicators.
+
+Classify inference distance:
+
+- `direct`: the checked evidence directly states or measures the company variable being modeled;
+- `one_step`: one explicit causal bridge connects the evidence to the modeled variable;
+- `analogical`: a peer, adjacent product, geography, or historical analogy supports direction but not company magnitude;
+- `contrary`: checked evidence weakens or falsifies the driver.
+
+A driver is `triangulated` only when non-contrary support contains at least two distinct evidence types and at least two distinct sources. A limited driver may remain in the model, but the report calls out the limitation. Source count alone is not triangulation when several articles repeat the same underlying fact.
+
+Examples of disciplined inference:
+
+- Extreme weather plus peer sell-through supports category demand. It does not prove the subject company's sales without company availability, channel, shipment, or market-share evidence.
+- Product reviews support relative competitiveness. They do not prove overseas volume without launch scope, homologation, distribution, orders, deliveries, or capacity.
+- A domestic capacity expansion supports possible supply. It becomes revenue only after demand, delivery, constraints, and recognition are modeled.
+
+## Search workflow
+
+For every candidate root:
+
+1. Write the exact causal claim and the parameter it would affect.
+2. Search official filings, releases, transcripts, presentations, operating disclosures, customer/regulatory records, and other primary evidence first.
+3. Search independent demand, channel, product, capacity, or industry evidence to test the bridge rather than merely repeat the company statement.
+4. Search explicitly for delays, weak demand, price pressure, failed launches, customer loss, capacity constraints, regulation, substitution, and accounting timing that could break the chain.
+5. Open each cited source, register a checked `growth_driver` claim, and mark inference distance.
+6. Record `found`, `searched_none_found`, or `data_gap` for counterevidence; silence without a documented search is not confirmation.
+
+## Structural versus temporary growth
+
+Classify persistence as `multi_year_structural`, `cyclical`, `temporary`, or `uncertain`, with a rationale. A short weather event, stock-out, subsidy, launch spike, or comparison-base effect may reveal demand but should not be extrapolated across years without evidence for capacity, repeated exposure, distribution, installed base, or durable share.
+
+Separate the observation from the durable mechanism. For example, a stock-out is an observation; repeated category demand plus expanding distribution and supply can be a multi-year mechanism.
+
+## Quantitative attribution and ranking
+
+Every root maps to parameter IDs that actually enter the Base path. It does not write a second revenue forecast or add an arbitrary CAGR premium.
+
+For driver `d` and segment `s`:
+
+```text
+driver terminal increment(d)
+= Σ [Base terminal segment increment(s) × attribution weight(d,s)]
+```
+
+Across all roots, weights for each segment sum to one. This permits several explanations to share one segment's net increment without duplicating that increment. Each attribution weight lies in `[-1, 1]` and must be non-zero. The **computed revenue increment**, not the weight's sign, determines positive ranking versus the headwinds list: a negative weight on a declining segment produces a positive allocation. Company-level forecast adjustments remain separately visible because the existing company bridge may not assign a base adjustment to an individual operating root.
+
+These are analyst-selected allocations, not measured causal contributions, estimated driver elasticities or counterfactual model reruns. Report them as such. Sum-to-one proves reconciliation only. A zero net segment increment makes every allocated increment zero even if large gains and losses offset; the bounded weights also cannot generally represent gross positive and negative effects much larger than the net change. Do not distort weights to imply those effects have been identified.
+
+Use operating volume/price/recognition bridges and independently specified sensitivity or theme counterfactual calculations to investigate mechanisms. Interaction terms require an explicit allocation convention; one-at-a-time sensitivities cannot simply be added together. Generic Shapley attribution, statistical causal estimation and a separate gross-effect bridge are not implemented by this tree. See [buy-side-methodology.md](buy-side-methodology.md) for the methodological distinction.
+
+## Output shape
+
+The concise section includes rank, title, one-sentence thesis, Base terminal increment, share of positive driver increment, and evidence status.
+
+The detailed tree expands each root into:
+
+- causal chain;
+- segment attribution and quantified impact;
+- actual Base parameter IDs;
+- horizon and persistence;
+- evidence nodes, claims, sources, types, and inference distance;
+- leading indicators;
+- falsifiers;
+- counterevidence search result;
+- reconciliation to the segment and company increment bridge.
+
+
+# REF management-targets
+# Management communication and target coverage
+
+Use this gate to reduce omission risk. It cannot prove that the internet contains no undiscovered statement; it forces a reproducible official-source search and makes every found target visible.
+
+## Required communication categories
+
+Provide exactly one record for each:
+
+- `latest_annual_filing`;
+- `latest_results_release`;
+- `latest_earnings_call`;
+- `latest_investor_presentation`;
+- `latest_strategy_communication`;
+- `material_announcements_since_last_filing`.
+
+Use `checked`, `not_available`, or `not_applicable`. A checked record requires opened source IDs and lists every material revenue target found. `not_available` requires the search performed and why no primary artifact could be opened. Search snippets are never evidence.
+
+## Target ledger
+
+For every material or contextually relevant revenue statement record:
+
+- exact statement, source-linked claim, target period and commitment strength (`guidance`, `goal`, `aspiration`, or `capacity_plan`);
+- raw value, currency, scale and unit exactly as communicated;
+- measurement basis: `annual_period`, `run_rate_at_period_end`, `cumulative_periods`, or `ambiguous`;
+- explicit `measurement_periods` used by the model and a rationale for translating the source wording into those periods;
+- metric definition and company/segment/custom scope;
+- whether its perimeter is `matched`, `reconciled`, or `mismatch` versus recognized revenue;
+- normalized comparison value in the model currency/unit and the normalization rationale when comparable;
+- treatment: `modeled_scenario`, `scenario_boundary`, `independent_benchmark`, `sensitivity_only`, `unmodeled_data_gap`, or `out_of_horizon`;
+- mapped scenario and parameter IDs when modeled.
+
+Do not equate external revenue with segment total revenue, ARR/run-rate with annual recognized revenue, bookings with revenue, or gross transaction value with net commission revenue. Do not infer that “over the next five years” means cumulative: it can describe the time allowed to reach a fifth-year annualized target.
+
+Resolve measurement basis using, in order: explicit management definition or Q&A; official transcript/presentation; official cross-language wording; management's disclosed current-to-target bridge or CAGR; then corroborating direct reporting. An isolated translated phrase is insufficient when the surrounding arithmetic implies another basis. Record conflicting evidence; use `ambiguous` if it cannot be reconciled.
+
+For `cumulative_periods`, provide at least two ordered, contiguous fiscal years; attainment is the sum of those modeled annual revenues. `annual_period` and `run_rate_at_period_end` each use exactly one period but remain separately labeled. If primary wording and context do not resolve the basis, use `ambiguous`, leave periods empty, and set treatment to `unmodeled_data_gap`.
+
+A period-end run-rate is not annual recognized revenue. A comparable run-rate target requires `comparison_basis="annual_recognized_revenue"`, `normalization_formula`, `normalization_parameter_ids`, and the existing `normalization_rationale`. Explain the intra-year trajectory, effective contract dates, service periods, variable fees and recognition where relevant. Preserve the original run-rate value, wording and `measurement_basis`; only the comparison amount is converted.
+
+The restricted arithmetic formula uses `x0` for `raw_target_value` and `x1`, `x2`, etc. for the verified registered parameters in `normalization_parameter_ids` order. Include at least one evidence-backed conversion or timing input. The runtime requires the expression to syntactically reference `x0` and every listed input and recompute to `comparison_value`; a literal constant or an expression omitting an input fails. This is not a proof of algebraic dependence: cancellation such as `x0-x0+x1` must be rejected in economic review even though all names occur. Review that each input genuinely performs the claimed conversion. For example, `x0*x1*x2` can express a supported annual exposure factor and currency/scale conversion, but the identity and evidence for those factors must fit the actual contract. The syntax example does not supply default numerical assumptions.
+
+If a supported conversion is unavailable, use `unmodeled_data_gap`, `comparison_value=null`, and no mapped parameters or scenarios; a genuine perimeter mismatch remains explicitly recorded as such. Do not fabricate a normalization to satisfy the material-target gate. Recomputable arithmetic is stronger than a narrative assertion of comparability, but does not itself prove the economic validity of the conversion.
+
+## Independent judgment before target attainment
+
+First build an independent operating forecast and an external reference-class check. Then compare it with management's target. A goal, aspiration or capacity plan does not acquire a probability merely by being disclosed. Record management's historical delivery, changed scope, execution prerequisites and contrary evidence where available; distinguish these from the target's exact-value claim.
+
+Use `independent_benchmark` for a material, comparable in-horizon target that should be evaluated without forcing any scenario to achieve it. This treatment requires:
+
+- non-empty `mapped_parameter_ids` used by the forecast;
+- `mapped_scenarios` containing exactly `low`, `base`, and `high`;
+- a non-empty `benchmark_rationale` explaining the independent assumptions, their difference from the target and why forced attainment is inappropriate;
+- `benchmark_claim_ids` with checked `rationale_support` claims bound to the same `management_target` / `target_id`; the original exact-value target claim remains mandatory.
+
+The engine reports each scenario's comparison and `meets_target`, including `false`, without requiring attainment for this treatment. This is a documented disagreement or benchmark, not permission to omit a target or its evidence. Use `modeled_scenario` or `scenario_boundary` when deliberately testing the operating conditions that meet the target; those treatments retain the numerical attainment gate.
+
+When independent comparisons exist, the output includes the optional count `targets_independent_benchmarks`; they are not counted as `targets_unmodeled`. The extra count is absent when there are no independent benchmarks, preserving the existing count shape for those forecasts.
+
+## Hard behavior
+
+- Communication target IDs and ledger target IDs must match exactly.
+- A material, comparable target inside the forecast horizon must receive scenario treatment or a fully evidenced `independent_benchmark` comparison; `sensitivity_only` cannot silently bypass this gate.
+- A target using `modeled_scenario` or `scenario_boundary` must numerically meet `at_least`, `at_most`, or `approximately` within the disclosed tolerance. An `independent_benchmark` compares all three scenarios and may remain unmet.
+- The comparison must be recomputed using the declared measurement basis and every declared model period; output records the per-period values as well as the aggregate.
+- A metric-perimeter mismatch cannot be modeled directly.
+- An out-of-horizon or otherwise unmodeled target is copied into `data_gaps` and confidence limitations.
+- Consider extending the horizon when evidence supports an explicit path. A target within ten years does not by itself justify a longer forecast. Use `out_of_horizon` with a reason when extrapolation would add unsupported precision.
+
+## Downstream boundary
+
+Revenue-forecast owns target discovery, reconciliation and scenario mapping. Financials, valuation and SOTP consume the frozen revenue lineage. They may disclose whether the selected scenario covers a target, but must never reconstruct a second target-driven revenue path.
+
+
+# REF accounting-boundaries
+# Revenue accounting boundaries
+
+## Customer contracts
+
+IFRS 15 requires identifying the contract and performance obligations, determining and allocating the transaction price, and recognizing revenue when control transfers as a performance obligation is satisfied. A performance obligation can be satisfied at a point in time or over time; over-time revenue needs an appropriate progress measure.
+
+Official reference:
+
+- https://www.ifrs.org/issued-standards/list-of-standards/ifrs-15-revenue-from-contracts-with-customers/
+
+Implementation rules:
+
+- Record `timing`, `trigger`, `presentation`, matching modeled presentation, and accounting-policy claim IDs for every segment.
+- Require `progress_measure` and scenario progress parameter IDs for over-time recognition. Recognized revenue is recomputed as modeled revenue times progress.
+- Use `lagged_activity` when modeled activity precedes acceptance or another point-in-time trigger; supply carry-in revenue and retain the unrecognized tail.
+- Split streams when a contract contains materially different recognition patterns.
+
+## Principal versus agent
+
+Gross merchandise value, payment volume, bookings, and customer billings are not automatically revenue. Determine whether the company controls the good or service before transfer. Use `presentation=net` for commission or take-rate revenue and `presentation=gross` only when the reporting policy supports gross recognition.
+
+## Projects and backlog
+
+Reconcile opening backlog, bookings, cancellations, contract changes, recognized revenue, and closing backlog. First-year opening backlog must match a source-claimed base backlog parameter; subsequent opening balances equal prior closing balances. Use project-level schedules when maturities differ materially.
+
+## Banks
+
+For a top-line operating-revenue bridge, calculate net interest income from average earning assets and average interest-bearing liabilities, then add fee and other reported revenue. FDIC defines NIM using average earning assets:
+
+- https://www.fdic.gov/resources/supervision-and-examinations/examination-policies-manual/section5-1.pdf
+
+## Insurers
+
+IFRS 17 presents insurance revenue separately from insurance finance amounts and excludes investment components from insurance revenue. Do not substitute written or collected premiums for insurance revenue.
+
+Official reference:
+
+- https://www.ifrs.org/issued-standards/list-of-standards/ifrs-17-insurance-contracts/
+
+Use a reported insurance-revenue path or a service-unit model only when it reconciles to the company’s IFRS 17 disclosures.
+
+
+# REF model-library
+# Executable revenue model library
+
+Assign models per segment. The exact model and driver names below match `scripts/revenue_core.py`.
+
+The runtime source of truth is the immutable `MODEL_REGISTRY` in `scripts/model_registry.py`. `revenue_core.py` exports compatibility views but contains no formula-selection branch.
+
+| Model | Required drivers | Optional drivers | Formula |
+|---|---|---|---|
+| `direct_growth` | `growth_rate` | — | prior revenue × (1 + growth rate) |
+| `direct_revenue` | `revenue` | — | explicit recognized revenue |
+| `unit_sales` | `units`, `unit_revenue` | `timing_factor`, `other_revenue` | units × unit revenue × timing + other |
+| `capacity_utilization` | `capacity`, `utilization`, `yield`, `unit_revenue` | `timing_factor`, `other_revenue` | capacity × utilization × yield × unit revenue × timing + other |
+| `subscription` | `average_customers`, `revenue_per_customer` | `timing_factor`, `usage_revenue` | average customers × revenue/customer × timing + usage |
+| `usage_platform` | `eligible_activity`, `monetization_rate` | `fixed_revenue` | eligible activity × monetization rate + fixed |
+| `services` | `billable_capacity`, `utilization`, `billing_rate` | `timing_factor`, `other_revenue` | billable capacity × utilization × billing rate × timing + other |
+| `project_backlog` | `opening_backlog`, `bookings`, `cancellations`, `contract_changes`, `closing_backlog` | `backlog_remeasurements` | opening + bookings − cancellations + changes + non-performance remeasurements − closing |
+| `resource` | `saleable_volume`, `realized_price` | `other_revenue` | saleable volume × realized price + other |
+| `infrastructure` | `billable_volume`, `tariff` | `other_revenue` | billable volume × tariff + other |
+| `bank_revenue` | `average_earning_assets`, `asset_yield`, `average_interest_bearing_liabilities`, `funding_cost`, `fee_revenue` | `other_revenue` | interest income − interest expense + fees + other |
+| `asset_management` | `average_aum`, `management_fee_rate` | `performance_fee_revenue`, `other_revenue` | average AUM × fee rate + performance fees + other |
+| `retail_franchise` | `average_owned_stores`, `revenue_per_owned_store` | `franchise_system_sales`, `recognized_fee_rate`, `supply_revenue` | owned-store revenue + recognized franchise fees + supply revenue |
+| `transport` | `capacity`, `utilization`, `yield` | `ancillary_revenue` | capacity × utilization × yield + ancillary |
+| `real_estate_rental` | `average_occupied_area`, `rent_per_area` | `other_revenue` | occupied area × rent/area + other |
+| `licensing_commercial` | `treated_units`, `net_revenue_per_unit` | `milestone_revenue`, `royalty_revenue`, `service_revenue` | commercial + milestone + royalty + service revenue |
+| `advertising` | `eligible_impressions`, `fill_rate`, `revenue_per_thousand_impressions` | `other_revenue` | impressions/1,000 × fill rate × revenue per thousand + other |
+| `gaming` | `active_users`, `payer_conversion`, `revenue_per_payer` | `other_revenue` | active users × payer conversion × revenue/payer + other |
+| `cohort_subscription` | `opening_customers`, `new_customers`, `churned_customers`, `ending_customers`, `revenue_per_customer` | `new_customer_revenue_fraction`, `churned_customer_lost_fraction`, `timing_factor`, `usage_revenue` | (opening + new × new-customer fraction − churn × lost fraction) × revenue/customer × timing + usage |
+| `delivery_pipeline` | opening orders, new orders, cancellations, deliveries, ending orders, unit revenue | `timing_factor`, `other_revenue` | deliveries × unit revenue × timing + other |
+| `milestone_royalty` | `eligible_sales`, `royalty_rate` | milestone and service revenue | eligible sales × royalty rate + milestone + service |
+| `insurance_service` | `coverage_units`, `revenue_per_coverage_unit` | `timing_factor`, `other_revenue` | coverage units × revenue/coverage unit × timing + other |
+| `reserve_depletion` | `opening_reserves`, `additions`, `depletion`, `closing_reserves`, `recovery_rate`, `realized_price` | `reserve_revisions`, `other_revenue` | depletion × recovery rate × realized price + other; reserve revisions affect the stock bridge only |
+
+Lifecycle and operating extensions are documented with exact drivers, formulas and limitations in [extended-models.md](extended-models.md): `subscription_arr_bridge`, `installed_base_aftermarket`, `store_cohorts`, `renewable_generation`, `aum_fee_bridge`, `commercial_launch`, `finite_adoption`, and `inventory_sellthrough`. Use the registry as the source of truth; do not infer driver names from a model label.
+
+## Selection notes
+
+- Split product and after-sales service when their drivers differ.
+- Split subscription and usage-based streams when ARPU does not already include usage.
+- Use average customers, stores, AUM, occupied area, or earning assets where revenue accrues through the period.
+- Use commissioned revenue-capable capacity, not announced capacity.
+- Treat `yield` as manufacturing yield only in `capacity_utilization`; in `transport`, `yield` means revenue per utilized capacity unit.
+- Use average earning assets and liabilities in the bank model. Do not substitute period-end total assets.
+- Use `cohort_subscription` when opening/adds/churn/ending data are available; the engine enforces the stock-flow bridge and continuity. New-customer revenue and churned-customer lost fractions default to 0.5 (uniform intra-year timing); supply sourced fractions when onboarding or churn is seasonal/concentrated. Do not apply a second `timing_factor` for the same effect. This is an aggregate customer bridge, not a full vintage-by-vintage retention model.
+- Use `delivery_pipeline` when order units convert to delivered units; the engine enforces order continuity and base opening orders.
+- Use `insurance_service` only when coverage/service units reconcile to IFRS 17 disclosures; never substitute premiums collected.
+- Use `timing_factor` for year-in-service, commissioning, or explicit seasonal availability. Do not use it as an unsupported growth plug.
+- Use `reserve_depletion` only when a same-unit physical stock is depleted into saleable output. The stock bridge is opening + additions + reserve revisions − depletion = closing. Patent expiry and capacity retirements are not revenue-producing depletion; land development is not necessarily delivery. See [resource-business-guidance.md](resource-business-guidance.md). Use `resource` when saleable volume is pre-computed and no stock-flow bridge is needed.
+- Use `backlog_remeasurements` only for signed non-performance changes such as FX/reclassification. They enter the backlog bridge so that those changes do not appear as contract fulfillment. `contract_changes` captures genuine changes to enforceable contract consideration. The analyst must classify these movements from evidence.
+
+## Model-by-model review requirements
+
+These are economic review requirements. Some are enforced numerically (ranges and registered stock-flow bridges); customer behavior, units inside generic dimensions and accounting meaning still require source review. See [buy-side-methodology.md](buy-side-methodology.md) for the distinction between a passed contract and a supported forecast.
+
+| Model | Check before using | Extend or change route when |
+|---|---|---|
+| `direct_growth` | Comparable prior revenue, supported growth path, nonzero base when using CAGR | Launch from zero, step change, saturation, M&A or structural decline needs operating drivers |
+| `direct_revenue` | Recognized amount and accounting bridge are externally supported | The amount is only a target, billings, GTV or unverified analyst plug |
+| `unit_sales` | Sold units and net revenue/unit share one period/perimeter | Product mix, returns, shipments versus sell-through or inventory matter |
+| `capacity_utilization` | Revenue-capable period capacity, utilization and manufacturing yield counted once | Commissioning, bottleneck, outages, demand limits or inventory require separate bridges |
+| `subscription` | Average billable customers, service-period ARPU and usage separation | Material additions/churn/expansion/contraction require cohort or ARR bridge |
+| `usage_platform` | Eligible monetized activity and recognized net take rate | Two-sided participation, fee tiers, principal/agent changes or subsidies matter |
+| `services` | Billable hours/capacity, utilization and compatible billing-rate time basis | Fixed-fee projects, subcontractors, reimbursements or milestone acceptance differ |
+| `project_backlog` | Backlog is unrecognized enforceable revenue; revisions/FX/cancellations are separate | Bookings have a different perimeter or progress was already recognized; avoid a second progress discount |
+| `resource` | Saleable quantity, net payable price, byproduct treatment | Processing loss, grade, stock depletion or production/sales differences are material |
+| `infrastructure` | Billable volume × allowed realized tariff, pass-through separately traced | Capacity payments, regulatory true-ups, availability or alternative tariffs matter |
+| `bank_revenue` | Period-average interest-bearing balances and annualized effective yield/cost | Repricing buckets, non-accruals, hedges or net/gross presentation are material |
+| `asset_management` | Time-weighted fee-earning AUM and fee schedule | Flows, market returns, fee tiers or crystallization require an AUM bridge/extra assumptions |
+| `retail_franchise` | Comparable average stores and store productivity; franchise/supply revenue separated | Openings, closures, cohorts and cannibalization drive growth |
+| `transport` | Capacity and yield denominator match; utilization has physical meaning | Passenger/cargo mix, load factor, seasonality or charter revenue diverge |
+| `real_estate_rental` | Average occupied area × recognized rent; incentives/free-rent periods included | Lease cohorts, turnover rent, development sales or cash/straight-line rent differ |
+| `licensing_commercial` | Treated units and net unit revenue, milestone/royalty recognition independent | Clinical stage, launch ramp, patent expiry and gross-to-net deductions are material |
+| `advertising` | Valid eligible impressions, one fill factor, net recognized CPM | Format mix, auction pricing and traffic acquisition change independently |
+| `gaming` | Users × payer conversion × payer revenue all share measurement period | Launch cohorts, payer churn, virtual-goods deferrals or franchise decay dominate |
+| `cohort_subscription` | Customer bridge, weighted time contribution and unit revenue compatibility | Cohort age, expansion/contraction or multiple plan tiers differ materially |
+| `delivery_pipeline` | Order/delivery/cancellation units match, opening and closing orders reconcile | Deliveries precede acceptance or advance payments are confused with revenue |
+| `milestone_royalty` | Eligible third-party sales, enforceable royalty rate and earned milestones | Clinical probability, cap/floor, clawback or variable-consideration constraints are material |
+| `insurance_service` | Service-unit revenue reconciles to insurance-revenue disclosures | Full IFRS 17 measurement is required; use a disclosed accounting bridge/direct_revenue |
+| `reserve_depletion` | Same-unit economic reserves; depletion leads to saleable output; revisions do not | Patent expiry, retirement, land development or mismatched ore/metal units are being substituted |
+
+The bank model is a revenue bridge, not a full balance-sheet/repricing simulation. The insurance model is a disclosed service-revenue approximation, not an actuarial IFRS 17 engine. Negative revenue line items and extreme stresses may fall outside generic nonnegative segment contracts; do not hide them with an unsupported positive plug. Preserve the gap and use an accounting-consistent alternative representation.
+
+## Double-counting gates
+
+- Do not add market growth, customer growth, capacity growth, and substitution growth when they describe the same units.
+- Do not multiply ARPU by another monetization factor when ARPU already represents revenue per user.
+- Do not add churn and expansion separately when NRR already contains them.
+- Do not add mix premium outside unit revenue when realized unit revenue already embeds mix.
+- Do not use reserves, TAM, pipeline value, total bookings, or announced capacity as revenue drivers without a conversion identity.
+
+## Fallback policy
+
+Use `direct_growth` only when an operating identity cannot be built from disclosed data. State the missing drivers in `data_gaps`. Use `direct_revenue` for accounting-defined streams whose internal mechanics cannot be represented safely, including many IFRS 17 insurance-revenue forecasts. Both fallbacks reduce the explicit-model component of confidence.
+
+The scoring penalty is not evidence that a more complex model predicts better. Prefer an honest fallback to invented operating detail, and compare candidate models against frozen out-of-sample benchmarks before claiming improved accuracy. Industry and lifecycle breadth comes from economic routing and explicit assumptions, not from assigning every company a unique formula.
+
+## Adding a model safely
+
+1. Create one frozen `ModelSpec` with a unique `model_id`, complete required/optional drivers, defaults, dimensions, ratio-driver metadata, displayed formula, and a pure calculator.
+2. The calculator receives only base revenue, resolved driver arrays, and forecast years. It must not read files, call an LLM, fetch data, mutate inputs, or introduce assumptions.
+3. Register the spec once in `MODEL_REGISTRY`; duplicate IDs and incomplete dimension coverage must fail at import time.
+4. Add the model to `tests/test_models.py` and `tests/test_industry_end_to_end.py`. Registry IDs, formula cases, and industry fixtures must remain exactly aligned.
+5. Never add `if model == ...` or `elif model == ...` to `calculate_model_path`. Parameter resolution and common finite/non-negative checks remain in `revenue_core.py`; model-specific stock-flow continuity belongs in the registered calculator.
+
+
+## Repository engineering tests
+
+The `tests/` paths mentioned here are contributor instructions for the source repository. Tests and engineering tools are not shipped with the installed skill and are not required to run a forecast.
+
+
+# REF input-schema
+# Revenue forecast input schema (engine 4.1.0)
+
+## 1. Identity
+
+Require canonical `schema_version="3.7"` (or the supported opt-in 3.8 extension), company, `as_of_date`, currency, scale in
+`unit`, fiscal-year end, base year, consecutive forecast years, sources,
+evidence claims, parameters, history, segments, reported-total parameter ID,
+nine-dimension research coverage, a causal growth-driver tree,
+management-communication coverage, and a management-target ledger. Earlier
+schemas are legacy read-only within their documented compatibility pairs.
+Engine 4.1.0 changes calculations and validation without changing the canonical
+schema number; use the pinned emitting runtime for old snapshots when required,
+and create a new input/forecast version for the upgraded methodology.
+
+Use `pre_revenue=true` only when reported and segment base revenue are zero.
+A genuinely pre-revenue company may use an empty history.
+
+**Draft / formal.** `run_forecast(data, mode="formal")` (default) enforces all
+hard gates; `mode="draft"` records unresolved data gaps as structured
+limitations and sets `formal_output_mode="draft"` in the publication receipt.
+invest-\* consumers must reject draft artifacts.
+
+**Custom research dimensions.** Appended after the nine core dimensions are
+accepted by both the input and output validators. Each custom dimension must
+be a non-empty, unique string; null, empty, or duplicate names are rejected.
+
+**Management communication search receipts.** Each of the six categories must
+be checked or explicitly marked unavailable/inapplicable. A `not_available`
+declaration requires a `search_event` with `query_scope`, `query_time`,
+`event_ids`, `generated_by`, and `event_sha256`. A `not_applicable`
+declaration carries a `reason_code`. Without a host-signed search receipt the
+declaration is an honour-system assertion.
+
+**Sensitivity completeness.** An opt-in gate (`require_sensitivity_completeness`)
+enforces that every base-scenario assumption/stress parameter is either
+sensitivity-tested or carries a structured exclusion (`sensitivity_exclusions`)
+with `reason` and `rationale`.
+
+**Filing acquisition.** Use the standalone `filing-fetch` skill
+(`filing_fetch_client.resolve_filing`) to obtain a capture-ready handle.
+
+**Model-aware skeleton.** `generate_input_template.py` accepts repeatable
+`--segment-model SEGMENT=MODEL` selections. Each segment name must appear in
+`--segments`, each model must be registered, and a segment cannot be selected
+twice. For example:
+
+```powershell
+python scripts/generate_input_template.py --name "Example Company" --base-year 2025 --forecast-years 2026 2027 --segments Software Equipment --segment-model Software=subscription_arr_bridge --segment-model Equipment=installed_base_aftermarket --output input.json
+```
+
+Unselected segments retain the helper's default model. Generated values,
+excerpts, metadata and hashes are placeholders, not usable forecast evidence.
+Fill and reconcile them, then run linting, hash synchronization and full
+validation as described in [input-construction.md](input-construction.md).
+
+## 2. Evidence claims
+
+Every source first carries the capture object defined in `compliance-contract.md`. Its whole-source `snapshot_sha256` must equal each linked claim's `content_sha256`; each claim also carries `capture_receipt_sha256` equal to the source capture receipt.
+
+Every claim requires:
+
+```json
+{
+  "claim_id": "claim_units_2026_base",
+  "source_id": "capacity_release",
+  "target_type": "parameter",
+  "target_id": "units_2026_base",
+  "support_type": "rationale_support",
+  "locator": "Commissioning table, row 4",
+  "excerpt": "Short passage opened and checked by the research agent.",
+  "excerpt_sha256": "<sha256 of trimmed excerpt>",
+  "content_sha256": "<sha256 of retrieved source artifact>",
+  "capture_receipt_sha256": "<sha256 of source capture receipt>",
+  "verification_status": "opened_and_checked",
+  "verified_by": "research-agent-id",
+  "verified_date": "2026-07-12"
+}
+```
+
+`reported_fact` and `management_guidance` require an `exact_value` claim whose
+extracted value, unit, and period match the parameter. Source-linked assumptions
+(`analyst_assumption`, `scenario_stress`) **must** have at least one
+`rationale_support` claim — an `exact_value` alone is not sufficient. Source
+horizon is enforced: a source whose `covers_until` precedes a forecast year
+that references it is rejected at input validation. Historical revenue,
+recognition policies, scenario probabilities, growth-driver evidence nodes, and
+actual revenue use their dedicated target types.
+
+## 3. Parameters
+
+```json
+{
+  "parameter_id": "units_2026_base",
+  "kind": "analyst_assumption",
+  "value": 120.0,
+  "unit": "thousand units",
+  "period": "FY2026",
+  "dimension": "quantity",
+  "time_basis": "annual",
+  "definition": "base-case deliverable units",
+  "scenario": "base",
+  "rationale": "Commissioned capacity and customer schedules support the assumption",
+  "source_ids": ["capacity_release"],
+  "claim_ids": ["claim_units_2026_base"]
+}
+```
+
+Periods must match `FYyyyy` exactly. Accepted dimensions are `revenue`, `quantity`, `ratio`, `revenue_per_unit`, `activity`, `revenue_per_activity`, `monetary_balance`, `area`, `revenue_per_area`, `backlog`, `coverage_units`, and `reserve_volume`. Monetary dimensions also require company-matching `currency` and `scale`. `time_basis` is `annual` or `point_in_time`.
+
+For `derived_fact`, use `x0...xn` in a restricted arithmetic formula and list inputs in that order. The engine recomputes the formula and rejects a conflicting stored value.
+
+## 4. History and base
+
+Historical records require value, year, source IDs, and exact-value claim IDs. Years cannot exceed the base year and must be consecutive. Reported total, segment bases, signed base adjustments, and historical base revenue must reconcile.
+
+## 5. Segments, scenarios, and recognition
+
+Each segment contains the same model in low/base/high and one parameter-ID series per driver. Recognition requires timing, trigger, gross/net presentation, matching `modeled_presentation`, and recognition-policy claim IDs.
+
+- Point-in-time `modeled_as_recognized`: modeled revenue is recognized directly.
+- Point-in-time `lagged_activity`: supply `lag_years` and scenario carry-in parameter IDs.
+- Over-time: supply `progress_measure` and low/base/high annual `progress_parameter_ids`; recognized revenue equals modeled revenue times progress.
+
+`project_backlog` also requires `base_backlog_parameter_id`; `delivery_pipeline` requires `base_orders_parameter_id`. First forecast-year opening balances must match these base facts.
+
+Six extensions require model-specific base anchors: `base_arr_parameter_id`,
+`base_installed_units_parameter_id`, `base_stores_parameter_id`,
+`base_aum_parameter_id`, `base_unserved_market_parameter_id`, or
+`base_inventory_parameter_id`, as appropriate. Use the exact mapping and
+driver dimensions in [extended-models.md](extended-models.md). The model-aware
+template emits these fields; do not substitute the segment's base revenue
+for an operating stock.
+
+## 6. Adjustments
+
+Forecast adjustments contain name, accepted category, and low/base/high annual revenue-parameter IDs. Eliminations and disposals are non-positive; acquisitions are non-negative.
+
+## 6A. Cross-segment revenue constraints
+
+`revenue_constraints` is optional and defaults to an empty list. Constraints run in declared list order after accounting recognition and before company aggregation. Every constraint requires a unique `constraint_id`, an exact `type`, a non-empty `rationale`, known segment names, and registered annual parameters for every low/base/high year. Unknown fields fail closed.
+
+### Shared sum cap
+
+```json
+{
+  "constraint_id": "shared_capacity_cap",
+  "type": "sum_cap",
+  "segments": ["Equipment", "Subscription"],
+  "allocation": "proportional",
+  "scenario_parameter_ids": {
+    "low": ["cap_low_2026", "cap_low_2027"],
+    "base": ["cap_base_2026", "cap_base_2027"],
+    "high": ["cap_high_2026", "cap_high_2027"]
+  },
+  "rationale": "Both curves consume one measured external capacity ceiling."
+}
+```
+
+Cap parameters use dimension `revenue` and must be non-negative. `proportional` scales the currently effective constrained segments only when their sum exceeds the cap. `fixed_weights` additionally requires:
+
+```json
+"weight_parameter_ids": {
+  "Equipment": {"low": ["..."], "base": ["..."], "high": ["..."]},
+  "Subscription": {"low": ["..."], "base": ["..."], "high": ["..."]}
+}
+```
+
+Weight parameters use dimension `ratio`, are non-negative, cover every constrained segment exactly, and sum to one for every scenario/year. Never infer weights from historical mix.
+
+### Linked ratio
+
+```json
+{
+  "constraint_id": "service_attach_limit",
+  "type": "linked_ratio",
+  "source_segment": "Equipment",
+  "target_segment": "Services",
+  "relation": "maximum",
+  "scenario_parameter_ids": {
+    "low": ["attach_low_2026", "attach_low_2027"],
+    "base": ["attach_base_2026", "attach_base_2027"],
+    "high": ["attach_high_2026", "attach_high_2027"]
+  },
+  "rationale": "Services cannot exceed the source installed-base relationship."
+}
+```
+
+Ratio parameters are non-negative. `maximum` caps the target at `source × ratio`; `exact` explicitly sets it to that amount and may increase or decrease the target. Source and target must differ. Use `exact` only when the identity is genuinely definitional.
+
+### Segment elimination
+
+```json
+{
+  "constraint_id": "internal_service_elimination",
+  "type": "elimination",
+  "segment_adjustment_parameter_ids": {
+    "Services": {
+      "low": ["elim_low_2026", "elim_low_2027"],
+      "base": ["elim_base_2026", "elim_base_2027"],
+      "high": ["elim_high_2026", "elim_high_2027"]
+    }
+  },
+  "rationale": "Remove measured internal revenue from the segment before valuation."
+}
+```
+
+Elimination parameters use dimension `revenue`, must be non-positive, and may not make a segment negative. Do not also include the same amount in `forecast_adjustments`.
+
+## 7. Causal growth-driver tree
+
+`growth_driver_tree.status` is `modeled` or `data_gap`. A data gap has no drivers and requires a rationale. A modeled tree contains one to ten roots; the report ranks at most five positive roots.
+
+Each root requires a stable ID, concise title/thesis, two-to-eight-step causal chain, Base-path parameter IDs, segment attribution weights, in-horizon start/end years, persistence and rationale, checked evidence nodes, leading indicators, falsifiers, and counterevidence status/rationale. Evidence types are non-empty analyst-defined labels rather than an industry enum. `inference_distance` is `direct`, `one_step`, `analogical`, or `contrary`.
+
+```json
+{
+  "status": "modeled",
+  "drivers": [{
+    "driver_id": "category_and_geography_expansion",
+    "title": "Category and geography expansion broadens demand",
+    "thesis": "New offers and distribution expand recognized product revenue.",
+    "causal_chain": ["new offers and channels", "more eligible customers", "higher delivered volume", "recognized segment revenue"],
+    "parameter_ids": ["units_2026_base", "units_2027_base"],
+    "segment_attribution": [{"segment_name": "Products", "weight": 1.0}],
+    "horizon": {"start_year": 2026, "end_year": 2027},
+    "persistence": "multi_year_structural",
+    "persistence_rationale": "The offer and distribution build-out spans the forecast horizon.",
+    "evidence_nodes": [{
+      "evidence_id": "checked_launch_and_channel_plan",
+      "evidence_type": "company_execution",
+      "inference_distance": "direct",
+      "conclusion": "Checked plans support the modeled launch and channel timing.",
+      "claim_ids": ["claim_checked_launch_and_channel_plan"]
+    }],
+    "leading_indicators": ["launch cadence", "active channels", "delivered units"],
+    "falsifiers": ["launches or delivered units remain below the low case"],
+    "counterevidence_status": "searched_none_found",
+    "counterevidence_rationale": "Primary and independent sources were checked for delays and weak demand."
+  }]
+}
+```
+
+Within each root, a segment may appear once. Across all roots, weights for every segment must sum to one. A weight of zero is rejected, and each weight must lie in `[-1, 1]`. The sign of the computed allocation (segment increment × weight), not the weight alone, determines whether it is reported as a positive driver or headwind. This is analyst allocation, not identified causal effect; zero net segment growth can conceal offsetting mechanisms. Every mapped parameter must actually enter the Base forecast and be Base/shared. See `growth-driver-tree.md` for research and inference rules.
+
+## 8. Scenario probabilities
+
+Probabilities are optional. When supplied, require low/base/high values summing to one, a rationale, and `probability_claim_ids` targeting `scenario_probability`.
+
+## 9. Sensitivities
+
+The input field is `sensitivity_tests` (or `sensitivities` as an alias). Each test requires a `name` field; if omitted, the engine auto-generates it from `parameter_id`. Each base-referenced assumption can appear once. Supported shocks:
+
+- `percent`, `percentage_point`, `basis_point`, or `absolute` with positive `shock_value`;
+- `range` or `discrete` with `down_value` and `up_value`.
+
+The output records requested values, effective bounded values, and clamp flags. Use absolute/range shocks for zero-base parameters.
+
+## 10. Theme and historical accuracy
+
+Theme counterfactual IDs must be non-negative terminal-year revenue assumptions for low/base/high. Historical accuracy uses only complete `historical_accuracy_records` emitted by backtesting. Version 1.1 requires matching company/currency/unit/fiscal-year end, forecast and actuals information dates, snapshot/evaluation/backtest links, positive observation count and error/actual totals; the record must be available by the current forecast's `as_of_date`, and duplicate forecast origins are rejected. WAPE is pooled from absolute-error and absolute-actual totals, not averaged across percentages. Version 1.0 remains readable and hash-checked but receives no historical-accuracy credit.
+
+The record hash proves payload integrity, not source authenticity or that an evaluation was actually performed. Retain the underlying immutable snapshot, sourced actuals and evaluation for reproduction. See [backtesting.md](backtesting.md) for exact fields, metrics, small-sample scoring and frozen A/B accuracy evaluation. The overall confidence score is an evidence/workflow indicator, not a probability of prediction success.
+
+## 11. Management communication and targets
+
+`management_communication_coverage` contains exactly the six categories defined in `management-targets.md`. Every record contains status, checked date, conclusion, source IDs and `material_revenue_target_ids`; unavailable/inapplicable records require a rationale.
+
+`management_targets` contains the exact statement, raw target value/unit/currency/scale, source period label, materiality, commitment strength, scope, metric definition, perimeter status/notes, comparison direction, treatment, mapped parameter/scenario IDs, exact-value target claims, and rationale. Comparable targets also require a model-currency comparison value and normalization rationale.
+
+Every target also requires `measurement_basis`, `measurement_periods`, and `measurement_rationale`:
+
+- `annual_period` or `run_rate_at_period_end`: exactly one `FYyyyy` model period;
+- `cumulative_periods`: at least two ordered, contiguous `FYyyyy` periods;
+- `ambiguous`: no model periods, no comparison value or scenario mapping, and treatment `unmodeled_data_gap`.
+
+Material comparable in-horizon targets require `modeled_scenario`,
+`scenario_boundary`, or `independent_benchmark`. The independent treatment
+requires all three mapped scenarios, used forecast parameter IDs,
+`benchmark_rationale`, and `benchmark_claim_ids` carrying checked
+`rationale_support` claims for the same `management_target` / `target_id`.
+It reports all three attainment outcomes without requiring any to reach the
+target. The optional output count `targets_independent_benchmarks` is present
+when this treatment exists and these comparisons are not counted as unmodeled.
+
+For a `run_rate_at_period_end` target to be comparable with annual revenue,
+require `comparison_basis="annual_recognized_revenue"`,
+`normalization_formula`, `normalization_parameter_ids`, and the existing
+`normalization_rationale`. The restricted arithmetic formula receives the raw
+target as `x0` and the verified registered parameters in list order as
+`x1`, `x2`, etc. It must syntactically reference the raw target and every listed input, include
+at least one evidence-backed conversion/timing parameter, and recompute to
+`comparison_value`. A literal constant or a formula omitting `x0` fails the
+syntax requirement; this does not prove algebraic dependence or economic
+validity. The analyst must reject cancellations or ineffective factors and
+verify the substantive role of every input. Preserve the original raw target
+and measurement basis; the conversion changes the comparison amount only.
+
+If no supported conversion is available, a run-rate target may honestly use
+`unmodeled_data_gap` with `comparison_value=null` and no mapped parameters or
+scenarios. Do not manufacture a conversion or force ARR into annual revenue
+to pass a target gate. See [management-targets.md](management-targets.md) for
+the complete treatment contract and research interpretation.
+
+
+# REF output-schema
+# Revenue forecast outputs
+
+The CLI emits validated JSON and can render a Markdown report from the same result.
+
+## Core JSON sections
+
+- identity: company, information date, currency, unit, fiscal-year end, base year, forecast years, version;
+- history: source-linked historical company revenue;
+- research coverage: all nine dimensions, status, revenue mechanism, used parameter IDs, sources, and exclusions or gaps;
+- management target coverage: six official-communication checks, complete target ledger, measurement basis and model periods, perimeter treatment, mapped scenarios, per-period modeled values and numerical attainment;
+- growth-driver analysis: up to five positive drivers ranked by reconciled Base terminal segment-revenue increment, negative headwinds (each with driver ID, thesis, negative Base terminal increment, and ranked), complete causal/evidence nodes, parameter mapping, persistence, leading indicators, falsifiers, and attribution reconciliation; a negative headwind root's `estimated_base_terminal_increment` is negative and its `share_of_positive_driver_increment` is zero;
+- segments: model, formula, driver values, modeled activity, accounting `recognized_revenue`, constraint-adjusted `effective_revenue`, recognition metadata, carry-in, and unrecognized tail;
+- revenue constraints: frozen definitions plus one audit row per constraint/scenario/year with parameter IDs, affected segments, before value, signed adjustment, after value, and before/after totals;
+- consolidated forecast: low/base/high segment bridge, adjustment bridge, annual revenue, annual growth, terminal revenue, CAGR, and incremental contribution;
+- optional probability-weighted forecast: annual expected revenue and expected-terminal-implied CAGR;
+- sensitivities: parameter shocks and terminal revenue impact;
+- optional theme analysis: explicit counterfactual, increment, elasticity, and terminal mix;
+- confidence: score, rating, components, evidence coverage, concentration, and limitations;
+- traceability: complete parameter trace, evidence-claim registry, source registry, input hash, result hash, schema, and engine version;
+- workflow compliance: captured-source receipt hashes, checked-claim and assumption inventory, data-gap hash, prompt-injection flags, mandatory gate IDs, and formal-output authority;
+- publication receipt: signed after output validation; binds the validated payload to the input, schema, engine, and validator version; carries the `output_recomputation` gate (absent from the execution receipt) and a self-consistent `receipt_sha256`; `freeform_override_allowed` is always false;
+- data gaps and disconfirming indicators.
+
+## Output validation
+
+`revenue_report.validate_forecast_output` independently recomputes:
+
+- every segment formula from driver IDs and values;
+- modeled-to-recognized revenue, including progress and lag;
+- every cross-segment constraint and its complete audit, independently recomputed from recognized revenue and registered parameters;
+- terminal revenue, annual growth, and CAGR;
+- segment plus adjustment bridge for every scenario/year;
+- incremental contribution;
+- low/base/high ordering;
+- effective segment low/base/high ordering after all constraints;
+- probability-weighted annual revenue, terminal, implied CAGR, and increment;
+- theme counterfactual arithmetic, sensitivity impacts, and confidence components;
+- presence of source and parameter traces.
+- nine-dimension completeness, counts, parameter/source identities, and propagation of research data gaps.
+- official-communication completeness, target-ledger identity, cumulative/annual/run-rate measurement arithmetic, mapped-scenario attainment, and propagation of ambiguous or otherwise unmodeled targets.
+- every growth-driver claim/source identity, Base-parameter mapping, segment attribution weight, evidence status, terminal increment, ranking, share, and reconciliation to segment contribution.
+- every current-schema source capture and claim-to-capture snapshot binding, plus exact recomputation of the workflow compliance receipt and the publication receipt (including its `validated_payload_sha256` and `receipt_sha256`);
+- the publication receipt's structural contract (`formal_output_mode`, `freeform_override_allowed`, gate identity) and `validated_payload_sha256` against the independently recomputed payload hash.
+
+It rejects fields for stock prices, valuation, profitability, cash generation, investment ratings, shareholder returns, and position sizing.  The prohibited-field scan walks the entire output tree; a prohibited key whose value is a plain string is allowed as legitimate evidence vocabulary.
+
+## Markdown sections
+
+The standard renderer includes:
+
+1. information boundary and base revenue;
+2. low/base/high terminal revenue, CAGR, and increment;
+3. a concise list of the main future revenue drivers and revenue headwinds;
+4. historical revenue;
+5. nine-dimension research coverage and model mapping;
+6. management communication and revenue-target coverage;
+7. annual scenario paths;
+8. segment models and recognition;
+9. base-case incremental contribution and the full causal growth-driver tree;
+10. sensitivities;
+11. confidence components;
+12. disconfirming indicators and data gaps;
+13. parameter-to-claim-to-source table;
+14. linked source registry.
+
+Generate both outputs with:
+
+```powershell
+python scripts/revenue_forecast.py input.json --output forecast.json --markdown forecast.md
+```
+
+
+# REF backtesting
+# Immutable snapshots and backtesting (engine 4.1.0)
+
+## Snapshot
+
+`create` calls `run_forecast` (which validates and signs the publication receipt
+before returning). Snapshot schema 2.0 hashes the canonical input and complete
+forecast result, and binds both hashes to company, as-of date, forecast version,
+engine version, forecast schema, and snapshot ID. Any input or result mutation
+fails evaluation.
+
+The current engine emits canonical forecast schema 3.7 or opt-in 3.8 under
+snapshot schema 2.0. Compatibility depends on both schema and emitting engine,
+as defined by `schema_compatibility.py`. Keep old snapshots byte-for-byte and
+use their pinned emitting runtime when required; do not change an old engine
+version to make it pass the new validator. Adopt revised models with a new
+input and forecast version.
+
+```powershell
+python scripts/revenue_backtest.py create input.json --version 2026-07-12-v1 --output snapshot.json
+```
+
+## Snapshot version discipline
+
+A snapshot is immutable: its `snapshot_id`, `input_sha256`, and
+`forecast_result_sha256` bind the exact input and result it froze. Any input
+field change — including conclusion wording, source registration, or target
+metadata — produces a different `input_sha256` and therefore requires a **new
+version label** (`2026-08-01-v2`, never reuse `-v1` for different content).
+
+- Never delete or overwrite an already-published snapshot file; `write_new_json`
+  refuses to overwrite an existing path (`FileExistsError`, pinned by
+  `test_backtest.py::test_write_new_json_refuses_overwrite`).
+- If a snapshot must be superseded, keep the old file, create a new version
+  label, and record the old `snapshot_id` and the reason in `progress.md`.
+- Validate a new snapshot with `validate_snapshot` (fingerprint + ID
+  consistency) and, for determinism, confirm a re-run of `create` on the same
+  input yields the same `snapshot_id`.
+- Note: `create` freezes `input + forecast_version` (the version label is part
+  of the frozen document), so `snapshot.input_sha256` is not byte-identical to
+  the receipt's `validated_input_sha256`; both are internally consistent and
+  deterministic.
+
+## Actuals
+
+Require `actuals_schema_version="2.0"`, matching company/currency/unit, actuals
+as-of date, sources (each with a `capture` receipt), actual evidence claims
+(each binding `content_sha256` to the source `snapshot_sha256` and
+`capture_receipt_sha256` to the source capture receipt), and company revenue.
+Segment actuals are optional. Each record uses an exact-value claim; its source
+must be published after the corresponding fiscal-year end and no later than
+actuals as-of. The actual must also not already have been published at the
+forecast origin. Freeze forecast inputs before knowing the actual result;
+evaluating a retrospective reconstruction is not evidence of prospective skill.
+
+## Evaluation
+
+```powershell
+python scripts/revenue_backtest.py evaluate snapshot.json actuals.json --output backtest.json
+```
+
+Segment accuracy compares actual revenue against `effective_revenue` when
+cross-segment constraints are present, falling back to `recognized_revenue`.
+Evaluation summarizes company, segment and horizon records, flags nonconsecutive
+actual years and measures direction only for consecutive observations. Sign
+convention is **forecast minus actual**: a positive signed error or bias means
+overprediction.
+
+| Output | Definition and interpretation |
+|---|---|
+| `absolute_error`, `signed_error_amount`, `squared_error` | Magnitude, signed amount and squared amount for an observation |
+| `signed_error`, `absolute_percentage_error` | Signed/absolute error divided by actual; undefined when actual is zero |
+| `smape` | Twice absolute error divided by the sum of absolute forecast and actual; both zero gives 0 |
+| `base_scaled_error` | Absolute error divided by the absolute base revenue; undefined for zero base |
+| `mae`, `bias_amount`, `rmse` | Mean absolute error, mean signed amount and root mean squared error |
+| `wape` | Sum of absolute errors divided by sum of absolute actuals |
+| `within_interval`, `interval_coverage` | Whether actual falls between low/high, and the observed fraction covered |
+| `scenario_width`, `mean_scenario_width` | High minus low for one observation and its mean; inspect together with coverage |
+| `direction_accuracy` | Share of eligible consecutive observations with correctly forecast direction |
+
+Low/high are conditional scenario bounds, **not probability quantiles**. More
+coverage obtained by widening bounds is not sufficient evidence of a better
+forecast. There is no declared nominal probability and no automatic claim of
+an 80%/95% statistical prediction interval.
+
+## Frozen-history benchmarks and scaled errors
+
+`benchmark_diagnostics` currently uses the frozen **company** historical
+revenue, not future actuals, to calculate:
+
+- `flat_base`: every forecast year equals base-year revenue.
+- `historical_cagr`: continue the first-to-last historical CAGR from base
+  revenue, when history and positive starting revenue allow that calculation.
+- MASE: model MAE divided by mean absolute consecutive annual changes in the
+  training history; RMSSE: square root of model MSE divided by mean squared
+  training changes. These are annual, nonseasonal scaling denominators, not
+  estimates from future evaluation data.
+- `mae_skill_vs_flat_base` and `mae_skill_vs_historical_cagr`: one minus model
+  absolute-error sum divided by the corresponding benchmark error sum. Positive
+  means lower error than that benchmark; negative means worse. Zero benchmark
+  error makes the skill ratio undefined.
+
+Missing or constant history makes the relevant MASE/RMSSE denominator undefined;
+report null rather than introducing an epsilon or claiming perfect skill.
+These company-level benchmarks do not imply that segment histories or a
+seasonal-naive model were estimated. An unusually short or distorted historical
+CAGR remains only a diagnostic benchmark, not a recommended forecast.
+
+When all actual revenue is zero, WAPE remains undefined but absolute error, MAE,
+sMAPE, and base-scaled error remain visible.
+
+## Accuracy record 1.1 and point-in-time scoring
+
+The output includes `evaluation_sha256`, `backtest_id`, and a generated
+`accuracy_record` with `record_schema_version="1.1"`. Copy that complete record
+into a later forecast's `historical_accuracy_records`; do not manually type a
+WAPE or reconstruct a successful-looking summary.
+
+The 1.1 record binds `company_name`, `currency`, `unit`, `fiscal_year_end`,
+`forecast_as_of_date`, `actuals_as_of_date`, `snapshot_id`, `backtest_id`,
+`evaluation_sha256`, `observations`, `wape`, `mae`, `mean_smape`,
+`sum_absolute_error`, `sum_absolute_actual`, and `record_sha256`.
+Current consumption validates:
+
+1. The record hash, unique backtest ID and positive integer observation count;
+   1.1 `backtest_id`, `snapshot_id` and `evaluation_sha256` must be lowercase
+   64-character SHA-256 identifiers, with no duplicate snapshot counted twice.
+2. Exact company/currency/unit/fiscal-year-end match with the consuming forecast.
+3. `forecast_as_of_date < actuals_as_of_date <= current as_of_date`; future
+   evaluations cannot improve a past forecast's score.
+4. No duplicate forecast origin among 1.1 records. Select one appropriate
+   evaluation per origin rather than adding repeated evaluations of the same
+   forecast to inflate the sample.
+5. Nonnegative error/actual totals, `wape = sum_absolute_error /
+   sum_absolute_actual` when defined, and `mae × observations = sum_absolute_error`.
+
+Across eligible records, historical WAPE is **pooled**:
+
+```text
+pooled WAPE = Σ sum_absolute_error / Σ sum_absolute_actual
+```
+
+Do not average WAPE percentages, even after weighting by observation count.
+A record with all-zero actuals has undefined individual WAPE but its absolute
+errors remain in the pooled numerator. The pooled value is undefined only
+when the pooled actual denominator is zero.
+
+Legacy 1.0 records remain readable and integrity-checked, but lack sufficient
+identity, information-availability and denominator fields. They do not earn
+historical-accuracy score or count as usable origins. The current history-score
+component applies a conservative sample multiplier
+`min(1, observations / 5, usable_origins / 3)`; this is a workflow policy, not a
+calibrated probability or statistical independence correction. Several horizons
+from one origin, overlapping periods and common macro shocks remain correlated.
+
+## Integrity, authentication and accuracy are separate
+
+An accuracy-record hash detects inconsistent or changed bytes relative to its
+payload; it does not authenticate the author, prove that a cited backtest was
+actually run, or make invented actuals true. The summary's `evaluation_sha256`
+is a linkage value, not a digital signature or independent retrieval of the
+evaluation. Retain the snapshot, actuals, evaluation and source captures for
+reproduction. Host-signed source/publication receipts strengthen only the
+specific trust boundary they cover. Do not describe an ordinary summary hash
+as source authentication.
+
+## Demonstrating improved forecast accuracy
+
+For a real A/B comparison, freeze the old/simple model and proposed model using
+the same company, revenue perimeter, information date and forecast horizon.
+Register the candidate and benchmark before observing actuals. Repeat across
+rolling origins and relevant lifecycle/industry cases, preserve failed launches
+and downturns, and compare bias and error by horizon as well as aggregate WAPE.
+Actuals first released after the origin are evaluation data, not training data;
+document later accounting restatements separately.
+
+This research procedure is not an automated rolling-origin experiment runner.
+Do not claim that unit tests, higher evidence scores, additional formulas, or
+one favorable evaluation establish better real-world accuracy. Training fit is
+not a substitute for genuine held-out forecasts, and chronological validation
+must respect information availability. See [Hyndman and Athanasopoulos:
+forecast evaluation](https://otexts.com/fpp3/accuracy.html) and [time-series
+cross-validation](https://otexts.com/fpp3/tscv.html).
+

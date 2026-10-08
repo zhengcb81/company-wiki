@@ -1,0 +1,1 @@
+{"manifest": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\manifest_v2.json", "claims": 502, "qualitative_targets": 33, "v1_unchanged": true, "independent_review": "pending", "us07": "BLOCKED"}

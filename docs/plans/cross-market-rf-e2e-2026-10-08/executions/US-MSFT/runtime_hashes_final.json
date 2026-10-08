@@ -1,0 +1,57 @@
+{
+  "SKILL.md": {
+    "installed_sha256": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf",
+    "repo_sha256": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf",
+    "same": true
+  },
+  "scripts/revenue_core.py": {
+    "installed_sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+    "repo_sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+    "same": true
+  },
+  "scripts/revenue_forecast.py": {
+    "installed_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+    "repo_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+    "same": true
+  },
+  "scripts/source_preparation.py": {
+    "installed_sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+    "repo_sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+    "same": true
+  },
+  "scripts/company_wiki_source.py": {
+    "installed_sha256": "b223974e94ffb6d91e0e927b252e1fbc67a590fc910c3da10600d292d48d4470",
+    "repo_sha256": "b223974e94ffb6d91e0e927b252e1fbc67a590fc910c3da10600d292d48d4470",
+    "same": true
+  },
+  "scripts/company_wiki_source_v2.py": {
+    "installed_sha256": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+    "repo_sha256": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+    "same": true
+  },
+  "scripts/company_wiki_source_reader_v2.py": {
+    "installed_sha256": "5f5bfd11cbc880c30f2766d8d6c78366d4e32f677ba9a517914a0df5f95faed1",
+    "repo_sha256": "5f5bfd11cbc880c30f2766d8d6c78366d4e32f677ba9a517914a0df5f95faed1",
+    "same": true
+  },
+  "scripts/contracts/constants.py": {
+    "installed_sha256": "3ad7332e4a76e7e3e2a9a8a1ab73828584ed8b19b32327479a0f79636b2f3462",
+    "repo_sha256": "3ad7332e4a76e7e3e2a9a8a1ab73828584ed8b19b32327479a0f79636b2f3462",
+    "same": true
+  },
+  "scripts/forecast/segments.py": {
+    "installed_sha256": "7b0dac5d5b6f19aba2305a7cb5d9d0ecddb1e5a31a6833285c5f81259018f002",
+    "repo_sha256": "7b0dac5d5b6f19aba2305a7cb5d9d0ecddb1e5a31a6833285c5f81259018f002",
+    "same": true
+  },
+  "scripts/revenue_backtest.py": {
+    "installed_sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+    "repo_sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+    "same": true
+  },
+  "scripts/revenue_report.py": {
+    "installed_sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+    "repo_sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+    "same": true
+  }
+}

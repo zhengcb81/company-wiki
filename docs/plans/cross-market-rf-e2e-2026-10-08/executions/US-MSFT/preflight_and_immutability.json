@@ -1,0 +1,86 @@
+{
+  "results": [
+    {
+      "label": "lint",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\lint_input.py",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\input.json"
+      ],
+      "returncode": 0,
+      "expected_nonzero": false,
+      "passed": true,
+      "stdout": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\lint_stdout.txt",
+      "stderr": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\lint_stderr.txt"
+    },
+    {
+      "label": "hash_check",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\fix_hashes.py",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\input.json",
+        "--check"
+      ],
+      "returncode": 0,
+      "expected_nonzero": false,
+      "passed": true,
+      "stdout": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\hash_check_stdout.txt",
+      "stderr": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\hash_check_stderr.txt"
+    },
+    {
+      "label": "frozen_validate_only",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\input.json",
+        "--validate-only",
+        "--verbose"
+      ],
+      "returncode": 0,
+      "expected_nonzero": false,
+      "passed": true,
+      "stdout": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\frozen_validate_only_stdout.txt",
+      "stderr": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\frozen_validate_only_stderr.txt"
+    },
+    {
+      "label": "immutable_duplicate",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_backtest.py",
+        "create",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\input.json",
+        "--version",
+        "2026-10-08-MSFT-v1",
+        "--output",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\snapshot.json"
+      ],
+      "returncode": 2,
+      "expected_nonzero": true,
+      "passed": true,
+      "stdout": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\immutable_duplicate_stdout.txt",
+      "stderr": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\immutable_duplicate_stderr.txt"
+    }
+  ],
+  "before_sha256": {
+    "input.json": "d872a864d1f7220c5635974b262b2b63378c1885998754ed8010134f8c7ae32e",
+    "forecast.json": "46c0c6ce0c71f27899ed4544012566489c8efef1d37826194048683732a36906",
+    "forecast.md": "4ccd4ff3e59ed0fc72af32850b35479dce595b1b641c140a2fb54d1675588511",
+    "snapshot.json": "ac029a2961a01f8d9d9f752bf6253535a45b3f7c3c61e594c6501928b755e0e2"
+  },
+  "after_sha256": {
+    "input.json": "d872a864d1f7220c5635974b262b2b63378c1885998754ed8010134f8c7ae32e",
+    "forecast.json": "46c0c6ce0c71f27899ed4544012566489c8efef1d37826194048683732a36906",
+    "forecast.md": "4ccd4ff3e59ed0fc72af32850b35479dce595b1b641c140a2fb54d1675588511",
+    "snapshot.json": "ac029a2961a01f8d9d9f752bf6253535a45b3f7c3c61e594c6501928b755e0e2"
+  },
+  "frozen_artifacts_unchanged": true,
+  "status": "PASS"
+}

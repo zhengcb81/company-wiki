@@ -1,0 +1,17 @@
+{
+  "url": "https://roadshow.sseinfo.com/base-service/api/pub/v1/activity/question_collect_activity_page",
+  "request": {
+    "activityId": 40766,
+    "pageNo": 5,
+    "pageSize": 3
+  },
+  "endpoint_basis": "literal public endpoint and parameter fields inspected from actual roadshow_app_script.html",
+  "response_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow_precollect_questions_page5.json",
+  "status": 200,
+  "bytes": 3915,
+  "sha256": "08d2f438308d015d83a3afeef324c886757c512dc6c226b862f85c02f85fbc78",
+  "elapsed_seconds": 4.683453599995119,
+  "captured_at": "2026-10-08T07:44:54.787138+00:00",
+  "cost_usd": 0,
+  "credentials_used": false
+}

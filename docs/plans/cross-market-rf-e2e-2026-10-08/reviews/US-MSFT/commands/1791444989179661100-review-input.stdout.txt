@@ -1,0 +1,3432 @@
+
+### company_name
+Microsoft
+
+### as_of_date
+2026-10-08
+
+### currency
+USD
+
+### unit
+million
+
+### fiscal_year_end
+06-30
+
+### base_year
+2026
+
+### forecast_years
+[
+  2027,
+  2028,
+  2029
+]
+
+### forecast_version
+2026-10-08-MSFT-v1
+
+### historical_revenue
+[
+  {
+    "year": 2024,
+    "value": 245122,
+    "source_ids": [
+      "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"
+    ],
+    "claim_ids": [
+      "claim_99_historical_revenue_2024"
+    ]
+  },
+  {
+    "year": 2025,
+    "value": 281724,
+    "source_ids": [
+      "src_results"
+    ],
+    "claim_ids": [
+      "claim_100_historical_revenue_2025"
+    ]
+  },
+  {
+    "year": 2026,
+    "value": 331839,
+    "source_ids": [
+      "src_results"
+    ],
+    "claim_ids": [
+      "claim_101_historical_revenue_2026"
+    ]
+  }
+]
+
+### segments
+[
+  {
+    "name": "Azure",
+    "base_revenue_parameter_id": "azure_base",
+    "recognition": {
+      "mode": "modeled_as_recognized",
+      "timing": "over_time",
+      "trigger": "Already-recognized annual external revenue forecast. Actual underlying recognition follows Note1: usage/service delivery, or control/ad serving. Mixed components are aggregated due undisclosed split; this annual model cannot produce quarterly or contract-level recognition.",
+      "presentation": "gross",
+      "modeled_presentation": "gross",
+      "basis_claim_ids": [
+        "claim_12_recognition_Azure"
+      ],
+      "progress_measure": "annual recognized-flow identity factor; 1 is not completion of backlog/RPO and does not accelerate any contract revenue",
+      "progress_parameter_ids": {
+        "low": [
+          "azure_recognition_identity_2027",
+          "azure_recognition_identity_2028",
+          "azure_recognition_identity_2029"
+        ],
+        "base": [
+          "azure_recognition_identity_2027",
+          "azure_recognition_identity_2028",
+          "azure_recognition_identity_2029"
+        ],
+        "high": [
+          "azure_recognition_identity_2027",
+          "azure_recognition_identity_2028",
+          "azure_recognition_identity_2029"
+        ]
+      }
+    },
+    "scenarios": {
+      "low": {
+        "model": "direct_growth",
+        "driver_parameter_ids": {
+          "growth_rate": [
+            "azure_growth_low_2027",
+            "azure_growth_low_2028",
+            "azure_growth_low_2029"
+          ]
+        },
+        "rationale": "Cloud consumption and AI demand; supply/compute execution constraints. FY26 restated growth40%; Q1 FY27 CC guide44-45%; annual FY27 base38% reported deliberately below a full-year extrapolation of Q1, then fades. Conditional low case; no calibrated probability."
+      },
+      "base": {
+        "model": "direct_growth",
+        "driver_parameter_ids": {
+          "growth_rate": [
+            "azure_growth_base_2027",
+            "azure_growth_base_2028",
+            "azure_growth_base_2029"
+          ]
+        },
+        "rationale": "Cloud consumption and AI demand; supply/compute execution constraints. FY26 restated growth40%; Q1 FY27 CC guide44-45%; annual FY27 base38% reported deliberately below a full-year extrapolation of Q1, then fades. Conditional base case; no calibrated probability."
+      },
+      "high": {
+        "model": "direct_growth",
+        "driver_parameter_ids": {
+          "growth_rate": [
+            "azure_growth_high_2027",
+            "azure_growth_high_2028",
+            "azure_growth_high_2029"
+          ]
+        },
+        "rationale": "Cloud consumption and AI demand; supply/compute execution constraints. FY26 restated growth40%; Q1 FY27 CC guide44-45%; annual FY27 base38% reported deliberately below a full-year extrapolation of Q1, then fades. Conditional high case; no calibrated probability."
+      }
+    },
+    "reporting_group": "Agents and Infra"
+  },
+  {
+    "name": "Microsoft 365 cloud",
+    "base_revenue_parameter_id": "microsoft_365_cloud_base",
+    "recognition": {
+      "mode": "modeled_as_recognized",
+      "timing": "over_time",
+      "trigger": "Already-recognized annual external revenue forecast. Actual underlying recognition follows Note1: usage/service delivery, or control/ad serving. Mixed components are aggregated due undisclosed split; this annual model cannot produce quarterly or contract-level recognition.",
+      "presentation": "gross",
+      "modeled_presentation": "gross",
+      "basis_claim_ids": [
+        "claim_26_recognition_Microsoft_365_cloud"
+      ],
+      "progress_measure": "annual recognized-flow identity factor; 1 is not completion of backlog/RPO and does not accelerate any contract revenue",
+      "progress_parameter_ids": {
+        "low": [
+          "microsoft_365_cloud_recognition_identity_2027",
+          "microsoft_365_cloud_recognition_identity_2028",
+          "microsoft_365_cloud_recognition_identity_2029"
+        ],
+        "base": [
+          "microsoft_365_cloud_recognition_identity_2027",
+          "microsoft_365_cloud_recognition_identity_2028",
+          "microsoft_365_cloud_recognition_identity_2029"
+        ],
+        "high": [
+          "microsoft_365_cloud_recognition_identity_2027",
+          "microsoft_365_cloud_recognition_identity_2028",
+          "microsoft_365_cloud_recognition_identity_2029"
+        ]
+      }
+    },
+    "scenarios": {
+      "low": {
+        "model": "direct_growth",
+        "driver_parameter_ids": {
+          "growth_rate": [
+            "microsoft_365_cloud_growth_low_2027",
+            "microsoft_365_cloud_growth_low_2028",
+            "microsoft_365_cloud_growth_low_2029"
+          ]
+        },
+        "rationale": "Paid seat growth and Copilot/E7 mix, with consumption monetization; FY26 commercial restated18% and new Q1 CC17% guidance apply only to commercial subset, not all cloud. Conditional low case; no calibrated probability."
+      },
+      "base": {
+        "model": "direct_growth",
+        "driver_parameter_ids": {
+          "growth_rate": [
+            "microsoft_365_cloud_growth_base_2027",
+            "microsoft_365_cloud_growth_base_2028",
+            "microsoft_365_cloud_growth_base_2029"
+          ]
+        },
+        "rationale": "Paid seat growth and Copilot/E7 mix, with consumption monetization; FY26 commercial restated18% and new Q1 CC17% guidance apply only to commercial subset, not all cloud. Conditional base case; no calibrated probability."
+      },
+      "high": {
+        "model": "direct_growth",
+        "driver_parameter_ids": {
+          "growth_rate": [
+            "microsoft_365_cloud_growth_high_2027",
+            "microsoft_365_cloud_growth_high_2028",
+            "microsoft_365_cloud_growth_high_2029"
+          ]
+        },
+        "rationale": "Paid seat growth and Copilot/E7 mix, with consumption monetization; FY26 commercial restated18% and new Q1 CC17% guidance apply only to commercial subset, not all cloud. Conditional high case; no calibrated probability."
+      }
+    },
+    "reporting_group": "Agents and Infra"
+  },
+  {
+    "name": "Productivity and server licensing",
+    "base_revenue_parameter_id": "productivity_and_server_licensing_base",
+    "recognition": {
+      "mode": "modeled_as_recognized",
+      "timing": "mixed",
+      "trigger": "Already-recognized annual external revenue forecast. Actual underlying recognition follows Note1: usage/service delivery, or control/ad serving. Mixed components are aggregated due undisclosed split; this annual model cannot produce quarterly or contract-level recognition.",
+      "presentation": "gross",
+      "modeled_presentation": "gross",
+      "basis_claim_ids": [
+        "claim_40_recognition_Productivity_and_server_licensing"
+      ],
+      "aggregation_boundary": "FY27 restated external annual recognized Productivity and server licensing revenue only. Underlying license/control transfer, subscriptions/service delivery, principal/agent components follow original policy; no forecasted billings, bookings or RPO converted. Component splits undisclosed; annual direct fallback preserves the reported aggregate and cannot support intra-year timing."
+    },
+    "scenarios": {
+      "low": {
+        "model": "direct_growth",
+        "driver_parameter_ids": {
+          "growth_rate": [
+            "productivity_and_server_licensing_growth_low_2027",
+            "productivity_and_server_licensing_growth_low_2028",
+            "productivity_and_server_licensing_growth_low_2029"
+          ]
+        },
+        "rationale": "Cloud migration and FY26 launch transactional comparable; full-year products decline mid-single digits guides direction; component mix undisclosed. Conditional low case; no calibrated probability."
+      },
+      "base": {
+        "model": "direct_growth",
+        "driver_parameter_ids": {
+          "growth_rate": [
+            "productivity_and_server_licensing_growth_base_2027",
+            "productivity_and_server_licensing_growth_base_2028",
+            "productivity_and_server_licensing_growth_base_2029"
+          ]
+        },
+        "rationale": "Cloud migration and FY26 launch transactional comparable; full-year products decline mid-single digits guides direction; component mix undisclosed. Conditional base case; no calibrated probability."
+      },
+      "high": {
+        "model": "direct_growth",
+        "driver_parameter_ids": {
+          "growth_rate": [
+            "productivity_and_server_licensing_growth_high_2027",
+            "productivity_and_server_licensing_growth_high_2028",
+            "productivity_and_server_licensing_growth_high_2029"
+          ]
+        },
+        "rationale": "Cloud migration and FY26 launch transactional comparable; full-year products decline mid-single digits guides direction; component mix undisclosed. Conditional high case; no calibrated probability."
+      }
+    },
+    "reporting_group": "Agents and Infra"
+  },
+  {
+    "name": "Industry solutions",
+    "base_revenue_parameter_id": "industry_solutions_base",
+    "recognition": {
+      "mode": "modeled_as_recognized",
+      "timing": "mixed",
+      "trigger": "Already-recognized annual external revenue forecast. Actual underlying recognition follows Note1: usage/service delivery, or control/ad serving. Mixed components are aggregated due undisclosed split; this annual model cannot produce quarterly or contract-level recognition.",
+      "presentation": "gross",
+      "modeled_presentation": "gross",
+      "basis_claim_ids": [
+        "claim_51_recognition_Industry_solutions"
+      ],
+      "aggregation_boundary": "FY27 restated external annual recognized Industry solutions revenue only. Underlying license/control transfer, subscriptions/service delivery, principal/agent components follow original policy; no forecasted billings, bookings or RPO converted. Component splits undisclosed; annual direct fallback preserves the reported aggregate and cannot support intra-year timing."
+    },
+    "scenarios": {
+      "low": {
+        "model": "direct_growth",
+        "driver_parameter_ids": {
+          "growth_rate": [
+            "industry_solutions_growth_low_2027",
+            "industry_solutions_growth_low_2028",
+            "industry_solutions_growth_low_2029"
+          ]
+        },
+        "rationale": "Dynamics and LinkedIn talent/sales plus healthcare; new cloud FY26 restated12% and Q1 high-single-digit guide inform direction, while products mix and CRM cycles constrain magnitude. Conditional low case; no calibrated probability."
+      },
+      "base": {
+        "model": "direct_growth",
+        "driver_parameter_ids": {
+          "growth_rate": [
+            "industry_solutions_growth_base_2027",
+            "industry_solutions_growth_base_2028",
+            "industry_solutions_growth_base_2029"
+          ]
+        },
+        "rationale": "Dynamics and LinkedIn talent/sales plus healthcare; new cloud FY26 restated12% and Q1 high-single-digit guide inform direction, while products mix and CRM cycles constrain magnitude. Conditional base case; no calibrated probability."
+      },
+      "high": {
+        "model": "direct_growth",
+        "driver_parameter_ids": {
+          "growth_rate": [
+            "industry_solutions_growth_high_2027",
+            "industry_solutions_growth_high_2028",
+            "industry_solutions_growth_high_2029"
+          ]
+        },
+        "rationale": "Dynamics and LinkedIn talent/sales plus healthcare; new cloud FY26 restated12% and Q1 high-single-digit guide inform direction, while products mix and CRM cycles constrain magnitude. Conditional high case; no calibrated probability."
+      }
+    },
+    "reporting_group": "Agents and Infra"
+  },
+  {
+    "name": "Frontier and support services",
+    "base_revenue_parameter_id": "frontier_and_support_services_base",
+    "recognition": {
+      "mode": "modeled_as_recognized",
+      "timing": "over_time",
+      "trigger": "Already-recognized annual external revenue forecast. Actual underlying recognition follows Note1: usage/service delivery, or control/ad serving. Mixed components are aggregated due undisclosed split; this annual model cannot produce quarterly or contract-level recognition.",
+      "presentation": "gross",
+      "modeled_presentation": "gross",
+      "basis_claim_ids": [
+        "claim_62_recognition_Frontier_and_support_services"
+      ],
+      "progress_measure": "annual recognized-flow identity factor; 1 is not completion of backlog/RPO and does not accelerate any contract revenue",
+      "progress_parameter_ids": {
+        "low": [
+          "frontier_and_support_services_recognition_identity_2027",
+          "frontier_and_support_services_recognition_identity_2028",
+          "frontier_and_support_services_recognition_identity_2029"
+        ],
+        "base": [
+          "frontier_and_support_services_recognition_identity_2027",
+          "frontier_and_support_services_recognition_identity_2028",
+          "frontier_and_support_services_recognition_identity_2029"
+        ],
+        "high": [
+          "frontier_and_support_services_recognition_identity_2027",
+          "frontier_and_support_services_recognition_identity_2028",
+          "frontier_and_support_services_recognition_identity_2029"
+        ]
+      }
+    },
+    "scenarios": {
+      "low": {
+        "model": "direct_growth",
+        "driver_parameter_ids": {
+          "growth_rate": [
+            "frontier_and_support_services_growth_low_2027",
+            "frontier_and_support_services_growth_low_2028",
+            "frontier_and_support_services_growth_low_2029"
+          ]
+        },
+        "rationale": "Consulting/support services attach to enterprise implementation; FY26 growth6.4%, no signed future pipeline amount disclosed. Conditional low case; no calibrated probability."
+      },
+      "base": {
+        "model": "direct_growth",
+        "driver_parameter_ids": {
+          "growth_rate": [
+            "frontier_and_support_services_growth_base_2027",
+            "frontier_and_support_services_growth_base_2028",
+            "frontier_and_support_services_growth_base_2029"
+          ]
+        },
+        "rationale": "Consulting/support services attach to enterprise implementation; FY26 growth6.4%, no signed future pipeline amount disclosed. Conditional base case; no calibrated probability."
+      },
+      "high": {
+        "model": "direct_growth",
+        "driver_parameter_ids": {
+          "growth_rate": [
+            "frontier_and_support_services_growth_high_2027",
+            "frontier_and_support_services_growth_high_2028",
+            "frontier_and_support_services_growth_high_2029"
+          ]
+        },
+        "rationale": "Consulting/support services attach to enterprise implementation; FY26 growth6.4%, no signed future pipeline amount disclosed. Conditional high case; no calibrated probability."
+      }
+    },
+    "reporting_group": "Agents and Infra"
+  },
+  {
+    "name": "Search and advertising",
+    "base_revenue_parameter_id": "search_and_advertising_base",
+    "recognition": {
+      "mode": "modeled_as_recognized",
+      "timing": "mixed",
+      "trigger": "Already-recognized annual external revenue forecast. Actual underlying recognition follows Note1: usage/service delivery, or control/ad serving. Mixed components are aggregated due undisclosed split; this annual model cannot produce quarterly or contract-level recognition.",
+      "presentation": "mixed",
+      "modeled_presentation": "mixed",
+      "basis_claim_ids": [
+        "claim_76_recognition_Search_and_advertising"
+      ],
+      "aggregation_boundary": "FY27 restated external annual recognized Search and advertising revenue only. Underlying license/control transfer, subscriptions/service delivery, principal/agent components follow original policy; no forecasted billings, bookings or RPO converted. Component splits undisclosed; annual direct fallback preserves the reported aggregate and cannot support intra-year timing."
+    },
+    "scenarios": {
+      "low": {
+        "model": "direct_growth",
+        "driver_parameter_ids": {
+          "growth_rate": [
+            "search_and_advertising_growth_low_2027",
+            "search_and_advertising_growth_low_2028",
+            "search_and_advertising_growth_low_2029"
+          ]
+        },
+        "rationale": "Search demand/price plus LinkedIn Marketing and Premium; Q1 exTAC mid-to-high-single growth is net KPI, not this gross revenue, so only directional check. Conditional low case; no calibrated probability."
+      },
+      "base": {
+        "model": "direct_growth",
+        "driver_parameter_ids": {
+          "growth_rate": [
+            "search_and_advertising_growth_base_2027",
+            "search_and_advertising_growth_base_2028",
+            "search_and_advertising_growth_base_2029"
+          ]
+        },
+        "rationale": "Search demand/price plus LinkedIn Marketing and Premium; Q1 exTAC mid-to-high-single growth is net KPI, not this gross revenue, so only directional check. Conditional base case; no calibrated probability."
+      },
+      "high": {
+        "model": "direct_growth",
+        "driver_parameter_ids": {
+          "growth_rate": [
+            "search_and_advertising_growth_high_2027",
+            "search_and_advertising_growth_high_2028",
+            "search_and_advertising_growth_high_2029"
+          ]
+        },
+        "rationale": "Search demand/price plus LinkedIn Marketing and Premium; Q1 exTAC mid-to-high-single growth is net KPI, not this gross revenue, so only directional check. Conditional high case; no calibrated probability."
+      }
+    },
+    "reporting_group": "Devices and Consumer"
+  },
+  {
+    "name": "XBOX",
+    "base_revenue_parameter_id": "xbox_base",
+    "recognition": {
+      "mode": "modeled_as_recognized",
+      "timing": "mixed",
+      "trigger": "Already-recognized annual external revenue forecast. Actual underlying recognition follows Note1: usage/service delivery, or control/ad serving. Mixed components are aggregated due undisclosed split; this annual model cannot produce quarterly or contract-level recognition.",
+      "presentation": "mixed",
+      "modeled_presentation": "mixed",
+      "basis_claim_ids": [
+        "claim_87_recognition_XBOX"
+      ],
+      "aggregation_boundary": "FY27 restated external annual recognized XBOX revenue only. Underlying license/control transfer, subscriptions/service delivery, principal/agent components follow original policy; no forecasted billings, bookings or RPO converted. Component splits undisclosed; annual direct fallback preserves the reported aggregate and cannot support intra-year timing."
+    },
+    "scenarios": {
+      "low": {
+        "model": "direct_growth",
+        "driver_parameter_ids": {
+          "growth_rate": [
+            "xbox_growth_low_2027",
+            "xbox_growth_low_2028",
+            "xbox_growth_low_2029"
+          ]
+        },
+        "rationale": "Reset and weaker hardware; management expects FY27 gaming return to growth but first quarter content decline. Base annual-4% is an explicit independent disagreement; excludes unproven launch uplift. Conditional low case; no calibrated probability."
+      },
+      "base": {
+        "model": "direct_growth",
+        "driver_parameter_ids": {
+          "growth_rate": [
+            "xbox_growth_base_2027",
+            "xbox_growth_base_2028",
+            "xbox_growth_base_2029"
+          ]
+        },
+        "rationale": "Reset and weaker hardware; management expects FY27 gaming return to growth but first quarter content decline. Base annual-4% is an explicit independent disagreement; excludes unproven launch uplift. Conditional base case; no calibrated probability."
+      },
+      "high": {
+        "model": "direct_growth",
+        "driver_parameter_ids": {
+          "growth_rate": [
+            "xbox_growth_high_2027",
+            "xbox_growth_high_2028",
+            "xbox_growth_high_2029"
+          ]
+        },
+        "rationale": "Reset and weaker hardware; management expects FY27 gaming return to growth but first quarter content decline. Base annual-4% is an explicit independent disagreement; excludes unproven launch uplift. Conditional high case; no calibrated probability."
+      }
+    },
+    "reporting_group": "Devices and Consumer"
+  },
+  {
+    "name": "Windows OEM and devices",
+    "base_revenue_parameter_id": "windows_oem_and_devices_base",
+    "recognition": {
+      "mode": "modeled_as_recognized",
+      "timing": "mixed",
+      "trigger": "Already-recognized annual external revenue forecast. Actual underlying recognition follows Note1: usage/service delivery, or control/ad serving. Mixed components are aggregated due undisclosed split; this annual model cannot produce quarterly or contract-level recognition.",
+      "presentation": "gross",
+      "modeled_presentation": "gross",
+      "basis_claim_ids": [
+        "claim_98_recognition_Windows_OEM_and_devices"
+      ],
+      "aggregation_boundary": "FY27 restated external annual recognized Windows OEM and devices revenue only. Underlying license/control transfer, subscriptions/service delivery, principal/agent components follow original policy; no forecasted billings, bookings or RPO converted. Component splits undisclosed; annual direct fallback preserves the reported aggregate and cannot support intra-year timing."
+    },
+    "scenarios": {
+      "low": {
+        "model": "direct_growth",
+        "driver_parameter_ids": {
+          "growth_rate": [
+            "windows_oem_and_devices_growth_low_2027",
+            "windows_oem_and_devices_growth_low_2028",
+            "windows_oem_and_devices_growth_low_2029"
+          ]
+        },
+        "rationale": "Higher component prices, inventory and end-support comparable drive FY27 high-teens decline; stabilization years2-3 is conditional, not management commitment. Conditional low case; no calibrated probability."
+      },
+      "base": {
+        "model": "direct_growth",
+        "driver_parameter_ids": {
+          "growth_rate": [
+            "windows_oem_and_devices_growth_base_2027",
+            "windows_oem_and_devices_growth_base_2028",
+            "windows_oem_and_devices_growth_base_2029"
+          ]
+        },
+        "rationale": "Higher component prices, inventory and end-support comparable drive FY27 high-teens decline; stabilization years2-3 is conditional, not management commitment. Conditional base case; no calibrated probability."
+      },
+      "high": {
+        "model": "direct_growth",
+        "driver_parameter_ids": {
+          "growth_rate": [
+            "windows_oem_and_devices_growth_high_2027",
+            "windows_oem_and_devices_growth_high_2028",
+            "windows_oem_and_devices_growth_high_2029"
+          ]
+        },
+        "rationale": "Higher component prices, inventory and end-support comparable drive FY27 high-teens decline; stabilization years2-3 is conditional, not management commitment. Conditional high case; no calibrated probability."
+      }
+    },
+    "reporting_group": "Devices and Consumer"
+  }
+]
+
+### research_coverage
+[
+  {
+    "dimension": "company_foundation",
+    "status": "modeled_driver",
+    "conclusion": "Eight product streams reconcile to official two reporting groups; FY26 total331839",
+    "revenue_mechanism": "Eight product streams reconcile to official two reporting groups; FY26 total331839",
+    "parameter_ids": [
+      "reported_total"
+    ],
+    "source_ids": [
+      "src_presentation"
+    ],
+    "rationale": "Eight product streams reconcile to official two reporting groups; FY26 total331839"
+  },
+  {
+    "dimension": "growth_curve",
+    "status": "modeled_driver",
+    "conclusion": "Cloud adoption vs legacy migration and consumer cycle separated",
+    "revenue_mechanism": "Cloud adoption vs legacy migration and consumer cycle separated",
+    "parameter_ids": [
+      "azure_growth_base_2027"
+    ],
+    "source_ids": [
+      "src_call"
+    ],
+    "rationale": "Cloud adoption vs legacy migration and consumer cycle separated"
+  },
+  {
+    "dimension": "industry_market",
+    "status": "modeled_driver",
+    "conclusion": "AWS cloud37% offers an independent category reference, not identical market share or company forecast",
+    "revenue_mechanism": "AWS cloud37% offers an independent category reference, not identical market share or company forecast",
+    "parameter_ids": [
+      "azure_growth_base_2027"
+    ],
+    "source_ids": [
+      "src_aws"
+    ],
+    "rationale": "AWS cloud37% offers an independent category reference, not identical market share or company forecast"
+  },
+  {
+    "dimension": "competition",
+    "status": "modeled_driver",
+    "conclusion": "Multi-model enterprise demand faces AWS competition and customer spending choices",
+    "revenue_mechanism": "Multi-model enterprise demand faces AWS competition and customer spending choices",
+    "parameter_ids": [
+      "azure_growth_base_2028"
+    ],
+    "source_ids": [
+      "src_aws"
+    ],
+    "rationale": "Multi-model enterprise demand faces AWS competition and customer spending choices"
+  },
+  {
+    "dimension": "capacity",
+    "status": "modeled_driver",
+    "conclusion": "Demand exceeds supply and DC deployment is prerequisite; capacity is not recognized revenue",
+    "revenue_mechanism": "Demand exceeds supply and DC deployment is prerequisite; capacity is not recognized revenue",
+    "parameter_ids": [
+      "azure_growth_base_2027"
+    ],
+    "source_ids": [
+      "src_call"
+    ],
+    "rationale": "Demand exceeds supply and DC deployment is prerequisite; capacity is not recognized revenue"
+  },
+  {
+    "dimension": "technology",
+    "status": "modeled_driver",
+    "conclusion": "Copilot preview and usage billing create potential monetization but rollout is not booked revenue",
+    "revenue_mechanism": "Copilot preview and usage billing create potential monetization but rollout is not booked revenue",
+    "parameter_ids": [
+      "microsoft_365_cloud_growth_base_2028"
+    ],
+    "source_ids": [
+      "src_strategy"
+    ],
+    "rationale": "Copilot preview and usage billing create potential monetization but rollout is not booked revenue"
+  },
+  {
+    "dimension": "policy",
+    "status": "data_gap",
+    "conclusion": "No quantitative policy-to-revenue bridge established; regulatory and trust exposure unmodeled",
+    "revenue_mechanism": "No quantitative policy-to-revenue bridge established; regulatory and trust exposure unmodeled",
+    "parameter_ids": [],
+    "source_ids": [
+      "src_call"
+    ],
+    "rationale": "No quantitative policy-to-revenue bridge established; regulatory and trust exposure unmodeled"
+  },
+  {
+    "dimension": "customers",
+    "status": "modeled_driver",
+    "conclusion": "Paid enterprise adoption improves mix; registered users and period-end seats are not annual paying averages",
+    "revenue_mechanism": "Paid enterprise adoption improves mix; registered users and period-end seats are not annual paying averages",
+    "parameter_ids": [
+      "microsoft_365_cloud_growth_base_2027"
+    ],
+    "source_ids": [
+      "src_call"
+    ],
+    "rationale": "Paid enterprise adoption improves mix; registered users and period-end seats are not annual paying averages"
+  },
+  {
+    "dimension": "demand",
+    "status": "modeled_driver",
+    "conclusion": "Supply constrained commercial demand coexists with weak PCs/gaming",
+    "revenue_mechanism": "Supply constrained commercial demand coexists with weak PCs/gaming",
+    "parameter_ids": [
+      "windows_oem_and_devices_growth_base_2027"
+    ],
+    "source_ids": [
+      "src_call"
+    ],
+    "rationale": "Supply constrained commercial demand coexists with weak PCs/gaming"
+  }
+]
+
+### management_communication_coverage
+[
+  {
+    "category": "latest_annual_filing",
+    "status": "not_available",
+    "source_ids": [],
+    "checked_date": "2026-10-08",
+    "conclusion": "FY2026 annual exists in official SEC listing, but current mandatory RF→FF→CWP ensure failed; latest annual cannot be marked checked. FY2025 verified original only.",
+    "material_revenue_target_ids": [],
+    "rationale": "Actual acquisition failure, not absence of published filing.",
+    "search_description": "Official SEC-filing listing checked, FF exact FY26 no_local_match then true ensure failed.",
+    "search_event": {
+      "query_scope": "MSFT FY2026 10K official listing and actual RF source preparation",
+      "query_time": "2026-10-08T07:21:48.766921+00:00",
+      "event_ids": [
+        "1791442398164187200-fetch-fy2026-legacy"
+      ],
+      "generated_by": "run_logged.py",
+      "event_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  {
+    "category": "latest_results_release",
+    "status": "checked",
+    "source_ids": [
+      "src_results"
+    ],
+    "checked_date": "2026-10-08",
+    "conclusion": "Opened retained original-language primary communications; numeric targets in ledger, qualitative targets preserved in sidecar.",
+    "material_revenue_target_ids": []
+  },
+  {
+    "category": "latest_earnings_call",
+    "status": "checked",
+    "source_ids": [
+      "src_call"
+    ],
+    "checked_date": "2026-10-08",
+    "conclusion": "Opened retained original-language primary communications; numeric targets in ledger, qualitative targets preserved in sidecar.",
+    "material_revenue_target_ids": [
+      "company_fy27_double_digit"
+    ]
+  },
+  {
+    "category": "latest_investor_presentation",
+    "status": "checked",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "checked_date": "2026-10-08",
+    "conclusion": "Opened retained original-language primary communications; numeric targets in ledger, qualitative targets preserved in sidecar.",
+    "material_revenue_target_ids": [
+      "company_q1_low",
+      "company_q1_high",
+      "agents_q1_low",
+      "agents_q1_high",
+      "devices_q1_low",
+      "devices_q1_high",
+      "azure_q1_cc_low",
+      "azure_q1_cc_high",
+      "m365_q1_cc",
+      "m365_q1_adjusted_cc"
+    ]
+  },
+  {
+    "category": "latest_strategy_communication",
+    "status": "checked",
+    "source_ids": [
+      "src_strategy",
+      "src_data_innovation"
+    ],
+    "checked_date": "2026-10-08",
+    "conclusion": "Opened retained original-language primary communications; numeric targets in ledger, qualitative targets preserved in sidecar.",
+    "material_revenue_target_ids": []
+  },
+  {
+    "category": "material_announcements_since_last_filing",
+    "status": "checked",
+    "source_ids": [
+      "src_leadership",
+      "src_strategy",
+      "src_data_innovation",
+      "src_presentation"
+    ],
+    "checked_date": "2026-10-08",
+    "conclusion": "Opened retained original-language primary communications; numeric targets in ledger, qualitative targets preserved in sidecar.",
+    "material_revenue_target_ids": []
+  }
+]
+
+### management_targets
+[
+  {
+    "target_id": "company_q1_low",
+    "statement": "Revenue of $89.85 to $90.95 billion",
+    "metric_name": "Microsoft quarterly guidance",
+    "metric_definition": "FY2027Q1 only; currency/gross perimeter as explicitly named",
+    "target_period": "FY2027Q1",
+    "raw_target_value": 89.85,
+    "raw_unit": "USD billion",
+    "raw_currency": "USD",
+    "raw_scale": "billion",
+    "measurement_basis": "ambiguous",
+    "measurement_periods": [],
+    "measurement_rationale": "Source period is unambiguous Q1. Ambiguous here ONLY denotes missing quarterly-to-annual mapping in an annual-only runtime; never reinterpret as annual guidance.",
+    "materiality": "material",
+    "commitment_strength": "guidance",
+    "perimeter_status": "mismatch",
+    "perimeter_notes": "Quarterly period and/or constant-currency KPI is not full-year reported recognized revenue; no supported conversion.",
+    "comparison": "approximately",
+    "comparison_value": null,
+    "scope": {
+      "type": "company",
+      "name": "Microsoft"
+    },
+    "treatment": "unmodeled_data_gap",
+    "mapped_parameter_ids": [],
+    "mapped_scenarios": [],
+    "rationale": "Keep exact quarterly target visible; annual model does not multiply by4. See sidecar quarterly guidance comparison.",
+    "claim_ids": [
+      "claim_111_company_q1_low"
+    ]
+  },
+  {
+    "target_id": "company_q1_high",
+    "statement": "Revenue of $89.85 to $90.95 billion",
+    "metric_name": "Microsoft quarterly guidance",
+    "metric_definition": "FY2027Q1 only; currency/gross perimeter as explicitly named",
+    "target_period": "FY2027Q1",
+    "raw_target_value": 90.95,
+    "raw_unit": "USD billion",
+    "raw_currency": "USD",
+    "raw_scale": "billion",
+    "measurement_basis": "ambiguous",
+    "measurement_periods": [],
+    "measurement_rationale": "Source period is unambiguous Q1. Ambiguous here ONLY denotes missing quarterly-to-annual mapping in an annual-only runtime; never reinterpret as annual guidance.",
+    "materiality": "material",
+    "commitment_strength": "guidance",
+    "perimeter_status": "mismatch",
+    "perimeter_notes": "Quarterly period and/or constant-currency KPI is not full-year reported recognized revenue; no supported conversion.",
+    "comparison": "approximately",
+    "comparison_value": null,
+    "scope": {
+      "type": "company",
+      "name": "Microsoft"
+    },
+    "treatment": "unmodeled_data_gap",
+    "mapped_parameter_ids": [],
+    "mapped_scenarios": [],
+    "rationale": "Keep exact quarterly target visible; annual model does not multiply by4. See sidecar quarterly guidance comparison.",
+    "claim_ids": [
+      "claim_112_company_q1_high"
+    ]
+  },
+  {
+    "target_id": "agents_q1_low",
+    "statement": "Revenue of $75.15 to $75.75 billion",
+    "metric_name": "Agents and Infra quarterly guidance",
+    "metric_definition": "FY2027Q1 only; currency/gross perimeter as explicitly named",
+    "target_period": "FY2027Q1",
+    "raw_target_value": 75.15,
+    "raw_unit": "USD billion",
+    "raw_currency": "USD",
+    "raw_scale": "billion",
+    "measurement_basis": "ambiguous",
+    "measurement_periods": [],
+    "measurement_rationale": "Source period is unambiguous Q1. Ambiguous here ONLY denotes missing quarterly-to-annual mapping in an annual-only runtime; never reinterpret as annual guidance.",
+    "materiality": "material",
+    "commitment_strength": "guidance",
+    "perimeter_status": "mismatch",
+    "perimeter_notes": "Quarterly period and/or constant-currency KPI is not full-year reported recognized revenue; no supported conversion.",
+    "comparison": "approximately",
+    "comparison_value": null,
+    "scope": {
+      "type": "custom",
+      "name": "Agents and Infra"
+    },
+    "treatment": "unmodeled_data_gap",
+    "mapped_parameter_ids": [],
+    "mapped_scenarios": [],
+    "rationale": "Keep exact quarterly target visible; annual model does not multiply by4. See sidecar quarterly guidance comparison.",
+    "claim_ids": [
+      "claim_113_agents_q1_low"
+    ]
+  },
+  {
+    "target_id": "agents_q1_high",
+    "statement": "Revenue of $75.15 to $75.75 billion",
+    "metric_name": "Agents and Infra quarterly guidance",
+    "metric_definition": "FY2027Q1 only; currency/gross perimeter as explicitly named",
+    "target_period": "FY2027Q1",
+    "raw_target_value": 75.75,
+    "raw_unit": "USD billion",
+    "raw_currency": "USD",
+    "raw_scale": "billion",
+    "measurement_basis": "ambiguous",
+    "measurement_periods": [],
+    "measurement_rationale": "Source period is unambiguous Q1. Ambiguous here ONLY denotes missing quarterly-to-annual mapping in an annual-only runtime; never reinterpret as annual guidance.",
+    "materiality": "material",
+    "commitment_strength": "guidance",
+    "perimeter_status": "mismatch",
+    "perimeter_notes": "Quarterly period and/or constant-currency KPI is not full-year reported recognized revenue; no supported conversion.",
+    "comparison": "approximately",
+    "comparison_value": null,
+    "scope": {
+      "type": "custom",
+      "name": "Agents and Infra"
+    },
+    "treatment": "unmodeled_data_gap",
+    "mapped_parameter_ids": [],
+    "mapped_scenarios": [],
+    "rationale": "Keep exact quarterly target visible; annual model does not multiply by4. See sidecar quarterly guidance comparison.",
+    "claim_ids": [
+      "claim_114_agents_q1_high"
+    ]
+  },
+  {
+    "target_id": "devices_q1_low",
+    "statement": "Revenue of $14.7 to $15.2 billion",
+    "metric_name": "Devices and Consumer quarterly guidance",
+    "metric_definition": "FY2027Q1 only; currency/gross perimeter as explicitly named",
+    "target_period": "FY2027Q1",
+    "raw_target_value": 14.7,
+    "raw_unit": "USD billion",
+    "raw_currency": "USD",
+    "raw_scale": "billion",
+    "measurement_basis": "ambiguous",
+    "measurement_periods": [],
+    "measurement_rationale": "Source period is unambiguous Q1. Ambiguous here ONLY denotes missing quarterly-to-annual mapping in an annual-only runtime; never reinterpret as annual guidance.",
+    "materiality": "material",
+    "commitment_strength": "guidance",
+    "perimeter_status": "mismatch",
+    "perimeter_notes": "Quarterly period and/or constant-currency KPI is not full-year reported recognized revenue; no supported conversion.",
+    "comparison": "approximately",
+    "comparison_value": null,
+    "scope": {
+      "type": "custom",
+      "name": "Devices and Consumer"
+    },
+    "treatment": "unmodeled_data_gap",
+    "mapped_parameter_ids": [],
+    "mapped_scenarios": [],
+    "rationale": "Keep exact quarterly target visible; annual model does not multiply by4. See sidecar quarterly guidance comparison.",
+    "claim_ids": [
+      "claim_115_devices_q1_low"
+    ]
+  },
+  {
+    "target_id": "devices_q1_high",
+    "statement": "Revenue of $14.7 to $15.2 billion",
+    "metric_name": "Devices and Consumer quarterly guidance",
+    "metric_definition": "FY2027Q1 only; currency/gross perimeter as explicitly named",
+    "target_period": "FY2027Q1",
+    "raw_target_value": 15.2,
+    "raw_unit": "USD billion",
+    "raw_currency": "USD",
+    "raw_scale": "billion",
+    "measurement_basis": "ambiguous",
+    "measurement_periods": [],
+    "measurement_rationale": "Source period is unambiguous Q1. Ambiguous here ONLY denotes missing quarterly-to-annual mapping in an annual-only runtime; never reinterpret as annual guidance.",
+    "materiality": "material",
+    "commitment_strength": "guidance",
+    "perimeter_status": "mismatch",
+    "perimeter_notes": "Quarterly period and/or constant-currency KPI is not full-year reported recognized revenue; no supported conversion.",
+    "comparison": "approximately",
+    "comparison_value": null,
+    "scope": {
+      "type": "custom",
+      "name": "Devices and Consumer"
+    },
+    "treatment": "unmodeled_data_gap",
+    "mapped_parameter_ids": [],
+    "mapped_scenarios": [],
+    "rationale": "Keep exact quarterly target visible; annual model does not multiply by4. See sidecar quarterly guidance comparison.",
+    "claim_ids": [
+      "claim_116_devices_q1_high"
+    ]
+  },
+  {
+    "target_id": "azure_q1_cc_low",
+    "statement": "Growth of 44% to 45% in constant currency",
+    "metric_name": "Azure quarterly guidance",
+    "metric_definition": "FY2027Q1 only; currency/gross perimeter as explicitly named",
+    "target_period": "FY2027Q1",
+    "raw_target_value": 44,
+    "raw_unit": "percent",
+    "raw_currency": "constant currency",
+    "raw_scale": "percent",
+    "measurement_basis": "ambiguous",
+    "measurement_periods": [],
+    "measurement_rationale": "Source period is unambiguous Q1. Ambiguous here ONLY denotes missing quarterly-to-annual mapping in an annual-only runtime; never reinterpret as annual guidance.",
+    "materiality": "material",
+    "commitment_strength": "guidance",
+    "perimeter_status": "mismatch",
+    "perimeter_notes": "Quarterly period and/or constant-currency KPI is not full-year reported recognized revenue; no supported conversion.",
+    "comparison": "approximately",
+    "comparison_value": null,
+    "scope": {
+      "type": "custom",
+      "name": "Azure"
+    },
+    "treatment": "unmodeled_data_gap",
+    "mapped_parameter_ids": [],
+    "mapped_scenarios": [],
+    "rationale": "Keep exact quarterly target visible; annual model does not multiply by4. See sidecar quarterly guidance comparison.",
+    "claim_ids": [
+      "claim_117_azure_q1_cc_low"
+    ]
+  },
+  {
+    "target_id": "azure_q1_cc_high",
+    "statement": "Growth of 44% to 45% in constant currency",
+    "metric_name": "Azure quarterly guidance",
+    "metric_definition": "FY2027Q1 only; currency/gross perimeter as explicitly named",
+    "target_period": "FY2027Q1",
+    "raw_target_value": 45,
+    "raw_unit": "percent",
+    "raw_currency": "constant currency",
+    "raw_scale": "percent",
+    "measurement_basis": "ambiguous",
+    "measurement_periods": [],
+    "measurement_rationale": "Source period is unambiguous Q1. Ambiguous here ONLY denotes missing quarterly-to-annual mapping in an annual-only runtime; never reinterpret as annual guidance.",
+    "materiality": "material",
+    "commitment_strength": "guidance",
+    "perimeter_status": "mismatch",
+    "perimeter_notes": "Quarterly period and/or constant-currency KPI is not full-year reported recognized revenue; no supported conversion.",
+    "comparison": "approximately",
+    "comparison_value": null,
+    "scope": {
+      "type": "custom",
+      "name": "Azure"
+    },
+    "treatment": "unmodeled_data_gap",
+    "mapped_parameter_ids": [],
+    "mapped_scenarios": [],
+    "rationale": "Keep exact quarterly target visible; annual model does not multiply by4. See sidecar quarterly guidance comparison.",
+    "claim_ids": [
+      "claim_118_azure_q1_cc_high"
+    ]
+  },
+  {
+    "target_id": "m365_q1_cc",
+    "statement": "Growth of approximately 17% in constant currency",
+    "metric_name": "Microsoft365 commercial cloud quarterly guidance",
+    "metric_definition": "FY2027Q1 only; currency/gross perimeter as explicitly named",
+    "target_period": "FY2027Q1",
+    "raw_target_value": 17,
+    "raw_unit": "percent",
+    "raw_currency": "constant currency",
+    "raw_scale": "percent",
+    "measurement_basis": "ambiguous",
+    "measurement_periods": [],
+    "measurement_rationale": "Source period is unambiguous Q1. Ambiguous here ONLY denotes missing quarterly-to-annual mapping in an annual-only runtime; never reinterpret as annual guidance.",
+    "materiality": "material",
+    "commitment_strength": "guidance",
+    "perimeter_status": "mismatch",
+    "perimeter_notes": "Quarterly period and/or constant-currency KPI is not full-year reported recognized revenue; no supported conversion.",
+    "comparison": "approximately",
+    "comparison_value": null,
+    "scope": {
+      "type": "custom",
+      "name": "Microsoft365 commercial cloud"
+    },
+    "treatment": "unmodeled_data_gap",
+    "mapped_parameter_ids": [],
+    "mapped_scenarios": [],
+    "rationale": "Keep exact quarterly target visible; annual model does not multiply by4. See sidecar quarterly guidance comparison.",
+    "claim_ids": [
+      "claim_119_m365_q1_cc"
+    ]
+  },
+  {
+    "target_id": "m365_q1_adjusted_cc",
+    "statement": "Growth of approximately 18% in constant currency",
+    "metric_name": "Microsoft365 commercial cloud adjusted quarterly guidance",
+    "metric_definition": "FY2027Q1 only; currency/gross perimeter as explicitly named",
+    "target_period": "FY2027Q1",
+    "raw_target_value": 18,
+    "raw_unit": "percent",
+    "raw_currency": "constant currency",
+    "raw_scale": "percent",
+    "measurement_basis": "ambiguous",
+    "measurement_periods": [],
+    "measurement_rationale": "Source period is unambiguous Q1. Ambiguous here ONLY denotes missing quarterly-to-annual mapping in an annual-only runtime; never reinterpret as annual guidance.",
+    "materiality": "material",
+    "commitment_strength": "guidance",
+    "perimeter_status": "mismatch",
+    "perimeter_notes": "Quarterly period and/or constant-currency KPI is not full-year reported recognized revenue; no supported conversion.",
+    "comparison": "approximately",
+    "comparison_value": null,
+    "scope": {
+      "type": "custom",
+      "name": "Microsoft365 commercial cloud adjusted"
+    },
+    "treatment": "unmodeled_data_gap",
+    "mapped_parameter_ids": [],
+    "mapped_scenarios": [],
+    "rationale": "Keep exact quarterly target visible; annual model does not multiply by4. See sidecar quarterly guidance comparison.",
+    "claim_ids": [
+      "claim_120_m365_q1_adjusted_cc"
+    ]
+  },
+  {
+    "target_id": "company_fy27_double_digit",
+    "statement": "Another fiscal year of double-digit revenue growth",
+    "metric_name": "annual company recognized revenue growth",
+    "metric_definition": "Full FY2027 vs FY2026 GAAP annual consolidated revenue; double-digit interpreted as >=10%, not an exact10% forecast",
+    "target_period": "FY2027",
+    "raw_target_value": 10,
+    "raw_unit": "percent linguistic lower bound",
+    "raw_currency": "USD",
+    "raw_scale": "percent",
+    "measurement_basis": "annual_period",
+    "measurement_periods": [
+      "FY2027"
+    ],
+    "measurement_rationale": "CFO explicitly says fiscal year; FYendJune30. Ten is a linguistic lower-bound normalization, not a quoted point estimate.",
+    "materiality": "material",
+    "commitment_strength": "guidance",
+    "perimeter_status": "reconciled",
+    "perimeter_notes": "Company annual growth converted against FY2026 official base331839; no constant-currency or runrate substitution.",
+    "comparison": "at_least",
+    "comparison_value": 365022.9,
+    "comparison_currency": "USD",
+    "comparison_scale": "million",
+    "comparison_tolerance": 0,
+    "normalization_rationale": "Double digit means at least10%; 331839*(1+10/100)=365022.9. No raw exact numeric quote implied.",
+    "scope": {
+      "type": "company",
+      "name": "Microsoft"
+    },
+    "treatment": "independent_benchmark",
+    "mapped_parameter_ids": [
+      "azure_growth_low_2027",
+      "azure_growth_low_2028",
+      "azure_growth_low_2029",
+      "azure_growth_base_2027",
+      "azure_growth_base_2028",
+      "azure_growth_base_2029",
+      "azure_growth_high_2027",
+      "azure_growth_high_2028",
+      "azure_growth_high_2029",
+      "microsoft_365_cloud_growth_low_2027",
+      "microsoft_365_cloud_growth_low_2028",
+      "microsoft_365_cloud_growth_low_2029",
+      "microsoft_365_cloud_growth_base_2027",
+      "microsoft_365_cloud_growth_base_2028",
+      "microsoft_365_cloud_growth_base_2029",
+      "microsoft_365_cloud_growth_high_2027",
+      "microsoft_365_cloud_growth_high_2028",
+      "microsoft_365_cloud_growth_high_2029",
+      "productivity_and_server_licensing_growth_low_2027",
+      "productivity_and_server_licensing_growth_low_2028",
+      "productivity_and_server_licensing_growth_low_2029",
+      "productivity_and_server_licensing_growth_base_2027",
+      "productivity_and_server_licensing_growth_base_2028",
+      "productivity_and_server_licensing_growth_base_2029",
+      "productivity_and_server_licensing_growth_high_2027",
+      "productivity_and_server_licensing_growth_high_2028",
+      "productivity_and_server_licensing_growth_high_2029",
+      "industry_solutions_growth_low_2027",
+      "industry_solutions_growth_low_2028",
+      "industry_solutions_growth_low_2029",
+      "industry_solutions_growth_base_2027",
+      "industry_solutions_growth_base_2028",
+      "industry_solutions_growth_base_2029",
+      "industry_solutions_growth_high_2027",
+      "industry_solutions_growth_high_2028",
+      "industry_solutions_growth_high_2029",
+      "frontier_and_support_services_growth_low_2027",
+      "frontier_and_support_services_growth_low_2028",
+      "frontier_and_support_services_growth_low_2029",
+      "frontier_and_support_services_growth_base_2027",
+      "frontier_and_support_services_growth_base_2028",
+      "frontier_and_support_services_growth_base_2029",
+      "frontier_and_support_services_growth_high_2027",
+      "frontier_and_support_services_growth_high_2028",
+      "frontier_and_support_services_growth_high_2029",
+      "search_and_advertising_growth_low_2027",
+      "search_and_advertising_growth_low_2028",
+      "search_and_advertising_growth_low_2029",
+      "search_and_advertising_growth_base_2027",
+      "search_and_advertising_growth_base_2028",
+      "search_and_advertising_growth_base_2029",
+      "search_and_advertising_growth_high_2027",
+      "search_and_advertising_growth_high_2028",
+      "search_and_advertising_growth_high_2029",
+      "xbox_growth_low_2027",
+      "xbox_growth_low_2028",
+      "xbox_growth_low_2029",
+      "xbox_growth_base_2027",
+      "xbox_growth_base_2028",
+      "xbox_growth_base_2029",
+      "xbox_growth_high_2027",
+      "xbox_growth_high_2028",
+      "xbox_growth_high_2029",
+      "windows_oem_and_devices_growth_low_2027",
+      "windows_oem_and_devices_growth_low_2028",
+      "windows_oem_and_devices_growth_low_2029",
+      "windows_oem_and_devices_growth_base_2027",
+      "windows_oem_and_devices_growth_base_2028",
+      "windows_oem_and_devices_growth_base_2029",
+      "windows_oem_and_devices_growth_high_2027",
+      "windows_oem_and_devices_growth_high_2028",
+      "windows_oem_and_devices_growth_high_2029"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "rationale": "Operating streams independently modeled before comparison; management aspiration does not set scenario probability.",
+    "benchmark_rationale": "MSFT restated history, supply caveats and AWS category demand support an independent range; future3years not forced to management wording.",
+    "benchmark_claim_ids": [
+      "claim_122_company_fy27_double_digit"
+    ],
+    "claim_ids": [
+      "claim_121_company_fy27_double_digit"
+    ]
+  }
+]
+
+### growth_driver_tree
+{
+  "status": "modeled",
+  "drivers": [
+    {
+      "driver_id": "cloud_ai",
+      "title": "Cloud usage and Copilot mix",
+      "thesis": "Usage delivery and enterprise paid monetization, constrained by GPUs and budgets.",
+      "causal_chain": [
+        "Capability and customer demand",
+        "Delivered usage/seats or device/content transactions",
+        "Source-supported direction and conditional annual growth",
+        "Annual recognized external product revenue"
+      ],
+      "parameter_ids": [
+        "azure_growth_base_2027",
+        "azure_growth_base_2028",
+        "azure_growth_base_2029",
+        "microsoft_365_cloud_growth_base_2027",
+        "microsoft_365_cloud_growth_base_2028",
+        "microsoft_365_cloud_growth_base_2029"
+      ],
+      "segment_attribution": [
+        {
+          "segment_name": "Azure",
+          "weight": 1
+        },
+        {
+          "segment_name": "Microsoft 365 cloud",
+          "weight": 1
+        }
+      ],
+      "horizon": {
+        "start_year": 2027,
+        "end_year": 2029
+      },
+      "persistence": "multi_year_structural",
+      "persistence_rationale": "Usage delivery and enterprise paid monetization, constrained by GPUs and budgets.",
+      "evidence_nodes": [
+        {
+          "evidence_id": "cloud_ai_company",
+          "evidence_type": "company_operating_disclosure",
+          "inference_distance": "one_step",
+          "conclusion": "Usage delivery and enterprise paid monetization, constrained by GPUs and budgets.",
+          "claim_ids": [
+            "claim_102_cloud_ai_company"
+          ]
+        },
+        {
+          "evidence_id": "cloud_ai_contrary",
+          "evidence_type": "company_counterevidence",
+          "inference_distance": "contrary",
+          "conclusion": "This observed constraint weakens magnitude or continuation; wide scenarios and future fades remain analyst judgment.",
+          "claim_ids": [
+            "claim_103_cloud_ai_contrary"
+          ]
+        },
+        {
+          "evidence_id": "cloud_ai_peer",
+          "evidence_type": "independent_peer_cloud_demand",
+          "inference_distance": "analogical",
+          "conclusion": "AWS Q2 cloud37% corroborates category demand; AWS annualized169B is not MSFT annual revenue and not used numerically.",
+          "claim_ids": [
+            "claim_104_cloud_ai_peer"
+          ]
+        }
+      ],
+      "leading_indicators": [
+        "Quarterly restated revenue growth",
+        "Paid adoption vs unmonetized users",
+        "Supply/utilization and renewals"
+      ],
+      "falsifiers": [
+        "Two successive quarters below low-case growth",
+        "Contract delays or price/cost pressure erode realized revenue"
+      ],
+      "counterevidence_status": "found",
+      "counterevidence_rationale": "Explicit constraints opened in full official call and Q&A; contrary nodes bind those observations. Independent customer-budget/usage data insufficient; search is not exhaustive."
+    },
+    {
+      "driver_id": "enterprise_migration",
+      "title": "Enterprise solutions and cloud migration",
+      "thesis": "Enterprise migration expands services but cannibalizes licenses; signed pipeline and cohort margins are unavailable.",
+      "causal_chain": [
+        "Capability and customer demand",
+        "Delivered usage/seats or device/content transactions",
+        "Source-supported direction and conditional annual growth",
+        "Annual recognized external product revenue"
+      ],
+      "parameter_ids": [
+        "productivity_and_server_licensing_growth_base_2027",
+        "productivity_and_server_licensing_growth_base_2028",
+        "productivity_and_server_licensing_growth_base_2029",
+        "industry_solutions_growth_base_2027",
+        "industry_solutions_growth_base_2028",
+        "industry_solutions_growth_base_2029",
+        "frontier_and_support_services_growth_base_2027",
+        "frontier_and_support_services_growth_base_2028",
+        "frontier_and_support_services_growth_base_2029"
+      ],
+      "segment_attribution": [
+        {
+          "segment_name": "Productivity and server licensing",
+          "weight": 1
+        },
+        {
+          "segment_name": "Industry solutions",
+          "weight": 1
+        },
+        {
+          "segment_name": "Frontier and support services",
+          "weight": 1
+        }
+      ],
+      "horizon": {
+        "start_year": 2027,
+        "end_year": 2029
+      },
+      "persistence": "multi_year_structural",
+      "persistence_rationale": "Enterprise migration expands services but cannibalizes licenses; signed pipeline and cohort margins are unavailable.",
+      "evidence_nodes": [
+        {
+          "evidence_id": "enterprise_migration_company",
+          "evidence_type": "company_operating_disclosure",
+          "inference_distance": "one_step",
+          "conclusion": "Enterprise migration expands services but cannibalizes licenses; signed pipeline and cohort margins are unavailable.",
+          "claim_ids": [
+            "claim_105_enterprise_migration_company"
+          ]
+        },
+        {
+          "evidence_id": "enterprise_migration_contrary",
+          "evidence_type": "company_counterevidence",
+          "inference_distance": "contrary",
+          "conclusion": "This observed constraint weakens magnitude or continuation; wide scenarios and future fades remain analyst judgment.",
+          "claim_ids": [
+            "claim_106_enterprise_migration_contrary"
+          ]
+        }
+      ],
+      "leading_indicators": [
+        "Quarterly restated revenue growth",
+        "Paid adoption vs unmonetized users",
+        "Supply/utilization and renewals"
+      ],
+      "falsifiers": [
+        "Two successive quarters below low-case growth",
+        "Contract delays or price/cost pressure erode realized revenue"
+      ],
+      "counterevidence_status": "found",
+      "counterevidence_rationale": "Explicit constraints opened in full official call and Q&A; contrary nodes bind those observations. Independent customer-budget/usage data insufficient; search is not exhaustive."
+    },
+    {
+      "driver_id": "advertising",
+      "title": "Advertising usage and monetized mix",
+      "thesis": "Search/ad usage and yield increase, but third-party partnerships and the LinkedIn perimeter prevent extrapolating old net KPI as gross revenue.",
+      "causal_chain": [
+        "Capability and customer demand",
+        "Delivered usage/seats or device/content transactions",
+        "Source-supported direction and conditional annual growth",
+        "Annual recognized external product revenue"
+      ],
+      "parameter_ids": [
+        "search_and_advertising_growth_base_2027",
+        "search_and_advertising_growth_base_2028",
+        "search_and_advertising_growth_base_2029"
+      ],
+      "segment_attribution": [
+        {
+          "segment_name": "Search and advertising",
+          "weight": 1
+        }
+      ],
+      "horizon": {
+        "start_year": 2027,
+        "end_year": 2029
+      },
+      "persistence": "uncertain",
+      "persistence_rationale": "Search/ad usage and yield increase, but third-party partnerships and the LinkedIn perimeter prevent extrapolating old net KPI as gross revenue.",
+      "evidence_nodes": [
+        {
+          "evidence_id": "advertising_company",
+          "evidence_type": "company_operating_disclosure",
+          "inference_distance": "one_step",
+          "conclusion": "Search/ad usage and yield increase, but third-party partnerships and the LinkedIn perimeter prevent extrapolating old net KPI as gross revenue.",
+          "claim_ids": [
+            "claim_107_advertising_company"
+          ]
+        },
+        {
+          "evidence_id": "advertising_contrary",
+          "evidence_type": "company_counterevidence",
+          "inference_distance": "contrary",
+          "conclusion": "This observed constraint weakens magnitude or continuation; wide scenarios and future fades remain analyst judgment.",
+          "claim_ids": [
+            "claim_108_advertising_contrary"
+          ]
+        }
+      ],
+      "leading_indicators": [
+        "Quarterly restated revenue growth",
+        "Paid adoption vs unmonetized users",
+        "Supply/utilization and renewals"
+      ],
+      "falsifiers": [
+        "Two successive quarters below low-case growth",
+        "Contract delays or price/cost pressure erode realized revenue"
+      ],
+      "counterevidence_status": "found",
+      "counterevidence_rationale": "Explicit constraints opened in full official call and Q&A; contrary nodes bind those observations. Independent customer-budget/usage data insufficient; search is not exhaustive."
+    },
+    {
+      "driver_id": "consumer_cycle",
+      "title": "Device and content reset",
+      "thesis": "PC inventories, component prices and XBOX reset create headwinds; no arbitrary AI uplift in Windows.",
+      "causal_chain": [
+        "Capability and customer demand",
+        "Delivered usage/seats or device/content transactions",
+        "Source-supported direction and conditional annual growth",
+        "Annual recognized external product revenue"
+      ],
+      "parameter_ids": [
+        "xbox_growth_base_2027",
+        "xbox_growth_base_2028",
+        "xbox_growth_base_2029",
+        "windows_oem_and_devices_growth_base_2027",
+        "windows_oem_and_devices_growth_base_2028",
+        "windows_oem_and_devices_growth_base_2029"
+      ],
+      "segment_attribution": [
+        {
+          "segment_name": "XBOX",
+          "weight": 1
+        },
+        {
+          "segment_name": "Windows OEM and devices",
+          "weight": 1
+        }
+      ],
+      "horizon": {
+        "start_year": 2027,
+        "end_year": 2029
+      },
+      "persistence": "cyclical",
+      "persistence_rationale": "PC inventories, component prices and XBOX reset create headwinds; no arbitrary AI uplift in Windows.",
+      "evidence_nodes": [
+        {
+          "evidence_id": "consumer_cycle_company",
+          "evidence_type": "company_operating_disclosure",
+          "inference_distance": "one_step",
+          "conclusion": "PC inventories, component prices and XBOX reset create headwinds; no arbitrary AI uplift in Windows.",
+          "claim_ids": [
+            "claim_109_consumer_cycle_company"
+          ]
+        },
+        {
+          "evidence_id": "consumer_cycle_contrary",
+          "evidence_type": "company_counterevidence",
+          "inference_distance": "contrary",
+          "conclusion": "This observed constraint weakens magnitude or continuation; wide scenarios and future fades remain analyst judgment.",
+          "claim_ids": [
+            "claim_110_consumer_cycle_contrary"
+          ]
+        }
+      ],
+      "leading_indicators": [
+        "Quarterly restated revenue growth",
+        "Paid adoption vs unmonetized users",
+        "Supply/utilization and renewals"
+      ],
+      "falsifiers": [
+        "Two successive quarters below low-case growth",
+        "Contract delays or price/cost pressure erode realized revenue"
+      ],
+      "counterevidence_status": "found",
+      "counterevidence_rationale": "Explicit constraints opened in full official call and Q&A; contrary nodes bind those observations. Independent customer-budget/usage data insufficient; search is not exhaustive."
+    }
+  ]
+}
+
+### data_gaps
+[
+  "Azure: operating quantity, realized price/mix, churn and timing split undisclosed; direct_growth fallback reduces explicit-model confidence. No unit/ARPU is fabricated.",
+  "Microsoft 365 cloud: operating quantity, realized price/mix, churn and timing split undisclosed; direct_growth fallback reduces explicit-model confidence. No unit/ARPU is fabricated.",
+  "Productivity and server licensing: operating quantity, realized price/mix, churn and timing split undisclosed; direct_growth fallback reduces explicit-model confidence. No unit/ARPU is fabricated.",
+  "Industry solutions: operating quantity, realized price/mix, churn and timing split undisclosed; direct_growth fallback reduces explicit-model confidence. No unit/ARPU is fabricated.",
+  "Frontier and support services: operating quantity, realized price/mix, churn and timing split undisclosed; direct_growth fallback reduces explicit-model confidence. No unit/ARPU is fabricated.",
+  "Search and advertising: operating quantity, realized price/mix, churn and timing split undisclosed; direct_growth fallback reduces explicit-model confidence. No unit/ARPU is fabricated.",
+  "XBOX: operating quantity, realized price/mix, churn and timing split undisclosed; direct_growth fallback reduces explicit-model confidence. No unit/ARPU is fabricated.",
+  "Windows OEM and devices: operating quantity, realized price/mix, churn and timing split undisclosed; direct_growth fallback reduces explicit-model confidence. No unit/ARPU is fabricated.",
+  "Official FY26 filing acquisition not yet successful; FY25 recognition policy may be superseded.",
+  "Latest FY27 two-segment historical reclassification covers only FY25/FY26; FY24 product-group history not invented.",
+  "Mixed-recognition XBOX/Industry solutions and licensing/support allocation cannot be decomposed from reported data; annual recognized-flow fallback unsuitable for intra-year timing.",
+  "Qualitative targets are retained in sidecar because numeric-only target schema cannot encode mid-single/high-teens without invented precision.",
+  "Self-generated capture receipts are unsigned: provenance metadata and SHA integrity are verified; host identity is not cryptographically attested.",
+  "No historical immutable MSFT forecast+actual pairs available; no backtest accuracy claimed."
+]
+
+### sensitivity_tests
+[
+  {
+    "name": "Azure FY27 growth ±5pp",
+    "parameter_id": "azure_growth_base_2027",
+    "shock_type": "percentage_point",
+    "shock_value": 5
+  },
+  {
+    "name": "Microsoft 365 cloud FY27 growth ±5pp",
+    "parameter_id": "microsoft_365_cloud_growth_base_2027",
+    "shock_type": "percentage_point",
+    "shock_value": 5
+  },
+  {
+    "name": "Productivity and server licensing FY27 growth ±5pp",
+    "parameter_id": "productivity_and_server_licensing_growth_base_2027",
+    "shock_type": "percentage_point",
+    "shock_value": 5
+  },
+  {
+    "name": "Industry solutions FY27 growth ±5pp",
+    "parameter_id": "industry_solutions_growth_base_2027",
+    "shock_type": "percentage_point",
+    "shock_value": 5
+  },
+  {
+    "name": "Frontier and support services FY27 growth ±5pp",
+    "parameter_id": "frontier_and_support_services_growth_base_2027",
+    "shock_type": "percentage_point",
+    "shock_value": 5
+  },
+  {
+    "name": "Search and advertising FY27 growth ±5pp",
+    "parameter_id": "search_and_advertising_growth_base_2027",
+    "shock_type": "percentage_point",
+    "shock_value": 5
+  },
+  {
+    "name": "XBOX FY27 growth ±5pp",
+    "parameter_id": "xbox_growth_base_2027",
+    "shock_type": "percentage_point",
+    "shock_value": 5
+  },
+  {
+    "name": "Windows OEM and devices FY27 growth ±5pp",
+    "parameter_id": "windows_oem_and_devices_growth_base_2027",
+    "shock_type": "percentage_point",
+    "shock_value": 5
+  }
+]
+
+### sources
+[
+  {
+    "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+    "source_type": "regulatory_filing",
+    "title": "Microsoft 10-K FY2025",
+    "publisher": "company-wiki",
+    "url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+    "published_date": "2025-07-30",
+    "locator": null,
+    "capture": {
+      "capture_schema_version": "1.0",
+      "capture_method": "local_document",
+      "tool_name": "company-wiki-source-version-reader",
+      "tool_call_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe|2026-10-08T06:59:01.280502+00:00",
+      "captured_date": "2026-10-08",
+      "snapshot_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "content_treatment": "untrusted_data_only",
+      "prompt_injection_status": "not_reviewed",
+      "host_receipt": {
+        "host_receipt_schema_version": "1.0",
+        "issuer": "company-wiki",
+        "environment": "host-runtime",
+        "tool_name": "company-wiki-source-version-reader",
+        "action": "verified_read",
+        "event_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "timestamp": "2026-10-08T06:59:01.280502+00:00",
+        "receipt_sha256": "a9e9055684ce9623a48d67df3debfdcd87cb4f0a3f38bc00a4c9d0c28ef2837e"
+      },
+      "receipt_sha256": "62a99b87c4b4374c38fddd9c6162f3f4126b46a46aff79db1c35ab64203b3c8b"
+    }
+  },
+  {
+    "source_id": "src_results",
+    "source_type": "company_release",
+    "title": "results official communication",
+    "publisher": "Microsoft",
+    "url": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q4/press-release-webcast",
+    "published_date": "2026-07-29",
+    "locator": null,
+    "capture": {
+      "capture_schema_version": "1.0",
+      "capture_method": "api_response",
+      "tool_name": "requests",
+      "tool_call_id": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\results.html",
+      "captured_date": "2026-10-08",
+      "snapshot_sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+      "content_treatment": "untrusted_data_only",
+      "prompt_injection_status": "not_reviewed",
+      "host_receipt": {
+        "host_receipt_schema_version": "1.0",
+        "issuer": "local execution audit (unsigned)",
+        "environment": "Codex Windows task TEMP",
+        "tool_name": "requests",
+        "action": "retain_opened_primary_source",
+        "event_sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+        "timestamp": "2026-10-08T07:21:48.757284+00:00",
+        "receipt_sha256": "68498a0dba46aceaad95020bc0dec52d9812740d73afaa0ceb036147c8c4a28f"
+      },
+      "receipt_sha256": "69795e18d683fac8c791833c3f47dd54e009727820bbd04541a490db95ba2386"
+    }
+  },
+  {
+    "source_id": "src_call",
+    "source_type": "earnings_transcript",
+    "title": "call official communication",
+    "publisher": "Microsoft",
+    "url": "https://www.microsoft.com/en-us/Investor/events/fy-2026/earnings-fy-2026-q4",
+    "published_date": "2026-07-29",
+    "locator": null,
+    "capture": {
+      "capture_schema_version": "1.0",
+      "capture_method": "api_response",
+      "tool_name": "requests",
+      "tool_call_id": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\call.html",
+      "captured_date": "2026-10-08",
+      "snapshot_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+      "content_treatment": "untrusted_data_only",
+      "prompt_injection_status": "not_reviewed",
+      "host_receipt": {
+        "host_receipt_schema_version": "1.0",
+        "issuer": "local execution audit (unsigned)",
+        "environment": "Codex Windows task TEMP",
+        "tool_name": "requests",
+        "action": "retain_opened_primary_source",
+        "event_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+        "timestamp": "2026-10-08T07:21:48.758372+00:00",
+        "receipt_sha256": "395c0a69b8508ed20eee652a162f14c216cc8ff930833641eb064eac5093b3ef"
+      },
+      "receipt_sha256": "7c33d98d05563eeab9b8eee1d1d81310e554fd1b81a59b7490d4ce50bb9ee28d"
+    }
+  },
+  {
+    "source_id": "src_metrics",
+    "source_type": "company_release",
+    "title": "metrics official communication",
+    "publisher": "Microsoft",
+    "url": "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q4/metrics",
+    "published_date": "2026-07-29",
+    "locator": null,
+    "capture": {
+      "capture_schema_version": "1.0",
+      "capture_method": "api_response",
+      "tool_name": "requests",
+      "tool_call_id": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\metrics.html",
+      "captured_date": "2026-10-08",
+      "snapshot_sha256": "cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+      "content_treatment": "untrusted_data_only",
+      "prompt_injection_status": "not_reviewed",
+      "host_receipt": {
+        "host_receipt_schema_version": "1.0",
+        "issuer": "local execution audit (unsigned)",
+        "environment": "Codex Windows task TEMP",
+        "tool_name": "requests",
+        "action": "retain_opened_primary_source",
+        "event_sha256": "cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+        "timestamp": "2026-10-08T07:21:48.758872+00:00",
+        "receipt_sha256": "601733732983753c5a7f3cb9213a60581f566e230f08aab26092777c9921c422"
+      },
+      "receipt_sha256": "062e5628022f2569db1a68beff5d57088b34cab8e4f1f12754b69ce239c4ee62"
+    }
+  },
+  {
+    "source_id": "src_aws",
+    "source_type": "company_release",
+    "title": "aws official communication",
+    "publisher": "Amazon",
+    "url": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Second-Quarter-Results/default.aspx",
+    "published_date": "2026-07-30",
+    "locator": null,
+    "capture": {
+      "capture_schema_version": "1.0",
+      "capture_method": "api_response",
+      "tool_name": "requests",
+      "tool_call_id": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\aws.html",
+      "captured_date": "2026-10-08",
+      "snapshot_sha256": "d83bb386a7d20107ec1480472490dab56ab83122e4e7f569fd1f36608c96e5a4",
+      "content_treatment": "untrusted_data_only",
+      "prompt_injection_status": "not_reviewed",
+      "host_receipt": {
+        "host_receipt_schema_version": "1.0",
+        "issuer": "local execution audit (unsigned)",
+        "environment": "Codex Windows task TEMP",
+        "tool_name": "requests",
+        "action": "retain_opened_primary_source",
+        "event_sha256": "d83bb386a7d20107ec1480472490dab56ab83122e4e7f569fd1f36608c96e5a4",
+        "timestamp": "2026-10-08T07:21:48.759249+00:00",
+        "receipt_sha256": "d0a97e444823c33de36c7e8caba422db8586009544ea6770e749b3b21db0fef9"
+      },
+      "receipt_sha256": "2382aae1c6c404c675c80c13df8dbad30afab3628165b67bc6912a31a631f70b"
+    }
+  },
+  {
+    "source_id": "src_presentation",
+    "source_type": "investor_presentation",
+    "title": "FY27 Segments and Investor Metrics",
+    "publisher": "Microsoft",
+    "url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/FY27ExternalKPIs.pptx",
+    "published_date": "2026-09-02",
+    "locator": null,
+    "capture": {
+      "capture_schema_version": "1.0",
+      "capture_method": "local_document",
+      "tool_name": "requests+view_image",
+      "tool_call_id": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\fy2027_segments_metrics.pptx",
+      "captured_date": "2026-10-08",
+      "snapshot_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "content_treatment": "untrusted_data_only",
+      "prompt_injection_status": "not_reviewed",
+      "host_receipt": {
+        "host_receipt_schema_version": "1.0",
+        "issuer": "local execution audit (unsigned)",
+        "environment": "Codex Windows task TEMP",
+        "tool_name": "requests+view_image",
+        "action": "retain_opened_primary_source",
+        "event_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "timestamp": "2026-10-08T07:21:48.760055+00:00",
+        "receipt_sha256": "96db6ef9a9b83bf94db0f381baf4bf9df91c5c926303328d8e7f42ec2d6825e1"
+      },
+      "receipt_sha256": "ceea906069fdc7a7d6fe8099909659cd0f498b31f35a9314759486161d84afe5"
+    }
+  },
+  {
+    "source_id": "src_strategy",
+    "source_type": "company_release",
+    "title": "introducing-the-new-copilot-with-home-code-and-autopilot",
+    "publisher": "Microsoft",
+    "url": "https://blogs.microsoft.com/blog/2026/09/25/introducing-the-new-copilot-with-home-code-and-autopilot/",
+    "published_date": "2026-09-25",
+    "locator": null,
+    "capture": {
+      "capture_schema_version": "1.0",
+      "capture_method": "browser_open",
+      "tool_name": "web.run retained multi-view response",
+      "tool_call_id": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_material_announcements.json",
+      "captured_date": "2026-10-08",
+      "snapshot_sha256": "a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+      "content_treatment": "untrusted_data_only",
+      "prompt_injection_status": "not_reviewed",
+      "host_receipt": {
+        "host_receipt_schema_version": "1.0",
+        "issuer": "local execution audit (unsigned)",
+        "environment": "Codex Windows task TEMP",
+        "tool_name": "web.run retained multi-view response",
+        "action": "retain_opened_primary_source",
+        "event_sha256": "a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+        "timestamp": "2026-10-08T07:21:48.764433+00:00",
+        "receipt_sha256": "70320e80b0fc4d0046b31832bb1199a81527da83260db8a2edd1121eab8a69b9"
+      },
+      "receipt_sha256": "99d29daac8dff89ab95ffc264cb6d65e5aa4b6685a98658ea293ccfaa41240fd"
+    }
+  },
+  {
+    "source_id": "src_data_innovation",
+    "source_type": "company_release",
+    "title": "new-microsoft-data-innovations-unlock-what-only-your-business-knows",
+    "publisher": "Microsoft",
+    "url": "https://blogs.microsoft.com/blog/2026/09/28/new-microsoft-data-innovations-unlock-what-only-your-business-knows/",
+    "published_date": "2026-09-28",
+    "locator": null,
+    "capture": {
+      "capture_schema_version": "1.0",
+      "capture_method": "browser_open",
+      "tool_name": "web.run retained multi-view response",
+      "tool_call_id": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_material_announcements.json",
+      "captured_date": "2026-10-08",
+      "snapshot_sha256": "a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+      "content_treatment": "untrusted_data_only",
+      "prompt_injection_status": "not_reviewed",
+      "host_receipt": {
+        "host_receipt_schema_version": "1.0",
+        "issuer": "local execution audit (unsigned)",
+        "environment": "Codex Windows task TEMP",
+        "tool_name": "web.run retained multi-view response",
+        "action": "retain_opened_primary_source",
+        "event_sha256": "a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+        "timestamp": "2026-10-08T07:21:48.764954+00:00",
+        "receipt_sha256": "158b2f35ea6b3602c6d67cf83ef071bb2445f6e7bb3d0c8f513c00abc11fe832"
+      },
+      "receipt_sha256": "04401afb5856787273e1fbf278407f9ac74a491bd8d997457950a91db8e6f0c6"
+    }
+  },
+  {
+    "source_id": "src_leadership",
+    "source_type": "company_release",
+    "title": "microsoft-365-and-linkedin-leadership-update",
+    "publisher": "Microsoft",
+    "url": "https://blogs.microsoft.com/blog/2026/10/01/microsoft-365-and-linkedin-leadership-update/",
+    "published_date": "2026-10-01",
+    "locator": null,
+    "capture": {
+      "capture_schema_version": "1.0",
+      "capture_method": "browser_open",
+      "tool_name": "web.run retained multi-view response",
+      "tool_call_id": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_material_announcements.json",
+      "captured_date": "2026-10-08",
+      "snapshot_sha256": "a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+      "content_treatment": "untrusted_data_only",
+      "prompt_injection_status": "not_reviewed",
+      "host_receipt": {
+        "host_receipt_schema_version": "1.0",
+        "issuer": "local execution audit (unsigned)",
+        "environment": "Codex Windows task TEMP",
+        "tool_name": "web.run retained multi-view response",
+        "action": "retain_opened_primary_source",
+        "event_sha256": "a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+        "timestamp": "2026-10-08T07:21:48.765241+00:00",
+        "receipt_sha256": "8a173340ad0d60a6a6eb9e40fb1e651a10060724a972744294565a2286f0a1d5"
+      },
+      "receipt_sha256": "0628d507fd3dedbd692af43c781d74b10cdb630869454099d12d900da197151a"
+    }
+  }
+]
+
+### parameters
+[
+  {
+    "parameter_id": "reported_total",
+    "kind": "reported_fact",
+    "value": 331839,
+    "unit": "USD million",
+    "period": "FY2026",
+    "definition": "Microsoft consolidated GAAP annual revenue, fiscal year ended June30 2026",
+    "dimension": "revenue",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_results"
+    ],
+    "scenario": null,
+    "rationale": "Microsoft consolidated GAAP annual revenue, fiscal year ended June30 2026",
+    "claim_ids": [
+      "claim_1_reported_total"
+    ],
+    "currency": "USD",
+    "scale": "million"
+  },
+  {
+    "parameter_id": "azure_base",
+    "kind": "reported_fact",
+    "value": 101938,
+    "unit": "USD million",
+    "period": "FY2026",
+    "definition": "Azure external annual recognized revenue restated on FY27 perimeter",
+    "dimension": "revenue",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": null,
+    "rationale": "Azure external annual recognized revenue restated on FY27 perimeter",
+    "claim_ids": [
+      "claim_2_azure_base"
+    ],
+    "currency": "USD",
+    "scale": "million"
+  },
+  {
+    "parameter_id": "azure_growth_low_2027",
+    "kind": "analyst_assumption",
+    "value": 0.3,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Cloud consumption and AI demand; supply/compute execution constraints. FY26 restated growth40%; Q1 FY27 CC guide44-45%; annual FY27 base38% reported deliberately below a full-year extrapolation of Q1, then fades. low FY2027 annual recognized revenue growth 30%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "low",
+    "rationale": "Cloud consumption and AI demand; supply/compute execution constraints. FY26 restated growth40%; Q1 FY27 CC guide44-45%; annual FY27 base38% reported deliberately below a full-year extrapolation of Q1, then fades. low FY2027 annual recognized revenue growth 30%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_3_azure_growth_low_2027"
+    ]
+  },
+  {
+    "parameter_id": "azure_growth_low_2028",
+    "kind": "analyst_assumption",
+    "value": 0.22,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Cloud consumption and AI demand; supply/compute execution constraints. FY26 restated growth40%; Q1 FY27 CC guide44-45%; annual FY27 base38% reported deliberately below a full-year extrapolation of Q1, then fades. low FY2028 annual recognized revenue growth 22%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "low",
+    "rationale": "Cloud consumption and AI demand; supply/compute execution constraints. FY26 restated growth40%; Q1 FY27 CC guide44-45%; annual FY27 base38% reported deliberately below a full-year extrapolation of Q1, then fades. low FY2028 annual recognized revenue growth 22%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_4_azure_growth_low_2028"
+    ]
+  },
+  {
+    "parameter_id": "azure_growth_low_2029",
+    "kind": "analyst_assumption",
+    "value": 0.16,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Cloud consumption and AI demand; supply/compute execution constraints. FY26 restated growth40%; Q1 FY27 CC guide44-45%; annual FY27 base38% reported deliberately below a full-year extrapolation of Q1, then fades. low FY2029 annual recognized revenue growth 16%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "low",
+    "rationale": "Cloud consumption and AI demand; supply/compute execution constraints. FY26 restated growth40%; Q1 FY27 CC guide44-45%; annual FY27 base38% reported deliberately below a full-year extrapolation of Q1, then fades. low FY2029 annual recognized revenue growth 16%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_5_azure_growth_low_2029"
+    ]
+  },
+  {
+    "parameter_id": "azure_growth_base_2027",
+    "kind": "analyst_assumption",
+    "value": 0.38,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Cloud consumption and AI demand; supply/compute execution constraints. FY26 restated growth40%; Q1 FY27 CC guide44-45%; annual FY27 base38% reported deliberately below a full-year extrapolation of Q1, then fades. base FY2027 annual recognized revenue growth 38%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "base",
+    "rationale": "Cloud consumption and AI demand; supply/compute execution constraints. FY26 restated growth40%; Q1 FY27 CC guide44-45%; annual FY27 base38% reported deliberately below a full-year extrapolation of Q1, then fades. base FY2027 annual recognized revenue growth 38%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_6_azure_growth_base_2027"
+    ]
+  },
+  {
+    "parameter_id": "azure_growth_base_2028",
+    "kind": "analyst_assumption",
+    "value": 0.3,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Cloud consumption and AI demand; supply/compute execution constraints. FY26 restated growth40%; Q1 FY27 CC guide44-45%; annual FY27 base38% reported deliberately below a full-year extrapolation of Q1, then fades. base FY2028 annual recognized revenue growth 30%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "base",
+    "rationale": "Cloud consumption and AI demand; supply/compute execution constraints. FY26 restated growth40%; Q1 FY27 CC guide44-45%; annual FY27 base38% reported deliberately below a full-year extrapolation of Q1, then fades. base FY2028 annual recognized revenue growth 30%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_7_azure_growth_base_2028"
+    ]
+  },
+  {
+    "parameter_id": "azure_growth_base_2029",
+    "kind": "analyst_assumption",
+    "value": 0.24,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Cloud consumption and AI demand; supply/compute execution constraints. FY26 restated growth40%; Q1 FY27 CC guide44-45%; annual FY27 base38% reported deliberately below a full-year extrapolation of Q1, then fades. base FY2029 annual recognized revenue growth 24%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "base",
+    "rationale": "Cloud consumption and AI demand; supply/compute execution constraints. FY26 restated growth40%; Q1 FY27 CC guide44-45%; annual FY27 base38% reported deliberately below a full-year extrapolation of Q1, then fades. base FY2029 annual recognized revenue growth 24%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_8_azure_growth_base_2029"
+    ]
+  },
+  {
+    "parameter_id": "azure_growth_high_2027",
+    "kind": "analyst_assumption",
+    "value": 0.45,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Cloud consumption and AI demand; supply/compute execution constraints. FY26 restated growth40%; Q1 FY27 CC guide44-45%; annual FY27 base38% reported deliberately below a full-year extrapolation of Q1, then fades. high FY2027 annual recognized revenue growth 45%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "high",
+    "rationale": "Cloud consumption and AI demand; supply/compute execution constraints. FY26 restated growth40%; Q1 FY27 CC guide44-45%; annual FY27 base38% reported deliberately below a full-year extrapolation of Q1, then fades. high FY2027 annual recognized revenue growth 45%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_9_azure_growth_high_2027"
+    ]
+  },
+  {
+    "parameter_id": "azure_growth_high_2028",
+    "kind": "analyst_assumption",
+    "value": 0.38,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Cloud consumption and AI demand; supply/compute execution constraints. FY26 restated growth40%; Q1 FY27 CC guide44-45%; annual FY27 base38% reported deliberately below a full-year extrapolation of Q1, then fades. high FY2028 annual recognized revenue growth 38%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "high",
+    "rationale": "Cloud consumption and AI demand; supply/compute execution constraints. FY26 restated growth40%; Q1 FY27 CC guide44-45%; annual FY27 base38% reported deliberately below a full-year extrapolation of Q1, then fades. high FY2028 annual recognized revenue growth 38%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_10_azure_growth_high_2028"
+    ]
+  },
+  {
+    "parameter_id": "azure_growth_high_2029",
+    "kind": "analyst_assumption",
+    "value": 0.3,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Cloud consumption and AI demand; supply/compute execution constraints. FY26 restated growth40%; Q1 FY27 CC guide44-45%; annual FY27 base38% reported deliberately below a full-year extrapolation of Q1, then fades. high FY2029 annual recognized revenue growth 30%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "high",
+    "rationale": "Cloud consumption and AI demand; supply/compute execution constraints. FY26 restated growth40%; Q1 FY27 CC guide44-45%; annual FY27 base38% reported deliberately below a full-year extrapolation of Q1, then fades. high FY2029 annual recognized revenue growth 30%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_11_azure_growth_high_2029"
+    ]
+  },
+  {
+    "parameter_id": "azure_recognition_identity_2027",
+    "kind": "analyst_assumption",
+    "value": 1,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Annual growth model already projects recognized service flow; factor1 prevents double timing multiplication. Mixed components must be split before any intra-year use.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"
+    ],
+    "scenario": null,
+    "rationale": "Annual growth model already projects recognized service flow; factor1 prevents double timing multiplication. Mixed components must be split before any intra-year use.",
+    "claim_ids": [
+      "claim_13_azure_recognition_identity_2027"
+    ]
+  },
+  {
+    "parameter_id": "azure_recognition_identity_2028",
+    "kind": "analyst_assumption",
+    "value": 1,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Annual growth model already projects recognized service flow; factor1 prevents double timing multiplication. Mixed components must be split before any intra-year use.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"
+    ],
+    "scenario": null,
+    "rationale": "Annual growth model already projects recognized service flow; factor1 prevents double timing multiplication. Mixed components must be split before any intra-year use.",
+    "claim_ids": [
+      "claim_14_azure_recognition_identity_2028"
+    ]
+  },
+  {
+    "parameter_id": "azure_recognition_identity_2029",
+    "kind": "analyst_assumption",
+    "value": 1,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Annual growth model already projects recognized service flow; factor1 prevents double timing multiplication. Mixed components must be split before any intra-year use.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"
+    ],
+    "scenario": null,
+    "rationale": "Annual growth model already projects recognized service flow; factor1 prevents double timing multiplication. Mixed components must be split before any intra-year use.",
+    "claim_ids": [
+      "claim_15_azure_recognition_identity_2029"
+    ]
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_base",
+    "kind": "reported_fact",
+    "value": 100299,
+    "unit": "USD million",
+    "period": "FY2026",
+    "definition": "Microsoft 365 cloud external annual recognized revenue restated on FY27 perimeter",
+    "dimension": "revenue",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": null,
+    "rationale": "Microsoft 365 cloud external annual recognized revenue restated on FY27 perimeter",
+    "claim_ids": [
+      "claim_16_microsoft_365_cloud_base"
+    ],
+    "currency": "USD",
+    "scale": "million"
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_low_2027",
+    "kind": "analyst_assumption",
+    "value": 0.12,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Paid seat growth and Copilot/E7 mix, with consumption monetization; FY26 commercial restated18% and new Q1 CC17% guidance apply only to commercial subset, not all cloud. low FY2027 annual recognized revenue growth 12%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "low",
+    "rationale": "Paid seat growth and Copilot/E7 mix, with consumption monetization; FY26 commercial restated18% and new Q1 CC17% guidance apply only to commercial subset, not all cloud. low FY2027 annual recognized revenue growth 12%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_17_microsoft_365_cloud_growth_low_2027"
+    ]
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_low_2028",
+    "kind": "analyst_assumption",
+    "value": 0.1,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Paid seat growth and Copilot/E7 mix, with consumption monetization; FY26 commercial restated18% and new Q1 CC17% guidance apply only to commercial subset, not all cloud. low FY2028 annual recognized revenue growth 10%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "low",
+    "rationale": "Paid seat growth and Copilot/E7 mix, with consumption monetization; FY26 commercial restated18% and new Q1 CC17% guidance apply only to commercial subset, not all cloud. low FY2028 annual recognized revenue growth 10%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_18_microsoft_365_cloud_growth_low_2028"
+    ]
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_low_2029",
+    "kind": "analyst_assumption",
+    "value": 0.08,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Paid seat growth and Copilot/E7 mix, with consumption monetization; FY26 commercial restated18% and new Q1 CC17% guidance apply only to commercial subset, not all cloud. low FY2029 annual recognized revenue growth 8%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "low",
+    "rationale": "Paid seat growth and Copilot/E7 mix, with consumption monetization; FY26 commercial restated18% and new Q1 CC17% guidance apply only to commercial subset, not all cloud. low FY2029 annual recognized revenue growth 8%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_19_microsoft_365_cloud_growth_low_2029"
+    ]
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_base_2027",
+    "kind": "analyst_assumption",
+    "value": 0.17,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Paid seat growth and Copilot/E7 mix, with consumption monetization; FY26 commercial restated18% and new Q1 CC17% guidance apply only to commercial subset, not all cloud. base FY2027 annual recognized revenue growth 17%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "base",
+    "rationale": "Paid seat growth and Copilot/E7 mix, with consumption monetization; FY26 commercial restated18% and new Q1 CC17% guidance apply only to commercial subset, not all cloud. base FY2027 annual recognized revenue growth 17%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_20_microsoft_365_cloud_growth_base_2027"
+    ]
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_base_2028",
+    "kind": "analyst_assumption",
+    "value": 0.16,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Paid seat growth and Copilot/E7 mix, with consumption monetization; FY26 commercial restated18% and new Q1 CC17% guidance apply only to commercial subset, not all cloud. base FY2028 annual recognized revenue growth 16%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "base",
+    "rationale": "Paid seat growth and Copilot/E7 mix, with consumption monetization; FY26 commercial restated18% and new Q1 CC17% guidance apply only to commercial subset, not all cloud. base FY2028 annual recognized revenue growth 16%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_21_microsoft_365_cloud_growth_base_2028"
+    ]
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_base_2029",
+    "kind": "analyst_assumption",
+    "value": 0.14,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Paid seat growth and Copilot/E7 mix, with consumption monetization; FY26 commercial restated18% and new Q1 CC17% guidance apply only to commercial subset, not all cloud. base FY2029 annual recognized revenue growth 14%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "base",
+    "rationale": "Paid seat growth and Copilot/E7 mix, with consumption monetization; FY26 commercial restated18% and new Q1 CC17% guidance apply only to commercial subset, not all cloud. base FY2029 annual recognized revenue growth 14%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_22_microsoft_365_cloud_growth_base_2029"
+    ]
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_high_2027",
+    "kind": "analyst_assumption",
+    "value": 0.22,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Paid seat growth and Copilot/E7 mix, with consumption monetization; FY26 commercial restated18% and new Q1 CC17% guidance apply only to commercial subset, not all cloud. high FY2027 annual recognized revenue growth 22%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "high",
+    "rationale": "Paid seat growth and Copilot/E7 mix, with consumption monetization; FY26 commercial restated18% and new Q1 CC17% guidance apply only to commercial subset, not all cloud. high FY2027 annual recognized revenue growth 22%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_23_microsoft_365_cloud_growth_high_2027"
+    ]
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_high_2028",
+    "kind": "analyst_assumption",
+    "value": 0.21,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Paid seat growth and Copilot/E7 mix, with consumption monetization; FY26 commercial restated18% and new Q1 CC17% guidance apply only to commercial subset, not all cloud. high FY2028 annual recognized revenue growth 21%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "high",
+    "rationale": "Paid seat growth and Copilot/E7 mix, with consumption monetization; FY26 commercial restated18% and new Q1 CC17% guidance apply only to commercial subset, not all cloud. high FY2028 annual recognized revenue growth 21%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_24_microsoft_365_cloud_growth_high_2028"
+    ]
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_high_2029",
+    "kind": "analyst_assumption",
+    "value": 0.19,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Paid seat growth and Copilot/E7 mix, with consumption monetization; FY26 commercial restated18% and new Q1 CC17% guidance apply only to commercial subset, not all cloud. high FY2029 annual recognized revenue growth 19%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "high",
+    "rationale": "Paid seat growth and Copilot/E7 mix, with consumption monetization; FY26 commercial restated18% and new Q1 CC17% guidance apply only to commercial subset, not all cloud. high FY2029 annual recognized revenue growth 19%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_25_microsoft_365_cloud_growth_high_2029"
+    ]
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_recognition_identity_2027",
+    "kind": "analyst_assumption",
+    "value": 1,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Annual growth model already projects recognized service flow; factor1 prevents double timing multiplication. Mixed components must be split before any intra-year use.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"
+    ],
+    "scenario": null,
+    "rationale": "Annual growth model already projects recognized service flow; factor1 prevents double timing multiplication. Mixed components must be split before any intra-year use.",
+    "claim_ids": [
+      "claim_27_microsoft_365_cloud_recognition_identity_2027"
+    ]
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_recognition_identity_2028",
+    "kind": "analyst_assumption",
+    "value": 1,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Annual growth model already projects recognized service flow; factor1 prevents double timing multiplication. Mixed components must be split before any intra-year use.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"
+    ],
+    "scenario": null,
+    "rationale": "Annual growth model already projects recognized service flow; factor1 prevents double timing multiplication. Mixed components must be split before any intra-year use.",
+    "claim_ids": [
+      "claim_28_microsoft_365_cloud_recognition_identity_2028"
+    ]
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_recognition_identity_2029",
+    "kind": "analyst_assumption",
+    "value": 1,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Annual growth model already projects recognized service flow; factor1 prevents double timing multiplication. Mixed components must be split before any intra-year use.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"
+    ],
+    "scenario": null,
+    "rationale": "Annual growth model already projects recognized service flow; factor1 prevents double timing multiplication. Mixed components must be split before any intra-year use.",
+    "claim_ids": [
+      "claim_29_microsoft_365_cloud_recognition_identity_2029"
+    ]
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_base",
+    "kind": "reported_fact",
+    "value": 37285,
+    "unit": "USD million",
+    "period": "FY2026",
+    "definition": "Productivity and server licensing external annual recognized revenue restated on FY27 perimeter",
+    "dimension": "revenue",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": null,
+    "rationale": "Productivity and server licensing external annual recognized revenue restated on FY27 perimeter",
+    "claim_ids": [
+      "claim_30_productivity_and_server_licensing_base"
+    ],
+    "currency": "USD",
+    "scale": "million"
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_low_2027",
+    "kind": "analyst_assumption",
+    "value": -0.08,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Cloud migration and FY26 launch transactional comparable; full-year products decline mid-single digits guides direction; component mix undisclosed. low FY2027 annual recognized revenue growth -8%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "low",
+    "rationale": "Cloud migration and FY26 launch transactional comparable; full-year products decline mid-single digits guides direction; component mix undisclosed. low FY2027 annual recognized revenue growth -8%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_31_productivity_and_server_licensing_growth_low_2027"
+    ]
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_low_2028",
+    "kind": "analyst_assumption",
+    "value": -0.06,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Cloud migration and FY26 launch transactional comparable; full-year products decline mid-single digits guides direction; component mix undisclosed. low FY2028 annual recognized revenue growth -6%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "low",
+    "rationale": "Cloud migration and FY26 launch transactional comparable; full-year products decline mid-single digits guides direction; component mix undisclosed. low FY2028 annual recognized revenue growth -6%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_32_productivity_and_server_licensing_growth_low_2028"
+    ]
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_low_2029",
+    "kind": "analyst_assumption",
+    "value": -0.05,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Cloud migration and FY26 launch transactional comparable; full-year products decline mid-single digits guides direction; component mix undisclosed. low FY2029 annual recognized revenue growth -5%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "low",
+    "rationale": "Cloud migration and FY26 launch transactional comparable; full-year products decline mid-single digits guides direction; component mix undisclosed. low FY2029 annual recognized revenue growth -5%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_33_productivity_and_server_licensing_growth_low_2029"
+    ]
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_base_2027",
+    "kind": "analyst_assumption",
+    "value": -0.05,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Cloud migration and FY26 launch transactional comparable; full-year products decline mid-single digits guides direction; component mix undisclosed. base FY2027 annual recognized revenue growth -5%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "base",
+    "rationale": "Cloud migration and FY26 launch transactional comparable; full-year products decline mid-single digits guides direction; component mix undisclosed. base FY2027 annual recognized revenue growth -5%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_34_productivity_and_server_licensing_growth_base_2027"
+    ]
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_base_2028",
+    "kind": "analyst_assumption",
+    "value": -0.03,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Cloud migration and FY26 launch transactional comparable; full-year products decline mid-single digits guides direction; component mix undisclosed. base FY2028 annual recognized revenue growth -3%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "base",
+    "rationale": "Cloud migration and FY26 launch transactional comparable; full-year products decline mid-single digits guides direction; component mix undisclosed. base FY2028 annual recognized revenue growth -3%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_35_productivity_and_server_licensing_growth_base_2028"
+    ]
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_base_2029",
+    "kind": "analyst_assumption",
+    "value": -0.02,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Cloud migration and FY26 launch transactional comparable; full-year products decline mid-single digits guides direction; component mix undisclosed. base FY2029 annual recognized revenue growth -2%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "base",
+    "rationale": "Cloud migration and FY26 launch transactional comparable; full-year products decline mid-single digits guides direction; component mix undisclosed. base FY2029 annual recognized revenue growth -2%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_36_productivity_and_server_licensing_growth_base_2029"
+    ]
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_high_2027",
+    "kind": "analyst_assumption",
+    "value": -0.02,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Cloud migration and FY26 launch transactional comparable; full-year products decline mid-single digits guides direction; component mix undisclosed. high FY2027 annual recognized revenue growth -2%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "high",
+    "rationale": "Cloud migration and FY26 launch transactional comparable; full-year products decline mid-single digits guides direction; component mix undisclosed. high FY2027 annual recognized revenue growth -2%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_37_productivity_and_server_licensing_growth_high_2027"
+    ]
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_high_2028",
+    "kind": "analyst_assumption",
+    "value": 0,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Cloud migration and FY26 launch transactional comparable; full-year products decline mid-single digits guides direction; component mix undisclosed. high FY2028 annual recognized revenue growth 0%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "high",
+    "rationale": "Cloud migration and FY26 launch transactional comparable; full-year products decline mid-single digits guides direction; component mix undisclosed. high FY2028 annual recognized revenue growth 0%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_38_productivity_and_server_licensing_growth_high_2028"
+    ]
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_high_2029",
+    "kind": "analyst_assumption",
+    "value": 0.01,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Cloud migration and FY26 launch transactional comparable; full-year products decline mid-single digits guides direction; component mix undisclosed. high FY2029 annual recognized revenue growth 1%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "high",
+    "rationale": "Cloud migration and FY26 launch transactional comparable; full-year products decline mid-single digits guides direction; component mix undisclosed. high FY2029 annual recognized revenue growth 1%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_39_productivity_and_server_licensing_growth_high_2029"
+    ]
+  },
+  {
+    "parameter_id": "industry_solutions_base",
+    "kind": "reported_fact",
+    "value": 20345,
+    "unit": "USD million",
+    "period": "FY2026",
+    "definition": "Industry solutions external annual recognized revenue restated on FY27 perimeter",
+    "dimension": "revenue",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": null,
+    "rationale": "Industry solutions external annual recognized revenue restated on FY27 perimeter",
+    "claim_ids": [
+      "claim_41_industry_solutions_base"
+    ],
+    "currency": "USD",
+    "scale": "million"
+  },
+  {
+    "parameter_id": "industry_solutions_growth_low_2027",
+    "kind": "analyst_assumption",
+    "value": 0.05,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Dynamics and LinkedIn talent/sales plus healthcare; new cloud FY26 restated12% and Q1 high-single-digit guide inform direction, while products mix and CRM cycles constrain magnitude. low FY2027 annual recognized revenue growth 5%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "low",
+    "rationale": "Dynamics and LinkedIn talent/sales plus healthcare; new cloud FY26 restated12% and Q1 high-single-digit guide inform direction, while products mix and CRM cycles constrain magnitude. low FY2027 annual recognized revenue growth 5%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_42_industry_solutions_growth_low_2027"
+    ]
+  },
+  {
+    "parameter_id": "industry_solutions_growth_low_2028",
+    "kind": "analyst_assumption",
+    "value": 0.04,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Dynamics and LinkedIn talent/sales plus healthcare; new cloud FY26 restated12% and Q1 high-single-digit guide inform direction, while products mix and CRM cycles constrain magnitude. low FY2028 annual recognized revenue growth 4%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "low",
+    "rationale": "Dynamics and LinkedIn talent/sales plus healthcare; new cloud FY26 restated12% and Q1 high-single-digit guide inform direction, while products mix and CRM cycles constrain magnitude. low FY2028 annual recognized revenue growth 4%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_43_industry_solutions_growth_low_2028"
+    ]
+  },
+  {
+    "parameter_id": "industry_solutions_growth_low_2029",
+    "kind": "analyst_assumption",
+    "value": 0.03,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Dynamics and LinkedIn talent/sales plus healthcare; new cloud FY26 restated12% and Q1 high-single-digit guide inform direction, while products mix and CRM cycles constrain magnitude. low FY2029 annual recognized revenue growth 3%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "low",
+    "rationale": "Dynamics and LinkedIn talent/sales plus healthcare; new cloud FY26 restated12% and Q1 high-single-digit guide inform direction, while products mix and CRM cycles constrain magnitude. low FY2029 annual recognized revenue growth 3%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_44_industry_solutions_growth_low_2029"
+    ]
+  },
+  {
+    "parameter_id": "industry_solutions_growth_base_2027",
+    "kind": "analyst_assumption",
+    "value": 0.09,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Dynamics and LinkedIn talent/sales plus healthcare; new cloud FY26 restated12% and Q1 high-single-digit guide inform direction, while products mix and CRM cycles constrain magnitude. base FY2027 annual recognized revenue growth 9%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "base",
+    "rationale": "Dynamics and LinkedIn talent/sales plus healthcare; new cloud FY26 restated12% and Q1 high-single-digit guide inform direction, while products mix and CRM cycles constrain magnitude. base FY2027 annual recognized revenue growth 9%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_45_industry_solutions_growth_base_2027"
+    ]
+  },
+  {
+    "parameter_id": "industry_solutions_growth_base_2028",
+    "kind": "analyst_assumption",
+    "value": 0.09,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Dynamics and LinkedIn talent/sales plus healthcare; new cloud FY26 restated12% and Q1 high-single-digit guide inform direction, while products mix and CRM cycles constrain magnitude. base FY2028 annual recognized revenue growth 9%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "base",
+    "rationale": "Dynamics and LinkedIn talent/sales plus healthcare; new cloud FY26 restated12% and Q1 high-single-digit guide inform direction, while products mix and CRM cycles constrain magnitude. base FY2028 annual recognized revenue growth 9%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_46_industry_solutions_growth_base_2028"
+    ]
+  },
+  {
+    "parameter_id": "industry_solutions_growth_base_2029",
+    "kind": "analyst_assumption",
+    "value": 0.08,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Dynamics and LinkedIn talent/sales plus healthcare; new cloud FY26 restated12% and Q1 high-single-digit guide inform direction, while products mix and CRM cycles constrain magnitude. base FY2029 annual recognized revenue growth 8%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "base",
+    "rationale": "Dynamics and LinkedIn talent/sales plus healthcare; new cloud FY26 restated12% and Q1 high-single-digit guide inform direction, while products mix and CRM cycles constrain magnitude. base FY2029 annual recognized revenue growth 8%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_47_industry_solutions_growth_base_2029"
+    ]
+  },
+  {
+    "parameter_id": "industry_solutions_growth_high_2027",
+    "kind": "analyst_assumption",
+    "value": 0.13,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Dynamics and LinkedIn talent/sales plus healthcare; new cloud FY26 restated12% and Q1 high-single-digit guide inform direction, while products mix and CRM cycles constrain magnitude. high FY2027 annual recognized revenue growth 13%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "high",
+    "rationale": "Dynamics and LinkedIn talent/sales plus healthcare; new cloud FY26 restated12% and Q1 high-single-digit guide inform direction, while products mix and CRM cycles constrain magnitude. high FY2027 annual recognized revenue growth 13%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_48_industry_solutions_growth_high_2027"
+    ]
+  },
+  {
+    "parameter_id": "industry_solutions_growth_high_2028",
+    "kind": "analyst_assumption",
+    "value": 0.13,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Dynamics and LinkedIn talent/sales plus healthcare; new cloud FY26 restated12% and Q1 high-single-digit guide inform direction, while products mix and CRM cycles constrain magnitude. high FY2028 annual recognized revenue growth 13%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "high",
+    "rationale": "Dynamics and LinkedIn talent/sales plus healthcare; new cloud FY26 restated12% and Q1 high-single-digit guide inform direction, while products mix and CRM cycles constrain magnitude. high FY2028 annual recognized revenue growth 13%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_49_industry_solutions_growth_high_2028"
+    ]
+  },
+  {
+    "parameter_id": "industry_solutions_growth_high_2029",
+    "kind": "analyst_assumption",
+    "value": 0.12,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Dynamics and LinkedIn talent/sales plus healthcare; new cloud FY26 restated12% and Q1 high-single-digit guide inform direction, while products mix and CRM cycles constrain magnitude. high FY2029 annual recognized revenue growth 12%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "high",
+    "rationale": "Dynamics and LinkedIn talent/sales plus healthcare; new cloud FY26 restated12% and Q1 high-single-digit guide inform direction, while products mix and CRM cycles constrain magnitude. high FY2029 annual recognized revenue growth 12%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_50_industry_solutions_growth_high_2029"
+    ]
+  },
+  {
+    "parameter_id": "frontier_and_support_services_base",
+    "kind": "reported_fact",
+    "value": 8260,
+    "unit": "USD million",
+    "period": "FY2026",
+    "definition": "Frontier and support services external annual recognized revenue restated on FY27 perimeter",
+    "dimension": "revenue",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": null,
+    "rationale": "Frontier and support services external annual recognized revenue restated on FY27 perimeter",
+    "claim_ids": [
+      "claim_52_frontier_and_support_services_base"
+    ],
+    "currency": "USD",
+    "scale": "million"
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_low_2027",
+    "kind": "analyst_assumption",
+    "value": 0.02,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Consulting/support services attach to enterprise implementation; FY26 growth6.4%, no signed future pipeline amount disclosed. low FY2027 annual recognized revenue growth 2%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "low",
+    "rationale": "Consulting/support services attach to enterprise implementation; FY26 growth6.4%, no signed future pipeline amount disclosed. low FY2027 annual recognized revenue growth 2%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_53_frontier_and_support_services_growth_low_2027"
+    ]
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_low_2028",
+    "kind": "analyst_assumption",
+    "value": 0.02,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Consulting/support services attach to enterprise implementation; FY26 growth6.4%, no signed future pipeline amount disclosed. low FY2028 annual recognized revenue growth 2%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "low",
+    "rationale": "Consulting/support services attach to enterprise implementation; FY26 growth6.4%, no signed future pipeline amount disclosed. low FY2028 annual recognized revenue growth 2%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_54_frontier_and_support_services_growth_low_2028"
+    ]
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_low_2029",
+    "kind": "analyst_assumption",
+    "value": 0.01,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Consulting/support services attach to enterprise implementation; FY26 growth6.4%, no signed future pipeline amount disclosed. low FY2029 annual recognized revenue growth 1%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "low",
+    "rationale": "Consulting/support services attach to enterprise implementation; FY26 growth6.4%, no signed future pipeline amount disclosed. low FY2029 annual recognized revenue growth 1%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_55_frontier_and_support_services_growth_low_2029"
+    ]
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_base_2027",
+    "kind": "analyst_assumption",
+    "value": 0.06,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Consulting/support services attach to enterprise implementation; FY26 growth6.4%, no signed future pipeline amount disclosed. base FY2027 annual recognized revenue growth 6%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "base",
+    "rationale": "Consulting/support services attach to enterprise implementation; FY26 growth6.4%, no signed future pipeline amount disclosed. base FY2027 annual recognized revenue growth 6%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_56_frontier_and_support_services_growth_base_2027"
+    ]
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_base_2028",
+    "kind": "analyst_assumption",
+    "value": 0.05,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Consulting/support services attach to enterprise implementation; FY26 growth6.4%, no signed future pipeline amount disclosed. base FY2028 annual recognized revenue growth 5%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "base",
+    "rationale": "Consulting/support services attach to enterprise implementation; FY26 growth6.4%, no signed future pipeline amount disclosed. base FY2028 annual recognized revenue growth 5%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_57_frontier_and_support_services_growth_base_2028"
+    ]
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_base_2029",
+    "kind": "analyst_assumption",
+    "value": 0.04,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Consulting/support services attach to enterprise implementation; FY26 growth6.4%, no signed future pipeline amount disclosed. base FY2029 annual recognized revenue growth 4%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "base",
+    "rationale": "Consulting/support services attach to enterprise implementation; FY26 growth6.4%, no signed future pipeline amount disclosed. base FY2029 annual recognized revenue growth 4%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_58_frontier_and_support_services_growth_base_2029"
+    ]
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_high_2027",
+    "kind": "analyst_assumption",
+    "value": 0.09,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Consulting/support services attach to enterprise implementation; FY26 growth6.4%, no signed future pipeline amount disclosed. high FY2027 annual recognized revenue growth 9%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "high",
+    "rationale": "Consulting/support services attach to enterprise implementation; FY26 growth6.4%, no signed future pipeline amount disclosed. high FY2027 annual recognized revenue growth 9%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_59_frontier_and_support_services_growth_high_2027"
+    ]
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_high_2028",
+    "kind": "analyst_assumption",
+    "value": 0.08,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Consulting/support services attach to enterprise implementation; FY26 growth6.4%, no signed future pipeline amount disclosed. high FY2028 annual recognized revenue growth 8%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "high",
+    "rationale": "Consulting/support services attach to enterprise implementation; FY26 growth6.4%, no signed future pipeline amount disclosed. high FY2028 annual recognized revenue growth 8%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_60_frontier_and_support_services_growth_high_2028"
+    ]
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_high_2029",
+    "kind": "analyst_assumption",
+    "value": 0.07,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Consulting/support services attach to enterprise implementation; FY26 growth6.4%, no signed future pipeline amount disclosed. high FY2029 annual recognized revenue growth 7%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "high",
+    "rationale": "Consulting/support services attach to enterprise implementation; FY26 growth6.4%, no signed future pipeline amount disclosed. high FY2029 annual recognized revenue growth 7%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_61_frontier_and_support_services_growth_high_2029"
+    ]
+  },
+  {
+    "parameter_id": "frontier_and_support_services_recognition_identity_2027",
+    "kind": "analyst_assumption",
+    "value": 1,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Annual growth model already projects recognized service flow; factor1 prevents double timing multiplication. Mixed components must be split before any intra-year use.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"
+    ],
+    "scenario": null,
+    "rationale": "Annual growth model already projects recognized service flow; factor1 prevents double timing multiplication. Mixed components must be split before any intra-year use.",
+    "claim_ids": [
+      "claim_63_frontier_and_support_services_recognition_identity_2027"
+    ]
+  },
+  {
+    "parameter_id": "frontier_and_support_services_recognition_identity_2028",
+    "kind": "analyst_assumption",
+    "value": 1,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Annual growth model already projects recognized service flow; factor1 prevents double timing multiplication. Mixed components must be split before any intra-year use.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"
+    ],
+    "scenario": null,
+    "rationale": "Annual growth model already projects recognized service flow; factor1 prevents double timing multiplication. Mixed components must be split before any intra-year use.",
+    "claim_ids": [
+      "claim_64_frontier_and_support_services_recognition_identity_2028"
+    ]
+  },
+  {
+    "parameter_id": "frontier_and_support_services_recognition_identity_2029",
+    "kind": "analyst_assumption",
+    "value": 1,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Annual growth model already projects recognized service flow; factor1 prevents double timing multiplication. Mixed components must be split before any intra-year use.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"
+    ],
+    "scenario": null,
+    "rationale": "Annual growth model already projects recognized service flow; factor1 prevents double timing multiplication. Mixed components must be split before any intra-year use.",
+    "claim_ids": [
+      "claim_65_frontier_and_support_services_recognition_identity_2029"
+    ]
+  },
+  {
+    "parameter_id": "search_and_advertising_base",
+    "kind": "reported_fact",
+    "value": 24835,
+    "unit": "USD million",
+    "period": "FY2026",
+    "definition": "Search and advertising external annual recognized revenue restated on FY27 perimeter",
+    "dimension": "revenue",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": null,
+    "rationale": "Search and advertising external annual recognized revenue restated on FY27 perimeter",
+    "claim_ids": [
+      "claim_66_search_and_advertising_base"
+    ],
+    "currency": "USD",
+    "scale": "million"
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_low_2027",
+    "kind": "analyst_assumption",
+    "value": 0.03,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Search demand/price plus LinkedIn Marketing and Premium; Q1 exTAC mid-to-high-single growth is net KPI, not this gross revenue, so only directional check. low FY2027 annual recognized revenue growth 3%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "low",
+    "rationale": "Search demand/price plus LinkedIn Marketing and Premium; Q1 exTAC mid-to-high-single growth is net KPI, not this gross revenue, so only directional check. low FY2027 annual recognized revenue growth 3%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_67_search_and_advertising_growth_low_2027"
+    ]
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_low_2028",
+    "kind": "analyst_assumption",
+    "value": 0.02,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Search demand/price plus LinkedIn Marketing and Premium; Q1 exTAC mid-to-high-single growth is net KPI, not this gross revenue, so only directional check. low FY2028 annual recognized revenue growth 2%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "low",
+    "rationale": "Search demand/price plus LinkedIn Marketing and Premium; Q1 exTAC mid-to-high-single growth is net KPI, not this gross revenue, so only directional check. low FY2028 annual recognized revenue growth 2%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_68_search_and_advertising_growth_low_2028"
+    ]
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_low_2029",
+    "kind": "analyst_assumption",
+    "value": 0.01,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Search demand/price plus LinkedIn Marketing and Premium; Q1 exTAC mid-to-high-single growth is net KPI, not this gross revenue, so only directional check. low FY2029 annual recognized revenue growth 1%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "low",
+    "rationale": "Search demand/price plus LinkedIn Marketing and Premium; Q1 exTAC mid-to-high-single growth is net KPI, not this gross revenue, so only directional check. low FY2029 annual recognized revenue growth 1%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_69_search_and_advertising_growth_low_2029"
+    ]
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_base_2027",
+    "kind": "analyst_assumption",
+    "value": 0.08,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Search demand/price plus LinkedIn Marketing and Premium; Q1 exTAC mid-to-high-single growth is net KPI, not this gross revenue, so only directional check. base FY2027 annual recognized revenue growth 8%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "base",
+    "rationale": "Search demand/price plus LinkedIn Marketing and Premium; Q1 exTAC mid-to-high-single growth is net KPI, not this gross revenue, so only directional check. base FY2027 annual recognized revenue growth 8%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_70_search_and_advertising_growth_base_2027"
+    ]
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_base_2028",
+    "kind": "analyst_assumption",
+    "value": 0.07,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Search demand/price plus LinkedIn Marketing and Premium; Q1 exTAC mid-to-high-single growth is net KPI, not this gross revenue, so only directional check. base FY2028 annual recognized revenue growth 7%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "base",
+    "rationale": "Search demand/price plus LinkedIn Marketing and Premium; Q1 exTAC mid-to-high-single growth is net KPI, not this gross revenue, so only directional check. base FY2028 annual recognized revenue growth 7%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_71_search_and_advertising_growth_base_2028"
+    ]
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_base_2029",
+    "kind": "analyst_assumption",
+    "value": 0.06,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Search demand/price plus LinkedIn Marketing and Premium; Q1 exTAC mid-to-high-single growth is net KPI, not this gross revenue, so only directional check. base FY2029 annual recognized revenue growth 6%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "base",
+    "rationale": "Search demand/price plus LinkedIn Marketing and Premium; Q1 exTAC mid-to-high-single growth is net KPI, not this gross revenue, so only directional check. base FY2029 annual recognized revenue growth 6%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_72_search_and_advertising_growth_base_2029"
+    ]
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_high_2027",
+    "kind": "analyst_assumption",
+    "value": 0.12,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Search demand/price plus LinkedIn Marketing and Premium; Q1 exTAC mid-to-high-single growth is net KPI, not this gross revenue, so only directional check. high FY2027 annual recognized revenue growth 12%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "high",
+    "rationale": "Search demand/price plus LinkedIn Marketing and Premium; Q1 exTAC mid-to-high-single growth is net KPI, not this gross revenue, so only directional check. high FY2027 annual recognized revenue growth 12%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_73_search_and_advertising_growth_high_2027"
+    ]
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_high_2028",
+    "kind": "analyst_assumption",
+    "value": 0.11,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Search demand/price plus LinkedIn Marketing and Premium; Q1 exTAC mid-to-high-single growth is net KPI, not this gross revenue, so only directional check. high FY2028 annual recognized revenue growth 11%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "high",
+    "rationale": "Search demand/price plus LinkedIn Marketing and Premium; Q1 exTAC mid-to-high-single growth is net KPI, not this gross revenue, so only directional check. high FY2028 annual recognized revenue growth 11%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_74_search_and_advertising_growth_high_2028"
+    ]
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_high_2029",
+    "kind": "analyst_assumption",
+    "value": 0.1,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Search demand/price plus LinkedIn Marketing and Premium; Q1 exTAC mid-to-high-single growth is net KPI, not this gross revenue, so only directional check. high FY2029 annual recognized revenue growth 10%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "high",
+    "rationale": "Search demand/price plus LinkedIn Marketing and Premium; Q1 exTAC mid-to-high-single growth is net KPI, not this gross revenue, so only directional check. high FY2029 annual recognized revenue growth 10%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_75_search_and_advertising_growth_high_2029"
+    ]
+  },
+  {
+    "parameter_id": "xbox_base",
+    "kind": "reported_fact",
+    "value": 21790,
+    "unit": "USD million",
+    "period": "FY2026",
+    "definition": "XBOX external annual recognized revenue restated on FY27 perimeter",
+    "dimension": "revenue",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": null,
+    "rationale": "XBOX external annual recognized revenue restated on FY27 perimeter",
+    "claim_ids": [
+      "claim_77_xbox_base"
+    ],
+    "currency": "USD",
+    "scale": "million"
+  },
+  {
+    "parameter_id": "xbox_growth_low_2027",
+    "kind": "analyst_assumption",
+    "value": -0.1,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Reset and weaker hardware; management expects FY27 gaming return to growth but first quarter content decline. Base annual-4% is an explicit independent disagreement; excludes unproven launch uplift. low FY2027 annual recognized revenue growth -10%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "low",
+    "rationale": "Reset and weaker hardware; management expects FY27 gaming return to growth but first quarter content decline. Base annual-4% is an explicit independent disagreement; excludes unproven launch uplift. low FY2027 annual recognized revenue growth -10%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_78_xbox_growth_low_2027"
+    ]
+  },
+  {
+    "parameter_id": "xbox_growth_low_2028",
+    "kind": "analyst_assumption",
+    "value": -0.05,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Reset and weaker hardware; management expects FY27 gaming return to growth but first quarter content decline. Base annual-4% is an explicit independent disagreement; excludes unproven launch uplift. low FY2028 annual recognized revenue growth -5%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "low",
+    "rationale": "Reset and weaker hardware; management expects FY27 gaming return to growth but first quarter content decline. Base annual-4% is an explicit independent disagreement; excludes unproven launch uplift. low FY2028 annual recognized revenue growth -5%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_79_xbox_growth_low_2028"
+    ]
+  },
+  {
+    "parameter_id": "xbox_growth_low_2029",
+    "kind": "analyst_assumption",
+    "value": 0,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Reset and weaker hardware; management expects FY27 gaming return to growth but first quarter content decline. Base annual-4% is an explicit independent disagreement; excludes unproven launch uplift. low FY2029 annual recognized revenue growth 0%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "low",
+    "rationale": "Reset and weaker hardware; management expects FY27 gaming return to growth but first quarter content decline. Base annual-4% is an explicit independent disagreement; excludes unproven launch uplift. low FY2029 annual recognized revenue growth 0%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_80_xbox_growth_low_2029"
+    ]
+  },
+  {
+    "parameter_id": "xbox_growth_base_2027",
+    "kind": "analyst_assumption",
+    "value": -0.04,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Reset and weaker hardware; management expects FY27 gaming return to growth but first quarter content decline. Base annual-4% is an explicit independent disagreement; excludes unproven launch uplift. base FY2027 annual recognized revenue growth -4%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "base",
+    "rationale": "Reset and weaker hardware; management expects FY27 gaming return to growth but first quarter content decline. Base annual-4% is an explicit independent disagreement; excludes unproven launch uplift. base FY2027 annual recognized revenue growth -4%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_81_xbox_growth_base_2027"
+    ]
+  },
+  {
+    "parameter_id": "xbox_growth_base_2028",
+    "kind": "analyst_assumption",
+    "value": 0.02,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Reset and weaker hardware; management expects FY27 gaming return to growth but first quarter content decline. Base annual-4% is an explicit independent disagreement; excludes unproven launch uplift. base FY2028 annual recognized revenue growth 2%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "base",
+    "rationale": "Reset and weaker hardware; management expects FY27 gaming return to growth but first quarter content decline. Base annual-4% is an explicit independent disagreement; excludes unproven launch uplift. base FY2028 annual recognized revenue growth 2%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_82_xbox_growth_base_2028"
+    ]
+  },
+  {
+    "parameter_id": "xbox_growth_base_2029",
+    "kind": "analyst_assumption",
+    "value": 0.04,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Reset and weaker hardware; management expects FY27 gaming return to growth but first quarter content decline. Base annual-4% is an explicit independent disagreement; excludes unproven launch uplift. base FY2029 annual recognized revenue growth 4%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "base",
+    "rationale": "Reset and weaker hardware; management expects FY27 gaming return to growth but first quarter content decline. Base annual-4% is an explicit independent disagreement; excludes unproven launch uplift. base FY2029 annual recognized revenue growth 4%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_83_xbox_growth_base_2029"
+    ]
+  },
+  {
+    "parameter_id": "xbox_growth_high_2027",
+    "kind": "analyst_assumption",
+    "value": 0.02,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Reset and weaker hardware; management expects FY27 gaming return to growth but first quarter content decline. Base annual-4% is an explicit independent disagreement; excludes unproven launch uplift. high FY2027 annual recognized revenue growth 2%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "high",
+    "rationale": "Reset and weaker hardware; management expects FY27 gaming return to growth but first quarter content decline. Base annual-4% is an explicit independent disagreement; excludes unproven launch uplift. high FY2027 annual recognized revenue growth 2%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_84_xbox_growth_high_2027"
+    ]
+  },
+  {
+    "parameter_id": "xbox_growth_high_2028",
+    "kind": "analyst_assumption",
+    "value": 0.08,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Reset and weaker hardware; management expects FY27 gaming return to growth but first quarter content decline. Base annual-4% is an explicit independent disagreement; excludes unproven launch uplift. high FY2028 annual recognized revenue growth 8%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "high",
+    "rationale": "Reset and weaker hardware; management expects FY27 gaming return to growth but first quarter content decline. Base annual-4% is an explicit independent disagreement; excludes unproven launch uplift. high FY2028 annual recognized revenue growth 8%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_85_xbox_growth_high_2028"
+    ]
+  },
+  {
+    "parameter_id": "xbox_growth_high_2029",
+    "kind": "analyst_assumption",
+    "value": 0.08,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Reset and weaker hardware; management expects FY27 gaming return to growth but first quarter content decline. Base annual-4% is an explicit independent disagreement; excludes unproven launch uplift. high FY2029 annual recognized revenue growth 8%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "high",
+    "rationale": "Reset and weaker hardware; management expects FY27 gaming return to growth but first quarter content decline. Base annual-4% is an explicit independent disagreement; excludes unproven launch uplift. high FY2029 annual recognized revenue growth 8%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_86_xbox_growth_high_2029"
+    ]
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_base",
+    "kind": "reported_fact",
+    "value": 17087,
+    "unit": "USD million",
+    "period": "FY2026",
+    "definition": "Windows OEM and devices external annual recognized revenue restated on FY27 perimeter",
+    "dimension": "revenue",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": null,
+    "rationale": "Windows OEM and devices external annual recognized revenue restated on FY27 perimeter",
+    "claim_ids": [
+      "claim_88_windows_oem_and_devices_base"
+    ],
+    "currency": "USD",
+    "scale": "million"
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_low_2027",
+    "kind": "analyst_assumption",
+    "value": -0.23,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Higher component prices, inventory and end-support comparable drive FY27 high-teens decline; stabilization years2-3 is conditional, not management commitment. low FY2027 annual recognized revenue growth -23%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "low",
+    "rationale": "Higher component prices, inventory and end-support comparable drive FY27 high-teens decline; stabilization years2-3 is conditional, not management commitment. low FY2027 annual recognized revenue growth -23%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_89_windows_oem_and_devices_growth_low_2027"
+    ]
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_low_2028",
+    "kind": "analyst_assumption",
+    "value": -0.1,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Higher component prices, inventory and end-support comparable drive FY27 high-teens decline; stabilization years2-3 is conditional, not management commitment. low FY2028 annual recognized revenue growth -10%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "low",
+    "rationale": "Higher component prices, inventory and end-support comparable drive FY27 high-teens decline; stabilization years2-3 is conditional, not management commitment. low FY2028 annual recognized revenue growth -10%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_90_windows_oem_and_devices_growth_low_2028"
+    ]
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_low_2029",
+    "kind": "analyst_assumption",
+    "value": -0.05,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Higher component prices, inventory and end-support comparable drive FY27 high-teens decline; stabilization years2-3 is conditional, not management commitment. low FY2029 annual recognized revenue growth -5%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "low",
+    "rationale": "Higher component prices, inventory and end-support comparable drive FY27 high-teens decline; stabilization years2-3 is conditional, not management commitment. low FY2029 annual recognized revenue growth -5%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_91_windows_oem_and_devices_growth_low_2029"
+    ]
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_base_2027",
+    "kind": "analyst_assumption",
+    "value": -0.18,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Higher component prices, inventory and end-support comparable drive FY27 high-teens decline; stabilization years2-3 is conditional, not management commitment. base FY2027 annual recognized revenue growth -18%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "base",
+    "rationale": "Higher component prices, inventory and end-support comparable drive FY27 high-teens decline; stabilization years2-3 is conditional, not management commitment. base FY2027 annual recognized revenue growth -18%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_92_windows_oem_and_devices_growth_base_2027"
+    ]
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_base_2028",
+    "kind": "analyst_assumption",
+    "value": -0.03,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Higher component prices, inventory and end-support comparable drive FY27 high-teens decline; stabilization years2-3 is conditional, not management commitment. base FY2028 annual recognized revenue growth -3%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "base",
+    "rationale": "Higher component prices, inventory and end-support comparable drive FY27 high-teens decline; stabilization years2-3 is conditional, not management commitment. base FY2028 annual recognized revenue growth -3%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_93_windows_oem_and_devices_growth_base_2028"
+    ]
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_base_2029",
+    "kind": "analyst_assumption",
+    "value": 0,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Higher component prices, inventory and end-support comparable drive FY27 high-teens decline; stabilization years2-3 is conditional, not management commitment. base FY2029 annual recognized revenue growth 0%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "base",
+    "rationale": "Higher component prices, inventory and end-support comparable drive FY27 high-teens decline; stabilization years2-3 is conditional, not management commitment. base FY2029 annual recognized revenue growth 0%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_94_windows_oem_and_devices_growth_base_2029"
+    ]
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_high_2027",
+    "kind": "analyst_assumption",
+    "value": -0.13,
+    "unit": "ratio",
+    "period": "FY2027",
+    "definition": "Higher component prices, inventory and end-support comparable drive FY27 high-teens decline; stabilization years2-3 is conditional, not management commitment. high FY2027 annual recognized revenue growth -13%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "high",
+    "rationale": "Higher component prices, inventory and end-support comparable drive FY27 high-teens decline; stabilization years2-3 is conditional, not management commitment. high FY2027 annual recognized revenue growth -13%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_95_windows_oem_and_devices_growth_high_2027"
+    ]
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_high_2028",
+    "kind": "analyst_assumption",
+    "value": 0.03,
+    "unit": "ratio",
+    "period": "FY2028",
+    "definition": "Higher component prices, inventory and end-support comparable drive FY27 high-teens decline; stabilization years2-3 is conditional, not management commitment. high FY2028 annual recognized revenue growth 3%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "high",
+    "rationale": "Higher component prices, inventory and end-support comparable drive FY27 high-teens decline; stabilization years2-3 is conditional, not management commitment. high FY2028 annual recognized revenue growth 3%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_96_windows_oem_and_devices_growth_high_2028"
+    ]
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_high_2029",
+    "kind": "analyst_assumption",
+    "value": 0.05,
+    "unit": "ratio",
+    "period": "FY2029",
+    "definition": "Higher component prices, inventory and end-support comparable drive FY27 high-teens decline; stabilization years2-3 is conditional, not management commitment. high FY2029 annual recognized revenue growth 5%; a research assumption, not source guidance.",
+    "dimension": "ratio",
+    "time_basis": "annual",
+    "source_ids": [
+      "src_presentation"
+    ],
+    "scenario": "high",
+    "rationale": "Higher component prices, inventory and end-support comparable drive FY27 high-teens decline; stabilization years2-3 is conditional, not management commitment. high FY2029 annual recognized revenue growth 5%; a research assumption, not source guidance.",
+    "claim_ids": [
+      "claim_97_windows_oem_and_devices_growth_high_2029"
+    ]
+  }
+]

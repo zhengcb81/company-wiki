@@ -1,0 +1,1517 @@
+{
+  "timestamp_utc": "2026-10-08T08:59:44.447955+00:00",
+  "old_all_files_including_sealed_v3": "UNCHANGED",
+  "protected_count": 188,
+  "checks": [
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\annual_2024_cover.png",
+      "bytes": 155489,
+      "sha256": "c4fb241510872edf921a9b4b94e90600336e472a9718b3cad1f6f43e35501c8e",
+      "after_bytes": 155489,
+      "after_sha256": "c4fb241510872edf921a9b4b94e90600336e472a9718b3cad1f6f43e35501c8e",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\annual_2024_pages.json",
+      "bytes": 489149,
+      "sha256": "54c0415ecced69425716bd601cde01a4de55a3e785ea8b5a00ea8601b89d68e3",
+      "after_bytes": 489149,
+      "after_sha256": "54c0415ecced69425716bd601cde01a4de55a3e785ea8b5a00ea8601b89d68e3",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\annual_2025_pages.json",
+      "bytes": 495087,
+      "sha256": "a7083f3f9903a1737e9324f4c7a6560c5edf4a4899f0a029e74805f638614d1c",
+      "after_bytes": 495087,
+      "after_sha256": "a7083f3f9903a1737e9324f4c7a6560c5edf4a4899f0a029e74805f638614d1c",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\corporate_overview_20260916.pdf",
+      "bytes": 1676729,
+      "sha256": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+      "after_bytes": 1676729,
+      "after_sha256": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\corporate_overview_pages.json",
+      "bytes": 23864,
+      "sha256": "8f627606a5f719059a3618d38123608b7d157ca9cc77c50c9ec52a5144d5729e",
+      "after_bytes": 23864,
+      "after_sha256": "8f627606a5f719059a3618d38123608b7d157ca9cc77c50c9ec52a5144d5729e",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast-v1.json",
+      "bytes": 429594,
+      "sha256": "6796b643ec444950eed608f3e87250931b92d0c2f13d0aa27d8a922ea9a5c220",
+      "after_bytes": 429594,
+      "after_sha256": "6796b643ec444950eed608f3e87250931b92d0c2f13d0aa27d8a922ea9a5c220",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast-v1.md",
+      "bytes": 57816,
+      "sha256": "48c412c766ffe8d3da359e52f2e25762584b520c36d0cfad8debaa4871a4ca99",
+      "after_bytes": 57816,
+      "after_sha256": "48c412c766ffe8d3da359e52f2e25762584b520c36d0cfad8debaa4871a4ca99",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast.json",
+      "bytes": 428931,
+      "sha256": "1c10deb1b93769632c553e51155def18afb4b1adfe8331c0eb511d52478ab3de",
+      "after_bytes": 428931,
+      "after_sha256": "1c10deb1b93769632c553e51155def18afb4b1adfe8331c0eb511d52478ab3de",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast.md",
+      "bytes": 58089,
+      "sha256": "1d152804ffd09e4e7b0d49215563a097a09b569e0af70e35cd91d30ffba1823b",
+      "after_bytes": 58089,
+      "after_sha256": "1d152804ffd09e4e7b0d49215563a097a09b569e0af70e35cd91d30ffba1823b",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input-v1.json",
+      "bytes": 192717,
+      "sha256": "da71c4b0787861c29f40369dd457799e3925e9d65f215e6cb2c546f2c2509e74",
+      "after_bytes": 192717,
+      "after_sha256": "da71c4b0787861c29f40369dd457799e3925e9d65f215e6cb2c546f2c2509e74",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input.json",
+      "bytes": 192154,
+      "sha256": "13078fd040fefcc8382f9ddd43d0044821aaf3bcfaecd80f36615cefb14476f1",
+      "after_bytes": 192154,
+      "after_sha256": "13078fd040fefcc8382f9ddd43d0044821aaf3bcfaecd80f36615cefb14476f1",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\interim_2026_official.pdf",
+      "bytes": 5135808,
+      "sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "after_bytes": 5135808,
+      "after_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\interim_2026_official_pages.json",
+      "bytes": 213250,
+      "sha256": "bf8085cf67605d6830e870676626e9e61a460c6bf1852dd7a329ef1a68847ba9",
+      "after_bytes": 213250,
+      "after_sha256": "bf8085cf67605d6830e870676626e9e61a460c6bf1852dd7a329ef1a68847ba9",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\netease_2q2026.html",
+      "bytes": 909908,
+      "sha256": "ba4cd2d0507d5d3211d642a8f6d45aba11e0ac245f5757d58e525223ebde4c98",
+      "after_bytes": 909908,
+      "after_sha256": "ba4cd2d0507d5d3211d642a8f6d45aba11e0ac245f5757d58e525223ebde4c98",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\presentation_2q2026.pdf",
+      "bytes": 987,
+      "sha256": "0b749a74c4e5af449a27c76c69cff824e525794e14d5fbe0bfee927e6013029b",
+      "after_bytes": 987,
+      "after_sha256": "0b749a74c4e5af449a27c76c69cff824e525794e14d5fbe0bfee927e6013029b",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\publications.jsonl",
+      "bytes": 4634,
+      "sha256": "00265bb86cad76ece54247b7e2d26a8c2ba0b9fd2255b9cdc2cdf44a798adaf9",
+      "after_bytes": 4634,
+      "after_sha256": "00265bb86cad76ece54247b7e2d26a8c2ba0b9fd2255b9cdc2cdf44a798adaf9",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\results_2q2026.pdf",
+      "bytes": 412297,
+      "sha256": "64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+      "after_bytes": 412297,
+      "after_sha256": "64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\results_2q2026_pages.json",
+      "bytes": 24573,
+      "sha256": "c221750ae71480f6f918a3e358844a56c015f1f70194faac20a558e4f6a618a0",
+      "after_bytes": 24573,
+      "after_sha256": "c221750ae71480f6f918a3e358844a56c015f1f70194faac20a558e4f6a618a0",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\snapshot-v2.json",
+      "bytes": 651923,
+      "sha256": "688de832c85f3eaf8a70957549b4c6a0afc006c65f203a05f480612eb1d0e794",
+      "after_bytes": 651923,
+      "after_sha256": "688de832c85f3eaf8a70957549b4c6a0afc006c65f203a05f480612eb1d0e794",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\snapshot.json",
+      "bytes": 653289,
+      "sha256": "879b70b7fb84faaaf50e2d41cc9f428b9ed0118f302e3b27a0ee68ef3bcaff94",
+      "after_bytes": 653289,
+      "after_sha256": "879b70b7fb84faaaf50e2d41cc9f428b9ed0118f302e3b27a0ee68ef3bcaff94",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\template.json",
+      "bytes": 88188,
+      "sha256": "3702539c8ed026199bce7599cfe1d2097d60de7e14c67a156856be9f1a70656a",
+      "after_bytes": 88188,
+      "after_sha256": "3702539c8ed026199bce7599cfe1d2097d60de7e14c67a156856be9f1a70656a",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\template_growth.json",
+      "bytes": 86928,
+      "sha256": "87551edf4b538171b7b5b51177f0dca2b4537eddc7d70c72398bbd7a7cde53d7",
+      "after_bytes": 86928,
+      "after_sha256": "87551edf4b538171b7b5b51177f0dca2b4537eddc7d70c72398bbd7a7cde53d7",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\tencent_announcements_index.html",
+      "bytes": 184217,
+      "sha256": "93782c3b7eb7a3558113b07c8ffd32f07ead78ad08d80331db9d8563571f6156",
+      "after_bytes": 184217,
+      "after_sha256": "93782c3b7eb7a3558113b07c8ffd32f07ead78ad08d80331db9d8563571f6156",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\tencent_results_index.html",
+      "bytes": 186626,
+      "sha256": "e7ac34c8e6826016c6b6a482ab6fa658328492ab67d88268c4e8bd8476714559",
+      "after_bytes": 186626,
+      "after_sha256": "e7ac34c8e6826016c6b6a482ab6fa658328492ab67d88268c4e8bd8476714559",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\TRUST_BOUNDARY.md",
+      "bytes": 767,
+      "sha256": "ee2b7aa34132f3d50c31bef90441375f8ba258c4b7db54afc82d680eaf7f1a66",
+      "after_bytes": 767,
+      "after_sha256": "ee2b7aa34132f3d50c31bef90441375f8ba258c4b7db54afc82d680eaf7f1a66",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\review-HK-00700-rf_hk_independent_review-v3\\cli.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\review-HK-00700-rf_hk_independent_review-v3\\cli.stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\review-HK-00700-rf_hk_independent_review-v3\\forecast.json",
+      "bytes": 1094149,
+      "sha256": "3ea402d2494e1a754de8cb1f406797d1d3f366622d4c3c6cc8621d18a7524f61",
+      "after_bytes": 1094149,
+      "after_sha256": "3ea402d2494e1a754de8cb1f406797d1d3f366622d4c3c6cc8621d18a7524f61",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\review-HK-00700-rf_hk_independent_review-v3\\forecast.md",
+      "bytes": 170196,
+      "sha256": "cf4ea50602e2ad79037e666ee6e390421fe5b1f6d57f46dfa9c87c55e176a7d5",
+      "after_bytes": 170196,
+      "after_sha256": "cf4ea50602e2ad79037e666ee6e390421fe5b1f6d57f46dfa9c87c55e176a7d5",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\review-HK-00700-rf_hk_independent_review-v3\\input.json",
+      "bytes": 524854,
+      "sha256": "c791b85406f62552e9eb9cba2a1adf8cbf36447ff432164c9e53a8426814fc87",
+      "after_bytes": 524854,
+      "after_sha256": "c791b85406f62552e9eb9cba2a1adf8cbf36447ff432164c9e53a8426814fc87",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\review-HK-00700-rf_hk_independent_review-v3\\publications.jsonl",
+      "bytes": 710,
+      "sha256": "223fb5a410ea36b751b57e898c1e90a565ed8bcae95ee05175bab0164f6fe7dc",
+      "after_bytes": 710,
+      "after_sha256": "223fb5a410ea36b751b57e898c1e90a565ed8bcae95ee05175bab0164f6fe7dc",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\context_inventory.json",
+      "bytes": 61525,
+      "sha256": "4b3cf75d053ebad5ff0c55d6bbc09d69a27b49464e947d3e5528e3fc2c3cafd9",
+      "after_bytes": 61525,
+      "after_sha256": "4b3cf75d053ebad5ff0c55d6bbc09d69a27b49464e947d3e5528e3fc2c3cafd9",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\forecast.json",
+      "bytes": 1094149,
+      "sha256": "3ea402d2494e1a754de8cb1f406797d1d3f366622d4c3c6cc8621d18a7524f61",
+      "after_bytes": 1094149,
+      "after_sha256": "3ea402d2494e1a754de8cb1f406797d1d3f366622d4c3c6cc8621d18a7524f61",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\forecast.md",
+      "bytes": 170196,
+      "sha256": "cf4ea50602e2ad79037e666ee6e390421fe5b1f6d57f46dfa9c87c55e176a7d5",
+      "after_bytes": 170196,
+      "after_sha256": "cf4ea50602e2ad79037e666ee6e390421fe5b1f6d57f46dfa9c87c55e176a7d5",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\FY2025_page_1_visual.png",
+      "bytes": 329629,
+      "sha256": "828d4fa6241f9e21bac3ece50db278819394b74e6b5be3c0a66f951655c0aeb2",
+      "after_bytes": 329629,
+      "after_sha256": "828d4fa6241f9e21bac3ece50db278819394b74e6b5be3c0a66f951655c0aeb2",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\FY2025_page_4_visual.png",
+      "bytes": 184195,
+      "sha256": "874d39e45fcf76c60303509b8ec92e0a2e2fd3c26e86f9aaf1d9d15749eafc0d",
+      "after_bytes": 184195,
+      "after_sha256": "874d39e45fcf76c60303509b8ec92e0a2e2fd3c26e86f9aaf1d9d15749eafc0d",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\input.json",
+      "bytes": 524854,
+      "sha256": "c791b85406f62552e9eb9cba2a1adf8cbf36447ff432164c9e53a8426814fc87",
+      "after_bytes": 524854,
+      "after_sha256": "c791b85406f62552e9eb9cba2a1adf8cbf36447ff432164c9e53a8426814fc87",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\official_auth_0.bin",
+      "bytes": 2057,
+      "sha256": "1d56c1549bda2f9f71b9a6cb09f771c361f1a2d340cadc46053bb55db0c56a2b",
+      "after_bytes": 2057,
+      "after_sha256": "1d56c1549bda2f9f71b9a6cb09f771c361f1a2d340cadc46053bb55db0c56a2b",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\official_auth_1.bin",
+      "bytes": 193637,
+      "sha256": "a15d020198d688deaff63f47610e18951a71382d70e377623e3e4da101fb6fa0",
+      "after_bytes": 193637,
+      "after_sha256": "a15d020198d688deaff63f47610e18951a71382d70e377623e3e4da101fb6fa0",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\official_auth_2.bin",
+      "bytes": 982,
+      "sha256": "0bffc0570f8c2322d91b9c694c3107e0ef84e98624bc263f9f94e71f751173ca",
+      "after_bytes": 982,
+      "after_sha256": "0bffc0570f8c2322d91b9c694c3107e0ef84e98624bc263f9f94e71f751173ca",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\publications.jsonl",
+      "bytes": 2286,
+      "sha256": "596fcf974f7174f714e400478394626b1868d92a3ac2c3501b17d5ff042c146b",
+      "after_bytes": 2286,
+      "after_sha256": "596fcf974f7174f714e400478394626b1868d92a3ac2c3501b17d5ff042c146b",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\snapshot.json",
+      "bytes": 1686000,
+      "sha256": "20c2657a8f2bfeb2d999665c7219a0164f93bb5f9feb38689f0376ff997573d2",
+      "after_bytes": 1686000,
+      "after_sha256": "20c2657a8f2bfeb2d999665c7219a0164f93bb5f9feb38689f0376ff997573d2",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\after_protected_and_runtime.json",
+      "bytes": 41406,
+      "sha256": "47c95feeb4d01fb029024f4e0b5d789c72ae26d659d10dfa431c11238275e144",
+      "after_bytes": 41406,
+      "after_sha256": "47c95feeb4d01fb029024f4e0b5d789c72ae26d659d10dfa431c11238275e144",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\after_v3_integrity.json",
+      "bytes": 63135,
+      "sha256": "5fb1f63665643518b3a294ec268e5f278fa192ff8f2840d8a1abe9a685ec0783",
+      "after_bytes": 63135,
+      "after_sha256": "5fb1f63665643518b3a294ec268e5f278fa192ff8f2840d8a1abe9a685ec0783",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\annual-2024-1791443168017116000.response.json",
+      "bytes": 4599,
+      "sha256": "e24adec17e1af26e1e6c84eafeb6457535e250de0738a8c9994573044815f593",
+      "after_bytes": 4599,
+      "after_sha256": "e24adec17e1af26e1e6c84eafeb6457535e250de0738a8c9994573044815f593",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\annual-2024-1791443168017116000.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\annual-2024.source.json",
+      "bytes": 4599,
+      "sha256": "e24adec17e1af26e1e6c84eafeb6457535e250de0738a8c9994573044815f593",
+      "after_bytes": 4599,
+      "after_sha256": "e24adec17e1af26e1e6c84eafeb6457535e250de0738a8c9994573044815f593",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\annual-2025-1791443142289657200.response.json",
+      "bytes": 4599,
+      "sha256": "47345cac63c01526cabb8de04888c0653cc4ae2ae2fd58c9899621bdf78ad72a",
+      "after_bytes": 4599,
+      "after_sha256": "47345cac63c01526cabb8de04888c0653cc4ae2ae2fd58c9899621bdf78ad72a",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\annual-2025-1791443142289657200.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\annual-2025-1791443836885749200.response.json",
+      "bytes": 4599,
+      "sha256": "ac41c91f87b34bd8fbffffaec68fc5babd6324489996428e4b2ac0ffa230a878",
+      "after_bytes": 4599,
+      "after_sha256": "ac41c91f87b34bd8fbffffaec68fc5babd6324489996428e4b2ac0ffa230a878",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\annual-2025-1791443836885749200.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\annual-2025.source.json",
+      "bytes": 4599,
+      "sha256": "ac41c91f87b34bd8fbffffaec68fc5babd6324489996428e4b2ac0ffa230a878",
+      "after_bytes": 4599,
+      "after_sha256": "ac41c91f87b34bd8fbffffaec68fc5babd6324489996428e4b2ac0ffa230a878",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\before.json",
+      "bytes": 15785,
+      "sha256": "1bda4bc28dcff7042a6aae3df9670d6b75a012f6c0af168b42f9368f26479c99",
+      "after_bytes": 15785,
+      "after_sha256": "1bda4bc28dcff7042a6aae3df9670d6b75a012f6c0af168b42f9368f26479c99",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\before_v3.json",
+      "bytes": 37904,
+      "sha256": "74884bbbc771e8c73772cf56689886eb5a4e1a6d23eca5fb0010ec7fc9ca3094",
+      "after_bytes": 37904,
+      "after_sha256": "74884bbbc771e8c73772cf56689886eb5a4e1a6d23eca5fb0010ec7fc9ca3094",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\bootstrap.py",
+      "bytes": 2905,
+      "sha256": "b24b80ce1174747d36b8701af837bfa44d72f7ebbd20594c5775fe9446485716",
+      "after_bytes": 2905,
+      "after_sha256": "b24b80ce1174747d36b8701af837bfa44d72f7ebbd20594c5775fe9446485716",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\build_input.py",
+      "bytes": 29686,
+      "sha256": "e67565de70ceabcf17e104fbcebe3751b769943d2b3a3e965471dce9efa9f7fb",
+      "after_bytes": 29686,
+      "after_sha256": "e67565de70ceabcf17e104fbcebe3751b769943d2b3a3e965471dce9efa9f7fb",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\capture_supplemental.py",
+      "bytes": 3529,
+      "sha256": "f0bf0056fe7c704718d0027e9845ddf3cdc62d719b4c7abf9f92fc4df25dd57c",
+      "after_bytes": 3529,
+      "after_sha256": "f0bf0056fe7c704718d0027e9845ddf3cdc62d719b4c7abf9f92fc4df25dd57c",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\communication_coverage.json",
+      "bytes": 4567,
+      "sha256": "46b1be05d3d98a58d5356d551746c483424fac68c18bf222f28399f328166059",
+      "after_bytes": 4567,
+      "after_sha256": "46b1be05d3d98a58d5356d551746c483424fac68c18bf222f28399f328166059",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\db_readonly_documents.json",
+      "bytes": 2773,
+      "sha256": "4c4ccfbb0d11f2238fc2ea7c130682559c75c460e31ab539ee209e856b3055ec",
+      "after_bytes": 2773,
+      "after_sha256": "4c4ccfbb0d11f2238fc2ea7c130682559c75c460e31ab539ee209e856b3055ec",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\delivery_verification.json",
+      "bytes": 10559,
+      "sha256": "58c376e0602f97420d79f7bdc14afceda17367f9ec3be64a9f5d127292a46040",
+      "after_bytes": 10559,
+      "after_sha256": "58c376e0602f97420d79f7bdc14afceda17367f9ec3be64a9f5d127292a46040",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\deterministic_local_parse.json",
+      "bytes": 1481,
+      "sha256": "4c9380ba77c404d681ff6d3f899a3e7df8b7286260bc649e9d277e7e46a3d461",
+      "after_bytes": 1481,
+      "after_sha256": "4c9380ba77c404d681ff6d3f899a3e7df8b7286260bc649e9d277e7e46a3d461",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\execution_report.md",
+      "bytes": 4086,
+      "sha256": "9be47dbf32deea89a9ae36152127ff6d533fb6e76827e86eba769a5d140a5788",
+      "after_bytes": 4086,
+      "after_sha256": "9be47dbf32deea89a9ae36152127ff6d533fb6e76827e86eba769a5d140a5788",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\fact_checks.json",
+      "bytes": 148053,
+      "sha256": "f382a0dea3b8ea32916d026bdea07866a4aeaedcfeeb090d1258def44085df2a",
+      "after_bytes": 148053,
+      "after_sha256": "f382a0dea3b8ea32916d026bdea07866a4aeaedcfeeb090d1258def44085df2a",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\fact_checks_v3.json",
+      "bytes": 558939,
+      "sha256": "b586e07cc2ed164620608fdb97efaf08cf18e6e57e3fc8040aa1307841dc3d70",
+      "after_bytes": 558939,
+      "after_sha256": "b586e07cc2ed164620608fdb97efaf08cf18e6e57e3fc8040aa1307841dc3d70",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\ff_diagnostics.py",
+      "bytes": 1830,
+      "sha256": "d3aab0bb8e09bb27fb3c632e91030293b56350c4f619d3a50d83dc88efa04420",
+      "after_bytes": 1830,
+      "after_sha256": "d3aab0bb8e09bb27fb3c632e91030293b56350c4f619d3a50d83dc88efa04420",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\ff_latest_companion.response.json",
+      "bytes": 1145,
+      "sha256": "6ab0101085c769181519e8dde4c26985b591ae8659198ce2673c878c665d78db",
+      "after_bytes": 1145,
+      "after_sha256": "6ab0101085c769181519e8dde4c26985b591ae8659198ce2673c878c665d78db",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\ff_latest_companion.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\finalize_manifest.py",
+      "bytes": 17102,
+      "sha256": "18c3255975d688a3f8ecd17c86c6152eed94ddfb93128e38ba28dda88808cb0f",
+      "after_bytes": 17102,
+      "after_sha256": "18c3255975d688a3f8ecd17c86c6152eed94ddfb93128e38ba28dda88808cb0f",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\forecast-1791443964659685100.response.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\forecast-1791443964659685100.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\forecast-1791444286110906100.response.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\forecast-1791444286110906100.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\hash-1791443832331404500.response.json",
+      "bytes": 19,
+      "sha256": "0b734000cdad4cb52cea6f0d8acdbe756f6f73bda3664320118df51e6fa6c8d4",
+      "after_bytes": 19,
+      "after_sha256": "0b734000cdad4cb52cea6f0d8acdbe756f6f73bda3664320118df51e6fa6c8d4",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\hash-1791443832331404500.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\interim-2026-1791443331318341000.response.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\interim-2026-1791443331318341000.stderr.txt",
+      "bytes": 165,
+      "sha256": "0da3c0bbe796b46158382801e8fde7595e0e10d678e662bc7cebf5ee7c28643a",
+      "after_bytes": 165,
+      "after_sha256": "0da3c0bbe796b46158382801e8fde7595e0e10d678e662bc7cebf5ee7c28643a",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\ir_capture_receipt.json",
+      "bytes": 904,
+      "sha256": "ac39afd1369c0682aae975996c7f00385e474fb003c5602490929f27b77f2bfb",
+      "after_bytes": 904,
+      "after_sha256": "ac39afd1369c0682aae975996c7f00385e474fb003c5602490929f27b77f2bfb",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\lint-1791443831971830800.response.json",
+      "bytes": 17,
+      "sha256": "4f878d68373c7caf9f6f2d03ece09363de58578a5601dc01fa9f5b88f9ad9d2b",
+      "after_bytes": 17,
+      "after_sha256": "4f878d68373c7caf9f6f2d03ece09363de58578a5601dc01fa9f5b88f9ad9d2b",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\lint-1791443831971830800.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\manifest.json",
+      "bytes": 31389,
+      "sha256": "0dec67f2c9e4a08499c05d94cc5b343763322dbe5f9d73e47bfb3825b4055b96",
+      "after_bytes": 31389,
+      "after_sha256": "0dec67f2c9e4a08499c05d94cc5b343763322dbe5f9d73e47bfb3825b4055b96",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\manifest_v3.json",
+      "bytes": 10102,
+      "sha256": "61add4702bddef07c0a921dc4b0fff71b33fff06dcd2c403be726c8f5a10fb95",
+      "after_bytes": 10102,
+      "after_sha256": "61add4702bddef07c0a921dc4b0fff71b33fff06dcd2c403be726c8f5a10fb95",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\model_research_decisions.json",
+      "bytes": 2580,
+      "sha256": "4b1dea70777fc9769770cd5bd13ba26bedb1ccc2bd4abf91c2d4ec516946aa06",
+      "after_bytes": 2580,
+      "after_sha256": "4b1dea70777fc9769770cd5bd13ba26bedb1ccc2bd4abf91c2d4ec516946aa06",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+      "bytes": 39385,
+      "sha256": "b707cdc21dcee29cbdd8027cec6b39094daf3d761af16c64b27d2e8dcc56c8cc",
+      "after_bytes": 39385,
+      "after_sha256": "b707cdc21dcee29cbdd8027cec6b39094daf3d761af16c64b27d2e8dcc56c8cc",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.md",
+      "bytes": 7406,
+      "sha256": "11f651bc9083691f9eeec2592c4c956325a37fcab03dc496de9b4f47feaacac6",
+      "after_bytes": 7406,
+      "after_sha256": "11f651bc9083691f9eeec2592c4c956325a37fcab03dc496de9b4f47feaacac6",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_annual_2024.json",
+      "bytes": 246,
+      "sha256": "03f358bff55873dfbd27f60b56c1381c2785e87754fb9e12f835cc8b21585bf4",
+      "after_bytes": 246,
+      "after_sha256": "03f358bff55873dfbd27f60b56c1381c2785e87754fb9e12f835cc8b21585bf4",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_annual_2024_no_language.json",
+      "bytes": 225,
+      "sha256": "19613b0849cfea4aae2f167d62c60e64392a125dea365681ebc1c08b505f2712",
+      "after_bytes": 225,
+      "after_sha256": "19613b0849cfea4aae2f167d62c60e64392a125dea365681ebc1c08b505f2712",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_annual_2025.json",
+      "bytes": 361,
+      "sha256": "cf2b45077123de5bfeb80a678abbd510eca893399062b2f66dd7979c806e96ab",
+      "after_bytes": 361,
+      "after_sha256": "cf2b45077123de5bfeb80a678abbd510eca893399062b2f66dd7979c806e96ab",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_annual_2025_no_language.json",
+      "bytes": 340,
+      "sha256": "433ab83b1a74294d67994fd496cdba89e1b9a0c1601c0e2e7573c5d3a0721bc9",
+      "after_bytes": 340,
+      "after_sha256": "433ab83b1a74294d67994fd496cdba89e1b9a0c1601c0e2e7573c5d3a0721bc9",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_ff_annual2025_companion2026q2.json",
+      "bytes": 474,
+      "sha256": "95871685cb12f4790ce4080e841c2e8be1136eb1f3d4d2144ec3657cedb4c2e1",
+      "after_bytes": 474,
+      "after_sha256": "95871685cb12f4790ce4080e841c2e8be1136eb1f3d4d2144ec3657cedb4c2e1",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_interim_2026.json",
+      "bytes": 516,
+      "sha256": "e3950ae826a09df31d926f0cff97cbe37d83e11c0f2d98e7f7de5445e38b8481",
+      "after_bytes": 516,
+      "after_sha256": "e3950ae826a09df31d926f0cff97cbe37d83e11c0f2d98e7f7de5445e38b8481",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_interim_2026_no_language.json",
+      "bytes": 495,
+      "sha256": "e170322c84d438d8ce6e6e52ba2fb158afd067f747d74db5dbd78ca03f6074b7",
+      "after_bytes": 495,
+      "after_sha256": "e170322c84d438d8ce6e6e52ba2fb158afd067f747d74db5dbd78ca03f6074b7",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\research_tools.py",
+      "bytes": 4362,
+      "sha256": "8a220d8d208a88f4c99eed1176499395e11e866b7bd0f9bb9a18581b25c5724f",
+      "after_bytes": 4362,
+      "after_sha256": "8a220d8d208a88f4c99eed1176499395e11e866b7bd0f9bb9a18581b25c5724f",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\run_step.py",
+      "bytes": 5260,
+      "sha256": "17bd504f453aa0052af7e871fad2497caf8b7899969c4f3750cb0024bf19db33",
+      "after_bytes": 5260,
+      "after_sha256": "17bd504f453aa0052af7e871fad2497caf8b7899969c4f3750cb0024bf19db33",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\skill_step_matrix.json",
+      "bytes": 4068,
+      "sha256": "c3e30dde344e8d3c885d08b3a6c49c7af4b325b8a59fd5c4f45a325768cab740",
+      "after_bytes": 4068,
+      "after_sha256": "c3e30dde344e8d3c885d08b3a6c49c7af4b325b8a59fd5c4f45a325768cab740",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\skill_step_matrix_v3.json",
+      "bytes": 10276,
+      "sha256": "572808592bf076e9d615deae184c716ac6f1313b3da3fcf914d4bbf5017b5a09",
+      "after_bytes": 10276,
+      "after_sha256": "572808592bf076e9d615deae184c716ac6f1313b3da3fcf914d4bbf5017b5a09",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\snapshot-1791443965648842800.response.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\snapshot-1791443965648842800.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\snapshot-v2-1791444287121498700.response.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\snapshot-v2-1791444287121498700.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2024.request.json",
+      "bytes": 1091,
+      "sha256": "2f8c503c2259afcea4778e81a78e684a2f5e6efff9673487a1bc832568a2f620",
+      "after_bytes": 1091,
+      "after_sha256": "2f8c503c2259afcea4778e81a78e684a2f5e6efff9673487a1bc832568a2f620",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2024.response.json",
+      "bytes": 307,
+      "sha256": "48553b7c0f164607285de4f694ed85f5738ac7a05bc212d9575021cbbb82f511",
+      "after_bytes": 307,
+      "after_sha256": "48553b7c0f164607285de4f694ed85f5738ac7a05bc212d9575021cbbb82f511",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2024.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2025.request.json",
+      "bytes": 1091,
+      "sha256": "f76758b592370f21f212084440888ac25c3dbe2d2568e74151b1e66a84e9b5b9",
+      "after_bytes": 1091,
+      "after_sha256": "f76758b592370f21f212084440888ac25c3dbe2d2568e74151b1e66a84e9b5b9",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2025.response.json",
+      "bytes": 307,
+      "sha256": "a9522c064349f3f40c6f4c855eb8f47869066ffe1dbda4269c52957bc853098e",
+      "after_bytes": 307,
+      "after_sha256": "a9522c064349f3f40c6f4c855eb8f47869066ffe1dbda4269c52957bc853098e",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2025.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_receipts.json",
+      "bytes": 2807,
+      "sha256": "59b758ff15859100dd0f642fc11e873f23568e9069a21f4c76f73bcedce190c4",
+      "after_bytes": 2807,
+      "after_sha256": "59b758ff15859100dd0f642fc11e873f23568e9069a21f4c76f73bcedce190c4",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_run.py",
+      "bytes": 3628,
+      "sha256": "3f80dc2eb7a804e048372acba12affee82ebb030ac23a63ee51a742a5f68fe0b",
+      "after_bytes": 3628,
+      "after_sha256": "3f80dc2eb7a804e048372acba12affee82ebb030ac23a63ee51a742a5f68fe0b",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\supplemental_capture_receipts.json",
+      "bytes": 6878,
+      "sha256": "a05cb55ce3849a352f22dd134bfc511bdd86873096e3b05287946e57aceea014",
+      "after_bytes": 6878,
+      "after_sha256": "a05cb55ce3849a352f22dd134bfc511bdd86873096e3b05287946e57aceea014",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\update_communication.py",
+      "bytes": 1850,
+      "sha256": "76f7f38fd776e2e5560947f3d301c1b2759512f69b9d40ca8bb0a5366cdfa419",
+      "after_bytes": 1850,
+      "after_sha256": "76f7f38fd776e2e5560947f3d301c1b2759512f69b9d40ca8bb0a5366cdfa419",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_audit.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_audit.stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_build.py",
+      "bytes": 20659,
+      "sha256": "fed3b276a4a1283da2f1dbb7780bbd13f952c6a83b3d5d097e8ef304ba170aea",
+      "after_bytes": 20659,
+      "after_sha256": "fed3b276a4a1283da2f1dbb7780bbd13f952c6a83b3d5d097e8ef304ba170aea",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_build.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_build.stdout.txt",
+      "bytes": 1862,
+      "sha256": "47f295ace209af9609576ba4aacd51456779fb531fd389b53daa235ceb8803f3",
+      "after_bytes": 1862,
+      "after_sha256": "47f295ace209af9609576ba4aacd51456779fb531fd389b53daa235ceb8803f3",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_claim_binding_index.json",
+      "bytes": 328931,
+      "sha256": "4b1446a7bb014605095123142a9007149c17276828d370eb9aa270ea08283893",
+      "after_bytes": 328931,
+      "after_sha256": "4b1446a7bb014605095123142a9007149c17276828d370eb9aa270ea08283893",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json",
+      "bytes": 161255,
+      "sha256": "045344a66fc6f13cc487e5081d65ee84a89b41f967ae2cdd837d9558baea0c97",
+      "after_bytes": 161255,
+      "after_sha256": "045344a66fc6f13cc487e5081d65ee84a89b41f967ae2cdd837d9558baea0c97",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_finalize.py",
+      "bytes": 21879,
+      "sha256": "36e891304ab86581f9f904e235e9396171f48ee899357d917c99628c79392318",
+      "after_bytes": 21879,
+      "after_sha256": "36e891304ab86581f9f904e235e9396171f48ee899357d917c99628c79392318",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_forecast.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_forecast.stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_hash-check.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_hash-check.stdout.txt",
+      "bytes": 19,
+      "sha256": "0b734000cdad4cb52cea6f0d8acdbe756f6f73bda3664320118df51e6fa6c8d4",
+      "after_bytes": 19,
+      "after_sha256": "0b734000cdad4cb52cea6f0d8acdbe756f6f73bda3664320118df51e6fa6c8d4",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_lint.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_lint.stdout.txt",
+      "bytes": 17,
+      "sha256": "4f878d68373c7caf9f6f2d03ece09363de58578a5601dc01fa9f5b88f9ad9d2b",
+      "after_bytes": 17,
+      "after_sha256": "4f878d68373c7caf9f6f2d03ece09363de58578a5601dc01fa9f5b88f9ad9d2b",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_official_auth.json",
+      "bytes": 2770,
+      "sha256": "312f94a8e58c79a3d432148673bbb41f3e394838a90023b444b7f19557399ed8",
+      "after_bytes": 2770,
+      "after_sha256": "312f94a8e58c79a3d432148673bbb41f3e394838a90023b444b7f19557399ed8",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_registry_integrity.json",
+      "bytes": 3272,
+      "sha256": "5b958042aad37c06acdbf5d40c511b529f1b046183836c317dd56330e6eb5142",
+      "after_bytes": 3272,
+      "after_sha256": "5b958042aad37c06acdbf5d40c511b529f1b046183836c317dd56330e6eb5142",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_run.py",
+      "bytes": 6694,
+      "sha256": "dfd5ee5a1ac89e39532d993463c3096c678628837424f02d41141eb5c34d35c6",
+      "after_bytes": 6694,
+      "after_sha256": "dfd5ee5a1ac89e39532d993463c3096c678628837424f02d41141eb5c34d35c6",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_runtime_inventory.json",
+      "bytes": 23838,
+      "sha256": "de547cbbbb8892ec9f82239a1e64c269cedfe93d2315b4c281fadaba5e382d33",
+      "after_bytes": 23838,
+      "after_sha256": "de547cbbbb8892ec9f82239a1e64c269cedfe93d2315b4c281fadaba5e382d33",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_setup.py",
+      "bytes": 2128,
+      "sha256": "08a6dfa41786142ee9c9681fe6b3c5b99fb96224d4dd372d8eda2fb1ff5431e7",
+      "after_bytes": 2128,
+      "after_sha256": "08a6dfa41786142ee9c9681fe6b3c5b99fb96224d4dd372d8eda2fb1ff5431e7",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_snapshot.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_snapshot.stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_source-facts.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_source-facts.stdout.txt",
+      "bytes": 307,
+      "sha256": "bfb2956ba85ea2f5520137be092dd09a4012ff858872287db16108509bb5fc85",
+      "after_bytes": 307,
+      "after_sha256": "bfb2956ba85ea2f5520137be092dd09a4012ff858872287db16108509bb5fc85",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_source_facts_2025.receipt.json",
+      "bytes": 1431,
+      "sha256": "80dc91e8997c6b73d9a1e06013bdd77257b4ab8e266ae58b65f3b0ab5119c546",
+      "after_bytes": 1431,
+      "after_sha256": "80dc91e8997c6b73d9a1e06013bdd77257b4ab8e266ae58b65f3b0ab5119c546",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_source_facts_2025.request.json",
+      "bytes": 1390,
+      "sha256": "307c79f4d40d5e9b27397fa1f4529f440dd60eacdc6d74ba65c64faa32bb60b7",
+      "after_bytes": 1390,
+      "after_sha256": "307c79f4d40d5e9b27397fa1f4529f440dd60eacdc6d74ba65c64faa32bb60b7",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_source_facts_producer_after.json",
+      "bytes": 4714,
+      "sha256": "fb4f4b4631a4bf4dbbc00ff39c6d12d1b522136574370f54865bf3e3c32c5422",
+      "after_bytes": 4714,
+      "after_sha256": "fb4f4b4631a4bf4dbbc00ff39c6d12d1b522136574370f54865bf3e3c32c5422",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_strong-calc.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_strong-calc.stdout.txt",
+      "bytes": 445,
+      "sha256": "0dc00407adb65da08d9783e260cddbf2fa3e98508b233f541c77701f3599f3ea",
+      "after_bytes": 445,
+      "after_sha256": "0dc00407adb65da08d9783e260cddbf2fa3e98508b233f541c77701f3599f3ea",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_validate.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_validate.stdout.txt",
+      "bytes": 7,
+      "sha256": "5be86f95bd4bb3848e802afa321452f38330ecec2d48f7a1d1cb8de4efbe7295",
+      "after_bytes": 7,
+      "after_sha256": "5be86f95bd4bb3848e802afa321452f38330ecec2d48f7a1d1cb8de4efbe7295",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_verify.py",
+      "bytes": 7656,
+      "sha256": "004302f741f54ea9a33911d182dd587c1295718e69018d236fba259dfad0d782",
+      "after_bytes": 7656,
+      "after_sha256": "004302f741f54ea9a33911d182dd587c1295718e69018d236fba259dfad0d782",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\validate-1791443869487047300.response.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\validate-1791443869487047300.stderr.txt",
+      "bytes": 1473,
+      "sha256": "939c7d18950fe593a02340df89b2134efda24b3e36c47949c57fed45abb4014a",
+      "after_bytes": 1473,
+      "after_sha256": "939c7d18950fe593a02340df89b2134efda24b3e36c47949c57fed45abb4014a",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\validate-1791443945003330500.response.json",
+      "bytes": 7,
+      "sha256": "5be86f95bd4bb3848e802afa321452f38330ecec2d48f7a1d1cb8de4efbe7295",
+      "after_bytes": 7,
+      "after_sha256": "5be86f95bd4bb3848e802afa321452f38330ecec2d48f7a1d1cb8de4efbe7295",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\validate-1791443945003330500.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_bytes": 0,
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\verify_delivery.py",
+      "bytes": 3927,
+      "sha256": "1b54fbc4471bebbd8971e167854b0f590361e1046854a87fefb0f389a18e3e12",
+      "after_bytes": 3927,
+      "after_sha256": "1b54fbc4471bebbd8971e167854b0f590361e1046854a87fefb0f389a18e3e12",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\web_action_index.json",
+      "bytes": 3095,
+      "sha256": "281b140f4d83f9369724de0fef82e1279e06fa9aa8f5a040520c002ec551a9a7",
+      "after_bytes": 3095,
+      "after_sha256": "281b140f4d83f9369724de0fef82e1279e06fa9aa8f5a040520c002ec551a9a7",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "bytes": 866,
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "after_bytes": 866,
+      "after_sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\config\\company_wiki.json",
+      "bytes": 1443,
+      "sha256": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+      "after_bytes": 1443,
+      "after_sha256": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20190726-中信建投-腾讯控股-0700.HK-如何描绘“聚变中的恒星”.pdf",
+      "bytes": 5069323,
+      "sha256": "56b9b1c6edd2ded17e9fb90f51a6401b9d4a0c05b7985bf7dd343b7451adf830",
+      "after_bytes": 5069323,
+      "after_sha256": "56b9b1c6edd2ded17e9fb90f51a6401b9d4a0c05b7985bf7dd343b7451adf830",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20200122-国信证券-腾讯控股-0700[1].HK-金融科技：引领腾讯下一个十年.pdf",
+      "bytes": 3561962,
+      "sha256": "2617cbbe35f143d9f62afd3df8907d9544edc417aee5b3ec1f46d4d7a95a0a3c",
+      "after_bytes": 3561962,
+      "after_sha256": "2617cbbe35f143d9f62afd3df8907d9544edc417aee5b3ec1f46d4d7a95a0a3c",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20200326-华创证券-海外科技互联网行业深度研究报告：复盘腾讯，股价的驱动力来自何方？.pdf",
+      "bytes": 1814308,
+      "sha256": "c117c87458f26faf3c6b08c67e191aea71b712a7c0efdcbf71906c4867474234",
+      "after_bytes": 1814308,
+      "after_sha256": "c117c87458f26faf3c6b08c67e191aea71b712a7c0efdcbf71906c4867474234",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210310-东吴证券-腾讯控股-0700.HK-解析视频号意义与商业化概览.pdf",
+      "bytes": 1959164,
+      "sha256": "d54dd6b8d31f3ae90e438d83b65fa76b016d7e84520d4f7ae648b35fbce87893",
+      "after_bytes": 1959164,
+      "after_sha256": "d54dd6b8d31f3ae90e438d83b65fa76b016d7e84520d4f7ae648b35fbce87893",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210310-招商证券-腾讯控股-0700.HK-深度探析腾讯的产品、生态、流量、商业化及增长空间.pdf",
+      "bytes": 5010221,
+      "sha256": "d3ae572246b5f3fa751ece9b9f956f6fcbaa3af9cbc4b9201848364f6437e2f7",
+      "after_bytes": 5010221,
+      "after_sha256": "d3ae572246b5f3fa751ece9b9f956f6fcbaa3af9cbc4b9201848364f6437e2f7",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210318-广发证券-腾讯控股-0700.HK-数字内容持续精进，夯实和延展“社交+内容”战略.pdf",
+      "bytes": 9770974,
+      "sha256": "c1aa48a0c43e4f820d2220a9907792a2f05ee05774804023a1d6b68addc2e221",
+      "after_bytes": 9770974,
+      "after_sha256": "c1aa48a0c43e4f820d2220a9907792a2f05ee05774804023a1d6b68addc2e221",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210323-天风证券-传媒行业腾讯专题深度一：视频号，社会里，每个人.pdf",
+      "bytes": 1422828,
+      "sha256": "05c6eac06564afc4379b5b65b2ba25f81081a47322cf866e5421af4f7fcf8692",
+      "after_bytes": 1422828,
+      "after_sha256": "05c6eac06564afc4379b5b65b2ba25f81081a47322cf866e5421af4f7fcf8692",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210526-申万宏源-腾讯控股-0700.HK-深度报告：社交与精品内容铸基，产业赋能正起步.pdf",
+      "bytes": 2894271,
+      "sha256": "faa1869d9e76a6d445df60600b82bab95951503f90be2db36b804e875f2b48fc",
+      "after_bytes": 2894271,
+      "after_sha256": "faa1869d9e76a6d445df60600b82bab95951503f90be2db36b804e875f2b48fc",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210616-西部证券-腾讯控股-0700.HK-首次覆盖：游戏增长稳健，视频号和2B业务进一步打开空间.pdf",
+      "bytes": 5265600,
+      "sha256": "45f32ea442c25478b0aa6748d6a277169773aa8a0574ce1591f3f9765fc7cc9a",
+      "after_bytes": 5265600,
+      "after_sha256": "45f32ea442c25478b0aa6748d6a277169773aa8a0574ce1591f3f9765fc7cc9a",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210715-西部证券-腾讯控股-0700.HK-跟踪报告：加大游戏研发投入，“开启”元宇宙，看好腾讯布局.pdf",
+      "bytes": 2743613,
+      "sha256": "21bd6906bd71d68230c3ed4ae13e8870a414e0bc29560682c4b4ca85cf23ce28",
+      "after_bytes": 2743613,
+      "after_sha256": "21bd6906bd71d68230c3ed4ae13e8870a414e0bc29560682c4b4ca85cf23ce28",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210811-光大证券-腾讯控股-0700.HK-视频号系列报告之一：视频号的入局，平平无奇还是弯道超车？.pdf",
+      "bytes": 2808533,
+      "sha256": "5626d1c9367068c81d646f9a3b916dbfbdcea91e2512f29362c32f3c70746074",
+      "after_bytes": 2808533,
+      "after_sha256": "5626d1c9367068c81d646f9a3b916dbfbdcea91e2512f29362c32f3c70746074",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210916-国金证券-腾讯控股-0700.HK-复盘历次“大跌”：曾经的“担忧”还在吗？.pdf",
+      "bytes": 1894992,
+      "sha256": "ccc4a068c56b4213a8300f41f07bda990ee9e8f3645e859b94c28f31f8052a4f",
+      "after_bytes": 1894992,
+      "after_sha256": "ccc4a068c56b4213a8300f41f07bda990ee9e8f3645e859b94c28f31f8052a4f",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20211220-东兴证券-传媒行业腾讯系列研究之7：腾讯专题，微信的本质价值是分发.pdf",
+      "bytes": 1447729,
+      "sha256": "2aa9fbd0ffc103ddf2d09423428a68b54e7721439887a52b9e3bc111ebadf21c",
+      "after_bytes": 1447729,
+      "after_sha256": "2aa9fbd0ffc103ddf2d09423428a68b54e7721439887a52b9e3bc111ebadf21c",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20211228-德邦证券-腾讯控股-0700.HK-深度复盘~如何理解腾讯游戏的护城河？.pdf",
+      "bytes": 3090034,
+      "sha256": "d00d4b2a97366710042b1c3ed77a58d165cfb917e454db9f43a5e9ec2cf983e2",
+      "after_bytes": 3090034,
+      "after_sha256": "d00d4b2a97366710042b1c3ed77a58d165cfb917e454db9f43a5e9ec2cf983e2",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20220118-东兴证券-腾讯控股-0700.HK-中概互联网复盘系列报告之三：腾讯控股2021年复盘，股价韧性强于市，强监管无碍微信价值.pdf",
+      "bytes": 696712,
+      "sha256": "5a46dfc31d5dfd0496db924e2d5dd8f6b4b3c144cd33725ea589fe503980f3f4",
+      "after_bytes": 696712,
+      "after_sha256": "5a46dfc31d5dfd0496db924e2d5dd8f6b4b3c144cd33725ea589fe503980f3f4",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20220410-中泰证券-腾讯控股-0700.HK-前瞻布局，突破求新.pdf",
+      "bytes": 2006765,
+      "sha256": "4c9e68963e174c31908e527b04174da9634e7acb23bde45bcf6dddc9badaeb2c",
+      "after_bytes": 2006765,
+      "after_sha256": "4c9e68963e174c31908e527b04174da9634e7acb23bde45bcf6dddc9badaeb2c",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20220418-华西证券-腾讯控股-0700.HK-社交+内容生态壁垒已成，技术服务驱动新增长.pdf",
+      "bytes": 3213800,
+      "sha256": "2c3eba443e6e7a46b4aaedb84ecae13b3ae4f87f7a6c0f4df2b107bb9205c0be",
+      "after_bytes": 3213800,
+      "after_sha256": "2c3eba443e6e7a46b4aaedb84ecae13b3ae4f87f7a6c0f4df2b107bb9205c0be",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20220518-东北证券-腾讯控股-0700.HK-超级APP构筑核心竞争优势，产业互联网驱动公司成长.pdf",
+      "bytes": 7317578,
+      "sha256": "d495667e896d40813d5324fe24c5deb5f7f1926ed4cb6a93a8fcc97ee7736b49",
+      "after_bytes": 7317578,
+      "after_sha256": "d495667e896d40813d5324fe24c5deb5f7f1926ed4cb6a93a8fcc97ee7736b49",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20220809-广发证券-媒体Ⅱ行业：腾讯会议，Zoom为借鉴的视频会议产品迭代与商业化路径探讨.pdf",
+      "bytes": 2776032,
+      "sha256": "b41c0b421a5f6b9aadd211433ed27a26d304470151be2026c83c530a1fb8a210",
+      "after_bytes": 2776032,
+      "after_sha256": "b41c0b421a5f6b9aadd211433ed27a26d304470151be2026c83c530a1fb8a210",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20221010-信达证券-腾讯控股-0700.HK-首次覆盖报告：优质的生态，进击的巨人.pdf",
+      "bytes": 3883303,
+      "sha256": "c183c261125f9946c16c9ba1102243621d7163dd3d8bdbddcb79055358714760",
+      "after_bytes": 3883303,
+      "after_sha256": "c183c261125f9946c16c9ba1102243621d7163dd3d8bdbddcb79055358714760",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20221110-德邦证券-腾讯控股-0700.HK-深度跟踪报告：各业务当前的逻辑与变化.pdf",
+      "bytes": 1041925,
+      "sha256": "62cd05c9c61ca7e819e3f6cfb270ad952613bc64951fb8dde7e08db178578936",
+      "after_bytes": 1041925,
+      "after_sha256": "62cd05c9c61ca7e819e3f6cfb270ad952613bc64951fb8dde7e08db178578936",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20230217-中信建投-腾讯控股-0700.HK-试析云服务的成长与格局之困.pdf",
+      "bytes": 3710155,
+      "sha256": "57dccf7dcaa51f081ce8420de8b090e6e873e83d12fe295d9edda4f02dded83f",
+      "after_bytes": 3710155,
+      "after_sha256": "57dccf7dcaa51f081ce8420de8b090e6e873e83d12fe295d9edda4f02dded83f",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20230322-腾讯-2022年第四季度及全年业绩发布会（英译中）.pdf",
+      "bytes": 5536448,
+      "sha256": "0300267e6d28a318c8e6555bf7beefccec2ab23d8eb828ebc7a0e95f552d1b61",
+      "after_bytes": 5536448,
+      "after_sha256": "0300267e6d28a318c8e6555bf7beefccec2ab23d8eb828ebc7a0e95f552d1b61",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20230420-天风证券-腾讯控股-0700.HK-腾讯AI战略、布局、大模型及应用跟踪.pdf",
+      "bytes": 2021939,
+      "sha256": "734da71f76bea358df1f22057211fae7dd83b36878ac276c28dcc3d1961de1d5",
+      "after_bytes": 2021939,
+      "after_sha256": "734da71f76bea358df1f22057211fae7dd83b36878ac276c28dcc3d1961de1d5",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20230517-腾讯-2023年第一季度业绩发布会（英译中）.pdf",
+      "bytes": 5023752,
+      "sha256": "e76540e42a9037b779ec954bb6784dff7afd1e90df0643318f7f135c386cfc31",
+      "after_bytes": 5023752,
+      "after_sha256": "e76540e42a9037b779ec954bb6784dff7afd1e90df0643318f7f135c386cfc31",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20230725-国泰君安-腾讯控股-0700.HK-公司更新报告：视频号电商全面发力，生态及商业化空间广阔.pdf",
+      "bytes": 3480889,
+      "sha256": "37f2dc43409b58c2827a1661f6a2ca734e342ec1f662ae618fc5db2bacb22e3e",
+      "after_bytes": 3480889,
+      "after_sha256": "37f2dc43409b58c2827a1661f6a2ca734e342ec1f662ae618fc5db2bacb22e3e",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20250122-海通证券-信息服务行业深度报告：走最适合自身的AI发展之路，善于“扬长”的腾讯.pdf",
+      "bytes": 4345299,
+      "sha256": "c093d9d2c788005d2bd9d7a5f5a8ab345adf5a4a619ceebd04d1405b5d24d939",
+      "after_bytes": 4345299,
+      "after_sha256": "c093d9d2c788005d2bd9d7a5f5a8ab345adf5a4a619ceebd04d1405b5d24d939",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20250915-华泰证券-腾讯控股-0700.HK-腾讯广告：AI和微信生态驱动商业化升级.pdf",
+      "bytes": 2988749,
+      "sha256": "cf46a51a71de02148e324e22329b69ad252e8ff7310189bcb94bcb80b46891c6",
+      "after_bytes": 2988749,
+      "after_sha256": "cf46a51a71de02148e324e22329b69ad252e8ff7310189bcb94bcb80b46891c6",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20260131-国联民生证券-计算机行业深度报告：被低估的腾讯AI“野望”.pdf",
+      "bytes": 1461411,
+      "sha256": "f6b2e5e631bf14ec23bf08702c5d9db371e1ac99486eaf63984df128f161bfce",
+      "after_bytes": 1461411,
+      "after_sha256": "f6b2e5e631bf14ec23bf08702c5d9db371e1ac99486eaf63984df128f161bfce",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\【互联网】腾讯2021Q2业绩会纪要20210818.pdf",
+      "bytes": 580652,
+      "sha256": "0f7552767ac4fac7e8f30f353306d02ec0996f134e9889a56e1b4fa4fc899680",
+      "after_bytes": 580652,
+      "after_sha256": "0f7552767ac4fac7e8f30f353306d02ec0996f134e9889a56e1b4fa4fc899680",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯2019n.pdf",
+      "bytes": 3054766,
+      "sha256": "fd6aaa4f59351447c7bc78032ef2dbb7f3d381bf120ea7d1383c3de052e4f82e",
+      "after_bytes": 3054766,
+      "after_sha256": "fd6aaa4f59351447c7bc78032ef2dbb7f3d381bf120ea7d1383c3de052e4f82e",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯2020n.pdf",
+      "bytes": 2822568,
+      "sha256": "bba24aaa10948ea37f7c7a8a96dcd79200842ffbfb3c1c8f64a182a6b3698d48",
+      "after_bytes": 2822568,
+      "after_sha256": "bba24aaa10948ea37f7c7a8a96dcd79200842ffbfb3c1c8f64a182a6b3698d48",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯2021n.pdf",
+      "bytes": 5687326,
+      "sha256": "70574582c616da1727590fc247c4caa40a7ee98ab83896d05638e9a630b50341",
+      "after_bytes": 5687326,
+      "after_sha256": "70574582c616da1727590fc247c4caa40a7ee98ab83896d05638e9a630b50341",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯2022n.PDF",
+      "bytes": 5564762,
+      "sha256": "48705cdd72b57ca1b7ff9d15f3c101fcd6633688d6a3a3b221852087d2be64fc",
+      "after_bytes": 5564762,
+      "after_sha256": "48705cdd72b57ca1b7ff9d15f3c101fcd6633688d6a3a3b221852087d2be64fc",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯SSV许浩碳中和纪要202203.pdf",
+      "bytes": 675094,
+      "sha256": "a9f047c4bc9cfacb7956e90d2c66b4e9e9e50b3e4a8e7316c0b81ffd69c6014f",
+      "after_bytes": 675094,
+      "after_sha256": "a9f047c4bc9cfacb7956e90d2c66b4e9e9e50b3e4a8e7316c0b81ffd69c6014f",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯交流纪要20220406.pdf",
+      "bytes": 556577,
+      "sha256": "d865f9774748f56396933c13c076d734ba09fb84467472564fbd8b5d1528f232",
+      "after_bytes": 556577,
+      "after_sha256": "d865f9774748f56396933c13c076d734ba09fb84467472564fbd8b5d1528f232",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯控股交流纪要20220323.pdf",
+      "bytes": 547111,
+      "sha256": "fafaf9fed1ace161f824811a462412474c6f67273837288b30fecd46daaa8328",
+      "after_bytes": 547111,
+      "after_sha256": "fafaf9fed1ace161f824811a462412474c6f67273837288b30fecd46daaa8328",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\financial_reports\\annual\\腾讯：2024年年度报告.pdf",
+      "bytes": 5241364,
+      "sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+      "after_bytes": 5241364,
+      "after_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\financial_reports\\annual\\腾讯：2025年年度报告.pdf",
+      "bytes": 4428270,
+      "sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "after_bytes": 4428270,
+      "after_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\SKILL.md",
+      "bytes": 27599,
+      "sha256": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf",
+      "after_bytes": 27599,
+      "after_sha256": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf",
+      "unchanged": true
+    }
+  ],
+  "allowed_append_only_logs": [
+    "events.jsonl",
+    "commands/index.jsonl",
+    "processes/*"
+  ],
+  "producer_writes": 0
+}

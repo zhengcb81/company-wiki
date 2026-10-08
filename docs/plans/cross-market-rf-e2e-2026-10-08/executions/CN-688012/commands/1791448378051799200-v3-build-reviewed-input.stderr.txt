@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\executions\CN-688012\v3_build_input.py", line 50, in <module>
+    platform=span(ap,48,'中微公司的子公司中微汇链','85%。')
+             ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\executions\CN-688012\v3_build_input.py", line 36, in span
+    text=pages[p];pos=text.index(start);text=text[pos:]
+                      ~~~~~~~~~~^^^^^^^
+ValueError: substring not found

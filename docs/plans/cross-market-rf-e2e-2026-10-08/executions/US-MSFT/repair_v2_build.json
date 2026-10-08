@@ -1,0 +1,28 @@
+{
+  "version": "2026-10-08-MSFT-v2",
+  "findings": [
+    "US-01",
+    "US-02",
+    "US-03",
+    "US-04",
+    "US-05",
+    "US-06",
+    "US-07",
+    "US-08"
+  ],
+  "future_parameter_count": 72,
+  "all_growth_values_preserved": true,
+  "claim_count": 502,
+  "frozen_before": {
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\input.json": "d872a864d1f7220c5635974b262b2b63378c1885998754ed8010134f8c7ae32e",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\forecast.json": "46c0c6ce0c71f27899ed4544012566489c8efef1d37826194048683732a36906",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\forecast.md": "4ccd4ff3e59ed0fc72af32850b35479dce595b1b641c140a2fb54d1675588511",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\snapshot.json": "ac029a2961a01f8d9d9f752bf6253535a45b3f7c3c61e594c6501928b755e0e2",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\manifest.json": "2845d8906d3e140a1eb7fa28ddf4981b1610d3c1037f0b6d49de4da2e73b4201"
+  },
+  "us07": "BLOCKED",
+  "review_files": {
+    "review_sha256": "40aa9646fadb7deb4b161e3168f2d1f80f886ce08d12b9fefa07335ec52326db",
+    "recommendations_sha256": "426d4d935765a41a65a4b7fa93e69cbacdc1b9d9751731610cc494db756be59b"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "source_ref": {
+    "byte_size": 3149962,
+    "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+    "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+    "mime_type": "application/pdf",
+    "schema_version": "2.0",
+    "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+  },
+  "facts": {
+    "source_url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482884.PDF"
+  },
+  "evidence": {
+    "source_url": {
+      "locator": "Independent actual official HTTP 200 application/pdf same-SHA transport GET; current immutable raw verified by reviewer and source-preparation verified-open",
+      "value": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482884.PDF",
+      "observed_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "official_receipt_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\reviews\\CN-688012\\official_pdf_current_sha_checks.json",
+      "official_receipt_sha256": "9320ccf95da11dad68bb2c47b6637022047b05645c64aca2673f407a13effea1",
+      "original_download_receipt_and_raw_preserved": true
+    }
+  }
+}

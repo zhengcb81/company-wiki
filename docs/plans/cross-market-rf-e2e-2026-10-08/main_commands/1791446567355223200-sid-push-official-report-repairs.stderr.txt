@@ -1,0 +1,2 @@
+To https://github.com/zhengcb81/StockInfoDownloader.git
+   47e1059..c0f07e1  v2-clean-rewrite -> v2-clean-rewrite

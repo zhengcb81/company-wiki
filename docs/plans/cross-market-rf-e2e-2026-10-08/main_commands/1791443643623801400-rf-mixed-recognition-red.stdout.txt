@@ -1,0 +1,207 @@
+FFFFFFFFF                                                                [100%]
+================================== FAILURES ===================================
+_ test_mixed_recognized_aggregate_preserves_exact_revenue_and_output_contract _
+
+    def test_mixed_recognized_aggregate_preserves_exact_revenue_and_output_contract():
+        baseline = run_forecast(forecast_document(), mode="draft")
+>       result = run_forecast(mixed_document(), mode="draft")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_mixed_aggregate_recognition.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\revenue_core.py:446: in run_forecast
+    result = _build_forecast_draft(data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\revenue_core.py:64: in _build_forecast_draft
+    result = _run_forecast_core(data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\forecast\segments.py:597: in _run_forecast_core
+    recognized_segments = apply_revenue_recognition(data, validated, modeled_segments)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\forecast\segments.py:311: in apply_revenue_recognition
+    recognition = validate_recognition_metadata(segment, source_index, claim_index)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\forecast\segments.py:241: in validate_recognition_metadata
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False
+message = 'unsupported recognition timing for Segment A: mixed'
+
+    def require(condition: Any, message: str) -> None:
+        # Truthiness gate (bool in intent); data-validation callers pass
+        # isinstance()/fullmatch() results, so the parameter is Any.
+        """Raise ``ForecastInputError`` when *condition* is falsy.
+    
+        When a :class:`Collector` is active for the current context (set via
+        :func:`collect_mode`), a falsy *condition* appends to that collector instead
+        of raising, enabling a single collect-all pass. With no collector active the
+        behavior is unchanged (raise on the first violation).
+        """
+        if condition:
+            return
+        collector = _COLLECTOR.get()
+        if collector is not None:
+            collector.add(message)
+        else:
+>           raise ForecastInputError(message)
+E           contracts.evidence.ForecastInputError: unsupported recognition timing for Segment A: mixed
+
+scripts\contracts\evidence.py:93: ForecastInputError
+___________ test_mixed_requires_explicit_aggregate_boundary[timing] ___________
+
+field = 'timing'
+
+    @pytest.mark.parametrize("field", ["timing", "presentation"])
+    def test_mixed_requires_explicit_aggregate_boundary(field):
+        data = mixed_document()
+        data["segments"][0]["recognition"].pop("aggregation_boundary")
+        if field == "timing":
+            data["segments"][0]["recognition"].update(presentation="gross", modeled_presentation="gross")
+        else:
+            data["segments"][0]["recognition"]["timing"] = "point_in_time"
+>       with pytest.raises(ForecastInputError, match="aggregation_boundary"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'aggregation_boundary'
+E         Actual message: 'unsupported recognition timing for Segment A: mixed'
+
+tests\test_mixed_aggregate_recognition.py:47: AssertionError
+________ test_mixed_requires_explicit_aggregate_boundary[presentation] ________
+
+field = 'presentation'
+
+    @pytest.mark.parametrize("field", ["timing", "presentation"])
+    def test_mixed_requires_explicit_aggregate_boundary(field):
+        data = mixed_document()
+        data["segments"][0]["recognition"].pop("aggregation_boundary")
+        if field == "timing":
+            data["segments"][0]["recognition"].update(presentation="gross", modeled_presentation="gross")
+        else:
+            data["segments"][0]["recognition"]["timing"] = "point_in_time"
+>       with pytest.raises(ForecastInputError, match="aggregation_boundary"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'aggregation_boundary'
+E         Actual message: 'unsupported presentation for Segment A: mixed'
+
+tests\test_mixed_aggregate_recognition.py:47: AssertionError
+_____________________ test_mixed_rejects_lagged_activity ______________________
+
+    def test_mixed_rejects_lagged_activity():
+        data = mixed_document()
+        data["segments"][0]["recognition"]["mode"] = "lagged_activity"
+>       with pytest.raises(ForecastInputError, match="already recognized"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'already recognized'
+E         Actual message: 'unsupported recognition timing for Segment A: mixed'
+
+tests\test_mixed_aggregate_recognition.py:54: AssertionError
+______________________ test_mixed_rejects_activity_model ______________________
+
+    def test_mixed_rejects_activity_model():
+        data = mixed_document()
+        for scenario in data["segments"][0]["scenarios"].values():
+            scenario["model"] = "unit_sales"
+        # Validate the accounting boundary before trying incompatible driver IDs.
+        from forecast.segments import validate_recognition_metadata
+        with pytest.raises(ForecastInputError, match="direct_growth/direct_revenue"):
+            validate_recognition_metadata(data["segments"][0],
+                {s["source_id"]: s for s in data["sources"]},
+>               {c["claim_id"]: c for c in data["claims"]})
+                                           ^^^^^^^^^^^^^^
+E           KeyError: 'claims'
+
+tests\test_mixed_aggregate_recognition.py:67: KeyError
+_ test_mixed_cannot_hide_extra_recognition_transforms[progress_parameter_ids-value0] _
+
+field = 'progress_parameter_ids', value = {'low': [], 'base': [], 'high': []}
+
+    @pytest.mark.parametrize("field,value", [
+        ("progress_parameter_ids", {"low": [], "base": [], "high": []}),
+        ("progress_measure", "fake progress=1"),
+        ("lag_years", 1),
+        ("carry_in_parameter_ids", {"low": [], "base": [], "high": []}),
+    ])
+    def test_mixed_cannot_hide_extra_recognition_transforms(field, value):
+        data = mixed_document()
+        data["segments"][0]["recognition"][field] = value
+>       with pytest.raises(ForecastInputError, match="recognition transform"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'recognition transform'
+E         Actual message: 'unsupported recognition timing for Segment A: mixed'
+
+tests\test_mixed_aggregate_recognition.py:79: AssertionError
+_ test_mixed_cannot_hide_extra_recognition_transforms[progress_measure-fake progress=1] _
+
+field = 'progress_measure', value = 'fake progress=1'
+
+    @pytest.mark.parametrize("field,value", [
+        ("progress_parameter_ids", {"low": [], "base": [], "high": []}),
+        ("progress_measure", "fake progress=1"),
+        ("lag_years", 1),
+        ("carry_in_parameter_ids", {"low": [], "base": [], "high": []}),
+    ])
+    def test_mixed_cannot_hide_extra_recognition_transforms(field, value):
+        data = mixed_document()
+        data["segments"][0]["recognition"][field] = value
+>       with pytest.raises(ForecastInputError, match="recognition transform"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'recognition transform'
+E         Actual message: 'unsupported recognition timing for Segment A: mixed'
+
+tests\test_mixed_aggregate_recognition.py:79: AssertionError
+______ test_mixed_cannot_hide_extra_recognition_transforms[lag_years-1] _______
+
+field = 'lag_years', value = 1
+
+    @pytest.mark.parametrize("field,value", [
+        ("progress_parameter_ids", {"low": [], "base": [], "high": []}),
+        ("progress_measure", "fake progress=1"),
+        ("lag_years", 1),
+        ("carry_in_parameter_ids", {"low": [], "base": [], "high": []}),
+    ])
+    def test_mixed_cannot_hide_extra_recognition_transforms(field, value):
+        data = mixed_document()
+        data["segments"][0]["recognition"][field] = value
+>       with pytest.raises(ForecastInputError, match="recognition transform"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'recognition transform'
+E         Actual message: 'unsupported recognition timing for Segment A: mixed'
+
+tests\test_mixed_aggregate_recognition.py:79: AssertionError
+_ test_mixed_cannot_hide_extra_recognition_transforms[carry_in_parameter_ids-value3] _
+
+field = 'carry_in_parameter_ids', value = {'low': [], 'base': [], 'high': []}
+
+    @pytest.mark.parametrize("field,value", [
+        ("progress_parameter_ids", {"low": [], "base": [], "high": []}),
+        ("progress_measure", "fake progress=1"),
+        ("lag_years", 1),
+        ("carry_in_parameter_ids", {"low": [], "base": [], "high": []}),
+    ])
+    def test_mixed_cannot_hide_extra_recognition_transforms(field, value):
+        data = mixed_document()
+        data["segments"][0]["recognition"][field] = value
+>       with pytest.raises(ForecastInputError, match="recognition transform"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'recognition transform'
+E         Actual message: 'unsupported recognition timing for Segment A: mixed'
+
+tests\test_mixed_aggregate_recognition.py:79: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_mixed_aggregate_recognition.py::test_mixed_recognized_aggregate_preserves_exact_revenue_and_output_contract
+FAILED tests/test_mixed_aggregate_recognition.py::test_mixed_requires_explicit_aggregate_boundary[timing]
+FAILED tests/test_mixed_aggregate_recognition.py::test_mixed_requires_explicit_aggregate_boundary[presentation]
+FAILED tests/test_mixed_aggregate_recognition.py::test_mixed_rejects_lagged_activity
+FAILED tests/test_mixed_aggregate_recognition.py::test_mixed_rejects_activity_model
+FAILED tests/test_mixed_aggregate_recognition.py::test_mixed_cannot_hide_extra_recognition_transforms[progress_parameter_ids-value0]
+FAILED tests/test_mixed_aggregate_recognition.py::test_mixed_cannot_hide_extra_recognition_transforms[progress_measure-fake progress=1]
+FAILED tests/test_mixed_aggregate_recognition.py::test_mixed_cannot_hide_extra_recognition_transforms[lag_years-1]
+FAILED tests/test_mixed_aggregate_recognition.py::test_mixed_cannot_hide_extra_recognition_transforms[carry_in_parameter_ids-value3]
+9 failed in 0.51s

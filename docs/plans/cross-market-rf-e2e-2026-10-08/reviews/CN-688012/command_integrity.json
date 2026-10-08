@@ -1,0 +1,513 @@
+[
+  {
+    "id": "1791442151563829600-source-preparation-help",
+    "label": "source-preparation-help",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791442194992474500-reuse-annual2025",
+    "label": "reuse-annual2025",
+    "returncode": 3,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791442229765399100-ff-annual2025-diagnostic",
+    "label": "ff-annual2025-diagnostic",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791442255961532800-rf-annual2025-legacy12-compat",
+    "label": "rf-annual2025-legacy12-compat",
+    "returncode": 3,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791442285577587300-rf-annual2025-legacy12-explicitFY",
+    "label": "rf-annual2025-legacy12-explicitFY",
+    "returncode": 3,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791442355251092500-inspect-annual2025-raw",
+    "label": "inspect-annual2025-raw",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791442371819147100-ff-annual2024-diagnostic",
+    "label": "ff-annual2024-diagnostic",
+    "returncode": 2,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791442377575794600-ff-half2026-diagnostic",
+    "label": "ff-half2026-diagnostic",
+    "returncode": 2,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791442383051703400-ff-q12026-diagnostic",
+    "label": "ff-q12026-diagnostic",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791442428958097800-annual2025-history-segments-recognition",
+    "label": "annual2025-history-segments-recognition",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791442432647092700-rf-half2026-bounded-fetch",
+    "label": "rf-half2026-bounded-fetch",
+    "returncode": 3,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791442456133558900-template-input",
+    "label": "template-input",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791442492046772000-ff-half2026-bounded-diagnostic",
+    "label": "ff-half2026-bounded-diagnostic",
+    "returncode": 2,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791442547356192600-inspect-q12026-raw",
+    "label": "inspect-q12026-raw",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791442551573479400-annual2025-business-risk-policy",
+    "label": "annual2025-business-risk-policy",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791442591665307900-annual2025-recognition-services-targets",
+    "label": "annual2025-recognition-services-targets",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791442681377033200-catalog-cli-help",
+    "label": "catalog-cli-help",
+    "returncode": 2,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791442708032715900-actual-catalog-cli-help",
+    "label": "actual-catalog-cli-help",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791442755381166200-rf-annual2025-v2-after-main-fix",
+    "label": "rf-annual2025-v2-after-main-fix",
+    "returncode": 3,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791442997011302200-source-facts-help",
+    "label": "source-facts-help",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791443060998030700-annual25-https-equivalence",
+    "label": "annual25-https-equivalence",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791443075902157700-annual25-standard-source-facts",
+    "label": "annual25-standard-source-facts",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791443088231609900-rf-annual2025-v2-verified-https",
+    "label": "rf-annual2025-v2-verified-https",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791443163254097200-sid-half2026-real-discover",
+    "label": "sid-half2026-real-discover",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791443205275371200-sid-official-category-comparison",
+    "label": "sid-official-category-comparison",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791443234286838900-annual-segment-footnote-check",
+    "label": "annual-segment-footnote-check",
+    "returncode": 2,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791443247472543900-annual-segment-footnote-check-corrected",
+    "label": "annual-segment-footnote-check-corrected",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791443283983290600-annual-product-disclosure",
+    "label": "annual-product-disclosure",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791443314348622300-sid-official-quarter-category-comparison",
+    "label": "sid-official-quarter-category-comparison",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791443395690137000-official-roadshow-capture",
+    "label": "official-roadshow-capture",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791443420408317500-semi-independent-reference-capture",
+    "label": "semi-independent-reference-capture",
+    "returncode": 1,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791443521541045400-roadshow-visible-script-read",
+    "label": "roadshow-visible-script-read",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791443577897750500-sid-official-quarter-union-comparison",
+    "label": "sid-official-quarter-union-comparison",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791443728767110900-model-aware-template",
+    "label": "model-aware-template",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791443817212431600-annual25-zero-download-repeat",
+    "label": "annual25-zero-download-repeat",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791443872252334400-rf-half2026-fetch-after-sid-fix",
+    "label": "rf-half2026-fetch-after-sid-fix",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791443930189431200-half2026-verified-page-extraction",
+    "label": "half2026-verified-page-extraction",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791443943683307900-half2026-primary-facts-read",
+    "label": "half2026-primary-facts-read",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791443978217904600-half2026-operating-context",
+    "label": "half2026-operating-context",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791444228262283900-half2026-publication-date-proof",
+    "label": "half2026-publication-date-proof",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791444232037282800-half2026-standard-publication-date-fact",
+    "label": "half2026-standard-publication-date-fact",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791444251776473000-rf-half2026-reuse-date-corrected",
+    "label": "rf-half2026-reuse-date-corrected",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791444259141597600-construct-real-forecast-input",
+    "label": "construct-real-forecast-input",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791444284242096900-input-lint-all",
+    "label": "input-lint-all",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791444303195990000-input-hash-synchronization",
+    "label": "input-hash-synchronization",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791444306640074300-input-validate-all",
+    "label": "input-validate-all",
+    "returncode": 2,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791444573993136200-construct-input-source-type-contract",
+    "label": "construct-input-source-type-contract",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791444583874612400-input-validate-real-schema",
+    "label": "input-validate-real-schema",
+    "returncode": 2,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791444662162334500-construct-complete-evidence-spans",
+    "label": "construct-complete-evidence-spans",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791444671719924800-input-validate-complete-spans",
+    "label": "input-validate-complete-spans",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791444701952739900-formal-forecast-engine",
+    "label": "formal-forecast-engine",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791444820788784000-strong-original-input-render-arithmetic",
+    "label": "strong-original-input-render-arithmetic",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791444833582872100-immutable-snapshot-create",
+    "label": "immutable-snapshot-create",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791444891797315000-strong-freeze-final",
+    "label": "strong-freeze-final",
+    "returncode": 1,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791444894077300600-roadshow-observed-public-question-api",
+    "label": "roadshow-observed-public-question-api",
+    "returncode": 1,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791444962164356700-half2026-current-producer-read",
+    "label": "half2026-current-producer-read",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791444962641707200-strong-freeze-version-contract",
+    "label": "strong-freeze-version-contract",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791445077363665900-roadshow-observed-frontend-assets",
+    "label": "roadshow-observed-frontend-assets",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791445156691592800-roadshow-real-frontend-question-contract",
+    "label": "roadshow-real-frontend-question-contract",
+    "returncode": 1,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791445202091909100-roadshow-public-real-urlencoding",
+    "label": "roadshow-public-real-urlencoding",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791445312305188900-roadshow-all-precollected-questions",
+    "label": "roadshow-all-precollected-questions",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791445313508050500-post-half-official-announcement-metadata",
+    "label": "post-half-official-announcement-metadata",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791445392141332100-roadshow-precollect-observed-page-size",
+    "label": "roadshow-precollect-observed-page-size",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791445475850599800-preserve-v1-before-additional-ir-evidence",
+    "label": "preserve-v1-before-additional-ir-evidence",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791445479524447200-roadshow-all-remaining-precollect-pages",
+    "label": "roadshow-all-remaining-precollect-pages",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791445685548220400-construct-v2-complete-official-ir",
+    "label": "construct-v2-complete-official-ir",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791445689025349200-v2-input-lint-all",
+    "label": "v2-input-lint-all",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791445693769402700-v2-input-hash-check",
+    "label": "v2-input-hash-check",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791445697398986300-v2-input-validate-all",
+    "label": "v2-input-validate-all",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791445744583106900-v2-formal-forecast-engine",
+    "label": "v2-formal-forecast-engine",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791445748422426400-v2-immutable-snapshot-create",
+    "label": "v2-immutable-snapshot-create",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791445752348299600-v2-strong-input-render-arithmetic-snapshot",
+    "label": "v2-strong-input-render-arithmetic-snapshot",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791446059457186600-complete-independent-review-handoff",
+    "label": "complete-independent-review-handoff",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  }
+]

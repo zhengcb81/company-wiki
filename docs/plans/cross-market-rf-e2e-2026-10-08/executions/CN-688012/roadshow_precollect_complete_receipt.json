@@ -1,0 +1,79 @@
+{
+  "timestamp_utc": "2026-10-08T07:45:17.212760+00:00",
+  "total": 29,
+  "pages": 10,
+  "cn_mentions": [
+    {
+      "id": 36395,
+      "collectType": 1,
+      "userId": 76246636,
+      "userNickName": "134*****721",
+      "userType": 1,
+      "userCompanyName": "",
+      "companyId": 145565,
+      "activityId": 40766,
+      "question": "请问：1、尹博士在早期的访谈节目中曾经介绍中微的双工作台刻蚀机推出后，成功的进入到台积电中，从中微2018年开始，对台湾地区的销售始终在大约1.5-4.5亿的水平波动，同时，近期传出SK海力士和三星均在考虑中微的设备，那么请问中微目前的设备在大陆以外地区的客户数量变化如何（以母公司计）？同时，目前在海外销售的设备种类有哪些？公司还有哪些设备有对外销售的计划？另外有消息传台积电在建晶圆厂达到创纪录的20个，公司对此有何销售预期和评价？2、根据SEMI的报告，第二季度韩国半导体设备的投资增速较Q1增长了50%，北美和欧洲的投资也在上行，而对中国大陆地区的投资的定义是“稳定增长”，总所周知，泛林和应用材料的设备交付周期都很长，那么中微是否可能在海外市场受益于此次投资热潮？同时，对于SEMI认为中国大陆市场是稳定的增长的这种评估，中微是如何看的？是国内产业对当前AI带动的需求增长等能否保持持续性增长较为保守？或者并不认同SEMI的评价？",
+      "answer": "您好，中微公司自成立以来一贯的发展目标是成为全球第一梯队的半导体设备公司，一直致力于研发和生产有国际竞争力的高端半导体设备。公司具备较好的海外客户基础，目前在海外最先进逻辑客户已经累计交付约800个反应台。公司强调完全自主知识产权，产品的国际竞争力在不断提升，实现更小的占地面积，更高的输出量。公司在持续对接更多海外意向客户，持续拓展海外市场。",
+      "status": 1,
+      "crtTime": "2026-09-04 18:55:49",
+      "updTime": "2026-09-10 15:19:54",
+      "isDel": false,
+      "companyName": "中微半导体设备(上海)股份有限公司",
+      "logoPath": "uploadfileNew/logo/2025-10-20/2bb496fa-4b1a-4064-869f-8d5bf3586bbb.png",
+      "title": "科创板2026年半年度半导体制造、设备及材料行业集体业绩说明会",
+      "stockCode": "688012",
+      "shortName": "中微公司",
+      "miniLogoPath": "uploadfileNew/avatar/company/688012.png"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow_precollect_questions_page2.json",
+      "sha256": "931e8438c367edc75d4bae274c1b77273eb310efcd01edfc647b721e546a328c",
+      "bytes": 4364
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow_precollect_questions_page3.json",
+      "sha256": "118abcaa9883bd2aab23fd2b89d856d56e338a307972a51a6faa308192c9acb7",
+      "bytes": 3947
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow_precollect_questions_page4.json",
+      "sha256": "621eeef81cc7e5a80ed3231d9d24c07f123d52de3f92251a629b11b0d7aa4357",
+      "bytes": 4538
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow_precollect_questions_page5.json",
+      "sha256": "08d2f438308d015d83a3afeef324c886757c512dc6c226b862f85c02f85fbc78",
+      "bytes": 3915
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow_precollect_questions_page6.json",
+      "sha256": "fe5138e7b8270629a4cd4dd34cf9b22127244bb63800d203b878f1fddb6b56f1",
+      "bytes": 6657
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow_precollect_questions_page7.json",
+      "sha256": "9c29223f4e1fbff9b3c6811a61741dc7d447bf2ea9cdcf3e8985d344a915e2dc",
+      "bytes": 5421
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow_precollect_questions_page8.json",
+      "sha256": "badbf360188e86033e368ab41c12a61503d1045d54aec0cb9b97a621ff1690b6",
+      "bytes": 5154
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow_precollect_questions_page9.json",
+      "sha256": "d4c4b239fb71f572ed6af815629e853b3e10004f03a553d1ee100afd17e8d659",
+      "bytes": 4433
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow_precollect_questions_page10.json",
+      "sha256": "784217fbfdddc06cd53235b3bef8159250b1d4209761092577d35ebb0f313234",
+      "bytes": 3871
+    }
+  ],
+  "coverage": "all 29 pre-collected responses read; per-company affiliation still checked independently",
+  "credentials_used": false,
+  "cost_usd": 0
+}

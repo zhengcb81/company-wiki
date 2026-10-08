@@ -1,0 +1,2 @@
+{"timestamp_utc": "2026-10-08T08:03:08.202720+00:00", "pid": 80716, "ppid": 35676, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py", "--source-ref-v2", "--timeout-seconds", "900.0"], "cwd": "C:\\Users\\郑曾波\\Projects\\filing-fetch"}}
+{"timestamp_utc": "2026-10-08T08:03:08.255070+00:00", "pid": 80716, "ppid": 35676, "event": "python_exit", "data": {}}

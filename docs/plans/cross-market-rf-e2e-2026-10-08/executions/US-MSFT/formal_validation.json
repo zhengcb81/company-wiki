@@ -1,0 +1,9 @@
+{
+  "strong_input_required_validation": "PASS",
+  "markdown_same_json": "PASS",
+  "independent_arithmetic": "PASS",
+  "snapshot": "validated",
+  "input_sha256": "d872a864d1f7220c5635974b262b2b63378c1885998754ed8010134f8c7ae32e",
+  "forecast_sha256": "46c0c6ce0c71f27899ed4544012566489c8efef1d37826194048683732a36906",
+  "guarantee": "Technical conformance/recomputation only; unsigned provenance and economic assumptions need independent review."
+}

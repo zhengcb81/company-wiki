@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\archive_research_delivery.py", line 145, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\archive_research_delivery.py", line 92, in main
+    assert snapshot["forecast_result_sha256"] == forecast["result_sha256"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

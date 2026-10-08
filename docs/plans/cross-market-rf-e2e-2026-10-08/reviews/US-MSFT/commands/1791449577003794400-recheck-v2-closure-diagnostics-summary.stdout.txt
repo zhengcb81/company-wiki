@@ -1,0 +1,249 @@
+{
+  "binding_failures": [],
+  "changed_claim_text_failures": [],
+  "target_text_failures": [],
+  "segment_differences": [
+    "/0/scenarios/base/rationale",
+    "/0/scenarios/low/rationale",
+    "/0/scenarios/high/rationale",
+    "/1/scenarios/base/rationale",
+    "/1/scenarios/low/rationale",
+    "/1/scenarios/high/rationale",
+    "/2/scenarios/base/rationale",
+    "/2/scenarios/low/rationale",
+    "/2/scenarios/high/rationale",
+    "/3/scenarios/base/rationale",
+    "/3/scenarios/low/rationale",
+    "/3/scenarios/high/rationale",
+    "/4/scenarios/base/rationale",
+    "/4/scenarios/low/rationale",
+    "/4/scenarios/high/rationale",
+    "/5/scenarios/base/rationale",
+    "/5/scenarios/low/rationale",
+    "/5/scenarios/high/rationale",
+    "/6/scenarios/base/rationale",
+    "/6/scenarios/low/rationale",
+    "/6/scenarios/high/rationale",
+    "/7/scenarios/base/rationale",
+    "/7/scenarios/low/rationale",
+    "/7/scenarios/high/rationale"
+  ],
+  "all72_growth_values_unchanged": true
+}
+{
+  "artifact_count": 15,
+  "artifact_failures": [],
+  "log_count": 58,
+  "log_failures": [],
+  "unpaired": [],
+  "post_initial_commands": [
+    {
+      "id": "1791448024372205700-us-v2-build-from-review",
+      "label": "us-v2-build-from-review",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "build"
+      ]
+    },
+    {
+      "id": "1791448037465436300-us-v2-lint",
+      "label": "us-v2-lint",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "lint"
+      ]
+    },
+    {
+      "id": "1791448040587453700-us-v2-hash",
+      "label": "us-v2-hash",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "hash"
+      ]
+    },
+    {
+      "id": "1791448043861311500-us-v2-validate",
+      "label": "us-v2-validate",
+      "returncode": 2,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "validate"
+      ]
+    },
+    {
+      "id": "1791448119950000400-us-v2-build-bounded-excerpt-fragments",
+      "label": "us-v2-build-bounded-excerpt-fragments",
+      "returncode": 1,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "build"
+      ]
+    },
+    {
+      "id": "1791448137610709500-us-v2-build-complete-excerpt-fragments",
+      "label": "us-v2-build-complete-excerpt-fragments",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "build"
+      ]
+    },
+    {
+      "id": "1791448147608204000-us-v2-final-lint",
+      "label": "us-v2-final-lint",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "lint"
+      ]
+    },
+    {
+      "id": "1791448150596878500-us-v2-final-hash",
+      "label": "us-v2-final-hash",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "hash"
+      ]
+    },
+    {
+      "id": "1791448153488866500-us-v2-final-validate",
+      "label": "us-v2-final-validate",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "validate"
+      ]
+    },
+    {
+      "id": "1791448157089831600-us-v2-final-forecast",
+      "label": "us-v2-final-forecast",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "forecast"
+      ]
+    },
+    {
+      "id": "1791448231969143300-us-v2-snapshot",
+      "label": "us-v2-snapshot",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "snapshot"
+      ]
+    },
+    {
+      "id": "1791448236102858800-us-v2-registry",
+      "label": "us-v2-registry",
+      "returncode": 2,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "registry"
+      ]
+    },
+    {
+      "id": "1791448259786973700-us-v2-final-registry",
+      "label": "us-v2-final-registry",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "registry"
+      ]
+    },
+    {
+      "id": "1791448262721646400-us-v2-final-verify",
+      "label": "us-v2-final-verify",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "verify"
+      ]
+    },
+    {
+      "id": "1791448409219693800-us-v2-handoff",
+      "label": "us-v2-handoff",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "handoff"
+      ]
+    },
+    {
+      "id": "1791448487730163100-us-v2-final-handoff-scoped-ledger",
+      "label": "us-v2-final-handoff-scoped-ledger",
+      "returncode": 0,
+      "pass": true,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/repair_msft_v2.py",
+        "handoff"
+      ]
+    }
+  ]
+}

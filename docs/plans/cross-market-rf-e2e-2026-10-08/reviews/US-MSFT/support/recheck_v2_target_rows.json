@@ -1,0 +1,858 @@
+[
+  {
+    "target_id": "v2_qualitative_original_01",
+    "original_or_added": "original17",
+    "source_id": "src_call",
+    "locator": "Complete official call, call.txt line 108",
+    "metric_perimeter": "Infrastructure capacity",
+    "source_period": "two years; terminal date unstated",
+    "mapped_parameter_ids": [
+      "azure_growth_low_2027",
+      "azure_growth_base_2027",
+      "azure_growth_high_2027"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Capacity is only an enablement condition; no capacity-to-utilization/price revenue bridge. Retain roughly double wording, not a 100% revenue target.",
+    "verdict": "PASS",
+    "original_source_verification": "independent full official raw reopened",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_qualitative_original_02",
+    "original_or_added": "original17",
+    "source_id": "src_call",
+    "locator": "Complete official call, call.txt line 205",
+    "metric_perimeter": "XBOX total",
+    "source_period": "FY2027",
+    "mapped_parameter_ids": [
+      "xbox_growth_low_2027",
+      "xbox_growth_base_2027",
+      "xbox_growth_high_2027"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Compare annual same-perimeter direction: management expects positive growth; analyst low-10/base-4 disagree, high+2 agrees direction. No exact management rate is invented.",
+    "verdict": "PASS",
+    "original_source_verification": "independent full official raw reopened",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_qualitative_original_03",
+    "original_or_added": "original17",
+    "source_id": "src_call",
+    "locator": "Complete official call, call.txt line 255",
+    "metric_perimeter": "Old M365commercial/server product KPIs",
+    "source_period": "FY2027",
+    "mapped_parameter_ids": [
+      "productivity_and_server_licensing_growth_low_2027",
+      "productivity_and_server_licensing_growth_base_2027",
+      "productivity_and_server_licensing_growth_high_2027"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Directionally consistent with negative FY27 three scenarios(-8,-5,-2%); new aggregate includes consumer/licenses and reclass, so no exact target attainment. Base-5 is assumption, not mid-single normalization.",
+    "verdict": "PASS",
+    "original_source_verification": "independent full official raw reopened",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_qualitative_original_04",
+    "original_or_added": "original17",
+    "source_id": "src_call",
+    "locator": "Complete official call, call.txt line 256",
+    "metric_perimeter": "Windows OEM and devices",
+    "source_period": "FY2027",
+    "mapped_parameter_ids": [
+      "windows_oem_and_devices_growth_low_2027",
+      "windows_oem_and_devices_growth_base_2027",
+      "windows_oem_and_devices_growth_high_2027"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Compare negative annual direction only; low-23/base-18/high-13 are assumptions, not inferred endpoints of high-teens. Scope has small Other reclass.",
+    "verdict": "PASS",
+    "original_source_verification": "independent full official raw reopened",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_qualitative_original_05",
+    "original_or_added": "original17",
+    "source_id": "src_call",
+    "locator": "Complete official call, call.txt line 257",
+    "metric_perimeter": "Company FX effect",
+    "source_period": "FY2027",
+    "mapped_parameter_ids": [],
+    "mapped_scenarios": [],
+    "comparison_or_unmodeled_reason": "Conditional current-rates FX<1pp drag; no annual currency bridge or FX adjustment parameter. Explicit unmodeled risk; cannot subtract from CC quarterly guidance to derive an annual rate.",
+    "verdict": "PASS",
+    "original_source_verification": "independent full official raw reopened",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_qualitative_original_06",
+    "original_or_added": "original17",
+    "source_id": "src_call",
+    "locator": "Complete official call, call.txt line 258",
+    "metric_perimeter": "Company total revenue",
+    "source_period": "FY2027",
+    "mapped_parameter_ids": [
+      "azure_growth_low_2027",
+      "azure_growth_base_2027",
+      "azure_growth_high_2027",
+      "microsoft_365_cloud_growth_low_2027",
+      "microsoft_365_cloud_growth_base_2027",
+      "microsoft_365_cloud_growth_high_2027",
+      "productivity_and_server_licensing_growth_low_2027",
+      "productivity_and_server_licensing_growth_base_2027",
+      "productivity_and_server_licensing_growth_high_2027",
+      "industry_solutions_growth_low_2027",
+      "industry_solutions_growth_base_2027",
+      "industry_solutions_growth_high_2027",
+      "frontier_and_support_services_growth_low_2027",
+      "frontier_and_support_services_growth_base_2027",
+      "frontier_and_support_services_growth_high_2027",
+      "search_and_advertising_growth_low_2027",
+      "search_and_advertising_growth_base_2027",
+      "search_and_advertising_growth_high_2027",
+      "xbox_growth_low_2027",
+      "xbox_growth_base_2027",
+      "xbox_growth_high_2027",
+      "windows_oem_and_devices_growth_low_2027",
+      "windows_oem_and_devices_growth_base_2027",
+      "windows_oem_and_devices_growth_high_2027"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Formal numeric ledger records only >=10% linguistic floor, compares all scenarios after construction. Non-revenue opex/CapEx/tax portions are outside revenue scope.",
+    "verdict": "PASS",
+    "original_source_verification": "independent full official raw reopened",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_qualitative_original_07",
+    "original_or_added": "original17",
+    "source_id": "src_call",
+    "locator": "Complete official call, call.txt line 264",
+    "metric_perimeter": "Commercial bookings excluding OpenAI",
+    "source_period": "FY2027Q1",
+    "mapped_parameter_ids": [
+      "azure_growth_low_2027",
+      "azure_growth_base_2027",
+      "azure_growth_high_2027",
+      "microsoft_365_cloud_growth_low_2027",
+      "microsoft_365_cloud_growth_base_2027",
+      "microsoft_365_cloud_growth_high_2027",
+      "industry_solutions_growth_low_2027",
+      "industry_solutions_growth_base_2027",
+      "industry_solutions_growth_high_2027"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Bookings is not recognized revenue; healthy growth no numeric point, expiry-base/OpenAI volatility matters. No conversion model, unmodeled with context mappings only.",
+    "verdict": "PASS",
+    "original_source_verification": "independent full official raw reopened",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_qualitative_original_08",
+    "original_or_added": "original17",
+    "source_id": "src_call",
+    "locator": "Complete official call, call.txt line 268",
+    "metric_perimeter": "Old M365commercial cloud",
+    "source_period": "FY2027Q1 and throughFY2027",
+    "mapped_parameter_ids": [
+      "microsoft_365_cloud_growth_low_2027",
+      "microsoft_365_cloud_growth_base_2027",
+      "microsoft_365_cloud_growth_high_2027"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Old Q1 15%CC/16%adjusted superseded mechanically by PPT21 17/18 on new commercial scope; whole annual cloud includes consumer/developer. Annual case12/17/22 not same-basis target attainment. Acceleration-through-year remains qualitative.",
+    "verdict": "PASS",
+    "original_source_verification": "independent full official raw reopened",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_qualitative_original_09",
+    "original_or_added": "original17",
+    "source_id": "src_call",
+    "locator": "Complete official call, call.txt line 269",
+    "metric_perimeter": "Old M365commercial products",
+    "source_period": "FY2027Q1",
+    "mapped_parameter_ids": [
+      "productivity_and_server_licensing_growth_low_2027",
+      "productivity_and_server_licensing_growth_base_2027",
+      "productivity_and_server_licensing_growth_high_2027"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Quarter mid-single positive differs from annual negative and new quarter aggregate low-single decline; only directional contract-timing context, no quarterly model or target comparison.",
+    "verdict": "PASS",
+    "original_source_verification": "independent full official raw reopened",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_qualitative_original_10",
+    "original_or_added": "original17",
+    "source_id": "src_call",
+    "locator": "Complete official call, call.txt line 270",
+    "metric_perimeter": "M365consumer cloud",
+    "source_period": "FY2027Q1",
+    "mapped_parameter_ids": [
+      "microsoft_365_cloud_growth_low_2027",
+      "microsoft_365_cloud_growth_base_2027",
+      "microsoft_365_cloud_growth_high_2027"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Quarter mid-teens subset unchanged under PPT21; full annual cloud cannot be mapped quantitatively without consumer weight/mix; no midpoint invented.",
+    "verdict": "PASS",
+    "original_source_verification": "independent full official raw reopened",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_qualitative_original_11",
+    "original_or_added": "original17",
+    "source_id": "src_call",
+    "locator": "Complete official call, call.txt line 271",
+    "metric_perimeter": "Old LinkedIn total",
+    "source_period": "FY2027Q1",
+    "mapped_parameter_ids": [
+      "industry_solutions_growth_low_2027",
+      "industry_solutions_growth_base_2027",
+      "industry_solutions_growth_high_2027",
+      "search_and_advertising_growth_low_2027",
+      "search_and_advertising_growth_base_2027",
+      "search_and_advertising_growth_high_2027"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "High-single old total splits Talent/Sales into Industry and Marketing/Premium into Search; no component bridge. Explicit mismatch, no annual comparison.",
+    "verdict": "PASS",
+    "original_source_verification": "independent full official raw reopened",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_qualitative_original_12",
+    "original_or_added": "original17",
+    "source_id": "src_call",
+    "locator": "Complete official call, call.txt line 272",
+    "metric_perimeter": "Dynamics365",
+    "source_period": "FY2027Q1",
+    "mapped_parameter_ids": [
+      "industry_solutions_growth_low_2027",
+      "industry_solutions_growth_base_2027",
+      "industry_solutions_growth_high_2027"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Low-teens cloud subset includes ERP strength and CRM moderation; new Industrycloud quarter high-single on wider scope. No quarterly/whole annual conversion.",
+    "verdict": "PASS",
+    "original_source_verification": "independent full official raw reopened",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_qualitative_original_13",
+    "original_or_added": "original17",
+    "source_id": "src_call",
+    "locator": "Complete official call, call.txt line 274",
+    "metric_perimeter": "Old Azure and other cloud services",
+    "source_period": "FY2027Q1 and H1FY2027",
+    "mapped_parameter_ids": [
+      "azure_growth_low_2027",
+      "azure_growth_base_2027",
+      "azure_growth_high_2027"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Old45%CC quarter mechanically new44–45%CC on narrower Azure scope; H1acceleration is expectation. Annual38reported separate, FX/capacity uncertain; no conservative same-basis bound.",
+    "verdict": "PASS",
+    "original_source_verification": "independent full official raw reopened",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_qualitative_original_14",
+    "original_or_added": "original17",
+    "source_id": "src_call",
+    "locator": "Complete official call, call.txt line 275",
+    "metric_perimeter": "Old onpremserver",
+    "source_period": "FY2027Q1",
+    "mapped_parameter_ids": [
+      "productivity_and_server_licensing_growth_low_2027",
+      "productivity_and_server_licensing_growth_base_2027",
+      "productivity_and_server_licensing_growth_high_2027"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Low-to-mid-single decline quarter on old subset; new licensing aggregate quarter low-single decline. No annual midpoint or quantitative same-basis comparison.",
+    "verdict": "PASS",
+    "original_source_verification": "independent full official raw reopened",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_qualitative_original_15",
+    "original_or_added": "original17",
+    "source_id": "src_call",
+    "locator": "Complete official call, call.txt line 278",
+    "metric_perimeter": "Old search advertising exTAC",
+    "source_period": "FY2027Q1",
+    "mapped_parameter_ids": [
+      "search_and_advertising_growth_low_2027",
+      "search_and_advertising_growth_base_2027",
+      "search_and_advertising_growth_high_2027"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Old mid-single quarter mechanically new mid-to-high-single exTAC including LinkedInMarketing/Premium. Net KPI cannot convert to recognized gross/mixed annual rate.",
+    "verdict": "PASS",
+    "original_source_verification": "independent full official raw reopened",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_qualitative_original_16",
+    "original_or_added": "original17",
+    "source_id": "src_call",
+    "locator": "Complete official call, call.txt line 279",
+    "metric_perimeter": "Xbox content/services and hardware",
+    "source_period": "FY2027Q1",
+    "mapped_parameter_ids": [
+      "xbox_growth_low_2027",
+      "xbox_growth_base_2027",
+      "xbox_growth_high_2027"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Content mid-single decline and hardware decline are subsets/quarter; annual total base-4 is independently judged and disagrees with annual positive management expectation. No quarter model.",
+    "verdict": "PASS",
+    "original_source_verification": "independent full official raw reopened",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_qualitative_original_17",
+    "original_or_added": "original17",
+    "source_id": "src_presentation",
+    "locator": "slides20-21/image20.png and image21.png",
+    "metric_perimeter": "FY27Q1 licensing/Industrycloud/exTAC/Xbox/Windows rows (five distinct scopes)",
+    "source_period": "FY2027Q1",
+    "mapped_parameter_ids": [
+      "productivity_and_server_licensing_growth_low_2027",
+      "productivity_and_server_licensing_growth_base_2027",
+      "productivity_and_server_licensing_growth_high_2027",
+      "industry_solutions_growth_low_2027",
+      "industry_solutions_growth_base_2027",
+      "industry_solutions_growth_high_2027",
+      "search_and_advertising_growth_low_2027",
+      "search_and_advertising_growth_base_2027",
+      "search_and_advertising_growth_high_2027",
+      "xbox_growth_low_2027",
+      "xbox_growth_base_2027",
+      "xbox_growth_high_2027",
+      "windows_oem_and_devices_growth_low_2027",
+      "windows_oem_and_devices_growth_base_2027",
+      "windows_oem_and_devices_growth_high_2027"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Split explicit quarter-row statements into children below. No quarter or CC/exTAC conversion to annual recognized revenue.",
+    "verdict": "PASS",
+    "original_source_verification": "independent PPT original visual",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_cobalt_month_end",
+    "original_or_added": "added16",
+    "source_id": "src_call",
+    "locator": "call.txt line118 CEO infrastructure",
+    "metric_perimeter": "Cobalt200 racks in over25 data centers",
+    "source_period": "end July2026 (this month relative to July29)",
+    "mapped_parameter_ids": [
+      "azure_growth_low_2027",
+      "azure_growth_low_2028",
+      "azure_growth_low_2029",
+      "azure_growth_base_2027",
+      "azure_growth_base_2028",
+      "azure_growth_base_2029",
+      "azure_growth_high_2027",
+      "azure_growth_high_2028",
+      "azure_growth_high_2029"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Deployment expectation is past its dated endpoint at asof but no actual completion source verified. No paid workload/price/utilization bridge; do not imply fulfillment or revenue. Retain >25 capability claim only.",
+    "verdict": "PASS",
+    "original_source_verification": "independent full official raw reopened",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_healthcare_calendar2026",
+    "original_or_added": "added16",
+    "source_id": "src_call",
+    "locator": "call.txt line191 CEO healthcare",
+    "metric_perimeter": "over100million patient encounters",
+    "source_period": "calendar2026",
+    "mapped_parameter_ids": [
+      "industry_solutions_growth_low_2027",
+      "industry_solutions_growth_low_2028",
+      "industry_solutions_growth_low_2029",
+      "industry_solutions_growth_base_2027",
+      "industry_solutions_growth_base_2028",
+      "industry_solutions_growth_base_2029",
+      "industry_solutions_growth_high_2027",
+      "industry_solutions_growth_high_2028",
+      "industry_solutions_growth_high_2029"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Calendar-year usage target with28M quarter actual is not fiscal-year recognized dollars. No fee perencounter or paid-counterparty/recognition bridge; explicitly unmodeled numeric operating target with qualitative linkage.",
+    "verdict": "PASS",
+    "original_source_verification": "independent full official raw reopened",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_frontier_experts",
+    "original_or_added": "added16",
+    "source_id": "src_call",
+    "locator": "call.txt line199 CEO Frontier",
+    "metric_perimeter": "6000 industry/engineering experts",
+    "source_period": "future deployment timing unstated",
+    "mapped_parameter_ids": [
+      "frontier_and_support_services_growth_low_2027",
+      "frontier_and_support_services_growth_low_2028",
+      "frontier_and_support_services_growth_low_2029",
+      "frontier_and_support_services_growth_base_2027",
+      "frontier_and_support_services_growth_base_2028",
+      "frontier_and_support_services_growth_base_2029",
+      "frontier_and_support_services_growth_high_2027",
+      "frontier_and_support_services_growth_high_2028",
+      "frontier_and_support_services_growth_high_2029"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Capacity commitment, not billable-hour forecast; fees/utilization/paid-milestones unavailable. No headcount-times-rate revenue calculation.",
+    "verdict": "PASS",
+    "original_source_verification": "independent full official raw reopened",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_copilot_call_superapp",
+    "original_or_added": "added16",
+    "source_id": "src_call",
+    "locator": "call.txt line162 CEO knowledge work",
+    "metric_perimeter": "Copilot consumer/commercial superapp",
+    "source_period": "this quarter relative to July29 FY2027Q1",
+    "mapped_parameter_ids": [
+      "microsoft_365_cloud_growth_low_2027",
+      "microsoft_365_cloud_growth_low_2028",
+      "microsoft_365_cloud_growth_low_2029",
+      "microsoft_365_cloud_growth_base_2027",
+      "microsoft_365_cloud_growth_base_2028",
+      "microsoft_365_cloud_growth_base_2029",
+      "microsoft_365_cloud_growth_high_2027",
+      "microsoft_365_cloud_growth_high_2028",
+      "microsoft_365_cloud_growth_high_2029"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Later September25 announcement gives availability windows but no realized usage/contract bridge. Do not assert rollout promise fulfilled solely from preview availability.",
+    "verdict": "PASS",
+    "original_source_verification": "independent full official raw reopened",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_cowork_usage_billing",
+    "original_or_added": "added16",
+    "source_id": "src_call",
+    "locator": "call.txt line177 CEO knowledge work",
+    "metric_perimeter": "Cowork usage billing and active paying customers",
+    "source_period": "earlier July2026",
+    "mapped_parameter_ids": [
+      "microsoft_365_cloud_growth_low_2027",
+      "microsoft_365_cloud_growth_low_2028",
+      "microsoft_365_cloud_growth_low_2029",
+      "microsoft_365_cloud_growth_base_2027",
+      "microsoft_365_cloud_growth_base_2028",
+      "microsoft_365_cloud_growth_base_2029",
+      "microsoft_365_cloud_growth_high_2027",
+      "microsoft_365_cloud_growth_high_2028",
+      "microsoft_365_cloud_growth_high_2029"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Actual billing-start statement with no revenue amount/cohort retention. Supports monetization mechanism, not exact future growth or annual average seats.",
+    "verdict": "PASS",
+    "original_source_verification": "independent full official raw reopened",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_copilot_frontier_rollout",
+    "original_or_added": "added16",
+    "source_id": "src_strategy",
+    "locator": "blog September25 paragraph after Home/Code/Autopilot introduction; fresh web lines8",
+    "metric_perimeter": "Home/Code Frontier and Autopilot private preview",
+    "source_period": "weeks after September25 /endSeptember2026",
+    "mapped_parameter_ids": [
+      "microsoft_365_cloud_growth_low_2027",
+      "microsoft_365_cloud_growth_low_2028",
+      "microsoft_365_cloud_growth_low_2029",
+      "microsoft_365_cloud_growth_base_2027",
+      "microsoft_365_cloud_growth_base_2028",
+      "microsoft_365_cloud_growth_base_2029",
+      "microsoft_365_cloud_growth_high_2027",
+      "microsoft_365_cloud_growth_high_2028",
+      "microsoft_365_cloud_growth_high_2029"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Announcement/preview is not delivered paid customer adoption. As-of completion not independently measured; annual consumption increment unmodeled.",
+    "verdict": "PASS",
+    "original_source_verification": "official Sep25 blog reopened live full article L8/L19/L20/L35/L36",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_code_broad_availability",
+    "original_or_added": "added16",
+    "source_id": "src_strategy",
+    "locator": "fresh blog web lines19",
+    "metric_perimeter": "Code roll-out",
+    "source_period": "endSeptember/comingweeks2026",
+    "mapped_parameter_ids": [
+      "microsoft_365_cloud_growth_low_2027",
+      "microsoft_365_cloud_growth_low_2028",
+      "microsoft_365_cloud_growth_low_2029",
+      "microsoft_365_cloud_growth_base_2027",
+      "microsoft_365_cloud_growth_base_2028",
+      "microsoft_365_cloud_growth_base_2029",
+      "microsoft_365_cloud_growth_high_2027",
+      "microsoft_365_cloud_growth_high_2028",
+      "microsoft_365_cloud_growth_high_2029"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Future availability commitment; no billed usage trajectory or price path verified. Do not treat source schedule as realized rollout.",
+    "verdict": "PASS",
+    "original_source_verification": "official Sep25 blog reopened live full article L8/L19/L20/L35/L36",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_copilot_consumer_preview",
+    "original_or_added": "added16",
+    "source_id": "src_strategy",
+    "locator": "fresh blog web line20",
+    "metric_perimeter": "Consumer Premium/Pro Code preview",
+    "source_period": "later calendar2026",
+    "mapped_parameter_ids": [
+      "microsoft_365_cloud_growth_low_2027",
+      "microsoft_365_cloud_growth_low_2028",
+      "microsoft_365_cloud_growth_low_2029",
+      "microsoft_365_cloud_growth_base_2027",
+      "microsoft_365_cloud_growth_base_2028",
+      "microsoft_365_cloud_growth_base_2029",
+      "microsoft_365_cloud_growth_high_2027",
+      "microsoft_365_cloud_growth_high_2028",
+      "microsoft_365_cloud_growth_high_2029"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Preview timing only; no incremental paid conversion/share of annual whole-cloud revenue.",
+    "verdict": "PASS",
+    "original_source_verification": "official Sep25 blog reopened live full article L8/L19/L20/L35/L36",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_ubb_scope",
+    "original_or_added": "added16",
+    "source_id": "src_strategy",
+    "locator": "fresh blog web line35",
+    "metric_perimeter": "usage-based billing product scope",
+    "source_period": "at September25 announcement; feature delivery follows stated availability windows",
+    "mapped_parameter_ids": [
+      "microsoft_365_cloud_growth_low_2027",
+      "microsoft_365_cloud_growth_low_2028",
+      "microsoft_365_cloud_growth_low_2029",
+      "microsoft_365_cloud_growth_base_2027",
+      "microsoft_365_cloud_growth_base_2028",
+      "microsoft_365_cloud_growth_base_2029",
+      "microsoft_365_cloud_growth_high_2027",
+      "microsoft_365_cloud_growth_high_2028",
+      "microsoft_365_cloud_growth_high_2029"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Supports delivered-usage monetization contract; not an amount or proof all preview products already generate revenue.",
+    "verdict": "PASS",
+    "original_source_verification": "official Sep25 blog reopened live full article L8/L19/L20/L35/L36",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_finops_october",
+    "original_or_added": "added16",
+    "source_id": "src_strategy",
+    "locator": "fresh blog web line36",
+    "metric_perimeter": "FinOps support for CopilotStudio agents",
+    "source_period": "October2026 planned",
+    "mapped_parameter_ids": [
+      "microsoft_365_cloud_growth_low_2027",
+      "microsoft_365_cloud_growth_low_2028",
+      "microsoft_365_cloud_growth_low_2029",
+      "microsoft_365_cloud_growth_base_2027",
+      "microsoft_365_cloud_growth_base_2028",
+      "microsoft_365_cloud_growth_base_2029",
+      "microsoft_365_cloud_growth_high_2027",
+      "microsoft_365_cloud_growth_high_2028",
+      "microsoft_365_cloud_growth_high_2029"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Spend controls may constrain or facilitate adoption; no outcome sign or revenue amount proven. Future after-asof portions not counted as fulfilled.",
+    "verdict": "PASS",
+    "original_source_verification": "official Sep25 blog reopened live full article L8/L19/L20/L35/L36",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_q1_licensing",
+    "original_or_added": "added16",
+    "source_id": "src_presentation",
+    "locator": "PPT21 adjusted outlook row named metric, visual read image21.png",
+    "metric_perimeter": "Productivity/serverlicensing",
+    "source_period": "FY2027Q1",
+    "mapped_parameter_ids": [
+      "productivity_and_server_licensing_growth_low_2027",
+      "productivity_and_server_licensing_growth_low_2028",
+      "productivity_and_server_licensing_growth_low_2029",
+      "productivity_and_server_licensing_growth_base_2027",
+      "productivity_and_server_licensing_growth_base_2028",
+      "productivity_and_server_licensing_growth_base_2029",
+      "productivity_and_server_licensing_growth_high_2027",
+      "productivity_and_server_licensing_growth_high_2028",
+      "productivity_and_server_licensing_growth_high_2029"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Quarter qualitative statement only; subset/new scope/exTAC distinctions retained. Annual scenarios not compared numerically and no midpoint or x4 conversion.",
+    "verdict": "PASS",
+    "original_source_verification": "independent PPT original visual",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_q1_industry",
+    "original_or_added": "added16",
+    "source_id": "src_presentation",
+    "locator": "PPT21 adjusted outlook row named metric, visual read image21.png",
+    "metric_perimeter": "Industrysolutionscloud",
+    "source_period": "FY2027Q1",
+    "mapped_parameter_ids": [
+      "industry_solutions_growth_low_2027",
+      "industry_solutions_growth_low_2028",
+      "industry_solutions_growth_low_2029",
+      "industry_solutions_growth_base_2027",
+      "industry_solutions_growth_base_2028",
+      "industry_solutions_growth_base_2029",
+      "industry_solutions_growth_high_2027",
+      "industry_solutions_growth_high_2028",
+      "industry_solutions_growth_high_2029"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Quarter qualitative statement only; subset/new scope/exTAC distinctions retained. Annual scenarios not compared numerically and no midpoint or x4 conversion.",
+    "verdict": "PASS",
+    "original_source_verification": "independent PPT original visual",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_q1_search",
+    "original_or_added": "added16",
+    "source_id": "src_presentation",
+    "locator": "PPT21 adjusted outlook row named metric, visual read image21.png",
+    "metric_perimeter": "Search/advertising exTAC",
+    "source_period": "FY2027Q1",
+    "mapped_parameter_ids": [
+      "search_and_advertising_growth_low_2027",
+      "search_and_advertising_growth_low_2028",
+      "search_and_advertising_growth_low_2029",
+      "search_and_advertising_growth_base_2027",
+      "search_and_advertising_growth_base_2028",
+      "search_and_advertising_growth_base_2029",
+      "search_and_advertising_growth_high_2027",
+      "search_and_advertising_growth_high_2028",
+      "search_and_advertising_growth_high_2029"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Quarter qualitative statement only; subset/new scope/exTAC distinctions retained. Annual scenarios not compared numerically and no midpoint or x4 conversion.",
+    "verdict": "PASS",
+    "original_source_verification": "independent PPT original visual",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_q1_xbox_content",
+    "original_or_added": "added16",
+    "source_id": "src_presentation",
+    "locator": "PPT21 adjusted outlook row named metric, visual read image21.png",
+    "metric_perimeter": "XBOXcontent/services",
+    "source_period": "FY2027Q1",
+    "mapped_parameter_ids": [
+      "xbox_growth_low_2027",
+      "xbox_growth_low_2028",
+      "xbox_growth_low_2029",
+      "xbox_growth_base_2027",
+      "xbox_growth_base_2028",
+      "xbox_growth_base_2029",
+      "xbox_growth_high_2027",
+      "xbox_growth_high_2028",
+      "xbox_growth_high_2029"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Quarter qualitative statement only; subset/new scope/exTAC distinctions retained. Annual scenarios not compared numerically and no midpoint or x4 conversion.",
+    "verdict": "PASS",
+    "original_source_verification": "independent PPT original visual",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_q1_xbox_hardware",
+    "original_or_added": "added16",
+    "source_id": "src_presentation",
+    "locator": "PPT21 adjusted outlook row named metric, visual read image21.png",
+    "metric_perimeter": "XBOXhardware",
+    "source_period": "FY2027Q1",
+    "mapped_parameter_ids": [
+      "xbox_growth_low_2027",
+      "xbox_growth_low_2028",
+      "xbox_growth_low_2029",
+      "xbox_growth_base_2027",
+      "xbox_growth_base_2028",
+      "xbox_growth_base_2029",
+      "xbox_growth_high_2027",
+      "xbox_growth_high_2028",
+      "xbox_growth_high_2029"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Quarter qualitative statement only; subset/new scope/exTAC distinctions retained. Annual scenarios not compared numerically and no midpoint or x4 conversion.",
+    "verdict": "PASS",
+    "original_source_verification": "independent PPT original visual",
+    "numeric_point_invented": false
+  },
+  {
+    "target_id": "v2_q1_windows",
+    "original_or_added": "added16",
+    "source_id": "src_presentation",
+    "locator": "PPT21 adjusted outlook row named metric, visual read image21.png",
+    "metric_perimeter": "WindowsOEM/devices",
+    "source_period": "FY2027Q1",
+    "mapped_parameter_ids": [
+      "windows_oem_and_devices_growth_low_2027",
+      "windows_oem_and_devices_growth_low_2028",
+      "windows_oem_and_devices_growth_low_2029",
+      "windows_oem_and_devices_growth_base_2027",
+      "windows_oem_and_devices_growth_base_2028",
+      "windows_oem_and_devices_growth_base_2029",
+      "windows_oem_and_devices_growth_high_2027",
+      "windows_oem_and_devices_growth_high_2028",
+      "windows_oem_and_devices_growth_high_2029"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "comparison_or_unmodeled_reason": "Quarter qualitative statement only; subset/new scope/exTAC distinctions retained. Annual scenarios not compared numerically and no midpoint or x4 conversion.",
+    "verdict": "PASS",
+    "original_source_verification": "independent PPT original visual",
+    "numeric_point_invented": false
+  }
+]

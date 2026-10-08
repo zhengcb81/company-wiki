@@ -1,0 +1,858 @@
+ARTIFACTS 344 FAIL 0
+LEDGER sample [{"id": "1791442151563829600-source-preparation-help", "label": "source-preparation-help", "started_at": "2026-10-08T06:49:11.564552+00:00", "cwd": "C:/Users/郑曾波/.agents/skills/revenue-forecast", "command": ["python", "scripts/source_preparation.py", "--help"], "timeout_seconds": 600, "event": "start"}, {"id": "1791442151563829600-source-preparation-help", "label": "source-preparation-help", "started_at": "2026-10-08T06:49:11.564552+00:00", "cwd": "C:/Users/郑曾波/.agents/skills/revenue-forecast", "command": ["python", "scripts/source_preparation.py", "--help"], "timeout_seconds": 600, "event": "finish", "ended_at": "2026-10-08T06:49:12.109619+00:00", "elapsed_seconds": 0.541, "returncode": 0, "outputs": {"stdout": {"path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791442151563829600-source-preparation-help.stdout.txt", "byte_size": 1226, "sha256": "22ede03744e3d9f14f53899e41739f5dc16f982bfb8738917b75fec81ea7445c"}, "stderr": {"path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791442151563829600-source-preparation-help.stderr.txt", "byte_size": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}}}]
+PDF annual2025.pdf PAGES 259 SHA d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5
+PDF half2026_current.pdf PAGES 210 SHA 182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe
+PARAMETERS
+{"parameter_id": "reported_total", "kind": "reported_fact", "value": 12384.63826811, "unit": "CNY million", "period": "FY2025", "definition": "Consolidated external FY2025 recognized revenue", "dimension": "revenue", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"], "scenario": null, "rationale": "Original CNY yuan /1,000,000; reconciled to annual p218", "claim_ids": ["claim_reported_total"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "equipment_base", "kind": "reported_fact", "value": 10527.0, "unit": "CNY million", "period": "FY2025", "definition": "FY2025 dedicated equipment revenue, disclosed rounded to 105.27亿元", "dimension": "revenue", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"], "scenario": null, "rationale": "Disclosed rounded magnitude; approximately ±0.5 CNY million, not false precision", "claim_ids": ["claim_equipment_base"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "aftermarket_base", "kind": "derived_fact", "value": 1857.6382681100004, "unit": "CNY million", "period": "FY2025", "definition": "Mathematical residual, not a precise published spares/services segment", "dimension": "revenue", "time_basis": "annual", "source_ids": [], "scenario": null, "rationale": "Total minus rounded equipment; includes undisclosed residual and inherits rounding. Mixed already-recognized fallback.", "claim_ids": [], "currency": "CNY", "scale": "million", "formula": "x0-x1", "input_parameter_ids": ["reported_total", "equipment_base"]}
+{"parameter_id": "cmp_base", "kind": "analyst_assumption", "value": 0, "unit": "CNY million", "period": "FY2025", "definition": "FY2025 incremental CMP revenue included in AMEC consolidation", "dimension": "revenue", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"], "scenario": null, "rationale": "CMP was acquired in 2026; zero incremental consolidation in FY2025 does NOT mean CMP standalone revenue zero", "claim_ids": ["claim_cmp_base"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "equipment_units_2025", "kind": "reported_fact", "value": 1240, "unit": "chambers", "period": "FY2025", "definition": "Dedicated-equipment chambers sold; not all produced or shipped chambers", "dimension": "quantity", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"], "scenario": null, "rationale": "Annual physical-sales disclosure; accepted-chamber forecast is a proxy, not a shipment-to-revenue identity proven by the table", "claim_ids": ["claim_equipment_units_2025"]}
+{"parameter_id": "equipment_weighted_unit_revenue_2025", "kind": "derived_fact", "value": 8.489516129032259, "unit": "CNY million per chamber", "period": "FY2025", "definition": "Rounded recognized equipment revenue per reported chamber, weighted product/configuration mix proxy", "dimension": "revenue_per_unit", "time_basis": "annual", "source_ids": [], "scenario": null, "rationale": "Not a quoted SKU ASP; rounded numerator limits precision", "claim_ids": [], "currency": "CNY", "scale": "million", "formula": "x0/x1", "input_parameter_ids": ["equipment_base", "equipment_units_2025"]}
+{"parameter_id": "equipment_units_low_2026", "kind": "analyst_assumption", "value": 1395, "unit": "chambers", "period": "FY2026", "definition": "Assumed chambers achieving revenue recognition in calendar fiscal year; legacy AMEC operations excluding acquired CMP", "dimension": "quantity", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "amec_sse_results_qa_20260910"], "scenario": "low", "rationale": "Conditional scenario, not a probability band. Global WFE forecast is an outside reference, not copied into AMEC. Customer concentration, client capex, qualification-to-acceptance, price mix and production execution can all change revenue. Base year-on-year unit growth is 30.6%/26.5%/22.0%, starting from 2025 sold 1240; product qualification and domestic process coverage justify a premium to industry benchmark, but no specific capacity ceiling is reported. Low imposes concentrated-client capex/acceptance delays; high requires successful film and packaging ramps. September10 official capacity plan supports expansion direction; 600,000m² current/900,000m² five-year plan and Guangzhou/Chengdu2027H1 commissioning are not converted mechanically into accepted chamber units or guaranteed revenue.", "claim_ids": ["claim_equipment_units_low_2026", "claim_ir_equipment_units_low_2026"]}
+{"parameter_id": "equipment_unit_revenue_low_2026", "kind": "analyst_assumption", "value": 8.2, "unit": "CNY million per chamber", "period": "FY2026", "definition": "Assumed recognized weighted revenue per chamber, mix and discounts included; legacy AMEC operations excluding acquired CMP", "dimension": "revenue_per_unit", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"], "scenario": "low", "rationale": "Independent pricing/mix assumption near rounded 2025 proxy 8.4895; low continuing discounts, high richer advanced equipment mix. No segment SKU price or client contract is known.", "claim_ids": ["claim_equipment_unit_revenue_low_2026"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "aftermarket_revenue_low_2026", "kind": "analyst_assumption", "value": 2043.4020949210005, "unit": "CNY million", "period": "FY2026", "definition": "Assumed already-recognized non-equipment residual including spares and services; legacy AMEC residual excluding all acquired CMP revenue", "dimension": "revenue", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"], "scenario": "low", "rationale": "Fallback residual annual path: installed equipment supports repeat spares/services; no measured installed base, attach rate or service progress. Values are assumptions rather than a disaggregated reported segment. Avoids re-applying arbitrary progress or shipment lag.", "claim_ids": ["claim_aftermarket_revenue_low_2026"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "cmp_revenue_low_2026", "kind": "analyst_assumption", "value": 40, "unit": "CNY million", "period": "FY2026", "definition": "Assumed incremental external CMP revenue included after control, full consolidated revenue not ownership multiplied", "dimension": "revenue", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"], "scenario": "low", "rationale": "2026 June–December after purchase on May31; June actual only1.29190208m. No mechanical 7/12 conversion of annual performance commitment; wide ramp/acceptance uncertainty. Low includes integration/qualification delays; high requires customer conversions.", "claim_ids": ["claim_cmp_revenue_low_2026"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "equipment_units_low_2027", "kind": "analyst_assumption", "value": 1470, "unit": "chambers", "period": "FY2027", "definition": "Assumed chambers achieving revenue recognition in calendar fiscal year; legacy AMEC operations excluding acquired CMP", "dimension": "quantity", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "amec_sse_results_qa_20260910"], "scenario": "low", "rationale": "Conditional scenario, not a probability band. Global WFE forecast is an outside reference, not copied into AMEC. Customer concentration, client capex, qualification-to-acceptance, price mix and production execution can all change revenue. Base year-on-year unit growth is 30.6%/26.5%/22.0%, starting from 2025 sold 1240; product qualification and domestic process coverage justify a premium to industry benchmark, but no specific capacity ceiling is reported. Low imposes concentrated-client capex/acceptance delays; high requires successful film and packaging ramps. September10 official capacity plan supports expansion direction; 600,000m² current/900,000m² five-year plan and Guangzhou/Chengdu2027H1 commissioning are not converted mechanically into accepted chamber units or guaranteed revenue.", "claim_ids": ["claim_equipment_units_low_2027", "claim_ir_equipment_units_low_2027"]}
+{"parameter_id": "equipment_unit_revenue_low_2027", "kind": "analyst_assumption", "value": 8.1, "unit": "CNY million per chamber", "period": "FY2027", "definition": "Assumed recognized weighted revenue per chamber, mix and discounts included; legacy AMEC operations excluding acquired CMP", "dimension": "revenue_per_unit", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"], "scenario": "low", "rationale": "Independent pricing/mix assumption near rounded 2025 proxy 8.4895; low continuing discounts, high richer advanced equipment mix. No segment SKU price or client contract is known.", "claim_ids": ["claim_equipment_unit_revenue_low_2027"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "aftermarket_revenue_low_2027", "kind": "analyst_assumption", "value": 2136.2840083265, "unit": "CNY million", "period": "FY2027", "definition": "Assumed already-recognized non-equipment residual including spares and services; legacy AMEC residual excluding all acquired CMP revenue", "dimension": "revenue", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"], "scenario": "low", "rationale": "Fallback residual annual path: installed equipment supports repeat spares/services; no measured installed base, attach rate or service progress. Values are assumptions rather than a disaggregated reported segment. Avoids re-applying arbitrary progress or shipment lag.", "claim_ids": ["claim_aftermarket_revenue_low_2027"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "cmp_revenue_low_2027", "kind": "analyst_assumption", "value": 180, "unit": "CNY million", "period": "FY2027", "definition": "Assumed incremental external CMP revenue included after control, full consolidated revenue not ownership multiplied", "dimension": "revenue", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"], "scenario": "low", "rationale": "Full-year CMP operating ramp assumption. Independently benchmarked to seller annual commitment, not forced to meet it. Intra-group transactions would require elimination if evidence emerges. Low includes integration/qualification delays; high requires customer conversions.", "claim_ids": ["claim_cmp_revenue_low_2027"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "equipment_units_low_2028", "kind": "analyst_assumption", "value": 1500, "unit": "chambers", "period": "FY2028", "definition": "Assumed chambers achieving revenue recognition in calendar fiscal year; legacy AMEC operations excluding acquired CMP", "dimension": "quantity", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "amec_sse_results_qa_20260910"], "scenario": "low", "rationale": "Conditional scenario, not a probability band. Global WFE forecast is an outside reference, not copied into AMEC. Customer concentration, client capex, qualification-to-acceptance, price mix and production execution can all change revenue. Base year-on-year unit growth is 30.6%/26.5%/22.0%, starting from 2025 sold 1240; product qualification and domestic process coverage justify a premium to industry benchmark, but no specific capacity ceiling is reported. Low imposes concentrated-client capex/acceptance delays; high requires successful film and packaging ramps. September10 official capacity plan supports expansion direction; 600,000m² current/900,000m² five-year plan and Guangzhou/Chengdu2027H1 commissioning are not converted mechanically into accepted chamber units or guaranteed revenue.", "claim_ids": ["claim_equipment_units_low_2028", "claim_ir_equipment_units_low_2028"]}
+{"parameter_id": "equipment_unit_revenue_low_2028", "kind": "analyst_assumption", "value": 8.0, "unit": "CNY million per chamber", "period": "FY2028", "definition": "Assumed recognized weighted revenue per chamber, mix and discounts included; legacy AMEC operations excluding acquired CMP", "dimension": "revenue_per_unit", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"], "scenario": "low", "rationale": "Independent pricing/mix assumption near rounded 2025 proxy 8.4895; low continuing discounts, high richer advanced equipment mix. No segment SKU price or client contract is known.", "claim_ids": ["claim_equipment_unit_revenue_low_2028"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "aftermarket_revenue_low_2028", "kind": "analyst_assumption", "value": 2229.1659217320002, "unit": "CNY million", "period": "FY2028", "definition": "Assumed already-recognized non-equipment residual including spares and services; legacy AMEC residual excluding all acquired CMP revenue", "dimension": "revenue", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"], "scenario": "low", "rationale": "Fallback residual annual path: installed equipment supports repeat spares/services; no measured installed base, attach rate or service progress. Values are assumptions rather than a disaggregated reported segment. Avoids re-applying arbitrary progress or shipment lag.", "claim_ids": ["claim_aftermarket_revenue_low_2028"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "cmp_revenue_low_2028", "kind": "analyst_assumption", "value": 260, "unit": "CNY million", "period": "FY2028", "definition": "Assumed incremental external CMP revenue included after control, full consolidated revenue not ownership multiplied", "dimension": "revenue", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"], "scenario": "low", "rationale": "Full-year CMP operating ramp assumption. Independently benchmarked to seller annual commitment, not forced to meet it. Intra-group transactions would require elimination if evidence emerges. Low includes integration/qualification delays; high requires customer conversions.", "claim_ids": ["claim_cmp_revenue_low_2028"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "equipment_units_base_2026", "kind": "analyst_assumption", "value": 1620, "unit": "chambers", "period": "FY2026", "definition": "Assumed chambers achieving revenue recognition in calendar fiscal year; legacy AMEC operations excluding acquired CMP", "dimension": "quantity", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "amec_sse_results_qa_20260910"], "scenario": "base", "rationale": "Conditional scenario, not a probability band. Global WFE forecast is an outside reference, not copied into AMEC. Customer concentration, client capex, qualification-to-acceptance, price mix and production execution can all change revenue. Base year-on-year unit growth is 30.6%/26.5%/22.0%, starting from 2025 sold 1240; product qualification and domestic process coverage justify a premium to industry benchmark, but no specific capacity ceiling is reported. Low imposes concentrated-client capex/acceptance delays; high requires successful film and packaging ramps. September10 official capacity plan supports expansion direction; 600,000m² current/900,000m² five-year plan and Guangzhou/Chengdu2027H1 commissioning are not converted mechanically into accepted chamber units or guaranteed revenue.", "claim_ids": ["claim_equipment_units_base_2026", "claim_ir_equipment_units_base_2026"]}
+{"parameter_id": "equipment_unit_revenue_base_2026", "kind": "analyst_assumption", "value": 8.49, "unit": "CNY million per chamber", "period": "FY2026", "definition": "Assumed recognized weighted revenue per chamber, mix and discounts included; legacy AMEC operations excluding acquired CMP", "dimension": "revenue_per_unit", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"], "scenario": "base", "rationale": "Independent pricing/mix assumption near rounded 2025 proxy 8.4895; low continuing discounts, high richer advanced equipment mix. No segment SKU price or client contract is known.", "claim_ids": ["claim_equipment_unit_revenue_base_2026"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "aftermarket_revenue_base_2026", "kind": "analyst_assumption", "value": 2322.0478351375004, "unit": "CNY million", "period": "FY2026", "definition": "Assumed already-recognized non-equipment residual including spares and services; legacy AMEC residual excluding all acquired CMP revenue", "dimension": "revenue", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"], "scenario": "base", "rationale": "Fallback residual annual path: installed equipment supports repeat spares/services; no measured installed base, attach rate or service progress. Values are assumptions rather than a disaggregated reported segment. Avoids re-applying arbitrary progress or shipment lag.", "claim_ids": ["claim_aftermarket_revenue_base_2026"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "cmp_revenue_base_2026", "kind": "analyst_assumption", "value": 120, "unit": "CNY million", "period": "FY2026", "definition": "Assumed incremental external CMP revenue included after control, full consolidated revenue not ownership multiplied", "dimension": "revenue", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"], "scenario": "base", "rationale": "2026 June–December after purchase on May31; June actual only1.29190208m. No mechanical 7/12 conversion of annual performance commitment; wide ramp/acceptance uncertainty. Low includes integration/qualification delays; high requires customer conversions.", "claim_ids": ["claim_cmp_revenue_base_2026"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "equipment_units_base_2027", "kind": "analyst_assumption", "value": 2050, "unit": "chambers", "period": "FY2027", "definition": "Assumed chambers achieving revenue recognition in calendar fiscal year; legacy AMEC operations excluding acquired CMP", "dimension": "quantity", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "amec_sse_results_qa_20260910"], "scenario": "base", "rationale": "Conditional scenario, not a probability band. Global WFE forecast is an outside reference, not copied into AMEC. Customer concentration, client capex, qualification-to-acceptance, price mix and production execution can all change revenue. Base year-on-year unit growth is 30.6%/26.5%/22.0%, starting from 2025 sold 1240; product qualification and domestic process coverage justify a premium to industry benchmark, but no specific capacity ceiling is reported. Low imposes concentrated-client capex/acceptance delays; high requires successful film and packaging ramps. September10 official capacity plan supports expansion direction; 600,000m² current/900,000m² five-year plan and Guangzhou/Chengdu2027H1 commissioning are not converted mechanically into accepted chamber units or guaranteed revenue.", "claim_ids": ["claim_equipment_units_base_2027", "claim_ir_equipment_units_base_2027"]}
+{"parameter_id": "equipment_unit_revenue_base_2027", "kind": "analyst_assumption", "value": 8.49, "unit": "CNY million per chamber", "period": "FY2027", "definition": "Assumed recognized weighted revenue per chamber, mix and discounts included; legacy AMEC operations excluding acquired CMP", "dimension": "revenue_per_unit", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"], "scenario": "base", "rationale": "Independent pricing/mix assumption near rounded 2025 proxy 8.4895; low continuing discounts, high richer advanced equipment mix. No segment SKU price or client contract is known.", "claim_ids": ["claim_equipment_unit_revenue_base_2027"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "aftermarket_revenue_base_2027", "kind": "analyst_assumption", "value": 2786.4574021650005, "unit": "CNY million", "period": "FY2027", "definition": "Assumed already-recognized non-equipment residual including spares and services; legacy AMEC residual excluding all acquired CMP revenue", "dimension": "revenue", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"], "scenario": "base", "rationale": "Fallback residual annual path: installed equipment supports repeat spares/services; no measured installed base, attach rate or service progress. Values are assumptions rather than a disaggregated reported segment. Avoids re-applying arbitrary progress or shipment lag.", "claim_ids": ["claim_aftermarket_revenue_base_2027"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "cmp_revenue_base_2027", "kind": "analyst_assumption", "value": 400, "unit": "CNY million", "period": "FY2027", "definition": "Assumed incremental external CMP revenue included after control, full consolidated revenue not ownership multiplied", "dimension": "revenue", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"], "scenario": "base", "rationale": "Full-year CMP operating ramp assumption. Independently benchmarked to seller annual commitment, not forced to meet it. Intra-group transactions would require elimination if evidence emerges. Low includes integration/qualification delays; high requires customer conversions.", "claim_ids": ["claim_cmp_revenue_base_2027"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "equipment_units_base_2028", "kind": "analyst_assumption", "value": 2500, "unit": "chambers", "period": "FY2028", "definition": "Assumed chambers achieving revenue recognition in calendar fiscal year; legacy AMEC operations excluding acquired CMP", "dimension": "quantity", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "amec_sse_results_qa_20260910"], "scenario": "base", "rationale": "Conditional scenario, not a probability band. Global WFE forecast is an outside reference, not copied into AMEC. Customer concentration, client capex, qualification-to-acceptance, price mix and production execution can all change revenue. Base year-on-year unit growth is 30.6%/26.5%/22.0%, starting from 2025 sold 1240; product qualification and domestic process coverage justify a premium to industry benchmark, but no specific capacity ceiling is reported. Low imposes concentrated-client capex/acceptance delays; high requires successful film and packaging ramps. September10 official capacity plan supports expansion direction; 600,000m² current/900,000m² five-year plan and Guangzhou/Chengdu2027H1 commissioning are not converted mechanically into accepted chamber units or guaranteed revenue.", "claim_ids": ["claim_equipment_units_base_2028", "claim_ir_equipment_units_base_2028"]}
+{"parameter_id": "equipment_unit_revenue_base_2028", "kind": "analyst_assumption", "value": 8.4, "unit": "CNY million per chamber", "period": "FY2028", "definition": "Assumed recognized weighted revenue per chamber, mix and discounts included; legacy AMEC operations excluding acquired CMP", "dimension": "revenue_per_unit", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"], "scenario": "base", "rationale": "Independent pricing/mix assumption near rounded 2025 proxy 8.4895; low continuing discounts, high richer advanced equipment mix. No segment SKU price or client contract is known.", "claim_ids": ["claim_equipment_unit_revenue_base_2028"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "aftermarket_revenue_base_2028", "kind": "analyst_assumption", "value": 3250.8669691925006, "unit": "CNY million", "period": "FY2028", "definition": "Assumed already-recognized non-equipment residual including spares and services; legacy AMEC residual excluding all acquired CMP revenue", "dimension": "revenue", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"], "scenario": "base", "rationale": "Fallback residual annual path: installed equipment supports repeat spares/services; no measured installed base, attach rate or service progress. Values are assumptions rather than a disaggregated reported segment. Avoids re-applying arbitrary progress or shipment lag.", "claim_ids": ["claim_aftermarket_revenue_base_2028"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "cmp_revenue_base_2028", "kind": "analyst_assumption", "value": 550, "unit": "CNY million", "period": "FY2028", "definition": "Assumed incremental external CMP revenue included after control, full consolidated revenue not ownership multiplied", "dimension": "revenue", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"], "scenario": "base", "rationale": "Full-year CMP operating ramp assumption. Independently benchmarked to seller annual commitment, not forced to meet it. Intra-group transactions would require elimination if evidence emerges. Low includes integration/qualification delays; high requires customer conversions.", "claim_ids": ["claim_cmp_revenue_base_2028"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "equipment_units_high_2026", "kind": "analyst_assumption", "value": 1800, "unit": "chambers", "period": "FY2026", "definition": "Assumed chambers achieving revenue recognition in calendar fiscal year; legacy AMEC operations excluding acquired CMP", "dimension": "quantity", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "amec_sse_results_qa_20260910"], "scenario": "high", "rationale": "Conditional scenario, not a probability band. Global WFE forecast is an outside reference, not copied into AMEC. Customer concentration, client capex, qualification-to-acceptance, price mix and production execution can all change revenue. Base year-on-year unit growth is 30.6%/26.5%/22.0%, starting from 2025 sold 1240; product qualification and domestic process coverage justify a premium to industry benchmark, but no specific capacity ceiling is reported. Low imposes concentrated-client capex/acceptance delays; high requires successful film and packaging ramps. September10 official capacity plan supports expansion direction; 600,000m² current/900,000m² five-year plan and Guangzhou/Chengdu2027H1 commissioning are not converted mechanically into accepted chamber units or guaranteed revenue.", "claim_ids": ["claim_equipment_units_high_2026", "claim_ir_equipment_units_high_2026"]}
+{"parameter_id": "equipment_unit_revenue_high_2026", "kind": "analyst_assumption", "value": 8.9, "unit": "CNY million per chamber", "period": "FY2026", "definition": "Assumed recognized weighted revenue per chamber, mix and discounts included; legacy AMEC operations excluding acquired CMP", "dimension": "revenue_per_unit", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"], "scenario": "high", "rationale": "Independent pricing/mix assumption near rounded 2025 proxy 8.4895; low continuing discounts, high richer advanced equipment mix. No segment SKU price or client contract is known.", "claim_ids": ["claim_equipment_unit_revenue_high_2026"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "aftermarket_revenue_high_2026", "kind": "analyst_assumption", "value": 2507.811661948501, "unit": "CNY million", "period": "FY2026", "definition": "Assumed already-recognized non-equipment residual including spares and services; legacy AMEC residual excluding all acquired CMP revenue", "dimension": "revenue", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"], "scenario": "high", "rationale": "Fallback residual annual path: installed equipment supports repeat spares/services; no measured installed base, attach rate or service progress. Values are assumptions rather than a disaggregated reported segment. Avoids re-applying arbitrary progress or shipment lag.", "claim_ids": ["claim_aftermarket_revenue_high_2026"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "cmp_revenue_high_2026", "kind": "analyst_assumption", "value": 220, "unit": "CNY million", "period": "FY2026", "definition": "Assumed incremental external CMP revenue included after control, full consolidated revenue not ownership multiplied", "dimension": "revenue", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"], "scenario": "high", "rationale": "2026 June–December after purchase on May31; June actual only1.29190208m. No mechanical 7/12 conversion of annual performance commitment; wide ramp/acceptance uncertainty. Low includes integration/qualification delays; high requires customer conversions.", "claim_ids": ["claim_cmp_revenue_high_2026"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "equipment_units_high_2027", "kind": "analyst_assumption", "value": 2500, "unit": "chambers", "period": "FY2027", "definition": "Assumed chambers achieving revenue recognition in calendar fiscal year; legacy AMEC operations excluding acquired CMP", "dimension": "quantity", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "amec_sse_results_qa_20260910"], "scenario": "high", "rationale": "Conditional scenario, not a probability band. Global WFE forecast is an outside reference, not copied into AMEC. Customer concentration, client capex, qualification-to-acceptance, price mix and production execution can all change revenue. Base year-on-year unit growth is 30.6%/26.5%/22.0%, starting from 2025 sold 1240; product qualification and domestic process coverage justify a premium to industry benchmark, but no specific capacity ceiling is reported. Low imposes concentrated-client capex/acceptance delays; high requires successful film and packaging ramps. September10 official capacity plan supports expansion direction; 600,000m² current/900,000m² five-year plan and Guangzhou/Chengdu2027H1 commissioning are not converted mechanically into accepted chamber units or guaranteed revenue.", "claim_ids": ["claim_equipment_units_high_2027", "claim_ir_equipment_units_high_2027"]}
+{"parameter_id": "equipment_unit_revenue_high_2027", "kind": "analyst_assumption", "value": 8.9, "unit": "CNY million per chamber", "period": "FY2027", "definition": "Assumed recognized weighted revenue per chamber, mix and discounts included; legacy AMEC operations excluding acquired CMP", "dimension": "revenue_per_unit", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"], "scenario": "high", "rationale": "Independent pricing/mix assumption near rounded 2025 proxy 8.4895; low continuing discounts, high richer advanced equipment mix. No segment SKU price or client contract is known.", "claim_ids": ["claim_equipment_unit_revenue_high_2027"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "aftermarket_revenue_high_2027", "kind": "analyst_assumption", "value": 3250.8669691925006, "unit": "CNY million", "period": "FY2027", "definition": "Assumed already-recognized non-equipment residual including spares and services; legacy AMEC residual excluding all acquired CMP revenue", "dimension": "revenue", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"], "scenario": "high", "rationale": "Fallback residual annual path: installed equipment supports repeat spares/services; no measured installed base, attach rate or service progress. Values are assumptions rather than a disaggregated reported segment. Avoids re-applying arbitrary progress or shipment lag.", "claim_ids": ["claim_aftermarket_revenue_high_2027"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "cmp_revenue_high_2027", "kind": "analyst_assumption", "value": 520, "unit": "CNY million", "period": "FY2027", "definition": "Assumed incremental external CMP revenue included after control, full consolidated revenue not ownership multiplied", "dimension": "revenue", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"], "scenario": "high", "rationale": "Full-year CMP operating ramp assumption. Independently benchmarked to seller annual commitment, not forced to meet it. Intra-group transactions would require elimination if evidence emerges. Low includes integration/qualification delays; high requires customer conversions.", "claim_ids": ["claim_cmp_revenue_high_2027"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "equipment_units_high_2028", "kind": "analyst_assumption", "value": 3250, "unit": "chambers", "period": "FY2028", "definition": "Assumed chambers achieving revenue recognition in calendar fiscal year; legacy AMEC operations excluding acquired CMP", "dimension": "quantity", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "amec_sse_results_qa_20260910"], "scenario": "high", "rationale": "Conditional scenario, not a probability band. Global WFE forecast is an outside reference, not copied into AMEC. Customer concentration, client capex, qualification-to-acceptance, price mix and production execution can all change revenue. Base year-on-year unit growth is 30.6%/26.5%/22.0%, starting from 2025 sold 1240; product qualification and domestic process coverage justify a premium to industry benchmark, but no specific capacity ceiling is reported. Low imposes concentrated-client capex/acceptance delays; high requires successful film and packaging ramps. September10 official capacity plan supports expansion direction; 600,000m² current/900,000m² five-year plan and Guangzhou/Chengdu2027H1 commissioning are not converted mechanically into accepted chamber units or guaranteed revenue.", "claim_ids": ["claim_equipment_units_high_2028", "claim_ir_equipment_units_high_2028"]}
+{"parameter_id": "equipment_unit_revenue_high_2028", "kind": "analyst_assumption", "value": 8.8, "unit": "CNY million per chamber", "period": "FY2028", "definition": "Assumed recognized weighted revenue per chamber, mix and discounts included; legacy AMEC operations excluding acquired CMP", "dimension": "revenue_per_unit", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"], "scenario": "high", "rationale": "Independent pricing/mix assumption near rounded 2025 proxy 8.4895; low continuing discounts, high richer advanced equipment mix. No segment SKU price or client contract is known.", "claim_ids": ["claim_equipment_unit_revenue_high_2028"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "aftermarket_revenue_high_2028", "kind": "analyst_assumption", "value": 4086.804189842001, "unit": "CNY million", "period": "FY2028", "definition": "Assumed already-recognized non-equipment residual including spares and services; legacy AMEC residual excluding all acquired CMP revenue", "dimension": "revenue", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"], "scenario": "high", "rationale": "Fallback residual annual path: installed equipment supports repeat spares/services; no measured installed base, attach rate or service progress. Values are assumptions rather than a disaggregated reported segment. Avoids re-applying arbitrary progress or shipment lag.", "claim_ids": ["claim_aftermarket_revenue_high_2028"], "currency": "CNY", "scale": "million"}
+{"parameter_id": "cmp_revenue_high_2028", "kind": "analyst_assumption", "value": 750, "unit": "CNY million", "period": "FY2028", "definition": "Assumed incremental external CMP revenue included after control, full consolidated revenue not ownership multiplied", "dimension": "revenue", "time_basis": "annual", "source_ids": ["urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"], "scenario": "high", "rationale": "Full-year CMP operating ramp assumption. Independently benchmarked to seller annual commitment, not forced to meet it. Intra-group transactions would require elimination if evidence emerges. Low includes integration/qualification delays; high requires customer conversions.", "claim_ids": ["claim_cmp_revenue_high_2028"], "currency": "CNY", "scale": "million"}
+CLAIMS
+{"claim_id": "claim_history_2023", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "historical_revenue", "target_id": "historical_revenue:2023", "support_type": "exact_value", "locator": "PDF page 25, principal financial data, CNY yuan converted /1,000,000", "excerpt": "营业收入\n12,384,638,268.11\n9,065,165,097.69\n36.62%\n6,263,513,581.37\n利润总额\n2,189,849,396.66\n1,708,934,664.34\n28.14%\n2,010,381,608.63\n归属于上市公司股东的\n净利润\n2,111,472,990.43\n1,615,675,746.81\n30.69%\n1,785,907,974.46\n归属于上市公司股东的\n扣除非经常性损益的净\n利润\n1,549,796,388.43\n1,388,153,354.14\n11.64%\n1,191,434,841.55\n经营活动产生的现金流\n量净额\n2,295,352,919.08\n1,458,401,788.71\n57.39%\n-976,926,439.66\n2025年末\n2024年末\n本期末比上年\n同期末增减（\n%）\n2023年末\n归属于上市公司股东的\n净资产\n22,694,616,797.16\n19,736,912,284.36\n14.99%\n17,826,122,876.82\n总资产\n29,846,018,981.43\n26,217,54", "excerpt_sha256": "f988462d26ae7b9da86e632f40ee82da7623aaafce4efdcaed799261208e026f", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08", "extracted_value": 6263.51358137, "unit": "CNY million", "period": "FY2023"}
+{"claim_id": "claim_history_2024", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "historical_revenue", "target_id": "historical_revenue:2024", "support_type": "exact_value", "locator": "PDF page 25, principal financial data, CNY yuan converted /1,000,000", "excerpt": "营业收入\n12,384,638,268.11\n9,065,165,097.69\n36.62%\n6,263,513,581.37\n利润总额\n2,189,849,396.66\n1,708,934,664.34\n28.14%\n2,010,381,608.63\n归属于上市公司股东的\n净利润\n2,111,472,990.43\n1,615,675,746.81\n30.69%\n1,785,907,974.46\n归属于上市公司股东的\n扣除非经常性损益的净\n利润\n1,549,796,388.43\n1,388,153,354.14\n11.64%\n1,191,434,841.55\n经营活动产生的现金流\n量净额\n2,295,352,919.08\n1,458,401,788.71\n57.39%\n-976,926,439.66\n2025年末\n2024年末\n本期末比上年\n同期末增减（\n%）\n2023年末\n归属于上市公司股东的\n净资产\n22,694,616,797.16\n19,736,912,284.36\n14.99%\n17,826,122,876.82\n总资产\n29,846,018,981.43\n26,217,54", "excerpt_sha256": "f988462d26ae7b9da86e632f40ee82da7623aaafce4efdcaed799261208e026f", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08", "extracted_value": 9065.16509769, "unit": "CNY million", "period": "FY2024"}
+{"claim_id": "claim_history_2025", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "historical_revenue", "target_id": "historical_revenue:2025", "support_type": "exact_value", "locator": "PDF page 25, principal financial data, CNY yuan converted /1,000,000", "excerpt": "营业收入\n12,384,638,268.11\n9,065,165,097.69\n36.62%\n6,263,513,581.37\n利润总额\n2,189,849,396.66\n1,708,934,664.34\n28.14%\n2,010,381,608.63\n归属于上市公司股东的\n净利润\n2,111,472,990.43\n1,615,675,746.81\n30.69%\n1,785,907,974.46\n归属于上市公司股东的\n扣除非经常性损益的净\n利润\n1,549,796,388.43\n1,388,153,354.14\n11.64%\n1,191,434,841.55\n经营活动产生的现金流\n量净额\n2,295,352,919.08\n1,458,401,788.71\n57.39%\n-976,926,439.66\n2025年末\n2024年末\n本期末比上年\n同期末增减（\n%）\n2023年末\n归属于上市公司股东的\n净资产\n22,694,616,797.16\n19,736,912,284.36\n14.99%\n17,826,122,876.82\n总资产\n29,846,018,981.43\n26,217,54", "excerpt_sha256": "f988462d26ae7b9da86e632f40ee82da7623aaafce4efdcaed799261208e026f", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08", "extracted_value": 12384.63826811, "unit": "CNY million", "period": "FY2025"}
+{"claim_id": "claim_reported_total", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "parameter", "target_id": "reported_total", "support_type": "exact_value", "locator": "PDF page 218", "excerpt": "61、\n营业收入和营业成本\n(1).营业收入和营业成本情况\n√适用□不适用\n单位：元\n币种：人民币\n项目\n本期发生额\n上期发生额\n收入\n成本\n收入\n成本\n主营业务\n12,384,638,268.11\n7,534,139,015.56\n9,065,165,097.69\n5,342,977,540.40\n其他业务\n-\n-\n-\n-\n合计\n12,384,638,268.11\n7,534,139,015.56\n9,065,165,097.69\n5,342,977,540.40\n(2).营业收入、营业成本的分解信息\n□适用√不适用\n其他说明\n□适用√不适用\n(3).履约义务的说明\n□适用√不适用\n(4).分摊至剩余履约义务的说明\n□适用√不适用", "excerpt_sha256": "e1e09113f68dca07e5c95dc3d4c912425b59c2810e121dd18a1e7d976042a512", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08", "extracted_value": 12384.63826811, "unit": "CNY million", "period": "FY2025"}
+{"claim_id": "claim_equipment_base", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "parameter", "target_id": "equipment_base", "support_type": "exact_value", "locator": "PDF page 65", "excerpt": "报告期内，公司半导体设备收入实现增长36.62%，其中专用设备实现收入105.27 亿元，同比增\n长34.76%，公司整体盈利水平持续提高。\n由于今年客户的结构性变化，公司给予了部分的客户一定的销售折扣，导致今年毛利率减少。从\n地区来看，公司主要收入来源为大陆地区。报告期内，大陆地区营业收入较上年增长40.07%。\n(2). 产销量情况分析表\n√适用□不适用\n主要产品\n单位\n生产量\n销售量\n库存量\n生产量比上\n年增减（%）\n销售量比上\n年增减（%）\n库存量比上\n年增减（%）\n专用设备\n腔\n1,660\n1,240\n1,010\n8.07%\n27.97%\n36.67%\n产销量情况说明\n无\n(3). 重大采购合同、重大销售合同的履行情况\n□适用√不适用", "excerpt_sha256": "1485a1a5d35a6ad0282931553711f7093def155fbccab9d7f761146aa49257f9", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08", "extracted_value": 10527.0, "unit": "CNY million", "period": "FY2025"}
+{"claim_id": "claim_cmp_base", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "parameter", "target_id": "cmp_base", "support_type": "rationale_support", "locator": "PDF page 176", "excerpt": "九、合并范围的变更\n1、非同一控制下企业合并\n√适用□不适用\n(1)本期发生的非同一控制下企业合并交易\n√适用□不适用\n单位：元币种：人民币\n被\n购\n买\n方\n名\n称\n股\n权\n取\n得\n时\n点\n股权取得成\n本\n股权取\n得比例\n（%）\n股\n权\n取\n得\n方\n式\n购\n买\n日\n购买\n日的\n确定\n依据\n购买日至\n期末被购\n买方的收\n入\n购买日至期\n末被购买方\n的净利润\n购买日至期\n末被购买方\n的现金流量\n中微\n众硅\n（杭\n州）\n电子\n科技\n有限\n公司\n2026\n年5\n月31\n日\n1,576,049,142.32\n64.69%\n发行\n股份\n及支\n付现\n金购\n买资\n产\n20\n26\n年\n5\n月\n31\n日\n购买方\n实际取\n得对被\n购买方\n控制权\n的日期\n1,291,902.08\n-15,440,347.39\n-34,333,141.30\n其他说明：\n无\n(2)合并成本及商誉\n√适用□不适用\n单位：元币种：人民币\n合并成本\n中微众硅（杭州）电子科技有限公司\n--现金\n52,585,310.41\n--非现金资产的公允价值\n-\n--发行或承担的债务的公允价值\n-\n--发行的权益性证券的公允价值\n1,523,463", "excerpt_sha256": "c5790bc6fde7b43fd5da0c5555e7a99aa082895af29a8ba59f8132d7ba0c5919", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_equipment_units_2025", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "parameter", "target_id": "equipment_units_2025", "support_type": "exact_value", "locator": "PDF page 65", "excerpt": "(2). 产销量情况分析表\n√适用□不适用\n主要产品\n单位\n生产量\n销售量\n库存量\n生产量比上\n年增减（%）\n销售量比上\n年增减（%）\n库存量比上\n年增减（%）\n专用设备\n腔\n1,660\n1,240\n1,010\n8.07%\n27.97%\n36.67%\n产销量情况说明\n无\n(3). 重大采购合同、重大销售合同的履行情况\n□适用√不适用", "excerpt_sha256": "b6e5729b1cf7ba3b1c7427dc1b1a31658caa2ab4ca7a2217d9c05470b8e9884a", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08", "extracted_value": 1240, "unit": "chambers", "period": "FY2025"}
+{"claim_id": "claim_equipment_units_low_2026", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "parameter", "target_id": "equipment_units_low_2026", "support_type": "rationale_support", "locator": "PDF page 16", "excerpt": "公司的ICP 刻蚀设备包括Primo Twin-Star、Primo Nanova、Primo Menova 等产\n品在涵盖逻辑、DRAM、3D NAND、功率和电源管理、以及微电机系统等芯片和器件的50 多个\n客户的生产线上量产，并继续验证更多ICP 刻蚀工艺。\n报告期内，公司低温高深宽比ICP 刻蚀设备Primo Nanova LUX-Cryo 在客户的下一代产品的\n产线上稳定量产。与此同时，为应对先进节点高深宽比挑战，公司研发的下一代高精度ICP 刻蚀\n设备的Primo Angnova 在实验室开展多个客户的工艺验证，全面满足客户的刻蚀需求，Beta 机器\n在客户端认证顺利，并取得多个重复订单。Primo Twin-Star 装机量快速增长，在海内外客户的逻\n辑芯片、功率器件、微型发光二极管Micro-LED、AR 和VR 智能眼镜用的超透镜（Metalens）\n等特色器件的产线上实现量产。公司的Primo Menova 金属刻蚀设备，在客户端认证顺利，已投\n入量产。\n公司开发的高选择比气相刻蚀设备Primo Domingo，在实验室的Alpha 腔上开展多个工艺验\n证，全面满足", "excerpt_sha256": "9652622988550b539bfe5b1f1760bc1ff272425fa4ef90f0cf1ce49021a39f6d", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_equipment_unit_revenue_low_2026", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "parameter", "target_id": "equipment_unit_revenue_low_2026", "support_type": "rationale_support", "locator": "PDF page 65", "excerpt": "由于今年客户的结构性变化，公司给予了部分的客户一定的销售折扣，导致今年毛利率减少。从\n地区来看，公司主要收入来源为大陆地区。报告期内，大陆地区营业收入较上年增长40.07%。\n(2). 产销量情况分析表\n√适用□不适用\n主要产品\n单位\n生产量\n销售量\n库存量\n生产量比上\n年增减（%）\n销售量比上\n年增减（%）\n库存量比上\n年增减（%）\n专用设备\n腔\n1,660\n1,240\n1,010\n8.07%\n27.97%\n36.67%\n产销量情况说", "excerpt_sha256": "0e56b7565b935c8feee8ccfcc595692a0b346fa923cb092a3ab707ea055dd866", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_aftermarket_revenue_low_2026", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "parameter", "target_id": "aftermarket_revenue_low_2026", "support_type": "rationale_support", "locator": "PDF page 174", "excerpt": "本集团将备品备件产品按照协议合同规定运至约定交货地点，经客户确认后，客户具有自行使用\n产品的权利并承担该产品可能发生价格波动或毁损的风险，本集团相应确认收入。\n本集团给予客户的信用期根据客户的信用风险特征确定，与行业惯例一致，不存在重大融资成分。\n本集团已收或应收客户对价而应向客户转让商品的义务列示为合同负债。\n(b)\n提供劳务\n本集团对外提供劳务，通常根据已完成劳务的进度在一段时间内确认收入，其中，已完成劳\n务的进度按照已发生的成本占预计总成本的比例确定。于资产负债表日，本集团对已完成劳务的\n进度进行重新估计，以使其能够反映履约情况的变化。\n本集团按照已完成劳务的进度确认收入时，对于本集团已经取得无条件收款权的部分，确认\n为应收账款，其余部分确认为合同资产，并对应收账款和合同资产以预期信用损失为基础确认损\n失准备(附注二(10))；如果本集团已收或应收的合同价款超过已完成的劳务，则将超过部分确认为\n合同负债。本集团对于同一合同项下的合同资产和合同负债以净额列示。\n(2).\n同类业务采用不同经营模式涉及不同收入确认方式及计量方法\n□适用√不适用\n35、合同成本\n□适用√不适用\n36、政", "excerpt_sha256": "1da505889e559f2c78a9a17e5264c9aef796c0f4ef00b838b833b0b429d07773", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_cmp_revenue_low_2026", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "parameter", "target_id": "cmp_revenue_low_2026", "support_type": "rationale_support", "locator": "PDF page 177", "excerpt": "业绩承诺的完成情况：\n√适用□不适用\n根据业绩承诺方与本集团已签署的《业绩承诺和补偿协议》，本次交易中业绩承诺方承诺：中微\n众硅在2026 年度、2027 年度和2028 年度实现的合并报表范围营业收入分别不低于28,000.00 万\n元、43,000.00 万元和58,000.00 万元。截至本半年报披露日，2026 年度业绩承诺尚在履行过程\n中，本期未到业绩承诺考核时点。\n大额商誉形成的主要原因：\n√适用□不适用\n中微众硅为国内少数掌握12 英寸高端CMP 设备核心技术并实现量产的企业，其CMP 工艺与本\n集团刻蚀、薄膜沉积等干法设备高度互补，交易完成后本集团形成“干法+湿法”全流程设备能\n力，双方将在研发、供应链、客户资源等维度形成深度协同，助力集团优化产品组合，提升整体\n解决方案的市场竞争力。\n其他说明：\n无\n(3)被购买方于购买日可辨认资产、负债\n√适用□不适用\n单位：元币种：人民币\n中微众硅（杭州）电子科技有限公司\n购买日公允价值\n购买日账面价值\n资产：\n货币资金\n69,341,049.74\n69,341,049.74\n交易性金融资产\n4,961,503.97\n4,961,", "excerpt_sha256": "b647767bcbfdce2b6d7923d07781bd88eca9b9e2b5685c8ac37d57e18438a6de", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_equipment_units_low_2027", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "parameter", "target_id": "equipment_units_low_2027", "support_type": "rationale_support", "locator": "PDF page 16", "excerpt": "公司的ICP 刻蚀设备包括Primo Twin-Star、Primo Nanova、Primo Menova 等产\n品在涵盖逻辑、DRAM、3D NAND、功率和电源管理、以及微电机系统等芯片和器件的50 多个\n客户的生产线上量产，并继续验证更多ICP 刻蚀工艺。\n报告期内，公司低温高深宽比ICP 刻蚀设备Primo Nanova LUX-Cryo 在客户的下一代产品的\n产线上稳定量产。与此同时，为应对先进节点高深宽比挑战，公司研发的下一代高精度ICP 刻蚀\n设备的Primo Angnova 在实验室开展多个客户的工艺验证，全面满足客户的刻蚀需求，Beta 机器\n在客户端认证顺利，并取得多个重复订单。Primo Twin-Star 装机量快速增长，在海内外客户的逻\n辑芯片、功率器件、微型发光二极管Micro-LED、AR 和VR 智能眼镜用的超透镜（Metalens）\n等特色器件的产线上实现量产。公司的Primo Menova 金属刻蚀设备，在客户端认证顺利，已投\n入量产。\n公司开发的高选择比气相刻蚀设备Primo Domingo，在实验室的Alpha 腔上开展多个工艺验\n证，全面满足", "excerpt_sha256": "9652622988550b539bfe5b1f1760bc1ff272425fa4ef90f0cf1ce49021a39f6d", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_equipment_unit_revenue_low_2027", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "parameter", "target_id": "equipment_unit_revenue_low_2027", "support_type": "rationale_support", "locator": "PDF page 65", "excerpt": "由于今年客户的结构性变化，公司给予了部分的客户一定的销售折扣，导致今年毛利率减少。从\n地区来看，公司主要收入来源为大陆地区。报告期内，大陆地区营业收入较上年增长40.07%。\n(2). 产销量情况分析表\n√适用□不适用\n主要产品\n单位\n生产量\n销售量\n库存量\n生产量比上\n年增减（%）\n销售量比上\n年增减（%）\n库存量比上\n年增减（%）\n专用设备\n腔\n1,660\n1,240\n1,010\n8.07%\n27.97%\n36.67%\n产销量情况说", "excerpt_sha256": "0e56b7565b935c8feee8ccfcc595692a0b346fa923cb092a3ab707ea055dd866", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_aftermarket_revenue_low_2027", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "parameter", "target_id": "aftermarket_revenue_low_2027", "support_type": "rationale_support", "locator": "PDF page 174", "excerpt": "本集团将备品备件产品按照协议合同规定运至约定交货地点，经客户确认后，客户具有自行使用\n产品的权利并承担该产品可能发生价格波动或毁损的风险，本集团相应确认收入。\n本集团给予客户的信用期根据客户的信用风险特征确定，与行业惯例一致，不存在重大融资成分。\n本集团已收或应收客户对价而应向客户转让商品的义务列示为合同负债。\n(b)\n提供劳务\n本集团对外提供劳务，通常根据已完成劳务的进度在一段时间内确认收入，其中，已完成劳\n务的进度按照已发生的成本占预计总成本的比例确定。于资产负债表日，本集团对已完成劳务的\n进度进行重新估计，以使其能够反映履约情况的变化。\n本集团按照已完成劳务的进度确认收入时，对于本集团已经取得无条件收款权的部分，确认\n为应收账款，其余部分确认为合同资产，并对应收账款和合同资产以预期信用损失为基础确认损\n失准备(附注二(10))；如果本集团已收或应收的合同价款超过已完成的劳务，则将超过部分确认为\n合同负债。本集团对于同一合同项下的合同资产和合同负债以净额列示。\n(2).\n同类业务采用不同经营模式涉及不同收入确认方式及计量方法\n□适用√不适用\n35、合同成本\n□适用√不适用\n36、政", "excerpt_sha256": "1da505889e559f2c78a9a17e5264c9aef796c0f4ef00b838b833b0b429d07773", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_cmp_revenue_low_2027", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "parameter", "target_id": "cmp_revenue_low_2027", "support_type": "rationale_support", "locator": "PDF page 177", "excerpt": "业绩承诺的完成情况：\n√适用□不适用\n根据业绩承诺方与本集团已签署的《业绩承诺和补偿协议》，本次交易中业绩承诺方承诺：中微\n众硅在2026 年度、2027 年度和2028 年度实现的合并报表范围营业收入分别不低于28,000.00 万\n元、43,000.00 万元和58,000.00 万元。截至本半年报披露日，2026 年度业绩承诺尚在履行过程\n中，本期未到业绩承诺考核时点。\n大额商誉形成的主要原因：\n√适用□不适用\n中微众硅为国内少数掌握12 英寸高端CMP 设备核心技术并实现量产的企业，其CMP 工艺与本\n集团刻蚀、薄膜沉积等干法设备高度互补，交易完成后本集团形成“干法+湿法”全流程设备能\n力，双方将在研发、供应链、客户资源等维度形成深度协同，助力集团优化产品组合，提升整体\n解决方案的市场竞争力。\n其他说明：\n无\n(3)被购买方于购买日可辨认资产、负债\n√适用□不适用\n单位：元币种：人民币\n中微众硅（杭州）电子科技有限公司\n购买日公允价值\n购买日账面价值\n资产：\n货币资金\n69,341,049.74\n69,341,049.74\n交易性金融资产\n4,961,503.97\n4,961,", "excerpt_sha256": "b647767bcbfdce2b6d7923d07781bd88eca9b9e2b5685c8ac37d57e18438a6de", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_equipment_units_low_2028", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "parameter", "target_id": "equipment_units_low_2028", "support_type": "rationale_support", "locator": "PDF page 16", "excerpt": "公司的ICP 刻蚀设备包括Primo Twin-Star、Primo Nanova、Primo Menova 等产\n品在涵盖逻辑、DRAM、3D NAND、功率和电源管理、以及微电机系统等芯片和器件的50 多个\n客户的生产线上量产，并继续验证更多ICP 刻蚀工艺。\n报告期内，公司低温高深宽比ICP 刻蚀设备Primo Nanova LUX-Cryo 在客户的下一代产品的\n产线上稳定量产。与此同时，为应对先进节点高深宽比挑战，公司研发的下一代高精度ICP 刻蚀\n设备的Primo Angnova 在实验室开展多个客户的工艺验证，全面满足客户的刻蚀需求，Beta 机器\n在客户端认证顺利，并取得多个重复订单。Primo Twin-Star 装机量快速增长，在海内外客户的逻\n辑芯片、功率器件、微型发光二极管Micro-LED、AR 和VR 智能眼镜用的超透镜（Metalens）\n等特色器件的产线上实现量产。公司的Primo Menova 金属刻蚀设备，在客户端认证顺利，已投\n入量产。\n公司开发的高选择比气相刻蚀设备Primo Domingo，在实验室的Alpha 腔上开展多个工艺验\n证，全面满足", "excerpt_sha256": "9652622988550b539bfe5b1f1760bc1ff272425fa4ef90f0cf1ce49021a39f6d", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_equipment_unit_revenue_low_2028", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "parameter", "target_id": "equipment_unit_revenue_low_2028", "support_type": "rationale_support", "locator": "PDF page 65", "excerpt": "由于今年客户的结构性变化，公司给予了部分的客户一定的销售折扣，导致今年毛利率减少。从\n地区来看，公司主要收入来源为大陆地区。报告期内，大陆地区营业收入较上年增长40.07%。\n(2). 产销量情况分析表\n√适用□不适用\n主要产品\n单位\n生产量\n销售量\n库存量\n生产量比上\n年增减（%）\n销售量比上\n年增减（%）\n库存量比上\n年增减（%）\n专用设备\n腔\n1,660\n1,240\n1,010\n8.07%\n27.97%\n36.67%\n产销量情况说", "excerpt_sha256": "0e56b7565b935c8feee8ccfcc595692a0b346fa923cb092a3ab707ea055dd866", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_aftermarket_revenue_low_2028", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "parameter", "target_id": "aftermarket_revenue_low_2028", "support_type": "rationale_support", "locator": "PDF page 174", "excerpt": "本集团将备品备件产品按照协议合同规定运至约定交货地点，经客户确认后，客户具有自行使用\n产品的权利并承担该产品可能发生价格波动或毁损的风险，本集团相应确认收入。\n本集团给予客户的信用期根据客户的信用风险特征确定，与行业惯例一致，不存在重大融资成分。\n本集团已收或应收客户对价而应向客户转让商品的义务列示为合同负债。\n(b)\n提供劳务\n本集团对外提供劳务，通常根据已完成劳务的进度在一段时间内确认收入，其中，已完成劳\n务的进度按照已发生的成本占预计总成本的比例确定。于资产负债表日，本集团对已完成劳务的\n进度进行重新估计，以使其能够反映履约情况的变化。\n本集团按照已完成劳务的进度确认收入时，对于本集团已经取得无条件收款权的部分，确认\n为应收账款，其余部分确认为合同资产，并对应收账款和合同资产以预期信用损失为基础确认损\n失准备(附注二(10))；如果本集团已收或应收的合同价款超过已完成的劳务，则将超过部分确认为\n合同负债。本集团对于同一合同项下的合同资产和合同负债以净额列示。\n(2).\n同类业务采用不同经营模式涉及不同收入确认方式及计量方法\n□适用√不适用\n35、合同成本\n□适用√不适用\n36、政", "excerpt_sha256": "1da505889e559f2c78a9a17e5264c9aef796c0f4ef00b838b833b0b429d07773", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_cmp_revenue_low_2028", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "parameter", "target_id": "cmp_revenue_low_2028", "support_type": "rationale_support", "locator": "PDF page 177", "excerpt": "业绩承诺的完成情况：\n√适用□不适用\n根据业绩承诺方与本集团已签署的《业绩承诺和补偿协议》，本次交易中业绩承诺方承诺：中微\n众硅在2026 年度、2027 年度和2028 年度实现的合并报表范围营业收入分别不低于28,000.00 万\n元、43,000.00 万元和58,000.00 万元。截至本半年报披露日，2026 年度业绩承诺尚在履行过程\n中，本期未到业绩承诺考核时点。\n大额商誉形成的主要原因：\n√适用□不适用\n中微众硅为国内少数掌握12 英寸高端CMP 设备核心技术并实现量产的企业，其CMP 工艺与本\n集团刻蚀、薄膜沉积等干法设备高度互补，交易完成后本集团形成“干法+湿法”全流程设备能\n力，双方将在研发、供应链、客户资源等维度形成深度协同，助力集团优化产品组合，提升整体\n解决方案的市场竞争力。\n其他说明：\n无\n(3)被购买方于购买日可辨认资产、负债\n√适用□不适用\n单位：元币种：人民币\n中微众硅（杭州）电子科技有限公司\n购买日公允价值\n购买日账面价值\n资产：\n货币资金\n69,341,049.74\n69,341,049.74\n交易性金融资产\n4,961,503.97\n4,961,", "excerpt_sha256": "b647767bcbfdce2b6d7923d07781bd88eca9b9e2b5685c8ac37d57e18438a6de", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_equipment_units_base_2026", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "parameter", "target_id": "equipment_units_base_2026", "support_type": "rationale_support", "locator": "PDF page 16", "excerpt": "公司的ICP 刻蚀设备包括Primo Twin-Star、Primo Nanova、Primo Menova 等产\n品在涵盖逻辑、DRAM、3D NAND、功率和电源管理、以及微电机系统等芯片和器件的50 多个\n客户的生产线上量产，并继续验证更多ICP 刻蚀工艺。\n报告期内，公司低温高深宽比ICP 刻蚀设备Primo Nanova LUX-Cryo 在客户的下一代产品的\n产线上稳定量产。与此同时，为应对先进节点高深宽比挑战，公司研发的下一代高精度ICP 刻蚀\n设备的Primo Angnova 在实验室开展多个客户的工艺验证，全面满足客户的刻蚀需求，Beta 机器\n在客户端认证顺利，并取得多个重复订单。Primo Twin-Star 装机量快速增长，在海内外客户的逻\n辑芯片、功率器件、微型发光二极管Micro-LED、AR 和VR 智能眼镜用的超透镜（Metalens）\n等特色器件的产线上实现量产。公司的Primo Menova 金属刻蚀设备，在客户端认证顺利，已投\n入量产。\n公司开发的高选择比气相刻蚀设备Primo Domingo，在实验室的Alpha 腔上开展多个工艺验\n证，全面满足", "excerpt_sha256": "9652622988550b539bfe5b1f1760bc1ff272425fa4ef90f0cf1ce49021a39f6d", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_equipment_unit_revenue_base_2026", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "parameter", "target_id": "equipment_unit_revenue_base_2026", "support_type": "rationale_support", "locator": "PDF page 65", "excerpt": "由于今年客户的结构性变化，公司给予了部分的客户一定的销售折扣，导致今年毛利率减少。从\n地区来看，公司主要收入来源为大陆地区。报告期内，大陆地区营业收入较上年增长40.07%。\n(2). 产销量情况分析表\n√适用□不适用\n主要产品\n单位\n生产量\n销售量\n库存量\n生产量比上\n年增减（%）\n销售量比上\n年增减（%）\n库存量比上\n年增减（%）\n专用设备\n腔\n1,660\n1,240\n1,010\n8.07%\n27.97%\n36.67%\n产销量情况说", "excerpt_sha256": "0e56b7565b935c8feee8ccfcc595692a0b346fa923cb092a3ab707ea055dd866", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_aftermarket_revenue_base_2026", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "parameter", "target_id": "aftermarket_revenue_base_2026", "support_type": "rationale_support", "locator": "PDF page 174", "excerpt": "本集团将备品备件产品按照协议合同规定运至约定交货地点，经客户确认后，客户具有自行使用\n产品的权利并承担该产品可能发生价格波动或毁损的风险，本集团相应确认收入。\n本集团给予客户的信用期根据客户的信用风险特征确定，与行业惯例一致，不存在重大融资成分。\n本集团已收或应收客户对价而应向客户转让商品的义务列示为合同负债。\n(b)\n提供劳务\n本集团对外提供劳务，通常根据已完成劳务的进度在一段时间内确认收入，其中，已完成劳\n务的进度按照已发生的成本占预计总成本的比例确定。于资产负债表日，本集团对已完成劳务的\n进度进行重新估计，以使其能够反映履约情况的变化。\n本集团按照已完成劳务的进度确认收入时，对于本集团已经取得无条件收款权的部分，确认\n为应收账款，其余部分确认为合同资产，并对应收账款和合同资产以预期信用损失为基础确认损\n失准备(附注二(10))；如果本集团已收或应收的合同价款超过已完成的劳务，则将超过部分确认为\n合同负债。本集团对于同一合同项下的合同资产和合同负债以净额列示。\n(2).\n同类业务采用不同经营模式涉及不同收入确认方式及计量方法\n□适用√不适用\n35、合同成本\n□适用√不适用\n36、政", "excerpt_sha256": "1da505889e559f2c78a9a17e5264c9aef796c0f4ef00b838b833b0b429d07773", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_cmp_revenue_base_2026", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "parameter", "target_id": "cmp_revenue_base_2026", "support_type": "rationale_support", "locator": "PDF page 177", "excerpt": "业绩承诺的完成情况：\n√适用□不适用\n根据业绩承诺方与本集团已签署的《业绩承诺和补偿协议》，本次交易中业绩承诺方承诺：中微\n众硅在2026 年度、2027 年度和2028 年度实现的合并报表范围营业收入分别不低于28,000.00 万\n元、43,000.00 万元和58,000.00 万元。截至本半年报披露日，2026 年度业绩承诺尚在履行过程\n中，本期未到业绩承诺考核时点。\n大额商誉形成的主要原因：\n√适用□不适用\n中微众硅为国内少数掌握12 英寸高端CMP 设备核心技术并实现量产的企业，其CMP 工艺与本\n集团刻蚀、薄膜沉积等干法设备高度互补，交易完成后本集团形成“干法+湿法”全流程设备能\n力，双方将在研发、供应链、客户资源等维度形成深度协同，助力集团优化产品组合，提升整体\n解决方案的市场竞争力。\n其他说明：\n无\n(3)被购买方于购买日可辨认资产、负债\n√适用□不适用\n单位：元币种：人民币\n中微众硅（杭州）电子科技有限公司\n购买日公允价值\n购买日账面价值\n资产：\n货币资金\n69,341,049.74\n69,341,049.74\n交易性金融资产\n4,961,503.97\n4,961,", "excerpt_sha256": "b647767bcbfdce2b6d7923d07781bd88eca9b9e2b5685c8ac37d57e18438a6de", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_equipment_units_base_2027", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "parameter", "target_id": "equipment_units_base_2027", "support_type": "rationale_support", "locator": "PDF page 16", "excerpt": "公司的ICP 刻蚀设备包括Primo Twin-Star、Primo Nanova、Primo Menova 等产\n品在涵盖逻辑、DRAM、3D NAND、功率和电源管理、以及微电机系统等芯片和器件的50 多个\n客户的生产线上量产，并继续验证更多ICP 刻蚀工艺。\n报告期内，公司低温高深宽比ICP 刻蚀设备Primo Nanova LUX-Cryo 在客户的下一代产品的\n产线上稳定量产。与此同时，为应对先进节点高深宽比挑战，公司研发的下一代高精度ICP 刻蚀\n设备的Primo Angnova 在实验室开展多个客户的工艺验证，全面满足客户的刻蚀需求，Beta 机器\n在客户端认证顺利，并取得多个重复订单。Primo Twin-Star 装机量快速增长，在海内外客户的逻\n辑芯片、功率器件、微型发光二极管Micro-LED、AR 和VR 智能眼镜用的超透镜（Metalens）\n等特色器件的产线上实现量产。公司的Primo Menova 金属刻蚀设备，在客户端认证顺利，已投\n入量产。\n公司开发的高选择比气相刻蚀设备Primo Domingo，在实验室的Alpha 腔上开展多个工艺验\n证，全面满足", "excerpt_sha256": "9652622988550b539bfe5b1f1760bc1ff272425fa4ef90f0cf1ce49021a39f6d", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_equipment_unit_revenue_base_2027", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "parameter", "target_id": "equipment_unit_revenue_base_2027", "support_type": "rationale_support", "locator": "PDF page 65", "excerpt": "由于今年客户的结构性变化，公司给予了部分的客户一定的销售折扣，导致今年毛利率减少。从\n地区来看，公司主要收入来源为大陆地区。报告期内，大陆地区营业收入较上年增长40.07%。\n(2). 产销量情况分析表\n√适用□不适用\n主要产品\n单位\n生产量\n销售量\n库存量\n生产量比上\n年增减（%）\n销售量比上\n年增减（%）\n库存量比上\n年增减（%）\n专用设备\n腔\n1,660\n1,240\n1,010\n8.07%\n27.97%\n36.67%\n产销量情况说", "excerpt_sha256": "0e56b7565b935c8feee8ccfcc595692a0b346fa923cb092a3ab707ea055dd866", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_aftermarket_revenue_base_2027", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "parameter", "target_id": "aftermarket_revenue_base_2027", "support_type": "rationale_support", "locator": "PDF page 174", "excerpt": "本集团将备品备件产品按照协议合同规定运至约定交货地点，经客户确认后，客户具有自行使用\n产品的权利并承担该产品可能发生价格波动或毁损的风险，本集团相应确认收入。\n本集团给予客户的信用期根据客户的信用风险特征确定，与行业惯例一致，不存在重大融资成分。\n本集团已收或应收客户对价而应向客户转让商品的义务列示为合同负债。\n(b)\n提供劳务\n本集团对外提供劳务，通常根据已完成劳务的进度在一段时间内确认收入，其中，已完成劳\n务的进度按照已发生的成本占预计总成本的比例确定。于资产负债表日，本集团对已完成劳务的\n进度进行重新估计，以使其能够反映履约情况的变化。\n本集团按照已完成劳务的进度确认收入时，对于本集团已经取得无条件收款权的部分，确认\n为应收账款，其余部分确认为合同资产，并对应收账款和合同资产以预期信用损失为基础确认损\n失准备(附注二(10))；如果本集团已收或应收的合同价款超过已完成的劳务，则将超过部分确认为\n合同负债。本集团对于同一合同项下的合同资产和合同负债以净额列示。\n(2).\n同类业务采用不同经营模式涉及不同收入确认方式及计量方法\n□适用√不适用\n35、合同成本\n□适用√不适用\n36、政", "excerpt_sha256": "1da505889e559f2c78a9a17e5264c9aef796c0f4ef00b838b833b0b429d07773", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_cmp_revenue_base_2027", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "parameter", "target_id": "cmp_revenue_base_2027", "support_type": "rationale_support", "locator": "PDF page 177", "excerpt": "业绩承诺的完成情况：\n√适用□不适用\n根据业绩承诺方与本集团已签署的《业绩承诺和补偿协议》，本次交易中业绩承诺方承诺：中微\n众硅在2026 年度、2027 年度和2028 年度实现的合并报表范围营业收入分别不低于28,000.00 万\n元、43,000.00 万元和58,000.00 万元。截至本半年报披露日，2026 年度业绩承诺尚在履行过程\n中，本期未到业绩承诺考核时点。\n大额商誉形成的主要原因：\n√适用□不适用\n中微众硅为国内少数掌握12 英寸高端CMP 设备核心技术并实现量产的企业，其CMP 工艺与本\n集团刻蚀、薄膜沉积等干法设备高度互补，交易完成后本集团形成“干法+湿法”全流程设备能\n力，双方将在研发、供应链、客户资源等维度形成深度协同，助力集团优化产品组合，提升整体\n解决方案的市场竞争力。\n其他说明：\n无\n(3)被购买方于购买日可辨认资产、负债\n√适用□不适用\n单位：元币种：人民币\n中微众硅（杭州）电子科技有限公司\n购买日公允价值\n购买日账面价值\n资产：\n货币资金\n69,341,049.74\n69,341,049.74\n交易性金融资产\n4,961,503.97\n4,961,", "excerpt_sha256": "b647767bcbfdce2b6d7923d07781bd88eca9b9e2b5685c8ac37d57e18438a6de", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_equipment_units_base_2028", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "parameter", "target_id": "equipment_units_base_2028", "support_type": "rationale_support", "locator": "PDF page 16", "excerpt": "公司的ICP 刻蚀设备包括Primo Twin-Star、Primo Nanova、Primo Menova 等产\n品在涵盖逻辑、DRAM、3D NAND、功率和电源管理、以及微电机系统等芯片和器件的50 多个\n客户的生产线上量产，并继续验证更多ICP 刻蚀工艺。\n报告期内，公司低温高深宽比ICP 刻蚀设备Primo Nanova LUX-Cryo 在客户的下一代产品的\n产线上稳定量产。与此同时，为应对先进节点高深宽比挑战，公司研发的下一代高精度ICP 刻蚀\n设备的Primo Angnova 在实验室开展多个客户的工艺验证，全面满足客户的刻蚀需求，Beta 机器\n在客户端认证顺利，并取得多个重复订单。Primo Twin-Star 装机量快速增长，在海内外客户的逻\n辑芯片、功率器件、微型发光二极管Micro-LED、AR 和VR 智能眼镜用的超透镜（Metalens）\n等特色器件的产线上实现量产。公司的Primo Menova 金属刻蚀设备，在客户端认证顺利，已投\n入量产。\n公司开发的高选择比气相刻蚀设备Primo Domingo，在实验室的Alpha 腔上开展多个工艺验\n证，全面满足", "excerpt_sha256": "9652622988550b539bfe5b1f1760bc1ff272425fa4ef90f0cf1ce49021a39f6d", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_equipment_unit_revenue_base_2028", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "parameter", "target_id": "equipment_unit_revenue_base_2028", "support_type": "rationale_support", "locator": "PDF page 65", "excerpt": "由于今年客户的结构性变化，公司给予了部分的客户一定的销售折扣，导致今年毛利率减少。从\n地区来看，公司主要收入来源为大陆地区。报告期内，大陆地区营业收入较上年增长40.07%。\n(2). 产销量情况分析表\n√适用□不适用\n主要产品\n单位\n生产量\n销售量\n库存量\n生产量比上\n年增减（%）\n销售量比上\n年增减（%）\n库存量比上\n年增减（%）\n专用设备\n腔\n1,660\n1,240\n1,010\n8.07%\n27.97%\n36.67%\n产销量情况说", "excerpt_sha256": "0e56b7565b935c8feee8ccfcc595692a0b346fa923cb092a3ab707ea055dd866", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_aftermarket_revenue_base_2028", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "parameter", "target_id": "aftermarket_revenue_base_2028", "support_type": "rationale_support", "locator": "PDF page 174", "excerpt": "本集团将备品备件产品按照协议合同规定运至约定交货地点，经客户确认后，客户具有自行使用\n产品的权利并承担该产品可能发生价格波动或毁损的风险，本集团相应确认收入。\n本集团给予客户的信用期根据客户的信用风险特征确定，与行业惯例一致，不存在重大融资成分。\n本集团已收或应收客户对价而应向客户转让商品的义务列示为合同负债。\n(b)\n提供劳务\n本集团对外提供劳务，通常根据已完成劳务的进度在一段时间内确认收入，其中，已完成劳\n务的进度按照已发生的成本占预计总成本的比例确定。于资产负债表日，本集团对已完成劳务的\n进度进行重新估计，以使其能够反映履约情况的变化。\n本集团按照已完成劳务的进度确认收入时，对于本集团已经取得无条件收款权的部分，确认\n为应收账款，其余部分确认为合同资产，并对应收账款和合同资产以预期信用损失为基础确认损\n失准备(附注二(10))；如果本集团已收或应收的合同价款超过已完成的劳务，则将超过部分确认为\n合同负债。本集团对于同一合同项下的合同资产和合同负债以净额列示。\n(2).\n同类业务采用不同经营模式涉及不同收入确认方式及计量方法\n□适用√不适用\n35、合同成本\n□适用√不适用\n36、政", "excerpt_sha256": "1da505889e559f2c78a9a17e5264c9aef796c0f4ef00b838b833b0b429d07773", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_cmp_revenue_base_2028", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "parameter", "target_id": "cmp_revenue_base_2028", "support_type": "rationale_support", "locator": "PDF page 177", "excerpt": "业绩承诺的完成情况：\n√适用□不适用\n根据业绩承诺方与本集团已签署的《业绩承诺和补偿协议》，本次交易中业绩承诺方承诺：中微\n众硅在2026 年度、2027 年度和2028 年度实现的合并报表范围营业收入分别不低于28,000.00 万\n元、43,000.00 万元和58,000.00 万元。截至本半年报披露日，2026 年度业绩承诺尚在履行过程\n中，本期未到业绩承诺考核时点。\n大额商誉形成的主要原因：\n√适用□不适用\n中微众硅为国内少数掌握12 英寸高端CMP 设备核心技术并实现量产的企业，其CMP 工艺与本\n集团刻蚀、薄膜沉积等干法设备高度互补，交易完成后本集团形成“干法+湿法”全流程设备能\n力，双方将在研发、供应链、客户资源等维度形成深度协同，助力集团优化产品组合，提升整体\n解决方案的市场竞争力。\n其他说明：\n无\n(3)被购买方于购买日可辨认资产、负债\n√适用□不适用\n单位：元币种：人民币\n中微众硅（杭州）电子科技有限公司\n购买日公允价值\n购买日账面价值\n资产：\n货币资金\n69,341,049.74\n69,341,049.74\n交易性金融资产\n4,961,503.97\n4,961,", "excerpt_sha256": "b647767bcbfdce2b6d7923d07781bd88eca9b9e2b5685c8ac37d57e18438a6de", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_equipment_units_high_2026", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "parameter", "target_id": "equipment_units_high_2026", "support_type": "rationale_support", "locator": "PDF page 16", "excerpt": "公司的ICP 刻蚀设备包括Primo Twin-Star、Primo Nanova、Primo Menova 等产\n品在涵盖逻辑、DRAM、3D NAND、功率和电源管理、以及微电机系统等芯片和器件的50 多个\n客户的生产线上量产，并继续验证更多ICP 刻蚀工艺。\n报告期内，公司低温高深宽比ICP 刻蚀设备Primo Nanova LUX-Cryo 在客户的下一代产品的\n产线上稳定量产。与此同时，为应对先进节点高深宽比挑战，公司研发的下一代高精度ICP 刻蚀\n设备的Primo Angnova 在实验室开展多个客户的工艺验证，全面满足客户的刻蚀需求，Beta 机器\n在客户端认证顺利，并取得多个重复订单。Primo Twin-Star 装机量快速增长，在海内外客户的逻\n辑芯片、功率器件、微型发光二极管Micro-LED、AR 和VR 智能眼镜用的超透镜（Metalens）\n等特色器件的产线上实现量产。公司的Primo Menova 金属刻蚀设备，在客户端认证顺利，已投\n入量产。\n公司开发的高选择比气相刻蚀设备Primo Domingo，在实验室的Alpha 腔上开展多个工艺验\n证，全面满足", "excerpt_sha256": "9652622988550b539bfe5b1f1760bc1ff272425fa4ef90f0cf1ce49021a39f6d", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_equipment_unit_revenue_high_2026", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "parameter", "target_id": "equipment_unit_revenue_high_2026", "support_type": "rationale_support", "locator": "PDF page 65", "excerpt": "由于今年客户的结构性变化，公司给予了部分的客户一定的销售折扣，导致今年毛利率减少。从\n地区来看，公司主要收入来源为大陆地区。报告期内，大陆地区营业收入较上年增长40.07%。\n(2). 产销量情况分析表\n√适用□不适用\n主要产品\n单位\n生产量\n销售量\n库存量\n生产量比上\n年增减（%）\n销售量比上\n年增减（%）\n库存量比上\n年增减（%）\n专用设备\n腔\n1,660\n1,240\n1,010\n8.07%\n27.97%\n36.67%\n产销量情况说", "excerpt_sha256": "0e56b7565b935c8feee8ccfcc595692a0b346fa923cb092a3ab707ea055dd866", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_aftermarket_revenue_high_2026", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "parameter", "target_id": "aftermarket_revenue_high_2026", "support_type": "rationale_support", "locator": "PDF page 174", "excerpt": "本集团将备品备件产品按照协议合同规定运至约定交货地点，经客户确认后，客户具有自行使用\n产品的权利并承担该产品可能发生价格波动或毁损的风险，本集团相应确认收入。\n本集团给予客户的信用期根据客户的信用风险特征确定，与行业惯例一致，不存在重大融资成分。\n本集团已收或应收客户对价而应向客户转让商品的义务列示为合同负债。\n(b)\n提供劳务\n本集团对外提供劳务，通常根据已完成劳务的进度在一段时间内确认收入，其中，已完成劳\n务的进度按照已发生的成本占预计总成本的比例确定。于资产负债表日，本集团对已完成劳务的\n进度进行重新估计，以使其能够反映履约情况的变化。\n本集团按照已完成劳务的进度确认收入时，对于本集团已经取得无条件收款权的部分，确认\n为应收账款，其余部分确认为合同资产，并对应收账款和合同资产以预期信用损失为基础确认损\n失准备(附注二(10))；如果本集团已收或应收的合同价款超过已完成的劳务，则将超过部分确认为\n合同负债。本集团对于同一合同项下的合同资产和合同负债以净额列示。\n(2).\n同类业务采用不同经营模式涉及不同收入确认方式及计量方法\n□适用√不适用\n35、合同成本\n□适用√不适用\n36、政", "excerpt_sha256": "1da505889e559f2c78a9a17e5264c9aef796c0f4ef00b838b833b0b429d07773", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_cmp_revenue_high_2026", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "parameter", "target_id": "cmp_revenue_high_2026", "support_type": "rationale_support", "locator": "PDF page 177", "excerpt": "业绩承诺的完成情况：\n√适用□不适用\n根据业绩承诺方与本集团已签署的《业绩承诺和补偿协议》，本次交易中业绩承诺方承诺：中微\n众硅在2026 年度、2027 年度和2028 年度实现的合并报表范围营业收入分别不低于28,000.00 万\n元、43,000.00 万元和58,000.00 万元。截至本半年报披露日，2026 年度业绩承诺尚在履行过程\n中，本期未到业绩承诺考核时点。\n大额商誉形成的主要原因：\n√适用□不适用\n中微众硅为国内少数掌握12 英寸高端CMP 设备核心技术并实现量产的企业，其CMP 工艺与本\n集团刻蚀、薄膜沉积等干法设备高度互补，交易完成后本集团形成“干法+湿法”全流程设备能\n力，双方将在研发、供应链、客户资源等维度形成深度协同，助力集团优化产品组合，提升整体\n解决方案的市场竞争力。\n其他说明：\n无\n(3)被购买方于购买日可辨认资产、负债\n√适用□不适用\n单位：元币种：人民币\n中微众硅（杭州）电子科技有限公司\n购买日公允价值\n购买日账面价值\n资产：\n货币资金\n69,341,049.74\n69,341,049.74\n交易性金融资产\n4,961,503.97\n4,961,", "excerpt_sha256": "b647767bcbfdce2b6d7923d07781bd88eca9b9e2b5685c8ac37d57e18438a6de", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_equipment_units_high_2027", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "parameter", "target_id": "equipment_units_high_2027", "support_type": "rationale_support", "locator": "PDF page 16", "excerpt": "公司的ICP 刻蚀设备包括Primo Twin-Star、Primo Nanova、Primo Menova 等产\n品在涵盖逻辑、DRAM、3D NAND、功率和电源管理、以及微电机系统等芯片和器件的50 多个\n客户的生产线上量产，并继续验证更多ICP 刻蚀工艺。\n报告期内，公司低温高深宽比ICP 刻蚀设备Primo Nanova LUX-Cryo 在客户的下一代产品的\n产线上稳定量产。与此同时，为应对先进节点高深宽比挑战，公司研发的下一代高精度ICP 刻蚀\n设备的Primo Angnova 在实验室开展多个客户的工艺验证，全面满足客户的刻蚀需求，Beta 机器\n在客户端认证顺利，并取得多个重复订单。Primo Twin-Star 装机量快速增长，在海内外客户的逻\n辑芯片、功率器件、微型发光二极管Micro-LED、AR 和VR 智能眼镜用的超透镜（Metalens）\n等特色器件的产线上实现量产。公司的Primo Menova 金属刻蚀设备，在客户端认证顺利，已投\n入量产。\n公司开发的高选择比气相刻蚀设备Primo Domingo，在实验室的Alpha 腔上开展多个工艺验\n证，全面满足", "excerpt_sha256": "9652622988550b539bfe5b1f1760bc1ff272425fa4ef90f0cf1ce49021a39f6d", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_equipment_unit_revenue_high_2027", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "parameter", "target_id": "equipment_unit_revenue_high_2027", "support_type": "rationale_support", "locator": "PDF page 65", "excerpt": "由于今年客户的结构性变化，公司给予了部分的客户一定的销售折扣，导致今年毛利率减少。从\n地区来看，公司主要收入来源为大陆地区。报告期内，大陆地区营业收入较上年增长40.07%。\n(2). 产销量情况分析表\n√适用□不适用\n主要产品\n单位\n生产量\n销售量\n库存量\n生产量比上\n年增减（%）\n销售量比上\n年增减（%）\n库存量比上\n年增减（%）\n专用设备\n腔\n1,660\n1,240\n1,010\n8.07%\n27.97%\n36.67%\n产销量情况说", "excerpt_sha256": "0e56b7565b935c8feee8ccfcc595692a0b346fa923cb092a3ab707ea055dd866", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_aftermarket_revenue_high_2027", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "parameter", "target_id": "aftermarket_revenue_high_2027", "support_type": "rationale_support", "locator": "PDF page 174", "excerpt": "本集团将备品备件产品按照协议合同规定运至约定交货地点，经客户确认后，客户具有自行使用\n产品的权利并承担该产品可能发生价格波动或毁损的风险，本集团相应确认收入。\n本集团给予客户的信用期根据客户的信用风险特征确定，与行业惯例一致，不存在重大融资成分。\n本集团已收或应收客户对价而应向客户转让商品的义务列示为合同负债。\n(b)\n提供劳务\n本集团对外提供劳务，通常根据已完成劳务的进度在一段时间内确认收入，其中，已完成劳\n务的进度按照已发生的成本占预计总成本的比例确定。于资产负债表日，本集团对已完成劳务的\n进度进行重新估计，以使其能够反映履约情况的变化。\n本集团按照已完成劳务的进度确认收入时，对于本集团已经取得无条件收款权的部分，确认\n为应收账款，其余部分确认为合同资产，并对应收账款和合同资产以预期信用损失为基础确认损\n失准备(附注二(10))；如果本集团已收或应收的合同价款超过已完成的劳务，则将超过部分确认为\n合同负债。本集团对于同一合同项下的合同资产和合同负债以净额列示。\n(2).\n同类业务采用不同经营模式涉及不同收入确认方式及计量方法\n□适用√不适用\n35、合同成本\n□适用√不适用\n36、政", "excerpt_sha256": "1da505889e559f2c78a9a17e5264c9aef796c0f4ef00b838b833b0b429d07773", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_cmp_revenue_high_2027", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "parameter", "target_id": "cmp_revenue_high_2027", "support_type": "rationale_support", "locator": "PDF page 177", "excerpt": "业绩承诺的完成情况：\n√适用□不适用\n根据业绩承诺方与本集团已签署的《业绩承诺和补偿协议》，本次交易中业绩承诺方承诺：中微\n众硅在2026 年度、2027 年度和2028 年度实现的合并报表范围营业收入分别不低于28,000.00 万\n元、43,000.00 万元和58,000.00 万元。截至本半年报披露日，2026 年度业绩承诺尚在履行过程\n中，本期未到业绩承诺考核时点。\n大额商誉形成的主要原因：\n√适用□不适用\n中微众硅为国内少数掌握12 英寸高端CMP 设备核心技术并实现量产的企业，其CMP 工艺与本\n集团刻蚀、薄膜沉积等干法设备高度互补，交易完成后本集团形成“干法+湿法”全流程设备能\n力，双方将在研发、供应链、客户资源等维度形成深度协同，助力集团优化产品组合，提升整体\n解决方案的市场竞争力。\n其他说明：\n无\n(3)被购买方于购买日可辨认资产、负债\n√适用□不适用\n单位：元币种：人民币\n中微众硅（杭州）电子科技有限公司\n购买日公允价值\n购买日账面价值\n资产：\n货币资金\n69,341,049.74\n69,341,049.74\n交易性金融资产\n4,961,503.97\n4,961,", "excerpt_sha256": "b647767bcbfdce2b6d7923d07781bd88eca9b9e2b5685c8ac37d57e18438a6de", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_equipment_units_high_2028", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "parameter", "target_id": "equipment_units_high_2028", "support_type": "rationale_support", "locator": "PDF page 16", "excerpt": "公司的ICP 刻蚀设备包括Primo Twin-Star、Primo Nanova、Primo Menova 等产\n品在涵盖逻辑、DRAM、3D NAND、功率和电源管理、以及微电机系统等芯片和器件的50 多个\n客户的生产线上量产，并继续验证更多ICP 刻蚀工艺。\n报告期内，公司低温高深宽比ICP 刻蚀设备Primo Nanova LUX-Cryo 在客户的下一代产品的\n产线上稳定量产。与此同时，为应对先进节点高深宽比挑战，公司研发的下一代高精度ICP 刻蚀\n设备的Primo Angnova 在实验室开展多个客户的工艺验证，全面满足客户的刻蚀需求，Beta 机器\n在客户端认证顺利，并取得多个重复订单。Primo Twin-Star 装机量快速增长，在海内外客户的逻\n辑芯片、功率器件、微型发光二极管Micro-LED、AR 和VR 智能眼镜用的超透镜（Metalens）\n等特色器件的产线上实现量产。公司的Primo Menova 金属刻蚀设备，在客户端认证顺利，已投\n入量产。\n公司开发的高选择比气相刻蚀设备Primo Domingo，在实验室的Alpha 腔上开展多个工艺验\n证，全面满足", "excerpt_sha256": "9652622988550b539bfe5b1f1760bc1ff272425fa4ef90f0cf1ce49021a39f6d", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_equipment_unit_revenue_high_2028", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "parameter", "target_id": "equipment_unit_revenue_high_2028", "support_type": "rationale_support", "locator": "PDF page 65", "excerpt": "由于今年客户的结构性变化，公司给予了部分的客户一定的销售折扣，导致今年毛利率减少。从\n地区来看，公司主要收入来源为大陆地区。报告期内，大陆地区营业收入较上年增长40.07%。\n(2). 产销量情况分析表\n√适用□不适用\n主要产品\n单位\n生产量\n销售量\n库存量\n生产量比上\n年增减（%）\n销售量比上\n年增减（%）\n库存量比上\n年增减（%）\n专用设备\n腔\n1,660\n1,240\n1,010\n8.07%\n27.97%\n36.67%\n产销量情况说", "excerpt_sha256": "0e56b7565b935c8feee8ccfcc595692a0b346fa923cb092a3ab707ea055dd866", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_aftermarket_revenue_high_2028", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "parameter", "target_id": "aftermarket_revenue_high_2028", "support_type": "rationale_support", "locator": "PDF page 174", "excerpt": "本集团将备品备件产品按照协议合同规定运至约定交货地点，经客户确认后，客户具有自行使用\n产品的权利并承担该产品可能发生价格波动或毁损的风险，本集团相应确认收入。\n本集团给予客户的信用期根据客户的信用风险特征确定，与行业惯例一致，不存在重大融资成分。\n本集团已收或应收客户对价而应向客户转让商品的义务列示为合同负债。\n(b)\n提供劳务\n本集团对外提供劳务，通常根据已完成劳务的进度在一段时间内确认收入，其中，已完成劳\n务的进度按照已发生的成本占预计总成本的比例确定。于资产负债表日，本集团对已完成劳务的\n进度进行重新估计，以使其能够反映履约情况的变化。\n本集团按照已完成劳务的进度确认收入时，对于本集团已经取得无条件收款权的部分，确认\n为应收账款，其余部分确认为合同资产，并对应收账款和合同资产以预期信用损失为基础确认损\n失准备(附注二(10))；如果本集团已收或应收的合同价款超过已完成的劳务，则将超过部分确认为\n合同负债。本集团对于同一合同项下的合同资产和合同负债以净额列示。\n(2).\n同类业务采用不同经营模式涉及不同收入确认方式及计量方法\n□适用√不适用\n35、合同成本\n□适用√不适用\n36、政", "excerpt_sha256": "1da505889e559f2c78a9a17e5264c9aef796c0f4ef00b838b833b0b429d07773", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_cmp_revenue_high_2028", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "parameter", "target_id": "cmp_revenue_high_2028", "support_type": "rationale_support", "locator": "PDF page 177", "excerpt": "业绩承诺的完成情况：\n√适用□不适用\n根据业绩承诺方与本集团已签署的《业绩承诺和补偿协议》，本次交易中业绩承诺方承诺：中微\n众硅在2026 年度、2027 年度和2028 年度实现的合并报表范围营业收入分别不低于28,000.00 万\n元、43,000.00 万元和58,000.00 万元。截至本半年报披露日，2026 年度业绩承诺尚在履行过程\n中，本期未到业绩承诺考核时点。\n大额商誉形成的主要原因：\n√适用□不适用\n中微众硅为国内少数掌握12 英寸高端CMP 设备核心技术并实现量产的企业，其CMP 工艺与本\n集团刻蚀、薄膜沉积等干法设备高度互补，交易完成后本集团形成“干法+湿法”全流程设备能\n力，双方将在研发、供应链、客户资源等维度形成深度协同，助力集团优化产品组合，提升整体\n解决方案的市场竞争力。\n其他说明：\n无\n(3)被购买方于购买日可辨认资产、负债\n√适用□不适用\n单位：元币种：人民币\n中微众硅（杭州）电子科技有限公司\n购买日公允价值\n购买日账面价值\n资产：\n货币资金\n69,341,049.74\n69,341,049.74\n交易性金融资产\n4,961,503.97\n4,961,", "excerpt_sha256": "b647767bcbfdce2b6d7923d07781bd88eca9b9e2b5685c8ac37d57e18438a6de", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_ir_equipment_units_low_2026", "source_id": "amec_sse_results_qa_20260910", "target_type": "parameter", "target_id": "equipment_units_low_2026", "support_type": "rationale_support", "locator": "Official reply id2508385; 尹志尧; 2026-09-10 16:37:39; companyId145565", "excerpt": "您好，中微公司目前有金桥、临港一期以及南昌三大生产基地。上海临港滴水湖畔的总部大楼暨研发中心已于2026年8月1日举办落成典礼。广州华南总部研发及生产基地计划2027年上半年投产；成都研发及生产基地暨西南总部预计2027年上半年投产。目前，公司厂房建筑面积达到60万平方米。临港二期的生产和研发基地拟于2026年下半年开工建设。未来五年，公司的厂房建筑面积将增至90万平方米。", "excerpt_sha256": "4eca7542d876555b935206a6b45d619f40a3b80606a9218130fbd254cc2147af", "content_sha256": "520684e158f0f10191be84c435cb5600fff0a6cbea8d41442dfee9647d497d6f", "capture_receipt_sha256": "6d501f42b3b2e2040860337f58d83621ed7e57704948ec3d01ff2caba5fcb6f8", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_ir_equipment_units_low_2027", "source_id": "amec_sse_results_qa_20260910", "target_type": "parameter", "target_id": "equipment_units_low_2027", "support_type": "rationale_support", "locator": "Official reply id2508385; 尹志尧; 2026-09-10 16:37:39; companyId145565", "excerpt": "您好，中微公司目前有金桥、临港一期以及南昌三大生产基地。上海临港滴水湖畔的总部大楼暨研发中心已于2026年8月1日举办落成典礼。广州华南总部研发及生产基地计划2027年上半年投产；成都研发及生产基地暨西南总部预计2027年上半年投产。目前，公司厂房建筑面积达到60万平方米。临港二期的生产和研发基地拟于2026年下半年开工建设。未来五年，公司的厂房建筑面积将增至90万平方米。", "excerpt_sha256": "4eca7542d876555b935206a6b45d619f40a3b80606a9218130fbd254cc2147af", "content_sha256": "520684e158f0f10191be84c435cb5600fff0a6cbea8d41442dfee9647d497d6f", "capture_receipt_sha256": "6d501f42b3b2e2040860337f58d83621ed7e57704948ec3d01ff2caba5fcb6f8", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_ir_equipment_units_low_2028", "source_id": "amec_sse_results_qa_20260910", "target_type": "parameter", "target_id": "equipment_units_low_2028", "support_type": "rationale_support", "locator": "Official reply id2508385; 尹志尧; 2026-09-10 16:37:39; companyId145565", "excerpt": "您好，中微公司目前有金桥、临港一期以及南昌三大生产基地。上海临港滴水湖畔的总部大楼暨研发中心已于2026年8月1日举办落成典礼。广州华南总部研发及生产基地计划2027年上半年投产；成都研发及生产基地暨西南总部预计2027年上半年投产。目前，公司厂房建筑面积达到60万平方米。临港二期的生产和研发基地拟于2026年下半年开工建设。未来五年，公司的厂房建筑面积将增至90万平方米。", "excerpt_sha256": "4eca7542d876555b935206a6b45d619f40a3b80606a9218130fbd254cc2147af", "content_sha256": "520684e158f0f10191be84c435cb5600fff0a6cbea8d41442dfee9647d497d6f", "capture_receipt_sha256": "6d501f42b3b2e2040860337f58d83621ed7e57704948ec3d01ff2caba5fcb6f8", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_ir_equipment_units_base_2026", "source_id": "amec_sse_results_qa_20260910", "target_type": "parameter", "target_id": "equipment_units_base_2026", "support_type": "rationale_support", "locator": "Official reply id2508385; 尹志尧; 2026-09-10 16:37:39; companyId145565", "excerpt": "您好，中微公司目前有金桥、临港一期以及南昌三大生产基地。上海临港滴水湖畔的总部大楼暨研发中心已于2026年8月1日举办落成典礼。广州华南总部研发及生产基地计划2027年上半年投产；成都研发及生产基地暨西南总部预计2027年上半年投产。目前，公司厂房建筑面积达到60万平方米。临港二期的生产和研发基地拟于2026年下半年开工建设。未来五年，公司的厂房建筑面积将增至90万平方米。", "excerpt_sha256": "4eca7542d876555b935206a6b45d619f40a3b80606a9218130fbd254cc2147af", "content_sha256": "520684e158f0f10191be84c435cb5600fff0a6cbea8d41442dfee9647d497d6f", "capture_receipt_sha256": "6d501f42b3b2e2040860337f58d83621ed7e57704948ec3d01ff2caba5fcb6f8", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_ir_equipment_units_base_2027", "source_id": "amec_sse_results_qa_20260910", "target_type": "parameter", "target_id": "equipment_units_base_2027", "support_type": "rationale_support", "locator": "Official reply id2508385; 尹志尧; 2026-09-10 16:37:39; companyId145565", "excerpt": "您好，中微公司目前有金桥、临港一期以及南昌三大生产基地。上海临港滴水湖畔的总部大楼暨研发中心已于2026年8月1日举办落成典礼。广州华南总部研发及生产基地计划2027年上半年投产；成都研发及生产基地暨西南总部预计2027年上半年投产。目前，公司厂房建筑面积达到60万平方米。临港二期的生产和研发基地拟于2026年下半年开工建设。未来五年，公司的厂房建筑面积将增至90万平方米。", "excerpt_sha256": "4eca7542d876555b935206a6b45d619f40a3b80606a9218130fbd254cc2147af", "content_sha256": "520684e158f0f10191be84c435cb5600fff0a6cbea8d41442dfee9647d497d6f", "capture_receipt_sha256": "6d501f42b3b2e2040860337f58d83621ed7e57704948ec3d01ff2caba5fcb6f8", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_ir_equipment_units_base_2028", "source_id": "amec_sse_results_qa_20260910", "target_type": "parameter", "target_id": "equipment_units_base_2028", "support_type": "rationale_support", "locator": "Official reply id2508385; 尹志尧; 2026-09-10 16:37:39; companyId145565", "excerpt": "您好，中微公司目前有金桥、临港一期以及南昌三大生产基地。上海临港滴水湖畔的总部大楼暨研发中心已于2026年8月1日举办落成典礼。广州华南总部研发及生产基地计划2027年上半年投产；成都研发及生产基地暨西南总部预计2027年上半年投产。目前，公司厂房建筑面积达到60万平方米。临港二期的生产和研发基地拟于2026年下半年开工建设。未来五年，公司的厂房建筑面积将增至90万平方米。", "excerpt_sha256": "4eca7542d876555b935206a6b45d619f40a3b80606a9218130fbd254cc2147af", "content_sha256": "520684e158f0f10191be84c435cb5600fff0a6cbea8d41442dfee9647d497d6f", "capture_receipt_sha256": "6d501f42b3b2e2040860337f58d83621ed7e57704948ec3d01ff2caba5fcb6f8", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_ir_equipment_units_high_2026", "source_id": "amec_sse_results_qa_20260910", "target_type": "parameter", "target_id": "equipment_units_high_2026", "support_type": "rationale_support", "locator": "Official reply id2508385; 尹志尧; 2026-09-10 16:37:39; companyId145565", "excerpt": "您好，中微公司目前有金桥、临港一期以及南昌三大生产基地。上海临港滴水湖畔的总部大楼暨研发中心已于2026年8月1日举办落成典礼。广州华南总部研发及生产基地计划2027年上半年投产；成都研发及生产基地暨西南总部预计2027年上半年投产。目前，公司厂房建筑面积达到60万平方米。临港二期的生产和研发基地拟于2026年下半年开工建设。未来五年，公司的厂房建筑面积将增至90万平方米。", "excerpt_sha256": "4eca7542d876555b935206a6b45d619f40a3b80606a9218130fbd254cc2147af", "content_sha256": "520684e158f0f10191be84c435cb5600fff0a6cbea8d41442dfee9647d497d6f", "capture_receipt_sha256": "6d501f42b3b2e2040860337f58d83621ed7e57704948ec3d01ff2caba5fcb6f8", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_ir_equipment_units_high_2027", "source_id": "amec_sse_results_qa_20260910", "target_type": "parameter", "target_id": "equipment_units_high_2027", "support_type": "rationale_support", "locator": "Official reply id2508385; 尹志尧; 2026-09-10 16:37:39; companyId145565", "excerpt": "您好，中微公司目前有金桥、临港一期以及南昌三大生产基地。上海临港滴水湖畔的总部大楼暨研发中心已于2026年8月1日举办落成典礼。广州华南总部研发及生产基地计划2027年上半年投产；成都研发及生产基地暨西南总部预计2027年上半年投产。目前，公司厂房建筑面积达到60万平方米。临港二期的生产和研发基地拟于2026年下半年开工建设。未来五年，公司的厂房建筑面积将增至90万平方米。", "excerpt_sha256": "4eca7542d876555b935206a6b45d619f40a3b80606a9218130fbd254cc2147af", "content_sha256": "520684e158f0f10191be84c435cb5600fff0a6cbea8d41442dfee9647d497d6f", "capture_receipt_sha256": "6d501f42b3b2e2040860337f58d83621ed7e57704948ec3d01ff2caba5fcb6f8", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_ir_equipment_units_high_2028", "source_id": "amec_sse_results_qa_20260910", "target_type": "parameter", "target_id": "equipment_units_high_2028", "support_type": "rationale_support", "locator": "Official reply id2508385; 尹志尧; 2026-09-10 16:37:39; companyId145565", "excerpt": "您好，中微公司目前有金桥、临港一期以及南昌三大生产基地。上海临港滴水湖畔的总部大楼暨研发中心已于2026年8月1日举办落成典礼。广州华南总部研发及生产基地计划2027年上半年投产；成都研发及生产基地暨西南总部预计2027年上半年投产。目前，公司厂房建筑面积达到60万平方米。临港二期的生产和研发基地拟于2026年下半年开工建设。未来五年，公司的厂房建筑面积将增至90万平方米。", "excerpt_sha256": "4eca7542d876555b935206a6b45d619f40a3b80606a9218130fbd254cc2147af", "content_sha256": "520684e158f0f10191be84c435cb5600fff0a6cbea8d41442dfee9647d497d6f", "capture_receipt_sha256": "6d501f42b3b2e2040860337f58d83621ed7e57704948ec3d01ff2caba5fcb6f8", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_recognition_Equipment", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "recognition_policy", "target_id": "recognition:Equipment", "support_type": "policy_support", "locator": "PDF page174 revenue policy, complete equipment/spares/services context", "excerpt": "本集团将专用设备产品运至约定交货地点，进行安装、调试及验收。根据不同专用设备产品的类\n型及合同安排，经客户确认后，客户具有自行使用产品的权利并承担该产品可能发生价格波动或\n毁损的风险，本集团于控制权转移至客户时相应确认收入。", "excerpt_sha256": "114b51105c6c79e5baef6ff5d720084beb38c72e549a44a49d422f4bd6bd19fd", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_recognition_Aftermarket", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "recognition_policy", "target_id": "recognition:Aftermarket", "support_type": "policy_support", "locator": "PDF page174 revenue policy, complete equipment/spares/services context", "excerpt": "本集团在客户取得相关商品或服务的控制权时，按预期有权收取的对价金额确认收入。\n(a)\n销售商品\n本集团生产产品并销售予各地客户。\n本集团将专用设备产品运至约定交货地点，进行安装、调试及验收。根据不同专用设备产品的类\n型及合同安排，经客户确认后，客户具有自行使用产品的权利并承担该产品可能发生价格波动或\n毁损的风险，本集团于控制权转移至客户时相应确认收入。\n本集团将备品备件产品按照协议合同规定运至约定交货地点，经客户确认后，客户具有自行使用\n产品的权利并承担该产品可能发生价格波动或毁损的风险，本集团相应确认收入。\n本集团给予客户的信用期根据客户的信用风险特征确定，与行业惯例一致，不存在重大融资成分。\n本集团已收或应收客户对价而应向客户转让商品的义务列示为合同负债。\n(b)\n提供劳务\n本集团对外提供劳务，通常根据已完成劳务的进度在一段时间内确认收入，其中，已完成劳\n务的进度按照已发生的成本占预计总成本的比例确定。于资产负债表日，本集团对已完成劳务的\n进度进行重新估计，以使其能够反映履约情况的变化。\n本集团按照已完成劳务的进度确认收入时，对于本集团已经取得无条件收款权的部分，确认\n为应收账款，", "excerpt_sha256": "abc10f216f5d80b2b022a040a7c396c3b9e496716507cc0c1810fc49eb9f4f85", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_recognition_Aftermarket_equipment", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "recognition_policy", "target_id": "recognition:Aftermarket", "support_type": "policy_support", "locator": "PDF page174, equipment policy", "excerpt": "本集团将专用设备产品运至约定交货地点，进行安装、调试及验收。根据不同专用设备产品的类\n型及合同安排，经客户确认后，客户具有自行使用产品的权利并承担该产品可能发生价格波动或\n毁损的风险，本集团于控制权转移至客户时相应确认收入。", "excerpt_sha256": "114b51105c6c79e5baef6ff5d720084beb38c72e549a44a49d422f4bd6bd19fd", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_recognition_Aftermarket_spares", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "recognition_policy", "target_id": "recognition:Aftermarket", "support_type": "policy_support", "locator": "PDF page174, spares policy", "excerpt": "本集团将备品备件产品按照协议合同规定运至约定交货地点，经客户确认后，客户具有自行使用\n产品的权利并承担该产品可能发生价格波动或毁损的风险，本集团相应确认收入。", "excerpt_sha256": "18915a0852e8d2bceae31993e83d5ba58541154ef6aa5d3b4fffc5874b6b72cc", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_recognition_Aftermarket_services", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "recognition_policy", "target_id": "recognition:Aftermarket", "support_type": "policy_support", "locator": "PDF page174, services policy", "excerpt": "本集团对外提供劳务，通常根据已完成劳务的进度在一段时间内确认收入，其中，已完成劳\n务的进度按照已发生的成本占预计总成本的比例确定。于资产负债表日，本集团对已完成劳务的\n进度进行重新估计，以使其能够反映履约情况的变化。", "excerpt_sha256": "a69e32b1b494e8d8425e3b4f4c357913e1f05190c62a4f4e5d48073a83180957", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_recognition_CMP", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "recognition_policy", "target_id": "recognition:CMP", "support_type": "policy_support", "locator": "PDF page174 revenue policy, complete equipment/spares/services context", "excerpt": "本集团在客户取得相关商品或服务的控制权时，按预期有权收取的对价金额确认收入。\n(a)\n销售商品\n本集团生产产品并销售予各地客户。\n本集团将专用设备产品运至约定交货地点，进行安装、调试及验收。根据不同专用设备产品的类\n型及合同安排，经客户确认后，客户具有自行使用产品的权利并承担该产品可能发生价格波动或\n毁损的风险，本集团于控制权转移至客户时相应确认收入。\n本集团将备品备件产品按照协议合同规定运至约定交货地点，经客户确认后，客户具有自行使用\n产品的权利并承担该产品可能发生价格波动或毁损的风险，本集团相应确认收入。\n本集团给予客户的信用期根据客户的信用风险特征确定，与行业惯例一致，不存在重大融资成分。\n本集团已收或应收客户对价而应向客户转让商品的义务列示为合同负债。\n(b)\n提供劳务\n本集团对外提供劳务，通常根据已完成劳务的进度在一段时间内确认收入，其中，已完成劳\n务的进度按照已发生的成本占预计总成本的比例确定。于资产负债表日，本集团对已完成劳务的\n进度进行重新估计，以使其能够反映履约情况的变化。\n本集团按照已完成劳务的进度确认收入时，对于本集团已经取得无条件收款权的部分，确认\n为应收账款，", "excerpt_sha256": "abc10f216f5d80b2b022a040a7c396c3b9e496716507cc0c1810fc49eb9f4f85", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_recognition_CMP_equipment", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "recognition_policy", "target_id": "recognition:CMP", "support_type": "policy_support", "locator": "PDF page174, equipment policy", "excerpt": "本集团将专用设备产品运至约定交货地点，进行安装、调试及验收。根据不同专用设备产品的类\n型及合同安排，经客户确认后，客户具有自行使用产品的权利并承担该产品可能发生价格波动或\n毁损的风险，本集团于控制权转移至客户时相应确认收入。", "excerpt_sha256": "114b51105c6c79e5baef6ff5d720084beb38c72e549a44a49d422f4bd6bd19fd", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_recognition_CMP_spares", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "recognition_policy", "target_id": "recognition:CMP", "support_type": "policy_support", "locator": "PDF page174, spares policy", "excerpt": "本集团将备品备件产品按照协议合同规定运至约定交货地点，经客户确认后，客户具有自行使用\n产品的权利并承担该产品可能发生价格波动或毁损的风险，本集团相应确认收入。", "excerpt_sha256": "18915a0852e8d2bceae31993e83d5ba58541154ef6aa5d3b4fffc5874b6b72cc", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_recognition_CMP_services", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "recognition_policy", "target_id": "recognition:CMP", "support_type": "policy_support", "locator": "PDF page174, services policy", "excerpt": "本集团对外提供劳务，通常根据已完成劳务的进度在一段时间内确认收入，其中，已完成劳\n务的进度按照已发生的成本占预计总成本的比例确定。于资产负债表日，本集团对已完成劳务的\n进度进行重新估计，以使其能够反映履约情况的变化。", "excerpt_sha256": "a69e32b1b494e8d8425e3b4f4c357913e1f05190c62a4f4e5d48073a83180957", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_CMP_annual_2026", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "management_target", "target_id": "CMP_annual_2026", "support_type": "exact_value", "locator": "PDF page177, seller commitment; table p53 states annual amounts not cumulative objective", "excerpt": "根据业绩承诺方与本集团已签署的《业绩承诺和补偿协议》，本次交易中业绩承诺方承诺：中微\n众硅在2026 年度、2027 年度和2028 年度实现的合并报表范围营业收入分别不低于28,000.00 万\n元、43,000.00 万元和58,000.00 万元。截至本半年报披露日，2026 年度业绩承诺尚在履行过程\n中，本期未到业绩承诺考核时点。", "excerpt_sha256": "7f73b3fcd4bd397b7ad07ad6ea75e581167a704974ad93de6b2a2c12cbf6eb6f", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08", "extracted_value": 28000, "unit": "万元", "period": "FY2026"}
+{"claim_id": "claim_CMP_annual_2027", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "management_target", "target_id": "CMP_annual_2027", "support_type": "exact_value", "locator": "PDF page177, seller commitment; table p53 states annual amounts not cumulative objective", "excerpt": "根据业绩承诺方与本集团已签署的《业绩承诺和补偿协议》，本次交易中业绩承诺方承诺：中微\n众硅在2026 年度、2027 年度和2028 年度实现的合并报表范围营业收入分别不低于28,000.00 万\n元、43,000.00 万元和58,000.00 万元。截至本半年报披露日，2026 年度业绩承诺尚在履行过程\n中，本期未到业绩承诺考核时点。", "excerpt_sha256": "7f73b3fcd4bd397b7ad07ad6ea75e581167a704974ad93de6b2a2c12cbf6eb6f", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08", "extracted_value": 43000, "unit": "万元", "period": "FY2027"}
+{"claim_id": "claim_benchmark_CMP_annual_2027", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "management_target", "target_id": "CMP_annual_2027", "support_type": "rationale_support", "locator": "PDF pages176–177, purchase and commitment scope", "excerpt": "业绩承诺的完成情况：\n√适用□不适用\n根据业绩承诺方与本集团已签署的《业绩承诺和补偿协议》，本次交易中业绩承诺方承诺：中微\n众硅在2026 年度、2027 年度和2028 年度实现的合并报表范围营业收入分别不低于28,000.00 万\n元、43,000.00 万元和58,000.00 万元。截至本半年报披露日，2026 年度业绩承诺尚在履行过程\n中，本期未到业绩承诺考核时点。\n大额商誉形成的主要原因：\n√适用□不适用\n中微众硅为国内少数掌握12 英寸高端CMP 设备核心技术并实现量产的企业，其CMP 工艺与本\n集团刻蚀、薄膜沉积等干法设备高度互补，交易完成后本集团形成“干法+湿法”全流程设备能\n力，双方将在研发、供应链、客户资源等维度形成深度协同，助力集团优化产品组合，提升整体\n解决方案的市场竞争力。\n其他说明：\n无\n(3)被购买方于购买日可辨认资产、负债\n√适用□不适用\n单位：元币种：人民币\n中微众硅（杭州）电子科技有限公司\n购买日公允价值\n购买日账面价值\n资产：\n货币资金\n69,341,049.74\n69,341,049.74\n交易性金融资产\n4,961,503.97\n4,961,", "excerpt_sha256": "b647767bcbfdce2b6d7923d07781bd88eca9b9e2b5685c8ac37d57e18438a6de", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_CMP_annual_2028", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "management_target", "target_id": "CMP_annual_2028", "support_type": "exact_value", "locator": "PDF page177, seller commitment; table p53 states annual amounts not cumulative objective", "excerpt": "根据业绩承诺方与本集团已签署的《业绩承诺和补偿协议》，本次交易中业绩承诺方承诺：中微\n众硅在2026 年度、2027 年度和2028 年度实现的合并报表范围营业收入分别不低于28,000.00 万\n元、43,000.00 万元和58,000.00 万元。截至本半年报披露日，2026 年度业绩承诺尚在履行过程\n中，本期未到业绩承诺考核时点。", "excerpt_sha256": "7f73b3fcd4bd397b7ad07ad6ea75e581167a704974ad93de6b2a2c12cbf6eb6f", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08", "extracted_value": 58000, "unit": "万元", "period": "FY2028"}
+{"claim_id": "claim_benchmark_CMP_annual_2028", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "management_target", "target_id": "CMP_annual_2028", "support_type": "rationale_support", "locator": "PDF pages176–177, purchase and commitment scope", "excerpt": "业绩承诺的完成情况：\n√适用□不适用\n根据业绩承诺方与本集团已签署的《业绩承诺和补偿协议》，本次交易中业绩承诺方承诺：中微\n众硅在2026 年度、2027 年度和2028 年度实现的合并报表范围营业收入分别不低于28,000.00 万\n元、43,000.00 万元和58,000.00 万元。截至本半年报披露日，2026 年度业绩承诺尚在履行过程\n中，本期未到业绩承诺考核时点。\n大额商誉形成的主要原因：\n√适用□不适用\n中微众硅为国内少数掌握12 英寸高端CMP 设备核心技术并实现量产的企业，其CMP 工艺与本\n集团刻蚀、薄膜沉积等干法设备高度互补，交易完成后本集团形成“干法+湿法”全流程设备能\n力，双方将在研发、供应链、客户资源等维度形成深度协同，助力集团优化产品组合，提升整体\n解决方案的市场竞争力。\n其他说明：\n无\n(3)被购买方于购买日可辨认资产、负债\n√适用□不适用\n单位：元币种：人民币\n中微众硅（杭州）电子科技有限公司\n购买日公允价值\n购买日账面价值\n资产：\n货币资金\n69,341,049.74\n69,341,049.74\n交易性金融资产\n4,961,503.97\n4,961,", "excerpt_sha256": "b647767bcbfdce2b6d7923d07781bd88eca9b9e2b5685c8ac37d57e18438a6de", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_driver_core_etch_acceptance", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "growth_driver", "target_id": "e_core_etch_acceptance", "support_type": "rationale_support", "locator": "PDF page16", "excerpt": "公司的ICP 刻蚀设备包括Primo Twin-Star、Primo Nanova、Primo Menova 等产\n品在涵盖逻辑、DRAM、3D NAND、功率和电源管理、以及微电机系统等芯片和器件的50 多个\n客户的生产线上量产，并继续验证更多ICP 刻蚀工艺。\n报告期内，公司低温高深宽比ICP 刻蚀设备Primo Nanova LUX-Cryo 在客户的下一代产品的\n产线上稳定量产。与此同时，为应对先进节点高深宽比挑战，公司研发的下一代高精度ICP 刻蚀\n设备的Primo Angnova 在实验室开展多个客户的工艺验证，全面满足客户的刻蚀需求，Beta 机器\n在客户端认证顺利，并取得多个重复订单。Primo Twin-Star 装机量快速增长，在海内外客户的逻\n辑芯片、功率器件、微型发光二极管Micro-LED、AR 和VR 智能眼镜用的超透镜（Metalens）\n等特色器件的产线上实现量产。公司的Primo Menova 金属刻蚀设备，在客户端认证顺利，已投\n入量产。\n公司开发的高选择比气相刻蚀设备Primo Domingo，在实验室的Alpha 腔上开展多个工艺验\n证，全面满足", "excerpt_sha256": "9652622988550b539bfe5b1f1760bc1ff272425fa4ef90f0cf1ce49021a39f6d", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_contrary_core_etch_acceptance", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "growth_driver", "target_id": "contra_core_etch_acceptance", "support_type": "rationale_support", "locator": "PDF page33, acquisition and technology execution risks", "excerpt": "中微半导体设备（上海）股份有限公司2026 年半年度报告\n33 / 210\n术水平不达预期等诸多不确定因素，可能导致其实际经营表现不达预期，导致投资项目的实际效\n益与预期结果存在较大差异，进而对公司利润产生不利影响。\n（2）并购风险\n公司强调稳健发展，坚持实施内生性增长与外延式并购相结合的发展策略。虽然公司未来并\n购时将继续秉承审慎原则，相应制定整合计划，防范并购风险，但若出现宏观经济波动、市场竞\n争加剧、地缘政治环境变化、被并购公司业绩低于预期或协同效应未显现等情形，将对公司的经\n营业绩产生不利影响。\n4、研发投入不足导致技术被赶超或替代的风险\n公司所处的半导体设备行业属于技术密集型行业，半导体关键设备的研发涉及等离子体物\n理、射频及微波学、结构化学、微观分子动力学、光谱及能谱学、真空机械传输等多种科学技术\n及工程领域学科知识的综合应用，具有产品技术升级快、研发投入大、研发周期长、研发风险高\n等特点。\n国外领先的半导体设备公司均在研发方面投入巨额资金。公司研发投入总额与国外领先的半\n导体公司有相当大的差距。如果公司未来研发资金投入不足，不能满足技术升级需要，可能导致\n公司技术被赶超或", "excerpt_sha256": "560671a80e98503c09313585f28c2b045e7fa015b1674299366aeb54d9140599", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_ir_supply_core_etch_acceptance", "source_id": "amec_sse_results_qa_20260910", "target_type": "growth_driver", "target_id": "ir_supply_core_etch_acceptance", "support_type": "rationale_support", "locator": "Official reply id2508080, 尹志尧, companyId145565, 2026-09-10 15:37:45", "excerpt": "您好，随着客户订单进入大规模交付期，我们持续与供应链紧密配合，不断提升公司交付能力。中微公司与海外零部件供应商有着长期、良好、稳定的合作关系，是海外供应商的优先客户，我们会根据订单情况提前做好海外核心零部件的战略备库。公司与国产供应商进行广泛合作，持续推进国产方案的导入，多元化供应链结构，保证供应链的安全性、及时性和稳定性。公司与客户也在不断提升生产及验证效率，缩短设备生产、终测、量产调试时间。", "excerpt_sha256": "d68338dd98d21e16cc32b117323dd10e09b84133ecb1f1171e0fe3ff4de2f4ff", "content_sha256": "520684e158f0f10191be84c435cb5600fff0a6cbea8d41442dfee9647d497d6f", "capture_receipt_sha256": "6d501f42b3b2e2040860337f58d83621ed7e57704948ec3d01ff2caba5fcb6f8", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_outside_wfe_reference", "source_id": "semi_wfe_20260714", "target_type": "growth_driver", "target_id": "outside_wfe_reference", "support_type": "rationale_support", "locator": "Official SEMI July14 release, parsed original line167; global WFE, not AMEC revenue", "excerpt": "After registering a record $116.9 billion in sales last year, the Wafer Fab Equipment (WFE) segment, which includes wafer processing, mask/reticle, and fab facilities equipment, is projected to increase 23.1% to $143.9 billion in 2026.", "excerpt_sha256": "fb782e321920a03e2c15af4723e2b5f04a958b029537efa72f8067ad06382be5", "content_sha256": "3da627dd2754e73dc70e974dccfdb356e09de9d92d594da2c8879a4e7a2a0e8d", "capture_receipt_sha256": "036e4279c1a43d78abe00a3cefe7e13b11041e0f8608b630928a5baa7508330d", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_driver_films_packaging", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "growth_driver", "target_id": "e_films_packaging", "support_type": "rationale_support", "locator": "PDF page16", "excerpt": "（3）薄膜沉积设备研发\n公司开发的多款薄膜沉积产品已推向市场。中微公司钨系列薄膜沉积产品：CVD（化学气\n相沉积）钨设备，HAR（高深宽比）钨设备和ALD（原子层沉积）钨设备，可覆盖存储器件所\n有钨应用；该系列设备均已通过关键存储客户端现场验证，满足先进存储应用中所有金属互连应\n用（包含高深宽比金属互连应用）及三维存储器件字线应用各项性能指标，并获得客户重复量产\n订单。同时，公司钨系列产品也可满足先进逻辑器件中多道金属钨互连应用需求，已通过关键逻\n辑客户端现场验证，满足先进逻辑应用中各项性能指标，已获得客户重复量产订单。此外，公司\n钨系列产品也通过了特殊器件客户金属钨应用现场验证。基于公司钨系列产品独特的性能优势，\n已顺利完成先进逻辑、先进存储和特殊器件的现场验证，未来将进一步扩大市场占有率。\n同期，公司开发出应用于先进逻辑器件的金属栅系列产品Preforma Uniflash ® ALD 氮化钛，\nALD 钛铝，ALD 氮化钽产品，已完成多个先进逻辑客户设备验证，可满足先进逻辑客户性能需", "excerpt_sha256": "0a5f731653bae416b49dc04017330be737eb33b83e608f9bc421468266640d17", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_contrary_films_packaging", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "growth_driver", "target_id": "contra_films_packaging", "support_type": "rationale_support", "locator": "PDF page33, acquisition and technology execution risks", "excerpt": "中微半导体设备（上海）股份有限公司2026 年半年度报告\n33 / 210\n术水平不达预期等诸多不确定因素，可能导致其实际经营表现不达预期，导致投资项目的实际效\n益与预期结果存在较大差异，进而对公司利润产生不利影响。\n（2）并购风险\n公司强调稳健发展，坚持实施内生性增长与外延式并购相结合的发展策略。虽然公司未来并\n购时将继续秉承审慎原则，相应制定整合计划，防范并购风险，但若出现宏观经济波动、市场竞\n争加剧、地缘政治环境变化、被并购公司业绩低于预期或协同效应未显现等情形，将对公司的经\n营业绩产生不利影响。\n4、研发投入不足导致技术被赶超或替代的风险\n公司所处的半导体设备行业属于技术密集型行业，半导体关键设备的研发涉及等离子体物\n理、射频及微波学、结构化学、微观分子动力学、光谱及能谱学、真空机械传输等多种科学技术\n及工程领域学科知识的综合应用，具有产品技术升级快、研发投入大、研发周期长、研发风险高\n等特点。\n国外领先的半导体设备公司均在研发方面投入巨额资金。公司研发投入总额与国外领先的半\n导体公司有相当大的差距。如果公司未来研发资金投入不足，不能满足技术升级需要，可能导致\n公司技术被赶超或", "excerpt_sha256": "560671a80e98503c09313585f28c2b045e7fa015b1674299366aeb54d9140599", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_ir_supply_films_packaging", "source_id": "amec_sse_results_qa_20260910", "target_type": "growth_driver", "target_id": "ir_supply_films_packaging", "support_type": "rationale_support", "locator": "Official reply id2508080, 尹志尧, companyId145565, 2026-09-10 15:37:45", "excerpt": "您好，随着客户订单进入大规模交付期，我们持续与供应链紧密配合，不断提升公司交付能力。中微公司与海外零部件供应商有着长期、良好、稳定的合作关系，是海外供应商的优先客户，我们会根据订单情况提前做好海外核心零部件的战略备库。公司与国产供应商进行广泛合作，持续推进国产方案的导入，多元化供应链结构，保证供应链的安全性、及时性和稳定性。公司与客户也在不断提升生产及验证效率，缩短设备生产、终测、量产调试时间。", "excerpt_sha256": "d68338dd98d21e16cc32b117323dd10e09b84133ecb1f1171e0fe3ff4de2f4ff", "content_sha256": "520684e158f0f10191be84c435cb5600fff0a6cbea8d41442dfee9647d497d6f", "capture_receipt_sha256": "6d501f42b3b2e2040860337f58d83621ed7e57704948ec3d01ff2caba5fcb6f8", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_driver_afterm_support", "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "target_type": "growth_driver", "target_id": "e_afterm_support", "support_type": "rationale_support", "locator": "PDF page174", "excerpt": "本集团将备品备件产品按照协议合同规定运至约定交货地点，经客户确认后，客户具有自行使用\n产品的权利并承担该产品可能发生价格波动或毁损的风险，本集团相应确认收入。\n本集团给予客户的信用期根据客户的信用风险特征确定，与行业惯例一致，不存在重大融资成分。\n本集团已收或应收客户对价而应向客户转让商品的义务列示为合同负债。\n(b)\n提供劳务\n本集团对外提供劳务，通常根据已完成劳务的进度在一段时间内确认收入，其中，已完成劳\n务的进度按照已发生的成本占预计总成本的比例确定。于资产负债表日，本集团对已完成劳务的\n进度进行重新估计，以使其能够反映履约情况的变化。\n本集团按照已完成劳务的进度确认收入时，对于本集团已经取得无条件收款权的部分，确认\n为应收账款，其余部分确认为合同资产，并对应收账款和合同资产以预期信用损失为基础确认损\n失准备(附注二(10))；如果本集团已收或应收的合同价款超过已完成的劳务，则将超过部分确认为\n合同负债。本集团对于同一合同项下的合同资产和合同负债以净额列示。\n(2).\n同类业务采用不同经营模式涉及不同收入确认方式及计量方法\n□适用√不适用\n35、合同成本\n□适用√不适用\n36、政", "excerpt_sha256": "1da505889e559f2c78a9a17e5264c9aef796c0f4ef00b838b833b0b429d07773", "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5", "capture_receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_contrary_afterm_support", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "growth_driver", "target_id": "contra_afterm_support", "support_type": "rationale_support", "locator": "PDF page33, acquisition and technology execution risks", "excerpt": "中微半导体设备（上海）股份有限公司2026 年半年度报告\n33 / 210\n术水平不达预期等诸多不确定因素，可能导致其实际经营表现不达预期，导致投资项目的实际效\n益与预期结果存在较大差异，进而对公司利润产生不利影响。\n（2）并购风险\n公司强调稳健发展，坚持实施内生性增长与外延式并购相结合的发展策略。虽然公司未来并\n购时将继续秉承审慎原则，相应制定整合计划，防范并购风险，但若出现宏观经济波动、市场竞\n争加剧、地缘政治环境变化、被并购公司业绩低于预期或协同效应未显现等情形，将对公司的经\n营业绩产生不利影响。\n4、研发投入不足导致技术被赶超或替代的风险\n公司所处的半导体设备行业属于技术密集型行业，半导体关键设备的研发涉及等离子体物\n理、射频及微波学、结构化学、微观分子动力学、光谱及能谱学、真空机械传输等多种科学技术\n及工程领域学科知识的综合应用，具有产品技术升级快、研发投入大、研发周期长、研发风险高\n等特点。\n国外领先的半导体设备公司均在研发方面投入巨额资金。公司研发投入总额与国外领先的半\n导体公司有相当大的差距。如果公司未来研发资金投入不足，不能满足技术升级需要，可能导致\n公司技术被赶超或", "excerpt_sha256": "560671a80e98503c09313585f28c2b045e7fa015b1674299366aeb54d9140599", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_driver_cmp_ramp", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "growth_driver", "target_id": "e_cmp_ramp", "support_type": "rationale_support", "locator": "PDF page177", "excerpt": "大额商誉形成的主要原因：\n√适用□不适用\n中微众硅为国内少数掌握12 英寸高端CMP 设备核心技术并实现量产的企业，其CMP 工艺与本\n集团刻蚀、薄膜沉积等干法设备高度互补，交易完成后本集团形成“干法+湿法”全流程设备能\n力，双方将在研发、供应链、客户资源等维度形成深度协同，助力集团优化产品组合，提升整体\n解决方案的市场竞争力。\n其他说明：\n无\n(3)被购买方于购买日可辨认资产、负债\n√适用□不适用\n单位：元币种：人民币\n中微众硅（杭州）电子科技有限公司\n购买日公允价值\n购买日账面价值\n资产：\n货币资金\n69,341,049.74\n69,341,049.74\n交易性金融资产\n4,961,503.97\n4,961,503.97\n应收票据\n289,960.00\n289,960.00\n应收款项\n136,763,470.28\n136,763,470.28\n预付款项\n7,994,360.41\n7,9", "excerpt_sha256": "ae6d198f04dd327359dd3da0b488ca6bb7eb51409f793b70da6499db9c61379f", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+{"claim_id": "claim_contrary_cmp_ramp", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "target_type": "growth_driver", "target_id": "contra_cmp_ramp", "support_type": "rationale_support", "locator": "PDF page33, acquisition and technology execution risks", "excerpt": "中微半导体设备（上海）股份有限公司2026 年半年度报告\n33 / 210\n术水平不达预期等诸多不确定因素，可能导致其实际经营表现不达预期，导致投资项目的实际效\n益与预期结果存在较大差异，进而对公司利润产生不利影响。\n（2）并购风险\n公司强调稳健发展，坚持实施内生性增长与外延式并购相结合的发展策略。虽然公司未来并\n购时将继续秉承审慎原则，相应制定整合计划，防范并购风险，但若出现宏观经济波动、市场竞\n争加剧、地缘政治环境变化、被并购公司业绩低于预期或协同效应未显现等情形，将对公司的经\n营业绩产生不利影响。\n4、研发投入不足导致技术被赶超或替代的风险\n公司所处的半导体设备行业属于技术密集型行业，半导体关键设备的研发涉及等离子体物\n理、射频及微波学、结构化学、微观分子动力学、光谱及能谱学、真空机械传输等多种科学技术\n及工程领域学科知识的综合应用，具有产品技术升级快、研发投入大、研发周期长、研发风险高\n等特点。\n国外领先的半导体设备公司均在研发方面投入巨额资金。公司研发投入总额与国外领先的半\n导体公司有相当大的差距。如果公司未来研发资金投入不足，不能满足技术升级需要，可能导致\n公司技术被赶超或", "excerpt_sha256": "560671a80e98503c09313585f28c2b045e7fa015b1674299366aeb54d9140599", "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "capture_receipt_sha256": "faaae965b385b071b029afff15533c3a6e7c43780d1b4ae5783b4d2b6561ec5c", "verification_status": "opened_and_checked", "verified_by": "rf_cn_execution", "verified_date": "2026-10-08"}
+historical_revenue [
+  {
+    "year": 2023,
+    "value": 6263.51358137,
+    "source_ids": [
+      "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
+    ],
+    "claim_ids": [
+      "claim_history_2023"
+    ]
+  },
+  {
+    "year": 2024,
+    "value": 9065.16509769,
+    "source_ids": [
+      "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
+    ],
+    "claim_ids": [
+      "claim_history_2024"
+    ]
+  },
+  {
+    "year": 2025,
+    "value": 12384.63826811,
+    "source_ids": [
+      "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
+    ],
+    "claim_ids": [
+      "claim_history_2025"
+    ]
+  }
+]
+research_coverage [
+  {
+    "dimension": "company_foundation",
+    "status": "modeled_driver",
+    "conclusion": "Consolidated external revenue, China-heavy physical equipment portfolio; acquired CMP is a new perimeter.",
+    "revenue_mechanism": "Consolidated external revenue, China-heavy physical equipment portfolio; acquired CMP is a new perimeter.",
+    "rationale": "Supported mechanisms map to actual base path; numerical magnitudes are conditional analyst assumptions. Short history, no hard throughput capacity and composite timing are disclosed. Official September10 site/overseas/supply-chain replies read; plant area and cumulative overseas deliveries are not annual recognized revenue.",
+    "parameter_ids": [
+      "reported_total",
+      "equipment_base",
+      "equipment_units_base_2026",
+      "equipment_units_base_2027",
+      "equipment_units_base_2028",
+      "equipment_unit_revenue_base_2026",
+      "equipment_unit_revenue_base_2027",
+      "equipment_unit_revenue_base_2028",
+      "cmp_revenue_base_2026",
+      "cmp_revenue_base_2027",
+      "cmp_revenue_base_2028"
+    ],
+    "source_ids": [
+      "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "amec_sse_results_qa_20260910"
+    ]
+  },
+  {
+    "dimension": "growth_curve",
+    "status": "modeled_driver",
+    "conclusion": "Mature etch plus commercializing film/CMP. Three annual historical totals are insufficient to estimate a full cycle; no historical statistical accuracy claim.",
+    "revenue_mechanism": "Mature etch plus commercializing film/CMP. Three annual historical totals are insufficient to estimate a full cycle; no historical statistical accuracy claim.",
+    "rationale": "Supported mechanisms map to actual base path; numerical magnitudes are conditional analyst assumptions. Short history, no hard throughput capacity and composite timing are disclosed. Official September10 site/overseas/supply-chain replies read; plant area and cumulative overseas deliveries are not annual recognized revenue.",
+    "parameter_ids": [
+      "equipment_units_base_2026",
+      "equipment_units_base_2027",
+      "equipment_units_base_2028",
+      "equipment_unit_revenue_base_2026",
+      "equipment_unit_revenue_base_2027",
+      "equipment_unit_revenue_base_2028",
+      "cmp_revenue_base_2026",
+      "cmp_revenue_base_2027",
+      "cmp_revenue_base_2028"
+    ],
+    "source_ids": [
+      "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "amec_sse_results_qa_20260910"
+    ]
+  },
+  {
+    "dimension": "industry_market",
+    "status": "modeled_driver",
+    "conclusion": "Outside WFE 23.1%/21.8%/14.1% reference does not mechanically identify AMEC growth; China moderation is counterevidence.",
+    "revenue_mechanism": "Outside WFE 23.1%/21.8%/14.1% reference does not mechanically identify AMEC growth; China moderation is counterevidence.",
+    "rationale": "Supported mechanisms map to actual base path; numerical magnitudes are conditional analyst assumptions. Short history, no hard throughput capacity and composite timing are disclosed. Official September10 site/overseas/supply-chain replies read; plant area and cumulative overseas deliveries are not annual recognized revenue.",
+    "parameter_ids": [
+      "equipment_units_base_2026",
+      "equipment_units_base_2027",
+      "equipment_units_base_2028",
+      "equipment_unit_revenue_base_2026",
+      "equipment_unit_revenue_base_2027",
+      "equipment_unit_revenue_base_2028"
+    ],
+    "source_ids": [
+      "semi_wfe_20260714",
+      "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+    ]
+  },
+  {
+    "dimension": "competition",
+    "status": "modeled_driver",
+    "conclusion": "Client discounts and international peer technology competition constrain weighted price; no precise future market share invented.",
+    "revenue_mechanism": "Client discounts and international peer technology competition constrain weighted price; no precise future market share invented.",
+    "rationale": "Supported mechanisms map to actual base path; numerical magnitudes are conditional analyst assumptions. Short history, no hard throughput capacity and composite timing are disclosed. Official September10 site/overseas/supply-chain replies read; plant area and cumulative overseas deliveries are not annual recognized revenue.",
+    "parameter_ids": [
+      "equipment_unit_revenue_base_2026",
+      "equipment_unit_revenue_base_2027",
+      "equipment_unit_revenue_base_2028"
+    ],
+    "source_ids": [
+      "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "amec_sse_results_qa_20260910"
+    ]
+  },
+  {
+    "dimension": "capacity",
+    "status": "modeled_driver",
+    "conclusion": "1240 sold vs1660 produced and1010 inventory chambers in FY2025; inventory is not infinite immediately acceptable capacity. No measured FY2026–28 hard capacity ceiling.",
+    "revenue_mechanism": "1240 sold vs1660 produced and1010 inventory chambers in FY2025; inventory is not infinite immediately acceptable capacity. No measured FY2026–28 hard capacity ceiling.",
+    "rationale": "Supported mechanisms map to actual base path; numerical magnitudes are conditional analyst assumptions. Short history, no hard throughput capacity and composite timing are disclosed. Official September10 site/overseas/supply-chain replies read; plant area and cumulative overseas deliveries are not annual recognized revenue.",
+    "parameter_ids": [
+      "equipment_units_base_2026",
+      "equipment_units_base_2027",
+      "equipment_units_base_2028",
+      "equipment_unit_revenue_base_2026",
+      "equipment_unit_revenue_base_2027",
+      "equipment_unit_revenue_base_2028"
+    ],
+    "source_ids": [
+      "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "amec_sse_results_qa_20260910"
+    ]
+  },
+  {
+    "dimension": "technology",
+    "status": "modeled_driver",
+    "conclusion": "H1 film/ICP repeat orders and validation expand process coverage; alpha/beta validation is not guaranteed recognized sales.",
+    "revenue_mechanism": "H1 film/ICP repeat orders and validation expand process coverage; alpha/beta validation is not guaranteed recognized sales.",
+    "rationale": "Supported mechanisms map to actual base path; numerical magnitudes are conditional analyst assumptions. Short history, no hard throughput capacity and composite timing are disclosed. Official September10 site/overseas/supply-chain replies read; plant area and cumulative overseas deliveries are not annual recognized revenue.",
+    "parameter_ids": [
+      "equipment_units_base_2026",
+      "equipment_units_base_2027",
+      "equipment_units_base_2028",
+      "equipment_unit_revenue_base_2026",
+      "equipment_unit_revenue_base_2027",
+      "equipment_unit_revenue_base_2028",
+      "cmp_revenue_base_2026",
+      "cmp_revenue_base_2027",
+      "cmp_revenue_base_2028"
+    ],
+    "source_ids": [
+      "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "amec_sse_results_qa_20260910"
+    ]
+  },
+  {
+    "dimension": "policy",
+    "status": "modeled_driver",
+    "conclusion": "Export restrictions and critical component availability can delay accepted output; low case includes disruption, no unsupported legal-rule forecast.",
+    "revenue_mechanism": "Export restrictions and critical component availability can delay accepted output; low case includes disruption, no unsupported legal-rule forecast.",
+    "rationale": "Supported mechanisms map to actual base path; numerical magnitudes are conditional analyst assumptions. Short history, no hard throughput capacity and composite timing are disclosed. Official September10 site/overseas/supply-chain replies read; plant area and cumulative overseas deliveries are not annual recognized revenue.",
+    "parameter_ids": [
+      "equipment_units_base_2026",
+      "equipment_units_base_2027",
+      "equipment_units_base_2028",
+      "equipment_unit_revenue_base_2026",
+      "equipment_unit_revenue_base_2027",
+      "equipment_unit_revenue_base_2028"
+    ],
+    "source_ids": [
+      "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "amec_sse_results_qa_20260910"
+    ]
+  },
+  {
+    "dimension": "customers",
+    "status": "modeled_driver",
+    "conclusion": "Customer A39.99% FY2025 vs22.15% FY2024; client capex concentration raises low-case risk.",
+    "revenue_mechanism": "Customer A39.99% FY2025 vs22.15% FY2024; client capex concentration raises low-case risk.",
+    "rationale": "Supported mechanisms map to actual base path; numerical magnitudes are conditional analyst assumptions. Short history, no hard throughput capacity and composite timing are disclosed. Official September10 site/overseas/supply-chain replies read; plant area and cumulative overseas deliveries are not annual recognized revenue.",
+    "parameter_ids": [
+      "equipment_units_base_2026",
+      "equipment_units_base_2027",
+      "equipment_units_base_2028",
+      "equipment_unit_revenue_base_2026",
+      "equipment_unit_revenue_base_2027",
+      "equipment_unit_revenue_base_2028"
+    ],
+    "source_ids": [
+      "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "amec_sse_results_qa_20260910"
+    ]
+  },
+  {
+    "dimension": "demand",
+    "status": "modeled_driver",
+    "conclusion": "Chamber acceptance drives equipment; installed fleet supports residual spares/services but no measured fleet or attach rate.",
+    "revenue_mechanism": "Chamber acceptance drives equipment; installed fleet supports residual spares/services but no measured fleet or attach rate.",
+    "rationale": "Supported mechanisms map to actual base path; numerical magnitudes are conditional analyst assumptions. Short history, no hard throughput capacity and composite timing are disclosed. Official September10 site/overseas/supply-chain replies read; plant area and cumulative overseas deliveries are not annual recognized revenue.",
+    "parameter_ids": [
+      "equipment_units_base_2026",
+      "equipment_units_base_2027",
+      "equipment_units_base_2028",
+      "equipment_unit_revenue_base_2026",
+      "equipment_unit_revenue_base_2027",
+      "equipment_unit_revenue_base_2028",
+      "aftermarket_revenue_base_2026",
+      "aftermarket_revenue_base_2027",
+      "aftermarket_revenue_base_2028"
+    ],
+    "source_ids": [
+      "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "amec_sse_results_qa_20260910"
+    ]
+  }
+]
+management_communication_coverage [
+  {
+    "category": "latest_annual_filing",
+    "status": "checked",
+    "source_ids": [
+      "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
+    ],
+    "checked_date": "2026-10-08",
+    "conclusion": "2025 annual report opened, revenue and policy/risk/strategy checked. Does not falsely report March proposed acquisition as completed.",
+    "material_revenue_target_ids": []
+  },
+  {
+    "category": "latest_results_release",
+    "status": "checked",
+    "source_ids": [
+      "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+    ],
+    "checked_date": "2026-10-08",
+    "conclusion": "Latest 2026H1 filing opened and verified; H1 revenue6,691.28732767m is not doubled mechanically to annual revenue.",
+    "material_revenue_target_ids": [
+      "CMP_annual_2026",
+      "CMP_annual_2027",
+      "CMP_annual_2028"
+    ]
+  },
+  {
+    "category": "latest_earnings_call",
+    "status": "not_available",
+    "source_ids": [],
+    "checked_date": "2026-10-08",
+    "conclusion": "No AMEC telephone-call TXT obtained via ET. Full official September10 network results Q&A was read and registered separately as strategy communication; this is not falsely labeled an ET telephone transcript. No claim that missing telephone coverage proves management has no target.",
+    "material_revenue_target_ids": [],
+    "rationale": "No AMEC telephone-call TXT obtained via ET. Full official September10 network results Q&A was read and registered separately as strategy communication; this is not falsely labeled an ET telephone transcript. No claim that missing telephone coverage proves management has no target.",
+    "search_description": "688012 official earnings-call/IR presentation, 2026H1 through information date; AMEC homepage, SSE IR2 and September10 roadshow, secondary leads for official originals",
+    "search_event": {
+      "query_scope": "688012 official earnings-call/IR presentation, 2026H1 through information date; AMEC homepage, SSE IR2 and September10 roadshow, secondary leads for official originals",
+      "query_time": "2026-10-08",
+      "event_ids": [
+        "turn231search2",
+        "turn231view0",
+        "turn232view0",
+        "turn235search0",
+        "cua-roadshow40766-actual-open"
+      ],
+      "generated_by": "rf_cn_execution logged observed tool calls",
+      "event_sha256": "e1b90fa9f78a84dd21bf81621b23774b21e3c6bbe9b901d3e0628b3746bcde7e"
+    }
+  },
+  {
+    "category": "latest_investor_presentation",
+    "status": "not_available",
+    "source_ids": [],
+    "checked_date": "2026-10-08",
+    "conclusion": "Search identified August2026 IR record DOCX through secondary leads, but no verified official original or complete presentation captured. AMEC homepage and IR2 failed web access. Original unavailable to this run, not proof it does not exist.",
+    "material_revenue_target_ids": [],
+    "rationale": "Search identified August2026 IR record DOCX through secondary leads, but no verified official original or complete presentation captured. AMEC homepage and IR2 failed web access. Original unavailable to this run, not proof it does not exist.",
+    "search_description": "688012 official earnings-call/IR presentation, 2026H1 through information date; AMEC homepage, SSE IR2 and September10 roadshow, secondary leads for official originals",
+    "search_event": {
+      "query_scope": "688012 official earnings-call/IR presentation, 2026H1 through information date; AMEC homepage, SSE IR2 and September10 roadshow, secondary leads for official originals",
+      "query_time": "2026-10-08",
+      "event_ids": [
+        "turn231search2",
+        "turn231view0",
+        "turn232view0",
+        "turn235search0",
+        "cua-roadshow40766-actual-open"
+      ],
+      "generated_by": "rf_cn_execution logged observed tool calls",
+      "event_sha256": "e1b90fa9f78a84dd21bf81621b23774b21e3c6bbe9b901d3e0628b3746bcde7e"
+    }
+  },
+  {
+    "category": "latest_strategy_communication",
+    "status": "checked",
+    "source_ids": [
+      "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "amec_sse_results_qa_20260910"
+    ],
+    "checked_date": "2026-10-08",
+    "conclusion": "H1 products and the complete September10 interactive dataset checked. All8 AMEC records are identity-filtered. Capacity/site plans and overseas cumulative approximately800 reaction stages are context, not annual revenue/accepted volume forecasts. Pre-collected responses are separately logged.",
+    "material_revenue_target_ids": []
+  },
+  {
+    "category": "material_announcements_since_last_filing",
+    "status": "checked",
+    "source_ids": [
+      "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+    ],
+    "checked_date": "2026-10-08",
+    "conclusion": "All19 official CNINFO announcement titles from August20 through October8 were read (metadata only). H1 pages53/176/177 acquisition/targets and complete September10 interactive Q&A checked in original. Post-H1 fund announcement and capex-delay documents are not fully downloaded/opened; no facts or targets inferred from titles alone.",
+    "material_revenue_target_ids": [
+      "CMP_annual_2026",
+      "CMP_annual_2027",
+      "CMP_annual_2028"
+    ]
+  }
+]
+management_targets [
+  {
+    "target_id": "CMP_annual_2026",
+    "statement": "中微众硅在2026年度实现的合并报表范围营业收入不低于28,000.00万元",
+    "metric_name": "CMP consolidated annual revenue commitment by transaction sellers",
+    "metric_definition": "Full-year target company consolidated revenue independently audited under performance compensation agreement; not group AMEC revenue",
+    "target_period": "FY2026",
+    "raw_unit": "万元",
+    "raw_currency": "CNY",
+    "raw_scale": "ten_thousand",
+    "raw_target_value": 28000,
+    "measurement_basis": "annual_period",
+    "measurement_periods": [
+      "FY2026"
+    ],
+    "measurement_rationale": "Original says 在2026年度、2027年度和2028年度实现...分别; per-year amount. Cumulative compensation test elsewhere does not change annual target amounts.",
+    "materiality": "material",
+    "commitment_strength": "goal",
+    "scope": {
+      "type": "segment",
+      "name": "CMP"
+    },
+    "perimeter_status": "mismatch",
+    "perimeter_notes": "2026 annual standalone target includes pre-acquisition periods; model is only June–December consolidated contribution.",
+    "comparison": "at_least",
+    "treatment": "unmodeled_data_gap",
+    "comparison_value": null,
+    "comparison_currency": "CNY",
+    "comparison_scale": "million",
+    "normalization_rationale": "万元 /100 equals CNY million; no FX. No unsupported partial-year prorating.",
+    "mapped_parameter_ids": [],
+    "mapped_scenarios": [],
+    "claim_ids": [
+      "claim_CMP_annual_2026"
+    ],
+    "rationale": "Seller compensation commitment is an independent reference, not a guaranteed revenue guidance or forced base scenario."
+  },
+  {
+    "target_id": "CMP_annual_2027",
+    "statement": "中微众硅在2027年度实现的合并报表范围营业收入不低于43,000.00万元",
+    "metric_name": "CMP consolidated annual revenue commitment by transaction sellers",
+    "metric_definition": "Full-year target company consolidated revenue independently audited under performance compensation agreement; not group AMEC revenue",
+    "target_period": "FY2027",
+    "raw_unit": "万元",
+    "raw_currency": "CNY",
+    "raw_scale": "ten_thousand",
+    "raw_target_value": 43000,
+    "measurement_basis": "annual_period",
+    "measurement_periods": [
+      "FY2027"
+    ],
+    "measurement_rationale": "Original says 在2026年度、2027年度和2028年度实现...分别; per-year amount. Cumulative compensation test elsewhere does not change annual target amounts.",
+    "materiality": "material",
+    "commitment_strength": "goal",
+    "scope": {
+      "type": "segment",
+      "name": "CMP"
+    },
+    "perimeter_status": "matched",
+    "perimeter_notes": "Full-year post-control external CMP revenue assumed comparable; unidentified internal transactions remain a reconciliation risk.",
+    "comparison": "at_least",
+    "treatment": "independent_benchmark",
+    "comparison_value": 430.0,
+    "comparison_currency": "CNY",
+    "comparison_scale": "million",
+    "normalization_rationale": "万元 /100 equals CNY million; no FX. No unsupported partial-year prorating.",
+    "mapped_parameter_ids": [
+      "cmp_revenue_low_2027",
+      "cmp_revenue_base_2027",
+      "cmp_revenue_high_2027"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "claim_ids": [
+      "claim_CMP_annual_2027"
+    ],
+    "rationale": "Seller compensation commitment is an independent reference, not a guaranteed revenue guidance or forced base scenario.",
+    "benchmark_rationale": "Independent analyst CMP operating paths are compared against seller annual commitment under matching full-year scope; under-attainment is reported as computed, never forced up.",
+    "benchmark_claim_ids": [
+      "claim_benchmark_CMP_annual_2027"
+    ]
+  },
+  {
+    "target_id": "CMP_annual_2028",
+    "statement": "中微众硅在2028年度实现的合并报表范围营业收入不低于58,000.00万元",
+    "metric_name": "CMP consolidated annual revenue commitment by transaction sellers",
+    "metric_definition": "Full-year target company consolidated revenue independently audited under performance compensation agreement; not group AMEC revenue",
+    "target_period": "FY2028",
+    "raw_unit": "万元",
+    "raw_currency": "CNY",
+    "raw_scale": "ten_thousand",
+    "raw_target_value": 58000,
+    "measurement_basis": "annual_period",
+    "measurement_periods": [
+      "FY2028"
+    ],
+    "measurement_rationale": "Original says 在2026年度、2027年度和2028年度实现...分别; per-year amount. Cumulative compensation test elsewhere does not change annual target amounts.",
+    "materiality": "material",
+    "commitment_strength": "goal",
+    "scope": {
+      "type": "segment",
+      "name": "CMP"
+    },
+    "perimeter_status": "matched",
+    "perimeter_notes": "Full-year post-control external CMP revenue assumed comparable; unidentified internal transactions remain a reconciliation risk.",
+    "comparison": "at_least",
+    "treatment": "independent_benchmark",
+    "comparison_value": 580.0,
+    "comparison_currency": "CNY",
+    "comparison_scale": "million",
+    "normalization_rationale": "万元 /100 equals CNY million; no FX. No unsupported partial-year prorating.",
+    "mapped_parameter_ids": [
+      "cmp_revenue_low_2028",
+      "cmp_revenue_base_2028",
+      "cmp_revenue_high_2028"
+    ],
+    "mapped_scenarios": [
+      "low",
+      "base",
+      "high"
+    ],
+    "claim_ids": [
+      "claim_CMP_annual_2028"
+    ],
+    "rationale": "Seller compensation commitment is an independent reference, not a guaranteed revenue guidance or forced base scenario.",
+    "benchmark_rationale": "Independent analyst CMP operating paths are compared against seller annual commitment under matching full-year scope; under-attainment is reported as computed, never forced up.",
+    "benchmark_claim_ids": [
+      "claim_benchmark_CMP_annual_2028"
+    ]
+  }
+]
+growth_driver_tree {
+  "status": "modeled",
+  "drivers": [
+    {
+      "driver_id": "core_etch_acceptance",
+      "title": "客户工序扩展及刻蚀验收",
+      "thesis": "Current etch qualification and client investment convert into accepted chamber volume.",
+      "causal_chain": [
+        "Customer process needs and capital investment",
+        "Qualification, manufacturing and installation execution",
+        "Customer acceptance or genuine service progress",
+        "Recognized external annual revenue"
+      ],
+      "parameter_ids": [
+        "equipment_units_base_2026",
+        "equipment_units_base_2027",
+        "equipment_units_base_2028",
+        "equipment_unit_revenue_base_2026",
+        "equipment_unit_revenue_base_2027",
+        "equipment_unit_revenue_base_2028"
+      ],
+      "segment_attribution": [
+        {
+          "segment_name": "Equipment",
+          "weight": 0.75
+        }
+      ],
+      "horizon": {
+        "start_year": 2026,
+        "end_year": 2028
+      },
+      "persistence": "cyclical",
+      "persistence_rationale": "Horizon spans current commercial ramps and equipment/client investment cycle; strength is an analyst judgment, not known outcome.",
+      "evidence_nodes": [
+        {
+          "evidence_id": "e_core_etch_acceptance",
+          "evidence_type": "company_execution",
+          "inference_distance": "one_step",
+          "conclusion": "Current etch qualification and client investment convert into accepted chamber volume.",
+          "claim_ids": [
+            "claim_driver_core_etch_acceptance"
+          ]
+        },
+        {
+          "evidence_id": "contra_core_etch_acceptance",
+          "evidence_type": "explicit_company_risk",
+          "inference_distance": "contrary",
+          "conclusion": "Delays, customer capex, competitive technology and acquired-business underperformance can defeat the path.",
+          "claim_ids": [
+            "claim_contrary_core_etch_acceptance"
+          ]
+        },
+        {
+          "evidence_id": "ir_supply_core_etch_acceptance",
+          "evidence_type": "official_results_question_answer",
+          "inference_distance": "one_step",
+          "conclusion": "Management describes strategic component stocking, domestic supplier alternatives and improved delivery/testing efficiency. No numeric accepted-volume guarantee.",
+          "claim_ids": [
+            "claim_ir_supply_core_etch_acceptance"
+          ]
+        },
+        {
+          "evidence_id": "outside_wfe_reference",
+          "evidence_type": "industry_association_outside_reference",
+          "inference_distance": "analogical",
+          "conclusion": "Independent global WFE benchmark: +23.1% in2026, +21.8%2027, +14.1%2028. Directional context only; China moderation, domestic share, product mix and client acceptance create an explicit inferential gap.",
+          "claim_ids": [
+            "claim_outside_wfe_reference"
+          ]
+        }
+      ],
+      "leading_indicators": [
+        "Accepted chamber sales and recurring customer orders",
+        "Half-year external revenue excluding acquisitions",
+        "Product validations reaching repeat volume orders"
+      ],
+      "falsifiers": [
+        "Acceptance/recognized revenue persistently below low-case driver values",
+        "New product validations fail to reach volume orders",
+        "CMP external annual revenue materially misses independent seller commitment"
+      ],
+      "counterevidence_status": "found",
+      "counterevidence_rationale": "Opened H1 p33 and annual p61–65 risks; no assumption that a positive product announcement proves future acceptance."
+    },
+    {
+      "driver_id": "films_packaging",
+      "title": "薄膜及先进封装商业化",
+      "thesis": "Repeated client validations/orders broaden accessible steps; commercial acceptance is uncertain.",
+      "causal_chain": [
+        "Customer process needs and capital investment",
+        "Qualification, manufacturing and installation execution",
+        "Customer acceptance or genuine service progress",
+        "Recognized external annual revenue"
+      ],
+      "parameter_ids": [
+        "equipment_units_base_2026",
+        "equipment_units_base_2027",
+        "equipment_units_base_2028",
+        "equipment_unit_revenue_base_2026",
+        "equipment_unit_revenue_base_2027",
+        "equipment_unit_revenue_base_2028"
+      ],
+      "segment_attribution": [
+        {
+          "segment_name": "Equipment",
+          "weight": 0.25
+        }
+      ],
+      "horizon": {
+        "start_year": 2026,
+        "end_year": 2028
+      },
+      "persistence": "multi_year_structural",
+      "persistence_rationale": "Horizon spans current commercial ramps and equipment/client investment cycle; strength is an analyst judgment, not known outcome.",
+      "evidence_nodes": [
+        {
+          "evidence_id": "e_films_packaging",
+          "evidence_type": "company_execution",
+          "inference_distance": "one_step",
+          "conclusion": "Repeated client validations/orders broaden accessible steps; commercial acceptance is uncertain.",
+          "claim_ids": [
+            "claim_driver_films_packaging"
+          ]
+        },
+        {
+          "evidence_id": "contra_films_packaging",
+          "evidence_type": "explicit_company_risk",
+          "inference_distance": "contrary",
+          "conclusion": "Delays, customer capex, competitive technology and acquired-business underperformance can defeat the path.",
+          "claim_ids": [
+            "claim_contrary_films_packaging"
+          ]
+        },
+        {
+          "evidence_id": "ir_supply_films_packaging",
+          "evidence_type": "official_results_question_answer",
+          "inference_distance": "one_step",
+          "conclusion": "Management describes strategic component stocking, domestic supplier alternatives and improved delivery/testing efficiency. No numeric accepted-volume guarantee.",
+          "claim_ids": [
+            "claim_ir_supply_films_packaging"
+          ]
+        }
+      ],
+      "leading_indicators": [
+        "Accepted chamber sales and recurring customer orders",
+        "Half-year external revenue excluding acquisitions",
+        "Product validations reaching repeat volume orders"
+      ],
+      "falsifiers": [
+        "Acceptance/recognized revenue persistently below low-case driver values",
+        "New product validations fail to reach volume orders",
+        "CMP external annual revenue materially misses independent seller commitment"
+      ],
+      "counterevidence_status": "found",
+      "counterevidence_rationale": "Opened H1 p33 and annual p61–65 risks; no assumption that a positive product announcement proves future acceptance."
+    },
+    {
+      "driver_id": "afterm_support",
+      "title": "安装设备带来的备件和服务",
+      "thesis": "Installed operations support replacement parts and services; no invented fleet metric.",
+      "causal_chain": [
+        "Customer process needs and capital investment",
+        "Qualification, manufacturing and installation execution",
+        "Customer acceptance or genuine service progress",
+        "Recognized external annual revenue"
+      ],
+      "parameter_ids": [
+        "aftermarket_revenue_base_2026",
+        "aftermarket_revenue_base_2027",
+        "aftermarket_revenue_base_2028"
+      ],
+      "segment_attribution": [
+        {
+          "segment_name": "Aftermarket",
+          "weight": 1.0
+        }
+      ],
+      "horizon": {
+        "start_year": 2026,
+        "end_year": 2028
+      },
+      "persistence": "multi_year_structural",
+      "persistence_rationale": "Horizon spans current commercial ramps and equipment/client investment cycle; strength is an analyst judgment, not known outcome.",
+      "evidence_nodes": [
+        {
+          "evidence_id": "e_afterm_support",
+          "evidence_type": "company_execution",
+          "inference_distance": "one_step",
+          "conclusion": "Installed operations support replacement parts and services; no invented fleet metric.",
+          "claim_ids": [
+            "claim_driver_afterm_support"
+          ]
+        },
+        {
+          "evidence_id": "contra_afterm_support",
+          "evidence_type": "explicit_company_risk",
+          "inference_distance": "contrary",
+          "conclusion": "Delays, customer capex, competitive technology and acquired-business underperformance can defeat the path.",
+          "claim_ids": [
+            "claim_contrary_afterm_support"
+          ]
+        }
+      ],
+      "leading_indicators": [
+        "Accepted chamber sales and recurring customer orders",
+        "Half-year external revenue excluding acquisitions",
+        "Product validations reaching repeat volume orders"
+      ],
+      "falsifiers": [
+        "Acceptance/recognized revenue persistently below low-case driver values",
+        "New product validations fail to reach volume orders",
+        "CMP external annual revenue materially misses independent seller commitment"
+      ],
+      "counterevidence_status": "found",
+      "counterevidence_rationale": "Opened H1 p33 and annual p61–65 risks; no assumption that a positive product announcement proves future acceptance."
+    },
+    {
+      "driver_id": "cmp_ramp",
+      "title": "并购CMP收入并表及商业化",
+      "thesis": "Control followed by customer qualification/acceptance gives incremental consolidated external revenue.",
+      "causal_chain": [
+        "Customer process needs and capital investment",
+        "Qualification, manufacturing and installation execution",
+        "Customer acceptance or genuine service progress",
+        "Recognized external annual revenue"
+      ],
+      "parameter_ids": [
+        "cmp_revenue_base_2026",
+        "cmp_revenue_base_2027",
+        "cmp_revenue_base_2028"
+      ],
+      "segment_attribution": [
+        {
+          "segment_name": "CMP",
+          "weight": 1.0
+        }
+      ],
+      "horizon": {
+        "start_year": 2026,
+        "end_year": 2028
+      },
+      "persistence": "uncertain",
+      "persistence_rationale": "Horizon spans current commercial ramps and equipment/client investment cycle; strength is an analyst judgment, not known outcome.",
+      "evidence_nodes": [
+        {
+          "evidence_id": "e_cmp_ramp",
+          "evidence_type": "company_execution",
+          "inference_distance": "one_step",
+          "conclusion": "Control followed by customer qualification/acceptance gives incremental consolidated external revenue.",
+          "claim_ids": [
+            "claim_driver_cmp_ramp"
+          ]
+        },
+        {
+          "evidence_id": "contra_cmp_ramp",
+          "evidence_type": "explicit_company_risk",
+          "inference_distance": "contrary",
+          "conclusion": "Delays, customer capex, competitive technology and acquired-business underperformance can defeat the path.",
+          "claim_ids": [
+            "claim_contrary_cmp_ramp"
+          ]
+        }
+      ],
+      "leading_indicators": [
+        "Accepted chamber sales and recurring customer orders",
+        "Half-year external revenue excluding acquisitions",
+        "Product validations reaching repeat volume orders"
+      ],
+      "falsifiers": [
+        "Acceptance/recognized revenue persistently below low-case driver values",
+        "New product validations fail to reach volume orders",
+        "CMP external annual revenue materially misses independent seller commitment"
+      ],
+      "counterevidence_status": "found",
+      "counterevidence_rationale": "Opened H1 p33 and annual p61–65 risks; no assumption that a positive product announcement proves future acceptance."
+    }
+  ]
+}

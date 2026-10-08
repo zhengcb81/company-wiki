@@ -1,0 +1,2 @@
+BEFORE_KEYS ['created_at', 'output_root', 'protected', 'runtime_comparison', 'superseded_sandbox_output_root']
+AFTER_KEYS ['protected', 'runtime_sha256', 'installed_canonical_comparison', 'runtime_drift_owner', 'catalog_write']

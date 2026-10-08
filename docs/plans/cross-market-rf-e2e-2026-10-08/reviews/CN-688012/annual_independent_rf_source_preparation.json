@@ -1,0 +1,101 @@
+{
+  "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+  "source_type": "regulatory_filing",
+  "title": "中微公司：2025年年度报告",
+  "publisher": "company-wiki",
+  "url": "https://static.cninfo.com.cn/finalpage/2026-03-31/1225062431.PDF",
+  "published_date": "2026-03-31",
+  "accessed_date": "2026-10-08",
+  "page_or_section": "1",
+  "capture": {
+    "capture_schema_version": "1.0",
+    "capture_method": "local_document",
+    "tool_name": "company-wiki-source-version-reader",
+    "tool_call_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5|2026-10-08T08:03:34.187346+00:00",
+    "captured_date": "2026-10-08",
+    "snapshot_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+    "content_treatment": "untrusted_data_only",
+    "prompt_injection_status": "not_reviewed",
+    "host_receipt": {
+      "host_receipt_schema_version": "1.0",
+      "issuer": "company-wiki",
+      "environment": "host-runtime",
+      "tool_name": "company-wiki-source-version-reader",
+      "action": "verified_read",
+      "event_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "timestamp": "2026-10-08T08:03:34.187346+00:00",
+      "receipt_sha256": "3b1af9062a0798fc7496e9f2286c0044df9b085d3a28f99fae770241f0666586"
+    },
+    "receipt_sha256": "fc90076a2c629f4f6ec8c552918a415aa44b31048a94dc6b3b6ef7aa9087f3c8"
+  },
+  "company_wiki_trace": {
+    "source_ref": {
+      "byte_size": 9165875,
+      "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "mime_type": "application/pdf",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
+    },
+    "read_receipt": {
+      "byte_size": 9165875,
+      "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+      "read_at": "2026-10-08T08:03:34.187346+00:00",
+      "review": {
+        "evidence_sha256": null,
+        "policy_hash": null,
+        "reviewed_at": null,
+        "source_sha256": null,
+        "status": "not_reviewed"
+      },
+      "schema_version": "2.1",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+      "status": "ok"
+    },
+    "source_manifest": {
+      "byte_size": 9165875,
+      "canonical_entity_id": null,
+      "collector_name": null,
+      "collector_version": null,
+      "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "display_name": "中微公司",
+      "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "document_kind": "annual_report",
+      "fiscal_period": "FY",
+      "fiscal_year": 2025,
+      "form_type": null,
+      "language": "zh",
+      "market": "CN",
+      "mime_type": "application/pdf",
+      "period_end": "2025-12-31",
+      "provider": null,
+      "provider_document_id": null,
+      "published_date": "2026-03-31",
+      "retrieved_at": null,
+      "security_id": "688012",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "source_url": "https://static.cninfo.com.cn/finalpage/2026-03-31/1225062431.PDF",
+      "title": "中微公司：2025年年度报告"
+    },
+    "source_candidate": {
+      "resolution_outcome": "reused_existing",
+      "download_events": 0
+    }
+  },
+  "reuse_receipt": {
+    "parser_calls": null,
+    "llm_calls": null,
+    "download_calls": 0,
+    "outcome": "reused_existing",
+    "policy_hash": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+    "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+    "prompt_injection_status": "not_reviewed",
+    "artifact_read": [],
+    "producer_events": [],
+    "artifact_read_events": [],
+    "artifact_failed_events": []
+  }
+}

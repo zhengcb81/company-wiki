@@ -1,0 +1,2 @@
+{"timestamp_utc": "2026-10-08T07:15:03.385896+00:00", "pid": 34496, "ppid": 25160, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\retrieval_worker.py", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\et-retrieval-b9626uno\\request.json"], "cwd": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts"}}
+{"timestamp_utc": "2026-10-08T07:15:03.790069+00:00", "pid": 34496, "ppid": 25160, "event": "python_exit", "data": {}}

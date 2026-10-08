@@ -1,0 +1,57 @@
+FF...F.                                                                  [100%]
+================================== FAILURES ===================================
+_____________ test_registered_result_is_not_an_unregistered_claim _____________
+
+registered = ({'input_sha256': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'result_sha256': 'bbbbbbbbbbbbbb... WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-145/test_registered_result_is_not_0/forecast.json'))
+
+    def test_registered_result_is_not_an_unregistered_claim(registered):
+        _, artifact = registered
+>       assert audit([artifact]) == []
+E       AssertionError: assert ['unregistere...r registered'] == []
+E         
+E         Left contains one more item: 'unregistered claim: C:\\Users\\郑曾波\\AppData\\Local\\Temp\\pytest-of-郑曾波\\pytest-145\\test_registered_result_is_not_0\\forecast.json anchors input aaaaaaaaaaaaaaaa which was never registered'
+E         Use -v to get more diff
+
+tests\test_registry_artifact_audit.py:31: AssertionError
+____ test_cross_version_and_snapshot_history_do_not_hide_registered_anchor ____
+
+registered = ({'input_sha256': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'result_sha256': 'bbbbbbbbbbbbbb... WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-145/test_cross_version_and_snapsho0/forecast.json'))
+
+    def test_cross_version_and_snapshot_history_do_not_hide_registered_anchor(registered):
+        result, artifact = registered
+        register_publication({**result, "engine_version": "4.2.0", "result_sha256": "c" * 64})
+        register_publication(result, artifact_type="snapshot")
+>       assert audit([artifact]) == []
+E       AssertionError: assert ['unregistere...r registered'] == []
+E         
+E         Left contains one more item: 'unregistered claim: C:\\Users\\郑曾波\\AppData\\Local\\Temp\\pytest-of-郑曾波\\pytest-145\\test_cross_version_and_snapsho0\\forecast.json anchors input aaaaaaaaaaaaaaaa which was never registered'
+E         Use -v to get more diff
+
+tests\test_registry_artifact_audit.py:38: AssertionError
+______________ test_real_cli_reports_correct_exit_status[True-0] ______________
+
+registered = ({'input_sha256': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'result_sha256': 'bbbbbbbbbbbbbb... WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-145/test_real_cli_reports_correct_0/forecast.json'))
+known = True, expected_code = 0
+
+    @pytest.mark.parametrize("known,expected_code", [(True, 0), (False, 1)])
+    def test_real_cli_reports_correct_exit_status(registered, known, expected_code):
+        result, artifact = registered
+        if not known:
+            artifact.write_text(json.dumps({**result, "input_sha256": "f" * 64}), encoding="utf-8")
+        cli = Path(__file__).resolve().parents[1] / "scripts/publication_registry.py"
+        completed = subprocess.run(
+            [sys.executable, "-B", str(cli), "audit", "--result", str(artifact)],
+            env=os.environ.copy(), capture_output=True, text=True, check=False,
+        )
+>       assert completed.returncode == expected_code, completed.stdout + completed.stderr
+E       AssertionError: unregistered claim: C:\Users\郑曾波\AppData\Local\Temp\pytest-of-郑曾波\pytest-145\test_real_cli_reports_correct_0\forecast.json anchors input aaaaaaaaaaaaaaaa which was never registered
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['C:\\Miniconda\\python.exe', '-B', 'C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\public...test_real_cli_reports_correct_0\\forecast.json anchors input aaaaaaaaaaaaaaaa which was never registered\n', stderr='').returncode
+
+tests\test_registry_artifact_audit.py:68: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_registry_artifact_audit.py::test_registered_result_is_not_an_unregistered_claim
+FAILED tests/test_registry_artifact_audit.py::test_cross_version_and_snapshot_history_do_not_hide_registered_anchor
+FAILED tests/test_registry_artifact_audit.py::test_real_cli_reports_correct_exit_status[True-0]
+3 failed, 4 passed in 1.07s

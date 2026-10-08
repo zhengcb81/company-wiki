@@ -1,0 +1,3971 @@
+{
+  "commands": [
+    {
+      "id": "1791442210246288800-bootstrap",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/bootstrap.py"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 2.13,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791442230684286900-read-required-references",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/bootstrap.py",
+        "refs"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 0.38,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791442235871282900-rf-ff-cwp-annual-2025-reuse",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+        "--request-file",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_annual_2025.json",
+        "--company-wiki-catalog-config",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+        "--timeout-seconds",
+        "180"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 3,
+      "elapsed": 3.064,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791442268415710600-ff-debug-annual-2025",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\fetch_filing.py",
+        "--request-file",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/request_annual_2025.json",
+        "--debug",
+        "--timeout-seconds",
+        "180"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 2,
+      "elapsed": 2.39,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791442297194681900-rf-ff-cwp-annual-2025-no-language",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+        "--request-file",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/request_annual_2025_no_language.json",
+        "--company-wiki-catalog-config",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+        "--timeout-seconds",
+        "180"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 3,
+      "elapsed": 2.704,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791442334843235800-ff-debug-annual-no-language",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\fetch_filing.py",
+        "--request-file",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/request_annual_2025_no_language.json",
+        "--debug",
+        "--timeout-seconds",
+        "180"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 2,
+      "elapsed": 2.381,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791442363586690700-rf-ff-cwp-interim-2026-fetch",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+        "--request-file",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/request_interim_2026.json",
+        "--company-wiki-catalog-config",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+        "--timeout-seconds",
+        "180",
+        "--allow-download"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 3,
+      "elapsed": 4.052,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791442391670426000-ff-debug-interim-fetch",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py",
+        "--request-file",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/request_interim_2026.json",
+        "--debug",
+        "--timeout-seconds",
+        "180"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 2,
+      "elapsed": 2.471,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791442498243492100-local-original-parse",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/research_tools.py",
+        "local-parse"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 1,
+      "elapsed": 0.806,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791442501873119300-db-readonly-debug",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/research_tools.py",
+        "db-debug"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 0.148,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791442517442749700-local-original-parse-normal-os",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/research_tools.py",
+        "local-parse"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 1,
+      "elapsed": 0.844,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791442537066565000-set-real-temp-root",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/research_tools.py",
+        "set-output"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 0.162,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791442547796273700-local-original-parse-real-temp",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/research_tools.py",
+        "local-parse"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 1.618,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791442683900094200-generate-five-segment-template",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\generate_input_template.py",
+        "--name",
+        "Tencent Holdings Limited",
+        "--base-year",
+        "2025",
+        "--forecast-years",
+        "2026",
+        "2027",
+        "2028",
+        "--currency",
+        "CNY",
+        "--unit",
+        "million",
+        "--segments",
+        "Games",
+        "SocialNetworks",
+        "MarketingServices",
+        "FinTechBusinessServices",
+        "Others",
+        "--output",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\template.json"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 0.165,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791442788349055200-supplemental-official-ir-capture",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/run_step.py",
+        "ir-capture"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 1.646,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791443123474868300-cwp-public-source-facts-annuals",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/source_facts_run.py"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 1.502,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791443136338824400-rf-ff-cwp-annual2025-source-facts",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/run_step.py",
+        "annual-2025"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 5.97,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791443161626956800-rf-ff-cwp-annual2024-source-facts",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/run_step.py",
+        "annual-2024"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 6.414,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791443328499928400-rf-ff-cwp-interim-current-runtime",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/run_step.py",
+        "interim-2026"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 3,
+      "elapsed": 2.832,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791443329023746200-capture-official-supplements",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/capture_supplemental.py"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 5.248,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791443461831135800-ff-latest-q2-companion-exact",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/ff_diagnostics.py"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 4.014,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791443465971261100-rf-model-aware-five-segment-template",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\generate_input_template.py",
+        "--name",
+        "Tencent Holdings Limited",
+        "--base-year",
+        "2025",
+        "--forecast-years",
+        "2026",
+        "2027",
+        "2028",
+        "--currency",
+        "CNY",
+        "--unit",
+        "million",
+        "--segments",
+        "Games",
+        "SocialNetworks",
+        "MarketingServices",
+        "FinTechBusinessServices",
+        "Others",
+        "--segment-model",
+        "Games=direct_growth",
+        "--segment-model",
+        "SocialNetworks=direct_growth",
+        "--segment-model",
+        "MarketingServices=direct_growth",
+        "--segment-model",
+        "FinTechBusinessServices=direct_growth",
+        "--segment-model",
+        "Others=direct_growth",
+        "--output",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\template_growth.json"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 0.154,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791443784865700300-construct-auditable-five-stream-input",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/build_input.py"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 0.273,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791443831726489100-lint-full-real-input",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/run_step.py",
+        "lint"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 0.266,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791443832125539000-sync-input-hash-ring",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/run_step.py",
+        "hash"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 0.223,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791443832460507900-repeated-annual2025-zero-download",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/run_step.py",
+        "annual-2025"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 4.441,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791443869201012400-formal-mixed-validate-only",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/run_step.py",
+        "validate"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 2,
+      "elapsed": 0.302,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791443944078030300-correct-input-contract-links-and-counterevidence",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/build_input.py"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 0.147,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791443944342159600-formal-mixed-validate-corrected-input",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/run_step.py",
+        "validate"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 0.675,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791443963686103200-formal-forecast-json-and-markdown",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/run_step.py",
+        "forecast"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 0.988,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791443964795495600-create-immutable-future-snapshot",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/run_step.py",
+        "snapshot"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 0.867,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791444185939141000-strong-recompute-snapshot-render-h1-sanity",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/verify_delivery.py"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 0.608,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791444284890234800-classify-latest-september-investor-presentation",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/update_communication.py"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 0.1,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791444285118271500-final-v2-formal-forecast",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/run_step.py",
+        "forecast"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 1.009,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791444286250717800-final-v2-immutable-snapshot",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/run_step.py",
+        "snapshot-v2"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 0.885,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791444287248808200-final-v2-strong-delivery-verification",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/verify_delivery.py"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 0.651,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791444490123830100-final-hk-handoff-manifest-and-originals",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/finalize_manifest.py"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 0.699,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    },
+    {
+      "id": "1791444587793423800-clarify-raw-config-versus-approved-runtime-drift",
+      "pair": [
+        "start",
+        "finish"
+      ],
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/finalize_manifest.py"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "rc": 0,
+      "elapsed": 0.432,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "hash_ok": true,
+          "bytes_ok": true
+        },
+        {
+          "kind": "stderr",
+          "hash_ok": true,
+          "bytes_ok": true
+        }
+      ]
+    }
+  ],
+  "traces": {
+    "process-102716.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:19:23.837274+00:00",
+        "pid": 102716,
+        "ppid": 18588,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input.json",
+            "--output",
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast.json",
+            "--markdown",
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast.md"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:19:24.644251+00:00",
+        "pid": 102716,
+        "ppid": 18588,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-104288.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:06:04.896860+00:00",
+        "pid": 104288,
+        "ppid": 93176,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "-m",
+            "--config",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:06:06.381658+00:00",
+        "pid": 104288,
+        "ppid": 93176,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-11916.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:05:24.328657+00:00",
+        "pid": 11916,
+        "ppid": 31116,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "-m",
+            "--config",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+            "source-facts",
+            "--request",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2025.request.json"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:05:24.882977+00:00",
+        "pid": 11916,
+        "ppid": 31116,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-13516.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:11:04.961210+00:00",
+        "pid": 13516,
+        "ppid": 24432,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "-m",
+            "--config",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:11:05.721431+00:00",
+        "pid": 13516,
+        "ppid": 24432,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-16024.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:24:45.268633+00:00",
+        "pid": 16024,
+        "ppid": 103720,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input.json",
+            "--output",
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast.json",
+            "--markdown",
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast.md"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:24:46.096379+00:00",
+        "pid": 16024,
+        "ppid": 103720,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-19092.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:05:39.033551+00:00",
+        "pid": 19092,
+        "ppid": 62244,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "-m",
+            "--config",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:05:40.036170+00:00",
+        "pid": 19092,
+        "ppid": 62244,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-20340.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:08:48.665308+00:00",
+        "pid": 20340,
+        "ppid": 24340,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+            "--request-file",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_interim_2026_no_language.json",
+            "--company-wiki-catalog-config",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+            "--timeout-seconds",
+            "180",
+            "--allow-download"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:08:48.735025+00:00",
+        "pid": 20340,
+        "ppid": 24340,
+        "event": "subprocess_spawn",
+        "data": {
+          "executable": null,
+          "argv": "C:\\Miniconda\\python.exe C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_fetch_client.py --source-ref-v2 --allow-download --timeout-seconds 180.0",
+          "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:08:51.304909+00:00",
+        "pid": 20340,
+        "ppid": 24340,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-22572.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:05:36.885142+00:00",
+        "pid": 22572,
+        "ppid": 67280,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_fetch_client.py",
+            "--source-ref-v2",
+            "--timeout-seconds",
+            "180.0"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:05:36.937474+00:00",
+        "pid": 22572,
+        "ppid": 67280,
+        "event": "subprocess_spawn",
+        "data": {
+          "executable": null,
+          "argv": "C:\\Miniconda\\python.exe C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py --source-ref-v2 --timeout-seconds 180.0",
+          "cwd": "C:\\Users\\郑曾波\\Projects\\filing-fetch"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:05:41.458385+00:00",
+        "pid": 22572,
+        "ppid": 67280,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-228.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:17:12.943352+00:00",
+        "pid": 228,
+        "ppid": 27776,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py",
+            "--source-ref-v2",
+            "--timeout-seconds",
+            "180.0"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\Projects\\filing-fetch"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:17:13.002406+00:00",
+        "pid": 228,
+        "ppid": 27776,
+        "event": "subprocess_spawn",
+        "data": {
+          "executable": null,
+          "argv": "C:\\Miniconda\\python.exe -B -S -c \"import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n\" C:\\Miniconda\\python.exe -m company_wiki.source_catalog.cli --config C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml identify --query 00700 --market HK",
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:17:14.245128+00:00",
+        "pid": 228,
+        "ppid": 27776,
+        "event": "subprocess_spawn",
+        "data": {
+          "executable": null,
+          "argv": "C:\\Miniconda\\python.exe -B -S -c \"import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n\" C:\\Miniconda\\python.exe -m company_wiki.source_catalog.source_query_cli --config C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:17:15.191807+00:00",
+        "pid": 228,
+        "ppid": 27776,
+        "event": "subprocess_spawn",
+        "data": {
+          "executable": null,
+          "argv": "C:\\Miniconda\\python.exe -B -S -c \"import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n\" C:\\Miniconda\\python.exe -m company_wiki.source_catalog.source_query_cli --config C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:17:16.163405+00:00",
+        "pid": 228,
+        "ppid": 27776,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-24732.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:05:40.366111+00:00",
+        "pid": 24732,
+        "ppid": 59316,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "-m",
+            "--config",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:05:41.340474+00:00",
+        "pid": 24732,
+        "ppid": 59316,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-27776.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:17:12.763828+00:00",
+        "pid": 27776,
+        "ppid": 98456,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_fetch_client.py",
+            "--source-ref-v2",
+            "--timeout-seconds",
+            "180.0"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:17:12.798875+00:00",
+        "pid": 27776,
+        "ppid": 98456,
+        "event": "subprocess_spawn",
+        "data": {
+          "executable": null,
+          "argv": "C:\\Miniconda\\python.exe C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py --source-ref-v2 --timeout-seconds 180.0",
+          "cwd": "C:\\Users\\郑曾波\\Projects\\filing-fetch"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:17:16.178178+00:00",
+        "pid": 27776,
+        "ppid": 98456,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-32036.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:24:46.399124+00:00",
+        "pid": 32036,
+        "ppid": 51720,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_backtest.py",
+            "create",
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input.json",
+            "--version",
+            "2026-10-08-hk-v2",
+            "--output",
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\snapshot-v2.json"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:24:47.104689+00:00",
+        "pid": 32036,
+        "ppid": 51720,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-38048.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:05:37.628149+00:00",
+        "pid": 38048,
+        "ppid": 100708,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "-m",
+            "--config",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+            "identify",
+            "--query",
+            "00700",
+            "--market",
+            "HK"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:05:38.707408+00:00",
+        "pid": 38048,
+        "ppid": 100708,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-39520.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:17:14.392693+00:00",
+        "pid": 39520,
+        "ppid": 53452,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "-m",
+            "--config",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:17:15.102970+00:00",
+        "pid": 39520,
+        "ppid": 53452,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-41352.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:05:23.641836+00:00",
+        "pid": 41352,
+        "ppid": 31116,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "-m",
+            "--config",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+            "source-facts",
+            "--request",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2024.request.json"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:05:24.186650+00:00",
+        "pid": 41352,
+        "ppid": 31116,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-43372.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:17:49.348571+00:00",
+        "pid": 43372,
+        "ppid": 45660,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input.json",
+            "--validate-only",
+            "--verbose"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:17:49.472302+00:00",
+        "pid": 43372,
+        "ppid": 45660,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-44388.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:11:02.081681+00:00",
+        "pid": 44388,
+        "ppid": 21968,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py",
+            "--request-file",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_ff_annual2025_companion2026q2.json",
+            "--source-ref-v2",
+            "--timeout-seconds",
+            "180"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:11:02.155680+00:00",
+        "pid": 44388,
+        "ppid": 21968,
+        "event": "subprocess_spawn",
+        "data": {
+          "executable": null,
+          "argv": "C:\\Miniconda\\python.exe -B -S -c \"import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n\" C:\\Miniconda\\python.exe -m company_wiki.source_catalog.cli --config C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml identify --query 00700 --market HK",
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:11:03.678726+00:00",
+        "pid": 44388,
+        "ppid": 21968,
+        "event": "subprocess_spawn",
+        "data": {
+          "executable": null,
+          "argv": "C:\\Miniconda\\python.exe -B -S -c \"import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n\" C:\\Miniconda\\python.exe -m company_wiki.source_catalog.source_query_cli --config C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:11:04.811862+00:00",
+        "pid": 44388,
+        "ppid": 21968,
+        "event": "subprocess_spawn",
+        "data": {
+          "executable": null,
+          "argv": "C:\\Miniconda\\python.exe -B -S -c \"import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n\" C:\\Miniconda\\python.exe -m company_wiki.source_catalog.source_query_cli --config C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:11:05.809208+00:00",
+        "pid": 44388,
+        "ppid": 21968,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-53704.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:19:04.513350+00:00",
+        "pid": 53704,
+        "ppid": 53992,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input.json",
+            "--validate-only",
+            "--verbose"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:19:04.986961+00:00",
+        "pid": 53704,
+        "ppid": 53992,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-56888.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:08:48.933479+00:00",
+        "pid": 56888,
+        "ppid": 7416,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py",
+            "--allow-download",
+            "--source-ref-v2",
+            "--timeout-seconds",
+            "180.0"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\Projects\\filing-fetch"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:08:48.988608+00:00",
+        "pid": 56888,
+        "ppid": 7416,
+        "event": "subprocess_spawn",
+        "data": {
+          "executable": null,
+          "argv": "C:\\Miniconda\\python.exe -B -S -c \"import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n\" C:\\Miniconda\\python.exe -m company_wiki.source_catalog.cli --config C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml identify --query 00700 --market HK",
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:08:50.247362+00:00",
+        "pid": 56888,
+        "ppid": 7416,
+        "event": "subprocess_spawn",
+        "data": {
+          "executable": null,
+          "argv": "C:\\Miniconda\\python.exe -B -S -c \"import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n\" C:\\Miniconda\\python.exe -m company_wiki.source_catalog.cli --config C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml ensure --entity 騰訊控股 --document-kind semi_annual_report --as-of-date 2026-10-08 --market HK --security-id 00700 --fiscal-period H1 --fiscal-year 2026 --mode exact --max-download-bytes 41943040 --max-download-seconds 180 --max-download-cost-usd 0.00 --source-ref-v2 --allow-download --acquisition-config C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_acquisition.yaml",
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:08:51.280897+00:00",
+        "pid": 56888,
+        "ppid": 7416,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-58052.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:11:03.879191+00:00",
+        "pid": 58052,
+        "ppid": 30724,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "-m",
+            "--config",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:11:04.720351+00:00",
+        "pid": 58052,
+        "ppid": 30724,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-58528.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:06:06.760195+00:00",
+        "pid": 58528,
+        "ppid": 81104,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "-m",
+            "--config",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+            "--document-id",
+            "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+            "--source-id",
+            "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+            "--content-sha256",
+            "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+            "--purpose",
+            "filing_reuse"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:06:07.891890+00:00",
+        "pid": 58528,
+        "ppid": 81104,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-60312.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:17:16.290806+00:00",
+        "pid": 60312,
+        "ppid": 98456,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "-m",
+            "--config",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+            "--document-id",
+            "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+            "--source-id",
+            "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+            "--content-sha256",
+            "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+            "--purpose",
+            "filing_reuse"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:17:16.828706+00:00",
+        "pid": 60312,
+        "ppid": 98456,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-63112.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:06:02.201811+00:00",
+        "pid": 63112,
+        "ppid": 80456,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py",
+            "--source-ref-v2",
+            "--timeout-seconds",
+            "180.0"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\Projects\\filing-fetch"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:06:02.297515+00:00",
+        "pid": 63112,
+        "ppid": 80456,
+        "event": "subprocess_spawn",
+        "data": {
+          "executable": null,
+          "argv": "C:\\Miniconda\\python.exe -B -S -c \"import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n\" C:\\Miniconda\\python.exe -m company_wiki.source_catalog.cli --config C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml identify --query 00700 --market HK",
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:06:04.562146+00:00",
+        "pid": 63112,
+        "ppid": 80456,
+        "event": "subprocess_spawn",
+        "data": {
+          "executable": null,
+          "argv": "C:\\Miniconda\\python.exe -B -S -c \"import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n\" C:\\Miniconda\\python.exe -m company_wiki.source_catalog.source_query_cli --config C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:06:06.532255+00:00",
+        "pid": 63112,
+        "ppid": 80456,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-67280.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:05:36.570484+00:00",
+        "pid": 67280,
+        "ppid": 91380,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+            "--request-file",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_annual_2025_no_language.json",
+            "--company-wiki-catalog-config",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+            "--timeout-seconds",
+            "180"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:05:36.690732+00:00",
+        "pid": 67280,
+        "ppid": 91380,
+        "event": "subprocess_spawn",
+        "data": {
+          "executable": null,
+          "argv": "C:\\Miniconda\\python.exe C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_fetch_client.py --source-ref-v2 --timeout-seconds 180.0",
+          "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:05:41.486109+00:00",
+        "pid": 67280,
+        "ppid": 91380,
+        "event": "subprocess_spawn",
+        "data": {
+          "executable": null,
+          "argv": "C:\\Miniconda\\python.exe -B -m company_wiki.source_catalog.source_reader_cli --config C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml --document-id urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7 --source-id urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7 --content-sha256 d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7 --purpose filing_reuse",
+          "cwd": null
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:05:42.273566+00:00",
+        "pid": 67280,
+        "ppid": 91380,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-680.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:08:50.401972+00:00",
+        "pid": 680,
+        "ppid": 9812,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "-m",
+            "--config",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+            "ensure",
+            "--entity",
+            "騰訊控股",
+            "--document-kind",
+            "semi_annual_report",
+            "--as-of-date",
+            "2026-10-08",
+            "--market",
+            "HK",
+            "--security-id",
+            "00700",
+            "--fiscal-period",
+            "H1",
+            "--fiscal-year",
+            "2026",
+            "--mode",
+            "exact",
+            "--max-download-bytes",
+            "41943040",
+            "--max-download-seconds",
+            "180",
+            "--max-download-cost-usd",
+            "0.00",
+            "--source-ref-v2",
+            "--allow-download",
+            "--acquisition-config",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_acquisition.yaml"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:08:51.182978+00:00",
+        "pid": 680,
+        "ppid": 9812,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-69672.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:05:41.590293+00:00",
+        "pid": 69672,
+        "ppid": 67280,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "-m",
+            "--config",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+            "--document-id",
+            "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+            "--source-id",
+            "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+            "--content-sha256",
+            "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+            "--purpose",
+            "filing_reuse"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:05:42.227097+00:00",
+        "pid": 69672,
+        "ppid": 67280,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-71876.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:19:24.948468+00:00",
+        "pid": 71876,
+        "ppid": 101956,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_backtest.py",
+            "create",
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input.json",
+            "--version",
+            "2026-10-08-hk-v1",
+            "--output",
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\snapshot.json"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:19:25.634077+00:00",
+        "pid": 71876,
+        "ppid": 101956,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-74052.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:17:12.282263+00:00",
+        "pid": 74052,
+        "ppid": 85660,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\fix_hashes.py",
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input.json"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:17:12.320100+00:00",
+        "pid": 74052,
+        "ppid": 85660,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-7416.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:08:48.816317+00:00",
+        "pid": 7416,
+        "ppid": 20340,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_fetch_client.py",
+            "--source-ref-v2",
+            "--allow-download",
+            "--timeout-seconds",
+            "180.0"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:08:48.847253+00:00",
+        "pid": 7416,
+        "ppid": 20340,
+        "event": "subprocess_spawn",
+        "data": {
+          "executable": null,
+          "argv": "C:\\Miniconda\\python.exe C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py --allow-download --source-ref-v2 --timeout-seconds 180.0",
+          "cwd": "C:\\Users\\郑曾波\\Projects\\filing-fetch"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:08:51.293482+00:00",
+        "pid": 7416,
+        "ppid": 20340,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-74264.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:08:49.147969+00:00",
+        "pid": 74264,
+        "ppid": 3896,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "-m",
+            "--config",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+            "identify",
+            "--query",
+            "00700",
+            "--market",
+            "HK"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:08:50.171199+00:00",
+        "pid": 74264,
+        "ppid": 3896,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-76556.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:05:37.079041+00:00",
+        "pid": 76556,
+        "ppid": 22572,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py",
+            "--source-ref-v2",
+            "--timeout-seconds",
+            "180.0"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\Projects\\filing-fetch"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:05:37.234855+00:00",
+        "pid": 76556,
+        "ppid": 22572,
+        "event": "subprocess_spawn",
+        "data": {
+          "executable": null,
+          "argv": "C:\\Miniconda\\python.exe -B -S -c \"import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n\" C:\\Miniconda\\python.exe -m company_wiki.source_catalog.cli --config C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml identify --query 00700 --market HK",
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:05:38.812451+00:00",
+        "pid": 76556,
+        "ppid": 22572,
+        "event": "subprocess_spawn",
+        "data": {
+          "executable": null,
+          "argv": "C:\\Miniconda\\python.exe -B -S -c \"import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n\" C:\\Miniconda\\python.exe -m company_wiki.source_catalog.source_query_cli --config C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:05:40.164350+00:00",
+        "pid": 76556,
+        "ppid": 22572,
+        "event": "subprocess_spawn",
+        "data": {
+          "executable": null,
+          "argv": "C:\\Miniconda\\python.exe -B -S -c \"import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n\" C:\\Miniconda\\python.exe -m company_wiki.source_catalog.source_query_cli --config C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:05:41.444726+00:00",
+        "pid": 76556,
+        "ppid": 22572,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-80456.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:06:02.012088+00:00",
+        "pid": 80456,
+        "ppid": 81104,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_fetch_client.py",
+            "--source-ref-v2",
+            "--timeout-seconds",
+            "180.0"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:06:02.060192+00:00",
+        "pid": 80456,
+        "ppid": 81104,
+        "event": "subprocess_spawn",
+        "data": {
+          "executable": null,
+          "argv": "C:\\Miniconda\\python.exe C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py --source-ref-v2 --timeout-seconds 180.0",
+          "cwd": "C:\\Users\\郑曾波\\Projects\\filing-fetch"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:06:06.552206+00:00",
+        "pid": 80456,
+        "ppid": 81104,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-81104.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:06:01.795803+00:00",
+        "pid": 81104,
+        "ppid": 92592,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+            "--request-file",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_annual_2024_no_language.json",
+            "--company-wiki-catalog-config",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+            "--timeout-seconds",
+            "180"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:06:01.878459+00:00",
+        "pid": 81104,
+        "ppid": 92592,
+        "event": "subprocess_spawn",
+        "data": {
+          "executable": null,
+          "argv": "C:\\Miniconda\\python.exe C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_fetch_client.py --source-ref-v2 --timeout-seconds 180.0",
+          "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:06:06.595594+00:00",
+        "pid": 81104,
+        "ppid": 92592,
+        "event": "subprocess_spawn",
+        "data": {
+          "executable": null,
+          "argv": "C:\\Miniconda\\python.exe -B -m company_wiki.source_catalog.source_reader_cli --config C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml --document-id urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0 --source-id urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0 --content-sha256 70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0 --purpose filing_reuse",
+          "cwd": null
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:06:07.987480+00:00",
+        "pid": 81104,
+        "ppid": 92592,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-85404.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:17:11.880287+00:00",
+        "pid": 85404,
+        "ppid": 47436,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\lint_input.py",
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input.json",
+            "--check-conclusion-facts",
+            "--check-sensitivity-propagation"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:17:11.945887+00:00",
+        "pid": 85404,
+        "ppid": 47436,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-89500.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:17:15.342702+00:00",
+        "pid": 89500,
+        "ppid": 60764,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "-m",
+            "--config",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:17:16.073239+00:00",
+        "pid": 89500,
+        "ppid": 60764,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-90104.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:06:02.575257+00:00",
+        "pid": 90104,
+        "ppid": 107800,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "-m",
+            "--config",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+            "identify",
+            "--query",
+            "00700",
+            "--market",
+            "HK"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:06:04.470591+00:00",
+        "pid": 90104,
+        "ppid": 107800,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-96760.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:17:13.147156+00:00",
+        "pid": 96760,
+        "ppid": 1740,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "-m",
+            "--config",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+            "identify",
+            "--query",
+            "00700",
+            "--market",
+            "HK"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:17:14.169471+00:00",
+        "pid": 96760,
+        "ppid": 1740,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-97788.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:11:02.320166+00:00",
+        "pid": 97788,
+        "ppid": 19280,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "-m",
+            "--config",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+            "identify",
+            "--query",
+            "00700",
+            "--market",
+            "HK"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:11:03.609335+00:00",
+        "pid": 97788,
+        "ppid": 19280,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-98456.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T07:17:12.627689+00:00",
+        "pid": 98456,
+        "ppid": 5524,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+            "--request-file",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_annual_2025_no_language.json",
+            "--company-wiki-catalog-config",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+            "--timeout-seconds",
+            "180"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:17:12.689219+00:00",
+        "pid": 98456,
+        "ppid": 5524,
+        "event": "subprocess_spawn",
+        "data": {
+          "executable": null,
+          "argv": "C:\\Miniconda\\python.exe C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_fetch_client.py --source-ref-v2 --timeout-seconds 180.0",
+          "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:17:16.202164+00:00",
+        "pid": 98456,
+        "ppid": 5524,
+        "event": "subprocess_spawn",
+        "data": {
+          "executable": null,
+          "argv": "C:\\Miniconda\\python.exe -B -m company_wiki.source_catalog.source_reader_cli --config C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml --document-id urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7 --source-id urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7 --content-sha256 d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7 --purpose filing_reuse",
+          "cwd": null
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T07:17:16.873242+00:00",
+        "pid": 98456,
+        "ppid": 5524,
+        "event": "python_exit",
+        "data": {}
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\annual_2024_cover.png",
+      "expected": "c4fb241510872edf921a9b4b94e90600336e472a9718b3cad1f6f43e35501c8e",
+      "current": "c4fb241510872edf921a9b4b94e90600336e472a9718b3cad1f6f43e35501c8e",
+      "expected_bytes": 155489,
+      "current_bytes": 155489
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\annual_2024_pages.json",
+      "expected": "54c0415ecced69425716bd601cde01a4de55a3e785ea8b5a00ea8601b89d68e3",
+      "current": "54c0415ecced69425716bd601cde01a4de55a3e785ea8b5a00ea8601b89d68e3",
+      "expected_bytes": 489149,
+      "current_bytes": 489149
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\annual_2025_pages.json",
+      "expected": "a7083f3f9903a1737e9324f4c7a6560c5edf4a4899f0a029e74805f638614d1c",
+      "current": "a7083f3f9903a1737e9324f4c7a6560c5edf4a4899f0a029e74805f638614d1c",
+      "expected_bytes": 495087,
+      "current_bytes": 495087
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\corporate_overview_20260916.pdf",
+      "expected": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+      "current": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+      "expected_bytes": 1676729,
+      "current_bytes": 1676729
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\corporate_overview_pages.json",
+      "expected": "8f627606a5f719059a3618d38123608b7d157ca9cc77c50c9ec52a5144d5729e",
+      "current": "8f627606a5f719059a3618d38123608b7d157ca9cc77c50c9ec52a5144d5729e",
+      "expected_bytes": 23864,
+      "current_bytes": 23864
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast-v1.json",
+      "expected": "6796b643ec444950eed608f3e87250931b92d0c2f13d0aa27d8a922ea9a5c220",
+      "current": "6796b643ec444950eed608f3e87250931b92d0c2f13d0aa27d8a922ea9a5c220",
+      "expected_bytes": 429594,
+      "current_bytes": 429594
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast-v1.md",
+      "expected": "48c412c766ffe8d3da359e52f2e25762584b520c36d0cfad8debaa4871a4ca99",
+      "current": "48c412c766ffe8d3da359e52f2e25762584b520c36d0cfad8debaa4871a4ca99",
+      "expected_bytes": 57816,
+      "current_bytes": 57816
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast.json",
+      "expected": "1c10deb1b93769632c553e51155def18afb4b1adfe8331c0eb511d52478ab3de",
+      "current": "1c10deb1b93769632c553e51155def18afb4b1adfe8331c0eb511d52478ab3de",
+      "expected_bytes": 428931,
+      "current_bytes": 428931
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast.md",
+      "expected": "1d152804ffd09e4e7b0d49215563a097a09b569e0af70e35cd91d30ffba1823b",
+      "current": "1d152804ffd09e4e7b0d49215563a097a09b569e0af70e35cd91d30ffba1823b",
+      "expected_bytes": 58089,
+      "current_bytes": 58089
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input-v1.json",
+      "expected": "da71c4b0787861c29f40369dd457799e3925e9d65f215e6cb2c546f2c2509e74",
+      "current": "da71c4b0787861c29f40369dd457799e3925e9d65f215e6cb2c546f2c2509e74",
+      "expected_bytes": 192717,
+      "current_bytes": 192717
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input.json",
+      "expected": "13078fd040fefcc8382f9ddd43d0044821aaf3bcfaecd80f36615cefb14476f1",
+      "current": "13078fd040fefcc8382f9ddd43d0044821aaf3bcfaecd80f36615cefb14476f1",
+      "expected_bytes": 192154,
+      "current_bytes": 192154
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\interim_2026_official.pdf",
+      "expected": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "current": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "expected_bytes": 5135808,
+      "current_bytes": 5135808
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\interim_2026_official_pages.json",
+      "expected": "bf8085cf67605d6830e870676626e9e61a460c6bf1852dd7a329ef1a68847ba9",
+      "current": "bf8085cf67605d6830e870676626e9e61a460c6bf1852dd7a329ef1a68847ba9",
+      "expected_bytes": 213250,
+      "current_bytes": 213250
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\netease_2q2026.html",
+      "expected": "ba4cd2d0507d5d3211d642a8f6d45aba11e0ac245f5757d58e525223ebde4c98",
+      "current": "ba4cd2d0507d5d3211d642a8f6d45aba11e0ac245f5757d58e525223ebde4c98",
+      "expected_bytes": 909908,
+      "current_bytes": 909908
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\presentation_2q2026.pdf",
+      "expected": "0b749a74c4e5af449a27c76c69cff824e525794e14d5fbe0bfee927e6013029b",
+      "current": "0b749a74c4e5af449a27c76c69cff824e525794e14d5fbe0bfee927e6013029b",
+      "expected_bytes": 987,
+      "current_bytes": 987
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\publications.jsonl",
+      "expected": "00265bb86cad76ece54247b7e2d26a8c2ba0b9fd2255b9cdc2cdf44a798adaf9",
+      "current": "00265bb86cad76ece54247b7e2d26a8c2ba0b9fd2255b9cdc2cdf44a798adaf9",
+      "expected_bytes": 4634,
+      "current_bytes": 4634
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\results_2q2026.pdf",
+      "expected": "64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+      "current": "64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+      "expected_bytes": 412297,
+      "current_bytes": 412297
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\results_2q2026_pages.json",
+      "expected": "c221750ae71480f6f918a3e358844a56c015f1f70194faac20a558e4f6a618a0",
+      "current": "c221750ae71480f6f918a3e358844a56c015f1f70194faac20a558e4f6a618a0",
+      "expected_bytes": 24573,
+      "current_bytes": 24573
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\snapshot-v2.json",
+      "expected": "688de832c85f3eaf8a70957549b4c6a0afc006c65f203a05f480612eb1d0e794",
+      "current": "688de832c85f3eaf8a70957549b4c6a0afc006c65f203a05f480612eb1d0e794",
+      "expected_bytes": 651923,
+      "current_bytes": 651923
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\snapshot.json",
+      "expected": "879b70b7fb84faaaf50e2d41cc9f428b9ed0118f302e3b27a0ee68ef3bcaff94",
+      "current": "879b70b7fb84faaaf50e2d41cc9f428b9ed0118f302e3b27a0ee68ef3bcaff94",
+      "expected_bytes": 653289,
+      "current_bytes": 653289
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\template.json",
+      "expected": "3702539c8ed026199bce7599cfe1d2097d60de7e14c67a156856be9f1a70656a",
+      "current": "3702539c8ed026199bce7599cfe1d2097d60de7e14c67a156856be9f1a70656a",
+      "expected_bytes": 88188,
+      "current_bytes": 88188
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\template_growth.json",
+      "expected": "87551edf4b538171b7b5b51177f0dca2b4537eddc7d70c72398bbd7a7cde53d7",
+      "current": "87551edf4b538171b7b5b51177f0dca2b4537eddc7d70c72398bbd7a7cde53d7",
+      "expected_bytes": 86928,
+      "current_bytes": 86928
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\tencent_announcements_index.html",
+      "expected": "93782c3b7eb7a3558113b07c8ffd32f07ead78ad08d80331db9d8563571f6156",
+      "current": "93782c3b7eb7a3558113b07c8ffd32f07ead78ad08d80331db9d8563571f6156",
+      "expected_bytes": 184217,
+      "current_bytes": 184217
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\tencent_results_index.html",
+      "expected": "e7ac34c8e6826016c6b6a482ab6fa658328492ab67d88268c4e8bd8476714559",
+      "current": "e7ac34c8e6826016c6b6a482ab6fa658328492ab67d88268c4e8bd8476714559",
+      "expected_bytes": 186626,
+      "current_bytes": 186626
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\TRUST_BOUNDARY.md",
+      "expected": "ee2b7aa34132f3d50c31bef90441375f8ba258c4b7db54afc82d680eaf7f1a66",
+      "current": "ee2b7aa34132f3d50c31bef90441375f8ba258c4b7db54afc82d680eaf7f1a66",
+      "expected_bytes": 767,
+      "current_bytes": 767
+    }
+  ],
+  "runtime": [
+    {
+      "file": "scripts/asset_ownership.py",
+      "expected": "2dc8931451b88f410de5011bac2e80cc74f838e11e94c5627170a6e0ab891ed0",
+      "current": "2dc8931451b88f410de5011bac2e80cc74f838e11e94c5627170a6e0ab891ed0"
+    },
+    {
+      "file": "scripts/commercial_terms.py",
+      "expected": "6596d4492fcfb31cb73efaf75fb482d90156f2fbc91ab29be272e24745546005",
+      "current": "6596d4492fcfb31cb73efaf75fb482d90156f2fbc91ab29be272e24745546005"
+    },
+    {
+      "file": "scripts/company_wiki_narrative_contracts.py",
+      "expected": "11fef2a81ff60940fc97cb918b17f0ce64e67b74fbc76a9f53c237fc07d178d3",
+      "current": "11fef2a81ff60940fc97cb918b17f0ce64e67b74fbc76a9f53c237fc07d178d3"
+    },
+    {
+      "file": "scripts/company_wiki_narrative_posix.py",
+      "expected": "669d268667d9e08a3d98ee1eec44ecc26fb4f142dd6d7310191169deba5dc852",
+      "current": "669d268667d9e08a3d98ee1eec44ecc26fb4f142dd6d7310191169deba5dc852"
+    },
+    {
+      "file": "scripts/company_wiki_narrative_process.py",
+      "expected": "9664696ac23699ecf6b234cec3aa93ce475127d36a4bddf680edb711ccf92e3d",
+      "current": "9664696ac23699ecf6b234cec3aa93ce475127d36a4bddf680edb711ccf92e3d"
+    },
+    {
+      "file": "scripts/company_wiki_narrative_reader.py",
+      "expected": "8ff1cf553a8849330a41f74ae27bfcacd2515186b5fa58168cead91b6cfa7508",
+      "current": "8ff1cf553a8849330a41f74ae27bfcacd2515186b5fa58168cead91b6cfa7508"
+    },
+    {
+      "file": "scripts/company_wiki_narrative_tree.py",
+      "expected": "561f921d20636532ec13d4c2a116af120a88a2b56e55de6fbadf61f137bef8ba",
+      "current": "561f921d20636532ec13d4c2a116af120a88a2b56e55de6fbadf61f137bef8ba"
+    },
+    {
+      "file": "scripts/company_wiki_source.py",
+      "expected": "b223974e94ffb6d91e0e927b252e1fbc67a590fc910c3da10600d292d48d4470",
+      "current": "b223974e94ffb6d91e0e927b252e1fbc67a590fc910c3da10600d292d48d4470"
+    },
+    {
+      "file": "scripts/company_wiki_source_reader_v2.py",
+      "expected": "5f5bfd11cbc880c30f2766d8d6c78366d4e32f677ba9a517914a0df5f95faed1",
+      "current": "5f5bfd11cbc880c30f2766d8d6c78366d4e32f677ba9a517914a0df5f95faed1"
+    },
+    {
+      "file": "scripts/company_wiki_source_v2.py",
+      "expected": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+      "current": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053"
+    },
+    {
+      "file": "scripts/confidence_policy.py",
+      "expected": "a2444c1ebb7f7ed9144e0db0199d1055da20b126b3026f90e114c55817ed822f",
+      "current": "a2444c1ebb7f7ed9144e0db0199d1055da20b126b3026f90e114c55817ed822f"
+    },
+    {
+      "file": "scripts/filing_fetch_client.py",
+      "expected": "b16f85962173fc6a2757ed88fae7074a458ab28bbe1a21f6ec5fbf83a44f3446",
+      "current": "b16f85962173fc6a2757ed88fae7074a458ab28bbe1a21f6ec5fbf83a44f3446"
+    },
+    {
+      "file": "scripts/fix_hashes.py",
+      "expected": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "current": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd"
+    },
+    {
+      "file": "scripts/generate_input_template.py",
+      "expected": "f7c57911d5f85204b04d07de02fdcf9bcdb2315cf0236181cd727986292870b1",
+      "current": "f7c57911d5f85204b04d07de02fdcf9bcdb2315cf0236181cd727986292870b1"
+    },
+    {
+      "file": "scripts/internal_flow.py",
+      "expected": "05814b9286889088278fc5cf0c47a40452026bbc926f8f382db7e70de38a1355",
+      "current": "05814b9286889088278fc5cf0c47a40452026bbc926f8f382db7e70de38a1355"
+    },
+    {
+      "file": "scripts/lint_input.py",
+      "expected": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "current": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2"
+    },
+    {
+      "file": "scripts/mine_year_operation.py",
+      "expected": "602255c766897dcabf8c5107c0ba3116686aab7dca683066fdffc70b88628986",
+      "current": "602255c766897dcabf8c5107c0ba3116686aab7dca683066fdffc70b88628986"
+    },
+    {
+      "file": "scripts/mixed_recognition.py",
+      "expected": "04ed62e0b61af523818aeff961cebc34eadc3df4b1b7756e5a32c9f8e432f232",
+      "current": "04ed62e0b61af523818aeff961cebc34eadc3df4b1b7756e5a32c9f8e432f232"
+    },
+    {
+      "file": "scripts/model_extensions.py",
+      "expected": "c5c15d782834546cf1d58a0a9c2d664db79898b6cc9517c657bcfac743ce2f92",
+      "current": "c5c15d782834546cf1d58a0a9c2d664db79898b6cc9517c657bcfac743ce2f92"
+    },
+    {
+      "file": "scripts/model_registry.py",
+      "expected": "62f864b9ab3f144eacff43448897d2c31abc217e17ed3b0e3f58894cdd985081",
+      "current": "62f864b9ab3f144eacff43448897d2c31abc217e17ed3b0e3f58894cdd985081"
+    },
+    {
+      "file": "scripts/narrative_source_preparation.py",
+      "expected": "4d848e286ca318f427d9001bb6243b98d9f91886f7931d7eb4796cf4cc4c2e72",
+      "current": "4d848e286ca318f427d9001bb6243b98d9f91886f7931d7eb4796cf4cc4c2e72"
+    },
+    {
+      "file": "scripts/processed_artifact_canary.py",
+      "expected": "19869b02cb370add57b5910d360e3ae864b870a2825d76894ea36530a9ccacfc",
+      "current": "19869b02cb370add57b5910d360e3ae864b870a2825d76894ea36530a9ccacfc"
+    },
+    {
+      "file": "scripts/processing_demand.py",
+      "expected": "fcdfcad8ebd1fc20febf3c157dcd20ad92708fd69d00373ef9a943e5a820afc1",
+      "current": "fcdfcad8ebd1fc20febf3c157dcd20ad92708fd69d00373ef9a943e5a820afc1"
+    },
+    {
+      "file": "scripts/publication_registry.py",
+      "expected": "29aaae4f9864d9c4dbb92720744daa49315a2980dfa158b0e3666cb86d886344",
+      "current": "29aaae4f9864d9c4dbb92720744daa49315a2980dfa158b0e3666cb86d886344"
+    },
+    {
+      "file": "scripts/reconciliation.py",
+      "expected": "c4b69e4ee1f3dc9822aed05b9facfd5bb44575b6b51b706dede46277ee5996f5",
+      "current": "c4b69e4ee1f3dc9822aed05b9facfd5bb44575b6b51b706dede46277ee5996f5"
+    },
+    {
+      "file": "scripts/revenue_backtest.py",
+      "expected": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "current": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b"
+    },
+    {
+      "file": "scripts/revenue_constraints.py",
+      "expected": "6ce99c1d59fa3858213e31bf9dadc351591ef0eda006d957f07cf1a839e57374",
+      "current": "6ce99c1d59fa3858213e31bf9dadc351591ef0eda006d957f07cf1a839e57374"
+    },
+    {
+      "file": "scripts/revenue_core.py",
+      "expected": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "current": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2"
+    },
+    {
+      "file": "scripts/revenue_forecast.py",
+      "expected": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "current": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196"
+    },
+    {
+      "file": "scripts/revenue_publication.py",
+      "expected": "bc2bb4a33e36ed9ad82bc4ffe33e57de8999002c2c7910b9c8b9d1565678fcd0",
+      "current": "bc2bb4a33e36ed9ad82bc4ffe33e57de8999002c2c7910b9c8b9d1565678fcd0"
+    },
+    {
+      "file": "scripts/revenue_report.py",
+      "expected": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+      "current": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b"
+    },
+    {
+      "file": "scripts/rolling_backtest.py",
+      "expected": "80de3bfbf47d1dc6b59fc8de94733f996463edb5d749923b6ab7039875d4ec8b",
+      "current": "80de3bfbf47d1dc6b59fc8de94733f996463edb5d749923b6ab7039875d4ec8b"
+    },
+    {
+      "file": "scripts/schema_compatibility.py",
+      "expected": "2fe8ffe2090300fbe81e130e21cf0b213faefc63ba0a6831894c9025db963352",
+      "current": "2fe8ffe2090300fbe81e130e21cf0b213faefc63ba0a6831894c9025db963352"
+    },
+    {
+      "file": "scripts/schema_fields.py",
+      "expected": "54276494dcb280b23791c3a7614eb2090997a68e1116d78f6efdf02edf52a01c",
+      "current": "54276494dcb280b23791c3a7614eb2090997a68e1116d78f6efdf02edf52a01c"
+    },
+    {
+      "file": "scripts/schema_optin.py",
+      "expected": "6a3e01ea8ab95e5d705ff21c86274db6fc16b3569a19d74c2d1558cd3cf6b3a3",
+      "current": "6a3e01ea8ab95e5d705ff21c86274db6fc16b3569a19d74c2d1558cd3cf6b3a3"
+    },
+    {
+      "file": "scripts/source_preparation.py",
+      "expected": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+      "current": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d"
+    },
+    {
+      "file": "scripts/trust_anchor.py",
+      "expected": "9abdcec55a524574b55e0111f513338f79a486f536985d036b94b4a71ba1310c",
+      "current": "9abdcec55a524574b55e0111f513338f79a486f536985d036b94b4a71ba1310c"
+    },
+    {
+      "file": "scripts/__init__.py",
+      "expected": "f7343866b80251c3d2105c6d34446898784ef6272ed9310dfee7cbecf8db3459",
+      "current": "f7343866b80251c3d2105c6d34446898784ef6272ed9310dfee7cbecf8db3459"
+    },
+    {
+      "file": "scripts/analysis/confidence.py",
+      "expected": "235b38e4586f15bb8908a2db53abc0724ad9e0ed79bb15e508f948ebeaa0e283",
+      "current": "235b38e4586f15bb8908a2db53abc0724ad9e0ed79bb15e508f948ebeaa0e283"
+    },
+    {
+      "file": "scripts/analysis/sensitivity.py",
+      "expected": "abb1f71f4b306739760e241672cc98e57ae8253f9bf90202cf06031d67f0373d",
+      "current": "abb1f71f4b306739760e241672cc98e57ae8253f9bf90202cf06031d67f0373d"
+    },
+    {
+      "file": "scripts/analysis/__init__.py",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "scripts/contracts/constants.py",
+      "expected": "3ad7332e4a76e7e3e2a9a8a1ab73828584ed8b19b32327479a0f79636b2f3462",
+      "current": "3ad7332e4a76e7e3e2a9a8a1ab73828584ed8b19b32327479a0f79636b2f3462"
+    },
+    {
+      "file": "scripts/contracts/document.py",
+      "expected": "c2df0a229116392968152ee547818567ab40ba3813a270f68fabbfb9ea207c0d",
+      "current": "c2df0a229116392968152ee547818567ab40ba3813a270f68fabbfb9ea207c0d"
+    },
+    {
+      "file": "scripts/contracts/evidence.py",
+      "expected": "eb1edea913b3b4f6f8f9c7a3f84e07d464bdf0b33e7e6e9aba5664b6cb5ba683",
+      "current": "eb1edea913b3b4f6f8f9c7a3f84e07d464bdf0b33e7e6e9aba5664b6cb5ba683"
+    },
+    {
+      "file": "scripts/contracts/__init__.py",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "scripts/forecast/calc.py",
+      "expected": "853baa0bb208c91be0c3983d9256cb42b76f61221b19ad11c11bc37db79ae049",
+      "current": "853baa0bb208c91be0c3983d9256cb42b76f61221b19ad11c11bc37db79ae049"
+    },
+    {
+      "file": "scripts/forecast/segments.py",
+      "expected": "7b0dac5d5b6f19aba2305a7cb5d9d0ecddb1e5a31a6833285c5f81259018f002",
+      "current": "7b0dac5d5b6f19aba2305a7cb5d9d0ecddb1e5a31a6833285c5f81259018f002"
+    },
+    {
+      "file": "scripts/research/coverage.py",
+      "expected": "ae6519cc18fea823dcc9d5e47956a2aea6da3270f1041b28d7bf1b783cd4b470",
+      "current": "ae6519cc18fea823dcc9d5e47956a2aea6da3270f1041b28d7bf1b783cd4b470"
+    },
+    {
+      "file": "scripts/research/drivers.py",
+      "expected": "45e3d58853c6757a0a49701d495ffb9e3e9cb0dafc2e819432cdd28af6e90e18",
+      "current": "45e3d58853c6757a0a49701d495ffb9e3e9cb0dafc2e819432cdd28af6e90e18"
+    },
+    {
+      "file": "scripts/research/targets.py",
+      "expected": "1c885deaf4168bacbd7d445ec6e76da93193132fce3b6ca67fbed4e6c910c48b",
+      "current": "1c885deaf4168bacbd7d445ec6e76da93193132fce3b6ca67fbed4e6c910c48b"
+    },
+    {
+      "file": "scripts/research/__init__.py",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "SKILL.md",
+      "expected": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf",
+      "current": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf"
+    }
+  ],
+  "events": [
+    {
+      "timestamp_utc": "2026-10-08T06:54:59.173437+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "setup",
+      "action": "read_contract_and_skills",
+      "tool": "exec/read",
+      "input_summary": "Read common execution contract, RF+FF+PDF skills, all required references and construction guidance; runtime six files match canonical repository.",
+      "source_url": null,
+      "artifacts": [],
+      "outcome": "success",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T06:54:59.174598+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "1A",
+      "action": "official_search_open",
+      "tool": "web.run",
+      "input_summary": "Opened Tencent results/investors/latest-results (9p), interim (122p), announcements, corporate-kit. Official Q2/H1 released 2026-08-12. Old HKEX annual URL inaccessible in web, local original remains. Latest webcast internal-error; static PPT web-returned text/html zero lines.",
+      "source_url": [
+        "https://www.tencent.com/investors/results/",
+        "https://www.tencent.com/Investors/",
+        "https://www.tencent.com/wp-content/uploads/2026/08/Tencent-Announces-2026-Second-Quarter-Results.pdf",
+        "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+        "https://www.tencent.com/investors/announcements/",
+        "https://www.tencent.com/investors/investor-kit-calendar/"
+      ],
+      "artifacts": [],
+      "outcome": "success",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T06:54:59.176462+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "3",
+      "action": "actual_source_preparation",
+      "tool": "run_logged.py",
+      "input_summary": "RF entry→configured FF repo→CWP: annual language zh excludes indexed language null; no-language yields fiscal_year mismatch. H1 fetch fails ensure rc1. All requests+failures kept; no fabricated captures.",
+      "source_url": null,
+      "artifacts": [],
+      "outcome": "failed",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T06:55:49.349367+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "3",
+      "action": "deterministic_pdf_parse",
+      "tool": "fitz.get_text",
+      "input_summary": "Read local annual original bytes for research; this is task-local parsing, not CWP canonical Worker execution, which is not claimed.",
+      "source_url": null,
+      "artifacts": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\annual_2025_pages.json",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\annual_2024_pages.json"
+      ],
+      "outcome": "success",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T06:59:49.922640+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "1A",
+      "action": "supplemental_ir_original_capture",
+      "tool": "requests.get",
+      "input_summary": {
+        "url": "https://www.tencent.com/wp-content/uploads/2026/09/Corporate-Overview-2Q26-20260916.pdf",
+        "final_url": "https://www.tencent.com/wp-content/uploads/2026/09/Corporate-Overview-2Q26-20260916.pdf",
+        "status_code": 200,
+        "download_bytes": 1676729,
+        "sha256": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+        "raw_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\corporate_overview_20260916.pdf",
+        "pages": 24,
+        "published_date": "2026-09-16",
+        "publication_date_basis": "official investor-kit link+dated filename Sep2026 title; exact day is website filename asserted, not inferred mtime",
+        "tool": "requests.get streamed",
+        "supplemental_route": "official IR presentation, not financial-filing route",
+        "max_bytes": 41943040,
+        "timeout_seconds": 180,
+        "cost_usd": "0.00",
+        "elapsed_seconds": 1.1121600000042235
+      },
+      "source_url": "https://www.tencent.com/wp-content/uploads/2026/09/Corporate-Overview-2Q26-20260916.pdf",
+      "artifacts": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\corporate_overview_20260916.pdf",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\corporate_overview_pages.json"
+      ],
+      "outcome": "success",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:05:24.241499+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "1A",
+      "action": "record_source_facts",
+      "tool": "CWP source-facts CLI",
+      "input_summary": {
+        "source_ref": {
+          "schema_version": "2.0",
+          "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "byte_size": 5241364,
+          "mime_type": "application/pdf"
+        },
+        "facts": {
+          "fiscal_year": 2024,
+          "language": "zh"
+        },
+        "evidence": {
+          "fiscal_year": {
+            "locator": "PDF page 1 cover and financial summary PDF page 4",
+            "value": 2024,
+            "observation": "Cover explicitly 2024 年報; financial summary year column 2024. 2024 cover visually rendered and inspected."
+          },
+          "language": {
+            "locator": "PDF page 1 cover; PDF page 4 financial summary; audited revenue note",
+            "value": "zh",
+            "observation": "Traditional Chinese cover 年報 and Chinese financial-summary and revenue-note body; original-language flag only, no translation."
+          }
+        }
+      },
+      "source_url": null,
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2024.request.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2024.response.json"
+      ],
+      "outcome": "success",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:05:24.936004+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "1A",
+      "action": "record_source_facts",
+      "tool": "CWP source-facts CLI",
+      "input_summary": {
+        "source_ref": {
+          "schema_version": "2.0",
+          "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "byte_size": 4428270,
+          "mime_type": "application/pdf"
+        },
+        "facts": {
+          "fiscal_year": 2025,
+          "language": "zh"
+        },
+        "evidence": {
+          "fiscal_year": {
+            "locator": "PDF page 1 cover and financial summary PDF page 4",
+            "value": 2025,
+            "observation": "Cover explicitly 2025 年報; financial summary year column 2025. 2024 cover visually rendered and inspected."
+          },
+          "language": {
+            "locator": "PDF page 1 cover; PDF page 4 financial summary; audited revenue note",
+            "value": "zh",
+            "observation": "Traditional Chinese cover 年報 and Chinese financial-summary and revenue-note body; original-language flag only, no translation."
+          }
+        }
+      },
+      "source_url": null,
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2025.request.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2025.response.json"
+      ],
+      "outcome": "success",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:05:42.292456+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "3",
+      "action": "actual_skill_annual-2025",
+      "tool": "subprocess",
+      "input_summary": {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+          "--request-file",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_annual_2025_no_language.json",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+          "--timeout-seconds",
+          "180"
+        ],
+        "returncode": 0
+      },
+      "source_url": null,
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\annual-2025-1791443142289657200.response.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\annual-2025-1791443142289657200.stderr.txt"
+      ],
+      "outcome": "success",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:06:08.021072+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "3",
+      "action": "actual_skill_annual-2024",
+      "tool": "subprocess",
+      "input_summary": {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+          "--request-file",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_annual_2024_no_language.json",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+          "--timeout-seconds",
+          "180"
+        ],
+        "returncode": 0
+      },
+      "source_url": null,
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\annual-2024-1791443168017116000.response.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\annual-2024-1791443168017116000.stderr.txt"
+      ],
+      "outcome": "success",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:08:51.319707+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "3",
+      "action": "actual_skill_interim-2026",
+      "tool": "subprocess",
+      "input_summary": {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+          "--request-file",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_interim_2026_no_language.json",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+          "--timeout-seconds",
+          "180",
+          "--allow-download"
+        ],
+        "returncode": 3
+      },
+      "source_url": null,
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\interim-2026-1791443331318341000.response.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\interim-2026-1791443331318341000.stderr.txt"
+      ],
+      "outcome": "failed",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:08:52.188127+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "1A",
+      "action": "capture_official_supplement",
+      "tool": "requests.get streamed",
+      "input_summary": {
+        "name": "interim_2026_official",
+        "url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+        "published_date": "2026-08-12",
+        "publication_date_basis": "date printed in original PDF/release, not file mtime",
+        "route": "official supplemental direct HTTP; not FF/Dayu/CWP acquisition",
+        "max_bytes": 41943040,
+        "timeout_seconds": 180,
+        "cost_usd": "0.00",
+        "authorized_by": "MAIN explicit supplemental-capture authorization",
+        "status": "captured",
+        "status_code": 200,
+        "final_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+        "raw_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\interim_2026_official.pdf",
+        "sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+        "download_bytes": 5135808,
+        "content_type": "application/pdf",
+        "pages": 122,
+        "parsed_pages_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\interim_2026_official_pages.json",
+        "parser": "PyMuPDF 1.26.7",
+        "parse_route": "task-local deterministic extraction; CWP Worker not run",
+        "timestamp_utc": "2026-10-08T07:08:52.188127+00:00",
+        "elapsed_seconds": 2.7596446000097785
+      },
+      "source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "artifacts": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\interim_2026_official.pdf"
+      ],
+      "outcome": "captured",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:08:52.634045+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "1A",
+      "action": "capture_official_supplement",
+      "tool": "requests.get streamed",
+      "input_summary": {
+        "name": "results_2q2026",
+        "url": "https://www.tencent.com/wp-content/uploads/2026/08/Tencent-Announces-2026-Second-Quarter-Results.pdf",
+        "published_date": "2026-08-12",
+        "publication_date_basis": "date printed in original PDF/release, not file mtime",
+        "route": "official supplemental direct HTTP; not FF/Dayu/CWP acquisition",
+        "max_bytes": 41943040,
+        "timeout_seconds": 180,
+        "cost_usd": "0.00",
+        "authorized_by": "MAIN explicit supplemental-capture authorization",
+        "status": "captured",
+        "status_code": 200,
+        "final_url": "https://www.tencent.com/wp-content/uploads/2026/08/Tencent-Announces-2026-Second-Quarter-Results.pdf",
+        "raw_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\results_2q2026.pdf",
+        "sha256": "64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+        "download_bytes": 412297,
+        "content_type": "application/pdf",
+        "pages": 9,
+        "parsed_pages_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\results_2q2026_pages.json",
+        "parser": "PyMuPDF 1.26.7",
+        "parse_route": "task-local deterministic extraction; CWP Worker not run",
+        "timestamp_utc": "2026-10-08T07:08:52.634045+00:00",
+        "elapsed_seconds": 0.4453584000002593
+      },
+      "source_url": "https://www.tencent.com/wp-content/uploads/2026/08/Tencent-Announces-2026-Second-Quarter-Results.pdf",
+      "artifacts": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\results_2q2026.pdf"
+      ],
+      "outcome": "captured",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:08:53.043000+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "1A",
+      "action": "capture_official_supplement",
+      "tool": "requests.get streamed",
+      "input_summary": {
+        "name": "presentation_2q2026",
+        "url": "https://static.www.tencent.com/website-2026-upload/2Q26-earnings-PPT_20260812_1800-88b183.pdf",
+        "published_date": "2026-08-12",
+        "publication_date_basis": "date printed in original PDF/release, not file mtime",
+        "route": "official supplemental direct HTTP; not FF/Dayu/CWP acquisition",
+        "max_bytes": 41943040,
+        "timeout_seconds": 180,
+        "cost_usd": "0.00",
+        "authorized_by": "MAIN explicit supplemental-capture authorization",
+        "status": "unavailable",
+        "status_code": 200,
+        "final_url": "https://static.www.tencent.com/website-2026-upload/2Q26-earnings-PPT_20260812_1800-88b183.pdf",
+        "raw_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\presentation_2q2026.pdf",
+        "sha256": "0b749a74c4e5af449a27c76c69cff824e525794e14d5fbe0bfee927e6013029b",
+        "download_bytes": 987,
+        "content_type": "text/html",
+        "error": "ValueError: Official PDF link returned non-PDF content; unavailable, not a successful PDF capture",
+        "timestamp_utc": "2026-10-08T07:08:53.043000+00:00",
+        "elapsed_seconds": 0.40846740000415593
+      },
+      "source_url": "https://static.www.tencent.com/website-2026-upload/2Q26-earnings-PPT_20260812_1800-88b183.pdf",
+      "artifacts": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\presentation_2q2026.pdf"
+      ],
+      "outcome": "unavailable",
+      "error": "ValueError: Official PDF link returned non-PDF content; unavailable, not a successful PDF capture"
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:08:53.422033+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "1A",
+      "action": "capture_official_supplement",
+      "tool": "requests.get streamed",
+      "input_summary": {
+        "name": "netease_2q2026",
+        "url": "https://ir.netease.com/news-releases/news-release-details/netease-announces-second-quarter-and-interim-2026-unaudited",
+        "published_date": "2026-08-20",
+        "publication_date_basis": "date printed in original PDF/release, not file mtime",
+        "route": "official supplemental direct HTTP; not FF/Dayu/CWP acquisition",
+        "max_bytes": 41943040,
+        "timeout_seconds": 180,
+        "cost_usd": "0.00",
+        "authorized_by": "MAIN explicit supplemental-capture authorization",
+        "status": "captured",
+        "status_code": 200,
+        "final_url": "https://ir.netease.com/news-releases/news-release-details/netease-announces-second-quarter-and-interim-2026-unaudited",
+        "raw_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\netease_2q2026.html",
+        "sha256": "ba4cd2d0507d5d3211d642a8f6d45aba11e0ac245f5757d58e525223ebde4c98",
+        "download_bytes": 909908,
+        "content_type": "text/html; charset=UTF-8",
+        "timestamp_utc": "2026-10-08T07:08:53.422033+00:00",
+        "elapsed_seconds": 0.37792449998960365
+      },
+      "source_url": "https://ir.netease.com/news-releases/news-release-details/netease-announces-second-quarter-and-interim-2026-unaudited",
+      "artifacts": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\netease_2q2026.html"
+      ],
+      "outcome": "captured",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:08:53.841597+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "1A",
+      "action": "capture_official_supplement",
+      "tool": "requests.get streamed",
+      "input_summary": {
+        "name": "tencent_results_index",
+        "url": "https://www.tencent.com/investors/results/",
+        "published_date": null,
+        "publication_date_basis": "undated official index; discovery record only, not a registered dated forecast source",
+        "route": "official supplemental direct HTTP; not FF/Dayu/CWP acquisition",
+        "max_bytes": 41943040,
+        "timeout_seconds": 180,
+        "cost_usd": "0.00",
+        "authorized_by": "MAIN explicit supplemental-capture authorization",
+        "status": "captured",
+        "status_code": 200,
+        "final_url": "https://www.tencent.com/investors/results/",
+        "raw_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\tencent_results_index.html",
+        "sha256": "e7ac34c8e6826016c6b6a482ab6fa658328492ab67d88268c4e8bd8476714559",
+        "download_bytes": 186626,
+        "content_type": "text/html; charset=UTF-8",
+        "timestamp_utc": "2026-10-08T07:08:53.841597+00:00",
+        "elapsed_seconds": 0.41888620000099763
+      },
+      "source_url": "https://www.tencent.com/investors/results/",
+      "artifacts": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\tencent_results_index.html"
+      ],
+      "outcome": "captured",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:08:54.210839+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "1A",
+      "action": "capture_official_supplement",
+      "tool": "requests.get streamed",
+      "input_summary": {
+        "name": "tencent_announcements_index",
+        "url": "https://www.tencent.com/investors/announcements/",
+        "published_date": null,
+        "publication_date_basis": "undated official index; discovery record only, not a registered dated forecast source",
+        "route": "official supplemental direct HTTP; not FF/Dayu/CWP acquisition",
+        "max_bytes": 41943040,
+        "timeout_seconds": 180,
+        "cost_usd": "0.00",
+        "authorized_by": "MAIN explicit supplemental-capture authorization",
+        "status": "captured",
+        "status_code": 200,
+        "final_url": "https://www.tencent.com/investors/announcements/",
+        "raw_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\tencent_announcements_index.html",
+        "sha256": "93782c3b7eb7a3558113b07c8ffd32f07ead78ad08d80331db9d8563571f6156",
+        "download_bytes": 184217,
+        "content_type": "text/html; charset=UTF-8",
+        "timestamp_utc": "2026-10-08T07:08:54.210839+00:00",
+        "elapsed_seconds": 0.36833650000335183
+      },
+      "source_url": "https://www.tencent.com/investors/announcements/",
+      "artifacts": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\tencent_announcements_index.html"
+      ],
+      "outcome": "captured",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:11:05.831654+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "1A",
+      "action": "independent_ff_companion_diagnostic",
+      "tool": "FF CLI",
+      "input_summary": {
+        "schema_version": "2.0",
+        "company_query": "00700",
+        "market": "HK",
+        "document_kind": "annual_report",
+        "mode": "exact",
+        "fiscal_year": 2025,
+        "as_of_date": "2026-10-08",
+        "filing_intent": "reuse_only",
+        "companion_transcript": {
+          "intent": "fetch_if_missing",
+          "fiscal_year": 2026,
+          "fiscal_quarter": 2,
+          "acquisition_limits": {
+            "max_bytes": 41943040,
+            "timeout_seconds": 180,
+            "max_cost_usd": "0.00"
+          }
+        }
+      },
+      "source_url": null,
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_ff_annual2025_companion2026q2.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\ff_latest_companion.response.json"
+      ],
+      "outcome": "success",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:17:11.974064+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "10",
+      "action": "actual_skill_lint",
+      "tool": "subprocess",
+      "input_summary": {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\lint_input.py",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input.json",
+          "--check-conclusion-facts",
+          "--check-sensitivity-propagation"
+        ],
+        "returncode": 0
+      },
+      "source_url": null,
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\lint-1791443831971830800.response.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\lint-1791443831971830800.stderr.txt"
+      ],
+      "outcome": "success",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:17:12.333037+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "10",
+      "action": "actual_skill_hash",
+      "tool": "subprocess",
+      "input_summary": {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\fix_hashes.py",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input.json"
+        ],
+        "returncode": 0
+      },
+      "source_url": null,
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\hash-1791443832331404500.response.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\hash-1791443832331404500.stderr.txt"
+      ],
+      "outcome": "success",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:17:16.887285+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "3",
+      "action": "actual_skill_annual-2025",
+      "tool": "subprocess",
+      "input_summary": {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+          "--request-file",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_annual_2025_no_language.json",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+          "--timeout-seconds",
+          "180"
+        ],
+        "returncode": 0
+      },
+      "source_url": null,
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\annual-2025-1791443836885749200.response.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\annual-2025-1791443836885749200.stderr.txt"
+      ],
+      "outcome": "success",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:17:49.488348+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "10",
+      "action": "actual_skill_validate",
+      "tool": "subprocess",
+      "input_summary": {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input.json",
+          "--validate-only",
+          "--verbose"
+        ],
+        "returncode": 2
+      },
+      "source_url": null,
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\validate-1791443869487047300.response.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\validate-1791443869487047300.stderr.txt"
+      ],
+      "outcome": "failed",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:19:05.004260+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "10",
+      "action": "actual_skill_validate",
+      "tool": "subprocess",
+      "input_summary": {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input.json",
+          "--validate-only",
+          "--verbose"
+        ],
+        "returncode": 0
+      },
+      "source_url": null,
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\validate-1791443945003330500.response.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\validate-1791443945003330500.stderr.txt"
+      ],
+      "outcome": "success",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:19:24.660594+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "10",
+      "action": "actual_skill_forecast",
+      "tool": "subprocess",
+      "input_summary": {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input.json",
+          "--output",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast.json",
+          "--markdown",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast.md"
+        ],
+        "returncode": 0
+      },
+      "source_url": null,
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\forecast-1791443964659685100.response.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\forecast-1791443964659685100.stderr.txt"
+      ],
+      "outcome": "success",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:19:25.650172+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "10",
+      "action": "actual_skill_snapshot",
+      "tool": "subprocess",
+      "input_summary": {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_backtest.py",
+          "create",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input.json",
+          "--version",
+          "2026-10-08-hk-v1",
+          "--output",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\snapshot.json"
+        ],
+        "returncode": 0
+      },
+      "source_url": null,
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\snapshot-1791443965648842800.response.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\snapshot-1791443965648842800.stderr.txt"
+      ],
+      "outcome": "success",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:24:46.112702+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "10",
+      "action": "actual_skill_forecast",
+      "tool": "subprocess",
+      "input_summary": {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input.json",
+          "--output",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast.json",
+          "--markdown",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast.md"
+        ],
+        "returncode": 0
+      },
+      "source_url": null,
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\forecast-1791444286110906100.response.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\forecast-1791444286110906100.stderr.txt"
+      ],
+      "outcome": "success",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:24:47.122791+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "10",
+      "action": "actual_skill_snapshot-v2",
+      "tool": "subprocess",
+      "input_summary": {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_backtest.py",
+          "create",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input.json",
+          "--version",
+          "2026-10-08-hk-v2",
+          "--output",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\snapshot-v2.json"
+        ],
+        "returncode": 0
+      },
+      "source_url": null,
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\snapshot-v2-1791444287121498700.response.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\snapshot-v2-1791444287121498700.stderr.txt"
+      ],
+      "outcome": "success",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:28:10.205121+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "1A/1B",
+      "action": "journal_actual_web_actions",
+      "tool": "web.run actual opens/search/click",
+      "input_summary": {
+        "action": "Tencent official results/investors latest disclosures",
+        "tool_reference_ids": [
+          "turn207view0",
+          "turn207view1",
+          "turn229view1"
+        ],
+        "timestamp_precision": "Grouped delayed journal; actual tool IDs and raw capture timestamps retained, no fabricated action timestamp"
+      },
+      "source_url": [
+        "https://www.tencent.com/investors/results/",
+        "https://www.tencent.com/Investors/"
+      ],
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\web_action_index.json"
+      ],
+      "outcome": "performed; unavailable actions named explicitly",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:28:10.205121+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "1A/1B",
+      "action": "journal_actual_web_actions",
+      "tool": "web.run actual opens/search/click",
+      "input_summary": {
+        "action": "Latest official Q2/H1 financial original and releases",
+        "tool_reference_ids": [
+          "turn208view0",
+          "turn208view3",
+          "turn210view1",
+          "turn220view1",
+          "turn230view0",
+          "turn230view1"
+        ],
+        "timestamp_precision": "Grouped delayed journal; actual tool IDs and raw capture timestamps retained, no fabricated action timestamp"
+      },
+      "source_url": [
+        "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+        "https://www.tencent.com/wp-content/uploads/2026/08/Tencent-Announces-2026-Second-Quarter-Results.pdf",
+        "https://www.tencent.com/wp-content/uploads/2026/08/E700_IRA.pdf"
+      ],
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\web_action_index.json"
+      ],
+      "outcome": "performed; unavailable actions named explicitly",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:28:10.205121+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "1A/1B",
+      "action": "journal_actual_web_actions",
+      "tool": "web.run actual opens/search/click",
+      "input_summary": {
+        "action": "Official presentation and strategy originals",
+        "tool_reference_ids": [
+          "turn210view2",
+          "turn211view0",
+          "turn216view0",
+          "turn208view1"
+        ],
+        "timestamp_precision": "Grouped delayed journal; actual tool IDs and raw capture timestamps retained, no fabricated action timestamp"
+      },
+      "source_url": [
+        "https://www.tencent.com/investors/investor-kit-calendar/",
+        "https://www.tencent.com/wp-content/uploads/2026/09/Corporate-Overview-2Q26-20260916.pdf",
+        "https://static.www.tencent.com/website-2026-upload/2Q26-earnings-PPT_20260812_1800-88b183.pdf"
+      ],
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\web_action_index.json"
+      ],
+      "outcome": "performed; unavailable actions named explicitly",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:28:10.205121+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "1A/1B",
+      "action": "journal_actual_web_actions",
+      "tool": "web.run actual opens/search/click",
+      "input_summary": {
+        "action": "Official announcement index and board date",
+        "tool_reference_ids": [
+          "turn210view3",
+          "turn211view1",
+          "turn216view2"
+        ],
+        "timestamp_precision": "Grouped delayed journal; actual tool IDs and raw capture timestamps retained, no fabricated action timestamp"
+      },
+      "source_url": [
+        "https://www.tencent.com/investors/announcements/",
+        "https://www.tencent.com/wp-content/uploads/2026/09/E700_BM.pdf"
+      ],
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\web_action_index.json"
+      ],
+      "outcome": "performed; unavailable actions named explicitly",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:28:10.205121+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "1A/1B",
+      "action": "journal_actual_web_actions",
+      "tool": "web.run actual opens/search/click",
+      "input_summary": {
+        "action": "Independent primary NetEase comparator actual open",
+        "tool_reference_ids": [
+          "turn225search2",
+          "turn229view0"
+        ],
+        "timestamp_precision": "Grouped delayed journal; actual tool IDs and raw capture timestamps retained, no fabricated action timestamp"
+      },
+      "source_url": [
+        "https://ir.netease.com/news-releases/news-release-details/netease-announces-second-quarter-and-interim-2026-unaudited"
+      ],
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\web_action_index.json"
+      ],
+      "outcome": "performed; unavailable actions named explicitly",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:28:10.205121+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "1A/1B",
+      "action": "journal_actual_web_actions",
+      "tool": "web.run actual opens/search/click",
+      "input_summary": {
+        "action": "Official call unavailable",
+        "tool_reference_ids": [
+          "turn208view2",
+          "turn233view0"
+        ],
+        "timestamp_precision": "Grouped delayed journal; actual tool IDs and raw capture timestamps retained, no fabricated action timestamp"
+      },
+      "source_url": [
+        "https://webcast.tencent.com/fj2pa6"
+      ],
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\web_action_index.json"
+      ],
+      "outcome": "performed; unavailable actions named explicitly",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:28:10.205121+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "1A/1B",
+      "action": "journal_actual_web_actions",
+      "tool": "web.run actual opens/search/click",
+      "input_summary": {
+        "action": "Read-only announcement pagination probes unavailable",
+        "tool_reference_ids": [
+          "turn236view0",
+          "turn236view1"
+        ],
+        "timestamp_precision": "Grouped delayed journal; actual tool IDs and raw capture timestamps retained, no fabricated action timestamp"
+      },
+      "source_url": [
+        "https://www.tencent.com/investors/announcements/?_paged=2",
+        "https://www.tencent.com/investors/announcements/?_news_years=2026&_all_news_months=august"
+      ],
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\web_action_index.json"
+      ],
+      "outcome": "performed; unavailable actions named explicitly",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:29:47.887451+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "1A/1B",
+      "action": "journal_actual_web_actions",
+      "tool": "web.run actual opens/search/click",
+      "input_summary": {
+        "action": "Tencent official results/investors latest disclosures",
+        "tool_reference_ids": [
+          "turn207view0",
+          "turn207view1",
+          "turn229view1"
+        ],
+        "timestamp_precision": "Grouped delayed journal; actual tool IDs and raw capture timestamps retained, no fabricated action timestamp"
+      },
+      "source_url": [
+        "https://www.tencent.com/investors/results/",
+        "https://www.tencent.com/Investors/"
+      ],
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\web_action_index.json"
+      ],
+      "outcome": "performed; unavailable actions named explicitly",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:29:47.887451+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "1A/1B",
+      "action": "journal_actual_web_actions",
+      "tool": "web.run actual opens/search/click",
+      "input_summary": {
+        "action": "Latest official Q2/H1 financial original and releases",
+        "tool_reference_ids": [
+          "turn208view0",
+          "turn208view3",
+          "turn210view1",
+          "turn220view1",
+          "turn230view0",
+          "turn230view1"
+        ],
+        "timestamp_precision": "Grouped delayed journal; actual tool IDs and raw capture timestamps retained, no fabricated action timestamp"
+      },
+      "source_url": [
+        "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+        "https://www.tencent.com/wp-content/uploads/2026/08/Tencent-Announces-2026-Second-Quarter-Results.pdf",
+        "https://www.tencent.com/wp-content/uploads/2026/08/E700_IRA.pdf"
+      ],
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\web_action_index.json"
+      ],
+      "outcome": "performed; unavailable actions named explicitly",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:29:47.887451+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "1A/1B",
+      "action": "journal_actual_web_actions",
+      "tool": "web.run actual opens/search/click",
+      "input_summary": {
+        "action": "Official presentation and strategy originals",
+        "tool_reference_ids": [
+          "turn210view2",
+          "turn211view0",
+          "turn216view0",
+          "turn208view1"
+        ],
+        "timestamp_precision": "Grouped delayed journal; actual tool IDs and raw capture timestamps retained, no fabricated action timestamp"
+      },
+      "source_url": [
+        "https://www.tencent.com/investors/investor-kit-calendar/",
+        "https://www.tencent.com/wp-content/uploads/2026/09/Corporate-Overview-2Q26-20260916.pdf",
+        "https://static.www.tencent.com/website-2026-upload/2Q26-earnings-PPT_20260812_1800-88b183.pdf"
+      ],
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\web_action_index.json"
+      ],
+      "outcome": "performed; unavailable actions named explicitly",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:29:47.887451+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "1A/1B",
+      "action": "journal_actual_web_actions",
+      "tool": "web.run actual opens/search/click",
+      "input_summary": {
+        "action": "Official announcement index and board date",
+        "tool_reference_ids": [
+          "turn210view3",
+          "turn211view1",
+          "turn216view2"
+        ],
+        "timestamp_precision": "Grouped delayed journal; actual tool IDs and raw capture timestamps retained, no fabricated action timestamp"
+      },
+      "source_url": [
+        "https://www.tencent.com/investors/announcements/",
+        "https://www.tencent.com/wp-content/uploads/2026/09/E700_BM.pdf"
+      ],
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\web_action_index.json"
+      ],
+      "outcome": "performed; unavailable actions named explicitly",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:29:47.887451+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "1A/1B",
+      "action": "journal_actual_web_actions",
+      "tool": "web.run actual opens/search/click",
+      "input_summary": {
+        "action": "Independent primary NetEase comparator actual open",
+        "tool_reference_ids": [
+          "turn225search2",
+          "turn229view0"
+        ],
+        "timestamp_precision": "Grouped delayed journal; actual tool IDs and raw capture timestamps retained, no fabricated action timestamp"
+      },
+      "source_url": [
+        "https://ir.netease.com/news-releases/news-release-details/netease-announces-second-quarter-and-interim-2026-unaudited"
+      ],
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\web_action_index.json"
+      ],
+      "outcome": "performed; unavailable actions named explicitly",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:29:47.887451+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "1A/1B",
+      "action": "journal_actual_web_actions",
+      "tool": "web.run actual opens/search/click",
+      "input_summary": {
+        "action": "Official call unavailable",
+        "tool_reference_ids": [
+          "turn208view2",
+          "turn233view0"
+        ],
+        "timestamp_precision": "Grouped delayed journal; actual tool IDs and raw capture timestamps retained, no fabricated action timestamp"
+      },
+      "source_url": [
+        "https://webcast.tencent.com/fj2pa6"
+      ],
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\web_action_index.json"
+      ],
+      "outcome": "performed; unavailable actions named explicitly",
+      "error": null
+    },
+    {
+      "timestamp_utc": "2026-10-08T07:29:47.887451+00:00",
+      "agent_id": "/root/rf_hk_execution",
+      "step": "1A/1B",
+      "action": "journal_actual_web_actions",
+      "tool": "web.run actual opens/search/click",
+      "input_summary": {
+        "action": "Read-only announcement pagination probes unavailable",
+        "tool_reference_ids": [
+          "turn236view0",
+          "turn236view1"
+        ],
+        "timestamp_precision": "Grouped delayed journal; actual tool IDs and raw capture timestamps retained, no fabricated action timestamp"
+      },
+      "source_url": [
+        "https://www.tencent.com/investors/announcements/?_paged=2",
+        "https://www.tencent.com/investors/announcements/?_news_years=2026&_all_news_months=august"
+      ],
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\web_action_index.json"
+      ],
+      "outcome": "performed; unavailable actions named explicitly",
+      "error": null
+    }
+  ]
+}

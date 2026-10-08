@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\executions\US-MSFT\lane_tools.py", line 114, in <module>
+    if __name__=='__main__':sys.exit(main())
+                                     ~~~~^^
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\executions\US-MSFT\lane_tools.py", line 91, in main
+    if not bytes(data).startswith(b'PK'):raise RuntimeError('not OOXML presentation')
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: not OOXML presentation

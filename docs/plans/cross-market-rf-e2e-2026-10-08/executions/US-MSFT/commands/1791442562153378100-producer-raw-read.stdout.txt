@@ -1,0 +1,1 @@
+{"returncode": 0, "verified": true, "bytes": 8158067, "receipt_path": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\fy2025_source_read_receipt.json"}

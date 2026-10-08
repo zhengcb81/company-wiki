@@ -1,0 +1,26 @@
+{
+  "schema_version": "2.0",
+  "company_query": "MSFT",
+  "market": "US",
+  "document_kind": "annual_report",
+  "mode": "exact",
+  "fiscal_year": 2026,
+  "as_of_date": "2026-10-08",
+  "filing_intent": "fetch_if_missing",
+  "acquisition_limits": {
+    "max_bytes": 41943040,
+    "timeout_seconds": 180,
+    "max_cost_usd": "0.00"
+  },
+  "companion_transcript": {
+    "intent": "fetch_if_missing",
+    "fiscal_year": 2026,
+    "fiscal_quarter": 4,
+    "provider": "fmp",
+    "acquisition_limits": {
+      "max_bytes": 5242880,
+      "timeout_seconds": 60,
+      "max_cost_usd": "0.00"
+    }
+  }
+}

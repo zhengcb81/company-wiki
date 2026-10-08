@@ -1,0 +1,198 @@
+{
+  "schema_version": "1.0",
+  "company": "TencentHK00700",
+  "agent_id": "/root/rf_hk_execution",
+  "as_of_date": "2026-10-08",
+  "scope": "Only independent-peer competition-risk classification and explanatory dependency closure",
+  "independent_finding": "HK-V3-R01 / HK-R02",
+  "status": "implemented_pending_independent_review",
+  "classification_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\classification_v4.json",
+  "before": "NetEase competitor node one_step/non-contrary -> Games triangulated; limitation omitted",
+  "after": "contrary competitive-risk node; analogical peer distance disclosed -> Games limited; limitation restored",
+  "reference": "RF references/growth-driver-tree.md lines35-46",
+  "why_not_analogical_enum_alone": "Current engine counts all non-contrary nodes including analogical as positive triangulation; contrary encodes observed risk direction with analogy limitation in text",
+  "claims_unchanged": 325,
+  "parameter_records_unchanged": 53,
+  "original45_future_rates": "UNCHANGED",
+  "all_company_and_segment_revenue_CAGR_and_sensitivities": "UNCHANGED",
+  "confidence_score": 64.0,
+  "confidence_dependency": {
+    "before": "triangulated",
+    "after": "limited",
+    "restored_confidence_limitation": "Growth driver evergreen_and_launch_monetization is not triangulated across two evidence types and sources",
+    "confidence_score_unchanged": 64.0,
+    "all325_claims_unchanged": true,
+    "all53_parameter_records_unchanged": true,
+    "all_income_and_sensitivity_results_unchanged": true,
+    "no_new_source_calls": true
+  },
+  "runtime_51_files": "UNCHANGED and installed/canonical matching",
+  "old_files_unchanged": 188,
+  "raw_config_and_producer": "No writes; unchanged",
+  "actual_commands": [
+    {
+      "label": "HK-v4-classification-build",
+      "id": "1791449817618038600-HK-v4-classification-build",
+      "returncode": 0,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791449817618038600-HK-v4-classification-build.stdout.txt",
+          "byte_size": 266,
+          "sha256": "d25f2ba27d86d1659206b188950fbbf65996d6435e35cddc4cf0513cbad67506"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791449817618038600-HK-v4-classification-build.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "HK-v4-lint",
+      "id": "1791449833016913700-HK-v4-lint",
+      "returncode": 0,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791449833016913700-HK-v4-lint.stdout.txt",
+          "byte_size": 757,
+          "sha256": "10f5f2b6b3815987230c32c6be253424dede520880b2e41851e5b703123eb198"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791449833016913700-HK-v4-lint.stderr.txt",
+          "byte_size": 2,
+          "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+        }
+      }
+    },
+    {
+      "label": "HK-v4-hash-check",
+      "id": "1791449836341562600-HK-v4-hash-check",
+      "returncode": 0,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791449836341562600-HK-v4-hash-check.stdout.txt",
+          "byte_size": 707,
+          "sha256": "d678bfa14bd6034669a1581bd409ed4283f9979bbc0000f1d51c0fd7ff220cc8"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791449836341562600-HK-v4-hash-check.stderr.txt",
+          "byte_size": 2,
+          "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+        }
+      }
+    },
+    {
+      "label": "HK-v4-validate",
+      "id": "1791449839451322300-HK-v4-validate",
+      "returncode": 0,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791449839451322300-HK-v4-validate.stdout.txt",
+          "byte_size": 722,
+          "sha256": "22b1756c12c1746ca021145548f502262513216b095e944a9b62889fe9371fb6"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791449839451322300-HK-v4-validate.stderr.txt",
+          "byte_size": 2,
+          "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+        }
+      }
+    },
+    {
+      "label": "HK-v4-forecast",
+      "id": "1791449843088843100-HK-v4-forecast",
+      "returncode": 0,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791449843088843100-HK-v4-forecast.stdout.txt",
+          "byte_size": 899,
+          "sha256": "7b44f4a80ad102fcb715d89948aaadf266addd3a66311ef8d100048a85441de9"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791449843088843100-HK-v4-forecast.stderr.txt",
+          "byte_size": 2,
+          "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+        }
+      }
+    },
+    {
+      "label": "HK-v4-snapshot",
+      "id": "1791449848592749800-HK-v4-snapshot",
+      "returncode": 0,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791449848592749800-HK-v4-snapshot.stdout.txt",
+          "byte_size": 834,
+          "sha256": "432c14daa5a0ec89d8e6c1e691ab66413b415bd8874bd56843b5ea473d16edfd"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791449848592749800-HK-v4-snapshot.stderr.txt",
+          "byte_size": 2,
+          "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+        }
+      }
+    },
+    {
+      "label": "HK-v4-audit",
+      "id": "1791449852928456300-HK-v4-audit",
+      "returncode": 0,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791449852928456300-HK-v4-audit.stdout.txt",
+          "byte_size": 711,
+          "sha256": "7a01dee7906aae73dcfd577f7e89d24ca34156193fb41b6b3d7575daddc8635c"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791449852928456300-HK-v4-audit.stderr.txt",
+          "byte_size": 2,
+          "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+        }
+      }
+    },
+    {
+      "label": "HK-v4-strong",
+      "id": "1791449855587339600-HK-v4-strong",
+      "returncode": 0,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791449855587339600-HK-v4-strong.stdout.txt",
+          "byte_size": 1461,
+          "sha256": "50df3de88e6179f2dccdf966fe0cb88b4c99919e6ce02409d03965274f0f1d10"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791449855587339600-HK-v4-strong.stderr.txt",
+          "byte_size": 2,
+          "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+        }
+      }
+    }
+  ],
+  "review_inputs": [
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\reviews\\HK-00700\\recheck_v3.md",
+      "bytes": 13130,
+      "sha256": "57ede56a14695951480c7d1fff4abfe9ccba1c610006b63153dd3367ae6f7606",
+      "role": "sealed independent v3 review"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\reviews\\HK-00700\\recheck_v3.json",
+      "bytes": 697510,
+      "sha256": "1c977411c0291b09020ffc129c865f3bd153cd45411c677a763a22010cb94640",
+      "role": "sealed independent v3 review"
+    }
+  ],
+  "remaining_pipeline_limitations": [
+    "FY2025 official same-SHA provenance and exact public days unverified",
+    "Bounded Dayu missing filing downloaded_new→reuse not demonstrated",
+    "Latest ET/call body absent and full announcements interval not opened",
+    "HK canonical Worker/narrative consumption not demonstrated",
+    "Conditional five-stream direct_growth forecast without causal coefficient/reference-class/future accuracy calibration"
+  ],
+  "provider_calls": 0,
+  "paid_LLM_calls": 0,
+  "cost_usd": 0,
+  "independent_review": "REQUIRED; no self acceptance",
+  "verification_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v4_delivery_verification.json",
+  "registry_integrity_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v4_registry_integrity.json",
+  "old_byte_integrity_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\after_v4_integrity.json"
+}

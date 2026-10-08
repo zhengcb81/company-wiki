@@ -1,0 +1,12 @@
+usage: publication_registry.py [-h] {lookup,audit} ...
+
+Query and audit the append-only publication registry
+
+positional arguments:
+  {lookup,audit}
+    lookup        publication history of one input anchor
+    audit         detect conflicts / corruption / unregistered claims
+
+options:
+  -h, --help      show this help message and exit
+

@@ -1,0 +1,26 @@
+{
+  "source_ref": {
+    "schema_version": "2.0",
+    "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+    "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+    "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+    "byte_size": 5241364,
+    "mime_type": "application/pdf"
+  },
+  "facts": {
+    "fiscal_year": 2024,
+    "language": "zh"
+  },
+  "evidence": {
+    "fiscal_year": {
+      "locator": "PDF page 1 cover and financial summary PDF page 4",
+      "value": 2024,
+      "observation": "Cover explicitly 2024 年報; financial summary year column 2024. 2024 cover visually rendered and inspected."
+    },
+    "language": {
+      "locator": "PDF page 1 cover; PDF page 4 financial summary; audited revenue note",
+      "value": "zh",
+      "observation": "Traditional Chinese cover 年報 and Chinese financial-summary and revenue-note body; original-language flag only, no translation."
+    }
+  }
+}

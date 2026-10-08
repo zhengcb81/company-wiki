@@ -1,0 +1,278 @@
+{
+  "status": "modeled",
+  "drivers": [
+    {
+      "driver_id": "core_etch_acceptance",
+      "title": "客户工序扩展及刻蚀验收",
+      "thesis": "Current etch qualification and client investment convert into accepted chamber volume.",
+      "causal_chain": [
+        "Customer process needs and capital investment",
+        "Qualification, manufacturing and installation execution",
+        "Customer acceptance or genuine service progress",
+        "Recognized external annual revenue"
+      ],
+      "parameter_ids": [
+        "equipment_units_base_2026",
+        "equipment_units_base_2027",
+        "equipment_units_base_2028",
+        "equipment_unit_revenue_base_2026",
+        "equipment_unit_revenue_base_2027",
+        "equipment_unit_revenue_base_2028"
+      ],
+      "segment_attribution": [
+        {
+          "segment_name": "Equipment",
+          "weight": 0.75
+        }
+      ],
+      "horizon": {
+        "start_year": 2026,
+        "end_year": 2028
+      },
+      "persistence": "cyclical",
+      "persistence_rationale": "Horizon spans current commercial ramps and equipment/client investment cycle; strength is an analyst judgment, not known outcome.",
+      "evidence_nodes": [
+        {
+          "evidence_id": "e_core_etch_acceptance",
+          "evidence_type": "company_execution",
+          "inference_distance": "one_step",
+          "conclusion": "Current etch qualification and client investment convert into accepted chamber volume.",
+          "claim_ids": [
+            "claim_driver_core_etch_acceptance"
+          ]
+        },
+        {
+          "evidence_id": "contra_core_etch_acceptance",
+          "evidence_type": "explicit_company_risk",
+          "inference_distance": "contrary",
+          "conclusion": "Delays, customer capex, competitive technology and acquired-business underperformance can defeat the path.",
+          "claim_ids": [
+            "claim_contrary_core_etch_acceptance"
+          ]
+        },
+        {
+          "evidence_id": "ir_supply_core_etch_acceptance",
+          "evidence_type": "official_results_question_answer",
+          "inference_distance": "one_step",
+          "conclusion": "Management describes strategic component stocking, domestic supplier alternatives and improved delivery/testing efficiency. No numeric accepted-volume guarantee.",
+          "claim_ids": [
+            "claim_ir_supply_core_etch_acceptance"
+          ]
+        },
+        {
+          "evidence_id": "outside_wfe_reference",
+          "evidence_type": "industry_association_outside_reference",
+          "inference_distance": "analogical",
+          "conclusion": "Independent global WFE benchmark: +23.1% in2026, +21.8%2027, +14.1%2028. Directional context only; China moderation, domestic share, product mix and client acceptance create an explicit inferential gap.",
+          "claim_ids": [
+            "claim_outside_wfe_reference"
+          ]
+        }
+      ],
+      "leading_indicators": [
+        "Accepted chamber sales and recurring customer orders",
+        "Half-year external revenue excluding acquisitions",
+        "Product validations reaching repeat volume orders"
+      ],
+      "falsifiers": [
+        "Acceptance/recognized revenue persistently below low-case driver values",
+        "New product validations fail to reach volume orders",
+        "CMP external annual revenue materially misses independent seller commitment"
+      ],
+      "counterevidence_status": "found",
+      "counterevidence_rationale": "Opened H1 p33 and annual p61–65 risks; no assumption that a positive product announcement proves future acceptance."
+    },
+    {
+      "driver_id": "films_packaging",
+      "title": "薄膜及先进封装商业化",
+      "thesis": "Repeated client validations/orders broaden accessible steps; commercial acceptance is uncertain.",
+      "causal_chain": [
+        "Customer process needs and capital investment",
+        "Qualification, manufacturing and installation execution",
+        "Customer acceptance or genuine service progress",
+        "Recognized external annual revenue"
+      ],
+      "parameter_ids": [
+        "equipment_units_base_2026",
+        "equipment_units_base_2027",
+        "equipment_units_base_2028",
+        "equipment_unit_revenue_base_2026",
+        "equipment_unit_revenue_base_2027",
+        "equipment_unit_revenue_base_2028"
+      ],
+      "segment_attribution": [
+        {
+          "segment_name": "Equipment",
+          "weight": 0.25
+        }
+      ],
+      "horizon": {
+        "start_year": 2026,
+        "end_year": 2028
+      },
+      "persistence": "multi_year_structural",
+      "persistence_rationale": "Horizon spans current commercial ramps and equipment/client investment cycle; strength is an analyst judgment, not known outcome.",
+      "evidence_nodes": [
+        {
+          "evidence_id": "e_films_packaging",
+          "evidence_type": "company_execution",
+          "inference_distance": "one_step",
+          "conclusion": "Repeated client validations/orders broaden accessible steps; commercial acceptance is uncertain.",
+          "claim_ids": [
+            "claim_driver_films_packaging"
+          ]
+        },
+        {
+          "evidence_id": "contra_films_packaging",
+          "evidence_type": "explicit_company_risk",
+          "inference_distance": "contrary",
+          "conclusion": "Delays, customer capex, competitive technology and acquired-business underperformance can defeat the path.",
+          "claim_ids": [
+            "claim_contrary_films_packaging"
+          ]
+        },
+        {
+          "evidence_id": "ir_supply_films_packaging",
+          "evidence_type": "official_results_question_answer",
+          "inference_distance": "one_step",
+          "conclusion": "Management describes strategic component stocking, domestic supplier alternatives and improved delivery/testing efficiency. No numeric accepted-volume guarantee.",
+          "claim_ids": [
+            "claim_ir_supply_films_packaging"
+          ]
+        }
+      ],
+      "leading_indicators": [
+        "Accepted chamber sales and recurring customer orders",
+        "Half-year external revenue excluding acquisitions",
+        "Product validations reaching repeat volume orders"
+      ],
+      "falsifiers": [
+        "Acceptance/recognized revenue persistently below low-case driver values",
+        "New product validations fail to reach volume orders",
+        "CMP external annual revenue materially misses independent seller commitment"
+      ],
+      "counterevidence_status": "found",
+      "counterevidence_rationale": "Opened H1 p33 and annual p61–65 risks; no assumption that a positive product announcement proves future acceptance."
+    },
+    {
+      "driver_id": "afterm_support",
+      "title": "安装设备带来的备件和服务",
+      "thesis": "Installed operations support replacement parts and services; no invented fleet metric.",
+      "causal_chain": [
+        "Customer process needs and capital investment",
+        "Qualification, manufacturing and installation execution",
+        "Customer acceptance or genuine service progress",
+        "Recognized external annual revenue"
+      ],
+      "parameter_ids": [
+        "aftermarket_revenue_base_2026",
+        "aftermarket_revenue_base_2027",
+        "aftermarket_revenue_base_2028"
+      ],
+      "segment_attribution": [
+        {
+          "segment_name": "Aftermarket",
+          "weight": 1.0
+        }
+      ],
+      "horizon": {
+        "start_year": 2026,
+        "end_year": 2028
+      },
+      "persistence": "multi_year_structural",
+      "persistence_rationale": "Horizon spans current commercial ramps and equipment/client investment cycle; strength is an analyst judgment, not known outcome.",
+      "evidence_nodes": [
+        {
+          "evidence_id": "e_afterm_support",
+          "evidence_type": "company_execution",
+          "inference_distance": "one_step",
+          "conclusion": "Installed operations support replacement parts and services; no invented fleet metric.",
+          "claim_ids": [
+            "claim_driver_afterm_support"
+          ]
+        },
+        {
+          "evidence_id": "contra_afterm_support",
+          "evidence_type": "explicit_company_risk",
+          "inference_distance": "contrary",
+          "conclusion": "Delays, customer capex, competitive technology and acquired-business underperformance can defeat the path.",
+          "claim_ids": [
+            "claim_contrary_afterm_support"
+          ]
+        }
+      ],
+      "leading_indicators": [
+        "Accepted chamber sales and recurring customer orders",
+        "Half-year external revenue excluding acquisitions",
+        "Product validations reaching repeat volume orders"
+      ],
+      "falsifiers": [
+        "Acceptance/recognized revenue persistently below low-case driver values",
+        "New product validations fail to reach volume orders",
+        "CMP external annual revenue materially misses independent seller commitment"
+      ],
+      "counterevidence_status": "found",
+      "counterevidence_rationale": "Opened H1 p33 and annual p61–65 risks; no assumption that a positive product announcement proves future acceptance."
+    },
+    {
+      "driver_id": "cmp_ramp",
+      "title": "并购CMP收入并表及商业化",
+      "thesis": "Control followed by customer qualification/acceptance gives incremental consolidated external revenue.",
+      "causal_chain": [
+        "Customer process needs and capital investment",
+        "Qualification, manufacturing and installation execution",
+        "Customer acceptance or genuine service progress",
+        "Recognized external annual revenue"
+      ],
+      "parameter_ids": [
+        "cmp_revenue_base_2026",
+        "cmp_revenue_base_2027",
+        "cmp_revenue_base_2028"
+      ],
+      "segment_attribution": [
+        {
+          "segment_name": "CMP",
+          "weight": 1.0
+        }
+      ],
+      "horizon": {
+        "start_year": 2026,
+        "end_year": 2028
+      },
+      "persistence": "uncertain",
+      "persistence_rationale": "Horizon spans current commercial ramps and equipment/client investment cycle; strength is an analyst judgment, not known outcome.",
+      "evidence_nodes": [
+        {
+          "evidence_id": "e_cmp_ramp",
+          "evidence_type": "company_execution",
+          "inference_distance": "one_step",
+          "conclusion": "Control followed by customer qualification/acceptance gives incremental consolidated external revenue.",
+          "claim_ids": [
+            "claim_driver_cmp_ramp"
+          ]
+        },
+        {
+          "evidence_id": "contra_cmp_ramp",
+          "evidence_type": "explicit_company_risk",
+          "inference_distance": "contrary",
+          "conclusion": "Delays, customer capex, competitive technology and acquired-business underperformance can defeat the path.",
+          "claim_ids": [
+            "claim_contrary_cmp_ramp"
+          ]
+        }
+      ],
+      "leading_indicators": [
+        "Accepted chamber sales and recurring customer orders",
+        "Half-year external revenue excluding acquisitions",
+        "Product validations reaching repeat volume orders"
+      ],
+      "falsifiers": [
+        "Acceptance/recognized revenue persistently below low-case driver values",
+        "New product validations fail to reach volume orders",
+        "CMP external annual revenue materially misses independent seller commitment"
+      ],
+      "counterevidence_status": "found",
+      "counterevidence_rationale": "Opened H1 p33 and annual p61–65 risks; no assumption that a positive product announcement proves future acceptance."
+    }
+  ]
+}

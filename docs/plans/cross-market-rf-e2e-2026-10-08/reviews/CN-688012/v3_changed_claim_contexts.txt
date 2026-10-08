@@ -1,0 +1,410 @@
+
+==== claim_cmp_base
+urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe / PDF page 176 ====
+九、合并范围的变更
+1、非同一控制下企业合并
+√适用□不适用
+(1)本期发生的非同一控制下企业合并交易
+√适用□不适用
+单位：元币种：人民币
+被
+购
+买
+方
+名
+称
+股
+权
+取
+得
+时
+点
+股权取得成
+本
+股权取
+得比例
+（%）
+股
+权
+取
+得
+方
+式
+购
+买
+日
+购买
+日的
+确定
+依据
+购买日至
+期末被购
+买方的收
+入
+购买日至期
+末被购买方
+的净利润
+购买日至期
+末被购买方
+的现金流量
+中微
+众硅
+（杭
+州）
+电子
+科技
+有限
+公司
+2026
+年5
+月31
+日
+1,576,049,142.32
+64.69%
+发行
+股份
+及支
+付现
+金购
+买资
+产
+20
+26
+年
+5
+月
+31
+日
+购买方
+实际取
+得对被
+购买方
+控制权
+的日期
+1,291,902.08
+-15,440,347.39
+-34,333,141.30
+其他说明：
+无
+(2)合并成本及商誉
+√适用□不适用
+单位：元币种：人民币
+合并成本
+中微众硅（杭州）电子科技有限公司
+--现金
+52,585,310.41
+--非现金资产的公允价值
+-
+--发行或承担的债务的公允价值
+-
+--发行的权益性证券的公允价值
+1,523,463
+
+==== claim_equipment_units_low_2026,claim_equipment_units_low_2027,claim_equipment_units_low_2028,claim_equipment_units_base_2026,claim_equipment_units_base_2027,claim_equipment_units_base_2028,claim_equipment_units_high_2026,claim_equipment_units_high_2027,claim_equipment_units_high_2028
+urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe / PDF page 16 ====
+公司的ICP 刻蚀设备包括Primo Twin-Star、Primo Nanova、Primo Menova 等产
+品在涵盖逻辑、DRAM、3D NAND、功率和电源管理、以及微电机系统等芯片和器件的50 多个
+客户的生产线上量产，并继续验证更多ICP 刻蚀工艺。
+报告期内，公司低温高深宽比ICP 刻蚀设备Primo Nanova LUX-Cryo 在客户的下一代产品的
+产线上稳定量产。与此同时，为应对先进节点高深宽比挑战，公司研发的下一代高精度ICP 刻蚀
+设备的Primo Angnova 在实验室开展多个客户的工艺验证，全面满足客户的刻蚀需求，Beta 机器
+在客户端认证顺利，并取得多个重复订单。Primo Twin-Star 装机量快速增长，在海内外客户的逻
+辑芯片、功率器件、微型发光二极管Micro-LED、AR 和VR 智能眼镜用的超透镜（Metalens）
+等特色器件的产线上实现量产。公司的Primo Menova 金属刻蚀设备，在客户端认证顺利，已投
+入量产。
+公司开发的高选择比气相刻蚀设备Primo Domingo，在实验室的Alpha 腔上开展多个工艺验
+证，全面满足
+
+==== claim_aftermarket_revenue_low_2026,claim_aftermarket_revenue_low_2027,claim_aftermarket_revenue_low_2028,claim_aftermarket_revenue_base_2026,claim_aftermarket_revenue_base_2027,claim_aftermarket_revenue_base_2028,claim_aftermarket_revenue_high_2026,claim_aftermarket_revenue_high_2027,claim_aftermarket_revenue_high_2028
+urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5 / FY2025 annual PDF p53, sales/service network; direction only, residual composition unknown ====
+半导体设备制造商的售后服务尤为关键，关系到设备能否在客户生产线上正常、稳定地运行。
+随着半导体制造环节向亚洲转移，相较于国际竞争对手，公司在地域上更接近主流客户，能提供
+快捷的技术支持和客户维护。
+公司良好的产品性能表现以及专业售后服务能力已在业内树立了良好的品牌形象。
+
+==== claim_cmp_revenue_low_2026,claim_cmp_revenue_low_2027,claim_cmp_revenue_low_2028,claim_cmp_revenue_base_2026,claim_cmp_revenue_base_2027,claim_cmp_revenue_base_2028,claim_cmp_revenue_high_2026,claim_cmp_revenue_high_2027,claim_cmp_revenue_high_2028
+urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe / PDF page 177 ====
+业绩承诺的完成情况：
+√适用□不适用
+根据业绩承诺方与本集团已签署的《业绩承诺和补偿协议》，本次交易中业绩承诺方承诺：中微
+众硅在2026 年度、2027 年度和2028 年度实现的合并报表范围营业收入分别不低于28,000.00 万
+元、43,000.00 万元和58,000.00 万元。截至本半年报披露日，2026 年度业绩承诺尚在履行过程
+中，本期未到业绩承诺考核时点。
+大额商誉形成的主要原因：
+√适用□不适用
+中微众硅为国内少数掌握12 英寸高端CMP 设备核心技术并实现量产的企业，其CMP 工艺与本
+集团刻蚀、薄膜沉积等干法设备高度互补，交易完成后本集团形成“干法+湿法”全流程设备能
+力，双方将在研发、供应链、客户资源等维度形成深度协同，助力集团优化产品组合，提升整体
+解决方案的市场竞争力。
+其他说明：
+无
+(3)被购买方于购买日可辨认资产、负债
+√适用□不适用
+单位：元币种：人民币
+中微众硅（杭州）电子科技有限公司
+购买日公允价值
+购买日账面价值
+资产：
+货币资金
+69,341,049.74
+69,341,049.74
+交易性金融资产
+4,961,503.97
+4,961,
+
+==== claim_recognition_NonEquipmentResidual
+urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5 / PDF page174 revenue policy, complete equipment/spares/services context ====
+本集团在客户取得相关商品或服务的控制权时，按预期有权收取的对价金额确认收入。
+(a)
+销售商品
+本集团生产产品并销售予各地客户。
+本集团将专用设备产品运至约定交货地点，进行安装、调试及验收。根据不同专用设备产品的类
+型及合同安排，经客户确认后，客户具有自行使用产品的权利并承担该产品可能发生价格波动或
+毁损的风险，本集团于控制权转移至客户时相应确认收入。
+本集团将备品备件产品按照协议合同规定运至约定交货地点，经客户确认后，客户具有自行使用
+产品的权利并承担该产品可能发生价格波动或毁损的风险，本集团相应确认收入。
+本集团给予客户的信用期根据客户的信用风险特征确定，与行业惯例一致，不存在重大融资成分。
+本集团已收或应收客户对价而应向客户转让商品的义务列示为合同负债。
+(b)
+提供劳务
+本集团对外提供劳务，通常根据已完成劳务的进度在一段时间内确认收入，其中，已完成劳
+务的进度按照已发生的成本占预计总成本的比例确定。于资产负债表日，本集团对已完成劳务的
+进度进行重新估计，以使其能够反映履约情况的变化。
+本集团按照已完成劳务的进度确认收入时，对于本集团已经取得无条件收款权的部分，确认
+为应收账款，
+
+==== claim_recognition_NonEquipmentResidual_equipment
+urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5 / PDF page174, equipment policy ====
+本集团将专用设备产品运至约定交货地点，进行安装、调试及验收。根据不同专用设备产品的类
+型及合同安排，经客户确认后，客户具有自行使用产品的权利并承担该产品可能发生价格波动或
+毁损的风险，本集团于控制权转移至客户时相应确认收入。
+
+==== claim_recognition_NonEquipmentResidual_spares
+urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5 / PDF page174, spares policy ====
+本集团将备品备件产品按照协议合同规定运至约定交货地点，经客户确认后，客户具有自行使用
+产品的权利并承担该产品可能发生价格波动或毁损的风险，本集团相应确认收入。
+
+==== claim_recognition_NonEquipmentResidual_services
+urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5 / PDF page174, services policy ====
+本集团对外提供劳务，通常根据已完成劳务的进度在一段时间内确认收入，其中，已完成劳
+务的进度按照已发生的成本占预计总成本的比例确定。于资产负债表日，本集团对已完成劳务的
+进度进行重新估计，以使其能够反映履约情况的变化。
+
+==== claim_CMP_annual_2026,claim_CMP_annual_2027,claim_CMP_annual_2028
+urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe / PDF page177, seller commitment; table p53 states annual amounts not cumulative objective ====
+根据业绩承诺方与本集团已签署的《业绩承诺和补偿协议》，本次交易中业绩承诺方承诺：中微
+众硅在2026 年度、2027 年度和2028 年度实现的合并报表范围营业收入分别不低于28,000.00 万
+元、43,000.00 万元和58,000.00 万元。截至本半年报披露日，2026 年度业绩承诺尚在履行过程
+中，本期未到业绩承诺考核时点。
+
+==== claim_benchmark_CMP_annual_2027,claim_benchmark_CMP_annual_2028
+urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe / PDF pages176–177, purchase and commitment scope ====
+业绩承诺的完成情况：
+√适用□不适用
+根据业绩承诺方与本集团已签署的《业绩承诺和补偿协议》，本次交易中业绩承诺方承诺：中微
+众硅在2026 年度、2027 年度和2028 年度实现的合并报表范围营业收入分别不低于28,000.00 万
+元、43,000.00 万元和58,000.00 万元。截至本半年报披露日，2026 年度业绩承诺尚在履行过程
+中，本期未到业绩承诺考核时点。
+大额商誉形成的主要原因：
+√适用□不适用
+中微众硅为国内少数掌握12 英寸高端CMP 设备核心技术并实现量产的企业，其CMP 工艺与本
+集团刻蚀、薄膜沉积等干法设备高度互补，交易完成后本集团形成“干法+湿法”全流程设备能
+力，双方将在研发、供应链、客户资源等维度形成深度协同，助力集团优化产品组合，提升整体
+解决方案的市场竞争力。
+其他说明：
+无
+(3)被购买方于购买日可辨认资产、负债
+√适用□不适用
+单位：元币种：人民币
+中微众硅（杭州）电子科技有限公司
+购买日公允价值
+购买日账面价值
+资产：
+货币资金
+69,341,049.74
+69,341,049.74
+交易性金融资产
+4,961,503.97
+4,961,
+
+==== claim_driver_core_etch_acceptance
+urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe / PDF page16 ====
+公司的ICP 刻蚀设备包括Primo Twin-Star、Primo Nanova、Primo Menova 等产
+品在涵盖逻辑、DRAM、3D NAND、功率和电源管理、以及微电机系统等芯片和器件的50 多个
+客户的生产线上量产，并继续验证更多ICP 刻蚀工艺。
+报告期内，公司低温高深宽比ICP 刻蚀设备Primo Nanova LUX-Cryo 在客户的下一代产品的
+产线上稳定量产。与此同时，为应对先进节点高深宽比挑战，公司研发的下一代高精度ICP 刻蚀
+设备的Primo Angnova 在实验室开展多个客户的工艺验证，全面满足客户的刻蚀需求，Beta 机器
+在客户端认证顺利，并取得多个重复订单。Primo Twin-Star 装机量快速增长，在海内外客户的逻
+辑芯片、功率器件、微型发光二极管Micro-LED、AR 和VR 智能眼镜用的超透镜（Metalens）
+等特色器件的产线上实现量产。公司的Primo Menova 金属刻蚀设备，在客户端认证顺利，已投
+入量产。
+公司开发的高选择比气相刻蚀设备Primo Domingo，在实验室的Alpha 腔上开展多个工艺验
+证，全面满足
+
+==== claim_contrary_core_etch_acceptance
+urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe / 2026H1 PDF p32, complete relevant risk block ====
+近年来，受复杂的国际形势影响，半导体器件供应链持续紧张，公司部分关键零部件和进口
+的材料采购周期较长。公司对关键零部件供应商采取多厂商策略支持零部件及时供应。若未来上
+游供应链产能紧张形势延续，将对公司设备交期产生不利影响，进而影响公司销售。
+
+==== claim_driver_films_packaging
+urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe / PDF page16 ====
+（3）薄膜沉积设备研发
+公司开发的多款薄膜沉积产品已推向市场。中微公司钨系列薄膜沉积产品：CVD（化学气
+相沉积）钨设备，HAR（高深宽比）钨设备和ALD（原子层沉积）钨设备，可覆盖存储器件所
+有钨应用；该系列设备均已通过关键存储客户端现场验证，满足先进存储应用中所有金属互连应
+用（包含高深宽比金属互连应用）及三维存储器件字线应用各项性能指标，并获得客户重复量产
+订单。同时，公司钨系列产品也可满足先进逻辑器件中多道金属钨互连应用需求，已通过关键逻
+辑客户端现场验证，满足先进逻辑应用中各项性能指标，已获得客户重复量产订单。此外，公司
+钨系列产品也通过了特殊器件客户金属钨应用现场验证。基于公司钨系列产品独特的性能优势，
+已顺利完成先进逻辑、先进存储和特殊器件的现场验证，未来将进一步扩大市场占有率。
+同期，公司开发出应用于先进逻辑器件的金属栅系列产品Preforma Uniflash ® ALD 氮化钛，
+ALD 钛铝，ALD 氮化钽产品，已完成多个先进逻辑客户设备验证，可满足先进逻辑客户性能需
+
+==== claim_contrary_films_packaging,claim_contrary_afterm_support
+urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe / 2026H1 PDF p33, complete relevant risk block ====
+4、研发投入不足导致技术被赶超或替代的风险
+公司所处的半导体设备行业属于技术密集型行业，半导体关键设备的研发涉及等离子体物
+理、射频及微波学、结构化学、微观分子动力学、光谱及能谱学、真空机械传输等多种科学技术
+及工程领域学科知识的综合应用，具有产品技术升级快、研发投入大、研发周期长、研发风险高
+等特点。
+国外领先的半导体设备公司均在研发方面投入巨额资金。公司研发投入总额与国外领先的半
+导体公司有相当大的差距。如果公司未来研发资金投入不足，不能满足技术升级需要，可能导致
+公司技术被赶超或替代的风险，对公司未来的经营业绩产生不利影响。
+
+==== claim_driver_afterm_support
+urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5 / FY2025 annual PDF p53, actual after-sales context; no quantitative recurring revenue ====
+半导体设备制造商的售后服务尤为关键，关系到设备能否在客户生产线上正常、稳定地运行。
+随着半导体制造环节向亚洲转移，相较于国际竞争对手，公司在地域上更接近主流客户，能提供
+快捷的技术支持和客户维护。
+公司良好的产品性能表现以及专业售后服务能力已在业内树立了良好的品牌形象。
+
+==== claim_driver_cmp_ramp
+urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe / PDF page177 ====
+大额商誉形成的主要原因：
+√适用□不适用
+中微众硅为国内少数掌握12 英寸高端CMP 设备核心技术并实现量产的企业，其CMP 工艺与本
+集团刻蚀、薄膜沉积等干法设备高度互补，交易完成后本集团形成“干法+湿法”全流程设备能
+力，双方将在研发、供应链、客户资源等维度形成深度协同，助力集团优化产品组合，提升整体
+解决方案的市场竞争力。
+其他说明：
+无
+(3)被购买方于购买日可辨认资产、负债
+√适用□不适用
+单位：元币种：人民币
+中微众硅（杭州）电子科技有限公司
+购买日公允价值
+购买日账面价值
+资产：
+货币资金
+69,341,049.74
+69,341,049.74
+交易性金融资产
+4,961,503.97
+4,961,503.97
+应收票据
+289,960.00
+289,960.00
+应收款项
+136,763,470.28
+136,763,470.28
+预付款项
+7,994,360.41
+7,9
+
+==== claim_contrary_cmp_ramp
+urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe / 2026H1 PDF p33, complete relevant risk block ====
+（2）并购风险
+公司强调稳健发展，坚持实施内生性增长与外延式并购相结合的发展策略。虽然公司未来并
+购时将继续秉承审慎原则，相应制定整合计划，防范并购风险，但若出现宏观经济波动、市场竞
+争加剧、地缘政治环境变化、被并购公司业绩低于预期或协同效应未显现等情形，将对公司的经
+营业绩产生不利影响。
+
+==== claim_residual_platform_context
+urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5 / FY2025 annual PDF p48, digital platform business; classification within residual unknown ====
+子公司中微汇链基于多年来在中微公司沉淀的业务管理经验以及在高科技制造领域多家企业
+的数字化服务实践经验，研发和推广数字化运营体系及产品，专注服务以集成电路为代表的高科
+技制造行业与行业内企业。
+汇链推出的“We”系列数字化产品为提升企业从研发、制造，到质量、售后的管理能力，助力
+企业融入产业生态，为高科技制造产业打造企业间协同互信、资源共享的生态型平台We-Linkin。
+目前，中微汇链产品已涵盖超80+个场景应用、超900+项微服务功能。
+基于半导体产业数字化领域的战略布局，专注为中国半导体设备、核心零部件及特种材料领
+域的科创型、高成长性企业，提供端到端的数字化运营整体解决方案。以“研发运营一体化、运营
+管理指标化”为核心理念的产业数字合伙人，致力于帮助客户将技术创新高效、可靠地转化为市场
+成功与可持续增长。汇链科技已成功服务超过50 家半导体领域的科创企业，产业链数字化解决方
+案覆盖率85%。
+
+==== claim_residual_h1_service_context
+urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe / 2026H1 PDF p23, professional after-sales support; no revenue magnitude ====
+半导体设备制造商的售后服务尤为关键，关系到设备能否在客户生产线上正常、稳定地运行。
+随着半导体制造环节向亚洲转移，相较于国际竞争对手，公司在地域上更接近主流客户，能提供
+快捷的技术支持和客户维护。
+公司良好的产品性能表现以及专业售后服务能力已在业内树立了良好的品牌形象。
+
+==== claim_residual_h1_other_business
+urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe / 2026H1 PDF p19, purification and digital platform businesses; their assignment to residual unknown ====
+子公司中微惠创利用分子筛的吸附原理的化学反应器，开发制造了工业用大型净化设备。设
+备可根据客户的要求灵活配置不同处理规模的系统，提供给客户可靠、稳定、安全和节能的净化
+解决方案。中微惠创与德国DAS 环境专家有限公司签订战略合作协议后，双方秉承协议内容按
+计划实施，在半导体行业尾气处理设备领域展开紧密的合作，目前已经生产制造的净化设备顺利
+地应用在各个客户端，共同推动环保科技行业的发展。此外，中微惠创还在积极探索新能源领域
+的相关研究。
+
+==== claim_residual_boundary_annual
+urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5 / FY2025 annual PDF p65, whole semiconductor equipment related revenue and rounded dedicated-equipment subset ====
+报告期内，公司半导体设备收入实现增长36.62%，其中专用设备实现收入105.27 亿元，同比增
+长34.76%，公司整体盈利水平持续提高。
+
+==== claim_concentration_equipment_units_low_2026,claim_concentration_equipment_units_low_2027,claim_concentration_equipment_units_low_2028,claim_concentration_equipment_units_base_2026,claim_concentration_equipment_units_base_2027,claim_concentration_equipment_units_base_2028,claim_concentration_equipment_units_high_2026,claim_concentration_equipment_units_high_2027,claim_concentration_equipment_units_high_2028
+urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5 / FY2025 annual PDF p219, customer A concentration, FY2025 39.99% / FY2024 22.15% ====
+于2025 年度，本集团自客户A 取得的营业收入占本集团营业收入的比重超过10%，金额为
+4,952,154,981.39 元(2024 年度：2,008,083,977.69 元)，占本集团营业收入的39.99% (2024 年度：
+22.15%)。
+
+==== claim_outside_wfe_2027_2028
+semi_wfe_20260714 / Actual opened official SEMI 2026-07-14 original line168, WFE forecast2027/2028 ====
+WFE segment sales are projected to expand 21.8% in 2027 and 14.1% in 2028 to reach the $200 billion mark, as manufacturers accelerate capacity expansion and technology migration for AI-related workloads.
+
+==== claim_china_moderation_core_etch_acceptance,claim_china_moderation_films_packaging
+semi_wfe_20260714 / Actual opened official SEMI2026-07-14 original line181, China 2026 growth moderation ====
+China, Taiwan and Korea are expected to remain the top three destinations for equipment spending through 2028. China is projected to maintain the leading position over the forecast period, though growth is expected to moderate in 2026 following elevated investment levels in recent years. In Taiwan, spending is supported by leading-edge capacity builds for AI and high-performance computing, while Korea’s equipment spending is driven by advanced memory technologies, including HBM.
+
+==== claim_driver_tsv_packaging
+urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe / 2026H1 PDF p16, TSV equipment in wafer-level/2.5D packaging and 3D via qualification ====
+报告期内，公司ICP 刻蚀设备类中的8 英寸Primo TSV 2G 200E 和12 英寸深硅刻蚀设备
+Primo TSV 2G 在晶圆级先进封装、2.5D 封装和微机电系统芯片生产线等成熟市场继续获得重复
+订单的同时，在12 英寸的3D 芯片的硅通孔刻蚀工艺上得到成功验证，并在欧洲客户12 英寸微
+机电系统芯片产线上获得认证的机会，这些新工艺的验证为公司Primo TSV 2G 刻蚀设备拓展了
+新的市场。
+
+==== claim_hq_delay_core_etch_acceptance,claim_hq_delay_films_packaging
+amec_cninfo_1225482911 / Company disclosure1225482911 PDF p4, full-use date delayed to December2027 ====
+中微临港总部和研发中心项目原计划实施周期5 年，项目计划分以下阶段实
+施完成，包括:前期准备、基地建设、设备购置与安装、员工招聘以及试运营。自
+募集资金到位以来，公司一直积极推进募投项目的实施，并根据实际情况，审慎
+规划资金的使用。截至本公告披露日，“中微临港总部和研发中心项目”主体建
+筑工程已顺利完工，部分功能楼层已完成内部装潢并可投入前期使用。为匹配后
+续业务扩容节奏以及研发人员分批入驻的统筹安排，剩余楼层将采取分批次装修、
+分阶段投用的精细化推进模式。为保障项目建成后整体运营效能与研发承载能力
+达到最优标准，经公司审慎评估与统筹规划，拟将该募投项目整体达到全面预定
+可使用状态的时间顺延至2027 年12 月。
+
+==== claim_capacity_equipment_units_low_2026,claim_capacity_equipment_units_low_2027,claim_capacity_equipment_units_low_2028,claim_capacity_equipment_units_base_2026,claim_capacity_equipment_units_base_2027,claim_capacity_equipment_units_base_2028,claim_capacity_equipment_units_high_2026,claim_capacity_equipment_units_high_2027,claim_capacity_equipment_units_high_2028
+amec_cninfo_1225482911 / Company1225482911 PDF p4, delayed full-use timing vs assumed accepted units ====
+中微临港总部和研发中心项目原计划实施周期5 年，项目计划分以下阶段实
+施完成，包括:前期准备、基地建设、设备购置与安装、员工招聘以及试运营。自
+募集资金到位以来，公司一直积极推进募投项目的实施，并根据实际情况，审慎
+规划资金的使用。截至本公告披露日，“中微临港总部和研发中心项目”主体建
+筑工程已顺利完工，部分功能楼层已完成内部装潢并可投入前期使用。为匹配后
+续业务扩容节奏以及研发人员分批入驻的统筹安排，剩余楼层将采取分批次装修、
+分阶段投用的精细化推进模式。为保障项目建成后整体运营效能与研发承载能力
+达到最优标准，经公司审慎评估与统筹规划，拟将该募投项目整体达到全面预定
+可使用状态的时间顺延至2027 年12 月。
+
+==== claim_LingangPhaseII_local_sales_at_maturity
+amec_cninfo_1225482894 / Company1225482894 PDF p4, investment and at-maturity local sales, period/perimeter ambiguous ====
+项目总投资人民币350,000 万元（以下币种同），其中固定资产总投资170,000
+万元，投资强度2,428 万元/亩。项目达产后可实现属地贡献销售收入300,000 万
+元。7 年内，获得专利数300 个，预计人员入驻1500-2000 人，其中研发人员600-
+800 人。

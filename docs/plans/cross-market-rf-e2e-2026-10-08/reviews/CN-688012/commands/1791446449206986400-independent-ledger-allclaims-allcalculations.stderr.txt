@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\reviews\CN-688012\independent_offline.py", line 25, in <module>
+    page=int(re.search(r'page\s*(\d+)',loc,re.I).group(1));actual=pages[src][page-1]['text']
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'group'

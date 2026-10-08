@@ -1,0 +1,1 @@
+{"manifest": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\manifest.json", "status": "partial", "forecast_status": "formal_validated", "protected_unchanged": true, "runtime_all_match": true, "sources": 6, "artifacts": 25, "steps": 15}

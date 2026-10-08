@@ -1,0 +1,44 @@
+[
+  {
+    "timestamp_utc": "2026-10-08T07:05:24.241499+00:00",
+    "command": [
+      "C:\\Miniconda\\python.exe",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "source-facts",
+      "--request",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2024.request.json"
+    ],
+    "returncode": 0,
+    "request_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2024.request.json",
+    "raw_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\financial_reports\\annual\\腾讯：2024年年度报告.pdf",
+    "raw_before_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+    "raw_after_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+    "raw_unchanged": true,
+    "response": "{\"assertion_id\": \"sa-d5fa952b082b48b2a5088f7c40e5f2e6\", \"document_id\": \"urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0\", \"source_id\": \"urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0\", \"status\": \"recorded\"}\n",
+    "stderr": ""
+  },
+  {
+    "timestamp_utc": "2026-10-08T07:05:24.936004+00:00",
+    "command": [
+      "C:\\Miniconda\\python.exe",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "source-facts",
+      "--request",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2025.request.json"
+    ],
+    "returncode": 0,
+    "request_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2025.request.json",
+    "raw_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\financial_reports\\annual\\腾讯：2025年年度报告.pdf",
+    "raw_before_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+    "raw_after_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+    "raw_unchanged": true,
+    "response": "{\"assertion_id\": \"sa-f5cc0cf223e6460596a950f65d89f054\", \"document_id\": \"urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7\", \"source_id\": \"urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7\", \"status\": \"recorded\"}\n",
+    "stderr": ""
+  }
+]

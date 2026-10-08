@@ -1,0 +1,869 @@
+{
+  "schema_version": "1.0",
+  "timestamp_utc": "2026-10-08T08:37:57.173571+00:00",
+  "status": "PASS deterministic execution checks; independent reviewer pending",
+  "strong_input_required_validation": true,
+  "render_byte_identical": true,
+  "snapshot_validated": true,
+  "snapshot_input_exact": true,
+  "arithmetic": [
+    {
+      "scenario": "low",
+      "year": 2026,
+      "independent_sum": 13522.402094920999,
+      "engine_total": 13522.402094920999,
+      "numeric_assumptions_identical_v2": true,
+      "status": "PASS"
+    },
+    {
+      "scenario": "low",
+      "year": 2027,
+      "independent_sum": 14223.2840083265,
+      "engine_total": 14223.2840083265,
+      "numeric_assumptions_identical_v2": true,
+      "status": "PASS"
+    },
+    {
+      "scenario": "low",
+      "year": 2028,
+      "independent_sum": 14489.165921732001,
+      "engine_total": 14489.165921732001,
+      "numeric_assumptions_identical_v2": true,
+      "status": "PASS"
+    },
+    {
+      "scenario": "base",
+      "year": 2026,
+      "independent_sum": 16195.847835137502,
+      "engine_total": 16195.847835137502,
+      "numeric_assumptions_identical_v2": true,
+      "status": "PASS"
+    },
+    {
+      "scenario": "base",
+      "year": 2027,
+      "independent_sum": 20590.957402165,
+      "engine_total": 20590.957402165,
+      "numeric_assumptions_identical_v2": true,
+      "status": "PASS"
+    },
+    {
+      "scenario": "base",
+      "year": 2028,
+      "independent_sum": 24800.866969192502,
+      "engine_total": 24800.866969192502,
+      "numeric_assumptions_identical_v2": true,
+      "status": "PASS"
+    },
+    {
+      "scenario": "high",
+      "year": 2026,
+      "independent_sum": 18747.8116619485,
+      "engine_total": 18747.8116619485,
+      "numeric_assumptions_identical_v2": true,
+      "status": "PASS"
+    },
+    {
+      "scenario": "high",
+      "year": 2027,
+      "independent_sum": 26020.866969192502,
+      "engine_total": 26020.866969192502,
+      "numeric_assumptions_identical_v2": true,
+      "status": "PASS"
+    },
+    {
+      "scenario": "high",
+      "year": 2028,
+      "independent_sum": 33436.804189842005,
+      "engine_total": 33436.804189842005,
+      "numeric_assumptions_identical_v2": true,
+      "status": "PASS"
+    }
+  ],
+  "all_claim_original_match": [
+    {
+      "claim_id": "claim_history_2023",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "PDF page 25, principal financial data, CNY yuan converted /1,000,000",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "f988462d26ae7b9da86e632f40ee82da7623aaafce4efdcaed799261208e026f"
+    },
+    {
+      "claim_id": "claim_history_2024",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "PDF page 25, principal financial data, CNY yuan converted /1,000,000",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "f988462d26ae7b9da86e632f40ee82da7623aaafce4efdcaed799261208e026f"
+    },
+    {
+      "claim_id": "claim_history_2025",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "PDF page 25, principal financial data, CNY yuan converted /1,000,000",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "f988462d26ae7b9da86e632f40ee82da7623aaafce4efdcaed799261208e026f"
+    },
+    {
+      "claim_id": "claim_reported_total",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "PDF page 218",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "e1e09113f68dca07e5c95dc3d4c912425b59c2810e121dd18a1e7d976042a512"
+    },
+    {
+      "claim_id": "claim_equipment_base",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "PDF page 65",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "1485a1a5d35a6ad0282931553711f7093def155fbccab9d7f761146aa49257f9"
+    },
+    {
+      "claim_id": "claim_cmp_base",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF page 176",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "c5790bc6fde7b43fd5da0c5555e7a99aa082895af29a8ba59f8132d7ba0c5919"
+    },
+    {
+      "claim_id": "claim_equipment_units_2025",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "PDF page 65",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "b6e5729b1cf7ba3b1c7427dc1b1a31658caa2ab4ca7a2217d9c05470b8e9884a"
+    },
+    {
+      "claim_id": "claim_equipment_units_low_2026",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF page 16",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "9652622988550b539bfe5b1f1760bc1ff272425fa4ef90f0cf1ce49021a39f6d"
+    },
+    {
+      "claim_id": "claim_equipment_unit_revenue_low_2026",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "PDF page 65",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "0e56b7565b935c8feee8ccfcc595692a0b346fa923cb092a3ab707ea055dd866"
+    },
+    {
+      "claim_id": "claim_aftermarket_revenue_low_2026",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p53, sales/service network; direction only, residual composition unknown",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "9dbf8c4a2cd63092b4b0ecd0e9bb39a6b79a8788a61a8730aa92879bcb0e6a8d"
+    },
+    {
+      "claim_id": "claim_cmp_revenue_low_2026",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF page 177",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "b647767bcbfdce2b6d7923d07781bd88eca9b9e2b5685c8ac37d57e18438a6de"
+    },
+    {
+      "claim_id": "claim_equipment_units_low_2027",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF page 16",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "9652622988550b539bfe5b1f1760bc1ff272425fa4ef90f0cf1ce49021a39f6d"
+    },
+    {
+      "claim_id": "claim_equipment_unit_revenue_low_2027",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "PDF page 65",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "0e56b7565b935c8feee8ccfcc595692a0b346fa923cb092a3ab707ea055dd866"
+    },
+    {
+      "claim_id": "claim_aftermarket_revenue_low_2027",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p53, sales/service network; direction only, residual composition unknown",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "9dbf8c4a2cd63092b4b0ecd0e9bb39a6b79a8788a61a8730aa92879bcb0e6a8d"
+    },
+    {
+      "claim_id": "claim_cmp_revenue_low_2027",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF page 177",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "b647767bcbfdce2b6d7923d07781bd88eca9b9e2b5685c8ac37d57e18438a6de"
+    },
+    {
+      "claim_id": "claim_equipment_units_low_2028",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF page 16",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "9652622988550b539bfe5b1f1760bc1ff272425fa4ef90f0cf1ce49021a39f6d"
+    },
+    {
+      "claim_id": "claim_equipment_unit_revenue_low_2028",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "PDF page 65",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "0e56b7565b935c8feee8ccfcc595692a0b346fa923cb092a3ab707ea055dd866"
+    },
+    {
+      "claim_id": "claim_aftermarket_revenue_low_2028",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p53, sales/service network; direction only, residual composition unknown",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "9dbf8c4a2cd63092b4b0ecd0e9bb39a6b79a8788a61a8730aa92879bcb0e6a8d"
+    },
+    {
+      "claim_id": "claim_cmp_revenue_low_2028",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF page 177",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "b647767bcbfdce2b6d7923d07781bd88eca9b9e2b5685c8ac37d57e18438a6de"
+    },
+    {
+      "claim_id": "claim_equipment_units_base_2026",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF page 16",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "9652622988550b539bfe5b1f1760bc1ff272425fa4ef90f0cf1ce49021a39f6d"
+    },
+    {
+      "claim_id": "claim_equipment_unit_revenue_base_2026",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "PDF page 65",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "0e56b7565b935c8feee8ccfcc595692a0b346fa923cb092a3ab707ea055dd866"
+    },
+    {
+      "claim_id": "claim_aftermarket_revenue_base_2026",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p53, sales/service network; direction only, residual composition unknown",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "9dbf8c4a2cd63092b4b0ecd0e9bb39a6b79a8788a61a8730aa92879bcb0e6a8d"
+    },
+    {
+      "claim_id": "claim_cmp_revenue_base_2026",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF page 177",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "b647767bcbfdce2b6d7923d07781bd88eca9b9e2b5685c8ac37d57e18438a6de"
+    },
+    {
+      "claim_id": "claim_equipment_units_base_2027",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF page 16",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "9652622988550b539bfe5b1f1760bc1ff272425fa4ef90f0cf1ce49021a39f6d"
+    },
+    {
+      "claim_id": "claim_equipment_unit_revenue_base_2027",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "PDF page 65",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "0e56b7565b935c8feee8ccfcc595692a0b346fa923cb092a3ab707ea055dd866"
+    },
+    {
+      "claim_id": "claim_aftermarket_revenue_base_2027",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p53, sales/service network; direction only, residual composition unknown",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "9dbf8c4a2cd63092b4b0ecd0e9bb39a6b79a8788a61a8730aa92879bcb0e6a8d"
+    },
+    {
+      "claim_id": "claim_cmp_revenue_base_2027",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF page 177",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "b647767bcbfdce2b6d7923d07781bd88eca9b9e2b5685c8ac37d57e18438a6de"
+    },
+    {
+      "claim_id": "claim_equipment_units_base_2028",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF page 16",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "9652622988550b539bfe5b1f1760bc1ff272425fa4ef90f0cf1ce49021a39f6d"
+    },
+    {
+      "claim_id": "claim_equipment_unit_revenue_base_2028",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "PDF page 65",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "0e56b7565b935c8feee8ccfcc595692a0b346fa923cb092a3ab707ea055dd866"
+    },
+    {
+      "claim_id": "claim_aftermarket_revenue_base_2028",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p53, sales/service network; direction only, residual composition unknown",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "9dbf8c4a2cd63092b4b0ecd0e9bb39a6b79a8788a61a8730aa92879bcb0e6a8d"
+    },
+    {
+      "claim_id": "claim_cmp_revenue_base_2028",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF page 177",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "b647767bcbfdce2b6d7923d07781bd88eca9b9e2b5685c8ac37d57e18438a6de"
+    },
+    {
+      "claim_id": "claim_equipment_units_high_2026",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF page 16",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "9652622988550b539bfe5b1f1760bc1ff272425fa4ef90f0cf1ce49021a39f6d"
+    },
+    {
+      "claim_id": "claim_equipment_unit_revenue_high_2026",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "PDF page 65",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "0e56b7565b935c8feee8ccfcc595692a0b346fa923cb092a3ab707ea055dd866"
+    },
+    {
+      "claim_id": "claim_aftermarket_revenue_high_2026",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p53, sales/service network; direction only, residual composition unknown",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "9dbf8c4a2cd63092b4b0ecd0e9bb39a6b79a8788a61a8730aa92879bcb0e6a8d"
+    },
+    {
+      "claim_id": "claim_cmp_revenue_high_2026",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF page 177",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "b647767bcbfdce2b6d7923d07781bd88eca9b9e2b5685c8ac37d57e18438a6de"
+    },
+    {
+      "claim_id": "claim_equipment_units_high_2027",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF page 16",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "9652622988550b539bfe5b1f1760bc1ff272425fa4ef90f0cf1ce49021a39f6d"
+    },
+    {
+      "claim_id": "claim_equipment_unit_revenue_high_2027",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "PDF page 65",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "0e56b7565b935c8feee8ccfcc595692a0b346fa923cb092a3ab707ea055dd866"
+    },
+    {
+      "claim_id": "claim_aftermarket_revenue_high_2027",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p53, sales/service network; direction only, residual composition unknown",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "9dbf8c4a2cd63092b4b0ecd0e9bb39a6b79a8788a61a8730aa92879bcb0e6a8d"
+    },
+    {
+      "claim_id": "claim_cmp_revenue_high_2027",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF page 177",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "b647767bcbfdce2b6d7923d07781bd88eca9b9e2b5685c8ac37d57e18438a6de"
+    },
+    {
+      "claim_id": "claim_equipment_units_high_2028",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF page 16",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "9652622988550b539bfe5b1f1760bc1ff272425fa4ef90f0cf1ce49021a39f6d"
+    },
+    {
+      "claim_id": "claim_equipment_unit_revenue_high_2028",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "PDF page 65",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "0e56b7565b935c8feee8ccfcc595692a0b346fa923cb092a3ab707ea055dd866"
+    },
+    {
+      "claim_id": "claim_aftermarket_revenue_high_2028",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p53, sales/service network; direction only, residual composition unknown",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "9dbf8c4a2cd63092b4b0ecd0e9bb39a6b79a8788a61a8730aa92879bcb0e6a8d"
+    },
+    {
+      "claim_id": "claim_cmp_revenue_high_2028",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF page 177",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "b647767bcbfdce2b6d7923d07781bd88eca9b9e2b5685c8ac37d57e18438a6de"
+    },
+    {
+      "claim_id": "claim_ir_equipment_units_low_2026",
+      "source_id": "amec_sse_results_qa_20260910",
+      "locator": "Official reply id2508385; 尹志尧; 2026-09-10 16:37:39; companyId145565",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "4eca7542d876555b935206a6b45d619f40a3b80606a9218130fbd254cc2147af"
+    },
+    {
+      "claim_id": "claim_ir_equipment_units_low_2027",
+      "source_id": "amec_sse_results_qa_20260910",
+      "locator": "Official reply id2508385; 尹志尧; 2026-09-10 16:37:39; companyId145565",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "4eca7542d876555b935206a6b45d619f40a3b80606a9218130fbd254cc2147af"
+    },
+    {
+      "claim_id": "claim_ir_equipment_units_low_2028",
+      "source_id": "amec_sse_results_qa_20260910",
+      "locator": "Official reply id2508385; 尹志尧; 2026-09-10 16:37:39; companyId145565",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "4eca7542d876555b935206a6b45d619f40a3b80606a9218130fbd254cc2147af"
+    },
+    {
+      "claim_id": "claim_ir_equipment_units_base_2026",
+      "source_id": "amec_sse_results_qa_20260910",
+      "locator": "Official reply id2508385; 尹志尧; 2026-09-10 16:37:39; companyId145565",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "4eca7542d876555b935206a6b45d619f40a3b80606a9218130fbd254cc2147af"
+    },
+    {
+      "claim_id": "claim_ir_equipment_units_base_2027",
+      "source_id": "amec_sse_results_qa_20260910",
+      "locator": "Official reply id2508385; 尹志尧; 2026-09-10 16:37:39; companyId145565",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "4eca7542d876555b935206a6b45d619f40a3b80606a9218130fbd254cc2147af"
+    },
+    {
+      "claim_id": "claim_ir_equipment_units_base_2028",
+      "source_id": "amec_sse_results_qa_20260910",
+      "locator": "Official reply id2508385; 尹志尧; 2026-09-10 16:37:39; companyId145565",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "4eca7542d876555b935206a6b45d619f40a3b80606a9218130fbd254cc2147af"
+    },
+    {
+      "claim_id": "claim_ir_equipment_units_high_2026",
+      "source_id": "amec_sse_results_qa_20260910",
+      "locator": "Official reply id2508385; 尹志尧; 2026-09-10 16:37:39; companyId145565",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "4eca7542d876555b935206a6b45d619f40a3b80606a9218130fbd254cc2147af"
+    },
+    {
+      "claim_id": "claim_ir_equipment_units_high_2027",
+      "source_id": "amec_sse_results_qa_20260910",
+      "locator": "Official reply id2508385; 尹志尧; 2026-09-10 16:37:39; companyId145565",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "4eca7542d876555b935206a6b45d619f40a3b80606a9218130fbd254cc2147af"
+    },
+    {
+      "claim_id": "claim_ir_equipment_units_high_2028",
+      "source_id": "amec_sse_results_qa_20260910",
+      "locator": "Official reply id2508385; 尹志尧; 2026-09-10 16:37:39; companyId145565",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "4eca7542d876555b935206a6b45d619f40a3b80606a9218130fbd254cc2147af"
+    },
+    {
+      "claim_id": "claim_recognition_Equipment",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "PDF page174 revenue policy, complete equipment/spares/services context",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "114b51105c6c79e5baef6ff5d720084beb38c72e549a44a49d422f4bd6bd19fd"
+    },
+    {
+      "claim_id": "claim_recognition_NonEquipmentResidual",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "PDF page174 revenue policy, complete equipment/spares/services context",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "abc10f216f5d80b2b022a040a7c396c3b9e496716507cc0c1810fc49eb9f4f85"
+    },
+    {
+      "claim_id": "claim_recognition_NonEquipmentResidual_equipment",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "PDF page174, equipment policy",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "114b51105c6c79e5baef6ff5d720084beb38c72e549a44a49d422f4bd6bd19fd"
+    },
+    {
+      "claim_id": "claim_recognition_NonEquipmentResidual_spares",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "PDF page174, spares policy",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "18915a0852e8d2bceae31993e83d5ba58541154ef6aa5d3b4fffc5874b6b72cc"
+    },
+    {
+      "claim_id": "claim_recognition_NonEquipmentResidual_services",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "PDF page174, services policy",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "a69e32b1b494e8d8425e3b4f4c357913e1f05190c62a4f4e5d48073a83180957"
+    },
+    {
+      "claim_id": "claim_recognition_CMP",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "PDF page174 revenue policy, complete equipment/spares/services context",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "abc10f216f5d80b2b022a040a7c396c3b9e496716507cc0c1810fc49eb9f4f85"
+    },
+    {
+      "claim_id": "claim_recognition_CMP_equipment",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "PDF page174, equipment policy",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "114b51105c6c79e5baef6ff5d720084beb38c72e549a44a49d422f4bd6bd19fd"
+    },
+    {
+      "claim_id": "claim_recognition_CMP_spares",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "PDF page174, spares policy",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "18915a0852e8d2bceae31993e83d5ba58541154ef6aa5d3b4fffc5874b6b72cc"
+    },
+    {
+      "claim_id": "claim_recognition_CMP_services",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "PDF page174, services policy",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "a69e32b1b494e8d8425e3b4f4c357913e1f05190c62a4f4e5d48073a83180957"
+    },
+    {
+      "claim_id": "claim_CMP_annual_2026",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF page177, seller commitment; table p53 states annual amounts not cumulative objective",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "7f73b3fcd4bd397b7ad07ad6ea75e581167a704974ad93de6b2a2c12cbf6eb6f"
+    },
+    {
+      "claim_id": "claim_CMP_annual_2027",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF page177, seller commitment; table p53 states annual amounts not cumulative objective",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "7f73b3fcd4bd397b7ad07ad6ea75e581167a704974ad93de6b2a2c12cbf6eb6f"
+    },
+    {
+      "claim_id": "claim_benchmark_CMP_annual_2027",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF pages176–177, purchase and commitment scope",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "b647767bcbfdce2b6d7923d07781bd88eca9b9e2b5685c8ac37d57e18438a6de"
+    },
+    {
+      "claim_id": "claim_CMP_annual_2028",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF page177, seller commitment; table p53 states annual amounts not cumulative objective",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "7f73b3fcd4bd397b7ad07ad6ea75e581167a704974ad93de6b2a2c12cbf6eb6f"
+    },
+    {
+      "claim_id": "claim_benchmark_CMP_annual_2028",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF pages176–177, purchase and commitment scope",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "b647767bcbfdce2b6d7923d07781bd88eca9b9e2b5685c8ac37d57e18438a6de"
+    },
+    {
+      "claim_id": "claim_driver_core_etch_acceptance",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF page16",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "9652622988550b539bfe5b1f1760bc1ff272425fa4ef90f0cf1ce49021a39f6d"
+    },
+    {
+      "claim_id": "claim_contrary_core_etch_acceptance",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "2026H1 PDF p32, complete relevant risk block",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "d9b968164859be3dcfb9a54eb409b0fa3370fea22250b40f49705151526f410a"
+    },
+    {
+      "claim_id": "claim_ir_supply_core_etch_acceptance",
+      "source_id": "amec_sse_results_qa_20260910",
+      "locator": "Official reply id2508080, 尹志尧, companyId145565, 2026-09-10 15:37:45",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "d68338dd98d21e16cc32b117323dd10e09b84133ecb1f1171e0fe3ff4de2f4ff"
+    },
+    {
+      "claim_id": "claim_outside_wfe_reference",
+      "source_id": "semi_wfe_20260714",
+      "locator": "Official SEMI July14 release, parsed original line167; global WFE, not AMEC revenue",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "fb782e321920a03e2c15af4723e2b5f04a958b029537efa72f8067ad06382be5"
+    },
+    {
+      "claim_id": "claim_driver_films_packaging",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF page16",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "0a5f731653bae416b49dc04017330be737eb33b83e608f9bc421468266640d17"
+    },
+    {
+      "claim_id": "claim_contrary_films_packaging",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "2026H1 PDF p33, complete relevant risk block",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "5cc73f97972294e37068ccd9762dc548ee5987a2867e4262b7b185b97dbc9eee"
+    },
+    {
+      "claim_id": "claim_ir_supply_films_packaging",
+      "source_id": "amec_sse_results_qa_20260910",
+      "locator": "Official reply id2508080, 尹志尧, companyId145565, 2026-09-10 15:37:45",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "d68338dd98d21e16cc32b117323dd10e09b84133ecb1f1171e0fe3ff4de2f4ff"
+    },
+    {
+      "claim_id": "claim_driver_afterm_support",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p53, actual after-sales context; no quantitative recurring revenue",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "9dbf8c4a2cd63092b4b0ecd0e9bb39a6b79a8788a61a8730aa92879bcb0e6a8d"
+    },
+    {
+      "claim_id": "claim_contrary_afterm_support",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "2026H1 PDF p33, complete relevant risk block",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "5cc73f97972294e37068ccd9762dc548ee5987a2867e4262b7b185b97dbc9eee"
+    },
+    {
+      "claim_id": "claim_driver_cmp_ramp",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "PDF page177",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "ae6d198f04dd327359dd3da0b488ca6bb7eb51409f793b70da6499db9c61379f"
+    },
+    {
+      "claim_id": "claim_contrary_cmp_ramp",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "2026H1 PDF p33, complete relevant risk block",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "d3d10081b7b9e4cb5a4fa8cc01995e7bb80f7fa52f47ccd1a14b581ac5f3bace"
+    },
+    {
+      "claim_id": "claim_residual_platform_context",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p48, digital platform business; classification within residual unknown",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "1cf34dfec25a2ef1ebdc3f876c2281c4c2dda5a3c48eaa56c3a4dac3c332b2fa"
+    },
+    {
+      "claim_id": "claim_residual_h1_service_context",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "2026H1 PDF p23, professional after-sales support; no revenue magnitude",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "9dbf8c4a2cd63092b4b0ecd0e9bb39a6b79a8788a61a8730aa92879bcb0e6a8d"
+    },
+    {
+      "claim_id": "claim_residual_h1_other_business",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "2026H1 PDF p19, purification and digital platform businesses; their assignment to residual unknown",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "2b545bdd15928b18c01c6086c6a1b0ce3412f88aea1bcda097e12f78eee74e6d"
+    },
+    {
+      "claim_id": "claim_residual_boundary_annual",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p65, whole semiconductor equipment related revenue and rounded dedicated-equipment subset",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "2b427bbee6d93cc60cf4f03200f1c0e7fbdc6c07f7da8da00aa902b513fdcd21"
+    },
+    {
+      "claim_id": "claim_concentration_equipment_units_low_2026",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p219, customer A concentration, FY2025 39.99% / FY2024 22.15%",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "d6595654b2eec267d7c3fa57cbcb34813454b76b2f53ead4bdc8324178df78c8"
+    },
+    {
+      "claim_id": "claim_concentration_equipment_units_low_2027",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p219, customer A concentration, FY2025 39.99% / FY2024 22.15%",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "d6595654b2eec267d7c3fa57cbcb34813454b76b2f53ead4bdc8324178df78c8"
+    },
+    {
+      "claim_id": "claim_concentration_equipment_units_low_2028",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p219, customer A concentration, FY2025 39.99% / FY2024 22.15%",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "d6595654b2eec267d7c3fa57cbcb34813454b76b2f53ead4bdc8324178df78c8"
+    },
+    {
+      "claim_id": "claim_concentration_equipment_units_base_2026",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p219, customer A concentration, FY2025 39.99% / FY2024 22.15%",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "d6595654b2eec267d7c3fa57cbcb34813454b76b2f53ead4bdc8324178df78c8"
+    },
+    {
+      "claim_id": "claim_concentration_equipment_units_base_2027",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p219, customer A concentration, FY2025 39.99% / FY2024 22.15%",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "d6595654b2eec267d7c3fa57cbcb34813454b76b2f53ead4bdc8324178df78c8"
+    },
+    {
+      "claim_id": "claim_concentration_equipment_units_base_2028",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p219, customer A concentration, FY2025 39.99% / FY2024 22.15%",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "d6595654b2eec267d7c3fa57cbcb34813454b76b2f53ead4bdc8324178df78c8"
+    },
+    {
+      "claim_id": "claim_concentration_equipment_units_high_2026",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p219, customer A concentration, FY2025 39.99% / FY2024 22.15%",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "d6595654b2eec267d7c3fa57cbcb34813454b76b2f53ead4bdc8324178df78c8"
+    },
+    {
+      "claim_id": "claim_concentration_equipment_units_high_2027",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p219, customer A concentration, FY2025 39.99% / FY2024 22.15%",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "d6595654b2eec267d7c3fa57cbcb34813454b76b2f53ead4bdc8324178df78c8"
+    },
+    {
+      "claim_id": "claim_concentration_equipment_units_high_2028",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "locator": "FY2025 annual PDF p219, customer A concentration, FY2025 39.99% / FY2024 22.15%",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "d6595654b2eec267d7c3fa57cbcb34813454b76b2f53ead4bdc8324178df78c8"
+    },
+    {
+      "claim_id": "claim_outside_wfe_2027_2028",
+      "source_id": "semi_wfe_20260714",
+      "locator": "Actual opened official SEMI 2026-07-14 original line168, WFE forecast2027/2028",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "c6f27736a33cc7e66da974f4834d1f93745bf9bac5c19c9ba5739fdc8ed41833"
+    },
+    {
+      "claim_id": "claim_china_moderation_core_etch_acceptance",
+      "source_id": "semi_wfe_20260714",
+      "locator": "Actual opened official SEMI2026-07-14 original line181, China 2026 growth moderation",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "ab6fc210eedf3110b90922ebf0d61a02a4d9a4a49e4491cd996f19b89962ad95"
+    },
+    {
+      "claim_id": "claim_china_moderation_films_packaging",
+      "source_id": "semi_wfe_20260714",
+      "locator": "Actual opened official SEMI2026-07-14 original line181, China 2026 growth moderation",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "ab6fc210eedf3110b90922ebf0d61a02a4d9a4a49e4491cd996f19b89962ad95"
+    },
+    {
+      "claim_id": "claim_driver_tsv_packaging",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "locator": "2026H1 PDF p16, TSV equipment in wafer-level/2.5D packaging and 3D via qualification",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "28093510e2a4f20bd90a6f75608c687a2201f375fbf43dd1f7e304c9a93d86e0"
+    },
+    {
+      "claim_id": "claim_hq_delay_core_etch_acceptance",
+      "source_id": "amec_cninfo_1225482911",
+      "locator": "Company disclosure1225482911 PDF p4, full-use date delayed to December2027",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "a834b4ffa5f6e2ea4cae2b06ccc6122099d03399f2df773afb5a0ee01de87b4c"
+    },
+    {
+      "claim_id": "claim_hq_delay_films_packaging",
+      "source_id": "amec_cninfo_1225482911",
+      "locator": "Company disclosure1225482911 PDF p4, full-use date delayed to December2027",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "a834b4ffa5f6e2ea4cae2b06ccc6122099d03399f2df773afb5a0ee01de87b4c"
+    },
+    {
+      "claim_id": "claim_capacity_equipment_units_low_2026",
+      "source_id": "amec_cninfo_1225482911",
+      "locator": "Company1225482911 PDF p4, delayed full-use timing vs assumed accepted units",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "a834b4ffa5f6e2ea4cae2b06ccc6122099d03399f2df773afb5a0ee01de87b4c"
+    },
+    {
+      "claim_id": "claim_capacity_equipment_units_low_2027",
+      "source_id": "amec_cninfo_1225482911",
+      "locator": "Company1225482911 PDF p4, delayed full-use timing vs assumed accepted units",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "a834b4ffa5f6e2ea4cae2b06ccc6122099d03399f2df773afb5a0ee01de87b4c"
+    },
+    {
+      "claim_id": "claim_capacity_equipment_units_low_2028",
+      "source_id": "amec_cninfo_1225482911",
+      "locator": "Company1225482911 PDF p4, delayed full-use timing vs assumed accepted units",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "a834b4ffa5f6e2ea4cae2b06ccc6122099d03399f2df773afb5a0ee01de87b4c"
+    },
+    {
+      "claim_id": "claim_capacity_equipment_units_base_2026",
+      "source_id": "amec_cninfo_1225482911",
+      "locator": "Company1225482911 PDF p4, delayed full-use timing vs assumed accepted units",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "a834b4ffa5f6e2ea4cae2b06ccc6122099d03399f2df773afb5a0ee01de87b4c"
+    },
+    {
+      "claim_id": "claim_capacity_equipment_units_base_2027",
+      "source_id": "amec_cninfo_1225482911",
+      "locator": "Company1225482911 PDF p4, delayed full-use timing vs assumed accepted units",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "a834b4ffa5f6e2ea4cae2b06ccc6122099d03399f2df773afb5a0ee01de87b4c"
+    },
+    {
+      "claim_id": "claim_capacity_equipment_units_base_2028",
+      "source_id": "amec_cninfo_1225482911",
+      "locator": "Company1225482911 PDF p4, delayed full-use timing vs assumed accepted units",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "a834b4ffa5f6e2ea4cae2b06ccc6122099d03399f2df773afb5a0ee01de87b4c"
+    },
+    {
+      "claim_id": "claim_capacity_equipment_units_high_2026",
+      "source_id": "amec_cninfo_1225482911",
+      "locator": "Company1225482911 PDF p4, delayed full-use timing vs assumed accepted units",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "a834b4ffa5f6e2ea4cae2b06ccc6122099d03399f2df773afb5a0ee01de87b4c"
+    },
+    {
+      "claim_id": "claim_capacity_equipment_units_high_2027",
+      "source_id": "amec_cninfo_1225482911",
+      "locator": "Company1225482911 PDF p4, delayed full-use timing vs assumed accepted units",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "a834b4ffa5f6e2ea4cae2b06ccc6122099d03399f2df773afb5a0ee01de87b4c"
+    },
+    {
+      "claim_id": "claim_capacity_equipment_units_high_2028",
+      "source_id": "amec_cninfo_1225482911",
+      "locator": "Company1225482911 PDF p4, delayed full-use timing vs assumed accepted units",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "a834b4ffa5f6e2ea4cae2b06ccc6122099d03399f2df773afb5a0ee01de87b4c"
+    },
+    {
+      "claim_id": "claim_LingangPhaseII_local_sales_at_maturity",
+      "source_id": "amec_cninfo_1225482894",
+      "locator": "Company1225482894 PDF p4, investment and at-maturity local sales, period/perimeter ambiguous",
+      "status": "PASS original normalized-whitespace exact substring",
+      "excerpt_sha256": "145244010df6eee039513857f8360d1a9888c9d86c2561f04de6564e55a23895"
+    }
+  ],
+  "claims_count": 106,
+  "old_v2_artifacts_protected": [
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\input.json",
+      "sha256": "3dcce43a05deb2faf92236af8c1b979c07334a34d5b7debb30d25057ab611746",
+      "bytes": 228626,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\forecast.json",
+      "sha256": "a7b2797fecb8edb1b2ba2641b3d65c7996e938427fc01eed1f8e513aa7be420d",
+      "bytes": 491060,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\forecast.md",
+      "sha256": "f6bca82bf5fd5b1db373685da4bd910f510ffcc1d780070b6ab747c6d37a8a83",
+      "bytes": 91014,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\snapshot_v2.json",
+      "sha256": "8768495ec9b6df68bb9ab57cfc63c924023ca1b6ca38949a923cba6ec39484e5",
+      "bytes": 748108,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\manifest.json",
+      "sha256": "6cba812e9f1dd8af3ea0fd8667c46a3a4dc0233cfc77fbe5dfcda981a2deaaf8",
+      "bytes": 142575,
+      "unchanged": true
+    }
+  ],
+  "publication_registry": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\publications.jsonl",
+  "attestation_status": "unattested",
+  "gaps": {
+    "CWPWorker": "BLOCKED/not_run",
+    "IR_original_DOCX": "BLOCKED/not_obtained",
+    "equity_incentive_target_numeric_schedule": "not_obtained; company mentions existence; no numeric fabrication",
+    "residual_quantitative_calibration": "unknown",
+    "phaseII_local_sales_target": "ambiguous period/mismatch/unmodeled"
+  }
+}

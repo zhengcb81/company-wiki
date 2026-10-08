@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\executions\US-MSFT\repair_msft_v2.py", line 235, in <module>
+    if a=='build':build()
+                  ~~~~~^^
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\executions\US-MSFT\repair_msft_v2.py", line 72, in build
+    downside=add_claim('v2_constraint_'+pid,pid,'parameter','src_call',text(s['contrary']),f'Complete official call.txt lines {s["contrary"]}; constraint/opposing gaming expectation; scope stated in parameter rationale')
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\executions\US-MSFT\repair_msft_v2.py", line 51, in add_claim
+    return set_claim(cid,sid,excerpt,locator)
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\executions\US-MSFT\repair_msft_v2.py", line 39, in set_claim
+    if len(chunks)>1 and len(chunks[-1])<10:chunks[-2]+=chunks.pop()
+                                            ~~~~~~^^^^
+IndexError: list assignment index out of range

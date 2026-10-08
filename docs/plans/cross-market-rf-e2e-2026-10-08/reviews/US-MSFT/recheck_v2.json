@@ -1,0 +1,599 @@
+{
+  "schema_version": "independent-rf-recheck/1",
+  "company": "Microsoft",
+  "security_id": "MSFT",
+  "market": "US",
+  "as_of_date": "2026-10-08",
+  "forecast_version": "2026-10-08-MSFT-v2",
+  "reviewer": "/root/rf_us_independent_review",
+  "reviewed_at_utc": "2026-10-08T08:59:02.803771+00:00",
+  "overall_verdict": "PARTIAL",
+  "research_artifact_verdict": "PASS",
+  "formal_technical_verdict": "PASS",
+  "product_e2e_verdict": "PARTIAL",
+  "open_workflow_finding": "US07",
+  "findings": [
+    {
+      "finding_id": "US01",
+      "closure": "CLOSED",
+      "verdict": "PASS",
+      "independent_reason": "8/8 .05 requested/effective and zero clamps independently recomputed; engine/MD/snapshot use repaired shock."
+    },
+    {
+      "finding_id": "US02",
+      "closure": "CLOSED",
+      "verdict": "PASS",
+      "independent_reason": "72/72 explicit annual analyst assumptions individually mapped to same-perimeter two-year history, reopened operating mechanism, constraints/gaps and quarter limits. Exact future levels/fades remain conditional, without calibrated evidential bounds."
+    },
+    {
+      "finding_id": "US03",
+      "closure": "CLOSED",
+      "verdict": "PASS",
+      "independent_reason": "Positive ERP/healthcare/completed-service activity separated from licensing headwinds; actual CRM moderation opposes industry expansion; FY27 positive Xbox expectation opposes gaming decline only. Inventory is no longer claimed contrary."
+    },
+    {
+      "finding_id": "US04",
+      "closure": "CLOSED",
+      "verdict": "PASS",
+      "independent_reason": "Four distinct recognition chains and indicators; FY27 annual same-perimeter falsifiers have correct positive/negative direction. FY28/29 recovery is separate conditional thesis. No invented two-quarter quantitative threshold."
+    },
+    {
+      "finding_id": "US05",
+      "closure": "CLOSED",
+      "verdict": "PASS",
+      "independent_reason": "Benchmark uses all8 restated annual histories plus stream-specific mechanism/constraints. AWS37 quarter is analogical cloud context, not consolidated magnitude. Company >=10 linguistic floor compared after construction."
+    },
+    {
+      "finding_id": "US06",
+      "closure": "CLOSED",
+      "verdict": "PASS",
+      "independent_reason": "All17 original statements individually mapped and 16 added/split statements make33. Per-target period/scope/comparison/gap retained; no numeric midpoint. Dated rollout/capacity promises are not marked fulfilled without actual evidence."
+    },
+    {
+      "finding_id": "US07",
+      "closure": "OPEN",
+      "verdict": "BLOCKED",
+      "independent_reason": "New filing acquisition/reuse cycle, latestFY26 recognition policy, FF companion→ET successful imported TXT and current source canonical SEC HTML Worker remain unproven. Existing TXT current read passes but asof2026-10-08 refuses source_publication_unknown; excluded from this input."
+    },
+    {
+      "finding_id": "US08",
+      "closure": "CLOSED",
+      "verdict": "PASS",
+      "independent_reason": "FY27 annual Azure38% is explicitly independent reported assumption; Q1 44–45%CC and <1pp FX drag are quarterly context; no same-basis conservative bound."
+    }
+  ],
+  "review_scope": "Repair dependency closure; original full independent review retained. No self-repair or executor files written. Technical/economic acceptance applies to conditional revenue paths, not probability calibration or completed collection/processing E2E.",
+  "coverage": {
+    "parameters": 90,
+    "future_parameter_rows": 72,
+    "evidence_claims": 502,
+    "changed_claims": 461,
+    "qualitative_target_rows": 33,
+    "original_qualitative_rows": 17,
+    "added_or_split_qualitative_rows": 16,
+    "formal_numeric_target_rows": 11,
+    "growth_roots": 4,
+    "sensitivity_rows": 8,
+    "original_full_slides_viewed": 22,
+    "v2_dependent_slides_reopened": [
+      17,
+      21
+    ],
+    "independent_raw_changed_context_pieces": 64,
+    "runtime_files_sha_checked": 14,
+    "manifest_artifacts_sha_checked": 15,
+    "executor_command_ledger_finishes": 58,
+    "v2_command_ledger_finishes": 16,
+    "v2_intermediate_command_failures": 3
+  },
+  "assumption_rows_file": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\reviews\\US-MSFT\\support\\recheck_v2_assumption_rows.json",
+  "target_rows_file": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\reviews\\US-MSFT\\support\\recheck_v2_target_rows.json",
+  "sensitivity_rows": [
+    {
+      "parameter_id": "azure_growth_base_2027",
+      "shock": 0.05,
+      "requested": {
+        "down": 0.33,
+        "up": 0.43
+      },
+      "effective": {
+        "down": 0.33,
+        "up": 0.43
+      },
+      "clamped": {
+        "down": false,
+        "up": false
+      },
+      "down_terminal_USDmillion": 509274.659962,
+      "up_terminal_USDmillion": 525707.065562,
+      "verdict": "PASS"
+    },
+    {
+      "parameter_id": "microsoft_365_cloud_growth_base_2027",
+      "shock": 0.05,
+      "requested": {
+        "down": 0.12000000000000001,
+        "up": 0.22000000000000003
+      },
+      "effective": {
+        "down": 0.12000000000000001,
+        "up": 0.22000000000000003
+      },
+      "clamped": {
+        "down": false,
+        "up": false
+      },
+      "down_terminal_USDmillion": 510859.09288199997,
+      "up_terminal_USDmillion": 524122.632642,
+      "verdict": "PASS"
+    },
+    {
+      "parameter_id": "productivity_and_server_licensing_growth_base_2027",
+      "shock": 0.05,
+      "requested": {
+        "down": -0.1,
+        "up": 0.0
+      },
+      "effective": {
+        "down": -0.1,
+        "up": 0.0
+      },
+      "clamped": {
+        "down": false,
+        "up": false
+      },
+      "down_terminal_USDmillion": 515718.70671199996,
+      "up_terminal_USDmillion": 519263.01881199994,
+      "verdict": "PASS"
+    },
+    {
+      "parameter_id": "industry_solutions_growth_base_2027",
+      "shock": 0.05,
+      "requested": {
+        "down": 0.039999999999999994,
+        "up": 0.14
+      },
+      "effective": {
+        "down": 0.039999999999999994,
+        "up": 0.14
+      },
+      "clamped": {
+        "down": false,
+        "up": false
+      },
+      "down_terminal_USDmillion": 516293.356062,
+      "up_terminal_USDmillion": 518688.369462,
+      "verdict": "PASS"
+    },
+    {
+      "parameter_id": "frontier_and_support_services_growth_base_2027",
+      "shock": 0.05,
+      "requested": {
+        "down": 0.009999999999999995,
+        "up": 0.11
+      },
+      "effective": {
+        "down": 0.009999999999999995,
+        "up": 0.11
+      },
+      "clamped": {
+        "down": false,
+        "up": false
+      },
+      "down_terminal_USDmillion": 517039.86676199996,
+      "up_terminal_USDmillion": 517941.85876199993,
+      "verdict": "PASS"
+    },
+    {
+      "parameter_id": "search_and_advertising_growth_base_2027",
+      "shock": 0.05,
+      "requested": {
+        "down": 0.03,
+        "up": 0.13
+      },
+      "effective": {
+        "down": 0.03,
+        "up": 0.13
+      },
+      "clamped": {
+        "down": false,
+        "up": false
+      },
+      "down_terminal_USDmillion": 516082.46991199994,
+      "up_terminal_USDmillion": 518899.25561199995,
+      "verdict": "PASS"
+    },
+    {
+      "parameter_id": "xbox_growth_base_2027",
+      "shock": 0.05,
+      "requested": {
+        "down": -0.09,
+        "up": 0.010000000000000002
+      },
+      "effective": {
+        "down": -0.09,
+        "up": 0.010000000000000002
+      },
+      "clamped": {
+        "down": false,
+        "up": false
+      },
+      "down_terminal_USDmillion": 516335.12116199994,
+      "up_terminal_USDmillion": 518646.6043619999,
+      "verdict": "PASS"
+    },
+    {
+      "parameter_id": "windows_oem_and_devices_growth_base_2027",
+      "shock": 0.05,
+      "requested": {
+        "down": -0.22999999999999998,
+        "up": -0.13
+      },
+      "effective": {
+        "down": -0.22999999999999998,
+        "up": -0.13
+      },
+      "clamped": {
+        "down": false,
+        "up": false
+      },
+      "down_terminal_USDmillion": 516662.14326199994,
+      "up_terminal_USDmillion": 518319.58226199995,
+      "verdict": "PASS"
+    }
+  ],
+  "benchmark": {
+    "target_id": "company_fy27_double_digit",
+    "linguistic_lower_bound_growth": 0.1,
+    "comparison_value_USDmillion": 365022.9,
+    "annual_company_growths": {
+      "low": 0.10683786414496188,
+      "base": 0.16360105352294352,
+      "high": 0.2162950105322159
+    },
+    "verdict": "PASS",
+    "scope": "Independent all8 restated historical annual pathways and operating constraints, compared after construction; AWS37 quarterly analogical only; annual FX<1pp unmodeled conditional risk distinct from Q1 CC."
+  },
+  "independent_arithmetic": {
+    "low": {
+      "annual_revenue": {
+        "2027": 367291.97,
+        "2028": 404859.94000000006,
+        "2029": 439422.28412
+      },
+      "reporting_groups": {
+        "Agents and Infra": {
+          "2027": 308943.93,
+          "2028": 348296.548,
+          "2029": 383190.04016
+        },
+        "Devices and Consumer": {
+          "2027": 58348.04,
+          "2028": 56563.39199999999,
+          "2029": 56232.24395999999
+        }
+      },
+      "cagr": 0.09812442243569786,
+      "increment": 107583.28412000003
+    },
+    "base": {
+      "annual_revenue": {
+        "2027": 386128.21,
+        "2028": 450353.0705999999,
+        "2029": 517490.86276199995
+      },
+      "reporting_groups": {
+        "Agents and Infra": {
+          "2027": 324376.67,
+          "2028": 386725.97679999995,
+          "2029": 451288.33868199994
+        },
+        "Devices and Consumer": {
+          "2027": 61751.54,
+          "2028": 63627.0938,
+          "2029": 66202.52408
+        }
+      },
+      "cagr": 0.15964507172665,
+      "increment": 185651.86276199995
+    },
+    "high": {
+      "annual_revenue": {
+        "2027": 403614.12,
+        "2028": 494471.221,
+        "2029": 593733.1183770001
+      },
+      "reporting_groups": {
+        "Agents and Infra": {
+          "2027": 338707.43,
+          "2028": 424280.8243,
+          "2029": 517769.34232199995
+        },
+        "Devices and Consumer": {
+          "2027": 64906.69,
+          "2028": 70190.39670000001,
+          "2029": 75963.77605500001
+        }
+      },
+      "cagr": 0.21400725702614687,
+      "increment": 261894.1183770001
+    }
+  },
+  "driver_attribution_USDmillion": {
+    "cloud_ai": 179713.61247199998,
+    "enterprise_migration": 3447.72621000001,
+    "advertising": 5586.2855600000075,
+    "consumer_cycle": -3095.761480000001
+  },
+  "runtime_file_sha256": {
+    "SKILL.md": {
+      "installed_sha256": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf",
+      "repo_sha256": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf",
+      "matches_manifest": true
+    },
+    "scripts/revenue_core.py": {
+      "installed_sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "repo_sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "matches_manifest": true
+    },
+    "scripts/revenue_forecast.py": {
+      "installed_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "repo_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "matches_manifest": true
+    },
+    "scripts/source_preparation.py": {
+      "installed_sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+      "repo_sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+      "matches_manifest": true
+    },
+    "scripts/company_wiki_source.py": {
+      "installed_sha256": "b223974e94ffb6d91e0e927b252e1fbc67a590fc910c3da10600d292d48d4470",
+      "repo_sha256": "b223974e94ffb6d91e0e927b252e1fbc67a590fc910c3da10600d292d48d4470",
+      "matches_manifest": true
+    },
+    "scripts/company_wiki_source_v2.py": {
+      "installed_sha256": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+      "repo_sha256": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+      "matches_manifest": true
+    },
+    "scripts/company_wiki_source_reader_v2.py": {
+      "installed_sha256": "5f5bfd11cbc880c30f2766d8d6c78366d4e32f677ba9a517914a0df5f95faed1",
+      "repo_sha256": "5f5bfd11cbc880c30f2766d8d6c78366d4e32f677ba9a517914a0df5f95faed1",
+      "matches_manifest": true
+    },
+    "scripts/contracts/constants.py": {
+      "installed_sha256": "3ad7332e4a76e7e3e2a9a8a1ab73828584ed8b19b32327479a0f79636b2f3462",
+      "repo_sha256": "3ad7332e4a76e7e3e2a9a8a1ab73828584ed8b19b32327479a0f79636b2f3462",
+      "matches_manifest": true
+    },
+    "scripts/forecast/segments.py": {
+      "installed_sha256": "7b0dac5d5b6f19aba2305a7cb5d9d0ecddb1e5a31a6833285c5f81259018f002",
+      "repo_sha256": "7b0dac5d5b6f19aba2305a7cb5d9d0ecddb1e5a31a6833285c5f81259018f002",
+      "matches_manifest": true
+    },
+    "scripts/revenue_backtest.py": {
+      "installed_sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "repo_sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "matches_manifest": true
+    },
+    "scripts/revenue_report.py": {
+      "installed_sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+      "repo_sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+      "matches_manifest": true
+    },
+    "scripts/lint_input.py": {
+      "installed_sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "repo_sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "matches_manifest": true
+    },
+    "scripts/fix_hashes.py": {
+      "installed_sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "repo_sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "matches_manifest": true
+    },
+    "scripts/publication_registry.py": {
+      "installed_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+      "repo_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+      "matches_manifest": true
+    }
+  },
+  "strong_input_bound": "PASS",
+  "same_json_renderer": "PASS",
+  "independent_engine_recompute": "PASS",
+  "snapshot_embedded_input_result_and_registry_tuple": "PASS",
+  "registry_audit_cli": "PASS_LIMITED_CHAIN_ANCHOR_SCOPE",
+  "v1_and_initial_review_preservation": [
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\input.json",
+      "sha256": "d872a864d1f7220c5635974b262b2b63378c1885998754ed8010134f8c7ae32e",
+      "expected_sha256": "d872a864d1f7220c5635974b262b2b63378c1885998754ed8010134f8c7ae32e",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\forecast.json",
+      "sha256": "46c0c6ce0c71f27899ed4544012566489c8efef1d37826194048683732a36906",
+      "expected_sha256": "46c0c6ce0c71f27899ed4544012566489c8efef1d37826194048683732a36906",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\forecast.md",
+      "sha256": "4ccd4ff3e59ed0fc72af32850b35479dce595b1b641c140a2fb54d1675588511",
+      "expected_sha256": "4ccd4ff3e59ed0fc72af32850b35479dce595b1b641c140a2fb54d1675588511",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\snapshot.json",
+      "sha256": "ac029a2961a01f8d9d9f752bf6253535a45b3f7c3c61e594c6501928b755e0e2",
+      "expected_sha256": "ac029a2961a01f8d9d9f752bf6253535a45b3f7c3c61e594c6501928b755e0e2",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\manifest.json",
+      "sha256": "2845d8906d3e140a1eb7fa28ddf4981b1610d3c1037f0b6d49de4da2e73b4201",
+      "expected_sha256": "2845d8906d3e140a1eb7fa28ddf4981b1610d3c1037f0b6d49de4da2e73b4201",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\reviews\\US-MSFT\\review.json",
+      "sha256": "40aa9646fadb7deb4b161e3168f2d1f80f886ce08d12b9fefa07335ec52326db",
+      "expected_sha256": "40aa9646fadb7deb4b161e3168f2d1f80f886ce08d12b9fefa07335ec52326db",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\reviews\\US-MSFT\\review.md",
+      "sha256": "b07a17d4d59b19ec1966b8498add1c279963330973dccfd49b0b829b878b82d8",
+      "expected_sha256": "b07a17d4d59b19ec1966b8498add1c279963330973dccfd49b0b829b878b82d8",
+      "unchanged": true
+    }
+  ],
+  "source_capture_file_rehash": [
+    {
+      "source_id": "src_results",
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\results.html",
+      "expected_sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+      "actual_sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+      "pass": true
+    },
+    {
+      "source_id": "src_call",
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\call.html",
+      "expected_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+      "actual_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+      "pass": true
+    },
+    {
+      "source_id": "src_metrics",
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\metrics.html",
+      "expected_sha256": "cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+      "actual_sha256": "cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+      "pass": true
+    },
+    {
+      "source_id": "src_aws",
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\aws.html",
+      "expected_sha256": "d83bb386a7d20107ec1480472490dab56ab83122e4e7f569fd1f36608c96e5a4",
+      "actual_sha256": "d83bb386a7d20107ec1480472490dab56ab83122e4e7f569fd1f36608c96e5a4",
+      "pass": true
+    },
+    {
+      "source_id": "src_presentation",
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\fy2027_segments_metrics.pptx",
+      "expected_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "actual_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "pass": true
+    },
+    {
+      "source_id": "src_strategy",
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_material_announcements.json",
+      "expected_sha256": "a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+      "actual_sha256": "a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+      "pass": true
+    },
+    {
+      "source_id": "src_data_innovation",
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_material_announcements.json",
+      "expected_sha256": "a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+      "actual_sha256": "a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+      "pass": true
+    },
+    {
+      "source_id": "src_leadership",
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_material_announcements.json",
+      "expected_sha256": "a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+      "actual_sha256": "a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+      "pass": true
+    },
+    {
+      "source_id": "FY25 SEC actual producer",
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-review-20261008-US-MSFT-independent\\producer_fy2025.html",
+      "actual_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "pass": true
+    }
+  ],
+  "configuration_boundary": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "baseline_sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "actual_sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\SKILL.md",
+      "baseline_sha256": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf",
+      "actual_sha256": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\config\\company_wiki.json",
+      "baseline_sha256": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+      "actual_sha256": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\config\\company_wiki.json",
+      "baseline_sha256": "73917689a14c1b17e69066b0837b0ad3ac1062c440243bc58fef34eb3e043ab0",
+      "actual_sha256": "73917689a14c1b17e69066b0837b0ad3ac1062c440243bc58fef34eb3e043ab0",
+      "unchanged": true
+    }
+  ],
+  "existing_narrative": {
+    "receipt_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\existing_narrative_current_vs_asof.json",
+    "receipt_sha256": "e639377ca4938b80a2376481e742dec05bc88bae588d0dbfc4aa618fa6039169",
+    "current_read": "PASS_49_SPANS_CWP_RF",
+    "asof_read": "BLOCKED_source_publication_unknown",
+    "forecast_input_consumed": false,
+    "new_worker_runs": 0,
+    "new_model_calls": 0
+  },
+  "limitations": [
+    "All8 streams remain direct recognized-growth fallback, zero explicit-driver model credit; FY25 policy used with latestFY26 policy gap.",
+    "72 future ranges/fades/recoveries are conditional analyst judgments, not measured future numbers, evidential endpoints or scenario probabilities.",
+    "Frontier project scope is a constraint/gap, not observed service-demand decline; no Windows stabilization evidence at asof.",
+    "Non-cloud roots lack independent triangulation; allocated increments reconcile arithmetically but are not econometric causal attribution.",
+    "Only firstyear base growth is shocked per stream; no comprehensive later-year or FX sensitivity.",
+    "Ten quarterly/context formal targets are unmodeled;33 qualitative/operating/availability statements reside in full sidecar because runtime numeric ledger cannot represent them.",
+    "No future actual backtest applies; confidence50.2172 low is evidence/workflow score and stayed equal after full recomputation.",
+    "Existing productionTXT read does not prove current-asof eligibility, newFF/ET success, this SEC HTML canonical processing or input consumption.",
+    "Global store and owner WIP before/after audits remain MAIN-owned; reviewer confirms only specified file/config hashes."
+  ],
+  "artifacts": [
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\input.json",
+      "sha256": "1fadabef5208df3438ea5202ba4524bb4d0fdfe9e923b0759c24dca8ff4165a3"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\forecast.json",
+      "sha256": "4447f9c5390a429ba5f304bf496af36f24ae6d8354b3a4fea890223d0a27c605"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\forecast.md",
+      "sha256": "649b9d16741e0089f5ac6996813e0fa518b0d4c04bb7787c183a41269b6c1bec"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\snapshot.json",
+      "sha256": "3127098e5ee041e3d17fa2fefeef47cc69ba90c321d68d4a44e6bc4c8e33c74e"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\publications.jsonl",
+      "sha256": "132beb8eb7249d8b74ded75b6e1a00dabddb14546941d35914d16e65fcf6b3a4"
+    }
+  ],
+  "evidence_support": [
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\reviews\\US-MSFT\\support\\recheck_v2_evidence_bindings.json",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\reviews\\US-MSFT\\support\\recheck_v2_independent_original_contexts.json",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\reviews\\US-MSFT\\support\\recheck_v2_assumption_rows.json",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\reviews\\US-MSFT\\support\\recheck_v2_target_rows.json",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\reviews\\US-MSFT\\support\\recheck_v2_sensitivity_rows.json",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\reviews\\US-MSFT\\support\\recheck_v2_runtime_recompute.json",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\reviews\\US-MSFT\\support\\recheck_v2_independent_calculations.json",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\reviews\\US-MSFT\\support\\recheck_v2_snapshot_registry_tuple.json",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\reviews\\US-MSFT\\support\\recheck_v2_registry_audit.json",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\reviews\\US-MSFT\\support\\recheck_v2_integrity.json"
+  ],
+  "visual_web_review_notes": {
+    "PPT17": "Both annual columns, all8 rows and Other footnote visually reread; all72 historical rates recalculated. Original wholePPT hash c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4 unchanged.",
+    "PPT21": "Mechanical adjusted Q1 guidance visually reread allrows; CC/exTAC/subset distinctions and no-change rows checked.",
+    "Sep25_blog": "Official full article reopened via web.run on2026-10-08; all5 added availability/UBB paragraphs atL8,L19,L20,L35,L36 checked in full context; no rollout fulfillment inferred."
+  },
+  "research_acceptance_limits_disclosed": true
+}

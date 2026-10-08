@@ -1,0 +1,70 @@
+{
+  "org_id": "9900038991",
+  "comparisons": [
+    {
+      "request": {
+        "pageNum": "1",
+        "pageSize": "30",
+        "column": "sse",
+        "tabName": "fulltext",
+        "stock": "688012,9900038991",
+        "seDate": "2026-01-01~2027-12-31",
+        "category": "category_ndbg_szsh",
+        "isHLtitle": "true"
+      },
+      "response_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\category_ndbg_szsh_official_response.json",
+      "total": 2,
+      "announcements": [
+        {
+          "announcementId": "1225062431",
+          "announcementTitle": "2025年年度报告",
+          "announcementTime": 1774886400000,
+          "adjunctUrl": "finalpage/2026-03-31/1225062431.PDF",
+          "secCode": "688012"
+        },
+        {
+          "announcementId": "1225062430",
+          "announcementTitle": "2025年年度报告摘要",
+          "announcementTime": 1774886400000,
+          "adjunctUrl": "finalpage/2026-03-31/1225062430.PDF",
+          "secCode": "688012"
+        }
+      ]
+    },
+    {
+      "request": {
+        "pageNum": "1",
+        "pageSize": "30",
+        "column": "sse",
+        "tabName": "fulltext",
+        "stock": "688012,9900038991",
+        "seDate": "2026-01-01~2027-12-31",
+        "category": "category_bndbg_szsh",
+        "isHLtitle": "true"
+      },
+      "response_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\category_bndbg_szsh_official_response.json",
+      "total": 2,
+      "announcements": [
+        {
+          "announcementId": "1225482915",
+          "announcementTitle": "2026年半年度报告摘要",
+          "announcementTime": 1787155200000,
+          "adjunctUrl": "finalpage/2026-08-20/1225482915.PDF",
+          "secCode": "688012"
+        },
+        {
+          "announcementId": "1225482884",
+          "announcementTitle": "2026年半年度报告",
+          "announcementTime": 1787155200000,
+          "adjunctUrl": "finalpage/2026-08-20/1225482884.PDF",
+          "secCode": "688012"
+        }
+      ]
+    }
+  ],
+  "acquisition_usage": {
+    "schema_version": "1.0",
+    "response_bytes": 2754,
+    "cost_usd": "0"
+  }
+}

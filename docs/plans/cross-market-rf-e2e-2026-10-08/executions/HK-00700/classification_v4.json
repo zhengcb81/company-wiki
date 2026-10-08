@@ -1,0 +1,77 @@
+{
+  "issue": "HK-v3-R02 independent-peer competitive risk improperly counted as positive triangulation",
+  "reference": "RF references/growth-driver-tree.md lines35-46",
+  "before": {
+    "evidence_id": "games_independent_peer_context",
+    "evidence_type": "independent_peer_company_net_revenue_and_franchises",
+    "inference_distance": "one_step",
+    "conclusion": "NetEase H1 Games-and-related-VAS NET revenue +8.3%, active franchises and international operations demonstrate independent competition, not Tencent market share or identified revenue displacement. Different accounting and perimeter prevent use as an exact growth coefficient.",
+    "claim_ids": [
+      "v3_growth_driver_games_independent_peer_context_240",
+      "v3_growth_driver_games_independent_peer_context_241",
+      "v3_growth_driver_games_independent_peer_context_242"
+    ]
+  },
+  "after": {
+    "evidence_id": "games_independent_peer_context",
+    "evidence_type": "independent_peer_competition_risk",
+    "inference_distance": "contrary",
+    "conclusion": "NetEase H1 Games-and-related-VAS NET revenue +8.3%, active franchises and international operations indicate an analogical competitive RISK to Tencent paid retention/launch monetization. Classified contrary, not positive support for Tencent evergreen/new-launch revenue growth. Different company, accounting and perimeter; no explicit causal bridge identifying Tencent share, displacement, payer/ARPPU or growth magnitude. This evidence cannot triangulate the positive Tencent mechanism.",
+    "claim_ids": [
+      "v3_growth_driver_games_independent_peer_context_240",
+      "v3_growth_driver_games_independent_peer_context_241",
+      "v3_growth_driver_games_independent_peer_context_242"
+    ]
+  },
+  "runtime_rule": "research/drivers.py excludes only inference_distance=contrary from supporting evidence; analogical alone still enters supporting types/sources",
+  "choice": "contrary encodes direction; narrative discloses analogical peer distance and does not invent Tencent causal bridge",
+  "expected_engine_evidence_status": "limited",
+  "expected_confidence_limitation": "Growth driver evergreen_and_launch_monetization is not triangulated across two evidence types and sources",
+  "no_new_claims": true,
+  "all325_claims_unchanged": true,
+  "all53_parameter_records_unchanged": true,
+  "independent_review": "PENDING",
+  "actual_input_diff": [
+    {
+      "path": "/data_gaps/16",
+      "before": null,
+      "after": "NetEase peer growth and live franchises are contrary/analogical competitive-risk context, not independent positive evidence for Tencent evergreen/new-launch revenue. Games remains limited, without triangulation credit; all325 claim bytes and53 parameter records unchanged."
+    },
+    {
+      "path": "/forecast_version",
+      "before": "2026-10-08-hk-v3",
+      "after": "2026-10-08-hk-v4"
+    },
+    {
+      "path": "/growth_driver_tree/drivers/0/counterevidence_rationale",
+      "before": "Tencent Q2 international Games -0.8% reported but +4% constant currency, higher Wuthering Waves/VALORANT PC offset lower certain Supercell games; FY2025 international +33% reported/+32% constant currency is a different full-year baseline. NetEase competition is separate one-step context, not measured Tencent displacement.",
+      "after": "Tencent Q2 international Games -0.8% reported but +4% constant currency, higher Wuthering Waves/VALORANT PC offset lower certain Supercell games; FY2025 international +33% reported/+32% constant currency is a different full-year baseline. NetEase competition is separately classified analogical competitive risk/contrary evidence, not positive Tencent growth support or measured displacement."
+    },
+    {
+      "path": "/growth_driver_tree/drivers/0/evidence_nodes/1/conclusion",
+      "before": "Tencent Q2 international Games -0.8% reported but +4% constant currency, higher Wuthering Waves/VALORANT PC offset lower certain Supercell games; FY2025 international +33% reported/+32% constant currency is a different full-year baseline. NetEase competition is separate one-step context, not measured Tencent displacement.",
+      "after": "Tencent Q2 international Games -0.8% reported but +4% constant currency, higher Wuthering Waves/VALORANT PC offset lower certain Supercell games; FY2025 international +33% reported/+32% constant currency is a different full-year baseline. NetEase competition is separately classified analogical competitive risk/contrary evidence, not positive Tencent growth support or measured displacement."
+    },
+    {
+      "path": "/growth_driver_tree/drivers/0/evidence_nodes/2/conclusion",
+      "before": "NetEase H1 Games-and-related-VAS NET revenue +8.3%, active franchises and international operations demonstrate independent competition, not Tencent market share or identified revenue displacement. Different accounting and perimeter prevent use as an exact growth coefficient.",
+      "after": "NetEase H1 Games-and-related-VAS NET revenue +8.3%, active franchises and international operations indicate an analogical competitive RISK to Tencent paid retention/launch monetization. Classified contrary, not positive support for Tencent evergreen/new-launch revenue growth. Different company, accounting and perimeter; no explicit causal bridge identifying Tencent share, displacement, payer/ARPPU or growth magnitude. This evidence cannot triangulate the positive Tencent mechanism."
+    },
+    {
+      "path": "/growth_driver_tree/drivers/0/evidence_nodes/2/evidence_type",
+      "before": "independent_peer_company_net_revenue_and_franchises",
+      "after": "independent_peer_competition_risk"
+    },
+    {
+      "path": "/growth_driver_tree/drivers/0/evidence_nodes/2/inference_distance",
+      "before": "one_step",
+      "after": "contrary"
+    }
+  ],
+  "actual_engine_evidence_status": "limited",
+  "actual_confidence_limitation_restored": "Growth driver evergreen_and_launch_monetization is not triangulated across two evidence types and sources",
+  "confidence_score": 64.0,
+  "income_and_sensitivity_results": "UNCHANGED",
+  "old_protected_count": 188,
+  "old_files": "UNCHANGED"
+}

@@ -1,0 +1,97 @@
+[
+  {
+    "category": "latest_annual_filing",
+    "status": "checked",
+    "source_ids": [
+      "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
+    ],
+    "checked_date": "2026-10-08",
+    "conclusion": "2025 annual report opened, revenue and policy/risk/strategy checked. Does not falsely report March proposed acquisition as completed.",
+    "material_revenue_target_ids": []
+  },
+  {
+    "category": "latest_results_release",
+    "status": "checked",
+    "source_ids": [
+      "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+    ],
+    "checked_date": "2026-10-08",
+    "conclusion": "Latest 2026H1 filing opened and verified; H1 revenue6,691.28732767m is not doubled mechanically to annual revenue.",
+    "material_revenue_target_ids": [
+      "CMP_annual_2026",
+      "CMP_annual_2027",
+      "CMP_annual_2028"
+    ]
+  },
+  {
+    "category": "latest_earnings_call",
+    "status": "not_available",
+    "source_ids": [],
+    "checked_date": "2026-10-08",
+    "conclusion": "No AMEC telephone-call TXT obtained via ET. Full official September10 network results Q&A was read and registered separately as strategy communication; this is not falsely labeled an ET telephone transcript. No claim that missing telephone coverage proves management has no target.",
+    "material_revenue_target_ids": [],
+    "rationale": "No AMEC telephone-call TXT obtained via ET. Full official September10 network results Q&A was read and registered separately as strategy communication; this is not falsely labeled an ET telephone transcript. No claim that missing telephone coverage proves management has no target.",
+    "search_description": "688012 official earnings-call/IR presentation, 2026H1 through information date; AMEC homepage, SSE IR2 and September10 roadshow, secondary leads for official originals",
+    "search_event": {
+      "query_scope": "688012 official earnings-call/IR presentation, 2026H1 through information date; AMEC homepage, SSE IR2 and September10 roadshow, secondary leads for official originals",
+      "query_time": "2026-10-08",
+      "event_ids": [
+        "turn231search2",
+        "turn231view0",
+        "turn232view0",
+        "turn235search0",
+        "cua-roadshow40766-actual-open"
+      ],
+      "generated_by": "rf_cn_execution logged observed tool calls",
+      "event_sha256": "e1b90fa9f78a84dd21bf81621b23774b21e3c6bbe9b901d3e0628b3746bcde7e"
+    }
+  },
+  {
+    "category": "latest_investor_presentation",
+    "status": "not_available",
+    "source_ids": [],
+    "checked_date": "2026-10-08",
+    "conclusion": "Search identified August2026 IR record DOCX through secondary leads, but no verified official original or complete presentation captured. AMEC homepage and IR2 failed web access. Original unavailable to this run, not proof it does not exist.",
+    "material_revenue_target_ids": [],
+    "rationale": "Search identified August2026 IR record DOCX through secondary leads, but no verified official original or complete presentation captured. AMEC homepage and IR2 failed web access. Original unavailable to this run, not proof it does not exist.",
+    "search_description": "688012 official earnings-call/IR presentation, 2026H1 through information date; AMEC homepage, SSE IR2 and September10 roadshow, secondary leads for official originals",
+    "search_event": {
+      "query_scope": "688012 official earnings-call/IR presentation, 2026H1 through information date; AMEC homepage, SSE IR2 and September10 roadshow, secondary leads for official originals",
+      "query_time": "2026-10-08",
+      "event_ids": [
+        "turn231search2",
+        "turn231view0",
+        "turn232view0",
+        "turn235search0",
+        "cua-roadshow40766-actual-open"
+      ],
+      "generated_by": "rf_cn_execution logged observed tool calls",
+      "event_sha256": "e1b90fa9f78a84dd21bf81621b23774b21e3c6bbe9b901d3e0628b3746bcde7e"
+    }
+  },
+  {
+    "category": "latest_strategy_communication",
+    "status": "checked",
+    "source_ids": [
+      "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "amec_sse_results_qa_20260910"
+    ],
+    "checked_date": "2026-10-08",
+    "conclusion": "H1 products and the complete September10 interactive dataset checked. All8 AMEC records are identity-filtered. Capacity/site plans and overseas cumulative approximately800 reaction stages are context, not annual revenue/accepted volume forecasts. Pre-collected responses are separately logged.",
+    "material_revenue_target_ids": []
+  },
+  {
+    "category": "material_announcements_since_last_filing",
+    "status": "checked",
+    "source_ids": [
+      "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+    ],
+    "checked_date": "2026-10-08",
+    "conclusion": "All19 official CNINFO announcement titles from August20 through October8 were read (metadata only). H1 pages53/176/177 acquisition/targets and complete September10 interactive Q&A checked in original. Post-H1 fund announcement and capex-delay documents are not fully downloaded/opened; no facts or targets inferred from titles alone.",
+    "material_revenue_target_ids": [
+      "CMP_annual_2026",
+      "CMP_annual_2027",
+      "CMP_annual_2028"
+    ]
+  }
+]

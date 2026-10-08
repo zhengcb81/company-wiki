@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0",
+  "company": "CN-688012",
+  "agent_id": "rf_cn_execution",
+  "timestamp_utc": "2026-10-08T08:41:52.932789+00:00",
+  "status": "PARTIAL",
+  "scope": "One bounded v3 closure repair of independentCN01-04; not independent acceptance",
+  "findings": [
+    {
+      "id": "CN01",
+      "status": "REPAIRED_PENDING_INDEPENDENT_REVIEW",
+      "changes": "Aftermarket renamedNonEquipmentResidual; 9futureparameter claims+root reboundactualannual53 withadditional48/65,H1p19/p23 businesscontext. Policyretained onlyrecognition. Residualcomposition/renewalunknown; direct_revenue fallback, uncertainpersistence, suitablefalsifiers, nine-dimensionnarrowing. Numerics transparentlyretained.",
+      "artifacts": [
+        "v3_build_input.py",
+        "fact_checks_v3.json",
+        "v3_input_repair_receipt.json"
+      ]
+    },
+    {
+      "id": "CN02",
+      "status": "REPAIRED_PENDING_INDEPENDENT_REVIEW",
+      "changes": "CustomerA39.99/22.15 completeannualp219boundall9futureunit assumptions. SEMI2027/28 completeclaim+China2026moderationcontrarybothEquipmentroots. FullTSVH1p16packagingclaim supplementsfilm. Fourrisknodes reboundactualH1p32supply/p33tech+merger withspecificscope; HQdelaycompany4additionalcontrary. No quantifiedclientcapexclaim.",
+      "artifacts": [
+        "fact_checks_v3.json",
+        "formal_verification_v3.json"
+      ]
+    },
+    {
+      "id": "CN03",
+      "status": "REPAIRED_WITH_VISIBLE_GAPS_PENDING_INDEPENDENT_REVIEW",
+      "changes": "All19entries individualtriage. 9originalPDFs actualexistingSIDfreeboundedfetch; full8company+onebrokerreview. Company1225482911distinguishedbroker1225482916; fund/loancash neverrevenue. Discovered1225482894local-salesmaturity300000万元targetregisteredcapacity_plan/ambiguous/mismatch/unmodeled. HQfulluse2027-12 updates9unitrationales+2contrarynodes. 1225482917expectedrelatedsalesauthorization not guaranteed recognizedtarget/internalelimination. 2880incentivegrowthconditionsmention remainsgapasnumeric/year scheduleunobtained.",
+      "artifacts": [
+        "announcement_triage_v3.json",
+        "announcements_v3_receipts.json",
+        "communication_coverage_v3.json"
+      ]
+    },
+    {
+      "id": "CN04",
+      "status": "REPAIRED_PENDING_INDEPENDENT_REVIEW",
+      "changes": "IndependentactualHTTPsameSHAPDFreceipt usedstandardCWPsource-facts append-onlysource_url correctionto8/20statictransport; subsequent realRF/FF/CWP verifiedrawreuse returnedcorrectpubdate/URL,newcapture,sameSHA,0download. Raw,oldsidecar,oldacquisitionreceipt andv2protectedbytespreserved.",
+      "artifacts": [
+        "requests/v3_half_source_url_fact.json",
+        "commands/1791448083706980100-v3-half-append-only-url-source-facts.stdout.txt",
+        "commands/1791448098298712100-v3-half2026-corrected-url-reuse.stdout.txt"
+      ]
+    }
+  ],
+  "remaining_gaps": {
+    "CWPWorker": "BLOCKED/not_run",
+    "IR_original_DOCX": "BLOCKED/not_obtained",
+    "equity_incentive_target_numeric_schedule": "not_obtained; company mentions existence; no numeric fabrication",
+    "residual_quantitative_calibration": "unknown",
+    "phaseII_local_sales_target": "ambiguous period/mismatch/unmodeled"
+  },
+  "formal_check_labels": [
+    "v3-validate-final",
+    "v3-formal-engine-markdown",
+    "v3-immutable-snapshot",
+    "v3-strong-render-calc-snapshot-protection",
+    "v3-publication-registry-audit",
+    "v3-lint-final",
+    "v3-hashcheck-final"
+  ],
+  "claims_checked": 106,
+  "announcement_originals": 9,
+  "announcement_response_bytes": 1804695,
+  "provider_cost_usd": "0",
+  "external_llm_calls": 0,
+  "output_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3",
+  "old_v2_protected": [
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\input.json",
+      "sha256": "3dcce43a05deb2faf92236af8c1b979c07334a34d5b7debb30d25057ab611746",
+      "bytes": 228626
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\forecast.json",
+      "sha256": "a7b2797fecb8edb1b2ba2641b3d65c7996e938427fc01eed1f8e513aa7be420d",
+      "bytes": 491060
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\forecast.md",
+      "sha256": "f6bca82bf5fd5b1db373685da4bd910f510ffcc1d780070b6ab747c6d37a8a83",
+      "bytes": 91014
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\snapshot_v2.json",
+      "sha256": "8768495ec9b6df68bb9ab57cfc63c924023ca1b6ca38949a923cba6ec39484e5",
+      "bytes": 748108
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\manifest.json",
+      "sha256": "6cba812e9f1dd8af3ea0fd8667c46a3a4dc0233cfc77fbe5dfcda981a2deaaf8",
+      "bytes": 142575
+    }
+  ],
+  "shared_mutation": "Only authorized standardappend-only CWPsource_urlfact; no sharedcode/config/install/Git/Dayu changes",
+  "future_backtest": "NOT_APPLICABLE: futureactualsunknown",
+  "publication_attestation": "unattested",
+  "publication_registry": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\publications.jsonl"
+}

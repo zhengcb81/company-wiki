@@ -1,0 +1,5 @@
+usage: company-wiki-source-catalog source-facts [-h] --request REQUEST
+
+options:
+  -h, --help         show this help message and exit
+  --request REQUEST

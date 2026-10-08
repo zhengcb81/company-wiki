@@ -1,0 +1,158 @@
+{
+  "Azure": {
+    "claim_ids": [
+      "claim_3_azure_growth_low_2027",
+      "claim_4_azure_growth_low_2028",
+      "claim_5_azure_growth_low_2029",
+      "claim_6_azure_growth_base_2027",
+      "claim_7_azure_growth_base_2028",
+      "claim_8_azure_growth_base_2029",
+      "claim_9_azure_growth_high_2027",
+      "claim_10_azure_growth_high_2028",
+      "claim_11_azure_growth_high_2029"
+    ],
+    "locators": [
+      "PPT17 FY25/FY26 external consumption revenue; PPT18 restated annual40% and quarterly series",
+      "PPT21 Q1 FY27 44-45%CC and FX drag, explicitly a quarterly CC perimeter",
+      "Official call CFO Intelligent Cloud results: efficiency/capacity promptly monetized; CFO outlook demand>supply; Brent Thill and Mark Moerdler Q&A supply, process timing, pricing/late-binding flexibility",
+      "Amazon Q2 release AWS37% (analogical category demand only)"
+    ],
+    "limitation": "No equation converts Q1 CC to annual reported growth. Future range/fade remains analyst assumption; 38% cannot be proven a conservative same-basis lower bound from44-45%CC."
+  },
+  "Microsoft 365 cloud": {
+    "claim_ids": [
+      "claim_17_microsoft_365_cloud_growth_low_2027",
+      "claim_18_microsoft_365_cloud_growth_low_2028",
+      "claim_19_microsoft_365_cloud_growth_low_2029",
+      "claim_20_microsoft_365_cloud_growth_base_2027",
+      "claim_21_microsoft_365_cloud_growth_base_2028",
+      "claim_22_microsoft_365_cloud_growth_base_2029",
+      "claim_23_microsoft_365_cloud_growth_high_2027",
+      "claim_24_microsoft_365_cloud_growth_high_2028",
+      "claim_25_microsoft_365_cloud_growth_high_2029"
+    ],
+    "locators": [
+      "PPT7/13 M365 cloud commercial+consumer/developer/security perimeter",
+      "PPT17 whole-cloud FY25/FY26 revenue; PPT18 commercial-only18%reported/15%CC and period-end seats7%",
+      "PPT21 commercial-only Q1 CC17%,18%adjusted; consumer mid-teens separately",
+      "Official call CEO paid30M Copilot seats/usage billing; CFO premium mix and lower-ARPU seat offset; Adam Wood Q&A deployment/usage/E7 monetization"
+    ],
+    "limitation": "Commercial KPI does not equal whole M365 cloud; period-end seats are not annual average billed seats; no fabricated ARPU."
+  },
+  "Productivity and server licensing": {
+    "claim_ids": [
+      "claim_31_productivity_and_server_licensing_growth_low_2027",
+      "claim_32_productivity_and_server_licensing_growth_low_2028",
+      "claim_33_productivity_and_server_licensing_growth_low_2029",
+      "claim_34_productivity_and_server_licensing_growth_base_2027",
+      "claim_35_productivity_and_server_licensing_growth_base_2028",
+      "claim_36_productivity_and_server_licensing_growth_base_2029",
+      "claim_37_productivity_and_server_licensing_growth_high_2027",
+      "claim_38_productivity_and_server_licensing_growth_high_2028",
+      "claim_39_productivity_and_server_licensing_growth_high_2029"
+    ],
+    "locators": [
+      "PPT7/9 aggregation of old Server and M365 commercial/consumer product licenses",
+      "PPT17 annual revenue35391→37285 and quarterly seasonality",
+      "Official call CFO FY27 full-year M365 products/server mid-single decline due launch comps; old Q1 M365 products growth vs server decline must preserve separate perimeter",
+      "PPT21 new licensing low-single Q1 decline"
+    ],
+    "limitation": "Full-year qualitative language does not supply an exact-5% midpoint; separate analyst range and scope/contract timing."
+  },
+  "Industry solutions": {
+    "claim_ids": [
+      "claim_42_industry_solutions_growth_low_2027",
+      "claim_43_industry_solutions_growth_low_2028",
+      "claim_44_industry_solutions_growth_low_2029",
+      "claim_45_industry_solutions_growth_base_2027",
+      "claim_46_industry_solutions_growth_base_2028",
+      "claim_47_industry_solutions_growth_base_2029",
+      "claim_48_industry_solutions_growth_high_2027",
+      "claim_49_industry_solutions_growth_high_2028",
+      "claim_50_industry_solutions_growth_high_2029"
+    ],
+    "locators": [
+      "PPT7/13 Dynamics365+LinkedIn Talent/Sales+healthcare/life sciences cloud/products",
+      "PPT17 annual18417→20345",
+      "PPT18 industry cloud annual12%reported/10%CC; PPT21 new cloud subset high-single Q1 growth",
+      "Official call CFO Dynamics ERP healthy bookings vs CRM moderation/longer sales cycles; CEO healthcare utilization and Frontier delivery examples"
+    ],
+    "limitation": "New cloud-subset KPI is not combined cloud/products annual stream; utilization counts need revenue bridge or explicit unmodeled status."
+  },
+  "Frontier and support services": {
+    "claim_ids": [
+      "claim_53_frontier_and_support_services_growth_low_2027",
+      "claim_54_frontier_and_support_services_growth_low_2028",
+      "claim_55_frontier_and_support_services_growth_low_2029",
+      "claim_56_frontier_and_support_services_growth_base_2027",
+      "claim_57_frontier_and_support_services_growth_base_2028",
+      "claim_58_frontier_and_support_services_growth_base_2029",
+      "claim_59_frontier_and_support_services_growth_high_2027",
+      "claim_60_frontier_and_support_services_growth_high_2028",
+      "claim_61_frontier_and_support_services_growth_high_2029"
+    ],
+    "locators": [
+      "PPT7 Enterprise/partner renamed Frontier/support; PPT17 FY25 7760 FY26 8260",
+      "Official call CEO Microsoft Frontier Co:6000 experts,330 projects/164 customers and two specific customer projects",
+      "FY25 10K Note1 pp55-57 consulting services recognized as provided"
+    ],
+    "limitation": "Projects/experts do not determine billable revenue without fee/delivery/renewal data; future6/5/4% needs explicit conditional reasoning."
+  },
+  "Search and advertising": {
+    "claim_ids": [
+      "claim_67_search_and_advertising_growth_low_2027",
+      "claim_68_search_and_advertising_growth_low_2028",
+      "claim_69_search_and_advertising_growth_low_2029",
+      "claim_70_search_and_advertising_growth_base_2027",
+      "claim_71_search_and_advertising_growth_base_2028",
+      "claim_72_search_and_advertising_growth_base_2029",
+      "claim_73_search_and_advertising_growth_high_2027",
+      "claim_74_search_and_advertising_growth_high_2028",
+      "claim_75_search_and_advertising_growth_high_2029"
+    ],
+    "locators": [
+      "PPT8/11/13 LinkedIn Marketing/Premium perimeter and ex-TAC distinction",
+      "PPT17 annual22171→24835; PPT18 restated advertising KPI annual14%reported/12%CC",
+      "PPT21 ex-TAC Q1 mid-to-high-single growth; official call CFO volume/yield and third-party partnership drag"
+    ],
+    "limitation": "Do not apply a net ex-TAC KPI to the reported aggregate as a same-basis growth conversion."
+  },
+  "XBOX": {
+    "claim_ids": [
+      "claim_78_xbox_growth_low_2027",
+      "claim_79_xbox_growth_low_2028",
+      "claim_80_xbox_growth_low_2029",
+      "claim_81_xbox_growth_base_2027",
+      "claim_82_xbox_growth_base_2028",
+      "claim_83_xbox_growth_base_2029",
+      "claim_84_xbox_growth_high_2027",
+      "claim_85_xbox_growth_high_2028",
+      "claim_86_xbox_growth_high_2029"
+    ],
+    "locators": [
+      "PPT8 unchanged Xbox perimeter; PPT17 annual23455→21790 and FY26Q4 decline",
+      "Official call CEO FY27 return-to-growth expectation vs CFO Q1 mid-single content decline and hardware decline",
+      "PPT21 Q1 content/hardware guidance unchanged"
+    ],
+    "limitation": "Annual Base-4% is openly a disagreement, not a management forecast. Bind both opposing passages; future recovery timing lacks verified launch/delivery evidence."
+  },
+  "Windows OEM and devices": {
+    "claim_ids": [
+      "claim_89_windows_oem_and_devices_growth_low_2027",
+      "claim_90_windows_oem_and_devices_growth_low_2028",
+      "claim_91_windows_oem_and_devices_growth_low_2029",
+      "claim_92_windows_oem_and_devices_growth_base_2027",
+      "claim_93_windows_oem_and_devices_growth_base_2028",
+      "claim_94_windows_oem_and_devices_growth_base_2029",
+      "claim_95_windows_oem_and_devices_growth_high_2027",
+      "claim_96_windows_oem_and_devices_growth_high_2028",
+      "claim_97_windows_oem_and_devices_growth_high_2029"
+    ],
+    "locators": [
+      "PPT8/17 changed Other perimeter,17315→17087 annual",
+      "Official call CFO FY27 high-teens decline: component pricing, lower PC demand, Windows10 end-support comp and elevated inventory",
+      "PPT21 Q1 low-twenties decline and unusually wide outcomes"
+    ],
+    "limitation": "High-teens is retained text, not normalized to18%. Base-18% and subsequent stabilization must be independently justified annual assumptions."
+  }
+}

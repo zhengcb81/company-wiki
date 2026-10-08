@@ -1,0 +1,204 @@
+{
+  "qualitative_target_id": "v2_qualitative_original_01",
+  "source_id": "src_call",
+  "locator": "Complete official call, call.txt line 108",
+  "exact_wording": "All up, we added another gigawatt of capacity this quarter and remain on track to roughly double our overall capacity in just two years.",
+  "metric_perimeter": "Infrastructure capacity",
+  "source_period": "two years; terminal date unstated",
+  "commitment_strength": "expectation/guidance",
+  "comparison_or_gap": "Capacity is only an enablement condition; no capacity-to-utilization/price revenue bridge. Retain roughly double wording, not a 100% revenue target.",
+  "source_publication_date": "2026-07-29",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_qualitative_original_02",
+  "source_id": "src_call",
+  "locator": "Complete official call, call.txt line 205",
+  "exact_wording": "We have the best IP in the industry, and talented studios around the world, and believe we can bring these strengths together and expect to return the business to growth in fiscal 2027.",
+  "metric_perimeter": "XBOX total",
+  "source_period": "FY2027",
+  "commitment_strength": "expectation/guidance",
+  "comparison_or_gap": "Compare annual same-perimeter direction: management expects positive growth; analyst low-10/base-4 disagree, high+2 agrees direction. No exact management rate is invented.",
+  "source_publication_date": "2026-07-29",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_qualitative_original_03",
+  "source_id": "src_call",
+  "locator": "Complete official call, call.txt line 255",
+  "exact_wording": "First some reminders. In both the M365 Commercial products and Server products KPIs, we are lapping higher transactional purchasing from the timing of product launches and expect revenue from both to decline in the mid-single digits for the full fiscal year.",
+  "metric_perimeter": "Old M365commercial/server product KPIs",
+  "source_period": "FY2027",
+  "commitment_strength": "expectation/guidance",
+  "comparison_or_gap": "Directionally consistent with negative FY27 three scenarios(-8,-5,-2%); new aggregate includes consumer/licenses and reclass, so no exact target attainment. Base-5 is assumption, not mid-single normalization.",
+  "source_publication_date": "2026-07-29",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_qualitative_original_04",
+  "source_id": "src_call",
+  "locator": "Complete official call, call.txt line 256",
+  "exact_wording": "Growth in Windows OEM and Devices will be impacted by lower PC market demand as higher component costs increase device pricing, a prior-year comparable that benefited from Windows 10 end-of-support, and elevated inventory levels. As a result, we expect revenue to decline in the high-teens for the fiscal year.",
+  "metric_perimeter": "Windows OEM and devices",
+  "source_period": "FY2027",
+  "commitment_strength": "expectation/guidance",
+  "comparison_or_gap": "Compare negative annual direction only; low-23/base-18/high-13 are assumptions, not inferred endpoints of high-teens. Scope has small Other reclass.",
+  "source_publication_date": "2026-07-29",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_qualitative_original_05",
+  "source_id": "src_call",
+  "locator": "Complete official call, call.txt line 257",
+  "exact_wording": "Moving to FX. Assuming current rates remain stable, we now expect FX to decrease full-year fiscal revenue growth by less than 1 point with no meaningful impact to COGS and operating expense growth.",
+  "metric_perimeter": "Company FX effect",
+  "source_period": "FY2027",
+  "commitment_strength": "expectation/guidance",
+  "comparison_or_gap": "Conditional current-rates FX<1pp drag; no annual currency bridge or FX adjustment parameter. Explicit unmodeled risk; cannot subtract from CC quarterly guidance to derive an annual rate.",
+  "source_publication_date": "2026-07-29",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_qualitative_original_06",
+  "source_id": "src_call",
+  "locator": "Complete official call, call.txt line 258",
+  "exact_wording": "At the company level, with strong commercial momentum, we continue to expect another fiscal year of double-digit revenue and operating income growth. Operating expenses should grow in the mid to high-single digits, reflecting continued investment in R&D compute capacity, talent, and data. And we expect FY27 capital expenditures will grow year-over-year given demand signals across our portfolio.",
+  "metric_perimeter": "Company total revenue",
+  "source_period": "FY2027",
+  "commitment_strength": "expectation/guidance",
+  "comparison_or_gap": "Formal numeric ledger records only >=10% linguistic floor, compares all scenarios after construction. Non-revenue opex/CapEx/tax portions are outside revenue scope.",
+  "source_publication_date": "2026-07-29",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_qualitative_original_07",
+  "source_id": "src_call",
+  "locator": "Complete official call, call.txt line 264",
+  "exact_wording": "In commercial bookings, when adjusted for the impact from OpenAI, we expect healthy growth on a growing expiry base driven by strong execution across our core annuity sales motions. As a reminder, the significant OpenAI contracts signed in the prior year will result in some quarterly volatility in both the bookings and RPO growth rates.",
+  "metric_perimeter": "Commercial bookings excluding OpenAI",
+  "source_period": "FY2027Q1",
+  "commitment_strength": "expectation/guidance",
+  "comparison_or_gap": "Bookings is not recognized revenue; healthy growth no numeric point, expiry-base/OpenAI volatility matters. No conversion model, unmodeled with context mappings only.",
+  "source_publication_date": "2026-07-29",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_qualitative_original_08",
+  "source_id": "src_call",
+  "locator": "Complete official call, call.txt line 268",
+  "exact_wording": "In M365 Commercial cloud, we expect growth of approximately 16% in constant currency on an adjusted basis which normalizes for the prior-year comparable that benefited from 1 point of in-period revenue recognition, or 15% on a reported basis. Sequential growth from our momentum in Copilot, E5, and E7, is mitigated a bit by the lower ARPU new seat adds in frontline worker and small and medium business SKUs. With the premium SKU momentum and the increased monetization opportunity from adding usage-based billing products alongside per-seat licensing in July, we expect to see acceleration in M365 Commercial cloud revenue growth through this fiscal year.",
+  "metric_perimeter": "Old M365commercial cloud",
+  "source_period": "FY2027Q1 and throughFY2027",
+  "commitment_strength": "expectation/guidance",
+  "comparison_or_gap": "Old Q1 15%CC/16%adjusted superseded mechanically by PPT21 17/18 on new commercial scope; whole annual cloud includes consumer/developer. Annual case12/17/22 not same-basis target attainment. Acceleration-through-year remains qualitative.",
+  "source_publication_date": "2026-07-29",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_qualitative_original_09",
+  "source_id": "src_call",
+  "locator": "Complete official call, call.txt line 269",
+  "exact_wording": "M365 Commercial products revenue should grow in the mid-single digits driven by the timing of long-duration M365 contracts, partially offset by the impact from the prior-year comparable noted earlier.",
+  "metric_perimeter": "Old M365commercial products",
+  "source_period": "FY2027Q1",
+  "commitment_strength": "expectation/guidance",
+  "comparison_or_gap": "Quarter mid-single positive differs from annual negative and new quarter aggregate low-single decline; only directional contract-timing context, no quarterly model or target comparison.",
+  "source_publication_date": "2026-07-29",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_qualitative_original_10",
+  "source_id": "src_call",
+  "locator": "Complete official call, call.txt line 270",
+  "exact_wording": "M365 consumer cloud revenue should grow in the mid-teens, down sequentially as we lap the benefit from last year’s price increase. Growth will again be driven by ARPU and an increase in subscription volume.",
+  "metric_perimeter": "M365consumer cloud",
+  "source_period": "FY2027Q1",
+  "commitment_strength": "expectation/guidance",
+  "comparison_or_gap": "Quarter mid-teens subset unchanged under PPT21; full annual cloud cannot be mapped quantitatively without consumer weight/mix; no midpoint invented.",
+  "source_publication_date": "2026-07-29",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_qualitative_original_11",
+  "source_id": "src_call",
+  "locator": "Complete official call, call.txt line 271",
+  "exact_wording": "For LinkedIn, we expect revenue growth in the high-single digits.",
+  "metric_perimeter": "Old LinkedIn total",
+  "source_period": "FY2027Q1",
+  "commitment_strength": "expectation/guidance",
+  "comparison_or_gap": "High-single old total splits Talent/Sales into Industry and Marketing/Premium into Search; no component bridge. Explicit mismatch, no annual comparison.",
+  "source_publication_date": "2026-07-29",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_qualitative_original_12",
+  "source_id": "src_call",
+  "locator": "Complete official call, call.txt line 272",
+  "exact_wording": "And in Dynamics 365, we expect revenue growth to be in the low-teens, relatively stable quarter-over-quarter driven by continued growth in ERP, although impacted by the bookings trends noted earlier.",
+  "metric_perimeter": "Dynamics365",
+  "source_period": "FY2027Q1",
+  "commitment_strength": "expectation/guidance",
+  "comparison_or_gap": "Low-teens cloud subset includes ERP strength and CRM moderation; new Industrycloud quarter high-single on wider scope. No quarterly/whole annual conversion.",
+  "source_publication_date": "2026-07-29",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_qualitative_original_13",
+  "source_id": "src_call",
+  "locator": "Complete official call, call.txt line 274",
+  "exact_wording": "In Azure, we expect revenue growth of approximately 45% in constant currency and we remain focused on delivering efficiencies that help us bridge the gaps we see as customer demand continues to exceed supply. Even with the strong close to Q4, we continue to expect H1 growth to accelerate. And as a reminder, year-over-year Azure growth rates can vary quarter-to-quarter based on capacity timing and contract mix.",
+  "metric_perimeter": "Old Azure and other cloud services",
+  "source_period": "FY2027Q1 and H1FY2027",
+  "commitment_strength": "expectation/guidance",
+  "comparison_or_gap": "Old45%CC quarter mechanically new44–45%CC on narrower Azure scope; H1acceleration is expectation. Annual38reported separate, FX/capacity uncertain; no conservative same-basis bound.",
+  "source_publication_date": "2026-07-29",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_qualitative_original_14",
+  "source_id": "src_call",
+  "locator": "Complete official call, call.txt line 275",
+  "exact_wording": "In our on-premises server business, we expect revenue to decline in the low to mid-single digits, with ongoing customer shift to cloud offerings and the prior-year comparable noted earlier.",
+  "metric_perimeter": "Old onpremserver",
+  "source_period": "FY2027Q1",
+  "commitment_strength": "expectation/guidance",
+  "comparison_or_gap": "Low-to-mid-single decline quarter on old subset; new licensing aggregate quarter low-single decline. No annual midpoint or quantitative same-basis comparison.",
+  "source_publication_date": "2026-07-29",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_qualitative_original_15",
+  "source_id": "src_call",
+  "locator": "Complete official call, call.txt line 278",
+  "exact_wording": "Search advertising revenue ex-TAC growth should be in the mid-single digits, down sequentially due to the impact of third-party partnerships. Growth will continue to be driven by consistent trends in revenue per search and volume.",
+  "metric_perimeter": "Old search advertising exTAC",
+  "source_period": "FY2027Q1",
+  "commitment_strength": "expectation/guidance",
+  "comparison_or_gap": "Old mid-single quarter mechanically new mid-to-high-single exTAC including LinkedInMarketing/Premium. Net KPI cannot convert to recognized gross/mixed annual rate.",
+  "source_publication_date": "2026-07-29",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_qualitative_original_16",
+  "source_id": "src_call",
+  "locator": "Complete official call, call.txt line 279",
+  "exact_wording": "And in XBOX content and services, we expect revenue to decline in the mid-single digits. Hardware revenue should decline year-over-year.",
+  "metric_perimeter": "Xbox content/services and hardware",
+  "source_period": "FY2027Q1",
+  "commitment_strength": "expectation/guidance",
+  "comparison_or_gap": "Content mid-single decline and hardware decline are subsets/quarter; annual total base-4 is independently judged and disagrees with annual positive management expectation. No quarter model.",
+  "source_publication_date": "2026-07-29",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_qualitative_original_17",
+  "source_id": "src_presentation",
+  "locator": "slides20-21/image20.png and image21.png",
+  "exact_wording": "Latest restated quarter outlook: licensing low-single decline; industry solutions cloud high-single growth; search exTAC mid-to-high-single growth; Xbox content/services mid-single decline and hardware decline; Windows OEM/devices low20s decline.",
+  "metric_perimeter": "FY27Q1 licensing/Industrycloud/exTAC/Xbox/Windows rows (five distinct scopes)",
+  "source_period": "FY2027Q1",
+  "commitment_strength": "mechanical_reclassification_of_prior_outlook",
+  "comparison_or_gap": "Split explicit quarter-row statements into children below. No quarter or CC/exTAC conversion to annual recognized revenue.",
+  "source_publication_date": "2026-09-02",
+  "numeric_normalization_performed": false
+}

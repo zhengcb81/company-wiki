@@ -1,0 +1,1 @@
+{"assertion_id": "sa-5602b47204c24ed9831dfa7fa46a58c5", "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe", "status": "recorded"}

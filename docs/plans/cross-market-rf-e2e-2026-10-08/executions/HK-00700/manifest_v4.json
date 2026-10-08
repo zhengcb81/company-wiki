@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "company": "Tencent Holdings Limited",
+  "market": "HK",
+  "security_id": "00700",
+  "agent_id": "/root/rf_hk_execution",
+  "as_of_date": "2026-10-08",
+  "status": "partial_pending_independent_review",
+  "output_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v4",
+  "primary_artifacts": [
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v4\\input.json",
+      "bytes": 525466,
+      "sha256": "71990a6e6d2b4fd489a7c31b80c1892b3470ae96cabdfefc1693a01e978d1b5b",
+      "role": "single classification repair input"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v4\\forecast.json",
+      "bytes": 1095377,
+      "sha256": "7d6fc7037ba34bc57a4f80dcef688f2f239db6a58c9aa7ee77cc00a5b1b4d27a",
+      "role": "formal actual engine output"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v4\\forecast.md",
+      "bytes": 170792,
+      "sha256": "2d3478d32179a81d46563a2533d47d39e9537929ce4c3b816528b8326137a111",
+      "role": "same-source deterministic Markdown"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v4\\snapshot.json",
+      "bytes": 1687845,
+      "sha256": "0382c543df010fe9620fb813d2f470770142327634a4b4be51d39f7fc5b47796",
+      "role": "immutable v4 snapshot"
+    }
+  ],
+  "registry": {
+    "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v4\\publications.jsonl",
+    "bytes": 2286,
+    "sha256": "bd7f8ed7ce69d13e5a4ff6728d7bfe763771b8df87fd015e43c17249349c1b6a",
+    "role": "v4 independent registry"
+  },
+  "classification_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\classification_v4.json",
+  "repair_json_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v4.json",
+  "repair_markdown_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v4.md",
+  "strong_verification_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v4_delivery_verification.json",
+  "old_integrity_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\after_v4_integrity.json",
+  "old_protected_count": 188,
+  "runtime_version": "4.1.0",
+  "runtime_schema": "3.7",
+  "runtime_51": "unchanged installed/canonical SHA",
+  "command_index": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\index.jsonl",
+  "process_trace_dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\processes",
+  "environment": {
+    "REVENUE_PUBLICATION_REGISTRY": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v4\\publications.jsonl",
+    "CWP_AUDIT_PROCESS_DIR": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\processes",
+    "PYTHONPATH_prefix": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\process_trace"
+  },
+  "sealed_v3_manifest": {
+    "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\manifest_v3.json",
+    "bytes": 10102,
+    "sha256": "61add4702bddef07c0a921dc4b0fff71b33fff06dcd2c403be726c8f5a10fb95",
+    "role": "unchanged sealed v3 manifest"
+  },
+  "review_inputs": [
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\reviews\\HK-00700\\recheck_v3.md",
+      "bytes": 13130,
+      "sha256": "57ede56a14695951480c7d1fff4abfe9ccba1c610006b63153dd3367ae6f7606",
+      "role": "sealed independent v3 review"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\reviews\\HK-00700\\recheck_v3.json",
+      "bytes": 697510,
+      "sha256": "1c977411c0291b09020ffc129c865f3bd153cd45411c677a763a22010cb94640",
+      "role": "sealed independent v3 review"
+    }
+  ],
+  "calls_and_cost": {
+    "provider_calls": 0,
+    "paid_LLM_calls": 0,
+    "cost_usd": 0
+  },
+  "remaining_limitations": [
+    "FY2025 official same-SHA provenance and exact public days unverified",
+    "Bounded Dayu missing filing downloaded_new→reuse not demonstrated",
+    "Latest ET/call body absent and full announcements interval not opened",
+    "HK canonical Worker/narrative consumption not demonstrated",
+    "Conditional five-stream direct_growth forecast without causal coefficient/reference-class/future accuracy calibration"
+  ],
+  "independent_review": "PENDING; executor not signed",
+  "ended_at": "2026-10-08T08:59:44.529202+00:00"
+}

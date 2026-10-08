@@ -1,0 +1,1 @@
+Preserved v1 input/result and immutable snapshot; updated semantic classification only, numerical assumptions unchanged.

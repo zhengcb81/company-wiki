@@ -1,0 +1,180 @@
+{
+  "schema_version": "1.0",
+  "company": "CN-688012",
+  "skill_root": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+  "engine_version": "4.1.0",
+  "steps": [
+    {
+      "step": "0",
+      "status": "PASS",
+      "detail": "Nine dimensions map to actual used drivers with explicit physical-capacity/history/market-share gaps. Runtime completeness is not economic validation.",
+      "artifacts": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\input.json",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\forecast.json"
+      ],
+      "independent_review_status": "pending"
+    },
+    {
+      "step": "1",
+      "status": "PASS",
+      "detail": "688012,CN; as_of2026-10-08;FY2025base;FY2026–28;CNYmillion;12-31yearend. No later disclosures.",
+      "artifacts": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\input.json"
+      ],
+      "independent_review_status": "pending"
+    },
+    {
+      "step": "1A",
+      "status": "PASS_WITH_GAPS",
+      "detail": "Six official communication categories;4 checked, telephone TXT/presentation original unavailable. Read all195 interactive replies +29 pre-collected;8 AMEC replies+1 AMEC pre-collected answer filtered. All19 post-H1 announcement titles read, bodies except H1 unavailable.",
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\communication_coverage.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\roadshow_public_questions_receipt.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\roadshow_precollect_complete_receipt.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\recent_announcements_receipt.json"
+      ],
+      "independent_review_status": "pending"
+    },
+    {
+      "step": "1B",
+      "status": "PASS_WITH_LIMITATIONS",
+      "detail": "Independent SEMI primary WFE reference + China moderation; original client discount/concentration/acquisition risks; explicit alternative conditions/falsifiers. No statistically calibrated AMEC forecasts.",
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\model_design.md",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\fact_checks.json",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\input.json"
+      ],
+      "independent_review_status": "pending"
+    },
+    {
+      "step": "2",
+      "status": "PASS",
+      "detail": "3 historical revenues from actual2025annual comparative table; precise total versus rounded equipment residual reconcile. Full2024annual readonly lookup not_found, never claimed read.",
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\annual2025_source_inspection.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\fact_checks.json"
+      ],
+      "independent_review_status": "pending"
+    },
+    {
+      "step": "3",
+      "status": "PASS",
+      "detail": "Real RF→FF→CWP annual reuse and SID H1 download; same H1request then0downloads/stableSHA; pathless SourceRef verified original binary reads. Claim/capture hashes bound.",
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\index.jsonl",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\half2026_current_raw_receipt.json",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\input.json"
+      ],
+      "independent_review_status": "pending"
+    },
+    {
+      "step": "4",
+      "status": "PASS_WITH_LIMITATIONS",
+      "detail": "3 mutually exclusive curves: legacy Equipment excluding CMP, legacy composite residual excluding CMP, acquired CMP all100%consolidated income after control. Unknown product/substream bases not invented.",
+      "artifacts": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\input.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\model_design.md"
+      ],
+      "independent_review_status": "pending"
+    },
+    {
+      "step": "5",
+      "status": "PASS",
+      "detail": "Equipment acceptance PIT. Mixed spares/services and CMP recognized direct-revenue aggregate, explicit boundaries and complete policy claims, no false progress/lag.",
+      "artifacts": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\input.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\fact_checks.json"
+      ],
+      "independent_review_status": "pending"
+    },
+    {
+      "step": "6",
+      "status": "PASS_WITH_LIMITATIONS",
+      "detail": "Three-year low/base/high allnoncrossing, futuredriver amounts classified assumptions, actual H1 not doubled; 2026 CMP annual seller target mismatch;27/28 full-year independent benchmarks.",
+      "artifacts": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\input.json",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\forecast.json"
+      ],
+      "independent_review_status": "pending"
+    },
+    {
+      "step": "6A",
+      "status": "PASS",
+      "detail": "4 causal roots;weights sum to1 bysegment; actual Base parameter IDs, evidence/falsifiers and contrary risk nodes, one explicit analogical outside-industry reference. Weights are analyst allocations.",
+      "artifacts": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\input.json",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\forecast.json"
+      ],
+      "independent_review_status": "pending"
+    },
+    {
+      "step": "7",
+      "status": "PASS",
+      "detail": "All9 scenario-year sums, bridge/increments/CAGR independently recomputed; no company adjustment or constraint invented, no ownership multiplication.",
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\formal_verification_receipt.json"
+      ],
+      "independent_review_status": "pending"
+    },
+    {
+      "step": "8",
+      "status": "PASS",
+      "detail": "Four terminal driver tests use percent fractions .10/.05/.20/.30; no assumption single shocks sum into joint stress. Strong validator recomputes sensitivity.",
+      "artifacts": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\forecast.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\formal_verification_receipt.json"
+      ],
+      "independent_review_status": "pending"
+    },
+    {
+      "step": "9",
+      "status": "PASS_WITH_LIMITATIONS",
+      "detail": "Engine score is workflow/evidence quality only; no immutable realized historical accuracy. Proxy sold-chambers≠provenacceptedrevenue units; mixed fallbacks and target mismatch remain material.",
+      "artifacts": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\forecast.json"
+      ],
+      "independent_review_status": "pending"
+    },
+    {
+      "step": "10",
+      "status": "PASS",
+      "detail": "Actual template/lint/hashcheck/validate-only/engine/input-requiredstrong/exactbytesrender; samev2JSONandMD delivered onlyTEMP.",
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\index.jsonl",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\formal_verification_receipt.json",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\forecast.json",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\forecast.md"
+      ],
+      "independent_review_status": "pending"
+    },
+    {
+      "step": "11",
+      "status": "PASS",
+      "detail": "Write-once v2snapshot matches exact explicit-version input and full formal result, both strongvalidated. v1freeze retained, not modified after new IR facts.",
+      "artifacts": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\snapshot_v2.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\formal_verification_receipt.json"
+      ],
+      "independent_review_status": "pending"
+    },
+    {
+      "step": "11-evaluate",
+      "status": "NOT_APPLICABLE",
+      "detail": "FY2026–28 actual complete results unknown at information date; never used scenario projections as actual backtest.",
+      "artifacts": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\snapshot_v2.json"
+      ],
+      "independent_review_status": "pending"
+    },
+    {
+      "step": "CWP-worker",
+      "status": "NOT_RUN",
+      "detail": "This run binary-verified raw and deterministically parsed259annual/210H1 pages in TEMP. It did not schedule CWPWorker or publish production narrative derivatives. receipt parser/LLMcounts null remain unknown, not relabeled zero.",
+      "artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\annual2025_source_inspection.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\half2026_current_source_inspection.json"
+      ],
+      "independent_review_status": "pending"
+    }
+  ]
+}

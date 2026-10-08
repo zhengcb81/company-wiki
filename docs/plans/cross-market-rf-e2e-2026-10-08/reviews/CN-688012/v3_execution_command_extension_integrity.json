@@ -1,0 +1,142 @@
+[
+  {
+    "id": "1791447950172428200-v3-protect-originals",
+    "label": "v3-protect-originals",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791447960515666300-v3-official-material-announcements",
+    "label": "v3-official-material-announcements",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791448071698723100-v3-prepare-half-source-url-fact",
+    "label": "v3-prepare-half-source-url-fact",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791448083706980100-v3-half-append-only-url-source-facts",
+    "label": "v3-half-append-only-url-source-facts",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791448098298712100-v3-half2026-corrected-url-reuse",
+    "label": "v3-half2026-corrected-url-reuse",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791448378051799200-v3-build-reviewed-input",
+    "label": "v3-build-reviewed-input",
+    "returncode": 1,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791448418198398300-v3-build-correct-original-boundaries",
+    "label": "v3-build-correct-original-boundaries",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791448432250639300-v3-lint",
+    "label": "v3-lint",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791448433060383700-v3-hashcheck",
+    "label": "v3-hashcheck",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791448434716674200-v3-validate",
+    "label": "v3-validate",
+    "returncode": 2,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791448515176079900-v3-build-final-context-bindings",
+    "label": "v3-build-final-context-bindings",
+    "returncode": 1,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791448546157685400-v3-final-input",
+    "label": "v3-final-input",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791448548917116300-v3-validate-final",
+    "label": "v3-validate-final",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791448569445707900-v3-formal-engine-markdown",
+    "label": "v3-formal-engine-markdown",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791448572672317000-v3-immutable-snapshot",
+    "label": "v3-immutable-snapshot",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791448675223579600-v3-lint-final",
+    "label": "v3-lint-final",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791448675802832400-v3-strong-render-calc-snapshot-protection",
+    "label": "v3-strong-render-calc-snapshot-protection",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791448676334417000-v3-hashcheck-final",
+    "label": "v3-hashcheck-final",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791448676745158400-v3-publication-registry-audit",
+    "label": "v3-publication-registry-audit",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  },
+  {
+    "id": "1791448912778309700-v3-finalize-engineering-handoff",
+    "label": "v3-finalize-engineering-handoff",
+    "returncode": 0,
+    "issues": [],
+    "status": "PASS"
+  }
+]

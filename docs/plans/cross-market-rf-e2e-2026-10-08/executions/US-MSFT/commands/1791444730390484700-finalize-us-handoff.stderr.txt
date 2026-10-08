@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\executions\US-MSFT\finish_msft.py", line 165, in <module>
+    sys.exit(checked_commands() if args.action=='checks' else handoff())
+                                                              ~~~~~~~^^
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\executions\US-MSFT\finish_msft.py", line 37, in handoff
+    claim=claims[row['claim_id']];source=sources[claim['source_id']]
+                 ~~~^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'

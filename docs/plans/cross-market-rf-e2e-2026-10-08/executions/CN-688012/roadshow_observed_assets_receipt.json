@@ -1,0 +1,31 @@
+{
+  "basis": "actual cua pageAssets inventory9ef2eae4-17c7-4fde-8ced-f581cde4c627",
+  "assets": [
+    {
+      "url": "https://roadshow.sseinfo.com/9252.8f9ada5b80359fdc.chunk.js",
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\9252.8f9ada5b80359fdc.chunk.js",
+      "bytes": 21632,
+      "sha256": "b05cfbd1e08b6f4616eb38db5ec03d55f997b232a167ade5a657ccb4e9253af0"
+    },
+    {
+      "url": "https://roadshow.sseinfo.com/3539.8c87283a5b464230.chunk.js",
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\3539.8c87283a5b464230.chunk.js",
+      "bytes": 153089,
+      "sha256": "96314568f7f681c28479d0ce6d34c7bca248441f6b3437a176bc5e43094f36e7"
+    },
+    {
+      "url": "https://roadshow.sseinfo.com/4811.7d3ee828b5dd6682.chunk.js",
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\4811.7d3ee828b5dd6682.chunk.js",
+      "bytes": 28838,
+      "sha256": "8d73193ce771af3be95a16113c99aa622ca7834d5c4ae6d63d40e90108a43ae9"
+    },
+    {
+      "url": "https://roadshow.sseinfo.com/5994.05e109e0d3541aa9.chunk.js",
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\5994.05e109e0d3541aa9.chunk.js",
+      "bytes": 153140,
+      "sha256": "fe9a81a9242d87bbcb1d5df45675694ac1e96a868875266fba1a1b72e3d785ec"
+    }
+  ],
+  "total_bytes": 356699,
+  "execution": "read text only; no downloaded script executed"
+}

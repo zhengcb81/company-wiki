@@ -1,0 +1,2 @@
+{"timestamp_utc": "2026-10-08T07:20:51.977473+00:00", "pid": 107408, "ppid": 63712, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\validate_msft.py"], "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"}}
+{"timestamp_utc": "2026-10-08T07:20:52.529126+00:00", "pid": 107408, "ppid": 63712, "event": "python_exit", "data": {}}

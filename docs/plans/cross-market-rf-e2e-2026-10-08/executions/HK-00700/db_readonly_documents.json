@@ -1,0 +1,30 @@
+[
+  {
+    "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+    "primary_source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+    "title": "腾讯：2024年年度报告",
+    "source_type": "regulatory_filing",
+    "document_kind": "annual_report",
+    "published_date": "2025-04-08",
+    "source_status": "active",
+    "metadata_priority": 10,
+    "metadata_json": "{\"acquisition\": {\"market\": \"HK\", \"published_date\": \"2025-04-08\", \"security_id\": \"00700\", \"source_title\": \"腾讯：2024年年度报告\", \"source_url\": \"https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0408/2025040800668_c.pdf\"}, \"dayu_meta\": null, \"group_key\": \"腾讯/raw/financial_reports/annual/腾讯：2024年年度报告.pdf\", \"root_id\": \"company_raw\", \"scanner_version\": \"1.0.0\", \"prompt_injection_review\": {\"schema_version\": \"1.0\", \"status\": \"not_detected\", \"reviewer\": \"policy-reviewer-fc906c\", \"reviewed_at\": \"2026-08-12T00:38:20Z\", \"evidence_sha256\": \"bae136f28bc930780710ed17839d890121a2642274c6612f50ed0f912daa978d\"}}",
+    "text_fingerprint": "49b844f2f83a5de3ae65b434b34ef47fb67ad69c4949d749d5dc4614cb9863dc",
+    "first_seen_at": "2026-07-26T10:31:10Z",
+    "last_seen_at": "2026-08-20T21:26:55Z"
+  },
+  {
+    "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+    "primary_source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+    "title": "腾讯：2025年年度报告",
+    "source_type": "regulatory_filing",
+    "document_kind": "annual_report",
+    "published_date": "2026-04-09",
+    "source_status": "active",
+    "metadata_priority": 10,
+    "metadata_json": "{\"acquisition\": {\"market\": \"HK\", \"published_date\": \"2026-04-09\", \"security_id\": \"00700\", \"source_title\": \"腾讯：2025年年度报告\", \"source_url\": \"https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf\"}, \"dayu_meta\": null, \"group_key\": \"腾讯/raw/financial_reports/annual/腾讯：2025年年度报告.pdf\", \"root_id\": \"company_raw\", \"scanner_version\": \"1.0.0\", \"prompt_injection_review\": {\"schema_version\": \"1.0\", \"status\": \"not_detected\", \"reviewer\": \"policy-reviewer-fc906c\", \"reviewed_at\": \"2026-08-12T00:38:20Z\", \"evidence_sha256\": \"f5c8311e4920494fbb7d7f56796019eddc72683c89076632becacead80a470b1\"}}",
+    "text_fingerprint": "da98e28c45ba260070a7937495a377e22e0fef52eeec2d8bfd7fa2c1f50a15cb",
+    "first_seen_at": "2026-07-26T10:31:10Z",
+    "last_seen_at": "2026-08-20T21:26:55Z"
+  }
+]

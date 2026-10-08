@@ -1,0 +1,32 @@
+[
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\input.json",
+    "sha256": "3dcce43a05deb2faf92236af8c1b979c07334a34d5b7debb30d25057ab611746",
+    "bytes": 228626,
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\forecast.json",
+    "sha256": "a7b2797fecb8edb1b2ba2641b3d65c7996e938427fc01eed1f8e513aa7be420d",
+    "bytes": 491060,
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\forecast.md",
+    "sha256": "f6bca82bf5fd5b1db373685da4bd910f510ffcc1d780070b6ab747c6d37a8a83",
+    "bytes": 91014,
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\snapshot_v2.json",
+    "sha256": "8768495ec9b6df68bb9ab57cfc63c924023ca1b6ca38949a923cba6ec39484e5",
+    "bytes": 748108,
+    "status": "PASS"
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\manifest.json",
+    "sha256": "6cba812e9f1dd8af3ea0fd8667c46a3a4dc0233cfc77fbe5dfcda981a2deaaf8",
+    "bytes": 142575,
+    "status": "PASS"
+  }
+]

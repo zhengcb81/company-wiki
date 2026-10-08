@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\executions\CN-688012\v3_build_input.py", line 70, in <module>
+    cid=makeclaim('claim_residual_boundary_annual',annual['source_id'],'growth_driver','residual_boundary_annual','FY2025 annual PDF p65, whole semiconductor equipment related revenue and rounded dedicated-equipment subset',span(ap,65,'报告期内，公司半导体设备收入','34.76%。'))
+                                                                                                                                                                                                                                ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\executions\CN-688012\v3_build_input.py", line 37, in span
+    if end:text=text[:text.index(end)+len(end)]
+                      ~~~~~~~~~~^^^^^
+ValueError: substring not found

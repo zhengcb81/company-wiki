@@ -1,0 +1,70 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "company_wiki.source_catalog.source_reader_cli",
+    "--config",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+    "--document-id",
+    "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+    "--source-id",
+    "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+    "--content-sha256",
+    "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+    "--purpose",
+    "filing_reuse"
+  ],
+  "source_ref": {
+    "byte_size": 9165875,
+    "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+    "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+    "mime_type": "application/pdf",
+    "schema_version": "2.0",
+    "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
+  },
+  "receipt": {
+    "byte_size": 9165875,
+    "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+    "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+    "manifest": {
+      "byte_size": 9165875,
+      "canonical_entity_id": null,
+      "collector_name": null,
+      "collector_version": null,
+      "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "display_name": "中微公司",
+      "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "document_kind": "annual_report",
+      "fiscal_period": "FY",
+      "fiscal_year": 2025,
+      "form_type": null,
+      "language": "zh",
+      "market": "CN",
+      "mime_type": "application/pdf",
+      "period_end": "2025-12-31",
+      "provider": null,
+      "provider_document_id": null,
+      "published_date": "2026-03-31",
+      "retrieved_at": null,
+      "security_id": "688012",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "source_url": "http://static.cninfo.com.cn/finalpage/2026-03-31/1225062431.PDF",
+      "title": "中微公司：2025年年度报告"
+    },
+    "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+    "read_at": "2026-10-08T06:52:35.925680+00:00",
+    "review": {
+      "evidence_sha256": null,
+      "policy_hash": null,
+      "reviewed_at": null,
+      "source_sha256": null,
+      "status": "not_reviewed"
+    },
+    "schema_version": "2.1",
+    "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+    "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+    "status": "ok"
+  },
+  "diagnostic_only": true
+}

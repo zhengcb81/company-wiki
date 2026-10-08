@@ -1,0 +1,47 @@
+[
+  {
+    "id": "presentation",
+    "url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/FY27ExternalKPIs.pptx",
+    "final_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/FY27ExternalKPIs.pptx",
+    "sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+    "bytes": 4016522,
+    "matches_execution": true,
+    "elapsed": 2.430398399999831
+  },
+  {
+    "id": "results",
+    "url": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q4/press-release-webcast",
+    "final_url": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q4/press-release-webcast",
+    "sha256": "1755789bdff336df5cda42a0e28a50b5e2dd408d93c9aa25ec58d4accebc0c3a",
+    "bytes": 808847,
+    "matches_execution": false,
+    "elapsed": 0.28595839999616146
+  },
+  {
+    "id": "call",
+    "url": "https://www.microsoft.com/en-us/Investor/events/fy-2026/earnings-fy-2026-q4",
+    "final_url": "https://www.microsoft.com/en-us/Investor/events/fy-2026/earnings-fy-2026-q4",
+    "sha256": "017886d271376199bac08570b1eb83663b233bf0e2293fa36da49502bc8cce95",
+    "bytes": 273401,
+    "matches_execution": false,
+    "elapsed": 0.325190699993982
+  },
+  {
+    "id": "metrics",
+    "url": "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q4/metrics",
+    "final_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q4/metrics",
+    "sha256": "78a4565cfe0304f223c631b86e0ab003e949c65bbe9dcc24fd1a515f2b46222f",
+    "bytes": 198174,
+    "matches_execution": false,
+    "elapsed": 0.2755256999953417
+  },
+  {
+    "id": "aws",
+    "url": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Second-Quarter-Results/default.aspx",
+    "final_url": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Second-Quarter-Results/default.aspx",
+    "sha256": "d83bb386a7d20107ec1480472490dab56ab83122e4e7f569fd1f36608c96e5a4",
+    "bytes": 647411,
+    "matches_execution": true,
+    "elapsed": 1.6102034999930765
+  }
+]

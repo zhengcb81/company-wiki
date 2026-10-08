@@ -1,0 +1,10 @@
+{
+  "tool": "web.run",
+  "action": "official page open",
+  "url": "https://www.semi.org/en/semi-press-release/global-semiconductor-equipment-sales-forecast-to-reach-a-record-229-billion-dollars-in-2028-semi-reports",
+  "tool_call_id": "turn234view0",
+  "snapshot_sha256": "3da627dd2754e73dc70e974dccfdb356e09de9d92d594da2c8879a4e7a2a0e8d",
+  "captured_at": "2026-10-08T07:48:05.667565+00:00",
+  "artifact": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\semi_web_open_snapshot.json",
+  "snapshot_kind": "complete returned parsed tool output; not original HTML"
+}

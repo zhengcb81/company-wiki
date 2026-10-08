@@ -1,0 +1,1 @@
+{"status": "PARTIAL", "claims": 106, "targets": 4, "pdf_originals": 9, "bytes": 1804695, "formal_checks": "green", "old_v2_unchanged": true, "artifacts": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012"}

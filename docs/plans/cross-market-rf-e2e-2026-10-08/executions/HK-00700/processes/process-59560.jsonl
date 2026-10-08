@@ -1,0 +1,2 @@
+{"timestamp_utc": "2026-10-08T08:29:29.138339+00:00", "pid": 59560, "ppid": 25336, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_build.py"], "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3"}}
+{"timestamp_utc": "2026-10-08T08:29:29.581870+00:00", "pid": 59560, "ppid": 25336, "event": "python_exit", "data": {}}

@@ -1,0 +1,121 @@
+{
+  "observations": [
+    {
+      "source_id": "src_call",
+      "source_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+      "locator": "call.txt line 101",
+      "exact_wording": "All up, our annual revenue surpassed $331 billion, up 18%.",
+      "unit_and_date": "Use original statement units; annual/quarter/period-end scope is explicit in surrounding call.",
+      "check": "Direct official text retained; not an additive revenue input",
+      "publication_date": "2026-07-29"
+    },
+    {
+      "source_id": "src_call",
+      "source_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+      "locator": "call.txt line 102",
+      "exact_wording": "Microsoft Cloud surpassed $214 billion, up 27%.",
+      "unit_and_date": "Use original statement units; annual/quarter/period-end scope is explicit in surrounding call.",
+      "check": "Direct official text retained; not an additive revenue input",
+      "publication_date": "2026-07-29"
+    },
+    {
+      "source_id": "src_call",
+      "source_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+      "locator": "call.txt line 103",
+      "exact_wording": "And Azure surpassed $100 billion, up 41%.",
+      "unit_and_date": "Use original statement units; annual/quarter/period-end scope is explicit in surrounding call.",
+      "check": "Direct official text retained; not an additive revenue input",
+      "publication_date": "2026-07-29"
+    },
+    {
+      "source_id": "src_call",
+      "source_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+      "locator": "call.txt line 108",
+      "exact_wording": "All up, we added another gigawatt of capacity this quarter and remain on track to roughly double our overall capacity in just two years.",
+      "unit_and_date": "Use original statement units; annual/quarter/period-end scope is explicit in surrounding call.",
+      "check": "Direct official text retained; not an additive revenue input",
+      "publication_date": "2026-07-29"
+    },
+    {
+      "source_id": "src_call",
+      "source_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+      "locator": "call.txt line 230",
+      "exact_wording": "Commercial remaining performance obligation grew 84% to $678 billion. All sequential commercial RPO growth was driven by commitments from customers outside of frontier model companies. And RPO increased 25% when excluding OpenAI.",
+      "unit_and_date": "Use original statement units; annual/quarter/period-end scope is explicit in surrounding call.",
+      "check": "Direct official text retained; not an additive revenue input",
+      "publication_date": "2026-07-29"
+    },
+    {
+      "source_id": "src_call",
+      "source_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+      "locator": "call.txt line 231",
+      "exact_wording": "RPO, including OpenAI, has a weighted average duration of 2.3 years. And roughly 30% will be recognized in revenue in the next 12 months, up 37% year-over-year. The remaining portion recognized beyond the next 12 months increased 112%.",
+      "unit_and_date": "Use original statement units; annual/quarter/period-end scope is explicit in surrounding call.",
+      "check": "Direct official text retained; not an additive revenue input",
+      "publication_date": "2026-07-29"
+    },
+    {
+      "source_id": "src_call",
+      "source_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+      "locator": "call.txt line 236",
+      "exact_wording": "M365 Commercial cloud revenue increased 16% on an adjusted basis when normalized for the prior-year comparable that benefited from 2 points of in-period revenue recognition. And on a reported basis, revenue growth was 14%. Building on our Copilot momentum from Q3, net paid seat adds more than doubled sequentially, with paid seats now over 30 million. Premium offerings, including Copilot, E5, and early traction in E7, drove ARPU growth this quarter. And paid M365 Commercial seats grew 6% year-over-year with installed base expansion across all customer segments, though primarily in our small and medium business and frontline worker offerings.",
+      "unit_and_date": "Use original statement units; annual/quarter/period-end scope is explicit in surrounding call.",
+      "check": "Direct official text retained; not an additive revenue input",
+      "publication_date": "2026-07-29"
+    },
+    {
+      "source_id": "src_call",
+      "source_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+      "locator": "call.txt line 243",
+      "exact_wording": "In Azure and other cloud services, revenue grew 43%, against a prior year that included accelerating growth. Customer demand continues to exceed available capacity. Revenue growth was ahead of expectations driven by efficiency gains across our CPU and GPU fleet as well as process improvements to enable earlier delivery of new capacity. That additional in-quarter capacity for Azure was quickly monetized. Results also benefited from stronger-than-expected GitHub Copilot consumption following the June business model change to align pricing with usage and value.",
+      "unit_and_date": "Use original statement units; annual/quarter/period-end scope is explicit in surrounding call.",
+      "check": "Direct official text retained; not an additive revenue input",
+      "publication_date": "2026-07-29"
+    },
+    {
+      "source_id": "src_call",
+      "source_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+      "locator": "call.txt line 247",
+      "exact_wording": "Windows OEM and Devices revenue decreased 7% and Windows OEM decreased 5% driven by lower PC market demand and a high prior-year comparable that benefited from Windows 10 end of support. Results were ahead of expectations as OEM and channel partners continued to build inventory given increasing component prices.",
+      "unit_and_date": "Use original statement units; annual/quarter/period-end scope is explicit in surrounding call.",
+      "check": "Direct official text retained; not an additive revenue input",
+      "publication_date": "2026-07-29"
+    },
+    {
+      "source_id": "src_call",
+      "source_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+      "locator": "call.txt line 248",
+      "exact_wording": "Search advertising revenue ex-TAC increased 10% and 9% in constant currency with growth driven by higher revenue per search across Edge and Bing, as well as higher volume, though growth was impacted by third-party partnerships.",
+      "unit_and_date": "Use original statement units; annual/quarter/period-end scope is explicit in surrounding call.",
+      "check": "Direct official text retained; not an additive revenue input",
+      "publication_date": "2026-07-29"
+    },
+    {
+      "source_id": "src_call",
+      "source_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+      "locator": "call.txt line 264",
+      "exact_wording": "In commercial bookings, when adjusted for the impact from OpenAI, we expect healthy growth on a growing expiry base driven by strong execution across our core annuity sales motions. As a reminder, the significant OpenAI contracts signed in the prior year will result in some quarterly volatility in both the bookings and RPO growth rates.",
+      "unit_and_date": "Use original statement units; annual/quarter/period-end scope is explicit in surrounding call.",
+      "check": "Direct official text retained; not an additive revenue input",
+      "publication_date": "2026-07-29"
+    },
+    {
+      "source_id": "src_call",
+      "source_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+      "locator": "call.txt line 274",
+      "exact_wording": "In Azure, we expect revenue growth of approximately 45% in constant currency and we remain focused on delivering efficiencies that help us bridge the gaps we see as customer demand continues to exceed supply. Even with the strong close to Q4, we continue to expect H1 growth to accelerate. And as a reminder, year-over-year Azure growth rates can vary quarter-to-quarter based on capacity timing and contract mix.",
+      "unit_and_date": "Use original statement units; annual/quarter/period-end scope is explicit in surrounding call.",
+      "check": "Direct official text retained; not an additive revenue input",
+      "publication_date": "2026-07-29"
+    }
+  ],
+  "boundaries": [
+    "Cloud overlaps Azure/M365; not a fourth stream",
+    "RPO678B stock and 2.3-year duration are not annual recognized revenue",
+    "Over30million paid Copilot seats are period-end, not annual average",
+    "Old Azure annual100B is actual annual revenue, not run-rate; use new restated101938",
+    "AWS annualized169B is a peer run-rate; not a Microsoft input",
+    "Preview launches and unmonetized developer/user counts are not sales"
+  ],
+  "independent_review_pending": true
+}

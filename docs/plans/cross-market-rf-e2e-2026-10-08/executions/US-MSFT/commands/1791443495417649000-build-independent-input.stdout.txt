@@ -1,0 +1,1 @@
+{"parameters": 96, "claims": 123, "segments": 8, "output": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\input.json"}

@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "status": "independent_reviews_sealed",
+  "companies": {
+    "CN-688012": {
+      "input.json": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\input.json",
+      "forecast.json": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\forecast.json",
+      "forecast.md": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\forecast.md",
+      "snapshot.json": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\snapshot.json"
+    },
+    "HK-00700": {
+      "input.json": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v4\\input.json",
+      "forecast.json": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v4\\forecast.json",
+      "forecast.md": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v4\\forecast.md",
+      "snapshot.json": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v4\\snapshot.json"
+    },
+    "US-MSFT": {
+      "input.json": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\input.json",
+      "forecast.json": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\forecast.json",
+      "forecast.md": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\forecast.md",
+      "snapshot.json": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\snapshot.json"
+    }
+  },
+  "independent_review_references": {
+    "CN-688012": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\reviews\\CN-688012\\recheck_v3.json",
+    "HK-00700": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\reviews\\HK-00700\\recheck_v4.json",
+    "US-MSFT": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\reviews\\US-MSFT\\recheck_v2.json"
+  },
+  "independent_review_sha256": {
+    "CN-688012": "e56e3bac6408d51ef9c96098ca89ff7e675d61f3ab022fac0528ad1aaa79df01",
+    "HK-00700": "ff7276261998f590fce000532b88632b6b78327cb19cbf7826b7aceb4a5029f3",
+    "US-MSFT": "3d706bc288c62da8f0e05645b90a00b64c43b81bcba151eaf0c8d320d66bceb2"
+  }
+}

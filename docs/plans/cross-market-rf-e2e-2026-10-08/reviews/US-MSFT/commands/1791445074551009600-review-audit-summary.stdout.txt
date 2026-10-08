@@ -1,0 +1,283 @@
+
+### integrity summary
+{
+  "artifacts_checked": 90,
+  "artifact_failures": [],
+  "starts": 42,
+  "finishes": 42,
+  "failure_count": 10,
+  "unpaired": [],
+  "log_failures": []
+}
+initialize 0 0.305 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py init
+reuse-fy2025 3 3.519 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py prepare request_fy2025_reuse.json
+legacy-requests 1 0.213 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py legacy-requests
+reuse-fy2025-legacy 3 3.512 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py prepare request_fy2025_reuse_legacy.json
+legacy-requests-repair 0 0.182 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py legacy-requests
+reuse-fy2026-legacy 3 4.111 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py prepare request_fy2026_reuse_legacy.json
+template 0 0.531 python C:/Users/郑曾波/.agents/skills/revenue-forecast/scripts/generate_input_template.py --name Microsoft --base-year 2026 --forecast-years 2027 2028 2029 --segments Productivity and Business Processes Intelligent Cloud More Personal Computing --currency USD --unit million --output C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/template.json
+fetch-fy2026-legacy 3 3.041 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py prepare request_fy2026_fetch_legacy.json
+ff-fy2025-inspect 0 2.688 python C:/Users/郑曾波/Projects/filing-fetch/scripts/fetch_filing.py --request-file C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/request_fy2025_reuse.json
+producer-raw-read 0 0.92 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py raw-read
+official-presentation-href 0 1.076 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py aux-ir
+official-presentation 1 1.255 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py aux-presentation
+html-temporary-parse 0 2.239 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py parse-html
+reuse-fy2025-after-main-fix 0 3.514 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py prepare request_fy2025_reuse.json
+official-presentation-cdn 0 2.934 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py aux-presentation
+capture-opened-ancillary-pages 1 3.138 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py capture-pages
+capture-opened-ancillary-pages-resume 0 3.733 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py capture-pages
+build-independent-input 0 1.198 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/build_msft_input.py
+lint-input 0 0.185 python C:/Users/郑曾波/.agents/skills/revenue-forecast/scripts/lint_input.py C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/input.json
+sync-capture-claim-hashes 0 0.144 python C:/Users/郑曾波/.agents/skills/revenue-forecast/scripts/fix_hashes.py C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/input.json
+validate-input-collect-all 2 0.221 python C:/Users/郑曾波/.agents/skills/revenue-forecast/scripts/revenue_forecast.py C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/input.json --validate-only --verbose
+reuse-fy2024 0 3.8 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py prepare request_fy2024_reuse.json
+preserve-webtool-events 0 0.153 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py register-web
+exact-et-fmp-discovery 0 1.155 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py et-discover
+exact-et-fmp-entitlement-probe 0 1.709 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py et-probe
+build-mixed-recognition-input 0 0.257 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/build_msft_input.py
+build-causal-input 0 0.235 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/build_msft_input.py
+validate-current-schema-gaps 2 0.243 python C:/Users/郑曾波/.agents/skills/revenue-forecast/scripts/revenue_forecast.py C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/input.json --validate-only --verbose
+build-contract-aligned-input 0 0.225 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/build_msft_input.py
+validate-contract-aligned-input 0 0.518 python C:/Users/郑曾波/.agents/skills/revenue-forecast/scripts/revenue_forecast.py C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/input.json --validate-only --verbose
+emit-formal-json-markdown 0 1.43 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py forecast
+build-raw-guidance-units 0 0.391 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/build_msft_input.py
+emit-corrected-formal 0 1.454 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py forecast
+strong-validate-formal 0 0.867 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py strong-check
+finalize-versioned-input 0 0.222 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/build_msft_input.py
+formal-versioned-output 0 1.355 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py forecast
+freeze-before-future-actuals 0 1.039 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py snapshot
+strong-check-with-snapshot 0 0.998 python docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py strong-check
+frozen-final-preflight 0 1.897 python -X utf8 docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/finish_msft.py checks
+finalize-us-handoff 1 0.148 python -X utf8 docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/finish_msft.py handoff
+finalize-us-handoff-corrected-index 0 0.517 python -X utf8 docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/finish_msft.py handoff
+seal-us-handoff-source-paths 0 0.362 python -X utf8 docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/finish_msft.py handoff
+
+### defects
+[
+  {
+    "id": "US-FY26-ENSURE",
+    "status": "unresolved",
+    "impact": "No downloaded_new; original missing latest filing; repeat newfile test unavailable",
+    "evidence": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\request_fy2026_fetch_legacy_stderr.txt"
+  },
+  {
+    "id": "US-HTML-NARRATIVE",
+    "status": "unresolved",
+    "impact": "CWP canonical selective parser did not process text/html; BS4 temporary parse is not narrative Worker"
+  },
+  {
+    "id": "US-ET-FMP",
+    "status": "entitlement_required",
+    "impact": "FMP metadata discovery unsupported and exact fetch entitlement denied; no translated or imported TXT"
+  },
+  {
+    "id": "US-QUALITATIVE-TARGETS",
+    "status": "semantic_gap",
+    "impact": "11 numeric targets do not fully represent material qualitative targets; sidecar is explicit, not a formal gate waiver"
+  },
+  {
+    "id": "RF-V2-ENVELOPE-RAW-TIMESTAMPS",
+    "status": "fixed_by_MAIN",
+    "impact": "True schema2 reuse now succeeds; unknown original retrieved_at preserved"
+  },
+  {
+    "id": "RF-MIXED-AGGREGATE",
+    "status": "fixed_by_MAIN",
+    "impact": "Mixed recognized annual direct fallback supported; prevents fabricated OT/gross split"
+  }
+]
+
+### gaps
+[
+  "Azure: operating quantity, realized price/mix, churn and timing split undisclosed; direct_growth fallback reduces explicit-model confidence. No unit/ARPU is fabricated.",
+  "Microsoft 365 cloud: operating quantity, realized price/mix, churn and timing split undisclosed; direct_growth fallback reduces explicit-model confidence. No unit/ARPU is fabricated.",
+  "Productivity and server licensing: operating quantity, realized price/mix, churn and timing split undisclosed; direct_growth fallback reduces explicit-model confidence. No unit/ARPU is fabricated.",
+  "Industry solutions: operating quantity, realized price/mix, churn and timing split undisclosed; direct_growth fallback reduces explicit-model confidence. No unit/ARPU is fabricated.",
+  "Frontier and support services: operating quantity, realized price/mix, churn and timing split undisclosed; direct_growth fallback reduces explicit-model confidence. No unit/ARPU is fabricated.",
+  "Search and advertising: operating quantity, realized price/mix, churn and timing split undisclosed; direct_growth fallback reduces explicit-model confidence. No unit/ARPU is fabricated.",
+  "XBOX: operating quantity, realized price/mix, churn and timing split undisclosed; direct_growth fallback reduces explicit-model confidence. No unit/ARPU is fabricated.",
+  "Windows OEM and devices: operating quantity, realized price/mix, churn and timing split undisclosed; direct_growth fallback reduces explicit-model confidence. No unit/ARPU is fabricated.",
+  "Official FY26 filing acquisition not yet successful; FY25 recognition policy may be superseded.",
+  "Latest FY27 two-segment historical reclassification covers only FY25/FY26; FY24 product-group history not invented.",
+  "Mixed-recognition XBOX/Industry solutions and licensing/support allocation cannot be decomposed from reported data; annual recognized-flow fallback unsuitable for intra-year timing.",
+  "Qualitative targets are retained in sidecar because numeric-only target schema cannot encode mid-single/high-teens without invented precision.",
+  "Self-generated capture receipts are unsigned: provenance metadata and SHA integrity are verified; host identity is not cryptographically attested.",
+  "No historical immutable MSFT forecast+actual pairs available; no backtest accuracy claimed."
+]
+
+### calls_and_cost
+{
+  "external_llm_calls": 0,
+  "external_llm_tokens": 0,
+  "external_llm_cost_usd": 0,
+  "provider_paid_upgrade": false,
+  "et_component_discover_attempts": 1,
+  "et_component_fetch_attempts": 1,
+  "et_provider_http_count": null,
+  "et_note": "Discovery unsupported; exact standalone fetch mapped to FMP entitlement error. No HTTP instrumentation; do not infer total provider API usage from process count.",
+  "successful_regulatory_downloads": 0,
+  "known_reuse_downloads": 0,
+  "parser_calls_from_reuse_receipt": null,
+  "llm_calls_from_reuse_receipt": null,
+  "ancillary_captures": "Captured HTML/PPT and web.run views counted by artifact receipts, not passed off as filings."
+}
+
+### owned_cleanup
+{
+  "retained_for_independent_review": true,
+  "allowed_after_MAIN_acceptance": [
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT"
+  ],
+  "production_cleanup_performed": false
+}
+
+### unchanged_originals
+{
+  "actions": "read-only SourceRef raw read; no writes to original/CWP canonical directories",
+  "fy2025_actual_raw_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+  "matches_producer": true,
+  "global_filesystem_unchanged_claim": false,
+  "inventory_verification": "MAIN owns baseline/end inventory; executor does not infer all-store unchanged from single receipt"
+}
+
+### process-100528.jsonl
+{"timestamp_utc": "2026-10-08T06:59:00.776724+00:00", "pid": 100528, "ppid": 103456, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["-m", "--config", "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml", "--document-id", "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe", "--source-id", "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe", "--content-sha256", "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe", "--purpose", "filing_reuse"], "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"}}
+{"timestamp_utc": "2026-10-08T06:59:01.302866+00:00", "pid": 100528, "ppid": 103456, "event": "python_exit", "data": {}}
+
+
+### process-103456.jsonl
+{"timestamp_utc": "2026-10-08T06:58:58.045744+00:00", "pid": 103456, "ppid": 104676, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py", "--request-file", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\request_fy2025_reuse.json", "--company-wiki-catalog-config", "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml", "--timeout-seconds", "180"], "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"}}
+{"timestamp_utc": "2026-10-08T06:58:58.098536+00:00", "pid": 103456, "ppid": 104676, "event": "subprocess_spawn", "data": {"executable": null, "argv": "C:\\Miniconda\\python.exe C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_fetch_client.py --source-ref-v2 --timeout-seconds 180.0", "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"}}
+{"timestamp_utc": "2026-10-08T06:59:00.693194+00:00", "pid": 103456, "ppid": 104676, "event": "subprocess_spawn", "data": {"executable": null, "argv": "C:\\Miniconda\\python.exe -B -m company_wiki.source_catalog.source_reader_cli --config C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml --document-id urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe --source-id urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe --content-sha256 99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe --purpose filing_reuse", "cwd": null}}
+{"timestamp_utc": "2026-10-08T06:59:01.358097+00:00", "pid": 103456, "ppid": 104676, "event": "python_exit", "data": {}}
+
+
+### process-105256.jsonl
+{"timestamp_utc": "2026-10-08T07:31:48.204977+00:00", "pid": 105256, "ppid": 6864, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\input.json", "--validate-only", "--verbose"], "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"}}
+{"timestamp_utc": "2026-10-08T07:31:48.650084+00:00", "pid": 105256, "ppid": 6864, "event": "python_exit", "data": {}}
+
+
+### process-107408.jsonl
+{"timestamp_utc": "2026-10-08T07:20:51.977473+00:00", "pid": 107408, "ppid": 63712, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\validate_msft.py"], "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"}}
+{"timestamp_utc": "2026-10-08T07:20:52.529126+00:00", "pid": 107408, "ppid": 63712, "event": "python_exit", "data": {}}
+
+
+### process-11996.jsonl
+{"timestamp_utc": "2026-10-08T07:14:22.055126+00:00", "pid": 11996, "ppid": 110156, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["-m", "--config", "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml"], "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"}}
+{"timestamp_utc": "2026-10-08T07:14:22.900720+00:00", "pid": 11996, "ppid": 110156, "event": "python_exit", "data": {}}
+
+
+### process-25160.jsonl
+{"timestamp_utc": "2026-10-08T07:15:02.920630+00:00", "pid": 25160, "ppid": 23712, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_tool.py", "--request-stdin", "--operation", "discover"], "cwd": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts"}}
+{"timestamp_utc": "2026-10-08T07:15:03.316485+00:00", "pid": 25160, "ppid": 23712, "event": "subprocess_spawn", "data": {"executable": null, "argv": "C:\\Miniconda\\python.exe -u C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\retrieval_worker.py C:\\Users\\郑曾波\\AppData\\Local\\Temp\\et-retrieval-b9626uno\\request.json", "cwd": null}}
+{"timestamp_utc": "2026-10-08T07:15:03.843461+00:00", "pid": 25160, "ppid": 23712, "event": "python_exit", "data": {}}
+
+
+### process-32388.jsonl
+{"timestamp_utc": "2026-10-08T07:14:20.277102+00:00", "pid": 32388, "ppid": 71876, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py", "--request-file", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\request_fy2024_reuse.json", "--company-wiki-catalog-config", "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml", "--timeout-seconds", "180"], "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"}}
+{"timestamp_utc": "2026-10-08T07:14:20.335307+00:00", "pid": 32388, "ppid": 71876, "event": "subprocess_spawn", "data": {"executable": null, "argv": "C:\\Miniconda\\python.exe C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_fetch_client.py --source-ref-v2 --timeout-seconds 180.0", "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"}}
+{"timestamp_utc": "2026-10-08T07:14:23.019221+00:00", "pid": 32388, "ppid": 71876, "event": "subprocess_spawn", "data": {"executable": null, "argv": "C:\\Miniconda\\python.exe -B -m company_wiki.source_catalog.source_reader_cli --config C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml --document-id urn:company-wiki:document:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95 --source-id urn:company-wiki:source:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95 --content-sha256 43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95 --purpose filing_reuse", "cwd": null}}
+{"timestamp_utc": "2026-10-08T07:14:23.873221+00:00", "pid": 32388, "ppid": 71876, "event": "python_exit", "data": {}}
+
+
+### process-34496.jsonl
+{"timestamp_utc": "2026-10-08T07:15:03.385896+00:00", "pid": 34496, "ppid": 25160, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\retrieval_worker.py", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\et-retrieval-b9626uno\\request.json"], "cwd": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts"}}
+{"timestamp_utc": "2026-10-08T07:15:03.790069+00:00", "pid": 34496, "ppid": 25160, "event": "python_exit", "data": {}}
+
+
+### process-41728.jsonl
+{"timestamp_utc": "2026-10-08T07:14:20.517727+00:00", "pid": 41728, "ppid": 46728, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py", "--source-ref-v2", "--timeout-seconds", "180.0"], "cwd": "C:\\Users\\郑曾波\\Projects\\filing-fetch"}}
+{"timestamp_utc": "2026-10-08T07:14:20.575045+00:00", "pid": 41728, "ppid": 46728, "event": "subprocess_spawn", "data": {"executable": null, "argv": "C:\\Miniconda\\python.exe -B -S -c \"import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n\" C:\\Miniconda\\python.exe -m company_wiki.source_catalog.cli --config C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml identify --query MSFT --market US", "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"}}
+{"timestamp_utc": "2026-10-08T07:14:21.862289+00:00", "pid": 41728, "ppid": 46728, "event": "subprocess_spawn", "data": {"executable": null, "argv": "C:\\Miniconda\\python.exe -B -S -c \"import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n\" C:\\Miniconda\\python.exe -m company_wiki.source_catalog.source_query_cli --config C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml", "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"}}
+{"timestamp_utc": "2026-10-08T07:14:22.981060+00:00", "pid": 41728, "ppid": 46728, "event": "python_exit", "data": {}}
+
+
+### process-42740.jsonl
+{"timestamp_utc": "2026-10-08T06:58:58.538704+00:00", "pid": 42740, "ppid": 4928, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["-m", "--config", "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml", "identify", "--query", "MSFT", "--market", "US"], "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"}}
+{"timestamp_utc": "2026-10-08T06:58:59.580471+00:00", "pid": 42740, "ppid": 4928, "event": "python_exit", "data": {}}
+
+
+### process-44628.jsonl
+{"timestamp_utc": "2026-10-08T06:58:58.291192+00:00", "pid": 44628, "ppid": 69936, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py", "--source-ref-v2", "--timeout-seconds", "180.0"], "cwd": "C:\\Users\\郑曾波\\Projects\\filing-fetch"}}
+{"timestamp_utc": "2026-10-08T06:58:58.374456+00:00", "pid": 44628, "ppid": 69936, "event": "subprocess_spawn", "data": {"executable": null, "argv": "C:\\Miniconda\\python.exe -B -S -c \"import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n\" C:\\Miniconda\\python.exe -m company_wiki.source_catalog.cli --config C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml identify --query MSFT --market US", "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"}}
+{"timestamp_utc": "2026-10-08T06:58:59.663715+00:00", "pid": 44628, "ppid": 69936, "event": "subprocess_spawn", "data": {"executable": null, "argv": "C:\\Miniconda\\python.exe -B -S -c \"import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n\" C:\\Miniconda\\python.exe -m company_wiki.source_catalog.source_query_cli --config C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml", "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"}}
+{"timestamp_utc": "2026-10-08T06:59:00.646897+00:00", "pid": 44628, "ppid": 69936, "event": "python_exit", "data": {}}
+
+
+### process-46728.jsonl
+{"timestamp_utc": "2026-10-08T07:14:20.405084+00:00", "pid": 46728, "ppid": 32388, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_fetch_client.py", "--source-ref-v2", "--timeout-seconds", "180.0"], "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"}}
+{"timestamp_utc": "2026-10-08T07:14:20.435305+00:00", "pid": 46728, "ppid": 32388, "event": "subprocess_spawn", "data": {"executable": null, "argv": "C:\\Miniconda\\python.exe C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py --source-ref-v2 --timeout-seconds 180.0", "cwd": "C:\\Users\\郑曾波\\Projects\\filing-fetch"}}
+{"timestamp_utc": "2026-10-08T07:14:22.994288+00:00", "pid": 46728, "ppid": 32388, "event": "python_exit", "data": {}}
+
+
+### process-52140.jsonl
+{"timestamp_utc": "2026-10-08T07:21:55.932379+00:00", "pid": 52140, "ppid": 67964, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_backtest.py", "create", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\input.json", "--version", "2026-10-08-MSFT-v1", "--output", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\snapshot.json"], "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"}}
+{"timestamp_utc": "2026-10-08T07:21:56.694899+00:00", "pid": 52140, "ppid": 67964, "event": "python_exit", "data": {}}
+
+
+### process-56420.jsonl
+{"timestamp_utc": "2026-10-08T07:31:47.822588+00:00", "pid": 56420, "ppid": 6864, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\lint_input.py", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\input.json"], "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"}}
+{"timestamp_utc": "2026-10-08T07:31:47.878987+00:00", "pid": 56420, "ppid": 6864, "event": "python_exit", "data": {}}
+
+
+### process-62356.jsonl
+{"timestamp_utc": "2026-10-08T07:31:48.000725+00:00", "pid": 62356, "ppid": 6864, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\fix_hashes.py", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\input.json", "--check"], "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"}}
+{"timestamp_utc": "2026-10-08T07:31:48.054792+00:00", "pid": 62356, "ppid": 6864, "event": "python_exit", "data": {}}
+
+
+### process-62412.jsonl
+{"timestamp_utc": "2026-10-08T07:15:58.710979+00:00", "pid": 62412, "ppid": 91568, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\retrieval_worker.py", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\et-retrieval-7jor4e67\\request.json"], "cwd": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts"}}
+{"timestamp_utc": "2026-10-08T07:15:59.683427+00:00", "pid": 62412, "ppid": 91568, "event": "python_exit", "data": {}}
+
+
+### process-63028.jsonl
+{"timestamp_utc": "2026-10-08T07:20:47.854334+00:00", "pid": 63028, "ppid": 88224, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\input.json", "--output", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\forecast.json", "--markdown", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\forecast.md"], "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"}}
+{"timestamp_utc": "2026-10-08T07:20:48.963728+00:00", "pid": 63028, "ppid": 88224, "event": "python_exit", "data": {}}
+
+
+### process-67060.jsonl
+{"timestamp_utc": "2026-10-08T06:58:59.820264+00:00", "pid": 67060, "ppid": 24772, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["-m", "--config", "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml"], "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"}}
+{"timestamp_utc": "2026-10-08T06:59:00.561450+00:00", "pid": 67060, "ppid": 24772, "event": "python_exit", "data": {}}
+
+
+### process-67968.jsonl
+{"timestamp_utc": "2026-10-08T07:14:20.731738+00:00", "pid": 67968, "ppid": 78844, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["-m", "--config", "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml", "identify", "--query", "MSFT", "--market", "US"], "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"}}
+{"timestamp_utc": "2026-10-08T07:14:21.771517+00:00", "pid": 67968, "ppid": 78844, "event": "python_exit", "data": {}}
+
+
+### process-69296.jsonl
+{"timestamp_utc": "2026-10-08T07:19:38.785783+00:00", "pid": 69296, "ppid": 33324, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\input.json", "--output", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\forecast.json", "--markdown", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\forecast.md"], "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"}}
+{"timestamp_utc": "2026-10-08T07:19:39.756535+00:00", "pid": 69296, "ppid": 33324, "event": "python_exit", "data": {}}
+
+
+### process-69936.jsonl
+{"timestamp_utc": "2026-10-08T06:58:58.171677+00:00", "pid": 69936, "ppid": 103456, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_fetch_client.py", "--source-ref-v2", "--timeout-seconds", "180.0"], "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"}}
+{"timestamp_utc": "2026-10-08T06:58:58.204286+00:00", "pid": 69936, "ppid": 103456, "event": "subprocess_spawn", "data": {"executable": null, "argv": "C:\\Miniconda\\python.exe C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py --source-ref-v2 --timeout-seconds 180.0", "cwd": "C:\\Users\\郑曾波\\Projects\\filing-fetch"}}
+{"timestamp_utc": "2026-10-08T06:59:00.659622+00:00", "pid": 69936, "ppid": 103456, "event": "python_exit", "data": {}}
+
+
+### process-71400.jsonl
+{"timestamp_utc": "2026-10-08T07:31:48.768741+00:00", "pid": 71400, "ppid": 6864, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_backtest.py", "create", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\input.json", "--version", "2026-10-08-MSFT-v1", "--output", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\snapshot.json"], "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"}}
+{"timestamp_utc": "2026-10-08T07:31:49.421353+00:00", "pid": 71400, "ppid": 6864, "event": "python_exit", "data": {}}
+
+
+### process-85164.jsonl
+{"timestamp_utc": "2026-10-08T07:21:51.879657+00:00", "pid": 85164, "ppid": 72724, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\input.json", "--output", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\forecast.json", "--markdown", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\forecast.md"], "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"}}
+{"timestamp_utc": "2026-10-08T07:21:52.922028+00:00", "pid": 85164, "ppid": 72724, "event": "python_exit", "data": {}}
+
+
+### process-90716.jsonl
+{"timestamp_utc": "2026-10-08T07:14:23.120263+00:00", "pid": 90716, "ppid": 32388, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["-m", "--config", "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml", "--document-id", "urn:company-wiki:document:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95", "--source-id", "urn:company-wiki:source:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95", "--content-sha256", "43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95", "--purpose", "filing_reuse"], "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"}}
+{"timestamp_utc": "2026-10-08T07:14:23.826561+00:00", "pid": 90716, "ppid": 32388, "event": "python_exit", "data": {}}
+
+
+### process-91568.jsonl
+{"timestamp_utc": "2026-10-08T07:15:58.252176+00:00", "pid": 91568, "ppid": 56316, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_tool.py", "--request-stdin", "--operation", "fetch"], "cwd": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts"}}
+{"timestamp_utc": "2026-10-08T07:15:58.641074+00:00", "pid": 91568, "ppid": 56316, "event": "subprocess_spawn", "data": {"executable": null, "argv": "C:\\Miniconda\\python.exe -u C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\retrieval_worker.py C:\\Users\\郑曾波\\AppData\\Local\\Temp\\et-retrieval-7jor4e67\\request.json", "cwd": null}}
+{"timestamp_utc": "2026-10-08T07:15:59.739586+00:00", "pid": 91568, "ppid": 56316, "event": "python_exit", "data": {}}
+
+
+### process-93100.jsonl
+{"timestamp_utc": "2026-10-08T07:21:59.600310+00:00", "pid": 93100, "ppid": 95444, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\validate_msft.py"], "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"}}
+{"timestamp_utc": "2026-10-08T07:22:00.338055+00:00", "pid": 93100, "ppid": 95444, "event": "python_exit", "data": {}}
+

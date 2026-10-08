@@ -1,0 +1,24 @@
+usage: source_preparation.py [-h] [--request-file REQUEST_FILE]
+                             [--allow-download] [--source-reader-v2]
+                             [--company-wiki-catalog-config COMPANY_WIKI_CATALOG_CONFIG]
+                             [--timeout-seconds TIMEOUT_SECONDS]
+                             [--company-wiki-config COMPANY_WIKI_CONFIG]
+                             [--filing-fetch-root FILING_FETCH_ROOT]
+
+Revenue source preparation — the single production entry.
+
+options:
+  -h, --help            show this help message and exit
+  --request-file REQUEST_FILE
+                        request JSON file (else stdin)
+  --allow-download
+  --source-reader-v2    compatibility no-op: SourceRef v2 is the only default;
+                        the legacy normalized-body reader is no longer
+                        reachable
+  --company-wiki-catalog-config COMPANY_WIKI_CATALOG_CONFIG
+  --timeout-seconds TIMEOUT_SECONDS
+  --company-wiki-config COMPANY_WIKI_CONFIG
+                        override company-wiki config for the chain (E2E)
+  --filing-fetch-root FILING_FETCH_ROOT
+                        override the filing-fetch skill root for the chain
+                        (E2E)

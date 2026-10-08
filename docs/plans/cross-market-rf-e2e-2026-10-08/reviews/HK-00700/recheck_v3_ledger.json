@@ -1,0 +1,3169 @@
+{
+  "timestamp": "2026-10-08T08:43:18.655996+00:00",
+  "protected": [
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\annual_2024_cover.png",
+      "expected": "c4fb241510872edf921a9b4b94e90600336e472a9718b3cad1f6f43e35501c8e",
+      "current": "c4fb241510872edf921a9b4b94e90600336e472a9718b3cad1f6f43e35501c8e",
+      "byte_size": 155489,
+      "expected_bytes": 155489,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\annual_2024_pages.json",
+      "expected": "54c0415ecced69425716bd601cde01a4de55a3e785ea8b5a00ea8601b89d68e3",
+      "current": "54c0415ecced69425716bd601cde01a4de55a3e785ea8b5a00ea8601b89d68e3",
+      "byte_size": 489149,
+      "expected_bytes": 489149,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\annual_2025_pages.json",
+      "expected": "a7083f3f9903a1737e9324f4c7a6560c5edf4a4899f0a029e74805f638614d1c",
+      "current": "a7083f3f9903a1737e9324f4c7a6560c5edf4a4899f0a029e74805f638614d1c",
+      "byte_size": 495087,
+      "expected_bytes": 495087,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\corporate_overview_20260916.pdf",
+      "expected": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+      "current": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+      "byte_size": 1676729,
+      "expected_bytes": 1676729,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\corporate_overview_pages.json",
+      "expected": "8f627606a5f719059a3618d38123608b7d157ca9cc77c50c9ec52a5144d5729e",
+      "current": "8f627606a5f719059a3618d38123608b7d157ca9cc77c50c9ec52a5144d5729e",
+      "byte_size": 23864,
+      "expected_bytes": 23864,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast-v1.json",
+      "expected": "6796b643ec444950eed608f3e87250931b92d0c2f13d0aa27d8a922ea9a5c220",
+      "current": "6796b643ec444950eed608f3e87250931b92d0c2f13d0aa27d8a922ea9a5c220",
+      "byte_size": 429594,
+      "expected_bytes": 429594,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast-v1.md",
+      "expected": "48c412c766ffe8d3da359e52f2e25762584b520c36d0cfad8debaa4871a4ca99",
+      "current": "48c412c766ffe8d3da359e52f2e25762584b520c36d0cfad8debaa4871a4ca99",
+      "byte_size": 57816,
+      "expected_bytes": 57816,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast.json",
+      "expected": "1c10deb1b93769632c553e51155def18afb4b1adfe8331c0eb511d52478ab3de",
+      "current": "1c10deb1b93769632c553e51155def18afb4b1adfe8331c0eb511d52478ab3de",
+      "byte_size": 428931,
+      "expected_bytes": 428931,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\forecast.md",
+      "expected": "1d152804ffd09e4e7b0d49215563a097a09b569e0af70e35cd91d30ffba1823b",
+      "current": "1d152804ffd09e4e7b0d49215563a097a09b569e0af70e35cd91d30ffba1823b",
+      "byte_size": 58089,
+      "expected_bytes": 58089,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input-v1.json",
+      "expected": "da71c4b0787861c29f40369dd457799e3925e9d65f215e6cb2c546f2c2509e74",
+      "current": "da71c4b0787861c29f40369dd457799e3925e9d65f215e6cb2c546f2c2509e74",
+      "byte_size": 192717,
+      "expected_bytes": 192717,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\input.json",
+      "expected": "13078fd040fefcc8382f9ddd43d0044821aaf3bcfaecd80f36615cefb14476f1",
+      "current": "13078fd040fefcc8382f9ddd43d0044821aaf3bcfaecd80f36615cefb14476f1",
+      "byte_size": 192154,
+      "expected_bytes": 192154,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\interim_2026_official.pdf",
+      "expected": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "current": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "byte_size": 5135808,
+      "expected_bytes": 5135808,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\interim_2026_official_pages.json",
+      "expected": "bf8085cf67605d6830e870676626e9e61a460c6bf1852dd7a329ef1a68847ba9",
+      "current": "bf8085cf67605d6830e870676626e9e61a460c6bf1852dd7a329ef1a68847ba9",
+      "byte_size": 213250,
+      "expected_bytes": 213250,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\netease_2q2026.html",
+      "expected": "ba4cd2d0507d5d3211d642a8f6d45aba11e0ac245f5757d58e525223ebde4c98",
+      "current": "ba4cd2d0507d5d3211d642a8f6d45aba11e0ac245f5757d58e525223ebde4c98",
+      "byte_size": 909908,
+      "expected_bytes": 909908,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\presentation_2q2026.pdf",
+      "expected": "0b749a74c4e5af449a27c76c69cff824e525794e14d5fbe0bfee927e6013029b",
+      "current": "0b749a74c4e5af449a27c76c69cff824e525794e14d5fbe0bfee927e6013029b",
+      "byte_size": 987,
+      "expected_bytes": 987,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\publications.jsonl",
+      "expected": "00265bb86cad76ece54247b7e2d26a8c2ba0b9fd2255b9cdc2cdf44a798adaf9",
+      "current": "00265bb86cad76ece54247b7e2d26a8c2ba0b9fd2255b9cdc2cdf44a798adaf9",
+      "byte_size": 4634,
+      "expected_bytes": 4634,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\results_2q2026.pdf",
+      "expected": "64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+      "current": "64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+      "byte_size": 412297,
+      "expected_bytes": 412297,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\results_2q2026_pages.json",
+      "expected": "c221750ae71480f6f918a3e358844a56c015f1f70194faac20a558e4f6a618a0",
+      "current": "c221750ae71480f6f918a3e358844a56c015f1f70194faac20a558e4f6a618a0",
+      "byte_size": 24573,
+      "expected_bytes": 24573,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\snapshot-v2.json",
+      "expected": "688de832c85f3eaf8a70957549b4c6a0afc006c65f203a05f480612eb1d0e794",
+      "current": "688de832c85f3eaf8a70957549b4c6a0afc006c65f203a05f480612eb1d0e794",
+      "byte_size": 651923,
+      "expected_bytes": 651923,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\snapshot.json",
+      "expected": "879b70b7fb84faaaf50e2d41cc9f428b9ed0118f302e3b27a0ee68ef3bcaff94",
+      "current": "879b70b7fb84faaaf50e2d41cc9f428b9ed0118f302e3b27a0ee68ef3bcaff94",
+      "byte_size": 653289,
+      "expected_bytes": 653289,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\template.json",
+      "expected": "3702539c8ed026199bce7599cfe1d2097d60de7e14c67a156856be9f1a70656a",
+      "current": "3702539c8ed026199bce7599cfe1d2097d60de7e14c67a156856be9f1a70656a",
+      "byte_size": 88188,
+      "expected_bytes": 88188,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\template_growth.json",
+      "expected": "87551edf4b538171b7b5b51177f0dca2b4537eddc7d70c72398bbd7a7cde53d7",
+      "current": "87551edf4b538171b7b5b51177f0dca2b4537eddc7d70c72398bbd7a7cde53d7",
+      "byte_size": 86928,
+      "expected_bytes": 86928,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\tencent_announcements_index.html",
+      "expected": "93782c3b7eb7a3558113b07c8ffd32f07ead78ad08d80331db9d8563571f6156",
+      "current": "93782c3b7eb7a3558113b07c8ffd32f07ead78ad08d80331db9d8563571f6156",
+      "byte_size": 184217,
+      "expected_bytes": 184217,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\tencent_results_index.html",
+      "expected": "e7ac34c8e6826016c6b6a482ab6fa658328492ab67d88268c4e8bd8476714559",
+      "current": "e7ac34c8e6826016c6b6a482ab6fa658328492ab67d88268c4e8bd8476714559",
+      "byte_size": 186626,
+      "expected_bytes": 186626,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\TRUST_BOUNDARY.md",
+      "expected": "ee2b7aa34132f3d50c31bef90441375f8ba258c4b7db54afc82d680eaf7f1a66",
+      "current": "ee2b7aa34132f3d50c31bef90441375f8ba258c4b7db54afc82d680eaf7f1a66",
+      "byte_size": 767,
+      "expected_bytes": 767,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\after_protected_and_runtime.json",
+      "expected": "47c95feeb4d01fb029024f4e0b5d789c72ae26d659d10dfa431c11238275e144",
+      "current": "47c95feeb4d01fb029024f4e0b5d789c72ae26d659d10dfa431c11238275e144",
+      "byte_size": 41406,
+      "expected_bytes": 41406,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\annual-2024-1791443168017116000.response.json",
+      "expected": "e24adec17e1af26e1e6c84eafeb6457535e250de0738a8c9994573044815f593",
+      "current": "e24adec17e1af26e1e6c84eafeb6457535e250de0738a8c9994573044815f593",
+      "byte_size": 4599,
+      "expected_bytes": 4599,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\annual-2024-1791443168017116000.stderr.txt",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "expected_bytes": 0,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\annual-2024.source.json",
+      "expected": "e24adec17e1af26e1e6c84eafeb6457535e250de0738a8c9994573044815f593",
+      "current": "e24adec17e1af26e1e6c84eafeb6457535e250de0738a8c9994573044815f593",
+      "byte_size": 4599,
+      "expected_bytes": 4599,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\annual-2025-1791443142289657200.response.json",
+      "expected": "47345cac63c01526cabb8de04888c0653cc4ae2ae2fd58c9899621bdf78ad72a",
+      "current": "47345cac63c01526cabb8de04888c0653cc4ae2ae2fd58c9899621bdf78ad72a",
+      "byte_size": 4599,
+      "expected_bytes": 4599,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\annual-2025-1791443142289657200.stderr.txt",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "expected_bytes": 0,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\annual-2025-1791443836885749200.response.json",
+      "expected": "ac41c91f87b34bd8fbffffaec68fc5babd6324489996428e4b2ac0ffa230a878",
+      "current": "ac41c91f87b34bd8fbffffaec68fc5babd6324489996428e4b2ac0ffa230a878",
+      "byte_size": 4599,
+      "expected_bytes": 4599,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\annual-2025-1791443836885749200.stderr.txt",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "expected_bytes": 0,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\annual-2025.source.json",
+      "expected": "ac41c91f87b34bd8fbffffaec68fc5babd6324489996428e4b2ac0ffa230a878",
+      "current": "ac41c91f87b34bd8fbffffaec68fc5babd6324489996428e4b2ac0ffa230a878",
+      "byte_size": 4599,
+      "expected_bytes": 4599,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\before.json",
+      "expected": "1bda4bc28dcff7042a6aae3df9670d6b75a012f6c0af168b42f9368f26479c99",
+      "current": "1bda4bc28dcff7042a6aae3df9670d6b75a012f6c0af168b42f9368f26479c99",
+      "byte_size": 15785,
+      "expected_bytes": 15785,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\bootstrap.py",
+      "expected": "b24b80ce1174747d36b8701af837bfa44d72f7ebbd20594c5775fe9446485716",
+      "current": "b24b80ce1174747d36b8701af837bfa44d72f7ebbd20594c5775fe9446485716",
+      "byte_size": 2905,
+      "expected_bytes": 2905,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\build_input.py",
+      "expected": "e67565de70ceabcf17e104fbcebe3751b769943d2b3a3e965471dce9efa9f7fb",
+      "current": "e67565de70ceabcf17e104fbcebe3751b769943d2b3a3e965471dce9efa9f7fb",
+      "byte_size": 29686,
+      "expected_bytes": 29686,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\capture_supplemental.py",
+      "expected": "f0bf0056fe7c704718d0027e9845ddf3cdc62d719b4c7abf9f92fc4df25dd57c",
+      "current": "f0bf0056fe7c704718d0027e9845ddf3cdc62d719b4c7abf9f92fc4df25dd57c",
+      "byte_size": 3529,
+      "expected_bytes": 3529,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\communication_coverage.json",
+      "expected": "46b1be05d3d98a58d5356d551746c483424fac68c18bf222f28399f328166059",
+      "current": "46b1be05d3d98a58d5356d551746c483424fac68c18bf222f28399f328166059",
+      "byte_size": 4567,
+      "expected_bytes": 4567,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\db_readonly_documents.json",
+      "expected": "4c4ccfbb0d11f2238fc2ea7c130682559c75c460e31ab539ee209e856b3055ec",
+      "current": "4c4ccfbb0d11f2238fc2ea7c130682559c75c460e31ab539ee209e856b3055ec",
+      "byte_size": 2773,
+      "expected_bytes": 2773,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\delivery_verification.json",
+      "expected": "58c376e0602f97420d79f7bdc14afceda17367f9ec3be64a9f5d127292a46040",
+      "current": "58c376e0602f97420d79f7bdc14afceda17367f9ec3be64a9f5d127292a46040",
+      "byte_size": 10559,
+      "expected_bytes": 10559,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\deterministic_local_parse.json",
+      "expected": "4c9380ba77c404d681ff6d3f899a3e7df8b7286260bc649e9d277e7e46a3d461",
+      "current": "4c9380ba77c404d681ff6d3f899a3e7df8b7286260bc649e9d277e7e46a3d461",
+      "byte_size": 1481,
+      "expected_bytes": 1481,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\execution_report.md",
+      "expected": "9be47dbf32deea89a9ae36152127ff6d533fb6e76827e86eba769a5d140a5788",
+      "current": "9be47dbf32deea89a9ae36152127ff6d533fb6e76827e86eba769a5d140a5788",
+      "byte_size": 4086,
+      "expected_bytes": 4086,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\fact_checks.json",
+      "expected": "f382a0dea3b8ea32916d026bdea07866a4aeaedcfeeb090d1258def44085df2a",
+      "current": "f382a0dea3b8ea32916d026bdea07866a4aeaedcfeeb090d1258def44085df2a",
+      "byte_size": 148053,
+      "expected_bytes": 148053,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\ff_diagnostics.py",
+      "expected": "d3aab0bb8e09bb27fb3c632e91030293b56350c4f619d3a50d83dc88efa04420",
+      "current": "d3aab0bb8e09bb27fb3c632e91030293b56350c4f619d3a50d83dc88efa04420",
+      "byte_size": 1830,
+      "expected_bytes": 1830,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\ff_latest_companion.response.json",
+      "expected": "6ab0101085c769181519e8dde4c26985b591ae8659198ce2673c878c665d78db",
+      "current": "6ab0101085c769181519e8dde4c26985b591ae8659198ce2673c878c665d78db",
+      "byte_size": 1145,
+      "expected_bytes": 1145,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\ff_latest_companion.stderr.txt",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "expected_bytes": 0,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\finalize_manifest.py",
+      "expected": "18c3255975d688a3f8ecd17c86c6152eed94ddfb93128e38ba28dda88808cb0f",
+      "current": "18c3255975d688a3f8ecd17c86c6152eed94ddfb93128e38ba28dda88808cb0f",
+      "byte_size": 17102,
+      "expected_bytes": 17102,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\forecast-1791443964659685100.response.json",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "expected_bytes": 0,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\forecast-1791443964659685100.stderr.txt",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "expected_bytes": 0,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\forecast-1791444286110906100.response.json",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "expected_bytes": 0,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\forecast-1791444286110906100.stderr.txt",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "expected_bytes": 0,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\hash-1791443832331404500.response.json",
+      "expected": "0b734000cdad4cb52cea6f0d8acdbe756f6f73bda3664320118df51e6fa6c8d4",
+      "current": "0b734000cdad4cb52cea6f0d8acdbe756f6f73bda3664320118df51e6fa6c8d4",
+      "byte_size": 19,
+      "expected_bytes": 19,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\hash-1791443832331404500.stderr.txt",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "expected_bytes": 0,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\interim-2026-1791443331318341000.response.json",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "expected_bytes": 0,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\interim-2026-1791443331318341000.stderr.txt",
+      "expected": "0da3c0bbe796b46158382801e8fde7595e0e10d678e662bc7cebf5ee7c28643a",
+      "current": "0da3c0bbe796b46158382801e8fde7595e0e10d678e662bc7cebf5ee7c28643a",
+      "byte_size": 165,
+      "expected_bytes": 165,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\ir_capture_receipt.json",
+      "expected": "ac39afd1369c0682aae975996c7f00385e474fb003c5602490929f27b77f2bfb",
+      "current": "ac39afd1369c0682aae975996c7f00385e474fb003c5602490929f27b77f2bfb",
+      "byte_size": 904,
+      "expected_bytes": 904,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\lint-1791443831971830800.response.json",
+      "expected": "4f878d68373c7caf9f6f2d03ece09363de58578a5601dc01fa9f5b88f9ad9d2b",
+      "current": "4f878d68373c7caf9f6f2d03ece09363de58578a5601dc01fa9f5b88f9ad9d2b",
+      "byte_size": 17,
+      "expected_bytes": 17,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\lint-1791443831971830800.stderr.txt",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "expected_bytes": 0,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\manifest.json",
+      "expected": "0dec67f2c9e4a08499c05d94cc5b343763322dbe5f9d73e47bfb3825b4055b96",
+      "current": "0dec67f2c9e4a08499c05d94cc5b343763322dbe5f9d73e47bfb3825b4055b96",
+      "byte_size": 31389,
+      "expected_bytes": 31389,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\model_research_decisions.json",
+      "expected": "4b1dea70777fc9769770cd5bd13ba26bedb1ccc2bd4abf91c2d4ec516946aa06",
+      "current": "4b1dea70777fc9769770cd5bd13ba26bedb1ccc2bd4abf91c2d4ec516946aa06",
+      "byte_size": 2580,
+      "expected_bytes": 2580,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_annual_2024.json",
+      "expected": "03f358bff55873dfbd27f60b56c1381c2785e87754fb9e12f835cc8b21585bf4",
+      "current": "03f358bff55873dfbd27f60b56c1381c2785e87754fb9e12f835cc8b21585bf4",
+      "byte_size": 246,
+      "expected_bytes": 246,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_annual_2024_no_language.json",
+      "expected": "19613b0849cfea4aae2f167d62c60e64392a125dea365681ebc1c08b505f2712",
+      "current": "19613b0849cfea4aae2f167d62c60e64392a125dea365681ebc1c08b505f2712",
+      "byte_size": 225,
+      "expected_bytes": 225,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_annual_2025.json",
+      "expected": "cf2b45077123de5bfeb80a678abbd510eca893399062b2f66dd7979c806e96ab",
+      "current": "cf2b45077123de5bfeb80a678abbd510eca893399062b2f66dd7979c806e96ab",
+      "byte_size": 361,
+      "expected_bytes": 361,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_annual_2025_no_language.json",
+      "expected": "433ab83b1a74294d67994fd496cdba89e1b9a0c1601c0e2e7573c5d3a0721bc9",
+      "current": "433ab83b1a74294d67994fd496cdba89e1b9a0c1601c0e2e7573c5d3a0721bc9",
+      "byte_size": 340,
+      "expected_bytes": 340,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_ff_annual2025_companion2026q2.json",
+      "expected": "95871685cb12f4790ce4080e841c2e8be1136eb1f3d4d2144ec3657cedb4c2e1",
+      "current": "95871685cb12f4790ce4080e841c2e8be1136eb1f3d4d2144ec3657cedb4c2e1",
+      "byte_size": 474,
+      "expected_bytes": 474,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_interim_2026.json",
+      "expected": "e3950ae826a09df31d926f0cff97cbe37d83e11c0f2d98e7f7de5445e38b8481",
+      "current": "e3950ae826a09df31d926f0cff97cbe37d83e11c0f2d98e7f7de5445e38b8481",
+      "byte_size": 516,
+      "expected_bytes": 516,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_interim_2026_no_language.json",
+      "expected": "e170322c84d438d8ce6e6e52ba2fb158afd067f747d74db5dbd78ca03f6074b7",
+      "current": "e170322c84d438d8ce6e6e52ba2fb158afd067f747d74db5dbd78ca03f6074b7",
+      "byte_size": 495,
+      "expected_bytes": 495,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\research_tools.py",
+      "expected": "8a220d8d208a88f4c99eed1176499395e11e866b7bd0f9bb9a18581b25c5724f",
+      "current": "8a220d8d208a88f4c99eed1176499395e11e866b7bd0f9bb9a18581b25c5724f",
+      "byte_size": 4362,
+      "expected_bytes": 4362,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\run_step.py",
+      "expected": "17bd504f453aa0052af7e871fad2497caf8b7899969c4f3750cb0024bf19db33",
+      "current": "17bd504f453aa0052af7e871fad2497caf8b7899969c4f3750cb0024bf19db33",
+      "byte_size": 5260,
+      "expected_bytes": 5260,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\skill_step_matrix.json",
+      "expected": "c3e30dde344e8d3c885d08b3a6c49c7af4b325b8a59fd5c4f45a325768cab740",
+      "current": "c3e30dde344e8d3c885d08b3a6c49c7af4b325b8a59fd5c4f45a325768cab740",
+      "byte_size": 4068,
+      "expected_bytes": 4068,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\snapshot-1791443965648842800.response.json",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "expected_bytes": 0,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\snapshot-1791443965648842800.stderr.txt",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "expected_bytes": 0,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\snapshot-v2-1791444287121498700.response.json",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "expected_bytes": 0,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\snapshot-v2-1791444287121498700.stderr.txt",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "expected_bytes": 0,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2024.request.json",
+      "expected": "2f8c503c2259afcea4778e81a78e684a2f5e6efff9673487a1bc832568a2f620",
+      "current": "2f8c503c2259afcea4778e81a78e684a2f5e6efff9673487a1bc832568a2f620",
+      "byte_size": 1091,
+      "expected_bytes": 1091,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2024.response.json",
+      "expected": "48553b7c0f164607285de4f694ed85f5738ac7a05bc212d9575021cbbb82f511",
+      "current": "48553b7c0f164607285de4f694ed85f5738ac7a05bc212d9575021cbbb82f511",
+      "byte_size": 307,
+      "expected_bytes": 307,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2024.stderr.txt",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "expected_bytes": 0,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2025.request.json",
+      "expected": "f76758b592370f21f212084440888ac25c3dbe2d2568e74151b1e66a84e9b5b9",
+      "current": "f76758b592370f21f212084440888ac25c3dbe2d2568e74151b1e66a84e9b5b9",
+      "byte_size": 1091,
+      "expected_bytes": 1091,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2025.response.json",
+      "expected": "a9522c064349f3f40c6f4c855eb8f47869066ffe1dbda4269c52957bc853098e",
+      "current": "a9522c064349f3f40c6f4c855eb8f47869066ffe1dbda4269c52957bc853098e",
+      "byte_size": 307,
+      "expected_bytes": 307,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_2025.stderr.txt",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "expected_bytes": 0,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_receipts.json",
+      "expected": "59b758ff15859100dd0f642fc11e873f23568e9069a21f4c76f73bcedce190c4",
+      "current": "59b758ff15859100dd0f642fc11e873f23568e9069a21f4c76f73bcedce190c4",
+      "byte_size": 2807,
+      "expected_bytes": 2807,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\source_facts_run.py",
+      "expected": "3f80dc2eb7a804e048372acba12affee82ebb030ac23a63ee51a742a5f68fe0b",
+      "current": "3f80dc2eb7a804e048372acba12affee82ebb030ac23a63ee51a742a5f68fe0b",
+      "byte_size": 3628,
+      "expected_bytes": 3628,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\supplemental_capture_receipts.json",
+      "expected": "a05cb55ce3849a352f22dd134bfc511bdd86873096e3b05287946e57aceea014",
+      "current": "a05cb55ce3849a352f22dd134bfc511bdd86873096e3b05287946e57aceea014",
+      "byte_size": 6878,
+      "expected_bytes": 6878,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\update_communication.py",
+      "expected": "76f7f38fd776e2e5560947f3d301c1b2759512f69b9d40ca8bb0a5366cdfa419",
+      "current": "76f7f38fd776e2e5560947f3d301c1b2759512f69b9d40ca8bb0a5366cdfa419",
+      "byte_size": 1850,
+      "expected_bytes": 1850,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\validate-1791443869487047300.response.json",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "expected_bytes": 0,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\validate-1791443869487047300.stderr.txt",
+      "expected": "939c7d18950fe593a02340df89b2134efda24b3e36c47949c57fed45abb4014a",
+      "current": "939c7d18950fe593a02340df89b2134efda24b3e36c47949c57fed45abb4014a",
+      "byte_size": 1473,
+      "expected_bytes": 1473,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\validate-1791443945003330500.response.json",
+      "expected": "5be86f95bd4bb3848e802afa321452f38330ecec2d48f7a1d1cb8de4efbe7295",
+      "current": "5be86f95bd4bb3848e802afa321452f38330ecec2d48f7a1d1cb8de4efbe7295",
+      "byte_size": 7,
+      "expected_bytes": 7,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\validate-1791443945003330500.stderr.txt",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "expected_bytes": 0,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\verify_delivery.py",
+      "expected": "1b54fbc4471bebbd8971e167854b0f590361e1046854a87fefb0f389a18e3e12",
+      "current": "1b54fbc4471bebbd8971e167854b0f590361e1046854a87fefb0f389a18e3e12",
+      "byte_size": 3927,
+      "expected_bytes": 3927,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\web_action_index.json",
+      "expected": "281b140f4d83f9369724de0fef82e1279e06fa9aa8f5a040520c002ec551a9a7",
+      "current": "281b140f4d83f9369724de0fef82e1279e06fa9aa8f5a040520c002ec551a9a7",
+      "byte_size": 3095,
+      "expected_bytes": 3095,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "expected": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "current": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "byte_size": 866,
+      "expected_bytes": 866,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\config\\company_wiki.json",
+      "expected": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+      "current": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+      "byte_size": 1443,
+      "expected_bytes": 1443,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20190726-中信建投-腾讯控股-0700.HK-如何描绘“聚变中的恒星”.pdf",
+      "expected": "56b9b1c6edd2ded17e9fb90f51a6401b9d4a0c05b7985bf7dd343b7451adf830",
+      "current": "56b9b1c6edd2ded17e9fb90f51a6401b9d4a0c05b7985bf7dd343b7451adf830",
+      "byte_size": 5069323,
+      "expected_bytes": 5069323,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20200122-国信证券-腾讯控股-0700[1].HK-金融科技：引领腾讯下一个十年.pdf",
+      "expected": "2617cbbe35f143d9f62afd3df8907d9544edc417aee5b3ec1f46d4d7a95a0a3c",
+      "current": "2617cbbe35f143d9f62afd3df8907d9544edc417aee5b3ec1f46d4d7a95a0a3c",
+      "byte_size": 3561962,
+      "expected_bytes": 3561962,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20200326-华创证券-海外科技互联网行业深度研究报告：复盘腾讯，股价的驱动力来自何方？.pdf",
+      "expected": "c117c87458f26faf3c6b08c67e191aea71b712a7c0efdcbf71906c4867474234",
+      "current": "c117c87458f26faf3c6b08c67e191aea71b712a7c0efdcbf71906c4867474234",
+      "byte_size": 1814308,
+      "expected_bytes": 1814308,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210310-东吴证券-腾讯控股-0700.HK-解析视频号意义与商业化概览.pdf",
+      "expected": "d54dd6b8d31f3ae90e438d83b65fa76b016d7e84520d4f7ae648b35fbce87893",
+      "current": "d54dd6b8d31f3ae90e438d83b65fa76b016d7e84520d4f7ae648b35fbce87893",
+      "byte_size": 1959164,
+      "expected_bytes": 1959164,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210310-招商证券-腾讯控股-0700.HK-深度探析腾讯的产品、生态、流量、商业化及增长空间.pdf",
+      "expected": "d3ae572246b5f3fa751ece9b9f956f6fcbaa3af9cbc4b9201848364f6437e2f7",
+      "current": "d3ae572246b5f3fa751ece9b9f956f6fcbaa3af9cbc4b9201848364f6437e2f7",
+      "byte_size": 5010221,
+      "expected_bytes": 5010221,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210318-广发证券-腾讯控股-0700.HK-数字内容持续精进，夯实和延展“社交+内容”战略.pdf",
+      "expected": "c1aa48a0c43e4f820d2220a9907792a2f05ee05774804023a1d6b68addc2e221",
+      "current": "c1aa48a0c43e4f820d2220a9907792a2f05ee05774804023a1d6b68addc2e221",
+      "byte_size": 9770974,
+      "expected_bytes": 9770974,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210323-天风证券-传媒行业腾讯专题深度一：视频号，社会里，每个人.pdf",
+      "expected": "05c6eac06564afc4379b5b65b2ba25f81081a47322cf866e5421af4f7fcf8692",
+      "current": "05c6eac06564afc4379b5b65b2ba25f81081a47322cf866e5421af4f7fcf8692",
+      "byte_size": 1422828,
+      "expected_bytes": 1422828,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210526-申万宏源-腾讯控股-0700.HK-深度报告：社交与精品内容铸基，产业赋能正起步.pdf",
+      "expected": "faa1869d9e76a6d445df60600b82bab95951503f90be2db36b804e875f2b48fc",
+      "current": "faa1869d9e76a6d445df60600b82bab95951503f90be2db36b804e875f2b48fc",
+      "byte_size": 2894271,
+      "expected_bytes": 2894271,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210616-西部证券-腾讯控股-0700.HK-首次覆盖：游戏增长稳健，视频号和2B业务进一步打开空间.pdf",
+      "expected": "45f32ea442c25478b0aa6748d6a277169773aa8a0574ce1591f3f9765fc7cc9a",
+      "current": "45f32ea442c25478b0aa6748d6a277169773aa8a0574ce1591f3f9765fc7cc9a",
+      "byte_size": 5265600,
+      "expected_bytes": 5265600,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210715-西部证券-腾讯控股-0700.HK-跟踪报告：加大游戏研发投入，“开启”元宇宙，看好腾讯布局.pdf",
+      "expected": "21bd6906bd71d68230c3ed4ae13e8870a414e0bc29560682c4b4ca85cf23ce28",
+      "current": "21bd6906bd71d68230c3ed4ae13e8870a414e0bc29560682c4b4ca85cf23ce28",
+      "byte_size": 2743613,
+      "expected_bytes": 2743613,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210811-光大证券-腾讯控股-0700.HK-视频号系列报告之一：视频号的入局，平平无奇还是弯道超车？.pdf",
+      "expected": "5626d1c9367068c81d646f9a3b916dbfbdcea91e2512f29362c32f3c70746074",
+      "current": "5626d1c9367068c81d646f9a3b916dbfbdcea91e2512f29362c32f3c70746074",
+      "byte_size": 2808533,
+      "expected_bytes": 2808533,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20210916-国金证券-腾讯控股-0700.HK-复盘历次“大跌”：曾经的“担忧”还在吗？.pdf",
+      "expected": "ccc4a068c56b4213a8300f41f07bda990ee9e8f3645e859b94c28f31f8052a4f",
+      "current": "ccc4a068c56b4213a8300f41f07bda990ee9e8f3645e859b94c28f31f8052a4f",
+      "byte_size": 1894992,
+      "expected_bytes": 1894992,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20211220-东兴证券-传媒行业腾讯系列研究之7：腾讯专题，微信的本质价值是分发.pdf",
+      "expected": "2aa9fbd0ffc103ddf2d09423428a68b54e7721439887a52b9e3bc111ebadf21c",
+      "current": "2aa9fbd0ffc103ddf2d09423428a68b54e7721439887a52b9e3bc111ebadf21c",
+      "byte_size": 1447729,
+      "expected_bytes": 1447729,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20211228-德邦证券-腾讯控股-0700.HK-深度复盘~如何理解腾讯游戏的护城河？.pdf",
+      "expected": "d00d4b2a97366710042b1c3ed77a58d165cfb917e454db9f43a5e9ec2cf983e2",
+      "current": "d00d4b2a97366710042b1c3ed77a58d165cfb917e454db9f43a5e9ec2cf983e2",
+      "byte_size": 3090034,
+      "expected_bytes": 3090034,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20220118-东兴证券-腾讯控股-0700.HK-中概互联网复盘系列报告之三：腾讯控股2021年复盘，股价韧性强于市，强监管无碍微信价值.pdf",
+      "expected": "5a46dfc31d5dfd0496db924e2d5dd8f6b4b3c144cd33725ea589fe503980f3f4",
+      "current": "5a46dfc31d5dfd0496db924e2d5dd8f6b4b3c144cd33725ea589fe503980f3f4",
+      "byte_size": 696712,
+      "expected_bytes": 696712,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20220410-中泰证券-腾讯控股-0700.HK-前瞻布局，突破求新.pdf",
+      "expected": "4c9e68963e174c31908e527b04174da9634e7acb23bde45bcf6dddc9badaeb2c",
+      "current": "4c9e68963e174c31908e527b04174da9634e7acb23bde45bcf6dddc9badaeb2c",
+      "byte_size": 2006765,
+      "expected_bytes": 2006765,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20220418-华西证券-腾讯控股-0700.HK-社交+内容生态壁垒已成，技术服务驱动新增长.pdf",
+      "expected": "2c3eba443e6e7a46b4aaedb84ecae13b3ae4f87f7a6c0f4df2b107bb9205c0be",
+      "current": "2c3eba443e6e7a46b4aaedb84ecae13b3ae4f87f7a6c0f4df2b107bb9205c0be",
+      "byte_size": 3213800,
+      "expected_bytes": 3213800,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20220518-东北证券-腾讯控股-0700.HK-超级APP构筑核心竞争优势，产业互联网驱动公司成长.pdf",
+      "expected": "d495667e896d40813d5324fe24c5deb5f7f1926ed4cb6a93a8fcc97ee7736b49",
+      "current": "d495667e896d40813d5324fe24c5deb5f7f1926ed4cb6a93a8fcc97ee7736b49",
+      "byte_size": 7317578,
+      "expected_bytes": 7317578,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20220809-广发证券-媒体Ⅱ行业：腾讯会议，Zoom为借鉴的视频会议产品迭代与商业化路径探讨.pdf",
+      "expected": "b41c0b421a5f6b9aadd211433ed27a26d304470151be2026c83c530a1fb8a210",
+      "current": "b41c0b421a5f6b9aadd211433ed27a26d304470151be2026c83c530a1fb8a210",
+      "byte_size": 2776032,
+      "expected_bytes": 2776032,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20221010-信达证券-腾讯控股-0700.HK-首次覆盖报告：优质的生态，进击的巨人.pdf",
+      "expected": "c183c261125f9946c16c9ba1102243621d7163dd3d8bdbddcb79055358714760",
+      "current": "c183c261125f9946c16c9ba1102243621d7163dd3d8bdbddcb79055358714760",
+      "byte_size": 3883303,
+      "expected_bytes": 3883303,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20221110-德邦证券-腾讯控股-0700.HK-深度跟踪报告：各业务当前的逻辑与变化.pdf",
+      "expected": "62cd05c9c61ca7e819e3f6cfb270ad952613bc64951fb8dde7e08db178578936",
+      "current": "62cd05c9c61ca7e819e3f6cfb270ad952613bc64951fb8dde7e08db178578936",
+      "byte_size": 1041925,
+      "expected_bytes": 1041925,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20230217-中信建投-腾讯控股-0700.HK-试析云服务的成长与格局之困.pdf",
+      "expected": "57dccf7dcaa51f081ce8420de8b090e6e873e83d12fe295d9edda4f02dded83f",
+      "current": "57dccf7dcaa51f081ce8420de8b090e6e873e83d12fe295d9edda4f02dded83f",
+      "byte_size": 3710155,
+      "expected_bytes": 3710155,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20230322-腾讯-2022年第四季度及全年业绩发布会（英译中）.pdf",
+      "expected": "0300267e6d28a318c8e6555bf7beefccec2ab23d8eb828ebc7a0e95f552d1b61",
+      "current": "0300267e6d28a318c8e6555bf7beefccec2ab23d8eb828ebc7a0e95f552d1b61",
+      "byte_size": 5536448,
+      "expected_bytes": 5536448,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20230420-天风证券-腾讯控股-0700.HK-腾讯AI战略、布局、大模型及应用跟踪.pdf",
+      "expected": "734da71f76bea358df1f22057211fae7dd83b36878ac276c28dcc3d1961de1d5",
+      "current": "734da71f76bea358df1f22057211fae7dd83b36878ac276c28dcc3d1961de1d5",
+      "byte_size": 2021939,
+      "expected_bytes": 2021939,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20230517-腾讯-2023年第一季度业绩发布会（英译中）.pdf",
+      "expected": "e76540e42a9037b779ec954bb6784dff7afd1e90df0643318f7f135c386cfc31",
+      "current": "e76540e42a9037b779ec954bb6784dff7afd1e90df0643318f7f135c386cfc31",
+      "byte_size": 5023752,
+      "expected_bytes": 5023752,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20230725-国泰君安-腾讯控股-0700.HK-公司更新报告：视频号电商全面发力，生态及商业化空间广阔.pdf",
+      "expected": "37f2dc43409b58c2827a1661f6a2ca734e342ec1f662ae618fc5db2bacb22e3e",
+      "current": "37f2dc43409b58c2827a1661f6a2ca734e342ec1f662ae618fc5db2bacb22e3e",
+      "byte_size": 3480889,
+      "expected_bytes": 3480889,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20250122-海通证券-信息服务行业深度报告：走最适合自身的AI发展之路，善于“扬长”的腾讯.pdf",
+      "expected": "c093d9d2c788005d2bd9d7a5f5a8ab345adf5a4a619ceebd04d1405b5d24d939",
+      "current": "c093d9d2c788005d2bd9d7a5f5a8ab345adf5a4a619ceebd04d1405b5d24d939",
+      "byte_size": 4345299,
+      "expected_bytes": 4345299,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20250915-华泰证券-腾讯控股-0700.HK-腾讯广告：AI和微信生态驱动商业化升级.pdf",
+      "expected": "cf46a51a71de02148e324e22329b69ad252e8ff7310189bcb94bcb80b46891c6",
+      "current": "cf46a51a71de02148e324e22329b69ad252e8ff7310189bcb94bcb80b46891c6",
+      "byte_size": 2988749,
+      "expected_bytes": 2988749,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\20260131-国联民生证券-计算机行业深度报告：被低估的腾讯AI“野望”.pdf",
+      "expected": "f6b2e5e631bf14ec23bf08702c5d9db371e1ac99486eaf63984df128f161bfce",
+      "current": "f6b2e5e631bf14ec23bf08702c5d9db371e1ac99486eaf63984df128f161bfce",
+      "byte_size": 1461411,
+      "expected_bytes": 1461411,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\【互联网】腾讯2021Q2业绩会纪要20210818.pdf",
+      "expected": "0f7552767ac4fac7e8f30f353306d02ec0996f134e9889a56e1b4fa4fc899680",
+      "current": "0f7552767ac4fac7e8f30f353306d02ec0996f134e9889a56e1b4fa4fc899680",
+      "byte_size": 580652,
+      "expected_bytes": 580652,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯2019n.pdf",
+      "expected": "fd6aaa4f59351447c7bc78032ef2dbb7f3d381bf120ea7d1383c3de052e4f82e",
+      "current": "fd6aaa4f59351447c7bc78032ef2dbb7f3d381bf120ea7d1383c3de052e4f82e",
+      "byte_size": 3054766,
+      "expected_bytes": 3054766,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯2020n.pdf",
+      "expected": "bba24aaa10948ea37f7c7a8a96dcd79200842ffbfb3c1c8f64a182a6b3698d48",
+      "current": "bba24aaa10948ea37f7c7a8a96dcd79200842ffbfb3c1c8f64a182a6b3698d48",
+      "byte_size": 2822568,
+      "expected_bytes": 2822568,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯2021n.pdf",
+      "expected": "70574582c616da1727590fc247c4caa40a7ee98ab83896d05638e9a630b50341",
+      "current": "70574582c616da1727590fc247c4caa40a7ee98ab83896d05638e9a630b50341",
+      "byte_size": 5687326,
+      "expected_bytes": 5687326,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯2022n.PDF",
+      "expected": "48705cdd72b57ca1b7ff9d15f3c101fcd6633688d6a3a3b221852087d2be64fc",
+      "current": "48705cdd72b57ca1b7ff9d15f3c101fcd6633688d6a3a3b221852087d2be64fc",
+      "byte_size": 5564762,
+      "expected_bytes": 5564762,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯SSV许浩碳中和纪要202203.pdf",
+      "expected": "a9f047c4bc9cfacb7956e90d2c66b4e9e9e50b3e4a8e7316c0b81ffd69c6014f",
+      "current": "a9f047c4bc9cfacb7956e90d2c66b4e9e9e50b3e4a8e7316c0b81ffd69c6014f",
+      "byte_size": 675094,
+      "expected_bytes": 675094,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯交流纪要20220406.pdf",
+      "expected": "d865f9774748f56396933c13c076d734ba09fb84467472564fbd8b5d1528f232",
+      "current": "d865f9774748f56396933c13c076d734ba09fb84467472564fbd8b5d1528f232",
+      "byte_size": 556577,
+      "expected_bytes": 556577,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\research\\腾讯控股交流纪要20220323.pdf",
+      "expected": "fafaf9fed1ace161f824811a462412474c6f67273837288b30fecd46daaa8328",
+      "current": "fafaf9fed1ace161f824811a462412474c6f67273837288b30fecd46daaa8328",
+      "byte_size": 547111,
+      "expected_bytes": 547111,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\financial_reports\\annual\\腾讯：2024年年度报告.pdf",
+      "expected": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+      "current": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+      "byte_size": 5241364,
+      "expected_bytes": 5241364,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\腾讯\\raw\\financial_reports\\annual\\腾讯：2025年年度报告.pdf",
+      "expected": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "current": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "byte_size": 4428270,
+      "expected_bytes": 4428270,
+      "valid": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\SKILL.md",
+      "expected": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf",
+      "current": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf",
+      "byte_size": 27599,
+      "expected_bytes": 27599,
+      "valid": true
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\input.json",
+      "expected": "c791b85406f62552e9eb9cba2a1adf8cbf36447ff432164c9e53a8426814fc87",
+      "current": "c791b85406f62552e9eb9cba2a1adf8cbf36447ff432164c9e53a8426814fc87",
+      "expected_bytes": 524854,
+      "current_bytes": 524854
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\forecast.json",
+      "expected": "3ea402d2494e1a754de8cb1f406797d1d3f366622d4c3c6cc8621d18a7524f61",
+      "current": "3ea402d2494e1a754de8cb1f406797d1d3f366622d4c3c6cc8621d18a7524f61",
+      "expected_bytes": 1094149,
+      "current_bytes": 1094149
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\forecast.md",
+      "expected": "cf4ea50602e2ad79037e666ee6e390421fe5b1f6d57f46dfa9c87c55e176a7d5",
+      "current": "cf4ea50602e2ad79037e666ee6e390421fe5b1f6d57f46dfa9c87c55e176a7d5",
+      "expected_bytes": 170196,
+      "current_bytes": 170196
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\snapshot.json",
+      "expected": "20c2657a8f2bfeb2d999665c7219a0164f93bb5f9feb38689f0376ff997573d2",
+      "current": "20c2657a8f2bfeb2d999665c7219a0164f93bb5f9feb38689f0376ff997573d2",
+      "expected_bytes": 1686000,
+      "current_bytes": 1686000
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\publications.jsonl",
+      "expected": "596fcf974f7174f714e400478394626b1868d92a3ac2c3501b17d5ff042c146b",
+      "current": "596fcf974f7174f714e400478394626b1868d92a3ac2c3501b17d5ff042c146b",
+      "expected_bytes": 2286,
+      "current_bytes": 2286
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\manifest.json",
+      "expected": "0dec67f2c9e4a08499c05d94cc5b343763322dbe5f9d73e47bfb3825b4055b96",
+      "current": "0dec67f2c9e4a08499c05d94cc5b343763322dbe5f9d73e47bfb3825b4055b96",
+      "expected_bytes": 31389,
+      "current_bytes": 31389
+    }
+  ],
+  "commands": [
+    {
+      "id": "1791447774653475800-HK-v3-freeze-render-FY2025",
+      "label": "HK-v3-freeze-render-FY2025",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/v3_setup.py"
+      ],
+      "started_at": "2026-10-08T08:22:54.653559+00:00",
+      "ended_at": "2026-10-08T08:22:55.614425+00:00",
+      "returncode": 0,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791447774653475800-HK-v3-freeze-render-FY2025.stdout.txt",
+          "byte_size": 509,
+          "sha256": "6a47dba4d96a97780494be6b5e32ebe7fdf52703a2e788243aaf6d6d8cc4d5d5",
+          "hash_verified": true
+        },
+        {
+          "kind": "stderr",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791447774653475800-HK-v3-freeze-render-FY2025.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "hash_verified": true
+        }
+      ]
+    },
+    {
+      "id": "1791447883609622100-HK-v3-source-facts-append-FY2025",
+      "label": "HK-v3-source-facts-append-FY2025",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/v3_run.py",
+        "source-facts"
+      ],
+      "started_at": "2026-10-08T08:24:43.609796+00:00",
+      "ended_at": "2026-10-08T08:24:44.471235+00:00",
+      "returncode": 0,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791447883609622100-HK-v3-source-facts-append-FY2025.stdout.txt",
+          "byte_size": 1167,
+          "sha256": "bf7d57a7ae8207917fc7f4bd7774ad62c567e8e3ac39efdfcb0a939719e24069",
+          "hash_verified": true
+        },
+        {
+          "kind": "stderr",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791447883609622100-HK-v3-source-facts-append-FY2025.stderr.txt",
+          "byte_size": 2,
+          "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+          "hash_verified": true
+        }
+      ]
+    },
+    {
+      "id": "1791447893858571000-HK-v3-bounded-official-auth",
+      "label": "HK-v3-bounded-official-auth",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/v3_run.py",
+        "official-auth"
+      ],
+      "started_at": "2026-10-08T08:24:53.858654+00:00",
+      "ended_at": "2026-10-08T08:24:55.558925+00:00",
+      "returncode": 0,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791447893858571000-HK-v3-bounded-official-auth.stdout.txt",
+          "byte_size": 2409,
+          "sha256": "29cb6a4fd1baaeef30847f78b938f25879498f1a217cf87636bdb4e8624f62d7",
+          "hash_verified": true
+        },
+        {
+          "kind": "stderr",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791447893858571000-HK-v3-bounded-official-auth.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "hash_verified": true
+        }
+      ]
+    },
+    {
+      "id": "1791448168986964300-HK-v3-build-complete-source-bindings",
+      "label": "HK-v3-build-complete-source-bindings",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/v3_run.py",
+        "build"
+      ],
+      "started_at": "2026-10-08T08:29:28.987049+00:00",
+      "ended_at": "2026-10-08T08:29:29.631650+00:00",
+      "returncode": 0,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791448168986964300-HK-v3-build-complete-source-bindings.stdout.txt",
+          "byte_size": 2541,
+          "sha256": "0275986637716108c89c1532da3afd73637793e3b7f21e7c3e6ad828afe4b698",
+          "hash_verified": true
+        },
+        {
+          "kind": "stderr",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791448168986964300-HK-v3-build-complete-source-bindings.stderr.txt",
+          "byte_size": 2,
+          "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+          "hash_verified": true
+        }
+      ]
+    },
+    {
+      "id": "1791448184445047500-HK-v3-lint",
+      "label": "HK-v3-lint",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/v3_run.py",
+        "lint"
+      ],
+      "started_at": "2026-10-08T08:29:44.445136+00:00",
+      "ended_at": "2026-10-08T08:29:44.689944+00:00",
+      "returncode": 0,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791448184445047500-HK-v3-lint.stdout.txt",
+          "byte_size": 807,
+          "sha256": "295a9af4e768231ea958704c8f63debd4131fd7adeeecb89e82f01c78f877643",
+          "hash_verified": true
+        },
+        {
+          "kind": "stderr",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791448184445047500-HK-v3-lint.stderr.txt",
+          "byte_size": 2,
+          "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+          "hash_verified": true
+        }
+      ]
+    },
+    {
+      "id": "1791448187519792600-HK-v3-hash-check",
+      "label": "HK-v3-hash-check",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/v3_run.py",
+        "hash-check"
+      ],
+      "started_at": "2026-10-08T08:29:47.519871+00:00",
+      "ended_at": "2026-10-08T08:29:47.735185+00:00",
+      "returncode": 0,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791448187519792600-HK-v3-hash-check.stdout.txt",
+          "byte_size": 757,
+          "sha256": "84a65bd9e77e3eaa6653a31af67847676007b7ef98e7222397a727809803c933",
+          "hash_verified": true
+        },
+        {
+          "kind": "stderr",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791448187519792600-HK-v3-hash-check.stderr.txt",
+          "byte_size": 2,
+          "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+          "hash_verified": true
+        }
+      ]
+    },
+    {
+      "id": "1791448190318858900-HK-v3-validate",
+      "label": "HK-v3-validate",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/v3_run.py",
+        "validate"
+      ],
+      "started_at": "2026-10-08T08:29:50.318942+00:00",
+      "ended_at": "2026-10-08T08:29:51.280591+00:00",
+      "returncode": 0,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791448190318858900-HK-v3-validate.stdout.txt",
+          "byte_size": 772,
+          "sha256": "611b2f52339ad183167eb2de082b5f16849eef74eed84d74c36a4563de8b0a4d",
+          "hash_verified": true
+        },
+        {
+          "kind": "stderr",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791448190318858900-HK-v3-validate.stderr.txt",
+          "byte_size": 2,
+          "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+          "hash_verified": true
+        }
+      ]
+    },
+    {
+      "id": "1791448222973339700-HK-v3-forecast",
+      "label": "HK-v3-forecast",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/v3_run.py",
+        "forecast"
+      ],
+      "started_at": "2026-10-08T08:30:22.973412+00:00",
+      "ended_at": "2026-10-08T08:30:24.675184+00:00",
+      "returncode": 0,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791448222973339700-HK-v3-forecast.stdout.txt",
+          "byte_size": 949,
+          "sha256": "f7578fda7808593ab7089bdee3e6c8c0863eae2d2a4ba04ef18d7a99fbe27cf7",
+          "hash_verified": true
+        },
+        {
+          "kind": "stderr",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791448222973339700-HK-v3-forecast.stderr.txt",
+          "byte_size": 2,
+          "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+          "hash_verified": true
+        }
+      ]
+    },
+    {
+      "id": "1791448227618505700-HK-v3-snapshot",
+      "label": "HK-v3-snapshot",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/v3_run.py",
+        "snapshot"
+      ],
+      "started_at": "2026-10-08T08:30:27.618589+00:00",
+      "ended_at": "2026-10-08T08:30:29.055938+00:00",
+      "returncode": 0,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791448227618505700-HK-v3-snapshot.stdout.txt",
+          "byte_size": 884,
+          "sha256": "0a2c195181b89a460a29fd830fef470f83954e0b2378d8075b335070daa19753",
+          "hash_verified": true
+        },
+        {
+          "kind": "stderr",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791448227618505700-HK-v3-snapshot.stderr.txt",
+          "byte_size": 2,
+          "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+          "hash_verified": true
+        }
+      ]
+    },
+    {
+      "id": "1791448231643120500-HK-v3-audit",
+      "label": "HK-v3-audit",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/v3_run.py",
+        "audit"
+      ],
+      "started_at": "2026-10-08T08:30:31.643244+00:00",
+      "ended_at": "2026-10-08T08:30:31.890315+00:00",
+      "returncode": 0,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791448231643120500-HK-v3-audit.stdout.txt",
+          "byte_size": 761,
+          "sha256": "4871a80f95f9f742e2850ce782a809f8c91be22c46e861519a8db3b23663e158",
+          "hash_verified": true
+        },
+        {
+          "kind": "stderr",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791448231643120500-HK-v3-audit.stderr.txt",
+          "byte_size": 2,
+          "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+          "hash_verified": true
+        }
+      ]
+    },
+    {
+      "id": "1791448321119765300-HK-v3-strong-render-independent-calc",
+      "label": "HK-v3-strong-render-independent-calc",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/v3_run.py",
+        "strong-calc"
+      ],
+      "started_at": "2026-10-08T08:32:01.119847+00:00",
+      "ended_at": "2026-10-08T08:32:02.949025+00:00",
+      "returncode": 0,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791448321119765300-HK-v3-strong-render-independent-calc.stdout.txt",
+          "byte_size": 1125,
+          "sha256": "164932fbeadb28d89c635cdbcd9cf18b1f227f3e44597c374bb17d889752f9be",
+          "hash_verified": true
+        },
+        {
+          "kind": "stderr",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791448321119765300-HK-v3-strong-render-independent-calc.stderr.txt",
+          "byte_size": 2,
+          "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+          "hash_verified": true
+        }
+      ]
+    },
+    {
+      "id": "1791448629563122600-HK-v3-final-handoff-integrity",
+      "label": "HK-v3-final-handoff-integrity",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/v3_finalize.py"
+      ],
+      "started_at": "2026-10-08T08:37:09.563207+00:00",
+      "ended_at": "2026-10-08T08:37:10.041667+00:00",
+      "returncode": 0,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791448629563122600-HK-v3-final-handoff-integrity.stdout.txt",
+          "byte_size": 468,
+          "sha256": "b2d9b25a81deb5f30f0c2a5d643ffd35aa51be813f58f609872d409485b05bc1",
+          "hash_verified": true
+        },
+        {
+          "kind": "stderr",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791448629563122600-HK-v3-final-handoff-integrity.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "hash_verified": true
+        }
+      ]
+    },
+    {
+      "id": "1791448711968722700-HK-v3-handoff-complete-step-facts",
+      "label": "HK-v3-handoff-complete-step-facts",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/HK-00700/v3_finalize.py"
+      ],
+      "started_at": "2026-10-08T08:38:31.968809+00:00",
+      "ended_at": "2026-10-08T08:38:32.382215+00:00",
+      "returncode": 0,
+      "outputs": [
+        {
+          "kind": "stdout",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791448711968722700-HK-v3-handoff-complete-step-facts.stdout.txt",
+          "byte_size": 468,
+          "sha256": "b2d9b25a81deb5f30f0c2a5d643ffd35aa51be813f58f609872d409485b05bc1",
+          "hash_verified": true
+        },
+        {
+          "kind": "stderr",
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\1791448711968722700-HK-v3-handoff-complete-step-facts.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "hash_verified": true
+        }
+      ]
+    }
+  ],
+  "process_traces": {
+    "process-108692.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T08:30:27.763577+00:00",
+        "pid": 108692,
+        "ppid": 3240,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_backtest.py",
+            "create",
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\input.json",
+            "--version",
+            "2026-10-08-hk-v3",
+            "--output",
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\snapshot.json"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T08:30:29.027016+00:00",
+        "pid": 108692,
+        "ppid": 3240,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-18364.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T08:30:31.800120+00:00",
+        "pid": 18364,
+        "ppid": 30680,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\publication_registry.py",
+            "audit",
+            "--result",
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\forecast.json"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T08:30:31.869082+00:00",
+        "pid": 18364,
+        "ppid": 30680,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-23728.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T08:29:47.670688+00:00",
+        "pid": 23728,
+        "ppid": 40256,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\fix_hashes.py",
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\input.json",
+            "--check"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T08:29:47.708719+00:00",
+        "pid": 23728,
+        "ppid": 40256,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-32224.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T08:24:43.794351+00:00",
+        "pid": 32224,
+        "ppid": 104120,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "-m",
+            "--config",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+            "source-facts",
+            "--request",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_source_facts_2025.request.json"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T08:24:44.390674+00:00",
+        "pid": 32224,
+        "ppid": 104120,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-59560.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T08:29:29.138339+00:00",
+        "pid": 59560,
+        "ppid": 25336,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_build.py"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T08:29:29.581870+00:00",
+        "pid": 59560,
+        "ppid": 25336,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-64260.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T08:29:50.460727+00:00",
+        "pid": 64260,
+        "ppid": 15012,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\input.json",
+            "--validate-only",
+            "--verbose"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T08:29:51.249494+00:00",
+        "pid": 64260,
+        "ppid": 15012,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-77020.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T08:30:23.122596+00:00",
+        "pid": 77020,
+        "ppid": 52696,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\input.json",
+            "--output",
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\forecast.json",
+            "--markdown",
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\forecast.md"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T08:30:24.650537+00:00",
+        "pid": 77020,
+        "ppid": 52696,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-88024.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T08:29:44.595597+00:00",
+        "pid": 88024,
+        "ppid": 83952,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\lint_input.py",
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\input.json",
+            "--check-conclusion-facts",
+            "--check-sensitivity-propagation"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T08:29:44.663858+00:00",
+        "pid": 88024,
+        "ppid": 83952,
+        "event": "python_exit",
+        "data": {}
+      }
+    ],
+    "process-97396.jsonl": [
+      {
+        "timestamp_utc": "2026-10-08T08:32:01.284571+00:00",
+        "pid": 97396,
+        "ppid": 48352,
+        "event": "python_start",
+        "data": {
+          "executable": "C:\\Miniconda\\python.exe",
+          "argv": [
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_verify.py"
+          ],
+          "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3"
+        }
+      },
+      {
+        "timestamp_utc": "2026-10-08T08:32:02.895869+00:00",
+        "pid": 97396,
+        "ppid": 48352,
+        "event": "python_exit",
+        "data": {}
+      }
+    ]
+  },
+  "runtime_inventory": {
+    "engine_version": "4.1.0",
+    "schema_version": "3.7",
+    "current_runtime": [
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\asset_ownership.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\asset_ownership.py",
+        "installed_sha256": "2dc8931451b88f410de5011bac2e80cc74f838e11e94c5627170a6e0ab891ed0",
+        "canonical_sha256": "2dc8931451b88f410de5011bac2e80cc74f838e11e94c5627170a6e0ab891ed0",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\commercial_terms.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\commercial_terms.py",
+        "installed_sha256": "6596d4492fcfb31cb73efaf75fb482d90156f2fbc91ab29be272e24745546005",
+        "canonical_sha256": "6596d4492fcfb31cb73efaf75fb482d90156f2fbc91ab29be272e24745546005",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_contracts.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_narrative_contracts.py",
+        "installed_sha256": "11fef2a81ff60940fc97cb918b17f0ce64e67b74fbc76a9f53c237fc07d178d3",
+        "canonical_sha256": "11fef2a81ff60940fc97cb918b17f0ce64e67b74fbc76a9f53c237fc07d178d3",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_posix.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_narrative_posix.py",
+        "installed_sha256": "669d268667d9e08a3d98ee1eec44ecc26fb4f142dd6d7310191169deba5dc852",
+        "canonical_sha256": "669d268667d9e08a3d98ee1eec44ecc26fb4f142dd6d7310191169deba5dc852",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_process.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_narrative_process.py",
+        "installed_sha256": "9664696ac23699ecf6b234cec3aa93ce475127d36a4bddf680edb711ccf92e3d",
+        "canonical_sha256": "9664696ac23699ecf6b234cec3aa93ce475127d36a4bddf680edb711ccf92e3d",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_reader.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_narrative_reader.py",
+        "installed_sha256": "8ff1cf553a8849330a41f74ae27bfcacd2515186b5fa58168cead91b6cfa7508",
+        "canonical_sha256": "8ff1cf553a8849330a41f74ae27bfcacd2515186b5fa58168cead91b6cfa7508",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_tree.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_narrative_tree.py",
+        "installed_sha256": "561f921d20636532ec13d4c2a116af120a88a2b56e55de6fbadf61f137bef8ba",
+        "canonical_sha256": "561f921d20636532ec13d4c2a116af120a88a2b56e55de6fbadf61f137bef8ba",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_source.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_source.py",
+        "installed_sha256": "b223974e94ffb6d91e0e927b252e1fbc67a590fc910c3da10600d292d48d4470",
+        "canonical_sha256": "b223974e94ffb6d91e0e927b252e1fbc67a590fc910c3da10600d292d48d4470",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_source_reader_v2.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_source_reader_v2.py",
+        "installed_sha256": "5f5bfd11cbc880c30f2766d8d6c78366d4e32f677ba9a517914a0df5f95faed1",
+        "canonical_sha256": "5f5bfd11cbc880c30f2766d8d6c78366d4e32f677ba9a517914a0df5f95faed1",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_source_v2.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_source_v2.py",
+        "installed_sha256": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+        "canonical_sha256": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\confidence_policy.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\confidence_policy.py",
+        "installed_sha256": "a2444c1ebb7f7ed9144e0db0199d1055da20b126b3026f90e114c55817ed822f",
+        "canonical_sha256": "a2444c1ebb7f7ed9144e0db0199d1055da20b126b3026f90e114c55817ed822f",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_fetch_client.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\filing_fetch_client.py",
+        "installed_sha256": "b16f85962173fc6a2757ed88fae7074a458ab28bbe1a21f6ec5fbf83a44f3446",
+        "canonical_sha256": "b16f85962173fc6a2757ed88fae7074a458ab28bbe1a21f6ec5fbf83a44f3446",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\fix_hashes.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\fix_hashes.py",
+        "installed_sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+        "canonical_sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\generate_input_template.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\generate_input_template.py",
+        "installed_sha256": "f7c57911d5f85204b04d07de02fdcf9bcdb2315cf0236181cd727986292870b1",
+        "canonical_sha256": "f7c57911d5f85204b04d07de02fdcf9bcdb2315cf0236181cd727986292870b1",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\internal_flow.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\internal_flow.py",
+        "installed_sha256": "05814b9286889088278fc5cf0c47a40452026bbc926f8f382db7e70de38a1355",
+        "canonical_sha256": "05814b9286889088278fc5cf0c47a40452026bbc926f8f382db7e70de38a1355",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\lint_input.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\lint_input.py",
+        "installed_sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+        "canonical_sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\mine_year_operation.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\mine_year_operation.py",
+        "installed_sha256": "602255c766897dcabf8c5107c0ba3116686aab7dca683066fdffc70b88628986",
+        "canonical_sha256": "602255c766897dcabf8c5107c0ba3116686aab7dca683066fdffc70b88628986",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\mixed_recognition.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\mixed_recognition.py",
+        "installed_sha256": "04ed62e0b61af523818aeff961cebc34eadc3df4b1b7756e5a32c9f8e432f232",
+        "canonical_sha256": "04ed62e0b61af523818aeff961cebc34eadc3df4b1b7756e5a32c9f8e432f232",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\model_extensions.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\model_extensions.py",
+        "installed_sha256": "c5c15d782834546cf1d58a0a9c2d664db79898b6cc9517c657bcfac743ce2f92",
+        "canonical_sha256": "c5c15d782834546cf1d58a0a9c2d664db79898b6cc9517c657bcfac743ce2f92",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\model_registry.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\model_registry.py",
+        "installed_sha256": "62f864b9ab3f144eacff43448897d2c31abc217e17ed3b0e3f58894cdd985081",
+        "canonical_sha256": "62f864b9ab3f144eacff43448897d2c31abc217e17ed3b0e3f58894cdd985081",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\narrative_source_preparation.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\narrative_source_preparation.py",
+        "installed_sha256": "4d848e286ca318f427d9001bb6243b98d9f91886f7931d7eb4796cf4cc4c2e72",
+        "canonical_sha256": "4d848e286ca318f427d9001bb6243b98d9f91886f7931d7eb4796cf4cc4c2e72",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\processed_artifact_canary.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\processed_artifact_canary.py",
+        "installed_sha256": "19869b02cb370add57b5910d360e3ae864b870a2825d76894ea36530a9ccacfc",
+        "canonical_sha256": "19869b02cb370add57b5910d360e3ae864b870a2825d76894ea36530a9ccacfc",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\processing_demand.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\processing_demand.py",
+        "installed_sha256": "fcdfcad8ebd1fc20febf3c157dcd20ad92708fd69d00373ef9a943e5a820afc1",
+        "canonical_sha256": "fcdfcad8ebd1fc20febf3c157dcd20ad92708fd69d00373ef9a943e5a820afc1",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\publication_registry.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\publication_registry.py",
+        "installed_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+        "canonical_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\reconciliation.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\reconciliation.py",
+        "installed_sha256": "c4b69e4ee1f3dc9822aed05b9facfd5bb44575b6b51b706dede46277ee5996f5",
+        "canonical_sha256": "c4b69e4ee1f3dc9822aed05b9facfd5bb44575b6b51b706dede46277ee5996f5",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_backtest.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_backtest.py",
+        "installed_sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+        "canonical_sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_constraints.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_constraints.py",
+        "installed_sha256": "6ce99c1d59fa3858213e31bf9dadc351591ef0eda006d957f07cf1a839e57374",
+        "canonical_sha256": "6ce99c1d59fa3858213e31bf9dadc351591ef0eda006d957f07cf1a839e57374",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_core.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_core.py",
+        "installed_sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+        "canonical_sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_forecast.py",
+        "installed_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+        "canonical_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_publication.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_publication.py",
+        "installed_sha256": "bc2bb4a33e36ed9ad82bc4ffe33e57de8999002c2c7910b9c8b9d1565678fcd0",
+        "canonical_sha256": "bc2bb4a33e36ed9ad82bc4ffe33e57de8999002c2c7910b9c8b9d1565678fcd0",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_report.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_report.py",
+        "installed_sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+        "canonical_sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\rolling_backtest.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\rolling_backtest.py",
+        "installed_sha256": "80de3bfbf47d1dc6b59fc8de94733f996463edb5d749923b6ab7039875d4ec8b",
+        "canonical_sha256": "80de3bfbf47d1dc6b59fc8de94733f996463edb5d749923b6ab7039875d4ec8b",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\schema_compatibility.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\schema_compatibility.py",
+        "installed_sha256": "2fe8ffe2090300fbe81e130e21cf0b213faefc63ba0a6831894c9025db963352",
+        "canonical_sha256": "2fe8ffe2090300fbe81e130e21cf0b213faefc63ba0a6831894c9025db963352",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\schema_fields.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\schema_fields.py",
+        "installed_sha256": "54276494dcb280b23791c3a7614eb2090997a68e1116d78f6efdf02edf52a01c",
+        "canonical_sha256": "54276494dcb280b23791c3a7614eb2090997a68e1116d78f6efdf02edf52a01c",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\schema_optin.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\schema_optin.py",
+        "installed_sha256": "6a3e01ea8ab95e5d705ff21c86274db6fc16b3569a19d74c2d1558cd3cf6b3a3",
+        "canonical_sha256": "6a3e01ea8ab95e5d705ff21c86274db6fc16b3569a19d74c2d1558cd3cf6b3a3",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+        "installed_sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+        "canonical_sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\trust_anchor.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\trust_anchor.py",
+        "installed_sha256": "9abdcec55a524574b55e0111f513338f79a486f536985d036b94b4a71ba1310c",
+        "canonical_sha256": "9abdcec55a524574b55e0111f513338f79a486f536985d036b94b4a71ba1310c",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\__init__.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\__init__.py",
+        "installed_sha256": "f7343866b80251c3d2105c6d34446898784ef6272ed9310dfee7cbecf8db3459",
+        "canonical_sha256": "f7343866b80251c3d2105c6d34446898784ef6272ed9310dfee7cbecf8db3459",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\analysis\\confidence.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\analysis\\confidence.py",
+        "installed_sha256": "235b38e4586f15bb8908a2db53abc0724ad9e0ed79bb15e508f948ebeaa0e283",
+        "canonical_sha256": "235b38e4586f15bb8908a2db53abc0724ad9e0ed79bb15e508f948ebeaa0e283",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\analysis\\sensitivity.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\analysis\\sensitivity.py",
+        "installed_sha256": "abb1f71f4b306739760e241672cc98e57ae8253f9bf90202cf06031d67f0373d",
+        "canonical_sha256": "abb1f71f4b306739760e241672cc98e57ae8253f9bf90202cf06031d67f0373d",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\analysis\\__init__.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\analysis\\__init__.py",
+        "installed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "canonical_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\constants.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\constants.py",
+        "installed_sha256": "3ad7332e4a76e7e3e2a9a8a1ab73828584ed8b19b32327479a0f79636b2f3462",
+        "canonical_sha256": "3ad7332e4a76e7e3e2a9a8a1ab73828584ed8b19b32327479a0f79636b2f3462",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\document.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\document.py",
+        "installed_sha256": "c2df0a229116392968152ee547818567ab40ba3813a270f68fabbfb9ea207c0d",
+        "canonical_sha256": "c2df0a229116392968152ee547818567ab40ba3813a270f68fabbfb9ea207c0d",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\evidence.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\evidence.py",
+        "installed_sha256": "eb1edea913b3b4f6f8f9c7a3f84e07d464bdf0b33e7e6e9aba5664b6cb5ba683",
+        "canonical_sha256": "eb1edea913b3b4f6f8f9c7a3f84e07d464bdf0b33e7e6e9aba5664b6cb5ba683",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\__init__.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\__init__.py",
+        "installed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "canonical_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\forecast\\calc.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\forecast\\calc.py",
+        "installed_sha256": "853baa0bb208c91be0c3983d9256cb42b76f61221b19ad11c11bc37db79ae049",
+        "canonical_sha256": "853baa0bb208c91be0c3983d9256cb42b76f61221b19ad11c11bc37db79ae049",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\forecast\\segments.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\forecast\\segments.py",
+        "installed_sha256": "7b0dac5d5b6f19aba2305a7cb5d9d0ecddb1e5a31a6833285c5f81259018f002",
+        "canonical_sha256": "7b0dac5d5b6f19aba2305a7cb5d9d0ecddb1e5a31a6833285c5f81259018f002",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\coverage.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\coverage.py",
+        "installed_sha256": "ae6519cc18fea823dcc9d5e47956a2aea6da3270f1041b28d7bf1b783cd4b470",
+        "canonical_sha256": "ae6519cc18fea823dcc9d5e47956a2aea6da3270f1041b28d7bf1b783cd4b470",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\drivers.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\drivers.py",
+        "installed_sha256": "45e3d58853c6757a0a49701d495ffb9e3e9cb0dafc2e819432cdd28af6e90e18",
+        "canonical_sha256": "45e3d58853c6757a0a49701d495ffb9e3e9cb0dafc2e819432cdd28af6e90e18",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\targets.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\targets.py",
+        "installed_sha256": "1c885deaf4168bacbd7d445ec6e76da93193132fce3b6ca67fbed4e6c910c48b",
+        "canonical_sha256": "1c885deaf4168bacbd7d445ec6e76da93193132fce3b6ca67fbed4e6c910c48b",
+        "matches_canonical": true
+      },
+      {
+        "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\__init__.py",
+        "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\__init__.py",
+        "installed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "canonical_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "matches_canonical": true
+      }
+    ],
+    "mismatches": [],
+    "owner": "MAIN; HK did not write runtime/config/installation"
+  },
+  "original51_parameters": [
+    {
+      "parameter_id": "reported_total",
+      "old_value": 751766,
+      "current_value": 751766,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "games_base",
+      "old_value": 241532,
+      "current_value": 241532,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "socialnetworks_base",
+      "old_value": 127749,
+      "current_value": 127749,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "marketingservices_base",
+      "old_value": 144973,
+      "current_value": 144973,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "fintechbusinessservices_base",
+      "old_value": 229435,
+      "current_value": 229435,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "others_base",
+      "old_value": 8077,
+      "current_value": 8077,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "games_growth_rate_low_2026",
+      "old_value": 0.07,
+      "current_value": 0.07,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "games_growth_rate_low_2027",
+      "old_value": 0.04,
+      "current_value": 0.04,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "games_growth_rate_low_2028",
+      "old_value": 0.02,
+      "current_value": 0.02,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "games_growth_rate_base_2026",
+      "old_value": 0.1,
+      "current_value": 0.1,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "games_growth_rate_base_2027",
+      "old_value": 0.09,
+      "current_value": 0.09,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "games_growth_rate_base_2028",
+      "old_value": 0.08,
+      "current_value": 0.08,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "games_growth_rate_high_2026",
+      "old_value": 0.15,
+      "current_value": 0.15,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "games_growth_rate_high_2027",
+      "old_value": 0.14,
+      "current_value": 0.14,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "games_growth_rate_high_2028",
+      "old_value": 0.12,
+      "current_value": 0.12,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_low_2026",
+      "old_value": -0.02,
+      "current_value": -0.02,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_low_2027",
+      "old_value": -0.03,
+      "current_value": -0.03,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_low_2028",
+      "old_value": -0.02,
+      "current_value": -0.02,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_base_2026",
+      "old_value": 0,
+      "current_value": 0,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_base_2027",
+      "old_value": 0.02,
+      "current_value": 0.02,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_base_2028",
+      "old_value": 0.03,
+      "current_value": 0.03,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_high_2026",
+      "old_value": 0.04,
+      "current_value": 0.04,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_high_2027",
+      "old_value": 0.05,
+      "current_value": 0.05,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_high_2028",
+      "old_value": 0.05,
+      "current_value": 0.05,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_low_2026",
+      "old_value": 0.12,
+      "current_value": 0.12,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_low_2027",
+      "old_value": 0.08,
+      "current_value": 0.08,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_low_2028",
+      "old_value": 0.06,
+      "current_value": 0.06,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_base_2026",
+      "old_value": 0.2,
+      "current_value": 0.2,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_base_2027",
+      "old_value": 0.17,
+      "current_value": 0.17,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_base_2028",
+      "old_value": 0.14,
+      "current_value": 0.14,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_high_2026",
+      "old_value": 0.24,
+      "current_value": 0.24,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_high_2027",
+      "old_value": 0.23,
+      "current_value": 0.23,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_high_2028",
+      "old_value": 0.2,
+      "current_value": 0.2,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_low_2026",
+      "old_value": 0.05,
+      "current_value": 0.05,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_low_2027",
+      "old_value": 0.04,
+      "current_value": 0.04,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_low_2028",
+      "old_value": 0.04,
+      "current_value": 0.04,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_base_2026",
+      "old_value": 0.09,
+      "current_value": 0.09,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_base_2027",
+      "old_value": 0.1,
+      "current_value": 0.1,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_base_2028",
+      "old_value": 0.1,
+      "current_value": 0.1,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_high_2026",
+      "old_value": 0.13,
+      "current_value": 0.13,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_high_2027",
+      "old_value": 0.15,
+      "current_value": 0.15,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_high_2028",
+      "old_value": 0.15,
+      "current_value": 0.15,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "others_growth_rate_low_2026",
+      "old_value": 0.15,
+      "current_value": 0.15,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "others_growth_rate_low_2027",
+      "old_value": 0,
+      "current_value": 0,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "others_growth_rate_low_2028",
+      "old_value": 0,
+      "current_value": 0,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "others_growth_rate_base_2026",
+      "old_value": 0.4,
+      "current_value": 0.4,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "others_growth_rate_base_2027",
+      "old_value": 0.1,
+      "current_value": 0.1,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "others_growth_rate_base_2028",
+      "old_value": 0.08,
+      "current_value": 0.08,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "others_growth_rate_high_2026",
+      "old_value": 0.6,
+      "current_value": 0.6,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "others_growth_rate_high_2027",
+      "old_value": 0.2,
+      "current_value": 0.2,
+      "equal": true,
+      "original_classification_retained": true
+    },
+    {
+      "parameter_id": "others_growth_rate_high_2028",
+      "old_value": 0.15,
+      "current_value": 0.15,
+      "equal": true,
+      "original_classification_retained": true
+    }
+  ],
+  "new_context_parameters": [
+    {
+      "parameter_id": "context_group_top5_customer_revenue_share",
+      "kind": "reported_fact",
+      "value": 0.065,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2025",
+      "scenario": null,
+      "unit": "ratio",
+      "definition": "FY2025 top-five customers share of Tencent consolidated GROUP revenue, not any segment customer or subscriber population.",
+      "rationale": "Context-only disclosed customer concentration. Explicitly not used as a growth coefficient or annual payer denominator. Original percentages6.5%/3.4% normalized by division by100.",
+      "source_ids": [
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "claim_ids": [
+        "v3_parameter_context_group_top5_customer_revenue_share_20"
+      ]
+    },
+    {
+      "parameter_id": "context_group_largest_customer_revenue_share",
+      "kind": "reported_fact",
+      "value": 0.034,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2025",
+      "scenario": null,
+      "unit": "ratio",
+      "definition": "FY2025 largest customer share of Tencent consolidated GROUP revenue, not any segment customer or subscriber population.",
+      "rationale": "Context-only disclosed customer concentration. Explicitly not used as a growth coefficient or annual payer denominator. Original percentages6.5%/3.4% normalized by division by100.",
+      "source_ids": [
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "claim_ids": [
+        "v3_parameter_context_group_largest_customer_revenue_share_21"
+      ]
+    }
+  ],
+  "source_capture_reuse": [
+    {
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "raw_capture_same": true,
+      "published_date": "2026-10-08",
+      "date_uncertainty": {
+        "state": "exact_publication_date_unverified",
+        "previous_date_assertion": "2026-04-09",
+        "previous_assertion_limitation": "legacy producer date, same-SHA official authentication remains blocked",
+        "available_as_of": "2026-10-08",
+        "actual_read_date": "2026-10-08",
+        "date_semantics": "available_as_of_upper_bound",
+        "evidence": "sealed independent review live original reads; RF verified-open for local FY2025 original",
+        "exact_publication_day": null
+      }
+    },
+    {
+      "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+      "raw_capture_same": true,
+      "published_date": "2025-04-08",
+      "date_uncertainty": null
+    },
+    {
+      "source_id": "tencent_h1_2026_official",
+      "raw_capture_same": true,
+      "published_date": "2026-10-08",
+      "date_uncertainty": {
+        "state": "exact_publication_date_unverified",
+        "previous_date_assertion": "2026-08-12",
+        "previous_assertion_limitation": "board/management signoff date and Q2 release date do not establish the whole interim-book public day",
+        "available_as_of": "2026-10-08",
+        "actual_read_date": "2026-10-08",
+        "date_semantics": "available_as_of_upper_bound",
+        "evidence": "sealed independent review live original reads; RF verified-open for local FY2025 original",
+        "exact_publication_day": null
+      }
+    },
+    {
+      "source_id": "tencent_results_2q2026",
+      "raw_capture_same": true,
+      "published_date": "2026-08-12",
+      "date_uncertainty": null
+    },
+    {
+      "source_id": "netease_results_2q2026",
+      "raw_capture_same": true,
+      "published_date": "2026-08-20",
+      "date_uncertainty": null
+    },
+    {
+      "source_id": "tencent_corporate_overview_sep2026",
+      "raw_capture_same": true,
+      "published_date": "2026-10-08",
+      "date_uncertainty": {
+        "state": "exact_publication_date_unverified",
+        "previous_date_assertion": "2026-09-16",
+        "previous_assertion_limitation": "official filename assertion, not independently verified primary publication timestamp",
+        "available_as_of": "2026-10-08",
+        "actual_read_date": "2026-10-08",
+        "date_semantics": "available_as_of_upper_bound",
+        "evidence": "sealed independent review live original reads; RF verified-open for local FY2025 original",
+        "exact_publication_day": null
+      }
+    }
+  ],
+  "repair_findings": [
+    {
+      "id": "HK-R01",
+      "executor_status": "implemented_pending_independent_review",
+      "implementation": "Bound259/264 fee subscriptions AND quarter-average daily definition separately from H1 revenue contraction.",
+      "claim_ids": [
+        "v3_growth_driver_paid_social_stabilization_contrary_245"
+      ],
+      "original_locators": [
+        "H1 PDF6/printed5 subscription table and footnote",
+        "H1 PDF47/printed46 Social revenue comparative"
+      ],
+      "evidence_artifacts": [],
+      "remaining_reason": null,
+      "independent_review": "PENDING; executor does not sign own work"
+    },
+    {
+      "id": "HK-R02",
+      "executor_status": "implemented_pending_independent_review",
+      "implementation": "Full Supercell/FX/constant-currency paragraph and annual33%/32% bound to Tencent contrary node. Independent peer franchise/net-revenue observations have a separate one-step node, no market-share/displacement assertion.",
+      "claim_ids": [
+        "v3_growth_driver_evergreen_and_launch_monetization_contrary_238",
+        "v3_growth_driver_evergreen_and_launch_monetization_contrary_239",
+        "v3_growth_driver_games_independent_peer_context_240",
+        "v3_growth_driver_games_independent_peer_context_241",
+        "v3_growth_driver_games_independent_peer_context_242"
+      ],
+      "original_locators": [
+        "H1 PDF10/printed9 complete international paragraph",
+        "Annual PDF9/printed8",
+        "NetEase release full H1 financial and games-franchise sections"
+      ],
+      "evidence_artifacts": [],
+      "remaining_reason": null,
+      "independent_review": "PENDING; executor does not sign own work"
+    },
+    {
+      "id": "HK-R03",
+      "executor_status": "implemented_pending_independent_review",
+      "implementation": "Two context-only annual reported parameters normalize group customer6.5%/3.4% into ratios; claims explicitly associated with customers gap. NetEase H1 net-gaming+8.3% claim associated with industry_market gap and peer context; no use as direct model coefficient.",
+      "claim_ids": [
+        "v3_parameter_context_group_top5_customer_revenue_share_20",
+        "v3_parameter_context_group_largest_customer_revenue_share_21",
+        "v3_parameter_games_growth_rate_base_2026_51",
+        "v3_growth_driver_games_independent_peer_context_240",
+        "v3_growth_driver_games_independent_peer_context_241",
+        "v3_growth_driver_games_independent_peer_context_242"
+      ],
+      "original_locators": [
+        "Annual PDF80/printed79 group customer concentration",
+        "NetEase first-half financial highlights"
+      ],
+      "evidence_artifacts": [],
+      "remaining_reason": "Segment billable customer denominators, total market/share and comparable peer perimeter still data gaps.",
+      "independent_review": "PENDING; executor does not sign own work"
+    },
+    {
+      "id": "HK-R04",
+      "executor_status": "implemented_pending_independent_review",
+      "implementation": "All five aggregate bases now separately bind general control-transfer timing and principal/agent gross-net, plus segment-specific timing. Games/Social also bind platform and third-party VAS presentation. No second transformation.",
+      "claim_ids": [
+        "v3_recognition_policy_recognition:Games_1",
+        "v3_recognition_policy_recognition:Games_2",
+        "v3_recognition_policy_recognition:Games_3",
+        "v3_recognition_policy_recognition:Games_4",
+        "v3_recognition_policy_recognition:Games_5",
+        "v3_recognition_policy_recognition:SocialNetworks_6",
+        "v3_recognition_policy_recognition:SocialNetworks_7",
+        "v3_recognition_policy_recognition:SocialNetworks_8",
+        "v3_recognition_policy_recognition:SocialNetworks_9",
+        "v3_recognition_policy_recognition:SocialNetworks_10",
+        "v3_recognition_policy_recognition:MarketingServices_11",
+        "v3_recognition_policy_recognition:MarketingServices_12",
+        "v3_recognition_policy_recognition:MarketingServices_13",
+        "v3_recognition_policy_recognition:FinTechBusinessServices_14",
+        "v3_recognition_policy_recognition:FinTechBusinessServices_15",
+        "v3_recognition_policy_recognition:FinTechBusinessServices_16",
+        "v3_recognition_policy_recognition:Others_17",
+        "v3_recognition_policy_recognition:Others_18",
+        "v3_recognition_policy_recognition:Others_19"
+      ],
+      "original_locators": [
+        "Annual Note2.22 PDF165-167/printed164-166"
+      ],
+      "evidence_artifacts": [],
+      "remaining_reason": null,
+      "independent_review": "PENDING; executor does not sign own work"
+    },
+    {
+      "id": "HK-R05",
+      "executor_status": "implemented_pending_independent_review",
+      "implementation": "All36 future Games/Social/Marketing/FBS rationales bind complete annual/H1/Q2/AI-ad/GPU paragraphs per actual parameter. All original45 future rates and6 bases unchanged.",
+      "claim_ids": [
+        "v3_parameter_games_growth_rate_low_2026_22",
+        "v3_parameter_games_growth_rate_low_2026_23",
+        "v3_parameter_games_growth_rate_low_2026_24",
+        "v3_parameter_games_growth_rate_low_2026_25",
+        "v3_parameter_games_growth_rate_low_2026_26",
+        "v3_parameter_games_growth_rate_low_2026_27",
+        "v3_parameter_games_growth_rate_low_2026_28",
+        "v3_parameter_games_growth_rate_low_2026_29",
+        "v3_parameter_games_growth_rate_low_2027_30",
+        "v3_parameter_games_growth_rate_low_2027_31",
+        "v3_parameter_games_growth_rate_low_2027_32",
+        "v3_parameter_games_growth_rate_low_2027_33",
+        "v3_parameter_games_growth_rate_low_2027_34",
+        "v3_parameter_games_growth_rate_low_2027_35",
+        "v3_parameter_games_growth_rate_low_2027_36",
+        "v3_parameter_games_growth_rate_low_2027_37",
+        "v3_parameter_games_growth_rate_low_2028_38",
+        "v3_parameter_games_growth_rate_low_2028_39",
+        "v3_parameter_games_growth_rate_low_2028_40",
+        "v3_parameter_games_growth_rate_low_2028_41",
+        "v3_parameter_games_growth_rate_low_2028_42",
+        "v3_parameter_games_growth_rate_low_2028_43",
+        "v3_parameter_games_growth_rate_low_2028_44",
+        "v3_parameter_games_growth_rate_low_2028_45",
+        "v3_parameter_games_growth_rate_base_2026_46",
+        "v3_parameter_games_growth_rate_base_2026_47",
+        "v3_parameter_games_growth_rate_base_2026_48",
+        "v3_parameter_games_growth_rate_base_2026_49",
+        "v3_parameter_games_growth_rate_base_2026_50",
+        "v3_parameter_games_growth_rate_base_2026_51",
+        "v3_parameter_games_growth_rate_base_2026_52",
+        "v3_parameter_games_growth_rate_base_2026_53",
+        "v3_parameter_games_growth_rate_base_2027_54",
+        "v3_parameter_games_growth_rate_base_2027_55",
+        "v3_parameter_games_growth_rate_base_2027_56",
+        "v3_parameter_games_growth_rate_base_2027_57",
+        "v3_parameter_games_growth_rate_base_2027_58",
+        "v3_parameter_games_growth_rate_base_2027_59",
+        "v3_parameter_games_growth_rate_base_2027_60",
+        "v3_parameter_games_growth_rate_base_2027_61",
+        "v3_parameter_games_growth_rate_base_2028_62",
+        "v3_parameter_games_growth_rate_base_2028_63",
+        "v3_parameter_games_growth_rate_base_2028_64",
+        "v3_parameter_games_growth_rate_base_2028_65",
+        "v3_parameter_games_growth_rate_base_2028_66",
+        "v3_parameter_games_growth_rate_base_2028_67",
+        "v3_parameter_games_growth_rate_base_2028_68",
+        "v3_parameter_games_growth_rate_base_2028_69",
+        "v3_parameter_games_growth_rate_high_2026_70",
+        "v3_parameter_games_growth_rate_high_2026_71",
+        "v3_parameter_games_growth_rate_high_2026_72",
+        "v3_parameter_games_growth_rate_high_2026_73",
+        "v3_parameter_games_growth_rate_high_2026_74",
+        "v3_parameter_games_growth_rate_high_2026_75",
+        "v3_parameter_games_growth_rate_high_2026_76",
+        "v3_parameter_games_growth_rate_high_2026_77",
+        "v3_parameter_games_growth_rate_high_2027_78",
+        "v3_parameter_games_growth_rate_high_2027_79",
+        "v3_parameter_games_growth_rate_high_2027_80",
+        "v3_parameter_games_growth_rate_high_2027_81",
+        "v3_parameter_games_growth_rate_high_2027_82",
+        "v3_parameter_games_growth_rate_high_2027_83",
+        "v3_parameter_games_growth_rate_high_2027_84",
+        "v3_parameter_games_growth_rate_high_2027_85",
+        "v3_parameter_games_growth_rate_high_2028_86",
+        "v3_parameter_games_growth_rate_high_2028_87",
+        "v3_parameter_games_growth_rate_high_2028_88",
+        "v3_parameter_games_growth_rate_high_2028_89",
+        "v3_parameter_games_growth_rate_high_2028_90",
+        "v3_parameter_games_growth_rate_high_2028_91",
+        "v3_parameter_games_growth_rate_high_2028_92",
+        "v3_parameter_games_growth_rate_high_2028_93",
+        "v3_parameter_socialnetworks_growth_rate_low_2026_94",
+        "v3_parameter_socialnetworks_growth_rate_low_2026_95",
+        "v3_parameter_socialnetworks_growth_rate_low_2026_96",
+        "v3_parameter_socialnetworks_growth_rate_low_2027_97",
+        "v3_parameter_socialnetworks_growth_rate_low_2027_98",
+        "v3_parameter_socialnetworks_growth_rate_low_2027_99",
+        "v3_parameter_socialnetworks_growth_rate_low_2028_100",
+        "v3_parameter_socialnetworks_growth_rate_low_2028_101",
+        "v3_parameter_socialnetworks_growth_rate_low_2028_102",
+        "v3_parameter_socialnetworks_growth_rate_base_2026_103",
+        "v3_parameter_socialnetworks_growth_rate_base_2026_104",
+        "v3_parameter_socialnetworks_growth_rate_base_2026_105",
+        "v3_parameter_socialnetworks_growth_rate_base_2027_106",
+        "v3_parameter_socialnetworks_growth_rate_base_2027_107",
+        "v3_parameter_socialnetworks_growth_rate_base_2027_108",
+        "v3_parameter_socialnetworks_growth_rate_base_2028_109",
+        "v3_parameter_socialnetworks_growth_rate_base_2028_110",
+        "v3_parameter_socialnetworks_growth_rate_base_2028_111",
+        "v3_parameter_socialnetworks_growth_rate_high_2026_112",
+        "v3_parameter_socialnetworks_growth_rate_high_2026_113",
+        "v3_parameter_socialnetworks_growth_rate_high_2026_114",
+        "v3_parameter_socialnetworks_growth_rate_high_2027_115",
+        "v3_parameter_socialnetworks_growth_rate_high_2027_116",
+        "v3_parameter_socialnetworks_growth_rate_high_2027_117",
+        "v3_parameter_socialnetworks_growth_rate_high_2028_118",
+        "v3_parameter_socialnetworks_growth_rate_high_2028_119",
+        "v3_parameter_socialnetworks_growth_rate_high_2028_120",
+        "v3_parameter_marketingservices_growth_rate_low_2026_121",
+        "v3_parameter_marketingservices_growth_rate_low_2026_122",
+        "v3_parameter_marketingservices_growth_rate_low_2026_123",
+        "v3_parameter_marketingservices_growth_rate_low_2026_124",
+        "v3_parameter_marketingservices_growth_rate_low_2026_125",
+        "v3_parameter_marketingservices_growth_rate_low_2026_126",
+        "v3_parameter_marketingservices_growth_rate_low_2026_127",
+        "v3_parameter_marketingservices_growth_rate_low_2027_128",
+        "v3_parameter_marketingservices_growth_rate_low_2027_129",
+        "v3_parameter_marketingservices_growth_rate_low_2027_130",
+        "v3_parameter_marketingservices_growth_rate_low_2027_131",
+        "v3_parameter_marketingservices_growth_rate_low_2027_132",
+        "v3_parameter_marketingservices_growth_rate_low_2027_133",
+        "v3_parameter_marketingservices_growth_rate_low_2027_134",
+        "v3_parameter_marketingservices_growth_rate_low_2028_135",
+        "v3_parameter_marketingservices_growth_rate_low_2028_136",
+        "v3_parameter_marketingservices_growth_rate_low_2028_137",
+        "v3_parameter_marketingservices_growth_rate_low_2028_138",
+        "v3_parameter_marketingservices_growth_rate_low_2028_139",
+        "v3_parameter_marketingservices_growth_rate_low_2028_140",
+        "v3_parameter_marketingservices_growth_rate_low_2028_141",
+        "v3_parameter_marketingservices_growth_rate_base_2026_142",
+        "v3_parameter_marketingservices_growth_rate_base_2026_143",
+        "v3_parameter_marketingservices_growth_rate_base_2026_144",
+        "v3_parameter_marketingservices_growth_rate_base_2026_145",
+        "v3_parameter_marketingservices_growth_rate_base_2026_146",
+        "v3_parameter_marketingservices_growth_rate_base_2026_147",
+        "v3_parameter_marketingservices_growth_rate_base_2026_148",
+        "v3_parameter_marketingservices_growth_rate_base_2027_149",
+        "v3_parameter_marketingservices_growth_rate_base_2027_150",
+        "v3_parameter_marketingservices_growth_rate_base_2027_151",
+        "v3_parameter_marketingservices_growth_rate_base_2027_152",
+        "v3_parameter_marketingservices_growth_rate_base_2027_153",
+        "v3_parameter_marketingservices_growth_rate_base_2027_154",
+        "v3_parameter_marketingservices_growth_rate_base_2027_155",
+        "v3_parameter_marketingservices_growth_rate_base_2028_156",
+        "v3_parameter_marketingservices_growth_rate_base_2028_157",
+        "v3_parameter_marketingservices_growth_rate_base_2028_158",
+        "v3_parameter_marketingservices_growth_rate_base_2028_159",
+        "v3_parameter_marketingservices_growth_rate_base_2028_160",
+        "v3_parameter_marketingservices_growth_rate_base_2028_161",
+        "v3_parameter_marketingservices_growth_rate_base_2028_162",
+        "v3_parameter_marketingservices_growth_rate_high_2026_163",
+        "v3_parameter_marketingservices_growth_rate_high_2026_164",
+        "v3_parameter_marketingservices_growth_rate_high_2026_165",
+        "v3_parameter_marketingservices_growth_rate_high_2026_166",
+        "v3_parameter_marketingservices_growth_rate_high_2026_167",
+        "v3_parameter_marketingservices_growth_rate_high_2026_168",
+        "v3_parameter_marketingservices_growth_rate_high_2026_169",
+        "v3_parameter_marketingservices_growth_rate_high_2027_170",
+        "v3_parameter_marketingservices_growth_rate_high_2027_171",
+        "v3_parameter_marketingservices_growth_rate_high_2027_172",
+        "v3_parameter_marketingservices_growth_rate_high_2027_173",
+        "v3_parameter_marketingservices_growth_rate_high_2027_174",
+        "v3_parameter_marketingservices_growth_rate_high_2027_175",
+        "v3_parameter_marketingservices_growth_rate_high_2027_176",
+        "v3_parameter_marketingservices_growth_rate_high_2028_177",
+        "v3_parameter_marketingservices_growth_rate_high_2028_178",
+        "v3_parameter_marketingservices_growth_rate_high_2028_179",
+        "v3_parameter_marketingservices_growth_rate_high_2028_180",
+        "v3_parameter_marketingservices_growth_rate_high_2028_181",
+        "v3_parameter_marketingservices_growth_rate_high_2028_182",
+        "v3_parameter_marketingservices_growth_rate_high_2028_183",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2026_184",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2026_185",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2026_186",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2026_187",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2026_188",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2026_189",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2027_190",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2027_191",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2027_192",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2027_193",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2027_194",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2027_195",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2028_196",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2028_197",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2028_198",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2028_199",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2028_200",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2028_201",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2026_202",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2026_203",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2026_204",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2026_205",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2026_206",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2026_207",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2027_208",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2027_209",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2027_210",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2027_211",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2027_212",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2027_213",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2028_214",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2028_215",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2028_216",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2028_217",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2028_218",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2028_219",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2026_220",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2026_221",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2026_222",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2026_223",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2026_224",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2026_225",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2027_226",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2027_227",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2027_228",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2027_229",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2027_230",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2027_231",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2028_232",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2028_233",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2028_234",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2028_235",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2028_236",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2028_237"
+      ],
+      "original_locators": [
+        "Annual PDF9/196",
+        "H1 PDF6/10/47",
+        "Corporate Overview PDF12/15",
+        "NetEase full release"
+      ],
+      "evidence_artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_claim_binding_index.json",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\context_inventory.json"
+      ],
+      "remaining_reason": null,
+      "independent_review": "PENDING; executor does not sign own work"
+    },
+    {
+      "id": "HK-R06",
+      "executor_status": "unresolved_external_official_provenance",
+      "implementation": "Exactly3 bounded official HTTP requests: registered URL404, official archive contains observedTC link, PDF linkHTTP200982-byte HTML. No PDF magic or same-SHA proof; no producer URL update.",
+      "claim_ids": [],
+      "original_locators": [],
+      "evidence_artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_official_auth.json"
+      ],
+      "remaining_reason": "Authentic current official same-SHA PDF and exact original publication metadata inaccessible. Do not claim repaired, treat as provenance limitation.",
+      "independent_review": "PENDING; executor does not sign own work"
+    },
+    {
+      "id": "HK-R07",
+      "executor_status": "representation_corrected_exact_day_unverified",
+      "implementation": "Exact-day claim removed for full H1 book/Corporate Overview, and conservatively for legacy FY2025. Required published_date field explicitly denotes available-as-of upper bound2026-10-08, not a release event; date_uncertainty retains old board/filename/legacy assertions. Actual live/asof reads establish cutoff availability.",
+      "claim_ids": [],
+      "original_locators": [],
+      "evidence_artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_claim_binding_index.json"
+      ],
+      "remaining_reason": "Exact primary publication days remain UNKNOWN. A future runtime nullable publication-date/availability contract would express this without a mandatory-date surrogate; no runtime rewrite in HK repair.",
+      "independent_review": "PENDING; executor does not sign own work"
+    },
+    {
+      "id": "HK-R08",
+      "executor_status": "implemented_pending_independent_review",
+      "implementation": "Actual FY2025 cover/summary rendered and viewed; public source-facts producer appendedsa-f7d91778e20847cfbd744aeaca2e6454 supersedingsa-f5cc0cf223e6460596a950f65d89f054. Read-only query proves old row unchanged, new correct fiscal-year/language and observation.",
+      "claim_ids": [],
+      "original_locators": [
+        "Actual FY2025 PDF1cover andPDF4summary"
+      ],
+      "evidence_artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_source_facts_2025.request.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_source_facts_2025.receipt.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_source_facts_producer_after.json",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\FY2025_page_1_visual.png",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\FY2025_page_4_visual.png"
+      ],
+      "remaining_reason": null,
+      "independent_review": "PENDING; executor does not sign own work"
+    },
+    {
+      "id": "HK-R09",
+      "executor_status": "blocked_external_adapter",
+      "implementation": "Existing capped RF→FF→CWP missing-H1 request still blocks before Dayu discover; no new provider call, no downloaded_new→reuse demonstration. No budget relaxation/Dayu modification.",
+      "claim_ids": [],
+      "original_locators": [],
+      "evidence_artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\request_interim_2026_no_language.json"
+      ],
+      "remaining_reason": "External Dayu adapter lacks bounded capabilities. Official supplemental route success does not attest FF/Dayu download.",
+      "independent_review": "PENDING; executor does not sign own work"
+    },
+    {
+      "id": "HK-R10",
+      "executor_status": "partial_communication_coverage",
+      "implementation": "Exact FY2026Q2 companion zero-cost unavailable/provider_calls0, ET child0 and no call body. Unavailable earnings deck/webcast and incomplete announcements interval preserved. Empty targets only for actually opened originals.",
+      "claim_ids": [],
+      "original_locators": [],
+      "evidence_artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\ff_latest_companion.response.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\communication_coverage.json"
+      ],
+      "remaining_reason": "No latest transcript and no exhaustive Apr9–Oct8 announcements. Missing management-target risk remains explicit.",
+      "independent_review": "PENDING; executor does not sign own work"
+    },
+    {
+      "id": "HK-R11",
+      "executor_status": "blocked_canonical_processing",
+      "implementation": "Real raw verify/open and task-local deterministic extraction kept separate from CWP Worker/normalized EvidenceSpan/narrative pipeline. Retired absent derivatives and earlier invalid-JSON failure are not consumed or claimed fixed.",
+      "claim_ids": [],
+      "original_locators": [],
+      "evidence_artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\deterministic_local_parse.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\reviews\\HK-00700\\independent_current_producer_rows.json"
+      ],
+      "remaining_reason": "No bounded canonical producer processing run in this HK repair; owner/MAIN must supply if full processing success is required.",
+      "independent_review": "PENDING; executor does not sign own work"
+    },
+    {
+      "id": "HK-R12",
+      "executor_status": "conditional_fallback_scope_disclosed",
+      "implementation": "Five direct_growth paths explicitly conditional, with denied invented operating denominators and zero explicit-model/backtest credit. All15 H2 residuals, all45 curve values and15 shock sensitivities independently checked. Uncalibrated FY2027/28 fade/stabilization and risk assumptions disclosed.",
+      "claim_ids": [],
+      "original_locators": [],
+      "evidence_artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\forecast.md"
+      ],
+      "remaining_reason": "No accuracy certification, calibrated prediction interval or causal coefficient estimate. Only one differently scoped peer reference, incomplete management communications and no future actuals.",
+      "independent_review": "PENDING; executor does not sign own work"
+    },
+    {
+      "id": "HK-R13",
+      "executor_status": "resolved_by_MAIN_retested",
+      "implementation": "Current installed publication_registry.py actual CLI audit(exit0) and chain/anchor audit below, using separate v3 registry. MAIN reported RF08673cf8/green; HK changed no runtime.",
+      "claim_ids": [],
+      "original_locators": [],
+      "evidence_artifacts": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_audit.stdout.txt",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_audit.stderr.txt"
+      ],
+      "remaining_reason": null,
+      "independent_review": "PENDING; executor does not sign own work"
+    }
+  ],
+  "skill_steps": [
+    {
+      "step": "0",
+      "name": "Nine-dimensional coverage",
+      "status": "done",
+      "evidence": "input.json:research_coverage; six model-linked, three explicit gaps",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "implemented_pending_independent_review"
+    },
+    {
+      "step": "1",
+      "name": "Freeze information set",
+      "status": "done",
+      "evidence": "before.json; dated original captures; as_of2026-10-08; no future FY actuals",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_claim_binding_index.json"
+      ],
+      "v3_status": "done_with_explicit_publication_uncertainty"
+    },
+    {
+      "step": "1A",
+      "name": "Management communications and targets",
+      "status": "partial",
+      "evidence": "communication_coverage.json; four checked categories; call/fullannouncement interval unavailable; no absent-target assertion",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "partial_supply_communication_canonical_processing"
+    },
+    {
+      "step": "1B",
+      "name": "Independent reference and route comparison",
+      "status": "done_with_gaps",
+      "evidence": "model_research_decisions.json; primary NetEase release; historical2022 contraction; candidate identity models rejected explicitly for unavailable denominators",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "implemented_pending_independent_review"
+    },
+    {
+      "step": "2",
+      "name": "History and base",
+      "status": "done",
+      "evidence": "fact_checks.json; FY2024 and2025 separate audited notes reconcile all five curves; FY2021–25 history",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "implemented_pending_independent_review"
+    },
+    {
+      "step": "3",
+      "name": "Register sources and parameters",
+      "status": "done",
+      "evidence": "actual RF source-preparation→FF→CWP pathless refs; capture/raw/claim/parameter binding; 51 parameters and69 claims",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "partial_supply_communication_canonical_processing"
+    },
+    {
+      "step": "4",
+      "name": "Split revenue curves",
+      "status": "done",
+      "evidence": "Five exact economic streams; Games+Social reconcile VAS; precise domestic/overseas split unavailable, not invented",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "implemented_pending_independent_review"
+    },
+    {
+      "step": "5",
+      "name": "Recognized revenue",
+      "status": "done",
+      "evidence": "Note2.22 PDF165–168 policies; true mixed metadata and already-recognized direct_growth; MAIN minimal extension green; no artificial progress/gross assumption",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "implemented_pending_independent_review"
+    },
+    {
+      "step": "6",
+      "name": "Driver scenarios",
+      "status": "done_with_gaps",
+      "evidence": "45 distinct annual low/base/high assumptions; missing eligible operating denominators disclosed; Fallback reduces explicit-model confidence",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "implemented_pending_independent_review"
+    },
+    {
+      "step": "6A",
+      "name": "Causal revenue driver tree",
+      "status": "done",
+      "evidence": "Five roots map actual Base parameters; analyst allocation weight1 each; real contrary nodes Games/Social/FBS; Marketing/Others data-gap counterevidence",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "implemented_pending_independent_review"
+    },
+    {
+      "step": "7",
+      "name": "Aggregate and bridge",
+      "status": "done",
+      "evidence": "delivery_verification.json independent arithmetic, total/CAGR/delta, all paths ordered; no doublecount or rounded gaming geography fake bridge",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "implemented_pending_independent_review"
+    },
+    {
+      "step": "8",
+      "name": "Sensitivity and theme",
+      "status": "done",
+      "evidence": "15 Base assumptions all tested±3percentagepoints; no requested separate theme, N/A",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "implemented_pending_independent_review"
+    },
+    {
+      "step": "9",
+      "name": "Confidence",
+      "status": "done",
+      "evidence": "Actual formal runtime confidence/gaps; not accuracy probability; no synthetic historical backtest credit",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "implemented_pending_independent_review"
+    },
+    {
+      "step": "10",
+      "name": "Validate and deliver",
+      "status": "done",
+      "evidence": "template/lint/hash/validate-only/forecast; strong input-required rederive; same-result Markdown; TRUST_BOUNDARY.md",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "implemented_pending_independent_review"
+    },
+    {
+      "step": "11",
+      "name": "Freeze and backtest",
+      "status": "done_freeze_evaluation_not_applicable",
+      "evidence": "snapshot-v2.json immutable; strong snapshot validation; no FY2026–2028 actuals available, evaluate N/A",
+      "v3_evidence": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json"
+      ],
+      "v3_status": "implemented_pending_independent_review"
+    }
+  ],
+  "executor_fact_index_read": {
+    "keys": [
+      "scope",
+      "source_claims",
+      "parameter_checks",
+      "exact_original_context_verification",
+      "derived_historical_facts",
+      "H2_requirements",
+      "future_rates",
+      "context_normalization",
+      "all325_claims_checked"
+    ],
+    "claims": 325,
+    "fact_index_sha256": "b586e07cc2ed164620608fdb97efaf08cf18e6e57e3fc8040aa1307841dc3d70"
+  }
+}

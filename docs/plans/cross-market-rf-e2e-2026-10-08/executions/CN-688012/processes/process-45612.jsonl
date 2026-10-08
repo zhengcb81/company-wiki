@@ -1,0 +1,2 @@
+{"timestamp_utc": "2026-10-08T07:09:55.831432+00:00", "pid": 45612, "ppid": 54772, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["docs/plans/cross-market-rf-e2e-2026-10-08/executions/CN-688012/capture_official_page.py", "roadshow2026", "https://roadshow.sseinfo.com/activityDetails/40766"], "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"}}
+{"timestamp_utc": "2026-10-08T07:09:59.134685+00:00", "pid": 45612, "ppid": 54772, "event": "python_exit", "data": {}}

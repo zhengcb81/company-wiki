@@ -1,0 +1,192 @@
+{
+  "qualitative_target_id": "v2_cobalt_month_end",
+  "source_id": "src_call",
+  "locator": "call.txt line118 CEO infrastructure",
+  "exact_wording": "And by the end of this month, we expect to have our Cobalt 200 racks in over 25 datacenters around the world as we rapidly expand capacity.",
+  "metric_perimeter": "Cobalt200 racks in over25 data centers",
+  "source_period": "end July2026 (this month relative to July29)",
+  "commitment_strength": "dated_operating_expectation",
+  "comparison_or_gap": "Deployment expectation is past its dated endpoint at asof but no actual completion source verified. No paid workload/price/utilization bridge; do not imply fulfillment or revenue. Retain >25 capability claim only.",
+  "source_publication_date": "2026-07-29",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_healthcare_calendar2026",
+  "source_id": "src_call",
+  "locator": "call.txt line191 CEO healthcare",
+  "exact_wording": "In healthcare, we are on pace to automate over 100 million patient encounters this calendar year, including 28 million this quarter, up 2X year-over-year.",
+  "metric_perimeter": "over100million patient encounters",
+  "source_period": "calendar2026",
+  "commitment_strength": "operating_expectation_on_pace",
+  "comparison_or_gap": "Calendar-year usage target with28M quarter actual is not fiscal-year recognized dollars. No fee perencounter or paid-counterparty/recognition bridge; explicitly unmodeled numeric operating target with qualitative linkage.",
+  "source_publication_date": "2026-07-29",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_frontier_experts",
+  "source_id": "src_call",
+  "locator": "call.txt line199 CEO Frontier",
+  "exact_wording": "We will embed 6,000 industry and engineering experts with customers to co-design, co-innovate, and continuously improve AI systems at scale.",
+  "metric_perimeter": "6000 industry/engineering experts",
+  "source_period": "future deployment timing unstated",
+  "commitment_strength": "deployment_intention",
+  "comparison_or_gap": "Capacity commitment, not billable-hour forecast; fees/utilization/paid-milestones unavailable. No headcount-times-rate revenue calculation.",
+  "source_publication_date": "2026-07-29",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_copilot_call_superapp",
+  "source_id": "src_call",
+  "locator": "call.txt line162 CEO knowledge work",
+  "exact_wording": "And this quarter we will bring these Copilot experiences together, including Code, in one “super app” spanning both consumer and commercial experiences.",
+  "metric_perimeter": "Copilot consumer/commercial superapp",
+  "source_period": "this quarter relative to July29 FY2027Q1",
+  "commitment_strength": "product_launch_expectation",
+  "comparison_or_gap": "Later September25 announcement gives availability windows but no realized usage/contract bridge. Do not assert rollout promise fulfilled solely from preview availability.",
+  "source_publication_date": "2026-07-29",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_cowork_usage_billing",
+  "source_id": "src_call",
+  "locator": "call.txt line177 CEO knowledge work",
+  "exact_wording": "Earlier this month, we added usage-based billing to Cowork, with thousands of customers already paying for and actively using it.",
+  "metric_perimeter": "Cowork usage billing and active paying customers",
+  "source_period": "earlier July2026",
+  "commitment_strength": "reported_billing_start",
+  "comparison_or_gap": "Actual billing-start statement with no revenue amount/cohort retention. Supports monetization mechanism, not exact future growth or annual average seats.",
+  "source_publication_date": "2026-07-29",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_copilot_frontier_rollout",
+  "source_id": "src_strategy",
+  "locator": "blog September25 paragraph after Home/Code/Autopilot introduction; fresh web lines8",
+  "exact_wording": "Home and Code will start rolling out in our Frontier program in the coming weeks and Autopilot is expanding to private preview at the end of the month.",
+  "metric_perimeter": "Home/Code Frontier and Autopilot private preview",
+  "source_period": "weeks after September25 /endSeptember2026",
+  "commitment_strength": "dated_product_availability_or_billing_announcement",
+  "comparison_or_gap": "Announcement/preview is not delivered paid customer adoption. As-of completion not independently measured; annual consumption increment unmodeled.",
+  "source_publication_date": "2026-09-25",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_code_broad_availability",
+  "source_id": "src_strategy",
+  "locator": "fresh blog web lines19",
+  "exact_wording": "Code is rolling out to Frontier at the end of the month, with broad availability in the coming weeks.",
+  "metric_perimeter": "Code roll-out",
+  "source_period": "endSeptember/comingweeks2026",
+  "commitment_strength": "dated_product_availability_or_billing_announcement",
+  "comparison_or_gap": "Future availability commitment; no billed usage trajectory or price path verified. Do not treat source schedule as realized rollout.",
+  "source_publication_date": "2026-09-25",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_copilot_consumer_preview",
+  "source_id": "src_strategy",
+  "locator": "fresh blog web line20",
+  "exact_wording": "It will be in preview for Microsoft 365 Premium and Pro subscribers later this year.",
+  "metric_perimeter": "Consumer Premium/Pro Code preview",
+  "source_period": "later calendar2026",
+  "commitment_strength": "dated_product_availability_or_billing_announcement",
+  "comparison_or_gap": "Preview timing only; no incremental paid conversion/share of annual whole-cloud revenue.",
+  "source_publication_date": "2026-09-25",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_ubb_scope",
+  "source_id": "src_strategy",
+  "locator": "fresh blog web line35",
+  "exact_wording": "Cowork, Code, and Autopilot, new long-running agentic capabilities, and frontier models like Astra and Fable all run on UBB.",
+  "metric_perimeter": "usage-based billing product scope",
+  "source_period": "at September25 announcement; feature delivery follows stated availability windows",
+  "commitment_strength": "dated_product_availability_or_billing_announcement",
+  "comparison_or_gap": "Supports delivered-usage monetization contract; not an amount or proof all preview products already generate revenue.",
+  "source_publication_date": "2026-09-25",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_finops_october",
+  "source_id": "src_strategy",
+  "locator": "fresh blog web line36",
+  "exact_wording": "Cost management in Agent 365 is expanding beyond Cowork and Work IQ APIs to include Code and Copilot Managed Runtime, with support for agents built in Microsoft Copilot Studio planned for October.",
+  "metric_perimeter": "FinOps support for CopilotStudio agents",
+  "source_period": "October2026 planned",
+  "commitment_strength": "dated_product_availability_or_billing_announcement",
+  "comparison_or_gap": "Spend controls may constrain or facilitate adoption; no outcome sign or revenue amount proven. Future after-asof portions not counted as fulfilled.",
+  "source_publication_date": "2026-09-25",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_q1_licensing",
+  "source_id": "src_presentation",
+  "locator": "PPT21 adjusted outlook row named metric, visual read image21.png",
+  "exact_wording": "Decline in low-single digits",
+  "metric_perimeter": "Productivity/serverlicensing",
+  "source_period": "FY2027Q1",
+  "commitment_strength": "mechanical_quarter_guidance",
+  "comparison_or_gap": "Quarter qualitative statement only; subset/new scope/exTAC distinctions retained. Annual scenarios not compared numerically and no midpoint or x4 conversion.",
+  "source_publication_date": "2026-09-02",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_q1_industry",
+  "source_id": "src_presentation",
+  "locator": "PPT21 adjusted outlook row named metric, visual read image21.png",
+  "exact_wording": "Growth in high-single digits",
+  "metric_perimeter": "Industrysolutionscloud",
+  "source_period": "FY2027Q1",
+  "commitment_strength": "mechanical_quarter_guidance",
+  "comparison_or_gap": "Quarter qualitative statement only; subset/new scope/exTAC distinctions retained. Annual scenarios not compared numerically and no midpoint or x4 conversion.",
+  "source_publication_date": "2026-09-02",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_q1_search",
+  "source_id": "src_presentation",
+  "locator": "PPT21 adjusted outlook row named metric, visual read image21.png",
+  "exact_wording": "Growth in mid- to high-single digits",
+  "metric_perimeter": "Search/advertising exTAC",
+  "source_period": "FY2027Q1",
+  "commitment_strength": "mechanical_quarter_guidance",
+  "comparison_or_gap": "Quarter qualitative statement only; subset/new scope/exTAC distinctions retained. Annual scenarios not compared numerically and no midpoint or x4 conversion.",
+  "source_publication_date": "2026-09-02",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_q1_xbox_content",
+  "source_id": "src_presentation",
+  "locator": "PPT21 adjusted outlook row named metric, visual read image21.png",
+  "exact_wording": "Content and services revenue expected to decline in mid-single digits",
+  "metric_perimeter": "XBOXcontent/services",
+  "source_period": "FY2027Q1",
+  "commitment_strength": "mechanical_quarter_guidance",
+  "comparison_or_gap": "Quarter qualitative statement only; subset/new scope/exTAC distinctions retained. Annual scenarios not compared numerically and no midpoint or x4 conversion.",
+  "source_publication_date": "2026-09-02",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_q1_xbox_hardware",
+  "source_id": "src_presentation",
+  "locator": "PPT21 adjusted outlook row named metric, visual read image21.png",
+  "exact_wording": "Hardware revenue should decline year-over-year",
+  "metric_perimeter": "XBOXhardware",
+  "source_period": "FY2027Q1",
+  "commitment_strength": "mechanical_quarter_guidance",
+  "comparison_or_gap": "Quarter qualitative statement only; subset/new scope/exTAC distinctions retained. Annual scenarios not compared numerically and no midpoint or x4 conversion.",
+  "source_publication_date": "2026-09-02",
+  "numeric_normalization_performed": false
+}
+{
+  "qualitative_target_id": "v2_q1_windows",
+  "source_id": "src_presentation",
+  "locator": "PPT21 adjusted outlook row named metric, visual read image21.png",
+  "exact_wording": "Decline in low-twenties",
+  "metric_perimeter": "WindowsOEM/devices",
+  "source_period": "FY2027Q1",
+  "commitment_strength": "mechanical_quarter_guidance",
+  "comparison_or_gap": "Quarter qualitative statement only; subset/new scope/exTAC distinctions retained. Annual scenarios not compared numerically and no midpoint or x4 conversion.",
+  "source_publication_date": "2026-09-02",
+  "numeric_normalization_performed": false
+}

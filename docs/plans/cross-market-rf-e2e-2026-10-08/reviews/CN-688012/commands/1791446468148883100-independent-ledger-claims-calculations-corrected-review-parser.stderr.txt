@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\reviews\CN-688012\independent_offline.py", line 66, in <module>
+    inc=sum((segs[a['segment_name']]['scenarios']['base']['terminal_revenue']-segs[a['segment_name']]['base_revenue'])*a['weight'] for a in d['segment_attribution'])
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\reviews\CN-688012\independent_offline.py", line 66, in <genexpr>
+    inc=sum((segs[a['segment_name']]['scenarios']['base']['terminal_revenue']-segs[a['segment_name']]['base_revenue'])*a['weight'] for a in d['segment_attribution'])
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+KeyError: 'terminal_revenue'

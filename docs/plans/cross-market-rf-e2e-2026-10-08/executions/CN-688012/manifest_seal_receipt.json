@@ -1,0 +1,7 @@
+{
+  "timestamp_utc": "2026-10-08T07:55:18.144847+00:00",
+  "action": "seal stable artifact inventory after all logged child commands returned",
+  "command": "python C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\seal_manifest.py",
+  "reason": "Avoid recursive mutation of command-index/stdout hashes by a logger wrapping its own inventory seal",
+  "formal_artifacts_unchanged": true
+}

@@ -1,0 +1,512 @@
+{
+  "timestamp": "2026-10-08T08:44:59.864710+00:00",
+  "original_input_sha": "c791b85406f62552e9eb9cba2a1adf8cbf36447ff432164c9e53a8426814fc87",
+  "original_forecast_sha": "3ea402d2494e1a754de8cb1f406797d1d3f366622d4c3c6cc8621d18a7524f61",
+  "replay_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\review-HK-00700-rf_hk_independent_review-v3",
+  "strong_input_required_validation": "PASS",
+  "snapshot_validation": "PASS",
+  "same_result_markdown": "PASS",
+  "independent_cli": {
+    "command": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\review-HK-00700-rf_hk_independent_review-v3\\input.json",
+      "--output",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\review-HK-00700-rf_hk_independent_review-v3\\forecast.json",
+      "--markdown",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\review-HK-00700-rf_hk_independent_review-v3\\forecast.md"
+    ],
+    "started_at": "2026-10-08T08:44:58.207332+00:00",
+    "returncode": 0,
+    "deterministic_payload_equality": true
+  },
+  "manual_arithmetic": {
+    "all45_segment_year_scenario_values": true,
+    "company_values": [
+      {
+        "scenario": "low",
+        "year": 2026,
+        "revenue": 796198.3200000001,
+        "growth": 0.0591039232952808,
+        "bridge_adjustment": 0
+      },
+      {
+        "scenario": "low",
+        "year": 2027,
+        "revenue": 825405.9198000001,
+        "growth": 0.03668382495456668,
+        "bridge_adjustment": 0
+      },
+      {
+        "scenario": "low",
+        "year": 2028,
+        "revenue": 848895.9732520002,
+        "growth": 0.028458789655508854,
+        "bridge_adjustment": 0
+      },
+      {
+        "scenario": "base",
+        "year": 2026,
+        "revenue": 828793.7500000001,
+        "growth": 0.10246240186441002,
+        "bridge_adjustment": 0
+      },
+      {
+        "scenario": "base",
+        "year": 2027,
+        "revenue": 910974.085,
+        "growth": 0.09915655734614282,
+        "bridge_adjustment": 0
+      },
+      {
+        "scenario": "base",
+        "year": 2028,
+        "revenue": 995051.1896200002,
+        "growth": 0.09229362942854769,
+        "bridge_adjustment": 0
+      },
+      {
+        "scenario": "high",
+        "year": 2026,
+        "revenue": 862572.03,
+        "growth": 0.14739430886738702,
+        "bridge_adjustment": 0
+      },
+      {
+        "scenario": "high",
+        "year": 2027,
+        "revenue": 990921.8021,
+        "growth": 0.14879890332173185,
+        "bridge_adjustment": 0
+      },
+      {
+        "scenario": "high",
+        "year": 2028,
+        "revenue": 1127166.069035,
+        "growth": 0.13749245061140636,
+        "bridge_adjustment": 0
+      }
+    ],
+    "paths": [
+      {
+        "segment": "Games",
+        "scenario": "low",
+        "base": 241532,
+        "path": {
+          "2026": 258439.24000000002,
+          "2027": 268776.80960000004,
+          "2028": 274152.34579200007
+        }
+      },
+      {
+        "segment": "Games",
+        "scenario": "base",
+        "base": 241532,
+        "path": {
+          "2026": 265685.2,
+          "2027": 289596.868,
+          "2028": 312764.61744000006
+        }
+      },
+      {
+        "segment": "Games",
+        "scenario": "high",
+        "base": 241532,
+        "path": {
+          "2026": 277761.8,
+          "2027": 316648.45200000005,
+          "2028": 354646.2662400001
+        }
+      },
+      {
+        "segment": "SocialNetworks",
+        "scenario": "low",
+        "base": 127749,
+        "path": {
+          "2026": 125194.02,
+          "2027": 121438.1994,
+          "2028": 119009.43541199999
+        }
+      },
+      {
+        "segment": "SocialNetworks",
+        "scenario": "base",
+        "base": 127749,
+        "path": {
+          "2026": 127749.0,
+          "2027": 130303.98,
+          "2028": 134213.0994
+        }
+      },
+      {
+        "segment": "SocialNetworks",
+        "scenario": "high",
+        "base": 127749,
+        "path": {
+          "2026": 132858.96,
+          "2027": 139501.908,
+          "2028": 146477.00340000002
+        }
+      },
+      {
+        "segment": "MarketingServices",
+        "scenario": "low",
+        "base": 144973,
+        "path": {
+          "2026": 162369.76,
+          "2027": 175359.34080000003,
+          "2028": 185880.90124800004
+        }
+      },
+      {
+        "segment": "MarketingServices",
+        "scenario": "base",
+        "base": 144973,
+        "path": {
+          "2026": 173967.6,
+          "2027": 203542.092,
+          "2028": 232037.98488000003
+        }
+      },
+      {
+        "segment": "MarketingServices",
+        "scenario": "high",
+        "base": 144973,
+        "path": {
+          "2026": 179766.52,
+          "2027": 221112.8196,
+          "2028": 265335.38352
+        }
+      },
+      {
+        "segment": "FinTechBusinessServices",
+        "scenario": "low",
+        "base": 229435,
+        "path": {
+          "2026": 240906.75,
+          "2027": 250543.02000000002,
+          "2028": 260564.74080000003
+        }
+      },
+      {
+        "segment": "FinTechBusinessServices",
+        "scenario": "base",
+        "base": 229435,
+        "path": {
+          "2026": 250084.15000000002,
+          "2027": 275092.56500000006,
+          "2028": 302601.8215000001
+        }
+      },
+      {
+        "segment": "FinTechBusinessServices",
+        "scenario": "high",
+        "base": 229435,
+        "path": {
+          "2026": 259261.55,
+          "2027": 298150.7825,
+          "2028": 342873.39987499994
+        }
+      },
+      {
+        "segment": "Others",
+        "scenario": "low",
+        "base": 8077,
+        "path": {
+          "2026": 9288.55,
+          "2027": 9288.55,
+          "2028": 9288.55
+        }
+      },
+      {
+        "segment": "Others",
+        "scenario": "base",
+        "base": 8077,
+        "path": {
+          "2026": 11307.8,
+          "2027": 12438.58,
+          "2028": 13433.6664
+        }
+      },
+      {
+        "segment": "Others",
+        "scenario": "high",
+        "base": 8077,
+        "path": {
+          "2026": 12923.2,
+          "2027": 15507.84,
+          "2028": 17834.016
+        }
+      }
+    ],
+    "sensitivities": [
+      {
+        "parameter_id": "games_growth_rate_base_2026",
+        "baseline": 995051.1896200002,
+        "down": 986521.2455080003,
+        "up": 1003581.1337320001,
+        "max_absolute_impact": 8529.94411199994
+      },
+      {
+        "parameter_id": "games_growth_rate_base_2027",
+        "baseline": 995051.1896200002,
+        "down": 986442.9891400002,
+        "up": 1003659.3901000002,
+        "max_absolute_impact": 8608.20048
+      },
+      {
+        "parameter_id": "games_growth_rate_base_2028",
+        "baseline": 995051.1896200002,
+        "down": 986363.2835800002,
+        "up": 1003739.0956600001,
+        "max_absolute_impact": 8687.90604000003
+      },
+      {
+        "parameter_id": "socialnetworks_growth_rate_base_2026",
+        "baseline": 995051.1896200002,
+        "down": 991024.7966380002,
+        "up": 999077.5826020001,
+        "max_absolute_impact": 4026.3929820000194
+      },
+      {
+        "parameter_id": "socialnetworks_growth_rate_base_2027",
+        "baseline": 995051.1896200002,
+        "down": 991103.7455200001,
+        "up": 998998.6337200002,
+        "max_absolute_impact": 3947.4441000000807
+      },
+      {
+        "parameter_id": "socialnetworks_growth_rate_base_2028",
+        "baseline": 995051.1896200002,
+        "down": 991142.0702200001,
+        "up": 998960.3090200002,
+        "max_absolute_impact": 3909.1194000000833
+      },
+      {
+        "parameter_id": "marketingservices_growth_rate_base_2026",
+        "baseline": 995051.1896200002,
+        "down": 989250.2399980002,
+        "up": 1000852.1392420002,
+        "max_absolute_impact": 5800.9496219999855
+      },
+      {
+        "parameter_id": "marketingservices_growth_rate_base_2027",
+        "baseline": 995051.1896200002,
+        "down": 989101.4977000003,
+        "up": 1001000.8815400002,
+        "max_absolute_impact": 5949.691920000012
+      },
+      {
+        "parameter_id": "marketingservices_growth_rate_base_2028",
+        "baseline": 995051.1896200002,
+        "down": 988944.9268600002,
+        "up": 1001157.4523800001,
+        "max_absolute_impact": 6106.262759999954
+      },
+      {
+        "parameter_id": "fintechbusinessservices_growth_rate_base_2026",
+        "baseline": 995051.1896200002,
+        "down": 986722.6991200002,
+        "up": 1003379.6801200002,
+        "max_absolute_impact": 8328.490499999956
+      },
+      {
+        "parameter_id": "fintechbusinessservices_growth_rate_base_2027",
+        "baseline": 995051.1896200002,
+        "down": 986798.4126700002,
+        "up": 1003303.9665700002,
+        "max_absolute_impact": 8252.77694999997
+      },
+      {
+        "parameter_id": "fintechbusinessservices_growth_rate_base_2028",
+        "baseline": 995051.1896200002,
+        "down": 986798.4126700002,
+        "up": 1003303.9665700002,
+        "max_absolute_impact": 8252.77694999997
+      },
+      {
+        "parameter_id": "others_growth_rate_base_2026",
+        "baseline": 995051.1896200002,
+        "down": 994763.3253400002,
+        "up": 995339.0539000002,
+        "max_absolute_impact": 287.8642799999798
+      },
+      {
+        "parameter_id": "others_growth_rate_base_2027",
+        "baseline": 995051.1896200002,
+        "down": 994684.8169000002,
+        "up": 995417.5623400002,
+        "max_absolute_impact": 366.37271999998484
+      },
+      {
+        "parameter_id": "others_growth_rate_base_2028",
+        "baseline": 995051.1896200002,
+        "down": 994678.0322200002,
+        "up": 995424.3470200002,
+        "max_absolute_impact": 373.1574000000255
+      }
+    ],
+    "driver_allocation": [
+      {
+        "driver_id": "ai_ad_matching_and_inventory",
+        "increment": 87064.98488000003
+      },
+      {
+        "driver_id": "payments_and_cloud_conversion",
+        "increment": 73166.82150000008
+      },
+      {
+        "driver_id": "evergreen_and_launch_monetization",
+        "increment": 71232.61744000006
+      },
+      {
+        "driver_id": "paid_social_stabilization",
+        "increment": 6464.099400000006
+      },
+      {
+        "driver_id": "residual_normalization",
+        "increment": 5356.6664
+      }
+    ],
+    "H1_H2_period_bridge": [
+      {
+        "segment": "Games",
+        "scenario": "low",
+        "H1_2025": 118654,
+        "H1_2026": 130115,
+        "H2_2025": 122878,
+        "implied_H2_2026": 128324.24000000002,
+        "implied_H2_growth": 0.04432233597552049
+      },
+      {
+        "segment": "Games",
+        "scenario": "base",
+        "H1_2025": 118654,
+        "H1_2026": 130115,
+        "H2_2025": 122878,
+        "implied_H2_2026": 135570.2,
+        "implied_H2_growth": 0.10329106919057929
+      },
+      {
+        "segment": "Games",
+        "scenario": "high",
+        "H1_2025": 118654,
+        "H1_2026": 130115,
+        "H2_2025": 122878,
+        "implied_H2_2026": 147646.8,
+        "implied_H2_growth": 0.2015722912156772
+      },
+      {
+        "segment": "SocialNetworks",
+        "scenario": "low",
+        "H1_2025": 64847,
+        "H1_2026": 64409,
+        "H2_2025": 62902,
+        "implied_H2_2026": 60785.020000000004,
+        "implied_H2_growth": -0.033655209691265675
+      },
+      {
+        "segment": "SocialNetworks",
+        "scenario": "base",
+        "H1_2025": 64847,
+        "H1_2026": 64409,
+        "H2_2025": 62902,
+        "implied_H2_2026": 63340.0,
+        "implied_H2_growth": 0.006963212616450942
+      },
+      {
+        "segment": "SocialNetworks",
+        "scenario": "high",
+        "H1_2025": 64847,
+        "H1_2026": 64409,
+        "H2_2025": 62902,
+        "implied_H2_2026": 68449.95999999999,
+        "implied_H2_growth": 0.0882000572318844
+      },
+      {
+        "segment": "MarketingServices",
+        "scenario": "low",
+        "H1_2025": 67615,
+        "H1_2026": 81736,
+        "H2_2025": 77358,
+        "implied_H2_2026": 80633.76000000001,
+        "implied_H2_growth": 0.04234545877608009
+      },
+      {
+        "segment": "MarketingServices",
+        "scenario": "base",
+        "H1_2025": 67615,
+        "H1_2026": 81736,
+        "H2_2025": 77358,
+        "implied_H2_2026": 92231.6,
+        "implied_H2_growth": 0.1922697070761914
+      },
+      {
+        "segment": "MarketingServices",
+        "scenario": "high",
+        "H1_2025": 67615,
+        "H1_2026": 81736,
+        "H2_2025": 77358,
+        "implied_H2_2026": 98030.51999999999,
+        "implied_H2_growth": 0.2672318312262467
+      },
+      {
+        "segment": "FinTechBusinessServices",
+        "scenario": "low",
+        "H1_2025": 110443,
+        "H1_2026": 120171,
+        "H2_2025": 118992,
+        "implied_H2_2026": 120735.75,
+        "implied_H2_growth": 0.014654346510689864
+      },
+      {
+        "segment": "FinTechBusinessServices",
+        "scenario": "base",
+        "H1_2025": 110443,
+        "H1_2026": 120171,
+        "H2_2025": 118992,
+        "implied_H2_2026": 129913.15000000002,
+        "implied_H2_growth": 0.09178053986822654
+      },
+      {
+        "segment": "FinTechBusinessServices",
+        "scenario": "high",
+        "H1_2025": 110443,
+        "H1_2026": 120171,
+        "H2_2025": 118992,
+        "implied_H2_2026": 139090.55,
+        "implied_H2_growth": 0.168906733225763
+      },
+      {
+        "segment": "Others",
+        "scenario": "low",
+        "H1_2025": 2967,
+        "H1_2026": 4812,
+        "H2_2025": 5110,
+        "implied_H2_2026": 4476.549999999999,
+        "implied_H2_growth": -0.12396281800391407
+      },
+      {
+        "segment": "Others",
+        "scenario": "base",
+        "H1_2025": 2967,
+        "H1_2026": 4812,
+        "H2_2025": 5110,
+        "implied_H2_2026": 6495.799999999999,
+        "implied_H2_growth": 0.27119373776908007
+      },
+      {
+        "segment": "Others",
+        "scenario": "high",
+        "H1_2025": 2967,
+        "H1_2026": 4812,
+        "H2_2025": 5110,
+        "implied_H2_2026": 8111.200000000001,
+        "implied_H2_growth": 0.5873189823874756
+      }
+    ]
+  },
+  "registry_original_sha": "596fcf974f7174f714e400478394626b1868d92a3ac2c3501b17d5ff042c146b",
+  "originals_unmodified": true
+}

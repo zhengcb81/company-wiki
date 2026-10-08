@@ -1,0 +1,62 @@
+{
+  "effective_env": "REVENUE_PUBLICATION_REGISTRY",
+  "effective_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\publications.jsonl",
+  "registry_sha256": "596fcf974f7174f714e400478394626b1868d92a3ac2c3501b17d5ff042c146b",
+  "entry_count": 3,
+  "chain": "PASS",
+  "forecast_snapshot_anchors": "PASS",
+  "audit_exit": 0,
+  "audit_stdout_empty_means_no_problems": true,
+  "current_installed_registry_runtime_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+  "MAIN_reported_commit": "08673cf8",
+  "commit_claim_source": "MAIN message; HK did no Git operation",
+  "entries": [
+    {
+      "artifact_id": null,
+      "artifact_type": "forecast",
+      "engine_version": "4.1.0",
+      "input_sha256": "7fec91b9c9dcea9d157027730458b2531818ddf738899d5148de23244c4fd366",
+      "input_summary_sha256": "0df0394163ebfe5a24346aa5ff52f60cd27926a666088d4d1549988a06a22f64",
+      "line_sha256": "53bc6c90a81506959a6d78698787ac72b40ed80c330678d10e056d93ca5463e1",
+      "note": "run_forecast formal",
+      "prev_line_sha256": null,
+      "publisher": "revenue-forecast",
+      "receipt_sha256": "2ef742e088f3f847067960f3d741ece2e244eb4ba52594303f71f568c9b0aa15",
+      "registered_at": "2026-10-08T08:30:23.919398+00:00",
+      "result_sha256": "945614bc0e6372ed7ce4dcfd8154ebf304296ff3e159c3ff47c52758e5669f15",
+      "schema_version": "3.7",
+      "validation_status": "validated"
+    },
+    {
+      "artifact_id": null,
+      "artifact_type": "forecast",
+      "engine_version": "4.1.0",
+      "input_sha256": "7fec91b9c9dcea9d157027730458b2531818ddf738899d5148de23244c4fd366",
+      "input_summary_sha256": "0df0394163ebfe5a24346aa5ff52f60cd27926a666088d4d1549988a06a22f64",
+      "line_sha256": "d8f1449d4d79fa707e7553d7ffa83a3f2a5dc0b73df8609c87b2b53dd420dc2b",
+      "note": "run_forecast formal",
+      "prev_line_sha256": "53bc6c90a81506959a6d78698787ac72b40ed80c330678d10e056d93ca5463e1",
+      "publisher": "revenue-forecast",
+      "receipt_sha256": "2ef742e088f3f847067960f3d741ece2e244eb4ba52594303f71f568c9b0aa15",
+      "registered_at": "2026-10-08T08:30:28.569304+00:00",
+      "result_sha256": "945614bc0e6372ed7ce4dcfd8154ebf304296ff3e159c3ff47c52758e5669f15",
+      "schema_version": "3.7",
+      "validation_status": "validated"
+    },
+    {
+      "artifact_id": "c69a19509ed62412a1db0fea386501fe486f81c5bb2a7745aa4fc7d1d932fd24",
+      "artifact_type": "snapshot",
+      "engine_version": "4.1.0",
+      "input_sha256": "7fec91b9c9dcea9d157027730458b2531818ddf738899d5148de23244c4fd366",
+      "input_summary_sha256": "0df0394163ebfe5a24346aa5ff52f60cd27926a666088d4d1549988a06a22f64",
+      "line_sha256": "a2bb4ea56c0943fe52a0ade53a4b6ddd4ebaa61aabf1b5c133aeabb22319bd3d",
+      "note": "revenue_backtest create",
+      "prev_line_sha256": "d8f1449d4d79fa707e7553d7ffa83a3f2a5dc0b73df8609c87b2b53dd420dc2b",
+      "publisher": "revenue-forecast",
+      "receipt_sha256": "2ef742e088f3f847067960f3d741ece2e244eb4ba52594303f71f568c9b0aa15",
+      "registered_at": "2026-10-08T08:30:28.968077+00:00",
+      "result_sha256": "852335a83c9fb368f92061e0500d6b1f93f34f10a40971b54c54c623745e8d3f",
+      "schema_version": "3.7"
+    }
+  ]
+}

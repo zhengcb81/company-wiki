@@ -1,0 +1,15 @@
+{
+  "tool": "web.run",
+  "independent": true,
+  "observed_tool_call_id": "turn250view0",
+  "checked_at": "2026-10-08",
+  "url": "https://www.semi.org/en/semi-press-release/global-semiconductor-equipment-sales-forecast-to-reach-a-record-229-billion-dollars-in-2028-semi-reports",
+  "source_published_date": "2026-07-14",
+  "actual_open_lines": 215,
+  "support": {
+    "line167": "Global WFE2026+23.1%,143.9B",
+    "line168": "2027+21.8%,2028+14.1%",
+    "line181": "China2026moderation"
+  },
+  "conclusion": "真实独立primary打开；不能将WFE机械代入AMEC增长。"
+}

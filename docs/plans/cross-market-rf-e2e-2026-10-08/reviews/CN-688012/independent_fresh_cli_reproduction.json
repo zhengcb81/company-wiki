@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "whole_json_equal": true,
+  "markdown_bytes_equal": true,
+  "input_sha256": "3dcce43a05deb2faf92236af8c1b979c07334a34d5b7debb30d25057ab611746",
+  "forecast_sha256": "a7b2797fecb8edb1b2ba2641b3d65c7996e938427fc01eed1f8e513aa7be420d",
+  "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review",
+  "registry_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012-review\\publications.jsonl"
+}

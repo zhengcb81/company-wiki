@@ -1,0 +1,1 @@
+{"status": "partial", "manifest": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\manifest.json", "facts": 122, "claims": 122, "runtime_all_same": true, "formal_input_sha256": "d872a864d1f7220c5635974b262b2b63378c1885998754ed8010134f8c7ae32e"}

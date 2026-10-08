@@ -1,0 +1,27 @@
+{
+  "read_at": "2026-10-08T08:04:02.440024+00:00",
+  "runs": [
+    {
+      "repository": "revenue-forecast",
+      "commit": "08673cf87b8a58fc25982b695a9d14e28c6818d3",
+      "workflow_runs": [
+        {
+          "id": 37747048408,
+          "name": "quality",
+          "head_branch": "main",
+          "head_sha": "08673cf87b8a58fc25982b695a9d14e28c6818d3",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/37747048408",
+          "created_at": "2026-10-08T08:00:56Z",
+          "updated_at": "2026-10-08T08:01:36Z"
+        }
+      ]
+    },
+    {
+      "repository": "StockInfoDownloader",
+      "commit": "c0f07e12d4ba3e232d712bb6e5e491832023b0a0",
+      "workflow_runs": []
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+{"version": "2026-10-08-MSFT-v2", "claims": 502, "future_parameters": 72, "us07": "BLOCKED"}

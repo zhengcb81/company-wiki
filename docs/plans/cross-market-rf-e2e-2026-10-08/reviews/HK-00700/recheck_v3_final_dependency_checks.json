@@ -1,0 +1,1634 @@
+{
+  "runtime": [
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\asset_ownership.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\asset_ownership.py",
+      "installed_sha256": "2dc8931451b88f410de5011bac2e80cc74f838e11e94c5627170a6e0ab891ed0",
+      "canonical_sha256": "2dc8931451b88f410de5011bac2e80cc74f838e11e94c5627170a6e0ab891ed0",
+      "matches_canonical": true,
+      "current_installed_sha256": "2dc8931451b88f410de5011bac2e80cc74f838e11e94c5627170a6e0ab891ed0",
+      "current_canonical_sha256": "2dc8931451b88f410de5011bac2e80cc74f838e11e94c5627170a6e0ab891ed0",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\commercial_terms.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\commercial_terms.py",
+      "installed_sha256": "6596d4492fcfb31cb73efaf75fb482d90156f2fbc91ab29be272e24745546005",
+      "canonical_sha256": "6596d4492fcfb31cb73efaf75fb482d90156f2fbc91ab29be272e24745546005",
+      "matches_canonical": true,
+      "current_installed_sha256": "6596d4492fcfb31cb73efaf75fb482d90156f2fbc91ab29be272e24745546005",
+      "current_canonical_sha256": "6596d4492fcfb31cb73efaf75fb482d90156f2fbc91ab29be272e24745546005",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_contracts.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_narrative_contracts.py",
+      "installed_sha256": "11fef2a81ff60940fc97cb918b17f0ce64e67b74fbc76a9f53c237fc07d178d3",
+      "canonical_sha256": "11fef2a81ff60940fc97cb918b17f0ce64e67b74fbc76a9f53c237fc07d178d3",
+      "matches_canonical": true,
+      "current_installed_sha256": "11fef2a81ff60940fc97cb918b17f0ce64e67b74fbc76a9f53c237fc07d178d3",
+      "current_canonical_sha256": "11fef2a81ff60940fc97cb918b17f0ce64e67b74fbc76a9f53c237fc07d178d3",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_posix.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_narrative_posix.py",
+      "installed_sha256": "669d268667d9e08a3d98ee1eec44ecc26fb4f142dd6d7310191169deba5dc852",
+      "canonical_sha256": "669d268667d9e08a3d98ee1eec44ecc26fb4f142dd6d7310191169deba5dc852",
+      "matches_canonical": true,
+      "current_installed_sha256": "669d268667d9e08a3d98ee1eec44ecc26fb4f142dd6d7310191169deba5dc852",
+      "current_canonical_sha256": "669d268667d9e08a3d98ee1eec44ecc26fb4f142dd6d7310191169deba5dc852",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_process.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_narrative_process.py",
+      "installed_sha256": "9664696ac23699ecf6b234cec3aa93ce475127d36a4bddf680edb711ccf92e3d",
+      "canonical_sha256": "9664696ac23699ecf6b234cec3aa93ce475127d36a4bddf680edb711ccf92e3d",
+      "matches_canonical": true,
+      "current_installed_sha256": "9664696ac23699ecf6b234cec3aa93ce475127d36a4bddf680edb711ccf92e3d",
+      "current_canonical_sha256": "9664696ac23699ecf6b234cec3aa93ce475127d36a4bddf680edb711ccf92e3d",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_reader.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_narrative_reader.py",
+      "installed_sha256": "8ff1cf553a8849330a41f74ae27bfcacd2515186b5fa58168cead91b6cfa7508",
+      "canonical_sha256": "8ff1cf553a8849330a41f74ae27bfcacd2515186b5fa58168cead91b6cfa7508",
+      "matches_canonical": true,
+      "current_installed_sha256": "8ff1cf553a8849330a41f74ae27bfcacd2515186b5fa58168cead91b6cfa7508",
+      "current_canonical_sha256": "8ff1cf553a8849330a41f74ae27bfcacd2515186b5fa58168cead91b6cfa7508",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_tree.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_narrative_tree.py",
+      "installed_sha256": "561f921d20636532ec13d4c2a116af120a88a2b56e55de6fbadf61f137bef8ba",
+      "canonical_sha256": "561f921d20636532ec13d4c2a116af120a88a2b56e55de6fbadf61f137bef8ba",
+      "matches_canonical": true,
+      "current_installed_sha256": "561f921d20636532ec13d4c2a116af120a88a2b56e55de6fbadf61f137bef8ba",
+      "current_canonical_sha256": "561f921d20636532ec13d4c2a116af120a88a2b56e55de6fbadf61f137bef8ba",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_source.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_source.py",
+      "installed_sha256": "b223974e94ffb6d91e0e927b252e1fbc67a590fc910c3da10600d292d48d4470",
+      "canonical_sha256": "b223974e94ffb6d91e0e927b252e1fbc67a590fc910c3da10600d292d48d4470",
+      "matches_canonical": true,
+      "current_installed_sha256": "b223974e94ffb6d91e0e927b252e1fbc67a590fc910c3da10600d292d48d4470",
+      "current_canonical_sha256": "b223974e94ffb6d91e0e927b252e1fbc67a590fc910c3da10600d292d48d4470",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_source_reader_v2.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_source_reader_v2.py",
+      "installed_sha256": "5f5bfd11cbc880c30f2766d8d6c78366d4e32f677ba9a517914a0df5f95faed1",
+      "canonical_sha256": "5f5bfd11cbc880c30f2766d8d6c78366d4e32f677ba9a517914a0df5f95faed1",
+      "matches_canonical": true,
+      "current_installed_sha256": "5f5bfd11cbc880c30f2766d8d6c78366d4e32f677ba9a517914a0df5f95faed1",
+      "current_canonical_sha256": "5f5bfd11cbc880c30f2766d8d6c78366d4e32f677ba9a517914a0df5f95faed1",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_source_v2.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_source_v2.py",
+      "installed_sha256": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+      "canonical_sha256": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+      "matches_canonical": true,
+      "current_installed_sha256": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+      "current_canonical_sha256": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\confidence_policy.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\confidence_policy.py",
+      "installed_sha256": "a2444c1ebb7f7ed9144e0db0199d1055da20b126b3026f90e114c55817ed822f",
+      "canonical_sha256": "a2444c1ebb7f7ed9144e0db0199d1055da20b126b3026f90e114c55817ed822f",
+      "matches_canonical": true,
+      "current_installed_sha256": "a2444c1ebb7f7ed9144e0db0199d1055da20b126b3026f90e114c55817ed822f",
+      "current_canonical_sha256": "a2444c1ebb7f7ed9144e0db0199d1055da20b126b3026f90e114c55817ed822f",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_fetch_client.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\filing_fetch_client.py",
+      "installed_sha256": "b16f85962173fc6a2757ed88fae7074a458ab28bbe1a21f6ec5fbf83a44f3446",
+      "canonical_sha256": "b16f85962173fc6a2757ed88fae7074a458ab28bbe1a21f6ec5fbf83a44f3446",
+      "matches_canonical": true,
+      "current_installed_sha256": "b16f85962173fc6a2757ed88fae7074a458ab28bbe1a21f6ec5fbf83a44f3446",
+      "current_canonical_sha256": "b16f85962173fc6a2757ed88fae7074a458ab28bbe1a21f6ec5fbf83a44f3446",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\fix_hashes.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\fix_hashes.py",
+      "installed_sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "canonical_sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "matches_canonical": true,
+      "current_installed_sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "current_canonical_sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\generate_input_template.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\generate_input_template.py",
+      "installed_sha256": "f7c57911d5f85204b04d07de02fdcf9bcdb2315cf0236181cd727986292870b1",
+      "canonical_sha256": "f7c57911d5f85204b04d07de02fdcf9bcdb2315cf0236181cd727986292870b1",
+      "matches_canonical": true,
+      "current_installed_sha256": "f7c57911d5f85204b04d07de02fdcf9bcdb2315cf0236181cd727986292870b1",
+      "current_canonical_sha256": "f7c57911d5f85204b04d07de02fdcf9bcdb2315cf0236181cd727986292870b1",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\internal_flow.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\internal_flow.py",
+      "installed_sha256": "05814b9286889088278fc5cf0c47a40452026bbc926f8f382db7e70de38a1355",
+      "canonical_sha256": "05814b9286889088278fc5cf0c47a40452026bbc926f8f382db7e70de38a1355",
+      "matches_canonical": true,
+      "current_installed_sha256": "05814b9286889088278fc5cf0c47a40452026bbc926f8f382db7e70de38a1355",
+      "current_canonical_sha256": "05814b9286889088278fc5cf0c47a40452026bbc926f8f382db7e70de38a1355",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\lint_input.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\lint_input.py",
+      "installed_sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "canonical_sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "matches_canonical": true,
+      "current_installed_sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "current_canonical_sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\mine_year_operation.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\mine_year_operation.py",
+      "installed_sha256": "602255c766897dcabf8c5107c0ba3116686aab7dca683066fdffc70b88628986",
+      "canonical_sha256": "602255c766897dcabf8c5107c0ba3116686aab7dca683066fdffc70b88628986",
+      "matches_canonical": true,
+      "current_installed_sha256": "602255c766897dcabf8c5107c0ba3116686aab7dca683066fdffc70b88628986",
+      "current_canonical_sha256": "602255c766897dcabf8c5107c0ba3116686aab7dca683066fdffc70b88628986",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\mixed_recognition.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\mixed_recognition.py",
+      "installed_sha256": "04ed62e0b61af523818aeff961cebc34eadc3df4b1b7756e5a32c9f8e432f232",
+      "canonical_sha256": "04ed62e0b61af523818aeff961cebc34eadc3df4b1b7756e5a32c9f8e432f232",
+      "matches_canonical": true,
+      "current_installed_sha256": "04ed62e0b61af523818aeff961cebc34eadc3df4b1b7756e5a32c9f8e432f232",
+      "current_canonical_sha256": "04ed62e0b61af523818aeff961cebc34eadc3df4b1b7756e5a32c9f8e432f232",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\model_extensions.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\model_extensions.py",
+      "installed_sha256": "c5c15d782834546cf1d58a0a9c2d664db79898b6cc9517c657bcfac743ce2f92",
+      "canonical_sha256": "c5c15d782834546cf1d58a0a9c2d664db79898b6cc9517c657bcfac743ce2f92",
+      "matches_canonical": true,
+      "current_installed_sha256": "c5c15d782834546cf1d58a0a9c2d664db79898b6cc9517c657bcfac743ce2f92",
+      "current_canonical_sha256": "c5c15d782834546cf1d58a0a9c2d664db79898b6cc9517c657bcfac743ce2f92",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\model_registry.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\model_registry.py",
+      "installed_sha256": "62f864b9ab3f144eacff43448897d2c31abc217e17ed3b0e3f58894cdd985081",
+      "canonical_sha256": "62f864b9ab3f144eacff43448897d2c31abc217e17ed3b0e3f58894cdd985081",
+      "matches_canonical": true,
+      "current_installed_sha256": "62f864b9ab3f144eacff43448897d2c31abc217e17ed3b0e3f58894cdd985081",
+      "current_canonical_sha256": "62f864b9ab3f144eacff43448897d2c31abc217e17ed3b0e3f58894cdd985081",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\narrative_source_preparation.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\narrative_source_preparation.py",
+      "installed_sha256": "4d848e286ca318f427d9001bb6243b98d9f91886f7931d7eb4796cf4cc4c2e72",
+      "canonical_sha256": "4d848e286ca318f427d9001bb6243b98d9f91886f7931d7eb4796cf4cc4c2e72",
+      "matches_canonical": true,
+      "current_installed_sha256": "4d848e286ca318f427d9001bb6243b98d9f91886f7931d7eb4796cf4cc4c2e72",
+      "current_canonical_sha256": "4d848e286ca318f427d9001bb6243b98d9f91886f7931d7eb4796cf4cc4c2e72",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\processed_artifact_canary.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\processed_artifact_canary.py",
+      "installed_sha256": "19869b02cb370add57b5910d360e3ae864b870a2825d76894ea36530a9ccacfc",
+      "canonical_sha256": "19869b02cb370add57b5910d360e3ae864b870a2825d76894ea36530a9ccacfc",
+      "matches_canonical": true,
+      "current_installed_sha256": "19869b02cb370add57b5910d360e3ae864b870a2825d76894ea36530a9ccacfc",
+      "current_canonical_sha256": "19869b02cb370add57b5910d360e3ae864b870a2825d76894ea36530a9ccacfc",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\processing_demand.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\processing_demand.py",
+      "installed_sha256": "fcdfcad8ebd1fc20febf3c157dcd20ad92708fd69d00373ef9a943e5a820afc1",
+      "canonical_sha256": "fcdfcad8ebd1fc20febf3c157dcd20ad92708fd69d00373ef9a943e5a820afc1",
+      "matches_canonical": true,
+      "current_installed_sha256": "fcdfcad8ebd1fc20febf3c157dcd20ad92708fd69d00373ef9a943e5a820afc1",
+      "current_canonical_sha256": "fcdfcad8ebd1fc20febf3c157dcd20ad92708fd69d00373ef9a943e5a820afc1",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\publication_registry.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\publication_registry.py",
+      "installed_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+      "canonical_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+      "matches_canonical": true,
+      "current_installed_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+      "current_canonical_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\reconciliation.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\reconciliation.py",
+      "installed_sha256": "c4b69e4ee1f3dc9822aed05b9facfd5bb44575b6b51b706dede46277ee5996f5",
+      "canonical_sha256": "c4b69e4ee1f3dc9822aed05b9facfd5bb44575b6b51b706dede46277ee5996f5",
+      "matches_canonical": true,
+      "current_installed_sha256": "c4b69e4ee1f3dc9822aed05b9facfd5bb44575b6b51b706dede46277ee5996f5",
+      "current_canonical_sha256": "c4b69e4ee1f3dc9822aed05b9facfd5bb44575b6b51b706dede46277ee5996f5",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_backtest.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_backtest.py",
+      "installed_sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "canonical_sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "matches_canonical": true,
+      "current_installed_sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "current_canonical_sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_constraints.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_constraints.py",
+      "installed_sha256": "6ce99c1d59fa3858213e31bf9dadc351591ef0eda006d957f07cf1a839e57374",
+      "canonical_sha256": "6ce99c1d59fa3858213e31bf9dadc351591ef0eda006d957f07cf1a839e57374",
+      "matches_canonical": true,
+      "current_installed_sha256": "6ce99c1d59fa3858213e31bf9dadc351591ef0eda006d957f07cf1a839e57374",
+      "current_canonical_sha256": "6ce99c1d59fa3858213e31bf9dadc351591ef0eda006d957f07cf1a839e57374",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_core.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_core.py",
+      "installed_sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "canonical_sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "matches_canonical": true,
+      "current_installed_sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "current_canonical_sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_forecast.py",
+      "installed_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "canonical_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "matches_canonical": true,
+      "current_installed_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "current_canonical_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_publication.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_publication.py",
+      "installed_sha256": "bc2bb4a33e36ed9ad82bc4ffe33e57de8999002c2c7910b9c8b9d1565678fcd0",
+      "canonical_sha256": "bc2bb4a33e36ed9ad82bc4ffe33e57de8999002c2c7910b9c8b9d1565678fcd0",
+      "matches_canonical": true,
+      "current_installed_sha256": "bc2bb4a33e36ed9ad82bc4ffe33e57de8999002c2c7910b9c8b9d1565678fcd0",
+      "current_canonical_sha256": "bc2bb4a33e36ed9ad82bc4ffe33e57de8999002c2c7910b9c8b9d1565678fcd0",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_report.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_report.py",
+      "installed_sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+      "canonical_sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+      "matches_canonical": true,
+      "current_installed_sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+      "current_canonical_sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\rolling_backtest.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\rolling_backtest.py",
+      "installed_sha256": "80de3bfbf47d1dc6b59fc8de94733f996463edb5d749923b6ab7039875d4ec8b",
+      "canonical_sha256": "80de3bfbf47d1dc6b59fc8de94733f996463edb5d749923b6ab7039875d4ec8b",
+      "matches_canonical": true,
+      "current_installed_sha256": "80de3bfbf47d1dc6b59fc8de94733f996463edb5d749923b6ab7039875d4ec8b",
+      "current_canonical_sha256": "80de3bfbf47d1dc6b59fc8de94733f996463edb5d749923b6ab7039875d4ec8b",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\schema_compatibility.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\schema_compatibility.py",
+      "installed_sha256": "2fe8ffe2090300fbe81e130e21cf0b213faefc63ba0a6831894c9025db963352",
+      "canonical_sha256": "2fe8ffe2090300fbe81e130e21cf0b213faefc63ba0a6831894c9025db963352",
+      "matches_canonical": true,
+      "current_installed_sha256": "2fe8ffe2090300fbe81e130e21cf0b213faefc63ba0a6831894c9025db963352",
+      "current_canonical_sha256": "2fe8ffe2090300fbe81e130e21cf0b213faefc63ba0a6831894c9025db963352",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\schema_fields.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\schema_fields.py",
+      "installed_sha256": "54276494dcb280b23791c3a7614eb2090997a68e1116d78f6efdf02edf52a01c",
+      "canonical_sha256": "54276494dcb280b23791c3a7614eb2090997a68e1116d78f6efdf02edf52a01c",
+      "matches_canonical": true,
+      "current_installed_sha256": "54276494dcb280b23791c3a7614eb2090997a68e1116d78f6efdf02edf52a01c",
+      "current_canonical_sha256": "54276494dcb280b23791c3a7614eb2090997a68e1116d78f6efdf02edf52a01c",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\schema_optin.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\schema_optin.py",
+      "installed_sha256": "6a3e01ea8ab95e5d705ff21c86274db6fc16b3569a19d74c2d1558cd3cf6b3a3",
+      "canonical_sha256": "6a3e01ea8ab95e5d705ff21c86274db6fc16b3569a19d74c2d1558cd3cf6b3a3",
+      "matches_canonical": true,
+      "current_installed_sha256": "6a3e01ea8ab95e5d705ff21c86274db6fc16b3569a19d74c2d1558cd3cf6b3a3",
+      "current_canonical_sha256": "6a3e01ea8ab95e5d705ff21c86274db6fc16b3569a19d74c2d1558cd3cf6b3a3",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+      "installed_sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+      "canonical_sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+      "matches_canonical": true,
+      "current_installed_sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+      "current_canonical_sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\trust_anchor.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\trust_anchor.py",
+      "installed_sha256": "9abdcec55a524574b55e0111f513338f79a486f536985d036b94b4a71ba1310c",
+      "canonical_sha256": "9abdcec55a524574b55e0111f513338f79a486f536985d036b94b4a71ba1310c",
+      "matches_canonical": true,
+      "current_installed_sha256": "9abdcec55a524574b55e0111f513338f79a486f536985d036b94b4a71ba1310c",
+      "current_canonical_sha256": "9abdcec55a524574b55e0111f513338f79a486f536985d036b94b4a71ba1310c",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\__init__.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\__init__.py",
+      "installed_sha256": "f7343866b80251c3d2105c6d34446898784ef6272ed9310dfee7cbecf8db3459",
+      "canonical_sha256": "f7343866b80251c3d2105c6d34446898784ef6272ed9310dfee7cbecf8db3459",
+      "matches_canonical": true,
+      "current_installed_sha256": "f7343866b80251c3d2105c6d34446898784ef6272ed9310dfee7cbecf8db3459",
+      "current_canonical_sha256": "f7343866b80251c3d2105c6d34446898784ef6272ed9310dfee7cbecf8db3459",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\analysis\\confidence.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\analysis\\confidence.py",
+      "installed_sha256": "235b38e4586f15bb8908a2db53abc0724ad9e0ed79bb15e508f948ebeaa0e283",
+      "canonical_sha256": "235b38e4586f15bb8908a2db53abc0724ad9e0ed79bb15e508f948ebeaa0e283",
+      "matches_canonical": true,
+      "current_installed_sha256": "235b38e4586f15bb8908a2db53abc0724ad9e0ed79bb15e508f948ebeaa0e283",
+      "current_canonical_sha256": "235b38e4586f15bb8908a2db53abc0724ad9e0ed79bb15e508f948ebeaa0e283",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\analysis\\sensitivity.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\analysis\\sensitivity.py",
+      "installed_sha256": "abb1f71f4b306739760e241672cc98e57ae8253f9bf90202cf06031d67f0373d",
+      "canonical_sha256": "abb1f71f4b306739760e241672cc98e57ae8253f9bf90202cf06031d67f0373d",
+      "matches_canonical": true,
+      "current_installed_sha256": "abb1f71f4b306739760e241672cc98e57ae8253f9bf90202cf06031d67f0373d",
+      "current_canonical_sha256": "abb1f71f4b306739760e241672cc98e57ae8253f9bf90202cf06031d67f0373d",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\analysis\\__init__.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\analysis\\__init__.py",
+      "installed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "canonical_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches_canonical": true,
+      "current_installed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current_canonical_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\constants.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\constants.py",
+      "installed_sha256": "3ad7332e4a76e7e3e2a9a8a1ab73828584ed8b19b32327479a0f79636b2f3462",
+      "canonical_sha256": "3ad7332e4a76e7e3e2a9a8a1ab73828584ed8b19b32327479a0f79636b2f3462",
+      "matches_canonical": true,
+      "current_installed_sha256": "3ad7332e4a76e7e3e2a9a8a1ab73828584ed8b19b32327479a0f79636b2f3462",
+      "current_canonical_sha256": "3ad7332e4a76e7e3e2a9a8a1ab73828584ed8b19b32327479a0f79636b2f3462",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\document.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\document.py",
+      "installed_sha256": "c2df0a229116392968152ee547818567ab40ba3813a270f68fabbfb9ea207c0d",
+      "canonical_sha256": "c2df0a229116392968152ee547818567ab40ba3813a270f68fabbfb9ea207c0d",
+      "matches_canonical": true,
+      "current_installed_sha256": "c2df0a229116392968152ee547818567ab40ba3813a270f68fabbfb9ea207c0d",
+      "current_canonical_sha256": "c2df0a229116392968152ee547818567ab40ba3813a270f68fabbfb9ea207c0d",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\evidence.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\evidence.py",
+      "installed_sha256": "eb1edea913b3b4f6f8f9c7a3f84e07d464bdf0b33e7e6e9aba5664b6cb5ba683",
+      "canonical_sha256": "eb1edea913b3b4f6f8f9c7a3f84e07d464bdf0b33e7e6e9aba5664b6cb5ba683",
+      "matches_canonical": true,
+      "current_installed_sha256": "eb1edea913b3b4f6f8f9c7a3f84e07d464bdf0b33e7e6e9aba5664b6cb5ba683",
+      "current_canonical_sha256": "eb1edea913b3b4f6f8f9c7a3f84e07d464bdf0b33e7e6e9aba5664b6cb5ba683",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\__init__.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\__init__.py",
+      "installed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "canonical_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches_canonical": true,
+      "current_installed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current_canonical_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\forecast\\calc.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\forecast\\calc.py",
+      "installed_sha256": "853baa0bb208c91be0c3983d9256cb42b76f61221b19ad11c11bc37db79ae049",
+      "canonical_sha256": "853baa0bb208c91be0c3983d9256cb42b76f61221b19ad11c11bc37db79ae049",
+      "matches_canonical": true,
+      "current_installed_sha256": "853baa0bb208c91be0c3983d9256cb42b76f61221b19ad11c11bc37db79ae049",
+      "current_canonical_sha256": "853baa0bb208c91be0c3983d9256cb42b76f61221b19ad11c11bc37db79ae049",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\forecast\\segments.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\forecast\\segments.py",
+      "installed_sha256": "7b0dac5d5b6f19aba2305a7cb5d9d0ecddb1e5a31a6833285c5f81259018f002",
+      "canonical_sha256": "7b0dac5d5b6f19aba2305a7cb5d9d0ecddb1e5a31a6833285c5f81259018f002",
+      "matches_canonical": true,
+      "current_installed_sha256": "7b0dac5d5b6f19aba2305a7cb5d9d0ecddb1e5a31a6833285c5f81259018f002",
+      "current_canonical_sha256": "7b0dac5d5b6f19aba2305a7cb5d9d0ecddb1e5a31a6833285c5f81259018f002",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\coverage.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\coverage.py",
+      "installed_sha256": "ae6519cc18fea823dcc9d5e47956a2aea6da3270f1041b28d7bf1b783cd4b470",
+      "canonical_sha256": "ae6519cc18fea823dcc9d5e47956a2aea6da3270f1041b28d7bf1b783cd4b470",
+      "matches_canonical": true,
+      "current_installed_sha256": "ae6519cc18fea823dcc9d5e47956a2aea6da3270f1041b28d7bf1b783cd4b470",
+      "current_canonical_sha256": "ae6519cc18fea823dcc9d5e47956a2aea6da3270f1041b28d7bf1b783cd4b470",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\drivers.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\drivers.py",
+      "installed_sha256": "45e3d58853c6757a0a49701d495ffb9e3e9cb0dafc2e819432cdd28af6e90e18",
+      "canonical_sha256": "45e3d58853c6757a0a49701d495ffb9e3e9cb0dafc2e819432cdd28af6e90e18",
+      "matches_canonical": true,
+      "current_installed_sha256": "45e3d58853c6757a0a49701d495ffb9e3e9cb0dafc2e819432cdd28af6e90e18",
+      "current_canonical_sha256": "45e3d58853c6757a0a49701d495ffb9e3e9cb0dafc2e819432cdd28af6e90e18",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\targets.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\targets.py",
+      "installed_sha256": "1c885deaf4168bacbd7d445ec6e76da93193132fce3b6ca67fbed4e6c910c48b",
+      "canonical_sha256": "1c885deaf4168bacbd7d445ec6e76da93193132fce3b6ca67fbed4e6c910c48b",
+      "matches_canonical": true,
+      "current_installed_sha256": "1c885deaf4168bacbd7d445ec6e76da93193132fce3b6ca67fbed4e6c910c48b",
+      "current_canonical_sha256": "1c885deaf4168bacbd7d445ec6e76da93193132fce3b6ca67fbed4e6c910c48b",
+      "unchanged": true
+    },
+    {
+      "installed_path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\__init__.py",
+      "canonical_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\__init__.py",
+      "installed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "canonical_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches_canonical": true,
+      "current_installed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current_canonical_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unchanged": true
+    }
+  ],
+  "registry": {
+    "entries": [
+      {
+        "artifact_id": null,
+        "artifact_type": "forecast",
+        "engine_version": "4.1.0",
+        "input_sha256": "7fec91b9c9dcea9d157027730458b2531818ddf738899d5148de23244c4fd366",
+        "input_summary_sha256": "0df0394163ebfe5a24346aa5ff52f60cd27926a666088d4d1549988a06a22f64",
+        "line_sha256": "53bc6c90a81506959a6d78698787ac72b40ed80c330678d10e056d93ca5463e1",
+        "note": "run_forecast formal",
+        "prev_line_sha256": null,
+        "publisher": "revenue-forecast",
+        "receipt_sha256": "2ef742e088f3f847067960f3d741ece2e244eb4ba52594303f71f568c9b0aa15",
+        "registered_at": "2026-10-08T08:30:23.919398+00:00",
+        "result_sha256": "945614bc0e6372ed7ce4dcfd8154ebf304296ff3e159c3ff47c52758e5669f15",
+        "schema_version": "3.7",
+        "validation_status": "validated"
+      },
+      {
+        "artifact_id": null,
+        "artifact_type": "forecast",
+        "engine_version": "4.1.0",
+        "input_sha256": "7fec91b9c9dcea9d157027730458b2531818ddf738899d5148de23244c4fd366",
+        "input_summary_sha256": "0df0394163ebfe5a24346aa5ff52f60cd27926a666088d4d1549988a06a22f64",
+        "line_sha256": "d8f1449d4d79fa707e7553d7ffa83a3f2a5dc0b73df8609c87b2b53dd420dc2b",
+        "note": "run_forecast formal",
+        "prev_line_sha256": "53bc6c90a81506959a6d78698787ac72b40ed80c330678d10e056d93ca5463e1",
+        "publisher": "revenue-forecast",
+        "receipt_sha256": "2ef742e088f3f847067960f3d741ece2e244eb4ba52594303f71f568c9b0aa15",
+        "registered_at": "2026-10-08T08:30:28.569304+00:00",
+        "result_sha256": "945614bc0e6372ed7ce4dcfd8154ebf304296ff3e159c3ff47c52758e5669f15",
+        "schema_version": "3.7",
+        "validation_status": "validated"
+      },
+      {
+        "artifact_id": "c69a19509ed62412a1db0fea386501fe486f81c5bb2a7745aa4fc7d1d932fd24",
+        "artifact_type": "snapshot",
+        "engine_version": "4.1.0",
+        "input_sha256": "7fec91b9c9dcea9d157027730458b2531818ddf738899d5148de23244c4fd366",
+        "input_summary_sha256": "0df0394163ebfe5a24346aa5ff52f60cd27926a666088d4d1549988a06a22f64",
+        "line_sha256": "a2bb4ea56c0943fe52a0ade53a4b6ddd4ebaa61aabf1b5c133aeabb22319bd3d",
+        "note": "revenue_backtest create",
+        "prev_line_sha256": "d8f1449d4d79fa707e7553d7ffa83a3f2a5dc0b73df8609c87b2b53dd420dc2b",
+        "publisher": "revenue-forecast",
+        "receipt_sha256": "2ef742e088f3f847067960f3d741ece2e244eb4ba52594303f71f568c9b0aa15",
+        "registered_at": "2026-10-08T08:30:28.968077+00:00",
+        "result_sha256": "852335a83c9fb368f92061e0500d6b1f93f34f10a40971b54c54c623745e8d3f",
+        "schema_version": "3.7"
+      }
+    ],
+    "command": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\publication_registry.py",
+      "audit",
+      "--result",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\forecast.json"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "",
+    "original_registry_sha256": "596fcf974f7174f714e400478394626b1868d92a3ac2c3501b17d5ff042c146b",
+    "runtime_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+    "chain_and_bindings": "PASS"
+  },
+  "old_numerical_output_equals_v3": true,
+  "confidence_score": 64,
+  "recognition_closure": [
+    {
+      "segment": "Games",
+      "claim_ids": [
+        "claim_recognition_policy_recognition:Games_11",
+        "v3_recognition_policy_recognition:Games_1",
+        "v3_recognition_policy_recognition:Games_2",
+        "v3_recognition_policy_recognition:Games_3",
+        "v3_recognition_policy_recognition:Games_4",
+        "v3_recognition_policy_recognition:Games_5"
+      ],
+      "timing_and_principal_agent": "PASS",
+      "mode": "modeled_as_recognized",
+      "presentation": "mixed"
+    },
+    {
+      "segment": "SocialNetworks",
+      "claim_ids": [
+        "claim_recognition_policy_recognition:SocialNetworks_21",
+        "v3_recognition_policy_recognition:SocialNetworks_6",
+        "v3_recognition_policy_recognition:SocialNetworks_7",
+        "v3_recognition_policy_recognition:SocialNetworks_8",
+        "v3_recognition_policy_recognition:SocialNetworks_9",
+        "v3_recognition_policy_recognition:SocialNetworks_10"
+      ],
+      "timing_and_principal_agent": "PASS",
+      "mode": "modeled_as_recognized",
+      "presentation": "mixed"
+    },
+    {
+      "segment": "MarketingServices",
+      "claim_ids": [
+        "claim_recognition_policy_recognition:MarketingServices_31",
+        "v3_recognition_policy_recognition:MarketingServices_11",
+        "v3_recognition_policy_recognition:MarketingServices_12",
+        "v3_recognition_policy_recognition:MarketingServices_13"
+      ],
+      "timing_and_principal_agent": "PASS",
+      "mode": "modeled_as_recognized",
+      "presentation": "mixed"
+    },
+    {
+      "segment": "FinTechBusinessServices",
+      "claim_ids": [
+        "claim_recognition_policy_recognition:FinTechBusinessServices_41",
+        "v3_recognition_policy_recognition:FinTechBusinessServices_14",
+        "v3_recognition_policy_recognition:FinTechBusinessServices_15",
+        "v3_recognition_policy_recognition:FinTechBusinessServices_16"
+      ],
+      "timing_and_principal_agent": "PASS",
+      "mode": "modeled_as_recognized",
+      "presentation": "mixed"
+    },
+    {
+      "segment": "Others",
+      "claim_ids": [
+        "claim_recognition_policy_recognition:Others_51",
+        "v3_recognition_policy_recognition:Others_17",
+        "v3_recognition_policy_recognition:Others_18",
+        "v3_recognition_policy_recognition:Others_19"
+      ],
+      "timing_and_principal_agent": "PASS",
+      "mode": "modeled_as_recognized",
+      "presentation": "mixed"
+    }
+  ],
+  "evidence_node_closure": [
+    {
+      "driver_id": "evergreen_and_launch_monetization",
+      "evidence_id": "evergreen_and_launch_monetization_checked",
+      "claim_ids": [
+        "claim_growth_driver_evergreen_and_launch_monetization_checked_61",
+        "v3_growth_driver_evergreen_and_launch_monetization_checked_243",
+        "v3_growth_driver_evergreen_and_launch_monetization_checked_244"
+      ],
+      "conclusion": "Historical disclosure supports mechanism; numerical growth is analyst judgment, not management guidance.",
+      "combined_excerpt": "billion for the second quarter of 2026. Domestic Games revenues were RMB47.3 billion, up 17% year-on-year, driven by growth from most of our major games, with notable contributions from Delta Force, VALORANT PC and MOBILE, and Roco Kingdom: World. International Games revenues were RMB18.6 billion, d 本土市場 遊戲收入為人民幣1,642 億元，同比增長18%，得益於近期發佈的《三角洲行動》的強勁表現，以及《王者榮耀》、 《和平精英》等長青遊戲及《無畏契約》系列（個人電腦端及移動端）的收入增長。 Domestic Games revenues were RMB47.3 billion, up 17% year-on-year, driven by growth from most of our major games, with notable contributions from Delta Force, VALORANT PC and MOBILE, and Roco Kingdom: World."
+    },
+    {
+      "driver_id": "evergreen_and_launch_monetization",
+      "evidence_id": "evergreen_and_launch_monetization_contrary",
+      "claim_ids": [
+        "claim_growth_driver_evergreen_and_launch_monetization_contrary_62",
+        "v3_growth_driver_evergreen_and_launch_monetization_contrary_238",
+        "v3_growth_driver_evergreen_and_launch_monetization_contrary_239"
+      ],
+      "conclusion": "Tencent Q2 international Games -0.8% reported but +4% constant currency, higher Wuthering Waves/VALORANT PC offset lower certain Supercell games; FY2025 international +33% reported/+32% constant currency is a different full-year baseline. NetEase competition is separate one-step context, not measured Tencent displacement.",
+      "combined_excerpt": "PC and MOBILE, and Roco Kingdom: World. International Games revenues were RMB18.6 billion, down 0.8% year-on-year due to foreign currency movements, or up 4% year-on-year in constant currency terms, as higher revenues from Wuthering Waves and VALORANT PC were International Games revenues were RMB18.6 billion, down 0.8% year-on-year due to foreign currency movements, or up 4% year-on-year in constant currency terms, as higher revenues from Wuthering Waves and VALORANT PC were offset by lower revenues from certain Supercell games. 國際市場遊戲收入為 人民幣774 億元，同比增長33%（按固定匯率計算為32%），得益於Supercell 旗下遊戲及《PUBG MOBILE》的 收入增長，以及《鳴潮》的增量收入貢獻。"
+    },
+    {
+      "driver_id": "evergreen_and_launch_monetization",
+      "evidence_id": "games_independent_peer_context",
+      "claim_ids": [
+        "v3_growth_driver_games_independent_peer_context_240",
+        "v3_growth_driver_games_independent_peer_context_241",
+        "v3_growth_driver_games_independent_peer_context_242"
+      ],
+      "conclusion": "NetEase H1 Games-and-related-VAS NET revenue +8.3%, active franchises and international operations demonstrate independent competition, not Tencent market share or identified revenue displacement. Different accounting and perimeter prevent use as an exact growth coefficient.",
+      "combined_excerpt": "Games and related value-added services net revenues were RMB50.7 billion ( US$7.5 billion ), an increase of 8.3% compared with the same period of 2025. The Fantasy Westward Journey franchise, Identity V , Eggy Party , Sword of Justice and Where Winds Meet sustained solid momentum through ongoing content updates, gameplay innovation and vibrant community activities. We also advanced our global strategy and enhanced player engagement through strong live operations. For example, Where Winds Meet and Marvel Rivals further broadened their international reach with a steady stream of fresh content and community-focused initiatives in various markets including North America and Europe ."
+    },
+    {
+      "driver_id": "paid_social_stabilization",
+      "evidence_id": "paid_social_stabilization_checked",
+      "claim_ids": [
+        "claim_growth_driver_paid_social_stabilization_checked_63"
+      ],
+      "conclusion": "Historical disclosure supports mechanism; numerical growth is analyst judgment, not management guidance.",
+      "combined_excerpt": "5 118,654 Social networks 32,463 32,215 64,409 64,847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526"
+    },
+    {
+      "driver_id": "paid_social_stabilization",
+      "evidence_id": "paid_social_stabilization_contrary",
+      "claim_ids": [
+        "claim_growth_driver_paid_social_stabilization_contrary_64",
+        "v3_growth_driver_paid_social_stabilization_contrary_245"
+      ],
+      "conclusion": "H1 Social revenue64,409m versus64,847m (-0.68%) is a half-year recognized-revenue observation; Q2 fee-based VAS259m versus264m are AVERAGE DAILY subscriptions DURING THE QUARTER, not year-end customers or annual payers. High period-end Weixin MAU does not prove paid conversion.",
+      "combined_excerpt": "5 118,654 Social networks 32,463 32,215 64,409 64,847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526 Fee-based VAS subscriptions# 259 264 -2% 266 -3% # Average daily number of subscriptions during the quarter"
+    },
+    {
+      "driver_id": "ai_ad_matching_and_inventory",
+      "evidence_id": "ai_ad_matching_and_inventory_checked",
+      "claim_ids": [
+        "claim_growth_driver_ai_ad_matching_and_inventory_checked_65",
+        "v3_growth_driver_ai_ad_matching_and_inventory_checked_246",
+        "v3_growth_driver_ai_ad_matching_and_inventory_checked_247",
+        "v3_growth_driver_ai_ad_matching_and_inventory_checked_248",
+        "v3_growth_driver_ai_ad_matching_and_inventory_checked_249",
+        "v3_growth_driver_ai_ad_matching_and_inventory_checked_250",
+        "v3_growth_driver_ai_ad_matching_and_inventory_checked_251"
+      ],
+      "conclusion": "Historical disclosure supports mechanism; numerical growth is analyst judgment, not management guidance.",
+      "combined_excerpt": "val, and accelerating content to market Automated ad campaign solution AIM+ • Facilitating advertisers to execute and iterate media buying campaigns across full range of inventory; powering 30%+ of total marketing services spend from advertisers Marketing Services – Clear Proof P Revenues from Marketing Services were RMB43.6 billion for the second quarter of 2026, up 22% year-on-year, enhancements to our AI-driven ad recommendation model (which determines the ad shown to each user for each impression), upgrades to our automated campaign management solution AIM+ (which helps advertisers purchase performant impressions), integration of closed-loop marketing capabilities within the Weixin ecosystem (which facilitates Weixin-integrated services, such as Mini Games and Mini Shops, to advertise more effectively on Tencent-managed ad properties). Automated ad campaign solution AIM+ • Facilitating advertisers to execute and iterate media buying campaigns across full range of inventory; powering 30%+ of total marketing services spend from advertisers Marketing Services – Clear Proof Point for AI Enhancing Revenue and Profitability More effective campaign execution and higher ROI for advertisers 20% FY2023 – 2025 revenue CAGR Enhanced utilisation of Tencent’s ad inventories and AI-driven ad monetisation efficiency 50%+ segment gross margin for 12"
+    },
+    {
+      "driver_id": "payments_and_cloud_conversion",
+      "evidence_id": "payments_and_cloud_conversion_checked",
+      "claim_ids": [
+        "claim_growth_driver_payments_and_cloud_conversion_checked_66",
+        "v3_growth_driver_payments_and_cloud_conversion_checked_252",
+        "v3_growth_driver_payments_and_cloud_conversion_checked_253",
+        "v3_growth_driver_payments_and_cloud_conversion_checked_254",
+        "v3_growth_driver_payments_and_cloud_conversion_checked_255"
+      ],
+      "conclusion": "Historical disclosure supports mechanism; numerical growth is analyst judgment, not management guidance.",
+      "combined_excerpt": "usted operating profit in 2025, despite constrained availability of GPUs and our decision to prioritise internal AI use cases • Tencent Cloud now offers full-stack AI agent solutions so that customers can integrate our security infrastructure, skillhubs and Weixin/QQ/WeCom contro Revenues from FinTech and Business Services rose by 9% year-on-year to RMB60.3 billion for the second quarter of 2026. FinTech Services revenue growth was mainly due to higher revenues from commercial payment, wealth management and consumer loan services. Business Services revenue growth was primarily driven by increased revenues from our cloud services, underpinned by greater demand for AI-related services, ongoing international expansion, and a more favourable pricing environment. To serve internal AI use cases and demand from external customers for Tencent Cloud AI infrastructure and solutions, we are increasing our GPU capacity during course of 2026 and beyond Tencent Cloud’s international business grew revenue rapidly YoY in 1H26, capturing rising demand from international customers who are adopting multi-cloud and hybrid strategies to achieve greater flexibility, performance and data sovereignty"
+    },
+    {
+      "driver_id": "payments_and_cloud_conversion",
+      "evidence_id": "payments_and_cloud_conversion_contrary",
+      "claim_ids": [
+        "claim_growth_driver_payments_and_cloud_conversion_contrary_67",
+        "v3_growth_driver_payments_and_cloud_conversion_contrary_256"
+      ],
+      "conclusion": "GPUs historically constrained and internal AI prioritized; no external AI revenue amount or FinTech/cloud mix; capex is not recognized revenue.",
+      "combined_excerpt": "usted operating profit in 2025, despite constrained availability of GPUs and our decision to prioritise internal AI use cases • Tencent Cloud now offers full-stack AI agent solutions so that customers can integrate our security infrastructure, skillhubs and We We started to focus on high-quality cloud revenue growth in 2022, and delivered RMB5 billion adjusted operating profit in 2025, despite constrained availability of GPUs and our decision to prioritise internal AI use cases"
+    },
+    {
+      "driver_id": "residual_normalization",
+      "evidence_id": "residual_normalization_checked",
+      "claim_ids": [
+        "claim_growth_driver_residual_normalization_checked_68"
+      ],
+      "conclusion": "Historical disclosure supports mechanism; numerical growth is analyst judgment, not management guidance.",
+      "combined_excerpt": "36 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526"
+    }
+  ],
+  "rationale_closure": [
+    {
+      "parameter_id": "games_growth_rate_low_2026",
+      "claim_ids": [
+        "claim_parameter_games_growth_rate_low_2026_12",
+        "v3_parameter_games_growth_rate_low_2026_22",
+        "v3_parameter_games_growth_rate_low_2026_23",
+        "v3_parameter_games_growth_rate_low_2026_24",
+        "v3_parameter_games_growth_rate_low_2026_25",
+        "v3_parameter_games_growth_rate_low_2026_26",
+        "v3_parameter_games_growth_rate_low_2026_27",
+        "v3_parameter_games_growth_rate_low_2026_28",
+        "v3_parameter_games_growth_rate_low_2026_29"
+      ],
+      "linked_source_ids": [
+        "netease_results_2q2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "games_growth_rate_low_2027",
+      "claim_ids": [
+        "claim_parameter_games_growth_rate_low_2027_13",
+        "v3_parameter_games_growth_rate_low_2027_30",
+        "v3_parameter_games_growth_rate_low_2027_31",
+        "v3_parameter_games_growth_rate_low_2027_32",
+        "v3_parameter_games_growth_rate_low_2027_33",
+        "v3_parameter_games_growth_rate_low_2027_34",
+        "v3_parameter_games_growth_rate_low_2027_35",
+        "v3_parameter_games_growth_rate_low_2027_36",
+        "v3_parameter_games_growth_rate_low_2027_37"
+      ],
+      "linked_source_ids": [
+        "netease_results_2q2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "games_growth_rate_low_2028",
+      "claim_ids": [
+        "claim_parameter_games_growth_rate_low_2028_14",
+        "v3_parameter_games_growth_rate_low_2028_38",
+        "v3_parameter_games_growth_rate_low_2028_39",
+        "v3_parameter_games_growth_rate_low_2028_40",
+        "v3_parameter_games_growth_rate_low_2028_41",
+        "v3_parameter_games_growth_rate_low_2028_42",
+        "v3_parameter_games_growth_rate_low_2028_43",
+        "v3_parameter_games_growth_rate_low_2028_44",
+        "v3_parameter_games_growth_rate_low_2028_45"
+      ],
+      "linked_source_ids": [
+        "netease_results_2q2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "games_growth_rate_base_2026",
+      "claim_ids": [
+        "claim_parameter_games_growth_rate_base_2026_15",
+        "v3_parameter_games_growth_rate_base_2026_46",
+        "v3_parameter_games_growth_rate_base_2026_47",
+        "v3_parameter_games_growth_rate_base_2026_48",
+        "v3_parameter_games_growth_rate_base_2026_49",
+        "v3_parameter_games_growth_rate_base_2026_50",
+        "v3_parameter_games_growth_rate_base_2026_51",
+        "v3_parameter_games_growth_rate_base_2026_52",
+        "v3_parameter_games_growth_rate_base_2026_53"
+      ],
+      "linked_source_ids": [
+        "netease_results_2q2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "games_growth_rate_base_2027",
+      "claim_ids": [
+        "claim_parameter_games_growth_rate_base_2027_16",
+        "v3_parameter_games_growth_rate_base_2027_54",
+        "v3_parameter_games_growth_rate_base_2027_55",
+        "v3_parameter_games_growth_rate_base_2027_56",
+        "v3_parameter_games_growth_rate_base_2027_57",
+        "v3_parameter_games_growth_rate_base_2027_58",
+        "v3_parameter_games_growth_rate_base_2027_59",
+        "v3_parameter_games_growth_rate_base_2027_60",
+        "v3_parameter_games_growth_rate_base_2027_61"
+      ],
+      "linked_source_ids": [
+        "netease_results_2q2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "games_growth_rate_base_2028",
+      "claim_ids": [
+        "claim_parameter_games_growth_rate_base_2028_17",
+        "v3_parameter_games_growth_rate_base_2028_62",
+        "v3_parameter_games_growth_rate_base_2028_63",
+        "v3_parameter_games_growth_rate_base_2028_64",
+        "v3_parameter_games_growth_rate_base_2028_65",
+        "v3_parameter_games_growth_rate_base_2028_66",
+        "v3_parameter_games_growth_rate_base_2028_67",
+        "v3_parameter_games_growth_rate_base_2028_68",
+        "v3_parameter_games_growth_rate_base_2028_69"
+      ],
+      "linked_source_ids": [
+        "netease_results_2q2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "games_growth_rate_high_2026",
+      "claim_ids": [
+        "claim_parameter_games_growth_rate_high_2026_18",
+        "v3_parameter_games_growth_rate_high_2026_70",
+        "v3_parameter_games_growth_rate_high_2026_71",
+        "v3_parameter_games_growth_rate_high_2026_72",
+        "v3_parameter_games_growth_rate_high_2026_73",
+        "v3_parameter_games_growth_rate_high_2026_74",
+        "v3_parameter_games_growth_rate_high_2026_75",
+        "v3_parameter_games_growth_rate_high_2026_76",
+        "v3_parameter_games_growth_rate_high_2026_77"
+      ],
+      "linked_source_ids": [
+        "netease_results_2q2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "games_growth_rate_high_2027",
+      "claim_ids": [
+        "claim_parameter_games_growth_rate_high_2027_19",
+        "v3_parameter_games_growth_rate_high_2027_78",
+        "v3_parameter_games_growth_rate_high_2027_79",
+        "v3_parameter_games_growth_rate_high_2027_80",
+        "v3_parameter_games_growth_rate_high_2027_81",
+        "v3_parameter_games_growth_rate_high_2027_82",
+        "v3_parameter_games_growth_rate_high_2027_83",
+        "v3_parameter_games_growth_rate_high_2027_84",
+        "v3_parameter_games_growth_rate_high_2027_85"
+      ],
+      "linked_source_ids": [
+        "netease_results_2q2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "games_growth_rate_high_2028",
+      "claim_ids": [
+        "claim_parameter_games_growth_rate_high_2028_20",
+        "v3_parameter_games_growth_rate_high_2028_86",
+        "v3_parameter_games_growth_rate_high_2028_87",
+        "v3_parameter_games_growth_rate_high_2028_88",
+        "v3_parameter_games_growth_rate_high_2028_89",
+        "v3_parameter_games_growth_rate_high_2028_90",
+        "v3_parameter_games_growth_rate_high_2028_91",
+        "v3_parameter_games_growth_rate_high_2028_92",
+        "v3_parameter_games_growth_rate_high_2028_93"
+      ],
+      "linked_source_ids": [
+        "netease_results_2q2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_low_2026",
+      "claim_ids": [
+        "claim_parameter_socialnetworks_growth_rate_low_2026_22",
+        "v3_parameter_socialnetworks_growth_rate_low_2026_94",
+        "v3_parameter_socialnetworks_growth_rate_low_2026_95",
+        "v3_parameter_socialnetworks_growth_rate_low_2026_96"
+      ],
+      "linked_source_ids": [
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_low_2027",
+      "claim_ids": [
+        "claim_parameter_socialnetworks_growth_rate_low_2027_23",
+        "v3_parameter_socialnetworks_growth_rate_low_2027_97",
+        "v3_parameter_socialnetworks_growth_rate_low_2027_98",
+        "v3_parameter_socialnetworks_growth_rate_low_2027_99"
+      ],
+      "linked_source_ids": [
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_low_2028",
+      "claim_ids": [
+        "claim_parameter_socialnetworks_growth_rate_low_2028_24",
+        "v3_parameter_socialnetworks_growth_rate_low_2028_100",
+        "v3_parameter_socialnetworks_growth_rate_low_2028_101",
+        "v3_parameter_socialnetworks_growth_rate_low_2028_102"
+      ],
+      "linked_source_ids": [
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_base_2026",
+      "claim_ids": [
+        "claim_parameter_socialnetworks_growth_rate_base_2026_25",
+        "v3_parameter_socialnetworks_growth_rate_base_2026_103",
+        "v3_parameter_socialnetworks_growth_rate_base_2026_104",
+        "v3_parameter_socialnetworks_growth_rate_base_2026_105"
+      ],
+      "linked_source_ids": [
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_base_2027",
+      "claim_ids": [
+        "claim_parameter_socialnetworks_growth_rate_base_2027_26",
+        "v3_parameter_socialnetworks_growth_rate_base_2027_106",
+        "v3_parameter_socialnetworks_growth_rate_base_2027_107",
+        "v3_parameter_socialnetworks_growth_rate_base_2027_108"
+      ],
+      "linked_source_ids": [
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_base_2028",
+      "claim_ids": [
+        "claim_parameter_socialnetworks_growth_rate_base_2028_27",
+        "v3_parameter_socialnetworks_growth_rate_base_2028_109",
+        "v3_parameter_socialnetworks_growth_rate_base_2028_110",
+        "v3_parameter_socialnetworks_growth_rate_base_2028_111"
+      ],
+      "linked_source_ids": [
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_high_2026",
+      "claim_ids": [
+        "claim_parameter_socialnetworks_growth_rate_high_2026_28",
+        "v3_parameter_socialnetworks_growth_rate_high_2026_112",
+        "v3_parameter_socialnetworks_growth_rate_high_2026_113",
+        "v3_parameter_socialnetworks_growth_rate_high_2026_114"
+      ],
+      "linked_source_ids": [
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_high_2027",
+      "claim_ids": [
+        "claim_parameter_socialnetworks_growth_rate_high_2027_29",
+        "v3_parameter_socialnetworks_growth_rate_high_2027_115",
+        "v3_parameter_socialnetworks_growth_rate_high_2027_116",
+        "v3_parameter_socialnetworks_growth_rate_high_2027_117"
+      ],
+      "linked_source_ids": [
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_high_2028",
+      "claim_ids": [
+        "claim_parameter_socialnetworks_growth_rate_high_2028_30",
+        "v3_parameter_socialnetworks_growth_rate_high_2028_118",
+        "v3_parameter_socialnetworks_growth_rate_high_2028_119",
+        "v3_parameter_socialnetworks_growth_rate_high_2028_120"
+      ],
+      "linked_source_ids": [
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_low_2026",
+      "claim_ids": [
+        "claim_parameter_marketingservices_growth_rate_low_2026_32",
+        "v3_parameter_marketingservices_growth_rate_low_2026_121",
+        "v3_parameter_marketingservices_growth_rate_low_2026_122",
+        "v3_parameter_marketingservices_growth_rate_low_2026_123",
+        "v3_parameter_marketingservices_growth_rate_low_2026_124",
+        "v3_parameter_marketingservices_growth_rate_low_2026_125",
+        "v3_parameter_marketingservices_growth_rate_low_2026_126",
+        "v3_parameter_marketingservices_growth_rate_low_2026_127"
+      ],
+      "linked_source_ids": [
+        "tencent_corporate_overview_sep2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_low_2027",
+      "claim_ids": [
+        "claim_parameter_marketingservices_growth_rate_low_2027_33",
+        "v3_parameter_marketingservices_growth_rate_low_2027_128",
+        "v3_parameter_marketingservices_growth_rate_low_2027_129",
+        "v3_parameter_marketingservices_growth_rate_low_2027_130",
+        "v3_parameter_marketingservices_growth_rate_low_2027_131",
+        "v3_parameter_marketingservices_growth_rate_low_2027_132",
+        "v3_parameter_marketingservices_growth_rate_low_2027_133",
+        "v3_parameter_marketingservices_growth_rate_low_2027_134"
+      ],
+      "linked_source_ids": [
+        "tencent_corporate_overview_sep2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_low_2028",
+      "claim_ids": [
+        "claim_parameter_marketingservices_growth_rate_low_2028_34",
+        "v3_parameter_marketingservices_growth_rate_low_2028_135",
+        "v3_parameter_marketingservices_growth_rate_low_2028_136",
+        "v3_parameter_marketingservices_growth_rate_low_2028_137",
+        "v3_parameter_marketingservices_growth_rate_low_2028_138",
+        "v3_parameter_marketingservices_growth_rate_low_2028_139",
+        "v3_parameter_marketingservices_growth_rate_low_2028_140",
+        "v3_parameter_marketingservices_growth_rate_low_2028_141"
+      ],
+      "linked_source_ids": [
+        "tencent_corporate_overview_sep2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_base_2026",
+      "claim_ids": [
+        "claim_parameter_marketingservices_growth_rate_base_2026_35",
+        "v3_parameter_marketingservices_growth_rate_base_2026_142",
+        "v3_parameter_marketingservices_growth_rate_base_2026_143",
+        "v3_parameter_marketingservices_growth_rate_base_2026_144",
+        "v3_parameter_marketingservices_growth_rate_base_2026_145",
+        "v3_parameter_marketingservices_growth_rate_base_2026_146",
+        "v3_parameter_marketingservices_growth_rate_base_2026_147",
+        "v3_parameter_marketingservices_growth_rate_base_2026_148"
+      ],
+      "linked_source_ids": [
+        "tencent_corporate_overview_sep2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_base_2027",
+      "claim_ids": [
+        "claim_parameter_marketingservices_growth_rate_base_2027_36",
+        "v3_parameter_marketingservices_growth_rate_base_2027_149",
+        "v3_parameter_marketingservices_growth_rate_base_2027_150",
+        "v3_parameter_marketingservices_growth_rate_base_2027_151",
+        "v3_parameter_marketingservices_growth_rate_base_2027_152",
+        "v3_parameter_marketingservices_growth_rate_base_2027_153",
+        "v3_parameter_marketingservices_growth_rate_base_2027_154",
+        "v3_parameter_marketingservices_growth_rate_base_2027_155"
+      ],
+      "linked_source_ids": [
+        "tencent_corporate_overview_sep2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_base_2028",
+      "claim_ids": [
+        "claim_parameter_marketingservices_growth_rate_base_2028_37",
+        "v3_parameter_marketingservices_growth_rate_base_2028_156",
+        "v3_parameter_marketingservices_growth_rate_base_2028_157",
+        "v3_parameter_marketingservices_growth_rate_base_2028_158",
+        "v3_parameter_marketingservices_growth_rate_base_2028_159",
+        "v3_parameter_marketingservices_growth_rate_base_2028_160",
+        "v3_parameter_marketingservices_growth_rate_base_2028_161",
+        "v3_parameter_marketingservices_growth_rate_base_2028_162"
+      ],
+      "linked_source_ids": [
+        "tencent_corporate_overview_sep2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_high_2026",
+      "claim_ids": [
+        "claim_parameter_marketingservices_growth_rate_high_2026_38",
+        "v3_parameter_marketingservices_growth_rate_high_2026_163",
+        "v3_parameter_marketingservices_growth_rate_high_2026_164",
+        "v3_parameter_marketingservices_growth_rate_high_2026_165",
+        "v3_parameter_marketingservices_growth_rate_high_2026_166",
+        "v3_parameter_marketingservices_growth_rate_high_2026_167",
+        "v3_parameter_marketingservices_growth_rate_high_2026_168",
+        "v3_parameter_marketingservices_growth_rate_high_2026_169"
+      ],
+      "linked_source_ids": [
+        "tencent_corporate_overview_sep2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_high_2027",
+      "claim_ids": [
+        "claim_parameter_marketingservices_growth_rate_high_2027_39",
+        "v3_parameter_marketingservices_growth_rate_high_2027_170",
+        "v3_parameter_marketingservices_growth_rate_high_2027_171",
+        "v3_parameter_marketingservices_growth_rate_high_2027_172",
+        "v3_parameter_marketingservices_growth_rate_high_2027_173",
+        "v3_parameter_marketingservices_growth_rate_high_2027_174",
+        "v3_parameter_marketingservices_growth_rate_high_2027_175",
+        "v3_parameter_marketingservices_growth_rate_high_2027_176"
+      ],
+      "linked_source_ids": [
+        "tencent_corporate_overview_sep2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_high_2028",
+      "claim_ids": [
+        "claim_parameter_marketingservices_growth_rate_high_2028_40",
+        "v3_parameter_marketingservices_growth_rate_high_2028_177",
+        "v3_parameter_marketingservices_growth_rate_high_2028_178",
+        "v3_parameter_marketingservices_growth_rate_high_2028_179",
+        "v3_parameter_marketingservices_growth_rate_high_2028_180",
+        "v3_parameter_marketingservices_growth_rate_high_2028_181",
+        "v3_parameter_marketingservices_growth_rate_high_2028_182",
+        "v3_parameter_marketingservices_growth_rate_high_2028_183"
+      ],
+      "linked_source_ids": [
+        "tencent_corporate_overview_sep2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_low_2026",
+      "claim_ids": [
+        "claim_parameter_fintechbusinessservices_growth_rate_low_2026_42",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2026_184",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2026_185",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2026_186",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2026_187",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2026_188",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2026_189"
+      ],
+      "linked_source_ids": [
+        "tencent_corporate_overview_sep2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_low_2027",
+      "claim_ids": [
+        "claim_parameter_fintechbusinessservices_growth_rate_low_2027_43",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2027_190",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2027_191",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2027_192",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2027_193",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2027_194",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2027_195"
+      ],
+      "linked_source_ids": [
+        "tencent_corporate_overview_sep2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_low_2028",
+      "claim_ids": [
+        "claim_parameter_fintechbusinessservices_growth_rate_low_2028_44",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2028_196",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2028_197",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2028_198",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2028_199",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2028_200",
+        "v3_parameter_fintechbusinessservices_growth_rate_low_2028_201"
+      ],
+      "linked_source_ids": [
+        "tencent_corporate_overview_sep2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_base_2026",
+      "claim_ids": [
+        "claim_parameter_fintechbusinessservices_growth_rate_base_2026_45",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2026_202",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2026_203",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2026_204",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2026_205",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2026_206",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2026_207"
+      ],
+      "linked_source_ids": [
+        "tencent_corporate_overview_sep2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_base_2027",
+      "claim_ids": [
+        "claim_parameter_fintechbusinessservices_growth_rate_base_2027_46",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2027_208",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2027_209",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2027_210",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2027_211",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2027_212",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2027_213"
+      ],
+      "linked_source_ids": [
+        "tencent_corporate_overview_sep2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_base_2028",
+      "claim_ids": [
+        "claim_parameter_fintechbusinessservices_growth_rate_base_2028_47",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2028_214",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2028_215",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2028_216",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2028_217",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2028_218",
+        "v3_parameter_fintechbusinessservices_growth_rate_base_2028_219"
+      ],
+      "linked_source_ids": [
+        "tencent_corporate_overview_sep2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_high_2026",
+      "claim_ids": [
+        "claim_parameter_fintechbusinessservices_growth_rate_high_2026_48",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2026_220",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2026_221",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2026_222",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2026_223",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2026_224",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2026_225"
+      ],
+      "linked_source_ids": [
+        "tencent_corporate_overview_sep2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_high_2027",
+      "claim_ids": [
+        "claim_parameter_fintechbusinessservices_growth_rate_high_2027_49",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2027_226",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2027_227",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2027_228",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2027_229",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2027_230",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2027_231"
+      ],
+      "linked_source_ids": [
+        "tencent_corporate_overview_sep2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_high_2028",
+      "claim_ids": [
+        "claim_parameter_fintechbusinessservices_growth_rate_high_2028_50",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2028_232",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2028_233",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2028_234",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2028_235",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2028_236",
+        "v3_parameter_fintechbusinessservices_growth_rate_high_2028_237"
+      ],
+      "linked_source_ids": [
+        "tencent_corporate_overview_sep2026",
+        "tencent_h1_2026_official",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "others_growth_rate_low_2026",
+      "claim_ids": [
+        "claim_parameter_others_growth_rate_low_2026_52"
+      ],
+      "linked_source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "others_growth_rate_low_2027",
+      "claim_ids": [
+        "claim_parameter_others_growth_rate_low_2027_53"
+      ],
+      "linked_source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "others_growth_rate_low_2028",
+      "claim_ids": [
+        "claim_parameter_others_growth_rate_low_2028_54"
+      ],
+      "linked_source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "others_growth_rate_base_2026",
+      "claim_ids": [
+        "claim_parameter_others_growth_rate_base_2026_55"
+      ],
+      "linked_source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "others_growth_rate_base_2027",
+      "claim_ids": [
+        "claim_parameter_others_growth_rate_base_2027_56"
+      ],
+      "linked_source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "others_growth_rate_base_2028",
+      "claim_ids": [
+        "claim_parameter_others_growth_rate_base_2028_57"
+      ],
+      "linked_source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "others_growth_rate_high_2026",
+      "claim_ids": [
+        "claim_parameter_others_growth_rate_high_2026_58"
+      ],
+      "linked_source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "others_growth_rate_high_2027",
+      "claim_ids": [
+        "claim_parameter_others_growth_rate_high_2027_59"
+      ],
+      "linked_source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    },
+    {
+      "parameter_id": "others_growth_rate_high_2028",
+      "claim_ids": [
+        "claim_parameter_others_growth_rate_high_2028_60"
+      ],
+      "linked_source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "all_required_fact_contexts_bound": true,
+      "future_value_is_analyst_assumption": true
+    }
+  ],
+  "context_only_parameters_not_used": [
+    "context_group_largest_customer_revenue_share",
+    "context_group_top5_customer_revenue_share"
+  ],
+  "official_authentication": {
+    "attempts": [
+      {
+        "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+        "captured_at": "2026-10-08T08:24:54.227724+00:00",
+        "route": "independent official original authentication; NOT FF/Dayu acquisition",
+        "max_aggregate_bytes": 41943040,
+        "max_aggregate_seconds": 180,
+        "cost_usd": 0,
+        "status_code": 404,
+        "final_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+        "content_type": "text/html",
+        "bytes": 2057,
+        "sha256": "1d56c1549bda2f9f71b9a6cb09f771c361f1a2d340cadc46053bb55db0c56a2b",
+        "pdf_magic": false,
+        "raw_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\official_auth_0.bin",
+        "same_sha_as_original": false
+      },
+      {
+        "url": "https://www.tencent.com/zh-hk/investors/financial-reports/",
+        "captured_at": "2026-10-08T08:24:54.810196+00:00",
+        "route": "independent official original authentication; NOT FF/Dayu acquisition",
+        "max_aggregate_bytes": 41943040,
+        "max_aggregate_seconds": 180,
+        "cost_usd": 0,
+        "status_code": 200,
+        "final_url": "https://www.tencent.com/zh-hk/investors/financial-reports/",
+        "content_type": "text/html; charset=UTF-8",
+        "bytes": 193637,
+        "sha256": "a15d020198d688deaff63f47610e18951a71382d70e377623e3e4da101fb6fa0",
+        "pdf_magic": false,
+        "raw_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\official_auth_1.bin",
+        "same_sha_as_original": false,
+        "archive_contains_observed_url": true
+      },
+      {
+        "url": "https://static.www.tencent.com/uploads/2026/04/09/5c38a9ec3c5695da42c1534d63e4be0b.pdf",
+        "captured_at": "2026-10-08T08:24:55.158853+00:00",
+        "route": "independent official original authentication; NOT FF/Dayu acquisition",
+        "max_aggregate_bytes": 41943040,
+        "max_aggregate_seconds": 180,
+        "cost_usd": 0,
+        "status_code": 200,
+        "final_url": "https://static.www.tencent.com/uploads/2026/04/09/5c38a9ec3c5695da42c1534d63e4be0b.pdf",
+        "content_type": "text/html",
+        "bytes": 982,
+        "sha256": "0bffc0570f8c2322d91b9c694c3107e0ef84e98624bc263f9f94e71f751173ca",
+        "pdf_magic": false,
+        "raw_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\official_auth_2.bin",
+        "same_sha_as_original": false
+      }
+    ],
+    "aggregate_bytes": 196676,
+    "elapsed_seconds": 1.2983001000102377,
+    "status": "BLOCKED_UNAUTHENTICATED",
+    "exact_publication_date": "UNVERIFIED; dated filename is not proof",
+    "producer_url_update": "NOT_PERFORMED unless separately same-SHA verified"
+  },
+  "date_availability_semantics": [
+    {
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "available_as_of": "2026-10-08",
+      "exact_publication_day": null,
+      "old_assertion": "2026-04-09",
+      "accepted_scope": "local/live availability on cutoff date only; no exact publication or annual sameSHA authentication"
+    },
+    {
+      "source_id": "tencent_h1_2026_official",
+      "available_as_of": "2026-10-08",
+      "exact_publication_day": null,
+      "old_assertion": "2026-08-12",
+      "accepted_scope": "local/live availability on cutoff date only; no exact publication or annual sameSHA authentication"
+    },
+    {
+      "source_id": "tencent_corporate_overview_sep2026",
+      "available_as_of": "2026-10-08",
+      "exact_publication_day": null,
+      "old_assertion": "2026-09-16",
+      "accepted_scope": "local/live availability on cutoff date only; no exact publication or annual sameSHA authentication"
+    }
+  ],
+  "narrative_existing_scope": {
+    "evidence_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\existing_narrative_current_vs_asof.json",
+    "sha256": "e639377ca4938b80a2376481e742dec05bc88bae588d0dbfc4aa618fa6039169",
+    "scope": "MAIN recorded existing MSFT TXT evidence; no new HK Worker and no HK forecast consumption",
+    "current_reads": [
+      49,
+      49
+    ],
+    "asof_refusals": [
+      {
+        "reason": "source_publication_unknown",
+        "schema_version": "narrative-read-receipt/1",
+        "status": "blocked"
+      },
+      {
+        "reason": "source_publication_unknown",
+        "schema_version": "revenue-narrative-refusal/1",
+        "status": "blocked"
+      }
+    ]
+  },
+  "initial_review_unmodified": {
+    "review.md": "f5c49efc0e3c1280ca29236b4dc6c9128df5ab25d3fb474fe438cf7ad085d8e8",
+    "review.json": "c7703c8c50a562bdf7383b13fd3caafc0d4a33409b741e92d91a575e10791683"
+  }
+}

@@ -1,0 +1,1 @@
+{"input_diff": 7, "claims_identical": 325, "parameters_identical": 53, "protected188": "PASS", "runtime51": "PASS", "Games": "limited", "warning_restored": true, "score": 64, "strong": "PASS", "render": "PASS", "snapshot": "PASS", "real_replay": "PASS", "registry": 0, "commands": 9, "traces": 7}

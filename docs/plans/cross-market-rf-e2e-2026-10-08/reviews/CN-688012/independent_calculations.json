@@ -1,0 +1,162 @@
+{
+  "year_rows": [
+    {
+      "scenario": "low",
+      "year": 2026,
+      "segments": {
+        "Equipment": 11438.999999999998,
+        "Aftermarket": 2043.4020949210005,
+        "CMP": 40
+      },
+      "total": 13522.402094920999,
+      "annual_growth": 0.09186895912339232,
+      "status": "PASS"
+    },
+    {
+      "scenario": "low",
+      "year": 2027,
+      "segments": {
+        "Equipment": 11907.0,
+        "Aftermarket": 2136.2840083265,
+        "CMP": 180
+      },
+      "total": 14223.2840083265,
+      "annual_growth": 0.05183116937993959,
+      "status": "PASS"
+    },
+    {
+      "scenario": "low",
+      "year": 2028,
+      "segments": {
+        "Equipment": 12000.0,
+        "Aftermarket": 2229.1659217320002,
+        "CMP": 260
+      },
+      "total": 14489.165921732001,
+      "annual_growth": 0.018693426444262196,
+      "status": "PASS"
+    },
+    {
+      "scenario": "base",
+      "year": 2026,
+      "segments": {
+        "Equipment": 13753.800000000001,
+        "Aftermarket": 2322.0478351375004,
+        "CMP": 120
+      },
+      "total": 16195.847835137502,
+      "annual_growth": 0.30773684983930694,
+      "status": "PASS"
+    },
+    {
+      "scenario": "base",
+      "year": 2027,
+      "segments": {
+        "Equipment": 17404.5,
+        "Aftermarket": 2786.4574021650005,
+        "CMP": 400
+      },
+      "total": 20590.957402165,
+      "annual_growth": 0.27137261425068115,
+      "status": "PASS"
+    },
+    {
+      "scenario": "base",
+      "year": 2028,
+      "segments": {
+        "Equipment": 21000.0,
+        "Aftermarket": 3250.8669691925006,
+        "CMP": 550
+      },
+      "total": 24800.866969192502,
+      "annual_growth": 0.2044542895603707,
+      "status": "PASS"
+    },
+    {
+      "scenario": "high",
+      "year": 2026,
+      "segments": {
+        "Equipment": 16020.0,
+        "Aftermarket": 2507.811661948501,
+        "CMP": 220
+      },
+      "total": 18747.8116619485,
+      "annual_growth": 0.5137956600818487,
+      "status": "PASS"
+    },
+    {
+      "scenario": "high",
+      "year": 2027,
+      "segments": {
+        "Equipment": 22250.0,
+        "Aftermarket": 3250.8669691925006,
+        "CMP": 520
+      },
+      "total": 26020.866969192502,
+      "annual_growth": 0.3879415602411753,
+      "status": "PASS"
+    },
+    {
+      "scenario": "high",
+      "year": 2028,
+      "segments": {
+        "Equipment": 28600.000000000004,
+        "Aftermarket": 4086.804189842001,
+        "CMP": 750
+      },
+      "total": 33436.804189842005,
+      "annual_growth": 0.2849996208592753,
+      "status": "PASS"
+    }
+  ],
+  "segment_year_scenario_count": 27,
+  "sensitivity_tests": [
+    {
+      "parameter_id": "equipment_units_base_2028",
+      "down": 22700.866969192502,
+      "up": 26900.866969192502,
+      "status": "PASS"
+    },
+    {
+      "parameter_id": "equipment_unit_revenue_base_2028",
+      "down": 23750.866969192502,
+      "up": 25850.866969192502,
+      "status": "PASS"
+    },
+    {
+      "parameter_id": "aftermarket_revenue_base_2028",
+      "down": 24150.693575354002,
+      "up": 25451.040363031003,
+      "status": "PASS"
+    },
+    {
+      "parameter_id": "cmp_revenue_base_2028",
+      "down": 24635.866969192502,
+      "up": 24965.866969192502,
+      "status": "PASS"
+    }
+  ],
+  "driver_allocations": [
+    {
+      "driver_id": "core_etch_acceptance",
+      "increment": 7854.75,
+      "status": "PASS"
+    },
+    {
+      "driver_id": "films_packaging",
+      "increment": 2618.25,
+      "status": "PASS"
+    },
+    {
+      "driver_id": "afterm_support",
+      "increment": 1393.2287010825003,
+      "status": "PASS"
+    },
+    {
+      "driver_id": "cmp_ramp",
+      "increment": 550.0,
+      "status": "PASS"
+    }
+  ],
+  "all_status": "PASS"
+}

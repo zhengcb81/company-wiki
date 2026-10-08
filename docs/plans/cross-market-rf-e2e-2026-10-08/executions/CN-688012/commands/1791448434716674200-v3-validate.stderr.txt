@@ -1,0 +1,5 @@
+error: 2 validation problem(s) found:
+[research_coverage]
+  - demand.parameter_ids contains duplicates
+[management_targets]
+  - management target claim period mismatch: LingangPhaseII_local_sales_at_maturity

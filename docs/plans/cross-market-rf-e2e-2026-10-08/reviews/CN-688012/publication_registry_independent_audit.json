@@ -1,0 +1,19 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "C:/Users/郑曾波/Projects/revenue-forecast/scripts/publication_registry.py",
+    "audit",
+    "--result",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\forecast.json",
+    "--result",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\snapshot_v2.json"
+  ],
+  "registry": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\publications.jsonl",
+  "registry_sha256": "a6596924e9ad1657b0d0c10d54ac6018e4e69d20104872574136d613390cb3c3",
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "",
+  "status": "PASS",
+  "runtime_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68"
+}

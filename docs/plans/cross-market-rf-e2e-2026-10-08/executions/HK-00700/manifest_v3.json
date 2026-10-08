@@ -1,0 +1,171 @@
+{
+  "schema_version": "1.0",
+  "company": "Tencent Holdings Limited",
+  "market": "HK",
+  "security_id": "00700",
+  "agent_id": "/root/rf_hk_execution",
+  "as_of_date": "2026-10-08",
+  "status": "partial_pending_independent_review",
+  "output_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3",
+  "primary_artifacts": [
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\input.json",
+      "sha256": "c791b85406f62552e9eb9cba2a1adf8cbf36447ff432164c9e53a8426814fc87",
+      "bytes": 524854,
+      "role": "independently repaired input"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\forecast.json",
+      "sha256": "3ea402d2494e1a754de8cb1f406797d1d3f366622d4c3c6cc8621d18a7524f61",
+      "bytes": 1094149,
+      "role": "actual RF validated result"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\forecast.md",
+      "sha256": "cf4ea50602e2ad79037e666ee6e390421fe5b1f6d57f46dfa9c87c55e176a7d5",
+      "bytes": 170196,
+      "role": "same JSON deterministic render"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\snapshot.json",
+      "sha256": "20c2657a8f2bfeb2d999665c7219a0164f93bb5f9feb38689f0376ff997573d2",
+      "bytes": 1686000,
+      "role": "immutable v3 snapshot"
+    }
+  ],
+  "registry": {
+    "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\publications.jsonl",
+    "sha256": "596fcf974f7174f714e400478394626b1868d92a3ac2c3501b17d5ff042c146b",
+    "bytes": 2286,
+    "role": "own append-only registry"
+  },
+  "runtime_inventory_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_runtime_inventory.json",
+  "runtime_version": "4.1.0",
+  "schema_version_runtime": "3.7",
+  "current_registry_runtime_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+  "source_capture_receipts_preserved": true,
+  "sources": [
+    {
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "raw_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "capture_receipt_sha256": "8b292acee306c6bb586f6012a8ffa37a9549958cc16a56eb72504c0ce802d3c0",
+      "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+      "published_date_field": "2026-10-08",
+      "date_uncertainty": {
+        "state": "exact_publication_date_unverified",
+        "previous_date_assertion": "2026-04-09",
+        "previous_assertion_limitation": "legacy producer date, same-SHA official authentication remains blocked",
+        "available_as_of": "2026-10-08",
+        "actual_read_date": "2026-10-08",
+        "date_semantics": "available_as_of_upper_bound",
+        "evidence": "sealed independent review live original reads; RF verified-open for local FY2025 original",
+        "exact_publication_day": null
+      },
+      "scope": "actual RF→FF→CWP raw reuse"
+    },
+    {
+      "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+      "raw_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+      "capture_receipt_sha256": "2cf438706deca7768a02c1df58beec89c723e68a527034e0634b77b9683c3af3",
+      "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0408/2025040800668_c.pdf",
+      "published_date_field": "2025-04-08",
+      "date_uncertainty": null,
+      "scope": "actual RF→FF→CWP raw reuse"
+    },
+    {
+      "source_id": "tencent_h1_2026_official",
+      "raw_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "published_date_field": "2026-10-08",
+      "date_uncertainty": {
+        "state": "exact_publication_date_unverified",
+        "previous_date_assertion": "2026-08-12",
+        "previous_assertion_limitation": "board/management signoff date and Q2 release date do not establish the whole interim-book public day",
+        "available_as_of": "2026-10-08",
+        "actual_read_date": "2026-10-08",
+        "date_semantics": "available_as_of_upper_bound",
+        "evidence": "sealed independent review live original reads; RF verified-open for local FY2025 original",
+        "exact_publication_day": null
+      },
+      "scope": "independent website supplement"
+    },
+    {
+      "source_id": "tencent_results_2q2026",
+      "raw_sha256": "64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+      "capture_receipt_sha256": "9068f7374928d666befc1b7f5f25f5cab62235a46d806b0fb83bd9f55404ba79",
+      "url": "https://www.tencent.com/wp-content/uploads/2026/08/Tencent-Announces-2026-Second-Quarter-Results.pdf",
+      "published_date_field": "2026-08-12",
+      "date_uncertainty": null,
+      "scope": "independent website supplement"
+    },
+    {
+      "source_id": "netease_results_2q2026",
+      "raw_sha256": "ba4cd2d0507d5d3211d642a8f6d45aba11e0ac245f5757d58e525223ebde4c98",
+      "capture_receipt_sha256": "7a87d437df109393b0b0de1ddb87a86380c1c9db5c99a1a6a6e90190c1a90e5e",
+      "url": "https://ir.netease.com/news-releases/news-release-details/netease-announces-second-quarter-and-interim-2026-unaudited",
+      "published_date_field": "2026-08-20",
+      "date_uncertainty": null,
+      "scope": "independent website supplement"
+    },
+    {
+      "source_id": "tencent_corporate_overview_sep2026",
+      "raw_sha256": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+      "capture_receipt_sha256": "9e85da3ec4a921f92e747e7849b05f500e832c274b5b076161f2ba0a7db10b2a",
+      "url": "https://www.tencent.com/wp-content/uploads/2026/09/Corporate-Overview-2Q26-20260916.pdf",
+      "published_date_field": "2026-10-08",
+      "date_uncertainty": {
+        "state": "exact_publication_date_unverified",
+        "previous_date_assertion": "2026-09-16",
+        "previous_assertion_limitation": "official filename assertion, not independently verified primary publication timestamp",
+        "available_as_of": "2026-10-08",
+        "actual_read_date": "2026-10-08",
+        "date_semantics": "available_as_of_upper_bound",
+        "evidence": "sealed independent review live original reads; RF verified-open for local FY2025 original",
+        "exact_publication_day": null
+      },
+      "scope": "independent website supplement"
+    }
+  ],
+  "repair_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.json",
+  "repair_markdown_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\repair_v3.md",
+  "claim_binding_index_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_claim_binding_index.json",
+  "verification_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\v3_delivery_verification.json",
+  "unchanged_old_bytes_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\after_v3_integrity.json",
+  "unchanged_old_artifact_count": 133,
+  "old_manifest": {
+    "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\manifest.json",
+    "sha256": "0dec67f2c9e4a08499c05d94cc5b343763322dbe5f9d73e47bfb3825b4055b96",
+    "bytes": 31389,
+    "role": "immutable previous execution manifest"
+  },
+  "command_index": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\commands\\index.jsonl",
+  "process_trace_dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\processes",
+  "environment": {
+    "REVENUE_PUBLICATION_REGISTRY": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\v3\\publications.jsonl",
+    "CWP_AUDIT_PROCESS_DIR": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\processes",
+    "PYTHONPATH_prefix": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\process_trace"
+  },
+  "full_pipeline_status": {
+    "local_raw_virtual_reuse": "PASS from actual earlier receipts; unchanged bytes",
+    "deterministic_local_parse": "PASS in ownedTEMP",
+    "RF_formal_model": "PASS execution verification, independent acceptance pending",
+    "Dayu_bounded_missing_download": "BLOCKED",
+    "ET_latest_call": "NOT_AVAILABLE;provider_calls0/child0",
+    "all_announcements": "PARTIAL",
+    "CWP_canonical_Worker": "BLOCKED/not demonstrated",
+    "FY2025_sameSHA_official_authentication": "BLOCKED",
+    "exact_full_H1_and_Corporate_publication_days": "UNKNOWN, explicit conservative asof bounds"
+  },
+  "calls_and_cost": {
+    "v3_official_HTTP_requests": 3,
+    "v3_official_HTTP_bytes": 196676,
+    "paid_LLM_calls": 0,
+    "FMP_provider_calls": 0,
+    "provider_cost_usd": 0
+  },
+  "independent_review": "REQUIRED, never executor signed",
+  "ended_at": "2026-10-08T08:38:32.364412+00:00",
+  "step_matrix_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\skill_step_matrix_v3.json",
+  "facts_index_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\HK-00700\\fact_checks_v3.json"
+}

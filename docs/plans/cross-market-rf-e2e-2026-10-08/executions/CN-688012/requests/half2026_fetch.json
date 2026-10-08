@@ -1,0 +1,16 @@
+{
+  "schema_version": "2.0",
+  "company_query": "688012",
+  "market": "CN",
+  "document_kind": "semi_annual_report",
+  "mode": "exact",
+  "fiscal_year": 2026,
+  "as_of_date": "2026-10-08",
+  "filing_intent": "fetch_if_missing",
+  "fiscal_period": "H1",
+  "acquisition_limits": {
+    "max_bytes": 41943040,
+    "timeout_seconds": 180,
+    "max_cost_usd": "0.00"
+  }
+}

@@ -1,0 +1,1050 @@
+{
+  "schema_version": "1.0",
+  "company": "中微公司",
+  "market": "CN",
+  "security_id": "688012",
+  "agent_id": "rf_cn_execution",
+  "as_of_date": "2026-10-08",
+  "ended_at": "2026-10-08T08:41:52.932789+00:00",
+  "skill_root": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+  "runtime_version": "4.1.0",
+  "runtime_file_sha256": [
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+      "sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_forecast.py",
+      "repo_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "installed_repo_equal": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_core.py",
+      "sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_core.py",
+      "repo_sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "installed_repo_equal": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_report.py",
+      "sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_report.py",
+      "repo_sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+      "installed_repo_equal": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_backtest.py",
+      "sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_backtest.py",
+      "repo_sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "installed_repo_equal": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+      "sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+      "repo_sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+      "installed_repo_equal": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_source_v2.py",
+      "sha256": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_source_v2.py",
+      "repo_sha256": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+      "installed_repo_equal": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\publication_registry.py",
+      "sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\publication_registry.py",
+      "repo_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+      "installed_repo_equal": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\lint_input.py",
+      "sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\lint_input.py",
+      "repo_sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "installed_repo_equal": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\fix_hashes.py",
+      "sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "repo_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\fix_hashes.py",
+      "repo_sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "installed_repo_equal": true
+    }
+  ],
+  "output_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3",
+  "status": "partial",
+  "formal_forecast_status": "complete and execution validated; independent closure pending",
+  "step_matrix_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\skill_step_matrix_v3.json",
+  "command_index": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\index.jsonl",
+  "sources": [
+    {
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "source_type": "regulatory_filing",
+      "title": "中微公司：2025年年度报告",
+      "publisher": "company-wiki",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-03-31/1225062431.PDF",
+      "published_date": "2026-03-31",
+      "accessed_date": "2026-10-08",
+      "page_or_section": "1",
+      "capture": {
+        "capture_schema_version": "1.0",
+        "capture_method": "local_document",
+        "tool_name": "company-wiki-source-version-reader",
+        "tool_call_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5|2026-10-08T07:17:00.503877+00:00",
+        "captured_date": "2026-10-08",
+        "snapshot_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "content_treatment": "untrusted_data_only",
+        "prompt_injection_status": "not_reviewed",
+        "host_receipt": {
+          "host_receipt_schema_version": "1.0",
+          "issuer": "company-wiki",
+          "environment": "host-runtime",
+          "tool_name": "company-wiki-source-version-reader",
+          "action": "verified_read",
+          "event_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "timestamp": "2026-10-08T07:17:00.503877+00:00",
+          "receipt_sha256": "0c5a73371223b534dd19e9002dd82a1a1a349279e4654d67ba21a12faaa5acf8"
+        },
+        "receipt_sha256": "e1cf7af1ac2f6e19dae2a55acb9cf07b44507ec46793a8895e5f98922d4873c1"
+      },
+      "original_artifact": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\annual2025.pdf"
+    },
+    {
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "source_type": "regulatory_filing",
+      "title": "2026年半年度报告",
+      "publisher": "company-wiki",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482884.PDF",
+      "published_date": "2026-08-20",
+      "accessed_date": "2026-10-08",
+      "page_or_section": "1",
+      "capture": {
+        "capture_schema_version": "1.0",
+        "capture_method": "local_document",
+        "tool_name": "company-wiki-source-version-reader",
+        "tool_call_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe|2026-10-08T08:28:21.490140+00:00",
+        "captured_date": "2026-10-08",
+        "snapshot_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "content_treatment": "untrusted_data_only",
+        "prompt_injection_status": "not_reviewed",
+        "host_receipt": {
+          "host_receipt_schema_version": "1.0",
+          "issuer": "company-wiki",
+          "environment": "host-runtime",
+          "tool_name": "company-wiki-source-version-reader",
+          "action": "verified_read",
+          "event_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+          "timestamp": "2026-10-08T08:28:21.490140+00:00",
+          "receipt_sha256": "981f6f0796509dd41a72d6eb0eb079ea0c0204f6f029de5709b93449ea0bcb30"
+        },
+        "receipt_sha256": "bf2e72ecf85ce2ff7f4527ceaa24c80dea4da350205a1cfc944c88ecda4419ae"
+      },
+      "original_artifact": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\half2026.pdf"
+    },
+    {
+      "source_id": "semi_wfe_20260714",
+      "source_type": "industry_association",
+      "title": "SEMI Mid-Year Semiconductor Equipment Forecast",
+      "publisher": "SEMI",
+      "url": "https://www.semi.org/en/semi-press-release/global-semiconductor-equipment-sales-forecast-to-reach-a-record-229-billion-dollars-in-2028-semi-reports",
+      "published_date": "2026-07-14",
+      "accessed_date": "2026-10-08",
+      "page_or_section": "WFE Sales and Regional Outlook",
+      "capture": {
+        "capture_schema_version": "1.0",
+        "capture_method": "browser_open",
+        "tool_name": "web.run",
+        "tool_call_id": "turn234view0",
+        "captured_date": "2026-10-08",
+        "snapshot_sha256": "3da627dd2754e73dc70e974dccfdb356e09de9d92d594da2c8879a4e7a2a0e8d",
+        "content_treatment": "untrusted_data_only",
+        "prompt_injection_status": "not_reviewed",
+        "host_receipt": {
+          "host_receipt_schema_version": "1.0",
+          "issuer": "rf_cn_execution",
+          "environment": "Codex local logged tools; unsigned",
+          "tool_name": "web.run",
+          "action": "capture_open",
+          "event_sha256": "ab1c602ae6351ae222c1b604c6ee149b360e68b63710322ab94c89ad07290d8d",
+          "timestamp": "2026-10-08T07:48:05.667565+00:00",
+          "receipt_sha256": "d10090fba7902d1dc1bcf0c1f6767d468ca171053f5a855edefa67be215e5b9d"
+        },
+        "receipt_sha256": "036e4279c1a43d78abe00a3cefe7e13b11041e0f8608b630928a5baa7508330d"
+      },
+      "original_artifact": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\semi_web_open_snapshot.json"
+    },
+    {
+      "source_id": "amec_sse_results_qa_20260910",
+      "source_type": "company_release",
+      "title": "中微公司2026半年度业绩说明会官方网络问答",
+      "publisher": "中微公司 / 上证路演中心",
+      "url": "https://roadshow.sseinfo.com/activityDetails/40766",
+      "published_date": "2026-09-10",
+      "accessed_date": "2026-10-08",
+      "page_or_section": "Official public API, all195 interactive replies; 8 AMEC records",
+      "capture": {
+        "capture_schema_version": "1.0",
+        "capture_method": "api_response",
+        "tool_name": "urllib.request",
+        "tool_call_id": "1791445202091909100-roadshow-public-real-urlencoding",
+        "captured_date": "2026-10-08",
+        "snapshot_sha256": "520684e158f0f10191be84c435cb5600fff0a6cbea8d41442dfee9647d497d6f",
+        "content_treatment": "untrusted_data_only",
+        "prompt_injection_status": "not_reviewed",
+        "host_receipt": {
+          "host_receipt_schema_version": "1.0",
+          "issuer": "rf_cn_execution",
+          "environment": "unsigned logged official API response",
+          "tool_name": "urllib.request",
+          "action": "bounded_official_api_read",
+          "event_sha256": "f68bf874d99e4f975d52f90fa998cc9e0f8b19e284f749dd43a4966b731bc17b",
+          "timestamp": "2026-10-08T07:40:10.937989+00:00",
+          "receipt_sha256": "8fbf432117fd67b554a33a9ecb8707da63376dcd6f7a746fa42266f609404c87"
+        },
+        "receipt_sha256": "6d501f42b3b2e2040860337f58d83621ed7e57704948ec3d01ff2caba5fcb6f8"
+      },
+      "original_artifact": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\roadshow_public_questions.json"
+    },
+    {
+      "source_id": "amec_cninfo_1225582793",
+      "source_type": "company_release",
+      "title": "关于参与设立私募投资基金暨关联交易进展的公告",
+      "publisher": "中微公司董事会",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-09-25/1225582793.PDF",
+      "published_date": "2026-09-25",
+      "accessed_date": "2026-10-08",
+      "page_or_section": "Complete original official disclosure PDF; deterministic local parse, no Worker/LLM",
+      "capture": {
+        "capture_schema_version": "1.0",
+        "capture_method": "api_response",
+        "tool_name": "SID.fetch_pdf",
+        "tool_call_id": "1791447960515666300-v3-official-material-announcements",
+        "captured_date": "2026-10-08",
+        "snapshot_sha256": "13675a986cfc976f3ea9d8f4abe82d1ae8058904b556620e0439269cceda9566",
+        "content_treatment": "untrusted_data_only",
+        "prompt_injection_status": "not_reviewed",
+        "host_receipt": {
+          "host_receipt_schema_version": "1.0",
+          "issuer": "rf_cn_execution",
+          "environment": "unsigned actual logged SID public HTTP transport",
+          "tool_name": "SID.fetch_pdf",
+          "action": "capture_official_pdf",
+          "event_sha256": "2294724ef79cca3763db5046e2632c8177034abcf30ea107e10232516c939eb7",
+          "timestamp": "2026-10-08T08:26:01.542040+00:00",
+          "receipt_sha256": "12ac2f327e2e403606c738f9088fdbecd6ab6ecb05b6dbb805780bc2b201a05e"
+        },
+        "receipt_sha256": "3eafb67c354b8e2ad276134077c63b13e66a00c4b5672fd7475e93ea81a33ba4"
+      },
+      "original_artifact": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225582793.pdf"
+    },
+    {
+      "source_id": "amec_cninfo_1225482911",
+      "source_type": "company_release",
+      "title": "关于公司部分募投项目结项并将节余募集资金永久补充流动资金及部分募投项目延期的公告",
+      "publisher": "中微公司董事会",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482911.PDF",
+      "published_date": "2026-08-20",
+      "accessed_date": "2026-10-08",
+      "page_or_section": "Complete original official disclosure PDF; deterministic local parse, no Worker/LLM",
+      "capture": {
+        "capture_schema_version": "1.0",
+        "capture_method": "api_response",
+        "tool_name": "SID.fetch_pdf",
+        "tool_call_id": "1791447960515666300-v3-official-material-announcements",
+        "captured_date": "2026-10-08",
+        "snapshot_sha256": "9a9e6584fdee35342059b37c5645c3b55d143f3145af595c77f82230c0ccc0c3",
+        "content_treatment": "untrusted_data_only",
+        "prompt_injection_status": "not_reviewed",
+        "host_receipt": {
+          "host_receipt_schema_version": "1.0",
+          "issuer": "rf_cn_execution",
+          "environment": "unsigned actual logged SID public HTTP transport",
+          "tool_name": "SID.fetch_pdf",
+          "action": "capture_official_pdf",
+          "event_sha256": "b83a41a33ebfffdd256ae51cbc660ebd0f36b1561e918908afb04e0f2968c70e",
+          "timestamp": "2026-10-08T08:26:01.719083+00:00",
+          "receipt_sha256": "4c012504c00aa570d1b6e91d8d2effa9d049ddeaa564159d22e79f1d5a5c4f90"
+        },
+        "receipt_sha256": "7365c8ab5d70728211a1e948a86eb142a5b9977971bca173a248907f227c6925"
+      },
+      "original_artifact": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482911.pdf"
+    },
+    {
+      "source_id": "amec_cninfo_1225482918",
+      "source_type": "company_release",
+      "title": "关于使用部分募集资金向子公司提供借款以实施募投项目的公告",
+      "publisher": "中微公司董事会",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482918.PDF",
+      "published_date": "2026-08-20",
+      "accessed_date": "2026-10-08",
+      "page_or_section": "Complete original official disclosure PDF; deterministic local parse, no Worker/LLM",
+      "capture": {
+        "capture_schema_version": "1.0",
+        "capture_method": "api_response",
+        "tool_name": "SID.fetch_pdf",
+        "tool_call_id": "1791447960515666300-v3-official-material-announcements",
+        "captured_date": "2026-10-08",
+        "snapshot_sha256": "4b34335aa53528abe783eeea0af05bfc38e74a3c76fc7acfbc8be9b5f3acfaca",
+        "content_treatment": "untrusted_data_only",
+        "prompt_injection_status": "not_reviewed",
+        "host_receipt": {
+          "host_receipt_schema_version": "1.0",
+          "issuer": "rf_cn_execution",
+          "environment": "unsigned actual logged SID public HTTP transport",
+          "tool_name": "SID.fetch_pdf",
+          "action": "capture_official_pdf",
+          "event_sha256": "3a41d065a8fe369644867233d36aca7028f67e33fd29fff8e0260daad03db199",
+          "timestamp": "2026-10-08T08:26:02.241885+00:00",
+          "receipt_sha256": "db5769c0d1a3f509d9dbf99c57ed7a54cd895c244c8447ff2ae084f0dfcb9c8d"
+        },
+        "receipt_sha256": "503de7be48aa35d9b92c9d30857734e8a39bd34bec26d75343bce40085b0419e"
+      },
+      "original_artifact": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482918.pdf"
+    },
+    {
+      "source_id": "amec_cninfo_1225482917",
+      "source_type": "company_release",
+      "title": "关于增加2026年度日常关联交易预计额度的公告",
+      "publisher": "中微公司董事会",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482917.PDF",
+      "published_date": "2026-08-20",
+      "accessed_date": "2026-10-08",
+      "page_or_section": "Complete original official disclosure PDF; deterministic local parse, no Worker/LLM",
+      "capture": {
+        "capture_schema_version": "1.0",
+        "capture_method": "api_response",
+        "tool_name": "SID.fetch_pdf",
+        "tool_call_id": "1791447960515666300-v3-official-material-announcements",
+        "captured_date": "2026-10-08",
+        "snapshot_sha256": "b7b72c3e07eccad9a2781a928ce135851ef37ef3c1ff8ba1aae6aae96c605685",
+        "content_treatment": "untrusted_data_only",
+        "prompt_injection_status": "not_reviewed",
+        "host_receipt": {
+          "host_receipt_schema_version": "1.0",
+          "issuer": "rf_cn_execution",
+          "environment": "unsigned actual logged SID public HTTP transport",
+          "tool_name": "SID.fetch_pdf",
+          "action": "capture_official_pdf",
+          "event_sha256": "d8539097fdc7164c01ebc458534bbf2ac55b79aab7540b45476dcafc69db5b97",
+          "timestamp": "2026-10-08T08:26:02.417484+00:00",
+          "receipt_sha256": "cabd548a738977e3ab4f23022b99548554dd4abbe691c3a0c66316111e854905"
+        },
+        "receipt_sha256": "585b45b9947e0be656e9d42d2062adab264afab896108de1ea9162a5e3fa0747"
+      },
+      "original_artifact": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482917.pdf"
+    },
+    {
+      "source_id": "amec_cninfo_1225482894",
+      "source_type": "company_release",
+      "title": "关于对外投资的公告",
+      "publisher": "中微公司董事会",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482894.PDF",
+      "published_date": "2026-08-20",
+      "accessed_date": "2026-10-08",
+      "page_or_section": "Complete original official disclosure PDF; deterministic local parse, no Worker/LLM",
+      "capture": {
+        "capture_schema_version": "1.0",
+        "capture_method": "api_response",
+        "tool_name": "SID.fetch_pdf",
+        "tool_call_id": "1791447960515666300-v3-official-material-announcements",
+        "captured_date": "2026-10-08",
+        "snapshot_sha256": "74fc4afd9a509136b96a8e38f12b30192a48c3d44f8a2174b97abbce18ee6d03",
+        "content_treatment": "untrusted_data_only",
+        "prompt_injection_status": "not_reviewed",
+        "host_receipt": {
+          "host_receipt_schema_version": "1.0",
+          "issuer": "rf_cn_execution",
+          "environment": "unsigned actual logged SID public HTTP transport",
+          "tool_name": "SID.fetch_pdf",
+          "action": "capture_official_pdf",
+          "event_sha256": "7374a1b4777639156b56e5c6fe834f991db758dc5aceb8cab908cff2facaf8c7",
+          "timestamp": "2026-10-08T08:26:02.592504+00:00",
+          "receipt_sha256": "141893769dc19977b50c205f153296f89284d535bb08e8b9b0a5561fee9a4780"
+        },
+        "receipt_sha256": "2ff65f9803588a8b2951abbe3b55894c0d8f6aa0d69fe5278743968eb012a7b7"
+      },
+      "original_artifact": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482894.pdf"
+    },
+    {
+      "source_id": "amec_cninfo_1225482893",
+      "source_type": "company_release",
+      "title": "关于使用募集资金置换预先投入募投项目及支付发行费用的自筹资金的公告",
+      "publisher": "中微公司董事会",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482893.PDF",
+      "published_date": "2026-08-20",
+      "accessed_date": "2026-10-08",
+      "page_or_section": "Complete original official disclosure PDF; deterministic local parse, no Worker/LLM",
+      "capture": {
+        "capture_schema_version": "1.0",
+        "capture_method": "api_response",
+        "tool_name": "SID.fetch_pdf",
+        "tool_call_id": "1791447960515666300-v3-official-material-announcements",
+        "captured_date": "2026-10-08",
+        "snapshot_sha256": "a2e4d45ff51d85162531eaa11e68f2f7fef2dd4018d1ad8845ac522ea20f8471",
+        "content_treatment": "untrusted_data_only",
+        "prompt_injection_status": "not_reviewed",
+        "host_receipt": {
+          "host_receipt_schema_version": "1.0",
+          "issuer": "rf_cn_execution",
+          "environment": "unsigned actual logged SID public HTTP transport",
+          "tool_name": "SID.fetch_pdf",
+          "action": "capture_official_pdf",
+          "event_sha256": "e49de2de7402ceab14453ebe1e56799d01ad6eff20d2ef7392fc48e54e2831e7",
+          "timestamp": "2026-10-08T08:26:02.757827+00:00",
+          "receipt_sha256": "ce7f8b8ee6f3753e100120c30e917832f68f157c4df77ec3fff6bdb8aee2a9dd"
+        },
+        "receipt_sha256": "a776c1a2aca6038096a9c77967da999e358824a932002bd28e80556c84cba359"
+      },
+      "original_artifact": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482893.pdf"
+    },
+    {
+      "source_id": "amec_cninfo_1225482882",
+      "source_type": "company_release",
+      "title": "关于公司募集资金存放、管理与实际使用情况的专项报告",
+      "publisher": "中微公司董事会",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482882.PDF",
+      "published_date": "2026-08-20",
+      "accessed_date": "2026-10-08",
+      "page_or_section": "Complete original official disclosure PDF; deterministic local parse, no Worker/LLM",
+      "capture": {
+        "capture_schema_version": "1.0",
+        "capture_method": "api_response",
+        "tool_name": "SID.fetch_pdf",
+        "tool_call_id": "1791447960515666300-v3-official-material-announcements",
+        "captured_date": "2026-10-08",
+        "snapshot_sha256": "231e464bb176196daff17f0f7281ee8a3c656ae5e92f29f15285dbe371e7e73a",
+        "content_treatment": "untrusted_data_only",
+        "prompt_injection_status": "not_reviewed",
+        "host_receipt": {
+          "host_receipt_schema_version": "1.0",
+          "issuer": "rf_cn_execution",
+          "environment": "unsigned actual logged SID public HTTP transport",
+          "tool_name": "SID.fetch_pdf",
+          "action": "capture_official_pdf",
+          "event_sha256": "691c2704b17f4e780a3d1dd005135b3ec87f9684594a23bef93da9fc8d1d0d09",
+          "timestamp": "2026-10-08T08:26:02.967583+00:00",
+          "receipt_sha256": "693c45f136aaefde566a61aaeb566bf8ce105c53708941971547ddedecd9f243"
+        },
+        "receipt_sha256": "4d288b9c2b22f118c79b92af49bac219ed626cef6edc0ed865fe57c0d6c2bec6"
+      },
+      "original_artifact": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482882.pdf"
+    },
+    {
+      "source_id": "amec_cninfo_1225482880",
+      "source_type": "company_release",
+      "title": "2026年度“提质增效重回报”专项行动方案的半年度评估报告",
+      "publisher": "中微公司董事会",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482880.PDF",
+      "published_date": "2026-08-20",
+      "accessed_date": "2026-10-08",
+      "page_or_section": "Complete original official disclosure PDF; deterministic local parse, no Worker/LLM",
+      "capture": {
+        "capture_schema_version": "1.0",
+        "capture_method": "api_response",
+        "tool_name": "SID.fetch_pdf",
+        "tool_call_id": "1791447960515666300-v3-official-material-announcements",
+        "captured_date": "2026-10-08",
+        "snapshot_sha256": "f05bb880cd2324cf1b0cbb06780a00003c4846438d09b4e3825de710af0067aa",
+        "content_treatment": "untrusted_data_only",
+        "prompt_injection_status": "not_reviewed",
+        "host_receipt": {
+          "host_receipt_schema_version": "1.0",
+          "issuer": "rf_cn_execution",
+          "environment": "unsigned actual logged SID public HTTP transport",
+          "tool_name": "SID.fetch_pdf",
+          "action": "capture_official_pdf",
+          "event_sha256": "334610355325e80cb469157087f4452c342211b1985bfea3461cddf5f85673b8",
+          "timestamp": "2026-10-08T08:26:03.196553+00:00",
+          "receipt_sha256": "67f07f8a9b2f71394115d6c9269883c21a040cbd8cf557bb07a56ccf86e1e45a"
+        },
+        "receipt_sha256": "411c51032f0681973df47c215b63649d604dd9fa9583aa8660491a2b1cd66723"
+      },
+      "original_artifact": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482880.pdf"
+    }
+  ],
+  "artifacts": [
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482880.pdf",
+      "sha256": "f05bb880cd2324cf1b0cbb06780a00003c4846438d09b4e3825de710af0067aa",
+      "bytes": 309696,
+      "role": "original_pdf"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482880_pages.json",
+      "sha256": "eb924faa49b36d6003799f78163333248725efb3a09e94cc64026e991b1e0b53",
+      "bytes": 20922,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482882.pdf",
+      "sha256": "231e464bb176196daff17f0f7281ee8a3c656ae5e92f29f15285dbe371e7e73a",
+      "bytes": 214671,
+      "role": "original_pdf"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482882_pages.json",
+      "sha256": "5ef968b0588cbd6463c1b4ca661237ef3d90af423a701ac2631ae354094fdc1f",
+      "bytes": 29577,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482893.pdf",
+      "sha256": "a2e4d45ff51d85162531eaa11e68f2f7fef2dd4018d1ad8845ac522ea20f8471",
+      "bytes": 131468,
+      "role": "original_pdf"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482893_pages.json",
+      "sha256": "6579f5c0e962b4ab0b35535533a99f317023f4151458ee01ff9ac393cb28a2db",
+      "bytes": 5903,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482894.pdf",
+      "sha256": "74fc4afd9a509136b96a8e38f12b30192a48c3d44f8a2174b97abbce18ee6d03",
+      "bytes": 131654,
+      "role": "original_pdf"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482894_pages.json",
+      "sha256": "6f9da39cb4f7443e7360a6ff5fd95d3867581dadf42f70043d902572c13b540b",
+      "bytes": 8045,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482911.pdf",
+      "sha256": "9a9e6584fdee35342059b37c5645c3b55d143f3145af595c77f82230c0ccc0c3",
+      "bytes": 160451,
+      "role": "original_pdf"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482911_pages.json",
+      "sha256": "6b9477291617e7977d42a7c832a0287c082182658935b2ff2225f32708df2f09",
+      "bytes": 9629,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482916.pdf",
+      "sha256": "16cd0b8ebdb8e2d4c42d14b120087216278a9938d863fadc54b669835a7f3f4b",
+      "bytes": 456202,
+      "role": "original_pdf"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482916_pages.json",
+      "sha256": "70a95f706d25276e44644aa6a550cb6ac3875b6f93ce69b0710325b359d160bf",
+      "bytes": 9740,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482917.pdf",
+      "sha256": "b7b72c3e07eccad9a2781a928ce135851ef37ef3c1ff8ba1aae6aae96c605685",
+      "bytes": 141036,
+      "role": "original_pdf"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482917_pages.json",
+      "sha256": "3d91ae3278fb0c611577f816f321ed10719837f5c3286db943c42f6ca5945815",
+      "bytes": 5986,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482918.pdf",
+      "sha256": "4b34335aa53528abe783eeea0af05bfc38e74a3c76fc7acfbc8be9b5f3acfaca",
+      "bytes": 128476,
+      "role": "original_pdf"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225482918_pages.json",
+      "sha256": "2e121b3e21490178ac26ff1fa97031487b3d142f216ce106601d12703e1a2e08",
+      "bytes": 7400,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225582793.pdf",
+      "sha256": "13675a986cfc976f3ea9d8f4abe82d1ae8058904b556620e0439269cceda9566",
+      "bytes": 131041,
+      "role": "original_pdf"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\announcements\\1225582793_pages.json",
+      "sha256": "e1e9edf293fea4435100f58cb76bce36a58bb8f93b648d80ab80f6b597a89f11",
+      "bytes": 5475,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\forecast.json",
+      "sha256": "1913f5e376590c9a5d77999f8d9c4072a3114e5fc58288ac25f11b31b4ebdea1",
+      "bytes": 614314,
+      "role": "formal_forecast"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\forecast.md",
+      "sha256": "890795ee5cb5706834d81a8fea85a840fa7f765bbe51717ea550faf1098871eb",
+      "bytes": 108159,
+      "role": "formal_markdown"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\input.json",
+      "sha256": "478ae3345e6011079929c05f01b8adec959c974581c703239271c1f9ba4e7ea4",
+      "bytes": 288840,
+      "role": "formal_input"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\publications.jsonl",
+      "sha256": "3767a08d72cf31c66fa153aebc7341207768afd1646876fe1aba5c8998a17947",
+      "bytes": 2286,
+      "role": "isolated_publication_registry"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\snapshot.json",
+      "sha256": "bd7ec3a23f2331f48e937be62e1d960e687f9c9ae10a4e6c70a305f67f423741",
+      "bytes": 938504,
+      "role": "immutable_snapshot"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\announcement_triage_v3.json",
+      "sha256": "026852db31ca7af96e7cf386999bde1347f41efb7591733724664c6d319d8b23",
+      "bytes": 14390,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791447950172428200-v3-protect-originals.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791447950172428200-v3-protect-originals.stdout.txt",
+      "sha256": "3db748389c6bc88fe011a313740a849761d92f643f75d8b36f010efaacb6dc59",
+      "bytes": 1095,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791447960515666300-v3-official-material-announcements.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791447960515666300-v3-official-material-announcements.stdout.txt",
+      "sha256": "73c5a3803fb73c56568f07288b2d4f961be61ff9ff5f28c47d64daef2837fddc",
+      "bytes": 9547,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448071698723100-v3-prepare-half-source-url-fact.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448071698723100-v3-prepare-half-source-url-fact.stdout.txt",
+      "sha256": "376063fecfa582ed4ec7d390ae882db1600ecab832d5b071efcc1ee19b204ac0",
+      "bytes": 1193,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448083706980100-v3-half-append-only-url-source-facts.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448083706980100-v3-half-append-only-url-source-facts.stdout.txt",
+      "sha256": "47f3c5f05616a53c258ea1c977093404fd8f25195508dd84dd29e870831cba73",
+      "bytes": 307,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448098298712100-v3-half2026-corrected-url-reuse.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448098298712100-v3-half2026-corrected-url-reuse.stdout.txt",
+      "sha256": "9dea5bac39b71a79860271a3fd9c915b7aa1fded9af0a80c574f8108713ca77c",
+      "bytes": 4608,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448378051799200-v3-build-reviewed-input.stderr.txt",
+      "sha256": "dfc0c2710fbdf97b381be45306b1336e4233272cf98a0290d583502758f422cf",
+      "bytes": 606,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448378051799200-v3-build-reviewed-input.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448418198398300-v3-build-correct-original-boundaries.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448418198398300-v3-build-correct-original-boundaries.stdout.txt",
+      "sha256": "0a79bacdaa957cbc1588d62d28e30f6860ebd6571d2e79da70c3af7f009dc697",
+      "bytes": 266,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448432250639300-v3-lint.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448432250639300-v3-lint.stdout.txt",
+      "sha256": "4f878d68373c7caf9f6f2d03ece09363de58578a5601dc01fa9f5b88f9ad9d2b",
+      "bytes": 17,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448433060383700-v3-hashcheck.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448433060383700-v3-hashcheck.stdout.txt",
+      "sha256": "0b734000cdad4cb52cea6f0d8acdbe756f6f73bda3664320118df51e6fa6c8d4",
+      "bytes": 19,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448434716674200-v3-validate.stderr.txt",
+      "sha256": "a47dad659c255d15b04da71a9880416f53279cb3fd7111a0f88e919fffb9de70",
+      "bytes": 213,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448434716674200-v3-validate.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448515176079900-v3-build-final-context-bindings.stderr.txt",
+      "sha256": "d1a7eb68fb5342c84784f2b059a0f38d0febf8fca500a1700a2622c5f073eba1",
+      "bytes": 1035,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448515176079900-v3-build-final-context-bindings.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448546157685400-v3-final-input.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448546157685400-v3-final-input.stdout.txt",
+      "sha256": "3062e92eb055ff9098fcb16e3ca24fb657cd4e13bf38a5192068b08adefdc5e3",
+      "bytes": 266,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448548917116300-v3-validate-final.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448548917116300-v3-validate-final.stdout.txt",
+      "sha256": "5be86f95bd4bb3848e802afa321452f38330ecec2d48f7a1d1cb8de4efbe7295",
+      "bytes": 7,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448569445707900-v3-formal-engine-markdown.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448569445707900-v3-formal-engine-markdown.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448572672317000-v3-immutable-snapshot.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448572672317000-v3-immutable-snapshot.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448675223579600-v3-lint-final.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448675223579600-v3-lint-final.stdout.txt",
+      "sha256": "4f878d68373c7caf9f6f2d03ece09363de58578a5601dc01fa9f5b88f9ad9d2b",
+      "bytes": 17,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448675802832400-v3-strong-render-calc-snapshot-protection.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448675802832400-v3-strong-render-calc-snapshot-protection.stdout.txt",
+      "sha256": "abd8543248165b7a64fc7a06484658c420a88446cd3d1499e28d70fdb0789df3",
+      "bytes": 167,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448676334417000-v3-hashcheck-final.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448676334417000-v3-hashcheck-final.stdout.txt",
+      "sha256": "0b734000cdad4cb52cea6f0d8acdbe756f6f73bda3664320118df51e6fa6c8d4",
+      "bytes": 19,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448676745158400-v3-publication-registry-audit.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448676745158400-v3-publication-registry-audit.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448912778309700-v3-finalize-engineering-handoff.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\1791448912778309700-v3-finalize-engineering-handoff.stdout.txt",
+      "sha256": "0ac1827fe84f4e26098ae6572c165207b572df30b335e55411c83dd304edd2f4",
+      "bytes": 271,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\commands\\index.jsonl",
+      "sha256": "31a50fa5234c6a5c8b1ae16d765b56fe23164b20df12b7b026fa44458d94b114",
+      "bytes": 161235,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\communication_coverage_v3.json",
+      "sha256": "f382f247cb1ab6d59bf19372e70932fb8e823b8454d75433f89df1af26d832ce",
+      "bytes": 15256,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\events.jsonl",
+      "sha256": "08a7efc228d8cc164dcd50d88319b6f62d4f497d78db948c26f9cffcb6708e90",
+      "bytes": 97072,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\fact_checks_v3.json",
+      "sha256": "223c8efa11042877db018963fe13d5c83bb5f012c659e3034ae510e234c9e91e",
+      "bytes": 358554,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\formal_verification_v3.json",
+      "sha256": "d57e960cef9ac83b507a97cb507d1b2de3e52baec88c31f7cb25902b9a4965f8",
+      "bytes": 47807,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\repair_v3.json",
+      "sha256": "b914993612b1043648b0d10a7ea15032626e345a66a44c33d1e79ee0d6a8c4cb",
+      "bytes": 5339,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\repair_v3.md",
+      "sha256": "509145dcd6b9bf223ba4713b594c71a6c74ce61ab07c6947751a1f06ba942b88",
+      "bytes": 3263,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\runtime_v3.json",
+      "sha256": "72f5cb05c8497bed9a1b0ad40225238f654795f692805668ad4de607faaa28d5",
+      "bytes": 4531,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\skill_step_matrix_v3.json",
+      "sha256": "fc65acf6692826b8600147b117fcde236f97ac0e08c176da12dbab07e826e51f",
+      "bytes": 17727,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\v3_build_input.py",
+      "sha256": "bf2843ee88df583061acb0989fa8256a34c766ac47bada18f4b8cd01969c98ef",
+      "bytes": 28740,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\v3_fetch_announcements.py",
+      "sha256": "bcc6541e6689e8ca93e6a762e92b8239ecdba1c9c9eb0ec1cb8555b529d28df4",
+      "bytes": 2625,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\v3_finalize.py",
+      "sha256": "5a6be35db41ba3a2c35d4beb22873f46df8df30ada64a258dae3c575f8cc5e6a",
+      "bytes": 16078,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\v3_initialize.py",
+      "sha256": "13f570d17bbc94e49944e106470b9e25c47161856a8a48f1f1a23141f132132f",
+      "bytes": 675,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\v3_input_repair_receipt.json",
+      "sha256": "88cffabc65f78aa8d7f6c3735ddd8e67f080a168e0e2b0092c98d863d34bacb0",
+      "bytes": 44450,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\v3_prepare_url_fact.py",
+      "sha256": "0d63decce2bc66c3d2ff9e966a6b769959a6e9b265c6e577d26b388d0cd48e1b",
+      "bytes": 1182,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\v3_protected_v2.json",
+      "sha256": "fceace95dff5ae82d355def4d70f7e0bf54ba37e27bef8b1a2739929dc8e33fd",
+      "bytes": 1272,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\v3_run_tool.py",
+      "sha256": "9cb81f2de216834ab81c7cd42abbbfb885a8141089db2a53814a014203b505eb",
+      "bytes": 1149,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\v3_seal_manifest.py",
+      "sha256": "f40cf44a29552ef85b36cdfb680150e195d2ee4c959ba66d5de267f05a30ee62",
+      "bytes": 2624,
+      "role": "engineering_or_source_evidence"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\v3_verify_formal.py",
+      "sha256": "c6bd5e72cb95c02914b8327fa64a8c507329ac9524dec7daf0076becec04de51",
+      "bytes": 5757,
+      "role": "engineering_or_source_evidence"
+    }
+  ],
+  "facts_index_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\fact_checks_v3.json",
+  "communication_coverage_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\communication_coverage_v3.json",
+  "repair_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\repair_v3.json",
+  "gaps": {
+    "CWPWorker": "BLOCKED/not_run",
+    "IR_original_DOCX": "BLOCKED/not_obtained",
+    "equity_incentive_target_numeric_schedule": "not_obtained; company mentions existence; no numeric fabrication",
+    "residual_quantitative_calibration": "unknown",
+    "phaseII_local_sales_target": "ambiguous period/mismatch/unmodeled"
+  },
+  "calls_and_cost": {
+    "v3_auxiliary_sid_download_calls": 9,
+    "v3_provider_response_bytes": 1804695,
+    "v3_provider_cost_usd": "0",
+    "v3_external_llm_calls": 0,
+    "v3_ff_cwp_half_reuse_download_calls": 0,
+    "parser": "actualdeterministicfitzoriginalPDF; noWorker",
+    "limits": {
+      "each_download_bytes": 41943040,
+      "each_download_seconds": 180,
+      "provider_cost": "0",
+      "all_raw_bytes": 262144000
+    }
+  },
+  "owned_cleanup": "No test downloads removed yet: isolated original PDFs are audit evidence; never canonically ingested by this auxiliary research. They may be cleaned after review per MAIN preserving engineering SHA receipts. No shared-temp deletion.",
+  "unchanged_originals": [
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\input.json",
+      "sha256": "3dcce43a05deb2faf92236af8c1b979c07334a34d5b7debb30d25057ab611746",
+      "bytes": 228626,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\forecast.json",
+      "sha256": "a7b2797fecb8edb1b2ba2641b3d65c7996e938427fc01eed1f8e513aa7be420d",
+      "bytes": 491060,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\forecast.md",
+      "sha256": "f6bca82bf5fd5b1db373685da4bd910f510ffcc1d780070b6ab747c6d37a8a83",
+      "bytes": 91014,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\snapshot_v2.json",
+      "sha256": "8768495ec9b6df68bb9ab57cfc63c924023ca1b6ca38949a923cba6ec39484e5",
+      "bytes": 748108,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\manifest.json",
+      "sha256": "6cba812e9f1dd8af3ea0fd8667c46a3a4dc0233cfc77fbe5dfcda981a2deaaf8",
+      "bytes": 142575,
+      "unchanged": true
+    }
+  ],
+  "frozen_v2_manifest_sha256": "6cba812e9f1dd8af3ea0fd8667c46a3a4dc0233cfc77fbe5dfcda981a2deaaf8",
+  "remaining_review": "OriginalCNindependentreviewer: CN01-04 closure only",
+  "main_artifacts": {
+    "input.json": {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\input.json",
+      "sha256": "478ae3345e6011079929c05f01b8adec959c974581c703239271c1f9ba4e7ea4",
+      "bytes": 288840
+    },
+    "forecast.json": {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\forecast.json",
+      "sha256": "1913f5e376590c9a5d77999f8d9c4072a3114e5fc58288ac25f11b31b4ebdea1",
+      "bytes": 614314
+    },
+    "forecast.md": {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\forecast.md",
+      "sha256": "890795ee5cb5706834d81a8fea85a840fa7f765bbe51717ea550faf1098871eb",
+      "bytes": 108159
+    },
+    "snapshot.json": {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\v3\\snapshot.json",
+      "sha256": "bd7ec3a23f2331f48e937be62e1d960e687f9c9ae10a4e6c70a305f67f423741",
+      "bytes": 938504
+    }
+  },
+  "seal_receipt_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\manifest_seal_v3_receipt.json",
+  "sealed_at": "2026-10-08T08:42:39.065930+00:00"
+}

@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\reviews\US-MSFT\support\independent_runtime.py", line 55, in <module>
+    obs=observed['scenarios'][sc]['annual_revenue']
+        ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+KeyError: 'annual_revenue'

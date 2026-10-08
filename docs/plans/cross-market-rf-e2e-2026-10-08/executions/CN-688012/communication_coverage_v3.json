@@ -1,0 +1,285 @@
+{
+  "records": [
+    {
+      "category": "latest_annual_filing",
+      "status": "checked",
+      "source_ids": [
+        "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
+      ],
+      "checked_date": "2026-10-08",
+      "conclusion": "2025 annual report opened, revenue and policy/risk/strategy checked. Does not falsely report March proposed acquisition as completed.",
+      "material_revenue_target_ids": []
+    },
+    {
+      "category": "latest_results_release",
+      "status": "checked",
+      "source_ids": [
+        "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+      ],
+      "checked_date": "2026-10-08",
+      "conclusion": "Latest 2026H1 filing opened and verified; H1 revenue6,691.28732767m is not doubled mechanically to annual revenue.",
+      "material_revenue_target_ids": [
+        "CMP_annual_2026",
+        "CMP_annual_2027",
+        "CMP_annual_2028"
+      ]
+    },
+    {
+      "category": "latest_earnings_call",
+      "status": "not_available",
+      "source_ids": [],
+      "checked_date": "2026-10-08",
+      "conclusion": "No AMEC telephone-call TXT obtained via ET. Full official September10 network results Q&A was read and registered separately as strategy communication; this is not falsely labeled an ET telephone transcript. No claim that missing telephone coverage proves management has no target.",
+      "material_revenue_target_ids": [],
+      "rationale": "No AMEC telephone-call TXT obtained via ET. Full official September10 network results Q&A was read and registered separately as strategy communication; this is not falsely labeled an ET telephone transcript. No claim that missing telephone coverage proves management has no target.",
+      "search_description": "688012 official earnings-call/IR presentation, 2026H1 through information date; AMEC homepage, SSE IR2 and September10 roadshow, secondary leads for official originals",
+      "search_event": {
+        "query_scope": "688012 official earnings-call/IR presentation, 2026H1 through information date; AMEC homepage, SSE IR2 and September10 roadshow, secondary leads for official originals",
+        "query_time": "2026-10-08",
+        "event_ids": [
+          "turn231search2",
+          "turn231view0",
+          "turn232view0",
+          "turn235search0",
+          "cua-roadshow40766-actual-open"
+        ],
+        "generated_by": "rf_cn_execution logged observed tool calls",
+        "event_sha256": "e1b90fa9f78a84dd21bf81621b23774b21e3c6bbe9b901d3e0628b3746bcde7e"
+      }
+    },
+    {
+      "category": "latest_investor_presentation",
+      "status": "not_available",
+      "source_ids": [],
+      "checked_date": "2026-10-08",
+      "conclusion": "Search identified August2026 IR record DOCX through secondary leads, but no verified official original or complete presentation captured. AMEC homepage and IR2 failed web access. Original unavailable to this run, not proof it does not exist.",
+      "material_revenue_target_ids": [],
+      "rationale": "Search identified August2026 IR record DOCX through secondary leads, but no verified official original or complete presentation captured. AMEC homepage and IR2 failed web access. Original unavailable to this run, not proof it does not exist.",
+      "search_description": "688012 official earnings-call/IR presentation, 2026H1 through information date; AMEC homepage, SSE IR2 and September10 roadshow, secondary leads for official originals",
+      "search_event": {
+        "query_scope": "688012 official earnings-call/IR presentation, 2026H1 through information date; AMEC homepage, SSE IR2 and September10 roadshow, secondary leads for official originals",
+        "query_time": "2026-10-08",
+        "event_ids": [
+          "turn231search2",
+          "turn231view0",
+          "turn232view0",
+          "turn235search0",
+          "cua-roadshow40766-actual-open"
+        ],
+        "generated_by": "rf_cn_execution logged observed tool calls",
+        "event_sha256": "e1b90fa9f78a84dd21bf81621b23774b21e3c6bbe9b901d3e0628b3746bcde7e"
+      }
+    },
+    {
+      "category": "latest_strategy_communication",
+      "status": "checked",
+      "source_ids": [
+        "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "amec_sse_results_qa_20260910",
+        "amec_cninfo_1225482880"
+      ],
+      "checked_date": "2026-10-08",
+      "conclusion": "H1 products and the complete September10 interactive dataset checked. All8 AMEC records are identity-filtered. Capacity/site plans and overseas cumulative approximately800 reaction stages are context, not annual revenue/accepted volume forecasts. Pre-collected responses are separately logged. Complete2026strategyassessment1225482880 read; unspecified revenue-growth incentive thresholds remain a gap; historical35% is not forecast.",
+      "material_revenue_target_ids": []
+    },
+    {
+      "category": "material_announcements_since_last_filing",
+      "status": "checked",
+      "source_ids": [
+        "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "amec_cninfo_1225582793",
+        "amec_cninfo_1225482911",
+        "amec_cninfo_1225482918",
+        "amec_cninfo_1225482917",
+        "amec_cninfo_1225482894",
+        "amec_cninfo_1225482893",
+        "amec_cninfo_1225482882",
+        "amec_cninfo_1225482880"
+      ],
+      "checked_date": "2026-10-08",
+      "conclusion": "All19 genuineCNINFOrecords individuallytriaged in announcement_triage_v3.json; eightrelevant companyoriginals +onebrokerfullopinion actuallyopened. Othermetadata-only exclusions haveexplicit revenue-scope/duplicate reasons, are not claimedbodychecked. FoundPhaseII localmaturity300000万元 plan registeredambiguous+mismatch gap. HQ/R&Dfulldate2027-12 checked; funds/loans/treasury not revenue. Strategy1225482880 mentions equityincentive revenueconditions withoutnumber/date; exactincentive schedule remains unfetched/missing and not assumedabsent.",
+      "material_revenue_target_ids": [
+        "CMP_annual_2026",
+        "CMP_annual_2027",
+        "CMP_annual_2028",
+        "LingangPhaseII_local_sales_at_maturity"
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "target_id": "CMP_annual_2026",
+      "statement": "中微众硅在2026年度实现的合并报表范围营业收入不低于28,000.00万元",
+      "metric_name": "CMP consolidated annual revenue commitment by transaction sellers",
+      "metric_definition": "Full-year target company consolidated revenue independently audited under performance compensation agreement; not group AMEC revenue",
+      "target_period": "FY2026",
+      "raw_unit": "万元",
+      "raw_currency": "CNY",
+      "raw_scale": "ten_thousand",
+      "raw_target_value": 28000,
+      "measurement_basis": "annual_period",
+      "measurement_periods": [
+        "FY2026"
+      ],
+      "measurement_rationale": "Original says 在2026年度、2027年度和2028年度实现...分别; per-year amount. Cumulative compensation test elsewhere does not change annual target amounts.",
+      "materiality": "material",
+      "commitment_strength": "goal",
+      "scope": {
+        "type": "segment",
+        "name": "CMP"
+      },
+      "perimeter_status": "mismatch",
+      "perimeter_notes": "2026 annual standalone target includes pre-acquisition periods; model is only June–December consolidated contribution.",
+      "comparison": "at_least",
+      "treatment": "unmodeled_data_gap",
+      "comparison_value": null,
+      "comparison_currency": "CNY",
+      "comparison_scale": "million",
+      "normalization_rationale": "万元 /100 equals CNY million; no FX. No unsupported partial-year prorating.",
+      "mapped_parameter_ids": [],
+      "mapped_scenarios": [],
+      "claim_ids": [
+        "claim_CMP_annual_2026"
+      ],
+      "rationale": "Seller compensation commitment is an independent reference, not a guaranteed revenue guidance or forced base scenario."
+    },
+    {
+      "target_id": "CMP_annual_2027",
+      "statement": "中微众硅在2027年度实现的合并报表范围营业收入不低于43,000.00万元",
+      "metric_name": "CMP consolidated annual revenue commitment by transaction sellers",
+      "metric_definition": "Full-year target company consolidated revenue independently audited under performance compensation agreement; not group AMEC revenue",
+      "target_period": "FY2027",
+      "raw_unit": "万元",
+      "raw_currency": "CNY",
+      "raw_scale": "ten_thousand",
+      "raw_target_value": 43000,
+      "measurement_basis": "annual_period",
+      "measurement_periods": [
+        "FY2027"
+      ],
+      "measurement_rationale": "Original says 在2026年度、2027年度和2028年度实现...分别; per-year amount. Cumulative compensation test elsewhere does not change annual target amounts.",
+      "materiality": "material",
+      "commitment_strength": "goal",
+      "scope": {
+        "type": "segment",
+        "name": "CMP"
+      },
+      "perimeter_status": "matched",
+      "perimeter_notes": "Full-year post-control external CMP revenue assumed comparable; unidentified internal transactions remain a reconciliation risk.",
+      "comparison": "at_least",
+      "treatment": "independent_benchmark",
+      "comparison_value": 430.0,
+      "comparison_currency": "CNY",
+      "comparison_scale": "million",
+      "normalization_rationale": "万元 /100 equals CNY million; no FX. No unsupported partial-year prorating.",
+      "mapped_parameter_ids": [
+        "cmp_revenue_low_2027",
+        "cmp_revenue_base_2027",
+        "cmp_revenue_high_2027"
+      ],
+      "mapped_scenarios": [
+        "low",
+        "base",
+        "high"
+      ],
+      "claim_ids": [
+        "claim_CMP_annual_2027"
+      ],
+      "rationale": "Seller compensation commitment is an independent reference, not a guaranteed revenue guidance or forced base scenario.",
+      "benchmark_rationale": "Independent analyst CMP operating paths are compared against seller annual commitment under matching full-year scope; under-attainment is reported as computed, never forced up.",
+      "benchmark_claim_ids": [
+        "claim_benchmark_CMP_annual_2027"
+      ]
+    },
+    {
+      "target_id": "CMP_annual_2028",
+      "statement": "中微众硅在2028年度实现的合并报表范围营业收入不低于58,000.00万元",
+      "metric_name": "CMP consolidated annual revenue commitment by transaction sellers",
+      "metric_definition": "Full-year target company consolidated revenue independently audited under performance compensation agreement; not group AMEC revenue",
+      "target_period": "FY2028",
+      "raw_unit": "万元",
+      "raw_currency": "CNY",
+      "raw_scale": "ten_thousand",
+      "raw_target_value": 58000,
+      "measurement_basis": "annual_period",
+      "measurement_periods": [
+        "FY2028"
+      ],
+      "measurement_rationale": "Original says 在2026年度、2027年度和2028年度实现...分别; per-year amount. Cumulative compensation test elsewhere does not change annual target amounts.",
+      "materiality": "material",
+      "commitment_strength": "goal",
+      "scope": {
+        "type": "segment",
+        "name": "CMP"
+      },
+      "perimeter_status": "matched",
+      "perimeter_notes": "Full-year post-control external CMP revenue assumed comparable; unidentified internal transactions remain a reconciliation risk.",
+      "comparison": "at_least",
+      "treatment": "independent_benchmark",
+      "comparison_value": 580.0,
+      "comparison_currency": "CNY",
+      "comparison_scale": "million",
+      "normalization_rationale": "万元 /100 equals CNY million; no FX. No unsupported partial-year prorating.",
+      "mapped_parameter_ids": [
+        "cmp_revenue_low_2028",
+        "cmp_revenue_base_2028",
+        "cmp_revenue_high_2028"
+      ],
+      "mapped_scenarios": [
+        "low",
+        "base",
+        "high"
+      ],
+      "claim_ids": [
+        "claim_CMP_annual_2028"
+      ],
+      "rationale": "Seller compensation commitment is an independent reference, not a guaranteed revenue guidance or forced base scenario.",
+      "benchmark_rationale": "Independent analyst CMP operating paths are compared against seller annual commitment under matching full-year scope; under-attainment is reported as computed, never forced up.",
+      "benchmark_claim_ids": [
+        "claim_benchmark_CMP_annual_2028"
+      ]
+    },
+    {
+      "target_id": "LingangPhaseII_local_sales_at_maturity",
+      "statement": "项目达产后可实现属地贡献销售收入300,000 万元。",
+      "metric_name": "Lingang PhaseII local contribution sales at maturity",
+      "metric_definition": "Project local contribution sales after reaching planned operation; not explicitly consolidated external annual recognized revenue",
+      "target_period": "达产后（未披露年份）",
+      "raw_unit": "万元",
+      "raw_currency": "CNY",
+      "raw_scale": "ten_thousand",
+      "raw_target_value": 300000,
+      "measurement_basis": "ambiguous",
+      "measurement_periods": [],
+      "measurement_rationale": "Company p4 does not specify annual vs cumulative revenue or maturity year. The adjacent7年内 modifies patents and cannot be assigned to sales without evidence.",
+      "materiality": "material",
+      "commitment_strength": "capacity_plan",
+      "scope": {
+        "type": "custom",
+        "name": "Lingang PhaseII local contribution sales"
+      },
+      "perimeter_status": "mismatch",
+      "perimeter_notes": "Local/project contribution metric and maturity timing lack a reconciled external recognized group revenue bridge. Project papers not yet signed as p1/p5 disclose.",
+      "comparison": "approximately",
+      "treatment": "unmodeled_data_gap",
+      "comparison_value": null,
+      "comparison_currency": "CNY",
+      "comparison_scale": "million",
+      "normalization_rationale": "Raw300000万元 equals3000CNYm only as scale arithmetic; not a normalized annual forecast comparison.",
+      "mapped_parameter_ids": [],
+      "mapped_scenarios": [],
+      "claim_ids": [
+        "claim_LingangPhaseII_local_sales_at_maturity"
+      ],
+      "rationale": "Disclose material plan prominently. Do not add3000m to modeled group revenue or treat350000万元 investment as revenue; contract, timing, overlap and external-sales definition remain unresolved."
+    }
+  ],
+  "announcement_triage_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\CN-688012\\announcement_triage_v3.json",
+  "remaining_gaps": {
+    "CWPWorker": "BLOCKED/not_run",
+    "IR_original_DOCX": "BLOCKED/not_obtained",
+    "equity_incentive_target_numeric_schedule": "not_obtained; company mentions existence; no numeric fabrication",
+    "residual_quantitative_calibration": "unknown",
+    "phaseII_local_sales_target": "ambiguous period/mismatch/unmodeled"
+  }
+}

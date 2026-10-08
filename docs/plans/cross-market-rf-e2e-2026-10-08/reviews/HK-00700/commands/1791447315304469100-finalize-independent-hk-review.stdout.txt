@@ -1,0 +1,1 @@
+{"serialization_status": "PASS", "checks": 33, "facts": 145, "findings": 13, "open_findings": 12, "protected_raw_config": 41, "emitting_artifacts": 25, "completed_review_command_pairs": 30, "report_sha256": {"review.md": "f5c49efc0e3c1280ca29236b4dc6c9128df5ab25d3fb474fe438cf7ad085d8e8", "review.json": "c7703c8c50a562bdf7383b13fd3caafc0d4a33409b741e92d91a575e10791683"}}

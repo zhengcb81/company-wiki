@@ -1,0 +1,969 @@
+
+### integrity
+{
+  "artifacts_checked": 90,
+  "artifact_failures": [],
+  "starts": 42,
+  "finishes": 42,
+  "failure_count": 10,
+  "unpaired": [],
+  "log_failures": [],
+  "commands": [
+    {
+      "label": "initialize",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "init"
+      ],
+      "rc": 0,
+      "elapsed": 0.305,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442232272441700-initialize.stdout.txt",
+          "byte_size": 416,
+          "sha256": "a1463fe2b8ecb86ed9eaa66ea6a9a156c40700b28603844e263f48137c5db035"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442232272441700-initialize.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "reuse-fy2025",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "prepare",
+        "request_fy2025_reuse.json"
+      ],
+      "rc": 3,
+      "elapsed": 3.519,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442245710731100-reuse-fy2025.stdout.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442245710731100-reuse-fy2025.stderr.txt",
+          "byte_size": 208,
+          "sha256": "234f8ae9cc5a5d03a8c19fb54f5f6b31c9a1f2d4ce6f5b5cc0f90d29417f0905"
+        }
+      }
+    },
+    {
+      "label": "legacy-requests",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "legacy-requests"
+      ],
+      "rc": 1,
+      "elapsed": 0.213,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442315932578800-legacy-requests.stdout.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442315932578800-legacy-requests.stderr.txt",
+          "byte_size": 1079,
+          "sha256": "efe692b5a8dc1d3eaa41f80cc3acdbde462be686a35ea1ab712a70a095203cd0"
+        }
+      }
+    },
+    {
+      "label": "reuse-fy2025-legacy",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "prepare",
+        "request_fy2025_reuse_legacy.json"
+      ],
+      "rc": 3,
+      "elapsed": 3.512,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442319130050500-reuse-fy2025-legacy.stdout.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442319130050500-reuse-fy2025-legacy.stderr.txt",
+          "byte_size": 92,
+          "sha256": "d7fc4b443723703dc7f8875185665a3b5ef2b74702e9b24f83ebc610ffa84a53"
+        }
+      }
+    },
+    {
+      "label": "legacy-requests-repair",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "legacy-requests"
+      ],
+      "rc": 0,
+      "elapsed": 0.182,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442360710826700-legacy-requests-repair.stdout.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442360710826700-legacy-requests-repair.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "reuse-fy2026-legacy",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "prepare",
+        "request_fy2026_reuse_legacy.json"
+      ],
+      "rc": 3,
+      "elapsed": 4.111,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442363888805300-reuse-fy2026-legacy.stdout.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442363888805300-reuse-fy2026-legacy.stderr.txt",
+          "byte_size": 215,
+          "sha256": "1924f1ad853afbd1b8a5b07434c4515c2a039023ffffdf2a40fb3b6df590e3ad"
+        }
+      }
+    },
+    {
+      "label": "template",
+      "command": [
+        "python",
+        "C:/Users/郑曾波/.agents/skills/revenue-forecast/scripts/generate_input_template.py",
+        "--name",
+        "Microsoft",
+        "--base-year",
+        "2026",
+        "--forecast-years",
+        "2027",
+        "2028",
+        "2029",
+        "--segments",
+        "Productivity and Business Processes",
+        "Intelligent Cloud",
+        "More Personal Computing",
+        "--currency",
+        "USD",
+        "--unit",
+        "million",
+        "--output",
+        "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/template.json"
+      ],
+      "rc": 0,
+      "elapsed": 0.531,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442370705931100-template.stdout.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442370705931100-template.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "fetch-fy2026-legacy",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "prepare",
+        "request_fy2026_fetch_legacy.json"
+      ],
+      "rc": 3,
+      "elapsed": 3.041,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442398164187200-fetch-fy2026-legacy.stdout.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442398164187200-fetch-fy2026-legacy.stderr.txt",
+          "byte_size": 188,
+          "sha256": "269429068995ab12536a3e0e4067a6579e860a933a94dde14b408c182c751ef0"
+        }
+      }
+    },
+    {
+      "label": "ff-fy2025-inspect",
+      "command": [
+        "python",
+        "C:/Users/郑曾波/Projects/filing-fetch/scripts/fetch_filing.py",
+        "--request-file",
+        "C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/request_fy2025_reuse.json"
+      ],
+      "rc": 0,
+      "elapsed": 2.688,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442421321083400-ff-fy2025-inspect.stdout.txt",
+          "byte_size": 1047,
+          "sha256": "6113bc9739b204717148e6b4c90e0d2b66a3ced35d967189a866fc94ab7fd878"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442421321083400-ff-fy2025-inspect.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "producer-raw-read",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "raw-read"
+      ],
+      "rc": 0,
+      "elapsed": 0.92,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442562153378100-producer-raw-read.stdout.txt",
+          "byte_size": 227,
+          "sha256": "8b06ca137f9820d47c2b385feb2121c39b9e4401cc8ed2ea5900c987b21df033"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442562153378100-producer-raw-read.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "official-presentation-href",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "aux-ir"
+      ],
+      "rc": 0,
+      "elapsed": 1.076,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442653948378500-official-presentation-href.stdout.txt",
+          "byte_size": 60,
+          "sha256": "c62929ccf9f0b5b0bc67c909036dc58e878f733a667b1db0992ad5aefea6c54e"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442653948378500-official-presentation-href.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "official-presentation",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "aux-presentation"
+      ],
+      "rc": 1,
+      "elapsed": 1.255,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442710444963500-official-presentation.stdout.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442710444963500-official-presentation.stderr.txt",
+          "byte_size": 632,
+          "sha256": "152705e099a98977edf01686e0feaabf3827841d7cce55dfb2db8ee1ef3db0d2"
+        }
+      }
+    },
+    {
+      "label": "html-temporary-parse",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "parse-html"
+      ],
+      "rc": 0,
+      "elapsed": 2.239,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442714300841300-html-temporary-parse.stdout.txt",
+          "byte_size": 311,
+          "sha256": "9648903cc178b46a3d56724f0cc9cf88149a822ff55a4fde223f7db0bd191eb0"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442714300841300-html-temporary-parse.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "reuse-fy2025-after-main-fix",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "prepare",
+        "request_fy2025_reuse.json"
+      ],
+      "rc": 0,
+      "elapsed": 3.514,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442737872418900-reuse-fy2025-after-main-fix.stdout.txt",
+          "byte_size": 4582,
+          "sha256": "dde72b3646cb655d2794bf1e25bcba2ba4e74175a9d3a7cf86b4cf0d06640adb"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442737872418900-reuse-fy2025-after-main-fix.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "official-presentation-cdn",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "aux-presentation"
+      ],
+      "rc": 0,
+      "elapsed": 2.934,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442978492793300-official-presentation-cdn.stdout.txt",
+          "byte_size": 520,
+          "sha256": "801fb9f01cf2f64e609daba6fee50627af7ac992f49194f32c65cfe4f26ef9a3"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791442978492793300-official-presentation-cdn.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "capture-opened-ancillary-pages",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "capture-pages"
+      ],
+      "rc": 1,
+      "elapsed": 3.138,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443254272574100-capture-opened-ancillary-pages.stdout.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443254272574100-capture-opened-ancillary-pages.stderr.txt",
+          "byte_size": 858,
+          "sha256": "c7349bc2683ef2b7a403695ab62a1f29a8ce039bde6cb31deade76161019bec2"
+        }
+      }
+    },
+    {
+      "label": "capture-opened-ancillary-pages-resume",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "capture-pages"
+      ],
+      "rc": 0,
+      "elapsed": 3.733,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443286264640900-capture-opened-ancillary-pages-resume.stdout.txt",
+          "byte_size": 2048,
+          "sha256": "212ec7c326497ef66dce417d13aeb0b371a9c43148e1cb09efce1032468adb32"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443286264640900-capture-opened-ancillary-pages-resume.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "build-independent-input",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/build_msft_input.py"
+      ],
+      "rc": 0,
+      "elapsed": 1.198,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443495417649000-build-independent-input.stdout.txt",
+          "byte_size": 157,
+          "sha256": "a39654a2345324d405da097c651ed974bbe40900715d7341821c4cfe797e4803"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443495417649000-build-independent-input.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "lint-input",
+      "command": [
+        "python",
+        "C:/Users/郑曾波/.agents/skills/revenue-forecast/scripts/lint_input.py",
+        "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/input.json"
+      ],
+      "rc": 0,
+      "elapsed": 0.185,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443510680137400-lint-input.stdout.txt",
+          "byte_size": 17,
+          "sha256": "4f878d68373c7caf9f6f2d03ece09363de58578a5601dc01fa9f5b88f9ad9d2b"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443510680137400-lint-input.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "sync-capture-claim-hashes",
+      "command": [
+        "python",
+        "C:/Users/郑曾波/.agents/skills/revenue-forecast/scripts/fix_hashes.py",
+        "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/input.json"
+      ],
+      "rc": 0,
+      "elapsed": 0.144,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443527941085100-sync-capture-claim-hashes.stdout.txt",
+          "byte_size": 19,
+          "sha256": "0b734000cdad4cb52cea6f0d8acdbe756f6f73bda3664320118df51e6fa6c8d4"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443527941085100-sync-capture-claim-hashes.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "validate-input-collect-all",
+      "command": [
+        "python",
+        "C:/Users/郑曾波/.agents/skills/revenue-forecast/scripts/revenue_forecast.py",
+        "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/input.json",
+        "--validate-only",
+        "--verbose"
+      ],
+      "rc": 2,
+      "elapsed": 0.221,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443530724435900-validate-input-collect-all.stdout.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443530724435900-validate-input-collect-all.stderr.txt",
+          "byte_size": 176,
+          "sha256": "dd754cc454a421be011aded2aa827f6f178708577b506b91020fdf198ada9365"
+        }
+      }
+    },
+    {
+      "label": "reuse-fy2024",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "prepare",
+        "request_fy2024_reuse.json"
+      ],
+      "rc": 0,
+      "elapsed": 3.8,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443660106621400-reuse-fy2024.stdout.txt",
+          "byte_size": 4582,
+          "sha256": "65a8cbdd830797db189fe5c3489fa241e618a78b1f772f92cce7d644177dad63"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443660106621400-reuse-fy2024.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "preserve-webtool-events",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "register-web"
+      ],
+      "rc": 0,
+      "elapsed": 0.153,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443666588935900-preserve-webtool-events.stdout.txt",
+          "byte_size": 25,
+          "sha256": "69f9bb2c7d0699328b51eaad3aabb3c4563af9f8b1e7d1b0e9b347b613b7d965"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443666588935900-preserve-webtool-events.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "exact-et-fmp-discovery",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "et-discover"
+      ],
+      "rc": 0,
+      "elapsed": 1.155,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443702740486300-exact-et-fmp-discovery.stdout.txt",
+          "byte_size": 188,
+          "sha256": "c836453aecbadb0978a63f50abf3964442f198fb878d9a931e70c4fdbebb7226"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443702740486300-exact-et-fmp-discovery.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "exact-et-fmp-entitlement-probe",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "et-probe"
+      ],
+      "rc": 0,
+      "elapsed": 1.709,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443758087987900-exact-et-fmp-entitlement-probe.stdout.txt",
+          "byte_size": 176,
+          "sha256": "a8c301cdfd7be4812174528152f2ecc3434ff0c04653f0aa66acefb2f9789900"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443758087987900-exact-et-fmp-entitlement-probe.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "build-mixed-recognition-input",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/build_msft_input.py"
+      ],
+      "rc": 0,
+      "elapsed": 0.257,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443771245355400-build-mixed-recognition-input.stdout.txt",
+          "byte_size": 157,
+          "sha256": "06a351e34be980c1452566ef4295230284e9fed1e19aa14c3fe899a0a392cd0d"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443771245355400-build-mixed-recognition-input.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "build-causal-input",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/build_msft_input.py"
+      ],
+      "rc": 0,
+      "elapsed": 0.235,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443860335514500-build-causal-input.stdout.txt",
+          "byte_size": 157,
+          "sha256": "5ff3d7a9e0e7bc42e252d532d78ed345c3cad023289d779e186da8d55d86ad53"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443860335514500-build-causal-input.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "validate-current-schema-gaps",
+      "command": [
+        "python",
+        "C:/Users/郑曾波/.agents/skills/revenue-forecast/scripts/revenue_forecast.py",
+        "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/input.json",
+        "--validate-only",
+        "--verbose"
+      ],
+      "rc": 2,
+      "elapsed": 0.243,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443863064221500-validate-current-schema-gaps.stdout.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443863064221500-validate-current-schema-gaps.stderr.txt",
+          "byte_size": 848,
+          "sha256": "d48fb2ddc7b80f2b6da2e3289803c7588beac170acb02512b8535df1fc29e867"
+        }
+      }
+    },
+    {
+      "label": "build-contract-aligned-input",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/build_msft_input.py"
+      ],
+      "rc": 0,
+      "elapsed": 0.225,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443899082027200-build-contract-aligned-input.stdout.txt",
+          "byte_size": 157,
+          "sha256": "5ff3d7a9e0e7bc42e252d532d78ed345c3cad023289d779e186da8d55d86ad53"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443899082027200-build-contract-aligned-input.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "validate-contract-aligned-input",
+      "command": [
+        "python",
+        "C:/Users/郑曾波/.agents/skills/revenue-forecast/scripts/revenue_forecast.py",
+        "C:/Users/郑曾波/AppData/Local/Temp/cwp-rf-e2e-20261008/US-MSFT/input.json",
+        "--validate-only",
+        "--verbose"
+      ],
+      "rc": 0,
+      "elapsed": 0.518,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443901920636800-validate-contract-aligned-input.stdout.txt",
+          "byte_size": 7,
+          "sha256": "5be86f95bd4bb3848e802afa321452f38330ecec2d48f7a1d1cb8de4efbe7295"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443901920636800-validate-contract-aligned-input.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "emit-formal-json-markdown",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "forecast"
+      ],
+      "rc": 0,
+      "elapsed": 1.43,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443978356812800-emit-formal-json-markdown.stdout.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791443978356812800-emit-formal-json-markdown.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "build-raw-guidance-units",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/build_msft_input.py"
+      ],
+      "rc": 0,
+      "elapsed": 0.391,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444044322242500-build-raw-guidance-units.stdout.txt",
+          "byte_size": 157,
+          "sha256": "5ff3d7a9e0e7bc42e252d532d78ed345c3cad023289d779e186da8d55d86ad53"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444044322242500-build-raw-guidance-units.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "emit-corrected-formal",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "forecast"
+      ],
+      "rc": 0,
+      "elapsed": 1.454,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444047538644000-emit-corrected-formal.stdout.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444047538644000-emit-corrected-formal.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "strong-validate-formal",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "strong-check"
+      ],
+      "rc": 0,
+      "elapsed": 0.867,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444051706378900-strong-validate-formal.stdout.txt",
+          "byte_size": 104,
+          "sha256": "260a6323bc3137aa19cef3585ed04c93eac8ef7e2331525abc36da1330b2d41d"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444051706378900-strong-validate-formal.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "finalize-versioned-input",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/build_msft_input.py"
+      ],
+      "rc": 0,
+      "elapsed": 0.222,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444108573624800-finalize-versioned-input.stdout.txt",
+          "byte_size": 157,
+          "sha256": "5ff3d7a9e0e7bc42e252d532d78ed345c3cad023289d779e186da8d55d86ad53"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444108573624800-finalize-versioned-input.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "formal-versioned-output",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "forecast"
+      ],
+      "rc": 0,
+      "elapsed": 1.355,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444111610079900-formal-versioned-output.stdout.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444111610079900-formal-versioned-output.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "freeze-before-future-actuals",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "snapshot"
+      ],
+      "rc": 0,
+      "elapsed": 1.039,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444115693457100-freeze-before-future-actuals.stdout.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444115693457100-freeze-before-future-actuals.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "strong-check-with-snapshot",
+      "command": [
+        "python",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/lane_tools.py",
+        "strong-check"
+      ],
+      "rc": 0,
+      "elapsed": 0.998,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444119381523000-strong-check-with-snapshot.stdout.txt",
+          "byte_size": 98,
+          "sha256": "8d3bf44c19d0c4a797a84226fa3e9a277d291f710f357ab369d8dccc5e6ca853"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444119381523000-strong-check-with-snapshot.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "frozen-final-preflight",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/finish_msft.py",
+        "checks"
+      ],
+      "rc": 0,
+      "elapsed": 1.897,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444707566803200-frozen-final-preflight.stdout.txt",
+          "byte_size": 2697,
+          "sha256": "2ccc287205f12dda548a7c66753f3da6bda4b0f7be7f415e38f78cb56ab2974e"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444707566803200-frozen-final-preflight.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "finalize-us-handoff",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/finish_msft.py",
+        "handoff"
+      ],
+      "rc": 1,
+      "elapsed": 0.148,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444730390484700-finalize-us-handoff.stdout.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444730390484700-finalize-us-handoff.stderr.txt",
+          "byte_size": 640,
+          "sha256": "7a81fe96711e6cacc4b399d0e3d4306b7c0cb7a4f1578e0cf7591690c73c7309"
+        }
+      }
+    },
+    {
+      "label": "finalize-us-handoff-corrected-index",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/finish_msft.py",
+        "handoff"
+      ],
+      "rc": 0,
+      "elapsed": 0.517,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444753253223200-finalize-us-handoff-corrected-index.stdout.txt",
+          "byte_size": 310,
+          "sha256": "6bba530791fc8bb776410283a8987f99df36688afa054144d8a07b7caca9591f"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444753253223200-finalize-us-handoff-corrected-index.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "seal-us-handoff-source-paths",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/plans/cross-market-rf-e2e-2026-10-08/executions/US-MSFT/finish_msft.py",
+        "handoff"
+      ],
+      "rc": 0,
+      "elapsed": 0.362,
+      "outputs": {
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444813386343500-seal-us-handoff-source-paths.stdout.txt",
+          "byte_size": 310,
+          "sha256": "6bba530791fc8bb776410283a8987f99df36688afa054144d8a07b7caca9591f"
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\1791444813386343500-seal-us-handoff-source-paths.stderr.txt",
+          "byte_size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    }
+  ]
+}

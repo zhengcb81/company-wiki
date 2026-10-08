@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.2",
+  "company_query": "688012",
+  "market": "CN",
+  "document_kind": "annual_report",
+  "mode": "exact",
+  "fiscal_year": 2025,
+  "as_of_date": "2026-10-08"
+}

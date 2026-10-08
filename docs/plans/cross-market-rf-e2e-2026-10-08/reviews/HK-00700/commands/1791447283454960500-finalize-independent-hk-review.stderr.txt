@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\reviews\HK-00700\finalize_review_hk.py", line 52, in <module>
+    assert len(protected) == 41
+           ^^^^^^^^^^^^^^^^^^^^
+AssertionError

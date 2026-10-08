@@ -1,0 +1,2 @@
+{"timestamp_utc": "2026-10-08T07:12:01.732003+00:00", "pid": 70240, "ppid": 102120, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["docs/plans/cross-market-rf-e2e-2026-10-08/executions/CN-688012/capture_official_page.py", "roadshow_app_script", "https://roadshow.sseinfo.com/app.9371d76d85505abe.js"], "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki"}}
+{"timestamp_utc": "2026-10-08T07:12:23.040008+00:00", "pid": 70240, "ppid": 102120, "event": "python_exit", "data": {}}

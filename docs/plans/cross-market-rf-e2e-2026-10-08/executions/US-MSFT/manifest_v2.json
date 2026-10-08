@@ -1,0 +1,401 @@
+{
+  "schema_version": "1.0",
+  "company": "Microsoft",
+  "security_id": "MSFT",
+  "market": "US",
+  "agent_id": "/root/rf_us_execution",
+  "as_of_date": "2026-10-08",
+  "forecast_version": "2026-10-08-MSFT-v2",
+  "output_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2",
+  "status": "partial",
+  "independent_review_status": "pending",
+  "formal_paths": {
+    "input.json": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\input.json",
+    "forecast.json": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\forecast.json",
+    "forecast.md": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\forecast.md",
+    "snapshot.json": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\snapshot.json"
+  },
+  "registry_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\publications.jsonl",
+  "runtime_file_sha256": {
+    "SKILL.md": {
+      "installed_sha256": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf",
+      "repo_sha256": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf",
+      "same": true
+    },
+    "scripts/revenue_core.py": {
+      "installed_sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "repo_sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "same": true
+    },
+    "scripts/revenue_forecast.py": {
+      "installed_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "repo_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "same": true
+    },
+    "scripts/source_preparation.py": {
+      "installed_sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+      "repo_sha256": "281828f7fcc0046497cfa9d9d420c453f4a73299a61fb68c570e8ce6cfa2a08d",
+      "same": true
+    },
+    "scripts/company_wiki_source.py": {
+      "installed_sha256": "b223974e94ffb6d91e0e927b252e1fbc67a590fc910c3da10600d292d48d4470",
+      "repo_sha256": "b223974e94ffb6d91e0e927b252e1fbc67a590fc910c3da10600d292d48d4470",
+      "same": true
+    },
+    "scripts/company_wiki_source_v2.py": {
+      "installed_sha256": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+      "repo_sha256": "e40da4caca941828be78de3f019d1e1888ae776c03ac51844fc508e567098053",
+      "same": true
+    },
+    "scripts/company_wiki_source_reader_v2.py": {
+      "installed_sha256": "5f5bfd11cbc880c30f2766d8d6c78366d4e32f677ba9a517914a0df5f95faed1",
+      "repo_sha256": "5f5bfd11cbc880c30f2766d8d6c78366d4e32f677ba9a517914a0df5f95faed1",
+      "same": true
+    },
+    "scripts/contracts/constants.py": {
+      "installed_sha256": "3ad7332e4a76e7e3e2a9a8a1ab73828584ed8b19b32327479a0f79636b2f3462",
+      "repo_sha256": "3ad7332e4a76e7e3e2a9a8a1ab73828584ed8b19b32327479a0f79636b2f3462",
+      "same": true
+    },
+    "scripts/forecast/segments.py": {
+      "installed_sha256": "7b0dac5d5b6f19aba2305a7cb5d9d0ecddb1e5a31a6833285c5f81259018f002",
+      "repo_sha256": "7b0dac5d5b6f19aba2305a7cb5d9d0ecddb1e5a31a6833285c5f81259018f002",
+      "same": true
+    },
+    "scripts/revenue_backtest.py": {
+      "installed_sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "repo_sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "same": true
+    },
+    "scripts/revenue_report.py": {
+      "installed_sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+      "repo_sha256": "212f00598feca408dc429d4c7a5332131ce25f1165b079347e4b295345df7d3b",
+      "same": true
+    },
+    "scripts/lint_input.py": {
+      "installed_sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "repo_sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "same": true
+    },
+    "scripts/fix_hashes.py": {
+      "installed_sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "repo_sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "same": true
+    },
+    "scripts/publication_registry.py": {
+      "installed_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+      "repo_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+      "same": true
+    }
+  },
+  "artifacts": [
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\forecast.json",
+      "sha256": "4447f9c5390a429ba5f304bf496af36f24ae6d8354b3a4fea890223d0a27c605",
+      "bytes": 1799560,
+      "role": "v2_research"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\forecast.md",
+      "sha256": "649b9d16741e0089f5ac6996813e0fa518b0d4c04bb7787c183a41269b6c1bec",
+      "bytes": 280916,
+      "role": "v2_research"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\input.json",
+      "sha256": "1fadabef5208df3438ea5202ba4524bb4d0fdfe9e923b0759c24dca8ff4165a3",
+      "bytes": 869139,
+      "role": "v2_research"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\publications.jsonl",
+      "sha256": "132beb8eb7249d8b74ded75b6e1a00dabddb14546941d35914d16e65fcf6b3a4",
+      "bytes": 2286,
+      "role": "v2_research"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\snapshot.json",
+      "sha256": "3127098e5ee041e3d17fa2fefeef47cc69ba90c321d68d4a44e6bc4c8e33c74e",
+      "bytes": 2766975,
+      "role": "v2_research"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\strategy_reopen_web.json",
+      "sha256": "bb32dab3510c3193b9922d8c6bee67e11e381b52365f50d5d4125c243c7b1d02",
+      "bytes": 18147,
+      "role": "v2_research"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\TRUST_BOUNDARY.md",
+      "sha256": "ec2230f7bcabd8329f469d7317173260bb4fc787181238e8b74f014b0c0f7702",
+      "bytes": 2126,
+      "role": "v2_research"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\repair_v2.json",
+      "sha256": "8b966f10a23c2ee9d8d07c676d2d0ae0b484e9113f99b2e540d78589efd955fb",
+      "bytes": 985469,
+      "role": "v2_engineering_handoff"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\repair_v2.md",
+      "sha256": "28d7114a3f227a84a69bf2f75326a8772150734ad67c091606848102d65ab6d4",
+      "bytes": 2232,
+      "role": "v2_engineering_handoff"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\fact_checks_v2.json",
+      "sha256": "b23367a2dbd48ffb03e8e6aed5812d7b3a6b71f2c4535cb2225ea60361c7c440",
+      "bytes": 700070,
+      "role": "v2_engineering_handoff"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\qualitative_targets_v2.json",
+      "sha256": "12c468cc6ff83a9ed9eb7504eaac309ebdb09bbb2b2dbaf1a05cfc0e50dfa96b",
+      "bytes": 58370,
+      "role": "v2_engineering_handoff"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\assumption_support_v2.json",
+      "sha256": "83dc17ce191eef01a701ef9a9dc73d2c898222bb71d1ab85ace1183e5ab1851c",
+      "bytes": 111123,
+      "role": "v2_engineering_handoff"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\claim_contexts_v2.json",
+      "sha256": "d4e3464ba5dfc5648164578e8230a2dab69b589acd39ca102402d32c9f760dc3",
+      "bytes": 265969,
+      "role": "v2_engineering_handoff"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\validation_v2.json",
+      "sha256": "ecdb97ba949eb02988348832595aab4bec29331d6337c36e234e40e470d31eca",
+      "bytes": 12368,
+      "role": "v2_engineering_handoff"
+    },
+    {
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\skill_step_matrix_v2.json",
+      "sha256": "579bc2289f7b3b24948210d826cecb7d3621b0ed2bcc9e4c6e154d5c9de2f1a5",
+      "bytes": 6736,
+      "role": "v2_engineering_handoff"
+    }
+  ],
+  "repair_report": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\repair_v2.md",
+  "repair_details": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\repair_v2.json",
+  "fact_checks": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\fact_checks_v2.json",
+  "qualitative_coverage": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\qualitative_targets_v2.json",
+  "assumption_support": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\assumption_support_v2.json",
+  "validation": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\validation_v2.json",
+  "command_index": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\commands\\index.jsonl",
+  "process_trace_dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\processes",
+  "v1_paths_and_unchanged_sha256": {
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\input.json": "d872a864d1f7220c5635974b262b2b63378c1885998754ed8010134f8c7ae32e",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\forecast.json": "46c0c6ce0c71f27899ed4544012566489c8efef1d37826194048683732a36906",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\forecast.md": "4ccd4ff3e59ed0fc72af32850b35479dce595b1b641c140a2fb54d1675588511",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\snapshot.json": "ac029a2961a01f8d9d9f752bf6253535a45b3f7c3c61e594c6501928b755e0e2",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\manifest.json": "2845d8906d3e140a1eb7fa28ddf4981b1610d3c1037f0b6d49de4da2e73b4201"
+  },
+  "blocked": [
+    "US-07"
+  ],
+  "remaining_limits": [
+    "Numeric-only management runtime; qualitative ledger separate and reviewed semantically",
+    "Direct-growth fallback and all future ranges/fades remain conditional analyst judgment",
+    "No host signer or future actual backtest"
+  ],
+  "calls_and_cost": {
+    "external_llm_calls": 0,
+    "external_llm_tokens": 0,
+    "provider_paid_calls": 0,
+    "new_download_attempts": 0
+  },
+  "created_at": "2026-10-08T08:34:47.965298+00:00",
+  "runtime_version": "4.1.0",
+  "formal_technical_status": "PASS",
+  "sources": [
+    {
+      "source_id": "urn:company-wiki:source:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+      "document_id": "urn:company-wiki:document:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+      "sha256": "43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+      "bytes": 6860911,
+      "published_date": "2024-07-30",
+      "request_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\request_fy2024_reuse.json",
+      "response_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\request_fy2024_reuse_response.json",
+      "resolution_outcome": "reused_existing",
+      "downloads": 0,
+      "provider": null,
+      "mime_type": "text/html",
+      "original_retrieved_at": null,
+      "read_at": "2026-10-08T07:14:23.807273+00:00",
+      "provenance_unknowns": [
+        "canonical_entity_id",
+        "collector_name",
+        "collector_version",
+        "display_name",
+        "fiscal_period",
+        "language",
+        "period_end",
+        "provider",
+        "provider_document_id",
+        "retrieved_at"
+      ]
+    },
+    {
+      "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "bytes": 8158067,
+      "published_date": "2025-07-30",
+      "request_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\request_fy2025_reuse.json",
+      "response_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\request_fy2025_reuse_response.json",
+      "resolution_outcome": "reused_existing",
+      "downloads": 0,
+      "provider": null,
+      "mime_type": "text/html",
+      "original_retrieved_at": null,
+      "read_at": "2026-10-08T06:59:01.280502+00:00",
+      "provenance_unknowns": [
+        "canonical_entity_id",
+        "collector_name",
+        "collector_version",
+        "display_name",
+        "fiscal_period",
+        "language",
+        "period_end",
+        "provider",
+        "provider_document_id",
+        "retrieved_at"
+      ]
+    },
+    {
+      "source_id": "src_results",
+      "sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+      "bytes": 808850,
+      "published_date": "2026-07-29",
+      "request_path": null,
+      "response_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\results.html",
+      "resolution_outcome": "ancillary_official_source_capture_not_regulatory_acquisition",
+      "downloads": null,
+      "provider": "Microsoft",
+      "url": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q4/press-release-webcast"
+    },
+    {
+      "source_id": "src_call",
+      "sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+      "bytes": 273436,
+      "published_date": "2026-07-29",
+      "request_path": null,
+      "response_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\call.html",
+      "resolution_outcome": "ancillary_official_source_capture_not_regulatory_acquisition",
+      "downloads": null,
+      "provider": "Microsoft",
+      "url": "https://www.microsoft.com/en-us/Investor/events/fy-2026/earnings-fy-2026-q4"
+    },
+    {
+      "source_id": "src_metrics",
+      "sha256": "cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+      "bytes": 198175,
+      "published_date": "2026-07-29",
+      "request_path": null,
+      "response_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\metrics.html",
+      "resolution_outcome": "ancillary_official_source_capture_not_regulatory_acquisition",
+      "downloads": null,
+      "provider": "Microsoft",
+      "url": "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q4/metrics"
+    },
+    {
+      "source_id": "src_aws",
+      "sha256": "d83bb386a7d20107ec1480472490dab56ab83122e4e7f569fd1f36608c96e5a4",
+      "bytes": 647411,
+      "published_date": "2026-07-30",
+      "request_path": null,
+      "response_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\aws.html",
+      "resolution_outcome": "ancillary_official_source_capture_not_regulatory_acquisition",
+      "downloads": null,
+      "provider": "Amazon",
+      "url": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Second-Quarter-Results/default.aspx"
+    },
+    {
+      "source_id": "src_presentation",
+      "sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "bytes": 4016522,
+      "published_date": "2026-09-02",
+      "request_path": null,
+      "response_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\fy2027_segments_metrics.pptx",
+      "resolution_outcome": "ancillary_official_source_capture_not_regulatory_acquisition",
+      "downloads": null,
+      "provider": "Microsoft",
+      "url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/FY27ExternalKPIs.pptx"
+    },
+    {
+      "source_id": "src_strategy",
+      "sha256": "a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+      "bytes": 39253,
+      "published_date": "2026-09-25",
+      "request_path": null,
+      "response_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_material_announcements.json",
+      "resolution_outcome": "ancillary_official_source_capture_not_regulatory_acquisition",
+      "downloads": null,
+      "provider": "Microsoft",
+      "url": "https://blogs.microsoft.com/blog/2026/09/25/introducing-the-new-copilot-with-home-code-and-autopilot/"
+    },
+    {
+      "source_id": "src_data_innovation",
+      "sha256": "a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+      "bytes": 39253,
+      "published_date": "2026-09-28",
+      "request_path": null,
+      "response_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_material_announcements.json",
+      "resolution_outcome": "ancillary_official_source_capture_not_regulatory_acquisition",
+      "downloads": null,
+      "provider": "Microsoft",
+      "url": "https://blogs.microsoft.com/blog/2026/09/28/new-microsoft-data-innovations-unlock-what-only-your-business-knows/"
+    },
+    {
+      "source_id": "src_leadership",
+      "sha256": "a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+      "bytes": 39253,
+      "published_date": "2026-10-01",
+      "request_path": null,
+      "response_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\web_material_announcements.json",
+      "resolution_outcome": "ancillary_official_source_capture_not_regulatory_acquisition",
+      "downloads": null,
+      "provider": "Microsoft",
+      "url": "https://blogs.microsoft.com/blog/2026/10/01/microsoft-365-and-linkedin-leadership-update/"
+    }
+  ],
+  "step_matrix_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\skill_step_matrix_v2.json",
+  "claim_full_context_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\executions\\US-MSFT\\claim_contexts_v2.json",
+  "existing_production_narrative_reference": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\existing_narrative_current_vs_asof.json",
+    "sha256": "e639377ca4938b80a2376481e742dec05bc88bae588d0dbfc4aa618fa6039169",
+    "artifact_already_existed": true,
+    "new_worker_runs": 0,
+    "new_model_calls": 0,
+    "published_date_invented": false,
+    "forecast_input_consumption_proven": false,
+    "qualification": [
+      {
+        "consumer": "CWP",
+        "as_of_date": null,
+        "returncode": 0
+      },
+      {
+        "consumer": "CWP",
+        "as_of_date": "2026-10-08",
+        "returncode": 2
+      },
+      {
+        "consumer": "RF",
+        "as_of_date": null,
+        "returncode": 0
+      },
+      {
+        "consumer": "RF",
+        "as_of_date": "2026-10-08",
+        "returncode": 2
+      }
+    ],
+    "scope": "MAIN executed read-only current-consumer check of prior production TXT/narrative; not this batch newWorker or model consumption. Explicit asof rejected unknown published_date. FY25 SEC HTML remains unprocessed by canonical narrative."
+  }
+}

@@ -1,0 +1,6 @@
+usage: sync_installations.py [-h] [--apply | --print-manifest |
+                             --import-from IMPORT_FROM | --plan]
+                             [--canonical CANONICAL]
+                             [--destination DESTINATION] [--file RELATIVE]
+                             [--json]
+sync_installations.py: error: --file is outside the installable runtime closure: tests/test_registry_artifact_audit.py

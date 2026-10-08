@@ -1,0 +1,27 @@
+{
+  "selected_companies": [
+    "CN-688012",
+    "HK-00700",
+    "US-MSFT"
+  ],
+  "config_files": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\SKILL.md",
+      "sha256": "3e12e492715131aeaadd060b785017590c18b6fad97dc00720f9056fc51bb3cf"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\config\\company_wiki.json",
+      "sha256": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\config\\company_wiki.json",
+      "sha256": "73917689a14c1b17e69066b0837b0ad3ac1062c440243bc58fef34eb3e043ab0"
+    }
+  ],
+  "temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Packages\\sandbox.{45963a3f-3b1b-48bc-82e7-4384f304ddb9}\\AC\\Temp\\cwp-rf-e2e-20261008",
+  "timestamp_utc": "2026-10-08T06:48:16.1740531Z"
+}

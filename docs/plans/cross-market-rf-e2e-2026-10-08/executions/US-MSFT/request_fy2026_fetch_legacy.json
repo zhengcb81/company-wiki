@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.2",
+  "company_query": "MSFT",
+  "market": "US",
+  "document_kind": "annual_report",
+  "mode": "exact",
+  "fiscal_year": 2026,
+  "as_of_date": "2026-10-08",
+  "acquisition_limits": {
+    "max_bytes": 41943040,
+    "timeout_seconds": 180,
+    "max_cost_usd": "0.00"
+  }
+}

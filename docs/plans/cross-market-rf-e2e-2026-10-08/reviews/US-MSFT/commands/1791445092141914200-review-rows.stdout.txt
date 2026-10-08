@@ -1,0 +1,1575 @@
+PARAM {"parameter_id": "reported_total", "value": 331839, "kind": "reported_fact", "unit": "USD million", "period": "FY2026", "scenario": null, "source_ids": ["src_results"]}
+PARAM {"parameter_id": "azure_base", "value": 101938, "kind": "reported_fact", "unit": "USD million", "period": "FY2026", "scenario": null, "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "azure_growth_low_2027", "value": 0.3, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": "low", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "azure_growth_low_2028", "value": 0.22, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": "low", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "azure_growth_low_2029", "value": 0.16, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": "low", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "azure_growth_base_2027", "value": 0.38, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": "base", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "azure_growth_base_2028", "value": 0.3, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": "base", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "azure_growth_base_2029", "value": 0.24, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": "base", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "azure_growth_high_2027", "value": 0.45, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": "high", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "azure_growth_high_2028", "value": 0.38, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": "high", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "azure_growth_high_2029", "value": 0.3, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": "high", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "azure_recognition_identity_2027", "value": 1, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": null, "source_ids": ["urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"]}
+PARAM {"parameter_id": "azure_recognition_identity_2028", "value": 1, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": null, "source_ids": ["urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"]}
+PARAM {"parameter_id": "azure_recognition_identity_2029", "value": 1, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": null, "source_ids": ["urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"]}
+PARAM {"parameter_id": "microsoft_365_cloud_base", "value": 100299, "kind": "reported_fact", "unit": "USD million", "period": "FY2026", "scenario": null, "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "microsoft_365_cloud_growth_low_2027", "value": 0.12, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": "low", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "microsoft_365_cloud_growth_low_2028", "value": 0.1, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": "low", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "microsoft_365_cloud_growth_low_2029", "value": 0.08, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": "low", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "microsoft_365_cloud_growth_base_2027", "value": 0.17, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": "base", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "microsoft_365_cloud_growth_base_2028", "value": 0.16, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": "base", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "microsoft_365_cloud_growth_base_2029", "value": 0.14, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": "base", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "microsoft_365_cloud_growth_high_2027", "value": 0.22, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": "high", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "microsoft_365_cloud_growth_high_2028", "value": 0.21, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": "high", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "microsoft_365_cloud_growth_high_2029", "value": 0.19, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": "high", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "microsoft_365_cloud_recognition_identity_2027", "value": 1, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": null, "source_ids": ["urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"]}
+PARAM {"parameter_id": "microsoft_365_cloud_recognition_identity_2028", "value": 1, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": null, "source_ids": ["urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"]}
+PARAM {"parameter_id": "microsoft_365_cloud_recognition_identity_2029", "value": 1, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": null, "source_ids": ["urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"]}
+PARAM {"parameter_id": "productivity_and_server_licensing_base", "value": 37285, "kind": "reported_fact", "unit": "USD million", "period": "FY2026", "scenario": null, "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "productivity_and_server_licensing_growth_low_2027", "value": -0.08, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": "low", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "productivity_and_server_licensing_growth_low_2028", "value": -0.06, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": "low", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "productivity_and_server_licensing_growth_low_2029", "value": -0.05, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": "low", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "productivity_and_server_licensing_growth_base_2027", "value": -0.05, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": "base", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "productivity_and_server_licensing_growth_base_2028", "value": -0.03, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": "base", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "productivity_and_server_licensing_growth_base_2029", "value": -0.02, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": "base", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "productivity_and_server_licensing_growth_high_2027", "value": -0.02, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": "high", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "productivity_and_server_licensing_growth_high_2028", "value": 0, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": "high", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "productivity_and_server_licensing_growth_high_2029", "value": 0.01, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": "high", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "industry_solutions_base", "value": 20345, "kind": "reported_fact", "unit": "USD million", "period": "FY2026", "scenario": null, "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "industry_solutions_growth_low_2027", "value": 0.05, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": "low", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "industry_solutions_growth_low_2028", "value": 0.04, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": "low", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "industry_solutions_growth_low_2029", "value": 0.03, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": "low", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "industry_solutions_growth_base_2027", "value": 0.09, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": "base", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "industry_solutions_growth_base_2028", "value": 0.09, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": "base", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "industry_solutions_growth_base_2029", "value": 0.08, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": "base", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "industry_solutions_growth_high_2027", "value": 0.13, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": "high", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "industry_solutions_growth_high_2028", "value": 0.13, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": "high", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "industry_solutions_growth_high_2029", "value": 0.12, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": "high", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "frontier_and_support_services_base", "value": 8260, "kind": "reported_fact", "unit": "USD million", "period": "FY2026", "scenario": null, "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "frontier_and_support_services_growth_low_2027", "value": 0.02, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": "low", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "frontier_and_support_services_growth_low_2028", "value": 0.02, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": "low", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "frontier_and_support_services_growth_low_2029", "value": 0.01, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": "low", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "frontier_and_support_services_growth_base_2027", "value": 0.06, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": "base", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "frontier_and_support_services_growth_base_2028", "value": 0.05, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": "base", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "frontier_and_support_services_growth_base_2029", "value": 0.04, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": "base", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "frontier_and_support_services_growth_high_2027", "value": 0.09, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": "high", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "frontier_and_support_services_growth_high_2028", "value": 0.08, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": "high", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "frontier_and_support_services_growth_high_2029", "value": 0.07, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": "high", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "frontier_and_support_services_recognition_identity_2027", "value": 1, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": null, "source_ids": ["urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"]}
+PARAM {"parameter_id": "frontier_and_support_services_recognition_identity_2028", "value": 1, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": null, "source_ids": ["urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"]}
+PARAM {"parameter_id": "frontier_and_support_services_recognition_identity_2029", "value": 1, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": null, "source_ids": ["urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"]}
+PARAM {"parameter_id": "search_and_advertising_base", "value": 24835, "kind": "reported_fact", "unit": "USD million", "period": "FY2026", "scenario": null, "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "search_and_advertising_growth_low_2027", "value": 0.03, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": "low", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "search_and_advertising_growth_low_2028", "value": 0.02, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": "low", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "search_and_advertising_growth_low_2029", "value": 0.01, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": "low", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "search_and_advertising_growth_base_2027", "value": 0.08, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": "base", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "search_and_advertising_growth_base_2028", "value": 0.07, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": "base", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "search_and_advertising_growth_base_2029", "value": 0.06, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": "base", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "search_and_advertising_growth_high_2027", "value": 0.12, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": "high", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "search_and_advertising_growth_high_2028", "value": 0.11, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": "high", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "search_and_advertising_growth_high_2029", "value": 0.1, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": "high", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "xbox_base", "value": 21790, "kind": "reported_fact", "unit": "USD million", "period": "FY2026", "scenario": null, "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "xbox_growth_low_2027", "value": -0.1, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": "low", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "xbox_growth_low_2028", "value": -0.05, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": "low", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "xbox_growth_low_2029", "value": 0, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": "low", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "xbox_growth_base_2027", "value": -0.04, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": "base", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "xbox_growth_base_2028", "value": 0.02, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": "base", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "xbox_growth_base_2029", "value": 0.04, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": "base", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "xbox_growth_high_2027", "value": 0.02, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": "high", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "xbox_growth_high_2028", "value": 0.08, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": "high", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "xbox_growth_high_2029", "value": 0.08, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": "high", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "windows_oem_and_devices_base", "value": 17087, "kind": "reported_fact", "unit": "USD million", "period": "FY2026", "scenario": null, "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "windows_oem_and_devices_growth_low_2027", "value": -0.23, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": "low", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "windows_oem_and_devices_growth_low_2028", "value": -0.1, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": "low", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "windows_oem_and_devices_growth_low_2029", "value": -0.05, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": "low", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "windows_oem_and_devices_growth_base_2027", "value": -0.18, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": "base", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "windows_oem_and_devices_growth_base_2028", "value": -0.03, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": "base", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "windows_oem_and_devices_growth_base_2029", "value": 0, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": "base", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "windows_oem_and_devices_growth_high_2027", "value": -0.13, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2027", "scenario": "high", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "windows_oem_and_devices_growth_high_2028", "value": 0.03, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2028", "scenario": "high", "source_ids": ["src_presentation"]}
+PARAM {"parameter_id": "windows_oem_and_devices_growth_high_2029", "value": 0.05, "kind": "analyst_assumption", "unit": "ratio", "period": "FY2029", "scenario": "high", "source_ids": ["src_presentation"]}
+
+### source-context
+{
+  "source_id": "src_results",
+  "locator": "FY2026 release Income Statements, Revenue row, year ended 2026",
+  "excerpt": "Revenue 331,839",
+  "claims": [
+    {
+      "claim_id": "claim_1_reported_total",
+      "target_type": "parameter",
+      "target_id": "reported_total",
+      "extracted_value": 331839,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "exact_value"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_presentation",
+  "locator": "PPT slide17 As Restated, Fiscal Year2026 column; image17.png visual check",
+  "excerpt": "Azure $101,938",
+  "claims": [
+    {
+      "claim_id": "claim_2_azure_base",
+      "target_type": "parameter",
+      "target_id": "azure_base",
+      "extracted_value": 101938,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "exact_value"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_presentation",
+  "locator": "PPT slide17 restated history + slides20-21 outlook; causal memo links full call and independent AWS benchmark",
+  "excerpt": "Azure $101,938",
+  "claims": [
+    {
+      "claim_id": "claim_3_azure_growth_low_2027",
+      "target_type": "parameter",
+      "target_id": "azure_growth_low_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_4_azure_growth_low_2028",
+      "target_type": "parameter",
+      "target_id": "azure_growth_low_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_5_azure_growth_low_2029",
+      "target_type": "parameter",
+      "target_id": "azure_growth_low_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_6_azure_growth_base_2027",
+      "target_type": "parameter",
+      "target_id": "azure_growth_base_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_7_azure_growth_base_2028",
+      "target_type": "parameter",
+      "target_id": "azure_growth_base_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_8_azure_growth_base_2029",
+      "target_type": "parameter",
+      "target_id": "azure_growth_base_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_9_azure_growth_high_2027",
+      "target_type": "parameter",
+      "target_id": "azure_growth_high_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_10_azure_growth_high_2028",
+      "target_type": "parameter",
+      "target_id": "azure_growth_high_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_11_azure_growth_high_2029",
+      "target_type": "parameter",
+      "target_id": "azure_growth_high_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+  "locator": "FY2025 10K Note1 Revenue Recognition; cloud/consulting/license/advertising/hardware paragraphs",
+  "excerpt": "Revenue related to cloud services provided on a consumption basis",
+  "claims": [
+    {
+      "claim_id": "claim_12_recognition_Azure",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:Azure",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "policy_support"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+  "locator": "FY2025 10K Note1 Revenue Recognition",
+  "excerpt": "Revenue related to cloud services provided on a consumption basis",
+  "claims": [
+    {
+      "claim_id": "claim_13_azure_recognition_identity_2027",
+      "target_type": "parameter",
+      "target_id": "azure_recognition_identity_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_14_azure_recognition_identity_2028",
+      "target_type": "parameter",
+      "target_id": "azure_recognition_identity_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_15_azure_recognition_identity_2029",
+      "target_type": "parameter",
+      "target_id": "azure_recognition_identity_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_presentation",
+  "locator": "PPT slide17 As Restated, Fiscal Year2026 column; image17.png visual check",
+  "excerpt": "Microsoft 365 cloud $100,299",
+  "claims": [
+    {
+      "claim_id": "claim_16_microsoft_365_cloud_base",
+      "target_type": "parameter",
+      "target_id": "microsoft_365_cloud_base",
+      "extracted_value": 100299,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "exact_value"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_presentation",
+  "locator": "PPT slide17 restated history + slides20-21 outlook; causal memo links full call and independent AWS benchmark",
+  "excerpt": "Microsoft 365 cloud $100,299",
+  "claims": [
+    {
+      "claim_id": "claim_17_microsoft_365_cloud_growth_low_2027",
+      "target_type": "parameter",
+      "target_id": "microsoft_365_cloud_growth_low_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_18_microsoft_365_cloud_growth_low_2028",
+      "target_type": "parameter",
+      "target_id": "microsoft_365_cloud_growth_low_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_19_microsoft_365_cloud_growth_low_2029",
+      "target_type": "parameter",
+      "target_id": "microsoft_365_cloud_growth_low_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_20_microsoft_365_cloud_growth_base_2027",
+      "target_type": "parameter",
+      "target_id": "microsoft_365_cloud_growth_base_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_21_microsoft_365_cloud_growth_base_2028",
+      "target_type": "parameter",
+      "target_id": "microsoft_365_cloud_growth_base_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_22_microsoft_365_cloud_growth_base_2029",
+      "target_type": "parameter",
+      "target_id": "microsoft_365_cloud_growth_base_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_23_microsoft_365_cloud_growth_high_2027",
+      "target_type": "parameter",
+      "target_id": "microsoft_365_cloud_growth_high_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_24_microsoft_365_cloud_growth_high_2028",
+      "target_type": "parameter",
+      "target_id": "microsoft_365_cloud_growth_high_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_25_microsoft_365_cloud_growth_high_2029",
+      "target_type": "parameter",
+      "target_id": "microsoft_365_cloud_growth_high_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+  "locator": "FY2025 10K Note1 Revenue Recognition; cloud/consulting/license/advertising/hardware paragraphs",
+  "excerpt": "recognized ratably over the contract period",
+  "claims": [
+    {
+      "claim_id": "claim_26_recognition_Microsoft_365_cloud",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:Microsoft 365 cloud",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "policy_support"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+  "locator": "FY2025 10K Note1 Revenue Recognition",
+  "excerpt": "recognized ratably over the contract period",
+  "claims": [
+    {
+      "claim_id": "claim_27_microsoft_365_cloud_recognition_identity_2027",
+      "target_type": "parameter",
+      "target_id": "microsoft_365_cloud_recognition_identity_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_28_microsoft_365_cloud_recognition_identity_2028",
+      "target_type": "parameter",
+      "target_id": "microsoft_365_cloud_recognition_identity_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_29_microsoft_365_cloud_recognition_identity_2029",
+      "target_type": "parameter",
+      "target_id": "microsoft_365_cloud_recognition_identity_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_presentation",
+  "locator": "PPT slide17 As Restated, Fiscal Year2026 column; image17.png visual check",
+  "excerpt": "Productivity and server licensing $37,285",
+  "claims": [
+    {
+      "claim_id": "claim_30_productivity_and_server_licensing_base",
+      "target_type": "parameter",
+      "target_id": "productivity_and_server_licensing_base",
+      "extracted_value": 37285,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "exact_value"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_presentation",
+  "locator": "PPT slide17 restated history + slides20-21 outlook; causal memo links full call and independent AWS benchmark",
+  "excerpt": "Productivity and server licensing $37,285",
+  "claims": [
+    {
+      "claim_id": "claim_31_productivity_and_server_licensing_growth_low_2027",
+      "target_type": "parameter",
+      "target_id": "productivity_and_server_licensing_growth_low_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_32_productivity_and_server_licensing_growth_low_2028",
+      "target_type": "parameter",
+      "target_id": "productivity_and_server_licensing_growth_low_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_33_productivity_and_server_licensing_growth_low_2029",
+      "target_type": "parameter",
+      "target_id": "productivity_and_server_licensing_growth_low_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_34_productivity_and_server_licensing_growth_base_2027",
+      "target_type": "parameter",
+      "target_id": "productivity_and_server_licensing_growth_base_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_35_productivity_and_server_licensing_growth_base_2028",
+      "target_type": "parameter",
+      "target_id": "productivity_and_server_licensing_growth_base_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_36_productivity_and_server_licensing_growth_base_2029",
+      "target_type": "parameter",
+      "target_id": "productivity_and_server_licensing_growth_base_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_37_productivity_and_server_licensing_growth_high_2027",
+      "target_type": "parameter",
+      "target_id": "productivity_and_server_licensing_growth_high_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_38_productivity_and_server_licensing_growth_high_2028",
+      "target_type": "parameter",
+      "target_id": "productivity_and_server_licensing_growth_high_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_39_productivity_and_server_licensing_growth_high_2029",
+      "target_type": "parameter",
+      "target_id": "productivity_and_server_licensing_growth_high_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+  "locator": "FY2025 10K Note1 Revenue Recognition; cloud/consulting/license/advertising/hardware paragraphs",
+  "excerpt": "Revenue is recognized upon transfer of control",
+  "claims": [
+    {
+      "claim_id": "claim_40_recognition_Productivity_and_server_licensing",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:Productivity and server licensing",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "policy_support"
+    },
+    {
+      "claim_id": "claim_51_recognition_Industry_solutions",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:Industry solutions",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "policy_support"
+    },
+    {
+      "claim_id": "claim_76_recognition_Search_and_advertising",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:Search and advertising",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "policy_support"
+    },
+    {
+      "claim_id": "claim_87_recognition_XBOX",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:XBOX",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "policy_support"
+    },
+    {
+      "claim_id": "claim_98_recognition_Windows_OEM_and_devices",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:Windows OEM and devices",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "policy_support"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_presentation",
+  "locator": "PPT slide17 As Restated, Fiscal Year2026 column; image17.png visual check",
+  "excerpt": "Industry solutions $20,345",
+  "claims": [
+    {
+      "claim_id": "claim_41_industry_solutions_base",
+      "target_type": "parameter",
+      "target_id": "industry_solutions_base",
+      "extracted_value": 20345,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "exact_value"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_presentation",
+  "locator": "PPT slide17 restated history + slides20-21 outlook; causal memo links full call and independent AWS benchmark",
+  "excerpt": "Industry solutions $20,345",
+  "claims": [
+    {
+      "claim_id": "claim_42_industry_solutions_growth_low_2027",
+      "target_type": "parameter",
+      "target_id": "industry_solutions_growth_low_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_43_industry_solutions_growth_low_2028",
+      "target_type": "parameter",
+      "target_id": "industry_solutions_growth_low_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_44_industry_solutions_growth_low_2029",
+      "target_type": "parameter",
+      "target_id": "industry_solutions_growth_low_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_45_industry_solutions_growth_base_2027",
+      "target_type": "parameter",
+      "target_id": "industry_solutions_growth_base_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_46_industry_solutions_growth_base_2028",
+      "target_type": "parameter",
+      "target_id": "industry_solutions_growth_base_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_47_industry_solutions_growth_base_2029",
+      "target_type": "parameter",
+      "target_id": "industry_solutions_growth_base_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_48_industry_solutions_growth_high_2027",
+      "target_type": "parameter",
+      "target_id": "industry_solutions_growth_high_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_49_industry_solutions_growth_high_2028",
+      "target_type": "parameter",
+      "target_id": "industry_solutions_growth_high_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_50_industry_solutions_growth_high_2029",
+      "target_type": "parameter",
+      "target_id": "industry_solutions_growth_high_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_presentation",
+  "locator": "PPT slide17 As Restated, Fiscal Year2026 column; image17.png visual check",
+  "excerpt": "Frontier and support services $8,260",
+  "claims": [
+    {
+      "claim_id": "claim_52_frontier_and_support_services_base",
+      "target_type": "parameter",
+      "target_id": "frontier_and_support_services_base",
+      "extracted_value": 8260,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "exact_value"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_presentation",
+  "locator": "PPT slide17 restated history + slides20-21 outlook; causal memo links full call and independent AWS benchmark",
+  "excerpt": "Frontier and support services $8,260",
+  "claims": [
+    {
+      "claim_id": "claim_53_frontier_and_support_services_growth_low_2027",
+      "target_type": "parameter",
+      "target_id": "frontier_and_support_services_growth_low_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_54_frontier_and_support_services_growth_low_2028",
+      "target_type": "parameter",
+      "target_id": "frontier_and_support_services_growth_low_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_55_frontier_and_support_services_growth_low_2029",
+      "target_type": "parameter",
+      "target_id": "frontier_and_support_services_growth_low_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_56_frontier_and_support_services_growth_base_2027",
+      "target_type": "parameter",
+      "target_id": "frontier_and_support_services_growth_base_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_57_frontier_and_support_services_growth_base_2028",
+      "target_type": "parameter",
+      "target_id": "frontier_and_support_services_growth_base_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_58_frontier_and_support_services_growth_base_2029",
+      "target_type": "parameter",
+      "target_id": "frontier_and_support_services_growth_base_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_59_frontier_and_support_services_growth_high_2027",
+      "target_type": "parameter",
+      "target_id": "frontier_and_support_services_growth_high_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_60_frontier_and_support_services_growth_high_2028",
+      "target_type": "parameter",
+      "target_id": "frontier_and_support_services_growth_high_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_61_frontier_and_support_services_growth_high_2029",
+      "target_type": "parameter",
+      "target_id": "frontier_and_support_services_growth_high_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+  "locator": "FY2025 10K Note1 Revenue Recognition; cloud/consulting/license/advertising/hardware paragraphs",
+  "excerpt": "recognized as services are provided",
+  "claims": [
+    {
+      "claim_id": "claim_62_recognition_Frontier_and_support_services",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:Frontier and support services",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "policy_support"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+  "locator": "FY2025 10K Note1 Revenue Recognition",
+  "excerpt": "recognized as services are provided",
+  "claims": [
+    {
+      "claim_id": "claim_63_frontier_and_support_services_recognition_identity_2027",
+      "target_type": "parameter",
+      "target_id": "frontier_and_support_services_recognition_identity_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_64_frontier_and_support_services_recognition_identity_2028",
+      "target_type": "parameter",
+      "target_id": "frontier_and_support_services_recognition_identity_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_65_frontier_and_support_services_recognition_identity_2029",
+      "target_type": "parameter",
+      "target_id": "frontier_and_support_services_recognition_identity_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_presentation",
+  "locator": "PPT slide17 As Restated, Fiscal Year2026 column; image17.png visual check",
+  "excerpt": "Search and advertising $24,835",
+  "claims": [
+    {
+      "claim_id": "claim_66_search_and_advertising_base",
+      "target_type": "parameter",
+      "target_id": "search_and_advertising_base",
+      "extracted_value": 24835,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "exact_value"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_presentation",
+  "locator": "PPT slide17 restated history + slides20-21 outlook; causal memo links full call and independent AWS benchmark",
+  "excerpt": "Search and advertising $24,835",
+  "claims": [
+    {
+      "claim_id": "claim_67_search_and_advertising_growth_low_2027",
+      "target_type": "parameter",
+      "target_id": "search_and_advertising_growth_low_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_68_search_and_advertising_growth_low_2028",
+      "target_type": "parameter",
+      "target_id": "search_and_advertising_growth_low_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_69_search_and_advertising_growth_low_2029",
+      "target_type": "parameter",
+      "target_id": "search_and_advertising_growth_low_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_70_search_and_advertising_growth_base_2027",
+      "target_type": "parameter",
+      "target_id": "search_and_advertising_growth_base_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_71_search_and_advertising_growth_base_2028",
+      "target_type": "parameter",
+      "target_id": "search_and_advertising_growth_base_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_72_search_and_advertising_growth_base_2029",
+      "target_type": "parameter",
+      "target_id": "search_and_advertising_growth_base_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_73_search_and_advertising_growth_high_2027",
+      "target_type": "parameter",
+      "target_id": "search_and_advertising_growth_high_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_74_search_and_advertising_growth_high_2028",
+      "target_type": "parameter",
+      "target_id": "search_and_advertising_growth_high_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_75_search_and_advertising_growth_high_2029",
+      "target_type": "parameter",
+      "target_id": "search_and_advertising_growth_high_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_presentation",
+  "locator": "PPT slide17 As Restated, Fiscal Year2026 column; image17.png visual check",
+  "excerpt": "XBOX $21,790",
+  "claims": [
+    {
+      "claim_id": "claim_77_xbox_base",
+      "target_type": "parameter",
+      "target_id": "xbox_base",
+      "extracted_value": 21790,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "exact_value"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_presentation",
+  "locator": "PPT slide17 restated history + slides20-21 outlook; causal memo links full call and independent AWS benchmark",
+  "excerpt": "XBOX $21,790",
+  "claims": [
+    {
+      "claim_id": "claim_78_xbox_growth_low_2027",
+      "target_type": "parameter",
+      "target_id": "xbox_growth_low_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_79_xbox_growth_low_2028",
+      "target_type": "parameter",
+      "target_id": "xbox_growth_low_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_80_xbox_growth_low_2029",
+      "target_type": "parameter",
+      "target_id": "xbox_growth_low_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_81_xbox_growth_base_2027",
+      "target_type": "parameter",
+      "target_id": "xbox_growth_base_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_82_xbox_growth_base_2028",
+      "target_type": "parameter",
+      "target_id": "xbox_growth_base_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_83_xbox_growth_base_2029",
+      "target_type": "parameter",
+      "target_id": "xbox_growth_base_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_84_xbox_growth_high_2027",
+      "target_type": "parameter",
+      "target_id": "xbox_growth_high_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_85_xbox_growth_high_2028",
+      "target_type": "parameter",
+      "target_id": "xbox_growth_high_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_86_xbox_growth_high_2029",
+      "target_type": "parameter",
+      "target_id": "xbox_growth_high_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_presentation",
+  "locator": "PPT slide17 As Restated, Fiscal Year2026 column; image17.png visual check",
+  "excerpt": "Windows OEM and devices $17,087",
+  "claims": [
+    {
+      "claim_id": "claim_88_windows_oem_and_devices_base",
+      "target_type": "parameter",
+      "target_id": "windows_oem_and_devices_base",
+      "extracted_value": 17087,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "exact_value"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_presentation",
+  "locator": "PPT slide17 restated history + slides20-21 outlook; causal memo links full call and independent AWS benchmark",
+  "excerpt": "Windows OEM and devices $17,087",
+  "claims": [
+    {
+      "claim_id": "claim_89_windows_oem_and_devices_growth_low_2027",
+      "target_type": "parameter",
+      "target_id": "windows_oem_and_devices_growth_low_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_90_windows_oem_and_devices_growth_low_2028",
+      "target_type": "parameter",
+      "target_id": "windows_oem_and_devices_growth_low_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_91_windows_oem_and_devices_growth_low_2029",
+      "target_type": "parameter",
+      "target_id": "windows_oem_and_devices_growth_low_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_92_windows_oem_and_devices_growth_base_2027",
+      "target_type": "parameter",
+      "target_id": "windows_oem_and_devices_growth_base_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_93_windows_oem_and_devices_growth_base_2028",
+      "target_type": "parameter",
+      "target_id": "windows_oem_and_devices_growth_base_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_94_windows_oem_and_devices_growth_base_2029",
+      "target_type": "parameter",
+      "target_id": "windows_oem_and_devices_growth_base_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_95_windows_oem_and_devices_growth_high_2027",
+      "target_type": "parameter",
+      "target_id": "windows_oem_and_devices_growth_high_2027",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_96_windows_oem_and_devices_growth_high_2028",
+      "target_type": "parameter",
+      "target_id": "windows_oem_and_devices_growth_high_2028",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_97_windows_oem_and_devices_growth_high_2029",
+      "target_type": "parameter",
+      "target_id": "windows_oem_and_devices_growth_high_2029",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+  "locator": "Consolidated annual Income Statements Revenue row FY2024",
+  "excerpt": "Revenue 245,122",
+  "claims": [
+    {
+      "claim_id": "claim_99_historical_revenue_2024",
+      "target_type": "historical_revenue",
+      "target_id": "historical_revenue:2024",
+      "extracted_value": 245122,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "exact_value"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_results",
+  "locator": "Consolidated annual Income Statements Revenue row FY2025",
+  "excerpt": "Revenue 281,724",
+  "claims": [
+    {
+      "claim_id": "claim_100_historical_revenue_2025",
+      "target_type": "historical_revenue",
+      "target_id": "historical_revenue:2025",
+      "extracted_value": 281724,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "exact_value"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_results",
+  "locator": "Consolidated annual Income Statements Revenue row FY2026",
+  "excerpt": "Revenue 331,839",
+  "claims": [
+    {
+      "claim_id": "claim_101_historical_revenue_2026",
+      "target_type": "historical_revenue",
+      "target_id": "historical_revenue:2026",
+      "extracted_value": 331839,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "exact_value"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_call",
+  "locator": "Official FY26Q4 full call: CFO outlook and Q&A",
+  "excerpt": "demand exceeds available supply",
+  "claims": [
+    {
+      "claim_id": "claim_102_cloud_ai_company",
+      "target_type": "growth_driver",
+      "target_id": "cloud_ai_company",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_call",
+  "locator": "Official full call CFO outlook / complete Q&A counterevidence",
+  "excerpt": "demand exceeds available supply",
+  "claims": [
+    {
+      "claim_id": "claim_103_cloud_ai_contrary",
+      "target_type": "growth_driver",
+      "target_id": "cloud_ai_contrary",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_aws",
+  "locator": "Amazon July30 Q22026 official release opening results",
+  "excerpt": "AWS net sales increased 37%",
+  "claims": [
+    {
+      "claim_id": "claim_104_cloud_ai_peer",
+      "target_type": "growth_driver",
+      "target_id": "cloud_ai_peer",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    },
+    {
+      "claim_id": "claim_122_company_fy27_double_digit",
+      "target_type": "management_target",
+      "target_id": "company_fy27_double_digit",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_call",
+  "locator": "Official FY26Q4 full call: CFO outlook and Q&A",
+  "excerpt": "decline in the mid-single digits",
+  "claims": [
+    {
+      "claim_id": "claim_105_enterprise_migration_company",
+      "target_type": "growth_driver",
+      "target_id": "enterprise_migration_company",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_call",
+  "locator": "Official full call CFO outlook / complete Q&A counterevidence",
+  "excerpt": "decline in the mid-single digits",
+  "claims": [
+    {
+      "claim_id": "claim_106_enterprise_migration_contrary",
+      "target_type": "growth_driver",
+      "target_id": "enterprise_migration_contrary",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_call",
+  "locator": "Official FY26Q4 full call: CFO outlook and Q&A",
+  "excerpt": "revenue per search and volume",
+  "claims": [
+    {
+      "claim_id": "claim_107_advertising_company",
+      "target_type": "growth_driver",
+      "target_id": "advertising_company",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_call",
+  "locator": "Official full call CFO outlook / complete Q&A counterevidence",
+  "excerpt": "impact of third-party partnerships",
+  "claims": [
+    {
+      "claim_id": "claim_108_advertising_contrary",
+      "target_type": "growth_driver",
+      "target_id": "advertising_contrary",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_call",
+  "locator": "Official FY26Q4 full call: CFO outlook and Q&A",
+  "excerpt": "elevated inventory levels",
+  "claims": [
+    {
+      "claim_id": "claim_109_consumer_cycle_company",
+      "target_type": "growth_driver",
+      "target_id": "consumer_cycle_company",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_call",
+  "locator": "Official full call CFO outlook / complete Q&A counterevidence",
+  "excerpt": "elevated inventory levels",
+  "claims": [
+    {
+      "claim_id": "claim_110_consumer_cycle_contrary",
+      "target_type": "growth_driver",
+      "target_id": "consumer_cycle_contrary",
+      "extracted_value": null,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "rationale_support"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_presentation",
+  "locator": "PPT slide20 adjusted FY27Q1 outlook",
+  "excerpt": "Revenue of $89.85 to $90.95 billion",
+  "claims": [
+    {
+      "claim_id": "claim_111_company_q1_low",
+      "target_type": "management_target",
+      "target_id": "company_q1_low",
+      "extracted_value": 89.85,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "exact_value"
+    },
+    {
+      "claim_id": "claim_112_company_q1_high",
+      "target_type": "management_target",
+      "target_id": "company_q1_high",
+      "extracted_value": 90.95,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "exact_value"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_presentation",
+  "locator": "PPT slide20 adjusted FY27Q1 outlook",
+  "excerpt": "Revenue of $75.15 to $75.75 billion",
+  "claims": [
+    {
+      "claim_id": "claim_113_agents_q1_low",
+      "target_type": "management_target",
+      "target_id": "agents_q1_low",
+      "extracted_value": 75.15,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "exact_value"
+    },
+    {
+      "claim_id": "claim_114_agents_q1_high",
+      "target_type": "management_target",
+      "target_id": "agents_q1_high",
+      "extracted_value": 75.75,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "exact_value"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_presentation",
+  "locator": "PPT slide20 adjusted FY27Q1 outlook",
+  "excerpt": "Revenue of $14.7 to $15.2 billion",
+  "claims": [
+    {
+      "claim_id": "claim_115_devices_q1_low",
+      "target_type": "management_target",
+      "target_id": "devices_q1_low",
+      "extracted_value": 14.7,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "exact_value"
+    },
+    {
+      "claim_id": "claim_116_devices_q1_high",
+      "target_type": "management_target",
+      "target_id": "devices_q1_high",
+      "extracted_value": 15.2,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "exact_value"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_presentation",
+  "locator": "PPT slide21 adjusted FY27Q1 outlook",
+  "excerpt": "Growth of 44% to 45% in constant currency",
+  "claims": [
+    {
+      "claim_id": "claim_117_azure_q1_cc_low",
+      "target_type": "management_target",
+      "target_id": "azure_q1_cc_low",
+      "extracted_value": 44,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "exact_value"
+    },
+    {
+      "claim_id": "claim_118_azure_q1_cc_high",
+      "target_type": "management_target",
+      "target_id": "azure_q1_cc_high",
+      "extracted_value": 45,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "exact_value"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_presentation",
+  "locator": "PPT slide21 adjusted FY27Q1 outlook",
+  "excerpt": "Growth of approximately 17% in constant currency",
+  "claims": [
+    {
+      "claim_id": "claim_119_m365_q1_cc",
+      "target_type": "management_target",
+      "target_id": "m365_q1_cc",
+      "extracted_value": 17,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "exact_value"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_presentation",
+  "locator": "PPT slide21 adjusted FY27Q1 outlook",
+  "excerpt": "Growth of approximately 18% in constant currency",
+  "claims": [
+    {
+      "claim_id": "claim_120_m365_q1_adjusted_cc",
+      "target_type": "management_target",
+      "target_id": "m365_q1_adjusted_cc",
+      "extracted_value": 18,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "exact_value"
+    }
+  ]
+}
+
+### source-context
+{
+  "source_id": "src_call",
+  "locator": "Official FY26Q4 full call CFO FY27 outlook paragraph",
+  "excerpt": "another fiscal year of double-digit revenue",
+  "claims": [
+    {
+      "claim_id": "claim_121_company_fy27_double_digit",
+      "target_type": "management_target",
+      "target_id": "company_fy27_double_digit",
+      "extracted_value": 10,
+      "extracted_unit": null,
+      "extracted_period": null,
+      "support_type": "exact_value"
+    }
+  ]
+}

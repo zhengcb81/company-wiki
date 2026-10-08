@@ -1,0 +1,5 @@
+# Audited artifact fingerprints bind exact bytes, including logged CRLF.
+# Scope is this one audit directory; production code keeps its normal policy.
+* -text
+**/commands/*.txt -diff
+main_commands/*.txt -diff

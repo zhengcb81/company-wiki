@@ -1,0 +1,2323 @@
+{
+  "schema_version": "1.0",
+  "company": "Tencent 00700",
+  "as_of_date": "2026-10-08",
+  "facts_and_claims": [
+    {
+      "claim_id": "claim_parameter_reported_total_0",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "target_type": "parameter",
+      "target_id": "reported_total",
+      "support_type": "exact_value",
+      "locator": "FY2025 annual PDF page 196 / printed 195 Note 6(b)",
+      "excerpt": "科技及企業服務 229,435 211,956 －其他 8,077 7,759 751,766 660,257",
+      "excerpt_sha256": "8a55345de32216ca92d1f622992fc1cce21e75e7cd8b0aa4568c9509777afe7c",
+      "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "capture_receipt_sha256": "8b292acee306c6bb586f6012a8ffa37a9549958cc16a56eb72504c0ce802d3c0",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "extracted_value": 751766,
+      "period": "FY2025",
+      "unit": "CNY million",
+      "checked_source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+      "conclusion": "Checked against complete original context; exact fact"
+    },
+    {
+      "claim_id": "claim_parameter_games_base_1",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "target_type": "parameter",
+      "target_id": "games_base",
+      "support_type": "exact_value",
+      "locator": "FY2025 annual PDF page 196 / printed 195 Note 6(b)",
+      "excerpt": "幣百萬元 人民幣百萬元 收入 －增值服務 369,281 319,168 遊戲 241,532 197,712 社交網絡 127,749 121,456 －營銷服務 144,973 121,374 －金融科技及企業服務 229,435 211,956 －其他 8,077 7,759 751,766 660,257",
+      "excerpt_sha256": "79ca198e31f3499635698b026dde688d4c150e6edbb527a4c2d7269792941abe",
+      "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "capture_receipt_sha256": "8b292acee306c6bb586f6012a8ffa37a9549958cc16a56eb72504c0ce802d3c0",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "extracted_value": 241532,
+      "period": "FY2025",
+      "unit": "CNY million",
+      "checked_source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+      "conclusion": "Checked against complete original context; exact fact"
+    },
+    {
+      "fact_id": "games_fy2024_reconciliation",
+      "source_ids": [
+        "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "locators": [
+        "FY2024 annual PDF page 188 / printed 187 Note 6(b)",
+        "FY2025 annual PDF page 196 / printed 195 comparative"
+      ],
+      "value": 197712,
+      "unit": "CNY million",
+      "period": "FY2024",
+      "excerpt": "幣百萬元 人民幣百萬元 收入 －增值服務 319,168 298,375 遊戲 197,712 179,860 社交網絡 121,456 118,515 －營銷服務 121,374 101,482 －金融科技及企業服務 211,956 203,763 －其他 7,759 5,395 660,257 609,015",
+      "conclusion": "Two separate annual originals match; sum 660257; FY2024 VAS319168 = Games197712 + Social121456"
+    },
+    {
+      "claim_id": "claim_parameter_socialnetworks_base_2",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_base",
+      "support_type": "exact_value",
+      "locator": "FY2025 annual PDF page 196 / printed 195 Note 6(b)",
+      "excerpt": "369,281 319,168 遊戲 241,532 197,712 社交網絡 127,749 121,456 －營銷服務 144,973 121,374 －金融科技及企業服務 229,435 211,956 －其他 8,077 7,759 751,766 660,257",
+      "excerpt_sha256": "a8b63623c2ae04c1396189cd1866d1084751234624cdd72024b308809436b5b2",
+      "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "capture_receipt_sha256": "8b292acee306c6bb586f6012a8ffa37a9549958cc16a56eb72504c0ce802d3c0",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "extracted_value": 127749,
+      "period": "FY2025",
+      "unit": "CNY million",
+      "checked_source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+      "conclusion": "Checked against complete original context; exact fact"
+    },
+    {
+      "fact_id": "socialnetworks_fy2024_reconciliation",
+      "source_ids": [
+        "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "locators": [
+        "FY2024 annual PDF page 188 / printed 187 Note 6(b)",
+        "FY2025 annual PDF page 196 / printed 195 comparative"
+      ],
+      "value": 121456,
+      "unit": "CNY million",
+      "period": "FY2024",
+      "excerpt": "319,168 298,375 遊戲 197,712 179,860 社交網絡 121,456 118,515 －營銷服務 121,374 101,482 －金融科技及企業服務 211,956 203,763 －其他 7,759 5,395 660,257 609,015",
+      "conclusion": "Two separate annual originals match; sum 660257; FY2024 VAS319168 = Games197712 + Social121456"
+    },
+    {
+      "claim_id": "claim_parameter_marketingservices_base_3",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "target_type": "parameter",
+      "target_id": "marketingservices_base",
+      "support_type": "exact_value",
+      "locator": "FY2025 annual PDF page 196 / printed 195 Note 6(b)",
+      "excerpt": ",532 197,712 社交網絡 127,749 121,456 －營銷服務 144,973 121,374 －金融科技及企業服務 229,435 211,956 －其他 8,077 7,759 751,766 660,257",
+      "excerpt_sha256": "d62da8babfc6fbe225ad87cd50f784e46bcc8f6ce6da00f774fd9223e4e1f6bc",
+      "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "capture_receipt_sha256": "8b292acee306c6bb586f6012a8ffa37a9549958cc16a56eb72504c0ce802d3c0",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "extracted_value": 144973,
+      "period": "FY2025",
+      "unit": "CNY million",
+      "checked_source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+      "conclusion": "Checked against complete original context; exact fact"
+    },
+    {
+      "fact_id": "marketingservices_fy2024_reconciliation",
+      "source_ids": [
+        "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "locators": [
+        "FY2024 annual PDF page 188 / printed 187 Note 6(b)",
+        "FY2025 annual PDF page 196 / printed 195 comparative"
+      ],
+      "value": 121374,
+      "unit": "CNY million",
+      "period": "FY2024",
+      "excerpt": ",712 179,860 社交網絡 121,456 118,515 －營銷服務 121,374 101,482 －金融科技及企業服務 211,956 203,763 －其他 7,759 5,395 660,257 609,015",
+      "conclusion": "Two separate annual originals match; sum 660257; FY2024 VAS319168 = Games197712 + Social121456"
+    },
+    {
+      "claim_id": "claim_parameter_fintechbusinessservices_base_4",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_base",
+      "support_type": "exact_value",
+      "locator": "FY2025 annual PDF page 196 / printed 195 Note 6(b)",
+      "excerpt": "21,456 －營銷服務 144,973 121,374 －金融科技及企業服務 229,435 211,956 －其他 8,077 7,759 751,766 660,257",
+      "excerpt_sha256": "dc7e6e4eacb22e494bb3871129e6db4c00edebc2b0ccb8603bbbf90c36ea000b",
+      "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "capture_receipt_sha256": "8b292acee306c6bb586f6012a8ffa37a9549958cc16a56eb72504c0ce802d3c0",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "extracted_value": 229435,
+      "period": "FY2025",
+      "unit": "CNY million",
+      "checked_source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+      "conclusion": "Checked against complete original context; exact fact"
+    },
+    {
+      "fact_id": "fintechbusinessservices_fy2024_reconciliation",
+      "source_ids": [
+        "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "locators": [
+        "FY2024 annual PDF page 188 / printed 187 Note 6(b)",
+        "FY2025 annual PDF page 196 / printed 195 comparative"
+      ],
+      "value": 211956,
+      "unit": "CNY million",
+      "period": "FY2024",
+      "excerpt": "18,515 －營銷服務 121,374 101,482 －金融科技及企業服務 211,956 203,763 －其他 7,759 5,395 660,257 609,015",
+      "conclusion": "Two separate annual originals match; sum 660257; FY2024 VAS319168 = Games197712 + Social121456"
+    },
+    {
+      "claim_id": "claim_parameter_others_base_5",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "target_type": "parameter",
+      "target_id": "others_base",
+      "support_type": "exact_value",
+      "locator": "FY2025 annual PDF page 196 / printed 195 Note 6(b)",
+      "excerpt": "121,374 －金融科技及企業服務 229,435 211,956 －其他 8,077 7,759 751,766 660,257",
+      "excerpt_sha256": "8618082385f25d9e3d17e6d8146c51bb8bccfa0612d1d0431613fbac2ea95e00",
+      "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "capture_receipt_sha256": "8b292acee306c6bb586f6012a8ffa37a9549958cc16a56eb72504c0ce802d3c0",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "extracted_value": 8077,
+      "period": "FY2025",
+      "unit": "CNY million",
+      "checked_source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+      "conclusion": "Checked against complete original context; exact fact"
+    },
+    {
+      "fact_id": "others_fy2024_reconciliation",
+      "source_ids": [
+        "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "locators": [
+        "FY2024 annual PDF page 188 / printed 187 Note 6(b)",
+        "FY2025 annual PDF page 196 / printed 195 comparative"
+      ],
+      "value": 7759,
+      "unit": "CNY million",
+      "period": "FY2024",
+      "excerpt": " 101,482 －金融科技及企業服務 211,956 203,763 －其他 7,759 5,395 660,257 609,015",
+      "conclusion": "Two separate annual originals match; sum 660257; FY2024 VAS319168 = Games197712 + Social121456"
+    },
+    {
+      "claim_id": "claim_historical_revenue_historical_revenue:2021_6",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "target_type": "historical_revenue",
+      "target_id": "historical_revenue:2021",
+      "support_type": "exact_value",
+      "locator": "FY2025 annual PDF page 4 / printed 3 five-year financial summary",
+      "excerpt": "年 人民幣百萬元 人民幣百萬元 人民幣百萬元 人民幣百萬元 人民幣百萬元 收入 560,118 554,552 609,015 660,257 751,766 毛利 245,944 238,746 293,109 349,246 422,593 經營盈利 124,656 110,827 160,074 208,099 241,562 除稅前盈利 248,062 210,225 161,324 241,485 277,249 年度盈利 227,810 188,709 118,048 196,467 229,801 本公司權益持有人應佔盈利 224,822",
+      "excerpt_sha256": "1b3c804e159bcf4b75240b3a5cb54afea83578f274e8a5d17792bfc0f3025fd0",
+      "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "capture_receipt_sha256": "8b292acee306c6bb586f6012a8ffa37a9549958cc16a56eb72504c0ce802d3c0",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "extracted_value": 560118,
+      "period": "FY2021",
+      "unit": "CNY million",
+      "checked_source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+      "conclusion": "Checked against complete original context; exact fact"
+    },
+    {
+      "claim_id": "claim_historical_revenue_historical_revenue:2022_7",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "target_type": "historical_revenue",
+      "target_id": "historical_revenue:2022",
+      "support_type": "exact_value",
+      "locator": "FY2025 annual PDF page 4 / printed 3 five-year financial summary",
+      "excerpt": "人民幣百萬元 人民幣百萬元 人民幣百萬元 人民幣百萬元 收入 560,118 554,552 609,015 660,257 751,766 毛利 245,944 238,746 293,109 349,246 422,593 經營盈利 124,656 110,827 160,074 208,099 241,562 除稅前盈利 248,062 210,225 161,324 241,485 277,249 年度盈利 227,810 188,709 118,048 196,467 229,801 本公司權益持有人應佔盈利 224,822 188,243",
+      "excerpt_sha256": "74d02948dd4868588e4441bab943590d3246bb886260cffbc301166b13222b0b",
+      "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "capture_receipt_sha256": "8b292acee306c6bb586f6012a8ffa37a9549958cc16a56eb72504c0ce802d3c0",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "extracted_value": 554552,
+      "period": "FY2022",
+      "unit": "CNY million",
+      "checked_source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+      "conclusion": "Checked against complete original context; exact fact"
+    },
+    {
+      "claim_id": "claim_historical_revenue_historical_revenue:2023_8",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "target_type": "historical_revenue",
+      "target_id": "historical_revenue:2023",
+      "support_type": "exact_value",
+      "locator": "FY2025 annual PDF page 4 / printed 3 five-year financial summary",
+      "excerpt": "人民幣百萬元 人民幣百萬元 人民幣百萬元 收入 560,118 554,552 609,015 660,257 751,766 毛利 245,944 238,746 293,109 349,246 422,593 經營盈利 124,656 110,827 160,074 208,099 241,562 除稅前盈利 248,062 210,225 161,324 241,485 277,249 年度盈利 227,810 188,709 118,048 196,467 229,801 本公司權益持有人應佔盈利 224,822 188,243 115,216",
+      "excerpt_sha256": "74a03e87a03b746da08de84198a73c377f2d28d35b66b17cf6f7807e1c3fa205",
+      "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "capture_receipt_sha256": "8b292acee306c6bb586f6012a8ffa37a9549958cc16a56eb72504c0ce802d3c0",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "extracted_value": 609015,
+      "period": "FY2023",
+      "unit": "CNY million",
+      "checked_source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+      "conclusion": "Checked against complete original context; exact fact"
+    },
+    {
+      "claim_id": "claim_historical_revenue_historical_revenue:2024_9",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "target_type": "historical_revenue",
+      "target_id": "historical_revenue:2024",
+      "support_type": "exact_value",
+      "locator": "FY2025 annual PDF page 4 / printed 3 five-year financial summary",
+      "excerpt": "民幣百萬元 人民幣百萬元 收入 560,118 554,552 609,015 660,257 751,766 毛利 245,944 238,746 293,109 349,246 422,593 經營盈利 124,656 110,827 160,074 208,099 241,562 除稅前盈利 248,062 210,225 161,324 241,485 277,249 年度盈利 227,810 188,709 118,048 196,467 229,801 本公司權益持有人應佔盈利 224,822 188,243 115,216 194,073",
+      "excerpt_sha256": "739e4e863b93aaf94814212903d451880962719647c57429a1c317997f970bbe",
+      "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "capture_receipt_sha256": "8b292acee306c6bb586f6012a8ffa37a9549958cc16a56eb72504c0ce802d3c0",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "extracted_value": 660257,
+      "period": "FY2024",
+      "unit": "CNY million",
+      "checked_source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+      "conclusion": "Checked against complete original context; exact fact"
+    },
+    {
+      "claim_id": "claim_historical_revenue_historical_revenue:2025_10",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "target_type": "historical_revenue",
+      "target_id": "historical_revenue:2025",
+      "support_type": "exact_value",
+      "locator": "FY2025 annual PDF page 4 / printed 3 five-year financial summary",
+      "excerpt": "幣百萬元 收入 560,118 554,552 609,015 660,257 751,766 毛利 245,944 238,746 293,109 349,246 422,593 經營盈利 124,656 110,827 160,074 208,099 241,562 除稅前盈利 248,062 210,225 161,324 241,485 277,249 年度盈利 227,810 188,709 118,048 196,467 229,801 本公司權益持有人應佔盈利 224,822 188,243 115,216 194,073 224,842",
+      "excerpt_sha256": "b41f4b3de4f560fab04ca96bad0be723324c8646e6ae1864a542d41cf31a4d46",
+      "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "capture_receipt_sha256": "8b292acee306c6bb586f6012a8ffa37a9549958cc16a56eb72504c0ce802d3c0",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "extracted_value": 751766,
+      "period": "FY2025",
+      "unit": "CNY million",
+      "checked_source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+      "conclusion": "Checked against complete original context; exact fact"
+    },
+    {
+      "claim_id": "claim_recognition_policy_recognition:Games_11",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:Games",
+      "support_type": "policy_support",
+      "locator": "FY2025 annual Note 2.22, PDF pages 165–168; cited PDF page 165",
+      "excerpt": "流逝而增加的準備確認為利息開支。 2.22 收入確認 本集團主要於中國提供增值服務、營銷服務、金融科技及企業服務以及其他互聯網相關服務而獲得收 入。收入在商品或服務的控制權轉移至客戶時確認。視乎合同條款及合同所適用的法律規定，商品及服 務的控制權或於一段時間內轉移，或於某一時點轉移。 (a) 增值服務 增值服務收入主要包括提供網絡遊戲及社交網絡服務的收入。網絡遊戲收入主要包括遊戲內虛擬道 具銷售收入，而社交網絡收入主要包括付費會員收入、虛擬道具銷售收入及歸屬於社交網絡業務的 網絡遊戲收入。 增值服務收入於本集團提供相關承諾服務履行其履約責任時確認。 由於本集團有明確或隱含的責任維持在本集團平台上運營的虛擬道具供用戶登錄使用，銷售遊戲內 永久型虛擬道具的流水於管理層估計的適用遊戲各自估計的預期用戶存續期內遞延及攤銷，而遊戲 內使用時間有限的虛擬道具及社交網絡虛擬道具銷售收入基於相關虛擬道具的使用情況或規定的有 效期限內按比例確認。付費會員收入於付費會員期間內按比例確認。",
+      "excerpt_sha256": "f5bf6456c2b6c23a28bd1d3ceffea0150cf9fd14cf0bf17e9756547e95baebda",
+      "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "capture_receipt_sha256": "8b292acee306c6bb586f6012a8ffa37a9549958cc16a56eb72504c0ce802d3c0",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_games_growth_rate_low_2026_12",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2026",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "368 194,524 183,501 Games 65,951 59,153 130,115 118,654 Social networks 32,463 32,215 64,409 64,847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "594ca016bd06d7891c2ec55961e33e160b31e7886bd971ffccfc88c4150d6211",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_games_growth_rate_low_2027_13",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2027",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "368 194,524 183,501 Games 65,951 59,153 130,115 118,654 Social networks 32,463 32,215 64,409 64,847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "594ca016bd06d7891c2ec55961e33e160b31e7886bd971ffccfc88c4150d6211",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_games_growth_rate_low_2028_14",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2028",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "368 194,524 183,501 Games 65,951 59,153 130,115 118,654 Social networks 32,463 32,215 64,409 64,847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "594ca016bd06d7891c2ec55961e33e160b31e7886bd971ffccfc88c4150d6211",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_games_growth_rate_base_2026_15",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2026",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "368 194,524 183,501 Games 65,951 59,153 130,115 118,654 Social networks 32,463 32,215 64,409 64,847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "594ca016bd06d7891c2ec55961e33e160b31e7886bd971ffccfc88c4150d6211",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_games_growth_rate_base_2027_16",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2027",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "368 194,524 183,501 Games 65,951 59,153 130,115 118,654 Social networks 32,463 32,215 64,409 64,847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "594ca016bd06d7891c2ec55961e33e160b31e7886bd971ffccfc88c4150d6211",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_games_growth_rate_base_2028_17",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2028",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "368 194,524 183,501 Games 65,951 59,153 130,115 118,654 Social networks 32,463 32,215 64,409 64,847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "594ca016bd06d7891c2ec55961e33e160b31e7886bd971ffccfc88c4150d6211",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_games_growth_rate_high_2026_18",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2026",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "368 194,524 183,501 Games 65,951 59,153 130,115 118,654 Social networks 32,463 32,215 64,409 64,847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "594ca016bd06d7891c2ec55961e33e160b31e7886bd971ffccfc88c4150d6211",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_games_growth_rate_high_2027_19",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2027",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "368 194,524 183,501 Games 65,951 59,153 130,115 118,654 Social networks 32,463 32,215 64,409 64,847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "594ca016bd06d7891c2ec55961e33e160b31e7886bd971ffccfc88c4150d6211",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_games_growth_rate_high_2028_20",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2028",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "368 194,524 183,501 Games 65,951 59,153 130,115 118,654 Social networks 32,463 32,215 64,409 64,847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "594ca016bd06d7891c2ec55961e33e160b31e7886bd971ffccfc88c4150d6211",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_recognition_policy_recognition:SocialNetworks_21",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:SocialNetworks",
+      "support_type": "policy_support",
+      "locator": "FY2025 annual Note 2.22, PDF pages 165–168; cited PDF page 165",
+      "excerpt": "具銷售收入，而社交網絡收入主要包括付費會員收入、虛擬道具銷售收入及歸屬於社交網絡業務的 網絡遊戲收入。 增值服務收入於本集團提供相關承諾服務履行其履約責任時確認。 由於本集團有明確或隱含的責任維持在本集團平台上運營的虛擬道具供用戶登錄使用，銷售遊戲內 永久型虛擬道具的流水於管理層估計的適用遊戲各自估計的預期用戶存續期內遞延及攤銷，而遊戲 內使用時間有限的虛擬道具及社交網絡虛擬道具銷售收入基於相關虛擬道具的使用情況或規定的有 效期限內按比例確認。付費會員收入於付費會員期間內按比例確認。",
+      "excerpt_sha256": "451536d562a2e76954add2c518fded2e77957209c9a3c13de4979085225c3dbc",
+      "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "capture_receipt_sha256": "8b292acee306c6bb586f6012a8ffa37a9549958cc16a56eb72504c0ce802d3c0",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_socialnetworks_growth_rate_low_2026_22",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_low_2026",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "5 118,654 Social networks 32,463 32,215 64,409 64,847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "08698ed3ab412463d8e11ce177841261efec5651a3a6e244ec3779d07f6ab578",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_socialnetworks_growth_rate_low_2027_23",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_low_2027",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "5 118,654 Social networks 32,463 32,215 64,409 64,847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "08698ed3ab412463d8e11ce177841261efec5651a3a6e244ec3779d07f6ab578",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_socialnetworks_growth_rate_low_2028_24",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_low_2028",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "5 118,654 Social networks 32,463 32,215 64,409 64,847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "08698ed3ab412463d8e11ce177841261efec5651a3a6e244ec3779d07f6ab578",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_socialnetworks_growth_rate_base_2026_25",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_base_2026",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "5 118,654 Social networks 32,463 32,215 64,409 64,847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "08698ed3ab412463d8e11ce177841261efec5651a3a6e244ec3779d07f6ab578",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_socialnetworks_growth_rate_base_2027_26",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_base_2027",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "5 118,654 Social networks 32,463 32,215 64,409 64,847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "08698ed3ab412463d8e11ce177841261efec5651a3a6e244ec3779d07f6ab578",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_socialnetworks_growth_rate_base_2028_27",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_base_2028",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "5 118,654 Social networks 32,463 32,215 64,409 64,847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "08698ed3ab412463d8e11ce177841261efec5651a3a6e244ec3779d07f6ab578",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_socialnetworks_growth_rate_high_2026_28",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_high_2026",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "5 118,654 Social networks 32,463 32,215 64,409 64,847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "08698ed3ab412463d8e11ce177841261efec5651a3a6e244ec3779d07f6ab578",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_socialnetworks_growth_rate_high_2027_29",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_high_2027",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "5 118,654 Social networks 32,463 32,215 64,409 64,847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "08698ed3ab412463d8e11ce177841261efec5651a3a6e244ec3779d07f6ab578",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_socialnetworks_growth_rate_high_2028_30",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_high_2028",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "5 118,654 Social networks 32,463 32,215 64,409 64,847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "08698ed3ab412463d8e11ce177841261efec5651a3a6e244ec3779d07f6ab578",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_recognition_policy_recognition:MarketingServices_31",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:MarketingServices",
+      "support_type": "policy_support",
+      "locator": "FY2025 annual Note 2.22, PDF pages 165–168; cited PDF page 166",
+      "excerpt": "任╱義務採用不同收入確認方法。 (b) 營銷服務 營銷服務收入主要包括本集團各平台銷售廣告庫存的收入。 廣告主要包括展示廣告（即在協定時間段內展示廣告）及效果廣告（乃基於實際效果計量，即通過曝 光次數、觀看量或點擊量體現效果）。 收入於協定展示時間段內按比例或於效果指標（如曝光次數、觀看量或點擊量）達成時確認。倘合同 包括多項履約責任，本集團按相對獨立售價基準（根據向客戶收取或預期收取的價格釐定）將交易價 格分配至單項履約責任。",
+      "excerpt_sha256": "dedeb1dda9140ec9b6fab530f4718e26141f7dd640df8da8b447f567d533b4df",
+      "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "capture_receipt_sha256": "8b292acee306c6bb586f6012a8ffa37a9549958cc16a56eb72504c0ce802d3c0",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_marketingservices_growth_rate_low_2026_32",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2026",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": ",847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "adddb3dd03f6cf39b27432626a0d16d615029af4c947b36d762f9a2a4e45ea32",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_marketingservices_growth_rate_low_2027_33",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2027",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": ",847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "adddb3dd03f6cf39b27432626a0d16d615029af4c947b36d762f9a2a4e45ea32",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_marketingservices_growth_rate_low_2028_34",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2028",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": ",847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "adddb3dd03f6cf39b27432626a0d16d615029af4c947b36d762f9a2a4e45ea32",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_marketingservices_growth_rate_base_2026_35",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2026",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": ",847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "adddb3dd03f6cf39b27432626a0d16d615029af4c947b36d762f9a2a4e45ea32",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_marketingservices_growth_rate_base_2027_36",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2027",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": ",847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "adddb3dd03f6cf39b27432626a0d16d615029af4c947b36d762f9a2a4e45ea32",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_marketingservices_growth_rate_base_2028_37",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2028",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": ",847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "adddb3dd03f6cf39b27432626a0d16d615029af4c947b36d762f9a2a4e45ea32",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_marketingservices_growth_rate_high_2026_38",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2026",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": ",847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "adddb3dd03f6cf39b27432626a0d16d615029af4c947b36d762f9a2a4e45ea32",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_marketingservices_growth_rate_high_2027_39",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2027",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": ",847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "adddb3dd03f6cf39b27432626a0d16d615029af4c947b36d762f9a2a4e45ea32",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_marketingservices_growth_rate_high_2028_40",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2028",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": ",847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "adddb3dd03f6cf39b27432626a0d16d615029af4c947b36d762f9a2a4e45ea32",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_recognition_policy_recognition:FinTechBusinessServices_41",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:FinTechBusinessServices",
+      "support_type": "policy_support",
+      "locator": "FY2025 annual Note 2.22, PDF pages 165–168; cited PDF page 167",
+      "excerpt": "續） 2.22 收入確認（續） (c) 金融科技及企業服務 金融科技及企業服務收入主要包括提供金融科技服務及雲服務產生的收入。 金融科技服務收入包括支付交易、理財服務及其他金融科技服務的佣金，而本集團所收取的佣金一 般基於每筆單一交易或定期保留金額的價值按百分比釐定。有關該等佣金的收入於本集團提供相關 服務履行其履約責任的時點確認。 雲服務收入主要包括向客戶提供一段時間內訂閱付費會員或雲資源消耗量的雲服務收入。就基於一 段特定服務時間內訂閱付費會員的雲服務合同而言，收入於向客戶交付服務的訂閱期間內按比例確 認。就根據消耗量提供的雲服務而言，收入基於客戶對雲資源的使用情況確認。倘雲服務合同包括 多項履約責任，本集團按相對獨立售價基準（根據向客戶收取或預期收取的價格釐定）將交易價格分 配至單項履約責任。 (d) 其他收入 本集團的其他收入主要來自投資、製作與發行電影及電視節目、內容授權，商品銷售及若干其他活 動。本集團於提供相關服務時或當商品控制權轉移至客戶時確認其他收入",
+      "excerpt_sha256": "0af881f83764a81f1a65e4cbc50417bd6894691f859eb8dc604751b112d0d71d",
+      "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "capture_receipt_sha256": "8b292acee306c6bb586f6012a8ffa37a9549958cc16a56eb72504c0ce802d3c0",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_fintechbusinessservices_growth_rate_low_2026_42",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_low_2026",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "ech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "bc9b59fd5993e2b347e5891c652c34545dff36c71d98292e8939540d8977d851",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_fintechbusinessservices_growth_rate_low_2027_43",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_low_2027",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "ech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "bc9b59fd5993e2b347e5891c652c34545dff36c71d98292e8939540d8977d851",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_fintechbusinessservices_growth_rate_low_2028_44",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_low_2028",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "ech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "bc9b59fd5993e2b347e5891c652c34545dff36c71d98292e8939540d8977d851",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_fintechbusinessservices_growth_rate_base_2026_45",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_base_2026",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "ech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "bc9b59fd5993e2b347e5891c652c34545dff36c71d98292e8939540d8977d851",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_fintechbusinessservices_growth_rate_base_2027_46",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_base_2027",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "ech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "bc9b59fd5993e2b347e5891c652c34545dff36c71d98292e8939540d8977d851",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_fintechbusinessservices_growth_rate_base_2028_47",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_base_2028",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "ech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "bc9b59fd5993e2b347e5891c652c34545dff36c71d98292e8939540d8977d851",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_fintechbusinessservices_growth_rate_high_2026_48",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_high_2026",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "ech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "bc9b59fd5993e2b347e5891c652c34545dff36c71d98292e8939540d8977d851",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_fintechbusinessservices_growth_rate_high_2027_49",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_high_2027",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "ech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "bc9b59fd5993e2b347e5891c652c34545dff36c71d98292e8939540d8977d851",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_fintechbusinessservices_growth_rate_high_2028_50",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_high_2028",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "ech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "bc9b59fd5993e2b347e5891c652c34545dff36c71d98292e8939540d8977d851",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_recognition_policy_recognition:Others_51",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:Others",
+      "support_type": "policy_support",
+      "locator": "FY2025 annual Note 2.22, PDF pages 165–168; cited PDF page 167",
+      "excerpt": "金融科技服務收入包括支付交易、理財服務及其他金融科技服務的佣金，而本集團所收取的佣金一 般基於每筆單一交易或定期保留金額的價值按百分比釐定。有關該等佣金的收入於本集團提供相關 服務履行其履約責任的時點確認。 雲服務收入主要包括向客戶提供一段時間內訂閱付費會員或雲資源消耗量的雲服務收入。就基於一 段特定服務時間內訂閱付費會員的雲服務合同而言，收入於向客戶交付服務的訂閱期間內按比例確 認。就根據消耗量提供的雲服務而言，收入基於客戶對雲資源的使用情況確認。倘雲服務合同包括 多項履約責任，本集團按相對獨立售價基準（根據向客戶收取或預期收取的價格釐定）將交易價格分 配至單項履約責任。 (d) 其他收入 本集團的其他收入主要來自投資、製作與發行電影及電視節目、內容授權，商品銷售及若干其他活 動。本集團於提供相關服務時或當商品控制權轉移至客戶時確認其他收入。 (e) 主要責任人與代理人考慮事項 本集團視乎其於交易中擔任主要責任人或代理人，按總額或淨額基準呈報收入。倘本集團在指定產",
+      "excerpt_sha256": "cf8ba5e0112019ad58df63607da43d9e530553f1f37f10c84e27327e09d0daf9",
+      "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "capture_receipt_sha256": "8b292acee306c6bb586f6012a8ffa37a9549958cc16a56eb72504c0ce802d3c0",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_others_growth_rate_low_2026_52",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "others_growth_rate_low_2026",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "36 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "a617f35335096081127e136c25e7116cfe3e28f300a8113f6988c6429f3e71bc",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_others_growth_rate_low_2027_53",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "others_growth_rate_low_2027",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "36 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "a617f35335096081127e136c25e7116cfe3e28f300a8113f6988c6429f3e71bc",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_others_growth_rate_low_2028_54",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "others_growth_rate_low_2028",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "36 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "a617f35335096081127e136c25e7116cfe3e28f300a8113f6988c6429f3e71bc",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_others_growth_rate_base_2026_55",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "others_growth_rate_base_2026",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "36 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "a617f35335096081127e136c25e7116cfe3e28f300a8113f6988c6429f3e71bc",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_others_growth_rate_base_2027_56",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "others_growth_rate_base_2027",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "36 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "a617f35335096081127e136c25e7116cfe3e28f300a8113f6988c6429f3e71bc",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_others_growth_rate_base_2028_57",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "others_growth_rate_base_2028",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "36 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "a617f35335096081127e136c25e7116cfe3e28f300a8113f6988c6429f3e71bc",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_others_growth_rate_high_2026_58",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "others_growth_rate_high_2026",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "36 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "a617f35335096081127e136c25e7116cfe3e28f300a8113f6988c6429f3e71bc",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_others_growth_rate_high_2027_59",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "others_growth_rate_high_2027",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "36 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "a617f35335096081127e136c25e7116cfe3e28f300a8113f6988c6429f3e71bc",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_parameter_others_growth_rate_high_2028_60",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "parameter",
+      "target_id": "others_growth_rate_high_2028",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "excerpt": "36 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "a617f35335096081127e136c25e7116cfe3e28f300a8113f6988c6429f3e71bc",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_growth_driver_evergreen_and_launch_monetization_checked_61",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "growth_driver",
+      "target_id": "evergreen_and_launch_monetization_checked",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page10 / printed9",
+      "excerpt": "billion for the second quarter of 2026. Domestic Games revenues were RMB47.3 billion, up 17% year-on-year, driven by growth from most of our major games, with notable contributions from Delta Force, VALORANT PC and MOBILE, and Roco Kingdom: World. International Games revenues were RMB18.6 billion, d",
+      "excerpt_sha256": "534b2d6dea93ca0349d0c5e3d9bdc4384076da157834502640315d12af09a13d",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_growth_driver_evergreen_and_launch_monetization_contrary_62",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "growth_driver",
+      "target_id": "evergreen_and_launch_monetization_contrary",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page10 / printed9",
+      "excerpt": "PC and MOBILE, and Roco Kingdom: World. International Games revenues were RMB18.6 billion, down 0.8% year-on-year due to foreign currency movements, or up 4% year-on-year in constant currency terms, as higher revenues from Wuthering Waves and VALORANT PC were",
+      "excerpt_sha256": "191d1aae34d6039075379e7a33c79b2f99cf73e51d7e52a9f6d8d27867d8b480",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_growth_driver_paid_social_stabilization_checked_63",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "growth_driver",
+      "target_id": "paid_social_stabilization_checked",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page47 / printed46 Note6(b)",
+      "excerpt": "5 118,654 Social networks 32,463 32,215 64,409 64,847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "08698ed3ab412463d8e11ce177841261efec5651a3a6e244ec3779d07f6ab578",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_growth_driver_paid_social_stabilization_contrary_64",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "growth_driver",
+      "target_id": "paid_social_stabilization_contrary",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page47 / printed46",
+      "excerpt": "5 118,654 Social networks 32,463 32,215 64,409 64,847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "08698ed3ab412463d8e11ce177841261efec5651a3a6e244ec3779d07f6ab578",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_growth_driver_ai_ad_matching_and_inventory_checked_65",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "target_type": "growth_driver",
+      "target_id": "ai_ad_matching_and_inventory_checked",
+      "support_type": "rationale_support",
+      "locator": "Corporate overview PDF page12",
+      "excerpt": "val, and accelerating content to market Automated ad campaign solution AIM+ • Facilitating advertisers to execute and iterate media buying campaigns across full range of inventory; powering 30%+ of total marketing services spend from advertisers Marketing Services – Clear Proof P",
+      "excerpt_sha256": "51f20b433e44e8689068f015a2027800d7bead0dc35d4dc3c31bdefe93b381ab",
+      "content_sha256": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+      "capture_receipt_sha256": "9e85da3ec4a921f92e747e7849b05f500e832c274b5b076161f2ba0a7db10b2a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/09/Corporate-Overview-2Q26-20260916.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_growth_driver_payments_and_cloud_conversion_checked_66",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "target_type": "growth_driver",
+      "target_id": "payments_and_cloud_conversion_checked",
+      "support_type": "rationale_support",
+      "locator": "Corporate overview PDF page15",
+      "excerpt": "usted operating profit in 2025, despite constrained availability of GPUs and our decision to prioritise internal AI use cases • Tencent Cloud now offers full-stack AI agent solutions so that customers can integrate our security infrastructure, skillhubs and Weixin/QQ/WeCom contro",
+      "excerpt_sha256": "39badc90660d53b4c14da4ac0d3d50c51e3cf7df8367ee9a08457fbbdf41d394",
+      "content_sha256": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+      "capture_receipt_sha256": "9e85da3ec4a921f92e747e7849b05f500e832c274b5b076161f2ba0a7db10b2a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/09/Corporate-Overview-2Q26-20260916.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_growth_driver_payments_and_cloud_conversion_contrary_67",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "target_type": "growth_driver",
+      "target_id": "payments_and_cloud_conversion_contrary",
+      "support_type": "rationale_support",
+      "locator": "Corporate overview PDF page15",
+      "excerpt": "usted operating profit in 2025, despite constrained availability of GPUs and our decision to prioritise internal AI use cases • Tencent Cloud now offers full-stack AI agent solutions so that customers can integrate our security infrastructure, skillhubs and We",
+      "excerpt_sha256": "c3c1e3d84ae499f1c1c94a23605a61bdff6d5eec6c50079793113bcda3f5aca0",
+      "content_sha256": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+      "capture_receipt_sha256": "9e85da3ec4a921f92e747e7849b05f500e832c274b5b076161f2ba0a7db10b2a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/09/Corporate-Overview-2Q26-20260916.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "claim_id": "claim_growth_driver_residual_normalization_checked_68",
+      "source_id": "tencent_h1_2026_official",
+      "target_type": "growth_driver",
+      "target_id": "residual_normalization_checked",
+      "support_type": "rationale_support",
+      "locator": "FY2026 interim PDF page47 / printed46 Note6(b)",
+      "excerpt": "36 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "excerpt_sha256": "a617f35335096081127e136c25e7116cfe3e28f300a8113f6988c6429f3e71bc",
+      "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "capture_receipt_sha256": "743d6b0866ff8204259d1399175dc6e3ad501a9cf301685eaac3d2244a73022a",
+      "verification_status": "opened_and_checked",
+      "verified_by": "/root/rf_hk_execution",
+      "verified_date": "2026-10-08",
+      "checked_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "conclusion": "Source supports mechanism/policy only; future assumption is analyst judgment"
+    },
+    {
+      "fact_id": "Games_h1_2026",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "PDF page47 / printed46 Note6(b) six-month columns",
+      "period": "H1 FY2026",
+      "value": 130115,
+      "comparative_value": 118654,
+      "unit": "CNY million",
+      "exact_yoy": 0.09659177103173944,
+      "excerpt": "368 194,524 183,501 Games 65,951 59,153 130,115 118,654 Social networks 32,463 32,215 64,409 64,847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "conclusion": "Current half-year observation, not FY2026 annual actual or management target."
+    },
+    {
+      "fact_id": "SocialNetworks_h1_2026",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "PDF page47 / printed46 Note6(b) six-month columns",
+      "period": "H1 FY2026",
+      "value": 64409,
+      "comparative_value": 64847,
+      "unit": "CNY million",
+      "exact_yoy": -0.006754360263389159,
+      "excerpt": "5 118,654 Social networks 32,463 32,215 64,409 64,847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "conclusion": "Current half-year observation, not FY2026 annual actual or management target."
+    },
+    {
+      "fact_id": "MarketingServices_h1_2026",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "PDF page47 / printed46 Note6(b) six-month columns",
+      "period": "H1 FY2026",
+      "value": 81736,
+      "comparative_value": 67615,
+      "unit": "CNY million",
+      "exact_yoy": 0.20884419137765287,
+      "excerpt": ",847 – Marketing Services 43,565 35,762 81,736 67,615 – FinTech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "conclusion": "Current half-year observation, not FY2026 annual actual or management target."
+    },
+    {
+      "fact_id": "FinTechBusinessServices_h1_2026",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "PDF page47 / printed46 Note6(b) six-month columns",
+      "period": "H1 FY2026",
+      "value": 120171,
+      "comparative_value": 110443,
+      "unit": "CNY million",
+      "exact_yoy": 0.08808163487047627,
+      "excerpt": "ech and Business Services 60,286 55,536 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "conclusion": "Current half-year observation, not FY2026 annual actual or management target."
+    },
+    {
+      "fact_id": "Others_h1_2026",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "PDF page47 / printed46 Note6(b) six-month columns",
+      "period": "H1 FY2026",
+      "value": 4812,
+      "comparative_value": 2967,
+      "unit": "CNY million",
+      "exact_yoy": 0.621840242669363,
+      "excerpt": "36 120,171 110,443 – Others 2,520 1,838 4,812 2,967 204,785 184,504 401,243 364,526",
+      "conclusion": "Current half-year observation, not FY2026 annual actual or management target."
+    },
+    {
+      "fact_id": "gaming_geographic_counterevidence",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "PDF page10 / printed9",
+      "excerpt": "PC and MOBILE, and Roco Kingdom: World. International Games revenues were RMB18.6 billion, down 0.8% year-on-year due to foreign currency movements, or up 4% year-on-year in constant currency terms, as higher revenues from Wuthering Waves and VALORANT PC were offset by lower revenues from certain Su",
+      "conclusion": "Domestic17%growth vs overseas-0.8%reported/+4%constantcurrency; different perimeters preserved."
+    },
+    {
+      "fact_id": "customer_concentration",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDFpage80 / printed79 five largest customers",
+      "value": 6.5,
+      "largest_value": 3.4,
+      "unit": "percent of total revenue",
+      "conclusion": "Verified complete paragraph; not used as billable customer count."
+    }
+  ],
+  "parameters": [
+    {
+      "parameter_id": "reported_total",
+      "kind": "reported_fact",
+      "value": 751766,
+      "dimension": "revenue",
+      "time_basis": "annual",
+      "period": "FY2025",
+      "scenario": null,
+      "unit": "CNY million",
+      "definition": "FY2025 consolidated IFRS revenue, CNY million",
+      "rationale": "Audited total; VAS is Games plus SocialNetworks, no VAS double count.",
+      "source_ids": [
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "claim_ids": [
+        "claim_parameter_reported_total_0"
+      ],
+      "currency": "CNY",
+      "scale": "million"
+    },
+    {
+      "parameter_id": "games_base",
+      "kind": "reported_fact",
+      "value": 241532,
+      "dimension": "revenue",
+      "time_basis": "annual",
+      "period": "FY2025",
+      "scenario": null,
+      "unit": "CNY million",
+      "definition": "Games recognized FY2025 revenue",
+      "rationale": "Note 6(b) disaggregation; precise values instead of rounded domestic/international gaming paragraphs.",
+      "source_ids": [
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "claim_ids": [
+        "claim_parameter_games_base_1"
+      ],
+      "currency": "CNY",
+      "scale": "million"
+    },
+    {
+      "parameter_id": "socialnetworks_base",
+      "kind": "reported_fact",
+      "value": 127749,
+      "dimension": "revenue",
+      "time_basis": "annual",
+      "period": "FY2025",
+      "scenario": null,
+      "unit": "CNY million",
+      "definition": "SocialNetworks recognized FY2025 revenue",
+      "rationale": "Note 6(b) disaggregation; precise values instead of rounded domestic/international gaming paragraphs.",
+      "source_ids": [
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "claim_ids": [
+        "claim_parameter_socialnetworks_base_2"
+      ],
+      "currency": "CNY",
+      "scale": "million"
+    },
+    {
+      "parameter_id": "marketingservices_base",
+      "kind": "reported_fact",
+      "value": 144973,
+      "dimension": "revenue",
+      "time_basis": "annual",
+      "period": "FY2025",
+      "scenario": null,
+      "unit": "CNY million",
+      "definition": "MarketingServices recognized FY2025 revenue",
+      "rationale": "Note 6(b) disaggregation; precise values instead of rounded domestic/international gaming paragraphs.",
+      "source_ids": [
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "claim_ids": [
+        "claim_parameter_marketingservices_base_3"
+      ],
+      "currency": "CNY",
+      "scale": "million"
+    },
+    {
+      "parameter_id": "fintechbusinessservices_base",
+      "kind": "reported_fact",
+      "value": 229435,
+      "dimension": "revenue",
+      "time_basis": "annual",
+      "period": "FY2025",
+      "scenario": null,
+      "unit": "CNY million",
+      "definition": "FinTechBusinessServices recognized FY2025 revenue",
+      "rationale": "Note 6(b) disaggregation; precise values instead of rounded domestic/international gaming paragraphs.",
+      "source_ids": [
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "claim_ids": [
+        "claim_parameter_fintechbusinessservices_base_4"
+      ],
+      "currency": "CNY",
+      "scale": "million"
+    },
+    {
+      "parameter_id": "others_base",
+      "kind": "reported_fact",
+      "value": 8077,
+      "dimension": "revenue",
+      "time_basis": "annual",
+      "period": "FY2025",
+      "scenario": null,
+      "unit": "CNY million",
+      "definition": "Others recognized FY2025 revenue",
+      "rationale": "Note 6(b) disaggregation; precise values instead of rounded domestic/international gaming paragraphs.",
+      "source_ids": [
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      ],
+      "claim_ids": [
+        "claim_parameter_others_base_5"
+      ],
+      "currency": "CNY",
+      "scale": "million"
+    },
+    {
+      "parameter_id": "games_growth_rate_low_2026",
+      "kind": "analyst_assumption",
+      "value": 0.07,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2026",
+      "scenario": "low",
+      "unit": "ratio",
+      "definition": "Games recognized annual growth, low FY2026",
+      "rationale": "FY2026 H1 Games +9.66% versus FY2025 Games +22.16%. Domestic launches and evergreen operations offset overseas Q2 reported -0.8% and FX/high comparison. Base 10/9/8% fades; low 7/4/2% assumes weaker launches, high 15/14/12% successful monetization. Not a 33% international perpetual extrapolation; payer/ARPPU and precise annual geographic bridge undisclosed. Analyst-selected 2026 low: 7.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_games_growth_rate_low_2026_12"
+      ]
+    },
+    {
+      "parameter_id": "games_growth_rate_low_2027",
+      "kind": "analyst_assumption",
+      "value": 0.04,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2027",
+      "scenario": "low",
+      "unit": "ratio",
+      "definition": "Games recognized annual growth, low FY2027",
+      "rationale": "FY2026 H1 Games +9.66% versus FY2025 Games +22.16%. Domestic launches and evergreen operations offset overseas Q2 reported -0.8% and FX/high comparison. Base 10/9/8% fades; low 7/4/2% assumes weaker launches, high 15/14/12% successful monetization. Not a 33% international perpetual extrapolation; payer/ARPPU and precise annual geographic bridge undisclosed. Analyst-selected 2027 low: 4.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_games_growth_rate_low_2027_13"
+      ]
+    },
+    {
+      "parameter_id": "games_growth_rate_low_2028",
+      "kind": "analyst_assumption",
+      "value": 0.02,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2028",
+      "scenario": "low",
+      "unit": "ratio",
+      "definition": "Games recognized annual growth, low FY2028",
+      "rationale": "FY2026 H1 Games +9.66% versus FY2025 Games +22.16%. Domestic launches and evergreen operations offset overseas Q2 reported -0.8% and FX/high comparison. Base 10/9/8% fades; low 7/4/2% assumes weaker launches, high 15/14/12% successful monetization. Not a 33% international perpetual extrapolation; payer/ARPPU and precise annual geographic bridge undisclosed. Analyst-selected 2028 low: 2.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_games_growth_rate_low_2028_14"
+      ]
+    },
+    {
+      "parameter_id": "games_growth_rate_base_2026",
+      "kind": "analyst_assumption",
+      "value": 0.1,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2026",
+      "scenario": "base",
+      "unit": "ratio",
+      "definition": "Games recognized annual growth, base FY2026",
+      "rationale": "FY2026 H1 Games +9.66% versus FY2025 Games +22.16%. Domestic launches and evergreen operations offset overseas Q2 reported -0.8% and FX/high comparison. Base 10/9/8% fades; low 7/4/2% assumes weaker launches, high 15/14/12% successful monetization. Not a 33% international perpetual extrapolation; payer/ARPPU and precise annual geographic bridge undisclosed. Analyst-selected 2026 base: 10.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_games_growth_rate_base_2026_15"
+      ]
+    },
+    {
+      "parameter_id": "games_growth_rate_base_2027",
+      "kind": "analyst_assumption",
+      "value": 0.09,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2027",
+      "scenario": "base",
+      "unit": "ratio",
+      "definition": "Games recognized annual growth, base FY2027",
+      "rationale": "FY2026 H1 Games +9.66% versus FY2025 Games +22.16%. Domestic launches and evergreen operations offset overseas Q2 reported -0.8% and FX/high comparison. Base 10/9/8% fades; low 7/4/2% assumes weaker launches, high 15/14/12% successful monetization. Not a 33% international perpetual extrapolation; payer/ARPPU and precise annual geographic bridge undisclosed. Analyst-selected 2027 base: 9.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_games_growth_rate_base_2027_16"
+      ]
+    },
+    {
+      "parameter_id": "games_growth_rate_base_2028",
+      "kind": "analyst_assumption",
+      "value": 0.08,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2028",
+      "scenario": "base",
+      "unit": "ratio",
+      "definition": "Games recognized annual growth, base FY2028",
+      "rationale": "FY2026 H1 Games +9.66% versus FY2025 Games +22.16%. Domestic launches and evergreen operations offset overseas Q2 reported -0.8% and FX/high comparison. Base 10/9/8% fades; low 7/4/2% assumes weaker launches, high 15/14/12% successful monetization. Not a 33% international perpetual extrapolation; payer/ARPPU and precise annual geographic bridge undisclosed. Analyst-selected 2028 base: 8.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_games_growth_rate_base_2028_17"
+      ]
+    },
+    {
+      "parameter_id": "games_growth_rate_high_2026",
+      "kind": "analyst_assumption",
+      "value": 0.15,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2026",
+      "scenario": "high",
+      "unit": "ratio",
+      "definition": "Games recognized annual growth, high FY2026",
+      "rationale": "FY2026 H1 Games +9.66% versus FY2025 Games +22.16%. Domestic launches and evergreen operations offset overseas Q2 reported -0.8% and FX/high comparison. Base 10/9/8% fades; low 7/4/2% assumes weaker launches, high 15/14/12% successful monetization. Not a 33% international perpetual extrapolation; payer/ARPPU and precise annual geographic bridge undisclosed. Analyst-selected 2026 high: 15.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_games_growth_rate_high_2026_18"
+      ]
+    },
+    {
+      "parameter_id": "games_growth_rate_high_2027",
+      "kind": "analyst_assumption",
+      "value": 0.14,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2027",
+      "scenario": "high",
+      "unit": "ratio",
+      "definition": "Games recognized annual growth, high FY2027",
+      "rationale": "FY2026 H1 Games +9.66% versus FY2025 Games +22.16%. Domestic launches and evergreen operations offset overseas Q2 reported -0.8% and FX/high comparison. Base 10/9/8% fades; low 7/4/2% assumes weaker launches, high 15/14/12% successful monetization. Not a 33% international perpetual extrapolation; payer/ARPPU and precise annual geographic bridge undisclosed. Analyst-selected 2027 high: 14.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_games_growth_rate_high_2027_19"
+      ]
+    },
+    {
+      "parameter_id": "games_growth_rate_high_2028",
+      "kind": "analyst_assumption",
+      "value": 0.12,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2028",
+      "scenario": "high",
+      "unit": "ratio",
+      "definition": "Games recognized annual growth, high FY2028",
+      "rationale": "FY2026 H1 Games +9.66% versus FY2025 Games +22.16%. Domestic launches and evergreen operations offset overseas Q2 reported -0.8% and FX/high comparison. Base 10/9/8% fades; low 7/4/2% assumes weaker launches, high 15/14/12% successful monetization. Not a 33% international perpetual extrapolation; payer/ARPPU and precise annual geographic bridge undisclosed. Analyst-selected 2028 high: 12.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_games_growth_rate_high_2028_20"
+      ]
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_low_2026",
+      "kind": "analyst_assumption",
+      "value": -0.02,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2026",
+      "scenario": "low",
+      "unit": "ratio",
+      "definition": "SocialNetworks recognized annual growth, low FY2026",
+      "rationale": "FY2026 H1 SocialNetworks -0.68%, Q2 +0.8%, quarterly-average fee subscriptions declined. Base 0/2/3% stabilizes paid content and app item sales; low -2/-3/-2% recognizes saturation, high4/5/5% requires sustained paid conversion. Weixin MAU is not gaming payer count or this stream's average customers. Analyst-selected 2026 low: -2.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_socialnetworks_growth_rate_low_2026_22"
+      ]
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_low_2027",
+      "kind": "analyst_assumption",
+      "value": -0.03,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2027",
+      "scenario": "low",
+      "unit": "ratio",
+      "definition": "SocialNetworks recognized annual growth, low FY2027",
+      "rationale": "FY2026 H1 SocialNetworks -0.68%, Q2 +0.8%, quarterly-average fee subscriptions declined. Base 0/2/3% stabilizes paid content and app item sales; low -2/-3/-2% recognizes saturation, high4/5/5% requires sustained paid conversion. Weixin MAU is not gaming payer count or this stream's average customers. Analyst-selected 2027 low: -3.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_socialnetworks_growth_rate_low_2027_23"
+      ]
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_low_2028",
+      "kind": "analyst_assumption",
+      "value": -0.02,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2028",
+      "scenario": "low",
+      "unit": "ratio",
+      "definition": "SocialNetworks recognized annual growth, low FY2028",
+      "rationale": "FY2026 H1 SocialNetworks -0.68%, Q2 +0.8%, quarterly-average fee subscriptions declined. Base 0/2/3% stabilizes paid content and app item sales; low -2/-3/-2% recognizes saturation, high4/5/5% requires sustained paid conversion. Weixin MAU is not gaming payer count or this stream's average customers. Analyst-selected 2028 low: -2.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_socialnetworks_growth_rate_low_2028_24"
+      ]
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_base_2026",
+      "kind": "analyst_assumption",
+      "value": 0,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2026",
+      "scenario": "base",
+      "unit": "ratio",
+      "definition": "SocialNetworks recognized annual growth, base FY2026",
+      "rationale": "FY2026 H1 SocialNetworks -0.68%, Q2 +0.8%, quarterly-average fee subscriptions declined. Base 0/2/3% stabilizes paid content and app item sales; low -2/-3/-2% recognizes saturation, high4/5/5% requires sustained paid conversion. Weixin MAU is not gaming payer count or this stream's average customers. Analyst-selected 2026 base: 0.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_socialnetworks_growth_rate_base_2026_25"
+      ]
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_base_2027",
+      "kind": "analyst_assumption",
+      "value": 0.02,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2027",
+      "scenario": "base",
+      "unit": "ratio",
+      "definition": "SocialNetworks recognized annual growth, base FY2027",
+      "rationale": "FY2026 H1 SocialNetworks -0.68%, Q2 +0.8%, quarterly-average fee subscriptions declined. Base 0/2/3% stabilizes paid content and app item sales; low -2/-3/-2% recognizes saturation, high4/5/5% requires sustained paid conversion. Weixin MAU is not gaming payer count or this stream's average customers. Analyst-selected 2027 base: 2.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_socialnetworks_growth_rate_base_2027_26"
+      ]
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_base_2028",
+      "kind": "analyst_assumption",
+      "value": 0.03,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2028",
+      "scenario": "base",
+      "unit": "ratio",
+      "definition": "SocialNetworks recognized annual growth, base FY2028",
+      "rationale": "FY2026 H1 SocialNetworks -0.68%, Q2 +0.8%, quarterly-average fee subscriptions declined. Base 0/2/3% stabilizes paid content and app item sales; low -2/-3/-2% recognizes saturation, high4/5/5% requires sustained paid conversion. Weixin MAU is not gaming payer count or this stream's average customers. Analyst-selected 2028 base: 3.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_socialnetworks_growth_rate_base_2028_27"
+      ]
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_high_2026",
+      "kind": "analyst_assumption",
+      "value": 0.04,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2026",
+      "scenario": "high",
+      "unit": "ratio",
+      "definition": "SocialNetworks recognized annual growth, high FY2026",
+      "rationale": "FY2026 H1 SocialNetworks -0.68%, Q2 +0.8%, quarterly-average fee subscriptions declined. Base 0/2/3% stabilizes paid content and app item sales; low -2/-3/-2% recognizes saturation, high4/5/5% requires sustained paid conversion. Weixin MAU is not gaming payer count or this stream's average customers. Analyst-selected 2026 high: 4.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_socialnetworks_growth_rate_high_2026_28"
+      ]
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_high_2027",
+      "kind": "analyst_assumption",
+      "value": 0.05,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2027",
+      "scenario": "high",
+      "unit": "ratio",
+      "definition": "SocialNetworks recognized annual growth, high FY2027",
+      "rationale": "FY2026 H1 SocialNetworks -0.68%, Q2 +0.8%, quarterly-average fee subscriptions declined. Base 0/2/3% stabilizes paid content and app item sales; low -2/-3/-2% recognizes saturation, high4/5/5% requires sustained paid conversion. Weixin MAU is not gaming payer count or this stream's average customers. Analyst-selected 2027 high: 5.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_socialnetworks_growth_rate_high_2027_29"
+      ]
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_high_2028",
+      "kind": "analyst_assumption",
+      "value": 0.05,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2028",
+      "scenario": "high",
+      "unit": "ratio",
+      "definition": "SocialNetworks recognized annual growth, high FY2028",
+      "rationale": "FY2026 H1 SocialNetworks -0.68%, Q2 +0.8%, quarterly-average fee subscriptions declined. Base 0/2/3% stabilizes paid content and app item sales; low -2/-3/-2% recognizes saturation, high4/5/5% requires sustained paid conversion. Weixin MAU is not gaming payer count or this stream's average customers. Analyst-selected 2028 high: 5.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_socialnetworks_growth_rate_high_2028_30"
+      ]
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_low_2026",
+      "kind": "analyst_assumption",
+      "value": 0.12,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2026",
+      "scenario": "low",
+      "unit": "ratio",
+      "definition": "MarketingServices recognized annual growth, low FY2026",
+      "rationale": "FY2026 H1 +20.88% and Q2 +22%, AI recommendation/AIM+/closed-loop and inventories. Base20/17/14% fades through maturation; low12/8/6% macro/price pressure, high24/23/20% execution upside. No disclosed eligible impressions/CPM; Video Accounts time cannot be mechanically multiplied by revenue. Analyst-selected 2026 low: 12.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_marketingservices_growth_rate_low_2026_32"
+      ]
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_low_2027",
+      "kind": "analyst_assumption",
+      "value": 0.08,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2027",
+      "scenario": "low",
+      "unit": "ratio",
+      "definition": "MarketingServices recognized annual growth, low FY2027",
+      "rationale": "FY2026 H1 +20.88% and Q2 +22%, AI recommendation/AIM+/closed-loop and inventories. Base20/17/14% fades through maturation; low12/8/6% macro/price pressure, high24/23/20% execution upside. No disclosed eligible impressions/CPM; Video Accounts time cannot be mechanically multiplied by revenue. Analyst-selected 2027 low: 8.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_marketingservices_growth_rate_low_2027_33"
+      ]
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_low_2028",
+      "kind": "analyst_assumption",
+      "value": 0.06,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2028",
+      "scenario": "low",
+      "unit": "ratio",
+      "definition": "MarketingServices recognized annual growth, low FY2028",
+      "rationale": "FY2026 H1 +20.88% and Q2 +22%, AI recommendation/AIM+/closed-loop and inventories. Base20/17/14% fades through maturation; low12/8/6% macro/price pressure, high24/23/20% execution upside. No disclosed eligible impressions/CPM; Video Accounts time cannot be mechanically multiplied by revenue. Analyst-selected 2028 low: 6.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_marketingservices_growth_rate_low_2028_34"
+      ]
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_base_2026",
+      "kind": "analyst_assumption",
+      "value": 0.2,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2026",
+      "scenario": "base",
+      "unit": "ratio",
+      "definition": "MarketingServices recognized annual growth, base FY2026",
+      "rationale": "FY2026 H1 +20.88% and Q2 +22%, AI recommendation/AIM+/closed-loop and inventories. Base20/17/14% fades through maturation; low12/8/6% macro/price pressure, high24/23/20% execution upside. No disclosed eligible impressions/CPM; Video Accounts time cannot be mechanically multiplied by revenue. Analyst-selected 2026 base: 20.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_marketingservices_growth_rate_base_2026_35"
+      ]
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_base_2027",
+      "kind": "analyst_assumption",
+      "value": 0.17,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2027",
+      "scenario": "base",
+      "unit": "ratio",
+      "definition": "MarketingServices recognized annual growth, base FY2027",
+      "rationale": "FY2026 H1 +20.88% and Q2 +22%, AI recommendation/AIM+/closed-loop and inventories. Base20/17/14% fades through maturation; low12/8/6% macro/price pressure, high24/23/20% execution upside. No disclosed eligible impressions/CPM; Video Accounts time cannot be mechanically multiplied by revenue. Analyst-selected 2027 base: 17.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_marketingservices_growth_rate_base_2027_36"
+      ]
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_base_2028",
+      "kind": "analyst_assumption",
+      "value": 0.14,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2028",
+      "scenario": "base",
+      "unit": "ratio",
+      "definition": "MarketingServices recognized annual growth, base FY2028",
+      "rationale": "FY2026 H1 +20.88% and Q2 +22%, AI recommendation/AIM+/closed-loop and inventories. Base20/17/14% fades through maturation; low12/8/6% macro/price pressure, high24/23/20% execution upside. No disclosed eligible impressions/CPM; Video Accounts time cannot be mechanically multiplied by revenue. Analyst-selected 2028 base: 14.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_marketingservices_growth_rate_base_2028_37"
+      ]
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_high_2026",
+      "kind": "analyst_assumption",
+      "value": 0.24,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2026",
+      "scenario": "high",
+      "unit": "ratio",
+      "definition": "MarketingServices recognized annual growth, high FY2026",
+      "rationale": "FY2026 H1 +20.88% and Q2 +22%, AI recommendation/AIM+/closed-loop and inventories. Base20/17/14% fades through maturation; low12/8/6% macro/price pressure, high24/23/20% execution upside. No disclosed eligible impressions/CPM; Video Accounts time cannot be mechanically multiplied by revenue. Analyst-selected 2026 high: 24.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_marketingservices_growth_rate_high_2026_38"
+      ]
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_high_2027",
+      "kind": "analyst_assumption",
+      "value": 0.23,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2027",
+      "scenario": "high",
+      "unit": "ratio",
+      "definition": "MarketingServices recognized annual growth, high FY2027",
+      "rationale": "FY2026 H1 +20.88% and Q2 +22%, AI recommendation/AIM+/closed-loop and inventories. Base20/17/14% fades through maturation; low12/8/6% macro/price pressure, high24/23/20% execution upside. No disclosed eligible impressions/CPM; Video Accounts time cannot be mechanically multiplied by revenue. Analyst-selected 2027 high: 23.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_marketingservices_growth_rate_high_2027_39"
+      ]
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_high_2028",
+      "kind": "analyst_assumption",
+      "value": 0.2,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2028",
+      "scenario": "high",
+      "unit": "ratio",
+      "definition": "MarketingServices recognized annual growth, high FY2028",
+      "rationale": "FY2026 H1 +20.88% and Q2 +22%, AI recommendation/AIM+/closed-loop and inventories. Base20/17/14% fades through maturation; low12/8/6% macro/price pressure, high24/23/20% execution upside. No disclosed eligible impressions/CPM; Video Accounts time cannot be mechanically multiplied by revenue. Analyst-selected 2028 high: 20.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_marketingservices_growth_rate_high_2028_40"
+      ]
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_low_2026",
+      "kind": "analyst_assumption",
+      "value": 0.05,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2026",
+      "scenario": "low",
+      "unit": "ratio",
+      "definition": "FinTechBusinessServices recognized annual growth, low FY2026",
+      "rationale": "FY2026 H1 +8.81% and Q2 +9%; financial services/enterprise cloud grow at different speeds. Base9/10/10% includes selective enterprise AI commercialization after GPU procurement, not all capex as revenue; low5/4/4% payment weakness/GPU constraints, high13/15/15% successful cloud/AI conversion. No disclosed TPV/net take or FinTech/cloud recognized split. Analyst-selected 2026 low: 5.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_fintechbusinessservices_growth_rate_low_2026_42"
+      ]
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_low_2027",
+      "kind": "analyst_assumption",
+      "value": 0.04,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2027",
+      "scenario": "low",
+      "unit": "ratio",
+      "definition": "FinTechBusinessServices recognized annual growth, low FY2027",
+      "rationale": "FY2026 H1 +8.81% and Q2 +9%; financial services/enterprise cloud grow at different speeds. Base9/10/10% includes selective enterprise AI commercialization after GPU procurement, not all capex as revenue; low5/4/4% payment weakness/GPU constraints, high13/15/15% successful cloud/AI conversion. No disclosed TPV/net take or FinTech/cloud recognized split. Analyst-selected 2027 low: 4.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_fintechbusinessservices_growth_rate_low_2027_43"
+      ]
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_low_2028",
+      "kind": "analyst_assumption",
+      "value": 0.04,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2028",
+      "scenario": "low",
+      "unit": "ratio",
+      "definition": "FinTechBusinessServices recognized annual growth, low FY2028",
+      "rationale": "FY2026 H1 +8.81% and Q2 +9%; financial services/enterprise cloud grow at different speeds. Base9/10/10% includes selective enterprise AI commercialization after GPU procurement, not all capex as revenue; low5/4/4% payment weakness/GPU constraints, high13/15/15% successful cloud/AI conversion. No disclosed TPV/net take or FinTech/cloud recognized split. Analyst-selected 2028 low: 4.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_fintechbusinessservices_growth_rate_low_2028_44"
+      ]
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_base_2026",
+      "kind": "analyst_assumption",
+      "value": 0.09,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2026",
+      "scenario": "base",
+      "unit": "ratio",
+      "definition": "FinTechBusinessServices recognized annual growth, base FY2026",
+      "rationale": "FY2026 H1 +8.81% and Q2 +9%; financial services/enterprise cloud grow at different speeds. Base9/10/10% includes selective enterprise AI commercialization after GPU procurement, not all capex as revenue; low5/4/4% payment weakness/GPU constraints, high13/15/15% successful cloud/AI conversion. No disclosed TPV/net take or FinTech/cloud recognized split. Analyst-selected 2026 base: 9.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_fintechbusinessservices_growth_rate_base_2026_45"
+      ]
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_base_2027",
+      "kind": "analyst_assumption",
+      "value": 0.1,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2027",
+      "scenario": "base",
+      "unit": "ratio",
+      "definition": "FinTechBusinessServices recognized annual growth, base FY2027",
+      "rationale": "FY2026 H1 +8.81% and Q2 +9%; financial services/enterprise cloud grow at different speeds. Base9/10/10% includes selective enterprise AI commercialization after GPU procurement, not all capex as revenue; low5/4/4% payment weakness/GPU constraints, high13/15/15% successful cloud/AI conversion. No disclosed TPV/net take or FinTech/cloud recognized split. Analyst-selected 2027 base: 10.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_fintechbusinessservices_growth_rate_base_2027_46"
+      ]
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_base_2028",
+      "kind": "analyst_assumption",
+      "value": 0.1,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2028",
+      "scenario": "base",
+      "unit": "ratio",
+      "definition": "FinTechBusinessServices recognized annual growth, base FY2028",
+      "rationale": "FY2026 H1 +8.81% and Q2 +9%; financial services/enterprise cloud grow at different speeds. Base9/10/10% includes selective enterprise AI commercialization after GPU procurement, not all capex as revenue; low5/4/4% payment weakness/GPU constraints, high13/15/15% successful cloud/AI conversion. No disclosed TPV/net take or FinTech/cloud recognized split. Analyst-selected 2028 base: 10.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_fintechbusinessservices_growth_rate_base_2028_47"
+      ]
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_high_2026",
+      "kind": "analyst_assumption",
+      "value": 0.13,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2026",
+      "scenario": "high",
+      "unit": "ratio",
+      "definition": "FinTechBusinessServices recognized annual growth, high FY2026",
+      "rationale": "FY2026 H1 +8.81% and Q2 +9%; financial services/enterprise cloud grow at different speeds. Base9/10/10% includes selective enterprise AI commercialization after GPU procurement, not all capex as revenue; low5/4/4% payment weakness/GPU constraints, high13/15/15% successful cloud/AI conversion. No disclosed TPV/net take or FinTech/cloud recognized split. Analyst-selected 2026 high: 13.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_fintechbusinessservices_growth_rate_high_2026_48"
+      ]
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_high_2027",
+      "kind": "analyst_assumption",
+      "value": 0.15,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2027",
+      "scenario": "high",
+      "unit": "ratio",
+      "definition": "FinTechBusinessServices recognized annual growth, high FY2027",
+      "rationale": "FY2026 H1 +8.81% and Q2 +9%; financial services/enterprise cloud grow at different speeds. Base9/10/10% includes selective enterprise AI commercialization after GPU procurement, not all capex as revenue; low5/4/4% payment weakness/GPU constraints, high13/15/15% successful cloud/AI conversion. No disclosed TPV/net take or FinTech/cloud recognized split. Analyst-selected 2027 high: 15.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_fintechbusinessservices_growth_rate_high_2027_49"
+      ]
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_high_2028",
+      "kind": "analyst_assumption",
+      "value": 0.15,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2028",
+      "scenario": "high",
+      "unit": "ratio",
+      "definition": "FinTechBusinessServices recognized annual growth, high FY2028",
+      "rationale": "FY2026 H1 +8.81% and Q2 +9%; financial services/enterprise cloud grow at different speeds. Base9/10/10% includes selective enterprise AI commercialization after GPU procurement, not all capex as revenue; low5/4/4% payment weakness/GPU constraints, high13/15/15% successful cloud/AI conversion. No disclosed TPV/net take or FinTech/cloud recognized split. Analyst-selected 2028 high: 15.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_fintechbusinessservices_growth_rate_high_2028_50"
+      ]
+    },
+    {
+      "parameter_id": "others_growth_rate_low_2026",
+      "kind": "analyst_assumption",
+      "value": 0.15,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2026",
+      "scenario": "low",
+      "unit": "ratio",
+      "definition": "Others recognized annual growth, low FY2026",
+      "rationale": "Small heterogeneous residual 1.07% FY2025 revenue; H1 +62.18% from low comparative base. Base40/10/8% deliberately fades one-period jump; low15/0/0% implies H2 reversal, high60/20/15% sustains content/products. This is not a quantified AI revenue plug; revenue mix and contract timing undisclosed. Analyst-selected 2026 low: 15.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_others_growth_rate_low_2026_52"
+      ]
+    },
+    {
+      "parameter_id": "others_growth_rate_low_2027",
+      "kind": "analyst_assumption",
+      "value": 0,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2027",
+      "scenario": "low",
+      "unit": "ratio",
+      "definition": "Others recognized annual growth, low FY2027",
+      "rationale": "Small heterogeneous residual 1.07% FY2025 revenue; H1 +62.18% from low comparative base. Base40/10/8% deliberately fades one-period jump; low15/0/0% implies H2 reversal, high60/20/15% sustains content/products. This is not a quantified AI revenue plug; revenue mix and contract timing undisclosed. Analyst-selected 2027 low: 0.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_others_growth_rate_low_2027_53"
+      ]
+    },
+    {
+      "parameter_id": "others_growth_rate_low_2028",
+      "kind": "analyst_assumption",
+      "value": 0,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2028",
+      "scenario": "low",
+      "unit": "ratio",
+      "definition": "Others recognized annual growth, low FY2028",
+      "rationale": "Small heterogeneous residual 1.07% FY2025 revenue; H1 +62.18% from low comparative base. Base40/10/8% deliberately fades one-period jump; low15/0/0% implies H2 reversal, high60/20/15% sustains content/products. This is not a quantified AI revenue plug; revenue mix and contract timing undisclosed. Analyst-selected 2028 low: 0.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_others_growth_rate_low_2028_54"
+      ]
+    },
+    {
+      "parameter_id": "others_growth_rate_base_2026",
+      "kind": "analyst_assumption",
+      "value": 0.4,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2026",
+      "scenario": "base",
+      "unit": "ratio",
+      "definition": "Others recognized annual growth, base FY2026",
+      "rationale": "Small heterogeneous residual 1.07% FY2025 revenue; H1 +62.18% from low comparative base. Base40/10/8% deliberately fades one-period jump; low15/0/0% implies H2 reversal, high60/20/15% sustains content/products. This is not a quantified AI revenue plug; revenue mix and contract timing undisclosed. Analyst-selected 2026 base: 40.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_others_growth_rate_base_2026_55"
+      ]
+    },
+    {
+      "parameter_id": "others_growth_rate_base_2027",
+      "kind": "analyst_assumption",
+      "value": 0.1,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2027",
+      "scenario": "base",
+      "unit": "ratio",
+      "definition": "Others recognized annual growth, base FY2027",
+      "rationale": "Small heterogeneous residual 1.07% FY2025 revenue; H1 +62.18% from low comparative base. Base40/10/8% deliberately fades one-period jump; low15/0/0% implies H2 reversal, high60/20/15% sustains content/products. This is not a quantified AI revenue plug; revenue mix and contract timing undisclosed. Analyst-selected 2027 base: 10.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_others_growth_rate_base_2027_56"
+      ]
+    },
+    {
+      "parameter_id": "others_growth_rate_base_2028",
+      "kind": "analyst_assumption",
+      "value": 0.08,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2028",
+      "scenario": "base",
+      "unit": "ratio",
+      "definition": "Others recognized annual growth, base FY2028",
+      "rationale": "Small heterogeneous residual 1.07% FY2025 revenue; H1 +62.18% from low comparative base. Base40/10/8% deliberately fades one-period jump; low15/0/0% implies H2 reversal, high60/20/15% sustains content/products. This is not a quantified AI revenue plug; revenue mix and contract timing undisclosed. Analyst-selected 2028 base: 8.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_others_growth_rate_base_2028_57"
+      ]
+    },
+    {
+      "parameter_id": "others_growth_rate_high_2026",
+      "kind": "analyst_assumption",
+      "value": 0.6,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2026",
+      "scenario": "high",
+      "unit": "ratio",
+      "definition": "Others recognized annual growth, high FY2026",
+      "rationale": "Small heterogeneous residual 1.07% FY2025 revenue; H1 +62.18% from low comparative base. Base40/10/8% deliberately fades one-period jump; low15/0/0% implies H2 reversal, high60/20/15% sustains content/products. This is not a quantified AI revenue plug; revenue mix and contract timing undisclosed. Analyst-selected 2026 high: 60.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_others_growth_rate_high_2026_58"
+      ]
+    },
+    {
+      "parameter_id": "others_growth_rate_high_2027",
+      "kind": "analyst_assumption",
+      "value": 0.2,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2027",
+      "scenario": "high",
+      "unit": "ratio",
+      "definition": "Others recognized annual growth, high FY2027",
+      "rationale": "Small heterogeneous residual 1.07% FY2025 revenue; H1 +62.18% from low comparative base. Base40/10/8% deliberately fades one-period jump; low15/0/0% implies H2 reversal, high60/20/15% sustains content/products. This is not a quantified AI revenue plug; revenue mix and contract timing undisclosed. Analyst-selected 2027 high: 20.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_others_growth_rate_high_2027_59"
+      ]
+    },
+    {
+      "parameter_id": "others_growth_rate_high_2028",
+      "kind": "analyst_assumption",
+      "value": 0.15,
+      "dimension": "ratio",
+      "time_basis": "annual",
+      "period": "FY2028",
+      "scenario": "high",
+      "unit": "ratio",
+      "definition": "Others recognized annual growth, high FY2028",
+      "rationale": "Small heterogeneous residual 1.07% FY2025 revenue; H1 +62.18% from low comparative base. Base40/10/8% deliberately fades one-period jump; low15/0/0% implies H2 reversal, high60/20/15% sustains content/products. This is not a quantified AI revenue plug; revenue mix and contract timing undisclosed. Analyst-selected 2028 high: 15.0%; official excerpt supports historical anchor only, not this forecast number.",
+      "source_ids": [
+        "tencent_h1_2026_official"
+      ],
+      "claim_ids": [
+        "claim_parameter_others_growth_rate_high_2028_60"
+      ]
+    }
+  ],
+  "source_artifacts": {
+    "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7": {
+      "byte_size": 4428270,
+      "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "mime_type": "application/pdf",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+    },
+    "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0": {
+      "byte_size": 5241364,
+      "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+      "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+      "mime_type": "application/pdf",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0"
+    },
+    "tencent_h1_2026_official": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\interim_2026_official.pdf",
+    "tencent_results_2q2026": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\results_2q2026.pdf",
+    "netease_results_2q2026": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\netease_2q2026.html",
+    "tencent_corporate_overview_sep2026": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\corporate_overview_20260916.pdf"
+  }
+}

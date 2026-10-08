@@ -1,0 +1,159 @@
+{
+  "query": {
+    "pageNum": "1",
+    "pageSize": "100",
+    "column": "sse",
+    "tabName": "fulltext",
+    "stock": "688012,9900038991",
+    "seDate": "2026-08-20~2026-10-08",
+    "category": "",
+    "isHLtitle": "true"
+  },
+  "total": 19,
+  "returned": 19,
+  "as_of": "2026-10-08",
+  "capture_time": "2026-10-08T07:41:55.068594+00:00",
+  "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\CN-688012\\recent_cninfo_metadata.json",
+  "sha256": "45a2b871e31258fbd21771a182468e7a8682fbe88ccb84f2656b31a5f5982834",
+  "usage": {
+    "schema_version": "1.0",
+    "response_bytes": 14568,
+    "cost_usd": "0"
+  },
+  "completeness": "all returned if returned equals total; metadata only, not full-document verification",
+  "announcements": [
+    {
+      "announcementId": "1225582793",
+      "announcementTitle": "关于参与设立私募投资基金暨关联交易进展的公告",
+      "announcementTime": 1790265600000,
+      "adjunctUrl": "finalpage/2026-09-25/1225582793.PDF",
+      "secCode": "688012"
+    },
+    {
+      "announcementId": "1225561867",
+      "announcementTitle": "董事、高级管理人员减持股份结果公告",
+      "announcementTime": 1789142400000,
+      "adjunctUrl": "finalpage/2026-09-12/1225561867.PDF",
+      "secCode": "688012"
+    },
+    {
+      "announcementId": "1225556622",
+      "announcementTitle": "关于持股5%以上股东权益变动触及1%刻度暨减持股份结果公告",
+      "announcementTime": 1788969600000,
+      "adjunctUrl": "finalpage/2026-09-10/1225556622.PDF",
+      "secCode": "688012"
+    },
+    {
+      "announcementId": "1225540276",
+      "announcementTitle": "关于参加科创板2026年半年度半导体制造、设备及材料行业集体业绩说明会的公告",
+      "announcementTime": 1788278400000,
+      "adjunctUrl": "finalpage/2026-09-02/1225540276.PDF",
+      "secCode": "688012"
+    },
+    {
+      "announcementId": "1225482918",
+      "announcementTitle": "关于使用部分募集资金向子公司提供借款以实施募投项目的公告",
+      "announcementTime": 1787155200000,
+      "adjunctUrl": "finalpage/2026-08-20/1225482918.PDF",
+      "secCode": "688012"
+    },
+    {
+      "announcementId": "1225482917",
+      "announcementTitle": "关于增加2026年度日常关联交易预计额度的公告",
+      "announcementTime": 1787155200000,
+      "adjunctUrl": "finalpage/2026-08-20/1225482917.PDF",
+      "secCode": "688012"
+    },
+    {
+      "announcementId": "1225482916",
+      "announcementTitle": "国泰海通证券股份有限公司关于中微半导体设备（上海）股份有限公司部分募投项目结项并将节余募集资金永久补充流动资金及部分募投项目延期的核查意见",
+      "announcementTime": 1787155200000,
+      "adjunctUrl": "finalpage/2026-08-20/1225482916.PDF",
+      "secCode": "688012"
+    },
+    {
+      "announcementId": "1225482915",
+      "announcementTitle": "2026年半年度报告摘要",
+      "announcementTime": 1787155200000,
+      "adjunctUrl": "finalpage/2026-08-20/1225482915.PDF",
+      "secCode": "688012"
+    },
+    {
+      "announcementId": "1225482911",
+      "announcementTitle": "关于公司部分募投项目结项并将节余募集资金永久补充流动资金及部分募投项目延期的公告",
+      "announcementTime": 1787155200000,
+      "adjunctUrl": "finalpage/2026-08-20/1225482911.PDF",
+      "secCode": "688012"
+    },
+    {
+      "announcementId": "1225482906",
+      "announcementTitle": "中信证券股份有限公司关于中微半导体设备（上海）股份有限公司使用募集资金置换预先投入募投项目及已支付发行费用的自筹资金的核查意见",
+      "announcementTime": 1787155200000,
+      "adjunctUrl": "finalpage/2026-08-20/1225482906.PDF",
+      "secCode": "688012"
+    },
+    {
+      "announcementId": "1225482905",
+      "announcementTitle": "普华永道中天会计师事务所(特殊普通合伙)关于中微半导体设备（上海）股份有限公司以自筹资金预先投入募集资金投资项目及支付发行费用情况报告及鉴证报告",
+      "announcementTime": 1787155200000,
+      "adjunctUrl": "finalpage/2026-08-20/1225482905.PDF",
+      "secCode": "688012"
+    },
+    {
+      "announcementId": "1225482897",
+      "announcementTitle": "中信证券股份有限公司关于中微半导体设备（上海）股份有限公司使用闲置募集资金进行现金管理的核查意见",
+      "announcementTime": 1787155200000,
+      "adjunctUrl": "finalpage/2026-08-20/1225482897.PDF",
+      "secCode": "688012"
+    },
+    {
+      "announcementId": "1225482896",
+      "announcementTitle": "中信证券股份有限公司关于中微半导体设备（上海）股份有限公司使用部分募集资金向子公司提供借款以实施募投项目的核查意见",
+      "announcementTime": 1787155200000,
+      "adjunctUrl": "finalpage/2026-08-20/1225482896.PDF",
+      "secCode": "688012"
+    },
+    {
+      "announcementId": "1225482894",
+      "announcementTitle": "关于对外投资的公告",
+      "announcementTime": 1787155200000,
+      "adjunctUrl": "finalpage/2026-08-20/1225482894.PDF",
+      "secCode": "688012"
+    },
+    {
+      "announcementId": "1225482893",
+      "announcementTitle": "关于使用募集资金置换预先投入募投项目及支付发行费用的自筹资金的公告",
+      "announcementTime": 1787155200000,
+      "adjunctUrl": "finalpage/2026-08-20/1225482893.PDF",
+      "secCode": "688012"
+    },
+    {
+      "announcementId": "1225482891",
+      "announcementTitle": "关于使用闲置募集资金进行现金管理的公告",
+      "announcementTime": 1787155200000,
+      "adjunctUrl": "finalpage/2026-08-20/1225482891.PDF",
+      "secCode": "688012"
+    },
+    {
+      "announcementId": "1225482884",
+      "announcementTitle": "2026年半年度报告",
+      "announcementTime": 1787155200000,
+      "adjunctUrl": "finalpage/2026-08-20/1225482884.PDF",
+      "secCode": "688012"
+    },
+    {
+      "announcementId": "1225482882",
+      "announcementTitle": "关于公司募集资金存放、管理与实际使用情况的专项报告",
+      "announcementTime": 1787155200000,
+      "adjunctUrl": "finalpage/2026-08-20/1225482882.PDF",
+      "secCode": "688012"
+    },
+    {
+      "announcementId": "1225482880",
+      "announcementTitle": "2026年度“提质增效重回报”专项行动方案的半年度评估报告",
+      "announcementTime": 1787155200000,
+      "adjunctUrl": "finalpage/2026-08-20/1225482880.PDF",
+      "secCode": "688012"
+    }
+  ]
+}

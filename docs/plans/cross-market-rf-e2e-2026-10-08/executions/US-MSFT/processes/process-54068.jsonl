@@ -1,0 +1,2 @@
+{"timestamp_utc": "2026-10-08T08:29:10.821105+00:00", "pid": 54068, "ppid": 83124, "event": "python_start", "data": {"executable": "C:\\Miniconda\\python.exe", "argv": ["C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\fix_hashes.py", "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\US-MSFT\\v2\\input.json", "--check"], "cwd": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast"}}
+{"timestamp_utc": "2026-10-08T08:29:10.872929+00:00", "pid": 54068, "ppid": 83124, "event": "python_exit", "data": {}}

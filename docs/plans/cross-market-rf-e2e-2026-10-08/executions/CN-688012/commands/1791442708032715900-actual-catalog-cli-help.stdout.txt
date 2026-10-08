@@ -1,0 +1,57 @@
+usage: company-wiki-source-catalog [-h] [--config CONFIG]
+                                   {scan,register,source-facts,fingerprint-backfill,export,policy-export,derived-audit,status,documents,identity-enrichment,identify,query,reconcile-retire,size-report,extraction-quality,duplicates,resolve,ensure,close-gap,import-portfolio,worker-status,worker-stop,uninstall-startup,startup-status,activation,runtime-policy} ...
+
+Catalog source versions, verify raw documents, and export read-only indexes.
+
+positional arguments:
+  {scan,register,source-facts,fingerprint-backfill,export,policy-export,derived-audit,status,documents,identity-enrichment,identify,query,reconcile-retire,size-report,extraction-quality,duplicates,resolve,ensure,close-gap,import-portfolio,worker-status,worker-stop,uninstall-startup,startup-status,activation,runtime-policy}
+    scan                scan and hash configured source roots
+    register            register explicit source groups without root discovery
+    source-facts        verify bytes and atomically record source facts
+    fingerprint-backfill
+                        compute normalized-text fingerprints for documents
+                        lacking one
+    export              export documents.csv, artifacts.csv, and index.md
+    policy-export       export the root policy snapshot (policy_hash + roots
+                        with ${PROJECT_ROOT}-tokenized path_refs) for
+                        consumers
+    derived-audit       audit detached derived files against current catalog
+    status              show catalog counts
+    documents           manage catalog documents (retire, ...)
+    identity-enrichment
+                        manage source metadata assertions: preview, verify,
+                        reject
+    identify            resolve a company name, alias, or ticker to one
+                        verified listed security
+    query               query catalog metadata and artifact paths
+    reconcile-retire    align phase-15.6 retire-audit with document status
+                        (dry-run default)
+    size-report         read-only catalog size / disk-health report (Phase 4
+                        monitoring)
+    extraction-quality  assess deterministic source/extraction quality without
+                        span bodies
+    duplicates          list exact-copy groups and their protected canonical
+                        locations
+    resolve             resolve an existing source before any downloader is
+                        considered
+    ensure              resolve first and optionally acquire one missing
+                        source through configured adapters
+    close-gap           fetch a missing source through the same bounded
+                        service as ensure; an optional legacy binding only
+                        narrows provider/accession scope
+    import-portfolio    promote already-indexed dayu-portfolio documents into
+                        company_raw canonical sources so filing-fetch reuses
+                        them without re-downloading
+    worker-status       inspect any remaining legacy worker and startup-task
+                        state
+    worker-stop         stop a remaining legacy worker process
+    uninstall-startup   remove the Windows logon task
+    startup-status      show Windows logon task status
+    activation          preview/apply/rollback cohort-epoch activation
+                        (FC-203)
+    runtime-policy      show or apply the persistent RuntimePolicySnapshot
+                        (FC-201)
+
+options:
+  -h, --help            show this help message and exit
+  --config CONFIG       versioned source-catalog YAML configuration

@@ -1,0 +1,17 @@
+{
+  "url": "https://www.tencent.com/wp-content/uploads/2026/09/Corporate-Overview-2Q26-20260916.pdf",
+  "final_url": "https://www.tencent.com/wp-content/uploads/2026/09/Corporate-Overview-2Q26-20260916.pdf",
+  "status_code": 200,
+  "download_bytes": 1676729,
+  "sha256": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+  "raw_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-rf-e2e-20261008\\HK-00700\\corporate_overview_20260916.pdf",
+  "pages": 24,
+  "published_date": "2026-09-16",
+  "publication_date_basis": "official investor-kit link+dated filename Sep2026 title; exact day is website filename asserted, not inferred mtime",
+  "tool": "requests.get streamed",
+  "supplemental_route": "official IR presentation, not financial-filing route",
+  "max_bytes": 41943040,
+  "timeout_seconds": 180,
+  "cost_usd": "0.00",
+  "elapsed_seconds": 1.1121600000042235
+}

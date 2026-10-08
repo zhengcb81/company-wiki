@@ -1,0 +1,284 @@
+FFFFFF                                                                   [100%]
+================================== FAILURES ===================================
+_________________ test_schema2_source_candidate_is_unwrapped __________________
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-135/test_schema2_source_candidate_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000209B4130050>
+
+    def test_schema2_source_candidate_is_unwrapped(tmp_path, monkeypatch):
+        import filing_fetch_client as client
+        (tmp_path / "scripts").mkdir()
+        (tmp_path / "scripts/fetch_filing.py").write_text("", encoding="utf-8")
+        filing = {"status": "source_candidate", "source_ref": {"schema_version": "2.0"},
+                  "document_kind": "annual_report", "fiscal_year": 2025, "fiscal_period": "FY",
+                  "resolution_outcome": "reused_existing", "download_events": 0,
+                  "byte_verification": "pending_verified_open"}
+        payload = {"schema_version": "2.0", "status": "source_candidate", "filing": filing,
+                   "transcript": {"status": "not_requested"}, "calls": 2, "downloads": 0}
+        monkeypatch.setattr(client.subprocess, "run", lambda *a, **kw:
+                            subprocess.CompletedProcess([], 0, json.dumps(payload), ""))
+>       assert client.resolve_filing({"schema_version": "2.0"}, filing_fetch_root=tmp_path) == filing
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_filing_fetch_client.py:414: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'schema_version': '2.0'}, allow_download = False
+timeout_seconds = 900.0
+filing_fetch_root = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-135/test_schema2_source_candidate_0')
+company_wiki_config = None, source_ref_v2 = False
+
+    def resolve_filing(
+        request: dict[str, Any],
+        *,
+        allow_download: bool = False,
+        timeout_seconds: float = 900.0,
+        filing_fetch_root: Path | None = None,
+        company_wiki_config: Path | None = None,
+        source_ref_v2: bool = False,
+    ) -> dict[str, Any]:
+        """Resolve (or, when authorized, ensure) a filing via filing-fetch.
+    
+        Returns the capture-ready ``handle`` dict on success, or raises
+        ``_ClientError`` carrying the upstream status / error_code / retryable /
+        candidates when filing-fetch fails.
+        """
+        root = filing_fetch_root or load_filing_fetch_root()
+        script = root / "scripts" / "fetch_filing.py"
+        if not script.is_file():
+            raise _ClientError(
+                f"filing-fetch script not found at {script}; "
+                "install the skill or override filing_fetch_root"
+            )
+        cmd = [sys.executable, str(script)]
+        if allow_download:
+            cmd.append("--allow-download")
+        if source_ref_v2:
+            cmd.append("--source-ref-v2")
+        if company_wiki_config is not None:
+            cmd.extend(["--config", str(company_wiki_config)])
+        cmd.extend(["--timeout-seconds", str(timeout_seconds)])
+        environment = dict(os.environ)
+        environment["PYTHONUTF8"] = "1"
+        creationflags = subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0  # type: ignore[attr-defined]
+        try:
+            completed = subprocess.run(
+                cmd,
+                input=json.dumps(request, ensure_ascii=False),
+                text=True,
+                encoding="utf-8",
+                errors="strict",
+                capture_output=True,
+                timeout=timeout_seconds + 10,  # small grace beyond the deadline
+                cwd=root,
+                env=environment,
+                check=False,
+                shell=False,
+                creationflags=creationflags,
+            )
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            raise _ClientError(f"filing-fetch subprocess failed: {exc}") from exc
+        if completed.returncode != 0:
+            # filing-fetch writes its structured error document to STDOUT and exits
+            # non-zero (stderr is typically empty). Parse stdout first so callers
+            # receive error_code / retryable / candidates; fall back to stderr only
+            # when stdout is not a JSON object.
+            payload = _try_loads(completed.stdout)
+            if isinstance(payload, dict):
+                raise _ClientError(
+                    f"filing-fetch exited {completed.returncode}: "
+                    f"{payload.get('error') or payload.get('status') or 'unknown error'}",
+                    status=payload.get("status"),
+                    error_code=payload.get("error_code"),
+                    retryable=payload.get("retryable"),
+                    candidates=payload.get("candidates"),
+                )
+            detail = completed.stderr.strip() or "no stderr"
+            raise _ClientError(f"filing-fetch exited {completed.returncode}: {detail}")
+        try:
+            response = json.loads(completed.stdout)
+        except json.JSONDecodeError:
+            raise _ClientError("filing-fetch stdout is not valid JSON")
+        if not isinstance(response, dict):
+            raise _ClientError("filing-fetch response must be an object")
+        status = response.get("status")
+        if status != "capture_ready":
+>           raise _ClientError(
+                f"filing-fetch returned status={status}: {response.get('error', 'unknown error')}",
+                status=status,
+                error_code=response.get("error_code"),
+                retryable=response.get("retryable"),
+                candidates=response.get("candidates"),
+            )
+E           filing_fetch_client._ClientError: filing-fetch returned status=source_candidate: unknown error
+
+scripts\filing_fetch_client.py:260: _ClientError
+___________________ test_schema2_gap_keeps_provider_reason ____________________
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-135/test_schema2_gap_keeps_provide0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000209B4130510>
+
+    def test_schema2_gap_keeps_provider_reason(tmp_path, monkeypatch):
+        import filing_fetch_client as client
+        import pytest
+        (tmp_path / "scripts").mkdir()
+        (tmp_path / "scripts/fetch_filing.py").write_text("", encoding="utf-8")
+        payload = {"schema_version": "2.0", "status": "gap",
+                   "filing": {"status": "gap", "reason": "provider_unavailable"}}
+        monkeypatch.setattr(client.subprocess, "run", lambda *a, **kw:
+                            subprocess.CompletedProcess([], 0, json.dumps(payload), ""))
+>       with pytest.raises(client._ClientError, match="provider_unavailable"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'provider_unavailable'
+E         Actual message: 'filing-fetch returned status=gap: unknown error'
+
+tests\test_filing_fetch_client.py:426: AssertionError
+__________ test_unknown_retrieval_preserved_and_actual_read_captured __________
+
+    def test_unknown_retrieval_preserved_and_actual_read_captured():
+        ref, receipt, manifest = _inputs()
+        manifest["retrieved_at"] = None
+>       result = _build(ref, receipt, manifest)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_company_wiki_source_v2.py:202: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_company_wiki_source_v2.py:115: in _build
+    return build_revenue_source_record_from_verified_read(
+scripts\company_wiki_source_v2.py:275: in build_revenue_source_record_from_verified_read
+    manifest, published = _validate_manifest(source_manifest, ref, as_of)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\company_wiki_source_v2.py:202: in _validate_manifest
+    published = _validate_manifest_dates(manifest, as_of)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\company_wiki_source_v2.py:177: in _validate_manifest_dates
+    retrieved = _aware_datetime(manifest.get("retrieved_at"), "source manifest retrieved_at")
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+value = None, label = 'source manifest retrieved_at'
+
+    def _aware_datetime(value: Any, label: str) -> datetime:
+        if not isinstance(value, str) or not value.strip():
+>           raise CompanyWikiSourceError(f"{label} must be timezone-aware")
+E           company_wiki_source.CompanyWikiSourceError: source manifest retrieved_at must be timezone-aware
+
+scripts\company_wiki_source_v2.py:61: CompanyWikiSourceError
+____________ test_minimal_schema2_candidate_uses_verified_manifest ____________
+
+    def test_minimal_schema2_candidate_uses_verified_manifest():
+        ref, receipt, manifest = _inputs()
+        minimal = {"status": "source_candidate", "source_ref": ref,
+                   "byte_verification": "pending_verified_open", "document_kind": "annual_report",
+                   "fiscal_year": 2025, "fiscal_period": None,
+                   "resolution_outcome": "reused_existing", "download_events": 0}
+>       record = _build(ref, receipt, manifest, candidate=minimal)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_company_wiki_source_v2.py:215: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_company_wiki_source_v2.py:115: in _build
+    return build_revenue_source_record_from_verified_read(
+scripts\company_wiki_source_v2.py:276: in build_revenue_source_record_from_verified_read
+    candidate = _validate_candidate(source_candidate, ref, manifest)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\company_wiki_source_v2.py:225: in _validate_candidate
+    _same(candidate.get(candidate_field), manifest.get(manifest_field),
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+actual = None
+expected = 'urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb'
+label = 'source candidate document_id'
+
+    def _same(actual: Any, expected: Any, label: str) -> None:
+        if type(actual) is not type(expected) or actual != expected:
+>           raise CompanyWikiSourceError(f"{label} mismatch")
+E           company_wiki_source.CompanyWikiSourceError: source candidate document_id mismatch
+
+scripts\company_wiki_source_v2.py:56: CompanyWikiSourceError
+__________________ test_null_original_retrieval_is_preserved __________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000209B3F69010>
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-135/test_null_original_retrieval_i0')
+
+    def test_null_original_retrieval_is_preserved(monkeypatch, tmp_path):
+        receipt = _receipt()
+        receipt["manifest"]["retrieved_at"] = None
+        monkeypatch.setattr("subprocess.run", lambda command, **kw:
+                            subprocess.CompletedProcess(command, 0, BODY,
+                                (json.dumps(receipt) + "\n").encode()))
+>       body, read_receipt, manifest = _open(tmp_path)
+                                       ^^^^^^^^^^^^^^^
+
+tests\test_company_wiki_source_reader_v2.py:199: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_company_wiki_source_reader_v2.py:49: in _open
+    return _reader().open_source_version_v2(
+scripts\company_wiki_source_reader_v2.py:331: in open_source_version_v2
+    manifest = _validate_success_receipt(
+scripts\company_wiki_source_reader_v2.py:308: in _validate_success_receipt
+    return _validate_manifest(receipt["manifest"], source_ref, as_of, fiscal_year)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\company_wiki_source_reader_v2.py:227: in _validate_manifest
+    _validate_manifest_period(manifest, as_of, fiscal_year)
+scripts\company_wiki_source_reader_v2.py:213: in _validate_manifest_period
+    retrieved = _datetime(manifest["retrieved_at"], "source manifest retrieved_at")
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+value = None, field = 'source manifest retrieved_at', require_utc = False
+
+    def _datetime(value: Any, field: str, *, require_utc: bool = False) -> datetime:
+        if not isinstance(value, str) or not value.strip():
+>           raise SourceVersionTransportError(f"{field} must be timezone-aware")
+E           company_wiki_source_reader_v2.SourceVersionTransportError: source manifest retrieved_at must be timezone-aware
+
+scripts\company_wiki_source_reader_v2.py:107: SourceVersionTransportError
+____________ test_annual_optional_period_defaults_to_canonical_fy _____________
+
+    def test_annual_optional_period_defaults_to_canonical_fy():
+        import source_preparation as prep
+        import pytest
+        request = {"document_kind": "annual_report", "fiscal_year": 2025}
+        handle = {"source_ref": {}, "document_kind": "annual_report",
+                  "fiscal_year": 2025, "fiscal_period": "FY"}
+>       assert prep._validate_v2_candidate(request, handle) == 2025
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_source_preparation.py:426: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+request = {'document_kind': 'annual_report', 'fiscal_year': 2025}
+handle = {'source_ref': {}, 'document_kind': 'annual_report', 'fiscal_year': 2025, 'fiscal_period': 'FY'}
+
+    def _validate_v2_candidate(request: dict, handle: dict) -> int:
+        source_ref = handle.get("source_ref")
+        if _SOURCE_LOCATION_FIELDS & set(handle):
+            raise RuntimeError(
+                "filing-fetch SourceRef candidate contains a storage location"
+            )
+        if isinstance(source_ref, dict) and _SOURCE_LOCATION_FIELDS & set(source_ref):
+            raise RuntimeError("filing-fetch SourceRef contains a storage location")
+        if not isinstance(source_ref, dict):
+            raise RuntimeError("filing-fetch SourceRef candidate is missing source_ref")
+        if handle.get("document_kind") != request.get("document_kind"):
+            raise RuntimeError("filing-fetch SourceRef document_kind mismatch")
+        fiscal_year = request.get("fiscal_year")
+        if type(fiscal_year) is not int or fiscal_year < 1:
+            raise RuntimeError("SourceRef v2 requires a valid fiscal_year")
+        if handle.get("fiscal_year") != fiscal_year:
+            raise RuntimeError("filing-fetch SourceRef fiscal_year mismatch")
+        if handle.get("fiscal_period") != request.get("fiscal_period"):
+>           raise RuntimeError("filing-fetch SourceRef fiscal_period mismatch")
+E           RuntimeError: filing-fetch SourceRef fiscal_period mismatch
+
+scripts\source_preparation.py:163: RuntimeError
+=========================== short test summary info ===========================
+FAILED tests/test_filing_fetch_client.py::test_schema2_source_candidate_is_unwrapped
+FAILED tests/test_filing_fetch_client.py::test_schema2_gap_keeps_provider_reason
+FAILED tests/test_company_wiki_source_v2.py::test_unknown_retrieval_preserved_and_actual_read_captured
+FAILED tests/test_company_wiki_source_v2.py::test_minimal_schema2_candidate_uses_verified_manifest
+FAILED tests/test_company_wiki_source_reader_v2.py::test_null_original_retrieval_is_preserved
+FAILED tests/test_source_preparation.py::test_annual_optional_period_defaults_to_canonical_fy
+6 failed, 63 deselected in 0.92s

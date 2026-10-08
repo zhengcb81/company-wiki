@@ -1,0 +1,154 @@
+[
+  {
+    "parameter_id": "azure_growth_base_2027",
+    "shock": 0.05,
+    "requested": {
+      "down": 0.33,
+      "up": 0.43
+    },
+    "effective": {
+      "down": 0.33,
+      "up": 0.43
+    },
+    "clamped": {
+      "down": false,
+      "up": false
+    },
+    "down_terminal_USDmillion": 509274.659962,
+    "up_terminal_USDmillion": 525707.065562,
+    "verdict": "PASS"
+  },
+  {
+    "parameter_id": "microsoft_365_cloud_growth_base_2027",
+    "shock": 0.05,
+    "requested": {
+      "down": 0.12000000000000001,
+      "up": 0.22000000000000003
+    },
+    "effective": {
+      "down": 0.12000000000000001,
+      "up": 0.22000000000000003
+    },
+    "clamped": {
+      "down": false,
+      "up": false
+    },
+    "down_terminal_USDmillion": 510859.09288199997,
+    "up_terminal_USDmillion": 524122.632642,
+    "verdict": "PASS"
+  },
+  {
+    "parameter_id": "productivity_and_server_licensing_growth_base_2027",
+    "shock": 0.05,
+    "requested": {
+      "down": -0.1,
+      "up": 0.0
+    },
+    "effective": {
+      "down": -0.1,
+      "up": 0.0
+    },
+    "clamped": {
+      "down": false,
+      "up": false
+    },
+    "down_terminal_USDmillion": 515718.70671199996,
+    "up_terminal_USDmillion": 519263.01881199994,
+    "verdict": "PASS"
+  },
+  {
+    "parameter_id": "industry_solutions_growth_base_2027",
+    "shock": 0.05,
+    "requested": {
+      "down": 0.039999999999999994,
+      "up": 0.14
+    },
+    "effective": {
+      "down": 0.039999999999999994,
+      "up": 0.14
+    },
+    "clamped": {
+      "down": false,
+      "up": false
+    },
+    "down_terminal_USDmillion": 516293.356062,
+    "up_terminal_USDmillion": 518688.369462,
+    "verdict": "PASS"
+  },
+  {
+    "parameter_id": "frontier_and_support_services_growth_base_2027",
+    "shock": 0.05,
+    "requested": {
+      "down": 0.009999999999999995,
+      "up": 0.11
+    },
+    "effective": {
+      "down": 0.009999999999999995,
+      "up": 0.11
+    },
+    "clamped": {
+      "down": false,
+      "up": false
+    },
+    "down_terminal_USDmillion": 517039.86676199996,
+    "up_terminal_USDmillion": 517941.85876199993,
+    "verdict": "PASS"
+  },
+  {
+    "parameter_id": "search_and_advertising_growth_base_2027",
+    "shock": 0.05,
+    "requested": {
+      "down": 0.03,
+      "up": 0.13
+    },
+    "effective": {
+      "down": 0.03,
+      "up": 0.13
+    },
+    "clamped": {
+      "down": false,
+      "up": false
+    },
+    "down_terminal_USDmillion": 516082.46991199994,
+    "up_terminal_USDmillion": 518899.25561199995,
+    "verdict": "PASS"
+  },
+  {
+    "parameter_id": "xbox_growth_base_2027",
+    "shock": 0.05,
+    "requested": {
+      "down": -0.09,
+      "up": 0.010000000000000002
+    },
+    "effective": {
+      "down": -0.09,
+      "up": 0.010000000000000002
+    },
+    "clamped": {
+      "down": false,
+      "up": false
+    },
+    "down_terminal_USDmillion": 516335.12116199994,
+    "up_terminal_USDmillion": 518646.6043619999,
+    "verdict": "PASS"
+  },
+  {
+    "parameter_id": "windows_oem_and_devices_growth_base_2027",
+    "shock": 0.05,
+    "requested": {
+      "down": -0.22999999999999998,
+      "up": -0.13
+    },
+    "effective": {
+      "down": -0.22999999999999998,
+      "up": -0.13
+    },
+    "clamped": {
+      "down": false,
+      "up": false
+    },
+    "down_terminal_USDmillion": 516662.14326199994,
+    "up_terminal_USDmillion": 518319.58226199995,
+    "verdict": "PASS"
+  }
+]

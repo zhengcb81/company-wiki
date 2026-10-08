@@ -1,0 +1,378 @@
+{
+  "schema_version": "1.0",
+  "default_for_unknown_files": "retain",
+  "files": [
+    {
+      "relative_path": "CN-688012-review/annual-p218.png",
+      "sha256": "715143872000098d8437ef8503e7122673d106f87a8fcb6970964a74d7952e8d",
+      "byte_size": 270398,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "CN-688012-review/annual-p219.png",
+      "sha256": "4a7003621c3075217c7a06dda9679805ac9dcaafefd03b1503118d50044b593d",
+      "byte_size": 241589,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "CN-688012-review/annual-p25.png",
+      "sha256": "d0a66e498ca03aec5324560c2e5fb8063a94576261a5d0c0aa41b85a47d6bb1c",
+      "byte_size": 372727,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "CN-688012-review/annual-p65.png",
+      "sha256": "904959d2fc627770eb505177ac7e9256729abd034c1bff13f2bbee092b54455e",
+      "byte_size": 329526,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "CN-688012-review/half-p176.png",
+      "sha256": "d61ed44c007bba042489270c2ccd051b0fd865e9f88ca34e2956d6bc281a32a2",
+      "byte_size": 273897,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "CN-688012-review/half-p177.png",
+      "sha256": "44367521080505ca56c02ddc13a611aca98cad05161e443b0d20d8ee5e98b239",
+      "byte_size": 397352,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "HK-00700/annual_2024_cover.png",
+      "sha256": "c4fb241510872edf921a9b4b94e90600336e472a9718b3cad1f6f43e35501c8e",
+      "byte_size": 155489,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/corp-page-12-mupdf.png",
+      "sha256": "bac444a40fe572fa9f7b668741b943d3313a68626f4fb1164ce2cc8a3bc8e3fc",
+      "byte_size": 210203,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/corp-page-12.png",
+      "sha256": "0d1f4927d7618ce2ee183a8c3c04a51fc7b4085c213cb37709828fdb1f2dfb4c",
+      "byte_size": 239881,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/corp-page-15-mupdf.png",
+      "sha256": "f95a447a69f8fc0b88cc6864da7b468473a24063a42cc781f4a11f658cf58de1",
+      "byte_size": 180340,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/corp-page-15.png",
+      "sha256": "aaa2293fe77fb6b0ede0bfea8b778fcbe24b0e547f79168254fe93393b97f8f1",
+      "byte_size": 218582,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2024-page-1-mupdf.png",
+      "sha256": "c9ba46187292953979d3b5be70b883c56ccb7d549f815918142aafb7b3e42f41",
+      "byte_size": 657465,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2024-page-1.png",
+      "sha256": "09580cd4e2b39474b26ed21f8d8fceaaebf1077ff5d7a0fa4c0f4c71a7e0d118",
+      "byte_size": 737059,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2024-page-188-mupdf.png",
+      "sha256": "3cfe3643486eca445e939f98f51b777023b6d36930ede647d0aa38dbe6886f22",
+      "byte_size": 81440,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2024-page-188.png",
+      "sha256": "b8d3c634b65dae945a11b9c73d76a67c10064d3cbadc1e106b3a9164eab90e4e",
+      "byte_size": 37007,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2025-page-165-mupdf.png",
+      "sha256": "3a5a067a4fce46eb5a35e46c4d979f06a732f3c092231624d5bde0ebd319d3ab",
+      "byte_size": 174710,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2025-page-165.png",
+      "sha256": "246d4acd4937d0a235c977621ecde08ad27244509800fae45bf0c12c42c42d43",
+      "byte_size": 14467,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2025-page-166-mupdf.png",
+      "sha256": "2b1388a0820a9922c8e443a42bcf1993d6454527fa42ac1e551997eb6f96cb6e",
+      "byte_size": 165426,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2025-page-166.png",
+      "sha256": "88dc411d800e5de32237d541a6d12840a59bd6623ccb616daf0426fbddbbd44d",
+      "byte_size": 14655,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2025-page-167-mupdf.png",
+      "sha256": "645bf613b0416017efc3949e6d8ed0fee818684bc552dca945bbfac79e855f26",
+      "byte_size": 163621,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2025-page-167.png",
+      "sha256": "e88e0aff6d9a0c6730f58445bb43bf6baeb34c44a12dafd79d741b0060dd2ec9",
+      "byte_size": 17108,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2025-page-196-mupdf.png",
+      "sha256": "9dca7ec9435f63d5ed80fa6b3d692a39efe8140e51a91d052d8feeb2bb066a0b",
+      "byte_size": 81947,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2025-page-196.png",
+      "sha256": "d0832cd841813aa6570bb62b5d134a1624dfbf3d99ed1eabb7e7eb1a3620df7c",
+      "byte_size": 37040,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2025-page-4-mupdf.png",
+      "sha256": "659a1a4b80ed725a70c148cccbf7dfb37b0d3d5455bfd23e9cf92bd53f30aace",
+      "byte_size": 233426,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2025-page-4.png",
+      "sha256": "b060b845880f8a5b2c83293ce78701452fdd369fc4ffaa991478f1d86e7c111a",
+      "byte_size": 235171,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2025-page-80-mupdf.png",
+      "sha256": "cca598cd401277be0c120bd958e218f45ebe29699a88568e144b9a0dd14b3291",
+      "byte_size": 189935,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/fy2025-page-80.png",
+      "sha256": "224b5775370a33f842f08f0675276845b6aacd42ace847509a1307ec9b6d0a2f",
+      "byte_size": 94658,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/h1-page-10-mupdf.png",
+      "sha256": "1b5093077771997598c31cd76493021793feca807693053b41298f6cf4516a8a",
+      "byte_size": 175788,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/h1-page-10.png",
+      "sha256": "687175c0a21035a41df10b7331b431f8669cf3bf832979a1ea49333475b2ef63",
+      "byte_size": 317940,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/h1-page-47-mupdf.png",
+      "sha256": "c4d1e7d9408da7d7574cf8a4a84af8062eb6786c8c8ec28d3c181b42218fee78",
+      "byte_size": 75787,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/h1-page-47.png",
+      "sha256": "95ce1b2fd8ca1bf8558191b27f4f6dcd87f86e0ffe78296f43ea9e74d9cd5f66",
+      "byte_size": 109458,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/h1-page-6-mupdf.png",
+      "sha256": "4e8dfb8dd957a48a54373c62c03d4319aefaa550bf74b75b3a2f9e58a99b6dad",
+      "byte_size": 172046,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "review-HK-00700-rf_hk_independent_review/h1-page-6.png",
+      "sha256": "5cfc51281bbc60773609bc756bd0511cc643cda2d3c0d3a18533043751d73588",
+      "byte_size": 302403,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "US-MSFT/fy2025_consumer_temporary_text.txt",
+      "sha256": "4083d988beff6119c77fd1579607b87c9d45cf3d5ac768653eb285ba7941b0a7",
+      "byte_size": 320880,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "US-MSFT/ppt_images/image1.png",
+      "sha256": "5905a318d9a9450f59bc747fe54b74789331ba9c79f1458ad138ead04c85ea1d",
+      "byte_size": 64310,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "US-MSFT/ppt_images/image10.png",
+      "sha256": "3c6ae574cf44b87cd6c9989485f46c0d3a2d6e6a562d6e9585d74d7cb0083120",
+      "byte_size": 31464,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "US-MSFT/ppt_images/image11.png",
+      "sha256": "e9655692b713891b74bf0d939a33c80e52b4fb5cc812edd3cd96bc5018d501db",
+      "byte_size": 211082,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "US-MSFT/ppt_images/image12.png",
+      "sha256": "5e936afdad9d5d4bed10da5acaf9f8f8722e2103f3d862cb978f836d4c70324e",
+      "byte_size": 219127,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "US-MSFT/ppt_images/image13.png",
+      "sha256": "2f5c8513b8e0b0b042d162ca3f9fa15838dbfb90dbf4776b74fee02ae2cc6580",
+      "byte_size": 327545,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "US-MSFT/ppt_images/image14.png",
+      "sha256": "89e14395a3b31a38f8939aafe0340acc38d1ff671b69d4092ffaaaaea8538ebe",
+      "byte_size": 34428,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "US-MSFT/ppt_images/image15.png",
+      "sha256": "be4bd936032ccb5e834089539231e13be50ed9829371bb3e126835a19e4290eb",
+      "byte_size": 204167,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "US-MSFT/ppt_images/image16.png",
+      "sha256": "628f04243fe62d4017ef378b37cea206f24b3072e50c1be189b05a2cc995b41e",
+      "byte_size": 263589,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "US-MSFT/ppt_images/image17.png",
+      "sha256": "3eb1d7fe082c7d171ccc5cca60a5f67790ac8c43490d7aa7697a8aff81496b56",
+      "byte_size": 307392,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "US-MSFT/ppt_images/image18.png",
+      "sha256": "05d04cf705fb19cfb12feb1382e9a9b668a563f9323ddc2a79b8d327949cef91",
+      "byte_size": 234059,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "US-MSFT/ppt_images/image19.png",
+      "sha256": "3c8fe61ba4645d7c80d14617cdf544a173d12b36fb51d010757b926f2aa6bf22",
+      "byte_size": 36004,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "US-MSFT/ppt_images/image2.png",
+      "sha256": "21fa303719942f41d3cd824d215a5cbcf5fc16264b81a510e3a9139d8f261328",
+      "byte_size": 113145,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "US-MSFT/ppt_images/image20.png",
+      "sha256": "c295779702745c971e9f813214cea10155e11c03d3329ba6b45a7cee9d657359",
+      "byte_size": 301835,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "US-MSFT/ppt_images/image21.png",
+      "sha256": "fa3b238c348236c19d17948f68815f56250a946a3bbe93d755a207441c12bddf",
+      "byte_size": 316564,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "US-MSFT/ppt_images/image22.png",
+      "sha256": "ab6bfc42d20c2745a0c5d5b7d5a989b71cbe66fbd349640dccca88cde2796f44",
+      "byte_size": 36887,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "US-MSFT/ppt_images/image3.png",
+      "sha256": "bab94b03d91f18ca1b90dba0766ba779a4d0285837de73ee710782865bef3670",
+      "byte_size": 94166,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "US-MSFT/ppt_images/image4.png",
+      "sha256": "33e54faabef297663755363b6358653237e55f8261889f6142ac44f7a24a41cb",
+      "byte_size": 204190,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "US-MSFT/ppt_images/image5.png",
+      "sha256": "1fbfbd03dedb94ba792541ac17dc9cbef23ab590e74bd4488807b8c58981c659",
+      "byte_size": 259559,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "US-MSFT/ppt_images/image6.png",
+      "sha256": "ede74c44e22b5f29efba64c10e9f53b2024e15998c6c73f180a25c5e215e9f97",
+      "byte_size": 30930,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "US-MSFT/ppt_images/image7.png",
+      "sha256": "d4edf0903db8d061555fc3d0a99409f21c9f034fe8e31df59a37ae69de5f31ea",
+      "byte_size": 331246,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "US-MSFT/ppt_images/image8.png",
+      "sha256": "8eee7ba448c14c20e22e2b2f5daa280e4138181d6f38911c060e291ab23ecc5e",
+      "byte_size": 112551,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "US-MSFT/ppt_images/image9.png",
+      "sha256": "a818ff4b319b716d75d29a5d76c79d25b3648c90eb3cb4df15119f03e018171e",
+      "byte_size": 220244,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "HK-00700/v3/FY2025_page_1_visual.png",
+      "sha256": "828d4fa6241f9e21bac3ece50db278819394b74e6b5be3c0a66f951655c0aeb2",
+      "byte_size": 329629,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "HK-00700/v3/FY2025_page_4_visual.png",
+      "sha256": "874d39e45fcf76c60303509b8ec92e0a2e2fd3c26e86f9aaf1d9d15749eafc0d",
+      "byte_size": 184195,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "CN-688012-review/v3/1225482894-p4.png",
+      "sha256": "9175c5f03000226a90274903aa5275c933249af8bef5d43ad8c2eddabfcede11",
+      "byte_size": 172332,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "CN-688012-review/v3/1225482911-p4.png",
+      "sha256": "de97ce2110f430c1f55d6494e3f5fc3ede35ccbe5de0d8d0c97196b8219baf9d",
+      "byte_size": 212748,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "CN-688012-review/v3/1225482917-p2.png",
+      "sha256": "a64155ed9fce8afa1ce2dbc43be545627a749542769383ca97b42e379c0c538d",
+      "byte_size": 172519,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    },
+    {
+      "relative_path": "CN-688012-review/v3/1225482918-p3.png",
+      "sha256": "42a009729edae5b952f84db4e450fdf7c2668385007ee1ef64c6ac71c58ba417",
+      "byte_size": 214483,
+      "reason": "Explicitly reviewed temporary PDF/PPT rendering or FY2025 HTML text extraction; originals and reproduction commands retained."
+    }
+  ]
+}

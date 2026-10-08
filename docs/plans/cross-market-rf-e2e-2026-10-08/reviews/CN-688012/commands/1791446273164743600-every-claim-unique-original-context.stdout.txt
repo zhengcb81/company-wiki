@@ -1,0 +1,574 @@
+
+GROUP 0 urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5 PDF page 25, principal financial data, CNY yuan converted /1,000,000
+CLAIMS [('claim_history_2023', 'historical_revenue', 'historical_revenue:2023', 'exact_value', 6263.51358137), ('claim_history_2024', 'historical_revenue', 'historical_revenue:2024', 'exact_value', 9065.16509769), ('claim_history_2025', 'historical_revenue', 'historical_revenue:2025', 'exact_value', 12384.63826811)]
+营业收入
+12,384,638,268.11
+9,065,165,097.69
+36.62%
+6,263,513,581.37
+利润总额
+2,189,849,396.66
+1,708,934,664.34
+28.14%
+2,010,381,608.63
+归属于上市公司股东的
+净利润
+2,111,472,990.43
+1,615,675,746.81
+30.69%
+1,785,907,974.46
+归属于上市公司股东的
+扣除非经常性损益的净
+利润
+1,549,796,388.43
+1,388,153,354.14
+11.64%
+1,191,434,841.55
+经营活动产生的现金流
+量净额
+2,295,352,919.08
+1,458,401,788.71
+57.39%
+-976,926,439.66
+2025年末
+2024年末
+本期末比上年
+同期末增减（
+%）
+2023年末
+归属于上市公司股东的
+净资产
+22,694,616,797.16
+19,736,912,284.36
+14.99%
+17,826,122,876.82
+总资产
+29,846,018,981.43
+26,217,54
+
+GROUP 1 urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5 PDF page 218
+CLAIMS [('claim_reported_total', 'parameter', 'reported_total', 'exact_value', 12384.63826811)]
+61、
+营业收入和营业成本
+(1).营业收入和营业成本情况
+√适用□不适用
+单位：元
+币种：人民币
+项目
+本期发生额
+上期发生额
+收入
+成本
+收入
+成本
+主营业务
+12,384,638,268.11
+7,534,139,015.56
+9,065,165,097.69
+5,342,977,540.40
+其他业务
+-
+-
+-
+-
+合计
+12,384,638,268.11
+7,534,139,015.56
+9,065,165,097.69
+5,342,977,540.40
+(2).营业收入、营业成本的分解信息
+□适用√不适用
+其他说明
+□适用√不适用
+(3).履约义务的说明
+□适用√不适用
+(4).分摊至剩余履约义务的说明
+□适用√不适用
+
+GROUP 2 urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5 PDF page 65
+CLAIMS [('claim_equipment_base', 'parameter', 'equipment_base', 'exact_value', 10527.0)]
+报告期内，公司半导体设备收入实现增长36.62%，其中专用设备实现收入105.27 亿元，同比增
+长34.76%，公司整体盈利水平持续提高。
+由于今年客户的结构性变化，公司给予了部分的客户一定的销售折扣，导致今年毛利率减少。从
+地区来看，公司主要收入来源为大陆地区。报告期内，大陆地区营业收入较上年增长40.07%。
+(2). 产销量情况分析表
+√适用□不适用
+主要产品
+单位
+生产量
+销售量
+库存量
+生产量比上
+年增减（%）
+销售量比上
+年增减（%）
+库存量比上
+年增减（%）
+专用设备
+腔
+1,660
+1,240
+1,010
+8.07%
+27.97%
+36.67%
+产销量情况说明
+无
+(3). 重大采购合同、重大销售合同的履行情况
+□适用√不适用
+
+GROUP 3 urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe PDF page 176
+CLAIMS [('claim_cmp_base', 'parameter', 'cmp_base', 'rationale_support', None)]
+九、合并范围的变更
+1、非同一控制下企业合并
+√适用□不适用
+(1)本期发生的非同一控制下企业合并交易
+√适用□不适用
+单位：元币种：人民币
+被
+购
+买
+方
+名
+称
+股
+权
+取
+得
+时
+点
+股权取得成
+本
+股权取
+得比例
+（%）
+股
+权
+取
+得
+方
+式
+购
+买
+日
+购买
+日的
+确定
+依据
+购买日至
+期末被购
+买方的收
+入
+购买日至期
+末被购买方
+的净利润
+购买日至期
+末被购买方
+的现金流量
+中微
+众硅
+（杭
+州）
+电子
+科技
+有限
+公司
+2026
+年5
+月31
+日
+1,576,049,142.32
+64.69%
+发行
+股份
+及支
+付现
+金购
+买资
+产
+20
+26
+年
+5
+月
+31
+日
+购买方
+实际取
+得对被
+购买方
+控制权
+的日期
+1,291,902.08
+-15,440,347.39
+-34,333,141.30
+其他说明：
+无
+(2)合并成本及商誉
+√适用□不适用
+单位：元币种：人民币
+合并成本
+中微众硅（杭州）电子科技有限公司
+--现金
+52,585,310.41
+--非现金资产的公允价值
+-
+--发行或承担的债务的公允价值
+-
+--发行的权益性证券的公允价值
+1,523,463
+
+GROUP 4 urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5 PDF page 65
+CLAIMS [('claim_equipment_units_2025', 'parameter', 'equipment_units_2025', 'exact_value', 1240)]
+(2). 产销量情况分析表
+√适用□不适用
+主要产品
+单位
+生产量
+销售量
+库存量
+生产量比上
+年增减（%）
+销售量比上
+年增减（%）
+库存量比上
+年增减（%）
+专用设备
+腔
+1,660
+1,240
+1,010
+8.07%
+27.97%
+36.67%
+产销量情况说明
+无
+(3). 重大采购合同、重大销售合同的履行情况
+□适用√不适用
+
+GROUP 5 urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe PDF page 16
+CLAIMS [('claim_equipment_units_low_2026', 'parameter', 'equipment_units_low_2026', 'rationale_support', None), ('claim_equipment_units_low_2027', 'parameter', 'equipment_units_low_2027', 'rationale_support', None), ('claim_equipment_units_low_2028', 'parameter', 'equipment_units_low_2028', 'rationale_support', None), ('claim_equipment_units_base_2026', 'parameter', 'equipment_units_base_2026', 'rationale_support', None), ('claim_equipment_units_base_2027', 'parameter', 'equipment_units_base_2027', 'rationale_support', None), ('claim_equipment_units_base_2028', 'parameter', 'equipment_units_base_2028', 'rationale_support', None), ('claim_equipment_units_high_2026', 'parameter', 'equipment_units_high_2026', 'rationale_support', None), ('claim_equipment_units_high_2027', 'parameter', 'equipment_units_high_2027', 'rationale_support', None), ('claim_equipment_units_high_2028', 'parameter', 'equipment_units_high_2028', 'rationale_support', None)]
+公司的ICP 刻蚀设备包括Primo Twin-Star、Primo Nanova、Primo Menova 等产
+品在涵盖逻辑、DRAM、3D NAND、功率和电源管理、以及微电机系统等芯片和器件的50 多个
+客户的生产线上量产，并继续验证更多ICP 刻蚀工艺。
+报告期内，公司低温高深宽比ICP 刻蚀设备Primo Nanova LUX-Cryo 在客户的下一代产品的
+产线上稳定量产。与此同时，为应对先进节点高深宽比挑战，公司研发的下一代高精度ICP 刻蚀
+设备的Primo Angnova 在实验室开展多个客户的工艺验证，全面满足客户的刻蚀需求，Beta 机器
+在客户端认证顺利，并取得多个重复订单。Primo Twin-Star 装机量快速增长，在海内外客户的逻
+辑芯片、功率器件、微型发光二极管Micro-LED、AR 和VR 智能眼镜用的超透镜（Metalens）
+等特色器件的产线上实现量产。公司的Primo Menova 金属刻蚀设备，在客户端认证顺利，已投
+入量产。
+公司开发的高选择比气相刻蚀设备Primo Domingo，在实验室的Alpha 腔上开展多个工艺验
+证，全面满足
+
+GROUP 6 urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5 PDF page 65
+CLAIMS [('claim_equipment_unit_revenue_low_2026', 'parameter', 'equipment_unit_revenue_low_2026', 'rationale_support', None), ('claim_equipment_unit_revenue_low_2027', 'parameter', 'equipment_unit_revenue_low_2027', 'rationale_support', None), ('claim_equipment_unit_revenue_low_2028', 'parameter', 'equipment_unit_revenue_low_2028', 'rationale_support', None), ('claim_equipment_unit_revenue_base_2026', 'parameter', 'equipment_unit_revenue_base_2026', 'rationale_support', None), ('claim_equipment_unit_revenue_base_2027', 'parameter', 'equipment_unit_revenue_base_2027', 'rationale_support', None), ('claim_equipment_unit_revenue_base_2028', 'parameter', 'equipment_unit_revenue_base_2028', 'rationale_support', None), ('claim_equipment_unit_revenue_high_2026', 'parameter', 'equipment_unit_revenue_high_2026', 'rationale_support', None), ('claim_equipment_unit_revenue_high_2027', 'parameter', 'equipment_unit_revenue_high_2027', 'rationale_support', None), ('claim_equipment_unit_revenue_high_2028', 'parameter', 'equipment_unit_revenue_high_2028', 'rationale_support', None)]
+由于今年客户的结构性变化，公司给予了部分的客户一定的销售折扣，导致今年毛利率减少。从
+地区来看，公司主要收入来源为大陆地区。报告期内，大陆地区营业收入较上年增长40.07%。
+(2). 产销量情况分析表
+√适用□不适用
+主要产品
+单位
+生产量
+销售量
+库存量
+生产量比上
+年增减（%）
+销售量比上
+年增减（%）
+库存量比上
+年增减（%）
+专用设备
+腔
+1,660
+1,240
+1,010
+8.07%
+27.97%
+36.67%
+产销量情况说
+
+GROUP 7 urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5 PDF page 174
+CLAIMS [('claim_aftermarket_revenue_low_2026', 'parameter', 'aftermarket_revenue_low_2026', 'rationale_support', None), ('claim_aftermarket_revenue_low_2027', 'parameter', 'aftermarket_revenue_low_2027', 'rationale_support', None), ('claim_aftermarket_revenue_low_2028', 'parameter', 'aftermarket_revenue_low_2028', 'rationale_support', None), ('claim_aftermarket_revenue_base_2026', 'parameter', 'aftermarket_revenue_base_2026', 'rationale_support', None), ('claim_aftermarket_revenue_base_2027', 'parameter', 'aftermarket_revenue_base_2027', 'rationale_support', None), ('claim_aftermarket_revenue_base_2028', 'parameter', 'aftermarket_revenue_base_2028', 'rationale_support', None), ('claim_aftermarket_revenue_high_2026', 'parameter', 'aftermarket_revenue_high_2026', 'rationale_support', None), ('claim_aftermarket_revenue_high_2027', 'parameter', 'aftermarket_revenue_high_2027', 'rationale_support', None), ('claim_aftermarket_revenue_high_2028', 'parameter', 'aftermarket_revenue_high_2028', 'rationale_support', None)]
+本集团将备品备件产品按照协议合同规定运至约定交货地点，经客户确认后，客户具有自行使用
+产品的权利并承担该产品可能发生价格波动或毁损的风险，本集团相应确认收入。
+本集团给予客户的信用期根据客户的信用风险特征确定，与行业惯例一致，不存在重大融资成分。
+本集团已收或应收客户对价而应向客户转让商品的义务列示为合同负债。
+(b)
+提供劳务
+本集团对外提供劳务，通常根据已完成劳务的进度在一段时间内确认收入，其中，已完成劳
+务的进度按照已发生的成本占预计总成本的比例确定。于资产负债表日，本集团对已完成劳务的
+进度进行重新估计，以使其能够反映履约情况的变化。
+本集团按照已完成劳务的进度确认收入时，对于本集团已经取得无条件收款权的部分，确认
+为应收账款，其余部分确认为合同资产，并对应收账款和合同资产以预期信用损失为基础确认损
+失准备(附注二(10))；如果本集团已收或应收的合同价款超过已完成的劳务，则将超过部分确认为
+合同负债。本集团对于同一合同项下的合同资产和合同负债以净额列示。
+(2).
+同类业务采用不同经营模式涉及不同收入确认方式及计量方法
+□适用√不适用
+35、合同成本
+□适用√不适用
+36、政
+
+GROUP 8 urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe PDF page 177
+CLAIMS [('claim_cmp_revenue_low_2026', 'parameter', 'cmp_revenue_low_2026', 'rationale_support', None), ('claim_cmp_revenue_low_2027', 'parameter', 'cmp_revenue_low_2027', 'rationale_support', None), ('claim_cmp_revenue_low_2028', 'parameter', 'cmp_revenue_low_2028', 'rationale_support', None), ('claim_cmp_revenue_base_2026', 'parameter', 'cmp_revenue_base_2026', 'rationale_support', None), ('claim_cmp_revenue_base_2027', 'parameter', 'cmp_revenue_base_2027', 'rationale_support', None), ('claim_cmp_revenue_base_2028', 'parameter', 'cmp_revenue_base_2028', 'rationale_support', None), ('claim_cmp_revenue_high_2026', 'parameter', 'cmp_revenue_high_2026', 'rationale_support', None), ('claim_cmp_revenue_high_2027', 'parameter', 'cmp_revenue_high_2027', 'rationale_support', None), ('claim_cmp_revenue_high_2028', 'parameter', 'cmp_revenue_high_2028', 'rationale_support', None)]
+业绩承诺的完成情况：
+√适用□不适用
+根据业绩承诺方与本集团已签署的《业绩承诺和补偿协议》，本次交易中业绩承诺方承诺：中微
+众硅在2026 年度、2027 年度和2028 年度实现的合并报表范围营业收入分别不低于28,000.00 万
+元、43,000.00 万元和58,000.00 万元。截至本半年报披露日，2026 年度业绩承诺尚在履行过程
+中，本期未到业绩承诺考核时点。
+大额商誉形成的主要原因：
+√适用□不适用
+中微众硅为国内少数掌握12 英寸高端CMP 设备核心技术并实现量产的企业，其CMP 工艺与本
+集团刻蚀、薄膜沉积等干法设备高度互补，交易完成后本集团形成“干法+湿法”全流程设备能
+力，双方将在研发、供应链、客户资源等维度形成深度协同，助力集团优化产品组合，提升整体
+解决方案的市场竞争力。
+其他说明：
+无
+(3)被购买方于购买日可辨认资产、负债
+√适用□不适用
+单位：元币种：人民币
+中微众硅（杭州）电子科技有限公司
+购买日公允价值
+购买日账面价值
+资产：
+货币资金
+69,341,049.74
+69,341,049.74
+交易性金融资产
+4,961,503.97
+4,961,
+
+GROUP 9 amec_sse_results_qa_20260910 Official reply id2508385; 尹志尧; 2026-09-10 16:37:39; companyId145565
+CLAIMS [('claim_ir_equipment_units_low_2026', 'parameter', 'equipment_units_low_2026', 'rationale_support', None), ('claim_ir_equipment_units_low_2027', 'parameter', 'equipment_units_low_2027', 'rationale_support', None), ('claim_ir_equipment_units_low_2028', 'parameter', 'equipment_units_low_2028', 'rationale_support', None), ('claim_ir_equipment_units_base_2026', 'parameter', 'equipment_units_base_2026', 'rationale_support', None), ('claim_ir_equipment_units_base_2027', 'parameter', 'equipment_units_base_2027', 'rationale_support', None), ('claim_ir_equipment_units_base_2028', 'parameter', 'equipment_units_base_2028', 'rationale_support', None), ('claim_ir_equipment_units_high_2026', 'parameter', 'equipment_units_high_2026', 'rationale_support', None), ('claim_ir_equipment_units_high_2027', 'parameter', 'equipment_units_high_2027', 'rationale_support', None), ('claim_ir_equipment_units_high_2028', 'parameter', 'equipment_units_high_2028', 'rationale_support', None)]
+您好，中微公司目前有金桥、临港一期以及南昌三大生产基地。上海临港滴水湖畔的总部大楼暨研发中心已于2026年8月1日举办落成典礼。广州华南总部研发及生产基地计划2027年上半年投产；成都研发及生产基地暨西南总部预计2027年上半年投产。目前，公司厂房建筑面积达到60万平方米。临港二期的生产和研发基地拟于2026年下半年开工建设。未来五年，公司的厂房建筑面积将增至90万平方米。
+
+GROUP 10 urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5 PDF page174 revenue policy, complete equipment/spares/services context
+CLAIMS [('claim_recognition_Equipment', 'recognition_policy', 'recognition:Equipment', 'policy_support', None)]
+本集团将专用设备产品运至约定交货地点，进行安装、调试及验收。根据不同专用设备产品的类
+型及合同安排，经客户确认后，客户具有自行使用产品的权利并承担该产品可能发生价格波动或
+毁损的风险，本集团于控制权转移至客户时相应确认收入。
+
+GROUP 11 urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5 PDF page174 revenue policy, complete equipment/spares/services context
+CLAIMS [('claim_recognition_Aftermarket', 'recognition_policy', 'recognition:Aftermarket', 'policy_support', None), ('claim_recognition_CMP', 'recognition_policy', 'recognition:CMP', 'policy_support', None)]
+本集团在客户取得相关商品或服务的控制权时，按预期有权收取的对价金额确认收入。
+(a)
+销售商品
+本集团生产产品并销售予各地客户。
+本集团将专用设备产品运至约定交货地点，进行安装、调试及验收。根据不同专用设备产品的类
+型及合同安排，经客户确认后，客户具有自行使用产品的权利并承担该产品可能发生价格波动或
+毁损的风险，本集团于控制权转移至客户时相应确认收入。
+本集团将备品备件产品按照协议合同规定运至约定交货地点，经客户确认后，客户具有自行使用
+产品的权利并承担该产品可能发生价格波动或毁损的风险，本集团相应确认收入。
+本集团给予客户的信用期根据客户的信用风险特征确定，与行业惯例一致，不存在重大融资成分。
+本集团已收或应收客户对价而应向客户转让商品的义务列示为合同负债。
+(b)
+提供劳务
+本集团对外提供劳务，通常根据已完成劳务的进度在一段时间内确认收入，其中，已完成劳
+务的进度按照已发生的成本占预计总成本的比例确定。于资产负债表日，本集团对已完成劳务的
+进度进行重新估计，以使其能够反映履约情况的变化。
+本集团按照已完成劳务的进度确认收入时，对于本集团已经取得无条件收款权的部分，确认
+为应收账款，
+
+GROUP 12 urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5 PDF page174, equipment policy
+CLAIMS [('claim_recognition_Aftermarket_equipment', 'recognition_policy', 'recognition:Aftermarket', 'policy_support', None), ('claim_recognition_CMP_equipment', 'recognition_policy', 'recognition:CMP', 'policy_support', None)]
+本集团将专用设备产品运至约定交货地点，进行安装、调试及验收。根据不同专用设备产品的类
+型及合同安排，经客户确认后，客户具有自行使用产品的权利并承担该产品可能发生价格波动或
+毁损的风险，本集团于控制权转移至客户时相应确认收入。
+
+GROUP 13 urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5 PDF page174, spares policy
+CLAIMS [('claim_recognition_Aftermarket_spares', 'recognition_policy', 'recognition:Aftermarket', 'policy_support', None), ('claim_recognition_CMP_spares', 'recognition_policy', 'recognition:CMP', 'policy_support', None)]
+本集团将备品备件产品按照协议合同规定运至约定交货地点，经客户确认后，客户具有自行使用
+产品的权利并承担该产品可能发生价格波动或毁损的风险，本集团相应确认收入。
+
+GROUP 14 urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5 PDF page174, services policy
+CLAIMS [('claim_recognition_Aftermarket_services', 'recognition_policy', 'recognition:Aftermarket', 'policy_support', None), ('claim_recognition_CMP_services', 'recognition_policy', 'recognition:CMP', 'policy_support', None)]
+本集团对外提供劳务，通常根据已完成劳务的进度在一段时间内确认收入，其中，已完成劳
+务的进度按照已发生的成本占预计总成本的比例确定。于资产负债表日，本集团对已完成劳务的
+进度进行重新估计，以使其能够反映履约情况的变化。
+
+GROUP 15 urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe PDF page177, seller commitment; table p53 states annual amounts not cumulative objective
+CLAIMS [('claim_CMP_annual_2026', 'management_target', 'CMP_annual_2026', 'exact_value', 28000), ('claim_CMP_annual_2027', 'management_target', 'CMP_annual_2027', 'exact_value', 43000), ('claim_CMP_annual_2028', 'management_target', 'CMP_annual_2028', 'exact_value', 58000)]
+根据业绩承诺方与本集团已签署的《业绩承诺和补偿协议》，本次交易中业绩承诺方承诺：中微
+众硅在2026 年度、2027 年度和2028 年度实现的合并报表范围营业收入分别不低于28,000.00 万
+元、43,000.00 万元和58,000.00 万元。截至本半年报披露日，2026 年度业绩承诺尚在履行过程
+中，本期未到业绩承诺考核时点。
+
+GROUP 16 urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe PDF pages176–177, purchase and commitment scope
+CLAIMS [('claim_benchmark_CMP_annual_2027', 'management_target', 'CMP_annual_2027', 'rationale_support', None), ('claim_benchmark_CMP_annual_2028', 'management_target', 'CMP_annual_2028', 'rationale_support', None)]
+业绩承诺的完成情况：
+√适用□不适用
+根据业绩承诺方与本集团已签署的《业绩承诺和补偿协议》，本次交易中业绩承诺方承诺：中微
+众硅在2026 年度、2027 年度和2028 年度实现的合并报表范围营业收入分别不低于28,000.00 万
+元、43,000.00 万元和58,000.00 万元。截至本半年报披露日，2026 年度业绩承诺尚在履行过程
+中，本期未到业绩承诺考核时点。
+大额商誉形成的主要原因：
+√适用□不适用
+中微众硅为国内少数掌握12 英寸高端CMP 设备核心技术并实现量产的企业，其CMP 工艺与本
+集团刻蚀、薄膜沉积等干法设备高度互补，交易完成后本集团形成“干法+湿法”全流程设备能
+力，双方将在研发、供应链、客户资源等维度形成深度协同，助力集团优化产品组合，提升整体
+解决方案的市场竞争力。
+其他说明：
+无
+(3)被购买方于购买日可辨认资产、负债
+√适用□不适用
+单位：元币种：人民币
+中微众硅（杭州）电子科技有限公司
+购买日公允价值
+购买日账面价值
+资产：
+货币资金
+69,341,049.74
+69,341,049.74
+交易性金融资产
+4,961,503.97
+4,961,
+
+GROUP 17 urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe PDF page16
+CLAIMS [('claim_driver_core_etch_acceptance', 'growth_driver', 'e_core_etch_acceptance', 'rationale_support', None)]
+公司的ICP 刻蚀设备包括Primo Twin-Star、Primo Nanova、Primo Menova 等产
+品在涵盖逻辑、DRAM、3D NAND、功率和电源管理、以及微电机系统等芯片和器件的50 多个
+客户的生产线上量产，并继续验证更多ICP 刻蚀工艺。
+报告期内，公司低温高深宽比ICP 刻蚀设备Primo Nanova LUX-Cryo 在客户的下一代产品的
+产线上稳定量产。与此同时，为应对先进节点高深宽比挑战，公司研发的下一代高精度ICP 刻蚀
+设备的Primo Angnova 在实验室开展多个客户的工艺验证，全面满足客户的刻蚀需求，Beta 机器
+在客户端认证顺利，并取得多个重复订单。Primo Twin-Star 装机量快速增长，在海内外客户的逻
+辑芯片、功率器件、微型发光二极管Micro-LED、AR 和VR 智能眼镜用的超透镜（Metalens）
+等特色器件的产线上实现量产。公司的Primo Menova 金属刻蚀设备，在客户端认证顺利，已投
+入量产。
+公司开发的高选择比气相刻蚀设备Primo Domingo，在实验室的Alpha 腔上开展多个工艺验
+证，全面满足
+
+GROUP 18 urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe PDF page33, acquisition and technology execution risks
+CLAIMS [('claim_contrary_core_etch_acceptance', 'growth_driver', 'contra_core_etch_acceptance', 'rationale_support', None), ('claim_contrary_films_packaging', 'growth_driver', 'contra_films_packaging', 'rationale_support', None), ('claim_contrary_afterm_support', 'growth_driver', 'contra_afterm_support', 'rationale_support', None), ('claim_contrary_cmp_ramp', 'growth_driver', 'contra_cmp_ramp', 'rationale_support', None)]
+中微半导体设备（上海）股份有限公司2026 年半年度报告
+33 / 210
+术水平不达预期等诸多不确定因素，可能导致其实际经营表现不达预期，导致投资项目的实际效
+益与预期结果存在较大差异，进而对公司利润产生不利影响。
+（2）并购风险
+公司强调稳健发展，坚持实施内生性增长与外延式并购相结合的发展策略。虽然公司未来并
+购时将继续秉承审慎原则，相应制定整合计划，防范并购风险，但若出现宏观经济波动、市场竞
+争加剧、地缘政治环境变化、被并购公司业绩低于预期或协同效应未显现等情形，将对公司的经
+营业绩产生不利影响。
+4、研发投入不足导致技术被赶超或替代的风险
+公司所处的半导体设备行业属于技术密集型行业，半导体关键设备的研发涉及等离子体物
+理、射频及微波学、结构化学、微观分子动力学、光谱及能谱学、真空机械传输等多种科学技术
+及工程领域学科知识的综合应用，具有产品技术升级快、研发投入大、研发周期长、研发风险高
+等特点。
+国外领先的半导体设备公司均在研发方面投入巨额资金。公司研发投入总额与国外领先的半
+导体公司有相当大的差距。如果公司未来研发资金投入不足，不能满足技术升级需要，可能导致
+公司技术被赶超或
+
+GROUP 19 amec_sse_results_qa_20260910 Official reply id2508080, 尹志尧, companyId145565, 2026-09-10 15:37:45
+CLAIMS [('claim_ir_supply_core_etch_acceptance', 'growth_driver', 'ir_supply_core_etch_acceptance', 'rationale_support', None), ('claim_ir_supply_films_packaging', 'growth_driver', 'ir_supply_films_packaging', 'rationale_support', None)]
+您好，随着客户订单进入大规模交付期，我们持续与供应链紧密配合，不断提升公司交付能力。中微公司与海外零部件供应商有着长期、良好、稳定的合作关系，是海外供应商的优先客户，我们会根据订单情况提前做好海外核心零部件的战略备库。公司与国产供应商进行广泛合作，持续推进国产方案的导入，多元化供应链结构，保证供应链的安全性、及时性和稳定性。公司与客户也在不断提升生产及验证效率，缩短设备生产、终测、量产调试时间。
+
+GROUP 20 semi_wfe_20260714 Official SEMI July14 release, parsed original line167; global WFE, not AMEC revenue
+CLAIMS [('claim_outside_wfe_reference', 'growth_driver', 'outside_wfe_reference', 'rationale_support', None)]
+After registering a record $116.9 billion in sales last year, the Wafer Fab Equipment (WFE) segment, which includes wafer processing, mask/reticle, and fab facilities equipment, is projected to increase 23.1% to $143.9 billion in 2026.
+
+GROUP 21 urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe PDF page16
+CLAIMS [('claim_driver_films_packaging', 'growth_driver', 'e_films_packaging', 'rationale_support', None)]
+（3）薄膜沉积设备研发
+公司开发的多款薄膜沉积产品已推向市场。中微公司钨系列薄膜沉积产品：CVD（化学气
+相沉积）钨设备，HAR（高深宽比）钨设备和ALD（原子层沉积）钨设备，可覆盖存储器件所
+有钨应用；该系列设备均已通过关键存储客户端现场验证，满足先进存储应用中所有金属互连应
+用（包含高深宽比金属互连应用）及三维存储器件字线应用各项性能指标，并获得客户重复量产
+订单。同时，公司钨系列产品也可满足先进逻辑器件中多道金属钨互连应用需求，已通过关键逻
+辑客户端现场验证，满足先进逻辑应用中各项性能指标，已获得客户重复量产订单。此外，公司
+钨系列产品也通过了特殊器件客户金属钨应用现场验证。基于公司钨系列产品独特的性能优势，
+已顺利完成先进逻辑、先进存储和特殊器件的现场验证，未来将进一步扩大市场占有率。
+同期，公司开发出应用于先进逻辑器件的金属栅系列产品Preforma Uniflash ® ALD 氮化钛，
+ALD 钛铝，ALD 氮化钽产品，已完成多个先进逻辑客户设备验证，可满足先进逻辑客户性能需
+
+GROUP 22 urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5 PDF page174
+CLAIMS [('claim_driver_afterm_support', 'growth_driver', 'e_afterm_support', 'rationale_support', None)]
+本集团将备品备件产品按照协议合同规定运至约定交货地点，经客户确认后，客户具有自行使用
+产品的权利并承担该产品可能发生价格波动或毁损的风险，本集团相应确认收入。
+本集团给予客户的信用期根据客户的信用风险特征确定，与行业惯例一致，不存在重大融资成分。
+本集团已收或应收客户对价而应向客户转让商品的义务列示为合同负债。
+(b)
+提供劳务
+本集团对外提供劳务，通常根据已完成劳务的进度在一段时间内确认收入，其中，已完成劳
+务的进度按照已发生的成本占预计总成本的比例确定。于资产负债表日，本集团对已完成劳务的
+进度进行重新估计，以使其能够反映履约情况的变化。
+本集团按照已完成劳务的进度确认收入时，对于本集团已经取得无条件收款权的部分，确认
+为应收账款，其余部分确认为合同资产，并对应收账款和合同资产以预期信用损失为基础确认损
+失准备(附注二(10))；如果本集团已收或应收的合同价款超过已完成的劳务，则将超过部分确认为
+合同负债。本集团对于同一合同项下的合同资产和合同负债以净额列示。
+(2).
+同类业务采用不同经营模式涉及不同收入确认方式及计量方法
+□适用√不适用
+35、合同成本
+□适用√不适用
+36、政
+
+GROUP 23 urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe PDF page177
+CLAIMS [('claim_driver_cmp_ramp', 'growth_driver', 'e_cmp_ramp', 'rationale_support', None)]
+大额商誉形成的主要原因：
+√适用□不适用
+中微众硅为国内少数掌握12 英寸高端CMP 设备核心技术并实现量产的企业，其CMP 工艺与本
+集团刻蚀、薄膜沉积等干法设备高度互补，交易完成后本集团形成“干法+湿法”全流程设备能
+力，双方将在研发、供应链、客户资源等维度形成深度协同，助力集团优化产品组合，提升整体
+解决方案的市场竞争力。
+其他说明：
+无
+(3)被购买方于购买日可辨认资产、负债
+√适用□不适用
+单位：元币种：人民币
+中微众硅（杭州）电子科技有限公司
+购买日公允价值
+购买日账面价值
+资产：
+货币资金
+69,341,049.74
+69,341,049.74
+交易性金融资产
+4,961,503.97
+4,961,503.97
+应收票据
+289,960.00
+289,960.00
+应收款项
+136,763,470.28
+136,763,470.28
+预付款项
+7,994,360.41
+7,9
+HISTORY [
+  {
+    "year": 2023,
+    "value": 6263.51358137,
+    "source_ids": [
+      "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
+    ],
+    "claim_ids": [
+      "claim_history_2023"
+    ]
+  },
+  {
+    "year": 2024,
+    "value": 9065.16509769,
+    "source_ids": [
+      "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
+    ],
+    "claim_ids": [
+      "claim_history_2024"
+    ]
+  },
+  {
+    "year": 2025,
+    "value": 12384.63826811,
+    "source_ids": [
+      "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
+    ],
+    "claim_ids": [
+      "claim_history_2025"
+    ]
+  }
+]
+FORMAT roadshow_public_questions.json dict ['success', 'message', 'code', 'datas']
+{"success": true, "message": "", "code": 200, "datas": [{"records": [{"id": 2508509, "questionType": 4, "userNickName": "上证路演中心 SSE Roadshow", "isAnswerPassed": false, "activityId": 40766, "content": "　　本次科创板2026年半年度半导体制造、设备及材料行业集体业绩说明会到此圆满结束。感谢各位投资者和网友的积极参与，如各位还有进一步的问题，可通过上证e互动平台与公司保持沟通，谢谢！", "contentEn": "The 2026 semi-annual collective performance presentation of semiconductor manufacturing, equipment and materials industry has come to a successful conclusion. Thank you for the active participation of investors and netizens. If you have further questions, you can keep communicating with the company through the e interactive platform of Shanghai Stock Exchange. Thank you!", "status": 3, "isAnswered": false, "isPush": false, "askType": 1, "crtTime": "2026-09-10 17:26:23", "updTime": "2026-09-10 17:26:23", "isDel": false, "isTestData": false, "activityTitle": "科创板2026年半年度半导体制造、设备及材料行业集体业绩说明会", "isCancelInfo": false, "isMulti": true}, {"id": 2508406, "questionType": 3, "isAnswerPassed": false, "activityCompanyId": 57790, "activityId": 40766, "companyId": 145565, "guestId": 173788, "guestTitle": "董事长、总经理", "guestTitleEn": "", "guestCompanyName": "中微公司", "guestCompanyNameEn": "", "guestName": "尹志尧", "guestNameEn": "尹志尧", "content": "由于时间关系，公司本次业绩说明会即将结束。再次感谢各位投资者的积极参与，交流公司业务状况、财务表现及未来发展战略。希望大家继续通过电话、微信、邮件、上证e互动平台等方式与我们保持密切沟通。再次感谢各位投资者对中微公司的关心与支持。谢谢大家！", "contentEn": "Due to time constraints, the company's performance presentation is coming to an end. Thank you again for your active participation in the exchange of the company's business status, financial performance and future development strategy. I hope you will continue to maintain close communication with us through telephone, WeChat, e-mail and the e-interactive platform of Shanghai Stock Exchange. Thank you again for your concern and support for Zhongwei Company. Thank you all!", "status": 1, "auditUser": 76047517, "auditName": "常莉敏", "auditTime": "2026-09-10 17:24:16", "isAnswered": false, "isPush": false, "askType": 1, "crtTime": "2026-09-10 16:46:54", "updTime": "2026-09-10 17:24:16", "isDel": false, "isTestData": false, "activityTitle": "科创板2026年半年度半导体制造、设备及材料行业集体业绩说明会", "isCancelInfo": false, "guestImage": "uploadfile/images/202408/1724141101831.jpg", "logoPath": "uploadfileNew/logo/2025-10-20/2bb496fa-4b1a-4064-869f-8d5bf3586bbb.png", "miniLogoPath": "uploadfileNew/avatar/company/688012.png", "aactivityCompanyId": 57790, "isMulti": true}, {"id": 2508409, "questionType": 3, "isAnswerPassed": false,
+FORMAT roadshow_precollect_questions_page1.json dict ['success', 'message', 'code', 'datas']
+{"success": true, "message": "", "code": 200, "datas": [{"records": [{"id": 36792, "collectType": 2, "companyId": 259555, "activityId": 40766, "question": "2，存货和合同负债较期初大幅增长，发出商品增加尤其明显，同时新能源侧从动力电池向大储能、快充、固态扩展。请说明：①新能源焊接设备、监控一体机、焊头/配件等耗材各自的收入增速、毛利率和复购周期，储能与固态新场景上半年贡献多少新增订单；②发出商品转收入的平均周期、合同负债对应哪些产品段，2026下半年收入确认是否会受到客户现场调试、验收标准变化影响；③在毛利率高位但研发费率近20%的情况下，公司如何平衡新能源耗材“稳现金流”与半导体“高投入换第二曲线”，对全年经营现金流和毛利率区间给出什么内部底线？", "answer": "尊敬的投资者，您好！2026年上半年末，公司存货5.38亿元，较期初增长59.78%，主要系本期订单增加，发出商品相应增加所致；合同负债1.73亿元，较期初增长145.20%，主要系本期预收的货款增加所致。关于公司新能源电池超声波设备、配件等各业务板块的收入增速、毛利率水平等情况敬请查阅公司《2025年年度报告》&ldquo;第三节 管理层讨论与分析&rdquo;部分。在新能源电池领域，公司与下游众多核心客户建立了长期稳定的合作，随着电池工艺持续向高安全性、高能量密度发展，快充电池、大储能电池、固态电池等新型电池技术产业化提速，公司深度参与下游技术演进过程，挖掘超声波技术应用场景。公司紧跟客户产品升级与设备更新需求，持续强化产品竞争力，稳固市场优势地位。公司合同负债主要是新签订单收到的预收货款，确认收入的时间会根据相关会计准则和会计政策结合具体项目进展确定，相关收入确认节奏存在不确定性，具体经营及财务数据敬请关注公司定期报告。公司专注于超声波技术的研发与应用，以超声波技术为底层核心，打造覆盖功率超声与检测超声的全面技术平台，通过平台化能力拓展新能源、半导体等多领域应用，并通过较强的研发投入持续丰富自身专业技术平台，不断提升核心竞争力。公司全年经营现金流和毛利率水平情况敬请关注公司后续定期报告。感谢您对公司的关注！", "status": 1, "crtTime": "2026-09-10 16:23:40", "updTime": "2026-09-10 16:23:40", "isDel": false, "companyName": "上海骄成超声波技术股份有限公司", "logoPath": "uploadfileNew/logo/2026-04-20/b065b87f-a7cb-4566-872f-2752e31eb6a2.png", "title": "科创板2026年半年度半导体制造、设备及材料行业集体业绩说明会", "stockCode": "688392", "shortName": "骄成超声", "miniLogoPath": "uploadfileNew/avatar/company/688392.png"}, {"id": 36778, "collectType": 2, "companyId": 270490, "activityId": 40766, "question": "公司长期未分红，后期是否有预期进行分红，预计在什么时候？", "answer": "尊敬的投资者您好，公司将在综合考虑自身经营状况、现金流水平、资本开支需求及长远发展规划的基础上，兼顾监管要求，平衡自身发展与股东回报，合理规划未来分红的比例和频次。如后续有分红计划，公司将严格按照相关规定及时履行信息披露义务。感谢您的关注。", "status": 1, "crtTime": "2026-09-10 15:10:28", "updTime": "2026-09-10 15:10:28", "isDel": false, "companyName": "合肥晶合集成电路股份有限公司", "logoPath": "uploadfileNew/logo/2025-05-07/1730174b-0b15-4292-853b-6cfd1b69f9bc.png", "title": "科创板2026年半年度半导体制造、设备及材料行业集体业绩说明会", "stockCode": "688249", "shortName": "晶合集成", "miniLogoPath": "uploadfileNew/logo/2025-05-07/c13553a9-cc5e-4239-b237-58e029022f42.png"}, {"id": 36777, "collectType": 2, "companyId": 270490, "activityId": 40766, "question": "公司怎么看待近期股价大跌，是否有回购股份安排？", "answer": "尊敬的投资者您好，公司股票二级市场价格受宏观环境、行业周期、市场情绪等多重因素综合影响。公司充分理解投资者对股价表现的关切，目前公司生产经营基本面稳健向好，公司将继续深耕研发创新，增强核心竞争力，努力提升经营业绩，推动公司估值水平合理回归。如后续实施股份回购计划，公司将严格按照相关规定及时履行信息披露义务。感谢您的关注。", "status": 1, "crtTime": "2026-09-10 15:09:50", "updTime": "2026-09-10 15:09:50", "isDel": false, "companyName": "合肥晶合集成电路股份有限公司", "logoPath": "uploadfileNew/logo/2025-05-07/1730174b-0b15-4292-853b-6cfd1b69f9bc.pn

@@ -1,0 +1,3724 @@
+{
+  "timestamp_utc": "2026-10-08T08:57:37.364853+00:00",
+  "strong_input_required_validator": "PASS",
+  "immutable_snapshot_validator": "PASS",
+  "same_result_markdown": "PASS",
+  "all45_original_annual_growth_values": "UNCHANGED",
+  "all6_original_bases": "UNCHANGED",
+  "all45_segment_year_paths": "PASS",
+  "all9_company_year_paths": "PASS",
+  "CAGR_increment_bridges": "PASS",
+  "old_numeric_forecast_comparison": "UNCHANGED",
+  "all15_independent_sensitivities": "PASS",
+  "all_claim_original_context_checks": [
+    {
+      "claim_id": "claim_parameter_reported_total_0",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 196 / printed 195 Note 6(b)",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "reported_total",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_games_base_1",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 196 / printed 195 Note 6(b)",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_base",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_socialnetworks_base_2",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 196 / printed 195 Note 6(b)",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_base",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_marketingservices_base_3",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 196 / printed 195 Note 6(b)",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_base",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_fintechbusinessservices_base_4",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 196 / printed 195 Note 6(b)",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_base",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_others_base_5",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 196 / printed 195 Note 6(b)",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "others_base",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_historical_revenue_historical_revenue:2021_6",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 4 / printed 3 five-year financial summary",
+      "exact_original_context_containment": "PASS",
+      "target_type": "historical_revenue",
+      "target_id": "historical_revenue:2021",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_historical_revenue_historical_revenue:2022_7",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 4 / printed 3 five-year financial summary",
+      "exact_original_context_containment": "PASS",
+      "target_type": "historical_revenue",
+      "target_id": "historical_revenue:2022",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_historical_revenue_historical_revenue:2023_8",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 4 / printed 3 five-year financial summary",
+      "exact_original_context_containment": "PASS",
+      "target_type": "historical_revenue",
+      "target_id": "historical_revenue:2023",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_historical_revenue_historical_revenue:2024_9",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 4 / printed 3 five-year financial summary",
+      "exact_original_context_containment": "PASS",
+      "target_type": "historical_revenue",
+      "target_id": "historical_revenue:2024",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_historical_revenue_historical_revenue:2025_10",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 4 / printed 3 five-year financial summary",
+      "exact_original_context_containment": "PASS",
+      "target_type": "historical_revenue",
+      "target_id": "historical_revenue:2025",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_recognition_policy_recognition:Games_11",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual Note 2.22, PDF pages 165–168; cited PDF page 165",
+      "exact_original_context_containment": "PASS",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:Games",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_games_growth_rate_low_2026_12",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_games_growth_rate_low_2027_13",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_games_growth_rate_low_2028_14",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_games_growth_rate_base_2026_15",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_games_growth_rate_base_2027_16",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_games_growth_rate_base_2028_17",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_games_growth_rate_high_2026_18",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_games_growth_rate_high_2027_19",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_games_growth_rate_high_2028_20",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_recognition_policy_recognition:SocialNetworks_21",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual Note 2.22, PDF pages 165–168; cited PDF page 165",
+      "exact_original_context_containment": "PASS",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:SocialNetworks",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_socialnetworks_growth_rate_low_2026_22",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_socialnetworks_growth_rate_low_2027_23",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_socialnetworks_growth_rate_low_2028_24",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_socialnetworks_growth_rate_base_2026_25",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_socialnetworks_growth_rate_base_2027_26",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_socialnetworks_growth_rate_base_2028_27",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_socialnetworks_growth_rate_high_2026_28",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_socialnetworks_growth_rate_high_2027_29",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_socialnetworks_growth_rate_high_2028_30",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_recognition_policy_recognition:MarketingServices_31",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual Note 2.22, PDF pages 165–168; cited PDF page 166",
+      "exact_original_context_containment": "PASS",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:MarketingServices",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_marketingservices_growth_rate_low_2026_32",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_marketingservices_growth_rate_low_2027_33",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_marketingservices_growth_rate_low_2028_34",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_marketingservices_growth_rate_base_2026_35",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_marketingservices_growth_rate_base_2027_36",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_marketingservices_growth_rate_base_2028_37",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_marketingservices_growth_rate_high_2026_38",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_marketingservices_growth_rate_high_2027_39",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_marketingservices_growth_rate_high_2028_40",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_recognition_policy_recognition:FinTechBusinessServices_41",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual Note 2.22, PDF pages 165–168; cited PDF page 167",
+      "exact_original_context_containment": "PASS",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:FinTechBusinessServices",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_fintechbusinessservices_growth_rate_low_2026_42",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_fintechbusinessservices_growth_rate_low_2027_43",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_fintechbusinessservices_growth_rate_low_2028_44",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_fintechbusinessservices_growth_rate_base_2026_45",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_fintechbusinessservices_growth_rate_base_2027_46",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_fintechbusinessservices_growth_rate_base_2028_47",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_fintechbusinessservices_growth_rate_high_2026_48",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_fintechbusinessservices_growth_rate_high_2027_49",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_fintechbusinessservices_growth_rate_high_2028_50",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_recognition_policy_recognition:Others_51",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual Note 2.22, PDF pages 165–168; cited PDF page 167",
+      "exact_original_context_containment": "PASS",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:Others",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_others_growth_rate_low_2026_52",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "others_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_others_growth_rate_low_2027_53",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "others_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_others_growth_rate_low_2028_54",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "others_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_others_growth_rate_base_2026_55",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "others_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_others_growth_rate_base_2027_56",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "others_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_others_growth_rate_base_2028_57",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "others_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_others_growth_rate_high_2026_58",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "others_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_others_growth_rate_high_2027_59",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "others_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_parameter_others_growth_rate_high_2028_60",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 47 / printed46 Note6(b), paired H1 2026/2025 observations",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "others_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_growth_driver_evergreen_and_launch_monetization_checked_61",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page10 / printed9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "evergreen_and_launch_monetization_checked",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_growth_driver_evergreen_and_launch_monetization_contrary_62",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page10 / printed9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "evergreen_and_launch_monetization_contrary",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_growth_driver_paid_social_stabilization_checked_63",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page47 / printed46 Note6(b)",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "paid_social_stabilization_checked",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_growth_driver_paid_social_stabilization_contrary_64",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page47 / printed46",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "paid_social_stabilization_contrary",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_growth_driver_ai_ad_matching_and_inventory_checked_65",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "Corporate overview PDF page12",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "ai_ad_matching_and_inventory_checked",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_growth_driver_payments_and_cloud_conversion_checked_66",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "Corporate overview PDF page15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "payments_and_cloud_conversion_checked",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_growth_driver_payments_and_cloud_conversion_contrary_67",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "Corporate overview PDF page15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "payments_and_cloud_conversion_contrary",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "claim_growth_driver_residual_normalization_checked_68",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page47 / printed46 Note6(b)",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "residual_normalization_checked",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_recognition_policy_recognition:Games_1",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 165 / printed 164",
+      "exact_original_context_containment": "PASS",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:Games",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_recognition_policy_recognition:Games_2",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 167 / printed 166",
+      "exact_original_context_containment": "PASS",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:Games",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_recognition_policy_recognition:Games_3",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 165 / printed 164",
+      "exact_original_context_containment": "PASS",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:Games",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_recognition_policy_recognition:Games_4",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 166 / printed 165",
+      "exact_original_context_containment": "PASS",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:Games",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_recognition_policy_recognition:Games_5",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 166 / printed 165",
+      "exact_original_context_containment": "PASS",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:Games",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_recognition_policy_recognition:SocialNetworks_6",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 165 / printed 164",
+      "exact_original_context_containment": "PASS",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:SocialNetworks",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_recognition_policy_recognition:SocialNetworks_7",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 167 / printed 166",
+      "exact_original_context_containment": "PASS",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:SocialNetworks",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_recognition_policy_recognition:SocialNetworks_8",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 165 / printed 164",
+      "exact_original_context_containment": "PASS",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:SocialNetworks",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_recognition_policy_recognition:SocialNetworks_9",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 166 / printed 165",
+      "exact_original_context_containment": "PASS",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:SocialNetworks",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_recognition_policy_recognition:SocialNetworks_10",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 166 / printed 165",
+      "exact_original_context_containment": "PASS",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:SocialNetworks",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_recognition_policy_recognition:MarketingServices_11",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 165 / printed 164",
+      "exact_original_context_containment": "PASS",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:MarketingServices",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_recognition_policy_recognition:MarketingServices_12",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 167 / printed 166",
+      "exact_original_context_containment": "PASS",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:MarketingServices",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_recognition_policy_recognition:MarketingServices_13",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 166 / printed 165",
+      "exact_original_context_containment": "PASS",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:MarketingServices",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_recognition_policy_recognition:FinTechBusinessServices_14",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 165 / printed 164",
+      "exact_original_context_containment": "PASS",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:FinTechBusinessServices",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_recognition_policy_recognition:FinTechBusinessServices_15",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 167 / printed 166",
+      "exact_original_context_containment": "PASS",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:FinTechBusinessServices",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_recognition_policy_recognition:FinTechBusinessServices_16",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 167 / printed 166",
+      "exact_original_context_containment": "PASS",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:FinTechBusinessServices",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_recognition_policy_recognition:Others_17",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 165 / printed 164",
+      "exact_original_context_containment": "PASS",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:Others",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_recognition_policy_recognition:Others_18",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 167 / printed 166",
+      "exact_original_context_containment": "PASS",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:Others",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_recognition_policy_recognition:Others_19",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 167 / printed 166",
+      "exact_original_context_containment": "PASS",
+      "target_type": "recognition_policy",
+      "target_id": "recognition:Others",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_context_group_top5_customer_revenue_share_20",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 80 / printed 79",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "context_group_top5_customer_revenue_share",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_context_group_largest_customer_revenue_share_21",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 80 / printed 79",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "context_group_largest_customer_revenue_share",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_low_2026_22",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 196 / printed 195",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_low_2026_23",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_low_2026_24",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_low_2026_25",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_low_2026_26",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_low_2026_27",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_low_2026_28",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_low_2026_29",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_low_2027_30",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 196 / printed 195",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_low_2027_31",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_low_2027_32",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_low_2027_33",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_low_2027_34",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_low_2027_35",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_low_2027_36",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_low_2027_37",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_low_2028_38",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 196 / printed 195",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_low_2028_39",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_low_2028_40",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_low_2028_41",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_low_2028_42",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_low_2028_43",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_low_2028_44",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_low_2028_45",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_base_2026_46",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 196 / printed 195",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_base_2026_47",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_base_2026_48",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_base_2026_49",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_base_2026_50",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_base_2026_51",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_base_2026_52",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_base_2026_53",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_base_2027_54",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 196 / printed 195",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_base_2027_55",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_base_2027_56",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_base_2027_57",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_base_2027_58",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_base_2027_59",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_base_2027_60",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_base_2027_61",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_base_2028_62",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 196 / printed 195",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_base_2028_63",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_base_2028_64",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_base_2028_65",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_base_2028_66",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_base_2028_67",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_base_2028_68",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_base_2028_69",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_high_2026_70",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 196 / printed 195",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_high_2026_71",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_high_2026_72",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_high_2026_73",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_high_2026_74",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_high_2026_75",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_high_2026_76",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_high_2026_77",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_high_2027_78",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 196 / printed 195",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_high_2027_79",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_high_2027_80",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_high_2027_81",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_high_2027_82",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_high_2027_83",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_high_2027_84",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_high_2027_85",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_high_2028_86",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 196 / printed 195",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_high_2028_87",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_high_2028_88",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_high_2028_89",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_high_2028_90",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_high_2028_91",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_high_2028_92",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_games_growth_rate_high_2028_93",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "games_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_low_2026_94",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_low_2026_95",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 6 / printed 5",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_low_2026_96",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_low_2027_97",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_low_2027_98",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 6 / printed 5",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_low_2027_99",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_low_2028_100",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_low_2028_101",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 6 / printed 5",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_low_2028_102",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_base_2026_103",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_base_2026_104",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 6 / printed 5",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_base_2026_105",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_base_2027_106",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_base_2027_107",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 6 / printed 5",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_base_2027_108",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_base_2028_109",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_base_2028_110",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 6 / printed 5",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_base_2028_111",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_high_2026_112",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_high_2026_113",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 6 / printed 5",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_high_2026_114",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_high_2027_115",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_high_2027_116",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 6 / printed 5",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_high_2027_117",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_high_2028_118",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_high_2028_119",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 6 / printed 5",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_socialnetworks_growth_rate_high_2028_120",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "socialnetworks_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_low_2026_121",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_low_2026_122",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_low_2026_123",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_low_2026_124",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_low_2026_125",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_low_2026_126",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 12 / printed 12",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_low_2026_127",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 12 / printed 12",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_low_2027_128",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_low_2027_129",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_low_2027_130",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_low_2027_131",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_low_2027_132",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_low_2027_133",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 12 / printed 12",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_low_2027_134",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 12 / printed 12",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_low_2028_135",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_low_2028_136",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_low_2028_137",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_low_2028_138",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_low_2028_139",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_low_2028_140",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 12 / printed 12",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_low_2028_141",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 12 / printed 12",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_base_2026_142",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_base_2026_143",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_base_2026_144",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_base_2026_145",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_base_2026_146",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_base_2026_147",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 12 / printed 12",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_base_2026_148",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 12 / printed 12",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_base_2027_149",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_base_2027_150",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_base_2027_151",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_base_2027_152",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_base_2027_153",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_base_2027_154",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 12 / printed 12",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_base_2027_155",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 12 / printed 12",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_base_2028_156",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_base_2028_157",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_base_2028_158",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_base_2028_159",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_base_2028_160",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_base_2028_161",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 12 / printed 12",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_base_2028_162",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 12 / printed 12",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_high_2026_163",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_high_2026_164",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_high_2026_165",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_high_2026_166",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_high_2026_167",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_high_2026_168",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 12 / printed 12",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_high_2026_169",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 12 / printed 12",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_high_2027_170",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_high_2027_171",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_high_2027_172",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_high_2027_173",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_high_2027_174",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_high_2027_175",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 12 / printed 12",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_high_2027_176",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 12 / printed 12",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_high_2028_177",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_high_2028_178",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_high_2028_179",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_high_2028_180",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_high_2028_181",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_high_2028_182",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 12 / printed 12",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_marketingservices_growth_rate_high_2028_183",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 12 / printed 12",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "marketingservices_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_low_2026_184",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_low_2026_185",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_low_2026_186",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_low_2026_187",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_low_2026_188",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_low_2026_189",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_low_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_low_2027_190",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_low_2027_191",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_low_2027_192",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_low_2027_193",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_low_2027_194",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_low_2027_195",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_low_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_low_2028_196",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_low_2028_197",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_low_2028_198",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_low_2028_199",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_low_2028_200",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_low_2028_201",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_low_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_base_2026_202",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_base_2026_203",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_base_2026_204",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_base_2026_205",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_base_2026_206",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_base_2026_207",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_base_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_base_2027_208",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_base_2027_209",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_base_2027_210",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_base_2027_211",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_base_2027_212",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_base_2027_213",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_base_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_base_2028_214",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_base_2028_215",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_base_2028_216",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_base_2028_217",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_base_2028_218",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_base_2028_219",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_base_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_high_2026_220",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_high_2026_221",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_high_2026_222",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_high_2026_223",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_high_2026_224",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_high_2026_225",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_high_2026",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_high_2027_226",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_high_2027_227",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_high_2027_228",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_high_2027_229",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_high_2027_230",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_high_2027_231",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_high_2027",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_high_2028_232",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_high_2028_233",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_high_2028_234",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_high_2028_235",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_high_2028_236",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_parameter_fintechbusinessservices_growth_rate_high_2028_237",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "parameter",
+      "target_id": "fintechbusinessservices_growth_rate_high_2028",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_growth_driver_evergreen_and_launch_monetization_contrary_238",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "evergreen_and_launch_monetization_contrary",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_growth_driver_evergreen_and_launch_monetization_contrary_239",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "evergreen_and_launch_monetization_contrary",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_growth_driver_games_independent_peer_context_240",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "games_independent_peer_context",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_growth_driver_games_independent_peer_context_241",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "games_independent_peer_context",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_growth_driver_games_independent_peer_context_242",
+      "source_id": "netease_results_2q2026",
+      "locator": "NetEase FY2026 Q2/H1 results release / full original HTML, specified section",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "games_independent_peer_context",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_growth_driver_evergreen_and_launch_monetization_checked_243",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "locator": "FY2025 annual PDF page 9 / printed 8",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "evergreen_and_launch_monetization_checked",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_growth_driver_evergreen_and_launch_monetization_checked_244",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "evergreen_and_launch_monetization_checked",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_growth_driver_paid_social_stabilization_contrary_245",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 6 / printed 5",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "paid_social_stabilization_contrary",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_growth_driver_ai_ad_matching_and_inventory_checked_246",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "ai_ad_matching_and_inventory_checked",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_growth_driver_ai_ad_matching_and_inventory_checked_247",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "ai_ad_matching_and_inventory_checked",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_growth_driver_ai_ad_matching_and_inventory_checked_248",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "ai_ad_matching_and_inventory_checked",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_growth_driver_ai_ad_matching_and_inventory_checked_249",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "ai_ad_matching_and_inventory_checked",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_growth_driver_ai_ad_matching_and_inventory_checked_250",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 12 / printed 12",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "ai_ad_matching_and_inventory_checked",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_growth_driver_ai_ad_matching_and_inventory_checked_251",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 12 / printed 12",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "ai_ad_matching_and_inventory_checked",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_growth_driver_payments_and_cloud_conversion_checked_252",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "payments_and_cloud_conversion_checked",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_growth_driver_payments_and_cloud_conversion_checked_253",
+      "source_id": "tencent_h1_2026_official",
+      "locator": "FY2026 interim PDF page 10 / printed 9",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "payments_and_cloud_conversion_checked",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_growth_driver_payments_and_cloud_conversion_checked_254",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "payments_and_cloud_conversion_checked",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_growth_driver_payments_and_cloud_conversion_checked_255",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "payments_and_cloud_conversion_checked",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    },
+    {
+      "claim_id": "v3_growth_driver_payments_and_cloud_conversion_contrary_256",
+      "source_id": "tencent_corporate_overview_sep2026",
+      "locator": "September2026 Corporate Overview PDF page 15 / printed 15",
+      "exact_original_context_containment": "PASS",
+      "target_type": "growth_driver",
+      "target_id": "payments_and_cloud_conversion_contrary",
+      "claim_excerpt_sha256": "PASS",
+      "capture_binding": "PASS"
+    }
+  ],
+  "context_check_count": 325,
+  "independent_paths": [
+    {
+      "segment": "Games",
+      "scenario": "low",
+      "annual": {
+        "2026": 258439.24000000002,
+        "2027": 268776.80960000004,
+        "2028": 274152.34579200007
+      }
+    },
+    {
+      "segment": "Games",
+      "scenario": "base",
+      "annual": {
+        "2026": 265685.2,
+        "2027": 289596.868,
+        "2028": 312764.61744000006
+      }
+    },
+    {
+      "segment": "Games",
+      "scenario": "high",
+      "annual": {
+        "2026": 277761.8,
+        "2027": 316648.45200000005,
+        "2028": 354646.2662400001
+      }
+    },
+    {
+      "segment": "SocialNetworks",
+      "scenario": "low",
+      "annual": {
+        "2026": 125194.02,
+        "2027": 121438.1994,
+        "2028": 119009.43541199999
+      }
+    },
+    {
+      "segment": "SocialNetworks",
+      "scenario": "base",
+      "annual": {
+        "2026": 127749.0,
+        "2027": 130303.98,
+        "2028": 134213.0994
+      }
+    },
+    {
+      "segment": "SocialNetworks",
+      "scenario": "high",
+      "annual": {
+        "2026": 132858.96,
+        "2027": 139501.908,
+        "2028": 146477.00340000002
+      }
+    },
+    {
+      "segment": "MarketingServices",
+      "scenario": "low",
+      "annual": {
+        "2026": 162369.76,
+        "2027": 175359.34080000003,
+        "2028": 185880.90124800004
+      }
+    },
+    {
+      "segment": "MarketingServices",
+      "scenario": "base",
+      "annual": {
+        "2026": 173967.6,
+        "2027": 203542.092,
+        "2028": 232037.98488000003
+      }
+    },
+    {
+      "segment": "MarketingServices",
+      "scenario": "high",
+      "annual": {
+        "2026": 179766.52,
+        "2027": 221112.8196,
+        "2028": 265335.38352
+      }
+    },
+    {
+      "segment": "FinTechBusinessServices",
+      "scenario": "low",
+      "annual": {
+        "2026": 240906.75,
+        "2027": 250543.02000000002,
+        "2028": 260564.74080000003
+      }
+    },
+    {
+      "segment": "FinTechBusinessServices",
+      "scenario": "base",
+      "annual": {
+        "2026": 250084.15000000002,
+        "2027": 275092.56500000006,
+        "2028": 302601.8215000001
+      }
+    },
+    {
+      "segment": "FinTechBusinessServices",
+      "scenario": "high",
+      "annual": {
+        "2026": 259261.55,
+        "2027": 298150.7825,
+        "2028": 342873.39987499994
+      }
+    },
+    {
+      "segment": "Others",
+      "scenario": "low",
+      "annual": {
+        "2026": 9288.55,
+        "2027": 9288.55,
+        "2028": 9288.55
+      }
+    },
+    {
+      "segment": "Others",
+      "scenario": "base",
+      "annual": {
+        "2026": 11307.8,
+        "2027": 12438.58,
+        "2028": 13433.6664
+      }
+    },
+    {
+      "segment": "Others",
+      "scenario": "high",
+      "annual": {
+        "2026": 12923.2,
+        "2027": 15507.84,
+        "2028": 17834.016
+      }
+    }
+  ],
+  "consolidated": {
+    "low": {
+      "2026": 796198.3200000001,
+      "2027": 825405.9198000001,
+      "2028": 848895.9732520002
+    },
+    "base": {
+      "2026": 828793.7500000001,
+      "2027": 910974.085,
+      "2028": 995051.1896200002
+    },
+    "high": {
+      "2026": 862572.03,
+      "2027": 990921.8021,
+      "2028": 1127166.069035
+    }
+  },
+  "H2_requirements": [
+    {
+      "segment": "Games",
+      "scenario": "low",
+      "H2_2025": 122878,
+      "H2_2026_required": 128324.24000000002,
+      "H2_required_yoy": 0.04432233597552049,
+      "FY2026": 258439.24000000002,
+      "actual_H1_2026": 130115,
+      "unit": "CNY million",
+      "economic_status": "conditional analyst requirement; non-negative does not establish demand/capacity or forecast accuracy"
+    },
+    {
+      "segment": "Games",
+      "scenario": "base",
+      "H2_2025": 122878,
+      "H2_2026_required": 135570.2,
+      "H2_required_yoy": 0.10329106919057929,
+      "FY2026": 265685.2,
+      "actual_H1_2026": 130115,
+      "unit": "CNY million",
+      "economic_status": "conditional analyst requirement; non-negative does not establish demand/capacity or forecast accuracy"
+    },
+    {
+      "segment": "Games",
+      "scenario": "high",
+      "H2_2025": 122878,
+      "H2_2026_required": 147646.8,
+      "H2_required_yoy": 0.2015722912156772,
+      "FY2026": 277761.8,
+      "actual_H1_2026": 130115,
+      "unit": "CNY million",
+      "economic_status": "conditional analyst requirement; non-negative does not establish demand/capacity or forecast accuracy"
+    },
+    {
+      "segment": "SocialNetworks",
+      "scenario": "low",
+      "H2_2025": 62902,
+      "H2_2026_required": 60785.020000000004,
+      "H2_required_yoy": -0.033655209691265675,
+      "FY2026": 125194.02,
+      "actual_H1_2026": 64409,
+      "unit": "CNY million",
+      "economic_status": "conditional analyst requirement; non-negative does not establish demand/capacity or forecast accuracy"
+    },
+    {
+      "segment": "SocialNetworks",
+      "scenario": "base",
+      "H2_2025": 62902,
+      "H2_2026_required": 63340.0,
+      "H2_required_yoy": 0.006963212616450942,
+      "FY2026": 127749.0,
+      "actual_H1_2026": 64409,
+      "unit": "CNY million",
+      "economic_status": "conditional analyst requirement; non-negative does not establish demand/capacity or forecast accuracy"
+    },
+    {
+      "segment": "SocialNetworks",
+      "scenario": "high",
+      "H2_2025": 62902,
+      "H2_2026_required": 68449.95999999999,
+      "H2_required_yoy": 0.0882000572318844,
+      "FY2026": 132858.96,
+      "actual_H1_2026": 64409,
+      "unit": "CNY million",
+      "economic_status": "conditional analyst requirement; non-negative does not establish demand/capacity or forecast accuracy"
+    },
+    {
+      "segment": "MarketingServices",
+      "scenario": "low",
+      "H2_2025": 77358,
+      "H2_2026_required": 80633.76000000001,
+      "H2_required_yoy": 0.04234545877608009,
+      "FY2026": 162369.76,
+      "actual_H1_2026": 81736,
+      "unit": "CNY million",
+      "economic_status": "conditional analyst requirement; non-negative does not establish demand/capacity or forecast accuracy"
+    },
+    {
+      "segment": "MarketingServices",
+      "scenario": "base",
+      "H2_2025": 77358,
+      "H2_2026_required": 92231.6,
+      "H2_required_yoy": 0.1922697070761914,
+      "FY2026": 173967.6,
+      "actual_H1_2026": 81736,
+      "unit": "CNY million",
+      "economic_status": "conditional analyst requirement; non-negative does not establish demand/capacity or forecast accuracy"
+    },
+    {
+      "segment": "MarketingServices",
+      "scenario": "high",
+      "H2_2025": 77358,
+      "H2_2026_required": 98030.51999999999,
+      "H2_required_yoy": 0.2672318312262467,
+      "FY2026": 179766.52,
+      "actual_H1_2026": 81736,
+      "unit": "CNY million",
+      "economic_status": "conditional analyst requirement; non-negative does not establish demand/capacity or forecast accuracy"
+    },
+    {
+      "segment": "FinTechBusinessServices",
+      "scenario": "low",
+      "H2_2025": 118992,
+      "H2_2026_required": 120735.75,
+      "H2_required_yoy": 0.014654346510689864,
+      "FY2026": 240906.75,
+      "actual_H1_2026": 120171,
+      "unit": "CNY million",
+      "economic_status": "conditional analyst requirement; non-negative does not establish demand/capacity or forecast accuracy"
+    },
+    {
+      "segment": "FinTechBusinessServices",
+      "scenario": "base",
+      "H2_2025": 118992,
+      "H2_2026_required": 129913.15000000002,
+      "H2_required_yoy": 0.09178053986822654,
+      "FY2026": 250084.15000000002,
+      "actual_H1_2026": 120171,
+      "unit": "CNY million",
+      "economic_status": "conditional analyst requirement; non-negative does not establish demand/capacity or forecast accuracy"
+    },
+    {
+      "segment": "FinTechBusinessServices",
+      "scenario": "high",
+      "H2_2025": 118992,
+      "H2_2026_required": 139090.55,
+      "H2_required_yoy": 0.168906733225763,
+      "FY2026": 259261.55,
+      "actual_H1_2026": 120171,
+      "unit": "CNY million",
+      "economic_status": "conditional analyst requirement; non-negative does not establish demand/capacity or forecast accuracy"
+    },
+    {
+      "segment": "Others",
+      "scenario": "low",
+      "H2_2025": 5110,
+      "H2_2026_required": 4476.549999999999,
+      "H2_required_yoy": -0.12396281800391407,
+      "FY2026": 9288.55,
+      "actual_H1_2026": 4812,
+      "unit": "CNY million",
+      "economic_status": "conditional analyst requirement; non-negative does not establish demand/capacity or forecast accuracy"
+    },
+    {
+      "segment": "Others",
+      "scenario": "base",
+      "H2_2025": 5110,
+      "H2_2026_required": 6495.799999999999,
+      "H2_required_yoy": 0.27119373776908007,
+      "FY2026": 11307.8,
+      "actual_H1_2026": 4812,
+      "unit": "CNY million",
+      "economic_status": "conditional analyst requirement; non-negative does not establish demand/capacity or forecast accuracy"
+    },
+    {
+      "segment": "Others",
+      "scenario": "high",
+      "H2_2025": 5110,
+      "H2_2026_required": 8111.200000000001,
+      "H2_required_yoy": 0.5873189823874756,
+      "FY2026": 12923.2,
+      "actual_H1_2026": 4812,
+      "unit": "CNY million",
+      "economic_status": "conditional analyst requirement; non-negative does not establish demand/capacity or forecast accuracy"
+    }
+  ],
+  "independent_sensitivity_details": [
+    {
+      "parameter_id": "games_growth_rate_base_2026",
+      "baseline_terminal": 995051.1896200002,
+      "shocked_terminal": {
+        "down": 986521.2455080001,
+        "up": 1003581.1337320001
+      }
+    },
+    {
+      "parameter_id": "games_growth_rate_base_2027",
+      "baseline_terminal": 995051.1896200002,
+      "shocked_terminal": {
+        "down": 986442.9891400002,
+        "up": 1003659.3901000002
+      }
+    },
+    {
+      "parameter_id": "games_growth_rate_base_2028",
+      "baseline_terminal": 995051.1896200002,
+      "shocked_terminal": {
+        "down": 986363.2835800002,
+        "up": 1003739.0956600001
+      }
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_base_2026",
+      "baseline_terminal": 995051.1896200002,
+      "shocked_terminal": {
+        "down": 991024.7966380002,
+        "up": 999077.5826020001
+      }
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_base_2027",
+      "baseline_terminal": 995051.1896200002,
+      "shocked_terminal": {
+        "down": 991103.7455200001,
+        "up": 998998.6337200002
+      }
+    },
+    {
+      "parameter_id": "socialnetworks_growth_rate_base_2028",
+      "baseline_terminal": 995051.1896200002,
+      "shocked_terminal": {
+        "down": 991142.0702200001,
+        "up": 998960.3090200002
+      }
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_base_2026",
+      "baseline_terminal": 995051.1896200002,
+      "shocked_terminal": {
+        "down": 989250.2399980002,
+        "up": 1000852.1392420002
+      }
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_base_2027",
+      "baseline_terminal": 995051.1896200002,
+      "shocked_terminal": {
+        "down": 989101.4977000002,
+        "up": 1001000.8815400002
+      }
+    },
+    {
+      "parameter_id": "marketingservices_growth_rate_base_2028",
+      "baseline_terminal": 995051.1896200002,
+      "shocked_terminal": {
+        "down": 988944.9268600001,
+        "up": 1001157.4523800001
+      }
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_base_2026",
+      "baseline_terminal": 995051.1896200002,
+      "shocked_terminal": {
+        "down": 986722.6991200002,
+        "up": 1003379.6801200002
+      }
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_base_2027",
+      "baseline_terminal": 995051.1896200002,
+      "shocked_terminal": {
+        "down": 986798.4126700002,
+        "up": 1003303.9665700002
+      }
+    },
+    {
+      "parameter_id": "fintechbusinessservices_growth_rate_base_2028",
+      "baseline_terminal": 995051.1896200002,
+      "shocked_terminal": {
+        "down": 986798.4126700002,
+        "up": 1003303.9665700002
+      }
+    },
+    {
+      "parameter_id": "others_growth_rate_base_2026",
+      "baseline_terminal": 995051.1896200002,
+      "shocked_terminal": {
+        "down": 994763.3253400002,
+        "up": 995339.0539000002
+      }
+    },
+    {
+      "parameter_id": "others_growth_rate_base_2027",
+      "baseline_terminal": 995051.1896200002,
+      "shocked_terminal": {
+        "down": 994684.8169000002,
+        "up": 995417.5623400002
+      }
+    },
+    {
+      "parameter_id": "others_growth_rate_base_2028",
+      "baseline_terminal": 995051.1896200002,
+      "shocked_terminal": {
+        "down": 994678.0322200002,
+        "up": 995424.3470200002
+      }
+    }
+  ],
+  "recognition": "Already recognized mixed aggregate, no second progress/timing/gross-net transformation",
+  "confidence_score": 64.0,
+  "accuracy_claim": "NONE; workflow evidence score only",
+  "scope": "Execution verification only; independent reviewer must sign",
+  "future_backtest": "NOT_APPLICABLE: full FY2026-2028 actuals not published as of cutoff",
+  "classification_dependency": {
+    "before": "triangulated",
+    "after": "limited",
+    "restored_confidence_limitation": "Growth driver evergreen_and_launch_monetization is not triangulated across two evidence types and sources",
+    "confidence_score_unchanged": 64.0,
+    "all325_claims_unchanged": true,
+    "all53_parameter_records_unchanged": true,
+    "all_income_and_sensitivity_results_unchanged": true,
+    "no_new_source_calls": true
+  }
+}
