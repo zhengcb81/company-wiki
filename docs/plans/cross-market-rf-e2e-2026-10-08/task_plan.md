@@ -88,3 +88,9 @@ P1 SDK公开接口/财政证据/实际HTTP回执及原件入库集中117项通�
 最新：FF/ET费用与能力责任实现已并main/push（FF697af966、ET282e8908），ET74项、FF49项和真实0费用离线链通过；实际FMP账户明确entitlement拒绝，不算产品数据全绿。FF首次远端只有静态复杂度失败（418行为通过），拆开计数类型和回执身份两项责任后本地同测试绿，精确新SHA远端待监控。三条R6卡互相不写同一目录，基准/交接接口/责任测试和大节点明确；MAIN 持续目标不暂停，接收顺序按先完成先集成，不增加小节点审批。
 
 发布确认：FF697af966 [远端CI37833957140](https://github.com/zhengcb81/filing-fetch/actions/runs/37833957140)成功；ET仓未配置Actions，不能虚报CI绿，用上述实际集中验收作工程证据。费用节点临时2工作树及9测试根已清除，原件删除0。新3工作树合计18,580,471字节，干净且未开工，见harness_lanes/worktrees.json。
+
+## 2026-10-09：公司池真实审查循环
+
+用户要求随机从已有公司池选公司→真实revenue-forecast-audit→四独立审查→专家共用根因PWF→实施及原公司复验→再选下一家，直到无主要问题/改进点。循环协调计划独立放在 C:/Users/郑曾波/Projects/revenue-forecast-audit/docs/plans/company-pool-cycle-2026-10-09/；此处旧工程责任、原两组回归和未完成Phase6仍保留，不重复创建同因施工包。当前goal active，语义已有继续循环，目标工具没有修改objective接口，未伪造新目标或完成旧目标。
+
+重大修复后以三家不同公司连续四路实读clean并覆盖池中A/H/US、复用与真实新下载作收尾证据；BLOCKED/NOT_RUN/旧主要问题不算clean。预算沿现有效累计USD20/2M tokens，unknown照计。只在大的节点测试和审查。当前首轮尚在选样/预算盘点，真实研究未执行。
