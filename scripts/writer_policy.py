@@ -58,13 +58,16 @@ RETIRED_ENGINEERING_TOOL_SCRIPTS = frozenset(
     }
 )
 
-# Source narrative pilots belong to the canonical source system.  They retain
-# their own byte/path/transaction checks; running a pilot is not research
-# writing.  The completed one-off catalog retirement, cutover, audit and
+# Source narrative workflows belong to the canonical source system.  The
+# configured finite batch entry only loads the authoritative LLM configuration
+# and composes the bounded source CLI; it is not a legacy research writer.
+# These tools retain their own byte/path/transaction checks.  The completed
+# one-off catalog retirement, cutover, audit and
 # derived-archive deletion tools were removed together with their dedicated
 # test chain (see the G1-LEGACY handoff).
 SOURCE_WORKFLOW_TOOL_ALLOWLIST = frozenset(
     {
+        "narrative_batch_configured.py",
         "narrative_evidence_pilot.py",
         "narrative_summary_review_pilot.py",
     }
