@@ -1,6 +1,6 @@
 {
   "schema_version": "r3a-current-material-consumers/1",
-  "status": "verified_merged_RF_published_CI_success_CWP_node_commit_pending",
+  "status": "verified_merged_published_exact_CI_success",
   "producer_implementation": "4c5590a9e711fc451468ee18c9fe433381cc3a93",
   "consumer_implementations": {
     "rf": "e585f6d58193f377daefe23147934b26e6293ad0",
@@ -159,9 +159,12 @@
   "RF_install": "r3a_rf_selective_install_2026-10-08.json",
   "StockWiki_remote": "none configured; committed and merged locally",
   "remaining": [
-    "publish CWP integration-test commit and observe its exact CI",
-    "R3 real production batch requires pending token increment answer; summary/final/resume/space acceptance still unexecuted"
+    "R3 real production batch requires pending token increment answer; summary/final/resume/space acceptance still unexecuted",
+    "R5B final complete-requirements audit and publication require R3 production evidence"
   ],
   "RF_exact_CI": "r3a_rf_exact_ci_2026-10-08.json",
-  "owned_cleanup": "r3a_owned_cleanup_2026-10-08.json"
+  "owned_cleanup": "r3a_owned_cleanup_2026-10-08.json",
+  "CWP_node_commit": "f0ad6b97051609c1ff278733df3135317f1df462",
+  "CWP_exact_CI": "r3a_cwp_node_exact_ci_2026-10-08.json",
+  "R3A_complete": true
 }

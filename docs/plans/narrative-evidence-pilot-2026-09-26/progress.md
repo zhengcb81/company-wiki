@@ -10,6 +10,8 @@ RF main快进c672a5e并正常推送，短pre-push107pass/16.71秒+mypy/Ruff绿�
 
 两个我创建的工作树已合入后删除91161217B副本；RF通过稀疏检出避免再复制约4.7万tracked历史planning记录，不清主仓历史。精确测试临时材料已恢复absent，收据留PWF；PowerShell Split-Path不兼容参数集错误已记录，Python预先绝对父路径校验和.NET事后复核均确认范围，没有扩大清理。CWP联调测试与当前PWF待正常发布/精确CI；live token增额仍未答，生产final0。
 
+随后CWP联调测试及PWF正常提交/push f0ad6b9，短commit/pre-push绿，精确CI37712551891所有步骤success，R3A complete。CI是既有快包，四真实原件CLI节点是本地显式执行，不借CI冒称每push跑真实节点。收口文档复用这次源码绿，无额外pytest。live增额仍未答，目标不complete。
+
 ## 已发布producer与R5零费用部分（不重跑）
 
 本目标轮继续实际推进[R3A](r3_current_material_read_implementation_2026-10-08.md)：发现公开日未知会连普通叙述阅读一起阻断，先TDD修producer，明确null当前模式与ISO历史模式。正常OS产品2RED后，当前38单测/0.70秒与26CLI责任/27.08秒绿（10项重叠不双算），Ruff/mypy绿；历史未知日期、身份/SHA仍拒绝。26保护SHA/DB stat保持、七owned目标恢复absent/21916B清理、付费POST0。RF/SW及三仓联调pending，live预算增额仍未答。
@@ -46,4 +48,4 @@ R2初始夹具缺SHA/reader清理、错误test路径0执行、JUnit xunit2警告
 
 ## Next Step
 
-R5A、producer、RF/SW与三仓节点已完成，不重做已绿节点。正常发布CWP联调测试与PWF，精确CI后收口R3A；token增量答复齐备再做R3唯一生产batch，预算不答不POST。使用current null请求，不伪造日期。正式final/零模型skip/当前消费者/locator/同run恢复/空间一次大节点，然后R5B完整要求审计和最终Git发布。目标保持active。
+R5A、R3A及精确源码CI已完成，不重做已绿责任/三仓/安装/CI节点。token增量答复齐备再做R3唯一生产batch，预算不答不POST。使用current null请求，不伪造日期。正式final/零模型skip/当前消费者/locator/同run恢复/空间一次大节点，然后R5B完整要求审计和最终Git发布。目标保持active，本轮有真实并线发布进展，不设blocked。

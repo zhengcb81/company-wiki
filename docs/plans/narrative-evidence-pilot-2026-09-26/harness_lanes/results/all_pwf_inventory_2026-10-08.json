@@ -1,13 +1,13 @@
 {
   "schema_version": "all-pwf-plan-inventory/2",
-  "status": "R3A_consumers_merged_RF_published_green_CWP_integration_test_release_pending_live_R3_and_R5B_pending",
+  "status": "R3A_complete_published_exact_CI_green_live_R3_and_final_R5B_pending",
   "previous_inventory": "all_pwf_inventory_2026-10-07.json",
   "historical_archive_commit": "6dd56011a7d49e2b8c147f2163b0708074f9edd7",
   "items": [
     {
       "path": "all_pwf_completion_implementation_2026-10-07.md",
       "title": "# 全部PWF：实际实施与完成条件",
-      "sha256": "69390f03a40b877f5e88addfd01f65ca48d53a1177db48637e1c1b97c090375c",
+      "sha256": "0d8b37629e1f2ea9168bfb06f64fef1c2a47cc965dcc34fa704baee54f70bef5",
       "role": "current_entry_or_current_evidence",
       "unchecked_items": 0
     },
@@ -112,7 +112,7 @@
     {
       "path": "findings.md",
       "title": "# Findings：当前事实、风险与证明范围",
-      "sha256": "1084566120d5aee9229bcc034973e5d288c9c1b4a57dc4854f1f80cc911f40c0",
+      "sha256": "73e43d0d3a295dfc56a3f3a4e82c6f927657147fa8b5a09d71f347b7a5aeccd8",
       "role": "current_entry_or_current_evidence",
       "unchecked_items": 0
     },
@@ -742,7 +742,7 @@
     {
       "path": "progress.md",
       "title": "# Progress：当前执行记录",
-      "sha256": "27655a208174be1b5c2dd5856b0e66314564b5f8bd3ca2e30048c07b8abbbf84",
+      "sha256": "89ce17c35cddee1468130d98caf7218e9fa8c24ba255437711608c65d25ba610",
       "role": "current_entry_or_current_evidence",
       "unchecked_items": 0
     },
@@ -771,13 +771,13 @@
       "path": "r3_current_material_read_implementation_2026-10-08.md",
       "role": "current_entry_or_current_evidence",
       "unchecked_items": 0,
-      "sha256": "6cbe2c9eee49522c889a4a9a1a66175868180f925b8a09ceb17f6ae109560fee",
+      "sha256": "9e8e7b8358976d0c3c86a224f46d7736adbe22343d9dab869f6e94d8072853cb",
       "title": "# R3A：普通资料阅读与历史时点读取分开"
     },
     {
       "path": "r5_cleanup_and_navigation_implementation_2026-10-08.md",
       "title": "# R5：当前入口、历史临时材料及最终交接",
-      "sha256": "8f4d6e02d5198c7c205f8e530e4a742b29a45e3d2492af1e8a57c2c73be20ae9",
+      "sha256": "962ae190a9bd11501326d54700aa5b2b8702cf2567e454deff96bb9e7a1c7567",
       "role": "current_entry_or_current_evidence",
       "unchecked_items": 0
     },
@@ -805,7 +805,7 @@
     {
       "path": "README.md",
       "title": "# 本计划目录导航",
-      "sha256": "e0e4d5d46e9811ecda91a2313f921ccfe6d36ca1342271d872841b8f03c2624c",
+      "sha256": "53071987114dfcdcb8f65880ae3bc2c1775212c6343d2626927280a8c8cae574",
       "role": "current_entry_or_current_evidence",
       "unchecked_items": 0
     },
@@ -875,7 +875,7 @@
     {
       "path": "task_plan.md",
       "title": "# 公司来源平台：唯一当前施工入口",
-      "sha256": "f690905074e7d0af87c694cd2d7a0acf45f578598c570e0958ad05e67c62e748",
+      "sha256": "710a946ce2c3a6db5da06e3f8b10a1eeaca1caad139595741303aed852d76b62",
       "role": "current_entry_or_current_evidence",
       "unchecked_items": 0
     },
@@ -909,7 +909,7 @@
     }
   ],
   "verification": {
-    "current_local_links_checked": 119,
+    "current_local_links_checked": 122,
     "missing_current_links": 0,
     "historical_top_notices_checked": 120,
     "R3_post_count": 0,
@@ -920,7 +920,11 @@
     "RF_head": "c672a5e5b496dfac532a705b70a7976540399177",
     "StockWiki_head": "42fba06878fc58c01f58c0206f4d694a68e4d451",
     "R3A_node": "1 pass, 0 skip, 49.98 sec; loopback only",
-    "R3A_owner_protected": 342
+    "R3A_owner_protected": 342,
+    "R3A_complete": true,
+    "CWP_node_head": "f0ad6b97051609c1ff278733df3135317f1df462",
+    "CWP_node_CI": 37712551891,
+    "RF_exact_CI": 37712024241
   },
   "not_a_permission_or_hash_gate": true,
   "document_count": 129

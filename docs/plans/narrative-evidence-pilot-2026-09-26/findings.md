@@ -30,7 +30,7 @@ R3模型尚未POST，production final0。现生产TXT49段/10873B HTTP，完整1
 
 ## 已知错误与限制
 
-R3A发现原NarrativeReadRequest/producer/RF/SW均强制ISO日期与已知公开日，所以前一份R3方案的“当前普通读取+未知日期不造假”不能实际成立；历史fixture日期消费绿不能代替此生产能力。[R3A](r3_current_material_read_implementation_2026-10-08.md)现三仓已实现：显式null仅表示当前资料，指定历史日期仍严格校验公开日。CWP38单测/26责任包及源码CI绿；RF67pass/1个Windows skip，SW68pass/0skip；四真实原件公共CLI节点1pass/0skip/49.98秒，本地loopback3、恢复新增0、真实provider0。RF main c672a5e已推/精确CI37712024241全绿，SW master42fba06本地已合入，无remote。CWP联调测试发布CI仍待发，live仍0，费用/模型配置和正式batch不变。
+R3A发现原NarrativeReadRequest/producer/RF/SW均强制ISO日期与已知公开日，所以前一份R3方案的“当前普通读取+未知日期不造假”不能实际成立；历史fixture日期消费绿不能代替此生产能力。[R3A](r3_current_material_read_implementation_2026-10-08.md)现complete：显式null仅表示当前资料，指定历史日期仍严格校验公开日。CWP38单测/26责任包及源码CI绿；RF67pass/1个Windows skip，SW68pass/0skip；四真实原件公共CLI节点1pass/0skip/49.98秒，本地loopback3、恢复新增0、真实provider0。RF main c672a5e已推/精确CI37712024241全绿，SW master42fba06本地已合入，无remote。CWP联调测试f0ad6b9已推/精确CI37712551891全绿，live仍0，费用/模型配置和正式batch不变。
 
 RF仓跟踪约4.7万历史planning文件，复制整仓工作树会制造无用副本。本次明确归属的隔离RF工作树使用Git稀疏检出，最终仅295文件/3144753B；两个已合入工作树现已移除91161217B副本，不删主仓历史。342 owner文件保持，RF一个接口文件定点安装的480未选文件保持/重复零写。兼容测试原以固定兄弟路径找仓，在隔离位置9次WinError267，实际三仓布局19绿，不改oracle迁就错误目录。测试清理的PowerShell Split-Path参数集错误有先前Python边界检查和后续.NET父目录/absent复核，不隐去该错误。
 

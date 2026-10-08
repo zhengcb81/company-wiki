@@ -1,6 +1,6 @@
 # R3A：普通资料阅读与历史时点读取分开
 
-**Status: implemented_merged，CWP联调测试提交的精确CI待发布。** 2026-10-08准备正式R3验收时发现，原`NarrativeReadRequest`强制ISO `as_of_date`，producer及RF/SW消费者无条件校验公开日期。S09的真实公开日未知，原机制只能得到metadata reference，无法通过公共接口阅读摘要或检索业务片段；不能用fixture公开日或直接读object路径完成R3。下述三仓实现已完成，live R3仍独立待做。
+**Status: complete。** Producer及consumer实现、四真实原件公共CLI节点、主线合并/定点安装/正常推送和精确CI均已完成。2026-10-08准备正式R3验收时发现，原`NarrativeReadRequest`强制ISO `as_of_date`，producer及RF/SW消费者无条件校验公开日期。S09的真实公开日未知，原机制只能得到metadata reference，无法通过公共接口阅读摘要或检索业务片段；不能用fixture公开日或直接读object路径完成R3。下述三仓实现已完成，live R3仍独立待做。
 
 ## 接口与职责
 
@@ -40,4 +40,6 @@ RF依赖pin同步到已发布CWP4c5590a，未改冻结基线/registry；main快�
 
 权威[consumer收据](harness_lanes/results/r3a_consumer_acceptance_2026-10-08.json)、[RF CI](harness_lanes/results/r3a_rf_exact_ci_2026-10-08.json)、[owner保护](harness_lanes/results/r3a_consumer_isolation_2026-10-08.json)。
 
-**Next Step:** 正常提交/push当前CWP联调测试与PWF，观察其精确CI后R3A complete。live token增额尚无答复，真实生产final仍0；不重跑已绿三仓节点。R3预算答复齐备后，生产阅读request使用`as_of_date: null`，历史ISO请求仍诚实拒绝unknown，不用object路径绕过公共接口。
+CWP联调测试及PWF已正常发布f0ad6b9，[精确CI37712551891](https://github.com/zhengcb81/company-wiki/actions/runs/37712551891)所有步骤success，[收据](harness_lanes/results/r3a_cwp_node_exact_ci_2026-10-08.json)。CI为既有短包，四真实原件可选节点是本地明确执行结果，不冒充每push运行该节点；纯文档后续复用精确源码绿。
+
+**Next Step:** R3A已完成，不重跑责任/三仓/安装/CI节点。live token增额尚无答复，真实生产final仍0。R3预算答复齐备后，生产阅读request使用`as_of_date: null`，历史ISO请求仍诚实拒绝unknown，不用object路径绕过公共接口。正式final/语义/恢复/空间和最终R5仍需完成。

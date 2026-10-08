@@ -13,12 +13,13 @@
 
 八个精确owned目标已删除，共119913476B、1123文件；26个原件/config/原侧录及旧pilot保护文件SHA、大小均保持，生产DB size/mtime未变。唯一原件删除0；canary年报测试副本与公司目录原件SHA一致后只删副本。历史pilot账本及unknown费用、tracked历史收据、tmp/pdfs、外包交接和owner资料保留。
 
-当前三PWF与实施单已改为唯一当前入口，120份历史卡加导航；原文历史固定在已推送6dd5601。当前128份计划文档的目录与本次链接检查作为导航数据持久化，不构成新门禁。纯文档/清理收据没有源码变化，复用6ae7ddc的精确CI37705927320全绿，不重复长测试。
+当前三PWF与实施单已改为唯一当前入口，120份历史卡加导航；原文历史固定在已推送6dd5601。新增R3A后当前129份计划文档的目录与链接检查作为导航数据持久化，不构成新门禁。A的纯文档/清理收据没有源码变化，复用6ae7ddc的精确CI37705927320全绿，不重复长测试；后续R3A源码及联调测试分别观察自己的精确CI，不借用该绿。
 
 - [归属与保护盘点](harness_lanes/results/r5_temporary_ownership_2026-10-08.json)
 - [实际删除与保护结果](harness_lanes/results/r5_owned_cleanup_2026-10-08.json)
 - [当前计划目录与链接结果](harness_lanes/results/all_pwf_inventory_2026-10-08.json)
 - [正常发布后的跨仓只读核对](harness_lanes/results/r5_readonly_repositories_2026-10-08.json)：A提交117dbaa；CWP/RF/FF/SID/ET实时远端一致，StockWiki无remote且独立quick-scan已推进9f9e0af。历史消费证明对应04dfc51，R3需用当前已提交版；owner文件保留，未介入独立项目。
+- 后续[R3A](r3_current_material_read_implementation_2026-10-08.md)complete：RF main c672a5e已推/精确CI绿，SW master42fba06本地合入；CWP联调测试f0ad6b9已推、精确CI37712551891全绿。自己创建的两个已合入工作树91161217B副本及精确测试临时目标已清，见[R3A清理](harness_lanes/results/r3a_owned_cleanup_2026-10-08.json)。副本字节不计入S5/S6生产净释放；生产原件/DB/26保护与342 owner保持。
 
 ## B. R3之后的最终验收（仍待做）
 
@@ -33,4 +34,4 @@
 - `harness_lanes/results/r5_temporary_ownership_2026-10-08.json`、实际清理/保护收据。
 - R3后完整requirements→evidence→当前结果表；未完成/未知明确保留。
 
-**Next Step:** A的文档和清理收据随本次正常文档提交发布；预算答复到达则优先R3，最终R5只有B的证据齐全才complete。不重新盘点/删除已完成的A，不把本次导航发布当作最终验收。
+**Next Step:** A及R3A均已发布/精确CI完成，等待既有token增额答复；答复到达优先R3。最终R5只有B的证据齐全才complete，不重新盘点/删除已完成的A，不把导航或loopback发布当作最终验收。

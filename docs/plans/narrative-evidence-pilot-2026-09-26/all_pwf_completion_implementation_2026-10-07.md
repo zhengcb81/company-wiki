@@ -26,7 +26,7 @@ R0逐份对账明确真实生产final0、来源字段和消费缺口。R1正式�
 
 ## R3 真实生产有限批次及跨仓验收
 
-**Status: in_progress，live token增量待答。** [R3A普通阅读细则](r3_current_material_read_implementation_2026-10-08.md)已补当前资料与历史as-of的职责缺口：真实S09公开日未知，当前阅读请求显式null，指定历史日期仍严格拒绝未知公开日。producer/RF/SW已实现并线，四真实原件三仓节点1pass/0skip；CWP新增联调测试提交的精确CI待发。不能以fixture日期或直读object替代公共接口。已明确同S09精选片段→DeepSeek外发授权持续有效；当前费用上限0.12不变。已占190035token/100502microUSD/unknown7/unsettled0、FX2764照计，当前余9965token/16734microUSD，完整19193token不够。提出累计220000token未获答复前零POST；不能以新目标或完整请求JSON当作增额许可。
+**Status: in_progress，live token增量待答。** [R3A普通阅读细则](r3_current_material_read_implementation_2026-10-08.md)complete：真实S09公开日未知，当前阅读请求显式null，指定历史日期仍严格拒绝未知公开日。producer/RF/SW已实现并线，四真实原件三仓节点1pass/0skip；CWP f0ad6b9及RF c672a5e已推/精确CI绿。不能以fixture日期或直读object替代公共接口。已明确同S09精选片段→DeepSeek外发授权持续有效；当前费用上限0.12不变。已占190035token/100502microUSD/unknown7/unsettled0、FX2764照计，当前余9965token/16734microUSD，完整19193token不够。提出累计220000token未获答复前零POST；不能以新目标或完整请求JSON当作增额许可。
 
 [完整DTO](harness_lanes/results/r3_production_batch_request_2026-10-08.json)与[零POST实际预检](harness_lanes/results/r3_production_request_preflight_2026-10-08.json)：生产S09+active真制度，P4计算3/模型1，max_seconds180、单batch19193token/$0.014591，按Config DeepSeek Flash/8192/温度1/default thinking/timeout。不改配置/价格、裁正文或换供应商绕限。未知公开日保持，不给予as-of资格。canonical AUTO目前未建立，用现有Store实现首次生产实例，不加第二任务框架；历史pilot usage保留。
 
