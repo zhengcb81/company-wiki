@@ -72,3 +72,7 @@ SID维护分支v2-clean-rewrite，提交c0f07e12d4ba3e232d712bb6e5e491832023b0a0
 - US：[初审](reviews/US-MSFT/review.md) → [v2修复](executions/US-MSFT/repair_v2.md) → [最终复查](reviews/US-MSFT/recheck_v2.md)。
 
 共享[PWF计划](task_plan.md)、[发现](findings.md)、[进度](progress.md)记录MAIN决策，各公司matrix/events/commands/manifest与审查逐项表保留完整证据。
+
+## 发布
+
+本仓工程记录已提交c72d532baa117d97d088cf0c8bae78e13cd7849a并推origin/master；正常推送前快速契约smoke GREEN，精确提交的[company-wiki CI](https://github.com/zhengcb81/company-wiki/actions/runs/37756152210)成功（67秒）。1470份当时暂存记录与原工作区字节独立相等，局部.gitattributes保护原记录换行；后续仅收尾Markdown，不修改已审来源或预测产物。

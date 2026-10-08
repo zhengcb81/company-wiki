@@ -100,3 +100,9 @@
 
 - 本轮新增审计目录局部.gitattributes禁用换行转换，保留原记录CRLF/LF。只影响本次审计，不改全仓Git设置。原始日志的空白必须保留，不为可选diff whitespace检查改写日志。
 - 1470份暂存文件通过git cat-file --batch逐blob比对工作区SHA/字节，差异0；派生检查报告不自哈希。该检查证明发布内容字节，不能替代前述事实/模型独立审查。
+
+## 09:24 UTC — 主线发布和远端CI收尾
+
+- 工程审计提交c72d532baa117d97d088cf0c8bae78e13cd7849a已推origin/master；正常pre-commit按文件范围跳过生产代码检查，正常pre-push快速契约smoke GREEN。1471个工程文件完整保留，不含原库删除或邻仓owner代码。
+- 精确完整SHA的company-wiki远端CI https://github.com/zhengcb81/company-wiki/actions/runs/37756152210 成功，09:22:08→09:23:15（67秒）。首查短SHA空结果仅是错误筛选，改完整40位后取得实际run，不误报没有CI。
+- 本轮Phase1–4审计任务完成。后续能力缺口仍未实现，独立follow_up_plan不涂绿；CWP/RF/SID发布与预算/原件/配置/临时清理结论见归总。此后仅提交共享PWF收尾Markdown，不重跑生产或外部模型。
