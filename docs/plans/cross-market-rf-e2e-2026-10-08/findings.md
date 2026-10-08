@@ -122,3 +122,6 @@ R6集中接线查实更深质量问题：capture.document_kind争议已记录，
 ## R6合并大节点发现
 
 新增字段可选必须对旧实际输入验证：unmodeled_reason与已有rationale重复，是无收益的准入门，已取消；无转换目标仍不产生年度值。HK同摘录正反混用是实质证据缺口，保留FAIL。来源能力错误必须保留机器原因，不能吞异常后按英文substring猜；PPTX22页全图只可具名BLOCKED，不是成功skip。副本存在不等于安装运行一致：两副本现在完整runtime零漂移且3builder实际导入成功。数据与逐项证据见[本节点记录](phase6/r6_handoff_intake.md)。
+
+
+第二次冻结回放CN/US恢复，43PASS/2FAIL（HK语义、PPTX探针）且无新回退；纠正probe只读顶层的假设，26责任测试绿，真实全图证明仍待最新冻结执行。实际测试/更正/下一接口统一见[查收记录](phase6/r6_handoff_intake.md)。

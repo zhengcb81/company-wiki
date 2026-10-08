@@ -258,3 +258,6 @@ P1 FF/ET费用能力集中验收：6RED/7PASS→ET费用13PASS，实际用量3RE
 CWP dbffc282、FF a1f3e4f、RF 424ba5b1均已推主线且精确SHA CI成功。三卡责任验收和格式接线完成；两RF安装副本零漂移，实际producer→RF 13PASS/2未提供owner样本SKIP。合并冻结回放33PASS/4FAIL，未冒充绿：重复目标说明门已修复（59PASS+2subtests），PPTX具名诊断已TDD关闭（52PASS），HK历史表正反混用待新研究。修复后的冻结回放待发布执行。详见[本节点记录](phase6/r6_handoff_intake.md)。三owned根恢复不存在，外部模型/费用0。
 
 工具记录：路径猜测与CLI夹具递归已纠正，真实RED/GREEN分别记载，工具错误不归产品。后续先rg实际路径；活动PWF三文件在本根，phase6无副本。
+
+
+第二次冻结回放CN/US恢复，43PASS/2FAIL（HK语义、PPTX探针）且无新回退；纠正probe只读顶层的假设，26责任测试绿，真实全图证明仍待最新冻结执行。实际测试/更正/下一接口统一见[查收记录](phase6/r6_handoff_intake.md)。

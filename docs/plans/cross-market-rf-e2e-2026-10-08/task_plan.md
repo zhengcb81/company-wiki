@@ -38,7 +38,7 @@
 
 ## Next Step
 
-**当前行动（2026-10-08 Phase6）**：三卡查收、主线合并推送及各仓CI绿；RF安装零漂移。合并full回放暴露重复目标说明门（已共用层修复并推送）、HK实质证据混用（新研究待修）、PPTX具名能力诊断丢失（已TDD实现，待发布回放）。先完成本次冻版本整链效果核对；随后CWP provider失败证明DTO、RF真实叙述消费、跨run复用/图片能力和两组新研究独立审查。详见phase6/r6_handoff_intake.md；旧Next Step为历史，不重新派发R6。
+**当前行动（2026-10-08 Phase6）**：三卡已查收、并远端主线，CI与RF安装绿。修复重复目标说明门后CN/US正式链恢复；第二次full43PASS/2FAIL，HK需新研究，PPTX已具名select拒绝但probe读错层。全图结构证明+闭集文档错误探针26项绿，先最新冻结验证此节点；随后[provider失败接线](phase6/r6_provider_cause_integration.md)、RF真实叙述消费、跨run复用/图片能力、两组新研究独立审查。历史Next Step和R6三卡不重复开工。
 
 ### Phase 5: 固化三市场回归套件（2026-10-08 新请求）
 **Status:** complete

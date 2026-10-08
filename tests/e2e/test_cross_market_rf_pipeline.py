@@ -162,7 +162,23 @@ def test_real_microsoft_format_capability(kind, loopback_model_server, record_pr
     assert call.stdout, call.stderr
     result = json.loads(call.stdout)
     from tools.cross_market_suite.core import format_capability_gap
-    reason = format_capability_gap(result)
+    images_only_checked = False
+    if kind == "pptx" and any("PARSER_INCOMPLETE" in row.get("errors", []) for row in result["documents"]):
+        from company_wiki.document_normalization import normalize_document
+        from company_wiki.source_catalog.source_reader import SourceRef
+
+        catalog = SourceCatalog(load_catalog_config(Path(item["config"]), project_root=Path(context["wiki"])))
+        try:
+            raw = SourceVersionReader(catalog).open_version(SourceRef(**ref), purpose="narrative_derivation")
+            structure = normalize_document(raw.data, source_id=ref["source_id"],
+                source_sha256=ref["content_sha256"], mime_type=ref["mime_type"]).structure
+            images_only_checked = (not structure.units and not structure.errors and structure.page_count > 0
+                and structure.pages_read == structure.page_count
+                and len(structure.opaque_pages) == structure.page_count)
+            record_property("cmrf_opaque_pages", str(len(structure.opaque_pages)))
+        finally:
+            catalog.close()
+    reason = format_capability_gap(result, images_only_checked=images_only_checked)
     if reason:
         assert call.returncode == 2
         assert result["budget"]["tokens"] == result["budget"]["estimated_micro_usd"] == 0
@@ -173,7 +189,8 @@ def test_real_microsoft_format_capability(kind, loopback_model_server, record_pr
                         + "; no published artifact or model call; body processing remains incomplete")
         return
     record_property("cmrf_format_detail", "actual finite Worker outcome: "
-                    + str(result.get("status")) + "; reason=" + str(result.get("error")))
+                    + str(result.get("status")) + "; reason=" + str(result.get("error"))
+                    + "; document_errors=" + str([row.get("errors") for row in result["documents"]]))
     assert call.returncode == 0 and result["status"] == "completed", (call.stderr, result)
     assert any(row.get("artifact_ref") for row in result["documents"]), result
     command = [sys.executable, "-B", "-m", "company_wiki.source_catalog.narrative_transport_cli", "--config", item["config"]]

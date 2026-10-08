@@ -48,6 +48,23 @@ def test_format_capability_uses_named_causes_without_calling_incomplete_a_succes
     assert summarize(report("BLOCKED")["checks"]) == "PARTIAL"
 
 
+def test_incomplete_parser_requires_actual_opaque_body_proof_and_no_other_failure():
+    from tools.cross_market_suite.core import format_capability_gap
+    receipt = {"status": "failed", "documents": [{"artifact_ref": None,
+               "errors": ["PARSER_INCOMPLETE", "DEPENDENCY_TERMINAL"]}]}
+    assert format_capability_gap(receipt) is None
+    assert format_capability_gap(receipt, images_only_checked=True) == "PARSER_INCOMPLETE"
+    receipt["documents"][0]["errors"].append("MODEL_BUDGET_DENIED")
+    assert format_capability_gap(receipt, images_only_checked=True) is None
+
+
+@pytest.mark.parametrize("errors", [None, "PARSER_INCOMPLETE", [{"code": "PARSER_INCOMPLETE"}]])
+def test_invalid_document_errors_stay_unclassified(errors):
+    from tools.cross_market_suite.core import format_capability_gap
+    receipt = {"status": "failed", "documents": [{"artifact_ref": None, "errors": errors}]}
+    assert format_capability_gap(receipt, images_only_checked=True) is None
+
+
 def test_removed_failed_checkpoint_is_a_regression():
     after = report("PASS")
     after["checks"] = []

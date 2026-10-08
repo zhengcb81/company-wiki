@@ -55,3 +55,14 @@ RF九运行文件已定点同步两份既有技能（.agents/.codex，共18文�
 工具操作记录：一次CLI测试夹具因猴补构造函数递归失败，修夹具后取得上述真实RED；多次猜路径失败，已统一改为rg --files先取实际文件，再读（语言模块在source_catalog，active PWF只在本根，phase6没有progress/findings）。不把工具猜错写成产品缺陷。
 
 下一施工：先确认本次具名诊断和重复门修复在冻结整链中的效果；再做有证明的CWP provider cause/started/usage边界和RF真实叙述输入消费，跨run内容复用、图片识读及两组三市场新研究按总计划继续。身份/标题/URL/语言声明/旧许可观察不恢复为重复准入。仅大节点做集中验收。
+
+
+## 修复后的冻结整链复核
+
+CWP cda5470c、RF424ba5b1、FFa1f3e4f、ET282e8908冻结回放185.323秒：43PASS/2FAIL/1BLOCKED/18NOT_RUN/7NOT_APPLICABLE；相对第一次合并回放10改善/61不变/0回退/0missing。CN、US全部正式预测/算术/新快照/跨seed/旧快照保护恢复通过，经济路径不变。CWP cda5470c CI37851842260也已成功。原件/配置保护与测试根恢复全部通过，外部模型/费用0。报告r6_corrected_full_replay.json，两个对比报告保留。
+
+PPTX尚FAIL原因复核更正：本样本已有正文语言声明，实际Worker走到select，已在documents[].errors提供PARSER_INCOMPLETE/DEPENDENCY_TERMINAL；不是此次具名语言错误，探针只读顶层error失去诊断。现探针在原件SHA打开后再次规范化，必须证明0units、0parser errors、全部page_count/pages_read/opaque_pages一致且>0，才将这些闭集文档错误归BLOCKED；另有MODEL_BUDGET_DENIED、坏error结构或无全图证据仍FAIL。1RED→26PASS/1.59秒，ruff绿。没有能力成功、自动skip或放宽产品完成标准；下一新冻结整链验证真实22页proof。
+
+默认沙箱TEMP曾使5夹具setup报权限错误，显式owned短根+正常OS重跑26项全绿，不改断言。工程JSON新增输出统一LF，staged diff-check曾发现CRLF，已仅规范换行并验证JSON逐值相同，不改原始数据。
+
+下一MAIN采集失败接线细则已写[r6_provider_cause_integration.md](r6_provider_cause_integration.md)：责任缺口在CWP公共失败边界，无启动/用量证明保持null，不增加权限或签收。其余新研究、图片识读、跨run复用与第二组仍待。

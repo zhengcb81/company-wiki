@@ -14,7 +14,7 @@ import tempfile
 STATES = {"PASS", "FAIL", "BLOCKED", "NOT_RUN", "NOT_APPLICABLE"}
 
 
-def format_capability_gap(receipt):
+def format_capability_gap(receipt, *, images_only_checked=False):
     """A proved, unpublished capability gap stays BLOCKED, never PASS.
 
     Invalid bytes, extraction bugs, arbitrary message text and a published
@@ -23,10 +23,20 @@ def format_capability_gap(receipt):
     known = {"SOURCE_LANGUAGE_UNDETERMINED", "SOURCE_LANGUAGE_PDF_UNAVAILABLE",
              "SOURCE_LANGUAGE_UNSUPPORTED_MIME"}
     documents = receipt.get("documents")
-    if (receipt.get("status") == "failed" and receipt.get("error") in known
-            and isinstance(documents, list) and documents
-            and all(isinstance(row, dict) and row.get("artifact_ref") is None for row in documents)):
-        return receipt["error"]
+    unpublished = (isinstance(documents, list) and bool(documents)
+                   and all(isinstance(row, dict) and row.get("artifact_ref") is None for row in documents))
+    if receipt.get("status") == "failed" and unpublished:
+        if receipt.get("error") in known:
+            return receipt["error"]
+        errors = set()
+        for row in documents:
+            codes = row.get("errors", [])
+            if not isinstance(codes, list) or not all(isinstance(code, str) for code in codes):
+                return None
+            errors.update(codes)
+        if (images_only_checked and "PARSER_INCOMPLETE" in errors
+                and errors <= {"PARSER_INCOMPLETE", "DEPENDENCY_TERMINAL"}):
+            return "PARSER_INCOMPLETE"
     return None
 
 
