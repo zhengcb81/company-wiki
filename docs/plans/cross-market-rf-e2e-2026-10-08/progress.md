@@ -209,3 +209,6 @@ P1 FF/ET费用能力集中验收：6RED/7PASS→ET费用13PASS，实际用量3RE
 
 
 元数据责任节点收尾：最后57PASS/9.09秒，mypy7模块与ruff绿，diff-check绿。清9owned pytest根207,312,882B，均不存在；外包工作树/原件保留。只读看到三外包HEAD已更新：FORMAT d48ca1be / RF f70d1978 / FF 8bb7b85；交接范围仍独立，FF handoff两文件未提交由本线交接声明解释，MAIN不擅自覆盖。误读.git/hooks/pre-push不存在，实际core.hooksPath=.githooks，后续从配置读取真实路径。
+
+
+2026-10-08 发布前修正：1a58ad11尚未推送；此前新增回放Markdown含CRLF，最终staged diff-check报告79行尾空白，提交封装未因该非零码停止，不能把最终diff-check记为绿。现规范该生成报告为LF，并将检查与提交分开执行。用户确认三外包均完成，MAIN进入三卡验收与接线，不新增身份签收门。
