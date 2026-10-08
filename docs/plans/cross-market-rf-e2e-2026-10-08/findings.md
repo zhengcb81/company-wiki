@@ -125,3 +125,6 @@ R6集中接线查实更深质量问题：capture.document_kind争议已记录，
 
 
 第二次冻结回放CN/US恢复，43PASS/2FAIL（HK语义、PPTX探针）且无新回退；纠正probe只读顶层的假设，26责任测试绿，真实全图证明仍待最新冻结执行。实际测试/更正/下一接口统一见[查收记录](phase6/r6_handoff_intake.md)。
+
+
+R6查收收尾：三分支均已包含于远端主线且代码CI绿；最终完整冻结43PASS/1FAIL/2BLOCKED/18NOT_RUN/7NA，HK旧语义问题仍失败、全图PPTX具名未完成，环境恢复/原件保护通过，外部模型费用0。责任验收完成不等于产品全绿；详情与下一MAIN接线见[查收记录](phase6/r6_handoff_intake.md)。

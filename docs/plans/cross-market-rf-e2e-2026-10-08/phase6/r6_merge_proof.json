@@ -1,0 +1,39 @@
+{
+  "schema_version": "r6-merge-proof/1",
+  "repositories": [
+    {
+      "repository": "company-wiki",
+      "main_branch": "master",
+      "main_head": "d41edbbad629537b3d1a6c3d23ae7862d9c78ebb",
+      "lane_branch": "codex/cmrf-format-normalization-20261008",
+      "lane_head": "d48ca1be9d377e14e3926b2c0ec1872ff08e0667",
+      "lane_contained_in_main": true,
+      "owner_status": []
+    },
+    {
+      "repository": "revenue-forecast",
+      "main_branch": "main",
+      "main_head": "424ba5b1596e7de0df4b3fc48cec5a0e447b0e64",
+      "lane_branch": "codex/cmrf-input-semantics-20261008",
+      "lane_head": "b1763fc034558674b56c941e0b13620df9c11a12",
+      "lane_contained_in_main": true,
+      "owner_status": [
+        " M assurance/runs/daily_alert.jsonl",
+        " M assurance/runs/weekly_alert.jsonl",
+        " M assurance/runs/weekly_manifest.json",
+        "?? output/"
+      ]
+    },
+    {
+      "repository": "filing-fetch",
+      "main_branch": "main",
+      "main_head": "a1f3e4f18bf644c6af668fddc009cacdf1aace20",
+      "lane_branch": "codex/cmrf-provider-diagnostics-20261008",
+      "lane_head": "a1f3e4f18bf644c6af668fddc009cacdf1aace20",
+      "lane_contained_in_main": true,
+      "owner_status": [
+        "?? config/FMP_API_KEY.txt"
+      ]
+    }
+  ]
+}

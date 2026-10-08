@@ -42,3 +42,6 @@ FF已推main a1f3e4f；RF main b1763fc0并线，静态7项修复17fce29c发布�
 ## 发布后回放检查
 
 CWP dbffc282已推master，CI37849838844成功；真实HTML full检查从BLOCKED改善为PASS。有文本PPTX资料链已通过；真实22页全图仍无正文。新增CLI闭集语言原因和format探针具名BLOCKED分类，52责任测试通过，坏字节/任意异常不豁免，新的冻结回放待提交后执行。主线查收、安装和其他仓问题统一见[r6_handoff_intake.md](r6_handoff_intake.md)。
+
+
+最终发布d41edbba CI37852832070成功；完整回放真实HTML PASS、有文本PPTX责任链绿、真实22页全图PPTX有字节/结构证明的PARSER_INCOMPLETE→BLOCKED，无模型/产物。此格式接线节点已完成，OCR/vision能力仍归后续；接口总记录r6_handoff_intake.md。

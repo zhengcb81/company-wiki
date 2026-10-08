@@ -1,6 +1,6 @@
 # MAIN 来源资格调查与后续责任测试
 
-状态：调查完成，来源资格及身份责任收敛实现正在集中验收。该工作归 MAIN，不占用 R6-FORMAT、R6-RF-INPUT、R6-FF-CAUSE 的写目录；实施接口以 identity_responsibility_simplification.md 为准。
+状态：来源资格/身份入库/元数据读取恢复两个责任节点已集中验收；R6三卡现已交付并主线合并，MAIN负责跨仓接线。实际官方出版证据缺口仍单列，不重新开启已关闭门禁。实现与后续接口见identity_responsibility_simplification.md和r6_handoff_intake.md。
 
 ## 已核实机制
 
@@ -24,7 +24,7 @@
 3. 原件与官方证据强绑定后走已有 append-only 修正接口；测幂等、原件/capture 不变、坏 SHA/投影失败回滚。
 4. 一次集中真实当前读取/历史拒绝→合法修正→历史读取及 0 模型重跑验证；缺证据仍具名 gap。不得修改冻结第一组基线以掩盖旧问题。
 
-三张外包卡写范围维持 README；MAIN 改现有 source_catalog/automation，不写新 document_normalization，不改 RF 工程或 FF 诊断线代码。
+历史分包写范围见README；三卡交付查收后MAIN接回各仓接线，不与已结束harness并行写。Dayu、owner WIP和生产原件仍不可写。
 
 ## 本次实现合同（先 RED）
 

@@ -66,3 +66,16 @@ PPTX尚FAIL原因复核更正：本样本已有正文语言声明，实际Worker
 默认沙箱TEMP曾使5夹具setup报权限错误，显式owned短根+正常OS重跑26项全绿，不改断言。工程JSON新增输出统一LF，staged diff-check曾发现CRLF，已仅规范换行并验证JSON逐值相同，不改原始数据。
 
 下一MAIN采集失败接线细则已写[r6_provider_cause_integration.md](r6_provider_cause_integration.md)：责任缺口在CWP公共失败边界，无启动/用量证明保持null，不增加权限或签收。其余新研究、图片识读、跨run复用与第二组仍待。
+
+
+## R6查收收尾
+
+最终冻版：CWP d41edbbad629537b3d1a6c3d23ae7862d9c78ebb、RF424ba5b1596e7de0df4b3fc48cec5a0e447b0e64、FFa1f3e4f18bf644c6af668fddc009cacdf1aace20、ET282e8908。三卡分支均为各仓main/master的ancestor，精确并线证明r6_merge_proof.json；CWP最新代码CI37852832070成功，RF37850906279、FF37847921596成功。所有工程代码已提交/推送，RF原有三assurance文件/output及FF密钥未混入。外包目录仅保留追溯，无未交付R6功能分支。
+
+最终full/replay214.595秒：43PASS/1FAIL/2BLOCKED/18NOT_RUN/7NOT_APPLICABLE，71检查点全部保留；相对第二次回放0回退/70不变/1未解决状态变更（PPTX FAIL→BLOCKED，不冒称能力改善）。相对并线前1改善（真实HTML）、5回退（HK新检查阻断旧语义问题及其后续4项未运行）、65不变。只有HK正式forecast因旧同摘录正反混用仍FAIL；HK官方出版证明、全图PPTX正文两项BLOCKED。数据/对比见r6_final_intake_replay*.json、r6_final_vs_*.json。
+
+全图PPTX实读SHA后再解析，实际22页全部opaque、0units、0parser errors；Worker具名PARSER_INCOMPLETE，未发布artifact、未调用模型、收费0。新测试没有把它做成skipped_no_narrative或PASS。CN/US正式结果、独立算术、快照registry、跨seed及旧冻结保护通过；新的canonical摘要未悄悄替换旧研究输入，新研究与独立语义审查仍待。
+
+全部owned环境恢复不存在，最终峰值67,192,413B（<256MiB上限）随临时根清理；本轮工程日志不保存原件/全文图片/完整研究副本。所有本节点外部模型与项目模型费用0。
+
+判定：三张分包责任验收及主线接线节点完成，产品计划未完成。MAIN下一优先项为已实查的provider失败证明边界/真实RF叙述输入消费，然后跨run复用、图片正文能力和两组真实研究；不用重派R6、不恢复任何旧identity/policy/receipt许可。

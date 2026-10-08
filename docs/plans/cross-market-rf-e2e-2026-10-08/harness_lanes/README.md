@@ -39,3 +39,6 @@ FF/ET 费用发布收尾 → 来源资格/公开日与有界诊断 → Worker �
 
 
 查收与合并后问题见 [r6_handoff_intake.md](../phase6/r6_handoff_intake.md)。当前未分派新包。
+
+
+最终并线证明：[r6_merge_proof.json](../phase6/r6_merge_proof.json)。查收节点已完成，剩余MAIN工程和最终新研究详见当前task_plan；无新外包包。
