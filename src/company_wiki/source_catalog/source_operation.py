@@ -23,7 +23,12 @@ def project_operation_result(
 ) -> dict[str, Any]:
     """Validate one producer result, then expose the pathless consumer DTO."""
     operation_input = parse_operation_payload(payload, operation=operation)
-    return project_source_operation(operation_input, reader=reader)
+    result = project_source_operation(operation_input, reader=reader)
+    from .acquisition_failure import failure_from_result
+    diagnostic = failure_from_result(payload)
+    if diagnostic is not None:
+        result["acquisition_failure"] = diagnostic
+    return result
 
 
 __all__ = [

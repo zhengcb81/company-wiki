@@ -87,9 +87,10 @@ class CloseGapResult:
     outcome: str | None
     resolution: dict[str, Any] | None
     envelope: dict[str, Any] | None
+    acquisition_failure: dict[str, Any] | None = None
 
     def to_dict(self) -> dict[str, Any]:
-        return {
+        result = {
             "schema_version": self.schema_version,
             "txn_id": self.txn_id,
             "status": self.status,
@@ -99,6 +100,9 @@ class CloseGapResult:
             "resolution": self.resolution,
             "envelope": self.envelope,
         }
+        if self.acquisition_failure is not None:
+            result["acquisition_failure"] = self.acquisition_failure
+        return result
 
 
 def _txn_id(binding: CloseGapBinding) -> str:
@@ -164,8 +168,10 @@ class CloseGapTransaction:
         try:
             ensured = service.ensure(request, budget=budget, candidate_scope=scope)
         except Exception as exc:
+            from .acquisition_failure import published_acquisition_failure
             return CloseGapResult(CLOSE_GAP_SCHEMA_VERSION, txn, "failed",
-                f"acquisition_failed:{type(exc).__name__}:{exc}", 0, None, None, None)
+                f"acquisition_failed:{type(exc).__name__}:{exc}", 0, None, None, None,
+                acquisition_failure=published_acquisition_failure(exc))
         completed = ensured.status in {SourceEnsureStatus.REUSED, SourceEnsureStatus.IMPORTED,
                                        SourceEnsureStatus.DEDUPLICATED}
         if not completed or ensured.resolution.status not in {
@@ -173,7 +179,8 @@ class CloseGapTransaction:
         }:
             return CloseGapResult(CLOSE_GAP_SCHEMA_VERSION, txn, "rejected",
                 ensured.acquisition.reason or "no_unique_current_target", 0, None,
-                ensured.resolution.to_dict(), None)
+                ensured.resolution.to_dict(), None,
+                acquisition_failure=ensured.acquisition.acquisition_failure)
         fetch_events = int(ensured.acquisition.status is AcquisitionStatus.STAGED)
         envelope = build_resolution_envelope(ensured.resolution, journal=self.journal,
             bundle=self.catalog.bundle_for_resolution(ensured.resolution),

@@ -692,6 +692,7 @@ def _run_ensure_command(
         args,
         required=args.allow_download or request.mode == "latest_as_of",
     )
+    args._acquisition_budget = budget
     if args.binding_file is not None and not args.allow_download:
         raise ValueError("download target scope requires an explicit download operation")
     binding = _acquisition_binding_from_args(args, request, budget, project_root)
@@ -1088,6 +1089,7 @@ def main(argv: Sequence[str] | None = None) -> int:
 
             request, identity = source_request()
             budget = _acquisition_budget_from_args(args, required=True)
+            args._acquisition_budget = budget
             binding = _acquisition_binding_from_args(args, request, budget, project_root)
             # Only the actual acquisition writer initializes the catalog.
             _ = get_catalog().store
@@ -1347,6 +1349,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         else:  # pragma: no cover - argparse requires a registered command
             raise RuntimeError(f"unsupported source-catalog command: {args.command}")
     except Exception as exc:
+        if hasattr(args, "_acquisition_budget"):
+            from .acquisition_failure import attach_acquisition_failure, published_acquisition_failure
+            if published_acquisition_failure(exc) is None:
+                attach_acquisition_failure(exc, budget=args._acquisition_budget, code="acquisition_validation_failed")
         # ZR-204: unified error taxonomy — canonical code + retryable flag.
         from .error_taxonomy import structured_error
 
@@ -1355,6 +1361,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             file=sys.stderr,
         )
         return 1
+    from .acquisition_failure import failure_from_result
+    diagnostic = failure_from_result(result)
+    if diagnostic is not None:
+        result["acquisition_failure"] = diagnostic
     if getattr(args, "source_ref_v2", False):
         try:
             from .source_operation import project_operation_result
@@ -1364,6 +1374,11 @@ def main(argv: Sequence[str] | None = None) -> int:
                 reader=SourceVersionReader(get_catalog()),
             )
         except Exception as exc:
+            from .acquisition_failure import attach_acquisition_failure
+            if diagnostic is not None:
+                exc.acquisition_failure = diagnostic
+            elif hasattr(args, "_acquisition_budget"):
+                attach_acquisition_failure(exc, budget=args._acquisition_budget, code="acquisition_validation_failed")
             from .error_taxonomy import structured_error
 
             print(
