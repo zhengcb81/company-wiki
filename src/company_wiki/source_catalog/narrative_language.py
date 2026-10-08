@@ -7,8 +7,21 @@ import hashlib
 import unicodedata
 
 
+_LANGUAGE_REASON_CODES = frozenset({
+    "SOURCE_LANGUAGE_TEXT_INVALID", "SOURCE_LANGUAGE_TEXT_EXTRACTION_FAILED",
+    "SOURCE_LANGUAGE_PDF_UNAVAILABLE", "SOURCE_LANGUAGE_PDF_INVALID",
+    "SOURCE_LANGUAGE_UNSUPPORTED_MIME", "SOURCE_LANGUAGE_UNSUPPORTED_SCRIPT",
+    "SOURCE_LANGUAGE_UNDETERMINED",
+})
+
+
 class NarrativeLanguageError(ValueError):
     """A source cannot be classified safely for narrative processing."""
+
+    @property
+    def code(self) -> str:
+        reason = str(self)
+        return reason if reason in _LANGUAGE_REASON_CODES else "SOURCE_LANGUAGE_FAILURE"
 
 
 _SUPPORTED_TEXT_MIME_TYPES = {

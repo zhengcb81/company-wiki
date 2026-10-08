@@ -304,3 +304,32 @@ def test_cli_error_is_static_and_does_not_echo_request_secrets(tmp_path, capsys)
     captured = capsys.readouterr()
     assert "never-print-this-secret" not in captured.out + captured.err
     assert "NARRATIVE_BATCH_INVALID_REQUEST" in captured.out
+
+
+@pytest.mark.parametrize("reason,expected", [
+    ("SOURCE_LANGUAGE_UNDETERMINED", "SOURCE_LANGUAGE_UNDETERMINED"),
+    ("SOURCE_LANGUAGE_TEXT_EXTRACTION_FAILED", "SOURCE_LANGUAGE_TEXT_EXTRACTION_FAILED"),
+    ("never-print-this-secret /private/original.pdf", "SOURCE_LANGUAGE_FAILURE"),
+])
+def test_cli_preserves_closed_language_failure_reason(tmp_path, capsys, monkeypatch, reason, expected):
+    import json
+    from company_wiki.source_catalog.narrative_language import NarrativeLanguageError
+
+    cli = importlib.import_module("company_wiki.automation.narrative_batch_cli")
+    request = tmp_path / "request.json"
+    request.write_text("{}", encoding="utf-8")
+    parsed = _request()
+    monkeypatch.setattr(cli.NarrativeBatchRequest, "from_dict", lambda raw: parsed)
+
+    def fail(*args, **kwargs):
+        raise NarrativeLanguageError(reason)
+
+    monkeypatch.setattr(cli, "run_batch", fail)
+    code = cli.main(["--project-root", str(tmp_path), "--catalog-config", str(tmp_path / "c.json"),
+                    "--automation-db", str(tmp_path / "auto.db"), "--work-dir", str(tmp_path / "work"),
+                    "--request", str(request)])
+    receipt = json.loads(capsys.readouterr().out)
+    assert code == 2 and receipt["status"] == "failed"
+    assert receipt["error"] == expected
+    assert all(row["artifact_ref"] is None for row in receipt["documents"])
+    assert "never-print-this-secret" not in json.dumps(receipt)

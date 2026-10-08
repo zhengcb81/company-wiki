@@ -117,3 +117,8 @@ MAIN 来源资格只读调查已记录在 phase6/source_qualification_investigat
 
 
 R6集中接线查实更深质量问题：capture.document_kind争议已记录，root column却仍给最后入库分类，显示与capture投影不一致。修共用column alias映射（包括title/filing_date等），保留raw读和完整冲突诊断，未知分类作为unknown路由，而不是再加类型人工许可。格式回放每文档normalize1次，再用全部locator/coordinates/text/parser/metadata匹配；每span不重解析全文。三包本地并线完成，FF/RF远端主线发布成功；真实22页图片deck尚无正文识读，不签全绿。
+
+
+## R6合并大节点发现
+
+新增字段可选必须对旧实际输入验证：unmodeled_reason与已有rationale重复，是无收益的准入门，已取消；无转换目标仍不产生年度值。HK同摘录正反混用是实质证据缺口，保留FAIL。来源能力错误必须保留机器原因，不能吞异常后按英文substring猜；PPTX22页全图只可具名BLOCKED，不是成功skip。副本存在不等于安装运行一致：两副本现在完整runtime零漂移且3builder实际导入成功。数据与逐项证据见[本节点记录](phase6/r6_handoff_intake.md)。

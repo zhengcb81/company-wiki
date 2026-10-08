@@ -22,7 +22,7 @@ FF已推main a1f3e4f；RF main b1763fc0并线，静态7项修复17fce29c发布�
 
 ## MAIN接线节点完成
 
-- 三包已并各自主线；FF main a1f3e4f18bf644c6af668fddc009cacdf1aace20已推送且CI37847921596成功；RF main17fce29cbed65e839484b1df4c0c9ecf58aa51e7已推送且CI37848277872成功。CWP格式merge后现接线待提交/推送。
+- 三包已并各自主线；FF main a1f3e4f18bf644c6af668fddc009cacdf1aace20已推送且CI37847921596成功；RF main17fce29cbed65e839484b1df4c0c9ecf58aa51e7已推送且CI37848277872成功。CWP格式接线dbffc282已提交/推送，CI37849838844成功。
 - 新格式路由、原语言、财务cell筛选、parser版本与batch生成identity、select/verify/公共transport共享回放均完成。一次解析回放所有选中locator，无全文MD/图片持久化。PDF/TXT普通batch的生成hash不因新解析器版本漂移；格式batch显式冻结document_normalization版本。
 - 258项集中责任测试PASS/34.48秒；37项实际catalog→AUTO→3任务→projector→public read集成PASS/47.16秒，包含真实微软8,158,067B SEC HTML（SHA99d693f6...0bbe）；只有模型是本地ReplayNarrativeModel，无外部付费调用，不能据此签模型摘要经济语义正确。
 - FF→CWP离线诊断25/25PASS，报告r6_ff_main_cause_e2e.json；脚本覆盖的一份工程报告已恢复原提交字节，其临时根确认不存在。FF→ET→CWP旧冻结契约仍PASS，新真实电话会账户entitlement限制保留。
@@ -37,3 +37,8 @@ FF已推main a1f3e4f；RF main b1763fc0并线，静态7项修复17fce29c发布�
 3. 真实图片deck22页仍opaque，尚无配置可用OCR/vision正文识读；不要把named incomplete算成功skip。继续按已配置模型能力和预算调查，不硬编码供应商。
 4. 现有AUTO/内容寻址对象实现跨run默认复用及显式refresh；保留原事件与费用账，不加第二数据库或人工许可。
 5. 换A/H/US三家固定新样本真实执行、逐家独立审查与后续根因循环。
+
+
+## 发布后回放检查
+
+CWP dbffc282已推master，CI37849838844成功；真实HTML full检查从BLOCKED改善为PASS。有文本PPTX资料链已通过；真实22页全图仍无正文。新增CLI闭集语言原因和format探针具名BLOCKED分类，52责任测试通过，坏字节/任意异常不豁免，新的冻结回放待提交后执行。主线查收、安装和其他仓问题统一见[r6_handoff_intake.md](r6_handoff_intake.md)。

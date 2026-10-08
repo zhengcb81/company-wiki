@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Sequence
 
 from company_wiki.source_catalog.source_reader import SourceReadError
+from company_wiki.source_catalog.narrative_language import NarrativeLanguageError
 
 from .models import canonical_json
 from .narrative_batch import BatchPreparationDeadlineExceeded, BatchResumeError, run_batch
@@ -67,6 +68,9 @@ def main(
     except BatchPreparationDeadlineExceeded:
         print(canonical_json(_failure_receipt(request, args.automation_db, "failed",
                                               "BATCH_PREPARATION_DEADLINE_EXCEEDED")))
+        return 2
+    except NarrativeLanguageError as exc:
+        print(canonical_json(_failure_receipt(request, args.automation_db, "failed", exc.code)))
         return 2
     except SourceReadError as exc:
         print(canonical_json(_failure_receipt(request, args.automation_db, "failed", exc.reason)))

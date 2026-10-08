@@ -32,6 +32,22 @@ def test_incomplete_work_never_becomes_pass(state):
     assert summarize(report(state)["checks"]) != "PASS"
 
 
+@pytest.mark.parametrize("reason,expected", [
+    ("SOURCE_LANGUAGE_UNDETERMINED", "SOURCE_LANGUAGE_UNDETERMINED"),
+    ("SOURCE_LANGUAGE_PDF_UNAVAILABLE", "SOURCE_LANGUAGE_PDF_UNAVAILABLE"),
+    ("SOURCE_LANGUAGE_TEXT_EXTRACTION_FAILED", None),
+    ("NARRATIVE_BATCH_ValueError", None),
+    ("unsupported in arbitrary provider text", None),
+])
+def test_format_capability_uses_named_causes_without_calling_incomplete_a_success(reason, expected):
+    from tools.cross_market_suite.core import format_capability_gap
+    receipt = {"status": "failed", "error": reason, "documents": [{"artifact_ref": None}]}
+    assert format_capability_gap(receipt) == expected
+    receipt["documents"][0]["artifact_ref"] = "unexpected-published-artifact"
+    assert format_capability_gap(receipt) is None
+    assert summarize(report("BLOCKED")["checks"]) == "PARTIAL"
+
+
 def test_removed_failed_checkpoint_is_a_regression():
     after = report("PASS")
     after["checks"] = []

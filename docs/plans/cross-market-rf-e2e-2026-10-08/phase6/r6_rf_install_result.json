@@ -1,0 +1,84 @@
+{
+  "mode": "apply",
+  "schema": "rf-install-result/1",
+  "selected": [
+    "scripts/analysis/sensitivity.py",
+    "scripts/contracts/constants.py",
+    "scripts/contracts/document.py",
+    "scripts/research/drivers.py",
+    "scripts/research/input_evidence.py",
+    "scripts/research/input_quantities.py",
+    "scripts/research/input_targets.py",
+    "scripts/research/targets.py",
+    "scripts/revenue_report.py"
+  ],
+  "status": "completed",
+  "targets": [
+    {
+      "conflicts": [],
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills",
+      "drifted": [],
+      "failed": [],
+      "remaining_selected_drift": 0,
+      "remaining_unselected_drift": 0,
+      "selected": [
+        "scripts/analysis/sensitivity.py",
+        "scripts/contracts/constants.py",
+        "scripts/contracts/document.py",
+        "scripts/research/drivers.py",
+        "scripts/research/input_evidence.py",
+        "scripts/research/input_quantities.py",
+        "scripts/research/input_targets.py",
+        "scripts/research/targets.py",
+        "scripts/revenue_report.py"
+      ],
+      "status": "completed",
+      "target": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "unchanged": [],
+      "written": [
+        "scripts/analysis/sensitivity.py",
+        "scripts/contracts/constants.py",
+        "scripts/contracts/document.py",
+        "scripts/research/drivers.py",
+        "scripts/research/input_evidence.py",
+        "scripts/research/input_quantities.py",
+        "scripts/research/input_targets.py",
+        "scripts/research/targets.py",
+        "scripts/revenue_report.py"
+      ]
+    },
+    {
+      "conflicts": [],
+      "destination": "C:\\Users\\郑曾波\\.codex\\skills",
+      "drifted": [],
+      "failed": [],
+      "remaining_selected_drift": 0,
+      "remaining_unselected_drift": 0,
+      "selected": [
+        "scripts/analysis/sensitivity.py",
+        "scripts/contracts/constants.py",
+        "scripts/contracts/document.py",
+        "scripts/research/drivers.py",
+        "scripts/research/input_evidence.py",
+        "scripts/research/input_quantities.py",
+        "scripts/research/input_targets.py",
+        "scripts/research/targets.py",
+        "scripts/revenue_report.py"
+      ],
+      "status": "completed",
+      "target": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "unchanged": [],
+      "written": [
+        "scripts/analysis/sensitivity.py",
+        "scripts/contracts/constants.py",
+        "scripts/contracts/document.py",
+        "scripts/research/drivers.py",
+        "scripts/research/input_evidence.py",
+        "scripts/research/input_quantities.py",
+        "scripts/research/input_targets.py",
+        "scripts/research/targets.py",
+        "scripts/revenue_report.py"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "canonical": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+  "schema": "rf-install-plan/1",
+  "selected": [
+    "scripts/analysis/sensitivity.py",
+    "scripts/contracts/constants.py",
+    "scripts/contracts/document.py",
+    "scripts/research/drivers.py",
+    "scripts/research/input_evidence.py",
+    "scripts/research/input_quantities.py",
+    "scripts/research/input_targets.py",
+    "scripts/research/targets.py",
+    "scripts/revenue_report.py"
+  ],
+  "targets": [
+    {
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills",
+      "files": [
+        {
+          "before_sha256": "abb1f71f4b306739760e241672cc98e57ae8253f9bf90202cf06031d67f0373d",
+          "operation": "replace",
+          "path": "scripts/analysis/sensitivity.py",
+          "size": 11450,
+          "source_sha256": "da033d45f616ce547d71c1f2189cd6fd639eb992dc0336e0e3de6daa374056b9"
+        },
+        {
+          "before_sha256": "3ad7332e4a76e7e3e2a9a8a1ab73828584ed8b19b32327479a0f79636b2f3462",
+          "operation": "replace",
+          "path": "scripts/contracts/constants.py",
+          "size": 6142,
+          "source_sha256": "f958974573c7e59e132cadf5cc043bbadb552098f7398532ee883ed0ab271e37"
+        },
+        {
+          "before_sha256": "c2df0a229116392968152ee547818567ab40ba3813a270f68fabbfb9ea207c0d",
+          "operation": "replace",
+          "path": "scripts/contracts/document.py",
+          "size": 47358,
+          "source_sha256": "970a45271a5aa6df2748271689d32a9f7da7828a2e2612cc99f8dee941fe20b7"
+        },
+        {
+          "before_sha256": "45e3d58853c6757a0a49701d495ffb9e3e9cb0dafc2e819432cdd28af6e90e18",
+          "operation": "replace",
+          "path": "scripts/research/drivers.py",
+          "size": 21671,
+          "source_sha256": "656c50b3d3e7fc52a8637b9fe587e22fc1f0a894bfb7b343aed2ee53afd85e22"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/research/input_evidence.py",
+          "size": 13866,
+          "source_sha256": "22f258d7288ca8f7e8df4923b7f7dddb23431778e37e3b4457eeefee2a55b64a"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/research/input_quantities.py",
+          "size": 9970,
+          "source_sha256": "0217ce20bd3456122349d59dd49f4b471c4e6fc844878e561141d95a28d11f1a"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/research/input_targets.py",
+          "size": 14221,
+          "source_sha256": "0abaf3c3771250730dadf7f13294cc9c22eec586e014ebeade851361f6e7a45f"
+        },
+        {
+          "before_sha256": "1c885deaf4168bacbd7d445ec6e76da93193132fce3b6ca67fbed4e6c910c48b",
+          "operation": "replace",
+          "path": "scripts/research/targets.py",
+          "size": 33102,
+          "source_sha256": "6f1216c973035e3aed2119ac3d9bacba1914f5bad2f5ee8f5d2eab8523cd7f31"
+        },
+        {
+          "before_sha256": "c70b7aeba2619f354e76a007633baa2930ac1d8127c57a2e710d7c2c38f77e61",
+          "operation": "replace",
+          "path": "scripts/revenue_report.py",
+          "size": 74210,
+          "source_sha256": "b3d3590bcf1eb703d3d48c2f809c0f644b89a4d54461d5a0f25d6ce74ce3c1fb"
+        }
+      ],
+      "installed": true,
+      "selected_drift": 9,
+      "target": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "unselected_drift": 0
+    },
+    {
+      "destination": "C:\\Users\\郑曾波\\.codex\\skills",
+      "files": [
+        {
+          "before_sha256": "abb1f71f4b306739760e241672cc98e57ae8253f9bf90202cf06031d67f0373d",
+          "operation": "replace",
+          "path": "scripts/analysis/sensitivity.py",
+          "size": 11450,
+          "source_sha256": "da033d45f616ce547d71c1f2189cd6fd639eb992dc0336e0e3de6daa374056b9"
+        },
+        {
+          "before_sha256": "3ad7332e4a76e7e3e2a9a8a1ab73828584ed8b19b32327479a0f79636b2f3462",
+          "operation": "replace",
+          "path": "scripts/contracts/constants.py",
+          "size": 6142,
+          "source_sha256": "f958974573c7e59e132cadf5cc043bbadb552098f7398532ee883ed0ab271e37"
+        },
+        {
+          "before_sha256": "c2df0a229116392968152ee547818567ab40ba3813a270f68fabbfb9ea207c0d",
+          "operation": "replace",
+          "path": "scripts/contracts/document.py",
+          "size": 47358,
+          "source_sha256": "970a45271a5aa6df2748271689d32a9f7da7828a2e2612cc99f8dee941fe20b7"
+        },
+        {
+          "before_sha256": "45e3d58853c6757a0a49701d495ffb9e3e9cb0dafc2e819432cdd28af6e90e18",
+          "operation": "replace",
+          "path": "scripts/research/drivers.py",
+          "size": 21671,
+          "source_sha256": "656c50b3d3e7fc52a8637b9fe587e22fc1f0a894bfb7b343aed2ee53afd85e22"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/research/input_evidence.py",
+          "size": 13866,
+          "source_sha256": "22f258d7288ca8f7e8df4923b7f7dddb23431778e37e3b4457eeefee2a55b64a"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/research/input_quantities.py",
+          "size": 9970,
+          "source_sha256": "0217ce20bd3456122349d59dd49f4b471c4e6fc844878e561141d95a28d11f1a"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/research/input_targets.py",
+          "size": 14221,
+          "source_sha256": "0abaf3c3771250730dadf7f13294cc9c22eec586e014ebeade851361f6e7a45f"
+        },
+        {
+          "before_sha256": "1c885deaf4168bacbd7d445ec6e76da93193132fce3b6ca67fbed4e6c910c48b",
+          "operation": "replace",
+          "path": "scripts/research/targets.py",
+          "size": 33102,
+          "source_sha256": "6f1216c973035e3aed2119ac3d9bacba1914f5bad2f5ee8f5d2eab8523cd7f31"
+        },
+        {
+          "before_sha256": "c70b7aeba2619f354e76a007633baa2930ac1d8127c57a2e710d7c2c38f77e61",
+          "operation": "replace",
+          "path": "scripts/revenue_report.py",
+          "size": 74210,
+          "source_sha256": "b3d3590bcf1eb703d3d48c2f809c0f644b89a4d54461d5a0f25d6ce74ce3c1fb"
+        }
+      ],
+      "installed": true,
+      "selected_drift": 9,
+      "target": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "unselected_drift": 0
+    }
+  ]
+}

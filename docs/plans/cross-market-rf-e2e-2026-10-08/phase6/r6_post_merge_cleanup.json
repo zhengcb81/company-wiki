@@ -1,0 +1,22 @@
+{
+  "production_config_changed": false,
+  "roots": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r6rfproducer",
+      "bytes": 0,
+      "restored_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r6lang",
+      "bytes": 6.0,
+      "restored_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r6diag",
+      "bytes": 869.0,
+      "restored_absent": true
+    }
+  ],
+  "originals_removed": 0,
+  "schema_version": "r6-post-merge-cleanup/1"
+}

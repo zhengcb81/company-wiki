@@ -1,0 +1,39 @@
+{
+  "schema_version": "r6-installed-entrypoints/1",
+  "results": [
+    {
+      "target": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "returncode": 0,
+      "quantity": {
+        "schema_version": "rf-input-quantity/1",
+        "value": 5.0,
+        "input_unit": "pp",
+        "engine_unit": "ratio",
+        "engine_value": 0.05,
+        "conversion": "5 pp = 0.05 (1 pp = 0.01 ratio fraction)"
+      },
+      "imports": [
+        "input_quantities",
+        "input_targets",
+        "input_evidence"
+      ]
+    },
+    {
+      "target": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "returncode": 0,
+      "quantity": {
+        "schema_version": "rf-input-quantity/1",
+        "value": 5.0,
+        "input_unit": "pp",
+        "engine_unit": "ratio",
+        "engine_value": 0.05,
+        "conversion": "5 pp = 0.05 (1 pp = 0.01 ratio fraction)"
+      },
+      "imports": [
+        "input_quantities",
+        "input_targets",
+        "input_evidence"
+      ]
+    }
+  ]
+}

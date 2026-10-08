@@ -14,6 +14,22 @@ import tempfile
 STATES = {"PASS", "FAIL", "BLOCKED", "NOT_RUN", "NOT_APPLICABLE"}
 
 
+def format_capability_gap(receipt):
+    """A proved, unpublished capability gap stays BLOCKED, never PASS.
+
+    Invalid bytes, extraction bugs, arbitrary message text and a published
+    artifact with a failed receipt are failures, not capability exclusions.
+    """
+    known = {"SOURCE_LANGUAGE_UNDETERMINED", "SOURCE_LANGUAGE_PDF_UNAVAILABLE",
+             "SOURCE_LANGUAGE_UNSUPPORTED_MIME"}
+    documents = receipt.get("documents")
+    if (receipt.get("status") == "failed" and receipt.get("error") in known
+            and isinstance(documents, list) and documents
+            and all(isinstance(row, dict) and row.get("artifact_ref") is None for row in documents)):
+        return receipt["error"]
+    return None
+
+
 def sha(path):
     with Path(path).open("rb") as stream:
         return hashlib.file_digest(stream, "sha256").hexdigest()

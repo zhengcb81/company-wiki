@@ -155,16 +155,25 @@ def test_real_microsoft_format_capability(kind, loopback_model_server, record_pr
     request_path.write_text(json.dumps(request), encoding="utf-8")
     env = dict(os.environ, PYTHONPATH=str(Path(context["wiki"]) / "src") + os.pathsep +
                str(Path(__file__).resolve().parents[2] / "tools/cross_market_suite/replay_hook"), PYTHONUTF8="1")
+    started_requests = len(loopback_model_server.requests)
     call = subprocess.run([sys.executable, "-B", "-m", "company_wiki.automation.narrative_batch_cli",
         "--project-root", context["wiki"], "--catalog-config", item["config"], "--automation-db", str(store.db_path),
         "--work-dir", str(root / "jobs"), "--request", str(request_path)], cwd=context["wiki"], env=env, capture_output=True, timeout=40)
     assert call.stdout, call.stderr
     result = json.loads(call.stdout)
-    detail = json.dumps(result, ensure_ascii=False)
-    if any(term in detail.lower() for term in ("unsupported", "not_supported", "source_suffix", "source_type_unavailable")):
+    from tools.cross_market_suite.core import format_capability_gap
+    reason = format_capability_gap(result)
+    if reason:
+        assert call.returncode == 2
+        assert result["budget"]["tokens"] == result["budget"]["estimated_micro_usd"] == 0
+        assert result["budget"]["unknown_reservations"] == 0
+        assert len(loopback_model_server.requests) == started_requests
         record_property("cmrf_format_status", "BLOCKED")
-        record_property("cmrf_format_detail", "actual finite Worker refusal: " + detail[:800])
+        record_property("cmrf_format_detail", "actual finite Worker capability gap: " + reason
+                        + "; no published artifact or model call; body processing remains incomplete")
         return
+    record_property("cmrf_format_detail", "actual finite Worker outcome: "
+                    + str(result.get("status")) + "; reason=" + str(result.get("error")))
     assert call.returncode == 0 and result["status"] == "completed", (call.stderr, result)
     assert any(row.get("artifact_ref") for row in result["documents"]), result
     command = [sys.executable, "-B", "-m", "company_wiki.source_catalog.narrative_transport_cli", "--config", item["config"]]
