@@ -1,0 +1,54 @@
+{
+  "schema_version": "r3-required-budget-blocker/1",
+  "status": "blocked_audit_passed_required_answer_pending",
+  "date": "2026-10-08",
+  "previous_goal_turn": "progress: R3A producer/consumers/real-source CLI node/mainline publication completed",
+  "current_turn": "no progress toward final production acceptance: read-only revalidation found unchanged required budget blocker; not a verified process wait",
+  "blocker": "required cumulative token increase has no human reply",
+  "consecutive_appearances": [
+    {
+      "turn": "earlier producer goal turn",
+      "evidence": "r3a_producer_acceptance_2026-10-08.json",
+      "observation": "production live requires pending token increment; producer work proceeded independently"
+    },
+    {
+      "turn": "previous consumer/mainline goal turn",
+      "evidence": "r3a_consumer_acceptance_2026-10-08.json",
+      "observation": "R3A completed, R3 token increment still pending"
+    },
+    {
+      "turn": "current automatic continuation",
+      "evidence": "this current-state readonly audit",
+      "observation": "same request and limits; production AUTO/work-dir absent; no human approval or live run"
+    }
+  ],
+  "cumulative_authorized_token_cap": 200000,
+  "proposed_token_cap_requires_reply": 220000,
+  "cost_cap_unchanged_micro_usd": 120000,
+  "charged_tokens": 190035,
+  "charged_micro_usd": 100502,
+  "historical_unknown_reservations": 7,
+  "historical_fx_guard_micro_usd": 2764,
+  "authorized_remaining_tokens": 9965,
+  "required_batch_reservation_tokens": 19193,
+  "shortfall_tokens": 9228,
+  "request_file_sha256": "c795dbacb7f72460bf95177c61744c9e949c931c9adf88b7dca35591503553b7",
+  "run_id": "r3-20261008-production-deepseek-01",
+  "production_AUTO_absent": true,
+  "production_workdir_absent": true,
+  "paid_POST": 0,
+  "production_database": {
+    "bytes": 222408704,
+    "mtime_ns": 1791248158420833300
+  },
+  "protected_files_unchanged": 26,
+  "model_configuration_changes": 0,
+  "uncompleted_scope": [
+    "R3 actual production summary, zero-model policy final, public consumer/replay/semantic and same-run resume acceptance, real footprint",
+    "R5B full requirements-to-evidence audit and final publication after R3"
+  ],
+  "safe_independent_work_exhausted": "R0/R1/R2/R3A/R4/R5A and handed-off lanes completed; no additional unexecuted plan or status restatement can substitute for live R3 evidence",
+  "resume_condition": "Human answers the existing 200000 to 220000 cumulative-token request; fee cap stays $0.12. Do not ask again for already authorized source/provider data transfer.",
+  "completion_claim": false,
+  "goal_service_transition": "Set blocked after publishing this audit; not pause or complete."
+}

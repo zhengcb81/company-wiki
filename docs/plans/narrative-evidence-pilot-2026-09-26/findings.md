@@ -1,6 +1,6 @@
 # Findings：当前事实、风险与证明范围
 
-**2026-10-08，目标active。** 本页只放当前事实；历史完整调查见[6dd5601完整findings](https://github.com/zhengcb81/company-wiki/blob/6dd56011a7d49e2b8c147f2163b0708074f9edd7/docs/plans/narrative-evidence-pilot-2026-09-26/findings.md)。施工状态只取[task_plan](task_plan.md)。
+**2026-10-08，等待必要预算答复。** 本页只放当前事实；历史完整调查见[6dd5601完整findings](https://github.com/zhengcb81/company-wiki/blob/6dd56011a7d49e2b8c147f2163b0708074f9edd7/docs/plans/narrative-evidence-pilot-2026-09-26/findings.md)。施工状态只取[task_plan](task_plan.md)。
 
 ## 架构与门禁
 
@@ -27,6 +27,8 @@ R5已读8根：五G2及cw-retire-r1是closed pytest夹具；canary PDF与compani
 R3模型尚未POST，production final0。现生产TXT49段/10873B HTTP，完整19193token/14591microUSD；当前余9965token，220000累计token增量待答，费用上限0.12不变。历史190035/100502/unknown7/FX2764照计，未知usage不退款。模型配置不改；不重新要求已明确的同资料向DeepSeek外发授权。
 
 正式AUTO路径.source_catalog/automation.sqlite3目前未创建，是现有AUTO实现的首次生产实例，work-dir.source_catalog/r3；历史tmp pilot不是第二生产队列。当前请求不能说明已经有final或完整预测。R3须真实有限批次/当前消费者/恢复/真实空间一次大节点，随后R5逐条完整审计及正常发布。
+
+R3A发布后的当前只读核对：AUTO/work-dir仍absent，生产DB stat/26保护保持，正式request及配置未改。需19193token、余9965、差9228；200000→220000请求尚无答复。同一缺口连续出现在producer轮、consumer并线轮、本轮；没有已确认live R3进程可等待。其他独立部分已完成，现在不能通过换run、降低配置、裁正文、重做已绿包或写未执行计划来替代生产证据。[阻塞收据](harness_lanes/results/r3_budget_blocked_audit_2026-10-08.json)保留旧unknown/费用，目标服务发布后设blocked，收到既有必要预算答复后按原R3→R5B恢复。
 
 ## 已知错误与限制
 

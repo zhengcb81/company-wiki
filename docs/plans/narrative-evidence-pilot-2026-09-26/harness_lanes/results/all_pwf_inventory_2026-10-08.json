@@ -1,13 +1,13 @@
 {
   "schema_version": "all-pwf-plan-inventory/2",
-  "status": "R3A_complete_published_exact_CI_green_live_R3_and_final_R5B_pending",
+  "status": "required_budget_answer_pending_blocked_audit_passed_R3_live_and_R5B_unfinished",
   "previous_inventory": "all_pwf_inventory_2026-10-07.json",
   "historical_archive_commit": "6dd56011a7d49e2b8c147f2163b0708074f9edd7",
   "items": [
     {
       "path": "all_pwf_completion_implementation_2026-10-07.md",
       "title": "# 全部PWF：实际实施与完成条件",
-      "sha256": "0d8b37629e1f2ea9168bfb06f64fef1c2a47cc965dcc34fa704baee54f70bef5",
+      "sha256": "81879e3a355afd001a149c712af44be651c19fabcae16bf265e25e4356e904b1",
       "role": "current_entry_or_current_evidence",
       "unchecked_items": 0
     },
@@ -112,7 +112,7 @@
     {
       "path": "findings.md",
       "title": "# Findings：当前事实、风险与证明范围",
-      "sha256": "73e43d0d3a295dfc56a3f3a4e82c6f927657147fa8b5a09d71f347b7a5aeccd8",
+      "sha256": "919a2aa480dc4f1a5c18e2768163baeee0e46a0f14c1418916d40636c53bb153",
       "role": "current_entry_or_current_evidence",
       "unchecked_items": 0
     },
@@ -742,7 +742,7 @@
     {
       "path": "progress.md",
       "title": "# Progress：当前执行记录",
-      "sha256": "89ce17c35cddee1468130d98caf7218e9fa8c24ba255437711608c65d25ba610",
+      "sha256": "73fc7abd4a783dbd021eb9470db748da592f78ed5a31abb2a154ef855e829f4b",
       "role": "current_entry_or_current_evidence",
       "unchecked_items": 0
     },
@@ -875,7 +875,7 @@
     {
       "path": "task_plan.md",
       "title": "# 公司来源平台：唯一当前施工入口",
-      "sha256": "710a946ce2c3a6db5da06e3f8b10a1eeaca1caad139595741303aed852d76b62",
+      "sha256": "c2433bfa094d3ea6319c9eb94f4fa592867c2da6a81657047e2931cbc69bd648",
       "role": "current_entry_or_current_evidence",
       "unchecked_items": 0
     },
@@ -909,7 +909,7 @@
     }
   ],
   "verification": {
-    "current_local_links_checked": 122,
+    "current_local_links_checked": 126,
     "missing_current_links": 0,
     "historical_top_notices_checked": 120,
     "R3_post_count": 0,
@@ -924,7 +924,10 @@
     "R3A_complete": true,
     "CWP_node_head": "f0ad6b97051609c1ff278733df3135317f1df462",
     "CWP_node_CI": 37712551891,
-    "RF_exact_CI": 37712024241
+    "RF_exact_CI": 37712024241,
+    "blocker_audit": "r3_budget_blocked_audit_2026-10-08.json",
+    "consecutive_budget_blocker_appearances": 3,
+    "paid_POST_current_audit": 0
   },
   "not_a_permission_or_hash_gate": true,
   "document_count": 129

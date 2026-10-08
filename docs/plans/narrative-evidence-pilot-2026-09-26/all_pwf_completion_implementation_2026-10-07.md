@@ -1,6 +1,6 @@
 # 全部PWF：实际实施与完成条件
 
-**当前2026-10-08：目标active。** G2–G5已验收发布，R0/R1/R2/R4完成；R3真实生产pending，R5A文档/历史临时部分已做、R5B最终审计待R3。唯一状态入口[task_plan](task_plan.md)，完整历史见[6dd5601版本](https://github.com/zhengcb81/company-wiki/blob/6dd56011a7d49e2b8c147f2163b0708074f9edd7/docs/plans/narrative-evidence-pilot-2026-09-26/all_pwf_completion_implementation_2026-10-07.md)。本页保留原完整计划家族，不用已做范围替代目标。
+**当前2026-10-08：等待必要预算答复。** G2–G5已验收发布，R0/R1/R2/R3A/R4完成；R3真实生产pending，R5A文档/历史临时部分已做、R5B最终审计待R3。三轮相同缺口的[阻塞核对](harness_lanes/results/r3_budget_blocked_audit_2026-10-08.json)通过，其他独立工作已完成，发布后目标服务设blocked，完整scope保留。唯一状态入口[task_plan](task_plan.md)，完整历史见[6dd5601版本](https://github.com/zhengcb81/company-wiki/blob/6dd56011a7d49e2b8c147f2163b0708074f9edd7/docs/plans/narrative-evidence-pilot-2026-09-26/all_pwf_completion_implementation_2026-10-07.md)。本页保留原完整计划家族，不用已做范围替代目标。
 
 ## 全部计划家族与证明范围
 

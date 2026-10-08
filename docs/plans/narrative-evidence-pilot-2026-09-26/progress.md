@@ -1,6 +1,10 @@
 # Progress：当前执行记录
 
-**2026-10-08｜目标active，未全部完成。** 历史逐轮日志见[6dd5601完整progress](https://github.com/zhengcb81/company-wiki/blob/6dd56011a7d49e2b8c147f2163b0708074f9edd7/docs/plans/narrative-evidence-pilot-2026-09-26/progress.md)；不复制归档，不从历史下一步重启已绿节点。当前入口[task_plan](task_plan.md)。
+**2026-10-08｜等待必要预算答复，未全部完成。** 历史逐轮日志见[6dd5601完整progress](https://github.com/zhengcb81/company-wiki/blob/6dd56011a7d49e2b8c147f2163b0708074f9edd7/docs/plans/narrative-evidence-pilot-2026-09-26/progress.md)；不复制归档，不从历史下一步重启已绿节点。当前入口[task_plan](task_plan.md)。
+
+## 当前预算阻塞核对
+
+上一目标轮是progress：R3A实现/真实原件公共CLI/主线合并/安装/精确CI已发布。本轮只读核对没有改变生产完成状态，不算新进度或verified process wait：同request19193token需预留、余9965、差9228；AUTO/work-dir仍absent，生产DB stat/26保护不变，真实POST0。同一必要增额答复缺失已连续producer轮、consumer并线轮和本轮出现；其他独立任务已做完，R5B需要尚未产生的R3事实。阻塞核对通过，保存[收据](harness_lanes/results/r3_budget_blocked_audit_2026-10-08.json)及当前PWF后调用目标服务blocked；不把状态文档更新当生产完成进度。原scope、旧费用/unknown、既有模型配置和外发授权保持，收到既有答复后恢复R3→R5B。
 
 ## 最新进展：R3A消费者与三仓接线
 
@@ -48,4 +52,4 @@ R2初始夹具缺SHA/reader清理、错误test路径0执行、JUnit xunit2警告
 
 ## Next Step
 
-R5A、R3A及精确源码CI已完成，不重做已绿责任/三仓/安装/CI节点。token增量答复齐备再做R3唯一生产batch，预算不答不POST。使用current null请求，不伪造日期。正式final/零模型skip/当前消费者/locator/同run恢复/空间一次大节点，然后R5B完整要求审计和最终Git发布。目标保持active，本轮有真实并线发布进展，不设blocked。
+R5A、R3A及精确源码CI已完成，不重做已绿责任/三仓/安装/CI节点。当前阻塞为既有token增量答复缺失；答复齐备再做R3唯一生产batch，预算不答不POST。使用current null请求，不伪造日期。正式final/零模型skip/当前消费者/locator/同run恢复/空间一次大节点，然后R5B完整要求审计和最终Git发布。当前阻塞核对通过，发布后目标服务blocked，不mark complete，也不新增人工签收要求。

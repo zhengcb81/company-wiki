@@ -1,6 +1,6 @@
 # 公司来源平台：唯一当前施工入口
 
-**2026-10-08｜目标 active，全部PWF尚未完成。** G2–G5已验收并线发布；R2真实生产来源修正/TXT登记完成。R3尚未POST、production final仍0，必要token增量待答。R5文档与临时归属部分提前实施，最终验收须等R3。
+**2026-10-08｜等待必要预算答复，全部PWF尚未完成。** 同一预算缺口已连续三目标轮出现，其他独立工作已完成，本轮[阻塞核对](harness_lanes/results/r3_budget_blocked_audit_2026-10-08.json)通过，发布后目标服务设blocked。G2–G5已验收并线发布；R2/R3A完成。R3尚未POST、production final仍0，R5最终验收须等R3。不是暂停或完成。
 
 ## Goal与边界
 
