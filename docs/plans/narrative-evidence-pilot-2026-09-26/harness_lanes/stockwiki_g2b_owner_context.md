@@ -1,5 +1,8 @@
 # StockWiki 独占施工卡 W04：G2b owner identity context 与公开导出
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](../task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 > **最新状态（2026-09-30）：W04 已验收。**StockWiki 本地主线现为 `b4f3846`，包含 W04 原实现及 MIC Operating/Segment 关系补强；合并后的完整门 **686 passed**，Ruff、coverage 与 validate-framework 全绿。canonical request SHA 已由 IQS owner 的冻结 golden/自动断言固定。公开 CLI 的 17 个单字段负例均被拒绝，使用稳定的通用 `semantic_validation_failed` 错误码；逐 mutation 区分更细错误码可作为后续诊断改进，不阻塞本次验收。本卡不修改 IQS，也不涉及 company-wiki E7。
 
 > **跨仓范围补充（2026-10-01）：**以上关闭的是 StockWiki W04 owner-context producer/card。本地 W01/W02/W03 与 reader lanes 已并线。IQS 当前复验仍将完整 G2b 标为 partial，因为 verified/multi-listing/AnalysisSubject、有效期历史与近名生产路径等样例/能力未齐；不要把 W04 通过解释成 full G2b 完成。IQS 的后续交付由其现有 owner 负责，本卡不再派发实现任务。

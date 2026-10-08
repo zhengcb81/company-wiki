@@ -1,5 +1,8 @@
 # StockWiki 独占施工卡：身份快照与四态映射（W02/W03）
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](../task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 > **状态：W02/W03 实现和真实 serializer golden 已并入 StockWiki `master@c8cfb2e7`。**本文件是已完成实施记录，不要重复派发。它不等于 G2b 通过：IQS handoff 仍要求 owner identity receipt 与 market-registry 投影。后续 producer 工作见[W04 独立施工卡](stockwiki_g2b_owner_context.md)；不得伪造这些记录。
 
 > 这条 W02/W03 线已经结束。W04 施工卡独占 StockWiki 写入范围；IQS、company-wiki、filing-fetch、revenue-forecast、earnings-transcripts 仍为只读依赖。

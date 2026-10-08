@@ -1,5 +1,8 @@
 # G2 最后两个大节点：覆盖对账与实施（2026-10-08）
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 **Status: complete（G2 A/B已正式验收发布）。** 目标active；R2生产元数据、R3真实模型、R5收口仍未完成。源码50e42f2已推master；[精确CI37702678973](https://github.com/zhengcb81/company-wiki/actions/runs/37702678973)全部步骤success，约81秒。下文pending为实施时点，当前结论以页首为准。
 
 ## 十四组当前对账

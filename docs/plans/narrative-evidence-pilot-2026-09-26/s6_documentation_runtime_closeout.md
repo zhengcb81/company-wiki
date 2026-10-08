@@ -1,5 +1,8 @@
 # S6：当前入口、门禁与运维说明收尾
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 **状态：complete。**代码e481578872309f50141fcd2555b1e8a206bd7a47已发布master；[精确CI37399248994](https://github.com/zhengcb81/company-wiki/actions/runs/37399248994) attempt1 completed/success。38责任测试/当前12项smoke/显式架构检查/18链接GREEN，测试根恢复；原件、用户配置和RF owner均不改。下方为本节点施工追溯，不再开工。
 
 ## 2026-10-06 施工范围

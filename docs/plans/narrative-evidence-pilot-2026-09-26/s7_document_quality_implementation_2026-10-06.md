@@ -1,5 +1,8 @@
 # S7：真实文档选择质量改进细则
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 ## 当前依据与责任
 
 N5-DOCSET工具已完成MAIN实读接收；产品质量仍待改进。旧报告保持在`benchmarks/narrative_document_types/report.json`，新报告为`report-main-2026-10-06.json`：运行代码CWP c8bf461c、parser0.1.0、selector0.3.2，实际工具SHA另记在报告中。9份原件、86点全部核定位；required12/33、optional4/17、744定位全部回放、48重复span。**这些是定向标注范围的结果，不是全文覆盖率或LLM摘要质量。**

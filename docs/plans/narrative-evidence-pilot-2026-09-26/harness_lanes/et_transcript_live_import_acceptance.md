@@ -1,5 +1,8 @@
 # ET-LIVE：电话会议原文导入与 SourceRef 虚拟化验收
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](../task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 ## 任务性质
 
 状态：**一次性验收已执行并交报告；真实导入NOT RUN**。真实段只验证 `earnings-transcripts 工具 → company-wiki 临时导入 → SourceRef/SourceExport`；FF companion路由另跑现有确定性测试。此次FMP GET返回HTTP 402 entitlement，未取到正文，所以不能声称SourceRef live闭环。报告：[report.md](C:/Users/郑曾波/Projects/company-wiki-et-live-20261004/report.md)。

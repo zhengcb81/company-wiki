@@ -1,5 +1,8 @@
 # G-D：当前空间与分批实施
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 > **2026-10-03 当前入口：**G-C/B1/B3/B4已收尾；两archive、27普通旧checkout、24测试根实删合计12.166448GiB/13.06GB。完整stat全仓及剩余worktree32.82GB/0读取错误；原件和当前库不变，见[最终收尾](harness_lanes/results/gd_storage_final_cleanup_2026-10-03.md)。唯一下一步[Phase62/N4A](n4_production_batch_implementation.md) scope RED→实现，随后N4B/C真实model/持久计量/预算/终态降容，再B2调用者切换。下方候选/待清/24树不可读均为历史依据，不重新执行；managed三根实际仍在不计释放，旧Worker paused。
 
 ## 当前入口（2026-10-03，B1后实读）

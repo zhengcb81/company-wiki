@@ -1,5 +1,8 @@
 # N5：三个已分派的独立施工包
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](../task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 **最新：三包全部交付并经MAIN接收。** DOCSET工具43不同case通过、9原件/86点/744定位回放；12/33实际业务覆盖缺口按[S7细则](../s7_document_quality_implementation_2026-10-06.md)继续。RAW-DUP与ET已并线发布，DOCSET本次实际merge发布中。下方旧状态不再产生任务，不重派N5。
 
 > **最新：N5-RAW-DUP已交付e40b4ec并经MAIN集中修正；51项/9.09秒、两CLI与Ruff绿，已合入master a41244a并推远端、精确CI37523080920/57秒绿。** [验收卡](n5_raw_duplicate_main_acceptance_2026-10-06.md)；ET已验收，DOCSET交接2c3583e已到待MAIN验收，不重派。下方旧未交付叙述属历史。

@@ -1,5 +1,8 @@
 > 2026-10-03 当前施工由 [task_plan.md](task_plan.md) 的S0–S6统一定义。本文保留历史技术背景，旧审批/签收、原件处置和逐小步审查要求不再执行；原件全部保留。
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 # 六仓独占施工与总指挥集成计划（2026-09-29）
 
 > **当前派发覆盖（2026-10-03）：**G-C两consumer/B3清理器/B4两批及24测试根已完成，12.166448GiB实删/完整stat32.82GB，见[最终收尾](harness_lanes/results/gd_storage_final_cleanup_2026-10-03.md)。这四条已完成线勿重新派发。下一步[N4A](n4_production_batch_implementation.md)由CWP独占Store/Worker/Supervisor/outbox scope；模型HTTP独立新文件可在接口冻结后并行，共享Store/schema/prompt保持单owner。N4尚未实施，其他仓owner文件保留，原文保留、Worker paused。下方“本轮B3/B4”是历史编排。

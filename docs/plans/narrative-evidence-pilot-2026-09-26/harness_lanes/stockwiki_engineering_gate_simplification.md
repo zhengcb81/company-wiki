@@ -1,5 +1,8 @@
 # StockWiki 独立施工卡：简化重复工程测试门
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](../task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 > **任务与 SourceExport v2 reader 不同。** reader 已完成交接后，可把本卡交给 StockWiki owner 单独执行。唯一写入目录是 `C:\Users\郑曾波\Projects\StockWiki` 的专用集成 worktree；company-wiki、IQS、RF、FF、ET 和已完成 reader 分支只读。StockWiki 同时只允许一名写入者：开工时若 reader 仍在写、尚未交付，或本卡允许路径与 reader 的未合并改动重叠，先停在基线盘点，不改文件。
 
 ## 目标与边界

@@ -1,5 +1,8 @@
 # Transcript Provider Rights Contract v1（已退役）
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 > **状态：本合同整体退役，不可按其原条款实施。** 2026-09-28 用户确认个人项目不需要逐文件人工审查与审批。当前规则以跨仓总计划 §2.1/S4b 及自动化验收规则为准。
 
 旧版本增加的多阶段 discovery/fetch 权限收据、DownloadAuthorization、provider rights JSON、reviewer/有效期/hash pin、取前取后双重政策复核、Motley Fool/FMP 逐动作人工 gate 均不再是 company-wiki 产品要求。不要恢复这些门槛，也不要为当前来源重建 provider_use_policy.json。

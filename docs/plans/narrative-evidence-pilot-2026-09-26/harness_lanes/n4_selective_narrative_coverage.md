@@ -1,5 +1,8 @@
 # N4-T2：Chinese report and IR narrative selection coverage
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](../task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 Status: MAIN IMPLEMENTATION PUSHED (`ea9dd26`); CI SUCCESS; EXTERNAL HARNESS STILL RUNNING; RECONCILIATION PENDING
 Card date: 2026-10-04
 Owner: isolated harness; MAIN owns final real-data batch, provider calls, storage measurement, and shared PWF.

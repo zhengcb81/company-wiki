@@ -1,5 +1,8 @@
 # S7 后续质量整改实施单（2026-10-07）
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 ## 恢复点与边界
 
 当前MAIN代码c1295b1/CI37552600440全绿75秒，selector0.4.1、parser0.1.1；真实九文档27/33、761定位0失败。N6历史基线e8c645e/selector0.4.0/parser0.1.0为21/33，经营节点9bf25a5提高到27/33；原86点/33分母不变。RF main6e6b817a，daily/weekly/manifest三owner日志与CWP用户source_acquisition.yaml只读保护。上轮是实质进展，不是等待。

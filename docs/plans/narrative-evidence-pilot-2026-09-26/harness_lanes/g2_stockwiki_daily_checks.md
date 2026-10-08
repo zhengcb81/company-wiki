@@ -1,5 +1,8 @@
 # G2-SW-DAILY：StockWiki日常工程检查与大节点分离
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](../task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 > 当前状态：2026-10-07 MAIN已验收303项日常责任绿并正常快进本地master `0b48919065a912f1da10d89d36bf6bf1e659db88`，owner16文件保持。本仓无remote，不声称已推。见[MAIN收据](results/g2_stockwiki_daily_main_acceptance_2026-10-07.json)。本卡已交付，不再开工；下文为原施工合同。
 
 **实施依赖已备齐。** 这是进一步收敛工程检查的大包，不是已完成的`stockwiki_engineering_gate_simplification.md`旧卡。旧卡8d4fdf7只将两遍全套合一，刻意保留73/40及体量门；本卡清理这些真实剩余并统一入口。单独拿本卡即可执行。

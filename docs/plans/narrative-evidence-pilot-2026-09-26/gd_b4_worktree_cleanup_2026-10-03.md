@@ -1,5 +1,8 @@
 # G-D B4: exact historical worktree cleanup
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 > Frozen 2026-10-03. Root owns this card and publication; space_reaudit owns only per-root execution and result receipts. No new user approval or test gate.
 
 ## Binding and boundary

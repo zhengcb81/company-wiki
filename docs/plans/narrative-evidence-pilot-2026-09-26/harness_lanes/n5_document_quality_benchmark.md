@@ -1,5 +1,8 @@
 # N5-DOCSET：多文档类型真实质量基准
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](../task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 **complete（工具范围），不重派。** 交接2c3583e已集中接收，43不同case通过、当前主线9原件/86点/744定位全回放；required12/33的产品缺口由MAIN按[S7细则](../s7_document_quality_implementation_2026-10-06.md)推进。见[MAIN验收](n5_docset_main_acceptance_2026-10-06.md)。下方是原施工要求，不能恢复成新任务；零LLM/下载，旧golden/报告保留。
 
 ## 1. 独占目录与基线

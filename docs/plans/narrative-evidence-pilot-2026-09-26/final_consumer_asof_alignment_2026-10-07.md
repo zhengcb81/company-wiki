@@ -1,5 +1,8 @@
 # 完整核查：消费者历史日期合同对齐
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 RF main6e6b817a、StockWiki master3fe5008只读；CWP848cacf/user配置3609e707保持。StockWiki有独立quick-scan项目，不覆盖其目录/提交。本单属于总PWF，不新增人工review门或日常长测试。
 
 ## 发现与要求

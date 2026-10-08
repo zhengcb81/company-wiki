@@ -1,97 +1,57 @@
-# 全部PWF内容：实际落地与最后收口（2026-10-07）
+# 全部PWF：实际实施与完成条件
 
-**当前覆盖（2026-10-08）：**G2–G5均已验收发布。R2正式来源事实API/CLI6ae7ddc正常推master、精确CI37705927320全绿；生产4restore/九事实/ET原TXT正式登记完成，原件/未选资料/根水位保持。R3请求已按现配置实测19193tokens/14591microUSD、真实两来源DTO备妥；已询问累计220000token增量，费用0.12不变，答复前零POST。R3及R5未完成，目标active。当前执行参见[R2完成与R3交接](r2_source_preparation_implementation_2026-10-08.md)，下方旧R2待应用/18755预算是历史估计。
+**当前2026-10-08：目标active。** G2–G5已验收发布，R0/R1/R2/R4完成；R3真实生产pending，R5A文档/历史临时部分已做、R5B最终审计待R3。唯一状态入口[task_plan](task_plan.md)，完整历史见[6dd5601版本](https://github.com/zhengcb81/company-wiki/blob/6dd56011a7d49e2b8c147f2163b0708074f9edd7/docs/plans/narrative-evidence-pilot-2026-09-26/all_pwf_completion_implementation_2026-10-07.md)。本页保留原完整计划家族，不用已做范围替代目标。
 
-**当前进度（2026-10-08，G2收口）：**G5三包均已验收、并线、推送；G2十四组和最后A/B节点完成。源码50e42f2已正常推master，精确CI37702678973全部步骤success、约81秒。真实IR/TXT/真制度/错标题业务原件与当前已提交RF/SW消费者读取一致，同run新增POST0；60登记责任、42退休合同、真实组合E2E均绿，另28项门禁责任4.67秒绿。删除固定SHA人工登记规则/11项许可表及9条已退役文件基线，不减真实字节/身份/期间/locator验真。24owned临时项恢复absent，实测23415676B/518文件；原件/生产/owner零改。见[G2最终验收](g2_consolidated_node_2026-10-08.md)。下一步R2生产来源元数据与ET原语言TXT正式登记→R3真实小批次final/消费/恢复/空间→R5收口；R4有证据决定不迁移。全部PWF尚未完成，下方旧pending/paused为历史，不重开已绿长包或人工签收。
+## 全部计划家族与证明范围
 
-**当前状态覆盖（2026-10-07最新验收）：**目标active。G5三包已验收并线发布；G2-12实际FF→ET→CWP链与获取实现已发布。本轮G2-08 FF安装系统修复完成：工具26e0e60/指导main211a56f已推，精确CI37696236234success；集中26责任项无警告，补9/12定点验证不相加。真实安装按入口闭包显式8文件、两物理目标各6差异，共12更新，实际入口help/只读check通过、重复0写；未选配置/输出/其他文件及18个owner/生产保护SHA不变，原件删除0。RF旧strict_targets/coverage/mtime漏项经当前源码核对已在G3修复，不重做、不重冻baseline。见[G2-08正式验收](g2_ff_installation_acceptance_2026-10-07.md)。下一步为G2十四组当前证据/指导与最后A/B节点核对，只补未覆盖的当下行为；之后R2→R3→R5，R4不迁移决策保持。全部PWF尚未完成，不用安装或试点通过冒充完成；下方paused/待安装/三文件等为历史估计，当前状态以页首为准。
-
-**G5当前结论：**[三卡总包](harness_lanes/g5_parallel_packages_2026-10-07.md)已全部交付、验收、并线和发布，不再分派。三个交接工作树保留；MAIN实际安装和兼容pin接线已完成。详细commit/测试/CI/保护/未做范围见[G5正式验收](g5_main_acceptance_2026-10-07.md)。
-
-**G4验收（历史时点，当前结论见页首）：**两包已验收、并入实际执行分支并推远端。CWP `df7d7ba`：冻结Pipeline/Gate0–5整族退休及CN 1.3.0路由配套，211责任用例绿；精确CI37673393822所有步骤绿/74秒。SID `eb8495c`：latest分页矛盾TDD修复，127责任/真实CLI离线联调用例绿，已推`v2-clean-rewrite`；该仓无workflow，不声称远端CI。见[G4正式验收](g4_main_acceptance_2026-10-07.md)。G4不再派发。G2-03完成；完整G2-12 ensure/FF/ET/CWP入库与复用仍未提交，其他G2、R2生产应用/R3/R5未完成。总目标保持paused，本次没有恢复生产或付费批次。
-
-**上一批G3验收（历史记录）：**三个包已接收并补齐MAIN接线，两个本地主线已并入。RF `ab7a7a44`已正常推远端main（107快测绿）；CWP接线代码`b2c9e66`随`4bde75a`已正常推master，115责任用例最终绿、1921单元绿；精确CI37665222739成功84秒，RF精确CI37664909065成功31秒。详情见[g3_main_acceptance](g3_main_acceptance_2026-10-07.md)。G3不再派发；G2-04旧维护退休已完成，R4依据现有注册重复上界决定不做对象化迁移（不是释放空间）。RF真实用户安装未同步；G2-12/其他G2、R2元数据生产应用、R3和R5仍未完成。目标服务保持paused，本次仅执行用户明确要求的G3验收，并未恢复总目标/付费/生产批次。
-
-> **当前执行归属：**目标active。MAIN已完成G5三包接收、兼容pin、真实RF安装和代码发布；当前先G2-08 FF installer与定点安装，随后剩余G2收口→R2→R3→R5。已交付包不重派；历史暂停文字不产生当前门。
-
-## 用户目标与当前基线
-
-用户要求完成全部PWF计划内容并逐步实施。当前已发布CWP源码057f1cd、SID执行分支47e1059、RF main436fed68、FF main5001dcb。当前目标active，MAIN先G2-08→剩余G2收口→R2→R3→R5；源码精确CI与责任证明见G5正式验收，纯文档后续提交不要求循环重签源码pin。历史冻结baseline与owner文件保留。
-
-**当前并行：**G2/G3/G4/G5已交付均已验收，不重派；三个G5工作树保留交接。MAIN负责剩余FF安装/G2收口和生产阶段，其他仓owner文件保留。
-
-**2026-10-07优先级更新：**先[G2全面补漏](gate_simplification_reaudit_2026-10-07.md)，再R2/R3/R4/R5。现场steady迁移、核心93ac5a5、Store b202d07、scoped pin22dcc927均已发布/精确CI绿；SW/SQA日常工程门与RF可选工具已交付。MAIN当前CWP/FF latest统一请求G2-12尚未提交，13项新反例绿不等于旧责任/CLI/FF/跨进程联调完成。CWP公开旧维护与冻结家族已退休；RF历史质量读取器/仓内包装已发布，实际用户安装与FF安装/兼容仍需对账；G3/G4不再是待发任务。G2仍仅两个大节点。R2生产metadata/正式登记和R3 paid没有执行。
-
-计划文件以[逐份目录及SHA](harness_lanes/results/all_pwf_inventory_2026-10-07.json)登记。旧执行卡W0–W7、F/D卡、各并行卡与其后继方案按下表对账；不能重复跑旧命令恢复已删除全文，不能将旧审批流程或唯一raw删除重新启用。当前用户原件不丢、Dayu零代码修改、IQS独立项目不动优先。
-
-## 计划家族与完成条件对账
-
-| 计划家族 | 现状与真正待办 | 实施处理 |
+| 家族 | 实际状态/证据 | 真实剩余责任 |
 |---|---|---|
-| G1/46项/八束激进门禁精简 | 原约定入口已验收；G2八仓复核确认14组及scoped pin遗留，历史全面完成不成立 | P0核心/Store轻初始化与P0-B日常工程门/latest统一请求，P1实际公开遗留家族/工具清理；两大节点，保留自动正确性 |
-| 原设计、W0/W2–W6、E4/M3、并发恢复/检索导出/跨仓G-C | 当前SourceRef/SourceExport、AUTO/outbox、精选/原语言摘要、配置模型及恢复有已发布节点证据 | 保留验收，不重写第二套队列/reader/投资研究状态。生产使用另按R2/R3 |
-| W1来源分类与无翻译ET统一管理 | ET/FF正式接口已交付；**生产S05/S06仍other、S01–S04仍retired且缺公开日、S09未登记**，试点fixture不能代替生产元数据 | R1修正式扫描器融资分类；R2核实来源/公开日/期间和retired原因，经现有入口登记/更新；不猜日期或直接UPDATE恢复retired |
-| S7/DOCSET质量 | 29/33必需、761定位回放；纯融资金额、纯财务guidance、正文外provider摘要及同源另页canonical产能已解释，golden不变 | 当前4个miss不盲目“修满分”；保留29/33和定位级覆盖，新增生产实际业务质量检验。发现新增业务漏项才TDD修责任层 |
-| N4真实模型/生产composition | 四类真实模型在隔离根验收、正式链可用；生产final0 | R3真实来源正式有限批次，成功final持久可读、同run恢复不增对象；预算获明确增量后才新POST。不用Replay冒充生产摘要 |
-| F0–F5、S5/S6、D旧删除提案 | 已净释放5659443210B，原件删除0；历史唯一低价值raw删除已取消 | 不重做整库迁移/备份恢复、不删唯一raw，原文去重依据N5实证，不把7.8GB登记上界当可回收物理量 |
-| N5 RAW-DUP与R5可选对象化 | 只读工具完成；已读3组约158MB跨根，CWP内部收益未证明，外根只读 | R4一次只读CWP内部候选核实、给真实收益/是否值得的决策；收益不足不强行迁移对象库，不动Dayu/Dropbox |
-| FF/ET联调、各外包、主线合并 | 已正式交付并线及对应CI，日期缺口已修复 | 复用已交付SHA，不重新派发；生产跨仓再用当前已提交consumer，不接入IQS活动队列 |
-| 完整预测/投资研究 | 当前PWF要求只读来源reader/adapter，未授权CWP产生正式研究；“自动完整研究”不是此来源平台writer目标 | R3将真实生产NarrativeRef读入RF/StockWiki既有公开consumer，不新增CWP研究状态；不把consumer读成功称全预测算法运行 |
-| R7快CI与TDD | 正常静态commit/短push/单Ubuntu快速CI已实现 | 本次新增行为先RED→责任包；生产联调/空间恢复集中节点，不每天跑全部PDF或全部跨仓套件 |
-| R8PWF收敛 | task_plan短入口完成；findings/progress仍近千行，历史卡最新状态散落 | R5压缩当前三入口/README与历史卡导航，历史原文在固定Git9a18e6d；不复制大归档，不掩盖errors与真实remaining |
+| G1/46项/八束/G2十四组门禁 | [G2最终验收](g2_consolidated_node_2026-10-08.md)：稳态/许可/签收/工程工具/FF-RF安装全部发布，50e42f2/精确CI绿 | 不重启人工链；R5只最终核状态和归属 |
+| 原设计、W0/W2–W6、E4/M3、AUTO并发恢复、G-C跨仓 | 来源虚拟接口/精选原语言/有界多文档与独立模型子进程、lease/generation/outbox/kill/ACK/资源恢复已验收 | R3实际生产组合使用既有实现，不重造第二reader/队列/研究state |
+| W1来源类型/ET/半年季报/招股/融资/IR | R1分类与R2正式来源应用完成，详[R2细则](r2_source_preparation_implementation_2026-10-08.md)，6ae7ddc/精确CI37705927320绿 | R3只用当前真实SourceRefs；未知公开日不伪造 |
+| S7/N5 DOCSET及N6三线 | selector0.4.2/parser0.1.1，九样本29/33、761定位，四required miss解释/optional取舍/重复6保留；[实施单](s7_followup_quality_implementation_2026-10-07.md) | R3新final需逐条核经营事实/角色/来源支持，不能从合法locator推出语义覆盖满分 |
+| N4/S4/R6真实模型/局部摘要 | 四类真实模型隔离验收、run10业务复核、R6局部恢复已发布 | R3正式生产final0这个真实缺口必须填，不拿loopback/隔离final替代 |
+| F0–F5/S5/S6/D旧派生清理 | [生产收据](harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json)：5659443210B净释放/raw0，来源事实保留 | 不恢复46GB整备份作演练、不删唯一原件，R3/R5实际增量计量 |
+| N5 RAW-DUP/R4对象化取舍 | G3已读内部逻辑上界94.3MiB/实际额外34.5MiB、allocation未知，证据决定不迁移 | 已complete，不虚报释放GB、不动外根 |
+| FF/ET/各外包及多仓并线 | [G3](g3_main_acceptance_2026-10-07.md)、[G4](g4_main_acceptance_2026-10-07.md)、[G5](g5_main_acceptance_2026-10-07.md)及早期收据已发布；当前接口/定点安装完成 | R3使用当前已提交RF/SW消费者；R5最后只读Git核对，不覆盖owner/IQS，不写Dayu |
+| FMP及Koyfin/SeekingAlpha/旧ET比较 | [费用/能力调查](provider_cost_and_capability_2026-09-27.md)、[电话会比较](earnings_transcripts_vs_platforms_2026-09-27.md)、真实402边界；无价值不加provider | 不冒称付费能力或现金账单硬预算已实测；不因原全计划强行新增订阅/provider |
+| 完整投资研究/预测 | 现PWF只要求来源reader/adapter，CWP上游不能生成投资state | R3实际readonly消费，不假称全预测算法已跑或CWP正式研究writer |
+| R7快CI/TDD与R8 PWF | 正常静态commit/短push/单Ubuntu Unit+精选合同，源码精确CI绿；当前三入口已压缩 | 只在大的剩余节点测试/审计；R5B最终requirements→evidence不能缩范围 |
 
-## R1 正式融资文档分类（零费用，先TDD）
+原102项目录与当前增量目录保留为导航，不是hash许可或新签收。[历史入口目录](harness_lanes/results/all_pwf_inventory_2026-10-07.json)中的旧unchecked/paused按上述后继方案对账，不重新执行退休命令。
 
-**Status:** complete
+## R0/R1/R2 已完成
 
-代码66ce046已推master，精确CI37578307854全部job/step绿79秒；责任45pass与真实两PDF公共CLI2pass，六新测试根已恢复absent。
-
-实际scanner._classification只认识普通prospectus，未识别equity_offering_prospectus/convertible_bond_prospectus。生产S05/S06为other。先用独立当前schema目录/原件夹具建立反例：显式sidecar融资类型、精确“股票募集说明书/可转换公司债券募集说明书”标题（大小写.PDF）、一般债券募集文件、broker点评及最高优先级sidecar；含“发行股票董事会公告”等不能误当招股。保持SourceType.PROSPECTUS现有族（实际枚举PROSPECTUS）、source/document ID按原SHA不变，不为了分类重下载。新增行为先真实RED，再最小scanner实现，集中责任测试及扫描二次幂等。生产元数据迁移属于R2，不能拿Unit绿说生产已改。
-
-## R2 生产来源准备与请求编制（零模型）
-
-**Status:** complete（2026-10-08正式生产应用/请求备妥；预算增量答复属于R3执行前限制）
-
-本阶段有限登记/单次权威SHA/AUTO范围SQL与终态零子进程/steady源码已发布2cad90d，202责任项与精确CI绿。现场steady迁移归G2-00首先实施；其他生产metadata和正式请求在G2两个节点后继续，不重复已绿代码验收。
-
-只读事实调查可由[G3-SOURCE-FACTS](harness_lanes/g3_source_metadata_and_raw_space.md)提前完成，不修改生产。MAIN收到metadata_proposals后核当前事实，经本阶段正式有限入口应用；调查报告不代表已登记或已生成生产final。
-
-已修复历史缺陷：CanonicalSourceWriter曾每次新增全扫company_raw，扫描器曾没有按文件入口。2cad90d已TDD实现单根显式relative_paths有限登记：保留相同group完整成员，未选组及根完整扫描水位不改，不做missing sweep；拒绝空集/越界/未命中。常规全扫描保留，canonical import仅登记刚写入组；202责任与精确CI已绿，不重造scanner或重跑该节点。当前R2生产metadata更新直接使用此正式入口，不patch扫描器、不全库23GB重扫。
-
-1. 只读核实际来源、位置/版本、acquisition sidecar与原件；S01–S04retired原因按正式journal/scan记录追溯，不能因文件在就复活撤回版本。S05/S06以明确来源类型迁移，不改raw或source SHA；S08表中活动日期与published_date2023-12-31冲突须记录，不能直接抄文件名为公开日。
-2. 原文日期/证券/期间以官方公告元数据、可复核来源记录为依据，经现有SourceCatalog写入口更新或登记。缺公开日保持unknown，禁止临时fixture进生产。只修首批实际请求来源；不先全库metadata/全文回填。
-3. ET旧TXT通过现有接口复用/导入公司目录；旧侧录缺失保持legacy_unverified，既有工具校验正文SHA与ticker/期次，新生产manifest不得伪造历史provider receipt。不改ET原件、不翻译、不启动scraper遍历历史。
-4. 首批优先一个元数据可核的有价值IR/TXT，及一个纯流程零模型skip；复用真正原件SHA，统一既有AUTO Store、P4计算3/模型1。不新建生产第二任务库。每个run有唯一work-dir、明确source refs、时间/token/费用/空间上限及可复用的请求。保存小元数据/预算预检，不保存全文转换。
-5. 根据正式Config（MiMo v2.6-flash/DeepSeek flash/8192温度1.0）计算实际完整请求最坏预留，旧190035token/100502microUSD/未知7/FX2764照计。现余9965token/16734microUSD不足已测完整请求18755，**新目标不是预算增量授权**。准备可审查的具体资料/目的地/请求与增量，再询问必要额度；期间完成零费用步骤。
+R0逐份对账明确真实生产final0、来源字段和消费缺口。R1正式融资分类66ce0467/真实两PDF CLI/精确CI绿。R2当前101责任+九真实原件隔离E2E全绿；源码6ae7ddc发布/精确CI全步骤success，生产restore4、九source-facts、旧ET TXT66324B+metadata589B完成。来源ID/SHA/原capture及未选文档/根水位保持，重复0新增。具体请求、六表差异、原件保护和错误见[R2](r2_source_preparation_implementation_2026-10-08.md)。不要再次恢复/登记整个库。
 
 ## R3 真实生产有限批次及跨仓验收
 
-**Status:** pending
+**Status: pending，token增量待答。** 已明确同S09精选片段→DeepSeek外发授权持续有效；当前费用上限0.12不变。已占190035token/100502microUSD/unknown7/unsettled0、FX2764照计，当前余9965token/16734microUSD，完整19193token不够。提出累计220000token未获答复前零POST；不能以新目标或完整请求JSON当作增额许可。
 
-先隔离E2E验证R1/R2新增公共行为，测试根最初absent、finally恢复；真实下载/副本/SQLite/子进程测试结束不得留下。生产保留成功final属于正式运行，不是测试残留。
+[完整DTO](harness_lanes/results/r3_production_batch_request_2026-10-08.json)与[零POST实际预检](harness_lanes/results/r3_production_request_preflight_2026-10-08.json)：生产S09+active真制度，P4计算3/模型1，max_seconds180、单batch19193token/$0.014591，按Config DeepSeek Flash/8192/温度1/default thinking/timeout。不改配置/价格、裁正文或换供应商绕限。未知公开日保持，不给予as-of资格。canonical AUTO目前未建立，用现有Store实现首次生产实例，不加第二任务框架；历史pilot usage保留。
 
-真实调用前核RF最新HEAD/status，不碰owner日志/其他研究目录。请求由现有配置加载，保留未知usage预留，显式batch，失败局部保留状态与可恢复事实。外发仅明确批准原件和配置供应商；不通过改max_tokens、thinking、超时或价格绕预算。真实来源至少一份有价值业务final和一份纯流程skip（后一份0模型）；逐条核原语言/角色/来源支持和locator，短摘要不重复全文，记录final大小、AUTO/对象/数据库/WAL总增量、scratch峰值。
+**只有必要token增量答复后执行**（cwd为CWP；目录.source_catalog/r3起初不存在）：
 
-正式reference/read/search/exact及RF/StockWiki当前主线CLI消费；检索结果精确回放。相同run再执行：原final/ref不变，model请求0、费用不重复，终态临时正文收敛。未来公开/版本改变等既有反例复用责任包，不在生产造坏数据。此节点后production final不为0，不能用隔离数据库统计代替；不声称已处理全库或自动投资研究。
+```powershell
+python -B scripts/narrative_batch_configured.py --llm-provider deepseek --project-root . --catalog-config config/source_catalog.yaml --automation-db .source_catalog/automation.sqlite3 --work-dir .source_catalog/r3 --request docs/plans/narrative-evidence-pilot-2026-09-26/harness_lanes/results/r3_production_batch_request_2026-10-08.json
+```
 
-## R4 原件空间与可选去重决策
+使用同request/run_id恢复，不能改run/重启账本来再POST。单batch恰为一个完整请求预留，实际请求收费后余额不能再容纳同请求；未知响应保留预留。失败保存局部可恢复事实与安全诊断，不保留provider全文/密钥或伪结算unknown。成功生产final是正式资料，不是测试残留。
 
-**Status:** complete — 按证据选择不迁移；raw删除0
+一次R3大节点（用真实输出和当前已提交消费者）：
 
-复用N5工具只读元数据候选，精确限定company_raw内部distinct physical copies，有限读取预算、拒绝云占位hydrate，原件不修改。所有source/version/location引用保留；输出实际实读duplicate上界与allocation未知。只有可量化收益与现行reader调用者迁移充分时才写下一步对象化施工细则；若只存在跨根副本/收益小，本计划以“不做无收益迁移”的证据决策完成本可选项，不假称已释放。用户最新“全部计划”不等于删除唯一原件或写外部Dayu。
+1. source facts/ref实际匹配，至少一个有价值业务final和真制度skipped_no_narrative/模型0；新production final确实非0。原语言/no translation；逐claim核来源支持、经营主题和说话角色，完整locator回放；partial/needs_review是诊断，不需人工签收。
+2. 正式NarrativeRef/reference/read/list/search/exact及RF/StockWiki当前主线消费者读取相同版本/证据。使用已提交package/config，不混owner WIP。CWP不写下游研究目录；未知公开日的as-of请求诚实拒绝，不为消费伪造日期。
+3. 相同request/run重复执行：ref/final/对象不变、模型新增POST0、费用不重复、终态临时正文收敛。复用已绿kill/ACK/源变反例，不在生产造坏数据。
+4. 实测objects/final/AUTO/catalog DB-WAL/恢复facts/log/scratch峰值及终态占用；单final2MiB、持久增量1GiB、scratch2GiB现限保持。记录provider usage或未知预留，现金账单未知不假称0费。
+5. 测试消费者/只读联调资料用独立短目录，测试结束恢复absent；正式生产成功final保留。核原件/config/owner保护，正常提交/push及对应代码CI（没有源码变化不重复CI）。
 
-本轮调查输出委托G3-SOURCE-FACTS同一只读卡，主线保留最终收益决策与任何后续迁移设计。它不重做N5工具、不把跨根历史样本当内部物理收益。
+## R4 原件去重决策
 
-MAIN本次接受G3上界：内部已注册逻辑重复98,845,393B（94.3MiB）、实读distinct额外副本36,191,979B（34.5MiB），allocation/releasable unknown。这个上界仅针对登记库，不声称已盘清未登记原件或已释放磁盘。收益小且引用迁移成本高，当前不做对象化；256MiB不是资格门。不再重复派R4调查/重读或删除原件。R2/S07/S08/S09实际入库与R3仍pending。
+**Status: complete。** 内部登记重复逻辑98845393B、实际extra36191979B、allocation/releasable unknown，收益小，决定不对象化。保留原件/来源/版本/location，不重读全根、删除外根或伪报释放。当前真实原件96.3%逻辑量，不把整体原文大小当派生膨胀。
 
 ## R5 最终PWF/主线发布收口
 
-**Status:** pending
+**Status: in_progress，A已实施，B待R3。** [R5细则](r5_cleanup_and_navigation_implementation_2026-10-08.md)：当前三入口/README/实施单压缩、120历史卡顶层当前导航，完整历史固定6dd5601；8 owned临时根先归属/无占用/无reparse/tracked0再删119913476B/1123文件，26 SHA/生产DB stat保持。pilot预算/恢复事实、原件/外包交接/owner保留。
 
-MAIN压缩当前findings/progress，保留当前目标、未完成、真实错误、保护文件、预算、验收、单一Next Step；历史正文使用Git9a18e6d固定链接。更新主计划各状态/README/完成证据顶部及所有相关交付卡的当前状态链接，避免弱模型恢复旧队列。
-
-代码正常commit/push，精确对应代码CI全部执行步骤终态绿。纯收据/文档不重复代码CI。新根清理前核精确路径/所有权/无reparse、原件及用户文件指纹；生产库预期元数据/新增final写入需逐表小范围变化账，不能要求合法新增后整个DB SHA仍等于旧库。若仅生产状态使用无源码变化，不触发多余CI。所有真实必要条目及预算/外部依赖未闭合时目标仍未完成；目标服务当前active，不能靠更改Status或排除待办完成。
-
-## 错误记录
-
-首次resolver使用-CheckAmbiguity仅做探针不返回目录，已不带该flag显式PLAN_ID解析到本目录。两次Python中文stdout乱码是编码设置，文件UTF8未损；后续PYTHONIOENCODING=utf-8。三次猜测implementation_spec.md/n5_raw_duplicate_advisor.md/NARRATIVE_RUNTIME.md不存在，已按实际文件名及docs/source-catalog.md查阅，不新建替代契约或忽略缺文件。
+B必须检查本页各家族和具体R3要求→authoritative证据→当前结果，真实R3尚未做时不complete。最终只读各仓HEAD/执行分支/远端、owner脏树归属、保护/新产物/临时目录/有效source refs；SID简易执行分支与SW无remote不伪报成所有main远端齐平。正常commit/push，源码精确CI对应actual SHA，纯文档复用已绿。目标服务只有全scope证据齐全才complete；不能因额度或卡交付完成而停成完成。

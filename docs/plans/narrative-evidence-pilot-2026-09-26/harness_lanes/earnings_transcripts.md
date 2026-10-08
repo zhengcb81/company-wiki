@@ -1,5 +1,8 @@
 # ET 独占施工卡：精确期次的原语言电话会议工具
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](../task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 > **2026-10-01 当前状态：**本仓 `main@4924d57` 已于本轮正常推送到 `origin/main`。精确 FY/Q、未翻译 `/1`、可选原始 payload `/2`、Motley 三入口默认禁用、FMP/Motley producer goldens 和单一请求内 `download_authorized` 网络意图已实现；旧 `--allow-download` 仅兼容 CLI 参数。离线全套 118 passed、2 deselected。FMP 真请求曾返回 402，真实 provider 权益未证实。FF→ET→CWP 汇合仍待 FF owner 完成，主要合同差异是 FMP 26 字段、Motley 24 字段与 CWP importer 当前只接受 Motley 形状。`eval_results.json` 和 `.workbuddy-ai/memory/` 由 ET PWF 记为既有本地评测/工具笔记，本轮保留。下方实现顺序是历史施工说明；不重复实现已完成的 ET producer。
 
 > 可单独交给一个 earnings-transcripts harness。**唯一写入目录**：`C:\Users\郑曾波\Projects\earnings-transcripts\earnings-transcripts` 及其由 owner 创建的独立 worktree。company-wiki、filing-fetch、revenue-forecast 等只读；本卡不授权更改那些仓。开工前读本仓当前 Git/PWF 并保存有效未提交代码，别按 2026-09-28 缓存 SHA 直接 reset。

@@ -56,6 +56,6 @@ python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml ex
 
 commit 只做相关静态检查；push 跑一组快速行为测试，CI 跑全 Unit 与同组 smoke。完整集成、真实资料 E2E 在大的实施节点运行，测试根恢复原样；不要求 Reviewer、授权 JSON 或人工 lock。
 
-2026-10-06 旧 derived 与全量 span 清理已完成，来源库降至约 222MB，原件保留。详情见[生产清理结果](docs/plans/narrative-evidence-pilot-2026-09-26/harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json)。不要求历史来源全部重跑模型。N4C 真实模型批次仍按主计划推进，不能把 Replay 或工具测试当作实际 LLM 验收。
+2026-10-06 旧 derived 与全量 span 清理已完成，来源库降至约 222MB，原件保留。详情见[生产清理结果](docs/plans/narrative-evidence-pilot-2026-09-26/harness_lanes/results/s5_production_storage_acceptance_2026-10-06.json)。不要求历史来源全部重跑模型。N4C 真实模型隔离试点已验收，R2 生产来源事实和电话会 TXT 已登记；R3 首个正式生产摘要与当前跨仓消费仍按主计划推进。不能把隔离 final、Replay 或工具测试当作已经完成生产运行。
 
 旧 collect_news、ingest、研究 Wiki writer、全库 normalize/summarize、常驻 Worker 启动及旧 cron 包装器均不作为运行入口。旧 Source Export v1 合同供显式兼容；新消费者默认 v2。

@@ -1,5 +1,8 @@
 # G4-SID-LATEST：按as-of发现A股最新财报
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](../task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 **状态：complete / accepted / published（provider范围）。SID eb8495c已并/推正式v2-clean-rewrite；CWP df7d7ba路由已接1.3.0，127责任/真实离线CLI合同绿。完整ensure/FF/ET/CWP入库复用仍归MAIN G2-12，不是本卡已完成范围。**
 
 正式收据：[G4 MAIN验收](../g4_main_acceptance_2026-10-07.md)。以下为已完成施工细则/历史基线，不再重新开工。

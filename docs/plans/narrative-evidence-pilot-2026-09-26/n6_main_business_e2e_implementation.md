@@ -1,5 +1,8 @@
 # N6 MAIN：最终业务E2E施工细则
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 ## 当前状态与边界
 
 上一目标回合为progress：冻结兼容测试/33点业务解释已提交并推，0947cea精确CI80秒绿，文档ccd9589已推。当前RF main仍6e6b817a；owner dirty新增daily_alert.jsonl，连同weekly_alert/weekly_manifest保护，不能恢复。N6三worktree仍为已分派bootstrap，未收到完整交付，不声称有确认live进程。

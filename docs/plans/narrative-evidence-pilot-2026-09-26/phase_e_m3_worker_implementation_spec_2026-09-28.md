@@ -1,5 +1,8 @@
 # Phase E / M3：多文档并发 Worker 详细施工卡（2026-09-28）
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 > **状态：实施前冻结稿。** 本文件先于任何 Phase E 产品代码提交。只有本卡单独提交、工作树可解释后，才按本文顺序进入 TDD 实施。
 >
 > **生产边界：** Phase E 不启动生产 Worker，不扫描生产目录，不删除 raw，不真实调用付费 LLM，不修改 revenue-forecast、filing-fetch、StockWiki 或 earnings-transcripts。所有写入型测试只使用经校验的 `C:\cwt\m3-*` 独立根，测试结束在 `finally` 中恢复原状。

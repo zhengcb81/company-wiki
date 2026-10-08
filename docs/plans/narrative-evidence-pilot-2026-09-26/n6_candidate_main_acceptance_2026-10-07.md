@@ -1,5 +1,8 @@
 # N6-CANDIDATE 主线集中验收与两质量线组合
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 ## 最新查收复核（2026-10-07）
 
 用户再次通知交付后，MAIN核对正式HANDOFF/JSON、lane提交及主线收据：f31cc0d和实际merge e8c645e均为当前HEAD ed2dc51祖先，真实远端master为ed2dc51，远端lane为f31cc0d；本卡已接收、合入并发布，不重复合并。GitHub实时查询CI37547043642对应e8c645e，attempt1、job112553429162及全部步骤success。

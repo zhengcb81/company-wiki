@@ -1,0 +1,1450 @@
+{
+  "schema_version": "r5-temporary-ownership/1",
+  "status": "classified_ready_for_owned_cleanup",
+  "roots": [
+    {
+      "path": ".planning/g2-latest-red",
+      "exists": true,
+      "bytes": 6038719,
+      "files": 119,
+      "extensions": {
+        ".sqlite3": 18,
+        ".pdf": 8,
+        ".jsonl": 17,
+        ".acquire": 34,
+        ".sqlite3-shm": 17,
+        ".sqlite3-wal": 17,
+        ".json": 7,
+        ".txt": 1
+      },
+      "reparse_paths": [],
+      "tracked_files": [],
+      "largest": [
+        {
+          "path": ".planning/g2-latest-red/test_staging_root_cannot_overl0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 258048
+        },
+        {
+          "path": ".planning/g2-latest-red/test_retryable_fetch_uses_same0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 258048
+        },
+        {
+          "path": ".planning/g2-latest-red/test_readonly_latest_keeps_met0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 258048
+        },
+        {
+          "path": ".planning/g2-latest-red/test_old_gap_hash_policy_and_e0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 258048
+        },
+        {
+          "path": ".planning/g2-latest-red/test_latest_uncharged_provider0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 258048
+        },
+        {
+          "path": ".planning/g2-latest-red/test_latest_tied_distinct_acce0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 258048
+        },
+        {
+          "path": ".planning/g2-latest-red/test_latest_intent_without_sna0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 258048
+        },
+        {
+          "path": ".planning/g2-latest-red/test_latest_does_not_invent_pr2/project/.source_catalog/catalog.sqlite3",
+          "bytes": 258048
+        }
+      ],
+      "document_files": [
+        {
+          "path": ".planning/g2-latest-red/test_staging_root_cannot_overl0/project/companies/original.pdf",
+          "bytes": 23,
+          "sha256": "086ecb42032c0918848b6294c9a6cea3522574705c8cf1672335e4f1d61b3840"
+        },
+        {
+          "path": ".planning/g2-latest-red/test_retryable_fetch_uses_same0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2-latest-red/test_old_gap_hash_policy_and_e0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2-latest-red/test_latest_intent_without_sna0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2-latest-red/test_latest_does_not_invent_pr2/project/companies/ACME/raw/financial_reports/quarterly/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2-latest-red/test_latest_does_not_invent_pr1/project/companies/ACME/raw/financial_reports/quarterly/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2-latest-red/test_latest_does_not_invent_pr0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2-latest-red/test_invalid_receipt_cleans_on0/staging/other-target/keep.txt",
+          "bytes": 27,
+          "sha256": "6149def9073b14a6ff441c56ce1453abc68c25d7e25e0326497e7c13b6e7476b"
+        },
+        {
+          "path": ".planning/g2-latest-red/test_cleanup_failure_never_jou0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        }
+      ],
+      "classification": "closed pytest fixtures; child directories named test_*; no user download originals",
+      "largest_document_bytes": 27,
+      "top_children": [
+        "test_cleanup_failure_never_jou0",
+        "test_discovery_budget_exhausti0",
+        "test_future_publication_is_nev0",
+        "test_import_failure_cleans_sta0",
+        "test_invalid_receipt_cleans_on0",
+        "test_latest_checks_candidate_i0",
+        "test_latest_checks_candidate_i1",
+        "test_latest_checks_candidate_i2",
+        "test_latest_does_not_invent_pr0",
+        "test_latest_does_not_invent_pr1",
+        "test_latest_does_not_invent_pr2",
+        "test_latest_intent_without_sna0",
+        "test_latest_tied_distinct_acce0",
+        "test_latest_uncharged_provider0",
+        "test_old_gap_hash_policy_and_e0",
+        "test_readonly_latest_keeps_met0",
+        "test_retryable_fetch_uses_same0",
+        "test_staging_root_cannot_overl0"
+      ],
+      "references": [
+        "g4_protection_before_2026-10-07.json preserves prior generated config SHA for G2 roots",
+        "G2 published API/chain/retirement receipts and current unit fixtures",
+        "cw-retire-r1 test_prune_* / test_archive_* are frozen legacy fixture names"
+      ],
+      "decision": "remove_closed_fixture_root"
+    },
+    {
+      "path": ".planning/g2cliR",
+      "exists": true,
+      "bytes": 676,
+      "files": 7,
+      "extensions": {
+        ".json": 1,
+        ".yaml": 6
+      },
+      "reparse_paths": [],
+      "tracked_files": [],
+      "largest": [
+        {
+          "path": ".planning/g2cliR/test_close_gap_cli_uses_one_in1/project/config/source_catalog.yaml",
+          "bytes": 277
+        },
+        {
+          "path": ".planning/g2cliR/test_close_gap_cli_uses_one_in0/project/config/source_catalog.yaml",
+          "bytes": 277
+        },
+        {
+          "path": ".planning/g2cliR/test_close_gap_cli_uses_one_in1/project/scope.json",
+          "bytes": 72
+        },
+        {
+          "path": ".planning/g2cliR/test_close_gap_cli_uses_one_in1/project/config/source_catalog_worker.yaml",
+          "bytes": 23
+        },
+        {
+          "path": ".planning/g2cliR/test_close_gap_cli_uses_one_in0/project/config/source_catalog_worker.yaml",
+          "bytes": 23
+        },
+        {
+          "path": ".planning/g2cliR/test_close_gap_cli_uses_one_in1/project/config/source_acquisition.yaml",
+          "bytes": 2
+        },
+        {
+          "path": ".planning/g2cliR/test_close_gap_cli_uses_one_in0/project/config/source_acquisition.yaml",
+          "bytes": 2
+        }
+      ],
+      "document_files": [],
+      "classification": "closed pytest fixtures; child directories named test_*; no user download originals",
+      "largest_document_bytes": 0,
+      "top_children": [
+        "test_close_gap_cli_uses_one_in0",
+        "test_close_gap_cli_uses_one_in1"
+      ],
+      "references": [
+        "g4_protection_before_2026-10-07.json preserves prior generated config SHA for G2 roots",
+        "G2 published API/chain/retirement receipts and current unit fixtures",
+        "cw-retire-r1 test_prune_* / test_archive_* are frozen legacy fixture names"
+      ],
+      "decision": "remove_closed_fixture_root"
+    },
+    {
+      "path": ".planning/g2g2",
+      "exists": true,
+      "bytes": 19444377,
+      "files": 395,
+      "extensions": {
+        ".sqlite3": 59,
+        ".json": 44,
+        ".sqlite3-shm": 56,
+        ".sqlite3-wal": 56,
+        ".acquire": 92,
+        ".pdf": 36,
+        ".htm": 1,
+        ".jsonl": 37,
+        ".py": 3,
+        ".txt": 2,
+        ".csv": 7,
+        ".md": 1,
+        ".yaml": 1
+      },
+      "reparse_paths": [],
+      "tracked_files": [],
+      "largest": [
+        {
+          "path": ".planning/g2g2/test_writer_dedup_ignores_dayu0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 274432
+        },
+        {
+          "path": ".planning/g2g2/test_writer_registers_exact_gr0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 266240
+        },
+        {
+          "path": ".planning/g2g2/test_writer_reactivates_retire0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 266240
+        },
+        {
+          "path": ".planning/g2g2/test_writer_reactivates_previo0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 266240
+        },
+        {
+          "path": ".planning/g2g2/test_writer_disambiguates_comm0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 266240
+        },
+        {
+          "path": ".planning/g2g2/test_writer_deduplicates_downl0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 266240
+        },
+        {
+          "path": ".planning/g2g2/test_writer_atomically_imports0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 266240
+        },
+        {
+          "path": ".planning/g2g2/test_zr407_newer_revision_is_a0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 258048
+        }
+      ],
+      "document_files": [
+        {
+          "path": ".planning/g2g2/test_writer_registers_exact_gr0/project/companies/示例公司/raw/financial_reports/annual/2026-03-20_cninfo_announcement-2025_示例公司2025年年度报告.pdf",
+          "bytes": 38,
+          "sha256": "e7975329c29e48242a591f56ddbe76ed17937b31c758fecdb1f83e96a1d19f70"
+        },
+        {
+          "path": ".planning/g2g2/test_writer_reactivates_retire0/project/companies/示例公司/raw/financial_reports/annual/2026-03-20_cninfo_announcement-2025_示例公司2025年年度报告.pdf",
+          "bytes": 38,
+          "sha256": "e7975329c29e48242a591f56ddbe76ed17937b31c758fecdb1f83e96a1d19f70"
+        },
+        {
+          "path": ".planning/g2g2/test_writer_reactivates_previo0/project/companies/示例公司/raw/financial_reports/annual/2026-03-20_cninfo_announcement-2025_示例公司2025年年度报告.pdf",
+          "bytes": 38,
+          "sha256": "e7975329c29e48242a591f56ddbe76ed17937b31c758fecdb1f83e96a1d19f70"
+        },
+        {
+          "path": ".planning/g2g2/test_writer_disambiguates_comm0/project/companies/示例公司/raw/financial_reports/annual/2026-03-20_cninfo_announcement-2025_示例公司2025年年度报告.pdf",
+          "bytes": 38,
+          "sha256": "e7975329c29e48242a591f56ddbe76ed17937b31c758fecdb1f83e96a1d19f70"
+        },
+        {
+          "path": ".planning/g2g2/test_writer_dedup_ignores_dayu0/project/companies/示例公司/raw/financial_reports/annual/2026-03-20_cninfo_announcement-2025_示例公司2025年年度报告.pdf",
+          "bytes": 38,
+          "sha256": "e7975329c29e48242a591f56ddbe76ed17937b31c758fecdb1f83e96a1d19f70"
+        },
+        {
+          "path": ".planning/g2g2/test_writer_dedup_ignores_dayu0/dayu/portfolio/MDB/filings/fil_x/same.htm",
+          "bytes": 38,
+          "sha256": "e7975329c29e48242a591f56ddbe76ed17937b31c758fecdb1f83e96a1d19f70"
+        },
+        {
+          "path": ".planning/g2g2/test_writer_deduplicates_downl0/project/companies/示例公司/raw/financial_reports/annual/2026-03-20_cninfo_announcement-2025_示例公司2025年年度报告.pdf",
+          "bytes": 38,
+          "sha256": "e7975329c29e48242a591f56ddbe76ed17937b31c758fecdb1f83e96a1d19f70"
+        },
+        {
+          "path": ".planning/g2g2/test_writer_atomically_imports0/project/companies/示例公司/raw/financial_reports/annual/2026-03-20_cninfo_announcement-2025_示例公司2025年年度报告.pdf",
+          "bytes": 38,
+          "sha256": "e7975329c29e48242a591f56ddbe76ed17937b31c758fecdb1f83e96a1d19f70"
+        },
+        {
+          "path": ".planning/g2g2/test_staging_root_cannot_overl0/project/companies/original.pdf",
+          "bytes": 23,
+          "sha256": "086ecb42032c0918848b6294c9a6cea3522574705c8cf1672335e4f1d61b3840"
+        },
+        {
+          "path": ".planning/g2g2/test_source_acquisition_servic0/project/companies/ACME/raw/financial_reports/annual/2026-03-20_hkex_12345_ACME 2025 Annual Report.pdf",
+          "bytes": 21,
+          "sha256": "c6ba8be991e66950ed8af8775bbb64fad41dc251c73ecab2dd3ee8e8f2faa062"
+        },
+        {
+          "path": ".planning/g2g2/test_service_ensure_latest_as_0/project/companies/ACME/0.pdf",
+          "bytes": 9,
+          "sha256": "7d2e61497e5ae20ca24a2ca468a775e9bca0f989310ebd6e9a21b521f598416f"
+        },
+        {
+          "path": ".planning/g2g2/test_retryable_fetch_uses_same0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g2/test_placeholder_with_missing_0/staging/f2db4351492daec38cfaa3b18a55ac1d836a551f13bd57063dc3435ac57ebda8/report.pdf",
+          "bytes": 21,
+          "sha256": "c6ba8be991e66950ed8af8775bbb64fad41dc251c73ecab2dd3ee8e8f2faa062"
+        },
+        {
+          "path": ".planning/g2g2/test_old_gap_hash_policy_and_e0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g2/test_missing_hk_source_routes_0/staging/90a1eb2684765794f68973c91cff78e54407cc9196f7bf76211060e162cc02c5/report.pdf",
+          "bytes": 21,
+          "sha256": "c6ba8be991e66950ed8af8775bbb64fad41dc251c73ecab2dd3ee8e8f2faa062"
+        },
+        {
+          "path": ".planning/g2g2/test_latest_intent_without_sna0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g2/test_latest_does_not_invent_pr2/project/companies/ACME/raw/financial_reports/quarterly/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g2/test_latest_does_not_invent_pr1/project/companies/ACME/raw/financial_reports/quarterly/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g2/test_latest_does_not_invent_pr0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g2/test_latest_as_of_with_allow_d0/project/companies/ACME/0.pdf",
+          "bytes": 9,
+          "sha256": "7d2e61497e5ae20ca24a2ca468a775e9bca0f989310ebd6e9a21b521f598416f"
+        },
+        {
+          "path": ".planning/g2g2/test_json_command_adapter_pres0/staging/report.pdf",
+          "bytes": 26,
+          "sha256": "0f4144215d5282a93da71b114ba564212c9160e49f31554108932860a8b3ed3c"
+        },
+        {
+          "path": ".planning/g2g2/test_invalid_receipt_cleans_on0/staging/other-target/keep.txt",
+          "bytes": 27,
+          "sha256": "6149def9073b14a6ff441c56ce1453abc68c25d7e25e0326497e7c13b6e7476b"
+        },
+        {
+          "path": ".planning/g2g2/test_existing_source_short_cir0/project/companies/Acme/raw/financial_reports/annual/2026-02-20_Acme_2025_annual_report.txt",
+          "bytes": 30,
+          "sha256": "14ead8030eaef264bafb534799821fba8d78d9df6f47dceb9eb05c7b3eff68f6"
+        },
+        {
+          "path": ".planning/g2g2/test_ensure_service_records_do0/project/companies/示例公司/raw/financial_reports/annual/2026-03-20_cninfo_announcement-2025_示例公司2025年年度报告.pdf",
+          "bytes": 41,
+          "sha256": "ce576c888a9349c10c07c7cd0de666c20b404abab9a3258fa97ce889e67f579e"
+        },
+        {
+          "path": ".planning/g2g2/test_e2e_f02_same_accession_se0/project/companies/ACME/raw/financial_reports/annual/2026-03-20_hkex_12345_ACME 2025 Annual Report.pdf",
+          "bytes": 21,
+          "sha256": "c6ba8be991e66950ed8af8775bbb64fad41dc251c73ecab2dd3ee8e8f2faa062"
+        },
+        {
+          "path": ".planning/g2g2/test_e2e_f01_html_disguised_as0/staging/c29cad05de4d8f49a2040b1222f3980f835f58e3e710d6040f9c15319d669c29/x.pdf",
+          "bytes": 35,
+          "sha256": "7faccd62527e93c00e379be856774e8c959c946989cd30aac71459475781a7d7"
+        },
+        {
+          "path": ".planning/g2g2/test_coordinator_latest_as_of_0/project/companies/ACME/0.pdf",
+          "bytes": 9,
+          "sha256": "7d2e61497e5ae20ca24a2ca468a775e9bca0f989310ebd6e9a21b521f598416f"
+        },
+        {
+          "path": ".planning/g2g2/test_close_gap_reuses_one_budg0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g2/test_cleanup_failure_never_jou0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g2/test_cg07_success_downloaded_n0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g2/test_cg05_rerun_is_idempotent0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g2/test_cg03_old_expiry_does_not_0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g2/test_cg02_old_gap_hash_does_no0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g2/test_cg01_old_policy_hash_does0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g2/test_bound_amendment_final_rea0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g2/test_bound_amendment_final_rea0/project/companies/ACME/raw/financial_reports/annual/2026-05-15_sec_acc-amended_ACME 2025 annual.pdf",
+          "bytes": 12,
+          "sha256": "0393ef15b71775cd6833b7155fa8f7887460826a85c766ea6bab44892b9b7d91"
+        },
+        {
+          "path": ".planning/g2g2/test_bounded_receipt_must_be_c0/staging/90a1eb2684765794f68973c91cff78e54407cc9196f7bf76211060e162cc02c5/report.pdf",
+          "bytes": 21,
+          "sha256": "c6ba8be991e66950ed8af8775bbb64fad41dc251c73ecab2dd3ee8e8f2faa062"
+        },
+        {
+          "path": ".planning/g2g2/test_bounded_adapter_consumes_0/staging/90a1eb2684765794f68973c91cff78e54407cc9196f7bf76211060e162cc02c5/report.pdf",
+          "bytes": 21,
+          "sha256": "c6ba8be991e66950ed8af8775bbb64fad41dc251c73ecab2dd3ee8e8f2faa062"
+        },
+        {
+          "path": ".planning/g2g2/test_adapter_receipt_outside_a0/outside/escaped.pdf",
+          "bytes": 21,
+          "sha256": "c6ba8be991e66950ed8af8775bbb64fad41dc251c73ecab2dd3ee8e8f2faa062"
+        }
+      ],
+      "classification": "closed pytest fixtures; child directories named test_*; no user download originals",
+      "largest_document_bytes": 41,
+      "top_children": [
+        "test_acquisition_config_builds0",
+        "test_adapter_process_error_deg0",
+        "test_adapter_process_error_exp0",
+        "test_adapter_receipt_outside_a0",
+        "test_bounded_adapter_consumes_0",
+        "test_bounded_receipt_must_be_c0",
+        "test_bound_amendment_final_rea0",
+        "test_build_creates_receipt0",
+        "test_cg01_old_policy_hash_does0",
+        "test_cg02_old_gap_hash_does_no0",
+        "test_cg03_old_expiry_does_not_0",
+        "test_cg04_invalid_staging_no_c0",
+        "test_cg05_rerun_is_idempotent0",
+        "test_cg06_fetch_failure_is_fai0",
+        "test_cg07_success_downloaded_n0",
+        "test_cg_c1b_cross_process_sing0",
+        "test_cg_c1_single_flight_one_f0",
+        "test_cg_c2b_non_retryable_fail0",
+        "test_cg_c2_retryable_failures_0",
+        "test_cg_c3_rerun_deduplicates0",
+        "test_cg_c4_lock_timeout_is_bou0",
+        "test_cleanup_failure_never_jou0",
+        "test_close_gap_reuses_one_budg0",
+        "test_coordinator_authorized_do0",
+        "test_coordinator_latest_as_of_0",
+        "test_coordinator_rejects_unaut0",
+        "test_discovery_budget_exhausti0",
+        "test_e2e_f01_html_disguised_as0",
+        "test_e2e_f02_same_accession_se0",
+        "test_ensure_service_records_do0",
+        "test_existing_source_short_cir0",
+        "test_future_publication_is_nev0",
+        "test_gap_hash_deterministic0",
+        "test_gap_hash_order_independen0",
+        "test_import_failure_cleans_sta0",
+        "test_invalid_receipt_cleans_on0",
+        "test_json_command_adapter_pres0",
+        "test_latest_as_of_with_allow_d0",
+        "test_latest_checks_candidate_i0",
+        "test_latest_checks_candidate_i1",
+        "test_latest_checks_candidate_i2",
+        "test_latest_does_not_invent_pr0",
+        "test_latest_does_not_invent_pr1",
+        "test_latest_does_not_invent_pr2",
+        "test_latest_intent_without_sna0",
+        "test_latest_tied_distinct_acce0",
+        "test_latest_uncharged_provider0",
+        "test_local_old_gap_new_period0",
+        "test_local_up_to_date_zero_gap0",
+        "test_missing_hk_source_routes_0",
+        "test_new_period_not_yet_publis0",
+        "test_no_binding_no_budget_refu0",
+        "test_older_revision_listed_not0",
+        "test_old_gap_hash_policy_and_e0",
+        "test_placeholder_with_missing_0",
+        "test_provider_unavailable_is_n0",
+        "test_provider_unavailable_keep0",
+        "test_readonly_latest_keeps_met0",
+        "test_receipt_hash_deterministi0",
+        "test_remote_after_as_of_exclud0",
+        "test_retryable_fetch_uses_same0",
+        "test_service_ensure_latest_as_0",
+        "test_source_acquisition_servic0",
+        "test_staging_root_cannot_overl0",
+        "test_unbounded_json_command_ad0",
+        "test_validate_ok_for_allowed_c0",
+        "test_validate_rejects_expired0",
+        "test_validate_rejects_other_pr0",
+        "test_validate_rejects_over_byt0",
+        "test_validate_rejects_over_ite0",
+        "test_validate_rejects_plan_has0",
+        "test_validate_rejects_unknown_0",
+        "test_writer_atomically_imports0",
+        "test_writer_deduplicates_downl0",
+        "test_writer_dedup_ignores_dayu0",
+        "test_writer_disambiguates_comm0",
+        "test_writer_reactivates_previo0",
+        "test_writer_reactivates_retire0",
+        "test_writer_registers_exact_gr0",
+        "test_zr407_newer_revision_is_a0"
+      ],
+      "references": [
+        "g4_protection_before_2026-10-07.json preserves prior generated config SHA for G2 roots",
+        "G2 published API/chain/retirement receipts and current unit fixtures",
+        "cw-retire-r1 test_prune_* / test_archive_* are frozen legacy fixture names"
+      ],
+      "decision": "remove_closed_fixture_root"
+    },
+    {
+      "path": ".planning/g2g3",
+      "exists": true,
+      "bytes": 19660015,
+      "files": 427,
+      "extensions": {
+        ".log": 1,
+        ".json": 48,
+        ".sqlite3": 58,
+        ".sqlite3-shm": 56,
+        ".sqlite3-wal": 56,
+        ".acquire": 102,
+        ".pdf": 42,
+        ".htm": 1,
+        ".jsonl": 37,
+        ".py": 3,
+        ".txt": 2,
+        ".yaml": 13,
+        ".csv": 7,
+        ".md": 1
+      },
+      "reparse_paths": [],
+      "tracked_files": [],
+      "largest": [
+        {
+          "path": ".planning/g2g3/test_writer_dedup_ignores_dayu0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 274432
+        },
+        {
+          "path": ".planning/g2g3/test_writer_registers_exact_gr0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 266240
+        },
+        {
+          "path": ".planning/g2g3/test_writer_reactivates_retire0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 266240
+        },
+        {
+          "path": ".planning/g2g3/test_writer_reactivates_previo0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 266240
+        },
+        {
+          "path": ".planning/g2g3/test_writer_disambiguates_comm0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 266240
+        },
+        {
+          "path": ".planning/g2g3/test_writer_deduplicates_downl0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 266240
+        },
+        {
+          "path": ".planning/g2g3/test_writer_atomically_imports0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 266240
+        },
+        {
+          "path": ".planning/g2g3/test_unbounded_json_command_ad0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 258048
+        }
+      ],
+      "document_files": [
+        {
+          "path": ".planning/g2g3/test_writer_registers_exact_gr0/project/companies/示例公司/raw/financial_reports/annual/2026-03-20_cninfo_announcement-2025_示例公司2025年年度报告.pdf",
+          "bytes": 38,
+          "sha256": "e7975329c29e48242a591f56ddbe76ed17937b31c758fecdb1f83e96a1d19f70"
+        },
+        {
+          "path": ".planning/g2g3/test_writer_reactivates_retire0/project/companies/示例公司/raw/financial_reports/annual/2026-03-20_cninfo_announcement-2025_示例公司2025年年度报告.pdf",
+          "bytes": 38,
+          "sha256": "e7975329c29e48242a591f56ddbe76ed17937b31c758fecdb1f83e96a1d19f70"
+        },
+        {
+          "path": ".planning/g2g3/test_writer_reactivates_previo0/project/companies/示例公司/raw/financial_reports/annual/2026-03-20_cninfo_announcement-2025_示例公司2025年年度报告.pdf",
+          "bytes": 38,
+          "sha256": "e7975329c29e48242a591f56ddbe76ed17937b31c758fecdb1f83e96a1d19f70"
+        },
+        {
+          "path": ".planning/g2g3/test_writer_disambiguates_comm0/project/companies/示例公司/raw/financial_reports/annual/2026-03-20_cninfo_announcement-2025_示例公司2025年年度报告.pdf",
+          "bytes": 38,
+          "sha256": "e7975329c29e48242a591f56ddbe76ed17937b31c758fecdb1f83e96a1d19f70"
+        },
+        {
+          "path": ".planning/g2g3/test_writer_dedup_ignores_dayu0/project/companies/示例公司/raw/financial_reports/annual/2026-03-20_cninfo_announcement-2025_示例公司2025年年度报告.pdf",
+          "bytes": 38,
+          "sha256": "e7975329c29e48242a591f56ddbe76ed17937b31c758fecdb1f83e96a1d19f70"
+        },
+        {
+          "path": ".planning/g2g3/test_writer_dedup_ignores_dayu0/dayu/portfolio/MDB/filings/fil_x/same.htm",
+          "bytes": 38,
+          "sha256": "e7975329c29e48242a591f56ddbe76ed17937b31c758fecdb1f83e96a1d19f70"
+        },
+        {
+          "path": ".planning/g2g3/test_writer_deduplicates_downl0/project/companies/示例公司/raw/financial_reports/annual/2026-03-20_cninfo_announcement-2025_示例公司2025年年度报告.pdf",
+          "bytes": 38,
+          "sha256": "e7975329c29e48242a591f56ddbe76ed17937b31c758fecdb1f83e96a1d19f70"
+        },
+        {
+          "path": ".planning/g2g3/test_writer_atomically_imports0/project/companies/示例公司/raw/financial_reports/annual/2026-03-20_cninfo_announcement-2025_示例公司2025年年度报告.pdf",
+          "bytes": 38,
+          "sha256": "e7975329c29e48242a591f56ddbe76ed17937b31c758fecdb1f83e96a1d19f70"
+        },
+        {
+          "path": ".planning/g2g3/test_staging_root_cannot_overl0/project/companies/original.pdf",
+          "bytes": 23,
+          "sha256": "086ecb42032c0918848b6294c9a6cea3522574705c8cf1672335e4f1d61b3840"
+        },
+        {
+          "path": ".planning/g2g3/test_source_acquisition_servic0/project/companies/ACME/raw/financial_reports/annual/2026-03-20_hkex_12345_ACME 2025 Annual Report.pdf",
+          "bytes": 21,
+          "sha256": "c6ba8be991e66950ed8af8775bbb64fad41dc251c73ecab2dd3ee8e8f2faa062"
+        },
+        {
+          "path": ".planning/g2g3/test_service_ensure_latest_as_0/project/companies/ACME/0.pdf",
+          "bytes": 9,
+          "sha256": "7d2e61497e5ae20ca24a2ca468a775e9bca0f989310ebd6e9a21b521f598416f"
+        },
+        {
+          "path": ".planning/g2g3/test_retryable_fetch_uses_same0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g3/test_placeholder_with_missing_0/staging/f2db4351492daec38cfaa3b18a55ac1d836a551f13bd57063dc3435ac57ebda8/report.pdf",
+          "bytes": 21,
+          "sha256": "c6ba8be991e66950ed8af8775bbb64fad41dc251c73ecab2dd3ee8e8f2faa062"
+        },
+        {
+          "path": ".planning/g2g3/test_old_gap_hash_policy_and_e0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g3/test_missing_hk_source_routes_0/staging/90a1eb2684765794f68973c91cff78e54407cc9196f7bf76211060e162cc02c5/report.pdf",
+          "bytes": 21,
+          "sha256": "c6ba8be991e66950ed8af8775bbb64fad41dc251c73ecab2dd3ee8e8f2faa062"
+        },
+        {
+          "path": ".planning/g2g3/test_latest_intent_without_sna0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g3/test_latest_does_not_invent_pr2/project/companies/ACME/raw/financial_reports/quarterly/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g3/test_latest_does_not_invent_pr1/project/companies/ACME/raw/financial_reports/quarterly/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g3/test_latest_does_not_invent_pr0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g3/test_latest_as_of_download_int0/staging/0b5137d596111bd9b68e61c839dccc9761e0f08c8afffc1b3d613715899cdd53/report.pdf",
+          "bytes": 21,
+          "sha256": "c6ba8be991e66950ed8af8775bbb64fad41dc251c73ecab2dd3ee8e8f2faa062"
+        },
+        {
+          "path": ".planning/g2g3/test_latest_as_of_download_int0/project/companies/ACME/0.pdf",
+          "bytes": 9,
+          "sha256": "7d2e61497e5ae20ca24a2ca468a775e9bca0f989310ebd6e9a21b521f598416f"
+        },
+        {
+          "path": ".planning/g2g3/test_json_command_adapter_pres0/staging/report.pdf",
+          "bytes": 26,
+          "sha256": "0f4144215d5282a93da71b114ba564212c9160e49f31554108932860a8b3ed3c"
+        },
+        {
+          "path": ".planning/g2g3/test_invalid_receipt_cleans_on0/staging/other-target/keep.txt",
+          "bytes": 27,
+          "sha256": "6149def9073b14a6ff441c56ce1453abc68c25d7e25e0326497e7c13b6e7476b"
+        },
+        {
+          "path": ".planning/g2g3/test_existing_source_short_cir0/project/companies/Acme/raw/financial_reports/annual/2026-02-20_Acme_2025_annual_report.txt",
+          "bytes": 30,
+          "sha256": "14ead8030eaef264bafb534799821fba8d78d9df6f47dceb9eb05c7b3eff68f6"
+        },
+        {
+          "path": ".planning/g2g3/test_ensure_service_records_do0/project/companies/示例公司/raw/financial_reports/annual/2026-03-20_cninfo_announcement-2025_示例公司2025年年度报告.pdf",
+          "bytes": 41,
+          "sha256": "ce576c888a9349c10c07c7cd0de666c20b404abab9a3258fa97ce889e67f579e"
+        },
+        {
+          "path": ".planning/g2g3/test_e2e_f02_same_accession_se0/project/companies/ACME/raw/financial_reports/annual/2026-03-20_hkex_12345_ACME 2025 Annual Report.pdf",
+          "bytes": 21,
+          "sha256": "c6ba8be991e66950ed8af8775bbb64fad41dc251c73ecab2dd3ee8e8f2faa062"
+        },
+        {
+          "path": ".planning/g2g3/test_e2e_f01_html_disguised_as0/staging/c29cad05de4d8f49a2040b1222f3980f835f58e3e710d6040f9c15319d669c29/x.pdf",
+          "bytes": 35,
+          "sha256": "7faccd62527e93c00e379be856774e8c959c946989cd30aac71459475781a7d7"
+        },
+        {
+          "path": ".planning/g2g3/test_coordinator_latest_as_of_0/project/companies/ACME/0.pdf",
+          "bytes": 9,
+          "sha256": "7d2e61497e5ae20ca24a2ca468a775e9bca0f989310ebd6e9a21b521f598416f"
+        },
+        {
+          "path": ".planning/g2g3/test_coordinator_authorized_do0/staging/0b5137d596111bd9b68e61c839dccc9761e0f08c8afffc1b3d613715899cdd53/annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g3/test_close_gap_reuses_one_budg0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g3/test_cleanup_failure_never_jou0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g3/test_cg_c3_rerun_deduplicates0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_spy_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 13,
+          "sha256": "8cde7adbf3892913fddb31cefc7adc7474ce4f28a3ff1ca1ebb3e9d5fbc67c77"
+        },
+        {
+          "path": ".planning/g2g3/test_cg_c2_retryable_failures_0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_spy_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 13,
+          "sha256": "8cde7adbf3892913fddb31cefc7adc7474ce4f28a3ff1ca1ebb3e9d5fbc67c77"
+        },
+        {
+          "path": ".planning/g2g3/test_cg_c1_single_flight_one_f0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_spy_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 13,
+          "sha256": "8cde7adbf3892913fddb31cefc7adc7474ce4f28a3ff1ca1ebb3e9d5fbc67c77"
+        },
+        {
+          "path": ".planning/g2g3/test_cg_c1b_cross_process_sing0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_spy_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 13,
+          "sha256": "8cde7adbf3892913fddb31cefc7adc7474ce4f28a3ff1ca1ebb3e9d5fbc67c77"
+        },
+        {
+          "path": ".planning/g2g3/test_cg07_success_downloaded_n0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g3/test_cg05_rerun_is_idempotent0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g3/test_cg03_old_expiry_does_not_0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g3/test_cg02_old_gap_hash_does_no0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g3/test_cg01_old_policy_hash_does0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g3/test_bound_amendment_final_rea0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2g3/test_bound_amendment_final_rea0/project/companies/ACME/raw/financial_reports/annual/2026-05-15_sec_acc-amended_ACME 2025 annual.pdf",
+          "bytes": 12,
+          "sha256": "0393ef15b71775cd6833b7155fa8f7887460826a85c766ea6bab44892b9b7d91"
+        },
+        {
+          "path": ".planning/g2g3/test_bounded_receipt_must_be_c0/staging/90a1eb2684765794f68973c91cff78e54407cc9196f7bf76211060e162cc02c5/report.pdf",
+          "bytes": 21,
+          "sha256": "c6ba8be991e66950ed8af8775bbb64fad41dc251c73ecab2dd3ee8e8f2faa062"
+        },
+        {
+          "path": ".planning/g2g3/test_bounded_adapter_consumes_0/staging/90a1eb2684765794f68973c91cff78e54407cc9196f7bf76211060e162cc02c5/report.pdf",
+          "bytes": 21,
+          "sha256": "c6ba8be991e66950ed8af8775bbb64fad41dc251c73ecab2dd3ee8e8f2faa062"
+        },
+        {
+          "path": ".planning/g2g3/test_adapter_receipt_outside_a0/outside/escaped.pdf",
+          "bytes": 21,
+          "sha256": "c6ba8be991e66950ed8af8775bbb64fad41dc251c73ecab2dd3ee8e8f2faa062"
+        }
+      ],
+      "classification": "closed pytest fixtures; child directories named test_*; no user download originals",
+      "largest_document_bytes": 41,
+      "top_children": [
+        "test_acquisition_config_builds0",
+        "test_adapter_process_error_deg0",
+        "test_adapter_process_error_exp0",
+        "test_adapter_receipt_outside_a0",
+        "test_bounded_adapter_consumes_0",
+        "test_bounded_receipt_must_be_c0",
+        "test_bound_amendment_final_rea0",
+        "test_build_creates_receipt0",
+        "test_cg01_old_policy_hash_does0",
+        "test_cg02_old_gap_hash_does_no0",
+        "test_cg03_old_expiry_does_not_0",
+        "test_cg04_invalid_staging_no_c0",
+        "test_cg05_rerun_is_idempotent0",
+        "test_cg06_fetch_failure_is_fai0",
+        "test_cg07_success_downloaded_n0",
+        "test_cg_c1b_cross_process_sing0",
+        "test_cg_c1_single_flight_one_f0",
+        "test_cg_c2b_non_retryable_fail0",
+        "test_cg_c2_retryable_failures_0",
+        "test_cg_c3_rerun_deduplicates0",
+        "test_cg_c4_actual_target_lock_0",
+        "test_cleanup_failure_never_jou0",
+        "test_close_gap_cli_uses_one_in0",
+        "test_close_gap_cli_uses_one_in1",
+        "test_close_gap_does_not_consul0",
+        "test_close_gap_reuses_one_budg0",
+        "test_close_gap_v2_records_the_0",
+        "test_coordinator_authorized_do0",
+        "test_coordinator_excludes_acce0",
+        "test_coordinator_latest_as_of_0",
+        "test_discovery_budget_exhausti0",
+        "test_e2e_f01_html_disguised_as0",
+        "test_e2e_f02_same_accession_se0",
+        "test_ensure_gap_rejects_mismat0",
+        "test_ensure_rejects_invalid_re0",
+        "test_ensure_rejects_invalid_re1",
+        "test_ensure_rejects_reader_can0",
+        "test_ensure_rejects_resolved_v0",
+        "test_ensure_rejects_resolved_v1",
+        "test_ensure_service_records_do0",
+        "test_ensure_v2_preserves_metad0",
+        "test_ensure_v2_projects_source0",
+        "test_existing_source_short_cir0",
+        "test_explicit_ensure_download_0",
+        "test_explicit_ensure_download_1",
+        "test_future_publication_is_nev0",
+        "test_gap_hash_deterministic0",
+        "test_gap_hash_order_independen0",
+        "test_import_failure_cleans_sta0",
+        "test_invalid_receipt_cleans_on0",
+        "test_json_command_adapter_pres0",
+        "test_latest_as_of_download_int0",
+        "test_latest_checks_candidate_i0",
+        "test_latest_checks_candidate_i1",
+        "test_latest_checks_candidate_i2",
+        "test_latest_does_not_invent_pr0",
+        "test_latest_does_not_invent_pr1",
+        "test_latest_does_not_invent_pr2",
+        "test_latest_intent_without_sna0",
+        "test_latest_tied_distinct_acce0",
+        "test_latest_uncharged_provider0",
+        "test_local_old_gap_new_period0",
+        "test_local_up_to_date_zero_gap0",
+        "test_missing_hk_source_routes_0",
+        "test_new_period_not_yet_publis0",
+        "test_no_binding_no_budget_refu0",
+        "test_older_revision_listed_not0",
+        "test_old_gap_hash_policy_and_e0",
+        "test_placeholder_with_missing_0",
+        "test_provider_unavailable_is_n0",
+        "test_provider_unavailable_keep0",
+        "test_readonly_latest_keeps_met0",
+        "test_receipt_hash_deterministi0",
+        "test_remote_after_as_of_exclud0",
+        "test_retryable_fetch_uses_same0",
+        "test_service_ensure_latest_as_0",
+        "test_source_acquisition_servic0",
+        "test_staging_root_cannot_overl0",
+        "test_unbounded_json_command_ad0",
+        "test_validate_ok_for_allowed_c0",
+        "test_validate_rejects_expired0",
+        "test_validate_rejects_other_pr0",
+        "test_validate_rejects_over_byt0",
+        "test_validate_rejects_over_ite0",
+        "test_validate_rejects_plan_has0",
+        "test_validate_rejects_unknown_0",
+        "test_writer_atomically_imports0",
+        "test_writer_deduplicates_downl0",
+        "test_writer_dedup_ignores_dayu0",
+        "test_writer_disambiguates_comm0",
+        "test_writer_reactivates_previo0",
+        "test_writer_reactivates_retire0",
+        "test_writer_registers_exact_gr0"
+      ],
+      "references": [
+        "g4_protection_before_2026-10-07.json preserves prior generated config SHA for G2 roots",
+        "G2 published API/chain/retirement receipts and current unit fixtures",
+        "cw-retire-r1 test_prune_* / test_archive_* are frozen legacy fixture names"
+      ],
+      "decision": "remove_closed_fixture_root"
+    },
+    {
+      "path": ".planning/g2r2",
+      "exists": true,
+      "bytes": 6970202,
+      "files": 140,
+      "extensions": {
+        ".sqlite3": 20,
+        ".pdf": 11,
+        ".jsonl": 19,
+        ".acquire": 41,
+        ".sqlite3-shm": 19,
+        ".sqlite3-wal": 19,
+        ".json": 10,
+        ".txt": 1
+      },
+      "reparse_paths": [],
+      "tracked_files": [],
+      "largest": [
+        {
+          "path": ".planning/g2r2/test_staging_root_cannot_overl0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 258048
+        },
+        {
+          "path": ".planning/g2r2/test_retryable_fetch_uses_same0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 258048
+        },
+        {
+          "path": ".planning/g2r2/test_readonly_latest_keeps_met0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 258048
+        },
+        {
+          "path": ".planning/g2r2/test_old_gap_hash_policy_and_e0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 258048
+        },
+        {
+          "path": ".planning/g2r2/test_no_binding_no_budget_refu0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 258048
+        },
+        {
+          "path": ".planning/g2r2/test_latest_uncharged_provider0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 258048
+        },
+        {
+          "path": ".planning/g2r2/test_latest_tied_distinct_acce0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 258048
+        },
+        {
+          "path": ".planning/g2r2/test_latest_intent_without_sna0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 258048
+        }
+      ],
+      "document_files": [
+        {
+          "path": ".planning/g2r2/test_staging_root_cannot_overl0/project/companies/original.pdf",
+          "bytes": 23,
+          "sha256": "086ecb42032c0918848b6294c9a6cea3522574705c8cf1672335e4f1d61b3840"
+        },
+        {
+          "path": ".planning/g2r2/test_retryable_fetch_uses_same0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2r2/test_old_gap_hash_policy_and_e0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2r2/test_no_binding_no_budget_refu0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2r2/test_latest_intent_without_sna0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2r2/test_latest_does_not_invent_pr2/project/companies/ACME/raw/financial_reports/quarterly/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2r2/test_latest_does_not_invent_pr1/project/companies/ACME/raw/financial_reports/quarterly/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2r2/test_latest_does_not_invent_pr0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2r2/test_invalid_receipt_cleans_on0/staging/other-target/keep.txt",
+          "bytes": 27,
+          "sha256": "6149def9073b14a6ff441c56ce1453abc68c25d7e25e0326497e7c13b6e7476b"
+        },
+        {
+          "path": ".planning/g2r2/test_cleanup_failure_never_jou0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2r2/test_bound_amendment_final_rea0/project/companies/ACME/raw/financial_reports/annual/2026-04-15_sec_acc-2025_ACME 2025 annual.pdf",
+          "bytes": 9,
+          "sha256": "54bdc9b61cb7d536c4576efe40bc89e8d3a20cff58bb388f5f099b96e4548f7e"
+        },
+        {
+          "path": ".planning/g2r2/test_bound_amendment_final_rea0/project/companies/ACME/raw/financial_reports/annual/2026-05-15_sec_acc-amended_ACME 2025 annual.pdf",
+          "bytes": 12,
+          "sha256": "0393ef15b71775cd6833b7155fa8f7887460826a85c766ea6bab44892b9b7d91"
+        }
+      ],
+      "classification": "closed pytest fixtures; child directories named test_*; no user download originals",
+      "largest_document_bytes": 27,
+      "top_children": [
+        "test_bound_amendment_final_rea0",
+        "test_cleanup_failure_never_jou0",
+        "test_discovery_budget_exhausti0",
+        "test_future_publication_is_nev0",
+        "test_import_failure_cleans_sta0",
+        "test_invalid_receipt_cleans_on0",
+        "test_latest_checks_candidate_i0",
+        "test_latest_checks_candidate_i1",
+        "test_latest_checks_candidate_i2",
+        "test_latest_does_not_invent_pr0",
+        "test_latest_does_not_invent_pr1",
+        "test_latest_does_not_invent_pr2",
+        "test_latest_intent_without_sna0",
+        "test_latest_tied_distinct_acce0",
+        "test_latest_uncharged_provider0",
+        "test_no_binding_no_budget_refu0",
+        "test_old_gap_hash_policy_and_e0",
+        "test_readonly_latest_keeps_met0",
+        "test_retryable_fetch_uses_same0",
+        "test_staging_root_cannot_overl0"
+      ],
+      "references": [
+        "g4_protection_before_2026-10-07.json preserves prior generated config SHA for G2 roots",
+        "G2 published API/chain/retirement receipts and current unit fixtures",
+        "cw-retire-r1 test_prune_* / test_archive_* are frozen legacy fixture names"
+      ],
+      "decision": "remove_closed_fixture_root"
+    },
+    {
+      "path": "tmp/cw-retire-r1",
+      "exists": true,
+      "bytes": 1367636,
+      "files": 31,
+      "extensions": {
+        ".txt": 5,
+        ".sqlite3": 5,
+        ".sqlite3-shm": 4,
+        ".sqlite3-wal": 4,
+        ".acquire": 5,
+        ".md": 4,
+        ".gz": 2,
+        ".json": 2
+      },
+      "reparse_paths": [],
+      "tracked_files": [],
+      "largest": [
+        {
+          "path": "tmp/cw-retire-r1/test_prune_dry_run_reports_spa0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 245760
+        },
+        {
+          "path": "tmp/cw-retire-r1/test_prune_apply_within_retent0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 245760
+        },
+        {
+          "path": "tmp/cw-retire-r1/test_prune_apply_deletes_spans0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 245760
+        },
+        {
+          "path": "tmp/cw-retire-r1/test_archive_exports_retired_e0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 245760
+        },
+        {
+          "path": "tmp/cw-retire-r1/test_archive_empty_when_no_ret0/project/.source_catalog/catalog.sqlite3",
+          "bytes": 237568
+        },
+        {
+          "path": "tmp/cw-retire-r1/test_prune_dry_run_reports_spa0/project/.source_catalog/catalog.sqlite3-shm",
+          "bytes": 32768
+        },
+        {
+          "path": "tmp/cw-retire-r1/test_prune_apply_deletes_spans0/project/.source_catalog/catalog.sqlite3-shm",
+          "bytes": 32768
+        },
+        {
+          "path": "tmp/cw-retire-r1/test_archive_exports_retired_e0/project/.source_catalog/catalog.sqlite3-shm",
+          "bytes": 32768
+        }
+      ],
+      "document_files": [
+        {
+          "path": "tmp/cw-retire-r1/test_prune_dry_run_reports_spa0/sources/a.txt",
+          "bytes": 514,
+          "sha256": "0bd91d78a806ffb36ea3da4f457c75430a8c5523f0558f44f454e65655ccf204"
+        },
+        {
+          "path": "tmp/cw-retire-r1/test_prune_apply_within_retent0/sources/a.txt",
+          "bytes": 514,
+          "sha256": "0bd91d78a806ffb36ea3da4f457c75430a8c5523f0558f44f454e65655ccf204"
+        },
+        {
+          "path": "tmp/cw-retire-r1/test_prune_apply_deletes_spans0/sources/a.txt",
+          "bytes": 514,
+          "sha256": "0bd91d78a806ffb36ea3da4f457c75430a8c5523f0558f44f454e65655ccf204"
+        },
+        {
+          "path": "tmp/cw-retire-r1/test_archive_exports_retired_e0/sources/a.txt",
+          "bytes": 514,
+          "sha256": "0bd91d78a806ffb36ea3da4f457c75430a8c5523f0558f44f454e65655ccf204"
+        },
+        {
+          "path": "tmp/cw-retire-r1/test_archive_empty_when_no_ret0/sources/a.txt",
+          "bytes": 514,
+          "sha256": "0bd91d78a806ffb36ea3da4f457c75430a8c5523f0558f44f454e65655ccf204"
+        }
+      ],
+      "classification": "closed pytest fixtures; child directories named test_*; no user download originals",
+      "largest_document_bytes": 514,
+      "top_children": [
+        "test_archive_empty_when_no_ret0",
+        "test_archive_exports_retired_e0",
+        "test_prune_apply_deletes_spans0",
+        "test_prune_apply_within_retent0",
+        "test_prune_dry_run_reports_spa0"
+      ],
+      "references": [
+        "g4_protection_before_2026-10-07.json preserves prior generated config SHA for G2 roots",
+        "G2 published API/chain/retirement receipts and current unit fixtures",
+        "cw-retire-r1 test_prune_* / test_archive_* are frozen legacy fixture names"
+      ],
+      "decision": "remove_closed_fixture_root"
+    },
+    {
+      "path": "tmp/n4c-20261004-pilot-a",
+      "exists": true,
+      "bytes": 461338,
+      "files": 8,
+      "extensions": {
+        ".sqlite3": 1,
+        ".sqlite3-shm": 1,
+        ".sqlite3-wal": 1,
+        ".lock": 1,
+        ".json": 2,
+        ".log": 2
+      },
+      "reparse_paths": [],
+      "tracked_files": [],
+      "largest": [
+        {
+          "path": "tmp/n4c-20261004-pilot-a/automation.sqlite3",
+          "bytes": 425984
+        },
+        {
+          "path": "tmp/n4c-20261004-pilot-a/automation.sqlite3-shm",
+          "bytes": 32768
+        },
+        {
+          "path": "tmp/n4c-20261004-pilot-a/request.json",
+          "bytes": 2378
+        },
+        {
+          "path": "tmp/n4c-20261004-pilot-a/work/storage-baseline.json",
+          "bytes": 120
+        },
+        {
+          "path": "tmp/n4c-20261004-pilot-a/work/logs/mixed-1.stdout.log",
+          "bytes": 87
+        },
+        {
+          "path": "tmp/n4c-20261004-pilot-a/automation.sqlite3.batch-owner.lock",
+          "bytes": 1
+        },
+        {
+          "path": "tmp/n4c-20261004-pilot-a/automation.sqlite3-wal",
+          "bytes": 0
+        },
+        {
+          "path": "tmp/n4c-20261004-pilot-a/work/logs/mixed-1.stderr.log",
+          "bytes": 0
+        }
+      ],
+      "document_files": [],
+      "classification": "historical paid pilot usage and recovery facts; keep entire 461338B root",
+      "decision": "keep_historical_usage_and_receipts"
+    },
+    {
+      "path": "artifacts/gates/slow-canary-drill",
+      "exists": true,
+      "bytes": 66441349,
+      "files": 8,
+      "extensions": {
+        ".py": 1,
+        ".log": 2,
+        ".json": 1,
+        ".sqlite3": 1,
+        ".acquire": 1,
+        ".pdf": 1,
+        ".md": 1
+      },
+      "reparse_paths": [],
+      "tracked_files": [
+        "artifacts/gates/slow-canary-drill/drill.py",
+        "artifacts/gates/slow-canary-drill/drill.stderr.log",
+        "artifacts/gates/slow-canary-drill/drill.stdout.log",
+        "artifacts/gates/slow-canary-drill/receipt.json"
+      ],
+      "largest": [
+        {
+          "path": "artifacts/gates/slow-canary-drill/source/canary/canary_中信建投：中信建投证券股份有限公司2021年年度报告（可视版）.pdf",
+          "bytes": 40966288
+        },
+        {
+          "path": "artifacts/gates/slow-canary-drill/catalog/catalog.sqlite3",
+          "bytes": 23912448
+        },
+        {
+          "path": "artifacts/gates/slow-canary-drill/catalog/derived/ec/ece692912201b018575b914db98e48db23f50429f2476d0aa028022a716ae5f2/normalized.md",
+          "bytes": 1553114
+        },
+        {
+          "path": "artifacts/gates/slow-canary-drill/drill.py",
+          "bytes": 6184
+        },
+        {
+          "path": "artifacts/gates/slow-canary-drill/drill.stdout.log",
+          "bytes": 1743
+        },
+        {
+          "path": "artifacts/gates/slow-canary-drill/receipt.json",
+          "bytes": 1571
+        },
+        {
+          "path": "artifacts/gates/slow-canary-drill/catalog/operation.lock.acquire",
+          "bytes": 1
+        },
+        {
+          "path": "artifacts/gates/slow-canary-drill/drill.stderr.log",
+          "bytes": 0
+        }
+      ],
+      "document_files": [
+        {
+          "path": "artifacts/gates/slow-canary-drill/source/canary/canary_中信建投：中信建投证券股份有限公司2021年年度报告（可视版）.pdf",
+          "bytes": 40966288,
+          "sha256": "ece692912201b018575b914db98e48db23f50429f2476d0aa028022a716ae5f2"
+        }
+      ],
+      "classification": "historical tracked drill receipt/script; untracked catalog derived scratch and duplicated-or-unverified canary PDF",
+      "verified_preserved_originals": [
+        {
+          "path": "companies/中信建投/raw/financial_reports/中信建投：中信建投证券股份有限公司2021年年度报告（可视版）.pdf",
+          "sha256": "ece692912201b018575b914db98e48db23f50429f2476d0aa028022a716ae5f2",
+          "bytes": 40966288,
+          "location_status": "retired"
+        }
+      ],
+      "production_sql_changes": 0,
+      "decision": "remove_only_untracked_catalog_and_verified_duplicate_source; keep_tracked_history"
+    }
+  ],
+  "raw_deleted": 0,
+  "production_writes": 0,
+  "model_posts": 0,
+  "decision_pending": false,
+  "preserve_other": [
+    "tmp/pdfs",
+    ".planning/other-harness-plans",
+    "cross-project owner worktrees",
+    "historical pilot budget database"
+  ],
+  "process_check": {
+    "method": "live Win32_Process query outside restricted CIM sandbox",
+    "matching_current_processes": 0,
+    "file_handle_check": "every deletion target will be exclusively opened before mutation"
+  },
+  "cleanup_targets": [
+    ".planning/g2-latest-red",
+    ".planning/g2cliR",
+    ".planning/g2g2",
+    ".planning/g2g3",
+    ".planning/g2r2",
+    "tmp/cw-retire-r1",
+    "artifacts/gates/slow-canary-drill/catalog",
+    "artifacts/gates/slow-canary-drill/source"
+  ],
+  "protected_files": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "bytes": 866,
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_acquisition.yaml",
+      "bytes": 1204,
+      "sha256": "04b0f8d0f0bba8020fa17eed0430d25473844c2c674001a0aa98fddf8a5bd019"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog_worker.yaml",
+      "bytes": 2234,
+      "sha256": "04fe21b45969a556437e0936d88aebcefe62692f344a56831e9060a4a87b5bf8"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml",
+      "bytes": 3602,
+      "sha256": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\n4c-20261004-pilot-a\\automation.sqlite3",
+      "bytes": 425984,
+      "sha256": "7b483d45f7155094bc6e94dfffae950f75f4d8bd762281199b4e7b05b0c10a9a"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\n4c-20261004-pilot-a\\request.json",
+      "bytes": 2378,
+      "sha256": "c544215c61b38957a49d7d00fed2f577fa6d85f92b8c826136985877525b529a"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\中微公司：2025年年度报告.pdf",
+      "bytes": 9165875,
+      "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\中微公司：2025年年度报告.pdf.source.json",
+      "bytes": 107,
+      "sha256": "4808a404e85141d86862e14895338715b59279acbcd6ee628ef30cc5a4378516"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\中微公司：2025年半年度报告.pdf",
+      "bytes": 6361468,
+      "sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\中微公司：2025年半年度报告.pdf.source.json",
+      "bytes": 110,
+      "sha256": "4ecde6686b85edda50803831f7b3784fae55733815eb526e647be23dec6040b7"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\中微公司：2026年第一季度报告.pdf",
+      "bytes": 217264,
+      "sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\中微公司：2026年第一季度报告.pdf.source.json",
+      "bytes": 113,
+      "sha256": "f3ce03d18cc9fb5b1e22b5a4d33fe276851f383ea022cbb5c9456b493064bb7b"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\prospectus\\中微公司：首次公开发行股票并在科创板上市招股说明书.pdf",
+      "bytes": 11211796,
+      "sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\prospectus\\中微公司：首次公开发行股票并在科创板上市招股说明书.pdf.source.json",
+      "bytes": 148,
+      "sha256": "b2418087e66b1d117fce874cae8cbb505d5ad15fd17d94d7b556ad2557235631"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\三角防务\\raw\\research\\三角防务：西安三角防务股份有限公司向特定对象发行股票并在创业板上市募集说明书（注册稿）.PDF",
+      "bytes": 5595592,
+      "sha256": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\三角防务\\raw\\research\\三角防务：西安三角防务股份有限公司向特定对象发行股票并在创业板上市募集说明书（注册稿）.PDF.source.json",
+      "bytes": 208,
+      "sha256": "b34ace23f1651c606ab6d646202445d407c6a50db932ad65995312cd5e1a40bb"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\华锐精密\\raw\\research\\华锐精密：向不特定对象发行可转换公司债券证券募集说明书.PDF",
+      "bytes": 4756322,
+      "sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\华锐精密\\raw\\research\\华锐精密：向不特定对象发行可转换公司债券证券募集说明书.PDF.source.json",
+      "bytes": 160,
+      "sha256": "ddd6e9aa083c3424b9b5981b1804c22bb3cde36d09c3f247e1309bc259416d22"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\万润股份\\raw\\research\\万润股份：投资者关系活动记录表20260515.pdf",
+      "bytes": 153851,
+      "sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\万润股份\\raw\\research\\万润股份：投资者关系活动记录表20260515.pdf.source.json",
+      "bytes": 132,
+      "sha256": "9be2b0baa27fd93342977e7050bc44e35113215fd40751d11e0c408ca0eac443"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\周大生\\raw\\research\\周大生：2023年6月26日-6月28日投资者关系活动记录表.pdf",
+      "bytes": 414544,
+      "sha256": "f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\周大生\\raw\\research\\周大生：2023年6月26日-6月28日投资者关系活动记录表.pdf.source.json",
+      "bytes": 179,
+      "sha256": "e1a40f1a8b880c87eeab18e69e1a45936db76ca839c26d4517f58e00eca147e1"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcripts\\MSFT\\MSFT_Q4_2026_earnings_call.txt",
+      "bytes": 66324,
+      "sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\Microsoft\\raw\\transcripts\\MSFT_Q4_2026_earnings_call.txt",
+      "bytes": 66324,
+      "sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\Microsoft\\raw\\transcripts\\MSFT_Q4_2026_earnings_call.txt.source.json",
+      "bytes": 589,
+      "sha256": "5243361e7850261723908aca6e489822e9bda9222f50392756ff4c91071f5754"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中信建投\\raw\\financial_reports\\中信建投：中信建投证券股份有限公司2021年年度报告（可视版）.pdf",
+      "bytes": 40966288,
+      "sha256": "ece692912201b018575b914db98e48db23f50429f2476d0aa028022a716ae5f2"
+    }
+  ],
+  "production_database_before": {
+    "bytes": 222408704,
+    "mtime_ns": 1791248158420833300
+  },
+  "error_notes": [
+    "PowerShell brace expansion is unsupported; use explicit filenames",
+    "restricted sandbox CIM unavailable; authoritative OS process query returned zero matches"
+  ]
+}

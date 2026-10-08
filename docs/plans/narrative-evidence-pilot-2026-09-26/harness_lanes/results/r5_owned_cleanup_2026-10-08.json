@@ -1,0 +1,89 @@
+{
+  "schema_version": "r5-owned-cleanup/1",
+  "items": [
+    {
+      "relative_path": ".planning/g2-latest-red",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2-latest-red",
+      "files": 119,
+      "bytes": 6038719,
+      "tracked": 0,
+      "reparse": 0,
+      "exclusive_open_check": true
+    },
+    {
+      "relative_path": ".planning/g2cliR",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2cliR",
+      "files": 7,
+      "bytes": 676,
+      "tracked": 0,
+      "reparse": 0,
+      "exclusive_open_check": true
+    },
+    {
+      "relative_path": ".planning/g2g2",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2g2",
+      "files": 395,
+      "bytes": 19444377,
+      "tracked": 0,
+      "reparse": 0,
+      "exclusive_open_check": true
+    },
+    {
+      "relative_path": ".planning/g2g3",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2g3",
+      "files": 427,
+      "bytes": 19660015,
+      "tracked": 0,
+      "reparse": 0,
+      "exclusive_open_check": true
+    },
+    {
+      "relative_path": ".planning/g2r2",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\g2r2",
+      "files": 140,
+      "bytes": 6970202,
+      "tracked": 0,
+      "reparse": 0,
+      "exclusive_open_check": true
+    },
+    {
+      "relative_path": "tmp/cw-retire-r1",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\cw-retire-r1",
+      "files": 31,
+      "bytes": 1367636,
+      "tracked": 0,
+      "reparse": 0,
+      "exclusive_open_check": true
+    },
+    {
+      "relative_path": "artifacts/gates/slow-canary-drill/catalog",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\artifacts\\gates\\slow-canary-drill\\catalog",
+      "files": 3,
+      "bytes": 25465563,
+      "tracked": 0,
+      "reparse": 0,
+      "exclusive_open_check": true
+    },
+    {
+      "relative_path": "artifacts/gates/slow-canary-drill/source",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\artifacts\\gates\\slow-canary-drill\\source",
+      "files": 1,
+      "bytes": 40966288,
+      "tracked": 0,
+      "reparse": 0,
+      "exclusive_open_check": true
+    }
+  ],
+  "all_restored_absent": true,
+  "original_raw_deleted": 0,
+  "duplicate_test_pdf_copies_deleted": 1,
+  "unknown_usage_erased": 0,
+  "model_posts": 0,
+  "tracked_history_kept": true,
+  "total_bytes": 119913476,
+  "total_files": 1123,
+  "protected_file_count": 26,
+  "all_protected_sha_unchanged": true,
+  "production_database_stat_unchanged": true,
+  "allocation_released_unknown": true
+}

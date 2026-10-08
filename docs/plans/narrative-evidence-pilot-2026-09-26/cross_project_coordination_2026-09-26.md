@@ -1,5 +1,8 @@
 # 与 revenue-forecast 三项目大计划的交叉及执行门禁
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 > 2026-09-27 08:xx UTC 只读刷新：读取 revenue-forecast `progress.md`（最新 Round 120）、`REMEDIATION_REGISTER.md`（§162）、`OWNER_DECISIONS.md`（§39）、I-05-C/I-06-A 正式 review、I-17-A/B 卡片及 register 当前状态。本专题没有写 RF 文件。以下上一条 I-16-B “planned”判断已被新证据取代；每次 G0 前仍须重新读源文件和卡级状态。
 
 **I-16-B / I-17 现状（2026-09-27 刷新）**：§162 记录 I-16-B 的 R1–R8 部署完成、独立复审 `ACCEPT`、父侧 `accepted_scoped` 落定；其中 CWP 有已授权提交 `dbe4745` 与少量 raw/sidecar 新增，Worker 明确保持 `paused`。当前链已转入 I-17-A 自然观察：register 有 attempt `c9fec8de` 在飞及周运行失败信号；原始 `card_I-17-A.md` 模板仍写 `planned`，所以不能把模板状态等同真实 attempt 状态或已满足观察时长。I-17-B 仍是后继终审。旧 `I-16-B/a20260926-02/snapshot_manifest.json` 只证明生成时 91 项初始 `all_match=true`；此前复核 11 个 SHA 不同，且此后又有新的 company-wiki 专项计划编辑。它不能证明当前快照一致。任何跨仓/共享接口实施前，须按即将纳入的最终文件重新冻结并复核 RF 所需快照；不能把 §162 对 I-16-B 的接受误读成 G0 通过。此处仅改本仓专项协调文档，不写 RF。

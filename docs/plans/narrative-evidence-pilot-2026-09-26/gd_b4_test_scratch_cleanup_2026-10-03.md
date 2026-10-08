@@ -1,5 +1,8 @@
 # B4补批：旧测试临时目录清理（2026-10-03）
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 ## 范围与依据
 
 本卡只清理下表24个 `C:\Users\郑曾波\Projects\company-wiki` 的直接子目录。独立空间盘点已确认它们来自历史 pytest/CI 排错：mock lake、临时 SQLite/WAL、JSON 断言文件，以及 fake PDF；两份849B PDF 为测试生成的单页夹具。未发现唯一下载原件或 reparse。已读文件共14,543,053B。普通用户读失败是 pytest 创建账号 `CodexSandboxOffline` 的 owner-only ACL；用创建账号 `use_default` 上下文操作，无需更改生产或临时目录 ACL。

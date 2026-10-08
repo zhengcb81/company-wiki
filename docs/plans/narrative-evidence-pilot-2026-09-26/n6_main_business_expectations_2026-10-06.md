@@ -1,5 +1,8 @@
 # N6 MAIN：统一业务验收解释
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 ## 目的
 
 在三线已分派、实现未收到之前，用原golden实际引文明确最终产品目标，避免候选线与预算线各自猜“重要内容”。这是MAIN验收解释，不是新权限、运行时门或公共合同；不要求逐点人工签收。机器可读33点表在[harness_lanes/results/n6_main_business_expectations_2026-10-06.json](harness_lanes/results/n6_main_business_expectations_2026-10-06.json)，绑定原golden、samples及每个quote SHA/locator，不复制原件或全文。

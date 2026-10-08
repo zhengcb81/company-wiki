@@ -1,5 +1,8 @@
 # 更激进的简化建议：整套退役、按需派生（2026-10-03）
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 > **2026-10-07补漏：**已采纳方向继续有效，当前实施优先级由[G2全面复核](gate_simplification_reaudit_2026-10-07.md)覆盖本页旧S0/N4A次序；现场canary、有效pin/AUTO状态、历史CLI和工程工具仍有漏项，不能把采纳或原范围验收当全面落实。
 
 > 用户2026-10-03已采纳本文并授权实施；执行顺序和完成状态以[task_plan](task_plan.md)为准，不能把采纳视作已实现。基于[46项代码现状清单](gate_permission_inventory_2026-10-03.md)、[最终空间盘点](harness_lanes/results/gd_storage_final_cleanup_2026-10-03.md)及[N4实施卡](n4_production_batch_implementation.md)。不增加许可文件、逐项签收或小节点审查。当前先S0整套简化收口，N4A在独占范围可并行；以下工作并入已有owner节点。

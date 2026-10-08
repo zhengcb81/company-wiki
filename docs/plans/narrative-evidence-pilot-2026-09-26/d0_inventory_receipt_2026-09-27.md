@@ -1,5 +1,8 @@
 # D0 原文与派生物只读盘点收据（2026-09-27）
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 ## 范围与方法
 
 - 通过 SQLite `mode=ro&immutable=1` 读取当前 catalog；对 29,409 条 `original_primary` / `original_attachment` location 逐路径执行文件系统元数据核对。

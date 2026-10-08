@@ -1,5 +1,8 @@
 # Phase E / E4：Narrative handlers 详细实施规格（2026-09-28）
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 > **状态：实施前冻结的施工卡，后附 E4.1–E4.8 实施收据。** 原始合同与顺序先冻结，再从 RED 测试开始实现。
 >
 > **边界：** E4 只把已完成的 verified source reader、Phase C 叙述证据选择、Phase D transcript material/权利门接入 Automation Worker。E4 不写 catalog、不发布对象、不启动生产 Worker、不访问真实付费模型、不删除 raw/旧派生、不修改 revenue-forecast、filing-fetch、StockWiki 或 earnings-transcripts。最终对象写入和单 writer projector 属于 E5。

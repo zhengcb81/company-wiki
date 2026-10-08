@@ -1,5 +1,8 @@
 # IQS 独占施工卡：身份包与工程签收简化
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](../task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 > **交给已在运行的 invest-quick-scan 项目 owner，勿另开同仓写入线。**唯一写入目录：`C:\Users\郑曾波\Projects\invest-quick-scan` 的指定集成 worktree；StockWiki/CWP/RF/FF/ET 均只读。IQS 负责自己的 issuer/security/listing 与 AnalysisSubject 合同，不读取或管理 CWP 原始财报，也不写 StockWiki 研究状态。
 
 > **2026-10-01 当前状态：**IQS `master@56ff421` 已提交三份 PWF 盘点；当前 V02/scoring 的四个未跟踪路径由 owner 管理，本总控不提交或覆盖。IQS 仓内施工卡步骤 1–4 已完成；provisional Entity 与四态 mapping golden 经 public CLI 正反验证，最新复验的 StockWiki→IQS 聚焦包为 113 passed。完整 G2b 仍 partial：verified/multi-listing/AnalysisSubject 与有效期历史等 owner 真实样例未齐，W01–W03 的完整生产入口/名单扫描接线也未关闭。QA-04 行为回归通过但交付 handoff 仍 partial；DWA-03/04/05/06 有审计跟进。只由现有 IQS owner 收尾，不派第二个 IQS 写入 harness。下方 2026-09-29 状态段是当时交接快照。

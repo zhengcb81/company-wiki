@@ -1,5 +1,8 @@
 # N3a producer 交接：RF / StockWiki selected 消费
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 ## 当前能力
 
 **已发布：**CWP `a640400af4bea0ce97944e99ac9cb6abc6813ae9`，origin/master 实读一致；[Actions 37113358995](https://github.com/zhengcb81/company-wiki/actions/runs/37113358995) 成功 / 单 job 57 秒。两张 consumer 卡现在可独占开工，无需等待额外人工签收。

@@ -1,5 +1,8 @@
 # N4：可运行的叙述批次、真实模型计量与持久恢复
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 ## 当前节点已收口（2026-10-06，覆盖全部下方过程记录）
 
 用户已批准累计200000 tokens/$0.12。run10同配置DeepSeek T01只发一次请求，真实20 claims/46 locators、15管理层/5分析师问题，99479 B final；RF reference/read0、replay verified、原语言/不翻译、policy skip/0model，原件/生产/配置/RF owner保持、测试根恢复absent。batch35.217秒/总42.828秒；[真实收据](harness_lanes/results/n4c_live_2026-10-05_run10.json)、[独立业务与角色复核](harness_lanes/results/n4c_live_business_review_2026-10-06.json)。

@@ -1,5 +1,8 @@
 # StockWiki 独立施工卡：已完成 reader 与 identity lanes 并入主线
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](../task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 > **可直接交给一个 StockWiki harness。**唯一写入仓库：`C:\Users\郑曾波\Projects\StockWiki` 的新集成 worktree。仅整合本仓已完成的 SourceExport v2 reader 与 W02/W03 identity snapshot/mapping；CWP、IQS、RF、FF、ET 只读。本卡不扩展产品范围、不替 IQS 关闭 G2b，也不触碰 CWP 当前 E5/E6 代码工作树。
 
 ## 目标和范围

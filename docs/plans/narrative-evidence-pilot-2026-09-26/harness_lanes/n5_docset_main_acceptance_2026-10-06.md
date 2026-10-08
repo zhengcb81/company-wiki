@@ -1,5 +1,8 @@
 # N5-DOCSET：MAIN接收、当前主线对照与缺口归因
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](../task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 ## 范围与已知状态
 
 交付分支codex/n5-document-quality，HEAD2c3583e084a6fc632bd0970db02a439187214c0f，代码9ff251ec9ce5b29b294477d66f84336a464fc29c，写集只有benchmarks/narrative_document_types、本线PWF和handoff。9份真实资料/86标注点；基线e46108b4、selector0.3.1，报告required11/33、712个定位全回放。不能把它当当前selector0.3.2或付费摘要质量。

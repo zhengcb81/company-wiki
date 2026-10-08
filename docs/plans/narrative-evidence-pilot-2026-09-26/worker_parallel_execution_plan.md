@@ -1,5 +1,8 @@
 > 2026-10-03 当前施工由 [task_plan.md](task_plan.md) 的S0–S6统一定义。本文保留历史技术背景，旧审批/签收、原件处置和逐小步审查要求不再执行；原件全部保留。
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 # 多文档并发 Worker：可实施设计与验收手册
 
 > **状态：PLAN ONLY；未实施、未启动、未解除暂停。** 本文件是本专题并发方案的实施入口；[worker_parallel_recovery.md](worker_parallel_recovery.md) 保留设计背景和故障分类。复用 [Worker v5](../source-catalog-worker-recovery-v5-2026-09-03/README.md) 和 [R4 C/D](../painpoint-outcome-audit-2026-09-05/simplified-execution-plan.md) 中仍适用的自动技术断言，不叠加人工签收、逐 job 权限 receipt 或同一测试重复跑。本专题按 [G0–G4](milestone_review_cadence.md) 的大节点运行端到端测试，N0–N6 不是七次独立审查。用户已授权的明确公司/期次任务覆盖其文档和电话会配套处理；运行次数/费用/字节上限是自动资源控制，不是再次索取人工授权。

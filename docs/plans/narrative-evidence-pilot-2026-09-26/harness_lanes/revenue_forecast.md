@@ -1,5 +1,8 @@
 # RF 独占施工卡：来源读取与 closure 证据诊断
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](../task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 > 可单独交给一个 revenue-forecast harness。**唯一写入目录**：`C:\Users\郑曾波\Projects\revenue-forecast` 的指定独立集成 worktree；CWP、FF、ET、StockWiki/IQS 均只读。用户优先要求 RF 有效支线进入主线，但旧 `fcap` 已在远端 main；本卡处理的是尚未并入的 reader WIP、消费合同和真实脏树，不做重复 merge。
 
 开工输入包：本卡、S0a observed 接口表、FF/CWP 后续 S0b golden（未产时标 pending）、197 项证据路径/hash 盘点和只读 P/T 样本清单；新测试只在本仓可写临时根生成数据。

@@ -1,5 +1,8 @@
 # Filing Fetch × Earnings Transcripts × Company Wiki（v1 草案已退役）
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 > **状态：按旧权限设计编写的草案已整体退役。** 弱模型不得照本页旧流程重建逐期用户授权、双阶段下载审批、provider rights hash policy 或人工签字。现行集成只按跨仓总计划 §2.1/S4b 实施。
 
 ## 当前契约摘要

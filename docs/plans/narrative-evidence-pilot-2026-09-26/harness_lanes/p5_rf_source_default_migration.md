@@ -1,5 +1,8 @@
 # P5-RF：默认来源准备迁至现有SourceRef v2
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](../task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 **complete：MAIN已验收、并入本地及远端main，不再派发。** 2026-10-06再次核对：交付树干净，tip `a74b9ceb`（代码 `31fe65e6`）完整为main `6e6b817a`的祖先，没有未合入提交。以下为原施工范围，不能作为重新开工指令。
 
 验收以[MAIN正式收据](results/p5_rf_main_acceptance_2026-10-06.json)为准：默认链代码 `b110502f`，发布代码 `ca67eab7` 的[CI37391526925](https://github.com/zhengcb81/revenue-forecast/actions/runs/37391526925) attempt1 success（32秒）；后续文档提交至 `6e6b817a`。已执行108个不同case的分步GREEN、正常pre-push 107 passed、真实原件默认CLI读取3次及篡改拒绝1次，不声称一次108项整包运行。测试根已恢复，owner两份周日志SHA保持；原始handoff的旧FF pin/环境skip等hold已由MAIN整合解决。

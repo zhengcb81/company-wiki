@@ -1,5 +1,8 @@
 # B4补批：保留历史Git引用，删除四个旧审查checkout
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 2026-10-03总指挥冻结；首批23根已完成，本卡只覆盖下表四根，约228,310,996B。无新增人工审查门。space_reaudit已只读核：全为8月历史审查，无代码WIP/活动owner；来源/状态40文件各自均Git tracked，无唯一原件或manifest。普通remove，不force/reset/prune，不碰managed/pinned/其他仓。
 
 | 精确根 | 必须不变的HEAD | 保留办法 |

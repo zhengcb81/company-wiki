@@ -1,5 +1,8 @@
 # MeetingConverter：CI 零任务根因与快速可靠门
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](../task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 Status: ACCEPTED / MERGED TO MASTER / PUBLISHED / MAIN CI GREEN
 Card date: 2026-10-04
 Target repository: C:/Users/郑曾波/Projects/MeetingConverter

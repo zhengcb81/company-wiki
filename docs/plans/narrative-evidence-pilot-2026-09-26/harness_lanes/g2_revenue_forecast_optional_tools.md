@@ -1,5 +1,8 @@
 # G2-RF-TOOLS：RF可选工程工具和收尾流程简化
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](../task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 > 当前状态：2026-10-07 MAIN已验收107项及静态/公开mypy绿，正常快进main `1a2f9428a599504eb8355fcaebf86c6cbcaccbb3` 并push，精确CI37608673031所有步骤绿29秒；三owner日志保持，六测试×三安装副本已获具体授权定点同步。见[MAIN收据](results/g2_revenue-forecast_main_acceptance_2026-10-07.json)。本卡已交付；报告的uc.quality/旧manifest漂移归MAIN P1，不重派本卡。下文为原施工合同。
 
 **实施依赖已备齐。** 这是RF仓内一整组可选工程工具改造，不依赖MAIN的CWP Store/pin改动。不要把它扩展为新的forecast/evidence/source adapter项目；本卡可单独交给一个harness。

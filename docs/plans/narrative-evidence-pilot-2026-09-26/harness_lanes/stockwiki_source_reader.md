@@ -1,5 +1,8 @@
 # StockWiki 独立并行线：SourceExport v2 来源 reader
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](../task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 > **当前 StockWiki 任务：**本卡仍已完成。CWP N3a `a640400` 已发布且 CI 绿，新叙述范围按[StockWiki narrative consumer 卡](stockwiki_narrative_consumer.md)实施；不重复本卡，不改 quick-scan owner 文件。
 
 > **2026-10-03 状态：本卡已完成，不再派发。**reader 已并入 StockWiki 主线，基础 G-B 已通过真实跨仓 E2E；W01–W04 均已完成，[W04 卡](stockwiki_g2b_owner_context.md)保留交付记录。当前主线是 CWP [N3a 叙述传输实现](../narrative_transport_implementation.md)，RF/StockWiki selected 消费 G-C 仍 pending；它是新的接口范围，不应重复本卡 reader 实施。G-D/生产 Worker 仍 paused，IQS 活动项目归其既有 owner。

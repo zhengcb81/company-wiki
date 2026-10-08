@@ -1,5 +1,8 @@
 # StockWiki 独占施工卡：来源 reader、QuickScanStore 与身份消费
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](../task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 > **状态更新（2026-09-30）：**W01、SourceExport v2 reader、工程验证门简化、W02/W03 都已有完成提交；两条产品功能分支尚未进入当前 `master`。下一项可独立派发任务是[已完成 lanes 主线整合卡](stockwiki_mainline_integration.md)。W02/W03 的本地实现通过不代表 IQS G2b 通过；receipt 与 market-registry 的真实 owner 数据仍是阻塞项。
 
 > **2026-09-29 状态更新：**W01 和 SourceExport v2 reader 已由用户报告完成；engineering gate simplification 已合入 StockWiki `master@dd8912f` 并通过独立审查。本页的 W01 失败数是开工前历史快照。IQS owner 已报告施工卡第 1–4 步收尾，第 5 步 G2b 等 StockWiki 真实身份 DTO/golden；该状态尚待读取 IQS 收尾报告核实。下一项独立代码任务为[W02/W03 身份快照与四态映射](stockwiki_identity_snapshot.md)：从 StockWiki 真实 serializer 生成 golden，完成版本化身份 DTO，再交 IQS CLI 做跨仓验证。selected/full sync 仍受 CWP 持久包和相关集成门约束。同一时刻只保留一位 StockWiki 写入者。

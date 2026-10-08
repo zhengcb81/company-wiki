@@ -1,5 +1,8 @@
 # S0a 现场接口与样本输入（2026-09-29）
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 > **N3a 已发布：**CWP `a640400`、CI `37113358995` 成功 / 57 秒。独立 narrative-ref/read wire 与六份 golden 见[交接包](narrative_transport_handoff.md)；当前 RF / StockWiki consumer 在各自 worktree 实施，不重复 raw SourceRef / SourceExport。下段 `2e674cc` 是 N3a 前的 G-A 收据。
 
 > **2026-10-03 当前接口状态覆盖：**已发布 CWP `master@2e674cc`、FF `origin/main@c47c397`（已核远端 ref）、ET `main@4924d57`、RF `main@0573c40`。G-A0/G-A1、FF transcript companion 及选定 SourceRef 消费链已完成；当前 FF/CWP/RF 三仓 E2E 为 1 passed / 8.69 秒，隔离根 `.ga-mainline-20261003` 已清理。FF→ET→CWP 历史节点包 191 passed / 1 skipped 见 [Phase 58](task_plan.md)；未证明 live FMP 200，历史真实请求为 402。RF [Actions 37110072067](https://github.com/zhengcb81/revenue-forecast/actions/runs/37110072067) 两 job 成功（verify 2 分 15 秒、real-roots 1 分 40 秒）。

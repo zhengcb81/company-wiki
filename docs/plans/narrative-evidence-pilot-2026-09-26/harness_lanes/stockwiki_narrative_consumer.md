@@ -1,5 +1,8 @@
 # StockWiki 独占任务：持久叙述证据薄 consumer
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](../task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 > **已完成，勿重复派发（2026-10-03）：**最终`4c3334e`正常merge到master`ae0b3e3`，保留W05其他owner提交；合并后相关172passed/1平台skip，Ruff绿。14真实producer/consumerE2E、785项单仓节点和两平台生命周期包有既有收据，不重复运行。无remote不新增。见[G-C收尾](results/gc_consumer_closeout_2026-10-03.md)。下方为实施历史与接口记录。
 
 ## 范围与前置

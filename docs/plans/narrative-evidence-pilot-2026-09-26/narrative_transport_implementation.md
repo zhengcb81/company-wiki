@@ -1,5 +1,8 @@
 # N3a：持久叙述包跨进程读取
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 ## 范围和顺序
 
 E-B 已实现内容寻址工件、projector 和 `narrative-bundle/2.0`，本步复用它们。仅改 company-wiki，不改 RF、StockWiki、IQS，不启动生产 Worker。G-A 当前主线 FF `c47c397` → CWP `2e674cc` → RF `0573c40` 的正式测试于 2026-10-03 通过（1 passed，8.69s，独立测试根退出删除）。此前 FF→ET→CWP 的 191 项节点包按 Phase 58 收据引用，不重复运行。

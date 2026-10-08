@@ -1,5 +1,8 @@
 # RF 独占任务：持久叙述证据薄 consumer
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](../task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 > **已完成，勿重复派发（2026-10-03）：**最终`6fb2def7`正常推送origin/main并快进rf-impl本地主线，Actions37119502901全绿。89项真实文档/原reader节点、生命周期Win20/Linux16/CLI3及静态门已通过；4项历史owner dirty原SHA保留。见[G-C收尾](results/gc_consumer_closeout_2026-10-03.md)。下方为实施历史与接口记录。
 
 ## 范围与前置

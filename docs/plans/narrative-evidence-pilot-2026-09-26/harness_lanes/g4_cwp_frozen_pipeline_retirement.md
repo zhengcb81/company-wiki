@@ -1,5 +1,8 @@
 # G4-CWP-PIPELINE：冻结旧处理链整体退休
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](../task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 **状态：complete / accepted / published。CWP df7d7ba已并master/推远端，211责任绿，精确CI37673393822全部步骤绿74秒；MAIN指南/工程清单接线已完成。**
 
 正式收据：[G4 MAIN验收](../g4_main_acceptance_2026-10-07.md)。以下为已完成施工细则/历史基线，不再重新开工。

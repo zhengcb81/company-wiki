@@ -1,5 +1,8 @@
 # N6 MAIN：选择器升级后的历史 final 兼容
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 ## 范围与现状
 
 2026-10-06复核：RF main仍为6e6b817a，两份weekly owner日志不动；CWP master ca6d9ce只含新卡文档，用户source_acquisition改动不动。上一目标回合为progress（DOCSET发布与N6独立卡/分支准备），不重复已绿节点。

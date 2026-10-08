@@ -1,5 +1,8 @@
 # FF 独占施工卡：财报复用、精确下载与电话会议编排
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](../task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 > 可单独交给一个 filing-fetch harness。**唯一写入目录**：`C:\Users\郑曾波\Projects\filing-fetch` 的本仓集成 worktree。`filing-fetch-transcript-companion` 旧 worktree 只读参考；ET/CWP/RF、全局安装的 filing-fetch skill 只读。总指挥接收本仓实现后统一更新全局技能入口。不得读取或 stage `config/FMP_API_KEY.txt` 的内容。
 
 > **2026-10-01 当前状态：**FF 根当前检出 `fcap@d35b6f5`，与 `origin/main` 同步；本地名为 `main` 的 ref `c9799b7` 比远端落后 39 个提交。SourceRef v2 worktree `5532ce0` 与 transcript companion worktree `29085f7` 当前无工作区改动，但 `fetch_filing.py`、`filing_contracts.py`、`transcript_companion.py`、`test_transcript_companion.py` 等核心路径有重叠。由一个 FF owner 在最新远端主线基础上收拢两条 WIP；不要让两个 harness 分别合并或覆盖同一文件。全局计划/S0b golden 与本仓 E2E 仍待验，不能把分支存在等同于功能已并线。

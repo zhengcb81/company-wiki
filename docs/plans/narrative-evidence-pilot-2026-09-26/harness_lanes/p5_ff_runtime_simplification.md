@@ -1,5 +1,8 @@
 # P5-FF：旧Worker编排退出与真正有界的JSON进程
 
+<!-- CURRENT_PWF_NAV -->
+> **历史施工/调查材料：**当前状态与唯一下一步见[总计划](../task_plan.md)。下方旧待办、暂停、人工签收和预算只是当时记录，不自动恢复；R3/R5的真实剩余范围以总计划为准。
+
 **已交付并验收合入；不要重派。** 原卡为中等代码包，外线交付ab9ce33/code7c6cf48，MAIN修复/验收已合入本地及远端FF main758e8f4，精确CI37385101051全绿；[MAIN验收收据](results/p5_ff_main_acceptance_2026-10-05.json)。下面保留原施工范围和上下文。仅负责filing-fetch，不依赖RF迁移或CWP真实模型结果，SourceRef v2/电话会wire未变。
 
 ## 1. 两个实证缺口
