@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 import subprocess
 import sys
+import time
 
 import pytest
 
@@ -90,7 +91,7 @@ def test_timeout_preserves_last_complete_matching_progress(
     def time_out(command, **kwargs):
         raise subprocess.TimeoutExpired(command, 1, stderr=partial.encode("utf-8"))
 
-    monkeypatch.setattr(subprocess, "run", time_out)
+    monkeypatch.setattr("company_wiki.source_catalog.adapter_process.run_json_process", time_out)
     budget = _budget()
     with pytest.raises(AdapterProcessError) as error:
         _adapter(tmp_path).discover_bounded(_request(), budget)
@@ -116,7 +117,7 @@ def test_failure_usage_with_wrong_adapter_version_is_not_trusted(
                       "acquisition_usage": _usage()},
         })
 
-    monkeypatch.setattr(subprocess, "run", lambda *a, **kw:
+    monkeypatch.setattr("company_wiki.source_catalog.adapter_process.run_json_process", lambda *a, **kw:
                         subprocess.CompletedProcess(a[0], 1, stdout="", stderr=detail))
     budget = _budget()
     with pytest.raises(AdapterProcessError) as error:
@@ -169,3 +170,28 @@ def test_real_subprocess_hard_timeout_recovers_checkpoint(tmp_path: Path):
     assert error.value.acquisition_usage_complete is False
     assert (budget.response_bytes_used, budget.cost_usd_used) == (7, Decimal("0.005"))
     assert not Path((tmp_path / "scratch_record.txt").read_text(encoding="utf-8")).exists()
+
+
+def test_hard_timeout_stops_owned_grandchild_and_late_writes(tmp_path: Path):
+    child = tmp_path / "grandchild.py"
+    started, late = tmp_path / "started", tmp_path / "late"
+    child.write_text("from pathlib import Path\nimport time\n"
+        + f"Path({str(started)!r}).write_text('started')\n"
+        + "time.sleep(3)\n" + f"Path({str(late)!r}).write_text('late provider activity')\n", encoding="utf-8")
+    parent = tmp_path / "parent.py"
+    parent.write_text("import subprocess,sys,time\n"
+        + f"subprocess.Popen([sys.executable,'-B',{str(child)!r}],stdin=subprocess.DEVNULL,"
+        + "stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)\n"
+        + "sys.stderr.write(" + repr(_progress(count=7)) + ");sys.stderr.flush()\n"
+        + "time.sleep(30)\n", encoding="utf-8")
+    adapter = JsonCommandAdapter(name="recovery", version="1.0.0",
+        command=(sys.executable, "-B", str(parent)), project_root=tmp_path,
+        timeout_seconds=1.5, supports_acquisition_budget=True)
+    budget = _budget()
+    with pytest.raises(AdapterProcessError) as error:
+        adapter.discover_bounded(_request(), budget)
+    assert started.exists(), "fixture descendant must really start"
+    assert error.value.error_code == "adapter_timeout"
+    assert budget.usage_complete is False
+    time.sleep(2)
+    assert not late.exists(), "timed-out provider descendant remained active"

@@ -1,0 +1,3680 @@
+{
+  "schema_version": "cross-market-report/1",
+  "mode": "live",
+  "suite": "full",
+  "spec_sha256": "88d272f741aca8e53973f02faf2c774befd9085b5d206bdab84607e209bfbeb4",
+  "checkpoints_sha256": "bc66bfe50034875ea7443648071860745eb5662b08532a64a50379ef1bc57d8e",
+  "versions": {
+    "rf": "72ce94c160bbb5b9399c8716307588b443a72a83",
+    "ff": "211a56ff1b1f7b5c5d1809b17a60e9a2af1ce6e8",
+    "cwp": "d77cd6c1c588bb6ef78be1e356af052e5521d113",
+    "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+    "et": "2b9fb84660f98ce27a05709a7e31342ab044b4d2",
+    "provider-cn": "c0f07e12d4ba3e232d712bb6e5e491832023b0a0",
+    "provider-hk": "76037b242d0b14a77281d7bc610429296123c5cb",
+    "provider-us": "76037b242d0b14a77281d7bc610429296123c5cb"
+  },
+  "checks": [
+    {
+      "case": "CN-688012",
+      "id": "frozen_bytes",
+      "status": "PASS",
+      "detail": "all referenced raw bytes and independent reviewed inputs opened",
+      "raw_count": 12
+    },
+    {
+      "case": "CN-688012",
+      "id": "identity_period",
+      "status": "PASS",
+      "detail": "copied source declarations, not fresh official authenticity proof",
+      "published_date": "2026-03-31",
+      "availability_semantics": null
+    },
+    {
+      "case": "CN-688012",
+      "id": "official_provenance",
+      "status": "NOT_RUN",
+      "detail": "fresh official provenance must be established in live mode"
+    },
+    {
+      "case": "CN-688012",
+      "id": "raw_replay",
+      "status": "PASS",
+      "detail": "registration idempotent; verified original byte open",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "byte_size": 9165875,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "case": "CN-688012",
+      "id": "virtual_move",
+      "status": "PASS",
+      "detail": "old SourceRef opens bytes after isolated physical rename"
+    },
+    {
+      "case": "CN-688012",
+      "id": "wrong_hash",
+      "status": "PASS",
+      "detail": "wrong SHA refused with zero original bytes"
+    },
+    {
+      "case": "CN-688012",
+      "id": "rf_ff_reuse",
+      "status": "PASS",
+      "detail": "real RF/FF/CWP subprocesses; SourceRef v2; download_calls=0"
+    },
+    {
+      "case": "CN-688012",
+      "id": "correct_provider_download",
+      "status": "PASS",
+      "detail": "actual configured market adapter, verified new bytes/identity/year, second request zero download",
+      "envelope": {
+        "schema_version": "2.0",
+        "status": "source_candidate",
+        "request_period": {
+          "mode": "exact",
+          "fiscal_year": 2026,
+          "fiscal_period": "H1",
+          "as_of_date": "2026-10-08"
+        },
+        "filing": {
+          "status": "source_candidate",
+          "source_ref": {
+            "byte_size": 3149962,
+            "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+            "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+            "mime_type": "application/pdf",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+          },
+          "byte_verification": "pending_verified_open",
+          "document_kind": "semi_annual_report",
+          "fiscal_year": 2026,
+          "fiscal_period": "H1",
+          "resolution_outcome": "downloaded_new",
+          "download_events": 1
+        },
+        "transcript": {
+          "status": "not_requested",
+          "retryable": false
+        },
+        "calls": 2,
+        "downloads": 1
+      }
+    },
+    {
+      "case": "CN-688012",
+      "id": "transcript_live",
+      "status": "NOT_APPLICABLE",
+      "detail": "this CN filing request has no earnings-call companion"
+    },
+    {
+      "case": "CN-688012",
+      "id": "canonical_worker",
+      "status": "PASS",
+      "detail": "real finite spawned Worker, loopback model only; selected business content, no translation, idempotent resume",
+      "span_count": 96,
+      "local_model_posts": 1,
+      "repeat_model_posts": 0,
+      "translate": false,
+      "source_language": "zh",
+      "source_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "external_model_posts": 0
+    },
+    {
+      "case": "CN-688012",
+      "id": "narrative_virtual_read",
+      "status": "PASS",
+      "detail": "CWP/RF current NarrativeRef contents match and exact evidence lookup"
+    },
+    {
+      "case": "CN-688012",
+      "id": "narrative_forecast_consumption",
+      "status": "NOT_RUN",
+      "detail": "frozen accepted model inputs; new worker output is not silently substituted into research evidence"
+    },
+    {
+      "case": "CN-688012",
+      "id": "format_support",
+      "status": "PASS",
+      "detail": "PDF tested"
+    },
+    {
+      "case": "CN-688012",
+      "id": "format_html",
+      "status": "NOT_APPLICABLE",
+      "detail": "format sample belongs to Microsoft case"
+    },
+    {
+      "case": "CN-688012",
+      "id": "format_pptx",
+      "status": "NOT_APPLICABLE",
+      "detail": "format sample belongs to Microsoft case"
+    },
+    {
+      "case": "CN-688012",
+      "id": "domain_boundaries",
+      "status": "PASS",
+      "detail": "independently reviewed facts, targets, peer and pp boundaries"
+    },
+    {
+      "case": "CN-688012",
+      "id": "formal_forecast",
+      "status": "PASS",
+      "detail": "validator + formal engine + generated Markdown; all scenario/year paths unchanged"
+    },
+    {
+      "case": "CN-688012",
+      "id": "arithmetic",
+      "status": "PASS",
+      "detail": "independent segment bridge and sensitivity request recomputation"
+    },
+    {
+      "case": "CN-688012",
+      "id": "snapshot_registry",
+      "status": "PASS",
+      "detail": "new frozen snapshot, registered-artifact audit, tuple validation, overwrite rejected"
+    },
+    {
+      "case": "CN-688012",
+      "id": "process_seed_stability",
+      "status": "PASS",
+      "detail": "strong validation of the same artifact under hash seeds 0/1/2; no changed expectations"
+    },
+    {
+      "case": "CN-688012",
+      "id": "old_snapshot_immutable",
+      "status": "PASS",
+      "detail": "original input/forecast/snapshot bytes unchanged"
+    },
+    {
+      "case": "CN-688012",
+      "id": "skill_coverage",
+      "status": "NOT_RUN",
+      "detail": "fresh skill 0–11 research is not proven by replay; sealed independent review retained",
+      "historical_review": "docs/plans/cross-market-rf-e2e-2026-10-08/reviews/CN-688012/recheck_v3.json",
+      "historical_review_sha256": "e56e3bac6408d51ef9c96098ca89ff7e675d61f3ab022fac0528ad1aaa79df01"
+    },
+    {
+      "case": "CN-688012",
+      "id": "future_backtest",
+      "status": "NOT_APPLICABLE",
+      "detail": "future actuals absent in frozen as-of; no fabricated evaluation"
+    },
+    {
+      "case": "HK-00700",
+      "id": "frozen_bytes",
+      "status": "PASS",
+      "detail": "all referenced raw bytes and independent reviewed inputs opened",
+      "raw_count": 6
+    },
+    {
+      "case": "HK-00700",
+      "id": "identity_period",
+      "status": "PASS",
+      "detail": "copied source declarations, not fresh official authenticity proof",
+      "published_date": "2026-04-09",
+      "availability_semantics": null
+    },
+    {
+      "case": "HK-00700",
+      "id": "official_provenance",
+      "status": "BLOCKED",
+      "detail": "HK archived-byte identity is known, fresh official authentication/publication day remains unproved"
+    },
+    {
+      "case": "HK-00700",
+      "id": "raw_replay",
+      "status": "PASS",
+      "detail": "registration idempotent; verified original byte open",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "byte_size": 4428270,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "case": "HK-00700",
+      "id": "virtual_move",
+      "status": "PASS",
+      "detail": "old SourceRef opens bytes after isolated physical rename"
+    },
+    {
+      "case": "HK-00700",
+      "id": "wrong_hash",
+      "status": "PASS",
+      "detail": "wrong SHA refused with zero original bytes"
+    },
+    {
+      "case": "HK-00700",
+      "id": "rf_ff_reuse",
+      "status": "PASS",
+      "detail": "real RF/FF/CWP subprocesses; SourceRef v2; download_calls=0"
+    },
+    {
+      "case": "HK-00700",
+      "id": "correct_provider_download",
+      "status": "PASS",
+      "detail": "actual configured market adapter, verified new bytes/identity/year, second request zero download",
+      "envelope": {
+        "schema_version": "2.0",
+        "status": "source_candidate",
+        "request_period": {
+          "mode": "exact",
+          "fiscal_year": 2026,
+          "fiscal_period": "H1",
+          "as_of_date": "2026-10-08"
+        },
+        "filing": {
+          "status": "source_candidate",
+          "source_ref": {
+            "byte_size": 5451089,
+            "content_sha256": "6231374bc3d7bd104fcebb7735f9692050b55be32fa0f34d7d7f20478efa71f1",
+            "document_id": "urn:company-wiki:document:sha256:6231374bc3d7bd104fcebb7735f9692050b55be32fa0f34d7d7f20478efa71f1",
+            "mime_type": "application/pdf",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:6231374bc3d7bd104fcebb7735f9692050b55be32fa0f34d7d7f20478efa71f1"
+          },
+          "byte_verification": "pending_verified_open",
+          "document_kind": "semi_annual_report",
+          "fiscal_year": 2026,
+          "fiscal_period": "H1",
+          "resolution_outcome": "downloaded_new",
+          "download_events": 1
+        },
+        "transcript": {
+          "status": "not_found",
+          "reason": "exact_transcript_missing",
+          "retryable": false
+        },
+        "calls": 3,
+        "downloads": 1
+      }
+    },
+    {
+      "case": "HK-00700",
+      "id": "transcript_live",
+      "status": "NOT_RUN",
+      "detail": "actual FF companion; tool start/provider calls/reason separate from filing outcome",
+      "transcript": {
+        "status": "provider_unavailable",
+        "reason": "zero_cost_budget",
+        "retryable": false,
+        "provider": "fmp",
+        "provider_calls": 0
+      },
+      "et_tool_started": false
+    },
+    {
+      "case": "HK-00700",
+      "id": "canonical_worker",
+      "status": "PASS",
+      "detail": "real finite spawned Worker, loopback model only; selected business content, no translation, idempotent resume",
+      "span_count": 12,
+      "local_model_posts": 1,
+      "repeat_model_posts": 0,
+      "translate": false,
+      "source_language": "zh",
+      "source_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "external_model_posts": 0
+    },
+    {
+      "case": "HK-00700",
+      "id": "narrative_virtual_read",
+      "status": "PASS",
+      "detail": "CWP/RF current NarrativeRef contents match and exact evidence lookup"
+    },
+    {
+      "case": "HK-00700",
+      "id": "narrative_forecast_consumption",
+      "status": "NOT_RUN",
+      "detail": "frozen accepted model inputs; new worker output is not silently substituted into research evidence"
+    },
+    {
+      "case": "HK-00700",
+      "id": "format_support",
+      "status": "PASS",
+      "detail": "PDF tested"
+    },
+    {
+      "case": "HK-00700",
+      "id": "format_html",
+      "status": "NOT_APPLICABLE",
+      "detail": "format sample belongs to Microsoft case"
+    },
+    {
+      "case": "HK-00700",
+      "id": "format_pptx",
+      "status": "NOT_APPLICABLE",
+      "detail": "format sample belongs to Microsoft case"
+    },
+    {
+      "case": "HK-00700",
+      "id": "domain_boundaries",
+      "status": "PASS",
+      "detail": "independently reviewed facts, targets, peer and pp boundaries"
+    },
+    {
+      "case": "HK-00700",
+      "id": "formal_forecast",
+      "status": "PASS",
+      "detail": "validator + formal engine + generated Markdown; all scenario/year paths unchanged"
+    },
+    {
+      "case": "HK-00700",
+      "id": "arithmetic",
+      "status": "PASS",
+      "detail": "independent segment bridge and sensitivity request recomputation"
+    },
+    {
+      "case": "HK-00700",
+      "id": "snapshot_registry",
+      "status": "PASS",
+      "detail": "new frozen snapshot, registered-artifact audit, tuple validation, overwrite rejected"
+    },
+    {
+      "case": "HK-00700",
+      "id": "process_seed_stability",
+      "status": "PASS",
+      "detail": "strong validation of the same artifact under hash seeds 0/1/2; no changed expectations"
+    },
+    {
+      "case": "HK-00700",
+      "id": "old_snapshot_immutable",
+      "status": "PASS",
+      "detail": "original input/forecast/snapshot bytes unchanged"
+    },
+    {
+      "case": "HK-00700",
+      "id": "skill_coverage",
+      "status": "NOT_RUN",
+      "detail": "fresh skill 0–11 research is not proven by replay; sealed independent review retained",
+      "historical_review": "docs/plans/cross-market-rf-e2e-2026-10-08/reviews/HK-00700/recheck_v4.json",
+      "historical_review_sha256": "ff7276261998f590fce000532b88632b6b78327cb19cbf7826b7aceb4a5029f3"
+    },
+    {
+      "case": "HK-00700",
+      "id": "future_backtest",
+      "status": "NOT_APPLICABLE",
+      "detail": "future actuals absent in frozen as-of; no fabricated evaluation"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "frozen_bytes",
+      "status": "PASS",
+      "detail": "all referenced raw bytes and independent reviewed inputs opened",
+      "raw_count": 9
+    },
+    {
+      "case": "US-MSFT",
+      "id": "identity_period",
+      "status": "PASS",
+      "detail": "copied source declarations, not fresh official authenticity proof",
+      "published_date": "2025-07-30",
+      "availability_semantics": null
+    },
+    {
+      "case": "US-MSFT",
+      "id": "official_provenance",
+      "status": "NOT_RUN",
+      "detail": "fresh official provenance must be established in live mode"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "raw_replay",
+      "status": "PASS",
+      "detail": "registration idempotent; verified original byte open",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "byte_size": 8158067,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "case": "US-MSFT",
+      "id": "virtual_move",
+      "status": "PASS",
+      "detail": "old SourceRef opens bytes after isolated physical rename"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "wrong_hash",
+      "status": "PASS",
+      "detail": "wrong SHA refused with zero original bytes"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "rf_ff_reuse",
+      "status": "PASS",
+      "detail": "real RF/FF/CWP subprocesses; SourceRef v2; download_calls=0"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "correct_provider_download",
+      "status": "PASS",
+      "detail": "actual configured market adapter, verified new bytes/identity/year, second request zero download",
+      "envelope": {
+        "schema_version": "2.0",
+        "status": "source_candidate",
+        "request_period": {
+          "mode": "exact",
+          "fiscal_year": 2026,
+          "fiscal_period": null,
+          "as_of_date": "2026-10-08"
+        },
+        "filing": {
+          "status": "source_candidate",
+          "source_ref": {
+            "byte_size": 8585610,
+            "content_sha256": "ace2aa8408b1e40c239fc5b222ce8e1b93acbfead28d0c86c4bb69f79b08eda7",
+            "document_id": "urn:company-wiki:document:sha256:ace2aa8408b1e40c239fc5b222ce8e1b93acbfead28d0c86c4bb69f79b08eda7",
+            "mime_type": "text/html",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:ace2aa8408b1e40c239fc5b222ce8e1b93acbfead28d0c86c4bb69f79b08eda7"
+          },
+          "byte_verification": "pending_verified_open",
+          "document_kind": "annual_report",
+          "fiscal_year": 2026,
+          "fiscal_period": "FY",
+          "resolution_outcome": "downloaded_new",
+          "download_events": 1
+        },
+        "transcript": {
+          "status": "provider_unavailable",
+          "reason": "zero_cost_budget",
+          "retryable": false,
+          "provider": "fmp",
+          "provider_calls": 0
+        },
+        "calls": 3,
+        "downloads": 1
+      }
+    },
+    {
+      "case": "US-MSFT",
+      "id": "transcript_live",
+      "status": "NOT_RUN",
+      "detail": "actual FF companion; tool start/provider calls/reason separate from filing outcome",
+      "transcript": {
+        "status": "provider_unavailable",
+        "reason": "zero_cost_budget",
+        "retryable": false,
+        "provider": "fmp",
+        "provider_calls": 0
+      },
+      "et_tool_started": false
+    },
+    {
+      "case": "US-MSFT",
+      "id": "canonical_worker",
+      "status": "PASS",
+      "detail": "real finite spawned Worker, loopback model only; selected business content, no translation, idempotent resume",
+      "span_count": 49,
+      "local_model_posts": 1,
+      "repeat_model_posts": 0,
+      "translate": false,
+      "source_language": "en",
+      "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "external_model_posts": 0
+    },
+    {
+      "case": "US-MSFT",
+      "id": "narrative_virtual_read",
+      "status": "PASS",
+      "detail": "CWP/RF current NarrativeRef contents match and exact evidence lookup"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "narrative_forecast_consumption",
+      "status": "NOT_RUN",
+      "detail": "frozen accepted model inputs; new worker output is not silently substituted into research evidence"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "format_support",
+      "status": "PASS",
+      "detail": "TXT tested; HTML/PPTX are separate actual probes"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "format_html",
+      "status": "BLOCKED",
+      "detail": "actual finite Worker refusal: {\"budget\": {\"estimated_micro_usd\": 0, \"tokens\": 0, \"unknown_reservations\": 0, \"unsettled_reservations\": 0}, \"documents\": [{\"artifact_ref\": null, \"document_id\": \"urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe\", \"errors\": [\"DEPENDENCY_TERMINAL\", \"UNSUPPORTED_SOURCE_TYPE\", \"DEPENDENCY_TERMINAL\"], \"status\": \"dead_letter\"}], \"run_id\": \"format-html\", \"schema_version\": \"narrative-batch-result/1\", \"status\": \"failed\", \"storage\": {\"persistent_added_bytes\": 135, \"scratch_peak_bytes\": 0}}"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "format_pptx",
+      "status": "BLOCKED",
+      "detail": "actual finite Worker refusal: {\"budget\": {\"estimated_micro_usd\": 0, \"tokens\": 0, \"unknown_reservations\": 0, \"unsettled_reservations\": 0}, \"documents\": [{\"artifact_ref\": null, \"document_id\": \"urn:company-wiki:document:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4\", \"errors\": [\"DEPENDENCY_TERMINAL\", \"UNSUPPORTED_SOURCE_TYPE\", \"DEPENDENCY_TERMINAL\"], \"status\": \"dead_letter\"}], \"run_id\": \"format-pptx\", \"schema_version\": \"narrative-batch-result/1\", \"status\": \"failed\", \"storage\": {\"persistent_added_bytes\": 135, \"scratch_peak_bytes\": 0}}"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "domain_boundaries",
+      "status": "PASS",
+      "detail": "independently reviewed facts, targets, peer and pp boundaries"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "formal_forecast",
+      "status": "PASS",
+      "detail": "validator + formal engine + generated Markdown; all scenario/year paths unchanged"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "arithmetic",
+      "status": "PASS",
+      "detail": "independent segment bridge and sensitivity request recomputation"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "snapshot_registry",
+      "status": "PASS",
+      "detail": "new frozen snapshot, registered-artifact audit, tuple validation, overwrite rejected"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "process_seed_stability",
+      "status": "PASS",
+      "detail": "strong validation of the same artifact under hash seeds 0/1/2; no changed expectations"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "old_snapshot_immutable",
+      "status": "PASS",
+      "detail": "original input/forecast/snapshot bytes unchanged"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "skill_coverage",
+      "status": "NOT_RUN",
+      "detail": "fresh skill 0–11 research is not proven by replay; sealed independent review retained",
+      "historical_review": "docs/plans/cross-market-rf-e2e-2026-10-08/reviews/US-MSFT/recheck_v2.json",
+      "historical_review_sha256": "3d706bc288c62da8f0e05645b90a00b64c43b81bcba151eaf0c8d320d66bceb2"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "future_backtest",
+      "status": "NOT_APPLICABLE",
+      "detail": "future actuals absent in frozen as-of; no fabricated evaluation"
+    },
+    {
+      "case": "ALL",
+      "id": "ff_et_cwp_contract",
+      "status": "PASS",
+      "detail": "actual ET CLI/workers; HTTP-only fixture; untranslated text, dedup, timeout cleanup"
+    },
+    {
+      "case": "ALL",
+      "id": "isolation_cleanup",
+      "status": "PASS",
+      "detail": "owned temporary tree removed and protected input hashes unchanged"
+    }
+  ],
+  "commands": [
+    {
+      "index": 0,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.source_reader_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--document-id",
+        "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "--source-id",
+        "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "--content-sha256",
+        "0000000000000000000000000000000000000000000000000000000000000000"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 1.582,
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr_sha256": "f4f34a791ead2775d276435d3093ddfda74bfa324cd34e26f80e0273a1ae8ada",
+      "stderr_bytes": 86,
+      "stderr_excerpt": "{\"reason\":\"expected_version_mismatch\",\"schema_version\":\"2.1\",\"status\":\"unavailable\"}\r\n"
+    },
+    {
+      "index": 1,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\source_preparation.py",
+        "--company-wiki-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--company-wiki-catalog-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--filing-fetch-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff",
+        "--timeout-seconds",
+        "45"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 3.839,
+      "returncode": 0,
+      "stdout_sha256": "b58b0b79ca13494207eb61f13f8bcd41e8be5c768a88a25df1a73b545275b278",
+      "stdout_bytes": 4582,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 2,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\revenue_forecast.py",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\CN-688012\\input.json",
+        "--validate-only",
+        "--verbose"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 0.743,
+      "returncode": 0,
+      "stdout_sha256": "5be86f95bd4bb3848e802afa321452f38330ecec2d48f7a1d1cb8de4efbe7295",
+      "stdout_bytes": 7,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 3,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\revenue_forecast.py",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\CN-688012\\input.json",
+        "--output",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\CN-688012\\new_forecast.json",
+        "--markdown",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\CN-688012\\new_forecast.md"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 0.557,
+      "returncode": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 4,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\revenue_backtest.py",
+        "create",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\CN-688012\\input.json",
+        "--version",
+        "2026-10-08-cn688012-v3",
+        "--output",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\CN-688012\\new_snapshot.json"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 0.503,
+      "returncode": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 5,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\cross_market_suite\\rf_checks.py",
+        "--runtime",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf",
+        "--case-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\CN-688012"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 0.456,
+      "returncode": 0,
+      "stdout_sha256": "b171f832fc03f839be3dc6be793b983eef0a6f7f9ac179fbf34245731518da0c",
+      "stdout_bytes": 71,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 6,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\revenue_backtest.py",
+        "create",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\CN-688012\\input.json",
+        "--version",
+        "2026-10-08-cn688012-v3",
+        "--output",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\CN-688012\\new_snapshot.json"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 0.455,
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr_sha256": "d296e35f2ecccb1c7957aa5ed4e7864f621e3853fb855ada541be4eaa6aa71b3",
+      "stderr_bytes": 122,
+      "stderr_excerpt": "error: [Errno 17] File exists: 'C:\\\\Users\\\\郑曾波\\\\AppData\\\\Local\\\\Temp\\\\cmrf-cgg8xpdn\\\\CN-688012\\\\new_snapshot.json'\r\n"
+    },
+    {
+      "index": 7,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\cross_market_suite\\rf_checks.py",
+        "--runtime",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf",
+        "--case-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\CN-688012"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 0.445,
+      "returncode": 0,
+      "stdout_sha256": "b171f832fc03f839be3dc6be793b983eef0a6f7f9ac179fbf34245731518da0c",
+      "stdout_bytes": 71,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 8,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\cross_market_suite\\rf_checks.py",
+        "--runtime",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf",
+        "--case-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\CN-688012"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 0.406,
+      "returncode": 0,
+      "stdout_sha256": "b171f832fc03f839be3dc6be793b983eef0a6f7f9ac179fbf34245731518da0c",
+      "stdout_bytes": 71,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 9,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.source_reader_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+        "--document-id",
+        "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "--source-id",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "--content-sha256",
+        "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "--purpose",
+        "filing_reuse"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 0.807,
+      "returncode": 0,
+      "stdout_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "stdout_bytes": 4428270,
+      "stderr_sha256": "82915231b543fb759cdd15445a554c57231caaa40c669892e5886fe234646d63",
+      "stderr_bytes": 1584,
+      "stderr_excerpt": "{\"byte_size\":4428270,\"content_sha256\":\"d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7\",\"document_id\":\"urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7\",\"manifest\":{\"byte_size\":4428270,\"canonical_entity_id\":null,\"collector_name\":null,\"collector_version\":null,\"content_sha256\":\"d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7\",\"display_name\":null,\"document_id\":\"urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7\",\"document_kind\":\"annual_report\",\"fiscal_period\":null,\"fiscal_year\":2025,\"form_type\":null,\"language\":\"zh\",\"market\":\"HK\",\"mime_type\":\"application/pdf\",\"period_end\":null,\"provider\":null,\"provider_document_id\":null,\"published_date\":\"2026-04-09\",\"retrieved_at\":null,\"security_id\":\"00700\",\"source_id\":\"urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7\",\"source_url\":\"https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf\",\"title\":\"\\u817e\\u8baf\\uff1a2025\\u5e74\\u5e74\\u5ea6\\u62a5\\u544a\"},\"policy_sha256\":\"c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd\",\"read_at\":\"2026-10-08T18:57:27.759781+00:00\",\"review\":{\"evidence_sha256\":null,\"policy_hash\":null,\"reviewed_at\":null,\"source_sha256\":null,\"status\":\"not_reviewed\"},\"schema_version\":\"2.1\",\"source_id\":\"urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7\",\"source_read_policy_sha256\":\"072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270\",\"status\":\"ok\"}\r\n"
+    },
+    {
+      "index": 10,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.source_reader_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+        "--document-id",
+        "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "--source-id",
+        "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "--content-sha256",
+        "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "--purpose",
+        "filing_reuse"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 0.808,
+      "returncode": 0,
+      "stdout_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+      "stdout_bytes": 5241364,
+      "stderr_sha256": "83114dd9208d55df327f941d096f42f845003b06b73688f4dc2da1e34ce59eac",
+      "stderr_bytes": 1584,
+      "stderr_excerpt": "{\"byte_size\":5241364,\"content_sha256\":\"70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0\",\"document_id\":\"urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0\",\"manifest\":{\"byte_size\":5241364,\"canonical_entity_id\":null,\"collector_name\":null,\"collector_version\":null,\"content_sha256\":\"70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0\",\"display_name\":null,\"document_id\":\"urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0\",\"document_kind\":\"annual_report\",\"fiscal_period\":null,\"fiscal_year\":2024,\"form_type\":null,\"language\":\"zh\",\"market\":\"HK\",\"mime_type\":\"application/pdf\",\"period_end\":null,\"provider\":null,\"provider_document_id\":null,\"published_date\":\"2025-04-08\",\"retrieved_at\":null,\"security_id\":\"00700\",\"source_id\":\"urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0\",\"source_url\":\"https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0408/2025040800668_c.pdf\",\"title\":\"\\u817e\\u8baf\\uff1a2024\\u5e74\\u5e74\\u5ea6\\u62a5\\u544a\"},\"policy_sha256\":\"c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd\",\"read_at\":\"2026-10-08T18:57:28.604821+00:00\",\"review\":{\"evidence_sha256\":null,\"policy_hash\":null,\"reviewed_at\":null,\"source_sha256\":null,\"status\":\"not_reviewed\"},\"schema_version\":\"2.1\",\"source_id\":\"urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0\",\"source_read_policy_sha256\":\"072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270\",\"status\":\"ok\"}\r\n"
+    },
+    {
+      "index": 11,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.source_reader_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--document-id",
+        "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "--source-id",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "--content-sha256",
+        "0000000000000000000000000000000000000000000000000000000000000000"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 0.743,
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr_sha256": "f4f34a791ead2775d276435d3093ddfda74bfa324cd34e26f80e0273a1ae8ada",
+      "stderr_bytes": 86,
+      "stderr_excerpt": "{\"reason\":\"expected_version_mismatch\",\"schema_version\":\"2.1\",\"status\":\"unavailable\"}\r\n"
+    },
+    {
+      "index": 12,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\source_preparation.py",
+        "--company-wiki-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--company-wiki-catalog-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--filing-fetch-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff",
+        "--timeout-seconds",
+        "45"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 3.034,
+      "returncode": 0,
+      "stdout_sha256": "6cfe68ef95fb4f4f0b0b1d84fabfa599202828e1342b425eccedba95536eb3d6",
+      "stdout_bytes": 4599,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 13,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\revenue_forecast.py",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\HK-00700\\input.json",
+        "--validate-only",
+        "--verbose"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 0.842,
+      "returncode": 0,
+      "stdout_sha256": "5be86f95bd4bb3848e802afa321452f38330ecec2d48f7a1d1cb8de4efbe7295",
+      "stdout_bytes": 7,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 14,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\revenue_forecast.py",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\HK-00700\\input.json",
+        "--output",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\HK-00700\\new_forecast.json",
+        "--markdown",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\HK-00700\\new_forecast.md"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 1.498,
+      "returncode": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 15,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\revenue_backtest.py",
+        "create",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\HK-00700\\input.json",
+        "--version",
+        "2026-10-08-hk-v4",
+        "--output",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\HK-00700\\new_snapshot.json"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 1.279,
+      "returncode": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 16,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\cross_market_suite\\rf_checks.py",
+        "--runtime",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf",
+        "--case-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\HK-00700"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 0.946,
+      "returncode": 0,
+      "stdout_sha256": "b171f832fc03f839be3dc6be793b983eef0a6f7f9ac179fbf34245731518da0c",
+      "stdout_bytes": 71,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 17,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\revenue_backtest.py",
+        "create",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\HK-00700\\input.json",
+        "--version",
+        "2026-10-08-hk-v4",
+        "--output",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\HK-00700\\new_snapshot.json"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 1.168,
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr_sha256": "2a28af5b780009f61212b80f49096dc246e2eead2fe407cc5819d37336337417",
+      "stderr_bytes": 121,
+      "stderr_excerpt": "error: [Errno 17] File exists: 'C:\\\\Users\\\\郑曾波\\\\AppData\\\\Local\\\\Temp\\\\cmrf-cgg8xpdn\\\\HK-00700\\\\new_snapshot.json'\r\n"
+    },
+    {
+      "index": 18,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\cross_market_suite\\rf_checks.py",
+        "--runtime",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf",
+        "--case-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\HK-00700"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 0.92,
+      "returncode": 0,
+      "stdout_sha256": "b171f832fc03f839be3dc6be793b983eef0a6f7f9ac179fbf34245731518da0c",
+      "stdout_bytes": 71,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 19,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\cross_market_suite\\rf_checks.py",
+        "--runtime",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf",
+        "--case-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\HK-00700"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 0.923,
+      "returncode": 0,
+      "stdout_sha256": "b171f832fc03f839be3dc6be793b983eef0a6f7f9ac179fbf34245731518da0c",
+      "stdout_bytes": 71,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 20,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.source_reader_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+        "--document-id",
+        "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "--source-id",
+        "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "--content-sha256",
+        "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "--purpose",
+        "filing_reuse"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 0.97,
+      "returncode": 0,
+      "stdout_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "stdout_bytes": 8158067,
+      "stderr_sha256": "13579da9b3f18aa311d12c125c8081683e1fe12a99f5fa85fd24de17a90d0698",
+      "stderr_bytes": 1552,
+      "stderr_excerpt": "{\"byte_size\":8158067,\"content_sha256\":\"99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe\",\"document_id\":\"urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe\",\"manifest\":{\"byte_size\":8158067,\"canonical_entity_id\":null,\"collector_name\":null,\"collector_version\":null,\"content_sha256\":\"99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe\",\"display_name\":null,\"document_id\":\"urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe\",\"document_kind\":\"annual_report\",\"fiscal_period\":null,\"fiscal_year\":2025,\"form_type\":\"10-K\",\"language\":null,\"market\":\"US\",\"mime_type\":\"text/html\",\"period_end\":null,\"provider\":null,\"provider_document_id\":null,\"published_date\":\"2025-07-30\",\"retrieved_at\":null,\"security_id\":\"MSFT\",\"source_id\":\"urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe\",\"source_url\":\"https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm\",\"title\":\"Microsoft 10-K FY2025\"},\"policy_sha256\":\"c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd\",\"read_at\":\"2026-10-08T18:57:41.574979+00:00\",\"review\":{\"evidence_sha256\":null,\"policy_hash\":null,\"reviewed_at\":null,\"source_sha256\":null,\"status\":\"not_reviewed\"},\"schema_version\":\"2.1\",\"source_id\":\"urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe\",\"source_read_policy_sha256\":\"072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270\",\"status\":\"ok\"}\r\n"
+    },
+    {
+      "index": 21,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.source_reader_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--document-id",
+        "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "--source-id",
+        "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "--content-sha256",
+        "0000000000000000000000000000000000000000000000000000000000000000"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 0.707,
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr_sha256": "f4f34a791ead2775d276435d3093ddfda74bfa324cd34e26f80e0273a1ae8ada",
+      "stderr_bytes": 86,
+      "stderr_excerpt": "{\"reason\":\"expected_version_mismatch\",\"schema_version\":\"2.1\",\"status\":\"unavailable\"}\r\n"
+    },
+    {
+      "index": 22,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.source_reader_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+        "--document-id",
+        "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "--source-id",
+        "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "--content-sha256",
+        "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "--purpose",
+        "narrative_derivation"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 0.756,
+      "returncode": 0,
+      "stdout_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "stdout_bytes": 66324,
+      "stderr_sha256": "84aae3cc6753cdbb015dbc1de10d65764a06d55d3dc7d3ed195fabbde95b7388",
+      "stderr_bytes": 1457,
+      "stderr_excerpt": "{\"byte_size\":66324,\"content_sha256\":\"4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a\",\"document_id\":\"urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a\",\"manifest\":{\"byte_size\":66324,\"canonical_entity_id\":null,\"collector_name\":null,\"collector_version\":null,\"content_sha256\":\"4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a\",\"display_name\":\"Microsoft\",\"document_id\":\"urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a\",\"document_kind\":\"investor_call_transcript\",\"fiscal_period\":\"Q4\",\"fiscal_year\":2026,\"form_type\":null,\"language\":\"en\",\"market\":\"US\",\"mime_type\":\"text/plain\",\"period_end\":null,\"provider\":null,\"provider_document_id\":null,\"published_date\":null,\"retrieved_at\":null,\"security_id\":\"MSFT\",\"source_id\":\"urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a\",\"source_url\":null,\"title\":null},\"policy_sha256\":\"c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd\",\"read_at\":\"2026-10-08T18:57:44.198040+00:00\",\"review\":{\"evidence_sha256\":null,\"policy_hash\":null,\"reviewed_at\":null,\"source_sha256\":null,\"status\":\"not_reviewed\"},\"schema_version\":\"2.1\",\"source_id\":\"urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a\",\"source_read_policy_sha256\":\"072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270\",\"status\":\"ok\"}\r\n"
+    },
+    {
+      "index": 23,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\source_preparation.py",
+        "--company-wiki-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--company-wiki-catalog-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--filing-fetch-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff",
+        "--timeout-seconds",
+        "45"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 2.987,
+      "returncode": 0,
+      "stdout_sha256": "b71a6b79f09eb27449a7e495675632ec19225cef964c5122c36db3d65cf18b49",
+      "stdout_bytes": 4582,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 24,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\revenue_forecast.py",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\US-MSFT\\input.json",
+        "--validate-only",
+        "--verbose"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 0.828,
+      "returncode": 0,
+      "stdout_sha256": "5be86f95bd4bb3848e802afa321452f38330ecec2d48f7a1d1cb8de4efbe7295",
+      "stdout_bytes": 7,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 25,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\revenue_forecast.py",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\US-MSFT\\input.json",
+        "--output",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\US-MSFT\\new_forecast.json",
+        "--markdown",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\US-MSFT\\new_forecast.md"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 1.564,
+      "returncode": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 26,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\revenue_backtest.py",
+        "create",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\US-MSFT\\input.json",
+        "--version",
+        "2026-10-08-MSFT-v2",
+        "--output",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\US-MSFT\\new_snapshot.json"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 1.353,
+      "returncode": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 27,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\cross_market_suite\\rf_checks.py",
+        "--runtime",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf",
+        "--case-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\US-MSFT"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 0.932,
+      "returncode": 0,
+      "stdout_sha256": "b171f832fc03f839be3dc6be793b983eef0a6f7f9ac179fbf34245731518da0c",
+      "stdout_bytes": 71,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 28,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\revenue_backtest.py",
+        "create",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\US-MSFT\\input.json",
+        "--version",
+        "2026-10-08-MSFT-v2",
+        "--output",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\US-MSFT\\new_snapshot.json"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 1.215,
+      "returncode": 2,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr_sha256": "07e2b01d8d9212f0cdeb472437623b9c9ba7846477b039c9a439639711f18886",
+      "stderr_bytes": 120,
+      "stderr_excerpt": "error: [Errno 17] File exists: 'C:\\\\Users\\\\郑曾波\\\\AppData\\\\Local\\\\Temp\\\\cmrf-cgg8xpdn\\\\US-MSFT\\\\new_snapshot.json'\r\n"
+    },
+    {
+      "index": 29,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\cross_market_suite\\rf_checks.py",
+        "--runtime",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf",
+        "--case-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\US-MSFT"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 1.133,
+      "returncode": 0,
+      "stdout_sha256": "b171f832fc03f839be3dc6be793b983eef0a6f7f9ac179fbf34245731518da0c",
+      "stdout_bytes": 71,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 30,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\cross_market_suite\\rf_checks.py",
+        "--runtime",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf",
+        "--case-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\US-MSFT"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 0.995,
+      "returncode": 0,
+      "stdout_sha256": "b171f832fc03f839be3dc6be793b983eef0a6f7f9ac179fbf34245731518da0c",
+      "stdout_bytes": 71,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 31,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\e2e\\run_ff_et_cwp_offline_acceptance.py",
+        "--ff-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff",
+        "--et-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\et"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 11.563,
+      "returncode": 0,
+      "stdout_sha256": "4128a45e355e3a52533f383d8a2af75e80eeda8bb7c250b705777fb130442b39",
+      "stdout_bytes": 280,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 32,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\e2e\\test_cross_market_rf_pipeline.py",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\pytest",
+        "--junitxml",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\worker.xml",
+        "-o",
+        "junit_family=legacy"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "seconds": 94.314,
+      "returncode": 0,
+      "stdout_sha256": "c66040938504eeddcbdf6b606a0c3a596925999c215deebb5591b0002cf79c9e",
+      "stdout_bytes": 1296,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 33,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff\\scripts\\fetch_filing.py",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--timeout-seconds",
+        "180"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 15.694,
+      "returncode": 0,
+      "stdout_sha256": "103111ebda81f6dcc1556a9b783a83852641c607e69e2df07cd395599b300988",
+      "stdout_bytes": 1057,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 34,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.source_reader_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--document-id",
+        "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "--source-id",
+        "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "--content-sha256",
+        "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 1.681,
+      "returncode": 0,
+      "stdout_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "stdout_bytes": 3149962,
+      "stderr_sha256": "f4d91d4d5f8941d66886b4667b45542f23b5c94c5249d505f5227c87c46e7d09",
+      "stderr_bytes": 1670,
+      "stderr_excerpt": "{\"byte_size\":3149962,\"content_sha256\":\"182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe\",\"document_id\":\"urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe\",\"manifest\":{\"byte_size\":3149962,\"canonical_entity_id\":null,\"collector_name\":null,\"collector_version\":null,\"content_sha256\":\"182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe\",\"display_name\":null,\"document_id\":\"urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe\",\"document_kind\":\"semi_annual_report\",\"fiscal_period\":\"H1\",\"fiscal_year\":2026,\"form_type\":\"interim_report\",\"language\":\"zh-CN\",\"market\":\"CN\",\"mime_type\":\"application/pdf\",\"period_end\":null,\"provider\":\"cninfo\",\"provider_document_id\":\"1225482884\",\"published_date\":\"2026-08-20\",\"retrieved_at\":\"2026-10-08T18:59:56Z\",\"security_id\":\"688012\",\"source_id\":\"urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe\",\"source_url\":\"https://www.cninfo.com.cn/new/disclosure/detail?stockCode=688012&announcementId=1225482884&announcementTime=2026-08-20%2000:00\",\"title\":\"2026\\u5e74\\u534a\\u5e74\\u5ea6\\u62a5\\u544a\"},\"policy_sha256\":\"be2b4e0a386b2bb8300458b161e27247e6fc3739654ca0ecec5012d2369ca907\",\"read_at\":\"2026-10-08T18:59:58.864945+00:00\",\"review\":{\"evidence_sha256\":null,\"policy_hash\":null,\"reviewed_at\":null,\"source_sha256\":null,\"status\":\"not_reviewed\"},\"schema_version\":\"2.1\",\"source_id\":\"urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe\",\"source_read_policy_sha256\":\"6da9d77abdeed983e1eebac16599d22e2694c63648d0cab459660ae3bcdd1919\",\"status\":\"ok\"}\r\n"
+    },
+    {
+      "index": 35,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff\\scripts\\fetch_filing.py",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--timeout-seconds",
+        "180"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 2.925,
+      "returncode": 0,
+      "stdout_sha256": "037b17250439643a66dda6e25e57474c0690a88b006085e5b0dd72f86f9ef023",
+      "stdout_bytes": 1058,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 36,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\source_preparation.py",
+        "--company-wiki-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--company-wiki-catalog-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--filing-fetch-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff",
+        "--timeout-seconds",
+        "45"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 4.931,
+      "returncode": 0,
+      "stdout_sha256": "815f2c1201290a1be1ceb95148c55a0ffa5c36b32295f6bb39532d1db9b58274",
+      "stdout_bytes": 4732,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 37,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff\\scripts\\fetch_filing.py",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--timeout-seconds",
+        "180"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 43.97,
+      "returncode": 0,
+      "stdout_sha256": "28f2adab74376645d2ee0c3e28619cabbade6bf3500f02a41544b611e9c7110f",
+      "stdout_bytes": 1096,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 38,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.source_reader_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--document-id",
+        "urn:company-wiki:document:sha256:6231374bc3d7bd104fcebb7735f9692050b55be32fa0f34d7d7f20478efa71f1",
+        "--source-id",
+        "urn:company-wiki:source:sha256:6231374bc3d7bd104fcebb7735f9692050b55be32fa0f34d7d7f20478efa71f1",
+        "--content-sha256",
+        "6231374bc3d7bd104fcebb7735f9692050b55be32fa0f34d7d7f20478efa71f1"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 1.525,
+      "returncode": 0,
+      "stdout_sha256": "6231374bc3d7bd104fcebb7735f9692050b55be32fa0f34d7d7f20478efa71f1",
+      "stdout_bytes": 5451089,
+      "stderr_sha256": "77034a4652cc51bff00d69857481c9579b95329a17b68ccf9ba37d6432b86cde",
+      "stderr_bytes": 1596,
+      "stderr_excerpt": "{\"byte_size\":5451089,\"content_sha256\":\"6231374bc3d7bd104fcebb7735f9692050b55be32fa0f34d7d7f20478efa71f1\",\"document_id\":\"urn:company-wiki:document:sha256:6231374bc3d7bd104fcebb7735f9692050b55be32fa0f34d7d7f20478efa71f1\",\"manifest\":{\"byte_size\":5451089,\"canonical_entity_id\":null,\"collector_name\":null,\"collector_version\":null,\"content_sha256\":\"6231374bc3d7bd104fcebb7735f9692050b55be32fa0f34d7d7f20478efa71f1\",\"display_name\":null,\"document_id\":\"urn:company-wiki:document:sha256:6231374bc3d7bd104fcebb7735f9692050b55be32fa0f34d7d7f20478efa71f1\",\"document_kind\":\"semi_annual_report\",\"fiscal_period\":\"H1\",\"fiscal_year\":2026,\"form_type\":\"H1\",\"language\":\"zh\",\"market\":\"HK\",\"mime_type\":\"application/pdf\",\"period_end\":null,\"provider\":\"hkexnews\",\"provider_document_id\":\"12297762\",\"published_date\":\"2026-08-25\",\"retrieved_at\":\"2026-10-08T19:00:48Z\",\"security_id\":\"00700\",\"source_id\":\"urn:company-wiki:source:sha256:6231374bc3d7bd104fcebb7735f9692050b55be32fa0f34d7d7f20478efa71f1\",\"source_url\":\"https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0825/2026082500557_c.pdf\",\"title\":\"\\u4e2d\\u671f\\u5831\\u544a 2026\"},\"policy_sha256\":\"be2b4e0a386b2bb8300458b161e27247e6fc3739654ca0ecec5012d2369ca907\",\"read_at\":\"2026-10-08T19:00:52.329198+00:00\",\"review\":{\"evidence_sha256\":null,\"policy_hash\":null,\"reviewed_at\":null,\"source_sha256\":null,\"status\":\"not_reviewed\"},\"schema_version\":\"2.1\",\"source_id\":\"urn:company-wiki:source:sha256:6231374bc3d7bd104fcebb7735f9692050b55be32fa0f34d7d7f20478efa71f1\",\"source_read_policy_sha256\":\"6da9d77abdeed983e1eebac16599d22e2694c63648d0cab459660ae3bcdd1919\",\"status\":\"ok\"}\r\n"
+    },
+    {
+      "index": 39,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff\\scripts\\fetch_filing.py",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--timeout-seconds",
+        "180"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 5.45,
+      "returncode": 0,
+      "stdout_sha256": "e4695fdccf4d5e9787caa2b1508ee3b26af92e67537b86b398fedd6c2f80a037",
+      "stdout_bytes": 1097,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 40,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\source_preparation.py",
+        "--company-wiki-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--company-wiki-catalog-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--filing-fetch-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff",
+        "--timeout-seconds",
+        "45"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 6.726,
+      "returncode": 0,
+      "stdout_sha256": "cfd11b7c7102249ecc64aa2278107b1ddc43eff72317af0c6d0ff7ead4e53070",
+      "stdout_bytes": 4612,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 41,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff\\scripts\\fetch_filing.py",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--timeout-seconds",
+        "90"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 2.787,
+      "returncode": 0,
+      "stdout_sha256": "6ab0101085c769181519e8dde4c26985b591ae8659198ce2673c878c665d78db",
+      "stdout_bytes": 1145,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 42,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff\\scripts\\fetch_filing.py",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--timeout-seconds",
+        "180"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 24.522,
+      "returncode": 0,
+      "stdout_sha256": "77ef51ecd6ab203aa77ca38b476160b0c0da4373fe5a18bd7a3790afed34e1bf",
+      "stdout_bytes": 1138,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 43,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.source_reader_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--document-id",
+        "urn:company-wiki:document:sha256:ace2aa8408b1e40c239fc5b222ce8e1b93acbfead28d0c86c4bb69f79b08eda7",
+        "--source-id",
+        "urn:company-wiki:source:sha256:ace2aa8408b1e40c239fc5b222ce8e1b93acbfead28d0c86c4bb69f79b08eda7",
+        "--content-sha256",
+        "ace2aa8408b1e40c239fc5b222ce8e1b93acbfead28d0c86c4bb69f79b08eda7"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 1.424,
+      "returncode": 0,
+      "stdout_sha256": "ace2aa8408b1e40c239fc5b222ce8e1b93acbfead28d0c86c4bb69f79b08eda7",
+      "stdout_bytes": 8585610,
+      "stderr_sha256": "fa99fd3f1ac0f189cf557d313068cd46ccf39a5d2f56882f0570f86567f45a8f",
+      "stderr_bytes": 1598,
+      "stderr_excerpt": "{\"byte_size\":8585610,\"content_sha256\":\"ace2aa8408b1e40c239fc5b222ce8e1b93acbfead28d0c86c4bb69f79b08eda7\",\"document_id\":\"urn:company-wiki:document:sha256:ace2aa8408b1e40c239fc5b222ce8e1b93acbfead28d0c86c4bb69f79b08eda7\",\"manifest\":{\"byte_size\":8585610,\"canonical_entity_id\":null,\"collector_name\":null,\"collector_version\":null,\"content_sha256\":\"ace2aa8408b1e40c239fc5b222ce8e1b93acbfead28d0c86c4bb69f79b08eda7\",\"display_name\":null,\"document_id\":\"urn:company-wiki:document:sha256:ace2aa8408b1e40c239fc5b222ce8e1b93acbfead28d0c86c4bb69f79b08eda7\",\"document_kind\":\"annual_report\",\"fiscal_period\":\"FY\",\"fiscal_year\":2026,\"form_type\":\"10-K\",\"language\":\"en\",\"market\":\"US\",\"mime_type\":\"text/html\",\"period_end\":null,\"provider\":\"sec\",\"provider_document_id\":\"0001193125-26-323660\",\"published_date\":\"2026-07-29\",\"retrieved_at\":\"2026-10-08T19:01:29Z\",\"security_id\":\"MSFT\",\"source_id\":\"urn:company-wiki:source:sha256:ace2aa8408b1e40c239fc5b222ce8e1b93acbfead28d0c86c4bb69f79b08eda7\",\"source_url\":\"https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm\",\"title\":\"MICROSOFT CORP 10-K 2026-06-30\"},\"policy_sha256\":\"be2b4e0a386b2bb8300458b161e27247e6fc3739654ca0ecec5012d2369ca907\",\"read_at\":\"2026-10-08T19:01:33.437811+00:00\",\"review\":{\"evidence_sha256\":null,\"policy_hash\":null,\"reviewed_at\":null,\"source_sha256\":null,\"status\":\"not_reviewed\"},\"schema_version\":\"2.1\",\"source_id\":\"urn:company-wiki:source:sha256:ace2aa8408b1e40c239fc5b222ce8e1b93acbfead28d0c86c4bb69f79b08eda7\",\"source_read_policy_sha256\":\"6da9d77abdeed983e1eebac16599d22e2694c63648d0cab459660ae3bcdd1919\",\"status\":\"ok\"}\r\n"
+    },
+    {
+      "index": 44,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff\\scripts\\fetch_filing.py",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--timeout-seconds",
+        "180"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 3.538,
+      "returncode": 0,
+      "stdout_sha256": "ea818e6cfe5236cd775714da27636013525aefea19b092afaafcde172c1b6ced",
+      "stdout_bytes": 1139,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 45,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\source_preparation.py",
+        "--company-wiki-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--company-wiki-catalog-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--filing-fetch-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff",
+        "--timeout-seconds",
+        "45"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 6.522,
+      "returncode": 0,
+      "stdout_sha256": "3b3c2e5a0486ef359e08838e584afd044bf4e51bdef117e94b5a1c508c7ed4ad",
+      "stdout_bytes": 4637,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "index": 46,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff\\scripts\\fetch_filing.py",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--timeout-seconds",
+        "90"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn",
+      "seconds": 2.937,
+      "returncode": 0,
+      "stdout_sha256": "c201456ed96e2b333200b5762a09ddacb9aaf02c28812d84f13181b6a7b6b025",
+      "stdout_bytes": 1139,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "stderr_excerpt": ""
+    }
+  ],
+  "subprocesses": [
+    {
+      "parent_pid": 102684,
+      "pid": 4748,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "identify",
+        "--query",
+        "688012",
+        "--market",
+        "CN"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 102684,
+      "pid": 83512,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.source_query_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 106776,
+      "pid": 80460,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\filing_fetch_client.py",
+        "--source-ref-v2",
+        "--filing-fetch-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff",
+        "--company-wiki-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--timeout-seconds",
+        "45.0"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf"
+    },
+    {
+      "parent_pid": 106776,
+      "pid": 98580,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.source_reader_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--document-id",
+        "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "--source-id",
+        "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "--content-sha256",
+        "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "--purpose",
+        "filing_reuse"
+      ],
+      "cwd": ""
+    },
+    {
+      "parent_pid": 108028,
+      "pid": 38816,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff\\scripts\\fetch_filing.py",
+        "--source-ref-v2",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--timeout-seconds",
+        "45.0"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff"
+    },
+    {
+      "parent_pid": 108664,
+      "pid": 73836,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "identify",
+        "--query",
+        "00700",
+        "--market",
+        "HK"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 108664,
+      "pid": 14516,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "ensure",
+        "--entity",
+        "騰訊控股",
+        "--document-kind",
+        "semi_annual_report",
+        "--as-of-date",
+        "2026-10-08",
+        "--market",
+        "HK",
+        "--security-id",
+        "00700",
+        "--fiscal-period",
+        "H1",
+        "--fiscal-year",
+        "2026",
+        "--mode",
+        "exact",
+        "--max-download-bytes",
+        "41943040",
+        "--max-download-seconds",
+        "180",
+        "--max-download-cost-usd",
+        "0.00",
+        "--source-ref-v2",
+        "--allow-download",
+        "--acquisition-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_acquisition.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 108664,
+      "pid": 45492,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.source_query_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 1512,
+      "pid": 85388,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\filing_fetch_client.py",
+        "--source-ref-v2",
+        "--filing-fetch-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff",
+        "--company-wiki-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--timeout-seconds",
+        "45.0"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf"
+    },
+    {
+      "parent_pid": 1512,
+      "pid": 51544,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.source_reader_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--document-id",
+        "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "--source-id",
+        "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "--content-sha256",
+        "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "--purpose",
+        "filing_reuse"
+      ],
+      "cwd": ""
+    },
+    {
+      "parent_pid": 15180,
+      "pid": 78504,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "identify",
+        "--query",
+        "00700",
+        "--market",
+        "HK"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 15180,
+      "pid": 86668,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.source_query_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 15180,
+      "pid": 85660,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.source_query_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 18088,
+      "pid": 109132,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "identify",
+        "--query",
+        "00700",
+        "--market",
+        "HK"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 18088,
+      "pid": 48764,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "ensure",
+        "--entity",
+        "騰訊控股",
+        "--document-kind",
+        "semi_annual_report",
+        "--as-of-date",
+        "2026-10-08",
+        "--market",
+        "HK",
+        "--security-id",
+        "00700",
+        "--fiscal-period",
+        "H1",
+        "--fiscal-year",
+        "2026",
+        "--mode",
+        "exact",
+        "--max-download-bytes",
+        "41943040",
+        "--max-download-seconds",
+        "180",
+        "--max-download-cost-usd",
+        "0.00",
+        "--source-ref-v2",
+        "--allow-download",
+        "--acquisition-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_acquisition.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 18088,
+      "pid": 16016,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.source_query_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 20968,
+      "pid": 108688,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.narrative_transport_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--operation",
+        "read"
+      ],
+      "cwd": ""
+    },
+    {
+      "parent_pid": 28208,
+      "pid": 83460,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\filing_fetch_client.py",
+        "--source-ref-v2",
+        "--filing-fetch-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff",
+        "--company-wiki-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--timeout-seconds",
+        "45.0"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf"
+    },
+    {
+      "parent_pid": 28208,
+      "pid": 89340,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.source_reader_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--document-id",
+        "urn:company-wiki:document:sha256:6231374bc3d7bd104fcebb7735f9692050b55be32fa0f34d7d7f20478efa71f1",
+        "--source-id",
+        "urn:company-wiki:source:sha256:6231374bc3d7bd104fcebb7735f9692050b55be32fa0f34d7d7f20478efa71f1",
+        "--content-sha256",
+        "6231374bc3d7bd104fcebb7735f9692050b55be32fa0f34d7d7f20478efa71f1",
+        "--purpose",
+        "filing_reuse"
+      ],
+      "cwd": ""
+    },
+    {
+      "parent_pid": 36848,
+      "pid": 36132,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "identify",
+        "--query",
+        "00700",
+        "--market",
+        "HK"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 36848,
+      "pid": 17380,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.source_query_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 37308,
+      "pid": 77800,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff\\scripts\\fetch_filing.py",
+        "--source-ref-v2",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--timeout-seconds",
+        "45.0"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff"
+    },
+    {
+      "parent_pid": 38816,
+      "pid": 58152,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "identify",
+        "--query",
+        "MSFT",
+        "--market",
+        "US"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 38816,
+      "pid": 64960,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "ensure",
+        "--entity",
+        "MICROSOFT CORP",
+        "--document-kind",
+        "annual_report",
+        "--as-of-date",
+        "2026-10-08",
+        "--market",
+        "US",
+        "--security-id",
+        "MSFT",
+        "--fiscal-year",
+        "2026",
+        "--mode",
+        "exact",
+        "--max-download-bytes",
+        "41943040",
+        "--max-download-seconds",
+        "180",
+        "--max-download-cost-usd",
+        "0.00",
+        "--source-ref-v2",
+        "--allow-download",
+        "--acquisition-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_acquisition.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 38816,
+      "pid": 65232,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.source_query_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 39348,
+      "pid": 67280,
+      "argv": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki/../dayu-agent/dayu-agent/.venv/Scripts/python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki/tools/dayu_sdk_bridge.py",
+        "--market",
+        "US",
+        "--adapter-name",
+        "dayu-us-sdk",
+        "--adapter-version",
+        "1.0.0",
+        "--provider-state-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki/.source_catalog/provider-state/dayu",
+        "discover"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\provider-us"
+    },
+    {
+      "parent_pid": 39348,
+      "pid": 62156,
+      "argv": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki/../dayu-agent/dayu-agent/.venv/Scripts/python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki/tools/dayu_sdk_bridge.py",
+        "--market",
+        "US",
+        "--adapter-name",
+        "dayu-us-sdk",
+        "--adapter-version",
+        "1.0.0",
+        "--provider-state-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki/.source_catalog/provider-state/dayu",
+        "fetch",
+        "--staging-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\.source_catalog\\staging\\b638ea57a07fc1c26c54f2c34c03aaa92298c9e4b2b740de406594e1a8b5c930"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\provider-us"
+    },
+    {
+      "parent_pid": 41556,
+      "pid": 95748,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "identify",
+        "--query",
+        "00700",
+        "--market",
+        "HK"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 41556,
+      "pid": 90476,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "ensure",
+        "--entity",
+        "騰訊控股",
+        "--document-kind",
+        "semi_annual_report",
+        "--as-of-date",
+        "2026-10-08",
+        "--market",
+        "HK",
+        "--security-id",
+        "00700",
+        "--fiscal-period",
+        "H1",
+        "--fiscal-year",
+        "2026",
+        "--mode",
+        "exact",
+        "--max-download-bytes",
+        "41943040",
+        "--max-download-seconds",
+        "180",
+        "--max-download-cost-usd",
+        "0.00",
+        "--source-ref-v2",
+        "--allow-download",
+        "--acquisition-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_acquisition.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 41556,
+      "pid": 22656,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.source_query_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 46528,
+      "pid": 36848,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff\\scripts\\fetch_filing.py",
+        "--source-ref-v2",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--timeout-seconds",
+        "45.0"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff"
+    },
+    {
+      "parent_pid": 48324,
+      "pid": 8644,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "identify",
+        "--query",
+        "MSFT",
+        "--market",
+        "US"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 48324,
+      "pid": 61544,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "ensure",
+        "--entity",
+        "MICROSOFT CORP",
+        "--document-kind",
+        "annual_report",
+        "--as-of-date",
+        "2026-10-08",
+        "--market",
+        "US",
+        "--security-id",
+        "MSFT",
+        "--fiscal-year",
+        "2026",
+        "--mode",
+        "exact",
+        "--max-download-bytes",
+        "41943040",
+        "--max-download-seconds",
+        "180",
+        "--max-download-cost-usd",
+        "0.00",
+        "--source-ref-v2",
+        "--allow-download",
+        "--acquisition-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_acquisition.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 48324,
+      "pid": 56296,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.source_query_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 46776,
+      "argv": [
+        "git",
+        "rev-parse",
+        "--git-dir"
+      ],
+      "cwd": ""
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 34332,
+      "argv": [
+        "git",
+        "config",
+        "--local",
+        "remote.origin.url"
+      ],
+      "cwd": ""
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 52236,
+      "argv": [
+        "git",
+        "describe",
+        "--dirty",
+        "--always",
+        "--long",
+        "--abbrev=40"
+      ],
+      "cwd": ""
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 26640,
+      "argv": [
+        "git",
+        "show",
+        "-s",
+        "--pretty=format:\"%cI\""
+      ],
+      "cwd": ""
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 104720,
+      "argv": [
+        "git",
+        "show",
+        "-s",
+        "--pretty=format:\"%aI\""
+      ],
+      "cwd": ""
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 50616,
+      "argv": [
+        "git",
+        "rev-parse",
+        "--abbrev-ref",
+        "HEAD"
+      ],
+      "cwd": ""
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 88412,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.automation.narrative_batch_cli",
+        "--project-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki",
+        "--catalog-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--automation-db",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\CN-688012\\worker\\auto.db",
+        "--work-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\CN-688012\\worker\\jobs",
+        "--request",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\CN-688012\\worker\\request.json"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 68544,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.narrative_transport_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--operation",
+        "reference"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 87340,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.narrative_transport_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--operation",
+        "read"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 20968,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\narrative_source_preparation.py",
+        "--company-wiki-catalog-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 79780,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.narrative_transport_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--operation",
+        "evidence-lookup",
+        "--span-id",
+        "urn:company-wiki:evidence-span:sha256:8806c5419014b0bd8c799c2b5b908bbbfe97677e530267c89260a5191c680548"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 88488,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.automation.narrative_batch_cli",
+        "--project-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki",
+        "--catalog-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--automation-db",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\CN-688012\\worker\\auto.db",
+        "--work-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\CN-688012\\worker\\jobs",
+        "--request",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\CN-688012\\worker\\request.json"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 64192,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.automation.narrative_batch_cli",
+        "--project-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki",
+        "--catalog-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--automation-db",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\HK-00700\\worker\\auto.db",
+        "--work-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\HK-00700\\worker\\jobs",
+        "--request",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\HK-00700\\worker\\request.json"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 7188,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.narrative_transport_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--operation",
+        "reference"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 5808,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.narrative_transport_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--operation",
+        "read"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 87328,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\narrative_source_preparation.py",
+        "--company-wiki-catalog-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 5892,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.narrative_transport_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--operation",
+        "evidence-lookup",
+        "--span-id",
+        "urn:company-wiki:evidence-span:sha256:6c2015a85a3117c9b4cb67954c69886017e9064217bdf80744f36bc8c8d05eb1"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 30344,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.automation.narrative_batch_cli",
+        "--project-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki",
+        "--catalog-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--automation-db",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\HK-00700\\worker\\auto.db",
+        "--work-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\HK-00700\\worker\\jobs",
+        "--request",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\HK-00700\\worker\\request.json"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 45044,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.automation.narrative_batch_cli",
+        "--project-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki",
+        "--catalog-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--automation-db",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\US-MSFT\\worker\\auto.db",
+        "--work-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\US-MSFT\\worker\\jobs",
+        "--request",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\US-MSFT\\worker\\request.json"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 91596,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.narrative_transport_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--operation",
+        "reference"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 54840,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.narrative_transport_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--operation",
+        "read"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 59048,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\narrative_source_preparation.py",
+        "--company-wiki-catalog-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 67424,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.narrative_transport_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--operation",
+        "evidence-lookup",
+        "--span-id",
+        "urn:company-wiki:evidence-span:sha256:bf94016b54ed5b73fafe9610eccdd2354c89cdc7417dfc0554b8dc29a136b30f"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 80256,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.narrative_transport_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--operation",
+        "read"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 82768,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.automation.narrative_batch_cli",
+        "--project-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki",
+        "--catalog-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--automation-db",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\US-MSFT\\worker\\auto.db",
+        "--work-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\US-MSFT\\worker\\jobs",
+        "--request",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\US-MSFT\\worker\\request.json"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 35260,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.automation.narrative_batch_cli",
+        "--project-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki",
+        "--catalog-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--automation-db",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\US-MSFT\\format-html\\auto.db",
+        "--work-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\US-MSFT\\format-html\\jobs",
+        "--request",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\US-MSFT\\format-html\\request.json"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 48832,
+      "pid": 28484,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.automation.narrative_batch_cli",
+        "--project-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki",
+        "--catalog-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--automation-db",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\US-MSFT\\format-pptx\\auto.db",
+        "--work-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\US-MSFT\\format-pptx\\jobs",
+        "--request",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\US-MSFT\\format-pptx\\request.json"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 53644,
+      "pid": 37308,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\filing_fetch_client.py",
+        "--source-ref-v2",
+        "--filing-fetch-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff",
+        "--company-wiki-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--timeout-seconds",
+        "45.0"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf"
+    },
+    {
+      "parent_pid": 53644,
+      "pid": 3128,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.source_reader_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--document-id",
+        "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "--source-id",
+        "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "--content-sha256",
+        "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "--purpose",
+        "filing_reuse"
+      ],
+      "cwd": ""
+    },
+    {
+      "parent_pid": 59048,
+      "pid": 74920,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.narrative_transport_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--operation",
+        "read"
+      ],
+      "cwd": ""
+    },
+    {
+      "parent_pid": 59236,
+      "pid": 108028,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\filing_fetch_client.py",
+        "--source-ref-v2",
+        "--filing-fetch-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff",
+        "--company-wiki-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--timeout-seconds",
+        "45.0"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf"
+    },
+    {
+      "parent_pid": 59236,
+      "pid": 39696,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.source_reader_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--document-id",
+        "urn:company-wiki:document:sha256:ace2aa8408b1e40c239fc5b222ce8e1b93acbfead28d0c86c4bb69f79b08eda7",
+        "--source-id",
+        "urn:company-wiki:source:sha256:ace2aa8408b1e40c239fc5b222ce8e1b93acbfead28d0c86c4bb69f79b08eda7",
+        "--content-sha256",
+        "ace2aa8408b1e40c239fc5b222ce8e1b93acbfead28d0c86c4bb69f79b08eda7",
+        "--purpose",
+        "filing_reuse"
+      ],
+      "cwd": ""
+    },
+    {
+      "parent_pid": 61120,
+      "pid": 46528,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf\\scripts\\filing_fetch_client.py",
+        "--source-ref-v2",
+        "--filing-fetch-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff",
+        "--company-wiki-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--timeout-seconds",
+        "45.0"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\rf"
+    },
+    {
+      "parent_pid": 61120,
+      "pid": 95640,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.source_reader_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--document-id",
+        "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "--source-id",
+        "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "--content-sha256",
+        "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "--purpose",
+        "filing_reuse"
+      ],
+      "cwd": ""
+    },
+    {
+      "parent_pid": 63184,
+      "pid": 27764,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "identify",
+        "--query",
+        "688012",
+        "--market",
+        "CN"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 63184,
+      "pid": 61772,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "ensure",
+        "--entity",
+        "中微公司",
+        "--document-kind",
+        "semi_annual_report",
+        "--as-of-date",
+        "2026-10-08",
+        "--market",
+        "CN",
+        "--security-id",
+        "688012",
+        "--fiscal-period",
+        "H1",
+        "--fiscal-year",
+        "2026",
+        "--mode",
+        "exact",
+        "--max-download-bytes",
+        "41943040",
+        "--max-download-seconds",
+        "180",
+        "--max-download-cost-usd",
+        "0.00",
+        "--source-ref-v2",
+        "--allow-download",
+        "--acquisition-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_acquisition.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 63880,
+      "pid": 34628,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "identify",
+        "--query",
+        "MSFT",
+        "--market",
+        "US"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 63880,
+      "pid": 68880,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "ensure",
+        "--entity",
+        "MICROSOFT CORP",
+        "--document-kind",
+        "annual_report",
+        "--as-of-date",
+        "2026-10-08",
+        "--market",
+        "US",
+        "--security-id",
+        "MSFT",
+        "--fiscal-year",
+        "2026",
+        "--mode",
+        "exact",
+        "--max-download-bytes",
+        "41943040",
+        "--max-download-seconds",
+        "180",
+        "--max-download-cost-usd",
+        "0.00",
+        "--source-ref-v2",
+        "--allow-download",
+        "--acquisition-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_acquisition.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 63880,
+      "pid": 76116,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.source_query_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 68720,
+      "pid": 74292,
+      "argv": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki/../dayu-agent/dayu-agent/.venv/Scripts/python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki/tools/dayu_sdk_bridge.py",
+        "--market",
+        "HK",
+        "--adapter-name",
+        "dayu-hk-sdk",
+        "--adapter-version",
+        "1.0.0",
+        "--provider-state-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki/.source_catalog/provider-state/dayu",
+        "discover"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\provider-hk"
+    },
+    {
+      "parent_pid": 68720,
+      "pid": 104700,
+      "argv": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki/../dayu-agent/dayu-agent/.venv/Scripts/python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki/tools/dayu_sdk_bridge.py",
+        "--market",
+        "HK",
+        "--adapter-name",
+        "dayu-hk-sdk",
+        "--adapter-version",
+        "1.0.0",
+        "--provider-state-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki/.source_catalog/provider-state/dayu",
+        "fetch",
+        "--staging-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\.source_catalog\\staging\\5bb8a19d6e5f021d0023db97bef3210e5b349f9aad9fb782c80519f327a0d0ee"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\provider-hk"
+    },
+    {
+      "parent_pid": 69512,
+      "pid": 36400,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "identify",
+        "--query",
+        "MSFT",
+        "--market",
+        "US"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 69512,
+      "pid": 75824,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.source_query_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 70192,
+      "pid": 48664,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "identify",
+        "--query",
+        "688012",
+        "--market",
+        "CN"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 70192,
+      "pid": 43524,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "ensure",
+        "--entity",
+        "中微公司",
+        "--document-kind",
+        "semi_annual_report",
+        "--as-of-date",
+        "2026-10-08",
+        "--market",
+        "CN",
+        "--security-id",
+        "688012",
+        "--fiscal-period",
+        "H1",
+        "--fiscal-year",
+        "2026",
+        "--mode",
+        "exact",
+        "--max-download-bytes",
+        "41943040",
+        "--max-download-seconds",
+        "180",
+        "--max-download-cost-usd",
+        "0.00",
+        "--source-ref-v2",
+        "--allow-download",
+        "--acquisition-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_acquisition.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 70256,
+      "pid": 51628,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\profile\\temp\\cwpet-cbcbs0u3\\w\\config\\source_catalog.yaml",
+        "scan",
+        "--root-id",
+        "company_raw"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\profile\\temp\\cwpet-cbcbs0u3\\w"
+    },
+    {
+      "parent_pid": 70256,
+      "pid": 47480,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.source_query_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\profile\\temp\\cwpet-cbcbs0u3\\w\\config\\source_catalog.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\profile\\temp\\cwpet-cbcbs0u3\\w"
+    },
+    {
+      "parent_pid": 70256,
+      "pid": 92324,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\profile\\temp\\cwpet-cbcbs0u3\\et_cli_wrapper.py",
+        "--request-stdin",
+        "--include-source-payload"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\profile\\temp\\cwpet-cbcbs0u3"
+    },
+    {
+      "parent_pid": 70256,
+      "pid": 28216,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.transcript_import_cli",
+        "--wiki-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\profile\\temp\\cwpet-cbcbs0u3\\w"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\profile\\temp\\cwpet-cbcbs0u3\\w"
+    },
+    {
+      "parent_pid": 70256,
+      "pid": 110280,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.source_reader_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\profile\\temp\\cwpet-cbcbs0u3\\w\\config\\source_catalog.yaml",
+        "--document-id",
+        "urn:company-wiki:document:sha256:ac80acc852b87da638448ea18b5fe365bd1844abe2f7c648c092e45056ac82fb",
+        "--source-id",
+        "urn:company-wiki:source:sha256:ac80acc852b87da638448ea18b5fe365bd1844abe2f7c648c092e45056ac82fb",
+        "--content-sha256",
+        "ac80acc852b87da638448ea18b5fe365bd1844abe2f7c648c092e45056ac82fb",
+        "--purpose",
+        "preview"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\profile\\temp\\cwpet-cbcbs0u3\\w"
+    },
+    {
+      "parent_pid": 70256,
+      "pid": 28084,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.source_query_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\profile\\temp\\cwpet-cbcbs0u3\\w\\config\\source_catalog.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\profile\\temp\\cwpet-cbcbs0u3\\w"
+    },
+    {
+      "parent_pid": 70256,
+      "pid": 89484,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.source_reader_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\profile\\temp\\cwpet-cbcbs0u3\\w\\config\\source_catalog.yaml",
+        "--document-id",
+        "urn:company-wiki:document:sha256:ac80acc852b87da638448ea18b5fe365bd1844abe2f7c648c092e45056ac82fb",
+        "--source-id",
+        "urn:company-wiki:source:sha256:ac80acc852b87da638448ea18b5fe365bd1844abe2f7c648c092e45056ac82fb",
+        "--content-sha256",
+        "ac80acc852b87da638448ea18b5fe365bd1844abe2f7c648c092e45056ac82fb",
+        "--purpose",
+        "preview"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\profile\\temp\\cwpet-cbcbs0u3\\w"
+    },
+    {
+      "parent_pid": 70256,
+      "pid": 22324,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\profile\\temp\\cwpet-cbcbs0u3\\tw\\config\\source_catalog.yaml",
+        "scan",
+        "--root-id",
+        "company_raw"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\profile\\temp\\cwpet-cbcbs0u3\\tw"
+    },
+    {
+      "parent_pid": 70256,
+      "pid": 26836,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.source_query_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\profile\\temp\\cwpet-cbcbs0u3\\tw\\config\\source_catalog.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\profile\\temp\\cwpet-cbcbs0u3\\tw"
+    },
+    {
+      "parent_pid": 70256,
+      "pid": 70888,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\profile\\temp\\cwpet-cbcbs0u3\\et_cli_wrapper.py",
+        "--request-stdin",
+        "--include-source-payload"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\profile\\temp\\cwpet-cbcbs0u3"
+    },
+    {
+      "parent_pid": 71108,
+      "pid": 63516,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "src.company_wiki_adapter_cli",
+        "discover"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\provider-cn"
+    },
+    {
+      "parent_pid": 71108,
+      "pid": 41572,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "src.company_wiki_adapter_cli",
+        "fetch",
+        "--staging-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\.source_catalog\\staging\\1eb03fa96210f8402a05a8fa4981921b454c1ecb3aac8e04d19319397483caa4"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\provider-cn"
+    },
+    {
+      "parent_pid": 74232,
+      "pid": 47576,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "identify",
+        "--query",
+        "MSFT",
+        "--market",
+        "US"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 74232,
+      "pid": 59596,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.source_query_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 74232,
+      "pid": 77932,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.source_query_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 77800,
+      "pid": 103176,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "identify",
+        "--query",
+        "688012",
+        "--market",
+        "CN"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 77800,
+      "pid": 66408,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-S",
+        "-c",
+        "import os,subprocess,sys\nif os.read(0,1)!=b'\\x00': sys.exit(125)\np=subprocess.Popen(sys.argv[1:],stdin=sys.stdin,stdout=sys.stdout,stderr=sys.stderr,close_fds=True,creationflags=subprocess.CREATE_NO_WINDOW)\nsys.exit(p.wait())\n",
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "ensure",
+        "--entity",
+        "中微公司",
+        "--document-kind",
+        "semi_annual_report",
+        "--as-of-date",
+        "2026-10-08",
+        "--market",
+        "CN",
+        "--security-id",
+        "688012",
+        "--fiscal-period",
+        "H1",
+        "--fiscal-year",
+        "2026",
+        "--mode",
+        "exact",
+        "--max-download-bytes",
+        "41943040",
+        "--max-download-seconds",
+        "180",
+        "--max-download-cost-usd",
+        "0.00",
+        "--source-ref-v2",
+        "--allow-download",
+        "--acquisition-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_acquisition.yaml"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki"
+    },
+    {
+      "parent_pid": 80460,
+      "pid": 69512,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff\\scripts\\fetch_filing.py",
+        "--source-ref-v2",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--timeout-seconds",
+        "45.0"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff"
+    },
+    {
+      "parent_pid": 83460,
+      "pid": 18088,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff\\scripts\\fetch_filing.py",
+        "--source-ref-v2",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--timeout-seconds",
+        "45.0"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff"
+    },
+    {
+      "parent_pid": 83820,
+      "pid": 40860,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-u",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\et\\retrieval_worker.py",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\profile\\temp\\cwpet-cbcbs0u3\\tw-worker\\et-retrieval-enkuol0u\\request.json"
+      ],
+      "cwd": ""
+    },
+    {
+      "parent_pid": 85388,
+      "pid": 102684,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff\\scripts\\fetch_filing.py",
+        "--source-ref-v2",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff-cwp.json",
+        "--timeout-seconds",
+        "45.0"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\ff"
+    },
+    {
+      "parent_pid": 87328,
+      "pid": 92028,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.narrative_transport_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\wiki\\config\\source_catalog.yaml",
+        "--operation",
+        "read"
+      ],
+      "cwd": ""
+    },
+    {
+      "parent_pid": 99996,
+      "pid": 35456,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-u",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\et\\retrieval_worker.py",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-cgg8xpdn\\profile\\temp\\cwpet-cbcbs0u3\\ew\\et-retrieval-2fw7_gce\\request.json"
+      ],
+      "cwd": ""
+    }
+  ],
+  "test_tree_final_bytes_before_cleanup": 141417079,
+  "external_model_calls": 0,
+  "project_llm_cost_usd": 0,
+  "replay_python_hashseed": "0",
+  "semantic_review": "frozen independent review; fresh model outputs not independently researched",
+  "test_root_restored_absent": true,
+  "seconds": 278.703,
+  "status": "PARTIAL"
+}

@@ -98,3 +98,5 @@ P0原三家公司结果证明共用修复有效且旧经济情景不变：US不�
 - 固定套件的live新增SDK配置必须把CWP代码/state映射到独立HEAD export；provider解释器仍只读复用，SDK import优先export cwd，防止editable安装指向原checkout。新增路径映射RED→17PASS。原71检查点不改。
 - 仍未实现的范围：SEC8-K/6-K exhibit bundle、HK英文发现；不能宣称支持，真实请求给具名能力拒绝。生产acquisition配置尚未提升。
 
+后续验收：实际三市场full/live全部download→import→reuse→RF read通过，正式配置已提升。Windows实际SDK解释器的redirector暴露另一类漏检：原hard-kill测试只有直接子进程，没覆盖子孙；新真实子孙RED确认超时后活动，用共用owned进程树/管道截止机制关闭。增加的OS测试覆盖阻塞stdin、stdout/stderr上限及嵌套job；不是加人工门禁。原件和外部Dayu保持不变；独立live目录141MB已恢复不存在。电话会zero_cost_budget仍是FF启动前判断，需要责任层下一步修复，而不能归咎FMP账户权限。
+

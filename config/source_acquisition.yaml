@@ -1,28 +1,55 @@
-schema_version: "1.1"
-staging_root: "${PROJECT_ROOT}/.source_catalog/staging"
-# dayu HK/US downloads wait for Docling+RapidOCR conversion before exiting;
-# large PDFs can take 5-15 minutes. 30 minutes provides ample headroom.
-timeout_seconds: 1800
+schema_version: '1.1'
+staging_root: ${PROJECT_ROOT}/.source_catalog/staging
+# Raw-only SDK bridge: no Docling, translation or LLM startup. Each ensure
+# still uses the request's smaller shared byte/time/cost ceiling.
+timeout_seconds: 180
 adapters:
   cn:
-    name: "stockinfo-cninfo"
-    version: "1.3.0"
-    interface: "json_command_v1"
+    name: stockinfo-cninfo
+    version: 1.3.0
+    interface: json_command_v1
     supports_acquisition_budget: true
-    project_root: "${PROJECT_ROOT}/../StockInfoDLSimple/v2-clean-rewrite"
+    project_root: ${PROJECT_ROOT}/../StockInfoDLSimple/v2-clean-rewrite
     config_root: null
-    command: ["${PYTHON_EXECUTABLE}", "-m", "src.company_wiki_adapter_cli"]
+    command:
+    - ${PYTHON_EXECUTABLE}
+    - -m
+    - src.company_wiki_adapter_cli
   hk:
-    name: "dayu-hkex-cli"
-    version: "1.0.0"
-    interface: "dayu_cli_v1"
-    project_root: "${PROJECT_ROOT}/../dayu-agent/dayu-agent"
-    config_root: "${PROJECT_ROOT}/../dayu-agent/workspace/config"
-    command: ["${PROJECT_ROOT}/../dayu-agent/dayu-agent/.venv/Scripts/python.exe", "-m", "dayu.cli"]
+    name: dayu-hk-sdk
+    version: 1.0.0
+    interface: dayu_sdk_bounded_v1
+    project_root: ${PROJECT_ROOT}/../dayu-agent/dayu-agent
+    config_root: null
+    command:
+    - ${PROJECT_ROOT}/../dayu-agent/dayu-agent/.venv/Scripts/python.exe
+    - -B
+    - ${PROJECT_ROOT}/tools/dayu_sdk_bridge.py
+    - --market
+    - HK
+    - --adapter-name
+    - dayu-hk-sdk
+    - --adapter-version
+    - 1.0.0
+    - --provider-state-root
+    - ${PROJECT_ROOT}/.source_catalog/provider-state/dayu
+    supports_acquisition_budget: true
   us:
-    name: "dayu-sec-cli"
-    version: "1.0.0"
-    interface: "dayu_cli_v1"
-    project_root: "${PROJECT_ROOT}/../dayu-agent/dayu-agent"
-    config_root: "${PROJECT_ROOT}/../dayu-agent/workspace/config"
-    command: ["${PROJECT_ROOT}/../dayu-agent/dayu-agent/.venv/Scripts/python.exe", "-m", "dayu.cli"]
+    name: dayu-us-sdk
+    version: 1.0.0
+    interface: dayu_sdk_bounded_v1
+    project_root: ${PROJECT_ROOT}/../dayu-agent/dayu-agent
+    config_root: null
+    command:
+    - ${PROJECT_ROOT}/../dayu-agent/dayu-agent/.venv/Scripts/python.exe
+    - -B
+    - ${PROJECT_ROOT}/tools/dayu_sdk_bridge.py
+    - --market
+    - US
+    - --adapter-name
+    - dayu-us-sdk
+    - --adapter-version
+    - 1.0.0
+    - --provider-state-root
+    - ${PROJECT_ROOT}/.source_catalog/provider-state/dayu
+    supports_acquisition_budget: true

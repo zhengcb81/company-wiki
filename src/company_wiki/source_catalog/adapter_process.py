@@ -9,6 +9,8 @@ import subprocess
 from tempfile import TemporaryDirectory
 from typing import Any, Sequence
 
+from company_wiki._bounded_process import TransportError, run_json_process
+
 from .acquisition import DownloadCandidate, DownloadReceipt
 from .download_budget import AcquisitionBudget
 from .resolver import SourceRequest
@@ -273,30 +275,22 @@ class JsonCommandAdapter:
         environment = dict(os.environ)
         environment["PYTHONUTF8"] = "1"
         environment["PYTHONDONTWRITEBYTECODE"] = "1"
-        creationflags = subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0
         try:
-            # The parent owns SDK scratch: subprocess.run kills/waits on timeout,
-            # then this context removes even a hard-killed child's partial files.
+            # The parent owns SDK scratch and the complete OS process tree,
+            # including Windows venv redirectors. Reap it before removing files.
             # Successful originals must reside in the explicit staging allocation.
             with TemporaryDirectory(prefix="cwpad-") as scratch:
                 environment["CWP_ADAPTER_SCRATCH_ROOT"] = scratch
-                completed = subprocess.run(
+                completed = run_json_process(
                     command,
                     input=canonical_json(payload),
-                    text=True,
-                    encoding="utf-8",
-                    errors="strict",
-                    capture_output=True,
                     cwd=self.project_root,
                     env=environment,
-                    timeout=(
+                    timeout_seconds=(
                         self.timeout_seconds
                         if timeout_seconds is None
                         else min(self.timeout_seconds, timeout_seconds)
                     ),
-                    check=False,
-                    shell=False,
-                    creationflags=creationflags,
                 )
         except subprocess.TimeoutExpired as cause:
             exc = AdapterProcessError(
@@ -306,6 +300,16 @@ class JsonCommandAdapter:
             exc.retryable = False
             exc.acquisition_usage_complete = False
             detail = cause.stderr or ""
+            if isinstance(detail, bytes):
+                detail = detail.decode("utf-8", errors="replace")
+            self._attach_usage_checkpoint(exc, detail)
+            raise exc from cause
+        except (TransportError, UnicodeError) as cause:
+            exc = AdapterProcessError(f"adapter {self.name} {action} violated bounded process lifetime")
+            exc.error_code = "adapter_output_limit" if type(cause).__name__ == "OutputLimitExceeded" else "adapter_process_failed"
+            exc.retryable = False
+            exc.acquisition_usage_complete = False
+            detail = getattr(cause, "stderr", b"")
             if isinstance(detail, bytes):
                 detail = detail.decode("utf-8", errors="replace")
             self._attach_usage_checkpoint(exc, detail)

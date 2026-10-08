@@ -78,3 +78,5 @@ Phase6 P0实现与原三公司大节点已通过（47PASS、无FAIL、1改善/70
 P1基础预算/HTTP/子进程及入库集中79项通过；下一步实现Dayu SDK桥公开DTO/财政期间/配置路由责任测试，再运行隔离真实HK/US download→import→reuse→RF读取。生产acquisition配置尚未切换，Dayu零改动。当前累计模型授权USD20/2,000,000tokens，见phase6/budget_authorization.md。
 
 P1 SDK公开接口/财政证据/实际HTTP回执及原件入库集中117项通过（包含实际Dayu SDK offline2），只读审查3项缺陷均有RED→GREEN。当前Next Step为复制候选配置的真实HK/US FF→CWP→reuse→RF读取，生产配置尚未提升；之后继续FF/ET费用及来源资格、格式规范化，不能把离线SDK绿记为真实供应商全绿。
+
+当前：P1 Dayu annual/quarter/HK H1 raw-only有界采集已验收并提升配置。三市场full/live各真实新下载→入库→0下载复用→RF读取均PASS（50PASS、0FAIL；其余缺口保留），独立测试环境恢复不存在。新增Windows子孙进程超时根因已修并责任测试绿。下一施工项为FF/ET把费用、配置能力和账户权限分别判定，随后来源资格/HTML/PPTX/RF输入与摘要实际消费，两组完整新研究验收仍未完成。
