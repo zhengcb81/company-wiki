@@ -134,6 +134,8 @@
 
 ## Phase 6 开始实施
 
+用户追加预批并明确选择累计USD20、2,000,000 tokens；包含原消耗，详见phase6/budget_authorization.md。当前实现/测试收费模型0，继续使用原配置和现有累计账，未知费用不清除。
+
 - 已启动持续目标，读取当前PWF和RF技能；RF main=08673cf8，owner未提交仅3个assurance日志及output，不能重置。按AGENTS的explore建议委派Dayu和parser两项只读结构探索；源码修改仍由MAIN按责任仓推进。
 - RF无AGENTS文件，读取尝试FileNotFound不作为项目缺陷；此前只读盘点也确认其父链无此文件。准备独立工作树与最小跨进程RED，不改失败成功定义。
 
@@ -142,3 +144,5 @@ P0候选72ce94c1已在独立RF分支提交，62责任测试3.79秒、125快速�
 P0大节点签收：RF候选72ce94c160bbb5b9399c8716307588b443a72a83的三公司full108.527秒，47PASS/3BLOCKED/14NOT_RUN/7NOT_APPLICABLE，0FAIL；与封存基线比较1改善（US process_seed_stability FAIL→PASS）、70不变、0missing/0退化，TEMP恢复不存在。已快进main并逐SHA确认owner三日志未变；安装计划只有.agents/.codex两份现存副本，各4文件，未选择文件漂移0。P0代码问题可关闭，其他能力仍未完成。
 
 P0发布收尾：72ce94c1已推origin/main，正常pre-push的125项检查通过；[精确SHA远端CI](https://github.com/zhengcb81/revenue-forecast/actions/runs/37820231186)成功。两份现存技能副本定点同步共8文件，配置/output及未选择文件保持不变，剩余漂移0。独立RF工作树只剩本次五个pytest生成目录，核对TEMP绝对边界、HEAD及无reparse后清理并移除已合并分支；主仓仍只有原owner三日志和output未提交，原件删除0。
+
+P1下载层基础责任组件完成：8个RED实证后修复actual usage、两维原子计账、精确adapter版本和hard-timeout最后完整checkpoint；未知最终用量不自动重试，预算usage_complete=false保留未结算状态。新增同步/异步HTTPX包裹覆盖redirect/retry/error body/HEAD/gzip/late chunk/slow drip/限时退避。79项责任及既有公共入库合同正常OS12.19秒通过，新增真实子进程hard-kill保留usage证明。达到额度时仍可完成本地验真/入库，只有新provider请求拒绝。Dayu桥和真实两个市场仍未完成，不能把基础组件绿记为P1全绿。

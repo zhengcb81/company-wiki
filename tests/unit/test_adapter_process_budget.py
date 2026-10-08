@@ -270,7 +270,7 @@ def test_bounded_json_adapter_rejects_reported_usage_over_remaining_cap(tmp_path
     with pytest.raises(AcquisitionBudgetExceeded):
         adapter.discover_bounded(_request(), budget)
 
-    assert budget.response_bytes_used == 0
+    assert budget.response_bytes_used == 101
 
 
 def test_bounded_json_adapter_uses_remaining_time_as_process_deadline(

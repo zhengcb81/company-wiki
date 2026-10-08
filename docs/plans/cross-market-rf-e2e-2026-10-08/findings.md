@@ -1,5 +1,13 @@
 # Findings
 
+## Phase6 P1预算与桥接共用层（实施中）
+
+- 最小RED共8失败/1通过，实证：无效cost已经改变byte计数，byte超额报告丢掉cost和实际bytes，hard-timeout丢stderr usage，失败响应信任错误adapter version，bytes耗尽仍能发新请求。原两个测试将actual usage错当成预约量；先记录独立反例后改其计数期望，超额拒绝仍保留。失败账不能抹去已经下载的流量或发生的费用。
+- 修正为两维先校验、完整实际计量后再拒绝；剩余额度不负数，失败账允许恢复超额实际值。timeout只取最后完整同名/同版本progress，不累加重复checkpoint；硬杀无法证明最终读/flush完整，明确usage_complete=false、计量为已知下界，不冒称全量零费用。
+- CWP-owned HTTPX同步/异步transport在全部HTTP状态、重定向和重试的stream计量，强制identity并拒绝服务器无视此要求，避免解压后原件大于计量。拒绝已知超长body，HEAD资源长度不当作body。未知长度最多最后一底层chunk超额，记录实际值后终止；sync阻塞仍须父进程hard deadline，不能声称chunk检查可以中断阻塞socket。接口依据[HTTPX官方transport文档](https://www.python-httpx.org/advanced/transports/)。
+- Windows async loop需内部socketpair：普通沙箱运行被平台阻塞；pytest函数级禁止network也会误伤loop构造。测试session先造内部loop，随后仍禁止外连且只用MockTransport；正常OS运行22项1.01秒通过。没有解除整个测试包的network禁止，也没有把该环境错误算provider失败。
+- SEC UA真源为已配置SEC_USER_AGENT（只验证非空，未记录值），不是workspace/run.json；Dayu构造/下载限流state全部指向CWP-owned workspace。HK注入client后UA/timeout必须由client显式配置。桥不调用CLI init或Pipeline，不修改Dayu或产生其pyc。
+
 2026-10-08 新任务。CWP 生产根 company_raw / dayu_portfolio / dropbox_stock / future_lake 由同一配置接入。RF 仓 main=7cf337e1，FF main=211a56ff；RF 三份 assurance 日志是既有 owner WIP，保持。RF 实际 runtime=4.1.0，五个来源运行文件 repo/installed SHA 相同（不存在所疑安装漂移）。EARNINGS_TRANSCRIPTS_TOOL 当前环境未配置，必须真实验证配置路径，不能冒称电话会已自动下载。
 
 ## 第一轮真实链路缺陷

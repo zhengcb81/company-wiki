@@ -39,6 +39,7 @@ class AcquisitionBudget:
     max_cost_usd: Decimal | str
     response_bytes_used: int = 0
     cost_usd_used: Decimal = field(default=Decimal("0"))
+    usage_complete: bool = True
 
     @classmethod
     def from_limits(
@@ -78,29 +79,70 @@ class AcquisitionBudget:
         if (
             isinstance(self.response_bytes_used, bool)
             or not isinstance(self.response_bytes_used, int)
-            or not 0 <= self.response_bytes_used <= self.max_response_bytes
+            or self.response_bytes_used < 0
         ):
-            raise ValueError("response_bytes_used must be within the byte ceiling")
+            raise ValueError("response_bytes_used must be a non-negative integer")
         self.max_cost_usd = _decimal_amount(self.max_cost_usd, "max_cost_usd")
         self.cost_usd_used = _decimal_amount(self.cost_usd_used, "cost_usd_used")
-        if self.cost_usd_used > self.max_cost_usd:
-            raise ValueError("cost_usd_used must be within the cost ceiling")
+        if not isinstance(self.usage_complete, bool):
+            raise TypeError("usage_complete must be bool")
 
     @property
     def remaining_response_bytes(self) -> int:
-        return self.max_response_bytes - self.response_bytes_used
+        return max(0, self.max_response_bytes - self.response_bytes_used)
 
     @property
     def remaining_cost_usd(self) -> Decimal:
-        return self.max_cost_usd - self.cost_usd_used
+        return max(Decimal("0"), self.max_cost_usd - self.cost_usd_used)
 
     @property
     def remaining_seconds(self) -> float:
         return max(0.0, self.deadline_monotonic - time.monotonic())
 
     def ensure_open(self) -> None:
+        """Check operation limits; finishing exactly at the cap is valid."""
+        self.ensure_deadline()
+        if not self.usage_complete:
+            raise AcquisitionBudgetExceeded("acquisition usage incomplete after provider failure")
+        if self.response_bytes_used > self.max_response_bytes:
+            raise AcquisitionBudgetExceeded("response byte budget exceeded")
+        if self.cost_usd_used > self.max_cost_usd:
+            raise AcquisitionBudgetExceeded("acquisition cost budget exceeded")
+
+    def ensure_new_request(self) -> None:
+        """Gate provider work; a zero cost ceiling still allows free requests."""
+        self.ensure_open()
+        if self.response_bytes_used >= self.max_response_bytes:
+            raise AcquisitionBudgetExceeded("response byte budget exhausted")
+
+    def ensure_deadline(self) -> None:
+        """Check time while reading an already-open response."""
         if time.monotonic() >= self.deadline_monotonic:
             raise AcquisitionBudgetExceeded("acquisition deadline exceeded")
+
+    def record_reported_usage(
+        self, *, response_bytes: int, cost_usd: Decimal | str
+    ) -> None:
+        """Record actual usage atomically, then reject an exceeded ceiling.
+
+        This is accounting, not a reservation: already read bytes and billed
+        cost cannot be undone. A failed budget may therefore retain an overage.
+        Both values are validated before either counter changes, and both are
+        recorded even when one exceeds its cap. Never clamp actual usage.
+        """
+        if (
+            isinstance(response_bytes, bool)
+            or not isinstance(response_bytes, int)
+            or response_bytes < 0
+        ):
+            raise ValueError("response byte count must be a non-negative integer")
+        cost = _decimal_amount(cost_usd, "cost")
+        self.response_bytes_used += response_bytes
+        self.cost_usd_used += cost
+        if self.response_bytes_used > self.max_response_bytes:
+            raise AcquisitionBudgetExceeded("response byte budget exceeded")
+        if self.cost_usd_used > self.max_cost_usd:
+            raise AcquisitionBudgetExceeded("acquisition cost budget exceeded")
 
     def consume_response_bytes(self, count: int) -> None:
         """Record response bytes already consumed by the provider.
@@ -110,13 +152,12 @@ class AcquisitionBudget:
         """
         if isinstance(count, bool) or not isinstance(count, int) or count < 0:
             raise ValueError("response byte count must be a non-negative integer")
-        if count > self.remaining_response_bytes:
-            raise AcquisitionBudgetExceeded("response byte budget exceeded")
         self.response_bytes_used += count
+        if self.response_bytes_used > self.max_response_bytes:
+            raise AcquisitionBudgetExceeded("response byte budget exceeded")
 
     def consume_cost_usd(self, amount: Decimal | str) -> None:
         """Record reported provider cost, even if the call crossed deadline."""
-        cost = _decimal_amount(amount, "cost")
-        if cost > self.remaining_cost_usd:
+        self.cost_usd_used += _decimal_amount(amount, "cost")
+        if self.cost_usd_used > self.max_cost_usd:
             raise AcquisitionBudgetExceeded("acquisition cost budget exceeded")
-        self.cost_usd_used += cost

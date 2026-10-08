@@ -30,6 +30,8 @@ class AdapterProcessError(RuntimeError):
     retryable: bool | None = None
     adapter_version: str | None = None
     acquisition_usage: dict[str, Any] | None = None
+    # False means a hard-killed process supplied only a lower-bound checkpoint.
+    acquisition_usage_complete: bool | None = None
 
     def __init__(self, message: str = "") -> None:
         super().__init__(message)
@@ -194,7 +196,7 @@ class JsonCommandAdapter:
         self, payload: dict[str, Any], budget: AcquisitionBudget
     ) -> tuple[dict[str, Any], float]:
         self._ensure_bounded_support()
-        budget.ensure_open()
+        budget.ensure_new_request()
         timeout_seconds = min(self.timeout_seconds, budget.remaining_seconds)
         if timeout_seconds <= 0:
             budget.ensure_open()
@@ -237,9 +239,10 @@ class JsonCommandAdapter:
             raise AdapterProcessError(
                 "bounded adapter acquisition_usage values are invalid"
             )
-        budget.consume_response_bytes(response_bytes)
         try:
-            budget.consume_cost_usd(cost_usd)
+            budget.record_reported_usage(
+                response_bytes=response_bytes, cost_usd=cost_usd
+            )
         except (TypeError, ValueError) as exc:
             raise AdapterProcessError(
                 "bounded adapter reported an invalid acquisition cost"
@@ -249,6 +252,9 @@ class JsonCommandAdapter:
     def _charge_failure_usage(
         cls, exc: AdapterProcessError, budget: AcquisitionBudget
     ) -> None:
+        if exc.acquisition_usage_complete is not True:
+            budget.usage_complete = False
+            exc.retryable = False  # An unknown final charge cannot fund a retry.
         if exc.acquisition_usage is not None:
             cls._charge_bounded_usage(
                 {"acquisition_usage": exc.acquisition_usage}, budget
@@ -265,6 +271,7 @@ class JsonCommandAdapter:
         command = (*self.command, action, *extra_args)
         environment = dict(os.environ)
         environment["PYTHONUTF8"] = "1"
+        environment["PYTHONDONTWRITEBYTECODE"] = "1"
         creationflags = subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0
         try:
             completed = subprocess.run(
@@ -285,14 +292,28 @@ class JsonCommandAdapter:
                 shell=False,
                 creationflags=creationflags,
             )
-        except (OSError, subprocess.TimeoutExpired) as exc:
-            raise AdapterProcessError(
-                f"adapter {self.name} {action} process failed: {exc}"
-            ) from exc
-        if completed.returncode != 0:
-            detail = completed.stderr.strip()[-2000:] or "no stderr"
+        except subprocess.TimeoutExpired as cause:
             exc = AdapterProcessError(
-                f"adapter {self.name} {action} exited {completed.returncode}: {detail}"
+                f"adapter {self.name} {action} process failed: deadline exceeded"
+            )
+            exc.error_code = "adapter_timeout"
+            exc.retryable = False
+            exc.acquisition_usage_complete = False
+            detail = cause.stderr or ""
+            if isinstance(detail, bytes):
+                detail = detail.decode("utf-8", errors="replace")
+            self._attach_usage_checkpoint(exc, detail)
+            raise exc from cause
+        except OSError as cause:
+            exc = AdapterProcessError(
+                f"adapter {self.name} {action} process failed: cannot launch"
+            )
+            exc.error_code = "adapter_process_failed"
+            raise exc from cause
+        if completed.returncode != 0:
+            detail = completed.stderr.strip()
+            exc = AdapterProcessError(
+                f"adapter {self.name} {action} exited {completed.returncode}"
             )
             # Try to parse the structured 1.0 error JSON from the *last* line of
             # stderr. Unknown / non-JSON / schema-mismatched stderr degrades to
@@ -302,7 +323,7 @@ class JsonCommandAdapter:
                 error_obj
                 and adapter_obj
                 and adapter_obj.get("name") == self.name
-                and isinstance(adapter_obj.get("version"), str)
+                and adapter_obj.get("version") == self.version
                 and isinstance(error_obj.get("code"), str)
             ):
                 exc.error_code = str(error_obj["code"])
@@ -312,9 +333,11 @@ class JsonCommandAdapter:
                 usage_raw = error_obj.get("acquisition_usage")
                 if isinstance(usage_raw, dict):
                     exc.acquisition_usage = usage_raw
+                    exc.acquisition_usage_complete = True
                 exc.adapter_version = str(adapter_obj["version"])
             else:
                 exc.error_code = "adapter_process_failed"
+                self._attach_usage_checkpoint(exc, detail)
             raise exc
         try:
             response = json.loads(completed.stdout)
@@ -332,6 +355,34 @@ class JsonCommandAdapter:
         if adapter.get("name") != self.name or adapter.get("version") != self.version:
             raise AdapterProcessError("adapter response identity/version mismatch")
         return response
+
+    def _attach_usage_checkpoint(self, exc: AdapterProcessError, detail: str) -> None:
+        """Read the last complete progress line, even if kill truncated the next.
+
+        A checkpoint reports cumulative usage for THIS subprocess invocation;
+        it is charged once, not summed with earlier checkpoints. Its identity
+        and version must match the configured process. It remains a lower bound
+        after a hard kill, because the final read/flush may have been interrupted.
+        Unstructured stderr and URLs are never copied into the public error.
+        """
+        for line in reversed(detail.splitlines()):
+            try:
+                value = json.loads(line)
+            except (ValueError, TypeError):
+                continue
+            if not isinstance(value, dict):
+                continue
+            if (
+                value.get("schema_version") != "1.0"
+                or value.get("status") != "progress"
+                or value.get("adapter") != {"name": self.name, "version": self.version}
+                or not isinstance(value.get("acquisition_usage"), dict)
+            ):
+                continue
+            exc.acquisition_usage = value["acquisition_usage"]
+            exc.acquisition_usage_complete = False
+            exc.adapter_version = self.version
+            return
 
     @staticmethod
     def _candidate(value: Any, request: SourceRequest) -> DownloadCandidate:

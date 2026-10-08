@@ -74,3 +74,5 @@ Phase 5发布：`71fec1554abf1b0fc6350da28589593b8e345adb`已推主线；[远端
 用户明确要求持续实施直到完成。顺序：P0 RF稳定计算 → CWP-owned Dayu有界桥及来源资格 → FF/ET能力和费用路由 → HTML/PPTX规范化 → RF目标/输入证据/摘要实际消费 → 原三公司完整回归 → 新三公司独立执行与审查。只读结构探索可并行，代码改动按责任层隔离；原件及邻仓owner WIP不动。Next Step：独立RF工作树先写跨进程确定性的RED测试。
 
 Phase6 P0实现与原三公司大节点已通过（47PASS、无FAIL、1改善/70不变），RF main=72ce94c1；剩余能力保留。Next Step：CWP-owned Dayu共用预算transport与失败usage/timeout责任测试，随后SDK桥。
+
+P1基础预算/HTTP/子进程及入库集中79项通过；下一步实现Dayu SDK桥公开DTO/财政期间/配置路由责任测试，再运行隔离真实HK/US download→import→reuse→RF读取。生产acquisition配置尚未切换，Dayu零改动。当前累计模型授权USD20/2,000,000tokens，见phase6/budget_authorization.md。
