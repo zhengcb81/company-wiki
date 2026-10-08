@@ -1,0 +1,364 @@
+{
+  "schema_version": "r2-production-source-application/1",
+  "status": "applied_verified",
+  "source_code_sha": "6ae7ddcc6d5fa974bb7e9a74210b1910f0960fda",
+  "exact_ci_run": 37705927320,
+  "counts_before": {
+    "sources": 43112,
+    "documents": 23530,
+    "locations": 46606,
+    "source_metadata_assertions": 22,
+    "document_retire_audit": 19000,
+    "document_restore_audit": 1
+  },
+  "catalog_bytes_before": {
+    "catalog.sqlite3": 222408704,
+    "catalog.sqlite3-wal": 0,
+    "catalog.sqlite3-shm": 32768
+  },
+  "operations": [
+    {
+      "sample_id": "S01",
+      "restore": {
+        "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "source_status": "active",
+        "audit_id": "restore-1b66604651c642fc8d75bc3e5331dc07",
+        "created_at": "2026-10-08T00:10:12Z"
+      }
+    },
+    {
+      "sample_id": "S01",
+      "facts_result": {
+        "status": "recorded",
+        "assertion_id": "sa-efd25eb7735f4cc18155baa97cf4deae",
+        "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
+      },
+      "effective_facts": {
+        "entity": "中微公司",
+        "market": "CN",
+        "language": "zh",
+        "document_kind": "annual_report",
+        "security_id": "688012",
+        "published_date": "2026-03-31",
+        "source_url": "http://static.cninfo.com.cn/finalpage/2026-03-31/1225062431.PDF",
+        "fiscal_year": 2025,
+        "fiscal_period": "FY",
+        "period_end": "2025-12-31"
+      },
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "byte_size": 9165875,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "sample_id": "S02",
+      "restore": {
+        "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "source_status": "active",
+        "audit_id": "restore-c998cd436bae4541a813884ca5d017ba",
+        "created_at": "2026-10-08T00:10:13Z"
+      }
+    },
+    {
+      "sample_id": "S02",
+      "facts_result": {
+        "status": "recorded",
+        "assertion_id": "sa-68f4b49116ce4d51967c548f302d1d21",
+        "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd"
+      },
+      "effective_facts": {
+        "entity": "中微公司",
+        "market": "CN",
+        "language": "zh",
+        "document_kind": "semi_annual_report",
+        "security_id": "688012",
+        "published_date": "2025-08-29",
+        "source_url": "http://static.cninfo.com.cn/finalpage/2025-08-29/1224606011.PDF",
+        "fiscal_year": 2025,
+        "fiscal_period": "H1",
+        "period_end": "2025-06-30"
+      },
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "content_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "byte_size": 6361468,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "sample_id": "S03",
+      "restore": {
+        "document_id": "urn:company-wiki:document:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "source_status": "active",
+        "audit_id": "restore-6ea99958708f4fc2aae6dbd908733422",
+        "created_at": "2026-10-08T00:10:13Z"
+      }
+    },
+    {
+      "sample_id": "S03",
+      "facts_result": {
+        "status": "recorded",
+        "assertion_id": "sa-05591ecf04944f868e88418db0e37937",
+        "document_id": "urn:company-wiki:document:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268"
+      },
+      "effective_facts": {
+        "entity": "中微公司",
+        "market": "CN",
+        "language": "zh",
+        "document_kind": "quarterly_report",
+        "security_id": "688012",
+        "published_date": "2026-04-28",
+        "source_url": "http://static.cninfo.com.cn/finalpage/2026-04-28/1225215453.PDF",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q1",
+        "period_end": "2026-03-31"
+      },
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "content_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "byte_size": 217264,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "sample_id": "S04",
+      "restore": {
+        "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "source_status": "active",
+        "audit_id": "restore-f639b650e81e475a87f9b138e8457a56",
+        "created_at": "2026-10-08T00:10:13Z"
+      }
+    },
+    {
+      "sample_id": "S04",
+      "facts_result": {
+        "status": "recorded",
+        "assertion_id": "sa-4071e74253d24f1487ef8342ba6ea33c",
+        "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67"
+      },
+      "effective_facts": {
+        "entity": "中微公司",
+        "market": "CN",
+        "language": "zh",
+        "document_kind": "prospectus",
+        "security_id": "688012",
+        "published_date": "2019-07-16",
+        "source_url": "http://static.cninfo.com.cn/finalpage/2019-07-16/1206447929.PDF",
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "period_end": null
+      },
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "content_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "byte_size": 11211796,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "sample_id": "S05",
+      "facts_result": {
+        "status": "recorded",
+        "assertion_id": "sa-b29821826b694bc1a0b68ff08f8de9e0",
+        "document_id": "urn:company-wiki:document:sha256:cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+        "source_id": "urn:company-wiki:source:sha256:cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b"
+      },
+      "effective_facts": {
+        "entity": "三角防务",
+        "market": "CN",
+        "language": "zh",
+        "document_kind": "equity_offering_prospectus",
+        "security_id": "300775",
+        "published_date": "2022-11-30",
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "period_end": null
+      },
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+        "source_id": "urn:company-wiki:source:sha256:cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+        "content_sha256": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+        "byte_size": 5595592,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "sample_id": "S06",
+      "facts_result": {
+        "status": "recorded",
+        "assertion_id": "sa-350fd6599a414552a4e93758d12ba4e4",
+        "document_id": "urn:company-wiki:document:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+        "source_id": "urn:company-wiki:source:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1"
+      },
+      "effective_facts": {
+        "entity": "华锐精密",
+        "market": "CN",
+        "language": "zh",
+        "document_kind": "convertible_bond_prospectus",
+        "security_id": "688059",
+        "published_date": "2022-06-22",
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "period_end": null
+      },
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+        "source_id": "urn:company-wiki:source:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+        "content_sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+        "byte_size": 4756322,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "sample_id": "S07",
+      "facts_result": {
+        "status": "recorded",
+        "assertion_id": "sa-0d5fd7729a6642a9b15de57179b2d60e",
+        "document_id": "urn:company-wiki:document:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7"
+      },
+      "effective_facts": {
+        "entity": "万润股份",
+        "market": "CN",
+        "language": "zh",
+        "document_kind": "investor_relations",
+        "security_id": "002643",
+        "published_date": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "period_end": null
+      },
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "content_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "byte_size": 153851,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "sample_id": "S08",
+      "facts_result": {
+        "status": "recorded",
+        "assertion_id": "sa-4025fcc4a95e4f02ae14a9e5e579e6c1",
+        "document_id": "urn:company-wiki:document:sha256:f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+        "source_id": "urn:company-wiki:source:sha256:f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b"
+      },
+      "effective_facts": {
+        "entity": "周大生",
+        "market": "CN",
+        "language": "zh",
+        "document_kind": "investor_relations",
+        "security_id": "002867",
+        "published_date": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "period_end": null
+      },
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+        "source_id": "urn:company-wiki:source:sha256:f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+        "content_sha256": "f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+        "byte_size": 414544,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "sample_id": "S09",
+      "register": {
+        "run_id": "scan-b126b9d48c6640608183dfb1bdbd7fbd",
+        "files_seen": 2,
+        "files_hashed": 2,
+        "files_reused": 0,
+        "files_excluded": 0,
+        "policy_excluded": 0,
+        "locations_active": 25059,
+        "locations_missing": 6,
+        "errors": 0,
+        "new_errors": 0,
+        "known_quarantined": 0,
+        "error_details": [],
+        "dry_run": false,
+        "strategy": [
+          [
+            "company_raw",
+            "legacy"
+          ]
+        ]
+      },
+      "raw_added_bytes": 66324,
+      "sidecar_added_bytes": 589,
+      "provenance_status": "legacy_unverified",
+      "http_provider_receipt": null
+    },
+    {
+      "sample_id": "S09",
+      "facts_result": {
+        "status": "recorded",
+        "assertion_id": "sa-01487fce0bb64bf28ed7f348cb09fc62",
+        "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a"
+      },
+      "effective_facts": {
+        "entity": "Microsoft",
+        "market": "US",
+        "language": "en",
+        "document_kind": "investor_call_transcript",
+        "security_id": "MSFT",
+        "published_date": null,
+        "fiscal_year": 2026,
+        "fiscal_period": "Q4",
+        "period_end": null
+      },
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "content_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "byte_size": 66324,
+        "mime_type": "text/plain",
+        "schema_version": "2.0"
+      }
+    }
+  ],
+  "raw_deleted": 0,
+  "model_posts": 0,
+  "translated": false,
+  "neighbor_writes": 0,
+  "counts_after": {
+    "sources": 43114,
+    "documents": 23531,
+    "locations": 46608,
+    "source_metadata_assertions": 31,
+    "document_retire_audit": 19000,
+    "document_restore_audit": 5
+  },
+  "catalog_bytes_after": {
+    "catalog.sqlite3": 222408704,
+    "catalog.sqlite3-wal": 1240152,
+    "catalog.sqlite3-shm": 32768
+  },
+  "all_original_sha_unchanged": true,
+  "configuration_and_original_sidecars_unchanged": true,
+  "unselected_documents_unchanged": true,
+  "root_scan_watermarks_unchanged": true,
+  "repeat_facts_added_assertions": 0,
+  "production_direct_sql_updates": 0
+}

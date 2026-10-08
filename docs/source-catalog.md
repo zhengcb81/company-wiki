@@ -33,12 +33,15 @@ python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml st
 python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml query "公司名"
 python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml resolve --help
 python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml ensure --help
+python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml source-facts --request source-facts.json
 python -m company_wiki.source_catalog.cli --config config/source_catalog.yaml export
 ```
 
 `ensure` 先查询、发现、再查 provider 身份，下载到隔离 staging 后由 CWP 复核实际原件 SHA/MIME/字节数，去重后导入并登记。CNINFO 使用 StockInfoDLSimple 的有界接口；没有硬限额能力的 provider 不能冒称实现了该能力。原件已存在时复用 SourceRef，避免重复下载。
 
 证券身份由已有官方身份快照匹配；有歧义时返回候选。来源 SHA、公司、期间和公开日/as-of 的一致性仍由各层自动验证，不新增人工签收文件。
+
+`source-facts` 请求只含 `source_ref`、`facts`、`evidence`。每个改动字段附来源 locator 和相同观察值；缺字段表示不改，明确 null 表示 unknown。入口实读原件 SHA，在同一事务追加事实并更新分类/公开日查询投影，保留原采集声明、历史与原件。相同事实复用；后续相同原件有限登记继续采用有效事实，真正新来源矛盾仍诊断并拒绝。具体格式与真实生产例见[R2实施与请求](plans/narrative-evidence-pilot-2026-09-26/r2_source_preparation_implementation_2026-10-08.md)。
 
 ## 有限叙述批次
 

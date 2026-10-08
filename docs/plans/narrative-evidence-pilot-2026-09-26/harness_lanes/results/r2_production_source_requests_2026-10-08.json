@@ -1,0 +1,724 @@
+{
+  "schema_version": "r2-production-source-requests/1",
+  "status": "applied_verified",
+  "source_code_sha": "6ae7ddcc6d5fa974bb7e9a74210b1910f0960fda",
+  "required_exact_ci_run": 37705927320,
+  "items": [
+    {
+      "sample_id": "S01",
+      "restore_legacy_missing_url": true,
+      "request": {
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "byte_size": 9165875,
+          "mime_type": "application/pdf",
+          "schema_version": "2.0"
+        },
+        "facts": {
+          "entity": "中微公司",
+          "market": "CN",
+          "language": "zh",
+          "document_kind": "annual_report",
+          "security_id": "688012",
+          "published_date": "2026-03-31",
+          "source_url": "http://static.cninfo.com.cn/finalpage/2026-03-31/1225062431.PDF",
+          "fiscal_year": 2025,
+          "fiscal_period": "FY",
+          "period_end": "2025-12-31"
+        },
+        "evidence": {
+          "entity": {
+            "locator": "source:S01:cover-or-body",
+            "value": "中微公司",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "market": {
+            "locator": "source:S01:cover-or-body",
+            "value": "CN",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "language": {
+            "locator": "source:S01:cover-or-body",
+            "value": "zh",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "document_kind": {
+            "locator": "source:S01:cover-or-body",
+            "value": "annual_report",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "security_id": {
+            "locator": "security_master:cn/688012",
+            "value": "688012",
+            "url": "https://www.cninfo.com.cn/new/data/szse_stock.json",
+            "status": "verified"
+          },
+          "published_date": {
+            "locator": "cninfo:announcementId=1225062431;adjunctUrl=finalpage/2026-03-31/1225062431.PDF",
+            "value": "2026-03-31",
+            "url": "http://static.cninfo.com.cn/finalpage/2026-03-31/1225062431.PDF",
+            "status": "verified"
+          },
+          "source_url": {
+            "locator": "cninfo:announcementId=1225062431",
+            "value": "http://static.cninfo.com.cn/finalpage/2026-03-31/1225062431.PDF",
+            "url": "http://static.cninfo.com.cn/finalpage/2026-03-31/1225062431.PDF",
+            "status": "verified"
+          },
+          "fiscal_year": {
+            "locator": "source:S01:cover-or-txt-header",
+            "value": 2025,
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          },
+          "fiscal_period": {
+            "locator": "source:S01:cover-or-txt-header",
+            "value": "FY",
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          },
+          "period_end": {
+            "locator": "source:S01:cover-or-txt-header",
+            "value": "2025-12-31",
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "S02",
+      "restore_legacy_missing_url": true,
+      "request": {
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+          "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+          "content_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+          "byte_size": 6361468,
+          "mime_type": "application/pdf",
+          "schema_version": "2.0"
+        },
+        "facts": {
+          "entity": "中微公司",
+          "market": "CN",
+          "language": "zh",
+          "document_kind": "semi_annual_report",
+          "security_id": "688012",
+          "published_date": "2025-08-29",
+          "source_url": "http://static.cninfo.com.cn/finalpage/2025-08-29/1224606011.PDF",
+          "fiscal_year": 2025,
+          "fiscal_period": "H1",
+          "period_end": "2025-06-30"
+        },
+        "evidence": {
+          "entity": {
+            "locator": "source:S02:cover-or-body",
+            "value": "中微公司",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "market": {
+            "locator": "source:S02:cover-or-body",
+            "value": "CN",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "language": {
+            "locator": "source:S02:cover-or-body",
+            "value": "zh",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "document_kind": {
+            "locator": "source:S02:cover-or-body",
+            "value": "semi_annual_report",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "security_id": {
+            "locator": "cover:S02-p1",
+            "value": "688012",
+            "url": null,
+            "status": "verified"
+          },
+          "published_date": {
+            "locator": "cninfo:announcementId=1224606011;adjunctUrl=finalpage/2025-08-29/1224606011.PDF",
+            "value": "2025-08-29",
+            "url": "http://static.cninfo.com.cn/finalpage/2025-08-29/1224606011.PDF",
+            "status": "verified"
+          },
+          "source_url": {
+            "locator": "cninfo:announcementId=1224606011",
+            "value": "http://static.cninfo.com.cn/finalpage/2025-08-29/1224606011.PDF",
+            "url": "http://static.cninfo.com.cn/finalpage/2025-08-29/1224606011.PDF",
+            "status": "verified"
+          },
+          "fiscal_year": {
+            "locator": "source:S02:cover-or-txt-header",
+            "value": 2025,
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          },
+          "fiscal_period": {
+            "locator": "source:S02:cover-or-txt-header",
+            "value": "H1",
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          },
+          "period_end": {
+            "locator": "source:S02:cover-or-txt-header",
+            "value": "2025-06-30",
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "S03",
+      "restore_legacy_missing_url": true,
+      "request": {
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "content_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "byte_size": 217264,
+          "mime_type": "application/pdf",
+          "schema_version": "2.0"
+        },
+        "facts": {
+          "entity": "中微公司",
+          "market": "CN",
+          "language": "zh",
+          "document_kind": "quarterly_report",
+          "security_id": "688012",
+          "published_date": "2026-04-28",
+          "source_url": "http://static.cninfo.com.cn/finalpage/2026-04-28/1225215453.PDF",
+          "fiscal_year": 2026,
+          "fiscal_period": "Q1",
+          "period_end": "2026-03-31"
+        },
+        "evidence": {
+          "entity": {
+            "locator": "source:S03:cover-or-body",
+            "value": "中微公司",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "market": {
+            "locator": "source:S03:cover-or-body",
+            "value": "CN",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "language": {
+            "locator": "source:S03:cover-or-body",
+            "value": "zh",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "document_kind": {
+            "locator": "source:S03:cover-or-body",
+            "value": "quarterly_report",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "security_id": {
+            "locator": "cover:S03-p1",
+            "value": "688012",
+            "url": null,
+            "status": "verified"
+          },
+          "published_date": {
+            "locator": "cninfo:announcementId=1225215453;adjunctUrl=finalpage/2026-04-28/1225215453.PDF",
+            "value": "2026-04-28",
+            "url": "http://static.cninfo.com.cn/finalpage/2026-04-28/1225215453.PDF",
+            "status": "verified"
+          },
+          "source_url": {
+            "locator": "cninfo:announcementId=1225215453",
+            "value": "http://static.cninfo.com.cn/finalpage/2026-04-28/1225215453.PDF",
+            "url": "http://static.cninfo.com.cn/finalpage/2026-04-28/1225215453.PDF",
+            "status": "verified"
+          },
+          "fiscal_year": {
+            "locator": "source:S03:cover-or-txt-header",
+            "value": 2026,
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          },
+          "fiscal_period": {
+            "locator": "source:S03:cover-or-txt-header",
+            "value": "Q1",
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          },
+          "period_end": {
+            "locator": "source:S03:cover-or-txt-header",
+            "value": "2026-03-31",
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "S04",
+      "restore_legacy_missing_url": true,
+      "request": {
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+          "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+          "content_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+          "byte_size": 11211796,
+          "mime_type": "application/pdf",
+          "schema_version": "2.0"
+        },
+        "facts": {
+          "entity": "中微公司",
+          "market": "CN",
+          "language": "zh",
+          "document_kind": "prospectus",
+          "security_id": "688012",
+          "published_date": "2019-07-16",
+          "source_url": "http://static.cninfo.com.cn/finalpage/2019-07-16/1206447929.PDF",
+          "fiscal_year": null,
+          "fiscal_period": null,
+          "period_end": null
+        },
+        "evidence": {
+          "entity": {
+            "locator": "source:S04:cover-or-body",
+            "value": "中微公司",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "market": {
+            "locator": "source:S04:cover-or-body",
+            "value": "CN",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "language": {
+            "locator": "source:S04:cover-or-body",
+            "value": "zh",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "document_kind": {
+            "locator": "source:S04:cover-or-body",
+            "value": "prospectus",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "security_id": {
+            "locator": "security_master:cn/688012",
+            "value": "688012",
+            "url": "https://www.cninfo.com.cn/new/data/szse_stock.json",
+            "status": "verified"
+          },
+          "published_date": {
+            "locator": "cninfo:announcementId=1206447929;adjunctUrl=finalpage/2019-07-16/1206447929.PDF",
+            "value": "2019-07-16",
+            "url": "http://static.cninfo.com.cn/finalpage/2019-07-16/1206447929.PDF",
+            "status": "verified"
+          },
+          "source_url": {
+            "locator": "cninfo:announcementId=1206447929",
+            "value": "http://static.cninfo.com.cn/finalpage/2019-07-16/1206447929.PDF",
+            "url": "http://static.cninfo.com.cn/finalpage/2019-07-16/1206447929.PDF",
+            "status": "verified"
+          },
+          "fiscal_year": {
+            "locator": "source:S04:cover-or-txt-header",
+            "value": null,
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          },
+          "fiscal_period": {
+            "locator": "source:S04:cover-or-txt-header",
+            "value": null,
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          },
+          "period_end": {
+            "locator": "source:S04:cover-or-txt-header",
+            "value": null,
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "S05",
+      "restore_legacy_missing_url": false,
+      "request": {
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+          "source_id": "urn:company-wiki:source:sha256:cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+          "content_sha256": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+          "byte_size": 5595592,
+          "mime_type": "application/pdf",
+          "schema_version": "2.0"
+        },
+        "facts": {
+          "entity": "三角防务",
+          "market": "CN",
+          "language": "zh",
+          "document_kind": "equity_offering_prospectus",
+          "security_id": "300775",
+          "published_date": "2022-11-30",
+          "fiscal_year": null,
+          "fiscal_period": null,
+          "period_end": null
+        },
+        "evidence": {
+          "entity": {
+            "locator": "source:S05:cover-or-body",
+            "value": "三角防务",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "market": {
+            "locator": "source:S05:cover-or-body",
+            "value": "CN",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "language": {
+            "locator": "source:S05:cover-or-body",
+            "value": "zh",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "document_kind": {
+            "locator": "source:S05:cover-or-body",
+            "value": "equity_offering_prospectus",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "security_id": {
+            "locator": "cover:S05-p1",
+            "value": "300775",
+            "url": null,
+            "status": "verified"
+          },
+          "published_date": {
+            "locator": "cninfo:announcementId=1215243407;adjunctUrl=finalpage/2022-11-30/1215243407.PDF",
+            "value": "2022-11-30",
+            "url": "http://static.cninfo.com.cn/finalpage/2022-11-30/1215243407.PDF",
+            "status": "verified"
+          },
+          "fiscal_year": {
+            "locator": "source:S05:cover-or-txt-header",
+            "value": null,
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          },
+          "fiscal_period": {
+            "locator": "source:S05:cover-or-txt-header",
+            "value": null,
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          },
+          "period_end": {
+            "locator": "source:S05:cover-or-txt-header",
+            "value": null,
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "S06",
+      "restore_legacy_missing_url": false,
+      "request": {
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+          "source_id": "urn:company-wiki:source:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+          "content_sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+          "byte_size": 4756322,
+          "mime_type": "application/pdf",
+          "schema_version": "2.0"
+        },
+        "facts": {
+          "entity": "华锐精密",
+          "market": "CN",
+          "language": "zh",
+          "document_kind": "convertible_bond_prospectus",
+          "security_id": "688059",
+          "published_date": "2022-06-22",
+          "fiscal_year": null,
+          "fiscal_period": null,
+          "period_end": null
+        },
+        "evidence": {
+          "entity": {
+            "locator": "source:S06:cover-or-body",
+            "value": "华锐精密",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "market": {
+            "locator": "source:S06:cover-or-body",
+            "value": "CN",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "language": {
+            "locator": "source:S06:cover-or-body",
+            "value": "zh",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "document_kind": {
+            "locator": "source:S06:cover-or-body",
+            "value": "convertible_bond_prospectus",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "security_id": {
+            "locator": "cover:S06-p1",
+            "value": "688059",
+            "url": null,
+            "status": "verified"
+          },
+          "published_date": {
+            "locator": "cninfo:announcementId=1213777070;adjunctUrl=finalpage/2022-06-22/1213777070.PDF",
+            "value": "2022-06-22",
+            "url": "http://static.cninfo.com.cn/finalpage/2022-06-22/1213777070.PDF",
+            "status": "verified"
+          },
+          "fiscal_year": {
+            "locator": "source:S06:cover-or-txt-header",
+            "value": null,
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          },
+          "fiscal_period": {
+            "locator": "source:S06:cover-or-txt-header",
+            "value": null,
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          },
+          "period_end": {
+            "locator": "source:S06:cover-or-txt-header",
+            "value": null,
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "S07",
+      "restore_legacy_missing_url": false,
+      "request": {
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+          "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+          "content_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+          "byte_size": 153851,
+          "mime_type": "application/pdf",
+          "schema_version": "2.0"
+        },
+        "facts": {
+          "entity": "万润股份",
+          "market": "CN",
+          "language": "zh",
+          "document_kind": "investor_relations",
+          "security_id": "002643",
+          "published_date": null,
+          "fiscal_year": null,
+          "fiscal_period": null,
+          "period_end": null
+        },
+        "evidence": {
+          "entity": {
+            "locator": "source:S07:cover-or-body",
+            "value": "万润股份",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "market": {
+            "locator": "source:S07:cover-or-body",
+            "value": "CN",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "language": {
+            "locator": "source:S07:cover-or-body",
+            "value": "zh",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "document_kind": {
+            "locator": "source:S07:cover-or-body",
+            "value": "investor_relations",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "security_id": {
+            "locator": "cover:S07-p1",
+            "value": "002643",
+            "url": null,
+            "status": "verified"
+          },
+          "published_date": {
+            "locator": "g3:S07:publication-unknown",
+            "value": null,
+            "basis": "No verified publication; activity/call day and URL path cannot replace publication"
+          },
+          "fiscal_year": {
+            "locator": "source:S07:cover-or-txt-header",
+            "value": null,
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          },
+          "fiscal_period": {
+            "locator": "source:S07:cover-or-txt-header",
+            "value": null,
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          },
+          "period_end": {
+            "locator": "source:S07:cover-or-txt-header",
+            "value": null,
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "S08",
+      "restore_legacy_missing_url": false,
+      "request": {
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+          "source_id": "urn:company-wiki:source:sha256:f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+          "content_sha256": "f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+          "byte_size": 414544,
+          "mime_type": "application/pdf",
+          "schema_version": "2.0"
+        },
+        "facts": {
+          "entity": "周大生",
+          "market": "CN",
+          "language": "zh",
+          "document_kind": "investor_relations",
+          "security_id": "002867",
+          "published_date": null,
+          "fiscal_year": null,
+          "fiscal_period": null,
+          "period_end": null
+        },
+        "evidence": {
+          "entity": {
+            "locator": "source:S08:cover-or-body",
+            "value": "周大生",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "market": {
+            "locator": "source:S08:cover-or-body",
+            "value": "CN",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "language": {
+            "locator": "source:S08:cover-or-body",
+            "value": "zh",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "document_kind": {
+            "locator": "source:S08:cover-or-body",
+            "value": "investor_relations",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "security_id": {
+            "locator": "cover:S08-p1",
+            "value": "002867",
+            "url": null,
+            "status": "verified"
+          },
+          "published_date": {
+            "locator": "g3:S08:publication-unknown",
+            "value": null,
+            "basis": "No verified publication; activity/call day and URL path cannot replace publication"
+          },
+          "fiscal_year": {
+            "locator": "source:S08:cover-or-txt-header",
+            "value": null,
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          },
+          "fiscal_period": {
+            "locator": "source:S08:cover-or-txt-header",
+            "value": null,
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          },
+          "period_end": {
+            "locator": "source:S08:cover-or-txt-header",
+            "value": null,
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "S09",
+      "restore_legacy_missing_url": false,
+      "request": {
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+          "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+          "content_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+          "byte_size": 66324,
+          "mime_type": "text/plain",
+          "schema_version": "2.0"
+        },
+        "facts": {
+          "entity": "Microsoft",
+          "market": "US",
+          "language": "en",
+          "document_kind": "investor_call_transcript",
+          "security_id": "MSFT",
+          "published_date": null,
+          "fiscal_year": 2026,
+          "fiscal_period": "Q4",
+          "period_end": null
+        },
+        "evidence": {
+          "entity": {
+            "locator": "source:S09:cover-or-body",
+            "value": "Microsoft",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "market": {
+            "locator": "source:S09:cover-or-body",
+            "value": "US",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "language": {
+            "locator": "source:S09:cover-or-body",
+            "value": "en",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "document_kind": {
+            "locator": "source:S09:cover-or-body",
+            "value": "investor_call_transcript",
+            "basis": "G3 real source review; namespace market and configured display name"
+          },
+          "security_id": {
+            "locator": "txt:header:Ticker",
+            "value": "MSFT"
+          },
+          "published_date": {
+            "locator": "g3:S09:publication-unknown",
+            "value": null,
+            "basis": "No verified publication; activity/call day and URL path cannot replace publication"
+          },
+          "fiscal_year": {
+            "locator": "source:S09:cover-or-txt-header",
+            "value": 2026,
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          },
+          "fiscal_period": {
+            "locator": "source:S09:cover-or-txt-header",
+            "value": "Q4",
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          },
+          "period_end": {
+            "locator": "source:S09:cover-or-txt-header",
+            "value": null,
+            "basis": "Declared reporting period; prospectus/activity has no single filing period. TXT period end not established."
+          }
+        }
+      }
+    }
+  ],
+  "legacy_transcript_relative_target": "Microsoft/raw/transcripts/MSFT_Q4_2026_earnings_call.txt",
+  "legacy_transcript_metadata": {
+    "company_name": "Microsoft",
+    "market": "US",
+    "security_id": "MSFT",
+    "document_kind": "investor_call_transcript",
+    "fiscal_year": 2026,
+    "fiscal_period": "Q4",
+    "language": "en",
+    "published_date": null,
+    "call_date": "2026-07-29",
+    "source_url": null,
+    "legacy_source_url": "https://www.fool.com/earnings/call-transcripts/2026/08/07/microsoft-msft-q4-2026-earnings-call-transcript/",
+    "legacy_declared_provider": "motley_fool",
+    "legacy_scraped_at": "2026-09-03T22:44:45.464617",
+    "provenance_status": "legacy_unverified",
+    "provider_receipt": null
+  },
+  "constraints": {
+    "model_posts": 0,
+    "translated": false,
+    "raw_deleted": 0,
+    "full_root_scan": false,
+    "direct_production_sql_updates": false,
+    "legacy_provider_receipt_fabricated": false
+  },
+  "application_receipt": "r2_production_source_application_2026-10-08.json"
+}

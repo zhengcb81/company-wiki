@@ -1,5 +1,11 @@
 # Progress：激进简化实施
 
+## R2生产完成，R3请求准备（2026-10-08）
+
+源码6ae7ddc正常commit/push，精确CI37705927320全步骤success；gh在当前shell缺失，改用GitHub官方只读API获取精确收据，不安装、不新加门。生产4restore/九source-facts正式API完成；原退休审计保持，TXT66324B/sidecar589B，原语言/legacy_unverified/无假HTTP receipt。实际六表计数与每项结果已记[r2_production_source_application](harness_lanes/results/r2_production_source_application_2026-10-08.json)。重复事实新增0、未选documents/根水位/九原件/config/原侧录SHA保持，模型0；DB主文件222408704B，WAL实际增1240152B。R2complete。
+
+当前正式选择与serializer零模型预检：生产S09共49精选段，body10873B、完整19193tokens/14591microUSD；原授权余9965tokens/16734microUSD。完整两SourceRef的P4 DTO已验证、源日期unknown不伪造、active真制度已定位。已请求仅将累计token提高220000、费用0.12不变；答复前零POST，旧费用/unknown7/FX保留。R3/R5仍未完成。发现历史tmp pilot AUTO存在，canonical生产AUTO尚无文件；正式使用现有AUTO实现的文档路径，不造第二队列，历史费用账本保持。另有历史tmp/retirement drill需R5归属盘点，不在此无依据删除。
+
 ## R2来源事实接口节点（2026-10-08）
 
 最新三包查收对应G5已验收/并线/推送，不重开。R2现场九原件只读观察total_changes0；新SourceCatalog.record_source_facts/薄CLI在现有锁与SQLite事务内实读SHA、追加唯一事实并同步查询投影，保留capture/历史/ID和显式unknown。TDD入口18产品RED后绿；重登假分类冲突1产品RED后修复共享分类/声明边界。当前101责任项15.08秒全绿/-W error，真实九原件隔离E2E一项4.75秒全绿/零skip；37,943,036B复制原件、4restore/8retire audit/9assertion，重复0新增，未选根水位保持，lake恢复absent，生产/原件/邻仓零写、模型0。Ruff及当前配置mypy绿。

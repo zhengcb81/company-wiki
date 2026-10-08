@@ -1,8 +1,16 @@
 # R2：生产来源事实与旧电话会登记实施细则
 
-**Status: in_progress。** G2已发布50e42f2、精确CI绿。本卡只完成零模型准备，R3真实final和R5最终收口另有责任；总目标active。
+**Status: complete。** R2源码6ae7ddc已正常推master、精确CI37705927320全部步骤success，真实生产九来源正式应用已完成。R3真实final和R5最终收口另有责任；总目标active，不能把本卡完成当整体完成。
 
-## 当前实施与验收（2026-10-08）
+## 正式生产与R3交接（覆盖下方发布前记录）
+
+[生产应用收据](harness_lanes/results/r2_production_source_application_2026-10-08.json)：S01–S04正式restore，八条原退休审计保持；S01–S09经公开API写九条事实，S05/S06融资分类正确、S07/S08/S09公开日unknown保持。TXT从ET原字节复制66,324B到Microsoft/raw/transcripts、sidecar589B，legacy_unverified/null HTTP receipt明确，不翻译、不重抓。documents23530→23531、sources43112→43114、locations46606→46608、assertions22→31、restore audit1→5，retire audit19000不变；重复新增断言0。不相关documents、根水位、九原件及原侧录/config SHA保持。DB主文件222,408,704B不增长，本次WAL1,240,152B是合法事务增量；不当作全文副本或宣称已释放。
+
+R3[完整DTO请求](harness_lanes/results/r3_production_batch_request_2026-10-08.json)已校验，生产SourceRef而非fixture：S09实际经营内容加active真制度。使用已配置DeepSeek Flash/8192/温度1，49段精选证据、HTTP正文10,873B；[零POST预检](harness_lanes/results/r3_production_request_preflight_2026-10-08.json)最坏预留19,193tokens/14,591microUSD，费用仍在原累计$0.12内，token余9965不足。已请求仅提高累计token到220000，费用不变；答复前零POST，全部旧190035/100502/unknown7/FX2764保留。
+
+唯一下一动作：收到必要预算增量后执行R3正式配置入口和两个来源唯一batch；单batch恰限19,193tokens/$0.014591，任一实际请求收费后无法再预留同一完整请求，不盲目重试。生产AUTO用既有实现及文档的`.source_catalog/automation.sqlite3`（目前未建立），work-dir`.source_catalog/r3`；历史tmp pilot账本保留，不创建第二任务框架、不冒称已运行。正式成功后当前RF/SW CLI消费、未知公开日诚实资格、locator回放、同run新增POST0及空间收据一次大节点验收。
+
+## 实施与隔离验收记录（发布前历史；完成状态见页首）
 
 来源事实公开API/薄CLI、显式unknown读取及有限重新登记已实现。当前101责任项15.08秒全绿、九份真实原件隔离E2E一项4.75秒全绿，均零skip/-W error。实际复制37,943,036B原件，恢复4个document、保留8条退休审计、仅9条事实断言，重复登记/事实处理零新增断言；不相关来源/根扫描水位保持，finally恢复测试lake absent，原件及生产配置/DB的size/mtime不变。入口不发模型、不翻译、不构造HTTP receipt。源码尚待正常commit/push和精确CI，生产尚未应用；详见[结构化验收](harness_lanes/results/r2_source_facts_api_acceptance_2026-10-08.json)。
 

@@ -1,0 +1,150 @@
+{
+  "schema_version": "exact-source-ci/1",
+  "repository": "zhengcb81/company-wiki",
+  "run_id": 37705927320,
+  "head_sha": "6ae7ddcc6d5fa974bb7e9a74210b1910f0960fda",
+  "status": "completed",
+  "conclusion": "success",
+  "url": "https://github.com/zhengcb81/company-wiki/actions/runs/37705927320",
+  "created_at": "2026-10-08T00:06:04Z",
+  "updated_at": "2026-10-08T00:07:26Z",
+  "jobs": [
+    {
+      "name": "Fast checks (Python 3.12)",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-08T00:06:08Z",
+      "completed_at": "2026-10-08T00:07:26Z",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-08T00:06:09Z",
+          "completed_at": "2026-10-08T00:06:10Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-08T00:06:10Z",
+          "completed_at": "2026-10-08T00:06:13Z"
+        },
+        {
+          "name": "Set up Python 3.12",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-08T00:06:13Z",
+          "completed_at": "2026-10-08T00:06:17Z"
+        },
+        {
+          "name": "Install dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-08T00:06:17Z",
+          "completed_at": "2026-10-08T00:06:41Z"
+        },
+        {
+          "name": "Ruff lint",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-08T00:06:41Z",
+          "completed_at": "2026-10-08T00:06:41Z"
+        },
+        {
+          "name": "Strict type check on contract modules",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-08T00:06:41Z",
+          "completed_at": "2026-10-08T00:06:43Z"
+        },
+        {
+          "name": "Compileall and config doctor",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-08T00:06:43Z",
+          "completed_at": "2026-10-08T00:06:45Z"
+        },
+        {
+          "name": "Unit tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-10-08T00:06:45Z",
+          "completed_at": "2026-10-08T00:07:21Z"
+        },
+        {
+          "name": "Unit test failure summary",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-10-08T00:07:21Z",
+          "completed_at": "2026-10-08T00:07:21Z"
+        },
+        {
+          "name": "Focused contract tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-10-08T00:07:21Z",
+          "completed_at": "2026-10-08T00:07:22Z"
+        },
+        {
+          "name": "Focused contract failure summary",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-10-08T00:07:22Z",
+          "completed_at": "2026-10-08T00:07:22Z"
+        },
+        {
+          "name": "CLI smoke test",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-10-08T00:07:22Z",
+          "completed_at": "2026-10-08T00:07:23Z"
+        },
+        {
+          "name": "Scan for hardcoded secrets",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-10-08T00:07:23Z",
+          "completed_at": "2026-10-08T00:07:23Z"
+        },
+        {
+          "name": "Post Set up Python 3.12",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 25,
+          "started_at": "2026-10-08T00:07:23Z",
+          "completed_at": "2026-10-08T00:07:23Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 26,
+          "started_at": "2026-10-08T00:07:23Z",
+          "completed_at": "2026-10-08T00:07:23Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 27,
+          "started_at": "2026-10-08T00:07:23Z",
+          "completed_at": "2026-10-08T00:07:23Z"
+        }
+      ]
+    }
+  ]
+}

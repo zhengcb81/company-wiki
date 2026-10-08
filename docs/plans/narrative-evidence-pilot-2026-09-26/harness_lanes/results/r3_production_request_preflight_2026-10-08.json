@@ -1,0 +1,81 @@
+{
+  "schema_version": "r3-production-request-preflight/1",
+  "status": "prepared_budget_increment_required",
+  "source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+    "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+    "content_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+    "byte_size": 66324,
+    "mime_type": "text/plain",
+    "schema_version": "2.0"
+  },
+  "source_metadata_is_fixture": false,
+  "publication": null,
+  "publication_note": "Unknown remains unknown; downstream as-of eligibility is not invented.",
+  "configured_options": {
+    "model_id": "deepseek-flash",
+    "endpoint": "https://api.deepseek.com/chat/completions",
+    "api_key_env": "DEEPSEEK_API_KEY",
+    "max_output_tokens": 8192,
+    "temperature": 1.0,
+    "output_token_field": "max_tokens"
+  },
+  "prompt_version": "1.6.0",
+  "selector_version": "0.4.2",
+  "selected_count": 49,
+  "candidate_count": 49,
+  "selection_status": "selected",
+  "request_bytes": 10873,
+  "request_sha256": "79898ce5dc3c0eb0d3aae1739daf6e414456df3f92ba587c87d985bfd7131770",
+  "input_token_reservation_bound": 11001,
+  "configured_output_tokens": 8192,
+  "total_token_reservation": 19193,
+  "micro_usd_reservation": 14591,
+  "remaining_authorized_tokens": 9965,
+  "remaining_authorized_micro_usd_after_fx": 16734,
+  "existing_charged_tokens": 190035,
+  "existing_charged_micro_usd": 100502,
+  "historical_unknown_reservations": 7,
+  "historical_fx_guard_micro_usd": 2764,
+  "model_posts": 0,
+  "production_auto_writes": 0,
+  "model_generation_configuration_modified": false,
+  "pricing": {
+    "version": "deepseek-cn-full-peak-fx-floor6-proxy-2026-10-06",
+    "input_micro_usd_per_million_tokens": 333334,
+    "output_micro_usd_per_million_tokens": 1333334,
+    "provider_invoice": false
+  },
+  "zero_model_policy_source": {
+    "document_id": "urn:company-wiki:document:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+    "primary_source_id": "urn:company-wiki:source:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+    "source_status": "active",
+    "document_kind": "investor_relations"
+  },
+  "pending": [
+    "necessary token increment before any paid POST",
+    "literal configured production batch plus actual final/replay/current RF/SW/resume/footprint major node"
+  ],
+  "proposed_cumulative_token_cap_not_authorized": 220000,
+  "cost_cap_unchanged_micro_usd": 120000,
+  "one_batch_budget": {
+    "tokens": 19193,
+    "micro_usd": 14591,
+    "reason": "After any actual started request, remaining batch tokens cannot reserve the same full request again."
+  },
+  "production_automation_db_relative": ".source_catalog/automation.sqlite3",
+  "production_work_dir_relative": ".source_catalog/r3",
+  "existing_production_automation_db_present": false,
+  "historical_pilot_budget_database": {
+    "relative_path": "tmp/n4c-20261004-pilot-a/automation.sqlite3",
+    "tables": [
+      "narrative_runs",
+      "narrative_run_jobs"
+    ],
+    "read_only": true,
+    "kept": true,
+    "total_changes": 0,
+    "scope": "historical isolated pilot; its prior charges are retained in campaign receipts, not a second production task store"
+  },
+  "future_production_db_note": "Use the existing AUTO Store implementation at the documented canonical path. The path is absent now: first production narrative run, not a second task framework. Preserve historical pilot budget evidence."
+}

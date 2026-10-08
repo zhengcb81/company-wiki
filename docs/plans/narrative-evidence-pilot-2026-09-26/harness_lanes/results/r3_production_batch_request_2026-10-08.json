@@ -1,0 +1,46 @@
+{
+  "schema_version": "narrative-batch-request/1",
+  "run_id": "r3-20261008-production-deepseek-01",
+  "sources": [
+    {
+      "schema_version": "2.0",
+      "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "content_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "byte_size": 66324,
+      "mime_type": "text/plain"
+    },
+    {
+      "schema_version": "2.0",
+      "document_id": "urn:company-wiki:document:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+      "source_id": "urn:company-wiki:source:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+      "content_sha256": "76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+      "byte_size": 167252,
+      "mime_type": "application/pdf"
+    }
+  ],
+  "profile": "P4",
+  "max_seconds": 180.0,
+  "max_tokens": 19193,
+  "max_cost_usd": "0.014591",
+  "model": {
+    "allow_local_http": false,
+    "api_key_env": "DEEPSEEK_API_KEY",
+    "endpoint": "https://api.deepseek.com/chat/completions",
+    "max_output_tokens": 8192,
+    "max_request_bytes": 262144,
+    "max_response_bytes": 262144,
+    "model_id": "deepseek-flash",
+    "output_token_field": "max_tokens",
+    "temperature": 1.0,
+    "timeout_seconds": 60
+  },
+  "pricing": {
+    "version": "deepseek-cn-full-peak-fx-floor6-proxy-2026-10-06",
+    "input_micro_usd_per_million_tokens": 333334,
+    "output_micro_usd_per_million_tokens": 1333334
+  },
+  "max_final_bytes": 2097152,
+  "max_persistent_bytes": 1073741824,
+  "max_scratch_bytes": 2147483648
+}

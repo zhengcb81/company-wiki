@@ -1,5 +1,11 @@
 # Findings：当前事实与待验证项
 
+## R2生产真实结果及R3预算（2026-10-08）
+
+当前九来源已正式修复/登记，不再以fixture代替生产。source/url/period事实与原capture分离，不丢ID或原文；S07/S08/S09公开日unknown保留，不会因活动或URL日期获得as-of资格。生产只新增TXT66324B/sidecar589B和九事实，重复新增0；DB主文件不增长，WAL1240152B真实增量。R2源码6ae7ddc已发布精确CI绿。
+
+当前parser/selector/prompt而非历史估计下，S09精选49段、HTTP10873B，实际完整预留19193tokens/14591microUSD；当前余9965tokens，不改配置凑预算，已问累计220000且费用0.12不变。当前真制度active，可同batch验证零模型skip。R3尚未POST，生产final仍0；旧隔离试点不是生产AUTO，canonical路径首次建立也必须用现有实现。发现几个历史tmp DB，R5统一核归属/可恢复账目与独立副本，不因目录叫tmp直接删。
+
 ## R2实际来源与重复空间问题（2026-10-08）
 
 九原件SHA实核；S01–S04仅旧缺URL治理/reconcile退役、无真实撤回，S05/S06仍other且弱身份，S07/S08弱证券标签，S08的2023-12-31未经证实，旧ET TXT未登记。旧preview实际写candidate，原verify无法原子同步documents分类/公开日；因此新增现有库内单事实事务而非临时UPDATE生产或重写sidecar。缺键不改/null明确unknown，来源事实始终只表示来源质量。

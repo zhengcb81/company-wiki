@@ -1,7 +1,7 @@
 {
   "schema_version": "r2-source-facts-api-acceptance/1",
-  "status": "isolated_green_awaiting_publication",
-  "production_applied": false,
+  "status": "verified_published_and_production_applied",
+  "production_applied": true,
   "source_api": "SourceCatalog.record_source_facts / source-facts --request",
   "scope": "source quality only; no investment state or model execution",
   "responsibility_current": {
@@ -255,7 +255,9 @@
     "r2i": "fixture setup: xunit2 record_property warning; use -o junit_family=legacy",
     "r2j": "fixture: query_ref correctly refuses retired source; keep Ref before retirement",
     "recovery_file_read": "one guessed test and guard path absent; actual paths discovered without product waiver",
-    "extra_type_flags": "An optional local --strict flag found no-any-return in unchanged reader:215; this flag is not in configured CI. Matching configured mypy command passes. No unrelated reader code was changed or new gate added."
+    "extra_type_flags": "An optional local --strict flag found no-any-return in unchanged reader:215; this flag is not in configured CI. Matching configured mypy command passes. No unrelated reader code was changed or new gate added.",
+    "ci_cli_absent": "gh absent in current shell; exact CI read with GitHub official read-only API. No installation or credential output.",
+    "literal_config_lookup": "Guessed automation/config.py absent; use actual file listing, configured batch entry and documented canonical AUTO path."
   },
   "major_node_only": true,
   "model_posts": 0,
@@ -263,15 +265,16 @@
   "raw_deleted": 0,
   "unknown_publication_preserved": true,
   "pending": [
-    "normal source commit/push and exact current CI",
-    "production restore and source facts through public entries",
-    "legacy TXT scoped registration",
-    "full configured R3 request and necessary budget increment",
-    "real final/consumer/resume/footprint and R5 final closeout"
+    "required cumulative token increment for prepared R3 request",
+    "real production final/consumer/resume/footprint major node",
+    "R5 PWF navigation/temporary ownership audit/final publication"
   ],
   "configured_static_checks": {
     "ruff_changed_files": "passed",
     "mypy_source_reader_existing_CI_command": "passed"
   },
-  "cleanup_receipt": "r2_owned_temp_cleanup_2026-10-08.json"
+  "cleanup_receipt": "r2_owned_temp_cleanup_2026-10-08.json",
+  "source_code_sha": "6ae7ddcc6d5fa974bb7e9a74210b1910f0960fda",
+  "exact_ci_run": 37705927320,
+  "production_receipt": "r2_production_source_application_2026-10-08.json"
 }
