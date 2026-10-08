@@ -86,8 +86,10 @@ def _require_manifest(
     bound_fields.pop("schema_version")
     bound_fields.update({
         "document_kind": bundle.source_metadata.document_kind,
-        "language": bundle.source_metadata.language,
     })
+    # Parser-detected language is derived metadata, not a missing source claim.
+    if manifest.get("language") is not None:
+        bound_fields["language"] = bundle.source_metadata.language
     if any(manifest.get(key) != value for key, value in bound_fields.items()):
         raise NarrativeTransportError("blocked", "source_identity_mismatch")
     if any(
