@@ -100,3 +100,7 @@ P0原三家公司结果证明共用修复有效且旧经济情景不变：US不�
 
 后续验收：实际三市场full/live全部download→import→reuse→RF read通过，正式配置已提升。Windows实际SDK解释器的redirector暴露另一类漏检：原hard-kill测试只有直接子进程，没覆盖子孙；新真实子孙RED确认超时后活动，用共用owned进程树/管道截止机制关闭。增加的OS测试覆盖阻塞stdin、stdout/stderr上限及嵌套job；不是加人工门禁。原件和外部Dayu保持不变；独立live目录141MB已恢复不存在。电话会zero_cost_budget仍是FF启动前判断，需要责任层下一步修复，而不能归咎FMP账户权限。
 
+
+电话会修复确认：max_cost=0限制增量费用，并非禁止已订阅配额HTTP。FMP exact支持和当前账户权限是两个独立状态；现账户真实一次请求仍拒绝，不能将离线绿说成可下载。用量保留独立stderr回执，public内容和SHA不改；unknown supervisor usage不伪造0、不自动重试，legacy provider_calls仅attempt。默认CLI静默合同保留，FF显式请求回执；公开v2 serializer也需传实际用量，直接调用companion不能替代该接口验证。
+
+三条根因任务可并行：纯格式normalization包只写CWP新document_normalization子目录，不触现有Worker；RF共用输入构建不依赖新解析器，使用现有SourceRef/NarrativeRef；FF失败原因传播可对当前CWP结构输出做离线/实际CLI验收，不要求同时改producer。最后由MAIN统一接线和真实两组公司审查。未提供机器元数据只能unknown，不能靠文本猜provider_started或公开日。相互独立来自写范围和接口，不来自“同一主目录不同agent不会冲突”的假设。

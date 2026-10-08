@@ -47,7 +47,7 @@ def _request(timeout_seconds: int) -> dict[str, Any]:
             "acquisition_limits": {
                 "max_bytes": 1_000_000,
                 "timeout_seconds": timeout_seconds,
-                "max_cost_usd": "1.00",
+                "max_cost_usd": "0.00",
             },
         },
     }
@@ -171,11 +171,12 @@ def _write_et_test_cli(scratch: Path) -> Path:
                 for key in (
                     "schema_version", "request_id", "ticker", "exchange",
                     "fiscal_year", "fiscal_quarter", "provider",
-                    "timeout_seconds", "max_body_bytes",
+                    "timeout_seconds", "max_body_bytes", "max_cost_usd",
                 )
             }
             with open(os.environ["ET_CLI_LOG"], "a", encoding="utf-8") as stream:
                 stream.write(json.dumps(safe_request) + "\\n")
+            assert request["max_cost_usd"] == "0.00"
             sys.stdin = __import__("io").StringIO(raw_request)
 
             raise SystemExit(main(
@@ -306,6 +307,9 @@ def _scenario(
             first, first_cwp_calls = _resolve(ff_scripts, wiki_root, tool, 30)
             assert first.get("status") == "downloaded", first
             assert first.get("provider_calls") == 1
+            assert first["provider_requests"] == 1
+            assert first["provider_response_bytes"] == len(payload)
+            assert first["provider_usage_complete"] is True
             assert first.get("publication_date") is None
             assert first.get("as_of_cutoff_verified") is False
             ref = first.get("source_ref")
@@ -357,6 +361,7 @@ def _scenario(
             assert cli_records[0]["fiscal_quarter"] == 3
             assert cli_records[0]["timeout_seconds"] == 30
             assert cli_records[0]["max_body_bytes"] == 1_000_000
+            assert cli_records[0]["max_cost_usd"] == "0.00"
             assert _FAKE_KEY not in json.dumps(first)
             assert _FAKE_KEY not in http_log.read_text(encoding="utf-8")
             assert _FAKE_KEY not in Path(env["ET_CLI_LOG"]).read_text(encoding="utf-8")
@@ -413,6 +418,9 @@ def _scenario(
                 "first_provider_calls": first["provider_calls"],
                 "second_provider_calls": second["provider_calls"],
                 "http_gets": 1,
+                "max_cost_usd": "0.00",
+                "provider_requests": first["provider_requests"],
+                "provider_usage_complete": first["provider_usage_complete"],
                 "worker_runs": 1,
                 "cwp_calls": first_cwp_calls + second_cwp_calls,
                 "timeout_provider_calls": timed_out.get("provider_calls"),

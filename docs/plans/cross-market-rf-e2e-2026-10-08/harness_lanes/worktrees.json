@@ -1,0 +1,57 @@
+{
+  "schema_version": "cmrf-worktrees/1",
+  "main_owns_shared_plan": true,
+  "worktrees": [
+    {
+      "lane_id": "R6-FORMAT",
+      "canonical_repository": "C:/Users/郑曾波/Projects/company-wiki",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\cwp-formats",
+      "branch": "codex/cmrf-format-normalization-20261008",
+      "baseline_commit": "eaad25a4bb2e6bbe5a8e110ec629dde4c5ddbda2",
+      "sparse_paths": [
+        "src",
+        "tests",
+        "config",
+        "scripts",
+        "tools"
+      ],
+      "working_tree_clean": true,
+      "implementation_started": false,
+      "checkout_file_bytes": 14294521,
+      "checkout_files": 1012
+    },
+    {
+      "lane_id": "R6-RF-INPUT",
+      "canonical_repository": "C:/Users/郑曾波/Projects/revenue-forecast",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\rf-inputs",
+      "branch": "codex/cmrf-input-semantics-20261008",
+      "baseline_commit": "72ce94c160bbb5b9399c8716307588b443a72a83",
+      "sparse_paths": [
+        "scripts",
+        "tests",
+        "references",
+        "tools",
+        "compatibility",
+        "config",
+        "docs"
+      ],
+      "working_tree_clean": true,
+      "implementation_started": false,
+      "checkout_file_bytes": 3359187,
+      "checkout_files": 311
+    },
+    {
+      "lane_id": "R6-FF-CAUSE",
+      "canonical_repository": "C:/Users/郑曾波/Projects/filing-fetch",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\ff-diagnostics",
+      "branch": "codex/cmrf-provider-diagnostics-20261008",
+      "baseline_commit": "697af966475a4aa7bb0687c78bfb81a7edb54f21",
+      "sparse_paths": null,
+      "working_tree_clean": true,
+      "implementation_started": false,
+      "checkout_file_bytes": 926763,
+      "checkout_files": 118
+    }
+  ],
+  "manifest_checked": true
+}

@@ -38,6 +38,8 @@
 
 ## Next Step
 
+**当前行动（2026-10-08 Phase6）**：按 [三条独立施工卡](harness_lanes/README.md) 分出格式解析、RF输入语义、FF失败诊断；工作树已准备，尚待用户交给独立harness开工。MAIN 不写三线独占目录，继续来源资格/公开日诊断、现有Worker新格式接线和最终集中验收。此前段落为阶段历史记录，不再作为当前施工起点。
+
 ### Phase 5: 固化三市场回归套件（2026-10-08 新请求）
 **Status:** complete
 
@@ -80,3 +82,7 @@ P1基础预算/HTTP/子进程及入库集中79项通过；下一步实现Dayu SD
 P1 SDK公开接口/财政证据/实际HTTP回执及原件入库集中117项通过（包含实际Dayu SDK offline2），只读审查3项缺陷均有RED→GREEN。当前Next Step为复制候选配置的真实HK/US FF→CWP→reuse→RF读取，生产配置尚未提升；之后继续FF/ET费用及来源资格、格式规范化，不能把离线SDK绿记为真实供应商全绿。
 
 当前：P1 Dayu annual/quarter/HK H1 raw-only有界采集已验收并提升配置。三市场full/live各真实新下载→入库→0下载复用→RF读取均PASS（50PASS、0FAIL；其余缺口保留），独立测试环境恢复不存在。新增Windows子孙进程超时根因已修并责任测试绿。下一施工项为FF/ET把费用、配置能力和账户权限分别判定，随后来源资格/HTML/PPTX/RF输入与摘要实际消费，两组完整新研究验收仍未完成。
+
+最新：FF/ET费用与能力责任实现已并main/push（FF697af966、ET282e8908），ET74项、FF49项和真实0费用离线链通过；实际FMP账户明确entitlement拒绝，不算产品数据全绿。FF首次远端只有静态复杂度失败（418行为通过），拆开计数类型和回执身份两项责任后本地同测试绿，精确新SHA远端待监控。三条R6卡互相不写同一目录，基准/交接接口/责任测试和大节点明确；MAIN 持续目标不暂停，接收顺序按先完成先集成，不增加小节点审批。
+
+发布确认：FF697af966 [远端CI37833957140](https://github.com/zhengcb81/filing-fetch/actions/runs/37833957140)成功；ET仓未配置Actions，不能虚报CI绿，用上述实际集中验收作工程证据。费用节点临时2工作树及9测试根已清除，原件删除0。新3工作树合计18,580,471字节，干净且未开工，见harness_lanes/worktrees.json。

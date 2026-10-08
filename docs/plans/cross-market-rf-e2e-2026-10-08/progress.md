@@ -158,3 +158,11 @@ live套件适配新桥：CWP-owned bridge代码和provider-state必须映射独�
 P1真实大节点已通过：d77cd6c1精确SHA远端CI37828217259成功。复制SDK候选配置的full/live278.703秒，50PASS/3BLOCKED/10NOT_RUN/8NOT_APPLICABLE、0FAIL，test_root_restored_absent=true，结束前隔离数据141,417,079B全部清理。三市场真实FF→对应provider→CWP原件入库/SHA/身份/期间→再次0下载→RF读取均PASS：CN中微H1原文3,149,962B、HK腾讯H1原文5,451,089B、US微软FY2026 HTML8,585,610B。新Byte SHA见phase6/dayu_sdk_live_1.json；正文没有留重复测试副本。电话会仍NOT_RUN（zero_cost_budget旧逻辑），格式能力等仍待施工，产品整体PARTIAL。此live与replay不同mode不作虚假同模式改善比较。
 
 真实进程观测补充根因：Windows venv解释器有redirector子进程；原subprocess.run只杀根，owned grandchild在timeout后仍写文件。新增真实子孙进程1RED/10PASS实证后引入CWP-owned OS进程树运行器（沿用FF已验证的Job/barrier/管道/截止机制，不跨仓import），在临时根清理前停止整个tree；timeout保留最后usage下界，输出上限故障也不自动重试。48既有adapter/入库与usage合同13.63秒、4管道上限/阻塞stdin/嵌套Windows Job测试1.35秒均通过，SDK两市场再次离线入库验证。正式source_acquisition配置提升为raw-only bounded SDK，旧Dayu CLI兼容入口保留；默认180秒且不启动Docling/模型，仍取请求更小额度，Dayu源码与workspace零写。Next Step：FF/ET费用与能力门的责任层改造。
+
+P1 FF/ET费用能力集中验收：6RED/7PASS→ET费用13PASS，实际用量3RED及FF7RED后共用接口修复；ET原API/CLI/真实Worker截止74PASS33.77秒、FF26PASS5.60秒。0.00费用的实际FF→ET CLI/Worker→CWP离线链入库/验SHA/零HTTP复用/timeout清理通过。旧stderr静默合同5失败后改用显式--report-usage，不改旧调用默认或内容schema。对外v2白名单吞掉新用量另1RED后补字段。真实FMP精确Q4 FY2026请求2.117秒、HTTP1次，provider_entitlement_required，费用0/模型0；账户外部BLOCKED保留。施工细则与原始小报告见phase6/transcript_capability_implementation.md和et_fmp_live_probe.json。
+
+已发布 ET282e8908与FF3945efb到main，owner未提交列表不变。FF远端37832787908实际418行为通过/5skip/78subtests，仅complexity_ratchet限制新顶层函数15>10失败；改共用回执身份/计数类型分别负责（不放宽测试阈值），49相关测试7.58秒和commit静态检查通过，697af966已再推main。安装三份既有FF副本定点4文件共12，首次postcheck把Windows分隔符当成未选文件误报；修正as_posix后验证选定字节相同、未选内容不变，报告见phase6/ff_selected_install_sync.json。共享PWF仅统一LF，避免上轮混合CRLF的diff-check误报。
+
+用户要求新分包：新增R6-FORMAT/RF-INPUT/FF-CAUSE三卡、总分工/交接格式；按真实未完成机制拆分，不重发旧卡。分别创建独立codex分支与工作树，CWP/RF稀疏检出避免历史/原件复制；worktrees.json记录精确SHA、干净状态、implementation_started=false。MAIN保留共享PWF、来源资格和现有Worker集成，三线各写独占项目/子目录，待用户发出开工。
+
+收尾发布证据：FF697af966精确SHA远端CI37833957140成功；ET没有工作流（API空列表），使用实际74责任测试/跨仓E2E，不报CI。跟进同一FF运行文件在3份安装副本单点同步，无未选漂移。清9个已完成owned测试根释放1,875,413B，2已并线的临时FF/ET工作树及其缓存移除；新3分包工作树保留，18,580,471B，无原件副本或密钥。主体目标active，分包不构成暂停。

@@ -1,0 +1,14 @@
+{
+  "repository_sha": "697af966475a4aa7bb0687c78bfb81a7edb54f21",
+  "selected": [
+    "SKILL.md",
+    "scripts/transcript_companion.py",
+    "scripts/transcript_tool_transport.py",
+    "scripts/ff_v2_envelope.py"
+  ],
+  "updated_files": 12,
+  "unselected_drift": 0,
+  "config_output_preserved": true,
+  "note": "First post-check incorrectly compared Windows backslashes with POSIX selected paths; all mutations were limited to the 12 selected files. Corrected as_posix identity and verified selected bytes and unselected stability.",
+  "followup_single_file_sync": 3
+}

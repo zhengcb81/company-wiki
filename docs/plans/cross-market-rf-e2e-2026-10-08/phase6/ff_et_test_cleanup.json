@@ -1,0 +1,17 @@
+{
+  "originals_deleted": 0,
+  "deleted_bytes": 1875413.0,
+  "restored_absent": true,
+  "deleted_owned_roots": [
+    "p1-et-cost-green",
+    "p1-et-cost-node",
+    "p1-et-usage-green",
+    "p1-ff-cost-green",
+    "p1-ff-cost-node",
+    "p1-ff-final",
+    "p1-ff-ratchet",
+    "p1-ff-usage-green",
+    "p1-ff-usage-red"
+  ],
+  "schema_version": "cmrf-test-cleanup/1"
+}

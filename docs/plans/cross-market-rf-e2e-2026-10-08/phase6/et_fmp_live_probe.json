@@ -1,0 +1,50 @@
+{
+  "tested_at": "2026-10-08T19:26:30.497879+00:00",
+  "request": {
+    "schema_version": "earnings-transcript-request/1",
+    "request_id": "phase6-fmp-msft-q4-2026",
+    "ticker": "MSFT",
+    "exchange": "nasdaq",
+    "fiscal_year": 2026,
+    "fiscal_quarter": 4,
+    "as_of_date": "2026-10-08",
+    "provider": "fmp",
+    "download_authorized": true,
+    "timeout_seconds": 20,
+    "max_body_bytes": 2097152,
+    "max_cost_usd": "0.00"
+  },
+  "tool_started": true,
+  "elapsed_seconds": 2.117,
+  "exit_code": 0,
+  "result": {
+    "schema_version": "earnings-transcript-result/2",
+    "request_id": "phase6-fmp-msft-q4-2026",
+    "status": "unavailable",
+    "error_code": "provider_entitlement_required",
+    "provider": "fmp",
+    "http_status": null,
+    "content_bytes": null,
+    "provider_payload_sha256": null,
+    "call_date": null,
+    "publication_date": null,
+    "as_of_cutoff_verified": null
+  },
+  "usage_receipt": {
+    "schema_version": "earnings-retrieval-usage/1",
+    "request_id": "phase6-fmp-msft-q4-2026",
+    "usage_complete": true,
+    "usage": {
+      "requests_used": 1,
+      "response_bytes_used": 0,
+      "exhausted": null
+    }
+  },
+  "model_calls": 0,
+  "incremental_cost_usd": "0",
+  "code_files": {
+    "transcript_api.py": "d9f83aecfc21dc19f9d5d1dd2607c94ebc0e640bd39ae034906400b0acf5ceaa",
+    "transcript_tool.py": "a37b36c10438321363472bd88247138746c415c6c38190b06fadbf2bb4577400"
+  },
+  "raw_test_files_retained": 0
+}

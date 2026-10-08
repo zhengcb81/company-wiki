@@ -2,6 +2,10 @@
 
 本文件记录审计发现后的责任层改进，不宣称尚未实现的能力已经通过。三公司执行、独立审查与固定回归套件已完成，当前进入根因修复。所有后续施工遵守 [root_cause_remediation.md](root_cause_remediation.md)：按共用机制和责任层修复，区分已证实根因与假设，先反例后实现，一个责任组一个大节点，不临时修改外部Dayu或切换模型配置来凑通过。
 
+## 最新施工状态（2026-10-08，优先于下方原设计时态）
+
+P0稳定计算已发布；P1 Dayu声明范围的有界原件桥已三市场真实验收并提升配置；FF/ET费用能力实现已发布（FMP账户权限仍外部BLOCKED）。剩余格式规范化、RF输入/证据构建、FF具名失败诊断按 [三条并行施工卡](harness_lanes/README.md) 分出，工作树与写目录隔离、接口已冻结。MAIN 同时负责来源资格/公开日、现有Worker接线、预算内图片解析策略、主线/安装闭包及最后两组三公司集中验收。下文仍保留原设计/漏检证据，不据其过去时重复完成的任务。
+
 ## 0. RF正式产物跨进程确定性（Phase 5新增，P0）
 
 固定套件已实际复现MSFT `confidence components recomputation mismatch`；`baseline_replay.json` 的 `process_seed_stability` 为FAIL。本轮仅固化测试，没有修改RF底层。
