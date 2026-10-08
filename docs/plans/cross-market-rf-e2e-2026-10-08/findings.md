@@ -88,3 +88,13 @@ P0已完成候选修复：最小3例证实seed/集合顺序/小权重丢失，9 
 独立worktree快速检查首跑2个CLI失败：默认sibling误取Temp/filing-fetch旧89c8bdb2，实际当前FF=211a56ff支持兼容flag。显式FF_V2_CODE_ROOT/CWP_V2_CODE_ROOT后125通过，断言未改。P0责任闭包62通过（2subtests），非生产数据问题。RF工作树初建复制49k历史文件，已用sparse收窄责任路径，不清理canonical记录。
 
 P0原三家公司结果证明共用修复有效且旧经济情景不变：US不同seed强校验已PASS，原其他70状态不变。套件整体PARTIAL是原采集/HTML/PPTX/新研究尚未实现，不再有确定性FAIL。一次只读报告脚本read_text漏encoding导致GBK诊断错误，已用UTF-8读取；runner本身退出码实现PARTIAL=2正确，不将PowerShell封装非零归一化误判为套件缺陷。
+# Phase 6 P1 下载桥机制审查（2026-10-08）
+
+- 实际Dayu SDK公开接口和现存venv兼容HTTPX0.28.1；bridge不启动Docling/LLM/翻译。parent scratch终止后回收，SEC共享throttle/OS mutex写CWP分配根，Dayu源码/缓存零改动。
+- 本地微软真实inline XBRL日期是`June 30 , 2025`/`March 31, 2026`，非ISO字面；按声明的[XBRL TR5](https://www.xbrl.org/Specification/inlineXBRL-transformationRegistry/REC-2022-02-16/inlineXBRL-transformationRegistry-REC-2022-02-16.html)已实现两个英文日期转换，保留原值和format，未支持格式明确拒绝，日期/CIK/FY/period语义校验不放松。
+- HK元数据窗口中无关旧财年无年份标题不得阻断有效请求；限定请求scope后验证，范围内未知年份不能用请求年份填补。
+- SDK `raise_for_status()`允许206，不能作为完整原件证明。现在GET实际200、无Content-Range、实际长度匹配才可stage；receipt采用GET实际版本头，避免HEAD/GET变化隐瞒。
+- 7RED/41PASS机制复现后修复；集中117PASS24.49秒，包括真实SDK两个市场metadata-only→唯一GET→真实CWP入库/SourceRef复用。离线fixtures只证明接口和行为，不能证明live供应商可用。
+- 固定套件的live新增SDK配置必须把CWP代码/state映射到独立HEAD export；provider解释器仍只读复用，SDK import优先export cwd，防止editable安装指向原checkout。新增路径映射RED→17PASS。原71检查点不改。
+- 仍未实现的范围：SEC8-K/6-K exhibit bundle、HK英文发现；不能宣称支持，真实请求给具名能力拒绝。生产acquisition配置尚未提升。
+

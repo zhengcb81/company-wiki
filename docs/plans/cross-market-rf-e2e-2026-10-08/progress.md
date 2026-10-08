@@ -148,3 +148,9 @@ P0发布收尾：72ce94c1已推origin/main，正常pre-push的125项检查通过
 P1下载层基础责任组件完成：8个RED实证后修复actual usage、两维原子计账、精确adapter版本和hard-timeout最后完整checkpoint；未知最终用量不自动重试，预算usage_complete=false保留未结算状态。新增同步/异步HTTPX包裹覆盖redirect/retry/error body/HEAD/gzip/late chunk/slow drip/限时退避。79项责任及既有公共入库合同正常OS12.19秒通过，新增真实子进程hard-kill保留usage证明。达到额度时仍可完成本地验真/入库，只有新provider请求拒绝。Dayu桥和真实两个市场仍未完成，不能把基础组件绿记为P1全绿。
 
 335df5d3已提交推送，远端CI37822907874收集失败；本机单独/全量收集都绿，取得真实日志后证实requirements入口漏声明HTTPX、openai当前改依赖httpx2。先新增直接依赖一致性RED，再修两安装入口；快速push只增加这条静态责任检查，等待修复SHA远端验证。没有删除新功能测试。
+
+CI修复7071e035已推master；[远端CI37823912376](https://github.com/zhengcb81/company-wiki/actions/runs/37823912376)成功。继续P1 SDK桥：跨年/52周SEC候选FY与quarter（fetch必须原件DEI确认）、HK明确标题年份27测试通过；公开SDK metadata-only发现/历史JSON/原始profile保留7测试通过；新配置兼容3项通过（首次RED返回仍运行即修改，未算RED，另在隔离Python装载已提交旧配置补证真实3RED）；fetch客户端计流/原件错误拒绝/SDK资产清理4通过。新桥尚未切生产、尚无真实市场下载，不以这些mock绿代替live。父进程分配scratch并在hardkill后清理，使用UTF8明确编码修正Windows测试读路径的GBK错误。
+
+P1 SDK桥集中节点：真实Dayu公开SDK/实际venv离线联调，两市场metadata-only发现→唯一原件GET→CWP真实入库→SourceRef/零网络resolve复用通过；117责任/旧公共合同/SDK集成测试24.49秒全绿。独立只读结构审查发现3项共性缺陷，7RED/41PASS实证后修复：按声明的XBRL TR4/5日期转换规范化原文并保留观察值，不猜日期；先限定HK请求范围再验证标题年份，未知年份不能冒充；实际GET必须完整200且无Content-Range、长度一致，receipt使用GET而非HEAD版本头。SDK测试夹具的lambda替换HTTPX类导致真实SDK子类导入TypeError（零HTTP），改为真正transport子类，未改Dayu。供应商源码/缓存前后不变；费用0、模型0。真实网络下载及生产配置提升仍待下一节点。
+
+live套件适配新桥：CWP-owned bridge代码和provider-state必须映射独立HEAD export，已有外部venv只读复用，SDK import优先明确provider cwd，防止editable安装绕过冻结版本。先新增路径隔离RED（旧入口缺能力），再实现共用配置命令展开；不改变原71检查点/旧样本。Next Step：提交SDK桥后用复制候选配置运行真实两市场FF→CWP→零下载复用→RF读取；确认后才提升生产配置，8-K/6-K exhibit与HK英文仍明确列未支持。

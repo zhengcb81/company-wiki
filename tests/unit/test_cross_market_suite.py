@@ -15,6 +15,18 @@ def report(status, *, mode="replay", digest="a", check="1"):
             "checks": [{"case": "US-MSFT", "id": "acquisition", "status": status}]}
 
 
+def test_sdk_command_uses_isolated_cwp_code_and_state_but_existing_external_interpreter(tmp_path):
+    from tools.cross_market_suite.runner import acquisition_command
+    origin, wiki = tmp_path / "original", tmp_path / "isolated"
+    command = ["${PROJECT_ROOT}/../dayu-agent/.venv/Scripts/python.exe", "-B",
+        "${PROJECT_ROOT}/tools/dayu_sdk_bridge.py", "--provider-state-root",
+        "${PROJECT_ROOT}/.source_catalog/provider-state/dayu"]
+    actual = acquisition_command(command, interface="dayu_sdk_bounded_v1", origin=origin, wiki=wiki)
+    assert actual[0] == str(origin) + "/../dayu-agent/.venv/Scripts/python.exe"
+    assert actual[2] == str(wiki) + "/tools/dayu_sdk_bridge.py"
+    assert actual[4] == str(wiki) + "/.source_catalog/provider-state/dayu"
+
+
 @pytest.mark.parametrize("state", ["FAIL", "BLOCKED", "NOT_RUN"])
 def test_incomplete_work_never_becomes_pass(state):
     assert summarize(report(state)["checks"]) != "PASS"

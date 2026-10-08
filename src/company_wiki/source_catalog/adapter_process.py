@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+from tempfile import TemporaryDirectory
 from typing import Any, Sequence
 
 from .acquisition import DownloadCandidate, DownloadReceipt
@@ -274,24 +275,29 @@ class JsonCommandAdapter:
         environment["PYTHONDONTWRITEBYTECODE"] = "1"
         creationflags = subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0
         try:
-            completed = subprocess.run(
-                command,
-                input=canonical_json(payload),
-                text=True,
-                encoding="utf-8",
-                errors="strict",
-                capture_output=True,
-                cwd=self.project_root,
-                env=environment,
-                timeout=(
-                    self.timeout_seconds
-                    if timeout_seconds is None
-                    else min(self.timeout_seconds, timeout_seconds)
-                ),
-                check=False,
-                shell=False,
-                creationflags=creationflags,
-            )
+            # The parent owns SDK scratch: subprocess.run kills/waits on timeout,
+            # then this context removes even a hard-killed child's partial files.
+            # Successful originals must reside in the explicit staging allocation.
+            with TemporaryDirectory(prefix="cwpad-") as scratch:
+                environment["CWP_ADAPTER_SCRATCH_ROOT"] = scratch
+                completed = subprocess.run(
+                    command,
+                    input=canonical_json(payload),
+                    text=True,
+                    encoding="utf-8",
+                    errors="strict",
+                    capture_output=True,
+                    cwd=self.project_root,
+                    env=environment,
+                    timeout=(
+                        self.timeout_seconds
+                        if timeout_seconds is None
+                        else min(self.timeout_seconds, timeout_seconds)
+                    ),
+                    check=False,
+                    shell=False,
+                    creationflags=creationflags,
+                )
         except subprocess.TimeoutExpired as cause:
             exc = AdapterProcessError(
                 f"adapter {self.name} {action} process failed: deadline exceeded"

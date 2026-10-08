@@ -73,13 +73,17 @@ class AcquisitionConfig:
 
         if self.cn.interface != "json_command_v1":
             raise AcquisitionConfigError("CN adapter must use json_command_v1")
-        if self.hk.interface != "dayu_cli_v1" or self.us.interface != "dayu_cli_v1":
-            raise AcquisitionConfigError("HK/US adapters must use dayu_cli_v1")
+        def build_market(spec: AdapterCommandSpec, market: str):
+            if spec.interface == "dayu_sdk_bounded_v1":
+                return build_json(spec)
+            if spec.interface == "dayu_cli_v1":
+                return build_dayu(spec, market)
+            raise AcquisitionConfigError("HK/US adapters must use a supported Dayu interface")
 
         return AdapterRegistry(
             cn=build_json(self.cn),
-            hk=build_dayu(self.hk, "HK"),
-            us=build_dayu(self.us, "US"),
+            hk=build_market(self.hk, "HK"),
+            us=build_market(self.us, "US"),
         )
 
 
@@ -137,20 +141,22 @@ def _adapter(value: Any, *, project_root: Path, name: str) -> AdapterCommandSpec
         raise AcquisitionConfigError(f"{name}.command must be a non-empty array")
     command = tuple(_expand(item, project_root=project_root) for item in raw_command)
     interface = _expand(data["interface"], project_root=project_root)
-    if interface not in {"json_command_v1", "dayu_cli_v1"}:
+    if interface not in {"json_command_v1", "dayu_cli_v1", "dayu_sdk_bounded_v1"}:
         raise AcquisitionConfigError(f"{name}.interface is unsupported")
     raw_config_root = data["config_root"]
-    if interface == "json_command_v1" and raw_config_root is not None:
-        raise AcquisitionConfigError(f"{name}.config_root must be null for json_command_v1")
+    if interface in {"json_command_v1", "dayu_sdk_bounded_v1"} and raw_config_root is not None:
+        raise AcquisitionConfigError(f"{name}.config_root must be null for {interface}")
     if interface == "dayu_cli_v1" and raw_config_root is None:
         raise AcquisitionConfigError(f"{name}.config_root is required for dayu_cli_v1")
     supports_budget = data.get("supports_acquisition_budget", False)
     if not isinstance(supports_budget, bool):
         raise AcquisitionConfigError(f"{name}.supports_acquisition_budget must be boolean")
-    if interface != "json_command_v1" and supports_budget:
+    if interface == "dayu_cli_v1" and supports_budget:
         raise AcquisitionConfigError(
             f"{name}.supports_acquisition_budget is only available for json_command_v1"
         )
+    if interface == "dayu_sdk_bounded_v1" and not supports_budget:
+        raise AcquisitionConfigError(f"{name}.dayu_sdk_bounded_v1 requires bounded acquisition")
     return AdapterCommandSpec(
         name=_expand(data["name"], project_root=project_root),
         version=_expand(data["version"], project_root=project_root),

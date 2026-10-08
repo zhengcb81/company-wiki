@@ -27,6 +27,21 @@ POINTS = REPO / "benchmarks/cross_market_rf/checkpoints.json"
 sys.path.insert(0, str(REPO / "src"))
 
 
+def acquisition_command(command, *, interface, origin, wiki):
+    """Map CWP-owned code/state to test export; retain provider interpreter.
+
+    The external venv is read-only and not archived. SDK imports use the
+    archived provider cwd, not the editable install's original checkout.
+    """
+    values = []
+    for value in command:
+        isolated = interface == "dayu_sdk_bounded_v1" and value.startswith("${PROJECT_ROOT}/") \
+            and not value.startswith("${PROJECT_ROOT}/../")
+        values.append(value.replace("${PROJECT_ROOT}", str(wiki if isolated else origin))
+                      .replace("${PYTHON_EXECUTABLE}", sys.executable))
+    return values
+
+
 class Suite:
     def __init__(self, args, root):
         self.args, self.root = args, root
@@ -144,7 +159,7 @@ class Suite:
     def setup(self):
         self.rf, rf_head = self.export(self.args.rf_root, "rf", ["scripts", "config", "references", "SKILL.md"])
         self.ff, ff_head = self.export(self.args.ff_root, "ff", ["scripts", "config"])
-        self.wiki, cwp_head = self.export(REPO, "wiki", ["src", "scripts", "config"])
+        self.wiki, cwp_head = self.export(REPO, "wiki", ["src", "scripts", "config", "tools/dayu_sdk_bridge.py"])
         self.versions = dict(rf=rf_head, ff=ff_head, cwp=cwp_head, python=sys.version)
         if self.args.et_root:
             self.et, et_head = self.export(self.args.et_root, "et", ["."])
@@ -180,7 +195,8 @@ class Suite:
                 exported, head = self.export(source, "provider-" + market, ["."])
                 self.versions["provider-" + market] = head
                 adapter["project_root"] = str(exported)
-                adapter["command"] = [expand(value) for value in adapter["command"]]
+                adapter["command"] = acquisition_command(adapter["command"],
+                    interface=adapter["interface"], origin=origin, wiki=self.wiki)
                 if adapter.get("config_root"):
                     original_config = Path(expand(adapter["config_root"])).resolve()
                     copied = self.root / ("provider-config-" + market)

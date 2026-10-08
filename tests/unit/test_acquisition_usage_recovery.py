@@ -149,7 +149,10 @@ def test_failed_budget_can_be_restored_without_erasing_actual_overage():
 def test_real_subprocess_hard_timeout_recovers_checkpoint(tmp_path: Path):
     script = tmp_path / "checkpoint_child.py"
     script.write_text(
-        "import sys, time\n"
+        "import os, sys, time\nfrom pathlib import Path\n"
+        + "scratch=Path(os.environ['CWP_ADAPTER_SCRATCH_ROOT'])\n"
+        + "(scratch/'partial.pdf').write_bytes(b'partial')\n"
+        + "Path(" + repr(str(tmp_path / "scratch_record.txt")) + ").write_text(str(scratch), encoding='utf-8')\n"
         + "sys.stderr.write(" + repr(_progress(count=7)) + ")\n"
         + "sys.stderr.write('{\"unfinished\":'); sys.stderr.flush()\n"
         + "time.sleep(30)\n",
@@ -165,3 +168,4 @@ def test_real_subprocess_hard_timeout_recovers_checkpoint(tmp_path: Path):
     assert error.value.error_code == "adapter_timeout"
     assert error.value.acquisition_usage_complete is False
     assert (budget.response_bytes_used, budget.cost_usd_used) == (7, Decimal("0.005"))
+    assert not Path((tmp_path / "scratch_record.txt").read_text(encoding="utf-8")).exists()
