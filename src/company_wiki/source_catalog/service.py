@@ -182,6 +182,13 @@ class SourceCatalog:
         with CatalogOperationLock(self.config.catalog_dir, operation="source_registration"):
             return register_catalog_sources(self.config, self.store, scope)
 
+    def record_source_facts(self, *, ref: Any, facts: dict[str, Any],
+                            evidence: dict[str, Any]) -> dict[str, Any]:
+        """Verify bytes and atomically append facts plus their query projection."""
+        from .assertion_service import record_source_facts
+
+        return record_source_facts(self, ref=ref, facts=facts, evidence=evidence)
+
     def backfill_text_fingerprints(
         self,
         *,

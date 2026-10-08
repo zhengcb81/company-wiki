@@ -23,6 +23,8 @@ from .admission import (
     FOCUS_ROOT_ID,
     evaluate_admission,
 )
+from .assertion_service import source_fact_projection
+from .document_kinds import SIDECAR_KIND_MAP as _SIDECAR_KIND_MAP
 from .adapters.dayu import (
     construct_edgar_url as _construct_edgar_url,
     enrich_dayu_metadata as _enrich_dayu_portfolio_metadata,
@@ -111,21 +113,6 @@ def _published_date(text: str) -> str | None:
         return datetime(int(match.group(1)), int(match.group(2)), int(match.group(3))).date().isoformat()
     except ValueError:
         return None
-
-
-_SIDECAR_KIND_MAP = {
-    "annual_report": (SourceType.REGULATORY_FILING, "annual_report"),
-    "semi_annual_report": (SourceType.REGULATORY_FILING, "semi_annual_report"),
-    "quarterly_report": (SourceType.REGULATORY_FILING, "quarterly_report"),
-    "regulatory_filing": (SourceType.REGULATORY_FILING, "regulatory_filing"),
-    "broker_research": (SourceType.BROKER_RESEARCH, "broker_research"),
-    "investor_relations": (SourceType.INVESTOR_RELATIONS, "investor_relations"),
-    "investor_call_transcript": (SourceType.INVESTOR_RELATIONS, "investor_call_transcript"),
-    "prospectus": (SourceType.PROSPECTUS, "prospectus"),
-    "equity_offering_prospectus": (SourceType.PROSPECTUS, "equity_offering_prospectus"),
-    "convertible_bond_prospectus": (SourceType.PROSPECTUS, "convertible_bond_prospectus"),
-    "news": (SourceType.ORIGINAL_NEWS, "news"),
-}
 
 
 def _classification(path: Path, *, root_kind: str, metadata: dict[str, Any]) -> tuple[str, SourceType]:
@@ -1100,6 +1087,10 @@ def _scan_catalog_impl(
                     priority=root.priority,
                     document_metadata=document_metadata,
                     scan_time=scan_time,
+                    verified_projection=source_fact_projection(
+                        connection, document_id=document_id,
+                        source_id=primary.source_id if primary else None,
+                    ),
                 )
                 connection.execute(
                     "INSERT OR IGNORE INTO entities(entity_id,name,entity_kind) VALUES(?,?,?)",
@@ -1725,6 +1716,7 @@ def _merge_document_row(
     priority: int,
     document_metadata: dict[str, Any],
     scan_time: str,
+    verified_projection: dict[str, Any] | None = None,
 ) -> None:
     """Write ONE document row: insert, retirement, winner merge or touch.
 
@@ -1814,6 +1806,22 @@ def _merge_document_row(
     existing_meta = metadata_object(existing_document["metadata_json"])
     existing_inner = existing_meta.get("dayu_meta") or existing_meta.get("acquisition") or {}
     new_inner = document_metadata.get("dayu_meta") or document_metadata.get("acquisition") or {}
+    fact_columns = verified_projection or {}
+    if fact_columns:
+        existing_document = {**dict(existing_document), **fact_columns}
+        # An identical legacy observation is not a new disagreement with the
+        # official correction. New contradictory declarations still reach B05.
+        effective = {}
+        for column, value in fact_columns.items():
+            keys = _DECLARING_KEYS.get(column, ())
+            new_raw = next((new_inner.get(key) for key in keys if new_inner.get(key) not in (None, "")), None)
+            old_raw = next((existing_inner.get(key) for key in keys if existing_inner.get(key) not in (None, "")), None)
+            if new_raw is None or new_raw == old_raw or _declaration_matches(column, new_raw, value):
+                effective[column] = value
+        document_kind = effective.get("document_kind", document_kind)
+        source_type = effective.get("source_type", source_type)
+        if "published_date" in effective:
+            published = effective["published_date"]
     # Parse the shared column once. Both priority branches need its provenance.
     previous_fields = _previous_provenance_fields(existing_meta)
     capture_conflicts: dict[str, Any] = {}
@@ -1896,6 +1904,7 @@ def _merge_document_row(
             stored_columns=stored_columns,
             previous_fields=previous_fields,
         )
+        stored_declared.update({key: True for key in fact_columns})
         incoming_columns = {
             "title": title,
             "source_type": source_type,
@@ -1942,7 +1951,7 @@ def _merge_document_row(
             document_metadata,
             prefer_new=prefer_new,
             provenance_fields=provenance_fields,
-            aligned_columns=merged_columns,
+            aligned_columns={key: value for key, value in merged_columns.items() if key not in fact_columns},
         )
         connection.execute(
             """UPDATE documents SET primary_source_id=?,title=?,source_type=?,
@@ -1989,6 +1998,7 @@ def _merge_document_row(
         stored_columns=stored_columns,
         previous_fields=previous_fields,
     )
+    stored_declared.update({key: True for key in fact_columns})
     _, column_provenance, _ = _merge_columns(
         stored_columns,
         incoming=incoming_columns,

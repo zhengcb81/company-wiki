@@ -1,0 +1,179 @@
+{
+  "schema_version": "r2-owned-temp-cleanup/1",
+  "items": [
+    {
+      "name": "r2a",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r2a",
+      "files": 126,
+      "bytes": 5312808,
+      "was_untracked": true,
+      "reparse_points": 0
+    },
+    {
+      "name": "r2b",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r2b",
+      "files": 128,
+      "bytes": 5355004,
+      "was_untracked": true,
+      "reparse_points": 0
+    },
+    {
+      "name": "r2c",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r2c",
+      "files": 128,
+      "bytes": 5519933,
+      "was_untracked": true,
+      "reparse_points": 0
+    },
+    {
+      "name": "r2d",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r2d",
+      "files": 7,
+      "bytes": 385828,
+      "was_untracked": true,
+      "reparse_points": 0
+    },
+    {
+      "name": "r2f",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r2f",
+      "files": 189,
+      "bytes": 9118097,
+      "was_untracked": true,
+      "reparse_points": 0
+    },
+    {
+      "name": "r2g",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r2g",
+      "files": 395,
+      "bytes": 21195717,
+      "was_untracked": true,
+      "reparse_points": 0
+    },
+    {
+      "name": "r2h",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r2h",
+      "files": 409,
+      "bytes": 21847965,
+      "was_untracked": true,
+      "reparse_points": 0
+    },
+    {
+      "name": "r2i",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r2i",
+      "files": 0,
+      "bytes": 0,
+      "was_untracked": true,
+      "reparse_points": 0
+    },
+    {
+      "name": "r2j",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r2j",
+      "files": 0,
+      "bytes": 0,
+      "was_untracked": true,
+      "reparse_points": 0
+    },
+    {
+      "name": "r2k",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r2k",
+      "files": 0,
+      "bytes": 0,
+      "was_untracked": true,
+      "reparse_points": 0
+    },
+    {
+      "name": "r2a-red.xml",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r2a-red.xml",
+      "files": 1,
+      "bytes": 11371,
+      "was_untracked": true,
+      "reparse_points": 0
+    },
+    {
+      "name": "r2b-red.xml",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r2b-red.xml",
+      "files": 1,
+      "bytes": 14143,
+      "was_untracked": true,
+      "reparse_points": 0
+    },
+    {
+      "name": "r2c-green.xml",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r2c-green.xml",
+      "files": 1,
+      "bytes": 2640,
+      "was_untracked": true,
+      "reparse_points": 0
+    },
+    {
+      "name": "r2d-projection-red.xml",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r2d-projection-red.xml",
+      "files": 1,
+      "bytes": 1156,
+      "was_untracked": true,
+      "reparse_points": 0
+    },
+    {
+      "name": "r2e-green.xml",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r2e-green.xml",
+      "files": 1,
+      "bytes": 241,
+      "was_untracked": true,
+      "reparse_points": 0
+    },
+    {
+      "name": "r2f-green.xml",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r2f-green.xml",
+      "files": 1,
+      "bytes": 5234,
+      "was_untracked": true,
+      "reparse_points": 0
+    },
+    {
+      "name": "r2g-responsibility.xml",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r2g-responsibility.xml",
+      "files": 1,
+      "bytes": 16568,
+      "was_untracked": true,
+      "reparse_points": 0
+    },
+    {
+      "name": "r2h-responsibility.xml",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r2h-responsibility.xml",
+      "files": 1,
+      "bytes": 16814,
+      "was_untracked": true,
+      "reparse_points": 0
+    },
+    {
+      "name": "r2i-real.xml",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r2i-real.xml",
+      "files": 1,
+      "bytes": 806,
+      "was_untracked": true,
+      "reparse_points": 0
+    },
+    {
+      "name": "r2j-real.xml",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r2j-real.xml",
+      "files": 1,
+      "bytes": 1013,
+      "was_untracked": true,
+      "reparse_points": 0
+    },
+    {
+      "name": "r2k-real.xml",
+      "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r2k-real.xml",
+      "files": 1,
+      "bytes": 7210,
+      "was_untracked": true,
+      "reparse_points": 0
+    }
+  ],
+  "total_bytes": 68812548,
+  "total_files": 1393,
+  "historical_five_roots_preserved": true,
+  "raw_deleted": 0,
+  "all_restored_absent": true,
+  "summary_note": "Summed retained native per-target inventory after OrderedDictionary property projection displayed null; target inventory and deletion checks were retained."
+}

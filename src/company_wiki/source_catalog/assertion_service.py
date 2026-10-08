@@ -13,10 +13,13 @@ from __future__ import annotations
 
 import json
 import uuid
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
+import re
 from typing import Any
+from urllib.parse import urlsplit
 
 from .store import CatalogStore, canonical_json
+from .document_kinds import SOURCE_FACT_KINDS
 
 
 def _evidence_payload(raw: Any, assertion_id: str) -> dict[str, Any]:
@@ -45,6 +48,139 @@ ASSERTION_SCHEMA_VERSION = "1.0.0"
 ASSERTION_REQUIRED_FIELDS = frozenset(
     {"source_id", "document_id", "content_sha256", "evidence_basis", "decision"}
 )
+
+SOURCE_FACT_FIELDS = frozenset({
+    "entity", "market", "security_id", "document_kind", "published_date",
+    "source_url", "provider", "provider_document_id", "filing_date",
+    "fiscal_year", "fiscal_period", "period_end", "language",
+})
+
+
+def _validate_source_facts(facts: dict[str, Any], evidence: dict[str, Any]) -> None:
+    if not isinstance(facts, dict) or not facts or not set(facts) <= SOURCE_FACT_FIELDS:
+        raise ValueError("source facts must be a nonempty object of known fields")
+    if not isinstance(evidence, dict) or set(evidence) != set(facts):
+        raise ValueError("each changed fact needs matching field evidence")
+    for key, value in facts.items():
+        if key == "fiscal_year":
+            if value is not None and (type(value) is not int or not 1900 <= value <= 9999):
+                raise ValueError("fiscal_year must be an integer year or unknown")
+        elif value is not None and (not isinstance(value, str) or not value.strip() or value != value.strip() or len(value) > 2048):
+            raise ValueError(f"{key} must be trimmed nonempty text or unknown")
+        if key in {"published_date", "filing_date", "period_end"} and value is not None:
+            if len(value) != 10 or date.fromisoformat(value).isoformat() != value:
+                raise ValueError(f"{key} must be an ISO date")
+        if key == "document_kind" and value not in SOURCE_FACT_KINDS:
+            raise ValueError("unknown document kind")
+        if key == "market" and value not in {None, "CN", "HK", "US"}:
+            raise ValueError("unknown market")
+        if key == "security_id" and value is not None and not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9.-]{0,19}", value):
+            raise ValueError("security_id must be a code, not a display name or path")
+        if key == "source_url" and value is not None:
+            parsed = urlsplit(value)
+            if parsed.scheme not in {"http", "https"} or not parsed.hostname or parsed.username or parsed.password:
+                raise ValueError("source_url must be a public HTTP URL")
+        observation = evidence[key]
+        if not isinstance(observation, dict) or not isinstance(observation.get("locator"), str) or not observation["locator"].strip():
+            raise ValueError(f"{key} has no field locator")
+        if "value" not in observation or observation["value"] != value:
+            raise ValueError(f"{key} disagrees with its field evidence")
+    if len(canonical_json(evidence).encode("utf-8")) > 65536:
+        raise ValueError("source fact evidence exceeds byte limit")
+
+
+def record_source_facts(catalog: Any, *, ref: Any, facts: dict[str, Any],
+                        evidence: dict[str, Any]) -> dict[str, Any]:
+    """Verify bytes; append facts and update their query projection atomically.
+
+    Captures stay unchanged. Explicit unknowns survive later corrections. No
+    candidate, review receipt, rollout flag or second task store is introduced.
+    """
+    from .lock import CatalogOperationLock
+    from .source_reader import SourceRef, SourceVersionReader
+
+    if not isinstance(ref, SourceRef):
+        raise TypeError("ref must be SourceRef")
+    _validate_source_facts(facts, evidence)
+    with CatalogOperationLock(catalog.config.catalog_dir, operation="source_facts"):
+        reader = SourceVersionReader(catalog)
+        reader.verify_version(ref, purpose="source_export")
+        current = reader.describe_version(ref)
+        store = catalog.store
+        prior = get_verified_assertion(store, ref.source_id, ref.content_sha256, reader="steady")
+        previous_evidence = _evidence_payload(prior["evidence_json"], prior["assertion_id"]) if prior else {}
+        patch = dict(previous_evidence.get("source_fact_patch") or {})
+        field_evidence = dict(previous_evidence.get("source_fact_evidence") or {})
+        patch.update(facts)
+        field_evidence.update(evidence)
+        _validate_source_facts(patch, field_evidence)
+        evidence_payload = {"source_fact_patch": patch, "source_fact_evidence": field_evidence}
+        def semantic_evidence(value: dict[str, Any]) -> dict[str, Any]:
+            fields = value.get("source_fact_evidence") or {}
+            return {"source_fact_patch": value.get("source_fact_patch"),
+                    "source_fact_evidence": {key: {k: v for k, v in proof.items() if k != "observed_at"}
+                                             for key, proof in fields.items()}}
+        if prior and prior["evidence_basis"] == "source-facts" and semantic_evidence(previous_evidence) == semantic_evidence(evidence_payload):
+            return {"status": "unchanged", "assertion_id": prior["assertion_id"],
+                    "document_id": ref.document_id, "source_id": ref.source_id}
+        values = {key: current.get(key) for key in SOURCE_FACT_FIELDS}
+        values["entity"] = current.get("display_name")
+        if prior:
+            for key in SOURCE_FACT_FIELDS - {"published_date"}:
+                if values.get(key) is None and key in prior:
+                    values[key] = prior[key]
+        values.update(patch)
+        assertion = _build_assertion(
+            source_id=ref.source_id, document_id=ref.document_id, content_sha256=ref.content_sha256,
+            **{key: value for key, value in values.items() if key not in {"published_date", "language"}},
+            evidence_basis="source-facts", evidence_json=evidence_payload, decision="verified",
+            supersedes_assertion_id=prior["assertion_id"] if prior else None,
+            created_by="automated-source-facts",
+        )
+        assertion.update(published_at=values["published_date"], language=values["language"])
+        columns = tuple(assertion)
+        projection = {}
+        if "document_kind" in facts:
+            projection.update(document_kind=facts["document_kind"], source_type=SOURCE_FACT_KINDS[facts["document_kind"]])
+        if "published_date" in facts:
+            projection["published_date"] = facts["published_date"]
+        with store.transaction() as connection:
+            connection.execute(
+                f"INSERT INTO source_metadata_assertions ({','.join(columns)}) VALUES ({','.join('?' for _ in columns)})",
+                tuple(assertion[key] for key in columns),
+            )
+            if projection:
+                connection.execute(
+                    f"UPDATE documents SET {','.join(key+'=?' for key in projection)} WHERE document_id=?",
+                    (*projection.values(), ref.document_id),
+                )
+        return {"status": "recorded", "assertion_id": assertion["assertion_id"],
+                "document_id": ref.document_id, "source_id": ref.source_id}
+
+
+def source_fact_projection(connection: Any, *, document_id: str,
+                           source_id: str | None) -> dict[str, Any]:
+    """Indexed single-source facts for scan projection; no discovery or raw reads."""
+    if not source_id:
+        return {}
+    row = connection.execute(
+        """SELECT a.evidence_basis,a.evidence_json FROM source_metadata_assertions a
+        JOIN sources s ON s.source_id=a.source_id AND s.content_sha256=a.content_sha256
+        WHERE a.document_id=? AND a.source_id=? AND a.decision='verified'
+          AND a.visibility_state IN ('legacy','active')
+        ORDER BY a.created_at DESC LIMIT 1""", (document_id, source_id),
+    ).fetchone()
+    if row is None or row["evidence_basis"] != "source-facts":
+        return {}
+    evidence = _evidence_payload(row["evidence_json"], document_id)
+    patch = evidence.get("source_fact_patch")
+    _validate_source_facts(patch, evidence.get("source_fact_evidence"))
+    projection = {}
+    if "document_kind" in patch:
+        projection.update(document_kind=patch["document_kind"], source_type=SOURCE_FACT_KINDS[patch["document_kind"]])
+    if "published_date" in patch:
+        projection["published_date"] = patch["published_date"]
+    return projection
 
 
 def _build_assertion(
@@ -265,21 +401,6 @@ def preview_assertion(
     rejected by its assertion_id. Candidates are never consumed by the
     resolver — only verified assertions are.
     """
-    existing = store.fetchall(
-        "SELECT * FROM source_metadata_assertions WHERE source_id=? AND decision='verified'",
-        (source_id,),
-    )
-    conflicts = []
-    for e in existing:
-        if (
-            e["entity"] == entity
-            and e["market"] == market
-            and e["security_id"] == security_id
-        ):
-            pass
-        elif e["entity"] != entity or e["security_id"] != security_id:
-            conflicts.append(e["assertion_id"])
-
     a = _build_assertion(
         source_id=source_id,
         document_id=document_id,
@@ -336,38 +457,6 @@ def preview_assertion(
             ),
         )
     return a
-    conflicts = []
-    for e in existing:
-        if (
-            e["entity"] == entity
-            and e["market"] == market
-            and e["security_id"] == security_id
-        ):
-            pass  # same identity, superseded
-        elif e["entity"] != entity or e["security_id"] != security_id:
-            conflicts.append(e["assertion_id"])
-
-    return _build_assertion(
-        source_id=source_id,
-        document_id=document_id,
-        content_sha256=content_sha256,
-        entity=entity,
-        market=market,
-        security_id=security_id,
-        document_kind=document_kind,
-        form_type=form_type,
-        fiscal_year=fiscal_year,
-        fiscal_period=fiscal_period,
-        provider=provider,
-        provider_document_id=provider_document_id,
-        source_url=source_url,
-        filing_date=filing_date,
-        evidence_basis=evidence_basis,
-        evidence_json=evidence_json,
-        decision="candidate",
-        supersedes_assertion_id=None,
-        created_by=created_by,
-    )
 
 
 def verify_assertion(

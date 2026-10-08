@@ -2228,7 +2228,7 @@ def _v2_assertion_metadata(
     row = store.fetchone(
         f"""SELECT evidence_json, fiscal_year, fiscal_period, document_kind,
                   form_type, provider, provider_document_id, source_url,
-                  security_id, market, content_sha256 {extra_columns}
+                  security_id, market, content_sha256, evidence_basis {extra_columns}
            FROM source_metadata_assertions
            WHERE source_id=? AND decision='verified' AND {visibility} {hash_match}
            ORDER BY created_at DESC LIMIT 1""",
@@ -2256,4 +2256,15 @@ def _v2_assertion_metadata(
     if reader == "steady":
         metadata.update({"period_end": row["period_end"], "language": row["language"],
                          "published_at": row["published_at"], "display_name": row["entity"]})
-    return {k: v for k, v in metadata.items() if v is not None}
+    result = {k: v for k, v in metadata.items() if v is not None}
+    if row["evidence_basis"] == "source-facts":
+        # Preserve explicit unknowns across later corrections. Old capture
+        # fallback cannot restore a value that source evidence disproved.
+        patch = evidence.get("source_fact_patch")
+        if isinstance(patch, dict):
+            from .assertion_service import SOURCE_FACT_FIELDS
+
+            for key, value in patch.items():
+                if key in SOURCE_FACT_FIELDS:
+                    result["display_name" if key == "entity" else key] = value
+    return result

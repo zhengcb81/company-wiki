@@ -1,0 +1,613 @@
+{
+  "schema_version": "r2-production-observation/1",
+  "production_write_count": 0,
+  "model_posts": 0,
+  "sources": [
+    {
+      "sample_id": "S01",
+      "source_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "byte_size": 9165875,
+      "raw_unchanged_vs_register": true,
+      "registered": true,
+      "document": {
+        "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "primary_source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "document_kind": "annual_report",
+        "source_type": "regulatory_filing",
+        "source_status": "retired",
+        "security_id": null,
+        "market": null,
+        "published_date": null,
+        "title": "中微公司：2025年年度报告",
+        "fiscal_year": null,
+        "fiscal_period": null
+      },
+      "locations": [
+        {
+          "location_id": "urn:company-wiki:location:sha256:c99590b373d511d2c8d54df26c8ab79d86d611655bac863abbc8628eeb543e49",
+          "root_id": "company_raw",
+          "relative_path": "中微公司/raw/financial_reports/中微公司：2025年年度报告.pdf",
+          "role": "original_primary",
+          "location_status": "retired",
+          "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
+        },
+        {
+          "location_id": "urn:company-wiki:location:sha256:5ae8493582938ff71b5107d64060917c5e1c33fd8ce462e7afd3877a7c884e6c",
+          "root_id": "company_raw",
+          "relative_path": "中微公司/raw/financial_reports/中微公司：2025年年度报告.pdf.source.json",
+          "role": "metadata",
+          "location_status": "retired",
+          "source_id": "urn:company-wiki:source:sha256:4808a404e85141d86862e14895338715b59279acbcd6ee628ef30cc5a4378516"
+        },
+        {
+          "location_id": "urn:company-wiki:location:sha256:6da1e171474ed540710a7b10c8465151823c4388be069cf28b0344510092f701",
+          "root_id": "dropbox_stock",
+          "relative_path": "工业与信息化/电子/中微公司/中微公司：2025年年度报告.pdf",
+          "role": "original_primary",
+          "location_status": "retired",
+          "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
+        }
+      ],
+      "assertions": [],
+      "retire_audit": [
+        {
+          "audit_id": "retire-60907f38899542b69f22393d5e29c2f3",
+          "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "reason": "legacy sidecar lacks source_url; batch governance Phase 15.6 (F13)",
+          "created_by": "phase-15.6-governance",
+          "created_at": "2026-08-01T09:06:00Z"
+        },
+        {
+          "audit_id": "retire-c67e272f098945749273d2a8e678920e",
+          "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "reason": "phase-15.6 audit reconciliation (reconcile-retire)",
+          "created_by": "reconcile-retire-20260806",
+          "created_at": "2026-08-07T08:08:52Z"
+        }
+      ],
+      "restore_audit": [],
+      "declarations": {
+        "acquisition": {
+          "market": "CN",
+          "security_id": "688012",
+          "source_title": "中微公司：2025年年度报告"
+        }
+      },
+      "provenance": null,
+      "current_public_description_error": {
+        "type": "SourceReadError",
+        "detail": "blocked: source_not_active"
+      }
+    },
+    {
+      "sample_id": "S02",
+      "source_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "byte_size": 6361468,
+      "raw_unchanged_vs_register": true,
+      "registered": true,
+      "document": {
+        "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "primary_source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "document_kind": "semi_annual_report",
+        "source_type": "regulatory_filing",
+        "source_status": "retired",
+        "security_id": null,
+        "market": null,
+        "published_date": null,
+        "title": "中微公司：2025年半年度报告",
+        "fiscal_year": null,
+        "fiscal_period": null
+      },
+      "locations": [
+        {
+          "location_id": "urn:company-wiki:location:sha256:259514bd70955d4f7114c84674624c270ea1759856aa263c654d5fc530c01d68",
+          "root_id": "company_raw",
+          "relative_path": "中微公司/raw/financial_reports/中微公司：2025年半年度报告.pdf",
+          "role": "original_primary",
+          "location_status": "retired",
+          "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd"
+        },
+        {
+          "location_id": "urn:company-wiki:location:sha256:a699708df649f064ea8e78a9db2375e2a1c5d59b9dbe587b86067140a0f3a41e",
+          "root_id": "company_raw",
+          "relative_path": "中微公司/raw/financial_reports/中微公司：2025年半年度报告.pdf.source.json",
+          "role": "metadata",
+          "location_status": "retired",
+          "source_id": "urn:company-wiki:source:sha256:4ecde6686b85edda50803831f7b3784fae55733815eb526e647be23dec6040b7"
+        }
+      ],
+      "assertions": [],
+      "retire_audit": [
+        {
+          "audit_id": "retire-27a0ff95b68a47fdb8a5aa2dc0988f5b",
+          "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+          "reason": "legacy sidecar lacks source_url; batch governance Phase 15.6 (F13)",
+          "created_by": "phase-15.6-governance",
+          "created_at": "2026-08-01T09:07:41Z"
+        },
+        {
+          "audit_id": "retire-16024568dd5f487c8ea57c0fbb496761",
+          "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+          "reason": "phase-15.6 audit reconciliation (reconcile-retire)",
+          "created_by": "reconcile-retire-20260806",
+          "created_at": "2026-08-07T08:10:42Z"
+        }
+      ],
+      "restore_audit": [],
+      "declarations": {
+        "acquisition": {
+          "market": "CN",
+          "security_id": "688012",
+          "source_title": "中微公司：2025年半年度报告"
+        }
+      },
+      "provenance": null,
+      "current_public_description_error": {
+        "type": "SourceReadError",
+        "detail": "blocked: source_not_active"
+      }
+    },
+    {
+      "sample_id": "S03",
+      "source_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "byte_size": 217264,
+      "raw_unchanged_vs_register": true,
+      "registered": true,
+      "document": {
+        "document_id": "urn:company-wiki:document:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "primary_source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "document_kind": "quarterly_report",
+        "source_type": "regulatory_filing",
+        "source_status": "retired",
+        "security_id": null,
+        "market": null,
+        "published_date": null,
+        "title": "中微公司：2026年第一季度报告",
+        "fiscal_year": null,
+        "fiscal_period": null
+      },
+      "locations": [
+        {
+          "location_id": "urn:company-wiki:location:sha256:99287847c0603973d1a0dac4fbb0b569c17bf0d79e7816511c55a6572a99c4b4",
+          "root_id": "company_raw",
+          "relative_path": "中微公司/raw/financial_reports/中微公司：2026年第一季度报告.pdf",
+          "role": "original_primary",
+          "location_status": "retired",
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268"
+        },
+        {
+          "location_id": "urn:company-wiki:location:sha256:857d744e66029ba7f8e962f9ae20487a5f6ce2b7b703572486e468d0479ec66d",
+          "root_id": "company_raw",
+          "relative_path": "中微公司/raw/financial_reports/中微公司：2026年第一季度报告.pdf.source.json",
+          "role": "metadata",
+          "location_status": "retired",
+          "source_id": "urn:company-wiki:source:sha256:f3ce03d18cc9fb5b1e22b5a4d33fe276851f383ea022cbb5c9456b493064bb7b"
+        }
+      ],
+      "assertions": [],
+      "retire_audit": [
+        {
+          "audit_id": "retire-fa022874d03d48ca9e2b70d453c1fe6c",
+          "document_id": "urn:company-wiki:document:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "reason": "legacy sidecar lacks source_url; batch governance Phase 15.6 (F13)",
+          "created_by": "phase-15.6-governance",
+          "created_at": "2026-08-01T09:06:38Z"
+        },
+        {
+          "audit_id": "retire-4d687eae6f944278a242a22f998faa6f",
+          "document_id": "urn:company-wiki:document:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "reason": "phase-15.6 audit reconciliation (reconcile-retire)",
+          "created_by": "reconcile-retire-20260806",
+          "created_at": "2026-08-07T08:09:32Z"
+        }
+      ],
+      "restore_audit": [],
+      "declarations": {
+        "acquisition": {
+          "market": "CN",
+          "security_id": "688012",
+          "source_title": "中微公司：2026年第一季度报告"
+        }
+      },
+      "provenance": null,
+      "current_public_description_error": {
+        "type": "SourceReadError",
+        "detail": "blocked: source_not_active"
+      }
+    },
+    {
+      "sample_id": "S04",
+      "source_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "byte_size": 11211796,
+      "raw_unchanged_vs_register": true,
+      "registered": true,
+      "document": {
+        "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "primary_source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "document_kind": "prospectus",
+        "source_type": "prospectus",
+        "source_status": "retired",
+        "security_id": null,
+        "market": null,
+        "published_date": null,
+        "title": "中微公司：首次公开发行股票并在科创板上市招股说明书",
+        "fiscal_year": null,
+        "fiscal_period": null
+      },
+      "locations": [
+        {
+          "location_id": "urn:company-wiki:location:sha256:f86358acc1f0a1d8b8b3e1c60e334730a62af4e7a039c472366cba0770dcb26e",
+          "root_id": "company_raw",
+          "relative_path": "中微公司/raw/prospectus/中微公司：首次公开发行股票并在科创板上市招股说明书.pdf",
+          "role": "original_primary",
+          "location_status": "retired",
+          "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67"
+        },
+        {
+          "location_id": "urn:company-wiki:location:sha256:f3191a9168cd5653a4e0b8d57d57e8f38be1c2790a175ffbbfa5aa97414bbf42",
+          "root_id": "company_raw",
+          "relative_path": "中微公司/raw/prospectus/中微公司：首次公开发行股票并在科创板上市招股说明书.pdf.source.json",
+          "role": "metadata",
+          "location_status": "retired",
+          "source_id": "urn:company-wiki:source:sha256:b2418087e66b1d117fce874cae8cbb505d5ad15fd17d94d7b556ad2557235631"
+        }
+      ],
+      "assertions": [],
+      "retire_audit": [
+        {
+          "audit_id": "retire-f59ce2a606b342689cb3a62e6fac0a5d",
+          "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+          "reason": "legacy sidecar lacks source_url; batch governance Phase 15.6 (F13)",
+          "created_by": "phase-15.6-governance",
+          "created_at": "2026-08-01T09:06:28Z"
+        },
+        {
+          "audit_id": "retire-61d432d6789248bfa07a7b2cf8c94428",
+          "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+          "reason": "phase-15.6 audit reconciliation (reconcile-retire)",
+          "created_by": "reconcile-retire-20260806",
+          "created_at": "2026-08-07T08:09:22Z"
+        }
+      ],
+      "restore_audit": [],
+      "declarations": {
+        "acquisition": {
+          "market": "CN",
+          "security_id": "688012",
+          "source_title": "中微公司：首次公开发行股票并在科创板上市招股说明书"
+        }
+      },
+      "provenance": null,
+      "current_public_description_error": {
+        "type": "SourceReadError",
+        "detail": "blocked: source_not_active"
+      }
+    },
+    {
+      "sample_id": "S05",
+      "source_sha256": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+      "byte_size": 5595592,
+      "raw_unchanged_vs_register": true,
+      "registered": true,
+      "document": {
+        "document_id": "urn:company-wiki:document:sha256:cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+        "primary_source_id": "urn:company-wiki:source:sha256:cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+        "document_kind": "other",
+        "source_type": "other",
+        "source_status": "active",
+        "security_id": null,
+        "market": null,
+        "published_date": null,
+        "title": "三角防务：西安三角防务股份有限公司向特定对象发行股票并在创业板上市募集说明书（注册稿）",
+        "fiscal_year": null,
+        "fiscal_period": null
+      },
+      "locations": [
+        {
+          "location_id": "urn:company-wiki:location:sha256:e2766a0b2847823e9d7ea201d94035cfa6458069983939b8492c61b1fd3b6743",
+          "root_id": "company_raw",
+          "relative_path": "三角防务/raw/research/三角防务：西安三角防务股份有限公司向特定对象发行股票并在创业板上市募集说明书（注册稿）.PDF",
+          "role": "original_primary",
+          "location_status": "active",
+          "source_id": "urn:company-wiki:source:sha256:cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b"
+        },
+        {
+          "location_id": "urn:company-wiki:location:sha256:1c3fa84149b4212cb8edabe16fd2e6b0f76f225fb41e07a4da58040fde28a26c",
+          "root_id": "company_raw",
+          "relative_path": "三角防务/raw/research/三角防务：西安三角防务股份有限公司向特定对象发行股票并在创业板上市募集说明书（注册稿）.PDF.source.json",
+          "role": "metadata",
+          "location_status": "active",
+          "source_id": "urn:company-wiki:source:sha256:b34ace23f1651c606ab6d646202445d407c6a50db932ad65995312cd5e1a40bb"
+        },
+        {
+          "location_id": "urn:company-wiki:location:sha256:f71f85d44b6b66f9143ffc8cd4b891e47cd5157bdde515123eba52e3efaa161e",
+          "root_id": "dropbox_stock",
+          "relative_path": "军工/三角防务/三角防务：西安三角防务股份有限公司向特定对象发行股票并在创业板上市募集说明书（注册稿）.PDF",
+          "role": "original_primary",
+          "location_status": "active",
+          "source_id": "urn:company-wiki:source:sha256:cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b"
+        }
+      ],
+      "assertions": [],
+      "retire_audit": [],
+      "restore_audit": [],
+      "declarations": {
+        "acquisition": {
+          "market": "CN",
+          "security_id": "三角防务",
+          "source_title": "三角防务：西安三角防务股份有限公司向特定对象发行股票并在创业板上市募集说明书（注册稿）"
+        }
+      },
+      "provenance": null,
+      "current_public_description": {
+        "document_id": "urn:company-wiki:document:sha256:cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+        "source_id": "urn:company-wiki:source:sha256:cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+        "content_sha256": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+        "byte_size": 5595592,
+        "mime_type": "application/pdf",
+        "title": "三角防务：西安三角防务股份有限公司向特定对象发行股票并在创业板上市募集说明书（注册稿）",
+        "document_kind": "other",
+        "published_date": null,
+        "source_url": null,
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": null,
+        "market": "CN",
+        "security_id": "三角防务",
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "period_end": null,
+        "form_type": null,
+        "provider": null,
+        "provider_document_id": null,
+        "language": null
+      }
+    },
+    {
+      "sample_id": "S06",
+      "source_sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+      "byte_size": 4756322,
+      "raw_unchanged_vs_register": true,
+      "registered": true,
+      "document": {
+        "document_id": "urn:company-wiki:document:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+        "primary_source_id": "urn:company-wiki:source:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+        "document_kind": "other",
+        "source_type": "other",
+        "source_status": "active",
+        "security_id": null,
+        "market": null,
+        "published_date": null,
+        "title": "华锐精密：向不特定对象发行可转换公司债券证券募集说明书",
+        "fiscal_year": null,
+        "fiscal_period": null
+      },
+      "locations": [
+        {
+          "location_id": "urn:company-wiki:location:sha256:0491e2e7c390d6d2de394b866d26cf58e0670df621d55bc9223250e903a421b6",
+          "root_id": "company_raw",
+          "relative_path": "华锐精密/raw/research/华锐精密：向不特定对象发行可转换公司债券证券募集说明书.PDF",
+          "role": "original_primary",
+          "location_status": "active",
+          "source_id": "urn:company-wiki:source:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1"
+        },
+        {
+          "location_id": "urn:company-wiki:location:sha256:ff652b7054fc2937d00f3f3db0ae07b34d88b53ab431fb6f303e0d6c3fc590da",
+          "root_id": "company_raw",
+          "relative_path": "华锐精密/raw/research/华锐精密：向不特定对象发行可转换公司债券证券募集说明书.PDF.source.json",
+          "role": "metadata",
+          "location_status": "active",
+          "source_id": "urn:company-wiki:source:sha256:ddd6e9aa083c3424b9b5981b1804c22bb3cde36d09c3f247e1309bc259416d22"
+        },
+        {
+          "location_id": "urn:company-wiki:location:sha256:ae203fa2a127a525ce683d64959eba65e6a648137f019da92944005c94b72a32",
+          "root_id": "dropbox_stock",
+          "relative_path": "工业与信息化/刀具/华锐精密/华锐精密：向不特定对象发行可转换公司债券证券募集说明书.PDF",
+          "role": "original_primary",
+          "location_status": "active",
+          "source_id": "urn:company-wiki:source:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1"
+        }
+      ],
+      "assertions": [],
+      "retire_audit": [],
+      "restore_audit": [],
+      "declarations": {
+        "acquisition": {
+          "market": "CN",
+          "security_id": "华锐精密",
+          "source_title": "华锐精密：向不特定对象发行可转换公司债券证券募集说明书"
+        }
+      },
+      "provenance": null,
+      "current_public_description": {
+        "document_id": "urn:company-wiki:document:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+        "source_id": "urn:company-wiki:source:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+        "content_sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+        "byte_size": 4756322,
+        "mime_type": "application/pdf",
+        "title": "华锐精密：向不特定对象发行可转换公司债券证券募集说明书",
+        "document_kind": "other",
+        "published_date": null,
+        "source_url": null,
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": null,
+        "market": "CN",
+        "security_id": "华锐精密",
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "period_end": null,
+        "form_type": null,
+        "provider": null,
+        "provider_document_id": null,
+        "language": null
+      }
+    },
+    {
+      "sample_id": "S07",
+      "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "byte_size": 153851,
+      "raw_unchanged_vs_register": true,
+      "registered": true,
+      "document": {
+        "document_id": "urn:company-wiki:document:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "primary_source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "document_kind": "investor_relations",
+        "source_type": "investor_relations",
+        "source_status": "active",
+        "security_id": null,
+        "market": null,
+        "published_date": null,
+        "title": "万润股份：投资者关系活动记录表20260515",
+        "fiscal_year": null,
+        "fiscal_period": null
+      },
+      "locations": [
+        {
+          "location_id": "urn:company-wiki:location:sha256:37ae3cfbab9eada6a06e9ff83fe5749018fe9b7ed95dc5dbfc8ba15714f32124",
+          "root_id": "company_raw",
+          "relative_path": "万润股份/raw/research/万润股份：投资者关系活动记录表20260515.pdf",
+          "role": "original_primary",
+          "location_status": "active",
+          "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7"
+        },
+        {
+          "location_id": "urn:company-wiki:location:sha256:73695f287969b1451b8832ff67b38480b4582b25344a3fdae91d14e7a0e60fad",
+          "root_id": "company_raw",
+          "relative_path": "万润股份/raw/research/万润股份：投资者关系活动记录表20260515.pdf.source.json",
+          "role": "metadata",
+          "location_status": "active",
+          "source_id": "urn:company-wiki:source:sha256:9be2b0baa27fd93342977e7050bc44e35113215fd40751d11e0c408ca0eac443"
+        }
+      ],
+      "assertions": [],
+      "retire_audit": [],
+      "restore_audit": [],
+      "declarations": {
+        "acquisition": {
+          "market": "CN",
+          "security_id": "万润股份",
+          "source_title": "万润股份：投资者关系活动记录表20260515"
+        }
+      },
+      "provenance": null,
+      "current_public_description": {
+        "document_id": "urn:company-wiki:document:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "content_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "byte_size": 153851,
+        "mime_type": "application/pdf",
+        "title": "万润股份：投资者关系活动记录表20260515",
+        "document_kind": "investor_relations",
+        "published_date": null,
+        "source_url": null,
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": null,
+        "market": "CN",
+        "security_id": "万润股份",
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "period_end": null,
+        "form_type": null,
+        "provider": null,
+        "provider_document_id": null,
+        "language": null
+      }
+    },
+    {
+      "sample_id": "S08",
+      "source_sha256": "f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+      "byte_size": 414544,
+      "raw_unchanged_vs_register": true,
+      "registered": true,
+      "document": {
+        "document_id": "urn:company-wiki:document:sha256:f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+        "primary_source_id": "urn:company-wiki:source:sha256:f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+        "document_kind": "investor_relations",
+        "source_type": "investor_relations",
+        "source_status": "active",
+        "security_id": null,
+        "market": null,
+        "published_date": "2023-12-31",
+        "title": "周大生：2023年6月26日-6月28日投资者关系活动记录表",
+        "fiscal_year": null,
+        "fiscal_period": null
+      },
+      "locations": [
+        {
+          "location_id": "urn:company-wiki:location:sha256:a4b0e73e471fe322be2f37da60a67b35f290a04d1404a65ef41f4cc41b01d160",
+          "root_id": "company_raw",
+          "relative_path": "周大生/raw/research/周大生：2023年6月26日-6月28日投资者关系活动记录表.pdf",
+          "role": "original_primary",
+          "location_status": "active",
+          "source_id": "urn:company-wiki:source:sha256:f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b"
+        },
+        {
+          "location_id": "urn:company-wiki:location:sha256:3a2be26cbfd701961f852b41e16f5b8541249f64a3a243cd45ad6ee745d0db4c",
+          "root_id": "company_raw",
+          "relative_path": "周大生/raw/research/周大生：2023年6月26日-6月28日投资者关系活动记录表.pdf.source.json",
+          "role": "metadata",
+          "location_status": "active",
+          "source_id": "urn:company-wiki:source:sha256:e1a40f1a8b880c87eeab18e69e1a45936db76ca839c26d4517f58e00eca147e1"
+        }
+      ],
+      "assertions": [],
+      "retire_audit": [],
+      "restore_audit": [],
+      "declarations": {
+        "acquisition": {
+          "market": "CN",
+          "published_date": "2023-12-31",
+          "security_id": "周大生",
+          "source_title": "周大生：2023年6月26日-6月28日投资者关系活动记录表"
+        }
+      },
+      "provenance": null,
+      "current_public_description": {
+        "document_id": "urn:company-wiki:document:sha256:f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+        "source_id": "urn:company-wiki:source:sha256:f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+        "content_sha256": "f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+        "byte_size": 414544,
+        "mime_type": "application/pdf",
+        "title": "周大生：2023年6月26日-6月28日投资者关系活动记录表",
+        "document_kind": "investor_relations",
+        "published_date": "2023-12-31",
+        "source_url": null,
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": null,
+        "market": "CN",
+        "security_id": "周大生",
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "period_end": null,
+        "form_type": null,
+        "provider": null,
+        "provider_document_id": null,
+        "language": null
+      }
+    },
+    {
+      "sample_id": "S09",
+      "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "byte_size": 66324,
+      "raw_unchanged_vs_register": true,
+      "registered": false,
+      "document": null,
+      "locations": [],
+      "assertions": [],
+      "retire_audit": [],
+      "restore_audit": []
+    }
+  ],
+  "sqlite_total_changes": 0
+}

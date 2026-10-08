@@ -1,0 +1,277 @@
+{
+  "schema_version": "r2-source-facts-api-acceptance/1",
+  "status": "isolated_green_awaiting_publication",
+  "production_applied": false,
+  "source_api": "SourceCatalog.record_source_facts / source-facts --request",
+  "scope": "source quality only; no investment state or model execution",
+  "responsibility_current": {
+    "file": "r2h-responsibility.xml",
+    "tests": 101,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 15.066
+  },
+  "real_e2e_current": {
+    "file": "r2k-real.xml",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 4.738
+  },
+  "real_e2e": {
+    "results": [
+      {
+        "sample_id": "S01",
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "byte_size": 9165875,
+          "mime_type": "application/pdf",
+          "schema_version": "2.0"
+        },
+        "document_kind": "annual_report",
+        "security_id": "688012",
+        "published_date": "2026-03-31"
+      },
+      {
+        "sample_id": "S02",
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+          "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+          "content_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+          "byte_size": 6361468,
+          "mime_type": "application/pdf",
+          "schema_version": "2.0"
+        },
+        "document_kind": "semi_annual_report",
+        "security_id": "688012",
+        "published_date": "2025-08-29"
+      },
+      {
+        "sample_id": "S03",
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "content_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "byte_size": 217264,
+          "mime_type": "application/pdf",
+          "schema_version": "2.0"
+        },
+        "document_kind": "quarterly_report",
+        "security_id": "688012",
+        "published_date": "2026-04-28"
+      },
+      {
+        "sample_id": "S04",
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+          "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+          "content_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+          "byte_size": 11211796,
+          "mime_type": "application/pdf",
+          "schema_version": "2.0"
+        },
+        "document_kind": "prospectus",
+        "security_id": "688012",
+        "published_date": "2019-07-16"
+      },
+      {
+        "sample_id": "S05",
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+          "source_id": "urn:company-wiki:source:sha256:cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+          "content_sha256": "cd803fe9528f4646f8f29b518a450ae4bd5b5968c482eb49789f9786b523595b",
+          "byte_size": 5595592,
+          "mime_type": "application/pdf",
+          "schema_version": "2.0"
+        },
+        "document_kind": "equity_offering_prospectus",
+        "security_id": "300775",
+        "published_date": "2022-11-30"
+      },
+      {
+        "sample_id": "S06",
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+          "source_id": "urn:company-wiki:source:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+          "content_sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+          "byte_size": 4756322,
+          "mime_type": "application/pdf",
+          "schema_version": "2.0"
+        },
+        "document_kind": "convertible_bond_prospectus",
+        "security_id": "688059",
+        "published_date": "2022-06-22"
+      },
+      {
+        "sample_id": "S07",
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+          "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+          "content_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+          "byte_size": 153851,
+          "mime_type": "application/pdf",
+          "schema_version": "2.0"
+        },
+        "document_kind": "investor_relations",
+        "security_id": "002643",
+        "published_date": null
+      },
+      {
+        "sample_id": "S08",
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+          "source_id": "urn:company-wiki:source:sha256:f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+          "content_sha256": "f6d50d717efd5e84e400a28b51bb0c73e2e2a712e828cd3fb6d872469718fd2b",
+          "byte_size": 414544,
+          "mime_type": "application/pdf",
+          "schema_version": "2.0"
+        },
+        "document_kind": "investor_relations",
+        "security_id": "002867",
+        "published_date": null
+      },
+      {
+        "sample_id": "S09",
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+          "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+          "content_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+          "byte_size": 66324,
+          "mime_type": "text/plain",
+          "schema_version": "2.0"
+        },
+        "document_kind": "investor_call_transcript",
+        "security_id": "MSFT",
+        "published_date": null
+      }
+    ],
+    "copied_raw_bytes": 37943036,
+    "assertions": 9,
+    "tmp_restored_absent": true,
+    "production_writes": 0,
+    "provider_posts": 0,
+    "retire_audits": 8,
+    "restore_audits": 4
+  },
+  "runs": [
+    {
+      "file": "r2a-red.xml",
+      "tests": 18,
+      "failures": 0,
+      "errors": 18,
+      "skipped": 0,
+      "seconds": 4.138
+    },
+    {
+      "file": "r2b-red.xml",
+      "tests": 18,
+      "failures": 18,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 4.336
+    },
+    {
+      "file": "r2c-green.xml",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 4.564
+    },
+    {
+      "file": "r2d-projection-red.xml",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 1.129
+    },
+    {
+      "file": "r2e-green.xml",
+      "tests": 0,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.019
+    },
+    {
+      "file": "r2f-green.xml",
+      "tests": 34,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 7.136
+    },
+    {
+      "file": "r2g-responsibility.xml",
+      "tests": 99,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 13.693
+    },
+    {
+      "file": "r2h-responsibility.xml",
+      "tests": 101,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 15.066
+    },
+    {
+      "file": "r2i-real.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "seconds": 1.076
+    },
+    {
+      "file": "r2j-real.xml",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 1.88
+    },
+    {
+      "file": "r2k-real.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 4.738
+    }
+  ],
+  "error_classification": {
+    "r2a": "fixture setup: missing expected SHA and reader cleanup; not product RED",
+    "r2b": "product RED: missing public source facts method and CLI",
+    "r2d": "product RED: repeated registration created a false corrected-kind conflict",
+    "r2e": "invocation error: nonexistent test file; zero tests, not GREEN",
+    "r2i": "fixture setup: xunit2 record_property warning; use -o junit_family=legacy",
+    "r2j": "fixture: query_ref correctly refuses retired source; keep Ref before retirement",
+    "recovery_file_read": "one guessed test and guard path absent; actual paths discovered without product waiver",
+    "extra_type_flags": "An optional local --strict flag found no-any-return in unchanged reader:215; this flag is not in configured CI. Matching configured mypy command passes. No unrelated reader code was changed or new gate added."
+  },
+  "major_node_only": true,
+  "model_posts": 0,
+  "neighbor_writes": 0,
+  "raw_deleted": 0,
+  "unknown_publication_preserved": true,
+  "pending": [
+    "normal source commit/push and exact current CI",
+    "production restore and source facts through public entries",
+    "legacy TXT scoped registration",
+    "full configured R3 request and necessary budget increment",
+    "real final/consumer/resume/footprint and R5 final closeout"
+  ],
+  "configured_static_checks": {
+    "ruff_changed_files": "passed",
+    "mypy_source_reader_existing_CI_command": "passed"
+  },
+  "cleanup_receipt": "r2_owned_temp_cleanup_2026-10-08.json"
+}

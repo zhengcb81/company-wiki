@@ -1,5 +1,13 @@
 # Progress：激进简化实施
 
+## R2来源事实接口节点（2026-10-08）
+
+最新三包查收对应G5已验收/并线/推送，不重开。R2现场九原件只读观察total_changes0；新SourceCatalog.record_source_facts/薄CLI在现有锁与SQLite事务内实读SHA、追加唯一事实并同步查询投影，保留capture/历史/ID和显式unknown。TDD入口18产品RED后绿；重登假分类冲突1产品RED后修复共享分类/声明边界。当前101责任项15.08秒全绿/-W error，真实九原件隔离E2E一项4.75秒全绿/零skip；37,943,036B复制原件、4restore/8retire audit/9assertion，重复0新增，未选根水位保持，lake恢复absent，生产/原件/邻仓零写、模型0。Ruff及当前配置mypy绿。
+
+所有尝试计数与错误分类见[r2_source_facts_api_acceptance](harness_lanes/results/r2_source_facts_api_acceptance_2026-10-08.json)：初始夹具expected SHA/reader清理、错测试路径0执行、xunit2 record_property、退休后query_ref均非产品RED。额外--strict旧reader Any报错不在当前配置CI；正常mypy绿，不改reader或新加门。下一步正常提交/push/精确CI，再应用生产来源事实/恢复/TXT；R3预算及真实final/R5仍未完成。
+
+R2 owned临时项先写逐项清单再原生删除，恢复absent，实测68,812,548B/1,393文件；原件删除0，五个历史根待R5保持。OrderedDictionary汇总输出null，按保留逐项值重算后发布真实数值；不是恢复/删除生产备份。
+
 ## G2正式发布收口（2026-10-08）
 
 **当前进度（2026-10-08，G2收口）：**G5三包均已验收、并线、推送；G2十四组和最后A/B节点完成。源码50e42f2已正常推master，精确CI37702678973全部步骤success、约81秒。真实IR/TXT/真制度/错标题业务原件与当前已提交RF/SW消费者读取一致，同run新增POST0；60登记责任、42退休合同、真实组合E2E均绿，另28项门禁责任4.67秒绿。删除固定SHA人工登记规则/11项许可表及9条已退役文件基线，不减真实字节/身份/期间/locator验真。24owned临时项恢复absent，实测23415676B/518文件；原件/生产/owner零改。见[G2最终验收](g2_consolidated_node_2026-10-08.md)。下一步R2生产来源元数据与ET原语言TXT正式登记→R3真实小批次final/消费/恢复/空间→R5收口；R4有证据决定不迁移。全部PWF尚未完成，下方旧pending/paused为历史，不重开已绿长包或人工签收。

@@ -176,6 +176,9 @@ def _parser() -> argparse.ArgumentParser:
         required=True, help="source group within --root-id; repeatable; no missing sweep",
     )
 
+    source_facts = subparsers.add_parser("source-facts", help="verify bytes and atomically record source facts")
+    source_facts.add_argument("--request", type=Path, required=True)
+
     fingerprint_backfill = subparsers.add_parser(
         "fingerprint-backfill",
         help="compute normalized-text fingerprints for documents lacking one",
@@ -226,7 +229,7 @@ def _parser() -> argparse.ArgumentParser:
     )
     identity_enrich_sub = identity_enrich.add_subparsers(dest="enrichment_action")
     id_preview = identity_enrich_sub.add_parser(
-        "preview", help="preview a candidate assertion without writing"
+        "preview", help="record a candidate assertion; does not verify it"
     )
     id_preview.add_argument("--source-id", required=True)
     id_preview.add_argument("--document-id", required=True)
@@ -899,6 +902,20 @@ def main(argv: Sequence[str] | None = None) -> int:
         elif args.command == "register":
             result = get_catalog().register_sources(
                 root_id=args.root_id, relative_paths=set(args.relative_path),
+            )
+        elif args.command == "source-facts":
+            from .source_reader import SourceRef
+
+            with args.request.open("rb") as source_facts_stream:
+                payload = source_facts_stream.read(131073)
+            if len(payload) > 131072:
+                raise ValueError("source facts request exceeds byte limit")
+            request_object = json.loads(payload.decode("utf-8"))
+            if not isinstance(request_object, dict) or set(request_object) != {"source_ref", "facts", "evidence"}:
+                raise ValueError("source facts request fields differ")
+            result = get_catalog().record_source_facts(
+                ref=SourceRef(**request_object["source_ref"]), facts=request_object["facts"],
+                evidence=request_object["evidence"],
             )
         elif args.command == "fingerprint-backfill":
             result = get_catalog().backfill_text_fingerprints(limit=args.limit)
