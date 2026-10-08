@@ -131,3 +131,14 @@
 
 - 新增second_cohort_generalization.md，规定全部改造后再选A/H/US各一家不同公司，按本地/官方真实资料选样并固定，覆盖复用/新下载、正确工具、规范化/摘要真实消费、完整RF技能及独立审查。
 - 已写入task_plan和根因施工顺序；沿用现有检查原则、配置及累计预算，独立测试环境退出恢复。此轮只更新计划，不提前跑新公司、不声称已通过、不触碰封存的第一组清单或原件。
+
+## Phase 6 开始实施
+
+- 已启动持续目标，读取当前PWF和RF技能；RF main=08673cf8，owner未提交仅3个assurance日志及output，不能重置。按AGENTS的explore建议委派Dayu和parser两项只读结构探索；源码修改仍由MAIN按责任仓推进。
+- RF无AGENTS文件，读取尝试FileNotFound不作为项目缺陷；此前只读盘点也确认其父链无此文件。准备独立工作树与最小跨进程RED，不改失败成功定义。
+
+P0候选72ce94c1已在独立RF分支提交，62责任测试3.79秒、125快速检查19.75秒通过；旧新五类金标语义核对通过后才刷新新revision金标。正在跑固定三公司full，待确认process_seed_stability改善及其他检查无退化后才并main/定点安装。HTML/PPTX和provider缺口仍待施工。
+
+P0大节点签收：RF候选72ce94c160bbb5b9399c8716307588b443a72a83的三公司full108.527秒，47PASS/3BLOCKED/14NOT_RUN/7NOT_APPLICABLE，0FAIL；与封存基线比较1改善（US process_seed_stability FAIL→PASS）、70不变、0missing/0退化，TEMP恢复不存在。已快进main并逐SHA确认owner三日志未变；安装计划只有.agents/.codex两份现存副本，各4文件，未选择文件漂移0。P0代码问题可关闭，其他能力仍未完成。
+
+P0发布收尾：72ce94c1已推origin/main，正常pre-push的125项检查通过；[精确SHA远端CI](https://github.com/zhengcb81/revenue-forecast/actions/runs/37820231186)成功。两份现存技能副本定点同步共8文件，配置/output及未选择文件保持不变，剩余漂移0。独立RF工作树只剩本次五个pytest生成目录，核对TEMP绝对边界、HEAD及无reparse后清理并移除已合并分支；主仓仍只有原owner三日志和output未提交，原件删除0。

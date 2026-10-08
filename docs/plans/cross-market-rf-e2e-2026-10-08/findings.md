@@ -70,3 +70,11 @@
 ## 泛化验收补充
 
 用户要求全部做完后换三家公司再测试，防止针对第一组修复。第二组应固定在改造后的版本上，独立事实oracle与完整新研究审查；不能仅换ticker重放第一组输入，也不能直接比较不同公司的金额或用不同spec的compare宣称改善。新组保留首次失败，发现共性问题后回责任层并同时复核两组。
+
+Phase6只读探索发现共用问题：Dayu budget transport需要覆盖SDK retry/HEAD软吞异常、同步流的总deadline、超限实际usage及压缩口径；仅子进程timeout会丢partial usage。解析层不能只放开MIME，需同时补结构/选片段/回放/表格排除/语言识别/执行版本；现有HTTP模型只收文本，图片型PPT需受配置/预算约束的视觉或OCR接口，不能假称已有支持。记录供责任层TDD，未实施。
+
+P0已完成候选修复：最小3例证实seed/集合顺序/小权重丢失，9 RED（其余6为新增兼容契约）；新增stable-fsum/1数值revision，以稳定key及补偿归约修共用层。新产物逐字段精确；无revision旧产物仅命名无量纲归约64ULP，历史计数类型/分类/身份/来源/hash不放宽。五类原HEAD金标逐一重现并用新validator验证，非confidence经济差异0；dependent receipt/result SHA按载荷依赖变更，不改原产物。根因测试包含64/65ULP边界、NaN/bool、unknown revision、覆盖/浓度/历史计数/score篡改及真正式发布跨进程。
+
+独立worktree快速检查首跑2个CLI失败：默认sibling误取Temp/filing-fetch旧89c8bdb2，实际当前FF=211a56ff支持兼容flag。显式FF_V2_CODE_ROOT/CWP_V2_CODE_ROOT后125通过，断言未改。P0责任闭包62通过（2subtests），非生产数据问题。RF工作树初建复制49k历史文件，已用sparse收窄责任路径，不清理canonical记录。
+
+P0原三家公司结果证明共用修复有效且旧经济情景不变：US不同seed强校验已PASS，原其他70状态不变。套件整体PARTIAL是原采集/HTML/PPTX/新研究尚未实现，不再有确定性FAIL。一次只读报告脚本read_text漏encoding导致GBK诊断错误，已用UTF-8读取；runner本身退出码实现PARTIAL=2正确，不将PowerShell封装非零归一化误判为套件缺陷。
