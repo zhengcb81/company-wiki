@@ -6,6 +6,8 @@
 
 本目标轮继续实际推进[R3A](r3_current_material_read_implementation_2026-10-08.md)：发现公开日未知会连普通叙述阅读一起阻断，先TDD修producer，明确null当前模式与ISO历史模式。正常OS产品2RED后，当前38单测/0.70秒与26CLI责任/27.08秒绿（10项重叠不双算），Ruff/mypy绿；历史未知日期、身份/SHA仍拒绝。26保护SHA/DB stat保持、七owned目标恢复absent/21916B清理、付费POST0。RF/SW及三仓联调pending，live预算增额仍未答。
 
+Producer源码已正常提交/push4c5590a，精确CI37710026917全部success、80秒；[收据](harness_lanes/results/r3a_exact_source_ci_2026-10-08.json)区分producer与待做consumer/live范围。源码绿已证实，不重复该节点。
+
 夹具沙箱9失败源于WinError5原子rename，不算产品RED；正常OS后才进入接口。非法日期矩阵改为纯DTO单测，避免七次重复DAG；旧None非法断言按明确新语义改为空字符串反例/null正例，没有更改历史日期/hash/identity oracle。补丁一次重复delete/add被拒、一次findings标题不匹配被拒，均在实际源变更前拒绝，再按真实内容修正。
 
 上一目标轮有实际进展：6ae7ddc正常提交/push/精确CI37705927320全部步骤success（78秒），R2生产正式4restore/九facts/ET TXT完成，文档6dd5601已推远端。R3 token增量未答，本轮先实施不依赖模型的R5A。
@@ -36,4 +38,4 @@ R2初始夹具缺SHA/reader清理、错误test路径0执行、JUnit xunit2警告
 
 ## Next Step
 
-R5A已发布，不重做盘点和删除。完成R3A的producer正常发布/精确CI与RF/SW当前模式及三仓节点；R3A和token增量答复俱齐再做R3唯一生产batch，预算不答不POST。正式final/零模型skip/当前消费者/locator/同run恢复/空间一次大节点，然后R5B完整要求审计和最终Git发布。目标保持active。
+R5A与R3A producer已发布，不重做已绿节点。接下来RF/SW当前模式及三仓节点；R3A和token增量答复俱齐再做R3唯一生产batch，预算不答不POST。正式final/零模型skip/当前消费者/locator/同run恢复/空间一次大节点，然后R5B完整要求审计和最终Git发布。目标保持active。

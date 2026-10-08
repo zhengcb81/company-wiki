@@ -1,6 +1,6 @@
 {
   "schema_version": "r3a-current-material-producer/1",
-  "status": "producer_local_verified_consumers_pending",
+  "status": "producer_verified_published_consumers_pending",
   "interface": {
     "schema": "narrative-read-request/1",
     "required_fields_unchanged": true,
@@ -87,12 +87,17 @@
   "remaining": [
     "RF and StockWiki request/receipt/DTO updates in independent clean worktrees",
     "current three-repository CLI node and consumer responsibility tests",
-    "normal publication and exact source CI",
     "R3 live requires pending cumulative token increment; final/resume/space/semantic node still unexecuted"
   ],
   "errors": [
     "PowerShell literal wildcard operand corrected to -g; no data loss",
     "initial guessed unit path absent; actual transport contract file read",
     "apply_patch rejected duplicate delete/add operation for one new file before any source change; corrected with sequential operations"
-  ]
+  ],
+  "source_head": "4c5590a9e711fc451468ee18c9fe433381cc3a93",
+  "source_ci": {
+    "run_id": 37710026917,
+    "conclusion": "success",
+    "elapsed_seconds": 80.0
+  }
 }

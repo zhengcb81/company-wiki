@@ -26,4 +26,6 @@
 
 七个实际存在的owned测试目标已恢复absent（4文件21916B）；26保护文件SHA/大小与生产DB stat保持，生产AUTO仍absent、模型POST0。证据：[producer](harness_lanes/results/r3a_producer_acceptance_2026-10-08.json)、[清根](harness_lanes/results/r3a_test_cleanup_2026-10-08.json)。
 
-**Next Step:** 正常发布producer并核精确源码CI；然后RF/SW独立clean工作树的request/receipt/DTO同步与三仓节点。已检查现有工作树，它们是其他施工历史/owner，不能随意复用或重置。live token增额仍未获答复，真实生产final仍0。
+Producer已正常提交/push为4c5590a，精确[CI37710026917](https://github.com/zhengcb81/company-wiki/actions/runs/37710026917)全部成功、80秒，[CI收据](harness_lanes/results/r3a_exact_source_ci_2026-10-08.json)。提交静态钩子和短pre-push通过，没有增加每commit完整pytest。
+
+**Next Step:** RF/SW独立clean工作树的request/receipt/DTO同步与三仓节点。已检查现有工作树，它们是其他施工历史/owner，不能随意复用或重置。live token增额仍未获答复，真实生产final仍0。

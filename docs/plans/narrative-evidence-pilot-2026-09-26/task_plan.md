@@ -21,7 +21,7 @@ MAIN负责共享接口/生产/总PWF/并线；Dayu零代码修改、IQS独立项
 | G2–G5与早期所有已发包 | 已交付/验收，不重派 | [G5正式验收](g5_main_acceptance_2026-10-07.md)、[G4](g4_main_acceptance_2026-10-07.md)、[G3](g3_main_acceptance_2026-10-07.md)，旧W/F/D/P/N卡通过导航保留 |
 | R0完整计划对账/R1融资分类 | complete | [全PWF实施单](all_pwf_completion_implementation_2026-10-07.md)、66ce0467/真实两PDF分类与精确CI |
 | R2真实生产来源/请求准备 | complete | [R2细则](r2_source_preparation_implementation_2026-10-08.md)：6ae7ddc正常推master/精确CI37705927320全绿、101责任+九原件E2E绿；4restore/9facts/TXT66324B+589B，重复0新增 |
-| R3正式生产与当前跨仓消费 | in_progress：先R3A接口；live仍待token答复 | [R3A细则](r3_current_material_read_implementation_2026-10-08.md)：普通阅读显式null与历史ISO日期分开，producer已实现，RF/SW和三仓节点待做；[完整请求](harness_lanes/results/r3_production_batch_request_2026-10-08.json)、[实测预检](harness_lanes/results/r3_production_request_preflight_2026-10-08.json)仍需真实final/skip/消费者/恢复/空间 |
+| R3正式生产与当前跨仓消费 | in_progress：先R3A接口；live仍待token答复 | [R3A细则](r3_current_material_read_implementation_2026-10-08.md)：普通阅读显式null与历史ISO日期分开，producer4c5590a已发布/精确CI绿，RF/SW和三仓节点待做；[完整请求](harness_lanes/results/r3_production_batch_request_2026-10-08.json)、[实测预检](harness_lanes/results/r3_production_request_preflight_2026-10-08.json)仍需真实final/skip/消费者/恢复/空间 |
 | R4可选原件对象化 | complete：依据收益不迁移 | [G3事实验收](../../implementation/g3-source-facts/MAIN_ACCEPTANCE.md)：注册重复上界94.3MiB、实读额外34.5MiB，allocation/releasable未知，未删原件；见全PWF实施单 |
 | R5文档/历史临时/最终发布 | in_progress，最终未验收 | [R5卡](r5_cleanup_and_navigation_implementation_2026-10-08.md)：8个owned临时根清119913476B/1123文件，26保护SHA及生产DB stat不变；历史pilot账本保留 |
 

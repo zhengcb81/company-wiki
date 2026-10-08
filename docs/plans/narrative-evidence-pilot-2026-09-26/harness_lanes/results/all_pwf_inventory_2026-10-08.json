@@ -1,6 +1,6 @@
 {
   "schema_version": "all-pwf-plan-inventory/2",
-  "status": "R5A_published_R3A_producer_locally_verified_consumers_live_R3_and_final_R5_pending",
+  "status": "R5A_and_R3A_producer_published_current_consumers_live_R3_and_final_R5_pending",
   "previous_inventory": "all_pwf_inventory_2026-10-07.json",
   "historical_archive_commit": "6dd56011a7d49e2b8c147f2163b0708074f9edd7",
   "items": [
@@ -742,7 +742,7 @@
     {
       "path": "progress.md",
       "title": "# Progress：当前执行记录",
-      "sha256": "4cc45a4d8943c12fbdf2870444c3eabc7c16394cde7823e7616f117dd61e47a5",
+      "sha256": "3c0e2de696131cb23acba2f416cfcc79860e583ebf2aa5425e71f82af30ebd59",
       "role": "current_entry_or_current_evidence",
       "unchecked_items": 0
     },
@@ -771,7 +771,7 @@
       "path": "r3_current_material_read_implementation_2026-10-08.md",
       "role": "current_entry_or_current_evidence",
       "unchecked_items": 0,
-      "sha256": "978a112bbcec466cc4805c293cb128a195e744aff907152422c5f7c6c77b405e",
+      "sha256": "b5e46d540048e31a27cc0b1943f4e361fe868332b5c00f4bd293a58dde63f708",
       "title": "# R3A：普通资料阅读与历史时点读取分开"
     },
     {
@@ -875,7 +875,7 @@
     {
       "path": "task_plan.md",
       "title": "# 公司来源平台：唯一当前施工入口",
-      "sha256": "c6762cea28e2736a089be2fdede6ea2c5d87ed4bcc2893975c6837b81d3da564",
+      "sha256": "bb1421511d099842eb95f19603821e7cc0b05fa8013cc11d8f34e330a04629cd",
       "role": "current_entry_or_current_evidence",
       "unchecked_items": 0
     },
@@ -909,7 +909,7 @@
     }
   ],
   "verification": {
-    "current_local_links_checked": 111,
+    "current_local_links_checked": 113,
     "missing_current_links": 0,
     "historical_top_notices_checked": 120,
     "R3_post_count": 0,
