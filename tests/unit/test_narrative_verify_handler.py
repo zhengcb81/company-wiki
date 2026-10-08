@@ -616,7 +616,7 @@ def test_verify_handler_rejects_dependency_identity_and_version_drift(case: str)
     assert raw.effects == ()
 
 
-def test_verify_handler_source_metadata_drift_blocks_before_replay() -> None:
+def test_verify_handler_keeps_generation_language_after_current_observation_changes() -> None:
     data, selected = _selected()
     summary = _summary(selected)
     reader = FakeReader(selected, data)
@@ -624,6 +624,9 @@ def test_verify_handler_source_metadata_drift_blocks_before_replay() -> None:
 
     raw = _run(data, selected, summary, reader=reader)
 
-    assert raw.outcome is HandlerOutcome.TERMINAL_FAILURE
-    assert raw.error is not None and raw.error.code == "INPUT_SCHEMA_INVALID"
-    assert raw.effects == ()
+    assert raw.outcome is HandlerOutcome.SUCCEEDED
+    assert raw.error is None
+    bundle = NarrativeBundle.from_dict(raw.result)
+    assert bundle.source_metadata.language == selected.source_metadata.language
+    assert bundle.replay.locator_count == len(selected.evidence_spans)
+    assert len(raw.effects) == 1

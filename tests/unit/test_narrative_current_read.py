@@ -39,13 +39,12 @@ def test_missing_cutoff_does_not_implicitly_select_current_mode():
         NarrativeReadRequest.from_dict(request)
 
 
-@pytest.mark.parametrize("language, allowed", [(None, True), ("en", True), ("zh", False)])
-def test_missing_registered_language_does_not_contradict_detected_language(language, allowed):
+@pytest.mark.parametrize("language", [None, "en", "zh"])
+def test_current_language_observation_does_not_gate_original_language_bundle(language):
     import json
     from pathlib import Path
     from company_wiki.automation.narrative_contracts import NarrativeBundle
     from company_wiki.automation.narrative_transport import _require_manifest
-    from company_wiki.automation.narrative_transport_contracts import NarrativeTransportError
     golden = Path(__file__).parents[1] / "fixtures" / "narrative_transport_v1"
     bundle = NarrativeBundle.from_dict(json.loads((golden / "bundle.json").read_bytes()))
     value = json.loads((golden / "read_request.json").read_bytes())
@@ -53,10 +52,6 @@ def test_missing_registered_language_does_not_contradict_detected_language(langu
     request = NarrativeReadRequest.from_dict(value)
     manifest = json.loads((golden / "read_receipt.json").read_bytes())["manifest"]
     manifest["language"] = language
-    if allowed:
-        _require_manifest(manifest, request, bundle)
-        assert manifest["language"] == language
-        assert bundle.source_metadata.language == "en"
-    else:
-        with pytest.raises(NarrativeTransportError, match="source_identity_mismatch"):
-            _require_manifest(manifest, request, bundle)
+    _require_manifest(manifest, request, bundle)
+    assert manifest["language"] == language
+    assert bundle.source_metadata.language == "en"

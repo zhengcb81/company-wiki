@@ -212,3 +212,14 @@ P1 FF/ET费用能力集中验收：6RED/7PASS→ET费用13PASS，实际用量3RE
 
 
 2026-10-08 发布前修正：1a58ad11尚未推送；此前新增回放Markdown含CRLF，最终staged diff-check报告79行尾空白，提交封装未因该非零码停止，不能把最终diff-check记为绿。现规范该生成报告为LF，并将检查与提交分开执行。用户确认三外包均完成，MAIN进入三卡验收与接线，不新增身份签收门。
+
+
+2026-10-08 三卡集中复验：FORMAT64PASS/12.45秒；RF明确责任集204PASS+8subtests/12.60秒；FF36PASS/4.29秒，外部模型0。交接所列文件SHA全匹配；RF HEAD新增纯handoff提交b1763fc0，代码未变；FORMAT HEAD d48ca1be为manifest提交，二者handoff.head仍指功能提交属已解释差异。RF handoff把1387PASS/99FAIL/4ERROR的宽集退出码写0不准确，本次只签实际204责任集；不把稀疏环境失败归一成绿。FF两未提交交接文件已明确解释，MAIN会收进主线交接记录。误猜execution_versions.py不存在，真实版本函数位于narrative_batch.py/request.py；下一结构调查先CodeGraph再实际文件。
+
+
+## 冻结整体验收完成
+
+冻结CWP bf8f0e82、RF72ce94c1、FF697af966、ET282e8908的full/replay完成143.724秒：47PASS/3BLOCKED/14NOT_RUN/7NOT_APPLICABLE/0FAIL。相同规格71状态全部不变，无missing/regression；保护原件不变且owned测试根恢复不存在，外部模型和费用均0。PARTIAL对应具名能力与最终新研究缺口，不是失败测试。详细结果见metadata_responsibility_full_replay.json和metadata_responsibility_replay_comparison.json。
+
+
+发布监控：bf8f0e82远端37847182377失败，annotations指向四份未纳入前一集中集的unit旧许可合同。只跑这四份真实复现21FAIL/78PASS（15.41秒），依据既有已授权责任规则改为当前观察可见/旧生成账本不重签/真实SHA损坏仍拒绝，99PASS（17.65秒）。不删测试或缩小CI。测试短根r6u待清理，首轮长根被pytest自动relocate并已自动恢复不存在。FF已快进a1f3e4f并推送；RF已快进b1763fc0但prepush拦七个未使用import/无插值f-string，定点修复后再发布，未绕过hook。

@@ -38,7 +38,7 @@
 
 ## Next Step
 
-**当前行动（2026-10-08 Phase6）**：[身份核验责任收敛](phase6/identity_responsibility_simplification.md)已完成入库节点；当前元数据/读取/恢复责任节点集中测试已绿，正在冻结提交与同模式三市场验收。随后优先接收三条外包交付、现有Worker接线，并安排跨run内容复用（旧指纹/辅助metadata不应重复触发模型）。用户已将 [三条独立施工卡](harness_lanes/README.md) 交给其他 harness；MAIN 不写三线独占目录，随后继续现有 Worker 接线与最终两组验收。此前段落为阶段历史记录，不再作为当前施工起点。
+**当前行动（2026-10-08 Phase6）**：入库和元数据/读取/恢复责任收敛已集中及冻结三市场验收；现在接收并合并R6-FORMAT、R6-RF-INPUT、R6-FF-CAUSE三个已交付施工包，统一现有Worker/回放/错误诊断与RF真实输入消费。三线复验已绿，状态和接口见phase6/r6_handoff_intake.md；接线不增加身份许可或人工签收。随后跨run内容复用及最终两组新研究/独立审查。下方旧Next Step段落只作历史记录。
 
 ### Phase 5: 固化三市场回归套件（2026-10-08 新请求）
 **Status:** complete

@@ -502,7 +502,7 @@ def test_select_handler_does_not_require_provider_policy_for_transcript() -> Non
 
 
 @pytest.mark.parametrize("drift", ["source_hash", "read_policy", "metadata"])
-def test_select_handler_rejects_source_identity_and_metadata_drift(drift: str) -> None:
+def test_select_handler_checks_bytes_without_requiring_old_observations(drift: str) -> None:
     data = b"Full Conference Call Transcript\nCEO: We launched a new product.\n"
     payload = _payload(
         data,
@@ -522,13 +522,18 @@ def test_select_handler_rejects_source_identity_and_metadata_drift(drift: str) -
         reader.metadata["language"] = "mixed"
 
     raw, _ = _run(payload, data, reader=reader)
+    if drift != "source_hash":
+        assert raw.outcome is HandlerOutcome.SUCCEEDED
+        assert raw.error is None
+        selected = NarrativeSelectResult.from_dict(raw.result)
+        assert selected.source_ref.content_sha256 == _sha(data)
+        assert selected.source_metadata.language == "en"
+        assert selected.evidence_spans
+        assert selected.expected_read_policy_sha256 == payload["expected_read_policy_sha256"]
+        return
     assert raw.outcome is HandlerOutcome.TERMINAL_FAILURE
     assert raw.error is not None
-    assert raw.error.code in {
-        "POLICY_DENIED",
-        "SOURCE_HASH_MISMATCH",
-        "INPUT_SCHEMA_INVALID",
-    }
+    assert raw.error.code == "SOURCE_HASH_MISMATCH"
     assert raw.effects == ()
 
 

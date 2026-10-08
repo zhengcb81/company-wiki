@@ -1,6 +1,6 @@
 # MAIN：身份核验责任收敛与入库解耦
 
-状态：2026-10-08 调查与 TDD 施工中。用户再次明确要求系统性减少冗余身份核验；本项提升为 MAIN 当前最高优先级，三张已分派卡的写范围维持不变。
+状态：2026-10-08 入库与元数据/读取/恢复两个责任节点已集中验收；后续跨run内容复用与外包接线进行中。用户再次明确要求系统性减少冗余身份核验；本项提升为 MAIN 当前最高优先级，三张已分派卡的写范围维持不变。
 
 ## 已证实的重复机制
 
@@ -78,3 +78,6 @@ MAIN 只改现有 CWP source_catalog / automation 及相关测试。R6-FORMAT �
 当前node的恢复修复不会改变用户明确发起的不同batch。只读发现 `test_narrative_batch_cross_run_e2e.py` 现有合同明确期待3个不同run同一source仍发3次模型，只对相同结果的对象字节去重；`SourceRevisionEventPayload.input_hash` 包含旧指纹和全source_metadata。不能把“相同run零重跑”说成跨run内容缓存完成。
 
 下一责任节点先调查 selector 对title/kind/language的真实使用，TDD覆盖同SourceRef、同解析/选择/模型版本、不同目录/title/url/来源日期修正的默认新batch应复用内容且新增模型费用0；明确refresh/变更生成算法或实际片段才生成新版本。生成身份应由真实源字节、parser/selector版本、selected spans、原语言、prompt/model配置决定，元数据用于当前来源描述和显式选择。沿用AUTO及content-addressed artifacts，不复制原件、不增许可receipt/缓存数据库、不给新run冒认旧费用。旧事件/用量保持原样；先验证默认复用与显式refresh契约，再实施。此项尚未改代码，单列后续，不盲目从旧事件hash删字段造成账本或selector行为漂移。
+
+
+当前更新：本文件“连续下一节点”五项已实现并通过集中测试与冻结三市场同规格回放，详见metadata_responsibility_acceptance.md。早期RED/施工结果只为历史记录；尚未完成的是跨run内容复用、格式/诊断/RF输入主线接线与两组新研究，不能重新把已关闭门禁列成待做。

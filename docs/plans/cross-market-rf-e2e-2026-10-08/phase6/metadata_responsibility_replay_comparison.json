@@ -1,0 +1,588 @@
+{
+  "comparable": true,
+  "incompatible_fields": [],
+  "changes": [
+    {
+      "case": "ALL",
+      "id": "ff_et_cwp_contract",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "ALL",
+      "id": "isolation_cleanup",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "CN-688012",
+      "id": "arithmetic",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "CN-688012",
+      "id": "canonical_worker",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "CN-688012",
+      "id": "correct_provider_download",
+      "change": "unchanged",
+      "before": "NOT_RUN",
+      "after": "NOT_RUN"
+    },
+    {
+      "case": "CN-688012",
+      "id": "domain_boundaries",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "CN-688012",
+      "id": "formal_forecast",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "CN-688012",
+      "id": "format_html",
+      "change": "unchanged",
+      "before": "NOT_APPLICABLE",
+      "after": "NOT_APPLICABLE"
+    },
+    {
+      "case": "CN-688012",
+      "id": "format_pptx",
+      "change": "unchanged",
+      "before": "NOT_APPLICABLE",
+      "after": "NOT_APPLICABLE"
+    },
+    {
+      "case": "CN-688012",
+      "id": "format_support",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "CN-688012",
+      "id": "frozen_bytes",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "CN-688012",
+      "id": "future_backtest",
+      "change": "unchanged",
+      "before": "NOT_APPLICABLE",
+      "after": "NOT_APPLICABLE"
+    },
+    {
+      "case": "CN-688012",
+      "id": "identity_period",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "CN-688012",
+      "id": "narrative_forecast_consumption",
+      "change": "unchanged",
+      "before": "NOT_RUN",
+      "after": "NOT_RUN"
+    },
+    {
+      "case": "CN-688012",
+      "id": "narrative_virtual_read",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "CN-688012",
+      "id": "official_provenance",
+      "change": "unchanged",
+      "before": "NOT_RUN",
+      "after": "NOT_RUN"
+    },
+    {
+      "case": "CN-688012",
+      "id": "old_snapshot_immutable",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "CN-688012",
+      "id": "process_seed_stability",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "CN-688012",
+      "id": "raw_replay",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "CN-688012",
+      "id": "rf_ff_reuse",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "CN-688012",
+      "id": "skill_coverage",
+      "change": "unchanged",
+      "before": "NOT_RUN",
+      "after": "NOT_RUN"
+    },
+    {
+      "case": "CN-688012",
+      "id": "snapshot_registry",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "CN-688012",
+      "id": "transcript_live",
+      "change": "unchanged",
+      "before": "NOT_RUN",
+      "after": "NOT_RUN"
+    },
+    {
+      "case": "CN-688012",
+      "id": "virtual_move",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "CN-688012",
+      "id": "wrong_hash",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "HK-00700",
+      "id": "arithmetic",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "HK-00700",
+      "id": "canonical_worker",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "HK-00700",
+      "id": "correct_provider_download",
+      "change": "unchanged",
+      "before": "NOT_RUN",
+      "after": "NOT_RUN"
+    },
+    {
+      "case": "HK-00700",
+      "id": "domain_boundaries",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "HK-00700",
+      "id": "formal_forecast",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "HK-00700",
+      "id": "format_html",
+      "change": "unchanged",
+      "before": "NOT_APPLICABLE",
+      "after": "NOT_APPLICABLE"
+    },
+    {
+      "case": "HK-00700",
+      "id": "format_pptx",
+      "change": "unchanged",
+      "before": "NOT_APPLICABLE",
+      "after": "NOT_APPLICABLE"
+    },
+    {
+      "case": "HK-00700",
+      "id": "format_support",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "HK-00700",
+      "id": "frozen_bytes",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "HK-00700",
+      "id": "future_backtest",
+      "change": "unchanged",
+      "before": "NOT_APPLICABLE",
+      "after": "NOT_APPLICABLE"
+    },
+    {
+      "case": "HK-00700",
+      "id": "identity_period",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "HK-00700",
+      "id": "narrative_forecast_consumption",
+      "change": "unchanged",
+      "before": "NOT_RUN",
+      "after": "NOT_RUN"
+    },
+    {
+      "case": "HK-00700",
+      "id": "narrative_virtual_read",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "HK-00700",
+      "id": "official_provenance",
+      "change": "unchanged",
+      "before": "BLOCKED",
+      "after": "BLOCKED"
+    },
+    {
+      "case": "HK-00700",
+      "id": "old_snapshot_immutable",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "HK-00700",
+      "id": "process_seed_stability",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "HK-00700",
+      "id": "raw_replay",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "HK-00700",
+      "id": "rf_ff_reuse",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "HK-00700",
+      "id": "skill_coverage",
+      "change": "unchanged",
+      "before": "NOT_RUN",
+      "after": "NOT_RUN"
+    },
+    {
+      "case": "HK-00700",
+      "id": "snapshot_registry",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "HK-00700",
+      "id": "transcript_live",
+      "change": "unchanged",
+      "before": "NOT_RUN",
+      "after": "NOT_RUN"
+    },
+    {
+      "case": "HK-00700",
+      "id": "virtual_move",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "HK-00700",
+      "id": "wrong_hash",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "arithmetic",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "canonical_worker",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "correct_provider_download",
+      "change": "unchanged",
+      "before": "NOT_RUN",
+      "after": "NOT_RUN"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "domain_boundaries",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "formal_forecast",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "format_html",
+      "change": "unchanged",
+      "before": "BLOCKED",
+      "after": "BLOCKED"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "format_pptx",
+      "change": "unchanged",
+      "before": "BLOCKED",
+      "after": "BLOCKED"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "format_support",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "frozen_bytes",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "future_backtest",
+      "change": "unchanged",
+      "before": "NOT_APPLICABLE",
+      "after": "NOT_APPLICABLE"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "identity_period",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "narrative_forecast_consumption",
+      "change": "unchanged",
+      "before": "NOT_RUN",
+      "after": "NOT_RUN"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "narrative_virtual_read",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "official_provenance",
+      "change": "unchanged",
+      "before": "NOT_RUN",
+      "after": "NOT_RUN"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "old_snapshot_immutable",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "process_seed_stability",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "raw_replay",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "rf_ff_reuse",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "skill_coverage",
+      "change": "unchanged",
+      "before": "NOT_RUN",
+      "after": "NOT_RUN"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "snapshot_registry",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "transcript_live",
+      "change": "unchanged",
+      "before": "NOT_RUN",
+      "after": "NOT_RUN"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "virtual_move",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "wrong_hash",
+      "change": "unchanged",
+      "before": "PASS",
+      "after": "PASS"
+    }
+  ],
+  "observations": [
+    {
+      "metric": "seconds",
+      "before": 220.179,
+      "after": 143.724
+    },
+    {
+      "metric": "test_tree_final_bytes_before_cleanup",
+      "before": 69944731,
+      "after": 69944919
+    },
+    {
+      "metric": "external_model_calls",
+      "before": 0,
+      "after": 0
+    },
+    {
+      "metric": "project_llm_cost_usd",
+      "before": 0,
+      "after": 0
+    },
+    {
+      "case": "CN-688012",
+      "checkpoint": "canonical_worker",
+      "metric": "span_count",
+      "before": 96,
+      "after": 96
+    },
+    {
+      "case": "CN-688012",
+      "checkpoint": "canonical_worker",
+      "metric": "local_model_posts",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "case": "CN-688012",
+      "checkpoint": "canonical_worker",
+      "metric": "repeat_model_posts",
+      "before": 0,
+      "after": 0
+    },
+    {
+      "case": "HK-00700",
+      "checkpoint": "canonical_worker",
+      "metric": "span_count",
+      "before": 12,
+      "after": 12
+    },
+    {
+      "case": "HK-00700",
+      "checkpoint": "canonical_worker",
+      "metric": "local_model_posts",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "case": "HK-00700",
+      "checkpoint": "canonical_worker",
+      "metric": "repeat_model_posts",
+      "before": 0,
+      "after": 0
+    },
+    {
+      "case": "US-MSFT",
+      "checkpoint": "canonical_worker",
+      "metric": "span_count",
+      "before": 49,
+      "after": 49
+    },
+    {
+      "case": "US-MSFT",
+      "checkpoint": "canonical_worker",
+      "metric": "local_model_posts",
+      "before": 1,
+      "after": 1
+    },
+    {
+      "case": "US-MSFT",
+      "checkpoint": "canonical_worker",
+      "metric": "repeat_model_posts",
+      "before": 0,
+      "after": 0
+    }
+  ]
+}

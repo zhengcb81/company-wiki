@@ -40,3 +40,8 @@
 
 
 清理：9个具名owned pytest根已恢复不存在，释放207,312,882B；原件删除0、生产配置修改0、三个外包工作树删除0。明示类型/大小等实际当前规则继续生效，未添加日常commit测试。
+
+
+## 冻结整体验收完成
+
+冻结CWP bf8f0e82、RF72ce94c1、FF697af966、ET282e8908的full/replay完成143.724秒：47PASS/3BLOCKED/14NOT_RUN/7NOT_APPLICABLE/0FAIL。相同规格71状态全部不变，无missing/regression；保护原件不变且owned测试根恢复不存在，外部模型和费用均0。PARTIAL对应具名能力与最终新研究缺口，不是失败测试。详细结果见metadata_responsibility_full_replay.json和metadata_responsibility_replay_comparison.json。

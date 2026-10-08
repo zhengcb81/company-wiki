@@ -117,7 +117,7 @@ def frozen_run(tmp_path, request):
     ("fiscal_year", 2025), ("fiscal_period", "Q2"), ("period_end", "2026-06-30"),
     ("published_date", "2026-05-03"), ("form_type", "10-K"),
 ])
-def test_resume_rechecks_real_current_identity_and_period_without_rebinding(frozen_run, field, value):
+def test_resume_observes_current_facts_without_rebinding_frozen_content(frozen_run, field, value):
     from company_wiki.automation import narrative_batch as batch
     state, request, store, runs, run = frozen_run
     document_id = request.sources[0].document_id
@@ -133,8 +133,14 @@ def test_resume_rechecks_real_current_identity_and_period_without_rebinding(froz
     # The responsible reader actually observes the changed assertion.
     ref = state.reader.query_ref(document_id, request.sources[0].source_id, request.sources[0].content_sha256)
     assert state.reader.describe_version(ref)[field] == value
-    with pytest.raises(batch.BatchResumeError, match="BATCH_SOURCE_FACTS_CHANGED"):
-        batch._resume_binding(request, state.reader, store, runs, run, deadline=None)
+    before_jobs = store.list_jobs()
+    before_budget = runs.budget_snapshot(run.run_id)
+    binding, _versions, jobs = batch._resume_binding(
+        request, state.reader, store, runs, run, deadline=None)
+    assert binding.input_hash == run.input_hash
+    assert jobs == store.list_jobs(job_ids=run.job_ids)
+    assert store.list_jobs() == before_jobs
+    assert runs.budget_snapshot(run.run_id) == before_budget
     assert runs.get_run(run.run_id) == run
     assert all(store.list_attempts(job_id) == () for job_id in run.job_ids)
 
@@ -182,18 +188,14 @@ def test_resume_preserves_original_events_and_usage_for_both_binding_versions(fr
     assert runs.get_run(run.run_id) == run
 
 
-def test_only_scoped_history_can_prove_unchanged_rules_after_unrelated_root_addition(frozen_run):
+def test_unrelated_root_does_not_gate_either_frozen_binding_version(frozen_run):
     from company_wiki.automation import narrative_batch as batch
     from company_wiki.source_catalog import RootSpec
     state, request, store, runs, run = frozen_run
     state.catalog.config = replace(state.catalog.config, roots=state.catalog.config.roots + (
         RootSpec("unrelated", state.root / "unrelated", "directory"),))
-    if json.loads(run.binding_json)["schema_version"] == "narrative-run-binding/1":
-        with pytest.raises(batch.BatchResumeError, match="BATCH_READ_POLICY_CHANGED"):
-            batch._resume_binding(request, state.reader, store, runs, run, deadline=None)
-    else:
-        binding, _versions, _jobs = batch._resume_binding(
-            request, state.reader, store, runs, run, deadline=None)
-        assert binding.input_hash == run.input_hash
+    binding, _versions, _jobs = batch._resume_binding(
+        request, state.reader, store, runs, run, deadline=None)
+    assert binding.input_hash == run.input_hash
     assert runs.get_run(run.run_id) == run
     assert all(store.list_attempts(job_id) == () for job_id in run.job_ids)
