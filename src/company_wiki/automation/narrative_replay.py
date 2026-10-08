@@ -15,8 +15,10 @@ from company_wiki.source_catalog.transcript_text_extract import (
     extract_transcript_material,
 )
 from company_wiki.source_contract import EvidenceSpan
+from company_wiki.document_normalization import normalize_document
 
 from .narrative_contracts import NarrativeBundle, NarrativeSelectResult, TranscriptByteBinding
+from .narrative_formats import NORMALIZED_MIME_TYPES, parser_component
 
 
 class NarrativeReplayError(ValueError):
@@ -92,6 +94,31 @@ def _replay_transcript(
     _require_full_replay(selected.evidence_spans, verified, failed)
 
 
+def _replay_normalized(data: bytes, selected: NarrativeSelectResult | NarrativeBundle) -> None:
+    """Parse once, then match every selected locator against actual source units."""
+    source = selected.source_ref
+    name, version = parser_component(source.mime_type)
+    if isinstance(selected, NarrativeSelectResult):
+        if (selected.parser.name, selected.parser.version) != (name, version):
+            raise NarrativeReplayError("unsupported normalization parser")
+    elif selected.versions.parser != version:
+        raise NarrativeReplayError("unsupported normalization parser")
+    document = normalize_document(data, source_id=source.source_id,
+                                  source_sha256=source.content_sha256, mime_type=source.mime_type)
+    if not document.structure.coverage_complete:
+        raise NarrativeReplayError("source normalization is incomplete")
+    by_locator = {unit.metadata["source_locator"]: unit for unit in document.units}
+    for span in selected.evidence_spans:
+        unit = by_locator.get(span.structured_value.get("source_locator"))
+        if (unit is None or span.parser_name != name or span.parser_version != version
+                or span.coordinates != unit.coordinates or span.raw_text != unit.raw_text
+                or span.source_id != source.source_id
+                or span.structured_value.get("unit_kind") != unit.unit_kind
+                or span.structured_value.get("source_role") != unit.source_role
+                or any(span.structured_value.get(key) != value for key, value in unit.metadata.items())):
+            raise NarrativeReplayError("selected locator differs from original normalized unit")
+
+
 def replay_narrative_evidence(
     data: bytes,
     selected: NarrativeSelectResult | NarrativeBundle,
@@ -104,6 +131,9 @@ def replay_narrative_evidence(
         raise NarrativeReplayError("original bytes differ from source reference")
     try:
         if selected.source_metadata.source_class == "filing":
+            if source.mime_type in NORMALIZED_MIME_TYPES:
+                _replay_normalized(data, selected)
+                return len(selected.evidence_spans)
             replayer = pdf_replayer or verify_pdf_evidence_spans_bytes
             verified, failed = replayer(
                 data, source_id=source.source_id,

@@ -96,7 +96,6 @@ def validate_source_metadata(
         "content_sha256": source.content_sha256,
         "byte_size": source.byte_size,
         "mime_type": source.mime_type,
-        "document_kind": payload.source_metadata.document_kind,
     }
     if {key: metadata.get(key) for key in expected} != expected:
         raise NarrativeSourceGuardError(

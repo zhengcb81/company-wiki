@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Any, Protocol
 
 from company_wiki.source_catalog.narrative_document import (
@@ -11,7 +11,6 @@ from company_wiki.source_catalog.narrative_document import (
     NarrativeParseResult,
 )
 from company_wiki.source_catalog.narrative_evidence import (
-    NARRATIVE_PARSER_NAME,
     NARRATIVE_PARSER_VERSION,
     NARRATIVE_SELECTOR_NAME,
     NARRATIVE_SELECTOR_VERSION,
@@ -29,8 +28,10 @@ from company_wiki.source_catalog.transcript_text_extract import (
     extract_transcript_material,
 )
 from company_wiki.source_contract import EvidenceSpan
+from company_wiki.document_normalization import normalize_document
 
 from .execution_context import JobExecutionContext
+from .narrative_formats import NORMALIZED_MIME_TYPES, parser_component
 from .models import (
     HandlerError,
     HandlerMetrics,
@@ -288,8 +289,33 @@ class NarrativeSelectHandler:
         context: JobExecutionContext,
     ) -> _SelectionWork:
         if payload.source_metadata.source_class == "filing":
+            if payload.source_ref.mime_type in NORMALIZED_MIME_TYPES:
+                return self._select_normalized(payload, data, context)
             return self._select_pdf(payload, data, context)
         return self._select_transcript(payload, data, context)
+
+    def _select_normalized(
+        self, payload: SourceRevisionEventPayload, data: bytes,
+        context: JobExecutionContext,
+    ) -> _SelectionWork:
+        try:
+            document = normalize_document(
+                data, source_id=payload.source_ref.source_id,
+                source_sha256=payload.source_ref.content_sha256,
+                mime_type=payload.source_ref.mime_type,
+            )
+        except (RuntimeError, ValueError) as exc:
+            raise _SelectFailure(
+                "PARSER_INCOMPLETE", HandlerOutcome.TERMINAL_FAILURE,
+                "verified filing format cannot be parsed completely",
+            ) from exc
+        language = payload.source_metadata.language
+        parsed = replace(document.structure, language=language,
+                         units=tuple(replace(unit, language=language) for unit in document.units))
+        context.checkpoint()
+        package = self._run_selector(payload, parsed)
+        self._require_usable_selection(parsed, package)
+        return _SelectionWork(parsed, package, None)
 
     def _select_pdf(
         self,
@@ -408,14 +434,17 @@ class NarrativeSelectHandler:
             if material is not None
             else ()
         )
+        parser_name, parser_version = parser_component(
+            payload.source_ref.mime_type, payload.source_metadata.source_class,
+        )
         return {
             "schema_version": SELECT_RESULT_SCHEMA,
             "source_ref": payload.source_ref.to_dict(),
             "expected_read_policy_sha256": payload.expected_read_policy_sha256,
             "source_metadata": payload.source_metadata.to_dict(),
             "parser": {
-                "name": NARRATIVE_PARSER_NAME,
-                "version": NARRATIVE_PARSER_VERSION,
+                "name": parser_name,
+                "version": parser_version,
             },
             "selector": {
                 "name": NARRATIVE_SELECTOR_NAME,

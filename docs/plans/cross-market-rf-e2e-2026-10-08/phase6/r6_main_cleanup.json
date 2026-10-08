@@ -1,0 +1,39 @@
+{
+  "schema_version": "r6-main-test-cleanup/1",
+  "roots": [
+    {
+      "root": "C:/Users/郑曾波/Projects/company-wiki/tmp/r6u",
+      "bytes": 13078036,
+      "restored_absent": true
+    },
+    {
+      "root": "C:/Users/郑曾波/Projects/company-wiki/tmp/r6ci",
+      "bytes": 92256828,
+      "restored_absent": true
+    },
+    {
+      "root": "C:/Users/郑曾波/Projects/company-wiki/tmp/r6f3",
+      "bytes": 3171136,
+      "restored_absent": true
+    },
+    {
+      "root": "C:/Users/郑曾波/Projects/company-wiki/tmp/r6f4",
+      "bytes": 3171136,
+      "restored_absent": true
+    },
+    {
+      "root": "C:/Users/郑曾波/Projects/company-wiki/tmp/r6fg",
+      "bytes": 30020227,
+      "restored_absent": true
+    },
+    {
+      "root": "C:/Users/郑曾波/Projects/company-wiki/tmp/r6ft",
+      "bytes": 0,
+      "restored_absent": true
+    }
+  ],
+  "released_bytes": 141697363,
+  "originals_removed": 0,
+  "external_worktrees_removed": 0,
+  "production_config_changed": false
+}

@@ -219,7 +219,6 @@ SequenceLike = Any
 def _pptx_module() -> Any:
     try:
         import pptx as _pptx_pkg
-        from pptx import Presentation
     except ImportError as exc:  # pragma: no cover - environment-specific
         raise RuntimeError(
             "PPTX parsing requires the optional python-pptx dependency"
@@ -629,7 +628,7 @@ def parse_pptx(
         return _result(
             state, preflight, page_count=0, format_mime=mime_main
         )
-    pptx = _pptx_module()
+    _pptx_module()
     try:
         from pptx import Presentation
 

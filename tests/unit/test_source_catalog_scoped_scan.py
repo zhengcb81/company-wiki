@@ -130,7 +130,7 @@ def test_registration_service_uses_configured_reader_without_old_rollout_scan(tm
 @pytest.mark.parametrize("declared_kind", ["ir_policy", "meeting_notice", "10-K", "Annual_Report"])
 def test_repeated_registration_preserves_capture_kind_without_inventing_conflict(tmp_path, declared_kind):
     from company_wiki.source_catalog.service import SourceCatalog
-    from company_wiki.source_catalog.source_reader import SourceReadError, SourceVersionReader
+    from company_wiki.source_catalog.source_reader import SourceVersionReader
 
     config, first, _ = _lake(tmp_path)
     config = replace(config, roots=(replace(config.roots[0], adapter_id="company_raw_v1"),))
@@ -155,14 +155,16 @@ def test_repeated_registration_preserves_capture_kind_without_inventing_conflict
             "WHERE document_id=?", (ref.document_id,))["metadata_json"])
         assert not any(item.get("conflicts") for item in metadata["r4_provenance"]["fields"].values())
         assert metadata["acquisition"]["document_kind"].casefold() == declared_kind.casefold()
-        # A genuinely different declaration still fails; no blanket conflict waiver.
+        # A disputed declaration becomes unknown; bytes remain available.
         sidecar = first.with_name(first.name + ".source.json")
         changed = json.loads(sidecar.read_text(encoding="utf-8"))
         changed["document_kind"] = "prospectus"
         sidecar.write_text(json.dumps(changed), encoding="utf-8")
         catalog.register_sources(root_id="company_raw", relative_paths={
             first.relative_to(config.roots[0].path).as_posix()})
-        with pytest.raises(SourceReadError, match="metadata_conflict"):
-            reader.describe_version(ref)
+        disputed = reader.describe_version(ref)
+        assert disputed["document_kind"] is None
+        assert reader.metadata_diagnostics(ref)["conflicted_fields"]
+        assert reader.open_version(ref, purpose="source_export").content_sha256 == ref.content_sha256
     finally:
         catalog.close()

@@ -16,6 +16,8 @@ from .models import canonical_json, canonical_json_hash
 from .narrative_contracts import SourceRefValue
 from .narrative_http_model import NarrativeHTTPModel
 from .narrative_model import MODEL_REQUEST_SCHEMA, NARRATIVE_PROMPT_VERSION
+from .narrative_formats import NORMALIZED_MIME_TYPES
+from company_wiki.document_normalization import PARSER_VERSION as NORMALIZATION_PARSER_VERSION
 
 
 BATCH_REQUEST_SCHEMA = "narrative-batch-request/1"
@@ -137,21 +139,27 @@ class NarrativeBatchRequest:
     @property
     def execution_versions(self) -> dict[str, str]:
         """Freeze these once on a new run; never substitute them on resume."""
-        return {
+        versions = {
             "adapter": NarrativeHTTPModel.adapter_id,
             "model_request_schema": MODEL_REQUEST_SCHEMA,
             "prompt": NARRATIVE_PROMPT_VERSION,
             "parser": NARRATIVE_PARSER_VERSION,
             "selector": NARRATIVE_SELECTOR_VERSION,
         }
+        if any(source.mime_type in NORMALIZED_MIME_TYPES for source in self.sources):
+            versions["document_normalization"] = NORMALIZATION_PARSER_VERSION
+        return versions
 
     @property
     def input_hash(self) -> str:
-        return canonical_json_hash({
+        identity = {
             "request": self.to_dict(), "adapter": NarrativeHTTPModel.adapter_id,
             "prompt": NARRATIVE_PROMPT_VERSION, "parser": NARRATIVE_PARSER_VERSION,
             "selector": NARRATIVE_SELECTOR_VERSION,
-        })
+        }
+        if any(source.mime_type in NORMALIZED_MIME_TYPES for source in self.sources):
+            identity["document_normalization"] = NORMALIZATION_PARSER_VERSION
+        return canonical_json_hash(identity)
 
 
 __all__ = ["BATCH_REQUEST_SCHEMA", "NarrativeBatchRequest"]

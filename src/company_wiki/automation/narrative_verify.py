@@ -5,8 +5,6 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from company_wiki.source_catalog.narrative_evidence import (
-    NARRATIVE_PARSER_NAME,
-    NARRATIVE_PARSER_VERSION,
     NARRATIVE_SELECTOR_NAME,
     NARRATIVE_SELECTOR_VERSION,
 )
@@ -26,6 +24,7 @@ from .models import (
     canonical_json_hash,
     make_effect_key,
 )
+from .narrative_formats import parser_component
 from .narrative_contracts import (
     BUNDLE_SCHEMA,
     ContractSizeError,
@@ -146,9 +145,12 @@ def _validate_dependency_identity(
             HandlerOutcome.TERMINAL_FAILURE,
             "dependency identity differs from the source event",
         )
+    parser_name, parser_version = parser_component(
+        selected.source_ref.mime_type, selected.source_metadata.source_class,
+    )
     if (
-        selected.parser.name != NARRATIVE_PARSER_NAME
-        or selected.parser.version != NARRATIVE_PARSER_VERSION
+        selected.parser.name != parser_name
+        or selected.parser.version != parser_version
         or selected.selector.name != NARRATIVE_SELECTOR_NAME
         or selected.selector.version != NARRATIVE_SELECTOR_VERSION
         or (

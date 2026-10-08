@@ -10,7 +10,7 @@ be chosen per deployment, but callers must always be able to bound the work.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field, fields
+from dataclasses import dataclass
 import math
 import time
 

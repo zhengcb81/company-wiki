@@ -1368,6 +1368,8 @@ def _table_scan_signal(text: str, *, parser_version: str = NARRATIVE_PARSER_VERS
 
 
 def _financial_table(unit: NarrativeUnit, topics: Sequence[str]) -> bool:
+    if unit.unit_kind in {"html_table_cell", "pptx_table_cell"}:
+        return unit.metadata.get("table_class") == "financial" and not _has_business_table_topics(topics)
     if unit.unit_kind != "pdf_table_row":
         return False
     numeric_cells, financial_label, financial_header, event_signal = _financial_row_signals(unit)

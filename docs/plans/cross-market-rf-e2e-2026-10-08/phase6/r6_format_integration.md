@@ -1,22 +1,23 @@
-# R6三包主线查收
+# MAIN R6格式主线接线
 
-状态：分包责任验收通过，进入主线并线与接线。不是产品全流程验收。
+状态：MAIN共用接线及集中258责任测试、37实际资料链集成已通过；图片识读缺口和最终真实研究保持待做。
 
-|包|真实交付HEAD|本轮集中复验|遗留主线事项|
-|---|---|---|---|
-|R6-FORMAT|d48ca1be9d377e14e3926b2c0ec1872ff08e0667|64PASS/12.45秒|Worker路由、表格选择、原语言、版本及一次批量locator回放；真实22页全图PPTX无文本，仍partial|
-|R6-RF-INPUT|b1763fc034558674b56c941e0b13620df9c11a12|204PASS+8subtests/12.60秒|真实NarrativeRef消费、新研究、安装闭包；handoff宽集99FAIL/4ERROR不可记成绿|
-|R6-FF-CAUSE|8bb7b85f57ca7effed2a42afe8fbcdbba72c15ff|36PASS/4.29秒|CWP机器原因/实际provider_started与usage证明；RF消费诊断；当前unknown不猜|
+## 责任与接口
 
-## 交接核对与并线方法
+1. SourceVersionReader验证当前SourceRef原文；不新增公司/期间/旧policy许可。生成任务使用冻结source_metadata作为处理输入，当前诊断不重签旧账。
+2. 纯normalize_document负责HTML/PPTX结构、稳定locator、财务表启发式与具名opaque缺口；只在内存工作。
+3. NarrativeSelectHandler统一路由PDF/HTML/PPTX，调用现有selector；金融表数值排除，表内具体业务描述保留，原语言填入selected spans；图片页不能记为成功跳过。
+4. 现有NarrativeVerifyHandler/Transport按MIME与parser版本走同一回放层；HTML/PPTX全部选中locator仅重解析一次，按locator+字节绑定+结构匹配，不能每span全文parse。禁止新数据库、全文MD或图片落地。
+5. parser/selector执行版本在新格式run中明确冻结；老PDF/TXT版本与旧run保持兼容，新解析器不冒充旧parser。
+6. batch语言判定从格式正文提取；全图PPTX返回具名无法识读/语言未知缺口，不猜语言、不启动无配置的视觉或收费模型。视觉/OCR能力另按既有配置和预算调查。
 
-三包功能文件清单SHA全部匹配，写范围无交叉；FORMAT与RF的handoff.head指功能提交，后续HEAD仅提交交接清单，差异已解释。FF未提交仅HANDOFF.md和handoff.json，先定点提交这两项，再并入main。RF既有assurance/runs和output、FF密钥配置属于主目录原有文件，保留，不加入本次提交。Dayu零写。
+## TDD与集中验收
 
-由MAIN合并各自已交付分支，保留原始功能提交；不重复签身份合同。主线只在集中接线节点跑相关集成及真实原件验收；最终两组新研究再做用户要求的独立质量审查。不得用合成E2E冒充真实网络、收费模型或图片识读。
+先实际select→原语言summary依赖→verify测试HTML/XHTML/有文本PPTX、业务表保留/财务数值排除、坏包/全图不自动skip、locator或parser冒用拒绝、多span只parse1次。随后64格式责任集、相关select/verify/transport/batch语言/版本集成一次集中验收；只读真实SEC10-K和真实22页图片deck补验，原件SHA不变、临时资料清理。不是每次修改跑全部公司或增加人工签收。最后两组完整真实研究按总计划大节点验收。
 
-## 简化约束
+## 当前并线状态
 
-来源层负责公司/期间筛选；入库层负责字节和原子保存；读取层负责当前SourceRef原件；解析层负责定位可重放；RF负责数量/目标/证据语义。不让title、URL、语言声明、旧policy观察或人工receipt重复决定访问。新的解析批量回放必须一次解析并匹配全部选中locator，不允许每个span重新解析全文。
+FF已推main a1f3e4f；RF main b1763fc0并线，静态7项修复17fce29c发布中；CWP格式包已merge master。主目录RF assurance/output和FF密钥保留；Dayu零写。
 
 
 ## MAIN接线节点完成

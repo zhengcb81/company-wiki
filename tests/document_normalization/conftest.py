@@ -62,7 +62,6 @@ def build_pptx(
     """Build a small deterministic deck covering the card's PPTX scenarios."""
     from pptx import Presentation
     from pptx.chart.data import CategoryChartData
-    from pptx.enum.shapes import MSO_SHAPE_TYPE
     from pptx.util import Emu, Inches
 
     presentation = Presentation()

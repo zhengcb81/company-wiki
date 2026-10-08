@@ -38,7 +38,7 @@
 
 ## Next Step
 
-**当前行动（2026-10-08 Phase6）**：入库和元数据/读取/恢复责任收敛已集中及冻结三市场验收；现在接收并合并R6-FORMAT、R6-RF-INPUT、R6-FF-CAUSE三个已交付施工包，统一现有Worker/回放/错误诊断与RF真实输入消费。三线复验已绿，状态和接口见phase6/r6_handoff_intake.md；接线不增加身份许可或人工签收。随后跨run内容复用及最终两组新研究/独立审查。下方旧Next Step段落只作历史记录。
+**当前行动（2026-10-08 Phase6）**：三包已并主线、RF/FF已推并CI绿；MAIN格式共用接线258责任测试和37实际资料链集成已绿，正在提交推送CWP并监控CI。随后补CWP有证明的provider错误诊断和RF安装/真实NarrativeRef输入消费，再跨run默认内容复用、图片正文能力与两组新研究独立审查。查收/接口/剩余项见phase6/r6_handoff_intake.md；不增加身份许可或人工签收。下方旧Next Step只作历史记录。
 
 ### Phase 5: 固化三市场回归套件（2026-10-08 新请求）
 **Status:** complete

@@ -37,8 +37,13 @@ class MetadataObservation:
 
     def project_document(self, document: dict[str, Any]) -> dict[str, Any]:
         result = {**document, 'metadata': self.metadata}
-        for column in _COLUMN_DECLARATIONS:
-            if column in self.disputed_declarations:
+        disputed = set(self.disputed_declarations)
+        for column, aliases in _COLUMN_DECLARATIONS.items():
+            if column in disputed or any(
+                f'{container}.{alias}' in disputed
+                for container in ('capture', 'acquisition', 'dayu_meta')
+                for alias in aliases
+            ):
                 result[column] = None
         return result
 

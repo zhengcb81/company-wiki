@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
 import os
 import subprocess
@@ -22,7 +21,6 @@ from conftest import (
     normalize_html,
     normalize_pptx,
     sha256_hex,
-    source_id_for,
 )
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

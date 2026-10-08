@@ -92,7 +92,7 @@ def _current_sources(request, reader, *, deadline=None):
         policy = reader.read_policy_sha256(current)
         metadata = reader.describe_version(current)
         _check_preparation_deadline(deadline)
-        kind = metadata["document_kind"]
+        kind = metadata["document_kind"] or "unknown"
         language = metadata.get("language")
         if language is None:
             opened = reader.open_version(

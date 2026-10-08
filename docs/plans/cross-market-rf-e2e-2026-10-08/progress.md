@@ -223,3 +223,31 @@ P1 FF/ET费用能力集中验收：6RED/7PASS→ET费用13PASS，实际用量3RE
 
 
 发布监控：bf8f0e82远端37847182377失败，annotations指向四份未纳入前一集中集的unit旧许可合同。只跑这四份真实复现21FAIL/78PASS（15.41秒），依据既有已授权责任规则改为当前观察可见/旧生成账本不重签/真实SHA损坏仍拒绝，99PASS（17.65秒）。不删测试或缩小CI。测试短根r6u待清理，首轮长根被pytest自动relocate并已自动恢复不存在。FF已快进a1f3e4f并推送；RF已快进b1763fc0但prepush拦七个未使用import/无插值f-string，定点修复后再发布，未绕过hook。
+
+
+三卡已实际并本地主线：FF快进a1f3e4f并推送；RF快进b1763fc0，定点静态修复17fce29c（4文件），push既有125项绿待网络完成；CWP格式包merge完成，MAIN发现格式包同样7静态问题，5自动修复、2重复dependency import/未用变量手动整理。不改业务断言，先完成当前CI单元2124范围再发布；接线计划r6_format_integration.md已写，先RED后共用Worker改造。
+
+
+格式接线TDD：新夹具两次collection失败（pytest importlib模式，无tests.unit包且不注入同目录sys.path），已用显式fixture模块加载，不混入production。真实8RED/2.70秒均为UNSUPPORTED_SOURCE_TYPE；共用路由/批量回放后23项18PASS/5FAIL，1为伪造span未重算自身hash的夹具，4暴露真实capture.document_kind争议未投影到document列。用独立自动清理小夹具验证：来源capture争议存在但manifest仍给prospectus；共用MetadataObservation按column别名投影根因修复，未知kind新batch用unknown处理输入，Worker不再重复比较current kind与generation kind。23PASS/4.96秒。剩余batch格式版本/正文语言2RED+10PASS/1.46秒，现接线实现并待集中验证。完整现有CI unit范围2120PASS/4旧争议门FAIL（209.66秒），后者已纳入上述修复；不每个小节点重跑全量。误猜test_metadata_responsibility.py不存在，集中未执行，已核实际tests/contract/test_source_metadata_responsibility.py。mypy五接线责任模块绿。
+
+
+## MAIN接线节点完成
+
+- 三包已并各自主线；FF main a1f3e4f18bf644c6af668fddc009cacdf1aace20已推送且CI37847921596成功；RF main17fce29cbed65e839484b1df4c0c9ecf58aa51e7已推送且CI37848277872成功。CWP格式merge后现接线待提交/推送。
+- 新格式路由、原语言、财务cell筛选、parser版本与batch生成identity、select/verify/公共transport共享回放均完成。一次解析回放所有选中locator，无全文MD/图片持久化。PDF/TXT普通batch的生成hash不因新解析器版本漂移；格式batch显式冻结document_normalization版本。
+- 258项集中责任测试PASS/34.48秒；37项实际catalog→AUTO→3任务→projector→public read集成PASS/47.16秒，包含真实微软8,158,067B SEC HTML（SHA99d693f6...0bbe）；只有模型是本地ReplayNarrativeModel，无外部付费调用，不能据此签模型摘要经济语义正确。
+- FF→CWP离线诊断25/25PASS，报告r6_ff_main_cause_e2e.json；脚本覆盖的一份工程报告已恢复原提交字节，其临时根确认不存在。FF→ET→CWP旧冻结契约仍PASS，新真实电话会账户entitlement限制保留。
+- 实际补充发现capture争议未清空对应document列，已用共用字段alias投影修复，unknown种类按unknown处理；Worker不再比较当前kind与历史生成kind作为准入。原version/hash/byte-size/MIME绑定和locator仍保留。
+- 全量CI unit现有范围2120PASS/4旧争议门FAIL，唯一4项已在上述258集中中全部通过；当前不逐修改重跑全部unit，发布后监控同一CI。4unit旧许可合同21RED→99PASS已在前提交关闭。
+- 本轮清理6个owned根，释放141,697,363B，全部恢复不存在，原件/生产配置/外包工作树删除0。ruff现有CIscope和新格式测试绿，mypy五接线模块绿。
+
+## 仍待MAIN完成
+
+1. CWP失败边界发布有证明的provider原因、started/usage字段；FF/RF消费，unknown不可猜为0。
+2. RF安装闭包定点同步、真实NarrativeRef→claim→参数消费；重做第一组三公司真实研究和独立审查。
+3. 真实图片deck22页仍opaque，尚无配置可用OCR/vision正文识读；不要把named incomplete算成功skip。继续按已配置模型能力和预算调查，不硬编码供应商。
+4. 现有AUTO/内容寻址对象实现跨run默认复用及显式refresh；保留原事件与费用账，不加第二数据库或人工许可。
+5. 换A/H/US三家固定新样本真实执行、逐家独立审查与后续根因循环。
+
+
+提交前补充接口检查发现HTML电话会与财报同MIME而不同解析职责；统一parser_component增加source_class参数，电话会维持旧material/parser/lineage，不以MIME一刀切。补13项格式责任测试全PASS/0.95秒（与258集重叠，不加总），记录与固定budget无关；生成语言及parser未被新财报路由冒用。
