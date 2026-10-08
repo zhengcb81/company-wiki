@@ -440,10 +440,8 @@ def test_resolver_missing_identity_metadata_is_not_identity_conflict(tmp_path):
     assert result.download_allowed is False
 
 
-def test_resolver_contradictory_market_is_still_identity_conflict(tmp_path):
-    """A document whose metadata contradicts the request identity (market HK vs
-    CN) must stay IDENTITY_CONFLICT and never reach the downloader (Phase 15.3
-    control group: true conflicts remain fail-closed)."""
+def test_resolver_contradictory_market_excludes_candidate_without_download_veto(tmp_path):
+    """The HK candidate cannot satisfy CN; obtaining a correct CN source remains possible."""
     from company_wiki.source_catalog import (
         ResolutionStatus,
         SourceRequest,
@@ -476,9 +474,9 @@ def test_resolver_contradictory_market_is_still_identity_conflict(tmp_path):
         )
     )
 
-    assert result.status is ResolutionStatus.IDENTITY_CONFLICT
+    assert result.status is ResolutionStatus.MISSING
     assert result.reason == "identity_mismatch_market_or_security_id"
-    assert result.download_required is False
+    assert result.matches == () and result.download_required is True
 
 
 # --- Phase 18.1: issuer-name anchoring (dual-class / same-issuer tickers) ---
@@ -671,7 +669,8 @@ def test_resolve_debug_trace_names_candidate_exclusion_reasons(tmp_path):
         )
     )
 
-    assert result.status is ResolutionStatus.IDENTITY_CONFLICT
+    assert result.status is ResolutionStatus.MISSING
+    assert result.matches == () and result.download_required
     trace = result.to_dict().get("debug_trace")
     assert trace, "non-reused resolution must carry a debug_trace"
     joined = "\n".join(trace)

@@ -156,12 +156,11 @@ def test_safe02_company_name_matches_its_own_identity(tmp_path):
         ResolutionStatus.REUSED_EXACT, ResolutionStatus.REUSED_EQUIVALENT)
 
 
-# --- SAFE-04: non-HTTPS / disallowed provider URL -> fail closed ---------------
+# --- Capture URL quality is diagnostic for an existing local original. -------
 
 
-def test_safe04_non_https_url_fails_closed(tmp_path):
-    """A non-HTTPS source URL is never capture-ready — the handle is
-    refused, never REUSED."""
+def test_http_capture_is_sparse_but_local_original_remains_reusable(tmp_path):
+    """A local original does not need a complete HTTPS capture receipt."""
     from company_wiki.source_catalog import ResolutionStatus
 
     tree = _company_raw_fixture(
@@ -179,10 +178,12 @@ def test_safe04_non_https_url_fails_closed(tmp_path):
     )
     catalog.scan()
     result = _resolve(catalog, entity="Acme", market="CN", security="601899")
-    assert result.status is not ResolutionStatus.REUSED_EXACT
-    assert any("capture_incomplete" in t or "https_url" in t
-               for t in result.debug_trace), (
-        f"no fail-closed trace: {list(result.debug_trace)[:4]}")
+    assert result.status is ResolutionStatus.REUSED_EQUIVALENT
+    assert len(result.matches) == 1
+    assert result.matches[0].https_url is None
+    assert result.matches[0].capture_ready is False
+    assert "https_url" in result.matches[0].missing_capture_fields
+    assert any("capture_metadata_sparse" in t for t in result.debug_trace)
 
 
 # --- SAFE-07: retired vs active assertion conflict -> fail closed ---------------

@@ -18,6 +18,7 @@ from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Any
 
 from .policy_2x import export_policy_2x
+from .qualification import qualify_source
 from .prompt_injection import (
     PromptInjectionReviewError,
     read_prompt_injection_review,
@@ -124,6 +125,7 @@ class SourceQueryResult:
     matches: tuple[SourceRef, ...]
     reason: str
     schema_version: str = SOURCE_REF_SCHEMA_VERSION
+    excluded_candidates: tuple[dict[str, object], ...] = ()
 
 
 def _relative_segments(relative_path: str) -> tuple[str, ...] | None:
@@ -311,8 +313,14 @@ class SourceVersionReader:
             raise TypeError("request must be SourceRequest")
         resolver = self._resolver_for_request()
         found: list[tuple[str, str, SourceRef]] = []
+        excluded: list[dict[str, object]] = []
+
+        def make_query_result(status: str, matches: tuple[SourceRef, ...], reason: str) -> SourceQueryResult:
+            return SourceQueryResult(status, matches, reason,
+                                     excluded_candidates=tuple(excluded))
+
         for document in self._candidate_pages(
-            request, include_unknown_publication=include_unknown_publication
+            request, include_unknown_publication=True
         ):
             if document["metadata_status"] != "ok":
                 continue
@@ -351,11 +359,6 @@ class SourceVersionReader:
                 or (request.provider and provider != request.provider)
             ):
                 continue
-            published = str(document["published_date"] or "")
-            if not published and not include_unknown_publication:
-                continue
-            if published and published > request.as_of_date:
-                continue
             source_id = str(document["source_id"] or "")
             digest = str(document["content_sha256"] or "")
             if not source_id or not _SHA256.fullmatch(digest):
@@ -364,25 +367,32 @@ class SourceVersionReader:
                 ref = self.query_ref(document["document_id"], source_id, digest)
             except SourceReadError:
                 continue
+            qualification = qualify_source(document["published_date"], as_of_date=request.as_of_date)
+            if not qualification.historical_date_eligible and not (
+                include_unknown_publication and qualification.publication_status == "unknown"
+            ):
+                excluded.append({"source_ref": asdict(ref), "qualification": qualification.to_dict()})
+                continue
+            published = str(document["published_date"] or "")
             found.append((published, provider_document_id or "", ref))
         if not found:
-            return SourceQueryResult("not_found", (), "no_local_match")
+            return make_query_result("not_found", (), "no_local_match")
         if request.mode == "latest_as_of":
             selected = max(
                 found,
                 key=lambda item: (item[0], item[1], item[2].source_id),
             )
-            return SourceQueryResult("found", (selected[2],), "latest_as_of")
+            return make_query_result("found", (selected[2],), "latest_as_of")
         if len(found) > 1:
-            return SourceQueryResult(
+            return make_query_result(
                 "ambiguous", tuple(item[2] for item in found),
                 "multiple_local_matches",
             )
         if not found[0][0]:
-            return SourceQueryResult(
+            return make_query_result(
                 "unknown_publication", (found[0][2],), "publication_date_unknown"
             )
-        return SourceQueryResult("found", (found[0][2],), "one_local_match")
+        return make_query_result("found", (found[0][2],), "one_local_match")
 
     def describe_version(self, ref: SourceRef) -> dict[str, str | int | None]:
         """Project catalog-owned display and capture facts for an exact version.

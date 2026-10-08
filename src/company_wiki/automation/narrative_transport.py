@@ -3,10 +3,8 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
-from datetime import date
 import hashlib
 import json
-import re
 import sqlite3
 from typing import Any
 
@@ -22,6 +20,7 @@ from company_wiki.source_catalog.narrative_artifact_store import (
 )
 from company_wiki.source_catalog.source_reader import SourceReadError, SourceRef, SourceVersionReader
 from company_wiki.source_catalog.reader import CatalogReaderUnavailable
+from company_wiki.source_catalog.qualification import qualify_source
 
 from .models import canonical_json, require_canonical_json
 from .narrative_contracts import (
@@ -59,23 +58,16 @@ def _artifact_error(error: NarrativeArtifactError) -> NarrativeTransportError:
     return NarrativeTransportError("unavailable", "narrative_artifact_unavailable")
 
 
-def _publication_date(published: object) -> date:
-    if not published:
-        raise NarrativeTransportError("blocked", "source_publication_unknown")
-    if not isinstance(published, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", published):
-        raise NarrativeTransportError("blocked", "source_publication_invalid")
-    try:
-        return date.fromisoformat(published)
-    except (TypeError, ValueError) as exc:
-        raise NarrativeTransportError("blocked", "source_publication_invalid") from exc
-
-
 def _require_historical_source(manifest: dict[str, Any], as_of_date: str) -> None:
     """Historical availability follows publication, independent of download time."""
-    cutoff = date.fromisoformat(as_of_date)
-    published = _publication_date(manifest.get("published_date"))
-    if published > cutoff:
-        raise NarrativeTransportError("blocked", "source_after_as_of")
+    qualification = qualify_source(manifest.get("published_date"), as_of_date=as_of_date)
+    reason = {
+        "unknown": "source_publication_unknown",
+        "invalid": "source_publication_invalid",
+        "after_as_of": "source_after_as_of",
+    }.get(qualification.publication_status)
+    if reason:
+        raise NarrativeTransportError("blocked", reason)
 
 
 def _require_manifest(

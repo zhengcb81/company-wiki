@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import UTC, date, datetime
 from enum import Enum
-from functools import lru_cache
+from functools import lru_cache, partial
 import hashlib
 import json
 import os
@@ -16,73 +16,11 @@ import stat
 from typing import Any
 
 from .policy import _effective_reusable
+from .qualification import SourceQualification, qualify_source
 from .runtime_policy import resolver_visibility_projection
 from .scanner import R4_PROVENANCE_KEY
 from .service import SourceCatalog
 from .store import metadata_state
-
-
-def _verified_assertion_identity(
-    store: Any,
-    source_id: str,
-    content_sha256: str,
-    document_id: str,
-    *,
-    reader: str = "v1",
-    current_epoch: str | None = None,
-    active_cohorts: tuple[str, ...] = (),
-) -> dict[str, Any] | None:
-    """Try to resolve legacy identity via a verified assertion.
-
-    Phase 15.5: assertions are matched by source_id first; when the source
-    path cannot match (placeholder documents surface source_id as NULL), fall
-    back to the document_id path.  FC-202: reads honor the pinned
-    RuntimePolicySnapshot visibility contract.
-    """
-    try:
-        from .assertion_service import (
-            get_verified_assertion,
-            get_verified_assertion_by_document,
-        )
-
-        candidates = [
-            get_verified_assertion(
-                store,
-                source_id,
-                content_sha256,
-                reader=reader,
-                current_epoch=current_epoch,
-                active_cohorts=active_cohorts,
-            )
-        ]
-        if source_id != document_id:
-            candidates.append(
-                get_verified_assertion_by_document(
-                    store,
-                    document_id,
-                    content_sha256,
-                    reader=reader,
-                    current_epoch=current_epoch,
-                    active_cohorts=active_cohorts,
-                )
-            )
-        for a in candidates:
-            if a is None:
-                continue
-            return {
-                "market": a.get("market"),
-                "security_id": a.get("security_id"),
-                "fiscal_year": a.get("fiscal_year"),
-                "fiscal_period": a.get("fiscal_period"),
-                "document_kind": a.get("document_kind"),
-                "provider": a.get("provider"),
-                "provider_document_id": a.get("provider_document_id"),
-                "source_url": a.get("source_url"),
-                "filing_date": a.get("filing_date"),
-            }
-        return None
-    except ImportError:
-        return None
 
 
 # B07 - the read contract's version policy, stated where the contract lives.
@@ -123,13 +61,10 @@ class SourceResolutionError(ValueError):
 class ResolutionStatus(str, Enum):
     """Resolution outcome for query-before-download reuse.
 
-    IDENTITY_CONFLICT means a document's metadata *contradicts* the request
-    identity (market or security_id present but different), or would be
-    reusable without verifiable identity — it blocks reuse and download.  A
-    document that merely *lacks* identity metadata (missing_fail_closed, no
-    verified assertion) and has no canonical file (placeholder) is NOT a
-    conflict (Phase 15.3): it falls through the year/form/handle checks and
-    resolves MISSING, which permits a download.
+    IDENTITY_CONFLICT is retained for serialized legacy results. Current
+    selection excludes contradictory candidates and returns MISSING when
+    no suitable source remains. Incomplete auxiliary identity is diagnostic;
+    it does not veto a company-owned source or a correct provider request.
     """
 
     REUSED_EXACT = "reused_exact"
@@ -708,6 +643,7 @@ class ResolutionResult:
     # Phase 19.6: per-candidate exclusion reasons for diagnostics (empty when
     # no candidate passed the entity gate and none were rejected).
     debug_trace: tuple[str, ...] = ()
+    excluded_candidates: tuple[dict[str, object], ...] = ()
 
     def to_dict(self) -> dict[str, Any]:
         payload = {
@@ -721,6 +657,8 @@ class ResolutionResult:
         }
         if self.debug_trace:
             payload["debug_trace"] = list(self.debug_trace)
+        if self.excluded_candidates:
+            payload["excluded_candidates"] = list(self.excluded_candidates)
         return payload
 
 
@@ -1370,6 +1308,7 @@ class SourceResolver:
         future_matches = 0
         unknown_date_matches = 0
         identity_mismatch = 0
+        excluded: list[dict[str, object]] = []
         # Phase 19.6: per-candidate exclusion reasons for diagnostics, plus the
         # count of documents rejected at the entity gate.
         trace: list[str] = []
@@ -1437,42 +1376,8 @@ class SourceResolver:
                     f"{document['title']}: identity_conflict_market_or_security_id"
                 )
                 continue
-            if market_match == "missing_fail_closed":
-                # Try verified assertion as fallback identity source (CW-2.28 T2-11).
-                assertion = _verified_assertion_identity(
-                    self.catalog.reader,
-                    document["source_id"],
-                    document.get("content_sha256") or None,
-                    document["document_id"],
-                    reader=self.reader,
-                    current_epoch=self.current_epoch,
-                    active_cohorts=self.active_cohorts,
-                )
-                if assertion and request.market and request.security_id:
-                    a_market = (
-                        str(assertion.get("market") or "").strip().upper() or None
-                    )
-                    a_secid = str(assertion.get("security_id") or "").strip() or None
-                    if a_market and a_secid:
-                        if (
-                            request.market.upper() == a_market
-                            and request.security_id == a_secid
-                        ):
-                            market_match = "match"
-                            # Enrich metadata with assertion values
-                            if "market" not in metadata or not metadata.get("market"):
-                                metadata["market"] = a_market
-                                metadata["security_id"] = a_secid
-                                metadata["fiscal_year"] = metadata.get(
-                                    "fiscal_year"
-                                ) or assertion.get("fiscal_year")
-                # Missing identity metadata with no verified assertion is NOT a
-                # true identity conflict (Phase 15.3): the year/form/handle
-                # checks below decide whether the document satisfies the
-                # request.  A placeholder with no canonical file yields
-                # handle=None → MISSING, which permits a download.  A
-                # document that WOULD be reusable still stays fail-closed —
-                # the strict check runs after the handle is built below.
+            if not metadata.get("market") or not metadata.get("security_id"):
+                trace.append(f"{document['title']}: identity_fields_incomplete")
             year = _fiscal_year(document, metadata)
             if request.fiscal_year is not None and year != request.fiscal_year:
                 trace.append(f"{document['title']}: fiscal_year_mismatch")
@@ -1501,13 +1406,10 @@ class SourceResolver:
             if request.provider_document_id and not strong_identity:
                 trace.append(f"{document['title']}: provider_document_id_not_strong")
                 continue
-            published = document["published_date"]
-            if not published:
-                unknown_date_matches += 1
-                trace.append(f"{document['title']}: published_date_unknown")
-                continue
-            if published > request.as_of_date:
+            qualification = qualify_source(document["published_date"], as_of_date=request.as_of_date)
+            if qualification.publication_status == "after_as_of":
                 future_matches += 1
+                excluded.append(self._excluded_candidate(document, qualification))
                 trace.append(f"{document['title']}: published_after_as_of_date")
                 continue
             # B02: REUSE eligibility is the qualification track, not the legacy
@@ -1518,6 +1420,10 @@ class SourceResolver:
                 item for item in document["locations"] if item.get("candidate_rank")
             ]
             if not canonical_locations:
+                excluded.append(self._excluded_candidate(document, qualify_source(
+                    document["published_date"], as_of_date=request.as_of_date,
+                    local_bytes_status="unavailable",
+                )))
                 if any(
                     item.get("role") == "original_primary"
                     and _is_rejections_path(item.get("relative_path", ""))
@@ -1548,7 +1454,14 @@ class SourceResolver:
                 reusable_root_ids=reusable_root_ids,
             )
             handle = selection.handle
+            availability = "verified" if selection.reason.startswith("verified_candidate_rank_") else (
+                "not_checked" if "budget_exceeded" in selection.reason or "cancelled" in selection.reason
+                else "unavailable"
+            )
+            qualification = qualify_source(document["published_date"], as_of_date=request.as_of_date,
+                                           local_bytes_status=availability)
             if handle is None:
+                excluded.append(self._excluded_candidate(document, qualification))
                 trace.append(f"{document['title']}: {selection.reason}")
                 for attempted in selection.tried:
                     trace.append(f"{document['title']}: candidate {attempted}")
@@ -1563,13 +1476,11 @@ class SourceResolver:
                 trace.append(f"{document['title']}: {selection.reason}")
                 for attempted in selection.tried:
                     trace.append(f"{document['title']}: candidate {attempted}")
-            if market_match == "missing_fail_closed":
-                # Reusable, but identity is unverifiable (no metadata, no
-                # assertion): stay fail-closed for reuse (CW-3.5 strict).
-                # Only placeholders (handle=None) fall through to MISSING so
-                # an authorized download can proceed (Phase 15.3).
-                identity_mismatch += 1
-                trace.append(f"{document['title']}: identity_unverifiable_strict")
+            if not qualification.historical_date_eligible:
+                excluded.append(self._excluded_candidate(document, qualification))
+                if availability != "unavailable":
+                    unknown_date_matches += 1
+                trace.append(f"{document['title']}: published_date_{qualification.publication_status}")
                 continue
             if not handle.capture_ready:
                 # Capture provenance is diagnostic. Identity, period,
@@ -1583,79 +1494,84 @@ class SourceResolver:
         if trace or entity_gate_rejected:
             trace.insert(0, f"entity_gate_rejected: {entity_gate_rejected}")
         debug_trace = tuple(trace)
+        result = partial(self._result, request, debug_trace=debug_trace,
+                         excluded_candidates=tuple(excluded))
         if len(exact) == 1:
-            return self._result(
-                request,
+            return result(
                 ResolutionStatus.REUSED_EXACT,
                 "one_existing_source_matches_provider_identity",
                 (exact[0],),
-                debug_trace,
             )
         if len(exact) > 1:
             if request.mode == "latest_as_of":
                 latest = self._pick_latest(exact, request.as_of_date)
                 if latest is not None:
-                    return self._result(
-                        request,
+                    return result(
                         ResolutionStatus.REUSED_EXACT,
                         "latest_existing_source_matches_provider_identity",
                         (latest,),
-                        debug_trace,
                     )
-            return self._result(
-                request,
+            return result(
                 ResolutionStatus.AMBIGUOUS,
                 "multiple_existing_sources_match_provider_identity",
                 tuple(exact),
-                debug_trace,
             )
         if len(semantic) == 1:
-            return self._result(
-                request,
+            return result(
                 ResolutionStatus.REUSED_EQUIVALENT,
                 "one_existing_source_satisfies_semantic_request",
                 (semantic[0],),
-                debug_trace,
             )
         if len(semantic) > 1:
             if request.mode == "latest_as_of":
                 latest = self._pick_latest(semantic, request.as_of_date)
                 if latest is not None:
-                    return self._result(
-                        request,
+                    return result(
                         ResolutionStatus.REUSED_EQUIVALENT,
                         "latest_existing_source_satisfies_semantic_request",
                         (latest,),
-                        debug_trace,
                     )
-            return self._result(
-                request,
+            return result(
                 ResolutionStatus.AMBIGUOUS,
                 "multiple_existing_sources_match_semantic_request",
                 tuple(semantic),
-                debug_trace,
             )
         if identity_mismatch:
-            return self._result(
-                request,
-                ResolutionStatus.IDENTITY_CONFLICT,
+            return result(
+                ResolutionStatus.MISSING,
                 "identity_mismatch_market_or_security_id",
                 (),
-                debug_trace,
             )
         if future_matches:
             reason = "only_sources_published_after_as_of_date"
         elif unknown_date_matches:
-            return self._result(
-                request,
+            return result(
                 ResolutionStatus.AMBIGUOUS,
                 "matching_sources_have_unknown_published_date",
                 (),
-                debug_trace,
             )
         else:
             reason = "no_existing_source_satisfies_request"
-        return self._result(request, ResolutionStatus.MISSING, reason, (), debug_trace)
+        return result(ResolutionStatus.MISSING, reason, ())
+
+    def _excluded_candidate(
+        self, document: dict[str, Any], qualification: SourceQualification,
+    ) -> dict[str, object]:
+        # Construct the existing logical ref without reading files or exporting locations.
+        from dataclasses import asdict
+        from .source_reader import SourceReadError, SourceVersionReader
+
+        diagnostic: dict[str, object] = {
+            "document_id": document["document_id"], "qualification": qualification.to_dict(),
+        }
+        try:
+            ref = SourceVersionReader(self.catalog).query_ref(
+                document["document_id"], document.get("source_id"), document.get("content_sha256"),
+            )
+        except (SourceReadError, ValueError):
+            return diagnostic
+        diagnostic["source_ref"] = asdict(ref)
+        return diagnostic
 
     @staticmethod
     def _identity_matches(request: SourceRequest, metadata: dict[str, Any]) -> str:
@@ -1664,7 +1580,7 @@ class SourceResolver:
         Returns:
             "match" — identity matches or request has no identity filter
             "conflict" — explicit identity conflict (market or security_id mismatch)
-            "missing_fail_closed" — request has identity but candidate has none
+            Missing auxiliary fields do not contradict an anchored issuer.
         """
         req_market = request.market
         req_security_id = request.security_id
@@ -1672,10 +1588,6 @@ class SourceResolver:
             return "match"
         cand_market = str(metadata.get("market") or "").strip().upper() or None
         cand_security_id = str(metadata.get("security_id") or "").strip() or None
-        # CW-3.5: truly empty identity → fail_closed (strict).
-        # Company-name-as-security_id → soft-match (CW-2.27H).
-        if not cand_market and not cand_security_id:
-            return "missing_fail_closed"
         if req_market and cand_market and req_market != cand_market:
             return "conflict"
 
@@ -1999,6 +1911,7 @@ class SourceResolver:
         reason: str,
         matches: tuple[SourceHandle, ...],
         debug_trace: tuple[str, ...] = (),
+        excluded_candidates: tuple[dict[str, object], ...] = (),
     ) -> ResolutionResult:
         return ResolutionResult(
             schema_version=SOURCE_RESOLVER_SCHEMA_VERSION,
@@ -2009,6 +1922,7 @@ class SourceResolver:
             download_allowed=request.allow_download,
             matches=matches,
             debug_trace=debug_trace,
+            excluded_candidates=excluded_candidates,
         )
 
     def read_verified_bytes(

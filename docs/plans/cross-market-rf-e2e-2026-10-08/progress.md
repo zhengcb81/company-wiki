@@ -173,3 +173,21 @@ P1 FF/ET费用能力集中验收：6RED/7PASS→ET费用13PASS，实际用量3RE
 - 邻工作树的默认沙箱 git 只读报 Permission denied；正常 OS 同一只读命令成功，未修改工作树。调用 gh 查询 CI 失败因本机无 gh 命令；不是远端 CI 失败，不将失败工具输出写成 CI 状态。
 - 只读来源资格结构调查与出版证据注意事项写 phase6/source_qualification_investigation.md；尚未代码实施或宣称待证问题已修。原件改动0、收费模型0。
 - 改用公开 GitHub REST 查询完整 SHA：a7c6705cd4c5158cc2435d7c74a917c001454e4e 对应 [CI 37834777705](https://github.com/zhengcb81/company-wiki/actions/runs/37834777705) completed/success。不使用缩短 SHA 的空查询或旧取消运行冒充结果。
+
+来源资格先 RED：新 contract 运行 6 失败，其中 1 是新夹具错误（SourceCatalog 不支持 context manager，不算产品 RED）；5 项实际缺口，其中真实原件删失＋未知公开日错误 AMBIGUOUS 已复现。CLI 夹具已改显式 close/实际 SHA/既有 helper 签名，随后重跑；不修改生产原件。实现前已有 source-facts/current-preview/as-of 行为保留。
+
+夹具修正后 29RED（含新纯分类 API 缺失）→29PASS/3.38秒；实质错误原件删失已独立复现并改善。共用日期分类接 query/resolve，排除候选只输出逻辑引用，空诊断保持旧 CLI 字段。正常 OS 的两项对照回归 2PASS/4.03秒；此前沙箱集中 83PASS/32FAIL，全部失败集中在真实 provider 子进程和原子 artifact prepare，仅对照证明环境差异，不据此宣称另外30项已绿。正在正常 OS 完成集中回归；不会放宽原断言。
+
+正常OS集中188项：185PASS/3FAIL（64.35秒），原沙箱失败32项均通过。新增E2E发现一个真实更深的责任耦合：原件恢复已成功，却因历史日期未知被 canonical writer/ensure 报失败；另一新夹具须把 SourceRefValue 转为正式 SourceRef。两个均处理后集中24项23PASS/1FAIL（7.10秒），唯一剩余是旧机器原因码未登记。改共用返回函数的具名，避免通用result的静态签名混淆；登记实际公开机器原因，不放宽测试。下一集中覆盖入库/ensure/日期与旧contract全部，然后三公司冻结回归。
+
+用户确认三张施工卡已分派，README和Next Step同步；MAIN继续来源资格/现有Worker，所有外包独占目录保持零写，不新增第4–6张卡。
+
+来源资格后一集中：231项229PASS/2FAIL，72.99秒，全部行为绿，2FAIL为已登记原因码没有stage映射。新增宽期间导入引用1FAIL/1.74秒是真实设计耦合：2025未知公开日原件被历史选择器排除，writer引用查到2024。用户进一步要求系统性减少身份核验，当前主任务升级为责任层收敛，先计划和RED，再实施。三张外包写范围不变。
+
+身份责任只读结构审查完成，四/五次完整resolve、候选冲突污染全请求、writer与coordinator名称规则不一致均查实。先18项8RED/10PASS，再3项3RED，开始共用责任层重构：writer工程结果2.0只返回SourceRef，原文sidecar1.0不动；service一次历史结果查询、缺辅助身份不拒绝、坏本地候选排除后可取正确目标、普通candidate允许未知公开日、两个入口复用字段比较规则。集中88项86PASS/2FAIL，14.33秒；两个为新fixture exact请求遗漏及stage顺序，已更正。尚未发布或宣称全量绿。
+
+第一次更广集中261项259PASS/2FAIL，85.29秒：一个stage次序错误修正；HTTP本地capture旧测试要求全局阻断，与已提交HEAD行为不一致。只读加载HEAD旧resolver对照首跑因SourceRequest类绑定错误失败（夹具错误），修正绑定后0.97秒重现同一capture_sparse错误；证明不是本次放开了原本有效的防护。新测试保留HTTP不可capture-ready/无https_url的断言，并要求已有原文可复用。再次猜测tests/contract/test_source_catalog_fc808_v2_binding.py失败，已rg --files核对实际source_operation_v2.py，禁止复用错路径。
+
+目标按用户最新要求扩展为两组验收后继续归纳共性问题入PWF并实施的循环。只读审查发现formal envelope缺entity_ids/期次及任意metadata冲突、Reader对runtime_policy损坏阻断等残留，加入最高优先级简化方案下一集中节点，不把当前入库重构宣称全部门禁清理完成。
+
+第一责任节点最终300PASS/106.36秒，公开v2、envelope、真实ensure/CLI/Worker、并发及原文负例均绿。补充未指定市场1RED/5PASS发现新helper误拒绝None，改为只比较显式请求市场并由candidate登记已知市场；49范围/writer/single-intent PASS/15.10秒。ruff所有改动文件和mypy五责任模块通过；精确记录见phase6/identity_responsibility_acceptance.md。先提交冻结版本再三市场full replay，随后继续剩余元数据/旧policy门禁节点，不宣称整体完成。

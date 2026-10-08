@@ -175,6 +175,96 @@ def test_writer_atomically_imports_with_provenance_and_resolver_reuses_exact(tmp
     assert resolved.matches[0].https_url == candidate.source_url
 
 
+def test_writer_saves_future_publication_without_claiming_historical_reuse(tmp_path):
+    from dataclasses import replace
+    from company_wiki.source_catalog import CanonicalSourceWriter, ResolutionStatus
+
+    catalog = _catalog(tmp_path)
+    try:
+        request, candidate, receipt, staged = _staged_contract(tmp_path)
+        candidate = replace(candidate, filing_date="2027-03-20")
+        writer = CanonicalSourceWriter(catalog)
+        imported = writer.import_staged(request, candidate, receipt)
+        assert Path(imported.canonical_path).read_bytes() == b"%PDF-1.7\ncanonical annual report bytes"
+        assert not staged.exists()
+        from company_wiki.source_catalog import SourceResolver
+        historical = SourceResolver(catalog).resolve(request)
+        assert historical.status is ResolutionStatus.MISSING
+        assert historical.matches == ()
+        assert writer.source_ref_for_import(request, candidate, receipt.content_sha256).content_sha256 == receipt.content_sha256
+    finally:
+        catalog.close()
+
+
+def test_writer_returns_exact_committed_ref_without_semantic_resolver(tmp_path, monkeypatch):
+    import pytest
+    from company_wiki.source_catalog import CanonicalSourceWriter, SourceResolver
+    from company_wiki.source_catalog.source_reader import SourceVersionReader
+
+    catalog = _catalog(tmp_path)
+    try:
+        request, candidate, receipt, _ = _staged_contract(tmp_path)
+
+        def forbidden(*args, **kwargs):
+            pytest.fail("raw writer must not run historical or company selection")
+
+        monkeypatch.setattr(SourceResolver, "resolve", forbidden)
+        imported = CanonicalSourceWriter(catalog).import_staged(request, candidate, receipt)
+        assert imported.source_ref.content_sha256 == receipt.content_sha256
+        assert SourceVersionReader(catalog).open_version(imported.source_ref, purpose="preview").data == Path(imported.canonical_path).read_bytes()
+    finally:
+        catalog.close()
+
+
+def test_unknown_date_annual_candidate_can_be_saved_without_inventing_date(tmp_path):
+    from dataclasses import replace
+    from company_wiki.source_catalog import CanonicalSourceWriter
+    from company_wiki.source_catalog.source_reader import SourceVersionReader
+
+    catalog = _catalog(tmp_path)
+    try:
+        request, candidate, receipt, _ = _staged_contract(tmp_path)
+        candidate = replace(candidate, filing_date=None)
+        imported = CanonicalSourceWriter(catalog).import_staged(request, candidate, receipt)
+        assert SourceVersionReader(catalog).describe_version(imported.source_ref)["published_date"] is None
+        assert imported.content_sha256 == receipt.content_sha256
+    finally:
+        catalog.close()
+
+
+def test_direct_writer_rejects_wrong_period_before_creating_raw(tmp_path):
+    from dataclasses import replace
+    import pytest
+    from company_wiki.source_catalog import CanonicalImportError, CanonicalSourceWriter
+
+    catalog = _catalog(tmp_path)
+    try:
+        request, candidate, receipt, staged = _staged_contract(tmp_path)
+        with pytest.raises(CanonicalImportError, match="fiscal_year"):
+            CanonicalSourceWriter(catalog).import_staged(request, replace(candidate, fiscal_year=2024), receipt)
+        assert staged.exists()
+        assert not tuple(catalog.config.roots[0].path.rglob("*.pdf"))
+    finally:
+        catalog.close()
+
+
+def test_direct_raw_import_does_not_require_auxiliary_request_identifiers(tmp_path):
+    from dataclasses import replace
+    from company_wiki.source_catalog import CanonicalSourceWriter
+    from company_wiki.source_catalog.source_reader import SourceVersionReader
+
+    catalog = _catalog(tmp_path)
+    try:
+        request, candidate, receipt, _ = _staged_contract(tmp_path)
+        imported = CanonicalSourceWriter(catalog).import_staged(
+            replace(request, market=None, security_id=None), candidate, receipt)
+        reader = SourceVersionReader(catalog)
+        assert reader.open_version(imported.source_ref, purpose="preview").data == Path(imported.canonical_path).read_bytes()
+        assert reader.describe_version(imported.source_ref)["market"] == candidate.market
+    finally:
+        catalog.close()
+
+
 def test_writer_disambiguates_committed_bytes_with_sparse_capture_diagnostics(
     tmp_path, monkeypatch,
 ):
@@ -218,10 +308,14 @@ def test_writer_disambiguates_committed_bytes_with_sparse_capture_diagnostics(
     imported = CanonicalSourceWriter(catalog).import_staged(request, candidate, receipt)
 
     assert imported.content_sha256 == receipt.content_sha256
-    assert imported.resolution.status is ResolutionStatus.REUSED_EXACT
-    assert len(imported.resolution.matches) == 1
-    assert imported.resolution.matches[0].capture_ready is False
-    assert imported.resolution.matches[0].content_sha256 == receipt.content_sha256
+    # Storage returns its exact ref; sparse or conflicting capture diagnostics
+    # remain a selection concern and cannot invalidate an already saved file.
+    assert imported.source_ref.content_sha256 == receipt.content_sha256
+    from company_wiki.source_catalog.acquisition import AcquisitionCoordinator
+    selected = SourceResolver(catalog).resolve(AcquisitionCoordinator.target_request(request, candidate))
+    assert selected.status is ResolutionStatus.AMBIGUOUS
+    assert any(h.content_sha256 == imported.source_ref.content_sha256 and not h.capture_ready
+               for h in selected.matches)
 
 
 def test_writer_reactivates_previously_retired_same_content_document(tmp_path):
@@ -513,4 +607,4 @@ def test_writer_registers_exact_group_with_declared_adapter_not_root_rescan(tmp_
     assert observed[0].root_id == "company_raw"
     assert observed[0].relative_paths == frozenset({
         Path(imported.canonical_path).relative_to(catalog.config.roots[0].path).as_posix()})
-    assert imported.resolution.matches[0].content_sha256 == receipt.content_sha256
+    assert imported.source_ref.content_sha256 == receipt.content_sha256

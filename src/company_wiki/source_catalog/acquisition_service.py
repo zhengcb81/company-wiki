@@ -231,16 +231,26 @@ class SourceAcquisitionService:
         final = SourceResolver(self.coordinator.catalog).resolve(
             self.coordinator.target_request(request, candidate))
         final = replace(final, request_id=request.request_id)
-        if final.status not in {ResolutionStatus.REUSED_EXACT, ResolutionStatus.REUSED_EQUIVALENT}:
-            raise RuntimeError("final source resolution did not reuse the requested source")
-        if not any(h.content_sha256 == imported.content_sha256 for h in final.matches):
-            raise RuntimeError("final source resolution did not match imported bytes")
+        # The writer has returned the registered exact version. This query
+        # describes its applicability to the requested history; it is not a
+        # second storage acceptance gate. Multiple provider revisions can be
+        # narrowed to the exact bytes this transaction actually committed.
+        committed = tuple(h for h in final.matches
+                          if h.content_sha256 == imported.source_ref.content_sha256)
+        if final.status is ResolutionStatus.AMBIGUOUS and len(committed) == 1:
+            final = replace(final, status=ResolutionStatus.REUSED_EXACT,
+                            reason="one_existing_source_matches_provider_identity",
+                            matches=committed, download_required=False)
         if imported.status is CanonicalImportStatus.IMPORTED_NEW:
             status = SourceEnsureStatus.IMPORTED
             outcome = "downloaded_new"
         else:
             status = SourceEnsureStatus.DEDUPLICATED
             outcome = "deduplicated_after_download"
+        if final.status is ResolutionStatus.AMBIGUOUS:
+            status = SourceEnsureStatus.AMBIGUOUS
+        elif final.status not in {ResolutionStatus.REUSED_EXACT, ResolutionStatus.REUSED_EQUIVALENT}:
+            status = SourceEnsureStatus.MISSING
         attempt = record_attempt(
             outcome,
             content_sha256=imported.content_sha256,

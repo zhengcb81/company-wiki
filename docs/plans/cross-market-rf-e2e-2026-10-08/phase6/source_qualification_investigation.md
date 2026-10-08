@@ -1,6 +1,6 @@
 # MAIN 来源资格调查与后续责任测试
 
-状态：只读调查完成，尚未实现。该工作归 MAIN，不占用 R6-FORMAT、R6-RF-INPUT、R6-FF-CAUSE 的写目录。
+状态：调查完成，来源资格及身份责任收敛实现正在集中验收。该工作归 MAIN，不占用 R6-FORMAT、R6-RF-INPUT、R6-FF-CAUSE 的写目录；实施接口以 identity_responsibility_simplification.md 为准。
 
 ## 已核实机制
 
@@ -25,3 +25,14 @@
 4. 一次集中真实当前读取/历史拒绝→合法修正→历史读取及 0 模型重跑验证；缺证据仍具名 gap。不得修改冻结第一组基线以掩盖旧问题。
 
 三张外包卡写范围维持 README；MAIN 改现有 source_catalog/automation，不写新 document_normalization，不改 RF 工程或 FF 诊断线代码。
+
+## 本次实现合同（先 RED）
+
+- 新纯函数 `qualify_source(published_date, *, as_of_date, local_bytes_status)`：严格日期分类；`historical_date_eligible` 与只有实读 SHA 后才能证明的 `historical_reuse_eligible` 分开。`not_checked` 不冒称 unavailable 或 verified。只作投影，不存第二状态、不增加授权。
+- query 保持 DB-only 和原 status/matches；增可选 `excluded_candidates`，只含逻辑 SourceRef 和资格诊断，未知/未来日不再无解释地消失。兼容输出在没有排除项时不新增该字段。
+- resolve 的未知/非法公开日只有在真实字节、身份和根通过后才能阻断重复下载；没有原件不能当成已持有。未来日期仍排除历史 matches，不用下载日/会议日补值。
+- v2 source operation 顶层保持原形状，避免打破当前 FF 白名单；本次诊断在 query 与 legacy resolution 有界附加，不自行修改 FF 外包工程。
+- 新 ensure E2E 还复现入库与历史资格耦合：未知日原件已经正确恢复，却因最终历史 resolve 无 matches 抛 CanonicalImportError。入库责任应验身份/期间/实际 SHA，ensure 返回具名历史不合格结果且保留真实下载记录；不能把未知日期填成 provider 候选日期覆盖已有 assertion。
+- 新集中责任测试 `tests/unit/test_source_qualification.py`、`tests/contract/test_source_qualification.py`；复用当前 reader、resolver、source-facts 和 narrative transport 的回归。再做隔离 CLI/ensure 大节点，原件/生产配置不写。
+
+调查命令错误：曾猜不存在的 tests/unit/test_source_resolver.py、source_catalog/acquisition/service.py、source_catalog/stage_taxonomy.py；实际文件以 CodeGraph 返回为准，后续不重复这些路径。PowerShell 对 rg 路径参数中的通配符不会按期望展开；使用目录加 `-g`。

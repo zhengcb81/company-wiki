@@ -62,8 +62,11 @@ def main(argv: Sequence[str] | None = None) -> int:
             if transcript_lookup
             else reader.query_local(request)
         )
+        result_data = asdict(result)
+        if not result.excluded_candidates:
+            result_data.pop("excluded_candidates")
         _emit({
-            **asdict(result),
+            **result_data,
             "request_id": request.request_id,
             "candidates": [
                 reader.describe_candidate(ref) for ref in result.matches

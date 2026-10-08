@@ -64,6 +64,8 @@
 
 ## 固定回归套件发现（Phase 5）
 
+2026-10-08 最新用户纠正：身份核验简化仍有遗漏。查实 writer post-scan/source_ref_for_import 借历史选择验证入库，unknown-date 分支又要求 title/provider/company/security/market 全匹配；ensure 再次 resolve。已建立 phase6/identity_responsibility_simplification.md，优先整条责任收敛，保留真实冲突负例，缺辅助信息仅诊断，不新增签收许可。
+
 - 初版小测试先收集失败（runner不存在）；实现后16责任单元测试绿，含明确5pp/同行反证/未定年达产目标负例、不同样本不能伪称改进、删除失败检查视为missing、故障及只读账清理。沙箱默认pytest TEMP无法创建，改用独立短basetemp正常OS运行，未改断言。
 - 真原件full当前71检查点：46PASS、3BLOCKED、1FAIL、14NOT_RUN、7NOT_APPLICABLE；完整基线在 `benchmarks/cross_market_rf/baseline_replay.json/.md`。CN/HK PDF与MSFT TXT有限Worker各一个loopback POST，96/12/49原文证据；全部locator由公共read回放验证，CLI lookup验证入口，RF/CWP视图相同，再次运行0新增POST且不翻译。
 - **新增真实RF缺陷**：MSFT正式输出在seed=0下可强校验，换Python hash seed后出现 `confidence components recomputation mismatch`。定位 `scripts/analysis/confidence.py`：`parameter_revenue_weights` 的refs为set，无序迭代影响weights插入顺序，后续sum/浮点累加存在最后位差异；validator对components要求精确相等，进程内测试漏掉此维度。经济情景路径没有变化，不能把这个失败误称全部营收事实错误。不同seed强校验成为固定检查，不用删断言/只固定seed掩盖。

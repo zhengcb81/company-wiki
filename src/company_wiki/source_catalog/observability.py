@@ -80,6 +80,18 @@ REASONS: dict[str, str] = {
     # resolver
     "exact_hit": "exact identity match resolved",
     "latest_selected": "latest-as-of handle selected",
+    "latest_as_of": "latest historically eligible indexed source selected; bytes remain an open-time check",
+    "no_local_match": "no indexed version satisfies the requested identity, period and publication cutoff",
+    "multiple_local_matches": "multiple indexed source versions satisfy the local request",
+    "one_local_match": "one indexed version satisfies the local request; bytes are not yet verified",
+    "publication_date_unknown": "stored source version has no proven publication date",
+    "acquisition_budget_required": "a provider execution request has no finite acquisition budget",
+    "candidate_selected": "one candidate selected for the requested provider scope",
+    "request_scope_allows_no_items_or_bytes": "requested provider scope has no usable item or byte allowance",
+    "intra_group_repeat": "repeated narrative evidence within the same source group",
+    "same_unit_repeat": "repeated narrative evidence from the same source unit",
+    "maintenance_retired": "source was retired by explicit maintenance",
+    "narrative_reader_unavailable": "narrative reader infrastructure is unavailable",
     "ambiguous_issuer": "token shared by multiple issuers",
     "entity_gate_rejected": "entity anchoring failed",
     # artifacts
@@ -581,6 +593,10 @@ STAGES_BY_REASON: dict[str, tuple[str, ...]] = {
     # resolution
     "exact_hit": ("resolution",),
     "latest_selected": ("resolution",),
+    "latest_as_of": ("resolution", "freshness"),
+    "no_local_match": ("resolution",),
+    "multiple_local_matches": ("resolution",),
+    "one_local_match": ("resolution",),
     "ambiguous_issuer": ("resolution",),
     "existing_catalog_source_reused_before_adapter": ("resolution",),
     "existing_catalog_source_reused_after_discovery": ("resolution",),
@@ -594,6 +610,7 @@ STAGES_BY_REASON: dict[str, tuple[str, ...]] = {
     "gap_already_closed": ("freshness",),
     "gap_closed_by_concurrent": ("freshness",),
     "fiscal_year": ("freshness",),
+    "publication_date_unknown": ("freshness",),
     # acquisition
     "download_suppressed": ("acquisition",),
     "download_authorized": ("acquisition",),
@@ -606,6 +623,9 @@ STAGES_BY_REASON: dict[str, tuple[str, ...]] = {
     "canonical_import_failed": ("acquisition",),
     "download_required_but_not_allowed": ("acquisition",),
     "no_original_location": ("acquisition",),
+    "acquisition_budget_required": ("acquisition",),
+    "candidate_selected": ("resolution", "acquisition"),
+    "request_scope_allows_no_items_or_bytes": ("acquisition",),
     # safety — no registered codes yet (stage reserved for prompt-safety)
     # artifact
     "hash_missing": ("artifact",),
@@ -631,6 +651,7 @@ STAGES_BY_REASON: dict[str, tuple[str, ...]] = {
     "artifact_superseded_by_newer": ("artifact",),
     "unexpected_path_pattern": ("artifact",),
     "focus_policy_orphan_sidecar": ("artifact",),
+    "maintenance_retired": ("resolution", "artifact"),
     # STAGE PLACEMENT CORRECTED 2026-09-16 (B-VR1301-03): the first registration put the
     # 13 focus_policy_* decision codes under "artifact", contradicting this map's own
     # rules - their sibling focus_policy_no_allowed_category_evidence is "semantic"
@@ -680,6 +701,8 @@ STAGES_BY_REASON: dict[str, tuple[str, ...]] = {
     "cannot_parse_yaml": ("semantic",),
     "llm_deferred": ("semantic",),
     "llm_global_failure": ("semantic",),
+    "intra_group_repeat": ("semantic",),
+    "same_unit_repeat": ("semantic",),
     # ZR-502 homepage identity — content-level verdict evidence
     "no_first_page_text": ("semantic",),
     "no_declared_identity_on_cover": ("semantic",),
@@ -704,6 +727,7 @@ STAGES_BY_REASON: dict[str, tuple[str, ...]] = {
     "no_output": ("consumer",),
     "document_not_in_catalog": ("consumer",),
     "source_not_in_catalog": ("consumer",),
+    "narrative_reader_unavailable": ("artifact", "consumer"),
     # Provider-use policy / transcript acquisition and source-export stages.
     "action_not_permitted": ("safety",),
     "allocated_staging_root_unavailable": ("acquisition", "safety"),

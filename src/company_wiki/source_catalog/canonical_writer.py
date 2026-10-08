@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass, replace
+from dataclasses import asdict, dataclass
 from enum import Enum
 import hashlib
 import json
@@ -18,16 +18,17 @@ from company_wiki.source_contract import source_id_for_sha256
 from .acquisition import DownloadCandidate, DownloadReceipt
 from .download_budget import AcquisitionBudget
 from .lock import CatalogOperationLock
-from .resolver import ResolutionResult, ResolutionStatus, SourceRequest, SourceResolver
+from .resolver import SourceRequest
 from .registration_scope import SourceRegistrationScope, register_catalog_sources
 from .service import SourceCatalog
-from .store import canonical_json, metadata_state
+from .store import canonical_json
 
 if TYPE_CHECKING:
     from .source_reader import SourceRef
 
 
 CANONICAL_IMPORT_SCHEMA_VERSION = "1.0"
+CANONICAL_IMPORT_RESULT_SCHEMA_VERSION = "2.0"
 MAX_PROVENANCE_EXTENSIONS_BYTES = 16 * 1024
 _INVALID_WINDOWS_CHARS = re.compile(r'[<>:"/\\|?*\x00-\x1f]+')
 _SAFE_EXTENSION = re.compile(r"^\.[a-z0-9]{1,10}$")
@@ -59,7 +60,7 @@ class CanonicalImportResult:
     content_sha256: str
     canonical_path: str
     provenance_path: str | None
-    resolution: ResolutionResult
+    source_ref: SourceRef
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -70,7 +71,7 @@ class CanonicalImportResult:
             "content_sha256": self.content_sha256,
             "canonical_path": self.canonical_path,
             "provenance_path": self.provenance_path,
-            "resolution": self.resolution.to_dict(),
+            "source_ref": asdict(self.source_ref),
         }
 
 
@@ -183,16 +184,15 @@ class CanonicalSourceWriter:
             existing = self._existing_original(receipt.content_sha256)
             if existing is not None:
                 self._remove_staged(staged)
-                resolution = SourceResolver(self.catalog).resolve(request)
                 return CanonicalImportResult(
-                    schema_version=CANONICAL_IMPORT_SCHEMA_VERSION,
+                    schema_version=CANONICAL_IMPORT_RESULT_SCHEMA_VERSION,
                     status=CanonicalImportStatus.DEDUPLICATED_AFTER_DOWNLOAD,
                     request_id=request.request_id,
                     source_id=source_id_for_sha256(receipt.content_sha256),
                     content_sha256=receipt.content_sha256,
                     canonical_path=str(existing),
                     provenance_path=None,
-                    resolution=resolution,
+                    source_ref=self.source_ref_for_import(request, candidate, receipt.content_sha256),
                 )
 
             destination = self._destination(request, candidate, receipt)
@@ -234,115 +234,18 @@ class CanonicalSourceWriter:
                     receipt,
                     provenance_extensions=provenance_extensions,
                 )
-            # DEF-MSFT-CANONICAL-DUP: this scan is the import's own
-            # consistency mechanism — the exact-identity verification below
-            # (and every future reuse) reads the index it builds.  GP-002
-            # wires production scans to the activation snapshot's
-            # v2_scan_shadow flag, but a root that declares no adapter_id
-            # fails CLOSED in the v2 dispatch (adapter_dispatch), so a
-            # shadow-mode import scan indexes NOTHING while the canonical
-            # file is already committed: the import then fails its own
-            # verification, and every replay re-downloads into another
-            # unindexed orphan (MSFT FY2026 10-K).  The import is a
-            # committed write, not a shadow experiment: dispatch through
-            # the root's declared adapter when it has one, otherwise the
-            # legacy scanner that can actually read the root.  Non-import
-            # scans keep following GP-002 unchanged.
+            # Registration proves the committed content exists in the catalog.
+            # Business identity, reporting periods and historical cutoffs belong
+            # to selection; storage returns the exact committed version directly.
             register_catalog_sources(
                 self.catalog.config, self.catalog.store,
                 SourceRegistrationScope(self.company_root.root_id,
                     frozenset({destination.relative_to(self.company_root.path).as_posix()})),
             )
-            exact_request = SourceRequest(
-                entity=request.entity,
-                market=request.market,
-                security_id=request.security_id,
-                document_kind=request.document_kind,
-                form_type=request.form_type or candidate.form_type,
-                fiscal_year=request.fiscal_year or candidate.fiscal_year,
-                fiscal_period=request.fiscal_period or candidate.fiscal_period,
-                language=request.language or candidate.language,
-                provider=candidate.provider,
-                provider_document_id=candidate.provider_document_id,
-                as_of_date=request.as_of_date,
-                allow_download=request.allow_download,
-            )
-            exact_resolution = SourceResolver(self.catalog).resolve(exact_request)
-            if exact_resolution.status is not ResolutionStatus.REUSED_EXACT:
-                unknown_publication = (
-                    candidate.document_kind == "investor_call_transcript"
-                    and candidate.filing_date is None
-                )
-                if unknown_publication:
-                    if (
-                        exact_resolution.status is not ResolutionStatus.AMBIGUOUS
-                        or exact_resolution.reason
-                        != "matching_sources_have_unknown_published_date"
-                    ):
-                        raise CanonicalImportError(
-                            "unknown-date source did not remain cutoff-ineligible"
-                        )
-                    self._verify_unknown_date_index(request, candidate, receipt.content_sha256)
-                    exact_resolution = replace(
-                        exact_resolution,
-                        request_id=request.request_id,
-                    )
-                else:
-                # DEF-MSFT-CANONICAL-DUP: re-serve variants of one provider
-                # identity may legitimately coexist on canonical disk (the
-                # pre-existing variant file stays until its owner disposes
-                # of it — raw content is immutable here), and two
-                # distinct-content documents sharing one provider identity
-                # resolve AMBIGUOUS by design (resolver: exact identity is
-                # one filing; which byte-variant is authoritative is an
-                # owner decision). This verification pins the exact bytes
-                # THIS import just committed: adopt the resolution only
-                # when exactly one exact-provider-identity match carries the
-                # committed source id and SHA. Capture metadata stays
-                # diagnostic and does not override those facts.
-                    committed = [
-                    handle
-                    for handle in exact_resolution.matches
-                    if handle.content_sha256 == receipt.content_sha256
-                    and handle.source_id == source_id_for_sha256(receipt.content_sha256)
-                    and handle.provider_document_id == candidate.provider_document_id
-                    and (not candidate.provider or handle.provider == candidate.provider)
-                ]
-                    if (
-                        exact_resolution.status is not ResolutionStatus.AMBIGUOUS
-                        or len(committed) != 1
-                    ):
-                        raise CanonicalImportError(
-                            "canonical file was written but exact provider identity did not resolve: "
-                            f"status={exact_resolution.status.value}; "
-                            f"trace={';'.join(exact_resolution.debug_trace)}"
-                        )
-                    exact_resolution = replace(
-                        exact_resolution,
-                        status=ResolutionStatus.REUSED_EXACT,
-                        reason="exact provider identity resolved to the committed bytes",
-                        matches=(committed[0],),
-                    )
-            # F-EE1: exact_request above is only the post-write VERIFICATION
-            # probe (it pins the candidate's provider identity).  The result
-            # this import RETURNS answers the CALLER's request: the journal
-            # row for this operation is keyed request.request_id
-            # (acquisition_service.common), the provenance sidecar records it
-            # (_write_provenance), and CanonicalImportResult.request_id below
-            # already claims it.  Returning the exact-keyed resolution broke
-            # that chain: the FC-704 envelope's journal loop skipped the
-            # downloaded_new row (resolver.py:1026
-            # attempt.request_id != resolution.request_id) and faked
-            # outcome=reused_existing / download_events=0 after a committed
-            # download (FC-704; FF READ-10; RF ENV-11).  Status, matches and
-            # reason stay the verified exact resolution — only the answering
-            # request identity is corrected, matching the dedup branch above,
-            # which already re-resolves with the caller's request.
-            resolution = replace(
-                exact_resolution, request_id=request.request_id)
+            source_ref = self.source_ref_for_import(request, candidate, receipt.content_sha256)
             self._remove_staged(staged)
             return CanonicalImportResult(
-                schema_version=CANONICAL_IMPORT_SCHEMA_VERSION,
+                schema_version=CANONICAL_IMPORT_RESULT_SCHEMA_VERSION,
                 # DEF-MSFT-CANONICAL-DUP: when the committed bytes were
                 # already on canonical disk this import is a re-acquisition
                 # of existing content, not a new document — journal it as
@@ -357,7 +260,7 @@ class CanonicalSourceWriter:
                 content_sha256=receipt.content_sha256,
                 canonical_path=str(destination.resolve()),
                 provenance_path=str(provenance.resolve()),
-                resolution=resolution,
+                source_ref=source_ref,
             )
 
     def source_ref_for_import(
@@ -366,33 +269,20 @@ class CanonicalSourceWriter:
         candidate: DownloadCandidate,
         sha256: str,
     ) -> SourceRef:
-        """Return the pathless catalog reference for one committed import.
+        """Return the committed content version without repeating selection.
 
-        Transcript records with unknown publication dates are deliberately
-        excluded from as-of resolution, so locate those only through the
-        writer's exact post-scan identity check. This reference does not grant
-        historical eligibility; consumers still apply their requested cutoff.
+        Request/candidate remain in this compatibility signature. Their scope
+        was checked at the write boundary; neither capture metadata nor a
+        historical cutoff is required to identify committed bytes.
         """
-        if candidate.document_kind == "investor_call_transcript" and candidate.filing_date is None:
-            document_id = self._verify_unknown_date_index(request, candidate, sha256)
-        else:
-            matches = [
-                item
-                for item in SourceResolver(self.catalog).resolve(request).matches
-                if item.content_sha256 == sha256
-                and item.provider_document_id == candidate.provider_document_id
-                and (not candidate.provider or item.provider == candidate.provider)
-            ]
-            if len(matches) != 1:
-                raise CanonicalImportError(
-                    "imported source has no unique exact catalog reference"
-                )
-            document_id = matches[0].document_id
-        from .source_reader import SourceVersionReader
+        from .source_reader import SourceReadError, SourceVersionReader
 
-        return SourceVersionReader(self.catalog).query_ref(
-            document_id, source_id_for_sha256(sha256), sha256
-        )
+        source_id = source_id_for_sha256(sha256)
+        document_id = source_id.replace("urn:company-wiki:source:", "urn:company-wiki:document:")
+        try:
+            return SourceVersionReader(self.catalog).query_ref(document_id, source_id, sha256)
+        except SourceReadError as exc:
+            raise CanonicalImportError("committed source was not indexed to its bytes") from exc
 
     def _validate_staged(
         self,
@@ -400,16 +290,14 @@ class CanonicalSourceWriter:
         candidate: DownloadCandidate,
         receipt: DownloadReceipt,
     ) -> Path:
-        if candidate.entity != request.entity:
-            raise CanonicalImportError("candidate entity does not match request")
-        if candidate.candidate_id != receipt.candidate_id:
-            raise CanonicalImportError("receipt candidate_id does not match candidate")
-        if candidate.provider != receipt.provider:
-            raise CanonicalImportError("receipt provider does not match candidate")
-        if candidate.provider_document_id != receipt.provider_document_id:
-            raise CanonicalImportError("receipt provider identity does not match candidate")
-        if candidate.source_url != receipt.source_url:
-            raise CanonicalImportError("receipt source URL does not match candidate")
+        from .acquisition_validation import candidate_scope_problem, receipt_binding_problem
+
+        problem = candidate_scope_problem(request, candidate)
+        if problem is not None:
+            raise CanonicalImportError(f"candidate {problem} does not match request")
+        problem = receipt_binding_problem(candidate, receipt)
+        if problem is not None:
+            raise CanonicalImportError(f"receipt {problem} does not match candidate")
         staged = Path(receipt.staged_path).resolve(strict=True)
         staging_root = self.staging_root.resolve(strict=True)
         try:
@@ -499,39 +387,6 @@ class CanonicalSourceWriter:
             / filename
         ).resolve(strict=False)
 
-    def _verify_unknown_date_index(
-        self, request: SourceRequest, candidate: DownloadCandidate, sha256: str
-    ) -> str:
-        rows = self.catalog.reader.query(
-            text=candidate.title,
-            document_kind=candidate.document_kind,
-            limit=1000,
-        )
-        matches = []
-        for row in rows:
-            metadata, problem = metadata_state(row["metadata_json"])
-            acquisition = metadata.get("acquisition")
-            if problem is not None or not isinstance(acquisition, dict):
-                continue
-            if (
-                row["published_date"] is None
-                and row["source_status"] == "active"
-                and row["primary_source_id"] == source_id_for_sha256(sha256)
-                and acquisition.get("provider_document_id")
-                == candidate.provider_document_id
-                and acquisition.get("provider") == candidate.provider
-                and acquisition.get("company_name") == request.entity
-                and acquisition.get("security_id") == request.security_id
-                and acquisition.get("market") == request.market
-                and self.catalog.reader.source_sha(row["primary_source_id"]) == sha256
-            ):
-                matches.append(row["document_id"])
-        if len(matches) != 1:
-            raise CanonicalImportError(
-                "unknown-date original was not indexed to its verified bytes"
-            )
-        return str(matches[0])
-
     @staticmethod
     def _atomic_copy(
         staged: Path,
@@ -568,7 +423,7 @@ class CanonicalSourceWriter:
             # Top-level identity field: the resolver and the scanner's
             # prefer-new metadata merge both read market at top level, while
             # security_id already sits here (portfolio-promotion spike).
-            "market": request.market,
+            "market": candidate.market,
             "security_id": request.security_id,
             "source_title": candidate.title,
             "provider": candidate.provider,
@@ -644,6 +499,7 @@ class CanonicalSourceWriter:
 
 __all__ = [
     "CANONICAL_IMPORT_SCHEMA_VERSION",
+    "CANONICAL_IMPORT_RESULT_SCHEMA_VERSION",
     "CanonicalImportError",
     "CanonicalImportResult",
     "CanonicalImportStatus",

@@ -190,7 +190,8 @@ class TestSecurityIdFiltering:
         )
         result = SourceResolver(catalog).resolve(request)
         # CN document has security_id=600519, not 999999
-        assert result.status is ResolutionStatus.IDENTITY_CONFLICT
+        assert result.status is ResolutionStatus.MISSING
+        assert result.matches == () and result.download_required
 
     def test_correct_security_id_matches(self, tmp_path):
         from company_wiki.source_catalog import (
@@ -213,12 +214,12 @@ class TestSecurityIdFiltering:
 
 
 # ---------------------------------------------------------------------------
-# RED 3: candidate identity missing — must fail closed
+# Auxiliary identity missing on a company-owned source does not veto reuse.
 # ---------------------------------------------------------------------------
 
 
-class TestIdentityMissingFailClosed:
-    """CW-3.5: truly empty identity → fail_closed (strict)."""
+class TestIdentityMissingDiagnostics:
+    """The company anchor remains usable without redundant security fields."""
 
     def test_request_with_market_but_candidate_no_identity(self, tmp_path):
         from company_wiki.source_catalog import (
@@ -235,8 +236,8 @@ class TestIdentityMissingFailClosed:
             as_of_date="2026-07-18",
         )
         result = SourceResolver(catalog).resolve(request)
-        # CW-3.5: empty security_id → fail_closed
-        assert result.status == ResolutionStatus.IDENTITY_CONFLICT
+        assert result.status is ResolutionStatus.REUSED_EQUIVALENT
+        assert len(result.matches) == 1 and not result.download_required
 
 
 # ---------------------------------------------------------------------------

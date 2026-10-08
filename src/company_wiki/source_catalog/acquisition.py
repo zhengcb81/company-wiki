@@ -124,10 +124,7 @@ class DownloadCandidate:
             raise ValueError("market must be CN, HK, or US")
         if not self.source_url.startswith("https://"):
             raise ValueError("source_url must be HTTPS")
-        if self.document_kind == "investor_call_transcript":
-            object.__setattr__(self, "filing_date", _optional_date(self.filing_date, "filing_date"))
-        else:
-            object.__setattr__(self, "filing_date", _date(self.filing_date, "filing_date"))
+        object.__setattr__(self, "filing_date", _optional_date(self.filing_date, "filing_date"))
         for name in (
             "form_type",
             "fiscal_period",
@@ -403,13 +400,6 @@ class AcquisitionCoordinator:
                 resolution=resolution,
                 reason=resolution.reason,
             )
-        if resolution.status is ResolutionStatus.IDENTITY_CONFLICT:
-            return AcquisitionResult(
-                schema_version=ACQUISITION_SCHEMA_VERSION,
-                status=AcquisitionStatus.MISSING,
-                resolution=resolution,
-                reason="identity_conflict_no_download",
-            )
         if request.mode == "latest_as_of":
             return self._gap_plan_result(request, resolution, budget=budget,
                                          candidate_scope=candidate_scope)
@@ -451,35 +441,14 @@ class AcquisitionCoordinator:
 
     @staticmethod
     def _validate_candidates(request: SourceRequest, candidates: tuple[DownloadCandidate, ...]) -> None:
+        from .acquisition_validation import candidate_scope_problem
+
         for candidate in candidates:
             if not isinstance(candidate, DownloadCandidate):
                 raise AcquisitionError("adapter returned a non-DownloadCandidate value")
-            if candidate.market != request.market:
-                raise AcquisitionError(
-                    "adapter candidate market does not match request"
-                )
-            if candidate.document_kind != request.document_kind:
-                raise AcquisitionError(
-                    "adapter candidate document_kind does not match request"
-                )
-            if candidate.entity.casefold() != request.entity.casefold():
-                raise AcquisitionError("adapter candidate entity does not match request")
-            if request.provider and candidate.provider != request.provider:
-                raise AcquisitionError("adapter candidate provider does not match request")
-            if request.provider_document_id and candidate.provider_document_id != request.provider_document_id:
-                raise AcquisitionError("adapter candidate accession does not match request")
-            for field in ("fiscal_period", "form_type", "language"):
-                requested = getattr(request, field)
-                actual = getattr(candidate, field)
-                if requested and actual and requested.casefold() != actual.casefold():
-                    raise AcquisitionError(f"adapter candidate {field} does not match request")
-            if (
-                request.fiscal_year is not None
-                and candidate.fiscal_year != request.fiscal_year
-            ):
-                raise AcquisitionError(
-                    "adapter candidate fiscal_year does not match request"
-                )
+            problem = candidate_scope_problem(request, candidate)
+            if problem is not None:
+                raise AcquisitionError(f"adapter candidate {problem} does not match request")
 
     def stage_selected(
         self, request: SourceRequest, selection: AcquisitionResult, *,
@@ -513,14 +482,10 @@ class AcquisitionCoordinator:
                 reason="existing_catalog_source_reused_after_discovery",
                 gap_plan=selection.gap_plan,
             )
-        if discovered_resolution.status in {
-            ResolutionStatus.AMBIGUOUS, ResolutionStatus.IDENTITY_CONFLICT,
-        }:
+        if discovered_resolution.status is ResolutionStatus.AMBIGUOUS:
             return AcquisitionResult(
                 schema_version=ACQUISITION_SCHEMA_VERSION,
-                status=(AcquisitionStatus.AMBIGUOUS
-                        if discovered_resolution.status is ResolutionStatus.AMBIGUOUS
-                        else AcquisitionStatus.MISSING),
+                status=AcquisitionStatus.AMBIGUOUS,
                 resolution=replace(discovered_resolution, request_id=request.request_id),
                 adapter_name=adapter.name, candidate=candidate,
                 reason=discovered_resolution.reason,
@@ -681,16 +646,10 @@ class AcquisitionCoordinator:
     ) -> None:
         if not isinstance(receipt, DownloadReceipt):
             raise AcquisitionError("adapter returned a non-DownloadReceipt value")
-        if receipt.candidate_id != candidate.candidate_id:
-            raise AcquisitionError("receipt candidate_id does not match candidate")
-        if receipt.provider != candidate.provider:
-            raise AcquisitionError("receipt provider does not match candidate")
-        if receipt.provider_document_id != candidate.provider_document_id:
-            raise AcquisitionError(
-                "receipt provider_document_id does not match candidate"
-            )
-        if receipt.source_url != candidate.source_url:
-            raise AcquisitionError("receipt source_url does not match candidate")
+        from .acquisition_validation import receipt_binding_problem
+        problem = receipt_binding_problem(candidate, receipt)
+        if problem is not None:
+            raise AcquisitionError(f"receipt {problem} does not match candidate")
         path = Path(receipt.staged_path).resolve(strict=True)
         allocated = staging_directory.resolve(strict=True)
         try:

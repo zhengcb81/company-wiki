@@ -1,0 +1,99 @@
+{
+  "schema_version": "cmrf-owned-cleanup/1",
+  "roots": [
+    {
+      "name": "p1sq",
+      "bytes_removed": 1888763,
+      "restored_absent": true
+    },
+    {
+      "name": "p1sq2",
+      "bytes_removed": 1917637,
+      "restored_absent": true
+    },
+    {
+      "name": "p1sq3",
+      "bytes_removed": 1942357,
+      "restored_absent": true
+    },
+    {
+      "name": "p1sqr",
+      "bytes_removed": 25450701,
+      "restored_absent": true
+    },
+    {
+      "name": "p1sqo",
+      "bytes_removed": 304164,
+      "restored_absent": true
+    },
+    {
+      "name": "p1sqa",
+      "bytes_removed": 39752501,
+      "restored_absent": true
+    },
+    {
+      "name": "p1sqb",
+      "bytes_removed": 3504807,
+      "restored_absent": true
+    },
+    {
+      "name": "p1sqc",
+      "bytes_removed": 45570026,
+      "restored_absent": true
+    },
+    {
+      "name": "p1sqd",
+      "bytes_removed": 432049,
+      "restored_absent": true
+    },
+    {
+      "name": "p1identity-red",
+      "bytes_removed": 5946603,
+      "restored_absent": true
+    },
+    {
+      "name": "p1identity-red2",
+      "bytes_removed": 838734,
+      "restored_absent": true
+    },
+    {
+      "name": "p1identity-green",
+      "bytes_removed": 10497136,
+      "restored_absent": true
+    },
+    {
+      "name": "p1identity-all",
+      "bytes_removed": 54977406,
+      "restored_absent": true
+    },
+    {
+      "name": "p1https-baseline",
+      "bytes_removed": 262455,
+      "restored_absent": true
+    },
+    {
+      "name": "p1https-baseline2",
+      "bytes_removed": 295223,
+      "restored_absent": true
+    },
+    {
+      "name": "p1identity-final",
+      "bytes_removed": 58462154,
+      "restored_absent": true
+    },
+    {
+      "name": "p1scope-red",
+      "bytes_removed": 0,
+      "restored_absent": true
+    },
+    {
+      "name": "p1scope-green",
+      "bytes_removed": 14952671,
+      "restored_absent": true
+    }
+  ],
+  "total_bytes_removed": 266995387,
+  "originals_written": 0,
+  "production_config_changes": 0,
+  "external_harness_worktrees_removed": 0
+}
