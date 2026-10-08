@@ -1,13 +1,13 @@
 {
   "schema_version": "all-pwf-plan-inventory/2",
-  "status": "R5A_and_R3A_producer_published_current_consumers_live_R3_and_final_R5_pending",
+  "status": "R3A_consumers_merged_RF_published_green_CWP_integration_test_release_pending_live_R3_and_R5B_pending",
   "previous_inventory": "all_pwf_inventory_2026-10-07.json",
   "historical_archive_commit": "6dd56011a7d49e2b8c147f2163b0708074f9edd7",
   "items": [
     {
       "path": "all_pwf_completion_implementation_2026-10-07.md",
       "title": "# 全部PWF：实际实施与完成条件",
-      "sha256": "060af02b68a5c6a5eab37597c924610825b3233ea0777e7fab3e126626067fd4",
+      "sha256": "69390f03a40b877f5e88addfd01f65ca48d53a1177db48637e1c1b97c090375c",
       "role": "current_entry_or_current_evidence",
       "unchecked_items": 0
     },
@@ -112,7 +112,7 @@
     {
       "path": "findings.md",
       "title": "# Findings：当前事实、风险与证明范围",
-      "sha256": "f9e0c3a19062c8cbe8956b41ebee0f3dda7b41ca0cc8ab37d263603b15976606",
+      "sha256": "1084566120d5aee9229bcc034973e5d288c9c1b4a57dc4854f1f80cc911f40c0",
       "role": "current_entry_or_current_evidence",
       "unchecked_items": 0
     },
@@ -742,7 +742,7 @@
     {
       "path": "progress.md",
       "title": "# Progress：当前执行记录",
-      "sha256": "3c0e2de696131cb23acba2f416cfcc79860e583ebf2aa5425e71f82af30ebd59",
+      "sha256": "27655a208174be1b5c2dd5856b0e66314564b5f8bd3ca2e30048c07b8abbbf84",
       "role": "current_entry_or_current_evidence",
       "unchecked_items": 0
     },
@@ -771,7 +771,7 @@
       "path": "r3_current_material_read_implementation_2026-10-08.md",
       "role": "current_entry_or_current_evidence",
       "unchecked_items": 0,
-      "sha256": "b5e46d540048e31a27cc0b1943f4e361fe868332b5c00f4bd293a58dde63f708",
+      "sha256": "6cbe2c9eee49522c889a4a9a1a66175868180f925b8a09ceb17f6ae109560fee",
       "title": "# R3A：普通资料阅读与历史时点读取分开"
     },
     {
@@ -805,7 +805,7 @@
     {
       "path": "README.md",
       "title": "# 本计划目录导航",
-      "sha256": "848de802d10a8d243dfa14e4469beffe2d70b63534024002afdbaa131ba14e10",
+      "sha256": "e0e4d5d46e9811ecda91a2313f921ccfe6d36ca1342271d872841b8f03c2624c",
       "role": "current_entry_or_current_evidence",
       "unchecked_items": 0
     },
@@ -875,7 +875,7 @@
     {
       "path": "task_plan.md",
       "title": "# 公司来源平台：唯一当前施工入口",
-      "sha256": "bb1421511d099842eb95f19603821e7cc0b05fa8013cc11d8f34e330a04629cd",
+      "sha256": "f690905074e7d0af87c694cd2d7a0acf45f578598c570e0958ad05e67c62e748",
       "role": "current_entry_or_current_evidence",
       "unchecked_items": 0
     },
@@ -909,14 +909,18 @@
     }
   ],
   "verification": {
-    "current_local_links_checked": 113,
+    "current_local_links_checked": 119,
     "missing_current_links": 0,
     "historical_top_notices_checked": 120,
     "R3_post_count": 0,
     "token_increment_reply": "pending",
     "production_AUTO_db_absent": true,
     "source_code_unchanged": false,
-    "source_change_scope": "R3A nullable explicit current cutoff in producer transport; old historical checks retained"
+    "source_change_scope": "R3A explicit nullable current reads in producer/RF/SW and real-source CLI integration; historical rules retained",
+    "RF_head": "c672a5e5b496dfac532a705b70a7976540399177",
+    "StockWiki_head": "42fba06878fc58c01f58c0206f4d694a68e4d451",
+    "R3A_node": "1 pass, 0 skip, 49.98 sec; loopback only",
+    "R3A_owner_protected": 342
   },
   "not_a_permission_or_hash_gate": true,
   "document_count": 129

@@ -46,10 +46,9 @@ def _export_stockwiki(root, head, target):
             destination.write_bytes(package.read(entry))
 
 
-@pytest.mark.real_data
-@pytest.mark.e2e
-def test_real_ir_txt_procedure_and_misleading_title_current_consumers(
+def _exercise_real_sources_and_committed_consumers(
     tmp_path_factory, loopback_model_server, monkeypatch, protected_inputs,
+    *, current_mode=False,
 ):
     inputs = {name: os.environ.get(name) for name in (
         "CWP_G2_REAL_SOURCE_ROOT", "CWP_E2E_TRANSCRIPT_PATH",
@@ -92,6 +91,10 @@ def test_real_ir_txt_procedure_and_misleading_title_current_consumers(
             relative_paths = {path.relative_to(root / "companies").as_posix()
                               for path in state.raw_paths.values()}
             state.catalog.register_sources(root_id="company_raw", relative_paths=relative_paths)
+            if current_mode:
+                # Isolated capture metadata only: unknown never becomes a fake date.
+                with state.catalog.store.transaction() as connection:
+                    connection.execute("UPDATE documents SET published_date=NULL")
             config = root / "config/catalog.json"
             config.parent.mkdir()
             config.write_bytes(state.config_path.read_bytes())
@@ -128,7 +131,7 @@ def test_real_ir_txt_procedure_and_misleading_title_current_consumers(
                     "schema_version": "narrative-reference-request/1", "source_ref": asdict(ref)})
                 manifest = state.reader.describe_version(ref)
                 request = {"schema_version": "narrative-read-request/1", "narrative_ref": reference,
-                    "as_of_date": "2026-10-08", "expected_source": {
+                    "as_of_date": None if current_mode else "2026-10-08", "expected_source": {
                         "canonical_entity_id": "ent-acme", "market": "US", "security_id": "ACME",
                         "document_kind": manifest["document_kind"], "fiscal_year": 2026, "fiscal_period": "Q1"}}
                 view, receipt = invoke(producer + ["--operation", "read"], request)
@@ -158,6 +161,29 @@ def test_real_ir_txt_procedure_and_misleading_title_current_consumers(
                 sw_view, _ = invoke([sys.executable, "-B", "-m", "stockwiki.cli", "source-read-narrative",
                                     "--request", str(request_file), "--reader-config", str(consumer_config)], request)
                 assert rf_view["evidence_spans"] == view["evidence_spans"] == sw_view["evidence"]
+                if current_mode:
+                    assert receipt["as_of_date"] is None
+                    assert receipt["manifest"]["published_date"] is None
+                    assert rf_view["as_of_date"] is sw_view["as_of_date"] is None
+                    assert rf_view["manifest"]["published_date"] is None
+                    assert sw_view["manifest"]["published_date"] is None
+                    historical = dict(request, as_of_date="2026-10-08")
+                    refused = subprocess.run(producer + ["--operation", "read"],
+                        input=json.dumps(historical).encode(), capture_output=True,
+                        env=env, cwd=root, timeout=45)
+                    assert refused.returncode == 2 and refused.stdout == b""
+                    assert json.loads(refused.stderr)["reason"] == "source_publication_unknown"
+                    refused_rf = subprocess.run([sys.executable, "-B", str(rf_export / "narrative_source_preparation.py"),
+                        "--company-wiki-catalog-config", str(config)], input=json.dumps(historical).encode(),
+                        capture_output=True, env=env, cwd=root, timeout=45)
+                    assert refused_rf.returncode == 2 and refused_rf.stdout == b""
+                    assert json.loads(refused_rf.stderr)["reason"] == "source_publication_unknown"
+                    request_file.write_text(json.dumps(historical), encoding="utf-8")
+                    refused_sw = subprocess.run([sys.executable, "-B", "-m", "stockwiki.cli", "source-read-narrative",
+                        "--request", str(request_file), "--reader-config", str(consumer_config)],
+                        capture_output=True, env=env, cwd=root, timeout=45)
+                    assert refused_sw.returncode == 2 and refused_sw.stdout == b""
+                    assert json.loads(refused_sw.stderr)["reason"] == "source_publication_unknown"
                 reports.append({"source_sha256": ref.content_sha256, "source_id": ref.source_id,
                                 "document_id": document_id, "language": language,
                                 "span_count": len(view["evidence_spans"]), "zero_model_skip": is_policy,
@@ -168,17 +194,38 @@ def test_real_ir_txt_procedure_and_misleading_title_current_consumers(
             assert len(loopback_model_server.requests) == 3
             fixtures.assert_originals_and_foreign_jobs_untouched(state, originals,
                 output=process.stdout + process.stderr + again.stdout + again.stderr)
-            report = {"schema_version": "g2-consolidated-node/1", "status": "passed",
+            report = {"schema_version": "r3a-current-material-chain/1" if current_mode else "g2-consolidated-node/1", "status": "passed",
                       "boundary": "real source bytes; fixture identity/publication; loopback model; committed consumer CLIs",
                       "consumer_heads": consumer_heads, "sources": reports,
                       "model_loopback_posts": 3, "resume_new_posts": 0, "live_provider_posts": 0,
                       "paid_calls": 0, "production_writes": 0, "budget": result["budget"]}
+            if current_mode:
+                report.update(as_of_date=None, publication=None,
+                              historical_refusals_per_source=["CWP", "RF", "StockWiki"])
         finally:
             state.catalog.close()
     assert not root.exists()
     report["fixture_root_restored_absent"] = True
-    output = os.environ.get("CWP_G2_NODE_REPORT")
+    output = os.environ.get("CWP_R3A_NODE_REPORT" if current_mode else "CWP_G2_NODE_REPORT")
     if output:
         path = Path(output).resolve()
         assert path.is_relative_to((REPO / ".planning").resolve()) and not path.exists()
         path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+@pytest.mark.real_data
+@pytest.mark.e2e
+def test_real_ir_txt_procedure_and_misleading_title_current_consumers(
+    tmp_path_factory, loopback_model_server, monkeypatch, protected_inputs,
+):
+    _exercise_real_sources_and_committed_consumers(
+        tmp_path_factory, loopback_model_server, monkeypatch, protected_inputs)
+
+
+@pytest.mark.real_data
+@pytest.mark.e2e
+def test_current_material_unknown_publication_real_consumers(
+    tmp_path_factory, loopback_model_server, monkeypatch, protected_inputs,
+):
+    _exercise_real_sources_and_committed_consumers(
+        tmp_path_factory, loopback_model_server, monkeypatch, protected_inputs, current_mode=True)

@@ -1,0 +1,2073 @@
+{
+  "schema_version": "r3a-consumer-isolation/1",
+  "status": "merged_owner_files_unchanged",
+  "bases": {
+    "rf": "436fed68d8ba334ae568de296636904c5cc3e6cf",
+    "stockwiki": "9f9e0afe16a327b475cb7a6e3d40bd1578bb9b0f"
+  },
+  "protected_files": [
+    {
+      "repo": "rf",
+      "relative_path": "assurance/runs/daily_alert.jsonl",
+      "bytes": 1407,
+      "sha256": "f297e2b887a4dc279a1012c23fb50b77c25f6237e970b22278037d42f24869c8"
+    },
+    {
+      "repo": "rf",
+      "relative_path": "assurance/runs/weekly_alert.jsonl",
+      "bytes": 753,
+      "sha256": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5"
+    },
+    {
+      "repo": "rf",
+      "relative_path": "assurance/runs/weekly_manifest.json",
+      "bytes": 364,
+      "sha256": "0d55cb8c81f12b663e330819da3037bb69ce8564ac41a686b578a99f78f948bf"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "docs/handoff/SW-REPAIR-02/build_export_manifest.py",
+      "bytes": 3968,
+      "sha256": "bde1c1c8b70d473d5729ba5f70854f24e135a17184938d531c6d778ddfb51e7c"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "docs/handoff/SW-REPAIR-02/export-manifest.json",
+      "bytes": 5288,
+      "sha256": "53d831d2a0b0aaae08970114bf92bb3d5193933ed59cf3d03574777bebde0957"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "docs/handoff/SW-REPAIR-02/run_frozen_acceptance.py",
+      "bytes": 5156,
+      "sha256": "6fef05625399918acf50610e5674dd5df0d723fd0afc72a816a60e4d219c77e5"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "docs/handoff/SW-REPAIR-02/logs/check_full.log",
+      "bytes": 2560,
+      "sha256": "c0e75034ee963588db5161a0f3a2ed117f2206c01c37e0ad06ddb38ad33c5f9b"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "docs/handoff/SW-REPAIR-02/logs/check_static_only.log",
+      "bytes": 593,
+      "sha256": "305a147407a4911cc7dcf58aac03015a59af944ad743a38abbc15cf047211f2f"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "docs/handoff/SW-REPAIR-02/logs/frozen_acceptance_post_fix.log",
+      "bytes": 218,
+      "sha256": "616b5fc2369cccf9ad14efc596b8a43f18f01f4774ddb25353831d116852d4eb"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "docs/handoff/SW-REPAIR-02/logs/green_affected_batch.log",
+      "bytes": 183,
+      "sha256": "f18626f60f77ebdfb3803b38b60f978d9c6726d3a0bcb4b2c0cefd3e7d074842"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "docs/handoff/SW-REPAIR-02/logs/green_e2e_browser.log",
+      "bytes": 11511,
+      "sha256": "6a3f128f6888ca7fc0ecb7fc1693d6bc054e055d3767aa4045da37802a94dee4"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "docs/handoff/SW-REPAIR-02/logs/red_swr_cases_baseline.log",
+      "bytes": 15698,
+      "sha256": "60a007d25374a6e4d03b88d5ff4313d49622241e95eca26ac5f3651e07aaa526"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "docs/handoff/SW-REPAIR-02/planning/findings.md",
+      "bytes": 4351,
+      "sha256": "c583a87e9eb254a94d0d5db16bc338b32041aec61c55c84734f4c3e5daffbc5f"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "docs/handoff/SW-REPAIR-02/planning/progress.md",
+      "bytes": 1953,
+      "sha256": "79700f036e377ee4446562e18091a9f8a7d8461bf7bbb96d9a17346a4ce5cfda"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "docs/handoff/SW-REPAIR-02/planning/task_plan.md",
+      "bytes": 6952,
+      "sha256": "2beb97cefdeb1652d48a265e27878ebdf1999af9eb9fa753c957b5fa0aa0b296"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "docs/handoff/SW-REPAIR-02/logs/screenshots/e2e-01-list-2000.png",
+      "bytes": 598881,
+      "sha256": "8b06803a7f576be54dee048e506f87257a843b8be7344f6442f07864055eac66"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "docs/handoff/SW-REPAIR-02/logs/screenshots/e2e-02-detail.png",
+      "bytes": 391577,
+      "sha256": "d8bc0c201881ec5e29188bcd0cad590e6fa14e7c2095a256b5f626523560f3ec"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "docs/handoff/SW-REPAIR-02/logs/screenshots/e2e-03-narrow.png",
+      "bytes": 369508,
+      "sha256": "e666282c30ac016c5d06cd640a94a5fa8e308e451131e5742ad97681fb283a9e"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "docs/handoff/SW-REPAIR-02/logs/screenshots/e2e-05-multi-condition.png",
+      "bytes": 640289,
+      "sha256": "c1e66194162d31a99dd732f20442a8f892285abb06d055fbb9cae7c907e4d7a7"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "docs/handoff/SW-REPAIR-02/logs/screenshots/e2e-06-multi-condition-context.png",
+      "bytes": 649977,
+      "sha256": "b02496b617c6f0a6f25982431d205aed04e30de3e8a0fd4af6e36ce6f2bb0602"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "docs/handoff/SW-REPAIR-02/logs/screenshots/e2e-07-variants.png",
+      "bytes": 392506,
+      "sha256": "f4dc95247e76d6f2bd62e7cb1998fd65fe4d393664143ede371234de856a5c23"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/export-manifest.json",
+      "bytes": 5288,
+      "sha256": "53d831d2a0b0aaae08970114bf92bb3d5193933ed59cf3d03574777bebde0957"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/pytest.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/cache/.gitignore",
+      "bytes": 37,
+      "sha256": "3ed731b65d06150c138e2dadb0be0697550888a6b47eb8c45ecc9adba8b8e9bd"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/cache/CACHEDIR.TAG",
+      "bytes": 191,
+      "sha256": "37dc88ef9a0abeddbe81053a6dd8fdfb13afb613045ea1eb4a5c815a74a3bde4"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/cache/README.md",
+      "bytes": 302,
+      "sha256": "73fd6fccdd802c419a6b2d983d6c3173b7da97558ac4b589edec2dfe443db9ad"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/legacy_quick_scan_query.py",
+      "bytes": 20260,
+      "sha256": "271b1ba2434123180d27a64437e3f14487d390ffb5c6276471e5302a06c0639a"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/analysis.py",
+      "bytes": 18708,
+      "sha256": "4ef54b5bc3b192acb93518431811bbd7f8f39c459912fdc9ee4c3d7465236394"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/analysis_evidence.py",
+      "bytes": 4606,
+      "sha256": "76476c22d72fa1ec4475ef24dc730307a68ac35632f8fe33e782fc1900758da6"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/analysis_render.py",
+      "bytes": 15500,
+      "sha256": "cc417fefbe4eb52f4fc373326cb95fba3af339290fe014f1d8bcd16c9d54c775"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/audit.py",
+      "bytes": 10051,
+      "sha256": "995d2e0a813daaf36aa43301779ccb0e97f0c8378ae7b79ebac86a3c283de52e"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/audit_dimensions.py",
+      "bytes": 22280,
+      "sha256": "8b4bbe427cdb0aac825b9b4d9e61a4beaf1339077c973fd9088479881d196d87"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/backup.py",
+      "bytes": 7715,
+      "sha256": "b70830d1a6ff614f556280e3c9fd79e2390704b8c1968f9cb87e98a75d81bfcd"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/cli.py",
+      "bytes": 708,
+      "sha256": "872dd5f810cd7f3a3a7c0ad9d30e5259dd8cddc855d639534805510adb44cde2"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/cli_registry.py",
+      "bytes": 1113,
+      "sha256": "84c1205427c3901f0b8495aceaa8e1863464a42d13fa9685c62873bda0e970a7"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/config.py",
+      "bytes": 7806,
+      "sha256": "d6ab49bbf406e77dc6ac39f5155154df8aa98bc1ee4f006496b33c8f82a5d613"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/content_conformance.py",
+      "bytes": 8979,
+      "sha256": "1d7c235dd11799db3d20104a26ec65401a7435a78ff5ec578d2e13ed27ecd685"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/crosslink.py",
+      "bytes": 12205,
+      "sha256": "483ec094cdba928c0afd40ccc11ff9b7b601e368e025ba8a9f887694391b07eb"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/dashboard.py",
+      "bytes": 23256,
+      "sha256": "4b8a79340d3f04f5f702992d35dae71894c65f2da7e1b791415f52712dd5028c"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/dayu_evidence.py",
+      "bytes": 21870,
+      "sha256": "59da916810d894e26fa313d0db8c108d45b6b9c967e619368b1e2c5f06e8724a"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/dir_index.py",
+      "bytes": 7384,
+      "sha256": "c6dfcfac4d8b10295fff723c87e3f79f7e9a6867611050ae70707dedaa61ee2d"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/documents.py",
+      "bytes": 9961,
+      "sha256": "e673606d95df3a2ceb8c2f8f43862945b8df991635e077e281bb594589ca9f69"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/document_signals.py",
+      "bytes": 17300,
+      "sha256": "f1dd454da8a9825a40158f16486ef3a723edfee0c416dbfa2f9053af4516007a"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/document_signals_helpers.py",
+      "bytes": 7303,
+      "sha256": "326a689e068984d1cb14db386400ae468c4241529cc298e187e3b6c040c7bac9"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/enrichment.py",
+      "bytes": 15567,
+      "sha256": "f0e1130a2d396cecf1b62548c4bd1b00918670e541b56f460abb405f677f9865"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/evidence_gap.py",
+      "bytes": 21064,
+      "sha256": "785e0ac373213e421663f991248c357db877d0b79be332e9e16d56a782106d05"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/evolution.py",
+      "bytes": 8842,
+      "sha256": "63c472f7df3c8f1ee973faf8166e504c946a7ed263bd63ffa58ba401c5689f96"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/evolution_apply.py",
+      "bytes": 15001,
+      "sha256": "dec948b1e489f7b9512820101ab2c73bc1fd1352feeb4e7c03395b9f9e55d568"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/evolution_proposers.py",
+      "bytes": 20019,
+      "sha256": "b56ae087a5684a1b2066e2d1d99f5a5940c22615be434b7f4437be499dc6c6c9"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/evolution_review.py",
+      "bytes": 11157,
+      "sha256": "0fd075058a7c7662cb514d216b1dbc301d40115fbf03d9c6536b38358bbd5484"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/framework.py",
+      "bytes": 13713,
+      "sha256": "fe911d6ddbaf8a67612eba5a584fa22c2581fbef07a4beec616accfc637a5efe"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/framework_validators.py",
+      "bytes": 2719,
+      "sha256": "730cd4001c7c5a13c96f1116e478fb8e8782851c33746e2b103677b89832b4f4"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/framework_validators_base.py",
+      "bytes": 3959,
+      "sha256": "682e774a228a7551ab4241a5c56b13d72f26746683f6ba93f53cbab9d7bc652e"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/framework_validators_forests.py",
+      "bytes": 5075,
+      "sha256": "ea3e2ff8a75cd4446ad98584c64d942e1a62aebbca5a9262f11b5d207a28e0e6"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/framework_validators_industry.py",
+      "bytes": 18514,
+      "sha256": "c0c940c9b2d841a40317432a1114ad3eee06de690cce3d3bdcbd035645ecaa33"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/framework_validators_okf.py",
+      "bytes": 12995,
+      "sha256": "3414cc5ca9acd865bcd9000c9ad1f6fd90cc021e97257f08d1aa2a16f869c92a"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/framework_validators_policy.py",
+      "bytes": 11758,
+      "sha256": "ec923498b8192802d26040411469da739e1b33f5b0cabe3823d010b76f3cec33"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/framework_validators_topics.py",
+      "bytes": 14393,
+      "sha256": "cba599dec330d55330020e3726a3e2bdf594dd0c721610ede2ed79d48471fe7f"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/hypothesis_ledger.py",
+      "bytes": 12149,
+      "sha256": "9c40b3f9623c42ff2864bd7383d225ba1f413ab2d39e8cff960621310754021e"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/i18n_labels.py",
+      "bytes": 5225,
+      "sha256": "75e8bfdf291585bacf1cbf2415f3e4ec3992946b3fd18dca4243d54d240711f6"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/identity_g2b.py",
+      "bytes": 10601,
+      "sha256": "c667ce6c7b22e3a545cdfd8ad265b1c80d3cef78adc4bea38d7809b6c78d2db1"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/identity_import.py",
+      "bytes": 16426,
+      "sha256": "832b391dfd6e26ab893fba26927fecfa7fdfa0128d5c428e841ba1fa1dd709aa"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/identity_mapping.py",
+      "bytes": 10262,
+      "sha256": "fac474253c6c529debef1011fa00dcecd07b2de2a9ff886e1d059c2736b6b043"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/identity_receipts.py",
+      "bytes": 22105,
+      "sha256": "58e5abcf757b507af6dc9cb7ff332e84f97ee0a6322214df928728fc97cf13ac"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/identity_snapshot.py",
+      "bytes": 14727,
+      "sha256": "e287eb88ee37cb1d407f47d630223a931b3bcbc839f047aef618ff7640f6210e"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/industry.py",
+      "bytes": 14635,
+      "sha256": "4e306268e6ca9144bfac5413a15690e411dcddc345631e7840ba1ce9c5c679ea"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/industry_gap.py",
+      "bytes": 20049,
+      "sha256": "c5752c5141a40f8e0ffe4d79058aab7b162d2b0c935306ec4f008d6c9f461533"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/industry_helpers.py",
+      "bytes": 3328,
+      "sha256": "7ef7adb8a5e2edb6d3fb173c18e10fbe53f60393e095265532f057a362ef3d4b"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/industry_helpers_base.py",
+      "bytes": 2189,
+      "sha256": "0befb52c27a33cdc6e3d0149d6e478bed5069afe28e20230bb433d3cbde2c166"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/industry_helpers_data.py",
+      "bytes": 22295,
+      "sha256": "22c25555f2f864f491fead35c9271438e99362adf743c53b548b21d5a32487e5"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/industry_helpers_render.py",
+      "bytes": 21238,
+      "sha256": "804dab898d9e05967cb7d3bfcd10da888a030ee2ee21541f196d91a100acb9c9"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/industry_report.py",
+      "bytes": 17858,
+      "sha256": "7d4611d46f44f3387cfd84d2a85ed377110134392095f665555baa15a68ece2a"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/industry_report_render.py",
+      "bytes": 18150,
+      "sha256": "666448d20e398dfa1f14d455ed5c676c38c321e70abcd53b381016ed72aac2cd"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/industry_signals.py",
+      "bytes": 13670,
+      "sha256": "70576de74580d317562f20cd2fb2e1d0164822057daf5f5409a76f9ecd262ab7"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/llm_classifier.py",
+      "bytes": 10032,
+      "sha256": "7be80dc5f40d6315c44f4c88bd8ef1e65b9027520273233904ed07b6b506840a"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/llm_provider.py",
+      "bytes": 7994,
+      "sha256": "fc05f74c4ac3cda34e268f14e32d5889e0b92edb1608bff711411e376de1b26f"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/llm_review.py",
+      "bytes": 9340,
+      "sha256": "203cbe6e98a0f652b1b09a96e02e61dfe5ab35e4b155b1e9cfaab98df84e28b8"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/market_registry.py",
+      "bytes": 17176,
+      "sha256": "b3333e0fb9dafac599b900884a9082d9ea975798c98984d31beac0597b633db9"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/narrative_source.py",
+      "bytes": 4372,
+      "sha256": "4025c9acfbeed3f57d2844679c7b2195b5a7fbd5a5955ef1ad0e14140094b199"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/news.py",
+      "bytes": 6779,
+      "sha256": "e0158816356e4c4fcd14e1839b41aef6701cc3b0a00895f756cb10a09901af8f"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/news_audit.py",
+      "bytes": 3709,
+      "sha256": "6c261b67837c20f3d1e21fc84dd67eee76eabc8e9a5b5d77ab817c61848640ae"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/news_fetch.py",
+      "bytes": 3118,
+      "sha256": "ef9700a9bad632473f8bf6da061c14a762d8cc1e56a80e7f853be5544dcd7dc1"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/news_helpers.py",
+      "bytes": 19128,
+      "sha256": "bba06c17f4181f687e7cca0f779890a707072986c216e87646663eef800993dc"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/news_helpers_base.py",
+      "bytes": 4902,
+      "sha256": "d8d12f1f651d94918b9e81efaf8eb2b9b1207f8484f9499335830fa8c03ef279"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/news_import.py",
+      "bytes": 7712,
+      "sha256": "8f0cc0496cc11954d368703ea747c0038fa93a154b02892cc3688c46541b7c56"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/news_models.py",
+      "bytes": 1516,
+      "sha256": "b3f8a009cfef29297b8f04d63cc848b02c97ae8ce40f8a84cfe9c700e214b433"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/news_writers.py",
+      "bytes": 11632,
+      "sha256": "aac94fd05a803b2f2a86383a050e142ff94b92b4fa668c8cd949dbb578717c0f"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/obsidian_export.py",
+      "bytes": 8999,
+      "sha256": "147768a52fdfa901597c3ca95aa6fa944d5deb9ae863285fb129bafbff7ecd5f"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/okf.py",
+      "bytes": 11971,
+      "sha256": "1d92eac1b6a5a9935c4e032a149416336a36a65ffec144d93733ee03c9f41fe5"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/okf_export.py",
+      "bytes": 4543,
+      "sha256": "23d991c30c9a9132a57aef76afaaedc4eb4c98abc7bae9d74cedf83a0ab00649"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/paths.py",
+      "bytes": 2386,
+      "sha256": "7d6ce107efe77681b5afe4d7aa39ffec075eb5fb0e474b0c1ee28b9cf2914b3d"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/perf.py",
+      "bytes": 4019,
+      "sha256": "8b9a480b3320dbb7d213725dd878bb685667eaaba7d1989cb6672094ef834869"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/pipeline.py",
+      "bytes": 11923,
+      "sha256": "cf3a6947d2c0fefbb024a78be42c851b3a8712d1f5dd0f62aa948bdca61b5687"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/preflight.py",
+      "bytes": 3728,
+      "sha256": "ea3b187cb1e649ece99fa45e9981b7ead2cdfb9110e13c49e580b380f9165a38"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/prompts.py",
+      "bytes": 5125,
+      "sha256": "624330e78fcdb0b11166dd50c44d17d8cfd6fa8f3e495194450173be6fc59006"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/question_timeline.py",
+      "bytes": 12368,
+      "sha256": "82937d20739a1fb876d6282402a262c5a2c90400025ad24d5717f451372524bf"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/quick_scan_analysis.py",
+      "bytes": 26582,
+      "sha256": "305b06ca58c42c18ed8f7651b18157f2bcfabe6b7336b62e39c50cc9e8552610"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/quick_scan_backup.py",
+      "bytes": 24887,
+      "sha256": "583969698128713e64ed6edd57112aadaf36377b931afd0caaaf7d8e53e81425"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/quick_scan_backup_manifest.py",
+      "bytes": 20223,
+      "sha256": "6be07efa5009aa88e2ad7540b666d7a64c369e82dbecf95726a2e13bec1fef41"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/quick_scan_candidates.py",
+      "bytes": 24221,
+      "sha256": "463705ee731ed23e6460ac80a69429eac12c484dd1bd226c2f60db706c34ba93"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/quick_scan_candidate_import.py",
+      "bytes": 13018,
+      "sha256": "9fcf4113fb1ff99c4d50d9f6713ee436639a974585419f37862335172cdb6086"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/quick_scan_conditions.py",
+      "bytes": 5164,
+      "sha256": "f757604866144439c0ebafc36f65f08b30b9a534cdc795efaa0e731d8a653885"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/quick_scan_delivery.py",
+      "bytes": 11791,
+      "sha256": "27208402b1672bc776aa469f6a9f77e4b27f24c072c044ee5758fbacf715cc73"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/quick_scan_evidence.py",
+      "bytes": 17407,
+      "sha256": "2b48d1f14e97f05b703dc1d865b1810ed557b66aad979e53879f94ac666e7525"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/quick_scan_freshness.py",
+      "bytes": 23165,
+      "sha256": "4cff8633f4d1e0d6c444177ec37e0fc7eca942bb2178fc93ee164d5464a6a1e9"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/quick_scan_identity.py",
+      "bytes": 21757,
+      "sha256": "2d894e50a6e07b0abdcc37ca2733fdb7d17bb5efe9f7dff6e64112dc9ed30230"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/quick_scan_import.py",
+      "bytes": 24477,
+      "sha256": "87c77921428cb52239f0276a647198aeb3988954f07b4debb468a1a1237dfa56"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/quick_scan_issuer_bridge.py",
+      "bytes": 15386,
+      "sha256": "c437edeff219072dd1e3cba00524d56a09bdb1558dd12817bf636282bab565eb"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/quick_scan_maintenance.py",
+      "bytes": 21985,
+      "sha256": "e22de405345cd2364f37acd3cfcd50e8a05787b90b72370911a6a99cff8d5a8b"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/quick_scan_observations.py",
+      "bytes": 23304,
+      "sha256": "c06f4c58ea5557ab678721f78c5a14d595c26fef5fb1e55843382be956866691"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/quick_scan_profiles.py",
+      "bytes": 23716,
+      "sha256": "b73db0d5e574039411d49af9b63a24fd864a28b7546e413fa4823dc9986d5b05"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/quick_scan_query.py",
+      "bytes": 24483,
+      "sha256": "72332d88d4d48fe8e45c2415cdabd3838849cd4e803e1f72c3cbf376bf9def09"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/quick_scan_recovery.py",
+      "bytes": 13037,
+      "sha256": "35046d296c7742087ed7c10815e9ecc8dfd1c0c66942772324be8d7d110bbd06"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/quick_scan_refresh.py",
+      "bytes": 13923,
+      "sha256": "12fd9f189d59863e576b5605f1ad6ef05c243be26e27dff2a37b9d551469fb83"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/quick_scan_rows.py",
+      "bytes": 11139,
+      "sha256": "ce206537d8c18db89fce0901345f51e7539fd3c2ec3e44b57b401d92241ec520"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/quick_scan_rules.py",
+      "bytes": 18761,
+      "sha256": "53afa69aa1737964b0575d5715ec4525f95dab3caaf91df51de3cb20ecb456f8"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/quick_scan_schema.py",
+      "bytes": 8966,
+      "sha256": "095d2eb25cf283853483ef98e6653595df326306ba2cfdc6e3e06cdb56914e46"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/quick_scan_store.py",
+      "bytes": 42099,
+      "sha256": "ba742b4214bc383f0d11ef9e119fa522a11230d58022c691df5efcd787c7f304"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/quick_scan_universe.py",
+      "bytes": 16044,
+      "sha256": "6676cc9d756eb73c50f2cc108954e95e01a15c1967f3f7ebeed6355b96d2e71c"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/remediation.py",
+      "bytes": 12771,
+      "sha256": "e056c53d878d44b5969bb2f34f72e8333ebb99330d53301699c819f972d10818"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/report_export.py",
+      "bytes": 2579,
+      "sha256": "80deab5e6355d9f18f72ca5c1e87e73ab0f60b7670c308f489694fe4cc7e5f52"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/report_writer.py",
+      "bytes": 20010,
+      "sha256": "8975e0b5b6d7792a34562ceef1c5b27eef115288d49e71bcdca82d3a7bfc4762"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/review_policy.py",
+      "bytes": 15499,
+      "sha256": "3b395cfc327afe1a9833b90993c9cf1bc040feca3f7bfd0b5031c7bc9258636d"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/review_runner.py",
+      "bytes": 2635,
+      "sha256": "19ed87910e2dd4cfb61bab8a657b2d30f49db4ea2fbd567c345b659231b5398e"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/review_workflow.py",
+      "bytes": 16166,
+      "sha256": "6daba32cc277b9f0c72437e0f4609b5f8e7535013dc7394e69862869dbccca5b"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/review_workflow_helpers.py",
+      "bytes": 4236,
+      "sha256": "fbe399df29bb99de28baec49051f910c90647e916d574e184000c1a184b520a4"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/review_workflow_helpers_base.py",
+      "bytes": 7417,
+      "sha256": "941fa7f9f4297716d896fe7076225c8790fc2c741fb60f437620085a49be571c"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/review_workflow_helpers_batch.py",
+      "bytes": 9775,
+      "sha256": "3181f523587c32ed56e225c7c76a3b3d0f14ad58e748083e39ef0a8a037b124a"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/review_workflow_helpers_flow.py",
+      "bytes": 18118,
+      "sha256": "12ff3a3935990340dd2e60e40b02542fc90bb5493bbfb4970d9d3ea419328216"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/review_workflow_helpers_report.py",
+      "bytes": 15042,
+      "sha256": "0e33386e80cc7aa5bb5e226d7f16ae9cb088aabea1e1d35f308b306343e7d9a8"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/runtime.py",
+      "bytes": 21467,
+      "sha256": "de81157b873cb04477d94e3a88addf731dc03193ee62c842f6ba6d1b7aab2de6"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/runtime_store.py",
+      "bytes": 4938,
+      "sha256": "9b1726a9e130042fc7141e4fc32ab4c4eac74a40be544f1b32749e0c93f00591"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/scaffold.py",
+      "bytes": 5320,
+      "sha256": "4618425384f4bb305bf968921298847e149bfaf3fd50b89826b684ea42e13583"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/schema.py",
+      "bytes": 3385,
+      "sha256": "9ae09fd0639e77ebeca60a2aaa0cef9d750853dd245605c3de09e795557489aa"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/snr_governance.py",
+      "bytes": 10327,
+      "sha256": "f762f9bec1f6a7b694843d9fcd3f914f22d599958e90bfbcc0f405e4cbf530e5"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/sources.py",
+      "bytes": 6372,
+      "sha256": "e9ef53d40851b673ee11d813078a54f475b4488b35899a0c88aba3313c9cd65d"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/source_reader_v2.py",
+      "bytes": 3055,
+      "sha256": "aca45c731bf62ce9e039ce7f86c2bb7121e963630ca00f25dfa98086ae4a816f"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/timeline_review.py",
+      "bytes": 19510,
+      "sha256": "a40ec08955032631e314d8e7ba4d3a2e097e287951e52f28ef8c2868e133539a"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/timeline_review_render.py",
+      "bytes": 6260,
+      "sha256": "1b808ee106f2bfe15336d0ae33c212adbc3205d268d3c791f5f085bb28a13fba"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/topic_policy.py",
+      "bytes": 15520,
+      "sha256": "dc2ddf202f09810287ac5ed034a98f70006e3d1911f33408c80adeec57533b90"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/ui.py",
+      "bytes": 13735,
+      "sha256": "b518e6e5239c1140cf94dc9f0f1a28bfc6543fac2a552d7b3980f78970a41e57"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/ui_assets.py",
+      "bytes": 5513,
+      "sha256": "29d15796fb62b2a3d5af38ec047400b02126820d19f610ccb2627da1bc6f3ea0"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/ui_company.py",
+      "bytes": 18210,
+      "sha256": "e87ff397023b57e984a9da989c9f9fc9f75daeb99ede6b048bd0072544f56bf6"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/ui_industry.py",
+      "bytes": 3880,
+      "sha256": "bcc6c9df43f9bfc677c093292f0f69090e102d1da32b29f9e47e35b68b3d594c"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/ui_jobs.py",
+      "bytes": 14989,
+      "sha256": "a660a2fbb76788e713d357f90c7e61c23b2a1183385e2b1e9f93d8d31f0309bc"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/ui_policy.py",
+      "bytes": 8804,
+      "sha256": "f9fa1bb0fee407700832b301c720ee67179b8e8347621acddb81223ae2dad2a1"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/ui_quick_scan.py",
+      "bytes": 4328,
+      "sha256": "dd319b2385c42e8e448051426ea4fc093cb3dae3747eade0be52bc9784baf9b6"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/ui_reviews.py",
+      "bytes": 8013,
+      "sha256": "447f55b5f12ee4a173b7bb1405d8f7f3ceffff67a6f52bc8ed0f639463387814"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/ui_summary.py",
+      "bytes": 18509,
+      "sha256": "108d700d3892a5e808645c3353368e85cc502bc93027449fe46c8a205ec15cb6"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/ui_utils.py",
+      "bytes": 2528,
+      "sha256": "7f47264cd4305ddb683028f8d9a2b0833ae29925ae55cba48a03c494a6223d58"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/ui_wiki.py",
+      "bytes": 3936,
+      "sha256": "25fa39944bfcd45daf7963863698fe1f376386f8be3286a6daaf5d738f039313"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/wiki_index.py",
+      "bytes": 5590,
+      "sha256": "c4a3021adf48888b3b9cc5006b961ac12c726dd91171e6fd0e2c636e6b16e47a"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/_narrative_bundle.py",
+      "bytes": 14456,
+      "sha256": "b01fd95cd667f11ca4aa552b177413bb56abd7bf295dd26b8679245a39298013"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/_narrative_process.py",
+      "bytes": 7868,
+      "sha256": "7c61fbf909bd95126280dc0fa602e27b14eb0b721e49af668436fc24b3a7d203"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/_narrative_process_tree.py",
+      "bytes": 6483,
+      "sha256": "fc89499c530d93203104033c34cd15b13d201b96fb702ac6cfe59627ebc30c3e"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/_narrative_wire.py",
+      "bytes": 5998,
+      "sha256": "df7b6ed5b5161910e1a28fa8cdbdf3eb067f59458986d6f163d66645aaac074d"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/_source_reader_v2_bundle.py",
+      "bytes": 11853,
+      "sha256": "c2d53ed9c9f129d5db63bff75c82a6ad5132c55caa049c9484bec91a8ef72615"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/_source_reader_v2_transport.py",
+      "bytes": 9025,
+      "sha256": "3d8f4c323f89fd7824cf702bfaef5ed96f8a8e40740156c18d8dbd1735ca4edd"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/_source_reader_v2_wire.py",
+      "bytes": 15406,
+      "sha256": "c4fb649df481acb1ac6bf93210da0bd6efe955ca3840b459b9b7c037dc1bdc0f"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/_text.py",
+      "bytes": 2258,
+      "sha256": "c0d3dec865c26bc123b27ef16c81ed7a4d42636049361abefff2407a6bcb3a44"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/__init__.py",
+      "bytes": 76,
+      "sha256": "e11c7f9e908d1ac641ebecca52b21d2fbdf9100755800888058bea65ccf8e618"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_analysis_policy.py",
+      "bytes": 2119,
+      "sha256": "6d51e30f6d47cf90b24e724162f61794ecbe7e56fe7d34c35fc9208ddfd425c5"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_audit.py",
+      "bytes": 5956,
+      "sha256": "f4f1e2425f491fae67efa524c6e7c5c0be2a75e76a1f706dcc4d57fef0eafd4a"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_backup.py",
+      "bytes": 4293,
+      "sha256": "f2e9a42b7d7b0a8236cc4411f5dd85af2a9d99d0b061984b1cee9c1e1dfa1ae1"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_checks.py",
+      "bytes": 13142,
+      "sha256": "1993df6f10defc2b4843ef4e69df0d738d34338bb3d90db46a783d12b7e9617d"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_check_all_script.py",
+      "bytes": 3244,
+      "sha256": "150c68f7f532f7455d22a3b3c1cbf32dfdd6584bd7c26974752b659af1ea9d3b"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_cli_core.py",
+      "bytes": 14122,
+      "sha256": "04a540140eaafd79ada7fd050a7063fc6043479d807133f9428cff866adbf6f5"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_cli_enqueue.py",
+      "bytes": 2652,
+      "sha256": "72299ee3b2c05d2f8c3351e47548edf70b85dd90e833bc07c4e331a13a4e6d87"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_cli_industry_pack.py",
+      "bytes": 1870,
+      "sha256": "e22759dd415e074b4b07bd4ed36f6fa0d2e2789632ab134913ef45ebcde56fab"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_cli_smoke.py",
+      "bytes": 2035,
+      "sha256": "3bc9def9dd8e3bc8c4b1b376cb74c7cab21dd68f7566aefdc2479ca0d232cd16"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_company_pipeline.py",
+      "bytes": 5366,
+      "sha256": "b4fc339bee2125d9f90091978c173dead8b3d8ec4db03d53112ef3fea31d6551"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_config.py",
+      "bytes": 1667,
+      "sha256": "130250fcdcb1ad4a993e861d102f53d0718a56c3eb9730436936f82c8698a445"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_content_conformance.py",
+      "bytes": 5505,
+      "sha256": "9fde034ba69ff0a45e0720ec4440b4c1d0a5470e4e6e04a786e775ed8051af74"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_crosslink.py",
+      "bytes": 5448,
+      "sha256": "4a5eaa997d4d2cff56eb6aaf33c01cb37374b1eae4b1dceb9d81db000152f162"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_dashboard.py",
+      "bytes": 4147,
+      "sha256": "d5e6d86be8b24de38ea951cef6289ae61eb760536ed0f231273db8beec7c55c8"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_data_contract.py",
+      "bytes": 2280,
+      "sha256": "5ea4f1988f050b0b82f36397ccc892eab345729310b6fe763b8465bdbc591dc6"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_dayu_cli_integration.py",
+      "bytes": 8590,
+      "sha256": "bc451db6f58b179f4e28e43f00104ef008fa0363a71f89461a01f2a4f15d2b61"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_dir_index.py",
+      "bytes": 4250,
+      "sha256": "df6f88015e710ec54d6619c9cdfea3c0bc0fd1de9d46e6fa204e753256a3f824"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_documents.py",
+      "bytes": 3042,
+      "sha256": "7c797141813da5b91b313302107246f201713b67759988e20d28d1099351acea"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_document_signals.py",
+      "bytes": 24187,
+      "sha256": "7fa921522fab0f8105216d6c37ee5bddeee1e8835a4458dec5a6d3e16fa9adcf"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_e2e_quick_scan_ui.py",
+      "bytes": 39806,
+      "sha256": "b0427dd47b02cb17c4d1fefb486d125af820108e3ff2e6a606fe0435a22cc186"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_e2e_real_workspace.py",
+      "bytes": 9095,
+      "sha256": "f4e6fe997c29f2e619a8ebbb30ec22919d304257bbc1fc2b4f0ca1ee37a4e009"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_enrichment.py",
+      "bytes": 15231,
+      "sha256": "21d3d7746085fa09694875555d58c6a20057bca050141a033063a89bb812835e"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_evidence_gap.py",
+      "bytes": 4334,
+      "sha256": "360f56b4b1c898906785a928409507b3ae87fda0c221df5eac2b8a12c883282c"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_evolution.py",
+      "bytes": 22869,
+      "sha256": "75bac60319eaf924e3720c68c4cb13c6efcb1c489c81d58be535d70eb553363c"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_evolution_review.py",
+      "bytes": 5667,
+      "sha256": "def46aae2505ebd25c2a34c1cff8617a764b279dd29d440d2136c2178d41aad8"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_framework_validation.py",
+      "bytes": 29001,
+      "sha256": "be9e6fd191eb9b6f1e0f514dabe786b6785266af5356799c5be56db039b2c88e"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_hypothesis_ledger.py",
+      "bytes": 8390,
+      "sha256": "d4043947f172a1ee5b30a1410b665a5a17c0ee9a2792d6ba5fd049f5849353b7"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_identity_g2b_export.py",
+      "bytes": 13088,
+      "sha256": "1e09c375dde80e817c984e77ac945ce901fa41ad0d774f7d854a2ab756f482e9"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_identity_mapping.py",
+      "bytes": 11362,
+      "sha256": "09105e3fa30823e6927dca22a08414c14e153d3fc01b8485a978b3def05eb513"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_identity_receipts.py",
+      "bytes": 12835,
+      "sha256": "d65c915f1a536c536a6258945ee5e3f96bd6ef1d957c4f6e52e44a634348a959"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_identity_snapshot.py",
+      "bytes": 15800,
+      "sha256": "a9beab07ecd3765a878e599b4d452c15e49e4a3bcb36743158af7a3e6e5e5be3"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_industry.py",
+      "bytes": 16023,
+      "sha256": "c82b3dd72b8858e781e565a537bc6353d96da1d88d4723b96c01b555f087ff54"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_industry_gap.py",
+      "bytes": 3497,
+      "sha256": "c898a283b90368d7f42bf73dd6c5d45046b55b09756fa06e6efa32bba9341887"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_industry_report.py",
+      "bytes": 7020,
+      "sha256": "4595ed2f37a5e6498905f8667be820b3141dcc759accc76e8f9f525d78226e08"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_industry_signals.py",
+      "bytes": 8739,
+      "sha256": "39d71df2823b1ba6e2bbddb674ee86de86de866345e8d03b04d0651698596d6d"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_llm_classifier.py",
+      "bytes": 4215,
+      "sha256": "8597c6fadb88a4ba9bcb08e15cb15b7edabe6cb65004389323b576b353e8aa99"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_llm_provider.py",
+      "bytes": 6199,
+      "sha256": "8941abddb034d782587d5cc3701209d1668a5043a722fe5e2d6c6b520a493651"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_llm_review.py",
+      "bytes": 6804,
+      "sha256": "afbdb1654eb2c276cb29800b956366a0d37d24e085b4900d120f9c3fd3c16cb8"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_market_registry.py",
+      "bytes": 15697,
+      "sha256": "e83acd76e141a6fea6dd4e446af70fe15a217951dfb7e16122f44ce531d1525a"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_merge_imported_result.py",
+      "bytes": 5889,
+      "sha256": "f3954f4e932f34ee665c30634f97620ef5cd9e7f8ff84b51367d91ad808db61d"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_narrative_process.py",
+      "bytes": 6125,
+      "sha256": "c4ca85ef582730de842ffd0fdf39d61126b1315da67680223a2d55efcf456228"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_narrative_source.py",
+      "bytes": 11528,
+      "sha256": "12c5ade321894dba44cc626a730dab39de3cfd77139dd7a1b19974094c495579"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_narrative_source_cli.py",
+      "bytes": 4196,
+      "sha256": "8125636c3adf2dffb87c1fd9109e81d09b0420fd718b7067be32e81cc59cb3ac"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_news.py",
+      "bytes": 14528,
+      "sha256": "36ae0939ad92505a704c7e3e79409b08f1743a4eab8b509e56ff21822fd33cd1"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_obsidian_export.py",
+      "bytes": 7922,
+      "sha256": "22f4a7c6fff2960b554b745020c03fe873a173bee6f9a6c9733661f259363869"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_okf.py",
+      "bytes": 8216,
+      "sha256": "ed441c6c564b7a603fb6a35e3ffddebb7dd9ca8aca450c6561e61e7c1124544a"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_okf_conformance.py",
+      "bytes": 7607,
+      "sha256": "398264e3b926136d4a4866a07d11901b1e00b4e945fbc29a381a6718293fb158"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_okf_export.py",
+      "bytes": 3965,
+      "sha256": "b2f4433a2a2f7d121a72f27e388dcb0fb1e9bed59111920945a01dbc20e56ddc"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_paths.py",
+      "bytes": 1417,
+      "sha256": "5730018a3f63ee3967dd0b7dcb6c788b1a807ca13414cf23a6b825ccfe35e8de"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_perf.py",
+      "bytes": 4072,
+      "sha256": "31686f80c7985d383e8068561deb90f86f25b804e4fa5e0021ed10e8c87b6f7d"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_pipeline.py",
+      "bytes": 6258,
+      "sha256": "0e7371736df3b15a86220da97205c6c66faf09fa3c5f39d240c7188918eabf00"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_preflight.py",
+      "bytes": 3395,
+      "sha256": "b1addf62ebe73b4a0e6973dec3899315fb46d73ca46d93a5efe27bfe1412dd56"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_prompts.py",
+      "bytes": 8744,
+      "sha256": "2c7282786c4ef583aa2dd07bcab461ca1410a005252a96a8271d000b3977c066"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_question_timeline.py",
+      "bytes": 9718,
+      "sha256": "da8fc3c29217661a9968e8cd6f2be1d3ba5bc840f6f57163d013f023c2b051d3"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_quick_scan_analysis.py",
+      "bytes": 22933,
+      "sha256": "5b6bbe45c92161e2d066e85eeb127234c9ebfc5b069daa17e159cdf9375a1f6f"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_quick_scan_backup.py",
+      "bytes": 23219,
+      "sha256": "065b4ff5d25e8662ffd93726ad3ba3c6c98667f7ad588e4223322ffccb7a5d96"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_quick_scan_candidates.py",
+      "bytes": 19508,
+      "sha256": "a2150346ec283639ff5300c8126bfe566084f3597c1a29a335f2cd312a540f91"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_quick_scan_delivery.py",
+      "bytes": 12930,
+      "sha256": "83590abb5801c343f409a7c7f291784919f979c8644533ec189867a1c6fc037e"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_quick_scan_entity_import.py",
+      "bytes": 16046,
+      "sha256": "b3fe494167d4b889eeca12c0090aa19d752b052a46e17c00138782b653999c42"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_quick_scan_evidence.py",
+      "bytes": 9576,
+      "sha256": "b0025ab51bd25e866e64644e7672eb164879529c7cf9dc6222402fba402b2322"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_quick_scan_freshness.py",
+      "bytes": 24481,
+      "sha256": "6e13fb5ba596f5ba8320c7c0b2207ce47107e0c9882c90fc533ac37d26744032"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_quick_scan_identity.py",
+      "bytes": 30517,
+      "sha256": "3f12dc3b6e6f32b6aec1c54772aeea8bc6edb4e6994a4f69e9296dc6cc2dcc93"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_quick_scan_issuer_bridge.py",
+      "bytes": 15476,
+      "sha256": "e555c32fb26207657e06af5046b2dbd4a4b21f224abc80924210349cc308b723"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_quick_scan_maintenance.py",
+      "bytes": 27023,
+      "sha256": "0d8ab9cc7c630dfd64c1fb0ab5ed5a2f16db558b718b8d954df1334661f4501d"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_quick_scan_observations.py",
+      "bytes": 39494,
+      "sha256": "b5a83507fdf8eb5d119eae8f244fc1860909af4390e5d6c45df1ca143eb2e297"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_quick_scan_profiles.py",
+      "bytes": 20629,
+      "sha256": "5a4e05ae0206af77ab04b34e9c809bca42958f675c7098a9e5df6af5b5b250ec"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_quick_scan_query.py",
+      "bytes": 18352,
+      "sha256": "4613839b05ffb7866d286b3bd708209d58d9ffda2b454be1c7f48eeed3221752"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_quick_scan_recovery.py",
+      "bytes": 10416,
+      "sha256": "dea14e4603b8f9f20769eb8905159560644cff11f90e44647b09ae65877f6418"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_quick_scan_refresh.py",
+      "bytes": 12861,
+      "sha256": "a20f1224588a7278aade4eba4382589bc25d116ad18a40d5388df4b50fbcc1d9"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_quick_scan_rules.py",
+      "bytes": 18615,
+      "sha256": "a6f33e559812540a84decba6fe1a275e7d80af40fa12064c5bef3b7741e00504"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_quick_scan_store.py",
+      "bytes": 31188,
+      "sha256": "a4bc9f0965313898fb92f370a75337c86af483e6951e98547b8910d178d426a9"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_quick_scan_universe.py",
+      "bytes": 14686,
+      "sha256": "bcb6dbaac5392bbee87261e4ac93d1030085c60005fe8c4a3c5c67938ed46513"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_regenerate_wiki.py",
+      "bytes": 4743,
+      "sha256": "1aad60b9d3a9ae8530da4fe5dacc88517cbc7926fde7317e4614b4be86dadaba"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_remediation.py",
+      "bytes": 2360,
+      "sha256": "2e4d74795c417988ba9d17b31d3e7dbd40d9d7cdb5966da5049ecd601ecd0c08"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_report_export.py",
+      "bytes": 2177,
+      "sha256": "0bbe1feb4ae286dc43032af0d78d6568e9a47f883a18e83fb44c416dfc892ae7"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_report_writer.py",
+      "bytes": 11400,
+      "sha256": "eafb2bed37f48901831a4823091dc64394cad5f318540194b65e761851cc0446"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_review_runner.py",
+      "bytes": 3901,
+      "sha256": "32a0bdc5dc2b7ed869a073f3ebaa349164eb02935d0c9a333311170f2883f251"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_runtime.py",
+      "bytes": 9802,
+      "sha256": "3bc441d2cf02f6244bebd36b5686a51bce7ecde6d4307ee6791d42380f2adf17"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_schema.py",
+      "bytes": 3452,
+      "sha256": "3a2f31adfadc35e76190b5b18bb0ccae5f5e6a1e6d24d8b1f9c2660c89bf7c15"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_services_industry.py",
+      "bytes": 5219,
+      "sha256": "4dceb4bc2915d3c92f962cbb8dbfbb05d5e4bbb232da60e454f034699ae58970"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_services_news.py",
+      "bytes": 5454,
+      "sha256": "70a2917378daca7b84ab8ae04c48328fc2d8493789f928262e62ae025e2f7943"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_services_pipeline.py",
+      "bytes": 8205,
+      "sha256": "ec2a3e8716d4bb227e368e15f2373092c241b415dc7b393ddd48d8b0e464cf92"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_services_review.py",
+      "bytes": 5601,
+      "sha256": "e195690172cdb098064af741ccb796ce0807521f16a218e29e389834d5e076ef"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_services_runtime.py",
+      "bytes": 3793,
+      "sha256": "6df9e5b90b101fc8a9f3eb2000bcc8634468efe0015b23bd13b913130c67cbb5"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_snr_governance.py",
+      "bytes": 10389,
+      "sha256": "dbf1eda8dea18882dd69813bcb35777238ab964aaf3717298fe6a7afb45766e7"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_source_export_v2_cli.py",
+      "bytes": 18698,
+      "sha256": "3a1e60da140296932b4d9441fc2b8bc422749dba4940ab0b14613ab44320a8cc"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_source_export_v2_reader.py",
+      "bytes": 19392,
+      "sha256": "4d903b4f92359d8ebde49d5a63c1431288bd14916fbb8ae857416494b0b8bde9"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_swr_backup.py",
+      "bytes": 19540,
+      "sha256": "806a8292dfab3f5b6bf67f61b32062a1df8c097c16ac8911a1ec5f1edc96c289"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_swr_cases.py",
+      "bytes": 10068,
+      "sha256": "b82942b7e4e08e825016279028f569406d31f2d269122008e14924bfd478ce63"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_swr_profiles.py",
+      "bytes": 13175,
+      "sha256": "252745145d3d7cc224353df05275c17e3a8c6d0dbb6126caf4d5fd56965ae057"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_swr_query.py",
+      "bytes": 6985,
+      "sha256": "21d7906b633a9f08f94d31be6a42aa5750ca5bf783ac9912d83e3e400a4b515b"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_sw_ready_01_real_data.py",
+      "bytes": 6951,
+      "sha256": "495614683d0cf48b9e14c492bac638b8bf54e7df88f4a6757fc96e04cad5aefd"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_timeline_review.py",
+      "bytes": 46805,
+      "sha256": "bd74fd54d22ef5f18de07033852e077d71b7e49c3a129d7a70594489c1df2625"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_topic_downstream_policy.py",
+      "bytes": 7621,
+      "sha256": "52e9650e49c0dbbc9f792abb8954418bf00b8955d2440377eb9de0accf2d0d20"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_topic_policy.py",
+      "bytes": 7006,
+      "sha256": "d7ee26a01c4996f2da86464b59d35c6e997f8f25b3dca64495ec35d240c13754"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_ui.py",
+      "bytes": 33150,
+      "sha256": "61be8f549bbdb782481e4d1927f6f516cbf17883f0cc541a895b6efeea3343f9"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_ui_http.py",
+      "bytes": 3880,
+      "sha256": "60db545b04c2ba945de7d58c69e32efaa84af12f8b417193da6f55b5252498ba"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_ui_quick_scan.py",
+      "bytes": 11694,
+      "sha256": "b01c746246a446a9b18c93b95e8eb2245cd8a98078652a50c83871b69ef24592"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/test_wiki_index.py",
+      "bytes": 2011,
+      "sha256": "ec4fe26a1dafcf17ccd3f7a4af96a0ed0d464a649c2d25bc0853341409a1a49b"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/e2e/test_cwp_narrative_source.py",
+      "bytes": 9509,
+      "sha256": "01fc2125623fe6e208addb15f601515629b62c5f9ae0ab6ac154a7461303e699"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/e2e/test_cwp_source_export_v2.py",
+      "bytes": 23870,
+      "sha256": "0558362e7efb0863099c9ce9e46d8fa8f561888669975006db19c1bf5cb271a3"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/e2e/test_g2b_iqs_cli.py",
+      "bytes": 10674,
+      "sha256": "32511b08cc76299a8c7a256841506aab5fa8322fee34911da60767df0c7c1e24"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/fixtures/quick_scan_exchange_example.json",
+      "bytes": 8675,
+      "sha256": "fbd555de608abcb071b9f93d0c2b20b0436ad40b62a92b2c0a0a4efa44b7adb4"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/fixtures/market_registry/iso10383_sample.csv",
+      "bytes": 1484,
+      "sha256": "a4f5d6aa9941d91a7867e74cd98f9e83f47f7f12762c95bea3bcaf4dab4fadc4"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/fixtures/narrative_v1/bundle.json",
+      "bytes": 4042,
+      "sha256": "18f5ad055b89aa6e9d408cbb9bfae9ad0fcb30065aae23a170e9a03d5fdae251"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/fixtures/narrative_v1/invalid_request.json",
+      "bytes": 832,
+      "sha256": "d3e9bb26e868961c6f41049bcdb0ca6ce0d9302cfb500cceae52de610e1fd7c4"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/fixtures/narrative_v1/metadata.json",
+      "bytes": 849,
+      "sha256": "b3b05c0f07324096e62cf30098f05ff987cdce22ea1aad90573bbac6b664e865"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/fixtures/narrative_v1/read_receipt.json",
+      "bytes": 1788,
+      "sha256": "bf98c07be262325c5b5298adc3e2e89d90eae2796e9dca1141524074667d4f39"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/fixtures/narrative_v1/read_request.json",
+      "bytes": 832,
+      "sha256": "c29e4b0a2fcf2c01a0db91dd19a80c9f608a559a61f258e7fa5a8423e07ead82"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/fixtures/narrative_v1/reference.json",
+      "bytes": 573,
+      "sha256": "18264d336b071ff76fca046a9d973481195f0b0c62275319e01eb3629f742a5a"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/fixtures/source_v2/evidence_span.json",
+      "bytes": 664,
+      "sha256": "8818a05e01685f2950cdf5c20861abe5af5dd6d7376c50079d5ab587ffaad3b1"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/fixtures/source_v2/README.md",
+      "bytes": 1980,
+      "sha256": "48381660fa6f5c44d54a5c21c7dd9709e0faa93a35a92a1ab23ac996e50f7025"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/fixtures/source_v2/source_export_bundle.json",
+      "bytes": 1878,
+      "sha256": "50127fc93f77e38f391917e5b152037c5375e385eedd0284419555348e16d793"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/fixtures/source_v2/source_ref.json",
+      "bytes": 374,
+      "sha256": "1cc85345a631dd99d7f52b0155b2c32b418da13e364cbd0d2f3b2173b3f2bd6a"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/fixtures/source_v2/source_ref_bad_sha.json",
+      "bytes": 374,
+      "sha256": "3bd9157868d0bea5eb041e088da9bbd717c4db9246f583936c92b551897b83aa"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/fixtures/source_v2/verified_open_bad_sha.json",
+      "bytes": 86,
+      "sha256": "f4f34a791ead2775d276435d3093ddfda74bfa324cd34e26f80e0273a1ae8ada"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/tests/fixtures/source_v2/verified_open_receipt_normalized.json",
+      "bytes": 1319,
+      "sha256": "2d7b75d0d72f13e01b13ad3ec665930e58ab64a2c8579c87a5eda55a253857ab"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/cli_parsers/backup.py",
+      "bytes": 2612,
+      "sha256": "bc20a70e48f24a54693aa1baf20da291da07a5c41dabeba5d5c131376a240d99"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/cli_parsers/company.py",
+      "bytes": 7630,
+      "sha256": "430f4ce68634151c56e0315dd66b61a7bae57cb107d3c7369e8e0a50a62ec199"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/cli_parsers/core.py",
+      "bytes": 2625,
+      "sha256": "adfba11908fd33ea21ae8f7f9775d7d7eab1fd6b59e40aba475fb422fe5699b7"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/cli_parsers/dayu.py",
+      "bytes": 5701,
+      "sha256": "1b028f547099868131aae587b7966c2862abde704ee313481182a4cd2f409735"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/cli_parsers/evidence_gap.py",
+      "bytes": 1436,
+      "sha256": "9fc9e51258aaa3e6cb1e358f5d77bfdf14017c856eed422b18d637c151cc05a2"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/cli_parsers/evolution.py",
+      "bytes": 2586,
+      "sha256": "afc899d9666a9c64990c4d507d97dd4c1fab718b21668cdd4db4029d743a99d1"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/cli_parsers/identity_g2b.py",
+      "bytes": 2693,
+      "sha256": "2f6b1b54fa4564997302152ba9ba4970d325630772321ba0995f2c3ae0c2f4d8"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/cli_parsers/industry.py",
+      "bytes": 9854,
+      "sha256": "95be77478c12e65c35c7f644e052523e0acff71852d891972b839d608140db34"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/cli_parsers/narrative_source.py",
+      "bytes": 641,
+      "sha256": "df34a1b12acbff152de765024f844635c8855499a4046bb60aa4adb46e38ce7b"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/cli_parsers/news.py",
+      "bytes": 3454,
+      "sha256": "e3b5a6e2914a307f0554b78c016b53a1bacbb754da6a00b3fb775eb3552fcf5e"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/cli_parsers/obsidian.py",
+      "bytes": 574,
+      "sha256": "8778e25cca0759284267966ae362c7dbd48e7444ab050c0fadc114cfd209bdd2"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/cli_parsers/pipeline.py",
+      "bytes": 5570,
+      "sha256": "2d4dfe7305b16f4130654cfec7d08b03352c41f1745b9154cf94fca6a43b027b"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/cli_parsers/quick_scan.py",
+      "bytes": 15126,
+      "sha256": "f08907e20f4d958a9823edc5b02642eda13e1d511446e50144834aa20a78a87b"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/cli_parsers/review.py",
+      "bytes": 11304,
+      "sha256": "56b08d704ab5f54063fa472a4ee49440d4ce0d4526c84a50774577624ea457e4"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/cli_parsers/runtime.py",
+      "bytes": 3425,
+      "sha256": "aec53f24dd40e21050349d4e2ee686e78494e0c1d9b015d3699dba419a7049fe"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/cli_parsers/source_reader_v2.py",
+      "bytes": 1627,
+      "sha256": "a9e19c4d9c0f1e393272a5ff8f6be3aef824e6c85df48741dc3cc27f9b52708f"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/cli_parsers/workspace.py",
+      "bytes": 1437,
+      "sha256": "613aff2804aa5a22384f8f66ffe85abad5bf4ecfa0e5e6928458eabe37fef484"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/cli_parsers/__init__.py",
+      "bytes": 58,
+      "sha256": "6590a5131f3e30506ffe3b9cff878fe00ecfe4624d3f5a7398c59be523be36b3"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/integrations/dayu_cli.py",
+      "bytes": 19571,
+      "sha256": "7bc7e51a0b1d611836ba7d04c53322eada19053131b20ee80b6d6d3f91432665"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/integrations/dayu_metadata.py",
+      "bytes": 9132,
+      "sha256": "380f721e8445189296e5b5b055eea2cb3961bd65ee8f41d6249c0ae853f421f6"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/integrations/__init__.py",
+      "bytes": 49,
+      "sha256": "cf84c5825219101e12857a3287fe4a1d375c7caf3a1bfc93698c90157d2ade27"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/services/backup.py",
+      "bytes": 4591,
+      "sha256": "67c732d5c42ad71523d038481746af5054f419ee790fc3393d128d324f604b33"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/services/company.py",
+      "bytes": 8675,
+      "sha256": "921a3ecaa7c3c96659600f67d85761baebed4ffb4db91ab4e212c9e063e25ac2"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/services/core.py",
+      "bytes": 4769,
+      "sha256": "33405b11c10371a571754ed7abca218dd1d8bc1dd5d0d78de3e7bb274b2a1aa5"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/services/dayu.py",
+      "bytes": 8753,
+      "sha256": "5a2527d165f72f4c581ac5d8246f93e37cfe9c6f7ee94ce2bd29ed656078cf23"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/services/evidence_gap.py",
+      "bytes": 2208,
+      "sha256": "cc5fd14e8261e12ce2286aa4a5ec8c7fa082c4ad93ca7d636a0a5aca0f829c36"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/services/evolution.py",
+      "bytes": 5335,
+      "sha256": "c1fc997a0c128ddf6a5458471df5ec18b148a199531cf1caa09ea0697608cf43"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/services/identity_g2b.py",
+      "bytes": 5757,
+      "sha256": "10bf117ccd76d5bfe755a417d77fbf5f6849cf59a60ae18b0ea92dbdfbfb8787"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/services/industry.py",
+      "bytes": 13399,
+      "sha256": "c4359207bdc9b516c100227add021a3d578ddd714e14ed3ba3ee9d797c13294e"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/services/narrative_source.py",
+      "bytes": 1427,
+      "sha256": "b2f3c857157728dc78cdced656fa28b3a3ef95aa9f1a40854e7c159a3eb6a245"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/services/news.py",
+      "bytes": 4398,
+      "sha256": "a726d1eb0682d37756a03e822e45d5443c3f0ceb590ba13c60e13a9a3ac50760"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/services/obsidian.py",
+      "bytes": 974,
+      "sha256": "7c421a9cb9c30260ac0352e0ac1a9e2cd84e91fdf6d327e3c81263a8d1bb70b3"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/services/pipeline.py",
+      "bytes": 21512,
+      "sha256": "422410955f3375b4055139d5b2a3648076bce2937675a051254da1a26e54821b"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/services/pipeline_planner.py",
+      "bytes": 14357,
+      "sha256": "b852b73c81b6768855fa9f9fe93600bb4a3380a44fcae8a82ce1685f3178e950"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/services/review.py",
+      "bytes": 14196,
+      "sha256": "6884cdc1f638e4bbde97b7cc22fcb890caa214a46fad481c150f2cce825e9774"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/services/runtime.py",
+      "bytes": 5515,
+      "sha256": "c1dc43c40ce09027d56293a82ac10f07e22990fe71a1ce8c6f028d506aedf876"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/services/source_reader_v2.py",
+      "bytes": 3260,
+      "sha256": "758d5c7107226e5306a39e31b4af9d8dac2e53dce90a5131bf107ea095070762"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/services/workspace.py",
+      "bytes": 2852,
+      "sha256": "952c6fa71538ddfaf54069b34c3c734d7f465341b299e53e466f1a3cc52529c9"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/services/_common.py",
+      "bytes": 792,
+      "sha256": "d14942171c971594fb7a6aeaf8d3eb9b7c4b03e8a11111a457c7b3df896ea7d9"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/services/__init__.py",
+      "bytes": 316,
+      "sha256": "6b3191203508155d14fabe239c379832451c5a0354414246b91677bdbb199175"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/ui_static/app.js",
+      "bytes": 105086,
+      "sha256": "6f36f37c0cf505629e81a66f05d3cc3270a10c34aaccea6bc52cfb78deaa3aa2"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/ui_static/index.html",
+      "bytes": 13677,
+      "sha256": "25c18f24ef66a43c0f8166d0e5505b2873a48bfd9621a457d644398294ac5a30"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/runtime/stockwiki/ui_static/styles.css",
+      "bytes": 19941,
+      "sha256": "116bcf0a5f06d7905ab6b5486abb9c3f4fcef248d246996533b9f980cc82da5a"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/pytest/test_two_subjects_of_one_issue0/workspace/data/quick_scan/analysis_subjects.sqlite",
+      "bytes": 24576,
+      "sha256": "88ff57f41f25eb9656702c59d05361d671aa8d8e3a0da27306dc88d9781252c8"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/pytest/test_two_subjects_of_one_issue0/workspace/data/quick_scan/scan.sqlite",
+      "bytes": 163840,
+      "sha256": "7a5606b01a9a2d82a8eb54d3774ab0a605e892d0274de8548fafb96c9a552baa"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/pytest/test_two_subjects_of_one_issue0/workspace/data/quick_scan/scan_evidence.sqlite",
+      "bytes": 28672,
+      "sha256": "f8a546afc3af3fb3cad4efd7510758524c025f8998e3c4119b3b8b4919c9deee"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/pytest/test_two_subjects_of_one_issue0/workspace/data/quick_scan/scan_observations.sqlite",
+      "bytes": 94208,
+      "sha256": "8c2d4cb74d63cca2f837d1ac57676a71825dc0c8981f4a756a5a667d3875220e"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/pytest/test_sqlite_online_backup_pres0/workspace/data/quick_scan/scan.sqlite",
+      "bytes": 8192,
+      "sha256": "2397ee52ef03e029eb14cf9fd8ee65d414d55130bce8658889fc5812d1277046"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/pytest/test_sqlite_online_backup_pres0/workspace/backups/quick_scan/owner_registry.json",
+      "bytes": 1013,
+      "sha256": "adb346335654199431e37899162b60a39f644bb7af28244bb1e72bbfa9ec61aa"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/pytest/test_sqlite_online_backup_pres0/workspace/backups/quick_scan/wal_positive/quick_scan_backup_manifest.json",
+      "bytes": 2997,
+      "sha256": "1b19575effb1ef81c3f6f54fb64714c20ae0abbdad162924452772c7575f7f3a"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/pytest/test_sqlite_online_backup_pres0/workspace/backups/quick_scan/wal_positive/scan.sqlite",
+      "bytes": 8192,
+      "sha256": "ff8a75fda9e42ab58536f9e979de9ed74e1979c21548a1063a5e85f5fadd3310"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/pytest/test_restore_accepts_already_e0/workspace/data/quick_scan/marker.txt",
+      "bytes": 13,
+      "sha256": "1c9bfa0492e48f0fcd317bd4532710cf611d39ebab2f6213567c0f1ae0fb3a41"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/pytest/test_restore_accepts_already_e0/workspace/backups/quick_scan/owner_registry.json",
+      "bytes": 1013,
+      "sha256": "8b791b13d6d95d525cc9a65bf35a19b01063d6b6308a6a690acb535a6fe19419"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/pytest/test_restore_accepts_already_e0/workspace/backups/quick_scan/owned_backup/marker.txt",
+      "bytes": 13,
+      "sha256": "1c9bfa0492e48f0fcd317bd4532710cf611d39ebab2f6213567c0f1ae0fb3a41"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/pytest/test_restore_accepts_already_e0/workspace/backups/quick_scan/owned_backup/quick_scan_backup_manifest.json",
+      "bytes": 2688,
+      "sha256": "9e604ba954d5c46f669cb5bd576b37c3f10b63a44e1d5356bd82904ded70883a"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/pytest/test_foreign_manifest_director0/workspace/data/quick_scan/marker.txt",
+      "bytes": 13,
+      "sha256": "1c9bfa0492e48f0fcd317bd4532710cf611d39ebab2f6213567c0f1ae0fb3a41"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/pytest/test_foreign_manifest_director0/workspace/backups/quick_scan/owner_registry.json",
+      "bytes": 1013,
+      "sha256": "c6f2bfd118e2d41a4577e75ad8d36c07dcecc90c1811bb3eb34270eef9a92dbf"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/pytest/test_foreign_manifest_director0/workspace/backups/quick_scan/foreign_fixture/quick_scan_backup_manifest.json",
+      "bytes": 169,
+      "sha256": "6524b79cf453b1fcac29539da988427953f11531ccf4ff91c48c66da7058ea6d"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/pytest/test_foreign_manifest_director0/workspace/backups/quick_scan/owned_backup/marker.txt",
+      "bytes": 13,
+      "sha256": "1c9bfa0492e48f0fcd317bd4532710cf611d39ebab2f6213567c0f1ae0fb3a41"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/pytest/test_foreign_manifest_director0/workspace/backups/quick_scan/owned_backup/quick_scan_backup_manifest.json",
+      "bytes": 2688,
+      "sha256": "735600cc13922cd241ce0276ba3dc753da03c4d6f36376e7e91098914c7d0f0b"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/pytest/test_failed_final_rename_never0/workspace/data/quick_scan/marker.txt",
+      "bytes": 7,
+      "sha256": "f16d05ec6b29248d2c61adb1e9263f78e4f7bace1b955014a2d17872cfe4064d"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/pytest/test_failed_final_rename_never0/workspace/backups/quick_scan/owner_registry.json",
+      "bytes": 488,
+      "sha256": "6d8ef0004e48dc0df55e83edf3dc84013b3da06faeff26298a69f57e8dd8bdf2"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/cache/v/cache/lastfailed",
+      "bytes": 2,
+      "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "repo": "stockwiki",
+      "relative_path": "runs/swr02-acceptance-20261007/cache/v/cache/nodeids",
+      "bytes": 467,
+      "sha256": "824326b854ba9477e8776228f7584b841944666551d9ddcded528497ab1212fe"
+    }
+  ],
+  "owned_worktrees": {
+    "rf": "C:\\Users\\郑曾波\\Projects\\_r3a\\rf",
+    "stockwiki": "C:\\Users\\郑曾波\\Projects\\_r3a\\sw"
+  },
+  "Dayu_IQS_write_scope": false,
+  "model_POST": 0,
+  "after_heads": {
+    "rf": "c672a5e5b496dfac532a705b70a7976540399177",
+    "stockwiki": "42fba06878fc58c01f58c0206f4d694a68e4d451"
+  },
+  "owner_files_verified_unchanged": 342
+}

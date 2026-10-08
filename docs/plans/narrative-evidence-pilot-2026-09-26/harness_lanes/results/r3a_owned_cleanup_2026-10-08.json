@@ -1,0 +1,105 @@
+{
+  "schema_version": "r3a-owned-test-cleanup/1",
+  "status": "completed_owned_targets_absent",
+  "owned_worktrees_removed": [
+    {
+      "repo": "revenue-forecast",
+      "path": "C:\\Users\\郑曾波\\Projects\\_r3a\\rf",
+      "head": "c672a5e5b496dfac532a705b70a7976540399177",
+      "files": 295,
+      "bytes": 3144753,
+      "git_status_clean": true,
+      "main_reachable": true,
+      "original_files": false,
+      "sparse": true
+    },
+    {
+      "repo": "StockWiki",
+      "path": "C:\\Users\\郑曾波\\Projects\\_r3a\\sw",
+      "head": "42fba06878fc58c01f58c0206f4d694a68e4d451",
+      "files": 2111,
+      "bytes": 88016464,
+      "git_status_clean": true,
+      "main_reachable": true,
+      "original_files": false,
+      "sparse": false
+    }
+  ],
+  "owned_worktree_bytes": 91161217,
+  "targets": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3ac",
+      "files": 1,
+      "bytes": 21,
+      "root_is_dir": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3a-rf-red.xml",
+      "files": 1,
+      "bytes": 17483,
+      "root_is_dir": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3a-rf-green.xml",
+      "files": 1,
+      "bytes": 11391,
+      "root_is_dir": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3a-sw-red.xml",
+      "files": 1,
+      "bytes": 15049,
+      "root_is_dir": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3a-sw-green.xml",
+      "files": 1,
+      "bytes": 26134,
+      "root_is_dir": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3a-rf-compat.xml",
+      "files": 1,
+      "bytes": 66915,
+      "root_is_dir": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3a-rf-compat-main.xml",
+      "files": 1,
+      "bytes": 2902,
+      "root_is_dir": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3a-chain.xml",
+      "files": 1,
+      "bytes": 410,
+      "root_is_dir": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3a-chain.json",
+      "files": 1,
+      "bytes": 2823,
+      "root_is_dir": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3a-rf-ci-poll.json",
+      "files": 1,
+      "bytes": 335,
+      "root_is_dir": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\r3a-worktrees-before-remove.json",
+      "files": 1,
+      "bytes": 621,
+      "root_is_dir": false
+    }
+  ],
+  "target_bytes": 144084,
+  "target_files": 11,
+  "production_original_deleted": 0,
+  "raw_config_pilot_protection": 26,
+  "unit_system_pytest_temp_roots": "default pytest-managed roots not independently classified or deleted; no claim that all system TEMP was cleaned",
+  "scope": "only explicit R3A checkout/test copies; Git commits and mainline files remain",
+  "targets_restored_absent": true,
+  "cleanup_error_note": "Split-Path -LiteralPath with -Parent failed as a PowerShell parameter set. Targets were already fully resolved and parent-checked in Python before deletion; this audit verifies all exact parents again with .NET and confirms absent. No expanded cleanup scope."
+}

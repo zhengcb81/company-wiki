@@ -1,0 +1,167 @@
+{
+  "schema_version": "r3a-current-material-consumers/1",
+  "status": "verified_merged_RF_published_CI_success_CWP_node_commit_pending",
+  "producer_implementation": "4c5590a9e711fc451468ee18c9fe433381cc3a93",
+  "consumer_implementations": {
+    "rf": "e585f6d58193f377daefe23147934b26e6293ad0",
+    "stockwiki": "42fba06878fc58c01f58c0206f4d694a68e4d451"
+  },
+  "merged_heads": {
+    "RF": "c672a5e5b496dfac532a705b70a7976540399177",
+    "StockWiki": "42fba06878fc58c01f58c0206f4d694a68e4d451"
+  },
+  "responsibility_results": {
+    "rf-red": {
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "4",
+          "skipped": "0",
+          "tests": "59",
+          "time": "0.684",
+          "timestamp": "2026-10-08T02:02:49.609316+01:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ],
+      "skips": [],
+      "xml_sha256": "ac7a50858ad0aa681365ef7fcb2337ecdfb518b557ec15b48edd6b2f37d4e6f9"
+    },
+    "rf-green": {
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "1",
+          "tests": "68",
+          "time": "1.784",
+          "timestamp": "2026-10-08T02:03:49.513592+01:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ],
+      "skips": [
+        {
+          "name": "test_posix_cli_smoke_uses_own_nonblocking_transport",
+          "reason": "POSIX executable-provider CLI smoke"
+        }
+      ],
+      "xml_sha256": "c7fb8f67f5ab7fb5272c6d5514e93139a8bd87a6562f0d8522ea650c2f13f437"
+    },
+    "sw-red": {
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "4",
+          "skipped": "0",
+          "tests": "52",
+          "time": "0.566",
+          "timestamp": "2026-10-08T02:02:49.711820+01:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ],
+      "skips": [],
+      "xml_sha256": "e1089b0ed1bcdc47d7d65c94fc3c1f1960149edf8f8ad862e72060ad3126face"
+    },
+    "sw-green": {
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "68",
+          "time": "4.021",
+          "timestamp": "2026-10-08T02:03:51.039270+01:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ],
+      "skips": [],
+      "xml_sha256": "b4b8ed8b98d57aa5539f99f5583057ffeb62ce35e49e3e2c071d1f6c6df249bb"
+    },
+    "rf-compat": {
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "9",
+          "skipped": "0",
+          "tests": "19",
+          "time": "0.881",
+          "timestamp": "2026-10-08T02:13:51.629051+01:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ],
+      "skips": [],
+      "xml_sha256": "543a97a8870e60e12e083043f4ca331d7d73b9a9df010e6bfa17292235ca9d9f"
+    },
+    "rf-compat-main": {
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "19",
+          "time": "1.444",
+          "timestamp": "2026-10-08T02:14:23.578533+01:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ],
+      "skips": [],
+      "xml_sha256": "559bae28156f7e7ff4722ca98d33e3f0eaf959a181f0fef0f945dffc196006ae"
+    },
+    "chain": {
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "1",
+          "time": "49.964",
+          "timestamp": "2026-10-08T02:11:40.425454+01:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ],
+      "skips": [],
+      "xml_sha256": "9773f2ad70b3c3e3caf07a44d7b69b711c1d7437c1938661c637c3a797dbad4f"
+    }
+  },
+  "error_notes": [
+    "Compatibility suite from the isolated RF checkout failed 9 cases because its expected sibling directories do not exist (WinError 267); unchanged tests pass 19/19 in the actual three-repository layout. This is not product RED.",
+    "StockWiki XML test time 4.021 sec; wall time including tool startup was 5.50 sec. Windows POSIX executable-provider smoke is skipped and not counted as passing."
+  ],
+  "RF_pre_push": {
+    "ruff": "passed",
+    "mypy_files": 7,
+    "smoke_passed": 107,
+    "pytest_seconds": 16.71,
+    "paid_calls": 0
+  },
+  "SW_static_gate": "passed; existing quick_scan_store length warning diagnostic only",
+  "three_repository_node": "r3a_three_repository_chain_2026-10-08.json",
+  "chain_retest_required_on_metadata_only_dependency_pin": false,
+  "current_read_historical_eligibility_claim": false,
+  "retired_manual_gates_added": 0,
+  "paid_model_POST": 0,
+  "provider_HTTP": 0,
+  "translation": 0,
+  "production_writes": 0,
+  "production_AUTO_absent": true,
+  "production_database": {
+    "bytes": 222408704,
+    "mtime_ns": 1791248158420833300
+  },
+  "raw_config_sidecar_pilot_protected_count": 26,
+  "owner_protected_count": 342,
+  "RF_install": "r3a_rf_selective_install_2026-10-08.json",
+  "StockWiki_remote": "none configured; committed and merged locally",
+  "remaining": [
+    "publish CWP integration-test commit and observe its exact CI",
+    "R3 real production batch requires pending token increment answer; summary/final/resume/space acceptance still unexecuted"
+  ],
+  "RF_exact_CI": "r3a_rf_exact_ci_2026-10-08.json",
+  "owned_cleanup": "r3a_owned_cleanup_2026-10-08.json"
+}

@@ -2,7 +2,15 @@
 
 **2026-10-08｜目标active，未全部完成。** 历史逐轮日志见[6dd5601完整progress](https://github.com/zhengcb81/company-wiki/blob/6dd56011a7d49e2b8c147f2163b0708074f9edd7/docs/plans/narrative-evidence-pilot-2026-09-26/progress.md)；不复制归档，不从历史下一步重启已绿节点。当前入口[task_plan](task_plan.md)。
 
-## 最新进展：R5零费用部分
+## 最新进展：R3A消费者与三仓接线
+
+本目标轮继续实际施工：独立RF/SW先各4产品RED后，责任包RF67pass/1skip、SW68pass/0skip，Ruff及SW static-only绿。Windows skip是POSIX executable-provider CLI smoke，单列。四真实原件公共CLI节点1pass/0skip/49.98秒，current null/unknown成功，各源CWP/RF/SW历史unknown均拒绝；真制度0模型、本地loopback3、同run新增0、付费0/生产写入0，fixture根恢复absent。
+
+RF main快进c672a5e并正常推送，短pre-push107pass/16.71秒+mypy/Ruff绿，精确CI37712024241全success。SW master快进42fba06，无remote，独立owner交接保持。RF依赖pin使用已发布producer4c5590a，真实布局兼容19pass；隔离位置9次WinError267不是产品RED。一个RF接口文件同步两物理副本，480未选文件SHA保持/重复零写。342 owner及26原件/config/账目保持，生产DB stat不变/AUTO仍absent。
+
+两个我创建的工作树已合入后删除91161217B副本；RF通过稀疏检出避免再复制约4.7万tracked历史planning记录，不清主仓历史。精确测试临时材料已恢复absent，收据留PWF；PowerShell Split-Path不兼容参数集错误已记录，Python预先绝对父路径校验和.NET事后复核均确认范围，没有扩大清理。CWP联调测试与当前PWF待正常发布/精确CI；live token增额仍未答，生产final0。
+
+## 已发布producer与R5零费用部分（不重跑）
 
 本目标轮继续实际推进[R3A](r3_current_material_read_implementation_2026-10-08.md)：发现公开日未知会连普通叙述阅读一起阻断，先TDD修producer，明确null当前模式与ISO历史模式。正常OS产品2RED后，当前38单测/0.70秒与26CLI责任/27.08秒绿（10项重叠不双算），Ruff/mypy绿；历史未知日期、身份/SHA仍拒绝。26保护SHA/DB stat保持、七owned目标恢复absent/21916B清理、付费POST0。RF/SW及三仓联调pending，live预算增额仍未答。
 
@@ -38,4 +46,4 @@ R2初始夹具缺SHA/reader清理、错误test路径0执行、JUnit xunit2警告
 
 ## Next Step
 
-R5A与R3A producer已发布，不重做已绿节点。接下来RF/SW当前模式及三仓节点；R3A和token增量答复俱齐再做R3唯一生产batch，预算不答不POST。正式final/零模型skip/当前消费者/locator/同run恢复/空间一次大节点，然后R5B完整要求审计和最终Git发布。目标保持active。
+R5A、producer、RF/SW与三仓节点已完成，不重做已绿节点。正常发布CWP联调测试与PWF，精确CI后收口R3A；token增量答复齐备再做R3唯一生产batch，预算不答不POST。使用current null请求，不伪造日期。正式final/零模型skip/当前消费者/locator/同run恢复/空间一次大节点，然后R5B完整要求审计和最终Git发布。目标保持active。

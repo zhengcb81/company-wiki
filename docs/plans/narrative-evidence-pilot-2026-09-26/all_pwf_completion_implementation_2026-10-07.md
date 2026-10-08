@@ -26,7 +26,7 @@ R0逐份对账明确真实生产final0、来源字段和消费缺口。R1正式�
 
 ## R3 真实生产有限批次及跨仓验收
 
-**Status: in_progress，live token增量待答。** [R3A普通阅读细则](r3_current_material_read_implementation_2026-10-08.md)先补当前资料与历史as-of的职责缺口：真实S09公开日未知，当前阅读请求显式null，指定历史日期仍严格拒绝未知公开日。producer已实现，RF/SW和三仓节点仍需做，不能以fixture日期或直读object替代公共接口。已明确同S09精选片段→DeepSeek外发授权持续有效；当前费用上限0.12不变。已占190035token/100502microUSD/unknown7/unsettled0、FX2764照计，当前余9965token/16734microUSD，完整19193token不够。提出累计220000token未获答复前零POST；不能以新目标或完整请求JSON当作增额许可。
+**Status: in_progress，live token增量待答。** [R3A普通阅读细则](r3_current_material_read_implementation_2026-10-08.md)已补当前资料与历史as-of的职责缺口：真实S09公开日未知，当前阅读请求显式null，指定历史日期仍严格拒绝未知公开日。producer/RF/SW已实现并线，四真实原件三仓节点1pass/0skip；CWP新增联调测试提交的精确CI待发。不能以fixture日期或直读object替代公共接口。已明确同S09精选片段→DeepSeek外发授权持续有效；当前费用上限0.12不变。已占190035token/100502microUSD/unknown7/unsettled0、FX2764照计，当前余9965token/16734microUSD，完整19193token不够。提出累计220000token未获答复前零POST；不能以新目标或完整请求JSON当作增额许可。
 
 [完整DTO](harness_lanes/results/r3_production_batch_request_2026-10-08.json)与[零POST实际预检](harness_lanes/results/r3_production_request_preflight_2026-10-08.json)：生产S09+active真制度，P4计算3/模型1，max_seconds180、单batch19193token/$0.014591，按Config DeepSeek Flash/8192/温度1/default thinking/timeout。不改配置/价格、裁正文或换供应商绕限。未知公开日保持，不给予as-of资格。canonical AUTO目前未建立，用现有Store实现首次生产实例，不加第二任务框架；历史pilot usage保留。
 
@@ -41,7 +41,7 @@ python -B scripts/narrative_batch_configured.py --llm-provider deepseek --projec
 一次R3大节点（用真实输出和当前已提交消费者）：
 
 1. source facts/ref实际匹配，至少一个有价值业务final和真制度skipped_no_narrative/模型0；新production final确实非0。原语言/no translation；逐claim核来源支持、经营主题和说话角色，完整locator回放；partial/needs_review是诊断，不需人工签收。
-2. 正式NarrativeRef/reference/read/list/search/exact及RF/StockWiki当前主线消费者读取相同版本/证据。使用已提交package/config，不混owner WIP。[最新只读核对](harness_lanes/results/r5_readonly_repositories_2026-10-08.json)的RF为436fed68，StockWiki已由独立quick-scan线推进9f9e0af；执行时读取实际HEAD，不把历史04dfc51消费证明算成新版本通过，不重做独立quick-scan工作。CWP不写下游研究目录；未知公开日的as-of请求诚实拒绝，不为消费伪造日期。
+2. 正式NarrativeRef/reference/read/list/search/exact及RF/StockWiki当前主线消费者读取相同版本/证据。生产当前请求明确`as_of_date: null`，缺字段/空字符串/非法日期不能降为current。使用已提交package/config，不混owner WIP。[R3A主线收据](harness_lanes/results/r3a_consumer_acceptance_2026-10-08.json)RF为c672a5e、SW为42fba06；执行时读实际HEAD，不把旧版本测试冒充新版本，不重做独立quick-scan工作。CWP不写下游研究目录；未知公开日的历史ISO请求诚实拒绝，不为消费伪造日期。
 3. 相同request/run重复执行：ref/final/对象不变、模型新增POST0、费用不重复、终态临时正文收敛。复用已绿kill/ACK/源变反例，不在生产造坏数据。
 4. 实测objects/final/AUTO/catalog DB-WAL/恢复facts/log/scratch峰值及终态占用；单final2MiB、持久增量1GiB、scratch2GiB现限保持。记录provider usage或未知预留，现金账单未知不假称0费。
 5. 测试消费者/只读联调资料用独立短目录，测试结束恢复absent；正式生产成功final保留。核原件/config/owner保护，正常提交/push及对应代码CI（没有源码变化不重复CI）。

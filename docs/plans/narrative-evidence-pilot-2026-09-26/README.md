@@ -5,7 +5,7 @@
 ## 当前施工
 
 - R2已完成：[来源事实/旧TXT生产应用及R3交接](r2_source_preparation_implementation_2026-10-08.md)。
-- R3 in_progress：[R3A当前资料读取](r3_current_material_read_implementation_2026-10-08.md)先修接口，RF/SW及三仓联调待做；live真实请求及预算答复见task_plan，当前生产final0，不用旧隔离试点冒充。
+- R3 in_progress：[R3A当前资料读取](r3_current_material_read_implementation_2026-10-08.md)三仓接口/联调/消费者并线已绿，CWP联调测试精确CI待发；live真实请求及预算答复见task_plan，当前生产final0，不用loopback或旧隔离试点冒充。
 - R5 in_progress：[导航、历史临时材料与最终交接](r5_cleanup_and_navigation_implementation_2026-10-08.md)，文档/清理部分已做，最终审计待R3。
 - G2/G3/G4/G5、N4/N5/N6、W/F/D及早期外线已交付范围不重派；相关验收收据解释范围，不是新审批。
 

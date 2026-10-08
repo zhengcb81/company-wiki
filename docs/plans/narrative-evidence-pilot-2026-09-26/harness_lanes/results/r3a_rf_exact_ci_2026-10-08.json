@@ -1,0 +1,58 @@
+{
+  "schema_version": "r3a-exact-source-ci/1",
+  "repository": "revenue-forecast",
+  "head_sha": "c672a5e5b496dfac532a705b70a7976540399177",
+  "run_id": 37712024241,
+  "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/37712024241",
+  "status": "completed",
+  "conclusion": "success",
+  "created_at": "2026-10-08T01:15:38Z",
+  "updated_at": "2026-10-08T01:16:18Z",
+  "jobs": [
+    {
+      "name": "verify",
+      "conclusion": "success",
+      "started_at": "2026-10-08T01:15:42Z",
+      "completed_at": "2026-10-08T01:16:17Z",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install dependencies",
+          "conclusion": "success"
+        },
+        {
+          "name": "Fetch pinned source dependencies",
+          "conclusion": "success"
+        },
+        {
+          "name": "Shared local and CI checks",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "scope": "published exact RF consumer/dependency commit; no claim of live production R3 summary"
+}

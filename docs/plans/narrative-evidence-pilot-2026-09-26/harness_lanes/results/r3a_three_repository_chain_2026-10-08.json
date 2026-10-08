@@ -1,0 +1,70 @@
+{
+  "schema_version": "r3a-current-material-chain/1",
+  "status": "passed",
+  "boundary": "real source bytes; fixture identity/publication; loopback model; committed consumer CLIs",
+  "consumer_heads": {
+    "rf": "e585f6d58193f377daefe23147934b26e6293ad0",
+    "stockwiki": "42fba06878fc58c01f58c0206f4d694a68e4d451"
+  },
+  "sources": [
+    {
+      "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "document_id": "urn:company-wiki:document:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "language": "zh",
+      "span_count": 9,
+      "zero_model_skip": false,
+      "current_consumers_match": true,
+      "replay_status": "verified"
+    },
+    {
+      "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "language": "en",
+      "span_count": 49,
+      "zero_model_skip": false,
+      "current_consumers_match": true,
+      "replay_status": "verified"
+    },
+    {
+      "source_sha256": "76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+      "source_id": "urn:company-wiki:source:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+      "document_id": "urn:company-wiki:document:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+      "language": "zh",
+      "span_count": 0,
+      "zero_model_skip": true,
+      "current_consumers_match": true,
+      "replay_status": "verified"
+    },
+    {
+      "source_sha256": "e9699886d539afebab6f8aa970d6db2e62b488606dcfc0bf0c486c18a8994380",
+      "source_id": "urn:company-wiki:source:sha256:e9699886d539afebab6f8aa970d6db2e62b488606dcfc0bf0c486c18a8994380",
+      "document_id": "urn:company-wiki:document:sha256:e9699886d539afebab6f8aa970d6db2e62b488606dcfc0bf0c486c18a8994380",
+      "language": "zh",
+      "span_count": 12,
+      "zero_model_skip": false,
+      "current_consumers_match": true,
+      "replay_status": "verified"
+    }
+  ],
+  "model_loopback_posts": 3,
+  "resume_new_posts": 0,
+  "live_provider_posts": 0,
+  "paid_calls": 0,
+  "production_writes": 0,
+  "budget": {
+    "estimated_micro_usd": 333,
+    "tokens": 276,
+    "unknown_reservations": 0,
+    "unsettled_reservations": 0
+  },
+  "as_of_date": null,
+  "publication": null,
+  "historical_refusals_per_source": [
+    "CWP",
+    "RF",
+    "StockWiki"
+  ],
+  "fixture_root_restored_absent": true
+}
