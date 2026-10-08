@@ -38,6 +38,15 @@
 
 ## Next Step
 
+### Phase 5: 固化三市场回归套件（2026-10-08 新请求）
+**Status:** complete
+
+施工细则见 regression_suite_plan.md。先写失败分类、样本验真、隔离清理、比较和语义回归测试，再实现命令入口。固定 CN v3 / HK v4 / US v2，不改已封存审查。离线真实原件重放与在线供应商联调分别计分；旧产品 PARTIAL 不改成全绿。大节点验收为：小测试 → 三公司重放及跨仓契约 → 重跑比较/故障清理。日常 CI 不增加真实下载或收费模型。
+
+已交付 `benchmarks/cross_market_rf/README.md` 一命令入口、71检查点、固定来源/输入SHA、隔离 registry/catalog/AUTO/work/profile、真实RF/FF/ET/Worker流程、前后比较、可搬移去重数据包和完整新研究大节点施工卡。16小测试绿；full真原件重放92.555秒；脱离生产库的数据包重放90.309秒，71状态相同。在线CN半年报真实新下载→验字节→再次0下载→RF读取通过。临时环境均恢复，导出样本副本签收后删除。
+
+**当前基线不是产品全绿**：46 PASS / 3 BLOCKED / 1 FAIL / 14 NOT_RUN / 7 NOT_APPLICABLE。US跨进程置信度验证缺陷已真实复现，优先放入follow_up_plan.md；HK官方认证、HTML/PPTX处理和在线Dayu/ET仍具名留存。固定输入/loopback不能证明新一轮研究、真实供应商或新摘要实际被模型消费。
+
 本轮审计任务完成。CN v3、HK v4、US v2最终独立复查已封存：条件模型可接受，三公司产品E2E均PARTIAL。原件/旧快照保护、RF交付归档、237文件TEMP清理、359命令账核对及本仓主线发布完成；c72d532b远端CI成功。完整归总见acceptance_summary.md。尚未实施的Dayu bounded、ET套餐/路由、HTML Worker等是后续功能施工，按follow_up_plan.md推进，不能把审计完成说成完整产品全绿。
 
 ## 问题记录

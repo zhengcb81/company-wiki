@@ -1,0 +1,32 @@
+{
+  "schema_version": "cross-market-checkpoints/1",
+  "per_company": {
+    "frozen_bytes": "所有输入、旧快照、独立审查、被引用来源的真实字节与固定 SHA 一致",
+    "identity_period": "原件身份/期间保持；未知日期不补造；公开日与可用上界分别记录",
+    "official_provenance": "当前真实官方来源认证和实际发布日期，不能由本地 SHA 相同代替",
+    "raw_replay": "CWP 原件注册与 SourceRef 字节读取；重复注册不增加文档",
+    "virtual_move": "同一原件移动测试存储后旧 SourceRef 仍可读，消费者不拿物理路径",
+    "wrong_hash": "错误 SHA 的读取必须拒绝，stdout 不输出原文",
+    "rf_ff_reuse": "真实 RF source_preparation→FF→CWP v2，复用不下载，实际子进程可见",
+    "correct_provider_download": "缺文档通过指定市场工具入库；人工官网补抓不算；第二次零下载",
+    "transcript_live": "FF 实际启动 ET；区分未启动、不可发现、无套餐与真实成功",
+    "canonical_worker": "真实原件有限 Worker、业务精选、原语言摘要、复跑零重复收费",
+    "narrative_virtual_read": "CWP NarrativeRef→RF，span 身份与原文 locator 相符",
+    "narrative_forecast_consumption": "新派生原件/摘要实际进入本轮模型证据；文件存在不能替代",
+    "format_support": "PDF/TXT/HTML/PPT 的实际 canonical 处理状态；临时手工解析不能算支持",
+    "format_html": "微软完整 SEC HTML 的实际 canonical Worker；未支持需具名 BLOCKED",
+    "format_pptx": "微软 22 页图片型指标 PPT 的实际 canonical Worker；不能用人工看图代替",
+    "domain_boundaries": "固定金额/单位/期间、CMP 并表残差、达产目标、同行风险、季度 CC 和 pp 单位",
+    "formal_forecast": "真实正式 validator、engine、生成 Markdown；全情景年度路径匹配旧经济结果",
+    "arithmetic": "独立复算分部桥接与 requested sensitivity shock，不复用被测计算函数",
+    "snapshot_registry": "真实新快照及 registered-artifact 正向 registry audit；input/result/snapshot 强绑定",
+    "process_seed_stability": "同一正式产物在 Python hash seed 0/1/2 下均能强验证；集合次序不能导致置信度抖动",
+    "old_snapshot_immutable": "固定原件、输入、旧结果、旧快照、审查字节保持",
+    "skill_coverage": "技能 0–11 既有审查可追溯；新一轮研究覆盖不能由固定输入重放证明",
+    "future_backtest": "未来实际尚未发布时 NOT_APPLICABLE，禁止虚构回测"
+  },
+  "shared": {
+    "ff_et_cwp_contract": "真实 FF companion→ET CLI/supervisor/worker/API→CWP；HTTP fixture 明示，超时与复用检查",
+    "isolation_cleanup": "生产配置/DB与外部输入保持，owned TEMP 删除，失败也恢复，测试空间与时间记录"
+  }
+}

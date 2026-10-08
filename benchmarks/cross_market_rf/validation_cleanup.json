@@ -1,0 +1,26 @@
+{
+  "schema_version": "cross-market-cleanup/1",
+  "portable_bundle_bytes_removed": 56835555,
+  "portable_bundle_files": 35,
+  "portable_bundle_restored_absent": true,
+  "unit_test_directories": [
+    {
+      "directory": "cmrf-unit",
+      "restored_absent": true
+    },
+    {
+      "directory": "cmrf-unit-two",
+      "restored_absent": true
+    },
+    {
+      "directory": "cmrf-unit-final",
+      "restored_absent": true
+    },
+    {
+      "directory": "cmrf-unit-latest",
+      "restored_absent": true
+    }
+  ],
+  "original_files_deleted": 0,
+  "normal_suite_owned_temp_cleanup": "see each sealed report test_root_restored_absent=true"
+}

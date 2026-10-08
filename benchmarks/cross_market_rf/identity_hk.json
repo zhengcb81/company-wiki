@@ -1,0 +1,35 @@
+{
+  "market": "HK",
+  "record_count": 1,
+  "records": [
+    {
+      "active": true,
+      "aliases": [
+        "TENCENT",
+        "腾讯",
+        "腾讯控股",
+        "騰訊"
+      ],
+      "canonical_name": "騰訊控股",
+      "exchange": "HKEX",
+      "identifiers": {
+        "hkex_stock_id": "17416"
+      },
+      "market": "HK",
+      "schema_version": "1.0",
+      "security_id": "00700",
+      "source_name": "hkex",
+      "source_record_id": "17416",
+      "source_url": "https://www1.hkexnews.hk/ncms/script/eds/activestock_sehk_c.json",
+      "ticker": "00700"
+    }
+  ],
+  "retrieved_at": "2026-07-19T08:12:43Z",
+  "schema_version": "1.0",
+  "sources": [
+    "https://www.hkex.com.hk/-/media/HKEX-Market/Services/Trading/Securities/Securities-Lists/Securities-Using-Standard-Transfer-Form-%28including-GEM%29-By-Stock-Code-Order/secstkorder.xls",
+    "https://www.hkex.com.hk/eng/services/trading/securities/securitieslists/ListOfSecurities.xlsx",
+    "https://www1.hkexnews.hk/ncms/script/eds/activestock_sehk_c.json",
+    "https://www1.hkexnews.hk/ncms/script/eds/inactivestock_sehk_c.json"
+  ]
+}

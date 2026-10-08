@@ -39,4 +39,6 @@ CWP源码6cd9b6d/CI37736338454，RF源码343e2de及依赖pin7cf337e/CI3773719372
 
 ## 导航
 
+2026-10-08新增的三市场真实RF审计与固定回归不重开原历史目标；当前工程入口是[三市场PWF](../cross-market-rf-e2e-2026-10-08/task_plan.md)、[71检查点回归套件](../../../benchmarks/cross_market_rf/README.md)、[新检出确定性缺陷与后续施工](../cross-market-rf-e2e-2026-10-08/follow_up_plan.md)。固定套件已交付，当前基线保留真实FAIL/BLOCKED，不将原计划签收等同于所有线上能力全绿。
+
 [实施单](all_pwf_completion_implementation_2026-10-07.md)、[最终对账](r5_full_closeout_2026-10-08.md)、[findings](findings.md)、[progress](progress.md)、[README](README.md)。旧120卡顶部指向本入口；旧paused/待签收/旧预算仅历史。原完整日志固定在已推[6dd5601](https://github.com/zhengcb81/company-wiki/tree/6dd56011a7d49e2b8c147f2163b0708074f9edd7/docs/plans/narrative-evidence-pilot-2026-09-26)，不复制大归档。

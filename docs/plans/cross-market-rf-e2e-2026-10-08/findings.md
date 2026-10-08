@@ -51,3 +51,14 @@
 - 原R3微软TXT正式摘要49证据在CWP与RF当前公共read实测通过，但显式信息日read拒绝公开日unknown，本輪输入没有消费；不会把已有能力泛称不存在，也不会重复付费生成。
 - 已审研究产物与来源按SHA交付RF output，原input/snapshot/manifest不改；测试TEMP237文件清理，原始资料字节保留。归档辅助错误混用两种SHA后按公开强校验器修正，不更改模型或测试成功标准。
 - 后续优先修CWP-owned Dayu有界桥、FF→ET exact能力/预算/套餐诊断、SEC HTML初处理和RF证据构建/目标表达，完整施工设计在follow_up_plan.md，尚未实施。
+
+## 固定回归套件发现（Phase 5）
+
+- 初版小测试先收集失败（runner不存在）；实现后16责任单元测试绿，含明确5pp/同行反证/未定年达产目标负例、不同样本不能伪称改进、删除失败检查视为missing、故障及只读账清理。沙箱默认pytest TEMP无法创建，改用独立短basetemp正常OS运行，未改断言。
+- 真原件full当前71检查点：46PASS、3BLOCKED、1FAIL、14NOT_RUN、7NOT_APPLICABLE；完整基线在 `benchmarks/cross_market_rf/baseline_replay.json/.md`。CN/HK PDF与MSFT TXT有限Worker各一个loopback POST，96/12/49原文证据；全部locator由公共read回放验证，CLI lookup验证入口，RF/CWP视图相同，再次运行0新增POST且不翻译。
+- **新增真实RF缺陷**：MSFT正式输出在seed=0下可强校验，换Python hash seed后出现 `confidence components recomputation mismatch`。定位 `scripts/analysis/confidence.py`：`parameter_revenue_weights` 的refs为set，无序迭代影响weights插入顺序，后续sum/浮点累加存在最后位差异；validator对components要求精确相等，进程内测试漏掉此维度。经济情景路径没有变化，不能把这个失败误称全部营收事实错误。不同seed强校验成为固定检查，不用删断言/只固定seed掩盖。
+- HTML/PPTX都实际运行有限Worker并返回unsupported_source_type，0tokens/0费用；不是静态猜不支持。PPT仍须22页图片/文字定位支持，不能用研究agent看图冒称canonical处理完成。
+- 输出目录曾因测试registry的Windows只读属性不能删除；先注入只读单元回归，再仅在已核绝对owned根解除属性。实际失败残留仅10134B测试账，逐文件核对后清理。现在marker最后删除，失败也有明确拥有标记，不碰原件。所有最后运行均TEMP不存在。
+- 额外定位检查不能每个span重启CLI重解析259页PDF：最初full224秒；改为公共read一次验证全部locator、每span合同验证、一次CLI lookup，功能不缩水，最终92.555秒。普通commit/CI只增加0.28秒小测试。
+- 可搬移包35文件56,835,555B，只包含被引用样本和固定研究输入/旧产物，按SHA去重，不复制数据库/密钥。故意提供不存在的生产catalog，用这个包重跑90.309秒；71状态全相同、比较0regression/0missing；证明独立复现。验证后该导出副本删除，Git无新增大原件。
+- 真实在线隔离验证：CN H1 2026新增3,149,962B、SHA182e2062...；FF下载1→复用0，CWP复核身份/年份/字节，RF source preparation再次读取通过；HK/US仍producer ensure fatal、download0。FF用既有年报复用独立触发HK/US companion，0费用请求返回zero_cost_budget/provider_calls0、ET未启动；与无套餐和已启动的offline契约严格区分。未调用外部LLM、未改Dayu、未触碰邻仓WIP。

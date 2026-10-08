@@ -106,3 +106,13 @@
 - 工程审计提交c72d532baa117d97d088cf0c8bae78e13cd7849a已推origin/master；正常pre-commit按文件范围跳过生产代码检查，正常pre-push快速契约smoke GREEN。1471个工程文件完整保留，不含原库删除或邻仓owner代码。
 - 精确完整SHA的company-wiki远端CI https://github.com/zhengcb81/company-wiki/actions/runs/37756152210 成功，09:22:08→09:23:15（67秒）。首查短SHA空结果仅是错误筛选，改完整40位后取得实际run，不误报没有CI。
 - 本轮Phase1–4审计任务完成。后续能力缺口仍未实现，独立follow_up_plan不涂绿；CWP/RF/SID发布与预算/原件/配置/临时清理结论见归总。此后仅提交共享PWF收尾Markdown，不重跑生产或外部模型。
+
+## Phase 5 — 用户要求固化可复现的公司端到端套件
+
+- 施工前写regression_suite_plan，先失败分类/域错误/故障清理小测试，再实现tools/cross_market_suite和benchmarks/cross_market_rf。已固定3公司、71检查点、所有来源与输入/旧结果/快照/独立审查SHA；不覆盖前轮记录。
+- 16轻量责任测试、ruff通过；full真实原件运行92.555秒；CN/HK PDF及MSFT TXT Worker 96/12/49证据，原语言、不重复推理，正式engine/Markdown/新snapshot/registry及原件搬移/错误SHA/重复注册均实际运行。微软HTML和图片PPT由实际Worker拒绝，明确BLOCKED。
+- 便携去重数据包35文件56,835,555B；用不存在的生产catalog参数，从此包full重放90.309秒，71状态完全一致，0regressed/0missing。包验证后删除，Git只留约0.34MB清单/报告，不复制大量原件。全部随机TEMP恢复不存在；Windows只读注册账失败演练也已恢复。
+- 在线core真实运行53.438秒：CN H1 2026通过实际SID下载1→CWP入库3,149,962B→第二次download0→RF真实读取。港/美股缺文档ensure仍BLOCKED；年报复用下FF companion实际返回zero_cost_budget/provider_calls0，ET未启动，不冒称无套餐或已调用。0收费模型/Dayu零改动/邻仓WIP未动。
+- 新检出MSFT不同Python hash seed跨进程强校验失败；原情景金额不变。基线保持FAIL，单列P0根因及实施卡，不改断言、不固定seed掩盖。当前总计46PASS/3BLOCKED/1FAIL/14NOT_RUN/7NOT_APPLICABLE；新一轮研究/线上供应商/新摘要实际消费不能由离线固定输入替代。
+- 普通CI只增加16小测试，真实下载、PDF/Worker、多仓流程不加入每次commit。README提供run/pack/compare、环境/退出码、完整新研究大节点卡及故障处理。旧总体计划导航新增入口，不重写原完成签收。
+- 提交前host-assumption-guard抓到负向测试写死机器盘符路径，已改为tmp_path生成绝对路径及平台无关Windows drive属性测试；不绕过hook。16项重新运行0.25秒全绿。

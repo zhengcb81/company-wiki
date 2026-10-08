@@ -1,0 +1,31 @@
+{
+  "market": "CN",
+  "record_count": 1,
+  "records": [
+    {
+      "active": true,
+      "aliases": [
+        "zwgs",
+        "中微"
+      ],
+      "canonical_name": "中微公司",
+      "exchange": "SSE",
+      "identifiers": {
+        "cninfo_category": "A股",
+        "org_id": "9900038991"
+      },
+      "market": "CN",
+      "schema_version": "1.0",
+      "security_id": "688012",
+      "source_name": "cninfo",
+      "source_record_id": "9900038991",
+      "source_url": "https://www.cninfo.com.cn/new/data/szse_stock.json",
+      "ticker": "688012"
+    }
+  ],
+  "retrieved_at": "2026-07-19T07:53:37Z",
+  "schema_version": "1.0",
+  "sources": [
+    "https://www.cninfo.com.cn/new/data/szse_stock.json"
+  ]
+}

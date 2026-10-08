@@ -2,6 +2,18 @@
 
 本文件记录审计发现后的责任层改进，不宣称尚未实现的能力已经通过。当前优先完成三个真实执行及独立审查，不在审查期间临时改动外部Dayu或切换模型配置来凑通过。
 
+## 0. RF正式产物跨进程确定性（Phase 5新增，P0）
+
+固定套件已实际复现MSFT `confidence components recomputation mismatch`；`baseline_replay.json` 的 `process_seed_stability` 为FAIL。本轮仅固化测试，没有修改RF底层。
+
+实施卡：先用同一MSFT固定输入在独立seed=0/1/2子进程生成/强复核，并增加含多组数量级权重的最小单元样本。RF `analysis/confidence.py` 的set refs遍历、权重累加和total/quality/freshness归约须有明确稳定顺序/稳定求和策略；强validator继续检查所有语义字段，不能直接删除components校验。来源/金额/期间/claimed-value仍精确验真，绝不重哈希旧input/snapshot。旧已发布产物如何兼容浮点最后位须显式定义并写兼容负例：最后位容差不能放过实质性分值/计数/覆盖率篡改。通过后按既有定点安装机制同步运行闭包，跑本full replay和相同定义compare，经济情景路径不变，seed失败变PASS，旧快照仍能正确识别运行版本。只做一个集中责任层+跨进程+真实样本验收节点。
+
+### 固定回归入口（全部后续大改的共用验收）
+
+`benchmarks/cross_market_rf/README.md` 定义71检查点、真实离线full、真实在线live、portable pack与compare。离线当前约93秒，不加入每次commit或日常CI；只有16小测试进现有Unit范围。真实模型刷新、新技能0–11研究与独立审查按该README的大节点卡做，不能用固定模型重放替代。工程改造完成后保留FAIL/BLOCKED→PASS的证据和未修项，而不是重设expected或删项目。
+
+在线验证还显示FF吞掉producer的具体bounded拒绝，只留下 `ensure exited 1` / fatal。后续桥接应把安全的cause code（如bounded能力未提供、provider未启动）留给消费者；不暴露路径/凭证、不增加人工签收，不把这项诊断修复误当provider功能完成。
+
 ## 1. CWP-owned Dayu 有界桥（采集功能缺口，优先）
 
 **事实**：旧 dayu_cli_v1 只提供 download 整流程，包含后续重处理；没有 metadata-only/预算入口。CWP ensure 在启动 provider 前拒绝。Dayu公开 `SecDownloader(client=AsyncClient)` 和 `HkexnewsDiscoveryClient(client=Client)` 支持注入；可以在CWP建立桥，不改外部项目。

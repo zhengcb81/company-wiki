@@ -1,0 +1,33 @@
+{
+  "market": "US",
+  "record_count": 1,
+  "records": [
+    {
+      "active": true,
+      "aliases": [
+        "MICROSOFT",
+        "Microsoft Corporation - Common Stock",
+        "Microsoft Corporation Common Stock"
+      ],
+      "canonical_name": "MICROSOFT CORP",
+      "exchange": "NASDAQ",
+      "identifiers": {
+        "cik": "0000789019"
+      },
+      "market": "US",
+      "schema_version": "1.0",
+      "security_id": "MSFT",
+      "source_name": "sec_nasdaq",
+      "source_record_id": "0000789019",
+      "source_url": "https://www.sec.gov/files/company_tickers.json",
+      "ticker": "MSFT"
+    }
+  ],
+  "retrieved_at": "2026-07-19T08:04:38Z",
+  "schema_version": "1.0",
+  "sources": [
+    "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+    "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+    "https://www.sec.gov/files/company_tickers.json"
+  ]
+}

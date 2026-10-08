@@ -1,0 +1,866 @@
+{
+  "schema_version": "cross-market-suite/1",
+  "as_of_date": "2026-10-08",
+  "audit_index": "docs/plans/cross-market-rf-e2e-2026-10-08/delivery_archive_index.json",
+  "cases": [
+    {
+      "case": "CN-688012",
+      "market": "CN",
+      "security_id": "688012",
+      "company_name": "中微半导体设备（上海）股份有限公司",
+      "frozen_artifacts": {
+        "input.json": "478ae3345e6011079929c05f01b8adec959c974581c703239271c1f9ba4e7ea4",
+        "forecast.json": "1913f5e376590c9a5d77999f8d9c4072a3114e5fc58288ac25f11b31b4ebdea1",
+        "snapshot.json": "bd7ec3a23f2331f48e937be62e1d960e687f9c9ae10a4e6c70a305f67f423741"
+      },
+      "review_relative": "docs/plans/cross-market-rf-e2e-2026-10-08/reviews/CN-688012/recheck_v3.json",
+      "review_sha256": "e56e3bac6408d51ef9c96098ca89ff7e675d61f3ab022fac0528ad1aaa79df01",
+      "sources": [
+        {
+          "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "object_relative": "objects/d6/d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "source_ref": null,
+          "filename": "annual2025.pdf",
+          "title": "中微公司：2025年年度报告",
+          "url": "https://static.cninfo.com.cn/finalpage/2026-03-31/1225062431.PDF",
+          "published_date": "2026-03-31",
+          "publication_date_semantics": null,
+          "metadata": {}
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+          "sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+          "object_relative": "objects/18/182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+          "source_ref": null,
+          "filename": "half2026.pdf",
+          "title": "2026年半年度报告",
+          "url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482884.PDF",
+          "published_date": "2026-08-20",
+          "publication_date_semantics": null,
+          "metadata": {}
+        },
+        {
+          "source_id": "semi_wfe_20260714",
+          "sha256": "3da627dd2754e73dc70e974dccfdb356e09de9d92d594da2c8879a4e7a2a0e8d",
+          "object_relative": "objects/3d/3da627dd2754e73dc70e974dccfdb356e09de9d92d594da2c8879a4e7a2a0e8d",
+          "source_ref": null,
+          "filename": "semi_web_open_snapshot.json",
+          "title": "SEMI Mid-Year Semiconductor Equipment Forecast",
+          "url": "https://www.semi.org/en/semi-press-release/global-semiconductor-equipment-sales-forecast-to-reach-a-record-229-billion-dollars-in-2028-semi-reports",
+          "published_date": "2026-07-14",
+          "publication_date_semantics": null,
+          "metadata": {}
+        },
+        {
+          "source_id": "amec_sse_results_qa_20260910",
+          "sha256": "520684e158f0f10191be84c435cb5600fff0a6cbea8d41442dfee9647d497d6f",
+          "object_relative": "objects/52/520684e158f0f10191be84c435cb5600fff0a6cbea8d41442dfee9647d497d6f",
+          "source_ref": null,
+          "filename": "roadshow_public_questions.json",
+          "title": "中微公司2026半年度业绩说明会官方网络问答",
+          "url": "https://roadshow.sseinfo.com/activityDetails/40766",
+          "published_date": "2026-09-10",
+          "publication_date_semantics": null,
+          "metadata": {}
+        },
+        {
+          "source_id": "amec_cninfo_1225582793",
+          "sha256": "13675a986cfc976f3ea9d8f4abe82d1ae8058904b556620e0439269cceda9566",
+          "object_relative": "objects/13/13675a986cfc976f3ea9d8f4abe82d1ae8058904b556620e0439269cceda9566",
+          "source_ref": null,
+          "filename": "1225582793.pdf",
+          "title": "关于参与设立私募投资基金暨关联交易进展的公告",
+          "url": "https://static.cninfo.com.cn/finalpage/2026-09-25/1225582793.PDF",
+          "published_date": "2026-09-25",
+          "publication_date_semantics": null,
+          "metadata": {}
+        },
+        {
+          "source_id": "amec_cninfo_1225482911",
+          "sha256": "9a9e6584fdee35342059b37c5645c3b55d143f3145af595c77f82230c0ccc0c3",
+          "object_relative": "objects/9a/9a9e6584fdee35342059b37c5645c3b55d143f3145af595c77f82230c0ccc0c3",
+          "source_ref": null,
+          "filename": "1225482911.pdf",
+          "title": "关于公司部分募投项目结项并将节余募集资金永久补充流动资金及部分募投项目延期的公告",
+          "url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482911.PDF",
+          "published_date": "2026-08-20",
+          "publication_date_semantics": null,
+          "metadata": {}
+        },
+        {
+          "source_id": "amec_cninfo_1225482918",
+          "sha256": "4b34335aa53528abe783eeea0af05bfc38e74a3c76fc7acfbc8be9b5f3acfaca",
+          "object_relative": "objects/4b/4b34335aa53528abe783eeea0af05bfc38e74a3c76fc7acfbc8be9b5f3acfaca",
+          "source_ref": null,
+          "filename": "1225482918.pdf",
+          "title": "关于使用部分募集资金向子公司提供借款以实施募投项目的公告",
+          "url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482918.PDF",
+          "published_date": "2026-08-20",
+          "publication_date_semantics": null,
+          "metadata": {}
+        },
+        {
+          "source_id": "amec_cninfo_1225482917",
+          "sha256": "b7b72c3e07eccad9a2781a928ce135851ef37ef3c1ff8ba1aae6aae96c605685",
+          "object_relative": "objects/b7/b7b72c3e07eccad9a2781a928ce135851ef37ef3c1ff8ba1aae6aae96c605685",
+          "source_ref": null,
+          "filename": "1225482917.pdf",
+          "title": "关于增加2026年度日常关联交易预计额度的公告",
+          "url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482917.PDF",
+          "published_date": "2026-08-20",
+          "publication_date_semantics": null,
+          "metadata": {}
+        },
+        {
+          "source_id": "amec_cninfo_1225482894",
+          "sha256": "74fc4afd9a509136b96a8e38f12b30192a48c3d44f8a2174b97abbce18ee6d03",
+          "object_relative": "objects/74/74fc4afd9a509136b96a8e38f12b30192a48c3d44f8a2174b97abbce18ee6d03",
+          "source_ref": null,
+          "filename": "1225482894.pdf",
+          "title": "关于对外投资的公告",
+          "url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482894.PDF",
+          "published_date": "2026-08-20",
+          "publication_date_semantics": null,
+          "metadata": {}
+        },
+        {
+          "source_id": "amec_cninfo_1225482893",
+          "sha256": "a2e4d45ff51d85162531eaa11e68f2f7fef2dd4018d1ad8845ac522ea20f8471",
+          "object_relative": "objects/a2/a2e4d45ff51d85162531eaa11e68f2f7fef2dd4018d1ad8845ac522ea20f8471",
+          "source_ref": null,
+          "filename": "1225482893.pdf",
+          "title": "关于使用募集资金置换预先投入募投项目及支付发行费用的自筹资金的公告",
+          "url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482893.PDF",
+          "published_date": "2026-08-20",
+          "publication_date_semantics": null,
+          "metadata": {}
+        },
+        {
+          "source_id": "amec_cninfo_1225482882",
+          "sha256": "231e464bb176196daff17f0f7281ee8a3c656ae5e92f29f15285dbe371e7e73a",
+          "object_relative": "objects/23/231e464bb176196daff17f0f7281ee8a3c656ae5e92f29f15285dbe371e7e73a",
+          "source_ref": null,
+          "filename": "1225482882.pdf",
+          "title": "关于公司募集资金存放、管理与实际使用情况的专项报告",
+          "url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482882.PDF",
+          "published_date": "2026-08-20",
+          "publication_date_semantics": null,
+          "metadata": {}
+        },
+        {
+          "source_id": "amec_cninfo_1225482880",
+          "sha256": "f05bb880cd2324cf1b0cbb06780a00003c4846438d09b4e3825de710af0067aa",
+          "object_relative": "objects/f0/f05bb880cd2324cf1b0cbb06780a00003c4846438d09b4e3825de710af0067aa",
+          "source_ref": null,
+          "filename": "1225482880.pdf",
+          "title": "2026年度“提质增效重回报”专项行动方案的半年度评估报告",
+          "url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482880.PDF",
+          "published_date": "2026-08-20",
+          "publication_date_semantics": null,
+          "metadata": {}
+        }
+      ],
+      "expected": {
+        "as_of_date": "2026-10-08",
+        "segment_names": [
+          "Equipment",
+          "NonEquipmentResidual",
+          "CMP"
+        ],
+        "parameters": {
+          "reported_total": {
+            "value": 12384.63826811,
+            "unit": "CNY million",
+            "period": "FY2025",
+            "kind": "reported_fact"
+          },
+          "equipment_base": {
+            "value": 10527.0,
+            "unit": "CNY million",
+            "period": "FY2025",
+            "kind": "reported_fact"
+          },
+          "equipment_units_2025": {
+            "value": 1240,
+            "unit": "chambers",
+            "period": "FY2025",
+            "kind": "reported_fact"
+          }
+        },
+        "sensitivities": {
+          "equipment_units_base_2028": {
+            "shock_type": "percent",
+            "shock_value": 0.1
+          },
+          "equipment_unit_revenue_base_2028": {
+            "shock_type": "percent",
+            "shock_value": 0.05
+          },
+          "aftermarket_revenue_base_2028": {
+            "shock_type": "percent",
+            "shock_value": 0.2
+          },
+          "cmp_revenue_base_2028": {
+            "shock_type": "percent",
+            "shock_value": 0.3
+          }
+        },
+        "target_fields": {
+          "CMP_annual_2026": {
+            "measurement_basis": "annual_period",
+            "measurement_periods": [
+              "FY2026"
+            ],
+            "comparison_value": null,
+            "treatment": "unmodeled_data_gap",
+            "perimeter_status": "mismatch"
+          },
+          "CMP_annual_2027": {
+            "measurement_basis": "annual_period",
+            "measurement_periods": [
+              "FY2027"
+            ],
+            "comparison_value": 430.0,
+            "treatment": "independent_benchmark",
+            "perimeter_status": "matched"
+          },
+          "CMP_annual_2028": {
+            "measurement_basis": "annual_period",
+            "measurement_periods": [
+              "FY2028"
+            ],
+            "comparison_value": 580.0,
+            "treatment": "independent_benchmark",
+            "perimeter_status": "matched"
+          },
+          "LingangPhaseII_local_sales_at_maturity": {
+            "measurement_basis": "ambiguous",
+            "measurement_periods": [],
+            "comparison_value": null,
+            "treatment": "unmodeled_data_gap",
+            "perimeter_status": "mismatch"
+          }
+        },
+        "evidence_distances": {}
+      },
+      "baseline_product_status": "PARTIAL"
+    },
+    {
+      "case": "HK-00700",
+      "market": "HK",
+      "security_id": "00700",
+      "company_name": "Tencent Holdings Limited",
+      "frozen_artifacts": {
+        "input.json": "71990a6e6d2b4fd489a7c31b80c1892b3470ae96cabdfefc1693a01e978d1b5b",
+        "forecast.json": "7d6fc7037ba34bc57a4f80dcef688f2f239db6a58c9aa7ee77cc00a5b1b4d27a",
+        "snapshot.json": "0382c543df010fe9620fb813d2f470770142327634a4b4be51d39f7fc5b47796"
+      },
+      "review_relative": "docs/plans/cross-market-rf-e2e-2026-10-08/reviews/HK-00700/recheck_v4.json",
+      "review_sha256": "ff7276261998f590fce000532b88632b6b78327cb19cbf7826b7aceb4a5029f3",
+      "sources": [
+        {
+          "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "object_relative": null,
+          "source_ref": {
+            "byte_size": 4428270,
+            "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+            "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+            "mime_type": "application/pdf",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+          },
+          "filename": "annual2025.pdf",
+          "title": "腾讯：2025年年度报告",
+          "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+          "published_date": "2026-10-08",
+          "publication_date_semantics": null,
+          "metadata": {
+            "byte_size": 4428270,
+            "canonical_entity_id": null,
+            "collector_name": null,
+            "collector_version": null,
+            "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+            "display_name": null,
+            "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+            "document_kind": "annual_report",
+            "fiscal_period": null,
+            "fiscal_year": 2025,
+            "form_type": null,
+            "language": "zh",
+            "market": "HK",
+            "mime_type": "application/pdf",
+            "period_end": null,
+            "provider": null,
+            "provider_document_id": null,
+            "published_date": "2026-04-09",
+            "retrieved_at": null,
+            "security_id": "00700",
+            "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+            "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+            "title": "腾讯：2025年年度报告"
+          }
+        },
+        {
+          "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "object_relative": null,
+          "source_ref": {
+            "byte_size": 5241364,
+            "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+            "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+            "mime_type": "application/pdf",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0"
+          },
+          "filename": "annual2024.pdf",
+          "title": "腾讯：2024年年度报告",
+          "url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0408/2025040800668_c.pdf",
+          "published_date": "2025-04-08",
+          "publication_date_semantics": null,
+          "metadata": {
+            "byte_size": 5241364,
+            "canonical_entity_id": null,
+            "collector_name": null,
+            "collector_version": null,
+            "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+            "display_name": null,
+            "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+            "document_kind": "annual_report",
+            "fiscal_period": null,
+            "fiscal_year": 2024,
+            "form_type": null,
+            "language": "zh",
+            "market": "HK",
+            "mime_type": "application/pdf",
+            "period_end": null,
+            "provider": null,
+            "provider_document_id": null,
+            "published_date": "2025-04-08",
+            "retrieved_at": null,
+            "security_id": "00700",
+            "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+            "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0408/2025040800668_c.pdf",
+            "title": "腾讯：2024年年度报告"
+          }
+        },
+        {
+          "source_id": "tencent_h1_2026_official",
+          "sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+          "object_relative": "objects/41/4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+          "source_ref": null,
+          "filename": "interim_2026_official.pdf",
+          "title": "Tencent Interim Report 2026",
+          "url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+          "published_date": "2026-10-08",
+          "publication_date_semantics": null,
+          "metadata": {}
+        },
+        {
+          "source_id": "tencent_results_2q2026",
+          "sha256": "64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+          "object_relative": "objects/64/64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+          "source_ref": null,
+          "filename": "results_2q2026.pdf",
+          "title": "Tencent second-quarter and first-half 2026 results",
+          "url": "https://www.tencent.com/wp-content/uploads/2026/08/Tencent-Announces-2026-Second-Quarter-Results.pdf",
+          "published_date": "2026-08-12",
+          "publication_date_semantics": null,
+          "metadata": {}
+        },
+        {
+          "source_id": "netease_results_2q2026",
+          "sha256": "ba4cd2d0507d5d3211d642a8f6d45aba11e0ac245f5757d58e525223ebde4c98",
+          "object_relative": "objects/ba/ba4cd2d0507d5d3211d642a8f6d45aba11e0ac245f5757d58e525223ebde4c98",
+          "source_ref": null,
+          "filename": "netease_2q2026.html",
+          "title": "NetEase second-quarter and interim 2026 unaudited results",
+          "url": "https://ir.netease.com/news-releases/news-release-details/netease-announces-second-quarter-and-interim-2026-unaudited",
+          "published_date": "2026-08-20",
+          "publication_date_semantics": null,
+          "metadata": {}
+        },
+        {
+          "source_id": "tencent_corporate_overview_sep2026",
+          "sha256": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+          "object_relative": "objects/a9/a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+          "source_ref": null,
+          "filename": "corporate_overview_20260916.pdf",
+          "title": "Tencent Corporate Overview September 2026",
+          "url": "https://www.tencent.com/wp-content/uploads/2026/09/Corporate-Overview-2Q26-20260916.pdf",
+          "published_date": "2026-10-08",
+          "publication_date_semantics": null,
+          "metadata": {}
+        }
+      ],
+      "expected": {
+        "as_of_date": "2026-10-08",
+        "segment_names": [
+          "Games",
+          "SocialNetworks",
+          "MarketingServices",
+          "FinTechBusinessServices",
+          "Others"
+        ],
+        "parameters": {
+          "reported_total": {
+            "value": 751766,
+            "unit": "CNY million",
+            "period": "FY2025",
+            "kind": "reported_fact"
+          },
+          "games_base": {
+            "value": 241532,
+            "unit": "CNY million",
+            "period": "FY2025",
+            "kind": "reported_fact"
+          },
+          "socialnetworks_base": {
+            "value": 127749,
+            "unit": "CNY million",
+            "period": "FY2025",
+            "kind": "reported_fact"
+          },
+          "marketingservices_base": {
+            "value": 144973,
+            "unit": "CNY million",
+            "period": "FY2025",
+            "kind": "reported_fact"
+          },
+          "fintechbusinessservices_base": {
+            "value": 229435,
+            "unit": "CNY million",
+            "period": "FY2025",
+            "kind": "reported_fact"
+          },
+          "others_base": {
+            "value": 8077,
+            "unit": "CNY million",
+            "period": "FY2025",
+            "kind": "reported_fact"
+          },
+          "context_group_top5_customer_revenue_share": {
+            "value": 0.065,
+            "unit": "ratio",
+            "period": "FY2025",
+            "kind": "reported_fact"
+          },
+          "context_group_largest_customer_revenue_share": {
+            "value": 0.034,
+            "unit": "ratio",
+            "period": "FY2025",
+            "kind": "reported_fact"
+          }
+        },
+        "sensitivities": {
+          "games_growth_rate_base_2026": {
+            "shock_type": "percentage_point",
+            "shock_value": 0.03
+          },
+          "games_growth_rate_base_2027": {
+            "shock_type": "percentage_point",
+            "shock_value": 0.03
+          },
+          "games_growth_rate_base_2028": {
+            "shock_type": "percentage_point",
+            "shock_value": 0.03
+          },
+          "socialnetworks_growth_rate_base_2026": {
+            "shock_type": "percentage_point",
+            "shock_value": 0.03
+          },
+          "socialnetworks_growth_rate_base_2027": {
+            "shock_type": "percentage_point",
+            "shock_value": 0.03
+          },
+          "socialnetworks_growth_rate_base_2028": {
+            "shock_type": "percentage_point",
+            "shock_value": 0.03
+          },
+          "marketingservices_growth_rate_base_2026": {
+            "shock_type": "percentage_point",
+            "shock_value": 0.03
+          },
+          "marketingservices_growth_rate_base_2027": {
+            "shock_type": "percentage_point",
+            "shock_value": 0.03
+          },
+          "marketingservices_growth_rate_base_2028": {
+            "shock_type": "percentage_point",
+            "shock_value": 0.03
+          },
+          "fintechbusinessservices_growth_rate_base_2026": {
+            "shock_type": "percentage_point",
+            "shock_value": 0.03
+          },
+          "fintechbusinessservices_growth_rate_base_2027": {
+            "shock_type": "percentage_point",
+            "shock_value": 0.03
+          },
+          "fintechbusinessservices_growth_rate_base_2028": {
+            "shock_type": "percentage_point",
+            "shock_value": 0.03
+          },
+          "others_growth_rate_base_2026": {
+            "shock_type": "percentage_point",
+            "shock_value": 0.03
+          },
+          "others_growth_rate_base_2027": {
+            "shock_type": "percentage_point",
+            "shock_value": 0.03
+          },
+          "others_growth_rate_base_2028": {
+            "shock_type": "percentage_point",
+            "shock_value": 0.03
+          }
+        },
+        "target_fields": {},
+        "evidence_distances": {
+          "games_independent_peer_context": "contrary"
+        }
+      },
+      "baseline_product_status": "PARTIAL"
+    },
+    {
+      "case": "US-MSFT",
+      "market": "US",
+      "security_id": "MSFT",
+      "company_name": "Microsoft",
+      "frozen_artifacts": {
+        "input.json": "1fadabef5208df3438ea5202ba4524bb4d0fdfe9e923b0759c24dca8ff4165a3",
+        "forecast.json": "4447f9c5390a429ba5f304bf496af36f24ae6d8354b3a4fea890223d0a27c605",
+        "snapshot.json": "3127098e5ee041e3d17fa2fefeef47cc69ba90c321d68d4a44e6bc4c8e33c74e"
+      },
+      "review_relative": "docs/plans/cross-market-rf-e2e-2026-10-08/reviews/US-MSFT/recheck_v2.json",
+      "review_sha256": "3d706bc288c62da8f0e05645b90a00b64c43b81bcba151eaf0c8d320d66bceb2",
+      "sources": [
+        {
+          "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+          "sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+          "object_relative": null,
+          "source_ref": {
+            "byte_size": 8158067,
+            "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+            "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+            "mime_type": "text/html",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"
+          },
+          "filename": "annual2025.html",
+          "title": "Microsoft 10-K FY2025",
+          "url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+          "published_date": "2025-07-30",
+          "publication_date_semantics": null,
+          "metadata": {
+            "byte_size": 8158067,
+            "canonical_entity_id": null,
+            "collector_name": null,
+            "collector_version": null,
+            "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+            "display_name": null,
+            "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+            "document_kind": "annual_report",
+            "fiscal_period": null,
+            "fiscal_year": 2025,
+            "form_type": "10-K",
+            "language": null,
+            "market": "US",
+            "mime_type": "text/html",
+            "period_end": null,
+            "provider": null,
+            "provider_document_id": null,
+            "published_date": "2025-07-30",
+            "retrieved_at": null,
+            "security_id": "MSFT",
+            "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+            "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+            "title": "Microsoft 10-K FY2025"
+          }
+        },
+        {
+          "source_id": "src_results",
+          "sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+          "object_relative": "objects/8d/8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+          "source_ref": null,
+          "filename": "results.html",
+          "title": "results official communication",
+          "url": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q4/press-release-webcast",
+          "published_date": "2026-07-29",
+          "publication_date_semantics": null,
+          "metadata": {}
+        },
+        {
+          "source_id": "src_call",
+          "sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+          "object_relative": "objects/bd/bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+          "source_ref": null,
+          "filename": "call.html",
+          "title": "call official communication",
+          "url": "https://www.microsoft.com/en-us/Investor/events/fy-2026/earnings-fy-2026-q4",
+          "published_date": "2026-07-29",
+          "publication_date_semantics": null,
+          "metadata": {}
+        },
+        {
+          "source_id": "src_metrics",
+          "sha256": "cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+          "object_relative": "objects/cf/cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+          "source_ref": null,
+          "filename": "metrics.html",
+          "title": "metrics official communication",
+          "url": "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q4/metrics",
+          "published_date": "2026-07-29",
+          "publication_date_semantics": null,
+          "metadata": {}
+        },
+        {
+          "source_id": "src_aws",
+          "sha256": "d83bb386a7d20107ec1480472490dab56ab83122e4e7f569fd1f36608c96e5a4",
+          "object_relative": "objects/d8/d83bb386a7d20107ec1480472490dab56ab83122e4e7f569fd1f36608c96e5a4",
+          "source_ref": null,
+          "filename": "aws.html",
+          "title": "aws official communication",
+          "url": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Second-Quarter-Results/default.aspx",
+          "published_date": "2026-07-30",
+          "publication_date_semantics": null,
+          "metadata": {}
+        },
+        {
+          "source_id": "src_presentation",
+          "sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+          "object_relative": "objects/c0/c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+          "source_ref": null,
+          "filename": "fy2027_segments_metrics.pptx",
+          "title": "FY27 Segments and Investor Metrics",
+          "url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/FY27ExternalKPIs.pptx",
+          "published_date": "2026-09-02",
+          "publication_date_semantics": null,
+          "metadata": {}
+        },
+        {
+          "source_id": "src_strategy",
+          "sha256": "a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+          "object_relative": "objects/a5/a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+          "source_ref": null,
+          "filename": "web_material_announcements.json",
+          "title": "introducing-the-new-copilot-with-home-code-and-autopilot",
+          "url": "https://blogs.microsoft.com/blog/2026/09/25/introducing-the-new-copilot-with-home-code-and-autopilot/",
+          "published_date": "2026-09-25",
+          "publication_date_semantics": null,
+          "metadata": {}
+        },
+        {
+          "source_id": "src_data_innovation",
+          "sha256": "a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+          "object_relative": "objects/a5/a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+          "source_ref": null,
+          "filename": "web_material_announcements.json",
+          "title": "new-microsoft-data-innovations-unlock-what-only-your-business-knows",
+          "url": "https://blogs.microsoft.com/blog/2026/09/28/new-microsoft-data-innovations-unlock-what-only-your-business-knows/",
+          "published_date": "2026-09-28",
+          "publication_date_semantics": null,
+          "metadata": {}
+        },
+        {
+          "source_id": "src_leadership",
+          "sha256": "a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+          "object_relative": "objects/a5/a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+          "source_ref": null,
+          "filename": "web_material_announcements.json",
+          "title": "microsoft-365-and-linkedin-leadership-update",
+          "url": "https://blogs.microsoft.com/blog/2026/10/01/microsoft-365-and-linkedin-leadership-update/",
+          "published_date": "2026-10-01",
+          "publication_date_semantics": null,
+          "metadata": {}
+        }
+      ],
+      "expected": {
+        "as_of_date": "2026-10-08",
+        "segment_names": [
+          "Azure",
+          "Microsoft 365 cloud",
+          "Productivity and server licensing",
+          "Industry solutions",
+          "Frontier and support services",
+          "Search and advertising",
+          "XBOX",
+          "Windows OEM and devices"
+        ],
+        "parameters": {
+          "reported_total": {
+            "value": 331839,
+            "unit": "USD million",
+            "period": "FY2026",
+            "kind": "reported_fact"
+          },
+          "azure_base": {
+            "value": 101938,
+            "unit": "USD million",
+            "period": "FY2026",
+            "kind": "reported_fact"
+          },
+          "microsoft_365_cloud_base": {
+            "value": 100299,
+            "unit": "USD million",
+            "period": "FY2026",
+            "kind": "reported_fact"
+          },
+          "productivity_and_server_licensing_base": {
+            "value": 37285,
+            "unit": "USD million",
+            "period": "FY2026",
+            "kind": "reported_fact"
+          },
+          "industry_solutions_base": {
+            "value": 20345,
+            "unit": "USD million",
+            "period": "FY2026",
+            "kind": "reported_fact"
+          },
+          "frontier_and_support_services_base": {
+            "value": 8260,
+            "unit": "USD million",
+            "period": "FY2026",
+            "kind": "reported_fact"
+          },
+          "search_and_advertising_base": {
+            "value": 24835,
+            "unit": "USD million",
+            "period": "FY2026",
+            "kind": "reported_fact"
+          },
+          "xbox_base": {
+            "value": 21790,
+            "unit": "USD million",
+            "period": "FY2026",
+            "kind": "reported_fact"
+          },
+          "windows_oem_and_devices_base": {
+            "value": 17087,
+            "unit": "USD million",
+            "period": "FY2026",
+            "kind": "reported_fact"
+          }
+        },
+        "sensitivities": {
+          "azure_growth_base_2027": {
+            "shock_type": "percentage_point",
+            "shock_value": 0.05
+          },
+          "microsoft_365_cloud_growth_base_2027": {
+            "shock_type": "percentage_point",
+            "shock_value": 0.05
+          },
+          "productivity_and_server_licensing_growth_base_2027": {
+            "shock_type": "percentage_point",
+            "shock_value": 0.05
+          },
+          "industry_solutions_growth_base_2027": {
+            "shock_type": "percentage_point",
+            "shock_value": 0.05
+          },
+          "frontier_and_support_services_growth_base_2027": {
+            "shock_type": "percentage_point",
+            "shock_value": 0.05
+          },
+          "search_and_advertising_growth_base_2027": {
+            "shock_type": "percentage_point",
+            "shock_value": 0.05
+          },
+          "xbox_growth_base_2027": {
+            "shock_type": "percentage_point",
+            "shock_value": 0.05
+          },
+          "windows_oem_and_devices_growth_base_2027": {
+            "shock_type": "percentage_point",
+            "shock_value": 0.05
+          }
+        },
+        "target_fields": {
+          "company_q1_low": {
+            "measurement_basis": "ambiguous",
+            "measurement_periods": [],
+            "comparison_value": null,
+            "treatment": "unmodeled_data_gap",
+            "perimeter_status": "mismatch"
+          },
+          "company_q1_high": {
+            "measurement_basis": "ambiguous",
+            "measurement_periods": [],
+            "comparison_value": null,
+            "treatment": "unmodeled_data_gap",
+            "perimeter_status": "mismatch"
+          },
+          "agents_q1_low": {
+            "measurement_basis": "ambiguous",
+            "measurement_periods": [],
+            "comparison_value": null,
+            "treatment": "unmodeled_data_gap",
+            "perimeter_status": "mismatch"
+          },
+          "agents_q1_high": {
+            "measurement_basis": "ambiguous",
+            "measurement_periods": [],
+            "comparison_value": null,
+            "treatment": "unmodeled_data_gap",
+            "perimeter_status": "mismatch"
+          },
+          "devices_q1_low": {
+            "measurement_basis": "ambiguous",
+            "measurement_periods": [],
+            "comparison_value": null,
+            "treatment": "unmodeled_data_gap",
+            "perimeter_status": "mismatch"
+          },
+          "devices_q1_high": {
+            "measurement_basis": "ambiguous",
+            "measurement_periods": [],
+            "comparison_value": null,
+            "treatment": "unmodeled_data_gap",
+            "perimeter_status": "mismatch"
+          },
+          "azure_q1_cc_low": {
+            "measurement_basis": "ambiguous",
+            "measurement_periods": [],
+            "comparison_value": null,
+            "treatment": "unmodeled_data_gap",
+            "perimeter_status": "mismatch"
+          },
+          "azure_q1_cc_high": {
+            "measurement_basis": "ambiguous",
+            "measurement_periods": [],
+            "comparison_value": null,
+            "treatment": "unmodeled_data_gap",
+            "perimeter_status": "mismatch"
+          },
+          "m365_q1_cc": {
+            "measurement_basis": "ambiguous",
+            "measurement_periods": [],
+            "comparison_value": null,
+            "treatment": "unmodeled_data_gap",
+            "perimeter_status": "mismatch"
+          },
+          "m365_q1_adjusted_cc": {
+            "measurement_basis": "ambiguous",
+            "measurement_periods": [],
+            "comparison_value": null,
+            "treatment": "unmodeled_data_gap",
+            "perimeter_status": "mismatch"
+          },
+          "company_fy27_double_digit": {
+            "measurement_basis": "annual_period",
+            "measurement_periods": [
+              "FY2027"
+            ],
+            "comparison_value": 365022.9,
+            "treatment": "independent_benchmark",
+            "perimeter_status": "reconciled"
+          }
+        },
+        "evidence_distances": {}
+      },
+      "baseline_product_status": "PARTIAL"
+    }
+  ]
+}
