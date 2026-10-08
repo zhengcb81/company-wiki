@@ -54,3 +54,5 @@
 - CodeGraph context 读取遇自动审批超时；不是代码错误。已尝试结构工具，后续对已知具体 CLI 文件使用文件阅读。
 - 邻仓 git 默认沙箱拒绝读取，已通过授权外的正常 OS 只读执行取得版本。
 - 猜测 `scripts/source_catalog.py` 不存在；需查实际入口，禁止复用错误命令。
+
+Phase 5发布：`71fec1554abf1b0fc6350da28589593b8e345adb`已推主线；[远端CI](https://github.com/zhengcb81/company-wiki/actions/runs/37765260153)成功（88秒）。固定产品基线仍46PASS/3BLOCKED/1FAIL/14NOT_RUN/7NOT_APPLICABLE；后续按follow_up_plan实施，不用CI绿色替代产品检查点。

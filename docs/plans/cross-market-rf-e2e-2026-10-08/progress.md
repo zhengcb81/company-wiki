@@ -116,3 +116,8 @@
 - 新检出MSFT不同Python hash seed跨进程强校验失败；原情景金额不变。基线保持FAIL，单列P0根因及实施卡，不改断言、不固定seed掩盖。当前总计46PASS/3BLOCKED/1FAIL/14NOT_RUN/7NOT_APPLICABLE；新一轮研究/线上供应商/新摘要实际消费不能由离线固定输入替代。
 - 普通CI只增加16小测试，真实下载、PDF/Worker、多仓流程不加入每次commit。README提供run/pack/compare、环境/退出码、完整新研究大节点卡及故障处理。旧总体计划导航新增入口，不重写原完成签收。
 - 提交前host-assumption-guard抓到负向测试写死机器盘符路径，已改为tmp_path生成绝对路径及平台无关Windows drive属性测试；不绕过hook。16项重新运行0.25秒全绿。
+
+## Phase 5 发布收尾
+
+- 套件提交71fec1554abf1b0fc6350da28589593b8e345adb已推origin/master；正常pre-commit/pre-push通过。远端CI https://github.com/zhengcb81/company-wiki/actions/runs/37765260153 成功，10:42:41→10:44:09 UTC（88秒；Fast checks job84秒）。基线的产品FAIL/BLOCKED不因CI成功改写。
+- 最后16项单元测试0.25秒，独立pytest测试目录只剩keep哨兵4B，按精确路径/内容及无reparse复核后删除，恢复不存在；原件删除0。工作区无邻仓改动。本次只固化回归基础设施，follow_up_plan中的产品能力和P0置信度问题仍待实施。
