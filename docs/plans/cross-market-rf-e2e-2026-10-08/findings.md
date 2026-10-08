@@ -62,3 +62,7 @@
 - 额外定位检查不能每个span重启CLI重解析259页PDF：最初full224秒；改为公共read一次验证全部locator、每span合同验证、一次CLI lookup，功能不缩水，最终92.555秒。普通commit/CI只增加0.28秒小测试。
 - 可搬移包35文件56,835,555B，只包含被引用样本和固定研究输入/旧产物，按SHA去重，不复制数据库/密钥。故意提供不存在的生产catalog，用这个包重跑90.309秒；71状态全相同、比较0regression/0missing；证明独立复现。验证后该导出副本删除，Git无新增大原件。
 - 真实在线隔离验证：CN H1 2026新增3,149,962B、SHA182e2062...；FF下载1→复用0，CWP复核身份/年份/字节，RF source preparation再次读取通过；HK/US仍producer ensure fatal、download0。FF用既有年报复用独立触发HK/US companion，0费用请求返回zero_cost_budget/provider_calls0、ET未启动；与无套餐和已启动的offline契约严格区分。未调用外部LLM、未改Dayu、未触碰邻仓WIP。
+
+## 根因修复要求补充
+
+用户要求每个暴露问题修共用机制，不能逐症状补丁。已将已证实机制、待验证假设、责任层、漏检维度及集中验收整理到root_cause_remediation.md。尤其区分ET启动前zero_cost_budget与实际账户套餐拒绝；正文真实与官方公开日证实；NarrativeRef可读与预测实际消费；算术/字节正确与证据含义正确。当前有界桥/格式/输入语义/P0改造尚未实施，不重新签为已解决。

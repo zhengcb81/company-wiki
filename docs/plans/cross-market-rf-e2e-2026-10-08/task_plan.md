@@ -56,3 +56,9 @@
 - 猜测 `scripts/source_catalog.py` 不存在；需查实际入口，禁止复用错误命令。
 
 Phase 5发布：`71fec1554abf1b0fc6350da28589593b8e345adb`已推主线；[远端CI](https://github.com/zhengcb81/company-wiki/actions/runs/37765260153)成功（88秒）。固定产品基线仍46PASS/3BLOCKED/1FAIL/14NOT_RUN/7NOT_APPLICABLE；后续按follow_up_plan实施，不用CI绿色替代产品检查点。
+
+## 根因修复阶段（用户补充要求）
+
+实施约束与责任分组见 [root_cause_remediation.md](root_cause_remediation.md)。每个原问题关联共用责任组，保留已证实机制/待证假设/原漏检原因；先RED责任测试，再共用层改造，最后一个集中大节点验收。不得以公司特判、固定seed、删失败检查、虚构日期或放宽关键语义校验完成修复。
+
+下一步：P0 RF跨进程确定性，先建立多seed和多数量级权重的最小失败复现，确定旧快照兼容策略，再改稳定归约；当前仅完成根因施工计划更新，产品缺陷仍未关闭。
