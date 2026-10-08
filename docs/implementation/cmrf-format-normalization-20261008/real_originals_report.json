@@ -1,0 +1,78 @@
+{
+ "schema_version": "cmrf-format-real-originals/1",
+ "read_only": true,
+ "documents": [
+  {
+   "label": "html",
+   "sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+   "declared_expected_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+   "byte_size": 8158067,
+   "format": "html",
+   "parser_name": "cwp_document_normalization",
+   "parser_version": "1.0.0",
+   "unit_count": 5215,
+   "unit_kinds": {
+    "html_paragraph": 1316,
+    "html_table_cell": 3899
+   },
+   "page_count": 0,
+   "pages_read": 0,
+   "opaque_page_count": 0,
+   "line_count": 5215,
+   "coverage_complete": true,
+   "error_count": 0,
+   "error_samples": [],
+   "opaque_asset_count": 0,
+   "opaque_asset_kinds": {},
+   "media_total_bytes": 0,
+   "replay_checks": [
+    {
+     "unit_kind": "html_paragraph",
+     "ok": true,
+     "seconds": 7.954
+    },
+    {
+     "unit_kind": "html_table_cell",
+     "ok": true,
+     "seconds": 7.436
+    }
+   ],
+   "normalize_seconds": 5.071,
+   "limits": {
+    "max_source_bytes": 67108864,
+    "max_units": 20000,
+    "max_media_bytes": 268435456
+   }
+  },
+  {
+   "label": "pptx",
+   "sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+   "declared_expected_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+   "byte_size": 4016522,
+   "format": "pptx",
+   "parser_name": "cwp_document_normalization",
+   "parser_version": "1.0.0",
+   "unit_count": 0,
+   "unit_kinds": {},
+   "page_count": 22,
+   "pages_read": 22,
+   "opaque_page_count": 22,
+   "line_count": 0,
+   "coverage_complete": false,
+   "error_count": 0,
+   "error_samples": [],
+   "opaque_asset_count": 22,
+   "opaque_asset_kinds": {
+    "image": 22
+   },
+   "media_total_bytes": 3954484,
+   "replay_checks": [],
+   "normalize_seconds": 0.514,
+   "limits": {
+    "max_source_bytes": 67108864,
+    "max_units": 20000,
+    "max_media_bytes": 268435456
+   }
+  }
+ ]
+}
