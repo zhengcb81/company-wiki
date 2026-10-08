@@ -104,3 +104,5 @@ P0原三家公司结果证明共用修复有效且旧经济情景不变：US不�
 电话会修复确认：max_cost=0限制增量费用，并非禁止已订阅配额HTTP。FMP exact支持和当前账户权限是两个独立状态；现账户真实一次请求仍拒绝，不能将离线绿说成可下载。用量保留独立stderr回执，public内容和SHA不改；unknown supervisor usage不伪造0、不自动重试，legacy provider_calls仅attempt。默认CLI静默合同保留，FF显式请求回执；公开v2 serializer也需传实际用量，直接调用companion不能替代该接口验证。
 
 三条根因任务可并行：纯格式normalization包只写CWP新document_normalization子目录，不触现有Worker；RF共用输入构建不依赖新解析器，使用现有SourceRef/NarrativeRef；FF失败原因传播可对当前CWP结构输出做离线/实际CLI验收，不要求同时改producer。最后由MAIN统一接线和真实两组公司审查。未提供机器元数据只能unknown，不能靠文本猜provider_started或公开日。相互独立来自写范围和接口，不来自“同一主目录不同agent不会冲突”的假设。
+
+MAIN 来源资格只读调查已记录在 phase6/source_qualification_investigation.md：indexed 与实读字节不同，已有 source-facts append-only 修正链可复用，未知公开日的 resolve 检查顺序仍待 RED；微软会议日不能替代 transcript 出版日。2026-10-08 再核三条实际独立工作树，分支/基线一致、未提交为空，可立即启动。

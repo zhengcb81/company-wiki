@@ -166,3 +166,10 @@ P1 FF/ET费用能力集中验收：6RED/7PASS→ET费用13PASS，实际用量3RE
 用户要求新分包：新增R6-FORMAT/RF-INPUT/FF-CAUSE三卡、总分工/交接格式；按真实未完成机制拆分，不重发旧卡。分别创建独立codex分支与工作树，CWP/RF稀疏检出避免历史/原件复制；worktrees.json记录精确SHA、干净状态、implementation_started=false。MAIN保留共享PWF、来源资格和现有Worker集成，三线各写独占项目/子目录，待用户发出开工。
 
 收尾发布证据：FF697af966精确SHA远端CI37833957140成功；ET没有工作流（API空列表），使用实际74责任测试/跨仓E2E，不报CI。跟进同一FF运行文件在3份安装副本单点同步，无未选漂移。清9个已完成owned测试根释放1,875,413B，2已并线的临时FF/ET工作树及其缓存移除；新3分包工作树保留，18,580,471B，无原件副本或密钥。主体目标active，分包不构成暂停。
+
+### 三卡交付复核与 MAIN 调查记录
+
+- 再核 R6-FORMAT / R6-RF-INPUT / R6-FF-CAUSE：三工作树实际存在，分支与登记的精确基线一致，git status 均为空；允许现在并行开工，MAIN 维持原独占边界。卡、接口、PWF 和测试包已在总 README 链接。
+- 邻工作树的默认沙箱 git 只读报 Permission denied；正常 OS 同一只读命令成功，未修改工作树。调用 gh 查询 CI 失败因本机无 gh 命令；不是远端 CI 失败，不将失败工具输出写成 CI 状态。
+- 只读来源资格结构调查与出版证据注意事项写 phase6/source_qualification_investigation.md；尚未代码实施或宣称待证问题已修。原件改动0、收费模型0。
+- 改用公开 GitHub REST 查询完整 SHA：a7c6705cd4c5158cc2435d7c74a917c001454e4e 对应 [CI 37834777705](https://github.com/zhengcb81/company-wiki/actions/runs/37834777705) completed/success。不使用缩短 SHA 的空查询或旧取消运行冒充结果。
