@@ -275,7 +275,7 @@ def test_cli_publishes_one_strict_pathless_v2_bundle_without_scanning(
     assert _snapshot(tmp_path) == before
 
 
-def test_cli_exports_sparse_manifest_when_v2_metadata_is_not_visible(
+def test_cli_ignores_automatic_legacy_rollout_file_and_exports_current_capture(
     tmp_path: Path,
 ) -> None:
     config_path, _raw, guard_dir, ref, span = _fixture(tmp_path)
@@ -290,13 +290,10 @@ def test_cli_exports_sparse_manifest_when_v2_metadata_is_not_visible(
     assert manifest["content_sha256"] == SHA
     assert manifest["byte_size"] == len(BODY)
     assert manifest["mime_type"] == "text/plain"
-    for field in (
-        "title", "source_url", "retrieved_at", "collector_name",
-        "collector_version", "canonical_entity_id", "display_name", "market",
-        "security_id", "fiscal_year", "fiscal_period", "period_end",
-        "form_type", "provider", "provider_document_id", "language",
-    ):
-        assert manifest[field] is None
+    assert manifest["title"] == "Acme 2025 annual report"
+    assert manifest["source_url"] == "https://sec.gov/x/2025"
+    assert manifest["fiscal_year"] == 2025
+    assert manifest["language"] is None and manifest["fiscal_period"] is None
     assert wire["evidence_spans"] == [span]
     assert b"EXPORT-V2-RAW-BYTES-SENTINEL" not in proc.stdout
     assert _snapshot(tmp_path) == before

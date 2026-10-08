@@ -715,7 +715,6 @@ def _run_ensure_command(
     )
     from .acquisition_journal import AcquisitionJournal
     from .resolver import build_resolution_envelope
-    from .runtime_policy import RuntimePolicyError, load_runtime_policy
 
     ensured = _retry_on_catalog_lock(
         lambda: SourceAcquisitionService(
@@ -732,10 +731,7 @@ def _run_ensure_command(
         action="ensure",
     )
 
-    try:
-        ensure_policy = load_runtime_policy(config.catalog_dir / "runtime_policy.json")
-    except RuntimePolicyError:
-        ensure_policy = None
+    ensure_policy = None  # Current source operations use steady facts, not rollout permissions.
     ensure_dict = _plain(ensured)
     resolution_dict = ensure_dict.get("resolution")
     if isinstance(resolution_dict, dict):
@@ -1047,13 +1043,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         elif args.command == "resolve":
             from .acquisition_journal import AcquisitionJournal
             from .resolver import build_resolution_envelope
-            from .runtime_policy import RuntimePolicyError, load_runtime_policy
-
             request, identity = source_request()
-            try:
-                policy = load_runtime_policy(config.catalog_dir / "runtime_policy.json")
-            except RuntimePolicyError:
-                policy = None  # no snapshot yet -> v1 + bridge (FC-202 default)
+            policy = None  # Legacy runtime snapshots require an explicit compatibility caller.
             resolution = SourceResolver(get_catalog(), runtime_policy=policy).resolve(
                 request
             )

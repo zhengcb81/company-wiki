@@ -191,3 +191,21 @@ P1 FF/ET费用能力集中验收：6RED/7PASS→ET费用13PASS，实际用量3RE
 目标按用户最新要求扩展为两组验收后继续归纳共性问题入PWF并实施的循环。只读审查发现formal envelope缺entity_ids/期次及任意metadata冲突、Reader对runtime_policy损坏阻断等残留，加入最高优先级简化方案下一集中节点，不把当前入库重构宣称全部门禁清理完成。
 
 第一责任节点最终300PASS/106.36秒，公开v2、envelope、真实ensure/CLI/Worker、并发及原文负例均绿。补充未指定市场1RED/5PASS发现新helper误拒绝None，改为只比较显式请求市场并由candidate登记已知市场；49范围/writer/single-intent PASS/15.10秒。ruff所有改动文件和mypy五责任模块通过；精确记录见phase6/identity_responsibility_acceptance.md。先提交冻结版本再三市场full replay，随后继续剩余元数据/旧policy门禁节点，不宣称整体完成。
+
+
+2026-10-08 身份责任入库节点已发布95749f84，精确SHA远端CI37843149783成功。冻结full/replay完成220.179秒，47PASS/3BLOCKED/14NOT_RUN/7NOT_APPLICABLE/0FAIL，隔离根恢复且保护原件/输入不变；同规格对比71不变（已有FF→ET→CWP离线契约仍PASS），无回归。后续仍按身份责任施工文档移除Reader任意元数据冲突全局阻断、重复期次检查、旧runtime许可与摘要policy自验，不宣布全项目完成。猜测tools/cross_market_suite/environment.py及execution.py不存在；已查实际文件为core.py/runner.py，后续只读实际路径。
+
+
+剩余门禁责任节点：19项新真实RED/8.69秒，涵盖辅助字段争议、缺期次/公开日原文、导出/摘要、坏runtime文件和旧策略指纹。开始共用metadata_observation，争议值只投影为None，不更改原文、capture或v2 manifest字段；现代reader默认steady，旧snapshot只显式compat；增加一次open_described_version，消除摘要前后自验。另记录本轮误猜source_facts.py及narrative_handlers.py不存在，实际为assertion_service.py和automation/handlers，不再沿错误路径读。
+
+
+元数据节点19RED→19GREEN，Worker/Gap5RED→75PASS/1旧语义要求。进一步发现batch恢复仍使用BATCH_READ_POLICY_CHANGED：实际已完成run修改标题/声明语言/可容纳大小限额后恢复1RED（6.67秒），本机HTTP回放1次，外部模型0。统一移除历史指纹与当前metadata等值准入，原冻结binding和usage不重签；集中239项207PASS/31旧权限语义FAIL/1skip（119.76秒），31按新产品合同更新并保留实际错字节/当前限额负例。正在297项集中验证。
+
+
+静态检查：ruff识别并删除5个已取消门的无用import；mypy发现新helper的空tuple推断1项，已显式tuple[str,...]，不改变运行语义。还发现实际scanner写capture.*（非仅acquisition.*），共用质量投影已覆盖此公开历史形状；formal质量理由也共用同一投影，取消第二段重复JSON/provenance解析。
+
+
+相关读取/导出/恢复297项集中296PASS/1skip（155.94秒），缺skip为未显式提供只读真实TXT输入；共用形状/新增身份负例和append-only修正40PASS（14.16秒）。上游234项231PASS/3FAIL（60.16秒）：2是旧元数据/未知公开日准入要求；1为新投影真实回归，误将两个同SHA不同文件名的derived-kind分歧当发行人声明冲突。已按原provenance的declared标记区分（只有明示全derived才不清空分类），保留全部分歧诊断；原resolver测试不改，补真实跨目录来源复用验证，未用公司特判。mypy7模块绿；初diff-check因混CRLF将文件每行误记空白，已统一该测试LF。
+
+
+元数据责任节点收尾：最后57PASS/9.09秒，mypy7模块与ruff绿，diff-check绿。清9owned pytest根207,312,882B，均不存在；外包工作树/原件保留。只读看到三外包HEAD已更新：FORMAT d48ca1be / RF f70d1978 / FF 8bb7b85；交接范围仍独立，FF handoff两文件未提交由本线交接声明解释，MAIN不擅自覆盖。误读.git/hooks/pre-push不存在，实际core.hooksPath=.githooks，后续从配置读取真实路径。

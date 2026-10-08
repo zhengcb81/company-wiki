@@ -634,3 +634,25 @@ def test_service_ensure_latest_as_of_returns_gap(tmp_path):
         if line.strip()
     ]
     assert any(r.get("outcome") == "gap_plan" for r in records), records
+
+
+def test_unknown_remote_date_is_inventory_not_historical_gap_or_proof_of_latest():
+    unknown = _Remote(2026, None, "unknown")
+    plan = _plan([_Local(2025, "2026-04-15")], [unknown])
+    assert plan.missing == plan.newer_revision == plan.future == ()
+    assert not plan.not_published
+    assert plan.publication_unknown == (unknown,)
+    assert plan.to_dict()["publication_unknown"][0]["filing_date"] is None
+    assert plan.gap_hash != _plan([_Local(2025, "2026-04-15")], []).gap_hash
+
+
+def test_known_unknown_invalid_future_remote_dates_are_classified_once():
+    known = _Remote(2025, "2026-04-15", "acc-2025")
+    unknown = _Remote(2026, None, "unknown")
+    invalid = _Remote(2026, "2026-02-30", "invalid")
+    future = _Remote(2026, "2026-12-01", "future")
+    plan = _plan([_Local(2025, "2026-04-15")], [known, unknown, invalid, future])
+    assert plan.missing == plan.newer_revision == ()
+    assert plan.future == (future,)
+    assert plan.publication_unknown == (unknown, invalid)
+    assert not plan.not_published

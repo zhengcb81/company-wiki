@@ -1,0 +1,54 @@
+{
+  "schema_version": "owned-test-cleanup/1",
+  "roots": [
+    {
+      "name": "p1metadata-red",
+      "removed_bytes": 5213221,
+      "restored_absent": true
+    },
+    {
+      "name": "p1metadata-next",
+      "removed_bytes": 6086257,
+      "restored_absent": true
+    },
+    {
+      "name": "p1metadata-focused",
+      "removed_bytes": 6086257,
+      "restored_absent": true
+    },
+    {
+      "name": "p1metadata-regression",
+      "removed_bytes": 57593420,
+      "restored_absent": true
+    },
+    {
+      "name": "p1metadata-green",
+      "removed_bytes": 58425017,
+      "restored_absent": true
+    },
+    {
+      "name": "p1metadata-closure",
+      "removed_bytes": 11313849,
+      "restored_absent": true
+    },
+    {
+      "name": "p1resume-red",
+      "removed_bytes": 21,
+      "restored_absent": true
+    },
+    {
+      "name": "p1metadata-upstream",
+      "removed_bytes": 45280234,
+      "restored_absent": true
+    },
+    {
+      "name": "p1metadata-derived",
+      "removed_bytes": 17314606,
+      "restored_absent": true
+    }
+  ],
+  "removed_bytes": 207312882,
+  "originals_removed": 0,
+  "external_worktrees_removed": 0,
+  "production_config_modified": false
+}

@@ -248,14 +248,13 @@ def test_changed_actual_admission_refuses_existing_pin_and_unpinned_open(tmp_pat
     catalog, reader, ref, _, _ = _indexed_reader(tmp_path, request)
     pin = reader.read_policy_sha256()
     catalog.config = replace(catalog.config, roots=(replace(catalog.config.roots[0], **change),))
-    with pytest.raises(SourceReadError, match="read_policy_mismatch"):
+    with pytest.raises(SourceReadError, match="root_admission_denied"):
         reader.open_version(ref, expected_read_policy_sha256=pin)
     with pytest.raises(SourceReadError, match="root_admission_denied"):
         reader.open_version(ref)
 
 
-def test_effective_pin_upgrade_explicitly_refuses_old_full_config_pin(tmp_path, request):
-    from company_wiki.source_catalog import SourceReadError
+def test_effective_pin_upgrade_reports_current_rules_without_denying_old_lineage(tmp_path, request):
 
     catalog, reader, ref, _, body = _indexed_reader(tmp_path, request)
 
@@ -273,8 +272,8 @@ def test_effective_pin_upgrade_explicitly_refuses_old_full_config_pin(tmp_path, 
     old_pin = hashlib.sha256(json.dumps(
         old_payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False,
     ).encode("utf-8")).hexdigest()
-    with pytest.raises(SourceReadError, match="read_policy_mismatch"):
-        reader.open_version(ref, expected_read_policy_sha256=old_pin)
+    opened = reader.open_version(ref, expected_read_policy_sha256=old_pin)
+    assert opened.data == body and opened.source_read_policy_sha256 != old_pin
     new_pin = reader.read_policy_sha256()
     assert new_pin != old_pin
     assert reader.open_version(ref, expected_read_policy_sha256=new_pin).data == body
@@ -305,29 +304,27 @@ def test_steady_effective_rules_still_refuse_changed_root_with_old_pin(tmp_path,
     catalog.config = replace(catalog.config, roots=(replace(
         catalog.config.roots[0], path=tmp_path / "unregistered-lake",
     ),))
-    with pytest.raises(SourceReadError, match="read_policy_mismatch"):
+    with pytest.raises(SourceReadError, match="no_verified_location"):
         reader.open_version(ref, expected_read_policy_sha256=pin)
     with pytest.raises(SourceReadError, match="no_verified_location"):
         reader.open_version(ref)
 
 
-def test_steady_runtime_snapshot_hash_is_still_verified(tmp_path, request):
-    from company_wiki.source_catalog import SourceReadError
+def test_bad_automatic_runtime_snapshot_is_ignored_by_current_reads(tmp_path, request):
 
-    catalog, reader, _, _, _ = _indexed_reader(tmp_path, request)
+    catalog, reader, ref, _, body = _indexed_reader(tmp_path, request)
     snapshot = _steady_runtime(catalog.config)
     snapshot["policy_hash"] = "a" * 64  # do not rebuild snapshot hash
     (catalog.config.catalog_dir / "runtime_policy.json").write_text(
         json.dumps(snapshot), encoding="utf-8",
     )
-    with pytest.raises(SourceReadError, match="runtime_policy_invalid"):
-        reader.read_policy_sha256()
+    assert reader.read_policy_sha256()
+    assert reader.open_version(ref).data == body
 
 
-def test_legacy_runtime_keeps_full_rootpolicy_binding(tmp_path, request):
-    from company_wiki.source_catalog import SourceReadError
+def test_legacy_automatic_runtime_does_not_bind_current_personal_reads(tmp_path, request):
 
-    catalog, reader, _, _, _ = _indexed_reader(tmp_path, request)
+    catalog, reader, ref, _, body = _indexed_reader(tmp_path, request)
     (catalog.config.catalog_dir / "runtime_policy.json").write_text(
         json.dumps(_runtime_snapshot(catalog.config)), encoding="utf-8",
     )
@@ -335,5 +332,5 @@ def test_legacy_runtime_keeps_full_rootpolicy_binding(tmp_path, request):
     catalog.config = replace(catalog.config, roots=(replace(
         catalog.config.roots[0], cohort="changed-old-cohort",
     ),))
-    with pytest.raises(SourceReadError, match="runtime_policy_mismatch"):
-        reader.read_policy_sha256()
+    assert reader.read_policy_sha256()
+    assert reader.open_version(ref).data == body

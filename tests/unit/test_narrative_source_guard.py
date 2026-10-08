@@ -56,12 +56,30 @@ def test_inferred_language_is_accepted_when_catalog_language_is_unavailable():
     validate_source_metadata(payload, _sparse_manifest(payload))
 
 
-def test_nonempty_catalog_language_must_match_the_byte_pinned_language():
+def test_changed_catalog_language_is_auxiliary_to_byte_pinned_language():
     payload = _payload()
     manifest = _sparse_manifest(payload)
     manifest["language"] = "en"
+    validate_source_metadata(payload, manifest)
 
-    with pytest.raises(NarrativeSourceGuardError) as error:
-        validate_source_metadata(payload, manifest)
 
-    assert error.value.code == "INPUT_SCHEMA_INVALID"
+@pytest.mark.parametrize("field,value", [("title", "Corrected title"), ("language", "en")])
+def test_auxiliary_declaration_drift_does_not_deny_byte_pinned_processing(field, value):
+    payload = _payload()
+    manifest = _sparse_manifest(payload)
+    manifest[field] = value
+    validate_source_metadata(payload, manifest)
+
+
+def test_generation_read_fingerprint_is_not_a_worker_permission():
+    from company_wiki.automation.narrative_source_guard import validate_opened_identity
+    from company_wiki.source_catalog.source_reader import VerifiedContent
+    payload = _payload()
+    opened = VerifiedContent(document_id=payload.source_ref.document_id,
+        source_id=payload.source_ref.source_id, content_sha256=payload.source_ref.content_sha256,
+        data=b"verified source bytes", byte_size=payload.source_ref.byte_size,
+        read_at="2026-10-08T00:00:00Z", policy_sha256="a" * 64, source_read_policy_sha256="c" * 64)
+    validate_opened_identity(payload, opened)
+    from dataclasses import replace
+    with pytest.raises(NarrativeSourceGuardError, match="SOURCE_HASH_MISMATCH"):
+        validate_opened_identity(payload, replace(opened, data=b"X" * len(opened.data)))

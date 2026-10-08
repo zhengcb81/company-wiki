@@ -128,7 +128,7 @@ def test_finite_registration_keeps_verified_projection_and_unknown_date(lake):
     assert _assertions(catalog) == before
 
 
-def test_new_conflicting_capture_still_blocks_after_verified_fact_correction(lake):
+def test_new_conflicting_capture_is_diagnostic_after_source_fact_correction(lake):
     catalog, reader, ref, original = lake
     _apply(lake, {"market": "CN", "security_id": "002643"})
     sidecar = original.with_suffix(".pdf.source.json")
@@ -136,8 +136,9 @@ def test_new_conflicting_capture_still_blocks_after_verified_fact_correction(lak
     data["market"] = "US"
     sidecar.write_text(json.dumps(data), encoding="utf-8")
     catalog.register_sources(root_id="company_raw", relative_paths={original.relative_to(catalog.config.roots[0].path).as_posix()})
-    with pytest.raises(SourceReadError, match="metadata_conflict"):
-        reader.describe_version(ref)
+    assert reader.describe_version(ref)["market"] == "CN"
+    assert reader.metadata_diagnostics(ref)["conflicted_fields"]
+    assert reader.open_version(ref).data == original.read_bytes()
 
 
 def test_corrected_unknown_publication_cannot_match_an_asof_filing(lake):
@@ -150,7 +151,7 @@ def test_corrected_unknown_publication_cannot_match_an_asof_filing(lake):
 
 
 def test_unknown_publication_never_returns_from_capture_after_later_correction(lake):
-    catalog, reader, ref, _ = lake
+    catalog, reader, ref, original = lake
     first = _apply(lake, {"published_date": None})
     second = _apply(lake, {"security_id": "002867"})
     assert reader.describe_version(ref)["published_date"] is None
@@ -160,8 +161,7 @@ def test_unknown_publication_never_returns_from_capture_after_later_correction(l
     latest = next(x for x in assertions if x["assertion_id"] == second["assertion_id"])
     assert latest["supersedes_assertion_id"] == first["assertion_id"]
     assert json.loads(latest["evidence_json"])["source_fact_patch"]["published_date"] is None
-    with pytest.raises(SourceReadError, match="capture_incomplete"):
-        reader.open_version(ref, purpose="filing_reuse")
+    assert reader.open_version(ref, purpose="filing_reuse").data == original.read_bytes()
 
 
 @pytest.mark.parametrize("facts", [

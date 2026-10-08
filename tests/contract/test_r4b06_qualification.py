@@ -1,25 +1,8 @@
-"""R4 phase-B step B06 acceptance: separate "locally readable" from "formally
-captured".
+"""Legacy quality labels report gaps, not a second identity or period licence.
 
-Design §B06 (with decision S-13 and the F-B01-7 acceptance item):
-
-* the response envelope carries a **qualification** label - ``verified_input``
-  (identity + period + source complete) vs ``preview`` (locally readable,
-  provenance gaps: no URL, no capture trace) vs **``blocked``** (identity or
-  period unknown, or a real field conflict);
-* the response-level ``blocked`` lives HERE and not in ``outcome``: the
-  consumer's own validator (filing-fetch ``validate_resolution_envelope``)
-  requires ``outcome`` to be one of ITS eight values, which contain no
-  ``blocked`` - putting it there would be an upstream error for filing-fetch;
-* a preview licence is never inherited by a formal input, and a missing URL is
-  never fabricated (no URL is invented, no network is touched);
-* B06 only provides FACTS: the consumer's own permission gate
-  (``revenue-forecast/scripts/company_wiki_source.py``) is not changed here.
-
-Matrix items: L09, L10 (phase-B acceptance map, reverse-coverage
-section; step B06 claims these, and the cases below are what exercises them).
-
-Product code is NOT modified by this file (file-scope F10: new tests only).
+2026-10-08 product contract: metadata gaps/conflicts are preview diagnostics;
+only missing source/hash binding is blocked. Period and publication constraints
+are enforced once by the requested selection, not again during exact-byte read.
 """
 
 from __future__ import annotations
@@ -209,7 +192,7 @@ def test_r4b06_missing_capture_trace_is_preview(tmp_path):
 # ---------------------------------------------------------------------------
 
 
-def test_r4b06_unknown_identity_blocks_the_formal_contract(tmp_path):
+def test_r4b06_unknown_identity_is_a_diagnostic(tmp_path):
     """Identity unknown => blocked, not preview.
 
     ``resolve`` matches BY identity, so a served handle always has entity ids;
@@ -225,11 +208,11 @@ def test_r4b06_unknown_identity_blocks_the_formal_contract(tmp_path):
     gaps = _qualification_gaps(catalog_handle)
     label, reason = _qualification_label(gaps, "")
     assert "identity_missing" in gaps, gaps
-    assert label == QUALIFICATION_BLOCKED, (label, gaps)
+    assert label == QUALIFICATION_PREVIEW, (label, gaps)
     assert reason, reason
 
 
-def test_r4b06_unknown_period_blocks_the_formal_contract(tmp_path):
+def test_r4b06_unknown_period_is_a_diagnostic(tmp_path):
     """B-VR06-01: the PERIOD is a period fact, not a filing date.
 
     A `published_date` says when the filing was PUBLISHED, so a handle carrying
@@ -246,7 +229,7 @@ def test_r4b06_unknown_period_blocks_the_formal_contract(tmp_path):
     date_only = replace(handle, fiscal_year=None, published_date="2026-02-20")
     gaps = _qualification_gaps(date_only)
     assert "period_missing" in gaps, gaps
-    assert _qualification_label(gaps, "")[0] == QUALIFICATION_BLOCKED, gaps
+    assert _qualification_label(gaps, "")[0] == QUALIFICATION_PREVIEW, gaps
 
     period_only = replace(handle, fiscal_year=None, fiscal_period="H1")
     assert "period_missing" not in _qualification_gaps(period_only)
@@ -271,7 +254,7 @@ def test_r4b06_missing_source_identity_blocks_the_formal_contract(tmp_path):
     assert reason, reason
 
 
-def test_r4b06_field_conflict_blocks_the_formal_contract(tmp_path):
+def test_r4b06_field_conflict_is_a_diagnostic(tmp_path):
     """S-13 wiring: a REAL metadata conflict (B05's reserved key) is the same
     fact the read side calls ``metadata_status="blocked"`` - the envelope must
     report it as a response-level ``blocked``, not as a weaker preview."""
@@ -301,7 +284,7 @@ def test_r4b06_field_conflict_blocks_the_formal_contract(tmp_path):
     )
     qualification = envelope.qualification
     assert qualification is not None, envelope.to_dict()
-    assert qualification["label"] == QUALIFICATION_BLOCKED, qualification
+    assert qualification["label"] == QUALIFICATION_PREVIEW, qualification
     assert "title" in qualification["reason"], qualification
 
 
@@ -414,7 +397,7 @@ def test_r4b06_malformed_shared_metadata_blocks_instead_of_staying_silent(tmp_pa
     assert "title" in reason, reason
 
 
-def test_r4b06_a_malformed_shared_column_blocks_the_envelope(tmp_path):
+def test_r4b06_a_malformed_shared_column_degrades_quality(tmp_path):
     """The two sides must agree: a document whose shared column is unreadable is
     BLOCKED in the envelope exactly as it is blocked on the read side
     (`metadata_status="blocked"`, `metadata_problem="unreadable_metadata"`)."""
@@ -445,7 +428,7 @@ def test_r4b06_a_malformed_shared_column_blocks_the_envelope(tmp_path):
             resolution, store=catalog.store, project_root=tmp_path
         )
         qualification = envelope.qualification
-        assert qualification["label"] == QUALIFICATION_BLOCKED, (label, qualification)
+        assert qualification["label"] == QUALIFICATION_PREVIEW, (label, qualification)
         assert "shared metadata" in qualification["reason"] or "provenance" in (
             qualification["reason"]
         ), (label, qualification)
@@ -480,7 +463,7 @@ def test_r4b06_the_prompt_injection_reader_tolerates_malformed_shapes():
         assert read_prompt_injection_review(_Store(payload), "doc-1") is None, label
 
 
-def test_r4b06_non_utf8_bytes_block_both_sides_not_just_the_read_side(tmp_path):
+def test_r4b06_non_utf8_metadata_degrades_quality(tmp_path):
     """B-VR05M-03 (P1): the shared column can hold bytes that are not valid UTF-8, and
     the envelope calls the prompt-injection reader BEFORE the conflict check.  That
     reader caught only JSONDecodeError, so the read side answered "blocked" while
@@ -511,7 +494,7 @@ def test_r4b06_non_utf8_bytes_block_both_sides_not_just_the_read_side(tmp_path):
     envelope = build_resolution_envelope(
         resolution, store=catalog.store, project_root=tmp_path
     )
-    assert envelope.qualification["label"] == QUALIFICATION_BLOCKED, envelope.qualification
+    assert envelope.qualification["label"] == QUALIFICATION_PREVIEW, envelope.qualification
     candidates = catalog.query_filing_candidates(
         document_kind="annual_report", source_statuses=("active",)
     )
@@ -563,7 +546,7 @@ def test_r4b06_the_conflict_check_reports_that_it_ran(tmp_path):
     assert envelope.qualification["conflict_check"] == "store", envelope.qualification
 
 
-def test_r4b06_a_served_document_without_a_period_is_blocked(tmp_path):
+def test_r4b06_a_served_document_without_a_period_is_diagnostic(tmp_path):
     """B-VR06-01 end to end: `latest_as_of` really serves a document whose source
     carries no fiscal year (measured), so the period gap is reachable through the
     pipeline - not only through the rule."""
@@ -585,7 +568,7 @@ def test_r4b06_a_served_document_without_a_period_is_blocked(tmp_path):
     envelope = build_resolution_envelope(resolution, store=catalog.store,
                                          project_root=tmp_path)
     qualification = envelope.qualification
-    assert qualification["label"] == QUALIFICATION_BLOCKED, qualification
+    assert qualification["label"] == QUALIFICATION_PREVIEW, qualification
     assert "period_missing" in qualification["gaps"], qualification
 
 

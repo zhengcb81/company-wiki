@@ -259,7 +259,7 @@ def test_v2_bundle_reads_any_configured_root_label(tmp_path):
     assert wire["evidence_spans"] == [span.to_dict()]
 
 
-def test_v2_bundle_blocks_conflicting_sidecars_regardless_of_root_labels(tmp_path):
+def test_v2_bundle_reports_disputed_auxiliary_facts_without_losing_grounded_spans(tmp_path):
     catalog, public_root, raw_path, ref, span = _fixture(tmp_path, text_mode=True)
     private_path = tmp_path / "other" / raw_path.name
     private_path.parent.mkdir()
@@ -281,10 +281,12 @@ def test_v2_bundle_blocks_conflicting_sidecars_regardless_of_root_labels(tmp_pat
         catalog.config, roots=(public_root, other_root),
     ))
     mixed_catalog.scan()
-    with pytest.raises(SourceReadError) as error:
-        _build(SourceVersionReader(mixed_catalog), ref, span)
-    assert error.value.status == "blocked"
-    assert error.value.reason == "metadata_conflict"
+    reader = SourceVersionReader(mixed_catalog)
+    wire = _build(reader, ref, span).to_dict()
+    assert wire["manifests"][0]["title"] is None
+    assert wire["manifests"][0]["source_url"] is None
+    assert wire["evidence_spans"] == [span.to_dict()]
+    assert reader.metadata_diagnostics(ref)["conflicted_fields"]
 
 
 def test_v2_bundle_is_available_from_public_source_contract():

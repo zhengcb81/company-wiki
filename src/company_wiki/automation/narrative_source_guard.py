@@ -81,11 +81,8 @@ def validate_opened_source(
             "SOURCE_HASH_MISMATCH",
             "verified source identity differs from the event pin",
         )
-    if opened.source_read_policy_sha256 != expected_read_policy_sha256:
-        raise NarrativeSourceGuardError(
-            "POLICY_DENIED",
-            "source read policy differs from the event pin",
-        )
+    # expected_read_policy_sha256 is persisted generation lineage. Current
+    # byte/root checks are owned by the reader, not a second worker permission.
 
 
 def validate_source_metadata(
@@ -99,19 +96,12 @@ def validate_source_metadata(
         "content_sha256": source.content_sha256,
         "byte_size": source.byte_size,
         "mime_type": source.mime_type,
-        "title": payload.source_metadata.title,
         "document_kind": payload.source_metadata.document_kind,
     }
     if {key: metadata.get(key) for key in expected} != expected:
         raise NarrativeSourceGuardError(
             "INPUT_SCHEMA_INVALID",
             "current source metadata differs from the event pin",
-        )
-    current_language = metadata.get("language")
-    if current_language not in (None, "") and current_language != payload.source_metadata.language:
-        raise NarrativeSourceGuardError(
-            "INPUT_SCHEMA_INVALID",
-            "current source language differs from the event pin",
         )
 
 

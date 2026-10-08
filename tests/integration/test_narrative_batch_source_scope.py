@@ -93,7 +93,7 @@ def test_completed_cli_has_source_scoped_binding_and_relocates_without_rework(
 
             config["roots"][0]["max_file_size"] = max(ref.byte_size for ref, *_ in state.indexed.values()) + 4096
             state.config_path.write_text(canonical_json(config), encoding="utf-8")
-            refused("BATCH_READ_POLICY_CHANGED")
+            resumed_without_work()
             config["roots"][0]["max_file_size"] = 1
             state.config_path.write_text(canonical_json(config), encoding="utf-8")
             refused("root_admission_denied")
@@ -116,5 +116,39 @@ def test_completed_cli_has_source_scoped_binding_and_relocates_without_rework(
             assert len(loopback_model_server.requests) == 1
             assert {p: p.read_bytes() for p in relocated_originals} == relocated_originals
             assert not loopback_model_server.errors
+        finally:
+            state.catalog.close()
+
+
+def test_completed_batch_resumes_after_auxiliary_metadata_and_permissive_limit_change(
+    tmp_path_factory, loopback_model_server, r6_protected_inputs,
+):
+    with fixtures.isolated_batch_directory(tmp_path_factory) as root:
+        state = _prepare(root, loopback_model_server.endpoint, one_source=True)
+        try:
+            call, first = _invoke(state)
+            assert call.returncode == 0 and first['status'] == 'completed', first
+            before = _dump(state.store.db_path)
+            run = NarrativeRunStore(state.store.db_path).get_run('cli-e2e')
+            original_binding = run.binding_json
+            source = next(iter(state.indexed.values()))[0]
+            with closing(sqlite3.connect(state.catalog.config.database_path)) as connection:
+                row = connection.execute('SELECT metadata_json FROM documents WHERE document_id=?',
+                                         (source.document_id,)).fetchone()
+                metadata = json.loads(row[0])
+                metadata['acquisition']['source_title'] = 'Corrected display title'
+                metadata['acquisition']['language'] = 'zh'
+                connection.execute('UPDATE documents SET metadata_json=? WHERE document_id=?',
+                                   (json.dumps(metadata), source.document_id))
+            config = json.loads(state.config_path.read_text(encoding='utf-8'))
+            config['roots'][0]['max_file_size'] = source.byte_size + 4096
+            state.config_path.write_text(canonical_json(config), encoding='utf-8')
+            call, second = _invoke(state)
+            assert call.returncode == 0 and second['status'] == 'completed', second
+            assert second['documents'] == first['documents']
+            assert second['budget'] == first['budget']
+            assert len(loopback_model_server.requests) == 1
+            assert _dump(state.store.db_path) == before
+            assert NarrativeRunStore(state.store.db_path).get_run('cli-e2e').binding_json == original_binding
         finally:
             state.catalog.close()

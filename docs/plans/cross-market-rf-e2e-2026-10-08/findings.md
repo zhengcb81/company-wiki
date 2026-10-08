@@ -108,3 +108,9 @@ P0原三家公司结果证明共用修复有效且旧经济情景不变：US不�
 三条根因任务可并行：纯格式normalization包只写CWP新document_normalization子目录，不触现有Worker；RF共用输入构建不依赖新解析器，使用现有SourceRef/NarrativeRef；FF失败原因传播可对当前CWP结构输出做离线/实际CLI验收，不要求同时改producer。最后由MAIN统一接线和真实两组公司审查。未提供机器元数据只能unknown，不能靠文本猜provider_started或公开日。相互独立来自写范围和接口，不来自“同一主目录不同agent不会冲突”的假设。
 
 MAIN 来源资格只读调查已记录在 phase6/source_qualification_investigation.md：indexed 与实读字节不同，已有 source-facts append-only 修正链可复用，未知公开日的 resolve 检查顺序仍待 RED；微软会议日不能替代 transcript 出版日。2026-10-08 再核三条实际独立工作树，分支/基线一致、未提交为空，可立即启动。
+
+
+2026-10-08 身份责任入库节点已发布95749f84，精确SHA远端CI37843149783成功。冻结full/replay完成220.179秒，47PASS/3BLOCKED/14NOT_RUN/7NOT_APPLICABLE/0FAIL，隔离根恢复且保护原件/输入不变；同规格对比71不变（已有FF→ET→CWP离线契约仍PASS），无回归。后续仍按身份责任施工文档移除Reader任意元数据冲突全局阻断、重复期次检查、旧runtime许可与摘要policy自验，不宣布全项目完成。猜测tools/cross_market_suite/environment.py及execution.py不存在；已查实际文件为core.py/runner.py，后续只读实际路径。
+
+
+根因扩展：仅去除Reader的旧指纹门仍不足，因为batch恢复自己又比较旧指纹和所有当前源事实，会让已完成资料因标题/期次修正或宽松限额改动无法恢复，甚至诱发重复模型/空间。该门已真实CLI复现，修复同属“原字节身份、选择事实、生成时观察、冻结账本”职责拆分；回执应报告当前观察，旧产物留原样，不用重签许可。

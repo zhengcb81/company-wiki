@@ -18,7 +18,6 @@ from typing import Any
 from .policy import _effective_reusable
 from .qualification import SourceQualification, qualify_source
 from .runtime_policy import resolver_visibility_projection
-from .scanner import R4_PROVENANCE_KEY
 from .service import SourceCatalog
 from .store import metadata_state
 
@@ -646,7 +645,7 @@ class ResolutionResult:
     excluded_candidates: tuple[dict[str, object], ...] = ()
 
     def to_dict(self) -> dict[str, Any]:
-        payload = {
+        payload: dict[str, Any] = {
             "schema_version": self.schema_version,
             "request_id": self.request_id,
             "status": self.status.value,
@@ -734,7 +733,7 @@ _GAP_BY_MISSING_FIELD = {
 # "preview" is defined for a locally readable copy whose PROVENANCE has gaps -
 # it still carries a local bytes hash - so a missing identity, period or
 # source/bytes identity is blocking instead.
-_QUALIFICATION_BLOCKING_GAPS = ("identity_missing", "period_missing", "source_missing")
+_QUALIFICATION_BLOCKING_GAPS = ("source_missing",)
 
 
 def _qualification_gaps(handle: Any) -> list[str]:
@@ -767,72 +766,25 @@ def _qualification_gaps(handle: Any) -> list[str]:
 
 
 def _qualification_label(gaps: list[str], conflict_reason: str) -> tuple[str, str]:
-    """B06: label + human-readable reason for one served handle.
-
-    ``conflict_reason`` carries the B05 field-level conflict fact (S-13: a real
-    metadata conflict is a response-level ``blocked``, not a second opinion).
-    """
-    if conflict_reason:
-        return QUALIFICATION_BLOCKED, conflict_reason
+    """Describe quality; only absent source version binding prevents an input."""
     if any(gap in _QUALIFICATION_BLOCKING_GAPS for gap in gaps):
-        return QUALIFICATION_BLOCKED, "identity or period is unknown: " + ", ".join(gaps)
-    if gaps:
-        return QUALIFICATION_PREVIEW, "locally readable; provenance gaps: " + ", ".join(gaps)
+        return QUALIFICATION_BLOCKED, "source version is unknown: " + ", ".join(gaps)
+    if conflict_reason or gaps:
+        reason = conflict_reason or "locally readable; metadata gaps: " + ", ".join(gaps)
+        return QUALIFICATION_PREVIEW, reason
     return QUALIFICATION_VERIFIED_INPUT, ""
 
 
 def _metadata_conflict_reason(store: Any, document_id: str) -> str:
-    """B06 + S-13: does the document carry a field-level conflict?
+    """Report field quality through the same pure projection as the reader."""
+    from .metadata_observation import observe_metadata
 
-    Reads B05's reserved provenance key from the shared ``metadata_json`` column
-    (read-only) and returns a reason when any field recorded a conflict - the
-    same fact the read side reports as ``metadata_status="blocked"``.
-
-    The shared column is written by several modules, so its shape is not this
-    function's to assume.  MALFORMED content is a reason, not silence
-    (b05-read-side-malformed-columns, B-VR06-02's second half): this function used to
-    answer "no conflict evidence" for unparseable JSON, a non-object payload or a
-    non-object ``fields``, which made the envelope label the document
-    ``verified_input`` while the read side raised on the very same row - the two sides
-    disagreed and this side was the fail-open one.  Both now say blocked.
-    """
     if store is None or not document_id:
         return ""
     row = store.fetchone(
         "SELECT metadata_json FROM documents WHERE document_id=?", (document_id,)
     )
-    if row is None:
-        return ""
-    # B10-3: the parse is the single chain's reporting half (store.metadata_state), which
-    # keeps the two named states this caller reports.
-    payload, state = metadata_state(row["metadata_json"])
-    if state == "unreadable":
-        # B-VR05M-02 history: RecursionError is a RuntimeError and escaped the first
-        # version of this guard, so a deeply nested payload raised out of the envelope
-        # builder.  The chain's catch set is narrower than the old bare ValueError - the
-        # delta is documented at service._read_shared_metadata (B-VR-B10-07) and is
-        # unreachable for sqlite TEXT.
-        return "shared metadata column is not readable JSON"
-    if state == "not_object":
-        return "shared metadata column is not a JSON object"
-    reserved = payload.get(R4_PROVENANCE_KEY)
-    if reserved is None:
-        return ""
-    if not isinstance(reserved, dict):
-        return "reserved provenance key is not an object"
-    fields = reserved.get("fields")
-    if fields is None:
-        return ""
-    if not isinstance(fields, dict):
-        return "reserved provenance fields are not an object"
-    conflicted = sorted(
-        str(name)
-        for name, record in fields.items()
-        if isinstance(record, dict) and record.get("conflicts")
-    )
-    if not conflicted:
-        return ""
-    return "field conflict recorded for: " + ", ".join(conflicted)
+    return observe_metadata(row["metadata_json"]).reason() if row is not None else ""
 
 
 @dataclass(frozen=True)
@@ -1146,11 +1098,17 @@ def _source_metadata(
             if v2:
                 if reader == "steady":
                     capture = _source_metadata(document, legacy_bridge_allowed=True)
-                    return {**capture, **v2}
+                    visible = {**capture, **v2}
+                    visible["_conflicted_fields"] = tuple(
+                        key for key in capture.get("_conflicted_fields", ()) if key not in v2
+                    )
+                    return visible
                 return v2
     if not legacy_bridge_allowed:
         return {}
-    metadata = document.get("metadata")
+    from .metadata_observation import observe_metadata
+
+    metadata = observe_metadata(document.get("metadata")).metadata
     if not isinstance(metadata, dict):
         return {}
     for key in ("acquisition", "dayu_meta"):
@@ -1166,7 +1124,9 @@ def _fiscal_year(document: dict[str, Any], metadata: dict[str, Any]) -> int | No
     value = metadata.get("fiscal_year")
     if isinstance(value, int) and not isinstance(value, bool):
         return value
-    years = [int(item) for item in _YEAR_RE.findall(document["title"])]
+    if "fiscal_year" in metadata:
+        return None  # Explicit unknown/disagreement cannot be restored from a filename.
+    years = [int(item) for item in _YEAR_RE.findall(str(document["title"] or ""))]
     return years[-1] if years else None
 
 
@@ -1344,7 +1304,10 @@ class SourceResolver:
         # (B-VR02-04).
         budget = self.read_budget or _ReadBudget()
         budget.begin_request()
+        from .metadata_observation import observe_metadata
+
         for document in candidates:
+            document = observe_metadata(document.get("metadata")).project_document(document)
             if not self._entity_matches(request.entity, document):
                 entity_gate_rejected += 1
                 continue
@@ -1368,6 +1331,8 @@ class SourceResolver:
                 active_cohorts=self.active_cohorts,
                 legacy_bridge_allowed=self.legacy_bridge_allowed,
             )
+            if "published_date" in metadata:
+                document["published_date"] = metadata["published_date"]
             # --- identity-aware market/security_id filtering ---
             market_match = self._identity_matches(request, metadata)
             if market_match == "conflict":
@@ -1566,7 +1531,8 @@ class SourceResolver:
         }
         try:
             ref = SourceVersionReader(self.catalog).query_ref(
-                document["document_id"], document.get("source_id"), document.get("content_sha256"),
+                document["document_id"], str(document.get("source_id") or ""),
+                str(document.get("content_sha256") or ""),
             )
         except (SourceReadError, ValueError):
             return diagnostic
@@ -1584,6 +1550,9 @@ class SourceResolver:
         """
         req_market = request.market
         req_security_id = request.security_id
+        disputed = metadata.get("_conflicted_fields", ())
+        if (req_market and "market" in disputed) or (req_security_id and "security_id" in disputed):
+            return "conflict"
         if not req_market and not req_security_id:
             return "match"
         cand_market = str(metadata.get("market") or "").strip().upper() or None
@@ -1637,6 +1606,8 @@ class SourceResolver:
         metadata = _source_metadata(
             document, legacy_bridge_allowed=self.legacy_bridge_allowed
         )
+        if set(metadata.get("_conflicted_fields", ())) & {"canonical_entity_id", "display_name", "company_name"}:
+            return False
         doc_values.update(
             _normalize_text(str(value))
             for value in (

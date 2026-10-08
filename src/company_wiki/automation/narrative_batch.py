@@ -203,8 +203,6 @@ def _resume_binding(request, reader, store, runs, run, *, deadline, prepared_sou
         else:
             # An old digest contains no recoverable per-root rules. Retain its
             # original interpretation and never re-sign events/usage/baseline.
-            if frozen["read_policy_sha256"] != reader.read_policy_sha256():
-                raise BatchResumeError("BATCH_READ_POLICY_CHANGED")
             policies = {document: frozen["read_policy_sha256"] for document in documents}
         jobs = store.list_jobs(job_ids=run.job_ids)
         members = runs.job_bindings(run.run_id)
@@ -239,20 +237,22 @@ def _resume_binding(request, reader, store, runs, run, *, deadline, prepared_sou
         current_payloads, current_facts = (
             _current_sources(request, reader, deadline=deadline)
             if prepared_sources is None else prepared_sources)
-        if current_facts != tuple(frozen["source_facts"]):
-            raise BatchResumeError("BATCH_SOURCE_FACTS_CHANGED")
         if set(by_document) != documents:
             raise BatchResumeError("BATCH_FROZEN_MEMBERSHIP_INVALID")
         ordered_events = []
         for current in current_payloads:
             saved_event, saved = by_document[current.source_ref.document_id]
             saved_wire, current_wire = saved.to_dict(), current.to_dict()
-            if scoped and saved.expected_read_policy_sha256 != current.expected_read_policy_sha256:
-                raise BatchResumeError("BATCH_READ_POLICY_CHANGED")
             # Only the pin's interpretation differs when opening a schema-2
             # history under current code. Every source/payload fact must match.
             saved_wire.pop("expected_read_policy_sha256")
             current_wire.pop("expected_read_policy_sha256")
+            # Already-created jobs retain their generation descriptions and pins.
+            # Same original bytes do not need new model work after a title, issuer
+            # declaration or period correction. Current selection/read controls
+            # use the current facts separately; no old facts are re-signed here.
+            saved_wire.pop("source_metadata")
+            current_wire.pop("source_metadata")
             if saved_wire != current_wire:
                 raise BatchResumeError("BATCH_SOURCE_FACTS_CHANGED")
             ordered_events.append(saved_event)

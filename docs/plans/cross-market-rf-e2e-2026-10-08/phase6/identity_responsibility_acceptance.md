@@ -39,3 +39,8 @@ python -B -m pytest tests/unit/test_acquisition_scope_responsibility.py tests/co
 [责任收敛方案](identity_responsibility_simplification.md) 的“连续下一节点”仍待实现：全局元数据争议门、formal身份/期间状态、自动旧runtime许可、Transport重复检查、latest未知日期分流。官方发布日期真实性、新格式Worker、RF输入/消费及两组三家公司完整新研究也未完成。
 
 清理证据见 identity_responsibility_cleanup.json；只删除列名的owned测试根，三外包工作树和原件保留。三市场报告完成后补精确commit及同模式compare，不改原基线。
+
+
+## 冻结发布后大节点
+
+95749f84已推master，精确SHA远端CI37843149783成功。full/replay 220.179秒：47PASS/3BLOCKED/14NOT_RUN/7NOT_APPLICABLE/0FAIL；同规格rf_determinism_full_replay对比71不变，无回归。owned测试环境已恢复，原件/旧快照保护通过，收费模型0。整体仍PARTIAL：HK公开日证据、HTML/PPTX、新研究与摘要实际消费仍未完成，不改成产品全绿。报告见identity_responsibility_full_replay.json及identity_responsibility_replay_comparison.json。

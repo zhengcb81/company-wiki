@@ -258,13 +258,10 @@ def test_narrative_derivation_open_and_verify_return_bound_review_snapshot(
     with pytest.raises(SourceReadError) as purpose_error:
         reader.open_version(ref, purpose="unknown-purpose")
     assert purpose_error.value.reason == "unsupported_purpose"
-    with pytest.raises(SourceReadError) as policy_error:
-        reader.open_version(
-            ref,
-            purpose="narrative_derivation",
-            expected_read_policy_sha256="0" * 64,
-        )
-    assert policy_error.value.reason == "read_policy_mismatch"
+    current_read = reader.open_version(ref, purpose="narrative_derivation",
+                                       expected_read_policy_sha256="0" * 64)
+    assert current_read.data == BODY
+    assert current_read.source_read_policy_sha256 != "0" * 64
 
 
 def test_wrong_identity_hash_and_retirement_fail_before_open(tmp_path, monkeypatch):
@@ -613,7 +610,7 @@ def test_local_query_does_not_silently_miss_match_after_first_page(tmp_path):
     assert result.matches[0].document_id == ids["document_id"]
 
 
-def test_disputed_capture_metadata_cannot_authorize_filing_reuse(tmp_path, monkeypatch):
+def test_disputed_auxiliary_capture_is_diagnostic_for_verified_filing_read(tmp_path, monkeypatch):
     catalog, _, _, ids = _fixture(tmp_path)
     ref = SourceVersionReader(catalog).query_ref(
         ids["document_id"], ids["source_id"], SHA
@@ -636,18 +633,10 @@ def test_disputed_capture_metadata_cannot_authorize_filing_reuse(tmp_path, monke
     )
     connection.commit()
     connection.close()
-    real_open = Path.open
-
-    def no_pdf_open(path, *args, **kwargs):
-        if path.suffix.lower() == ".pdf":
-            raise AssertionError("disputed metadata opened filing bytes")
-        return real_open(path, *args, **kwargs)
-
-    monkeypatch.setattr(Path, "open", no_pdf_open)
-    with pytest.raises(SourceReadError) as error:
-        SourceVersionReader(catalog).open_version(ref, purpose="filing_reuse")
-    assert error.value.status == "blocked"
-    assert error.value.reason == "metadata_conflict"
+    reader = SourceVersionReader(catalog)
+    assert reader.open_version(ref, purpose="filing_reuse").data == BODY
+    assert reader.describe_version(ref)["source_url"] is None
+    assert reader.metadata_diagnostics(ref)["conflicted_fields"] == ["acquisition.source_url"]
 
 
 def test_pending_remediation_is_diagnostic_and_does_not_block_verified_reuse(tmp_path):
@@ -675,7 +664,7 @@ def test_pending_remediation_is_diagnostic_and_does_not_block_verified_reuse(tmp
         assert reader.open_version(ref, purpose=purpose).data == BODY
 
 
-def test_filing_reuse_needs_declared_reporting_period_not_a_filing_date(
+def test_exact_filing_read_does_not_require_period_but_period_query_does(
     tmp_path, monkeypatch
 ):
     catalog, _, _, ids = _fixture(
@@ -684,18 +673,12 @@ def test_filing_reuse_needs_declared_reporting_period_not_a_filing_date(
     ref = SourceVersionReader(catalog).query_ref(
         ids["document_id"], ids["source_id"], SHA
     )
-    real_open = Path.open
-
-    def no_pdf_open(path, *args, **kwargs):
-        if path.suffix.lower() == ".pdf":
-            raise AssertionError("period-unknown filing opened source bytes")
-        return real_open(path, *args, **kwargs)
-
-    monkeypatch.setattr(Path, "open", no_pdf_open)
-    with pytest.raises(SourceReadError) as error:
-        SourceVersionReader(catalog).open_version(ref, purpose="filing_reuse")
-    assert error.value.status == "blocked"
-    assert error.value.reason == "period_unknown"
+    reader = SourceVersionReader(catalog)
+    assert reader.open_version(ref, purpose="filing_reuse").data == BODY
+    assert reader.describe_version(ref)["fiscal_year"] is None
+    request = SourceRequest(entity="Acme", document_kind="annual_report",
+                            fiscal_year=2025, as_of_date="2026-10-08")
+    assert reader.query_local(request).matches == ()
 
 
 @pytest.mark.parametrize(
@@ -752,7 +735,7 @@ def test_v2_runtime_snapshot_closes_legacy_metadata_bridge_for_query_and_reuse(
     (catalog.config.catalog_dir / "runtime_policy.json").write_text(
         json.dumps(snapshot), encoding="utf-8"
     )
-    reader = SourceVersionReader(catalog)
+    reader = SourceVersionReader(catalog, runtime_policy=snapshot)
     request = SourceRequest(
         entity="Acme", market="US", security_id="ACME",
         document_kind="annual_report", form_type="10-K", fiscal_year=2025,
@@ -773,17 +756,10 @@ def test_v2_runtime_snapshot_closes_legacy_metadata_bridge_for_query_and_reuse(
         "form_type", "provider", "provider_document_id", "language",
     ):
         assert manifest[field] is None
-    real_open = Path.open
-
-    def no_pdf_open(path, *args, **kwargs):
-        if path.suffix.lower() == ".pdf":
-            raise AssertionError("legacy metadata bypass opened filing bytes")
-        return real_open(path, *args, **kwargs)
-
-    monkeypatch.setattr(Path, "open", no_pdf_open)
-    with pytest.raises(SourceReadError) as error:
-        reader.open_version(ref, purpose="filing_reuse")
-    assert error.value.status == "blocked"
+    assert reader.open_version(ref, purpose="filing_reuse").data == BODY
+    modern = SourceVersionReader(catalog)
+    assert modern.query_local(request).status == "found"
+    assert modern.describe_version(ref)["fiscal_year"] == 2025
 
 
 def test_source_export_falls_back_to_same_sha_copy_regardless_of_root_label(tmp_path):
@@ -805,7 +781,7 @@ def test_source_export_falls_back_to_same_sha_copy_regardless_of_root_label(tmp_
     assert reader.open_version(ref, purpose="source_export").data == BODY
 
 
-def test_same_sha_complete_sidecars_with_disputed_identity_are_not_reused(tmp_path):
+def test_same_sha_disputed_period_blocks_period_selection_not_raw_read(tmp_path):
     catalog, paths, _, ids = _fixture(tmp_path, three_roots=True)
     sidecar_path = paths[1].parent / f"{paths[1].name}.source.json"
     sidecar = json.loads(sidecar_path.read_text(encoding="utf-8"))
@@ -817,14 +793,13 @@ def test_same_sha_complete_sidecars_with_disputed_identity_are_not_reused(tmp_pa
 
     reader = SourceVersionReader(catalog)
     ref = reader.query_ref(ids["document_id"], ids["source_id"], SHA)
-    for operation in (
-        lambda: reader.describe_version(ref),
-        lambda: reader.open_version(ref, purpose="filing_reuse"),
-    ):
-        with pytest.raises(SourceReadError) as error:
-            operation()
-        assert error.value.status == "blocked"
-        assert error.value.reason == "metadata_conflict"
+    manifest = reader.describe_version(ref)
+    assert manifest["source_url"] is None and manifest["fiscal_year"] is None
+    assert manifest["provider_document_id"] is None
+    assert reader.open_version(ref, purpose="filing_reuse").data == BODY
+    request = SourceRequest(entity="Acme", document_kind="annual_report", fiscal_year=2025,
+                            as_of_date="2026-10-08")
+    assert reader.query_local(request).matches == ()
 
 
 def test_review_store_failure_is_diagnostic_and_verified_bytes_remain_usable(

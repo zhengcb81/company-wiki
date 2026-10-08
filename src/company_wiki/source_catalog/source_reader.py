@@ -2,8 +2,8 @@
 
 This is the first v2 read slice.  The public reference contains identity only;
 each open checks the current catalog, root policy and actual bytes again.
-Filing reuse requires a declared publication and reporting period; sparse
-capture descriptions remain diagnostics rather than access prerequisites.
+Period and historical availability belong to selection. Capture descriptions
+and old read fingerprints are observations, never byte access prerequisites.
 """
 
 from __future__ import annotations
@@ -25,8 +25,8 @@ from .prompt_injection import (
 )
 from .source_read_policy import exact_source_read_policy_sha256, source_read_policy_sha256
 from .reader import CatalogReaderUnavailable
-from .runtime_policy import RuntimePolicyError, load_runtime_policy
-from .scanner import R4_PROVENANCE_KEY
+from .runtime_policy import validate_snapshot
+from .metadata_observation import observe_metadata
 from .resolver import (
     _ReadBudget,
     _fiscal_year,
@@ -148,28 +148,20 @@ def _relative_segments(relative_path: str) -> tuple[str, ...] | None:
 class SourceVersionReader:
     """Read an exact catalog version without accepting or returning a raw path."""
 
-    def __init__(self, catalog: SourceCatalog):
+    def __init__(self, catalog: SourceCatalog, *, runtime_policy: dict[str, Any] | None = None):
         if not isinstance(catalog, SourceCatalog):
             raise TypeError("catalog must be SourceCatalog")
         self.catalog = catalog
+        if runtime_policy is not None and validate_snapshot(runtime_policy):
+            raise ValueError("invalid explicit compatibility snapshot")
+        self._runtime_policy = runtime_policy
 
     def _read_context(self) -> tuple[SourceResolver, dict[str, Any] | None, str]:
-        """Load and validate one visibility snapshot for facts and read policy."""
-        policy_path = self.catalog.config.catalog_dir / "runtime_policy.json"
-        policy = None
-        if policy_path.exists():
-            try:
-                policy = load_runtime_policy(policy_path)
-            except RuntimePolicyError:
-                raise SourceReadError("blocked", "runtime_policy_invalid") from None
-            # Steady has no rollout authorization. Its broad RootPolicy hash
-            # is a historical observation, while current roots/admission are
-            # checked by the effective pin and again against actual bytes.
-            # Old activation snapshots retain their exact compatibility check.
-            if policy.get("schema_version") != "2.0":
-                current_policy_hash, _ = export_policy_2x(self.catalog.config)
-                if policy.get("policy_hash") != current_policy_hash:
-                    raise SourceReadError("blocked", "runtime_policy_mismatch")
+        """Use current steady facts, or a caller's explicit compatibility view.
+
+        An automatically discovered rollout file cannot grant or deny reads.
+        """
+        policy = self._runtime_policy
         read_policy_sha256 = source_read_policy_sha256(self.catalog.config, policy)
         resolver = SourceResolver(self.catalog, runtime_policy=policy)
         return resolver, policy, read_policy_sha256
@@ -177,19 +169,15 @@ class SourceVersionReader:
     def _resolver_and_read_policy(
         self, expected_read_policy_sha256: str | None = None, *, ref: SourceRef | None = None,
     ) -> tuple[SourceResolver, str]:
-        """Check either the scoped pin or an unchanged explicit legacy pin."""
+        """Report the current fingerprint; stored fingerprints are lineage."""
         resolver, policy, read_policy_sha256 = self._read_context()
         if expected_read_policy_sha256 is not None:
             if not isinstance(expected_read_policy_sha256, str) or not _SHA256.fullmatch(
                 expected_read_policy_sha256
             ):
                 raise SourceReadError("blocked", "invalid_read_policy_pin")
-            if expected_read_policy_sha256 != read_policy_sha256:
-                if ref is None or expected_read_policy_sha256 != self._exact_read_policy(
-                    ref, resolver, policy
-                ):
-                    raise SourceReadError("blocked", "read_policy_mismatch")
-                read_policy_sha256 = expected_read_policy_sha256
+            if expected_read_policy_sha256 != read_policy_sha256 and ref is not None:
+                read_policy_sha256 = self._exact_read_policy(ref, resolver, policy)
         return resolver, read_policy_sha256
 
     def _resolver_for_request(self) -> SourceResolver:
@@ -208,8 +196,10 @@ class SourceVersionReader:
 
     def _exact_read_policy(
         self, ref: SourceRef, resolver: SourceResolver, runtime_policy: dict[str, Any] | None,
+        *, metadata: dict[str, str | int | None] | None = None,
     ) -> str:
-        metadata = self._describe_version(ref, resolver)
+        if metadata is None:
+            metadata = self._describe_version(ref, resolver)
         try:
             locations = self.catalog.reader.exact_source_locations(ref.document_id, ref.source_id)
         except (CatalogReaderUnavailable, sqlite3.Error):
@@ -322,8 +312,7 @@ class SourceVersionReader:
         for document in self._candidate_pages(
             request, include_unknown_publication=True
         ):
-            if document["metadata_status"] != "ok":
-                continue
+            document = observe_metadata(document.get("metadata")).project_document(document)
             if not resolver._entity_matches(request.entity, document):
                 continue
             metadata = _source_metadata(
@@ -333,6 +322,8 @@ class SourceVersionReader:
                 active_cohorts=resolver.active_cohorts,
                 legacy_bridge_allowed=resolver.legacy_bridge_allowed,
             )
+            if "published_date" in metadata:
+                document["published_date"] = metadata["published_date"]
             if resolver._identity_matches(request, metadata) != "match":
                 continue
             if request.fiscal_year is not None and (
@@ -416,20 +407,9 @@ class SourceVersionReader:
             raise SourceReadError("unavailable", "catalog_unavailable") from None
         if row is None:
             raise SourceReadError("not_indexed", "document_not_indexed")
-        shared, problem = metadata_state(row["metadata_json"])
-        if problem is not None:
-            raise SourceReadError("blocked", "metadata_unreadable")
-        provenance = shared.get(R4_PROVENANCE_KEY)
-        if provenance is not None:
-            if not isinstance(provenance, dict) or not isinstance(
-                provenance.get("fields"), dict
-            ):
-                raise SourceReadError("blocked", "metadata_unreadable")
-            if any(
-                isinstance(record, dict) and record.get("conflicts")
-                for record in provenance["fields"].values()
-            ):
-                raise SourceReadError("blocked", "metadata_conflict")
+        observation = observe_metadata(row["metadata_json"])
+        shared = observation.metadata
+        row = observation.project_document(dict(row))
         visible = _source_metadata(
             {"source_id": ref.source_id, "metadata": shared},
             store=self.catalog.reader,
@@ -438,17 +418,9 @@ class SourceVersionReader:
             active_cohorts=resolver.active_cohorts,
             legacy_bridge_allowed=resolver.legacy_bridge_allowed,
         )
-        captures = [visible] if visible else []
-
         def claim(key: str) -> str | None:
-            values = {
-                str(capture[key]).strip()
-                for capture in captures
-                if capture.get(key) not in (None, "")
-            }
-            if len(values) > 1:
-                raise SourceReadError("blocked", "metadata_conflict")
-            return next(iter(values), None)
+            value = visible.get(key)
+            return str(value).strip() or None if value is not None else None
 
         source_url = claim("source_url") or claim("https_url")
         if source_url and not source_url.startswith(("https://", "http://")):
@@ -467,7 +439,7 @@ class SourceVersionReader:
             "mime_type": ref.mime_type,
             "title": claim("source_title"),
             "document_kind": str(row["document_kind"] or "") or None,
-            "published_date": str(row["published_date"] or "") or None,
+            "published_date": visible.get("published_date", str(row["published_date"] or "") or None),
             "source_url": source_url,
             "retrieved_at": claim("retrieved_at"),
             "collector_name": claim("collector_name"),
@@ -484,6 +456,26 @@ class SourceVersionReader:
             "provider_document_id": claim("provider_document_id"),
             "language": claim("language"),
         }
+
+    def metadata_diagnostics(self, ref: SourceRef) -> dict[str, object]:
+        """Read-only field quality for an exact source, outside the v2 manifest."""
+        self.query_ref(ref.document_id, ref.source_id, ref.content_sha256)
+        row = self.catalog.reader.exact_source_version(ref.document_id)
+        if row is None:
+            raise SourceReadError("not_indexed", "document_not_indexed")
+        return observe_metadata(row["metadata_json"]).to_dict()
+
+    def open_described_version(
+        self, ref: SourceRef, *, purpose: str = "source_export",
+    ) -> tuple[VerifiedContent, dict[str, str | int | None]]:
+        """Observe facts once and verify the actual buffer under one read context."""
+        resolver, policy, _ = self._read_context()
+        manifest = self._describe_version(ref, resolver)
+        pin = self._exact_read_policy(ref, resolver, policy, metadata=manifest)
+        opened = self._verified_version(ref, purpose=purpose, expected_read_policy_sha256=None,
+                                        retain_bytes=True, current_read_policy_sha256=pin)
+        assert isinstance(opened, VerifiedContent)
+        return opened, manifest
 
     def describe_candidate(self, ref: SourceRef) -> dict[str, object]:
         """DB-only, pathless prequalification for a filing consumer.
@@ -654,7 +646,7 @@ class SourceVersionReader:
     def _verified_version(
         self, ref: SourceRef, *, purpose: str,
         expected_read_policy_sha256: str | None,
-        retain_bytes: bool,
+        retain_bytes: bool, current_read_policy_sha256: str | None = None,
     ) -> VerifiedContent | VerifiedVersionReceipt:
         """Verify through the current policy and same-SHA location fallback.
 
@@ -670,9 +662,12 @@ class SourceVersionReader:
         current = self.query_ref(ref.document_id, ref.source_id, ref.content_sha256)
         if current != ref:
             raise SourceReadError("unavailable", "source_ref_changed")
-        resolver, read_policy_sha256 = self._resolver_and_read_policy(
-            expected_read_policy_sha256, ref=ref,
-        )
+        if current_read_policy_sha256 is None:
+            _, read_policy_sha256 = self._resolver_and_read_policy(
+                expected_read_policy_sha256, ref=ref,
+            )
+        else:
+            read_policy_sha256 = current_read_policy_sha256
         try:
             version_row = self.catalog.reader.exact_source_version(ref.document_id)
         except (CatalogReaderUnavailable, sqlite3.Error):
@@ -725,46 +720,6 @@ class SourceVersionReader:
             raise SourceReadError("blocked", "root_admission_denied")
         candidates = admitted
 
-        # Reuse needs source/period facts, while a URL or collector description
-        # is optional provenance. Every admitted location still gets the same
-        # exact byte verification below; sparse captures stay honestly sparse.
-        if purpose == "filing_reuse":
-            if not version_row["published_date"]:
-                raise SourceReadError("blocked", "capture_incomplete")
-            shared_metadata, metadata_problem = metadata_state(
-                version_row["metadata_json"]
-            )
-            if metadata_problem is not None:
-                raise SourceReadError("blocked", "capture_incomplete")
-            provenance = shared_metadata.get(R4_PROVENANCE_KEY)
-            if provenance is not None:
-                if not isinstance(provenance, dict) or not isinstance(
-                    provenance.get("fields"), dict
-                ):
-                    raise SourceReadError("blocked", "capture_incomplete")
-                if any(
-                    isinstance(record, dict) and record.get("conflicts")
-                    for record in provenance["fields"].values()
-                ):
-                    raise SourceReadError("blocked", "metadata_conflict")
-            identity = _source_metadata(
-                {"source_id": ref.source_id, "metadata": shared_metadata},
-                store=self.catalog.reader,
-                reader=resolver.reader,
-                current_epoch=resolver.current_epoch,
-                active_cohorts=resolver.active_cohorts,
-                legacy_bridge_allowed=resolver.legacy_bridge_allowed,
-            )
-            fiscal_year = identity.get("fiscal_year")
-            if not (
-                (isinstance(fiscal_year, int) and not isinstance(fiscal_year, bool))
-                or str(identity.get("fiscal_period") or "").strip()
-                or re.fullmatch(
-                    r"\d{4}-\d{2}-\d{2}",
-                    str(identity.get("period_end") or ""),
-                )
-            ):
-                raise SourceReadError("blocked", "period_unknown")
         budget = _ReadBudget()
         budget.begin_request()
         failures: list[str] = []

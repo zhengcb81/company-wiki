@@ -24,6 +24,8 @@ import hashlib
 from dataclasses import dataclass
 from typing import Any
 
+from .qualification import qualify_source
+
 
 GAP_PLAN_SCHEMA_VERSION = "1.0"
 
@@ -44,9 +46,10 @@ class GapPlan:
     provider_reason: str | None = None
     future: tuple[Any, ...] = ()
     gap_hash: str = ""
+    publication_unknown: tuple[Any, ...] = ()
 
     def to_dict(self) -> dict[str, Any]:
-        return {
+        result = {
             "schema_version": self.schema_version,
             "request_id": self.request_id,
             "as_of_date": self.as_of_date,
@@ -68,6 +71,11 @@ class GapPlan:
             ],
             "gap_hash": self.gap_hash,
         }
+        if self.publication_unknown:
+            result["publication_unknown"] = [
+                c.to_dict() if hasattr(c, "to_dict") else c for c in self.publication_unknown
+            ]
+        return result
 
 
 def _candidate_year(candidate: Any) -> int | None:
@@ -124,13 +132,16 @@ def build_gap_plan(
             ),
         )
 
-    # Remote metadata filed after as_of is excluded from the gap.
-    eligible_remote = [
-        c
-        for c in remote_candidates
-        if not _candidate_filed(c) or _candidate_filed(c) <= as_of_date
-    ]
-    future = [c for c in remote_candidates if c not in eligible_remote]
+    # Storage inventory and historical eligibility are distinct responsibilities.
+    eligible_remote, future, publication_unknown = [], [], []
+    for candidate in remote_candidates:
+        qualification = qualify_source(_candidate_filed(candidate), as_of_date=as_of_date)
+        if qualification.historical_date_eligible:
+            eligible_remote.append(candidate)
+        elif qualification.publication_status == "after_as_of":
+            future.append(candidate)
+        else:
+            publication_unknown.append(candidate)
 
     local_by_year: dict[int, list[Any]] = {}
     for handle in local_handles:
@@ -177,7 +188,7 @@ def build_gap_plan(
     # eligible beyond the local latest. A future-dated candidate is excluded
     # from the gap (not yet published by as_of) and does not negate
     # not_published — the local latest IS the latest as of as_of.
-    not_published = not missing and not newer_revision
+    not_published = not missing and not newer_revision and not publication_unknown
 
     return GapPlan(
         schema_version=GAP_PLAN_SCHEMA_VERSION,
@@ -191,6 +202,7 @@ def build_gap_plan(
         newer_revision=tuple(newer_revision),
         not_published=not_published,
         future=tuple(future),
+        publication_unknown=tuple(publication_unknown),
         gap_hash=_hash_gap(
             request_id=request_id,
             as_of_date=as_of_date,
@@ -199,6 +211,7 @@ def build_gap_plan(
             newer_revision=newer_revision,
             provider_unavailable=False,
             provider_reason=None,
+            publication_unknown=publication_unknown,
         ),
     )
 
@@ -212,6 +225,7 @@ def _hash_gap(
     newer_revision: list[Any],
     provider_unavailable: bool,
     provider_reason: str | None,
+    publication_unknown: list[Any] | None = None,
 ) -> str:
     """Deterministic gap hash binding request + local/remote alignment."""
     digest = hashlib.sha256()
@@ -235,4 +249,8 @@ def _hash_gap(
     digest.update(b"unavailable" if provider_unavailable else b"ok")
     if provider_reason:
         digest.update(provider_reason.encode())
+    for candidate in sorted(publication_unknown or [], key=_candidate_accession):
+        digest.update(b"publication_unknown")
+        digest.update(_candidate_accession(candidate).encode())
+        digest.update(str(_candidate_filed(candidate)).encode())
     return digest.hexdigest()

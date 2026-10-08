@@ -58,3 +58,23 @@ MAIN 只改现有 CWP source_catalog / automation 及相关测试。R6-FORMAT �
 5. latest gap-plan把unknown publication纳入eligible_remote，与最新选择器的已知日规则不一致。统一未知日诊断，允许保存；未知日不冒充历史已公开或证明最新。
 
 下一节点先覆盖争议辅助字段仍可raw/export/current摘要、争议公开日历史不合格、无期次当前可读、显式错误期间不命中、坏旧runtime文件不禁当前根、不同目录同SourceRef、零重复policy自验，再做一次相关责任集成和相同三市场E2E。不得改三个外包独占目录；跨仓消费者需要的调整留MAIN最后统一接线。
+
+
+## 当前施工：元数据 / 读取 / 恢复责任节点
+
+- 共用 `MetadataObservation` 只读投影：保存原有争议记录，争议字段给 None；元数据坏 JSON 只给质量诊断。`metadata_diagnostics(SourceRef)` 提供无路径的字段名/问题，不扩大 SourceExport v2 固定字段，也不新增存储库或签收物。
+- 精确原文打开不再检查财年/公开日。查询按所请求字段处理：明确争议财年不能由文件名重新猜回；争议公开日不进入历史 as-of。辅助身份缺失仍可在公司归属后复用，明确错误/争议的请求字段仍排除候选。
+- 现代 reader、resolve/ensure CLI 统一 steady，不自动加载旧 runtime_policy 的 rollout 许可。历史快照只能由显式 compatibility 调用者传入；文件无需重写/删除。格式错误的请求仍是错误，旧有效指纹是生成时观察，读取回执报告当前指纹而不冒充旧指纹。
+- `open_described_version` 由读取层一次提供当前描述和真实字节；Transport 删除自取 policy 自验与回放后的全量身份/元数据/策略三重检查。原始 SourceRef、artifact SHA、逐locator原文回放、用户明确 expected_source / as-of 仍在各自责任边界验证。
+- Worker 取消标题/声明语言变化和策略指纹的准入阻断。解析类型与真实 source/hash/size 绑定继续负责错误输入。已建立事件和账本保持原样，不因元数据修正或可容纳原件的大小限额变化而重跑模型。
+- 发现已完成 batch 的恢复仍有旧指纹和全部当前事实等值门；实际 CLI/Worker RED 1项/6.67秒。改为保留 frozen membership / intent / execution / usage 证据与当前原文字节检查，移除对当前元数据/历史policy的等值许可。不会重签旧事件、artifact、usage；新预算/模型请求仍用新run，防止混账。
+- GapPlan 统一来源日期分类，unknown / invalid 保留可见库存 `publication_unknown`，不作为历史missing/newer，亦不能证明not_published；保存未知日原件的能力不受影响。字段仅非空时输出，普通历史wire/hash保持原样。
+
+集中验证过程：19真实RED→19GREEN；Worker/Gap补充5真实RED后75PASS/1旧unknown-date要求；相关公开链239项207PASS/31旧门禁要求失败/1缺真实TXT输入skip，119.76秒。旧要求依据此新产品合同调整为观测当前字节和实际选择负例；不删除错SHA、错期次、损坏原文、真实current limit、证据locator或冻结账本篡改断言。最终集中仍在运行，暂不记全绿。
+
+
+### 随后整体效率施工：跨批次内容复用
+
+当前node的恢复修复不会改变用户明确发起的不同batch。只读发现 `test_narrative_batch_cross_run_e2e.py` 现有合同明确期待3个不同run同一source仍发3次模型，只对相同结果的对象字节去重；`SourceRevisionEventPayload.input_hash` 包含旧指纹和全source_metadata。不能把“相同run零重跑”说成跨run内容缓存完成。
+
+下一责任节点先调查 selector 对title/kind/language的真实使用，TDD覆盖同SourceRef、同解析/选择/模型版本、不同目录/title/url/来源日期修正的默认新batch应复用内容且新增模型费用0；明确refresh/变更生成算法或实际片段才生成新版本。生成身份应由真实源字节、parser/selector版本、selected spans、原语言、prompt/model配置决定，元数据用于当前来源描述和显式选择。沿用AUTO及content-addressed artifacts，不复制原件、不增许可receipt/缓存数据库、不给新run冒认旧费用。旧事件/用量保持原样；先验证默认复用与显式refresh契约，再实施。此项尚未改代码，单列后续，不盲目从旧事件hash删字段造成账本或selector行为漂移。

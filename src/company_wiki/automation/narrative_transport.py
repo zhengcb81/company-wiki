@@ -76,12 +76,6 @@ def _require_manifest(
     source = request.narrative_ref.source_ref
     bound_fields = dict(source.to_dict())
     bound_fields.pop("schema_version")
-    bound_fields.update({
-        "document_kind": bundle.source_metadata.document_kind,
-    })
-    # Parser-detected language is derived metadata, not a missing source claim.
-    if manifest.get("language") is not None:
-        bound_fields["language"] = bundle.source_metadata.language
     if any(manifest.get(key) != value for key, value in bound_fields.items()):
         raise NarrativeTransportError("blocked", "source_identity_mismatch")
     if any(
@@ -191,26 +185,11 @@ class NarrativeTransportReader:
             expected_sha256=reference.artifact_sha256, expected_size=reference.byte_size,
         )
         bundle = _bound_bundle(version, data, reference)
-        # The generation pin remains lineage. Current policy governs this read.
-        read_pin = self._reader.read_policy_sha256(current)
-        opened = self._reader.open_version(
-            current, purpose="source_export", expected_read_policy_sha256=read_pin,
-        )
-        if (
-            opened.document_id != source.document_id or opened.source_id != source.source_id
-            or opened.content_sha256 != source.content_sha256
-            or opened.byte_size != source.byte_size
-        ):
-            raise NarrativeTransportError("blocked", "source_identity_mismatch")
-        manifest = self._reader.describe_version(current)
+        # Persisted generation facts remain lineage. This read observes current
+        # facts once and replays locators against the one actually verified buffer.
+        opened, manifest = self._reader.open_described_version(current, purpose="source_export")
         _require_manifest(manifest, request, bundle)
         locator_count = replay_narrative_evidence(opened.data, bundle)
-        # Replaying can be expensive: recheck identity, metadata and policy after it.
-        self._current_ref(source)
-        if self._reader.describe_version(current) != manifest:
-            raise NarrativeTransportError("blocked", "source_metadata_changed")
-        if self._reader.read_policy_sha256(current) != opened.source_read_policy_sha256:
-            raise NarrativeTransportError("blocked", "read_policy_mismatch")
         receipt = {
             "schema_version": NARRATIVE_READ_RECEIPT_SCHEMA,
             "status": "ok", "narrative_ref": reference.to_dict(),

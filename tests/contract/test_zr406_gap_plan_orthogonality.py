@@ -259,12 +259,13 @@ def test_c1_sparse_capture_local_in_provider_error_branch():
 # ---------------------------------------------------------------------------
 
 
-def test_c2_unknown_filing_date_is_eligible_conservative():
+def test_c2_unknown_filing_date_is_visible_but_not_historically_eligible():
     """A remote candidate WITHOUT a filing_date cannot be proven future:
     it stays ELIGIBLE for the gap (conservative direction — never silently
     dropped, never leaked out of the gap without evidence)."""
     plan = _plan(_L_NO, [_Remote(2026, None, "acc-2026-unknown")])
-    assert tuple(c.provider_document_id for c in plan.missing) == ("acc-2026-unknown",)
+    assert plan.missing == ()
+    assert tuple(c.provider_document_id for c in plan.publication_unknown) == ("acc-2026-unknown",)
     assert plan.future == ()
     assert plan.not_published is False
 

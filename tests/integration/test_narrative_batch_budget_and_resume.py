@@ -149,7 +149,11 @@ raise SystemExit(main())
             changed = json.loads(config)
             changed["roots"][0]["max_file_size"] = 4096
             state.config_path.write_text(json.dumps(changed), encoding="utf-8")
-            refused("BATCH_READ_POLICY_CHANGED")
+            preserved = _dump(state.store.db_path)
+            call, resumed = _invoke(state, launcher)
+            assert call.returncode == 0 and resumed["status"] == "completed", resumed
+            assert _dump(state.store.db_path) == preserved
+            assert len(loopback_model_server.requests) == 1
             state.config_path.write_bytes(config)
             # A migration must not silently manufacture evidence for old pins.
             for legacy in (None, canonical_json({**frozen, "read_policy_schema_version": "1.0"})):

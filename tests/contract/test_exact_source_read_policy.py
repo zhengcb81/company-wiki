@@ -67,8 +67,9 @@ def test_exact_pin_binds_relevant_read_rules(tmp_path, change):
         pin = reader.read_policy_sha256(ref)
         catalog.config = replace(catalog.config, roots=(replace(root, **change),))
         assert reader.read_policy_sha256(ref) != pin
-        with pytest.raises(SourceReadError, match="read_policy_mismatch"):
-            reader.open_version(ref, expected_read_policy_sha256=pin)
+        opened = reader.open_version(ref, expected_read_policy_sha256=pin)
+        assert opened.data == BODY
+        assert opened.source_read_policy_sha256 == reader.read_policy_sha256(ref)
     finally:
         catalog.close()
 
@@ -90,7 +91,7 @@ def test_exact_pin_does_not_replace_real_bytes_or_current_admission(tmp_path):
         catalog.close()
 
 
-def test_global_pin_compatibility_is_explicit_and_never_accepts_arbitrary_pins(tmp_path):
+def test_fingerprints_remain_lineage_and_malformed_digest_is_still_invalid_input(tmp_path):
     catalog, reader, ref, _, _ = _reader(tmp_path)
     try:
         global_pin, exact_pin = reader.read_policy_sha256(), reader.read_policy_sha256(ref)
@@ -99,8 +100,8 @@ def test_global_pin_compatibility_is_explicit_and_never_accepts_arbitrary_pins(t
         assert opened.source_read_policy_sha256 == global_pin
         verified = reader.verify_version(ref, expected_read_policy_sha256=exact_pin)
         assert verified.source_read_policy_sha256 == exact_pin
-        with pytest.raises(SourceReadError, match="read_policy_mismatch"):
-            reader.open_version(ref, expected_read_policy_sha256="a" * 64)
+        observed = reader.open_version(ref, expected_read_policy_sha256="a" * 64)
+        assert observed.data == BODY and observed.source_read_policy_sha256 == exact_pin
         with pytest.raises(SourceReadError, match="invalid_read_policy_pin"):
             reader.open_version(ref, expected_read_policy_sha256="invalid")
     finally:
@@ -123,7 +124,8 @@ def test_exact_pin_binds_visible_source_identity_and_period(tmp_path, field, val
                                (json.dumps(metadata), ref.document_id))
         assert reader.describe_version(ref)[field] == value
         assert reader.read_policy_sha256(ref) != pin
-        with pytest.raises(SourceReadError, match="read_policy_mismatch"):
-            reader.open_version(ref, expected_read_policy_sha256=pin)
+        opened = reader.open_version(ref, expected_read_policy_sha256=pin)
+        assert opened.data == BODY
+        assert opened.source_read_policy_sha256 == reader.read_policy_sha256(ref)
     finally:
         catalog.close()

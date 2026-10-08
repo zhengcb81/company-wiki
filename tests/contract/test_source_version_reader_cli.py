@@ -571,7 +571,7 @@ def test_final_reader_receipt_reflects_review_removed_after_candidate_query(
     assert receipt["review"]["status"] == "not_reviewed"
 
 
-def test_cli_refuses_stale_read_policy_pin_before_opening_bytes(tmp_path: Path):
+def test_cli_reports_current_fingerprint_and_reads_bytes_despite_old_lineage(tmp_path: Path):
     config_path, _, ids = _fixture(tmp_path)
     cwd = tmp_path / "caller"
     cwd.mkdir()
@@ -585,14 +585,9 @@ def test_cli_refuses_stale_read_policy_pin_before_opening_bytes(tmp_path: Path):
     config["roots"][0]["max_file_size"] = 1024 * 1024
     config_path.write_text(json.dumps(config), encoding="utf-8")
     before = _snapshot(tmp_path)
-    refused = _run_cli(config_path, ids, cwd, expected_read_policy_sha256=pin)
-    assert refused.returncode == 2
-    assert refused.stdout == b""
-    error = _json_stderr(refused, tmp_path)
-    assert error == {
-        "schema_version": "2.1", "status": "blocked",
-        "reason": "read_policy_mismatch",
-    }
+    current = _run_cli(config_path, ids, cwd, expected_read_policy_sha256=pin)
+    assert current.returncode == 0 and current.stdout == BODY
+    assert _json_stderr(current, tmp_path)["source_read_policy_sha256"] != pin
     assert _snapshot(tmp_path) == before
 
 

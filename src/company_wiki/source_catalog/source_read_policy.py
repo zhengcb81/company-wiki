@@ -9,9 +9,9 @@ not govern an already registered read and cannot invalidate it. RootPolicy
 remains a separate wire export; its broad diagnostic hash is not another
 permission inside this fingerprint.
 
-The schema change deliberately produces new pins. Existing runs carrying a
-schema 1 digest are refused by the reader's ordinary read_policy_mismatch;
-their persisted payloads, artifacts and usage are never silently re-signed.
+Fingerprint schema changes produce new observations. A valid old digest is
+generation lineage, not a read permission. Current roots and actual bytes
+govern every open; persisted payloads, artifacts and usage are never re-signed.
 """
 
 from __future__ import annotations
