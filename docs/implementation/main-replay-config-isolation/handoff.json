@@ -1,0 +1,123 @@
+{
+  "schema_version": "main-replay-config-isolation-handoff/1",
+  "status": "ENGINEERING_PASS",
+  "base": "8479b8ad1eae5031ca6d01d5e540824cafa4a60f",
+  "runtime_commit": "ff4307630f7985898341ea07360d030899957e43",
+  "branch": "codex/main-replay-config-isolation-20261009",
+  "worktree": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\cwp-formats",
+  "preserved_selector_branch_head": "760ed472fc002820371da5d622d4540296f680a6",
+  "git_blobs": {
+    "tools/cross_market_suite/runner.py": "cb622291e8854d92cd0a9ab368a186109d7aed2d",
+    "tools/cross_market_suite/runtime_evidence.py": "f33f1ebd148139faeb4d2e0ff0943603e479ab7c",
+    "tests/e2e/test_cross_market_rf_pipeline.py": "65eea06a4592e597f131906bf6ffcaf51b300bac",
+    "tests/unit/test_replay_config_isolation.py": "f8b065d9e3b7ebbcc0f601cb3bb13649f92613e8",
+    "docs/implementation/main-replay-config-isolation/tiny-cli-actual.json": "64d7bc41343796d74c22991b980502db2a2a7e8e",
+    "docs/implementation/main-replay-config-isolation/tiny-cli-first-actual.json": "5a5ab844a4b8846b57ff53db039b4457271d282f"
+  },
+  "tests": [
+    {
+      "phase": "meaningful_RED",
+      "count": 5,
+      "failed": 5,
+      "seconds": 1.21,
+      "command": "python -B -m pytest tests/unit/test_replay_config_isolation.py -q -p no:cacheprovider"
+    },
+    {
+      "phase": "concentrated_GREEN",
+      "passed": 35,
+      "seconds": 5.93,
+      "command": "python -B - (pytest.main: tests/unit/test_replay_config_isolation.py tests/unit/test_cross_market_suite.py -q -p no:cacheprovider --junitxml docs/implementation/main-replay-config-isolation/focused-green.xml -o junit_family=legacy; runner.SPEC/POINTS read-only primary benchmark pin for sparse checkout)"
+    },
+    {
+      "phase": "final_legacy_unknown_boundary",
+      "passed": 6,
+      "deselected_cli": 1,
+      "seconds": 0.89,
+      "command": "python -B -m pytest tests/unit/test_replay_config_isolation.py -q -p no:cacheprovider -k 'not single_image_pptx'"
+    },
+    {
+      "phase": "lint",
+      "status": "PASS",
+      "command": "python -B -m ruff check --no-cache tools/cross_market_suite/runner.py tools/cross_market_suite/runtime_evidence.py tests/unit/test_replay_config_isolation.py tests/e2e/test_cross_market_rf_pipeline.py"
+    },
+    {
+      "phase": "diff",
+      "status": "PASS",
+      "command": "git diff --check"
+    }
+  ],
+  "distinct_passing_tests": 36,
+  "actual_native_tiny": {
+    "receipt_file": "tiny-cli-actual.json",
+    "batch_seconds": 3.307511,
+    "source_bytes": 29620,
+    "source_sha256": "ce280dc91debcc266b8d78f6281adf796e0293358b9ab06db933a82c932584ea",
+    "native_budget": {
+      "tokens": 0,
+      "estimated_micro_usd": 0,
+      "unknown_reservations": 0,
+      "unsettled_reservations": 0
+    },
+    "reservation_count": 0,
+    "job_states": [
+      {
+        "job_type": "source.narrative_select",
+        "status": "dead_letter",
+        "last_error_code": "PARSER_INCOMPLETE"
+      },
+      {
+        "job_type": "source.narrative_summarize",
+        "status": "dead_letter",
+        "last_error_code": "DEPENDENCY_TERMINAL"
+      },
+      {
+        "job_type": "source.narrative_verify",
+        "status": "dead_letter",
+        "last_error_code": "DEPENDENCY_TERMINAL"
+      }
+    ],
+    "artifact_published": false,
+    "capability_checkpoint": "BLOCKED_PARSER_INCOMPLETE_WITH_OPAQUE_PAGE_PROOF",
+    "parser_version": "1.1.0",
+    "ocr_config_present": false,
+    "native_ocr_inference_calls": 0,
+    "native_ocr_zero_basis": "pure parser frozen binding and absent owned local OCR config; no engine adapter instantiated",
+    "supplier_posts": 0,
+    "supplier_post_zero_basis": "zero actual model reservations, zero native usage and external-network guard",
+    "raw_sha_mtime_readonly_assertions_passed": true,
+    "config_hash_assertions_passed": true
+  },
+  "first_actual_failure": {
+    "receipt_file": "tiny-cli-first-actual.json",
+    "batch_seconds": 3.914318,
+    "failure": "post-CLI test assertion: parser metadata extractor used pre-envelope field",
+    "actual_batch_status": "failed",
+    "parser_metadata_at_capture": null,
+    "protection_assertions_completed": false,
+    "retained": true
+  },
+  "cleanup": {
+    "owned_cli_roots": [
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-crdpsukt",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-8o9sukej"
+    ],
+    "all_owned_cli_roots_restored_absent": true,
+    "subprocesses_returned_before_cleanup": true
+  },
+  "scope": {
+    "src_changes": false,
+    "production_config_changes": false,
+    "main_PWF_changes": false,
+    "old_report_sha256_expected": "38a15df00e1f3b16469279731495a64617b5db772fb8d4fec7c2b916306b14e5",
+    "old_report_sha256_actual": "38a15df00e1f3b16469279731495a64617b5db772fb8d4fec7c2b916306b14e5",
+    "old_report_unchanged": true,
+    "original_22_page_bytes_read": false,
+    "original_22_page_ocr_rerun": false,
+    "whole71_rerun": false,
+    "supplier_calls": 0
+  },
+  "classification_unchanged": true,
+  "live_current_HEAD_configuration_export_preserved": true,
+  "product_acceptance": "NOT_RUN_HERE; independent real configured MAIN node owns product acceptance",
+  "economic_acceptance": "NOT_AN_INVESTMENT_REVIEW"
+}

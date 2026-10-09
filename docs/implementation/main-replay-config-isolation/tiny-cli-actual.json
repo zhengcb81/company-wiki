@@ -1,0 +1,186 @@
+{
+  "cmrf_import_command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "company_wiki.source_catalog.official_source_cli",
+    "--config",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-crdpsukt\\config\\source_catalog.yaml",
+    "--project-root",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-crdpsukt",
+    "--request",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-crdpsukt\\import-request.json",
+    "--input-file",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-crdpsukt\\input\\image-only.pptx"
+  ],
+  "cmrf_import_receipt": {
+    "status": "imported_new",
+    "source_ref": {
+      "document_id": "urn:company-wiki:document:sha256:ce280dc91debcc266b8d78f6281adf796e0293358b9ab06db933a82c932584ea",
+      "source_id": "urn:company-wiki:source:sha256:ce280dc91debcc266b8d78f6281adf796e0293358b9ab06db933a82c932584ea",
+      "content_sha256": "ce280dc91debcc266b8d78f6281adf796e0293358b9ab06db933a82c932584ea",
+      "byte_size": 29620,
+      "mime_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      "schema_version": "2.0"
+    },
+    "capture_receipt": {
+      "capture_method": "local_document",
+      "tool_name": "pytest_native_cli_fixture",
+      "tool_call_id": "tiny-fixture-local-read",
+      "captured_at": "2026-10-09T06:19:11.016726+00:00",
+      "content_sha256": "ce280dc91debcc266b8d78f6281adf796e0293358b9ab06db933a82c932584ea",
+      "response_bytes": 29620
+    },
+    "download_events": 0
+  },
+  "cmrf_runtime_evidence": {
+    "schema_version": "cmrf-runtime-evidence/1",
+    "run_id": "offline-tiny-pptx",
+    "returncode": 2,
+    "receipt": {
+      "status": "failed",
+      "error": null,
+      "budget": {
+        "tokens": 0,
+        "estimated_micro_usd": 0,
+        "unknown_reservations": 0,
+        "unsettled_reservations": 0
+      },
+      "document_count": 1,
+      "documents": [
+        {
+          "document_id": "urn:company-wiki:document:sha256:ce280dc91debcc266b8d78f6281adf796e0293358b9ab06db933a82c932584ea",
+          "status": "dead_letter",
+          "artifact_ref": null,
+          "errors": [
+            "DEPENDENCY_TERMINAL",
+            "DEPENDENCY_TERMINAL",
+            "PARSER_INCOMPLETE"
+          ]
+        }
+      ]
+    },
+    "database_evidence": "available",
+    "jobs": [
+      {
+        "job_id": "a0993bdeca1953ec",
+        "job_type": "source.narrative_select",
+        "status": "dead_letter",
+        "handler_version": "1.1.0",
+        "last_error_code": "PARSER_INCOMPLETE",
+        "attempt_count": 1,
+        "latest_attempt": {
+          "attempt_id": "b6b69f0fdaac471ab85fe1416195e9a5",
+          "attempt_no": 1,
+          "started_at": "2026-10-09T06:19:15Z",
+          "finished_at": "2026-10-09T06:19:15Z",
+          "outcome": "terminal_failure",
+          "error_code": "PARSER_INCOMPLETE",
+          "runtime_generation": 2,
+          "result_schema": null,
+          "result_status": null,
+          "parser_name": null,
+          "parser_version": null,
+          "selector_version": null,
+          "selection": null
+        }
+      },
+      {
+        "job_id": "0f52a6779bb5fcd7",
+        "job_type": "source.narrative_summarize",
+        "status": "dead_letter",
+        "handler_version": "1.1.0",
+        "last_error_code": "DEPENDENCY_TERMINAL",
+        "attempt_count": 0,
+        "latest_attempt": null
+      },
+      {
+        "job_id": "2af4299e44981c2c",
+        "job_type": "source.narrative_verify",
+        "status": "dead_letter",
+        "handler_version": "1.1.0",
+        "last_error_code": "DEPENDENCY_TERMINAL",
+        "attempt_count": 0,
+        "latest_attempt": null
+      }
+    ],
+    "reservations": [],
+    "job_count": 3,
+    "reservation_count": 0,
+    "run": {
+      "state": "open",
+      "block_reason": null,
+      "max_tokens": 1,
+      "max_micro_usd": 0,
+      "last_runtime_generation": 2,
+      "input_hash": "10a6bb6ecad3964e1fac625c54124d6a59af70fe9ac9201e0237f88823026879",
+      "scope_sha256": "029b79489b4f0cd45b03942ca9d1930839f388876bfced6432b44e95d5259344"
+    },
+    "normalization_binding": {
+      "ocr_config_present": false,
+      "parsers": [
+        {
+          "document_id": "urn:company-wiki:document:sha256:ce280dc91debcc266b8d78f6281adf796e0293358b9ab06db933a82c932584ea",
+          "parser_name": "cwp_document_normalization",
+          "parser_version": "1.1.0"
+        }
+      ]
+    }
+  },
+  "cmrf_actual_command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "company_wiki.automation.narrative_batch_cli",
+    "--project-root",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-crdpsukt",
+    "--catalog-config",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-crdpsukt\\config\\source_catalog.yaml",
+    "--automation-db",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-crdpsukt\\batch\\auto.db",
+    "--work-dir",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-crdpsukt\\batch\\jobs",
+    "--request",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-crdpsukt\\batch\\request.json"
+  ],
+  "cmrf_seconds": "3.307511",
+  "cmrf_raw_protection": {
+    "before": [
+      "ce280dc91debcc266b8d78f6281adf796e0293358b9ab06db933a82c932584ea",
+      29620,
+      1791526750987388100
+    ],
+    "after": [
+      "ce280dc91debcc266b8d78f6281adf796e0293358b9ab06db933a82c932584ea",
+      29620,
+      1791526750987388100
+    ],
+    "config_before_sha256": "d5ad56969ed7b2045fbbef0def9d9d8b31886ef700af18f6d4340527fcfbbddd",
+    "config_after_sha256": "d5ad56969ed7b2045fbbef0def9d9d8b31886ef700af18f6d4340527fcfbbddd",
+    "read_only": true
+  },
+  "cmrf_pure_structure": {
+    "pages_total": 1,
+    "pages_read": 1,
+    "source_units": 0,
+    "opaque_pages": [
+      1
+    ],
+    "errors": []
+  },
+  "cmrf_protected_config": {
+    "before_sha256": "3ef4d36adff892e66115271a15e3e73dd20a530af615e24d80cdb35f4cf20105",
+    "after_sha256": "3ef4d36adff892e66115271a15e3e73dd20a530af615e24d80cdb35f4cf20105"
+  },
+  "cmrf_owned_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-crdpsukt",
+  "cmrf_owned_root_restored_absent": true,
+  "test_status": "PASS",
+  "engineering_scope": "single synthetic image-only page; actual official local import and native batch CLI, no configured OCR",
+  "testsuite_counts": {
+    "tests": "35",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "5.906"
+  }
+}
