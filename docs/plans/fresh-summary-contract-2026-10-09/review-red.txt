@@ -1,0 +1,43 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\wsum-hzui3fk_\\pytest", "requested_basetemp_len": 52, "cwd_len": 63, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki
+configfile: pytest.ini
+collected 20 items / 16 deselected / 4 selected
+
+tests\contract\test_summary_group_coverage.py FFFF                       [100%]
+
+================================== FAILURES ===================================
+___ test_explicit_null_group_declaration_is_malformed_not_a_legacy_absence ____
+tests\contract\test_summary_group_coverage.py:97: in test_explicit_null_group_declaration_is_malformed_not_a_legacy_absence
+    with pytest.raises(NarrativeContractError,match="summary claim evidence group declaration is invalid"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE NarrativeContractError
+_ test_duplicate_or_overpinned_citations_cannot_satisfy_a_finite_claim_reference_contract[ids0] _
+tests\contract\test_summary_group_coverage.py:105: in test_duplicate_or_overpinned_citations_cannot_satisfy_a_finite_claim_reference_contract
+    with pytest.raises(NarrativeContractError,match="summary claim evidence IDs"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE NarrativeContractError
+_ test_duplicate_or_overpinned_citations_cannot_satisfy_a_finite_claim_reference_contract[ids1] _
+tests\contract\test_summary_group_coverage.py:105: in test_duplicate_or_overpinned_citations_cannot_satisfy_a_finite_claim_reference_contract
+    with pytest.raises(NarrativeContractError,match="summary claim evidence IDs"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE NarrativeContractError
+_ test_prompt_twenty_claim_and_280_character_limits_are_real_output_contracts _
+tests\contract\test_summary_group_coverage.py:111: in test_prompt_twenty_claim_and_280_character_limits_are_real_output_contracts
+    with pytest.raises(NarrativeContractError,match="summary claims exceed twenty"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE NarrativeContractError
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/contract/test_summary_group_coverage.py::test_explicit_null_group_declaration_is_malformed_not_a_legacy_absence
+FAILED tests/contract/test_summary_group_coverage.py::test_duplicate_or_overpinned_citations_cannot_satisfy_a_finite_claim_reference_contract[ids0]
+FAILED tests/contract/test_summary_group_coverage.py::test_duplicate_or_overpinned_citations_cannot_satisfy_a_finite_claim_reference_contract[ids1]
+FAILED tests/contract/test_summary_group_coverage.py::test_prompt_twenty_claim_and_280_character_limits_are_real_output_contracts
+================= 4 failed, 16 deselected, 1 warning in 0.81s =================

@@ -1,0 +1,577 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\wsum-b4ipc54m\\pytest", "requested_basetemp_len": 52, "cwd_len": 63, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki
+configfile: pytest.ini
+collected 215 items
+
+tests\contract\test_narrative_output_plan.py ......                      [  2%]
+tests\contract\test_summary_group_coverage.py ................           [ 10%]
+tests\unit\test_narrative_model_request.py ......F.                      [ 13%]
+tests\unit\test_narrative_model_aliases.py .........                     [ 18%]
+tests\unit\test_narrative_model_usage.py ...............                 [ 25%]
+tests\unit\test_narrative_model_caller.py .............                  [ 31%]
+tests\unit\test_narrative_http_model.py EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE [ 46%]
+EEEEEEEEEEEE......EEEEEEEEE                                              [ 58%]
+tests\unit\test_narrative_summarize_handler.py ......................... [ 70%]
+..............                                                           [ 76%]
+tests\unit\test_narrative_model_config.py ...........................    [ 89%]
+tests\unit\test_narrative_run_store.py ......................            [ 99%]
+tests\integration\test_narrative_batch_budget_and_resume.py E            [100%]
+
+=================================== ERRORS ====================================
+_ ERROR at setup of test_single_post_preserves_roles_identity_usage_and_original_language _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+__ ERROR at setup of test_missing_or_invalid_usage_is_unknown_not_zero[None] __
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_missing_or_invalid_usage_is_unknown_not_zero[usage1] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_missing_or_invalid_usage_is_unknown_not_zero[usage2] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_missing_or_invalid_usage_is_unknown_not_zero[usage3] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+__ ERROR at setup of test_key_is_read_at_generate_and_not_cached_in_adapter ___
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_invalid_header_credentials_are_rejected_before_http[nonascii-\u5bc6\u94a5] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_invalid_header_credentials_are_rejected_before_http[key\r\ninjected-header] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_invalid_header_credentials_are_rejected_before_http[key\x01control] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_invalid_header_credentials_are_rejected_before_http[key\x7fcontrol] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_complete_response_without_content_length_ends_at_eof _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_empty_response_is_invalid_envelope_not_a_transport_failure _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_invalid_envelope_keeps_safe_stage_and_reported_usage[overrides0-choices] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_invalid_envelope_keeps_safe_stage_and_reported_usage[overrides1-content_type] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_invalid_envelope_keeps_safe_stage_and_reported_usage[overrides2-empty_content] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_invalid_envelope_keeps_safe_stage_and_reported_usage[overrides3-model_identity] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_invalid_envelope_keeps_safe_stage_and_reported_usage[overrides4-provider_error] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_invalid_json_and_provider_text_are_not_copied_into_diagnostics _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+____________ ERROR at setup of test_request_cap_stops_before_http _____________
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+___ ERROR at setup of test_response_cap_stops_large_body_without_echoing_it ___
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+___ ERROR at setup of test_response_cap_also_applies_without_content_length ___
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_http_errors_do_not_retry_redirect_or_echo_provider_body[302] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_http_errors_do_not_retry_redirect_or_echo_provider_body[401] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_http_errors_do_not_retry_redirect_or_echo_provider_body[429] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_http_errors_do_not_retry_redirect_or_echo_provider_body[500] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+___________ ERROR at setup of test_timeout_is_named_and_one_request ___________
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_streaming_body_cannot_reset_the_overall_read_deadline _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_truncated_output_carries_metering_without_content_or_secret[None-usage0-expected_tokens0] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_truncated_output_carries_metering_without_content_or_secret[None-None-expected_tokens1] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_truncated_output_carries_metering_without_content_or_secret[-usage0-expected_tokens0] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_truncated_output_carries_metering_without_content_or_secret[-None-expected_tokens1] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_truncated_output_carries_metering_without_content_or_secret[synthetic-key-never-a-live-credential{"text":"\u4e1a\u52a1\u8fdb\u5c55"}-usage0-expected_tokens0] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_truncated_output_carries_metering_without_content_or_secret[synthetic-key-never-a-live-credential{"text":"\u4e1a\u52a1\u8fdb\u5c55"}-None-expected_tokens1] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_explicit_thinking_control_reaches_the_one_bounded_post[disabled] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_explicit_thinking_control_reaches_the_one_bounded_post[adaptive] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_invalid_thinking_control_is_rejected_without_a_request[False] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_invalid_thinking_control_is_rejected_without_a_request[none] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_invalid_thinking_control_is_rejected_without_a_request[] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_invalid_thinking_control_is_rejected_without_a_request[thinking3] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_invalid_thinking_control_is_rejected_without_a_request[thinking4] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_invalid_envelope_or_truncated_output_has_named_static_error[not-json] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_invalid_envelope_or_truncated_output_has_named_static_error[[]] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_invalid_envelope_or_truncated_output_has_named_static_error[{"choices":[]}] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_invalid_envelope_or_truncated_output_has_named_static_error[{"choices":[{"message":{"content":"cut"},"finish_reason":"length"}]}] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_client_rejection_is_terminal_and_keeps_only_the_integer_status[400] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_client_rejection_is_terminal_and_keeps_only_the_integer_status[401] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_client_rejection_is_terminal_and_keeps_only_the_integer_status[404] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_server_failure_is_retryable_and_keeps_only_the_integer_status[500] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_server_failure_is_retryable_and_keeps_only_the_integer_status[502] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_server_failure_is_retryable_and_keeps_only_the_integer_status[503] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_malformed_2xx_envelope_stays_a_bounded_response_failure_not_an_http_error[{"model":"actual-provider-model"}] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_malformed_2xx_envelope_stays_a_bounded_response_failure_not_an_http_error[{"choices":[{"message":{"content":123}}]}] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_malformed_2xx_envelope_stays_a_bounded_response_failure_not_an_http_error[{"choices":[{"message":{"content":""},"finish_reason":"stop"}]}] _
+tests\unit\test_narrative_http_model.py:93: in stub
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+_ ERROR at setup of test_actual_completed_cli_survives_execution_upgrade_without_rework_or_ledger_changes _
+tests\support\narrative_batch_fixtures.py:68: in loopback_model_server
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\socketserver.py:453: in __init__
+    self.socket = socket.socket(self.address_family,
+C:\Miniconda\Lib\socket.py:233: in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+E   OSError: [WinError 10106] 无法加载或初始化请求的服务提供程序。
+================================== FAILURES ===================================
+_ test_large_selection_requests_short_merged_claims_without_removing_source_evidence _
+tests\unit\test_narrative_model_request.py:95: in test_large_selection_requests_short_merged_claims_without_removing_source_evidence
+    assert claims["items"]["properties"]["evidence_ids"]["maxItems"] == 8
+E   assert 160 == 8
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_model_request.py::test_large_selection_requests_short_merged_claims_without_removing_source_evidence
+ERROR tests/unit/test_narrative_http_model.py::test_single_post_preserves_roles_identity_usage_and_original_language
+ERROR tests/unit/test_narrative_http_model.py::test_missing_or_invalid_usage_is_unknown_not_zero[None]
+ERROR tests/unit/test_narrative_http_model.py::test_missing_or_invalid_usage_is_unknown_not_zero[usage1]
+ERROR tests/unit/test_narrative_http_model.py::test_missing_or_invalid_usage_is_unknown_not_zero[usage2]
+ERROR tests/unit/test_narrative_http_model.py::test_missing_or_invalid_usage_is_unknown_not_zero[usage3]
+ERROR tests/unit/test_narrative_http_model.py::test_key_is_read_at_generate_and_not_cached_in_adapter
+ERROR tests/unit/test_narrative_http_model.py::test_invalid_header_credentials_are_rejected_before_http[nonascii-\u5bc6\u94a5]
+ERROR tests/unit/test_narrative_http_model.py::test_invalid_header_credentials_are_rejected_before_http[key\r\ninjected-header]
+ERROR tests/unit/test_narrative_http_model.py::test_invalid_header_credentials_are_rejected_before_http[key\x01control]
+ERROR tests/unit/test_narrative_http_model.py::test_invalid_header_credentials_are_rejected_before_http[key\x7fcontrol]
+ERROR tests/unit/test_narrative_http_model.py::test_complete_response_without_content_length_ends_at_eof
+ERROR tests/unit/test_narrative_http_model.py::test_empty_response_is_invalid_envelope_not_a_transport_failure
+ERROR tests/unit/test_narrative_http_model.py::test_invalid_envelope_keeps_safe_stage_and_reported_usage[overrides0-choices]
+ERROR tests/unit/test_narrative_http_model.py::test_invalid_envelope_keeps_safe_stage_and_reported_usage[overrides1-content_type]
+ERROR tests/unit/test_narrative_http_model.py::test_invalid_envelope_keeps_safe_stage_and_reported_usage[overrides2-empty_content]
+ERROR tests/unit/test_narrative_http_model.py::test_invalid_envelope_keeps_safe_stage_and_reported_usage[overrides3-model_identity]
+ERROR tests/unit/test_narrative_http_model.py::test_invalid_envelope_keeps_safe_stage_and_reported_usage[overrides4-provider_error]
+ERROR tests/unit/test_narrative_http_model.py::test_invalid_json_and_provider_text_are_not_copied_into_diagnostics
+ERROR tests/unit/test_narrative_http_model.py::test_request_cap_stops_before_http
+ERROR tests/unit/test_narrative_http_model.py::test_response_cap_stops_large_body_without_echoing_it
+ERROR tests/unit/test_narrative_http_model.py::test_response_cap_also_applies_without_content_length
+ERROR tests/unit/test_narrative_http_model.py::test_http_errors_do_not_retry_redirect_or_echo_provider_body[302]
+ERROR tests/unit/test_narrative_http_model.py::test_http_errors_do_not_retry_redirect_or_echo_provider_body[401]
+ERROR tests/unit/test_narrative_http_model.py::test_http_errors_do_not_retry_redirect_or_echo_provider_body[429]
+ERROR tests/unit/test_narrative_http_model.py::test_http_errors_do_not_retry_redirect_or_echo_provider_body[500]
+ERROR tests/unit/test_narrative_http_model.py::test_timeout_is_named_and_one_request
+ERROR tests/unit/test_narrative_http_model.py::test_streaming_body_cannot_reset_the_overall_read_deadline
+ERROR tests/unit/test_narrative_http_model.py::test_truncated_output_carries_metering_without_content_or_secret[None-usage0-expected_tokens0]
+ERROR tests/unit/test_narrative_http_model.py::test_truncated_output_carries_metering_without_content_or_secret[None-None-expected_tokens1]
+ERROR tests/unit/test_narrative_http_model.py::test_truncated_output_carries_metering_without_content_or_secret[-usage0-expected_tokens0]
+ERROR tests/unit/test_narrative_http_model.py::test_truncated_output_carries_metering_without_content_or_secret[-None-expected_tokens1]
+ERROR tests/unit/test_narrative_http_model.py::test_truncated_output_carries_metering_without_content_or_secret[synthetic-key-never-a-live-credential{"text":"\u4e1a\u52a1\u8fdb\u5c55"}-usage0-expected_tokens0]
+ERROR tests/unit/test_narrative_http_model.py::test_truncated_output_carries_metering_without_content_or_secret[synthetic-key-never-a-live-credential{"text":"\u4e1a\u52a1\u8fdb\u5c55"}-None-expected_tokens1]
+ERROR tests/unit/test_narrative_http_model.py::test_explicit_thinking_control_reaches_the_one_bounded_post[disabled]
+ERROR tests/unit/test_narrative_http_model.py::test_explicit_thinking_control_reaches_the_one_bounded_post[adaptive]
+ERROR tests/unit/test_narrative_http_model.py::test_invalid_thinking_control_is_rejected_without_a_request[False]
+ERROR tests/unit/test_narrative_http_model.py::test_invalid_thinking_control_is_rejected_without_a_request[none]
+ERROR tests/unit/test_narrative_http_model.py::test_invalid_thinking_control_is_rejected_without_a_request[]
+ERROR tests/unit/test_narrative_http_model.py::test_invalid_thinking_control_is_rejected_without_a_request[thinking3]
+ERROR tests/unit/test_narrative_http_model.py::test_invalid_thinking_control_is_rejected_without_a_request[thinking4]
+ERROR tests/unit/test_narrative_http_model.py::test_invalid_envelope_or_truncated_output_has_named_static_error[not-json]
+ERROR tests/unit/test_narrative_http_model.py::test_invalid_envelope_or_truncated_output_has_named_static_error[[]]
+ERROR tests/unit/test_narrative_http_model.py::test_invalid_envelope_or_truncated_output_has_named_static_error[{"choices":[]}]
+ERROR tests/unit/test_narrative_http_model.py::test_invalid_envelope_or_truncated_output_has_named_static_error[{"choices":[{"message":{"content":"cut"},"finish_reason":"length"}]}]
+ERROR tests/unit/test_narrative_http_model.py::test_client_rejection_is_terminal_and_keeps_only_the_integer_status[400]
+ERROR tests/unit/test_narrative_http_model.py::test_client_rejection_is_terminal_and_keeps_only_the_integer_status[401]
+ERROR tests/unit/test_narrative_http_model.py::test_client_rejection_is_terminal_and_keeps_only_the_integer_status[404]
+ERROR tests/unit/test_narrative_http_model.py::test_server_failure_is_retryable_and_keeps_only_the_integer_status[500]
+ERROR tests/unit/test_narrative_http_model.py::test_server_failure_is_retryable_and_keeps_only_the_integer_status[502]
+ERROR tests/unit/test_narrative_http_model.py::test_server_failure_is_retryable_and_keeps_only_the_integer_status[503]
+ERROR tests/unit/test_narrative_http_model.py::test_malformed_2xx_envelope_stays_a_bounded_response_failure_not_an_http_error[{"model":"actual-provider-model"}]
+ERROR tests/unit/test_narrative_http_model.py::test_malformed_2xx_envelope_stays_a_bounded_response_failure_not_an_http_error[{"choices":[{"message":{"content":123}}]}]
+ERROR tests/unit/test_narrative_http_model.py::test_malformed_2xx_envelope_stays_a_bounded_response_failure_not_an_http_error[{"choices":[{"message":{"content":""},"finish_reason":"stop"}]}]
+ERROR tests/integration/test_narrative_batch_budget_and_resume.py::test_actual_completed_cli_survives_execution_upgrade_without_rework_or_ledger_changes
+============= 1 failed, 160 passed, 1 warning, 54 errors in 7.28s =============

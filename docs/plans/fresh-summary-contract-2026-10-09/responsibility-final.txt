@@ -1,0 +1,58 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\wsum-wxyufyfs\\pytest", "requested_basetemp_len": 52, "cwd_len": 63, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki
+configfile: pytest.ini
+collected 254 items
+
+tests\contract\test_narrative_output_plan.py ......                      [  2%]
+tests\contract\test_summary_group_coverage.py .......................    [ 11%]
+tests\unit\test_narrative_model_request.py ........                      [ 14%]
+tests\unit\test_narrative_model_aliases.py .........                     [ 18%]
+tests\unit\test_narrative_model_usage.py ...............                 [ 24%]
+tests\unit\test_narrative_model_caller.py .............                  [ 29%]
+tests\unit\test_narrative_http_model.py ................................ [ 41%]
+...........................                                              [ 52%]
+tests\unit\test_narrative_summarize_handler.py ......................... [ 62%]
+..............                                                           [ 67%]
+tests\unit\test_narrative_model_config.py ...........................    [ 78%]
+tests\unit\test_narrative_run_store.py ......................            [ 87%]
+tests\integration\test_narrative_batch_budget_and_resume.py .            [ 87%]
+tests\unit\test_narrative_partial_summary.py ........................... [ 98%]
+.F...                                                                    [100%]
+
+================================== FAILURES ===================================
+______ test_old_long_summary_policy_is_not_a_reader_rejection_threshold _______
+src\company_wiki\automation\narrative_summarize.py:297: in _completed_result
+    draft = decode_model_draft(response, selected=selected)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_model.py:316: in decode_model_draft
+    raise NarrativeContractError("summary claims exceed twenty")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: summary claims exceed twenty
+
+The above exception was the direct cause of the following exception:
+tests\unit\test_narrative_partial_summary.py:150: in test_old_long_summary_policy_is_not_a_reader_rejection_threshold
+    result = _complete(selected, _payload(selected, claims))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_partial_summary.py:38: in _complete
+    return NarrativeSummarizeHandler._completed_result(selected, selected.prompt_review, response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_summarize.py:304: in _completed_result
+    raise _SummaryFailure(
+E   company_wiki.automation.narrative_summarize._SummaryFailure: ('SUMMARY_INVALID', <HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'>, 'model draft violates the summary contract (rule=CLAIMS_LIMIT)')
+
+During handling of the above exception, another exception occurred:
+C:\Miniconda\Lib\contextlib.py:195: in __exit__
+    exc.__traceback__ = traceback
+    ^^^^^^^^^^^^^^^^^
+E   dataclasses.FrozenInstanceError: cannot assign to field '__traceback__'
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_partial_summary.py::test_old_long_summary_policy_is_not_a_reader_rejection_threshold
+================== 1 failed, 253 passed, 1 warning in 38.05s ==================

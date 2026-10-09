@@ -1,0 +1,510 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\wsum-6h74us59\\pytest", "requested_basetemp_len": 52, "cwd_len": 63, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki
+configfile: pytest.ini
+collected 22 items
+
+tests\contract\test_narrative_output_plan.py FFFFFF                      [ 27%]
+tests\contract\test_summary_group_coverage.py FFFFFFFFFFFFFFFF           [100%]
+
+================================== FAILURES ===================================
+_ test_96_span_compact_plan_is_material_excerpt_not_row_enumeration_and_preserves_every_source_row _
+tests\contract\test_narrative_output_plan.py:33: in test_96_span_compact_plan_is_material_excerpt_not_row_enumeration_and_preserves_every_source_row
+    selected=selected96();before=selected.to_dict();request=NarrativeModelRequest.from_selection(selected)
+                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_model.py:206: in from_selection
+    canonical_json_hash(identity),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:121: in canonical_json_hash
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:110: in canonical_json
+    _validate_json_value(value)
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:105: in _validate_json_value
+    raise TypeError(f"{path} contains unsupported JSON type {type(value).__name__}")
+E   TypeError: $.group_mapping.g1 contains unsupported JSON type tuple
+_ test_compact_plan_uses_real_configured_cap_without_changing_model_or_generation_options[1200] _
+tests\contract\test_narrative_output_plan.py:46: in test_compact_plan_uses_real_configured_cap_without_changing_model_or_generation_options
+    request=NarrativeModelRequest.from_selection(selected96());model=PlannedProvider(max_output_tokens=limit,temperature=0.7,thinking="adaptive")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_model.py:206: in from_selection
+    canonical_json_hash(identity),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:121: in canonical_json_hash
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:110: in canonical_json
+    _validate_json_value(value)
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:105: in _validate_json_value
+    raise TypeError(f"{path} contains unsupported JSON type {type(value).__name__}")
+E   TypeError: $.group_mapping.g1 contains unsupported JSON type tuple
+_ test_compact_plan_uses_real_configured_cap_without_changing_model_or_generation_options[2400] _
+tests\contract\test_narrative_output_plan.py:46: in test_compact_plan_uses_real_configured_cap_without_changing_model_or_generation_options
+    request=NarrativeModelRequest.from_selection(selected96());model=PlannedProvider(max_output_tokens=limit,temperature=0.7,thinking="adaptive")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_model.py:206: in from_selection
+    canonical_json_hash(identity),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:121: in canonical_json_hash
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:110: in canonical_json
+    _validate_json_value(value)
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:105: in _validate_json_value
+    raise TypeError(f"{path} contains unsupported JSON type {type(value).__name__}")
+E   TypeError: $.group_mapping.g1 contains unsupported JSON type tuple
+_ test_compact_plan_uses_real_configured_cap_without_changing_model_or_generation_options[8192] _
+tests\contract\test_narrative_output_plan.py:46: in test_compact_plan_uses_real_configured_cap_without_changing_model_or_generation_options
+    request=NarrativeModelRequest.from_selection(selected96());model=PlannedProvider(max_output_tokens=limit,temperature=0.7,thinking="adaptive")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_model.py:206: in from_selection
+    canonical_json_hash(identity),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:121: in canonical_json_hash
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:110: in canonical_json
+    _validate_json_value(value)
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:105: in _validate_json_value
+    raise TypeError(f"{path} contains unsupported JSON type {type(value).__name__}")
+E   TypeError: $.group_mapping.g1 contains unsupported JSON type tuple
+_ test_truncated_96_span_attempt_settles_once_with_safe_length_diagnostic_and_cannot_blindly_replay _
+tests\contract\test_narrative_output_plan.py:59: in test_truncated_96_span_attempt_settles_once_with_safe_length_diagnostic_and_cannot_blindly_replay
+    request=NarrativeModelRequest.from_selection(selected96())
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_model.py:206: in from_selection
+    canonical_json_hash(identity),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:121: in canonical_json_hash
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:110: in canonical_json
+    _validate_json_value(value)
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:105: in _validate_json_value
+    raise TypeError(f"{path} contains unsupported JSON type {type(value).__name__}")
+E   TypeError: $.group_mapping.g1 contains unsupported JSON type tuple
+_ test_truncation_reaches_handler_static_diagnostics_with_original_source_identity_and_no_success _
+tests\contract\test_narrative_output_plan.py:79: in test_truncation_reaches_handler_static_diagnostics_with_original_source_identity_and_no_success
+    result=NarrativeSummarizeHandler(model=None,model_caller=Caller())(handler_context(selected))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_summarize.py:164: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_summarize.py:224: in _execute
+    request = NarrativeModelRequest.from_selection(selected)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_model.py:206: in from_selection
+    canonical_json_hash(identity),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:121: in canonical_json_hash
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:110: in canonical_json
+    _validate_json_value(value)
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:105: in _validate_json_value
+    raise TypeError(f"{path} contains unsupported JSON type {type(value).__name__}")
+E   TypeError: $.group_mapping.g1 contains unsupported JSON type tuple
+_ test_model_envelope_has_stable_whole_groups_without_duplicate_text_or_source_changes _
+tests\contract\test_summary_group_coverage.py:18: in test_model_envelope_has_stable_whole_groups_without_duplicate_text_or_source_changes
+    first = NarrativeModelRequest.from_selection(selected)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_model.py:206: in from_selection
+    canonical_json_hash(identity),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:121: in canonical_json_hash
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:110: in canonical_json
+    _validate_json_value(value)
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:105: in _validate_json_value
+    raise TypeError(f"{path} contains unsupported JSON type {type(value).__name__}")
+E   TypeError: $.group_mapping.g1 contains unsupported JSON type tuple
+_ test_omitted_hk_service_fee_or_us_previously_azure_tail_cannot_support_a_declared_group[HK] _
+tests\contract\test_summary_group_coverage.py:37: in test_omitted_hk_service_fee_or_us_previously_azure_tail_cannot_support_a_declared_group
+    decode_model_draft(reply(selected,[claim(text,ids,groups)]), selected=selected)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\contract\test_summary_group_coverage.py:12: in reply
+    request = NarrativeModelRequest.from_selection(selected)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_model.py:206: in from_selection
+    canonical_json_hash(identity),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:121: in canonical_json_hash
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:110: in canonical_json
+    _validate_json_value(value)
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:105: in _validate_json_value
+    raise TypeError(f"{path} contains unsupported JSON type {type(value).__name__}")
+E   TypeError: $.group_mapping.g1 contains unsupported JSON type tuple
+_ test_omitted_hk_service_fee_or_us_previously_azure_tail_cannot_support_a_declared_group[US-new-W02] _
+tests\contract\test_summary_group_coverage.py:37: in test_omitted_hk_service_fee_or_us_previously_azure_tail_cannot_support_a_declared_group
+    decode_model_draft(reply(selected,[claim(text,ids,groups)]), selected=selected)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\contract\test_summary_group_coverage.py:12: in reply
+    request = NarrativeModelRequest.from_selection(selected)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_model.py:206: in from_selection
+    canonical_json_hash(identity),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:121: in canonical_json_hash
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:110: in canonical_json
+    _validate_json_value(value)
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:105: in _validate_json_value
+    raise TypeError(f"{path} contains unsupported JSON type {type(value).__name__}")
+E   TypeError: $.group_mapping.g1 contains unsupported JSON type tuple
+_ test_omitted_hk_service_fee_or_us_previously_azure_tail_cannot_support_a_declared_group[US-sealed-old-group] _
+tests\contract\test_summary_group_coverage.py:37: in test_omitted_hk_service_fee_or_us_previously_azure_tail_cannot_support_a_declared_group
+    decode_model_draft(reply(selected,[claim(text,ids,groups)]), selected=selected)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\contract\test_summary_group_coverage.py:12: in reply
+    request = NarrativeModelRequest.from_selection(selected)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_model.py:206: in from_selection
+    canonical_json_hash(identity),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:121: in canonical_json_hash
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:110: in canonical_json
+    _validate_json_value(value)
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:105: in _validate_json_value
+    raise TypeError(f"{path} contains unsupported JSON type {type(value).__name__}")
+E   TypeError: $.group_mapping.g1 contains unsupported JSON type tuple
+_ test_complete_multi_proposition_claim_keeps_exact_citations_and_no_group_wire_extensions _
+tests\contract\test_summary_group_coverage.py:41: in test_complete_multi_proposition_claim_keeps_exact_citations_and_no_group_wire_extensions
+    result=decode_model_draft(reply(selected,[claim("金融科技收入增長；企業服務受雲需求和微信小店商家技術服務費帶動。",ids,["g1","g2"])]),selected=selected)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\contract\test_summary_group_coverage.py:12: in reply
+    request = NarrativeModelRequest.from_selection(selected)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_model.py:206: in from_selection
+    canonical_json_hash(identity),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:121: in canonical_json_hash
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:110: in canonical_json
+    _validate_json_value(value)
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:105: in _validate_json_value
+    raise TypeError(f"{path} contains unsupported JSON type {type(value).__name__}")
+E   TypeError: $.group_mapping.g1 contains unsupported JSON type tuple
+_ test_unrelated_adjacent_paragraph_is_never_added_to_close_the_business_group _
+tests\contract\test_summary_group_coverage.py:48: in test_unrelated_adjacent_paragraph_is_never_added_to_close_the_business_group
+    selected=grouped_selection(); result=decode_model_draft(reply(selected,[claim("微信小店交易額上升帶動商家技術服務費收入增長。",["e3","e4"],["g2"])]),selected=selected)
+                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\contract\test_summary_group_coverage.py:12: in reply
+    request = NarrativeModelRequest.from_selection(selected)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_model.py:206: in from_selection
+    canonical_json_hash(identity),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:121: in canonical_json_hash
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:110: in canonical_json
+    _validate_json_value(value)
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:105: in _validate_json_value
+    raise TypeError(f"{path} contains unsupported JSON type {type(value).__name__}")
+E   TypeError: $.group_mapping.g1 contains unsupported JSON type tuple
+_ test_legacy_or_explicit_narrow_claim_can_survive_but_partial_context_is_diagnostic[None] _
+tests\contract\test_summary_group_coverage.py:53: in test_legacy_or_explicit_narrow_claim_can_survive_but_partial_context_is_diagnostic
+    selected=grouped_selection(); result=decode_model_draft(reply(selected,[claim("企業服務收入同比增長接近20%。",["e3"],declaration)]),selected=selected)
+                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\contract\test_summary_group_coverage.py:12: in reply
+    request = NarrativeModelRequest.from_selection(selected)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_model.py:206: in from_selection
+    canonical_json_hash(identity),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:121: in canonical_json_hash
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:110: in canonical_json
+    _validate_json_value(value)
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:105: in _validate_json_value
+    raise TypeError(f"{path} contains unsupported JSON type {type(value).__name__}")
+E   TypeError: $.group_mapping.g1 contains unsupported JSON type tuple
+_ test_legacy_or_explicit_narrow_claim_can_survive_but_partial_context_is_diagnostic[declaration1] _
+tests\contract\test_summary_group_coverage.py:53: in test_legacy_or_explicit_narrow_claim_can_survive_but_partial_context_is_diagnostic
+    selected=grouped_selection(); result=decode_model_draft(reply(selected,[claim("企業服務收入同比增長接近20%。",["e3"],declaration)]),selected=selected)
+                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\contract\test_summary_group_coverage.py:12: in reply
+    request = NarrativeModelRequest.from_selection(selected)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_model.py:206: in from_selection
+    canonical_json_hash(identity),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:121: in canonical_json_hash
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:110: in canonical_json
+    _validate_json_value(value)
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:105: in _validate_json_value
+    raise TypeError(f"{path} contains unsupported JSON type {type(value).__name__}")
+E   TypeError: $.group_mapping.g1 contains unsupported JSON type tuple
+_ test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped[declaration0] _
+tests\contract\test_summary_group_coverage.py:61: in test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped
+    decode_model_draft(reply(selected,[claim("業務進展",["e1","e2"],declaration)]),selected=selected)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\contract\test_summary_group_coverage.py:12: in reply
+    request = NarrativeModelRequest.from_selection(selected)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_model.py:206: in from_selection
+    canonical_json_hash(identity),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:121: in canonical_json_hash
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:110: in canonical_json
+    _validate_json_value(value)
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:105: in _validate_json_value
+    raise TypeError(f"{path} contains unsupported JSON type {type(value).__name__}")
+E   TypeError: $.group_mapping.g1 contains unsupported JSON type tuple
+_ test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped[declaration1] _
+tests\contract\test_summary_group_coverage.py:61: in test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped
+    decode_model_draft(reply(selected,[claim("業務進展",["e1","e2"],declaration)]),selected=selected)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\contract\test_summary_group_coverage.py:12: in reply
+    request = NarrativeModelRequest.from_selection(selected)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_model.py:206: in from_selection
+    canonical_json_hash(identity),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:121: in canonical_json_hash
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:110: in canonical_json
+    _validate_json_value(value)
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:105: in _validate_json_value
+    raise TypeError(f"{path} contains unsupported JSON type {type(value).__name__}")
+E   TypeError: $.group_mapping.g1 contains unsupported JSON type tuple
+_ test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped[g1] _
+tests\contract\test_summary_group_coverage.py:61: in test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped
+    decode_model_draft(reply(selected,[claim("業務進展",["e1","e2"],declaration)]),selected=selected)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\contract\test_summary_group_coverage.py:12: in reply
+    request = NarrativeModelRequest.from_selection(selected)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_model.py:206: in from_selection
+    canonical_json_hash(identity),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:121: in canonical_json_hash
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:110: in canonical_json
+    _validate_json_value(value)
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:105: in _validate_json_value
+    raise TypeError(f"{path} contains unsupported JSON type {type(value).__name__}")
+E   TypeError: $.group_mapping.g1 contains unsupported JSON type tuple
+_ test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped[declaration3] _
+tests\contract\test_summary_group_coverage.py:61: in test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped
+    decode_model_draft(reply(selected,[claim("業務進展",["e1","e2"],declaration)]),selected=selected)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\contract\test_summary_group_coverage.py:12: in reply
+    request = NarrativeModelRequest.from_selection(selected)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_model.py:206: in from_selection
+    canonical_json_hash(identity),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:121: in canonical_json_hash
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:110: in canonical_json
+    _validate_json_value(value)
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:105: in _validate_json_value
+    raise TypeError(f"{path} contains unsupported JSON type {type(value).__name__}")
+E   TypeError: $.group_mapping.g1 contains unsupported JSON type tuple
+_ test_one_incomplete_group_claim_is_discarded_whole_without_modifying_the_good_claim _
+tests\contract\test_summary_group_coverage.py:65: in test_one_incomplete_group_claim_is_discarded_whole_without_modifying_the_good_claim
+    result=decode_model_draft(reply(selected,[claim("技術服務費帶動增長",["e3"],["g2"],name="bad"),
+tests\contract\test_summary_group_coverage.py:12: in reply
+    request = NarrativeModelRequest.from_selection(selected)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_model.py:206: in from_selection
+    canonical_json_hash(identity),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:121: in canonical_json_hash
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:110: in canonical_json
+    _validate_json_value(value)
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:105: in _validate_json_value
+    raise TypeError(f"{path} contains unsupported JSON type {type(value).__name__}")
+E   TypeError: $.group_mapping.g1 contains unsupported JSON type tuple
+_ test_handler_reports_static_group_reason_and_never_builds_a_success_artifact _
+tests\contract\test_summary_group_coverage.py:74: in test_handler_reports_static_group_reason_and_never_builds_a_success_artifact
+    result=NarrativeSummarizeHandler(model=Model())(_context(selected))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_summarize.py:164: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_summarize.py:224: in _execute
+    request = NarrativeModelRequest.from_selection(selected)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_model.py:206: in from_selection
+    canonical_json_hash(identity),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:121: in canonical_json_hash
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:110: in canonical_json
+    _validate_json_value(value)
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:105: in _validate_json_value
+    raise TypeError(f"{path} contains unsupported JSON type {type(value).__name__}")
+E   TypeError: $.group_mapping.g1 contains unsupported JSON type tuple
+_ test_nine_member_complete_atomic_sentence_is_representable_inside_existing_transport_caps _
+tests\contract\test_summary_group_coverage.py:81: in test_nine_member_complete_atomic_sentence_is_representable_inside_existing_transport_caps
+    request=NarrativeModelRequest.from_selection(selected); envelope=json.loads(request.data_json)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_model.py:206: in from_selection
+    canonical_json_hash(identity),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:121: in canonical_json_hash
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:110: in canonical_json
+    _validate_json_value(value)
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:105: in _validate_json_value
+    raise TypeError(f"{path} contains unsupported JSON type {type(value).__name__}")
+E   TypeError: $.group_mapping.g1 contains unsupported JSON type tuple
+___ test_public_summary_result_roundtrips_without_new_group_alias_contract ____
+tests\contract\test_summary_group_coverage.py:88: in test_public_summary_result_roundtrips_without_new_group_alias_contract
+    selected=grouped_selection();response=reply(selected,[claim("雲需求及技術服務費帶動增長",["e3","e4"],["g2"])])
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\contract\test_summary_group_coverage.py:12: in reply
+    request = NarrativeModelRequest.from_selection(selected)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_model.py:206: in from_selection
+    canonical_json_hash(identity),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:121: in canonical_json_hash
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:110: in canonical_json
+    _validate_json_value(value)
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:103: in _validate_json_value
+    _validate_json_value(item, f"{path}.{key}")
+src\company_wiki\automation\models.py:105: in _validate_json_value
+    raise TypeError(f"{path} contains unsupported JSON type {type(value).__name__}")
+E   TypeError: $.group_mapping.g1 contains unsupported JSON type tuple
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/contract/test_narrative_output_plan.py::test_96_span_compact_plan_is_material_excerpt_not_row_enumeration_and_preserves_every_source_row
+FAILED tests/contract/test_narrative_output_plan.py::test_compact_plan_uses_real_configured_cap_without_changing_model_or_generation_options[1200]
+FAILED tests/contract/test_narrative_output_plan.py::test_compact_plan_uses_real_configured_cap_without_changing_model_or_generation_options[2400]
+FAILED tests/contract/test_narrative_output_plan.py::test_compact_plan_uses_real_configured_cap_without_changing_model_or_generation_options[8192]
+FAILED tests/contract/test_narrative_output_plan.py::test_truncated_96_span_attempt_settles_once_with_safe_length_diagnostic_and_cannot_blindly_replay
+FAILED tests/contract/test_narrative_output_plan.py::test_truncation_reaches_handler_static_diagnostics_with_original_source_identity_and_no_success
+FAILED tests/contract/test_summary_group_coverage.py::test_model_envelope_has_stable_whole_groups_without_duplicate_text_or_source_changes
+FAILED tests/contract/test_summary_group_coverage.py::test_omitted_hk_service_fee_or_us_previously_azure_tail_cannot_support_a_declared_group[HK]
+FAILED tests/contract/test_summary_group_coverage.py::test_omitted_hk_service_fee_or_us_previously_azure_tail_cannot_support_a_declared_group[US-new-W02]
+FAILED tests/contract/test_summary_group_coverage.py::test_omitted_hk_service_fee_or_us_previously_azure_tail_cannot_support_a_declared_group[US-sealed-old-group]
+FAILED tests/contract/test_summary_group_coverage.py::test_complete_multi_proposition_claim_keeps_exact_citations_and_no_group_wire_extensions
+FAILED tests/contract/test_summary_group_coverage.py::test_unrelated_adjacent_paragraph_is_never_added_to_close_the_business_group
+FAILED tests/contract/test_summary_group_coverage.py::test_legacy_or_explicit_narrow_claim_can_survive_but_partial_context_is_diagnostic[None]
+FAILED tests/contract/test_summary_group_coverage.py::test_legacy_or_explicit_narrow_claim_can_survive_but_partial_context_is_diagnostic[declaration1]
+FAILED tests/contract/test_summary_group_coverage.py::test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped[declaration0]
+FAILED tests/contract/test_summary_group_coverage.py::test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped[declaration1]
+FAILED tests/contract/test_summary_group_coverage.py::test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped[g1]
+FAILED tests/contract/test_summary_group_coverage.py::test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped[declaration3]
+FAILED tests/contract/test_summary_group_coverage.py::test_one_incomplete_group_claim_is_discarded_whole_without_modifying_the_good_claim
+FAILED tests/contract/test_summary_group_coverage.py::test_handler_reports_static_group_reason_and_never_builds_a_success_artifact
+FAILED tests/contract/test_summary_group_coverage.py::test_nine_member_complete_atomic_sentence_is_representable_inside_existing_transport_caps
+FAILED tests/contract/test_summary_group_coverage.py::test_public_summary_result_roundtrips_without_new_group_alias_contract
+======================== 22 failed, 1 warning in 2.23s ========================

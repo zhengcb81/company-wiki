@@ -1,0 +1,40 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\wsum-to834miy\\pytest", "requested_basetemp_len": 52, "cwd_len": 63, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki
+configfile: pytest.ini
+collected 254 items
+
+tests\contract\test_narrative_output_plan.py ......                      [  2%]
+tests\contract\test_summary_group_coverage.py .......................    [ 11%]
+tests\unit\test_narrative_model_request.py ........                      [ 14%]
+tests\unit\test_narrative_model_aliases.py .........                     [ 18%]
+tests\unit\test_narrative_model_usage.py ...............                 [ 24%]
+tests\unit\test_narrative_model_caller.py .............                  [ 29%]
+tests\unit\test_narrative_http_model.py ................................ [ 41%]
+...........................                                              [ 52%]
+tests\unit\test_narrative_summarize_handler.py ......................... [ 62%]
+..............                                                           [ 67%]
+tests\unit\test_narrative_model_config.py ...........................    [ 78%]
+tests\unit\test_narrative_run_store.py ......................            [ 87%]
+tests\integration\test_narrative_batch_budget_and_resume.py .            [ 87%]
+tests\unit\test_narrative_partial_summary.py ........................... [ 98%]
+.F...                                                                    [100%]
+
+================================== FAILURES ===================================
+______ test_old_long_summary_policy_is_not_a_reader_rejection_threshold _______
+tests\unit\test_narrative_partial_summary.py:168: in test_old_long_summary_policy_is_not_a_reader_rejection_threshold
+    assert bundle.summary == result.draft
+E   AssertionError: assert BundleSummaryValue(status='completed', translate=False, draft=SourceSummaryDraft(source_id='urn:company-wiki:source:sh...e-legacy', prompt_version='1.6.0', response_sha256='1111111111111111111111111111111111111111111111111111111111111111')) == SourceSummaryDraft(source_id='urn:company-wiki:source:sha256:4d8193c55d4e7a77d9342b52362c5ef02c45d6e308fe4426d8beacae4...dd2081092cb9dc84e3b85d5f8',), claim_type='company_statement', modality='planned', needs_review=False)), status='draft')
+E    +  where BundleSummaryValue(status='completed', translate=False, draft=SourceSummaryDraft(source_id='urn:company-wiki:source:sh...e-legacy', prompt_version='1.6.0', response_sha256='1111111111111111111111111111111111111111111111111111111111111111')) = NarrativeBundle(schema_version='narrative-bundle/2.0', source_ref=SourceRefValue(schema_version='2.0', document_id='do...acy', prompt='1.6.0', bundle_producer='1.0.0'), replay=ReplayValue(required=True, locator_count=1), encoded_size=47914).summary
+E    +  and   SourceSummaryDraft(source_id='urn:company-wiki:source:sha256:4d8193c55d4e7a77d9342b52362c5ef02c45d6e308fe4426d8beacae4...dd2081092cb9dc84e3b85d5f8',), claim_type='company_statement', modality='planned', needs_review=False)), status='draft') = NarrativeSummaryResult(schema_version='narrative-summary-result/2.0', source_ref=SourceRefValue(schema_version='2.0', ...atus='not_reviewed', source_sha256=None, evidence_sha256=None, policy_hash=None, reviewed_at=None), encoded_size=45577).draft
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_partial_summary.py::test_old_long_summary_policy_is_not_a_reader_rejection_threshold
+================== 1 failed, 253 passed, 1 warning in 33.93s ==================
