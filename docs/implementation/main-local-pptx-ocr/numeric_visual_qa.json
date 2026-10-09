@@ -1,0 +1,385 @@
+{
+  "schema_version": "cwp-local-ocr-numeric-visual-check/1",
+  "source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+    "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+    "content_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+    "byte_size": 4016522,
+    "mime_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+    "schema_version": "2.0"
+  },
+  "page_number": 18,
+  "media_sha256": [
+    "05d04cf705fb19cfb12feb1382e9a9b668a563f9323ddc2a79b8d327949cef91"
+  ],
+  "scope": "selected_media",
+  "coverage_complete": false,
+  "selected_spans": [
+    {
+      "schema_version": "1.0.0",
+      "span_id": "urn:company-wiki:evidence-span:sha256:1bdb9a90e2996e0300c71328a4dcbb83a48ce42e8a26e735ba99999a5efac1f2",
+      "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "locator": "loc:v1/page:18/paragraph:8",
+      "coordinates": {
+        "page_number": 18,
+        "paragraph_index": 8,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "42%",
+      "structured_value": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "pptx",
+        "source_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "source_locator": "cwp-pptx-image-ocr/1|s=18|p=0|m=05d04cf705fb19cfb12feb1382e9a9b668a563f9323ddc2a79b8d327949cef91|ocr=7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d|l=8|b=2098.000,407.000,2157.000,440.000",
+        "transform": "rapidocr-image-rgb/1",
+        "slide_number": 18,
+        "slide_id": 273,
+        "shape_path": "0",
+        "media_sha256": "05d04cf705fb19cfb12feb1382e9a9b668a563f9323ddc2a79b8d327949cef91",
+        "ocr_fingerprint": "7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d",
+        "ocr_box": [
+          2098.0,
+          407.0,
+          2157.0,
+          440.0
+        ],
+        "coordinate_space": "image_pixels",
+        "image_width": 2560,
+        "image_height": 1440,
+        "ocr_line_index": 8,
+        "ocr_confidence": 0.99995,
+        "reading_order": "top-left-box/1",
+        "table_cells_inferred": false,
+        "recall_status": "unverified",
+        "language": "und",
+        "selection_reasons": [
+          "numeric_visual_check_only"
+        ],
+        "source_role": "company_filing",
+        "text_sha256": "8640b64bbd40b579f65acec121bb6b2a7cd6a694b0d0f6e148032d6b7c363f85",
+        "topics": [
+          "business_progress"
+        ],
+        "unit_kind": "pptx_image_ocr_line"
+      },
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "2.0.0",
+      "output_sha256": "d197b579884b4935c5ec9c18567802af787521a0acf8410a7c2d1fcc53b26e7d",
+      "parse_status": "parsed",
+      "quality_flags": [
+        "layout_ambiguous",
+        "ocr_used"
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "span_id": "urn:company-wiki:evidence-span:sha256:211e78a0a5824c95135e7f88913c0e774f0ecf19dd98791b3cd1435f5a74f5fb",
+      "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "locator": "loc:v1/page:18/paragraph:9",
+      "coordinates": {
+        "page_number": 18,
+        "paragraph_index": 9,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "40% / 39%",
+      "structured_value": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "pptx",
+        "source_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "source_locator": "cwp-pptx-image-ocr/1|s=18|p=0|m=05d04cf705fb19cfb12feb1382e9a9b668a563f9323ddc2a79b8d327949cef91|ocr=7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d|l=9|b=1461.000,408.000,1595.000,438.000",
+        "transform": "rapidocr-image-rgb/1",
+        "slide_number": 18,
+        "slide_id": 273,
+        "shape_path": "0",
+        "media_sha256": "05d04cf705fb19cfb12feb1382e9a9b668a563f9323ddc2a79b8d327949cef91",
+        "ocr_fingerprint": "7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d",
+        "ocr_box": [
+          1461.0,
+          408.0,
+          1595.0,
+          438.0
+        ],
+        "coordinate_space": "image_pixels",
+        "image_width": 2560,
+        "image_height": 1440,
+        "ocr_line_index": 9,
+        "ocr_confidence": 0.96592,
+        "reading_order": "top-left-box/1",
+        "table_cells_inferred": false,
+        "recall_status": "unverified",
+        "language": "und",
+        "selection_reasons": [
+          "numeric_visual_check_only"
+        ],
+        "source_role": "company_filing",
+        "text_sha256": "77582f699bb3e33d42a4605c262328b21d478c4e80137c3263118cee55a96655",
+        "topics": [
+          "business_progress"
+        ],
+        "unit_kind": "pptx_image_ocr_line"
+      },
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "2.0.0",
+      "output_sha256": "2b0f983434c5a59550b9d76a5d9b597927162b51c7f9b0b3a816a959a97df382",
+      "parse_status": "parsed",
+      "quality_flags": [
+        "layout_ambiguous",
+        "ocr_used"
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "span_id": "urn:company-wiki:evidence-span:sha256:da13436a4d4f0f866e0a53b4511ede79a65cf23624ae425827b54725de722441",
+      "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "locator": "loc:v1/page:18/paragraph:10",
+      "coordinates": {
+        "page_number": 18,
+        "paragraph_index": 10,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "39% / 38%",
+      "structured_value": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "pptx",
+        "source_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "source_locator": "cwp-pptx-image-ocr/1|s=18|p=0|m=05d04cf705fb19cfb12feb1382e9a9b668a563f9323ddc2a79b8d327949cef91|ocr=7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d|l=10|b=1661.000,408.000,1795.000,438.000",
+        "transform": "rapidocr-image-rgb/1",
+        "slide_number": 18,
+        "slide_id": 273,
+        "shape_path": "0",
+        "media_sha256": "05d04cf705fb19cfb12feb1382e9a9b668a563f9323ddc2a79b8d327949cef91",
+        "ocr_fingerprint": "7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d",
+        "ocr_box": [
+          1661.0,
+          408.0,
+          1795.0,
+          438.0
+        ],
+        "coordinate_space": "image_pixels",
+        "image_width": 2560,
+        "image_height": 1440,
+        "ocr_line_index": 10,
+        "ocr_confidence": 0.96339,
+        "reading_order": "top-left-box/1",
+        "table_cells_inferred": false,
+        "recall_status": "unverified",
+        "language": "und",
+        "selection_reasons": [
+          "numeric_visual_check_only"
+        ],
+        "source_role": "company_filing",
+        "text_sha256": "f9ff5f195f673aff130ee3cf0bccc2cb3d101acc83e04080ae663bdbc08ac57d",
+        "topics": [
+          "business_progress"
+        ],
+        "unit_kind": "pptx_image_ocr_line"
+      },
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "2.0.0",
+      "output_sha256": "5ac594c25d7fcc866ca5d97582803d011d3ad264914688414c5af238c85eaa8f",
+      "parse_status": "parsed",
+      "quality_flags": [
+        "layout_ambiguous",
+        "ocr_used"
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "span_id": "urn:company-wiki:evidence-span:sha256:828e58f63ea0fd5278e43df642054a03b91cb79ae00cc7d348281ccdcb7ac54c",
+      "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "locator": "loc:v1/page:18/paragraph:11",
+      "coordinates": {
+        "page_number": 18,
+        "paragraph_index": 11,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "40% / 39%",
+      "structured_value": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "pptx",
+        "source_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "source_locator": "cwp-pptx-image-ocr/1|s=18|p=0|m=05d04cf705fb19cfb12feb1382e9a9b668a563f9323ddc2a79b8d327949cef91|ocr=7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d|l=11|b=1860.000,408.000,1995.000,438.000",
+        "transform": "rapidocr-image-rgb/1",
+        "slide_number": 18,
+        "slide_id": 273,
+        "shape_path": "0",
+        "media_sha256": "05d04cf705fb19cfb12feb1382e9a9b668a563f9323ddc2a79b8d327949cef91",
+        "ocr_fingerprint": "7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d",
+        "ocr_box": [
+          1860.0,
+          408.0,
+          1995.0,
+          438.0
+        ],
+        "coordinate_space": "image_pixels",
+        "image_width": 2560,
+        "image_height": 1440,
+        "ocr_line_index": 11,
+        "ocr_confidence": 0.97654,
+        "reading_order": "top-left-box/1",
+        "table_cells_inferred": false,
+        "recall_status": "unverified",
+        "language": "und",
+        "selection_reasons": [
+          "numeric_visual_check_only"
+        ],
+        "source_role": "company_filing",
+        "text_sha256": "77582f699bb3e33d42a4605c262328b21d478c4e80137c3263118cee55a96655",
+        "topics": [
+          "business_progress"
+        ],
+        "unit_kind": "pptx_image_ocr_line"
+      },
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "2.0.0",
+      "output_sha256": "99631d2bf845ec64a4aefff501d39f6288b1218ffb984831ee0124af40280d66",
+      "parse_status": "parsed",
+      "quality_flags": [
+        "layout_ambiguous",
+        "ocr_used"
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "span_id": "urn:company-wiki:evidence-span:sha256:499c40faa6f09507a865dd674223bef6707174bdfd8b3cb8aba3d956f219ab7a",
+      "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "locator": "loc:v1/page:18/paragraph:12",
+      "coordinates": {
+        "page_number": 18,
+        "paragraph_index": 12,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "40%",
+      "structured_value": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "pptx",
+        "source_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "source_locator": "cwp-pptx-image-ocr/1|s=18|p=0|m=05d04cf705fb19cfb12feb1382e9a9b668a563f9323ddc2a79b8d327949cef91|ocr=7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d|l=12|b=2298.000,408.000,2355.000,438.000",
+        "transform": "rapidocr-image-rgb/1",
+        "slide_number": 18,
+        "slide_id": 273,
+        "shape_path": "0",
+        "media_sha256": "05d04cf705fb19cfb12feb1382e9a9b668a563f9323ddc2a79b8d327949cef91",
+        "ocr_fingerprint": "7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d",
+        "ocr_box": [
+          2298.0,
+          408.0,
+          2355.0,
+          438.0
+        ],
+        "coordinate_space": "image_pixels",
+        "image_width": 2560,
+        "image_height": 1440,
+        "ocr_line_index": 12,
+        "ocr_confidence": 0.99994,
+        "reading_order": "top-left-box/1",
+        "table_cells_inferred": false,
+        "recall_status": "unverified",
+        "language": "und",
+        "selection_reasons": [
+          "numeric_visual_check_only"
+        ],
+        "source_role": "company_filing",
+        "text_sha256": "b322f5a716ebd783d166094ab1fab818ca782f1c61ab0dd2bff11af2f743bde9",
+        "topics": [
+          "business_progress"
+        ],
+        "unit_kind": "pptx_image_ocr_line"
+      },
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "2.0.0",
+      "output_sha256": "0d0a4ac64a7a1848363d8511890b4362a0139fd8ad0a51a1318c5b00ed73f959",
+      "parse_status": "parsed",
+      "quality_flags": [
+        "layout_ambiguous",
+        "ocr_used"
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "span_id": "urn:company-wiki:evidence-span:sha256:6180fee3d207cb3c907fe5fc23378c3827711e41e2a43aaf758ecdda349f029b",
+      "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "locator": "loc:v1/page:18/paragraph:13",
+      "coordinates": {
+        "page_number": 18,
+        "paragraph_index": 13,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "Azure revenue growth (y/y)",
+      "structured_value": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "pptx",
+        "source_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "source_locator": "cwp-pptx-image-ocr/1|s=18|p=0|m=05d04cf705fb19cfb12feb1382e9a9b668a563f9323ddc2a79b8d327949cef91|ocr=7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d|l=13|b=92.000,411.000,424.000,441.000",
+        "transform": "rapidocr-image-rgb/1",
+        "slide_number": 18,
+        "slide_id": 273,
+        "shape_path": "0",
+        "media_sha256": "05d04cf705fb19cfb12feb1382e9a9b668a563f9323ddc2a79b8d327949cef91",
+        "ocr_fingerprint": "7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d",
+        "ocr_box": [
+          92.0,
+          411.0,
+          424.0,
+          441.0
+        ],
+        "coordinate_space": "image_pixels",
+        "image_width": 2560,
+        "image_height": 1440,
+        "ocr_line_index": 13,
+        "ocr_confidence": 0.99759,
+        "reading_order": "top-left-box/1",
+        "table_cells_inferred": false,
+        "recall_status": "unverified",
+        "language": "und",
+        "selection_reasons": [
+          "numeric_visual_check_only"
+        ],
+        "source_role": "company_filing",
+        "text_sha256": "2f86b9dad38365aeea44fb5526e1e8a85e052fe905c17e368b755a92b1399e16",
+        "topics": [
+          "business_progress"
+        ],
+        "unit_kind": "pptx_image_ocr_line"
+      },
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "2.0.0",
+      "output_sha256": "a350f64fa0403805ab8b7aab3b24c93eacaa991286af34dbd348f5cf71273e4d",
+      "parse_status": "parsed",
+      "quality_flags": [
+        "layout_ambiguous",
+        "ocr_used"
+      ]
+    }
+  ],
+  "inference_calls": 2,
+  "normalizations_for_replay": 1,
+  "elapsed_seconds": 14.822453,
+  "network_attempts": 0,
+  "table_cells_inferred": false,
+  "meaning": "raw OCR excerpts for visual comparison only; row/column relations are not inferred"
+}

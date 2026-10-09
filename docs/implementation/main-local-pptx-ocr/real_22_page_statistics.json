@@ -1,0 +1,1463 @@
+{
+  "schema_version": "cwp-local-ocr-real-check/1",
+  "status": "recognized_with_unverified_recall",
+  "case": "US-MSFT",
+  "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+  "benchmark_legacy_alias": "src_presentation",
+  "isolated_source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+    "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+    "content_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+    "byte_size": 4016522,
+    "mime_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+    "schema_version": "2.0"
+  },
+  "source_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+  "original_bytes": 4016522,
+  "original_stat_unchanged": true,
+  "original_sha256_after": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+  "normalization_identity": {
+    "parser_name": "cwp_document_normalization",
+    "parser_version": "2.0.0",
+    "format": "pptx",
+    "ocr_identity": {
+      "adapter": "rapidocr-cpu/1",
+      "base_config_sha256": "e753d39c0222297f0180e1bdcde1799bc26218f315356763362810846b6afa84",
+      "box_round_decimals": 3,
+      "confidence_round_decimals": 6,
+      "device": "cpu",
+      "engine_version": "3.8.1",
+      "inter_op_threads": 1,
+      "intra_op_threads": 2,
+      "low_confidence_threshold": 0.8,
+      "max_side_len": 3000,
+      "models": {
+        "cls": "e47acedf663230f8863ff1ab0e64dd2d82b838fceb5957146dab185a89d6215c",
+        "det": "d2a7720d45a54257208b1e13e36a8479894cb74155a5efe29462512d42f49da9",
+        "rec": "48fc40f24f6d2a207a2b1091d3437eb3cc3eb6b676dc3ef9c37384005483683b"
+      },
+      "reading_order": "top-left-box/1",
+      "runtime_version": "1.26.0",
+      "schema_version": "cwp-local-ocr-config/1",
+      "text_score": 0.5,
+      "transform": "rapidocr-image-rgb/1"
+    },
+    "ocr_fingerprint": "7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d"
+  },
+  "pure_parser_version": "1.1.0",
+  "pure_units": 0,
+  "pure_pages_read": 22,
+  "pure_opaque_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22
+  ],
+  "ocr_parser_version": "2.0.0",
+  "elapsed_seconds": 145.549077,
+  "ocr_inference_calls": 22,
+  "unique_media_count": 22,
+  "total_decoded_pixels": 81100800,
+  "recognized_lines": 1067,
+  "pages_read": 22,
+  "coverage_complete": false,
+  "errors": [],
+  "opaque_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22
+  ],
+  "recall_status": "unverified",
+  "table_cells_inferred": false,
+  "reading_order": "top-left-box/1",
+  "page_statistics": [
+    {
+      "page_number": 1,
+      "slide_id": 256,
+      "line_count": 4,
+      "low_confidence_lines": 0,
+      "status": "recognized",
+      "images": [
+        {
+          "shape_path": "0",
+          "media_sha256": "5905a318d9a9450f59bc747fe54b74789331ba9c79f1458ad138ead04c85ea1d",
+          "line_count": 4,
+          "status": "recognized",
+          "error": null,
+          "dimensions": [
+            2560,
+            1440
+          ]
+        }
+      ],
+      "elapsed_seconds": 3.799699,
+      "min_confidence": 0.96802,
+      "mean_confidence": 0.9825524999999999
+    },
+    {
+      "page_number": 2,
+      "slide_id": 257,
+      "line_count": 6,
+      "low_confidence_lines": 0,
+      "status": "recognized",
+      "images": [
+        {
+          "shape_path": "0",
+          "media_sha256": "21fa303719942f41d3cd824d215a5cbcf5fc16264b81a510e3a9139d8f261328",
+          "line_count": 6,
+          "status": "recognized",
+          "error": null,
+          "dimensions": [
+            2560,
+            1440
+          ]
+        }
+      ],
+      "elapsed_seconds": 3.920182,
+      "min_confidence": 0.98727,
+      "mean_confidence": 0.992725
+    },
+    {
+      "page_number": 3,
+      "slide_id": 258,
+      "line_count": 8,
+      "low_confidence_lines": 0,
+      "status": "recognized",
+      "images": [
+        {
+          "shape_path": "0",
+          "media_sha256": "bab94b03d91f18ca1b90dba0766ba779a4d0285837de73ee710782865bef3670",
+          "line_count": 8,
+          "status": "recognized",
+          "error": null,
+          "dimensions": [
+            2560,
+            1440
+          ]
+        }
+      ],
+      "elapsed_seconds": 3.631861,
+      "min_confidence": 0.96496,
+      "mean_confidence": 0.98848125
+    },
+    {
+      "page_number": 4,
+      "slide_id": 259,
+      "line_count": 12,
+      "low_confidence_lines": 0,
+      "status": "recognized",
+      "images": [
+        {
+          "shape_path": "0",
+          "media_sha256": "33e54faabef297663755363b6358653237e55f8261889f6142ac44f7a24a41cb",
+          "line_count": 12,
+          "status": "recognized",
+          "error": null,
+          "dimensions": [
+            2560,
+            1440
+          ]
+        }
+      ],
+      "elapsed_seconds": 9.201068,
+      "min_confidence": 0.95958,
+      "mean_confidence": 0.9863575
+    },
+    {
+      "page_number": 5,
+      "slide_id": 260,
+      "line_count": 15,
+      "low_confidence_lines": 0,
+      "status": "recognized",
+      "images": [
+        {
+          "shape_path": "0",
+          "media_sha256": "1fbfbd03dedb94ba792541ac17dc9cbef23ab590e74bd4488807b8c58981c659",
+          "line_count": 15,
+          "status": "recognized",
+          "error": null,
+          "dimensions": [
+            2560,
+            1440
+          ]
+        }
+      ],
+      "elapsed_seconds": 10.655374,
+      "min_confidence": 0.94784,
+      "mean_confidence": 0.9889866666666667
+    },
+    {
+      "page_number": 6,
+      "slide_id": 261,
+      "line_count": 1,
+      "low_confidence_lines": 0,
+      "status": "recognized",
+      "images": [
+        {
+          "shape_path": "0",
+          "media_sha256": "ede74c44e22b5f29efba64c10e9f53b2024e15998c6c73f180a25c5e215e9f97",
+          "line_count": 1,
+          "status": "recognized",
+          "error": null,
+          "dimensions": [
+            2560,
+            1440
+          ]
+        }
+      ],
+      "elapsed_seconds": 1.411312,
+      "min_confidence": 0.99892,
+      "mean_confidence": 0.99892
+    },
+    {
+      "page_number": 7,
+      "slide_id": 262,
+      "line_count": 22,
+      "low_confidence_lines": 0,
+      "status": "recognized",
+      "images": [
+        {
+          "shape_path": "0",
+          "media_sha256": "d4edf0903db8d061555fc3d0a99409f21c9f034fe8e31df59a37ae69de5f31ea",
+          "line_count": 22,
+          "status": "recognized",
+          "error": null,
+          "dimensions": [
+            2560,
+            1440
+          ]
+        }
+      ],
+      "elapsed_seconds": 14.757601,
+      "min_confidence": 0.95847,
+      "mean_confidence": 0.9882040909090909
+    },
+    {
+      "page_number": 8,
+      "slide_id": 263,
+      "line_count": 8,
+      "low_confidence_lines": 0,
+      "status": "recognized",
+      "images": [
+        {
+          "shape_path": "0",
+          "media_sha256": "8eee7ba448c14c20e22e2b2f5daa280e4138181d6f38911c060e291ab23ecc5e",
+          "line_count": 8,
+          "status": "recognized",
+          "error": null,
+          "dimensions": [
+            2560,
+            1440
+          ]
+        }
+      ],
+      "elapsed_seconds": 5.537266,
+      "min_confidence": 0.96207,
+      "mean_confidence": 0.9866425
+    },
+    {
+      "page_number": 9,
+      "slide_id": 264,
+      "line_count": 51,
+      "low_confidence_lines": 0,
+      "status": "recognized",
+      "images": [
+        {
+          "shape_path": "0",
+          "media_sha256": "a818ff4b319b716d75d29a5d76c79d25b3648c90eb3cb4df15119f03e018171e",
+          "line_count": 51,
+          "status": "recognized",
+          "error": null,
+          "dimensions": [
+            2560,
+            1440
+          ]
+        }
+      ],
+      "elapsed_seconds": 6.936198,
+      "min_confidence": 0.95761,
+      "mean_confidence": 0.9914419607843137
+    },
+    {
+      "page_number": 10,
+      "slide_id": 265,
+      "line_count": 1,
+      "low_confidence_lines": 0,
+      "status": "recognized",
+      "images": [
+        {
+          "shape_path": "0",
+          "media_sha256": "3c6ae574cf44b87cd6c9989485f46c0d3a2d6e6a562d6e9585d74d7cb0083120",
+          "line_count": 1,
+          "status": "recognized",
+          "error": null,
+          "dimensions": [
+            2560,
+            1440
+          ]
+        }
+      ],
+      "elapsed_seconds": 1.239749,
+      "min_confidence": 0.99846,
+      "mean_confidence": 0.99846
+    },
+    {
+      "page_number": 11,
+      "slide_id": 266,
+      "line_count": 15,
+      "low_confidence_lines": 1,
+      "status": "low_confidence",
+      "images": [
+        {
+          "shape_path": "0",
+          "media_sha256": "e9655692b713891b74bf0d939a33c80e52b4fb5cc812edd3cd96bc5018d501db",
+          "line_count": 15,
+          "status": "low_confidence",
+          "error": null,
+          "dimensions": [
+            2560,
+            1440
+          ]
+        }
+      ],
+      "elapsed_seconds": 7.879889,
+      "min_confidence": 0.5913,
+      "mean_confidence": 0.9645746666666667
+    },
+    {
+      "page_number": 12,
+      "slide_id": 267,
+      "line_count": 34,
+      "low_confidence_lines": 0,
+      "status": "recognized",
+      "images": [
+        {
+          "shape_path": "0",
+          "media_sha256": "5e936afdad9d5d4bed10da5acaf9f8f8722e2103f3d862cb978f836d4c70324e",
+          "line_count": 34,
+          "status": "recognized",
+          "error": null,
+          "dimensions": [
+            2560,
+            1440
+          ]
+        }
+      ],
+      "elapsed_seconds": 6.196542,
+      "min_confidence": 0.97304,
+      "mean_confidence": 0.9940073529411765
+    },
+    {
+      "page_number": 13,
+      "slide_id": 268,
+      "line_count": 23,
+      "low_confidence_lines": 0,
+      "status": "recognized",
+      "images": [
+        {
+          "shape_path": "0",
+          "media_sha256": "2f5c8513b8e0b0b042d162ca3f9fa15838dbfb90dbf4776b74fee02ae2cc6580",
+          "line_count": 23,
+          "status": "recognized",
+          "error": null,
+          "dimensions": [
+            2560,
+            1440
+          ]
+        }
+      ],
+      "elapsed_seconds": 14.834201,
+      "min_confidence": 0.96331,
+      "mean_confidence": 0.9881604347826087
+    },
+    {
+      "page_number": 14,
+      "slide_id": 269,
+      "line_count": 1,
+      "low_confidence_lines": 0,
+      "status": "recognized",
+      "images": [
+        {
+          "shape_path": "0",
+          "media_sha256": "89e14395a3b31a38f8939aafe0340acc38d1ff671b69d4092ffaaaaea8538ebe",
+          "line_count": 1,
+          "status": "recognized",
+          "error": null,
+          "dimensions": [
+            2560,
+            1440
+          ]
+        }
+      ],
+      "elapsed_seconds": 1.486187,
+      "min_confidence": 0.99501,
+      "mean_confidence": 0.99501
+    },
+    {
+      "page_number": 15,
+      "slide_id": 270,
+      "line_count": 170,
+      "low_confidence_lines": 0,
+      "status": "recognized",
+      "images": [
+        {
+          "shape_path": "0",
+          "media_sha256": "be4bd936032ccb5e834089539231e13be50ed9829371bb3e126835a19e4290eb",
+          "line_count": 170,
+          "status": "recognized",
+          "error": null,
+          "dimensions": [
+            2560,
+            1440
+          ]
+        }
+      ],
+      "elapsed_seconds": 6.373666,
+      "min_confidence": 0.96253,
+      "mean_confidence": 0.9978039411764705
+    },
+    {
+      "page_number": 16,
+      "slide_id": 271,
+      "line_count": 225,
+      "low_confidence_lines": 0,
+      "status": "recognized",
+      "images": [
+        {
+          "shape_path": "0",
+          "media_sha256": "628f04243fe62d4017ef378b37cea206f24b3072e50c1be189b05a2cc995b41e",
+          "line_count": 225,
+          "status": "recognized",
+          "error": null,
+          "dimensions": [
+            2560,
+            1440
+          ]
+        }
+      ],
+      "elapsed_seconds": 7.025794,
+      "min_confidence": 0.92531,
+      "mean_confidence": 0.9976087111111112
+    },
+    {
+      "page_number": 17,
+      "slide_id": 272,
+      "line_count": 250,
+      "low_confidence_lines": 0,
+      "status": "recognized",
+      "images": [
+        {
+          "shape_path": "0",
+          "media_sha256": "3eb1d7fe082c7d171ccc5cca60a5f67790ac8c43490d7aa7697a8aff81496b56",
+          "line_count": 250,
+          "status": "recognized",
+          "error": null,
+          "dimensions": [
+            2560,
+            1440
+          ]
+        }
+      ],
+      "elapsed_seconds": 9.455717,
+      "min_confidence": 0.96789,
+      "mean_confidence": 0.99791112
+    },
+    {
+      "page_number": 18,
+      "slide_id": 273,
+      "line_count": 85,
+      "low_confidence_lines": 0,
+      "status": "recognized",
+      "images": [
+        {
+          "shape_path": "0",
+          "media_sha256": "05d04cf705fb19cfb12feb1382e9a9b668a563f9323ddc2a79b8d327949cef91",
+          "line_count": 85,
+          "status": "recognized",
+          "error": null,
+          "dimensions": [
+            2560,
+            1440
+          ]
+        }
+      ],
+      "elapsed_seconds": 7.293203,
+      "min_confidence": 0.85364,
+      "mean_confidence": 0.9707601176470588
+    },
+    {
+      "page_number": 19,
+      "slide_id": 274,
+      "line_count": 1,
+      "low_confidence_lines": 0,
+      "status": "recognized",
+      "images": [
+        {
+          "shape_path": "0",
+          "media_sha256": "3c8fe61ba4645d7c80d14617cdf544a173d12b36fb51d010757b926f2aa6bf22",
+          "line_count": 1,
+          "status": "recognized",
+          "error": null,
+          "dimensions": [
+            2560,
+            1440
+          ]
+        }
+      ],
+      "elapsed_seconds": 1.450485,
+      "min_confidence": 0.98273,
+      "mean_confidence": 0.98273
+    },
+    {
+      "page_number": 20,
+      "slide_id": 275,
+      "line_count": 60,
+      "low_confidence_lines": 1,
+      "status": "low_confidence",
+      "images": [
+        {
+          "shape_path": "0",
+          "media_sha256": "c295779702745c971e9f813214cea10155e11c03d3329ba6b45a7cee9d657359",
+          "line_count": 60,
+          "status": "low_confidence",
+          "error": null,
+          "dimensions": [
+            2560,
+            1440
+          ]
+        }
+      ],
+      "elapsed_seconds": 10.996006,
+      "min_confidence": 0.62586,
+      "mean_confidence": 0.9830936666666666
+    },
+    {
+      "page_number": 21,
+      "slide_id": 276,
+      "line_count": 73,
+      "low_confidence_lines": 1,
+      "status": "low_confidence",
+      "images": [
+        {
+          "shape_path": "0",
+          "media_sha256": "fa3b238c348236c19d17948f68815f56250a946a3bbe93d755a207441c12bddf",
+          "line_count": 73,
+          "status": "low_confidence",
+          "error": null,
+          "dimensions": [
+            2560,
+            1440
+          ]
+        }
+      ],
+      "elapsed_seconds": 9.705289,
+      "min_confidence": 0.50246,
+      "mean_confidence": 0.9828465753424658
+    },
+    {
+      "page_number": 22,
+      "slide_id": 277,
+      "line_count": 2,
+      "low_confidence_lines": 0,
+      "status": "recognized",
+      "images": [
+        {
+          "shape_path": "0",
+          "media_sha256": "ab6bfc42d20c2745a0c5d5b7d5a989b71cbe66fbd349640dccca88cde2796f44",
+          "line_count": 2,
+          "status": "recognized",
+          "error": null,
+          "dimensions": [
+            2560,
+            1440
+          ]
+        }
+      ],
+      "elapsed_seconds": 1.60861,
+      "min_confidence": 0.98555,
+      "mean_confidence": 0.99193
+    }
+  ],
+  "selected_spans": [
+    {
+      "schema_version": "1.0.0",
+      "span_id": "urn:company-wiki:evidence-span:sha256:dd573be32a9f29558c033c44fff63a1dc0df95613f9c7ad0204f5f27ad32d6d3",
+      "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "locator": "loc:v1/page:1/paragraph:0",
+      "coordinates": {
+        "page_number": 1,
+        "paragraph_index": 0,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "Microsoft",
+      "structured_value": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "pptx",
+        "source_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "source_locator": "cwp-pptx-image-ocr/1|s=1|p=0|m=5905a318d9a9450f59bc747fe54b74789331ba9c79f1458ad138ead04c85ea1d|ocr=7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d|l=0|b=199.000,129.000,413.000,176.000",
+        "transform": "rapidocr-image-rgb/1",
+        "slide_number": 1,
+        "slide_id": 256,
+        "shape_path": "0",
+        "media_sha256": "5905a318d9a9450f59bc747fe54b74789331ba9c79f1458ad138ead04c85ea1d",
+        "ocr_fingerprint": "7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d",
+        "ocr_box": [
+          199.0,
+          129.0,
+          413.0,
+          176.0
+        ],
+        "coordinate_space": "image_pixels",
+        "image_width": 2560,
+        "image_height": 1440,
+        "ocr_line_index": 0,
+        "ocr_confidence": 0.99764,
+        "reading_order": "top-left-box/1",
+        "table_cells_inferred": false,
+        "recall_status": "unverified",
+        "language": "und",
+        "selection_reasons": [
+          "local_visual_qa"
+        ],
+        "source_role": "company_filing",
+        "text_sha256": "c7bac46904be785cd0c965bf5659610044f0cdb4cbb02d2ec398dc56648988fd",
+        "topics": [
+          "business_progress"
+        ],
+        "unit_kind": "pptx_image_ocr_line"
+      },
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "2.0.0",
+      "output_sha256": "4081410685fc88fde20f96f25deb5b57f5677c2f13f846e55f5f4a9a8c01afaf",
+      "parse_status": "parsed",
+      "quality_flags": [
+        "layout_ambiguous",
+        "ocr_used"
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "span_id": "urn:company-wiki:evidence-span:sha256:d109a3af1aeb59bce61566f36f71ac35f40d7a2713441aa684c76816dfd0de8e",
+      "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "locator": "loc:v1/page:1/paragraph:1",
+      "coordinates": {
+        "page_number": 1,
+        "paragraph_index": 1,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "FY27 Segments and Investor Metrics",
+      "structured_value": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "pptx",
+        "source_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "source_locator": "cwp-pptx-image-ocr/1|s=1|p=0|m=5905a318d9a9450f59bc747fe54b74789331ba9c79f1458ad138ead04c85ea1d|ocr=7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d|l=1|b=122.000,642.000,1665.000,743.000",
+        "transform": "rapidocr-image-rgb/1",
+        "slide_number": 1,
+        "slide_id": 256,
+        "shape_path": "0",
+        "media_sha256": "5905a318d9a9450f59bc747fe54b74789331ba9c79f1458ad138ead04c85ea1d",
+        "ocr_fingerprint": "7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d",
+        "ocr_box": [
+          122.0,
+          642.0,
+          1665.0,
+          743.0
+        ],
+        "coordinate_space": "image_pixels",
+        "image_width": 2560,
+        "image_height": 1440,
+        "ocr_line_index": 1,
+        "ocr_confidence": 0.98108,
+        "reading_order": "top-left-box/1",
+        "table_cells_inferred": false,
+        "recall_status": "unverified",
+        "language": "und",
+        "selection_reasons": [
+          "local_visual_qa"
+        ],
+        "source_role": "company_filing",
+        "text_sha256": "e5257166ca72b0096bc737ed34f6413d8407b33d5ca5b1e54423b90b589fb275",
+        "topics": [
+          "business_progress"
+        ],
+        "unit_kind": "pptx_image_ocr_line"
+      },
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "2.0.0",
+      "output_sha256": "2eee0f14ddd4cf68c9f7d20f4b80aca6a8dca01a44369efb823c3cec0322036c",
+      "parse_status": "parsed",
+      "quality_flags": [
+        "layout_ambiguous",
+        "ocr_used"
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "span_id": "urn:company-wiki:evidence-span:sha256:042571fb9e6bf0aa0a1e8c0a5b350325bf2064f1b1a29939bf86246b853577f3",
+      "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "locator": "loc:v1/page:7/paragraph:0",
+      "coordinates": {
+        "page_number": 7,
+        "paragraph_index": 0,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "FY27 Segment changes and resulting new product and service reporting updates",
+      "structured_value": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "pptx",
+        "source_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "source_locator": "cwp-pptx-image-ocr/1|s=7|p=0|m=d4edf0903db8d061555fc3d0a99409f21c9f034fe8e31df59a37ae69de5f31ea|ocr=7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d|l=0|b=82.000,74.000,2381.000,139.000",
+        "transform": "rapidocr-image-rgb/1",
+        "slide_number": 7,
+        "slide_id": 262,
+        "shape_path": "0",
+        "media_sha256": "d4edf0903db8d061555fc3d0a99409f21c9f034fe8e31df59a37ae69de5f31ea",
+        "ocr_fingerprint": "7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d",
+        "ocr_box": [
+          82.0,
+          74.0,
+          2381.0,
+          139.0
+        ],
+        "coordinate_space": "image_pixels",
+        "image_width": 2560,
+        "image_height": 1440,
+        "ocr_line_index": 0,
+        "ocr_confidence": 0.99363,
+        "reading_order": "top-left-box/1",
+        "table_cells_inferred": false,
+        "recall_status": "unverified",
+        "language": "und",
+        "selection_reasons": [
+          "local_visual_qa"
+        ],
+        "source_role": "company_filing",
+        "text_sha256": "d66d26221cb045e2579a2c3348343553367ee21dcdcbf41e96a50b4158f23d0c",
+        "topics": [
+          "business_progress"
+        ],
+        "unit_kind": "pptx_image_ocr_line"
+      },
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "2.0.0",
+      "output_sha256": "be63677d98930d03f52fe12f8b96357f903f79679c6468f45a0c78b9ecd004e5",
+      "parse_status": "parsed",
+      "quality_flags": [
+        "layout_ambiguous",
+        "ocr_used"
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "span_id": "urn:company-wiki:evidence-span:sha256:a12fa967760f9545d592243a9f06f7e733c05e4b9cad6aab6cf15367f5901e76",
+      "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "locator": "loc:v1/page:7/paragraph:1",
+      "coordinates": {
+        "page_number": 7,
+        "paragraph_index": 1,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "our consulting and support businesses. Devices and Consumer will include our Windows, XBOX, and advertising businesses. With these segment",
+      "structured_value": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "pptx",
+        "source_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "source_locator": "cwp-pptx-image-ocr/1|s=7|p=0|m=d4edf0903db8d061555fc3d0a99409f21c9f034fe8e31df59a37ae69de5f31ea|ocr=7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d|l=1|b=95.000,220.000,2359.000,259.000",
+        "transform": "rapidocr-image-rgb/1",
+        "slide_number": 7,
+        "slide_id": 262,
+        "shape_path": "0",
+        "media_sha256": "d4edf0903db8d061555fc3d0a99409f21c9f034fe8e31df59a37ae69de5f31ea",
+        "ocr_fingerprint": "7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d",
+        "ocr_box": [
+          95.0,
+          220.0,
+          2359.0,
+          259.0
+        ],
+        "coordinate_space": "image_pixels",
+        "image_width": 2560,
+        "image_height": 1440,
+        "ocr_line_index": 1,
+        "ocr_confidence": 0.9871,
+        "reading_order": "top-left-box/1",
+        "table_cells_inferred": false,
+        "recall_status": "unverified",
+        "language": "und",
+        "selection_reasons": [
+          "local_visual_qa"
+        ],
+        "source_role": "company_filing",
+        "text_sha256": "0a149331a21b20b813e2fb3cc68752d6796a8f3aa94f9c99bbbb506c79be9435",
+        "topics": [
+          "business_progress"
+        ],
+        "unit_kind": "pptx_image_ocr_line"
+      },
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "2.0.0",
+      "output_sha256": "36d5afb600a83e038f889997015c9685621330b0717580dda7237f72bdddce8d",
+      "parse_status": "parsed",
+      "quality_flags": [
+        "layout_ambiguous",
+        "ocr_used"
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "span_id": "urn:company-wiki:evidence-span:sha256:c23059ae8b7ebc6d1ed4fff16c07632ceb1ce25cbd914906f4723fb6b3b0e006",
+      "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "locator": "loc:v1/page:12/paragraph:0",
+      "coordinates": {
+        "page_number": 12,
+        "paragraph_index": 0,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "Investor Metrics",
+      "structured_value": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "pptx",
+        "source_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "source_locator": "cwp-pptx-image-ocr/1|s=12|p=0|m=5e936afdad9d5d4bed10da5acaf9f8f8722e2103f3d862cb978f836d4c70324e|ocr=7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d|l=0|b=78.000,74.000,532.000,123.000",
+        "transform": "rapidocr-image-rgb/1",
+        "slide_number": 12,
+        "slide_id": 267,
+        "shape_path": "0",
+        "media_sha256": "5e936afdad9d5d4bed10da5acaf9f8f8722e2103f3d862cb978f836d4c70324e",
+        "ocr_fingerprint": "7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d",
+        "ocr_box": [
+          78.0,
+          74.0,
+          532.0,
+          123.0
+        ],
+        "coordinate_space": "image_pixels",
+        "image_width": 2560,
+        "image_height": 1440,
+        "ocr_line_index": 0,
+        "ocr_confidence": 0.99208,
+        "reading_order": "top-left-box/1",
+        "table_cells_inferred": false,
+        "recall_status": "unverified",
+        "language": "und",
+        "selection_reasons": [
+          "local_visual_qa"
+        ],
+        "source_role": "company_filing",
+        "text_sha256": "5bb6a773dc53f50eef61dfc74ced735907419028e2da65c9990d85954e60cdc1",
+        "topics": [
+          "business_progress"
+        ],
+        "unit_kind": "pptx_image_ocr_line"
+      },
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "2.0.0",
+      "output_sha256": "e4df0ea378615a82e8bcc70cfee7d79e4e297d6392e0528782f88da13e4bc750",
+      "parse_status": "parsed",
+      "quality_flags": [
+        "layout_ambiguous",
+        "ocr_used"
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "span_id": "urn:company-wiki:evidence-span:sha256:1ab51f6c27bc589a5542c22848eec995125372f946ee24379277075380262d93",
+      "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "locator": "loc:v1/page:12/paragraph:1",
+      "coordinates": {
+        "page_number": 12,
+        "paragraph_index": 1,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "FY27 Investor Metrics",
+      "structured_value": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "pptx",
+        "source_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "source_locator": "cwp-pptx-image-ocr/1|s=12|p=0|m=5e936afdad9d5d4bed10da5acaf9f8f8722e2103f3d862cb978f836d4c70324e|ocr=7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d|l=1|b=1704.000,171.000,2062.000,210.000",
+        "transform": "rapidocr-image-rgb/1",
+        "slide_number": 12,
+        "slide_id": 267,
+        "shape_path": "0",
+        "media_sha256": "5e936afdad9d5d4bed10da5acaf9f8f8722e2103f3d862cb978f836d4c70324e",
+        "ocr_fingerprint": "7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d",
+        "ocr_box": [
+          1704.0,
+          171.0,
+          2062.0,
+          210.0
+        ],
+        "coordinate_space": "image_pixels",
+        "image_width": 2560,
+        "image_height": 1440,
+        "ocr_line_index": 1,
+        "ocr_confidence": 0.99481,
+        "reading_order": "top-left-box/1",
+        "table_cells_inferred": false,
+        "recall_status": "unverified",
+        "language": "und",
+        "selection_reasons": [
+          "local_visual_qa"
+        ],
+        "source_role": "company_filing",
+        "text_sha256": "1b180635aa2517239901f421bd5a5cdb6b0204c85eed286b9261f7c3b182edfa",
+        "topics": [
+          "business_progress"
+        ],
+        "unit_kind": "pptx_image_ocr_line"
+      },
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "2.0.0",
+      "output_sha256": "8a0cb174a371defe3d5e6aa62413ce907c86238f29407136e5dd2b8eae0b5f52",
+      "parse_status": "parsed",
+      "quality_flags": [
+        "layout_ambiguous",
+        "ocr_used"
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "span_id": "urn:company-wiki:evidence-span:sha256:0fa6d573b947419da47542a7838a7ba8b3f66bfeaf2fe94d8c680dd555880dec",
+      "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "locator": "loc:v1/page:18/paragraph:0",
+      "coordinates": {
+        "page_number": 18,
+        "paragraph_index": 0,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "FY27 Investor Metrics",
+      "structured_value": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "pptx",
+        "source_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "source_locator": "cwp-pptx-image-ocr/1|s=18|p=0|m=05d04cf705fb19cfb12feb1382e9a9b668a563f9323ddc2a79b8d327949cef91|ocr=7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d|l=0|b=98.000,91.000,676.000,141.000",
+        "transform": "rapidocr-image-rgb/1",
+        "slide_number": 18,
+        "slide_id": 273,
+        "shape_path": "0",
+        "media_sha256": "05d04cf705fb19cfb12feb1382e9a9b668a563f9323ddc2a79b8d327949cef91",
+        "ocr_fingerprint": "7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d",
+        "ocr_box": [
+          98.0,
+          91.0,
+          676.0,
+          141.0
+        ],
+        "coordinate_space": "image_pixels",
+        "image_width": 2560,
+        "image_height": 1440,
+        "ocr_line_index": 0,
+        "ocr_confidence": 0.96722,
+        "reading_order": "top-left-box/1",
+        "table_cells_inferred": false,
+        "recall_status": "unverified",
+        "language": "und",
+        "selection_reasons": [
+          "local_visual_qa"
+        ],
+        "source_role": "company_filing",
+        "text_sha256": "1b180635aa2517239901f421bd5a5cdb6b0204c85eed286b9261f7c3b182edfa",
+        "topics": [
+          "business_progress"
+        ],
+        "unit_kind": "pptx_image_ocr_line"
+      },
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "2.0.0",
+      "output_sha256": "9a643ef64b8cec288e9c70da23e3c8d504c012d1a2f1ec08f273aaeae4ea680e",
+      "parse_status": "parsed",
+      "quality_flags": [
+        "layout_ambiguous",
+        "ocr_used"
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "span_id": "urn:company-wiki:evidence-span:sha256:13956b843e56072a5e936f66c6ede24e6e4ee6539b7dd1313038db25a4d564b6",
+      "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "locator": "loc:v1/page:18/paragraph:1",
+      "coordinates": {
+        "page_number": 18,
+        "paragraph_index": 1,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "As Restated",
+      "structured_value": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "pptx",
+        "source_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "source_locator": "cwp-pptx-image-ocr/1|s=18|p=0|m=05d04cf705fb19cfb12feb1382e9a9b668a563f9323ddc2a79b8d327949cef91|ocr=7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d|l=1|b=93.000,271.000,256.000,304.000",
+        "transform": "rapidocr-image-rgb/1",
+        "slide_number": 18,
+        "slide_id": 273,
+        "shape_path": "0",
+        "media_sha256": "05d04cf705fb19cfb12feb1382e9a9b668a563f9323ddc2a79b8d327949cef91",
+        "ocr_fingerprint": "7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d",
+        "ocr_box": [
+          93.0,
+          271.0,
+          256.0,
+          304.0
+        ],
+        "coordinate_space": "image_pixels",
+        "image_width": 2560,
+        "image_height": 1440,
+        "ocr_line_index": 1,
+        "ocr_confidence": 0.98979,
+        "reading_order": "top-left-box/1",
+        "table_cells_inferred": false,
+        "recall_status": "unverified",
+        "language": "und",
+        "selection_reasons": [
+          "local_visual_qa"
+        ],
+        "source_role": "company_filing",
+        "text_sha256": "6a6e731bc0e99781ab889c4e41705cf80e4c107be6cb8048fc3a2c16df3c6930",
+        "topics": [
+          "business_progress"
+        ],
+        "unit_kind": "pptx_image_ocr_line"
+      },
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "2.0.0",
+      "output_sha256": "e361386493db12ac6bc734fa6932de14b895caea226fffa12a48eb2438820598",
+      "parse_status": "parsed",
+      "quality_flags": [
+        "layout_ambiguous",
+        "ocr_used"
+      ]
+    }
+  ],
+  "multi_span_replay": {
+    "spans": 8,
+    "normalizations": 1,
+    "inference_calls": 4,
+    "elapsed_seconds": 16.57042
+  },
+  "network": {
+    "attempts": 0,
+    "supplier_posts": 0
+  },
+  "parent_hard_deadline_seconds": 240.0,
+  "native_call_cooperative_cancellation": false,
+  "qa_bounded_previews": {
+    "1": [
+      {
+        "index": 0,
+        "text": "Microsoft",
+        "confidence": 0.99764,
+        "box": [
+          199.0,
+          129.0,
+          413.0,
+          176.0
+        ]
+      },
+      {
+        "index": 1,
+        "text": "FY27 Segments and Investor Metrics",
+        "confidence": 0.98108,
+        "box": [
+          122.0,
+          642.0,
+          1665.0,
+          743.0
+        ]
+      },
+      {
+        "index": 2,
+        "text": "September 2026",
+        "confidence": 0.96802,
+        "box": [
+          122.0,
+          842.0,
+          543.0,
+          901.0
+        ]
+      },
+      {
+        "index": 3,
+        "text": "Classified as Microsoft Confidentia",
+        "confidence": 0.98347,
+        "box": [
+          16.0,
+          1400.0,
+          410.0,
+          1425.0
+        ]
+      }
+    ],
+    "7": [
+      {
+        "index": 0,
+        "text": "FY27 Segment changes and resulting new product and service reporting updates",
+        "confidence": 0.99363,
+        "box": [
+          82.0,
+          74.0,
+          2381.0,
+          139.0
+        ]
+      },
+      {
+        "index": 1,
+        "text": "our consulting and support businesses. Devices and Consumer will include our Windows, XBOX, and advertising businesses. With these segment",
+        "confidence": 0.9871,
+        "box": [
+          95.0,
+          220.0,
+          2359.0,
+          259.0
+        ]
+      },
+      {
+        "index": 2,
+        "text": "changes and to provide transparency to investors, we are updating our product and services reporting definitions to better represent the businesses as",
+        "confidence": 0.99461,
+        "box": [
+          97.0,
+          263.0,
+          2437.0,
+          300.0
+        ]
+      },
+      {
+        "index": 3,
+        "text": "we manage them today, which will be used in our SEC filings going forward.",
+        "confidence": 0.98376,
+        "box": [
+          93.0,
+          304.0,
+          1275.0,
+          345.0
+        ]
+      },
+      {
+        "index": 4,
+        "text": "Agents andInfra",
+        "confidence": 0.95847,
+        "box": [
+          96.0,
+          384.0,
+          421.0,
+          426.0
+        ]
+      },
+      {
+        "index": 11,
+        "text": "· Server products now excludes the on-premises portion of GitHub and other developer services which has moved to Microsoft 365",
+        "confidence": 0.98836,
+        "box": [
+          235.0,
+          804.0,
+          2281.0,
+          845.0
+        ]
+      },
+      {
+        "index": 19,
+        "text": "· Industry solutions products, which is the on-premises portion of these businesses",
+        "confidence": 0.98901,
+        "box": [
+          239.0,
+          1207.0,
+          1527.0,
+          1246.0
+        ]
+      },
+      {
+        "index": 20,
+        "text": "Frontier and support services was previously reported as Enterprise and Partner services, but is otherwise unchanged",
+        "confidence": 0.99736,
+        "box": [
+          146.0,
+          1264.0,
+          2001.0,
+          1305.0
+        ]
+      },
+      {
+        "index": 21,
+        "text": "The product and service offerings referenced above will be reported in our SEC filings",
+        "confidence": 0.98918,
+        "box": [
+          78.0,
+          1344.0,
+          1122.0,
+          1382.0
+        ]
+      }
+    ],
+    "12": [
+      {
+        "index": 0,
+        "text": "Investor Metrics",
+        "confidence": 0.99208,
+        "box": [
+          78.0,
+          74.0,
+          532.0,
+          123.0
+        ]
+      },
+      {
+        "index": 1,
+        "text": "FY27 Investor Metrics",
+        "confidence": 0.99481,
+        "box": [
+          1704.0,
+          171.0,
+          2062.0,
+          210.0
+        ]
+      },
+      {
+        "index": 2,
+        "text": "FY26 Investor Metrics",
+        "confidence": 0.97304,
+        "box": [
+          471.0,
+          177.0,
+          827.0,
+          213.0
+        ]
+      },
+      {
+        "index": 3,
+        "text": "Commercial; Intelligent Cloud; Productivity",
+        "confidence": 0.99892,
+        "box": [
+          197.0,
+          231.0,
+          908.0,
+          276.0
+        ]
+      },
+      {
+        "index": 4,
+        "text": "Agents and Infra",
+        "confidence": 0.99757,
+        "box": [
+          1430.0,
+          274.0,
+          1709.0,
+          317.0
+        ]
+      },
+      {
+        "index": 17,
+        "text": "Microsoft 365 commercial cloud revenue growth",
+        "confidence": 0.99096,
+        "box": [
+          1431.0,
+          703.0,
+          2049.0,
+          738.0
+        ]
+      },
+      {
+        "index": 31,
+        "text": "Windows OEM and devices revenue growth",
+        "confidence": 0.9991,
+        "box": [
+          195.0,
+          1301.0,
+          752.0,
+          1336.0
+        ]
+      },
+      {
+        "index": 32,
+        "text": "Windows OEM and devices revenue growth",
+        "confidence": 0.99031,
+        "box": [
+          1430.0,
+          1310.0,
+          1985.0,
+          1348.0
+        ]
+      },
+      {
+        "index": 33,
+        "text": "12",
+        "confidence": 0.99938,
+        "box": [
+          2459.0,
+          1340.0,
+          2479.0,
+          1358.0
+        ]
+      }
+    ],
+    "18": [
+      {
+        "index": 0,
+        "text": "FY27 Investor Metrics",
+        "confidence": 0.96722,
+        "box": [
+          98.0,
+          91.0,
+          676.0,
+          141.0
+        ]
+      },
+      {
+        "index": 1,
+        "text": "As Restated",
+        "confidence": 0.98979,
+        "box": [
+          93.0,
+          271.0,
+          256.0,
+          304.0
+        ]
+      },
+      {
+        "index": 2,
+        "text": "2026",
+        "confidence": 0.99985,
+        "box": [
+          1890.0,
+          312.0,
+          1965.0,
+          347.0
+        ]
+      },
+      {
+        "index": 3,
+        "text": "Fiscal Year",
+        "confidence": 0.98888,
+        "box": [
+          2261.0,
+          360.0,
+          2394.0,
+          393.0
+        ]
+      },
+      {
+        "index": 4,
+        "text": "Q2",
+        "confidence": 0.99956,
+        "box": [
+          1708.0,
+          362.0,
+          1750.0,
+          393.0
+        ]
+      },
+      {
+        "index": 42,
+        "text": "Q4",
+        "confidence": 0.99984,
+        "box": [
+          2106.0,
+          824.0,
+          2148.0,
+          856.0
+        ]
+      },
+      {
+        "index": 82,
+        "text": "cloud revenue growth metric. Linkedln Marketing Solutions and Premium Subscriptions will now be reported in the Search and advertising revenue (ex TAC) growth metric. Quarterly growth rates",
+        "confidence": 0.97704,
+        "box": [
+          92.0,
+          1316.0,
+          2390.0,
+          1350.0
+        ]
+      },
+      {
+        "index": 83,
+        "text": "18",
+        "confidence": 0.99894,
+        "box": [
+          2454.0,
+          1337.0,
+          2483.0,
+          1362.0
+        ]
+      },
+      {
+        "index": 84,
+        "text": "includenon-GAAPCCgrowth(GAAP% /CC%).",
+        "confidence": 0.98455,
+        "box": [
+          93.0,
+          1350.0,
+          667.0,
+          1379.0
+        ]
+      }
+    ]
+  }
+}

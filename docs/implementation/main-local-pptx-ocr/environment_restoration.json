@@ -1,0 +1,58 @@
+{
+  "schema_version": "cwp-local-ocr-environment-restoration/1",
+  "status": "completed",
+  "owned_catalog_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwocr-source-bz1xdap2",
+  "owned_catalog_root_exists_after": false,
+  "original_sha256_after": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+  "original_size_unchanged": true,
+  "original_mtime_ns_unchanged": true,
+  "subprocess_environment_only": true,
+  "production_config_written": false,
+  "installed_models_written": false,
+  "elapsed_seconds": 165.719808,
+  "owned_qa_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwocr-qjn2cp9j",
+  "owned_qa_root_exists_after": false,
+  "qa_files_before_cleanup": [
+    {
+      "name": "owned-marker",
+      "bytes": 28,
+      "sha256": "1ed49cc8f37a475d1bac48ef7644ce57e72076fdd86ec8528de9eba728d87d80"
+    },
+    {
+      "name": "p1.png",
+      "bytes": 64310,
+      "sha256": "5905a318d9a9450f59bc747fe54b74789331ba9c79f1458ad138ead04c85ea1d"
+    },
+    {
+      "name": "p10.png",
+      "bytes": 31464,
+      "sha256": "3c6ae574cf44b87cd6c9989485f46c0d3a2d6e6a562d6e9585d74d7cb0083120"
+    },
+    {
+      "name": "p12.png",
+      "bytes": 219127,
+      "sha256": "5e936afdad9d5d4bed10da5acaf9f8f8722e2103f3d862cb978f836d4c70324e"
+    },
+    {
+      "name": "p18.png",
+      "bytes": 234059,
+      "sha256": "05d04cf705fb19cfb12feb1382e9a9b668a563f9323ddc2a79b8d327949cef91"
+    },
+    {
+      "name": "p3.png",
+      "bytes": 94166,
+      "sha256": "bab94b03d91f18ca1b90dba0766ba779a4d0285837de73ee710782865bef3670"
+    },
+    {
+      "name": "p7.png",
+      "bytes": 331246,
+      "sha256": "d4edf0903db8d061555fc3d0a99409f21c9f034fe8e31df59a37ae69de5f31ea"
+    }
+  ],
+  "local_model_sha256_after": {
+    "det": "d2a7720d45a54257208b1e13e36a8479894cb74155a5efe29462512d42f49da9",
+    "cls": "e47acedf663230f8863ff1ab0e64dd2d82b838fceb5957146dab185a89d6215c",
+    "rec": "48fc40f24f6d2a207a2b1091d3437eb3cc3eb6b676dc3ef9c37384005483683b"
+  },
+  "local_models_unchanged": true
+}
