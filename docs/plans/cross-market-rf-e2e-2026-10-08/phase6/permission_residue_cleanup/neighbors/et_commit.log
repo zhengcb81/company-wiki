@@ -1,0 +1,24 @@
+[
+  {
+    "command": [
+      "git",
+      "add",
+      "--",
+      "README.md"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "commit",
+      "-m",
+      "docs: preserve task intent without transcript approval loops"
+    ],
+    "exit_code": 0,
+    "stdout": "[codex/main-permission-residue-20261009 8c23ef6] docs: preserve task intent without transcript approval loops\n 1 file changed, 15 insertions(+), 6 deletions(-)\n",
+    "stderr": ""
+  }
+]

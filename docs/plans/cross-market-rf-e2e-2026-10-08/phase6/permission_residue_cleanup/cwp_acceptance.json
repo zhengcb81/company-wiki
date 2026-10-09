@@ -1,6 +1,6 @@
 {
   "schema_version": "permission-residue-cleanup/1",
-  "status": "CWP_ENGINEERING_PASS_NEIGHBORS_IN_PROGRESS",
+  "status": "CWP_ENGINEERING_PASS_NEIGHBORS_INTEGRATED",
   "user_direction": "Remove redundant project approvals and reuse existing authorization",
   "platform_control": "External tool automatic review remains enforced; repository cannot disable it",
   "removed": [
@@ -43,11 +43,8 @@
     "cwread-d57b496f",
     "cwcompat-69b13eb6"
   ],
-  "remaining_neighbors": [
-    "FF and RF skill wording commit/install",
-    "ET stale README gate wording",
-    "StockWiki UI confirmation token"
-  ],
+  "remaining_neighbors": [],
   "test_root_cleanup_restored_absent": true,
-  "mypy": "2 source files pass"
+  "mypy": "2 source files pass",
+  "main_closeout": "main_acceptance.json"
 }

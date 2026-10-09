@@ -1,0 +1,130 @@
+{
+  "schema_version": "permission-cleanup-main/1",
+  "status": "ENGINEERING_CLEANUP_COMPLETE",
+  "observed_at": "2026-10-09T06:42:21.847450+00:00",
+  "scope": "CWP active and legacy source entry points; FF/RF skills; ET README; StockWiki scheduler UI; audit skill instructions; excludes global platform policy and unrelated owner WIP",
+  "project_repeat_authorization_required": false,
+  "platform_auto_review_disabled": false,
+  "source_correctness_and_resource_limits_preserved": true,
+  "cwp_distinct_tests_passed": 77,
+  "cwp_opt_in_tests_skipped": 2,
+  "stockwiki_concentrated_tests_passed": 35,
+  "neighbor_findings": 30,
+  "ci_observation": [
+    {
+      "repo": "company-wiki",
+      "head": "91f7bb2610cb7f74ea38464ac941e4aeccc730de",
+      "runs": [
+        {
+          "id": 37893837225,
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/zhengcb81/company-wiki/actions/runs/37893837225"
+        }
+      ]
+    },
+    {
+      "repo": "filing-fetch",
+      "head": "de09787c1efff9623b12ba162c4bf8325b7d9955",
+      "runs": [
+        {
+          "id": 37893953324,
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/zhengcb81/filing-fetch/actions/runs/37893953324"
+        }
+      ]
+    },
+    {
+      "repo": "revenue-forecast",
+      "head": "42382c9b48ef6e2e2f7395a9daca3b7380695a72",
+      "runs": [
+        {
+          "id": 37894025957,
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/37894025957"
+        }
+      ]
+    },
+    {
+      "repo": "earnings-transcripts",
+      "head": "fa99f46861616bcebe120914fd3a030a6b8f34b5",
+      "runs": []
+    }
+  ],
+  "stockwiki": {
+    "head": "c40de21403720306ba21edbf71b9634a40ee58f8",
+    "branch": "master",
+    "working_tree_clean": true,
+    "actual_remotes": [],
+    "push_state": "NOT_PUSHED_NO_REMOTE"
+  },
+  "installed_files_updated": 6,
+  "owned_test_roots": [
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwperm-09988e01",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwperm-6680dee5",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwread-d57b496f",
+      "absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwcompat-69b13eb6",
+      "absent": true
+    }
+  ],
+  "new_downloads": 0,
+  "new_model_calls": 0,
+  "dayu_code_changed": false,
+  "production_scheduler_started": false,
+  "research_quality_acceptance": "NOT_PERFORMED_BY_THIS_CLEANUP",
+  "next_main_action": "freeze current original-three-company scope and budget; launch fresh native RF executions and four independent reviews",
+  "references": [
+    {
+      "path": "cwp_acceptance.json",
+      "sha256": "d029b78a93daf34e939f0bbcf84a5e14f8e6b972429779efe26f2742b56968cc",
+      "byte_size": 1551
+    },
+    {
+      "path": "ci_observation.json",
+      "sha256": "25ea50629a1775950ccc7a3aca112f477d76d25b46252ea8e50a393746262dbe",
+      "byte_size": 1039
+    },
+    {
+      "path": "install_receipt.json",
+      "sha256": "cfb4d9ef5faf3a1875bb0fccebbd5b2b9e7000e09ee0fca792813c8180b7cf71",
+      "byte_size": 2585
+    },
+    {
+      "path": "neighbors/HANDOFF.md",
+      "sha256": "4b51df2e3292c95a0737d7435448f73e588b4ff605bc4284ee2613abdd947a7c",
+      "byte_size": 7544
+    },
+    {
+      "path": "neighbors/INVENTORY.md",
+      "sha256": "c1c024ef0d8b5c1fec9da5354387735f783b35e84c742b7055da16bf0f5098cc",
+      "byte_size": 8727
+    },
+    {
+      "path": "neighbors/inventory.json",
+      "sha256": "2b325d8a846b18b4268e16fb7c0357ebae5869fdb48330288da074f4f4e01070",
+      "byte_size": 14828
+    },
+    {
+      "path": "neighbors/validation.json",
+      "sha256": "55f3aa37104c58e621ab8daed51ba3ea71538c1e26547931311ac5d68197384f",
+      "byte_size": 2852
+    },
+    {
+      "path": "neighbors/commits.json",
+      "sha256": "e8e37634b3721a97bd7183ef959dc459b1918159ea9911ef9c0fdb90ea27ece5",
+      "byte_size": 3174
+    }
+  ]
+}

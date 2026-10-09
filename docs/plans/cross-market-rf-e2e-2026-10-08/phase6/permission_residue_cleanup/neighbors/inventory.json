@@ -1,0 +1,334 @@
+{
+  "schema_version": "neighbor-permission-inventory/1",
+  "scope": "current public entry points/skills plus distinguishable legacy/history; no whole repository-history deletion",
+  "items": [
+    {
+      "repo": "FF",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\ff-permission-residue\\SKILL.md",
+      "line": 3,
+      "baseline_line": 3,
+      "surface": "active skill routing",
+      "blocks": "text could cause repeated permission prompt",
+      "action": "changed",
+      "reason": "Routes the authorized task through current intent/configuration/limits."
+    },
+    {
+      "repo": "FF",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\ff-permission-residue\\scripts\\fetch_filing.py",
+      "line": 6,
+      "baseline_line": 4,
+      "surface": "active module explanation",
+      "blocks": "text could cause repeated permission prompt",
+      "action": "changed docstring only",
+      "reason": "Execution AST unchanged excluding module docstring."
+    },
+    {
+      "repo": "FF",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\ff-permission-residue\\SKILL.md",
+      "line": 371,
+      "baseline_line": 353,
+      "surface": "historical receipts linked from active skill",
+      "blocks": "text could demand a new canary/observation window",
+      "action": "reframed as historical",
+      "reason": "Preserves WU-1303/902/1304 evidence; current source eligibility owns reuse."
+    },
+    {
+      "repo": "FF",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\ff-permission-residue\\SKILL.md",
+      "line": 355,
+      "baseline_line": 339,
+      "surface": "active storage eligibility guidance",
+      "blocks": "old text implied separate reusable-root permission",
+      "action": "clarified",
+      "reason": "Root registration locates storage; identity/period/asof/bytes still validated, metadata-only gaps can reconcile."
+    },
+    {
+      "repo": "FF",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\ff-permission-residue\\SKILL.md",
+      "line": 385,
+      "baseline_line": 369,
+      "surface": "legacy request compatibility",
+      "blocks": false,
+      "action": "preserved",
+      "reason": "Optional provider/accession/cap scope is not a signed permission receipt; no expiry/policy/gap/canary gate."
+    },
+    {
+      "repo": "FF",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\ff-permission-residue\\scripts\\filing_contracts.py",
+      "line": 128,
+      "baseline_line": null,
+      "surface": "legacy runtime compatibility",
+      "blocks": false,
+      "action": "preserved",
+      "reason": "Existing optional target scope remains strict if supplied; schema2.0 excludes it."
+    },
+    {
+      "repo": "FF",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\ff-permission-residue\\scripts\\fetch_filing.py",
+      "line": 1147,
+      "baseline_line": null,
+      "surface": "legacy runtime transport",
+      "blocks": false,
+      "action": "preserved",
+      "reason": "Generated temporary legacy scope is transport data, not a human authorization file."
+    },
+    {
+      "repo": "FF",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\ff-permission-residue\\scripts\\fetch_filing.py",
+      "line": 1505,
+      "baseline_line": null,
+      "surface": "active v2 vs legacy compatibility",
+      "blocks": false,
+      "action": "preserved",
+      "reason": "Legacy path containment remains separate; v2 does not require caller root-policy approval."
+    },
+    {
+      "repo": "RF",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\rf-permission-residue\\SKILL.md",
+      "line": 147,
+      "baseline_line": 152,
+      "surface": "active skill acquisition",
+      "blocks": "old comment could require repeated download approval",
+      "action": "changed",
+      "reason": "Schema2.0 example now uses one filing_intent; legacy flag remains an intent flag."
+    },
+    {
+      "repo": "RF",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\rf-permission-residue\\SKILL.md",
+      "line": 179,
+      "baseline_line": 167,
+      "surface": "active storage eligibility guidance",
+      "blocks": "old text implied separate reusable-root permission",
+      "action": "clarified",
+      "reason": "CWP owns current eligibility/local reconcile and exact public read; honest gaps remain."
+    },
+    {
+      "repo": "RF",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\rf-permission-residue\\SKILL.md",
+      "line": 41,
+      "baseline_line": null,
+      "surface": "active source facts contract",
+      "blocks": false,
+      "action": "preserved",
+      "reason": "As-of/source availability/SHA checks verify information facts, not human permission."
+    },
+    {
+      "repo": "RF",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\rf-permission-residue\\SKILL.md",
+      "line": 45,
+      "baseline_line": null,
+      "surface": "active machine publication provenance",
+      "blocks": false,
+      "action": "preserved",
+      "reason": "Machine publication receipts are integrity/consumer contracts, not per-document human sign-off."
+    },
+    {
+      "repo": "RF",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\rf-permission-residue\\scripts\\source_preparation.py",
+      "line": 355,
+      "baseline_line": null,
+      "surface": "active public entry",
+      "blocks": false,
+      "action": "no runtime change",
+      "reason": "Delegates intent to FF and reads SourceRef publicly with current config/deadline."
+    },
+    {
+      "repo": "ET",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\et-permission-residue\\README.md",
+      "line": 365,
+      "baseline_line": 358,
+      "surface": "active provider workflow",
+      "blocks": "old text asked for both gates/discover-policy then candidate approval",
+      "action": "changed",
+      "reason": "Same task network intent and unchanged limits across provider-supported phases."
+    },
+    {
+      "repo": "ET",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\et-permission-residue\\README.md",
+      "line": 402,
+      "baseline_line": 393,
+      "surface": "active configuration/producer explanation",
+      "blocks": "old text implied an independent rights-approval pass",
+      "action": "clarified",
+      "reason": "Disabled capability and account limits remain real; source intake facts have one owner."
+    },
+    {
+      "repo": "ET",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\et-permission-residue\\README.md",
+      "line": 406,
+      "baseline_line": 397,
+      "surface": "historical observation in active README",
+      "blocks": "old pending integration/canary language could block current requests",
+      "action": "reframed as historical",
+      "reason": "Past HTTP402 and producer/consumer mismatch facts retained without recurring canary license."
+    },
+    {
+      "repo": "ET",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\et-permission-residue\\transcript_tool.py",
+      "line": 148,
+      "baseline_line": null,
+      "surface": "active CLI",
+      "blocks": false,
+      "action": "preserved",
+      "reason": "Legacy CLI allow-download is inert; request boolean is the one network intent."
+    },
+    {
+      "repo": "ET",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\et-permission-residue\\transcript_api.py",
+      "line": 787,
+      "baseline_line": null,
+      "surface": "active exact/discovery/candidate runtime intent",
+      "blocks": false,
+      "action": "preserved",
+      "reason": "False explicit network intent returns not_authorized before provider session; no human receipt/private/public/canary gate."
+    },
+    {
+      "repo": "ET",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\et-permission-residue\\README.md",
+      "line": 408,
+      "baseline_line": null,
+      "surface": "active provider capability/resource contract",
+      "blocks": false,
+      "action": "preserved",
+      "reason": "Credential absence, actual entitlement rejection, unsupported operation and fee/response/time caps remain honest outcomes."
+    },
+    {
+      "repo": "StockWiki",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\sw-permission-residue\\README.md",
+      "line": 55,
+      "baseline_line": 55,
+      "surface": "active developer UI instructions",
+      "blocks": "previous token blocked scheduler start",
+      "action": "changed",
+      "reason": "Click requests one configured bounded scheduler cycle."
+    },
+    {
+      "repo": "StockWiki",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\sw-permission-residue\\stockwiki\\ui_jobs.py",
+      "line": 168,
+      "baseline_line": 166,
+      "surface": "active UI backend",
+      "blocks": "previous confirm comparison raised before scheduling",
+      "action": "removed duplicate token gate",
+      "reason": "Legacy confirm values are ignored; existing bounds/bools/scheduler/error flow intact."
+    },
+    {
+      "repo": "StockWiki",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\sw-permission-residue\\stockwiki\\ui_static\\app.js",
+      "line": 1371,
+      "baseline_line": 1372,
+      "surface": "active UI frontend",
+      "blocks": "previous window.prompt could cancel before POST",
+      "action": "removed prompt and confirm payload",
+      "reason": "Actual action posts current controls directly; same API path/result/error handling."
+    },
+    {
+      "repo": "StockWiki",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\sw-permission-residue\\stockwiki\\ui.py",
+      "line": 237,
+      "baseline_line": null,
+      "surface": "active HTTP dispatcher",
+      "blocks": false,
+      "action": "preserved",
+      "reason": "POST route delegates the same request and retains 400 error formatting."
+    },
+    {
+      "repo": "StockWiki",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\sw-permission-residue\\stockwiki\\runtime.py",
+      "line": 83,
+      "baseline_line": null,
+      "surface": "active scheduler execution",
+      "blocks": false,
+      "action": "preserved",
+      "reason": "Existing queued command/job-state mutex/dependency/timeouts retained; no production jobs run."
+    },
+    {
+      "repo": "StockWiki",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\sw-permission-residue\\stockwiki\\cli_parsers\\quick_scan.py",
+      "line": 147,
+      "baseline_line": null,
+      "surface": "active CLI help referring to historical owner batch",
+      "blocks": false,
+      "action": "preserved",
+      "reason": "Frozen identity-preview report is source/provenance input; no new human token gate identified."
+    },
+    {
+      "repo": "StockWiki",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\sw-permission-residue\\stockwiki\\review_workflow.py",
+      "line": 266,
+      "baseline_line": null,
+      "surface": "active research quality decisions",
+      "blocks": false,
+      "action": "preserved",
+      "reason": "Human or LLM decisions and configured auto-accept are research-quality states, not source-fetch permissions."
+    },
+    {
+      "repo": "StockWiki",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\sw-permission-residue\\stockwiki\\backup.py",
+      "line": 211,
+      "baseline_line": null,
+      "surface": "explicit backup restore execution mode",
+      "blocks": false,
+      "action": "preserved outside this repair",
+      "reason": "Confirm selects applying a destructive restore instead of preview; unrelated to source/scheduler repetitive authorization."
+    },
+    {
+      "repo": "audit",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\skills\\revenue-forecast-audit\\SKILL.md",
+      "line": 52,
+      "baseline_line": null,
+      "surface": "active skill",
+      "blocks": false,
+      "action": "no change",
+      "reason": "Already prohibits duplicate source permission chains; four requested independent reviews remain quality review."
+    },
+    {
+      "repo": "audit",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\skills\\revenue-forecast-audit\\references\\workflow.md",
+      "line": 8,
+      "baseline_line": null,
+      "surface": "active workflow",
+      "blocks": false,
+      "action": "no change",
+      "reason": "Carries existing authorization; truly missing configuration/budget stays a gap."
+    },
+    {
+      "repo": "audit",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\skills\\revenue-forecast-audit\\references\\artifact-contract.md",
+      "line": 59,
+      "baseline_line": null,
+      "surface": "active evidence contract",
+      "blocks": false,
+      "action": "no change",
+      "reason": "Hashes identify artifacts; no per-layer repeated raw hashing/human receipt."
+    }
+  ],
+  "installed_skill_observations": [
+    {
+      "repo": "FF",
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\SKILL.md",
+      "sha256_observed": "91161e16655740f39a3d28257bc0f5017dc2f17b1f84636f45e449b730647325",
+      "written": false,
+      "install_owner": "MAIN"
+    },
+    {
+      "repo": "RF",
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\SKILL.md",
+      "sha256_observed": "4984909259ec83a48b239a8ba8d18e93fd1221d58c4fa20c46588de35471455f",
+      "written": false,
+      "install_owner": "MAIN"
+    },
+    {
+      "repo": "audit",
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\SKILL.md",
+      "sha256_observed": "994175cfbd7c41b8a0ce4a717d77405c2e251651fe172ff5fa8497baa01cbe67",
+      "written": false,
+      "install_owner": "MAIN"
+    }
+  ],
+  "CodeGraph": "existing FF/RF/StockWiki index queried; ET nested not initialized, no new index created; explicit current files read after focused entry-point context",
+  "provider_or_model_calls": 0,
+  "main_PWF_writes": 0,
+  "Dayu_edits": 0,
+  "fresh_storage_scope_changed": false
+}

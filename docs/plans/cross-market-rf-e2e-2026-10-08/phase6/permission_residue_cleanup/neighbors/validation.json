@@ -1,0 +1,83 @@
+{
+  "schema_version": "neighbor-permission-doc-validation/1",
+  "checks": [
+    {
+      "name": "FF skill validation",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "C:/Users/郑曾波/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\ff-permission-residue"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\ff-permission-residue",
+      "exit_code": 0,
+      "duration_seconds": 0.138,
+      "stdout": "Skill is valid!\n",
+      "stderr": ""
+    },
+    {
+      "name": "RF skill validation",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "C:/Users/郑曾波/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\rf-permission-residue"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\rf-permission-residue",
+      "exit_code": 0,
+      "duration_seconds": 0.115,
+      "stdout": "Skill is valid!\n",
+      "stderr": ""
+    },
+    {
+      "name": "RF existing documentation contracts",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "tests/test_skill_documentation.py",
+        "tests/test_skill_doc_executable.py"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\rf-permission-residue",
+      "exit_code": 0,
+      "duration_seconds": 3.747,
+      "stdout": ".........                                                   [100%]\n9 passed, 13 subtests passed in 0.82s\n",
+      "stderr": ""
+    },
+    {
+      "name": "FF Ruff",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-m",
+        "ruff",
+        "check",
+        "--no-cache",
+        "scripts/fetch_filing.py"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\ff-permission-residue",
+      "exit_code": 0,
+      "duration_seconds": 0.179,
+      "stdout": "All checks passed!\n",
+      "stderr": ""
+    },
+    {
+      "name": "FF module execution AST unchanged excluding module docstring",
+      "pass": true,
+      "base_sha256": "112bacf7f8b2fd65786390b9ccbe4c830e793fd56aac47d39fa9953e2c017271",
+      "new_sha256": "9d9c9d6e57c49519febdc9b01992e1297168e302d8e6070790c6395257da8bf8"
+    }
+  ],
+  "temp_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\pResid-_s16zfmt",
+  "temp_removed": true,
+  "caller_TEMP_unchanged": true,
+  "provider_requests": 0,
+  "model_requests": 0,
+  "new_tests_written": 0,
+  "artificial_RED": false,
+  "existing_checks_only": true
+}

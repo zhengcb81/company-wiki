@@ -1,0 +1,156 @@
+{
+  "schema_version": "neighbor-permission-cleanup-handoff/1",
+  "status": "complete_MAIN_integrated",
+  "commits": [
+    {
+      "repo": "FF",
+      "root": "C:/Users/郑曾波/Projects/_harness_worktrees/cmrf-20261008/ff-permission-residue",
+      "head": "55b7347a29b98e6844e6bef8c0708a58a5c68e45",
+      "branch": "codex/main-permission-residue-20261009",
+      "paths": [
+        "SKILL.md",
+        "scripts/fetch_filing.py"
+      ],
+      "working_tree_status": "",
+      "duration_seconds": 6.63,
+      "normal_hook": true,
+      "base": "5ef8056bdba4be9134bb6c90f9bd457ee5f38253",
+      "hook_receipt": "Ruff/mypy/host guard passed",
+      "files_sha256": {
+        "SKILL.md": "b09c1857992dfba714c3742306b78ffcea1a4f72419a0308140f316828aa93e4",
+        "scripts/fetch_filing.py": "9d9c9d6e57c49519febdc9b01992e1297168e302d8e6070790c6395257da8bf8"
+      }
+    },
+    {
+      "repo": "RF",
+      "root": "C:/Users/郑曾波/Projects/_harness_worktrees/cmrf-20261008/rf-permission-residue",
+      "head": "5108f4703e92a385c37d01720ad930a751fbdc11",
+      "branch": "codex/main-permission-residue-20261009",
+      "paths": [
+        "SKILL.md"
+      ],
+      "working_tree_status": "",
+      "duration_seconds": 3.025,
+      "normal_hook": true,
+      "base": "28dbb91056c1b16759ab814018e19025415fb4ec",
+      "hook_receipt": "normal hook found no applicable staged code",
+      "files_sha256": {
+        "SKILL.md": "dd9595f95d354833d1627fff0d2a6a141ed9253bd7f42a3504f03cb2af2768e4"
+      }
+    },
+    {
+      "repo": "ET",
+      "root": "C:/Users/郑曾波/Projects/_harness_worktrees/cmrf-20261008/et-permission-residue",
+      "head": "8c23ef66f5f4e3f0ffda8c049b6899c623b46e48",
+      "branch": "codex/main-permission-residue-20261009",
+      "paths": [
+        "README.md"
+      ],
+      "working_tree_status": "",
+      "duration_seconds": 0.486,
+      "normal_hook": true,
+      "base": "f4f2eca0e27ab877b9ab2012a28c70468eb3a364",
+      "hook_receipt": "normal git commit; no hook output",
+      "files_sha256": {
+        "README.md": "818f28f037fca32a39dd3a02beb2c071d69f7087833fd1e181782dfdfcb55757"
+      }
+    },
+    {
+      "repo": "StockWiki",
+      "root": "C:/Users/郑曾波/Projects/_harness_worktrees/cmrf-20261008/sw-permission-residue",
+      "head": "d98acdcdf1a2feada2ae91f2f56aafaa74046728",
+      "branch": "codex/main-permission-residue-20261009",
+      "paths": [
+        "README.md",
+        "stockwiki/ui_jobs.py",
+        "stockwiki/ui_static/app.js",
+        "tests/test_ui.py",
+        "tests/test_ui_scheduler_intent.py"
+      ],
+      "working_tree_status": "",
+      "duration_seconds": 0.372,
+      "normal_hook": true,
+      "base": "d253fea5f4f6e4242d2b91eaf8d89d3dac8b45ff",
+      "hook_receipt": "normal git commit; no hook output; mandatory SW static check separately passed",
+      "files_sha256": {
+        "README.md": "30d2744be3ecccbc3618c54e70cbdbd14247797d726673adfae2138457b54198",
+        "stockwiki/ui_jobs.py": "af9446fa59abc966dbb193e8f5b7b9ba0b96451e51445d1afa8cc90e8c25078e",
+        "stockwiki/ui_static/app.js": "3eedb1c6d07aedde152cb9143daf905f92ff560704eb22309770ec7dff405611",
+        "tests/test_ui.py": "b11a3298d2741d2c0bad952be47271b52a3916da189b434c4a5cce75d3c90d30",
+        "tests/test_ui_scheduler_intent.py": "a07d61e4a30bb4053e00a1bff12c5e73bb52eb9469db3c89c11410139f5a5704"
+      }
+    }
+  ],
+  "inventory": "inventory.json",
+  "inventory_items": 30,
+  "validation": {
+    "FF_RF": "validation.json",
+    "SW_RED": "sw_red.json",
+    "SW_responsibility": "sw_green.json",
+    "SW_static_final": "sw_static_corrected.json",
+    "SW_static_import_failure": "sw_static_import_failure.json"
+  },
+  "tests": {
+    "RF_docs_pass": 9,
+    "RF_subtests_pass": 13,
+    "SW_red_failed": 4,
+    "SW_red_passed": 1,
+    "SW_focused_pass": 35,
+    "SW_focused_seconds": 10.87,
+    "SW_static": "PASS",
+    "actual_frontend_syntax": "PASS"
+  },
+  "all_worktrees_clean": true,
+  "provider_requests": 0,
+  "model_requests": 0,
+  "production_scheduler_runs": 0,
+  "Dayu_edits": 0,
+  "installation": false,
+  "push": false,
+  "main_PWF_writes": 0,
+  "fresh_storage_scope_changed": false,
+  "temporary_roots_restored": true,
+  "MAIN_owns": [
+    "main_PWF",
+    "normal final package documentation commit",
+    "any later remote configuration decision"
+  ],
+  "remaining_duplicate_permission_gate_in_touched_entry": false,
+  "docs": "HANDOFF.md",
+  "MAIN_integration_report": {
+    "source": "MAIN message; no repeated verification by this agent",
+    "FF": {
+      "commit": "de09787c",
+      "CI_run": 37893953324,
+      "CI": "success"
+    },
+    "RF": {
+      "commit": "42382c9b",
+      "CI_run": 37894025957,
+      "CI": "success"
+    },
+    "ET": {
+      "commit": "fa99f468",
+      "Actions": "not configured; no success claim"
+    },
+    "StockWiki": {
+      "commit": "c40de214",
+      "master": "clean",
+      "remotes": [],
+      "push": "origin failed; no remote created"
+    },
+    "CWP": {
+      "commit": "91f7bb26",
+      "push": true,
+      "CI_run": 37893837225,
+      "CI": "success"
+    },
+    "targeted_install": {
+      "owner": "MAIN",
+      "FF_RF_files": 6,
+      "exact_blob": true,
+      "existing_claude_junction": true,
+      "receipt": "../install_receipt.json"
+    }
+  }
+}

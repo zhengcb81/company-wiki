@@ -1,0 +1,60 @@
+{
+  "schema_version": "permission-instruction-install/1",
+  "files": [
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\SKILL.md",
+      "head": "de09787c1efff9623b12ba162c4bf8325b7d9955",
+      "before_sha256": "91161e16655740f39a3d28257bc0f5017dc2f17b1f84636f45e449b730647325",
+      "after_sha256": "f9d493871dcf9c81dd38dfb05a48990c8e935888c09099454005d63102eb654d",
+      "byte_size": 22631,
+      "changed": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\fetch_filing.py",
+      "head": "de09787c1efff9623b12ba162c4bf8325b7d9955",
+      "before_sha256": "112bacf7f8b2fd65786390b9ccbe4c830e793fd56aac47d39fa9953e2c017271",
+      "after_sha256": "6c2c2a181188819af83a5f4da01b9bc01239d92659f628d21ce2d0d7bee9b9d1",
+      "byte_size": 71079,
+      "changed": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\SKILL.md",
+      "head": "de09787c1efff9623b12ba162c4bf8325b7d9955",
+      "before_sha256": "91161e16655740f39a3d28257bc0f5017dc2f17b1f84636f45e449b730647325",
+      "after_sha256": "f9d493871dcf9c81dd38dfb05a48990c8e935888c09099454005d63102eb654d",
+      "byte_size": 22631,
+      "changed": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\fetch_filing.py",
+      "head": "de09787c1efff9623b12ba162c4bf8325b7d9955",
+      "before_sha256": "112bacf7f8b2fd65786390b9ccbe4c830e793fd56aac47d39fa9953e2c017271",
+      "after_sha256": "6c2c2a181188819af83a5f4da01b9bc01239d92659f628d21ce2d0d7bee9b9d1",
+      "byte_size": 71079,
+      "changed": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\SKILL.md",
+      "head": "42382c9b48ef6e2e2f7395a9daca3b7380695a72",
+      "before_sha256": "4984909259ec83a48b239a8ba8d18e93fd1221d58c4fa20c46588de35471455f",
+      "after_sha256": "f849e43cc693cfc224a187914666de396eafd2b0b49a988deeb4a4609403a264",
+      "byte_size": 31561,
+      "changed": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\SKILL.md",
+      "head": "42382c9b48ef6e2e2f7395a9daca3b7380695a72",
+      "before_sha256": "4984909259ec83a48b239a8ba8d18e93fd1221d58c4fa20c46588de35471455f",
+      "after_sha256": "f849e43cc693cfc224a187914666de396eafd2b0b49a988deeb4a4609403a264",
+      "byte_size": 31561,
+      "changed": true
+    }
+  ],
+  "physical_roots": 2,
+  "claude_aliases_agents": {
+    "filing-fetch": true,
+    "revenue-forecast": true
+  },
+  "config_registry_output_changed": false,
+  "runtime_execution_ast_unchanged": true
+}

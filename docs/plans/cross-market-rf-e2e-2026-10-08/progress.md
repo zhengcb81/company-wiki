@@ -1,5 +1,15 @@
 # Progress
 
+## 2026-10-09 06:40 UTC — 审批补漏并线收尾
+
+- 收到用户“一律取消类似过度审批”的指令后完成逐层实际阻断盘点，不只改措辞。CWP许可hash/TTL取消，旧人工提案写链无IO退役；77不同测试PASS，2 opt-in真实样本测试未执行。四个独占测试根均恢复不存在，原件/配置未改，模型/下载调用0。
+- 接收neighbors四仓交付与30项inventory；StockWiki前后端口令取消，35项责任测试PASS；FF/RF/ET旧授权指引已修。正常merge/push FFde09787c、RF42382c9b、ETfa99f468；StockWikic40de214本地master干净，实际无remote，origin推送失败已如实保留且未创建猜测远端。RF assurance/output、FF密钥文件、ET其他owner文件未动。
+- FF/RF安装六文件精确Git blob定点同步，核对旧SHA，.claude junction复用，未覆盖配置/输出。CWP先提交af43c84e，再正常并replay隔离18b9956b为91f7bb26并推master。精确SHA远端CWP37893837225/FF37893953324/RF37894025957均SUCCESS；ET无Actions，不伪称CI绿。
+- 已接收replay责任包36不同测试和真实tiny图像PPTX no-OCR具名失败；不追加整套71/付费OCR反复验证。Python写新文档JSON指定LF，避免Windows CRLF产生git diff --check噪声；旧不可变receipt/manifest未重写。
+- 新增CLOSEOUT/main_acceptance并刷新主PWF页首：下一步冻结mFresh现有三家公司scope/当前安装和母账，启动全新原三家研究+四独立审查；无新的逐材料/逐供应商许可。当前Phase6和长期目标仍active，不停止、不把工程绿色冒充研究验收。
+- 收尾首次cached whitespace检查拒绝邻仓原始CRLF交接文本，正常commit尚未执行；不重写已有receipt/manifest字节。检查命令仅声明CR为合法行尾（仍查真实行尾空白/空行/缩进），不改全局Git配置、不跳过hooks，随后正常提交。
+
+
 - 2026-10-08 MAIN：读取 PWF/RF/FF 技能与当前主线验收；新建独立本任务计划。
 - 只读确认 RF/FF Git HEAD 和既有 WIP；生产 source_catalog 配置未改。
 - 当前阶段：来源盘点、真实公司选择和独立执行接口准备。

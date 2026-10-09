@@ -1,5 +1,14 @@
 # Findings
 
+## 当前补漏结论：项目重复授权已清理（2026-10-09 06:40 UTC）
+
+- 不把工具平台自动审批与仓库人工许可混为一谈。当前托管session的reviewer不能由项目代码关闭，也不能换命令/渠道绕过；已授权公司资料处理不再新增项目许可文件。API凭证认证、供应商套餐和真实来源/资源约束分别保留其职责。
+- CWP旧计划hash/政策hash/TTL不再许可阻断；旧proposal→approve→shadow writer退役为无IO兼容入口。历史行和线格式不删、不伪签。集中TDD 9RED；当前77个不同责任测试PASS，另2个显式真实夹具opt-in未跑，不能宣称真实研究通过。
+- 邻仓30项逐路径盘点见permission_residue_cleanup/neighbors/INVENTORY.md。FF/RF沿用任务与既有授权，ET说明收敛实际单一下载意图，StockWiki前后端取消手输启动token。StockWiki 4RED→35GREEN，FF/RF既有文档/静态检查通过；无供应商调用、无生产任务启动、无Dayu改动。
+- 正常并线：CWP91f7bb26、FFde09787c、RF42382c9b、ETfa99f468、StockWikic40de214。前三个实际精确SHA CI SUCCESS；ET无Actions；StockWiki实际remote=[]，本地主线干净但无推送，不虚报远端成功。FF/RF六个安装文件定点同步，保留配置/output，.claude现有junction指向.agents。
+- replay隔离包18b9956b已并线；36个不同责任测试及真实tiny no-OCR失败分类已留证。此工程节点已完成；后续原三家/新三家研究与四审尚未启动，Phase6和母目标继续active。完成授权清理不等于研究质量验收。
+
+
 ## Phase6 P1预算与桥接共用层（实施中）
 
 - 基础组件335df5d3发布后远端CI在collect阶段缺httpx，具体日志已取证。本机有包导致局部和全量collect未暴露；CI只安装requirements.txt，我只加pyproject直接依赖，且2026-10当前openai 3.26.1的传递依赖已为httpx2，不再保证httpx。根因是双安装入口声明漂移/错误依赖传递包。新增所有直接runtime依赖须出现在CI requirements的责任测试，先RED再补显式HTTPX声明，并将这个毫秒级静态检查纳入现有快速push集合；不删除HTTP测试、不扩大普通commit完整E2E。

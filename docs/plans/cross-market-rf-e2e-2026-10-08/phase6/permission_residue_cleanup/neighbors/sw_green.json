@@ -1,0 +1,45 @@
+{
+  "checks": [
+    {
+      "name": "concentrated UI/runtime responsibility",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "tests/test_ui.py",
+        "tests/test_ui_scheduler_intent.py",
+        "tests/test_ui_http.py",
+        "tests/test_runtime.py"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 13.671,
+      "stdout": "...................................                                      [100%]\n35 passed in 10.87s\n",
+      "stderr": ""
+    },
+    {
+      "name": "required static-only interface",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "scripts/checks.py",
+        "--static-only"
+      ],
+      "exit_code": 1,
+      "duration_seconds": 1.693,
+      "stdout": "StockWiki checks — mode=static\nworkspace root: C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\sw-permission-residue\n=== ruff ===\n  $ C:\\Miniconda\\python.exe -m ruff check stockwiki tests scripts\nFAIL  ruff (0.1s)\n=== validate-framework ===\n  $ C:\\Miniconda\\python.exe -B -m stockwiki.cli --root C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\sw-permission-residue validate-framework --static\n[warning] stockwiki\\quick_scan_backup.py: 模块 656 行（>600）：偏大，建议分解为 <600 行的子模块（诊断项，不阻断）\n[warning] stockwiki\\quick_scan_store.py: 模块 969 行（>600）：偏大，建议分解为 <600 行的子模块（诊断项，不阻断）\nFramework validation passed with 2 warning(s).\nPASS  validate-framework (1.5s)\nSOME CHECKS FAILED: ruff\n",
+      "stderr": "error: invalid value '1' for '--no-cache'\n  [possible values: true, false]\n\nFor more information, try '--help'.\n"
+    }
+  ],
+  "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\pSwGreen-2dtzdzxu",
+  "temp_removed": true,
+  "caller_TEMP_unchanged": true,
+  "production_scheduler_runs": 0,
+  "provider_requests": 0,
+  "model_requests": 0,
+  "loopback_HTTP_only": true,
+  "queued_jobs": "owned temporary print/error/deadline fixtures only"
+}

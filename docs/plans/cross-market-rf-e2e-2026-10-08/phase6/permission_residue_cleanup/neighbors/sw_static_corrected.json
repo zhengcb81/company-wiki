@@ -1,0 +1,56 @@
+{
+  "checks": [
+    {
+      "name": "sort owned test imports only",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-m",
+        "ruff",
+        "check",
+        "--no-cache",
+        "--fix",
+        "tests/test_ui_scheduler_intent.py"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.156,
+      "stdout": "Found 1 error (1 fixed, 0 remaining).\n",
+      "stderr": ""
+    },
+    {
+      "name": "required static-only",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "scripts/checks.py",
+        "--static-only"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 1.251,
+      "stdout": "StockWiki checks — mode=static\nworkspace root: C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\sw-permission-residue\n=== ruff ===\n  $ C:\\Miniconda\\python.exe -m ruff check stockwiki tests scripts\nAll checks passed!\nPASS  ruff (0.2s)\n=== validate-framework ===\n  $ C:\\Miniconda\\python.exe -B -m stockwiki.cli --root C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\sw-permission-residue validate-framework --static\n[warning] stockwiki\\quick_scan_backup.py: 模块 656 行（>600）：偏大，建议分解为 <600 行的子模块（诊断项，不阻断）\n[warning] stockwiki\\quick_scan_store.py: 模块 969 行（>600）：偏大，建议分解为 <600 行的子模块（诊断项，不阻断）\nFramework validation passed with 2 warning(s).\nPASS  validate-framework (1.0s)\nALL CHECKS PASSED\n",
+      "stderr": ""
+    },
+    {
+      "name": "frontend syntax",
+      "command": [
+        "node",
+        "--check",
+        "stockwiki/ui_static/app.js"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.074,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "earlier_failures": [
+    "sw_green.json: caller RUFF_NO_CACHE=1",
+    "sw_static_import_failure.json: owned new test import ordering I001 fixed by Ruff only"
+  ],
+  "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\pSwStatic-72nssixd",
+  "temp_removed": true,
+  "caller_TEMP_unchanged": true,
+  "provider_requests": 0,
+  "production_scheduler_runs": 0,
+  "full_suite_repeated": false
+}

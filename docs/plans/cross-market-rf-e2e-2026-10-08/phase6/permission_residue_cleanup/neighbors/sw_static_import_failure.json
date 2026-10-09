@@ -1,0 +1,24 @@
+{
+  "checks": [
+    {
+      "name": "required static-only corrected caller",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "scripts/checks.py",
+        "--static-only"
+      ],
+      "exit_code": 1,
+      "duration_seconds": 1.318,
+      "stdout": "StockWiki checks — mode=static\nworkspace root: C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\sw-permission-residue\n=== ruff ===\n  $ C:\\Miniconda\\python.exe -m ruff check stockwiki tests scripts\nI001 [*] Import block is un-sorted or un-formatted\n --> tests\\test_ui_scheduler_intent.py:3:1\n  |\n1 |   \"\"\"Exercise the actual scheduler button action with a local JavaScript runtime.\"\"\"\n2 |\n3 | / import json\n4 | | import shutil\n5 | | import subprocess\n6 | | from pathlib import Path\n7 | |\n8 | | import pytest\n  | |_____________^\n  |\nhelp: Organize imports\n\nFound 1 error.\n[*] 1 fixable with the `--fix` option.\nFAIL  ruff (0.4s)\n=== validate-framework ===\n  $ C:\\Miniconda\\python.exe -B -m stockwiki.cli --root C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\sw-permission-residue validate-framework --static\n[warning] stockwiki\\quick_scan_backup.py: 模块 656 行（>600）：偏大，建议分解为 <600 行的子模块（诊断项，不阻断）\n[warning] stockwiki\\quick_scan_store.py: 模块 969 行（>600）：偏大，建议分解为 <600 行的子模块（诊断项，不阻断）\nFramework validation passed with 2 warning(s).\nPASS  validate-framework (0.8s)\nSOME CHECKS FAILED: ruff\n",
+      "stderr": ""
+    }
+  ],
+  "first_caller_failure": "sw_green.json retained: RUFF_NO_CACHE=1 rejected by Ruff; corrected to true, no test/assertion/code relaxation",
+  "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\pSwStatic-slb5xc48",
+  "temp_removed": true,
+  "caller_TEMP_unchanged": true,
+  "provider_requests": 0,
+  "production_scheduler_runs": 0,
+  "full_suite_repeated": false
+}
