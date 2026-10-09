@@ -11,6 +11,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 import re
 
+from .n6_scope_changes import SCOPE_CHANGE_JOIN, scope_change_reasons
+
 
 @dataclass(frozen=True)
 class OperatingFact:
@@ -200,7 +202,7 @@ _DETECTOR_SIGNALS: tuple[
 # Union used to find minimal unit windows whose joined text carries a fact that
 # no single unit expresses (a sentence split across PDF blocks).
 OPERATING_FACT_JOIN = re.compile(
-    "|".join(pattern.pattern for pattern, _, _, _ in _DETECTOR_SIGNALS),
+    "|".join([*(pattern.pattern for pattern, _, _, _ in _DETECTOR_SIGNALS), SCOPE_CHANGE_JOIN.pattern]),
     re.IGNORECASE,
 )
 
@@ -222,6 +224,14 @@ def detect_operating_fact(text: str) -> OperatingFact:
         for topic in fact_topics:
             if topic not in topics:
                 topics.append(topic)
+    scope_reasons = scope_change_reasons(text)
+    legacy_matched = matched
+    if scope_reasons:
+        matched = True
+        score += 3
+        reasons.extend(reason for reason in scope_reasons if reason not in reasons)
+        if "core_business" not in topics:
+            topics.append("core_business")
     if not matched:
         return _NONE
     return OperatingFact(
@@ -229,7 +239,7 @@ def detect_operating_fact(text: str) -> OperatingFact:
         topics=tuple(topics),
         reasons=tuple(reasons),
         score=score,
-        financial_exempt=re.search(r"\d", text) is not None,
+        financial_exempt=legacy_matched and re.search(r"\d", text) is not None,
     )
 
 

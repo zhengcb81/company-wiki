@@ -10,7 +10,10 @@ from types import MappingProxyType
 from typing import Literal
 
 from .narrative_candidates import EvidenceCandidate
-from .n6_candidate_completion import linkable
+from .n6_candidate_completion import (
+    BUSINESS_CHARACTER_WINDOW, MAX_COMPLETION_UNITS, ends_sentence, linkable,
+)
+from .narrative_visual_units import is_ocr_unit, ocr_identity
 from .narrative_document import NarrativeUnit
 
 
@@ -79,18 +82,35 @@ def _match(pattern: re.Pattern[str], text: str) -> bool:
     return pattern.search(text) is not None
 
 
-def _unit_by_location(
-    units: Sequence[NarrativeUnit],
-) -> dict[tuple[str, int | None, int | None], NarrativeUnit]:
+def _location_key(unit: NarrativeUnit, offset: int = 0) -> tuple:
+    carrier = ocr_identity(unit) if is_ocr_unit(unit) else ()
+    return (
+        unit.source_id, unit.coordinates.page_number,
+        (unit.coordinates.paragraph_index or 0) + offset, unit.unit_kind, carrier,
+    )
+
+
+def _unit_by_location(units: Sequence[NarrativeUnit]) -> dict[tuple, NarrativeUnit]:
     return {
-        (
-            unit.source_id,
-            unit.coordinates.page_number,
-            unit.coordinates.paragraph_index,
-        ): unit
-        for unit in units
-        if unit.unit_kind == "pdf_text_block"
+        _location_key(unit): unit for unit in units
+        if unit.unit_kind == "pdf_text_block" or is_ocr_unit(unit)
     }
+
+
+def _ocr_group_room(store: _Store, anchor: NarrativeUnit, adjacent: NarrativeUnit) -> bool:
+    if not is_ocr_unit(anchor):
+        return True
+    group_id = store.group_ids.get(anchor.unit_id)
+    members = [
+        c.unit for c in store.candidates
+        if c.unit.unit_id == anchor.unit_id or (
+            group_id is not None and store.group_ids.get(c.unit.unit_id) == group_id
+        )
+    ]
+    return (
+        len(members) < MAX_COMPLETION_UNITS
+        and sum(len(u.raw_text) for u in (*members, adjacent)) <= BUSINESS_CHARACTER_WINDOW
+    )
 
 
 def _subject_signal(unit: NarrativeUnit, rules: NeighborRules) -> bool:
@@ -109,6 +129,8 @@ def _valid_previous(
     if previous is None or previous.unit_id in selected_ids:
         return False
     if not linkable(previous, event):
+        return False
+    if is_ocr_unit(previous) and ends_sentence(previous.raw_text):
         return False
     if not _subject_signal(previous, rules) or len(previous.raw_text) < 12:
         return False
@@ -147,24 +169,22 @@ def _add_adjacent_subjects(
 def _add_adjacent_subject(
     store: _Store,
     candidate: EvidenceCandidate,
-    by_location: Mapping[tuple[str, int | None, int | None], NarrativeUnit],
+    by_location: Mapping[tuple, NarrativeUnit],
     selected_ids: set[str],
     rules: NeighborRules,
 ) -> None:
     event = candidate.unit
-    if event.unit_kind != "pdf_text_block":
+    if event.unit_kind != "pdf_text_block" and not is_ocr_unit(event):
         return
     if not _match(rules.high_value_event, event.raw_text):
         return
-    key = (
-        event.source_id,
-        event.coordinates.page_number,
-        (event.coordinates.paragraph_index or 0) - 1,
-    )
+    key = _location_key(event, -1)
     previous = by_location.get(key)
     if not _valid_previous(previous, event, selected_ids, rules):
         return
     assert previous is not None
+    if not _ocr_group_room(store, event, previous):
+        return
     group = _compatible_group(store.group_ids, event.unit_id, previous.unit_id)
     if group is False:
         return
@@ -224,24 +244,22 @@ def _add_heading_continuations(
 def _add_heading_continuation(
     store: _Store,
     candidate: EvidenceCandidate,
-    by_location: Mapping[tuple[str, int | None, int | None], NarrativeUnit],
+    by_location: Mapping[tuple, NarrativeUnit],
     selected_ids: set[str],
     rules: NeighborRules,
 ) -> None:
     heading = candidate.unit
-    if heading.unit_kind != "pdf_text_block":
+    if heading.unit_kind != "pdf_text_block" and not is_ocr_unit(heading):
         return
     if not _match(rules.project_rationale, heading.raw_text):
         return
-    key = (
-        heading.source_id,
-        heading.coordinates.page_number,
-        (heading.coordinates.paragraph_index or 0) + 1,
-    )
+    key = _location_key(heading, 1)
     continuation = by_location.get(key)
     if not _valid_continuation(continuation, heading, selected_ids, rules):
         return
     assert continuation is not None
+    if not _ocr_group_room(store, heading, continuation):
+        return
     group = _compatible_group(store.group_ids, heading.unit_id, continuation.unit_id)
     if group is False:
         return

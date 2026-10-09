@@ -32,6 +32,7 @@ from .narrative_group_candidates import (
 )
 from .narrative_finalize import finalize_selection
 from .narrative_neighbors import NeighborRules, enrich_neighbor_context
+from .narrative_ocr_groups import build_ocr_context_groups
 from .narrative_pdf_groups import PdfGroupRules, build_pdf_context_groups
 from .narrative_pdf_qa import QA_FRAGMENT_VERSION, pdf_qa_parts, question_markers
 from .narrative_project_context import enrich_fundraising_table_context
@@ -61,7 +62,7 @@ NARRATIVE_SELECTOR_NAME = "select_narrative_evidence"
 # and keeps unrecognized business documents reviewable. The version also pins
 # batch generation identity, so old selection results cannot be silently reused.
 # Parsing, source bytes and locator construction remain unchanged.
-NARRATIVE_SELECTOR_VERSION = "0.4.2"
+NARRATIVE_SELECTOR_VERSION = "0.5.0"
 _FINANCIAL_TERMS = re.compile(
     r"资产负债表|利润表|现金流量表|每股收益|归母净利润|营业收入|营业成本|"
     r"货币资金|应收账款|存货|固定资产|加权平均|基本每股|稀释每股|"
@@ -1459,17 +1460,15 @@ def _base_candidates(
 def _pdf_context_groups(
     units: Sequence[NarrativeUnit],
 ) -> tuple[tuple[str, tuple[NarrativeUnit, ...], str], ...]:
-    """Compatibility seam for tests while grouping lives in its own layer."""
+    """Compatibility seam; PDF points and OCR image pixels stay separate."""
+    rules = PdfGroupRules(
+        project_heading=_PROJECT_SECTION_HEADING,
+        business_heading=_BUSINESS_SECTION_HEADING,
+        heading_only=_HEADING_ONLY,
+    )
     return cast(
         tuple[tuple[str, tuple[NarrativeUnit, ...], str], ...],
-        build_pdf_context_groups(
-            units,
-            PdfGroupRules(
-                project_heading=_PROJECT_SECTION_HEADING,
-                business_heading=_BUSINESS_SECTION_HEADING,
-                heading_only=_HEADING_ONLY,
-            ),
-        ),
+        build_pdf_context_groups(units, rules) + build_ocr_context_groups(units, rules),
     )
 
 
