@@ -318,3 +318,9 @@ W01三仓main已推，精确SHA远端CI全部success（CWP98s、FF80s、RF37s）
 ET131PASS/66.70秒（MAIN_GREEN），五种actual supervisor/worker/mock-HTTP CLI原证据保留。FF新增4post-fetch失败RED→33责任PASS/5.06秒；CWP附加metadata两RED→25责任PASS/6.20秒。实际FF2→ET真实worker→CWP入库/verified open→重复0 HTTP、一个canonical原件，以及20386B/1024B超限terminal无入库，18检查点PASS/14.708秒；owned根均恢复、supplier0。ET f4f2eca、FF59c4d0d已精准commit，待MAIN按ET→FF顺序并线及FF定点安装。
 
 真实发现：CWP要求provider原始JSON恰好5字段，ET允许额外metadata导致成功数据入库被拒；已取消该exactset许可，必需字段/期间/int年份/正文SHA仍绑定。后续入库/坏ref/verified-open失败曾丢已完成ET计量并泛化为retryable；同一post-fetch边界现保留receipt且不再建议下载重试。测试调用者先错用1.1带2.0字段、mock事件误用event而非op、post-fetch fixture未配tool均更正，失败记录保留，没有改产品断言。
+
+## 2026-10-09T03:18:48.391228+00:00 — W02/W03主线已落地
+
+ETmain f4f2eca、FFmain59c4d0d已推，FF59c4d0d精确CI37878099537 success；FF runtime仅1文件同步两物理安装target、2保护config/output SHA不变。CWP c54962f2已推且精确CI37878152859 success，W03并线HEADf788a07a完成。合并后W03实际责任113PASS/33.14秒，三格式public import/finite/read/reuse；main FF→ETcanonical→CWP18检查点PASS/16.18秒。独立TEMP及生产配置均保持。
+
+RF W04功能及HTML消费已提交隔离支线，W05正在实现，不冒称整个RF或主线完成。跨run重POST共因查明，已写main_cross_run_narrative_reuse.md并复用W03 clean工作树从master建立新分支。离线OCR调查已证明RapidOCR本地模型可运行且单页主要文字准确，全22页正文/版本化locator仍待施工，不把封面成功叫图片功能已验收。

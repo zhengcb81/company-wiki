@@ -1,0 +1,366 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/integration/test_official_source_flow.py",
+    "tests/unit/test_source_facts.py",
+    "tests/unit/test_narrative_transport_contracts.py",
+    "tests/document_normalization/test_html.py",
+    "tests/document_normalization/test_replay_and_determinism.py",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w03main-n0841qza\\pytest"
+  ],
+  "exit_code": 0,
+  "stdout": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\w03main-n0841qza\\\\pytest\", \"requested_basetemp_len\": 55, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nbenchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\nplugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 113 items\n\ntests\\integration\\test_official_source_flow.py ........................  [ 21%]\ntests\\unit\\test_source_facts.py .......................                  [ 41%]\ntests\\unit\\test_narrative_transport_contracts.py ....................... [ 61%]\n.....                                                                    [ 66%]\ntests\\document_normalization\\test_html.py .......................        [ 86%]\ntests\\document_normalization\\test_replay_and_determinism.py ............ [ 97%]\n...                                                                      [100%]\n\n============================ 113 passed in 33.14s =============================\n",
+  "stderr": "",
+  "seconds": 37.842,
+  "temporary_root_restored": true,
+  "production_configuration_unchanged": true,
+  "supplier_cost_usd": "0",
+  "actual_public_cli_proof": {
+    "schema_version": "w03-engineering-proof/1",
+    "fixture_only": true,
+    "supplier_requests": 0,
+    "supplier_cost_usd": "0",
+    "loopback_requests": 3,
+    "simulated_budget": {
+      "estimated_micro_usd": 333,
+      "tokens": 276,
+      "unknown_reservations": 0,
+      "unsettled_reservations": 0
+    },
+    "repeat_budget": {
+      "estimated_micro_usd": 333,
+      "tokens": 276,
+      "unknown_reservations": 0,
+      "unsettled_reservations": 0
+    },
+    "repeat_import_statuses": [
+      "deduplicated",
+      "deduplicated",
+      "deduplicated"
+    ],
+    "canonical_bytes_and_sidecars_unchanged": true,
+    "documents": [
+      {
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d",
+          "source_id": "urn:company-wiki:source:sha256:f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d",
+          "content_sha256": "f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d",
+          "byte_size": 120,
+          "mime_type": "text/html",
+          "schema_version": "2.0"
+        },
+        "narrative_ref": {
+          "artifact_sha256": "1576ae79794ed0a59028441297f99eee1155ffe44d07f06fe7833686937e23ce",
+          "artifact_version_id": "narrative-79109275a5394e9298fcd0c689ab7eb7",
+          "byte_size": 3454,
+          "schema_version": "narrative-ref/1",
+          "source_ref": {
+            "byte_size": 120,
+            "content_sha256": "f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d",
+            "document_id": "urn:company-wiki:document:sha256:f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d",
+            "mime_type": "text/html",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d"
+          }
+        },
+        "read_receipt": {
+          "as_of_date": "2026-10-09",
+          "locator_count": 1,
+          "manifest": {
+            "byte_size": 120,
+            "canonical_entity_id": null,
+            "collector_name": "official-original-import",
+            "collector_version": "1.0.0",
+            "content_sha256": "f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d",
+            "display_name": "Acme",
+            "document_id": "urn:company-wiki:document:sha256:f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d",
+            "document_kind": "investor_relations",
+            "fiscal_period": null,
+            "fiscal_year": null,
+            "form_type": null,
+            "language": "en",
+            "market": "US",
+            "mime_type": "text/html",
+            "period_end": null,
+            "provider": "official",
+            "provider_document_id": "f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d",
+            "published_date": "2026-08-26",
+            "retrieved_at": "2026-10-09T00:00:00Z",
+            "security_id": "ACME",
+            "source_id": "urn:company-wiki:source:sha256:f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d",
+            "source_url": "https://official.example/Acme/update",
+            "title": "Acme business update"
+          },
+          "narrative_ref": {
+            "artifact_sha256": "1576ae79794ed0a59028441297f99eee1155ffe44d07f06fe7833686937e23ce",
+            "artifact_version_id": "narrative-79109275a5394e9298fcd0c689ab7eb7",
+            "byte_size": 3454,
+            "schema_version": "narrative-ref/1",
+            "source_ref": {
+              "byte_size": 120,
+              "content_sha256": "f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d",
+              "document_id": "urn:company-wiki:document:sha256:f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d",
+              "mime_type": "text/html",
+              "schema_version": "2.0",
+              "source_id": "urn:company-wiki:source:sha256:f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d"
+            }
+          },
+          "quality_status": "needs_review",
+          "read_at": "2026-10-09T03:14:27.932186+00:00",
+          "replay_status": "verified",
+          "schema_version": "narrative-read-receipt/1",
+          "selection_status": "selected",
+          "source_read_policy_sha256": "292626b9b5d382d4bbfb5bbd970bbea157e4bff750312ef29d5dd134b65350cb",
+          "status": "ok"
+        },
+        "parser_versions": {
+          "bundle_producer": "1.0.0",
+          "material": null,
+          "model": "stub-model",
+          "parser": "1.0.0",
+          "prompt": "1.6.0",
+          "selector": "0.4.2"
+        },
+        "summary_language": "en",
+        "translate": false,
+        "locators": [
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:07b6894caab7b2c7000e4d7a8a81dceef4b525bc82a7697b53dd63faac087882",
+            "locator": "loc:v1/paragraph:1"
+          }
+        ],
+        "selection": {
+          "candidate_count": 1,
+          "coverage_complete": true,
+          "dropped_financial_count": 0,
+          "lines_total": 2,
+          "omitted_candidate_count": 0,
+          "pages_read": 0,
+          "pages_total": 0,
+          "selected_count": 1,
+          "source_units": 2,
+          "status": "selected",
+          "tables_scanned": 0,
+          "tables_total": 0
+        }
+      },
+      {
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:042e153c0d329616c731a3bfbdc3a69f61e86a57830616fd25de8b4b3a133b69",
+          "source_id": "urn:company-wiki:source:sha256:042e153c0d329616c731a3bfbdc3a69f61e86a57830616fd25de8b4b3a133b69",
+          "content_sha256": "042e153c0d329616c731a3bfbdc3a69f61e86a57830616fd25de8b4b3a133b69",
+          "byte_size": 836,
+          "mime_type": "application/pdf",
+          "schema_version": "2.0"
+        },
+        "narrative_ref": {
+          "artifact_sha256": "7f1aff42250cddbcfaf36d332c6117353ad58db16d2a471158d5fee6c50e171c",
+          "artifact_version_id": "narrative-51202b4197de478a91c75b13d7ec3d60",
+          "byte_size": 3555,
+          "schema_version": "narrative-ref/1",
+          "source_ref": {
+            "byte_size": 836,
+            "content_sha256": "042e153c0d329616c731a3bfbdc3a69f61e86a57830616fd25de8b4b3a133b69",
+            "document_id": "urn:company-wiki:document:sha256:042e153c0d329616c731a3bfbdc3a69f61e86a57830616fd25de8b4b3a133b69",
+            "mime_type": "application/pdf",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:042e153c0d329616c731a3bfbdc3a69f61e86a57830616fd25de8b4b3a133b69"
+          }
+        },
+        "read_receipt": {
+          "as_of_date": "2026-10-09",
+          "locator_count": 1,
+          "manifest": {
+            "byte_size": 836,
+            "canonical_entity_id": null,
+            "collector_name": "official-original-import",
+            "collector_version": "1.0.0",
+            "content_sha256": "042e153c0d329616c731a3bfbdc3a69f61e86a57830616fd25de8b4b3a133b69",
+            "display_name": "Acme",
+            "document_id": "urn:company-wiki:document:sha256:042e153c0d329616c731a3bfbdc3a69f61e86a57830616fd25de8b4b3a133b69",
+            "document_kind": "investor_call_transcript",
+            "fiscal_period": null,
+            "fiscal_year": null,
+            "form_type": null,
+            "language": "unknown",
+            "market": "US",
+            "mime_type": "application/pdf",
+            "period_end": null,
+            "provider": "official",
+            "provider_document_id": "042e153c0d329616c731a3bfbdc3a69f61e86a57830616fd25de8b4b3a133b69",
+            "published_date": "2026-08-26",
+            "retrieved_at": "2026-10-09T00:00:00Z",
+            "security_id": "ACME",
+            "source_id": "urn:company-wiki:source:sha256:042e153c0d329616c731a3bfbdc3a69f61e86a57830616fd25de8b4b3a133b69",
+            "source_url": "https://official.example/Acme/update",
+            "title": "Acme business update"
+          },
+          "narrative_ref": {
+            "artifact_sha256": "7f1aff42250cddbcfaf36d332c6117353ad58db16d2a471158d5fee6c50e171c",
+            "artifact_version_id": "narrative-51202b4197de478a91c75b13d7ec3d60",
+            "byte_size": 3555,
+            "schema_version": "narrative-ref/1",
+            "source_ref": {
+              "byte_size": 836,
+              "content_sha256": "042e153c0d329616c731a3bfbdc3a69f61e86a57830616fd25de8b4b3a133b69",
+              "document_id": "urn:company-wiki:document:sha256:042e153c0d329616c731a3bfbdc3a69f61e86a57830616fd25de8b4b3a133b69",
+              "mime_type": "application/pdf",
+              "schema_version": "2.0",
+              "source_id": "urn:company-wiki:source:sha256:042e153c0d329616c731a3bfbdc3a69f61e86a57830616fd25de8b4b3a133b69"
+            }
+          },
+          "quality_status": "needs_review",
+          "read_at": "2026-10-09T03:14:29.561820+00:00",
+          "replay_status": "verified",
+          "schema_version": "narrative-read-receipt/1",
+          "selection_status": "selected",
+          "source_read_policy_sha256": "54be4c9f9a82cac1a0a697e7ee8443a25c49c853b78553a6c525b9627d12d5c6",
+          "status": "ok"
+        },
+        "parser_versions": {
+          "bundle_producer": "1.0.0",
+          "material": null,
+          "model": "stub-model",
+          "parser": "0.1.1",
+          "prompt": "1.6.0",
+          "selector": "0.4.2"
+        },
+        "summary_language": "en",
+        "translate": false,
+        "locators": [
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:efa0174a984759d9ad01714fb35926e8c002277152ca5ca96d1acd9aa50e3f16",
+            "locator": "loc:v1/page:1/paragraph:0"
+          }
+        ],
+        "selection": {
+          "candidate_count": 1,
+          "coverage_complete": true,
+          "dropped_financial_count": 0,
+          "lines_total": 0,
+          "omitted_candidate_count": 0,
+          "pages_read": 1,
+          "pages_total": 1,
+          "selected_count": 1,
+          "source_units": 1,
+          "status": "selected",
+          "tables_scanned": 1,
+          "tables_total": 1
+        }
+      },
+      {
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc",
+          "source_id": "urn:company-wiki:source:sha256:c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc",
+          "content_sha256": "c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc",
+          "byte_size": 119,
+          "mime_type": "text/plain",
+          "schema_version": "2.0"
+        },
+        "narrative_ref": {
+          "artifact_sha256": "8c748bd41bc5dc9dc230c55cfad26d7a5ac9dd12da8cbbc774adadda1920ce91",
+          "artifact_version_id": "narrative-537e75d397d847bd9d540e75a436df5b",
+          "byte_size": 4146,
+          "schema_version": "narrative-ref/1",
+          "source_ref": {
+            "byte_size": 119,
+            "content_sha256": "c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc",
+            "document_id": "urn:company-wiki:document:sha256:c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc",
+            "mime_type": "text/plain",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc"
+          }
+        },
+        "read_receipt": {
+          "as_of_date": "2026-10-09",
+          "locator_count": 1,
+          "manifest": {
+            "byte_size": 119,
+            "canonical_entity_id": null,
+            "collector_name": "official-original-import",
+            "collector_version": "1.0.0",
+            "content_sha256": "c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc",
+            "display_name": "Acme",
+            "document_id": "urn:company-wiki:document:sha256:c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc",
+            "document_kind": "investor_call_transcript",
+            "fiscal_period": null,
+            "fiscal_year": null,
+            "form_type": null,
+            "language": "zh",
+            "market": "US",
+            "mime_type": "text/plain",
+            "period_end": null,
+            "provider": "official",
+            "provider_document_id": "c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc",
+            "published_date": "2026-08-26",
+            "retrieved_at": "2026-10-09T00:00:00Z",
+            "security_id": "ACME",
+            "source_id": "urn:company-wiki:source:sha256:c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc",
+            "source_url": "https://official.example/Acme/update",
+            "title": "Acme business update"
+          },
+          "narrative_ref": {
+            "artifact_sha256": "8c748bd41bc5dc9dc230c55cfad26d7a5ac9dd12da8cbbc774adadda1920ce91",
+            "artifact_version_id": "narrative-537e75d397d847bd9d540e75a436df5b",
+            "byte_size": 4146,
+            "schema_version": "narrative-ref/1",
+            "source_ref": {
+              "byte_size": 119,
+              "content_sha256": "c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc",
+              "document_id": "urn:company-wiki:document:sha256:c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc",
+              "mime_type": "text/plain",
+              "schema_version": "2.0",
+              "source_id": "urn:company-wiki:source:sha256:c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc"
+            }
+          },
+          "quality_status": "needs_review",
+          "read_at": "2026-10-09T03:14:31.213457+00:00",
+          "replay_status": "verified",
+          "schema_version": "narrative-read-receipt/1",
+          "selection_status": "selected",
+          "source_read_policy_sha256": "312c7a9cf68d48d6c5e0702cb5b93a2300f092074ee06f8355a04e793d90b76b",
+          "status": "ok"
+        },
+        "parser_versions": {
+          "bundle_producer": "1.0.0",
+          "material": "transcript-original-text/1.0.0",
+          "model": "stub-model",
+          "parser": "0.1.1",
+          "prompt": "1.6.0",
+          "selector": "0.4.2"
+        },
+        "summary_language": "zh",
+        "translate": false,
+        "locators": [
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:81c05fab6dad2c187048108372dcad9051af3f51f36b4d529613f14b839f34ea",
+            "locator": "loc:v1/paragraph:1/chars:0-27"
+          }
+        ],
+        "selection": {
+          "candidate_count": 1,
+          "coverage_complete": true,
+          "dropped_financial_count": 0,
+          "lines_total": 2,
+          "omitted_candidate_count": 0,
+          "pages_read": 0,
+          "pages_total": 0,
+          "selected_count": 1,
+          "source_units": 1,
+          "status": "selected",
+          "tables_scanned": 0,
+          "tables_total": 0
+        }
+      }
+    ]
+  }
+}
