@@ -545,3 +545,10 @@ CWP d1ce50ee真正pre-push2346PASS/113.39s，精确CI37910840899 SUCCESS；FF23d
 真实启动4个互斥施工写集：MAIN W01→W02→W03；fresh_canonical_capture在managed fresh-capture-20261009（baseceac91e7）做W04；rf_root_trace在TEMP rf-fresh-dag-20261009（base79139534）做W10→W14；fresh_transcript_launch在FF/ET独占工作树做W07。W04 additive capture/recover CLI扩写已协调，W05待该接口交接；其余共用边界串行。没有新人工审批/许可，Dayu零改动，无新付费或真实下载。W01准确RED13FAIL/6PASS（首次控制台编码/夹具分类问题不计产品缺陷），测试TEMP自动恢复，小RED日志留存。
 
 W01共用locale适配：准确13RED→119责任测试PASS/10.74秒，Ruff通过；保留source declared tag与worker family，旧4字段线格式及版本恢复兼容，零原文/配置/模型改动。新契约放tests/unit保证当前CI/push覆盖，M3原H1真实链仍待执行。三run协调员64映射原生event已写，check unmapped=[]/event_errors=[]，仍needs_remediation；不把映射完整说成修复。
+
+
+## 2026-10-09 16:31 UTC MAIN大节点进度
+
+CI子包仍已关闭：已发布CWP284328bb/CI37925080695、FF44c778b4/CI37923517689、RF5acad6a1/CI37919247211全部exact SUCCESS；pre-commit快速static、push共用行为清单。W05现独立源码审查，103规范化+14原CLI/Worker端到端、真实微软41/41段回放通过后已正常合master3b842eaa；合后W03/W05同入口80PASS/13.05s。自然电话会10契约加入既有FAST_CONTRACT_CASES，先2RED/35PASS再GREEN，不另开CI或commit门。新普通commit/push及远端exact验收尚待，不用本地绿冒称已发布。
+
+W06同任务预算从本地盘点/元数据/枚举/hash一直传到ready验证，实际MSFT同期间缺原文正确not_found，不再因无关旧年度元数据阻断下载；独占工作树196PASS/2明确skip，最后交接待。W08 typed usage/cause跨CLI绿后独立复核又发现中间RF candidates公开嵌套正文泄漏，正在原责任层RED根修，暂不验收。W11独立发现输入/输出同路径覆盖历史及atomic清理遮蔽主因，已修为明确argv绑定、历史/消费副本隔离、保留真实childexit及主异常；59全suite/28.352s、15focused、新版4个实际安装RF调用通过，集中独立复审/commit/定点安装待。以上均零真实供应商/LLM付费，旧封存/原件/配置不改，不能当M3研究通过。

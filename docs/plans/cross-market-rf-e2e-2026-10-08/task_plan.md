@@ -1,14 +1,14 @@
 # 三市场真实收入预测端到端审计
 
-## 最新执行节点（2026-10-09 11:35 UTC；优先于下文历史Next Step）
+## 最新执行节点（2026-10-09 12:00 UTC；优先于下文历史Next Step）
 
-**当前 Next Step：** MAIN正常提交/推送W03共享CI入口和本轮发布安装收尾，确认精确远端CI；独占W05继续DOCX/官方电话会HTML通用处理，W06先做真实缺年报元数据只读归因，再实施W06/W08/W11等冻结共因卡。原三家M3、新三家M4与NVDA loop仍后置。
+**当前 Next Step：** 发布W05已验收本地并线和共享CI入口；W06收尾交接，W08修独立反例，W11集中复审后commit/定点安装；之后W09/W12/W13。M3/M4/NVDA loop仍未开始，不以工程绿替代研究。
 
 - 昨日CI根因子包已closed；commit维持快速static，push覆盖全部未推范围与受影响unit，CI/push共用契约清单。新入口已实际拦住W02旧版本断言再修复发布，不许诺静态检查能阻止所有跨平台缺陷。
 - W04完整三提交已并主线；实现者74PASS，独立10PASS+2actual controls，普通push2387PASS/142.74s；cba23b8e精确CI37923124555 SUCCESS/94s。总deadline/真实usage/丢返回恢复/清理幂等已工程验收，原研究M3未做。
 - W07 ETc91f5f54与FF44c778b4已推各main；FF普通push601PASS/7明确SKIP/78subtests/62.07s，精确CI37923517689 SUCCESS/87s。独立持久配置10PASS及真实默认FF→ET supervisor→CWP import/reader/reuse链接受。5文件定点同步两物理技能根，Claude沿用agents junction；未选代码drift=0。两份配置只加工具/已有key文件位置，密钥不复制。默认安装路径已无临时env复验。真实FMP鉴权/entitlement留M3。
-- W03已独立接受并合主线：source8395299f、handoff589439b4，集中254PASS/独立89PASS。共享push/CI入口先2RED后66PASS；摘要输出预算规划、原子组明确引用闭合、截断费用实账、历史摘要兼容已验证。正常发布/精确CI待本批完成；真实三家模型内容M3仍待。
-- W01/W02、RF W10/W14已发布/工程M2接受。W05互斥工作树施工，W06互斥只读调查；W08/W09/W11/W12/W13及M3/M4/loop未完成，工程绿不替代研究。
+- W03已独立接受并合主线：source8395299f、handoff589439b4，集中254PASS/独立89PASS。共享push/CI入口先2RED后66PASS；摘要输出预算规划、原子组明确引用闭合、截断费用实账、历史摘要兼容已验证。284328bb普通push2418PASS/122.65s、精确CI37925080695 SUCCESS/86s；真实三家模型内容M3仍待。
+- W01/W02、RF W10/W14已发布/工程M2接受。W05独立M2与合后80检查通过已并master，发布待；W06最终源交接待，W08独立发现candidate泄漏正根修；W11独立残留先RED后59全suite+15集中、新版4次实际installed RF通过待集中复审/commit/install。W09/W12/W13及M3/M4/loop未完成，工程绿不替代研究。
 - [本轮发布/安装回执](phase6/fresh_root_implementation_2026-10-09/main_capture_transcript_integration.json)与[冻结14卡](phase6/fresh_root_remediation_2026-10-09/IMPLEMENTATION.md)为准，64 finding矩阵不改；原件/生产catalog配置/Dayu/IQS不改，零新增收费调用，旧unknown和累计预算保留。
 
 ## 当前施工状态（2026-10-09；历史阶段完成不代表Phase6完成）
@@ -206,3 +206,10 @@ CWP ea76998c 已推 master，精确 CI37888084960 成功。RF source-clock 4.1.1
 MAIN 新增 repair 仅为升级后的明确 generation：保留父失败/任务/账，实读 settled ledger，执行版本必须变化，已花费用沿累计 baseline 一次承接；9RED→9GREEN，真实同版本拒绝且无新 AUTO/模型。cleanup 比较 durable/origin receipt SHA，仅清理 owned TEMP，失败状态不变。旧22页 origin 保留，不能盲 resume terminal jobs。
 
 下一步：接收三责任包→正常并线、安装、push→升级后的真实22页 public/read/跨run零调用复用→固定71对照→原三家及四路实际审查→新三家及四路实际审查→恢复冻结NVDA及公司池loop。未完成主线之前不启动新随机样本，不增加小节点人签；原件保护与累计USD20/2M授权沿用。
+
+
+## 2026-10-09 16:31 UTC MAIN大节点进度
+
+CI子包仍已关闭：已发布CWP284328bb/CI37925080695、FF44c778b4/CI37923517689、RF5acad6a1/CI37919247211全部exact SUCCESS；pre-commit快速static、push共用行为清单。W05现独立源码审查，103规范化+14原CLI/Worker端到端、真实微软41/41段回放通过后已正常合master3b842eaa；合后W03/W05同入口80PASS/13.05s。自然电话会10契约加入既有FAST_CONTRACT_CASES，先2RED/35PASS再GREEN，不另开CI或commit门。新普通commit/push及远端exact验收尚待，不用本地绿冒称已发布。
+
+W06同任务预算从本地盘点/元数据/枚举/hash一直传到ready验证，实际MSFT同期间缺原文正确not_found，不再因无关旧年度元数据阻断下载；独占工作树196PASS/2明确skip，最后交接待。W08 typed usage/cause跨CLI绿后独立复核又发现中间RF candidates公开嵌套正文泄漏，正在原责任层RED根修，暂不验收。W11独立发现输入/输出同路径覆盖历史及atomic清理遮蔽主因，已修为明确argv绑定、历史/消费副本隔离、保留真实childexit及主异常；59全suite/28.352s、15focused、新版4个实际安装RF调用通过，集中独立复审/commit/定点安装待。以上均零真实供应商/LLM付费，旧封存/原件/配置不改，不能当M3研究通过。

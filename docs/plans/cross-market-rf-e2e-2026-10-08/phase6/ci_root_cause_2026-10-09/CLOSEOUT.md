@@ -36,3 +36,10 @@ W02正常push在本地拦住旧测试的0.5.0写死断言（1939PASS/1FAIL，108
 ## 最新发布最终验收
 
 CWP W02及版本行为测试已正常推送至 `b1888522525f3dad28891c999adc0919bd59443b`：完整待推送范围119个受影响unit路径与去重smoke共1940PASS，107.99秒，未旁路hook。精确远端[37920455948](https://github.com/zhengcb81/company-wiki/actions/runs/37920455948) SUCCESS（10:54:24→10:56:06 UTC，102秒）。此前一次1939PASS/1FAIL在本地成功拦截，未上传；不是远端失败。FF23d25644/37911571894及RF最新主线5acad6a1/[37919247211](https://github.com/zhengcb81/revenue-forecast/actions/runs/37919247211)亦SUCCESS。本次CI根因修复关闭，commit仍快速static；跨平台/未知动态依赖继续由真实CI负责，不保证以后没有新缺陷。
+
+
+## 后续主线验证（W03/W04/W07）
+
+新的同一入口已实际支持连续主线集成：CWP cba23b8e普通push2387PASS/142.74s，exactCI37923124555 SUCCESS94s；W03合入284328bb普通commit约6.2s、push2418PASS/122.65s，exactCI37925080695 SUCCESS86s。FF44c778b4正常push601PASS/7explicitSKIP/78subtests/62.07s，exactCI37923517689 SUCCESS87s。新摘要29项契约纳入现有FAST_CONTRACT_CASES，CI与push共用，入口先2RED→66PASS，commit仍无pytest。完整unit回退发生在runner/config/动态执行重大改动，纯文档推送只shared smoke；不把两分钟push误说成每次commit两分钟，也不许诺所有跨平台未知变化都能由本机阻止。
+
+本子包已关闭；主PWF剩余来源/研究共因仍ACTIVE，不以这些工程绿代替三家研究E2E。用户本次CI请求根因和现状可直接查本文件与findings。

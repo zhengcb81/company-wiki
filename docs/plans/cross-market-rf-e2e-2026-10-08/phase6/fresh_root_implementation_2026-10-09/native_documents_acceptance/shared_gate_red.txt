@@ -1,0 +1,37 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\֣����\Projects\company-wiki
+configfile: pytest.ini
+collected 37 items
+
+tests\unit\test_ci_push_selection.py ................................... [ 94%]
+FF                                                                       [100%]
+
+================================== FAILURES ===================================
+___ test_published_summary_contracts_run_in_both_ci_and_push[--push-checks] ___
+tests\unit\test_ci_push_selection.py:166: in test_published_summary_contracts_run_in_both_ci_and_push
+    assert "tests/contract/test_official_transcript_layouts.py" in seen[0]
+E   AssertionError: assert 'tests/contract/test_official_transcript_layouts.py' in ['C:\\Miniconda\\python.exe', '-m', 'pytest', '-q', '--tb=short', '--timeout=180', ...]
+---------------------------- Captured stdout call -----------------------------
+Push unit scope: documents only (0 paths)
+
+pre-push gate GREEN �� safe to push (then self-monitor CI).
+_ test_published_summary_contracts_run_in_both_ci_and_push[--fast-contracts-only] _
+tests\unit\test_ci_push_selection.py:166: in test_published_summary_contracts_run_in_both_ci_and_push
+    assert "tests/contract/test_official_transcript_layouts.py" in seen[0]
+E   AssertionError: assert 'tests/contract/test_official_transcript_layouts.py' in ['C:\\Miniconda\\python.exe', '-m', 'pytest', '-q', '--tb=short', '--timeout=180', ...]
+---------------------------- Captured stdout call -----------------------------
+
+pre-push gate GREEN �� safe to push (then self-monitor CI).
+============================== warnings summary ===============================
+..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/unit/test_ci_push_selection.py::test_published_summary_contracts_run_in_both_ci_and_push[--push-checks]
+FAILED tests/unit/test_ci_push_selection.py::test_published_summary_contracts_run_in_both_ci_and_push[--fast-contracts-only]
+=================== 2 failed, 35 passed, 1 warning in 0.92s ===================

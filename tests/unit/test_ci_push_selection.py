@@ -163,3 +163,4 @@ def test_published_summary_contracts_run_in_both_ci_and_push(entrypoint, monkeyp
     assert len(seen) == 1
     assert "tests/contract/test_narrative_output_plan.py" in seen[0]
     assert "tests/contract/test_summary_group_coverage.py" in seen[0]
+    assert "tests/contract/test_official_transcript_layouts.py" in seen[0]

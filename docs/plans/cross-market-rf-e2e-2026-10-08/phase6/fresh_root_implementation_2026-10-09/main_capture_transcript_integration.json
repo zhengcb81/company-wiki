@@ -1,7 +1,7 @@
 {
   "schema_version": "fresh-main-integration/1",
   "date": "2026-10-09",
-  "status": "W04_W07_PUBLISHED_INSTALLED_W03_MERGED_PUBLICATION_PENDING",
+  "status": "W03_W04_W07_PUBLISHED_W05_MERGED_M2_ACCEPTED_W06_W08_W11_ACTIVE",
   "frozen_issue_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
   "W04": {
     "source_tip": "68333bc360eb35b84f0616564953411e306f7610",
@@ -81,7 +81,58 @@
     "shared_ci_and_push_tdd_red": 2,
     "shared_gate_green": 66,
     "runtime_installation_delta": [],
-    "remote_CI": "pending",
+    "remote_CI": {
+      "id": 37925080695,
+      "head_sha": "284328bb6f48677dd2999541c14b4bfb54379a04",
+      "conclusion": "success",
+      "duration_seconds": 86
+    },
+    "M3": "pending",
+    "main_published": "284328bb6f48677dd2999541c14b4bfb54379a04",
+    "normal_pre_push": {
+      "passes": 2418,
+      "seconds": 122.65
+    }
+  },
+  "W05": {
+    "state": "M2_accepted_main_merged_remote_pending",
+    "M3": "pending",
+    "source_commit": "97c82dc5fa1b4ee31dad3185ae5b0998b7903418",
+    "main_merge": "3b842eaaaf5a89ff5c8320113ed558b4bd9d8516",
+    "independent_normalization_passes": 103,
+    "independent_native_pipeline_passes": 14,
+    "combined_main_passes": 80,
+    "real_source_replay": "native_documents_acceptance/real_msft_main.json",
+    "shared_gate_red": 2,
+    "shared_ci_contract_module": "tests/contract/test_official_transcript_layouts.py",
+    "runtime_installation_delta": []
+  },
+  "W06": {
+    "state": "TDD_and_real_local_replay_green_final_handoff_pending",
+    "real_causes": [
+      "legacy_inline_date_transform",
+      "wrong_period_failure_classified_target",
+      "metadata_group_cap_used_as_raw_candidate_cap",
+      "direct_company_root_not_registered"
+    ],
+    "diagnosis": "source_facts_diagnosis/handoff.json",
     "M3": "pending"
+  },
+  "W08": {
+    "state": "independent_candidate_nested_leak_FOUND_TDD_root_fix_running",
+    "diagnosis": "typed_cause_usage_diagnosis/w08_safe_boundary/DIAGNOSIS.md",
+    "M3": "pending"
+  },
+  "W11": {
+    "state": "independent_residuals_RED_fixed_full_suite_and_native_v2_green_re_review_pending",
+    "recording_tests_full_before_cleanup": 54,
+    "focused_final": 11,
+    "native_RF_calls": 4,
+    "no_paid_calls": true,
+    "installation": "pending",
+    "M3": "pending",
+    "recording_tests_full_current": 59,
+    "focused_current": 15,
+    "native_current": "precall_history/native_recording_binding_v2.json"
   }
 }

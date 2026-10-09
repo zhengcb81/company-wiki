@@ -1,0 +1,23 @@
+{
+  "schema_version": "w05-main-real-replay/1",
+  "original_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+  "bytes": 273436,
+  "line_count": 481,
+  "body_start_line": 90,
+  "body_end_line": 414,
+  "parsed_units": 515,
+  "parser_version": "0.2.0",
+  "roles": {
+    "management": 457,
+    "operator": 49,
+    "analyst": 9
+  },
+  "selected": 41,
+  "replayed": 41,
+  "failures": 0,
+  "original_sha_mtime_unchanged": true,
+  "provider_calls": 0,
+  "paid_calls": 0,
+  "research_acceptance": "NOT_RUN",
+  "actual_source_repo": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\worktrees\\fresh-capture-20261009\\company-wiki"
+}

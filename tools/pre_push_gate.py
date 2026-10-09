@@ -62,6 +62,7 @@ FAST_CONTRACT_CASES = (
     *CURRENT_CI_REGRESSION_CASES,
     "tests/contract/test_narrative_output_plan.py",
     "tests/contract/test_summary_group_coverage.py",
+    "tests/contract/test_official_transcript_layouts.py",
     "tests/unit/test_narrative_evidence.py::test_financial_table_rows_are_dropped_but_business_rows_are_selected",
     "tests/unit/test_narrative_evidence.py::test_numbered_project_rationale_heading_survives_a_tight_budget",
     "tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings",

@@ -347,3 +347,10 @@ repair 的职责是版本化重做、父账承接与可追溯失败；不是新�
 ## 2026-10-09 09:33 UTC：CI根因节点收尾
 
 CWP d1ce50ee真正pre-push2346PASS/113.39s，精确CI37910840899 SUCCESS；FF23d25644普通环境rootloader补修后553PASS/4既有明确SKIP/78subtests/59.80s，精确CI37911571894 SUCCESS，两仓主线已推。commit静态5.76s；没有将全pytest放每commit、没有删必要测试。四测试根123746526B和独占FF worktree恢复，原件/ownerWIP/keys保留。完整phase6/ci_root_cause_2026-10-09/CLOSEOUT.md。原三家四独立报告64finding与原生check问题保留，独立专家已实际启动共因PWF；goal继续active。
+
+
+## 2026-10-09 16:31 UTC MAIN大节点进度
+
+CI子包仍已关闭：已发布CWP284328bb/CI37925080695、FF44c778b4/CI37923517689、RF5acad6a1/CI37919247211全部exact SUCCESS；pre-commit快速static、push共用行为清单。W05现独立源码审查，103规范化+14原CLI/Worker端到端、真实微软41/41段回放通过后已正常合master3b842eaa；合后W03/W05同入口80PASS/13.05s。自然电话会10契约加入既有FAST_CONTRACT_CASES，先2RED/35PASS再GREEN，不另开CI或commit门。新普通commit/push及远端exact验收尚待，不用本地绿冒称已发布。
+
+W06同任务预算从本地盘点/元数据/枚举/hash一直传到ready验证，实际MSFT同期间缺原文正确not_found，不再因无关旧年度元数据阻断下载；独占工作树196PASS/2明确skip，最后交接待。W08 typed usage/cause跨CLI绿后独立复核又发现中间RF candidates公开嵌套正文泄漏，正在原责任层RED根修，暂不验收。W11独立发现输入/输出同路径覆盖历史及atomic清理遮蔽主因，已修为明确argv绑定、历史/消费副本隔离、保留真实childexit及主异常；59全suite/28.352s、15focused、新版4个实际安装RF调用通过，集中独立复审/commit/定点安装待。以上均零真实供应商/LLM付费，旧封存/原件/配置不改，不能当M3研究通过。
