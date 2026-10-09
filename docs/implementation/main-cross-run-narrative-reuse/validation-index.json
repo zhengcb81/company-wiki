@@ -1,0 +1,422 @@
+{
+  "schema_version": "main-narrative-reuse-validation/1",
+  "supplier_requests": 0,
+  "runs": [
+    {
+      "receipt": "COMMIT-code.json",
+      "exit_code": 0,
+      "runner_seconds": 16.963,
+      "pytest_summary": null,
+      "command": [
+        "git",
+        "commit",
+        "-m",
+        "Reuse verified narrative generations across finite runs"
+      ],
+      "temp_final": "absent",
+      "protected_config_unchanged": true
+    },
+    {
+      "receipt": "GREEN-boundaries.json",
+      "exit_code": 0,
+      "runner_seconds": 169.543,
+      "pytest_summary": "================== 14 passed, 1 skipped in 166.56s (0:02:46) ==================",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/integration/test_narrative_generation_reuse.py",
+        "tests/integration/test_narrative_batch_cross_run_e2e.py",
+        "tests/integration/test_narrative_batch_source_scope.py",
+        "tests/integration/test_narrative_batch_budget_and_resume.py",
+        "-q"
+      ],
+      "temp_final": "absent",
+      "protected_config_unchanged": true
+    },
+    {
+      "receipt": "GREEN-carrier-provenance.json",
+      "exit_code": 1,
+      "runner_seconds": 30.906,
+      "pytest_summary": "======================== 4 failed, 13 passed in 27.81s ========================",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/unit/test_narrative_generation.py",
+        "tests/integration/test_narrative_generation_candidates.py",
+        "tests/integration/test_narrative_generation_concurrency.py",
+        "tests/integration/test_narrative_batch_recovery_e2e.py",
+        "-q"
+      ],
+      "temp_final": "absent",
+      "protected_config_unchanged": true
+    },
+    {
+      "receipt": "GREEN-compatibility.json",
+      "exit_code": 0,
+      "runner_seconds": 71.095,
+      "pytest_summary": "================== 143 passed, 1 skipped in 68.26s (0:01:08) ==================",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/unit/test_narrative_select_handler.py",
+        "tests/unit/test_narrative_verify_handler.py",
+        "tests/unit/test_narrative_model_caller.py",
+        "tests/unit/test_narrative_evidence.py",
+        "tests/integration/test_narrative_transport.py",
+        "tests/integration/test_narrative_batch_budget_and_resume.py",
+        "tests/integration/test_narrative_batch_source_scope.py",
+        "tests/integration/test_narrative_batch_cross_run_e2e.py",
+        "tests/integration/test_narrative_generation_reuse.py::test_zero_new_quota_and_different_database_reuse_keep_origin_accounting",
+        "-q"
+      ],
+      "temp_final": "absent",
+      "protected_config_unchanged": true
+    },
+    {
+      "receipt": "GREEN-final-flow.json",
+      "exit_code": 1,
+      "runner_seconds": 173.772,
+      "pytest_summary": "================== 1 failed, 12 passed in 169.01s (0:02:49) ===================",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/integration/test_narrative_generation_reuse.py",
+        "tests/integration/test_narrative_generation_outbox.py",
+        "tests/integration/test_narrative_batch_recovery_e2e.py",
+        "-q"
+      ],
+      "temp_final": "absent",
+      "protected_config_unchanged": true
+    },
+    {
+      "receipt": "GREEN-final-ruff.json",
+      "exit_code": 0,
+      "runner_seconds": 0.04,
+      "pytest_summary": null,
+      "command": [
+        "ruff",
+        "check",
+        "--no-cache",
+        "tests/integration/test_narrative_batch_recovery_e2e.py",
+        "docs/implementation/main-cross-run-narrative-reuse/validate.py",
+        "docs/implementation/main-cross-run-narrative-reuse/validate_budget_overlay.py"
+      ],
+      "temp_final": "absent",
+      "protected_config_unchanged": true
+    },
+    {
+      "receipt": "GREEN-first.json",
+      "exit_code": 0,
+      "runner_seconds": 32.111,
+      "pytest_summary": "============================= 10 passed in 29.24s =============================",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/unit/test_narrative_generation.py",
+        "tests/integration/test_narrative_generation_reuse.py",
+        "-q"
+      ],
+      "temp_final": "absent",
+      "protected_config_unchanged": true
+    },
+    {
+      "receipt": "GREEN-generation-recovery.json",
+      "exit_code": 0,
+      "runner_seconds": 30.691,
+      "pytest_summary": "============================= 18 passed in 27.76s =============================",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/unit/test_narrative_generation.py",
+        "tests/integration/test_narrative_generation_candidates.py",
+        "tests/integration/test_narrative_generation_concurrency.py",
+        "tests/integration/test_narrative_batch_recovery_e2e.py",
+        "-q"
+      ],
+      "temp_final": "absent",
+      "protected_config_unchanged": true
+    },
+    {
+      "receipt": "GREEN-integrated-kill-recovery-final.json",
+      "exit_code": 0,
+      "runner_seconds": 13.537,
+      "pytest_summary": "============================= 1 passed in 10.90s ==============================",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/integration/test_narrative_batch_recovery_e2e.py",
+        "-q"
+      ],
+      "temp_final": "absent",
+      "protected_config_unchanged": true
+    },
+    {
+      "receipt": "GREEN-integrated-kill-recovery.json",
+      "exit_code": 1,
+      "runner_seconds": 12.828,
+      "pytest_summary": "============================= 1 failed in 10.22s ==============================",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/integration/test_narrative_batch_recovery_e2e.py",
+        "-q"
+      ],
+      "temp_final": "absent",
+      "protected_config_unchanged": true
+    },
+    {
+      "receipt": "GREEN-outbox.json",
+      "exit_code": 1,
+      "runner_seconds": 11.547,
+      "pytest_summary": "============================== 1 failed in 8.92s ==============================",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/integration/test_narrative_generation_outbox.py",
+        "-q"
+      ],
+      "temp_final": "absent",
+      "protected_config_unchanged": true
+    },
+    {
+      "receipt": "GREEN-responsibility.json",
+      "exit_code": 0,
+      "runner_seconds": 64.501,
+      "pytest_summary": "======================== 69 passed in 61.66s (0:01:01) ========================",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/unit/test_narrative_generation.py",
+        "tests/unit/test_narrative_batch.py",
+        "tests/unit/test_narrative_run_store.py",
+        "tests/unit/test_narrative_artifact_store.py",
+        "tests/contract/test_narrative_artifact_layering.py",
+        "tests/integration/test_narrative_generation_candidates.py",
+        "tests/integration/test_narrative_generation_concurrency.py",
+        "tests/integration/test_narrative_generation_outbox.py",
+        "tests/integration/test_narrative_batch_recovery_e2e.py",
+        "tests/integration/test_narrative_generation_reuse.py::test_zero_new_quota_and_different_database_reuse_keep_origin_accounting",
+        "tests/integration/test_narrative_generation_reuse.py::test_visible_origin_recovery_pointer_does_not_block_explicit_refresh",
+        "-q"
+      ],
+      "temp_final": "absent",
+      "protected_config_unchanged": true
+    },
+    {
+      "receipt": "GREEN-ruff.json",
+      "exit_code": 0,
+      "runner_seconds": 0.037,
+      "pytest_summary": null,
+      "command": [
+        "ruff",
+        "check",
+        "--no-cache",
+        "src/company_wiki/automation/narrative_batch.py",
+        "src/company_wiki/automation/narrative_batch_request.py",
+        "src/company_wiki/automation/narrative_projection.py",
+        "src/company_wiki/automation/narrative_generation.py",
+        "src/company_wiki/source_catalog/narrative_artifact_store.py",
+        "tests/unit/test_narrative_generation.py",
+        "tests/integration/test_narrative_generation_candidates.py",
+        "tests/integration/test_narrative_generation_concurrency.py",
+        "tests/integration/test_narrative_generation_outbox.py",
+        "tests/integration/test_narrative_generation_reuse.py",
+        "tests/integration/test_narrative_batch_recovery_e2e.py",
+        "tests/integration/test_narrative_batch_cross_run_e2e.py",
+        "tests/integration/test_narrative_batch_source_scope.py",
+        "docs/implementation/main-cross-run-narrative-reuse/validate.py"
+      ],
+      "temp_final": "absent",
+      "protected_config_unchanged": true
+    },
+    {
+      "receipt": "RED-binding-cap.json",
+      "exit_code": 1,
+      "runner_seconds": 4.154,
+      "pytest_summary": "============================== 1 failed in 1.29s ==============================",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/unit/test_narrative_generation.py::test_one_hundred_source_reuse_binding_remains_inside_existing_persistence_cap",
+        "-q"
+      ],
+      "temp_final": "absent",
+      "protected_config_unchanged": true
+    },
+    {
+      "receipt": "RED-carrier-provenance.json",
+      "exit_code": 1,
+      "runner_seconds": 5.956,
+      "pytest_summary": "========================= 2 failed, 4 passed in 3.21s =========================",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/unit/test_narrative_generation.py::test_each_carrier_uses_actual_parser_and_pathless_component_fingerprint",
+        "tests/integration/test_narrative_generation_candidates.py",
+        "-q"
+      ],
+      "temp_final": "absent",
+      "protected_config_unchanged": true
+    },
+    {
+      "receipt": "RED-default-reuse.json",
+      "exit_code": 1,
+      "runner_seconds": 32.381,
+      "pytest_summary": "============================= 3 failed in 29.72s ==============================",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/integration/test_narrative_generation_reuse.py",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "temp_final": "absent",
+      "protected_config_unchanged": true
+    },
+    {
+      "receipt": "RED-generation-identity.json",
+      "exit_code": 2,
+      "runner_seconds": 3.415,
+      "pytest_summary": "============================== 1 error in 0.64s ===============================",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/unit/test_narrative_generation.py",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "temp_final": "absent",
+      "protected_config_unchanged": true
+    },
+    {
+      "receipt": "RED-generation-import.json",
+      "exit_code": 1,
+      "runner_seconds": 3.733,
+      "pytest_summary": "============================== 7 failed in 0.86s ==============================",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/unit/test_narrative_generation.py",
+        "-q"
+      ],
+      "temp_final": "absent",
+      "protected_config_unchanged": true
+    },
+    {
+      "receipt": "RED-hit-catalog-writer.json",
+      "exit_code": 1,
+      "runner_seconds": 9.48,
+      "pytest_summary": "============================== 1 failed in 6.52s ==============================",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/integration/test_narrative_generation_reuse.py::test_zero_new_quota_and_different_database_reuse_keep_origin_accounting",
+        "-q"
+      ],
+      "temp_final": "absent",
+      "protected_config_unchanged": true
+    },
+    {
+      "receipt": "RED-reuse-storage-quota.json",
+      "exit_code": 1,
+      "runner_seconds": 12.76,
+      "pytest_summary": "============================== 1 failed in 9.53s ==============================",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/integration/test_narrative_generation_reuse.py::test_zero_new_quota_and_different_database_reuse_keep_origin_accounting",
+        "-q"
+      ],
+      "temp_final": "absent",
+      "protected_config_unchanged": true
+    },
+    {
+      "receipt": "RED-visible-owner-refresh.json",
+      "exit_code": 1,
+      "runner_seconds": 9.262,
+      "pytest_summary": "============================== 1 failed in 6.39s ==============================",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/integration/test_narrative_generation_reuse.py::test_visible_origin_recovery_pointer_does_not_block_explicit_refresh",
+        "-q"
+      ],
+      "temp_final": "absent",
+      "protected_config_unchanged": true
+    }
+  ]
+}

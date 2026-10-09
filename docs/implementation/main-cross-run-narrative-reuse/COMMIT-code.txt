@@ -1,0 +1,12 @@
+ruff check (WU-1.2, mirrors CI).......................................................Passed
+mypy contract modules (FC-1204-c, mirrors CI).....................(no files to check)Skipped
+config doctor (WU-7.1, mirrors CI)................................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test).......................Passed
+[codex/main-cross-run-narrative-reuse-20261009 002824df] Reuse verified narrative generations across finite runs
+ 13 files changed, 1727 insertions(+), 29 deletions(-)
+ create mode 100644 src/company_wiki/automation/narrative_generation.py
+ create mode 100644 tests/integration/test_narrative_generation_candidates.py
+ create mode 100644 tests/integration/test_narrative_generation_concurrency.py
+ create mode 100644 tests/integration/test_narrative_generation_outbox.py
+ create mode 100644 tests/integration/test_narrative_generation_reuse.py
+ create mode 100644 tests/unit/test_narrative_generation.py

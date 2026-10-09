@@ -1,0 +1,13 @@
+# Findings
+
+The original request hash contains run ID, batch members, policy and spending/time limits and is reused as event policy. Job keys consequently differ for identical source generation across runs. narrative_run_jobs.job_id UNIQUE and create_run ownership validation forbid lending an old job to another run. Existing publication work/effect identity remains unchanged.
+
+Generation identity now binds one source's logical raw identity/bytes, effective title/kind/language/class, actual carrier parser, generation versions and effective profile/model options. Execution-only fields are omitted. A visible artifact's existing metadata_json carries the manifest and SHA; a bounded read-only candidate query finds earlier compatible versions too. Existing current-source/public exact artifact and locator replay supplies the read proof.
+
+Binding/3 stores exact reused artifact pins and normal miss jobs, with shared generation settings factored to fit the unchanged 262144-byte run-binding cap for 100 sources. Legacy binding/1 and /2 exact-run behavior is retained. Hits own zero old reservations and do not open CatalogStore, activate workers or reserve generation output; actual bookkeeping storage remains measured.
+
+The DB owner mutex covers one AUTO DB. Added sorted catalog generation OS locks cover live equal generation across AUTO DBs. A minimal recovery locator points to original AUTO/run; original jobs/outbox/reservations determine its meaning. Unknown/unpublished work requires origin recovery. Known terminal no-pending-publication work and exact visible artifacts permit cleanup. It is not a second ledger or a permanent AUTO path permission gate.
+
+The actual POST-loss test exposed a separate final-output budget defect: old attempts' final bounds were added for the same summarize job, preventing any sufficient-budget retry while supplier cost correctly remained unknown. MAIN fixed its existing budget layer to account by unique final-output slot per job, preserving all attempts' token/cost bounds. A one-module temporary integration proved completed recovery, retained unknown 1, visible artifact, and another DB/public-read hit with 0 new POST. The original owned budget module was restored and has no diff.
+
+Current package has a single whole-source coverage cache gate at narrative_generation.read_reuse_pin. MAIN's OCR integration must allow selected/completed derivations with honest coverage_complete=false after every selected locator is replayed; skipped_no_narrative still requires complete coverage and no evidence. MAIN also supplies normalization_identity's real pathless OCR fingerprint through the reserved parser_components parameter. This package does not guess OCR configuration.

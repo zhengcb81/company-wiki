@@ -1,0 +1,10 @@
+{
+  "source_commit": "ce116dddb07184d99fe8fa9661171d2bc4aa88cc",
+  "path": "src/company_wiki/automation/narrative_run_store.py",
+  "old_sha256": "cfd28629ba573d09731830d7a6c5ed8baa45a89df70c5adfecae6b6d70156d83",
+  "overlay_sha256": "219340d3c96273588b222842bec615b72ba2deb65148df974b47cfa8492d336b",
+  "temporary_authorization": "MAIN explicitly authorized this one-budget-module integration overlay; no overlay commit",
+  "supplier_requests": 0,
+  "exit_code": 0,
+  "restored_sha256": "cfd28629ba573d09731830d7a6c5ed8baa45a89df70c5adfecae6b6d70156d83"
+}

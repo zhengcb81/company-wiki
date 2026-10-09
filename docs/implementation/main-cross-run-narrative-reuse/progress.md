@@ -1,0 +1,29 @@
+# Progress
+
+2026-10-09: Received authorized main-cross-run task after MAIN merged W03 at f788a07a. Verified clean assigned isolated branch and base. Read actual implementation card and planning-with-files skill. Requested independent investigation interface; no implementation changes yet. Prior W03 package remains untouched.
+
+RED setup first failed before pytest with SyntaxError in copied runner: a broad display-label replacement changed an environment keyword. Replaced exact keyword; no tests, model calls or TEMP creation happened in that failed setup. The efficiency RED uses equal real positive fixture budgets, so it demonstrates a second POST rather than stopping at budget denial.
+
+## First implementation
+
+Corrected unit caller import and retained collection-error evidence separately. RED-generation-import: 7 missing-module failures. RED-default-reuse: 3 real duplicate-POST failures / 29.72s. GREEN-first: all 10 PASS / 29.24s. Stable source manifest, binding/3 hits plus owned misses, metadata generation candidates, public exact replay, and minimal recovery pointer implemented. Old three-publication test now explicitly requests refresh; all quality/pin checks remain.
+
+## Concentrated boundaries and defects
+
+GREEN-boundaries: 14 PASS / 1 explicit real-input skip / 166.56s. RED-carrier-provenance: 2 failures / 4 PASS; fixed actual per-carrier parser identity and bundle metadata attribution. First provenance GREEN attempt had 4 failures caused by an implementation attribute error (bundle has versions.parser, no parser object); preserved GREEN-carrier-provenance receipt, fixed the field. RED-binding-cap: 100 source binding was 322647 bytes > existing 262144 persistence cap; fixed by factoring shared generation settings, without raising cap. GREEN-generation-recovery: 18 PASS / 27.76s. Actual POST-kill owner resumes conservatively to budget_exhausted (unknown fee plus existing output-accounting defect); reported precise root cause to MAIN. RED-visible-owner-refresh: visible publication with surviving minimal locator wrongly blocked refresh; corrected locator retirement by exact visible proof. Initial outbox fault launcher lacked Windows spawn main guard and emitted multiple JSON documents; preserved caller-fixture failure, fixed launcher guard without weakening stdout assertions.
+
+## Final responsibility and accepted limits
+
+GREEN-final-flow: 12 PASS / 1 caller-forensic failure / 169.01s. The forensic SQL guessed a nonexistent results table; retained raw evidence, corrected to actual attempts.result_json and only successful result counts. GREEN-responsibility: 69 PASS / 61.66s, including all existing batch/run/artifact layer unit responsibilities and actual concurrency/ACK/killed-owner/tight-budget/visible-owner tests. The actual hard-kill base ends budget_exhausted with unknown cost retained; local effects/object counts are zero. budget-root-cause.md provides the exact chain for MAIN. RED-reuse-storage-quota proved wrong worst-case generation preflight on an all-hit run; admit actual bookkeeping only on all-hit, preflight actual miss count. New control locators are measured; legacy eight-component baselines retain their exact interpretation. RED-hit-catalog-writer proved all-hit needlessly opened CatalogStore; moved all-hit to read-only artifact facade. Compatibility gate now running; no paid/supplier requests.
+
+## Compatibility and code commit
+
+GREEN-compatibility: 143 PASS / 1 explicit external real-input skip / pytest 68.26s, covering select/verify/model/evidence/public transport and exact batch contracts. GREEN-ruff passed all 13 implementation/test paths plus the runner with --no-cache. Normal code commit 002824df4c3275d171e22fd56f94b946095c0690 passed ruff and host guard; ordinary mypy/config-doctor hooks skipped because no matching files (no bypass).
+
+## Corrected final-output slot integration
+
+MAIN supplied ce116dddb07184d99fe8fa9661171d2bc4aa88cc; only its narrative_run_store.py was temporarily overlaid. The initial strict integration reached completed owner and reused another DB, then failed the newly added public call: the old fixture put relative catalog config at root, while the public CLI derives project_root from config/.. . Retained GREEN-integrated-kill-recovery and budget-overlay-caller-failure-receipt. A dedicated identical config under root/config corrected the caller without touching original config or production semantics.
+
+The passing final test checks refusal at its actual time (1 local POST, new AUTO absent). A duplicate late proof capture recorded total POST=2 after recovery; its receipt is explicitly annotated with that scope. Removed the duplicate fixture capture after the successful gate without changing acceptance assertions or runtime behavior; no extra tests per MAIN instruction. GREEN-integrated-kill-recovery-final: 1 PASS / pytest 10.90s. Owner completed with 2 local POST total, 3474 conservative tokens / 3893 microUSD, unknown 1 / unsettled 0; select/summarize/verify each one successful result, effect 1, visible object 1 / 4069B. Another AUTO/run reused the exact pin with current six-field public read, locator_count=1/replay_status=verified, language en/translate false, tokens/cost 0 and 0 additional POST. Original supplier unknown 3382 tokens / 3782 microUSD remained. Pre-budget-fix proof was copied before replacement and is preserved.
+
+Budget original/restored SHA cfd28629ba573d09731830d7a6c5ed8baa45a89df70c5adfecae6b6d70156d83; overlay SHA 219340d3c96273588b222842bec615b72ba2deb65148df974b47cfa8492d336b. No budget file diff/commit. validate_budget_overlay.py captures the sole authorized overlay and restores bytes in finally. GREEN-final-ruff passed. Every finished runner receipt has TEMP final absent and identical protected before/after config SHA. HANDOFF prepared for precise normal docs/test commit; MAIN owns final shared OCR integration and exact main rerun.
