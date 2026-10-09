@@ -1,0 +1,20 @@
+[
+  {
+    "company": "cn-688012",
+    "mappings": 25,
+    "exit_code": 0,
+    "result": "{\"event_id\": \"0e20b1f1c5ec48ed9ddd327e2a1dda67\", \"events\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\revenue-forecast-audit\\\\runs\\\\fresh-20261009T065028-cn-688012\\\\roles\\\\coordinator\\\\events.jsonl\"}"
+  },
+  {
+    "company": "hk-00700",
+    "mappings": 20,
+    "exit_code": 0,
+    "result": "{\"event_id\": \"151f63406114415bbef939ea55425947\", \"events\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\revenue-forecast-audit\\\\runs\\\\fresh-20261009T065028-hk-00700\\\\roles\\\\coordinator\\\\events.jsonl\"}"
+  },
+  {
+    "company": "us-msft",
+    "mappings": 19,
+    "exit_code": 0,
+    "result": "{\"event_id\": \"2c4fda6d185448c387594d906e428d44\", \"events\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\revenue-forecast-audit\\\\runs\\\\fresh-20261009T065028-us-msft\\\\roles\\\\coordinator\\\\events.jsonl\"}"
+  }
+]

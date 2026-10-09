@@ -1,0 +1,619 @@
+[
+  {
+    "company": "cn-688012",
+    "exit_code": 2,
+    "result": {
+      "schema_version": "1.0",
+      "run_id": "fresh-20261009T065028-cn-688012",
+      "check_kind": "artifact_integrity_not_quality",
+      "quality_status": "not_evaluated",
+      "status": "needs_remediation",
+      "review_attempt": null,
+      "review_root": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\reports",
+      "missing_reports": [],
+      "integrity_problems": [
+        "storage: failed, blocked or unrun checks",
+        "fetch: failed, blocked or unrun checks",
+        "process: failed, blocked or unrun checks",
+        "analyst: failed, blocked or unrun checks"
+      ],
+      "reports": {
+        "storage": {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\reports\\storage.json",
+          "executor_completion": "verified",
+          "checks": {
+            "S01": "BLOCKED",
+            "S02": "PASS",
+            "S03": "PASS",
+            "S04": "FAIL",
+            "S05": "FAIL",
+            "S06": "FAIL",
+            "S07": "FAIL",
+            "S08": "FAIL",
+            "S09": "PASS",
+            "S10": "BLOCKED",
+            "S11": "N/A",
+            "S12": "PASS"
+          }
+        },
+        "fetch": {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\reports\\fetch.json",
+          "executor_completion": "verified",
+          "checks": {
+            "F01": "PASS",
+            "F02": "PASS",
+            "F03": "FAIL",
+            "F04": "FAIL",
+            "F05": "PASS",
+            "F06": "BLOCKED",
+            "F07": "N/A",
+            "F08": "FAIL",
+            "F09": "PASS",
+            "F10": "FAIL",
+            "F11": "PASS",
+            "F12": "NOT_RUN",
+            "F13": "FAIL"
+          }
+        },
+        "process": {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\reports\\process.json",
+          "executor_completion": "verified",
+          "checks": {
+            "S0": "FAIL",
+            "S1": "PASS",
+            "S1A": "FAIL",
+            "S1B": "FAIL",
+            "S2": "FAIL",
+            "S3": "FAIL",
+            "S4": "FAIL",
+            "S5": "PASS",
+            "S6": "FAIL",
+            "S6A": "FAIL",
+            "S7": "PASS",
+            "S8": "PASS",
+            "S9": "PASS",
+            "S10": "PASS",
+            "S11": "PASS",
+            "NUMERIC-ALL": "PASS",
+            "SOURCE-NUMERIC": "PASS",
+            "NUMERIC-PROSE": "FAIL",
+            "FAILURE-TRACE": "PASS",
+            "FUTURE-BACKTEST": "N/A"
+          }
+        },
+        "analyst": {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\reports\\analyst.json",
+          "executor_completion": "verified",
+          "checks": {
+            "A01": "PASS",
+            "A02": "PASS",
+            "A03": "PASS",
+            "A04": "FAIL",
+            "A05": "BLOCKED",
+            "A06": "PASS",
+            "A07": "BLOCKED",
+            "A08": "FAIL",
+            "A09": "PASS",
+            "A10": "N/A",
+            "A11": "BLOCKED",
+            "A12": "FAIL"
+          }
+        }
+      },
+      "issue_ids": [
+        "ANALYST-001",
+        "ANALYST-002",
+        "ANALYST-003",
+        "ANALYST-004",
+        "FETCH-001",
+        "FETCH-002",
+        "FETCH-003",
+        "FETCH-004",
+        "FETCH-005",
+        "FETCH-006",
+        "PROCESS-001",
+        "PROCESS-002",
+        "PROCESS-003",
+        "PROCESS-004",
+        "PROCESS-005",
+        "PROCESS-006",
+        "PROCESS-007",
+        "PROCESS-008",
+        "STORAGE-001",
+        "STORAGE-002",
+        "STORAGE-003",
+        "STORAGE-004",
+        "STORAGE-005",
+        "STORAGE-006",
+        "STORAGE-007"
+      ],
+      "current_issue_ids": [
+        "ANALYST-001",
+        "ANALYST-002",
+        "ANALYST-003",
+        "ANALYST-004",
+        "FETCH-001",
+        "FETCH-002",
+        "FETCH-003",
+        "FETCH-004",
+        "FETCH-005",
+        "FETCH-006",
+        "PROCESS-001",
+        "PROCESS-002",
+        "PROCESS-003",
+        "PROCESS-004",
+        "PROCESS-005",
+        "PROCESS-006",
+        "PROCESS-007",
+        "PROCESS-008",
+        "STORAGE-001",
+        "STORAGE-002",
+        "STORAGE-003",
+        "STORAGE-004",
+        "STORAGE-005",
+        "STORAGE-006",
+        "STORAGE-007"
+      ],
+      "history_issue_ids": [],
+      "history_diagnostics": [],
+      "unmapped_issue_ids": [],
+      "event_counts": {
+        "executor": 121,
+        "storage": 1,
+        "fetch": 1,
+        "process": 22,
+        "analyst": 1,
+        "expert": 2,
+        "coordinator": 2
+      },
+      "event_formats": {
+        "executor": {
+          "canonical": 121,
+          "legacy_native_event": 0,
+          "invalid": 0
+        },
+        "storage": {
+          "canonical": 1,
+          "legacy_native_event": 0,
+          "invalid": 0
+        },
+        "fetch": {
+          "canonical": 1,
+          "legacy_native_event": 0,
+          "invalid": 0
+        },
+        "process": {
+          "canonical": 22,
+          "legacy_native_event": 0,
+          "invalid": 0
+        },
+        "analyst": {
+          "canonical": 1,
+          "legacy_native_event": 0,
+          "invalid": 0
+        },
+        "expert": {
+          "canonical": 2,
+          "legacy_native_event": 0,
+          "invalid": 0
+        },
+        "coordinator": {
+          "canonical": 2,
+          "legacy_native_event": 0,
+          "invalid": 0
+        }
+      },
+      "event_diagnostics": [],
+      "event_errors": [],
+      "usage": null,
+      "cost": null
+    },
+    "quality_claimed": false
+  },
+  {
+    "company": "hk-00700",
+    "exit_code": 2,
+    "result": {
+      "schema_version": "1.0",
+      "run_id": "fresh-20261009T065028-hk-00700",
+      "check_kind": "artifact_integrity_not_quality",
+      "quality_status": "not_evaluated",
+      "status": "needs_remediation",
+      "review_attempt": null,
+      "review_root": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\reports",
+      "missing_reports": [],
+      "integrity_problems": [
+        "storage: executor completion is not verified",
+        "storage: failed, blocked or unrun checks",
+        "fetch: executor completion is not verified",
+        "fetch: failed, blocked or unrun checks",
+        "process: executor completion is not verified",
+        "process: failed, blocked or unrun checks",
+        "analyst: executor completion is not verified",
+        "analyst: failed, blocked or unrun checks"
+      ],
+      "reports": {
+        "storage": {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\reports\\storage.json",
+          "executor_completion": "partial",
+          "checks": {
+            "S01": "BLOCKED",
+            "S02": "PASS",
+            "S03": "PASS",
+            "S04": "FAIL",
+            "S05": "PASS",
+            "S06": "FAIL",
+            "S07": "BLOCKED",
+            "S08": "FAIL",
+            "S09": "PASS",
+            "S10": "NOT_RUN",
+            "S11": "PASS",
+            "S12": "PASS"
+          }
+        },
+        "fetch": {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\reports\\fetch.json",
+          "executor_completion": "partial",
+          "checks": {
+            "F01": "PASS",
+            "F02": "PASS",
+            "F03": "FAIL",
+            "F04": "PASS",
+            "F05": "PASS",
+            "F06": "FAIL",
+            "F07": "PASS",
+            "F08": "FAIL",
+            "F09": "PASS",
+            "F10": "FAIL",
+            "F11": "FAIL",
+            "F12": "NOT_RUN"
+          }
+        },
+        "process": {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\reports\\process.json",
+          "executor_completion": "partial",
+          "checks": {
+            "S0": "FAIL",
+            "S1": "PASS",
+            "S1A": "FAIL",
+            "S1B": "FAIL",
+            "S2": "PASS",
+            "S3": "PASS",
+            "S4": "FAIL",
+            "S5": "PASS",
+            "S6": "FAIL",
+            "S6A": "FAIL",
+            "S7": "PASS",
+            "S8": "FAIL",
+            "S9": "PASS",
+            "S10": "FAIL",
+            "S11": "PASS",
+            "NUMERIC-ALL": "PASS",
+            "SOURCE-NUMERIC": "PASS",
+            "NUMERIC-PROSE": "PASS",
+            "FAILURE-TRACE": "BLOCKED",
+            "FUTURE-BACKTEST": "N/A"
+          }
+        },
+        "analyst": {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\reports\\analyst.json",
+          "executor_completion": "partial",
+          "checks": {
+            "A01": "PASS",
+            "A02": "PASS",
+            "A03": "PASS",
+            "A04": "FAIL",
+            "A05": "BLOCKED",
+            "A06": "PASS",
+            "A07": "PASS",
+            "A08": "BLOCKED",
+            "A09": "PASS",
+            "A10": "N/A",
+            "A11": "PASS",
+            "A12": "FAIL"
+          }
+        }
+      },
+      "issue_ids": [
+        "ANALYST-001",
+        "ANALYST-002",
+        "ANALYST-003",
+        "FETCH-001",
+        "FETCH-002",
+        "FETCH-003",
+        "FETCH-004",
+        "FETCH-005",
+        "PROCESS-001",
+        "PROCESS-002",
+        "PROCESS-003",
+        "PROCESS-004",
+        "PROCESS-005",
+        "STORAGE-001",
+        "STORAGE-002",
+        "STORAGE-003",
+        "STORAGE-004",
+        "STORAGE-005",
+        "STORAGE-006",
+        "STORAGE-007"
+      ],
+      "current_issue_ids": [
+        "ANALYST-001",
+        "ANALYST-002",
+        "ANALYST-003",
+        "FETCH-001",
+        "FETCH-002",
+        "FETCH-003",
+        "FETCH-004",
+        "FETCH-005",
+        "PROCESS-001",
+        "PROCESS-002",
+        "PROCESS-003",
+        "PROCESS-004",
+        "PROCESS-005",
+        "STORAGE-001",
+        "STORAGE-002",
+        "STORAGE-003",
+        "STORAGE-004",
+        "STORAGE-005",
+        "STORAGE-006",
+        "STORAGE-007"
+      ],
+      "history_issue_ids": [],
+      "history_diagnostics": [],
+      "unmapped_issue_ids": [],
+      "event_counts": {
+        "executor": 160,
+        "storage": 1,
+        "fetch": 1,
+        "process": 21,
+        "analyst": 1,
+        "expert": 2,
+        "coordinator": 2
+      },
+      "event_formats": {
+        "executor": {
+          "canonical": 160,
+          "legacy_native_event": 0,
+          "invalid": 0
+        },
+        "storage": {
+          "canonical": 1,
+          "legacy_native_event": 0,
+          "invalid": 0
+        },
+        "fetch": {
+          "canonical": 1,
+          "legacy_native_event": 0,
+          "invalid": 0
+        },
+        "process": {
+          "canonical": 21,
+          "legacy_native_event": 0,
+          "invalid": 0
+        },
+        "analyst": {
+          "canonical": 1,
+          "legacy_native_event": 0,
+          "invalid": 0
+        },
+        "expert": {
+          "canonical": 2,
+          "legacy_native_event": 0,
+          "invalid": 0
+        },
+        "coordinator": {
+          "canonical": 2,
+          "legacy_native_event": 0,
+          "invalid": 0
+        }
+      },
+      "event_diagnostics": [],
+      "event_errors": [],
+      "usage": null,
+      "cost": null
+    },
+    "quality_claimed": false
+  },
+  {
+    "company": "us-msft",
+    "exit_code": 2,
+    "result": {
+      "schema_version": "1.0",
+      "run_id": "fresh-20261009T065028-us-msft",
+      "check_kind": "artifact_integrity_not_quality",
+      "quality_status": "not_evaluated",
+      "status": "needs_remediation",
+      "review_attempt": null,
+      "review_root": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\reports",
+      "missing_reports": [],
+      "integrity_problems": [
+        "storage: executor completion is not verified",
+        "storage: failed, blocked or unrun checks",
+        "fetch: executor completion is not verified",
+        "fetch: failed, blocked or unrun checks",
+        "process: executor completion is not verified",
+        "process: failed, blocked or unrun checks",
+        "analyst: executor completion is not verified",
+        "analyst: failed, blocked or unrun checks"
+      ],
+      "reports": {
+        "storage": {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\reports\\storage.json",
+          "executor_completion": "partial",
+          "checks": {
+            "S01": "FAIL",
+            "S02": "PASS",
+            "S03": "PASS",
+            "S04": "PASS",
+            "S05": "FAIL",
+            "S06": "FAIL",
+            "S07": "BLOCKED",
+            "S08": "FAIL",
+            "S09": "PASS",
+            "S10": "NOT_RUN",
+            "S11": "PASS",
+            "S12": "PASS"
+          }
+        },
+        "fetch": {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\reports\\fetch.json",
+          "executor_completion": "partial",
+          "checks": {
+            "F01": "FAIL",
+            "F02": "PASS",
+            "F03": "FAIL",
+            "F04": "BLOCKED",
+            "F05": "BLOCKED",
+            "F06": "FAIL",
+            "F07": "PASS",
+            "F08": "FAIL",
+            "F09": "PASS",
+            "F10": "BLOCKED",
+            "F11": "FAIL",
+            "F12": "NOT_RUN"
+          }
+        },
+        "process": {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\reports\\process.json",
+          "executor_completion": "partial",
+          "checks": {
+            "S0": "FAIL",
+            "S1": "FAIL",
+            "S1A": "FAIL",
+            "S1B": "FAIL",
+            "S2": "PASS",
+            "S3": "FAIL",
+            "S4": "FAIL",
+            "S5": "FAIL",
+            "S6": "FAIL",
+            "S6A": "FAIL",
+            "S7": "PASS",
+            "S8": "FAIL",
+            "S9": "PASS",
+            "S10": "PASS",
+            "S11": "PASS",
+            "NUMERIC-ALL": "PASS",
+            "SOURCE-NUMERIC": "PASS",
+            "NUMERIC-PROSE": "PASS",
+            "FAILURE-TRACE": "BLOCKED",
+            "FUTURE-BACKTEST": "N/A"
+          }
+        },
+        "analyst": {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\reports\\analyst.json",
+          "executor_completion": "partial",
+          "checks": {
+            "A01": "PASS",
+            "A02": "PASS",
+            "A03": "PASS",
+            "A04": "FAIL",
+            "A05": "BLOCKED",
+            "A06": "PASS",
+            "A07": "BLOCKED",
+            "A08": "BLOCKED",
+            "A09": "PASS",
+            "A10": "N/A",
+            "A11": "PASS",
+            "A12": "FAIL"
+          }
+        }
+      },
+      "issue_ids": [
+        "ANALYST-001",
+        "ANALYST-002",
+        "ANALYST-003",
+        "FETCH-001",
+        "FETCH-002",
+        "FETCH-003",
+        "FETCH-004",
+        "FETCH-005",
+        "PROCESS-001",
+        "PROCESS-002",
+        "PROCESS-003",
+        "PROCESS-004",
+        "PROCESS-005",
+        "STORAGE-001",
+        "STORAGE-002",
+        "STORAGE-003",
+        "STORAGE-004",
+        "STORAGE-005",
+        "STORAGE-006"
+      ],
+      "current_issue_ids": [
+        "ANALYST-001",
+        "ANALYST-002",
+        "ANALYST-003",
+        "FETCH-001",
+        "FETCH-002",
+        "FETCH-003",
+        "FETCH-004",
+        "FETCH-005",
+        "PROCESS-001",
+        "PROCESS-002",
+        "PROCESS-003",
+        "PROCESS-004",
+        "PROCESS-005",
+        "STORAGE-001",
+        "STORAGE-002",
+        "STORAGE-003",
+        "STORAGE-004",
+        "STORAGE-005",
+        "STORAGE-006"
+      ],
+      "history_issue_ids": [],
+      "history_diagnostics": [],
+      "unmapped_issue_ids": [],
+      "event_counts": {
+        "executor": 224,
+        "storage": 1,
+        "fetch": 1,
+        "process": 21,
+        "analyst": 1,
+        "expert": 2,
+        "coordinator": 2
+      },
+      "event_formats": {
+        "executor": {
+          "canonical": 224,
+          "legacy_native_event": 0,
+          "invalid": 0
+        },
+        "storage": {
+          "canonical": 1,
+          "legacy_native_event": 0,
+          "invalid": 0
+        },
+        "fetch": {
+          "canonical": 1,
+          "legacy_native_event": 0,
+          "invalid": 0
+        },
+        "process": {
+          "canonical": 21,
+          "legacy_native_event": 0,
+          "invalid": 0
+        },
+        "analyst": {
+          "canonical": 1,
+          "legacy_native_event": 0,
+          "invalid": 0
+        },
+        "expert": {
+          "canonical": 2,
+          "legacy_native_event": 0,
+          "invalid": 0
+        },
+        "coordinator": {
+          "canonical": 2,
+          "legacy_native_event": 0,
+          "invalid": 0
+        }
+      },
+      "event_diagnostics": [],
+      "event_errors": [],
+      "usage": null,
+      "cost": null
+    },
+    "quality_claimed": false
+  }
+]

@@ -1,6 +1,12 @@
 # Findings
 
-## 新真实执行的审查交接（2026-10-09）
+## 当前：64项共因规划已冻结，通用实现已启动
+
+12份独立审查报告全部完成。专家矩阵逐项覆盖CN25/HK20/US19、storage20/fetch16/process18/analyst10，共64项；133个原finding引用文件均存在且12份JSON报告SHA未变。28个对应根因另加两个RF源码诊断，共14卡，详见[frozen implementation](phase6/fresh_root_remediation_2026-10-09/IMPLEMENTATION.md)。M1计划验收只证明覆盖与设计，不证明代码修好或研究通过。
+
+MAIN已启动互斥写集：本工作树语言/选择/摘要；CWP独占worktree稳定物理名与持久capture；RF独占worktree原生DAG/输出；FF/ET独占worktreecapability与凭据传递。主line源码ownerWIP仅RF assurance/output，保留；Dayu/IQS不改。W01先RED时校正了TXT夹具原本应是transcript的分类预期，准确locale RED为13FAIL/6PASS，原件和生产配置均未改。旧四审的研究/来源实质问题仍待实施与M3复验。
+
+## 历史：新真实执行的审查交接（2026-10-09）
 
 CN storage独立报告已读：12项全覆盖，7 findings。除了locale/年度截断外，实际精选p41漏LPCVD重复订单和300反应台主体行、p62只留下风险标题，部分ESG模板入选；应调查完整语义group/价值排序，而不是仅调公司词表。Lam 305877B下载body未在导入失败后持久化；存储长路径与有界staging失败恢复分别证明，不能以既有raw可打开掩盖这条失败。其他角色尚在独立审查，不提前给完整根因结论。
 
