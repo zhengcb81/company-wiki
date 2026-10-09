@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "run_id": "m3-20261009T184946-us-msft",
+  "role": "coordinator",
+  "observed_at": "2026-10-09T20:13:46.051740+00:00",
+  "executor_sealed_at": "2026-10-09T20:10:32.051097+00:00",
+  "execution_outcome": "partial",
+  "artifact_completeness": "complete",
+  "manifest": {
+    "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-us-msft\\execution\\manifest.json",
+    "sha256": "9eda5b55230c9692f42543575628b5787f5cd963c7b50580f42de0de4e0485b5",
+    "bytes": 108045
+  },
+  "executor_handoff": {
+    "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-us-msft\\execution\\handoff.json",
+    "sha256": "fac53e6c9b6f47f8c5aef5c7a944fb419d278c667ada4a4ad8195f49bf82cce1",
+    "bytes": 3118
+  },
+  "scope": {
+    "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-us-msft\\scope.json",
+    "sha256": "30fb80161b71a6fe26324409e3f3a71a2fd6de193a27b8c397a5af7257fbe005",
+    "bytes": 35839
+  },
+  "freeze_boundary": "execution unchanged after seal; original and AUTO roots preserved; package quality and ephemeral artifact handling to be independently reviewed",
+  "review_acceptance": "not determined",
+  "review_agent_ids": {
+    "storage": "/root/m3_us_storage_review"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "schema": "bounded-http-valid-encoding-observation/1",
+  "observed_at": "2026-10-09T20:14:28.273793+00:00",
+  "source_sha256": "55c5be4adacd99ca6492fd5a300ef0632664f0d34f878da00f97d2bc6b2abdab",
+  "runtime_unchanged": true,
+  "external_requests": 0,
+  "external_model_calls": 0,
+  "transport": "Real public bounded sync/async decorators; httpx.MockTransport only",
+  "cases": [
+    {
+      "mode": "sync",
+      "encoding": "identity",
+      "wire_bytes_fixture": 84,
+      "entity_bytes": 84,
+      "cap": 1024,
+      "outcome": "success",
+      "entity_exact": true,
+      "wire_bytes_observed": 84
+    },
+    {
+      "mode": "sync",
+      "encoding": "gzip",
+      "wire_bytes_fixture": 94,
+      "entity_bytes": 84,
+      "cap": 1024,
+      "outcome": "refused",
+      "error_type": "ProviderBudgetStop",
+      "error_code": "unsupported_content_encoding",
+      "wire_bytes_observed": 0
+    },
+    {
+      "mode": "sync",
+      "encoding": "deflate",
+      "wire_bytes_fixture": 82,
+      "entity_bytes": 84,
+      "cap": 1024,
+      "outcome": "refused",
+      "error_type": "ProviderBudgetStop",
+      "error_code": "unsupported_content_encoding",
+      "wire_bytes_observed": 0
+    },
+    {
+      "mode": "async",
+      "encoding": "identity",
+      "wire_bytes_fixture": 84,
+      "entity_bytes": 84,
+      "cap": 1024,
+      "outcome": "success",
+      "entity_exact": true,
+      "wire_bytes_observed": 84
+    },
+    {
+      "mode": "async",
+      "encoding": "gzip",
+      "wire_bytes_fixture": 94,
+      "entity_bytes": 84,
+      "cap": 1024,
+      "outcome": "refused",
+      "error_type": "ProviderBudgetStop",
+      "error_code": "unsupported_content_encoding",
+      "wire_bytes_observed": 0
+    },
+    {
+      "mode": "async",
+      "encoding": "deflate",
+      "wire_bytes_fixture": 82,
+      "entity_bytes": 84,
+      "cap": 1024,
+      "outcome": "refused",
+      "error_type": "ProviderBudgetStop",
+      "error_code": "unsupported_content_encoding",
+      "wire_bytes_observed": 0
+    }
+  ],
+  "previous_attempt": {
+    "session_id": 75074,
+    "outcome": "coordinator interrupted without persisted observation",
+    "scope": "same MockTransport intention under sandbox; no successful proof claimed"
+  },
+  "limits": "Legal gzip/deflate rejection independently reproduced. Does not identify actual SSE encoding, does not implement decoding or certify acquisition."
+}

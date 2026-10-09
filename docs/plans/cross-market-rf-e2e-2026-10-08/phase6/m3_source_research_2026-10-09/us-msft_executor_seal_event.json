@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "C:/Users/郑曾波/Projects/revenue-forecast-audit/skills/revenue-forecast-audit/scripts/audit_run.py",
+    "event",
+    "--run",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-us-msft",
+    "--role",
+    "coordinator",
+    "--kind",
+    "execution_package_observed",
+    "--data-file",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3seal-x4uvr4jj\\event.json"
+  ],
+  "returncode": 0,
+  "stdout": "{\"event_id\": \"a99c685c8ff243298b3b75cf7ef6f835\", \"events\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\revenue-forecast-audit\\\\runs\\\\m3-20261009T184946-us-msft\\\\roles\\\\coordinator\\\\events.jsonl\"}\n",
+  "stderr": ""
+}

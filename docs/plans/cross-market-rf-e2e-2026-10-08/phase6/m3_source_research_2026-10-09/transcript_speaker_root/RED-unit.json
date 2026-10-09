@@ -1,0 +1,19 @@
+{
+  "observed_at": "2026-10-09T19:46:52.319523+00:00",
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/contract/test_transcript_speaker_affiliation.py",
+    "-q",
+    "--tb=short"
+  ],
+  "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\fresh-capture-20261009\\company-wiki",
+  "exit_code": 1,
+  "seconds": 6.316201899986481,
+  "external_calls": 0,
+  "before_implementation": true
+}

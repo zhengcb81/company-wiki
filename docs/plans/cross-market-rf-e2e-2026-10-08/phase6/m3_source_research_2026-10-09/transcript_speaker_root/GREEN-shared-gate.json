@@ -1,0 +1,22 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/unit/test_ci_push_selection.py",
+    "tests/unit/test_pre_push_temp_scope.py",
+    "tests/unit/test_commit_policy.py",
+    "tests/contract/test_transcript_speaker_affiliation.py",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3gate-rg2b8sg5\\pytest"
+  ],
+  "returncode": 0,
+  "seconds": 4.961,
+  "owned_temp_restored": true,
+  "external_calls": 0,
+  "production_runtime_changed": false
+}

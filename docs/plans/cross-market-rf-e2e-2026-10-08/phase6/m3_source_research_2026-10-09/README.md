@@ -1,6 +1,16 @@
 # 原三家 M3：当前修复后的真实新执行
 
-状态：三个原生独立 executor 已启动，真实研究执行中，尚无四审结论。MAIN 独占本目录及根 PWF；三 executor 的独占运行目录与实际 agent ID 由 `cohort.json` 指定。这里是现有根计划的 M3 交接，不另建任务库或审批流程。
+状态：三executor均封存partial/完整证据，HK-storage、CN-fetch、US-storage首批独立审查启动；尚无四审结论或研究接受。MAIN 独占本目录及根 PWF；三 executor 的独占运行目录与实际 agent ID 由 `cohort.json` 指定。这里是现有根计划的 M3 交接，不另建任务库或审批流程。
+
+## 已封存交接与当前工程调查
+
+- 腾讯：[executor交接](C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/m3-20261009T184946-hk-00700/execution/execution_handoff.json)、[manifest](C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/m3-20261009T184946-hk-00700/execution/manifest.json)、[协调员只读封存观察](hk_executor_seal_observation.json)。manifest SHA2b6b9d56e6e59b47a7316266149efefe36bb67351281a026d92fe5dd041d6252，执行partial/554引用，四审pending不是PASS。
+- 中微：[executor交接](C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/m3-20261009T184946-cn-688012/roles/executor/handoff.md)、[manifest](C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/m3-20261009T184946-cn-688012/execution/manifest.json)、[协调员观察](cn-688012_executor_seal_observation.json)，605文件/partial。
+- 微软：[executor交接](C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/m3-20261009T184946-us-msft/execution/handoff.json)、[manifest](C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/m3-20261009T184946-us-msft/execution/manifest.json)、[协调员观察](us-msft_executor_seal_observation.json)，218项/108capture/partial。
+- [十二审查调度](review_dispatch.json)记录实际agent与尚未启动的角色，不代表接受。
+- [四审交接](REVIEW_HANDOFF.md)；按剩余slot分批，各角色只写本报告，不跨角色读初稿。
+- [电话会角色/QA版本化施工](transcript_speaker_root/IMPLEMENTATION.md)：原件真实RED、隔离0.3实现/90责任+58共享快测green，支线8c154b11正常commit；主运行时未切换，选择仍只覆盖4/6QA，不能当全部源问题关闭。
+- [模型配置与计量共因](model_output_runtime_root/INVESTIGATION.md)、[有界HTTP解码调查](http_content_coding_root/INVESTIGATION.md)、[官方JSON来源施工细则](official_json_source_root/IMPLEMENTATION.md)均按实际材料定位，未实施部分明确待四审/专家整合，禁止盲收费重试或假SourceRef。
 
 ## 本次与封存旧执行的关系
 

@@ -1,0 +1,24 @@
+{
+  "observed_at": "2026-10-09T19:48:49.092473+00:00",
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/contract/test_transcript_speaker_affiliation.py",
+    "tests/contract/test_official_transcript_layouts.py",
+    "tests/unit/test_narrative_evidence.py",
+    "tests/contract/test_transcript_material.py",
+    "tests/contract/test_transcript_json_material.py",
+    "tests/contract/test_transcript_architecture.py",
+    "-q",
+    "--tb=short"
+  ],
+  "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\fresh-capture-20261009\\company-wiki",
+  "exit_code": 0,
+  "seconds": 4.907288399990648,
+  "external_calls": 0,
+  "primary_runtime_changed": false
+}

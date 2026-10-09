@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "run_id": "m3-20261009T184946-hk-00700",
+  "role": "coordinator",
+  "observed_at": "2026-10-09T20:05:44.774720+00:00",
+  "executor_sealed_at": "2026-10-09T20:01:26.245436+00:00",
+  "execution_outcome": "partial",
+  "artifact_completeness": "complete",
+  "manifest": {
+    "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-hk-00700\\execution\\manifest.json",
+    "sha256": "2b6b9d56e6e59b47a7316266149efefe36bb67351281a026d92fe5dd041d6252",
+    "bytes": 281335
+  },
+  "executor_handoff": {
+    "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-hk-00700\\execution\\execution_handoff.json",
+    "sha256": "c07e95fb19bd74b88c54f3d50c77b596769cb7cb0645ba6aab72aa548708a702",
+    "bytes": 4572
+  },
+  "scope": {
+    "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-hk-00700\\scope.json",
+    "sha256": "2596700720d4d6b51af3186434bdb2f9a8a53630c07852af1353c68d00626737",
+    "bytes": 35054
+  },
+  "freeze_boundary": "execution/ unchanged after executor seal; four independent role reports pending; source roots preserved",
+  "review_acceptance": "not determined",
+  "review_agent_ids": {
+    "storage": "/root/m3_hk_storage_review"
+  }
+}

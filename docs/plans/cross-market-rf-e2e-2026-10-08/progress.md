@@ -1,5 +1,23 @@
 # Progress
 
+## 最新 M3 节点（2026-10-09 20:15 UTC）
+
+**Next Step：** 三executor均已封存partial/完整证据；首批独立HK-storage、CN-fetch、US-storage正在审查，余下九份按槽位分批，随后独立专家整合原64与本轮新问题。本次施工/费用/外部限制不由executor自签PASS；M4/NVDA/池loop及后续八家仍待。
+
+- 交接manifest：CN33efe768（605文件）、HK2b6b9d56（554引用）、US9eda5b55（218项/108capture）。MAIN只核对交接引用与manifest SHA、创建各共享handoffs和原生观察，未改封存execution。当前[四审接口](phase6/m3_source_research_2026-10-09/REVIEW_HANDOFF.md)与[执行入口](phase6/m3_source_research_2026-10-09/README.md)已同步。
+- 电话会0.3隔离支线source8c154b11+默认身份测试3f3f55c1，正常push2492PASS/136.71秒。首push2491PASS/1FAIL（原集成测试仍宣称默认0.2）已阻上传；仅更新新版默认身份，保留全部字节/角色/旧版本回放断言，35责任PASS。源修复仍未并主线/安装，US-storage在本大节点独立复审；6actor正确/50selected仅4QA，不宣称整个选择缺口已关闭。
+- 真实SSE压缩格式/header仍未知；独立公共transport mock现证明合法gzip/deflate在1KiB cap内仍4次拒绝、identity2次成功，0外部请求，见[有限诊断](phase6/m3_source_research_2026-10-09/http_content_coding_root/RED-valid-encoded-transport.json)。此前sandbox试验无持久结果而中断、真实头观察ConnectTimeout均不当成功；有界解码及业务JSON方案尚待实施，非取消字节/原文验真。
+- 新M3已知总95,401tokens/99,125microUSD没有新增付费；老母账与历史unknown/FX、CN八次获取未知仍保留。预算累计USD20/2,000,000tokens不重置。所有原件/新旧AUTO/work/registry继续保留到四审结束。
+
+## 最新 M3 节点（2026-10-09 20:06 UTC；封存时间以原 JSON 为准）
+
+**Next Step：** 腾讯已封存partial/完整执行证据，首路独立storage审查启动；中微和微软仍收尾，按槽位逐公司调四路独立审查，随后专家整合本轮新增共因。新八家目标仍只登记，当前goal未完成，不切换。
+
+- 电话会姓名/机构与QA归属已由真实微软原件证实共用解析缺陷；隔离新版本0.3 TDD先10FAIL/3PASS，再90责任PASS、58共享入口/TEMP责任PASS。旧0.2 fingerprint/原失败保留，新原件6首问归属正确、50/50 selected回放，但选择仍仅4/6QA组。支线8c154b11正常commit/static通过，尚未并主运行时或签研究接受，见[施工](phase6/m3_source_research_2026-10-09/transcript_speaker_root/IMPLEMENTATION.md)。
+- SSE官方分页原JSON被电话会专用content校验错拒；195/33/29跨公司总量不可冒称中微问答。实际逐页原件不变，257条仅24中微记录、7回答与未答/另类发言区分。写入[通用JSON施工细则](phase6/m3_source_research_2026-10-09/official_json_source_root/IMPLEMENTATION.md)，不拼TXT假原件、不凭猜测改身份。
+- 模型输出cap/配置推理策略、合法压缩官方HTTP、业务选择缺口分开调查，不通过升8192或盲重复收费掩盖。原件/config/原64矩阵和所有失败/未知账留存；当前腾讯新已知费用$0.025308/24,249tokens，无新paid重跑。
+- 先前CWP35ef5756精确CI37980399074已成功（19:27:54→19:29:12，78秒）；这是工程记录，不核销本轮研究问题。
+
 ## 最新 M3 节点（2026-10-09 19:26 UTC；记录实际时间以 JSON 为准）
 
 **Next Step：** 三个独立原公司新执行继续研究，封存后四路独立审查；共用摘要截断/业务表选取/OCR时延问题正在按真实材料查因，见[输出调查](phase6/m3_source_research_2026-10-09/model_output_runtime_root/INVESTIGATION.md)。不增输出上限、不猜配置、不收费盲重试；M4/NVDA/池loop及后续八家目标仍待。

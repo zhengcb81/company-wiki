@@ -1,0 +1,63 @@
+{
+  "started_at": "2026-10-09T19:33:46.884759+00:00",
+  "request": {
+    "schema_version": "official-source-capture-request/1",
+    "request_id": "root-sse-encoding-diagnostic-193346",
+    "source": {
+      "entity": "中微公司",
+      "document_kind": "regulatory_filing",
+      "title": "发行股份及支付现金购买资产并募集配套资金报告书",
+      "publisher": "上海证券交易所",
+      "source_url": "https://static.sse.com.cn/disclosure/listedinfo/announcement/c/new/2026-05-13/688012_20260513_TCLM.pdf",
+      "market": "CN",
+      "security_id": "688012",
+      "published_date": "2026-05-13",
+      "fiscal_year": null,
+      "fiscal_period": null,
+      "language": "zh",
+      "provider": "official"
+    },
+    "max_bytes": 65536,
+    "max_seconds": 30,
+    "max_cost_usd": "0",
+    "mime_type": "application/pdf"
+  },
+  "purpose": "Observe actual response encoding through unchanged public CWP capture with header-only small byte cap; no provider/header override; not company execution replay",
+  "request_source": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\requests\\material-0-v2.json",
+  "external_model_calls": 0,
+  "normal_policy_unchanged": true,
+  "outcome": "observed_refusal",
+  "exception_type": "ConnectTimeout",
+  "error_code": null,
+  "error_text": "",
+  "capture_id": "88c5fb93c715416ea41a10986f3d1979",
+  "capture_receipt": {
+    "capture_method": "bounded_http",
+    "tool_name": "company-wiki-official-source",
+    "tool_call_id": "http-c62bfe7ef6804c5f825913631dbdae42",
+    "http_requests": 1,
+    "started_at": "2026-10-09T19:33:47.256928+00:00",
+    "captured_at": "2026-10-09T19:33:52.726129+00:00",
+    "response_bytes": 0,
+    "content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "usage_complete": false,
+    "acquisition_usage": {
+      "schema_version": "1.0",
+      "response_bytes": 0,
+      "cost_usd": "0"
+    }
+  },
+  "acquisition_usage": {
+    "schema_version": "1.0",
+    "response_bytes": 0,
+    "cost_usd": "0"
+  },
+  "acquisition_usage_complete": false,
+  "provider_started": true,
+  "own_temp_bytes_before_cleanup": 2300,
+  "finished_at": "2026-10-09T19:33:52.741857+00:00",
+  "seconds": 5.8571157999977,
+  "response_headers_observed": [],
+  "owned_temp_restored": true,
+  "production_config_raw_DB_written": false
+}

@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/unit/test_native_document_pipeline.py",
+    "tests/unit/test_transcript_parser_compatibility.py",
+    "tests/contract/test_transcript_speaker_affiliation.py",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3native-jyb5b1yz\\pytest"
+  ],
+  "returncode": 0,
+  "seconds": 4.667,
+  "owned_temp_restored": true,
+  "old_version_controls_retained": true,
+  "external_calls": 0,
+  "production_runtime_changed": false
+}

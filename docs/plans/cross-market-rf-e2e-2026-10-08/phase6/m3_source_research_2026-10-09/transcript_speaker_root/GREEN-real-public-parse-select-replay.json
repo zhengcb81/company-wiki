@@ -1,0 +1,255 @@
+{
+  "observed_at": "2026-10-09T19:50:28.919607+00:00",
+  "worktree": "C:\\Users\\郑曾波\\.codex\\worktrees\\fresh-capture-20261009\\company-wiki",
+  "source_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+  "source_bytes": 273436,
+  "method": "Public extract/verify/parse/select/replay in own isolated source branch, one raw disk read, no provider/model/storage writes",
+  "versions": [
+    {
+      "parser_version": "0.2.0",
+      "parsed_units": 515,
+      "parsed_errors": [],
+      "qa_parents": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "selected_count": 41,
+      "selection_status": "selected",
+      "selection_coverage_complete": true,
+      "selected_qa_parents": [
+        "1",
+        "2"
+      ],
+      "original_first_questions": [
+        {
+          "original_label": "KARL KEIRSTEAD, UBS:",
+          "original_lines": [
+            293
+          ],
+          "native_attributed_unit_count": 0,
+          "actors": [],
+          "roles": [],
+          "qa_parents": [],
+          "label_leaked_into_other_speaker_count": 1,
+          "correct": false
+        },
+        {
+          "original_label": "BRENT THILL, Jefferies:",
+          "original_lines": [
+            314
+          ],
+          "native_attributed_unit_count": 0,
+          "actors": [],
+          "roles": [],
+          "qa_parents": [],
+          "label_leaked_into_other_speaker_count": 1,
+          "correct": false
+        },
+        {
+          "original_label": "MARK MOERDLER, Bernstein:",
+          "original_lines": [
+            326
+          ],
+          "native_attributed_unit_count": 0,
+          "actors": [],
+          "roles": [],
+          "qa_parents": [],
+          "label_leaked_into_other_speaker_count": 1,
+          "correct": false
+        },
+        {
+          "original_label": "ADAM WOOD, Morgan Stanley:",
+          "original_lines": [
+            351
+          ],
+          "native_attributed_unit_count": 0,
+          "actors": [],
+          "roles": [],
+          "qa_parents": [],
+          "label_leaked_into_other_speaker_count": 1,
+          "correct": false
+        },
+        {
+          "original_label": "BRAD ZELNICK, Deutsche Bank:",
+          "original_lines": [
+            377
+          ],
+          "native_attributed_unit_count": 0,
+          "actors": [],
+          "roles": [],
+          "qa_parents": [],
+          "label_leaked_into_other_speaker_count": 1,
+          "correct": false
+        },
+        {
+          "original_label": "GABRIELA BORGES, Goldman Sachs:",
+          "original_lines": [
+            394
+          ],
+          "native_attributed_unit_count": 0,
+          "actors": [],
+          "roles": [],
+          "qa_parents": [],
+          "label_leaked_into_other_speaker_count": 1,
+          "correct": false
+        }
+      ],
+      "verified_selected_spans": 41,
+      "failed_selected_spans": [],
+      "actual_selected_groups": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "parser_version": "0.3.0",
+      "parsed_units": 515,
+      "parsed_errors": [],
+      "qa_parents": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "selected_count": 50,
+      "selection_status": "selected",
+      "selection_coverage_complete": true,
+      "selected_qa_parents": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "original_first_questions": [
+        {
+          "original_label": "KARL KEIRSTEAD, UBS:",
+          "original_lines": [
+            293
+          ],
+          "native_attributed_unit_count": 7,
+          "actors": [
+            "KARL KEIRSTEAD"
+          ],
+          "roles": [
+            "analyst"
+          ],
+          "qa_parents": [
+            "1"
+          ],
+          "label_leaked_into_other_speaker_count": 0,
+          "correct": true
+        },
+        {
+          "original_label": "BRENT THILL, Jefferies:",
+          "original_lines": [
+            314
+          ],
+          "native_attributed_unit_count": 3,
+          "actors": [
+            "BRENT THILL"
+          ],
+          "roles": [
+            "analyst"
+          ],
+          "qa_parents": [
+            "2"
+          ],
+          "label_leaked_into_other_speaker_count": 0,
+          "correct": true
+        },
+        {
+          "original_label": "MARK MOERDLER, Bernstein:",
+          "original_lines": [
+            326
+          ],
+          "native_attributed_unit_count": 5,
+          "actors": [
+            "MARK MOERDLER"
+          ],
+          "roles": [
+            "analyst"
+          ],
+          "qa_parents": [
+            "3"
+          ],
+          "label_leaked_into_other_speaker_count": 0,
+          "correct": true
+        },
+        {
+          "original_label": "ADAM WOOD, Morgan Stanley:",
+          "original_lines": [
+            351
+          ],
+          "native_attributed_unit_count": 9,
+          "actors": [
+            "ADAM WOOD"
+          ],
+          "roles": [
+            "analyst"
+          ],
+          "qa_parents": [
+            "4"
+          ],
+          "label_leaked_into_other_speaker_count": 0,
+          "correct": true
+        },
+        {
+          "original_label": "BRAD ZELNICK, Deutsche Bank:",
+          "original_lines": [
+            377
+          ],
+          "native_attributed_unit_count": 5,
+          "actors": [
+            "BRAD ZELNICK"
+          ],
+          "roles": [
+            "analyst"
+          ],
+          "qa_parents": [
+            "5"
+          ],
+          "label_leaked_into_other_speaker_count": 0,
+          "correct": true
+        },
+        {
+          "original_label": "GABRIELA BORGES, Goldman Sachs:",
+          "original_lines": [
+            394
+          ],
+          "native_attributed_unit_count": 8,
+          "actors": [
+            "GABRIELA BORGES"
+          ],
+          "roles": [
+            "analyst"
+          ],
+          "qa_parents": [
+            "6"
+          ],
+          "label_leaked_into_other_speaker_count": 0,
+          "correct": true
+        }
+      ],
+      "verified_selected_spans": 50,
+      "failed_selected_spans": [],
+      "actual_selected_groups": [
+        "1",
+        "1:q1",
+        "1:q2",
+        "2",
+        "3",
+        "4"
+      ]
+    }
+  ],
+  "seconds": 1.3925250000029337,
+  "raw_stat_unchanged": true,
+  "production_changed": false,
+  "external_calls": 0,
+  "engineering_passed": true
+}

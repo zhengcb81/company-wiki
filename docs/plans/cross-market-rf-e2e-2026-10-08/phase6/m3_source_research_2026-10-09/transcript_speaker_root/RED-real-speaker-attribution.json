@@ -1,0 +1,142 @@
+{
+  "observed_at": "2026-10-09T19:40:46.898958+00:00",
+  "public_APIs": [
+    "extract_transcript_material",
+    "TranscriptMaterial.verify",
+    "parse_transcript_text"
+  ],
+  "parser_version": "0.2.0",
+  "raw_reference": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\companies\\MICROSOFT CORP\\raw\\investor_relations\\transcripts\\unknown-date_official_bdc90bf78dbf55ec.html",
+  "raw_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+  "raw_size": 273436,
+  "normalized_line_count": 481,
+  "parsed_units": 515,
+  "parsed_errors": [],
+  "qa_groups": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5"
+  ],
+  "observations": [
+    {
+      "expected_label": "KARL KEIRSTEAD, UBS:",
+      "actual_original_lines": [
+        293
+      ],
+      "matched_parsed_units": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:abac8c1e8cf43be67ed3e942ceabd9a581c71b76c8d6ae1bc91237222efb2875",
+          "source_role": "operator",
+          "speaker": "OPERATOR",
+          "speaker_title": null,
+          "qa_group_id": null,
+          "line_start": 291,
+          "line_end": 296,
+          "snippet": "KARL KEIRSTEAD, UBS:\nOkay, great."
+        }
+      ],
+      "correctly_attributed": false
+    },
+    {
+      "expected_label": "BRENT THILL, Jefferies:",
+      "actual_original_lines": [
+        314
+      ],
+      "matched_parsed_units": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:52e2cc72d70accd9934d13ab67ad5fb290c32ac5ae08faa91398cabeaddcef54",
+          "source_role": "operator",
+          "speaker": "OPERATOR",
+          "speaker_title": null,
+          "qa_group_id": 1,
+          "line_start": 312,
+          "line_end": 315,
+          "snippet": "BRENT THILL, Jefferies:\nThanks."
+        }
+      ],
+      "correctly_attributed": false
+    },
+    {
+      "expected_label": "MARK MOERDLER, Bernstein:",
+      "actual_original_lines": [
+        326
+      ],
+      "matched_parsed_units": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:77cb90c1e5dcced2db01f4f4f9c37e984b6eac08beca226dc55d88176f47a856",
+          "source_role": "operator",
+          "speaker": "OPERATOR",
+          "speaker_title": null,
+          "qa_group_id": 1,
+          "line_start": 324,
+          "line_end": 329,
+          "snippet": "MARK MOERDLER, Bernstein:\nThank you very much for taking my question, and congratulations on the solid – it’s a really great quarter."
+        }
+      ],
+      "correctly_attributed": false
+    },
+    {
+      "expected_label": "ADAM WOOD, Morgan Stanley:",
+      "actual_original_lines": [
+        351
+      ],
+      "matched_parsed_units": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:77d1c558ad05a3d104f28a7711a081ed7b7a1d436374bd8dad4bdeb9aff0b6f4",
+          "source_role": "operator",
+          "speaker": "OPERATOR",
+          "speaker_title": null,
+          "qa_group_id": 2,
+          "line_start": 349,
+          "line_end": 354,
+          "snippet": "ADAM WOOD, Morgan Stanley:\nHi, good evening."
+        }
+      ],
+      "correctly_attributed": false
+    },
+    {
+      "expected_label": "BRAD ZELNICK, Deutsche Bank:",
+      "actual_original_lines": [
+        377
+      ],
+      "matched_parsed_units": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:5b80e2a5b6563991ff1a89b8f50e0feb604725533e1bdd76f7f29726620a6c02",
+          "source_role": "operator",
+          "speaker": "OPERATOR",
+          "speaker_title": null,
+          "qa_group_id": 3,
+          "line_start": 375,
+          "line_end": 379,
+          "snippet": "BRAD ZELNICK, Deutsche Bank:\nGreat."
+        }
+      ],
+      "correctly_attributed": false
+    },
+    {
+      "expected_label": "GABRIELA BORGES, Goldman Sachs:",
+      "actual_original_lines": [
+        394
+      ],
+      "matched_parsed_units": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:bd6a8e6714bd9d0d84a668e264657c06a7980efe06b586120345481f4fe009f2",
+          "source_role": "operator",
+          "speaker": "OPERATOR",
+          "speaker_title": null,
+          "qa_group_id": 4,
+          "line_start": 392,
+          "line_end": 397,
+          "snippet": "GABRIELA BORGES, Goldman Sachs:\nHey, good afternoon."
+        }
+      ],
+      "correctly_attributed": false
+    }
+  ],
+  "external_calls": 0,
+  "source_config_DB_written": false,
+  "red_assertion": "All six original comma-affiliation first turns retain analyst speaker identity in parsed units; no original first-turn label leaks into another speaker body.",
+  "passed": false
+}

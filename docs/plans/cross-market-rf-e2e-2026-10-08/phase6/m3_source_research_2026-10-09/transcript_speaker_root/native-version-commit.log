@@ -1,0 +1,8 @@
+[codex/m3-transcript-role-20261009 3f3f55c1] test(transcripts): bind native pipeline to versioned default
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+runtime dependency declaration parity.............................(no files to check)Skipped
+ruff check (WU-1.2, mirrors CI).......................................................Passed
+mypy contract modules (FC-1204-c, mirrors CI).....................(no files to check)Skipped
+config doctor (WU-7.1, mirrors CI)................................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test).......................Passed

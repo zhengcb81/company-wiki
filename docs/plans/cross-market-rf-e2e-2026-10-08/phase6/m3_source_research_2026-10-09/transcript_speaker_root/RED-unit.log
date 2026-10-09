@@ -1,0 +1,92 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\fresh-capture-20261009\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 13 items
+
+tests\contract\test_transcript_speaker_affiliation.py FFFFFFFFF...F      [100%]
+
+================================== FAILURES ===================================
+_ test_comma_affiliation_first_question_retains_actual_analyst[Alex Rivera-Westshore Research] _
+tests\contract\test_transcript_speaker_affiliation.py:52: in test_comma_affiliation_first_question_retains_actual_analyst
+    assert q.source_role == "analyst"
+E   AssertionError: assert 'operator' == 'analyst'
+E     
+E     - analyst
+E     + operator
+_ test_comma_affiliation_first_question_retains_actual_analyst[Priya Shah-NORTHBANK] _
+tests\contract\test_transcript_speaker_affiliation.py:52: in test_comma_affiliation_first_question_retains_actual_analyst
+    assert q.source_role == "analyst"
+E   AssertionError: assert 'operator' == 'analyst'
+E     
+E     - analyst
+E     + operator
+_ test_comma_affiliation_first_question_retains_actual_analyst[Jordan Lee-Independent Research] _
+tests\contract\test_transcript_speaker_affiliation.py:52: in test_comma_affiliation_first_question_retains_actual_analyst
+    assert q.source_role == "analyst"
+E   AssertionError: assert 'operator' == 'analyst'
+E     
+E     - analyst
+E     + operator
+_ test_comma_affiliation_first_question_retains_actual_analyst[Chris Jones-Southgate Capital] _
+tests\contract\test_transcript_speaker_affiliation.py:52: in test_comma_affiliation_first_question_retains_actual_analyst
+    assert q.source_role == "analyst"
+E   AssertionError: assert 'operator' == 'analyst'
+E     
+E     - analyst
+E     + operator
+_ test_comma_affiliation_first_question_retains_actual_analyst[Robin Khan-Regional Markets] _
+tests\contract\test_transcript_speaker_affiliation.py:52: in test_comma_affiliation_first_question_retains_actual_analyst
+    assert q.source_role == "analyst"
+E   AssertionError: assert 'operator' == 'analyst'
+E     
+E     - analyst
+E     + operator
+_ test_comma_affiliation_first_question_retains_actual_analyst[Dana Morris-Longview Partners] _
+tests\contract\test_transcript_speaker_affiliation.py:52: in test_comma_affiliation_first_question_retains_actual_analyst
+    assert q.source_role == "analyst"
+E   AssertionError: assert 'operator' == 'analyst'
+E     
+E     - analyst
+E     + operator
+______ test_six_questions_and_closing_courtesies_keep_six_parent_groups _______
+tests\contract\test_transcript_speaker_affiliation.py:73: in test_six_questions_and_closing_courtesies_keep_six_parent_groups
+    assert q.metadata["speaker"] == name and q.source_role == "analyst"
+E   AssertionError: assert ('Operator' == 'Alex Rivera'
+E     
+E     - Alex Rivera
+E     + Operator)
+_ test_prepared_management_identity_is_case_insensitive_without_changing_display _
+tests\contract\test_transcript_speaker_affiliation.py:93: in test_prepared_management_identity_is_case_insensitive_without_changing_display
+    assert answer.source_role == "management"
+E   AssertionError: assert 'analyst' == 'management'
+E     
+E     - management
+E     + analyst
+_________ test_comma_title_can_start_a_real_prepared_management_turn __________
+tests\contract\test_transcript_speaker_affiliation.py:102: in test_comma_title_can_start_a_real_prepared_management_turn
+    assert not d.errors
+E   AssertionError: assert not ('transcript_start_missing',)
+E    +  where ('transcript_start_missing',) = DocumentStructure(source_id='urn:company-wiki:source:sha256:fb742cf398ba0058f4b2930e9e4780f9a0c9a655033c0f163343a9ced4...d=0, opaque_pages=(), table_scan_pages=(), deferred_table_pages=(), line_count=3, errors=('transcript_start_missing',)).errors
+_______ test_legacy_natural_parser_fingerprint_is_frozen_and_replayable _______
+tests\contract\test_transcript_speaker_affiliation.py:118: in test_legacy_natural_parser_fingerprint_is_frozen_and_replayable
+    assert old.units[0].unit_id != new.units[0].unit_id
+E   AssertionError: assert 'urn:company-wiki:narrative-unit:sha256:9e3dd06bc8ecc86cde3a2c42104e745be7583a127f697b49eb591f532794a600' != 'urn:company-wiki:narrative-unit:sha256:9e3dd06bc8ecc86cde3a2c42104e745be7583a127f697b49eb591f532794a600'
+E    +  where 'urn:company-wiki:narrative-unit:sha256:9e3dd06bc8ecc86cde3a2c42104e745be7583a127f697b49eb591f532794a600' = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:9e3dd06bc8ecc86cde3a2c42104e745be7583a127f697b49eb591f53..._group_id': None, 'qa_parent_id': None, 'section': 'prepared_remarks', 'speaker': 'Jane Doe', 'speaker_title': 'CEO'})).unit_id
+E    +  and   'urn:company-wiki:narrative-unit:sha256:9e3dd06bc8ecc86cde3a2c42104e745be7583a127f697b49eb591f532794a600' = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:9e3dd06bc8ecc86cde3a2c42104e745be7583a127f697b49eb591f53..._group_id': None, 'qa_parent_id': None, 'section': 'prepared_remarks', 'speaker': 'Jane Doe', 'speaker_title': 'CEO'})).unit_id
+=========================== short test summary info ===========================
+FAILED tests/contract/test_transcript_speaker_affiliation.py::test_comma_affiliation_first_question_retains_actual_analyst[Alex Rivera-Westshore Research]
+FAILED tests/contract/test_transcript_speaker_affiliation.py::test_comma_affiliation_first_question_retains_actual_analyst[Priya Shah-NORTHBANK]
+FAILED tests/contract/test_transcript_speaker_affiliation.py::test_comma_affiliation_first_question_retains_actual_analyst[Jordan Lee-Independent Research]
+FAILED tests/contract/test_transcript_speaker_affiliation.py::test_comma_affiliation_first_question_retains_actual_analyst[Chris Jones-Southgate Capital]
+FAILED tests/contract/test_transcript_speaker_affiliation.py::test_comma_affiliation_first_question_retains_actual_analyst[Robin Khan-Regional Markets]
+FAILED tests/contract/test_transcript_speaker_affiliation.py::test_comma_affiliation_first_question_retains_actual_analyst[Dana Morris-Longview Partners]
+FAILED tests/contract/test_transcript_speaker_affiliation.py::test_six_questions_and_closing_courtesies_keep_six_parent_groups
+FAILED tests/contract/test_transcript_speaker_affiliation.py::test_prepared_management_identity_is_case_insensitive_without_changing_display
+FAILED tests/contract/test_transcript_speaker_affiliation.py::test_comma_title_can_start_a_real_prepared_management_turn
+FAILED tests/contract/test_transcript_speaker_affiliation.py::test_legacy_natural_parser_fingerprint_is_frozen_and_replayable
+======================== 10 failed, 3 passed in 0.92s =========================
