@@ -2,7 +2,7 @@
 
 ## Current status
 
-Old fc1c1c0c / d44421fa delivery failed MAIN independent scope qualification acceptance. Historical GREEN evidence remains sealed. Shared source-owner qualification remediation is committed as 4c92b72c; final concentrated regression260passed/3skipped and new actual-byte replay GREEN. Merge/push/install and independent major reacceptance belong to MAIN.
+Old fc1c1c0c / d44421fa delivery failed MAIN independent scope qualification acceptance. Historical GREEN evidence remains sealed. Second independent review rejected 4c92b72c: a normal official import with A labels and matching B URL/body still passed all five formal filing entries. Prior GREEN is sealed limited evidence. Registered company binding root repair is committed as 90723304,269passed/3skip and actual MSFT8.718s GREEN; MAIN independent reacceptance remains pending. Merge/push/install and independent major reacceptance belong to MAIN.
 
 ## Goal
 
@@ -27,7 +27,7 @@ Actual title-null quarterly HTML originals each have exact head title10-Q. Add t
 
 ## Next Step
 
-MAIN independently reaccepts source commit 4c92b72cbae8c3507588b4c4fbe99bba6e0ee676 with HANDOFF_qualification.md and the current qualification manifest, then integrates. The old two commits alone must not be integrated as accepted.
+MAIN independently reaccepts source commit 90723304e4c7a0115f825bfee715f9568f2079f6 with HANDOFF_company_binding.md and company_binding_delivery_manifest.json, then integrates the entire W06 source delta. Earlier4c delivery was rejected. The old two commits alone must not be integrated as accepted.
 
 ## Acceptance
 
@@ -74,3 +74,15 @@ Final tests use exclusive TEMP, and record the effective pytest basetemp selecte
 
 
 Final phase7 lane execution complete: source commit 4c92b72cbae8c3507588b4c4fbe99bba6e0ee676 with ordinary hooks GREEN, concentrated260passed/3skipped and actual MSFT11.664s/7reads52,643,200B GREEN; own TEMP restored, originals/config/frozen DB unchanged. MAIN independent reacceptance pending.
+
+
+## Second independent P1: company labels are not issuer proof
+
+Independent normal import API declares Acme/ACME whose existing master CIK is12345, but real original DEI and standard18-digit official Archives URL both identify99999. import/query are provisional; 4c falsely returned B's original as A's filing in all5entries. Exact original SHA c51b7559ff90c7b26d30cb44587a767818255b7f4446f2eabce91e87d331e605,448B; independent ROOT receipt/script remain untouched. Owner RED red_registered_company_binding.txt contains6failures:5wrong-company reuse entries plus correct completeproof prepare still reloading master;18existing controls pass.
+
+Root repair within existing authorized files: assertion_service first accepts only complete real SHA/DEI/issuer_record_id/primary_cik evidence that binds current registered company labels, then compares URL/provider provenance. Otherwise observe the existing registered source identity once, verify original DEI from same SHA buffer, and reject A/B contradiction by named primary_issuer_conflict. URL CIK is not company identity. Readonly formal reader does not secretly append proof; each missing-proof new observation costs one identity lookup and one original read/parse. prepare's existing fact writer records genuine binding, and its completeproof fast path must skip both master and parser. No new DTO, permission, queue, SQL schema or W05 edits.
+
+Three old provider/alias positives may gain real registered source identity data while retaining all selection/byte/alias and compatibility assertions. Same-issuer share classes use existing actual CIK to bind one company, not strict equality of share-class security IDs. Unknown original company binding cannot pretend a successful formal reuse. Raw preview/export stays available under byte/root/version rules. Concentrated responsibility and protected actual MSFT replay run once after this root repair, ordinary commits then MAIN independent acceptance.
+
+
+Second-review implementation complete: 90723304e4c7a0115f825bfee715f9568f2079f6,27scope contracts, concentrated20files269passed/3skip, original reviewer standardURL reproducer5/5GREEN, realMSFT8.718s/7reads52,643,200B protected andTEMP restored. Ordinary source hooks GREEN/normal pattern skips. MAIN independent reacceptance remains the next major node.

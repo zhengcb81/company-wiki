@@ -1,3 +1,5 @@
+> Historical 4c delivery failed independent company-binding acceptance. Use HANDOFF_company_binding.md and company_binding_delivery_manifest.json. Historical RED/GREEN receipts remain.
+
 # W06 shared source qualification handoff
 
 ## Current delivery
