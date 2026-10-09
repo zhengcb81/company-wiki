@@ -1,0 +1,111 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 19 items
+
+tests\contract\test_title_source_fact.py FFF....                         [ 36%]
+tests\contract\test_local_request_relevance.py FF....F                   [ 73%]
+tests\contract\test_local_discovery_limits.py FFFFF                      [100%]
+
+================================== FAILURES ===================================
+___ test_title_correction_is_actual_source_text_append_only_and_idempotent ____
+tests\contract\test_title_source_fact.py:20: in test_title_correction_is_actual_source_text_append_only_and_idempotent
+    first=cat.record_source_facts(ref=ref,facts=facts,evidence=proof)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:190: in record_source_facts
+    return record_source_facts(self, ref=ref, facts=facts, evidence=evidence)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\assertion_service.py:104: in record_source_facts
+    _validate_source_facts(facts, evidence)
+src\company_wiki\source_catalog\assertion_service.py:61: in _validate_source_facts
+    raise ValueError("source facts must be a nonempty object of known fields")
+E   ValueError: source facts must be a nonempty object of known fields
+________ test_title_and_form_projection_survives_explicit_registration ________
+tests\contract\test_title_source_fact.py:31: in test_title_and_form_projection_survives_explicit_registration
+    cat.record_source_facts(ref=ref,facts=facts,evidence=evidence(ref,facts))
+src\company_wiki\source_catalog\service.py:190: in record_source_facts
+    return record_source_facts(self, ref=ref, facts=facts, evidence=evidence)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\assertion_service.py:104: in record_source_facts
+    _validate_source_facts(facts, evidence)
+src\company_wiki\source_catalog\assertion_service.py:61: in _validate_source_facts
+    raise ValueError("source facts must be a nonempty object of known fields")
+E   ValueError: source facts must be a nonempty object of known fields
+________ test_explicit_unknown_title_remains_nullable_and_raw_readable ________
+tests\contract\test_title_source_fact.py:42: in test_explicit_unknown_title_remains_nullable_and_raw_readable
+    facts={"title":value};cat.record_source_facts(ref=ref,facts=facts,evidence=evidence(ref,facts))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:190: in record_source_facts
+    return record_source_facts(self, ref=ref, facts=facts, evidence=evidence)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\assertion_service.py:104: in record_source_facts
+    _validate_source_facts(facts, evidence)
+src\company_wiki\source_catalog\assertion_service.py:61: in _validate_source_facts
+    raise ValueError("source facts must be a nonempty object of known fields")
+E   ValueError: source facts must be a nonempty object of known fields
+_ test_actual_wrong_scope_is_excluded_before_irrelevant_date_error[2022-FY-10-K] _
+tests\contract\test_local_request_relevance.py:16: in test_actual_wrong_scope_is_excluded_before_irrelevant_date_error
+    assert result["status"]=="not_found" and not result["blocks_download"]
+E   AssertionError: assert ('blocked' == 'not_found'
+E     
+E     - not_found
+E     + blocked)
+_ test_actual_wrong_scope_is_excluded_before_irrelevant_date_error[2026-Q1-10-Q] _
+tests\contract\test_local_request_relevance.py:16: in test_actual_wrong_scope_is_excluded_before_irrelevant_date_error
+    assert result["status"]=="not_found" and not result["blocks_download"]
+E   AssertionError: assert ('blocked' == 'not_found'
+E     
+E     - not_found
+E     + blocked)
+____________ test_known_wrong_cache_year_is_not_an_exclusion_proof ____________
+tests\contract\test_local_request_relevance.py:43: in test_known_wrong_cache_year_is_not_an_exclusion_proof
+    assert result["status"]=="ready" and result["source_ref"]["content_sha256"]==ref.content_sha256
+E   AssertionError: assert ('blocked' == 'ready'
+E     
+E     - ready
+E     + blocked)
+____ test_twenty_six_metadata_groups_do_not_consume_sixteen_raw_candidates ____
+tests\contract\test_local_discovery_limits.py:27: in test_twenty_six_metadata_groups_do_not_consume_sixteen_raw_candidates
+    assert result["status"]=="not_found" and not result["blocks_download"]
+E   AssertionError: assert ('unavailable' == 'not_found'
+E     
+E     - not_found
+E     + unavailable)
+____________ test_metadata_discovery_limit_is_finite_and_distinct _____________
+tests\contract\test_local_discovery_limits.py:35: in test_metadata_discovery_limit_is_finite_and_distinct
+    result=prepare_local_source(cat,request(),limits=LocalPrepareLimits(max_candidates=16,max_discovery_groups=3))
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: LocalPrepareLimits.__init__() got an unexpected keyword argument 'max_discovery_groups'
+________________ test_invalid_discovery_ceiling_is_rejected[0] ________________
+tests\contract\test_local_discovery_limits.py:42: in test_invalid_discovery_ceiling_is_rejected
+    with pytest.raises(ValueError):LocalPrepareLimits(max_discovery_groups=value)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: LocalPrepareLimits.__init__() got an unexpected keyword argument 'max_discovery_groups'
+______________ test_invalid_discovery_ceiling_is_rejected[True] _______________
+tests\contract\test_local_discovery_limits.py:42: in test_invalid_discovery_ceiling_is_rejected
+    with pytest.raises(ValueError):LocalPrepareLimits(max_discovery_groups=value)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: LocalPrepareLimits.__init__() got an unexpected keyword argument 'max_discovery_groups'
+_____________ test_invalid_discovery_ceiling_is_rejected[100001] ______________
+tests\contract\test_local_discovery_limits.py:42: in test_invalid_discovery_ceiling_is_rejected
+    with pytest.raises(ValueError):LocalPrepareLimits(max_discovery_groups=value)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: LocalPrepareLimits.__init__() got an unexpected keyword argument 'max_discovery_groups'
+=========================== short test summary info ===========================
+FAILED tests/contract/test_title_source_fact.py::test_title_correction_is_actual_source_text_append_only_and_idempotent
+FAILED tests/contract/test_title_source_fact.py::test_title_and_form_projection_survives_explicit_registration
+FAILED tests/contract/test_title_source_fact.py::test_explicit_unknown_title_remains_nullable_and_raw_readable
+FAILED tests/contract/test_local_request_relevance.py::test_actual_wrong_scope_is_excluded_before_irrelevant_date_error[2022-FY-10-K]
+FAILED tests/contract/test_local_request_relevance.py::test_actual_wrong_scope_is_excluded_before_irrelevant_date_error[2026-Q1-10-Q]
+FAILED tests/contract/test_local_request_relevance.py::test_known_wrong_cache_year_is_not_an_exclusion_proof
+FAILED tests/contract/test_local_discovery_limits.py::test_twenty_six_metadata_groups_do_not_consume_sixteen_raw_candidates
+FAILED tests/contract/test_local_discovery_limits.py::test_metadata_discovery_limit_is_finite_and_distinct
+FAILED tests/contract/test_local_discovery_limits.py::test_invalid_discovery_ceiling_is_rejected[0]
+FAILED tests/contract/test_local_discovery_limits.py::test_invalid_discovery_ceiling_is_rejected[True]
+FAILED tests/contract/test_local_discovery_limits.py::test_invalid_discovery_ceiling_is_rejected[100001]
+======================== 11 failed, 8 passed in 3.40s =========================

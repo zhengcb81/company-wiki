@@ -1,0 +1,159 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 10 items
+
+tests\contract\test_company_source_layout.py FFFFFFF                     [ 70%]
+tests\contract\test_registration_read_budget.py FFF                      [100%]
+
+================================== FAILURES ===================================
+_ test_company_direct_and_raw_discover_once_without_other_company[direct-None] _
+tests\contract\test_company_source_layout.py:47: in test_company_direct_and_raw_discover_once_without_other_company
+    assert result["status"]=="ready" and result["download_events"]==0, result
+E   AssertionError: {'schema_version': 'local-source-prepare/1', 'status': 'not_found', 'reason': 'no_registered_local_source', 'source_ref': None, ...}
+E   assert ('not_found' == 'ready'
+E     
+E     - ready
+E     + not_found)
+_ test_company_direct_and_raw_discover_once_without_other_company[direct-company_raw_v1] _
+tests\contract\test_company_source_layout.py:47: in test_company_direct_and_raw_discover_once_without_other_company
+    assert result["status"]=="ready" and result["download_events"]==0, result
+E   AssertionError: {'schema_version': 'local-source-prepare/1', 'status': 'not_found', 'reason': 'no_registered_local_source', 'source_ref': None, ...}
+E   assert ('not_found' == 'ready'
+E     
+E     - ready
+E     + not_found)
+__ test_company_direct_and_raw_discover_once_without_other_company[raw-None] __
+tests\contract\test_company_source_layout.py:46: in test_company_direct_and_raw_discover_once_without_other_company
+    result=prepare_local_source(cat,request())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:646: in prepare_local_source
+    return _prepare_local_source(
+src\company_wiki\source_catalog\local_reconcile.py:487: in _prepare_local_source
+    if _discover_source_groups(catalog, identity, budget):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:435: in _discover_source_groups
+    catalog.register_sources(root_id=root_id, relative_paths=paths)
+src\company_wiki\source_catalog\service.py:183: in register_sources
+    return register_catalog_sources(self.config, self.store, scope)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\registration_scope.py:43: in register_catalog_sources
+    return scan_catalog(config, store, root_ids={scope.root_id},
+src\company_wiki\source_catalog\scanner.py:2081: in scan_catalog
+    return _scan_catalog_impl(
+src\company_wiki\source_catalog\scanner.py:909: in _scan_catalog_impl
+    candidates = SourceRegistrationScope(root.root_id, frozenset(relative_paths)).select_groups(candidates)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\source_group_scope.py:34: in select_groups
+    raise ValueError("registration path is not an available source candidate")
+E   ValueError: registration path is not an available source candidate
+_ test_company_direct_and_raw_discover_once_without_other_company[raw-company_raw_v1] _
+tests\contract\test_company_source_layout.py:46: in test_company_direct_and_raw_discover_once_without_other_company
+    result=prepare_local_source(cat,request())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:646: in prepare_local_source
+    return _prepare_local_source(
+src\company_wiki\source_catalog\local_reconcile.py:487: in _prepare_local_source
+    if _discover_source_groups(catalog, identity, budget):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:435: in _discover_source_groups
+    catalog.register_sources(root_id=root_id, relative_paths=paths)
+src\company_wiki\source_catalog\service.py:183: in register_sources
+    return register_catalog_sources(self.config, self.store, scope)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\registration_scope.py:43: in register_catalog_sources
+    return scan_catalog(config, store, root_ids={scope.root_id},
+src\company_wiki\source_catalog\scanner.py:2081: in scan_catalog
+    return _scan_catalog_impl(
+src\company_wiki\source_catalog\scanner.py:909: in _scan_catalog_impl
+    candidates = SourceRegistrationScope(root.root_id, frozenset(relative_paths)).select_groups(candidates)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\source_group_scope.py:34: in select_groups
+    raise ValueError("registration path is not an available source candidate")
+E   ValueError: registration path is not an available source candidate
+_ test_company_direct_and_raw_discover_once_without_other_company[both-None] __
+tests\contract\test_company_source_layout.py:46: in test_company_direct_and_raw_discover_once_without_other_company
+    result=prepare_local_source(cat,request())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:646: in prepare_local_source
+    return _prepare_local_source(
+src\company_wiki\source_catalog\local_reconcile.py:487: in _prepare_local_source
+    if _discover_source_groups(catalog, identity, budget):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:435: in _discover_source_groups
+    catalog.register_sources(root_id=root_id, relative_paths=paths)
+src\company_wiki\source_catalog\service.py:183: in register_sources
+    return register_catalog_sources(self.config, self.store, scope)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\registration_scope.py:43: in register_catalog_sources
+    return scan_catalog(config, store, root_ids={scope.root_id},
+src\company_wiki\source_catalog\scanner.py:2081: in scan_catalog
+    return _scan_catalog_impl(
+src\company_wiki\source_catalog\scanner.py:909: in _scan_catalog_impl
+    candidates = SourceRegistrationScope(root.root_id, frozenset(relative_paths)).select_groups(candidates)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\source_group_scope.py:34: in select_groups
+    raise ValueError("registration path is not an available source candidate")
+E   ValueError: registration path is not an available source candidate
+_ test_company_direct_and_raw_discover_once_without_other_company[both-company_raw_v1] _
+tests\contract\test_company_source_layout.py:46: in test_company_direct_and_raw_discover_once_without_other_company
+    result=prepare_local_source(cat,request())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:646: in prepare_local_source
+    return _prepare_local_source(
+src\company_wiki\source_catalog\local_reconcile.py:487: in _prepare_local_source
+    if _discover_source_groups(catalog, identity, budget):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:435: in _discover_source_groups
+    catalog.register_sources(root_id=root_id, relative_paths=paths)
+src\company_wiki\source_catalog\service.py:183: in register_sources
+    return register_catalog_sources(self.config, self.store, scope)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\registration_scope.py:43: in register_catalog_sources
+    return scan_catalog(config, store, root_ids={scope.root_id},
+src\company_wiki\source_catalog\scanner.py:2081: in scan_catalog
+    return _scan_catalog_impl(
+src\company_wiki\source_catalog\scanner.py:909: in _scan_catalog_impl
+    candidates = SourceRegistrationScope(root.root_id, frozenset(relative_paths)).select_groups(candidates)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\source_group_scope.py:34: in select_groups
+    raise ValueError("registration path is not an available source candidate")
+E   ValueError: registration path is not an available source candidate
+___ test_scoped_adapter_and_registration_scope_reject_escape_and_projection ___
+tests\contract\test_company_source_layout.py:65: in test_scoped_adapter_and_registration_scope_reject_escape_and_projection
+    assert {item.relative_path for item in scoped}=={"Acme/annual.htm","Acme/annual.htm.source.json"}
+E   AssertionError: assert set() == {'Acme/annual....source.json'}
+E     
+E     Extra items in the right set:
+E     'Acme/annual.htm'
+E     'Acme/annual.htm.source.json'
+E     Use -v to get more diff
+_________ test_registration_budget_refuses_oversized_raw_before_read __________
+tests\contract\test_registration_read_budget.py:22: in test_registration_budget_refuses_oversized_raw_before_read
+    cat.register_sources(root_id="company_raw",relative_paths={"Acme/raw/annual.htm"},budget=budget)
+E   TypeError: SourceCatalog.register_sources() got an unexpected keyword argument 'budget'
+____ test_registration_stream_checks_deadline_and_changing_bytes[deadline] ____
+tests\contract\test_registration_read_budget.py:55: in test_registration_stream_checks_deadline_and_changing_bytes
+    cat.register_sources(root_id="company_raw",relative_paths={"Acme/raw/annual.htm"},budget=budget)
+E   TypeError: SourceCatalog.register_sources() got an unexpected keyword argument 'budget'
+_____ test_registration_stream_checks_deadline_and_changing_bytes[growth] _____
+tests\contract\test_registration_read_budget.py:55: in test_registration_stream_checks_deadline_and_changing_bytes
+    cat.register_sources(root_id="company_raw",relative_paths={"Acme/raw/annual.htm"},budget=budget)
+E   TypeError: SourceCatalog.register_sources() got an unexpected keyword argument 'budget'
+=========================== short test summary info ===========================
+FAILED tests/contract/test_company_source_layout.py::test_company_direct_and_raw_discover_once_without_other_company[direct-None]
+FAILED tests/contract/test_company_source_layout.py::test_company_direct_and_raw_discover_once_without_other_company[direct-company_raw_v1]
+FAILED tests/contract/test_company_source_layout.py::test_company_direct_and_raw_discover_once_without_other_company[raw-None]
+FAILED tests/contract/test_company_source_layout.py::test_company_direct_and_raw_discover_once_without_other_company[raw-company_raw_v1]
+FAILED tests/contract/test_company_source_layout.py::test_company_direct_and_raw_discover_once_without_other_company[both-None]
+FAILED tests/contract/test_company_source_layout.py::test_company_direct_and_raw_discover_once_without_other_company[both-company_raw_v1]
+FAILED tests/contract/test_company_source_layout.py::test_scoped_adapter_and_registration_scope_reject_escape_and_projection
+FAILED tests/contract/test_registration_read_budget.py::test_registration_budget_refuses_oversized_raw_before_read
+FAILED tests/contract/test_registration_read_budget.py::test_registration_stream_checks_deadline_and_changing_bytes[deadline]
+FAILED tests/contract/test_registration_read_budget.py::test_registration_stream_checks_deadline_and_changing_bytes[growth]
+============================= 10 failed in 1.69s ==============================

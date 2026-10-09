@@ -1,0 +1,32 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 198 items
+
+tests\contract\test_title_source_fact.py .......                         [  3%]
+tests\contract\test_local_request_relevance.py ........                  [  7%]
+tests\contract\test_local_discovery_limits.py ......                     [ 10%]
+tests\contract\test_company_source_layout.py ......s.                    [ 14%]
+tests\contract\test_registration_read_budget.py .........                [ 19%]
+tests\unit\test_source_facts.py .......................                  [ 30%]
+tests\unit\test_dayu_fiscal_metadata.py ................................ [ 46%]
+..                                                                       [ 47%]
+tests\unit\test_adapter_registration_efficiency.py .....                 [ 50%]
+tests\unit\test_source_catalog_scanner_direct.py ....                    [ 52%]
+tests\integration\test_legacy_local_reconcile.py ....................... [ 64%]
+....                                                                     [ 66%]
+tests\contract\test_company_raw_adapter.py .....                         [ 68%]
+tests\contract\test_dayu_adapter.py ....                                 [ 70%]
+tests\contract\test_sidecar_adapter.py ...........                       [ 76%]
+tests\contract\test_adapter_production_dispatch.py .........             [ 80%]
+tests\contract\test_scanner_facade.py ....                               [ 82%]
+tests\contract\test_source_version_reader.py ........................... [ 96%]
+......                                                                   [ 99%]
+tests\e2e\test_r2_source_facts_real_bytes.py s                           [100%]
+
+======================= 196 passed, 2 skipped in 22.29s =======================
