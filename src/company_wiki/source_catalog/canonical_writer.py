@@ -217,7 +217,7 @@ class CanonicalSourceWriter:
                                    provenance_extensions=provenance_extensions, budget=budget)
 
     def _commit_staged(self, request, candidate, receipt, staged, *,
-                       provenance_extensions=None, budget=None):
+                       provenance_extensions=None, budget=None, reactivate_retired=True):
         """One immutable commit algorithm shared by provider and local originals."""
         with CatalogOperationLock(
             self.catalog.config.catalog_dir,
@@ -226,7 +226,17 @@ class CanonicalSourceWriter:
         ):
             if budget is not None:
                 budget.ensure_open()
-            self._reactivate_if_retired(receipt.content_sha256)
+            if reactivate_retired:
+                # Explicit provider re-acquisition retains its existing contract.
+                self._reactivate_if_retired(receipt.content_sha256)
+            else:
+                # A local import cannot turn a withdrawal into fresh provider approval.
+                document_id = source_id_for_sha256(receipt.content_sha256).replace(
+                    "urn:company-wiki:source:", "urn:company-wiki:document:")
+                current = (self.catalog.reader.exact_source_version(document_id)
+                           if self.catalog.config.database_path.exists() else None)
+                if current is not None and current["source_status"] != "active":
+                    raise CanonicalImportError("local import requires atomic metadata reconciliation")
             existing = self._existing_original(receipt.content_sha256)
             if existing is not None:
                 self._remove_staged(staged)
@@ -338,7 +348,8 @@ class CanonicalSourceWriter:
         receipt = _OriginalStorageReceipt(str(staged), content_sha256, byte_size,
                                           mime_type, retrieved_at)
         return self._commit_staged(request, candidate, receipt, staged,
-                                  provenance_extensions={"official_capture": dict(capture_receipt)})
+                                  provenance_extensions={"official_capture": dict(capture_receipt)},
+                                  reactivate_retired=False)
 
     def source_ref_for_import(
         self,

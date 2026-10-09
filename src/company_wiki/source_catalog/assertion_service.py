@@ -106,56 +106,127 @@ def record_source_facts(catalog: Any, *, ref: Any, facts: dict[str, Any],
         reader = SourceVersionReader(catalog)
         reader.verify_version(ref, purpose="source_export")
         current = reader.describe_version(ref)
-        store = catalog.store
-        prior = get_verified_assertion(store, ref.source_id, ref.content_sha256, reader="steady")
-        previous_evidence = _evidence_payload(prior["evidence_json"], prior["assertion_id"]) if prior else {}
-        patch = dict(previous_evidence.get("source_fact_patch") or {})
-        field_evidence = dict(previous_evidence.get("source_fact_evidence") or {})
-        patch.update(facts)
-        field_evidence.update(evidence)
-        _validate_source_facts(patch, field_evidence)
-        evidence_payload = {"source_fact_patch": patch, "source_fact_evidence": field_evidence}
-        def semantic_evidence(value: dict[str, Any]) -> dict[str, Any]:
-            fields = value.get("source_fact_evidence") or {}
-            return {"source_fact_patch": value.get("source_fact_patch"),
-                    "source_fact_evidence": {key: {k: v for k, v in proof.items() if k != "observed_at"}
-                                             for key, proof in fields.items()}}
-        if prior and prior["evidence_basis"] == "source-facts" and semantic_evidence(previous_evidence) == semantic_evidence(evidence_payload):
-            return {"status": "unchanged", "assertion_id": prior["assertion_id"],
-                    "document_id": ref.document_id, "source_id": ref.source_id}
-        values = {key: current.get(key) for key in SOURCE_FACT_FIELDS}
-        values["entity"] = current.get("display_name")
-        if prior:
-            for key in SOURCE_FACT_FIELDS - {"published_date"}:
-                if values.get(key) is None and key in prior:
-                    values[key] = prior[key]
-        values.update(patch)
-        assertion = _build_assertion(
-            source_id=ref.source_id, document_id=ref.document_id, content_sha256=ref.content_sha256,
-            **{key: value for key, value in values.items() if key not in {"published_date", "language"}},
-            evidence_basis="source-facts", evidence_json=evidence_payload, decision="verified",
-            supersedes_assertion_id=prior["assertion_id"] if prior else None,
-            created_by="automated-source-facts",
+        assertion, projection, assertion_id = _prepare_source_fact_write(catalog, ref, current, facts, evidence)
+        if assertion is not None:
+            with catalog.store.transaction() as connection:
+                _write_source_fact_projection(connection, ref, assertion, projection)
+        return {"status": "recorded" if assertion is not None else "unchanged",
+                "assertion_id": assertion_id, "document_id": ref.document_id, "source_id": ref.source_id}
+
+
+def _prepare_source_fact_write(catalog, ref, current, facts, evidence):
+    """One semantic correction builder shared by active updates and atomic restoration."""
+    prior = get_verified_assertion(catalog.reader, ref.source_id, ref.content_sha256, reader="steady")
+    previous_evidence = _evidence_payload(prior["evidence_json"], prior["assertion_id"]) if prior else {}
+    patch = dict(previous_evidence.get("source_fact_patch") or {})
+    field_evidence = dict(previous_evidence.get("source_fact_evidence") or {})
+    patch.update(facts)
+    field_evidence.update(evidence)
+    _validate_source_facts(patch, field_evidence)
+    evidence_payload = {"source_fact_patch": patch, "source_fact_evidence": field_evidence}
+    def semantic_evidence(value: dict[str, Any]) -> dict[str, Any]:
+        fields = value.get("source_fact_evidence") or {}
+        return {"source_fact_patch": value.get("source_fact_patch"),
+                "source_fact_evidence": {key: {k: v for k, v in proof.items() if k != "observed_at"}
+                                         for key, proof in fields.items()}}
+    if prior and prior["evidence_basis"] == "source-facts" and semantic_evidence(previous_evidence) == semantic_evidence(evidence_payload):
+        return None, {}, prior["assertion_id"]
+    values = {key: current.get(key) for key in SOURCE_FACT_FIELDS}
+    values["entity"] = current.get("display_name")
+    if prior:
+        for key in SOURCE_FACT_FIELDS - {"published_date"}:
+            if values.get(key) is None and key in prior:
+                values[key] = prior[key]
+    values.update(patch)
+    assertion = _build_assertion(
+        source_id=ref.source_id, document_id=ref.document_id, content_sha256=ref.content_sha256,
+        **{key: value for key, value in values.items() if key not in {"published_date", "language"}},
+        evidence_basis="source-facts", evidence_json=evidence_payload, decision="verified",
+        supersedes_assertion_id=prior["assertion_id"] if prior else None,
+        created_by="automated-source-facts",
+    )
+    assertion.update(published_at=values["published_date"], language=values["language"])
+    projection = {}
+    if "document_kind" in facts:
+        projection.update(document_kind=facts["document_kind"], source_type=SOURCE_FACT_KINDS[facts["document_kind"]])
+    if "published_date" in facts:
+        projection["published_date"] = facts["published_date"]
+    return assertion, projection, assertion["assertion_id"]
+
+
+def _write_source_fact_projection(connection, ref, assertion, projection):
+    columns = tuple(assertion)
+    connection.execute(
+        f"INSERT INTO source_metadata_assertions ({','.join(columns)}) VALUES ({','.join('?' for _ in columns)})",
+        tuple(assertion[key] for key in columns),
+    )
+    if projection:
+        connection.execute(
+            f"UPDATE documents SET {','.join(key+'=?' for key in projection)} WHERE document_id=?",
+            (*projection.values(), ref.document_id),
         )
-        assertion.update(published_at=values["published_date"], language=values["language"])
-        columns = tuple(assertion)
-        projection = {}
-        if "document_kind" in facts:
-            projection.update(document_kind=facts["document_kind"], source_type=SOURCE_FACT_KINDS[facts["document_kind"]])
-        if "published_date" in facts:
-            projection["published_date"] = facts["published_date"]
-        with store.transaction() as connection:
-            connection.execute(
-                f"INSERT INTO source_metadata_assertions ({','.join(columns)}) VALUES ({','.join('?' for _ in columns)})",
-                tuple(assertion[key] for key in columns),
-            )
-            if projection:
-                connection.execute(
-                    f"UPDATE documents SET {','.join(key+'=?' for key in projection)} WHERE document_id=?",
-                    (*projection.values(), ref.document_id),
-                )
-        return {"status": "recorded", "assertion_id": assertion["assertion_id"],
-                "document_id": ref.document_id, "source_id": ref.source_id}
+
+
+def restore_document_facts(catalog, *, ref, facts, evidence, retirement_observation,
+                           budget=None, fact_replay=None):
+    """Verify inactive bytes, supersede facts and restore only verified locations atomically.
+
+    The observation is an optimistic concurrency pin; it does not authorize an
+    arbitrary retirement. There is no intermediate fake-active read.
+    """
+    from .local_inventory import (LocalPrepareLimits, LocalReadBudget,
+                                  metadata_retirement, observe_document, verify_registered_original)
+    from .lock import CatalogOperationLock
+    from .source_reader import SourceReadError, SourceRef
+    from .resolver import _source_metadata
+    from .metadata_observation import observe_metadata
+
+    if not isinstance(ref, SourceRef):
+        raise TypeError("ref must be SourceRef")
+    _validate_source_facts(facts, evidence)
+    required = {"entity", "market", "security_id", "document_kind", "published_date"}
+    if any(not facts.get(key) for key in required):
+        raise SourceReadError("blocked", "local_metadata_incomplete")
+    budget = budget or LocalReadBudget(LocalPrepareLimits())
+    with CatalogOperationLock(catalog.config.catalog_dir, operation="local_source_reconcile"):
+        budget.check()
+        observed = observe_document(catalog, ref.document_id)
+        if observed != retirement_observation:
+            raise SourceReadError("unavailable", "local_observation_changed")
+        status = observed["version"]["source_status"]
+        if status not in {"active", "retired"} or (status == "retired" and not metadata_retirement(observed)):
+            raise SourceReadError("blocked", "retirement_not_metadata_only")
+        original = verify_registered_original(catalog, ref, budget=budget)
+        if fact_replay is not None:
+            replayed_facts, replayed_evidence = fact_replay(original)
+            if (replayed_facts,replayed_evidence) != (facts,evidence):
+                raise SourceReadError("unavailable", "local_fact_observation_changed")
+        row = observed["version"]
+        metadata = observe_metadata(row["metadata_json"]).metadata
+        current = _source_metadata({"source_id":ref.source_id, "metadata":metadata},
+                                   store=catalog.reader, reader="steady")
+        current.update(document_kind=row["document_kind"],
+                       published_date=current.get("published_date",row["published_date"]),
+                       display_name=current.get("display_name") or current.get("company_name"))
+        assertion, projection, assertion_id = _prepare_source_fact_write(catalog,ref,current,facts,evidence)
+        audit_id = f"restore-{uuid.uuid4().hex}" if status == "retired" else None
+        with catalog.store.transaction() as connection:
+            if observe_document(catalog,ref.document_id) != observed:
+                raise SourceReadError("unavailable", "local_observation_changed")
+            budget.check()
+            if assertion is not None:
+                _write_source_fact_projection(connection,ref,assertion,projection)
+            if status == "retired":
+                connection.execute("UPDATE documents SET source_status='active' WHERE document_id=?",(ref.document_id,))
+                for location_id, _path, _root in original.locations:
+                    connection.execute("UPDATE locations SET location_status='active' WHERE location_id=? AND source_id=? AND location_status='retired'",(location_id,ref.source_id))
+                connection.execute("INSERT INTO document_restore_audit(audit_id,document_id,reason,created_by,created_at) VALUES(?,?,?,?,?)",
+                    (audit_id,ref.document_id,"verified local original and corrected source facts; prior retirement audits retained",
+                     "automated-local-reconcile",datetime.now(tz=timezone.utc).isoformat()))
+            budget.check()
+        return {"status":"restored" if audit_id else ("recorded" if assertion is not None else "unchanged"),
+                "source_ref":ref, "assertion_id":assertion_id, "restore_audit_id":audit_id,
+                "verified_locations":len(original.locations)}
 
 
 def source_fact_projection(connection: Any, *, document_id: str,

@@ -91,19 +91,12 @@ def _inline_date(text: str, transform: str) -> str:
         raise FiscalMetadataError("SEC primary inline date cannot be normalized") from exc
 
 
-def verify_sec_primary(
-    data: bytes, *, cik: str, year: int, period: str, report_date: str,
-) -> dict[str, Any]:
-    """Require unambiguous DEI values in the actual HTML primary document."""
+def _sec_primary_observations(data: bytes):
     from bs4 import BeautifulSoup
 
     soup = BeautifulSoup(data, "html.parser")
-    fields = {
-        "documentfiscalyearfocus": str(year),
-        "documentfiscalperiodfocus": period,
-        "documentperiodenddate": report_date,
-        "entitycentralindexkey": str(int(cik)),
-    }
+    fields = ("documentfiscalyearfocus", "documentfiscalperiodfocus",
+              "documentperiodenddate", "entitycentralindexkey", "documenttype")
     observed: dict[str, set[str]] = {key: set() for key in fields}
     dates = []
     for tag in soup.find_all(attrs={"name": True}):
@@ -125,10 +118,37 @@ def verify_sec_primary(
                 raise FiscalMetadataError("SEC primary has invalid CIK")
             value = str(int(value))
         observed[field].add(value)
+    return observed, dates
+
+
+def extract_sec_primary(data: bytes) -> dict[str, Any]:
+    """Extract unambiguous source facts first; request labels are never inputs."""
+    observed, dates = _sec_primary_observations(data)
+    if any(len(values) != 1 for values in observed.values()):
+        raise FiscalMetadataError("SEC primary DEI is missing or ambiguous")
+    values = {key: next(iter(items)) for key, items in observed.items()}
+    year = values["documentfiscalyearfocus"]
+    period = values["documentfiscalperiodfocus"]
+    form = re.sub(r"\s+", "", values["documenttype"]).upper()
+    if not re.fullmatch(r"(?:19|20|21)\d{2}", year) or period not in {"Q1", "Q2", "Q3", "FY"} or form not in {"10-Q", "10-Q/A", "10-K", "10-K/A", "20-F", "20-F/A"}:
+        raise FiscalMetadataError("SEC primary fiscal identity is unsupported")
+    if (form.startswith("10-Q")) != (period != "FY"):
+        raise FiscalMetadataError("SEC primary form and period conflict")
+    return {"kind":"primary_dei", "cik":values["entitycentralindexkey"],
+            "fiscal_year":int(year), "fiscal_period":period,
+            "report_date":values["documentperiodenddate"], "form_type":form,
+            "date_observations":dates}
+
+
+def verify_sec_primary(
+    data: bytes, *, cik: str, year: int, period: str, report_date: str,
+) -> dict[str, Any]:
+    """Require unambiguous DEI values in the actual HTML primary document."""
+    observed, dates = _sec_primary_observations(data)
+    fields = {"documentfiscalyearfocus":str(year), "documentfiscalperiodfocus":period,
+              "documentperiodenddate":report_date, "entitycentralindexkey":str(int(cik))}
     if any(observed[key] != {expected} for key, expected in fields.items()):
         raise FiscalMetadataError("SEC primary DEI conflicts with candidate or is missing")
-    return {
-        "kind": "primary_dei", "cik": fields["entitycentralindexkey"],
-        "fiscal_year": year, "fiscal_period": period, "report_date": report_date,
-        "date_observations": dates,
-    }
+    return {"kind":"primary_dei", "cik":fields["entitycentralindexkey"],
+            "fiscal_year":year, "fiscal_period":period, "report_date":report_date,
+            "date_observations":dates}
