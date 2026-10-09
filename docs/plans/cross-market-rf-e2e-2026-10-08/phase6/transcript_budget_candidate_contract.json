@@ -1,0 +1,384 @@
+{
+  "schema_version": "transcript-budget-contract/1",
+  "started_at": "2026-10-09T03:07:26.957502+00:00",
+  "roots": {
+    "ff": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\ff-diagnostics",
+    "et": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\pool-20261009\\et-budget",
+    "cwp": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+  },
+  "supplier_requests": 0,
+  "supplier_cost_usd": "0",
+  "checks": [
+    {
+      "name": "success:primary_reused",
+      "status": "PASS",
+      "detail": "source_candidate"
+    },
+    {
+      "name": "success:actual_usage",
+      "status": "PASS",
+      "detail": {
+        "status": "downloaded",
+        "retryable": false,
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:fca9602f9406bc5f9b4aa624f2cac07b8b86014d28efd413c535b34ebbb1f0e8",
+          "source_id": "urn:company-wiki:source:sha256:fca9602f9406bc5f9b4aa624f2cac07b8b86014d28efd413c535b34ebbb1f0e8",
+          "content_sha256": "fca9602f9406bc5f9b4aa624f2cac07b8b86014d28efd413c535b34ebbb1f0e8",
+          "byte_size": 1024,
+          "mime_type": "application/json",
+          "schema_version": "2.0"
+        },
+        "provider": "fmp",
+        "fiscal_year": 2026,
+        "fiscal_quarter": 2,
+        "provider_document_id": "fmp:AAPL:2026:Q2:2026-09-01",
+        "call_date": "2026-09-01",
+        "publication_date": null,
+        "as_of_cutoff_verified": false,
+        "provider_calls": 1,
+        "provider_requests": 1,
+        "provider_response_bytes": 1024,
+        "provider_usage_complete": true
+      }
+    },
+    {
+      "name": "success:one_mock_http",
+      "status": "PASS",
+      "detail": 1
+    },
+    {
+      "name": "success:canonical_import",
+      "status": "PASS",
+      "detail": "downloaded"
+    },
+    {
+      "name": "success:verified_raw_open",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "success:repeat_zero_http",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "success:repeat_same_ref",
+      "status": "PASS",
+      "detail": {
+        "status": "unknown_publication",
+        "reason": "publication_date_unknown",
+        "retryable": false,
+        "source_ref": {
+          "byte_size": 1024,
+          "content_sha256": "fca9602f9406bc5f9b4aa624f2cac07b8b86014d28efd413c535b34ebbb1f0e8",
+          "document_id": "urn:company-wiki:document:sha256:fca9602f9406bc5f9b4aa624f2cac07b8b86014d28efd413c535b34ebbb1f0e8",
+          "mime_type": "application/json",
+          "schema_version": "2.0",
+          "source_id": "urn:company-wiki:source:sha256:fca9602f9406bc5f9b4aa624f2cac07b8b86014d28efd413c535b34ebbb1f0e8"
+        },
+        "provider": "fmp",
+        "fiscal_year": 2026,
+        "fiscal_quarter": 2,
+        "publication_date": null,
+        "as_of_cutoff_verified": false,
+        "provider_calls": 0
+      }
+    },
+    {
+      "name": "success:one_canonical_raw",
+      "status": "PASS",
+      "detail": 1
+    },
+    {
+      "name": "success:primary_unchanged",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "success:worker_restored",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "padded-json:primary_reused",
+      "status": "PASS",
+      "detail": "source_candidate"
+    },
+    {
+      "name": "padded-json:actual_usage",
+      "status": "PASS",
+      "detail": {
+        "status": "provider_unavailable",
+        "reason": "byte_limit",
+        "retryable": false,
+        "provider_calls": 1,
+        "provider_requests": 1,
+        "provider_response_bytes": 20386,
+        "provider_usage_complete": true
+      }
+    },
+    {
+      "name": "padded-json:one_mock_http",
+      "status": "PASS",
+      "detail": 1
+    },
+    {
+      "name": "padded-json:terminal_byte_limit",
+      "status": "PASS",
+      "detail": {
+        "status": "provider_unavailable",
+        "reason": "byte_limit",
+        "retryable": false,
+        "provider_calls": 1,
+        "provider_requests": 1,
+        "provider_response_bytes": 20386,
+        "provider_usage_complete": true
+      }
+    },
+    {
+      "name": "padded-json:no_transcript_import",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "padded-json:primary_unchanged",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "padded-json:worker_restored",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "temporary_root_restored",
+      "status": "PASS",
+      "detail": null
+    }
+  ],
+  "commands": [
+    {
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpet-k7uj5s6i\\success\\ff_observe.py",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpet-k7uj5s6i\\success\\wiki\\company_wiki.json",
+        "--source-ref-v2",
+        "--timeout-seconds",
+        "120"
+      ],
+      "exit_code": 0,
+      "seconds": 5.415,
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.source_reader_cli",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpet-k7uj5s6i\\success\\wiki\\config\\source_catalog.yaml",
+        "--document-id",
+        "urn:company-wiki:document:sha256:fca9602f9406bc5f9b4aa624f2cac07b8b86014d28efd413c535b34ebbb1f0e8",
+        "--source-id",
+        "urn:company-wiki:source:sha256:fca9602f9406bc5f9b4aa624f2cac07b8b86014d28efd413c535b34ebbb1f0e8",
+        "--content-sha256",
+        "fca9602f9406bc5f9b4aa624f2cac07b8b86014d28efd413c535b34ebbb1f0e8",
+        "--purpose",
+        "preview"
+      ],
+      "exit_code": 0,
+      "seconds": 0.735,
+      "stderr": "{\"byte_size\":1024,\"content_sha256\":\"fca9602f9406bc5f9b4aa624f2cac07b8b86014d28efd413c535b34ebbb1f0e8\",\"document_id\":\"urn:company-wiki:document:sha256:fca9602f9406bc5f9b4aa624f2cac07b8b86014d28efd413c535b34ebbb1f0e8\",\"manifest\":{\"byte_size\":1024,\"canonical_entity_id\":null,\"collector_name\":null,\"collector_version\":null,\"content_sha256\":\"fca9602f9406bc5f9b4aa624f2cac07b8b86014d28efd413c535b34ebbb1f0e8\",\"display_name\":null,\"document_id\":\"urn:company-wiki:document:sha256:fca9602f9406bc5f9b4aa624f2cac07b8b86014d28efd413c535b34ebbb1f0e8\",\"document_kind\":\"investor_call_transcript\",\"fiscal_period\":\"Q2\",\"fiscal_year\":2026,\"form_type\":null,\"language\":null,\"market\":\"US\",\"mime_type\":\"application/json\",\"period_end\":null,\"provider\":\"fmp\",\"provider_document_id\":\"fmp:AAPL:2026:Q2:2026-09-01\",\"published_date\":null,\"retrieved_at\":\"2026-10-09T03:07:31Z\",\"security_id\":\"AAPL\",\"source_id\":\"urn:company-wiki:source:sha256:fca9602f9406bc5f9b4aa624f2cac07b8b86014d28efd413c535b34ebbb1f0e8\",\"source_url\":\"https://financialmodelingprep.com/stable/earning-call-transcript?symbol=AAPL&year=2026&quarter=2\",\"title\":\"AAPL 2026 Q2 Earnings Call Transcript\"},\"policy_sha256\":\"56481b2394e32fb7b625dbd21b48878be754377c2fed30a1683aa0f15f6deb7d\",\"read_at\":\"2026-10-09T03:07:33.928674+00:00\",\"review\":null,\"schema_version\":\"2.1\",\"source_id\":\"urn:company-wiki:source:sha256:fca9602f9406bc5f9b4aa624f2cac07b8b86014d28efd413c535b34ebbb1f0e8\",\"source_read_policy_sha256\":\"527521a084dcee71aca13290d898b834df9970c7c362ad324627948695b74c18\",\"status\":\"ok\"}\r\n"
+    },
+    {
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpet-k7uj5s6i\\success\\ff_observe.py",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpet-k7uj5s6i\\success\\wiki\\company_wiki.json",
+        "--source-ref-v2",
+        "--timeout-seconds",
+        "120"
+      ],
+      "exit_code": 0,
+      "seconds": 3.166,
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpet-k7uj5s6i\\padded-json\\ff_observe.py",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpet-k7uj5s6i\\padded-json\\wiki\\company_wiki.json",
+        "--source-ref-v2",
+        "--timeout-seconds",
+        "120"
+      ],
+      "exit_code": 0,
+      "seconds": 3.735,
+      "stderr": ""
+    }
+  ],
+  "temporary_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpet-k7uj5s6i",
+  "success": {
+    "first": {
+      "schema_version": "2.0",
+      "status": "source_candidate",
+      "request_period": {
+        "mode": "exact",
+        "fiscal_year": 2025,
+        "fiscal_period": null,
+        "as_of_date": "2026-10-09"
+      },
+      "filing": {
+        "status": "source_candidate",
+        "source_ref": {
+          "byte_size": 44,
+          "content_sha256": "1badfe897596187aef9f4aa3b36408e621143b2d0f8ca6d252dd89bbefd72065",
+          "document_id": "urn:company-wiki:document:sha256:1badfe897596187aef9f4aa3b36408e621143b2d0f8ca6d252dd89bbefd72065",
+          "mime_type": "application/pdf",
+          "schema_version": "2.0",
+          "source_id": "urn:company-wiki:source:sha256:1badfe897596187aef9f4aa3b36408e621143b2d0f8ca6d252dd89bbefd72065"
+        },
+        "byte_verification": "pending_verified_open",
+        "document_kind": "annual_report",
+        "fiscal_year": 2025,
+        "fiscal_period": null,
+        "resolution_outcome": "reused_existing",
+        "download_events": 0
+      },
+      "transcript": {
+        "status": "downloaded",
+        "retryable": false,
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:fca9602f9406bc5f9b4aa624f2cac07b8b86014d28efd413c535b34ebbb1f0e8",
+          "source_id": "urn:company-wiki:source:sha256:fca9602f9406bc5f9b4aa624f2cac07b8b86014d28efd413c535b34ebbb1f0e8",
+          "content_sha256": "fca9602f9406bc5f9b4aa624f2cac07b8b86014d28efd413c535b34ebbb1f0e8",
+          "byte_size": 1024,
+          "mime_type": "application/json",
+          "schema_version": "2.0"
+        },
+        "provider": "fmp",
+        "fiscal_year": 2026,
+        "fiscal_quarter": 2,
+        "provider_document_id": "fmp:AAPL:2026:Q2:2026-09-01",
+        "call_date": "2026-09-01",
+        "publication_date": null,
+        "as_of_cutoff_verified": false,
+        "provider_calls": 1,
+        "provider_requests": 1,
+        "provider_response_bytes": 1024,
+        "provider_usage_complete": true
+      },
+      "calls": 5,
+      "downloads": 0
+    },
+    "observed_http_gets": 1,
+    "repeat": {
+      "schema_version": "2.0",
+      "status": "source_candidate",
+      "request_period": {
+        "mode": "exact",
+        "fiscal_year": 2025,
+        "fiscal_period": null,
+        "as_of_date": "2026-10-09"
+      },
+      "filing": {
+        "status": "source_candidate",
+        "source_ref": {
+          "byte_size": 44,
+          "content_sha256": "1badfe897596187aef9f4aa3b36408e621143b2d0f8ca6d252dd89bbefd72065",
+          "document_id": "urn:company-wiki:document:sha256:1badfe897596187aef9f4aa3b36408e621143b2d0f8ca6d252dd89bbefd72065",
+          "mime_type": "application/pdf",
+          "schema_version": "2.0",
+          "source_id": "urn:company-wiki:source:sha256:1badfe897596187aef9f4aa3b36408e621143b2d0f8ca6d252dd89bbefd72065"
+        },
+        "byte_verification": "pending_verified_open",
+        "document_kind": "annual_report",
+        "fiscal_year": 2025,
+        "fiscal_period": null,
+        "resolution_outcome": "reused_existing",
+        "download_events": 0
+      },
+      "transcript": {
+        "status": "unknown_publication",
+        "reason": "publication_date_unknown",
+        "retryable": false,
+        "source_ref": {
+          "byte_size": 1024,
+          "content_sha256": "fca9602f9406bc5f9b4aa624f2cac07b8b86014d28efd413c535b34ebbb1f0e8",
+          "document_id": "urn:company-wiki:document:sha256:fca9602f9406bc5f9b4aa624f2cac07b8b86014d28efd413c535b34ebbb1f0e8",
+          "mime_type": "application/json",
+          "schema_version": "2.0",
+          "source_id": "urn:company-wiki:source:sha256:fca9602f9406bc5f9b4aa624f2cac07b8b86014d28efd413c535b34ebbb1f0e8"
+        },
+        "provider": "fmp",
+        "fiscal_year": 2026,
+        "fiscal_quarter": 2,
+        "publication_date": null,
+        "as_of_cutoff_verified": false,
+        "provider_calls": 0
+      },
+      "calls": 4,
+      "downloads": 0
+    }
+  },
+  "padded-json": {
+    "first": {
+      "schema_version": "2.0",
+      "status": "source_candidate",
+      "request_period": {
+        "mode": "exact",
+        "fiscal_year": 2025,
+        "fiscal_period": null,
+        "as_of_date": "2026-10-09"
+      },
+      "filing": {
+        "status": "source_candidate",
+        "source_ref": {
+          "byte_size": 44,
+          "content_sha256": "1badfe897596187aef9f4aa3b36408e621143b2d0f8ca6d252dd89bbefd72065",
+          "document_id": "urn:company-wiki:document:sha256:1badfe897596187aef9f4aa3b36408e621143b2d0f8ca6d252dd89bbefd72065",
+          "mime_type": "application/pdf",
+          "schema_version": "2.0",
+          "source_id": "urn:company-wiki:source:sha256:1badfe897596187aef9f4aa3b36408e621143b2d0f8ca6d252dd89bbefd72065"
+        },
+        "byte_verification": "pending_verified_open",
+        "document_kind": "annual_report",
+        "fiscal_year": 2025,
+        "fiscal_period": null,
+        "resolution_outcome": "reused_existing",
+        "download_events": 0
+      },
+      "transcript": {
+        "status": "provider_unavailable",
+        "reason": "byte_limit",
+        "retryable": false,
+        "provider_calls": 1,
+        "provider_requests": 1,
+        "provider_response_bytes": 20386,
+        "provider_usage_complete": true
+      },
+      "calls": 3,
+      "downloads": 0
+    },
+    "observed_http_gets": 1
+  },
+  "temporary_root_restored": true,
+  "seconds": 14.708,
+  "passed": 18,
+  "failed": 0
+}

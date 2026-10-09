@@ -102,3 +102,31 @@ def test_fmp_json_record_identity_is_bound_to_envelope():
     payload["provider_payload_sha256"] = hashlib.sha256(encoded).hexdigest()
     with pytest.raises(TranscriptToolContractError):
         _parse(payload)
+
+
+@pytest.mark.parametrize("extra", [{"padding": "x" * 20000},
+                                  {"provider_metadata": {"revision": 2, "optional": None}}])
+def test_fmp_extra_provider_fields_preserve_raw_and_do_not_change_content(extra):
+    payload, _, _ = _inputs()
+    records = json.loads(base64.b64decode(payload["provider_payload_base64"]))
+    records[0].update(extra)
+    original = json.dumps(records, ensure_ascii=False).encode("utf-8")
+    payload["provider_payload_base64"] = base64.b64encode(original).decode()
+    payload["provider_payload_sha256"] = hashlib.sha256(original).hexdigest()
+    accepted = _parse(payload)
+    assert accepted.original == original
+    assert accepted.content_bytes == payload["content_bytes"]
+    assert accepted.canonical_content_sha256 == payload["canonical_content_sha256"]
+
+
+@pytest.mark.parametrize("field,value", [("symbol", "OTHER"), ("year", True),
+                                        ("period", "Q4"), ("content", "other text")])
+def test_fmp_extra_metadata_never_hides_changed_required_content(field, value):
+    payload, _, _ = _inputs()
+    records = json.loads(base64.b64decode(payload["provider_payload_base64"]))
+    records[0].update({"provider_metadata": {}, field: value})
+    original = json.dumps(records).encode()
+    payload["provider_payload_base64"] = base64.b64encode(original).decode()
+    payload["provider_payload_sha256"] = hashlib.sha256(original).hexdigest()
+    with pytest.raises(TranscriptToolContractError):
+        _parse(payload)

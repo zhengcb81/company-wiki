@@ -164,3 +164,11 @@ FF独立工程提交e9b0d088已正常hook推隔离支线，精确远端CI3786455
 ## 2026-10-09T00:48:11.532827+00:00: W01已合并并同步
 
 CWP156PASS/1真实数据SKIP、FF110PASS、RF14PASS；真实RF→FF→CWP23checks PASS，owned TEMP恢复，supplier0。RF3/FF4文件仅同步到两个物理副本，30个配置/output文件SHA不变，.claude Junction保留。完整证据 C:\Users\郑曾波\Projects\revenue-forecast-audit\runs\pool-20261009-001-us-nvda\execution_replays\w01-main。调用器先误用unittest（无法导入、后0collection），明确失败未假绿；读实际pytest函数后一次补跑；RF首次零写plan发现destination应parent，写前更正。W01工程完成，实际研究M2/公司池clean仍未完成。
+
+## 主线恢复盘点（2026-10-09）
+
+ET W02已有128责任测试及实际supervisor/worker五种离线CLI证据，但交接/commit未完成；CWP W03公共read复验待收尾；RF W04–W06未写代码。不能以agent摘要代替交付。主线跨run默认复用/全图PPTX/原三家和新三家研究验收仍保留，循环后置不取消责任。W01精确CI与W07工程完成不表示研究全部完成。
+
+## W02集成发现的共享根因（2026-10-09）
+
+原始provider数据不能被要求与本项目的固定字段枚举完全相等。原件附加metadata应保存但不成为许可；必要身份/期间/内容及hash核对保持。ET执行已完成后CWP写/读失败不能抹掉实际供应商receipt、更不能退回不明retryable错误而触发重复下载。两机制已通过独立责任RED与真实三仓CLI验证；账户FMP entitlement与publication unknown仍如实保留。本节点是工程，不代替原/新三家公司独立研究验收。

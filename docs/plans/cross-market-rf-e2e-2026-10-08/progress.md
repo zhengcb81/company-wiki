@@ -302,3 +302,19 @@ FF独立工程提交e9b0d088已正常hook推隔离支线，精确远端CI3786455
 ## 2026-10-09T00:48:11.532827+00:00: W01已合并并同步
 
 CWP156PASS/1真实数据SKIP、FF110PASS、RF14PASS；真实RF→FF→CWP23checks PASS，owned TEMP恢复，supplier0。RF3/FF4文件仅同步到两个物理副本，30个配置/output文件SHA不变，.claude Junction保留。完整证据 C:\Users\郑曾波\Projects\revenue-forecast-audit\runs\pool-20261009-001-us-nvda\execution_replays\w01-main。调用器先误用unittest（无法导入、后0collection），明确失败未假绿；读实际pytest函数后一次补跑；RF首次零写plan发现destination应parent，写前更正。W01工程完成，实际研究M2/公司池clean仍未完成。
+
+## 2026-10-09T00:57:04.373016+00:00: W07及主线发布
+
+W01三仓main已推，精确SHA远端CI全部success（CWP98s、FF80s、RF37s）。W07功能ba290f85/交接681f2d19已合audit main并定点同步3文件×2逻辑技能安装；MAIN9责任测试PASS，原NVDA check仍needs_remediation、24findings/0unmapped/0event错误，旧native只是观察。RF独占负责人继续W04→W05→W06工作树；W02 FF字段两个RED→29GREEN，等待真实ET候选集中三仓联调再发版。CWP W03改按实际carrier解析PDF电话会，真实类型不变。
+
+## 2026-10-09T02:56:41.078465+00:00 — 恢复主线，循环延后
+
+按用户最新指令先完成本主线PWF，再运行公司池loop。实查ET W02/CWP W03已有未提交代码，FF W02接线未提交；RF W04–W06工作树clean尚无实现。已新派独立RF owner串行三包、独立CWP owner收尾W03，MAIN接ET/FF实际三仓离线联调。W01三仓精确主线CI均success，W07已并audit并安装。NVDA证据封存，clean为空，无新公司/付费模型。
+
+操作记录：apply_patch错误锚点未写入，已改为准确局部补丁。ET最终HANDOFF尚不存在，不能当交付。旧测试路径猜测及PS通配符rg失败已纠正为test_transcript_companion(_transport).py。计划同步首次自动审批拒绝Next Step后尾部截断，已改为严格精确段落替换、保留其余全文，无需扩大授权。
+
+## 2026-10-09T03:09:43.582153+00:00 — W02预算及三仓节点完成
+
+ET131PASS/66.70秒（MAIN_GREEN），五种actual supervisor/worker/mock-HTTP CLI原证据保留。FF新增4post-fetch失败RED→33责任PASS/5.06秒；CWP附加metadata两RED→25责任PASS/6.20秒。实际FF2→ET真实worker→CWP入库/verified open→重复0 HTTP、一个canonical原件，以及20386B/1024B超限terminal无入库，18检查点PASS/14.708秒；owned根均恢复、supplier0。ET f4f2eca、FF59c4d0d已精准commit，待MAIN按ET→FF顺序并线及FF定点安装。
+
+真实发现：CWP要求provider原始JSON恰好5字段，ET允许额外metadata导致成功数据入库被拒；已取消该exactset许可，必需字段/期间/int年份/正文SHA仍绑定。后续入库/坏ref/verified-open失败曾丢已完成ET计量并泛化为retryable；同一post-fetch边界现保留receipt且不再建议下载重试。测试调用者先错用1.1带2.0字段、mock事件误用event而非op、post-fetch fixture未配tool均更正，失败记录保留，没有改产品断言。

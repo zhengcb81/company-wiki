@@ -1,0 +1,222 @@
+{
+  "schema_version": "transcript-budget-contract/1",
+  "started_at": "2026-10-09T02:58:55.142926+00:00",
+  "roots": {
+    "ff": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\ff-diagnostics",
+    "et": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\pool-20261009\\et-budget",
+    "cwp": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+  },
+  "supplier_requests": 0,
+  "supplier_cost_usd": "0",
+  "checks": [
+    {
+      "name": "success:primary_reused",
+      "status": "PASS",
+      "detail": "source_candidate"
+    },
+    {
+      "name": "success:actual_usage",
+      "status": "FAIL",
+      "detail": {
+        "status": "upstream_error",
+        "reason": "transcript_acquisition_failed:ChildFailed",
+        "retryable": true
+      }
+    },
+    {
+      "name": "success:one_mock_http",
+      "status": "FAIL",
+      "detail": 0
+    },
+    {
+      "name": "success:canonical_import",
+      "status": "FAIL",
+      "detail": "upstream_error"
+    },
+    {
+      "name": "success:primary_unchanged",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "success:worker_restored",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "padded-json:primary_reused",
+      "status": "PASS",
+      "detail": "source_candidate"
+    },
+    {
+      "name": "padded-json:actual_usage",
+      "status": "PASS",
+      "detail": {
+        "status": "provider_unavailable",
+        "reason": "byte_limit",
+        "retryable": false,
+        "provider_calls": 1,
+        "provider_requests": 1,
+        "provider_response_bytes": 20386,
+        "provider_usage_complete": true
+      }
+    },
+    {
+      "name": "padded-json:one_mock_http",
+      "status": "FAIL",
+      "detail": 0
+    },
+    {
+      "name": "padded-json:terminal_byte_limit",
+      "status": "PASS",
+      "detail": {
+        "status": "provider_unavailable",
+        "reason": "byte_limit",
+        "retryable": false,
+        "provider_calls": 1,
+        "provider_requests": 1,
+        "provider_response_bytes": 20386,
+        "provider_usage_complete": true
+      }
+    },
+    {
+      "name": "padded-json:no_transcript_import",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "padded-json:primary_unchanged",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "padded-json:worker_restored",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "name": "temporary_root_restored",
+      "status": "PASS",
+      "detail": null
+    }
+  ],
+  "commands": [
+    {
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\ff-diagnostics\\scripts\\fetch_filing.py",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpet-3y1f4065\\success\\wiki\\company_wiki.json",
+        "--source-ref-v2",
+        "--timeout-seconds",
+        "120"
+      ],
+      "exit_code": 0,
+      "seconds": 4.624,
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\ff-diagnostics\\scripts\\fetch_filing.py",
+        "--config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpet-3y1f4065\\padded-json\\wiki\\company_wiki.json",
+        "--source-ref-v2",
+        "--timeout-seconds",
+        "120"
+      ],
+      "exit_code": 0,
+      "seconds": 4.014,
+      "stderr": ""
+    }
+  ],
+  "temporary_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpet-3y1f4065",
+  "success": {
+    "first": {
+      "schema_version": "2.0",
+      "status": "source_candidate",
+      "request_period": {
+        "mode": "exact",
+        "fiscal_year": 2025,
+        "fiscal_period": null,
+        "as_of_date": "2026-10-09"
+      },
+      "filing": {
+        "status": "source_candidate",
+        "source_ref": {
+          "byte_size": 44,
+          "content_sha256": "1badfe897596187aef9f4aa3b36408e621143b2d0f8ca6d252dd89bbefd72065",
+          "document_id": "urn:company-wiki:document:sha256:1badfe897596187aef9f4aa3b36408e621143b2d0f8ca6d252dd89bbefd72065",
+          "mime_type": "application/pdf",
+          "schema_version": "2.0",
+          "source_id": "urn:company-wiki:source:sha256:1badfe897596187aef9f4aa3b36408e621143b2d0f8ca6d252dd89bbefd72065"
+        },
+        "byte_verification": "pending_verified_open",
+        "document_kind": "annual_report",
+        "fiscal_year": 2025,
+        "fiscal_period": null,
+        "resolution_outcome": "reused_existing",
+        "download_events": 0
+      },
+      "transcript": {
+        "status": "upstream_error",
+        "reason": "transcript_acquisition_failed:ChildFailed",
+        "retryable": true
+      },
+      "calls": 4,
+      "downloads": 0
+    },
+    "observed_http_gets": 0
+  },
+  "padded-json": {
+    "first": {
+      "schema_version": "2.0",
+      "status": "source_candidate",
+      "request_period": {
+        "mode": "exact",
+        "fiscal_year": 2025,
+        "fiscal_period": null,
+        "as_of_date": "2026-10-09"
+      },
+      "filing": {
+        "status": "source_candidate",
+        "source_ref": {
+          "byte_size": 44,
+          "content_sha256": "1badfe897596187aef9f4aa3b36408e621143b2d0f8ca6d252dd89bbefd72065",
+          "document_id": "urn:company-wiki:document:sha256:1badfe897596187aef9f4aa3b36408e621143b2d0f8ca6d252dd89bbefd72065",
+          "mime_type": "application/pdf",
+          "schema_version": "2.0",
+          "source_id": "urn:company-wiki:source:sha256:1badfe897596187aef9f4aa3b36408e621143b2d0f8ca6d252dd89bbefd72065"
+        },
+        "byte_verification": "pending_verified_open",
+        "document_kind": "annual_report",
+        "fiscal_year": 2025,
+        "fiscal_period": null,
+        "resolution_outcome": "reused_existing",
+        "download_events": 0
+      },
+      "transcript": {
+        "status": "provider_unavailable",
+        "reason": "byte_limit",
+        "retryable": false,
+        "provider_calls": 1,
+        "provider_requests": 1,
+        "provider_response_bytes": 20386,
+        "provider_usage_complete": true
+      },
+      "calls": 3,
+      "downloads": 0
+    },
+    "observed_http_gets": 0
+  },
+  "temporary_root_restored": true,
+  "seconds": 10.477,
+  "passed": 10,
+  "failed": 4
+}

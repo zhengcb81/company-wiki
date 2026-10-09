@@ -114,8 +114,12 @@ def _decode_record(original: bytes) -> dict[str, Any]:
 
 
 def _validate_record_identity(record: dict[str, Any], payload: dict[str, Any], request: SourceRequest, candidate: DownloadCandidate) -> None:
-    if set(record) != {"symbol", "period", "year", "date", "content"}:
-        raise TranscriptToolContractError("FMP original fields differ from producer schema")
+    # Provider raw JSON is preserved, not rewritten into our envelope schema.
+    # Optional metadata does not change the required identity/content binding.
+    if not {"symbol", "period", "year", "date", "content"}.issubset(record):
+        raise TranscriptToolContractError("FMP original is missing required fields")
+    if type(record["year"]) is not int:
+        raise TranscriptToolContractError("FMP original fiscal year is invalid")
     expected = (request.security_id, request.fiscal_period, request.fiscal_year)
     if (record["symbol"], record["period"], record["year"]) != expected:
         raise TranscriptToolContractError("FMP original identity or period mismatch")

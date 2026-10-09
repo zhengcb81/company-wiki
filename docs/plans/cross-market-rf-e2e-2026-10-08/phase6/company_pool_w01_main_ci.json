@@ -1,0 +1,35 @@
+{
+  "checked_at_utc": "2026-10-09T00:57:04.373016+00:00",
+  "result": "all_exact_main_SHA_success",
+  "runs": [
+    {
+      "repo": "company-wiki",
+      "branch": "master",
+      "head": "e0a9a22330e6a2fa28a520637822870fa98ca313",
+      "run_id": 37866677654,
+      "conclusion": "success",
+      "seconds": 98,
+      "url": "https://github.com/zhengcb81/company-wiki/actions/runs/37866677654"
+    },
+    {
+      "repo": "filing-fetch",
+      "branch": "main",
+      "head": "e9b0d0882f46772e333a5b986c7c414733c284cd",
+      "run_id": 37866715921,
+      "conclusion": "success",
+      "seconds": 80,
+      "url": "https://github.com/zhengcb81/filing-fetch/actions/runs/37866715921"
+    },
+    {
+      "repo": "revenue-forecast",
+      "branch": "main",
+      "head": "8b48a99f23a19b1fd71a7e051837a55e12bb7d30",
+      "run_id": 37866771494,
+      "conclusion": "success",
+      "seconds": 37,
+      "url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/37866771494"
+    }
+  ],
+  "research_acceptance": false,
+  "Dayu_changes": 0
+}
