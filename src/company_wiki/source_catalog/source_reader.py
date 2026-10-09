@@ -648,7 +648,7 @@ class SourceVersionReader:
         self, ref: SourceRef, *, purpose: str,
         expected_read_policy_sha256: str | None,
         retain_bytes: bool, current_read_policy_sha256: str | None = None,
-        budget: _ReadBudget | None = None,
+        budget: _ReadBudget | None = None, scope_qualification=None,
     ) -> VerifiedContent | VerifiedVersionReceipt:
         """Verify through the current policy and same-SHA location fallback.
 
@@ -677,6 +677,13 @@ class SourceVersionReader:
         if version_row is None:
             raise SourceReadError("not_indexed", "document_not_indexed")
 
+        if purpose == "filing_reuse":
+            if scope_qualification is None:
+                from .assertion_service import source_scope_qualification
+                scope_qualification = source_scope_qualification(
+                    self.catalog, ref, metadata=self.describe_version(ref))
+            elif scope_qualification.ref != ref:
+                raise SourceReadError("unavailable", "source_scope_ref_changed")
         config = self.catalog.config
         roots = {root.root_id: root for root in config.roots}
         locations = []
@@ -745,9 +752,12 @@ class SourceVersionReader:
                 continue
             data, status, reason, detail = _read_verified_bytes(
                 resolved, expected_sha256=ref.content_sha256, budget=budget,
-                expected_byte_size=ref.byte_size, retain_bytes=retain_bytes,
+                expected_byte_size=ref.byte_size,
+                retain_bytes=retain_bytes or bool(scope_qualification and scope_qualification.needs_original),
             )
             if not status:
+                if scope_qualification is not None:
+                    scope_qualification.verify(data, budget=budget)
                 review = self._review_for_result(
                     ref, purpose=purpose, retain_bytes=retain_bytes
                 )

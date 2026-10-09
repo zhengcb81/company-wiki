@@ -318,7 +318,7 @@ def verify_registered_original(
         if status:
             failures.append(reason or status)
             if reason in {"cancelled", "budget_exceeded"}:
-                break
+                raise SourceReadError(status, reason, detail)
             continue
         if first is None:
             first = data

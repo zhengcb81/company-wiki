@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import json
 import uuid
+from dataclasses import dataclass
 from datetime import date, datetime, timezone
 import re
 from typing import Any
@@ -48,6 +49,235 @@ ASSERTION_SCHEMA_VERSION = "1.0.0"
 ASSERTION_REQUIRED_FIELDS = frozenset(
     {"source_id", "document_id", "content_sha256", "evidence_basis", "decision"}
 )
+
+def source_issuer_identity(catalog, request, cache_dir):
+    from .security_identity import SecurityIdentityResolver, SecurityMasterStore, IdentityStatus
+    from .source_reader import SourceReadError
+
+    master = SecurityMasterStore(
+        cache_dir or catalog.config.catalog_dir / "security_master"
+    ).load(markets=(request.market,) if request.market else None)
+    result = SecurityIdentityResolver(master).identify(
+        request.security_id or request.entity, market=request.market
+    )
+    identity = result.resolved
+    if (
+        result.status is not IdentityStatus.RESOLVED
+        or identity is None
+        or not identity.verified
+        or not identity.active
+    ):
+        raise SourceReadError("blocked", "verified_issuer_unavailable")
+    # A ticker supplied alongside another issuer name must not silently win.
+    entity_result = SecurityIdentityResolver(master).identify(
+        request.entity, market=request.market
+    )
+    if entity_result.resolved is None or (
+        entity_result.resolved.market,
+        entity_result.resolved.security_id,
+    ) != (identity.market, identity.security_id):
+        raise SourceReadError("blocked", "requested_issuer_conflict")
+    return identity
+
+
+SOURCE_SCOPE_METHOD = "sec-primary-dei/1"
+
+
+def _sec_original(ref, market, document_kind):
+    return (market == "US" and ref.mime_type in {"text/html", "application/xhtml+xml"}
+            and document_kind in {"regulatory_filing", "annual_report"})
+
+
+def _reusable_sec_scope(ref, identity, patch, proof):
+    """Reuse original DEI evidence, never canonical import labels alone.
+
+    The existing append-only assertion carries the extractor's observed primary
+    CIK, as well as hash/value/field locator. A locator naming CIK while containing
+    only the imported company name is not an original-issuer observation.
+    """
+    cik = identity.identifiers.get("cik")
+    if not cik or not cik.isdigit():
+        return None
+    cik = str(int(cik))
+    issuers = {"entity": identity.canonical_name, "market": identity.market,
+               "security_id": identity.security_id}
+    fields = {"fiscal_year": "DocumentFiscalYearFocus",
+              "fiscal_period": "DocumentFiscalPeriodFocus",
+              "form_type": "DocumentType", "period_end": "DocumentPeriodEndDate"}
+    for key, locator in {**dict.fromkeys(issuers, "EntityCentralIndexKey"), **fields}.items():
+        observation = proof.get(key)
+        if (not isinstance(observation, dict) or patch.get(key) is None
+                or observation.get("value") != patch[key]
+                or observation.get("content_sha256") != ref.content_sha256
+                or observation.get("locator") != "primary-dei:/" + locator
+                or observation.get("extraction_method") != SOURCE_SCOPE_METHOD):
+            return None
+        if key in issuers and (patch[key] != issuers[key]
+                or observation.get("issuer_record_id") != identity.source_record_id
+                or observation.get("primary_cik") != cik):
+            return None
+    title = proof.get("title")
+    if (not isinstance(title, dict) or title.get("content_sha256") != ref.content_sha256
+            or title.get("value") != patch.get("title")
+            or title.get("locator") != "html:/html/head/title"
+            or title.get("extraction_method") != SOURCE_SCOPE_METHOD):
+        return None
+    return {"cik": cik, "fiscal_year": patch["fiscal_year"],
+            "fiscal_period": patch["fiscal_period"], "form_type": patch["form_type"],
+            "report_date": patch["period_end"], "title": patch.get("title")}
+
+
+
+@dataclass(frozen=True)
+class SourceScopeQualification:
+    """Original filing facts, shared by candidate selection and verified read.
+
+    This checks the current SourceRecord's issuer/period declarations, and any
+    given source request. It adds no research assumptions, approval or storage.
+    """
+    ref: Any
+    identity: Any
+    expected: dict[str, Any]
+    document_kind: str
+    primary: dict[str, Any] | None
+
+    @property
+    def needs_original(self) -> bool:
+        return self.primary is None
+
+    def scope(self, data, *, budget=None, extractor=None):
+        from .dayu_fiscal_metadata import extract_sec_scope, FiscalMetadataError
+        from .source_reader import SourceReadError
+
+        if budget is not None and callable(getattr(budget, "check", None)):
+            budget.check()
+        try:
+            primary = self.primary
+            if primary is None:
+                if data is None:
+                    raise SourceReadError("unavailable", "scope_buffer_missing")
+                primary = (extractor or extract_sec_scope)(data)
+        except FiscalMetadataError as exc:
+            raise SourceReadError("blocked", exc.error_code) from exc
+        cik = self.identity.identifiers.get("cik")
+        if not cik or not cik.isdigit() or str(int(cik)) != primary["cik"]:
+            raise SourceReadError("blocked", "primary_issuer_conflict")
+        if budget is not None and callable(getattr(budget, "check", None)):
+            budget.check()
+        return primary
+
+    def verify(self, data, *, budget=None):
+        from .dayu_fiscal_metadata import complete_sec_primary, FiscalMetadataError
+        from .source_reader import SourceReadError
+
+        primary = self.scope(data, budget=budget)
+        if (any(value is not None and value != primary.get(key)
+                for key, value in self.expected.items() if key != "period_end")
+                or (self.document_kind == "annual_report"
+                    and primary["form_type"].removesuffix("/A") not in {"10-K", "20-F"})):
+            raise SourceReadError("blocked", "primary_scope_conflict")
+        if self.primary is None:
+            try:
+                primary = complete_sec_primary(primary)
+            except FiscalMetadataError as exc:
+                raise SourceReadError("blocked", exc.error_code) from exc
+        if self.expected.get("period_end") is not None and self.expected["period_end"] != primary["report_date"]:
+            raise SourceReadError("blocked", "primary_scope_conflict")
+        if budget is not None and callable(getattr(budget, "check", None)):
+            budget.check()
+        return primary
+
+
+def _registered_sec_cik(metadata):
+    """Read registered issuer provenance, not a claim of raw DEI extraction.
+
+    Never reconstruct an archive URL or infer CIK from an accession/ticker.
+    The unchanged source URL is an observed SourceRecord fact. It supplies the
+    issuer to compare with raw scope; it cannot qualify the original by itself.
+    """
+    from .source_reader import SourceReadError
+
+    ciks = set()
+    for field in ("cik", "company_id"):
+        value = metadata.get(field)
+        if value is not None:
+            if not isinstance(value, str) or not value.isdigit():
+                raise SourceReadError("blocked", "primary_identity_unresolved")
+            ciks.add(str(int(value)))
+    for field in ("source_url", "https_url"):
+        value = metadata.get(field)
+        if not isinstance(value, str):
+            continue
+        try:
+            parsed = urlsplit(value)
+            official_archive = (parsed.scheme == "https" and parsed.hostname in {"www.sec.gov", "sec.gov"}
+                and not parsed.username and not parsed.password and parsed.port in {None, 443})
+        except ValueError as exc:
+            raise SourceReadError("blocked", "primary_identity_unresolved") from exc
+        if official_archive:
+            match = re.fullmatch(r"/Archives/edgar/data/([0-9]+)/.+", parsed.path)
+            if match:
+                ciks.add(str(int(match[1])))
+    if len(ciks) > 1:
+        raise SourceReadError("blocked", "primary_issuer_conflict")
+    return next(iter(ciks), None)
+
+
+def source_scope_qualification(catalog, ref, *, metadata, request=None, identity=None):
+    """Build one SourceRecord scope observation, with no original read/write.
+
+    Request matching remains the resolver's responsibility. This owner compares
+    registered issuer provenance and declared scope with original DEI. Existing
+    complete proof uses SHA alone; incomplete proof uses the same verified buffer.
+    Generic raw export/preview chooses its byte-only read purpose.
+    """
+    from types import SimpleNamespace
+    from .source_reader import SourceReadError
+
+    market = getattr(request, "market", None) or metadata.get("market")
+    kind = getattr(request, "document_kind", None) or metadata.get("document_kind")
+    if not _sec_original(ref, market, kind):
+        return None
+    form = getattr(request, "form_type", None) or metadata.get("form_type")
+    if kind == "regulatory_filing" and form and form.removesuffix("/A") not in {"10-K", "10-Q", "20-F"}:
+        return None
+    expected = {key: getattr(request, key, None) if getattr(request, key, None) is not None else metadata.get(key)
+                for key in ("fiscal_year", "fiscal_period", "form_type")}
+    expected["period_end"] = metadata.get("period_end")
+    prior = get_verified_assertion(catalog.reader, ref.source_id, ref.content_sha256, reader="steady")
+    try:
+        previous = _evidence_payload(prior["evidence_json"], prior["assertion_id"]) if prior else {}
+    except ValueError as exc:
+        raise SourceReadError("blocked", "local_fact_validation_failed") from exc
+    patch = previous.get("source_fact_patch") or {}
+    proof = previous.get("source_fact_evidence") or {}
+    registered_cik = _registered_sec_cik(metadata)
+    if identity is not None:
+        cik = identity.identifiers.get("cik")
+        if registered_cik and (not cik or not cik.isdigit() or str(int(cik)) != registered_cik):
+            raise SourceReadError("blocked", "primary_issuer_conflict")
+    elif registered_cik:
+        # A genuine previous proof's existing issuer-record binding is reused,
+        # not invented from its canonical label or substituted for raw CIK proof.
+        entity_proof = proof.get("entity") or {}
+        identity = SimpleNamespace(
+            canonical_name=metadata.get("display_name") or metadata.get("entity") or metadata.get("company_name") or patch.get("entity"),
+            market=metadata.get("market"), security_id=metadata.get("security_id"),
+            source_record_id=entity_proof.get("issuer_record_id") if isinstance(entity_proof, dict) else None,
+            identifiers={"cik": registered_cik})
+    else:
+        # Older registered sources without provider CIK may use their existing
+        # source identity master. It is not a required second lookup for reads.
+        source_identity = SimpleNamespace(
+            entity=metadata.get("display_name") or metadata.get("entity") or metadata.get("company_name") or metadata.get("security_id"),
+            market=market, security_id=metadata.get("security_id"))
+        try:
+            identity = source_issuer_identity(catalog, source_identity, None)
+        except (ValueError, SourceReadError) as exc:
+            raise SourceReadError("blocked", "primary_identity_unresolved") from exc
+    primary = _reusable_sec_scope(ref, identity, patch, proof)
+    return SourceScopeQualification(ref, identity, expected, kind, primary)
+
 
 SOURCE_FACT_FIELDS = frozenset({
     "entity", "market", "security_id", "document_kind", "published_date",
@@ -169,12 +399,14 @@ def _write_source_fact_projection(connection, ref, assertion, projection):
         )
 
 
-def restore_document_facts(catalog, *, ref, facts, evidence, retirement_observation,
+def restore_document_facts(catalog, *, ref, facts=None, evidence=None, retirement_observation,
                            budget=None, fact_replay=None):
     """Verify inactive bytes, supersede facts and restore only verified locations atomically.
 
     The observation is an optimistic concurrency pin; it does not authorize an
-    arbitrary retirement. There is no intermediate fake-active read.
+    arbitrary retirement. There is no intermediate fake-active read. If facts
+    and evidence are omitted, fact_replay computes them from the one verified
+    original buffer under this lock; (None, None) means proven non-relevance.
     """
     from .local_inventory import (LocalPrepareLimits, LocalReadBudget,
                                   metadata_retirement, observe_document, verify_registered_original)
@@ -185,10 +417,9 @@ def restore_document_facts(catalog, *, ref, facts, evidence, retirement_observat
 
     if not isinstance(ref, SourceRef):
         raise TypeError("ref must be SourceRef")
-    _validate_source_facts(facts, evidence)
-    required = {"entity", "market", "security_id", "document_kind", "published_date"}
-    if any(not facts.get(key) for key in required):
-        raise SourceReadError("blocked", "local_metadata_incomplete")
+    computed = facts is None and evidence is None and fact_replay is not None
+    if not computed:
+        _validate_source_facts(facts, evidence)
     budget = budget or LocalReadBudget(LocalPrepareLimits())
     with CatalogOperationLock(catalog.config.catalog_dir, operation="local_source_reconcile"):
         budget.check()
@@ -201,8 +432,16 @@ def restore_document_facts(catalog, *, ref, facts, evidence, retirement_observat
         original = verify_registered_original(catalog, ref, budget=budget)
         if fact_replay is not None:
             replayed_facts, replayed_evidence = fact_replay(original)
-            if (replayed_facts,replayed_evidence) != (facts,evidence):
+            if computed:
+                facts, evidence = replayed_facts, replayed_evidence
+                if facts is None and evidence is None:
+                    return {"status": "not_relevant", "source_ref": ref}
+            elif (replayed_facts,replayed_evidence) != (facts,evidence):
                 raise SourceReadError("unavailable", "local_fact_observation_changed")
+        _validate_source_facts(facts, evidence)
+        required = {"entity", "market", "security_id", "document_kind", "published_date"}
+        if any(not facts.get(key) for key in required):
+            raise SourceReadError("blocked", "local_metadata_incomplete")
         row = observed["version"]
         metadata = observe_metadata(row["metadata_json"]).metadata
         current = _source_metadata({"source_id":ref.source_id, "metadata":metadata},

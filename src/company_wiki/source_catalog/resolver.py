@@ -212,6 +212,7 @@ def _verify_candidate(
     expected_sha256: str,
     size: int,
     budget: _ReadBudget,
+    scope_qualification=None,
 ) -> tuple[str, str]:
     """B02 segment 3 — verify the candidate's LOCAL bytes against the
     requested version.
@@ -221,6 +222,19 @@ def _verify_candidate(
     qualifying decision is always a full-file digest, and sampling is never
     used to claim equality.
     """
+    if scope_qualification is not None:
+        from .source_reader import SourceReadError
+
+        data, status, reason, detail = _read_verified_bytes(
+            Path(str(location["absolute_path"])), expected_sha256=expected_sha256,
+            expected_byte_size=size, budget=budget,
+            retain_bytes=scope_qualification.needs_original,
+        )
+        if status:
+            raise SourceReadError(status, reason or "source_read_failed", detail)
+        scope_qualification.verify(data, budget=budget)
+        location["verified_sha256"] = expected_sha256
+        return "", expected_sha256
     stop = budget.take_candidate()
     if stop:
         return stop, ""
@@ -1322,7 +1336,9 @@ class SourceResolver:
         # an injected/reused budget cannot silently un-verify later requests
         # (B-VR02-04).
         budget = self.read_budget or _ReadBudget()
-        budget.begin_request()
+        from .local_inventory import LocalReadBudget
+        if not isinstance(budget, LocalReadBudget):
+            budget.begin_request()
         from .metadata_observation import observe_metadata
 
         for document in candidates:
@@ -1425,6 +1441,14 @@ class SourceResolver:
                 # `reusable_root_kinds` in source_catalog.yaml to reuse it).
                 trace.append(f"{document['title']}: no_reusable_root_location")
                 continue
+            from .assertion_service import source_scope_qualification
+            from .source_reader import SourceRef
+
+            version = self.catalog.reader.exact_source_version(document["document_id"])
+            source_ref = SourceRef(version["document_id"], version["source_id"],
+                version["content_sha256"], version["byte_size"], version["mime_type"])
+            scope_qualification = source_scope_qualification(self.catalog, source_ref,
+                metadata={**metadata, "document_kind": document["document_kind"]}, request=request)
             selection = self._handle(
                 document,
                 metadata=metadata,
@@ -1436,6 +1460,7 @@ class SourceResolver:
                 provider_document_id=provider_document_id,
                 budget=budget,
                 reusable_root_ids=reusable_root_ids,
+                scope_qualification=scope_qualification,
             )
             handle = selection.handle
             availability = "verified" if selection.reason.startswith("verified_candidate_rank_") else (
@@ -1656,6 +1681,7 @@ class SourceResolver:
         *,
         budget: _ReadBudget,
         reusable_root_ids: frozenset[str] = frozenset(),
+        scope_qualification=None,
     ) -> tuple[dict[str, Any] | None, str, tuple[str, ...]]:
         """B02 段 3/4 — walk the ordered qualified candidates of the REQUESTED
         version and return the copy to serve.
@@ -1742,11 +1768,13 @@ class SourceResolver:
             if probe_status:
                 tried.append(f"{location['location_id']}:{probe_status}")
                 continue
+            qualification_args = {"scope_qualification": scope_qualification} if scope_qualification is not None else {}
             status, detail = _verify_candidate(
                 location,
                 expected_sha256=expected_sha256,
                 size=size,
                 budget=budget,
+                **qualification_args,
             )
             if not status:
                 if budget.cancelled:
@@ -1793,13 +1821,15 @@ class SourceResolver:
         provider_document_id: str | None,
         budget: _ReadBudget,
         reusable_root_ids: frozenset[str] = frozenset(),
+        scope_qualification=None,
     ) -> _Selection:
         # B02: qualification (segments 1-3) is decided on the ordered
         # candidate list; the pre-B02 code took the elected canonical and
         # returned None when that single path was unreadable, so an
         # equivalent copy could not take over.
         canonical, selection_reason, tried = SourceResolver._select_candidate(
-            document, budget=budget, reusable_root_ids=reusable_root_ids
+            document, budget=budget, reusable_root_ids=reusable_root_ids,
+            scope_qualification=scope_qualification,
         )
         if canonical is None:
             return _Selection(None, selection_reason, tried)

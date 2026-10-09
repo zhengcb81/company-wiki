@@ -12,6 +12,11 @@ from .assertion_service import (
     _evidence_payload,
     get_verified_assertion,
     restore_document_facts,
+    source_issuer_identity,
+    source_scope_qualification,
+    _reusable_sec_scope,
+    _sec_original,
+    SOURCE_SCOPE_METHOD as SEC_SCOPE_METHOD,
 )
 from .dayu_fiscal_metadata import extract_sec_scope, complete_sec_primary, FiscalMetadataError
 from .local_inventory import (
@@ -19,18 +24,12 @@ from .local_inventory import (
     LocalReadBudget,
     metadata_retirement,
     observe_document,
-    verify_registered_original,
 )
 from .resolver import (
     SourceRequest,
     SourceResolver,
     _needs_hydration,
     _inside_configured_roots,
-)
-from .security_identity import (
-    SecurityIdentityResolver,
-    SecurityMasterStore,
-    IdentityStatus,
 )
 from .source_reader import SourceReadError, SourceRef, SourceVersionReader
 from .source_group_scope import SourceRegistrationScope
@@ -53,30 +52,7 @@ def _result(status, reason, *, ref=None, blocks=False, operations=(), diagnostic
 
 
 def _identity(catalog, request, cache_dir):
-    master = SecurityMasterStore(
-        cache_dir or catalog.config.catalog_dir / "security_master"
-    ).load(markets=(request.market,) if request.market else None)
-    result = SecurityIdentityResolver(master).identify(
-        request.security_id or request.entity, market=request.market
-    )
-    identity = result.resolved
-    if (
-        result.status is not IdentityStatus.RESOLVED
-        or identity is None
-        or not identity.verified
-        or not identity.active
-    ):
-        raise SourceReadError("blocked", "verified_issuer_unavailable")
-    # A ticker supplied alongside another issuer name must not silently win.
-    entity_result = SecurityIdentityResolver(master).identify(
-        request.entity, market=request.market
-    )
-    if entity_result.resolved is None or (
-        entity_result.resolved.market,
-        entity_result.resolved.security_id,
-    ) != (identity.market, identity.security_id):
-        raise SourceReadError("blocked", "requested_issuer_conflict")
-    return identity
+    return source_issuer_identity(catalog, request, cache_dir)
 
 
 def _read_metadata(path, root, budget):
@@ -177,44 +153,75 @@ def _sec_cache(original, primary, budget):
     return observations[0]
 
 
-def _proven_facts(catalog, original, identity, request, budget):
+
+
+def _sec_sidecar(original, identity, budget):
+    """Observed publication declarations bound to the actual registered original.
+
+    Body-derived issuer/scope is established separately. This is the existing
+    direct/raw storage metadata, never a filename/capture-time date fallback.
+    """
+    observations = []
+    for _location_id, path, root in original.locations:
+        cached = _read_metadata(path.with_name(path.name + ".source.json"), root, budget)
+        if cached is None:
+            continue
+        meta, sha = cached
+        if (meta.get("content_sha256") != original.ref.content_sha256
+                or (meta.get("market"), meta.get("security_id")) != (identity.market, identity.security_id)
+                or meta.get("entity") != identity.canonical_name):
+            raise SourceReadError("blocked", "provider_cache_identity_conflict")
+        published = meta.get("published_date") or meta.get("filing_date")
+        if published is not None:
+            try:
+                if date.fromisoformat(published).isoformat() != published:
+                    raise ValueError()
+            except (ValueError, TypeError):
+                raise SourceReadError("blocked", "publication_date_invalid") from None
+        observations.append({"published_date": published, "source_url": meta.get("source_url"),
+                             "provider": meta.get("provider"),
+                             "provider_document_id": meta.get("provider_document_id"),
+                             "locator": "registered-source-sidecar:/.source.json", "metadata_sha256": sha})
+    if not observations:
+        return None
+    if len({(x["published_date"], x["source_url"], x["provider"], x["provider_document_id"])
+            for x in observations}) != 1:
+        raise SourceReadError("blocked", "provider_cache_publication_conflict")
+    return observations[0]
+
+
+def _prior_source_facts(catalog, ref):
+    prior = get_verified_assertion(catalog.reader, ref.source_id, ref.content_sha256, reader="steady")
+    previous = _evidence_payload(prior["evidence_json"], prior["assertion_id"]) if prior else {}
+    return previous.get("source_fact_patch") or {}, previous.get("source_fact_evidence") or {}
+
+
+def _scope_matches(primary, request):
+    return (all(getattr(request, key) is None or getattr(request, key) == primary[key]
+                for key in ("fiscal_year", "fiscal_period", "form_type"))
+            and (request.document_kind != "annual_report"
+                 or primary["form_type"].removesuffix("/A") in {"10-K", "20-F"}))
+
+
+
+def _proven_facts(catalog, original, identity, request, budget, *, claimed_match=False):
     ref = original.ref
-    prior = get_verified_assertion(
-        catalog.reader, ref.source_id, ref.content_sha256, reader="steady"
-    )
-    previous = (
-        _evidence_payload(prior["evidence_json"], prior["assertion_id"])
-        if prior
-        else {}
-    )
-    prior_patch = previous.get("source_fact_patch") or {}
-    prior_proof = previous.get("source_fact_evidence") or {}
-    if (
-        identity.market == "US"
-        and ref.mime_type in {"text/html", "application/xhtml+xml"}
-        and request.document_kind in {"regulatory_filing", "annual_report"}
-    ):
-        primary = extract_sec_scope(original.data)
-        cik = identity.identifiers.get("cik")
-        if not cik or not cik.isdigit() or str(int(cik)) != primary["cik"]:
-            raise SourceReadError("blocked", "primary_issuer_conflict")
-        if (
-            (
-                request.fiscal_year is not None
-                and request.fiscal_year != primary["fiscal_year"]
-            )
-            or (
-                request.fiscal_period is not None
-                and request.fiscal_period != primary["fiscal_period"]
-            )
-            or (
-                request.form_type is not None
-                and request.form_type != primary["form_type"]
-            )
-        ):
+    prior_patch, prior_proof = _prior_source_facts(catalog, ref)
+    if _sec_original(ref, identity.market, request.document_kind):
+        qualification = source_scope_qualification(catalog, ref,
+            metadata={"market": identity.market, "document_kind": request.document_kind},
+            request=request, identity=identity)
+        reused_scope = not qualification.needs_original
+        primary = qualification.scope(original.data, budget=budget, extractor=extract_sec_scope)
+        if not _scope_matches(primary, request):
+            if claimed_match:
+                raise SourceReadError("blocked", "primary_scope_conflict")
             return None, None
-        primary = complete_sec_primary(primary)
+        if not reused_scope:
+            primary = complete_sec_primary(primary)
         cache = _sec_cache(original, primary, budget)
+        if cache is None and prior_patch.get("published_date") is None:
+            cache = _sec_sidecar(original, identity, budget)
         # A prior verified assertion is already hash-bound, but legacy row/filename/mtime is not proof.
         published = (
             cache["published_date"] if cache else prior_patch.get("published_date")
@@ -238,7 +245,7 @@ def _proven_facts(catalog, original, identity, request, budget):
         }
         if cache:
             facts.update(
-                provider="sec", provider_document_id=cache["provider_document_id"]
+                provider=cache.get("provider", "sec"), provider_document_id=cache["provider_document_id"]
             )
         evidence = {
             key: {
@@ -254,9 +261,12 @@ def _proven_facts(catalog, original, identity, request, budget):
                 "value": value,
                 "content_sha256": ref.content_sha256,
                 "issuer_record_id": identity.source_record_id,
+                "extraction_method": SEC_SCOPE_METHOD,
             }
             for key, value in facts.items()
         }
+        for key in {"entity", "market", "security_id"}:
+            evidence[key]["primary_cik"] = primary["cik"]
         evidence["title"]["locator"] = "html:/html/head/title"
         for key in {
             "published_date",
@@ -420,10 +430,28 @@ def _prepare_local_source(
     budget = _budget or LocalReadBudget(limits or LocalPrepareLimits())
     reader = SourceVersionReader(catalog)
     query = reader.query_local(request)
+    identity = None
+    claimed_matches = {ref.document_id for ref in query.matches} if query.status == "found" else set()
     if query.status == "found" and not _discovery_done:
         ref = query.matches[0]
-        reader.verify_version(ref, purpose="filing_reuse", budget=budget)
-        return _result("ready", "existing_active_source", ref=ref)
+        market = request.market or reader.describe_version(ref).get("market")
+        if not _sec_original(ref, market, request.document_kind):
+            reader.verify_version(ref, purpose="filing_reuse", budget=budget)
+            return _result("ready", "existing_active_source", ref=ref)
+        try:
+            identity = _identity(catalog, request, identity_cache_dir)
+            patch, proof = _prior_source_facts(catalog, ref)
+        except (ValueError, SourceReadError) as exc:
+            return _result(getattr(exc, "status", "blocked"),
+                           getattr(exc, "reason", "local_fact_validation_failed"), blocks=True)
+        primary = _reusable_sec_scope(ref, identity, patch, proof)
+        if primary is not None and _scope_matches(primary, request):
+            qualification = source_scope_qualification(catalog, ref,
+                metadata=reader.describe_version(ref), request=request, identity=identity)
+            reader._verified_version(ref, purpose="filing_reuse",
+                expected_read_policy_sha256=None, retain_bytes=False, budget=budget,
+                scope_qualification=qualification)
+            return _result("ready", "existing_active_source", ref=ref)
     if query.status == "ambiguous":
         return _result("ambiguous", query.reason, blocks=True)
     if (
@@ -464,9 +492,10 @@ def _prepare_local_source(
         return _result("not_found", "no_registered_local_source")
     diagnostics = []
     operations = []
+    qualified_documents = set()
     targeted = False
     try:
-        identity = _identity(catalog, request, identity_cache_dir)
+        identity = identity or _identity(catalog, request, identity_cache_dir)
     except (ValueError, SourceReadError) as exc:
         return _result(
             "blocked",
@@ -489,28 +518,28 @@ def _prepare_local_source(
             observed = observe_document(catalog, ref.document_id)
             if row["source_status"] == "retired" and not metadata_retirement(observed):
                 raise SourceReadError("blocked", "retirement_not_metadata_only")
-            original = verify_registered_original(catalog, ref, budget=budget)
-            facts, evidence = _proven_facts(
-                catalog, original, identity, request, budget
-            )
-            if facts is None:
-                continue
-            targeted = True
+            observed_facts = []
+
+            def qualify(checked):
+                facts, evidence = _proven_facts(
+                    catalog, checked, identity, request, budget,
+                    claimed_match=ref.document_id in claimed_matches,
+                )
+                observed_facts.append(facts)
+                return facts, evidence
+
             operation = restore_document_facts(
                 catalog,
                 ref=ref,
-                facts=facts,
-                evidence=evidence,
                 retirement_observation=observed,
                 budget=budget,
-                fact_replay=lambda checked: _proven_facts(
-                    catalog,
-                    checked,
-                    _identity(catalog, request, identity_cache_dir),
-                    request,
-                    budget,
-                ),
+                fact_replay=qualify,
             )
+            if operation["status"] == "not_relevant":
+                continue
+            facts = observed_facts[0]
+            targeted = True
+            qualified_documents.add(ref.document_id)
             operations.append(
                 {
                     key: value
@@ -532,6 +561,11 @@ def _prepare_local_source(
             OSError,
             CatalogOperationLockedError,
         ) as exc:
+            if isinstance(exc, SourceReadError) and exc.reason in {
+                "budget_exceeded", "cancelled", "local_prepare_deadline",
+                "local_source_group_limit", "local_discovery_entry_limit",
+            }:
+                raise
             targeted = True
             diagnostics.append(
                 {
@@ -557,9 +591,9 @@ def _prepare_local_source(
                 }
             )
     query = reader.query_local(request)
-    if query.status == "found":
+    if query.status == "found" and query.matches[0].document_id in qualified_documents:
         ref = query.matches[0]
-        reader.verify_version(ref, purpose="filing_reuse", budget=budget)
+        budget.check()
         return _result(
             "ready",
             "local_source_reconciled",

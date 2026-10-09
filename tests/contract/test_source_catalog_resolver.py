@@ -127,7 +127,8 @@ def test_resolver_prefers_strong_provider_identity_and_builds_capture_ready_hand
     company = project / "companies" / "ACME" / "raw" / "financial_reports" / "annual"
     company.mkdir(parents=True)
     primary = company / "2026-02-20_ACME_2025_annual_report.htm"
-    primary.write_text("<html>ACME FY2025 annual report.</html>", encoding="utf-8")
+    from helpers.source_fact_fixture import html
+    primary.write_bytes(html(cik="1", year=2025, end="2025-12-31", title="ACME FY2025 annual report"))
     (company / "2026-02-20_ACME_2025_annual_report.htm.source.json").write_text(
         json.dumps(
             {
@@ -519,8 +520,9 @@ def _alphabet_catalog(tmp_path: Path, *, security_id: str):
         project / "companies" / "Alphabet Inc" / "raw" / "financial_reports" / "annual"
     )
     company.mkdir(parents=True)
-    (company / "2026-02-05_Alphabet_2025_10K.htm").write_text(
-        "<html>Alphabet FY2025 10-K</html>", encoding="utf-8"
+    from helpers.source_fact_fixture import html
+    (company / "2026-02-05_Alphabet_2025_10K.htm").write_bytes(
+        html(cik="1652044", year=2025, end="2025-12-31", title="Alphabet FY2025 10-K")
     )
     (company / "2026-02-05_Alphabet_2025_10K.htm.source.json").write_text(
         json.dumps(
