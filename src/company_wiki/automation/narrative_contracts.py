@@ -13,6 +13,10 @@ from company_wiki.source_catalog.narrative_evidence import (
     validate_summary_draft,
 )
 from company_wiki.source_contract import EvidenceSpan, source_id_for_sha256
+from company_wiki.source_catalog.narrative_language import (
+    NarrativeLanguageError,
+    narrative_language_family,
+)
 
 from .models import canonical_json, canonical_json_hash
 
@@ -217,11 +221,13 @@ class SourceMetadataValue:
     title: str | None
     document_kind: str
     language: str
+    declared_language: str | None = None
 
     @classmethod
     def from_dict(cls, value: object) -> "SourceMetadataValue":
         item = _exact(
-            value, {"source_class", "title", "document_kind", "language"},
+            value, {"source_class", "title", "document_kind", "language"}
+            | ({"declared_language"} if isinstance(value, Mapping) and "declared_language" in value else set()),
             "source_metadata",
         )
         source_class = _text(item["source_class"], "source_metadata.source_class")
@@ -230,20 +236,32 @@ class SourceMetadataValue:
         language = _text(item["language"], "source_metadata.language")
         if language not in _LANGUAGES:
             raise NarrativeContractError("source_metadata.language is invalid")
+        declared = _text(item.get("declared_language"), "source_metadata.declared_language", optional=True)
+        if declared is not None:
+            try:
+                family = narrative_language_family(declared)
+            except NarrativeLanguageError as exc:
+                raise NarrativeContractError("source_metadata.declared_language is invalid") from exc
+            if family != language:
+                raise NarrativeContractError("source_metadata.language does not match declared_language")
         return cls(
             source_class,
             _text(item["title"], "source_metadata.title", optional=True),
             _text(item["document_kind"], "source_metadata.document_kind"),
             language,
+            declared,
         )
 
     def to_dict(self) -> dict[str, Any]:
-        return {
+        result = {
             "source_class": self.source_class,
             "title": self.title,
             "document_kind": self.document_kind,
             "language": self.language,
         }
+        if self.declared_language is not None:
+            result["declared_language"] = self.declared_language
+        return result
 
 
 @dataclass(frozen=True)

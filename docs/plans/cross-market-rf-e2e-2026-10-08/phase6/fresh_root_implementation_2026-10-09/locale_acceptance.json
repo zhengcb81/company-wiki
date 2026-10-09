@@ -1,0 +1,35 @@
+{
+  "work_package": "W01",
+  "root_cause": "RC01",
+  "status": "LOCAL_CONTRACT_GREEN_COMPANY_REACCEPTANCE_PENDING",
+  "red": {
+    "failed": 13,
+    "passed": 6,
+    "exit_code": 1,
+    "log": "locale_red.txt"
+  },
+  "green": {
+    "passed": 119,
+    "exit_code": 0,
+    "seconds": 10.74,
+    "log": "locale_green.txt",
+    "suites": [
+      "locale_boundary",
+      "narrative_batch",
+      "job_contracts",
+      "generation",
+      "versioned_resume",
+      "source_guard"
+    ]
+  },
+  "interface": "Optional source_metadata.declared_language retains exact supported locale; language remains zh/en/mixed. Existing family-only wire unchanged. Source catalog/raw untouched.",
+  "no_provider_calls": true,
+  "no_new_permissions": true,
+  "temporary_roots_restored": true,
+  "test_path_deviation": "New contract placed in tests/unit so current local push and CI include it; plan proposed test filename was not an implemented test.",
+  "limitations": [
+    "Original CN H1 public narrative/read/RF consumption still requires M3.",
+    "Initial test runner console encoding error was not a product RED.",
+    "TXT fixture expected filing instead of existing transcript class was corrected before recorded RED."
+  ]
+}

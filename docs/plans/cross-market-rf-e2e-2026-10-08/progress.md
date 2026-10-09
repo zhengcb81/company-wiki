@@ -513,3 +513,5 @@ CWP d1ce50ee真正pre-push2346PASS/113.39s，精确CI37910840899 SUCCESS；FF23d
 上一个goal turn为实质progress：两仓防CI漏检代码/文档已提交推送并精确远端绿。当前重新核对CWP仅专家包未跟踪、RF仅既有assurance/output WIP，未凭记忆认定干净。专家冻结64/64矩阵（SHA f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb）、14卡与133/133原finding证据，M1已接受；不计修复/研究PASS。
 
 真实启动4个互斥施工写集：MAIN W01→W02→W03；fresh_canonical_capture在managed fresh-capture-20261009（baseceac91e7）做W04；rf_root_trace在TEMP rf-fresh-dag-20261009（base79139534）做W10→W14；fresh_transcript_launch在FF/ET独占工作树做W07。W04 additive capture/recover CLI扩写已协调，W05待该接口交接；其余共用边界串行。没有新人工审批/许可，Dayu零改动，无新付费或真实下载。W01准确RED13FAIL/6PASS（首次控制台编码/夹具分类问题不计产品缺陷），测试TEMP自动恢复，小RED日志留存。
+
+W01共用locale适配：准确13RED→119责任测试PASS/10.74秒，Ruff通过；保留source declared tag与worker family，旧4字段线格式及版本恢复兼容，零原文/配置/模型改动。新契约放tests/unit保证当前CI/push覆盖，M3原H1真实链仍待执行。三run协调员64映射原生event已写，check unmapped=[]/event_errors=[]，仍needs_remediation；不把映射完整说成修复。

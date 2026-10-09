@@ -20,7 +20,7 @@ from company_wiki.source_catalog.lock import CatalogOperationLock
 from company_wiki.source_catalog.narrative_artifact_store import (
     LocalNarrativeObjectStore, NarrativeArtifactNotVisibleError, NarrativeArtifactReader, NarrativeArtifactStore,
 )
-from company_wiki.source_catalog.narrative_language import detect_narrative_language
+from company_wiki.source_catalog.narrative_language import detect_narrative_language, narrative_language_family
 from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization, PPTX_MIME
 from company_wiki.source_catalog.source_reader import SourceVersionReader
 from company_wiki.source_catalog.source_read_policy import (
@@ -101,6 +101,7 @@ def _current_sources(request, reader, *, deadline=None, normalization=None):
         _check_preparation_deadline(deadline)
         kind = metadata["document_kind"] or "unknown"
         language = metadata.get("language")
+        declared_language = language
         if language in {None, "unknown"}:
             opened = reader.open_version(
                 current,
@@ -120,11 +121,15 @@ def _current_sources(request, reader, *, deadline=None, normalization=None):
                 raise
             language = detect_narrative_language(opened.data, current.mime_type, normalization=normalization)
             _check_preparation_deadline(deadline)
+        else:
+            language = narrative_language_family(language)
         payloads.append(SourceRevisionEventPayload.from_dict({
             "schema_version": "source-revision-event/2.0", "source_ref": ref.to_dict(),
             "expected_read_policy_sha256": policy,
             "source_metadata": {"source_class": source_class_for(current.mime_type, kind),
-                                "title": metadata["title"], "document_kind": kind, "language": language},
+                                "title": metadata["title"], "document_kind": kind, "language": language,
+                                **({"declared_language": declared_language}
+                                   if declared_language not in {None, "unknown", language} else {})},
         }))
         source_facts.append({"document_id": ref.document_id, "document_kind": kind,
                              **{field: metadata.get(field) for field in _SOURCE_FACT_FIELDS}})

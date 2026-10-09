@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from collections import Counter
 import hashlib
+import re
 import unicodedata
 
 
@@ -12,6 +13,7 @@ _LANGUAGE_REASON_CODES = frozenset({
     "SOURCE_LANGUAGE_PDF_UNAVAILABLE", "SOURCE_LANGUAGE_PDF_INVALID",
     "SOURCE_LANGUAGE_UNSUPPORTED_MIME", "SOURCE_LANGUAGE_UNSUPPORTED_SCRIPT",
     "SOURCE_LANGUAGE_UNDETERMINED",
+    "SOURCE_LANGUAGE_UNSUPPORTED_TAG",
 })
 
 
@@ -45,6 +47,24 @@ _BOILERPLATE_LINES = {
     "semi-annual report",
     "transcript",
 }
+
+_LOCALE_TAG = re.compile(r"(zh|en)(?:-(Hans|Hant|Latn))?(?:-([a-z]{2}|[0-9]{3}))?\Z", re.IGNORECASE)
+
+
+def narrative_language_family(declared: str) -> str:
+    """Adapt supported catalog locale tags to worker families; never infer identity."""
+    if not isinstance(declared, str) or declared != declared.strip():
+        raise NarrativeLanguageError("SOURCE_LANGUAGE_UNSUPPORTED_TAG")
+    if declared in {"zh", "en", "mixed"}:
+        return declared
+    match = _LOCALE_TAG.fullmatch(declared)
+    if match is None:
+        raise NarrativeLanguageError("SOURCE_LANGUAGE_UNSUPPORTED_TAG")
+    family, script, _region = match.groups()
+    family = family.lower()
+    if script and script.lower() not in ({"hans", "hant"} if family == "zh" else {"latn"}):
+        raise NarrativeLanguageError("SOURCE_LANGUAGE_UNSUPPORTED_TAG")
+    return family
 
 
 def _decode_sample(data: bytes) -> str:
@@ -157,4 +177,4 @@ def detect_narrative_text_language(text: str) -> str:
     return "zh" if chinese > english else "en"
 
 
-__all__ = ["NarrativeLanguageError", "detect_narrative_language"]
+__all__ = ["NarrativeLanguageError", "detect_narrative_language", "narrative_language_family"]
