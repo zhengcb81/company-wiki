@@ -9,6 +9,8 @@
 | CWP master | d1ce50eee0340a217565d69945bad3a23a691b81 | 正常commit5.76秒；实际push2346PASS/113.39秒（检查工具变更，保守完整unit+6contract，一次pytest） | [37910840899](https://github.com/zhengcb81/company-wiki/actions/runs/37910840899) SUCCESS，104秒 |
 | FF main | 23d25644a78390ebd5d7fd4da20e42d6788c1240 | 实际普通push553PASS/4SKIP/78subtests，59.80秒；全部static/config检查绿 | [37911571894](https://github.com/zhengcb81/filing-fetch/actions/runs/37911571894) SUCCESS，83秒 |
 
+收尾提交41024525的正常push仅13项smoke（2.38秒），其精确远端[CI37912573122](https://github.com/zhengcb81/company-wiki/actions/runs/37912573122)亦SUCCESS（100秒）。本条后续Markdown补记按现有workflow路径规则不触发新CI；代码验收以表内提交为准。
+
 CWP没有让每次commit跑pytest。声明文件静态parity由同一函数供commit和unit使用；push读取所有未推送ref的完整范围、保守受影响unit+原smoke。配置/依赖/动态范围不明回退完整unit，重大变更可能仍需约两分钟；不能许诺每次push都几秒。纯文档变化不增加unit，CI继续全unit。独立审查实际发现并先RED验证动态别名/消费者，修后集中责任53PASS；新增Git child上下文隔离也由上述整体验收覆盖。
 
 FF把原26文件+runner自测收敛到一份27文件清单，由CI/push共用；正常hook无需手工export工程路径，优先CI override、否则复用既有FF公开配置loader。实际普通push首轮发现548/5SKIP与显式env549/4不同，补修后553/4，不把首轮误记为一致。原SKIP明确展示：1个旧DB-only环境opt-in、2个生产security-master快照缺失、1个Windows symlink能力不可用；这些不算通过，也不靠复制生产库求绿。受影响真实跨仓重大联调仍按主计划独立跑。

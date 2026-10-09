@@ -12,12 +12,14 @@
 
 **为何pre-commit没有阻止：**三仓hooks实际有效，无旁路证据。commit刻意仅静态检查，避免每次数分钟；CWP push只有13smoke，CI完整unit，遗漏上述6unit文件；FF push不跑pytest，CI另列26文件。共同根因是职责/覆盖入口漂移，最新CI绿色只证明直接修复。
 
-## 防漏检实现，待精确远端验收
+## 防漏检实现，精确远端验收已通过
 
 - CWP push读取所有ref的remote-old→local-new并集，不看HEAD^；rename/delete两端包括。缺对象/新branch/配置/runner变更回退完整unit；AST相对/传递/fixture/字面module，未知动态consumer保守纳入，别名/相对动态/路径执行有反例。无缓存库/许可记录。CI保留完整unit。一般叙述模块变更实测仍选117文件，不虚报所有push数秒，不承诺静态分析穷尽动态行为。
 - direct runtime声明共用静态检查供commit/unit，仅声明文件触发，不受本机已装包影响；Python3.10用条件tomli测试依赖，CI3.12不新增包。
 - JUnit collect traceback仅抽异常类，避免unknown_error而不输出正文。push失败保留首个node；child剥离Git hook仓库上下文，避免临时Git测试被父.git污染。
-- FF397ec0ee已验收并fast-forward main：原26文件+runner自测=27，CI/push共用一次pytest。正常OS549PASS/4既有条件SKIP/78subtests，59.70秒，commit静态不变。Windows/3.13和Linux/3.12、当前本机runtime与CI兼容pin仍有差别，不能用本地替代精确远端结果。
+- FF397ec0ee已验收并fast-forward main：原26文件+runner自测=27，CI/push共用一次pytest。普通hook随后暴露缺工程路径导致静默跳过；23d25644复用公开配置loader补修后，实际普通push553PASS/4既有条件SKIP/78subtests，59.80秒，commit静态不变。Windows/3.13和Linux/3.12、当前本机runtime与CI兼容pin仍有差别；精确远端CI37911571894已成功。
 - 新集中53PASS/1.17秒；独立审查别名/动态consumer4RED→GREEN、JUnit1RED→GREEN；另增Git child context测试随正常push集中验收。基线全unit2299PASS/128.21秒。sandbox假失败不当作CI代码根因。
 
 证据：runs/jobs JSON、hook_audit、historical_repro、historical_selection、selector_review、local_validation。成功全量XML仅保留hash/小摘要并移除362090B冗余输出，测试夹具owned TEMP，原件零修改。
+
+最终正常push与精确远端验收见[CLOSEOUT](CLOSEOUT.md)：CWP d1ce50ee本地2346PASS、CI37910840899成功；FF 23d25644本地553PASS/4SKIP、CI37911571894成功。CI调查已收尾；总体研究改进仍按主PWF推进。
