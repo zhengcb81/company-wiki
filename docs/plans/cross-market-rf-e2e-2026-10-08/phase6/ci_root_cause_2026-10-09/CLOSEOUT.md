@@ -32,3 +32,7 @@ JUnit收集失败改为抽真实异常类，私有正文/断言仍不打印到�
 ## 新入口实际阻止一次远端失败
 
 W02正常push在本地拦住旧测试的0.5.0写死断言（1939PASS/1FAIL，108.51秒），没有上传929db846。已改为版本传播与generation失效的真实行为测试，相关60PASS/1.36秒；commit仍快速静态，完整正常push与精确远端验收随后补记。没有降回selector版本、删除该测试或绕过hook。
+
+## 最新发布最终验收
+
+CWP W02及版本行为测试已正常推送至 `b1888522525f3dad28891c999adc0919bd59443b`：完整待推送范围119个受影响unit路径与去重smoke共1940PASS，107.99秒，未旁路hook。精确远端[37920455948](https://github.com/zhengcb81/company-wiki/actions/runs/37920455948) SUCCESS（10:54:24→10:56:06 UTC，102秒）。此前一次1939PASS/1FAIL在本地成功拦截，未上传；不是远端失败。FF23d25644/37911571894及RF最新主线5acad6a1/[37919247211](https://github.com/zhengcb81/revenue-forecast/actions/runs/37919247211)亦SUCCESS。本次CI根因修复关闭，commit仍快速static；跨平台/未知动态依赖继续由真实CI负责，不保证以后没有新缺陷。

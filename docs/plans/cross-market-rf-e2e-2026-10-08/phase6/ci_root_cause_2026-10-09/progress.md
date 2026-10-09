@@ -7,3 +7,5 @@
 - FF独占397ec0ee已验收并正常fast-forward main；549PASS/4SKIP/78subtests/59.70秒，未跟踪FMP key保留。正常push在运行；CWP准备commit/push。本包还未宣称发布最终绿。
 - 已发布CWP d1ce50ee：正常commit5.76s，真正pre-push一次2346PASS113.39s，远端37910840899 SUCCESS。FF普通397hook发现少跑v2 E2E，补公共config loader定位后23d25644真正hook553PASS/4明确SKIP/78subtests/59.80s，远端37911571894 SUCCESS。两仓均主线已推，不旁路hooks。
 - 四个owned测试根123746526B与FF独占worktree恢复不存在；其他历史worktree/WIP/key/原件不动。调查closed，主goal active，下一步原三家64finding独立专家共因PWF。
+
+- 最新实际拦截：W02第一轮正常push1939PASS/1FAIL，旧测试写死selector0.5.0，未上传929db846。修为版本传播/intent稳定/缓存generation失效契约，60PASS/1.36s；保留RED/GREEN记录。正常commit b1888522，重新push1940PASS/107.99s，精确CI37920455948 SUCCESS/102s。无新增人审、无每commit全pytest。CI子包closed，总goal ACTIVE。

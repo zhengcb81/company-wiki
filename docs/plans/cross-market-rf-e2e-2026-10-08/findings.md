@@ -1,5 +1,11 @@
 # Findings
 
+## 2026-10-09：CI防漏检已实证，最终M2状态
+
+W02升级selector0.6.0后，旧测试强制0.5.0属于release值与行为契约耦合；新整批pre-push在上传前正确拒绝。现在检验运行版本传播、合成下一版本改变input/generation而intent不变及原manifest稳定，1940PASS且精确远端b1888522 SUCCESS。CI修复没有让每个commit跑完整pytest，也没有移除原文/恢复必要测试。
+
+W07共同解码边界修复已独立M2接受，工程结果不等于真FMP套餐可用；W04原恢复问题已修，但cold-start短deadline夹具仍有启动速度假设，完成结果后恢复缺cleanup是真产品残留。修fixture初始化职责并固化清理故障恢复，不靠多跑一次绿或放宽产品deadline。W02旧章节的“最终待交”仅属前次历史状态，最新为M2已接受、已发布、M3待。
+
 ## 2026-10-09：M2发现的共用边界，工程绿不替代独立审查
 
 CI已证实根因是直接依赖安装入口漂移、旧职责断言和真实恢复兼容错误，以及FF复杂度阻断；本地commit/本地push/CI覆盖入口不一致导致漏检。已发布防漏机制与精确远端成功证据见phase6/ci_root_cause_2026-10-09/CLOSEOUT.md。RF也将这轮DAG/输出基础两模块加入既有共享CI/daily入口，保持每次commit不跑pytest。

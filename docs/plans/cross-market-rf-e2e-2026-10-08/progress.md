@@ -1,5 +1,11 @@
 # Progress
 
+## 2026-10-09 10:56 UTC：最新发布与大节点交接
+
+CWP正常push先阻止一条旧版本写死断言（1939PASS/1FAIL），修为generation行为契约后1940PASS/107.99s，b1888522已推master，精确CI37920455948 SUCCESS/102s。昨日CI根因子包closed；commit仍快速static。RF收尾5acad6a1/37919247211 SUCCESS。
+
+W02已发布/M2接受，M3仍待；W07最终独立FF67PASS+ET73PASS及两真实离线bridge，M2接受，MAIN下一步ET→FF并线/责任清单/定点安装。W04最终20PASS/1FAIL，原三项修复成立但冷transport body夹具与completed恢复清理两残留仍在原实现者修；不提前发布。各独立历史报告/RED保留，64矩阵不变、母goal ACTIVE，预算不重置。
+
 ## 2026-10-09：CI收尾后共因施工的大节点验收
 
 - 昨日CI调查已完整收尾；再次只读确认CWP2a978b67/37914735874、FF23d25644/37911571894成功。CWP普通commit仍快速static；整批push范围affected units/CI contract共用入口已发布，绝不把旧smoke绿冒称完整CI绿。
