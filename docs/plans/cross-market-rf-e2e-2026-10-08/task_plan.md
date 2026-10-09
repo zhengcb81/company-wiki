@@ -2,7 +2,7 @@
 
 ## 最新执行节点（2026-10-09 17:00 UTC；优先于下文历史Next Step）
 
-**当前 Next Step：** 正常push已独立接受的W05兼容/cache snapshot并核对精确CI；W06 local prepare修复211绿，但实际ensure早return两例仍绕过，继续在CWP共享来源资格责任层根修后集中验收。W08两仓已推/精确CI绿/定点安装，W11已commit/安装；随后W09/W12/W13，再原三家M3/新三家M4/NVDA loop。
+**当前 Next Step：** W06在CWP共享来源事实责任层根修cached实际主体/期间与manifest不符，确保ensure与FF最终读也走同一资格；集中大节点验收后并线。W12已独立开工仅做离线缓存行为测试/回执。W05/W08最新精确CI已绿并已发布，W11已commit/定点安装；之后W09/W13，再原三家M3/新三家M4/NVDA loop。
 
 - 昨日CI根因已发布修复：依赖安装声明不一致、local/remote覆盖入口分叉、旧许可和版本断言、FF复杂度伪门。commit维持快速静态，正常push检查全部未推范围的受影响unit及共享契约；CI/push契约入口一致。不把每次commit变成两分钟整套测试，不宣称静态检查可证明运行行为。
 - 新入口已在上传前拦住CWP W05三个失败（2428PASS/3FAIL，144.26s）：1个真实0.1.0兼容缺口，2个fixture错宣0.1.1而实际解析0.2.0。作者87cdf733/7de4fabb保留旧版本语义、接通HTML回放、修fixture；202PASS/1明确optional skip、实际MSFT41/41回放。独立复审和主线push待，未把7762bfd1称已发布。

@@ -1,7 +1,7 @@
 {
   "schema_version": "fresh-main-integration/1",
   "date": "2026-10-09",
-  "status": "W05_MERGED_FINAL_PUSH_PENDING_W08_PUBLISHED_INSTALLED_W11_INSTALLED_W06_SCOPE_ENTRY_REPAIR",
+  "status": "W05_W08_W11_ENGINEERING_ACCEPTED_PUBLISHED_OR_INSTALLED_W06_SHARED_SCOPE_REPAIR_W12_STARTED",
   "frozen_issue_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
   "W04": {
     "source_tip": "68333bc360eb35b84f0616564953411e306f7610",
@@ -96,7 +96,7 @@
     }
   },
   "W05": {
-    "state": "M2_accepted_compat_snapshot_main_merged_final_push_pending",
+    "state": "M2_accepted_main_published_exact_CI_success",
     "M3": "pending",
     "source_commit": "97c82dc5fa1b4ee31dad3185ae5b0998b7903418",
     "main_merge": "3b842eaaaf5a89ff5c8320113ed558b4bd9d8516",
@@ -147,7 +147,18 @@
       "seconds": 1.18
     },
     "compatibility_merge": "3b436b12596f3c9749cc3567ce8b7d74552ce496",
-    "snapshot_re_review": "native_documents_acceptance/transcript_snapshot_re_review.md"
+    "snapshot_re_review": "native_documents_acceptance/transcript_snapshot_re_review.md",
+    "main_published": "2350077ac31655d358e67390c6fbda129d80d7dc",
+    "normal_pre_push": {
+      "passes": 2450,
+      "seconds": 145.64
+    },
+    "remote_CI": {
+      "id": 37966014234,
+      "head_sha": "2350077ac31655d358e67390c6fbda129d80d7dc",
+      "conclusion": "success",
+      "seconds": 98
+    }
   },
   "W06": {
     "state": "local_prepare_qualification_211_green_additional_ensure_bypass_RED_shared_entry_diagnosis",
@@ -238,5 +249,13 @@
     },
     "remote": "none_configured"
   },
-  "observed_at": "2026-10-09T17:00:00Z"
+  "observed_at": "2026-10-09T17:35:31.738907+00:00",
+  "W12": {
+    "state": "offline_cache_behavior_receipts_started",
+    "branch": "codex/fresh-cache-receipts-20261009",
+    "source_base": "2350077ac31655d358e67390c6fbda129d80d7dc",
+    "owner_plan": "docs/plans/fresh-cache-receipts-2026-10-09",
+    "writes": "one new contract/e2e test plus own PWF; production code only after proven RED and MAIN scope assignment",
+    "M3": "pending"
+  }
 }

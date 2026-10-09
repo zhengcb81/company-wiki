@@ -575,3 +575,14 @@ RF W08 3c3c0379独立21重点PASS/12 actual CLIcontrols全部PASS后正常ff并m
 W05 snapshot修复146491ae+PWF20be9dfc独立16重点PASS/17实际控验后接受；主体兼容208PASS/1optional skip与独立真实MSFT41/41仍保留。MAIN正常no-ff并，最终push/远端CI待；未删除此前cache FAIL或任一RED。
 
 W06统一local qualification已211PASS/2明确skip和actualMSFT7reads/52,643,200B/9.351s，但作者按普通ensure API又证明两个exact早return可绕过；正在调查共用资格入口及FF found路径，暂不并线或安装。不是每个consumer再加身份门，需CWP自己证明来源事实并由上层复用。
+
+
+## 2026-10-09T17:35:31.738907+00:00：最新三仓发布CI已全部成功
+
+CWP 2350077ac31655d358e67390c6fbda129d80d7dc普通push2450PASS/145.64s，精确CI37966014234 SUCCESS（17:24:15→17:25:53，98s）。FF41ba0150精确CI37961753941 SUCCESS/81s；RF3c3c0379精确CI37965179206 SUCCESS/37s。均未绕过hook。工程发布当前绿，不说明W06未合的资格修复或真实公司研究已验收。
+
+W06正常ensure两早返回、FF query_found→最终open已由作者实证绕过旧prepare-only资格；peer只读层次审查归到一份CWP共用fact qualification + 同次verified buffer。RF现有request→candidate→manifest kind/year/period逐字段合同仍有效，不据推测增加另一套跨仓身份/期次许可。DB query保持provisional，普通预览可看原件；真正源与已登记公司/期间矛盾的金融复用必须拒绝。作者在已授权14源写集中统一修，仍未并线。
+
+并行W12已从同235基线复用clean既有worktree，新branch codex/fresh-cache-receipts-20261009；仅新cache behavior contract/e2e测试+独立PWF。使用真实catalog/AUTO engine、synthetic model port、measure provider/parse/OCR调用和bytes；目前无已证prod故障，不臆改生成缓存。已知same-spec public回放可有parse/OCR，不能把该成本声称0；零收费调用，M3三家真实repeat留以后。
+
+诊断曾错误猜reader_cli.py及跨仓relative source_reader_cli.py路径，命令读取失败、无写操作；之后按report明确绝对路径成功读取CWP真实source_reader_cli.py和RF公司来源builder，未将shell失败作产品RED。

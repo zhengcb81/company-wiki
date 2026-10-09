@@ -57,3 +57,10 @@ FF新W08主线41ba0150正常push601PASS/7明确SKIP/78subtests/62.63s；精确CI
 ## 2026-10-09：RF新增拒绝原因修复发布完成
 
 实际normalpush先147PASS/2FAIL上传拒绝，通用有限原因根修后151PASS/23.06s；3c3c03792b189734aac5a0c8900b67b2c6f73ca5已推main，精确CI37965179206 SUCCESS/37s。独立21测试/12实际CLI控验通过；保留损坏原件/错期失败与恢复断言，没有忽略两个失败。CWP最新兼容/cache后续已接受合主线，正常最终push待，结果另追加。
+
+
+## 2026-10-09T17:35:31.738907+00:00：CWP新兼容/cache修复发布闭合
+
+正常push先2428PASS/3FAIL拒绝上传，修真实0.1.0兼容+正确fixture版本及独立发现cache ownership根因后2450PASS/145.64s；最新2350077ac31655d358e67390c6fbda129d80d7dc已推master，精确CI37966014234 SUCCESS/98s。RF新增37s、FF新增81s精确CI同为成功。源码工程当前三仓已绿；以后新改动仍必须正常push，不拿旧绿色代替未推的新代码。
+
+pre-commit保持快速static；runtime问题由全未推范围的push覆盖提前拦截。此次两个真实阻断批次均在本地发现和修复后才上传。没有删除原文SHA/期间/缓存恢复负例，也没有加人为签收门。本CI子包仍closed，总体PWF继续active。
