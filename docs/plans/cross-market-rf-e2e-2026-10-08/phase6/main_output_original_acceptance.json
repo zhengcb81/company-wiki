@@ -1,0 +1,42 @@
+{
+  "schema_version": "main-engineering-acceptance/1",
+  "root_cause": "provider-attempt-cost-is-not-final-artifact-slot",
+  "red": {
+    "failed": 4,
+    "passed": 2,
+    "seconds": 2.77
+  },
+  "focused_run_model_ownership": {
+    "passed": 50,
+    "seconds": 8
+  },
+  "official_pptx": {
+    "red_failed": 4,
+    "red_seconds": 1.33,
+    "concentrated_passed": 28,
+    "seconds": 23.75
+  },
+  "ruff": "pass",
+  "mypy": {
+    "modules": 2,
+    "result": "pass",
+    "project_ignore_missing_imports": true
+  },
+  "supplier_calls": 0,
+  "raw_original_edits": 0,
+  "actual_post_kill": "pending_after_integration",
+  "prior_docs_ci": {
+    "head_sha": "1d448f1d2bc728d4e39ffe6e59977d569ed744df",
+    "id": 37880153364,
+    "conclusion": "success",
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/37880153364"
+  },
+  "tool_fixture_errors": [
+    "short_c_root_permission",
+    "workspace_temp_parent_missing",
+    "retry_job_promotion_missing",
+    "default_sandbox_temp_permission",
+    "local_socket_test_hang_terminated",
+    "mypy_fitz_missing_stubs_wrong_invocation"
+  ]
+}

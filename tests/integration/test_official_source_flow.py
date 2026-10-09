@@ -1209,3 +1209,49 @@ def test_storage_failure_removes_only_this_calls_staged_original(monkeypatch):
             .data
             == body
         )
+
+
+@pytest.mark.parametrize("image_only", [False, True])
+def test_official_presentation_import_preserves_original_and_opaque_content(image_only):
+    import io
+    from pptx import Presentation
+
+    deck = Presentation()
+    slide = deck.slides.add_slide(deck.slide_layouts[6])
+    if image_only:
+        from PIL import Image
+        from pptx.util import Inches
+        image = io.BytesIO()
+        Image.new("RGB", (40, 30), "white").save(image, format="PNG")
+        image.seek(0)
+        slide.shapes.add_picture(image, Inches(0), Inches(0))
+    else:
+        from pptx.util import Inches
+        slide.shapes.add_textbox(Inches(0), Inches(0), Inches(4), Inches(1)).text = (
+            "Customer demand grows as the company expands production capacity.")
+    original = io.BytesIO()
+    deck.save(original)
+    body = original.getvalue()
+    mime = "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    with owned_lake() as (root, catalog):
+        first = _import(catalog, body, mime=mime, published=None)
+        again = _import(catalog, body, mime=mime, published=None)
+        assert first["source_ref"] == again["source_ref"] and again["status"] == "deduplicated"
+        ref = first["source_ref"]
+        reader = SourceVersionReader(catalog)
+        exact = reader.query_ref(ref["document_id"], ref["source_id"], ref["content_sha256"])
+        assert reader.open_version(exact, purpose="source_export").data == body
+        assert len(list((root / "companies").rglob("*.pptx"))) == 1
+        assert first["metadata"]["published_date"] is None
+        # Successful original storage makes no claim about OCR/text coverage.
+        assert "canonical_path" not in json.dumps(first) and str(root) not in json.dumps(first)
+
+
+@pytest.mark.parametrize("body", [b"<html>not a presentation</html>", b"PK\x03\x04broken"])
+def test_invalid_presentation_refused_before_canonical_write(body):
+    from company_wiki.source_catalog.official_source_flow import OfficialSourceError
+    mime = "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    with owned_lake() as (root, catalog):
+        with pytest.raises(OfficialSourceError, match="invalid_pptx"):
+            _import(catalog, body, mime=mime)
+        assert not list((root / "companies").rglob("*"))

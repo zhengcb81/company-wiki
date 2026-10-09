@@ -183,3 +183,11 @@ ET W02已有128责任测试及实际supervisor/worker五种离线CLI证据，但
 - https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/cost-20260830.htm
 
 这些只证明资料可发现；金额/假设oracle在独立执行/审查实读全文建立。未引用非官方搜索结果，未复制完整网页进PWF。
+
+## Worker 失联恢复的输出计量共因
+
+跨 run 包真实 POST-kill 证明：未知供应商 attempt 的 2 MiB output bound 被当成已经增加的最终文件空间求和，单源恢复被错误预算拒绝。MAIN 将费用累计与唯一 summarize job 最终结果槽分开，旧未知账不改；物理 scratch/object 增量仍由原存储 guard 控制。实施细则见 phase6/main_final_output_accounting.md。读取 unit 文件时误猜 contract 路径不存在，已核实际 tests/unit/test_narrative_run_store.py，不把路径错误记作产品 RED。
+
+官方PPTX接线补充：存储成功仅证明原件格式和字节保存，不证明文字已提取；文本和全图原件均须可登记，opaque不能成为原件入库许可。先通过现normalization的纯package解析（禁止OCR），页数非零，再走同一个canonical writer；新入口不建writer/数据库。真实PPTX作为隔离manifest登记后才能形成规范EvidenceSpan。
+
+验收工具记录：normal OS默认mypy调用未带本项目既有ignore_missing_imports，fitz无stub报1 import-untyped；已按项目参数复查，不改运行代码来压制类型错误。默认sandbox本机socket集成停止输出，精确pptgreen进程树已终止，正常OS短TEMP补跑，不能把中断当PASS。

@@ -330,3 +330,13 @@ RF W04功能及HTML消费已提交隔离支线，W05正在实现，不冒称整�
 CWP f788a07a官方资料功能合并及964886f8协调文档已推master，精确CI37879066572 success。ET/FF W02已并线；审计技能工程61cfeff提交当前协调计划，无remote，未伪称推送。RF W04/W05及合法非财报null followup已提交支线，W06继续；跨run复用和本机OCR分别独占干净工作树，MAIN接共享接口。纯工程仍0新供应商模型/费用。
 
 工具环境记录：gh不在PATH，改用GitHub只读API查询精确SHA并留official_source_push_ci.json；错误CodeGraph node参数在已定位文件上下文中未影响实现。误猜config/worker_profiles.yaml不存在，后续先rg实际配置路径。不将这些工具错误当产品RED。主线PWF当前入口和清单已去掉“已完成但仍未提交”的过时描述。
+
+## MAIN 输出计量与官方演示文档接线
+
+真实 POST-kill 暴露最终输出按 attempt 累加的共因，先写6项责任测试；夹具路径先遇沙箱C根权限和缺父目录，再遇遗漏retry promotion，这三项均为工具/夹具错误，已分别更正。真实产品RED为4FAIL/2PASS（2.77秒）；按唯一summarize job最终产物槽计量后，含旧run/lease/unknown/模型调用责任共50PASS（8.00秒）。token/cost仍累计全部attempt，未知output bound和旧receipt未清零，实际物理增量guard保持。
+
+真实全图PPTX需要先公开登记canonical manifest，W03入口遗漏PPTX MIME。MAIN增加文本/全图原件复用与坏原件责任测试；默认sandbox TEMP的4权限失败更换workspace TEMP后，真实产品4RED unsupported_mime（1.33秒），现只补共用有界原件package验证及.pptx保存，全图opaque不阻断原件入库、不冒称OCR完成。全28项原官方integration集中在跑，尚未把它记绿。
+
+RF W04-W06已交付 b62161c8，MAIN派独立工程验收，实际发现四处目标/期间/业务scope与证据错绑反例，暂不合并。原owner将依据证据做责任TDD，不增加人签或许可。真实商业M2与四审仍待工程节点完成。
+
+正常OS官方flow28PASS（23.75秒），Ruff四变更文件PASS，mypy两源码按项目参数PASS。官方PPTX import已足够供OCR owner真实临时manifest登记，0供应商费。

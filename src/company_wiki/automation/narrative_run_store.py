@@ -239,12 +239,27 @@ def _required_reservation(
     return record
 
 
-def _budget(connection: sqlite3.Connection, run_id: str) -> RunBudgetSnapshot:
+def _budget(
+    connection: sqlite3.Connection, run_id: str, *,
+    output_reservation: tuple[str, int] | None = None,
+) -> RunBudgetSnapshot:
     rows = connection.execute(
         "SELECT * FROM narrative_model_reservations WHERE run_id=?",
         (run_id,),
     ).fetchall()
     records = [ReservationRecord(**dict(row)) for row in rows]
+    # Each summarize job publishes one final artifact. A retry consumes another
+    # provider call, but it replaces the same final-output slot. Keep every
+    # attempt's uncertain bytes/usage intact; physical scratch/object growth is
+    # measured separately by the batch storage guard.
+    output_slots: dict[str, int] = {}
+    for record in records:
+        output_slots[record.job_id] = max(
+            output_slots.get(record.job_id, 0), record.charged_output_bytes,
+        )
+    if output_reservation is not None:
+        job_id, output_bound = output_reservation
+        output_slots[job_id] = max(output_slots.get(job_id, 0), output_bound)
     # Validate this run's ledger before arithmetic; SQLite would silently coerce
     # malformed text in an addition. Python also preserves exact large totals.
     # Admission still holds the same BEGIN IMMEDIATE transaction.
@@ -252,7 +267,7 @@ def _budget(connection: sqlite3.Connection, run_id: str) -> RunBudgetSnapshot:
         run_id=run_id,
         charged_tokens=sum(record.charged_tokens for record in records),
         charged_micro_usd=sum(record.charged_micro_usd for record in records),
-        charged_output_bytes=sum(record.charged_output_bytes for record in records),
+        charged_output_bytes=sum(output_slots.values()),
         unknown_reservations=sum(record.usage_status == "unknown" for record in records),
         unsettled_reservations=sum(record.usage_status == "reserved" for record in records),
     )
@@ -618,14 +633,13 @@ class NarrativeRunStore:
                 membership["handler_version"],
             ):
                 raise RunConflictError("scoped job input or handler version changed")
-            budget = _budget(connection, run_id)
+            budget = _budget(connection, run_id, output_reservation=(job_id, output_bytes_bound))
             if (
                 run.blocked
                 or budget.charged_tokens + input_tokens_bound + max_output_tokens
                 > run.max_tokens
                 or budget.charged_micro_usd + cost > run.max_micro_usd
-                or budget.charged_output_bytes + output_bytes_bound
-                > run.max_output_bytes
+                or budget.charged_output_bytes > run.max_output_bytes
             ):
                 raise RunBudgetExceededError(
                     "run is blocked or this request exceeds its remaining budget"

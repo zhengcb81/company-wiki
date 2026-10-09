@@ -1,0 +1,44 @@
+[
+  {
+    "target": "C:/Users/郑曾波/Projects/company-wiki/.test-tmp/fmred",
+    "files": 10,
+    "bytes": 1048576.0,
+    "restored_absent": true
+  },
+  {
+    "target": "C:/Users/郑曾波/Projects/company-wiki/.test-tmp/fmred2",
+    "files": 10,
+    "bytes": 1048576.0,
+    "restored_absent": true
+  },
+  {
+    "target": "C:/Users/郑曾波/Projects/company-wiki/.test-tmp/fmgreen",
+    "files": 64,
+    "bytes": 6062080.0,
+    "restored_absent": true
+  },
+  {
+    "target": "C:/Users/郑曾波/Projects/company-wiki/.test-tmp/pptred",
+    "files": 0,
+    "bytes": 0,
+    "restored_absent": true
+  },
+  {
+    "target": "C:/Users/郑曾波/Projects/company-wiki/.test-tmp/pptred2",
+    "files": 0,
+    "bytes": 0,
+    "restored_absent": true
+  },
+  {
+    "target": "C:/Users/郑曾波/Projects/company-wiki/.test-tmp/pptgreen",
+    "files": 0,
+    "bytes": 0,
+    "restored_absent": true
+  },
+  {
+    "target": "C:/cw-official-ppt-main",
+    "files": 0,
+    "bytes": 0,
+    "restored_absent": true
+  }
+]

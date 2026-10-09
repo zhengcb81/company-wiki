@@ -414,3 +414,65 @@ def test_anomalous_actual_total_is_exact_even_beyond_sqlite_sum_range(tmp_path):
     )
     assert budget.get_run("run-one").blocked
     assert budget.budget_snapshot("run-one").charged_tokens == maximum + 150
+
+
+def _retry_claim(auto, generation, job, name):
+    assert auto.reap_expired_attempts(now=T3, allowed_job_ids=(job.job_id,))
+    auto.promote_ready_jobs(now=T9, allowed_job_ids=(job.job_id,))
+    return auto.claim_next_ready(
+        worker_id="replacement-model", attempt_id=name, lease_token=f"lease-{name}",
+        now=T9, lease_until="2026-10-03T10:10:00Z", expected_generation=generation,
+        allowed_job_ids=(job.job_id,),
+    )
+
+
+@pytest.mark.parametrize("usage_status", ["reserved", "unknown", "known"])
+def test_retry_reuses_one_final_output_slot_and_keeps_every_provider_charge(tmp_path, usage_status):
+    module, auto, budget, generation, a, _ = setup_run(tmp_path, max_output_bytes=100)
+    first = claim(auto, generation, a)
+    original = reserve(budget, first).record
+    if usage_status != "reserved":
+        original = budget.settle_model_usage(
+            run_id="run-one", attempt_id=first.attempt.attempt_id,
+            usage=module.ModelUsage(30, 10) if usage_status == "known" else None,
+            response_sha256=RESPONSE if usage_status == "known" else None,
+            error_code="MODEL_WORKER_LOST", settled_at=T2,
+        )
+    retry = _retry_claim(auto, generation, a, "replacement-a")
+    admitted = reserve(budget, retry, now=T9)
+    assert admitted.may_send_http and admitted.created
+    # A lost response does not prove a free provider call or zero local output.
+    assert budget.get_reservation("run-one", first.attempt.attempt_id) == original
+    assert original.output_bytes is None
+    meter = budget.budget_snapshot("run-one")
+    assert meter.charged_output_bytes == 100
+    assert meter.charged_tokens == original.charged_tokens + 150
+    assert meter.charged_micro_usd == original.charged_micro_usd + 90
+
+
+def test_retry_slot_growth_and_independent_job_slots_still_obey_output_limit(tmp_path):
+    module, auto, budget, generation, a, b = setup_run(tmp_path, max_output_bytes=170)
+    first = claim(auto, generation, a)
+    reserve(budget, first, output_bytes_bound=80)
+    reserve(budget, claim(auto, generation, b), output_bytes_bound=70)
+    retry = _retry_claim(auto, generation, a, "larger-a")
+    with pytest.raises(module.RunBudgetExceededError):
+        reserve(budget, retry, output_bytes_bound=101, now=T9)
+    assert budget.get_reservation("run-one", retry.attempt.attempt_id) is None
+    reserve(budget, retry, output_bytes_bound=100, now=T9,
+            input_tokens_bound=0, max_output_tokens=0)
+    assert budget.budget_snapshot("run-one").charged_output_bytes == 170
+
+
+@pytest.mark.parametrize("limit,cap", [("max_tokens", 150), ("max_micro_usd", 90)])
+def test_reusing_output_slot_never_refunds_unknown_tokens_or_cost(tmp_path, limit, cap):
+    module, auto, budget, generation, a, _ = setup_run(
+        tmp_path, max_output_bytes=100, **{limit: cap})
+    first = claim(auto, generation, a)
+    reserve(budget, first)
+    retry = _retry_claim(auto, generation, a, "still-billed-a")
+    before = budget.budget_snapshot("run-one")
+    with pytest.raises(module.RunBudgetExceededError):
+        reserve(budget, retry, now=T9)
+    assert budget.budget_snapshot("run-one") == before
+    assert budget.get_reservation("run-one", retry.attempt.attempt_id) is None

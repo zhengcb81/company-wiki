@@ -25,12 +25,14 @@ from .source_reader import SourceVersionReader
 IMPORT_REQUEST_SCHEMA = "official-source-import-request/1"
 IMPORT_RESULT_SCHEMA = "official-source-import-result/1"
 _MAX_BYTES = 128 * 1024 * 1024
+_PPTX_MIME = "application/vnd.openxmlformats-officedocument.presentationml.presentation"
 _SUPPORTED_MIMES = {
     "application/pdf",
     "text/html",
     "application/xhtml+xml",
     "text/plain",
     "application/json",
+    _PPTX_MIME,
 }
 
 
@@ -121,6 +123,8 @@ def _validate_bytes(data, mime):
                     raise ValueError()
         except (RuntimeError, ValueError):
             raise OfficialSourceError("invalid_pdf") from None
+    elif mime == _PPTX_MIME:
+        _validate_presentation(data)
     elif mime in {"text/html", "application/xhtml+xml"}:
         from bs4 import BeautifulSoup
 
@@ -157,6 +161,26 @@ def _validate_bytes(data, mime):
             extract_transcript_material(data, mime_type=mime)
         except TranscriptMaterialError:
             raise OfficialSourceError("invalid_text_original") from None
+
+
+def _validate_presentation(data):
+    """Verify the bounded package, independent of narrative/OCR coverage."""
+    import time
+    import zipfile
+    from company_wiki.document_normalization import normalize_document, NormalizationLimits
+    from company_wiki.source_contract import source_id_for_sha256
+
+    sha = hashlib.sha256(data).hexdigest()
+    try:
+        parsed = normalize_document(
+            data, source_id=source_id_for_sha256(sha), source_sha256=sha,
+            mime_type=_PPTX_MIME,
+            limits=NormalizationLimits(max_source_bytes=_MAX_BYTES, deadline=time.monotonic() + 15),
+        )
+        if parsed.structure.page_count < 1:
+            raise ValueError("empty or invalid presentation package")
+    except (ValueError, zipfile.BadZipFile):
+        raise OfficialSourceError("invalid_pptx") from None
 
 
 def import_official_source(
@@ -215,6 +239,7 @@ def import_official_source(
         "application/xhtml+xml": ".html",
         "text/plain": ".txt",
         "application/json": ".json",
+        _PPTX_MIME: ".pptx",
     }[mime]
     fd, path = tempfile.mkstemp(
         prefix="official-", suffix=suffix, dir=writer.staging_root
