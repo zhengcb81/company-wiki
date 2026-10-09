@@ -1,14 +1,14 @@
 # 三市场真实收入预测端到端审计
 
-## 最新执行节点（2026-10-09 18:27 UTC；优先于下文历史Next Step）
+## 最新执行节点（2026-10-09 18:34 UTC；优先于下文历史Next Step）
 
-**当前 Next Step：** W06正确公司绑定已独立接受，W06/W12正常并线后的集中70PASS/115.20s。提交共享短scope CI路由、当前PWF及回执，正常push/精确远端CI完成发布；然后按W09已调查18项交接和W13既有研究合同，创建原三家M3完整新执行/四审。新三家M4、冻结NVDA和公司池loop仍待；后续八家目标只登记未激活。
+**当前 Next Step：** W06正确公司绑定已独立接受，W06/W12正常并线后的集中70PASS/115.20s。来源/缓存/共享短scope回归已发布88c4f29a，正常push2479PASS/126.88s，精确CI37973817060成功/102s。下一步刷新真实累计账及当前配置安装snapshot，按W09已调查18项交接和W13既有研究合同，创建原三家M3独立新执行/四审。新三家M4、冻结NVDA和公司池loop仍待；后续八家目标只登记未激活。
 
-- **W06工程M2接受/已并主线，发布待**：原正常API A标签/B原文反例五入口全部拒绝；独立29controls+3相邻合同通过。source90723304/PWF e8afcd26，main merge3ee0a6b2。完整原DEI公司绑定master0/parse0/一SHA，缺绑定源责任层一次既有身份观察/同buffer解析，不增FF/RF许可。责任269PASS/3明确SKIP；真实MSFT7reads/52,643,200B/8.718s，原件/config/库/TEMP保护。旧fc1/4c FAIL及RED保留。
-- **W12工程M2接受/已并主线，发布待**：只有一新离线cache test及ownPWF，无生产缓存重写。test7668ef6e/main merge d5855924；结合scope27、CI路由39、缓存1及既有HTML/PDF/TXT复用3共70PASS/0skip/115.20s。12合成finite runs、14loopback模型POST、外部/收费0；同规格新run无模型/reservation/token，仍回放locators，真实公司repeat留M3。长矩阵不进commit/快速CI，短scope契约共用CI/push。
+- **W06工程M2接受/主线发布/远端绿**：原正常API A标签/B原文反例五入口全部拒绝；独立29controls+3相邻合同通过。source90723304/PWF e8afcd26，main merge3ee0a6b2。完整原DEI公司绑定master0/parse0/一SHA，缺绑定源责任层一次既有身份观察/同buffer解析，不增FF/RF许可。责任269PASS/3明确SKIP；真实MSFT7reads/52,643,200B/8.718s，原件/config/库/TEMP保护。旧fc1/4c FAIL及RED保留。
+- **W12工程M2接受/主线发布/远端绿**：只有一新离线cache test及ownPWF，无生产缓存重写。test7668ef6e/main merge d5855924；结合scope27、CI路由39、缓存1及既有HTML/PDF/TXT复用3共70PASS/0skip/115.20s。12合成finite runs、14loopback模型POST、外部/收费0；同规格新run无模型/reservation/token，仍回放locators，真实公司repeat留M3。长矩阵不进commit/快速CI，短scope契约共用CI/push。
 - **W08后续RF诊断已发布/定点安装/远端绿**：只补四个CWP既有finite reason，source5dcd19be；189PASS/1既有Windows skip/61.35s、22实际RF wire CLI场景；MAIN11独立投影PASS。正常push151PASS/26.70s，精确CI37972797793成功/30s；一文件到两物理安装根，166未选公共文件drift0，config/output/owner日志保留。synthetic wire不是CWP公司事实校验，也不是M3。
 - **W09只读准备已交**：24既有SourceRef、19物理原件SHA（17匹配）、CN/HK/US各6动作共18项；57选定文件SHA/size不变。SSE195为21家公司总量，不同IPO不可替代，H1事件同SHA/公开日仍待；MSFT FY26发现不等于已下载。真实补齐、解析、摘要消费仍待M3，不假装coverage完成。
-- W05/W11及W01/W02/W03/W04/W07/W10/W14此前工程接受仍有效。最近CWP源码2350077a正常push2450PASS/145.64s及CI37966014234成功/98s、文档0504aa9d CI37967393014成功/100s为历史发布基线，不能冒称此次未推的新代码已远端绿；FF41ba0150 CI37961753941成功/81s保持。
+- W05/W11及W01/W02/W03/W04/W07/W10/W14此前工程接受仍有效。最近CWP源码2350077a正常push2450PASS/145.64s及CI37966014234成功/98s、文档0504aa9d CI37967393014成功/100s为历史发布基线，本轮新的88c4f29a精确CI另列，历史发布基线不替代当前结果；FF41ba0150 CI37961753941成功/81s保持。
 - 本轮engineering零供应商/付费调用；Git/GitHub发布与W09有限官方浏览分列。原件、生产config、冻结64矩阵、Dayu/IQS及邻仓owner WIP不改。当前goal active，W09/W13→M3→M4→NVDA/池loop未完成。
 - [本轮总回执](phase6/fresh_root_implementation_2026-10-09/main_capture_transcript_integration.json)、[集中主线验收](phase6/fresh_root_implementation_2026-10-09/source_facts_diagnosis/main_combined_acceptance.json)、[冻结14卡](phase6/fresh_root_remediation_2026-10-09/IMPLEMENTATION.md)区分历史FAIL和当前接受。
 

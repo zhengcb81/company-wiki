@@ -621,3 +621,10 @@ RF两行finite词表修复5dcd19be正常ff main，MAIN11独立投影PASS/.39s，
 W09readonly两文件交付，18M3动作、24refs/19原件hash/17匹配，57选定文件SHA/size保护；没有新获取/摘要/研究。纳秒mtime曾经JS数值丢精度，报告删除失真数字且不称精确mtime保护，不以mtime作publication证据。M3/W13、新三家、NVDA和当前池loop未完成；用户八家名单仍queued未激活。
 
 工具路径失误：MAIN在作者尚未写完时读W09交接一次missing；又猜RF acceptance_receipt.json（实际HANDOFF明确concentrated.json）及不存在typed_cause_usage_diagnosis.md。均只是只读路径错误，无源/测试/原件写，不能作产品RED；后续直接用真实交接literal路径。旧FAIL/所有RED不覆盖。
+
+
+## 2026-10-09 18:34 UTC — 本轮工程发布收尾
+
+源码/短scope共享CI接线及PWF主线88c4f29a正常push2479PASS/126.88s，精确CI37973817060SUCCESS/102s；RF5dcd19be CI37972797793SUCCESS/30s已记录。W06/W12工程M2完整接受发布，目录clean（本次最终发布记录提交前）；全项目及goal仍active未完成。下一大节点：真实累计账/实际配置安装snapshot→原三家M3，按W09十八项动作完成来源获取/复用/处理/模型消费、W13实证校准和joint stress，再四独立审查。M4/NVDA/池loop后续保留。
+
+八家名单条件目标已登记且之前02b6831a推送；未标当前goalcomplete、未create新goal、未启动八家下载/付费。每家完整审查与问题处置后更新已证重要风险，下一家用验证后的技能；固定八家全部遍历，不套用随机池连续三家停止规则。原件/config/矩阵与Dayu/邻仓owner WIP保护，engineering累计本轮新增外部supplier/付费0。

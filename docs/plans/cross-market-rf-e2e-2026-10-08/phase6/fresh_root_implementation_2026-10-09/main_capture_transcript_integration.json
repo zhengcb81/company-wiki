@@ -1,7 +1,7 @@
 {
   "schema_version": "fresh-main-integration/1",
   "date": "2026-10-09",
-  "status": "W06_W12_M2_INDEPENDENT_AND_COMBINED_ACCEPTED_MAIN_PUSH_PENDING_W09_W13_M3_PENDING",
+  "status": "ALL_ENGINEERING_M2_ACCEPTED_PUBLISHED_W09_W13_M3_M4_LOOP_PENDING",
   "frozen_issue_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
   "W04": {
     "source_tip": "68333bc360eb35b84f0616564953411e306f7610",
@@ -156,7 +156,7 @@
     }
   },
   "W06": {
-    "state": "M2_independent_and_main_combined_ACCEPTED_normal_push_pending",
+    "state": "M2_independent_and_main_combined_ACCEPTED_main_published_exact_CI_success",
     "real_causes": [
       "legacy_inline_date_transform",
       "wrong_period_failure_classified_target",
@@ -198,6 +198,18 @@
       "adjacent_contracts": 3,
       "complete_proof": "master0 parse0 target_SHA1",
       "missing_company_binding": "existing_master1 parse1 target_SHA1; same remaining budget"
+    },
+    "main_published": "88c4f29a825a09de69bd4eb4203f7940416196fe",
+    "remote_CI": {
+      "id": 37973817060,
+      "head_sha": "88c4f29a825a09de69bd4eb4203f7940416196fe",
+      "conclusion": "success",
+      "seconds": 102
+    },
+    "normal_push": {
+      "passes": 2479,
+      "seconds": 126.88,
+      "uploaded": true
     }
   },
   "W08": {
@@ -295,7 +307,7 @@
   },
   "observed_at": "2026-10-09T17:35:31.738907+00:00",
   "W12": {
-    "state": "M2_MAIN_combined_ACCEPTED_normal_push_pending",
+    "state": "M2_independent_and_main_combined_ACCEPTED_main_published_exact_CI_success",
     "branch": "codex/fresh-cache-receipts-20261009",
     "source_base": "2350077ac31655d358e67390c6fbda129d80d7dc",
     "owner_plan": "docs/plans/fresh-cache-receipts-2026-10-09",
@@ -320,7 +332,19 @@
       "external_paid_calls": 0,
       "TEMP_restored": true
     },
-    "fast_CI": "Long matrix excluded; short source-scope contracts share CI/push entry"
+    "fast_CI": "Long matrix excluded; short source-scope contracts share CI/push entry",
+    "main_published": "88c4f29a825a09de69bd4eb4203f7940416196fe",
+    "remote_CI": {
+      "id": 37973817060,
+      "head_sha": "88c4f29a825a09de69bd4eb4203f7940416196fe",
+      "conclusion": "success",
+      "seconds": 102
+    },
+    "normal_push": {
+      "passes": 2479,
+      "seconds": 126.88,
+      "uploaded": true
+    }
   },
   "W09": {
     "state": "readonly_source_coverage_preparation_delivered_not_M3_ACCEPTED",

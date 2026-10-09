@@ -1,0 +1,22 @@
+{
+  "observed_at": "2026-10-09T18:33:44.732953+00:00",
+  "head_sha": "88c4f29a825a09de69bd4eb4203f7940416196fe",
+  "runs": [
+    {
+      "id": 37973817060,
+      "name": "CI",
+      "head_sha": "88c4f29a825a09de69bd4eb4203f7940416196fe",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/37973817060",
+      "run_started_at": "2026-10-09T18:30:58Z",
+      "updated_at": "2026-10-09T18:32:40Z"
+    }
+  ],
+  "normal_push": {
+    "passes": 2479,
+    "seconds": 126.88,
+    "uploaded": true
+  },
+  "engineering_only_not_M3": true
+}
