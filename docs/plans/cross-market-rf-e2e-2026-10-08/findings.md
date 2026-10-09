@@ -160,3 +160,7 @@ FF独立工程提交e9b0d088已正常hook推隔离支线，精确远端CI3786455
 原producer agent确认pytest218/219为其前次133/48测试的unique自有根，MAIN逐一核实绝对父路径及无Reparse后删除423个临时夹具文件，共18,492,724B；此前MAIN220自有根已恢复。见phase6/producer_temp_restore_2026-10-09.json。真实NVDA根仍保留供专家，生产原件删除0，supplier费0。
 
 专家拟7卡并正在细化真实机制与接口；ET读入预算还能复现overflow响应读过后账却是0B，属于FETCH-007同因计量责任，不忽略为外围问题。根因包未交付前不发布新真实运行版本，不认为当前已clean。
+
+## 2026-10-09T00:48:11.532827+00:00: W01已合并并同步
+
+CWP156PASS/1真实数据SKIP、FF110PASS、RF14PASS；真实RF→FF→CWP23checks PASS，owned TEMP恢复，supplier0。RF3/FF4文件仅同步到两个物理副本，30个配置/output文件SHA不变，.claude Junction保留。完整证据 C:\Users\郑曾波\Projects\revenue-forecast-audit\runs\pool-20261009-001-us-nvda\execution_replays\w01-main。调用器先误用unittest（无法导入、后0collection），明确失败未假绿；读实际pytest函数后一次补跑；RF首次零写plan发现destination应parent，写前更正。W01工程完成，实际研究M2/公司池clean仍未完成。

@@ -1,0 +1,31 @@
+{
+  "at_utc": "2026-10-09T00:48:11.532827+00:00",
+  "milestone": "W01_main_integration_and_selected_install",
+  "heads": {
+    "company-wiki": "c07852eaf2eb589675b73590e8fc494e1e02ef88",
+    "filing-fetch": "e9b0d0882f46772e333a5b986c7c414733c284cd",
+    "revenue-forecast": "cf06ba000fe594597c5d32a18aad6040d19a0fa0"
+  },
+  "counts": {
+    "CWP_pass": 156,
+    "CWP_skip_real_data": 1,
+    "FF_pass": 110,
+    "RF_pass": 14,
+    "three_public_CLIs_checkpoints_pass": 23
+  },
+  "engineering_result": "PASS",
+  "research_result": "not_replayed_not_clean",
+  "new_supplier_calls": 0,
+  "owned_temporary_restored": true,
+  "installed_selected": {
+    "RF": "3files x2physical",
+    "FF": "4files x2physical"
+  },
+  "protected_config_output_files": 30,
+  "claude_junctions_preserved": true,
+  "caller_errors_recorded": [
+    "unittest module path/zero pytest collection corrected; zero tests never accepted",
+    "RF first zero-write destination plan used skill child instead of parent; rejected before mutation"
+  ],
+  "evidence_dir": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pool-20261009-001-us-nvda\\execution_replays\\w01-main"
+}
