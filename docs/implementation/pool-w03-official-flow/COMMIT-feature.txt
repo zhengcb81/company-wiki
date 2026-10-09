@@ -1,0 +1,15 @@
+ruff check (WU-1.2, mirrors CI).......................................................Passed
+mypy contract modules (FC-1204-c, mirrors CI).....................(no files to check)Skipped
+config doctor (WU-7.1, mirrors CI)................................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test).......................Passed
+[codex/pool-official-source-flow-20261009 afc70de1] feat: connect official originals to finite source narratives
+ 12 files changed, 2486 insertions(+), 3 deletions(-)
+ create mode 100644 docs/implementation/pool-w03-official-flow/INTERFACE.md
+ create mode 100644 docs/implementation/pool-w03-official-flow/flow-proof.json
+ create mode 100644 docs/implementation/pool-w03-official-flow/html-bundle.json
+ create mode 100644 docs/implementation/pool-w03-official-flow/html-read-receipt.json
+ create mode 100644 docs/implementation/pool-w03-official-flow/html-read-request.json
+ create mode 100644 src/company_wiki/source_catalog/official_discovery.py
+ create mode 100644 src/company_wiki/source_catalog/official_source_cli.py
+ create mode 100644 src/company_wiki/source_catalog/official_source_flow.py
+ create mode 100644 tests/integration/test_official_source_flow.py
