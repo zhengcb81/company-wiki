@@ -1,0 +1,71 @@
+{
+  "schema_version": "w08-rf-selected-installation/1",
+  "source_commit": "3c3c03792b189734aac5a0c8900b67b2c6f73ca5",
+  "logical_roots": [
+    "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+    "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast",
+    "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast"
+  ],
+  "physical_roots": [
+    "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+    "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast"
+  ],
+  "selected_files": [
+    {
+      "relative": "scripts/filing_upstream_cause.py",
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_upstream_cause.py",
+      "before_sha256": "2aeff1700a051c538347eb2adae64c9aabffc9b1038c1a5f8884d1914186e0aa",
+      "after_sha256": "a8c2bf46a74e752fc87be10cb9b91708adb2dcd72b3e2b852c2e1d38808ee311",
+      "byte_size": 11663
+    },
+    {
+      "relative": "scripts/filing_fetch_client.py",
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_fetch_client.py",
+      "before_sha256": "b08b1535b45b31c9161edb4f2186a04f848acf5b180a6c4387159e0c5da27580",
+      "after_sha256": "f8f2177be8f7f320e973c78161d0b23c04fbe71e41fc2be65a57efe7bebadb19",
+      "byte_size": 18658
+    },
+    {
+      "relative": "scripts/company_wiki_source_reader_v2.py",
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_source_reader_v2.py",
+      "before_sha256": "01c92f37bee005b36aca0e114eb8974ccd03a6608461800890808548e4ed702d",
+      "after_sha256": "dd238da96383da706a147fcea18f84ba54c84b2909a63ca9d2e5c59ab29fa025",
+      "byte_size": 17186
+    },
+    {
+      "relative": "scripts/source_preparation.py",
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+      "before_sha256": "ffe4a9c52c73639b4a9441c00a086624883f1e1d1c6bfa2c9bc94de0a27bc715",
+      "after_sha256": "bd67489b2099fc15c47879bf87027723a1ef40d6da673b87c26c1e44671ad91d",
+      "byte_size": 24527
+    },
+    {
+      "relative": "scripts/filing_upstream_cause.py",
+      "destination": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\filing_upstream_cause.py",
+      "before_sha256": "2aeff1700a051c538347eb2adae64c9aabffc9b1038c1a5f8884d1914186e0aa",
+      "after_sha256": "a8c2bf46a74e752fc87be10cb9b91708adb2dcd72b3e2b852c2e1d38808ee311",
+      "byte_size": 11663
+    },
+    {
+      "relative": "scripts/filing_fetch_client.py",
+      "destination": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\filing_fetch_client.py",
+      "before_sha256": "b08b1535b45b31c9161edb4f2186a04f848acf5b180a6c4387159e0c5da27580",
+      "after_sha256": "f8f2177be8f7f320e973c78161d0b23c04fbe71e41fc2be65a57efe7bebadb19",
+      "byte_size": 18658
+    },
+    {
+      "relative": "scripts/company_wiki_source_reader_v2.py",
+      "destination": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\company_wiki_source_reader_v2.py",
+      "before_sha256": "01c92f37bee005b36aca0e114eb8974ccd03a6608461800890808548e4ed702d",
+      "after_sha256": "dd238da96383da706a147fcea18f84ba54c84b2909a63ca9d2e5c59ab29fa025",
+      "byte_size": 17186
+    },
+    {
+      "relative": "scripts/source_preparation.py",
+      "destination": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+      "before_sha256": "ffe4a9c52c73639b4a9441c00a086624883f1e1d1c6bfa2c9bc94de0a27bc715",
+      "after_sha256": "bd67489b2099fc15c47879bf87027723a1ef40d6da673b87c26c1e44671ad91d",
+      "byte_size": 24527
+    }
+  ]
+}

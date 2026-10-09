@@ -1,7 +1,7 @@
 {
   "schema_version": "fresh-main-integration/1",
   "date": "2026-10-09",
-  "status": "W11_M2_INSTALLED_FF_W08_PUBLISHED_CWP_W05_RF_W08_PUSH_BLOCKED_W06_REVIEW_FAIL",
+  "status": "W05_MERGED_FINAL_PUSH_PENDING_W08_PUBLISHED_INSTALLED_W11_INSTALLED_W06_SCOPE_ENTRY_REPAIR",
   "frozen_issue_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
   "W04": {
     "source_tip": "68333bc360eb35b84f0616564953411e306f7610",
@@ -58,7 +58,8 @@
     "production_catalog_config_modified": false,
     "Dayu_modified": false,
     "IQS_modified": false,
-    "external_or_paid_calls": 0
+    "external_or_paid_calls": 0,
+    "network_scope": "No source-provider or LLM calls; Git/GitHub CI publication and read-only observation occur separately."
   },
   "remaining_cards": [
     "W05",
@@ -95,7 +96,7 @@
     }
   },
   "W05": {
-    "state": "compatibility_committed_independent_re_review_pending_not_published",
+    "state": "M2_accepted_compat_snapshot_main_merged_final_push_pending",
     "M3": "pending",
     "source_commit": "97c82dc5fa1b4ee31dad3185ae5b0998b7903418",
     "main_merge": "3b842eaaaf5a89ff5c8320113ed558b4bd9d8516",
@@ -122,10 +123,34 @@
         "legacy_0.1.0_runtime_rejected",
         "two_fixture_declared_version_mismatch"
       ]
-    }
+    },
+    "independent_compatibility_passes": 21,
+    "independent_compatibility_seconds": 2.6,
+    "independent_real_replay_groups": 41,
+    "independent_review": "native_documents_acceptance/transcript_compat_review.md",
+    "cache_counterexample": "same_resolver_cached_replay_contract_mutated_to_unknown_version",
+    "cache_fix": "M2_independent_ACCEPTED",
+    "cache_fix_commit": "146491aeeeacee9d01dd10d4ae7ee91a2b790bf7",
+    "compatibility_tip": "20be9dfc942abb71e41dfedb93a180e800dc0e67",
+    "snapshot_responsibility": {
+      "passes": 208,
+      "skipped": 1,
+      "seconds": 4.38
+    },
+    "snapshot_focused": {
+      "passes": 31,
+      "seconds": 1.06
+    },
+    "snapshot_independent": {
+      "passes": 16,
+      "actual_controls": 17,
+      "seconds": 1.18
+    },
+    "compatibility_merge": "3b436b12596f3c9749cc3567ce8b7d74552ce496",
+    "snapshot_re_review": "native_documents_acceptance/transcript_snapshot_re_review.md"
   },
   "W06": {
-    "state": "independent_review_FAIL_cached_ready_scope_repair_running",
+    "state": "local_prepare_qualification_211_green_additional_ensure_bypass_RED_shared_entry_diagnosis",
     "real_causes": [
       "legacy_inline_date_transform",
       "wrong_period_failure_classified_target",
@@ -138,10 +163,21 @@
     "counterexamples": [
       "cached_ready_actual_wrong_CIK",
       "cached_ready_actual_FY2022_declared_FY2026"
-    ]
+    ],
+    "qualification_responsibility": {
+      "passes": 211,
+      "skipped": 2,
+      "seconds": 23.48
+    },
+    "actual_replay": {
+      "original_reads": 7,
+      "bytes": 52643200,
+      "seconds": 9.351
+    },
+    "additional_counterexamples": "actual ensure exact reuse returns before qualification for two wrong cached scopes; source branch not merged"
   },
   "W08": {
-    "state": "FF_published_RF_pre_push_reader_reason_blocked_repair_running",
+    "state": "M2_accepted_both_mains_published_selected_installed",
     "diagnosis": "typed_cause_usage_diagnosis/w08_safe_boundary/DIAGNOSIS.md",
     "M3": "pending",
     "FF_main": "41ba0150c9c634f6021c9346744cada391ec2c4c",
@@ -153,13 +189,32 @@
     },
     "RF_local_main": "1a0608026c0f5c1419642078461c033b111e7a07",
     "RF_normal_pre_push": {
-      "passes": 147,
-      "failures": 2,
-      "seconds": 19.69,
-      "uploaded": false
+      "passes": 151,
+      "seconds": 23.06,
+      "uploaded": true
     },
-    "installation": "pending",
-    "FF_selected_installation": "typed_cause_usage_diagnosis/w08_safe_boundary/ff_selected_installation_receipt.json"
+    "installation": "FF_10_RF_8_selected_physical_files_2_roots_each_preserved_config_output",
+    "FF_selected_installation": "typed_cause_usage_diagnosis/w08_safe_boundary/ff_selected_installation_receipt.json",
+    "RF_followup_commit": "3c3c03792b189734aac5a0c8900b67b2c6f73ca5",
+    "RF_followup_tests": {
+      "passes": 159,
+      "skipped": 1,
+      "seconds": 33.06
+    },
+    "RF_followup_independent_review": "pending",
+    "RF_main_published": "3c3c03792b189734aac5a0c8900b67b2c6f73ca5",
+    "RF_followup_independent": {
+      "passes": 21,
+      "actual_cli_controls": 12,
+      "seconds": 11.14
+    },
+    "RF_CI": {
+      "id": 37965179206,
+      "head_sha": "3c3c03792b189734aac5a0c8900b67b2c6f73ca5",
+      "conclusion": "success",
+      "seconds": 37
+    },
+    "RF_selected_installation": "typed_cause_usage_diagnosis/w08_safe_boundary/rf_selected_installation_receipt.json"
   },
   "W11": {
     "state": "M2_independently_accepted_committed_selected_installed",

@@ -1,0 +1,270 @@
+{
+  "schema_version": "w05-transcript-snapshot-independent-review/1",
+  "source_commit": "146491aeeeacee9d01dd10d4ae7ee91a2b790bf7",
+  "documentation_commit": "20be9dfc942abb71e41dfedb93a180e800dc0e67",
+  "worktree": "C:\\Users\\郑曾波\\.codex\\worktrees\\fresh-capture-20261009\\company-wiki",
+  "source_before": {
+    "src/company_wiki/automation/narrative_formats.py": "58dc81ae9ebdda162c44675bdf613741d4d7e7593533edc0b1f7f4ee69ff8dd6",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "fade99dacb8b607e040ca95808d3820679cb3679607728b54d930e0377e7a894",
+    "src/company_wiki/source_catalog/narrative_retrieval.py": "7a24fe44f24fcdb188d3c30932d78db6d9362df35a1ac49c9eddf1f3446a8f83",
+    "tests/unit/test_transcript_parser_compatibility.py": "d96c910595d5ab94d7ec8810525cb0b79dc3d069d7dea206066b407f9f2f6b6d"
+  },
+  "external_requests": 0,
+  "paid_calls": 0,
+  "company_M3": false,
+  "full_suite_run": false,
+  "control_script": "\nfrom pathlib import Path\nfrom copy import deepcopy\nfrom unittest.mock import patch\nimport hashlib,json,os,sys\nfrom company_wiki.automation.narrative_formats import parser_component\nfrom company_wiki.source_contract import source_id_for_sha256\nfrom company_wiki.source_catalog import narrative_evidence as ne,narrative_retrieval as nr\nassert Path(nr.__file__).resolve()==Path(sys.argv[2]).resolve()/'src/company_wiki/source_catalog/narrative_retrieval.py'\nowned=Path(sys.argv[1]);cases=[]\nsentence='We launched a new manufacturing product and expanded overseas capacity.'\noriginal=('Full Conference Call Transcript\\nCEO: '+sentence+'\\n').encode()\ndef fixture(name):\n raw=owned/(name+'.txt');raw.write_bytes(original);digest=hashlib.sha256(original).hexdigest();source=source_id_for_sha256(digest)\n pname,pver=parser_component('text/plain','transcript',parser_version='0.2.0')\n parsed=ne.parse_transcript_text(original.decode(),source_id=source,source_sha256=digest,parser_version=pver,language='en')\n selected=ne.select_narrative_evidence(parsed,title='Independent manufacturing earnings call',existing_kind='investor_call_transcript')\n bundle={'schema_version':nr.NARRATIVE_EVIDENCE_BUNDLE_SCHEMA_VERSION,'sources':[{'title':'Independent manufacturing earnings call','selection_status':selected.status,'coverage_complete':selected.coverage_complete,'summary_input':selected.summary_input(),'replay_contract':{'schema_version':nr.NARRATIVE_REPLAY_CONTRACT_SCHEMA_VERSION,'source_format':'transcript_txt','language':'en','existing_kind':'investor_call_transcript','parser_name':pname,'parser_version':pver,'parser_options':{},'selector_name':ne.NARRATIVE_SELECTOR_NAME,'selector_version':ne.NARRATIVE_SELECTOR_VERSION,'max_selected':selected.selection_limit}}]}\n return raw,bundle,nr.NarrativeEvidenceSearch(bundle).search('manufacturing product')[0]\ndef mutate(bundle,kind):\n record=bundle['sources'][0];row=record['summary_input']['evidence'][0];contract=record['replay_contract']\n if kind=='version':contract['parser_version']='9.9.9'\n elif kind=='supported_mismatch':contract['parser_version']='0.1.1'\n elif kind in {'text','text_with_sha'}:\n  row['raw_text']='We launched a fabricated different business.'\n  if kind=='text_with_sha':row['raw_text_sha256']=hashlib.sha256(row['raw_text'].encode()).hexdigest()\n elif kind=='locator':row['locators'][0]='loc:v1/paragraph:999/chars:0-4'\n elif kind=='source_sha':record['summary_input']['source_sha256']='0'*64\n elif kind=='selector':contract['selector_version']='9.9.9'\n elif kind=='options':contract['parser_options']['unrecognized']=True\nfor when in ['before_first_read','after_first_read']:\n for kind in ['version','supported_mismatch','text','text_with_sha','locator','source_sha','selector','options']:\n  raw,bundle,hit=fixture(when+'-'+kind);paths={hit.source_id:raw};initial=deepcopy(bundle['sources'][0]);resolver=nr.NarrativeEvidenceResolver(bundle,raw_paths_by_source_id=paths)\n  parse_calls=[];hash_calls=[];parse_original=ne.parse_transcript_text;hash_original=nr._sha256_file\n  def count_parse(*args,**kwargs):\n   parse_calls.append(kwargs['parser_version']);return parse_original(*args,**kwargs)\n  def count_hash(path):\n   hash_calls.append(str(path));return hash_original(path)\n  with patch.object(ne,'parse_transcript_text',count_parse),patch.object(nr,'_sha256_file',count_hash):\n   first=resolver.resolve(hit) if when=='after_first_read' else None\n   mutate(bundle,kind);paths.clear();current=resolver.resolve(hit);grouped=resolver.resolve_group(source_id=hit.source_id,evidence_group_id=hit.evidence_group_id)\n   assert current==grouped and (first is None or first==current)\n   assert current.raw_text==sentence and current.parser_version=='0.2.0'\n   assert resolver._records[hit.source_id]==initial and resolver._records[hit.source_id] is not bundle['sources'][0]\n   assert parse_calls==['0.2.0'] and len(hash_calls)==(4 if when=='after_first_read' else 3)\n  fresh=nr.NarrativeEvidenceResolver(bundle,raw_paths_by_source_id={hit.source_id:raw})\n  try:fresh.resolve(hit)\n  except nr.NarrativeEvidenceResolveError as exc:reason=str(exc)\n  else:raise AssertionError('new reader accepted '+kind)\n  cases.append({'name':when+'-'+kind,'passed':True,'parser_calls_existing_reader':len(parse_calls),'sha_calls_existing_reader':len(hash_calls),'existing_snapshot_equals_original':True,'existing_parser':'0.2.0','external_path_map_cleared':True,'new_reader_refused':True,'new_reader_reason':reason})\nraw,bundle,hit=fixture('raw-cache-integrity');resolver=nr.NarrativeEvidenceResolver(bundle,raw_paths_by_source_id={hit.source_id:raw});stat=raw.stat();parse_original=ne.parse_transcript_text;parse_calls=[]\ndef count_parse(*args,**kwargs):\n parse_calls.append(kwargs['parser_version']);return parse_original(*args,**kwargs)\nwith patch.object(ne,'parse_transcript_text',count_parse):\n first=resolver.resolve(hit);changed=original.replace(b'overseas',b'domestic');assert len(changed)==len(original) and changed!=original;raw.write_bytes(changed);refusals=[]\n for operation in [lambda:resolver.resolve(hit),lambda:resolver.resolve_group(source_id=hit.source_id,evidence_group_id=hit.evidence_group_id)]:\n  try:operation()\n  except nr.NarrativeEvidenceResolveError as exc:\n   assert 'raw source SHA-256' in str(exc);refusals.append(str(exc))\n  else:raise AssertionError('cached reader accepted changed raw bytes')\n raw.write_bytes(original);os.utime(raw,ns=(stat.st_atime_ns,stat.st_mtime_ns))\n assert resolver.resolve(hit)==first and resolver.resolve_group(source_id=hit.source_id,evidence_group_id=hit.evidence_group_id)==first\n assert parse_calls==['0.2.0'] and raw.read_bytes()==original and raw.stat().st_mtime_ns==stat.st_mtime_ns\ncases.append({'name':'cached-raw-change-refusal-and-exact-restoration','passed':True,'same_length_bytes_changed':True,'resolve_and_group_refused':True,'refusal_reasons':refusals,'restored_result_equals_original':True,'raw_sha_and_mtime_restored':True,'parser_calls':1})\nprint(json.dumps({'cases':cases,'case_count':len(cases),'all_passed':True,'external_requests':0,'paid_calls':0},ensure_ascii=False))\n",
+  "initial_harness_errors": [
+    "git -C under sandbox returned128 before tests/TEMP creation; corrected to explicit subprocess cwd",
+    "first sandbox focused16passed/1.16s; sandbox TEMP subsequently denied script-write/empty-directory-cleanup; owned emptyTEMP explicitly resolved and removed with native cmdlet; rerun in explicit owned WindowsTEMP"
+  ],
+  "failed_sandbox_temp_absent": true,
+  "focused_tests": {
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-X",
+      "utf8",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w05-snapshot-independent-yul67kar\\pytest",
+      "tests/unit/test_transcript_parser_compatibility.py::test_resolver_owns_construction_snapshot_and_reuses_parse_cache",
+      "tests/unit/test_transcript_parser_compatibility.py::test_resolver_snapshot_is_taken_before_first_read_and_keeps_path_mapping",
+      "tests/unit/test_transcript_parser_compatibility.py::test_version_text_hash_locator_and_format_guards_remain_closed",
+      "tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes",
+      "tests/unit/test_narrative_retrieval.py::test_resolver_rejects_a_hit_with_forged_locator",
+      "tests/unit/test_narrative_retrieval.py::test_resolver_rejects_package_text_tampering",
+      "tests/unit/test_narrative_retrieval.py::test_resolver_rejects_unknown_selector_contract"
+    ],
+    "exit_code": 0,
+    "seconds": 1.725,
+    "stdout": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\w05-snapshot-independent-yul67kar\\\\pytest\", \"requested_basetemp_len\": 72, \"cwd_len\": 65, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": true, \"reason\": \"resolved-basetemp-exceeds-budget\", \"effective_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\w05-snapshot-independent-yul67kar\\\\cw-pytest-basetemp\\\\20261009-171841-1c78f743\", \"effective_basetemp_len\": 109}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\.codex\\worktrees\\fresh-capture-20261009\\company-wiki\nconfigfile: pytest.ini\ncollected 16 items\n\ntests\\unit\\test_transcript_parser_compatibility.py ............          [ 75%]\ntests\\unit\\test_narrative_retrieval.py ....                              [100%]\n\n============================== warnings summary ===============================\n..\\..\\..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n======================== 16 passed, 1 warning in 1.18s ========================\nCW-BASETEMP-CLEANUP {\"event\": \"cleanup\", \"dir\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\w05-snapshot-independent-yul67kar\\\\cw-pytest-basetemp\\\\20261009-171841-1c78f743\", \"existed\": true, \"removed\": true}\n",
+    "stderr": ""
+  },
+  "independent_controls": {
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-X",
+      "utf8",
+      "-B",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w05-snapshot-independent-yul67kar\\snapshot_controls.py",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w05-snapshot-independent-yul67kar",
+      "C:\\Users\\郑曾波\\.codex\\worktrees\\fresh-capture-20261009\\company-wiki"
+    ],
+    "exit_code": 0,
+    "seconds": 1.039,
+    "stderr": "",
+    "results": {
+      "cases": [
+        {
+          "name": "before_first_read-version",
+          "passed": true,
+          "parser_calls_existing_reader": 1,
+          "sha_calls_existing_reader": 3,
+          "existing_snapshot_equals_original": true,
+          "existing_parser": "0.2.0",
+          "external_path_map_cleared": true,
+          "new_reader_refused": true,
+          "new_reader_reason": "unsupported transcript parser version"
+        },
+        {
+          "name": "before_first_read-supported_mismatch",
+          "passed": true,
+          "parser_calls_existing_reader": 1,
+          "sha_calls_existing_reader": 3,
+          "existing_snapshot_equals_original": true,
+          "existing_parser": "0.2.0",
+          "external_path_map_cleared": true,
+          "new_reader_refused": true,
+          "new_reader_reason": "package parser metadata does not match replay contract"
+        },
+        {
+          "name": "before_first_read-text",
+          "passed": true,
+          "parser_calls_existing_reader": 1,
+          "sha_calls_existing_reader": 3,
+          "existing_snapshot_equals_original": true,
+          "existing_parser": "0.2.0",
+          "external_path_map_cleared": true,
+          "new_reader_refused": true,
+          "new_reader_reason": "package evidence text hash is invalid"
+        },
+        {
+          "name": "before_first_read-text_with_sha",
+          "passed": true,
+          "parser_calls_existing_reader": 1,
+          "sha_calls_existing_reader": 3,
+          "existing_snapshot_equals_original": true,
+          "existing_parser": "0.2.0",
+          "external_path_map_cleared": true,
+          "new_reader_refused": true,
+          "new_reader_reason": "replayed package raw_text_sha256 differs"
+        },
+        {
+          "name": "before_first_read-locator",
+          "passed": true,
+          "parser_calls_existing_reader": 1,
+          "sha_calls_existing_reader": 3,
+          "existing_snapshot_equals_original": true,
+          "existing_parser": "0.2.0",
+          "external_path_map_cleared": true,
+          "new_reader_refused": true,
+          "new_reader_reason": "search hit is not an exact package group"
+        },
+        {
+          "name": "before_first_read-source_sha",
+          "passed": true,
+          "parser_calls_existing_reader": 1,
+          "sha_calls_existing_reader": 3,
+          "existing_snapshot_equals_original": true,
+          "existing_parser": "0.2.0",
+          "external_path_map_cleared": true,
+          "new_reader_refused": true,
+          "new_reader_reason": "search hit identity differs from bundle"
+        },
+        {
+          "name": "before_first_read-selector",
+          "passed": true,
+          "parser_calls_existing_reader": 1,
+          "sha_calls_existing_reader": 3,
+          "existing_snapshot_equals_original": true,
+          "existing_parser": "0.2.0",
+          "external_path_map_cleared": true,
+          "new_reader_refused": true,
+          "new_reader_reason": "unsupported narrative selector version"
+        },
+        {
+          "name": "before_first_read-options",
+          "passed": true,
+          "parser_calls_existing_reader": 1,
+          "sha_calls_existing_reader": 3,
+          "existing_snapshot_equals_original": true,
+          "existing_parser": "0.2.0",
+          "external_path_map_cleared": true,
+          "new_reader_refused": true,
+          "new_reader_reason": "transcript parser options must be empty"
+        },
+        {
+          "name": "after_first_read-version",
+          "passed": true,
+          "parser_calls_existing_reader": 1,
+          "sha_calls_existing_reader": 4,
+          "existing_snapshot_equals_original": true,
+          "existing_parser": "0.2.0",
+          "external_path_map_cleared": true,
+          "new_reader_refused": true,
+          "new_reader_reason": "unsupported transcript parser version"
+        },
+        {
+          "name": "after_first_read-supported_mismatch",
+          "passed": true,
+          "parser_calls_existing_reader": 1,
+          "sha_calls_existing_reader": 4,
+          "existing_snapshot_equals_original": true,
+          "existing_parser": "0.2.0",
+          "external_path_map_cleared": true,
+          "new_reader_refused": true,
+          "new_reader_reason": "package parser metadata does not match replay contract"
+        },
+        {
+          "name": "after_first_read-text",
+          "passed": true,
+          "parser_calls_existing_reader": 1,
+          "sha_calls_existing_reader": 4,
+          "existing_snapshot_equals_original": true,
+          "existing_parser": "0.2.0",
+          "external_path_map_cleared": true,
+          "new_reader_refused": true,
+          "new_reader_reason": "package evidence text hash is invalid"
+        },
+        {
+          "name": "after_first_read-text_with_sha",
+          "passed": true,
+          "parser_calls_existing_reader": 1,
+          "sha_calls_existing_reader": 4,
+          "existing_snapshot_equals_original": true,
+          "existing_parser": "0.2.0",
+          "external_path_map_cleared": true,
+          "new_reader_refused": true,
+          "new_reader_reason": "replayed package raw_text_sha256 differs"
+        },
+        {
+          "name": "after_first_read-locator",
+          "passed": true,
+          "parser_calls_existing_reader": 1,
+          "sha_calls_existing_reader": 4,
+          "existing_snapshot_equals_original": true,
+          "existing_parser": "0.2.0",
+          "external_path_map_cleared": true,
+          "new_reader_refused": true,
+          "new_reader_reason": "search hit is not an exact package group"
+        },
+        {
+          "name": "after_first_read-source_sha",
+          "passed": true,
+          "parser_calls_existing_reader": 1,
+          "sha_calls_existing_reader": 4,
+          "existing_snapshot_equals_original": true,
+          "existing_parser": "0.2.0",
+          "external_path_map_cleared": true,
+          "new_reader_refused": true,
+          "new_reader_reason": "search hit identity differs from bundle"
+        },
+        {
+          "name": "after_first_read-selector",
+          "passed": true,
+          "parser_calls_existing_reader": 1,
+          "sha_calls_existing_reader": 4,
+          "existing_snapshot_equals_original": true,
+          "existing_parser": "0.2.0",
+          "external_path_map_cleared": true,
+          "new_reader_refused": true,
+          "new_reader_reason": "unsupported narrative selector version"
+        },
+        {
+          "name": "after_first_read-options",
+          "passed": true,
+          "parser_calls_existing_reader": 1,
+          "sha_calls_existing_reader": 4,
+          "existing_snapshot_equals_original": true,
+          "existing_parser": "0.2.0",
+          "external_path_map_cleared": true,
+          "new_reader_refused": true,
+          "new_reader_reason": "transcript parser options must be empty"
+        },
+        {
+          "name": "cached-raw-change-refusal-and-exact-restoration",
+          "passed": true,
+          "same_length_bytes_changed": true,
+          "resolve_and_group_refused": true,
+          "refusal_reasons": [
+            "raw source SHA-256 differs from bundle",
+            "raw source SHA-256 differs from bundle"
+          ],
+          "restored_result_equals_original": true,
+          "raw_sha_and_mtime_restored": true,
+          "parser_calls": 1
+        }
+      ],
+      "case_count": 17,
+      "all_passed": true,
+      "external_requests": 0,
+      "paid_calls": 0
+    }
+  },
+  "temporary_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w05-snapshot-independent-yul67kar",
+  "temporary_root_absent": true,
+  "source_after": {
+    "src/company_wiki/automation/narrative_formats.py": "58dc81ae9ebdda162c44675bdf613741d4d7e7593533edc0b1f7f4ee69ff8dd6",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "fade99dacb8b607e040ca95808d3820679cb3679607728b54d930e0377e7a894",
+    "src/company_wiki/source_catalog/narrative_retrieval.py": "7a24fe44f24fcdb188d3c30932d78db6d9362df35a1ac49c9eddf1f3446a8f83",
+    "tests/unit/test_transcript_parser_compatibility.py": "d96c910595d5ab94d7ec8810525cb0b79dc3d069d7dea206066b407f9f2f6b6d"
+  },
+  "source_unchanged": true,
+  "baseline_restored": true,
+  "review_decision": "PASS_frozen_snapshot_ownership_scope"
+}

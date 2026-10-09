@@ -1,0 +1,780 @@
+{
+  "schema_version": "independent-native-reason-review/1",
+  "reviewed_head": "3c3c03792b189734aac5a0c8900b67b2c6f73ca5",
+  "expected_head": "3c3c03792b189734aac5a0c8900b67b2c6f73ca5",
+  "dependency_heads": {
+    "ff": "41ba0150c9c634f6021c9346744cada391ec2c4c",
+    "cwp": "33310a1cfe2648ec3f8a29bfa3b376eacd2d19a9"
+  },
+  "source_sha256_before": {
+    "scripts/company_wiki_source_reader_v2.py": "dd238da96383da706a147fcea18f84ba54c84b2909a63ca9d2e5c59ab29fa025",
+    "scripts/filing_upstream_cause.py": "a8c2bf46a74e752fc87be10cb9b91708adb2dcd72b3e2b852c2e1d38808ee311",
+    "scripts/filing_fetch_client.py": "f8f2177be8f7f320e973c78161d0b23c04fbe71e41fc2be65a57efe7bebadb19",
+    "scripts/source_preparation.py": "bd67489b2099fc15c47879bf87027723a1ef40d6da673b87c26c1e44671ad91d"
+  },
+  "external_calls": 0,
+  "paid_usd": 0,
+  "production_writes": 0,
+  "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3",
+  "focused_tests": {
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-X",
+      "utf8",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\pytest",
+      "tests/test_p5_source_default_v2.py::test_default_failure_keeps_error_semantics_for_bad_candidate",
+      "tests/test_p5_source_default_cli_e2e.py::test_cli_corrupted_raw_refuses_then_heals",
+      "tests/test_company_wiki_source_reader_v2.py::test_same_size_tampered_bytes_are_rejected",
+      "tests/test_company_wiki_source_reader_v2.py::test_verified_bytes_still_need_as_of_and_period",
+      "tests/test_company_wiki_source_reader_v2.py::test_wrong_version_refusal_never_falls_back_to_a_local_path",
+      "tests/test_source_failure_observations.py::test_native_reader_refusal_retains_finite_reason_and_prior_counts",
+      "tests/test_source_failure_observations.py::test_untyped_exception_body_cannot_publish_a_lookalike_known_reason",
+      "tests/test_source_failure_observations.py::test_optional_native_reason_uses_same_finite_projection_across_cli_boundaries",
+      "tests/test_source_failure_observations.py::test_malformed_native_refusal_keeps_safe_typed_failure"
+    ],
+    "exit": 0,
+    "seconds": 11.532,
+    "stdout": ".....................                                                    [100%]\n21 passed in 11.14s\n",
+    "stderr": ""
+  },
+  "actual_cli_controls": {
+    "description": "Real RF client and preparation CLIs; fake FF SourceRef producer plus fake native CWP refusal producer. Original P5 node separately exercises actual FF and CWP code with corrupt/refuse/heal fixture.",
+    "fixture_source": {
+      "fake_ff": "import json, pathlib, sys\nsys.stdin.read()\np=pathlib.Path(__file__).resolve().parents[1]/'payload.json'\nprint(p.read_text(encoding='utf-8'))\n",
+      "fake_native_reader": "import json, pathlib, sys\np=pathlib.Path(sys.argv[sys.argv.index('--config')+1])\nx=json.loads(p.read_text(encoding='utf-8'))\npathlib.Path(x['trace']).write_text(json.dumps(sys.argv,ensure_ascii=False),encoding='utf-8')\nsys.stderr.write(x['wire'])\nraise SystemExit(2)\n"
+    },
+    "request": {
+      "schema_version": "1.1",
+      "company_query": "Acme",
+      "document_kind": "annual_report",
+      "fiscal_year": 2025,
+      "as_of_date": "2026-09-27",
+      "fiscal_period": null
+    },
+    "base_envelope": {
+      "schema_version": "2.0",
+      "status": "source_candidate",
+      "filing": {
+        "status": "source_candidate",
+        "source_ref": {
+          "schema_version": "2.0",
+          "document_id": "doc-1",
+          "source_id": "src-1",
+          "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "byte_size": 3,
+          "mime_type": "application/pdf"
+        },
+        "document_kind": "annual_report",
+        "fiscal_year": 2025,
+        "fiscal_period": null,
+        "provider": "company-wiki",
+        "prompt_injection_status": null,
+        "resolution_outcome": "reused_existing",
+        "download_events": 0
+      },
+      "transcript": {
+        "status": "not_requested"
+      },
+      "calls": 2,
+      "downloads": 0
+    },
+    "controls": [
+      {
+        "label": "no_verified_location",
+        "expected_reason": "no_verified_location",
+        "native_refusal": {
+          "schema_version": "2.1",
+          "status": "unavailable",
+          "reason": "no_verified_location"
+        },
+        "candidate_mutation": null,
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\fake-ff",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\catalog.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "native_argv": [
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\fake-cwp\\company_wiki\\source_catalog\\source_reader_cli.py",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\catalog.json",
+          "--document-id",
+          "doc-1",
+          "--source-id",
+          "src-1",
+          "--content-sha256",
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "--purpose",
+          "filing_reuse"
+        ],
+        "exit": 3,
+        "stdout": "",
+        "stderr_json": {
+          "error_code": "upstream",
+          "error": "source reader refused: no_verified_location",
+          "source_failure_reason": "no_verified_location",
+          "stage": "source_reader",
+          "calls": 2,
+          "downloads": 0
+        },
+        "checks": {
+          "exit_3": true,
+          "stdout_empty": true,
+          "valid_error_json": true,
+          "source_reader_stage": true,
+          "prior_calls_2": true,
+          "prior_downloads_0": true,
+          "reason_expected": true,
+          "native_invocation_expected": true,
+          "sentinel_not_echoed": true,
+          "unknown_no_fabricated_acquisition": true
+        },
+        "passed": true
+      },
+      {
+        "label": "catalog_unavailable",
+        "expected_reason": "catalog_unavailable",
+        "native_refusal": {
+          "schema_version": "2.1",
+          "status": "unavailable",
+          "reason": "catalog_unavailable"
+        },
+        "candidate_mutation": null,
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\fake-ff",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\catalog.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "native_argv": [
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\fake-cwp\\company_wiki\\source_catalog\\source_reader_cli.py",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\catalog.json",
+          "--document-id",
+          "doc-1",
+          "--source-id",
+          "src-1",
+          "--content-sha256",
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "--purpose",
+          "filing_reuse"
+        ],
+        "exit": 3,
+        "stdout": "",
+        "stderr_json": {
+          "error_code": "upstream",
+          "error": "source reader refused: catalog_unavailable",
+          "source_failure_reason": "catalog_unavailable",
+          "stage": "source_reader",
+          "calls": 2,
+          "downloads": 0
+        },
+        "checks": {
+          "exit_3": true,
+          "stdout_empty": true,
+          "valid_error_json": true,
+          "source_reader_stage": true,
+          "prior_calls_2": true,
+          "prior_downloads_0": true,
+          "reason_expected": true,
+          "native_invocation_expected": true,
+          "sentinel_not_echoed": true,
+          "unknown_no_fabricated_acquisition": true
+        },
+        "passed": true
+      },
+      {
+        "label": "candidate_budget_exceeded",
+        "expected_reason": "candidate_budget_exceeded",
+        "native_refusal": {
+          "schema_version": "2.1",
+          "status": "unavailable",
+          "reason": "candidate_budget_exceeded"
+        },
+        "candidate_mutation": null,
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\fake-ff",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\catalog.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "native_argv": [
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\fake-cwp\\company_wiki\\source_catalog\\source_reader_cli.py",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\catalog.json",
+          "--document-id",
+          "doc-1",
+          "--source-id",
+          "src-1",
+          "--content-sha256",
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "--purpose",
+          "filing_reuse"
+        ],
+        "exit": 3,
+        "stdout": "",
+        "stderr_json": {
+          "error_code": "upstream",
+          "error": "source reader refused: candidate_budget_exceeded",
+          "source_failure_reason": "candidate_budget_exceeded",
+          "stage": "source_reader",
+          "calls": 2,
+          "downloads": 0
+        },
+        "checks": {
+          "exit_3": true,
+          "stdout_empty": true,
+          "valid_error_json": true,
+          "source_reader_stage": true,
+          "prior_calls_2": true,
+          "prior_downloads_0": true,
+          "reason_expected": true,
+          "native_invocation_expected": true,
+          "sentinel_not_echoed": true,
+          "unknown_no_fabricated_acquisition": true
+        },
+        "passed": true
+      },
+      {
+        "label": "unknown_finite_token",
+        "expected_reason": null,
+        "native_refusal": {
+          "schema_version": "2.1",
+          "status": "unavailable",
+          "reason": "api_key_SYNTHETIC_NATIVE_BODY_NOT_A_REAL_KEY"
+        },
+        "candidate_mutation": null,
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\fake-ff",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\catalog.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "native_argv": [
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\fake-cwp\\company_wiki\\source_catalog\\source_reader_cli.py",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\catalog.json",
+          "--document-id",
+          "doc-1",
+          "--source-id",
+          "src-1",
+          "--content-sha256",
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "--purpose",
+          "filing_reuse"
+        ],
+        "exit": 3,
+        "stdout": "",
+        "stderr_json": {
+          "error_code": "upstream",
+          "error": "source preparation failed at source_reader",
+          "stage": "source_reader",
+          "calls": 2,
+          "downloads": 0
+        },
+        "checks": {
+          "exit_3": true,
+          "stdout_empty": true,
+          "valid_error_json": true,
+          "source_reader_stage": true,
+          "prior_calls_2": true,
+          "prior_downloads_0": true,
+          "reason_expected": true,
+          "native_invocation_expected": true,
+          "sentinel_not_echoed": true,
+          "unknown_no_fabricated_acquisition": true
+        },
+        "passed": true
+      },
+      {
+        "label": "unknown_body",
+        "expected_reason": null,
+        "native_refusal": {
+          "schema_version": "2.1",
+          "status": "unavailable",
+          "reason": "https://invalid/?api_key=SYNTHETIC_NATIVE_BODY_NOT_A_REAL_KEY"
+        },
+        "candidate_mutation": null,
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\fake-ff",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\catalog.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "native_argv": [
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\fake-cwp\\company_wiki\\source_catalog\\source_reader_cli.py",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\catalog.json",
+          "--document-id",
+          "doc-1",
+          "--source-id",
+          "src-1",
+          "--content-sha256",
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "--purpose",
+          "filing_reuse"
+        ],
+        "exit": 3,
+        "stdout": "",
+        "stderr_json": {
+          "error_code": "upstream",
+          "error": "source preparation failed at source_reader",
+          "stage": "source_reader",
+          "calls": 2,
+          "downloads": 0
+        },
+        "checks": {
+          "exit_3": true,
+          "stdout_empty": true,
+          "valid_error_json": true,
+          "source_reader_stage": true,
+          "prior_calls_2": true,
+          "prior_downloads_0": true,
+          "reason_expected": true,
+          "native_invocation_expected": true,
+          "sentinel_not_echoed": true,
+          "unknown_no_fabricated_acquisition": true
+        },
+        "passed": true
+      },
+      {
+        "label": "malformed_schema_version",
+        "expected_reason": null,
+        "native_refusal": {
+          "schema_version": [
+            "SYNTHETIC_NATIVE_BODY_NOT_A_REAL_KEY"
+          ],
+          "status": "unavailable",
+          "reason": "no_verified_location"
+        },
+        "candidate_mutation": null,
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\fake-ff",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\catalog.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "native_argv": [
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\fake-cwp\\company_wiki\\source_catalog\\source_reader_cli.py",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\catalog.json",
+          "--document-id",
+          "doc-1",
+          "--source-id",
+          "src-1",
+          "--content-sha256",
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "--purpose",
+          "filing_reuse"
+        ],
+        "exit": 3,
+        "stdout": "",
+        "stderr_json": {
+          "error_code": "upstream",
+          "error": "source preparation failed at source_reader",
+          "stage": "source_reader",
+          "calls": 2,
+          "downloads": 0
+        },
+        "checks": {
+          "exit_3": true,
+          "stdout_empty": true,
+          "valid_error_json": true,
+          "source_reader_stage": true,
+          "prior_calls_2": true,
+          "prior_downloads_0": true,
+          "reason_expected": true,
+          "native_invocation_expected": true,
+          "sentinel_not_echoed": true,
+          "unknown_no_fabricated_acquisition": true
+        },
+        "passed": true
+      },
+      {
+        "label": "malformed_status",
+        "expected_reason": null,
+        "native_refusal": {
+          "schema_version": "2.1",
+          "status": [
+            "SYNTHETIC_NATIVE_BODY_NOT_A_REAL_KEY"
+          ],
+          "reason": "no_verified_location"
+        },
+        "candidate_mutation": null,
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\fake-ff",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\catalog.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "native_argv": [
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\fake-cwp\\company_wiki\\source_catalog\\source_reader_cli.py",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\catalog.json",
+          "--document-id",
+          "doc-1",
+          "--source-id",
+          "src-1",
+          "--content-sha256",
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "--purpose",
+          "filing_reuse"
+        ],
+        "exit": 3,
+        "stdout": "",
+        "stderr_json": {
+          "error_code": "upstream",
+          "error": "source preparation failed at source_reader",
+          "stage": "source_reader",
+          "calls": 2,
+          "downloads": 0
+        },
+        "checks": {
+          "exit_3": true,
+          "stdout_empty": true,
+          "valid_error_json": true,
+          "source_reader_stage": true,
+          "prior_calls_2": true,
+          "prior_downloads_0": true,
+          "reason_expected": true,
+          "native_invocation_expected": true,
+          "sentinel_not_echoed": true,
+          "unknown_no_fabricated_acquisition": true
+        },
+        "passed": true
+      },
+      {
+        "label": "malformed_reason",
+        "expected_reason": null,
+        "native_refusal": {
+          "schema_version": "2.1",
+          "status": "unavailable",
+          "reason": [
+            "SYNTHETIC_NATIVE_BODY_NOT_A_REAL_KEY"
+          ]
+        },
+        "candidate_mutation": null,
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\fake-ff",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\catalog.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "native_argv": [
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\fake-cwp\\company_wiki\\source_catalog\\source_reader_cli.py",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\catalog.json",
+          "--document-id",
+          "doc-1",
+          "--source-id",
+          "src-1",
+          "--content-sha256",
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "--purpose",
+          "filing_reuse"
+        ],
+        "exit": 3,
+        "stdout": "",
+        "stderr_json": {
+          "error_code": "upstream",
+          "error": "source preparation failed at source_reader",
+          "stage": "source_reader",
+          "calls": 2,
+          "downloads": 0
+        },
+        "checks": {
+          "exit_3": true,
+          "stdout_empty": true,
+          "valid_error_json": true,
+          "source_reader_stage": true,
+          "prior_calls_2": true,
+          "prior_downloads_0": true,
+          "reason_expected": true,
+          "native_invocation_expected": true,
+          "sentinel_not_echoed": true,
+          "unknown_no_fabricated_acquisition": true
+        },
+        "passed": true
+      },
+      {
+        "label": "invalid_json",
+        "expected_reason": null,
+        "native_refusal": "raw response SYNTHETIC_NATIVE_BODY_NOT_A_REAL_KEY",
+        "candidate_mutation": null,
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\fake-ff",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\catalog.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "native_argv": [
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\fake-cwp\\company_wiki\\source_catalog\\source_reader_cli.py",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\catalog.json",
+          "--document-id",
+          "doc-1",
+          "--source-id",
+          "src-1",
+          "--content-sha256",
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "--purpose",
+          "filing_reuse"
+        ],
+        "exit": 3,
+        "stdout": "",
+        "stderr_json": {
+          "error_code": "upstream",
+          "error": "source preparation failed at source_reader",
+          "stage": "source_reader",
+          "calls": 2,
+          "downloads": 0
+        },
+        "checks": {
+          "exit_3": true,
+          "stdout_empty": true,
+          "valid_error_json": true,
+          "source_reader_stage": true,
+          "prior_calls_2": true,
+          "prior_downloads_0": true,
+          "reason_expected": true,
+          "native_invocation_expected": true,
+          "sentinel_not_echoed": true,
+          "unknown_no_fabricated_acquisition": true
+        },
+        "passed": true
+      },
+      {
+        "label": "candidate_fiscal_year",
+        "expected_reason": "fiscal_year_mismatch",
+        "native_refusal": {
+          "schema_version": "2.1",
+          "status": "unavailable",
+          "reason": "no_verified_location"
+        },
+        "candidate_mutation": [
+          "fiscal_year",
+          2024
+        ],
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\fake-ff",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\catalog.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "native_argv": null,
+        "exit": 3,
+        "stdout": "",
+        "stderr_json": {
+          "error_code": "upstream",
+          "error": "source validation refused: fiscal_year mismatch",
+          "source_failure_reason": "fiscal_year_mismatch",
+          "stage": "source_reader",
+          "calls": 2,
+          "downloads": 0
+        },
+        "checks": {
+          "exit_3": true,
+          "stdout_empty": true,
+          "valid_error_json": true,
+          "source_reader_stage": true,
+          "prior_calls_2": true,
+          "prior_downloads_0": true,
+          "reason_expected": true,
+          "native_invocation_expected": true,
+          "sentinel_not_echoed": true,
+          "unknown_no_fabricated_acquisition": true
+        },
+        "passed": true
+      },
+      {
+        "label": "candidate_document_kind",
+        "expected_reason": "document_kind_mismatch",
+        "native_refusal": {
+          "schema_version": "2.1",
+          "status": "unavailable",
+          "reason": "no_verified_location"
+        },
+        "candidate_mutation": [
+          "document_kind",
+          "quarterly_report"
+        ],
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\fake-ff",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\catalog.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "native_argv": null,
+        "exit": 3,
+        "stdout": "",
+        "stderr_json": {
+          "error_code": "upstream",
+          "error": "source validation refused: document_kind mismatch",
+          "source_failure_reason": "document_kind_mismatch",
+          "stage": "source_reader",
+          "calls": 2,
+          "downloads": 0
+        },
+        "checks": {
+          "exit_3": true,
+          "stdout_empty": true,
+          "valid_error_json": true,
+          "source_reader_stage": true,
+          "prior_calls_2": true,
+          "prior_downloads_0": true,
+          "reason_expected": true,
+          "native_invocation_expected": true,
+          "sentinel_not_echoed": true,
+          "unknown_no_fabricated_acquisition": true
+        },
+        "passed": true
+      },
+      {
+        "label": "candidate_fiscal_period",
+        "expected_reason": "fiscal_period_mismatch",
+        "native_refusal": {
+          "schema_version": "2.1",
+          "status": "unavailable",
+          "reason": "no_verified_location"
+        },
+        "candidate_mutation": [
+          "fiscal_period",
+          "Q1"
+        ],
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\fake-ff",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-native-independent-trbm5xg3\\中文-控验\\catalog.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "native_argv": null,
+        "exit": 3,
+        "stdout": "",
+        "stderr_json": {
+          "error_code": "upstream",
+          "error": "source validation refused: fiscal_period mismatch",
+          "source_failure_reason": "fiscal_period_mismatch",
+          "stage": "source_reader",
+          "calls": 2,
+          "downloads": 0
+        },
+        "checks": {
+          "exit_3": true,
+          "stdout_empty": true,
+          "valid_error_json": true,
+          "source_reader_stage": true,
+          "prior_calls_2": true,
+          "prior_downloads_0": true,
+          "reason_expected": true,
+          "native_invocation_expected": true,
+          "sentinel_not_echoed": true,
+          "unknown_no_fabricated_acquisition": true
+        },
+        "passed": true
+      }
+    ]
+  },
+  "baseline_restored": true,
+  "owned_temp_absent": true,
+  "source_sha256_after": {
+    "scripts/company_wiki_source_reader_v2.py": "dd238da96383da706a147fcea18f84ba54c84b2909a63ca9d2e5c59ab29fa025",
+    "scripts/filing_upstream_cause.py": "a8c2bf46a74e752fc87be10cb9b91708adb2dcd72b3e2b852c2e1d38808ee311",
+    "scripts/filing_fetch_client.py": "f8f2177be8f7f320e973c78161d0b23c04fbe71e41fc2be65a57efe7bebadb19",
+    "scripts/source_preparation.py": "bd67489b2099fc15c47879bf87027723a1ef40d6da673b87c26c1e44671ad91d"
+  },
+  "source_unchanged": true,
+  "head_after": "3c3c03792b189734aac5a0c8900b67b2c6f73ca5",
+  "seconds_total": 17.057,
+  "passed": true
+}

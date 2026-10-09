@@ -1,0 +1,193 @@
+{
+  "schema_version": "w05-transcript-compat-independent-review/1",
+  "source_commit": "87cdf733f3951f43416300304da84dac5d26d3c2",
+  "documentation_commit": "7de4fabb9eb4f7c82a9da03397169099f2e3f0fe",
+  "source_before": {
+    "src/company_wiki/automation/narrative_formats.py": "58dc81ae9ebdda162c44675bdf613741d4d7e7593533edc0b1f7f4ee69ff8dd6",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "fade99dacb8b607e040ca95808d3820679cb3679607728b54d930e0377e7a894",
+    "src/company_wiki/source_catalog/narrative_retrieval.py": "f513b4a4e8f3acf4a9523e282f3122a1eb72fa77f63f5d0e48b619776fd4e2d9"
+  },
+  "external_requests": 0,
+  "paid_calls": 0,
+  "company_M3": false,
+  "focused_tests": {
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-X",
+      "utf8",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w05-independent-compat-z3j4pyge\\pytest",
+      "tests/unit/test_narrative_english_business_recall.py::test_recall_semantics_are_versioned_and_legacy_txt_locators_stay_unchanged",
+      "tests/unit/test_narrative_retrieval.py::test_resolver_replays_selected_transcript_group_from_hashed_raw",
+      "tests/unit/test_narrative_retrieval.py::test_resolver_rejects_package_text_tampering",
+      "tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes",
+      "tests/unit/test_narrative_retrieval.py::test_resolver_rejects_a_hit_with_forged_locator",
+      "tests/unit/test_transcript_parser_compatibility.py",
+      "tests/integration/test_narrative_format_transport.py::test_format_real_auto_publication_and_public_transport_restores_test_lake"
+    ],
+    "exit_code": 0,
+    "seconds": 3.16,
+    "log": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\w05-independent-compat-z3j4pyge\\\\pytest\", \"requested_basetemp_len\": 70, \"cwd_len\": 65, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": true, \"reason\": \"resolved-basetemp-exceeds-budget\", \"effective_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\w05-independent-compat-z3j4pyge\\\\cw-pytest-basetemp\\\\20261009-170104-a33f88d2\", \"effective_basetemp_len\": 107}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\.codex\\worktrees\\fresh-capture-20261009\\company-wiki\nconfigfile: pytest.ini\ncollected 21 items\n\ntests\\unit\\test_narrative_english_business_recall.py .                   [  4%]\ntests\\unit\\test_narrative_retrieval.py ....                              [ 23%]\ntests\\unit\\test_transcript_parser_compatibility.py .............         [ 85%]\ntests\\integration\\test_narrative_format_transport.py ...                 [100%]\n\n============================== warnings summary ===============================\n..\\..\\..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n======================== 21 passed, 1 warning in 2.60s ========================\nCW-BASETEMP-CLEANUP {\"event\": \"cleanup\", \"dir\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\w05-independent-compat-z3j4pyge\\\\cw-pytest-basetemp\\\\20261009-170104-a33f88d2\", \"existed\": true, \"removed\": true}\n"
+  },
+  "baseline_restored": true,
+  "temporary_root_absent": true,
+  "source_after": {
+    "src/company_wiki/automation/narrative_formats.py": "58dc81ae9ebdda162c44675bdf613741d4d7e7593533edc0b1f7f4ee69ff8dd6",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "fade99dacb8b607e040ca95808d3820679cb3679607728b54d930e0377e7a894",
+    "src/company_wiki/source_catalog/narrative_retrieval.py": "f513b4a4e8f3acf4a9523e282f3122a1eb72fa77f63f5d0e48b619776fd4e2d9"
+  },
+  "source_unchanged": true,
+  "independent_controls": {
+    "cases": [
+      {
+        "name": "version-0.1.0",
+        "passed": true,
+        "locators": [
+          "loc:v1/paragraph:1/chars:0-68"
+        ],
+        "natural_unit_count": 0,
+        "natural_errors": [
+          "transcript_start_missing"
+        ]
+      },
+      {
+        "name": "version-0.1.1",
+        "passed": true,
+        "locators": [
+          "loc:v1/paragraph:1/chars:0-68"
+        ],
+        "natural_unit_count": 0,
+        "natural_errors": [
+          "transcript_start_missing"
+        ]
+      },
+      {
+        "name": "version-0.2.0",
+        "passed": false,
+        "locators": [
+          "loc:v1/paragraph:1/chars:0-68"
+        ],
+        "natural_unit_count": 0,
+        "natural_errors": [
+          "transcript_start_missing"
+        ]
+      },
+      {
+        "name": "HTML-index-query-resolve",
+        "passed": true,
+        "selected": 1,
+        "groups": 1,
+        "locators": [
+          "loc:v1/paragraph:2/chars:0-68"
+        ]
+      },
+      {
+        "name": "guard-unknown_version",
+        "passed": true,
+        "error": "unsupported transcript parser version"
+      },
+      {
+        "name": "guard-supported_mismatch",
+        "passed": true,
+        "error": "package parser metadata does not match replay contract"
+      },
+      {
+        "name": "guard-package_text_sha",
+        "passed": true,
+        "error": "replayed package raw_text_sha256 differs"
+      },
+      {
+        "name": "guard-package_text_and_sha",
+        "passed": true,
+        "error": "replayed package raw_text_sha256 differs"
+      },
+      {
+        "name": "guard-locator",
+        "passed": true,
+        "error": "selected evidence set does not replay exactly"
+      },
+      {
+        "name": "guard-raw_sha",
+        "passed": true,
+        "error": "raw source SHA-256 differs from bundle"
+      },
+      {
+        "name": "cached-declared-version-change",
+        "passed": false,
+        "error": null
+      }
+    ],
+    "baseline_restored": true,
+    "temporary_root_absent": true
+  },
+  "natural_fixture_correction": {
+    "initial_failed_expectation_retained": true,
+    "reason": "single-speaker natural body lacks turns>=2 proof; no product defect claimed",
+    "harness_retry": "first display attempted nonexistent NarrativeUnit.text attribute; failed before TEMP/real replay; removed display-only field",
+    "two_speaker_cases": [
+      {
+        "version": "0.1.0",
+        "passed": true,
+        "unit_count": 0,
+        "errors": [
+          "transcript_start_missing"
+        ]
+      },
+      {
+        "version": "0.1.1",
+        "passed": true,
+        "unit_count": 0,
+        "errors": [
+          "transcript_start_missing"
+        ]
+      },
+      {
+        "version": "0.2.0",
+        "passed": true,
+        "unit_count": 2,
+        "errors": []
+      }
+    ]
+  },
+  "real_msft_replay": {
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-X",
+      "utf8",
+      "-B",
+      "C:\\Users\\郑曾波\\.codex\\worktrees\\fresh-capture-20261009\\company-wiki\\docs\\plans\\fresh-transcript-compatibility-2026-10-09\\replay_real_msft.py",
+      "--raw",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\companies\\MICROSOFT CORP\\raw\\investor_relations\\transcripts\\unknown-date_official_bdc90bf78dbf55ec.html",
+      "--output",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\fresh_root_implementation_2026-10-09\\native_documents_acceptance\\transcript_compat_real_replay_receipt.json"
+    ],
+    "exit_code": 0,
+    "seconds": 1.955,
+    "stdout": "{\n  \"status\": \"pass\",\n  \"raw_sha256\": \"bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656\",\n  \"raw_bytes\": 273436,\n  \"extracted_lines\": 481,\n  \"body_first_line\": 90,\n  \"body_last_line\": 414,\n  \"parsed_units\": 515,\n  \"selected_spans\": 41,\n  \"verified_spans\": 41,\n  \"replayed_spans\": 41,\n  \"replayed_groups\": 41,\n  \"indexed_groups\": 41,\n  \"query\": \"models\",\n  \"query_hits_resolved\": 4,\n  \"parser_version\": \"0.2.0\",\n  \"selector_version\": \"0.6.0\",\n  \"external_provider_calls\": 0,\n  \"model_calls\": 0,\n  \"model_cost_usd\": 0,\n  \"raw_sha_unchanged\": true,\n  \"raw_mtime_unchanged\": true,\n  \"owned_temp_restored\": true,\n  \"temp_environment_restored\": true\n}\n",
+    "stderr": "",
+    "baseline_restored": true,
+    "temporary_root_absent": true
+  },
+  "source_final": {
+    "src/company_wiki/automation/narrative_formats.py": "58dc81ae9ebdda162c44675bdf613741d4d7e7593533edc0b1f7f4ee69ff8dd6",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "fade99dacb8b607e040ca95808d3820679cb3679607728b54d930e0377e7a894",
+    "src/company_wiki/source_catalog/narrative_retrieval.py": "f513b4a4e8f3acf4a9523e282f3122a1eb72fa77f63f5d0e48b619776fd4e2d9"
+  },
+  "source_unchanged_entire_review": true,
+  "review_decision": "FAIL_existing_cache_consumption_contract_not_bound",
+  "cached_contract_red_setup": {
+    "raw": "Full Conference Call Transcript\\nCEO: We expanded overseas capacity and launched a new industrial product.\\n",
+    "initial_package_parser": "0.2.0",
+    "first_call": "resolver.resolve(hit) succeeds",
+    "mutation": "bundle.sources[0].replay_contract.parser_version = 9.9.9; all evidence rows remain 0.2.0; raw/hit unchanged",
+    "second_call": "same resolver.resolve(hit) succeeds, no exception",
+    "fresh_resolver_same_mutation": "raises unsupported transcript parser version",
+    "classification": "genuine existing adjacent P2 cache ownership/contract binding gap; not a legitimate full two-end legacy-version rewrite"
+  }
+}

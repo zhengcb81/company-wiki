@@ -363,3 +363,19 @@ CWP d1ce50ee真正pre-push2346PASS/113.39s，精确CI37910840899 SUCCESS；FF23d
 CI子包仍已关闭：已发布CWP284328bb/CI37925080695、FF44c778b4/CI37923517689、RF5acad6a1/CI37919247211全部exact SUCCESS；pre-commit快速static、push共用行为清单。W05现独立源码审查，103规范化+14原CLI/Worker端到端、真实微软41/41段回放通过后已正常合master3b842eaa；合后W03/W05同入口80PASS/13.05s。自然电话会10契约加入既有FAST_CONTRACT_CASES，先2RED/35PASS再GREEN，不另开CI或commit门。新普通commit/push及远端exact验收尚待，不用本地绿冒称已发布。
 
 W06同任务预算从本地盘点/元数据/枚举/hash一直传到ready验证，实际MSFT同期间缺原文正确not_found，不再因无关旧年度元数据阻断下载；独占工作树196PASS/2明确skip，最后交接待。W08 typed usage/cause跨CLI绿后独立复核又发现中间RF candidates公开嵌套正文泄漏，正在原责任层RED根修，暂不验收。W11独立发现输入/输出同路径覆盖历史及atomic清理遮蔽主因，已修为明确argv绑定、历史/消费副本隔离、保留真实childexit及主异常；59全suite/28.352s、15focused、新版4个实际安装RF调用通过，集中独立复审/commit/定点安装待。以上均零真实供应商/LLM付费，旧封存/原件/配置不改，不能当M3研究通过。
+
+
+### 2026-10-09 17:10 UTC：W05集中复审残留与实际hook路径
+
+21集中PASS/2.60s及真实MSFT41/41独立回放仍成立；独立cache-bound控制发现既有P2：resolver持有外部可变record，缓存命中不重验修改后的unknown parser_version。已交原作者先RED，选明确snapshot ownership或完整cache-bound合同，不靠每次重复全文解析。旧FAIL和reviewer单speaker夹具错误记录保留；正常两speaker自然合同已独立通过。该项尚未发布，不虚报整体接受。
+
+Git实际core.hooksPath=.githooks，active pre-commit/pre-push内容已核对。默认.git/hooks/pre-push不存在并非hook失效；一次读取默认路径失败记录于此。项目启用的githooks调用共享push runner，真实两批红拦截已证明执行。
+
+
+## 2026-10-09 17:25 UTC：W08发布安装完成，W05复审接受后并线
+
+RF W08 3c3c0379独立21重点PASS/12 actual CLIcontrols全部PASS后正常ff并main；正常push151PASS/23.06s，精确远端CI37965179206 SUCCESS/37s。4源码定点安装到2物理技能根共8文件；先核旧5acad6a1字节或已知新增缺项，原子CAS写，4实际help入口成功，未选公共代码drift=0，config/output和owner三日志WIP保留。FF41ba0150此前远端81s成功和10文件定点安装仍有效；W08工程M2已闭合，真实公司M3待。
+
+W05 snapshot修复146491ae+PWF20be9dfc独立16重点PASS/17实际控验后接受；主体兼容208PASS/1optional skip与独立真实MSFT41/41仍保留。MAIN正常no-ff并，最终push/远端CI待；未删除此前cache FAIL或任一RED。
+
+W06统一local qualification已211PASS/2明确skip和actualMSFT7reads/52,643,200B/9.351s，但作者按普通ensure API又证明两个exact早return可绕过；正在调查共用资格入口及FF found路径，暂不并线或安装。不是每个consumer再加身份门，需CWP自己证明来源事实并由上层复用。

@@ -52,3 +52,8 @@ CWP新整批push在上传前拦住2428PASS/3FAIL（144.26s）：一个真实tran
 FF新W08主线41ba0150正常push601PASS/7明确SKIP/78subtests/62.63s；精确CI37961753941 SUCCESS（81s），并仅定点同步5文件两物理skill根共10文件，未选公共代码drift=0，配置/output保留。CWP与RF当前修复发表结果将在下一段追加，旧红结果保留。
 
 诊断命令一次猜错邻仓handoff.md文件名（Get-Content不存在）；未改文件、未作产品失败统计。实际交接位于roottyped_cause_usage_diagnosis/w08_safe_boundary/IMPLEMENTATION_HANDOFF.md和own仓PWF记录。
+
+
+## 2026-10-09：RF新增拒绝原因修复发布完成
+
+实际normalpush先147PASS/2FAIL上传拒绝，通用有限原因根修后151PASS/23.06s；3c3c03792b189734aac5a0c8900b67b2c6f73ca5已推main，精确CI37965179206 SUCCESS/37s。独立21测试/12实际CLI控验通过；保留损坏原件/错期失败与恢复断言，没有忽略两个失败。CWP最新兼容/cache后续已接受合主线，正常最终push待，结果另追加。
