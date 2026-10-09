@@ -1,0 +1,48 @@
+{
+  "schema_version": "ff-local-prepare-install/1",
+  "base": "59c4d0d96f02e039298dfbbbbcd3f79200711f78",
+  "head": "5ef8056bdba4be9134bb6c90f9bd457ee5f38253",
+  "files": [
+    {
+      "root": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+      "file": "SKILL.md",
+      "old_sha256": "ecc4874459a7785879bb859f5332b5eb55272d057603e07ad46d0466cb210418",
+      "new_sha256": "91161e16655740f39a3d28257bc0f5017dc2f17b1f84636f45e449b730647325"
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+      "file": "SKILL.md",
+      "old_sha256": "ecc4874459a7785879bb859f5332b5eb55272d057603e07ad46d0466cb210418",
+      "new_sha256": "91161e16655740f39a3d28257bc0f5017dc2f17b1f84636f45e449b730647325"
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+      "file": "scripts/fetch_filing.py",
+      "old_sha256": "8912a8cde4316066e045b569406b9acc06bd00d2b3e8e658caa7fd3d6e900c73",
+      "new_sha256": "112bacf7f8b2fd65786390b9ccbe4c830e793fd56aac47d39fa9953e2c017271"
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+      "file": "scripts/fetch_filing.py",
+      "old_sha256": "8912a8cde4316066e045b569406b9acc06bd00d2b3e8e658caa7fd3d6e900c73",
+      "new_sha256": "112bacf7f8b2fd65786390b9ccbe4c830e793fd56aac47d39fa9953e2c017271"
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+      "file": "scripts/ff_local_source_prepare.py",
+      "old_sha256": null,
+      "new_sha256": "417540c65b8c6d83e438aa60db29c3a4ea35f4ae9d1a44d26e1402e1c424ce71"
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+      "file": "scripts/ff_local_source_prepare.py",
+      "old_sha256": null,
+      "new_sha256": "417540c65b8c6d83e438aa60db29c3a4ea35f4ae9d1a44d26e1402e1c424ce71"
+    }
+  ],
+  "status": "PASS",
+  "configuration_writes": 0,
+  "claude_is_agents_junction": true,
+  "physical_targets": 2,
+  "files_written": 6
+}

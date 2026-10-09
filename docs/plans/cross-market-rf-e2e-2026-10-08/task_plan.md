@@ -1,5 +1,13 @@
 # 三市场真实收入预测端到端审计
 
+## 当前施工状态（2026-10-09；历史阶段完成不代表Phase6完成）
+
+- **Phase6仍进行中**；公司池loop后置，冻结NVDA不重抽。
+- 通用修复已并主线：CWP `8479b8ad`（OCR候选0.5.0、本地来源prepare）；RF `28dbb910`（4.1.1来源时钟与剩余deadline）；FF `5ef8056`（v2查询miss先本地prepare）。RF24/FF6个文件定点安装，旧SHA核对，配置/输出不动。
+- 真实四原件联调：3份MSFT季度零下载复用/公共实读通过；CN FY24保留来源日期不足gap，不假造恢复。固定71回放43PASS/2FAIL/1BLOCKED/18NOT_RUN/7NA，155.345秒；三市场来源准备改善，0退步，独占测试根恢复。
+- 剩余：真实22页OCR→精选摘要→公共回放→另AUTO零调用复用（平台外发审批暂拒，问题已发，0新费用）；离线fixture意外继承生产OCR配置的隔离修复与真实状态记录；原三家全新研究/四独立审查；新三家同样验收；再恢复NVDA与loop。
+- 具体记录：`phase6/main_integrated_clock_local_ocr.json`、`phase6/full_replay_clock_local_comparison.json`。不重复已交付工程包、不以CI或结构check替代研究、不新增小节点人签。
+
 ## 目标与边界
 
 按用户 2026-10-08 的新请求，选择 3 家公司覆盖 US/HK/CN，由三个独立执行 agent 使用 revenue-forecast 完成真实全流程，再由独立审查 agent 逐家公司审查。覆盖至少一次既有原件复用和一次真实新下载。执行、审查结论分别留存，不用 fixture、虚构日期/数据或删减流程冒充成功。

@@ -254,3 +254,17 @@ FF v2 explicit reuse_only 在 source query 真 not_found 后调用 CWP local_pre
 OCR诊断确认经营范围/报告定义变化有价值而原 selector未识别；图片行未进入视觉句子完成，且不能套PDF点坐标。源 partial/漏首行保留，不强选纯数字/标题。独立单页真实 initial+replay 在写收据时因旧字段名失败，保留失败，不新增OCR补测来凑绿；最终以完整公共节点验收。
 
 repair 的职责是版本化重做、父账承接与可追溯失败；不是新的人工许可。真实同版本 repair 拒绝，live=false、protected不变；原失败DB/request/marker/receipt保持。已结算失败可在 durable SHA 对照和原始字节保护后只清理独占测试根，失败记录保留。
+
+
+## 2026-10-09：集成后的实际差异与剩余责任
+
+三责任包均集成；source-clock与本地prepare的真实入口已接通，固定71有3项确实改善、0退步。PPTX纯解析 fixture的partial这次没有document error，不能套上次PARSER_INCOMPLETE的BLOCKED规则；需要实际native stage/selection/artifact/账证明，独立只读调查已开。旧HK研究同段支持又反对是封存输入的真实语义问题，正式新研究重新取事实/角色，不修改旧expected躲失败。
+
+平台对真实22页节点拒绝理由是未明确覆盖该PPTX向DeepSeek外发，不是项目新增许可、私有根或人工签收。实际应发送原语言精选业务片段而非PPTX全文；SEC 2026-09-02公开8-K及Exhibit99.1已现场打开确认材料业务口径内容，链接https://www.sec.gov/Archives/edgar/data/789019/000119312526380280/d291965d8k.htm及d291965dex991.htm。公开来源不伪装为本地PPTX相同HTTP字节收据，既有永久授权保留；等待所需平台范围澄清时推进免费工作。生产catalog222,613,504B，三公司不能各clone整库；新的独立storage准备使用必要组公共登记/真实facts入口及独占下载根，不创建第二资料湖或全库转换。
+
+
+## 2026-10-09：固定回放的配置串入根因（补充上次partial调查）
+
+只读owner定位：runner.setup归档全config，包括已部署的local_ocr.json；原意纯PPTX parser能力探测的request没有显式normalization覆盖，实际默认构建OCR2.0 port，却沿旧30秒batch/40秒wrapper。故本次不能称“无OCR已经跑完却partial”，而是离线fixture受到当前生产OCR设置影响、短时停止尚未完成。实际native JSON/jobs/reservation随TEMP清理未保留，无法补造阶段/count/0账。外部模型调用仍为离线回放0，不把它与OCR CPU工作混为一谈。
+
+通用修复优先：离线fixture显式冻结自身parser配置，不继承host设置；真实live/MAIN配置仍由当前显式snapshot。报告保留小型actual阶段/产物/任务/账诊断，清理后可复查，不留原件副本/DB。独立owner先RED再改tools/cross_market_suite责任，不改产品完整度、不普遍放宽partial、不再全22OCR或整71来诊断。完成后只跑受影响公开fixture节点，MAIN仍保留真实configured大节点。

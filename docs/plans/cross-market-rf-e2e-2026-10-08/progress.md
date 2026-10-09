@@ -421,3 +421,19 @@ CWP ea76998c 正常提交/推送，精确CI37888084960 SUCCESS。RF source-clock
 MAIN repair helper9真RED→9PASS，新增 durable/origin SHA 清理对照后9PASS/0.42秒、Ruff绿。实际 repair 同旧0.4.2版本 exit2，repair_requires_changed_execution_version、live_batch_executed=false，报告mocr-20261009T053108-61c0ce6a；未新建AUTO/收费任务，旧origin ledger/request/marker/acceptance SHA不变。旧22页失败仍FAILED_RETAIN_ORIGIN，不覆盖、不断言已修复。
 
 本次只删除4个一次性FF写入辅助脚本，不交付为项目代码；初始pytest-9短临时根检查已不存在，非执行删除。三份主PWF无效dummy patch因标题不匹配被原子拒绝，未写文件；随后按实际文件追加本记录。真实工程节点与研究节点仍严格区分，目标active，等待整合后继续真实主线验收再loop。
+
+
+## 2026-10-09：三责任包已正常并线与安装，固定71复验完成
+
+CWP selector 760ed472/runtime a1ac491e合9775e402，local30f1cf07/code7ced0b50合8479b8ad；20个runtime/test文件精确Gitblob与交付一致，工作字节仅CRLF转换。正常push/prepush均绿。RF a55603fb合28dbb910，正常push126PASS/23.10s+ruff/mypy8；24运行文件定点安装、2 installed pure smoke通过，其他assurance/output WIP保持。FF a1e97fa合5ef8056，正常push/prepush全部绿，6运行文件定点安装；config/FMP_API_KEY.txt未跟踪不读不提交。
+
+新固定71 full replay实际155.345秒，43PASS/2FAIL/1BLOCKED/18NOT_RUN/7NA，67,598,404B临时树恢复不存在；收费0。相同spec/checkpoint与979792e0比较：3改善（真实三市场source preparation）、68不变、0退步。旧HK同excerpt正反角色FAIL按原输入保留；PPTX无OCR fixture变为partial reason=null/errors=[[]]仍FAIL，独立owner只读查实际阶段，不直接放宽断言。真实6家公司研究尚未启动。
+
+CWP9775e402精确CI37890198535、RF28dbb910精确quality37890212555均SUCCESS；CWP最新8479b8ad/FF5ef8056远端仍待具体SHA确认。真实22页repair被平台自动审批拒绝，原因是该材料与DeepSeek不在其认定的具体授权范围；没有执行该次命令/模型/新AUTO。用户已询问原因，MAIN解释并补查SEC公开8-K/99.1源；显式问题仍pending，不绕审批。原旧失败保留。
+
+
+## 2026-10-09：固定回放的配置串入根因（补充上次partial调查）
+
+只读owner定位：runner.setup归档全config，包括已部署的local_ocr.json；原意纯PPTX parser能力探测的request没有显式normalization覆盖，实际默认构建OCR2.0 port，却沿旧30秒batch/40秒wrapper。故本次不能称“无OCR已经跑完却partial”，而是离线fixture受到当前生产OCR设置影响、短时停止尚未完成。实际native JSON/jobs/reservation随TEMP清理未保留，无法补造阶段/count/0账。外部模型调用仍为离线回放0，不把它与OCR CPU工作混为一谈。
+
+通用修复优先：离线fixture显式冻结自身parser配置，不继承host设置；真实live/MAIN配置仍由当前显式snapshot。报告保留小型actual阶段/产物/任务/账诊断，清理后可复查，不留原件副本/DB。独立owner先RED再改tools/cross_market_suite责任，不改产品完整度、不普遍放宽partial、不再全22OCR或整71来诊断。完成后只跑受影响公开fixture节点，MAIN仍保留真实configured大节点。
