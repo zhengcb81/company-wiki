@@ -1,0 +1,10 @@
+{
+  "base": "7762bfd1c5542fbc37e606c361cb6d661b0f02c3",
+  "base_only_tracked_source_and_synthetic_test_archive": true,
+  "production_raw_copied": false,
+  "normalization_and_original_test_unchanged_at_proof": true,
+  "expected_red_exit_code": 1,
+  "failure": "PPTX current declared 1.1.0 vs stale all-format assertion 1.0.0",
+  "owned_temp_restored": true,
+  "external_calls": 0
+}

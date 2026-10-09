@@ -1,0 +1,75 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\.codex\worktrees\fresh-capture-20261009\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 6 items
+
+tests\unit\test_transcript_parser_compatibility.py .FFFFF                [100%]
+
+================================== FAILURES ===================================
+_ test_resolver_owns_construction_snapshot_and_reuses_parse_cache[evidence-package evidence text hash] _
+tests\unit\test_transcript_parser_compatibility.py:204: in test_resolver_owns_construction_snapshot_and_reuses_parse_cache
+    assert resolver.resolve(hit) == first
+           ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_retrieval.py:348: in resolve
+    return self._resolve_row(record, row)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_retrieval.py:467: in _resolve_row
+    raise NarrativeEvidenceResolveError("package evidence text hash is invalid")
+E   company_wiki.source_catalog.narrative_retrieval.NarrativeEvidenceResolveError: package evidence text hash is invalid
+_ test_resolver_owns_construction_snapshot_and_reuses_parse_cache[locator-exact package group] _
+tests\unit\test_transcript_parser_compatibility.py:204: in test_resolver_owns_construction_snapshot_and_reuses_parse_cache
+    assert resolver.resolve(hit) == first
+           ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_retrieval.py:342: in resolve
+    row = self._find_group(
+src\company_wiki\source_catalog\narrative_retrieval.py:410: in _find_group
+    raise NarrativeEvidenceResolveError("search hit is not an exact package group")
+E   company_wiki.source_catalog.narrative_retrieval.NarrativeEvidenceResolveError: search hit is not an exact package group
+_ test_resolver_owns_construction_snapshot_and_reuses_parse_cache[evidence_sha-replayed package raw_text_sha256] _
+tests\unit\test_transcript_parser_compatibility.py:204: in test_resolver_owns_construction_snapshot_and_reuses_parse_cache
+    assert resolver.resolve(hit) == first
+           ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_retrieval.py:348: in resolve
+    return self._resolve_row(record, row)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_retrieval.py:474: in _resolve_row
+    raise NarrativeEvidenceResolveError(f"replayed package {field} differs")
+E   company_wiki.source_catalog.narrative_retrieval.NarrativeEvidenceResolveError: replayed package raw_text_sha256 differs
+_ test_resolver_owns_construction_snapshot_and_reuses_parse_cache[source_sha-search hit identity] _
+tests\unit\test_transcript_parser_compatibility.py:204: in test_resolver_owns_construction_snapshot_and_reuses_parse_cache
+    assert resolver.resolve(hit) == first
+           ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_retrieval.py:341: in resolve
+    raise NarrativeEvidenceResolveError("search hit identity differs from bundle")
+E   company_wiki.source_catalog.narrative_retrieval.NarrativeEvidenceResolveError: search hit identity differs from bundle
+__ test_resolver_snapshot_is_taken_before_first_read_and_keeps_path_mapping ___
+src\company_wiki\source_catalog\narrative_retrieval.py:528: in _replay_record
+    transcript_parser_contract(parser_version)
+src\company_wiki\source_catalog\narrative_evidence.py:78: in transcript_parser_contract
+    raise ValueError("unsupported transcript parser version")
+E   ValueError: unsupported transcript parser version
+
+The above exception was the direct cause of the following exception:
+tests\unit\test_transcript_parser_compatibility.py:222: in test_resolver_snapshot_is_taken_before_first_read_and_keeps_path_mapping
+    resolved = resolver.resolve(hit)
+               ^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_retrieval.py:348: in resolve
+    return self._resolve_row(record, row)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_retrieval.py:448: in _resolve_row
+    replayed_rows = self._replay_record(
+src\company_wiki\source_catalog\narrative_retrieval.py:530: in _replay_record
+    raise NarrativeEvidenceResolveError(str(exc)) from exc
+E   company_wiki.source_catalog.narrative_retrieval.NarrativeEvidenceResolveError: unsupported transcript parser version
+=========================== short test summary info ===========================
+FAILED tests/unit/test_transcript_parser_compatibility.py::test_resolver_owns_construction_snapshot_and_reuses_parse_cache[evidence-package evidence text hash]
+FAILED tests/unit/test_transcript_parser_compatibility.py::test_resolver_owns_construction_snapshot_and_reuses_parse_cache[locator-exact package group]
+FAILED tests/unit/test_transcript_parser_compatibility.py::test_resolver_owns_construction_snapshot_and_reuses_parse_cache[evidence_sha-replayed package raw_text_sha256]
+FAILED tests/unit/test_transcript_parser_compatibility.py::test_resolver_owns_construction_snapshot_and_reuses_parse_cache[source_sha-search hit identity]
+FAILED tests/unit/test_transcript_parser_compatibility.py::test_resolver_snapshot_is_taken_before_first_read_and_keeps_path_mapping
+========================= 5 failed, 1 passed in 0.80s =========================

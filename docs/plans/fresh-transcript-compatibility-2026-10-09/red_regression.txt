@@ -1,0 +1,61 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\.codex\worktrees\fresh-capture-20261009\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 13 items
+
+tests\unit\test_transcript_parser_compatibility.py F..F.FF....F.         [100%]
+
+================================== FAILURES ===================================
+_ test_legacy_and_current_packages_replay_original_words_and_locators[0.1.0] __
+tests\unit\test_transcript_parser_compatibility.py:69: in test_legacy_and_current_packages_replay_original_words_and_locators
+    bundle, parsed, selected, text = transcript_bundle(raw, version=version)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_transcript_parser_compatibility.py:40: in transcript_bundle
+    parser_name, parser_version = parser_component(mime_type, "transcript", parser_version=version)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_formats.py:21: in parser_component
+    raise ValueError("unsupported transcript parser version")
+E   ValueError: unsupported transcript parser version
+______ test_old_versions_do_not_reinterpret_current_natural_body[0.1.0] _______
+tests\unit\test_transcript_parser_compatibility.py:92: in test_old_versions_do_not_reinterpret_current_natural_body
+    parsed = parse_transcript_text(NATURAL, source_id=source_id_for_sha256(digest),
+src\company_wiki\source_catalog\narrative_evidence.py:1238: in parse_transcript_text
+    raise ValueError("unsupported transcript parser version")
+E   ValueError: unsupported transcript parser version
+______ test_current_official_html_package_replays_hashed_original_bytes _______
+tests\unit\test_transcript_parser_compatibility.py:105: in test_current_official_html_package_replays_hashed_original_bytes
+    assert selected.coverage_complete
+E   AssertionError: assert False
+E    +  where False = NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:d1453fa2a71ebc796a4185bcef12aa6ae63ab8e8b8d57092ca8...t=96, candidate_count=0, dropped_financial_count=0, source_units=0, omitted_candidate_count=0, coverage_complete=False).coverage_complete
+_ test_version_text_hash_locator_and_format_guards_remain_closed[unknown-unsupported transcript parser version] _
+tests\unit\test_transcript_parser_compatibility.py:146: in test_version_text_hash_locator_and_format_guards_remain_closed
+    resolver.resolve(hit)
+src\company_wiki\source_catalog\narrative_retrieval.py:348: in resolve
+    return self._resolve_row(record, row)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_retrieval.py:448: in _resolve_row
+    replayed_rows = self._replay_record(
+src\company_wiki\source_catalog\narrative_retrieval.py:581: in _replay_record
+    parsed = parse_transcript_text(
+src\company_wiki\source_catalog\narrative_evidence.py:1238: in parse_transcript_text
+    raise ValueError("unsupported transcript parser version")
+E   ValueError: unsupported transcript parser version
+_ test_version_text_hash_locator_and_format_guards_remain_closed[wrong_format-file extension] _
+tests\unit\test_transcript_parser_compatibility.py:145: in test_version_text_hash_locator_and_format_guards_remain_closed
+    with pytest.raises(NarrativeEvidenceResolveError, match=message):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'file extension'
+E     Actual message: 'unsupported replay source format'
+=========================== short test summary info ===========================
+FAILED tests/unit/test_transcript_parser_compatibility.py::test_legacy_and_current_packages_replay_original_words_and_locators[0.1.0]
+FAILED tests/unit/test_transcript_parser_compatibility.py::test_old_versions_do_not_reinterpret_current_natural_body[0.1.0]
+FAILED tests/unit/test_transcript_parser_compatibility.py::test_current_official_html_package_replays_hashed_original_bytes
+FAILED tests/unit/test_transcript_parser_compatibility.py::test_version_text_hash_locator_and_format_guards_remain_closed[unknown-unsupported transcript parser version]
+FAILED tests/unit/test_transcript_parser_compatibility.py::test_version_text_hash_locator_and_format_guards_remain_closed[wrong_format-file extension]
+========================= 5 failed, 8 passed in 0.88s =========================

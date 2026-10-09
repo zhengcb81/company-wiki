@@ -53,6 +53,34 @@ from .narrative_routing import (
 NARRATIVE_PARSER_NAME = "selective_narrative_parser"
 NARRATIVE_PARSER_VERSION = QA_FRAGMENT_VERSION
 TRANSCRIPT_PARSER_VERSION = "0.2.0"
+# Transcript 0.1.0 and 0.1.1 share the original heading/line parser. The PDF
+# QA version is independent: changing it must never reinterpret saved calls.
+_TRANSCRIPT_PARSER_LAYOUTS: dict[str, Literal["legacy", "natural"]] = {
+    "0.1.0": "legacy",
+    "0.1.1": "legacy",
+    "0.2.0": "natural",
+}
+
+
+@dataclass(frozen=True)
+class TranscriptParserContract:
+    parser_name: str
+    parser_version: str
+    layout: Literal["legacy", "natural"]
+
+
+def transcript_parser_contract(
+    parser_version: str | None = None,
+) -> TranscriptParserContract:
+    """Return the exact call parser shared by generation, parsing and replay."""
+    version = TRANSCRIPT_PARSER_VERSION if parser_version is None else parser_version
+    if not isinstance(version, str) or version not in _TRANSCRIPT_PARSER_LAYOUTS:
+        raise ValueError("unsupported transcript parser version")
+    return TranscriptParserContract(
+        NARRATIVE_PARSER_NAME, version, _TRANSCRIPT_PARSER_LAYOUTS[version]
+    )
+
+
 NARRATIVE_SELECTOR_NAME = "select_narrative_evidence"
 # 0.4.2 separates customer adoption and binds visual fundraising project rows.
 # 0.4.1 preserves specific operating/industry meaning and atomic fact sentences.
@@ -1231,13 +1259,12 @@ def parse_transcript_text(
     parser_version: str = TRANSCRIPT_PARSER_VERSION,
     language: str = "en",
 ) -> NarrativeParseResult:
-    """Split proved call layouts; legacy 0.1.1 remains replayable unchanged."""
+    """Split proved call layouts; legacy 0.1.0/0.1.1 replay unchanged."""
     if not isinstance(text, str):
         raise TypeError("transcript text must be a string")
-    if parser_version not in {NARRATIVE_PARSER_VERSION, TRANSCRIPT_PARSER_VERSION}:
-        raise ValueError("unsupported transcript parser version")
+    contract = transcript_parser_contract(parser_version)
     raw_lines = text.splitlines()
-    legacy = parser_version == NARRATIVE_PARSER_VERSION
+    legacy = contract.layout == "legacy"
     if legacy:
         heading = next((i for i, line in enumerate(raw_lines) if _TRANSCRIPT_START.match(line.strip())), None)
         start_index = None if heading is None else heading + 1

@@ -12,6 +12,10 @@ import pytest
 from company_wiki.automation.narrative_transport import NarrativeTransportReader
 from company_wiki.automation.narrative_transport_contracts import NarrativeReadRequest
 from support.narrative_transport_fixture import published_fixture
+from company_wiki.document_normalization.units import (
+    PARSER_VERSION as HTML_PARSER_VERSION,
+    PPTX_PARSER_VERSION,
+)
 
 
 BUSINESS = "Company launched a new product and expanded overseas capacity for new customers."
@@ -34,7 +38,8 @@ def _transport(tmp_path, data, suffix):
         assert payload["summary"]["translate"] is False
         assert result.receipt["replay_status"] == "verified"
         assert result.receipt["locator_count"] == len(payload["evidence_spans"])
-        assert payload["versions"]["parser"] == "1.0.0"
+        expected_parser = PPTX_PARSER_VERSION if suffix == "pptx" else HTML_PARSER_VERSION
+        assert payload["versions"]["parser"] == expected_parser
     assert tuple(tmp_path.iterdir()) == before
 
 

@@ -8,6 +8,7 @@ callers can resolve them through the existing source query contract.
 from __future__ import annotations
 
 from collections import Counter
+from copy import deepcopy
 from dataclasses import dataclass
 import hashlib
 import math
@@ -283,6 +284,11 @@ class NarrativeEvidenceResolver:
     supplies only a trusted source-ID-to-raw-path mapping; versioned parser and
     selector inputs come from the package. No path is read from the bundle,
     and only selected package groups are kept in the per-instance memory cache.
+
+    Source records and the raw-path mapping are owned construction snapshots.
+    Caller mutations are inputs for a new resolver; they cannot rebind this
+    resolver's cached contract or evidence. Raw bytes are still hashed on every
+    resolve, including reads that reuse parsed evidence from the cache.
     """
 
     def __init__(
@@ -311,7 +317,7 @@ class NarrativeEvidenceResolver:
             source_id = _required_string(summary, "source_id")
             if source_id in self._records:
                 raise NarrativeEvidenceResolveError("source_id is ambiguous in bundle")
-            self._records[source_id] = record
+            self._records[source_id] = deepcopy(dict(record))
 
         self._raw_paths: dict[str, Path] = {}
         for source_id, raw_path in raw_paths_by_source_id.items():
@@ -502,6 +508,7 @@ class NarrativeEvidenceResolver:
             parse_pdf,
             parse_transcript_text,
             select_narrative_evidence,
+            transcript_parser_contract,
         )
 
         summary = record["summary_input"]
@@ -522,6 +529,11 @@ class NarrativeEvidenceResolver:
             raise NarrativeEvidenceResolveError("unsupported narrative parser name")
         language = _required_string(contract, "language")
         source_format = _required_string(contract, "source_format")
+        if source_format in {"transcript_txt", "transcript_html"}:
+            try:
+                transcript_parser_contract(parser_version)
+            except ValueError as exc:
+                raise NarrativeEvidenceResolveError(str(exc)) from exc
         existing_kind = _required_string(contract, "existing_kind")
         max_selected = contract.get("max_selected")
         if isinstance(max_selected, bool) or not isinstance(max_selected, int) or max_selected < 1:
@@ -569,15 +581,30 @@ class NarrativeEvidenceResolver:
                 full_table_scan=full_table_scan,
                 table_pages=table_pages,
             )
-        elif source_format == "transcript_txt":
-            if suffix != ".txt":
-                raise NarrativeEvidenceResolveError("raw file extension differs from replay format")
+        elif source_format in {"transcript_txt", "transcript_html"}:
             if parser_options:
                 raise NarrativeEvidenceResolveError("transcript parser options must be empty")
-            try:
-                raw_text = raw_path.read_bytes().decode("utf-8-sig", errors="strict")
-            except UnicodeError as exc:
-                raise NarrativeEvidenceResolveError("transcript TXT is not valid UTF-8") from exc
+            if source_format == "transcript_txt":
+                if suffix != ".txt":
+                    raise NarrativeEvidenceResolveError("raw file extension differs from replay format")
+                try:
+                    raw_text = raw_path.read_bytes().decode("utf-8-sig", errors="strict")
+                except UnicodeError as exc:
+                    raise NarrativeEvidenceResolveError("transcript TXT is not valid UTF-8") from exc
+            else:
+                if suffix not in {".html", ".htm"}:
+                    raise NarrativeEvidenceResolveError("raw file extension differs from replay format")
+                from .transcript_text_extract import (
+                    TranscriptMaterialError,
+                    extract_transcript_material,
+                )
+                try:
+                    original_bytes = raw_path.read_bytes()
+                    material = extract_transcript_material(original_bytes, mime_type="text/html")
+                    material.verify(original_bytes)
+                except TranscriptMaterialError as exc:
+                    raise NarrativeEvidenceResolveError("transcript HTML byte lineage does not replay") from exc
+                raw_text = material.text_utf8
             parsed = parse_transcript_text(
                 raw_text,
                 source_id=source_id,

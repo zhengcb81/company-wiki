@@ -1,0 +1,47 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\.codex\worktrees\fresh-capture-20261009\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 3 items
+
+tests\unit\test_narrative_english_business_recall.py F                   [ 33%]
+tests\unit\test_narrative_retrieval.py FF                                [100%]
+
+================================== FAILURES ===================================
+_ test_recall_semantics_are_versioned_and_legacy_txt_locators_stay_unchanged __
+tests\unit\test_narrative_english_business_recall.py:155: in test_recall_semantics_are_versioned_and_legacy_txt_locators_stay_unchanged
+    _, legacy, _, _ = _select(text, parser_version="0.1.0")
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_english_business_recall.py:51: in _select
+    parsed = parse_transcript_text(
+src\company_wiki\source_catalog\narrative_evidence.py:1238: in parse_transcript_text
+    raise ValueError("unsupported transcript parser version")
+E   ValueError: unsupported transcript parser version
+_______ test_resolver_replays_selected_transcript_group_from_hashed_raw _______
+tests\unit\test_narrative_retrieval.py:226: in test_resolver_replays_selected_transcript_group_from_hashed_raw
+    resolved = resolver.resolve(hits[0])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_retrieval.py:348: in resolve
+    return self._resolve_row(record, row)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_retrieval.py:448: in _resolve_row
+    replayed_rows = self._replay_record(
+src\company_wiki\source_catalog\narrative_retrieval.py:546: in _replay_record
+    raise NarrativeEvidenceResolveError("package parser metadata does not match replay contract")
+E   company_wiki.source_catalog.narrative_retrieval.NarrativeEvidenceResolveError: package parser metadata does not match replay contract
+________________ test_resolver_rejects_package_text_tampering _________________
+tests\unit\test_narrative_retrieval.py:274: in test_resolver_rejects_package_text_tampering
+    with pytest.raises(NarrativeEvidenceResolveError, match="package evidence text hash"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'package evidence text hash'
+E     Actual message: 'package parser metadata does not match replay contract'
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_english_business_recall.py::test_recall_semantics_are_versioned_and_legacy_txt_locators_stay_unchanged
+FAILED tests/unit/test_narrative_retrieval.py::test_resolver_replays_selected_transcript_group_from_hashed_raw
+FAILED tests/unit/test_narrative_retrieval.py::test_resolver_rejects_package_text_tampering
+============================== 3 failed in 0.97s ==============================
