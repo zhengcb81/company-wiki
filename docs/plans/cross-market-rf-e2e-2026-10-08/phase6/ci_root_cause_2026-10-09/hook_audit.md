@@ -89,3 +89,13 @@ RF/FF mypy都只查指定public contract模块；RF与CWP `follow_imports=skip`�
 - 真实执行命令有无旁路hooks。没有执行证据时保留“未证实”。latest green不能否定这些历史缺口。
 
 原始历史可复查命令均为只读 `git show SHA:path`/`git log -- path`；当前文件SHA-256与结构化结论见 `hook_audit.json`。
+
+## 8. 后续授权的 FF 实施与普通 push 环境补修
+
+只读审计关闭后，MAIN授权在独占分支 `codex/ci-push-parity-20261009`、工作树 `C:/Users/郑曾波/AppData/Local/Temp/ff-ci-push-parity-20261009` 实施。`397ec0ee52d171ebb88bc90f88e8cd9c10d4912f` 将CI原26文件收敛到唯一 `tools/ci_tests.py`，加入runner自身回归，CI与pre-push `--ci-tests`复用27文件清单。正常OS全共享suite为549PASS/4SKIP/78subtests，pytest58.91秒、墙钟59.70秒；此测量显式设置了CI使用的本地CWP代码环境变量。真实commit hooks通过，未merge/push/install；MAIN随后接收并发布该提交。
+
+MAIN真实普通push观测548PASS/5SKIP/53.95秒，揭示 `_environment()` 未得到 `FILING_FETCH_V2_WIKI_SRC` 就跳过v2 CLI E2E。因此共享测试清单仍少一次实际行为执行，首次显式env测量不能代替普通hook证明。
+
+补修提交 **`23d25644a78390ebd5d7fd4da20e42d6788c1240`**：runner优先使用CI显式source override；不存在时调用既有 `scripts/fetch_filing.py::load_company_wiki_root(config_path=PROJECT_ROOT/config/company_wiki.json)`，由其承担schema、token扩展、工程目录与source_catalog配置存在性校验，再定位工程 `src` 中source_catalog CLI。未复制原始存储目录规则、未改owner配置或读取FMP凭据。缺配置/工程runtime时runner清楚报错并返回2，不将E2E视作通过。E2E单文件也直接调用同一个公开rootloader作为缺env fallback。runner增加pytest `-rs`，公开既有skip原因。
+
+TDD先得到4FAIL/5PASS（缺rootloader调用、缺runtime仍返回成功、E2E静默skip、未显示skip原因），再在**删除FILING_FETCH_V2_WIKI_SRC**的正常Windows环境仅跑runner9项与v2 CLI E2E单文件：**10PASS / 5.18秒**。完整ruff、host guard new0、cached diff-check及真实commit hook通过。按MAIN要求未重跑全部suite；独占worktree干净，新提交仅留branch供MAIN合并/推送，保持原ownerconfig/key/WIP。

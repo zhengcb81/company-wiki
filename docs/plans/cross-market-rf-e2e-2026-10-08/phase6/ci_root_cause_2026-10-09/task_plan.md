@@ -7,9 +7,9 @@
 ## 阶段
 
 1. **complete** — 真实三仓run/job/annotations已落盘：CWP3次、FF2次失败，RF没有失败。公开完整日志403；已有历史实读记录及独立exact blob复现分别标明，不混称新取得完整日志。
-2. **in_progress** — 已核对HTTPX双安装声明、旧metadata断言、空generation绑定/3兼容缺陷和每格式parser版本；FF两历史分数阻断各自exact复现。当前CWP正常OS全unit2299PASS/128.21秒；sandbox假失败不算CI根因。下一步防漏检RED。
-3. **pending** — CWP从整个Git未推送范围选择受影响unit及既有contract smoke，单次pytest；CI继续全unit。FF将26文件focused列表归一并供push/CI共用。依赖声明静态检查在相关commit执行，不跑pytest。配置/runner/conftest/无法判定依赖时CWP回退完整unit。
-4. **pending** — 验收正常commit/push、远端精确SHA CI，更新主PWF；研究四独立审查保持只读运行，随后恢复主线施工。
+2. **complete** — HTTPX双声明、旧metadata断言、空generation绑定兼容、每格式parser和两个FF历史分数阻断已逐一查实；独立exact复现/历史记录/REST限定分清。
+3. **complete** — CWP完整push范围保守选unit、静态声明和JUnit诊断发布；FF27文件唯一CI/push runner发布，并修普通环境E2E漏跑。commit不执行pytest，CI必要测试保留。
+4. **complete** — 正常commit/push：CWP2346PASS/113.39秒，FF553PASS/4既有SKIP/78subtests/59.80秒。精确远端CWP37910840899、FF37911571894均SUCCESS；测试根/独占worktree恢复，主PWF更新，详情[CLOSEOUT](CLOSEOUT.md)。总体goal仍active。
 
 ## 边界
 
@@ -17,7 +17,7 @@
 
 ## Next Step
 
-先写选择器和依赖静态入口RED，再实现。并行FF独占worktree共享回归入口，MAIN做CWP。提交快速静态；受影响单元在push检查，不在每小节点新增人审。正常commit/push后核对精确SHA远端CI，随后继续原研究主线。
+本调查已收尾，回到原三家四审64finding的独立专家共因PWF与主线施工。不重复跑此节点、不再增加每小节点审查；旧研究partial不改成成功。
 
 ## 防漏检接口与验收
 

@@ -503,3 +503,7 @@ CWP9775e402精确CI37890198535、RF28dbb910精确quality37890212555均SUCCESS；
 ## 2026-10-09 09:20 UTC：CI优先防漏检节点
 
 CWP正常OS2299unit基线PASS/128.21s；新53责任PASS/1.17s，独立审查动态别名4RED后根修。FF独占397ec0ee已fast-forward main，原26文件+runner回归共享，549PASS/4既有SKIP/78subtests/59.70s；正常push运行。实际5失败取证/历史exact复现/hooks审计在phase6/ci_root_cause_2026-10-09/，原件零修改。CWP正常提交推送/两仓精确CI尚待；goal继续active，不以CI代替研究验收。原三家四角色12报告已完成，原执行partial不改，等待专家归并。
+
+## 2026-10-09 09:33 UTC：CI根因节点收尾
+
+CWP d1ce50ee真正pre-push2346PASS/113.39s，精确CI37910840899 SUCCESS；FF23d25644普通环境rootloader补修后553PASS/4既有明确SKIP/78subtests/59.80s，精确CI37911571894 SUCCESS，两仓主线已推。commit静态5.76s；没有将全pytest放每commit、没有删必要测试。四测试根123746526B和独占FF worktree恢复，原件/ownerWIP/keys保留。完整phase6/ci_root_cause_2026-10-09/CLOSEOUT.md。原三家四独立报告64finding与原生check问题保留，独立专家已实际启动共因PWF；goal继续active。

@@ -2,7 +2,7 @@
 
 ## 当前施工状态（2026-10-09；历史阶段完成不代表Phase6完成）
 
-- **最新优先节点**：用户指出昨日多次CI失败，MAIN已完成真实5失败取证/根因对照，推进本地push与CI防漏检对齐，详见[独立调查PWF](phase6/ci_root_cause_2026-10-09/task_plan.md)。CWP正常OS2299unit基线绿、新53项责任绿；FF共享27文件549项绿并已并main397ec0ee，正常推送/精确CI仍在验收。commit保持快速静态，不新加人审。
+- **最新优先节点已收尾**：昨日5次CI失败已逐一归因并补本地防漏检，详见[结果](phase6/ci_root_cause_2026-10-09/CLOSEOUT.md)。CWP d1ce50ee正常commit5.76秒、push2346PASS，FF23d25644共享27文件push553PASS/4明确SKIP/78subtests；两仓主线已推、精确远端CI成功。commit保持快速静态，不新加人审。
 - 原三家公司四独立审查已全部完成，共12份JSON/MD及原生事件；各包仍partial、有实质finding，不能以工程CI绿替代研究验收。原件/隔离根保留。CI发布收尾后，MAIN原生汇总并调独立编程专家归并共因PWF，继续主线施工。
 
 - **当前大节点**：原三家新执行已封存，中微180/腾讯375/微软474个artifact引用；执行均partial，三个原生formal交付完成。MAIN已写每run交接，storage/fetch/process/analyst四个独立身份均已实际启动；CN storage报告已完成7 findings，HK/US storage待空槽followup。后续独立专家整合共因PWF。完整调度见[四路审查](phase6/fresh_four_reviews/README.md)。研究未签收，已可用原件保留；CN失败Lam下载body未持久化列问题，不声称所有下载原件都保留。不把结构完整/CI绿等同研究质量。
@@ -55,7 +55,7 @@
 
 ## Next Step
 
-先收尾CI防漏检节点的正常commit/push与精确远端CI；原三家四独立报告已齐，随后独立专家建立共用根因PWF，优先根治新增职责阻断再实施其他共用修复。三家公司执行包已封存，不编辑旧结果；审批补漏、replay配置隔离无需重复工程验收。后文旧Next Step是历史证据，页首当前状态优先；工程CI通过不能代替两组真实研究验收。
+CI防漏检节点已收尾。原三家四独立报告已齐，原生汇总三次needs_remediation/exit2但结构/事件/封存hash无错误；独立专家正在fresh_root_remediation_2026-10-09建立64finding的共因PWF，随后MAIN优先根治职责阻断并实施其他共用修复。三家公司执行包已封存，不编辑旧结果。后文旧Next Step是历史证据，页首当前状态优先；工程CI通过不能代替两组真实研究验收。
 
 ### Phase 5: 固化三市场回归套件（2026-10-08 新请求）
 **Status:** complete

@@ -314,3 +314,7 @@ repair 的职责是版本化重做、父账承接与可追溯失败；不是新�
 ## 2026-10-09：昨日CI共同漏检机制
 
 已取得CWP3/FF2实际失败，RF相邻无失败。根因及既有直接修复逐一对照，详见phase6/ci_root_cause_2026-10-09/findings.md。commit静态不执行动态合同；CWP固定push13smoke遗漏6unit，FF仅静态push而CI另26文件。新增CWP整个push范围保守选unit/依赖静态入口/JUnit分类、FF27文件共享runner已测试并线中，正常push及精确CI待完成；不加人审，不删必要测试。原三家四独立报告全部完成，实际发现均保留，下一步独立专家共因PWF。
+
+## 2026-10-09 09:33 UTC：CI根因节点收尾
+
+CWP d1ce50ee真正pre-push2346PASS/113.39s，精确CI37910840899 SUCCESS；FF23d25644普通环境rootloader补修后553PASS/4既有明确SKIP/78subtests/59.80s，精确CI37911571894 SUCCESS，两仓主线已推。commit静态5.76s；没有将全pytest放每commit、没有删必要测试。四测试根123746526B和独占FF worktree恢复，原件/ownerWIP/keys保留。完整phase6/ci_root_cause_2026-10-09/CLOSEOUT.md。原三家四独立报告64finding与原生check问题保留，独立专家已实际启动共因PWF；goal继续active。

@@ -11,7 +11,8 @@
       "C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/ci_root_cause_2026-10-09/hook_audit.md",
       "C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/ci_root_cause_2026-10-09/hook_audit.json"
     ],
-    "sensitive_configuration_read": false
+    "sensitive_configuration_read": false,
+    "scope_name": "read-only audit before subsequently authorized FF implementation"
   },
   "evidence_limits": {
     "github_source": "MAIN-saved REST runs/jobs/check annotations in the same directory",
@@ -303,5 +304,51 @@
       "local working tree WIP differs from pushed SHA"
     ],
     "affected_selection_failure_policy": "all non-deletion ref ranges union; deletions and rename old/new paths; zero old SHA/missing object/unknown baseline conservative fallback; never HEAD^ or first stdin line only"
-  }
+  },
+  "implementation_followups": [
+    {
+      "repository": "filing-fetch",
+      "branch": "codex/ci-push-parity-20261009",
+      "commit": "397ec0ee52d171ebb88bc90f88e8cd9c10d4912f",
+      "change": "original26 CI files plus runner regressions share tools/ci_tests.py; CI and pre-push --ci-tests use it",
+      "verification": {
+        "passed": 549,
+        "skipped": 4,
+        "subtests_passed": 78,
+        "pytest_seconds": 58.91,
+        "wall_seconds": 59.7,
+        "explicit_local_CWP_env": true
+      },
+      "subsequent_main_normal_push": {
+        "passed": 548,
+        "skipped": 5,
+        "seconds": 53.95,
+        "gap": "v2 CLI E2E skipped without FILING_FETCH_V2_WIKI_SRC"
+      }
+    },
+    {
+      "repository": "filing-fetch",
+      "commit": "23d25644a78390ebd5d7fd4da20e42d6788c1240",
+      "public_locator": "scripts/fetch_filing.py::load_company_wiki_root(config_path=PROJECT_ROOT/config/company_wiki.json)",
+      "priority": "explicit CI FILING_FETCH_V2_WIKI_SRC; else public project config loader -> engineering src/CLI",
+      "missing_runtime_result": "clear stderr and exit2 before pytest",
+      "direct_E2E": "same public project loader fallback; no opt-in skip",
+      "pytest_skip_visibility": "-rs",
+      "TDD_red": {
+        "failed": 4,
+        "passed": 5
+      },
+      "targeted_green_without_override": {
+        "passed": 10,
+        "seconds": 5.18,
+        "scope": "9 runner tests + v2 CLI E2E single file"
+      },
+      "static_checks": "full ruff, host guard new0, cached diff-check, real commit hooks pass",
+      "full_suite_rerun": false,
+      "merge_push_install_by_agent": false,
+      "nonsecret_project_config_read_by_existing_public_loader": true,
+      "owner_config_modified": false,
+      "credentials_read_or_modified": false
+    }
+  ]
 }
