@@ -5,10 +5,15 @@ import argparse
 import json
 from pathlib import Path
 import sys
+import httpx
 
+from .bounded_http import ProviderBudgetStop
 from .config import load_catalog_config
 from .service import SourceCatalog
-from .official_source_flow import import_official_source, OfficialSourceError
+from .official_source_flow import (
+    import_official_source, OfficialSourceError, capture_official_source,
+    recover_official_source, list_retained_official_captures,
+)
 from .official_discovery import discover_official_documents, fetch_official_indexes
 
 _MAX_REQUEST_BYTES = 65536
@@ -41,7 +46,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path)
     parser.add_argument("--project-root", type=Path)
-    parser.add_argument("--operation", choices=("import", "discover"), default="import")
+    parser.add_argument("--operation", choices=("import", "discover", "capture", "recover"), default="import")
     parser.add_argument("--request", type=Path, required=True)
     parser.add_argument("--input-file", type=Path)
     args = parser.parse_args(argv)
@@ -65,6 +70,21 @@ def main(argv=None):
             root = args.project_root or args.config.resolve().parents[1]
             catalog = SourceCatalog(load_catalog_config(args.config, project_root=root))
             result = import_official_source(catalog, original=original, request=request)
+        elif args.operation in {"capture", "recover"}:
+            if args.config is None:
+                raise ValueError("explicit_config_required")
+            root = args.project_root or args.config.resolve().parents[1]
+            catalog = SourceCatalog(load_catalog_config(args.config, project_root=root))
+            if args.operation == "capture":
+                result = capture_official_source(catalog, request=request)
+            else:
+                if request.get("schema_version") != "official-source-recovery-request/1":
+                    raise OfficialSourceError("invalid_recovery_request_schema")
+                if request.get("capture_id") is None:
+                    result = {"schema_version": "official-source-recovery-inventory/1",
+                              "captures": list_retained_official_captures(catalog)}
+                else:
+                    result = recover_official_source(catalog, capture_id=request["capture_id"])
         else:
             if request.get("schema_version") != "official-discovery-request/1":
                 raise ValueError("invalid_discovery_schema")
@@ -127,23 +147,20 @@ def main(argv=None):
                 result["limitations"].append("index_fetch_incomplete")
         print(json.dumps(result, ensure_ascii=False, separators=(",", ":")))
         return 0
-    except (OSError, ValueError, RuntimeError) as exc:
+    except (OSError, ValueError, RuntimeError, ProviderBudgetStop, httpx.HTTPError) as exc:
         # Do not expose input paths, credentials or source bodies on a refusal.
         code = (
             str(exc)
             if isinstance(exc, OfficialSourceError)
             else "official_source_" + type(exc).__name__
         )
-        print(
-            json.dumps(
-                {
-                    "schema_version": "official-source-failure/1",
-                    "status": "failed",
-                    "error_code": code,
-                }
-            ),
-            file=sys.stderr,
-        )
+        failure = {"schema_version": "official-source-failure/1", "status": "failed",
+                   "error_code": getattr(exc, "error_code", code)}
+        for field in ("capture_id", "acquisition_usage", "acquisition_usage_complete", "provider_started"):
+            value = getattr(exc, field, None)
+            if value is not None:
+                failure[field] = value
+        print(json.dumps(failure), file=sys.stderr)
         return 2
     finally:
         if catalog is not None:

@@ -1,0 +1,69 @@
+{
+  "all_absent": true,
+  "schema_version": "w04-test-cleanup/1",
+  "production_originals_touched": false,
+  "mFresh_touched": false,
+  "total_bytes_removed": 45713515.0,
+  "rows": [
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w04-red-20261009",
+      "bytes_removed": 1290355,
+      "absent_after": true,
+      "ownership": "explicit W04 synthetic fixture basetemp"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w04-red2-20261009",
+      "bytes_removed": 2372519,
+      "absent_after": true,
+      "ownership": "explicit W04 synthetic fixture basetemp"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w04-green-20261009",
+      "bytes_removed": 2636517,
+      "absent_after": true,
+      "ownership": "explicit W04 synthetic fixture basetemp"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w04-green2-20261009",
+      "bytes_removed": 3672971,
+      "absent_after": true,
+      "ownership": "explicit W04 synthetic fixture basetemp"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w04-green3-20261009",
+      "bytes_removed": 5759849,
+      "absent_after": true,
+      "ownership": "explicit W04 synthetic fixture basetemp"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w04-m2-20261009",
+      "bytes_removed": 10377709,
+      "absent_after": true,
+      "ownership": "explicit W04 synthetic fixture basetemp"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w04-edge-red-20261009",
+      "bytes_removed": 323471,
+      "absent_after": true,
+      "ownership": "explicit W04 synthetic fixture basetemp"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w04-final-focus-20261009",
+      "bytes_removed": 6538990,
+      "absent_after": true,
+      "ownership": "explicit W04 synthetic fixture basetemp"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w04-retry-red-20261009",
+      "bytes_removed": 1020402,
+      "absent_after": true,
+      "ownership": "explicit W04 synthetic fixture basetemp"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w04-m2-final-20261009",
+      "bytes_removed": 11720732,
+      "absent_after": true,
+      "ownership": "explicit W04 synthetic fixture basetemp"
+    }
+  ]
+}

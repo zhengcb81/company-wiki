@@ -217,7 +217,7 @@ class CanonicalSourceWriter:
                                    provenance_extensions=provenance_extensions, budget=budget)
 
     def _commit_staged(self, request, candidate, receipt, staged, *,
-                       provenance_extensions=None, budget=None, reactivate_retired=True):
+                       provenance_extensions=None, budget=None, reactivate_retired=True, cleanup_staged=True):
         """One immutable commit algorithm shared by provider and local originals."""
         with CatalogOperationLock(
             self.catalog.config.catalog_dir,
@@ -239,7 +239,9 @@ class CanonicalSourceWriter:
                     raise CanonicalImportError("local import requires atomic metadata reconciliation")
             existing = self._existing_original(receipt.content_sha256)
             if existing is not None:
-                self._remove_staged(staged)
+                source_ref = self.source_ref_for_import(request, candidate, receipt.content_sha256)
+                if cleanup_staged:
+                    self._remove_staged(staged)
                 return CanonicalImportResult(
                     schema_version=CANONICAL_IMPORT_RESULT_SCHEMA_VERSION,
                     status=CanonicalImportStatus.DEDUPLICATED_AFTER_DOWNLOAD,
@@ -248,16 +250,15 @@ class CanonicalSourceWriter:
                     content_sha256=receipt.content_sha256,
                     canonical_path=str(existing),
                     provenance_path=None,
-                    source_ref=self.source_ref_for_import(request, candidate, receipt.content_sha256),
+                    source_ref=source_ref,
                 )
 
             destination = self._destination(request, candidate, receipt)
             destination.parent.mkdir(parents=True, exist_ok=True)
             # DEF-MSFT-CANONICAL-DUP: ``destination_preexisting`` marks the
-            # case where the computed canonical path (including the hash
-            # suffix fallback) already holds byte-identical content — a
+            # case where the computed content path holds byte-identical content — a
             # re-serve of bytes an earlier acquisition committed to this
-            # exact path.  The copy below is then a no-op and the immutable
+            # content path. The copy below is then a no-op and the immutable
             # provenance sidecar must NOT be rewritten: it belongs to the
             # first acquisition of these bytes, and request_id/retrieved_at
             # differ on every attempt (writing would die on the immutable
@@ -265,17 +266,8 @@ class CanonicalSourceWriter:
             destination_preexisting = False
             if destination.exists():
                 if _hash_file(destination) != receipt.content_sha256:
-                    destination = destination.with_name(
-                        destination.stem
-                        + "__"
-                        + receipt.content_sha256[:12]
-                        + destination.suffix
-                    )
-                if destination.exists() and _hash_file(destination) != receipt.content_sha256:
-                    raise CanonicalImportError("canonical filename collision after hash suffix")
-                # only a FINAL path that already held these exact bytes is a
-                # re-acquisition; after the hash-suffix rename the new path
-                # has not been written yet, so this import is a fresh commit.
+                    raise CanonicalImportError("canonical_content_name_collision")
+                # A byte-identical existing final path is a re-acquisition.
                 destination_preexisting = destination.exists()
             if not destination.exists():
                 self._atomic_copy(staged, destination, receipt)
@@ -299,7 +291,8 @@ class CanonicalSourceWriter:
                     frozenset({destination.relative_to(self.company_root.path).as_posix()})),
             )
             source_ref = self.source_ref_for_import(request, candidate, receipt.content_sha256)
-            self._remove_staged(staged)
+            if cleanup_staged:
+                self._remove_staged(staged)
             return CanonicalImportResult(
                 schema_version=CANONICAL_IMPORT_RESULT_SCHEMA_VERSION,
                 # DEF-MSFT-CANONICAL-DUP: when the committed bytes were
@@ -322,7 +315,7 @@ class CanonicalSourceWriter:
     def import_original_staged(
         self, *, request: SourceRequest, metadata: Mapping[str, Any],
         staged_path: Path, content_sha256: str, byte_size: int, mime_type: str,
-        retrieved_at: str, capture_receipt: Mapping[str, Any],
+        retrieved_at: str, capture_receipt: Mapping[str, Any], cleanup_staged: bool = True,
     ) -> CanonicalImportResult:
         """Commit already verified local original through the same storage path.
 
@@ -349,7 +342,7 @@ class CanonicalSourceWriter:
                                           mime_type, retrieved_at)
         return self._commit_staged(request, candidate, receipt, staged,
                                   provenance_extensions={"official_capture": dict(capture_receipt)},
-                                  reactivate_retired=False)
+                                  reactivate_retired=False, cleanup_staged=cleanup_staged)
 
     def source_ref_for_import(
         self,
@@ -447,33 +440,19 @@ class CanonicalSourceWriter:
         candidate: DownloadCandidate,
         receipt: DownloadReceipt,
     ) -> Path:
-        company = _safe_component(request.entity, limit=80)
-        if candidate.document_kind == "investor_call_transcript":
-            # Keep the full provider title/ID in the immutable sidecar. A long
-            # transcript title otherwise exceeds the Windows path budget in
-            # nested company directories and unique pytest run roots.
-            filename = (
-                f"{candidate.filing_date or 'unknown-date'}_"
-                f"{_safe_component(candidate.provider, limit=24)}_"
-                f"{receipt.content_sha256[:16]}"
-                f"{_extension(receipt)}"
-            )
-        else:
-            filename = "_".join(
-                (
-                    candidate.filing_date or "unknown-date",
-                    _safe_component(candidate.provider, limit=24),
-                    _safe_component(candidate.provider_document_id, limit=64),
-                    _safe_component(candidate.title, limit=90),
-                )
-            ) + _extension(receipt)
-        return (
-            self.company_root.path
-            / company
-            / "raw"
-            / _destination_subdirectory(candidate.document_kind)
-            / filename
-        ).resolve(strict=False)
+        # Human title/provider IDs are immutable metadata, never physical names.
+        # Count UTF-16 units for the portable Win32 limit and reserve the longest
+        # provenance atomic suffix (including a ten-digit PID) before any write.
+        directory = (self.company_root.path / _safe_component(request.entity, limit=80)
+                     / "raw" / _destination_subdirectory(candidate.document_kind)).resolve(strict=False)
+        extension = _extension(receipt)
+        suffix_reserve = len(".source.json.9999999999.tmp")
+        units = len(str(directory).encode("utf-16-le")) // 2
+        available = 259 - units - 1 - len(extension) - suffix_reserve
+        if available < 16:
+            raise CanonicalImportError("canonical_root_path_limit")
+        name = receipt.content_sha256[:min(64, available)] + extension
+        return directory / name
 
     @staticmethod
     def _atomic_copy(
@@ -490,6 +469,8 @@ class CanonicalSourceWriter:
                 raise CanonicalImportError("temporary canonical copy has wrong size")
             if _hash_file(temporary) != receipt.content_sha256:
                 raise CanonicalImportError("temporary canonical copy has wrong SHA-256")
+            with temporary.open("r+b") as committed_bytes:
+                os.fsync(committed_bytes.fileno())
             os.replace(temporary, destination)
         finally:
             if temporary.exists():
@@ -554,7 +535,10 @@ class CanonicalSourceWriter:
             return
         temporary = path.with_name(path.name + f".{os.getpid()}.tmp")
         try:
-            temporary.write_bytes(encoded)
+            with temporary.open("wb") as stream:
+                stream.write(encoded)
+                stream.flush()
+                os.fsync(stream.fileno())
             os.replace(temporary, path)
         finally:
             if temporary.exists():

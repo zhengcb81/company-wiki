@@ -20,6 +20,8 @@ ACQUISITION_OUTCOMES = frozenset(
         "reused_before_download",
         "reused_after_discovery",
         "downloaded_new",
+        "imported_original",
+        "deduplicated_original",
         "deduplicated_after_download",
         "missing",
         "ambiguous",

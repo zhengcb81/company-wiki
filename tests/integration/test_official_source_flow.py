@@ -1174,7 +1174,7 @@ def test_long_cn_fundraising_business_and_routine_ir_use_existing_selection():
         )
 
 
-def test_storage_failure_removes_only_this_calls_staged_original(monkeypatch):
+def test_storage_failure_retains_owned_original_and_preserves_other_owners(monkeypatch):
     from company_wiki.source_catalog.official_source_flow import import_official_source
     from company_wiki.source_catalog.canonical_writer import (
         CanonicalSourceWriter,
@@ -1198,7 +1198,11 @@ def test_storage_failure_removes_only_this_calls_staged_original(monkeypatch):
         with pytest.raises(CanonicalImportError, match="fixture_storage_failure"):
             import_official_source(catalog, original=changed, request=request(changed))
         assert sentinel.read_bytes() == b"pre-existing staging sentinel"
-        assert list(sentinel.parent.iterdir()) == [sentinel]
+        captures = list(sentinel.parent.glob("*.capture.json"))
+        assert len(captures) == 1
+        state = json.loads(captures[0].read_text(encoding="utf-8"))
+        assert (sentinel.parent / state["staged_name"]).read_bytes() == changed
+        assert state["request"]["capture_receipt"] == request(changed)["capture_receipt"]
         assert baseline == {
             p: p.read_bytes() for p in (root / "companies").rglob("*") if p.is_file()
         }

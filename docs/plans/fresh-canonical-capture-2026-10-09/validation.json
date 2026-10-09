@@ -1,0 +1,75 @@
+{
+  "schema_version": "w04-engineering-acceptance/1",
+  "recorded_at": "2026-10-09T10:14:56.667738+00:00",
+  "base": "ceac91e7e09f615fb217d0fa02604ba96cdea111",
+  "scope": "isolated fixture/loopback M2; not M3 company research acceptance",
+  "external_paid_calls": 0,
+  "production_originals_modified": false,
+  "commands": [
+    {
+      "command": "python -X utf8 -B -m pytest tests/contract/test_official_capture_recovery.py -q --tb=short --basetemp C:/Users/郑曾波/AppData/Local/Temp/cwp-w04-red2-20261009",
+      "exit_code": 1,
+      "failed": 12,
+      "passed": 0,
+      "seconds": 4.25,
+      "note": "Four actual Win32 long-name failures; five stage-removal failures; missing capture/deadline public API. Initial fixture trailing whitespace corrected before interpreting failures."
+    },
+    {
+      "command": "pytest grouped six files (listed below)",
+      "exit_code": 0,
+      "passed": 83,
+      "seconds": 47.1,
+      "phase": "first grouped M2"
+    },
+    {
+      "command": "pytest focused receipt-storage and single-MIME-parse RED",
+      "exit_code": 1,
+      "failed": 2,
+      "seconds": 1.87
+    },
+    {
+      "command": "pytest focused retained known-SHA retry and budget/mismatched-SHA cases",
+      "exit_code": 1,
+      "failed": 1,
+      "passed": 2,
+      "seconds": 4.0
+    },
+    {
+      "command": "python -X utf8 -B -m pytest tests/contract/test_official_capture_recovery.py tests/contract/test_source_catalog_canonical_writer.py tests/unit/test_canonical_import_reference.py tests/unit/test_bounded_http.py tests/unit/test_adapter_process_budget.py tests/integration/test_official_source_flow.py -q --tb=short --basetemp C:/Users/郑曾波/AppData/Local/Temp/cwp-w04-m2-final-20261009",
+      "exit_code": 0,
+      "passed": 88,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 46.79
+    }
+  ],
+  "checks": {
+    "ruff": "passed",
+    "git_diff_check": "passed",
+    "slow_trickle_real_loopback": "passed",
+    "stalled_read_real_loopback": "passed",
+    "public_cli_capture_recover": "passed",
+    "same_sha_canonical_and_retained_zero_get": "passed",
+    "different_bytes_no_overwrite": "passed",
+    "copy_rename_provenance_catalog_facts_failure_preservation": "passed",
+    "journal_secondary_error_preserves_primary": "passed",
+    "receipt_write_failure_keeps_raw_and_actual_usage": "passed",
+    "partial_download_not_importable": "passed",
+    "public_reader_actual_bytes_sha": "passed",
+    "legacy_journal_and_provider_import": "passed"
+  },
+  "source_file_sha256": {
+    "src/company_wiki/source_catalog/acquisition_journal.py": "cc04595c664dbc3684823d630e77844d719936d140d4fd838456b28d24b46235",
+    "src/company_wiki/source_catalog/canonical_writer.py": "2e5a97ce82c679608008d23127e08bc142e14c373d92102d77ee49a66ec7c4bd",
+    "src/company_wiki/source_catalog/official_source_cli.py": "279a047ab73ca2eaefee1bae4332f7159fbe3345081f93225acdc1b0c2dc511c",
+    "src/company_wiki/source_catalog/official_source_flow.py": "a8af1e4ed365fa8b274c325a7cc23c8983384aaf96eaef6811d5e4aeae82f78c",
+    "tests/contract/test_official_capture_recovery.py": "bc51685a31e4602c84e9df90b9c5062fb86375e577f9091b16ff7f9783858529",
+    "tests/integration/test_official_source_flow.py": "591c5a1c0d2de7b6b4639144896dd66108e642d69c08dc08f162651c66d2a1aa"
+  },
+  "installation_delta": [],
+  "remaining_main_acceptance": [
+    "MAIN cherry-pick and independent grouped review",
+    "M3 original CN/HK/US fresh attempts via public capture instead of one-off urllib",
+    "Historical lost Lam body remains lost; do not relabel current peer capture as recovery"
+  ]
+}
