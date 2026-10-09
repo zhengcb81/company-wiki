@@ -1,5 +1,14 @@
 # 三市场真实收入预测端到端审计
 
+## 最新执行节点（2026-10-09；优先于下文历史Next Step）
+
+**当前 Next Step：** MAIN收 W02最后一次独立边界复核并正常commit/push/核对精确CI；并行W04/W07各在原隔离树修其大节点发现，不提前并线。随后继续W03/W05/W06/W08等冻结共因卡，原三家公司M3、新三家M4与NVDA loop保持后置。
+
+- RF W10/W14已本地主线、远端主线、精确CI及五文件定点安装完成：8bbb81c7／37917444152 SUCCESS，新增两模块在共享daily入口，149PASS。不表示研究校准/联合压力/历史丢失作者字节已解决。
+- W01已发布/CI绿。W02当前191责任测试PASS，独立M2已接受、正常发布待完成；W04/W07均因大节点实证缺口退回原实现者，原交付保留、尚未并线。
+- 昨日CI根因与hook防漏检已关闭；commit快速静态、push整批变化检查/共享CI责任集；不增加逐节点人工签收。
+- 完整施工接口仍以[冻结14卡](phase6/fresh_root_remediation_2026-10-09/IMPLEMENTATION.md)为准；64 finding映射不改，新增工程反例在[本轮大节点报告](phase6/fresh_root_implementation_2026-10-09/)登记。不同写集和原件保护继续有效。
+
 ## 当前施工状态（2026-10-09；历史阶段完成不代表Phase6完成）
 
 - **最新优先节点已收尾**：昨日5次CI失败已逐一归因并补本地防漏检，详见[结果](phase6/ci_root_cause_2026-10-09/CLOSEOUT.md)。CWP d1ce50ee正常commit5.76秒、push2346PASS，FF23d25644共享27文件push553PASS/4明确SKIP/78subtests；两仓主线已推、精确远端CI成功。commit保持快速静态，不新加人审。

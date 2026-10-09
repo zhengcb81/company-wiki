@@ -24,3 +24,7 @@ JUnit收集失败改为抽真实异常类，私有正文/断言仍不打印到�
 ## 回主线
 
 原三家四独立角色已全部完成，64真实finding；原生audit check三次exit2/needs_remediation，schema/event/manifest无错误。工程CI绿不代表研究通过。独立专家正在[新共因PWF](../fresh_root_remediation_2026-10-09/task_plan.md)归并全部问题，MAIN继续主线；本调查关闭不暂停/完成总体goal。
+
+## 最新只读复核
+
+2026-10-09再次核对精确SHA：CWP2a978b67 [37914735874](https://github.com/zhengcb81/company-wiki/actions/runs/37914735874) SUCCESS，103秒；FF23d25644 [37911571894](https://github.com/zhengcb81/filing-fetch/actions/runs/37911571894) SUCCESS，83秒。后续RF数值共因修复与新增责任测试亦已推8bbb81c7，[37917444152](https://github.com/zhengcb81/revenue-forecast/actions/runs/37917444152) SUCCESS。这些结果是本轮已发布提交的事实，不承诺以后静态或行为检查不会发现新缺陷；仍不把本地未发布W02或待修W04/W07标为通过。

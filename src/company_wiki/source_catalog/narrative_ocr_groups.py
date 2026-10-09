@@ -23,6 +23,20 @@ def _heading(unit: NarrativeUnit, rules: PdfGroupRules) -> bool:
     )
 
 
+def ocr_sentence_continues(
+    prior: NarrativeUnit, line: NarrativeUnit, *,
+    project_heading: re.Pattern[str], business_heading: re.Pattern[str],
+    heading_only: re.Pattern[str],
+) -> bool:
+    """Physical and semantic boundaries shared by search and budget grouping."""
+    headings = (project_heading, business_heading, heading_only)
+    return (
+        ocr_continues(prior, line) and not ends_sentence(prior.raw_text)
+        and not any(pattern.search(unit.raw_text) for unit in (prior, line) for pattern in headings)
+        and not _NEW_BULLET.match(line.raw_text)
+    )
+
+
 def build_ocr_context_groups(
     units: Sequence[NarrativeUnit], rules: PdfGroupRules
 ) -> tuple[PdfContextGroup, ...]:
@@ -37,14 +51,13 @@ def build_ocr_context_groups(
         clusters = []
         for line in sorted(lines, key=lambda u: u.metadata["ocr_line_index"]):
             prior = clusters[-1][-1] if clusters else None
-            continues = prior is not None and ocr_continues(prior, line)
+            continues = prior is not None and ocr_sentence_continues(
+                prior, line, project_heading=rules.project_heading,
+                business_heading=rules.business_heading, heading_only=rules.heading_only,
+            )
             if continues:
                 continues = (
-                    not ends_sentence(prior.raw_text)
-                    and not _heading(prior, rules)
-                    and not _heading(line, rules)
-                    and not _NEW_BULLET.match(line.raw_text)
-                    and len(clusters[-1]) < MAX_COMPLETION_UNITS
+                    len(clusters[-1]) < MAX_COMPLETION_UNITS
                     and len(join_unit_text((*clusters[-1], line)))
                     <= BUSINESS_CHARACTER_WINDOW
                 )

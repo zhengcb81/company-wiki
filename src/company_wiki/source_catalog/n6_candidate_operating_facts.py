@@ -170,6 +170,46 @@ _INCREMENTAL_CAPACITY = re.compile(
     re.IGNORECASE,
 )
 
+_COMMERCIAL_METRIC_CHANGE = re.compile(
+    r"(?:^|[，、；。！？!?;,.]\s*|(?:以及|其中|而|但|并|且)\s*)"
+    r"(?:(?:本年度|报告期内|报告期|本期|目前|当期|本季度|公司|本土市场|国内|海外|国际市场|"
+    r"游戏|广告|的|日|月|年|平均|期间|我们|现有|新增|总|营销服务)\s*){0,8}"
+    r"(?:活跃用户|付费用户|付费率|留存率|广告曝光|曝光次数|广告价格|客单价|订阅用户|"
+    r"用户时长|付费频次|转化率|广告库存|平均售价)"
+    r"(?:(?:次数|同比|环比|持续|显著|分别|进一步|出现|有所|均)\s*){0,4}"
+    r"(?:增长|增加|上升|提升|下降|减少|下滑|提高|改善)",
+    re.IGNORECASE,
+)
+_ENGLISH_OPERATING_CHANGE = re.compile(
+    r"(?:^|[,.!?;]\s*|\b(?:and|while|whereas)\s+)"
+    r"(?:(?:our|the|production|customer|average|daily|monthly|global|international|total)\s+){0,3}"
+    r"(?:active users|paying users|paid users|retention rate|advertising impressions|ad impressions|"
+    r"ad pric(?:e|ing)|average selling price|capacity(?: utilization)?|production volumes|"
+    r"output|orders|order intake|backlog|yield)\s+"
+    r"(?:(?:has|have|had|been|was|were|year.over.year|year.on.year|significantly|materially|"
+    r"unexpectedly|slightly|steadily|continued to|continues to)\s+){0,3}"
+    r"(?:increas\w*|decreas\w*|grew|grow\w*|rose|fell|improv\w*|declin\w*)\b",
+    re.IGNORECASE,
+)
+_ENGLISH_SUPPLY_DELIVERY_RISK = re.compile(
+    r"(?:supply|component|material|capacity)[^.!?;。；！？]{0,40}"
+    r"(?:constraints?|shortages?|disruptions?|restrictions?)[^.!?;。；！？]{0,40}"
+    r"(?:delayed|disrupted|reduced|limited|constrained)[^.!?;。；！？]{0,40}"
+    r"(?:deliver(?:y|ies)|production|output|shipments|capacity|customers)",
+    re.IGNORECASE,
+)
+_REVENUE_CAUSE = re.compile(
+    r"(?:revenue|sales)[^.;!?。；！？]{0,40}(?:grew|increas\w*|decreas\w*|declin\w*)"
+    r"[^.;!?。；！？]{0,55}(?:driven by|due to|because of)[^.;!?。；！？]{0,70}"
+    r"(?:customer|adoption|platform|product|volume|pricing|usage|subscription|demand)",
+    re.IGNORECASE,
+)
+_SUPPLY_DELIVERY_RISK = re.compile(
+    r"(?:上游|供应链|关键零部件|关键原材料)[^。；]{0,80}(?:紧张|短缺|限制|中断)"
+    r"[^。；]{0,65}(?:交期|交付|生产|产能|客户)[^。；]{0,30}(?:影响|延迟|延误|受限|减少)",
+    re.IGNORECASE,
+)
+
 _DETECTOR_SIGNALS: tuple[
     tuple[re.Pattern[str], tuple[str, ...], tuple[str, ...], int], ...
 ] = (
@@ -197,6 +237,11 @@ _DETECTOR_SIGNALS: tuple[
         3,
     ),
     (_DEMAND_EXCEEDS, ("industry_dynamics",), ("direct_capacity_constraint",), 2),
+    (_COMMERCIAL_METRIC_CHANGE, ("core_business",), ("quantified_operating_status",), 3),
+    (_ENGLISH_OPERATING_CHANGE, ("core_business",), ("quantified_operating_status",), 3),
+    (_ENGLISH_SUPPLY_DELIVERY_RISK, ("capacity_projects",), ("business_risk_or_constraint",), 3),
+    (_REVENUE_CAUSE, ("core_business",), ("specific_business_event",), 3),
+    (_SUPPLY_DELIVERY_RISK, ("capacity_projects",), ("business_risk_or_constraint",), 3),
 )
 
 # Union used to find minimal unit windows whose joined text carries a fact that

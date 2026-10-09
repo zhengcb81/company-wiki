@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Callable, Mapping, Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import re
 from types import MappingProxyType
 
@@ -23,6 +23,7 @@ from .n6_candidate_operating_facts import (
 from .narrative_candidates import EvidenceCandidate
 from .narrative_context import PdfContextGroup
 from .narrative_document import NarrativeUnit
+from .narrative_ocr_groups import ocr_sentence_continues
 from .narrative_visual_units import is_ocr_unit, join_unit_text
 
 
@@ -56,6 +57,7 @@ class GroupCandidateRules:
     operating_facts: OperatingFactDetector = detect_operating_fact
     project_heading: re.Pattern[str] = _NEVER
     business_heading: re.Pattern[str] = _NEVER
+    heading_only: re.Pattern[str] = _NEVER
     high_value_event: re.Pattern[str] = _NEVER
     positioning: re.Pattern[str] = _NEVER
     business_risk: re.Pattern[str] = _NEVER
@@ -81,6 +83,7 @@ class GroupCandidateRules:
 class GroupEnrichmentResult:
     candidates: tuple[EvidenceCandidate, ...]
     group_ids: Mapping[str, str]
+    excluded_context_unit_ids: frozenset[str] = frozenset()
 
 
 @dataclass(frozen=True)
@@ -105,6 +108,7 @@ class _GroupSignals:
 class _CandidateStore:
     candidates: list[EvidenceCandidate]
     group_ids: dict[str, str]
+    excluded_context_unit_ids: set[str] = field(default_factory=set)
 
     def index(self, unit_id: str) -> int | None:
         return next(
@@ -473,6 +477,29 @@ def _merge_fact_windows(
     return tuple(merged)
 
 
+def _complete_fact_window(
+    members: Sequence[NarrativeUnit], start: int, end: int, rules: GroupCandidateRules
+) -> tuple[int, int]:
+    """Complete a hit before assigning atomic membership, within existing bounds."""
+    first = completion_indices(
+        members, start, barrier=lambda unit: _section_barrier(unit, rules)
+    )
+    last = completion_indices(
+        members, end, barrier=lambda unit: _section_barrier(unit, rules)
+    )
+    expanded_start = min(start, first[0]) if first else start
+    expanded_end = max(end, last[-1]) if last else end
+    expanded = members[expanded_start : expanded_end + 1]
+    if (
+        len(expanded) > MAX_COMPLETION_UNITS
+        or sum(len(unit.raw_text) for unit in expanded) > PROJECT_CHARACTER_WINDOW
+        or not members_linkable(expanded)
+        or any(not _usable_unit(unit, rules) or _outside_page_body(unit) for unit in expanded)
+    ):
+        return start, end
+    return expanded_start, expanded_end
+
+
 def _add_operating_fact_windows(
     store: _CandidateStore,
     group_id: str,
@@ -480,10 +507,14 @@ def _add_operating_fact_windows(
     topics: tuple[str, ...],
     rules: GroupCandidateRules,
 ) -> set[str]:
-    """Select minimal unit windows whose joined text expresses one fact."""
+    """Complete minimal fact windows before scoring and atomic group assignment."""
     added: set[str] = set()
     windows = _merge_fact_windows(
-        rules.window_finder(members, OPERATING_FACT_JOIN), members=members
+        tuple(
+            _complete_fact_window(members, start, end, rules)
+            for start, end in rules.window_finder(members, OPERATING_FACT_JOIN)
+        ),
+        members=members,
     )
     for index, (start, end) in enumerate(windows):
         window_members = members[start : end + 1]
@@ -857,6 +888,117 @@ def _expand_general(
     return True
 
 
+def _sentence_ranges(
+    members: Sequence[NarrativeUnit], rules: GroupCandidateRules
+) -> tuple[tuple[int, int], ...]:
+    """Full visual sentences; a line-count search limit is not a semantic boundary."""
+    ranges: list[tuple[int, int]] = []
+    start: int | None = None
+    for index, unit in enumerate(members):
+        usable = (_usable_unit(unit, rules) and not _section_barrier(unit, rules)
+                  and not _outside_page_body(unit))
+        if start is not None and (
+            not usable or ends_sentence(members[index - 1].raw_text)
+            or not members_linkable((members[index - 1], unit))
+        ):
+            ranges.append((start, index - 1))
+            start = None
+        if usable and start is None:
+            start = index
+    if start is not None:
+        ranges.append((start, len(members) - 1))
+    return tuple(ranges)
+
+
+def _coalesce_sentences(
+    store: _CandidateStore, group: PdfContextGroup, rules: GroupCandidateRules,
+    protected_groups: Mapping[str, str], character_budget: int,
+) -> None:
+    """Make bounded subject/action/qualification statements atomic before quota."""
+    group_id, members, _ = group
+    for start, end in _sentence_ranges(members, rules):
+        sentence_members = members[start : end + 1]
+        if len(sentence_members) < 2:
+            continue
+        ids = {unit.unit_id for unit in sentence_members}
+        seeds = [candidate for candidate in store.candidates if candidate.unit.unit_id in ids]
+        if not seeds:
+            continue
+        if sum(len(u.raw_text) for u in sentence_members) > character_budget:
+            store.excluded_context_unit_ids.update(ids)
+            continue
+        old_groups = {store.group_ids[uid] for uid in ids if uid in store.group_ids}
+        # Preserve a pre-existing wider atomic context rather than splitting it.
+        if any(uid not in ids and gid in old_groups for uid, gid in store.group_ids.items()):
+            continue
+        protected = {protected_groups[uid] for uid in ids if uid in protected_groups}
+        if len(protected) > 1:
+            continue
+        anchor = (next(iter(protected)) if protected else next(iter(old_groups))
+                  if len(old_groups) == 1 else f"{group_id}:sentence:{start}:{end}")
+        topics = tuple(dict.fromkeys(topic for candidate in seeds for topic in candidate.topics))
+        reasons = tuple(dict.fromkeys(reason for candidate in seeds for reason in candidate.reasons))
+        score = max(candidate.score for candidate in seeds)
+        for unit in sentence_members:
+            store.group_ids[unit.unit_id] = anchor
+            store.add(unit, rules.topics(unit.raw_text) or topics,
+                      _member_reasons(unit, reasons), score, anchor)
+
+
+def _join_ocr_sentence_groups(
+    groups: Sequence[PdfContextGroup], rules: GroupCandidateRules
+) -> tuple[PdfContextGroup, ...]:
+    """Rejoin OCR search chunks only within one bounded continuous image sentence."""
+    joined: list[PdfContextGroup] = []
+    for group in groups:
+        members = group[1]
+        if joined and members and is_ocr_unit(members[0]):
+            previous = joined[-1]
+            union = (*previous[1], *members)
+            if (
+                previous[1] and is_ocr_unit(previous[1][-1])
+                and ocr_sentence_continues(
+                    previous[1][-1], members[0], project_heading=rules.project_heading,
+                    business_heading=rules.business_heading, heading_only=rules.heading_only,
+                )
+                and members_linkable(union)
+                and sum(len(u.raw_text) for u in union) <= BUSINESS_CHARACTER_WINDOW
+            ):
+                joined[-1] = (previous[0], union, join_unit_text(union))
+                continue
+        joined.append(group)
+    return tuple(joined)
+
+
+def _oversize_ocr_sentence_ids(
+    groups: Sequence[PdfContextGroup], rules: GroupCandidateRules
+) -> set[str]:
+    """Count a complete OCR sentence without assembling an unbounded string."""
+    excluded: set[str] = set()
+    sentence: list[NarrativeUnit] = []
+    size = 0
+    seen: set[str] = set()
+    for _, members, _ in groups:
+        for unit in members:
+            if unit.unit_id in seen:
+                continue
+            seen.add(unit.unit_id)
+            continues = bool(sentence) and is_ocr_unit(unit) and ocr_sentence_continues(
+                sentence[-1], unit, project_heading=rules.project_heading,
+                business_heading=rules.business_heading, heading_only=rules.heading_only,
+            )
+            if not continues:
+                if size > BUSINESS_CHARACTER_WINDOW:
+                    excluded.update(u.unit_id for u in sentence)
+                sentence, size = [], 0
+            if is_ocr_unit(unit):
+                sentence.append(unit)
+                size += len(unit.raw_text)
+    if size > BUSINESS_CHARACTER_WINDOW:
+        excluded.update(u.unit_id for u in sentence)
+    return excluded
+
+
 def enrich_context_groups(
     groups: Sequence[PdfContextGroup],
     *,
@@ -868,15 +1010,24 @@ def enrich_context_groups(
 ) -> GroupEnrichmentResult:
     """Add joined visual context while retaining replayable member locators."""
     store = _CandidateStore(list(initial_candidates), dict(initial_group_ids))
+    store.excluded_context_unit_ids.update(_oversize_ocr_sentence_ids(groups, rules))
     initial_ids = frozenset(candidate.unit.unit_id for candidate in initial_candidates)
-    for group in groups:
+    for group in _join_ocr_sentence_groups(groups, rules):
+        if not group[1]:
+            continue
         text = group[2]
         if _match(rules.project_heading, text) or _match(rules.business_heading, text):
             continue
         _enrich_group(store, group, initial_ids, project_scores, business_scores, rules)
+        _coalesce_sentences(
+            store, group, rules, initial_group_ids,
+            BUSINESS_CHARACTER_WINDOW if group[0] in business_scores or is_ocr_unit(group[1][0])
+            else PROJECT_CHARACTER_WINDOW,
+        )
     return GroupEnrichmentResult(
         candidates=tuple(store.candidates),
         group_ids=MappingProxyType(store.group_ids),
+        excluded_context_unit_ids=frozenset(store.excluded_context_unit_ids),
     )
 
 

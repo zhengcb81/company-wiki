@@ -1,5 +1,17 @@
 # Findings
 
+## 2026-10-09：M2发现的共用边界，工程绿不替代独立审查
+
+CI已证实根因是直接依赖安装入口漂移、旧职责断言和真实恢复兼容错误，以及FF复杂度阻断；本地commit/本地push/CI覆盖入口不一致导致漏检。已发布防漏机制与精确远端成功证据见phase6/ci_root_cause_2026-10-09/CLOSEOUT.md。RF也将这轮DAG/输出基础两模块加入既有共享CI/daily入口，保持每次commit不跑pytest。
+
+W02根因：regex在简体/工业术语上偏置；最小hit window先分组后补完整句，8行搜索界限误当semantic边界；neighbor盲借已结束段。现在match-only繁简视图不落盘，最终restore原unit/hash/metadata；字符有界全句负责预算原子性，旧8行局部搜索API保持；OCR真实图/页/角色/geometry/bullet/heading共同边界复用，完整prior只有明确“其中”等指代可借；预算全部省略如实partial。188前的实际集中是187PASS；M2最终独立复核仍待，不抢先清除原研究问题。
+
+W04：原88PASS未覆盖成功返回丢失后的recover、零GET retained绕过新cap、合法JSON非object。独立实证后回同capture层修；不是通过移除bytecap或复制大body求绿。
+
+W07：只扫描JSON序列化/原始字节不保证最终解码内容与reason不含已知credential；纯字母数字error_code也不是安全enum。污染receipt不能当完整账。所有反例只synthetic，独立测试没用真实key/外部服务，修复回统一语义输出边界与用量可信度。
+
+RF：消费祖先按native DAG刷新；ratio signed-growth/delta使用明确数值domain，派生driver物理约束照常。opening residual解释reported分母与增量，绝不加未来收入。强output/confidence roundtrip读取原authored inputs，而不是漏foundation/constraint重构；OAT诊断可以越固定scenario bracket，正式Low/Base/High仍排序。五旧family结果逐字段与pinned相同。
+
 ## 当前：64项共因规划已冻结，通用实现已启动
 
 12份独立审查报告全部完成。专家矩阵逐项覆盖CN25/HK20/US19、storage20/fetch16/process18/analyst10，共64项；133个原finding引用文件均存在且12份JSON报告SHA未变。28个对应根因另加两个RF源码诊断，共14卡，详见[frozen implementation](phase6/fresh_root_remediation_2026-10-09/IMPLEMENTATION.md)。M1计划验收只证明覆盖与设计，不证明代码修好或研究通过。

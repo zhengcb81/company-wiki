@@ -1,0 +1,74 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cws-cxqpecug", "requested_basetemp_len": 44, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+collected 17 items
+
+tests\unit\test_fresh_selection_semantics.py ..........FFFFFFF           [100%]
+
+================================== FAILURES ===================================
+_ test_english_negative_operating_disclosures_are_material_business_evidence[Supply constraints delayed deliveries to customers by six weeks.] _
+tests\unit\test_fresh_selection_semantics.py:113: in test_english_negative_operating_disclosures_are_material_business_evidence
+    assert [span.raw_text for span in package.evidence_spans] == [text]
+E   AssertionError: assert [] == ['Supply cons...y six weeks.']
+E     
+E     Right contains one more item: 'Supply constraints delayed deliveries to customers by six weeks.'
+E     Use -v to get more diff
+_ test_english_negative_operating_disclosures_are_material_business_evidence[Production capacity decreased 20% following an unexpected factory closure.] _
+tests\unit\test_fresh_selection_semantics.py:113: in test_english_negative_operating_disclosures_are_material_business_evidence
+    assert [span.raw_text for span in package.evidence_spans] == [text]
+E   AssertionError: assert [] == ['Production ...ory closure.']
+E     
+E     Right contains one more item: 'Production capacity decreased 20% following an unexpected factory closure.'
+E     Use -v to get more diff
+_ test_english_negative_operating_disclosures_are_material_business_evidence[Customer orders declined 20% and our backlog fell by five million units.] _
+tests\unit\test_fresh_selection_semantics.py:113: in test_english_negative_operating_disclosures_are_material_business_evidence
+    assert [span.raw_text for span in package.evidence_spans] == [text]
+E   AssertionError: assert [] == ['Customer or...llion units.']
+E     
+E     Right contains one more item: 'Customer orders declined 20% and our backlog fell by five million units.'
+E     Use -v to get more diff
+_ test_metric_words_in_training_or_a_finished_previous_sentence_are_not_operating_growth[lines0] _
+tests\unit\test_fresh_selection_semantics.py:122: in test_metric_words_in_training_or_a_finished_previous_sentence_are_not_operating_growth
+    assert package.evidence_spans == ()
+E   AssertionError: assert (EvidenceSpan...ty_flags=()),) == ()
+E     
+E     Left contains one more item: EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:753bb4e15676a5f0d193b686d4545543de...1c56e62e42d9f99081e8db772b0e07050d896537791e4c5009e5d9', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=())
+E     Use -v to get more diff
+_ test_metric_words_in_training_or_a_finished_previous_sentence_are_not_operating_growth[lines1] _
+tests\unit\test_fresh_selection_semantics.py:122: in test_metric_words_in_training_or_a_finished_previous_sentence_are_not_operating_growth
+    assert package.evidence_spans == ()
+E   AssertionError: assert (EvidenceSpan...ity_flags=())) == ()
+E     
+E     Left contains 2 more items, first extra item: EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:94c08cfa1e960dd0984b075750bd646443...2bba0753885bae2af0e710fd51db67fd305358b3cdb63905bbd7ac', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=())
+E     Use -v to get more diff
+_ test_fragment_count_does_not_split_a_bounded_sentence_from_its_cancellation_condition _
+tests\unit\test_fresh_selection_semantics.py:131: in test_fragment_count_does_not_split_a_bounded_sentence_from_its_cancellation_condition
+    assert len({span.structured_value.get("selection_group_id") for span in full.evidence_spans}) == 1
+E   AssertionError: assert 2 == 1
+E    +  where 2 = len({'urn:company-wiki:context-group:sha256:0968c433676e55e44111a1971199f1a6775448f908b15a37bf7de598260fc37f', 'urn:company-wiki:context-group:sha256:0968c433676e55e44111a1971199f1a6775448f908b15a37bf7de598260fc37f:operating-fact:0'})
+_ test_finished_previous_product_description_is_not_borrowed_as_the_next_event_subject _
+tests\unit\test_fresh_selection_semantics.py:143: in test_finished_previous_product_description_is_not_borrowed_as_the_next_event_subject
+    assert {span.coordinates.paragraph_index for span in package.evidence_spans} == {1}
+E   assert {0, 1} == {1}
+E     
+E     Extra items in the left set:
+E     0
+E     Use -v to get more diff
+============================== warnings summary ===============================
+..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/unit/test_fresh_selection_semantics.py::test_english_negative_operating_disclosures_are_material_business_evidence[Supply constraints delayed deliveries to customers by six weeks.]
+FAILED tests/unit/test_fresh_selection_semantics.py::test_english_negative_operating_disclosures_are_material_business_evidence[Production capacity decreased 20% following an unexpected factory closure.]
+FAILED tests/unit/test_fresh_selection_semantics.py::test_english_negative_operating_disclosures_are_material_business_evidence[Customer orders declined 20% and our backlog fell by five million units.]
+FAILED tests/unit/test_fresh_selection_semantics.py::test_metric_words_in_training_or_a_finished_previous_sentence_are_not_operating_growth[lines0]
+FAILED tests/unit/test_fresh_selection_semantics.py::test_metric_words_in_training_or_a_finished_previous_sentence_are_not_operating_growth[lines1]
+FAILED tests/unit/test_fresh_selection_semantics.py::test_fragment_count_does_not_split_a_bounded_sentence_from_its_cancellation_condition
+FAILED tests/unit/test_fresh_selection_semantics.py::test_finished_previous_product_description_is_not_borrowed_as_the_next_event_subject
+=================== 7 failed, 10 passed, 1 warning in 0.86s ===================

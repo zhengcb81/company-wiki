@@ -1,5 +1,16 @@
 # Progress
 
+## 2026-10-09：CI收尾后共因施工的大节点验收
+
+- 昨日CI调查已完整收尾；再次只读确认CWP2a978b67/37914735874、FF23d25644/37911571894成功。CWP普通commit仍快速static；整批push范围affected units/CI contract共用入口已发布，绝不把旧smoke绿冒称完整CI绿。
+- RF W10/W14已由MAIN逐文件独立读diff并23新增责任测试复验，正常快进并线后把两新module加现有共享daily入口。实际149PASS/22.35s，普通push149PASS/20.08s；8bbb81c7已推main，精确CI37917444152 SUCCESS。五source定点同步两物理安装根，Claude既有副本同字节；0 unselected drift，owner三日志与output保留。
+- CWP W02首轮9FAIL/1PASS，共用修复93PASS后独立复核发现五类语义边界；MAIN补齐7FAIL/10PASS。后续通用修复新增负向English披露、显式指代、全句原子预算、共同OCR bullet/heading边界，责任集中187PASS/2.38s。第一次扩大回归1FAIL/186PASS揭示旧“其中GaAs”确有产品指代需求，保留日志后修职责，没有放宽旧断言。最终独立复核待交，尚未commit/push/M3。
+- W04首个交付c839af58、实现者88PASS；独立24PASS并实证3缺口：成功recover重试、retained当前bytecap、非对象JSON回执。原实现者已按独占写集TDD接续，暂不并线。
+- W07首个交付FFf2182732/ET1d03de61；独立39PASS及真实离线桥同时发现JSON语义解码后可泄漏synthetic credential、污染receipt仍complete。原实现者已按FF/ET互斥写集先RED继续，暂不并线。无外部HTTP/收费，不用真实密钥作试验。
+- 新独立报告在phase6/fresh_root_implementation_2026-10-09，初稿不覆盖；冻结64项issue_root_matrix不改。以上是M2工程，不清除原三家公司M3或新三家公司M4研究问题。母goal ACTIVE，raw/生产配置/Dayu/IQS零改动，预算不重置。
+
+W02最终同一M2：残留3项先4FAIL/18PASS，根治后191PASS/2.00s；独立4PASS并验12实际候选原unit/hash/坐标/metadata与完整排除计数，M2接受。PDF/OCR长句超字符窗时整组省略并partial，不发布缺取消条件的正文；旧显式指代与原8行搜索接口不放宽。此后正常commit/push与精确CI仍待本次发布。
+
 ## 2026-10-09：原三家封存，独立审查分批启动
 
 最新调度：CN storage已交7 findings（3P1/4P2）和原生event，第四独立analyst随即实际启动；HK/US storage待空槽followup。CN STORAGE-003确认Lam同行HTML已取得305877B却在导入失败后未持久化，既有财报原件仍可读；不能笼统断言所有下载原件保留。MAIN空间观察不再声明all_raw_retained；只声明该观察没有删/改原件。独占环境24.46MiB、完整审计记录30.85MiB分列，无整库克隆。

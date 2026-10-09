@@ -1,0 +1,91 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-selection-red-20261009-suyshvyr\\pytest", "requested_basetemp_len": 74, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261009-100606-cb33578d", "effective_basetemp_len": 75}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+collected 10 items
+
+tests\unit\test_fresh_selection_semantics.py FFFFFFFF.F                  [100%]
+
+================================== FAILURES ===================================
+_ test_native_scripts_have_equivalent_recall_but_keep_original_text[\u516c\u53f8\u65b0\u4ea7\u54c1\u5df2\u901a\u8fc7\u5ba2\u6237\u9a8c\u8bc1\uff0c\u5e76\u5df2\u8fdb\u5165\u6d77\u5916\u5e02\u573a\u91cf\u4ea7\u3002-\u516c\u53f8\u65b0\u7522\u54c1\u5df2\u901a\u904e\u5ba2\u6236\u9a57\u8b49\uff0c\u4e26\u5df2\u9032\u5165\u6d77\u5916\u5e02\u5834\u91cf\u7522\u3002] _
+tests\unit\test_fresh_selection_semantics.py:46: in test_native_scripts_have_equivalent_recall_but_keep_original_text
+    assert len(left.evidence_spans) == len(right.evidence_spans) == 1
+E   AssertionError: assert 1 == 0
+E    +  where 1 = len((EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:14b2439739d72492639c119943716c96c...ae8608e539d6e337def1449c61aed65c86916ee3ed3d8951d268', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=()),))
+E    +    where (EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:14b2439739d72492639c119943716c96c...ae8608e539d6e337def1449c61aed65c86916ee3ed3d8951d268', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=()),) = NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:2d3831dcaab5dd9079018f84d267d6c8adce4294c66e20342fc...it=96, candidate_count=1, dropped_financial_count=0, source_units=1, omitted_candidate_count=0, coverage_complete=True).evidence_spans
+E    +  and   0 = len(())
+E    +    where () = NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:0f845cb11e27d0c39147ca7985ddcbe102f8c18dfb24d06573a...it=96, candidate_count=0, dropped_financial_count=0, source_units=1, omitted_candidate_count=0, coverage_complete=True).evidence_spans
+_ test_native_scripts_have_equivalent_recall_but_keep_original_text[\u672c\u5e74\u5ea6\u6d77\u5916\u4e1a\u52a1\u6301\u7eed\u589e\u957f\uff0c\u65b0\u5ba2\u6237\u5df2\u7ecf\u5b8c\u6210\u4ea7\u54c1\u9a8c\u8bc1\u3002-\u672c\u5e74\u5ea6\u6d77\u5916\u696d\u52d9\u6301\u7e8c\u589e\u9577\uff0c\u65b0\u5ba2\u6236\u5df2\u7d93\u5b8c\u6210\u7522\u54c1\u9a57\u8b49\u3002] _
+tests\unit\test_fresh_selection_semantics.py:46: in test_native_scripts_have_equivalent_recall_but_keep_original_text
+    assert len(left.evidence_spans) == len(right.evidence_spans) == 1
+E   AssertionError: assert 1 == 0
+E    +  where 1 = len((EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:4a8246b9b86e210b19f9ebc1329c2ae15...a6e93136af000f4ed441fc5fba5553e8dbe34bd3643455846cfb', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=()),))
+E    +    where (EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:4a8246b9b86e210b19f9ebc1329c2ae15...a6e93136af000f4ed441fc5fba5553e8dbe34bd3643455846cfb', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=()),) = NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:60e379cb5a0b22a33b974e4dcf6b0fae3e7c538eaab1b431647...it=96, candidate_count=1, dropped_financial_count=0, source_units=1, omitted_candidate_count=0, coverage_complete=True).evidence_spans
+E    +  and   0 = len(())
+E    +    where () = NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:45716f2c47c5b758e6c3dc3fac2d367917bc5dbbf257f632267...it=96, candidate_count=0, dropped_financial_count=0, source_units=1, omitted_candidate_count=0, coverage_complete=True).evidence_spans
+_ test_native_scripts_have_equivalent_recall_but_keep_original_text[\u516c\u53f8\u751f\u4ea7\u7ebf\u4ea7\u80fd\u5229\u7528\u7387\u63d0\u5347\u81f385%\uff0c\u65b0\u4ea7\u7ebf\u5df2\u6295\u5165\u4f7f\u7528\u3002-\u516c\u53f8\u751f\u7522\u7dda\u7522\u80fd\u5229\u7528\u7387\u63d0\u5347\u81f385%\uff0c\u65b0\u7522\u7dda\u5df2\u6295\u5165\u4f7f\u7528\u3002] _
+tests\unit\test_fresh_selection_semantics.py:46: in test_native_scripts_have_equivalent_recall_but_keep_original_text
+    assert len(left.evidence_spans) == len(right.evidence_spans) == 1
+E   AssertionError: assert 1 == 0
+E    +  where 1 = len((EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:bb310e74b85ade143f9e91005eea918e4...bad0fdd2cf153ac4a1eb1396728b29d3f8f611f73069445120d8', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=()),))
+E    +    where (EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:bb310e74b85ade143f9e91005eea918e4...bad0fdd2cf153ac4a1eb1396728b29d3f8f611f73069445120d8', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=()),) = NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:7df300a981a6acea5cf7bd43f24a4b785c891e866fc0ff23e1a...it=96, candidate_count=1, dropped_financial_count=0, source_units=1, omitted_candidate_count=0, coverage_complete=True).evidence_spans
+E    +  and   0 = len(())
+E    +    where () = NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:ebc99cfb24c2fc82dabc8b20a1df7a256345fa1fd03cb36ac59...it=96, candidate_count=0, dropped_financial_count=0, source_units=1, omitted_candidate_count=0, coverage_complete=True).evidence_spans
+_ test_operating_metrics_are_business_narrative_without_industrial_keywords[\u672c\u5e74\u5ea6\u672c\u571f\u5e02\u5834\u904a\u6232\u7684\u65e5\u6d3b\u8e8d\u7528\u6236\u589e\u957718%\uff0c\u570b\u969b\u5e02\u5834\u4ed8\u8cbb\u7528\u6236\u589e\u52a0\u3002] _
+tests\unit\test_fresh_selection_semantics.py:61: in test_operating_metrics_are_business_narrative_without_industrial_keywords
+    assert len(package.evidence_spans) == 1
+E   AssertionError: assert 0 == 1
+E    +  where 0 = len(())
+E    +    where () = NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:d7fd97e304f3ecb689629401c7e1b1e76f7654a811668eafaec...it=96, candidate_count=0, dropped_financial_count=0, source_units=1, omitted_candidate_count=0, coverage_complete=True).evidence_spans
+_ test_operating_metrics_are_business_narrative_without_industrial_keywords[\u5831\u544a\u671f\u5167\u5ee3\u544a\u66dd\u5149\u6b21\u6578\u540c\u6bd4\u4e0a\u5347\uff0c\u5e73\u5747\u5ee3\u544a\u50f9\u683c\u589e\u9577\u5e36\u52d5\u71df\u92b7\u670d\u52d9\u767c\u5c55\u3002] _
+tests\unit\test_fresh_selection_semantics.py:61: in test_operating_metrics_are_business_narrative_without_industrial_keywords
+    assert len(package.evidence_spans) == 1
+E   AssertionError: assert 0 == 1
+E    +  where 0 = len(())
+E    +    where () = NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:f6eef3aed6a598618a5800ecb18333a392da3e6f195c2e30ae2...it=96, candidate_count=0, dropped_financial_count=0, source_units=1, omitted_candidate_count=0, coverage_complete=True).evidence_spans
+_ test_operating_metrics_are_business_narrative_without_industrial_keywords[During the quarter, advertising impressions increased 12% and average ad pricing rose 5%.] _
+tests\unit\test_fresh_selection_semantics.py:61: in test_operating_metrics_are_business_narrative_without_industrial_keywords
+    assert len(package.evidence_spans) == 1
+E   AssertionError: assert 0 == 1
+E    +  where 0 = len(())
+E    +    where () = NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:e8cb0108e778b775174fb0d715ef6f1328c0b9ae1f8c151af04...it=96, candidate_count=0, dropped_financial_count=0, source_units=1, omitted_candidate_count=0, coverage_complete=True).evidence_spans
+___ test_product_subject_repeat_order_and_quantity_are_one_atomic_statement ___
+tests\unit\test_fresh_selection_semantics.py:77: in test_product_subject_repeat_order_and_quantity_are_one_atomic_statement
+    assert len({spans[i].structured_value.get("selection_group_id") for i in (1, 2, 3)}) == 1
+E   AssertionError: assert 2 == 1
+E    +  where 2 = len({'urn:company-wiki:context-group:sha256:a85618bc3cde143d77084e247bc424f8f5601ce4e0f6a6208a3c202a32e17d4b:operating-fac... 'urn:company-wiki:context-group:sha256:a85618bc3cde143d77084e247bc424f8f5601ce4e0f6a6208a3c202a32e17d4b:sentence:1:3'})
+_______ test_ocr_short_segment_owner_stays_with_its_predicate_and_tail ________
+tests\unit\test_fresh_selection_semantics.py:87: in test_ocr_short_segment_owner_stays_with_its_predicate_and_tail
+    assert {span.coordinates.paragraph_index for span in package.evidence_spans} == {0, 1, 2}
+E   assert set() == {0, 1, 2}
+E     
+E     Extra items in the right set:
+E     0
+E     1
+E     2
+E     Use -v to get more diff
+_________ test_specific_supply_chain_risk_keeps_its_conditional_body __________
+tests\unit\test_fresh_selection_semantics.py:103: in test_specific_supply_chain_risk_keeps_its_conditional_body
+    assert any("若未来" in span.raw_text for span in package.evidence_spans)
+E   assert False
+E    +  where False = any(<generator object test_specific_supply_chain_risk_keeps_its_conditional_body.<locals>.<genexpr> at 0x000001E3130239F0>)
+============================== warnings summary ===============================
+..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/unit/test_fresh_selection_semantics.py::test_native_scripts_have_equivalent_recall_but_keep_original_text[\u516c\u53f8\u65b0\u4ea7\u54c1\u5df2\u901a\u8fc7\u5ba2\u6237\u9a8c\u8bc1\uff0c\u5e76\u5df2\u8fdb\u5165\u6d77\u5916\u5e02\u573a\u91cf\u4ea7\u3002-\u516c\u53f8\u65b0\u7522\u54c1\u5df2\u901a\u904e\u5ba2\u6236\u9a57\u8b49\uff0c\u4e26\u5df2\u9032\u5165\u6d77\u5916\u5e02\u5834\u91cf\u7522\u3002]
+FAILED tests/unit/test_fresh_selection_semantics.py::test_native_scripts_have_equivalent_recall_but_keep_original_text[\u672c\u5e74\u5ea6\u6d77\u5916\u4e1a\u52a1\u6301\u7eed\u589e\u957f\uff0c\u65b0\u5ba2\u6237\u5df2\u7ecf\u5b8c\u6210\u4ea7\u54c1\u9a8c\u8bc1\u3002-\u672c\u5e74\u5ea6\u6d77\u5916\u696d\u52d9\u6301\u7e8c\u589e\u9577\uff0c\u65b0\u5ba2\u6236\u5df2\u7d93\u5b8c\u6210\u7522\u54c1\u9a57\u8b49\u3002]
+FAILED tests/unit/test_fresh_selection_semantics.py::test_native_scripts_have_equivalent_recall_but_keep_original_text[\u516c\u53f8\u751f\u4ea7\u7ebf\u4ea7\u80fd\u5229\u7528\u7387\u63d0\u5347\u81f385%\uff0c\u65b0\u4ea7\u7ebf\u5df2\u6295\u5165\u4f7f\u7528\u3002-\u516c\u53f8\u751f\u7522\u7dda\u7522\u80fd\u5229\u7528\u7387\u63d0\u5347\u81f385%\uff0c\u65b0\u7522\u7dda\u5df2\u6295\u5165\u4f7f\u7528\u3002]
+FAILED tests/unit/test_fresh_selection_semantics.py::test_operating_metrics_are_business_narrative_without_industrial_keywords[\u672c\u5e74\u5ea6\u672c\u571f\u5e02\u5834\u904a\u6232\u7684\u65e5\u6d3b\u8e8d\u7528\u6236\u589e\u957718%\uff0c\u570b\u969b\u5e02\u5834\u4ed8\u8cbb\u7528\u6236\u589e\u52a0\u3002]
+FAILED tests/unit/test_fresh_selection_semantics.py::test_operating_metrics_are_business_narrative_without_industrial_keywords[\u5831\u544a\u671f\u5167\u5ee3\u544a\u66dd\u5149\u6b21\u6578\u540c\u6bd4\u4e0a\u5347\uff0c\u5e73\u5747\u5ee3\u544a\u50f9\u683c\u589e\u9577\u5e36\u52d5\u71df\u92b7\u670d\u52d9\u767c\u5c55\u3002]
+FAILED tests/unit/test_fresh_selection_semantics.py::test_operating_metrics_are_business_narrative_without_industrial_keywords[During the quarter, advertising impressions increased 12% and average ad pricing rose 5%.]
+FAILED tests/unit/test_fresh_selection_semantics.py::test_product_subject_repeat_order_and_quantity_are_one_atomic_statement
+FAILED tests/unit/test_fresh_selection_semantics.py::test_ocr_short_segment_owner_stays_with_its_predicate_and_tail
+FAILED tests/unit/test_fresh_selection_semantics.py::test_specific_supply_chain_risk_keeps_its_conditional_body
+=================== 9 failed, 1 passed, 1 warning in 0.81s ====================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261009-100606-cb33578d", "existed": true, "removed": true}

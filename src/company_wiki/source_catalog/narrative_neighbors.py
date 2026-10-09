@@ -19,6 +19,8 @@ from .narrative_document import NarrativeUnit
 
 TopicClassifier = Callable[[str], tuple[str, ...]]
 _NEVER = re.compile(r"(?!x)x")
+_REFERENTIAL_EVENT = re.compile(r"^(?:其中|上述|该(?:款|项|类|产品|设备)|其(?:中)?|这些|此(?:类|项)|"
+                                r"(?:this|these|it|they)\b)", re.IGNORECASE)
 
 
 def _no_topics(_text: str) -> tuple[str, ...]:
@@ -130,8 +132,11 @@ def _valid_previous(
         return False
     if not linkable(previous, event):
         return False
-    if is_ocr_unit(previous) and ends_sentence(previous.raw_text):
-        return False
+    if ends_sentence(previous.raw_text):
+        # A complete prior paragraph is useful only for an explicit reference,
+        # such as "其中" referring back to a named product list.
+        if is_ocr_unit(previous) or not _REFERENTIAL_EVENT.match(event.raw_text):
+            return False
     if not _subject_signal(previous, rules) or len(previous.raw_text) < 12:
         return False
     return not _match(rules.accounting_context, previous.raw_text)

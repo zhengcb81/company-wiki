@@ -90,6 +90,10 @@ def _status(
         return "selected" if structure.coverage_complete and omitted == 0 else "partial"
     if structure.errors:
         return "blocked"
+    if omitted:
+        # A quota that fits none of the complete groups is still partial
+        # processing, rather than absence of business narrative.
+        return "partial"
     if not structure.coverage_complete:
         return "needs_review"
     if structure.units and dropped_financial_count == len(structure.units):
@@ -105,6 +109,7 @@ def finalize_selection(
     group_ids: Mapping[str, str],
     heading_pattern: re.Pattern[str],
     dropped_financial_count: int,
+    excluded_context_unit_ids: frozenset[str] = frozenset(),
 ) -> NarrativeEvidencePackage:
     """Create the compact package after deterministic candidate enrichment.
 
@@ -113,7 +118,11 @@ def finalize_selection(
     both conservative deduplication and budget refusal stay visible instead of
     shrinking the counters after the fact.
     """
-    deduplicated = deduplicate_candidates(candidates, group_ids)
+    excluded_groups = {group_ids[uid] for uid in excluded_context_unit_ids if uid in group_ids}
+    complete = tuple(candidate for candidate in candidates
+                     if candidate.unit.unit_id not in excluded_context_unit_ids
+                     and group_ids.get(candidate.unit.unit_id) not in excluded_groups)
+    deduplicated = deduplicate_candidates(complete, group_ids)
     budget_items = tuple(
         _budget_item(candidate, deduplicated.group_ids, heading_pattern)
         for candidate in deduplicated.candidates

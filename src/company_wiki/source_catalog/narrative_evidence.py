@@ -31,6 +31,7 @@ from .narrative_group_candidates import (
     enrich_context_groups,
 )
 from .narrative_finalize import finalize_selection
+from .narrative_matching import matching_document, matching_text, original_candidates
 from .narrative_neighbors import NeighborRules, enrich_neighbor_context
 from .narrative_ocr_groups import build_ocr_context_groups
 from .narrative_pdf_groups import PdfGroupRules, build_pdf_context_groups
@@ -62,7 +63,7 @@ NARRATIVE_SELECTOR_NAME = "select_narrative_evidence"
 # and keeps unrecognized business documents reviewable. The version also pins
 # batch generation identity, so old selection results cannot be silently reused.
 # Parsing, source bytes and locator construction remain unchanged.
-NARRATIVE_SELECTOR_VERSION = "0.5.0"
+NARRATIVE_SELECTOR_VERSION = "0.6.0"
 _FINANCIAL_TERMS = re.compile(
     r"资产负债表|利润表|现金流量表|每股收益|归母净利润|营业收入|营业成本|"
     r"货币资金|应收账款|存货|固定资产|加权平均|基本每股|稀释每股|"
@@ -1358,6 +1359,7 @@ def _has_pdf_question(text: str, parser_version: str) -> bool:
 
 def _table_scan_signal(text: str, *, parser_version: str = NARRATIVE_PARSER_VERSION) -> bool:
     """Limit expensive table discovery to pages with specific business events."""
+    text = matching_text(text)
     if _has_pdf_question(text, parser_version) or _QA_ANSWER.search(text):
         return True
     topics = _topics(text)
@@ -1509,8 +1511,10 @@ def select_narrative_evidence(
     max_selected: int | None = None,
 ) -> NarrativeEvidencePackage:
     """Select compact narrative spans; incomplete scans can never auto-skip."""
+    original = parsed
+    parsed = matching_document(parsed)
     route = route_document(
-        title, existing_kind=existing_kind, max_selected=max_selected
+        matching_text(title), existing_kind=existing_kind, max_selected=max_selected
     )
     candidates, dropped_financial = _base_candidates(parsed)
     selection_group_ids: dict[str, str] = {}
@@ -1543,6 +1547,7 @@ def select_narrative_evidence(
             window_finder=_minimal_matching_unit_windows,
             project_heading=_PROJECT_SECTION_HEADING,
             business_heading=_BUSINESS_SECTION_HEADING,
+            heading_only=_HEADING_ONLY,
             high_value_event=_HIGH_VALUE_EVENT,
             positioning=_SPECIFIC_BUSINESS_POSITIONING,
             business_risk=_BUSINESS_RISK_SIGNAL,
@@ -1590,12 +1595,13 @@ def select_narrative_evidence(
         for candidate in projects.candidates if candidate.unit.unit_id not in previous_ids
     )
     return finalize_selection(
-        parsed,
+        original,
         route,
-        projects.candidates,
+        original_candidates(projects.candidates, original),
         group_ids=projects.group_ids,
         heading_pattern=_HEADING_ONLY,
         dropped_financial_count=dropped_financial,
+        excluded_context_unit_ids=enriched.excluded_context_unit_ids,
     )
 
 

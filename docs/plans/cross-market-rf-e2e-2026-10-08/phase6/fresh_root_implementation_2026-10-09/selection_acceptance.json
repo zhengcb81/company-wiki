@@ -1,0 +1,46 @@
+{
+  "at_utc": "2026-10-09T10:45:57.346069+00:00",
+  "status": "LOCAL_M2_ACCEPTED_PUBLICATION_M3_PENDING",
+  "roots": [
+    "RC05",
+    "RC06",
+    "RC26"
+  ],
+  "selector_version": "0.6.0",
+  "initial_red": {
+    "failed": 9,
+    "passed": 1,
+    "path": "selection_red.txt"
+  },
+  "review_red": {
+    "failed": 7,
+    "passed": 10,
+    "path": "selection_review_red.txt"
+  },
+  "final_review_red": {
+    "failed": 4,
+    "passed": 18,
+    "path": "selection_final_review_red.txt"
+  },
+  "concentrated_green": {
+    "passed": 191,
+    "seconds": 2.0,
+    "path": "selection_final_green.txt"
+  },
+  "independent_review": "selection_residual_acceptance.md",
+  "planned_test_path_change": "new responsibility module is tests/unit/test_fresh_selection_semantics.py so full unit CI always collects it",
+  "bounded_semantics": "Original eight-unit search completion API stays bounded; complete sentences use existing character limit and atomic quota; over-limit context is omitted whole, original candidate/omitted counts retained. Existing explicit product references remain allowed.",
+  "originals_and_config_changed": false,
+  "paid_provider_model_calls": 0,
+  "company_M3": "pending",
+  "installation_required": false,
+  "source_sha256": {
+    "src/company_wiki/source_catalog/narrative_matching.py": "d9eaa7235f82b8d6e555504be041d9a396cdef72883f3d87fcf8f1cd0a79e693",
+    "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": "f05f884167b1789a028b0628f1104f3d699059f658a60f6572fc8efa49950a9a",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "c2aa937dfafc690ef12704bc9413afc1c7aaa5f31054200aeaeae3f1035b5a4a",
+    "src/company_wiki/source_catalog/narrative_group_candidates.py": "cface6b409883958142aa1e3906c5d7abdcb1ea6e4a164a85491725a8ec5b04b",
+    "src/company_wiki/source_catalog/narrative_neighbors.py": "44fca7fd68a1c1365dbbc6c9700883a979f85bbfe4789236f19048fffcd6d09c",
+    "src/company_wiki/source_catalog/narrative_ocr_groups.py": "5078f6348d96ffb186e0bb3df9ac25ef93c153adfece98162f05df7fa586a93e",
+    "src/company_wiki/source_catalog/narrative_finalize.py": "c6840d8772681f88ba99207686dedad85a4d58615a36eb4b136a5bc1213b0916"
+  }
+}

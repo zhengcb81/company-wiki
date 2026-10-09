@@ -1,0 +1,39 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cws-jvqxhtzb", "requested_basetemp_len": 44, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+collected 187 items
+
+tests\unit\test_fresh_selection_semantics.py ..................          [  9%]
+tests\unit\test_n6_context_boundaries.py ...................             [ 19%]
+tests\unit\test_n6_candidate_main_boundaries.py .................        [ 28%]
+tests\unit\test_n6_candidate_recall.py ......                            [ 32%]
+tests\unit\test_n6_dedup_context_safety.py ...............               [ 40%]
+tests\unit\test_n6_group_dedup.py .................                      [ 49%]
+tests\unit\test_n6_budget_selection.py .........                         [ 54%]
+tests\unit\test_narrative_evidence.py .................................. [ 72%]
+...F........                                                             [ 78%]
+tests\unit\test_narrative_retrieval.py ............                      [ 85%]
+tests\unit\test_narrative_transport_contracts.py ....................... [ 97%]
+.....                                                                    [100%]
+
+================================== FAILURES ===================================
+______ test_adjacent_product_context_is_retained_for_a_validation_event _______
+tests\unit\test_narrative_evidence.py:1206: in test_adjacent_product_context_is_retained_for_a_validation_event
+    assert {span.coordinates.paragraph_index for span in package.evidence_spans} == {24, 25}
+E   assert {25} == {24, 25}
+E     
+E     Extra items in the right set:
+E     24
+E     Use -v to get more diff
+============================== warnings summary ===============================
+..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_evidence.py::test_adjacent_product_context_is_retained_for_a_validation_event
+================== 1 failed, 186 passed, 1 warning in 1.96s ===================
