@@ -10,9 +10,9 @@ Public entry points (frozen by the R6-FORMAT construction card):
 >>> text = replay_unit(html_bytes, source_sha256=...,
 ...                    unit=doc.units[0], limits=limits)
 
-The layer is pure parsing and replay: no network, no models, no database,
-no durable full-text or per-page image artifacts.  Opaque assets carry byte
-identity (images also in-memory bytes for MAIN's budgeted model work).
+Default parsing and replay are pure. Explicit CPU local OCR enriches image
+evidence in memory, with no network, downloads, database or durable full-text
+or per-page image artifacts. Opaque image assets keep their byte identity.
 """
 
 from __future__ import annotations
@@ -30,15 +30,26 @@ from .errors import (
 from .html_parser import SUPPORTED_MIME_TYPES as _HTML_MIME_TYPES
 from .html_parser import parse_html
 from .limits import DEFAULT_LIMITS, MAX_ZIP_MEMBERS, NormalizationLimits
+from .local_ocr import (
+    LocalOCRAdapter,
+    LocalOCRConfig,
+    LocalOCRError,
+    OCRLimits,
+    OCRModelFile,
+    OCRLine,
+    ImageOCRResult,
+)
 from .pptx_parser import SUPPORTED_MIME_TYPES as _PPTX_MIME_TYPES
 from .pptx_parser import parse_pptx
-from .replay import replay_unit
+from .replay import replay_unit, replay_units, replay_evidence_spans
 from .units import (
     FORMAT_HTML,
     FORMAT_PPTX,
     NORMALIZATION_SCHEMA,
     PARSER_NAME,
     PARSER_VERSION,
+    PPTX_PARSER_VERSION,
+    PPTX_OCR_PARSER_VERSION,
 )
 
 __all__ = [
@@ -52,6 +63,13 @@ __all__ = [
     "NormalizationLimitError",
     "NormalizationLimits",
     "NormalizedDocument",
+    "LocalOCRAdapter",
+    "LocalOCRConfig",
+    "LocalOCRError",
+    "OCRLimits",
+    "OCRModelFile",
+    "OCRLine",
+    "ImageOCRResult",
     "OpaqueAsset",
     "PARSER_NAME",
     "PARSER_VERSION",
@@ -59,6 +77,11 @@ __all__ = [
     "UnsupportedFormatError",
     "normalize_document",
     "replay_unit",
+    "replay_units",
+    "replay_evidence_spans",
+    "normalization_identity",
+    "PPTX_PARSER_VERSION",
+    "PPTX_OCR_PARSER_VERSION",
 ]
 
 
@@ -69,6 +92,9 @@ def normalize_document(
     source_sha256: str,
     mime_type: str,
     limits: NormalizationLimits | None = None,
+    parser_version: str | None = None,
+    ocr=None,
+    ocr_limits=None,
 ) -> NormalizedDocument:
     """Normalize one verified source document from its actual bytes."""
     if not isinstance(original, bytes):
@@ -89,6 +115,8 @@ def normalize_document(
         )
     mime_main = mime_type.split(";")[0].strip().lower()
     if mime_main in _HTML_MIME_TYPES:
+        if parser_version not in {None, PARSER_VERSION}:
+            raise ValueError("unsupported HTML parser_version")
         return parse_html(
             original,
             source_id=source_id,
@@ -97,14 +125,59 @@ def normalize_document(
             limits=limits,
         )
     if mime_main in _PPTX_MIME_TYPES:
-        return parse_pptx(
+        version = (
+            parser_version
+            if parser_version is not None
+            else (PPTX_OCR_PARSER_VERSION if ocr is not None else PPTX_PARSER_VERSION)
+        )
+        if version == PPTX_OCR_PARSER_VERSION and ocr is None:
+            from .local_ocr import LocalOCRError
+
+            raise LocalOCRError("OCR_ADAPTER_REQUIRED")
+        if ocr is not None and version != PPTX_OCR_PARSER_VERSION:
+            raise ValueError("OCR requires PPTX parser_version 2.0.0")
+        document = parse_pptx(
             original,
             source_id=source_id,
             source_sha256=source_sha256,
             mime_type=mime_type,
             limits=limits,
+            parser_version=PPTX_PARSER_VERSION
+            if version == PPTX_OCR_PARSER_VERSION
+            else version,
         )
+        if version == PPTX_OCR_PARSER_VERSION:
+            from .ocr_composition import enrich_pptx
+
+            return enrich_pptx(document, ocr=ocr, limits=limits, ocr_limits=ocr_limits)
+        return document
     raise UnsupportedFormatError(
         f"unsupported mime_type {mime_type!r}; supported: "
         f"{sorted(_HTML_MIME_TYPES | _PPTX_MIME_TYPES)}"
     )
+
+
+def normalization_identity(mime_type: str, *, ocr=None) -> dict:
+    """Pathless derivation identity for MAIN's batch/artifact generation manifest."""
+    mime_main = mime_type.split(";")[0].strip().lower()
+    if mime_main in _HTML_MIME_TYPES:
+        return {
+            "parser_name": PARSER_NAME,
+            "parser_version": PARSER_VERSION,
+            "format": "html",
+        }
+    if mime_main not in _PPTX_MIME_TYPES:
+        raise UnsupportedFormatError("unsupported normalization MIME")
+    identity = {
+        "parser_name": PARSER_NAME,
+        "parser_version": PPTX_OCR_PARSER_VERSION
+        if ocr is not None
+        else PPTX_PARSER_VERSION,
+        "format": "pptx",
+    }
+    if ocr is not None:
+        from .ocr_composition import adapter_identity
+
+        manifest, fingerprint = adapter_identity(ocr)
+        identity.update(ocr_identity=manifest, ocr_fingerprint=fingerprint)
+    return identity

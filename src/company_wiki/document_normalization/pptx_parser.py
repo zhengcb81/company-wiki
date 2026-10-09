@@ -1,9 +1,10 @@
 """Deterministic PPTX normalization with versioned shape-path locators.
 
-Locator schema ``cwp-pptx-shape/1``:
-``cwp-pptx-shape/1|s=<slide>|p=<shape path>[|c=<cell r,c>|par=<i>][|m=<media sha>...]``.
+Current locator schema ``cwp-pptx-shape/2`` (parser 1.1.0):
+``cwp-pptx-shape/2|s=<slide>|p=<shape path>[|c=<cell r,c>|par=<i>][|m=<media sha>...]``.
 
-Slides are 1-based; the shape path counts nested shape indexes per container
+Current slides use 1-based display ordinals; the frozen 1.0.0/shape/1
+replay branch retains OOXML slide IDs. The shape path counts nested shape indexes per container
 (slide, then group members) 0-based, dot-separated.  Table cells add ``c=r,c``
 (0-based row/column); paragraph text bodies add ``par=<i>`` per paragraph.
 Media referenced by a shape appends each verified media SHA (verified against
@@ -44,6 +45,8 @@ from .text import normalize_text
 from .units import (
     FORMAT_PPTX,
     PPTX_LOCATOR_SCHEMA,
+    LEGACY_PPTX_LOCATOR_SCHEMA,
+    PPTX_PARSER_VERSION,
     build_unit,
 )
 
@@ -148,9 +151,7 @@ class _ZipPreflight:
                     # read below; the archive itself is already in memory.
                     pass
                 with package.open(info, "r") as stream:
-                    payload = stream.read(
-                        declared + 1 if declared else 1
-                    )
+                    payload = stream.read(declared + 1 if declared else 1)
                 if len(payload) != declared:  # pragma: no cover - zip invariant
                     self.traversal_names.append(name)
                     continue
@@ -169,7 +170,15 @@ class _PptxState:
         source_id: str,
         source_sha256: str,
         limits: NormalizationLimits,
+        parser_version: str = PPTX_PARSER_VERSION,
     ) -> None:
+        self.parser_version = parser_version
+        self.locator_schema = (
+            LEGACY_PPTX_LOCATOR_SCHEMA
+            if parser_version == "1.0.0"
+            else PPTX_LOCATOR_SCHEMA
+        )
+        self.slide_ids: dict[int, int] = {}
         self.source_id = source_id
         self.source_sha256 = source_sha256
         self.limits = limits
@@ -184,12 +193,18 @@ class _PptxState:
         # shape relationship: registered at the end as named package gaps.
         self.package_media: dict[str, str] = {}
 
+    def build_unit(self, **kwargs):
+        return build_unit(parser_version=self.parser_version, **kwargs)
+
+    def slide_metadata(self, page: int) -> dict[str, int]:
+        return (
+            {} if self.parser_version == "1.0.0" else {"slide_id": self.slide_ids[page]}
+        )
+
     def check_deadline(self, where: str) -> None:
         self.limits.check_deadline(f"pptx:{where}")
 
-    def register_media(
-        self, part_name: str, data: bytes
-    ) -> tuple[str, int]:
+    def register_media(self, part_name: str, data: bytes) -> tuple[str, int]:
         normalized = posixpath.normpath(part_name.replace("\\", "/")).lstrip("/")
         entry = self.media_index.get(normalized)
         if entry is not None:
@@ -305,9 +320,7 @@ def _resolve_media_by_rIds(
         except Exception:
             target_ref = None
         if is_external or target is None:
-            state.errors.append(
-                f"{where}:external_media:{target_ref or r_id}"
-            )
+            state.errors.append(f"{where}:external_media:{target_ref or r_id}")
             _register_media_asset(
                 state,
                 slide_number,
@@ -360,11 +373,7 @@ def _register_media_asset(
         state.assets.append(asset)
         return
     kind = "image" if is_image else "media"
-    gap = (
-        GAP_IMAGE_BYTES_ONLY
-        if is_image
-        else GAP_BROKEN_PART
-    )
+    gap = GAP_IMAGE_BYTES_ONLY if is_image else GAP_BROKEN_PART
     asset = OpaqueAsset(
         asset_kind=kind,
         slide_number=slide_number,
@@ -377,6 +386,8 @@ def _register_media_asset(
     )
     state.assets.append(asset)
     state.package_media.pop(normalized, None)
+
+
 def _walk_shape(
     shape: Any,
     state: _PptxState,
@@ -451,11 +462,11 @@ def _walk_shape(
                     )
                 state.text_bytes += text_bytes
                 locator = (
-                    f"{PPTX_LOCATOR_SCHEMA}|s={slide_number}"
+                    f"{state.locator_schema}|s={slide_number}"
                     f"|p={_shape_path_string(path)}|c={row_index},{column_index}"
                 )
                 state.units.append(
-                    build_unit(
+                    state.build_unit(
                         source_id=state.source_id,
                         source_sha256=state.source_sha256,
                         format_name=FORMAT_PPTX,
@@ -471,6 +482,7 @@ def _walk_shape(
                         transform=TRANSFORM,
                         extra_metadata={
                             "slide_number": slide_number,
+                            **state.slide_metadata(slide_number),
                             "shape_path": _shape_path_string(path),
                             "row_index": row_index,
                             "column_index": column_index,
@@ -487,9 +499,7 @@ def _walk_shape(
     if element is not None:
         r_ids = _iter_embedded_rIds(element)
     if is_picture or r_ids:
-        resolved = _resolve_media_by_rIds(
-            slide_part, r_ids, state, slide_number, path
-        )
+        resolved = _resolve_media_by_rIds(slide_part, r_ids, state, slide_number, path)
         for part_name, digest, size in resolved:
             data = preflight.read_part(part_name) if preflight is not None else None
             _register_media_asset(
@@ -519,11 +529,11 @@ def _walk_shape(
             )
         state.text_bytes += text_bytes
         locator = (
-            f"{PPTX_LOCATOR_SCHEMA}|s={slide_number}"
+            f"{state.locator_schema}|s={slide_number}"
             f"|p={_shape_path_string(path)}|par={paragraph_index}"
         )
         state.units.append(
-            build_unit(
+            state.build_unit(
                 source_id=state.source_id,
                 source_sha256=state.source_sha256,
                 format_name=FORMAT_PPTX,
@@ -536,6 +546,7 @@ def _walk_shape(
                 transform=TRANSFORM,
                 extra_metadata={
                     "slide_number": slide_number,
+                    **state.slide_metadata(slide_number),
                     "shape_path": _shape_path_string(path),
                     "paragraph_index": paragraph_index,
                 },
@@ -562,10 +573,7 @@ def _walk_slide(
                         "max_units", state.limits.max_units, "pptx notes"
                     )
                 text_bytes = len(text.encode("utf-8"))
-                if (
-                    state.text_bytes + text_bytes
-                    > state.limits.max_text_output_bytes
-                ):
+                if state.text_bytes + text_bytes > state.limits.max_text_output_bytes:
                     raise NormalizationLimitError(
                         "max_text_output_bytes",
                         state.limits.max_text_output_bytes,
@@ -573,11 +581,11 @@ def _walk_slide(
                     )
                 state.text_bytes += text_bytes
                 locator = (
-                    f"{PPTX_LOCATOR_SCHEMA}|s={slide_number}"
+                    f"{state.locator_schema}|s={slide_number}"
                     f"|notes=1|par={paragraph_index}"
                 )
                 state.units.append(
-                    build_unit(
+                    state.build_unit(
                         source_id=state.source_id,
                         source_sha256=state.source_sha256,
                         format_name=FORMAT_PPTX,
@@ -591,6 +599,7 @@ def _walk_slide(
                         transform=TRANSFORM,
                         extra_metadata={
                             "slide_number": slide_number,
+                            **state.slide_metadata(slide_number),
                             "notes": True,
                             "paragraph_index": paragraph_index,
                         },
@@ -605,8 +614,11 @@ def parse_pptx(
     source_sha256: str,
     mime_type: str,
     limits: NormalizationLimits,
+    parser_version: str = PPTX_PARSER_VERSION,
 ) -> NormalizedDocument:
     """Normalize one verified PPTX package into narrative units."""
+    if parser_version not in {"1.0.0", PPTX_PARSER_VERSION}:
+        raise ValueError("unsupported pure PPTX parser_version")
     if hashlib.sha256(data).hexdigest() != source_sha256:
         raise ValueError("PPTX bytes do not match source_sha256")
     mime_main = mime_type.split(";")[0].strip().lower()
@@ -619,15 +631,15 @@ def parse_pptx(
             )
     if preflight.traversal_names:
         state = _PptxState(
-            source_id=source_id, source_sha256=source_sha256, limits=limits
+            source_id=source_id,
+            source_sha256=source_sha256,
+            limits=limits,
+            parser_version=parser_version,
         )
         state.errors.append(
-            "zip_traversal:"
-            + ",".join(sorted(preflight.traversal_names))[:200]
+            "zip_traversal:" + ",".join(sorted(preflight.traversal_names))[:200]
         )
-        return _result(
-            state, preflight, page_count=0, format_mime=mime_main
-        )
+        return _result(state, preflight, page_count=0, format_mime=mime_main)
     _pptx_module()
     try:
         from pptx import Presentation
@@ -635,13 +647,19 @@ def parse_pptx(
         package = Presentation(io.BytesIO(data))
     except Exception as exc:
         state = _PptxState(
-            source_id=source_id, source_sha256=source_sha256, limits=limits
+            source_id=source_id,
+            source_sha256=source_sha256,
+            limits=limits,
+            parser_version=parser_version,
         )
         state.errors.append(f"package_open:{type(exc).__name__}")
         return _result(state, preflight, page_count=0, format_mime=mime_main)
     slides = package.slides
     state = _PptxState(
-        source_id=source_id, source_sha256=source_sha256, limits=limits
+        source_id=source_id,
+        source_sha256=source_sha256,
+        limits=limits,
+        parser_version=parser_version,
     )
     state.preflight = preflight  # type: ignore[attr-defined]
     # Seed package media inventory from the preflight scan up front; shape
@@ -659,9 +677,10 @@ def parse_pptx(
             "max_pages", limits.max_pages, f"{page_count} slides"
         )
     slide_numbers_seen: set[int] = set()
-    for slide in slides:
+    for ordinal, slide in enumerate(slides, start=1):
         limits.check_deadline("slide")
-        slide_number = slide.slide_id
+        slide_number = slide.slide_id if parser_version == "1.0.0" else ordinal
+        state.slide_ids[slide_number] = slide.slide_id
         state.pages_read += 1
         slide_numbers_seen.add(slide_number)
         units_before = len(state.units)
@@ -670,17 +689,13 @@ def parse_pptx(
         except NormalizationLimitError:
             raise
         except Exception as exc:
-            state.errors.append(
-                f"slide{slide_number}:{type(exc).__name__}"
-            )
+            state.errors.append(f"slide{slide_number}:{type(exc).__name__}")
         if len(state.units) == units_before:
             # A slide with no text units is honestly partial: image-only or
             # broken.  Its assets already name the gap; the slide also joins
             # opaque_pages so coverage_complete stays False.
             state.opaque_pages.append(slide_number)
-            if not any(
-                asset.slide_number == slide_number for asset in state.assets
-            ):
+            if not any(asset.slide_number == slide_number for asset in state.assets):
                 state.assets.append(
                     OpaqueAsset(
                         asset_kind="unknown",
@@ -741,13 +756,18 @@ def _result(
             for name, (digest, size) in sorted(state.media_index.items())
         },
         "declared_mime_type": format_mime,
+        **(
+            {}
+            if state.parser_version == "1.0.0"
+            else {"slide_ids": dict(state.slide_ids)}
+        ),
     }
     return NormalizedDocument(
         source_id=state.source_id,
         source_sha256=state.source_sha256,
         format_name=FORMAT_PPTX,
         parser_name="cwp_document_normalization",
-        parser_version="1.0.0",
+        parser_version=state.parser_version,
         structure=structure,
         opaque_assets=tuple(state.assets),
         metadata=metadata,

@@ -35,7 +35,7 @@ class TestTextShapes:
         assert paragraphs[0].raw_text == "Segment revenue grew 18% in FY2025"
         for unit in paragraphs:
             locator = unit.metadata["source_locator"]
-            assert locator.startswith("cwp-pptx-shape/1|s=")
+            assert locator.startswith("cwp-pptx-shape/2|s=")
             assert "|p=0|" in locator
             assert isinstance(unit.metadata["slide_number"], int)
 
