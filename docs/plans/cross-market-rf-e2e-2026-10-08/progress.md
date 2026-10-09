@@ -324,3 +324,9 @@ ET131PASS/66.70秒（MAIN_GREEN），五种actual supervisor/worker/mock-HTTP CL
 ETmain f4f2eca、FFmain59c4d0d已推，FF59c4d0d精确CI37878099537 success；FF runtime仅1文件同步两物理安装target、2保护config/output SHA不变。CWP c54962f2已推且精确CI37878152859 success，W03并线HEADf788a07a完成。合并后W03实际责任113PASS/33.14秒，三格式public import/finite/read/reuse；main FF→ETcanonical→CWP18检查点PASS/16.18秒。独立TEMP及生产配置均保持。
 
 RF W04功能及HTML消费已提交隔离支线，W05正在实现，不冒称整个RF或主线完成。跨run重POST共因查明，已写main_cross_run_narrative_reuse.md并复用W03 clean工作树从master建立新分支。离线OCR调查已证明RapidOCR本地模型可运行且单页主要文字准确，全22页正文/版本化locator仍待施工，不把封面成功叫图片功能已验收。
+
+## 2026-10-09T03:26Z — 主线顺序与OCR实施启动
+
+CWP f788a07a官方资料功能合并及964886f8协调文档已推master，精确CI37879066572 success。ET/FF W02已并线；审计技能工程61cfeff提交当前协调计划，无remote，未伪称推送。RF W04/W05及合法非财报null followup已提交支线，W06继续；跨run复用和本机OCR分别独占干净工作树，MAIN接共享接口。纯工程仍0新供应商模型/费用。
+
+工具环境记录：gh不在PATH，改用GitHub只读API查询精确SHA并留official_source_push_ci.json；错误CodeGraph node参数在已定位文件上下文中未影响实现。误猜config/worker_profiles.yaml不存在，后续先rg实际配置路径。不将这些工具错误当产品RED。主线PWF当前入口和清单已去掉“已完成但仍未提交”的过时描述。

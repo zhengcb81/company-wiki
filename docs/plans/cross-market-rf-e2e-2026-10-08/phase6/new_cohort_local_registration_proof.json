@@ -1,0 +1,87 @@
+{
+  "checked_at": "2026-10-09T03:35:08.385943+00:00",
+  "purpose": "isolated_explicit_existing_source_registration",
+  "register_exit": 0,
+  "register": {
+    "dry_run": false,
+    "error_details": [],
+    "errors": 0,
+    "files_excluded": 0,
+    "files_hashed": 2,
+    "files_reused": 0,
+    "files_seen": 2,
+    "known_quarantined": 0,
+    "locations_active": 2,
+    "locations_missing": 0,
+    "new_errors": 0,
+    "policy_excluded": 0,
+    "run_id": "scan-97e1dc4921fe470592f82a857f0d8d07",
+    "strategy": {
+      "company_raw": "legacy"
+    }
+  },
+  "query_exit": 0,
+  "query": {
+    "candidates": [
+      {
+        "byte_size": 2070073,
+        "canonical_entity_id": null,
+        "capture_provenance": "indexed_location_manifest",
+        "capture_ready": true,
+        "collector_name": "stockinfo-cninfo",
+        "collector_version": "1.1.0",
+        "display_name": null,
+        "document_id": "urn:company-wiki:document:sha256:b4f1713d7b821eb076c102711d177fe942ccc2bc8dd171ae5d7a95799a65b0ad",
+        "document_kind": "annual_report",
+        "fiscal_period": "FY",
+        "fiscal_year": 2024,
+        "form_type": "annual_report",
+        "https_url": "https://www.cninfo.com.cn/new/disclosure/detail?stockCode=300750&announcementId=1222806982&announcementTime=2025-03-14%2016:00",
+        "language": "zh-CN",
+        "market": null,
+        "mime_type": "application/pdf",
+        "period_end": null,
+        "prompt_injection_status": "not_reviewed",
+        "provider": "cninfo",
+        "provider_document_id": "1222806982",
+        "published_date": "2025-03-14",
+        "retrieved_at": "2026-08-01T09:10:12Z",
+        "security_id": "300750",
+        "snapshot_sha256": "b4f1713d7b821eb076c102711d177fe942ccc2bc8dd171ae5d7a95799a65b0ad",
+        "source_id": "urn:company-wiki:source:sha256:b4f1713d7b821eb076c102711d177fe942ccc2bc8dd171ae5d7a95799a65b0ad",
+        "source_ref": {
+          "byte_size": 2070073,
+          "content_sha256": "b4f1713d7b821eb076c102711d177fe942ccc2bc8dd171ae5d7a95799a65b0ad",
+          "document_id": "urn:company-wiki:document:sha256:b4f1713d7b821eb076c102711d177fe942ccc2bc8dd171ae5d7a95799a65b0ad",
+          "mime_type": "application/pdf",
+          "schema_version": "2.0",
+          "source_id": "urn:company-wiki:source:sha256:b4f1713d7b821eb076c102711d177fe942ccc2bc8dd171ae5d7a95799a65b0ad"
+        },
+        "title": "2024年年度报告"
+      }
+    ],
+    "matches": [
+      {
+        "byte_size": 2070073,
+        "content_sha256": "b4f1713d7b821eb076c102711d177fe942ccc2bc8dd171ae5d7a95799a65b0ad",
+        "document_id": "urn:company-wiki:document:sha256:b4f1713d7b821eb076c102711d177fe942ccc2bc8dd171ae5d7a95799a65b0ad",
+        "mime_type": "application/pdf",
+        "schema_version": "2.0",
+        "source_id": "urn:company-wiki:source:sha256:b4f1713d7b821eb076c102711d177fe942ccc2bc8dd171ae5d7a95799a65b0ad"
+      }
+    ],
+    "reason": "one_local_match",
+    "request_id": "urn:company-wiki:source-request:sha256:d71bd648b2d2abce179b6f6bb53ed21a0dd6a5b6191e46cb6b0ace51a055109e",
+    "schema_version": "2.0",
+    "source_read_policy_sha256": "cb15eacb11b36e78590e151d52e065fc45d56b5226cb3ff2f02f6f4922561a5f",
+    "status": "found"
+  },
+  "seconds": 1.4922126000165008,
+  "original_sha": "b4f1713d7b821eb076c102711d177fe942ccc2bc8dd171ae5d7a95799a65b0ad",
+  "original_size": 2070073,
+  "downloads": 0,
+  "model_calls": 0,
+  "production_index_written": false,
+  "original_unchanged": true,
+  "temporary_root_restored_absent": true
+}

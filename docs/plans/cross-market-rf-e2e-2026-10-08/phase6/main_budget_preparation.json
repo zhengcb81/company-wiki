@@ -1,0 +1,60 @@
+{
+  "checked_at": "2026-10-09T03:32:00.071047+00:00",
+  "read_only": true,
+  "tables": {
+    "narrative_runs": [
+      "run_id",
+      "input_hash",
+      "scope_sha256",
+      "model_id",
+      "prompt_version",
+      "pricing_version",
+      "input_micro_usd_per_million_tokens",
+      "output_micro_usd_per_million_tokens",
+      "max_tokens",
+      "max_micro_usd",
+      "max_output_bytes",
+      "state",
+      "block_reason",
+      "created_at",
+      "updated_at",
+      "last_runtime_generation",
+      "binding_json"
+    ],
+    "narrative_run_jobs": [
+      "run_id",
+      "job_id",
+      "input_hash",
+      "handler_version"
+    ],
+    "narrative_model_reservations": [
+      "attempt_id",
+      "run_id",
+      "job_id",
+      "request_sha256",
+      "input_tokens_bound",
+      "max_output_tokens",
+      "output_bytes_bound",
+      "reserved_micro_usd",
+      "usage_status",
+      "input_tokens",
+      "output_tokens",
+      "estimated_micro_usd",
+      "response_sha256",
+      "error_code",
+      "output_bytes",
+      "output_sha256",
+      "reserved_at",
+      "usage_settled_at",
+      "output_settled_at"
+    ]
+  },
+  "narrative_runs": [
+    {
+      "run_id": "r3-20261008-production-deepseek-01",
+      "max_tokens": 19193,
+      "max_micro_usd": 14591,
+      "state": "open"
+    }
+  ]
+}

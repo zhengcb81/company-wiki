@@ -172,3 +172,14 @@ ET W02已有128责任测试及实际supervisor/worker五种离线CLI证据，但
 ## W02集成发现的共享根因（2026-10-09）
 
 原始provider数据不能被要求与本项目的固定字段枚举完全相等。原件附加metadata应保存但不成为许可；必要身份/期间/内容及hash核对保持。ET执行已完成后CWP写/读失败不能抹掉实际供应商receipt、更不能退回不明retryable错误而触发重复下载。两机制已通过独立责任RED与真实三仓CLI验证；账户FMP entitlement与publication unknown仍如实保留。本节点是工程，不代替原/新三家公司独立研究验收。
+
+## 2026-10-09 主线恢复：OCR与新样本准备
+
+本机OCR调查已证实 RapidOCR/ONNX 三模型可离线加载，一页封面0外发；底部小字漏识，正文和22页整体仍未验收。PPTX旧parser将OOXML内部slide_id作页码，现独立包负责版本化ordinal与旧locator。施工卡phase6/main_local_pptx_ocr.md已明确本机模型SHA、限额、真正文对照、多span一次回放与无持久全页副本；batch/缓存共享接线由MAIN负责。
+
+第二组仅做候选准备，尚未选定或执行：官方CATL页面确认2025年报及海外/储能经营描述；吉利官方资料页列2026中期与2025年报；SEC公开Costco FY2026 10-K。业务形态与原中微/腾讯/微软不同，仍须核实当前CWP原件存在性和身份再固定，不能把网页搜索算provider下载成功。官方链接：
+- https://www.catl.com/en/news/6773.html
+- https://www.geelyauto.com.hk/financial-documents/
+- https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/cost-20260830.htm
+
+这些只证明资料可发现；金额/假设oracle在独立执行/审查实读全文建立。未引用非官方搜索结果，未复制完整网页进PWF。

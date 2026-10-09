@@ -1,0 +1,296 @@
+{
+  "checked_at": "2026-10-09T03:28:41.802691+00:00",
+  "purpose": "preparation_only_not_selection_or_execution",
+  "raw_changes": 0,
+  "downloads": 0,
+  "supplier_model_calls": 0,
+  "rows": [
+    {
+      "query": "300750",
+      "market": "CN",
+      "identity": {
+        "schema_version": "1.0",
+        "query": "300750",
+        "normalized_query": "300750",
+        "market_hint": "CN",
+        "exchange_hint": null,
+        "status": "resolved",
+        "reason": "one_verified_exact_identity",
+        "resolved": {
+          "canonical_name": "宁德时代",
+          "market": "CN",
+          "exchange": "SZSE",
+          "ticker": "300750",
+          "security_id": "300750",
+          "match_basis": "ticker_exact",
+          "matched_value": "300750",
+          "score": 1.0,
+          "verified": true,
+          "active": true,
+          "source_name": "cninfo",
+          "source_url": "https://www.cninfo.com.cn/new/data/szse_stock.json",
+          "source_record_id": "GD165627",
+          "identifiers": {
+            "cninfo_category": "A股",
+            "org_id": "GD165627"
+          }
+        },
+        "candidates": [
+          {
+            "canonical_name": "宁德时代",
+            "market": "CN",
+            "exchange": "SZSE",
+            "ticker": "300750",
+            "security_id": "300750",
+            "match_basis": "ticker_exact",
+            "matched_value": "300750",
+            "score": 1.0,
+            "verified": true,
+            "active": true,
+            "source_name": "cninfo",
+            "source_url": "https://www.cninfo.com.cn/new/data/szse_stock.json",
+            "source_record_id": "GD165627",
+            "identifiers": {
+              "cninfo_category": "A股",
+              "org_id": "GD165627"
+            }
+          }
+        ]
+      },
+      "queries": [
+        {
+          "request": {
+            "entity": "宁德时代",
+            "market": "CN",
+            "security_id": "300750",
+            "document_kind": "annual_report",
+            "as_of_date": "2026-10-09"
+          },
+          "exit_code": 0,
+          "status": "not_found",
+          "reason": "no_local_match",
+          "matches_count": 0,
+          "candidates": []
+        },
+        {
+          "request": {
+            "entity": "宁德时代",
+            "market": "CN",
+            "security_id": "300750",
+            "document_kind": "semi_annual_report",
+            "as_of_date": "2026-10-09"
+          },
+          "exit_code": 0,
+          "status": "not_found",
+          "reason": "no_local_match",
+          "matches_count": 0,
+          "candidates": []
+        },
+        {
+          "request": {
+            "entity": "宁德时代",
+            "market": "CN",
+            "security_id": "300750",
+            "document_kind": "quarterly_report",
+            "as_of_date": "2026-10-09"
+          },
+          "exit_code": 0,
+          "status": "not_found",
+          "reason": "no_local_match",
+          "matches_count": 0,
+          "candidates": []
+        }
+      ]
+    },
+    {
+      "query": "00175",
+      "market": "HK",
+      "identity": {
+        "schema_version": "1.0",
+        "query": "00175",
+        "normalized_query": "00175",
+        "market_hint": "HK",
+        "exchange_hint": null,
+        "status": "resolved",
+        "reason": "one_verified_exact_identity",
+        "resolved": {
+          "canonical_name": "吉利汽車",
+          "market": "HK",
+          "exchange": "HKEX",
+          "ticker": "00175",
+          "security_id": "00175",
+          "match_basis": "ticker_exact",
+          "matched_value": "00175",
+          "score": 1.0,
+          "verified": true,
+          "active": true,
+          "source_name": "hkex",
+          "source_url": "https://www1.hkexnews.hk/ncms/script/eds/activestock_sehk_c.json",
+          "source_record_id": "5177",
+          "identifiers": {
+            "hkex_stock_id": "5177"
+          }
+        },
+        "candidates": [
+          {
+            "canonical_name": "吉利汽車",
+            "market": "HK",
+            "exchange": "HKEX",
+            "ticker": "00175",
+            "security_id": "00175",
+            "match_basis": "ticker_exact",
+            "matched_value": "00175",
+            "score": 1.0,
+            "verified": true,
+            "active": true,
+            "source_name": "hkex",
+            "source_url": "https://www1.hkexnews.hk/ncms/script/eds/activestock_sehk_c.json",
+            "source_record_id": "5177",
+            "identifiers": {
+              "hkex_stock_id": "5177"
+            }
+          }
+        ]
+      },
+      "queries": [
+        {
+          "request": {
+            "entity": "吉利汽車",
+            "market": "HK",
+            "security_id": "00175",
+            "document_kind": "annual_report",
+            "as_of_date": "2026-10-09"
+          },
+          "exit_code": 0,
+          "status": "not_found",
+          "reason": "no_local_match",
+          "matches_count": 0,
+          "candidates": []
+        },
+        {
+          "request": {
+            "entity": "吉利汽車",
+            "market": "HK",
+            "security_id": "00175",
+            "document_kind": "semi_annual_report",
+            "as_of_date": "2026-10-09"
+          },
+          "exit_code": 0,
+          "status": "not_found",
+          "reason": "no_local_match",
+          "matches_count": 0,
+          "candidates": []
+        },
+        {
+          "request": {
+            "entity": "吉利汽車",
+            "market": "HK",
+            "security_id": "00175",
+            "document_kind": "quarterly_report",
+            "as_of_date": "2026-10-09"
+          },
+          "exit_code": 0,
+          "status": "not_found",
+          "reason": "no_local_match",
+          "matches_count": 0,
+          "candidates": []
+        }
+      ]
+    },
+    {
+      "query": "COST",
+      "market": "US",
+      "identity": {
+        "schema_version": "1.0",
+        "query": "COST",
+        "normalized_query": "cost",
+        "market_hint": "US",
+        "exchange_hint": null,
+        "status": "resolved",
+        "reason": "one_verified_exact_identity",
+        "resolved": {
+          "canonical_name": "COSTCO WHOLESALE CORP /NEW",
+          "market": "US",
+          "exchange": "NASDAQ",
+          "ticker": "COST",
+          "security_id": "COST",
+          "match_basis": "ticker_exact",
+          "matched_value": "COST",
+          "score": 1.0,
+          "verified": true,
+          "active": true,
+          "source_name": "sec_nasdaq",
+          "source_url": "https://www.sec.gov/files/company_tickers.json",
+          "source_record_id": "0000909832",
+          "identifiers": {
+            "cik": "0000909832"
+          }
+        },
+        "candidates": [
+          {
+            "canonical_name": "COSTCO WHOLESALE CORP /NEW",
+            "market": "US",
+            "exchange": "NASDAQ",
+            "ticker": "COST",
+            "security_id": "COST",
+            "match_basis": "ticker_exact",
+            "matched_value": "COST",
+            "score": 1.0,
+            "verified": true,
+            "active": true,
+            "source_name": "sec_nasdaq",
+            "source_url": "https://www.sec.gov/files/company_tickers.json",
+            "source_record_id": "0000909832",
+            "identifiers": {
+              "cik": "0000909832"
+            }
+          }
+        ]
+      },
+      "queries": [
+        {
+          "request": {
+            "entity": "COSTCO WHOLESALE CORP /NEW",
+            "market": "US",
+            "security_id": "COST",
+            "document_kind": "annual_report",
+            "as_of_date": "2026-10-09"
+          },
+          "exit_code": 0,
+          "status": "not_found",
+          "reason": "no_local_match",
+          "matches_count": 0,
+          "candidates": []
+        },
+        {
+          "request": {
+            "entity": "COSTCO WHOLESALE CORP /NEW",
+            "market": "US",
+            "security_id": "COST",
+            "document_kind": "semi_annual_report",
+            "as_of_date": "2026-10-09"
+          },
+          "exit_code": 0,
+          "status": "not_found",
+          "reason": "no_local_match",
+          "matches_count": 0,
+          "candidates": []
+        },
+        {
+          "request": {
+            "entity": "COSTCO WHOLESALE CORP /NEW",
+            "market": "US",
+            "security_id": "COST",
+            "document_kind": "quarterly_report",
+            "as_of_date": "2026-10-09"
+          },
+          "exit_code": 0,
+          "status": "not_found",
+          "reason": "no_local_match",
+          "matches_count": 0,
+          "candidates": []
+        }
+      ]
+    }
+  ]
+}
