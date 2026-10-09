@@ -18,8 +18,26 @@ from company_wiki.source_catalog.service import SourceCatalog
 from company_wiki.source_catalog.source_reader import SourceVersionReader
 from company_wiki.source_contract import EvidenceSpan
 from support import narrative_batch_fixtures as fixtures
+from tools.cross_market_suite.runtime_evidence import capture_runtime_evidence, public_quality
 
 loopback_model_server = fixtures.loopback_model_server
+
+
+def batch_probe(argv, *, store, request, record_property, **kwargs):
+    """Persist actual metadata even if the subprocess deadline or receipt decoding fails."""
+    try:
+        call = subprocess.run(argv, **kwargs)
+    except subprocess.TimeoutExpired:
+        record_property("cmrf_runtime_evidence", json.dumps(capture_runtime_evidence(
+            store.db_path, {}, run_id=request["run_id"])))
+        raise
+    record_property("cmrf_runtime_evidence", json.dumps(capture_runtime_evidence(
+        store.db_path, {}, run_id=request["run_id"], returncode=call.returncode)))
+    result = json.loads(call.stdout) if call.stdout else {}
+    record_property("cmrf_runtime_evidence", json.dumps(capture_runtime_evidence(
+        store.db_path, result, run_id=request["run_id"], returncode=call.returncode)))
+    assert call.stdout, call.stderr
+    return call, result
 
 
 @pytest.mark.e2e
@@ -59,10 +77,9 @@ def test_real_company_finite_worker_and_narrative_rf_view(case, loopback_model_s
             "--project-root", context["wiki"], "--catalog-config", item["config"],
             "--automation-db", str(store.db_path), "--work-dir", str(work / "jobs"), "--request", str(request_path)]
     started_requests = len(loopback_model_server.requests)
-    call = subprocess.run(argv, cwd=context["wiki"], env=env, capture_output=True, timeout=135)
+    call, result = batch_probe(argv, store=store, request=request, record_property=record_property,
+                               cwd=context["wiki"], env=env, capture_output=True, timeout=135)
     assert fixtures.KEY.encode() not in call.stdout + call.stderr
-    assert call.stdout, call.stderr
-    result = json.loads(call.stdout)
     record_property("cmrf_batch_status", result.get("status"))
     docs = result.get("documents", [])
     # HTML support must be observed, not assumed from successful hand parsing.
@@ -97,6 +114,7 @@ def test_real_company_finite_worker_and_narrative_rf_view(case, loopback_model_s
         rf_view = invoke([sys.executable, "-B", str(Path(context["rf"]) / "scripts/narrative_source_preparation.py"),
                           "--company-wiki-catalog-config", item["config"]], read_request)
         assert rf_view["evidence_spans"] == view["evidence_spans"]
+        record_property("cmrf_public_quality", json.dumps(public_quality(view, replay_status="verified")))
         assert view["summary"]["translate"] is False
         assert view["source_metadata"]["language"] == meta["language"]
         assert view["selection"]["status"] != "skipped_no_narrative"
@@ -156,11 +174,11 @@ def test_real_microsoft_format_capability(kind, loopback_model_server, record_pr
     env = dict(os.environ, PYTHONPATH=str(Path(context["wiki"]) / "src") + os.pathsep +
                str(Path(__file__).resolve().parents[2] / "tools/cross_market_suite/replay_hook"), PYTHONUTF8="1")
     started_requests = len(loopback_model_server.requests)
-    call = subprocess.run([sys.executable, "-B", "-m", "company_wiki.automation.narrative_batch_cli",
+    call, result = batch_probe([sys.executable, "-B", "-m", "company_wiki.automation.narrative_batch_cli",
         "--project-root", context["wiki"], "--catalog-config", item["config"], "--automation-db", str(store.db_path),
-        "--work-dir", str(root / "jobs"), "--request", str(request_path)], cwd=context["wiki"], env=env, capture_output=True, timeout=40)
-    assert call.stdout, call.stderr
-    result = json.loads(call.stdout)
+        "--work-dir", str(root / "jobs"), "--request", str(request_path)],
+        store=store, request=request, record_property=record_property,
+        cwd=context["wiki"], env=env, capture_output=True, timeout=40)
     from tools.cross_market_suite.core import format_capability_gap
     images_only_checked = False
     if kind == "pptx" and any("PARSER_INCOMPLETE" in row.get("errors", []) for row in result["documents"]):
@@ -208,6 +226,9 @@ def test_real_microsoft_format_capability(kind, loopback_model_server, record_pr
                              cwd=context["wiki"], env=env, capture_output=True, timeout=30)
         assert read.returncode == 0, read.stderr
         view = json.loads(read.stdout)
+        replay_status = json.loads(read.stderr)["replay_status"]
+        record_property("cmrf_public_quality", json.dumps(public_quality(view, replay_status=replay_status)))
+        assert replay_status == "verified"
         assert view["evidence_spans"] and view["summary"]["draft"]["claims"]
         assert view["summary"]["translate"] is False
     finally:

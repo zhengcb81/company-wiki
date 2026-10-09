@@ -1,0 +1,154 @@
+{
+  "test_status": "FAILED_ASSERTION_PARSER_METADATA_FIELD",
+  "actual_properties": {
+    "cmrf_import_command": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.official_source_cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-8o9sukej\\config\\source_catalog.yaml",
+      "--project-root",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-8o9sukej",
+      "--request",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-8o9sukej\\import-request.json",
+      "--input-file",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-8o9sukej\\input\\image-only.pptx"
+    ],
+    "cmrf_import_receipt": {
+      "status": "imported_new",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:0a6ad451750508c089fd1a6448594b3cd5b5dfb2364b352c9c848e745b8de2fc",
+        "source_id": "urn:company-wiki:source:sha256:0a6ad451750508c089fd1a6448594b3cd5b5dfb2364b352c9c848e745b8de2fc",
+        "content_sha256": "0a6ad451750508c089fd1a6448594b3cd5b5dfb2364b352c9c848e745b8de2fc",
+        "byte_size": 29620,
+        "mime_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "schema_version": "2.0"
+      },
+      "capture_receipt": {
+        "capture_method": "local_document",
+        "tool_name": "pytest_native_cli_fixture",
+        "tool_call_id": "tiny-fixture-local-read",
+        "captured_at": "2026-10-09T06:17:21.235480+00:00",
+        "content_sha256": "0a6ad451750508c089fd1a6448594b3cd5b5dfb2364b352c9c848e745b8de2fc",
+        "response_bytes": 29620
+      },
+      "download_events": 0
+    },
+    "cmrf_runtime_evidence": {
+      "schema_version": "cmrf-runtime-evidence/1",
+      "run_id": "offline-tiny-pptx",
+      "returncode": 2,
+      "receipt": {
+        "status": "failed",
+        "error": null,
+        "budget": {
+          "tokens": 0,
+          "estimated_micro_usd": 0,
+          "unknown_reservations": 0,
+          "unsettled_reservations": 0
+        },
+        "document_count": 1,
+        "documents": [
+          {
+            "document_id": "urn:company-wiki:document:sha256:0a6ad451750508c089fd1a6448594b3cd5b5dfb2364b352c9c848e745b8de2fc",
+            "status": "dead_letter",
+            "artifact_ref": null,
+            "errors": [
+              "DEPENDENCY_TERMINAL",
+              "DEPENDENCY_TERMINAL",
+              "PARSER_INCOMPLETE"
+            ]
+          }
+        ]
+      },
+      "database_evidence": "available",
+      "jobs": [
+        {
+          "job_id": "fbdd9f6b6822e240",
+          "job_type": "source.narrative_select",
+          "status": "dead_letter",
+          "handler_version": "1.1.0",
+          "last_error_code": "PARSER_INCOMPLETE",
+          "attempt_count": 1,
+          "latest_attempt": {
+            "attempt_id": "7bf3d9d579fe4284abc9bf46fc279d29",
+            "attempt_no": 1,
+            "started_at": "2026-10-09T06:17:25Z",
+            "finished_at": "2026-10-09T06:17:26Z",
+            "outcome": "terminal_failure",
+            "error_code": "PARSER_INCOMPLETE",
+            "runtime_generation": 2,
+            "result_schema": null,
+            "result_status": null,
+            "parser_name": null,
+            "parser_version": null,
+            "selector_version": null,
+            "selection": null
+          }
+        },
+        {
+          "job_id": "bcccb8c38bdb8107",
+          "job_type": "source.narrative_summarize",
+          "status": "dead_letter",
+          "handler_version": "1.1.0",
+          "last_error_code": "DEPENDENCY_TERMINAL",
+          "attempt_count": 0,
+          "latest_attempt": null
+        },
+        {
+          "job_id": "ea6747db162436a0",
+          "job_type": "source.narrative_verify",
+          "status": "dead_letter",
+          "handler_version": "1.1.0",
+          "last_error_code": "DEPENDENCY_TERMINAL",
+          "attempt_count": 0,
+          "latest_attempt": null
+        }
+      ],
+      "reservations": [],
+      "job_count": 3,
+      "reservation_count": 0,
+      "run": {
+        "state": "open",
+        "block_reason": null,
+        "max_tokens": 1,
+        "max_micro_usd": 0,
+        "last_runtime_generation": 2,
+        "input_hash": "84062a1566737ffdfdd4bfd6df0cd172078b4683020f4d13f9a40ce65baa1f91",
+        "scope_sha256": "f8fd9e07892b6e8917251960a2042c2a3992ee6737cf89eed5734058ba1a5288"
+      },
+      "normalization_binding": {
+        "ocr_config_present": false,
+        "parsers": [
+          {
+            "document_id": "urn:company-wiki:document:sha256:0a6ad451750508c089fd1a6448594b3cd5b5dfb2364b352c9c848e745b8de2fc",
+            "parser_name": null,
+            "parser_version": null
+          }
+        ]
+      }
+    },
+    "cmrf_actual_command": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.automation.narrative_batch_cli",
+      "--project-root",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-8o9sukej",
+      "--catalog-config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-8o9sukej\\config\\source_catalog.yaml",
+      "--automation-db",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-8o9sukej\\batch\\auto.db",
+      "--work-dir",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-8o9sukej\\batch\\jobs",
+      "--request",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-8o9sukej\\batch\\request.json"
+    ],
+    "cmrf_seconds": "3.914318"
+  },
+  "owned_root_restored_absent": true,
+  "owned_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-8o9sukej",
+  "protection_assertions_completed": false,
+  "parser_metadata_at_capture": null
+}

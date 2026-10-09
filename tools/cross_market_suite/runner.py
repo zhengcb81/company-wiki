@@ -19,6 +19,8 @@ import sys
 import time
 import zipfile
 
+from .runtime_evidence import runtime_properties
+
 from .core import arithmetic_checks, compare_reports, domain_checks, isolated_directory, load, safe_child, sha, summarize, write_new
 
 REPO = Path(__file__).resolve().parents[2]
@@ -159,7 +161,11 @@ class Suite:
     def setup(self):
         self.rf, rf_head = self.export(self.args.rf_root, "rf", ["scripts", "config", "references", "SKILL.md"])
         self.ff, ff_head = self.export(self.args.ff_root, "ff", ["scripts", "config"])
-        self.wiki, cwp_head = self.export(REPO, "wiki", ["src", "scripts", "config", "tools/dayu_sdk_bridge.py"])
+        # Replay parser capabilities are fixture-declared, never inherited from host OCR.
+        parts = ["src", "scripts", "tools/dayu_sdk_bridge.py"]
+        if self.args.mode == "live":
+            parts.insert(2, "config")
+        self.wiki, cwp_head = self.export(REPO, "wiki", parts)
         self.versions = dict(rf=rf_head, ff=ff_head, cwp=cwp_head, python=sys.version)
         if self.args.et_root:
             self.et, et_head = self.export(self.args.et_root, "et", ["."])
@@ -170,6 +176,7 @@ class Suite:
                 self.env["FMP_API_KEY"] = key_file.read_text(encoding="utf-8-sig").strip()
         self.env["PYTHONPATH"] = os.pathsep.join((str(REPO / "tools/cross_market_suite/replay_hook"), str(self.wiki / "src")))
         config_dir = self.wiki / "config"
+        config_dir.mkdir(parents=True, exist_ok=True)
         self.catalog_config = config_dir / "source_catalog.yaml"
         self.catalog_config.write_text(json.dumps({"schema_version": "1.0", "catalog_dir": str(self.wiki / ".source_catalog"),
             "roots": [{"root_id": "company_raw", "kind": "company_raw", "path": str(self.wiki / "companies"), "read_only": False}]}), encoding="utf-8")
@@ -209,7 +216,19 @@ class Suite:
             (config_dir / "source_acquisition.yaml").write_text("schema_version: '1.1'\nstaging_root: '${PROJECT_ROOT}/.source_catalog/staging'\ntimeout_seconds: 10\nadapters: {}\n", encoding="utf-8")
         self.protect(self.args.source_catalog_config)
         self.protect(self.args.source_catalog_config.parent.parent / ".source_catalog/catalog.sqlite3")
-        self.context = {"root": str(self.root), "wiki": str(self.wiki), "rf": str(self.rf), "cases": []}
+        from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization, PPTX_MIME
+        ocr_path = config_dir / "local_ocr.json"
+        port = NarrativeNormalization.from_project(self.wiki, enabled=True)
+        self.normalization_policy = {
+            "profile": "offline_fixture_no_ocr" if self.args.mode == "replay" else "configured_head_snapshot",
+            "cwp_head": cwp_head,
+            "local_ocr_sha256": sha(ocr_path) if ocr_path.is_file() else None,
+            "pptx_parser_version": port.identity(PPTX_MIME)["parser_version"],
+        }
+        if self.args.mode == "replay":
+            assert port.config is None, "replay fixture unexpectedly inherited OCR config"
+        self.context = {"root": str(self.root), "wiki": str(self.wiki), "rf": str(self.rf), "cases": [],
+                        "normalization_policy": self.normalization_policy}
 
     def case(self, spec):
         case = spec["case"]
@@ -392,18 +411,19 @@ class Suite:
             if "cmrf_case" not in properties:
                 continue
             case = properties["cmrf_case"]
+            evidence = runtime_properties(properties)
             format_key = properties.get("cmrf_format")
             if format_key:
                 status = "FAIL" if test.find("failure") is not None or test.find("error") is not None else properties["cmrf_format_status"]
-                self.set(case, format_key, status, properties.get("cmrf_format_detail", "format probe failed"))
+                self.set(case, format_key, status, properties.get("cmrf_format_detail", "format probe failed"), **evidence)
                 continue
             if test.find("failure") is not None or test.find("error") is not None:
-                self.set(case, "canonical_worker", "FAIL", "isolated real-byte Worker failed", test=test.attrib["name"])
+                self.set(case, "canonical_worker", "FAIL", "isolated real-byte Worker failed", test=test.attrib["name"], **evidence)
             elif test.find("skipped") is not None:
-                self.set(case, "canonical_worker", "BLOCKED", "source format/capability not supported", test=test.attrib["name"])
+                self.set(case, "canonical_worker", "BLOCKED", "source format/capability not supported", test=test.attrib["name"], **evidence)
             else:
                 receipt = json.loads(properties["cmrf_receipt"])
-                self.set(case, "canonical_worker", "PASS", "real finite spawned Worker, loopback model only; selected business content, no translation, idempotent resume", **receipt)
+                self.set(case, "canonical_worker", "PASS", "real finite spawned Worker, loopback model only; selected business content, no translation, idempotent resume", **receipt, **evidence)
                 self.set(case, "narrative_virtual_read", "PASS", "CWP/RF current NarrativeRef contents match and exact evidence lookup")
             self.set(case, "format_support", self.checks[case, "canonical_worker"]["status"],
                      "PDF tested" if case != "US-MSFT" else "TXT tested; HTML/PPTX are separate actual probes")
@@ -479,6 +499,7 @@ class Suite:
         assert final_bytes <= 256 * 1024 * 1024, "test storage exceeds 256 MiB budget"
         return {"schema_version": "cross-market-report/1", "mode": self.args.mode, "suite": self.args.suite,
                 "spec_sha256": sha(SPEC), "checkpoints_sha256": sha(POINTS), "versions": self.versions,
+                "normalization_policy": self.normalization_policy,
                 "checks": list(self.checks.values()), "commands": self.commands,
                 "subprocesses": [json.loads(line) for path in self.process_log.glob("*.jsonl")
                                  for line in path.read_text(encoding="utf-8").splitlines()],
