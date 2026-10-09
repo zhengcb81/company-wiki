@@ -1,0 +1,17 @@
+[
+  {
+    "skill": "revenue-forecast",
+    "matched_repository_files_checked": 83,
+    "normalized_byte_drifts": []
+  },
+  {
+    "skill": "filing-fetch",
+    "matched_repository_files_checked": 12,
+    "normalized_byte_drifts": []
+  },
+  {
+    "skill": "revenue-forecast-audit",
+    "matched_repository_files_checked": 0,
+    "normalized_byte_drifts": []
+  }
+]

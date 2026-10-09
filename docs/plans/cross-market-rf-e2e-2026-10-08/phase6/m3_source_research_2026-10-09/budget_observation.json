@@ -1,0 +1,121 @@
+{
+  "observed_at": "2026-10-09T18:40:13.852023+00:00",
+  "baseline_receipt": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\fresh_executor_launch\\launched\\budget_observation.json",
+  "existing_reservations": [
+    {
+      "company": "cn-688012",
+      "database": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\auto\\narrative.sqlite3",
+      "read_only": true,
+      "reservations": [
+        {
+          "attempt_id": "5de60a611ae843968d5d2941468027a9",
+          "run_id": "fresh-20261009T065028-cn-688012-annual-native",
+          "usage_status": "known",
+          "input_tokens": 2716,
+          "output_tokens": 8192,
+          "estimated_micro_usd": 11829,
+          "input_tokens_bound": 11764,
+          "max_output_tokens": 8192,
+          "reserved_micro_usd": 14845,
+          "usage_settled_at": "2026-10-09T07:00:11Z"
+        },
+        {
+          "attempt_id": "6494d75e9e5b4a468a3e09b38a3852b6",
+          "run_id": "fresh-20261009T065028-cn-688012-q1-native",
+          "usage_status": "known",
+          "input_tokens": 1579,
+          "output_tokens": 4846,
+          "estimated_micro_usd": 6988,
+          "input_tokens_bound": 6568,
+          "max_output_tokens": 8192,
+          "reserved_micro_usd": 13113,
+          "usage_settled_at": "2026-10-09T07:29:26Z"
+        }
+      ]
+    },
+    {
+      "company": "hk-00700",
+      "database": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\auto\\narrative.sqlite3",
+      "read_only": true,
+      "reservations": [
+        {
+          "attempt_id": "23af14c4708d40b19f5d68060f7ce188",
+          "run_id": "fresh-20261009T065028-hk-00700-narrative-01",
+          "usage_status": "known",
+          "input_tokens": 1129,
+          "output_tokens": 2851,
+          "estimated_micro_usd": 4178,
+          "input_tokens_bound": 4775,
+          "max_output_tokens": 8192,
+          "reserved_micro_usd": 12515,
+          "usage_settled_at": "2026-10-09T06:58:33Z"
+        },
+        {
+          "attempt_id": "bca3c43646c443e3a412f48946790b03",
+          "run_id": "fresh-20261009T065028-hk-00700-narrative-01",
+          "usage_status": "known",
+          "input_tokens": 1037,
+          "output_tokens": 2117,
+          "estimated_micro_usd": 3169,
+          "input_tokens_bound": 4249,
+          "max_output_tokens": 8192,
+          "reserved_micro_usd": 12340,
+          "usage_settled_at": "2026-10-09T06:58:44Z"
+        }
+      ]
+    },
+    {
+      "company": "us-msft",
+      "database": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\auto\\narrative.sqlite3",
+      "read_only": true,
+      "reservations": [
+        {
+          "attempt_id": "9e1e9eb9bb574b2aae67fe33b5397bfb",
+          "run_id": "fresh-20261009T065028-us-msft-narrative",
+          "usage_status": "known",
+          "input_tokens": 1077,
+          "output_tokens": 4028,
+          "estimated_micro_usd": 5730,
+          "input_tokens_bound": 4892,
+          "max_output_tokens": 8192,
+          "reserved_micro_usd": 12554,
+          "usage_settled_at": "2026-10-09T07:04:22Z"
+        }
+      ]
+    }
+  ],
+  "current_cohort_known_tokens": 29572,
+  "current_cohort_known_micro_usd": 31894,
+  "previous_counted_tokens": 29572,
+  "previous_counted_micro_usd": 31894,
+  "additional_since_previous_tokens": 0,
+  "additional_since_previous_micro_usd": 0,
+  "newly_unknown_reservations": [],
+  "historical_unknown_reservations": 7,
+  "unobserved_acquisition_usage": [
+    {
+      "run": "fresh-20261009T065028-us-msft",
+      "capture_id": "1fc320db8942401694de2c53d2e5cc23",
+      "reason": "failed legacy FF fetch has no native HTTP usage receipt; not claimed zero"
+    }
+  ],
+  "retained_fx_guard_micro_usd": 2764,
+  "cap_tokens": 2000000,
+  "cap_micro_usd": 20000000,
+  "pricing_primary_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+  "pricing_primary_observed_peak_per_million_USD": {
+    "input": 0.3,
+    "output": 1.2
+  },
+  "pricing_conservative_existing": {
+    "version": "deepseek-cn-full-peak-fx-floor6-proxy-2026-10-06",
+    "input_micro_usd_per_million_tokens": 333334,
+    "output_micro_usd_per_million_tokens": 1333334
+  },
+  "paid_calls_by_refresh": 0,
+  "cumulative_known_tokens": 236614,
+  "cumulative_known_estimated_micro_usd": 151565,
+  "remaining_tokens": 1763386,
+  "remaining_micro_usd_after_known_and_FX": 19845671,
+  "unknown_not_settled_by_arithmetic": true
+}

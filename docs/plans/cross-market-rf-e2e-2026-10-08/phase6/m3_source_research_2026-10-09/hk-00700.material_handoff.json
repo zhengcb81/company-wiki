@@ -1,0 +1,758 @@
+{
+  "identity": {
+    "canonical_name": "騰訊控股",
+    "market": "HK",
+    "exchange": "HKEX",
+    "ticker": "00700",
+    "security_id": "00700",
+    "match_basis": "ticker_exact",
+    "matched_value": "00700",
+    "score": 1,
+    "verified": true,
+    "active": true,
+    "source_name": "hkex",
+    "source_url": "https://www1.hkexnews.hk/ncms/script/eds/activestock_sehk_c.json",
+    "source_record_id": "17416",
+    "identifiers": {
+      "hkex_stock_id": "17416"
+    }
+  },
+  "existing_sources": [
+    {
+      "key": "hk-00700:d19f183452e9",
+      "source_ref": {
+        "byte_size": 4428270,
+        "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "mime_type": "application/pdf",
+        "schema_version": "2.0",
+        "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+      },
+      "sealed_source_fact": {
+        "title": "腾讯：2025年年度报告",
+        "display_name": "騰訊控股",
+        "market": "HK",
+        "security_id": "00700",
+        "document_kind": "annual_report",
+        "fiscal_year": 2025,
+        "fiscal_period": null,
+        "form_type": null,
+        "period_end": null,
+        "published_date": "2026-04-09",
+        "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf"
+      },
+      "sealed_executor_open": null,
+      "sealed_reviewer_open": {
+        "status": "qualified_and_opened",
+        "bytes_verified": true,
+        "read_at": "2026-10-09T08:18:10.403537+00:00",
+        "receipt_status": "ok"
+      },
+      "sealed_parse": {
+        "parser": "PyMuPDF 1.26.7",
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\annual-2025-pages.json"
+      },
+      "sealed_summary": {
+        "status": "read",
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\annual-2025-narrative-context.json",
+        "coverage_complete": false
+      },
+      "sealed_research_relevance": {
+        "locator": "company_wiki_trace.source_manifest; exact cited pages in evidence_claims",
+        "claim_ids": [
+          "claim_history_2025",
+          "claim_vas_base",
+          "claim_marketing_base",
+          "claim_fintechbusiness_base",
+          "claim_other_base",
+          "claim_reported_total",
+          "claim_rec_vas",
+          "claim_agent_vas",
+          "claim_rec_marketing",
+          "claim_agent_marketing",
+          "claim_rec_fintechbusiness",
+          "claim_agent_fintechbusiness",
+          "claim_other_h2_low_2026_g_context",
+          "claim_other_low_2027_g_context",
+          "claim_other_low_2028_g_context",
+          "claim_other_h2_base_2026_g_context",
+          "claim_other_base_2027_g_context",
+          "claim_other_base_2028_g_context",
+          "claim_other_h2_high_2026_g_context",
+          "claim_other_high_2027_g_context",
+          "claim_other_high_2028_g_context",
+          "claim_rec_other",
+          "claim_agent_other",
+          "claim_gd_marketing_engagement",
+          "claim_gd_ftb_ai",
+          "claim_gd_other_company",
+          "claim_narrative_cloud_direction",
+          "claim_narrative_payment_direction"
+        ],
+        "narrative_binding_locators": [],
+        "used_in_forecast": null,
+        "note": "Original bytes verified once by public source reader; hashes are identity/integrity, not attestation or economic validation."
+      },
+      "sealed_reference": {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\roles\\fetch\\review-original-opens.json",
+        "json_pointer": "/originals/0"
+      },
+      "current_physical_paths": [],
+      "current_read_claim": "Existing SourceRef and sealed exact-byte reader receipt observed; this investigation did not resolve or native-open this physical file again."
+    },
+    {
+      "key": "hk-00700:70f529984a87",
+      "source_ref": {
+        "byte_size": 5241364,
+        "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "mime_type": "application/pdf",
+        "schema_version": "2.0",
+        "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0"
+      },
+      "sealed_source_fact": {
+        "title": "腾讯：2024年年度报告",
+        "display_name": "騰訊控股",
+        "market": "HK",
+        "security_id": "00700",
+        "document_kind": "annual_report",
+        "fiscal_year": 2024,
+        "fiscal_period": null,
+        "form_type": null,
+        "period_end": null,
+        "published_date": "2025-04-08",
+        "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0408/2025040800668_c.pdf"
+      },
+      "sealed_executor_open": null,
+      "sealed_reviewer_open": {
+        "status": "qualified_and_opened",
+        "bytes_verified": true,
+        "read_at": "2026-10-09T08:18:11.038908+00:00",
+        "receipt_status": "ok"
+      },
+      "sealed_parse": {
+        "parser": "PyMuPDF 1.26.7",
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\annual-2024-pages.json"
+      },
+      "sealed_summary": {
+        "status": "not_requested",
+        "artifact": null,
+        "coverage_complete": null
+      },
+      "sealed_research_relevance": {
+        "locator": "company_wiki_trace.source_manifest; exact cited pages in evidence_claims",
+        "claim_ids": [
+          "claim_history_2023",
+          "claim_history_2024"
+        ],
+        "narrative_binding_locators": [],
+        "used_in_forecast": null,
+        "note": "Original bytes verified once by public source reader; hashes are identity/integrity, not attestation or economic validation."
+      },
+      "sealed_reference": {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\roles\\fetch\\review-original-opens.json",
+        "json_pointer": "/originals/1"
+      },
+      "current_physical_paths": [],
+      "current_read_claim": "Existing SourceRef and sealed exact-byte reader receipt observed; this investigation did not resolve or native-open this physical file again."
+    },
+    {
+      "key": "hk-00700:64d8d2038eee",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+        "source_id": "urn:company-wiki:source:sha256:64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+        "content_sha256": "64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+        "byte_size": 412297,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "sealed_source_fact": {
+        "title": "Tencent second-quarter and first-half 2026 results",
+        "display_name": "騰訊控股",
+        "market": "HK",
+        "security_id": "00700",
+        "document_kind": "investor_relations",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q2",
+        "form_type": null,
+        "period_end": null,
+        "published_date": "2026-08-12",
+        "source_url": "https://www.tencent.com/wp-content/uploads/2026/08/Tencent-Announces-2026-Second-Quarter-Results.pdf"
+      },
+      "sealed_executor_open": null,
+      "sealed_reviewer_open": {
+        "status": "qualified_and_opened",
+        "bytes_verified": true,
+        "read_at": "2026-10-09T08:18:11.666291+00:00",
+        "receipt_status": "ok"
+      },
+      "sealed_parse": {
+        "parser": "PyMuPDF 1.26.7",
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\release-2026-pages.json"
+      },
+      "sealed_summary": {
+        "status": "read",
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\release-2026-narrative-context.json",
+        "coverage_complete": false
+      },
+      "sealed_research_relevance": {
+        "locator": "company_wiki_trace.source_manifest; exact cited pages in evidence_claims",
+        "claim_ids": [
+          "claim_vas_q1_2026",
+          "claim_vas_q2_2026",
+          "claim_marketing_q1_2026",
+          "claim_marketing_q2_2026",
+          "claim_fintechbusiness_q1_2026",
+          "claim_fintechbusiness_q2_2026",
+          "claim_other_q1_2026",
+          "claim_other_q2_2026",
+          "claim_vas_h2_low_2026_g_0",
+          "claim_vas_low_2027_g_0",
+          "claim_vas_low_2028_g_0",
+          "claim_vas_h2_base_2026_g_0",
+          "claim_vas_base_2027_g_0",
+          "claim_vas_base_2028_g_0",
+          "claim_vas_h2_high_2026_g_0",
+          "claim_vas_high_2027_g_0",
+          "claim_vas_high_2028_g_0",
+          "claim_marketing_h2_low_2026_g_0",
+          "claim_marketing_low_2027_g_0",
+          "claim_marketing_low_2028_g_0",
+          "claim_marketing_h2_base_2026_g_0",
+          "claim_marketing_base_2027_g_0",
+          "claim_marketing_base_2028_g_0",
+          "claim_marketing_h2_high_2026_g_0",
+          "claim_marketing_high_2027_g_0",
+          "claim_marketing_high_2028_g_0",
+          "claim_fintechbusiness_h2_low_2026_g_0",
+          "claim_fintechbusiness_low_2027_g_0",
+          "claim_fintechbusiness_low_2028_g_0",
+          "claim_fintechbusiness_h2_base_2026_g_0",
+          "claim_fintechbusiness_base_2027_g_0",
+          "claim_fintechbusiness_base_2028_g_0",
+          "claim_fintechbusiness_h2_high_2026_g_0",
+          "claim_fintechbusiness_high_2027_g_0",
+          "claim_fintechbusiness_high_2028_g_0",
+          "claim_gd_vas_company",
+          "claim_gd_vas_contrary",
+          "claim_gd_marketing_company",
+          "claim_gd_marketing_counter",
+          "claim_gd_fintechbusiness_company",
+          "claim_gd_ftb_conversion_gap",
+          "claim_target_ai_usage_conversion"
+        ],
+        "narrative_binding_locators": [],
+        "used_in_forecast": null,
+        "note": "Original bytes verified once by public source reader; hashes are identity/integrity, not attestation or economic validation."
+      },
+      "sealed_reference": {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\roles\\fetch\\review-original-opens.json",
+        "json_pointer": "/originals/2"
+      },
+      "current_physical_paths": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\companies\\騰訊控股\\raw\\investor_relations\\unknown-date_official_64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a_Tencent second-quarter and first-half 2026 results.pdf"
+      ],
+      "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+    },
+    {
+      "key": "hk-00700:8bf85e0cc19d",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:8bf85e0cc19d42784ba3faec42c8ddced1b8c378fcdea6f943839fcc51823704",
+        "source_id": "urn:company-wiki:source:sha256:8bf85e0cc19d42784ba3faec42c8ddced1b8c378fcdea6f943839fcc51823704",
+        "content_sha256": "8bf85e0cc19d42784ba3faec42c8ddced1b8c378fcdea6f943839fcc51823704",
+        "byte_size": 520839,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "sealed_source_fact": {
+        "title": "Tencent Announces 2025 Second Quarter Results",
+        "display_name": "騰訊控股",
+        "market": "HK",
+        "security_id": "00700",
+        "document_kind": "investor_relations",
+        "fiscal_year": 2025,
+        "fiscal_period": "Q2",
+        "form_type": null,
+        "period_end": null,
+        "published_date": "2025-08-13",
+        "source_url": "https://static.www.tencent.com/uploads/2025/08/13/56af6c5c98acdc7bd757a7bd208d8189.pdf"
+      },
+      "sealed_executor_open": null,
+      "sealed_reviewer_open": {
+        "status": "qualified_and_opened",
+        "bytes_verified": true,
+        "read_at": "2026-10-09T08:18:12.253358+00:00",
+        "receipt_status": "ok"
+      },
+      "sealed_parse": {
+        "parser": "PyMuPDF 1.26.7",
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\release-2025-pages.json"
+      },
+      "sealed_summary": {
+        "status": "not_requested",
+        "artifact": null,
+        "coverage_complete": null
+      },
+      "sealed_research_relevance": {
+        "locator": "company_wiki_trace.source_manifest; exact cited pages in evidence_claims",
+        "claim_ids": [
+          "claim_vas_q1_2025",
+          "claim_vas_q2_2025",
+          "claim_marketing_q1_2025",
+          "claim_marketing_q2_2025",
+          "claim_fintechbusiness_q1_2025",
+          "claim_fintechbusiness_q2_2025",
+          "claim_other_q1_2025",
+          "claim_other_q2_2025"
+        ],
+        "narrative_binding_locators": [],
+        "used_in_forecast": null,
+        "note": "Original bytes verified once by public source reader; hashes are identity/integrity, not attestation or economic validation."
+      },
+      "sealed_reference": {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\roles\\fetch\\review-original-opens.json",
+        "json_pointer": "/originals/3"
+      },
+      "current_physical_paths": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\companies\\騰訊控股\\raw\\investor_relations\\unknown-date_official_8bf85e0cc19d42784ba3faec42c8ddced1b8c378fcdea6f943839fcc51823704_Tencent Announces 2025 Second Quarter Results.pdf"
+      ],
+      "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+    },
+    {
+      "key": "hk-00700:ef3baa5008e1",
+      "source_ref": {
+        "byte_size": 865653,
+        "content_sha256": "ef3baa5008e15b2c58203bc48ec1f8feda6ff34e29f70d484ffeedefd16dc310",
+        "document_id": "urn:company-wiki:document:sha256:ef3baa5008e15b2c58203bc48ec1f8feda6ff34e29f70d484ffeedefd16dc310",
+        "mime_type": "application/pdf",
+        "schema_version": "2.0",
+        "source_id": "urn:company-wiki:source:sha256:ef3baa5008e15b2c58203bc48ec1f8feda6ff34e29f70d484ffeedefd16dc310"
+      },
+      "sealed_source_fact": {
+        "title": "截至二零二六年三月三十一日止三個月業績公佈",
+        "display_name": null,
+        "market": "HK",
+        "security_id": "00700",
+        "document_kind": "quarterly_report",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q1",
+        "form_type": "Q1",
+        "period_end": null,
+        "published_date": "2026-05-13",
+        "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0513/2026051300335_c.pdf"
+      },
+      "sealed_executor_open": null,
+      "sealed_reviewer_open": {
+        "status": "qualified_and_opened",
+        "bytes_verified": true,
+        "read_at": "2026-10-09T08:18:12.823203+00:00",
+        "receipt_status": "ok"
+      },
+      "sealed_parse": {
+        "parser": "PyMuPDF 1.26.7",
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\quarterly-2026Q1-zh-pages.json"
+      },
+      "sealed_summary": {
+        "status": "not_requested",
+        "artifact": null,
+        "coverage_complete": null
+      },
+      "sealed_research_relevance": {
+        "locator": "company_wiki_trace.source_manifest; exact cited pages in evidence_claims",
+        "claim_ids": [
+          "claim_q1_original_vas",
+          "claim_q1_original_marketing",
+          "claim_q1_original_fintechbusiness",
+          "claim_q1_original_other",
+          "claim_gd_vas_recognition_timing"
+        ],
+        "narrative_binding_locators": [],
+        "used_in_forecast": null,
+        "note": "Original bytes verified once by public source reader; hashes are identity/integrity, not attestation or economic validation."
+      },
+      "sealed_reference": {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\roles\\fetch\\review-original-opens.json",
+        "json_pointer": "/originals/4"
+      },
+      "current_physical_paths": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\companies\\騰訊控股\\raw\\financial_reports\\quarterly\\2026-05-13_hkexnews_12157227_截至二零二六年三月三十一日止三個月業績公佈.pdf"
+      ],
+      "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+    },
+    {
+      "key": "hk-00700:1cfbaab885ce",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:1cfbaab885ce9df493e82358d2a07d4dd1ef017c1190f5408081f326b4814fa6",
+        "source_id": "urn:company-wiki:source:sha256:1cfbaab885ce9df493e82358d2a07d4dd1ef017c1190f5408081f326b4814fa6",
+        "content_sha256": "1cfbaab885ce9df493e82358d2a07d4dd1ef017c1190f5408081f326b4814fa6",
+        "byte_size": 3478243,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "sealed_source_fact": {
+        "title": "Tencent GMTN Offering Circular 2026",
+        "display_name": "騰訊控股",
+        "market": "HK",
+        "security_id": "00700",
+        "document_kind": "prospectus",
+        "fiscal_year": 2026,
+        "fiscal_period": null,
+        "form_type": null,
+        "period_end": null,
+        "published_date": "2026-06-09",
+        "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0609/2026060900199.pdf"
+      },
+      "sealed_executor_open": null,
+      "sealed_reviewer_open": {
+        "status": "qualified_and_opened",
+        "bytes_verified": true,
+        "read_at": "2026-10-09T08:18:13.675419+00:00",
+        "receipt_status": "ok"
+      },
+      "sealed_parse": {
+        "parser": "PyMuPDF 1.26.7",
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\prospectus-2026-pages.json"
+      },
+      "sealed_summary": {
+        "status": "not_requested",
+        "artifact": null,
+        "coverage_complete": null
+      },
+      "sealed_research_relevance": {
+        "locator": "company_wiki_trace.source_manifest; exact cited pages in evidence_claims",
+        "claim_ids": [
+          "claim_gd_vas_strategy_risk",
+          "claim_gd_marketing_strategy_risk",
+          "claim_gd_marketing_ai_acceptance_risk",
+          "claim_gd_fintechbusiness_strategy_risk",
+          "claim_gd_fintechbusiness_ai_acceptance_risk",
+          "claim_gd_other_strategy_risk"
+        ],
+        "narrative_binding_locators": [],
+        "used_in_forecast": null,
+        "note": "Original bytes verified once by public source reader; hashes are identity/integrity, not attestation or economic validation."
+      },
+      "sealed_reference": {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\roles\\fetch\\review-original-opens.json",
+        "json_pointer": "/originals/5"
+      },
+      "current_physical_paths": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\companies\\騰訊控股\\raw\\prospectus\\unknown-date_official_1cfbaab885ce9df493e82358d2a07d4dd1ef017c1190f5408081f326b4814fa6_Tencent GMTN Offering Circular 2026.pdf"
+      ],
+      "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+    },
+    {
+      "key": "hk-00700:4170f80ec854",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+        "source_id": "urn:company-wiki:source:sha256:4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+        "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+        "byte_size": 5135808,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "sealed_source_fact": {
+        "title": "Tencent Interim Report 2026",
+        "display_name": "騰訊控股",
+        "market": "HK",
+        "security_id": "00700",
+        "document_kind": "semi_annual_report",
+        "fiscal_year": 2026,
+        "fiscal_period": "H1",
+        "form_type": null,
+        "period_end": null,
+        "published_date": null,
+        "source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf"
+      },
+      "sealed_executor_open": "RF default2.1 refused unknown publication",
+      "sealed_reviewer_open": {
+        "status": "rf_qualification_failed",
+        "bytes_verified": true,
+        "read_at": null,
+        "receipt_status": null
+      },
+      "sealed_parse": null,
+      "sealed_summary": null,
+      "sealed_research_relevance": {
+        "locator": null,
+        "claim_ids": [],
+        "narrative_binding_locators": [],
+        "used_in_forecast": false,
+        "note": "Archive import/capture/mtime is not prior publication or exact-SHA prior availability proof. No metadata overwrite or redownload repair."
+      },
+      "sealed_reference": {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\roles\\fetch\\review-original-opens.json",
+        "json_pointer": "/originals/6"
+      },
+      "current_physical_paths": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\companies\\騰訊控股\\raw\\financial_reports\\semi_annual\\unknown-date_official_4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639_Tencent Interim Report 2026.pdf"
+      ],
+      "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+    },
+    {
+      "key": "hk-00700:a9b0a5d6c68d",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+        "source_id": "urn:company-wiki:source:sha256:a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+        "content_sha256": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+        "byte_size": 1676729,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "sealed_source_fact": {
+        "title": "Tencent Corporate Overview September 2026",
+        "display_name": "騰訊控股",
+        "market": "HK",
+        "security_id": "00700",
+        "document_kind": "investor_relations",
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "form_type": null,
+        "period_end": null,
+        "published_date": null,
+        "source_url": "https://www.tencent.com/wp-content/uploads/2026/09/Corporate-Overview-2Q26-20260916.pdf"
+      },
+      "sealed_executor_open": "RF default2.1 refused unknown publication",
+      "sealed_reviewer_open": {
+        "status": "rf_qualification_failed",
+        "bytes_verified": true,
+        "read_at": null,
+        "receipt_status": null
+      },
+      "sealed_parse": null,
+      "sealed_summary": null,
+      "sealed_research_relevance": {
+        "locator": null,
+        "claim_ids": [],
+        "narrative_binding_locators": [],
+        "used_in_forecast": false,
+        "note": "Archive import/capture/mtime is not prior publication or exact-SHA prior availability proof. No metadata overwrite or redownload repair."
+      },
+      "sealed_reference": {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\roles\\fetch\\review-original-opens.json",
+        "json_pointer": "/originals/7"
+      },
+      "current_physical_paths": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\companies\\騰訊控股\\raw\\investor_relations\\unknown-date_official_a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389_Tencent Corporate Overview September 2026.pdf"
+      ],
+      "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+    }
+  ],
+  "source_tasks": [
+    {
+      "id": "HK-01",
+      "company": "00700",
+      "category": "2026H1 exact publication of existing E700",
+      "as_of_date": "2026-10-08",
+      "state": "existing_raw_unknown_publication",
+      "existing_source_keys": [
+        "hk-00700:4170f80ec854"
+      ],
+      "official_discovery_urls": [
+        "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+        "https://www.tencent.com/investors/financial-reports/",
+        "https://www1.hkexnews.hk/search/titlesearch.xhtml?category=0&lang=EN&market=SEHK&stockId=1000041953"
+      ],
+      "next_executor_steps": [
+        "Existing E700 122-page 5135808B SHA4170f... is intact. HKEX debt counter40242 lists interim-report event Aug25 16:53; this is a candidate event, not yet same-byte proof.",
+        "Resolve the event's actual PDF URL and issuer linkage; establish exact equality to existing E700 bytes or separate version evidence before W06 metadata assertion.",
+        "Reuse original English after exact fact proof; do not retry zh H1 merely because sealed zh request was not_found."
+      ],
+      "material_read_checkpoints": [
+        "Full H1 recognition/segment/cash-flow/order/AI adoption business terms and subsequent-event/commitment constraints; selected release is not full H1."
+      ],
+      "completion_evidence": [
+        "Exact linked publication event and sameSHA assertion+new public qualified receipt, complete material original read and model relevance; otherwise unknown remains."
+      ],
+      "dependency": "W06 identity/candidate repair; debt counter is not full00700 coverage",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/execution/interim-2026-candidate.json",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/roles/fetch/review-original-opens.json#/originals/6",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/reports/fetch.json#findings/FETCH-002"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "HK-02",
+      "company": "00700",
+      "category": "Existing September corporate overview date",
+      "as_of_date": "2026-10-08",
+      "state": "existing_raw_unknown_publication",
+      "existing_source_keys": [
+        "hk-00700:a9b0a5d6c68d"
+      ],
+      "official_discovery_urls": [
+        "https://www.tencent.com/wp-content/uploads/2026/09/Corporate-Overview-2Q26-20260916.pdf",
+        "https://www.tencent.com/investors/investor-kit-calendar/"
+      ],
+      "next_executor_steps": [
+        "Reuse existing 24-page 1676729B SHAa9b0...; find a publisher dated event/archive linking that exact version.",
+        "Do not infer Sep16 publication from URL basename, PDF internal creation time, retrieval or current investor-kit page. If proof missing keep historical availability unknown and say so.",
+        "After W06 compatible assertion, public prepare/read original; acquisition of same-byte overview is unnecessary."
+      ],
+      "material_read_checkpoints": [
+        "AI/cloud/ads/game/overseas product strategy and actual target periods; token/adoption/procurement metrics are not billed revenue without a bridge."
+      ],
+      "completion_evidence": [
+        "SameSHA dated source proof and new source version/read receipt, or exact named remaining metadata gap; old null manifest remains sealed."
+      ],
+      "dependency": "W06; current investor-kit web open failed",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/execution/overview-2026-candidate.json",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/roles/fetch/review-original-opens.json#/originals/7",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/reports/storage.json#findings/STORAGE-001"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "HK-03",
+      "company": "00700",
+      "category": "Official Q2 earnings presentation",
+      "as_of_date": "2026-10-08",
+      "state": "exact_link_discovered_web_timeout_no_raw",
+      "existing_source_keys": [],
+      "official_discovery_urls": [
+        "https://www.tencent.com/investors/results/",
+        "https://static.www.tencent.com/website-2026-upload/2Q26-earnings-PPT_20260812_1800-88b183.pdf"
+      ],
+      "next_executor_steps": [
+        "Official results page latest Q2 presentation link resolved; actual web open timed out. This is not original capture or SourceRef.",
+        "Query current catalog before one bounded official acquisition in a new M3 attempt; validate PDF signature/MIME/issuer/period and publication event.",
+        "Exclude sealed 987-byte HTML pseudoPDF; overview remains separate source and cannot count as this presentation."
+      ],
+      "material_read_checkpoints": [
+        "Full management targets, quantitative driver bridges, recognition/customer/use context and limitations; compare to full H1/release/call and handle supersession."
+      ],
+      "completion_evidence": [
+        "Actual valid PDF SHA+SourceRef and dated event, complete material slides/notes read; summary/public consumption or justified no new model value."
+      ],
+      "dependency": "W04/W05/W06; actual browser timeout is external/tool boundary",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/execution/document_matrix.json#matrix/9",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/reports/fetch.json#findings/FETCH-004"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "HK-04",
+      "company": "00700",
+      "category": "June9–Oct8 material announcements and official business news",
+      "as_of_date": "2026-10-08",
+      "state": "partial_interval_not_complete",
+      "existing_source_keys": [
+        "hk-00700:1cfbaab885ce"
+      ],
+      "official_discovery_urls": [
+        "https://www.tencent.com/investors/announcements/",
+        "https://www.tencent.com/investors/results/"
+      ],
+      "next_executor_steps": [
+        "Traverse actual00700 equity issuer announcements over entire June9–Oct8 interval, not only first page Sep9–Oct9 or the40242/85070 debt counters. Oct9 is outside cutoff.",
+        "Record pagination/date boundaries and materiality for routine buybacks/monthly forms versus issuance/acquisition/strategy/product/customer constraints.",
+        "Read material original announcement clauses; separately triage issuer news leads (Aug5/28 model launch, Aug20 games, Sep22 esports) from search previews before any model use."
+      ],
+      "material_read_checkpoints": [
+        "Business timing/ads/AI monetization/overseas licence and execution constraints; rights/financing/funding != recognized revenue; generic compliance forms may be skipped with concrete reason."
+      ],
+      "completion_evidence": [
+        "Interval reconciliation, per-selected-event primary locator/SHA, justified skipped categories, specific uncovered pages/events; no statement all latest targets absent."
+      ],
+      "dependency": "W04/W06; official news leads not yet original-opened",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/execution/document_matrix.json#matrix/7",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/execution/document_matrix.json#matrix/12",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/reports/process.json#findings/PROCESS-002"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "HK-05",
+      "company": "00700",
+      "category": "GMTN issue terms after existing June9 circular",
+      "as_of_date": "2026-10-08",
+      "state": "circular_existing_selected_clauses_read_updates_missing",
+      "existing_source_keys": [
+        "hk-00700:1cfbaab885ce"
+      ],
+      "official_discovery_urls": [
+        "https://www1.hkexnews.hk/search/titlesearch.xhtml?category=0&lang=EN&market=SEHK&stockId=1000041953"
+      ],
+      "next_executor_steps": [
+        "Reuse existing 664-page circular SHA1cfb...; full parse is available but only selected substantive pages were read. Do not call all664 pages a full clause audit.",
+        "Resolve June10 pricing and June17 completion/pricing supplements from official event index, deduplicate actualSHA and read relevant final terms only if they alter constraints/availability.",
+        "No mechanical bulk download of all offerings or boilerplate annexes; explicitly account for any applicable convertible/equity documents in the bounded interval."
+      ],
+      "material_read_checkpoints": [
+        "Existing circular physical p24/40/41/46/62/220/227/246/276; check proceeds, debt currency/maturity, licences/AI adoption risks and term amendments. June17 funding is financing, not sales."
+      ],
+      "completion_evidence": [
+        "Existing circular reused; final applicable financing terms/version chain and no-revenue boundary supported with original locators or justified no model effect."
+      ],
+      "dependency": "W04/W06",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/execution/prospectus-2026-compact-import-request.json",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/execution/source_ledger.json#sources/5",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/execution/hkex-primary-index-web-response.json"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "HK-06",
+      "company": "00700",
+      "category": "Original call/Q&A and existing summary rerun",
+      "as_of_date": "2026-10-08",
+      "state": "ET_preHTTP_failure_no_transcript",
+      "existing_source_keys": [],
+      "official_discovery_urls": [
+        "https://www.tencent.com/investors/results/"
+      ],
+      "next_executor_steps": [
+        "W07 identifies actual ET provider market/exchange capability first; unsupported HK is a named provider limit, not a failed paid entitlement or missing user permission.",
+        "Inspect official webcast/IR for original transcript or Q/A export; discovery is separate from ET success, no unconfigured transcription/translation service.",
+        "Reuse existing annual25/release26 originals after W02/W03 for full business groups; material call unavailable remains explicit, with alternate source scope honestly recorded."
+      ],
+      "material_read_checkpoints": [
+        "Games domestic/international timing; ads volume/price vs engagement; Weixin-store technical fees all supporting spans; AI-use-to-billed-revenue conversion; full answer constraints."
+      ],
+      "completion_evidence": [
+        "Actual original call/Q&A SourceRef if publicly available, or reproducible capability/official-source limitation; separate valid annual/release actual rerun and use, not surrogate call acceptance."
+      ],
+      "dependency": "W07 plus W02/W03; later M3 executor only",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/execution/companion-transcript-request.json",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/execution/document_matrix.json#matrix/11",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/reports/fetch.json#findings/FETCH-001"
+      ],
+      "execution_started_here": false
+    }
+  ],
+  "other_ledger_sources": [
+    {
+      "ledger_row": 6,
+      "document_kind": "industry_association",
+      "raw_sha256": "d5a6d246b599a1859d2d64e302fa771d82951e51b663321a00972670b84f6840",
+      "original_reference": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\cadpa-2025.html",
+      "status": "HTTP200 original HTML"
+    },
+    {
+      "ledger_row": 7,
+      "document_kind": "industry_association",
+      "raw_sha256": "3443ca2fe1e7680da42c45236255879f835bdf2f15186d129254e66bb992acbf",
+      "original_reference": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\cadpa-2024.html",
+      "status": "HTTP200 original HTML"
+    },
+    {
+      "ledger_row": 8,
+      "document_kind": "company_release",
+      "raw_sha256": "ce477bfa4d2daddb8b47f105aa8ca2a1d5b4d07cf247099d20a1d3797c29879c",
+      "original_reference": {
+        "url": "https://ir.netease.com/news-releases/news-release-details/netease-announces-second-quarter-and-interim-2026-unaudited",
+        "tool_call_id": "turn319view0",
+        "response_representation": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\netease-web-capture.json"
+      },
+      "status": null
+    }
+  ],
+  "fixed_cutoff": "2026-10-08",
+  "discovery_is_not_import": true
+}

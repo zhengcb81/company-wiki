@@ -1,0 +1,837 @@
+{
+  "identity": {
+    "canonical_name": "MICROSOFT CORP",
+    "market": "US",
+    "exchange": "NASDAQ",
+    "ticker": "MSFT",
+    "security_id": "MSFT",
+    "match_basis": "ticker_exact",
+    "matched_value": "MSFT",
+    "score": 1,
+    "verified": true,
+    "active": true,
+    "source_name": "sec_nasdaq",
+    "source_url": "https://www.sec.gov/files/company_tickers.json",
+    "source_record_id": "0000789019",
+    "identifiers": {
+      "cik": "0000789019"
+    }
+  },
+  "existing_sources": [
+    {
+      "key": "us-msft:99d693f6c154",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "byte_size": 8158067,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "sealed_source_fact": {
+        "title": "Microsoft 10-K FY2025",
+        "display_name": "MICROSOFT CORP",
+        "market": "US",
+        "security_id": "MSFT",
+        "document_kind": "annual_report",
+        "fiscal_year": 2025,
+        "fiscal_period": null,
+        "form_type": "10-K",
+        "period_end": null,
+        "published_date": "2025-07-30",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm"
+      },
+      "sealed_executor_open": {
+        "status": "opened_native_receipt",
+        "reason": null
+      },
+      "sealed_reviewer_open": {
+        "status": "qualified_and_opened",
+        "bytes_verified": true,
+        "read_at": "2026-10-09T08:18:16.975035+00:00",
+        "receipt_status": "ok"
+      },
+      "sealed_parse": {
+        "status": "HTML numbered text projection",
+        "full_recall_verified": false
+      },
+      "sealed_summary": {
+        "status": "not_requested",
+        "reason": null
+      },
+      "sealed_research_relevance": {
+        "locator": "1",
+        "claim_ids": [],
+        "narrative_binding_locators": [],
+        "used_in_forecast": null,
+        "note": null
+      },
+      "sealed_reference": {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\roles\\fetch\\review-original-opens.json",
+        "json_pointer": "/originals/0"
+      },
+      "current_physical_paths": [
+        "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0000950170-25-100235\\msft-20250630.htm"
+      ],
+      "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+    },
+    {
+      "key": "us-msft:43829a12cc9c",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+        "source_id": "urn:company-wiki:source:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+        "content_sha256": "43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+        "byte_size": 6860911,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "sealed_source_fact": {
+        "title": "Microsoft 10-K FY2024",
+        "display_name": "MICROSOFT CORP",
+        "market": "US",
+        "security_id": "MSFT",
+        "document_kind": "annual_report",
+        "fiscal_year": 2024,
+        "fiscal_period": null,
+        "form_type": "10-K",
+        "period_end": null,
+        "published_date": "2024-07-30",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017024087843/msft-20240630.htm"
+      },
+      "sealed_executor_open": {
+        "status": "opened_native_receipt",
+        "reason": null
+      },
+      "sealed_reviewer_open": {
+        "status": "qualified_and_opened",
+        "bytes_verified": true,
+        "read_at": "2026-10-09T08:18:19.114771+00:00",
+        "receipt_status": "ok"
+      },
+      "sealed_parse": {
+        "status": "HTML numbered text projection",
+        "full_recall_verified": false
+      },
+      "sealed_summary": {
+        "status": "not_requested",
+        "reason": null
+      },
+      "sealed_research_relevance": {
+        "locator": "1",
+        "claim_ids": [],
+        "narrative_binding_locators": [],
+        "used_in_forecast": null,
+        "note": null
+      },
+      "sealed_reference": {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\roles\\fetch\\review-original-opens.json",
+        "json_pointer": "/originals/1"
+      },
+      "current_physical_paths": [
+        "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0000950170-24-087843\\msft-20240630.htm"
+      ],
+      "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+    },
+    {
+      "key": "us-msft:c963d7503907",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+        "source_id": "urn:company-wiki:source:sha256:c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+        "content_sha256": "c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+        "byte_size": 5597461,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "sealed_source_fact": {
+        "title": null,
+        "display_name": "MICROSOFT CORP",
+        "market": "US",
+        "security_id": "MSFT",
+        "document_kind": "regulatory_filing",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q1",
+        "form_type": "10-Q",
+        "period_end": "2025-09-30",
+        "published_date": "2025-10-29",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312525256321/msft-20250930.htm"
+      },
+      "sealed_executor_open": {
+        "status": "qualification_failed",
+        "reason": "Actual regulatory_filing RF candidate was found; manifest title blank caused public reader rejection."
+      },
+      "sealed_reviewer_open": {
+        "status": "qualified_and_opened",
+        "bytes_verified": true,
+        "read_at": "2026-10-09T08:18:21.524931+00:00",
+        "receipt_status": "ok"
+      },
+      "sealed_parse": {
+        "status": "not_run",
+        "full_recall_verified": false
+      },
+      "sealed_summary": {
+        "status": "not_requested",
+        "reason": null
+      },
+      "sealed_research_relevance": {
+        "locator": null,
+        "claim_ids": [],
+        "narrative_binding_locators": [],
+        "used_in_forecast": null,
+        "note": null
+      },
+      "sealed_reference": {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\roles\\fetch\\review-original-opens.json",
+        "json_pointer": "/originals/2"
+      },
+      "current_physical_paths": [
+        "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-25-256321\\msft-20250930.htm"
+      ],
+      "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+    },
+    {
+      "key": "us-msft:a60bb6a07479",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+        "source_id": "urn:company-wiki:source:sha256:a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+        "content_sha256": "a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+        "byte_size": 7483278,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "sealed_source_fact": {
+        "title": null,
+        "display_name": "MICROSOFT CORP",
+        "market": "US",
+        "security_id": "MSFT",
+        "document_kind": "regulatory_filing",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q2",
+        "form_type": "10-Q",
+        "period_end": "2025-12-31",
+        "published_date": "2026-01-28",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526027207/msft-20251231.htm"
+      },
+      "sealed_executor_open": {
+        "status": "not_opened",
+        "reason": "Frozen candidate manifest title is blank; related Q1 actual failure retained; no unsupported correction or further original read claimed."
+      },
+      "sealed_reviewer_open": {
+        "status": "qualified_and_opened",
+        "bytes_verified": true,
+        "read_at": "2026-10-09T08:18:23.732578+00:00",
+        "receipt_status": "ok"
+      },
+      "sealed_parse": {
+        "status": "not_run",
+        "full_recall_verified": false
+      },
+      "sealed_summary": {
+        "status": "not_requested",
+        "reason": null
+      },
+      "sealed_research_relevance": {
+        "locator": null,
+        "claim_ids": [],
+        "narrative_binding_locators": [],
+        "used_in_forecast": null,
+        "note": null
+      },
+      "sealed_reference": {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\roles\\fetch\\review-original-opens.json",
+        "json_pointer": "/originals/3"
+      },
+      "current_physical_paths": [
+        "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-26-027207\\msft-20251231.htm"
+      ],
+      "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+    },
+    {
+      "key": "us-msft:76945a2c148a",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+        "source_id": "urn:company-wiki:source:sha256:76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+        "content_sha256": "76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+        "byte_size": 7731948,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "sealed_source_fact": {
+        "title": null,
+        "display_name": "MICROSOFT CORP",
+        "market": "US",
+        "security_id": "MSFT",
+        "document_kind": "regulatory_filing",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q3",
+        "form_type": "10-Q",
+        "period_end": "2026-03-31",
+        "published_date": "2026-04-29",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526191507/msft-20260331.htm"
+      },
+      "sealed_executor_open": {
+        "status": "not_opened",
+        "reason": "Frozen candidate manifest title is blank; related Q1 actual failure retained; no unsupported correction or further original read claimed."
+      },
+      "sealed_reviewer_open": {
+        "status": "qualified_and_opened",
+        "bytes_verified": true,
+        "read_at": "2026-10-09T08:18:25.994682+00:00",
+        "receipt_status": "ok"
+      },
+      "sealed_parse": {
+        "status": "not_run",
+        "full_recall_verified": false
+      },
+      "sealed_summary": {
+        "status": "not_requested",
+        "reason": null
+      },
+      "sealed_research_relevance": {
+        "locator": null,
+        "claim_ids": [],
+        "narrative_binding_locators": [],
+        "used_in_forecast": null,
+        "note": null
+      },
+      "sealed_reference": {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\roles\\fetch\\review-original-opens.json",
+        "json_pointer": "/originals/4"
+      },
+      "current_physical_paths": [
+        "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-26-191507\\msft-20260331.htm"
+      ],
+      "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+    },
+    {
+      "key": "us-msft:8d63b8eaa344",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+        "source_id": "urn:company-wiki:source:sha256:8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+        "content_sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+        "byte_size": 808850,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "sealed_source_fact": {
+        "title": "results official communication",
+        "display_name": "MICROSOFT CORP",
+        "market": "US",
+        "security_id": "MSFT",
+        "document_kind": "investor_relations",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q4",
+        "form_type": null,
+        "period_end": null,
+        "published_date": "2026-07-29",
+        "source_url": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q4/press-release-webcast"
+      },
+      "sealed_executor_open": {
+        "status": "opened_native_receipt",
+        "reason": null
+      },
+      "sealed_reviewer_open": {
+        "status": "qualified_and_opened",
+        "bytes_verified": true,
+        "read_at": "2026-10-09T08:18:28.065555+00:00",
+        "receipt_status": "ok"
+      },
+      "sealed_parse": {
+        "status": "HTML numbered text projection",
+        "full_recall_verified": false
+      },
+      "sealed_summary": {
+        "status": "not_requested",
+        "reason": null
+      },
+      "sealed_research_relevance": {
+        "locator": "1",
+        "claim_ids": [],
+        "narrative_binding_locators": [],
+        "used_in_forecast": null,
+        "note": null
+      },
+      "sealed_reference": {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\roles\\fetch\\review-original-opens.json",
+        "json_pointer": "/originals/5"
+      },
+      "current_physical_paths": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\companies\\MICROSOFT CORP\\raw\\investor_relations\\unknown-date_official_8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e_results official communication.html"
+      ],
+      "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+    },
+    {
+      "key": "us-msft:bdc90bf78dbf",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+        "source_id": "urn:company-wiki:source:sha256:bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+        "content_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+        "byte_size": 273436,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "sealed_source_fact": {
+        "title": "call official communication",
+        "display_name": "MICROSOFT CORP",
+        "market": "US",
+        "security_id": "MSFT",
+        "document_kind": "investor_call_transcript",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q4",
+        "form_type": null,
+        "period_end": null,
+        "published_date": "2026-07-29",
+        "source_url": "https://www.microsoft.com/en-us/Investor/events/fy-2026/earnings-fy-2026-q4"
+      },
+      "sealed_executor_open": {
+        "status": "opened_native_receipt",
+        "reason": null
+      },
+      "sealed_reviewer_open": {
+        "status": "qualified_and_opened",
+        "bytes_verified": true,
+        "read_at": "2026-10-09T08:18:28.835715+00:00",
+        "receipt_status": "ok"
+      },
+      "sealed_parse": {
+        "status": "HTML numbered text projection",
+        "full_recall_verified": false
+      },
+      "sealed_summary": {
+        "status": "parser_failed",
+        "reason": "Official call finite narrative parser terminal failure; separately opened original HTML supports research."
+      },
+      "sealed_research_relevance": {
+        "locator": "1",
+        "claim_ids": [],
+        "narrative_binding_locators": [],
+        "used_in_forecast": null,
+        "note": null
+      },
+      "sealed_reference": {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\roles\\fetch\\review-original-opens.json",
+        "json_pointer": "/originals/6"
+      },
+      "current_physical_paths": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\companies\\MICROSOFT CORP\\raw\\investor_relations\\transcripts\\unknown-date_official_bdc90bf78dbf55ec.html"
+      ],
+      "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+    },
+    {
+      "key": "us-msft:cf054968a148",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+        "source_id": "urn:company-wiki:source:sha256:cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+        "content_sha256": "cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+        "byte_size": 198175,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "sealed_source_fact": {
+        "title": "metrics official communication",
+        "display_name": "MICROSOFT CORP",
+        "market": "US",
+        "security_id": "MSFT",
+        "document_kind": "investor_relations",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q4",
+        "form_type": null,
+        "period_end": null,
+        "published_date": "2026-07-29",
+        "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q4/metrics"
+      },
+      "sealed_executor_open": {
+        "status": "opened_native_receipt",
+        "reason": null
+      },
+      "sealed_reviewer_open": {
+        "status": "qualified_and_opened",
+        "bytes_verified": true,
+        "read_at": "2026-10-09T08:18:29.461714+00:00",
+        "receipt_status": "ok"
+      },
+      "sealed_parse": {
+        "status": "HTML numbered text projection",
+        "full_recall_verified": false
+      },
+      "sealed_summary": {
+        "status": "not_requested",
+        "reason": null
+      },
+      "sealed_research_relevance": {
+        "locator": "1",
+        "claim_ids": [],
+        "narrative_binding_locators": [],
+        "used_in_forecast": null,
+        "note": null
+      },
+      "sealed_reference": {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\roles\\fetch\\review-original-opens.json",
+        "json_pointer": "/originals/7"
+      },
+      "current_physical_paths": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\companies\\MICROSOFT CORP\\raw\\investor_relations\\unknown-date_official_cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6_metrics official communication.html"
+      ],
+      "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+    },
+    {
+      "key": "us-msft:c02f4ea1a271",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "content_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "byte_size": 4016522,
+        "mime_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "schema_version": "2.0"
+      },
+      "sealed_source_fact": {
+        "title": "FY27 Segments and Investor Metrics",
+        "display_name": "MICROSOFT CORP",
+        "market": "US",
+        "security_id": "MSFT",
+        "document_kind": "investor_relations",
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "form_type": null,
+        "period_end": null,
+        "published_date": "2026-09-02",
+        "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/FY27ExternalKPIs.pptx"
+      },
+      "sealed_executor_open": {
+        "status": "opened_native_receipt",
+        "reason": null
+      },
+      "sealed_reviewer_open": {
+        "status": "qualified_and_opened",
+        "bytes_verified": true,
+        "read_at": "2026-10-09T08:18:30.082571+00:00",
+        "receipt_status": "ok"
+      },
+      "sealed_parse": {
+        "status": "native_PPTX_OCR_selected",
+        "full_recall_verified": false
+      },
+      "sealed_summary": {
+        "status": "consumed",
+        "selection": {
+          "candidate_count": 16,
+          "coverage_complete": false,
+          "dropped_financial_count": 0,
+          "lines_total": 1067,
+          "omitted_candidate_count": 1,
+          "pages_read": 22,
+          "pages_total": 22,
+          "selected_count": 15,
+          "source_units": 1064,
+          "status": "partial",
+          "tables_scanned": 0,
+          "tables_total": 0
+        }
+      },
+      "sealed_research_relevance": {
+        "locator": "1",
+        "claim_ids": [],
+        "narrative_binding_locators": [
+          "loc:v1/page:7/paragraph:8",
+          "loc:v1/page:7/paragraph:9",
+          "loc:v1/page:18/paragraph:81",
+          "loc:v1/page:18/paragraph:82",
+          "loc:v1/page:7/paragraph:20"
+        ],
+        "used_in_forecast": null,
+        "note": null
+      },
+      "sealed_reference": {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\roles\\fetch\\review-original-opens.json",
+        "json_pointer": "/originals/8"
+      },
+      "current_physical_paths": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\companies\\MICROSOFT CORP\\raw\\investor_relations\\unknown-date_official_c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4_FY27 Segments and Investor Metrics.pptx"
+      ],
+      "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+    },
+    {
+      "key": "us-msft:4ac3b4f0fa1b",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "content_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "byte_size": 66324,
+        "mime_type": "text/plain",
+        "schema_version": "2.0"
+      },
+      "sealed_source_fact": {
+        "title": null,
+        "display_name": "Microsoft",
+        "market": "US",
+        "security_id": "MSFT",
+        "document_kind": "investor_call_transcript",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q4",
+        "form_type": null,
+        "period_end": null,
+        "published_date": null,
+        "source_url": null
+      },
+      "sealed_executor_open": {
+        "status": "qualification_failed",
+        "reason": "Unknown exact publication/source URL; default reader2.1 refused. No date borrowed from separate official call HTML."
+      },
+      "sealed_reviewer_open": {
+        "status": "rf_qualification_failed",
+        "bytes_verified": true,
+        "read_at": null,
+        "receipt_status": null
+      },
+      "sealed_parse": {
+        "status": "not_run",
+        "full_recall_verified": false
+      },
+      "sealed_summary": {
+        "status": "not_requested",
+        "reason": null
+      },
+      "sealed_research_relevance": {
+        "locator": null,
+        "claim_ids": [],
+        "narrative_binding_locators": [],
+        "used_in_forecast": null,
+        "note": null
+      },
+      "sealed_reference": {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\roles\\fetch\\review-original-opens.json",
+        "json_pointer": "/originals/9"
+      },
+      "current_physical_paths": [],
+      "current_read_claim": "Existing SourceRef and sealed exact-byte reader receipt observed; this investigation did not resolve or native-open this physical file again."
+    }
+  ],
+  "source_tasks": [
+    {
+      "id": "US-01",
+      "company": "MSFT",
+      "category": "Latest FY2026 annual 10-K",
+      "as_of_date": "2026-10-08",
+      "state": "primary_event_confirmed_raw_not_registered",
+      "existing_source_keys": [],
+      "official_discovery_urls": [
+        "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/0001193125-26-323660-index.htm",
+        "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+      ],
+      "next_executor_steps": [
+        "SEC index primary body confirms CIK789019, accession0001193125-26-323660, period2026-06-30, filed/accepted July29 and primary10K8585501B. Current sealed ledger has no rawSHA/SourceRef; first failed acquisition cost/bytes cannot be invented.",
+        "After W06 repair, query fresh configured inventory; if truly absent perform one configured RF→FF→CWP exactannual fetch in new isolated M3 root, preserving real cumulative usage.",
+        "Use execution/requests/fy26-fetch.json as v2 field template, current acquisition limits, original-language exact10K/FY2026/asof; do not get36MB complete submission or duplicate exhibits mechanically.",
+        "Immediately public native-open/period/issuer/SHA validate, then repeat same request proves reuse/download_events0. Do not reclassify old failed fetch as success."
+      ],
+      "material_read_checkpoints": [
+        "Latest annual revenue-recognition segment perimeter, RPO/customer concentration/contracts, capacity/capex constraints, contingent customer-financing/commitments, net/gross and currency/unit changes."
+      ],
+      "completion_evidence": [
+        "New actual sourceRef/SHA/typed usage and first-capture then sameSHA reuse receipt; complete material annual read and actual RF use; or honest configured external failure."
+      ],
+      "dependency": "W06 current identity repair and W08 usage propagation; no provider/Dayu code changes",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/execution/requests/fy26-fetch.json",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/execution/source_ledger.json#sources/10",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/reports/fetch.json#findings/FETCH-001"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "US-02",
+      "company": "MSFT",
+      "category": "Existing FY2026 Q1–Q3 10-Q",
+      "as_of_date": "2026-10-08",
+      "state": "existing_raw_reviewer_open_executor_unconsumed",
+      "existing_source_keys": [
+        "us-msft:c963d7503907",
+        "us-msft:a60bb6a07479",
+        "us-msft:76945a2c148a"
+      ],
+      "official_discovery_urls": [],
+      "next_executor_steps": [
+        "Reuse exact three SEC SourceRefs and existing physical originals; correct formal native selection to document_kind regulatory_filing/form10-Q/exactyearandquarter, not fake quarterly_report.",
+        "W06 new qualified preparation/reader should use genuine period/issuer facts even with blank title. Independent sealed reviewer already qualified all3; sealed executor Q1failed/Q2–Q3notopened remains unchanged.",
+        "Read native originals and link relevant interim policy/customer/capacity changes; do not download again to obtain a title."
+      ],
+      "material_read_checkpoints": [
+        "Q1/Q2/Q3 reported/constant-currency and annual vs quarterly period, recognition/commitment disclosures and superseded segment definitions; latest FY26annual ultimately governs annual perimeter."
+      ],
+      "completion_evidence": [
+        "Three actual preparation/open/extraction receipts and model relevance or justified no incremental value, sameSHA/noGET."
+      ],
+      "dependency": "W06",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/roles/fetch/review-original-opens.json#/originals/2-4",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/execution/source_ledger.json#sources/2-4",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/reports/storage.json#findings/STORAGE-001"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "US-03",
+      "company": "MSFT",
+      "category": "Existing official Q4 call/results/metrics and Sep2 deck",
+      "as_of_date": "2026-10-08",
+      "state": "raw_read_native_call_summary_failed_deck_partial",
+      "existing_source_keys": [
+        "us-msft:bdc90bf78dbf",
+        "us-msft:8d63b8eaa344",
+        "us-msft:cf054968a148",
+        "us-msft:c02f4ea1a271"
+      ],
+      "official_discovery_urls": [],
+      "next_executor_steps": [
+        "Reuse four registered official sources; W05 repaired official HTML transcript parser mechanism needs the actual481-line original new M3 native parse/selection/summary/public-read/consume chain.",
+        "Read the entire substantive call incl Q/A, rather than count PPTX summary as call success. Retain actual native call speaker/paragraph locators and original language.",
+        "Deck Sep2 updated guidance supersedes earlier Q1 segment/KPI guidance where expressly stated; preserve both historical sources and supporting whole groups. Requery exact ET USFY26Q4 via W07 only under current zeroincrementalfee bound; its external entitlement outcome remains separate."
+      ],
+      "material_read_checkpoints": [
+        "Management FY27/Q1 guides, currency effects, Azure capacity/demand/RPO conversion; deck page7 paragraph9 full Agents/Infra ownership and page18 product alignment; RPO is not all next-year revenue."
+      ],
+      "completion_evidence": [
+        "Actual new native officialcall chain with its ownSourceRef; complete support/targetperiods; separate ET measured status; valid deck binding without automatic neighbor-ID support."
+      ],
+      "dependency": "W05/W02/W03/W07",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/execution/source_ledger.json#sources/5-8",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/execution/research/management-discovery.json",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/reports/storage.json#findings/STORAGE-002"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "US-04",
+      "company": "MSFT",
+      "category": "Customer financing / OpenAI contract changes",
+      "as_of_date": "2026-10-08",
+      "state": "public_primary_terms_discovered_not_ingested",
+      "existing_source_keys": [],
+      "official_discovery_urls": [
+        "https://openai.com/index/next-chapter-of-microsoft-openai-partnership/",
+        "https://blogs.microsoft.com/blog/2026/04/27/the-next-phase-of-the-microsoft-openai-partnership/"
+      ],
+      "next_executor_steps": [
+        "Read-only primary body opened here: Oct28 2025 definitive-agreement announcement and Apr27 2026 amended agreement. Capture these originals through configured bounded CWP path later; noSourceRef/SHA minted now.",
+        "Use latest annual/call for relevant concentration, enforceability, fulfilment and recognition. Read the old purchasecommitment alongside the Aprilamendment, not old exclusivity alone.",
+        "Discover direct primary customer funding-close/available-cash/compute-purchase sources only if they support a material exposure. Full private contract/cap amount/payment schedule remains unknown if undisclosed; no subscription or inferred facts."
+      ],
+      "material_read_checkpoints": [
+        "Old disclosed additional Azure purchase commitment and investment value are distinct; April amendment changes cloud flexibility/IP exclusivity/revenue-share direction and cap. Financing, equity value, booked commitment and recognized revenue are separate quantities."
+      ],
+      "completion_evidence": [
+        "Dated original publicterms+SHA/SourceRef/locators, supersession mapping and exact known/unknown contractual constraints; all forecast effect sourced or explicitly conditional, not funding-as-sales."
+      ],
+      "dependency": "W04/W06; private/fullterms not established by publicnews",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/reports/storage.json#findings/STORAGE-004",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/execution/document_matrix.json",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/execution/research/management-discovery.json"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "US-05",
+      "company": "MSFT",
+      "category": "Annual-to-asof material communications",
+      "as_of_date": "2026-10-08",
+      "state": "partial_interval_coverage",
+      "existing_source_keys": [],
+      "official_discovery_urls": [],
+      "next_executor_steps": [
+        "Traverse primary Microsoft/SEC material communications from latest annual July29 through Oct8, plus relevant contractual changes since prior baseline July30 2025.",
+        "Reuse sealed research material-discovery-final.json actual observations; Oct7 announcement schedules Oct28 quarterly release, so no futureQ1actuals. Capitaldistribution notices need no forced revenue parameter.",
+        "Read materially relevant AI/customer/product/recognition/security constraints; record original date boundaries and concrete no-model-effect skips."
+      ],
+      "material_read_checkpoints": [
+        "Sep9 educationAI policy if relevant to uptake/adoption; exact strategy/revenue targets vs forecasts; recognition and capacity/counterevidence."
+      ],
+      "completion_evidence": [
+        "Bounded dateinterval materiality inventory with actualoriginal locators or namedunavailable events; no unsupported claim alltargets reviewed."
+      ],
+      "dependency": "W04/W06",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/execution/research/material-discovery-final.json",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/execution/research/management-discovery.json",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/reports/storage.json#findings/STORAGE-004"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "US-06",
+      "company": "MSFT",
+      "category": "Existing ET TXT and outside market references",
+      "as_of_date": "2026-10-08",
+      "state": "intact_TXT_publication_unknown_partial_external_text",
+      "existing_source_keys": [
+        "us-msft:4ac3b4f0fa1b"
+      ],
+      "official_discovery_urls": [],
+      "next_executor_steps": [
+        "Existing 66324B TXT SHA4ac3... has nullsourceURL/pubdate. Keep it; do not borrow dated officialHTML's publication to qualify differentbytes.",
+        "If original TXT source/version can be proved with exactperiod/body/providerprovenance, add compatible fact then reuse; otherwise use separatelyqualified officialHTML and retain TXTunknown. No paidfallback.",
+        "External SRG/AWS/Gartner snapshots are browserpartialtext, not originalHTML/CWPSourceRefs; fetch originals only if needed for a material independent forecast check. Otherwise name analogical/partialscope."
+      ],
+      "material_read_checkpoints": [
+        "Transcript identity/FYQ/year/speaker and currency/billion unit; independent market perimeter vs companyreportedrevenue; no marketbenchmark directly applied as company growth."
+      ],
+      "completion_evidence": [
+        "ExactTXTprovenance receipt or truthfulunusedunknown, no duplicatedcall masquerade; actualoriginalexternalSourceRefs onlywhen material."
+      ],
+      "dependency": "W06/W07; conditional materiality, not mandatory newprovider",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/execution/source_ledger.json#sources/9",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/roles/fetch/review-original-opens.json#/originals/9",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/execution/source_ledger.json#sources/11-13"
+      ],
+      "execution_started_here": false
+    }
+  ],
+  "other_ledger_sources": [
+    {
+      "ledger_row": 10,
+      "document_kind": "annual_report",
+      "raw_sha256": null,
+      "original_reference": {
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+      },
+      "status": "failed"
+    },
+    {
+      "ledger_row": 11,
+      "document_kind": "primary_market_dataset",
+      "raw_sha256": null,
+      "original_reference": {
+        "url": "https://www.srgresearch.com/articles/q2-cloud-market-passes-143-billion-highest-growth-rate-in-eight-years",
+        "returned_text_sha256": "1dff00332e7cc3c6e3301e05ebec7aa0a283108458837dfb8893c904465e5801",
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\execution\\external\\srg-returned.txt"
+      },
+      "status": "returned_primary_tool_text"
+    },
+    {
+      "ledger_row": 12,
+      "document_kind": "company_release",
+      "raw_sha256": null,
+      "original_reference": {
+        "url": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Second-Quarter-Results/default.aspx",
+        "returned_text_sha256": "5c50483991053fd801766df4b9d8924c8715e0a9ffd9b7c3e24af0f23ae11089",
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\execution\\external\\aws-returned.txt"
+      },
+      "status": "returned_primary_tool_text"
+    },
+    {
+      "ledger_row": 13,
+      "document_kind": "specialist_research",
+      "raw_sha256": null,
+      "original_reference": {
+        "url": "https://www.gartner.com/en/newsroom/press-releases/2026-02-26-gartner-says-surging-memory-costs-will-reduce-global-pc-and-smartphone-shipments-in-2026",
+        "returned_text_sha256": "ba11ac6426060994b9ff67b3e068c14f1c1bfe0e28ebda4d2c81d2b610558e5d",
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\execution\\external\\gartner-returned.txt"
+      },
+      "status": "returned_primary_tool_text"
+    }
+  ],
+  "fixed_cutoff": "2026-10-08",
+  "discovery_is_not_import": true
+}

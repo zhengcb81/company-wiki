@@ -1,5 +1,12 @@
 # Findings
 
+## 2026-10-09 19:00 UTC：新M3实测边界
+
+FF旧安装SKILL.md只遗漏已发布ET工具/凭证位置配置说明，所选代码本已一致；准备preflight正确拒绝，定点同步说明后全安装字节一致。旧隔离FF配置没有fmp_api_key_file字段是只读观察，不能据此推出凭证不可用；新US真实ET已经得到具名entitlement而非missing_credentials，按真实结果归因，不改冻结scope或读/输出key。
+
+旧索引文件长度与实际新下载长度不同必须保留当前原件SHA/byte_size，不把索引线索当原件身份。US三个季度重新遭reader拒绝已定位RF转换强制title非空：来源层和RF原文接口都可打开、manifest title为空。MAIN先保留实际记录并TDD修展示字段与资格分离，executor正常来源丰富不能当产品修好。CN/HK未知公开日不能假造。新M3完整研究和四独立验收仍待，不用既有offline绿集提前核销64finding。
+
+
 ## 2026-10-09 17:00 UTC：正常push的新实证与大节点反例
 
 新pre-push实际阻止了CWP W05的3FAIL（1真实旧版本兼容、2夹具错宣parser identity），以及RF W08 2FAIL（合法reader拒绝原因丢失）；都未上传。这证明runtime应由push/CI共用职责入口检查，pre-commit快速静态并不能替代它。恢复有限typed诊断不等于输出不可信正文；测试需固定实际行为/失败语义而非退休许可/全格式同一版本号。

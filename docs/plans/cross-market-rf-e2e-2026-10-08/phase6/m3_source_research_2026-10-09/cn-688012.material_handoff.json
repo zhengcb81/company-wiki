@@ -1,0 +1,500 @@
+{
+  "identity": {
+    "canonical_name": "中微公司",
+    "market": "CN",
+    "exchange": "SSE",
+    "ticker": "688012",
+    "security_id": "688012",
+    "match_basis": "ticker_exact",
+    "matched_value": "688012",
+    "score": 1,
+    "verified": true,
+    "active": true,
+    "source_name": "cninfo",
+    "source_url": "https://www.cninfo.com.cn/new/data/szse_stock.json",
+    "source_record_id": "9900038991",
+    "identifiers": {
+      "cninfo_category": "A股",
+      "org_id": "9900038991"
+    }
+  },
+  "existing_sources": [
+    {
+      "key": "cn-688012:d64c410832f2",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "byte_size": 9165875,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "sealed_source_fact": {
+        "title": "中微公司：2025年年度报告",
+        "display_name": "中微公司",
+        "market": "CN",
+        "security_id": "688012",
+        "document_kind": "annual_report",
+        "fiscal_year": 2025,
+        "fiscal_period": "FY",
+        "form_type": null,
+        "period_end": "2025-12-31",
+        "published_date": "2026-03-31",
+        "source_url": "https://static.cninfo.com.cn/finalpage/2026-03-31/1225062431.PDF"
+      },
+      "sealed_executor_open": "verified raw read success",
+      "sealed_reviewer_open": {
+        "status": "qualified_and_opened",
+        "bytes_verified": true,
+        "read_at": "2026-10-09T08:17:11.102128+00:00",
+        "receipt_status": "ok"
+      },
+      "sealed_parse": {
+        "parser": "PyMuPDF",
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\execution\\sources\\d64c410832f2-pages.json"
+      },
+      "sealed_summary": "failed: paid MODEL_OUTPUT_TRUNCATED; no narrative artifact",
+      "sealed_research_relevance": {
+        "locator": "PyMuPDF all pages; nativeclaims exact locators",
+        "claim_ids": [],
+        "narrative_binding_locators": [],
+        "used_in_forecast": null,
+        "note": null
+      },
+      "sealed_reference": {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\roles\\fetch\\review-original-opens.json",
+        "json_pointer": "/originals/0"
+      },
+      "current_physical_paths": [
+        "C:\\Users\\郑曾波\\Dropbox\\Stock\\工业与信息化\\电子\\中微公司\\中微公司：2025年年度报告.pdf"
+      ],
+      "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+    },
+    {
+      "key": "cn-688012:182e2062fed9",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "byte_size": 3149962,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "sealed_source_fact": {
+        "title": "2026年半年度报告",
+        "display_name": "中微公司",
+        "market": "CN",
+        "security_id": "688012",
+        "document_kind": "semi_annual_report",
+        "fiscal_year": 2026,
+        "fiscal_period": "H1",
+        "form_type": "interim_report",
+        "period_end": null,
+        "published_date": "2026-08-20",
+        "source_url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482884.PDF"
+      },
+      "sealed_executor_open": "verified raw read success",
+      "sealed_reviewer_open": {
+        "status": "qualified_and_opened",
+        "bytes_verified": true,
+        "read_at": "2026-10-09T08:17:11.746487+00:00",
+        "receipt_status": "ok"
+      },
+      "sealed_parse": {
+        "parser": "PyMuPDF",
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\execution\\sources\\182e2062fed9-pages.json"
+      },
+      "sealed_summary": "failed: unpaid source_metadata.language contract precheck",
+      "sealed_research_relevance": {
+        "locator": "PyMuPDF all pages; nativeclaims exact locators",
+        "claim_ids": [],
+        "narrative_binding_locators": [],
+        "used_in_forecast": null,
+        "note": null
+      },
+      "sealed_reference": {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\roles\\fetch\\review-original-opens.json",
+        "json_pointer": "/originals/1"
+      },
+      "current_physical_paths": [],
+      "current_read_claim": "Existing SourceRef and sealed exact-byte reader receipt observed; this investigation did not resolve or native-open this physical file again."
+    },
+    {
+      "key": "cn-688012:91ae4978b694",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "content_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "byte_size": 6361468,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "sealed_source_fact": {
+        "title": "中微公司：2025年半年度报告",
+        "display_name": "中微公司",
+        "market": "CN",
+        "security_id": "688012",
+        "document_kind": "semi_annual_report",
+        "fiscal_year": 2025,
+        "fiscal_period": "H1",
+        "form_type": null,
+        "period_end": "2025-06-30",
+        "published_date": "2025-08-29",
+        "source_url": "http://static.cninfo.com.cn/finalpage/2025-08-29/1224606011.PDF"
+      },
+      "sealed_executor_open": "verified raw read success",
+      "sealed_reviewer_open": {
+        "status": "qualified_and_opened",
+        "bytes_verified": true,
+        "read_at": "2026-10-09T08:17:12.360961+00:00",
+        "receipt_status": "ok"
+      },
+      "sealed_parse": {
+        "parser": "PyMuPDF",
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\execution\\sources\\91ae4978b694-pages.json"
+      },
+      "sealed_summary": "not_model_summarized; original comparative numbers read",
+      "sealed_research_relevance": {
+        "locator": "PyMuPDF all pages; nativeclaims exact locators",
+        "claim_ids": [],
+        "narrative_binding_locators": [],
+        "used_in_forecast": null,
+        "note": null
+      },
+      "sealed_reference": {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\roles\\fetch\\review-original-opens.json",
+        "json_pointer": "/originals/2"
+      },
+      "current_physical_paths": [],
+      "current_read_claim": "Existing SourceRef and sealed exact-byte reader receipt observed; this investigation did not resolve or native-open this physical file again."
+    },
+    {
+      "key": "cn-688012:ab7bb0076b2a",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "content_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "byte_size": 217264,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "sealed_source_fact": {
+        "title": "中微公司：2026年第一季度报告",
+        "display_name": "中微公司",
+        "market": "CN",
+        "security_id": "688012",
+        "document_kind": "quarterly_report",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q1",
+        "form_type": null,
+        "period_end": "2026-03-31",
+        "published_date": "2026-04-28",
+        "source_url": "http://static.cninfo.com.cn/finalpage/2026-04-28/1225215453.PDF"
+      },
+      "sealed_executor_open": "verified raw read success",
+      "sealed_reviewer_open": {
+        "status": "qualified_and_opened",
+        "bytes_verified": true,
+        "read_at": "2026-10-09T08:17:12.995855+00:00",
+        "receipt_status": "ok"
+      },
+      "sealed_parse": {
+        "parser": "PyMuPDF",
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\execution\\sources\\ab7bb0076b2a-pages.json"
+      },
+      "sealed_summary": "completed: original Chinese summary publicly read; two spans consumed into six used parameters, selection partial",
+      "sealed_research_relevance": {
+        "locator": "PyMuPDF all pages; nativeclaims exact locators",
+        "claim_ids": [],
+        "narrative_binding_locators": [],
+        "used_in_forecast": null,
+        "note": null
+      },
+      "sealed_reference": {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\roles\\fetch\\review-original-opens.json",
+        "json_pointer": "/originals/3"
+      },
+      "current_physical_paths": [],
+      "current_read_claim": "Existing SourceRef and sealed exact-byte reader receipt observed; this investigation did not resolve or native-open this physical file again."
+    },
+    {
+      "key": "cn-688012:19cdb41e03b2",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "content_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "byte_size": 11211796,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "sealed_source_fact": {
+        "title": "中微公司：首次公开发行股票并在科创板上市招股说明书",
+        "display_name": "中微公司",
+        "market": "CN",
+        "security_id": "688012",
+        "document_kind": "prospectus",
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "form_type": null,
+        "period_end": null,
+        "published_date": "2019-07-16",
+        "source_url": "http://static.cninfo.com.cn/finalpage/2019-07-16/1206447929.PDF"
+      },
+      "sealed_executor_open": "verified raw read success",
+      "sealed_reviewer_open": {
+        "status": "qualified_and_opened",
+        "bytes_verified": true,
+        "read_at": "2026-10-09T08:17:13.583318+00:00",
+        "receipt_status": "ok"
+      },
+      "sealed_parse": {
+        "parser": "PyMuPDF",
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\execution\\sources\\19cdb41e03b2-pages.json"
+      },
+      "sealed_summary": "not_model_summarized; historical qualitative context read",
+      "sealed_research_relevance": {
+        "locator": "PyMuPDF all pages; nativeclaims exact locators",
+        "claim_ids": [],
+        "narrative_binding_locators": [],
+        "used_in_forecast": null,
+        "note": null
+      },
+      "sealed_reference": {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\roles\\fetch\\review-original-opens.json",
+        "json_pointer": "/originals/4"
+      },
+      "current_physical_paths": [],
+      "current_read_claim": "Existing SourceRef and sealed exact-byte reader receipt observed; this investigation did not resolve or native-open this physical file again."
+    },
+    {
+      "key": "cn-688012:0c5481a9e5f8",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:0c5481a9e5f8e9f14348cddef5f60f2212b651685190078520908216c9526116",
+        "source_id": "urn:company-wiki:source:sha256:0c5481a9e5f8e9f14348cddef5f60f2212b651685190078520908216c9526116",
+        "content_sha256": "0c5481a9e5f8e9f14348cddef5f60f2212b651685190078520908216c9526116",
+        "byte_size": 206948,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "sealed_source_fact": {
+        "title": "SEMI July 2026 semiconductor equipment forecast",
+        "display_name": "中微公司",
+        "market": "CN",
+        "security_id": "688012",
+        "document_kind": "other",
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "form_type": null,
+        "period_end": null,
+        "published_date": "2026-07-14",
+        "source_url": "https://www.semi.org/en/semi-press-release/global-semiconductor-equipment-sales-forecast-to-reach-a-record-229-billion-dollars-in-2028-semi-reports"
+      },
+      "sealed_executor_open": "verified raw success",
+      "sealed_reviewer_open": {
+        "status": "qualified_and_opened",
+        "bytes_verified": true,
+        "read_at": "2026-10-09T08:17:14.233852+00:00",
+        "receipt_status": "ok"
+      },
+      "sealed_parse": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\execution\\sources\\semi-original-text.json",
+      "sealed_summary": "not_model_summarized; original English evidence used",
+      "sealed_research_relevance": {
+        "locator": "WFE forecast and region prose",
+        "claim_ids": [],
+        "narrative_binding_locators": [],
+        "used_in_forecast": null,
+        "note": null
+      },
+      "sealed_reference": {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\roles\\fetch\\review-original-opens.json",
+        "json_pointer": "/originals/5"
+      },
+      "current_physical_paths": [
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\companies\\中微公司\\raw\\other\\unknown-date_official_0c5481a9e5f8e9f14348cddef5f60f2212b651685190078520908216c9526116_SEMI July 2026 semiconductor equipment forecast.html"
+      ],
+      "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+    }
+  ],
+  "source_tasks": [
+    {
+      "id": "CN-01",
+      "company": "688012",
+      "category": "FY2024 exact publication",
+      "as_of_date": "2026-10-08",
+      "state": "existing_raw_publication_conflict",
+      "existing_source_keys": [],
+      "official_discovery_urls": [],
+      "next_executor_steps": [
+        "Reuse physical FY2024 original 3273711fbb79fa6ee5e9a3b2f0eea7d5a1dfa0d305721c61e5af251f9addf399, 14285291B, 268 pages; locate it through the current catalog rather than importing a filename as identity.",
+        "Find the issuer/exchange official annual-publication event for these exact bytes; resolve April17 vs April18 with official event+document-link evidence.",
+        "If proved, use W06 existing append-only source-fact API, then exact FY2024 reuse/public preparation; if unproved retain unknown, not today's retrieval date."
+      ],
+      "material_read_checkpoints": [
+        "Standalone FY2024 product history/qualification and revenue recognition; cover and 268-page header were read here, detailed business pages were not."
+      ],
+      "completion_evidence": [
+        "Exact byte SHA and original retained; official publication evidence bound to it; new qualified receipt or named unknown; no duplicate GET."
+      ],
+      "dependency": "W06 source owner acceptance",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/reports/storage.json#findings/STORAGE-007",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/execution/document_matrix.json#documents/12"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "CN-02",
+      "company": "688012",
+      "category": "2026-08-25 official investor-relations DOCX",
+      "as_of_date": "2026-10-08",
+      "state": "official_url_unresolved_no_raw",
+      "existing_source_keys": [],
+      "official_discovery_urls": [
+        "https://open.sseinfo.com/ir2/indexkcb?language=zh_CN&stockCode=688012"
+      ],
+      "next_executor_steps": [
+        "Rediscover exact August25 record from AMEC/SSE issuer IR index in the new attempt; sealed observations recorded mirror DOCX but did not retain a literal official URL.",
+        "Confirm issuer 688012, event date and actual downloadable DOCX; a mirror is not labelled official without publisher provenance.",
+        "Search current source inventory for that byte identity, otherwise acquire once through configured bounded official capture/CWP import; W05 supports DOCX. Preserve bytes/MIME/SHA, no translation."
+      ],
+      "material_read_checkpoints": [
+        "Read entire substantive Q/A and strategy/product qualification/overseas/CMP context; give paragraph or table-cell locators, preserve disclaimers and target periods."
+      ],
+      "completion_evidence": [
+        "Exact official URL+event date+byte SHA+SourceRef; full native DOCX parse/read and selected business summary/public read; RF use or a concrete no-model-value reason."
+      ],
+      "dependency": "W05 and W06; current web access failure is named discovery limit",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/execution/document_matrix.json#documents/7",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/execution/management-context-ledger.json#latest_ir_gap",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/reports/fetch.json#findings/FETCH-001"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "CN-03",
+      "company": "688012",
+      "category": "SSE Sep10 interactive QA complete pagination",
+      "as_of_date": "2026-10-08",
+      "state": "discovered_not_original_captured",
+      "existing_source_keys": [],
+      "official_discovery_urls": [
+        "https://roadshow.sseinfo.com/activityDetails/40766"
+      ],
+      "next_executor_steps": [
+        "Use the official rendered event to discover its actual public body/pagination or documented export; do not invent an endpoint or replace body with a search excerpt.",
+        "The search preview claims 21 companies, 195 interaction records/65 pages at 3 per page; pre-collected questions are separately 29/10 pages. Reconfirm actual totals from original responses.",
+        "Capture complete bounded response pages/order/event IDs/thread IDs/issuer IDs, join question and answer, account for admin/closing entries, then attribute only 688012 records. Do not claim 195 AMEC answers.",
+        "Retain originals once; normalize stable event/thread/Q/A locators via CWP-supported current path. If exact endpoint/rendering cannot be captured, record missing page IDs/count and real blocker."
+      ],
+      "material_read_checkpoints": [
+        "Complete management answers including constraints, conditional targets, timelines and contrary evidence; separate unaffiliated user question from company answer."
+      ],
+      "completion_evidence": [
+        "Reconciled actual page totals and unique record IDs, no missing/collapsed order, issuer attribution; per-Q/A raw locator+SHA; no partial-response coverage_complete."
+      ],
+      "dependency": "W05/W06; official web open returned 0 text lines in this investigation",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/execution/document_matrix.json#documents/8",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/reports/storage.json#findings/STORAGE-005",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/reports/process.json#findings/PROCESS-002"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "CN-04",
+      "company": "688012",
+      "category": "Zhonggui acquisition/issuance agreements",
+      "as_of_date": "2026-10-08",
+      "state": "H1_notes_read_full_transaction_missing",
+      "existing_source_keys": [
+        "cn-688012:182e2062fed9"
+      ],
+      "official_discovery_urls": [
+        "https://www.sse.com.cn/listing/renewal/ma/index_listing_detail.shtml?auditId=d111c13e8f884c24bc2e5008c6337657&bussinesType=1",
+        "https://star.sse.com.cn/disclosure/listedinfo/announcement/c/new/2026-04-29/688012_20260429_2YSG.pdf",
+        "https://static.sse.com.cn/stock/disclosure/announcement/c/202604/688012_20260424_14Q8.pdf"
+      ],
+      "next_executor_steps": [
+        "Official SSE project/index/report URLs are discovery leads; search previews are not full original agreement evidence. Resolve final registered report and latest supplements/implementation notices as of Oct8, using project ID and issuer.",
+        "Enumerate report, purchase agreement and supplement, performance-compensation agreement, valuation/consideration, closing/control and implementation notices. Match exact versions and do not download all appendices mechanically.",
+        "Reuse any exact existing SourceRef; acquire only required missing originals once under current bounds; read agreement clauses including definitions, settlement and conditions, not only H1 summary."
+      ],
+      "material_read_checkpoints": [
+        "H1 physical p176–177: 64.69% control, May31 consolidation, postpurchase revenue and CY2026/27/28 revenue commitments; verify against final agreement accounting perimeter, compensation/contingencies, timelines, target entity, consolidated revenue vs ownership, recognition and feasibility."
+      ],
+      "completion_evidence": [
+        "Final contract/materiality inventory, exact clauses+SourceRef/locators; all discovered amendments accounted for, unknown private clauses named; financial commitment not equated to achieved CWP/RF revenue."
+      ],
+      "dependency": "W04/W06 before new capture/import",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/execution/management-context-ledger.json#contextual_material_items",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/execution/document_matrix.json#documents/6",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/reports/fetch.json#findings/FETCH-002"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "CN-05",
+      "company": "688012",
+      "category": "Annual-to-asof management presentation/announcements",
+      "as_of_date": "2026-10-08",
+      "state": "bounded_search_incomplete",
+      "existing_source_keys": [],
+      "official_discovery_urls": [],
+      "next_executor_steps": [
+        "Bounded official issuer/SSE discovery from annual publication March31 to Oct8; enumerate investor presentation, strategy, issuance/convertible and material acquisition/product notices.",
+        "Record each event/link/category separately; title triage may skip routine formatted records with a concrete no-business-value reason. No blanket absent claim from FY2025 annual's convertible-bond not-applicable box.",
+        "Read selected primary business clauses after one reuse-first capture, then either extract materially new targets/counterevidence or document lack of model effect."
+      ],
+      "material_read_checkpoints": [
+        "Product/qualification/shipment-to-acceptance, overseas constraints, new curves, final acquisition milestones; no future 2026Q3 inferred before publication."
+      ],
+      "completion_evidence": [
+        "Dated bounded interval coverage with actual originals for materially relevant events or named missing candidates and justified skips."
+      ],
+      "dependency": "W04/W05/W06; no new provider",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/execution/document_matrix.json#documents/5",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/execution/document_matrix.json#documents/9",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/reports/process.json#findings/PROCESS-002"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "CN-06",
+      "company": "688012",
+      "category": "Existing annual/H1/IPO processing and additive pointer",
+      "as_of_date": "2026-10-08",
+      "state": "existing_read_summary_failed_or_partial",
+      "existing_source_keys": [
+        "cn-688012:d64c410832f2",
+        "cn-688012:182e2062fed9",
+        "cn-688012:19cdb41e03b2"
+      ],
+      "official_discovery_urls": [],
+      "next_executor_steps": [
+        "Reuse existing annual/H1/IPO SourceRefs; new batch only after W01/W02/W03 installed acceptance. Old annual paid truncation and H1 unpaid language failure remain historical failures.",
+        "Keep old document matrix unchanged; new attempt supersession references real execution/requests/registered-ipo-v2.json, not absent registered-ipo.json.",
+        "Do not replace final IPO SHA19cdb... with Dropbox legacy prospectus SHA3a9eb... merely because titles resemble."
+      ],
+      "material_read_checkpoints": [
+        "Annual p41 LPCVD full product subject/repeat-order context and p62 risk; H1p13 five-year equipment-process product coverage, not corporate market-share/revenue goal; p15/p18 milestones; IPO p44/p116/p251 is 2016–18 historical context."
+      ],
+      "completion_evidence": [
+        "New actual selected-group summary/public read/consumption or justified unused reason, full supporting proposition references; same original SHA, no retry download."
+      ],
+      "dependency": "W01/W02/W03 plus W06",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/execution/source_ledger.json#sources/0",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/execution/source_ledger.json#sources/1",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/execution/requests/registered-ipo-v2.json",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/reports/fetch.json#findings/FETCH-006"
+      ],
+      "execution_started_here": false
+    }
+  ],
+  "other_ledger_sources": [],
+  "fixed_cutoff": "2026-10-08",
+  "discovery_is_not_import": true
+}

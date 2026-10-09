@@ -1,5 +1,12 @@
 # Progress
 
+## 2026-10-09 19:00 UTC：M3三独立新执行启动
+
+实际native init三次exit0，分别cn-688012/hk-00700/us-msft；三个独立agent均已返回真实工具初报，非模拟角色。新run/AUTO/work/TEMP/registry独占，旧source/raw/config只通过既有API复用/追加，不复制全库。准备第一次preflight因FF安装SKILL.md旧字节拒绝，未启动付费；CAS定点同步两份说明后全安装匹配，第二次初始化成功。原预算母账236,614tokens/151,565microUSD估算，历史unknown7和FX2,764及旧acquisition unknown保持，初次准备无新增model/provider。运行期费用待原生AUTO/工具封存，不能继续写0。
+
+US FY26 true 10-K实际下载成功（SHA2c86b6365b5308b546f9864cbd02f48f9baec3d050e943389accc43a5723516f/8,585,616B），索引长度差115B单列。US FY26Q1–Q3当前reader upstream，CN FY24 local_prepare、HK H1 metadata gap在查；CN初次H1未显式period请求保留、改精确H1新增call。FMP companion实际entitlement限制，不盲重试、不把0cost当有资料。MAIN继续共用责任诊断；截至此记录无四审研究结论，未提前激活八家目标。一次协调记录脚本因非ASCII bytes literal在解析阶段失败、零文件写入，已纠正为UTF8 encode后继续；不是产品失败。
+
+
 ## 2026-10-09 17:00 UTC：发布边界复核与新增阻断
 
 FF W08 41ba0150正常push601PASS/7SKIP/78subtests/62.63s，GitHub公开API精确CI37961753941 SUCCESS（16:48:25→16:49:46，81s）。CWP7762bfd1正常push2428PASS/3FAIL/144.26s，RF1a060802普通push147PASS/2FAIL/19.69s，二者未上传。没有绕过hooks。W05修复普通commit87cdf733+7de4fabb已交202PASS/1optional skip/真实MSFT41组回放，独立集中复审中；RF W08追加reader有限cause正在TDD。

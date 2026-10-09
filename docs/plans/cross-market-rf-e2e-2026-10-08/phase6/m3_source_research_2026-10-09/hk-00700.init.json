@@ -1,0 +1,21 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+    "init",
+    "--root",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs",
+    "--company",
+    "腾讯控股",
+    "--as-of",
+    "2026-10-08",
+    "--run-id",
+    "m3-20261009T184946-hk-00700"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"run\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\revenue-forecast-audit\\\\runs\\\\m3-20261009T184946-hk-00700\", \"run_id\": \"m3-20261009T184946-hk-00700\"}\n",
+  "stderr": ""
+}

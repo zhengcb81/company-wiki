@@ -1,0 +1,826 @@
+{
+  "observed_at": "2026-10-09T18:49:46.750418+00:00",
+  "repo_heads": {
+    "company-wiki": "7caedd19758b0f617d8840659b53a0d20a329c80",
+    "revenue-forecast": "5dcd19be77e8425f88a3d162d21c16b55070d51c",
+    "filing-fetch": "41ba0150c9c634f6021c9346744cada391ec2c4c",
+    "revenue-forecast-audit": "78c2b1089200937a9371548f3f8a212c501fdfcd",
+    "earnings-transcripts/earnings-transcripts": "c91f5f54bc2a24e7b5d6e648dba3f9d578f5fa52"
+  },
+  "installed_files": [
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\accounting-boundaries.md",
+      "sha256": "be72df88166b76558e997a9f42138f796fb953933dc4e7e38536622940967f60",
+      "byte_size": 2570,
+      "mtime_ns": 1791225761126294400,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\backtesting.md",
+      "sha256": "84336ecb1373baecf079949155f891121e70612ad150811532c129c556055196",
+      "byte_size": 10191,
+      "mtime_ns": 1791225761126294400,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\buy-side-methodology.md",
+      "sha256": "a55381c9519f13fbddd70d21d16d01a1229155d90a6a128fe9529d67ff80f89f",
+      "byte_size": 12669,
+      "mtime_ns": 1791519908604876800,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\compliance-contract.md",
+      "sha256": "d4509a54459c1471d4523e359eddb74147c84ce8d20138abd8b1107b3e8c7b18",
+      "byte_size": 7697,
+      "mtime_ns": 1786185848098177300,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\data-governance.md",
+      "sha256": "be56cd9fdb60b326b328e5a970edcc8c63ce375ee322b1dbf1004c7ea9a864c9",
+      "byte_size": 6695,
+      "mtime_ns": 1791531363481966600,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\evidence-role-calibration.md",
+      "sha256": "a476f7b10c24f5d778dbf0e6cacb77c59d831bb7fb97982dc37d49d549d81aaf",
+      "byte_size": 10059,
+      "mtime_ns": 1791519908442587700,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\extended-models.md",
+      "sha256": "831cf530a4d3260c25fe5d251f9621afe88b97708575f151bf922016e377c499",
+      "byte_size": 16741,
+      "mtime_ns": 1791396621761626400,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\growth-driver-tree.md",
+      "sha256": "ce3b57f69dfe269f868187adbf24b1579d5e822dc88cabaf0378c16e8f32c621",
+      "byte_size": 7337,
+      "mtime_ns": 1791225761126294400,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\industry-lifecycle-routing.md",
+      "sha256": "826953f8adbb26c2ebf71253711fa6d73c3958e55cd7d01f4416ca8eb2a06b5b",
+      "byte_size": 10202,
+      "mtime_ns": 1791225761126294400,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\input-construction.md",
+      "sha256": "c7ef79311c0be7f1bb63a1ff4213044d8a1f44024b53ade7b9688ebdbdab2d20",
+      "byte_size": 11651,
+      "mtime_ns": 1791396621761626400,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\input-schema.md",
+      "sha256": "b2d70aa6f97dc3382c4e342c7f449bb8205a4d47f1709656d3ba1eeeecd43607",
+      "byte_size": 19362,
+      "mtime_ns": 1791445543725094000,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\management-targets.md",
+      "sha256": "85ae3dcaa49d0ee16a35f87f21a13ca16bfed1261c2f0742e9b74d71463c9c15",
+      "byte_size": 7776,
+      "mtime_ns": 1791225761142884600,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\model-library.md",
+      "sha256": "9b335522a5e956424260cca379e640eb484d52d0688cf3d44486d06ff4f1e921",
+      "byte_size": 14308,
+      "mtime_ns": 1791396621761626400,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\output-schema.md",
+      "sha256": "fd8628717c5638ddb35e485bcec970f2ae7d8baefff75171fee18d6cd557d75d",
+      "byte_size": 6369,
+      "mtime_ns": 1791482003172711200,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\research-coverage.md",
+      "sha256": "2c1abb034da0a5e86f71bf0a58414473938c74d474543fef5a1e3781c2d7785d",
+      "byte_size": 9188,
+      "mtime_ns": 1791225761146878500,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\resource-business-guidance.md",
+      "sha256": "93ebdadcc77a7f1fcc60dd64e7ece640b238b53e28fa93c793d84eddba7f27ba",
+      "byte_size": 6263,
+      "mtime_ns": 1791225761147883500,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\schema-migration-3.4-to-3.5.md",
+      "sha256": "efee17cbaf33c688b23d2d32aca32d918c8e0a7e6dc734c4e59cc338b5408c04",
+      "byte_size": 2927,
+      "mtime_ns": 1786183445228738900,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\schema-migration-3.5-to-3.6.md",
+      "sha256": "e7b1a589de8dce4bb319da8f62f6e903d31ade44c02da954eee968cf37701cbe",
+      "byte_size": 2177,
+      "mtime_ns": 1791225761149879500,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\schema-migration-3.6-to-3.7.md",
+      "sha256": "a292acf48db79f96071a81f286fb56d0abad35752c222499d649a0baabd1ad1d",
+      "byte_size": 2149,
+      "mtime_ns": 1791396621761626400,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\target-measurement-comparison.md",
+      "sha256": "2a41d45f566f7a30508bf9bbf718f54b2182d426ecb33cf7d9b888a98dcd5464",
+      "byte_size": 5537,
+      "mtime_ns": 1791519908432876200,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\__init__.py",
+      "sha256": "f7343866b80251c3d2105c6d34446898784ef6272ed9310dfee7cbecf8db3459",
+      "byte_size": 35,
+      "mtime_ns": 1791225761158863900,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\analysis\\__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "mtime_ns": 1791225761161541200,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\analysis\\confidence.py",
+      "sha256": "0413b4d07ed19b976820d358c80d86f2780e9fe38113138ceb43ede5119cf05f",
+      "byte_size": 14476,
+      "mtime_ns": 1791519908520129100,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\analysis\\sensitivity.py",
+      "sha256": "0b9f5f15bc14ac5a1ec8c58396ebb1379f8481d2a1e7d7ce02141bae7971b2c0",
+      "byte_size": 13266,
+      "mtime_ns": 1791541313469754500,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\asset_ownership.py",
+      "sha256": "2dc8931451b88f410de5011bac2e80cc74f838e11e94c5627170a6e0ab891ed0",
+      "byte_size": 10622,
+      "mtime_ns": 1791225761161541200,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\commercial_terms.py",
+      "sha256": "6596d4492fcfb31cb73efaf75fb482d90156f2fbc91ab29be272e24745546005",
+      "byte_size": 4795,
+      "mtime_ns": 1791225761161541200,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_contracts.py",
+      "sha256": "87217f45ac810b572f4fba114b1ee0574ea437de5e973ea23374365c1384fecf",
+      "byte_size": 26500,
+      "mtime_ns": 1791531363482965800,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_posix.py",
+      "sha256": "669d268667d9e08a3d98ee1eec44ecc26fb4f142dd6d7310191169deba5dc852",
+      "byte_size": 2824,
+      "mtime_ns": 1791225761161541200,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_process.py",
+      "sha256": "9664696ac23699ecf6b234cec3aa93ce475127d36a4bddf680edb711ccf92e3d",
+      "byte_size": 8500,
+      "mtime_ns": 1791225761174198400,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_reader.py",
+      "sha256": "8ff1cf553a8849330a41f74ae27bfcacd2515186b5fa58168cead91b6cfa7508",
+      "byte_size": 3348,
+      "mtime_ns": 1791225761176215900,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_tree.py",
+      "sha256": "561f921d20636532ec13d4c2a116af120a88a2b56e55de6fbadf61f137bef8ba",
+      "byte_size": 6960,
+      "mtime_ns": 1791225761179222800,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_source.py",
+      "sha256": "e6e1df861ea25d2a23ada3e7ca9e5c1c68fdfd25cea620bdd9354d553d3f1111",
+      "byte_size": 20953,
+      "mtime_ns": 1791524769102428100,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_source_reader_v2.py",
+      "sha256": "dd238da96383da706a147fcea18f84ba54c84b2909a63ca9d2e5c59ab29fa025",
+      "byte_size": 17186,
+      "mtime_ns": 1791566378273689300,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_source_v2.py",
+      "sha256": "72bc240db60de62cabf0ca8018930fc5af5b01fe1964e1c9cffe7153dd6c9d6f",
+      "byte_size": 16188,
+      "mtime_ns": 1791524769175802800,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\confidence_policy.py",
+      "sha256": "a2444c1ebb7f7ed9144e0db0199d1055da20b126b3026f90e114c55817ed822f",
+      "byte_size": 7843,
+      "mtime_ns": 1791225761186211200,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "mtime_ns": 1791225761187213400,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\constants.py",
+      "sha256": "bf051f719c27ed455d2826f5e03b391d7643c596dadfcf741aadf7562d0309de",
+      "byte_size": 6200,
+      "mtime_ns": 1791524769213337400,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\document.py",
+      "sha256": "daea670c80f441c6ff60627bf9f87cd27d0113cd1cc8b3baa9248fea05ecdd63",
+      "byte_size": 48537,
+      "mtime_ns": 1791541313470900100,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\evidence.py",
+      "sha256": "cf200313135108d23ed803f6089bc2be7778a3a3ff4c91e892f461abd8bbaa6a",
+      "byte_size": 15959,
+      "mtime_ns": 1791531363483968600,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\source_clock.py",
+      "sha256": "194abc751640892bd38d0ad84ee482ac6797859cf27508abb88131fcf3376c3b",
+      "byte_size": 9677,
+      "mtime_ns": 1791524769315655400,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_fetch_client.py",
+      "sha256": "f8f2177be8f7f320e973c78161d0b23c04fbe71e41fc2be65a57efe7bebadb19",
+      "byte_size": 18658,
+      "mtime_ns": 1791566378248801900,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_upstream_cause.py",
+      "sha256": "32d2a1d5bc44e0d9abc60452f226e13418ebea4ea16fc7e1124345bfcf3bddbb",
+      "byte_size": 11783,
+      "mtime_ns": 1791570256016643100,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\fix_hashes.py",
+      "sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "byte_size": 8484,
+      "mtime_ns": 1791225761194830200,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\forecast\\calc.py",
+      "sha256": "cac7c1fb3fd4a4b17701c691e0f621a5256048a63c90a9a25e882d4ee24d9faf",
+      "byte_size": 18909,
+      "mtime_ns": 1791541313471901000,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\forecast\\segments.py",
+      "sha256": "fc2d33f91f4cd1e003a9ed93efec2a88be1839bfea043aa106f13a6daeb08b7b",
+      "byte_size": 29602,
+      "mtime_ns": 1791541313472902000,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\generate_input_template.py",
+      "sha256": "f7e7f44a00203035002e4814adae9a9aaaf67bc053e8a001c80d7e100ae87a38",
+      "byte_size": 13109,
+      "mtime_ns": 1791519908561820500,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\internal_flow.py",
+      "sha256": "05814b9286889088278fc5cf0c47a40452026bbc926f8f382db7e70de38a1355",
+      "byte_size": 4841,
+      "mtime_ns": 1791225761194830200,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\lint_input.py",
+      "sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "byte_size": 21589,
+      "mtime_ns": 1791225761194830200,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\mine_year_operation.py",
+      "sha256": "602255c766897dcabf8c5107c0ba3116686aab7dca683066fdffc70b88628986",
+      "byte_size": 4670,
+      "mtime_ns": 1791225761194830200,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\mixed_recognition.py",
+      "sha256": "04ed62e0b61af523818aeff961cebc34eadc3df4b1b7756e5a32c9f8e432f232",
+      "byte_size": 4034,
+      "mtime_ns": 1791225761194830200,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\model_extensions.py",
+      "sha256": "c5c15d782834546cf1d58a0a9c2d664db79898b6cc9517c657bcfac743ce2f92",
+      "byte_size": 16009,
+      "mtime_ns": 1791225761194830200,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\model_registry.py",
+      "sha256": "62f864b9ab3f144eacff43448897d2c31abc217e17ed3b0e3f58894cdd985081",
+      "byte_size": 30116,
+      "mtime_ns": 1791225761194830200,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\narrative_source_preparation.py",
+      "sha256": "4d848e286ca318f427d9001bb6243b98d9f91886f7931d7eb4796cf4cc4c2e72",
+      "byte_size": 2400,
+      "mtime_ns": 1791225761209886400,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\processed_artifact_canary.py",
+      "sha256": "19869b02cb370add57b5910d360e3ae864b870a2825d76894ea36530a9ccacfc",
+      "byte_size": 4639,
+      "mtime_ns": 1791225761210891600,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\processing_demand.py",
+      "sha256": "fcdfcad8ebd1fc20febf3c157dcd20ad92708fd69d00373ef9a943e5a820afc1",
+      "byte_size": 8231,
+      "mtime_ns": 1791225761212176600,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\publication_registry.py",
+      "sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+      "byte_size": 10936,
+      "mtime_ns": 1791446141395204500,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\reconciliation.py",
+      "sha256": "c4b69e4ee1f3dc9822aed05b9facfd5bb44575b6b51b706dede46277ee5996f5",
+      "byte_size": 4224,
+      "mtime_ns": 1791225761215166800,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0,
+      "mtime_ns": 1791225761216164400,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\communication_scope.py",
+      "sha256": "ef802da4ed1e10778070fdc36c51098851322e8996fbd003e12d716049ee1994",
+      "byte_size": 5435,
+      "mtime_ns": 1791519908507130100,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\coverage.py",
+      "sha256": "ae6519cc18fea823dcc9d5e47956a2aea6da3270f1041b28d7bf1b783cd4b470",
+      "byte_size": 5801,
+      "mtime_ns": 1786205130429291300,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\drivers.py",
+      "sha256": "656c50b3d3e7fc52a8637b9fe587e22fc1f0a894bfb7b343aed2ee53afd85e22",
+      "byte_size": 21671,
+      "mtime_ns": 1791495290739365200,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\evidence_roles.py",
+      "sha256": "bad8c09dde16590d3f56f979051dc814629c8b8b7fc750b66adfba51ecbf21b2",
+      "byte_size": 13610,
+      "mtime_ns": 1791519908397179500,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\input_evidence.py",
+      "sha256": "4cec4c2c4d43fea578be1261449724edb118cfeb18e08019effea27debfc1865",
+      "byte_size": 14093,
+      "mtime_ns": 1791524769352170200,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\input_quantities.py",
+      "sha256": "0217ce20bd3456122349d59dd49f4b471c4e6fc844878e561141d95a28d11f1a",
+      "byte_size": 9970,
+      "mtime_ns": 1791495290743006300,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\input_targets.py",
+      "sha256": "0abaf3c3771250730dadf7f13294cc9c22eec586e014ebeade851361f6e7a45f",
+      "byte_size": 14221,
+      "mtime_ns": 1791495390748062100,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\native_dependencies.py",
+      "sha256": "6096e2065d9036235a7960b367bbf9e7ed2ae2c7c5a766cc20f0a11d63045931",
+      "byte_size": 4517,
+      "mtime_ns": 1791519908397179500,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\target_measurement.py",
+      "sha256": "4009b0ad2ac60b5e7bc9f38c3c9f4d60e39c602c56bd712da902aeba112d1e4e",
+      "byte_size": 12423,
+      "mtime_ns": 1791519908413297400,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\targets.py",
+      "sha256": "59c0019d1855bb43000aa59718d2a907a0185679397169c773690aa315e19a21",
+      "byte_size": 36535,
+      "mtime_ns": 1791531363484968000,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\timing_bridge.py",
+      "sha256": "1df60466342836611709c2e4d6d158dcf6fe8bc90301308e263c24908d4b186d",
+      "byte_size": 5578,
+      "mtime_ns": 1791519908584694900,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_backtest.py",
+      "sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "byte_size": 29070,
+      "mtime_ns": 1791225761221175800,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_constraints.py",
+      "sha256": "6ce99c1d59fa3858213e31bf9dadc351591ef0eda006d957f07cf1a839e57374",
+      "byte_size": 15064,
+      "mtime_ns": 1791225761222171300,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_core.py",
+      "sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "byte_size": 25879,
+      "mtime_ns": 1791225761225205500,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+      "sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "byte_size": 5324,
+      "mtime_ns": 1791396621761626400,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_publication.py",
+      "sha256": "bc2bb4a33e36ed9ad82bc4ffe33e57de8999002c2c7910b9c8b9d1565678fcd0",
+      "byte_size": 24917,
+      "mtime_ns": 1791225761227209600,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_report.py",
+      "sha256": "36653f60aa98e76db9a31b33fd8e254de38d6534c29e1410eb7969242f2d5188",
+      "byte_size": 81537,
+      "mtime_ns": 1791541313473900100,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\rolling_backtest.py",
+      "sha256": "80de3bfbf47d1dc6b59fc8de94733f996463edb5d749923b6ab7039875d4ec8b",
+      "byte_size": 8900,
+      "mtime_ns": 1791225761229199400,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\schema_compatibility.py",
+      "sha256": "90bf360c78818783d52e68f7e3429f27ef1e1a2ae02c70589659ee4203d88ace",
+      "byte_size": 3671,
+      "mtime_ns": 1791524769394300500,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\schema_fields.py",
+      "sha256": "54276494dcb280b23791c3a7614eb2090997a68e1116d78f6efdf02edf52a01c",
+      "byte_size": 1526,
+      "mtime_ns": 1791225761231200000,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\schema_optin.py",
+      "sha256": "6a3e01ea8ab95e5d705ff21c86274db6fc16b3569a19d74c2d1558cd3cf6b3a3",
+      "byte_size": 2263,
+      "mtime_ns": 1791225761232019800,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_narrative_context.py",
+      "sha256": "c499ae024e9013c165aa98650df624b9567dd8ee67465a7826a06b35cfc18bde",
+      "byte_size": 6124,
+      "mtime_ns": 1791524769399294900,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_period_semantics.py",
+      "sha256": "d1c155189ccd631037e85f2f2005a8cf04cbe24c20497ede157a0d33e3d4c1ff",
+      "byte_size": 423,
+      "mtime_ns": 1791519908490014900,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+      "sha256": "bd67489b2099fc15c47879bf87027723a1ef40d6da673b87c26c1e44671ad91d",
+      "byte_size": 24527,
+      "mtime_ns": 1791566378287191600,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\trust_anchor.py",
+      "sha256": "9abdcec55a524574b55e0111f513338f79a486f536985d036b94b4a71ba1310c",
+      "byte_size": 1634,
+      "mtime_ns": 1791225761234032800,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\SKILL.md",
+      "sha256": "f559ff51caacaea5c3b420e27b5c95ce1ae9cd55c55b24f46e63e74be1727c4e",
+      "byte_size": 31765,
+      "mtime_ns": 1791531363480966300,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\references\\contract-ownership.md",
+      "sha256": "ca731d27679d728df86598ff3eb7eb836556f945da0a673c4fcccdf899ab80c7",
+      "byte_size": 2026,
+      "mtime_ns": 1791076124168321100,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\references\\identity.md",
+      "sha256": "ae83b6215c8c1cd0d60fac31f7c69446a2c57d9e945a6f58a709640e51aedd64",
+      "byte_size": 2038,
+      "mtime_ns": 1785685175570934500,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\et_v2_contract.py",
+      "sha256": "ee5b4e877b55b65b2aa86a3eb1d02a00e631ed79b60db1e4c1f2dbd18cd30def",
+      "byte_size": 8755,
+      "mtime_ns": 1791543784090948400,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\fetch_filing.py",
+      "sha256": "9e0ae4dc11b12367b7498e3f80599f63df48e27efd3eebba9e6ca59e4be8de51",
+      "byte_size": 74560,
+      "mtime_ns": 1791564425626171200,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\ff_local_source_prepare.py",
+      "sha256": "2120ee7bb00a7ad2476fc7032db593024b0d4441c2c07a1c4529021fc21f0653",
+      "byte_size": 5488,
+      "mtime_ns": 1791564425627170900,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\ff_process_transport.py",
+      "sha256": "a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a",
+      "byte_size": 11655,
+      "mtime_ns": 1791506533361658000,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\ff_process_tree.py",
+      "sha256": "4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f",
+      "byte_size": 4837,
+      "mtime_ns": 1791240742236281300,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\ff_provider_cause.py",
+      "sha256": "49f6ae540b2068ab6a6c9f5c9c823128adc9095a3bce4094fcec64302e724f18",
+      "byte_size": 15039,
+      "mtime_ns": 1791564425628170600,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\ff_v2_envelope.py",
+      "sha256": "94651be3bb1fae306e304047e01a33a6bb9e6993be2fca0be4b56e56b19ea3f9",
+      "byte_size": 7321,
+      "mtime_ns": 1791564425629170500,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\filing_contracts.py",
+      "sha256": "814c63bd8b684d946e7b3a18f194ed441da375070e822eb370ec9c3a136536eb",
+      "byte_size": 30324,
+      "mtime_ns": 1791564425630170800,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\transcript_companion.py",
+      "sha256": "1f373148043d66502d9c1316036597c09a2c1071981ce38a17ba06fa9b13db14",
+      "byte_size": 8058,
+      "mtime_ns": 1791543784092948300,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\transcript_tool_transport.py",
+      "sha256": "013c905b88e4d936d9fd0d2f88a67bb8204378a7e091b29f5ccfb58bed30e847",
+      "byte_size": 34930,
+      "mtime_ns": 1791544523826524900,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\SKILL.md",
+      "sha256": "7974f9c638b4cabda1767e678e758977cf92484a176b473ed5ffd333036b12bd",
+      "byte_size": 22940,
+      "mtime_ns": 1791571781584670000,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\references\\artifact-contract.md",
+      "sha256": "18ff10b42141cc2d0fc7e0e1d022114e8f93fc41fdfbb11d97e56537d65d42c9",
+      "byte_size": 12471,
+      "mtime_ns": 1791564219387873200,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\references\\company-pool-loop.md",
+      "sha256": "8e96452ccb94b458832171855200b29214f2a106265a33eb3610d9292493794c",
+      "byte_size": 11301,
+      "mtime_ns": 1791501620529707700,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\references\\executor.md",
+      "sha256": "90cefa6727fdf81499406f86cd1acf8d69651ac325a7ba312306307a80de860c",
+      "byte_size": 5679,
+      "mtime_ns": 1791564219382783700,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\references\\numeric-ledger-example.json",
+      "sha256": "2f793ef0b2ec633a7a31bd8b42c7d7a0c8759667c928122d721e0677f4f33890",
+      "byte_size": 347,
+      "mtime_ns": 1791500483276771200,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\references\\remediation.md",
+      "sha256": "6f67653523f0774c49285f30099adcbd1a2b63568798320fd9b94916fd7db3e4",
+      "byte_size": 5071,
+      "mtime_ns": 1791500933376252900,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\references\\review-analyst.md",
+      "sha256": "90855852d17571c27568e2e26ecbc482a05a803ee869fad17dab2208ceadbe9c",
+      "byte_size": 2702,
+      "mtime_ns": 1791500483282953100,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\references\\review-fetch.md",
+      "sha256": "d083b5956f939e782479e352d90cc71df013daa25d51e2bf14d98c1225778218",
+      "byte_size": 3055,
+      "mtime_ns": 1791500483285957200,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\references\\review-process.md",
+      "sha256": "696863868745cb8025ed4bb2e86e94cf0e77b7ce724bcee2ba34babe8e968667",
+      "byte_size": 3147,
+      "mtime_ns": 1791500483288277900,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\references\\review-storage.md",
+      "sha256": "e297f393725b2b43a92f7c0769a6140c4bbfbfa4aa560bf99542221d9e8b68ca",
+      "byte_size": 3009,
+      "mtime_ns": 1791500933381494200,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\references\\rf-checkpoints.md",
+      "sha256": "0f8f69a4257d1c34a30ac1ecfc9432e0c49be4280546a56e0289efce6e731459",
+      "byte_size": 5969,
+      "mtime_ns": 1791500483294398500,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\references\\workflow.md",
+      "sha256": "5db61c28c64278ec2e08734503227500a6e2ad79462f7dc462069d349961a719",
+      "byte_size": 7936,
+      "mtime_ns": 1791507376672514000,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+      "sha256": "2c30b29fe64c78deef194ace0650ad73d3402e22510995baa2cf184c5ae54c57",
+      "byte_size": 39689,
+      "mtime_ns": 1791564219370386000,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\scripts\\numeric_audit.py",
+      "sha256": "39cb4f8f561f14f406b5c79639f7395af915e1f9027b15a0e2ac8e0c40949aec",
+      "byte_size": 5633,
+      "mtime_ns": 1791500483264239400,
+      "normalized_repository_match": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\SKILL.md",
+      "sha256": "e17691e20aae24684b1629585280efa0e57e526fcc3fc69bcf95490ab95f1be6",
+      "byte_size": 8444,
+      "mtime_ns": 1791564219362832200,
+      "normalized_repository_match": true
+    }
+  ],
+  "normalized_installed_drifts": [],
+  "credential_values_logged": false,
+  "actual_model_options": {
+    "model_id": "deepseek-flash",
+    "endpoint": "https://api.deepseek.com/chat/completions",
+    "api_key_env": "DEEPSEEK_API_KEY",
+    "max_output_tokens": 8192,
+    "temperature": 1.0,
+    "output_token_field": "max_tokens"
+  },
+  "provider": "deepseek",
+  "protected_production_configs": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml",
+      "sha256": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+      "byte_size": 3602,
+      "mtime_ns": 1791230922098841600
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "byte_size": 866,
+      "mtime_ns": 1790542565101886700
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_acquisition.yaml",
+      "sha256": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585",
+      "byte_size": 1656,
+      "mtime_ns": 1791486533260798700
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\local_ocr.json",
+      "sha256": "9b8a7df81ca62ebc4bb9c2d60d45c247b291564a4a38f5648e5f4b3edb59889b",
+      "byte_size": 943,
+      "mtime_ns": 1791519643945418900
+    }
+  ]
+}
