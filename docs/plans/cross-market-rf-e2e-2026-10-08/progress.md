@@ -1,5 +1,12 @@
 # Progress
 
+## 2026-10-09 17:00 UTC：发布边界复核与新增阻断
+
+FF W08 41ba0150正常push601PASS/7SKIP/78subtests/62.63s，GitHub公开API精确CI37961753941 SUCCESS（16:48:25→16:49:46，81s）。CWP7762bfd1正常push2428PASS/3FAIL/144.26s，RF1a060802普通push147PASS/2FAIL/19.69s，二者未上传。没有绕过hooks。W05修复普通commit87cdf733+7de4fabb已交202PASS/1optional skip/真实MSFT41组回放，独立集中复审中；RF W08追加reader有限cause正在TDD。
+
+W06独立审查完成FAIL，两fast-ready实证错CIK与FY2022正文均伪缓存ready；已交作者统一事实资格修复，原件/DB/config不变。W11源码9b107672+PWF78c2b10已commit，59/15/10controls及4native通过，八选定安装文件实际SHA验证成功。所有运行0外部付费；主目标继续active，W09/W12/W13/M3/M4/loop仍未完成。
+
+
 ## 2026-10-09 11:35 UTC：W04/W07发布安装完成、W03已并线待推
 
 W04 cba23b8e / exactCI37923124555 SUCCESS94s；FF44c778b4 / exactCI37923517689 SUCCESS87s，ETc91f5f54已main。FF独立持久启动10PASS及真实三跳/双复用通过，五运行文件两物理根定点安装与默认配置无env探测已通过，unselected drift0，未读/复制密钥。W03 source8395299f+docs589439b4已正常合主线；原254PASS/独立89PASS，MAIN共享CI/push责任测试2RED→66PASS，准备正常推送。新日志、失败历史和安装receipt保留。W05独占DOCX/transcript施工、W06只读调查启动。M3/M4/loop及剩余卡未完成；母goal ACTIVE，零原件/config/Dayu/IQS改动、零新增收费。

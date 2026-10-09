@@ -1,0 +1,13 @@
+test_aggregate_cap_missing_and_unmatched_are_recorded_without_child (test_precall_input_history.PrecallInputHistoryTests.test_aggregate_cap_missing_and_unmatched_are_recorded_without_child) ... ok
+test_cli_accepts_explicit_freeze_and_propagates_native_exit (test_precall_input_history.PrecallInputHistoryTests.test_cli_accepts_explicit_freeze_and_propagates_native_exit) ... ok
+test_failure_then_correction_preserves_both_exact_input_versions (test_precall_input_history.PrecallInputHistoryTests.test_failure_then_correction_preserves_both_exact_input_versions) ... ok
+test_invalid_utf8_empty_and_preflight_input_are_not_reencoded (test_precall_input_history.PrecallInputHistoryTests.test_invalid_utf8_empty_and_preflight_input_are_not_reencoded) ... ok
+test_old_capture_has_no_implicit_file_scan (test_precall_input_history.PrecallInputHistoryTests.test_old_capture_has_no_implicit_file_scan) ... ok
+test_real_child_consumes_snapshot_when_original_changes_at_launch (test_precall_input_history.PrecallInputHistoryTests.test_real_child_consumes_snapshot_when_original_changes_at_launch) ... ok
+test_relative_equals_arguments_duplicates_and_same_basename (test_precall_input_history.PrecallInputHistoryTests.test_relative_equals_arguments_duplicates_and_same_basename) ... ok
+test_timeout_and_launch_failure_keep_pre_call_input (test_precall_input_history.PrecallInputHistoryTests.test_timeout_and_launch_failure_keep_pre_call_input) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 2.050s
+
+OK

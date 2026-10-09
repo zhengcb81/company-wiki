@@ -1,0 +1,909 @@
+{
+  "schema_version": "w08-independent-re-review/1",
+  "source_before": {
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009\\scripts\\fetch_filing.py": "9e0ae4dc11b12367b7498e3f80599f63df48e27efd3eebba9e6ca59e4be8de51",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009\\scripts\\ff_local_source_prepare.py": "2120ee7bb00a7ad2476fc7032db593024b0d4441c2c07a1c4529021fc21f0653",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009\\scripts\\ff_provider_cause.py": "49f6ae540b2068ab6a6c9f5c9c823128adc9095a3bce4094fcec64302e724f18",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009\\scripts\\ff_v2_envelope.py": "8bca27f2acfdb4f4ba00342fcf4b9a783da6328ed69018c2b0286ff464fda534",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009\\scripts\\filing_contracts.py": "814c63bd8b684d946e7b3a18f194ed441da375070e822eb370ec9c3a136536eb",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py": "ee8979e4853debf0cd433aae7a3d01219952d0fe0ebbffbabec4c37f8fd252d4",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_upstream_cause.py": "67be19ef4e903c06abcaa05217d509ac48c4a090d9ebc557128d9a35d224cf27",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py": "4038be124d06c9d3b26a5d0490f82f18e03e0dd92fa4a3b1c72625da294c9ebb"
+  },
+  "cases": [
+    {
+      "name": "mime0-v2-upstream-exit2",
+      "mime_type": "text/plain",
+      "passed": true,
+      "observation": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-final-uznmk46g\\mime0-v2-exit2\\fake",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-final-uznmk46g\\mime0-v2-exit2\\配置.json"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 0.201,
+        "payload": {
+          "error_code": "ambiguous",
+          "error": "filing-fetch exited 2: status=ambiguous: canonical_import_failed",
+          "retryable": false,
+          "candidates": [
+            {
+              "ticker": "0700",
+              "canonical_name": "腾讯控股有限公司",
+              "market": "HK",
+              "exchange": "HKEX",
+              "security_id": "hk:0700",
+              "entity_id": "issuer:Tencent"
+            },
+            {
+              "source_ref": {
+                "schema_version": "2.0",
+                "document_id": "urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "source_id": "urn:company-wiki:source:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "byte_size": 25,
+                "mime_type": "text/plain"
+              }
+            }
+          ],
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": null,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "schema_version": "acquisition-failure/1",
+            "code": "canonical_import_failed",
+            "retryable": false,
+            "provider_started": true,
+            "usage_complete": null,
+            "usage_scope": "operation",
+            "acquisition_usage": null
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"ambiguous\", \"error\": \"filing-fetch exited 2: status=ambiguous: canonical_import_failed\", \"retryable\": false, \"candidates\": [{\"ticker\": \"0700\", \"canonical_name\": \"腾讯控股有限公司\", \"market\": \"HK\", \"exchange\": \"HKEX\", \"security_id\": \"hk:0700\", \"entity_id\": \"issuer:Tencent\"}, {\"source_ref\": {\"schema_version\": \"2.0\", \"document_id\": \"urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"source_id\": \"urn:company-wiki:source:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"content_sha256\": \"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"byte_size\": 25, \"mime_type\": \"text/plain\"}}], \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": null, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"schema_version\": \"acquisition-failure/1\", \"code\": \"canonical_import_failed\", \"retryable\": false, \"provider_started\": true, \"usage_complete\": null, \"usage_scope\": \"operation\", \"acquisition_usage\": null}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    },
+    {
+      "name": "mime0-v2-upstream-exit0",
+      "mime_type": "text/plain",
+      "passed": true,
+      "observation": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-final-uznmk46g\\mime0-v2-exit0\\fake",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-final-uznmk46g\\mime0-v2-exit0\\配置.json"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 0.209,
+        "payload": {
+          "error_code": "ambiguous",
+          "error": "filing-fetch returned: status=ambiguous: canonical_import_failed",
+          "retryable": false,
+          "candidates": [
+            {
+              "ticker": "0700",
+              "canonical_name": "腾讯控股有限公司",
+              "market": "HK",
+              "exchange": "HKEX",
+              "security_id": "hk:0700",
+              "entity_id": "issuer:Tencent"
+            },
+            {
+              "source_ref": {
+                "schema_version": "2.0",
+                "document_id": "urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "source_id": "urn:company-wiki:source:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "byte_size": 25,
+                "mime_type": "text/plain"
+              }
+            }
+          ],
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": null,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "schema_version": "acquisition-failure/1",
+            "code": "canonical_import_failed",
+            "retryable": false,
+            "provider_started": true,
+            "usage_complete": null,
+            "usage_scope": "operation",
+            "acquisition_usage": null
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"ambiguous\", \"error\": \"filing-fetch returned: status=ambiguous: canonical_import_failed\", \"retryable\": false, \"candidates\": [{\"ticker\": \"0700\", \"canonical_name\": \"腾讯控股有限公司\", \"market\": \"HK\", \"exchange\": \"HKEX\", \"security_id\": \"hk:0700\", \"entity_id\": \"issuer:Tencent\"}, {\"source_ref\": {\"schema_version\": \"2.0\", \"document_id\": \"urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"source_id\": \"urn:company-wiki:source:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"content_sha256\": \"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"byte_size\": 25, \"mime_type\": \"text/plain\"}}], \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": null, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"schema_version\": \"acquisition-failure/1\", \"code\": \"canonical_import_failed\", \"retryable\": false, \"provider_started\": true, \"usage_complete\": null, \"usage_scope\": \"operation\", \"acquisition_usage\": null}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    },
+    {
+      "name": "mime0-v1-upstream-exit2",
+      "mime_type": "text/plain",
+      "passed": true,
+      "observation": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-final-uznmk46g\\mime0-v1-exit2\\fake",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-final-uznmk46g\\mime0-v1-exit2\\配置.json"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 0.223,
+        "payload": {
+          "error_code": "ambiguous",
+          "error": "filing-fetch exited 2: status=ambiguous: canonical_import_failed",
+          "retryable": false,
+          "candidates": [
+            {
+              "ticker": "0700",
+              "canonical_name": "腾讯控股有限公司",
+              "market": "HK",
+              "exchange": "HKEX",
+              "security_id": "hk:0700",
+              "entity_id": "issuer:Tencent"
+            },
+            {
+              "source_ref": {
+                "schema_version": "2.0",
+                "document_id": "urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "source_id": "urn:company-wiki:source:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "byte_size": 25,
+                "mime_type": "text/plain"
+              }
+            }
+          ],
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": null,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "schema_version": "acquisition-failure/1",
+            "code": "canonical_import_failed",
+            "retryable": false,
+            "provider_started": true,
+            "usage_complete": null,
+            "usage_scope": "operation",
+            "acquisition_usage": null
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"ambiguous\", \"error\": \"filing-fetch exited 2: status=ambiguous: canonical_import_failed\", \"retryable\": false, \"candidates\": [{\"ticker\": \"0700\", \"canonical_name\": \"腾讯控股有限公司\", \"market\": \"HK\", \"exchange\": \"HKEX\", \"security_id\": \"hk:0700\", \"entity_id\": \"issuer:Tencent\"}, {\"source_ref\": {\"schema_version\": \"2.0\", \"document_id\": \"urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"source_id\": \"urn:company-wiki:source:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"content_sha256\": \"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"byte_size\": 25, \"mime_type\": \"text/plain\"}}], \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": null, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"schema_version\": \"acquisition-failure/1\", \"code\": \"canonical_import_failed\", \"retryable\": false, \"provider_started\": true, \"usage_complete\": null, \"usage_scope\": \"operation\", \"acquisition_usage\": null}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    },
+    {
+      "name": "mime0-v1-upstream-exit0",
+      "mime_type": "text/plain",
+      "passed": true,
+      "observation": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-final-uznmk46g\\mime0-v1-exit0\\fake",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-final-uznmk46g\\mime0-v1-exit0\\配置.json"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 0.299,
+        "payload": {
+          "error_code": "ambiguous",
+          "error": "filing-fetch returned: status=ambiguous: canonical_import_failed",
+          "retryable": false,
+          "candidates": [
+            {
+              "ticker": "0700",
+              "canonical_name": "腾讯控股有限公司",
+              "market": "HK",
+              "exchange": "HKEX",
+              "security_id": "hk:0700",
+              "entity_id": "issuer:Tencent"
+            },
+            {
+              "source_ref": {
+                "schema_version": "2.0",
+                "document_id": "urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "source_id": "urn:company-wiki:source:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "byte_size": 25,
+                "mime_type": "text/plain"
+              }
+            }
+          ],
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": null,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "schema_version": "acquisition-failure/1",
+            "code": "canonical_import_failed",
+            "retryable": false,
+            "provider_started": true,
+            "usage_complete": null,
+            "usage_scope": "operation",
+            "acquisition_usage": null
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"ambiguous\", \"error\": \"filing-fetch returned: status=ambiguous: canonical_import_failed\", \"retryable\": false, \"candidates\": [{\"ticker\": \"0700\", \"canonical_name\": \"腾讯控股有限公司\", \"market\": \"HK\", \"exchange\": \"HKEX\", \"security_id\": \"hk:0700\", \"entity_id\": \"issuer:Tencent\"}, {\"source_ref\": {\"schema_version\": \"2.0\", \"document_id\": \"urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"source_id\": \"urn:company-wiki:source:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"content_sha256\": \"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"byte_size\": 25, \"mime_type\": \"text/plain\"}}], \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": null, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"schema_version\": \"acquisition-failure/1\", \"code\": \"canonical_import_failed\", \"retryable\": false, \"provider_started\": true, \"usage_complete\": null, \"usage_scope\": \"operation\", \"acquisition_usage\": null}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    },
+    {
+      "name": "mime1-v2-upstream-exit2",
+      "mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "passed": true,
+      "observation": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-final-uznmk46g\\mime1-v2-exit2\\fake",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-final-uznmk46g\\mime1-v2-exit2\\配置.json"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 0.197,
+        "payload": {
+          "error_code": "ambiguous",
+          "error": "filing-fetch exited 2: status=ambiguous: canonical_import_failed",
+          "retryable": false,
+          "candidates": [
+            {
+              "ticker": "0700",
+              "canonical_name": "腾讯控股有限公司",
+              "market": "HK",
+              "exchange": "HKEX",
+              "security_id": "hk:0700",
+              "entity_id": "issuer:Tencent"
+            },
+            {
+              "source_ref": {
+                "schema_version": "2.0",
+                "document_id": "urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "source_id": "urn:company-wiki:source:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "byte_size": 25,
+                "mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              }
+            }
+          ],
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": null,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "schema_version": "acquisition-failure/1",
+            "code": "canonical_import_failed",
+            "retryable": false,
+            "provider_started": true,
+            "usage_complete": null,
+            "usage_scope": "operation",
+            "acquisition_usage": null
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"ambiguous\", \"error\": \"filing-fetch exited 2: status=ambiguous: canonical_import_failed\", \"retryable\": false, \"candidates\": [{\"ticker\": \"0700\", \"canonical_name\": \"腾讯控股有限公司\", \"market\": \"HK\", \"exchange\": \"HKEX\", \"security_id\": \"hk:0700\", \"entity_id\": \"issuer:Tencent\"}, {\"source_ref\": {\"schema_version\": \"2.0\", \"document_id\": \"urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"source_id\": \"urn:company-wiki:source:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"content_sha256\": \"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"byte_size\": 25, \"mime_type\": \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\"}}], \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": null, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"schema_version\": \"acquisition-failure/1\", \"code\": \"canonical_import_failed\", \"retryable\": false, \"provider_started\": true, \"usage_complete\": null, \"usage_scope\": \"operation\", \"acquisition_usage\": null}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    },
+    {
+      "name": "mime1-v2-upstream-exit0",
+      "mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "passed": true,
+      "observation": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-final-uznmk46g\\mime1-v2-exit0\\fake",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-final-uznmk46g\\mime1-v2-exit0\\配置.json"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 0.205,
+        "payload": {
+          "error_code": "ambiguous",
+          "error": "filing-fetch returned: status=ambiguous: canonical_import_failed",
+          "retryable": false,
+          "candidates": [
+            {
+              "ticker": "0700",
+              "canonical_name": "腾讯控股有限公司",
+              "market": "HK",
+              "exchange": "HKEX",
+              "security_id": "hk:0700",
+              "entity_id": "issuer:Tencent"
+            },
+            {
+              "source_ref": {
+                "schema_version": "2.0",
+                "document_id": "urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "source_id": "urn:company-wiki:source:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "byte_size": 25,
+                "mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              }
+            }
+          ],
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": null,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "schema_version": "acquisition-failure/1",
+            "code": "canonical_import_failed",
+            "retryable": false,
+            "provider_started": true,
+            "usage_complete": null,
+            "usage_scope": "operation",
+            "acquisition_usage": null
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"ambiguous\", \"error\": \"filing-fetch returned: status=ambiguous: canonical_import_failed\", \"retryable\": false, \"candidates\": [{\"ticker\": \"0700\", \"canonical_name\": \"腾讯控股有限公司\", \"market\": \"HK\", \"exchange\": \"HKEX\", \"security_id\": \"hk:0700\", \"entity_id\": \"issuer:Tencent\"}, {\"source_ref\": {\"schema_version\": \"2.0\", \"document_id\": \"urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"source_id\": \"urn:company-wiki:source:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"content_sha256\": \"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"byte_size\": 25, \"mime_type\": \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\"}}], \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": null, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"schema_version\": \"acquisition-failure/1\", \"code\": \"canonical_import_failed\", \"retryable\": false, \"provider_started\": true, \"usage_complete\": null, \"usage_scope\": \"operation\", \"acquisition_usage\": null}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    },
+    {
+      "name": "mime1-v1-upstream-exit2",
+      "mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "passed": true,
+      "observation": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-final-uznmk46g\\mime1-v1-exit2\\fake",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-final-uznmk46g\\mime1-v1-exit2\\配置.json"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 0.198,
+        "payload": {
+          "error_code": "ambiguous",
+          "error": "filing-fetch exited 2: status=ambiguous: canonical_import_failed",
+          "retryable": false,
+          "candidates": [
+            {
+              "ticker": "0700",
+              "canonical_name": "腾讯控股有限公司",
+              "market": "HK",
+              "exchange": "HKEX",
+              "security_id": "hk:0700",
+              "entity_id": "issuer:Tencent"
+            },
+            {
+              "source_ref": {
+                "schema_version": "2.0",
+                "document_id": "urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "source_id": "urn:company-wiki:source:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "byte_size": 25,
+                "mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              }
+            }
+          ],
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": null,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "schema_version": "acquisition-failure/1",
+            "code": "canonical_import_failed",
+            "retryable": false,
+            "provider_started": true,
+            "usage_complete": null,
+            "usage_scope": "operation",
+            "acquisition_usage": null
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"ambiguous\", \"error\": \"filing-fetch exited 2: status=ambiguous: canonical_import_failed\", \"retryable\": false, \"candidates\": [{\"ticker\": \"0700\", \"canonical_name\": \"腾讯控股有限公司\", \"market\": \"HK\", \"exchange\": \"HKEX\", \"security_id\": \"hk:0700\", \"entity_id\": \"issuer:Tencent\"}, {\"source_ref\": {\"schema_version\": \"2.0\", \"document_id\": \"urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"source_id\": \"urn:company-wiki:source:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"content_sha256\": \"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"byte_size\": 25, \"mime_type\": \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\"}}], \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": null, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"schema_version\": \"acquisition-failure/1\", \"code\": \"canonical_import_failed\", \"retryable\": false, \"provider_started\": true, \"usage_complete\": null, \"usage_scope\": \"operation\", \"acquisition_usage\": null}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    },
+    {
+      "name": "mime1-v1-upstream-exit0",
+      "mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "passed": true,
+      "observation": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-final-uznmk46g\\mime1-v1-exit0\\fake",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-final-uznmk46g\\mime1-v1-exit0\\配置.json"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 0.19,
+        "payload": {
+          "error_code": "ambiguous",
+          "error": "filing-fetch returned: status=ambiguous: canonical_import_failed",
+          "retryable": false,
+          "candidates": [
+            {
+              "ticker": "0700",
+              "canonical_name": "腾讯控股有限公司",
+              "market": "HK",
+              "exchange": "HKEX",
+              "security_id": "hk:0700",
+              "entity_id": "issuer:Tencent"
+            },
+            {
+              "source_ref": {
+                "schema_version": "2.0",
+                "document_id": "urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "source_id": "urn:company-wiki:source:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "byte_size": 25,
+                "mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              }
+            }
+          ],
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": null,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "schema_version": "acquisition-failure/1",
+            "code": "canonical_import_failed",
+            "retryable": false,
+            "provider_started": true,
+            "usage_complete": null,
+            "usage_scope": "operation",
+            "acquisition_usage": null
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"ambiguous\", \"error\": \"filing-fetch returned: status=ambiguous: canonical_import_failed\", \"retryable\": false, \"candidates\": [{\"ticker\": \"0700\", \"canonical_name\": \"腾讯控股有限公司\", \"market\": \"HK\", \"exchange\": \"HKEX\", \"security_id\": \"hk:0700\", \"entity_id\": \"issuer:Tencent\"}, {\"source_ref\": {\"schema_version\": \"2.0\", \"document_id\": \"urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"source_id\": \"urn:company-wiki:source:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"content_sha256\": \"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"byte_size\": 25, \"mime_type\": \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\"}}], \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": null, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"schema_version\": \"acquisition-failure/1\", \"code\": \"canonical_import_failed\", \"retryable\": false, \"provider_started\": true, \"usage_complete\": null, \"usage_scope\": \"operation\", \"acquisition_usage\": null}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    },
+    {
+      "name": "mime2-v2-upstream-exit2",
+      "mime_type": "application/x-company-custom",
+      "passed": true,
+      "observation": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-final-uznmk46g\\mime2-v2-exit2\\fake",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-final-uznmk46g\\mime2-v2-exit2\\配置.json"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 0.227,
+        "payload": {
+          "error_code": "ambiguous",
+          "error": "filing-fetch exited 2: status=ambiguous: canonical_import_failed",
+          "retryable": false,
+          "candidates": [
+            {
+              "ticker": "0700",
+              "canonical_name": "腾讯控股有限公司",
+              "market": "HK",
+              "exchange": "HKEX",
+              "security_id": "hk:0700",
+              "entity_id": "issuer:Tencent"
+            },
+            {
+              "source_ref": {
+                "schema_version": "2.0",
+                "document_id": "urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "source_id": "urn:company-wiki:source:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "byte_size": 25,
+                "mime_type": "application/x-company-custom"
+              }
+            }
+          ],
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": null,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "schema_version": "acquisition-failure/1",
+            "code": "canonical_import_failed",
+            "retryable": false,
+            "provider_started": true,
+            "usage_complete": null,
+            "usage_scope": "operation",
+            "acquisition_usage": null
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"ambiguous\", \"error\": \"filing-fetch exited 2: status=ambiguous: canonical_import_failed\", \"retryable\": false, \"candidates\": [{\"ticker\": \"0700\", \"canonical_name\": \"腾讯控股有限公司\", \"market\": \"HK\", \"exchange\": \"HKEX\", \"security_id\": \"hk:0700\", \"entity_id\": \"issuer:Tencent\"}, {\"source_ref\": {\"schema_version\": \"2.0\", \"document_id\": \"urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"source_id\": \"urn:company-wiki:source:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"content_sha256\": \"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"byte_size\": 25, \"mime_type\": \"application/x-company-custom\"}}], \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": null, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"schema_version\": \"acquisition-failure/1\", \"code\": \"canonical_import_failed\", \"retryable\": false, \"provider_started\": true, \"usage_complete\": null, \"usage_scope\": \"operation\", \"acquisition_usage\": null}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    },
+    {
+      "name": "mime2-v2-upstream-exit0",
+      "mime_type": "application/x-company-custom",
+      "passed": true,
+      "observation": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-final-uznmk46g\\mime2-v2-exit0\\fake",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-final-uznmk46g\\mime2-v2-exit0\\配置.json"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 0.204,
+        "payload": {
+          "error_code": "ambiguous",
+          "error": "filing-fetch returned: status=ambiguous: canonical_import_failed",
+          "retryable": false,
+          "candidates": [
+            {
+              "ticker": "0700",
+              "canonical_name": "腾讯控股有限公司",
+              "market": "HK",
+              "exchange": "HKEX",
+              "security_id": "hk:0700",
+              "entity_id": "issuer:Tencent"
+            },
+            {
+              "source_ref": {
+                "schema_version": "2.0",
+                "document_id": "urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "source_id": "urn:company-wiki:source:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "byte_size": 25,
+                "mime_type": "application/x-company-custom"
+              }
+            }
+          ],
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": null,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "schema_version": "acquisition-failure/1",
+            "code": "canonical_import_failed",
+            "retryable": false,
+            "provider_started": true,
+            "usage_complete": null,
+            "usage_scope": "operation",
+            "acquisition_usage": null
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"ambiguous\", \"error\": \"filing-fetch returned: status=ambiguous: canonical_import_failed\", \"retryable\": false, \"candidates\": [{\"ticker\": \"0700\", \"canonical_name\": \"腾讯控股有限公司\", \"market\": \"HK\", \"exchange\": \"HKEX\", \"security_id\": \"hk:0700\", \"entity_id\": \"issuer:Tencent\"}, {\"source_ref\": {\"schema_version\": \"2.0\", \"document_id\": \"urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"source_id\": \"urn:company-wiki:source:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"content_sha256\": \"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"byte_size\": 25, \"mime_type\": \"application/x-company-custom\"}}], \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": null, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"schema_version\": \"acquisition-failure/1\", \"code\": \"canonical_import_failed\", \"retryable\": false, \"provider_started\": true, \"usage_complete\": null, \"usage_scope\": \"operation\", \"acquisition_usage\": null}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    },
+    {
+      "name": "mime2-v1-upstream-exit2",
+      "mime_type": "application/x-company-custom",
+      "passed": true,
+      "observation": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-final-uznmk46g\\mime2-v1-exit2\\fake",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-final-uznmk46g\\mime2-v1-exit2\\配置.json"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 0.213,
+        "payload": {
+          "error_code": "ambiguous",
+          "error": "filing-fetch exited 2: status=ambiguous: canonical_import_failed",
+          "retryable": false,
+          "candidates": [
+            {
+              "ticker": "0700",
+              "canonical_name": "腾讯控股有限公司",
+              "market": "HK",
+              "exchange": "HKEX",
+              "security_id": "hk:0700",
+              "entity_id": "issuer:Tencent"
+            },
+            {
+              "source_ref": {
+                "schema_version": "2.0",
+                "document_id": "urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "source_id": "urn:company-wiki:source:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "byte_size": 25,
+                "mime_type": "application/x-company-custom"
+              }
+            }
+          ],
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": null,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "schema_version": "acquisition-failure/1",
+            "code": "canonical_import_failed",
+            "retryable": false,
+            "provider_started": true,
+            "usage_complete": null,
+            "usage_scope": "operation",
+            "acquisition_usage": null
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"ambiguous\", \"error\": \"filing-fetch exited 2: status=ambiguous: canonical_import_failed\", \"retryable\": false, \"candidates\": [{\"ticker\": \"0700\", \"canonical_name\": \"腾讯控股有限公司\", \"market\": \"HK\", \"exchange\": \"HKEX\", \"security_id\": \"hk:0700\", \"entity_id\": \"issuer:Tencent\"}, {\"source_ref\": {\"schema_version\": \"2.0\", \"document_id\": \"urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"source_id\": \"urn:company-wiki:source:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"content_sha256\": \"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"byte_size\": 25, \"mime_type\": \"application/x-company-custom\"}}], \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": null, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"schema_version\": \"acquisition-failure/1\", \"code\": \"canonical_import_failed\", \"retryable\": false, \"provider_started\": true, \"usage_complete\": null, \"usage_scope\": \"operation\", \"acquisition_usage\": null}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    },
+    {
+      "name": "mime2-v1-upstream-exit0",
+      "mime_type": "application/x-company-custom",
+      "passed": true,
+      "observation": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-final-uznmk46g\\mime2-v1-exit0\\fake",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-final-uznmk46g\\mime2-v1-exit0\\配置.json"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 0.314,
+        "payload": {
+          "error_code": "ambiguous",
+          "error": "filing-fetch returned: status=ambiguous: canonical_import_failed",
+          "retryable": false,
+          "candidates": [
+            {
+              "ticker": "0700",
+              "canonical_name": "腾讯控股有限公司",
+              "market": "HK",
+              "exchange": "HKEX",
+              "security_id": "hk:0700",
+              "entity_id": "issuer:Tencent"
+            },
+            {
+              "source_ref": {
+                "schema_version": "2.0",
+                "document_id": "urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "source_id": "urn:company-wiki:source:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "byte_size": 25,
+                "mime_type": "application/x-company-custom"
+              }
+            }
+          ],
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": null,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "schema_version": "acquisition-failure/1",
+            "code": "canonical_import_failed",
+            "retryable": false,
+            "provider_started": true,
+            "usage_complete": null,
+            "usage_scope": "operation",
+            "acquisition_usage": null
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"ambiguous\", \"error\": \"filing-fetch returned: status=ambiguous: canonical_import_failed\", \"retryable\": false, \"candidates\": [{\"ticker\": \"0700\", \"canonical_name\": \"腾讯控股有限公司\", \"market\": \"HK\", \"exchange\": \"HKEX\", \"security_id\": \"hk:0700\", \"entity_id\": \"issuer:Tencent\"}, {\"source_ref\": {\"schema_version\": \"2.0\", \"document_id\": \"urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"source_id\": \"urn:company-wiki:source:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"content_sha256\": \"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"byte_size\": 25, \"mime_type\": \"application/x-company-custom\"}}], \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": null, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"schema_version\": \"acquisition-failure/1\", \"code\": \"canonical_import_failed\", \"retryable\": false, \"provider_started\": true, \"usage_complete\": null, \"usage_scope\": \"operation\", \"acquisition_usage\": null}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    }
+  ],
+  "external_http_requests": 0,
+  "paid_calls": 0,
+  "company_M3": false,
+  "previous_red_and_candidate_receipts_preserved": true,
+  "focused_test": {
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-X",
+      "utf8",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-final-uznmk46g\\focused-pytest",
+      "tests/test_source_failure_observations.py",
+      "tests/test_source_failure_cause.py"
+    ],
+    "exit_code": 0,
+    "seconds": 13.397,
+    "log": "..................................................                       [100%]\n50 passed in 13.07s\n"
+  },
+  "baseline_restored": true,
+  "temporary_root_absent": true,
+  "source_after": {
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009\\scripts\\fetch_filing.py": "9e0ae4dc11b12367b7498e3f80599f63df48e27efd3eebba9e6ca59e4be8de51",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009\\scripts\\ff_local_source_prepare.py": "2120ee7bb00a7ad2476fc7032db593024b0d4441c2c07a1c4529021fc21f0653",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009\\scripts\\ff_provider_cause.py": "49f6ae540b2068ab6a6c9f5c9c823128adc9095a3bce4094fcec64302e724f18",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009\\scripts\\ff_v2_envelope.py": "8bca27f2acfdb4f4ba00342fcf4b9a783da6328ed69018c2b0286ff464fda534",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009\\scripts\\filing_contracts.py": "814c63bd8b684d946e7b3a18f194ed441da375070e822eb370ec9c3a136536eb",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py": "ee8979e4853debf0cd433aae7a3d01219952d0fe0ebbffbabec4c37f8fd252d4",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_upstream_cause.py": "67be19ef4e903c06abcaa05217d509ac48c4a090d9ebc557128d9a35d224cf27",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py": "4038be124d06c9d3b26a5d0490f82f18e03e0dd92fa4a3b1c72625da294c9ebb"
+  },
+  "source_unchanged": true,
+  "passed": true,
+  "commit_refs": {
+    "FF": "bb0fe920d75781ebf6bc25365c9e190cdd73bb12",
+    "RF": "ef5150007855a74498150f075fe9eb1be0201ad5"
+  }
+}

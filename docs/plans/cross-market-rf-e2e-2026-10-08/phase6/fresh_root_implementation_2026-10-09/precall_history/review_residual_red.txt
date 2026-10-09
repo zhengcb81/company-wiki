@@ -1,0 +1,103 @@
+test_aggregate_cap_missing_and_unmatched_are_recorded_without_child (test_precall_input_history.PrecallInputHistoryTests.test_aggregate_cap_missing_and_unmatched_are_recorded_without_child) ... ok
+test_ambiguous_input_output_path_is_rejected_before_child (test_precall_input_history.PrecallInputHistoryTests.test_ambiguous_input_output_path_is_rejected_before_child) ... FAIL
+test_child_mutation_cannot_destroy_retained_input_history (test_precall_input_history.PrecallInputHistoryTests.test_child_mutation_cannot_destroy_retained_input_history) ... ERROR
+test_cli_accepts_explicit_freeze_and_propagates_native_exit (test_precall_input_history.PrecallInputHistoryTests.test_cli_accepts_explicit_freeze_and_propagates_native_exit) ... ok
+test_explicit_input_position_preserves_output_path_and_history (test_precall_input_history.PrecallInputHistoryTests.test_explicit_input_position_preserves_output_path_and_history) ... usage: python.exe -m unittest [-h]
+                              {init,trust-statement,event,capture,status,check} ...
+python.exe -m unittest: error: unrecognized arguments: --freeze-arg-index
+ERROR
+test_failure_then_correction_preserves_both_exact_input_versions (test_precall_input_history.PrecallInputHistoryTests.test_failure_then_correction_preserves_both_exact_input_versions) ... ok
+test_invalid_trust_json_does_not_replace_existing_statement (test_precall_input_history.PrecallInputHistoryTests.test_invalid_trust_json_does_not_replace_existing_statement) ... ok
+test_invalid_utf8_empty_and_preflight_input_are_not_reencoded (test_precall_input_history.PrecallInputHistoryTests.test_invalid_utf8_empty_and_preflight_input_are_not_reencoded) ... ok
+test_old_capture_has_no_implicit_file_scan (test_precall_input_history.PrecallInputHistoryTests.test_old_capture_has_no_implicit_file_scan) ... ok
+test_real_child_consumes_snapshot_when_original_changes_at_launch (test_precall_input_history.PrecallInputHistoryTests.test_real_child_consumes_snapshot_when_original_changes_at_launch) ... ok
+test_relative_equals_arguments_duplicates_and_same_basename (test_precall_input_history.PrecallInputHistoryTests.test_relative_equals_arguments_duplicates_and_same_basename) ... ok
+test_snapshot_cleanup_failure_cannot_replace_primary_copy_failure (test_precall_input_history.PrecallInputHistoryTests.test_snapshot_cleanup_failure_cannot_replace_primary_copy_failure) ... ok
+test_timeout_and_launch_failure_keep_pre_call_input (test_precall_input_history.PrecallInputHistoryTests.test_timeout_and_launch_failure_keep_pre_call_input) ... ok
+test_trust_statement_cleanup_cannot_replace_primary_write_failure (test_precall_input_history.PrecallInputHistoryTests.test_trust_statement_cleanup_cannot_replace_primary_write_failure) ... ERROR
+test_trust_statement_is_faithful_to_current_json_without_certification (test_precall_input_history.PrecallInputHistoryTests.test_trust_statement_is_faithful_to_current_json_without_certification) ... ok
+
+======================================================================
+ERROR: test_child_mutation_cannot_destroy_retained_input_history (test_precall_input_history.PrecallInputHistoryTests.test_child_mutation_cannot_destroy_retained_input_history)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 243, in test_child_mutation_cannot_destroy_retained_input_history
+    self.assertFalse(result["input_complete"])
+                     ~~~~~~^^^^^^^^^^^^^^^^^^
+KeyError: 'input_complete'
+
+======================================================================
+ERROR: test_explicit_input_position_preserves_output_path_and_history (test_precall_input_history.PrecallInputHistoryTests.test_explicit_input_position_preserves_output_path_and_history)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 222, in test_explicit_input_position_preserves_output_path_and_history
+    result = self.capture([source], command, options=("--freeze-arg-index", "5"))
+  File "C:\Users\֣����\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 33, in capture
+    return AUDIT.capture(AUDIT.parser().parse_args([*argv, "--", *command]))
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 1902, in parse_args
+    self.error(msg)
+    ~~~~~~~~~~^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2658, in error
+    self.exit(2, _('%(prog)s: error: %(message)s\n') % args)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2645, in exit
+    _sys.exit(status)
+    ~~~~~~~~~^^^^^^^^
+SystemExit: 2
+
+======================================================================
+ERROR: test_trust_statement_cleanup_cannot_replace_primary_write_failure (test_precall_input_history.PrecallInputHistoryTests.test_trust_statement_cleanup_cannot_replace_primary_write_failure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\revenue-forecast-audit\skills\revenue-forecast-audit\scripts\audit_run.py", line 647, in write_trust_statement
+    os.replace(staged, target)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\unittest\mock.py", line 1169, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\unittest\mock.py", line 1173, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\unittest\mock.py", line 1228, in _execute_mock_call
+    raise effect
+OSError: primary replace failure
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 265, in test_trust_statement_cleanup_cannot_replace_primary_write_failure
+    AUDIT.write_trust_statement(args)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\֣����\Projects\revenue-forecast-audit\skills\revenue-forecast-audit\scripts\audit_run.py", line 649, in write_trust_statement
+    Path(staged).unlink(missing_ok=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\֣����\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 261, in failed_cleanup
+    raise PermissionError("secondary cleanup failure")
+PermissionError: secondary cleanup failure
+
+======================================================================
+FAIL: test_ambiguous_input_output_path_is_rejected_before_child (test_precall_input_history.PrecallInputHistoryTests.test_ambiguous_input_output_path_is_rejected_before_child)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 211, in test_ambiguous_input_output_path_is_rejected_before_child
+    result = self.capture([source], command)
+  File "C:\Users\֣����\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 33, in capture
+    return AUDIT.capture(AUDIT.parser().parse_args([*argv, "--", *command]))
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\֣����\Projects\revenue-forecast-audit\skills\revenue-forecast-audit\scripts\audit_run.py", line 563, in capture
+    process = subprocess.Popen(executed, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=environment)
+  File "C:\Miniconda\Lib\unittest\mock.py", line 1169, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\unittest\mock.py", line 1173, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\unittest\mock.py", line 1228, in _execute_mock_call
+    raise effect
+AssertionError: child started
+
+----------------------------------------------------------------------
+Ran 15 tests in 2.073s
+
+FAILED (failures=1, errors=3)

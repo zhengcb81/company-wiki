@@ -1,0 +1,1333 @@
+{
+  "schema_version": "w08-readonly-diagnosis/1",
+  "source_file_sha256": {
+    "CWP": "7441b22459d158cf5e0b031cd0bfe7d35db0a75695ef4739cf10e2ef9d13a4ec",
+    "FF": "8ba2d75aea623c19d2b1289dbb610ba2244a4ebf7fd13edabcd1e305e668a51a",
+    "RF": "ffe4a9c52c73639b4a9441c00a086624883f1e1d1c6bfa2c9bc94de0a27bc715"
+  },
+  "external_http_requests": 0,
+  "paid_calls": 0,
+  "production_originals_modified": false,
+  "production_config_modified": false,
+  "cases": [
+    {
+      "mode": "discover-fail",
+      "fixture": "real_CWP_FF_RF_public_CLIs_synthetic_no_HTTP_provider",
+      "cwp": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "company_wiki.source_catalog.cli",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\discover-fail\\config\\source_catalog.yaml",
+          "ensure",
+          "--entity",
+          "Fixture",
+          "--market",
+          "US",
+          "--security-id",
+          "AAPL",
+          "--document-kind",
+          "annual_report",
+          "--fiscal-year",
+          "2025",
+          "--fiscal-period",
+          "FY",
+          "--form-type",
+          "10-K",
+          "--language",
+          "en",
+          "--as-of-date",
+          "2026-10-09",
+          "--allow-download",
+          "--source-ref-v2",
+          "--max-download-bytes",
+          "10000",
+          "--max-download-seconds",
+          "8",
+          "--max-download-cost-usd",
+          "1",
+          "--acquisition-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\discover-fail\\config\\source_acquisition.yaml"
+        ],
+        "exit_code": 1,
+        "duration_seconds": 0.81,
+        "payload": {
+          "acquisition_failure": {
+            "acquisition_usage": {
+              "cost_usd": "0.01",
+              "response_bytes": 17,
+              "schema_version": "1.0"
+            },
+            "code": "upstream_unavailable",
+            "provider_started": true,
+            "retryable": true,
+            "schema_version": "acquisition-failure/1",
+            "usage_complete": true,
+            "usage_scope": "operation"
+          },
+          "error": "adapter proof-cli discover exited 1",
+          "error_type": "fatal",
+          "retryable": false,
+          "status": "failed"
+        },
+        "stdout": "",
+        "stderr": "{\"acquisition_failure\": {\"acquisition_usage\": {\"cost_usd\": \"0.01\", \"response_bytes\": 17, \"schema_version\": \"1.0\"}, \"code\": \"upstream_unavailable\", \"provider_started\": true, \"retryable\": true, \"schema_version\": \"acquisition-failure/1\", \"usage_complete\": true, \"usage_scope\": \"operation\"}, \"error\": \"adapter proof-cli discover exited 1\", \"error_type\": \"fatal\", \"retryable\": false, \"status\": \"failed\"}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "ff": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py",
+          "--source-ref-v2",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\discover-fail\\company_wiki.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 1.688,
+        "payload": {
+          "schema_version": "2.0",
+          "status": "fatal",
+          "request_period": {
+            "mode": "exact",
+            "fiscal_year": 2025,
+            "fiscal_period": "FY",
+            "as_of_date": "2026-10-09"
+          },
+          "filing": {
+            "status": "fatal",
+            "reason": "company-wiki ensure exited 1",
+            "retryable": false,
+            "upstream_cause": {
+              "schema_version": "filing-upstream-cause/1",
+              "operation": "ensure",
+              "code": "upstream_unavailable",
+              "provider_started": true,
+              "usage_complete": true,
+              "retry_scope": "none"
+            }
+          },
+          "transcript": {
+            "status": "not_requested",
+            "retryable": false
+          },
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "{\n  \"schema_version\": \"2.0\",\n  \"status\": \"fatal\",\n  \"request_period\": {\n    \"mode\": \"exact\",\n    \"fiscal_year\": 2025,\n    \"fiscal_period\": \"FY\",\n    \"as_of_date\": \"2026-10-09\"\n  },\n  \"filing\": {\n    \"status\": \"fatal\",\n    \"reason\": \"company-wiki ensure exited 1\",\n    \"retryable\": false,\n    \"upstream_cause\": {\n      \"schema_version\": \"filing-upstream-cause/1\",\n      \"operation\": \"ensure\",\n      \"code\": \"upstream_unavailable\",\n      \"provider_started\": true,\n      \"usage_complete\": true,\n      \"retry_scope\": \"none\"\n    }\n  },\n  \"transcript\": {\n    \"status\": \"not_requested\",\n    \"retryable\": false\n  },\n  \"calls\": 2,\n  \"downloads\": 0\n}\n",
+        "stderr": "",
+        "synthetic_sentinel_leaked": false
+      },
+      "rf_client": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\filing_fetch_client.py",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\discover-fail\\company_wiki.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 1.776,
+        "payload": {
+          "error_code": "fatal",
+          "error": "filing-fetch exited 2: fatal",
+          "retryable": false,
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "upstream_unavailable",
+            "provider_started": true,
+            "usage_complete": true,
+            "retry_scope": "none"
+          }
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"fatal\", \"error\": \"filing-fetch exited 2: fatal\", \"retryable\": false, \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"upstream_unavailable\", \"provider_started\": true, \"usage_complete\": true, \"retry_scope\": \"none\"}}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "rf_prepare": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+          "--result-envelope",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\discover-fail\\company_wiki.json",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\discover-fail\\config\\source_catalog.yaml",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 3,
+        "duration_seconds": 1.937,
+        "payload": {
+          "error_code": "upstream",
+          "error": "filing-fetch client exited 2: {\"error_code\": \"fatal\", \"error\": \"filing-fetch exited 2: fatal\", \"retryable\": false, \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"upstream_unavailable\", \"provider_started\": true, \"usage_complete\": true, \"retry_scope\": \"none\"}}",
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "upstream_unavailable",
+            "provider_started": true,
+            "usage_complete": true,
+            "retry_scope": "none"
+          }
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"upstream\", \"error\": \"filing-fetch client exited 2: {\\\"error_code\\\": \\\"fatal\\\", \\\"error\\\": \\\"filing-fetch exited 2: fatal\\\", \\\"retryable\\\": false, \\\"upstream_cause\\\": {\\\"schema_version\\\": \\\"filing-upstream-cause/1\\\", \\\"operation\\\": \\\"ensure\\\", \\\"code\\\": \\\"upstream_unavailable\\\", \\\"provider_started\\\": true, \\\"usage_complete\\\": true, \\\"retry_scope\\\": \\\"none\\\"}}\", \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"upstream_unavailable\", \"provider_started\": true, \"usage_complete\": true, \"retry_scope\": \"none\"}}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "provider_invocations_all_four_probes": [
+        "discover",
+        "discover",
+        "discover",
+        "discover"
+      ],
+      "provider_http_requests": 0,
+      "paid_cost_usd": "0",
+      "raw_files_remaining": 0
+    },
+    {
+      "mode": "unsupported_language",
+      "fixture": "real_CWP_FF_RF_public_CLIs_synthetic_no_HTTP_provider",
+      "cwp": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "company_wiki.source_catalog.cli",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\unsupported_language\\config\\source_catalog.yaml",
+          "ensure",
+          "--entity",
+          "Fixture",
+          "--market",
+          "US",
+          "--security-id",
+          "AAPL",
+          "--document-kind",
+          "annual_report",
+          "--fiscal-year",
+          "2025",
+          "--fiscal-period",
+          "FY",
+          "--form-type",
+          "10-K",
+          "--language",
+          "en",
+          "--as-of-date",
+          "2026-10-09",
+          "--allow-download",
+          "--source-ref-v2",
+          "--max-download-bytes",
+          "10000",
+          "--max-download-seconds",
+          "8",
+          "--max-download-cost-usd",
+          "1",
+          "--acquisition-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\unsupported_language\\config\\source_acquisition.yaml"
+        ],
+        "exit_code": 1,
+        "duration_seconds": 0.835,
+        "payload": {
+          "acquisition_failure": {
+            "acquisition_usage": {
+              "cost_usd": "0.01",
+              "response_bytes": 17,
+              "schema_version": "1.0"
+            },
+            "code": "unsupported_language",
+            "provider_started": true,
+            "retryable": true,
+            "schema_version": "acquisition-failure/1",
+            "usage_complete": true,
+            "usage_scope": "operation"
+          },
+          "error": "adapter proof-cli discover exited 1",
+          "error_type": "fatal",
+          "retryable": false,
+          "status": "failed"
+        },
+        "stdout": "",
+        "stderr": "{\"acquisition_failure\": {\"acquisition_usage\": {\"cost_usd\": \"0.01\", \"response_bytes\": 17, \"schema_version\": \"1.0\"}, \"code\": \"unsupported_language\", \"provider_started\": true, \"retryable\": true, \"schema_version\": \"acquisition-failure/1\", \"usage_complete\": true, \"usage_scope\": \"operation\"}, \"error\": \"adapter proof-cli discover exited 1\", \"error_type\": \"fatal\", \"retryable\": false, \"status\": \"failed\"}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "ff": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py",
+          "--source-ref-v2",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\unsupported_language\\company_wiki.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 2.072,
+        "payload": {
+          "schema_version": "2.0",
+          "status": "fatal",
+          "request_period": {
+            "mode": "exact",
+            "fiscal_year": 2025,
+            "fiscal_period": "FY",
+            "as_of_date": "2026-10-09"
+          },
+          "filing": {
+            "status": "fatal",
+            "reason": "company-wiki ensure exited 1",
+            "retryable": false,
+            "upstream_cause": {
+              "schema_version": "filing-upstream-cause/1",
+              "operation": "ensure",
+              "code": "unsupported_language",
+              "provider_started": true,
+              "usage_complete": true,
+              "retry_scope": "none"
+            }
+          },
+          "transcript": {
+            "status": "not_requested",
+            "retryable": false
+          },
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "{\n  \"schema_version\": \"2.0\",\n  \"status\": \"fatal\",\n  \"request_period\": {\n    \"mode\": \"exact\",\n    \"fiscal_year\": 2025,\n    \"fiscal_period\": \"FY\",\n    \"as_of_date\": \"2026-10-09\"\n  },\n  \"filing\": {\n    \"status\": \"fatal\",\n    \"reason\": \"company-wiki ensure exited 1\",\n    \"retryable\": false,\n    \"upstream_cause\": {\n      \"schema_version\": \"filing-upstream-cause/1\",\n      \"operation\": \"ensure\",\n      \"code\": \"unsupported_language\",\n      \"provider_started\": true,\n      \"usage_complete\": true,\n      \"retry_scope\": \"none\"\n    }\n  },\n  \"transcript\": {\n    \"status\": \"not_requested\",\n    \"retryable\": false\n  },\n  \"calls\": 2,\n  \"downloads\": 0\n}\n",
+        "stderr": "",
+        "synthetic_sentinel_leaked": false
+      },
+      "rf_client": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\filing_fetch_client.py",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\unsupported_language\\company_wiki.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 2.892,
+        "payload": {
+          "error_code": "fatal",
+          "error": "filing-fetch exited 2: fatal",
+          "retryable": false,
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "unsupported_language",
+            "provider_started": true,
+            "usage_complete": true,
+            "retry_scope": "none"
+          }
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"fatal\", \"error\": \"filing-fetch exited 2: fatal\", \"retryable\": false, \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"unsupported_language\", \"provider_started\": true, \"usage_complete\": true, \"retry_scope\": \"none\"}}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "rf_prepare": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+          "--result-envelope",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\unsupported_language\\company_wiki.json",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\unsupported_language\\config\\source_catalog.yaml",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 3,
+        "duration_seconds": 2.069,
+        "payload": {
+          "error_code": "upstream",
+          "error": "filing-fetch client exited 2: {\"error_code\": \"fatal\", \"error\": \"filing-fetch exited 2: fatal\", \"retryable\": false, \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"unsupported_language\", \"provider_started\": true, \"usage_complete\": true, \"retry_scope\": \"none\"}}",
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "unsupported_language",
+            "provider_started": true,
+            "usage_complete": true,
+            "retry_scope": "none"
+          }
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"upstream\", \"error\": \"filing-fetch client exited 2: {\\\"error_code\\\": \\\"fatal\\\", \\\"error\\\": \\\"filing-fetch exited 2: fatal\\\", \\\"retryable\\\": false, \\\"upstream_cause\\\": {\\\"schema_version\\\": \\\"filing-upstream-cause/1\\\", \\\"operation\\\": \\\"ensure\\\", \\\"code\\\": \\\"unsupported_language\\\", \\\"provider_started\\\": true, \\\"usage_complete\\\": true, \\\"retry_scope\\\": \\\"none\\\"}}\", \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"unsupported_language\", \"provider_started\": true, \"usage_complete\": true, \"retry_scope\": \"none\"}}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "provider_invocations_all_four_probes": [
+        "discover",
+        "discover",
+        "discover",
+        "discover"
+      ],
+      "provider_http_requests": 0,
+      "paid_cost_usd": "0",
+      "raw_files_remaining": 0
+    },
+    {
+      "mode": "malformed_usage",
+      "fixture": "real_CWP_FF_RF_public_CLIs_synthetic_no_HTTP_provider",
+      "cwp": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "company_wiki.source_catalog.cli",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\malformed_usage\\config\\source_catalog.yaml",
+          "ensure",
+          "--entity",
+          "Fixture",
+          "--market",
+          "US",
+          "--security-id",
+          "AAPL",
+          "--document-kind",
+          "annual_report",
+          "--fiscal-year",
+          "2025",
+          "--fiscal-period",
+          "FY",
+          "--form-type",
+          "10-K",
+          "--language",
+          "en",
+          "--as-of-date",
+          "2026-10-09",
+          "--allow-download",
+          "--source-ref-v2",
+          "--max-download-bytes",
+          "10000",
+          "--max-download-seconds",
+          "8",
+          "--max-download-cost-usd",
+          "1",
+          "--acquisition-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\malformed_usage\\config\\source_acquisition.yaml"
+        ],
+        "exit_code": 1,
+        "duration_seconds": 0.883,
+        "payload": {
+          "acquisition_failure": {
+            "acquisition_usage": null,
+            "code": "upstream_unavailable",
+            "provider_started": true,
+            "retryable": true,
+            "schema_version": "acquisition-failure/1",
+            "usage_complete": null,
+            "usage_scope": "operation"
+          },
+          "error": "adapter proof-cli discover exited 1",
+          "error_type": "fatal",
+          "retryable": false,
+          "status": "failed"
+        },
+        "stdout": "",
+        "stderr": "{\"acquisition_failure\": {\"acquisition_usage\": null, \"code\": \"upstream_unavailable\", \"provider_started\": true, \"retryable\": true, \"schema_version\": \"acquisition-failure/1\", \"usage_complete\": null, \"usage_scope\": \"operation\"}, \"error\": \"adapter proof-cli discover exited 1\", \"error_type\": \"fatal\", \"retryable\": false, \"status\": \"failed\"}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "ff": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py",
+          "--source-ref-v2",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\malformed_usage\\company_wiki.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 1.659,
+        "payload": {
+          "schema_version": "2.0",
+          "status": "fatal",
+          "request_period": {
+            "mode": "exact",
+            "fiscal_year": 2025,
+            "fiscal_period": "FY",
+            "as_of_date": "2026-10-09"
+          },
+          "filing": {
+            "status": "fatal",
+            "reason": "company-wiki ensure exited 1",
+            "retryable": false,
+            "upstream_cause": {
+              "schema_version": "filing-upstream-cause/1",
+              "operation": "ensure",
+              "code": "upstream_unavailable",
+              "provider_started": true,
+              "usage_complete": null,
+              "retry_scope": "none"
+            }
+          },
+          "transcript": {
+            "status": "not_requested",
+            "retryable": false
+          },
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "{\n  \"schema_version\": \"2.0\",\n  \"status\": \"fatal\",\n  \"request_period\": {\n    \"mode\": \"exact\",\n    \"fiscal_year\": 2025,\n    \"fiscal_period\": \"FY\",\n    \"as_of_date\": \"2026-10-09\"\n  },\n  \"filing\": {\n    \"status\": \"fatal\",\n    \"reason\": \"company-wiki ensure exited 1\",\n    \"retryable\": false,\n    \"upstream_cause\": {\n      \"schema_version\": \"filing-upstream-cause/1\",\n      \"operation\": \"ensure\",\n      \"code\": \"upstream_unavailable\",\n      \"provider_started\": true,\n      \"usage_complete\": null,\n      \"retry_scope\": \"none\"\n    }\n  },\n  \"transcript\": {\n    \"status\": \"not_requested\",\n    \"retryable\": false\n  },\n  \"calls\": 2,\n  \"downloads\": 0\n}\n",
+        "stderr": "",
+        "synthetic_sentinel_leaked": false
+      },
+      "rf_client": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\filing_fetch_client.py",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\malformed_usage\\company_wiki.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 1.721,
+        "payload": {
+          "error_code": "fatal",
+          "error": "filing-fetch exited 2: fatal",
+          "retryable": false,
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "upstream_unavailable",
+            "provider_started": true,
+            "usage_complete": null,
+            "retry_scope": "none"
+          }
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"fatal\", \"error\": \"filing-fetch exited 2: fatal\", \"retryable\": false, \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"upstream_unavailable\", \"provider_started\": true, \"usage_complete\": null, \"retry_scope\": \"none\"}}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "rf_prepare": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+          "--result-envelope",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\malformed_usage\\company_wiki.json",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\malformed_usage\\config\\source_catalog.yaml",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 3,
+        "duration_seconds": 1.923,
+        "payload": {
+          "error_code": "upstream",
+          "error": "filing-fetch client exited 2: {\"error_code\": \"fatal\", \"error\": \"filing-fetch exited 2: fatal\", \"retryable\": false, \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"upstream_unavailable\", \"provider_started\": true, \"usage_complete\": null, \"retry_scope\": \"none\"}}",
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "upstream_unavailable",
+            "provider_started": true,
+            "usage_complete": null,
+            "retry_scope": "none"
+          }
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"upstream\", \"error\": \"filing-fetch client exited 2: {\\\"error_code\\\": \\\"fatal\\\", \\\"error\\\": \\\"filing-fetch exited 2: fatal\\\", \\\"retryable\\\": false, \\\"upstream_cause\\\": {\\\"schema_version\\\": \\\"filing-upstream-cause/1\\\", \\\"operation\\\": \\\"ensure\\\", \\\"code\\\": \\\"upstream_unavailable\\\", \\\"provider_started\\\": true, \\\"usage_complete\\\": null, \\\"retry_scope\\\": \\\"none\\\"}}\", \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"upstream_unavailable\", \"provider_started\": true, \"usage_complete\": null, \"retry_scope\": \"none\"}}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "provider_invocations_all_four_probes": [
+        "discover",
+        "discover",
+        "discover",
+        "discover"
+      ],
+      "provider_http_requests": 0,
+      "paid_cost_usd": "0",
+      "raw_files_remaining": 0
+    },
+    {
+      "mode": "bad_receipt",
+      "fixture": "real_CWP_FF_RF_public_CLIs_synthetic_no_HTTP_provider",
+      "cwp": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "company_wiki.source_catalog.cli",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\bad_receipt\\config\\source_catalog.yaml",
+          "ensure",
+          "--entity",
+          "Fixture",
+          "--market",
+          "US",
+          "--security-id",
+          "AAPL",
+          "--document-kind",
+          "annual_report",
+          "--fiscal-year",
+          "2025",
+          "--fiscal-period",
+          "FY",
+          "--form-type",
+          "10-K",
+          "--language",
+          "en",
+          "--as-of-date",
+          "2026-10-09",
+          "--allow-download",
+          "--source-ref-v2",
+          "--max-download-bytes",
+          "10000",
+          "--max-download-seconds",
+          "8",
+          "--max-download-cost-usd",
+          "1",
+          "--acquisition-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\bad_receipt\\config\\source_acquisition.yaml"
+        ],
+        "exit_code": 1,
+        "duration_seconds": 0.982,
+        "payload": {
+          "acquisition_failure": {
+            "acquisition_usage": {
+              "cost_usd": "0.02",
+              "response_bytes": 92,
+              "schema_version": "1.0"
+            },
+            "code": "acquisition_validation_failed",
+            "provider_started": true,
+            "retryable": null,
+            "schema_version": "acquisition-failure/1",
+            "usage_complete": true,
+            "usage_scope": "operation"
+          },
+          "error": "receipt SHA-256 does not match staged file",
+          "error_type": "fatal",
+          "retryable": false,
+          "status": "failed"
+        },
+        "stdout": "",
+        "stderr": "{\"acquisition_failure\": {\"acquisition_usage\": {\"cost_usd\": \"0.02\", \"response_bytes\": 92, \"schema_version\": \"1.0\"}, \"code\": \"acquisition_validation_failed\", \"provider_started\": true, \"retryable\": null, \"schema_version\": \"acquisition-failure/1\", \"usage_complete\": true, \"usage_scope\": \"operation\"}, \"error\": \"receipt SHA-256 does not match staged file\", \"error_type\": \"fatal\", \"retryable\": false, \"status\": \"failed\"}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "ff": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py",
+          "--source-ref-v2",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\bad_receipt\\company_wiki.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 1.865,
+        "payload": {
+          "schema_version": "2.0",
+          "status": "fatal",
+          "request_period": {
+            "mode": "exact",
+            "fiscal_year": 2025,
+            "fiscal_period": "FY",
+            "as_of_date": "2026-10-09"
+          },
+          "filing": {
+            "status": "fatal",
+            "reason": "company-wiki ensure exited 1",
+            "retryable": false,
+            "upstream_cause": {
+              "schema_version": "filing-upstream-cause/1",
+              "operation": "ensure",
+              "code": "acquisition_validation_failed",
+              "provider_started": true,
+              "usage_complete": true,
+              "retry_scope": "none"
+            }
+          },
+          "transcript": {
+            "status": "not_requested",
+            "retryable": false
+          },
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "{\n  \"schema_version\": \"2.0\",\n  \"status\": \"fatal\",\n  \"request_period\": {\n    \"mode\": \"exact\",\n    \"fiscal_year\": 2025,\n    \"fiscal_period\": \"FY\",\n    \"as_of_date\": \"2026-10-09\"\n  },\n  \"filing\": {\n    \"status\": \"fatal\",\n    \"reason\": \"company-wiki ensure exited 1\",\n    \"retryable\": false,\n    \"upstream_cause\": {\n      \"schema_version\": \"filing-upstream-cause/1\",\n      \"operation\": \"ensure\",\n      \"code\": \"acquisition_validation_failed\",\n      \"provider_started\": true,\n      \"usage_complete\": true,\n      \"retry_scope\": \"none\"\n    }\n  },\n  \"transcript\": {\n    \"status\": \"not_requested\",\n    \"retryable\": false\n  },\n  \"calls\": 2,\n  \"downloads\": 0\n}\n",
+        "stderr": "",
+        "synthetic_sentinel_leaked": false
+      },
+      "rf_client": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\filing_fetch_client.py",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\bad_receipt\\company_wiki.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 2.104,
+        "payload": {
+          "error_code": "fatal",
+          "error": "filing-fetch exited 2: fatal",
+          "retryable": false,
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "acquisition_validation_failed",
+            "provider_started": true,
+            "usage_complete": true,
+            "retry_scope": "none"
+          }
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"fatal\", \"error\": \"filing-fetch exited 2: fatal\", \"retryable\": false, \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"acquisition_validation_failed\", \"provider_started\": true, \"usage_complete\": true, \"retry_scope\": \"none\"}}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "rf_prepare": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+          "--result-envelope",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\bad_receipt\\company_wiki.json",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\bad_receipt\\config\\source_catalog.yaml",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 3,
+        "duration_seconds": 2.244,
+        "payload": {
+          "error_code": "upstream",
+          "error": "filing-fetch client exited 2: {\"error_code\": \"fatal\", \"error\": \"filing-fetch exited 2: fatal\", \"retryable\": false, \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"acquisition_validation_failed\", \"provider_started\": true, \"usage_complete\": true, \"retry_scope\": \"none\"}}",
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "acquisition_validation_failed",
+            "provider_started": true,
+            "usage_complete": true,
+            "retry_scope": "none"
+          }
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"upstream\", \"error\": \"filing-fetch client exited 2: {\\\"error_code\\\": \\\"fatal\\\", \\\"error\\\": \\\"filing-fetch exited 2: fatal\\\", \\\"retryable\\\": false, \\\"upstream_cause\\\": {\\\"schema_version\\\": \\\"filing-upstream-cause/1\\\", \\\"operation\\\": \\\"ensure\\\", \\\"code\\\": \\\"acquisition_validation_failed\\\", \\\"provider_started\\\": true, \\\"usage_complete\\\": true, \\\"retry_scope\\\": \\\"none\\\"}}\", \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"acquisition_validation_failed\", \"provider_started\": true, \"usage_complete\": true, \"retry_scope\": \"none\"}}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "provider_invocations_all_four_probes": [
+        "discover",
+        "fetch",
+        "discover",
+        "fetch",
+        "discover",
+        "fetch",
+        "discover",
+        "fetch"
+      ],
+      "provider_http_requests": 0,
+      "paid_cost_usd": "0",
+      "raw_files_remaining": 0
+    },
+    {
+      "mode": "no_candidate",
+      "fixture": "real_CWP_FF_RF_public_CLIs_synthetic_no_HTTP_provider",
+      "cwp": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "company_wiki.source_catalog.cli",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\no_candidate\\config\\source_catalog.yaml",
+          "ensure",
+          "--entity",
+          "Fixture",
+          "--market",
+          "US",
+          "--security-id",
+          "AAPL",
+          "--document-kind",
+          "annual_report",
+          "--fiscal-year",
+          "2025",
+          "--fiscal-period",
+          "FY",
+          "--form-type",
+          "10-K",
+          "--language",
+          "en",
+          "--as-of-date",
+          "2026-10-09",
+          "--allow-download",
+          "--source-ref-v2",
+          "--max-download-bytes",
+          "10000",
+          "--max-download-seconds",
+          "8",
+          "--max-download-cost-usd",
+          "1",
+          "--acquisition-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\no_candidate\\config\\source_acquisition.yaml"
+        ],
+        "exit_code": 0,
+        "duration_seconds": 0.87,
+        "payload": {
+          "candidate": null,
+          "download_events": 0,
+          "gap_plan": null,
+          "operation": "ensure",
+          "operation_schema_version": "1.0",
+          "outcome": "missing",
+          "policy_hash": "d3d5cc82bb83fc78a555e12040354585442c672f43b2fdb3e78ab4af9352c630",
+          "request_id": "urn:company-wiki:source-request:sha256:4e4e0d4cdbee5242df35323d8a5853b857fa9cccf902342566f8839e1c784b00",
+          "source_ref": null,
+          "status": "not_found"
+        },
+        "stdout": "{\"candidate\": null, \"download_events\": 0, \"gap_plan\": null, \"operation\": \"ensure\", \"operation_schema_version\": \"1.0\", \"outcome\": \"missing\", \"policy_hash\": \"d3d5cc82bb83fc78a555e12040354585442c672f43b2fdb3e78ab4af9352c630\", \"request_id\": \"urn:company-wiki:source-request:sha256:4e4e0d4cdbee5242df35323d8a5853b857fa9cccf902342566f8839e1c784b00\", \"source_ref\": null, \"status\": \"not_found\"}\n",
+        "stderr": "",
+        "synthetic_sentinel_leaked": false
+      },
+      "ff": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py",
+          "--source-ref-v2",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\no_candidate\\company_wiki.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 1.708,
+        "payload": {
+          "schema_version": "2.0",
+          "status": "not_found",
+          "request_period": {
+            "mode": "exact",
+            "fiscal_year": 2025,
+            "fiscal_period": "FY",
+            "as_of_date": "2026-10-09"
+          },
+          "filing": {
+            "status": "not_found",
+            "reason": "company-wiki ensure not_found",
+            "retryable": false
+          },
+          "transcript": {
+            "status": "not_requested",
+            "retryable": false
+          },
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "{\n  \"schema_version\": \"2.0\",\n  \"status\": \"not_found\",\n  \"request_period\": {\n    \"mode\": \"exact\",\n    \"fiscal_year\": 2025,\n    \"fiscal_period\": \"FY\",\n    \"as_of_date\": \"2026-10-09\"\n  },\n  \"filing\": {\n    \"status\": \"not_found\",\n    \"reason\": \"company-wiki ensure not_found\",\n    \"retryable\": false\n  },\n  \"transcript\": {\n    \"status\": \"not_requested\",\n    \"retryable\": false\n  },\n  \"calls\": 2,\n  \"downloads\": 0\n}\n",
+        "stderr": "",
+        "synthetic_sentinel_leaked": false
+      },
+      "rf_client": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\filing_fetch_client.py",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\no_candidate\\company_wiki.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 1.903,
+        "payload": {
+          "error_code": "not_found",
+          "error": "filing-fetch exited 2: not_found",
+          "retryable": false
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"not_found\", \"error\": \"filing-fetch exited 2: not_found\", \"retryable\": false}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "rf_prepare": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+          "--result-envelope",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\no_candidate\\company_wiki.json",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\no_candidate\\config\\source_catalog.yaml",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 3,
+        "duration_seconds": 1.966,
+        "payload": {
+          "error_code": "upstream",
+          "error": "filing-fetch client exited 2: {\"error_code\": \"not_found\", \"error\": \"filing-fetch exited 2: not_found\", \"retryable\": false}"
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"upstream\", \"error\": \"filing-fetch client exited 2: {\\\"error_code\\\": \\\"not_found\\\", \\\"error\\\": \\\"filing-fetch exited 2: not_found\\\", \\\"retryable\\\": false}\"}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "provider_invocations_all_four_probes": [
+        "discover",
+        "discover",
+        "discover",
+        "discover"
+      ],
+      "provider_http_requests": 0,
+      "paid_cost_usd": "0",
+      "raw_files_remaining": 0
+    },
+    {
+      "mode": "local_metadata_gap",
+      "fixture": "real_CWP_FF_RF_public_CLIs_synthetic_no_HTTP_provider",
+      "cwp": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "company_wiki.source_catalog.source_query_cli",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\local_metadata_gap\\config\\source_catalog.yaml"
+        ],
+        "exit_code": 0,
+        "duration_seconds": 0.497,
+        "payload": {
+          "candidates": [],
+          "matches": [],
+          "reason": "no_local_match",
+          "request_id": "urn:company-wiki:source-request:sha256:4e4e0d4cdbee5242df35323d8a5853b857fa9cccf902342566f8839e1c784b00",
+          "schema_version": "2.0",
+          "source_read_policy_sha256": "e2bbf5900df26ea20ed2836ebb5b7576f00d084ced9580e2c8c5c4283dad7935",
+          "status": "not_found"
+        },
+        "stdout": "{\"candidates\":[],\"matches\":[],\"reason\":\"no_local_match\",\"request_id\":\"urn:company-wiki:source-request:sha256:4e4e0d4cdbee5242df35323d8a5853b857fa9cccf902342566f8839e1c784b00\",\"schema_version\":\"2.0\",\"source_read_policy_sha256\":\"e2bbf5900df26ea20ed2836ebb5b7576f00d084ced9580e2c8c5c4283dad7935\",\"status\":\"not_found\"}\n",
+        "stderr": "",
+        "synthetic_sentinel_leaked": false
+      },
+      "ff": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py",
+          "--source-ref-v2",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\local_metadata_gap\\company_wiki.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 2.043,
+        "payload": {
+          "schema_version": "2.0",
+          "status": "not_found",
+          "request_period": {
+            "mode": "exact",
+            "fiscal_year": 2025,
+            "fiscal_period": "FY",
+            "as_of_date": "2026-10-09"
+          },
+          "filing": {
+            "status": "not_found",
+            "reason": "local source preparation not_found: no_registered_local_source",
+            "retryable": false
+          },
+          "transcript": {
+            "status": "not_requested",
+            "retryable": false
+          },
+          "calls": 3,
+          "downloads": 0
+        },
+        "stdout": "{\n  \"schema_version\": \"2.0\",\n  \"status\": \"not_found\",\n  \"request_period\": {\n    \"mode\": \"exact\",\n    \"fiscal_year\": 2025,\n    \"fiscal_period\": \"FY\",\n    \"as_of_date\": \"2026-10-09\"\n  },\n  \"filing\": {\n    \"status\": \"not_found\",\n    \"reason\": \"local source preparation not_found: no_registered_local_source\",\n    \"retryable\": false\n  },\n  \"transcript\": {\n    \"status\": \"not_requested\",\n    \"retryable\": false\n  },\n  \"calls\": 3,\n  \"downloads\": 0\n}\n",
+        "stderr": "",
+        "synthetic_sentinel_leaked": false
+      },
+      "rf_client": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\filing_fetch_client.py",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\local_metadata_gap\\company_wiki.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 3.181,
+        "payload": {
+          "error_code": "not_found",
+          "error": "filing-fetch exited 2: not_found",
+          "retryable": false
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"not_found\", \"error\": \"filing-fetch exited 2: not_found\", \"retryable\": false}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "rf_prepare": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+          "--result-envelope",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\local_metadata_gap\\company_wiki.json",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\local_metadata_gap\\config\\source_catalog.yaml",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 3,
+        "duration_seconds": 2.594,
+        "payload": {
+          "error_code": "upstream",
+          "error": "filing-fetch client exited 2: {\"error_code\": \"not_found\", \"error\": \"filing-fetch exited 2: not_found\", \"retryable\": false}"
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"upstream\", \"error\": \"filing-fetch client exited 2: {\\\"error_code\\\": \\\"not_found\\\", \\\"error\\\": \\\"filing-fetch exited 2: not_found\\\", \\\"retryable\\\": false}\"}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "provider_invocations_all_four_probes": [],
+      "provider_http_requests": 0,
+      "paid_cost_usd": "0",
+      "raw_files_remaining": 1
+    },
+    {
+      "mode": "true_no_local_match",
+      "fixture": "real_CWP_FF_RF_public_CLIs_synthetic_no_HTTP_provider",
+      "cwp": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "company_wiki.source_catalog.source_query_cli",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\true_no_local_match\\config\\source_catalog.yaml"
+        ],
+        "exit_code": 0,
+        "duration_seconds": 0.584,
+        "payload": {
+          "candidates": [],
+          "matches": [],
+          "reason": "no_local_match",
+          "request_id": "urn:company-wiki:source-request:sha256:4e4e0d4cdbee5242df35323d8a5853b857fa9cccf902342566f8839e1c784b00",
+          "schema_version": "2.0",
+          "source_read_policy_sha256": "529f6f1c92bf91061e051247bbaeb7bba2bab76487e6bb1f9ec02bc4e4beca52",
+          "status": "not_found"
+        },
+        "stdout": "{\"candidates\":[],\"matches\":[],\"reason\":\"no_local_match\",\"request_id\":\"urn:company-wiki:source-request:sha256:4e4e0d4cdbee5242df35323d8a5853b857fa9cccf902342566f8839e1c784b00\",\"schema_version\":\"2.0\",\"source_read_policy_sha256\":\"529f6f1c92bf91061e051247bbaeb7bba2bab76487e6bb1f9ec02bc4e4beca52\",\"status\":\"not_found\"}\n",
+        "stderr": "",
+        "synthetic_sentinel_leaked": false
+      },
+      "ff": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py",
+          "--source-ref-v2",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\true_no_local_match\\company_wiki.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 2.127,
+        "payload": {
+          "schema_version": "2.0",
+          "status": "not_found",
+          "request_period": {
+            "mode": "exact",
+            "fiscal_year": 2025,
+            "fiscal_period": "FY",
+            "as_of_date": "2026-10-09"
+          },
+          "filing": {
+            "status": "not_found",
+            "reason": "local source preparation not_found: no_registered_local_source",
+            "retryable": false
+          },
+          "transcript": {
+            "status": "not_requested",
+            "retryable": false
+          },
+          "calls": 3,
+          "downloads": 0
+        },
+        "stdout": "{\n  \"schema_version\": \"2.0\",\n  \"status\": \"not_found\",\n  \"request_period\": {\n    \"mode\": \"exact\",\n    \"fiscal_year\": 2025,\n    \"fiscal_period\": \"FY\",\n    \"as_of_date\": \"2026-10-09\"\n  },\n  \"filing\": {\n    \"status\": \"not_found\",\n    \"reason\": \"local source preparation not_found: no_registered_local_source\",\n    \"retryable\": false\n  },\n  \"transcript\": {\n    \"status\": \"not_requested\",\n    \"retryable\": false\n  },\n  \"calls\": 3,\n  \"downloads\": 0\n}\n",
+        "stderr": "",
+        "synthetic_sentinel_leaked": false
+      },
+      "rf_client": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\filing_fetch_client.py",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\true_no_local_match\\company_wiki.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 2.186,
+        "payload": {
+          "error_code": "not_found",
+          "error": "filing-fetch exited 2: not_found",
+          "retryable": false
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"not_found\", \"error\": \"filing-fetch exited 2: not_found\", \"retryable\": false}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "rf_prepare": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+          "--result-envelope",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\true_no_local_match\\company_wiki.json",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\true_no_local_match\\config\\source_catalog.yaml",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 3,
+        "duration_seconds": 2.349,
+        "payload": {
+          "error_code": "upstream",
+          "error": "filing-fetch client exited 2: {\"error_code\": \"not_found\", \"error\": \"filing-fetch exited 2: not_found\", \"retryable\": false}"
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"upstream\", \"error\": \"filing-fetch client exited 2: {\\\"error_code\\\": \\\"not_found\\\", \\\"error\\\": \\\"filing-fetch exited 2: not_found\\\", \\\"retryable\\\": false}\"}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "provider_invocations_all_four_probes": [],
+      "provider_http_requests": 0,
+      "paid_cost_usd": "0",
+      "raw_files_remaining": 0
+    }
+  ],
+  "wire_controls": [
+    {
+      "name": "known_cause",
+      "fixture": "injected_FF_wire_actual_RF_client_and_preparation_CLIs",
+      "input": {
+        "schema_version": "2.0",
+        "status": "upstream_error",
+        "filing": {
+          "status": "upstream_error",
+          "reason": "safe fixed message",
+          "retryable": false,
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": true,
+            "retry_scope": "none"
+          },
+          "acquisition_usage": {
+            "schema_version": "1.0",
+            "response_bytes": 4096,
+            "cost_usd": "0.02"
+          }
+        },
+        "transcript": {
+          "status": "not_requested"
+        },
+        "calls": 2,
+        "downloads": 0
+      },
+      "rf_prepare": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\wire_controls",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\wire_controls\\catalog.json",
+          "--timeout-seconds",
+          "5"
+        ],
+        "exit_code": 3,
+        "duration_seconds": 0.352,
+        "payload": {
+          "error_code": "upstream",
+          "error": "filing-fetch client exited 2: {\"error_code\": \"upstream_error\", \"error\": \"filing-fetch exited 2: upstream_error\", \"retryable\": false, \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": true, \"retry_scope\": \"none\"}}",
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": true,
+            "retry_scope": "none"
+          }
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"upstream\", \"error\": \"filing-fetch client exited 2: {\\\"error_code\\\": \\\"upstream_error\\\", \\\"error\\\": \\\"filing-fetch exited 2: upstream_error\\\", \\\"retryable\\\": false, \\\"upstream_cause\\\": {\\\"schema_version\\\": \\\"filing-upstream-cause/1\\\", \\\"operation\\\": \\\"ensure\\\", \\\"code\\\": \\\"canonical_import_failed\\\", \\\"provider_started\\\": true, \\\"usage_complete\\\": true, \\\"retry_scope\\\": \\\"none\\\"}}\", \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": true, \"retry_scope\": \"none\"}}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    },
+    {
+      "name": "untrusted_reason",
+      "fixture": "injected_FF_wire_actual_RF_client_and_preparation_CLIs",
+      "input": {
+        "fields": [
+          "calls",
+          "downloads",
+          "filing",
+          "schema_version",
+          "status",
+          "transcript"
+        ],
+        "sentinel_present": true
+      },
+      "rf_prepare": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\wire_controls",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q\\wire_controls\\catalog.json",
+          "--timeout-seconds",
+          "5"
+        ],
+        "exit_code": 3,
+        "duration_seconds": 0.311,
+        "payload": {
+          "error_code": "upstream",
+          "error": "filing-fetch client exited 2: {\"error_code\": \"upstream_error\", \"error\": \"filing-fetch exited 2: upstream_error\", \"retryable\": false, \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": true, \"retry_scope\": \"none\"}}",
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": true,
+            "retry_scope": "none"
+          }
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"upstream\", \"error\": \"filing-fetch client exited 2: {\\\"error_code\\\": \\\"upstream_error\\\", \\\"error\\\": \\\"filing-fetch exited 2: upstream_error\\\", \\\"retryable\\\": false, \\\"upstream_cause\\\": {\\\"schema_version\\\": \\\"filing-upstream-cause/1\\\", \\\"operation\\\": \\\"ensure\\\", \\\"code\\\": \\\"canonical_import_failed\\\", \\\"provider_started\\\": true, \\\"usage_complete\\\": true, \\\"retry_scope\\\": \\\"none\\\"}}\", \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": true, \"retry_scope\": \"none\"}}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    }
+  ],
+  "owned_temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-0yug0u1q",
+  "temp_root_exists_after_cleanup": false
+}

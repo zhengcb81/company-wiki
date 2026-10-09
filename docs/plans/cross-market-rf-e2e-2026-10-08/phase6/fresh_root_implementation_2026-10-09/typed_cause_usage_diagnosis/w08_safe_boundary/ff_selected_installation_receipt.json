@@ -1,0 +1,110 @@
+{
+  "schema_version": "w08-ff-selected-installation/1",
+  "source_commit": "41ba0150c9c634f6021c9346744cada391ec2c4c",
+  "status": "INSTALLED_SELECTED_ACCEPTED_FILES",
+  "physical_roots": 2,
+  "selected_files": 10,
+  "unselected_public_code_drift": 0,
+  "configuration_or_user_files_written": false,
+  "external_or_paid_calls": 0,
+  "files": [
+    {
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\fetch_filing.py",
+      "before_sha256": "8ba2d75aea623c19d2b1289dbb610ba2244a4ebf7fd13edabcd1e305e668a51a",
+      "after_sha256": "9e0ae4dc11b12367b7498e3f80599f63df48e27efd3eebba9e6ca59e4be8de51"
+    },
+    {
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\ff_local_source_prepare.py",
+      "before_sha256": "417540c65b8c6d83e438aa60db29c3a4ea35f4ae9d1a44d26e1402e1c424ce71",
+      "after_sha256": "2120ee7bb00a7ad2476fc7032db593024b0d4441c2c07a1c4529021fc21f0653"
+    },
+    {
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\ff_provider_cause.py",
+      "before_sha256": "7dc4a63344e78c0f482cc4604f43397540e4ed1e4ee755ddffb049212e8cdf7a",
+      "after_sha256": "49f6ae540b2068ab6a6c9f5c9c823128adc9095a3bce4094fcec64302e724f18"
+    },
+    {
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\ff_v2_envelope.py",
+      "before_sha256": "c936f7cdb18bb5b59f218a387c944faf520f222a8242d72397407c3a7eb0ea02",
+      "after_sha256": "94651be3bb1fae306e304047e01a33a6bb9e6993be2fca0be4b56e56b19ea3f9"
+    },
+    {
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\filing_contracts.py",
+      "before_sha256": "0c010dbaac305fbe32b3129e6af23def4c4f8d15cd143fb0d10190f94777fce7",
+      "after_sha256": "814c63bd8b684d946e7b3a18f194ed441da375070e822eb370ec9c3a136536eb"
+    },
+    {
+      "destination": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\fetch_filing.py",
+      "before_sha256": "8ba2d75aea623c19d2b1289dbb610ba2244a4ebf7fd13edabcd1e305e668a51a",
+      "after_sha256": "9e0ae4dc11b12367b7498e3f80599f63df48e27efd3eebba9e6ca59e4be8de51"
+    },
+    {
+      "destination": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\ff_local_source_prepare.py",
+      "before_sha256": "417540c65b8c6d83e438aa60db29c3a4ea35f4ae9d1a44d26e1402e1c424ce71",
+      "after_sha256": "2120ee7bb00a7ad2476fc7032db593024b0d4441c2c07a1c4529021fc21f0653"
+    },
+    {
+      "destination": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\ff_provider_cause.py",
+      "before_sha256": "7dc4a63344e78c0f482cc4604f43397540e4ed1e4ee755ddffb049212e8cdf7a",
+      "after_sha256": "49f6ae540b2068ab6a6c9f5c9c823128adc9095a3bce4094fcec64302e724f18"
+    },
+    {
+      "destination": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\ff_v2_envelope.py",
+      "before_sha256": "c936f7cdb18bb5b59f218a387c944faf520f222a8242d72397407c3a7eb0ea02",
+      "after_sha256": "94651be3bb1fae306e304047e01a33a6bb9e6993be2fca0be4b56e56b19ea3f9"
+    },
+    {
+      "destination": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\filing_contracts.py",
+      "before_sha256": "0c010dbaac305fbe32b3129e6af23def4c4f8d15cd143fb0d10190f94777fce7",
+      "after_sha256": "814c63bd8b684d946e7b3a18f194ed441da375070e822eb370ec9c3a136536eb"
+    }
+  ],
+  "tool_result": {
+    "schema_version": "ff-install-result/1",
+    "status": "completed",
+    "scope": [
+      "scripts/fetch_filing.py",
+      "scripts/ff_local_source_prepare.py",
+      "scripts/ff_provider_cause.py",
+      "scripts/ff_v2_envelope.py",
+      "scripts/filing_contracts.py"
+    ],
+    "targets": [
+      {
+        "physical_target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+        "destinations": [
+          "C:\\Users\\郑曾波\\.agents\\skills",
+          "C:\\Users\\郑曾波\\.claude\\skills"
+        ],
+        "written": [
+          "scripts/fetch_filing.py",
+          "scripts/ff_local_source_prepare.py",
+          "scripts/ff_provider_cause.py",
+          "scripts/ff_v2_envelope.py",
+          "scripts/filing_contracts.py"
+        ],
+        "not_written": [],
+        "conflicts": [],
+        "preserved_config": [],
+        "errors": []
+      },
+      {
+        "physical_target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+        "destinations": [
+          "C:\\Users\\郑曾波\\.codex\\skills"
+        ],
+        "written": [
+          "scripts/fetch_filing.py",
+          "scripts/ff_local_source_prepare.py",
+          "scripts/ff_provider_cause.py",
+          "scripts/ff_v2_envelope.py",
+          "scripts/filing_contracts.py"
+        ],
+        "not_written": [],
+        "conflicts": [],
+        "preserved_config": [],
+        "errors": []
+      }
+    ]
+  }
+}

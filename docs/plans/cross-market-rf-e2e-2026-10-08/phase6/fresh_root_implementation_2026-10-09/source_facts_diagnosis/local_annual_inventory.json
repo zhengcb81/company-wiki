@@ -1,0 +1,310 @@
+{
+  "schema_version": "w06-known-issuer-inventory/1",
+  "registered_annuals": [
+    {
+      "title": "Microsoft 10-K FY2025",
+      "sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "published_date": "2025-07-30",
+      "declared_fiscal_year": 2025
+    },
+    {
+      "title": "Microsoft 10-K FY2024",
+      "sha256": "43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+      "published_date": "2024-07-30",
+      "declared_fiscal_year": 2024
+    },
+    {
+      "title": "msft-20230630",
+      "sha256": "6506060f3f928e31abcbcfe46792ff4e0ae5c60bd9ad40964933c37ac854a9ea",
+      "published_date": "2023-07-27",
+      "declared_fiscal_year": 2023
+    },
+    {
+      "title": "msft-10k_20210630",
+      "sha256": "0cdddd9409d55b933bb5b9d3f8cc3fbb3c7f3390a531406aea2b1a0ba4bbf999",
+      "published_date": "2021-07-29",
+      "declared_fiscal_year": 2021
+    },
+    {
+      "title": "msft-10k_20220630",
+      "sha256": "d8c69513cd820ecdfa3b22decf2672591ced88996188c218d3ffa1439b6b528f",
+      "published_date": "2022-07-28",
+      "declared_fiscal_year": 2022
+    }
+  ],
+  "dayu_groups": [
+    {
+      "group": "fil_0000950170-23-035122",
+      "metadata_sha256": "69a553acfe13f46d4feff1a819452f9b02e54331c5d765e6a39ecfa7709d5bf7",
+      "form": "10-K",
+      "fiscal_year": 2023,
+      "report_date": "2023-06-30",
+      "filing_date": "2023-07-27",
+      "primary_document": "msft-20230630.htm"
+    },
+    {
+      "group": "fil_0000950170-24-048288",
+      "metadata_sha256": "594b53af53148e3442ed8d72733a497a59546337c66a24456d1c05de1a5e7d80",
+      "form": "10-Q",
+      "fiscal_year": 2024,
+      "report_date": "2024-03-31",
+      "filing_date": "2024-04-25",
+      "primary_document": "msft-20240331.htm"
+    },
+    {
+      "group": "fil_0000950170-24-087843",
+      "metadata_sha256": "d1f843b8d76f40d9c70f4b53546f9c5a7d629e9543c620d90ac7cc8c83aeb56b",
+      "form": "10-K",
+      "fiscal_year": 2024,
+      "report_date": "2024-06-30",
+      "filing_date": "2024-07-30",
+      "primary_document": "msft-20240630.htm"
+    },
+    {
+      "group": "fil_0000950170-24-118967",
+      "metadata_sha256": "a49a73099eacdd7d208319673f2bf96949c61432fdd5fc319e242a6661f7254f",
+      "form": "10-Q",
+      "fiscal_year": 2024,
+      "report_date": "2024-09-30",
+      "filing_date": "2024-10-30",
+      "primary_document": "msft-20240930.htm"
+    },
+    {
+      "group": "fil_0000950170-25-010491",
+      "metadata_sha256": "82febc40d46c3b2dd759efde5980ddec7ea0f3dc364274f6b9143fed27604d61",
+      "form": "10-Q",
+      "fiscal_year": 2024,
+      "report_date": "2024-12-31",
+      "filing_date": "2025-01-29",
+      "primary_document": "msft-20241231.htm"
+    },
+    {
+      "group": "fil_0000950170-25-061032",
+      "metadata_sha256": "b45851b564b4331d46d4f20a8f09bfb61ff4892c203ed58ff0ca0248c3d8c2c7",
+      "form": "8-K",
+      "fiscal_year": 2025,
+      "report_date": "2025-04-30",
+      "filing_date": "2025-04-30",
+      "primary_document": "msft-20250430.htm"
+    },
+    {
+      "group": "fil_0000950170-25-061046",
+      "metadata_sha256": "8429df03ff5bead5392560adf3df8ef7e3a6e048dcc1cbd580669daf083db3da",
+      "form": "10-Q",
+      "fiscal_year": 2025,
+      "report_date": "2025-03-31",
+      "filing_date": "2025-04-30",
+      "primary_document": "msft-20250331.htm"
+    },
+    {
+      "group": "fil_0000950170-25-100226",
+      "metadata_sha256": "2ee22b2d4aa6a180df9e496fd180cada1fed76b4d4d8da2f332aa32d9068c27b",
+      "form": "8-K",
+      "fiscal_year": 2025,
+      "report_date": "2025-07-30",
+      "filing_date": "2025-07-30",
+      "primary_document": "msft-20250730.htm"
+    },
+    {
+      "group": "fil_0000950170-25-100235",
+      "metadata_sha256": "b1714eb874f5a117d09e125f6e31682cf3c4693a12debcef70ab1f16a927cc41",
+      "form": "10-K",
+      "fiscal_year": 2025,
+      "report_date": "2025-06-30",
+      "filing_date": "2025-07-30",
+      "primary_document": "msft-20250630.htm"
+    },
+    {
+      "group": "fil_0001193125-23-259247",
+      "metadata_sha256": "0f3514e09b2a2ac7b05fb7903729e916b4224da2fba08199c3185692c22a00b8",
+      "form": "DEF 14A",
+      "fiscal_year": 2023,
+      "report_date": "2023-12-07",
+      "filing_date": "2023-10-19",
+      "primary_document": "d356108ddef14a.htm"
+    },
+    {
+      "group": "fil_0001193125-24-242883",
+      "metadata_sha256": "8af6c9d8262edc33fd7b5343d65d75036236dc184786521d4ccf9f897decd581",
+      "form": "DEF 14A",
+      "fiscal_year": 2024,
+      "report_date": "2024-12-10",
+      "filing_date": "2024-10-24",
+      "primary_document": "d858775ddef14a.htm"
+    },
+    {
+      "group": "fil_0001193125-25-154103",
+      "metadata_sha256": "c229ab1e6208ac146279dc02f2ae7c4af289a82e9f12693873896b80fd801c96",
+      "form": "8-K",
+      "fiscal_year": 2025,
+      "report_date": "2025-07-01",
+      "filing_date": "2025-07-01",
+      "primary_document": "d84624d8k.htm"
+    },
+    {
+      "group": "fil_0001193125-25-225125",
+      "metadata_sha256": "901614344e798c9782f6572a4472fd5fe758d7129a12dbd397c07db35bd0dab2",
+      "form": "8-K",
+      "fiscal_year": 2025,
+      "report_date": "2025-09-24",
+      "filing_date": "2025-09-30",
+      "primary_document": "d863209d8k.htm"
+    },
+    {
+      "group": "fil_0001193125-25-245150",
+      "metadata_sha256": "624ed0cb0061f14d88432629d0b929e9fdba467111e0ddbd3eba36326a5af306",
+      "form": "DEF 14A",
+      "fiscal_year": 2025,
+      "report_date": "2025-12-05",
+      "filing_date": "2025-10-21",
+      "primary_document": "d908201ddef14a.htm"
+    },
+    {
+      "group": "fil_0001193125-25-256310",
+      "metadata_sha256": "ed4f1417da467fad807e96f59056e76b2e8bd266f1bb0a49a5fbdb6cd2125490",
+      "form": "8-K",
+      "fiscal_year": 2025,
+      "report_date": "2025-10-28",
+      "filing_date": "2025-10-29",
+      "primary_document": "msft-20251028.htm"
+    },
+    {
+      "group": "fil_0001193125-25-256321",
+      "metadata_sha256": "4c4aabfc64c2d9d881c282217264f11a3a91a5686474de7ac10238b93f16039a",
+      "form": "10-Q",
+      "fiscal_year": 2025,
+      "report_date": "2025-09-30",
+      "filing_date": "2025-10-29",
+      "primary_document": "msft-20250930.htm"
+    },
+    {
+      "group": "fil_0001193125-25-311196",
+      "metadata_sha256": "12dd7715cc502eac650f172527e07278712617f349cb9ffbec07794b7bd25666",
+      "form": "8-K",
+      "fiscal_year": 2025,
+      "report_date": "2025-12-05",
+      "filing_date": "2025-12-08",
+      "primary_document": "d34077d8k.htm"
+    },
+    {
+      "group": "fil_0001193125-26-027198",
+      "metadata_sha256": "701c209641955088dfcaee439f0640c6ca48da01a178c02e3f51d8212d6c3a5b",
+      "form": "8-K",
+      "fiscal_year": 2026,
+      "report_date": "2026-01-28",
+      "filing_date": "2026-01-28",
+      "primary_document": "msft-20260128.htm"
+    },
+    {
+      "group": "fil_0001193125-26-027207",
+      "metadata_sha256": "a1aa582529a171c0729c3ab4080798905d5f990b93913a8c86d519f5fb064089",
+      "form": "10-Q",
+      "fiscal_year": 2025,
+      "report_date": "2025-12-31",
+      "filing_date": "2026-01-28",
+      "primary_document": "msft-20251231.htm"
+    },
+    {
+      "group": "fil_0001193125-26-191457",
+      "metadata_sha256": "108317650d38fccce1657a98fa3f60e475b039eab36f5735e11e8a4621d132e0",
+      "form": "8-K",
+      "fiscal_year": 2026,
+      "report_date": "2026-04-29",
+      "filing_date": "2026-04-29",
+      "primary_document": "msft-20260429.htm"
+    },
+    {
+      "group": "fil_0001193125-26-191507",
+      "metadata_sha256": "0760e6540f78db7281d0e689f188c726133b10d2a0e03ad58e8523bf32b7c4fb",
+      "form": "10-Q",
+      "fiscal_year": 2026,
+      "report_date": "2026-03-31",
+      "filing_date": "2026-04-29",
+      "primary_document": "msft-20260331.htm"
+    },
+    {
+      "group": "fil_0001193125-26-224155",
+      "metadata_sha256": "e63ef4dcb27faf308666f21fa6cac632735f196469c33f78680dac0f88110854",
+      "form": "8-K",
+      "fiscal_year": 2026,
+      "report_date": "2026-05-13",
+      "filing_date": "2026-05-14",
+      "primary_document": "d125909d8k.htm"
+    },
+    {
+      "group": "fil_0001193125-26-258667",
+      "metadata_sha256": "ea1b006e4067f40a18f6b40a4401235fa2b6584f1a124745f4a2cc697ddbda2e",
+      "form": "8-K",
+      "fiscal_year": 2026,
+      "report_date": "2026-06-02",
+      "filing_date": "2026-06-05",
+      "primary_document": "d26760d8k.htm"
+    },
+    {
+      "group": "fil_0001564590-21-039151",
+      "metadata_sha256": "9aefd699ac1fe732462ecd81b9f57b06e96f0c0b0732b4e7308479a87a9efdd1",
+      "form": "10-K",
+      "fiscal_year": 2021,
+      "report_date": "2021-06-30",
+      "filing_date": "2021-07-29",
+      "primary_document": "msft-10k_20210630.htm"
+    },
+    {
+      "group": "fil_0001564590-22-026876",
+      "metadata_sha256": "ceec0c2e54c45f43970a0d4cdcae4c9c0f80bd182f6241d78f85c84b160b1163",
+      "form": "10-K",
+      "fiscal_year": 2022,
+      "report_date": "2022-06-30",
+      "filing_date": "2022-07-28",
+      "primary_document": "msft-10k_20220630.htm"
+    },
+    {
+      "group": "fil_0002100119-26-000820",
+      "metadata_sha256": "185bc385f2234b0305d577203adf8537f0c0cb9ec5eeebe16abebeda2dcf2fba",
+      "form": "SC 13G",
+      "fiscal_year": null,
+      "report_date": null,
+      "filing_date": "2026-04-30",
+      "primary_document": "xslSCHEDULE_13G_X02/primary_doc.xml"
+    }
+  ],
+  "group_count": 26,
+  "latest_dayu_filing_date": "2026-06-05",
+  "annual_dir_files": [
+    {
+      "name": "微软_10-K_2024.htm",
+      "bytes": 6860911
+    },
+    {
+      "name": "微软_10-K_2024.htm.source.json",
+      "bytes": 279
+    },
+    {
+      "name": "微软_10-K_2024.xsd",
+      "bytes": 2099152
+    },
+    {
+      "name": "微软_10-K_2024_htm.xml",
+      "bytes": 8853334
+    },
+    {
+      "name": "微软_10-K_2025.htm",
+      "bytes": 8158067
+    },
+    {
+      "name": "微软_10-K_2025.htm.source.json",
+      "bytes": 279
+    },
+    {
+      "name": "微软_10-K_2025.xsd",
+      "bytes": 2066295
+    },
+    {
+      "name": "微软_10-K_2025_htm.xml",
+      "bytes": 10533273
+    }
+  ],
+  "coverage": "registered isolated sources + observed company annual directory + exact MSFT Dayu filings; not a universal arbitrary Dropbox absence proof",
+  "writes": 0,
+  "network_requests": 0
+}

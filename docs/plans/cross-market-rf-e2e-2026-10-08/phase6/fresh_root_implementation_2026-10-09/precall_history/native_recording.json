@@ -1,0 +1,186 @@
+{
+  "schema_version": "w11-native-recording/1",
+  "provider_calls": 0,
+  "paid_calls": 0,
+  "fixture_is_synthetic_not_company_research": true,
+  "calls": [
+    {
+      "capture_id": "ae7e8af462774eedb60d095e1059d967",
+      "exit_code": 2,
+      "timed_out": false,
+      "child_started": true,
+      "input_snapshots": [
+        {
+          "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\draft.json",
+          "frozen_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\runs\\native\\roles\\executor\\commands\\ae7e8af462774eedb60d095e1059d967\\input-0001-da26c7631e7a.json",
+          "sha256": "da26c7631e7a1d7c54e0cf7092c46de144aa3e6c104e3e5abf2bf371e0253467",
+          "byte_size": 25,
+          "observed_at": "2026-10-09T11:59:22.027682+00:00"
+        }
+      ],
+      "runtime_observation": {
+        "python_version": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+        "platform": "Windows",
+        "capture_tool_sha256": "fb1bdeeb88a5c87eaa33cd887c7226daa7daa0377903ad15d0a8602c6bf4af7f",
+        "observed_at": "2026-10-09T11:59:22.020815+00:00",
+        "scope_ref": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\runs\\native\\scope.json",
+        "scope_sha256": "43b6c3959291e32b083573bd7454bc503794b3f279f12f63362dd63cea334222"
+      },
+      "direct_child_pid": 106724,
+      "execution_error": null,
+      "output_complete": true,
+      "warnings": [],
+      "max_log_bytes": 1048576,
+      "timeout_seconds": 600,
+      "max_input_bytes": 4194304,
+      "stdout_total_bytes": 0,
+      "stdout_retained_bytes": 0,
+      "stdout_truncated": false,
+      "stdout_artifact": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\runs\\native\\roles\\executor\\commands\\ae7e8af462774eedb60d095e1059d967\\stdout.txt",
+      "stderr_total_bytes": 84,
+      "stderr_retained_bytes": 84,
+      "stderr_truncated": false,
+      "stderr_artifact": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\runs\\native\\roles\\executor\\commands\\ae7e8af462774eedb60d095e1059d967\\stderr.txt",
+      "events": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\runs\\native\\roles\\executor\\events.jsonl"
+    },
+    {
+      "capture_id": "1199a542c8bf4a8d9f38d02e7daa3b1d",
+      "exit_code": 0,
+      "timed_out": false,
+      "child_started": true,
+      "input_snapshots": [
+        {
+          "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\draft.json",
+          "frozen_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\runs\\native\\roles\\executor\\commands\\1199a542c8bf4a8d9f38d02e7daa3b1d\\input-0001-68decf56c23f.json",
+          "sha256": "68decf56c23fd773e9b6aca080b0634fcd4d6bec8952ff02c099f68bbf515403",
+          "byte_size": 38545,
+          "observed_at": "2026-10-09T11:59:22.538512+00:00"
+        }
+      ],
+      "runtime_observation": {
+        "python_version": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+        "platform": "Windows",
+        "capture_tool_sha256": "fb1bdeeb88a5c87eaa33cd887c7226daa7daa0377903ad15d0a8602c6bf4af7f",
+        "observed_at": "2026-10-09T11:59:22.526303+00:00",
+        "scope_ref": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\runs\\native\\scope.json",
+        "scope_sha256": "43b6c3959291e32b083573bd7454bc503794b3f279f12f63362dd63cea334222"
+      },
+      "direct_child_pid": 44360,
+      "execution_error": null,
+      "output_complete": true,
+      "warnings": [],
+      "max_log_bytes": 1048576,
+      "timeout_seconds": 600,
+      "max_input_bytes": 4194304,
+      "stdout_total_bytes": 7,
+      "stdout_retained_bytes": 7,
+      "stdout_truncated": false,
+      "stdout_artifact": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\runs\\native\\roles\\executor\\commands\\1199a542c8bf4a8d9f38d02e7daa3b1d\\stdout.txt",
+      "stderr_total_bytes": 0,
+      "stderr_retained_bytes": 0,
+      "stderr_truncated": false,
+      "stderr_artifact": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\runs\\native\\roles\\executor\\commands\\1199a542c8bf4a8d9f38d02e7daa3b1d\\stderr.txt",
+      "events": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\runs\\native\\roles\\executor\\events.jsonl"
+    },
+    {
+      "capture_id": "e5b5bcb668e942e2a7b11e4212bd5d94",
+      "exit_code": 0,
+      "timed_out": false,
+      "child_started": true,
+      "input_snapshots": [
+        {
+          "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\draft.json",
+          "frozen_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\runs\\native\\roles\\executor\\commands\\e5b5bcb668e942e2a7b11e4212bd5d94\\input-0001-68decf56c23f.json",
+          "sha256": "68decf56c23fd773e9b6aca080b0634fcd4d6bec8952ff02c099f68bbf515403",
+          "byte_size": 38545,
+          "observed_at": "2026-10-09T11:59:23.049470+00:00"
+        }
+      ],
+      "runtime_observation": {
+        "python_version": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+        "platform": "Windows",
+        "capture_tool_sha256": "fb1bdeeb88a5c87eaa33cd887c7226daa7daa0377903ad15d0a8602c6bf4af7f",
+        "observed_at": "2026-10-09T11:59:23.044413+00:00",
+        "scope_ref": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\runs\\native\\scope.json",
+        "scope_sha256": "43b6c3959291e32b083573bd7454bc503794b3f279f12f63362dd63cea334222"
+      },
+      "direct_child_pid": 49220,
+      "execution_error": null,
+      "output_complete": true,
+      "warnings": [],
+      "max_log_bytes": 1048576,
+      "timeout_seconds": 600,
+      "max_input_bytes": 4194304,
+      "stdout_total_bytes": 0,
+      "stdout_retained_bytes": 0,
+      "stdout_truncated": false,
+      "stdout_artifact": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\runs\\native\\roles\\executor\\commands\\e5b5bcb668e942e2a7b11e4212bd5d94\\stdout.txt",
+      "stderr_total_bytes": 0,
+      "stderr_retained_bytes": 0,
+      "stderr_truncated": false,
+      "stderr_artifact": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\runs\\native\\roles\\executor\\commands\\e5b5bcb668e942e2a7b11e4212bd5d94\\stderr.txt",
+      "events": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\runs\\native\\roles\\executor\\events.jsonl"
+    },
+    {
+      "capture_id": "5cd14869ee254c67b677501bcc61d9ea",
+      "exit_code": 0,
+      "timed_out": false,
+      "child_started": true,
+      "input_snapshots": [
+        {
+          "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\result.json",
+          "frozen_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\runs\\native\\roles\\executor\\commands\\5cd14869ee254c67b677501bcc61d9ea\\input-0001-125f3493feb3.json",
+          "sha256": "125f3493feb3d4f5e63b46cce7af776e9e2a687aef3f406d9e6ad42b5d62a235",
+          "byte_size": 94644,
+          "observed_at": "2026-10-09T11:59:23.588772+00:00"
+        },
+        {
+          "original_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\draft.json",
+          "frozen_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\runs\\native\\roles\\executor\\commands\\5cd14869ee254c67b677501bcc61d9ea\\input-0002-68decf56c23f.json",
+          "sha256": "68decf56c23fd773e9b6aca080b0634fcd4d6bec8952ff02c099f68bbf515403",
+          "byte_size": 38545,
+          "observed_at": "2026-10-09T11:59:23.591630+00:00"
+        }
+      ],
+      "runtime_observation": {
+        "python_version": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+        "platform": "Windows",
+        "capture_tool_sha256": "fb1bdeeb88a5c87eaa33cd887c7226daa7daa0377903ad15d0a8602c6bf4af7f",
+        "observed_at": "2026-10-09T11:59:23.582806+00:00",
+        "scope_ref": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\runs\\native\\scope.json",
+        "scope_sha256": "43b6c3959291e32b083573bd7454bc503794b3f279f12f63362dd63cea334222"
+      },
+      "direct_child_pid": 90872,
+      "execution_error": null,
+      "output_complete": true,
+      "warnings": [],
+      "max_log_bytes": 1048576,
+      "timeout_seconds": 600,
+      "max_input_bytes": 4194304,
+      "stdout_total_bytes": 17,
+      "stdout_retained_bytes": 17,
+      "stdout_truncated": false,
+      "stdout_artifact": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\runs\\native\\roles\\executor\\commands\\5cd14869ee254c67b677501bcc61d9ea\\stdout.txt",
+      "stderr_total_bytes": 0,
+      "stderr_retained_bytes": 0,
+      "stderr_truncated": false,
+      "stderr_artifact": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\runs\\native\\roles\\executor\\commands\\5cd14869ee254c67b677501bcc61d9ea\\stderr.txt",
+      "events": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\runs\\native\\roles\\executor\\events.jsonl"
+    }
+  ],
+  "native_input_output_bound": true,
+  "validate_only_registry_zero_write": true,
+  "earlier_failure_exact_bytes_retained": true,
+  "corrected_draft_not_modified": true,
+  "actual_result_input_document_matches": true,
+  "statement": {
+    "artifact": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs\\runs\\native\\execution\\TRUST_BOUNDARY.md",
+    "source_sha256": "95efcd48bf527d166469fbe0fefca334e1d8ea247d008ea7b30df56fb4a68bc4",
+    "output_sha256": "b28d61d783368223311207ed3f3744382f387fcbc7e1ddffdffa9ba757a88b74",
+    "bytes": 675,
+    "guarantee_scope": "observation_only_not_quality"
+  },
+  "temporary_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w11-native-gebk4tcs",
+  "isolated_registry_entries": 1,
+  "temporary_root_restored_absent": true
+}

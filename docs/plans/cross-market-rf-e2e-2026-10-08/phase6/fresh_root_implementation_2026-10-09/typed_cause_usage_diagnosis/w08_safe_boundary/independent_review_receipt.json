@@ -1,0 +1,1211 @@
+{
+  "schema_version": "w08-independent-review/1",
+  "source_file_sha256": {
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009\\scripts\\fetch_filing.py": "9e0ae4dc11b12367b7498e3f80599f63df48e27efd3eebba9e6ca59e4be8de51",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009\\scripts\\ff_local_source_prepare.py": "2120ee7bb00a7ad2476fc7032db593024b0d4441c2c07a1c4529021fc21f0653",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009\\scripts\\ff_provider_cause.py": "49f6ae540b2068ab6a6c9f5c9c823128adc9095a3bce4094fcec64302e724f18",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009\\scripts\\ff_v2_envelope.py": "8bca27f2acfdb4f4ba00342fcf4b9a783da6328ed69018c2b0286ff464fda534",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009\\scripts\\filing_contracts.py": "814c63bd8b684d946e7b3a18f194ed441da375070e822eb370ec9c3a136536eb",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py": "b3297af7f0595362b26e594732de7a7c65d7a7f2f0a6da69e5832790d4bb4f37",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_upstream_cause.py": "57c5c5c579a6963959dd7636fc28312338779dc1ddbedb8f36a25a163cf8f3b8",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py": "4038be124d06c9d3b26a5d0490f82f18e03e0dd92fa4a3b1c72625da294c9ebb"
+  },
+  "external_http_requests": 0,
+  "paid_calls": 0,
+  "company_M3": false,
+  "tests": [
+    {
+      "repo": "FF",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\FF-pytest",
+        "tests/test_failure_usage_continuity.py",
+        "tests/test_provider_cause_contract.py",
+        "tests/test_local_source_prepare.py",
+        "tests/test_source_ref_v2.py"
+      ],
+      "exit_code": 0,
+      "seconds": 3.298,
+      "log": "...........................................................              [100%]\n59 passed in 2.85s\n"
+    },
+    {
+      "repo": "RF",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\RF-pytest",
+        "tests/test_source_failure_observations.py",
+        "tests/test_source_failure_cause.py",
+        "tests/test_filing_fetch_client.py",
+        "tests/test_source_preparation_complete_result.py"
+      ],
+      "exit_code": 0,
+      "seconds": 12.525,
+      "log": "........................................................................ [ 98%]\n.                                                                        [100%]\n73 passed in 12.07s\n"
+    }
+  ],
+  "cases": [
+    {
+      "mode": "discover-fail",
+      "fixture": "real_CWP_FF_RF_public_CLIs_synthetic_no_HTTP_provider",
+      "cwp": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "company_wiki.source_catalog.cli",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\discover-fail\\config\\source_catalog.yaml",
+          "ensure",
+          "--entity",
+          "Fixture",
+          "--market",
+          "US",
+          "--security-id",
+          "AAPL",
+          "--document-kind",
+          "annual_report",
+          "--fiscal-year",
+          "2025",
+          "--fiscal-period",
+          "FY",
+          "--form-type",
+          "10-K",
+          "--language",
+          "en",
+          "--as-of-date",
+          "2026-10-09",
+          "--allow-download",
+          "--source-ref-v2",
+          "--max-download-bytes",
+          "10000",
+          "--max-download-seconds",
+          "8",
+          "--max-download-cost-usd",
+          "1",
+          "--acquisition-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\discover-fail\\config\\source_acquisition.yaml"
+        ],
+        "exit_code": 1,
+        "duration_seconds": 0.859,
+        "payload": {
+          "acquisition_failure": {
+            "acquisition_usage": {
+              "cost_usd": "0.01",
+              "response_bytes": 17,
+              "schema_version": "1.0"
+            },
+            "code": "upstream_unavailable",
+            "provider_started": true,
+            "retryable": true,
+            "schema_version": "acquisition-failure/1",
+            "usage_complete": true,
+            "usage_scope": "operation"
+          },
+          "error": "adapter proof-cli discover exited 1",
+          "error_type": "fatal",
+          "retryable": false,
+          "status": "failed"
+        },
+        "stdout": "",
+        "stderr": "{\"acquisition_failure\": {\"acquisition_usage\": {\"cost_usd\": \"0.01\", \"response_bytes\": 17, \"schema_version\": \"1.0\"}, \"code\": \"upstream_unavailable\", \"provider_started\": true, \"retryable\": true, \"schema_version\": \"acquisition-failure/1\", \"usage_complete\": true, \"usage_scope\": \"operation\"}, \"error\": \"adapter proof-cli discover exited 1\", \"error_type\": \"fatal\", \"retryable\": false, \"status\": \"failed\"}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "ff": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009\\scripts\\fetch_filing.py",
+          "--source-ref-v2",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\discover-fail\\company_wiki.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 1.83,
+        "payload": {
+          "schema_version": "2.0",
+          "status": "fatal",
+          "request_period": {
+            "mode": "exact",
+            "fiscal_year": 2025,
+            "fiscal_period": "FY",
+            "as_of_date": "2026-10-09"
+          },
+          "filing": {
+            "status": "fatal",
+            "reason": "company-wiki ensure exited 1",
+            "retryable": false,
+            "upstream_cause": {
+              "schema_version": "filing-upstream-cause/1",
+              "operation": "ensure",
+              "code": "upstream_unavailable",
+              "provider_started": true,
+              "usage_complete": true,
+              "retry_scope": "none"
+            },
+            "acquisition_failure": {
+              "acquisition_usage": {
+                "cost_usd": "0.01",
+                "response_bytes": 17,
+                "schema_version": "1.0"
+              },
+              "code": "upstream_unavailable",
+              "provider_started": true,
+              "retryable": true,
+              "schema_version": "acquisition-failure/1",
+              "usage_complete": true,
+              "usage_scope": "operation"
+            },
+            "stage": "ensure",
+            "attempts": 1
+          },
+          "transcript": {
+            "status": "not_requested",
+            "retryable": false
+          },
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "{\n  \"schema_version\": \"2.0\",\n  \"status\": \"fatal\",\n  \"request_period\": {\n    \"mode\": \"exact\",\n    \"fiscal_year\": 2025,\n    \"fiscal_period\": \"FY\",\n    \"as_of_date\": \"2026-10-09\"\n  },\n  \"filing\": {\n    \"status\": \"fatal\",\n    \"reason\": \"company-wiki ensure exited 1\",\n    \"retryable\": false,\n    \"upstream_cause\": {\n      \"schema_version\": \"filing-upstream-cause/1\",\n      \"operation\": \"ensure\",\n      \"code\": \"upstream_unavailable\",\n      \"provider_started\": true,\n      \"usage_complete\": true,\n      \"retry_scope\": \"none\"\n    },\n    \"acquisition_failure\": {\n      \"acquisition_usage\": {\n        \"cost_usd\": \"0.01\",\n        \"response_bytes\": 17,\n        \"schema_version\": \"1.0\"\n      },\n      \"code\": \"upstream_unavailable\",\n      \"provider_started\": true,\n      \"retryable\": true,\n      \"schema_version\": \"acquisition-failure/1\",\n      \"usage_complete\": true,\n      \"usage_scope\": \"operation\"\n    },\n    \"stage\": \"ensure\",\n    \"attempts\": 1\n  },\n  \"transcript\": {\n    \"status\": \"not_requested\",\n    \"retryable\": false\n  },\n  \"calls\": 2,\n  \"downloads\": 0\n}\n",
+        "stderr": "",
+        "synthetic_sentinel_leaked": false
+      },
+      "rf_client": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\discover-fail\\company_wiki.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 1.927,
+        "payload": {
+          "error_code": "fatal",
+          "error": "filing-fetch exited 2: status=fatal: upstream_unavailable",
+          "retryable": false,
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "upstream_unavailable",
+            "provider_started": true,
+            "usage_complete": true,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "acquisition_usage": {
+              "cost_usd": "0.01",
+              "response_bytes": 17,
+              "schema_version": "1.0"
+            },
+            "code": "upstream_unavailable",
+            "provider_started": true,
+            "retryable": true,
+            "schema_version": "acquisition-failure/1",
+            "usage_complete": true,
+            "usage_scope": "operation"
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"fatal\", \"error\": \"filing-fetch exited 2: status=fatal: upstream_unavailable\", \"retryable\": false, \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"upstream_unavailable\", \"provider_started\": true, \"usage_complete\": true, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"acquisition_usage\": {\"cost_usd\": \"0.01\", \"response_bytes\": 17, \"schema_version\": \"1.0\"}, \"code\": \"upstream_unavailable\", \"provider_started\": true, \"retryable\": true, \"schema_version\": \"acquisition-failure/1\", \"usage_complete\": true, \"usage_scope\": \"operation\"}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "rf_prepare": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py",
+          "--result-envelope",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\discover-fail\\company_wiki.json",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\discover-fail\\config\\source_catalog.yaml",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 3,
+        "duration_seconds": 1.928,
+        "payload": {
+          "error_code": "upstream",
+          "error": "filing-fetch client exited 2: status=fatal: upstream_unavailable",
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "upstream_unavailable",
+            "provider_started": true,
+            "usage_complete": true,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "acquisition_usage": {
+              "cost_usd": "0.01",
+              "response_bytes": 17,
+              "schema_version": "1.0"
+            },
+            "code": "upstream_unavailable",
+            "provider_started": true,
+            "retryable": true,
+            "schema_version": "acquisition-failure/1",
+            "usage_complete": true,
+            "usage_scope": "operation"
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"upstream\", \"error\": \"filing-fetch client exited 2: status=fatal: upstream_unavailable\", \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"upstream_unavailable\", \"provider_started\": true, \"usage_complete\": true, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"acquisition_usage\": {\"cost_usd\": \"0.01\", \"response_bytes\": 17, \"schema_version\": \"1.0\"}, \"code\": \"upstream_unavailable\", \"provider_started\": true, \"retryable\": true, \"schema_version\": \"acquisition-failure/1\", \"usage_complete\": true, \"usage_scope\": \"operation\"}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "provider_invocations_all_four_probes": [
+        "discover",
+        "discover",
+        "discover",
+        "discover"
+      ],
+      "provider_http_requests": 0,
+      "paid_cost_usd": "0",
+      "raw_files_remaining": 0
+    },
+    {
+      "mode": "deadline",
+      "fixture": "real_CWP_FF_RF_public_CLIs_synthetic_no_HTTP_provider",
+      "cwp": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "company_wiki.source_catalog.cli",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\deadline\\config\\source_catalog.yaml",
+          "ensure",
+          "--entity",
+          "Fixture",
+          "--market",
+          "US",
+          "--security-id",
+          "AAPL",
+          "--document-kind",
+          "annual_report",
+          "--fiscal-year",
+          "2025",
+          "--fiscal-period",
+          "FY",
+          "--form-type",
+          "10-K",
+          "--language",
+          "en",
+          "--as-of-date",
+          "2026-10-09",
+          "--allow-download",
+          "--source-ref-v2",
+          "--max-download-bytes",
+          "10000",
+          "--max-download-seconds",
+          "2",
+          "--max-download-cost-usd",
+          "1",
+          "--acquisition-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\deadline\\config\\source_acquisition.yaml"
+        ],
+        "exit_code": 1,
+        "duration_seconds": 2.524,
+        "payload": {
+          "acquisition_failure": {
+            "acquisition_usage": {
+              "cost_usd": "0.03",
+              "response_bytes": 36,
+              "schema_version": "1.0"
+            },
+            "code": "adapter_timeout",
+            "provider_started": true,
+            "retryable": false,
+            "schema_version": "acquisition-failure/1",
+            "usage_complete": false,
+            "usage_scope": "operation"
+          },
+          "error": "adapter proof-cli fetch process failed: deadline exceeded",
+          "error_type": "fatal",
+          "retryable": false,
+          "status": "failed"
+        },
+        "stdout": "",
+        "stderr": "{\"acquisition_failure\": {\"acquisition_usage\": {\"cost_usd\": \"0.03\", \"response_bytes\": 36, \"schema_version\": \"1.0\"}, \"code\": \"adapter_timeout\", \"provider_started\": true, \"retryable\": false, \"schema_version\": \"acquisition-failure/1\", \"usage_complete\": false, \"usage_scope\": \"operation\"}, \"error\": \"adapter proof-cli fetch process failed: deadline exceeded\", \"error_type\": \"fatal\", \"retryable\": false, \"status\": \"failed\"}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "ff": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009\\scripts\\fetch_filing.py",
+          "--source-ref-v2",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\deadline\\company_wiki.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 6.632,
+        "payload": {
+          "schema_version": "2.0",
+          "status": "fatal",
+          "request_period": {
+            "mode": "exact",
+            "fiscal_year": 2025,
+            "fiscal_period": "FY",
+            "as_of_date": "2026-10-09"
+          },
+          "filing": {
+            "status": "fatal",
+            "reason": "company-wiki ensure exited 1",
+            "retryable": false,
+            "upstream_cause": {
+              "schema_version": "filing-upstream-cause/1",
+              "operation": "ensure",
+              "code": "adapter_timeout",
+              "provider_started": true,
+              "usage_complete": false,
+              "retry_scope": "none"
+            },
+            "acquisition_failure": {
+              "acquisition_usage": {
+                "cost_usd": "0.03",
+                "response_bytes": 36,
+                "schema_version": "1.0"
+              },
+              "code": "adapter_timeout",
+              "provider_started": true,
+              "retryable": false,
+              "schema_version": "acquisition-failure/1",
+              "usage_complete": false,
+              "usage_scope": "operation"
+            },
+            "stage": "ensure",
+            "attempts": 1
+          },
+          "transcript": {
+            "status": "not_requested",
+            "retryable": false
+          },
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "{\n  \"schema_version\": \"2.0\",\n  \"status\": \"fatal\",\n  \"request_period\": {\n    \"mode\": \"exact\",\n    \"fiscal_year\": 2025,\n    \"fiscal_period\": \"FY\",\n    \"as_of_date\": \"2026-10-09\"\n  },\n  \"filing\": {\n    \"status\": \"fatal\",\n    \"reason\": \"company-wiki ensure exited 1\",\n    \"retryable\": false,\n    \"upstream_cause\": {\n      \"schema_version\": \"filing-upstream-cause/1\",\n      \"operation\": \"ensure\",\n      \"code\": \"adapter_timeout\",\n      \"provider_started\": true,\n      \"usage_complete\": false,\n      \"retry_scope\": \"none\"\n    },\n    \"acquisition_failure\": {\n      \"acquisition_usage\": {\n        \"cost_usd\": \"0.03\",\n        \"response_bytes\": 36,\n        \"schema_version\": \"1.0\"\n      },\n      \"code\": \"adapter_timeout\",\n      \"provider_started\": true,\n      \"retryable\": false,\n      \"schema_version\": \"acquisition-failure/1\",\n      \"usage_complete\": false,\n      \"usage_scope\": \"operation\"\n    },\n    \"stage\": \"ensure\",\n    \"attempts\": 1\n  },\n  \"transcript\": {\n    \"status\": \"not_requested\",\n    \"retryable\": false\n  },\n  \"calls\": 2,\n  \"downloads\": 0\n}\n",
+        "stderr": "",
+        "synthetic_sentinel_leaked": false
+      },
+      "rf_client": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\deadline\\company_wiki.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 6.85,
+        "payload": {
+          "error_code": "fatal",
+          "error": "filing-fetch exited 2: status=fatal: adapter_timeout",
+          "retryable": false,
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "adapter_timeout",
+            "provider_started": true,
+            "usage_complete": false,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "acquisition_usage": {
+              "cost_usd": "0.03",
+              "response_bytes": 36,
+              "schema_version": "1.0"
+            },
+            "code": "adapter_timeout",
+            "provider_started": true,
+            "retryable": false,
+            "schema_version": "acquisition-failure/1",
+            "usage_complete": false,
+            "usage_scope": "operation"
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"fatal\", \"error\": \"filing-fetch exited 2: status=fatal: adapter_timeout\", \"retryable\": false, \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"adapter_timeout\", \"provider_started\": true, \"usage_complete\": false, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"acquisition_usage\": {\"cost_usd\": \"0.03\", \"response_bytes\": 36, \"schema_version\": \"1.0\"}, \"code\": \"adapter_timeout\", \"provider_started\": true, \"retryable\": false, \"schema_version\": \"acquisition-failure/1\", \"usage_complete\": false, \"usage_scope\": \"operation\"}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "rf_prepare": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py",
+          "--result-envelope",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\deadline\\company_wiki.json",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\deadline\\config\\source_catalog.yaml",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 3,
+        "duration_seconds": 6.901,
+        "payload": {
+          "error_code": "upstream",
+          "error": "filing-fetch client exited 2: status=fatal: adapter_timeout",
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "adapter_timeout",
+            "provider_started": true,
+            "usage_complete": false,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "acquisition_usage": {
+              "cost_usd": "0.03",
+              "response_bytes": 36,
+              "schema_version": "1.0"
+            },
+            "code": "adapter_timeout",
+            "provider_started": true,
+            "retryable": false,
+            "schema_version": "acquisition-failure/1",
+            "usage_complete": false,
+            "usage_scope": "operation"
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"upstream\", \"error\": \"filing-fetch client exited 2: status=fatal: adapter_timeout\", \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"adapter_timeout\", \"provider_started\": true, \"usage_complete\": false, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"acquisition_usage\": {\"cost_usd\": \"0.03\", \"response_bytes\": 36, \"schema_version\": \"1.0\"}, \"code\": \"adapter_timeout\", \"provider_started\": true, \"retryable\": false, \"schema_version\": \"acquisition-failure/1\", \"usage_complete\": false, \"usage_scope\": \"operation\"}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "provider_invocations_all_four_probes": [
+        "discover",
+        "fetch",
+        "discover",
+        "fetch",
+        "discover",
+        "fetch",
+        "discover",
+        "fetch"
+      ],
+      "provider_http_requests": 0,
+      "paid_cost_usd": "0",
+      "raw_files_remaining": 0
+    },
+    {
+      "mode": "malformed_usage",
+      "fixture": "real_CWP_FF_RF_public_CLIs_synthetic_no_HTTP_provider",
+      "cwp": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "company_wiki.source_catalog.cli",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\malformed_usage\\config\\source_catalog.yaml",
+          "ensure",
+          "--entity",
+          "Fixture",
+          "--market",
+          "US",
+          "--security-id",
+          "AAPL",
+          "--document-kind",
+          "annual_report",
+          "--fiscal-year",
+          "2025",
+          "--fiscal-period",
+          "FY",
+          "--form-type",
+          "10-K",
+          "--language",
+          "en",
+          "--as-of-date",
+          "2026-10-09",
+          "--allow-download",
+          "--source-ref-v2",
+          "--max-download-bytes",
+          "10000",
+          "--max-download-seconds",
+          "8",
+          "--max-download-cost-usd",
+          "1",
+          "--acquisition-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\malformed_usage\\config\\source_acquisition.yaml"
+        ],
+        "exit_code": 1,
+        "duration_seconds": 0.789,
+        "payload": {
+          "acquisition_failure": {
+            "acquisition_usage": null,
+            "code": "upstream_unavailable",
+            "provider_started": true,
+            "retryable": true,
+            "schema_version": "acquisition-failure/1",
+            "usage_complete": null,
+            "usage_scope": "operation"
+          },
+          "error": "adapter proof-cli discover exited 1",
+          "error_type": "fatal",
+          "retryable": false,
+          "status": "failed"
+        },
+        "stdout": "",
+        "stderr": "{\"acquisition_failure\": {\"acquisition_usage\": null, \"code\": \"upstream_unavailable\", \"provider_started\": true, \"retryable\": true, \"schema_version\": \"acquisition-failure/1\", \"usage_complete\": null, \"usage_scope\": \"operation\"}, \"error\": \"adapter proof-cli discover exited 1\", \"error_type\": \"fatal\", \"retryable\": false, \"status\": \"failed\"}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "ff": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009\\scripts\\fetch_filing.py",
+          "--source-ref-v2",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\malformed_usage\\company_wiki.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 1.687,
+        "payload": {
+          "schema_version": "2.0",
+          "status": "fatal",
+          "request_period": {
+            "mode": "exact",
+            "fiscal_year": 2025,
+            "fiscal_period": "FY",
+            "as_of_date": "2026-10-09"
+          },
+          "filing": {
+            "status": "fatal",
+            "reason": "company-wiki ensure exited 1",
+            "retryable": false,
+            "upstream_cause": {
+              "schema_version": "filing-upstream-cause/1",
+              "operation": "ensure",
+              "code": "upstream_unavailable",
+              "provider_started": true,
+              "usage_complete": null,
+              "retry_scope": "none"
+            },
+            "acquisition_failure": {
+              "acquisition_usage": null,
+              "code": "upstream_unavailable",
+              "provider_started": true,
+              "retryable": true,
+              "schema_version": "acquisition-failure/1",
+              "usage_complete": null,
+              "usage_scope": "operation"
+            },
+            "stage": "ensure",
+            "attempts": 1
+          },
+          "transcript": {
+            "status": "not_requested",
+            "retryable": false
+          },
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "{\n  \"schema_version\": \"2.0\",\n  \"status\": \"fatal\",\n  \"request_period\": {\n    \"mode\": \"exact\",\n    \"fiscal_year\": 2025,\n    \"fiscal_period\": \"FY\",\n    \"as_of_date\": \"2026-10-09\"\n  },\n  \"filing\": {\n    \"status\": \"fatal\",\n    \"reason\": \"company-wiki ensure exited 1\",\n    \"retryable\": false,\n    \"upstream_cause\": {\n      \"schema_version\": \"filing-upstream-cause/1\",\n      \"operation\": \"ensure\",\n      \"code\": \"upstream_unavailable\",\n      \"provider_started\": true,\n      \"usage_complete\": null,\n      \"retry_scope\": \"none\"\n    },\n    \"acquisition_failure\": {\n      \"acquisition_usage\": null,\n      \"code\": \"upstream_unavailable\",\n      \"provider_started\": true,\n      \"retryable\": true,\n      \"schema_version\": \"acquisition-failure/1\",\n      \"usage_complete\": null,\n      \"usage_scope\": \"operation\"\n    },\n    \"stage\": \"ensure\",\n    \"attempts\": 1\n  },\n  \"transcript\": {\n    \"status\": \"not_requested\",\n    \"retryable\": false\n  },\n  \"calls\": 2,\n  \"downloads\": 0\n}\n",
+        "stderr": "",
+        "synthetic_sentinel_leaked": false
+      },
+      "rf_client": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\malformed_usage\\company_wiki.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 1.701,
+        "payload": {
+          "error_code": "fatal",
+          "error": "filing-fetch exited 2: status=fatal: upstream_unavailable",
+          "retryable": false,
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "upstream_unavailable",
+            "provider_started": true,
+            "usage_complete": null,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "acquisition_usage": null,
+            "code": "upstream_unavailable",
+            "provider_started": true,
+            "retryable": true,
+            "schema_version": "acquisition-failure/1",
+            "usage_complete": null,
+            "usage_scope": "operation"
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"fatal\", \"error\": \"filing-fetch exited 2: status=fatal: upstream_unavailable\", \"retryable\": false, \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"upstream_unavailable\", \"provider_started\": true, \"usage_complete\": null, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"acquisition_usage\": null, \"code\": \"upstream_unavailable\", \"provider_started\": true, \"retryable\": true, \"schema_version\": \"acquisition-failure/1\", \"usage_complete\": null, \"usage_scope\": \"operation\"}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "rf_prepare": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py",
+          "--result-envelope",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\malformed_usage\\company_wiki.json",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\malformed_usage\\config\\source_catalog.yaml",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 3,
+        "duration_seconds": 1.886,
+        "payload": {
+          "error_code": "upstream",
+          "error": "filing-fetch client exited 2: status=fatal: upstream_unavailable",
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "upstream_unavailable",
+            "provider_started": true,
+            "usage_complete": null,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "acquisition_usage": null,
+            "code": "upstream_unavailable",
+            "provider_started": true,
+            "retryable": true,
+            "schema_version": "acquisition-failure/1",
+            "usage_complete": null,
+            "usage_scope": "operation"
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"upstream\", \"error\": \"filing-fetch client exited 2: status=fatal: upstream_unavailable\", \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"upstream_unavailable\", \"provider_started\": true, \"usage_complete\": null, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"acquisition_usage\": null, \"code\": \"upstream_unavailable\", \"provider_started\": true, \"retryable\": true, \"schema_version\": \"acquisition-failure/1\", \"usage_complete\": null, \"usage_scope\": \"operation\"}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "provider_invocations_all_four_probes": [
+        "discover",
+        "discover",
+        "discover",
+        "discover"
+      ],
+      "provider_http_requests": 0,
+      "paid_cost_usd": "0",
+      "raw_files_remaining": 0
+    },
+    {
+      "mode": "local_metadata_gap",
+      "fixture": "real_CWP_FF_RF_public_CLIs_synthetic_no_HTTP_provider",
+      "cwp": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "company_wiki.source_catalog.source_query_cli",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\local_metadata_gap\\config\\source_catalog.yaml"
+        ],
+        "exit_code": 0,
+        "duration_seconds": 0.501,
+        "payload": {
+          "candidates": [],
+          "excluded_candidates": [
+            {
+              "qualification": {
+                "as_of_date": "2026-10-09",
+                "historical_date_eligible": false,
+                "historical_reuse_eligible": false,
+                "local_bytes_status": "not_checked",
+                "publication_status": "unknown",
+                "schema_version": "source-qualification/1"
+              },
+              "source_ref": {
+                "byte_size": 63,
+                "content_sha256": "36f1641043559bdbd6ea3bbd729530e53a7eaaea4844bed35689ea00c208f62f",
+                "document_id": "urn:company-wiki:document:sha256:36f1641043559bdbd6ea3bbd729530e53a7eaaea4844bed35689ea00c208f62f",
+                "mime_type": "application/pdf",
+                "schema_version": "2.0",
+                "source_id": "urn:company-wiki:source:sha256:36f1641043559bdbd6ea3bbd729530e53a7eaaea4844bed35689ea00c208f62f"
+              }
+            }
+          ],
+          "matches": [],
+          "reason": "no_local_match",
+          "request_id": "urn:company-wiki:source-request:sha256:4e4e0d4cdbee5242df35323d8a5853b857fa9cccf902342566f8839e1c784b00",
+          "schema_version": "2.0",
+          "source_read_policy_sha256": "0aa3d539a38c8dc216dca1b5fafff8f8eb9ec28c44112a968af0f3b3d5428e19",
+          "status": "not_found"
+        },
+        "stdout": "{\"candidates\":[],\"excluded_candidates\":[{\"qualification\":{\"as_of_date\":\"2026-10-09\",\"historical_date_eligible\":false,\"historical_reuse_eligible\":false,\"local_bytes_status\":\"not_checked\",\"publication_status\":\"unknown\",\"schema_version\":\"source-qualification/1\"},\"source_ref\":{\"byte_size\":63,\"content_sha256\":\"36f1641043559bdbd6ea3bbd729530e53a7eaaea4844bed35689ea00c208f62f\",\"document_id\":\"urn:company-wiki:document:sha256:36f1641043559bdbd6ea3bbd729530e53a7eaaea4844bed35689ea00c208f62f\",\"mime_type\":\"application/pdf\",\"schema_version\":\"2.0\",\"source_id\":\"urn:company-wiki:source:sha256:36f1641043559bdbd6ea3bbd729530e53a7eaaea4844bed35689ea00c208f62f\"}}],\"matches\":[],\"reason\":\"no_local_match\",\"request_id\":\"urn:company-wiki:source-request:sha256:4e4e0d4cdbee5242df35323d8a5853b857fa9cccf902342566f8839e1c784b00\",\"schema_version\":\"2.0\",\"source_read_policy_sha256\":\"0aa3d539a38c8dc216dca1b5fafff8f8eb9ec28c44112a968af0f3b3d5428e19\",\"status\":\"not_found\"}\n",
+        "stderr": "",
+        "synthetic_sentinel_leaked": false
+      },
+      "ff": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009\\scripts\\fetch_filing.py",
+          "--source-ref-v2",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\local_metadata_gap\\company_wiki.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 2.026,
+        "payload": {
+          "schema_version": "2.0",
+          "status": "source_blocked",
+          "request_period": {
+            "mode": "exact",
+            "fiscal_year": 2025,
+            "fiscal_period": "FY",
+            "as_of_date": "2026-10-09"
+          },
+          "filing": {
+            "status": "source_blocked",
+            "reason": "local source preparation blocked: local_metadata_gap",
+            "retryable": false,
+            "upstream_cause": {
+              "schema_version": "filing-upstream-cause/1",
+              "operation": "local_prepare",
+              "code": "local_metadata_gap",
+              "provider_started": false,
+              "usage_complete": true,
+              "retry_scope": "none"
+            },
+            "stage": "local_prepare"
+          },
+          "transcript": {
+            "status": "not_requested",
+            "retryable": false
+          },
+          "calls": 3,
+          "downloads": 0
+        },
+        "stdout": "{\n  \"schema_version\": \"2.0\",\n  \"status\": \"source_blocked\",\n  \"request_period\": {\n    \"mode\": \"exact\",\n    \"fiscal_year\": 2025,\n    \"fiscal_period\": \"FY\",\n    \"as_of_date\": \"2026-10-09\"\n  },\n  \"filing\": {\n    \"status\": \"source_blocked\",\n    \"reason\": \"local source preparation blocked: local_metadata_gap\",\n    \"retryable\": false,\n    \"upstream_cause\": {\n      \"schema_version\": \"filing-upstream-cause/1\",\n      \"operation\": \"local_prepare\",\n      \"code\": \"local_metadata_gap\",\n      \"provider_started\": false,\n      \"usage_complete\": true,\n      \"retry_scope\": \"none\"\n    },\n    \"stage\": \"local_prepare\"\n  },\n  \"transcript\": {\n    \"status\": \"not_requested\",\n    \"retryable\": false\n  },\n  \"calls\": 3,\n  \"downloads\": 0\n}\n",
+        "stderr": "",
+        "synthetic_sentinel_leaked": false
+      },
+      "rf_client": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\local_metadata_gap\\company_wiki.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 2.226,
+        "payload": {
+          "error_code": "source_blocked",
+          "error": "filing-fetch exited 2: status=source_blocked: local_metadata_gap",
+          "retryable": false,
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "local_prepare",
+            "code": "local_metadata_gap",
+            "provider_started": false,
+            "usage_complete": true,
+            "retry_scope": "none"
+          },
+          "stage": "local_prepare",
+          "calls": 3,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"source_blocked\", \"error\": \"filing-fetch exited 2: status=source_blocked: local_metadata_gap\", \"retryable\": false, \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"local_prepare\", \"code\": \"local_metadata_gap\", \"provider_started\": false, \"usage_complete\": true, \"retry_scope\": \"none\"}, \"stage\": \"local_prepare\", \"calls\": 3, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "rf_prepare": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py",
+          "--result-envelope",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\local_metadata_gap\\company_wiki.json",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\local_metadata_gap\\config\\source_catalog.yaml",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 3,
+        "duration_seconds": 2.246,
+        "payload": {
+          "error_code": "upstream",
+          "error": "filing-fetch client exited 2: status=source_blocked: local_metadata_gap",
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "local_prepare",
+            "code": "local_metadata_gap",
+            "provider_started": false,
+            "usage_complete": true,
+            "retry_scope": "none"
+          },
+          "stage": "local_prepare",
+          "calls": 3,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"upstream\", \"error\": \"filing-fetch client exited 2: status=source_blocked: local_metadata_gap\", \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"local_prepare\", \"code\": \"local_metadata_gap\", \"provider_started\": false, \"usage_complete\": true, \"retry_scope\": \"none\"}, \"stage\": \"local_prepare\", \"calls\": 3, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "provider_invocations_all_four_probes": [],
+      "provider_http_requests": 0,
+      "paid_cost_usd": "0",
+      "raw_files_remaining": 0
+    },
+    {
+      "mode": "no_registered_local_source",
+      "fixture": "real_CWP_FF_RF_public_CLIs_synthetic_no_HTTP_provider",
+      "cwp": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "company_wiki.source_catalog.source_query_cli",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\no_registered_local_source\\config\\source_catalog.yaml"
+        ],
+        "exit_code": 0,
+        "duration_seconds": 0.527,
+        "payload": {
+          "candidates": [],
+          "matches": [],
+          "reason": "no_local_match",
+          "request_id": "urn:company-wiki:source-request:sha256:4e4e0d4cdbee5242df35323d8a5853b857fa9cccf902342566f8839e1c784b00",
+          "schema_version": "2.0",
+          "source_read_policy_sha256": "4fdeedb4f17a54dd7fdef7d888d715841ed912cd2733f236ff654502198ddb09",
+          "status": "not_found"
+        },
+        "stdout": "{\"candidates\":[],\"matches\":[],\"reason\":\"no_local_match\",\"request_id\":\"urn:company-wiki:source-request:sha256:4e4e0d4cdbee5242df35323d8a5853b857fa9cccf902342566f8839e1c784b00\",\"schema_version\":\"2.0\",\"source_read_policy_sha256\":\"4fdeedb4f17a54dd7fdef7d888d715841ed912cd2733f236ff654502198ddb09\",\"status\":\"not_found\"}\n",
+        "stderr": "",
+        "synthetic_sentinel_leaked": false
+      },
+      "ff": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009\\scripts\\fetch_filing.py",
+          "--source-ref-v2",
+          "--config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\no_registered_local_source\\company_wiki.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 2.392,
+        "payload": {
+          "schema_version": "2.0",
+          "status": "not_found",
+          "request_period": {
+            "mode": "exact",
+            "fiscal_year": 2025,
+            "fiscal_period": "FY",
+            "as_of_date": "2026-10-09"
+          },
+          "filing": {
+            "status": "not_found",
+            "reason": "local source preparation not_found: no_registered_local_source",
+            "retryable": false,
+            "upstream_cause": {
+              "schema_version": "filing-upstream-cause/1",
+              "operation": "local_prepare",
+              "code": "no_registered_local_source",
+              "provider_started": false,
+              "usage_complete": true,
+              "retry_scope": "none"
+            },
+            "stage": "local_prepare"
+          },
+          "transcript": {
+            "status": "not_requested",
+            "retryable": false
+          },
+          "calls": 3,
+          "downloads": 0
+        },
+        "stdout": "{\n  \"schema_version\": \"2.0\",\n  \"status\": \"not_found\",\n  \"request_period\": {\n    \"mode\": \"exact\",\n    \"fiscal_year\": 2025,\n    \"fiscal_period\": \"FY\",\n    \"as_of_date\": \"2026-10-09\"\n  },\n  \"filing\": {\n    \"status\": \"not_found\",\n    \"reason\": \"local source preparation not_found: no_registered_local_source\",\n    \"retryable\": false,\n    \"upstream_cause\": {\n      \"schema_version\": \"filing-upstream-cause/1\",\n      \"operation\": \"local_prepare\",\n      \"code\": \"no_registered_local_source\",\n      \"provider_started\": false,\n      \"usage_complete\": true,\n      \"retry_scope\": \"none\"\n    },\n    \"stage\": \"local_prepare\"\n  },\n  \"transcript\": {\n    \"status\": \"not_requested\",\n    \"retryable\": false\n  },\n  \"calls\": 3,\n  \"downloads\": 0\n}\n",
+        "stderr": "",
+        "synthetic_sentinel_leaked": false
+      },
+      "rf_client": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\no_registered_local_source\\company_wiki.json",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 2.719,
+        "payload": {
+          "error_code": "not_found",
+          "error": "filing-fetch exited 2: status=not_found: no_registered_local_source",
+          "retryable": false,
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "local_prepare",
+            "code": "no_registered_local_source",
+            "provider_started": false,
+            "usage_complete": true,
+            "retry_scope": "none"
+          },
+          "stage": "local_prepare",
+          "calls": 3,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"not_found\", \"error\": \"filing-fetch exited 2: status=not_found: no_registered_local_source\", \"retryable\": false, \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"local_prepare\", \"code\": \"no_registered_local_source\", \"provider_started\": false, \"usage_complete\": true, \"retry_scope\": \"none\"}, \"stage\": \"local_prepare\", \"calls\": 3, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "rf_prepare": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py",
+          "--result-envelope",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ff-fresh-transcript-launch-20261009",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\no_registered_local_source\\company_wiki.json",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\no_registered_local_source\\config\\source_catalog.yaml",
+          "--timeout-seconds",
+          "15"
+        ],
+        "exit_code": 3,
+        "duration_seconds": 2.857,
+        "payload": {
+          "error_code": "upstream",
+          "error": "filing-fetch client exited 2: status=not_found: no_registered_local_source",
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "local_prepare",
+            "code": "no_registered_local_source",
+            "provider_started": false,
+            "usage_complete": true,
+            "retry_scope": "none"
+          },
+          "stage": "local_prepare",
+          "calls": 3,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"upstream\", \"error\": \"filing-fetch client exited 2: status=not_found: no_registered_local_source\", \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"local_prepare\", \"code\": \"no_registered_local_source\", \"provider_started\": false, \"usage_complete\": true, \"retry_scope\": \"none\"}, \"stage\": \"local_prepare\", \"calls\": 3, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      },
+      "provider_invocations_all_four_probes": [],
+      "provider_http_requests": 0,
+      "paid_cost_usd": "0",
+      "raw_files_remaining": 0
+    }
+  ],
+  "additional_controls": [
+    {
+      "name": "untrusted_failure_candidates_rf_client",
+      "observation": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\untrusted-candidates",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\untrusted-candidates\\config.json"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 0.208,
+        "payload": {
+          "error_code": "ambiguous",
+          "error": "filing-fetch exited 2: status=ambiguous: canonical_import_failed",
+          "retryable": false,
+          "candidates": [
+            {
+              "error": "https://invalid/?api_key=[SYNTHETIC_REDACTED]"
+            }
+          ],
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": true,
+            "retry_scope": "none"
+          },
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"ambiguous\", \"error\": \"filing-fetch exited 2: status=ambiguous: canonical_import_failed\", \"retryable\": false, \"candidates\": [{\"error\": \"https://invalid/?api_key=[SYNTHETIC_REDACTED]\"}], \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": true, \"retry_scope\": \"none\"}, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": true
+      }
+    },
+    {
+      "name": "untrusted_failure_candidates_rf_prepare",
+      "observation": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\untrusted-candidates",
+          "--result-envelope",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-bt2ztive\\untrusted-candidates\\config.json"
+        ],
+        "exit_code": 3,
+        "duration_seconds": 0.336,
+        "payload": {
+          "error_code": "upstream",
+          "error": "filing-fetch client exited 2: status=ambiguous: canonical_import_failed",
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": true,
+            "retry_scope": "none"
+          },
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"upstream\", \"error\": \"filing-fetch client exited 2: status=ambiguous: canonical_import_failed\", \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": true, \"retry_scope\": \"none\"}, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    }
+  ],
+  "source_files_unchanged": true,
+  "baseline_restored": true,
+  "temporary_root_absent": true
+}

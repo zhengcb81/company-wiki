@@ -1,0 +1,83 @@
+{
+  "schema_version": "w11-independent-review/1",
+  "reviewed_source_sha256": "0f3c8418a3e4c507dde734bf218c3c2ca16825e4e3f9fb8a2f53023063f0cf77",
+  "associated_test_exit_code": 0,
+  "associated_test_log": "test_aggregate_cap_missing_and_unmatched_are_recorded_without_child (test_precall_input_history.PrecallInputHistoryTests.test_aggregate_cap_missing_and_unmatched_are_recorded_without_child) ... ok\ntest_cli_accepts_explicit_freeze_and_propagates_native_exit (test_precall_input_history.PrecallInputHistoryTests.test_cli_accepts_explicit_freeze_and_propagates_native_exit) ... ok\ntest_failure_then_correction_preserves_both_exact_input_versions (test_precall_input_history.PrecallInputHistoryTests.test_failure_then_correction_preserves_both_exact_input_versions) ... ok\ntest_invalid_trust_json_does_not_replace_existing_statement (test_precall_input_history.PrecallInputHistoryTests.test_invalid_trust_json_does_not_replace_existing_statement) ... ok\ntest_invalid_utf8_empty_and_preflight_input_are_not_reencoded (test_precall_input_history.PrecallInputHistoryTests.test_invalid_utf8_empty_and_preflight_input_are_not_reencoded) ... ok\ntest_old_capture_has_no_implicit_file_scan (test_precall_input_history.PrecallInputHistoryTests.test_old_capture_has_no_implicit_file_scan) ... ok\ntest_real_child_consumes_snapshot_when_original_changes_at_launch (test_precall_input_history.PrecallInputHistoryTests.test_real_child_consumes_snapshot_when_original_changes_at_launch) ... ok\ntest_relative_equals_arguments_duplicates_and_same_basename (test_precall_input_history.PrecallInputHistoryTests.test_relative_equals_arguments_duplicates_and_same_basename) ... ok\ntest_snapshot_cleanup_failure_cannot_replace_primary_copy_failure (test_precall_input_history.PrecallInputHistoryTests.test_snapshot_cleanup_failure_cannot_replace_primary_copy_failure) ... ok\ntest_timeout_and_launch_failure_keep_pre_call_input (test_precall_input_history.PrecallInputHistoryTests.test_timeout_and_launch_failure_keep_pre_call_input) ... ok\ntest_trust_statement_is_faithful_to_current_json_without_certification (test_precall_input_history.PrecallInputHistoryTests.test_trust_statement_is_faithful_to_current_json_without_certification) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 1.715s\n\nOK\n",
+  "provider_calls": 0,
+  "paid_calls": 0,
+  "company_M3": false,
+  "controls": [
+    {
+      "name": "same_input_path_in_explicit_output_argument",
+      "exit_code": 0,
+      "output_complete": true,
+      "snapshot_matches_pre_call_sha": false,
+      "original_input_unchanged": true,
+      "input_and_output_both_redirected": true,
+      "execution_error": null,
+      "expected": "An output argument must not overwrite retained input history; retained snapshot must remain exact pre-call bytes.",
+      "outer_argv": [
+        "capture",
+        "--run",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\audit-w11-review-detail-t44dsrds\\runs\\detail",
+        "--role",
+        "executor",
+        "--freeze-input",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\audit-w11-review-detail-t44dsrds\\原始 输入.json",
+        "--",
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-c",
+        "import pathlib,sys;p=pathlib.Path(sys.argv[1]);assert p.read_bytes();pathlib.Path(sys.argv[3]).write_bytes(b\"changed output\");print(\"completed\")",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\audit-w11-review-detail-t44dsrds\\原始 输入.json",
+        "--output",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\audit-w11-review-detail-t44dsrds\\原始 输入.json"
+      ],
+      "native_argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-c",
+        "import pathlib,sys;p=pathlib.Path(sys.argv[1]);assert p.read_bytes();pathlib.Path(sys.argv[3]).write_bytes(b\"changed output\");print(\"completed\")",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\audit-w11-review-detail-t44dsrds\\原始 输入.json",
+        "--output",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\audit-w11-review-detail-t44dsrds\\原始 输入.json"
+      ],
+      "recorded_executed_command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-c",
+        "import pathlib,sys;p=pathlib.Path(sys.argv[1]);assert p.read_bytes();pathlib.Path(sys.argv[3]).write_bytes(b\"changed output\");print(\"completed\")",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\audit-w11-review-detail-t44dsrds\\runs\\detail\\roles\\executor\\commands\\6402ced40b6a45098b103243cfd02cb0\\input-0001-3ccad41f7f93.json",
+        "--output",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\audit-w11-review-detail-t44dsrds\\runs\\detail\\roles\\executor\\commands\\6402ced40b6a45098b103243cfd02cb0\\input-0001-3ccad41f7f93.json"
+      ],
+      "original_sha256": "3ccad41f7f936267469d3c2f067153c0cb1a016f554512fe7e967b39b73e5197",
+      "snapshot_declared_sha256": "3ccad41f7f936267469d3c2f067153c0cb1a016f554512fe7e967b39b73e5197",
+      "snapshot_actual_after_child_sha256": "87c47ae76854e34cdebb3a5bd652c911d02cf7fa20a93c014c87b39d5df0ee6c",
+      "retained_input_file_removed_after_test": true
+    },
+    {
+      "name": "trust_statement_primary_and_cleanup_failures",
+      "observed_error": "CONTROL_SECONDARY_CLEANUP_FAILURE",
+      "primary_failure_preserved": false,
+      "prior_statement_unchanged": true,
+      "expected": "The original write/replace failure remains primary when owned scratch cleanup also fails.",
+      "outer_argv": [
+        "trust-statement",
+        "--run",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\audit-w11-review-detail-t44dsrds\\runs\\detail",
+        "--trust-file",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\audit-w11-review-detail-t44dsrds\\runs\\detail\\execution\\trust.json"
+      ],
+      "primary_injected_exception": "PermissionError: CONTROL_PRIMARY_REPLACE_FAILURE",
+      "secondary_injected_exception": "OSError: CONTROL_SECONDARY_CLEANUP_FAILURE"
+    }
+  ],
+  "baseline_restored": true,
+  "temporary_root_absent": true,
+  "reviewed_source_unchanged": true,
+  "detailed_controls_restored_absent": true,
+  "script_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+  "control_runner": "python -X utf8 -B - (stdin); exact executable snippets in independent_review.md, not a fabricated on-disk test script",
+  "detailed_proof_source_sha256": "0f3c8418a3e4c507dde734bf218c3c2ca16825e4e3f9fb8a2f53023063f0cf77"
+}

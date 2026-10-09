@@ -1,0 +1,152 @@
+{
+  "schema_version": "w06-readonly-candidate-replay/1",
+  "query": {
+    "status": "not_found",
+    "matches": [],
+    "reason": "no_local_match",
+    "schema_version": "2.0",
+    "excluded_candidates": []
+  },
+  "candidate_count": 5,
+  "candidate_observations": [
+    {
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "byte_size": 8158067,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "catalog_title": "Microsoft 10-K FY2025",
+      "catalog_kind": "annual_report",
+      "catalog_date": "2025-07-30",
+      "locations": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\微软\\raw\\financial_reports\\annual\\微软_10-K_2025.htm",
+        "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0000950170-25-100235\\msft-20250630.htm"
+      ],
+      "bytes_read": 16316134,
+      "outcome": "proven_wrong_period_or_form",
+      "facts": null
+    },
+    {
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+        "source_id": "urn:company-wiki:source:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+        "content_sha256": "43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+        "byte_size": 6860911,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "catalog_title": "Microsoft 10-K FY2024",
+      "catalog_kind": "annual_report",
+      "catalog_date": "2024-07-30",
+      "locations": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\微软\\raw\\financial_reports\\annual\\微软_10-K_2024.htm",
+        "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0000950170-24-087843\\msft-20240630.htm"
+      ],
+      "bytes_read": 13721822,
+      "outcome": "proven_wrong_period_or_form",
+      "facts": null
+    },
+    {
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:6506060f3f928e31abcbcfe46792ff4e0ae5c60bd9ad40964933c37ac854a9ea",
+        "source_id": "urn:company-wiki:source:sha256:6506060f3f928e31abcbcfe46792ff4e0ae5c60bd9ad40964933c37ac854a9ea",
+        "content_sha256": "6506060f3f928e31abcbcfe46792ff4e0ae5c60bd9ad40964933c37ac854a9ea",
+        "byte_size": 9963591,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "catalog_title": "msft-20230630",
+      "catalog_kind": "annual_report",
+      "catalog_date": "2023-07-27",
+      "locations": [
+        "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0000950170-23-035122\\msft-20230630.htm"
+      ],
+      "bytes_read": 9963591,
+      "outcome": "proven_wrong_period_or_form",
+      "facts": null
+    },
+    {
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:d8c69513cd820ecdfa3b22decf2672591ced88996188c218d3ffa1439b6b528f",
+        "source_id": "urn:company-wiki:source:sha256:d8c69513cd820ecdfa3b22decf2672591ced88996188c218d3ffa1439b6b528f",
+        "content_sha256": "d8c69513cd820ecdfa3b22decf2672591ced88996188c218d3ffa1439b6b528f",
+        "byte_size": 6215855,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "catalog_title": "msft-10k_20220630",
+      "catalog_kind": "annual_report",
+      "catalog_date": "2022-07-28",
+      "locations": [
+        "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001564590-22-026876\\msft-10k_20220630.htm"
+      ],
+      "bytes_read": 6215855,
+      "outcome": "failed_before_target_proof",
+      "reason": "fiscal_period_unresolved",
+      "message": "SEC primary inline date cannot be normalized"
+    },
+    {
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:0cdddd9409d55b933bb5b9d3f8cc3fbb3c7f3390a531406aea2b1a0ba4bbf999",
+        "source_id": "urn:company-wiki:source:sha256:0cdddd9409d55b933bb5b9d3f8cc3fbb3c7f3390a531406aea2b1a0ba4bbf999",
+        "content_sha256": "0cdddd9409d55b933bb5b9d3f8cc3fbb3c7f3390a531406aea2b1a0ba4bbf999",
+        "byte_size": 6332563,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "catalog_title": "msft-10k_20210630",
+      "catalog_kind": "annual_report",
+      "catalog_date": "2021-07-29",
+      "locations": [
+        "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001564590-21-039151\\msft-10k_20210630.htm"
+      ],
+      "bytes_read": 6332563,
+      "outcome": "failed_before_target_proof",
+      "reason": "fiscal_period_unresolved",
+      "message": "SEC primary inline date cannot be normalized"
+    }
+  ],
+  "protected_unchanged": true,
+  "network_requests": 0,
+  "download_events": 0,
+  "model_requests": 0,
+  "catalog_writes": 0,
+  "source_writes": 0,
+  "before": {
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\catalog\\catalog.sqlite3": {
+      "sha256": "e9c2f7d6a4eb2219c498ccd437f766c7a5ef713458fefcedfecd125631746b03",
+      "mtime_ns": 1791529051602895800,
+      "bytes": 1097728
+    },
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\config\\source_catalog.yaml": {
+      "sha256": "4d416de2dbc7ae3757bbf2aff0f5cb9ef575860ec9e49db82ee0281da8869f95",
+      "mtime_ns": 1791525874945997500,
+      "bytes": 789
+    },
+    "config\\source_catalog.yaml": {
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "mtime_ns": 1790542565101886700,
+      "bytes": 866
+    }
+  },
+  "after": {
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\catalog\\catalog.sqlite3": {
+      "sha256": "e9c2f7d6a4eb2219c498ccd437f766c7a5ef713458fefcedfecd125631746b03",
+      "mtime_ns": 1791529051602895800,
+      "bytes": 1097728
+    },
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\config\\source_catalog.yaml": {
+      "sha256": "4d416de2dbc7ae3757bbf2aff0f5cb9ef575860ec9e49db82ee0281da8869f95",
+      "mtime_ns": 1791525874945997500,
+      "bytes": 789
+    },
+    "config\\source_catalog.yaml": {
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "mtime_ns": 1790542565101886700,
+      "bytes": 866
+    }
+  }
+}

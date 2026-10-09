@@ -1,0 +1,15 @@
+test_snapshot_cleanup_failure_cannot_replace_primary_copy_failure (test_precall_input_history.PrecallInputHistoryTests.test_snapshot_cleanup_failure_cannot_replace_primary_copy_failure) ... FAIL
+
+======================================================================
+FAIL: test_snapshot_cleanup_failure_cannot_replace_primary_copy_failure (test_precall_input_history.PrecallInputHistoryTests.test_snapshot_cleanup_failure_cannot_replace_primary_copy_failure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 197, in test_snapshot_cleanup_failure_cannot_replace_primary_copy_failure
+    self.assertIn("input_snapshot_source_changed", result["execution_error"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'input_snapshot_source_changed' not found in 'ValueError: PermissionError: synthetic cleanup failure'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.116s
+
+FAILED (failures=1)

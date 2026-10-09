@@ -1,0 +1,98 @@
+{
+  "schema_version": "w11-selected-installation/1",
+  "source_commit": "9b107672b33cac931921fc686f599ac62fe3a2d7",
+  "physical_roots": [
+    "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+    "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit"
+  ],
+  "files": [
+    {
+      "source": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\skills\\revenue-forecast-audit\\SKILL.md",
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\SKILL.md",
+      "before_sha256": "994175cfbd7c41b8a0ce4a717d77405c2e251651fe172ff5fa8497baa01cbe67",
+      "after_sha256": "e17691e20aae24684b1629585280efa0e57e526fcc3fc69bcf95490ab95f1be6",
+      "before_bytes": 7901,
+      "after_bytes": 8444
+    },
+    {
+      "source": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+      "before_sha256": "00c2c95ce1902192ce72970e927f91d1171a73612b8ba8d302853254f8e3135e",
+      "after_sha256": "2c30b29fe64c78deef194ace0650ad73d3402e22510995baa2cf184c5ae54c57",
+      "before_bytes": 28641,
+      "after_bytes": 39689
+    },
+    {
+      "source": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\skills\\revenue-forecast-audit\\references\\executor.md",
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\references\\executor.md",
+      "before_sha256": "9d45642ad59f547054b23823ae2ecf2a75d86cd98bc01199ebfa10f3e12ada54",
+      "after_sha256": "90cefa6727fdf81499406f86cd1acf8d69651ac325a7ba312306307a80de860c",
+      "before_bytes": 3045,
+      "after_bytes": 5679
+    },
+    {
+      "source": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\skills\\revenue-forecast-audit\\references\\artifact-contract.md",
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\references\\artifact-contract.md",
+      "before_sha256": "297f75cbb21d0ca720b07e99649c566153c200626bf0dc16deac1cee841af485",
+      "after_sha256": "18ff10b42141cc2d0fc7e0e1d022114e8f93fc41fdfbb11d97e56537d65d42c9",
+      "before_bytes": 9795,
+      "after_bytes": 12471
+    },
+    {
+      "source": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\skills\\revenue-forecast-audit\\SKILL.md",
+      "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit\\SKILL.md",
+      "before_sha256": "994175cfbd7c41b8a0ce4a717d77405c2e251651fe172ff5fa8497baa01cbe67",
+      "after_sha256": "e17691e20aae24684b1629585280efa0e57e526fcc3fc69bcf95490ab95f1be6",
+      "before_bytes": 7901,
+      "after_bytes": 8444
+    },
+    {
+      "source": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+      "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+      "before_sha256": "00c2c95ce1902192ce72970e927f91d1171a73612b8ba8d302853254f8e3135e",
+      "after_sha256": "2c30b29fe64c78deef194ace0650ad73d3402e22510995baa2cf184c5ae54c57",
+      "before_bytes": 28641,
+      "after_bytes": 39689
+    },
+    {
+      "source": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\skills\\revenue-forecast-audit\\references\\executor.md",
+      "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit\\references\\executor.md",
+      "before_sha256": "9d45642ad59f547054b23823ae2ecf2a75d86cd98bc01199ebfa10f3e12ada54",
+      "after_sha256": "90cefa6727fdf81499406f86cd1acf8d69651ac325a7ba312306307a80de860c",
+      "before_bytes": 3045,
+      "after_bytes": 5679
+    },
+    {
+      "source": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\skills\\revenue-forecast-audit\\references\\artifact-contract.md",
+      "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit\\references\\artifact-contract.md",
+      "before_sha256": "297f75cbb21d0ca720b07e99649c566153c200626bf0dc16deac1cee841af485",
+      "after_sha256": "18ff10b42141cc2d0fc7e0e1d022114e8f93fc41fdfbb11d97e56537d65d42c9",
+      "before_bytes": 9795,
+      "after_bytes": 12471
+    }
+  ],
+  "status": "INSTALLED_ACCEPTED_SELECTED_BYTES",
+  "no_remote_created": true,
+  "unselected_code_reference_drift": 0,
+  "installed_probes": [
+    {
+      "script": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+      "exit_code": 0,
+      "new_binding_interface_present": true,
+      "provider_started": false
+    },
+    {
+      "script": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+      "exit_code": 0,
+      "new_binding_interface_present": true,
+      "provider_started": false
+    }
+  ],
+  "unselected_counts": {
+    "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit": 9,
+    "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit": 9
+  },
+  "external_calls": 0,
+  "paid_calls": 0,
+  "config_output_unknown_modified": false
+}

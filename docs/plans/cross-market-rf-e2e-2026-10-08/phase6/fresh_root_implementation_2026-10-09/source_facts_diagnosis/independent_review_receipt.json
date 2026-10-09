@@ -1,0 +1,252 @@
+{
+  "schema_version": "w06-independent-review/1",
+  "source_commit": "fc1c1c0c8bff1eb6a1a1c499a48dfadeef702a0f",
+  "pwf_commit": "d44421fae8944c5b8e87c3ab4f824606d88e742f",
+  "source_before": {
+    "assertion_service.py": "90a69c3123a2bb8e8e3ced9aa910fc31e0161224e61574645430adc2180e17b9",
+    "resolver.py": "421c714df709265d463c0f286faff0bfeb64993ead8296c48dce4ba4bc372691",
+    "dayu_fiscal_metadata.py": "04249d337bbf506fae6ee89df57158f8d27ab46a73906ab4b9d6fadfb43ba27e",
+    "local_reconcile.py": "113ecf9576fc6d60073775c530f7716296bd99be18a2d508e0ff9a71ee605a1d",
+    "local_inventory.py": "20a1d983a0d7bd519d7981ff045016a72572b339af7daa5d4acdf496752d4eaa",
+    "source_group_scope.py": "799af6150ab92efb606c58b710a67b50f7f5e8d55f85108c2bd1ed5852b9ae98",
+    "adapters/company_raw.py": "2bf10709e81f9439f0652b38d441936d05d88d9c8d7906cc73fcbec950403d0a",
+    "scanner.py": "4a79882979e07097a9996779dee1f642dfe0446a8422b7f2ce6ace2dcbe89846",
+    "service.py": "b308b935067e9a08fd4aee6c8c1cd56964447dadaed9f8401a6fe12fd684b1aa",
+    "registration_scope.py": "56e43bedb93317f38ad4c9648cfe40b74106dc86e64859ff05d1d7ab9620314f",
+    "adapter_dispatch.py": "d7ccb6de13131781b62d4f80949569483071a18e4e75ac33b19c953f9fcbecef",
+    "adapters/dayu.py": "167c6e53a5f3286693aad5fe578970fbc75b0f1f3d5cfb0acb1ce1107077cad8",
+    "adapters/sidecar.py": "b30a5f0a81bdd4f323dcbc87afa777a691f33b3747edefedbf04ff442484ef32",
+    "source_reader.py": "b0bfdefc10658c4b768927f2219e5ac34987280cfd141f7bd019444a5085a7bc"
+  },
+  "external_requests": 0,
+  "paid_calls": 0,
+  "company_M3": false,
+  "focused_test": {
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-X",
+      "utf8",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w06-independent-0n4xdrq5\\pytest",
+      "tests/contract/test_title_source_fact.py",
+      "tests/contract/test_local_request_relevance.py",
+      "tests/contract/test_local_discovery_limits.py",
+      "tests/contract/test_company_source_layout.py",
+      "tests/contract/test_registration_read_budget.py"
+    ],
+    "exit_code": 0,
+    "seconds": 7.026,
+    "log": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\w06-independent-0n4xdrq5\\\\pytest\", \"requested_basetemp_len\": 63, \"cwd_len\": 63, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": true, \"reason\": \"resolved-basetemp-exceeds-budget\", \"effective_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\w06-independent-0n4xdrq5\\\\cw-pytest-basetemp\\\\20261009-164749-35b3ec79\", \"effective_basetemp_len\": 100}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki\nconfigfile: pytest.ini\ncollected 39 items\n\ntests\\contract\\test_title_source_fact.py .......                         [ 17%]\ntests\\contract\\test_local_request_relevance.py ........                  [ 38%]\ntests\\contract\\test_local_discovery_limits.py ......                     [ 53%]\ntests\\contract\\test_company_source_layout.py ......s..                   [ 76%]\ntests\\contract\\test_registration_read_budget.py .........                [100%]\n\n============================== warnings summary ===============================\n..\\..\\..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n================== 38 passed, 1 skipped, 1 warning in 6.53s ===================\nCW-BASETEMP-CLEANUP {\"event\": \"cleanup\", \"dir\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\w06-independent-0n4xdrq5\\\\cw-pytest-basetemp\\\\20261009-164749-35b3ec79\", \"existed\": true, \"removed\": true}\n"
+  },
+  "baseline_restored": true,
+  "temporary_root_absent": true,
+  "source_after": {
+    "assertion_service.py": "90a69c3123a2bb8e8e3ced9aa910fc31e0161224e61574645430adc2180e17b9",
+    "resolver.py": "421c714df709265d463c0f286faff0bfeb64993ead8296c48dce4ba4bc372691",
+    "dayu_fiscal_metadata.py": "04249d337bbf506fae6ee89df57158f8d27ab46a73906ab4b9d6fadfb43ba27e",
+    "local_reconcile.py": "113ecf9576fc6d60073775c530f7716296bd99be18a2d508e0ff9a71ee605a1d",
+    "local_inventory.py": "20a1d983a0d7bd519d7981ff045016a72572b339af7daa5d4acdf496752d4eaa",
+    "source_group_scope.py": "799af6150ab92efb606c58b710a67b50f7f5e8d55f85108c2bd1ed5852b9ae98",
+    "adapters/company_raw.py": "2bf10709e81f9439f0652b38d441936d05d88d9c8d7906cc73fcbec950403d0a",
+    "scanner.py": "4a79882979e07097a9996779dee1f642dfe0446a8422b7f2ce6ace2dcbe89846",
+    "service.py": "b308b935067e9a08fd4aee6c8c1cd56964447dadaed9f8401a6fe12fd684b1aa",
+    "registration_scope.py": "56e43bedb93317f38ad4c9648cfe40b74106dc86e64859ff05d1d7ab9620314f",
+    "adapter_dispatch.py": "d7ccb6de13131781b62d4f80949569483071a18e4e75ac33b19c953f9fcbecef",
+    "adapters/dayu.py": "167c6e53a5f3286693aad5fe578970fbc75b0f1f3d5cfb0acb1ce1107077cad8",
+    "adapters/sidecar.py": "b30a5f0a81bdd4f323dcbc87afa777a691f33b3747edefedbf04ff442484ef32",
+    "source_reader.py": "b0bfdefc10658c4b768927f2219e5ac34987280cfd141f7bd019444a5085a7bc"
+  },
+  "source_unchanged": true,
+  "actual_replay": {
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-X",
+      "utf8",
+      "-B",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w06-independent-actual-intjl5sm\\review_actual.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 18.082,
+    "stdout": "{\n  \"schema_version\": \"w06-actual-green/1\",\n  \"annual_result\": {\n    \"schema_version\": \"local-source-prepare/1\",\n    \"status\": \"not_found\",\n    \"reason\": \"no_matching_local_period\",\n    \"source_ref\": null,\n    \"blocks_download\": false,\n    \"operations\": [],\n    \"diagnostics\": [],\n    \"download_events\": 0\n  },\n  \"elapsed_seconds\": 8.32,\n  \"limits\": {\n    \"max_candidates\": 16,\n    \"max_discovery_groups\": 256,\n    \"max_discovery_entries\": 4096,\n    \"max_bytes\": 268435456,\n    \"timeout_seconds\": 30.0\n  },\n  \"observed\": {\n    \"raw_candidate_reads\": 7,\n    \"read_bytes\": 52643200,\n    \"metadata_groups\": 32,\n    \"directory_entries\": 40\n  },\n  \"protected_unchanged\": true,\n  \"owned_temps\": [\n    \"C:\\\\Users\\\\郑曾波\\\\AppData\\\\Local\\\\Temp\\\\w06-independent-actual-intjl5sm\\\\w06-actual-green-ibmwpnd1\"\n  ],\n  \"temps_absent_after\": true,\n  \"network_attempts\": [],\n  \"network_requests\": 0,\n  \"model_requests\": 0,\n  \"download_events\": 0,\n  \"original_writes\": 0,\n  \"scope\": \"Known registered MSFT originals and finite configured issuer directories; not universal arbitrary Dropbox absence.\"\n}\n",
+    "stderr": "",
+    "in_memory_change": "only receipt output path redirected; no replay/source/old receipt edited",
+    "baseline_restored": true,
+    "temporary_root_absent": true
+  },
+  "independent_controls": {
+    "cases": [
+      {
+        "name": "wrong_period_bad_cache",
+        "passed": true,
+        "result": {
+          "schema_version": "local-source-prepare/1",
+          "status": "not_found",
+          "reason": "no_matching_local_period",
+          "source_ref": null,
+          "blocks_download": false,
+          "operations": [],
+          "diagnostics": [],
+          "download_events": 0
+        },
+        "raw_unchanged": true
+      },
+      {
+        "name": "same_period_bad_cache",
+        "passed": true,
+        "result": {
+          "schema_version": "local-source-prepare/1",
+          "status": "blocked",
+          "reason": "local_metadata_gap",
+          "source_ref": null,
+          "blocks_download": true,
+          "operations": [],
+          "diagnostics": [
+            {
+              "document_id": "urn:company-wiki:document:sha256:6bec2f4e0dff4c2c782dccf251790b251b7caa0843798a3fde9bd04e554bf4bf",
+              "reason": "local_metadata_unreadable",
+              "status": "blocked"
+            }
+          ],
+          "download_events": 0
+        },
+        "raw_unchanged": true
+      },
+      {
+        "name": "cached_same_period_wrong_actual_cik",
+        "passed": false,
+        "query_status_before": "found",
+        "result": {
+          "schema_version": "local-source-prepare/1",
+          "status": "ready",
+          "reason": "existing_active_source",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:27572046bae50fbeda71446d38af50d44832e5a4ad02f149858788e7bb692fdd",
+            "source_id": "urn:company-wiki:source:sha256:27572046bae50fbeda71446d38af50d44832e5a4ad02f149858788e7bb692fdd",
+            "content_sha256": "27572046bae50fbeda71446d38af50d44832e5a4ad02f149858788e7bb692fdd",
+            "byte_size": 438,
+            "mime_type": "text/html",
+            "schema_version": "2.0"
+          },
+          "blocks_download": false,
+          "operations": [],
+          "diagnostics": [],
+          "download_events": 0
+        },
+        "raw_unchanged": true
+      },
+      {
+        "name": "healthy_primary_unreadable_attachment",
+        "passed": true,
+        "events": [
+          "attachment_read_denied"
+        ],
+        "result": {
+          "schema_version": "local-source-prepare/1",
+          "status": "ready",
+          "reason": "local_source_reconciled",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:6bec2f4e0dff4c2c782dccf251790b251b7caa0843798a3fde9bd04e554bf4bf",
+            "source_id": "urn:company-wiki:source:sha256:6bec2f4e0dff4c2c782dccf251790b251b7caa0843798a3fde9bd04e554bf4bf",
+            "content_sha256": "6bec2f4e0dff4c2c782dccf251790b251b7caa0843798a3fde9bd04e554bf4bf",
+            "byte_size": 438,
+            "mime_type": "text/html",
+            "schema_version": "2.0"
+          },
+          "blocks_download": false,
+          "operations": [
+            {
+              "status": "recorded",
+              "assertion_id": "sa-410c147a89284f6aaee13f8e6cb2d2be",
+              "restore_audit_id": null
+            }
+          ],
+          "diagnostics": [],
+          "download_events": 0
+        },
+        "raw_unchanged": true
+      },
+      {
+        "name": "cached_declared_FY2026_actual_FY2022",
+        "query_status_before": "found",
+        "passed": false,
+        "result": {
+          "schema_version": "local-source-prepare/1",
+          "status": "ready",
+          "reason": "existing_active_source",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:6301c771c1aa49c0a3d528cf587229d4fba77ceae6369cfa33a59ad156cd6498",
+            "source_id": "urn:company-wiki:source:sha256:6301c771c1aa49c0a3d528cf587229d4fba77ceae6369cfa33a59ad156cd6498",
+            "content_sha256": "6301c771c1aa49c0a3d528cf587229d4fba77ceae6369cfa33a59ad156cd6498",
+            "byte_size": 438,
+            "mime_type": "text/html",
+            "schema_version": "2.0"
+          },
+          "blocks_download": false,
+          "operations": [],
+          "diagnostics": [],
+          "download_events": 0
+        },
+        "raw_unchanged": true
+      }
+    ],
+    "baseline_restored": true,
+    "temporary_root_absent": true,
+    "additional_scope_temp_absent": true
+  },
+  "review_decision": "FAIL_cached_actual_scope_not_checked",
+  "source_final": {
+    "assertion_service.py": "90a69c3123a2bb8e8e3ced9aa910fc31e0161224e61574645430adc2180e17b9",
+    "resolver.py": "421c714df709265d463c0f286faff0bfeb64993ead8296c48dce4ba4bc372691",
+    "dayu_fiscal_metadata.py": "04249d337bbf506fae6ee89df57158f8d27ab46a73906ab4b9d6fadfb43ba27e",
+    "local_reconcile.py": "113ecf9576fc6d60073775c530f7716296bd99be18a2d508e0ff9a71ee605a1d",
+    "local_inventory.py": "20a1d983a0d7bd519d7981ff045016a72572b339af7daa5d4acdf496752d4eaa",
+    "source_group_scope.py": "799af6150ab92efb606c58b710a67b50f7f5e8d55f85108c2bd1ed5852b9ae98",
+    "adapters/company_raw.py": "2bf10709e81f9439f0652b38d441936d05d88d9c8d7906cc73fcbec950403d0a",
+    "scanner.py": "4a79882979e07097a9996779dee1f642dfe0446a8422b7f2ce6ace2dcbe89846",
+    "service.py": "b308b935067e9a08fd4aee6c8c1cd56964447dadaed9f8401a6fe12fd684b1aa",
+    "registration_scope.py": "56e43bedb93317f38ad4c9648cfe40b74106dc86e64859ff05d1d7ab9620314f",
+    "adapter_dispatch.py": "d7ccb6de13131781b62d4f80949569483071a18e4e75ac33b19c953f9fcbecef",
+    "adapters/dayu.py": "167c6e53a5f3286693aad5fe578970fbc75b0f1f3d5cfb0acb1ce1107077cad8",
+    "adapters/sidecar.py": "b30a5f0a81bdd4f323dcbc87afa777a691f33b3747edefedbf04ff442484ef32",
+    "source_reader.py": "b0bfdefc10658c4b768927f2219e5ac34987280cfd141f7bd019444a5085a7bc"
+  },
+  "source_unchanged_entire_review": true,
+  "independent_control_setup": {
+    "cached_wrong_cik": {
+      "identity": "Acme / US / ACME / expected CIK12345",
+      "data_call": "html(cik='99999')",
+      "import_call": "imported(cat, data, published='2026-07-30', declared_year=2026)",
+      "facts": {
+        "form_type": "10-K",
+        "fiscal_period": "FY"
+      },
+      "evidence": "helpers.source_fact_fixture.evidence(ref, facts); these fields actually match body, no fabricated CIK assertion",
+      "request": {
+        "entity": "Acme",
+        "market": "US",
+        "security_id": "ACME",
+        "document_kind": "annual_report",
+        "fiscal_year": 2026,
+        "form_type": "10-K",
+        "as_of_date": "2026-10-08",
+        "mode": "exact"
+      }
+    },
+    "cached_wrong_year": {
+      "data_call": "html(year=2022,end='2022-06-30')",
+      "import_call": "imported(cat, data, published='2026-07-30', declared_year=2026)",
+      "facts": {
+        "form_type": "10-K",
+        "fiscal_period": "FY"
+      },
+      "evidence": "same source fixture proof; form and period actually match body, wrong fiscal_year originates in existing acquisition description",
+      "request": "same FY2026 exact request as above"
+    }
+  }
+}

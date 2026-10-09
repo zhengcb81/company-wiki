@@ -1,0 +1,74 @@
+[
+  {
+    "source_sha": "d8c69513cd820ecdfa3b22decf2672591ced88996188c218d3ffa1439b6b528f",
+    "original_exact_bytes": 6215855,
+    "actual_dei": [
+      {
+        "name": "dei:DocumentFiscalPeriodFocus",
+        "value": "FY",
+        "format": null,
+        "context_ref": "C_0000789019_20210701_20220630"
+      },
+      {
+        "name": "dei:EntityCentralIndexKey",
+        "value": "0000789019",
+        "format": null,
+        "context_ref": "C_0000789019_20210701_20220630"
+      },
+      {
+        "name": "dei:DocumentType",
+        "value": "10-K",
+        "format": null,
+        "context_ref": "C_0000789019_20210701_20220630"
+      },
+      {
+        "name": "dei:DocumentPeriodEndDate",
+        "value": "June 30, 2022",
+        "format": "ixt:datemonthdayyearen",
+        "context_ref": "C_0000789019_20210701_20220630"
+      },
+      {
+        "name": "dei:DocumentFiscalYearFocus",
+        "value": "2022",
+        "format": null,
+        "context_ref": "C_0000789019_20210701_20220630"
+      }
+    ]
+  },
+  {
+    "source_sha": "0cdddd9409d55b933bb5b9d3f8cc3fbb3c7f3390a531406aea2b1a0ba4bbf999",
+    "original_exact_bytes": 6332563,
+    "actual_dei": [
+      {
+        "name": "dei:DocumentFiscalPeriodFocus",
+        "value": "FY",
+        "format": null,
+        "context_ref": "C_0000789019_20200701_20210630"
+      },
+      {
+        "name": "dei:EntityCentralIndexKey",
+        "value": "0000789019",
+        "format": null,
+        "context_ref": "C_0000789019_20200701_20210630"
+      },
+      {
+        "name": "dei:DocumentType",
+        "value": "10-K",
+        "format": null,
+        "context_ref": "C_0000789019_20200701_20210630"
+      },
+      {
+        "name": "dei:DocumentPeriodEndDate",
+        "value": "June 30, 2021",
+        "format": "ixt:datemonthdayyearen",
+        "context_ref": "C_0000789019_20200701_20210630"
+      },
+      {
+        "name": "dei:DocumentFiscalYearFocus",
+        "value": "2021",
+        "format": null,
+        "context_ref": "C_0000789019_20200701_20210630"
+      }
+    ]
+  }
+]

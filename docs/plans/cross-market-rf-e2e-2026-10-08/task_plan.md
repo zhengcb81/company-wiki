@@ -1,15 +1,16 @@
 # 三市场真实收入预测端到端审计
 
-## 最新执行节点（2026-10-09 12:00 UTC；优先于下文历史Next Step）
+## 最新执行节点（2026-10-09 17:00 UTC；优先于下文历史Next Step）
 
-**当前 Next Step：** 发布W05已验收本地并线和共享CI入口；W06收尾交接，W08修独立反例，W11集中复审后commit/定点安装；之后W09/W12/W13。M3/M4/NVDA loop仍未开始，不以工程绿替代研究。
+**当前 Next Step：** W05兼容修复独立验收后正常push；RF W08恢复有限reader拒绝原因后正常push；W06修cached-ready实际主体/期间绕过，再集中独立验收。W11已commit/安装，FF W08已发布且精确CI绿。之后W09/W12/W13，最后原三家M3/新三家M4/NVDA loop。
 
-- 昨日CI根因子包已closed；commit维持快速static，push覆盖全部未推范围与受影响unit，CI/push共用契约清单。新入口已实际拦住W02旧版本断言再修复发布，不许诺静态检查能阻止所有跨平台缺陷。
-- W04完整三提交已并主线；实现者74PASS，独立10PASS+2actual controls，普通push2387PASS/142.74s；cba23b8e精确CI37923124555 SUCCESS/94s。总deadline/真实usage/丢返回恢复/清理幂等已工程验收，原研究M3未做。
-- W07 ETc91f5f54与FF44c778b4已推各main；FF普通push601PASS/7明确SKIP/78subtests/62.07s，精确CI37923517689 SUCCESS/87s。独立持久配置10PASS及真实默认FF→ET supervisor→CWP import/reader/reuse链接受。5文件定点同步两物理技能根，Claude沿用agents junction；未选代码drift=0。两份配置只加工具/已有key文件位置，密钥不复制。默认安装路径已无临时env复验。真实FMP鉴权/entitlement留M3。
-- W03已独立接受并合主线：source8395299f、handoff589439b4，集中254PASS/独立89PASS。共享push/CI入口先2RED后66PASS；摘要输出预算规划、原子组明确引用闭合、截断费用实账、历史摘要兼容已验证。284328bb普通push2418PASS/122.65s、精确CI37925080695 SUCCESS/86s；真实三家模型内容M3仍待。
-- W01/W02、RF W10/W14已发布/工程M2接受。W05独立M2与合后80检查通过已并master，发布待；W06最终源交接待，W08独立发现candidate泄漏正根修；W11独立残留先RED后59全suite+15集中、新版4次实际installed RF通过待集中复审/commit/install。W09/W12/W13及M3/M4/loop未完成，工程绿不替代研究。
-- [本轮发布/安装回执](phase6/fresh_root_implementation_2026-10-09/main_capture_transcript_integration.json)与[冻结14卡](phase6/fresh_root_remediation_2026-10-09/IMPLEMENTATION.md)为准，64 finding矩阵不改；原件/生产catalog配置/Dayu/IQS不改，零新增收费调用，旧unknown和累计预算保留。
+- 昨日CI根因已发布修复：依赖安装声明不一致、local/remote覆盖入口分叉、旧许可和版本断言、FF复杂度伪门。commit维持快速静态，正常push检查全部未推范围的受影响unit及共享契约；CI/push契约入口一致。不把每次commit变成两分钟整套测试，不宣称静态检查可证明运行行为。
+- 新入口已在上传前拦住CWP W05三个失败（2428PASS/3FAIL，144.26s）：1个真实0.1.0兼容缺口，2个fixture错宣0.1.1而实际解析0.2.0。作者87cdf733/7de4fabb保留旧版本语义、接通HTML回放、修fixture；202PASS/1明确optional skip、实际MSFT41/41回放。独立复审和主线push待，未把7762bfd1称已发布。
+- FF W08 41ba0150已主线发布：正常push601PASS/7明确SKIP/78subtests/62.63s；精确CI37961753941 SUCCESS/81s。RF W08本地主线1a060802尚未发布，正常push147PASS/2FAIL/19.69s：当前来源reader拒绝原因被通用诊断抹去，作者在既有typed cause加optional有限原因投影修复；不回显任意错误正文、不削弱原文SHA/期间拒绝。
+- W06独立验收FAIL：除元数据/候选预算通用修复外，cached-ready只验SHA未验证实际正文主体/期间，实证错CIK与FY2022伪缓存FY2026都ready。原38PASS/1OSskip未覆盖该快速路径；作者已按同一事实责任层补两RED和统一修复，不新增人签/权限或第二账本，暂不合并/安装。
+- W11工程M2独立接受：59全suite、15集中、10独立controls、4次真实installed RF native调用，原输入历史与消费副本分离、原子写/cleanup故障因果、trust JSON忠实投影已验证。源码9b107672和PWF78c2b10已commit；只选4文件安装到agents/claude两物理根8文件132566B，未选代码drift=0，无remote不虚报推送。真实公司M3仍未开始。
+- W03/W04/W07及W01/W02/RF W10/W14工程接受/此前精确CI绿仍有效；64finding冻结矩阵不改。所有本轮工程零新增供应商/付费调用，原件、生产catalog/config、Dayu/IQS及邻仓owner WIP保留。各包旧FAIL/RED证据保留，不以工程绿替代研究。
+- [本轮总回执](phase6/fresh_root_implementation_2026-10-09/main_capture_transcript_integration.json)、[昨日CI根因](phase6/ci_root_cause_2026-10-09/CLOSEOUT.md)、[冻结14卡](phase6/fresh_root_remediation_2026-10-09/IMPLEMENTATION.md)为准。
 
 ## 当前施工状态（2026-10-09；历史阶段完成不代表Phase6完成）
 

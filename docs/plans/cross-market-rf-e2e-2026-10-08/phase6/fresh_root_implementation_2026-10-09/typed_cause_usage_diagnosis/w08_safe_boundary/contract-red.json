@@ -1,0 +1,211 @@
+{
+  "schema_version": "w08-retained-contract-red/1",
+  "checks": [
+    {
+      "id": "discover-fail_FF_operation_usage_continuity",
+      "passed": false,
+      "actual": null,
+      "expected": {
+        "acquisition_usage": {
+          "cost_usd": "0.01",
+          "response_bytes": 17,
+          "schema_version": "1.0"
+        },
+        "code": "upstream_unavailable",
+        "provider_started": true,
+        "retryable": true,
+        "schema_version": "acquisition-failure/1",
+        "usage_complete": true,
+        "usage_scope": "operation"
+      },
+      "reference": "observations.json/cases/discover-fail"
+    },
+    {
+      "id": "discover-fail_RF_known_cause_continuity",
+      "passed": true,
+      "actual": {
+        "schema_version": "filing-upstream-cause/1",
+        "operation": "ensure",
+        "code": "upstream_unavailable",
+        "provider_started": true,
+        "usage_complete": true,
+        "retry_scope": "none"
+      },
+      "expected": {
+        "schema_version": "filing-upstream-cause/1",
+        "operation": "ensure",
+        "code": "upstream_unavailable",
+        "provider_started": true,
+        "usage_complete": true,
+        "retry_scope": "none"
+      },
+      "reference": "retained CLI /discover-fail"
+    },
+    {
+      "id": "bad_receipt_FF_operation_usage_continuity",
+      "passed": false,
+      "actual": null,
+      "expected": {
+        "acquisition_usage": {
+          "cost_usd": "0.02",
+          "response_bytes": 92,
+          "schema_version": "1.0"
+        },
+        "code": "acquisition_validation_failed",
+        "provider_started": true,
+        "retryable": null,
+        "schema_version": "acquisition-failure/1",
+        "usage_complete": true,
+        "usage_scope": "operation"
+      },
+      "reference": "observations.json/cases/bad_receipt"
+    },
+    {
+      "id": "bad_receipt_RF_known_cause_continuity",
+      "passed": true,
+      "actual": {
+        "schema_version": "filing-upstream-cause/1",
+        "operation": "ensure",
+        "code": "acquisition_validation_failed",
+        "provider_started": true,
+        "usage_complete": true,
+        "retry_scope": "none"
+      },
+      "expected": {
+        "schema_version": "filing-upstream-cause/1",
+        "operation": "ensure",
+        "code": "acquisition_validation_failed",
+        "provider_started": true,
+        "usage_complete": true,
+        "retry_scope": "none"
+      },
+      "reference": "retained CLI /bad_receipt"
+    },
+    {
+      "id": "deadline_FF_operation_usage_continuity",
+      "passed": false,
+      "actual": null,
+      "expected": {
+        "acquisition_usage": {
+          "cost_usd": "0.03",
+          "response_bytes": 36,
+          "schema_version": "1.0"
+        },
+        "code": "adapter_timeout",
+        "provider_started": true,
+        "retryable": false,
+        "schema_version": "acquisition-failure/1",
+        "usage_complete": false,
+        "usage_scope": "operation"
+      },
+      "reference": "boundary-controls.json/cases/deadline"
+    },
+    {
+      "id": "deadline_RF_known_cause_continuity",
+      "passed": true,
+      "actual": {
+        "schema_version": "filing-upstream-cause/1",
+        "operation": "ensure",
+        "code": "adapter_timeout",
+        "provider_started": true,
+        "usage_complete": false,
+        "retry_scope": "none"
+      },
+      "expected": {
+        "schema_version": "filing-upstream-cause/1",
+        "operation": "ensure",
+        "code": "adapter_timeout",
+        "provider_started": true,
+        "usage_complete": false,
+        "retry_scope": "none"
+      },
+      "reference": "retained CLI /deadline"
+    },
+    {
+      "id": "malformed_usage_stays_null",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "reference": "observations.json/cases/malformed_usage"
+    },
+    {
+      "id": "malformed_completeness_stays_unknown",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "reference": "observations.json/cases/malformed_usage"
+    },
+    {
+      "id": "metadata_cause_is_machine_readable_at_FF",
+      "passed": false,
+      "actual": null,
+      "expected": "local_metadata_gap",
+      "reference": "boundary-controls.json/cases/local_metadata_gap"
+    },
+    {
+      "id": "metadata_cause_is_machine_readable_at_RF",
+      "passed": false,
+      "actual": null,
+      "expected": "local_metadata_gap",
+      "reference": "boundary-controls.json/cases/local_metadata_gap"
+    },
+    {
+      "id": "RF_actual_subprocess_counts_are_retained",
+      "passed": false,
+      "actual": {
+        "calls": null,
+        "downloads": null
+      },
+      "expected": {
+        "calls": 3,
+        "downloads": 0
+      },
+      "reference": "boundary-controls.json/cases/local_metadata_gap"
+    },
+    {
+      "id": "FF_v2_stage_is_retained",
+      "passed": false,
+      "actual": null,
+      "expected": "local_prepare",
+      "reference": "boundary-controls.json/cases/local_metadata_gap"
+    },
+    {
+      "id": "untrusted_top_level_error_never_echo_synthetic_secret",
+      "passed": false,
+      "actual": true,
+      "expected": false,
+      "reference": "wire-controls.json/wire_controls/untrusted_top_level_error"
+    },
+    {
+      "id": "untrusted_stderr_never_echo_synthetic_secret",
+      "passed": false,
+      "actual": true,
+      "expected": false,
+      "reference": "wire-controls.json/wire_controls/untrusted_stderr"
+    },
+    {
+      "id": "untrusted_success_exit_reason_never_echo_synthetic_secret",
+      "passed": false,
+      "actual": true,
+      "expected": false,
+      "reference": "wire-controls.json/wire_controls/untrusted_success_exit_reason"
+    },
+    {
+      "id": "RF_reader_failure_retains_already_observed_counts",
+      "passed": false,
+      "actual": {
+        "calls": null,
+        "downloads": null
+      },
+      "expected": {
+        "calls": 2,
+        "downloads": 1
+      },
+      "reference": "wire-controls.json/wire_controls/post_selection_reader_failure"
+    }
+  ],
+  "passed": 5,
+  "failed": 11,
+  "skip": 0,
+  "source_not_modified": true
+}

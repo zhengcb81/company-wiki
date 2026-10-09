@@ -1,7 +1,7 @@
 {
   "schema_version": "fresh-main-integration/1",
   "date": "2026-10-09",
-  "status": "W03_W04_W07_PUBLISHED_W05_MERGED_M2_ACCEPTED_W06_W08_W11_ACTIVE",
+  "status": "W11_M2_INSTALLED_FF_W08_PUBLISHED_CWP_W05_RF_W08_PUSH_BLOCKED_W06_REVIEW_FAIL",
   "frozen_issue_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
   "W04": {
     "source_tip": "68333bc360eb35b84f0616564953411e306f7610",
@@ -95,7 +95,7 @@
     }
   },
   "W05": {
-    "state": "M2_accepted_main_merged_remote_pending",
+    "state": "compatibility_committed_independent_re_review_pending_not_published",
     "M3": "pending",
     "source_commit": "97c82dc5fa1b4ee31dad3185ae5b0998b7903418",
     "main_merge": "3b842eaaaf5a89ff5c8320113ed558b4bd9d8516",
@@ -105,10 +105,27 @@
     "real_source_replay": "native_documents_acceptance/real_msft_main.json",
     "shared_gate_red": 2,
     "shared_ci_contract_module": "tests/contract/test_official_transcript_layouts.py",
-    "runtime_installation_delta": []
+    "runtime_installation_delta": [],
+    "compatibility_source_commit": "87cdf733f3951f43416300304da84dac5d26d3c2",
+    "compatibility_pwf_commit": "7de4fabb9eb4f7c82a9da03397169099f2e3f0fe",
+    "compatibility_responsibility": {
+      "passes": 202,
+      "skipped": 1,
+      "seconds": 4.28
+    },
+    "normal_pre_push_blocked": {
+      "passes": 2428,
+      "failures": 3,
+      "seconds": 144.26,
+      "uploaded": false,
+      "classification": [
+        "legacy_0.1.0_runtime_rejected",
+        "two_fixture_declared_version_mismatch"
+      ]
+    }
   },
   "W06": {
-    "state": "TDD_and_real_local_replay_green_final_handoff_pending",
+    "state": "independent_review_FAIL_cached_ready_scope_repair_running",
     "real_causes": [
       "legacy_inline_date_transform",
       "wrong_period_failure_classified_target",
@@ -116,23 +133,55 @@
       "direct_company_root_not_registered"
     ],
     "diagnosis": "source_facts_diagnosis/handoff.json",
-    "M3": "pending"
+    "M3": "pending",
+    "review": "source_facts_diagnosis/independent_review.md",
+    "counterexamples": [
+      "cached_ready_actual_wrong_CIK",
+      "cached_ready_actual_FY2022_declared_FY2026"
+    ]
   },
   "W08": {
-    "state": "independent_candidate_nested_leak_FOUND_TDD_root_fix_running",
+    "state": "FF_published_RF_pre_push_reader_reason_blocked_repair_running",
     "diagnosis": "typed_cause_usage_diagnosis/w08_safe_boundary/DIAGNOSIS.md",
-    "M3": "pending"
+    "M3": "pending",
+    "FF_main": "41ba0150c9c634f6021c9346744cada391ec2c4c",
+    "FF_CI": {
+      "id": 37961753941,
+      "head_sha": "41ba0150c9c634f6021c9346744cada391ec2c4c",
+      "conclusion": "success",
+      "seconds": 81
+    },
+    "RF_local_main": "1a0608026c0f5c1419642078461c033b111e7a07",
+    "RF_normal_pre_push": {
+      "passes": 147,
+      "failures": 2,
+      "seconds": 19.69,
+      "uploaded": false
+    },
+    "installation": "pending",
+    "FF_selected_installation": "typed_cause_usage_diagnosis/w08_safe_boundary/ff_selected_installation_receipt.json"
   },
   "W11": {
-    "state": "independent_residuals_RED_fixed_full_suite_and_native_v2_green_re_review_pending",
+    "state": "M2_independently_accepted_committed_selected_installed",
     "recording_tests_full_before_cleanup": 54,
     "focused_final": 11,
     "native_RF_calls": 4,
     "no_paid_calls": true,
-    "installation": "pending",
+    "installation": "precall_history/selected_installation_receipt.json",
     "M3": "pending",
     "recording_tests_full_current": 59,
     "focused_current": 15,
-    "native_current": "precall_history/native_recording_binding_v2.json"
-  }
+    "native_current": "precall_history/native_recording_binding_v2.json",
+    "source_commit": "9b107672b33cac931921fc686f599ac62fe3a2d7",
+    "pwf_commit": "78c2b10",
+    "independent_controls": 10,
+    "selected_installation": {
+      "physical_roots": 2,
+      "files": 8,
+      "bytes": 132566,
+      "unselected_code_reference_drift": 0
+    },
+    "remote": "none_configured"
+  },
+  "observed_at": "2026-10-09T17:00:00Z"
 }

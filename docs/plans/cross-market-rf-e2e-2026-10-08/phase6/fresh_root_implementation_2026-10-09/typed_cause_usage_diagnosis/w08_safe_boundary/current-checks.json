@@ -1,0 +1,73 @@
+{
+  "schema_version": "w08-current-contract-check/1",
+  "suites": [
+    {
+      "name": "producer",
+      "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-current-checks-20261009-1_fyhu4z\\producer",
+        "tests/unit/test_acquisition_failure_diagnostic.py",
+        "tests/contract/test_acquisition_failure_return_paths.py",
+        "tests/integration/test_acquisition_failure_cli_e2e.py"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 16.297,
+      "log": "producer-current.txt"
+    },
+    {
+      "name": "ff",
+      "cwd": "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-current-checks-20261009-1_fyhu4z\\ff",
+        "tests/test_provider_cause_contract.py"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.514,
+      "log": "ff-current.txt"
+    },
+    {
+      "name": "rf",
+      "cwd": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-current-checks-20261009-1_fyhu4z\\rf",
+        "tests/test_source_failure_cause.py"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 3.053,
+      "log": "rf-current.txt"
+    }
+  ],
+  "temp_root_exists_after_cleanup": false,
+  "external_http_requests": 0,
+  "paid_calls": 0
+}

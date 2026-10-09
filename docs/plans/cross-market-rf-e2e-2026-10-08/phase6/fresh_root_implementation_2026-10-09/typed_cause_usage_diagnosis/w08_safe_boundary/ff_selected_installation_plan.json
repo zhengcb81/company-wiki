@@ -1,0 +1,64 @@
+{
+  "schema_version": "ff-install-plan/1",
+  "scope": [
+    "scripts/fetch_filing.py",
+    "scripts/ff_local_source_prepare.py",
+    "scripts/ff_provider_cause.py",
+    "scripts/ff_v2_envelope.py",
+    "scripts/filing_contracts.py"
+  ],
+  "source_sha256": {
+    "scripts/fetch_filing.py": "9e0ae4dc11b12367b7498e3f80599f63df48e27efd3eebba9e6ca59e4be8de51",
+    "scripts/ff_local_source_prepare.py": "2120ee7bb00a7ad2476fc7032db593024b0d4441c2c07a1c4529021fc21f0653",
+    "scripts/ff_provider_cause.py": "49f6ae540b2068ab6a6c9f5c9c823128adc9095a3bce4094fcec64302e724f18",
+    "scripts/ff_v2_envelope.py": "94651be3bb1fae306e304047e01a33a6bb9e6993be2fca0be4b56e56b19ea3f9",
+    "scripts/filing_contracts.py": "814c63bd8b684d946e7b3a18f194ed441da375070e822eb370ec9c3a136536eb"
+  },
+  "targets": [
+    {
+      "physical_target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+      "destinations": [
+        "C:\\Users\\郑曾波\\.agents\\skills",
+        "C:\\Users\\郑曾波\\.claude\\skills"
+      ],
+      "needs_update": [
+        "scripts/fetch_filing.py",
+        "scripts/ff_local_source_prepare.py",
+        "scripts/ff_provider_cause.py",
+        "scripts/ff_v2_envelope.py",
+        "scripts/filing_contracts.py"
+      ],
+      "preserved_config": [],
+      "before_sha256": {
+        "scripts/fetch_filing.py": "8ba2d75aea623c19d2b1289dbb610ba2244a4ebf7fd13edabcd1e305e668a51a",
+        "scripts/ff_local_source_prepare.py": "417540c65b8c6d83e438aa60db29c3a4ea35f4ae9d1a44d26e1402e1c424ce71",
+        "scripts/ff_provider_cause.py": "7dc4a63344e78c0f482cc4604f43397540e4ed1e4ee755ddffb049212e8cdf7a",
+        "scripts/ff_v2_envelope.py": "c936f7cdb18bb5b59f218a387c944faf520f222a8242d72397407c3a7eb0ea02",
+        "scripts/filing_contracts.py": "0c010dbaac305fbe32b3129e6af23def4c4f8d15cd143fb0d10190f94777fce7"
+      },
+      "errors": []
+    },
+    {
+      "physical_target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+      "destinations": [
+        "C:\\Users\\郑曾波\\.codex\\skills"
+      ],
+      "needs_update": [
+        "scripts/fetch_filing.py",
+        "scripts/ff_local_source_prepare.py",
+        "scripts/ff_provider_cause.py",
+        "scripts/ff_v2_envelope.py",
+        "scripts/filing_contracts.py"
+      ],
+      "preserved_config": [],
+      "before_sha256": {
+        "scripts/fetch_filing.py": "8ba2d75aea623c19d2b1289dbb610ba2244a4ebf7fd13edabcd1e305e668a51a",
+        "scripts/ff_local_source_prepare.py": "417540c65b8c6d83e438aa60db29c3a4ea35f4ae9d1a44d26e1402e1c424ce71",
+        "scripts/ff_provider_cause.py": "7dc4a63344e78c0f482cc4604f43397540e4ed1e4ee755ddffb049212e8cdf7a",
+        "scripts/ff_v2_envelope.py": "c936f7cdb18bb5b59f218a387c944faf520f222a8242d72397407c3a7eb0ea02",
+        "scripts/filing_contracts.py": "0c010dbaac305fbe32b3129e6af23def4c4f8d15cd143fb0d10190f94777fce7"
+      },
+      "errors": []
+    }
+  ]
+}

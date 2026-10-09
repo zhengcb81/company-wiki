@@ -1,0 +1,75 @@
+{
+  "schema_version": "w06-source-facts-diagnosis-handoff/1",
+  "status": "READONLY_DIAGNOSIS_COMPLETE_IMPLEMENTATION_PENDING",
+  "source_write_set": [
+    "src/company_wiki/source_catalog/assertion_service.py",
+    "src/company_wiki/source_catalog/resolver.py",
+    "src/company_wiki/source_catalog/dayu_fiscal_metadata.py",
+    "src/company_wiki/source_catalog/local_reconcile.py",
+    "src/company_wiki/source_catalog/local_inventory.py"
+  ],
+  "production_writes": 0,
+  "network_requests": 0,
+  "paid_calls": 0,
+  "files": [
+    {
+      "path": "annual_gap_replay.json",
+      "sha256": "f35d849ed75883d6d46ff37353f6ae0494bd0dbeb90a5555ad6d480b4e458890",
+      "bytes": 8399
+    },
+    {
+      "path": "findings.md",
+      "sha256": "11ff404abce0fa99a585745c62bcdcdef03f5d49ca2ab2ab2b2824f3c092e898",
+      "bytes": 1790
+    },
+    {
+      "path": "IMPLEMENTATION_HANDOFF.md",
+      "sha256": "1bc138dd807ef8d2854a89d7d0a3d42962a0b1bbec5ad6b86bb4ccbec9909eb0",
+      "bytes": 19819
+    },
+    {
+      "path": "legacy_annual_inline_dei.json",
+      "sha256": "95d1698bde1ba3273dbdaf72415c41510cc94fe5794a3ffd79192263c1fe469d",
+      "bytes": 2121
+    },
+    {
+      "path": "local_annual_inventory.json",
+      "sha256": "bfabe4d7b1d30113022f911766d08e2b1c9d2c0a41ac96405559564e30b1167d",
+      "bytes": 10525
+    },
+    {
+      "path": "progress.md",
+      "sha256": "1c48a0fc81f5ae894aa21c336cfc07285b3595c9ecb35c8e7619ebe490feedec",
+      "bytes": 1230
+    },
+    {
+      "path": "publication_original_observations.json",
+      "sha256": "dc1ad9659ec470c91186152e7eb8d8c4e505f9fa49055aefc4241b2c22c084dc",
+      "bytes": 3631
+    },
+    {
+      "path": "replay_annual_gap.py",
+      "sha256": "757885082ebf90f7c27078edd6407e3313ebafbb22cad31b39ee2b9bbcbecb87",
+      "bytes": 5400
+    },
+    {
+      "path": "sec_title_observations.json",
+      "sha256": "6d200d1e74bc8303d1a63dad23c3aaeb776a11a267cef804cc841fc11c024a30",
+      "bytes": 12938
+    },
+    {
+      "path": "task_plan.md",
+      "sha256": "1bab767607cded7012275ba1132cc5150e8f4da0bb4009ce4eb0358c3eef8192",
+      "bytes": 1542
+    },
+    {
+      "path": "us_annual_candidate_replay.json",
+      "sha256": "d8721c9aaf26c0d4c135bfa0322aee005b7f956ca46ad3523ac5df091f43cc6f",
+      "bytes": 6745
+    }
+  ],
+  "temp_receipt": "annual_gap_replay.json",
+  "implementation_worktree": "C:/Users/郑曾波/.codex/worktrees/audit-provider-cause/company-wiki",
+  "implementation_branch": "codex/fresh-source-facts-20261009",
+  "implementation_base": "284328bb6f48677dd2999541c14b4bfb54379a04"
+}

@@ -1,0 +1,107 @@
+test_aggregate_cap_missing_and_unmatched_are_recorded_without_child (test_precall_input_history.PrecallInputHistoryTests.test_aggregate_cap_missing_and_unmatched_are_recorded_without_child) ... ok
+test_cli_accepts_explicit_freeze_and_propagates_native_exit (test_precall_input_history.PrecallInputHistoryTests.test_cli_accepts_explicit_freeze_and_propagates_native_exit) ... ok
+test_failure_then_correction_preserves_both_exact_input_versions (test_precall_input_history.PrecallInputHistoryTests.test_failure_then_correction_preserves_both_exact_input_versions) ... ok
+test_invalid_trust_json_does_not_replace_existing_statement (test_precall_input_history.PrecallInputHistoryTests.test_invalid_trust_json_does_not_replace_existing_statement) ... usage: python.exe -m unittest [-h] {init,event,capture,status,check} ...
+python.exe -m unittest: error: argument action: invalid choice: 'trust-statement' (choose from init, event, capture, status, check)
+ERROR
+test_invalid_utf8_empty_and_preflight_input_are_not_reencoded (test_precall_input_history.PrecallInputHistoryTests.test_invalid_utf8_empty_and_preflight_input_are_not_reencoded) ... ok
+test_old_capture_has_no_implicit_file_scan (test_precall_input_history.PrecallInputHistoryTests.test_old_capture_has_no_implicit_file_scan) ... ok
+test_real_child_consumes_snapshot_when_original_changes_at_launch (test_precall_input_history.PrecallInputHistoryTests.test_real_child_consumes_snapshot_when_original_changes_at_launch) ... ok
+test_relative_equals_arguments_duplicates_and_same_basename (test_precall_input_history.PrecallInputHistoryTests.test_relative_equals_arguments_duplicates_and_same_basename) ... ok
+test_timeout_and_launch_failure_keep_pre_call_input (test_precall_input_history.PrecallInputHistoryTests.test_timeout_and_launch_failure_keep_pre_call_input) ... ok
+test_trust_statement_is_faithful_to_current_json_without_certification (test_precall_input_history.PrecallInputHistoryTests.test_trust_statement_is_faithful_to_current_json_without_certification) ... usage: python.exe -m unittest [-h] {init,event,capture,status,check} ...
+python.exe -m unittest: error: argument action: invalid choice: 'trust-statement' (choose from init, event, capture, status, check)
+ERROR
+
+======================================================================
+ERROR: test_invalid_trust_json_does_not_replace_existing_statement (test_precall_input_history.PrecallInputHistoryTests.test_invalid_trust_json_does_not_replace_existing_statement)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Miniconda\Lib\argparse.py", line 1937, in _parse_known_args2
+    namespace, args = self._parse_known_args(args, namespace, intermixed)
+                      ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2169, in _parse_known_args
+    positionals_end_index = consume_positionals(start_index)
+  File "C:\Miniconda\Lib\argparse.py", line 2144, in consume_positionals
+    take_action(action, args)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 1998, in take_action
+    argument_values = self._get_values(action, argument_strings)
+  File "C:\Miniconda\Lib\argparse.py", line 2528, in _get_values
+    self._check_value(action, value[0])
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2578, in _check_value
+    raise ArgumentError(action, msg % args)
+argparse.ArgumentError: argument action: invalid choice: 'trust-statement' (choose from init, event, capture, status, check)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 170, in test_invalid_trust_json_does_not_replace_existing_statement
+    args = AUDIT.parser().parse_args(["trust-statement", "--run", str(self.run),
+                                      "--trust-file", str(source)])
+  File "C:\Miniconda\Lib\argparse.py", line 1898, in parse_args
+    args, argv = self.parse_known_args(args, namespace)
+                 ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 1908, in parse_known_args
+    return self._parse_known_args2(args, namespace, intermixed=False)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 1939, in _parse_known_args2
+    self.error(str(err))
+    ~~~~~~~~~~^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2658, in error
+    self.exit(2, _('%(prog)s: error: %(message)s\n') % args)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2645, in exit
+    _sys.exit(status)
+    ~~~~~~~~~^^^^^^^^
+SystemExit: 2
+
+======================================================================
+ERROR: test_trust_statement_is_faithful_to_current_json_without_certification (test_precall_input_history.PrecallInputHistoryTests.test_trust_statement_is_faithful_to_current_json_without_certification)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Miniconda\Lib\argparse.py", line 1937, in _parse_known_args2
+    namespace, args = self._parse_known_args(args, namespace, intermixed)
+                      ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2169, in _parse_known_args
+    positionals_end_index = consume_positionals(start_index)
+  File "C:\Miniconda\Lib\argparse.py", line 2144, in consume_positionals
+    take_action(action, args)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 1998, in take_action
+    argument_values = self._get_values(action, argument_strings)
+  File "C:\Miniconda\Lib\argparse.py", line 2528, in _get_values
+    self._check_value(action, value[0])
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2578, in _check_value
+    raise ArgumentError(action, msg % args)
+argparse.ArgumentError: argument action: invalid choice: 'trust-statement' (choose from init, event, capture, status, check)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 154, in test_trust_statement_is_faithful_to_current_json_without_certification
+    args = AUDIT.parser().parse_args(["trust-statement", "--run", str(self.run),
+                                      "--trust-file", str(source)])
+  File "C:\Miniconda\Lib\argparse.py", line 1898, in parse_args
+    args, argv = self.parse_known_args(args, namespace)
+                 ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 1908, in parse_known_args
+    return self._parse_known_args2(args, namespace, intermixed=False)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 1939, in _parse_known_args2
+    self.error(str(err))
+    ~~~~~~~~~~^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2658, in error
+    self.exit(2, _('%(prog)s: error: %(message)s\n') % args)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2645, in exit
+    _sys.exit(status)
+    ~~~~~~~~~^^^^^^^^
+SystemExit: 2
+
+----------------------------------------------------------------------
+Ran 10 tests in 2.116s
+
+FAILED (errors=2)

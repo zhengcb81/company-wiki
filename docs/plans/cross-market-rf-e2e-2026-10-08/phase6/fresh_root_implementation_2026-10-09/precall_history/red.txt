@@ -1,0 +1,212 @@
+test_aggregate_cap_missing_and_unmatched_are_recorded_without_child (test_precall_input_history.PrecallInputHistoryTests.test_aggregate_cap_missing_and_unmatched_are_recorded_without_child) ... usage: python.exe -m unittest [-h] {init,event,capture,status,check} ...
+python.exe -m unittest: error: unrecognized arguments: --max-input-bytes
+
+  test_aggregate_cap_missing_and_unmatched_are_recorded_without_child (test_precall_input_history.PrecallInputHistoryTests.test_aggregate_cap_missing_and_unmatched_are_recorded_without_child) (paths=[WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/audit-input-sys_mkyh/one.json'), WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/audit-input-sys_mkyh/two.json')], options=('--max-input-bytes', '7')) ... ERROR
+usage: python.exe -m unittest [-h] {init,event,capture,status,check} ...
+python.exe -m unittest: error: unrecognized arguments: --freeze-input
+  test_aggregate_cap_missing_and_unmatched_are_recorded_without_child (test_precall_input_history.PrecallInputHistoryTests.test_aggregate_cap_missing_and_unmatched_are_recorded_without_child) (paths=[WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/audit-input-sys_mkyh/missing.json')], options=()) ... ERROR
+usage: python.exe -m unittest [-h] {init,event,capture,status,check} ...
+python.exe -m unittest: error: unrecognized arguments: --freeze-input
+  test_aggregate_cap_missing_and_unmatched_are_recorded_without_child (test_precall_input_history.PrecallInputHistoryTests.test_aggregate_cap_missing_and_unmatched_are_recorded_without_child) (paths=[WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/audit-input-sys_mkyh/one.json')], options=()) ... ERROR
+test_cli_accepts_explicit_freeze_and_propagates_native_exit (test_precall_input_history.PrecallInputHistoryTests.test_cli_accepts_explicit_freeze_and_propagates_native_exit) ... FAIL
+test_failure_then_correction_preserves_both_exact_input_versions (test_precall_input_history.PrecallInputHistoryTests.test_failure_then_correction_preserves_both_exact_input_versions) ... usage: python.exe -m unittest [-h] {init,event,capture,status,check} ...
+python.exe -m unittest: error: unrecognized arguments: --freeze-input
+ERROR
+test_invalid_utf8_empty_and_preflight_input_are_not_reencoded (test_precall_input_history.PrecallInputHistoryTests.test_invalid_utf8_empty_and_preflight_input_are_not_reencoded) ... usage: python.exe -m unittest [-h] {init,event,capture,status,check} ...
+python.exe -m unittest: error: unrecognized arguments: --freeze-input
+ERROR
+test_old_capture_has_no_implicit_file_scan (test_precall_input_history.PrecallInputHistoryTests.test_old_capture_has_no_implicit_file_scan) ... ERROR
+test_real_child_consumes_snapshot_when_original_changes_at_launch (test_precall_input_history.PrecallInputHistoryTests.test_real_child_consumes_snapshot_when_original_changes_at_launch) ... usage: python.exe -m unittest [-h] {init,event,capture,status,check} ...
+python.exe -m unittest: error: unrecognized arguments: --freeze-input
+ERROR
+test_relative_equals_arguments_duplicates_and_same_basename (test_precall_input_history.PrecallInputHistoryTests.test_relative_equals_arguments_duplicates_and_same_basename) ... usage: python.exe -m unittest [-h] {init,event,capture,status,check} ...
+python.exe -m unittest: error: unrecognized arguments: --freeze-input
+ERROR
+test_timeout_and_launch_failure_keep_pre_call_input (test_precall_input_history.PrecallInputHistoryTests.test_timeout_and_launch_failure_keep_pre_call_input) ... usage: python.exe -m unittest [-h] {init,event,capture,status,check} ...
+python.exe -m unittest: error: unrecognized arguments: --freeze-input
+ERROR
+
+======================================================================
+ERROR: test_aggregate_cap_missing_and_unmatched_are_recorded_without_child (test_precall_input_history.PrecallInputHistoryTests.test_aggregate_cap_missing_and_unmatched_are_recorded_without_child) (paths=[WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/audit-input-sys_mkyh/one.json'), WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/audit-input-sys_mkyh/two.json')], options=('--max-input-bytes', '7'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 102, in test_aggregate_cap_missing_and_unmatched_are_recorded_without_child
+    result = self.capture(paths, active, options=options)
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 33, in capture
+    return AUDIT.capture(AUDIT.parser().parse_args([*argv, "--", *command]))
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 1902, in parse_args
+    self.error(msg)
+    ~~~~~~~~~~^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2658, in error
+    self.exit(2, _('%(prog)s: error: %(message)s\n') % args)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2645, in exit
+    _sys.exit(status)
+    ~~~~~~~~~^^^^^^^^
+SystemExit: 2
+
+======================================================================
+ERROR: test_aggregate_cap_missing_and_unmatched_are_recorded_without_child (test_precall_input_history.PrecallInputHistoryTests.test_aggregate_cap_missing_and_unmatched_are_recorded_without_child) (paths=[WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/audit-input-sys_mkyh/missing.json')], options=())
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 102, in test_aggregate_cap_missing_and_unmatched_are_recorded_without_child
+    result = self.capture(paths, active, options=options)
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 33, in capture
+    return AUDIT.capture(AUDIT.parser().parse_args([*argv, "--", *command]))
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 1902, in parse_args
+    self.error(msg)
+    ~~~~~~~~~~^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2658, in error
+    self.exit(2, _('%(prog)s: error: %(message)s\n') % args)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2645, in exit
+    _sys.exit(status)
+    ~~~~~~~~~^^^^^^^^
+SystemExit: 2
+
+======================================================================
+ERROR: test_aggregate_cap_missing_and_unmatched_are_recorded_without_child (test_precall_input_history.PrecallInputHistoryTests.test_aggregate_cap_missing_and_unmatched_are_recorded_without_child) (paths=[WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/audit-input-sys_mkyh/one.json')], options=())
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 102, in test_aggregate_cap_missing_and_unmatched_are_recorded_without_child
+    result = self.capture(paths, active, options=options)
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 33, in capture
+    return AUDIT.capture(AUDIT.parser().parse_args([*argv, "--", *command]))
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 1902, in parse_args
+    self.error(msg)
+    ~~~~~~~~~~^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2658, in error
+    self.exit(2, _('%(prog)s: error: %(message)s\n') % args)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2645, in exit
+    _sys.exit(status)
+    ~~~~~~~~~^^^^^^^^
+SystemExit: 2
+
+======================================================================
+ERROR: test_failure_then_correction_preserves_both_exact_input_versions (test_precall_input_history.PrecallInputHistoryTests.test_failure_then_correction_preserves_both_exact_input_versions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 65, in test_failure_then_correction_preserves_both_exact_input_versions
+    failed = self.capture([source], command)
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 33, in capture
+    return AUDIT.capture(AUDIT.parser().parse_args([*argv, "--", *command]))
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 1902, in parse_args
+    self.error(msg)
+    ~~~~~~~~~~^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2658, in error
+    self.exit(2, _('%(prog)s: error: %(message)s\n') % args)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2645, in exit
+    _sys.exit(status)
+    ~~~~~~~~~^^^^^^^^
+SystemExit: 2
+
+======================================================================
+ERROR: test_invalid_utf8_empty_and_preflight_input_are_not_reencoded (test_precall_input_history.PrecallInputHistoryTests.test_invalid_utf8_empty_and_preflight_input_are_not_reencoded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 115, in test_invalid_utf8_empty_and_preflight_input_are_not_reencoded
+    result = self.capture([source], command)
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 33, in capture
+    return AUDIT.capture(AUDIT.parser().parse_args([*argv, "--", *command]))
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 1902, in parse_args
+    self.error(msg)
+    ~~~~~~~~~~^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2658, in error
+    self.exit(2, _('%(prog)s: error: %(message)s\n') % args)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2645, in exit
+    _sys.exit(status)
+    ~~~~~~~~~^^^^^^^^
+SystemExit: 2
+
+======================================================================
+ERROR: test_old_capture_has_no_implicit_file_scan (test_precall_input_history.PrecallInputHistoryTests.test_old_capture_has_no_implicit_file_scan)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 142, in test_old_capture_has_no_implicit_file_scan
+    self.assertEqual(result["input_snapshots"], [])
+                     ~~~~~~^^^^^^^^^^^^^^^^^^^
+KeyError: 'input_snapshots'
+
+======================================================================
+ERROR: test_real_child_consumes_snapshot_when_original_changes_at_launch (test_precall_input_history.PrecallInputHistoryTests.test_real_child_consumes_snapshot_when_original_changes_at_launch)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 49, in test_real_child_consumes_snapshot_when_original_changes_at_launch
+    summary = self.capture([source], command)
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 33, in capture
+    return AUDIT.capture(AUDIT.parser().parse_args([*argv, "--", *command]))
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 1902, in parse_args
+    self.error(msg)
+    ~~~~~~~~~~^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2658, in error
+    self.exit(2, _('%(prog)s: error: %(message)s\n') % args)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2645, in exit
+    _sys.exit(status)
+    ~~~~~~~~~^^^^^^^^
+SystemExit: 2
+
+======================================================================
+ERROR: test_relative_equals_arguments_duplicates_and_same_basename (test_precall_input_history.PrecallInputHistoryTests.test_relative_equals_arguments_duplicates_and_same_basename)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 83, in test_relative_equals_arguments_duplicates_and_same_basename
+    summary = self.capture([sources[0], "first/same.json", sources[1]], command)
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 33, in capture
+    return AUDIT.capture(AUDIT.parser().parse_args([*argv, "--", *command]))
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 1902, in parse_args
+    self.error(msg)
+    ~~~~~~~~~~^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2658, in error
+    self.exit(2, _('%(prog)s: error: %(message)s\n') % args)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2645, in exit
+    _sys.exit(status)
+    ~~~~~~~~~^^^^^^^^
+SystemExit: 2
+
+======================================================================
+ERROR: test_timeout_and_launch_failure_keep_pre_call_input (test_precall_input_history.PrecallInputHistoryTests.test_timeout_and_launch_failure_keep_pre_call_input)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 125, in test_timeout_and_launch_failure_keep_pre_call_input
+    result = self.capture([source], command, options=options)
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 33, in capture
+    return AUDIT.capture(AUDIT.parser().parse_args([*argv, "--", *command]))
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 1902, in parse_args
+    self.error(msg)
+    ~~~~~~~~~~^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2658, in error
+    self.exit(2, _('%(prog)s: error: %(message)s\n') % args)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\argparse.py", line 2645, in exit
+    _sys.exit(status)
+    ~~~~~~~~~^^^^^^^^
+SystemExit: 2
+
+======================================================================
+FAIL: test_cli_accepts_explicit_freeze_and_propagates_native_exit (test_precall_input_history.PrecallInputHistoryTests.test_cli_accepts_explicit_freeze_and_propagates_native_exit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit\tests\test_precall_input_history.py", line 134, in test_cli_accepts_explicit_freeze_and_propagates_native_exit
+    self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 2 != 1 : usage: audit_run.py [-h] {init,event,capture,status,check} ...
+audit_run.py: error: unrecognized arguments: --freeze-input
+
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.484s
+
+FAILED (failures=1, errors=9)

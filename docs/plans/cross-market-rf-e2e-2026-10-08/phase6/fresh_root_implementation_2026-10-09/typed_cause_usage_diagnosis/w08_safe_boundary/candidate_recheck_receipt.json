@@ -1,0 +1,526 @@
+{
+  "schema_version": "w08-independent-candidate-recheck/1",
+  "source_before": {
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py": "ee8979e4853debf0cd433aae7a3d01219952d0fe0ebbffbabec4c37f8fd252d4",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_upstream_cause.py": "67be19ef4e903c06abcaa05217d509ac48c4a090d9ebc557128d9a35d224cf27",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py": "4038be124d06c9d3b26a5d0490f82f18e03e0dd92fa4a3b1c72625da294c9ebb"
+  },
+  "cases": [
+    {
+      "name": "client-v2-upstream-exit2",
+      "passed": true,
+      "observation": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-candidates-n2ugnlk6\\v2-exit2\\fake",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-candidates-n2ugnlk6\\v2-exit2\\config.json"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 0.197,
+        "payload": {
+          "error_code": "ambiguous",
+          "error": "filing-fetch exited 2: status=ambiguous: canonical_import_failed",
+          "retryable": false,
+          "candidates": [
+            {
+              "ticker": "MSFT",
+              "canonical_name": "Microsoft Corporation",
+              "market": "US",
+              "exchange": "NASDAQ",
+              "security_id": "MSFT",
+              "entity_id": "issuer:MSFT"
+            },
+            {
+              "source_ref": {
+                "schema_version": "2.0",
+                "document_id": "urn:company-wiki:document:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "source_id": "urn:company-wiki:source:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "byte_size": 25,
+                "mime_type": "text/plain"
+              }
+            }
+          ],
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": false,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "schema_version": "acquisition-failure/1",
+            "code": "canonical_import_failed",
+            "retryable": false,
+            "provider_started": true,
+            "usage_complete": false,
+            "usage_scope": "operation",
+            "acquisition_usage": {
+              "schema_version": "1.0",
+              "response_bytes": 36,
+              "cost_usd": "0.03"
+            }
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"ambiguous\", \"error\": \"filing-fetch exited 2: status=ambiguous: canonical_import_failed\", \"retryable\": false, \"candidates\": [{\"ticker\": \"MSFT\", \"canonical_name\": \"Microsoft Corporation\", \"market\": \"US\", \"exchange\": \"NASDAQ\", \"security_id\": \"MSFT\", \"entity_id\": \"issuer:MSFT\"}, {\"source_ref\": {\"schema_version\": \"2.0\", \"document_id\": \"urn:company-wiki:document:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\", \"source_id\": \"urn:company-wiki:source:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\", \"content_sha256\": \"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\", \"byte_size\": 25, \"mime_type\": \"text/plain\"}}], \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": false, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"schema_version\": \"acquisition-failure/1\", \"code\": \"canonical_import_failed\", \"retryable\": false, \"provider_started\": true, \"usage_complete\": false, \"usage_scope\": \"operation\", \"acquisition_usage\": {\"schema_version\": \"1.0\", \"response_bytes\": 36, \"cost_usd\": \"0.03\"}}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    },
+    {
+      "name": "prepare-v2-upstream-exit2",
+      "passed": true,
+      "observation": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-candidates-n2ugnlk6\\v2-exit2\\fake",
+          "--result-envelope",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-candidates-n2ugnlk6\\v2-exit2\\config.json"
+        ],
+        "exit_code": 3,
+        "duration_seconds": 0.332,
+        "payload": {
+          "error_code": "upstream",
+          "error": "filing-fetch client exited 2: status=ambiguous: canonical_import_failed",
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": false,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "schema_version": "acquisition-failure/1",
+            "code": "canonical_import_failed",
+            "retryable": false,
+            "provider_started": true,
+            "usage_complete": false,
+            "usage_scope": "operation",
+            "acquisition_usage": {
+              "schema_version": "1.0",
+              "response_bytes": 36,
+              "cost_usd": "0.03"
+            }
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"upstream\", \"error\": \"filing-fetch client exited 2: status=ambiguous: canonical_import_failed\", \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": false, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"schema_version\": \"acquisition-failure/1\", \"code\": \"canonical_import_failed\", \"retryable\": false, \"provider_started\": true, \"usage_complete\": false, \"usage_scope\": \"operation\", \"acquisition_usage\": {\"schema_version\": \"1.0\", \"response_bytes\": 36, \"cost_usd\": \"0.03\"}}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    },
+    {
+      "name": "client-v2-upstream-exit0",
+      "passed": true,
+      "observation": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-candidates-n2ugnlk6\\v2-exit0\\fake",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-candidates-n2ugnlk6\\v2-exit0\\config.json"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 0.243,
+        "payload": {
+          "error_code": "ambiguous",
+          "error": "filing-fetch returned: status=ambiguous: canonical_import_failed",
+          "retryable": false,
+          "candidates": [
+            {
+              "ticker": "MSFT",
+              "canonical_name": "Microsoft Corporation",
+              "market": "US",
+              "exchange": "NASDAQ",
+              "security_id": "MSFT",
+              "entity_id": "issuer:MSFT"
+            },
+            {
+              "source_ref": {
+                "schema_version": "2.0",
+                "document_id": "urn:company-wiki:document:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "source_id": "urn:company-wiki:source:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "byte_size": 25,
+                "mime_type": "text/plain"
+              }
+            }
+          ],
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": false,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "schema_version": "acquisition-failure/1",
+            "code": "canonical_import_failed",
+            "retryable": false,
+            "provider_started": true,
+            "usage_complete": false,
+            "usage_scope": "operation",
+            "acquisition_usage": {
+              "schema_version": "1.0",
+              "response_bytes": 36,
+              "cost_usd": "0.03"
+            }
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"ambiguous\", \"error\": \"filing-fetch returned: status=ambiguous: canonical_import_failed\", \"retryable\": false, \"candidates\": [{\"ticker\": \"MSFT\", \"canonical_name\": \"Microsoft Corporation\", \"market\": \"US\", \"exchange\": \"NASDAQ\", \"security_id\": \"MSFT\", \"entity_id\": \"issuer:MSFT\"}, {\"source_ref\": {\"schema_version\": \"2.0\", \"document_id\": \"urn:company-wiki:document:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\", \"source_id\": \"urn:company-wiki:source:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\", \"content_sha256\": \"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\", \"byte_size\": 25, \"mime_type\": \"text/plain\"}}], \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": false, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"schema_version\": \"acquisition-failure/1\", \"code\": \"canonical_import_failed\", \"retryable\": false, \"provider_started\": true, \"usage_complete\": false, \"usage_scope\": \"operation\", \"acquisition_usage\": {\"schema_version\": \"1.0\", \"response_bytes\": 36, \"cost_usd\": \"0.03\"}}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    },
+    {
+      "name": "prepare-v2-upstream-exit0",
+      "passed": true,
+      "observation": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-candidates-n2ugnlk6\\v2-exit0\\fake",
+          "--result-envelope",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-candidates-n2ugnlk6\\v2-exit0\\config.json"
+        ],
+        "exit_code": 3,
+        "duration_seconds": 0.343,
+        "payload": {
+          "error_code": "upstream",
+          "error": "filing-fetch client exited 2: status=ambiguous: canonical_import_failed",
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": false,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "schema_version": "acquisition-failure/1",
+            "code": "canonical_import_failed",
+            "retryable": false,
+            "provider_started": true,
+            "usage_complete": false,
+            "usage_scope": "operation",
+            "acquisition_usage": {
+              "schema_version": "1.0",
+              "response_bytes": 36,
+              "cost_usd": "0.03"
+            }
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"upstream\", \"error\": \"filing-fetch client exited 2: status=ambiguous: canonical_import_failed\", \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": false, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"schema_version\": \"acquisition-failure/1\", \"code\": \"canonical_import_failed\", \"retryable\": false, \"provider_started\": true, \"usage_complete\": false, \"usage_scope\": \"operation\", \"acquisition_usage\": {\"schema_version\": \"1.0\", \"response_bytes\": 36, \"cost_usd\": \"0.03\"}}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    },
+    {
+      "name": "client-v1-upstream-exit2",
+      "passed": true,
+      "observation": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-candidates-n2ugnlk6\\v1-exit2\\fake",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-candidates-n2ugnlk6\\v1-exit2\\config.json"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 0.218,
+        "payload": {
+          "error_code": "ambiguous",
+          "error": "filing-fetch exited 2: status=ambiguous: canonical_import_failed",
+          "retryable": false,
+          "candidates": [
+            {
+              "ticker": "MSFT",
+              "canonical_name": "Microsoft Corporation",
+              "market": "US",
+              "exchange": "NASDAQ",
+              "security_id": "MSFT",
+              "entity_id": "issuer:MSFT"
+            },
+            {
+              "source_ref": {
+                "schema_version": "2.0",
+                "document_id": "urn:company-wiki:document:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "source_id": "urn:company-wiki:source:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "byte_size": 25,
+                "mime_type": "text/plain"
+              }
+            }
+          ],
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": false,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "schema_version": "acquisition-failure/1",
+            "code": "canonical_import_failed",
+            "retryable": false,
+            "provider_started": true,
+            "usage_complete": false,
+            "usage_scope": "operation",
+            "acquisition_usage": {
+              "schema_version": "1.0",
+              "response_bytes": 36,
+              "cost_usd": "0.03"
+            }
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"ambiguous\", \"error\": \"filing-fetch exited 2: status=ambiguous: canonical_import_failed\", \"retryable\": false, \"candidates\": [{\"ticker\": \"MSFT\", \"canonical_name\": \"Microsoft Corporation\", \"market\": \"US\", \"exchange\": \"NASDAQ\", \"security_id\": \"MSFT\", \"entity_id\": \"issuer:MSFT\"}, {\"source_ref\": {\"schema_version\": \"2.0\", \"document_id\": \"urn:company-wiki:document:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\", \"source_id\": \"urn:company-wiki:source:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\", \"content_sha256\": \"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\", \"byte_size\": 25, \"mime_type\": \"text/plain\"}}], \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": false, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"schema_version\": \"acquisition-failure/1\", \"code\": \"canonical_import_failed\", \"retryable\": false, \"provider_started\": true, \"usage_complete\": false, \"usage_scope\": \"operation\", \"acquisition_usage\": {\"schema_version\": \"1.0\", \"response_bytes\": 36, \"cost_usd\": \"0.03\"}}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    },
+    {
+      "name": "prepare-v1-upstream-exit2",
+      "passed": true,
+      "observation": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-candidates-n2ugnlk6\\v1-exit2\\fake",
+          "--result-envelope",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-candidates-n2ugnlk6\\v1-exit2\\config.json"
+        ],
+        "exit_code": 3,
+        "duration_seconds": 0.337,
+        "payload": {
+          "error_code": "upstream",
+          "error": "filing-fetch client exited 2: status=ambiguous: canonical_import_failed",
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": false,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "schema_version": "acquisition-failure/1",
+            "code": "canonical_import_failed",
+            "retryable": false,
+            "provider_started": true,
+            "usage_complete": false,
+            "usage_scope": "operation",
+            "acquisition_usage": {
+              "schema_version": "1.0",
+              "response_bytes": 36,
+              "cost_usd": "0.03"
+            }
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"upstream\", \"error\": \"filing-fetch client exited 2: status=ambiguous: canonical_import_failed\", \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": false, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"schema_version\": \"acquisition-failure/1\", \"code\": \"canonical_import_failed\", \"retryable\": false, \"provider_started\": true, \"usage_complete\": false, \"usage_scope\": \"operation\", \"acquisition_usage\": {\"schema_version\": \"1.0\", \"response_bytes\": 36, \"cost_usd\": \"0.03\"}}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    },
+    {
+      "name": "client-v1-upstream-exit0",
+      "passed": true,
+      "observation": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-candidates-n2ugnlk6\\v1-exit0\\fake",
+          "--source-ref-v2",
+          "--result-envelope",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-candidates-n2ugnlk6\\v1-exit0\\config.json"
+        ],
+        "exit_code": 2,
+        "duration_seconds": 0.202,
+        "payload": {
+          "error_code": "ambiguous",
+          "error": "filing-fetch returned: status=ambiguous: canonical_import_failed",
+          "retryable": false,
+          "candidates": [
+            {
+              "ticker": "MSFT",
+              "canonical_name": "Microsoft Corporation",
+              "market": "US",
+              "exchange": "NASDAQ",
+              "security_id": "MSFT",
+              "entity_id": "issuer:MSFT"
+            },
+            {
+              "source_ref": {
+                "schema_version": "2.0",
+                "document_id": "urn:company-wiki:document:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "source_id": "urn:company-wiki:source:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "byte_size": 25,
+                "mime_type": "text/plain"
+              }
+            }
+          ],
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": false,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "schema_version": "acquisition-failure/1",
+            "code": "canonical_import_failed",
+            "retryable": false,
+            "provider_started": true,
+            "usage_complete": false,
+            "usage_scope": "operation",
+            "acquisition_usage": {
+              "schema_version": "1.0",
+              "response_bytes": 36,
+              "cost_usd": "0.03"
+            }
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"ambiguous\", \"error\": \"filing-fetch returned: status=ambiguous: canonical_import_failed\", \"retryable\": false, \"candidates\": [{\"ticker\": \"MSFT\", \"canonical_name\": \"Microsoft Corporation\", \"market\": \"US\", \"exchange\": \"NASDAQ\", \"security_id\": \"MSFT\", \"entity_id\": \"issuer:MSFT\"}, {\"source_ref\": {\"schema_version\": \"2.0\", \"document_id\": \"urn:company-wiki:document:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\", \"source_id\": \"urn:company-wiki:source:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\", \"content_sha256\": \"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\", \"byte_size\": 25, \"mime_type\": \"text/plain\"}}], \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": false, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"schema_version\": \"acquisition-failure/1\", \"code\": \"canonical_import_failed\", \"retryable\": false, \"provider_started\": true, \"usage_complete\": false, \"usage_scope\": \"operation\", \"acquisition_usage\": {\"schema_version\": \"1.0\", \"response_bytes\": 36, \"cost_usd\": \"0.03\"}}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    },
+    {
+      "name": "prepare-v1-upstream-exit0",
+      "passed": true,
+      "observation": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-candidates-n2ugnlk6\\v1-exit0\\fake",
+          "--result-envelope",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w08-independent-candidates-n2ugnlk6\\v1-exit0\\config.json"
+        ],
+        "exit_code": 3,
+        "duration_seconds": 0.317,
+        "payload": {
+          "error_code": "upstream",
+          "error": "filing-fetch client exited 2: status=ambiguous: canonical_import_failed",
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": false,
+            "retry_scope": "none"
+          },
+          "acquisition_failure": {
+            "schema_version": "acquisition-failure/1",
+            "code": "canonical_import_failed",
+            "retryable": false,
+            "provider_started": true,
+            "usage_complete": false,
+            "usage_scope": "operation",
+            "acquisition_usage": {
+              "schema_version": "1.0",
+              "response_bytes": 36,
+              "cost_usd": "0.03"
+            }
+          },
+          "stage": "ensure",
+          "attempts": 1,
+          "calls": 2,
+          "downloads": 0
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"upstream\", \"error\": \"filing-fetch client exited 2: status=ambiguous: canonical_import_failed\", \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": false, \"retry_scope\": \"none\"}, \"acquisition_failure\": {\"schema_version\": \"acquisition-failure/1\", \"code\": \"canonical_import_failed\", \"retryable\": false, \"provider_started\": true, \"usage_complete\": false, \"usage_scope\": \"operation\", \"acquisition_usage\": {\"schema_version\": \"1.0\", \"response_bytes\": 36, \"cost_usd\": \"0.03\"}}, \"stage\": \"ensure\", \"attempts\": 1, \"calls\": 2, \"downloads\": 0}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    }
+  ],
+  "external_http_requests": 0,
+  "paid_calls": 0,
+  "company_M3": false,
+  "infrastructure_retry": "first sandbox TEMP failed before any child; empty owned root removed",
+  "baseline_restored": true,
+  "temporary_root_absent": true,
+  "source_after": {
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_fetch_client.py": "ee8979e4853debf0cd433aae7a3d01219952d0fe0ebbffbabec4c37f8fd252d4",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\filing_upstream_cause.py": "67be19ef4e903c06abcaa05217d509ac48c4a090d9ebc557128d9a35d224cf27",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py": "4038be124d06c9d3b26a5d0490f82f18e03e0dd92fa4a3b1c72625da294c9ebb"
+  },
+  "source_unchanged": true
+}

@@ -1,0 +1,300 @@
+{
+  "schema_version": "w08-readonly-diagnosis/1",
+  "source_file_sha256": {
+    "CWP": "7441b22459d158cf5e0b031cd0bfe7d35db0a75695ef4739cf10e2ef9d13a4ec",
+    "FF": "8ba2d75aea623c19d2b1289dbb610ba2244a4ebf7fd13edabcd1e305e668a51a",
+    "RF": "ffe4a9c52c73639b4a9441c00a086624883f1e1d1c6bfa2c9bc94de0a27bc715"
+  },
+  "external_http_requests": 0,
+  "paid_calls": 0,
+  "production_originals_modified": false,
+  "production_config_modified": false,
+  "cases": [],
+  "wire_controls": [
+    {
+      "name": "known_cause",
+      "fixture": "injected_FF_wire_actual_RF_client_and_preparation_CLIs",
+      "input": {
+        "schema_version": "2.0",
+        "status": "upstream_error",
+        "filing": {
+          "status": "upstream_error",
+          "reason": "safe fixed message",
+          "retryable": false,
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": true,
+            "retry_scope": "none"
+          },
+          "acquisition_usage": {
+            "schema_version": "1.0",
+            "response_bytes": 4096,
+            "cost_usd": "0.02"
+          }
+        },
+        "transcript": {
+          "status": "not_requested"
+        },
+        "calls": 2,
+        "downloads": 0
+      },
+      "rf_prepare": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-tino2j0h\\wire_controls",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-tino2j0h\\wire_controls\\catalog.json",
+          "--timeout-seconds",
+          "5"
+        ],
+        "exit_code": 3,
+        "duration_seconds": 0.316,
+        "payload": {
+          "error_code": "upstream",
+          "error": "filing-fetch client exited 2: {\"error_code\": \"upstream_error\", \"error\": \"filing-fetch exited 2: upstream_error\", \"retryable\": false, \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": true, \"retry_scope\": \"none\"}}",
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": true,
+            "retry_scope": "none"
+          }
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"upstream\", \"error\": \"filing-fetch client exited 2: {\\\"error_code\\\": \\\"upstream_error\\\", \\\"error\\\": \\\"filing-fetch exited 2: upstream_error\\\", \\\"retryable\\\": false, \\\"upstream_cause\\\": {\\\"schema_version\\\": \\\"filing-upstream-cause/1\\\", \\\"operation\\\": \\\"ensure\\\", \\\"code\\\": \\\"canonical_import_failed\\\", \\\"provider_started\\\": true, \\\"usage_complete\\\": true, \\\"retry_scope\\\": \\\"none\\\"}}\", \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": true, \"retry_scope\": \"none\"}}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    },
+    {
+      "name": "untrusted_reason",
+      "fixture": "injected_FF_wire_actual_RF_client_and_preparation_CLIs",
+      "input": {
+        "fields": [
+          "calls",
+          "downloads",
+          "filing",
+          "schema_version",
+          "status",
+          "transcript"
+        ],
+        "sentinel_present": true
+      },
+      "rf_prepare": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-tino2j0h\\wire_controls",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-tino2j0h\\wire_controls\\catalog.json",
+          "--timeout-seconds",
+          "5"
+        ],
+        "exit_code": 3,
+        "duration_seconds": 0.289,
+        "payload": {
+          "error_code": "upstream",
+          "error": "filing-fetch client exited 2: {\"error_code\": \"upstream_error\", \"error\": \"filing-fetch exited 2: upstream_error\", \"retryable\": false, \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": true, \"retry_scope\": \"none\"}}",
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": true,
+            "retry_scope": "none"
+          }
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"upstream\", \"error\": \"filing-fetch client exited 2: {\\\"error_code\\\": \\\"upstream_error\\\", \\\"error\\\": \\\"filing-fetch exited 2: upstream_error\\\", \\\"retryable\\\": false, \\\"upstream_cause\\\": {\\\"schema_version\\\": \\\"filing-upstream-cause/1\\\", \\\"operation\\\": \\\"ensure\\\", \\\"code\\\": \\\"canonical_import_failed\\\", \\\"provider_started\\\": true, \\\"usage_complete\\\": true, \\\"retry_scope\\\": \\\"none\\\"}}\", \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": true, \"retry_scope\": \"none\"}}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    },
+    {
+      "name": "untrusted_top_level_error",
+      "fixture": "injected_FF_wire_actual_RF_client_and_preparation_CLIs",
+      "input": {
+        "fields": [
+          "calls",
+          "downloads",
+          "error",
+          "filing",
+          "schema_version",
+          "status",
+          "transcript"
+        ],
+        "sentinel_present": true
+      },
+      "rf_prepare": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-tino2j0h\\wire_controls",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-tino2j0h\\wire_controls\\catalog.json",
+          "--timeout-seconds",
+          "5"
+        ],
+        "exit_code": 3,
+        "duration_seconds": 0.292,
+        "payload": {
+          "error_code": "upstream",
+          "error": "filing-fetch client exited 2: {\"error_code\": \"upstream_error\", \"error\": \"filing-fetch exited 2: provider URL https://example.invalid/?api_key=[SYNTHETIC_REDACTED]\", \"retryable\": false, \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": true, \"retry_scope\": \"none\"}}",
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": true,
+            "retry_scope": "none"
+          }
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"upstream\", \"error\": \"filing-fetch client exited 2: {\\\"error_code\\\": \\\"upstream_error\\\", \\\"error\\\": \\\"filing-fetch exited 2: provider URL https://example.invalid/?api_key=[SYNTHETIC_REDACTED]\\\", \\\"retryable\\\": false, \\\"upstream_cause\\\": {\\\"schema_version\\\": \\\"filing-upstream-cause/1\\\", \\\"operation\\\": \\\"ensure\\\", \\\"code\\\": \\\"canonical_import_failed\\\", \\\"provider_started\\\": true, \\\"usage_complete\\\": true, \\\"retry_scope\\\": \\\"none\\\"}}\", \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": true, \"retry_scope\": \"none\"}}\n",
+        "synthetic_sentinel_leaked": true
+      }
+    },
+    {
+      "name": "untrusted_stderr",
+      "fixture": "injected_FF_wire_actual_RF_client_and_preparation_CLIs",
+      "input": {
+        "fields": [
+          "calls",
+          "downloads",
+          "filing",
+          "schema_version",
+          "status",
+          "transcript"
+        ],
+        "sentinel_present": true
+      },
+      "rf_prepare": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-tino2j0h\\wire_controls",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-tino2j0h\\wire_controls\\catalog.json",
+          "--timeout-seconds",
+          "5"
+        ],
+        "exit_code": 3,
+        "duration_seconds": 0.302,
+        "payload": {
+          "error_code": "upstream",
+          "error": "filing-fetch client exited 2: {\"error_code\": \"fatal\", \"error\": \"filing-fetch exited 2: provider URL https://example.invalid/?api_key=[SYNTHETIC_REDACTED]\", \"retryable\": false}"
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"upstream\", \"error\": \"filing-fetch client exited 2: {\\\"error_code\\\": \\\"fatal\\\", \\\"error\\\": \\\"filing-fetch exited 2: provider URL https://example.invalid/?api_key=[SYNTHETIC_REDACTED]\\\", \\\"retryable\\\": false}\"}\n",
+        "synthetic_sentinel_leaked": true
+      }
+    },
+    {
+      "name": "untrusted_success_exit_reason",
+      "fixture": "injected_FF_wire_actual_RF_client_and_preparation_CLIs",
+      "input": {
+        "fields": [
+          "calls",
+          "downloads",
+          "filing",
+          "schema_version",
+          "status",
+          "transcript"
+        ],
+        "sentinel_present": true
+      },
+      "rf_prepare": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-tino2j0h\\wire_controls",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-tino2j0h\\wire_controls\\catalog.json",
+          "--timeout-seconds",
+          "5"
+        ],
+        "exit_code": 3,
+        "duration_seconds": 0.301,
+        "payload": {
+          "error_code": "upstream",
+          "error": "filing-fetch client exited 2: {\"error_code\": \"upstream_error\", \"error\": \"filing-fetch returned status=upstream_error: provider URL https://example.invalid/?api_key=[SYNTHETIC_REDACTED]\", \"retryable\": false, \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": true, \"retry_scope\": \"none\"}}",
+          "upstream_cause": {
+            "schema_version": "filing-upstream-cause/1",
+            "operation": "ensure",
+            "code": "canonical_import_failed",
+            "provider_started": true,
+            "usage_complete": true,
+            "retry_scope": "none"
+          }
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"upstream\", \"error\": \"filing-fetch client exited 2: {\\\"error_code\\\": \\\"upstream_error\\\", \\\"error\\\": \\\"filing-fetch returned status=upstream_error: provider URL https://example.invalid/?api_key=[SYNTHETIC_REDACTED]\\\", \\\"retryable\\\": false, \\\"upstream_cause\\\": {\\\"schema_version\\\": \\\"filing-upstream-cause/1\\\", \\\"operation\\\": \\\"ensure\\\", \\\"code\\\": \\\"canonical_import_failed\\\", \\\"provider_started\\\": true, \\\"usage_complete\\\": true, \\\"retry_scope\\\": \\\"none\\\"}}\", \"upstream_cause\": {\"schema_version\": \"filing-upstream-cause/1\", \"operation\": \"ensure\", \"code\": \"canonical_import_failed\", \"provider_started\": true, \"usage_complete\": true, \"retry_scope\": \"none\"}}\n",
+        "synthetic_sentinel_leaked": true
+      }
+    },
+    {
+      "name": "post_selection_reader_failure",
+      "fixture": "injected_FF_wire_actual_RF_client_and_preparation_CLIs",
+      "input": {
+        "fields": [
+          "calls",
+          "downloads",
+          "filing",
+          "schema_version",
+          "status",
+          "transcript"
+        ],
+        "sentinel_present": true
+      },
+      "rf_prepare": {
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-tino2j0h\\wire_controls",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-tino2j0h\\wire_controls\\catalog.json",
+          "--timeout-seconds",
+          "5"
+        ],
+        "exit_code": 3,
+        "duration_seconds": 1.018,
+        "payload": {
+          "error_code": "upstream",
+          "error": "source reader refused: reader_unavailable"
+        },
+        "stdout": "",
+        "stderr": "{\"error_code\": \"upstream\", \"error\": \"source reader refused: reader_unavailable\"}\n",
+        "synthetic_sentinel_leaked": false
+      }
+    }
+  ],
+  "owned_temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w08-readonly-20261009-tino2j0h",
+  "temp_root_exists_after_cleanup": false
+}

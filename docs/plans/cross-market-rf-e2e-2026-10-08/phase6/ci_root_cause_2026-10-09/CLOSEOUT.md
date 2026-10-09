@@ -43,3 +43,12 @@ CWP W02及版本行为测试已正常推送至 `b1888522525f3dad28891c999adc0919
 新的同一入口已实际支持连续主线集成：CWP cba23b8e普通push2387PASS/142.74s，exactCI37923124555 SUCCESS94s；W03合入284328bb普通commit约6.2s、push2418PASS/122.65s，exactCI37925080695 SUCCESS86s。FF44c778b4正常push601PASS/7explicitSKIP/78subtests/62.07s，exactCI37923517689 SUCCESS87s。新摘要29项契约纳入现有FAST_CONTRACT_CASES，CI与push共用，入口先2RED→66PASS，commit仍无pytest。完整unit回退发生在runner/config/动态执行重大改动，纯文档推送只shared smoke；不把两分钟push误说成每次commit两分钟，也不许诺所有跨平台未知变化都能由本机阻止。
 
 本子包已关闭；主PWF剩余来源/研究共因仍ACTIVE，不以这些工程绿代替三家研究E2E。用户本次CI请求根因和现状可直接查本文件与findings。
+
+
+## 2026-10-09 17:05 UTC：新修改的防漏检实证
+
+CWP新整批push在上传前拦住2428PASS/3FAIL（144.26s）：一个真实transcript0.1.0兼容缺口，两个fixture误宣0.1.1而实际0.2.0。RF新push拦住147PASS/2FAIL（19.69s）：来源reader真实拒绝被通用failure丢掉有限原因。当前两仓新修改未上传，正在根修后按正常push复验。不能把上一精确绿色CI当这些新修改已验证。
+
+FF新W08主线41ba0150正常push601PASS/7明确SKIP/78subtests/62.63s；精确CI37961753941 SUCCESS（81s），并仅定点同步5文件两物理skill根共10文件，未选公共代码drift=0，配置/output保留。CWP与RF当前修复发表结果将在下一段追加，旧红结果保留。
+
+诊断命令一次猜错邻仓handoff.md文件名（Get-Content不存在）；未改文件、未作产品失败统计。实际交接位于roottyped_cause_usage_diagnosis/w08_safe_boundary/IMPLEMENTATION_HANDOFF.md和own仓PWF记录。

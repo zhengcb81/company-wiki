@@ -1,5 +1,14 @@
 # Findings
 
+## 2026-10-09 17:00 UTC：正常push的新实证与大节点反例
+
+新pre-push实际阻止了CWP W05的3FAIL（1真实旧版本兼容、2夹具错宣parser identity），以及RF W08 2FAIL（合法reader拒绝原因丢失）；都未上传。这证明runtime应由push/CI共用职责入口检查，pre-commit快速静态并不能替代它。恢复有限typed诊断不等于输出不可信正文；测试需固定实际行为/失败语义而非退休许可/全格式同一版本号。
+
+W06新增独立反例是实质P1：cached-ready仍把import标签当实际来源事实，只验证hash不会发现正文错CIK/错财年。现有测试错CIK使用缺metadata只触发慢路径，未测完整缓存快速路径。统一来源facts资格/ready责任层修，不要求上层反复鉴别身份或添加人签。作者正在两RED根修，不能接受原196绿集代替这条失败。
+
+W11 independent复审及定点安装已完成；4 native调用仅证明工程输入留证与工具组合，synthetic模型不等于真实公司M3。
+
+
 ## 2026-10-09：持久入口和发布边界已闭合，研究仍待真实复验
 
 W07原独立bridge用显式tool注入会掩盖日常默认入口缺临时env的问题；MAIN沿用同一selected config加optional ETtool位置，bounded64KiB读取和4KiB credential入口，不另造配置/授权层。第二独立审查实际默认facade→real ET→real CWP入库/复用，安装两根无临时env也找到tool与原key位置，不读key就可验配置闭合。真实entitlement仍需M3，synthetic GET不可替代。W04冷请求的0GET不能推出provider_started=false；客户端确尝试但DNS/连接未达server时真实attempt/unknown需保留。W03原子group完整引用与原文语义支持区分：显式声明group须覆盖全部成员，没有声明的旧部分claim保持needs_review诊断，不能自动补引伪造支持。新摘要契约纳入CI/push同一清单，避免重现入口覆盖漂移。
