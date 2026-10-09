@@ -328,18 +328,33 @@ def test_public_capture_cli_zero_get_reuse_and_pathless_recovery(tmp_path, monke
         assert not retained(catalog)
 
 
-def test_public_stall_cli_reports_persistent_capture_and_safe_usage(tmp_path, monkeypatch):
+def test_public_stall_cli_total_deadline_reports_observed_progress(tmp_path, monkeypatch):
     with lake(tmp_path) as (root, catalog), loopback(monkeypatch, mode="stall") as (url, calls):
+        # The total deadline includes TLS transport setup. A slow Windows child
+        # may stop before GET; that truthful outcome is not an acquisition bug.
         result = _cli(root, capture_request(url, seconds=0.35), operation="capture")
         assert result.returncode == 2
         failure = json.loads(result.stderr)
         assert failure["error_code"] == "deadline_exceeded"
-        assert failure["provider_started"] is True
-        assert failure["acquisition_usage_complete"] is False
-        assert failure["acquisition_usage"]["response_bytes"] == 8
-        assert failure["capture_id"] == json.loads(retained(catalog)[0].read_text(encoding="utf-8"))["capture_id"]
+        assert type(failure["provider_started"]) is bool
+        received = failure["acquisition_usage"]["response_bytes"]
+        assert type(received) is int and 0 <= received <= 8
+        if not calls:
+            assert calls == [] and failure["provider_started"] is False and received == 0
+            assert failure["acquisition_usage_complete"] is True
+        else:
+            assert calls == ["/original"] and failure["provider_started"] is True
+            assert failure["acquisition_usage_complete"] is False
+        descriptor = retained(catalog)[0]
+        state = json.loads(descriptor.read_text(encoding="utf-8"))
+        raw = (descriptor.parent / state["staged_name"]).read_bytes()
+        receipt = state["request"]["capture_receipt"]
+        assert state["complete"] is False and state["capture_id"] == failure["capture_id"]
+        assert raw == BODY[:received] and len(raw) == receipt["response_bytes"] == received
+        assert hashlib.sha256(raw).hexdigest() == receipt["content_sha256"]
+        assert receipt["acquisition_usage"] == failure["acquisition_usage"]
+        assert receipt["usage_complete"] == failure["acquisition_usage_complete"]
         assert str(root) not in result.stderr and BODY.decode() not in result.stderr
-        assert calls == ["/original"]
 
 
 def test_capture_receipt_write_failure_keeps_raw_and_actual_usage(tmp_path, monkeypatch):
@@ -418,3 +433,177 @@ def test_capture_different_sha_is_retained_and_cannot_recover_as_expected(tmp_pa
         with pytest.raises(flow.OfficialSourceError, match="source_sha_mismatch"):
             flow.recover_official_source(catalog, capture_id=caught.value.capture_id)
         assert calls == ["/original"]
+
+
+# Independent M2 counterexamples: keep the initial delivery's contracts intact.
+def _failed_local_capture(catalog, monkeypatch):
+    with monkeypatch.context() as patch:
+        def fail(*_args, **_kwargs):
+            raise OSError("fixture-copy")
+        patch.setattr(writer_module.shutil, "copyfile", fail)
+        with pytest.raises(OSError, match="fixture-copy") as caught:
+            flow.import_official_source(catalog, original=BODY, request=import_request())
+    return caught.value.capture_id
+
+
+def test_same_capture_id_replays_after_successful_response_is_lost(tmp_path, monkeypatch):
+    with lake(tmp_path) as (root, catalog), loopback(monkeypatch) as (url, calls):
+        with monkeypatch.context() as patch:
+            def fail(*_args, **_kwargs):
+                raise OSError("fixture-copy")
+            patch.setattr(writer_module.shutil, "copyfile", fail)
+            with pytest.raises(OSError) as caught:
+                flow.capture_official_source(catalog, request=capture_request(url))
+        capture_id = caught.value.capture_id
+        first = flow.recover_official_source(catalog, capture_id=capture_id)
+        assert not retained(catalog)
+        # Simulate the caller losing the response and reopening its catalog.
+        replay = _cli(root, {"schema_version": "official-source-recovery-request/1",
+                             "capture_id": capture_id}, operation="recover")
+        assert replay.returncode == 0, replay.stderr
+        second = json.loads(replay.stdout)
+        assert second["source_ref"] == first["source_ref"]
+        assert second["capture_receipt"] == first["capture_receipt"]
+        assert second["status"] == first["status"] == "imported_new"
+        assert second["download_events"] == 0
+        assert second["acquisition_usage"] == {"schema_version": "1.0", "response_bytes": 0, "cost_usd": "0"}
+        third = flow.recover_official_source(catalog, capture_id=capture_id)
+        assert third["source_ref"] == first["source_ref"]
+        assert third["capture_receipt"]["http_requests"] == 1
+        assert calls == ["/original"]
+        assert str(root) not in replay.stdout
+        records = list((catalog.config.catalog_dir / "staging").glob("*.result.json"))
+        assert len(records) == 1 and records[0].stat().st_size <= 65536
+        assert BODY not in records[0].read_bytes(), "completion projection must not duplicate source body"
+
+
+def test_current_cap_applies_to_retained_canonical_and_completed_reuse(tmp_path, monkeypatch):
+    with lake(tmp_path) as (root, catalog), loopback(monkeypatch) as (url, calls):
+        with monkeypatch.context() as patch:
+            def fail(*_args, **_kwargs):
+                raise OSError("fixture-copy")
+            patch.setattr(writer_module.shutil, "copyfile", fail)
+            with pytest.raises(OSError) as caught:
+                flow.capture_official_source(catalog, request=capture_request(url))
+        capture_id = caught.value.capture_id
+        descriptor = retained(catalog)[0]
+        unchanged = descriptor.read_bytes()
+        state = json.loads(unchanged)
+        raw = descriptor.parent / state["staged_name"]
+        retry = capture_request(url, expected=hashlib.sha256(BODY).hexdigest())
+        retry["max_bytes"] = 10
+        with pytest.raises(flow.OfficialSourceError, match="source_byte_limit"):
+            flow.capture_official_source(catalog, request=retry)
+        with pytest.raises(flow.OfficialSourceError, match="source_byte_limit"):
+            flow.recover_official_source(catalog, capture_id=capture_id, max_bytes=10)
+        refused = _cli(root, {"schema_version": "official-source-recovery-request/1",
+                              "capture_id": capture_id, "max_bytes": 10}, operation="recover")
+        assert refused.returncode == 2
+        assert json.loads(refused.stderr)["error_code"] == "source_byte_limit"
+        assert descriptor.read_bytes() == unchanged and raw.read_bytes() == BODY
+        assert calls == ["/original"]
+        accepted = flow.recover_official_source(catalog, capture_id=capture_id, max_bytes=len(BODY))
+        assert accepted["source_ref"]["byte_size"] == len(BODY)
+        with pytest.raises(flow.OfficialSourceError, match="source_byte_limit"):
+            flow.capture_official_source(catalog, request=retry)
+        with pytest.raises(flow.OfficialSourceError, match="source_byte_limit"):
+            flow.recover_official_source(catalog, capture_id=capture_id, max_bytes=10)
+        assert calls == ["/original"]
+
+
+@pytest.mark.parametrize("damage", ["list", "null", "request_list", "receipt_list", "cap_bool", "mime_list", "source_kind_list", "status_list"])
+def test_invalid_retained_json_shapes_are_safe_and_keep_original(tmp_path, monkeypatch, damage):
+    with lake(tmp_path) as (root, catalog):
+        capture_id = _failed_local_capture(catalog, monkeypatch)
+        descriptor = retained(catalog)[0]
+        state = json.loads(descriptor.read_text(encoding="utf-8"))
+        raw = descriptor.parent / state["staged_name"]
+        if damage == "list":
+            state = []
+        elif damage == "null":
+            state = None
+        elif damage == "request_list":
+            state["request"] = []
+        elif damage == "receipt_list":
+            state["request"]["capture_receipt"] = []
+        elif damage == "cap_bool":
+            state["request"]["max_bytes"] = True
+        elif damage == "mime_list":
+            state["request"]["mime_type"] = []
+        elif damage == "source_kind_list":
+            state["request"]["source"]["document_kind"] = []
+        else:
+            state["request"]["capture_receipt"]["http_status"] = []
+        descriptor.write_text(json.dumps(state), encoding="utf-8")
+        inventory = flow.list_retained_official_captures(catalog)
+        assert inventory == [{"capture_id": capture_id, "status": "unavailable"}]
+        refused = _cli(root, {"schema_version": "official-source-recovery-request/1",
+                              "capture_id": capture_id}, operation="recover")
+        assert refused.returncode == 2, refused.stderr
+        failure = json.loads(refused.stderr)
+        assert failure["error_code"] == "invalid_retained_capture"
+        assert "Traceback" not in refused.stderr and str(root) not in refused.stderr
+        assert "acquisition_usage" not in failure and "provider_started" not in failure
+        assert raw.read_bytes() == BODY and descriptor.is_file()
+
+
+def test_completion_record_write_failure_keeps_raw_and_can_resume(tmp_path, monkeypatch):
+    with lake(tmp_path) as (_, catalog):
+        capture_id = _failed_local_capture(catalog, monkeypatch)
+        descriptor = retained(catalog)[0]
+        state = json.loads(descriptor.read_text(encoding="utf-8"))
+        raw = descriptor.parent / state["staged_name"]
+        original_replace = flow.os.replace
+        with monkeypatch.context() as patch:
+            def replace(src, dst):
+                if str(dst).endswith(".result.json"):
+                    raise OSError("fixture-completed-result-storage")
+                return original_replace(src, dst)
+            patch.setattr(flow.os, "replace", replace)
+            with pytest.raises(OSError, match="fixture-completed-result-storage"):
+                flow.recover_official_source(catalog, capture_id=capture_id)
+        assert raw.read_bytes() == BODY and descriptor.is_file()
+        from company_wiki.source_catalog.acquisition_journal import AcquisitionJournal
+        assert any(row.outcome == "imported_original" for row in AcquisitionJournal(catalog.config.catalog_dir).read_all())
+        first = flow.recover_official_source(catalog, capture_id=capture_id)
+        second = flow.recover_official_source(catalog, capture_id=capture_id)
+        assert first["source_ref"] == second["source_ref"]
+        assert first["capture_receipt"] == second["capture_receipt"] == state["request"]["capture_receipt"]
+        assert not raw.exists() and not descriptor.exists()
+
+
+@pytest.mark.parametrize("damage", ["list", "receipt_list", "source_ref_list"])
+def test_completed_result_wrong_shape_is_safe_json(tmp_path, monkeypatch, damage):
+    with lake(tmp_path) as (root, catalog):
+        capture_id = _failed_local_capture(catalog, monkeypatch)
+        flow.recover_official_source(catalog, capture_id=capture_id)
+        records = list((catalog.config.catalog_dir / "staging").glob("*.result.json"))
+        assert len(records) == 1
+        record = records[0]
+        result = json.loads(record.read_text(encoding="utf-8"))
+        if damage == "list":
+            result = []
+        elif damage == "receipt_list":
+            result["capture_receipt"] = []
+        else:
+            result["source_ref"] = []
+        record.write_text(json.dumps(result), encoding="utf-8")
+        refused = _cli(root, {"schema_version": "official-source-recovery-request/1",
+                              "capture_id": capture_id}, operation="recover")
+        assert refused.returncode == 2
+        assert json.loads(refused.stderr)["error_code"] == "invalid_completed_capture"
+        assert "Traceback" not in refused.stderr and "acquisition_usage" not in json.loads(refused.stderr)
+        assert len(list((root / "companies").rglob("*.html"))) == 1
+
+
+def test_completed_replay_revalidates_actual_canonical_sha(tmp_path, monkeypatch):
+    from company_wiki.source_catalog.source_reader import SourceReadError
+    with lake(tmp_path) as (_, catalog):
+        capture_id = _failed_local_capture(catalog, monkeypatch)
+        first = flow.recover_official_source(catalog, capture_id=capture_id)
+        location = catalog.store.fetchone("SELECT absolute_path FROM locations WHERE source_id=? AND role='original_primary'", (first["source_ref"]["source_id"],))
+        canonical = Path(location["absolute_path"])
+        canonical.write_bytes(BODY.replace(b"new", b"old"))  # Owned synthetic raw only.
+        with pytest.raises(SourceReadError):
+            flow.recover_official_source(catalog, capture_id=capture_id)
+        assert canonical.read_bytes() != BODY

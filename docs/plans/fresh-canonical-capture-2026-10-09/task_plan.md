@@ -19,3 +19,13 @@ Owner: fresh_canonical_capture. Exclusive worktree based on ceac91e7.
 4. [complete] Committed independently with normal hooks; no merge/push. Exact final Git HEAD is delivered to MAIN with interfaces and receipt evidence.
 
 M2 here is local engineering acceptance. M3 real-company reruns remain MAIN-owned.
+
+
+## Independent M2 follow-up (c839af is not yet accepted)
+
+1. [complete] Append real RED controls IR-W04-01/02/03 and completion-projection write failure; keep initial RED evidence unchanged.
+2. [complete] Durable bounded completed projection linked to existing journal/source ref, enforce current cap on reuse/recover, validate all persisted JSON shapes.
+3. [complete] One grouped focused M2 rerun, real public CLI/loopback and exact SHA; cleanup owned synthetic fixtures.
+4. [complete] HANDOFF/validation/cleanup and empty installation delta prepared for normal independent commit; exact delivered commit is supplied by Git. Independent M2 re-review remains MAIN owned. No merge or push.
+
+The completed projection contains references/actual receipt only (<=64KiB), never source bodies or a second task queue. Result persistence precedes staging cleanup. Current public reader must verify canonical bytes again on replay.

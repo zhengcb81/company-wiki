@@ -18,6 +18,7 @@ from typing import Any
 from .assertion_service import SOURCE_FACT_FIELDS
 from .canonical_writer import CanonicalSourceWriter
 from .acquisition_journal import AcquisitionJournal
+from .lock import _acquisition_mutex
 from .store import canonical_json
 from .document_kinds import SOURCE_FACT_KINDS
 from .resolver import SourceRequest
@@ -83,14 +84,14 @@ def _metadata(value):
         result[field] = item
     for field in ["market", "security_id", "fiscal_year", "fiscal_period", "language"]:
         result.setdefault(field, None)
-    if result["market"] not in {None, "CN", "HK", "US"}:
+    if result["market"] is not None and (not isinstance(result["market"], str) or result["market"] not in {"CN", "HK", "US"}):
         raise OfficialSourceError("invalid_market")
     if result["fiscal_year"] is not None and (
         type(result["fiscal_year"]) is not int
         or not 1900 <= result["fiscal_year"] <= 2200
     ):
         raise OfficialSourceError("invalid_fiscal_year")
-    if result["language"] not in {None, "unknown", "en", "zh", "mixed"}:
+    if result["language"] is not None and (not isinstance(result["language"], str) or result["language"] not in {"unknown", "en", "zh", "mixed"}):
         raise OfficialSourceError("invalid_language")
     for field in [
         "security_id",
@@ -185,39 +186,24 @@ def _validate_presentation(data):
         raise OfficialSourceError("invalid_pptx") from None
 
 
-def _validate_import_request(original, request):
-    if (
-        not isinstance(request, dict)
-        or request.get("schema_version") != IMPORT_REQUEST_SCHEMA
-    ):
-        raise OfficialSourceError("invalid_request_schema")
-    if not isinstance(original, bytes):
-        raise OfficialSourceError("invalid_original_bytes")
-    _text(request.get("request_id"), "request_id")
-    cap = request.get("max_bytes")
-    if type(cap) is not int or not 0 < cap <= _MAX_BYTES:
+def _byte_cap(value):
+    if type(value) is not int or not 0 < value <= _MAX_BYTES:
         raise OfficialSourceError("invalid_byte_cap")
-    if len(original) > cap:
-        raise OfficialSourceError("source_byte_limit")
-    sha = request.get("content_sha256")
-    if (
-        not isinstance(sha, str)
-        or not re.fullmatch("[0-9a-f]{64}", sha)
-        or hashlib.sha256(original).hexdigest() != sha
-    ):
-        raise OfficialSourceError("source_sha_mismatch")
-    mime = request.get("mime_type")
-    if mime not in _SUPPORTED_MIMES:
-        raise OfficialSourceError("unsupported_mime")
-    source = _metadata(request.get("source"))
-    capture = request.get("capture_receipt")
-    if (
-        not isinstance(capture, dict)
-        or capture.get("content_sha256") != sha
-        or capture.get("response_bytes") != len(original)
-    ):
+    return value
+
+
+def _validate_capture_receipt(capture, *, sha, byte_size=None):
+    """Validate persisted observation shapes before reporting real capture/usage."""
+    if (not isinstance(capture, dict) or capture.get("content_sha256") != sha
+            or type(capture.get("response_bytes")) is not int
+            or not 0 <= capture["response_bytes"] <= _MAX_BYTES
+            or (byte_size is not None and capture["response_bytes"] != byte_size)):
         raise OfficialSourceError("capture_byte_identity_mismatch")
-    if len(json.dumps(capture, ensure_ascii=False).encode()) > 16384:
+    try:
+        encoded = json.dumps(capture, ensure_ascii=False, allow_nan=False).encode()
+    except (TypeError, ValueError, RecursionError):
+        raise OfficialSourceError("invalid_capture_receipt") from None
+    if len(encoded) > 16384:
         raise OfficialSourceError("capture_receipt_limit")
     for field in ["capture_method", "tool_name", "tool_call_id", "captured_at"]:
         _text(capture.get(field), field)
@@ -227,6 +213,61 @@ def _validate_import_request(original, request):
             raise ValueError()
     except (ValueError, TypeError):
         raise OfficialSourceError("invalid_capture_time") from None
+    if "http_status" in capture and (type(capture["http_status"]) is not int
+                                     or not 100 <= capture["http_status"] <= 599):
+        raise OfficialSourceError("invalid_capture_receipt")
+    if "http_requests" in capture and (type(capture["http_requests"]) is not int
+                                       or capture["http_requests"] < 0):
+        raise OfficialSourceError("invalid_capture_receipt")
+    for field in ("usage_complete", "provider_started"):
+        if field in capture and type(capture[field]) is not bool:
+            raise OfficialSourceError("invalid_capture_receipt")
+    for field in ("acquisition_usage", "cumulative_acquisition_usage"):
+        if field not in capture:
+            continue
+        usage = capture[field]
+        if (not isinstance(usage, dict) or usage.get("schema_version") != "1.0"
+                or type(usage.get("response_bytes")) is not int or usage["response_bytes"] < 0
+                or not isinstance(usage.get("cost_usd"), str)):
+            raise OfficialSourceError("invalid_capture_receipt")
+        from decimal import Decimal, InvalidOperation
+        try:
+            cost = Decimal(usage["cost_usd"])
+            if not cost.is_finite() or cost < 0:
+                raise ValueError()
+        except (InvalidOperation, ValueError):
+            raise OfficialSourceError("invalid_capture_receipt") from None
+    return dt
+
+
+def _validate_import_header(request):
+    if not isinstance(request, dict) or request.get("schema_version") != IMPORT_REQUEST_SCHEMA:
+        raise OfficialSourceError("invalid_request_schema")
+    _text(request.get("request_id"), "request_id")
+    _byte_cap(request.get("max_bytes"))
+    sha = request.get("content_sha256")
+    if not isinstance(sha, str) or not re.fullmatch("[0-9a-f]{64}", sha):
+        raise OfficialSourceError("source_sha_mismatch")
+    mime = request.get("mime_type")
+    if not isinstance(mime, str) or mime not in _SUPPORTED_MIMES:
+        raise OfficialSourceError("unsupported_mime")
+    source = _metadata(request.get("source"))
+    expected = request.get("expected_content_sha256")
+    if expected is not None and (not isinstance(expected, str) or not re.fullmatch("[0-9a-f]{64}", expected)):
+        raise OfficialSourceError("invalid_expected_content_sha256")
+    return source
+
+
+def _validate_import_request(original, request):
+    source = _validate_import_header(request)
+    if not isinstance(original, bytes):
+        raise OfficialSourceError("invalid_original_bytes")
+    if len(original) > request["max_bytes"]:
+        raise OfficialSourceError("source_byte_limit")
+    if hashlib.sha256(original).hexdigest() != request["content_sha256"]:
+        raise OfficialSourceError("source_sha_mismatch")
+    dt = _validate_capture_receipt(request.get("capture_receipt"),
+                                   sha=request["content_sha256"], byte_size=len(original))
     return source, dt
 
 
@@ -300,13 +341,16 @@ def _journal(catalog, state, *, outcome, reason=None, error_type=None, canonical
     )
 
 
-def _import_retained(catalog, staged, descriptor, state, *, bytes_validated=False):
+def _import_retained(catalog, staged, descriptor, state, *, bytes_validated=False, max_bytes=None):
     request = state["request"]
     try:
         if not state.get("complete", True):
             raise OfficialSourceError("incomplete_capture_requires_new_request")
+        cap = request["max_bytes"] if max_bytes is None else min(request["max_bytes"], _byte_cap(max_bytes))
         with staged.open("rb") as stream:
-            original = stream.read(request["max_bytes"] + 1)
+            original = stream.read(cap + 1)
+        if len(original) > cap:
+            raise OfficialSourceError("source_byte_limit")
         source, dt = _validate_import_request(original, request)
         if request.get("expected_content_sha256") not in {None, request["content_sha256"]}:
             raise OfficialSourceError("source_sha_mismatch")
@@ -369,8 +413,9 @@ def _import_retained(catalog, staged, descriptor, state, *, bytes_validated=Fals
         outcome = (("downloaded_new" if captured_http else "imported_original")
                    if result.status.value == "imported_new" else
                    ("deduplicated_after_download" if captured_http else "deduplicated_original"))
-        _journal(catalog, state, outcome=outcome, canonical_path=result.canonical_path)
-        # Only complete catalog + fact + journal success permits staging cleanup.
+        attempt = _journal(catalog, state, outcome=outcome, canonical_path=result.canonical_path)
+        _persist_completed(catalog, state, out, journal_attempt_id=attempt.attempt_id)
+        # A durable result must survive a lost response before raw cleanup.
         writer._remove_staged(staged)
         descriptor.unlink()
         return out
@@ -393,30 +438,145 @@ def import_official_source(catalog, *, original: bytes, request: dict[str, Any])
     return _import_retained(catalog, staged, descriptor, state, bytes_validated=True)
 
 
-def _load_retained(catalog, capture_id):
-    if not isinstance(capture_id, str) or not re.fullmatch(r"[0-9a-f]{32}", capture_id):
+def _capture_id(value):
+    if not isinstance(value, str) or not re.fullmatch(r"[0-9a-f]{32}", value):
         raise OfficialSourceError("invalid_capture_id")
-    root = _staging_root(catalog)
-    descriptor = root / (capture_id + ".capture.json")
-    if descriptor.is_symlink():
+    return value
+
+
+def _read_capture_record(path, *, error_code):
+    if path.is_symlink():
         raise OfficialSourceError("unsafe_retained_capture")
-    if not descriptor.is_file():
-        raise OfficialSourceError("retained_capture_receipt_unavailable")
-    with descriptor.open("rb") as stream:
+    with path.open("rb") as stream:
         raw = stream.read(65537)
     if len(raw) > 65536:
         raise OfficialSourceError("capture_receipt_limit")
-    state = json.loads(raw)
+    def unique_pairs(items):
+        value = {}
+        for key, item in items:
+            if key in value:
+                raise ValueError()
+            value[key] = item
+        return value
+    def invalid_constant(_):
+        raise ValueError()
+    try:
+        state = json.loads(raw, object_pairs_hook=unique_pairs, parse_constant=invalid_constant)
+        if not isinstance(state, dict):
+            raise ValueError()
+    except (ValueError, UnicodeError, RecursionError):
+        raise OfficialSourceError(error_code) from None
+    return state
+
+
+def _load_retained(catalog, capture_id):
+    _capture_id(capture_id)
+    root = _staging_root(catalog)
+    descriptor = root / (capture_id + ".capture.json")
+    if not descriptor.is_file():
+        raise OfficialSourceError("retained_capture_receipt_unavailable")
+    state = _read_capture_record(descriptor, error_code="invalid_retained_capture")
     name = state.get("staged_name")
-    if (state.get("schema_version") != "official-source-retained-capture/1"
-            or state.get("capture_id") != capture_id or type(state.get("complete", True)) is not bool
-            or not isinstance(name, str)
-            or not re.fullmatch(capture_id + r"\.[a-z0-9]{1,10}", name)):
-        raise OfficialSourceError("invalid_retained_capture")
+    try:
+        if (state.get("schema_version") != "official-source-retained-capture/1"
+                or state.get("capture_id") != capture_id or type(state.get("complete", True)) is not bool
+                or not isinstance(name, str)
+                or not re.fullmatch(capture_id + r"\.[a-z0-9]{1,10}", name)):
+            raise OfficialSourceError("invalid_retained_capture")
+        _validate_import_header(state.get("request"))
+        request = state["request"]
+        _validate_capture_receipt(request.get("capture_receipt"), sha=request["content_sha256"])
+    except OfficialSourceError:
+        raise OfficialSourceError("invalid_retained_capture") from None
     staged = root / name
     if staged.is_symlink() or not staged.is_file():
         raise OfficialSourceError("retained_original_unavailable")
     return staged, descriptor, state
+
+
+def _persist_completed(catalog, state, out, *, journal_attempt_id):
+    """Bounded capture-output projection, linked to the existing success journal.
+
+    No body, paths, queue or permission is copied here. Persistence occurs
+    before deleting recoverable raw; a failed result write retains the input.
+    Same-ID recovery uses the existing OS file mutex around result lookup/import.
+    """
+    root = _staging_root(catalog)
+    record = {"schema_version": "official-source-completed-capture/1",
+              "capture_id": state["capture_id"], "journal_attempt_id": journal_attempt_id,
+              "source_ref": out["source_ref"], "status": out["status"],
+              "max_bytes": state["request"]["max_bytes"],
+              "capture_receipt": out["capture_receipt"]}
+    encoded = canonical_json(record).encode("utf-8")
+    if len(encoded) > 65536:
+        raise OfficialSourceError("capture_receipt_limit")
+    temporary = root / (uuid.uuid4().hex + ".result.tmp")
+    completed = root / (state["capture_id"] + ".result.json")
+    created = False
+    try:
+        with temporary.open("xb") as stream:
+            created = True
+            stream.write(encoded)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, completed)
+    except Exception as primary:
+        if created:
+            try:
+                temporary.unlink(missing_ok=True)
+            except OSError as cleanup_error:
+                primary.add_note("completion projection cleanup failed: " + type(cleanup_error).__name__)
+        raise
+
+
+def _replay_completed(catalog, capture_id, *, max_bytes=None):
+    from .source_reader import SourceRef
+    from company_wiki.source_contract import source_id_for_sha256
+    path = _staging_root(catalog) / (capture_id + ".result.json")
+    if not path.exists() and not path.is_symlink():
+        return None
+    record = _read_capture_record(path, error_code="invalid_completed_capture")
+    try:
+        value = record.get("source_ref")
+        if (record.get("schema_version") != "official-source-completed-capture/1"
+                or record.get("capture_id") != capture_id
+                or not isinstance(record.get("status"), str)
+                or record["status"] not in {"imported_new", "deduplicated"}
+                or not isinstance(record.get("journal_attempt_id"), str)
+                or not re.fullmatch(r"urn:company-wiki:acquisition-attempt:sha256:[0-9a-f]{64}", record["journal_attempt_id"])
+                or not isinstance(value, dict)
+                or set(value) != {"schema_version", "document_id", "source_id", "content_sha256", "byte_size", "mime_type"}):
+            raise OfficialSourceError("invalid_completed_capture")
+        sha = value["content_sha256"]
+        if (not isinstance(sha, str) or not re.fullmatch(r"[0-9a-f]{64}", sha)
+                or value["schema_version"] != "2.0"
+                or value["source_id"] != source_id_for_sha256(sha)
+                or value["document_id"] != value["source_id"].replace("urn:company-wiki:source:", "urn:company-wiki:document:")
+                or type(value["byte_size"]) is not int or not 0 < value["byte_size"] <= _MAX_BYTES
+                or not isinstance(value["mime_type"], str) or value["mime_type"] not in _SUPPORTED_MIMES):
+            raise OfficialSourceError("invalid_completed_capture")
+        cap = _byte_cap(record.get("max_bytes"))
+        _validate_capture_receipt(record.get("capture_receipt"), sha=sha, byte_size=value["byte_size"])
+    except OfficialSourceError:
+        raise OfficialSourceError("invalid_completed_capture") from None
+    if max_bytes is not None:
+        cap = min(cap, _byte_cap(max_bytes))
+    if value["byte_size"] > cap:
+        raise OfficialSourceError("source_byte_limit")
+    ref = SourceRef(**value)
+    reader = SourceVersionReader(catalog)
+    # Current storage/byte verification is owned by the public reader, streaming
+    # SHA without copying the source body into another output or persisted file.
+    reader.verify_version(ref, purpose="filing_reuse")
+    manifest = reader.describe_version(ref)
+    stored = catalog.reader.exact_source_version(ref.document_id)
+    persisted = observe_metadata(stored["metadata_json"]).metadata
+    return {"schema_version": IMPORT_RESULT_SCHEMA, "status": record["status"],
+            "source_ref": asdict(ref),
+            "metadata": {**manifest, "entity": manifest.get("display_name"),
+                         "publisher": persisted.get("publisher")},
+            "capture_receipt": dict(record["capture_receipt"]), "download_events": 0,
+            "acquisition_usage": {"schema_version": "1.0", "response_bytes": 0, "cost_usd": "0"}}
 
 
 def list_retained_official_captures(catalog):
@@ -443,9 +603,21 @@ def list_retained_official_captures(catalog):
     return result
 
 
-def recover_official_source(catalog, *, capture_id):
-    """Resume the exact persisted capture without another HTTP request."""
-    return _import_retained(catalog, *_load_retained(catalog, capture_id))
+def recover_official_source(catalog, *, capture_id, max_bytes=None):
+    """Resume/replay the exact capture, checking the optional current byte cap."""
+    _capture_id(capture_id)
+    if max_bytes is not None:
+        _byte_cap(max_bytes)
+    root = _staging_root(catalog)
+    # Reuse the existing file mutex; the .r suffix keeps its Win32 name bounded
+    # and distinct from captured raw or recovery records in inventory.
+    with _acquisition_mutex(root / (capture_id + ".r")):
+        replay = _replay_completed(catalog, capture_id, max_bytes=max_bytes)
+        if replay is not None:
+            return replay
+        out = _import_retained(catalog, *_load_retained(catalog, capture_id), max_bytes=max_bytes)
+        out["acquisition_usage"] = {"schema_version": "1.0", "response_bytes": 0, "cost_usd": "0"}
+        return out
 
 
 def capture_official_source(catalog, *, request, budget=None, transport=None):
@@ -468,7 +640,7 @@ def capture_official_source(catalog, *, request, budget=None, transport=None):
             or not isinstance(seconds, (int, float)) or not 0 < seconds <= 300):
         raise OfficialSourceError("invalid_capture_limits")
     mime = request.get("mime_type")
-    if mime not in _SUPPORTED_MIMES:
+    if not isinstance(mime, str) or mime not in _SUPPORTED_MIMES:
         raise OfficialSourceError("unsupported_mime")
     expected = request.get("expected_content_sha256")
     if expected is not None and (not isinstance(expected, str) or not re.fullmatch(r"[0-9a-f]{64}", expected)):
@@ -500,7 +672,7 @@ def capture_official_source(catalog, *, request, budget=None, transport=None):
                 _, _, state = _load_retained(catalog, retained["capture_id"])
                 if state["request"]["source"]["entity"] != source["entity"]:
                     raise OfficialSourceError("source_identity_conflict")
-                out = recover_official_source(catalog, capture_id=retained["capture_id"])
+                out = recover_official_source(catalog, capture_id=retained["capture_id"], max_bytes=cap)
                 out["acquisition_usage"] = {"schema_version": "1.0", "response_bytes": 0, "cost_usd": "0"}
                 return out
     _staging_root(catalog)  # The existing journal also needs its configured parent.

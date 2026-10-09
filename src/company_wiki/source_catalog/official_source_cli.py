@@ -84,7 +84,7 @@ def main(argv=None):
                     result = {"schema_version": "official-source-recovery-inventory/1",
                               "captures": list_retained_official_captures(catalog)}
                 else:
-                    result = recover_official_source(catalog, capture_id=request["capture_id"])
+                    result = recover_official_source(catalog, capture_id=request["capture_id"], max_bytes=request.get("max_bytes"))
         else:
             if request.get("schema_version") != "official-discovery-request/1":
                 raise ValueError("invalid_discovery_schema")
