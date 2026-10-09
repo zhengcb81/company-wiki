@@ -1,0 +1,217 @@
+{
+  "schema_version": "asof-clock-fixed71-evidence/1",
+  "status": "OBSERVED_FAIL_NOT_RERUN",
+  "as_of_date": "2026-10-08",
+  "report_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\full_replay_979792e0.json",
+  "report_sha256": "1e5478ba1ffb836ce24dc6bd18f6a8cb207f6efd7971301a47abcffd116901c6",
+  "cases_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\benchmarks\\cross_market_rf\\cases.json",
+  "cases_sha256": "88d272f741aca8e53973f02faf2c774befd9085b5d206bdab84607e209bfbeb4",
+  "cases_sha_matches_report_spec": true,
+  "versions": {
+    "rf": "e688b0a2dceeb7de453e43dad3534061bf346bc9",
+    "ff": "59c4d0d96f02e039298dfbbbbcd3f79200711f78",
+    "cwp": "979792e0a4105b18aed06dc7053f7bc239de6865",
+    "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+    "et": "f4f2eca0e27ab877b9ab2012a28c70468eb3a364"
+  },
+  "seconds": 144.37,
+  "check_count": 71,
+  "report_status": "FAIL",
+  "external_model_calls": 0,
+  "project_llm_cost_usd": 0,
+  "test_root_restored_absent": true,
+  "cases": [
+    {
+      "case": "CN-688012",
+      "raw_replay": {
+        "case": "CN-688012",
+        "id": "raw_replay",
+        "status": "PASS",
+        "detail": "registration idempotent; verified original byte open",
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "byte_size": 9165875,
+          "mime_type": "application/pdf",
+          "schema_version": "2.0"
+        }
+      },
+      "rf_ff_reuse": {
+        "case": "CN-688012",
+        "id": "rf_ff_reuse",
+        "status": "BLOCKED",
+        "detail": "real source preparation refused; no fixture success substituted",
+        "error": "{\"error_code\": \"upstream\", \"error\": \"source capture is outside as_of_date\"}\r\n"
+      },
+      "source_preparation_command": {
+        "index": 1,
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-m3yioxkm\\rf\\scripts\\source_preparation.py",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-m3yioxkm\\ff-cwp.json",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-m3yioxkm\\wiki\\config\\source_catalog.yaml",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-m3yioxkm\\ff",
+          "--timeout-seconds",
+          "45"
+        ],
+        "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-m3yioxkm",
+        "seconds": 3.202,
+        "returncode": 3,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_bytes": 0,
+        "stderr_sha256": "be4a2166751c6f030b5d6d5528d1cd73eb53f1cd67bbb682d86f717c8166a5a8",
+        "stderr_bytes": 77,
+        "stderr_excerpt": "{\"error_code\": \"upstream\", \"error\": \"source capture is outside as_of_date\"}\r\n"
+      },
+      "input_clock_facts": {
+        "case_source_published_date": "2026-03-31",
+        "manifest_published_date_from_metadata_setdefault": "2026-03-31",
+        "manifest_original_retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "source_url": "https://static.cninfo.com.cn/finalpage/2026-03-31/1225062431.PDF",
+        "source_metadata_locator": "cases/0/sources/0/metadata",
+        "current_read_at_in_failure_report": null,
+        "read_at_not_exported_note": "Failed adapter returns no SourceRecord/trace. Current CWP reader creates a real UTC read_at; no raw read receipt is invented here."
+      }
+    },
+    {
+      "case": "HK-00700",
+      "raw_replay": {
+        "case": "HK-00700",
+        "id": "raw_replay",
+        "status": "PASS",
+        "detail": "registration idempotent; verified original byte open",
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "byte_size": 4428270,
+          "mime_type": "application/pdf",
+          "schema_version": "2.0"
+        }
+      },
+      "rf_ff_reuse": {
+        "case": "HK-00700",
+        "id": "rf_ff_reuse",
+        "status": "BLOCKED",
+        "detail": "real source preparation refused; no fixture success substituted",
+        "error": "{\"error_code\": \"upstream\", \"error\": \"source capture is outside as_of_date\"}\r\n"
+      },
+      "source_preparation_command": {
+        "index": 12,
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-m3yioxkm\\rf\\scripts\\source_preparation.py",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-m3yioxkm\\ff-cwp.json",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-m3yioxkm\\wiki\\config\\source_catalog.yaml",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-m3yioxkm\\ff",
+          "--timeout-seconds",
+          "45"
+        ],
+        "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-m3yioxkm",
+        "seconds": 2.845,
+        "returncode": 3,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_bytes": 0,
+        "stderr_sha256": "be4a2166751c6f030b5d6d5528d1cd73eb53f1cd67bbb682d86f717c8166a5a8",
+        "stderr_bytes": 77,
+        "stderr_excerpt": "{\"error_code\": \"upstream\", \"error\": \"source capture is outside as_of_date\"}\r\n"
+      },
+      "input_clock_facts": {
+        "case_source_published_date": "2026-10-08",
+        "manifest_published_date_from_metadata_setdefault": "2026-04-09",
+        "manifest_original_retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+        "source_metadata_locator": "cases/1/sources/0/metadata",
+        "current_read_at_in_failure_report": null,
+        "read_at_not_exported_note": "Failed adapter returns no SourceRecord/trace. Current CWP reader creates a real UTC read_at; no raw read receipt is invented here."
+      }
+    },
+    {
+      "case": "US-MSFT",
+      "raw_replay": {
+        "case": "US-MSFT",
+        "id": "raw_replay",
+        "status": "PASS",
+        "detail": "registration idempotent; verified original byte open",
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+          "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+          "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+          "byte_size": 8158067,
+          "mime_type": "text/html",
+          "schema_version": "2.0"
+        }
+      },
+      "rf_ff_reuse": {
+        "case": "US-MSFT",
+        "id": "rf_ff_reuse",
+        "status": "BLOCKED",
+        "detail": "real source preparation refused; no fixture success substituted",
+        "error": "{\"error_code\": \"upstream\", \"error\": \"source capture is outside as_of_date\"}\r\n"
+      },
+      "source_preparation_command": {
+        "index": 17,
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-m3yioxkm\\rf\\scripts\\source_preparation.py",
+          "--company-wiki-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-m3yioxkm\\ff-cwp.json",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-m3yioxkm\\wiki\\config\\source_catalog.yaml",
+          "--filing-fetch-root",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-m3yioxkm\\ff",
+          "--timeout-seconds",
+          "45"
+        ],
+        "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-m3yioxkm",
+        "seconds": 2.745,
+        "returncode": 3,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_bytes": 0,
+        "stderr_sha256": "be4a2166751c6f030b5d6d5528d1cd73eb53f1cd67bbb682d86f717c8166a5a8",
+        "stderr_bytes": 77,
+        "stderr_excerpt": "{\"error_code\": \"upstream\", \"error\": \"source capture is outside as_of_date\"}\r\n"
+      },
+      "input_clock_facts": {
+        "case_source_published_date": "2025-07-30",
+        "manifest_published_date_from_metadata_setdefault": "2025-07-30",
+        "manifest_original_retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "source_metadata_locator": "cases/2/sources/0/metadata",
+        "current_read_at_in_failure_report": null,
+        "read_at_not_exported_note": "Failed adapter returns no SourceRecord/trace. Current CWP reader creates a real UTC read_at; no raw read receipt is invented here."
+      }
+    }
+  ],
+  "independent_failures": [
+    {
+      "case": "HK-00700",
+      "id": "formal_forecast",
+      "status": "FAIL",
+      "detail": "command 13 returned 2: error: 1 validation problem(s) found:\r\n[growth_driver_tree]\r\n  - paid_social_stabilization: the same excerpt cannot support and contradict (claims: claim_growth_driver_paid_social_stabilization_checked_63, claim_growth_driver_paid_social_stabilization_contrary_64)\r\n b''"
+    },
+    {
+      "case": "US-MSFT",
+      "id": "format_pptx",
+      "status": "FAIL",
+      "detail": "actual finite Worker outcome: partial; reason=None; document_errors=[['PARSER_INCOMPLETE']]"
+    }
+  ],
+  "no_new_execution": true
+}

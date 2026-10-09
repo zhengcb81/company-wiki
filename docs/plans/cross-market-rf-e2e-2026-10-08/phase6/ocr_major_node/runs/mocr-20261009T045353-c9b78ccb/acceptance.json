@@ -1,0 +1,375 @@
+{
+  "schema_version": "main-ocr-major-node/1",
+  "operation": "preflight",
+  "attempt_id": "mocr-20261009T045353-c9b78ccb",
+  "started_at": "2026-10-09T04:53:53.526727Z",
+  "live_batch_executed": false,
+  "protected_before": {
+    "config.yaml": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml",
+      "sha256": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+      "byte_size": 3602,
+      "mtime_ns": 1791230922098841600
+    },
+    "config/source_catalog.yaml": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "byte_size": 866,
+      "mtime_ns": 1790542565101886700
+    },
+    "config/local_ocr.json": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\local_ocr.json",
+      "sha256": "9b8a7df81ca62ebc4bb9c2d60d45c247b291564a4a38f5648e5f4b3edb59889b",
+      "byte_size": 943,
+      "mtime_ns": 1791519643945418900
+    },
+    ".env": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.env",
+      "sha256": "8d24dc08b82b41fd7f1c24e0b6f3fb65b0202ee0a38c52a6955f21e0a097c853",
+      "byte_size": 1137,
+      "mtime_ns": 1784406996168687800
+    },
+    "docs/plans/cross-market-rf-e2e-2026-10-08/task_plan.md": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\task_plan.md",
+      "sha256": "9f9bc4d4e25baabeae6078c3e8a73dc138fc37e9bacde98bfbc8b7872b94e756",
+      "byte_size": 17302,
+      "mtime_ns": 1791520743567362400
+    },
+    "docs/plans/cross-market-rf-e2e-2026-10-08/findings.md": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\findings.md",
+      "sha256": "8b2ef8a665bf5085f72956149b6d5993f376a3fb8cf0422877d6a285c70b2172",
+      "byte_size": 39156,
+      "mtime_ns": 1791520743567362400
+    },
+    "docs/plans/cross-market-rf-e2e-2026-10-08/progress.md": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\progress.md",
+      "sha256": "06eab03abec473858fbb21c87a3d994b1f5251b2595caf9401773c9fd7c20860",
+      "byte_size": 61574,
+      "mtime_ns": 1791520743567362400
+    },
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_budget_preparation.json": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_budget_preparation.json",
+      "sha256": "9f3310064333178a97a2fbb318883642694376ad4a8ef0312a9338934bc27782",
+      "byte_size": 1278,
+      "mtime_ns": 1791519643987202800
+    }
+  },
+  "head": "979792e0a4105b18aed06dc7053f7bc239de6865",
+  "preflight": {
+    "status": "PREPARED_NOT_RUN",
+    "real_cli_help_commands": [
+      {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-m",
+          "company_wiki.source_catalog.official_source_cli",
+          "--help"
+        ],
+        "started_at": "2026-10-09T04:53:54.312197Z",
+        "finished_at": "2026-10-09T04:53:54.954576Z",
+        "elapsed_seconds": 0.642,
+        "exit_code": 0,
+        "outer_timeout": false,
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-r8tasrl6\\logs\\help-1-01.stdout",
+          "sha256": "706f9131f55fb6a69851d1ae83eeb51775a5cc3d1651f11277f2bf2303812932",
+          "byte_size": 534,
+          "mtime_ns": 1791521634911645800
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-r8tasrl6\\logs\\help-1-01.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "byte_size": 0,
+          "mtime_ns": 1791521634311909300
+        },
+        "stdin_sha256": null
+      },
+      {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\scripts\\narrative_batch_configured.py",
+          "--help"
+        ],
+        "started_at": "2026-10-09T04:53:54.962737Z",
+        "finished_at": "2026-10-09T04:53:55.922052Z",
+        "elapsed_seconds": 0.959,
+        "exit_code": 0,
+        "outer_timeout": false,
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-r8tasrl6\\logs\\help-2-01.stdout",
+          "sha256": "9e70450a1eda656952b14c3078b19fcccef967134b3c0ab54ff44e6593fa02ad",
+          "byte_size": 965,
+          "mtime_ns": 1791521635871268500
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-r8tasrl6\\logs\\help-2-01.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "byte_size": 0,
+          "mtime_ns": 1791521634962533700
+        },
+        "stdin_sha256": null
+      },
+      {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-m",
+          "company_wiki.source_catalog.narrative_transport_cli",
+          "--help"
+        ],
+        "started_at": "2026-10-09T04:53:55.926156Z",
+        "finished_at": "2026-10-09T04:53:56.717510Z",
+        "elapsed_seconds": 0.791,
+        "exit_code": 0,
+        "outer_timeout": false,
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-r8tasrl6\\logs\\help-3-01.stdout",
+          "sha256": "7dca76cf0e91f3e3385fc9f01b0a33d0364e3051c89c75f1bb4e613ef6cb7c22",
+          "byte_size": 873,
+          "mtime_ns": 1791521636665806300
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-r8tasrl6\\logs\\help-3-01.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "byte_size": 0,
+          "mtime_ns": 1791521635925874800
+        },
+        "stdin_sha256": null
+      }
+    ],
+    "contract_checks": [
+      "catalog-owned-root",
+      "official-source-metadata-and-local-capture",
+      "batch-first",
+      "batch-reuse",
+      "existing-bundle",
+      "reference-request",
+      "read-request"
+    ],
+    "vendor_requests": 0,
+    "deck_normalizations": 0,
+    "ocr_inferences": 0,
+    "existing_fixture_is_not_a_live_import_or_http_receipt": true
+  },
+  "status": "PREPARED_NOT_RUN",
+  "finished_at": "2026-10-09T04:53:56.723408Z",
+  "protected_after": {
+    "config.yaml": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml",
+      "sha256": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+      "byte_size": 3602,
+      "mtime_ns": 1791230922098841600
+    },
+    "config/source_catalog.yaml": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "byte_size": 866,
+      "mtime_ns": 1790542565101886700
+    },
+    "config/local_ocr.json": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\local_ocr.json",
+      "sha256": "9b8a7df81ca62ebc4bb9c2d60d45c247b291564a4a38f5648e5f4b3edb59889b",
+      "byte_size": 943,
+      "mtime_ns": 1791519643945418900
+    },
+    ".env": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.env",
+      "sha256": "8d24dc08b82b41fd7f1c24e0b6f3fb65b0202ee0a38c52a6955f21e0a097c853",
+      "byte_size": 1137,
+      "mtime_ns": 1784406996168687800
+    },
+    "docs/plans/cross-market-rf-e2e-2026-10-08/task_plan.md": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\task_plan.md",
+      "sha256": "9f9bc4d4e25baabeae6078c3e8a73dc138fc37e9bacde98bfbc8b7872b94e756",
+      "byte_size": 17302,
+      "mtime_ns": 1791520743567362400
+    },
+    "docs/plans/cross-market-rf-e2e-2026-10-08/findings.md": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\findings.md",
+      "sha256": "8b2ef8a665bf5085f72956149b6d5993f376a3fb8cf0422877d6a285c70b2172",
+      "byte_size": 39156,
+      "mtime_ns": 1791520743567362400
+    },
+    "docs/plans/cross-market-rf-e2e-2026-10-08/progress.md": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\progress.md",
+      "sha256": "06eab03abec473858fbb21c87a3d994b1f5251b2595caf9401773c9fd7c20860",
+      "byte_size": 61574,
+      "mtime_ns": 1791520743567362400
+    },
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_budget_preparation.json": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_budget_preparation.json",
+      "sha256": "9f3310064333178a97a2fbb318883642694376ad4a8ef0312a9338934bc27782",
+      "byte_size": 1278,
+      "mtime_ns": 1791519643987202800
+    }
+  },
+  "protected_unchanged": true,
+  "preparation": {
+    "schema_version": "main-ocr-major-node/1",
+    "attempt_id": "mocr-20261009T045353-c9b78ccb",
+    "created_at": "2026-10-09T04:53:54.292957Z",
+    "owned_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-r8tasrl6",
+    "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "source": {
+      "archive_index": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\delivery_archive_index.json",
+        "sha256": "60c0c8dfd901bfbd8c8dc8604ade1589b6aca61f98afab227ba584c69045f89a",
+        "byte_size": 144427,
+        "mtime_ns": 1791450581148860600
+      },
+      "original": {
+        "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\c0\\c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "byte_size": 4016522,
+        "mtime_ns": 1791450580109140500
+      },
+      "filename": "fy2027_segments_metrics.pptx",
+      "title": "FY27 Segments and Investor Metrics",
+      "url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/FY27ExternalKPIs.pptx",
+      "published_date": "2026-09-02",
+      "entity": "Microsoft",
+      "market": "US",
+      "security_id": "MSFT"
+    },
+    "budget_baseline": {
+      "schema_version": "main-cumulative-budget-preparation/1",
+      "checked_at": "2026-10-09T04:20:43.987522+00:00",
+      "historical_receipt": "docs/plans/narrative-evidence-pilot-2026-09-26/harness_lanes/results/r3_production_live_batch_2026-10-08.json",
+      "cumulative_tokens": 199534,
+      "cumulative_estimated_micro_usd": 110737,
+      "historical_unknown_reservations": 7,
+      "fx_guard_micro_usd": 2764,
+      "effective_cap_tokens": 2000000,
+      "effective_cap_micro_usd": 20000000,
+      "native_reservations_already_in_historical_total": [
+        {
+          "run_id": "r3-20261008-production-deepseek-01",
+          "usage_status": "known",
+          "input_tokens": 2431,
+          "output_tokens": 7068,
+          "estimated_micro_usd": 10235,
+          "input_tokens_bound": 11001,
+          "max_output_tokens": 8192,
+          "reserved_micro_usd": 14590,
+          "error_code": null
+        }
+      ],
+      "double_counted_native": false,
+      "new_supplier_calls_this_engineering_node": 0,
+      "remaining_tokens": 1800466,
+      "remaining_micro_usd_after_fx": 19886499,
+      "per_company_cap_tokens": 120000,
+      "per_company_cap_micro_usd": 2000000,
+      "six_company_max_allocated_tokens": 720000,
+      "six_company_max_allocated_micro_usd": 12000000,
+      "ocr_major_node_separate_cap_tokens": 30000,
+      "ocr_major_node_separate_cap_micro_usd": 100000
+    },
+    "budget_baseline_file": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_budget_preparation.json",
+      "sha256": "9f3310064333178a97a2fbb318883642694376ad4a8ef0312a9338934bc27782",
+      "byte_size": 1278,
+      "mtime_ns": 1791519643987202800
+    },
+    "historical_receipt": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\narrative-evidence-pilot-2026-09-26\\harness_lanes\\results\\r3_production_live_batch_2026-10-08.json",
+      "sha256": "56264ae987257798153dbcc8aa4ce9b6a122669038bf758a5312c3f2f6454f4f",
+      "byte_size": 1841,
+      "mtime_ns": 1791440246490717400
+    },
+    "ocr_identity": {
+      "schema_version": "cwp-local-ocr-config/1",
+      "adapter": "rapidocr-cpu/1",
+      "engine_version": "3.8.1",
+      "runtime_version": "1.26.0",
+      "base_config_sha256": "e753d39c0222297f0180e1bdcde1799bc26218f315356763362810846b6afa84",
+      "models": {
+        "det": "d2a7720d45a54257208b1e13e36a8479894cb74155a5efe29462512d42f49da9",
+        "cls": "e47acedf663230f8863ff1ab0e64dd2d82b838fceb5957146dab185a89d6215c",
+        "rec": "48fc40f24f6d2a207a2b1091d3437eb3cc3eb6b676dc3ef9c37384005483683b"
+      },
+      "device": "cpu",
+      "text_score": 0.5,
+      "low_confidence_threshold": 0.8,
+      "max_side_len": 3000,
+      "intra_op_threads": 2,
+      "inter_op_threads": 1,
+      "box_round_decimals": 3,
+      "confidence_round_decimals": 6,
+      "reading_order": "top-left-box/1",
+      "transform": "rapidocr-image-rgb/1"
+    },
+    "ocr_fingerprint": "7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d",
+    "ocr_resources": {
+      "det": {
+        "path": "C:\\Miniconda\\Lib\\site-packages\\rapidocr\\models\\ch_PP-OCRv4_det_mobile.onnx",
+        "sha256": "d2a7720d45a54257208b1e13e36a8479894cb74155a5efe29462512d42f49da9",
+        "byte_size": 4745517,
+        "mtime_ns": 1780351615923907200
+      },
+      "cls": {
+        "path": "C:\\Miniconda\\Lib\\site-packages\\rapidocr\\models\\ch_ppocr_mobile_v2.0_cls_mobile.onnx",
+        "sha256": "e47acedf663230f8863ff1ab0e64dd2d82b838fceb5957146dab185a89d6215c",
+        "byte_size": 585532,
+        "mtime_ns": 1780351617143699400
+      },
+      "rec": {
+        "path": "C:\\Miniconda\\Lib\\site-packages\\rapidocr\\models\\ch_PP-OCRv4_rec_mobile.onnx",
+        "sha256": "48fc40f24f6d2a207a2b1091d3437eb3cc3eb6b676dc3ef9c37384005483683b",
+        "byte_size": 10857958,
+        "mtime_ns": 1780351623755661400
+      }
+    },
+    "model": {
+      "model_id": "deepseek-flash",
+      "endpoint": "https://api.deepseek.com/chat/completions",
+      "api_key_env": "DEEPSEEK_API_KEY",
+      "max_output_tokens": 8192,
+      "temperature": 1.0,
+      "output_token_field": "max_tokens"
+    },
+    "run_ids": {
+      "first": "mocr-20261009T045353-c9b78ccb-first",
+      "reuse": "mocr-20261009T045353-c9b78ccb-reuse"
+    },
+    "config_hashes": {
+      "config\\local_ocr.json": {
+        "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-r8tasrl6\\config\\local_ocr.json",
+        "sha256": "3ef4d36adff892e66115271a15e3e73dd20a530af615e24d80cdb35f4cf20105",
+        "byte_size": 968,
+        "mtime_ns": 1791521634258973600
+      },
+      "config\\source_catalog.yaml": {
+        "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-r8tasrl6\\config\\source_catalog.yaml",
+        "sha256": "2fefe373696eab502bc5506e8ff5e112ec5c085bb9b6376792a32fbf2015121a",
+        "byte_size": 371,
+        "mtime_ns": 1791521634259910900
+      },
+      "config.yaml": {
+        "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-r8tasrl6\\config.yaml",
+        "sha256": "a76552606afe7201fadf4275319f8e7f23fbb2df867822fc806df89defcd3a37",
+        "byte_size": 386,
+        "mtime_ns": 1791521634259910900
+      }
+    }
+  },
+  "original_after": {
+    "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\c0\\c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+    "sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+    "byte_size": 4016522,
+    "mtime_ns": 1791450580109140500
+  },
+  "original_unchanged": true,
+  "origin_owned_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-r8tasrl6",
+  "recovery_command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\ocr_major_node\\run_acceptance.py",
+    "resume",
+    "--owned-root",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-r8tasrl6"
+  ],
+  "preflight_temp_removed": true
+}

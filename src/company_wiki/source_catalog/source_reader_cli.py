@@ -18,6 +18,10 @@ from typing import Sequence
 from .config import CatalogConfigError, load_catalog_config
 from .reader import CatalogReaderUnavailable
 from .service import SourceCatalog
+from .source_availability import (
+    AVAILABILITY_RECEIPT_SCHEMA_VERSION,
+    verified_availability_evidence,
+)
 from .source_reader import (
     SOURCE_READ_RECEIPT_SCHEMA_VERSION,
     SourceReadError,
@@ -44,6 +48,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--content-sha256", required=True)
     parser.add_argument("--purpose", default="filing_reuse")
     parser.add_argument("--expected-read-policy-sha256")
+    parser.add_argument("--include-availability-evidence", action="store_true",
+                        help="Return receipt 2.2 with existing historical capture evidence, or null.")
     catalog: SourceCatalog | None = None
     try:
         args = parser.parse_args(argv)
@@ -58,11 +64,16 @@ def main(argv: Sequence[str] | None = None) -> int:
             expected_read_policy_sha256=args.expected_read_policy_sha256,
         )
         manifest = reader.describe_version(ref)
+        extension = {}
+        if args.include_availability_evidence:
+            extension["availability_evidence"] = verified_availability_evidence(catalog, ref)
         sys.stdout.buffer.write(opened.data)
         sys.stdout.buffer.flush()
         _emit_receipt(
             {
-                "schema_version": SOURCE_READ_RECEIPT_SCHEMA_VERSION,
+                "schema_version": (AVAILABILITY_RECEIPT_SCHEMA_VERSION
+                                   if args.include_availability_evidence
+                                   else SOURCE_READ_RECEIPT_SCHEMA_VERSION),
                 "status": "ok",
                 "document_id": opened.document_id,
                 "source_id": opened.source_id,
@@ -73,6 +84,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 "read_at": opened.read_at,
                 "manifest": manifest,
                 "review": asdict(opened.review) if opened.review is not None else None,
+                **extension,
             }
         )
         return 0

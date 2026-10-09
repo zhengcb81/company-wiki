@@ -135,7 +135,7 @@ RF四个独立验收finding的共用关系修复在 `a7370517`，owner集中201P
 | 71固定检查 / 原三家新研究 / 新三家 | 待工程接线完成后大节点实施 | `phase6/fresh_research_major_node.md`；实际独立executor及每公司四审查 |
 | 公司池loop | 后置，未重抽 | 冻结NVDA首轮24发现保留；主线全部完成后恢复原attempt责任 |
 
-当前总目标继续active，不停在工程绿。下一步：接收shared最终交付→正常merge/commit/push→精确CI及真实OCR公共链→固定71对照→原三家全新RF研究和四独立审查→固定新三家→公司池loop。只在这些大节点审查；失败保持旧记录，根因修正，不删除检查点、不加人工签收。
+当前总目标继续active，不停在工程绿。本表是04:39历史快照；当前状态以末尾实际共因施工与发布记录为准。剩余为真实路径根因修复→固定71对照→原三家全新RF研究和四独立审查→固定新三家→公司池loop。失败保持旧记录，不删除检查点、不加人工签收。
 
 
 ## 2026-10-09：shared接线发布与大节点新反例
@@ -147,3 +147,25 @@ shared交付67b55d72正常合入master979792e0并push，15runtime/test交付SHA�
 另一个共用效率原因已结构定位：legacy缺URL治理retired原件真实存在、普通scan sticky，不会自动成为reuse候选，可能fetch后才按SHA去重。`phase6/legacy_local_reuse_diagnosis/`独立只读反例进行中；应在真实六家前决定通用零下载reconcile入口，不粗暴active所有退休源或用公司特判隐藏缺陷。Dayu code零改动。
 
 当前Next Step：完成这两个实际共因的责任细则/TDD通用修复；真实22页public batch/read/跨run零调用复用；同一固定71对照（未变研究输入不宣称全绿）；原三家、新三家真实执行+四独立审查；最后恢复冻结NVDA及公司池loop。目标仍active，主线未完成，loop尚未启动。
+
+
+### 2026-10-09 实际OCR节点与新增共因施工
+
+真实22页节点已运行一次，不是NOT_RUN：`phase6/ocr_major_node/runs/mocr-20261009T045902-933be853/acceptance.json`保存FAILED_RETAIN_ORIGIN。官方local import0download完成，首select真实126秒后终止：`PARSER_INCOMPLETE / empty selection does not have complete coverage`，后两依赖dead_letter。原生tokens/cost/unknown/unsettled全0、无模型admission；原件SHA/size/mtime及protected配置/PWF前后全相等。保留owned origin `C:/Users/郑曾波/AppData/Local/Temp/mOCR-srw9_9oe`供诊断，不盲resume不可复活的旧terminal jobs、不开新run绕账。
+
+当前根因优先包：
+
+1. [legacy local reconcile施工卡](phase6/legacy_local_reuse_diagnosis/IMPLEMENTATION_CARD.md)已由MAIN审读，单一CWP owner开始隔离TDD实现；退休原因分类、实际bytes/issuer/period、facts+restore单事务、重复0fetch；真正withdrawn/damaged不active，不去全改9499状态，不动Dayu。source-query继续只读，公共localprepare接线由MAIN整合FF。
+2. `phase6/asof_clock_diagnosis/`统一publication/availability/read/capture/verify责任细则正在调查。已定位RF不止一处抓取<=asof门，也存在新claim verified_date直接写asof的错误；必须共用时钟资格，不伪造旧日期，不放行future材料，旧frozen字节保留。RF单一owner负责其目录，CWP可选availability DTO由MAIN统一接口。
+3. `phase6/ocr_selection_diagnosis/`独立实查为什么已识读图文未成为任何有效candidate；先判断分行/role/group/filter或该材料真实无业务价值，再通用TDD。不为节点绿降低阈值或强选财务表；需要最小真实页样本才另安排，不重复全22页。脚本原要求selection==selected已修为合法selected/partial，但仍要求completed summary、parsed/high-confidence selected spans、精确publicreplay、原语言、全篇coverage=false；这个validator修正不解释本次empty。
+
+上述根因处置后再真实节点的新合法generation验收、固定71对照、原三家与新三家真实研究/四独立审查；全部主线完成后公司池loop。大节点增加的是此前未接起来的真实路径，不新增小节点签收。
+
+### 最新执行责任与已完成发布
+
+- CWP `a40eb065` exact远端 [CI37886236535](https://github.com/zhengcb81/company-wiki/actions/runs/37886236535)成功；shared接线已完成，真实OCR为空仍未关闭，不能用CI替代它。
+- [来源时钟卡](phase6/asof_clock_diagnosis/W01_source_clock.md)已完成诊断；RF单一owner在实际 `Projects/_harness_worktrees/cmrf-20261008/rf-inputs`、`codex/source-clock-20261009` 从e688b0a2实施18责任TDD。保持真实read/capture/verify时间与future-information拒绝，旧封存不重写。
+- MAIN已完成 [CWP最小可选事实生产](phase6/asof_clock_diagnosis/PRODUCER_IMPLEMENTATION.md)：默认2.1不变，显式2.2仅增加已有HTTP capture的availability上界/null；实际集中28PASS/13.51秒、Ruff通过。未制造新publication、数据库或人签；未知格式保留null，不强求多provider proof。
+- legacy local reconcile独占CWP隔离包；MAIN随后负责FF薄CLI组合，Dayu零修改。OCR候选归因包只读交接后实施通用选择/分组TDD；需恢复失败节点时保留旧terminal及费用账，合法新generation不得冒充旧attempt复活。
+
+当前Next Step：三个互不抢写的责任包集中实现/整合→真实OCR公共链与固定71→原三家/新三家实际研究四审→冻结NVDA复验及loop。来源准备文件和诊断报告是工程证据，尚无新六家公司研究PASS。

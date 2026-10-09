@@ -1,0 +1,24 @@
+usage: narrative_batch_configured.py [--llm-config LLM_CONFIG]
+                                     [--llm-provider {minimax,mimo,deepseek,openai}]
+                                     [--allow-local-model-http]
+
+Compose the finite batch CLI with the project's existing LLM config loader.
+
+options:
+  --llm-config LLM_CONFIG
+  --llm-provider {minimax,mimo,deepseek,openai}
+  --allow-local-model-http
+usage: narrative_batch_configured.py [-h] --project-root PROJECT_ROOT
+                                     --catalog-config CATALOG_CONFIG
+                                     --automation-db AUTOMATION_DB
+                                     --work-dir WORK_DIR --request REQUEST
+
+Process explicit source references without translation
+
+options:
+  -h, --help            show this help message and exit
+  --project-root PROJECT_ROOT
+  --catalog-config CATALOG_CONFIG
+  --automation-db AUTOMATION_DB
+  --work-dir WORK_DIR
+  --request REQUEST

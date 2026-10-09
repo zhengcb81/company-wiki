@@ -1,0 +1,26 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\scripts\\narrative_batch_configured.py",
+    "--help"
+  ],
+  "started_at": "2026-10-09T04:53:54.962737Z",
+  "finished_at": "2026-10-09T04:53:55.922052Z",
+  "elapsed_seconds": 0.959,
+  "exit_code": 0,
+  "outer_timeout": false,
+  "stdout": {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-r8tasrl6\\logs\\help-2-01.stdout",
+    "sha256": "9e70450a1eda656952b14c3078b19fcccef967134b3c0ab54ff44e6593fa02ad",
+    "byte_size": 965,
+    "mtime_ns": 1791521635871268500
+  },
+  "stderr": {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-r8tasrl6\\logs\\help-2-01.stderr",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "byte_size": 0,
+    "mtime_ns": 1791521634962533700
+  },
+  "stdin_sha256": null
+}

@@ -1,0 +1,264 @@
+{
+  "schema_version": "asof-clock-tdd-plan/1",
+  "status": "PLAN_NOT_RUN",
+  "as_of_date": "2026-10-08",
+  "actual_red_evidence": "fixed71_evidence.json",
+  "tests": [
+    {
+      "id": "T01",
+      "name": "reader: known publication with late original download",
+      "input": {
+        "published_date": "2026-10-01",
+        "original_retrieved_at": "2026-10-09T09:00:00Z",
+        "read_at": "2026-10-09T12:00:00Z"
+      },
+      "expected": "ALLOW, preserve both real events",
+      "responsibility": "tests/test_company_wiki_source_reader_v2.py",
+      "current_evidence_or_dependency": "Current _validate_manifest_period rejects original retrieval after as_of",
+      "new_test_run_status": "NOT_RUN"
+    },
+    {
+      "id": "T02",
+      "name": "builder: unknown original capture and current real read",
+      "input": {
+        "published_date": "2026-10-01",
+        "original_retrieved_at": null,
+        "read_at": "2026-10-09T12:00:00Z"
+      },
+      "expected": "ALLOW; capture/access Oct9; original retrieval null",
+      "responsibility": "tests/test_company_wiki_source_v2.py",
+      "current_evidence_or_dependency": "Exact adapter error observed in fixed71 all three markets",
+      "new_test_run_status": "NOT_RUN"
+    },
+    {
+      "id": "T03",
+      "name": "builder: original event is not current accessed_date",
+      "input": {
+        "published_date": "2026-10-01",
+        "original_retrieved_at": "2026-10-02T09:00:00Z",
+        "read_at": "2026-10-09T12:00:00Z"
+      },
+      "expected": "capture/access Oct9; keep original Oct2 in trace",
+      "responsibility": "tests/test_company_wiki_source_v2.py",
+      "current_evidence_or_dependency": "Current builder uses original retrieval as current capture",
+      "new_test_run_status": "NOT_RUN"
+    },
+    {
+      "id": "T04",
+      "name": "formal source/capture: real next-day capture",
+      "input": {
+        "published_date": "2026-10-01",
+        "capture_date": "2026-10-09",
+        "host_timestamp": "2026-10-09T12:00:00Z"
+      },
+      "expected": "ALLOW with intact capture/host hashes",
+      "responsibility": "capture contract responsibility test",
+      "current_evidence_or_dependency": "Current validate_source_capture rejects capture later than as_of",
+      "new_test_run_status": "NOT_RUN"
+    },
+    {
+      "id": "T05",
+      "name": "claim: later actual verification, source receipt unchanged",
+      "input": {
+        "published_date": "2026-10-01",
+        "capture_date": "2026-10-02",
+        "verified_date": "2026-10-09"
+      },
+      "expected": "ALLOW; retain Oct9 verified_date and existing valid capture link",
+      "responsibility": "evidence claim responsibility test",
+      "current_evidence_or_dependency": "Current validate_evidence_claims rejects verification later than as_of",
+      "new_test_run_status": "NOT_RUN"
+    },
+    {
+      "id": "T06",
+      "name": "automatic narrative claim uses actual verification event",
+      "input": {
+        "published_date": "2026-10-01",
+        "read_at": "2026-10-09T12:00:00Z"
+      },
+      "expected": "new claim verified_date Oct9, not as_of; existing claims untouched",
+      "responsibility": "source_narrative_context responsibility test",
+      "current_evidence_or_dependency": "Current _claim writes verified_date=as_of",
+      "new_test_run_status": "NOT_RUN"
+    },
+    {
+      "id": "T07",
+      "name": "future publication always refused",
+      "input": {
+        "published_date": "2026-10-09",
+        "read_at": "2026-10-09T12:00:00Z",
+        "prior_proof_available_by": "2026-10-07"
+      },
+      "expected": "REJECT source_publication_after_asof; name conflicting proof if present",
+      "responsibility": "shared helper + reader/builder/formal tests",
+      "current_evidence_or_dependency": "Existing future publication protection must remain",
+      "new_test_run_status": "NOT_RUN"
+    },
+    {
+      "id": "T08",
+      "name": "later actual financial outcome cannot leak",
+      "input": {
+        "actual_source_publication": "2026-10-09",
+        "research_verified_date": "2026-10-10"
+      },
+      "expected": "REJECT actual source; current research date does not authorize future information",
+      "responsibility": "formal engine/backtest availability responsibility test",
+      "current_evidence_or_dependency": "Preserve source publication and actual information-date boundaries",
+      "new_test_run_status": "NOT_RUN"
+    },
+    {
+      "id": "T09",
+      "name": "unknown publication without reliable proof",
+      "input": {
+        "published_date": null,
+        "read_at": "2026-10-09T12:00:00Z",
+        "availability_evidence": null
+      },
+      "expected": "REJECT source_availability_unknown; raw exists is separate",
+      "responsibility": "shared helper + public transport",
+      "current_evidence_or_dependency": "Current interface cannot safely admit unknown publication",
+      "new_test_run_status": "NOT_RUN"
+    },
+    {
+      "id": "T10",
+      "name": "unknown publication with reliable earlier same-version proof",
+      "input": {
+        "published_date": null,
+        "proof_available_by": "2026-10-07",
+        "proof_matches_exact_raw_sha": true,
+        "read_at": "2026-10-09T12:00:00Z"
+      },
+      "expected": "ALLOW source information; publication remains null; no invented exact communication window",
+      "responsibility": "shared helper + producer/RF transport extension",
+      "current_evidence_or_dependency": "Requires actual CWP proof resolver and declared receipt2.2; unit fixture alone is not production proof",
+      "new_test_run_status": "NOT_RUN"
+    },
+    {
+      "id": "T11",
+      "name": "unknown publication with only later proof",
+      "input": {
+        "published_date": null,
+        "proof_available_by": "2026-10-09"
+      },
+      "expected": "REJECT source_availability_after_asof",
+      "responsibility": "shared helper + public transport",
+      "current_evidence_or_dependency": "Do not use current capture as historical availability",
+      "new_test_run_status": "NOT_RUN"
+    },
+    {
+      "id": "T12",
+      "name": "changed raw bytes do not inherit old proof",
+      "input": {
+        "published_date": null,
+        "proof_sha": "old SHA",
+        "current_raw_sha": "different SHA",
+        "same_url_and_title": true
+      },
+      "expected": "REJECT source_availability_version_mismatch; no inherited publication assertion",
+      "responsibility": "shared helper + producer/version read",
+      "current_evidence_or_dependency": "Preserve raw identity and version-sensitive proof",
+      "new_test_run_status": "NOT_RUN"
+    },
+    {
+      "id": "T13",
+      "name": "untrusted timestamps cannot become availability proof",
+      "input": {
+        "published_date": null,
+        "bare_retrieved_at": "2026-10-07T00:00:00Z",
+        "mtime_before_asof": true,
+        "call_date_before_asof": true
+      },
+      "expected": "REJECT unknown availability; no inference from these fields",
+      "responsibility": "shared helper + producer proof validation",
+      "current_evidence_or_dependency": "No mtime/date-default or caller self-attestation fallback",
+      "new_test_run_status": "NOT_RUN"
+    },
+    {
+      "id": "T14",
+      "name": "named date conflicts",
+      "input": {
+        "variants": [
+          "current read before known publication",
+          "current capture date mismatches actual read",
+          "claim check before its bound capture",
+          "prior public availability proof contradicts future publication"
+        ]
+      },
+      "expected": "REJECT source_clock_conflict or future-publication priority; include field names/actual values",
+      "responsibility": "event chronology + source/claim boundaries",
+      "current_evidence_or_dependency": "Do not silently repair/backdate date conflicts",
+      "new_test_run_status": "NOT_RUN"
+    },
+    {
+      "id": "T15",
+      "name": "versioned strict proof transport",
+      "input": {
+        "variants": [
+          "unchanged2.1",
+          "2.2 exact extra availability key",
+          "unknown receipt version",
+          "extra field",
+          "malformed/mismatched proof"
+        ]
+      },
+      "expected": "2.1 compatible; valid declared2.2 recognized; all drift refused; manifest fields unchanged",
+      "responsibility": "tests/test_company_wiki_source_reader_v2.py + CWP source reader CLI",
+      "current_evidence_or_dependency": "Proposed2.2 is not implemented today",
+      "new_test_run_status": "NOT_RUN"
+    },
+    {
+      "id": "T16",
+      "name": "frozen bytes and old runtime compatibility",
+      "input": {
+        "snapshot_runtime": "existing pinned engine",
+        "current_real_read_date": "2026-10-09"
+      },
+      "expected": "old snapshot/input/capture/claim/result hashes unchanged; documented runtime path retained",
+      "responsibility": "tests/test_schema_compatibility.py + golden/frozen responsibility tests",
+      "current_evidence_or_dependency": "Do not rehash/migrate old snapshots or inject wallclock into deterministic validator",
+      "new_test_run_status": "NOT_RUN"
+    },
+    {
+      "id": "T17",
+      "name": "UTC day boundary",
+      "input": {
+        "read_at": "2026-10-09T00:30:00+00:00",
+        "host_machine_timezone": "different timezone"
+      },
+      "expected": "capture/access/check use actual UTC event date; as_of unchanged",
+      "responsibility": "reader/builder/narrative date tests",
+      "current_evidence_or_dependency": "Do not local-time slice an offset timestamp to counterfeit historical day",
+      "new_test_run_status": "NOT_RUN"
+    },
+    {
+      "id": "T18",
+      "name": "shared market/format chain",
+      "input": {
+        "formats": [
+          "CN PDF",
+          "HK PDF",
+          "US SEC HTML",
+          "independent-company fixture HTML/PDF"
+        ],
+        "fixed_as_of": "2026-10-08",
+        "real_read_is_later": true
+      },
+      "expected": "same known-publication rule across formats/companies; zero download/provider calls",
+      "responsibility": "tests/test_source_preparation.py + test_source_ref_v2_three_repo_e2e.py + MAIN fixed71",
+      "current_evidence_or_dependency": "No per-company/market special branch or altered frozen input",
+      "new_test_run_status": "NOT_RUN"
+    }
+  ],
+  "sequence": [
+    "isolated responsibility RED",
+    "single RF source clock helper + boundaries GREEN",
+    "MAIN producer extension if reliable proof needed",
+    "one zero-download cross-day integrated formal chain",
+    "one MAIN fixed71 major node only when scope ready"
+  ],
+  "independent_failures_must_remain_explicit": [
+    "HK stale same-excerpt opposite roles",
+    "US image PPTX without OCR fixture partial"
+  ],
+  "no_models_or_providers_for_unit_tdd": true
+}

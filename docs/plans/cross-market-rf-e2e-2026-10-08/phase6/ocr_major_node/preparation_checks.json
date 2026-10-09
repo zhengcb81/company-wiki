@@ -1,0 +1,61 @@
+{
+  "schema_version": "main-ocr-preparation-checks/1",
+  "status": "PREPARED_NOT_RUN",
+  "checked_at": "2026-10-09T04:56:09.624495+00:00",
+  "exact_head": "979792e0a4105b18aed06dc7053f7bc239de6865",
+  "script": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\ocr_major_node\\run_acceptance.py",
+    "sha256": "de5fcb53f1d9197ed2ae93793cc9f1b35bb95229172d8d6a470bd6bcb948f2f5",
+    "byte_size": 36519,
+    "ast_parse": "PASS",
+    "ast_process_argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-"
+    ]
+  },
+  "preflight_command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\ocr_major_node\\run_acceptance.py",
+    "preflight"
+  ],
+  "completed_free_preflights": 2,
+  "completed_cli_help_commands": 6,
+  "completed_contract_checks_per_preflight": 7,
+  "latest_actual_receipt": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\ocr_major_node\\runs\\mocr-20261009T045353-c9b78ccb\\acceptance.json",
+  "actual_receipts": [
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\ocr_major_node\\runs\\mocr-20261009T045121-638cae72\\acceptance.json",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\ocr_major_node\\runs\\mocr-20261009T045353-c9b78ccb\\acceptance.json"
+  ],
+  "initial_failed_invocation": {
+    "schema_version": "main-ocr-preparation-failure/1",
+    "status": "SANDBOX_WRITE_PERMISSION_FAILURE",
+    "operation": "preflight",
+    "process_exit_code": 1,
+    "error": "PermissionError while saving owned TEMP acceptance.json; preceding preparation exception was not preserved by that revision.",
+    "failed_owned_root": "C:\\Users\\郑曾波\\AppData\\Local\\Packages\\sandbox.{9bdbbff8-e9bb-43df-9795-de5d5f5813a4}\\AC\\Temp\\mOCR-bsi4neuj",
+    "later_exact_path_test_exists": false,
+    "successful_checks_not_claimed": true,
+    "vendor_requests": 0,
+    "live_batch_executed": false
+  },
+  "vendor_requests": 0,
+  "ocr_inferences": 0,
+  "deck_normalizations": 0,
+  "new_source_downloads": 0,
+  "unit_tests_run": 0,
+  "real_batch_run": "NOT_RUN",
+  "public_live_read": "NOT_RUN",
+  "second_run_zero_post_acceptance": "NOT_RUN",
+  "all_successful_owned_temps_removed": true,
+  "protected_files_unchanged": true,
+  "archived_original_sha_size_mtime_unchanged": true,
+  "final_live_guard_checks": "code review only: missing jobs refuse, configured summary model identity, no second live workflow",
+  "engineering_composition_acceptance": "NOT_RUN",
+  "product_acceptance": "NOT_PERFORMED",
+  "investment_acceptance": "NOT_PERFORMED",
+  "installs": 0,
+  "commits": 0,
+  "merges": 0
+}

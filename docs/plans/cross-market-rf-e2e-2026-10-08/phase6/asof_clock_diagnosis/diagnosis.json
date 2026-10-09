@@ -1,0 +1,168 @@
+{
+  "schema_version": "asof-clock-diagnosis/1",
+  "root_cause_id": "RC-ASOF-CLOCK-01",
+  "status": "DIAGNOSED_IMPLEMENTATION_NOT_RUN",
+  "as_of_date": "2026-10-08",
+  "observed_heads": {
+    "cwp": "a40eb065da1bb21d231d2644449e2ecd8a2f98d6",
+    "rf": "e688b0a2dceeb7de453e43dad3534061bf346bc9"
+  },
+  "heads_are_observations_not_final_execution_pins": true,
+  "classification": "shared code/contract clock conflation",
+  "observed_failure": "source capture is outside as_of_date",
+  "primary_error_site": {
+    "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_source_v2.py",
+    "line": 302,
+    "function": "build_revenue_source_record_from_verified_read",
+    "mechanism": "captured_at = manifest.retrieved_at or actual read_at, then captured date is bounded above by historical as_of"
+  },
+  "additional_responsibility_sites": [
+    {
+      "path": "scripts/company_wiki_source_reader_v2.py",
+      "symbol": "_validate_manifest_period",
+      "line": 209,
+      "problem": "original retrieved is incorrectly bounded by as_of"
+    },
+    {
+      "path": "scripts/company_wiki_source_v2.py",
+      "symbol": "_validate_manifest_dates",
+      "line": 176,
+      "problem": "same duplicate manifest gate"
+    },
+    {
+      "path": "scripts/contracts/evidence.py",
+      "symbol": "validate_source_capture",
+      "line": 385,
+      "problem": "current capture incorrectly bounded by as_of"
+    },
+    {
+      "path": "scripts/contracts/document.py",
+      "symbol": "validate_evidence_claims",
+      "line": 622,
+      "problem": "actual verification incorrectly bounded by as_of"
+    },
+    {
+      "path": "scripts/source_narrative_context.py",
+      "symbol": "_claim/consume_narrative_input",
+      "line": 48,
+      "problem": "new automatic claim writes verified_date=as_of instead of actual read/check date"
+    },
+    {
+      "path": "scripts/research/input_evidence.py",
+      "symbol": "_bind_narrative_span",
+      "line": 231,
+      "problem": "actual capture/date is created but formal engine rejects it"
+    },
+    {
+      "path": "scripts/company_wiki_source.py",
+      "symbol": "build_revenue_source_record",
+      "line": 426,
+      "problem": "explicit legacy source path has same capture gate"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+      "sha256": "5e3a30d7a3c704ea566562e7eda848a5361b78f9a46bdc1888700a0d217d4737"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_source_v2.py",
+      "sha256": "96ee68a9f969862f02e302e9180dc716fa1b6895773485fdd5fc7c24d5b98ddc"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_source_reader_v2.py",
+      "sha256": "0e9c5325537d6480806cca18dcb838938f35fc2ab46fe4a7d84b89de9e1b25c7"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\evidence.py",
+      "sha256": "eb1edea913b3b4f6f8f9c7a3f84e07d464bdf0b33e7e6e9aba5664b6cb5ba683"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\document.py",
+      "sha256": "b111d5c5997954c66020f3db379861ff53e32058959a7bb9c19fd65b18c4d258"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_narrative_context.py",
+      "sha256": "195d0be48e27a27d248c55cd92919be57c4e1602741d3e87cdbccc2c953a998a"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\input_evidence.py",
+      "sha256": "22f258d7288ca8f7e8df4923b7f7dddb23431778e37e3b4457eeefee2a55b64a"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_source.py",
+      "sha256": "b223974e94ffb6d91e0e927b252e1fbc67a590fc910c3da10600d292d48d4470"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\schema_compatibility.py",
+      "sha256": "2fe8ffe2090300fbe81e130e21cf0b213faefc63ba0a6831894c9025db963352"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\constants.py",
+      "sha256": "514bbe0da2125454a568b428f390ee1c9a03f61ae6f5ea503c93b94eefb6c1c7"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\source_reader.py",
+      "sha256": "890efeaff24cb6552ded0bbfdabcb6807adae13ff1bea915fea0f192d5059f0e"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\source_reader_cli.py",
+      "sha256": "dccf382d82c1e3670c8464dd202fcf17712cc76783d7ae5cb4829e13b7c32c46"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\qualification.py",
+      "sha256": "d772560bc43b74ee481694f0ea6ebe07ec0179b36b00a1164e6218c97256fdee"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\cross_market_suite\\runner.py",
+      "sha256": "e612304c259ee6b62d8b4e0aa927eee4313448584fc2df4d32fd1607ff4ed0c6"
+    }
+  ],
+  "current_interfaces": {
+    "source_ref_schema": "2.0",
+    "source_read_receipt_schema": "2.1",
+    "capture_schema": "1.0",
+    "host_receipt_schema": "1.0",
+    "forecast_schema": "3.7",
+    "opt_in_schema": "3.8",
+    "skill_version": "4.1.0",
+    "availability_proof_in_public_v2": false,
+    "manifest_and_receipt_have_strict_field_sets": true,
+    "known_publication_cross_day_fix_needs_new_identity_field": false
+  },
+  "existing_plan_references": [
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/root_cause_remediation.md",
+      "locator": "P1 source metadata/qualification",
+      "meaning": "Separate exists/as-of eligibility/derivable; unknown/late publication stays explicit."
+    },
+    {
+      "path": "docs/plans/narrative-evidence-pilot-2026-09-26/cross_repo_mainline_and_delivery_plan_2026-09-28.md",
+      "locator": "S4 source-ref-v2 date fixture correction, lines 114-115",
+      "meaning": "Frozen fixture capture/request dates matched; this does not cover next-day historical analysis. Retain future-source and raw integrity checks."
+    },
+    {
+      "path": "docs/plans/narrative-evidence-pilot-2026-09-26/r2_source_preparation_implementation_2026-10-08.md",
+      "locator": "same-SHA metadata assertion, explicit null date",
+      "meaning": "Unknown metadata must not be reconstructed from capture; preserve raw and old SourceRef/sidecar assertions."
+    },
+    {
+      "path": "docs/plans/narrative-evidence-pilot-2026-09-26/s0a_observed_interfaces_2026-09-29.md",
+      "locator": "ET call_date/publication_date/as_of_cutoff_verified",
+      "meaning": "Call date/current capability are not historical publication proof."
+    }
+  ],
+  "constraints": {
+    "code_changes": 0,
+    "production_config_changes": 0,
+    "raw_changes": 0,
+    "main_pwf_changes": 0,
+    "supplier_calls": 0,
+    "model_calls": 0,
+    "ocr_calls": 0,
+    "full71_reruns": 0,
+    "downloads": 0
+  },
+  "implementation_owner": "MAIN to assign one isolated RF owner; optional CWP producer extension MAIN/single CWP owner only",
+  "codegraph_observation": "CodeGraph used first for structure; current RF/CWP recently added v2 symbols/files were missing in index. Exact known current files were then read, with observed file SHA recorded; unrelated fallback context results were not used as code evidence."
+}

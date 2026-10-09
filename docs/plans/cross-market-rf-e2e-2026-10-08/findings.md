@@ -228,3 +228,18 @@ shared交付67b55d72正常合入master979792e0并push，15runtime/test交付SHA�
 另一个共用效率原因已结构定位：legacy缺URL治理retired原件真实存在、普通scan sticky，不会自动成为reuse候选，可能fetch后才按SHA去重。`phase6/legacy_local_reuse_diagnosis/`独立只读反例进行中；应在真实六家前决定通用零下载reconcile入口，不粗暴active所有退休源或用公司特判隐藏缺陷。Dayu code零改动。
 
 当前Next Step：完成这两个实际共因的责任细则/TDD通用修复；真实22页public batch/read/跨run零调用复用；同一固定71对照（未变研究输入不宣称全绿）；原三家、新三家真实执行+四独立审查；最后恢复冻结NVDA及公司池loop。目标仍active，主线未完成，loop尚未启动。
+
+
+### 2026-10-09 实际OCR节点与新增共因施工
+
+真实22页节点已运行一次，不是NOT_RUN：`phase6/ocr_major_node/runs/mocr-20261009T045902-933be853/acceptance.json`保存FAILED_RETAIN_ORIGIN。官方local import0download完成，首select真实126秒后终止：`PARSER_INCOMPLETE / empty selection does not have complete coverage`，后两依赖dead_letter。原生tokens/cost/unknown/unsettled全0、无模型admission；原件SHA/size/mtime及protected配置/PWF前后全相等。保留owned origin `C:/Users/郑曾波/AppData/Local/Temp/mOCR-srw9_9oe`供诊断，不盲resume不可复活的旧terminal jobs、不开新run绕账。
+
+当前根因优先包：
+
+1. [legacy local reconcile施工卡](phase6/legacy_local_reuse_diagnosis/IMPLEMENTATION_CARD.md)已由MAIN审读，单一CWP owner开始隔离TDD实现；退休原因分类、实际bytes/issuer/period、facts+restore单事务、重复0fetch；真正withdrawn/damaged不active，不去全改9499状态，不动Dayu。source-query继续只读，公共localprepare接线由MAIN整合FF。
+2. `phase6/asof_clock_diagnosis/`统一publication/availability/read/capture/verify责任细则正在调查。已定位RF不止一处抓取<=asof门，也存在新claim verified_date直接写asof的错误；必须共用时钟资格，不伪造旧日期，不放行future材料，旧frozen字节保留。RF单一owner负责其目录，CWP可选availability DTO由MAIN统一接口。
+3. `phase6/ocr_selection_diagnosis/`独立实查为什么已识读图文未成为任何有效candidate；先判断分行/role/group/filter或该材料真实无业务价值，再通用TDD。不为节点绿降低阈值或强选财务表；需要最小真实页样本才另安排，不重复全22页。脚本原要求selection==selected已修为合法selected/partial，但仍要求completed summary、parsed/high-confidence selected spans、精确publicreplay、原语言、全篇coverage=false；这个validator修正不解释本次empty。
+
+上述根因处置后再真实节点的新合法generation验收、固定71对照、原三家与新三家真实研究/四独立审查；全部主线完成后公司池loop。大节点增加的是此前未接起来的真实路径，不新增小节点签收。
+
+来源时钟施工细则已交付，RF在隔离 `Projects/_harness_worktrees/cmrf-20261008/rf-inputs` 从e688b0a2实施。MAIN以最小事实接口完成CWP receipt2.2：仅解析既有canonical HTTP DownloadReceipt，实际SHA/时间/URL/大小/MIME一致才给availability上界，其他返回null；默认2.1不变，不加许可。集中28PASS/13.51秒、Ruff绿、2个owned短根恢复不存在，收费调用0。详细限制与实际RED性质见phase6/asof_clock_diagnosis/PRODUCER_IMPLEMENTATION.md。a40eb065精确CI37886236535成功。

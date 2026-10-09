@@ -1,0 +1,68 @@
+{
+  "schema_version": "legacy-local-counterexample/1",
+  "mode": "offline local fixture; no successful simulated download",
+  "code_head": "979792e0a4105b18aed06dc7053f7bc239de6865",
+  "temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\legacy-local-eiwdu9m4",
+  "checks": {
+    "active_unknown_url_reuses": {
+      "resolver": "reused_equivalent",
+      "source_query": "found",
+      "capture_ready": false,
+      "missing_fields": [
+        "https_url"
+      ]
+    },
+    "retired_complete_raw_stays_missing_after_registration": {
+      "exact_query": {
+        "status": "blocked",
+        "reason": "source_not_active"
+      },
+      "resolver": "missing",
+      "source_query": "not_found",
+      "source_status_after_scoped_register": "retired"
+    },
+    "fetch_if_missing_reaches_fetch_before_dedup": {
+      "offline_discover_invocations": 1,
+      "offline_fetch_invocations": 1,
+      "download_events": 0,
+      "network_requests": 0,
+      "success": false
+    },
+    "existing_audited_restore_primitive": {
+      "source_status": "active",
+      "restore_audit_rows": 1,
+      "source_url": null
+    },
+    "existing_canonical_local_import_reactivates_but_does_not_correct_facts": {
+      "import_status": "deduplicated",
+      "source_status": "active",
+      "market": "HK",
+      "fiscal_year": 2025,
+      "correct_business_query": "not_found",
+      "download_events": 0
+    },
+    "existing_source_fact_correction_primitive_reuses_without_url_guess": {
+      "source_query": "found",
+      "resolver": "reused_equivalent",
+      "verified_bytes_sha256": "21a09778e2fca6efa946353eae169f5a4bffefbf8f25b37c66adf836570af46b",
+      "source_url": null,
+      "download_events": 0
+    }
+  },
+  "supplier_requests": 0,
+  "model_requests": 0,
+  "download_events": 0,
+  "protected_before": {
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "config/source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585",
+    "config/local_ocr.json": "9b8a7df81ca62ebc4bb9c2d60d45c247b291564a4a38f5648e5f4b3edb59889b"
+  },
+  "exit_code": 0,
+  "temp_final": "absent",
+  "network_attempts": 0,
+  "protected_after": {
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "config/source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585",
+    "config/local_ocr.json": "9b8a7df81ca62ebc4bb9c2d60d45c247b291564a4a38f5648e5f4b3edb59889b"
+  }
+}

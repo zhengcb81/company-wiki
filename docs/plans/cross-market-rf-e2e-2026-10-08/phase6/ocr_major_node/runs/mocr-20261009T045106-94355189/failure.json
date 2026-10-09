@@ -1,0 +1,12 @@
+{
+  "schema_version": "main-ocr-preparation-failure/1",
+  "status": "SANDBOX_WRITE_PERMISSION_FAILURE",
+  "operation": "preflight",
+  "process_exit_code": 1,
+  "error": "PermissionError while saving owned TEMP acceptance.json; preceding preparation exception was not preserved by that revision.",
+  "failed_owned_root": "C:\\Users\\郑曾波\\AppData\\Local\\Packages\\sandbox.{9bdbbff8-e9bb-43df-9795-de5d5f5813a4}\\AC\\Temp\\mOCR-bsi4neuj",
+  "later_exact_path_test_exists": false,
+  "successful_checks_not_claimed": true,
+  "vendor_requests": 0,
+  "live_batch_executed": false
+}

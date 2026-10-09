@@ -1,0 +1,27 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "company_wiki.source_catalog.official_source_cli",
+    "--help"
+  ],
+  "started_at": "2026-10-09T04:59:02.943497Z",
+  "finished_at": "2026-10-09T04:59:03.571002Z",
+  "elapsed_seconds": 0.628,
+  "exit_code": 0,
+  "outer_timeout": false,
+  "stdout": {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-srw9_9oe\\logs\\help-1-01.stdout",
+    "sha256": "706f9131f55fb6a69851d1ae83eeb51775a5cc3d1651f11277f2bf2303812932",
+    "byte_size": 534,
+    "mtime_ns": 1791521943533864500
+  },
+  "stderr": {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-srw9_9oe\\logs\\help-1-01.stderr",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "byte_size": 0,
+    "mtime_ns": 1791521942943846500
+  },
+  "stdin_sha256": null
+}

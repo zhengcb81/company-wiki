@@ -1,0 +1,7 @@
+{
+  "accepted": false,
+  "failure": "WinError5 creating companies and cleanup inside sandbox-provided AC/Temp",
+  "temp_root": "C:/Users/郑曾波/AppData/Local/Packages/sandbox.{152b6bcb-025b-4e70-83d9-08cfa56106db}/AC/Temp/legacy-local-0scbhkg9",
+  "code_executed": "No catalog/provider/metadata fixture created; mkdir failed first",
+  "cleanup": "exact path and AC/Temp not present in ordinary host namespace after sandbox command; no deletion performed; subsequent owned normal TEMP finally cleaned"
+}

@@ -1,0 +1,20 @@
+usage: narrative_transport_cli.py [-h] --config CONFIG
+                                  [--operation {reference,read,evidence-list,evidence-lookup,evidence-search}]
+                                  [--limit LIMIT] [--offset OFFSET]
+                                  [--span-id SPAN_ID] [--locator LOCATOR]
+                                  [--query QUERY]
+
+Read persistent narrative bundles by logical identity, never raw file paths.
+stdin: bounded versioned JSON request. stdout: exact artifact bytes (or
+reference). stderr: one JSON receipt/refusal. Consumers require exit 0 and
+verify stdout SHA.
+
+options:
+  -h, --help            show this help message and exit
+  --config CONFIG
+  --operation {reference,read,evidence-list,evidence-lookup,evidence-search}
+  --limit LIMIT
+  --offset OFFSET
+  --span-id SPAN_ID
+  --locator LOCATOR
+  --query QUERY

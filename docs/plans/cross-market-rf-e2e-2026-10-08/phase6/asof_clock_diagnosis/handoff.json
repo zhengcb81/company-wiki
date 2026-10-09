@@ -1,0 +1,70 @@
+{
+  "schema_version": "asof-clock-diagnosis-handoff/1",
+  "status": "DIAGNOSED_READY_FOR_ISOLATED_TDD_NOT_IMPLEMENTED",
+  "root_cause_id": "RC-ASOF-CLOCK-01",
+  "as_of_date": "2026-10-08",
+  "owner_assignment": "MAIN assigns one RF owner; optional CWP producer single owner/MAIN only",
+  "entrypoints": [
+    "W01_source_clock.md",
+    "INTERFACE.md",
+    "fixed71_evidence.json",
+    "tdd_plan.json"
+  ],
+  "actual_red": {
+    "fixed71_seconds": 144.37,
+    "fixed71_status": "FAIL",
+    "three_rf_ff_reuse": "BLOCKED source capture is outside as_of_date"
+  },
+  "new_tests": "18 planned, all NOT_RUN",
+  "proposed_proof_protocol": {
+    "default_source_read_receipt": "2.1 unchanged",
+    "opt_in_source_read_receipt": "2.2 proposed, not implemented",
+    "new_top_level_field": "availability_evidence",
+    "source_ref": "2.0 unchanged",
+    "manifest_field_set": "unchanged",
+    "cwp_files": [
+      "source_catalog/source_availability.py (proposed new)",
+      "source_catalog/source_reader_cli.py:main"
+    ],
+    "shared_source_reader_or_qualification_changes": "MAIN serial integration with legacy intake/facts/eligibility owner only"
+  },
+  "files": {
+    "diagnosis.json": {
+      "sha256": "24b8e1bc3fa204d2f4b7e5c5c3683bb93d03541dec422225a39278539c67c854",
+      "bytes": 7588
+    },
+    "fixed71_evidence.json": {
+      "sha256": "4fd6df3f3308215660df055b29f4f5f6597f00d12461805d64f0c8e182774e62",
+      "bytes": 10558
+    },
+    "INTERFACE.md": {
+      "sha256": "3ac919610022d5bba8f2e4de5ae8f8bd49dbe953cd86b8f01cb43818e551df12",
+      "bytes": 9999
+    },
+    "README.md": {
+      "sha256": "ba507fe3c26fbbd4bbf2b4fb063eae74181c2bdb3d16571285d5a3452fb1c565",
+      "bytes": 6802
+    },
+    "tdd_plan.json": {
+      "sha256": "9ca3d84937ef7f29d531df1f8b668efd43b37759d1668e1ee4b5f7bca30d4a92",
+      "bytes": 11043
+    },
+    "W01_source_clock.md": {
+      "sha256": "693ebe3ce5b64fc6ef03710d861fabd2afeb45b9caa3e5b63d304479fa70c0ab",
+      "bytes": 8565
+    }
+  },
+  "no_code_or_production_changes": true,
+  "no_providers_models_downloads_ocr_or_fullsuite_rerun": true,
+  "not_completed_claims": [
+    "No clock fix implemented",
+    "No new RED/GREEN or fixed71 rerun",
+    "No fresh research run",
+    "No real unknown-publication proof transport exists yet"
+  ],
+  "independent_known_failures": [
+    "HK old input same-excerpt opposite roles",
+    "US pure-image no-OCR fixture PARSER_INCOMPLETE"
+  ],
+  "old_frozen_snapshot_policy": "raw/input/capture/claims/output bytes and hashes unchanged; old pinned runtime retained"
+}

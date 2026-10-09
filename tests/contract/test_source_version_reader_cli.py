@@ -129,6 +129,7 @@ def _contains_physical_key(value: object) -> bool:
 def _run_cli(
     config_path: Path, ids: dict[str, str], cwd: Path,
     *, expected_read_policy_sha256: str | None = None,
+    include_availability_evidence: bool = False,
 ) -> subprocess.CompletedProcess[bytes]:
     env = os.environ.copy()
     env["PYTHONPATH"] = str(ROOT / "src") + os.pathsep + env.get("PYTHONPATH", "")
@@ -142,11 +143,58 @@ def _run_cli(
     ]
     if expected_read_policy_sha256 is not None:
         command.extend(("--expected-read-policy-sha256", expected_read_policy_sha256))
+    if include_availability_evidence:
+        command.append("--include-availability-evidence")
     return subprocess.run(
         command,
         cwd=cwd, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
         check=False, timeout=30,
     )
+
+
+def test_optional_availability_receipt_keeps_default_and_unknown_dates(tmp_path: Path):
+    config_path, _, ids = _fixture(tmp_path)
+    before = _snapshot(tmp_path)
+    default = _run_cli(config_path, ids, tmp_path)
+    extended = _run_cli(config_path, ids, tmp_path, include_availability_evidence=True)
+    assert default.returncode == extended.returncode == 0
+    assert default.stdout == extended.stdout == BODY
+    old = _json_stderr(default, tmp_path)
+    new = _json_stderr(extended, tmp_path)
+    assert old["schema_version"] == "2.1"
+    assert new["schema_version"] == "2.2"
+    assert set(new) == set(old) | {"availability_evidence"}
+    assert new["availability_evidence"] is None  # bare collector time is not proof
+    assert new["manifest"] == old["manifest"]
+    assert _snapshot(tmp_path) == before
+
+
+def test_optional_availability_receipt_opens_existing_capture_without_writes(tmp_path: Path):
+    config_path, raw, ids = _fixture(tmp_path)
+    sidecar = raw.with_name(raw.name + ".source.json")
+    payload = json.loads(sidecar.read_text(encoding="utf-8"))
+    payload.update({"byte_size": len(BODY), "mime_type": "application/pdf",
+                    "adapter_name": "sec-reader", "adapter_version": "1.0.0"})
+    payload["candidate"] = {k: payload[k] for k in ("provider", "provider_document_id", "source_url")}
+    payload["receipt"] = {
+        **{k: payload[k] for k in ("provider", "provider_document_id", "source_url",
+                                  "content_sha256", "byte_size", "mime_type",
+                                  "retrieved_at", "adapter_name", "adapter_version")},
+        "schema_version": "1.0", "candidate_id": "doc-cli-1",
+        "staged_path": "staging/2025.pdf", "http_status": 200,
+    }
+    sidecar.write_text(json.dumps(payload), encoding="utf-8")
+    before = _snapshot(tmp_path)
+    proc = _run_cli(config_path, ids, tmp_path, include_availability_evidence=True)
+    assert proc.returncode == 0, proc.stderr
+    receipt = _json_stderr(proc, tmp_path)
+    proof = receipt["availability_evidence"]
+    assert proc.stdout == BODY
+    assert proof["source_sha256"] == SHA
+    assert proof["available_by"] == "2026-02-21"
+    assert receipt["manifest"]["published_date"] == "2026-02-20"
+    assert str(tmp_path) not in proc.stderr.decode("utf-8")
+    assert _snapshot(tmp_path) == before
 
 
 def _run_query_cli(config_path: Path, cwd: Path) -> subprocess.CompletedProcess[bytes]:

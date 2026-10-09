@@ -1,0 +1,39 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\scripts\\narrative_batch_configured.py",
+    "--llm-config",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-srw9_9oe\\config.yaml",
+    "--llm-provider",
+    "deepseek",
+    "--project-root",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-srw9_9oe",
+    "--catalog-config",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-srw9_9oe\\config\\source_catalog.yaml",
+    "--automation-db",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-srw9_9oe\\auto\\first.sqlite3",
+    "--work-dir",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-srw9_9oe\\work-first",
+    "--request",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-srw9_9oe\\requests\\first.json"
+  ],
+  "started_at": "2026-10-09T04:59:06.277094Z",
+  "finished_at": "2026-10-09T05:01:24.069972Z",
+  "elapsed_seconds": 137.793,
+  "exit_code": 2,
+  "outer_timeout": false,
+  "stdout": {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-srw9_9oe\\logs\\batch-first-01.stdout",
+    "sha256": "8b16b8923b3a9de9e388ad7a9b34d0be28042e7efb919b7e7c15ed249166dd20",
+    "byte_size": 525,
+    "mtime_ns": 1791522083956537000
+  },
+  "stderr": {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-srw9_9oe\\logs\\batch-first-01.stderr",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "byte_size": 0,
+    "mtime_ns": 1791521946277391000
+  },
+  "stdin_sha256": null
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": "source-clock-producer-acceptance/1",
+  "status": "ENGINEERING_PASS_NOT_COMPANY_RESEARCH",
+  "red": {"result": "module_missing_collection_error", "seconds": 0.87},
+  "green": {"passed": 28, "seconds": 13.51, "ruff": "pass"},
+  "commands": [
+    "python -X utf8 -B -m pytest tests/contract/test_source_availability.py tests/contract/test_source_version_reader_cli.py -q -p no:cacheprovider --basetemp C:/cw-av-cli-a3d92517/bt",
+    "python -m ruff check --no-cache src/company_wiki/source_catalog/source_availability.py src/company_wiki/source_catalog/source_reader_cli.py tests/contract/test_source_availability.py tests/contract/test_source_version_reader_cli.py"
+  ],
+  "default_receipt": "2.1",
+  "opt_in_receipt": "2.2",
+  "source_ref": "2.0",
+  "supported_historical_proof": "existing canonical DownloadReceipt with exact SHA/size/MIME, HTTP 2xx, real UTC time and consistent provenance",
+  "unsupported_or_unverified_proof": "null",
+  "production_writes": 0,
+  "supplier_posts": 0,
+  "raw_reads_in_optional_proof_lookup": 0,
+  "owned_roots_restored_absent": ["C:/cw-av-green-72fd8c64", "C:/cw-av-cli-a3d92517"],
+  "initial_green_note": "26 passed / 12.32s; Ruff test unused import was fixed before final run",
+  "remaining": ["RF consumer/common clock TDD package", "real three-market as-of source preparation", "fresh six-company execution and independent reviews"]
+}
