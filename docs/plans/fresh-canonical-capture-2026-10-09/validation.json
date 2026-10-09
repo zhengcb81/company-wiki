@@ -1,6 +1,6 @@
 {
   "schema_version": "w04-engineering-acceptance/1",
-  "recorded_at": "2026-10-09T10:48:16.218617+00:00",
+  "recorded_at": "2026-10-09T11:08:38.160630+00:00",
   "base": "ceac91e7e09f615fb217d0fa02604ba96cdea111",
   "scope": "isolated fixture/loopback M2; not M3 company research acceptance",
   "external_paid_calls": 0,
@@ -86,6 +86,41 @@
       "failed": 0,
       "skipped": 0,
       "seconds": 57.93
+    },
+    {
+      "command": "pytest residual completed cleanup contracts (raw/descriptor, diagnostic, cap/SHA guard, changed raw)",
+      "phase": "residual repair RED",
+      "exit_code": 1,
+      "failed": 6,
+      "deselected": 39,
+      "seconds": 4.85
+    },
+    {
+      "command": "pytest keeps_changed_or_unknown and missing_receipt",
+      "phase": "additional unknown-raw RED",
+      "exit_code": 1,
+      "failed": 1,
+      "deselected": 45,
+      "seconds": 1.05
+    },
+    {
+      "command": "python -X utf8 -B -m pytest tests/contract/test_official_capture_recovery.py tests/integration/test_official_source_flow.py -q --tb=short --basetemp C:/Users/郑曾波/AppData/Local/Temp/cwp-w04-res-m2-20261009",
+      "phase": "first concentrated residual M2",
+      "exit_code": 1,
+      "passed": 73,
+      "failed": 1,
+      "seconds": 60.62,
+      "reason": "cold CLI observation incorrectly inferred no provider attempt from no server GET; persisted real attempt1/raw0/usage incomplete proves distinction"
+    },
+    {
+      "command": "python -X utf8 -B -m pytest tests/contract/test_official_capture_recovery.py tests/integration/test_official_source_flow.py -q --tb=short --basetemp C:/Users/郑曾波/AppData/Local/Temp/cwp-w04-res-m2b-20261009",
+      "phase": "final concentrated residual M2 responsibility set",
+      "exit_code": 0,
+      "passed": 74,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 67.45,
+      "note": "46 capture contracts +28 official-flow integration tests; unrelated unchanged full suites not repeated"
     }
   ],
   "checks": {
@@ -107,19 +142,25 @@
     "malformed_retained_and_completed_json_public_cli": "passed",
     "completion_result_write_failure_preserves_raw": "passed",
     "completed_replay_public_reader_actual_sha": "passed",
-    "cli_total_deadline_observed_progress": "passed (same 0.35s cap; actual persisted bytes/receipt/usage, genuine mandatory stall/trickle controls unchanged)"
+    "cli_total_deadline_observed_progress": "passed (same 0.35s cap; actual persisted bytes/receipt/usage, genuine mandatory stall/trickle controls unchanged)",
+    "body_deadline_preinitialized_real_transport": "passed (unchanged0.35s, realGET1, stall exactly8, trickle actual partial/SHA)",
+    "cold_cli_attempt_vs_remote_get_vs_received_bytes": "passed (actual persisted evidence, unknown usage stays incomplete)",
+    "completed_pending_raw_and_descriptor_cleanup": "passed",
+    "completed_cleanup_failure_safe_available_result": "passed",
+    "completed_current_cap_and_sha_refusal_no_cleanup": "passed",
+    "changed_and_receipt_unknown_raw_not_deleted": "passed"
   },
   "source_file_sha256": {
     "src/company_wiki/source_catalog/acquisition_journal.py": "cc04595c664dbc3684823d630e77844d719936d140d4fd838456b28d24b46235",
     "src/company_wiki/source_catalog/canonical_writer.py": "2e5a97ce82c679608008d23127e08bc142e14c373d92102d77ee49a66ec7c4bd",
     "src/company_wiki/source_catalog/official_source_cli.py": "3ea93e26ff1c3aa297e1af37694071dcb1dedb3179fdc6ad0927f4fc48fe9c37",
-    "src/company_wiki/source_catalog/official_source_flow.py": "a896580802a14057df97d2da841c82f04749e51545f24d60b80efb504e9fdbdd",
-    "tests/contract/test_official_capture_recovery.py": "0bb95599640f80a9484ae7160298e7b248a99d66c5bad8e4895ad1905f12031d",
+    "src/company_wiki/source_catalog/official_source_flow.py": "30893d528064c5e65b5c23b3e4391b09b9db0e035c2f3a2db07582f466ae8ebd",
+    "tests/contract/test_official_capture_recovery.py": "91be99f92ab6379d5024d2578d6f72a50f7e146d8e2d079b7a16d919e3e7c672",
     "tests/integration/test_official_source_flow.py": "591c5a1c0d2de7b6b4639144896dd66108e642d69c08dc08f162651c66d2a1aa"
   },
   "installation_delta": [],
   "remaining_main_acceptance": [
-    "MAIN independent exact follow-up commit review, then initial+follow-up cherry-pick with normal hooks",
+    "MAIN independent exact residual follow-up commit review, then full three-commit W04 chain cherry-pick with normal hooks",
     "M3 original CN/HK/US fresh attempts via public capture instead of one-off urllib",
     "Historical lost Lam body remains lost; do not relabel current peer capture as recovery"
   ],
@@ -134,5 +175,38 @@
   "independent_m2_followup": {
     "reviewed_commit": "c839af5857dc0d9720a3127f1a2d3028493b50f7",
     "reviewer_report": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/fresh_root_implementation_2026-10-09/capture_independent_review.md"
+  },
+  "first_followup_delivery_file_sha256": {
+    "src/company_wiki/source_catalog/acquisition_journal.py": "cc04595c664dbc3684823d630e77844d719936d140d4fd838456b28d24b46235",
+    "src/company_wiki/source_catalog/canonical_writer.py": "2e5a97ce82c679608008d23127e08bc142e14c373d92102d77ee49a66ec7c4bd",
+    "src/company_wiki/source_catalog/official_source_cli.py": "3ea93e26ff1c3aa297e1af37694071dcb1dedb3179fdc6ad0927f4fc48fe9c37",
+    "src/company_wiki/source_catalog/official_source_flow.py": "a896580802a14057df97d2da841c82f04749e51545f24d60b80efb504e9fdbdd",
+    "tests/contract/test_official_capture_recovery.py": "0bb95599640f80a9484ae7160298e7b248a99d66c5bad8e4895ad1905f12031d",
+    "tests/integration/test_official_source_flow.py": "591c5a1c0d2de7b6b4639144896dd66108e642d69c08dc08f162651c66d2a1aa"
+  },
+  "independent_residual_followup": {
+    "reviewed_commit": "17e154a757ec0e6534b7b93d8bd599e4f02a8eca",
+    "reviewer_report": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/fresh_root_implementation_2026-10-09/capture_residual_acceptance.md",
+    "write_set_beyond_reviewed_commit": [
+      "src/company_wiki/source_catalog/official_source_flow.py",
+      "tests/contract/test_official_capture_recovery.py",
+      "docs/plans/fresh-canonical-capture-2026-10-09/"
+    ],
+    "installation_delta": [],
+    "initial_failure_actual_receipt_observation": {
+      "http_requests": 1,
+      "remote_gets": 0,
+      "http_status": null,
+      "response_bytes": 0,
+      "persisted_raw_bytes": 0,
+      "usage_complete": false,
+      "provider_started": true,
+      "original_complete": false,
+      "current_acquisition_usage": {
+        "schema_version": "1.0",
+        "response_bytes": 0,
+        "cost_usd": "0"
+      }
+    }
   }
 }

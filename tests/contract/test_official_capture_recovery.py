@@ -186,15 +186,23 @@ def test_real_capture_then_known_same_sha_reuses_without_second_get(tmp_path, mo
 
 
 @pytest.mark.parametrize("mode", ["trickle", "stall"])
-def test_real_total_deadline_stops_stream_and_retains_usage(tmp_path, monkeypatch, mode):
+def test_body_read_deadline_preinitialized_real_transport_retains_usage(tmp_path, monkeypatch, mode):
+    import httpx
     with lake(tmp_path) as (_, catalog), loopback(monkeypatch, mode=mode) as (url, calls):
+        # This control isolates actual socket/body cancellation. Construct real
+        # TLS transport before the budget/timer; no warm-up HTTP is performed.
+        # The cold public CLI separately includes initialization in its deadline.
+        transport = httpx.AsyncHTTPTransport(retries=0)
         began = time.monotonic()
         with pytest.raises(Exception) as caught:
-            flow.capture_official_source(catalog, request=capture_request(url, seconds=0.35))
+            flow.capture_official_source(catalog, request=capture_request(url, seconds=0.35), transport=transport)
         elapsed = time.monotonic() - began
         assert caught.value.error_code == "deadline_exceeded"
         assert elapsed < 1.3, "total deadline must interrupt a blocking/drip read"
-        assert 0 < caught.value.acquisition_usage["response_bytes"] < len(BODY)
+        received = caught.value.acquisition_usage["response_bytes"]
+        assert 0 < received < len(BODY)
+        if mode == "stall":
+            assert received == 8, "stall control must read exactly the real 8-byte prefix"
         assert caught.value.acquisition_usage_complete is False
         assert caught.value.provider_started is True
         assert calls == ["/original"]
@@ -339,16 +347,24 @@ def test_public_stall_cli_total_deadline_reports_observed_progress(tmp_path, mon
         assert type(failure["provider_started"]) is bool
         received = failure["acquisition_usage"]["response_bytes"]
         assert type(received) is int and 0 <= received <= 8
-        if not calls:
-            assert calls == [] and failure["provider_started"] is False and received == 0
-            assert failure["acquisition_usage_complete"] is True
-        else:
-            assert calls == ["/original"] and failure["provider_started"] is True
-            assert failure["acquisition_usage_complete"] is False
         descriptor = retained(catalog)[0]
         state = json.loads(descriptor.read_text(encoding="utf-8"))
         raw = (descriptor.parent / state["staged_name"]).read_bytes()
         receipt = state["request"]["capture_receipt"]
+        # A transport attempt can time out while connecting, before the server
+        # sees GET. Provider-start and byte progress have independent evidence.
+        attempts = receipt["http_requests"]
+        assert type(attempts) is int and attempts in {0, 1}
+        assert calls in ([], ["/original"])
+        assert failure["provider_started"] is (attempts == 1)
+        if attempts == 0:
+            assert calls == [] and received == 0
+            assert failure["acquisition_usage_complete"] is True
+            assert failure["acquisition_usage"]["cost_usd"] == "0"
+        else:
+            assert failure["acquisition_usage_complete"] is False
+            if received > 0:
+                assert calls == ["/original"]
         assert state["complete"] is False and state["capture_id"] == failure["capture_id"]
         assert raw == BODY[:received] and len(raw) == receipt["response_bytes"] == received
         assert hashlib.sha256(raw).hexdigest() == receipt["content_sha256"]
@@ -607,3 +623,138 @@ def test_completed_replay_revalidates_actual_canonical_sha(tmp_path, monkeypatch
         with pytest.raises(SourceReadError):
             flow.recover_official_source(catalog, capture_id=capture_id)
         assert canonical.read_bytes() != BODY
+
+
+# Independent residual review: complete means cleanup is resumable too.
+@pytest.mark.parametrize("fault", ["raw", "descriptor"])
+def test_completed_replay_cleans_only_pending_exact_staging(tmp_path, monkeypatch, fault):
+    with lake(tmp_path) as (root, catalog), loopback(monkeypatch) as (url, calls):
+        sentinel = catalog.config.catalog_dir / "staging" / "other-owner.txt"
+        sentinel.parent.mkdir(parents=True)
+        sentinel.write_bytes(b"unrelated original")
+        with monkeypatch.context() as patch:
+            def fail(*_args, **_kwargs):
+                raise OSError("fixture-cleanup")
+            if fault == "raw":
+                patch.setattr(writer_module.CanonicalSourceWriter, "_remove_staged", fail)
+            else:
+                actual_unlink = Path.unlink
+                def unlink(path, *args, **kwargs):
+                    if path.name.endswith(".capture.json"):
+                        fail()
+                    return actual_unlink(path, *args, **kwargs)
+                patch.setattr(Path, "unlink", unlink)
+            with pytest.raises(OSError, match="fixture-cleanup") as caught:
+                flow.capture_official_source(catalog, request=capture_request(url))
+        capture_id = caught.value.capture_id
+        descriptor = retained(catalog)[0]
+        state = json.loads(descriptor.read_text(encoding="utf-8"))
+        raw = descriptor.parent / state["staged_name"]
+        assert raw.exists() is (fault == "raw")
+        result_path = descriptor.parent / (capture_id + ".result.json")
+        completed_bytes = result_path.read_bytes()
+        completed = json.loads(completed_bytes)
+        replay = _cli(root, {"schema_version": "official-source-recovery-request/1",
+                             "capture_id": capture_id}, operation="recover")
+        assert replay.returncode == 0, replay.stderr
+        out = json.loads(replay.stdout)
+        assert out["source_ref"] == completed["source_ref"]
+        assert out["status"] == "imported_new"
+        assert out["capture_receipt"] == state["request"]["capture_receipt"]
+        assert out["download_events"] == 0 and out["acquisition_usage"]["response_bytes"] == 0
+        assert calls == ["/original"]
+        assert not raw.exists() and not descriptor.exists()
+        assert flow.list_retained_official_captures(catalog) == []
+        assert result_path.read_bytes() == completed_bytes
+        assert sentinel.read_bytes() == b"unrelated original"
+        from company_wiki.source_catalog.source_reader import SourceRef, SourceVersionReader
+        verified = SourceVersionReader(catalog).open_version(SourceRef(**out["source_ref"]))
+        assert verified.data == BODY
+
+
+def test_completed_replay_cleanup_failure_returns_result_with_safe_diagnostic(tmp_path, monkeypatch):
+    with lake(tmp_path) as (root, catalog):
+        capture_id = _failed_local_capture(catalog, monkeypatch)
+        descriptor = retained(catalog)[0]
+        state = json.loads(descriptor.read_text(encoding="utf-8"))
+        raw = descriptor.parent / state["staged_name"]
+        with monkeypatch.context() as patch:
+            def fail(*_args, **_kwargs):
+                raise OSError("fixture-cleanup-sensitive-path:" + str(root))
+            patch.setattr(writer_module.CanonicalSourceWriter, "_remove_staged", fail)
+            with pytest.raises(OSError):
+                flow.recover_official_source(catalog, capture_id=capture_id)
+            replay = flow.recover_official_source(catalog, capture_id=capture_id)
+        assert replay["staging_cleanup"] == {"status": "retained", "reason": "staging_cleanup_failed", "error_type": "OSError"}
+        assert replay["status"] == "imported_new" and replay["download_events"] == 0
+        assert replay["acquisition_usage"]["response_bytes"] == 0
+        assert replay["capture_receipt"] == state["request"]["capture_receipt"]
+        assert str(root) not in json.dumps(replay)
+        assert raw.read_bytes() == BODY and descriptor.is_file()
+        recovered = flow.recover_official_source(catalog, capture_id=capture_id)
+        assert recovered["source_ref"] == replay["source_ref"]
+        assert not raw.exists() and not descriptor.exists()
+
+
+@pytest.mark.parametrize("guard", ["current_cap", "canonical_sha"])
+def test_completed_replay_refusal_preserves_pending_raw_before_cleanup(tmp_path, monkeypatch, guard):
+    from company_wiki.source_catalog.source_reader import SourceReadError
+    with lake(tmp_path) as (_, catalog):
+        capture_id = _failed_local_capture(catalog, monkeypatch)
+        descriptor = retained(catalog)[0]
+        state = json.loads(descriptor.read_text(encoding="utf-8"))
+        raw = descriptor.parent / state["staged_name"]
+        descriptor_bytes = descriptor.read_bytes()
+        with monkeypatch.context() as patch:
+            def fail(*_args, **_kwargs):
+                raise OSError("fixture-cleanup")
+            patch.setattr(writer_module.CanonicalSourceWriter, "_remove_staged", fail)
+            with pytest.raises(OSError):
+                flow.recover_official_source(catalog, capture_id=capture_id)
+        result_path = descriptor.parent / (capture_id + ".result.json")
+        completed_bytes = result_path.read_bytes()
+        completed = json.loads(completed_bytes)
+        location = catalog.store.fetchone("SELECT absolute_path FROM locations WHERE source_id=? AND role='original_primary'", (completed["source_ref"]["source_id"],))
+        canonical = Path(location["absolute_path"])
+        if guard == "current_cap":
+            with pytest.raises(flow.OfficialSourceError, match="source_byte_limit"):
+                flow.recover_official_source(catalog, capture_id=capture_id, max_bytes=10)
+        else:
+            canonical.write_bytes(BODY.replace(b"new", b"old"))
+            with pytest.raises(SourceReadError):
+                flow.recover_official_source(catalog, capture_id=capture_id)
+            canonical.write_bytes(BODY)
+        assert raw.read_bytes() == BODY and descriptor.read_bytes() == descriptor_bytes
+        assert result_path.read_bytes() == completed_bytes
+        out = flow.recover_official_source(catalog, capture_id=capture_id)
+        assert out["source_ref"] == completed["source_ref"]
+        assert canonical.read_bytes() == BODY and not raw.exists() and not descriptor.exists()
+
+
+@pytest.mark.parametrize("damage", ["changed_body", "missing_receipt"])
+def test_completed_replay_keeps_changed_or_unknown_retained_raw(tmp_path, monkeypatch, damage):
+    with lake(tmp_path) as (_, catalog):
+        capture_id = _failed_local_capture(catalog, monkeypatch)
+        descriptor = retained(catalog)[0]
+        state = json.loads(descriptor.read_text(encoding="utf-8"))
+        raw = descriptor.parent / state["staged_name"]
+        with monkeypatch.context() as patch:
+            def fail(*_args, **_kwargs):
+                raise OSError("fixture-cleanup")
+            patch.setattr(writer_module.CanonicalSourceWriter, "_remove_staged", fail)
+            with pytest.raises(OSError):
+                flow.recover_official_source(catalog, capture_id=capture_id)
+        saved_receipt = descriptor.read_bytes()
+        changed = BODY.replace(b"new", b"old") if damage == "changed_body" else BODY
+        raw.write_bytes(changed)  # Owned fixture only; no canonical bytes change.
+        if damage == "missing_receipt":
+            descriptor.unlink()
+        out = flow.recover_official_source(catalog, capture_id=capture_id)
+        reason = "retained_capture_identity_mismatch" if damage == "changed_body" else "retained_capture_receipt_unavailable"
+        assert out["staging_cleanup"] == {"status": "retained", "reason": reason}
+        assert out["status"] == "imported_new" and out["download_events"] == 0
+        assert raw.read_bytes() == changed and descriptor.exists() is (damage == "changed_body")
+        raw.write_bytes(BODY)
+        descriptor.write_bytes(saved_receipt)
+        flow.recover_official_source(catalog, capture_id=capture_id)
+        assert not raw.exists() and not descriptor.exists()

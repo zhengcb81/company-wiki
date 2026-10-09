@@ -16,7 +16,7 @@ from urllib.parse import urlsplit
 from typing import Any
 
 from .assertion_service import SOURCE_FACT_FIELDS
-from .canonical_writer import CanonicalSourceWriter
+from .canonical_writer import CanonicalSourceWriter, CanonicalImportError
 from .acquisition_journal import AcquisitionJournal
 from .lock import _acquisition_mutex
 from .store import canonical_json
@@ -37,6 +37,9 @@ _SUPPORTED_MIMES = {
     "application/json",
     _PPTX_MIME,
 }
+_CAPTURE_SUFFIXES = {"application/pdf": ".pdf", "text/html": ".html",
+                     "application/xhtml+xml": ".html", "text/plain": ".txt",
+                     "application/json": ".json", _PPTX_MIME: ".pptx"}
 
 
 class OfficialSourceError(ValueError):
@@ -293,9 +296,7 @@ def _persist_capture(catalog, original, request, *, complete=True):
     """
     root = _staging_root(catalog)
     capture_id = uuid.uuid4().hex
-    suffix = {"application/pdf": ".pdf", "text/html": ".html",
-              "application/xhtml+xml": ".html", "text/plain": ".txt",
-              "application/json": ".json", _PPTX_MIME: ".pptx"}[request["mime_type"]]
+    suffix = _CAPTURE_SUFFIXES[request["mime_type"]]
     staged = root / (capture_id + suffix)
     descriptor = root / (capture_id + ".capture.json")
     state = {"schema_version": "official-source-retained-capture/1",
@@ -469,7 +470,7 @@ def _read_capture_record(path, *, error_code):
     return state
 
 
-def _load_retained(catalog, capture_id):
+def _load_retained(catalog, capture_id, *, require_original=True):
     _capture_id(capture_id)
     root = _staging_root(catalog)
     descriptor = root / (capture_id + ".capture.json")
@@ -486,10 +487,13 @@ def _load_retained(catalog, capture_id):
         _validate_import_header(state.get("request"))
         request = state["request"]
         _validate_capture_receipt(request.get("capture_receipt"), sha=request["content_sha256"])
+        if name != capture_id + _CAPTURE_SUFFIXES[request["mime_type"]]:
+            raise OfficialSourceError("invalid_retained_capture")
     except OfficialSourceError:
         raise OfficialSourceError("invalid_retained_capture") from None
     staged = root / name
-    if staged.is_symlink() or not staged.is_file():
+    if (staged.is_symlink() or (require_original and not staged.is_file())
+            or (staged.exists() and not staged.is_file())):
         raise OfficialSourceError("retained_original_unavailable")
     return staged, descriptor, state
 
@@ -571,12 +575,75 @@ def _replay_completed(catalog, capture_id, *, max_bytes=None):
     manifest = reader.describe_version(ref)
     stored = catalog.reader.exact_source_version(ref.document_id)
     persisted = observe_metadata(stored["metadata_json"]).metadata
-    return {"schema_version": IMPORT_RESULT_SCHEMA, "status": record["status"],
-            "source_ref": asdict(ref),
-            "metadata": {**manifest, "entity": manifest.get("display_name"),
-                         "publisher": persisted.get("publisher")},
-            "capture_receipt": dict(record["capture_receipt"]), "download_events": 0,
-            "acquisition_usage": {"schema_version": "1.0", "response_bytes": 0, "cost_usd": "0"}}
+    out = {"schema_version": IMPORT_RESULT_SCHEMA, "status": record["status"],
+           "source_ref": asdict(ref),
+           "metadata": {**manifest, "entity": manifest.get("display_name"),
+                        "publisher": persisted.get("publisher")},
+           "capture_receipt": dict(record["capture_receipt"]), "download_events": 0,
+           "acquisition_usage": {"schema_version": "1.0", "response_bytes": 0, "cost_usd": "0"}}
+    cleanup = _cleanup_completed_staging(catalog, capture_id, record)
+    if cleanup is not None:
+        out["staging_cleanup"] = cleanup
+    return out
+
+
+def _cleanup_completed_staging(catalog, capture_id, record):
+    """Resume only this exact capture after current canonical/cap verification.
+
+    The same-ID mutex is held by recovery. Canonical source/result remain
+    available if a safe staging diagnostic is needed. Unknown/changed raw is
+    never adopted or deleted merely because its UUID matches a completed ID.
+    """
+    try:
+        root = _staging_root(catalog)
+        descriptor = root / (capture_id + ".capture.json")
+        ref = record["source_ref"]
+        if not descriptor.exists() and not descriptor.is_symlink():
+            raw = root / (capture_id + _CAPTURE_SUFFIXES[ref["mime_type"]])
+            if raw.exists() or raw.is_symlink():
+                return {"status": "retained", "reason": "retained_capture_receipt_unavailable"}
+            return None
+        staged, descriptor, state = _load_retained(catalog, capture_id, require_original=False)
+        request = state["request"]
+        if (not state.get("complete", True)
+                or request["content_sha256"] != ref["content_sha256"]
+                or request["mime_type"] != ref["mime_type"]
+                or request["max_bytes"] != record["max_bytes"]
+                or request["capture_receipt"] != record["capture_receipt"]):
+            return {"status": "retained", "reason": "retained_capture_identity_mismatch"}
+        if staged.exists():
+            # Bounded streaming identity check: retain no copy of a large body.
+            before = staged.stat()
+            digest = hashlib.sha256()
+            size = 0
+            remaining = ref["byte_size"] + 1
+            with staged.open("rb") as stream:
+                while remaining:
+                    chunk = stream.read(min(65536, remaining))
+                    if not chunk:
+                        break
+                    size += len(chunk)
+                    digest.update(chunk)
+                    remaining -= len(chunk)
+            after = staged.stat()
+            if (size != ref["byte_size"] or digest.hexdigest() != ref["content_sha256"]
+                    or (before.st_size, before.st_mtime_ns, before.st_ino)
+                    != (after.st_size, after.st_mtime_ns, after.st_ino)):
+                return {"status": "retained", "reason": "retained_capture_identity_mismatch"}
+            CanonicalSourceWriter(catalog)._remove_staged(staged)
+        # Raw can already be gone after interrupted descriptor cleanup.
+        descriptor.unlink(missing_ok=True)
+        return None
+    except OfficialSourceError as exc:
+        allowed = {"invalid_retained_capture", "unsafe_retained_capture",
+                   "retained_original_unavailable", "retained_capture_receipt_unavailable",
+                   "capture_receipt_limit", "unsafe_staging_root", "staging_root_path_limit"}
+        reason = str(exc) if str(exc) in allowed else "invalid_retained_capture"
+        return {"status": "retained", "reason": reason}
+    except CanonicalImportError:
+        return {"status": "retained", "reason": "staging_cleanup_failed", "error_type": "CanonicalImportError"}
+    except OSError:
+        return {"status": "retained", "reason": "staging_cleanup_failed", "error_type": "OSError"}
 
 
 def list_retained_official_captures(catalog):
