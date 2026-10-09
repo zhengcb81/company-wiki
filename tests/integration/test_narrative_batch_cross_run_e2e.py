@@ -1,4 +1,4 @@
-"""Distinct batch publications share immutable bodies without rebinding pins."""
+"""Explicit refresh publications share immutable bodies without rebinding pins."""
 
 from __future__ import annotations
 
@@ -101,6 +101,7 @@ def _request(state, endpoint, run_id):
     request = NarrativeBatchRequest.from_dict({
         "schema_version": "narrative-batch-request/1",
         "run_id": run_id,
+        "refresh": True,
         "sources": [{
             "schema_version": ref.schema_version,
             "document_id": ref.document_id,
@@ -167,7 +168,7 @@ def _exact(artifacts, pin):
     return version, payload, NarrativeBundle.from_dict(json.loads(payload))
 
 
-def test_three_runs_keep_exact_pins_share_identical_body_and_publish_changed_draft(
+def test_three_explicit_refresh_runs_keep_exact_pins_share_identical_body_and_publish_changed_draft(
     tmp_path_factory, cross_run_model_server,
 ):
     with isolated_batch_directory(tmp_path_factory) as root:

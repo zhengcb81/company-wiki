@@ -1,0 +1,28 @@
+{
+  "name": "GREEN-integrated-kill-recovery-final",
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/integration/test_narrative_batch_recovery_e2e.py",
+    "-q"
+  ],
+  "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+  "temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\reuse-gkhq7ee7",
+  "temp_initial": "absent; created exclusively",
+  "supplier_requests": 0,
+  "protected_before": {
+    "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+  },
+  "exit_code": 0,
+  "elapsed_seconds": 13.537,
+  "protected_after": {
+    "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+  },
+  "temp_final": "absent"
+}

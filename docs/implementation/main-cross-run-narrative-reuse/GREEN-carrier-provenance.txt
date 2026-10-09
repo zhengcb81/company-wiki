@@ -1,0 +1,56 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 17 items
+
+tests\unit\test_narrative_generation.py .........                        [ 52%]
+tests\integration\test_narrative_generation_candidates.py ..FF.          [ 82%]
+tests\integration\test_narrative_generation_concurrency.py FF            [ 94%]
+tests\integration\test_narrative_batch_recovery_e2e.py .                 [100%]
+
+================================== FAILURES ===================================
+_ test_only_complete_matching_visible_and_replayed_candidate_is_eligible[partial] _
+tests\integration\test_narrative_generation_candidates.py:53: in test_only_complete_matching_visible_and_replayed_candidate_is_eligible
+    pin = find_reuse_pin(reader, fixture.reader, payload, manifest, binding.source_facts[0])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_generation.py:111: in find_reuse_pin
+    complete = read_reuse_pin(artifacts, reader, payload, pin, facts, manifest)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_generation.py:85: in read_reuse_pin
+    or bundle.parser.to_dict() != manifest["parser_component"]
+       ^^^^^^^^^^^^^
+E   AttributeError: 'NarrativeBundle' object has no attribute 'parser'
+_ test_only_complete_matching_visible_and_replayed_candidate_is_eligible[complete] _
+tests\integration\test_narrative_generation_candidates.py:53: in test_only_complete_matching_visible_and_replayed_candidate_is_eligible
+    pin = find_reuse_pin(reader, fixture.reader, payload, manifest, binding.source_facts[0])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_generation.py:111: in find_reuse_pin
+    complete = read_reuse_pin(artifacts, reader, payload, pin, facts, manifest)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_generation.py:85: in read_reuse_pin
+    or bundle.parser.to_dict() != manifest["parser_component"]
+       ^^^^^^^^^^^^^
+E   AttributeError: 'NarrativeBundle' object has no attribute 'parser'
+___ test_concurrent_generation_waits_or_retries_then_reuses_one_post[False] ___
+tests\integration\test_narrative_generation_concurrency.py:39: in test_concurrent_generation_waits_or_retries_then_reuses_one_post
+    assert process.returncode == 0 and reused["status"] == "completed", reused
+E   AssertionError: {'budget': {'estimated_micro_usd': 0, 'tokens': 0, 'unknown_reservations': 0, 'unsettled_reservations': 0}, 'documents...1650ea1afe7f8105bc002', 'status': 'failed'}], 'error': 'NARRATIVE_BATCH_AttributeError', 'run_id': 'concurrent-b', ...}
+E   assert (1 == 0)
+E    +  where 1 = CompletedProcess(args=['C:\\Miniconda\\python.exe', '-X', 'utf8', '-B', 'C:\\Users\\郑曾波\\.codex\\worktrees\\audit-prov...H_AttributeError","run_id":"concurrent-b","schema_version":"narrative-batch-result/1","status":"failed"}\n', stderr='').returncode
+___ test_concurrent_generation_waits_or_retries_then_reuses_one_post[True] ____
+tests\integration\test_narrative_generation_concurrency.py:39: in test_concurrent_generation_waits_or_retries_then_reuses_one_post
+    assert process.returncode == 0 and reused["status"] == "completed", reused
+E   AssertionError: {'budget': {'estimated_micro_usd': 0, 'tokens': 0, 'unknown_reservations': 0, 'unsettled_reservations': 0}, 'documents...1650ea1afe7f8105bc002', 'status': 'failed'}], 'error': 'NARRATIVE_BATCH_AttributeError', 'run_id': 'concurrent-b', ...}
+E   assert (1 == 0)
+E    +  where 1 = CompletedProcess(args=['C:\\Miniconda\\python.exe', '-X', 'utf8', '-B', 'C:\\Users\\郑曾波\\.codex\\worktrees\\audit-prov...H_AttributeError","run_id":"concurrent-b","schema_version":"narrative-batch-result/1","status":"failed"}\n', stderr='').returncode
+=========================== short test summary info ===========================
+FAILED tests/integration/test_narrative_generation_candidates.py::test_only_complete_matching_visible_and_replayed_candidate_is_eligible[partial]
+FAILED tests/integration/test_narrative_generation_candidates.py::test_only_complete_matching_visible_and_replayed_candidate_is_eligible[complete]
+FAILED tests/integration/test_narrative_generation_concurrency.py::test_concurrent_generation_waits_or_retries_then_reuses_one_post[False]
+FAILED tests/integration/test_narrative_generation_concurrency.py::test_concurrent_generation_waits_or_retries_then_reuses_one_post[True]
+======================== 4 failed, 13 passed in 27.81s ========================

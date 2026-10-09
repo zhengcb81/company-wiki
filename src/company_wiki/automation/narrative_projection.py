@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import datetime, timedelta, timezone
 import json
 import sqlite3
@@ -128,8 +128,10 @@ class NarrativeEffectDispatcher:
         artifacts: NarrativeArtifactStore,
         *,
         allowed_job_ids: tuple[str, ...] | None = None,
+        generation_manifests: dict | None = None,
     ) -> None:
         self._allowed_job_ids = normalize_id_scope(allowed_job_ids, name="allowed_job_ids")
+        self._generation_manifests = generation_manifests or {}
         self._automation = automation
         self._artifacts = artifacts
 
@@ -159,10 +161,14 @@ class NarrativeEffectDispatcher:
 
         try:
             effect, bundle, payload = self._prepare_effect(lease.effect_id)
-            version = self._artifacts.prepare(
-                self._draft(effect, bundle),
-                payload,
-            )
+            draft = self._draft(effect, bundle)
+            manifest = self._generation_manifests.get(bundle.source_ref.document_id)
+            if manifest is not None:
+                metadata = json.loads(draft.metadata_json)
+                metadata.update(generation_manifest=manifest,
+                                generation_sha256=canonical_json_hash(manifest))
+                draft = replace(draft, metadata_json=canonical_json(metadata))
+            version = self._artifacts.prepare(draft, payload)
         except (
             IntegrityViolationError,
             NarrativeArtifactError,

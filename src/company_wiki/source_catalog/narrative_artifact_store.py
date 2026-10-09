@@ -577,6 +577,30 @@ class NarrativeArtifactReader:
         _require_current_identity(row, source)
         return NarrativeArtifactVersion.from_row(row)
 
+    def visible_generation_candidates(
+        self, *, document_id: str, source_id: str, source_sha256: str,
+        generation_sha256: str, limit: int = 32,
+    ) -> tuple[NarrativeArtifactVersion, ...]:
+        """Bounded exact-generation lookup; older compatible versions stay eligible."""
+        if not _SHA256.fullmatch(source_sha256) or not _SHA256.fullmatch(generation_sha256):
+            raise ValueError("generation/source SHA must be lowercase SHA-256")
+        if type(limit) is not int or not 1 <= limit <= 100:
+            raise ValueError("generation candidate limit must be 1 to 100")
+        sql = """SELECT * FROM narrative_artifact_versions
+            WHERE document_id=? AND source_id=? AND source_sha256=? AND status='visible'
+              AND json_extract(metadata_json, '$.generation_sha256')=?
+            ORDER BY activated_at DESC, created_at DESC, artifact_version_id DESC LIMIT ?"""
+        params = (document_id, source_id, source_sha256, generation_sha256, limit)
+        if self._connection is not None:
+            rows = self._connection.execute(sql, params).fetchall()
+        else:
+            assert self._reader is not None
+            rows = self._reader.fetchall(sql, params)
+        source = self._fetchone(_CURRENT_SOURCE_SQL, (document_id,))
+        for row in rows:
+            _require_current_identity(row, source)
+        return tuple(NarrativeArtifactVersion.from_row(row) for row in rows)
+
     def latest_visible_version(
         self, *, document_id: str, source_id: str, source_sha256: str,
     ) -> NarrativeArtifactVersion:

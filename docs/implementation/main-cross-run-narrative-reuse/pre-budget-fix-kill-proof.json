@@ -1,0 +1,71 @@
+{
+  "post-kill-owner-recovery": {
+    "local_post_count": 1,
+    "supplier_requests": 0,
+    "batch_result": {
+      "budget": {
+        "estimated_micro_usd": 3782,
+        "tokens": 3382,
+        "unknown_reservations": 1,
+        "unsettled_reservations": 0
+      },
+      "documents": [
+        {
+          "artifact_ref": null,
+          "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+          "errors": [
+            "DEPENDENCY_TERMINAL",
+            "MODEL_BUDGET_DENIED"
+          ],
+          "status": "dead_letter"
+        }
+      ],
+      "run_id": "parent-kill",
+      "schema_version": "narrative-batch-result/1",
+      "status": "budget_exhausted",
+      "storage": {
+        "persistent_added_bytes": 8527,
+        "scratch_peak_bytes": 0
+      }
+    },
+    "read_receipt": null,
+    "extra": {
+      "charged_output_bytes": 2097152,
+      "run_max_output_bytes": 2097152,
+      "reservation_output_bytes": null,
+      "reservation_output_bound": 2097152,
+      "persisted": {
+        "successful_result_counts": {
+          "source.narrative_select": 1
+        },
+        "effects_count": 0
+      },
+      "object_count": 0
+    }
+  },
+  "post-kill-other-db-refused": {
+    "local_post_count": 1,
+    "supplier_requests": 0,
+    "batch_result": {
+      "budget": {
+        "estimated_micro_usd": 0,
+        "tokens": 0,
+        "unknown_reservations": 0,
+        "unsettled_reservations": 0
+      },
+      "documents": [
+        {
+          "artifact_ref": null,
+          "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+          "status": "failed"
+        }
+      ],
+      "error": "BATCH_GENERATION_RECOVERY_REQUIRED",
+      "run_id": "other-after-kill",
+      "schema_version": "narrative-batch-result/1",
+      "status": "failed"
+    },
+    "read_receipt": null,
+    "extra": null
+  }
+}

@@ -48,7 +48,7 @@ def test_completed_cli_has_source_scoped_binding_and_relocates_without_rework(
             run = NarrativeRunStore(state.store.db_path).get_run("cli-e2e")
             assert run is not None
             frozen = json.loads(run.binding_json)
-            assert frozen["schema_version"] == "narrative-run-binding/2"
+            assert frozen["schema_version"] == "narrative-run-binding/3"
             assert frozen["read_policy_schema_version"] == "3.0"
             assert set(frozen["source_read_policies"]) == set(state.indexed)
             auto_before = _dump(state.store.db_path)
