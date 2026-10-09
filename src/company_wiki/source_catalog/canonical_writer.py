@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from enum import Enum
 import hashlib
 import json
@@ -123,6 +123,46 @@ def _extension(receipt: DownloadReceipt) -> str:
     return by_mime.get(receipt.mime_type, ".bin")
 
 
+@dataclass(frozen=True)
+class _OfficialOriginal:
+    """Actual source metadata, deliberately not a fiscal DownloadCandidate."""
+    entity: str
+    market: str | None
+    title: str
+    source_url: str
+    document_kind: str
+    filing_date: str | None
+    fiscal_year: int | None
+    fiscal_period: str | None
+    language: str | None
+    publisher: str
+    provider: str
+    provider_document_id: str
+    form_type: str | None = None
+    amended: bool = False
+    metadata: Mapping[str, Any] = field(default_factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        return {key: value for key, value in asdict(self).items() if key != "metadata"}
+
+
+@dataclass(frozen=True)
+class _OriginalStorageReceipt:
+    """Local byte observation; no fabricated HTTP status or download event."""
+    staged_path: str
+    content_sha256: str
+    byte_size: int
+    mime_type: str
+    retrieved_at: str
+    adapter_name: str = "official-original-import"
+    adapter_version: str = "1.0.0"
+    etag: str | None = None
+    last_modified: str | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
 class CanonicalSourceWriter:
     """Own canonical paths, immutable provenance, hash reuse, and catalog registration."""
 
@@ -173,6 +213,12 @@ class CanonicalSourceWriter:
             if extension_size > MAX_PROVENANCE_EXTENSIONS_BYTES:
                 raise CanonicalImportError("provenance extensions exceed byte limit")
         staged = self._validate_staged(request, candidate, receipt)
+        return self._commit_staged(request, candidate, receipt, staged,
+                                   provenance_extensions=provenance_extensions, budget=budget)
+
+    def _commit_staged(self, request, candidate, receipt, staged, *,
+                       provenance_extensions=None, budget=None):
+        """One immutable commit algorithm shared by provider and local originals."""
         with CatalogOperationLock(
             self.catalog.config.catalog_dir,
             operation="canonical_import",
@@ -262,6 +308,37 @@ class CanonicalSourceWriter:
                 provenance_path=str(provenance.resolve()),
                 source_ref=source_ref,
             )
+
+    def import_original_staged(
+        self, *, request: SourceRequest, metadata: Mapping[str, Any],
+        staged_path: Path, content_sha256: str, byte_size: int, mime_type: str,
+        retrieved_at: str, capture_receipt: Mapping[str, Any],
+    ) -> CanonicalImportResult:
+        """Commit already verified local original through the same storage path.
+
+        OfficialSourceFlow owns MIME/capture/metadata validation. This storage
+        boundary checks the staged byte identity and owns the immutable copy,
+        deduplication, provenance and registration. It does not label a local
+        import as an HTTP download or manufacture a financial reporting year.
+        """
+        staged = staged_path.resolve(strict=True)
+        staged.relative_to(self.staging_root.resolve(strict=True))
+        if (not staged.is_file() or staged.is_symlink() or staged.stat().st_size != byte_size
+                or _hash_file(staged) != content_sha256):
+            raise CanonicalImportError("staged original byte identity mismatch")
+        candidate = _OfficialOriginal(
+            entity=request.entity, market=request.market, title=metadata["title"],
+            source_url=metadata["source_url"], document_kind=request.document_kind,
+            filing_date=metadata.get("filing_date"), fiscal_year=metadata.get("fiscal_year"),
+            fiscal_period=metadata.get("fiscal_period"), language=metadata.get("language"),
+            publisher=metadata["publisher"], provider="official",
+            provider_document_id=metadata.get("provider_document_id") or content_sha256,
+            metadata=dict(metadata),
+        )
+        receipt = _OriginalStorageReceipt(str(staged), content_sha256, byte_size,
+                                          mime_type, retrieved_at)
+        return self._commit_staged(request, candidate, receipt, staged,
+                                  provenance_extensions={"official_capture": dict(capture_receipt)})
 
     def source_ref_for_import(
         self,
@@ -448,6 +525,15 @@ class CanonicalSourceWriter:
             "candidate": candidate.to_dict(),
             "receipt": receipt.to_dict(),
         }
+        if isinstance(candidate, _OfficialOriginal):
+            payload.update({"display_name": candidate.entity,
+                            "published_date": candidate.metadata["published_date"],
+                            "period_end": candidate.metadata.get("period_end"),
+                            "publisher": candidate.publisher,
+                            "collector_name": "official-original-import",
+                            "collector_version": "1.0.0"})
+            if candidate.metadata.get("canonical_entity_id") is not None:
+                payload["canonical_entity_id"] = candidate.metadata["canonical_entity_id"]
         if provenance_extensions is not None:
             payload["provenance_extensions"] = dict(provenance_extensions)
         encoded = (canonical_json(payload) + "\n").encode("utf-8")

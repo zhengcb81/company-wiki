@@ -32,6 +32,7 @@ from .narrative_contracts import (
     SourceRevisionEventPayload,
 )
 from .narrative_model import NARRATIVE_PROMPT_VERSION
+from .narrative_formats import source_class_for
 from .narrative_projection import NarrativeEffectDispatcher
 from .narrative_run_store import NarrativeRunStore, RunConflictError
 from .narrative_source_guard import (
@@ -94,7 +95,7 @@ def _current_sources(request, reader, *, deadline=None):
         _check_preparation_deadline(deadline)
         kind = metadata["document_kind"] or "unknown"
         language = metadata.get("language")
-        if language is None:
+        if language in {None, "unknown"}:
             opened = reader.open_version(
                 current,
                 purpose="narrative_derivation",
@@ -116,7 +117,7 @@ def _current_sources(request, reader, *, deadline=None):
         payloads.append(SourceRevisionEventPayload.from_dict({
             "schema_version": "source-revision-event/2.0", "source_ref": ref.to_dict(),
             "expected_read_policy_sha256": policy,
-            "source_metadata": {"source_class": "transcript" if kind == "investor_call_transcript" else "filing",
+            "source_metadata": {"source_class": source_class_for(current.mime_type, kind),
                                 "title": metadata["title"], "document_kind": kind, "language": language},
         }))
         source_facts.append({"document_id": ref.document_id,
