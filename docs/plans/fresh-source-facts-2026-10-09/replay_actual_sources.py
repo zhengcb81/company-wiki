@@ -44,7 +44,7 @@ def snapshot(path):
     }
 
 
-def main():
+def main(receipt_name="actual_source_receipt.json"):
     from company_wiki.source_catalog.config import load_catalog_config
     from company_wiki.source_catalog.dayu_fiscal_metadata import extract_sec_primary
     from company_wiki.source_catalog.local_inventory import (
@@ -250,7 +250,9 @@ def main():
     assert (
         receipt["protected_unchanged"] and receipt["temps_absent_after"] and not network
     )
-    out = Path(__file__).with_name("actual_source_receipt.json")
+    if Path(receipt_name).name != receipt_name:
+        raise ValueError("receipt_name must remain in this independent PWF")
+    out = Path(__file__).with_name(receipt_name)
     out.write_text(
         json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
@@ -274,4 +276,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--receipt-name", default="actual_source_receipt.json")
+    main(parser.parse_args().receipt_name)

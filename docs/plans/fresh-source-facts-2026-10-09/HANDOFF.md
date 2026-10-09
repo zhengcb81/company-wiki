@@ -1,3 +1,5 @@
+> Historical delivery below failed independent scope qualification acceptance. Use HANDOFF_qualification.md and qualification_delivery_manifest.json for current remediation. Old receipts remain sealed.
+
 # W06 source facts / local discovery delivery
 
 ## Owner and branch

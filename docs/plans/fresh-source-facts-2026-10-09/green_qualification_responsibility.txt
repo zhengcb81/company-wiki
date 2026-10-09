@@ -1,0 +1,33 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\w06-qualification-regression-1w241cfw\\pytest", "requested_basetemp_len": 76, "cwd_len": 63, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261009-171513-d166ef76", "effective_basetemp_len": 75}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 213 items
+
+tests\contract\test_title_source_fact.py .......                         [  3%]
+tests\contract\test_local_request_relevance.py ......................    [ 13%]
+tests\contract\test_local_discovery_limits.py ......                     [ 16%]
+tests\contract\test_company_source_layout.py ......s..                   [ 20%]
+tests\contract\test_registration_read_budget.py .........                [ 24%]
+tests\unit\test_source_facts.py .......................                  [ 35%]
+tests\unit\test_dayu_fiscal_metadata.py ................................ [ 50%]
+..                                                                       [ 51%]
+tests\unit\test_adapter_registration_efficiency.py .....                 [ 53%]
+tests\unit\test_source_catalog_scanner_direct.py ....                    [ 55%]
+tests\integration\test_legacy_local_reconcile.py ....................... [ 66%]
+....                                                                     [ 68%]
+tests\contract\test_company_raw_adapter.py .....                         [ 70%]
+tests\contract\test_dayu_adapter.py ....                                 [ 72%]
+tests\contract\test_sidecar_adapter.py ...........                       [ 77%]
+tests\contract\test_adapter_production_dispatch.py .........             [ 82%]
+tests\contract\test_scanner_facade.py ....                               [ 84%]
+tests\contract\test_source_version_reader.py ........................... [ 96%]
+......                                                                   [ 99%]
+tests\e2e\test_r2_source_facts_real_bytes.py s                           [100%]
+
+======================= 211 passed, 2 skipped in 23.48s =======================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261009-171513-d166ef76", "existed": true, "removed": false}

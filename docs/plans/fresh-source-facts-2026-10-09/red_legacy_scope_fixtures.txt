@@ -1,0 +1,77 @@
+Historical simplified fixture compatibility RED before fixture upgrade. No negative contract removed.
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 3 items
+
+tests\contract\test_source_catalog_resolver.py FFF                       [100%]
+
+================================== FAILURES ===================================
+_ test_resolver_prefers_strong_provider_identity_and_builds_capture_ready_handle _
+src\company_wiki\source_catalog\assertion_service.py:215: in source_scope_qualification
+    identity = source_issuer_identity(catalog, source_identity, None)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\assertion_service.py:59: in source_issuer_identity
+    ).load(markets=(request.market,) if request.market else None)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\security_identity.py:408: in load
+    raise SecurityMasterUnavailableError(
+E   company_wiki.source_catalog.security_identity.SecurityMasterUnavailableError: no security-master snapshots found in C:\Users\郑曾波\AppData\Local\Temp\pytest-of-郑曾波\pytest-50\test_resolver_prefers_strong_p0\project\.source_catalog\security_master
+
+The above exception was the direct cause of the following exception:
+tests\contract\test_source_catalog_resolver.py:167: in test_resolver_prefers_strong_provider_identity_and_builds_capture_ready_handle
+    result = SourceResolver(catalog).resolve(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\resolver.py:1450: in resolve
+    scope_qualification = source_scope_qualification(self.catalog, source_ref,
+src\company_wiki\source_catalog\assertion_service.py:217: in source_scope_qualification
+    raise SourceReadError("blocked", "primary_identity_unresolved") from exc
+E   company_wiki.source_catalog.source_reader.SourceReadError: blocked: primary_identity_unresolved
+____________ test_resolver_anchors_ticker_to_issuer_canonical_name ____________
+src\company_wiki\source_catalog\assertion_service.py:215: in source_scope_qualification
+    identity = source_issuer_identity(catalog, source_identity, None)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\assertion_service.py:59: in source_issuer_identity
+    ).load(markets=(request.market,) if request.market else None)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\security_identity.py:384: in load
+    raise SecurityIdentityError(f"invalid {market} snapshot schema")
+E   company_wiki.source_catalog.security_identity.SecurityIdentityError: invalid US snapshot schema
+
+The above exception was the direct cause of the following exception:
+tests\contract\test_source_catalog_resolver.py:564: in test_resolver_anchors_ticker_to_issuer_canonical_name
+    result = SourceResolver(catalog).resolve(
+src\company_wiki\source_catalog\resolver.py:1450: in resolve
+    scope_qualification = source_scope_qualification(self.catalog, source_ref,
+src\company_wiki\source_catalog\assertion_service.py:217: in source_scope_qualification
+    raise SourceReadError("blocked", "primary_identity_unresolved") from exc
+E   company_wiki.source_catalog.source_reader.SourceReadError: blocked: primary_identity_unresolved
+________ test_resolver_matches_sibling_ticker_and_alias_of_same_issuer ________
+src\company_wiki\source_catalog\assertion_service.py:215: in source_scope_qualification
+    identity = source_issuer_identity(catalog, source_identity, None)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\assertion_service.py:59: in source_issuer_identity
+    ).load(markets=(request.market,) if request.market else None)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\security_identity.py:384: in load
+    raise SecurityIdentityError(f"invalid {market} snapshot schema")
+E   company_wiki.source_catalog.security_identity.SecurityIdentityError: invalid US snapshot schema
+
+The above exception was the direct cause of the following exception:
+tests\contract\test_source_catalog_resolver.py:588: in test_resolver_matches_sibling_ticker_and_alias_of_same_issuer
+    result = SourceResolver(catalog).resolve(
+src\company_wiki\source_catalog\resolver.py:1450: in resolve
+    scope_qualification = source_scope_qualification(self.catalog, source_ref,
+src\company_wiki\source_catalog\assertion_service.py:217: in source_scope_qualification
+    raise SourceReadError("blocked", "primary_identity_unresolved") from exc
+E   company_wiki.source_catalog.source_reader.SourceReadError: blocked: primary_identity_unresolved
+=========================== short test summary info ===========================
+FAILED tests/contract/test_source_catalog_resolver.py::test_resolver_prefers_strong_provider_identity_and_builds_capture_ready_handle
+FAILED tests/contract/test_source_catalog_resolver.py::test_resolver_anchors_ticker_to_issuer_canonical_name
+FAILED tests/contract/test_source_catalog_resolver.py::test_resolver_matches_sibling_ticker_and_alias_of_same_issuer
+============================== 3 failed in 1.33s ==============================

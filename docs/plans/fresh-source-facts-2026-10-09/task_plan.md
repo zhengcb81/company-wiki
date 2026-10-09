@@ -1,12 +1,16 @@
 # W06 common source facts implementation
 
+## Current status
+
+Old fc1c1c0c / d44421fa delivery failed MAIN independent scope qualification acceptance. Historical GREEN evidence remains sealed. Shared source-owner qualification remediation is committed as 4c92b72c; final concentrated regression260passed/3skipped and new actual-byte replay GREEN. Merge/push/install and independent major reacceptance belong to MAIN.
+
 ## Goal
 
 Implement the independently diagnosed source-fact title/form correction, actual-byte request relevance and bounded metadata discovery without new permissions, duplicate downloads or changes to original bytes. Base284328bb; branch codex/fresh-source-facts-20261009.
 
 ## Ownership
 
-Only assertion_service.py, resolver.py, dayu_fiscal_metadata.py, local_reconcile.py, local_inventory.py, source_group_scope.py, adapters/company_raw.py, scanner.py, related tests and this PWF. No W05, FF/ET/RF, Dayu, production config/raw or shared hooks/CI edits. MAIN owns integration and publication.
+Authorized 14 source files: assertion_service.py, resolver.py, dayu_fiscal_metadata.py, local_reconcile.py, local_inventory.py, source_group_scope.py, scanner.py, service.py, registration_scope.py, adapter_dispatch.py, source_reader.py and adapters/company_raw.py, adapters/dayu.py, adapters/sidecar.py; related tests and this PWF. No W05, FF/ET/RF, Dayu, production config/raw or shared hooks/CI edits. MAIN owns integration and publication.
 
 ## Design
 
@@ -23,7 +27,7 @@ Actual title-null quarterly HTML originals each have exact head title10-Q. Add t
 
 ## Next Step
 
-MAIN independently accepts source commit fc1c1c0c8bff1eb6a1a1c499a48dfadeef702a0f and the accompanying PWF/evidence, then integrates and publishes.
+MAIN independently reaccepts source commit 4c92b72cbae8c3507588b4c4fbe99bba6e0ee676 with HANDOFF_qualification.md and the current qualification manifest, then integrates. The old two commits alone must not be integrated as accepted.
 
 ## Acceptance
 
@@ -48,3 +52,25 @@ MAIN authorized source_reader.py verify_version/_verified_version optional budge
 ## Final bounded outcome semantics
 
 Only verified actual-byte issuer/year/period/form mismatch is skipped before unrelated date/publication metadata. Missing/ambiguous scope, bad SHA/identity, matching-period unsupported date, unknown public day, byte/deadline/entries/candidate exhaustion remain explicit blocked/unavailable; never false absence or permission. Metadata directory group256 and entry4096 caps are independent of raw read candidate16. Registration hashes, sidecar/cache reads, all ready branches and restoration share one LocalReadBudget. Complete scans defaultNone keep their established independent behavior. Root paths remain a storage detail; consumers receive SourceRef, not a path recipe.
+
+## Independent rejection: cached scope qualification (P1)
+
+MAIN acceptance failed: cached FY2026 annual labels can describe original CIK99999 or actual FY2022. Both initial and final ready returns bypass original scope proof. Prior GREEN remains evidence of its limited coverage, not acceptance.
+
+5. RED both cached-hit issuer/year contradictions at both ready paths; positive correct cache, genuine proof reuse, byte budget exactly one original, and irrelevant-old-source controls.
+6. Unified qualification in local_reconcile; existing restore_document_facts computes facts from one verified original under its lock (optional builder path, old explicit facts calls unchanged). Actual SEC scope evidence records primary CIK and extraction method in the existing field evidence JSON; import declarations and form-only evidence cannot substitute. Reuse requires matching SHA/value/locator, original scope and registered issuer provenance. Master remains the existing fallback, not a mandatory identity approval on each read. Failed candidates cannot be selected again by final query.
+7. Concentrated source-owner contracts/regression, frozen MSFT read-only replay, normal commit and new handoff; MAIN independent reacceptance only. No W05/other project/production edits, no external calls or new permission/task ledger.
+
+
+## Shared source-owner remediation after normal-API causal verification
+
+Actual ensure() and stage_selected() reuse matched catalog before prepare; FF found candidates use open_version(filing_reuse). Two normal-API causal receipts and two canonical RED logs establish these bypasses. Do not patch acquisition.py, FF or RF independently. DB query remains provisional; assertion_service.SourceScopeQualification is shared by resolver's actual candidate read and SourceReader filing_reuse. Supplied LocalReadBudget is not reset; SHA and incomplete-proof parsing consume one retained original buffer. Complete hash/value/DEI-locator/primary-CIK evidence reuses a streamed SHA check, no reparse/master lookup. Raw source_export/preview stays byte-only.
+
+Registered CIK is an observed provider field or CIK from the exact recorded HTTPS sec.gov Archives path (host/path/credentials/port validated). URL is preserved; no reconstructed URL or accession-prefix identity guess. URL CIK is provenance to compare against raw DEI, never proof that the body was parsed. Conflicting registered CIK observations return primary_issuer_conflict; unknown original scope stays a named unresolved qualification, not empty. Alias/request matching is existing resolver responsibility. If no registered CIK exists, older sources may consult their existing registered issuer master; no new master schema admission for known provider facts.
+
+Three compatibility REDs were archived in red_legacy_scope_fixtures.txt. Their simplified HTML had no actual DEI; the tests are about provider selection and same-issuer GOOG/GOOGL alias reuse, not eligibility of fabricated financial facts. Only two fixture writers gain genuine five-field DEI bodies (three cases); legacy master/alias assertions and all negative tests remain unchanged. New complete-proof efficiency contracts forbid master reload/reparse and count one raw open; unknown and contradictory provenance are separate negative controls.
+
+Final tests use exclusive TEMP, and record the effective pytest basetemp selected by repository safety hooks. Only this exact owned generation may be removed. The real MSFT replay uses frozen DB backup and original bytes read-only; no external HTTP, new dates or original writes. This lane asserts source-owner behavior, not a new complete RF execution or whole-chain cross-process one-read guarantee.
+
+
+Final phase7 lane execution complete: source commit 4c92b72cbae8c3507588b4c4fbe99bba6e0ee676 with ordinary hooks GREEN, concentrated260passed/3skipped and actual MSFT11.664s/7reads52,643,200B GREEN; own TEMP restored, originals/config/frozen DB unchanged. MAIN independent reacceptance pending.

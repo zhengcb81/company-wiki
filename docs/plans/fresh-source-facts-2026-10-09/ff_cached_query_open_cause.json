@@ -1,0 +1,18 @@
+{
+  "schema_version": "w06-ff-query-open-cause/1",
+  "transport": "In-process real CWP query_local/describe_candidate JSON payload into real FF candidate function; not a full FF subprocess/network run",
+  "query_status": "found",
+  "ff_outcome": "reused_existing",
+  "ff_provisional_byte_verified": false,
+  "downstream_open_status": "accepted",
+  "actual_primary_cik": "99999",
+  "requested_cik": "12345",
+  "content_sha256": "27572046bae50fbeda71446d38af50d44832e5a4ad02f149858788e7bb692fdd",
+  "byte_size": 438,
+  "raw_unchanged": true,
+  "download_events": 0,
+  "external_requests": 0,
+  "model_requests": 0,
+  "ff_source_modified": false,
+  "temporary_root_absent": true
+}

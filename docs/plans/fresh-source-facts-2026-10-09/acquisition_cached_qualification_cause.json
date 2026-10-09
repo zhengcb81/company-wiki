@@ -1,0 +1,27 @@
+{
+  "schema_version": "w06-acquisition-cached-qualification-cause/1",
+  "cases": [
+    {
+      "case": "wrong_cik",
+      "status": "reused",
+      "reason": "existing_catalog_source_reused_before_adapter",
+      "content_sha256": "27572046bae50fbeda71446d38af50d44832e5a4ad02f149858788e7bb692fdd",
+      "byte_size": 438,
+      "supplier_calls": 0,
+      "raw_unchanged": true
+    },
+    {
+      "case": "wrong_year",
+      "status": "reused",
+      "reason": "existing_catalog_source_reused_before_adapter",
+      "content_sha256": "6301c771c1aa49c0a3d528cf587229d4fba77ceae6369cfa33a59ad156cd6498",
+      "byte_size": 438,
+      "supplier_calls": 0,
+      "raw_unchanged": true
+    }
+  ],
+  "temporary_root_absent": true,
+  "external_requests": 0,
+  "model_requests": 0,
+  "unapproved_source_changes": 0
+}

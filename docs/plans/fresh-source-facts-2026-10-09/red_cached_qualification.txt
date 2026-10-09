@@ -1,0 +1,6 @@
+2026-10-09 canonical RED before implementation:
+pytest -q tests/contract/test_local_request_relevance.py -k "cached_request_hit or correct_cache"
+5 failed / 8 deselected in 2.12s.
+Both initial and after_discovery ready return ready for actual CIK99999 and actualFY2022/cacheFY2026.
+Correct cached original keeps imported title fixture original instead of actual10-K.
+Original bytes restored by owned tmp fixtures.
