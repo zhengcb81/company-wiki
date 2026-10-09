@@ -41,7 +41,9 @@ def selection(count=1, *, role="company_filing", flags=(), text_suffix=""):
             "bbox": [72.123456, 180.654321, 500.123456, 600.654321],
             "block_sha256": digest,
             "text_sha256": digest,
-            "selection_group_id": "urn:company-wiki:group:sha256:" + digest,
+            # Each page has an independent complete sentence. Group closure
+            # tests use explicit multi-span fixtures; these are singleton groups.
+            "selection_group_id": "urn:company-wiki:group:sha256:" + digest + f":singleton:{index}",
         },
         parser_name="synthetic-parser", parser_version="1.0.0",
         parse_status="parsed", quality_flags=flags,

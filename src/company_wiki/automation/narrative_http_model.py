@@ -68,7 +68,12 @@ class ModelOutputTruncatedError(ModelResponseError):
         input_tokens: int | None,
         output_tokens: int | None,
         duration_ms: int,
+        content_bytes: int = 0,
     ) -> None:
+        if type(content_bytes) is not int or not 0 <= content_bytes <= MODEL_RESPONSE_MAX_BYTES:
+            raise ValueError("invalid truncated content byte count")
+        self.finish_reason = "length"
+        self.content_bytes = content_bytes
         self.model_id = model_id
         self.input_tokens = input_tokens
         self.output_tokens = output_tokens
@@ -240,6 +245,7 @@ class NarrativeHTTPModel:
         """The exact, secret-free body, also usable for pre-request reservation."""
         if not isinstance(request, NarrativeModelRequest):
             raise ModelResponseError("MODEL_REQUEST_INVALID")
+        request = request.with_output_budget(self.max_output_tokens)
         payload = {
             "model": self.model_id,
             "messages": [
@@ -393,6 +399,7 @@ class NarrativeHTTPModel:
                 input_tokens=input_tokens,
                 output_tokens=output_tokens,
                 duration_ms=duration_ms,
+                content_bytes=len(encoded),
             )
         if not encoded:
             raise ModelEnvelopeError("empty_content", http_status=http_status,

@@ -1,0 +1,41 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\wsum-uw_urz19\\pytest", "requested_basetemp_len": 52, "cwd_len": 63, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki
+configfile: pytest.ini
+collected 215 items
+
+tests\contract\test_narrative_output_plan.py ......                      [  2%]
+tests\contract\test_summary_group_coverage.py ................           [ 10%]
+tests\unit\test_narrative_model_request.py ........                      [ 13%]
+tests\unit\test_narrative_model_aliases.py .........                     [ 18%]
+tests\unit\test_narrative_model_usage.py ...............                 [ 25%]
+tests\unit\test_narrative_model_caller.py .............                  [ 31%]
+tests\unit\test_narrative_http_model.py ................................ [ 46%]
+...........................                                              [ 58%]
+tests\unit\test_narrative_summarize_handler.py ......................... [ 70%]
+..............                                                           [ 76%]
+tests\unit\test_narrative_model_config.py ...........................    [ 89%]
+tests\unit\test_narrative_run_store.py ......................            [ 99%]
+tests\integration\test_narrative_batch_budget_and_resume.py F            [100%]
+
+================================== FAILURES ===================================
+_ test_actual_completed_cli_survives_execution_upgrade_without_rework_or_ledger_changes _
+tests\integration\test_narrative_batch_budget_and_resume.py:124: in test_actual_completed_cli_survives_execution_upgrade_without_rework_or_ledger_changes
+    assert frozen["execution_versions"]["prompt"] == "1.6.0"
+E   AssertionError: assert '1.7.0' == '1.6.0'
+E     
+E     - 1.6.0
+E     ?   ^
+E     + 1.7.0
+E     ?   ^
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/integration/test_narrative_batch_budget_and_resume.py::test_actual_completed_cli_survives_execution_upgrade_without_rework_or_ledger_changes
+================== 1 failed, 214 passed, 1 warning in 14.54s ==================

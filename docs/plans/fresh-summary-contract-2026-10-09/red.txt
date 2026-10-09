@@ -1,0 +1,142 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\wsum-mqa3nyxr\\pytest", "requested_basetemp_len": 52, "cwd_len": 63, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki
+configfile: pytest.ini
+collected 22 items
+
+tests\contract\test_narrative_output_plan.py FFFFFF                      [ 27%]
+tests\contract\test_summary_group_coverage.py FFFF..FFFFFFFFF.           [100%]
+
+================================== FAILURES ===================================
+_ test_96_span_compact_plan_is_material_excerpt_not_row_enumeration_and_preserves_every_source_row _
+tests\contract\test_narrative_output_plan.py:36: in test_96_span_compact_plan_is_material_excerpt_not_row_enumeration_and_preserves_every_source_row
+    body=json.loads(model.request_bytes(request)); envelope=json.loads(body["messages"][1]["content"]); plan=envelope["output_plan"]
+                                                                                                             ^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'output_plan'
+_ test_compact_plan_uses_real_configured_cap_without_changing_model_or_generation_options[1200] _
+tests\contract\test_narrative_output_plan.py:48: in test_compact_plan_uses_real_configured_cap_without_changing_model_or_generation_options
+    body=json.loads(model.request_bytes(request));plan=json.loads(body["messages"][1]["content"])["output_plan"]
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'output_plan'
+_ test_compact_plan_uses_real_configured_cap_without_changing_model_or_generation_options[2400] _
+tests\contract\test_narrative_output_plan.py:48: in test_compact_plan_uses_real_configured_cap_without_changing_model_or_generation_options
+    body=json.loads(model.request_bytes(request));plan=json.loads(body["messages"][1]["content"])["output_plan"]
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'output_plan'
+_ test_compact_plan_uses_real_configured_cap_without_changing_model_or_generation_options[8192] _
+tests\contract\test_narrative_output_plan.py:48: in test_compact_plan_uses_real_configured_cap_without_changing_model_or_generation_options
+    body=json.loads(model.request_bytes(request));plan=json.loads(body["messages"][1]["content"])["output_plan"]
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'output_plan'
+_ test_truncated_96_span_attempt_settles_once_with_safe_length_diagnostic_and_cannot_blindly_replay _
+tests\contract\test_narrative_output_plan.py:58: in test_truncated_96_span_attempt_settles_once_with_safe_length_diagnostic_and_cannot_blindly_replay
+    store.create_run(run_id="current-prompt",request_sha256="b"*64,model_id="model-one",prompt_version=NARRATIVE_PROMPT_VERSION,
+E   TypeError: NarrativeRunStore.create_run() got an unexpected keyword argument 'request_sha256'
+_ test_truncation_reaches_handler_static_diagnostics_with_original_source_identity_and_no_success _
+tests\contract\test_narrative_output_plan.py:83: in test_truncation_reaches_handler_static_diagnostics_with_original_source_identity_and_no_success
+    result=NarrativeSummarizeHandler(model=None,model_caller=Caller())(handler_context(selected))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_summarize.py:162: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_summarize.py:221: in _execute
+    response, metrics = self._model_caller.generate(context, request)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\contract\test_narrative_output_plan.py:81: in generate
+    raise NarrativeBudgetCallError("MODEL_OUTPUT_TRUNCATED",HandlerOutcome.TERMINAL_FAILURE,
+E   TypeError: NarrativeBudgetCallError.__init__() got an unexpected keyword argument 'finish_reason'
+_ test_model_envelope_has_stable_whole_groups_without_duplicate_text_or_source_changes _
+tests\contract\test_summary_group_coverage.py:20: in test_model_envelope_has_stable_whole_groups_without_duplicate_text_or_source_changes
+    assert envelope["evidence_groups"] == [["g1", ["e1", "e2"]], ["g2", ["e3", "e4"]]]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'evidence_groups'
+_ test_omitted_hk_service_fee_or_us_previously_azure_tail_cannot_support_a_declared_group[HK] _
+tests\contract\test_summary_group_coverage.py:36: in test_omitted_hk_service_fee_or_us_previously_azure_tail_cannot_support_a_declared_group
+    with pytest.raises(NarrativeContractError, match="group coverage is incomplete"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE NarrativeContractError
+_ test_omitted_hk_service_fee_or_us_previously_azure_tail_cannot_support_a_declared_group[US-new-W02] _
+tests\contract\test_summary_group_coverage.py:36: in test_omitted_hk_service_fee_or_us_previously_azure_tail_cannot_support_a_declared_group
+    with pytest.raises(NarrativeContractError, match="group coverage is incomplete"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE NarrativeContractError
+_ test_omitted_hk_service_fee_or_us_previously_azure_tail_cannot_support_a_declared_group[US-sealed-old-group] _
+tests\contract\test_summary_group_coverage.py:36: in test_omitted_hk_service_fee_or_us_previously_azure_tail_cannot_support_a_declared_group
+    with pytest.raises(NarrativeContractError, match="group coverage is incomplete"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE NarrativeContractError
+_ test_legacy_or_explicit_narrow_claim_can_survive_but_partial_context_is_diagnostic[None] _
+tests\contract\test_summary_group_coverage.py:55: in test_legacy_or_explicit_narrow_claim_can_survive_but_partial_context_is_diagnostic
+    assert result["claims"][0]["needs_review"] is True and result["status"] == "needs_review"
+E   assert (False is True)
+_ test_legacy_or_explicit_narrow_claim_can_survive_but_partial_context_is_diagnostic[declaration1] _
+tests\contract\test_summary_group_coverage.py:55: in test_legacy_or_explicit_narrow_claim_can_survive_but_partial_context_is_diagnostic
+    assert result["claims"][0]["needs_review"] is True and result["status"] == "needs_review"
+E   assert (False is True)
+_ test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped[declaration0] _
+tests\contract\test_summary_group_coverage.py:60: in test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped
+    with pytest.raises(NarrativeContractError, match="summary claim evidence group"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE NarrativeContractError
+_ test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped[declaration1] _
+tests\contract\test_summary_group_coverage.py:60: in test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped
+    with pytest.raises(NarrativeContractError, match="summary claim evidence group"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE NarrativeContractError
+_ test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped[g1] _
+tests\contract\test_summary_group_coverage.py:60: in test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped
+    with pytest.raises(NarrativeContractError, match="summary claim evidence group"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE NarrativeContractError
+_ test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped[declaration3] _
+tests\contract\test_summary_group_coverage.py:60: in test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped
+    with pytest.raises(NarrativeContractError, match="summary claim evidence group"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE NarrativeContractError
+_ test_one_incomplete_group_claim_is_discarded_whole_without_modifying_the_good_claim _
+tests\contract\test_summary_group_coverage.py:67: in test_one_incomplete_group_claim_is_discarded_whole_without_modifying_the_good_claim
+    assert [c["claim_id"] for c in result["claims"]] == ["good"] and result["status"] == "needs_review"
+E   AssertionError: assert (['bad', 'good'] == ['good']
+E     
+E     At index 0 diff: 'bad' != 'good'
+E     Left contains one more item: 'good'
+E     Use -v to get more diff)
+_ test_handler_reports_static_group_reason_and_never_builds_a_success_artifact _
+tests\contract\test_summary_group_coverage.py:75: in test_handler_reports_static_group_reason_and_never_builds_a_success_artifact
+    assert result.outcome is HandlerOutcome.TERMINAL_FAILURE and result.result == {}
+E   AssertionError: assert (<HandlerOutcome.SUCCEEDED: 'succeeded'> is <HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'>)
+E    +  where <HandlerOutcome.SUCCEEDED: 'succeeded'> = HandlerResult(outcome=<HandlerOutcome.SUCCEEDED: 'succeeded'>, result=mappingproxy({'schema_version': 'narrative-summa...wed_at': None})}), artifacts=(), effects=(), metrics=HandlerMetrics(tokens=0, cost_usd=0.0, duration_ms=0), error=None).outcome
+E    +  and   <HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'> = HandlerOutcome.TERMINAL_FAILURE
+_ test_nine_member_complete_atomic_sentence_is_representable_inside_existing_transport_caps _
+tests\contract\test_summary_group_coverage.py:83: in test_nine_member_complete_atomic_sentence_is_representable_inside_existing_transport_caps
+    assert schema["properties"]["evidence_ids"]["maxItems"] >= 9
+E   assert 8 >= 9
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/contract/test_narrative_output_plan.py::test_96_span_compact_plan_is_material_excerpt_not_row_enumeration_and_preserves_every_source_row
+FAILED tests/contract/test_narrative_output_plan.py::test_compact_plan_uses_real_configured_cap_without_changing_model_or_generation_options[1200]
+FAILED tests/contract/test_narrative_output_plan.py::test_compact_plan_uses_real_configured_cap_without_changing_model_or_generation_options[2400]
+FAILED tests/contract/test_narrative_output_plan.py::test_compact_plan_uses_real_configured_cap_without_changing_model_or_generation_options[8192]
+FAILED tests/contract/test_narrative_output_plan.py::test_truncated_96_span_attempt_settles_once_with_safe_length_diagnostic_and_cannot_blindly_replay
+FAILED tests/contract/test_narrative_output_plan.py::test_truncation_reaches_handler_static_diagnostics_with_original_source_identity_and_no_success
+FAILED tests/contract/test_summary_group_coverage.py::test_model_envelope_has_stable_whole_groups_without_duplicate_text_or_source_changes
+FAILED tests/contract/test_summary_group_coverage.py::test_omitted_hk_service_fee_or_us_previously_azure_tail_cannot_support_a_declared_group[HK]
+FAILED tests/contract/test_summary_group_coverage.py::test_omitted_hk_service_fee_or_us_previously_azure_tail_cannot_support_a_declared_group[US-new-W02]
+FAILED tests/contract/test_summary_group_coverage.py::test_omitted_hk_service_fee_or_us_previously_azure_tail_cannot_support_a_declared_group[US-sealed-old-group]
+FAILED tests/contract/test_summary_group_coverage.py::test_legacy_or_explicit_narrow_claim_can_survive_but_partial_context_is_diagnostic[None]
+FAILED tests/contract/test_summary_group_coverage.py::test_legacy_or_explicit_narrow_claim_can_survive_but_partial_context_is_diagnostic[declaration1]
+FAILED tests/contract/test_summary_group_coverage.py::test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped[declaration0]
+FAILED tests/contract/test_summary_group_coverage.py::test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped[declaration1]
+FAILED tests/contract/test_summary_group_coverage.py::test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped[g1]
+FAILED tests/contract/test_summary_group_coverage.py::test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped[declaration3]
+FAILED tests/contract/test_summary_group_coverage.py::test_one_incomplete_group_claim_is_discarded_whole_without_modifying_the_good_claim
+FAILED tests/contract/test_summary_group_coverage.py::test_handler_reports_static_group_reason_and_never_builds_a_success_artifact
+FAILED tests/contract/test_summary_group_coverage.py::test_nine_member_complete_atomic_sentence_is_representable_inside_existing_transport_caps
+=================== 19 failed, 3 passed, 1 warning in 1.86s ===================

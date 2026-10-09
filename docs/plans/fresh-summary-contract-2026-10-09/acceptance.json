@@ -1,0 +1,56 @@
+{
+  "schema_version": "fresh-summary-local-acceptance/1",
+  "status": "LOCAL_M2_ACCEPTED_MAIN_PUBLICATION_M3_PENDING",
+  "base": "d6444ef9fbce1586652bff903a51285ee680964b",
+  "branch": "codex/fresh-summary-20261009",
+  "root_cause_ids": [
+    "RC02",
+    "RC07"
+  ],
+  "new_contract_count": 29,
+  "concentrated": {
+    "passed": 254,
+    "failed": 0,
+    "skipped": 0,
+    "elapsed_seconds": 25.94,
+    "log": "final-green.txt"
+  },
+  "independent_review": {
+    "passed": 89,
+    "failed": 0,
+    "skipped": 0,
+    "elapsed_seconds": 3.53,
+    "report": "final_acceptance.md"
+  },
+  "red_logs": [
+    "red.txt",
+    "review-red.txt"
+  ],
+  "retained_intermediate_failures": [
+    "green-first.txt",
+    "responsibility-first.txt",
+    "responsibility-second.txt",
+    "responsibility-final.txt",
+    "responsibility-accepted.txt"
+  ],
+  "originals_modified": false,
+  "production_config_modified": false,
+  "external_http_calls": 0,
+  "paid_calls": 0,
+  "cost_usd": 0,
+  "wrapper_owned_temp_roots_restored_absent": true,
+  "selected_installation_performed": false,
+  "source_fingerprints": {
+    "src/company_wiki/automation/narrative_model.py": "ab65959e541a81486920744ff249b2b05564d69e4818c4968c46f764e2815cb2",
+    "src/company_wiki/automation/narrative_http_model.py": "b1eb34662e52600a7d97d73c6a60032f7bad5dfe7e1168a32498560f7f534184",
+    "src/company_wiki/automation/narrative_model_caller.py": "4720c433e70d831474cab96789c68c9180988e3cfc5572cac5454cbcbd765d84",
+    "src/company_wiki/automation/narrative_summarize.py": "5e2f959d588a6fd62bebbc6c3fd761cd853d7ba9ff5519623f3057756d9fb9b5"
+  },
+  "remaining": [
+    "MAIN integrate normal hooks/push and exact remote CI",
+    "MAIN include new contract modules in shared CI/push test set",
+    "selected runtime installation only if applicable",
+    "same original CN/HK/US configured-provider M3 + independent semantic review",
+    "W12 same-input reuse/no-new-charge"
+  ]
+}

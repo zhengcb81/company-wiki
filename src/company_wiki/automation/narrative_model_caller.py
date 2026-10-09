@@ -49,8 +49,15 @@ class NarrativeBudgetCallError(Exception):
     http_status: int | None = None
     response_stage: str | None = None
     provider_code: int | None = None
+    finish_reason: str | None = None
+    content_bytes: int | None = None
 
     def __post_init__(self) -> None:
+        if self.finish_reason not in {None, "length"}:
+            raise ValueError("invalid response finish diagnostic")
+        if self.content_bytes is not None and (type(self.content_bytes) is not int
+                or not 0 <= self.content_bytes <= 128 * 1024):
+            raise ValueError("invalid response content byte diagnostic")
         if self.http_status is not None and (
             type(self.http_status) is not int or not 100 <= self.http_status <= 599
         ):
@@ -165,6 +172,7 @@ class BudgetedNarrativeCaller:
             usage = None
             http_status = None
             response_stage = provider_code = None
+            finish_reason = content_bytes = None
             duration_ms = max(0, int((time.monotonic() - started) * 1000))
             if isinstance(error, ModelTimeoutError):
                 code, outcome = "MODEL_TIMEOUT", HandlerOutcome.RETRYABLE
@@ -192,6 +200,7 @@ class BudgetedNarrativeCaller:
                     usage = ModelUsage(error.input_tokens, error.output_tokens)
             elif isinstance(error, ModelOutputTruncatedError):
                 code, duration_ms = "MODEL_OUTPUT_TRUNCATED", error.duration_ms
+                finish_reason, content_bytes = error.finish_reason, error.content_bytes
                 if error.input_tokens is not None and error.output_tokens is not None:
                     usage = ModelUsage(error.input_tokens, error.output_tokens)
             elif not isinstance(error, ModelResponseError):
@@ -208,6 +217,7 @@ class BudgetedNarrativeCaller:
             raise NarrativeBudgetCallError(
                 code, outcome, metrics, http_status=http_status,
                 response_stage=response_stage, provider_code=provider_code,
+                finish_reason=finish_reason, content_bytes=content_bytes,
             ) from None
         usage = None
         if response.input_tokens is not None and response.output_tokens is not None:

@@ -147,9 +147,25 @@ def test_question_role_cannot_be_marked_actual_in_the_canonical_contract():
 def test_old_long_summary_policy_is_not_a_reader_rejection_threshold():
     selected = selection()
     claims = [{**_claim(str(i)), "text": "来源已说明新业务项目进展。" * 40} for i in range(25)]
-    result = _complete(selected, _payload(selected, claims))
+    # This is a persisted reader-compatibility case, not a new model request.
+    # Preserve the historical long claims while the current model boundary
+    # enforces its declared twenty-claim / 280-character generation schema.
+    draft = _payload(selected, claims)["draft"]
+    for claim in draft["claims"]:
+        claim["evidence_ids"] = [selected.evidence_spans[0].span_id]
+    result = NarrativeSummaryResult.from_dict({
+        "schema_version": "narrative-summary-result/2.0",
+        "source_ref": selected.source_ref.to_dict(), "language": "zh",
+        "translate": False, "status": "completed", "draft": draft,
+        "model": {"adapter_id": "offline-legacy", "model_id": "offline-legacy",
+                  "prompt_version": "1.6.0", "response_sha256": "1" * 64},
+        "prompt_review": selected.prompt_review.to_dict(),
+    })
+    result.validate_against(selected)
+    bundle = NarrativeVerifyHandler._bundle(selected, result, selected.prompt_review)
     assert result.draft is not None and len(result.draft.claims) == 25
     assert result.draft.status == "draft"
+    assert bundle.summary.draft == result.draft
 
 
 @pytest.mark.parametrize("literal", ["NaN", "Infinity", "-Infinity"])

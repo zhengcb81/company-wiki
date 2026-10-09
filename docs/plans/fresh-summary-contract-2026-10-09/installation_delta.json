@@ -1,0 +1,32 @@
+{
+  "schema_version": "fresh-summary-installation-delta/1",
+  "base": "d6444ef9",
+  "installed": false,
+  "scope": "only four canonical source files; no config/provider/key/output/raw changes",
+  "files": [
+    {
+      "path": "src/company_wiki/automation/narrative_model.py",
+      "before_git_blob_sha256": "d963493131692760d7ad4deeee4cf6dc2ed15fdea8f2f7a6ff3ad19c5b8dfd49",
+      "after_worktree_bytes_sha256": "ab65959e541a81486920744ff249b2b05564d69e4818c4968c46f764e2815cb2",
+      "after_normalized_lf_sha256": "faad1a3c9504e9a650dbe46608037c1273ba4fdc0248513509d26a3046ebc30b"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_http_model.py",
+      "before_git_blob_sha256": "bca38fb3739a20b7d08f88a057a91ddbf60f75b264dbdfa61ab2c181cdbb8f5a",
+      "after_worktree_bytes_sha256": "b1eb34662e52600a7d97d73c6a60032f7bad5dfe7e1168a32498560f7f534184",
+      "after_normalized_lf_sha256": "6c14c8d15fb349acc8dd35a6fadad15bd91ce483b273435b46f9b8fe7d8b278f"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_model_caller.py",
+      "before_git_blob_sha256": "43097509ff7e7e3f1dd597b5b6575ee9af241d0ad7271526d80591a51f2a47f4",
+      "after_worktree_bytes_sha256": "4720c433e70d831474cab96789c68c9180988e3cfc5572cac5454cbcbd765d84",
+      "after_normalized_lf_sha256": "3d5543076b46a5453ab3ffb280c91628b72739cba55604ab465c6eea32dd2390"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_summarize.py",
+      "before_git_blob_sha256": "ce72dc3a7e6f2e13323c35e205aaa6f43026cdd5ef8934209d5f2e70aadb6ac1",
+      "after_worktree_bytes_sha256": "5e2f959d588a6fd62bebbc6c3fd761cd853d7ba9ff5519623f3057756d9fb9b5",
+      "after_normalized_lf_sha256": "fdea705efbff68063280495c6a2e7d930924bc664531493c8923b9d49c161f49"
+    }
+  ]
+}

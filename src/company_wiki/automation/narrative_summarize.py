@@ -54,12 +54,17 @@ def _summary_contract_rule(error: NarrativeContractError) -> str:
         "summary language must match the source language": "SOURCE_LANGUAGE",
         "summary draft must contain at least one claim": "CLAIMS_EMPTY",
         "summary claims must be an array": "CLAIMS_SHAPE",
+        "summary claims exceed twenty": "CLAIMS_LIMIT",
+        "summary claim text exceeds 280 characters": "CLAIM_TEXT",
+        "summary claim evidence IDs exceed the pinned unique set": "EVIDENCE_REFERENCE",
         "summary claim refers to unknown evidence IDs": "EVIDENCE_REFERENCE",
         "every summary claim requires evidence IDs": "EVIDENCE_REFERENCE",
         "non-company evidence cannot support a company statement": "CLAIM_ROLE",
         "analyst-question claims must cite question evidence only": "CLAIM_ROLE",
         "analyst-question claims must preserve question modality": "CLAIM_MODALITY",
         "summary claim IDs are duplicated": "CLAIM_DUPLICATE_ID",
+        "summary claim evidence group declaration is invalid": "GROUP_DECLARATION",
+        "summary claim evidence group coverage is incomplete": "GROUP_INCOMPLETE",
     }
     if message in exact:
         return exact[message]
@@ -170,6 +175,10 @@ class NarrativeSummarizeHandler:
                 status += f" (response_stage={exc.response_stage})"
             if exc.provider_code is not None:
                 status += f" (provider_code={exc.provider_code})"
+            if exc.finish_reason is not None:
+                status += f" (finish_reason={exc.finish_reason})"
+            if exc.content_bytes is not None:
+                status += f" (content_bytes={exc.content_bytes})"
             return _failure(
                 exc.code,
                 exc.outcome,

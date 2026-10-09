@@ -92,7 +92,9 @@ def test_large_selection_requests_short_merged_claims_without_removing_source_ev
     claims = envelope["response_schema"]["properties"]["draft"]["properties"]["claims"]
     assert claims["maxItems"] == 20
     assert claims["items"]["properties"]["text"]["maxLength"] == 280
-    assert claims["items"]["properties"]["evidence_ids"]["maxItems"] == 8
+    # Closure may require more than eight original fragments; references remain
+    # bounded by this pinned selection and existing HTTP/result byte caps.
+    assert claims["items"]["properties"]["evidence_ids"]["maxItems"] == len(selected.evidence_spans)
     assert len(envelope["evidence"]) == 160
     assert [row[1] for row in envelope["evidence"]] == [span.raw_text for span in selected.evidence_spans]
     assert "Merge" in request.instruction and "Prioritize" in request.instruction
