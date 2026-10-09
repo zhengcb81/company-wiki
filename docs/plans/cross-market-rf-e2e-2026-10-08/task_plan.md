@@ -13,6 +13,10 @@
 - W01/W02/W03/W04/W07/W10/W14此前工程接受仍有效；冻结64finding不改。项目整体未完成：W06/W12、W09/W13、原三家公司四审重跑、新三家泛化、NVDA与公司池loop仍在总目标内。
 - [本轮总回执](phase6/fresh_root_implementation_2026-10-09/main_capture_transcript_integration.json)、[昨日CI根因](phase6/ci_root_cause_2026-10-09/CLOSEOUT.md)、[冻结14卡](phase6/fresh_root_remediation_2026-10-09/IMPLEMENTATION.md)为工程证据。总回执内旧失败/旧head是历史事实；本节为最新执行状态。
 
+## 已登记的下一目标（当前目标完成后激活）
+
+按用户2026-10-09新指令，完成当前目标后依次对**阿里巴巴、小米集团、药明生物、药明康德、药明合联、微软、Snowflake、MongoDB**运行完整revenue-forecast-audit；每家完成后先把已证实的重要新风险加入技能及相关测试，再处理下一家。固定八家须全部遍历，不使用连续三家干净即停止的抽样规则。当前goal仍active，尚未切换。执行/切换入口见[后续八家公司目标](followup_eight_company_audit.md)。
+
 ## 当前施工状态（2026-10-09；历史阶段完成不代表Phase6完成）
 
 - **最新优先节点已收尾**：昨日5次CI失败已逐一归因并补本地防漏检，详见[结果](phase6/ci_root_cause_2026-10-09/CLOSEOUT.md)。CWP d1ce50ee正常commit5.76秒、push2346PASS，FF23d25644共享27文件push553PASS/4明确SKIP/78subtests；两仓主线已推、精确远端CI成功。commit保持快速静态，不新加人审。

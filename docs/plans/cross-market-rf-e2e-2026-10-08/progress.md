@@ -592,3 +592,7 @@ W06正常ensure两早返回、FF query_found→最终open已由作者实证绕�
 - 已用大白话说明工程完成与真实研究未完成的区别；最新CWP文档head0504aa9d精确CI37967393014 SUCCESS/100s，与源码2350077a CI98s分开记录。FF41ba0150 CI81s、RF3c3c0379 CI37s仍为各仓最新通过依据。
 - task_plan页首清除过时的W05/RF“待推/待独立复审”现状，原FAIL/RED及历史叙述不重写。W06五入口共享事实资格待最终集中交付；W12仅工程缓存计量，不宣称已修未证实的缺陷。
 - 原件/生产config不改；本节点无新增来源供应商/LLM调用。整个goal仍active，M3/M4及loop未执行完成。
+
+## 2026-10-09 17:47 UTC — 登记下一目标，保持当前目标运行
+
+已创建followup_eight_company_audit.md并在task_plan引用，逐家列表、完整审查/根因处置/技能升级/定点同步及结束条件均登记。当前目标实际完成后先update_goal complete再create_goal新目标；目前不虚报切换、不启动八家付费研究。本次仅规划记录，0新下载/LLM调用，原件/config/Dayu不改。

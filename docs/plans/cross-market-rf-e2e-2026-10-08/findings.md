@@ -390,3 +390,7 @@ W06正常ensure两早返回、FF query_found→最终open已由作者实证绕�
 并行W12已从同235基线复用clean既有worktree，新branch codex/fresh-cache-receipts-20261009；仅新cache behavior contract/e2e测试+独立PWF。使用真实catalog/AUTO engine、synthetic model port、measure provider/parse/OCR调用和bytes；目前无已证prod故障，不臆改生成缓存。已知same-spec public回放可有parse/OCR，不能把该成本声称0；零收费调用，M3三家真实repeat留以后。
 
 诊断曾错误猜reader_cli.py及跨仓relative source_reader_cli.py路径，命令读取失败、无写操作；之后按report明确绝对路径成功读取CWP真实source_reader_cli.py和RF公司来源builder，未将shell失败作产品RED。
+
+## 2026-10-09 17:47 UTC — 后续八家公司目标的语义
+
+用户新增的是当前目标完成后的固定名单遍历，非立即替换或随机池抽样。顺序为阿里巴巴、小米集团、药明生物、药明康德、药明合联、微软、Snowflake、MongoDB。每家完成完整审查技能和必要根因修复后，根据真实新问题改进技能的重要风险检查点；下一家用已验证更新版本。默认连续三家干净的随机池停止规则不适用于该名单，微软旧执行不能替代新目标中的新运行。当前goal工具核实仍active，未create/complete。
