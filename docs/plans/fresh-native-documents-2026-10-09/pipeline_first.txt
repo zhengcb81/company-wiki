@@ -1,0 +1,768 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\fresh-capture-20261009\company-wiki
+configfile: pytest.ini
+collected 224 items
+
+tests\contract\test_official_transcript_layouts.py .......               [  3%]
+tests\contract\test_transcript_material.py .......                       [  6%]
+tests\contract\test_transcript_json_material.py ............             [ 11%]
+tests\unit\test_narrative_format_pipeline.py ............F               [ 17%]
+tests\unit\test_narrative_select_handler.py ........FFFFF.FFFFFF..F.FFFF [ 29%]
+                                                                         [ 29%]
+tests\unit\test_narrative_verify_handler.py FFFFFFFFFFFFFFFF.FFF         [ 38%]
+tests\unit\test_narrative_evidence.py .........F........................ [ 54%]
+............                                                             [ 59%]
+tests\unit\test_narrative_language.py ......                             [ 62%]
+tests\unit\test_narrative_generation.py FFFFFFF.FF.                      [ 66%]
+tests\integration\test_official_source_flow.py ...............FF........ [ 78%]
+...                                                                      [ 79%]
+tests\contract\test_official_capture_recovery.py ....................... [ 89%]
+.......................                                                  [100%]
+
+================================== FAILURES ===================================
+______ test_html_transcript_keeps_its_transcript_parser_and_byte_lineage ______
+tests\unit\test_narrative_format_pipeline.py:163: in test_html_transcript_keeps_its_transcript_parser_and_byte_lineage
+    raw, _ = selecting._run(payload, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_select_handler.py:240: in _run
+    result = handler(_context(payload, lambda: checkpoints.append(1)))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:212: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:262: in _execute
+    raw = self._result_dict(payload, review, work)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:440: in _result_dict
+    parser_name, parser_version = work.parser_identity or parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_select_handler_reads_pdf_bytes_for_high_value_document_types[Acme 2025 Annual Report.pdf-annual_report] _
+tests\unit\test_narrative_select_handler.py:306: in test_select_handler_reads_pdf_bytes_for_high_value_document_types
+    raw, checkpoint_count = _run(payload, data)
+                            ^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_select_handler.py:240: in _run
+    result = handler(_context(payload, lambda: checkpoints.append(1)))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:212: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:262: in _execute
+    raw = self._result_dict(payload, review, work)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:440: in _result_dict
+    parser_name, parser_version = work.parser_identity or parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+---------------------------- Captured stdout call -----------------------------
+Consider using the pymupdf_layout package for a greatly improved page layout analysis.
+_ test_select_handler_reads_pdf_bytes_for_high_value_document_types[\u9996\u6b21\u516c\u5f00\u53d1\u884c\u80a1\u7968\u5e76\u4e0a\u5e02\u62db\u80a1\u8bf4\u660e\u4e66.pdf-prospectus] _
+tests\unit\test_narrative_select_handler.py:306: in test_select_handler_reads_pdf_bytes_for_high_value_document_types
+    raw, checkpoint_count = _run(payload, data)
+                            ^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_select_handler.py:240: in _run
+    result = handler(_context(payload, lambda: checkpoints.append(1)))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:212: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:262: in _execute
+    raw = self._result_dict(payload, review, work)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:440: in _result_dict
+    parser_name, parser_version = work.parser_identity or parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_select_handler_reads_pdf_bytes_for_high_value_document_types[\u6295\u8d44\u8005\u5173\u7cfb\u6d3b\u52a8\u8bb0\u5f55\u8868.pdf-investor_relations] _
+tests\unit\test_narrative_select_handler.py:306: in test_select_handler_reads_pdf_bytes_for_high_value_document_types
+    raw, checkpoint_count = _run(payload, data)
+                            ^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_select_handler.py:240: in _run
+    result = handler(_context(payload, lambda: checkpoints.append(1)))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:212: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:262: in _execute
+    raw = self._result_dict(payload, review, work)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:440: in _result_dict
+    parser_name, parser_version = work.parser_identity or parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_select_handler_recovers_titleless_quarterly_business_narrative_with_replay[quarterly_report] _
+tests\unit\test_narrative_select_handler.py:328: in test_select_handler_recovers_titleless_quarterly_business_narrative_with_replay
+    raw, _ = _run(payload, data)
+             ^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_select_handler.py:240: in _run
+    result = handler(_context(payload, lambda: checkpoints.append(1)))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:212: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:262: in _execute
+    raw = self._result_dict(payload, review, work)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:440: in _result_dict
+    parser_name, parser_version = work.parser_identity or parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_select_handler_recovers_titleless_quarterly_business_narrative_with_replay[investor_relations] _
+tests\unit\test_narrative_select_handler.py:328: in test_select_handler_recovers_titleless_quarterly_business_narrative_with_replay
+    raw, _ = _run(payload, data)
+             ^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_select_handler.py:240: in _run
+    result = handler(_context(payload, lambda: checkpoints.append(1)))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:212: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:262: in _execute
+    raw = self._result_dict(payload, review, work)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:440: in _result_dict
+    parser_name, parser_version = work.parser_identity or parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_________ test_select_handler_does_not_require_prompt_review_receipt __________
+tests\unit\test_narrative_select_handler.py:392: in test_select_handler_does_not_require_prompt_review_receipt
+    raw, _ = _run(payload, data, reader=reader)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_select_handler.py:240: in _run
+    result = handler(_context(payload, lambda: checkpoints.append(1)))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:212: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:262: in _execute
+    raw = self._result_dict(payload, review, work)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:440: in _result_dict
+    parser_name, parser_version = work.parser_identity or parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_select_handler_transcript_keeps_only_selected_original_byte_bindings[text/plain] _
+tests\unit\test_narrative_select_handler.py:422: in test_select_handler_transcript_keeps_only_selected_original_byte_bindings
+    raw, _ = _run(payload, data)
+             ^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_select_handler.py:240: in _run
+    result = handler(_context(payload, lambda: checkpoints.append(1)))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:212: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:262: in _execute
+    raw = self._result_dict(payload, review, work)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:440: in _result_dict
+    parser_name, parser_version = work.parser_identity or parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_select_handler_transcript_keeps_only_selected_original_byte_bindings[text/html] _
+tests\unit\test_narrative_select_handler.py:422: in test_select_handler_transcript_keeps_only_selected_original_byte_bindings
+    raw, _ = _run(payload, data)
+             ^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_select_handler.py:240: in _run
+    result = handler(_context(payload, lambda: checkpoints.append(1)))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:212: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:262: in _execute
+    raw = self._result_dict(payload, review, work)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:440: in _result_dict
+    parser_name, parser_version = work.parser_identity or parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_select_handler_complete_low_value_pdf_emits_small_skip[\u6295\u8d44\u8005\u5173\u7cfb\u7ba1\u7406\u529e\u6cd5\uff082025\u5e748\u6708\uff09.pdf] _
+tests\unit\test_narrative_select_handler.py:447: in test_select_handler_complete_low_value_pdf_emits_small_skip
+    raw, _ = _run(payload, data)
+             ^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_select_handler.py:240: in _run
+    result = handler(_context(payload, lambda: checkpoints.append(1)))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:212: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:262: in _execute
+    raw = self._result_dict(payload, review, work)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:440: in _result_dict
+    parser_name, parser_version = work.parser_identity or parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_select_handler_complete_low_value_pdf_emits_small_skip[Investor Relations Policy] _
+tests\unit\test_narrative_select_handler.py:447: in test_select_handler_complete_low_value_pdf_emits_small_skip
+    raw, _ = _run(payload, data)
+             ^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_select_handler.py:240: in _run
+    result = handler(_context(payload, lambda: checkpoints.append(1)))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:212: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:262: in _execute
+    raw = self._result_dict(payload, review, work)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:440: in _result_dict
+    parser_name, parser_version = work.parser_identity or parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_select_handler_complete_low_value_pdf_emits_small_skip[INVESTOR RELATIONS MANAGEMENT POLICY] _
+tests\unit\test_narrative_select_handler.py:447: in test_select_handler_complete_low_value_pdf_emits_small_skip
+    raw, _ = _run(payload, data)
+             ^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_select_handler.py:240: in _run
+    result = handler(_context(payload, lambda: checkpoints.append(1)))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:212: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:262: in _execute
+    raw = self._result_dict(payload, review, work)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:440: in _result_dict
+    parser_name, parser_version = work.parser_identity or parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_____ test_select_handler_does_not_require_provider_policy_for_transcript _____
+tests\unit\test_narrative_select_handler.py:498: in test_select_handler_does_not_require_provider_policy_for_transcript
+    raw, _ = _run(payload, data)
+             ^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_select_handler.py:240: in _run
+    result = handler(_context(payload, lambda: checkpoints.append(1)))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:212: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:262: in _execute
+    raw = self._result_dict(payload, review, work)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:440: in _result_dict
+    parser_name, parser_version = work.parser_identity or parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_select_handler_checks_bytes_without_requiring_old_observations[read_policy] _
+tests\unit\test_narrative_select_handler.py:524: in test_select_handler_checks_bytes_without_requiring_old_observations
+    raw, _ = _run(payload, data, reader=reader)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_select_handler.py:240: in _run
+    result = handler(_context(payload, lambda: checkpoints.append(1)))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:212: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:262: in _execute
+    raw = self._result_dict(payload, review, work)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:440: in _result_dict
+    parser_name, parser_version = work.parser_identity or parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_select_handler_checks_bytes_without_requiring_old_observations[metadata] _
+tests\unit\test_narrative_select_handler.py:524: in test_select_handler_checks_bytes_without_requiring_old_observations
+    raw, _ = _run(payload, data, reader=reader)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_select_handler.py:240: in _run
+    result = handler(_context(payload, lambda: checkpoints.append(1)))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:212: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:262: in _execute
+    raw = self._result_dict(payload, review, work)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:440: in _result_dict
+    parser_name, parser_version = work.parser_identity or parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_select_handler_cap_and_path_leak_fail_with_zero_effect[False-RESULT_TOO_LARGE] _
+tests\unit\test_narrative_select_handler.py:594: in test_select_handler_cap_and_path_leak_fail_with_zero_effect
+    raw, _ = _run(payload, data, selector=selector)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_select_handler.py:240: in _run
+    result = handler(_context(payload, lambda: checkpoints.append(1)))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:212: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:262: in _execute
+    raw = self._result_dict(payload, review, work)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:440: in _result_dict
+    parser_name, parser_version = work.parser_identity or parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_select_handler_cap_and_path_leak_fail_with_zero_effect[True-INPUT_SCHEMA_INVALID] _
+tests\unit\test_narrative_select_handler.py:594: in test_select_handler_cap_and_path_leak_fail_with_zero_effect
+    raw, _ = _run(payload, data, selector=selector)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_select_handler.py:240: in _run
+    result = handler(_context(payload, lambda: checkpoints.append(1)))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:212: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:262: in _execute
+    raw = self._result_dict(payload, review, work)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:440: in _result_dict
+    parser_name, parser_version = work.parser_identity or parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_verify_handler_machine_read_error_semantics[unavailable-catalog_unavailable-IO_TRANSIENT-retryable] _
+tests\unit\test_narrative_verify_handler.py:457: in test_verify_handler_machine_read_error_semantics
+    raw = _run(data, selected, summary, reader=reader)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_verify_handler.py:427: in _run
+    return handler(_context(selected, summary, payload=payload))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:185: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:203: in _execute
+    _validate_dependency_identity(payload, selected, summary, self._normalization)
+src\company_wiki\automation\narrative_verify.py:150: in _validate_dependency_identity
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_verify_handler_machine_read_error_semantics[not_indexed-document_not_indexed-SOURCE_UNAVAILABLE-terminal_failure] _
+tests\unit\test_narrative_verify_handler.py:457: in test_verify_handler_machine_read_error_semantics
+    raw = _run(data, selected, summary, reader=reader)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_verify_handler.py:427: in _run
+    return handler(_context(selected, summary, payload=payload))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:185: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:203: in _execute
+    _validate_dependency_identity(payload, selected, summary, self._normalization)
+src\company_wiki\automation\narrative_verify.py:150: in _validate_dependency_identity
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_verify_handler_machine_read_error_semantics[not_indexed-source_version_not_indexed-SOURCE_UNAVAILABLE-terminal_failure] _
+tests\unit\test_narrative_verify_handler.py:457: in test_verify_handler_machine_read_error_semantics
+    raw = _run(data, selected, summary, reader=reader)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_verify_handler.py:427: in _run
+    return handler(_context(selected, summary, payload=payload))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:185: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:203: in _execute
+    _validate_dependency_identity(payload, selected, summary, self._normalization)
+src\company_wiki\automation\narrative_verify.py:150: in _validate_dependency_identity
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_verify_handler_machine_read_error_semantics[unavailable-no_indexed_location-SOURCE_UNAVAILABLE-terminal_failure] _
+tests\unit\test_narrative_verify_handler.py:457: in test_verify_handler_machine_read_error_semantics
+    raw = _run(data, selected, summary, reader=reader)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_verify_handler.py:427: in _run
+    return handler(_context(selected, summary, payload=payload))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:185: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:203: in _execute
+    _validate_dependency_identity(payload, selected, summary, self._normalization)
+src\company_wiki\automation\narrative_verify.py:150: in _validate_dependency_identity
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_verify_handler_machine_read_error_semantics[unavailable-no_verified_location-SOURCE_UNAVAILABLE-terminal_failure] _
+tests\unit\test_narrative_verify_handler.py:457: in test_verify_handler_machine_read_error_semantics
+    raw = _run(data, selected, summary, reader=reader)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_verify_handler.py:427: in _run
+    return handler(_context(selected, summary, payload=payload))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:185: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:203: in _execute
+    _validate_dependency_identity(payload, selected, summary, self._normalization)
+src\company_wiki\automation\narrative_verify.py:150: in _validate_dependency_identity
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_verify_handler_machine_read_error_semantics[unavailable-expected_version_mismatch-SOURCE_HASH_MISMATCH-terminal_failure] _
+tests\unit\test_narrative_verify_handler.py:457: in test_verify_handler_machine_read_error_semantics
+    raw = _run(data, selected, summary, reader=reader)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_verify_handler.py:427: in _run
+    return handler(_context(selected, summary, payload=payload))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:185: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:203: in _execute
+    _validate_dependency_identity(payload, selected, summary, self._normalization)
+src\company_wiki\automation\narrative_verify.py:150: in _validate_dependency_identity
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_verify_handler_machine_read_error_semantics[unavailable-source_ref_changed-SOURCE_HASH_MISMATCH-terminal_failure] _
+tests\unit\test_narrative_verify_handler.py:457: in test_verify_handler_machine_read_error_semantics
+    raw = _run(data, selected, summary, reader=reader)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_verify_handler.py:427: in _run
+    return handler(_context(selected, summary, payload=payload))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:185: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:203: in _execute
+    _validate_dependency_identity(payload, selected, summary, self._normalization)
+src\company_wiki\automation\narrative_verify.py:150: in _validate_dependency_identity
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_verify_handler_machine_read_error_semantics[blocked-read_policy_mismatch-POLICY_DENIED-terminal_failure] _
+tests\unit\test_narrative_verify_handler.py:457: in test_verify_handler_machine_read_error_semantics
+    raw = _run(data, selected, summary, reader=reader)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_verify_handler.py:427: in _run
+    return handler(_context(selected, summary, payload=payload))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:185: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:203: in _execute
+    _validate_dependency_identity(payload, selected, summary, self._normalization)
+src\company_wiki\automation\narrative_verify.py:150: in _validate_dependency_identity
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_verify_handler_pdf_replays_and_emits_one_deterministic_pending_effect __
+tests\unit\test_narrative_verify_handler.py:473: in test_verify_handler_pdf_replays_and_emits_one_deterministic_pending_effect
+    first = _run(data, selected, summary)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_verify_handler.py:427: in _run
+    return handler(_context(selected, summary, payload=payload))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:185: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:203: in _execute
+    _validate_dependency_identity(payload, selected, summary, self._normalization)
+src\company_wiki\automation\narrative_verify.py:150: in _validate_dependency_identity
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+____________ test_verify_handler_skip_bundle_stays_under_small_cap ____________
+tests\unit\test_narrative_verify_handler.py:496: in test_verify_handler_skip_bundle_stays_under_small_cap
+    raw = _run(data, selected, summary)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_verify_handler.py:427: in _run
+    return handler(_context(selected, summary, payload=payload))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:185: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:203: in _execute
+    _validate_dependency_identity(payload, selected, summary, self._normalization)
+src\company_wiki\automation\narrative_verify.py:150: in _validate_dependency_identity
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+____ test_same_bundle_from_distinct_jobs_has_distinct_publication_effects _____
+tests\unit\test_narrative_verify_handler.py:515: in test_same_bundle_from_distinct_jobs_has_distinct_publication_effects
+    first = handler(context)
+            ^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:185: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:203: in _execute
+    _validate_dependency_identity(payload, selected, summary, self._normalization)
+src\company_wiki\automation\narrative_verify.py:150: in _validate_dependency_identity
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+____ test_verify_handler_transcript_replays_bytes_without_provider_policy _____
+tests\unit\test_narrative_verify_handler.py:531: in test_verify_handler_transcript_replays_bytes_without_provider_policy
+    raw = _run(
+tests\unit\test_narrative_verify_handler.py:427: in _run
+    return handler(_context(selected, summary, payload=payload))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:185: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:203: in _execute
+    _validate_dependency_identity(payload, selected, summary, self._normalization)
+src\company_wiki\automation\narrative_verify.py:150: in _validate_dependency_identity
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_verify_handler_rejects_transcript_byte_binding_mismatch_with_zero_effect _
+tests\unit\test_narrative_verify_handler.py:550: in test_verify_handler_rejects_transcript_byte_binding_mismatch_with_zero_effect
+    raw = _run(
+tests\unit\test_narrative_verify_handler.py:427: in _run
+    return handler(_context(selected, summary, payload=payload))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:185: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:203: in _execute
+    _validate_dependency_identity(payload, selected, summary, self._normalization)
+src\company_wiki\automation\narrative_verify.py:150: in _validate_dependency_identity
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_________ test_verify_handler_any_pdf_locator_failure_has_zero_effect _________
+tests\unit\test_narrative_verify_handler.py:569: in test_verify_handler_any_pdf_locator_failure_has_zero_effect
+    raw = _run(data, selected, summary, pdf_replayer=fail_replay)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_verify_handler.py:427: in _run
+    return handler(_context(selected, summary, payload=payload))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:185: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:203: in _execute
+    _validate_dependency_identity(payload, selected, summary, self._normalization)
+src\company_wiki\automation\narrative_verify.py:150: in _validate_dependency_identity
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_______ test_verify_handler_review_metadata_does_not_gate_effect[drift] _______
+tests\unit\test_narrative_verify_handler.py:585: in test_verify_handler_review_metadata_does_not_gate_effect
+    raw = _run(
+tests\unit\test_narrative_verify_handler.py:427: in _run
+    return handler(_context(selected, summary, payload=payload))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:185: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:203: in _execute
+    _validate_dependency_identity(payload, selected, summary, self._normalization)
+src\company_wiki\automation\narrative_verify.py:150: in _validate_dependency_identity
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+______ test_verify_handler_review_metadata_does_not_gate_effect[missing] ______
+tests\unit\test_narrative_verify_handler.py:585: in test_verify_handler_review_metadata_does_not_gate_effect
+    raw = _run(
+tests\unit\test_narrative_verify_handler.py:427: in _run
+    return handler(_context(selected, summary, payload=payload))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:185: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:203: in _execute
+    _validate_dependency_identity(payload, selected, summary, self._normalization)
+src\company_wiki\automation\narrative_verify.py:150: in _validate_dependency_identity
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+__ test_verify_handler_rejects_dependency_identity_and_version_drift[parser] __
+tests\unit\test_narrative_verify_handler.py:612: in test_verify_handler_rejects_dependency_identity_and_version_drift
+    raw = _run(data, selected, summary, payload=payload)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_verify_handler.py:427: in _run
+    return handler(_context(selected, summary, payload=payload))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:185: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:203: in _execute
+    _validate_dependency_identity(payload, selected, summary, self._normalization)
+src\company_wiki\automation\narrative_verify.py:150: in _validate_dependency_identity
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+__ test_verify_handler_rejects_dependency_identity_and_version_drift[prompt] __
+tests\unit\test_narrative_verify_handler.py:612: in test_verify_handler_rejects_dependency_identity_and_version_drift
+    raw = _run(data, selected, summary, payload=payload)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_verify_handler.py:427: in _run
+    return handler(_context(selected, summary, payload=payload))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:185: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:203: in _execute
+    _validate_dependency_identity(payload, selected, summary, self._normalization)
+src\company_wiki\automation\narrative_verify.py:150: in _validate_dependency_identity
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_verify_handler_keeps_generation_language_after_current_observation_changes _
+tests\unit\test_narrative_verify_handler.py:625: in test_verify_handler_keeps_generation_language_after_current_observation_changes
+    raw = _run(data, selected, summary, reader=reader)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_verify_handler.py:427: in _run
+    return handler(_context(selected, summary, payload=payload))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:185: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_verify.py:203: in _execute
+    _validate_dependency_identity(payload, selected, summary, self._normalization)
+src\company_wiki\automation\narrative_verify.py:150: in _validate_dependency_identity
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+___ test_transcript_parser_excludes_editorial_and_keeps_qa_question_context ___
+tests\unit\test_narrative_evidence.py:253: in test_transcript_parser_excludes_editorial_and_keeps_qa_question_context
+    assert all(span.parser_version == narrative_evidence_module.NARRATIVE_PARSER_VERSION
+E   assert False
+E    +  where False = all(<generator object test_transcript_parser_excludes_editorial_and_keeps_qa_question_context.<locals>.<genexpr> at 0x000001CD2678FAC0>)
+_ test_generation_is_stable_for_run_budget_pricing_key_env_and_batch_members __
+tests\unit\test_narrative_generation.py:29: in test_generation_is_stable_for_run_budget_pricing_key_env_and_batch_members
+    expected = manifest(original)
+               ^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_generation.py:20: in manifest
+    return generation_manifest(
+src\company_wiki\automation\narrative_generation.py:39: in generation_manifest
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_generation_changes_for_real_model_generation_inputs[model_id-another-model] _
+tests\unit\test_narrative_generation.py:70: in test_generation_changes_for_real_model_generation_inputs
+    assert manifest(
+tests\unit\test_narrative_generation.py:20: in manifest
+    return generation_manifest(
+src\company_wiki\automation\narrative_generation.py:39: in generation_manifest
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_generation_changes_for_real_model_generation_inputs[endpoint-https://other.invalid/v1/chat/completions] _
+tests\unit\test_narrative_generation.py:70: in test_generation_changes_for_real_model_generation_inputs
+    assert manifest(
+tests\unit\test_narrative_generation.py:20: in manifest
+    return generation_manifest(
+src\company_wiki\automation\narrative_generation.py:39: in generation_manifest
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+__ test_generation_changes_for_real_model_generation_inputs[temperature-0.8] __
+tests\unit\test_narrative_generation.py:70: in test_generation_changes_for_real_model_generation_inputs
+    assert manifest(
+tests\unit\test_narrative_generation.py:20: in manifest
+    return generation_manifest(
+src\company_wiki\automation\narrative_generation.py:39: in generation_manifest
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+___ test_generation_changes_for_real_model_generation_inputs[thinking-True] ___
+tests\unit\test_narrative_generation.py:70: in test_generation_changes_for_real_model_generation_inputs
+    assert manifest(
+tests\unit\test_narrative_generation.py:20: in manifest
+    return generation_manifest(
+src\company_wiki\automation\narrative_generation.py:39: in generation_manifest
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_generation_changes_for_real_model_generation_inputs[max_output_tokens-500] _
+tests\unit\test_narrative_generation.py:70: in test_generation_changes_for_real_model_generation_inputs
+    assert manifest(
+tests\unit\test_narrative_generation.py:20: in manifest
+    return generation_manifest(
+src\company_wiki\automation\narrative_generation.py:39: in generation_manifest
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+__ test_generation_binds_source_processing_metadata_profile_and_all_versions __
+tests\unit\test_narrative_generation.py:77: in test_generation_binds_source_processing_metadata_profile_and_all_versions
+    expected = manifest(request)
+               ^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_generation.py:20: in manifest
+    return generation_manifest(
+src\company_wiki\automation\narrative_generation.py:39: in generation_manifest
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+___ test_refresh_is_explicit_boolean_and_default_wire_remains_legacy_exact ____
+tests\unit\test_narrative_generation.py:171: in test_refresh_is_explicit_boolean_and_default_wire_remains_legacy_exact
+    assert manifest(refresh) == manifest(request)
+           ^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_generation.py:20: in manifest
+    return generation_manifest(
+src\company_wiki\automation\narrative_generation.py:39: in generation_manifest
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+_ test_one_hundred_source_reuse_binding_remains_inside_existing_persistence_cap _
+tests\unit\test_narrative_generation.py:195: in test_one_hundred_source_reuse_binding_remains_inside_existing_persistence_cap
+    manifests[event.subject_id] = generation_manifest(
+src\company_wiki\automation\narrative_generation.py:39: in generation_manifest
+    parser_name, parser_version = parser_component(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: too many values to unpack (expected 2)
+____ test_configured_official_three_formats_summary_public_read_and_repeat ____
+tests\integration\test_official_source_flow.py:759: in test_configured_official_three_formats_summary_public_read_and_repeat
+    assert call.returncode == 0 and output["status"] == "completed", (
+E   AssertionError: ('', {'budget': {'estimated_micro_usd': 0, 'tokens': 0, 'unknown_reservations': 0, 'unsettled_reservations': 0}, 'docu...ab2797c4c327bd089b59dc', 'status': 'failed'}], 'error': 'NARRATIVE_BATCH_ValueError', 'run_id': 'official-three', ...})
+E   assert (2 == 0)
+E    +  where 2 = CompletedProcess(args=['C:\\Miniconda\\python.exe', '-X', 'utf8', '-B', 'C:\\Users\\郑曾波\\.codex\\worktrees\\fresh-capt...TCH_ValueError","run_id":"official-three","schema_version":"narrative-batch-result/1","status":"failed"}\n', stderr='').returncode
+________ test_image_only_pdf_is_parser_incomplete_not_successful_skip _________
+tests\integration\test_official_source_flow.py:973: in test_image_only_pdf_is_parser_incomplete_not_successful_skip
+    assert "PARSER_INCOMPLETE" in json.dumps(out)
+E   assert 'PARSER_INCOMPLETE' in '{"budget": {"estimated_micro_usd": 0, "tokens": 0, "unknown_reservations": 0, "unsettled_reservations": 0}, "document...ATIVE_BATCH_ValueError", "run_id": "image-official", "schema_version": "narrative-batch-result/1", "status": "failed"}'
+E    +  where '{"budget": {"estimated_micro_usd": 0, "tokens": 0, "unknown_reservations": 0, "unsettled_reservations": 0}, "document...ATIVE_BATCH_ValueError", "run_id": "image-official", "schema_version": "narrative-batch-result/1", "status": "failed"}' = <function dumps at 0x000001CD2041C860>({'budget': {'estimated_micro_usd': 0, 'tokens': 0, 'unknown_reservations': 0, 'unsettled_reservations': 0}, 'documents...5c634f22d42d47dd22cc3d3', 'status': 'failed'}], 'error': 'NARRATIVE_BATCH_ValueError', 'run_id': 'image-official', ...})
+E    +    where <function dumps at 0x000001CD2041C860> = json.dumps
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_format_pipeline.py::test_html_transcript_keeps_its_transcript_parser_and_byte_lineage
+FAILED tests/unit/test_narrative_select_handler.py::test_select_handler_reads_pdf_bytes_for_high_value_document_types[Acme 2025 Annual Report.pdf-annual_report]
+FAILED tests/unit/test_narrative_select_handler.py::test_select_handler_reads_pdf_bytes_for_high_value_document_types[\u9996\u6b21\u516c\u5f00\u53d1\u884c\u80a1\u7968\u5e76\u4e0a\u5e02\u62db\u80a1\u8bf4\u660e\u4e66.pdf-prospectus]
+FAILED tests/unit/test_narrative_select_handler.py::test_select_handler_reads_pdf_bytes_for_high_value_document_types[\u6295\u8d44\u8005\u5173\u7cfb\u6d3b\u52a8\u8bb0\u5f55\u8868.pdf-investor_relations]
+FAILED tests/unit/test_narrative_select_handler.py::test_select_handler_recovers_titleless_quarterly_business_narrative_with_replay[quarterly_report]
+FAILED tests/unit/test_narrative_select_handler.py::test_select_handler_recovers_titleless_quarterly_business_narrative_with_replay[investor_relations]
+FAILED tests/unit/test_narrative_select_handler.py::test_select_handler_does_not_require_prompt_review_receipt
+FAILED tests/unit/test_narrative_select_handler.py::test_select_handler_transcript_keeps_only_selected_original_byte_bindings[text/plain]
+FAILED tests/unit/test_narrative_select_handler.py::test_select_handler_transcript_keeps_only_selected_original_byte_bindings[text/html]
+FAILED tests/unit/test_narrative_select_handler.py::test_select_handler_complete_low_value_pdf_emits_small_skip[\u6295\u8d44\u8005\u5173\u7cfb\u7ba1\u7406\u529e\u6cd5\uff082025\u5e748\u6708\uff09.pdf]
+FAILED tests/unit/test_narrative_select_handler.py::test_select_handler_complete_low_value_pdf_emits_small_skip[Investor Relations Policy]
+FAILED tests/unit/test_narrative_select_handler.py::test_select_handler_complete_low_value_pdf_emits_small_skip[INVESTOR RELATIONS MANAGEMENT POLICY]
+FAILED tests/unit/test_narrative_select_handler.py::test_select_handler_does_not_require_provider_policy_for_transcript
+FAILED tests/unit/test_narrative_select_handler.py::test_select_handler_checks_bytes_without_requiring_old_observations[read_policy]
+FAILED tests/unit/test_narrative_select_handler.py::test_select_handler_checks_bytes_without_requiring_old_observations[metadata]
+FAILED tests/unit/test_narrative_select_handler.py::test_select_handler_cap_and_path_leak_fail_with_zero_effect[False-RESULT_TOO_LARGE]
+FAILED tests/unit/test_narrative_select_handler.py::test_select_handler_cap_and_path_leak_fail_with_zero_effect[True-INPUT_SCHEMA_INVALID]
+FAILED tests/unit/test_narrative_verify_handler.py::test_verify_handler_machine_read_error_semantics[unavailable-catalog_unavailable-IO_TRANSIENT-retryable]
+FAILED tests/unit/test_narrative_verify_handler.py::test_verify_handler_machine_read_error_semantics[not_indexed-document_not_indexed-SOURCE_UNAVAILABLE-terminal_failure]
+FAILED tests/unit/test_narrative_verify_handler.py::test_verify_handler_machine_read_error_semantics[not_indexed-source_version_not_indexed-SOURCE_UNAVAILABLE-terminal_failure]
+FAILED tests/unit/test_narrative_verify_handler.py::test_verify_handler_machine_read_error_semantics[unavailable-no_indexed_location-SOURCE_UNAVAILABLE-terminal_failure]
+FAILED tests/unit/test_narrative_verify_handler.py::test_verify_handler_machine_read_error_semantics[unavailable-no_verified_location-SOURCE_UNAVAILABLE-terminal_failure]
+FAILED tests/unit/test_narrative_verify_handler.py::test_verify_handler_machine_read_error_semantics[unavailable-expected_version_mismatch-SOURCE_HASH_MISMATCH-terminal_failure]
+FAILED tests/unit/test_narrative_verify_handler.py::test_verify_handler_machine_read_error_semantics[unavailable-source_ref_changed-SOURCE_HASH_MISMATCH-terminal_failure]
+FAILED tests/unit/test_narrative_verify_handler.py::test_verify_handler_machine_read_error_semantics[blocked-read_policy_mismatch-POLICY_DENIED-terminal_failure]
+FAILED tests/unit/test_narrative_verify_handler.py::test_verify_handler_pdf_replays_and_emits_one_deterministic_pending_effect
+FAILED tests/unit/test_narrative_verify_handler.py::test_verify_handler_skip_bundle_stays_under_small_cap
+FAILED tests/unit/test_narrative_verify_handler.py::test_same_bundle_from_distinct_jobs_has_distinct_publication_effects
+FAILED tests/unit/test_narrative_verify_handler.py::test_verify_handler_transcript_replays_bytes_without_provider_policy
+FAILED tests/unit/test_narrative_verify_handler.py::test_verify_handler_rejects_transcript_byte_binding_mismatch_with_zero_effect
+FAILED tests/unit/test_narrative_verify_handler.py::test_verify_handler_any_pdf_locator_failure_has_zero_effect
+FAILED tests/unit/test_narrative_verify_handler.py::test_verify_handler_review_metadata_does_not_gate_effect[drift]
+FAILED tests/unit/test_narrative_verify_handler.py::test_verify_handler_review_metadata_does_not_gate_effect[missing]
+FAILED tests/unit/test_narrative_verify_handler.py::test_verify_handler_rejects_dependency_identity_and_version_drift[parser]
+FAILED tests/unit/test_narrative_verify_handler.py::test_verify_handler_rejects_dependency_identity_and_version_drift[prompt]
+FAILED tests/unit/test_narrative_verify_handler.py::test_verify_handler_keeps_generation_language_after_current_observation_changes
+FAILED tests/unit/test_narrative_evidence.py::test_transcript_parser_excludes_editorial_and_keeps_qa_question_context
+FAILED tests/unit/test_narrative_generation.py::test_generation_is_stable_for_run_budget_pricing_key_env_and_batch_members
+FAILED tests/unit/test_narrative_generation.py::test_generation_changes_for_real_model_generation_inputs[model_id-another-model]
+FAILED tests/unit/test_narrative_generation.py::test_generation_changes_for_real_model_generation_inputs[endpoint-https://other.invalid/v1/chat/completions]
+FAILED tests/unit/test_narrative_generation.py::test_generation_changes_for_real_model_generation_inputs[temperature-0.8]
+FAILED tests/unit/test_narrative_generation.py::test_generation_changes_for_real_model_generation_inputs[thinking-True]
+FAILED tests/unit/test_narrative_generation.py::test_generation_changes_for_real_model_generation_inputs[max_output_tokens-500]
+FAILED tests/unit/test_narrative_generation.py::test_generation_binds_source_processing_metadata_profile_and_all_versions
+FAILED tests/unit/test_narrative_generation.py::test_refresh_is_explicit_boolean_and_default_wire_remains_legacy_exact
+FAILED tests/unit/test_narrative_generation.py::test_one_hundred_source_reuse_binding_remains_inside_existing_persistence_cap
+FAILED tests/integration/test_official_source_flow.py::test_configured_official_three_formats_summary_public_read_and_repeat
+FAILED tests/integration/test_official_source_flow.py::test_image_only_pdf_is_parser_incomplete_not_successful_skip
+================= 48 failed, 176 passed, 1 warning in 48.63s ==================

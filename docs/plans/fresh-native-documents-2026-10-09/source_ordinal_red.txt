@@ -1,0 +1,37 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\֣����\.codex\worktrees\fresh-capture-20261009\company-wiki
+configfile: pytest.ini
+collected 20 items
+
+tests\document_normalization\test_docx.py ..................FF           [100%]
+
+================================== FAILURES ===================================
+_____ test_deleted_body_paragraph_and_table_still_reserve_source_ordinals _____
+tests\document_normalization\test_docx.py:306: in test_deleted_body_paragraph_and_table_still_reserve_source_ordinals
+    assert doc.units[0].coordinates.paragraph_index == 1
+E   AssertionError: assert 0 == 1
+E    +  where 0 = EvidenceCoordinates(page_number=None, paragraph_index=0, table_index=None, row_index=None, column_index=None, char_start=None, char_end=None).paragraph_index
+E    +    where EvidenceCoordinates(page_number=None, paragraph_index=0, table_index=None, row_index=None, column_index=None, char_start=None, char_end=None) = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:a0eaa0a94805150b3b61611dc036680cc5c39f46982e395d3c9f1b52...bff8eb283cc6c2b87ac1f3550c65e44e7192f', 'source_locator': 'cwp-docx-body/1|p=0', 'transform': 'docx_visible_body_v1'})).coordinates
+___________ test_unparsed_cell_wrapper_is_explicit_partial_coverage ___________
+tests\document_normalization\test_docx.py:315: in test_unparsed_cell_wrapper_is_explicit_partial_coverage
+    assert "docx_unsupported_table_element" in doc.structure.errors
+E   AssertionError: assert 'docx_unsupported_table_element' in ()
+E    +  where () = DocumentStructure(source_id='urn:company-wiki:source:sha256:1fa7d1ad1b7fa8356a3be261081023c61082a0749f0ec6ef4a1917f28e...,), page_count=0, pages_read=0, opaque_pages=(), table_scan_pages=(), deferred_table_pages=(), line_count=2, errors=()).errors
+E    +    where DocumentStructure(source_id='urn:company-wiki:source:sha256:1fa7d1ad1b7fa8356a3be261081023c61082a0749f0ec6ef4a1917f28e...,), page_count=0, pages_read=0, opaque_pages=(), table_scan_pages=(), deferred_table_pages=(), line_count=2, errors=()) = NormalizedDocument(source_id='urn:company-wiki:source:sha256:1fa7d1ad1b7fa8356a3be261081023c61082a0749f0ec6ef4a1917f28..._count': 2, 'uncompressed_bytes': 529, 'external_relationship_count': 0, 'body_paragraph_count': 1, 'table_count': 1})).structure
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+tests/document_normalization/test_docx.py::test_duplicate_zip_member_refused
+  C:\Miniconda\Lib\zipfile\__init__.py:1642: UserWarning: Duplicate name: 'word/document.xml'
+    return self._open_to_write(zinfo, force_zip64=force_zip64)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/document_normalization/test_docx.py::test_deleted_body_paragraph_and_table_still_reserve_source_ordinals
+FAILED tests/document_normalization/test_docx.py::test_unparsed_cell_wrapper_is_explicit_partial_coverage
+================== 2 failed, 18 passed, 2 warnings in 0.39s ===================

@@ -52,6 +52,7 @@ from .narrative_routing import (
 
 NARRATIVE_PARSER_NAME = "selective_narrative_parser"
 NARRATIVE_PARSER_VERSION = QA_FRAGMENT_VERSION
+TRANSCRIPT_PARSER_VERSION = "0.2.0"
 NARRATIVE_SELECTOR_NAME = "select_narrative_evidence"
 # 0.4.2 separates customer adoption and binds visual fundraising project rows.
 # 0.4.1 preserves specific operating/industry meaning and atomic fact sentences.
@@ -1227,35 +1228,69 @@ def parse_transcript_text(
     *,
     source_id: str,
     source_sha256: str,
-    parser_version: str = NARRATIVE_PARSER_VERSION,
+    parser_version: str = TRANSCRIPT_PARSER_VERSION,
     language: str = "en",
 ) -> NarrativeParseResult:
-    """Split known transcript layouts by speaker while preserving source lines."""
+    """Split proved call layouts; legacy 0.1.1 remains replayable unchanged."""
     if not isinstance(text, str):
         raise TypeError("transcript text must be a string")
+    if parser_version not in {NARRATIVE_PARSER_VERSION, TRANSCRIPT_PARSER_VERSION}:
+        raise ValueError("unsupported transcript parser version")
     raw_lines = text.splitlines()
-    start_index = next(
-        (index for index, line in enumerate(raw_lines) if _TRANSCRIPT_START.match(line.strip())),
-        None,
-    )
+    legacy = parser_version == NARRATIVE_PARSER_VERSION
+    if legacy:
+        heading = next((i for i, line in enumerate(raw_lines) if _TRANSCRIPT_START.match(line.strip())), None)
+        start_index = None if heading is None else heading + 1
+    else:
+        from .transcript_layout import body_start
+        found = body_start(raw_lines, _TRANSCRIPT_START, _transcript_speaker_fields)
+        start_index = None if found is None else found[0]
+        explicit_heading = False if found is None else found[1]
     if start_index is None:
-        return NarrativeParseResult(
-            source_id=source_id, source_sha256=source_sha256, language=language,
-            units=(), line_count=len(raw_lines), errors=("transcript_start_missing",),
-        )
+        return NarrativeParseResult(source_id=source_id, source_sha256=source_sha256,
+            language=language, units=(), line_count=len(raw_lines),
+            errors=("transcript_start_missing",))
     state = _TranscriptParseState()
-    for line_number, line in enumerate(raw_lines[start_index + 1 :], start=start_index + 2):
+    finished = False
+    index = start_index
+    while index < len(raw_lines):
+        line = raw_lines[index]
         if _TRANSCRIPT_END.match(line.strip()):
+            finished = True
             break
-        _consume_transcript_line(state, line_number, line)
-    units = [
-        unit for block in state.blocks
-        for unit in _transcript_block_units(block, source_id, parser_version, language)
-    ]
-    return NarrativeParseResult(
-        source_id=source_id, source_sha256=source_sha256, language=language,
-        units=tuple(units), line_count=len(raw_lines),
-    )
+        if not legacy:
+            from .transcript_layout import END, QA_HEADING, speaker_fields
+            if END.fullmatch(line.strip()) and len(line.strip()) < 80:
+                finished = True
+                break
+            if QA_HEADING.fullmatch(line.strip()):
+                state.qa_mode = True
+                state.active = None
+                index += 1
+                continue
+            name, title, body, label_count = speaker_fields(raw_lines,index,_transcript_speaker_fields)
+            if name:
+                _begin_transcript_speaker(state,index+1,name,title or "",body or "")
+                if label_count > 1 and state.active is not None:
+                    state.active["line_end"] = index + label_count
+                _enable_transcript_qa(state,bool(_QA_TRANSITION.search(body or "")))
+                index += label_count
+                continue
+        if legacy:
+            _consume_transcript_line(state,index+1,line)
+        elif not _consume_transcript_control_line(state,line.strip()):
+            appended = _append_transcript_unattributed(state,index+1,line,line.strip())
+            _enable_transcript_qa(state,appended and bool(_QA_TRANSITION.search(line.strip())))
+        if not legacy and END.search(line.strip()):
+            finished = True
+            break
+        index += 1
+    units = [unit for block in state.blocks
+             for unit in _transcript_block_units(block,source_id,parser_version,language)]
+    return NarrativeParseResult(source_id=source_id, source_sha256=source_sha256,
+        language=language,units=tuple(units),line_count=len(raw_lines),
+        errors=(() if legacy or units else ("transcript_body_missing",))
+        + (("transcript_end_missing",) if not legacy and not explicit_heading and not finished else ()),)
 
 
 def verify_pdf_evidence_spans(
@@ -1322,7 +1357,7 @@ def verify_transcript_evidence_spans(
     versions = {span.parser_version for span in evidence_spans}
     if len(versions) > 1:
         raise ValueError("round-trip verification requires one parser version")
-    parser_version = next(iter(versions), NARRATIVE_PARSER_VERSION)
+    parser_version = next(iter(versions), TRANSCRIPT_PARSER_VERSION)
     replay = parse_transcript_text(
         text,
         source_id=source_id,
@@ -1371,7 +1406,7 @@ def _table_scan_signal(text: str, *, parser_version: str = NARRATIVE_PARSER_VERS
 
 
 def _financial_table(unit: NarrativeUnit, topics: Sequence[str]) -> bool:
-    if unit.unit_kind in {"html_table_cell", "pptx_table_cell"}:
+    if unit.unit_kind in {"html_table_cell", "pptx_table_cell", "docx_table_cell"}:
         return unit.metadata.get("table_class") == "financial" and not _has_business_table_topics(topics)
     if unit.unit_kind != "pdf_table_row":
         return False

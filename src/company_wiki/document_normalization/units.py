@@ -26,6 +26,9 @@ SOURCE_ROLE = "company_filing"
 
 FORMAT_HTML = "html"
 FORMAT_PPTX = "pptx"
+FORMAT_DOCX = "docx"
+DOCX_LOCATOR_SCHEMA = "cwp-docx-body/1"
+DOCX_PARSER_VERSION = "1.0.0"
 
 HTML_LOCATOR_SCHEMA = "cwp-html-dom/1"
 PPTX_LOCATOR_SCHEMA = "cwp-pptx-shape/2"
@@ -103,6 +106,7 @@ def build_unit(
     extra_metadata: Mapping[str, Any] | None = None,
     quality_flags: Sequence[str] = (),
     parser_version: str | None = None,
+    source_role: str = SOURCE_ROLE,
 ) -> NarrativeUnit:
     """Create one NarrativeUnit whose id binds every replay-relevant fact."""
     parser_version = (
@@ -132,7 +136,7 @@ def build_unit(
         source_locator=source_locator,
         text_sha256=unit_text_sha256(normalized),
         unit_kind=unit_kind,
-        source_role=SOURCE_ROLE,
+        source_role=source_role,
         parser_version=parser_version,
     )
     return NarrativeUnit(
@@ -143,7 +147,7 @@ def build_unit(
         coordinates=coordinates,
         raw_text=normalized,
         unit_kind=unit_kind,
-        source_role=SOURCE_ROLE,
+        source_role=source_role,
         language="und",
         quality_flags=tuple(quality_flags),
         metadata=metadata,
@@ -180,6 +184,9 @@ def verify_unit_identity(unit: NarrativeUnit, *, format_name: str) -> None:
 
 
 __all__ = [
+    "FORMAT_DOCX",
+    "DOCX_LOCATOR_SCHEMA",
+    "DOCX_PARSER_VERSION",
     "FORMAT_HTML",
     "FORMAT_PPTX",
     "HTML_LOCATOR_SCHEMA",

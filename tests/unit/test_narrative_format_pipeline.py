@@ -155,7 +155,7 @@ def test_batch_language_detection_uses_format_body_without_translation(mime):
 
 
 def test_html_transcript_keeps_its_transcript_parser_and_byte_lineage():
-    from company_wiki.source_catalog.narrative_evidence import NARRATIVE_PARSER_NAME, NARRATIVE_PARSER_VERSION
+    from company_wiki.source_catalog.narrative_evidence import NARRATIVE_PARSER_NAME, TRANSCRIPT_PARSER_VERSION
     data = ("<html><body><p>Full Conference Call Transcript</p>"
             f"<p>CEO: {BUSINESS}</p></body></html>").encode()
     payload = selecting._payload(data, title="ACME call", document_kind="earnings_call_transcript",
@@ -163,7 +163,7 @@ def test_html_transcript_keeps_its_transcript_parser_and_byte_lineage():
     raw, _ = selecting._run(payload, data)
     assert raw.outcome is HandlerOutcome.SUCCEEDED, raw.error
     selected = NarrativeSelectResult.from_dict(raw.result)
-    assert (selected.parser.name, selected.parser.version) == (NARRATIVE_PARSER_NAME, NARRATIVE_PARSER_VERSION)
+    assert (selected.parser.name, selected.parser.version) == (NARRATIVE_PARSER_NAME, TRANSCRIPT_PARSER_VERSION)
     assert selected.transcript_lineage is not None
     assert selected.transcript_byte_bindings
     result = verifying._run(data, selected, verifying._summary(selected))

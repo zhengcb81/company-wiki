@@ -1,0 +1,52 @@
+{
+  "schema_version": "w05-selected-installation-delta/1",
+  "branch": "codex/fresh-native-documents-20261009",
+  "base_sha": "cba23b8eb27cf63b47517d62539b3fe3d86bd63b",
+  "scope": "source modules only; MAIN owns selective installation after independent acceptance",
+  "performed": false,
+  "files": [
+    {
+      "path": "src/company_wiki/automation/narrative_formats.py",
+      "sha256": "3dda919b6dceac88a8ec7b08c18392427e5c5b354e49259fd2992c0218309abd"
+    },
+    {
+      "path": "src/company_wiki/document_normalization/__init__.py",
+      "sha256": "1d5f241c09830c15ddd3fed2a02420929ea5626633ba95d278afe9b18f2ea6b2"
+    },
+    {
+      "path": "src/company_wiki/document_normalization/document.py",
+      "sha256": "e53a49dc941ef0cca17cdde1a249abbb91390bf9cef9380c28433c651d459b15"
+    },
+    {
+      "path": "src/company_wiki/document_normalization/replay.py",
+      "sha256": "83a9ca6fe4739924ae4f06effa0cee138f37c1df8bf6463ae293d5bbdb3af1de"
+    },
+    {
+      "path": "src/company_wiki/document_normalization/units.py",
+      "sha256": "365df014eeb4a68867ac6e882e54fdc59c4fe18a68fed1083bef9c9446d84f2d"
+    },
+    {
+      "path": "src/company_wiki/document_normalization/docx_parser.py",
+      "sha256": "4fb6f20698f1f07d0faf6447b0b2d7b203befc4e568b557ac35e8d3ef560c295"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_evidence.py",
+      "sha256": "d15a5259dc4002241f6fd488a9a74356b27b6730d3f1ca91451fedc51b47a71d"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_language.py",
+      "sha256": "34acbf7df88b5dd03c8d27e13c6892475eea82d8f9db59d6a08dd3b35ded02c6"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/official_source_flow.py",
+      "sha256": "65a59d904a5c02688f76e79bd63065e11639f97f987893967b2c80d1548f24fa"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/transcript_layout.py",
+      "sha256": "df91013a3feb3fad4311b12ef307fe3f8e48a5eed0ba2fabea17d1265b63f106"
+    }
+  ],
+  "dependencies": "lxml and python-docx already declared; no new dependency",
+  "no_full_tree_copy": true,
+  "newline_note": "sha256 describes current lane working bytes (LF). Repository core.autocrlf=true may render CRLF in another checkout; MAIN recomputes exact selected-copy SHA from its actual tested source files. This file is a delta list, not a permit gate."
+}

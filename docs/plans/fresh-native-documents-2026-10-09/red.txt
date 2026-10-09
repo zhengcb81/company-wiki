@@ -1,0 +1,151 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\fresh-capture-20261009\company-wiki
+configfile: pytest.ini
+collected 18 items
+
+tests\document_normalization\test_docx.py FFFFFFFF.FFF                   [ 66%]
+tests\contract\test_official_transcript_layouts.py FF...F                [100%]
+
+================================== FAILURES ===================================
+_____________ test_native_text_table_qa_and_exact_original_replay _____________
+tests\document_normalization\test_docx.py:30: in test_native_text_table_qa_and_exact_original_replay
+    before=hashlib.sha256(data).hexdigest();doc=norm(data)
+                                                ^^^^^^^^^^
+tests\document_normalization\test_docx.py:26: in norm
+    return normalize_document(data,source_id="urn:company-wiki:source:sha256:"+sha,source_sha256=sha,mime_type=MIME,**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\document_normalization\__init__.py:154: in normalize_document
+    raise UnsupportedFormatError(
+E   company_wiki.document_normalization.errors.UnsupportedFormatError: unsupported mime_type 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'; supported: ['application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/vnd.openxmlformats-officedocument.presentationml.slideshow', 'application/xhtml+xml', 'text/html']
+_______ test_duplicate_headings_and_blank_paragraph_ordinals_are_stable _______
+tests\document_normalization\test_docx.py:44: in test_duplicate_headings_and_blank_paragraph_ordinals_are_stable
+    a=norm(data);b=norm(data)
+      ^^^^^^^^^^
+tests\document_normalization\test_docx.py:26: in norm
+    return normalize_document(data,source_id="urn:company-wiki:source:sha256:"+sha,source_sha256=sha,mime_type=MIME,**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\document_normalization\__init__.py:154: in normalize_document
+    raise UnsupportedFormatError(
+E   company_wiki.document_normalization.errors.UnsupportedFormatError: unsupported mime_type 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'; supported: ['application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/vnd.openxmlformats-officedocument.presentationml.slideshow', 'application/xhtml+xml', 'text/html']
+_____ test_hyperlink_label_retained_external_relationship_never_executed ______
+tests\document_normalization\test_docx.py:52: in test_hyperlink_label_retained_external_relationship_never_executed
+    doc=norm(data)
+        ^^^^^^^^^^
+tests\document_normalization\test_docx.py:26: in norm
+    return normalize_document(data,source_id="urn:company-wiki:source:sha256:"+sha,source_sha256=sha,mime_type=MIME,**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\document_normalization\__init__.py:154: in normalize_document
+    raise UnsupportedFormatError(
+E   company_wiki.document_normalization.errors.UnsupportedFormatError: unsupported mime_type 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'; supported: ['application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/vnd.openxmlformats-officedocument.presentationml.slideshow', 'application/xhtml+xml', 'text/html']
+_____ test_tracked_deleted_text_excluded_and_current_insertions_diagnosed _____
+tests\document_normalization\test_docx.py:59: in test_tracked_deleted_text_excluded_and_current_insertions_diagnosed
+    doc=norm(data)
+        ^^^^^^^^^^
+tests\document_normalization\test_docx.py:26: in norm
+    return normalize_document(data,source_id="urn:company-wiki:source:sha256:"+sha,source_sha256=sha,mime_type=MIME,**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\document_normalization\__init__.py:154: in normalize_document
+    raise UnsupportedFormatError(
+E   company_wiki.document_normalization.errors.UnsupportedFormatError: unsupported mime_type 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'; supported: ['application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/vnd.openxmlformats-officedocument.presentationml.slideshow', 'application/xhtml+xml', 'text/html']
+________________ test_archive_traversal_refused[../escape.xml] ________________
+tests\document_normalization\test_docx.py:65: in test_archive_traversal_refused
+    with pytest.raises(NormalizationError,match='archive'): norm(package(para('content'),{name:b'bad'}))
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'archive'
+E     Actual message: "unsupported mime_type 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'; supported: ['application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/vnd.openxmlformats-officedocument.presentationml.slideshow', 'application/xhtml+xml', 'text/html']"
+____________ test_archive_traversal_refused[word/../../escape.xml] ____________
+tests\document_normalization\test_docx.py:65: in test_archive_traversal_refused
+    with pytest.raises(NormalizationError,match='archive'): norm(package(para('content'),{name:b'bad'}))
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'archive'
+E     Actual message: "unsupported mime_type 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'; supported: ['application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/vnd.openxmlformats-officedocument.presentationml.slideshow', 'application/xhtml+xml', 'text/html']"
+________________ test_corrupt_archive_refused_with_named_error ________________
+tests\document_normalization\test_docx.py:68: in test_corrupt_archive_refused_with_named_error
+    with pytest.raises(NormalizationError,match='DOCX|docx|archive'): norm(b'PK'+b'bad archive')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'DOCX|docx|archive'
+E     Actual message: "unsupported mime_type 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'; supported: ['application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/vnd.openxmlformats-officedocument.presentationml.slideshow', 'application/xhtml+xml', 'text/html']"
+______________________ test_duplicate_zip_member_refused ______________________
+tests\document_normalization\test_docx.py:74: in test_duplicate_zip_member_refused
+    with pytest.raises(NormalizationError,match='duplicate'): norm(data.getvalue())
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'duplicate'
+E     Actual message: "unsupported mime_type 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'; supported: ['application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/vnd.openxmlformats-officedocument.presentationml.slideshow', 'application/xhtml+xml', 'text/html']"
+____________ test_zip_expansion_text_units_and_deadline_are_finite ____________
+tests\document_normalization\test_docx.py:84: in test_zip_expansion_text_units_and_deadline_are_finite
+    with pytest.raises(NormalizationLimitError,match='max_total_uncompressed_bytes'):norm(data,limits=NormalizationLimits(max_total_uncompressed_bytes=1000))
+                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\document_normalization\test_docx.py:26: in norm
+    return normalize_document(data,source_id="urn:company-wiki:source:sha256:"+sha,source_sha256=sha,mime_type=MIME,**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\document_normalization\__init__.py:154: in normalize_document
+    raise UnsupportedFormatError(
+E   company_wiki.document_normalization.errors.UnsupportedFormatError: unsupported mime_type 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'; supported: ['application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/vnd.openxmlformats-officedocument.presentationml.slideshow', 'application/xhtml+xml', 'text/html']
+__________ test_replay_rejects_changed_source_and_forged_coordinates __________
+tests\document_normalization\test_docx.py:90: in test_replay_rejects_changed_source_and_forged_coordinates
+    data=package(para('Company launched a new product overseas.'));doc=norm(data)
+                                                                       ^^^^^^^^^^
+tests\document_normalization\test_docx.py:26: in norm
+    return normalize_document(data,source_id="urn:company-wiki:source:sha256:"+sha,source_sha256=sha,mime_type=MIME,**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\document_normalization\__init__.py:154: in normalize_document
+    raise UnsupportedFormatError(
+E   company_wiki.document_normalization.errors.UnsupportedFormatError: unsupported mime_type 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'; supported: ['application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/vnd.openxmlformats-officedocument.presentationml.slideshow', 'application/xhtml+xml', 'text/html']
+____________ test_native_language_sampling_and_generation_dispatch ____________
+tests\document_normalization\test_docx.py:99: in test_native_language_sampling_and_generation_dispatch
+    assert detect_narrative_language(data,MIME)=='zh'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_language.py:163: in detect_narrative_language
+    return detect_narrative_text_language(_text_for_mime(data, mime_type, normalization=normalization))
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_language.py:113: in _text_for_mime
+    raise NarrativeLanguageError("SOURCE_LANGUAGE_UNSUPPORTED_MIME")
+E   company_wiki.source_catalog.narrative_language.NarrativeLanguageError: SOURCE_LANGUAGE_UNSUPPORTED_MIME
+________ test_actual_issuer_natural_heading_colon_speakers_end_and_qa _________
+tests\contract\test_official_transcript_layouts.py:15: in test_actual_issuer_natural_heading_colon_speakers_end_and_qa
+    assert not d.errors and d.coverage_complete
+E   AssertionError: assert (not ('transcript_start_missing',))
+E    +  where ('transcript_start_missing',) = DocumentStructure(source_id='urn:company-wiki:source:sha256:b9bc997d1def7674ed3fa6c1f262b3317068b6653ac6918357151b4fc4...=0, opaque_pages=(), table_scan_pages=(), deferred_table_pages=(), line_count=13, errors=('transcript_start_missing',)).errors
+__ test_second_layout_titled_speaker_labels_and_question_and_answer_heading ___
+tests\contract\test_official_transcript_layouts.py:29: in test_second_layout_titled_speaker_labels_and_question_and_answer_heading
+    assert not d.errors
+E   AssertionError: assert not ('transcript_start_missing',)
+E    +  where ('transcript_start_missing',) = DocumentStructure(source_id='urn:company-wiki:source:sha256:0b62f0cc3acc20cf62610a93179fe65ed8ee56478ae2a62fcee0f37e97...=0, opaque_pages=(), table_scan_pages=(), deferred_table_pages=(), line_count=10, errors=('transcript_start_missing',)).errors
+______________ test_ambiguous_empty_heading_body_is_not_success _______________
+tests\contract\test_official_transcript_layouts.py:42: in test_ambiguous_empty_heading_body_is_not_success
+    assert d.errors and not d.units
+E   AssertionError: assert (())
+E    +  where () = DocumentStructure(source_id='urn:company-wiki:source:sha256:a43c767c6cd4db0f069abc6c7e255837f3f90a7d146fdb02e2d74ef2f2...,), page_count=0, pages_read=0, opaque_pages=(), table_scan_pages=(), deferred_table_pages=(), line_count=2, errors=()).errors
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+tests/document_normalization/test_docx.py::test_duplicate_zip_member_refused
+  C:\Miniconda\Lib\zipfile\__init__.py:1642: UserWarning: Duplicate name: 'word/document.xml'
+    return self._open_to_write(zinfo, force_zip64=force_zip64)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/document_normalization/test_docx.py::test_native_text_table_qa_and_exact_original_replay
+FAILED tests/document_normalization/test_docx.py::test_duplicate_headings_and_blank_paragraph_ordinals_are_stable
+FAILED tests/document_normalization/test_docx.py::test_hyperlink_label_retained_external_relationship_never_executed
+FAILED tests/document_normalization/test_docx.py::test_tracked_deleted_text_excluded_and_current_insertions_diagnosed
+FAILED tests/document_normalization/test_docx.py::test_archive_traversal_refused[../escape.xml]
+FAILED tests/document_normalization/test_docx.py::test_archive_traversal_refused[word/../../escape.xml]
+FAILED tests/document_normalization/test_docx.py::test_corrupt_archive_refused_with_named_error
+FAILED tests/document_normalization/test_docx.py::test_duplicate_zip_member_refused
+FAILED tests/document_normalization/test_docx.py::test_zip_expansion_text_units_and_deadline_are_finite
+FAILED tests/document_normalization/test_docx.py::test_replay_rejects_changed_source_and_forged_coordinates
+FAILED tests/document_normalization/test_docx.py::test_native_language_sampling_and_generation_dispatch
+FAILED tests/contract/test_official_transcript_layouts.py::test_actual_issuer_natural_heading_colon_speakers_end_and_qa
+FAILED tests/contract/test_official_transcript_layouts.py::test_second_layout_titled_speaker_labels_and_question_and_answer_heading
+FAILED tests/contract/test_official_transcript_layouts.py::test_ambiguous_empty_heading_body_is_not_success
+================== 14 failed, 4 passed, 2 warnings in 0.79s ===================

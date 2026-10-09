@@ -1,0 +1,34 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\֣����\.codex\worktrees\fresh-capture-20261009\company-wiki
+configfile: pytest.ini
+collected 243 items
+
+tests\contract\test_official_transcript_layouts.py ..........            [  4%]
+tests\contract\test_transcript_material.py .......                       [  6%]
+tests\contract\test_transcript_json_material.py ............             [ 11%]
+tests\contract\test_official_capture_recovery.py ....................... [ 21%]
+.......................                                                  [ 30%]
+tests\contract\test_zr509_html_capture.py ............                   [ 35%]
+tests\unit\test_narrative_evidence.py .................................. [ 49%]
+............                                                             [ 54%]
+tests\unit\test_narrative_language.py ......                             [ 57%]
+tests\unit\test_narrative_generation.py ...........                      [ 61%]
+tests\unit\test_narrative_format_pipeline.py .............               [ 67%]
+tests\unit\test_narrative_select_handler.py ............................ [ 78%]
+                                                                         [ 78%]
+tests\unit\test_narrative_verify_handler.py ....................         [ 86%]
+tests\unit\test_native_document_pipeline.py ...                          [ 88%]
+tests\integration\test_official_source_flow.py ......................... [ 98%]
+...                                                                      [ 99%]
+tests\integration\test_native_document_pipeline.py .                     [100%]
+
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================== 243 passed, 1 warning in 72.50s (0:01:12) ==================

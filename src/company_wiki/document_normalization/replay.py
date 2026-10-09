@@ -7,7 +7,7 @@ import hashlib
 import re
 from .errors import ReplayError
 from .limits import NormalizationLimits
-from .units import FORMAT_HTML, PARSER_NAME, verify_unit_identity
+from .units import FORMAT_DOCX, FORMAT_HTML, PARSER_NAME, verify_unit_identity
 
 
 def _plain(value):
@@ -136,6 +136,8 @@ def replay_units(
     mime = (
         "text/html"
         if format_name == FORMAT_HTML
+        else "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        if format_name == FORMAT_DOCX
         else "application/vnd.openxmlformats-officedocument.presentationml.presentation"
     )
     doc = _parse(
