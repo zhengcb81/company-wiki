@@ -1,5 +1,15 @@
 # Findings
 
+## 新真实执行的审查交接（2026-10-09）
+
+三家公司正式原生计算/渲染/强验证/快照/注册表完成，whole execution仍partial，HK/US有早期authoring/time留证缺口。旧问题未被换短文档、替代模型或最终校验绿色抹去；当前四路独立审查按phase6/fresh_four_reviews/README.md分批，尚无最终质量结论。
+
+重复授权清理已发布，但真实运行出现另一类职责耦合：source locale值zh-CN与summary枚举冲突、已有季度原件因空标题不能public read、缺报表请求被local_metadata_gap阻断。应优先核实资格与展示字段的职责，而非给每个公司修metadata、加人工许可或关闭真实来源验真。当前是待专家归因的具名症状，不能把全部设定归为权限。
+
+其他待四审共因包括年度输出截断、ET请求/凭证传递、长文件名MAX_PATH、DOCX/电话会HTML、源类别投影、敏感性祖先/derived重算/量纲与strong output基础参数引用。保留失败输入缺字节这一observability事实；专家初次只做整体施工包，MAIN随后TDD共用层改造、大节点真实复验。
+
+审查者另有实际配置全文输出失误，详见fresh_four_reviews/README.md脱敏incident；这是reviewer记录卫生问题，不是executor错误。工具历史进入模型上下文，仓库不能删该历史；后续诊断必须用现有安全投影或明确白名单/presence，不能输出密钥或为此新增人工审批。用户已获知建议更换疑似对应凭证，配置未擅改。
+
 ## 新研究的共用边界（2026-10-09；尚非研究全绿）
 
 原三家三个独立执行在既有授权下已实际开始。新发现与责任细则见 [IMPLEMENTATION](phase6/fresh_runtime_boundaries/IMPLEMENTATION.md)。已确认 RF targets.py 残留 `checked_date <= as_of` 与 source-clock 原意冲突；rich MIME 白名单漏 PPTX；RF URL 合同比 CWP storage 的 HTTP(S) provenance 更窄。保持真实操作日期、原始 URL 和 source SHA，不能要求人签/回填日期/重复 GET 才通过。

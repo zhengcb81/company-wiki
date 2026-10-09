@@ -1,5 +1,17 @@
 # Progress
 
+## 2026-10-09：原三家封存，独立审查分批启动
+
+三个executor已完成formal compute/render/strong validation/snapshot/registry并封存，执行均partial；CN证据包complete、HK/US partial，早期留证缺口真实保留。manifest引用180/375/474项，MAIN只核对manifest实际SHA与文件可用性后写已有协议handoff，没有把hash变成许可证或重复全层原件hash。实际引用与调度见phase6/fresh_four_reviews/README.md。
+
+独立storage/fetch/process三个身份已启动，因4总槽含MAIN，storage先CN完成释放后启动独立analyst，后续同storage followup补HK/US；各角色不读其他初稿。四份报告后专家统一共因施工，不让每个局部错误触发另一个小修/签收流程。第二组三家公司和NVDA loop仍后置。
+
+用户再次要求取消过度审批：已核对30入口inventory/CLOSEOUT及现有主线、安装，没有撤销既有永久授权。平台此前对公开PPTX/DeepSeek具体授权的误判记录原样保留，同命令在既有授权证明下已获准。项目内重复许可清理已经发布，平台托管reviewer无仓库关闭接口。新暴露locale/空标题/metadata gap职责耦合升为专家优先排查，不能宣称所有业务校验问题都已解决。
+
+最新CWP fb5e958dd8794ca3e1fb52283afc2cc1553d8f0b 精确CI37901575972 SUCCESS，公开API只读观察；没有为文档新增重复测试。RF79139534精确CI成功事实保留。三家本轮known收费母账仍236614tokens/151565microUSD估计，旧unknown7/FX2764以及US早期fetch未知用量保留，不重置/双计。新审查不发供应商请求。
+
+fetch reviewer配置检查失误：全文ET config工具输出含三项疑似实际模型credential（仅本地布尔判定、未认证），已进入平台工具记录/模型上下文，不声称可由仓库删除或“未外发”。脱敏incident在CN roles/fetch/reviewer-sensitive-output-incident.json，原chunk7eb7d0。MAIN已制止全文输出并告知用户建议换对应密钥；没有改配置/自行旋转，没有把reviewer错误算executor缺陷。后续使用明确白名单字段/presence，专家检查已有安全诊断入口，避免另造许可门。
+
 ## 2026-10-09：新RF主线发布/真实重试
 
 RF f88ace5a正常合main79139534并push，快速prepush126PASS+Ruff/mypy，exact CI37900018978成功。六个runtime/指引文件实装到两个物理root，原始执行路径字节已实核，.claude沿现有alias。安装第一次把--destination完整skill路径误当父目录，实际只创建本次六文件嵌套副本；原错误回执保留，纠正参数后验证每个实际执行文件、精确owned副本清单/SHA，再清理两个嵌套副本。自己的工程工作树干净并线后恢复不存在；原件删除0。不能把首次虚假的nested check MATCH称安装成功。
