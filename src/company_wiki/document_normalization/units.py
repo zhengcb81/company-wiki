@@ -28,13 +28,28 @@ FORMAT_HTML = "html"
 FORMAT_PPTX = "pptx"
 
 HTML_LOCATOR_SCHEMA = "cwp-html-dom/1"
-PPTX_LOCATOR_SCHEMA = "cwp-pptx-shape/1"
+PPTX_LOCATOR_SCHEMA = "cwp-pptx-shape/2"
+LEGACY_PPTX_LOCATOR_SCHEMA = "cwp-pptx-shape/1"
+PPTX_PARSER_VERSION = "1.1.0"
+PPTX_OCR_PARSER_VERSION = "2.0.0"
+
+
+def parser_version_for_format(format_name: str) -> str:
+    return PPTX_PARSER_VERSION if format_name == FORMAT_PPTX else PARSER_VERSION
+
+
+def require_parser_version(format_name: str, version: str) -> None:
+    allowed = (
+        {PARSER_VERSION, PPTX_PARSER_VERSION, PPTX_OCR_PARSER_VERSION}
+        if format_name == FORMAT_PPTX
+        else {PARSER_VERSION}
+    )
+    if version not in allowed:
+        raise ValueError("unsupported parser_version")
 
 
 def canonical_identity_json(value: Any) -> str:
-    return json.dumps(
-        value, ensure_ascii=False, sort_keys=True, separators=(",", ":")
-    )
+    return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
 
 
 def unit_text_sha256(text: str) -> str:
@@ -50,11 +65,18 @@ def compute_unit_id(
     text_sha256: str,
     unit_kind: str,
     source_role: str,
+    parser_version: str | None = None,
 ) -> str:
+    parser_version = (
+        parser_version
+        if parser_version is not None
+        else parser_version_for_format(format_name)
+    )
+    require_parser_version(format_name, parser_version)
     identity = {
         "format": format_name,
         "parser_name": PARSER_NAME,
-        "parser_version": PARSER_VERSION,
+        "parser_version": parser_version,
         "source_id": source_id,
         "source_locator": source_locator,
         "source_role": source_role,
@@ -62,9 +84,10 @@ def compute_unit_id(
         "text_sha256": text_sha256,
         "unit_kind": unit_kind,
     }
-    return UNIT_ID_PREFIX + hashlib.sha256(
-        canonical_identity_json(identity).encode("utf-8")
-    ).hexdigest()
+    return (
+        UNIT_ID_PREFIX
+        + hashlib.sha256(canonical_identity_json(identity).encode("utf-8")).hexdigest()
+    )
 
 
 def build_unit(
@@ -79,8 +102,15 @@ def build_unit(
     transform: str,
     extra_metadata: Mapping[str, Any] | None = None,
     quality_flags: Sequence[str] = (),
+    parser_version: str | None = None,
 ) -> NarrativeUnit:
     """Create one NarrativeUnit whose id binds every replay-relevant fact."""
+    parser_version = (
+        parser_version
+        if parser_version is not None
+        else parser_version_for_format(format_name)
+    )
+    require_parser_version(format_name, parser_version)
     normalized = normalize_text(raw_text)
     if not normalized:
         raise ValueError("cannot build a narrative unit from blank text")
@@ -103,12 +133,13 @@ def build_unit(
         text_sha256=unit_text_sha256(normalized),
         unit_kind=unit_kind,
         source_role=SOURCE_ROLE,
+        parser_version=parser_version,
     )
     return NarrativeUnit(
         unit_id=unit_id,
         source_id=source_id,
         parser_name=PARSER_NAME,
-        parser_version=PARSER_VERSION,
+        parser_version=parser_version,
         coordinates=coordinates,
         raw_text=normalized,
         unit_kind=unit_kind,
@@ -125,6 +156,9 @@ def verify_unit_identity(unit: NarrativeUnit, *, format_name: str) -> None:
     The claimed unit_id must equal the id recomputed from the unit's own
     fields and metadata, so a forged locator, version, or text cannot replay.
     """
+    require_parser_version(format_name, unit.parser_version)
+    if unit.parser_name != PARSER_NAME:
+        raise ValueError("unknown parser_name")
     metadata = unit.metadata
     expected_locator = metadata.get("source_locator")
     if not isinstance(expected_locator, str) or not expected_locator:
@@ -137,11 +171,10 @@ def verify_unit_identity(unit: NarrativeUnit, *, format_name: str) -> None:
         text_sha256=unit.text_sha256,
         unit_kind=unit.unit_kind,
         source_role=unit.source_role,
+        parser_version=unit.parser_version,
     )
     if unit.unit_id != expected_id:
-        raise ValueError(
-            "unit_id does not bind its claimed locator, text, or metadata"
-        )
+        raise ValueError("unit_id does not bind its claimed locator, text, or metadata")
     if metadata.get("format") != format_name:
         raise ValueError("unit format does not match the parsed document")
 
@@ -154,6 +187,11 @@ __all__ = [
     "PARSER_NAME",
     "PARSER_VERSION",
     "PPTX_LOCATOR_SCHEMA",
+    "LEGACY_PPTX_LOCATOR_SCHEMA",
+    "PPTX_PARSER_VERSION",
+    "PPTX_OCR_PARSER_VERSION",
+    "parser_version_for_format",
+    "require_parser_version",
     "SOURCE_ROLE",
     "UNIT_ID_PREFIX",
     "build_unit",

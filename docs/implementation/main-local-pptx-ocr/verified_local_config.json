@@ -1,0 +1,25 @@
+{
+  "schema_version": "cwp-local-ocr-config/1",
+  "engine_version": "3.8.1",
+  "runtime_version": "1.26.0",
+  "base_config_sha256": "e753d39c0222297f0180e1bdcde1799bc26218f315356763362810846b6afa84",
+  "text_score": 0.5,
+  "low_confidence_threshold": 0.8,
+  "max_side_len": 3000,
+  "intra_op_threads": 2,
+  "inter_op_threads": 1,
+  "models": {
+    "det": {
+      "path": "C:/Miniconda/Lib/site-packages/rapidocr/models/ch_PP-OCRv4_det_mobile.onnx",
+      "sha256": "d2a7720d45a54257208b1e13e36a8479894cb74155a5efe29462512d42f49da9"
+    },
+    "cls": {
+      "path": "C:/Miniconda/Lib/site-packages/rapidocr/models/ch_ppocr_mobile_v2.0_cls_mobile.onnx",
+      "sha256": "e47acedf663230f8863ff1ab0e64dd2d82b838fceb5957146dab185a89d6215c"
+    },
+    "rec": {
+      "path": "C:/Miniconda/Lib/site-packages/rapidocr/models/ch_PP-OCRv4_rec_mobile.onnx",
+      "sha256": "48fc40f24f6d2a207a2b1091d3437eb3cc3eb6b676dc3ef9c37384005483683b"
+    }
+  }
+}

@@ -24,7 +24,7 @@ from .units import (
     FORMAT_HTML,
     FORMAT_PPTX,
     PARSER_NAME,
-    PARSER_VERSION,
+    require_parser_version,
 )
 
 KNOWN_FORMATS = (FORMAT_HTML, FORMAT_PPTX)
@@ -52,8 +52,7 @@ class NormalizedDocument:
             raise ValueError(f"unknown format_name: {self.format_name!r}")
         if self.parser_name != PARSER_NAME:
             raise ValueError(f"parser_name must be {PARSER_NAME!r}")
-        if self.parser_version != PARSER_VERSION:
-            raise ValueError(f"parser_version must be {PARSER_VERSION!r}")
+        require_parser_version(self.format_name, self.parser_version)
         if not isinstance(self.structure, DocumentStructure):
             raise TypeError("structure must be a DocumentStructure")
         if self.structure.source_id != self.source_id:
