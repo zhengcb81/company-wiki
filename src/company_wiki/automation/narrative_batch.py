@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass
+from contextlib import ExitStack
+from dataclasses import asdict, dataclass, field
 from datetime import datetime, timedelta, timezone
 import json
 from pathlib import Path
@@ -11,7 +12,7 @@ import stat
 import time
 from typing import Any
 
-from company_wiki._file_mutex import os_file_mutex
+from company_wiki._file_mutex import FileMutexLockedError, os_file_mutex
 
 from company_wiki.source_catalog import SourceCatalog
 from company_wiki.source_catalog.config import load_catalog_config
@@ -32,9 +33,10 @@ from .narrative_contracts import (
     SourceRevisionEventPayload,
 )
 from .narrative_model import NARRATIVE_PROMPT_VERSION
+from .narrative_generation import generation_manifest, generation_sha256, find_reuse_pin, read_reuse_pin
 from .narrative_formats import source_class_for
 from .narrative_projection import NarrativeEffectDispatcher
-from .narrative_run_store import NarrativeRunStore, RunConflictError
+from .narrative_run_store import NarrativeRunError, NarrativeRunStore, RunConflictError
 from .narrative_source_guard import (
     NarrativeSourceGuardError,
     source_ref,
@@ -55,6 +57,8 @@ class BatchEvents:
     input_hash: str
     events: tuple[Event, ...]
     source_facts: tuple[dict[str, Any], ...] = ()
+    generation_manifests: dict = field(default_factory=dict)
+    reused_artifact_pins: dict = field(default_factory=dict)
 
 
 _NARRATIVE_JOB_TYPES = ("source.narrative_select", "source.narrative_summarize", "source.narrative_verify")
@@ -120,7 +124,7 @@ def _current_sources(request, reader, *, deadline=None):
             "source_metadata": {"source_class": source_class_for(current.mime_type, kind),
                                 "title": metadata["title"], "document_kind": kind, "language": language},
         }))
-        source_facts.append({"document_id": ref.document_id,
+        source_facts.append({"document_id": ref.document_id, "document_kind": kind,
                              **{field: metadata.get(field) for field in _SOURCE_FACT_FIELDS}})
     _check_preparation_deadline(deadline)
     return payloads, tuple(source_facts)
@@ -155,13 +159,52 @@ def _frozen_binding(request, binding):
                 for event in binding.events
                 for payload in [SourceRevisionEventPayload.from_dict(json.loads(event.payload_json))]}
     return canonical_json({
-        "schema_version": "narrative-run-binding/2", "request_sha256": request.request_sha256,
+        "schema_version": "narrative-run-binding/3", "request_sha256": request.request_sha256,
         "execution_versions": _execution_versions(request),
         "read_policy_schema_version": EXACT_READ_POLICY_FINGERPRINT_SCHEMA_VERSION,
         "read_policy_sha256": canonical_json_hash(policies),
         "source_read_policies": policies,
         "source_facts": list(binding.source_facts),
+        **_freeze_generations(binding.generation_manifests),
+        "reused_artifact_pins": binding.reused_artifact_pins,
     })
+
+
+_GENERATION_SOURCE_FIELDS = frozenset({"source_ref", "source_metadata", "parser_component",
+                                     "parser_components", "material_extractor"})
+
+
+def _freeze_generations(manifests):
+    """Deduplicate settings so 100-source bindings retain the existing byte cap."""
+    settings, records = {}, {}
+    for document, manifest in manifests.items():
+        common = {key: value for key, value in manifest.items() if key not in _GENERATION_SOURCE_FIELDS}
+        digest = canonical_json_hash(common)
+        settings[digest] = common
+        records[document] = {"settings_sha256": digest, "generation_sha256": generation_sha256(manifest),
+            "source_inputs": {key: value for key, value in manifest.items() if key in _GENERATION_SOURCE_FIELDS}}
+    return {"generation_settings": settings, "generation_manifests": records}
+
+
+def _thaw_generations(frozen):
+    settings, records = frozen["generation_settings"], frozen["generation_manifests"]
+    if not isinstance(settings, dict) or not isinstance(records, dict):
+        raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
+    manifests = {}
+    for document, record in records.items():
+        if not isinstance(record, dict) or set(record) != {"settings_sha256", "generation_sha256", "source_inputs"}:
+            raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
+        common = settings[record["settings_sha256"]]
+        source = record["source_inputs"]
+        if (not isinstance(common, dict) or canonical_json_hash(common) != record["settings_sha256"]
+                or not isinstance(source, dict) or not {"source_ref", "source_metadata", "parser_component"} <= source.keys()
+                or not source.keys() <= _GENERATION_SOURCE_FIELDS or source.keys() & common.keys()):
+            raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
+        manifest = {**common, **source}
+        if generation_sha256(manifest) != record["generation_sha256"]:
+            raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
+        manifests[document] = manifest
+    return manifests
 
 
 def _resume_binding(request, reader, store, runs, run, *, deadline, prepared_sources=None):
@@ -173,7 +216,8 @@ def _resume_binding(request, reader, store, runs, run, *, deadline, prepared_sou
         if not isinstance(frozen, dict):
             raise BatchResumeError("BATCH_LEGACY_BINDING_UNVERIFIABLE")
         schema_pair = (frozen.get("schema_version"), frozen.get("read_policy_schema_version"))
-        scoped = schema_pair == ("narrative-run-binding/2", EXACT_READ_POLICY_FINGERPRINT_SCHEMA_VERSION)
+        reusable = schema_pair == ("narrative-run-binding/3", EXACT_READ_POLICY_FINGERPRINT_SCHEMA_VERSION)
+        scoped = reusable or schema_pair == ("narrative-run-binding/2", EXACT_READ_POLICY_FINGERPRINT_SCHEMA_VERSION)
         if not scoped and schema_pair != ("narrative-run-binding/1", READ_POLICY_FINGERPRINT_SCHEMA_VERSION):
             raise BatchResumeError("BATCH_LEGACY_BINDING_UNVERIFIABLE")
         if frozen["request_sha256"] != request.request_sha256:
@@ -205,17 +249,35 @@ def _resume_binding(request, reader, store, runs, run, *, deadline, prepared_sou
             # An old digest contains no recoverable per-root rules. Retain its
             # original interpretation and never re-sign events/usage/baseline.
             policies = {document: frozen["read_policy_sha256"] for document in documents}
+        pins = frozen["reused_artifact_pins"] if reusable else {}
+        manifests = _thaw_generations(frozen) if reusable else {}
+        payload_wires = {document: {"schema_version": "source-revision-event/2.0",
+            "source_ref": manifest["source_ref"], "source_metadata": manifest["source_metadata"],
+            "expected_read_policy_sha256": policies[document]}
+            for document, manifest in manifests.items()}
+        if reusable and (not isinstance(pins, dict) or not set(pins) <= documents
+                or not isinstance(manifests, dict) or set(manifests) != documents
+                or not isinstance(payload_wires, dict) or set(payload_wires) != documents):
+            raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
         jobs = store.list_jobs(job_ids=run.job_ids)
         members = runs.job_bindings(run.run_id)
-        if (len(jobs) != len(request.sources) * len(_NARRATIVE_JOB_TYPES)
+        if (len(jobs) != (len(request.sources) - len(pins)) * len(_NARRATIVE_JOB_TYPES)
                 or set(members) != set(run.job_ids)
                 or canonical_json_hash(list(sorted(run.job_ids))) != run.scope_sha256):
             raise BatchResumeError("BATCH_FROZEN_MEMBERSHIP_INVALID")
         event_ids = {job.created_from_event_id for job in jobs}
         events = tuple(store.get_event(event_id) for event_id in sorted(event_ids))
-        if len(events) != len(request.sources) or any(event is None for event in events):
+        if len(events) != len(request.sources) - len(pins) or any(event is None for event in events):
             raise BatchResumeError("BATCH_FROZEN_MEMBERSHIP_INVALID")
         by_document = {}
+        if reusable:
+            for document in pins:
+                payload = SourceRevisionEventPayload.from_dict(payload_wires[document])
+                event = Event("narrative-batch-" + canonical_json_hash({"run": run.input_hash, "source": document}),
+                    "source.revision_registered", "source_revision", document, payload.input_hash,
+                    canonical_json(payload.to_dict()), "narrative-batch/1:" + run.input_hash,
+                    run.created_at, run.created_at)
+                events += (event,)
         for event in events:
             payload = SourceRevisionEventPayload.from_dict(json.loads(event.payload_json))
             if (event.input_hash != payload.input_hash
@@ -226,14 +288,29 @@ def _resume_binding(request, reader, store, runs, run, *, deadline, prepared_sou
                         {"run": run.input_hash, "source": payload.source_ref.document_id})):
                 raise BatchResumeError("BATCH_FROZEN_MEMBERSHIP_INVALID")
             related = tuple(job for job in jobs if job.created_from_event_id == event.event_id)
-            if (len(related) != len(_NARRATIVE_JOB_TYPES)
-                    or {job.job_type for job in related} != set(_NARRATIVE_JOB_TYPES)
+            expected_count = 0 if event.subject_id in pins else len(_NARRATIVE_JOB_TYPES)
+            if (len(related) != expected_count
+                    or {job.job_type for job in related} != (set(_NARRATIVE_JOB_TYPES) if expected_count else set())
                     or any((job.input_hash, job.handler_version) != members[job.job_id]
                            or job.handler_version != versions["handlers"][job.job_type]
                            or job.policy_version != event.policy_version
                            or job.input_hash != event.input_hash
                            or job.subject_id != event.subject_id for job in related)):
                 raise BatchResumeError("BATCH_FROZEN_MEMBERSHIP_INVALID")
+            if reusable and payload.to_dict() != payload_wires.get(event.subject_id):
+                raise BatchResumeError("BATCH_FROZEN_MEMBERSHIP_INVALID")
+            if reusable:
+                manifest = manifests[event.subject_id]
+                expected = generation_manifest(request, payload, execution_versions=versions,
+                                               parser_components=manifest.get("parser_components"))
+                # Preserve frozen parser/producer interpretation on completed
+                # history. The public reader must explicitly replay that version.
+                expected["parser_component"] = manifest["parser_component"]
+                expected["bundle_producer"] = manifest["bundle_producer"]
+                if "material_extractor" in manifest:
+                    expected["material_extractor"] = manifest["material_extractor"]
+                if expected != manifest:
+                    raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
             by_document[payload.source_ref.document_id] = (event, payload)
         current_payloads, current_facts = (
             _current_sources(request, reader, deadline=deadline)
@@ -257,7 +334,7 @@ def _resume_binding(request, reader, store, runs, run, *, deadline, prepared_sou
             if saved_wire != current_wire:
                 raise BatchResumeError("BATCH_SOURCE_FACTS_CHANGED")
             ordered_events.append(saved_event)
-        return BatchEvents(run.input_hash, tuple(ordered_events), current_facts), versions, jobs
+        return BatchEvents(run.input_hash, tuple(ordered_events), current_facts, manifests, pins), versions, jobs
     except (KeyError, TypeError, json.JSONDecodeError) as exc:
         raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID") from exc
 
@@ -336,7 +413,12 @@ def _storage_guard(request, catalog, db_path, work_dir, input_hash, *, read_only
         if saved.get("input_hash") != input_hash:
             raise ValueError("BATCH_WORK_DIRECTORY_CONFLICT")
         baseline = tuple(saved["sizes"])
-    guard = BatchStorageBudget(files=files, persistent_dirs=(catalog.config.catalog_dir / "objects", work_dir),
+    persistent_dirs = (catalog.config.catalog_dir / "objects", work_dir)
+    # Legacy baseline vectors keep their original interpretation and bytes.
+    # New vectors also measure this application's small recovery locators.
+    if baseline is None or len(baseline) == len(files) + len(persistent_dirs) + 1:
+        persistent_dirs += (catalog.config.catalog_dir / "narrative-generations",)
+    guard = BatchStorageBudget(files=files, persistent_dirs=persistent_dirs,
         scratch_dirs=(), max_persistent_bytes=request.max_persistent_bytes,
         max_scratch_bytes=request.max_scratch_bytes, baseline=baseline)
     if baseline is None and not read_only:
@@ -362,11 +444,11 @@ class _BudgetedObjects(LocalNarrativeObjectStore):
         return super().put(data)
 
 
-def _preflight_storage(request):
+def _preflight_storage(request, *, source_count=None):
     # All contracts are byte-bounded. Admit their worst case plus SQLite/WAL/log
     # overhead before any worker or HTTP starts; measured growth is checked too.
     per_source = SELECT_RESULT_MAX_BYTES + SUMMARY_RESULT_MAX_BYTES + 2 * BUNDLE_MAX_BYTES + 1024 ** 2
-    reserve = len(request.sources) * per_source + len(profile_slots(request.profile)) * 262144 + 8 * 1024 ** 2
+    reserve = (len(request.sources) if source_count is None else source_count) * per_source + len(profile_slots(request.profile)) * 262144 + 8 * 1024 ** 2
     if reserve > request.max_persistent_bytes:
         raise ValueError("PERSISTENT_BYTES_EXCEEDED")
     if request.max_final_bytes > request.max_scratch_bytes:
@@ -416,6 +498,25 @@ def _run_owned(request, catalog, project_root, config_path, db_path, work_dir, *
                                expected_read_policy_sha256=payload.expected_read_policy_sha256)
         _check_preparation_deadline(deadline)
     _check_preparation_deadline(deadline)
+    manifests = {payload.source_ref.document_id: generation_manifest(
+        request, payload, execution_versions=_execution_versions(request)) for payload in prepared_sources[0]}
+    lock_dir = catalog.config.catalog_dir / "narrative-generations"
+    lock_dir.mkdir(parents=True, exist_ok=True)
+    with ExitStack() as locks:
+        for digest in sorted({generation_sha256(value) for value in manifests.values()}):
+            _check_preparation_deadline(deadline)
+            try:
+                locks.enter_context(os_file_mutex(lock_dir / (digest + ".lock"),
+                    timeout_seconds=max(0.001, deadline - time.monotonic())))
+            except FileMutexLockedError as exc:
+                raise BatchResumeError("BATCH_GENERATION_BUSY") from exc
+        return _run_prepared(request, catalog, project_root, config_path, db_path, work_dir,
+                             deadline=deadline, prepared_sources=prepared_sources, manifests=manifests)
+
+
+def _run_prepared(request, catalog, project_root, config_path, db_path, work_dir, *, deadline,
+                  prepared_sources, manifests):
+    reader = SourceVersionReader(catalog)
     store = AutomationStore(db_path) if db_path.exists() else None
     runs = NarrativeRunStore(db_path) if store is not None else None
     previous = runs.get_run(request.run_id) if runs is not None else None
@@ -426,8 +527,39 @@ def _run_owned(request, catalog, project_root, config_path, db_path, work_dir, *
             request, reader, store, runs, previous, deadline=deadline, prepared_sources=prepared_sources)
         guard = _storage_guard(request, catalog, db_path, work_dir, binding.input_hash, read_only=True)
     else:
-        _preflight_storage(request)
         binding = _events_from_sources(request, *prepared_sources, now=_now())
+        pins = {}
+        readonly_artifacts = NarrativeArtifactReader(
+            catalog.config.database_path, LocalNarrativeObjectStore(catalog.config.catalog_dir))
+        try:
+            facts = {item["document_id"]: item for item in prepared_sources[1]}
+            for payload in prepared_sources[0]:
+                _check_preparation_deadline(deadline)
+                document = payload.source_ref.document_id
+                pointer = _generation_pointer(catalog, manifests[document])
+                try:
+                    candidate = (find_reuse_pin(readonly_artifacts, reader, payload, manifests[document], facts[document])
+                                 if not request.refresh or pointer.exists() else None)
+                except ValueError as exc:
+                    raise BatchResumeError("BATCH_REUSE_ARTIFACT_INVALID") from exc
+                _check_preparation_deadline(deadline)
+                # A visible verified publication completes the recovery locator,
+                # including a crash between activate and pointer cleanup. Refresh
+                # still creates its own new jobs and usage.
+                if candidate is not None:
+                    pointer.unlink(missing_ok=True)
+                pin = None if request.refresh else candidate
+                if pin is not None:
+                    pins[document] = pin
+                    pointer.unlink(missing_ok=True)
+                else:
+                    _check_generation_owner(pointer, db_path, request.run_id)
+        finally:
+            readonly_artifacts.close()
+        binding = BatchEvents(binding.input_hash, binding.events, binding.source_facts, manifests, pins)
+        misses = len(request.sources) - len(pins)
+        if misses:
+            _preflight_storage(request, source_count=misses)
         _check_preparation_deadline(deadline)
         work_dir.mkdir(parents=True, exist_ok=True)
         # Save the baseline before new AUTO initialization/materialization grows files.
@@ -446,7 +578,7 @@ def _run_owned(request, catalog, project_root, config_path, db_path, work_dir, *
             catalog.config.database_path, LocalNarrativeObjectStore(catalog.config.catalog_dir))
         try:
             documents = _final_documents(request, binding, store, runs, readonly_artifacts,
-                                         read_only=True, job_ids=previous.job_ids)
+                                         read_only=True, job_ids=previous.job_ids, reader=reader)
         finally:
             readonly_artifacts.close()
         if all(document["status"] not in {"activation_pending", "succeeded"} for document in documents):
@@ -477,8 +609,10 @@ def _run_owned(request, catalog, project_root, config_path, db_path, work_dir, *
 
         if previous is None:
             scheduler = AutomationScheduler(store, create_default_registry(), PolicyConfig(allow_llm=True, allow_network=True))
-            event_ids = {event.event_id for event in binding.events}
+            event_ids = {event.event_id for event in binding.events if event.subject_id not in binding.reused_artifact_pins}
             for event in binding.events:
+                if event.subject_id in binding.reused_artifact_pins:
+                    continue
                 stored = store.get_event(event.event_id)
                 if stored is None:
                     stored = store.put_event(event).value
@@ -497,8 +631,28 @@ def _run_owned(request, catalog, project_root, config_path, db_path, work_dir, *
                 created_at=_now(), binding_json=_frozen_binding(request, binding))
         else:
             run = previous
+        if not run.job_ids:
+            readonly_artifacts = NarrativeArtifactReader(
+                catalog.config.database_path, LocalNarrativeObjectStore(catalog.config.catalog_dir))
+            try:
+                documents = _final_documents(request, binding, store, runs, readonly_artifacts,
+                                             read_only=True, job_ids=(), reader=reader)
+                try:
+                    guard.check()
+                except ValueError as exc:
+                    if str(exc) not in {"PERSISTENT_BYTES_EXCEEDED", "SCRATCH_BYTES_EXCEEDED"}:
+                        raise
+                    runs.block_run(run.run_id, error_code=str(exc), updated_at=_now())
+                    return _receipt(run.run_id, "storage_exhausted", documents, runs, guard)
+                return _receipt(run.run_id, "completed", documents, runs, guard)
+            finally:
+                readonly_artifacts.close()
         artifacts = NarrativeArtifactStore(catalog.store, _BudgetedObjects(catalog.config.catalog_dir, guard, request.max_final_bytes))
-        dispatcher = NarrativeEffectDispatcher(store, artifacts, allowed_job_ids=run.job_ids)
+        for document, manifest in binding.generation_manifests.items():
+            if document not in binding.reused_artifact_pins:
+                _write_generation_owner(_generation_pointer(catalog, manifest), db_path, run.run_id)
+        dispatcher = NarrativeEffectDispatcher(store, artifacts, allowed_job_ids=run.job_ids,
+                                               generation_manifests=binding.generation_manifests)
         supervisor = AutomationSupervisor(SupervisorConfig(
             db_path=db_path, log_dir=work_dir / "logs", profile=request.profile,
             runtime_factory_path="company_wiki.automation.narrative_worker_factory:create_runtime",
@@ -578,10 +732,77 @@ def _run_owned(request, catalog, project_root, config_path, db_path, work_dir, *
                 current = store.read_runtime_gate()
                 if current.control_generation == generation:
                     store.set_runtime_gate(RuntimeState.PAUSED, updated_at=_now(), expected_generation=generation)
-    documents = _final_documents(request, binding, store, runs, artifacts, job_ids=run.job_ids)
+    documents = _final_documents(request, binding, store, runs, artifacts, job_ids=run.job_ids, reader=reader)
+    for document in documents:
+        manifest = binding.generation_manifests.get(document["document_id"])
+        if manifest is not None:
+            pointer = _generation_pointer(catalog, manifest)
+            if document["status"] == "completed" or _generation_owner_finished(db_path, run.run_id):
+                pointer.unlink(missing_ok=True)
     if status == "completed" and any(document["status"] != "completed" for document in documents):
         status = "partial"
     return _receipt(run.run_id, status, documents, runs, guard)
+
+
+def _generation_pointer(catalog, manifest):
+    return catalog.config.catalog_dir / "narrative-generations" / (generation_sha256(manifest) + ".json")
+
+
+def _generation_owner_finished(db_path, run_id):
+    """Read existing AUTO facts; only known settled terminal work can be released."""
+    from . import migrations
+    if not db_path.is_file():
+        return False
+    runs = NarrativeRunStore(db_path)
+    run = runs.get_run(run_id)
+    if run is None:
+        return False
+    if any(item.usage_status != "known" for item in runs.reservations_for_run(run_id)):
+        return False
+    connection = migrations._open_readonly_connection(db_path)
+    try:
+        rows = connection.execute("""SELECT j.status FROM jobs j JOIN narrative_run_jobs r
+            ON r.job_id=j.job_id WHERE r.run_id=?""", (run_id,)).fetchall()
+        if len(rows) != len(run.job_ids) or any(JobStatus(row[0]) not in _TERMINAL for row in rows):
+            return False
+        pending = connection.execute("""SELECT 1 FROM effects e JOIN narrative_run_jobs r
+            ON r.job_id=e.job_id WHERE r.run_id=? AND e.status IN ('planned','pending','verified') LIMIT 1""",
+            (run_id,)).fetchone()
+        return pending is None
+    finally:
+        connection.close()
+
+
+def _check_generation_owner(pointer, db_path, run_id):
+    if not pointer.exists():
+        return
+    try:
+        owner = json.loads(pointer.read_text(encoding="utf-8"))
+        if set(owner) != {"schema_version", "automation_db", "run_id"} or owner["schema_version"] != "narrative-generation-recovery/1":
+            raise ValueError("invalid recovery pointer")
+        origin_db = Path(owner["automation_db"])
+        if origin_db.resolve() == db_path.resolve() and owner["run_id"] == run_id:
+            return
+        if _generation_owner_finished(origin_db, owner["run_id"]):
+            pointer.unlink()
+            return
+    except (OSError, KeyError, TypeError, ValueError, NarrativeRunError):
+        raise BatchResumeError("BATCH_GENERATION_RECOVERY_REQUIRED") from None
+    raise BatchResumeError("BATCH_GENERATION_RECOVERY_REQUIRED")
+
+
+def _write_generation_owner(pointer, db_path, run_id):
+    import os
+    temporary = pointer.with_suffix(".partial")
+    try:
+        with temporary.open("w", encoding="utf-8") as stream:
+            stream.write(canonical_json({"schema_version": "narrative-generation-recovery/1",
+                "automation_db": str(db_path), "run_id": run_id}))
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, pointer)
+    finally:
+        temporary.unlink(missing_ok=True)
 
 
 def _receipt(run_id, status, documents, runs, guard):
@@ -594,11 +815,20 @@ def _receipt(run_id, status, documents, runs, guard):
         "storage": {"persistent_added_bytes": storage.persistent_added_bytes, "scratch_peak_bytes": storage.scratch_peak_bytes}}
 
 
-def _final_documents(request, binding, store, runs, artifacts, *, read_only=False, job_ids=None):
+def _final_documents(request, binding, store, runs, artifacts, *, read_only=False, job_ids=None, reader=None):
     documents = []
     all_jobs = store.list_jobs(job_ids=job_ids, event_ids=tuple(event.event_id for event in binding.events))
+    facts = {item["document_id"]: item for item in binding.source_facts}
     for event in binding.events:
-        ref = SourceRevisionEventPayload.from_dict(json.loads(event.payload_json)).source_ref
+        payload = SourceRevisionEventPayload.from_dict(json.loads(event.payload_json))
+        ref = payload.source_ref
+        pin = binding.reused_artifact_pins.get(ref.document_id)
+        if pin is not None:
+            if reader is None or not read_reuse_pin(artifacts, reader, payload, pin, facts[ref.document_id], binding.generation_manifests.get(ref.document_id)):
+                raise BatchResumeError("BATCH_REUSE_ARTIFACT_INVALID")
+            documents.append({"document_id": ref.document_id, "status": "completed",
+                              "artifact_ref": pin, "errors": [], "generation_status": "reused"})
+            continue
         jobs = tuple(job for job in all_jobs if job.created_from_event_id == event.event_id)
         verify = next(job for job in jobs if job.job_type == "source.narrative_verify")
         effect_ids = store.effect_ids_for_jobs((verify.job_id,), effect_type=EFFECT_TYPE)

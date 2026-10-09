@@ -68,6 +68,7 @@ class NarrativeBatchRequest:
     max_final_bytes: int
     max_persistent_bytes: int
     max_scratch_bytes: int
+    refresh: bool = False
 
     @classmethod
     def from_dict(cls, value: object) -> NarrativeBatchRequest:
@@ -76,6 +77,8 @@ class NarrativeBatchRequest:
         required = {"run_id", "sources", "profile", "max_seconds", "max_tokens", "max_cost_usd", "model", "pricing"}
         if not required <= value.keys():
             raise ValueError("batch request is missing required fields")
+        if type(value.get("refresh", False)) is not bool:
+            raise ValueError("refresh must be a boolean")
         sources_raw = value["sources"]
         if not isinstance(sources_raw, list) or not 1 <= len(sources_raw) <= 100:
             raise ValueError("batch must contain 1 to 100 explicit source references")
@@ -112,6 +115,7 @@ class NarrativeBatchRequest:
             _integer(pricing["output_micro_usd_per_million_tokens"], "output price", positive=False),
             final_bytes, _integer(value.get("max_persistent_bytes", 1024 ** 3), "max_persistent_bytes"),
             _integer(value.get("max_scratch_bytes", 2 * 1024 ** 3), "max_scratch_bytes"),
+            value.get("refresh", False),
         )
 
     @property
@@ -120,6 +124,7 @@ class NarrativeBatchRequest:
 
     def to_dict(self) -> dict[str, Any]:
         return {
+            **({"refresh": True} if self.refresh else {}),
             "schema_version": BATCH_REQUEST_SCHEMA, "run_id": self.run_id,
             "sources": [ref.to_dict() for ref in self.sources], "profile": self.profile,
             "max_seconds": self.max_seconds, "max_tokens": self.max_tokens,

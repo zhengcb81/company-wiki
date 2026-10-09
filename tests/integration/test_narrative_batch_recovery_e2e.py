@@ -279,6 +279,23 @@ def test_killed_coordinator_releases_owner_and_resumes_without_refunding_unknown
                 pass
             assert runs.reservations_for_run("parent-kill") == reserved
             assert_originals_and_foreign_jobs_untouched(state, originals)
+            # Another entrypoint with a fresh AUTO cannot bypass the origin's
+            # actually sent, still-reserved attempt after its process disappeared.
+            other_request = root / "other-request.json"
+            foreign_wire = json.loads((root / "request.json").read_text(encoding="utf-8"))
+            foreign_wire["run_id"] = "other-after-kill"
+            other_request.write_text(json.dumps(foreign_wire), encoding="utf-8")
+            foreign_command = list(command)
+            foreign_command[foreign_command.index("--request") + 1] = str(other_request)
+            foreign_command[foreign_command.index("--automation-db") + 1] = str(root / "other.db")
+            foreign_command[foreign_command.index("--work-dir") + 1] = str(root / "other-work")
+            foreign = subprocess.run(foreign_command, cwd=root, env=env, capture_output=True,
+                                     text=True, encoding="utf-8", timeout=15)
+            refused = json.loads(foreign.stdout)
+            assert foreign.returncode == 2 and refused["error"] == "BATCH_GENERATION_RECOVERY_REQUIRED", refused
+            assert len(interrupted_model_server.requests) == 1
+            assert runs.reservations_for_run("parent-kill") == reserved
+            assert not (root / "other.db").exists()
             interrupted_model_server.release_first.set()
             resumed = subprocess.run(command, cwd=root, env=env, capture_output=True, text=True, encoding="utf-8", timeout=45)
             assert KEY not in resumed.stdout + resumed.stderr
@@ -311,6 +328,26 @@ def test_killed_coordinator_releases_owner_and_resumes_without_refunding_unknown
                 "unsettled_reservations": budget.unsettled_reservations,
             }
             assert budget.unknown_reservations == 1 and budget.unsettled_reservations == 0
+            from integration.test_narrative_generation_reuse import record_proof
+            from company_wiki.automation import migrations
+            connection = migrations._open_readonly_connection(state.store.db_path)
+            try:
+                persisted = {"successful_result_counts": {row[0]:row[1] for row in connection.execute(
+                    "SELECT j.job_type,COUNT(*) FROM attempts a JOIN jobs j ON j.job_id=a.job_id "
+                    "JOIN narrative_run_jobs r ON r.job_id=a.job_id WHERE r.run_id=? "
+                    "AND a.outcome='succeeded' AND a.result_json IS NOT NULL GROUP BY j.job_type", ("parent-kill",))},
+                    "effects_count":connection.execute("SELECT COUNT(*) FROM effects e JOIN narrative_run_jobs r "
+                    "ON r.job_id=e.job_id WHERE r.run_id=?", ("parent-kill",)).fetchone()[0]}
+            finally:
+                connection.close()
+            record_proof("post-kill-owner-recovery", interrupted_model_server, result, extra={
+                "charged_output_bytes":budget.charged_output_bytes,
+                "run_max_output_bytes":runs.get_run("parent-kill").max_output_bytes,
+                "reservation_output_bytes":retained.output_bytes,
+                "reservation_output_bound":retained.output_bytes_bound,
+                "persisted":persisted,
+                "object_count":len(list((state.catalog.config.catalog_dir / "objects").rglob("*.json")))})
+            record_proof("post-kill-other-db-refused", interrupted_model_server, refused)
             assert len(result["documents"]) == 1
             document = result["documents"][0]
             assert document["document_id"] == next(iter(state.indexed))
@@ -327,6 +364,19 @@ def test_killed_coordinator_releases_owner_and_resumes_without_refunding_unknown
                 )
                 assert version.byte_size == len(payload) > 0
                 assert len(list((state.catalog.config.catalog_dir / "objects").rglob("*.json"))) == 1
+                # After owner lease/outbox recovery the same fresh entrypoint can
+                # pin its exact visible bytes with zero new requests/reservations.
+                reused_process = subprocess.run(foreign_command, cwd=root, env=env, capture_output=True,
+                                               text=True, encoding="utf-8", timeout=15)
+                reused = json.loads(reused_process.stdout)
+                assert reused_process.returncode == 0 and reused["status"] == "completed", reused
+                assert reused["documents"][0]["artifact_ref"] == pin
+                assert reused["budget"]["tokens"] == reused["budget"]["estimated_micro_usd"] == 0
+                assert len(interrupted_model_server.requests) == 2
+                assert runs.reservations_for_run("parent-kill") == reservations
+                from integration.test_narrative_generation_reuse import record_proof
+                record_proof("post-kill-owner-recovery", interrupted_model_server, result)
+                record_proof("post-kill-other-db-reuse", interrupted_model_server, reused)
             else:
                 assert document["artifact_ref"] is None
                 assert result["budget"]["tokens"] > 0 and result["budget"]["estimated_micro_usd"] > 0
