@@ -8,6 +8,7 @@ callers can resolve them through the existing source query contract.
 from __future__ import annotations
 
 from collections import Counter
+from copy import deepcopy
 from dataclasses import dataclass
 import hashlib
 import math
@@ -283,6 +284,11 @@ class NarrativeEvidenceResolver:
     supplies only a trusted source-ID-to-raw-path mapping; versioned parser and
     selector inputs come from the package. No path is read from the bundle,
     and only selected package groups are kept in the per-instance memory cache.
+
+    Source records and the raw-path mapping are owned construction snapshots.
+    Caller mutations are inputs for a new resolver; they cannot rebind this
+    resolver's cached contract or evidence. Raw bytes are still hashed on every
+    resolve, including reads that reuse parsed evidence from the cache.
     """
 
     def __init__(
@@ -311,7 +317,7 @@ class NarrativeEvidenceResolver:
             source_id = _required_string(summary, "source_id")
             if source_id in self._records:
                 raise NarrativeEvidenceResolveError("source_id is ambiguous in bundle")
-            self._records[source_id] = record
+            self._records[source_id] = deepcopy(dict(record))
 
         self._raw_paths: dict[str, Path] = {}
         for source_id, raw_path in raw_paths_by_source_id.items():

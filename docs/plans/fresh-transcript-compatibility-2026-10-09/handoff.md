@@ -31,3 +31,9 @@ True preserved MSFT HTML:273436bytes,SHA bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aa
 For independent replay, pin PYTHONPATH to this worktree/src and run replay_real_msft.py with --raw pointing to the preserved mFresh original and --output pointing to a new owned result file. The harness asserts its loaded resolver belongs to the same worktree and performs no model/provider call. Plain python may otherwise load an editable MAIN installation.
 
 MAIN owns independent acceptance, merge, normal fullunit push gate and exact CI. This worker performed no push, merge, installation, production config/raw write or cross-repo write.
+
+## Independent acceptance P2 follow-up
+
+Independent review's21 focused tests passed but exposed mutable external bundle/cache ownership. Fixed with a deep construction snapshot of source-record dictionaries; raw-path mapping was already independently owned. An existing resolver consumes its frozen initial input, so external contract/evidence/locator/SHA changes do not rebind its cached replay. A newly constructed resolver consumes new input and still rejects unknown/mismatched parser versions, invalid text/SHA and locators. No per-call parse added; same-reader repeated resolve and resolve_group prove one parser call. Raw source SHA is still checked on every read.
+
+Follow-up writes only narrative_retrieval.py, test_transcript_parser_compatibility.py and this PWF. Ownership RED5FAIL/1PASS0.80s retained; compatibility+retrievalGREEN31PASS1.06s; latest concentration208PASS/1SKIP4.38s. Real MSFT rerun41/41 in real_msft_replay_snapshot.json retains90–414body,481lines,515units,4queryhits,immutable source bytes/SHA/mtime,TEMP/env restoration andzero model/provider/cost. Existing earlier RED/initial classification/PPTX base proofs unchanged. MAIN must independently reaccept this latest branch tip before merge/push/install.

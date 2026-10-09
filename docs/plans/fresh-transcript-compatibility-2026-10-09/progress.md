@@ -13,3 +13,9 @@ Focused run203cases:201PASS/1SKIP/1FAIL4.74s. Preserve responsibility_initial_re
 Final concentrated responsibility202PASS/1SKIP4.28s. Optional skip only CWP_R6_HTML_SAMPLE absent; synthetic HTML/PPTX transport cases all pass. Focused ruff clean, mypy evidence/retrieval2files clean, diff-check clean. Ordinary commit with exact paths next; no push/merge/install performed.
 
 Normal source/test/evidence commit87cdf733 completed with repository hooks:ruff PASS,mypy contract modules PASS,host assumption guard PASS; dependency/config checks correctly skipped without related files. No hooks disabled. Closing this own PWF only; MAIN independent acceptance and normal push remain its responsibility.
+
+Reopened after independent21testsPASS exposed adjacent P2 mutable input/cache contract binding. MAIN authorized root fix in same worktree/code/test scope. Four slots active after reviewer released its slot; do not spawn another worker. Preserve all earlier RED/GREEN logs; add new ownership RED before source change.
+
+Ownership RED6cases:5FAIL/1PASS0.80s retained in red_snapshot_ownership.txt. Warm-cache contract-only mutation already returns the original result, consistent with chosen frozen snapshot API; first-read mutation and four nested evidence/locator/SHA cases prove absent ownership. Implemented one constructor deep copy per record plus explicit API documentation. No source parser/version/selector policy change and no per-call reparse.
+
+P2 GREEN:compatibility+retrieval31PASS1.06s;concentrated same responsibility208PASS/1SKIP4.38s;optional SEC sample skip unchanged. Real immutable MSFT rerun41/41 after snapshot fix,4modelsquery hits resolved;body90–414,SHA+mtime unchanged,TEMP/env restored,external/modelcalls0/cost0. Focused mypy retrieval+ruff source/test+diff checks passed. Normal hooks commit now; MAIN repeats independent acceptance.

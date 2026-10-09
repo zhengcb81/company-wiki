@@ -156,3 +156,70 @@ def test_unknown_version_rejected_at_parser_and_generation_boundary():
     with pytest.raises(ValueError, match="unsupported transcript parser version"):
         parse_transcript_text(LEGACY, source_id=source_id_for_sha256(digest),
                               source_sha256=digest, parser_version="0.2.1")
+
+
+@pytest.mark.parametrize("mutation,message", [
+    ("contract", "unsupported transcript parser version"),
+    ("evidence", "package evidence text hash"),
+    ("locator", "exact package group"),
+    ("evidence_sha", "replayed package raw_text_sha256"),
+    ("source_sha", "search hit identity"),
+])
+def test_resolver_owns_construction_snapshot_and_reuses_parse_cache(
+    tmp_path, monkeypatch, mutation, message,
+):
+    raw = tmp_path / "call.txt"
+    raw.write_bytes(LEGACY.encode())
+    bundle, _, _, _ = transcript_bundle(raw, version="0.2.0")
+    hit = NarrativeEvidenceSearch(bundle).search("expanded overseas")[0]
+    paths = {hit.source_id: raw}
+    resolver = NarrativeEvidenceResolver(bundle, raw_paths_by_source_id=paths)
+    from company_wiki.source_catalog import narrative_evidence
+    original_parse = narrative_evidence.parse_transcript_text
+    parse_calls = []
+
+    def counted_parse(*args, **kwargs):
+        parse_calls.append(kwargs["parser_version"])
+        return original_parse(*args, **kwargs)
+
+    monkeypatch.setattr(narrative_evidence, "parse_transcript_text", counted_parse)
+    first = resolver.resolve(hit)
+    assert first.raw_text == SENTENCE and parse_calls == ["0.2.0"]
+    record = bundle["sources"][0]
+    row = record["summary_input"]["evidence"][0]
+    if mutation == "contract":
+        record["replay_contract"]["parser_version"] = "9.9.9"
+    elif mutation == "evidence":
+        row["raw_text"] = "We launched a forged overseas product."
+    elif mutation == "locator":
+        row["locators"][0] = "loc:v1/paragraph:999/char:0:4"
+    elif mutation == "evidence_sha":
+        row["raw_text"] = "We launched a forged overseas product."
+        row["raw_text_sha256"] = hashlib.sha256(row["raw_text"].encode()).hexdigest()
+    else:
+        record["summary_input"]["source_sha256"] = "0" * 64
+    # This reader owns the original construction snapshot. The external bundle
+    # is input for future readers, not a mutable control channel for this one.
+    assert resolver.resolve(hit) == first
+    assert resolver.resolve_group(source_id=hit.source_id,
+                                  evidence_group_id=hit.evidence_group_id) == first
+    assert parse_calls == ["0.2.0"]
+    fresh = NarrativeEvidenceResolver(bundle, raw_paths_by_source_id=paths)
+    with pytest.raises(NarrativeEvidenceResolveError, match=message):
+        fresh.resolve(hit)
+
+
+def test_resolver_snapshot_is_taken_before_first_read_and_keeps_path_mapping(tmp_path):
+    raw = tmp_path / "call.txt"
+    raw.write_bytes(LEGACY.encode())
+    bundle, _, _, _ = transcript_bundle(raw, version="0.1.1")
+    hit = NarrativeEvidenceSearch(bundle).search("expanded overseas")[0]
+    paths = {hit.source_id: raw}
+    resolver = NarrativeEvidenceResolver(bundle, raw_paths_by_source_id=paths)
+    bundle["sources"][0]["replay_contract"]["parser_version"] = "9.9.9"
+    paths.clear()
+    resolved = resolver.resolve(hit)
+    assert resolved.raw_text == SENTENCE and resolved.parser_version == "0.1.1"
+    assert resolved.locators == hit.locators
+    with pytest.raises(NarrativeEvidenceResolveError, match="unsupported transcript parser version"):
+        NarrativeEvidenceResolver(bundle, raw_paths_by_source_id={hit.source_id: raw}).resolve(hit)

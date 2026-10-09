@@ -16,7 +16,7 @@ Restore exact transcript 0.1.0 / 0.1.1 compatibility and current 0.2.0 replay us
 Only src/company_wiki/automation/narrative_formats.py, src/company_wiki/source_catalog/narrative_evidence.py, src/company_wiki/source_catalog/narrative_retrieval.py, associated tests and this plan. No main/shared plans/config/CI/hooks/raw/installations or cross-repo writes.
 
 ## Next Step
-MAIN independently accepts branch codex/fresh-transcript-compat-20261009, then owns merge, normal fullunit push gate and exact CI. This worker is complete.
+Commit the focused P2 snapshot-ownership fix with ordinary hooks and update handoff; MAIN repeats independent acceptance.
 
 ## Errors
 - Sandbox Git status falsely reported not-a-work-tree; normal OS Git status was clean.
@@ -35,3 +35,12 @@ MAIN independently accepts branch codex/fresh-transcript-compat-20261009, then o
 - Actual MSFT current parser0.2.0:481lines,body90–414,515units,41selected/verified/indexed/replayed,4model-query hits resolved. Source bytes/SHA/mtime and TEMP restored.
 - Focused ruff clean; mypy evidence/retrieval2files clean; git diff --check clean.
 - PPTX fixture version correction separately authorized after exact unchanged-base RED; no PPTX/normalization source changed.
+
+## Independent acceptance follow-up
+
+- [x] Reproduce external mutation of nested contract/evidence/locator/SHA after resolver construction and cache population.
+- [x] Freeze constructor snapshot ownership; new resolver still rejects bad external input.
+- [x] Prove same-reader repeated calls parse once, fresh valid legacy packages still replay, and real MSFT remains41/41.
+- [ ] Run concentrated checks, ordinary commit and updated handoff; MAIN repeats independent acceptance.
+
+P2 final checks:ownership/retrieval31PASS1.06s;full concentrated responsibility208PASS/1SKIP4.38s;realMSFT41/41 retained with source bytes/SHA/mtime/TEMP unchanged;mypy retrieval clean;ruff source/test clean;diff-check clean. Earlier evidence preserved.
