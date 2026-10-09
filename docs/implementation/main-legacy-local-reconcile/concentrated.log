@@ -1,0 +1,787 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwplr-a5aac2ea\\p", "requested_basetemp_len": 48, "cwd_len": 63, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\.codex\worktrees\audit-provider-cause\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 64 items
+
+tests\integration\test_legacy_local_reconcile.py FFFFFFFFFFFFFFFFFFFFFFF [ 35%]
+                                                                         [ 35%]
+tests\integration\test_official_source_flow.py FFF......FFFFF.FF.F..FFFF [ 75%]
+F..                                                                      [ 79%]
+tests\contract\test_source_catalog_canonical_writer.py .............     [100%]
+
+================================== FAILURES ===================================
+_____ test_retired_actual_dei_repairs_identity_same_ref_and_is_idempotent _____
+tests\integration\test_legacy_local_reconcile.py:177: in test_retired_actual_dei_repairs_identity_same_ref_and_is_idempotent
+    ref, path, _ = imported(lake, url=False)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:91: in imported
+    result = import_official_source(cat, original=DATA, request=req)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\p\test_retired_actual_dei_repair0\catalog\catalog.sqlite3
+_ test_untrusted_or_true_retirement_never_restores[issuer withdrew original-source-publisher] _
+tests\integration\test_legacy_local_reconcile.py:210: in test_untrusted_or_true_retirement_never_restores
+    ref, path, _ = imported(lake)
+                   ^^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:91: in imported
+    result = import_official_source(cat, original=DATA, request=req)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\p\test_untrusted_or_true_retirem0\catalog\catalog.sqlite3
+_ test_untrusted_or_true_retirement_never_restores[damaged raw-quality-check] _
+tests\integration\test_legacy_local_reconcile.py:210: in test_untrusted_or_true_retirement_never_restores
+    ref, path, _ = imported(lake)
+                   ^^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:91: in imported
+    result = import_official_source(cat, original=DATA, request=req)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\p\test_untrusted_or_true_retirem1\catalog\catalog.sqlite3
+___ test_untrusted_or_true_retirement_never_restores[metadata gap-unknown] ____
+tests\integration\test_legacy_local_reconcile.py:210: in test_untrusted_or_true_retirement_never_restores
+    ref, path, _ = imported(lake)
+                   ^^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:91: in imported
+    result = import_official_source(cat, original=DATA, request=req)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\p\test_untrusted_or_true_retirem2\catalog\catalog.sqlite3
+_ test_publication_gap_never_becomes_reusable_or_download[None-2026-10-09-publication_date_unknown] _
+tests\integration\test_legacy_local_reconcile.py:231: in test_publication_gap_never_becomes_reusable_or_download
+    ref, _, _ = imported(lake, published=published)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:91: in imported
+    result = import_official_source(cat, original=DATA, request=req)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\p\test_publication_gap_never_bec0\catalog\catalog.sqlite3
+_ test_publication_gap_never_becomes_reusable_or_download[2026-01-28-2026-01-27-publication_after_as_of] _
+tests\integration\test_legacy_local_reconcile.py:231: in test_publication_gap_never_becomes_reusable_or_download
+    ref, _, _ = imported(lake, published=published)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:91: in imported
+    result = import_official_source(cat, original=DATA, request=req)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\p\test_publication_gap_never_bec1\catalog\catalog.sqlite3
+______ test_official_same_sha_dedup_corrects_facts_without_rewriting_raw ______
+tests\integration\test_legacy_local_reconcile.py:243: in test_official_same_sha_dedup_corrects_facts_without_rewriting_raw
+    ref, path, req = imported(lake)
+                     ^^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:91: in imported
+    result = import_official_source(cat, original=DATA, request=req)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\p\test_official_same_sha_dedup_c0\catalog\catalog.sqlite3
+___________ test_local_official_import_does_not_resurrect_withdrawn ___________
+tests\integration\test_legacy_local_reconcile.py:266: in test_local_official_import_does_not_resurrect_withdrawn
+    ref, path, req = imported(lake)
+                     ^^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:91: in imported
+    result = import_official_source(cat, original=DATA, request=req)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\p\test_local_official_import_doe0\catalog\catalog.sqlite3
+_ test_atomic_fault_cannot_leave_half_restored[source_metadata_assertions-INSERT-] _
+tests\integration\test_legacy_local_reconcile.py:309: in test_atomic_fault_cannot_leave_half_restored
+    ref, path, _ = imported(lake)
+                   ^^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:91: in imported
+    result = import_official_source(cat, original=DATA, request=req)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\p\test_atomic_fault_cannot_leave0\catalog\catalog.sqlite3
+_ test_atomic_fault_cannot_leave_half_restored[documents-UPDATE- OF published_date] _
+tests\integration\test_legacy_local_reconcile.py:309: in test_atomic_fault_cannot_leave_half_restored
+    ref, path, _ = imported(lake)
+                   ^^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:91: in imported
+    result = import_official_source(cat, original=DATA, request=req)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\p\test_atomic_fault_cannot_leave1\catalog\catalog.sqlite3
+_______ test_atomic_fault_cannot_leave_half_restored[locations-UPDATE-] _______
+tests\integration\test_legacy_local_reconcile.py:309: in test_atomic_fault_cannot_leave_half_restored
+    ref, path, _ = imported(lake)
+                   ^^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:91: in imported
+    result = import_official_source(cat, original=DATA, request=req)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\p\test_atomic_fault_cannot_leave2\catalog\catalog.sqlite3
+_ test_atomic_fault_cannot_leave_half_restored[document_restore_audit-INSERT-] _
+tests\integration\test_legacy_local_reconcile.py:309: in test_atomic_fault_cannot_leave_half_restored
+    ref, path, _ = imported(lake)
+                   ^^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:91: in imported
+    result = import_official_source(cat, original=DATA, request=req)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\p\test_atomic_fault_cannot_leave3\catalog\catalog.sqlite3
+________________ test_stale_audit_observation_refuses_by_name _________________
+tests\integration\test_legacy_local_reconcile.py:338: in test_stale_audit_observation_refuses_by_name
+    ref, _, _ = imported(lake)
+                ^^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:91: in imported
+    result = import_official_source(cat, original=DATA, request=req)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\p\test_stale_audit_observation_r0\catalog\catalog.sqlite3
+_______ test_concurrent_prepare_never_exposes_inflight_and_retry_reuses _______
+tests\integration\test_legacy_local_reconcile.py:369: in test_concurrent_prepare_never_exposes_inflight_and_retry_reuses
+    ref, _, _ = imported(lake)
+                ^^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:91: in imported
+    result = import_official_source(cat, original=DATA, request=req)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\p\test_concurrent_prepare_never_0\catalog\catalog.sqlite3
+___________ test_local_read_failure_preserves_retirement[tampered] ____________
+tests\integration\test_legacy_local_reconcile.py:407: in test_local_read_failure_preserves_retirement
+    ref, path, _ = imported(lake)
+                   ^^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:91: in imported
+    result = import_official_source(cat, original=DATA, request=req)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\p\test_local_read_failure_preser0\catalog\catalog.sqlite3
+_________ test_local_read_failure_preserves_retirement[outside_root] __________
+tests\integration\test_legacy_local_reconcile.py:407: in test_local_read_failure_preserves_retirement
+    ref, path, _ = imported(lake)
+                   ^^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:91: in imported
+    result = import_official_source(cat, original=DATA, request=req)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\p\test_local_read_failure_preser1\catalog\catalog.sqlite3
+__________ test_local_read_failure_preserves_retirement[placeholder] __________
+tests\integration\test_legacy_local_reconcile.py:407: in test_local_read_failure_preserves_retirement
+    ref, path, _ = imported(lake)
+                   ^^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:91: in imported
+    result = import_official_source(cat, original=DATA, request=req)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\p\test_local_read_failure_preser2\catalog\catalog.sqlite3
+___________ test_local_read_failure_preserves_retirement[byte_cap] ____________
+tests\integration\test_legacy_local_reconcile.py:407: in test_local_read_failure_preserves_retirement
+    ref, path, _ = imported(lake)
+                   ^^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:91: in imported
+    result = import_official_source(cat, original=DATA, request=req)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\p\test_local_read_failure_preser3\catalog\catalog.sqlite3
+___________ test_local_read_failure_preserves_retirement[deadline] ____________
+tests\integration\test_legacy_local_reconcile.py:407: in test_local_read_failure_preserves_retirement
+    ref, path, _ = imported(lake)
+                   ^^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:91: in imported
+    result = import_official_source(cat, original=DATA, request=req)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\p\test_local_read_failure_preser4\catalog\catalog.sqlite3
+_ test_ensure_composition_reconciles_or_reports_gap_before_adapter[2026-01-28-2026-10-09-True-reused] _
+tests\integration\test_legacy_local_reconcile.py:471: in test_ensure_composition_reconciles_or_reports_gap_before_adapter
+    ref, _, _ = imported(lake, published=published)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:91: in imported
+    result = import_official_source(cat, original=DATA, request=req)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\p\test_ensure_composition_reconc0\catalog\catalog.sqlite3
+_ test_ensure_composition_reconciles_or_reports_gap_before_adapter[2026-01-28-2026-10-09-False-reused] _
+tests\integration\test_legacy_local_reconcile.py:471: in test_ensure_composition_reconciles_or_reports_gap_before_adapter
+    ref, _, _ = imported(lake, published=published)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:91: in imported
+    result = import_official_source(cat, original=DATA, request=req)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\p\test_ensure_composition_reconc1\catalog\catalog.sqlite3
+_ test_ensure_composition_reconciles_or_reports_gap_before_adapter[None-2026-10-09-True-missing] _
+tests\integration\test_legacy_local_reconcile.py:471: in test_ensure_composition_reconciles_or_reports_gap_before_adapter
+    ref, _, _ = imported(lake, published=published)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:91: in imported
+    result = import_official_source(cat, original=DATA, request=req)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\p\test_ensure_composition_reconc2\catalog\catalog.sqlite3
+_ test_ensure_composition_reconciles_or_reports_gap_before_adapter[2026-01-28-2026-01-27-True-missing] _
+tests\integration\test_legacy_local_reconcile.py:471: in test_ensure_composition_reconciles_or_reports_gap_before_adapter
+    ref, _, _ = imported(lake, published=published)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:91: in imported
+    result = import_official_source(cat, original=DATA, request=req)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\p\test_ensure_composition_reconc3\catalog\catalog.sqlite3
+________ test_official_import_is_pathless_byte_verified_and_idempotent ________
+tests\integration\test_official_source_flow.py:89: in test_official_import_is_pathless_byte_verified_and_idempotent
+    first = _import(catalog, data)
+            ^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_source_flow.py:83: in _import
+    return import_official_source(catalog, original=data, request=request(data, **kw))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\cwpaW03-sf5ib0ol\catalog\catalog.sqlite3
+____ test_other_company_and_unknown_dates_are_never_relabelled[Microsoft] _____
+tests\integration\test_official_source_flow.py:129: in test_other_company_and_unknown_dates_are_never_relabelled
+    result = _import(
+tests\integration\test_official_source_flow.py:83: in _import
+    return import_official_source(catalog, original=data, request=request(data, **kw))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\cwpaW03-0b0p70pa\catalog\catalog.sqlite3
+______ test_other_company_and_unknown_dates_are_never_relabelled[OpenAI] ______
+tests\integration\test_official_source_flow.py:129: in test_other_company_and_unknown_dates_are_never_relabelled
+    result = _import(
+tests\integration\test_official_source_flow.py:83: in _import
+    return import_official_source(catalog, original=data, request=request(data, **kw))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\cwpaW03-qmedx5nd\catalog\catalog.sqlite3
+_____ test_pdf_call_is_normalized_as_pdf_and_unknown_language_is_detected _____
+tests\integration\test_official_source_flow.py:280: in test_pdf_call_is_normalized_as_pdf_and_unknown_language_is_detected
+    result = _import(
+tests\integration\test_official_source_flow.py:83: in _import
+    return import_official_source(catalog, original=data, request=request(data, **kw))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\cwpaW03-el51acan\catalog\catalog.sqlite3
+_________ test_format_selection_replay_32_spans_parses_original_once __________
+tests\integration\test_official_source_flow.py:350: in test_format_selection_replay_32_spans_parses_original_once
+    original = replay.normalize_document
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_replay' has no attribute 'normalize_document'
+_ test_txt_and_json_originals_stay_exact_and_real_kind[investor_call_transcript-text/plain-Full Conference Call Transcript\nCEO: We expanded overseas production capacity for customers.\n] _
+tests\integration\test_official_source_flow.py:392: in test_txt_and_json_originals_stay_exact_and_real_kind
+    result = _import(catalog, body, kind=kind, mime=mime)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_source_flow.py:83: in _import
+    return import_official_source(catalog, original=data, request=request(data, **kw))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\cwpaW03-2e8xydbu\catalog\catalog.sqlite3
+_ test_txt_and_json_originals_stay_exact_and_real_kind[investor_call_transcript-application/json-[{"content":"Full Conference Call Transcript\nCEO: We launched a new product and expanded overseas capacity."}]] _
+tests\integration\test_official_source_flow.py:392: in test_txt_and_json_originals_stay_exact_and_real_kind
+    result = _import(catalog, body, kind=kind, mime=mime)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_source_flow.py:83: in _import
+    return import_official_source(catalog, original=data, request=request(data, **kw))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\cwpaW03-2ep0adih\catalog\catalog.sqlite3
+__________ test_public_import_cli_keeps_source_storage_path_private ___________
+tests\integration\test_official_source_flow.py:471: in test_public_import_cli_keeps_source_storage_path_private
+    assert call.returncode == 0, call.stderr
+E   AssertionError: {"schema_version": "official-source-failure/1", "status": "failed", "error_code": "official_source_CatalogReaderUnavailable"}
+E
+E   assert 2 == 0
+E    +  where 2 = CompletedProcess(args=['C:\\Miniconda\\python.exe', '-X', 'utf8', '-B', '-m', 'company_wiki.source_catalog.official_so...ersion": "official-source-failure/1", "status": "failed", "error_code": "official_source_CatalogReaderUnavailable"}\n').returncode
+____ test_configured_official_three_formats_summary_public_read_and_repeat ____
+tests\integration\test_official_source_flow.py:716: in test_configured_official_three_formats_summary_public_read_and_repeat
+    _public_official_import(
+tests\integration\test_official_source_flow.py:563: in _public_official_import
+    assert call.returncode == 0, call.stderr
+E   AssertionError: b'{"schema_version": "official-source-failure/1", "status": "failed", "error_code": "official_source_CatalogReaderUnavailable"}\r
+E     '
+E   assert 2 == 0
+E    +  where 2 = CompletedProcess(args=['C:\\Miniconda\\python.exe', '-X', 'utf8', '-B', '-m', 'company_wiki.source_catalog.official_so...sion": "official-source-failure/1", "status": "failed", "error_code": "official_source_CatalogReaderUnavailable"}\r\n').returncode
+________ test_image_only_pdf_is_parser_incomplete_not_successful_skip _________
+tests\integration\test_official_source_flow.py:930: in test_image_only_pdf_is_parser_incomplete_not_successful_skip
+    imported = _import(catalog, pdf, mime="application/pdf", kind="prospectus")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_source_flow.py:83: in _import
+    return import_official_source(catalog, original=data, request=request(data, **kw))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\cwpaW03-r74her2r\catalog\catalog.sqlite3
+________ test_capture_offset_and_supplied_period_metadata_remain_exact ________
+tests\integration\test_official_source_flow.py:1016: in test_capture_offset_and_supplied_period_metadata_remain_exact
+    result = import_official_source(catalog, original=body, request=value)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\cwpaW03-mma5_4h2\catalog\catalog.sqlite3
+____________ test_reused_original_reports_the_persisted_publisher _____________
+tests\integration\test_official_source_flow.py:1096: in test_reused_original_reports_the_persisted_publisher
+    first = import_official_source(catalog, original=body, request=value)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\cwpaW03-czf3v66d\catalog\catalog.sqlite3
+___ test_long_cn_fundraising_business_and_routine_ir_use_existing_selection ___
+tests\integration\test_official_source_flow.py:1123: in test_long_cn_fundraising_business_and_routine_ir_use_existing_selection
+    imported = import_official_source(catalog, original=body, request=value)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\cwpaW03-q3np6tmw\catalog\catalog.sqlite3
+________ test_storage_failure_removes_only_this_calls_staged_original _________
+tests\integration\test_official_source_flow.py:1183: in test_storage_failure_removes_only_this_calls_staged_original
+    first = _import(catalog, body)
+            ^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_source_flow.py:83: in _import
+    return import_official_source(catalog, original=data, request=request(data, **kw))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\cwpaW03-ax5r5n5n\catalog\catalog.sqlite3
+_ test_official_presentation_import_preserves_original_and_opaque_content[False] _
+tests\integration\test_official_source_flow.py:1237: in test_official_presentation_import_preserves_original_and_opaque_content
+    first = _import(catalog, body, mime=mime, published=None)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_source_flow.py:83: in _import
+    return import_official_source(catalog, original=data, request=request(data, **kw))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\cwpaW03-zwfsalyk\catalog\catalog.sqlite3
+_ test_official_presentation_import_preserves_original_and_opaque_content[True] _
+tests\integration\test_official_source_flow.py:1237: in test_official_presentation_import_preserves_original_and_opaque_content
+    first = _import(catalog, body, mime=mime, published=None)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_source_flow.py:83: in _import
+    return import_official_source(catalog, original=data, request=request(data, **kw))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_source_flow.py:287: in import_official_source
+    result = writer.import_original_staged(
+src\company_wiki\source_catalog\canonical_writer.py:349: in import_original_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:236: in _commit_staged
+    current = self.catalog.reader.exact_source_version(document_id)
+              ^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:128: in reader
+    self._reader = ReadOnlyCatalogReader(self.config.database_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\reader.py:172: in __init__
+    raise CatalogReaderUnavailable(
+E   company_wiki.source_catalog.reader.CatalogReaderUnavailable: catalog does not exist (not created, not touched): C:\Users\֣����\AppData\Local\Temp\cwplr-a5aac2ea\cwpaW03-af9dzkm1\catalog\catalog.sqlite3
+=========================== short test summary info ===========================
+FAILED tests/integration/test_legacy_local_reconcile.py::test_retired_actual_dei_repairs_identity_same_ref_and_is_idempotent
+FAILED tests/integration/test_legacy_local_reconcile.py::test_untrusted_or_true_retirement_never_restores[issuer withdrew original-source-publisher]
+FAILED tests/integration/test_legacy_local_reconcile.py::test_untrusted_or_true_retirement_never_restores[damaged raw-quality-check]
+FAILED tests/integration/test_legacy_local_reconcile.py::test_untrusted_or_true_retirement_never_restores[metadata gap-unknown]
+FAILED tests/integration/test_legacy_local_reconcile.py::test_publication_gap_never_becomes_reusable_or_download[None-2026-10-09-publication_date_unknown]
+FAILED tests/integration/test_legacy_local_reconcile.py::test_publication_gap_never_becomes_reusable_or_download[2026-01-28-2026-01-27-publication_after_as_of]
+FAILED tests/integration/test_legacy_local_reconcile.py::test_official_same_sha_dedup_corrects_facts_without_rewriting_raw
+FAILED tests/integration/test_legacy_local_reconcile.py::test_local_official_import_does_not_resurrect_withdrawn
+FAILED tests/integration/test_legacy_local_reconcile.py::test_atomic_fault_cannot_leave_half_restored[source_metadata_assertions-INSERT-]
+FAILED tests/integration/test_legacy_local_reconcile.py::test_atomic_fault_cannot_leave_half_restored[documents-UPDATE- OF published_date]
+FAILED tests/integration/test_legacy_local_reconcile.py::test_atomic_fault_cannot_leave_half_restored[locations-UPDATE-]
+FAILED tests/integration/test_legacy_local_reconcile.py::test_atomic_fault_cannot_leave_half_restored[document_restore_audit-INSERT-]
+FAILED tests/integration/test_legacy_local_reconcile.py::test_stale_audit_observation_refuses_by_name
+FAILED tests/integration/test_legacy_local_reconcile.py::test_concurrent_prepare_never_exposes_inflight_and_retry_reuses
+FAILED tests/integration/test_legacy_local_reconcile.py::test_local_read_failure_preserves_retirement[tampered]
+FAILED tests/integration/test_legacy_local_reconcile.py::test_local_read_failure_preserves_retirement[outside_root]
+FAILED tests/integration/test_legacy_local_reconcile.py::test_local_read_failure_preserves_retirement[placeholder]
+FAILED tests/integration/test_legacy_local_reconcile.py::test_local_read_failure_preserves_retirement[byte_cap]
+FAILED tests/integration/test_legacy_local_reconcile.py::test_local_read_failure_preserves_retirement[deadline]
+FAILED tests/integration/test_legacy_local_reconcile.py::test_ensure_composition_reconciles_or_reports_gap_before_adapter[2026-01-28-2026-10-09-True-reused]
+FAILED tests/integration/test_legacy_local_reconcile.py::test_ensure_composition_reconciles_or_reports_gap_before_adapter[2026-01-28-2026-10-09-False-reused]
+FAILED tests/integration/test_legacy_local_reconcile.py::test_ensure_composition_reconciles_or_reports_gap_before_adapter[None-2026-10-09-True-missing]
+FAILED tests/integration/test_legacy_local_reconcile.py::test_ensure_composition_reconciles_or_reports_gap_before_adapter[2026-01-28-2026-01-27-True-missing]
+FAILED tests/integration/test_official_source_flow.py::test_official_import_is_pathless_byte_verified_and_idempotent
+FAILED tests/integration/test_official_source_flow.py::test_other_company_and_unknown_dates_are_never_relabelled[Microsoft]
+FAILED tests/integration/test_official_source_flow.py::test_other_company_and_unknown_dates_are_never_relabelled[OpenAI]
+FAILED tests/integration/test_official_source_flow.py::test_pdf_call_is_normalized_as_pdf_and_unknown_language_is_detected
+FAILED tests/integration/test_official_source_flow.py::test_format_selection_replay_32_spans_parses_original_once
+FAILED tests/integration/test_official_source_flow.py::test_txt_and_json_originals_stay_exact_and_real_kind[investor_call_transcript-text/plain-Full Conference Call Transcript\nCEO: We expanded overseas production capacity for customers.\n]
+FAILED tests/integration/test_official_source_flow.py::test_txt_and_json_originals_stay_exact_and_real_kind[investor_call_transcript-application/json-[{"content":"Full Conference Call Transcript\nCEO: We launched a new product and expanded overseas capacity."}]]
+FAILED tests/integration/test_official_source_flow.py::test_public_import_cli_keeps_source_storage_path_private
+FAILED tests/integration/test_official_source_flow.py::test_configured_official_three_formats_summary_public_read_and_repeat
+FAILED tests/integration/test_official_source_flow.py::test_image_only_pdf_is_parser_incomplete_not_successful_skip
+FAILED tests/integration/test_official_source_flow.py::test_capture_offset_and_supplied_period_metadata_remain_exact
+FAILED tests/integration/test_official_source_flow.py::test_reused_original_reports_the_persisted_publisher
+FAILED tests/integration/test_official_source_flow.py::test_long_cn_fundraising_business_and_routine_ir_use_existing_selection
+FAILED tests/integration/test_official_source_flow.py::test_storage_failure_removes_only_this_calls_staged_original
+FAILED tests/integration/test_official_source_flow.py::test_official_presentation_import_preserves_original_and_opaque_content[False]
+FAILED tests/integration/test_official_source_flow.py::test_official_presentation_import_preserves_original_and_opaque_content[True]
+======================== 39 failed, 25 passed in 9.00s ========================

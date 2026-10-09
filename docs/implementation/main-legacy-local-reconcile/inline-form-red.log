@@ -1,0 +1,31 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwplr-6df0d9cb\\p", "requested_basetemp_len": 48, "cwd_len": 63, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\.codex\worktrees\audit-provider-cause\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 25 items / 23 deselected / 2 selected
+
+tests\integration\test_legacy_local_reconcile.py FF                      [100%]
+
+================================== FAILURES ===================================
+_______ test_actual_inline_tag_whitespace_is_canonical_sec_form[10- Q] ________
+tests\integration\test_legacy_local_reconcile.py:499: in test_actual_inline_tag_whitespace_is_canonical_sec_form
+    primary=extract_sec_primary(data)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\dayu_fiscal_metadata.py:134: in extract_sec_primary
+    raise FiscalMetadataError("SEC primary fiscal identity is unsupported")
+E   company_wiki.source_catalog.dayu_fiscal_metadata.FiscalMetadataError: SEC primary fiscal identity is unsupported
+_______ test_actual_inline_tag_whitespace_is_canonical_sec_form[10-\nQ] _______
+tests\integration\test_legacy_local_reconcile.py:499: in test_actual_inline_tag_whitespace_is_canonical_sec_form
+    primary=extract_sec_primary(data)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\dayu_fiscal_metadata.py:134: in extract_sec_primary
+    raise FiscalMetadataError("SEC primary fiscal identity is unsupported")
+E   company_wiki.source_catalog.dayu_fiscal_metadata.FiscalMetadataError: SEC primary fiscal identity is unsupported
+=========================== short test summary info ===========================
+FAILED tests/integration/test_legacy_local_reconcile.py::test_actual_inline_tag_whitespace_is_canonical_sec_form[10- Q]
+FAILED tests/integration/test_legacy_local_reconcile.py::test_actual_inline_tag_whitespace_is_canonical_sec_form[10-\nQ]
+====================== 2 failed, 23 deselected in 0.69s =======================

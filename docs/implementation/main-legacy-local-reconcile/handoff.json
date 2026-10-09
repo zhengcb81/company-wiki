@@ -1,0 +1,64 @@
+{
+  "schema_version": "local-reconcile-handoff/1",
+  "status": "implemented_verified_main_integration_pending",
+  "base": "a40eb065da1bb21d231d2644449e2ecd8a2f98d6",
+  "code_head": "7ced0b50b8cabb5a8becc50374cd6f8216d212ff",
+  "branch": "codex/main-legacy-local-reconcile-20261009",
+  "worktree": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+  "ff_dependency_head": "a1e97fa462f6fc381f18ce39641224310c7228a8",
+  "code_files": {
+    "src/company_wiki/source_catalog/acquisition.py": "42b893dda8cd4ec57a624f023ab0fb14c97f7ae73721e4d04248a94b3b46fb38",
+    "src/company_wiki/source_catalog/assertion_service.py": "6dcd39a0a2d9a0d4224065f22b0f7d7005ecb766c57f01bf57c91f0faeb31e8f",
+    "src/company_wiki/source_catalog/canonical_writer.py": "51618970ebedb25daf255a4cc88c18a8946a3aebd226380d6d45933bb37a05d9",
+    "src/company_wiki/source_catalog/dayu_fiscal_metadata.py": "c274acffd9b77149f96a2e0c05f71237ddccafa5b9a80c7ed1e7c1b90ad3968e",
+    "src/company_wiki/source_catalog/official_source_flow.py": "0867ce09194ea58d86407865cf2feb5a5774eb154a440075ab61598f39f93114",
+    "src/company_wiki/source_catalog/local_inventory.py": "65552a0f45f1cf3dff74851a538d76fefb711c1bef13c4b561a36fa8743978d3",
+    "src/company_wiki/source_catalog/local_reconcile.py": "a7966c892d74cf16ebbb6e76ecb47b742c092c8fd277e76b5ed3f25953680a17",
+    "src/company_wiki/source_catalog/local_prepare_cli.py": "2a65e18133c2f3c57dd0129dbdf648f9ae9f1576e74d9a82b81a4feecc4665cc",
+    "tests/integration/test_legacy_local_reconcile.py": "4856c76fd6042857fadaac13e556f5c40384dbd82a77379263d0c0ce655e06ec",
+    "tests/integration/test_official_source_flow.py": "6ee022d17b6d9009d5f8526070f894120d1dcd854de78b1383cae22db7a11491"
+  },
+  "tests": {
+    "concentrated": {
+      "passed": 166,
+      "seconds": 39.34,
+      "receipt": "concentrated-delivery.log"
+    },
+    "real_originals": {
+      "cases": 4,
+      "reused": 3,
+      "honest_gaps": 1,
+      "seconds": 56.248,
+      "receipt": "actual_originals_receipt.json",
+      "checks_complete": true,
+      "network_attempts": 0,
+      "downloads": 0,
+      "models": 0,
+      "supplier_requests": 0,
+      "protected_sources_unchanged": true,
+      "temp_absent": true,
+      "temp_environment_restored": true
+    },
+    "ruff_no_cache": "passed",
+    "diff_check": "passed",
+    "normal_hooks": {
+      "ruff": "passed",
+      "host_assumption_guard": "passed",
+      "mypy": "skipped_by_scope",
+      "config_doctor": "skipped_by_scope"
+    }
+  },
+  "untouched": [
+    "source_reader.py",
+    "source_reader_cli.py",
+    "source_availability.py",
+    "production DB/raw/config",
+    "Dayu",
+    "RF",
+    "main PWF",
+    "install"
+  ],
+  "overlay": null,
+  "known_gap": "CN FY24 independent publication/issuer facts insufficient; retired; zero fetch",
+  "main_action": "merge code/doc series and separate FF thin composition; own main integration"
+}

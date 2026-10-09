@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "C:\Users\֣����\.codex\worktrees\audit-provider-cause\company-wiki\docs\implementation\main-legacy-local-reconcile\actual_originals_node.py", line 379, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\֣����\.codex\worktrees\audit-provider-cause\company-wiki\docs\implementation\main-legacy-local-reconcile\actual_originals_node.py", line 318, in main
+    assert local["status"] != "ready" and local["blocks_download"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
