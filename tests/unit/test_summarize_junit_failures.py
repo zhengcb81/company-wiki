@@ -131,3 +131,16 @@ def test_collection_error_without_testcase_gets_a_generic_identity(
 
     assert main(str(report)) == 0
     assert "pytest collection/runtime failures (2)" in capsys.readouterr().out
+
+
+def test_collection_traceback_exposes_exception_class_without_private_body(tmp_path, capsys):
+    report = tmp_path / "collection.xml"
+    suite = ET.Element("testsuite", {"errors": "1"})
+    case = ET.SubElement(suite, "testcase", {"name": "tests.unit.test_bounded_http"})
+    error = ET.SubElement(case, "error", {"message": "collection failure"})
+    error.text = "private source text\nE   ModuleNotFoundError: No module named 'httpx'\nprivate body"
+    ET.ElementTree(suite).write(report, encoding="utf-8")
+    assert main(str(report)) == 0
+    output = capsys.readouterr().out
+    assert "[ModuleNotFoundError]" in output
+    assert "private" not in output and "No module named" not in output

@@ -55,6 +55,7 @@ all = [
     "xlrd>=2.0.0",
 ]
 test = [
+    "tomli>=2; python_version < '3.11'",
     "cryptography>=41.0",
     "pytest>=7.0.0",
     "pytest-cov>=4.0.0",

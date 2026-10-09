@@ -1,7 +1,7 @@
 # Local pre-commit gate mirroring the CI quality workflow's fast checks.
 # Pins match CI exactly (ruff 0.15.18, mypy 1.19.0 via the local system).
-# Commits run static checks only. Push and CI run the curated behavior smoke
-# set once each; CI also runs all Unit tests. Major implementation nodes run
+# Commits run static checks only. Push checks affected Unit files and the CI
+# smoke set once; CI runs all Unit tests. Major implementation nodes run
 # their relevant integration and end-to-end tests.
 #
 #   pre-commit install   # once per clone (installs .git/hooks/pre-commit)
@@ -9,13 +9,20 @@
 repos:
   - repo: local
     hooks:
+      - id: dependency-declarations
+        name: runtime dependency declaration parity
+        entry: python tools/check_dependencies.py
+        language: system
+        pass_filenames: false
+        files: ^(pyproject\.toml|requirements[^/]*\.txt|tools/check_dependencies\.py)$
+
       - id: ruff
         name: ruff check (WU-1.2, mirrors CI)
         entry: ruff check
         language: system
         types: [python]
         # CI scope plus the narrative runtime integration fixture and its model port.
-        files: ^(src/|tests/unit/|tests/contract/|tests/e2e/|scripts/).*\.py$|^tests/integration/test_narrative_runtime_e2e\.py$|^tests/support/narrative_model_fixture\.py$
+        files: ^(src/|tests/unit/|tests/contract/|tests/e2e/|scripts/).*\.py$|^tests/integration/test_narrative_runtime_e2e\.py$|^tests/support/narrative_model_fixture\.py$|^tools/(check_dependencies|changed_unit_tests|pre_push_gate|summarize_junit_failures)\.py$
 
       - id: mypy-contract
         name: mypy contract modules (FC-1204-c, mirrors CI)

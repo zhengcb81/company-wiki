@@ -1,0 +1,27 @@
+{
+  "baseline_head": "7073bde5941d365cc033a885055bfad464faa690",
+  "platform": "Windows normal OS",
+  "python": "3.13.9",
+  "result": "passed",
+  "tests": 2299,
+  "pytest_seconds": 128.21,
+  "warning_count": 1,
+  "junit_sha256": "5674e5d0306f7c3182c621cafa53182de07f978c1099d8c8c45ffb81d02e86cb",
+  "junit_bytes": 362090,
+  "junit_retention": "bounded summary; successful full XML removed to avoid redundant test output",
+  "sandbox_attempt": "interrupted; sandbox subprocess/async restrictions were not classified as CI failures",
+  "focused_after_changes": {
+    "passed": 53,
+    "seconds": 1.17
+  },
+  "red_counterexamples": {
+    "selector_alias_and_unchanged_dynamic": [
+      4,
+      27
+    ],
+    "junit_collection_diagnostic": [
+      1,
+      8
+    ]
+  }
+}

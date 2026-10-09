@@ -55,3 +55,14 @@ def test_owned_temp_is_removed_on_transport_exception(tmp_path, monkeypatch):
         gate._run_pytest_gate(["fixture"], "timeout")
     assert len(paths) == 1 and not paths[0].exists()
     assert not list(checkout.iterdir())
+
+
+def test_check_child_does_not_inherit_hook_repository_context(tmp_path, monkeypatch):
+    monkeypatch.setattr(gate, "PROJECT_ROOT", tmp_path)
+    for name in gate.GIT_REPOSITORY_CONTEXT:
+        monkeypatch.setenv(name, "parent-repository")
+    monkeypatch.setenv("GIT_CONFIG_PARAMETERS", "preserved-user-setting")
+    probe = ("import os; "
+             f"assert not any(k in os.environ for k in {gate.GIT_REPOSITORY_CONTEXT!r}); "
+             "assert os.environ['GIT_CONFIG_PARAMETERS']=='preserved-user-setting'")
+    assert gate._run([sys.executable, "-c", probe], "isolated child Git context") == 0

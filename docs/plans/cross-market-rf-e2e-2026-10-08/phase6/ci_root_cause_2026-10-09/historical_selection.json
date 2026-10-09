@@ -1,0 +1,132 @@
+[
+  {
+    "change": "httpx",
+    "sha": "335df5d3a10bda72da544c9be1e73da428739205",
+    "reason": "configuration or test entrypoint changed",
+    "selected_count": 1,
+    "selector_seconds": 0.062746,
+    "expected": [
+      "tests/unit/test_bounded_http.py"
+    ],
+    "missing": [],
+    "selected": [
+      "tests/unit"
+    ]
+  },
+  {
+    "change": "metadata",
+    "sha": "1a58ad11a3c6bf8e56bf0fac5fefe9cdc37de969",
+    "reason": "dynamic execution changed",
+    "selected_count": 1,
+    "selector_seconds": 4.013211,
+    "expected": [
+      "tests/unit/test_narrative_current_read.py",
+      "tests/unit/test_narrative_select_handler.py",
+      "tests/unit/test_narrative_verify_handler.py",
+      "tests/unit/test_narrative_versioned_resume.py"
+    ],
+    "missing": [],
+    "selected": [
+      "tests/unit"
+    ]
+  },
+  {
+    "change": "generation",
+    "sha": "002824df4c3275d171e22fd56f94b946095c0690",
+    "reason": "dynamic execution changed",
+    "selected_count": 1,
+    "selector_seconds": 2.444767,
+    "expected": [
+      "tests/unit/test_narrative_versioned_resume.py",
+      "tests/unit/test_narrative_format_pipeline.py"
+    ],
+    "missing": [],
+    "selected": [
+      "tests/unit"
+    ]
+  },
+  {
+    "change": "parser",
+    "sha": "d11db2a2020ea329a4fd7dc75033e666c5799d14",
+    "reason": "affected unit tests",
+    "selected_count": 70,
+    "selector_seconds": 3.137682,
+    "expected": [
+      "tests/unit/test_narrative_versioned_resume.py",
+      "tests/unit/test_narrative_format_pipeline.py"
+    ],
+    "missing": [],
+    "selected": [
+      "tests/unit/test_acquisition_budget.py",
+      "tests/unit/test_adapter_process_budget.py",
+      "tests/unit/test_adapter_registration_efficiency.py",
+      "tests/unit/test_automation_models.py",
+      "tests/unit/test_b10_frontmatter_tolerance.py",
+      "tests/unit/test_b10_manifest_abort_paths.py",
+      "tests/unit/test_batch_assessment.py",
+      "tests/unit/test_batch_preparation_deadline.py",
+      "tests/unit/test_ci_push_selection.py",
+      "tests/unit/test_cleanup_deprecated.py",
+      "tests/unit/test_commit_policy.py",
+      "tests/unit/test_common.py",
+      "tests/unit/test_config.py",
+      "tests/unit/test_contradiction_detector.py",
+      "tests/unit/test_cross_market_suite.py",
+      "tests/unit/test_default_steady_source_reader.py",
+      "tests/unit/test_deployment.py",
+      "tests/unit/test_download.py",
+      "tests/unit/test_finite_configured_entrypoint_launch.py",
+      "tests/unit/test_g4_pipeline_retirement.py",
+      "tests/unit/test_g5_legacy_checks_retirement.py",
+      "tests/unit/test_graph_models.py",
+      "tests/unit/test_legacy_entrypoint_simplification.py",
+      "tests/unit/test_llm_client.py",
+      "tests/unit/test_llm_defaults.py",
+      "tests/unit/test_log_writer.py",
+      "tests/unit/test_main_ocr_selection.py",
+      "tests/unit/test_n4_batch_scope.py",
+      "tests/unit/test_n4c_preflight_budget.py",
+      "tests/unit/test_n6_candidate_recall.py",
+      "tests/unit/test_n6_context_boundaries.py",
+      "tests/unit/test_narrative_batch.py",
+      "tests/unit/test_narrative_batch_request.py",
+      "tests/unit/test_narrative_current_read.py",
+      "tests/unit/test_narrative_evidence_view_query.py",
+      "tests/unit/test_narrative_format_pipeline.py",
+      "tests/unit/test_narrative_generation.py",
+      "tests/unit/test_narrative_language.py",
+      "tests/unit/test_narrative_model_aliases.py",
+      "tests/unit/test_narrative_model_config.py",
+      "tests/unit/test_narrative_ocr_composition.py",
+      "tests/unit/test_narrative_partial_summary.py",
+      "tests/unit/test_narrative_quality_projection.py",
+      "tests/unit/test_narrative_select_handler.py",
+      "tests/unit/test_narrative_transport_cli_output.py",
+      "tests/unit/test_narrative_verify_handler.py",
+      "tests/unit/test_narrative_versioned_resume.py",
+      "tests/unit/test_narrative_worker_factory.py",
+      "tests/unit/test_new_modules.py",
+      "tests/unit/test_pdf_classify.py",
+      "tests/unit/test_pipeline.py",
+      "tests/unit/test_prompt_review_gate_retired.py",
+      "tests/unit/test_query.py",
+      "tests/unit/test_question_model.py",
+      "tests/unit/test_replay_config_isolation.py",
+      "tests/unit/test_s7_adoption_project_context.py",
+      "tests/unit/test_s7_pdf_qa_fragments.py",
+      "tests/unit/test_scheduler.py",
+      "tests/unit/test_secret_audit.py",
+      "tests/unit/test_secret_preflight.py",
+      "tests/unit/test_source_catalog_financing_classification.py",
+      "tests/unit/test_source_catalog_scanner_direct.py",
+      "tests/unit/test_source_catalog_scoped_scan.py",
+      "tests/unit/test_source_discoverer.py",
+      "tests/unit/test_source_facts.py",
+      "tests/unit/test_source_policy.py",
+      "tests/unit/test_state_store.py",
+      "tests/unit/test_terminal_narrative_receipts.py",
+      "tests/unit/test_wikilinks.py",
+      "tests/unit/test_writer_freeze.py"
+    ]
+  }
+]

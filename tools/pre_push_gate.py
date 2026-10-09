@@ -1,7 +1,7 @@
 """Local validation helpers for the GitHub CI fast gate.
 
-The installed pre-push hook and GitHub Actions use ``--fast-contracts-only``
-to keep routine validation short. Run this script without arguments for the
+The push hook adds affected unit files to the same CI contract smoke set.
+GitHub Actions runs every unit test. Run this script without arguments for the
 optional full local gate; all portable Contract tests remain available by
 running pytest directly.
 
@@ -40,7 +40,15 @@ import sys
 import tempfile
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from tools.changed_unit_tests import changed_paths, select_unit_tests  # noqa: E402
+
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+GIT_REPOSITORY_CONTEXT = (
+    "GIT_DIR", "GIT_WORK_TREE", "GIT_COMMON_DIR", "GIT_INDEX_FILE",
+    "GIT_OBJECT_DIRECTORY", "GIT_ALTERNATE_OBJECT_DIRECTORIES", "GIT_PREFIX",
+    "GIT_NAMESPACE", "GIT_QUARANTINE_PATH", "GIT_SHALLOW_FILE",
+)
 CURRENT_CI_REGRESSION_CASES = (
     "tests/unit/test_automation_migrations.py::test_m14_classification_uses_one_snapshot_during_concurrent_init",
     "tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store",
@@ -68,6 +76,10 @@ def _run(
     env_extra: dict | None = None,
 ) -> int:
     env = dict(os.environ)
+    # Git hooks export their checkout context. Tests create their own repos;
+    # their subprocesses must resolve Git from their own cwd, as they do in CI.
+    for name in GIT_REPOSITORY_CONTEXT:
+        env.pop(name, None)
     env["PYTHONPATH"] = str(PROJECT_ROOT / "src")
     if env_extra:
         env.update(env_extra)
@@ -77,13 +89,13 @@ def _run(
         encoding="utf-8", errors="replace", timeout=timeout, env=env,
     )
     output = (proc.stdout or "") + "\n" + (proc.stderr or "")
-    tail = output[-3000:]
     returncode = proc.returncode
     if returncode != 0:
-        print(tail)
+        print(output)  # Keep the first failing node, not just the report's tail.
         print(f"FAILED: {label}")
     else:
-        print("ok")
+        summary = next((line for line in reversed(output.splitlines()) if "passed" in line), "ok")
+        print(summary)
     return returncode
 
 
@@ -103,6 +115,10 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--skip-contract", action="store_true",
                         help="skip the contract-test step (fast lint-only)")
+    parser.add_argument(
+        "--push-checks", action="store_true",
+        help="read Git push ref updates from stdin; run affected units and contract smoke once",
+    )
     parser.add_argument(
         "--fast-contracts-only",
         action="store_true",
@@ -147,7 +163,14 @@ def main(argv: list[str] | None = None) -> int:
         "CI fast contract smoke set",
         None,
     )
-    if args.fast_contracts_only:
+    if args.push_checks:
+        selected, reason = select_unit_tests(PROJECT_ROOT, changed_paths(PROJECT_ROOT, sys.stdin.read()))
+        print(f"Push unit scope: {reason} ({len(selected)} paths)")
+        cases = [*selected, *(case for case in FAST_CONTRACT_CASES
+                 if not any(case.split('::')[0] == path or case.startswith(path + '/') for path in selected))]
+        gates = [([sys.executable, "-m", "pytest", "-q", "--tb=short", "--timeout=180", *cases],
+                  "affected units and CI contract smoke", None)]
+    elif args.fast_contracts_only:
         fast_gate = fast_contract_gate
         if args.junitxml:
             fast_gate = (

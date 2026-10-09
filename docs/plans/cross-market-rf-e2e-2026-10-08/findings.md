@@ -310,3 +310,7 @@ repair 的职责是版本化重做、父账承接与可追溯失败；不是新�
 真实22页组合15locators、48,804B产物、same pin第二AUTO0账；新增持久首380870B/复用200830B，没有持久全文MD/页图。source仍partial；母账known207042tokens/$0.119671，unknown7与FX$0.002764保持。两组研究尚未启动。
 
 诊断方法教训：PowerShell JSON往返会把时间字符串转换当地时间对象，不能据其显示断言producer字节错误。实际acceptance SHA6fa609e9005ee4e2918cda4dc301f891a76cfe5b5496e64abd4438aeaba764ab/43383B，json.loads为UTC+00且RF纯decoder接受；无需改正确producer或放宽consumer，这不是业务消费验收。
+
+## 2026-10-09：昨日CI共同漏检机制
+
+已取得CWP3/FF2实际失败，RF相邻无失败。根因及既有直接修复逐一对照，详见phase6/ci_root_cause_2026-10-09/findings.md。commit静态不执行动态合同；CWP固定push13smoke遗漏6unit，FF仅静态push而CI另26文件。新增CWP整个push范围保守选unit/依赖静态入口/JUnit分类、FF27文件共享runner已测试并线中，正常push及精确CI待完成；不加人审，不删必要测试。原三家四独立报告全部完成，实际发现均保留，下一步独立专家共因PWF。

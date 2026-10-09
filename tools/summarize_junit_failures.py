@@ -45,7 +45,14 @@ def _failed_cases(report_path: Path) -> list[tuple[str, str, str, str]] | None:
             # diagnostic does not expose assertion text or private data.
             message = failure_kind.get("message", "")
             match = re.match(r"^([A-Za-z_][A-Za-z0-9_.]*)\s*:", message)
-            declared_type = match.group(1) if match else "unknown_error"
+            # Collection errors use message="collection failure"; the actual
+            # exception class is in the traceback. Extract its name only.
+            trace_match = re.search(
+                r"(?m)^(?:E\s+)?([A-Za-z_][A-Za-z0-9_.]*(?:Error|Exception))\s*:",
+                failure_kind.text or "",
+            )
+            declared_type = (match.group(1) if match else
+                             trace_match.group(1) if trace_match else "unknown_error")
         error_type = declared_type.rsplit(".", maxsplit=1)[-1]
         error_type = "".join(char for char in error_type if char.isalnum() or char == "_")
         failures.append((file_name, case.get("line", ""), node_id, error_type))

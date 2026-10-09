@@ -1,0 +1,258 @@
+{
+  "observed_at": "2026-10-09T09:07:44.838413+00:00",
+  "execution": "normal Windows OS require_escalated",
+  "source_sha256": "05c338d1769c134ffcff659fc00876be595235eb0251d24ba2cd24434bb59fe9",
+  "probes": [
+    {
+      "name": "subprocess_from_alias",
+      "body": "from subprocess import run as execute\ndef launch(name):\n    return execute(['python', '-m', name])\n",
+      "dynamic_detected": true,
+      "selected": [
+        "tests/unit"
+      ],
+      "reason": "dynamic execution changed",
+      "expected_by_fallback_policy": [
+        "tests/unit"
+      ],
+      "defect": false
+    },
+    {
+      "name": "subprocess_module_alias",
+      "body": "import subprocess as sp\ndef launch(name):\n    return sp.run(['python', '-m', name])\n",
+      "dynamic_detected": true,
+      "selected": [
+        "tests/unit"
+      ],
+      "reason": "dynamic execution changed",
+      "expected_by_fallback_policy": [
+        "tests/unit"
+      ],
+      "defect": false
+    },
+    {
+      "name": "importlib_from_alias",
+      "body": "from importlib import import_module as load\ndef fetch(name):\n    return load(name)\n",
+      "dynamic_detected": true,
+      "selected": [
+        "tests/unit"
+      ],
+      "reason": "dynamic execution changed",
+      "expected_by_fallback_policy": [
+        "tests/unit"
+      ],
+      "defect": false
+    },
+    {
+      "name": "importlib_module_alias",
+      "body": "import importlib as il\ndef fetch(name):\n    return il.import_module(name)\n",
+      "dynamic_detected": true,
+      "selected": [
+        "tests/unit"
+      ],
+      "reason": "dynamic execution changed",
+      "expected_by_fallback_policy": [
+        "tests/unit"
+      ],
+      "defect": false
+    },
+    {
+      "name": "runpy_from_alias",
+      "body": "from runpy import run_module as execute\ndef fetch(name):\n    return execute(name)\n",
+      "dynamic_detected": true,
+      "selected": [
+        "tests/unit"
+      ],
+      "reason": "dynamic execution changed",
+      "expected_by_fallback_policy": [
+        "tests/unit"
+      ],
+      "defect": false
+    },
+    {
+      "name": "unchanged_computed_dynamic_consumer_real_pytest",
+      "selected": [
+        "tests/unit/test_dynamic.py",
+        "tests/unit/test_static.py"
+      ],
+      "reason": "affected unit tests",
+      "selected_run": {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-m",
+          "pytest",
+          "tests/unit/test_dynamic.py",
+          "tests/unit/test_static.py",
+          "-q",
+          "--tb=short",
+          "-p",
+          "no:cacheprovider"
+        ],
+        "exit_code": 1,
+        "stdout": "F.                                                                       [100%]\n================================== FAILURES ===================================\n____________________________ test_dynamic_consumer ____________________________\ntests\\unit\\test_dynamic.py:5: in test_dynamic_consumer\n    assert core.value == 1\nE   assert 2 == 1\nE    +  where 2 = core.value\n=========================== short test summary info ===========================\nFAILED tests/unit/test_dynamic.py::test_dynamic_consumer - assert 2 == 1\n1 failed, 1 passed in 0.05s\n",
+        "stderr": "",
+        "duration_seconds": 0.395
+      },
+      "full_run": {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-m",
+          "pytest",
+          "tests/unit",
+          "-q",
+          "--tb=short",
+          "-p",
+          "no:cacheprovider"
+        ],
+        "exit_code": 1,
+        "stdout": "F..                                                                      [100%]\n================================== FAILURES ===================================\n____________________________ test_dynamic_consumer ____________________________\ntests\\unit\\test_dynamic.py:5: in test_dynamic_consumer\n    assert core.value == 1\nE   assert 2 == 1\nE    +  where 2 = core.value\n=========================== short test summary info ===========================\nFAILED tests/unit/test_dynamic.py::test_dynamic_consumer - assert 2 == 1\n1 failed, 2 passed in 0.07s\n",
+        "stderr": "",
+        "duration_seconds": 0.426
+      },
+      "defect": false,
+      "dynamic_consumer_included": true
+    },
+    {
+      "name": "real_git_complete_push_range",
+      "changes": [
+        "docs/note.md",
+        "src/pkg/core.py"
+      ],
+      "expected": [
+        "docs/note.md",
+        "src/pkg/core.py"
+      ],
+      "pass": true
+    },
+    {
+      "name": "real_git_rename_two_ends",
+      "changes": [
+        "src/pkg/core.py",
+        "src/pkg/renamed.py"
+      ],
+      "pass": true
+    },
+    {
+      "name": "new_branch_fallback",
+      "changes": null,
+      "pass": true
+    },
+    {
+      "name": "unknown_commit_fallback",
+      "changes": null,
+      "pass": true
+    },
+    {
+      "name": "literal_relative_import",
+      "body": "import importlib\nmodule=importlib.import_module('.core', 'pkg')\n",
+      "selected": [
+        "tests/unit/test_static.py"
+      ],
+      "omitted_consumer": "tests/unit/test_relative_dynamic.py",
+      "defect": false,
+      "before_correction_selected": [
+        "tests/unit/test_static.py"
+      ],
+      "original_gap_confirmed": true,
+      "correction": {
+        "name": "literal_relative_import",
+        "selected": [
+          "tests/unit/test_relative_dynamic.py",
+          "tests/unit/test_static.py"
+        ],
+        "reason": "affected unit tests",
+        "expected_consumer": "tests/unit/test_relative_dynamic.py",
+        "pass": true,
+        "owned_temp_removed": true
+      }
+    },
+    {
+      "name": "literal_run_path",
+      "body": "import runpy\nmodule=runpy.run_path('scripts/task.py')\n",
+      "selected": [
+        "tests/unit/test_script_static.py"
+      ],
+      "omitted_consumer": "tests/unit/test_runpath.py",
+      "defect": false,
+      "before_correction_selected": [
+        "tests/unit/test_script_static.py"
+      ],
+      "original_gap_confirmed": true,
+      "correction": {
+        "name": "literal_run_path",
+        "selected": [
+          "tests/unit/test_relative_dynamic.py",
+          "tests/unit/test_runpath.py",
+          "tests/unit/test_script_static.py"
+        ],
+        "reason": "affected unit tests",
+        "expected_consumer": "tests/unit/test_runpath.py",
+        "pass": true,
+        "owned_temp_removed": true
+      }
+    },
+    {
+      "name": "gate_real_red_cleanup_and_main_single_run",
+      "actual_pytest_rc": 1,
+      "main_rc": 1,
+      "runner_invocations": 1,
+      "full_unit_argument_count": 1,
+      "unit_nodeids_duplicated": false,
+      "contract_smoke_retained": true,
+      "owned_runner_roots_removed": true,
+      "runner_stdout": "\n=== minimal red boundary probe ===\nF                                                                        [100%]\n================================== FAILURES ===================================\n__________________________________ test_red ___________________________________\ntests\\unit\\test_red.py:2: in test_red\n    assert False\nE   assert False\n=========================== short test summary info ===========================\nFAILED tests/unit/test_red.py::test_red - assert False\n1 failed in 0.05s\n\n\nFAILED: minimal red boundary probe\n",
+      "pass": true,
+      "fixture_root_removed": true
+    },
+    {
+      "name": "literal_dotted_alias_resolved",
+      "selected": [
+        "tests/unit/test_literal_alias.py",
+        "tests/unit/test_relative_dynamic.py",
+        "tests/unit/test_runpath.py",
+        "tests/unit/test_static.py"
+      ],
+      "reason": "affected unit tests",
+      "expected_consumer": "tests/unit/test_literal_alias.py",
+      "pass": true,
+      "owned_temp_removed": true
+    },
+    {
+      "name": "uncertain_seeds_do_not_mask_missing_known_consumer",
+      "selected": [
+        "tests/unit"
+      ],
+      "reason": "no known unit consumer",
+      "pass": true,
+      "owned_temp_removed": true
+    }
+  ],
+  "network_used": false,
+  "source_or_config_mutated": false,
+  "owned_temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-selector-review-owq8eza_",
+  "cleanup_paths_verified_within_owned_root": true,
+  "owned_temp_removed": true,
+  "read_review": {
+    "return_code_propagation": "main returns the exact nonzero _run_pytest_gate result; hook exits rc. No swallowed pytest failure found.",
+    "pytest_temp_cleanup": "TemporaryDirectory context encloses subprocess and covers success, error return and timeout; all probe-owned temp cleaned.",
+    "fast_commit": "pre-commit contains static parity/ruff/mypy/config/host checks and no pytest invocation.",
+    "known_ci_recurrence": "Static smoke always includes direct-runtime dependency parity plus frozen narrative golden/hash and concurrent-init known regression cases. Github CI continues full tests/unit.",
+    "limitation": "Review detects selector false negatives, not an all-tests guarantee; source import parity is deliberately a direct dependency declaration check."
+  },
+  "review_status": "All concrete findings independently confirmed corrected. No remaining actionable issue in the reviewed scope; AST selection remains an optimization with full-unit CI coverage.",
+  "final_source_sha256": "7f5d3b34ae3131a2a472384c63fba81a2395bec407fcf7557ffcfde9b26e2c8d",
+  "known_failure_selection": {
+    "migrations": {
+      "expected_consumer_included": true,
+      "selected_file_count": 127
+    },
+    "narrative_document": {
+      "expected_consumer_included": true,
+      "selected_file_count": 117
+    },
+    "pptx_parser": {
+      "expected_consumer_included": true,
+      "selected_file_count": 117
+    },
+    "note": "Counts from post-alias-fix read-only source selection; no large test suite executed, counts may widen after literal-call conservatism."
+  }
+}

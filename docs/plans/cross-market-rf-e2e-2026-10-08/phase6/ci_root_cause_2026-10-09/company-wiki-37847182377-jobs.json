@@ -1,0 +1,301 @@
+{
+  "repo": "company-wiki",
+  "run_id": 37847182377,
+  "head_sha": "bf8f0e82b8b62e390e269421f76fa038d3297ccb",
+  "observed_at": "2026-10-09T08:47:54.562122+00:00",
+  "failed_jobs": [
+    {
+      "id": 113550864840,
+      "name": "Fast checks (Python 3.12)",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/37847182377/job/113550864840",
+      "started_at": "2026-10-08T21:29:54Z",
+      "completed_at": "2026-10-08T21:30:59Z",
+      "check_run_url": "https://api.github.com/repos/zhengcb81/company-wiki/check-runs/113550864840",
+      "steps": [
+        {
+          "name": "Set up job",
+          "number": 1,
+          "conclusion": "success",
+          "started_at": "2026-10-08T21:29:55Z",
+          "completed_at": "2026-10-08T21:29:55Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "conclusion": "success",
+          "started_at": "2026-10-08T21:29:55Z",
+          "completed_at": "2026-10-08T21:29:58Z"
+        },
+        {
+          "name": "Set up Python 3.12",
+          "number": 3,
+          "conclusion": "success",
+          "started_at": "2026-10-08T21:29:58Z",
+          "completed_at": "2026-10-08T21:30:01Z"
+        },
+        {
+          "name": "Install dependencies",
+          "number": 4,
+          "conclusion": "success",
+          "started_at": "2026-10-08T21:30:01Z",
+          "completed_at": "2026-10-08T21:30:17Z"
+        },
+        {
+          "name": "Ruff lint",
+          "number": 5,
+          "conclusion": "success",
+          "started_at": "2026-10-08T21:30:17Z",
+          "completed_at": "2026-10-08T21:30:17Z"
+        },
+        {
+          "name": "Strict type check on contract modules",
+          "number": 6,
+          "conclusion": "success",
+          "started_at": "2026-10-08T21:30:17Z",
+          "completed_at": "2026-10-08T21:30:19Z"
+        },
+        {
+          "name": "Compileall and config doctor",
+          "number": 7,
+          "conclusion": "success",
+          "started_at": "2026-10-08T21:30:19Z",
+          "completed_at": "2026-10-08T21:30:20Z"
+        },
+        {
+          "name": "Unit tests",
+          "number": 8,
+          "conclusion": "failure",
+          "started_at": "2026-10-08T21:30:20Z",
+          "completed_at": "2026-10-08T21:30:57Z"
+        },
+        {
+          "name": "Unit test failure summary",
+          "number": 9,
+          "conclusion": "success",
+          "started_at": "2026-10-08T21:30:57Z",
+          "completed_at": "2026-10-08T21:30:57Z"
+        },
+        {
+          "name": "Focused contract tests",
+          "number": 10,
+          "conclusion": "skipped",
+          "started_at": "2026-10-08T21:30:57Z",
+          "completed_at": "2026-10-08T21:30:57Z"
+        },
+        {
+          "name": "Focused contract failure summary",
+          "number": 11,
+          "conclusion": "success",
+          "started_at": "2026-10-08T21:30:57Z",
+          "completed_at": "2026-10-08T21:30:57Z"
+        },
+        {
+          "name": "CLI smoke test",
+          "number": 12,
+          "conclusion": "skipped",
+          "started_at": "2026-10-08T21:30:57Z",
+          "completed_at": "2026-10-08T21:30:57Z"
+        },
+        {
+          "name": "Scan for hardcoded secrets",
+          "number": 13,
+          "conclusion": "skipped",
+          "started_at": "2026-10-08T21:30:57Z",
+          "completed_at": "2026-10-08T21:30:57Z"
+        },
+        {
+          "name": "Post Set up Python 3.12",
+          "number": 25,
+          "conclusion": "skipped",
+          "started_at": "2026-10-08T21:30:57Z",
+          "completed_at": "2026-10-08T21:30:57Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "number": 26,
+          "conclusion": "success",
+          "started_at": "2026-10-08T21:30:57Z",
+          "completed_at": "2026-10-08T21:30:57Z"
+        },
+        {
+          "name": "Complete job",
+          "number": 27,
+          "conclusion": "success",
+          "started_at": "2026-10-08T21:30:57Z",
+          "completed_at": "2026-10-08T21:30:57Z"
+        }
+      ],
+      "annotations": [
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/bf8f0e82b8b62e390e269421f76fa038d3297ccb/.github",
+          "start_line": 2,
+          "start_column": null,
+          "end_line": 2,
+          "end_column": null,
+          "annotation_level": "warning",
+          "title": "",
+          "message": "Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/bf8f0e82b8b62e390e269421f76fa038d3297ccb/.github",
+          "start_line": 15,
+          "start_column": null,
+          "end_line": 15,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "JUnit report unavailable or invalid; inspect the authenticated job log",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/bf8f0e82b8b62e390e269421f76fa038d3297ccb/.github",
+          "start_line": 24,
+          "start_column": null,
+          "end_line": 24,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "tests.unit.test_narrative_versioned_resume::test_resume_rechecks_real_current_identity_and_period_without_rebinding[scoped-period_end-2026-06-30] [Failed]",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/bf8f0e82b8b62e390e269421f76fa038d3297ccb/.github",
+          "start_line": 23,
+          "start_column": null,
+          "end_line": 23,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "tests.unit.test_narrative_versioned_resume::test_resume_rechecks_real_current_identity_and_period_without_rebinding[scoped-fiscal_period-Q2] [Failed]",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/bf8f0e82b8b62e390e269421f76fa038d3297ccb/.github",
+          "start_line": 22,
+          "start_column": null,
+          "end_line": 22,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "tests.unit.test_narrative_versioned_resume::test_resume_rechecks_real_current_identity_and_period_without_rebinding[scoped-fiscal_year-2025] [Failed]",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/bf8f0e82b8b62e390e269421f76fa038d3297ccb/.github",
+          "start_line": 21,
+          "start_column": null,
+          "end_line": 21,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "tests.unit.test_narrative_versioned_resume::test_resume_rechecks_real_current_identity_and_period_without_rebinding[scoped-security_id-OTHER] [Failed]",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/bf8f0e82b8b62e390e269421f76fa038d3297ccb/.github",
+          "start_line": 20,
+          "start_column": null,
+          "end_line": 20,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "tests.unit.test_narrative_versioned_resume::test_resume_rechecks_real_current_identity_and_period_without_rebinding[scoped-market-HK] [Failed]",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/bf8f0e82b8b62e390e269421f76fa038d3297ccb/.github",
+          "start_line": 19,
+          "start_column": null,
+          "end_line": 19,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "tests.unit.test_narrative_versioned_resume::test_resume_rechecks_real_current_identity_and_period_without_rebinding[scoped-canonical_entity_id-ent-other] [Failed]",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/bf8f0e82b8b62e390e269421f76fa038d3297ccb/.github",
+          "start_line": 18,
+          "start_column": null,
+          "end_line": 18,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "tests.unit.test_narrative_verify_handler::test_verify_handler_source_metadata_drift_blocks_before_replay [AssertionError]",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/bf8f0e82b8b62e390e269421f76fa038d3297ccb/.github",
+          "start_line": 17,
+          "start_column": null,
+          "end_line": 17,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "tests.unit.test_narrative_select_handler::test_select_handler_rejects_source_identity_and_metadata_drift[metadata] [AssertionError]",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/bf8f0e82b8b62e390e269421f76fa038d3297ccb/.github",
+          "start_line": 16,
+          "start_column": null,
+          "end_line": 16,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "tests.unit.test_narrative_select_handler::test_select_handler_rejects_source_identity_and_metadata_drift[read_policy] [AssertionError]",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/bf8f0e82b8b62e390e269421f76fa038d3297ccb/.github",
+          "start_line": 15,
+          "start_column": null,
+          "end_line": 15,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "tests.unit.test_narrative_current_read::test_missing_registered_language_does_not_contradict_detected_language[zh-False] [Failed]",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/bf8f0e82b8b62e390e269421f76fa038d3297ccb/.github",
+          "start_line": 339,
+          "start_column": null,
+          "end_line": 339,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "Process completed with exit code 1.",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/bf8f0e82b8b62e390e269421f76fa038d3297ccb/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "notice",
+          "title": "",
+          "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+          "raw_details": ""
+        }
+      ],
+      "annotation_error": null
+    }
+  ]
+}

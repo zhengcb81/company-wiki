@@ -1,0 +1,23 @@
+[
+  {
+    "repo": "company-wiki",
+    "job_id": 113468244757,
+    "endpoint": "https://api.github.com/repos/zhengcb81/company-wiki/actions/jobs/113468244757/logs",
+    "status": 403,
+    "error": "public job logs access denied"
+  },
+  {
+    "repo": "filing-fetch",
+    "job_id": 113502118202,
+    "endpoint": "https://api.github.com/repos/zhengcb81/filing-fetch/actions/jobs/113502118202/logs",
+    "status": 403,
+    "error": "public job logs access denied"
+  },
+  {
+    "repo": "filing-fetch",
+    "job_id": 113599477606,
+    "endpoint": "https://api.github.com/repos/zhengcb81/filing-fetch/actions/jobs/113599477606/logs",
+    "status": 403,
+    "error": "public job logs access denied"
+  }
+]

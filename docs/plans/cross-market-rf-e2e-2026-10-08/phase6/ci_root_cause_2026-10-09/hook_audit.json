@@ -1,0 +1,307 @@
+{
+  "schema_version": "1.0",
+  "information_date": "2026-10-09",
+  "auditor": "ci_hook_coverage_audit",
+  "scope": {
+    "read_only_repositories": true,
+    "network_calls_by_this_agent": 0,
+    "llm_calls": 0,
+    "full_test_runs": 0,
+    "writes": [
+      "C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/ci_root_cause_2026-10-09/hook_audit.md",
+      "C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/ci_root_cause_2026-10-09/hook_audit.json"
+    ],
+    "sensitive_configuration_read": false
+  },
+  "evidence_limits": {
+    "github_source": "MAIN-saved REST runs/jobs/check annotations in the same directory",
+    "full_job_log_available": false,
+    "full_job_log_rest_status": 403,
+    "hook_bypass": "not established; commit objects and current hook config do not prove execution"
+  },
+  "local_toolchain": {
+    "python": "3.13.9",
+    "ruff": "0.15.18",
+    "mypy": "1.19.0"
+  },
+  "repositories": [
+    {
+      "name": "company-wiki",
+      "root": "C:/Users/郑曾波/Projects/company-wiki",
+      "head": "7073bde5",
+      "actual_hooks_path": ".githooks",
+      "hooks_origin": "file:.git/config",
+      "agents_read": "AGENTS.md",
+      "commit": [
+        "staged matching Python ruff",
+        "conditional enumerated contract mypy",
+        "conditional config doctor --structure-only",
+        "conditional tests/src host assumption guard"
+      ],
+      "commit_pytest": false,
+      "push": {
+        "entry": "python tools/pre_push_gate.py --fast-contracts-only",
+        "behavior_selection": "13 fixed node IDs",
+        "unit_suite": false
+      },
+      "ci": {
+        "os": "ubuntu-latest",
+        "python": "3.12",
+        "entry": "independent static steps + all tests/unit + same fast contracts",
+        "dependency_entry": "requirements.txt + requirements-test.txt + ruff==0.15.18",
+        "trigger": "push/PR master; ignores docs Markdown and root Markdown",
+        "timeout_minutes": 5
+      },
+      "current_fast_smoke_missing_failed_test_files": [
+        "tests/unit/test_bounded_http.py",
+        "tests/unit/test_narrative_versioned_resume.py",
+        "tests/unit/test_narrative_select_handler.py",
+        "tests/unit/test_narrative_verify_handler.py",
+        "tests/unit/test_narrative_current_read.py",
+        "tests/unit/test_narrative_format_pipeline.py"
+      ],
+      "historical_evidence": [
+        {
+          "sha": "335df5d3a10bda72da544c9be1e73da428739205",
+          "run_id": 37822907874,
+          "failed_step": "Unit tests",
+          "exit_code": 2,
+          "annotation": "::tests.unit.test_bounded_http [unknown_error]",
+          "confirmed_config_gap": "HTTPX direct dependency added in pyproject but omitted from requirements; historical smoke lacked declaration test",
+          "repair_sha": "7071e035bd16abf6936d9dd7e3d9bcc3a9a1b611",
+          "causality_limit": "Exact collection exception unavailable. Other dependencies can transitively install HTTPX."
+        },
+        {
+          "sha": "bf8f0e82b8b62e390e269421f76fa038d3297ccb",
+          "run_id": 37847182377,
+          "event": "push",
+          "branch": "master",
+          "failed_step": "Unit tests",
+          "exit_code": 1,
+          "annotated_families": [
+            "versioned_resume real-current identity/period",
+            "select metadata/read_policy",
+            "verify metadata drift",
+            "current_read registered/detected language"
+          ],
+          "preceding_behavior_sha": "1a58ad11a3c6bf8e56bf0fac5fefe9cdc37de969",
+          "repair_sha": "2e54b5df9e972653aa4d123b5765fa226b9c4b4a",
+          "limit": "HEAD own diff is docs-only; REST proves actual failed run; docs diff does not imply complete push range was docs-only."
+        },
+        {
+          "sha": "a901b67f242d490aca768e83cdd071dd5668b024",
+          "run_id": 37883563191,
+          "failed_step": "Unit tests",
+          "exit_code": 1,
+          "annotated_families": [
+            "versioned_resume scoped job_hash",
+            "versioned_resume current facts BatchResumeError",
+            "format_pipeline PPTX parser assertion"
+          ],
+          "preceding_behavior_sha": "002824df4c3275d171e22fd56f94b946095c0690",
+          "repair_sha": "d11db2a2020ea329a4fd7dc75033e666c5799d14",
+          "verified_repair": "generation-dependent frozen binding version and PPTX parser 1.1.0 assertions",
+          "limit": "Production OCR configuration content was not read; sandbox-local errors must not be relabeled CI root causes."
+        },
+        {
+          "kind": "local_push_scratch",
+          "old_behavior": "PROJECT_ROOT/tmp, path length <=60 and relocated=false parsed as success preconditions",
+          "repair_sha": "d7923191977d88dda037782332878d9f4b0a2359",
+          "new_behavior": "owned system TemporaryDirectory with true subprocess return code; separate from remote unit failures"
+        }
+      ],
+      "current_file_sha256": {
+        ".githooks/pre-commit": "51e3a78e9b4c99cd7184269744aa5e3ed2ee449ed5307644098509ccebe527d2",
+        ".githooks/pre-push": "4df43889718c59075319eaeb1c5963b55cff4bbba30537c262861c48fcf7aadf",
+        ".pre-commit-config.yaml": "067cdc5d73ffe400002322eaf80a258bb595b2a689c91e68a66ead9dcb37c695",
+        "tools/pre_push_gate.py": "a99447f0b96564e73b030fefb0522ca1e32c1e38b924c9b3779c4e1bea37d4b4",
+        ".github/workflows/ci.yml": "0ab0e193e7bd53feb0bf6367aa2250865674d861483cfb9bc426f505968f2025",
+        "requirements.txt": "699a12ce6405909f583be9280a479b81184319d88bba36438eed1fa7b545d1ce",
+        "requirements-test.txt": "b19ea72472c5405ec9f7835a1e919adcb5b97e69cf3963e3cd4aefde3bf77ff6",
+        "pyproject.toml": "d597238b403725893f8dca3e7ef640ef17863db29d61a535559d8c76fba29626"
+      }
+    },
+    {
+      "name": "revenue-forecast",
+      "root": "C:/Users/郑曾波/Projects/revenue-forecast",
+      "head": "79139534",
+      "actual_hooks_path": ".githooks",
+      "hooks_origin": "file:.git/config",
+      "agents_root_present": false,
+      "commit": [
+        "staged scripts/tests/tools/e2e Python ruff",
+        "conditional public contracts mypy",
+        "conditional host assumption guard"
+      ],
+      "commit_pytest": false,
+      "push": {
+        "entry": "python tools/pre_push_gate.py",
+        "behavior_selection": "12 fixed test files",
+        "shared_with_ci": true,
+        "static": [
+          "ruff",
+          "mypy"
+        ]
+      },
+      "ci": {
+        "os": "ubuntu-latest",
+        "python": "3.12",
+        "entry": "same tools/pre_push_gate.py",
+        "dependency_entry": "inline pytest pyyaml requests pymupdf cryptography ruff==0.15.18 mypy==1.19.0",
+        "sibling_strategy": "manifest current_triplet from RF checkout; skip revenue",
+        "sparse_checkout": "exclude historical execution archives",
+        "timeout_minutes": 10
+      },
+      "manifest_pins": {
+        "filing": "5001dcbef1845a08e90cda6f2a86365610a662af",
+        "revenue": "e585f6d58193f377daefe23147934b26e6293ad0",
+        "wiki": "6cd9b6d7ca4faee3348fdd8afcf70bf7e3d6a5fb"
+      },
+      "confirmed_gaps": [
+        "local sibling current working directories differ from pinned CI siblings",
+        "same gate does not prove same dependency environment or OS/Python",
+        "fixed 12-file behavior selection does not automatically grow with source-clock/provider changes"
+      ],
+      "current_file_sha256": {
+        ".githooks/pre-commit": "9de21a05fdfa306dd19f3f65642b0f1c3c7ab31b5d172eb2d811fab765c17943",
+        ".githooks/pre-push": "723aa6c7bb7e8f226e74df235d338f97f9e69b3519184e83cebbaca26b8ffd1f",
+        ".pre-commit-config.yaml": "5ee9fc271e8340d94088f80b0bb9ec66a0094e5f90d3ba7bdbd6f1d5356b0f0e",
+        "tools/pre_push_gate.py": "b369b0b96bf3e8743be5c43943d05ce2177d5c2d7582a9bc8694bf4b2bec6f61",
+        ".github/workflows/quality.yml": "e58cca8afd68fddc14bc3e8917e606bea55f16b0cc5340abafdfc58ceecec5fd",
+        "tools/ci_checkout_siblings.py": "98bd3bff5d39c70cf267d4b33cd42485cde0b52ef73b76b9650830d85d1bd93e",
+        "compatibility/current.json": "ace0daa87d17ee90df73b2e0cda31bb9642ffc5f9b77105dcb35d55c3152d6ba"
+      }
+    },
+    {
+      "name": "filing-fetch",
+      "root": "C:/Users/郑曾波/Projects/filing-fetch",
+      "head": "de09787c",
+      "actual_hooks_path": ".githooks",
+      "hooks_origin": "file:.git/config",
+      "agents_root_present": false,
+      "commit": [
+        "staged scripts/tests/tools/e2e Python ruff",
+        "conditional filing_contracts/fetch_filing mypy",
+        "conditional host assumption guard"
+      ],
+      "commit_pytest": false,
+      "push": {
+        "entry": "python tools/pre_push_gate.py --skip-install-sync",
+        "behavior_tests": false,
+        "static": [
+          "ruff",
+          "compileall",
+          "fetch_filing/filing_contracts import smoke",
+          "mypy",
+          "unique test symbols",
+          "host assumption guard",
+          "three-repo config doctor",
+          "plan claim verifier",
+          "BOM"
+        ]
+      },
+      "ci": {
+        "os": "ubuntu-latest",
+        "python": "3.12",
+        "entry": "independent static steps + 26 focused regression files",
+        "dependency_entry": "inline pytest pyyaml requests mypy==1.19.0; later ruff==0.15.18",
+        "sibling_strategy": "floating RF bootstrap clone -> RF manifest -> pinned CWP; FF under test symlinked",
+        "shared_behavior_definition": false
+      },
+      "confirmed_gaps": [
+        "push executes zero pytest; CI has separate behavior list",
+        "CI dependency entry does not install declared CWP package/test subset",
+        "RF bootstrap manifest source can change on rerun of same FF SHA",
+        "local doctor skips missing RF sibling with exit0"
+      ],
+      "historical_evidence": [
+        {
+          "sha": "3945efb42272f78daf7baa9cf44685137c462e87",
+          "run_id": 37832787908,
+          "failed_step": "Run focused regression suite once",
+          "exit_code": 1,
+          "test_node_available": false,
+          "legacy_ci_contains": "tests/test_complexity_ratchet.py",
+          "limit": "No complete job log or node; exact remote failure unestablished"
+        },
+        {
+          "sha": "afbef6536d3ee66615beb99a465d3a2a1f648313",
+          "run_id": 37861936346,
+          "failed_step": "Run focused regression suite once",
+          "exit_code": 1,
+          "test_node_available": false,
+          "local_historical_proof_from_MAIN": "419 PASS / 1 FAIL; ff_provider_cause legacy complexity 14 >10",
+          "ci_omits_new_tests": [
+            "tests/test_provider_cause_contract.py",
+            "tests/test_acquisition_failure_consumer.py"
+          ],
+          "repair_sha": "e9b0d0882f46772e333a5b986c7c414733c284cd",
+          "repair": "complexity becomes diagnostic with meaningful syntax/report tests; provider and failure consumer CI added",
+          "limit": "Local complexity failure cannot establish sole remote failure without job traceback"
+        }
+      ],
+      "current_file_sha256": {
+        ".githooks/pre-commit": "2168aa309f8901b26e7a49021fa0c49846989b53dfebaea77314ed8b4c179ee2",
+        ".githooks/pre-push": "c32b8ec03e7cdb55b89609a7e3a89948ae6e27fdaed26bcf62598a040cb2c40f",
+        ".pre-commit-config.yaml": "bef039f5b98dae910b29e417807da7c0f20386a47ac30fb10b48279bb7c68c90",
+        "tools/pre_push_gate.py": "3250fc6a4c31a1d971ecad6000922d0826976a5b2d0d77e03b5bc23e30dd8704",
+        ".github/workflows/quality.yml": "a0084848698db47aacd59239ef70da383dae613385f188d7574f0eaa19de54ec",
+        "pyproject.toml": "801b301fac86cd5fb56bf314d07f2e6f3706d200b91a523c4190e86c33c78aa0"
+      }
+    }
+  ],
+  "changed_files": {
+    "commit": "staged ACMRTUXB paths then hook files/types filters; pass_filenames=false remains conditional",
+    "merge_commit": "framework MERGE_MSG conflicts union staged-tree diff against HEAD and MERGE_HEAD, then same filters",
+    "push": "all three wrappers ignore remote stdin range; fixed sets",
+    "ci": "fixed scopes, with CWP workflow paths-ignore; RF sparse checkout does not select affected tests"
+  },
+  "prevention": {
+    "status": "proposed_only",
+    "simplest_first_step": [
+      "Commit retains static checks",
+      "CWP push uses union of real pre-push ref ranges; conservative AST transitive imports select affected unit plus existing fast contracts; dependency/config/runner/conftest/unknown relations fall back to all unit; CI keeps all unit",
+      "FF26 focused files move to one tools/ci_tests.py definition; push --ci-tests and CI share one runner; measure local duration before adding affected selection",
+      "RF same gate remains"
+    ],
+    "observed_remote_suite_duration_from_MAIN": {
+      "cwp_unit_seconds": "37-50",
+      "ff_focused_seconds": "42"
+    },
+    "lightweight_dependency_gate": "Offline declaration consistency triggered by staged pyproject/requirements/CI dependency files; owner runtime extras consumed by each clean CI install",
+    "optional_later_impact_selection": "If measured local push cost requires it, use complete remote-old to local-new range, merge-safe region map, unclassified runtime/test/CI fallback to current quick CI suite",
+    "minimum_verification": [
+      "same selected behavior suite and one execution for push/CI",
+      "child failure propagates",
+      "new unit collection included",
+      "dependency omission fails",
+      "deep scratch works and cleans",
+      "production config/install roots untouched"
+    ],
+    "milestone_responsibility": [
+      "full contracts/integration",
+      "native Windows/Linux processes/files/OCR",
+      "live providers/original sources/budget recovery",
+      "clean dependency install on dependency/profile changes"
+    ],
+    "excluded": [
+      "full pytest on each commit",
+      "remove core tests for green",
+      "human signoff chain",
+      "HEAD license",
+      "CI must finish before commit"
+    ],
+    "normal_os_cwp_unit_baseline_from_MAIN": {
+      "passed": 2299,
+      "seconds": 128.21
+    },
+    "affected_selection_limitations": [
+      "dynamic imports/importlib/runpy/module strings",
+      "subprocess CLI and runtime registry",
+      "external repository contracts",
+      "ambiguous or unclassified dependency relations",
+      "local working tree WIP differs from pushed SHA"
+    ],
+    "affected_selection_failure_policy": "all non-deletion ref ranges union; deletions and rename old/new paths; zero old SHA/missing object/unknown baseline conservative fallback; never HEAD^ or first stdin line only"
+  }
+}

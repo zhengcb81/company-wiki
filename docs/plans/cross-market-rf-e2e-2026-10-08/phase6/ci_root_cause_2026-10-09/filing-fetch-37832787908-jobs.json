@@ -1,0 +1,155 @@
+{
+  "repo": "filing-fetch",
+  "run_id": 37832787908,
+  "head_sha": "3945efb42272f78daf7baa9cf44685137c462e87",
+  "observed_at": "2026-10-09T08:47:54.390827+00:00",
+  "failed_jobs": [
+    {
+      "id": 113502118202,
+      "name": "verify",
+      "html_url": "https://github.com/zhengcb81/filing-fetch/actions/runs/37832787908/job/113502118202",
+      "started_at": "2026-10-08T19:33:07Z",
+      "completed_at": "2026-10-08T19:34:26Z",
+      "check_run_url": "https://api.github.com/repos/zhengcb81/filing-fetch/check-runs/113502118202",
+      "steps": [
+        {
+          "name": "Set up job",
+          "number": 1,
+          "conclusion": "success",
+          "started_at": "2026-10-08T19:33:08Z",
+          "completed_at": "2026-10-08T19:33:09Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "conclusion": "success",
+          "started_at": "2026-10-08T19:33:09Z",
+          "completed_at": "2026-10-08T19:33:10Z"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "number": 3,
+          "conclusion": "success",
+          "started_at": "2026-10-08T19:33:10Z",
+          "completed_at": "2026-10-08T19:33:10Z"
+        },
+        {
+          "name": "Install dependencies",
+          "number": 4,
+          "conclusion": "success",
+          "started_at": "2026-10-08T19:33:10Z",
+          "completed_at": "2026-10-08T19:33:15Z"
+        },
+        {
+          "name": "Fetch company-wiki runtime (FC-1101: manifest-driven current triplet)",
+          "number": 5,
+          "conclusion": "success",
+          "started_at": "2026-10-08T19:33:15Z",
+          "completed_at": "2026-10-08T19:33:38Z"
+        },
+        {
+          "name": "Ruff + compileall + import smoke (WU-1.2)",
+          "number": 6,
+          "conclusion": "success",
+          "started_at": "2026-10-08T19:33:38Z",
+          "completed_at": "2026-10-08T19:33:39Z"
+        },
+        {
+          "name": "Strict type check on public contracts (FC-1204-c)",
+          "number": 7,
+          "conclusion": "success",
+          "started_at": "2026-10-08T19:33:39Z",
+          "completed_at": "2026-10-08T19:33:41Z"
+        },
+        {
+          "name": "Unique test symbols gate (WU-7.1)",
+          "number": 8,
+          "conclusion": "success",
+          "started_at": "2026-10-08T19:33:41Z",
+          "completed_at": "2026-10-08T19:33:41Z"
+        },
+        {
+          "name": "Run focused regression suite once",
+          "number": 9,
+          "conclusion": "failure",
+          "started_at": "2026-10-08T19:33:41Z",
+          "completed_at": "2026-10-08T19:34:23Z"
+        },
+        {
+          "name": "Config doctor (FC-1202: three-repo contract compatibility)",
+          "number": 10,
+          "conclusion": "skipped",
+          "started_at": "2026-10-08T19:34:23Z",
+          "completed_at": "2026-10-08T19:34:23Z"
+        },
+        {
+          "name": "Plan claim verifier (WU-8.3)",
+          "number": 11,
+          "conclusion": "skipped",
+          "started_at": "2026-10-08T19:34:23Z",
+          "completed_at": "2026-10-08T19:34:23Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "number": 21,
+          "conclusion": "skipped",
+          "started_at": "2026-10-08T19:34:23Z",
+          "completed_at": "2026-10-08T19:34:23Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "number": 22,
+          "conclusion": "success",
+          "started_at": "2026-10-08T19:34:23Z",
+          "completed_at": "2026-10-08T19:34:23Z"
+        },
+        {
+          "name": "Complete job",
+          "number": 23,
+          "conclusion": "success",
+          "started_at": "2026-10-08T19:34:23Z",
+          "completed_at": "2026-10-08T19:34:23Z"
+        }
+      ],
+      "annotations": [
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/filing-fetch/blob/3945efb42272f78daf7baa9cf44685137c462e87/.github",
+          "start_line": 2,
+          "start_column": null,
+          "end_line": 2,
+          "end_column": null,
+          "annotation_level": "warning",
+          "title": "",
+          "message": "Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/filing-fetch/blob/3945efb42272f78daf7baa9cf44685137c462e87/.github",
+          "start_line": 29,
+          "start_column": null,
+          "end_line": 29,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "Process completed with exit code 1.",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/filing-fetch/blob/3945efb42272f78daf7baa9cf44685137c462e87/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "notice",
+          "title": "",
+          "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+          "raw_details": ""
+        }
+      ],
+      "annotation_error": null
+    }
+  ]
+}

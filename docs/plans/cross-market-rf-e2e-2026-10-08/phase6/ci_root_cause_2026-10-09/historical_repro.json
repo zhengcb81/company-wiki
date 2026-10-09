@@ -1,0 +1,180 @@
+{
+  "observed_at": "2026-10-09T08:58:21.621785+00:00",
+  "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+  "python_executable": "C:\\Miniconda\\python.exe",
+  "pytest_version": "9.1.1",
+  "network_used": false,
+  "local_source_mutation": false,
+  "pretest_environment_failure": "Initial OS temporary extraction failed with PermissionError before pytest execution; retried by extracting exact file bytes without tar mode attributes into owned workspace temp.",
+  "runs": [
+    {
+      "sha": "3945efb42272f78daf7baa9cf44685137c462e87",
+      "archive_command": [
+        "git",
+        "archive",
+        "--format=tar",
+        "3945efb42272f78daf7baa9cf44685137c462e87",
+        "scripts",
+        "tests/test_complexity_ratchet.py",
+        "pyproject.toml"
+      ],
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "pytest",
+        "tests/test_complexity_ratchet.py",
+        "-q",
+        "--tb=short",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "duration_seconds": 0.605,
+      "exit_code": 1,
+      "stdout": ".F                                                                       [100%]\n================================== FAILURES ===================================\n_________________________ test_new_files_stay_simple __________________________\ntests\\test_complexity_ratchet.py:65: in test_new_files_stay_simple\n    assert actual <= NEW_FILE_MAX, f\"{rel} max {actual} > {NEW_FILE_MAX}\"\nE   AssertionError: transcript_tool_transport.py max 15 > 10\nE   assert 15 <= 10\n=========================== short test summary info ===========================\nFAILED tests/test_complexity_ratchet.py::test_new_files_stay_simple - Asserti...\n1 failed, 1 passed in 0.18s\n",
+      "stderr": "",
+      "test_bytes_match_git_blob": true,
+      "test_sha256": "eaa12d90ec42b79efe7e45cf1800a654667a92413a408766c95ca2ed44e29398",
+      "failing_metrics": [
+        {
+          "path": "transcript_tool_transport.py",
+          "actual": 15,
+          "limit": 10,
+          "functions": [
+            {
+              "function": "_provider_usage",
+              "line": 45,
+              "score": 15
+            }
+          ],
+          "sha256": "073e06c9e594cc3c2cd5a4561827034e5c4a3b15252d95be0a2d640ca9b45247"
+        }
+      ],
+      "owned_temp_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\ci_root_cause_2026-10-09\\historical-ff-v0i918q5",
+      "cleanup_checked_within_owned_root": true,
+      "owned_temp_removed": true,
+      "non_sandbox_reproduction": {
+        "duration_seconds": 0.567,
+        "exit_code": 1,
+        "stdout": ".F                                                                       [100%]\n================================== FAILURES ===================================\n_________________________ test_new_files_stay_simple __________________________\ntests\\test_complexity_ratchet.py:65: in test_new_files_stay_simple\n    assert actual <= NEW_FILE_MAX, f\"{rel} max {actual} > {NEW_FILE_MAX}\"\nE   AssertionError: transcript_tool_transport.py max 15 > 10\nE   assert 15 <= 10\n=========================== short test summary info ===========================\nFAILED tests/test_complexity_ratchet.py::test_new_files_stay_simple - Asserti...\n1 failed, 1 passed in 0.24s\n",
+        "stderr": "",
+        "owned_temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cw-ci-historical-ff-n0j4nvs2",
+        "test_sha256_matched": true,
+        "cleanup_checked_within_owned_root": true,
+        "owned_temp_removed": true
+      }
+    },
+    {
+      "sha": "afbef6536d3ee66615beb99a465d3a2a1f648313",
+      "archive_command": [
+        "git",
+        "archive",
+        "--format=tar",
+        "afbef6536d3ee66615beb99a465d3a2a1f648313",
+        "scripts",
+        "tests/test_complexity_ratchet.py",
+        "pyproject.toml"
+      ],
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "pytest",
+        "tests/test_complexity_ratchet.py",
+        "-q",
+        "--tb=short",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "duration_seconds": 0.554,
+      "exit_code": 1,
+      "stdout": ".F                                                                       [100%]\n================================== FAILURES ===================================\n_________________________ test_new_files_stay_simple __________________________\ntests\\test_complexity_ratchet.py:65: in test_new_files_stay_simple\n    assert actual <= NEW_FILE_MAX, f\"{rel} max {actual} > {NEW_FILE_MAX}\"\nE   AssertionError: ff_provider_cause.py max 14 > 10\nE   assert 14 <= 10\n=========================== short test summary info ===========================\nFAILED tests/test_complexity_ratchet.py::test_new_files_stay_simple - Asserti...\n1 failed, 1 passed in 0.17s\n",
+      "stderr": "",
+      "test_bytes_match_git_blob": true,
+      "test_sha256": "eaa12d90ec42b79efe7e45cf1800a654667a92413a408766c95ca2ed44e29398",
+      "failing_metrics": [
+        {
+          "path": "ff_provider_cause.py",
+          "actual": 14,
+          "limit": 10,
+          "functions": [
+            {
+              "function": "_valid_acquisition_usage",
+              "line": 184,
+              "score": 14
+            },
+            {
+              "function": "_acquisition_evidence",
+              "line": 204,
+              "score": 11
+            },
+            {
+              "function": "build_cause",
+              "line": 134,
+              "score": 10
+            }
+          ],
+          "sha256": "7dc4a63344e78c0f482cc4604f43397540e4ed1e4ee755ddffb049212e8cdf7a"
+        }
+      ],
+      "owned_temp_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\ci_root_cause_2026-10-09\\historical-ff-ep14l_rb",
+      "cleanup_checked_within_owned_root": true,
+      "owned_temp_removed": true,
+      "non_sandbox_reproduction": {
+        "duration_seconds": 0.608,
+        "exit_code": 1,
+        "stdout": ".F                                                                       [100%]\n================================== FAILURES ===================================\n_________________________ test_new_files_stay_simple __________________________\ntests\\test_complexity_ratchet.py:65: in test_new_files_stay_simple\n    assert actual <= NEW_FILE_MAX, f\"{rel} max {actual} > {NEW_FILE_MAX}\"\nE   AssertionError: ff_provider_cause.py max 14 > 10\nE   assert 14 <= 10\n=========================== short test summary info ===========================\nFAILED tests/test_complexity_ratchet.py::test_new_files_stay_simple - Asserti...\n1 failed, 1 passed in 0.26s\n",
+        "stderr": "",
+        "owned_temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cw-ci-historical-ff-k0bc0op9",
+        "test_sha256_matched": true,
+        "cleanup_checked_within_owned_root": true,
+        "owned_temp_removed": true
+      }
+    }
+  ],
+  "classification": "Historical complexity ratchet assertion failures reproduced from exact archived blobs; public CI evidence confirms the matching focused suite failed but its complete log was unavailable.",
+  "scope_limit": "Focused complexity tests only; no full historical regression suite. Local Python 3.13.9 differs from CI Python 3.12. Assertions use repository-local AST metrics and require no external runtime or data.",
+  "execution_mode": "Normal Windows OS subprocess; command invoked with require_escalated, per task instruction.",
+  "non_sandbox_observed_at": "2026-10-09T08:59:27.374143+00:00",
+  "initial_sandbox_temp_exists_on_non_sandbox_check": false,
+  "first_failure_fix_control": {
+    "sha": "697af966475a4aa7bb0687c78bfb81a7edb54f21",
+    "command": [
+      "C:\\Miniconda\\python.exe",
+      "-m",
+      "pytest",
+      "tests/test_complexity_ratchet.py",
+      "-q",
+      "--tb=short",
+      "-p",
+      "no:cacheprovider"
+    ],
+    "archive_command": [
+      "git",
+      "archive",
+      "--format=tar",
+      "697af966475a4aa7bb0687c78bfb81a7edb54f21",
+      "scripts",
+      "tests/test_complexity_ratchet.py",
+      "pyproject.toml"
+    ],
+    "exit_code": 0,
+    "duration_seconds": 0.601,
+    "stdout": "..                                                                       [100%]\n2 passed in 0.19s\n",
+    "stderr": "",
+    "max_complexity": 10,
+    "functions": [
+      {
+        "function": "_usage_counters",
+        "line": 45,
+        "score": 7
+      },
+      {
+        "function": "_provider_usage",
+        "line": 55,
+        "score": 10
+      }
+    ],
+    "owned_temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cw-ci-historical-ff-control-7p47369f",
+    "cleanup_checked_within_owned_root": true,
+    "owned_temp_removed": true
+  }
+}
