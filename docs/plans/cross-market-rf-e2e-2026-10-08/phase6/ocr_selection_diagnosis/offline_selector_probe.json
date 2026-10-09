@@ -1,0 +1,877 @@
+{
+  "schema_version": "ocr-selection-offline-causal-probe/1",
+  "status": "CAUSE_REPRODUCED",
+  "head": "a40eb065da1bb21d231d2644449e2ecd8a2f98d6",
+  "probe_file_sha256": "c20707ec2de160e773d3929b37e28d4ddb8c4e7df483544f3771eb86861c8313",
+  "existing_ocr_report": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\implementation\\main-local-pptx-ocr\\real_22_page_statistics.json",
+    "sha256": "a26be866da1c31ed3ea25aa732dd9eac97c3c3f2b6ef5737965636db71dc68e6",
+    "original_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+    "recognized_lines": 1067
+  },
+  "scope": "Existing bounded OCR preview text projected into transient structure units; synthetic controls explicitly separated.",
+  "not_a_live_ocr_or_provider_receipt": true,
+  "network_calls": 0,
+  "ocr_inferences": 0,
+  "raw_normalizations": 0,
+  "suppliers": 0,
+  "auto_mutations": 0,
+  "temp_roots": [],
+  "diagnoses": {
+    "actual_page7_preview_projection": {
+      "trace": [
+        {
+          "text": "FY27 Segment changes and resulting new product and service reporting updates",
+          "source_role": "company_filing",
+          "unit_kind": "pptx_image_ocr_line",
+          "length": 76,
+          "topics": [
+            "new_business"
+          ],
+          "operating_fact": {
+            "eligible": false,
+            "topics": [],
+            "reasons": [],
+            "score": 0,
+            "financial_exempt": false
+          },
+          "signals": {
+            "progress": false,
+            "event": false,
+            "positioning": false,
+            "business_risk": false,
+            "direct_capacity_constraint": false,
+            "long_customer_qualification": false,
+            "project_certification_timeline": false,
+            "permit_milestone": false,
+            "new_product_milestone": false,
+            "project_rationale": false,
+            "downstream_extension": false,
+            "current_industry": false,
+            "current_business_progress": false,
+            "project": false
+          },
+          "pre_signal": false,
+          "excluded": false,
+          "static_definition": false,
+          "dropped_financial": false,
+          "candidate": null
+        },
+        {
+          "text": "our consulting and support businesses. Devices and Consumer will include our Windows, XBOX, and advertising businesses. With these segment",
+          "source_role": "company_filing",
+          "unit_kind": "pptx_image_ocr_line",
+          "length": 138,
+          "topics": [],
+          "operating_fact": {
+            "eligible": false,
+            "topics": [],
+            "reasons": [],
+            "score": 0,
+            "financial_exempt": false
+          },
+          "signals": {
+            "progress": false,
+            "event": false,
+            "positioning": false,
+            "business_risk": false,
+            "direct_capacity_constraint": false,
+            "long_customer_qualification": false,
+            "project_certification_timeline": false,
+            "permit_milestone": false,
+            "new_product_milestone": false,
+            "project_rationale": false,
+            "downstream_extension": false,
+            "current_industry": false,
+            "current_business_progress": false,
+            "project": false
+          },
+          "pre_signal": false,
+          "excluded": false,
+          "static_definition": false,
+          "dropped_financial": false,
+          "candidate": null
+        },
+        {
+          "text": "changes and to provide transparency to investors, we are updating our product and services reporting definitions to better represent the businesses as",
+          "source_role": "company_filing",
+          "unit_kind": "pptx_image_ocr_line",
+          "length": 150,
+          "topics": [],
+          "operating_fact": {
+            "eligible": false,
+            "topics": [],
+            "reasons": [],
+            "score": 0,
+            "financial_exempt": false
+          },
+          "signals": {
+            "progress": false,
+            "event": false,
+            "positioning": false,
+            "business_risk": false,
+            "direct_capacity_constraint": false,
+            "long_customer_qualification": false,
+            "project_certification_timeline": false,
+            "permit_milestone": false,
+            "new_product_milestone": false,
+            "project_rationale": false,
+            "downstream_extension": false,
+            "current_industry": false,
+            "current_business_progress": false,
+            "project": false
+          },
+          "pre_signal": false,
+          "excluded": false,
+          "static_definition": false,
+          "dropped_financial": false,
+          "candidate": null
+        },
+        {
+          "text": "we manage them today, which will be used in our SEC filings going forward.",
+          "source_role": "company_filing",
+          "unit_kind": "pptx_image_ocr_line",
+          "length": 74,
+          "topics": [],
+          "operating_fact": {
+            "eligible": false,
+            "topics": [],
+            "reasons": [],
+            "score": 0,
+            "financial_exempt": false
+          },
+          "signals": {
+            "progress": false,
+            "event": false,
+            "positioning": false,
+            "business_risk": false,
+            "direct_capacity_constraint": false,
+            "long_customer_qualification": false,
+            "project_certification_timeline": false,
+            "permit_milestone": false,
+            "new_product_milestone": false,
+            "project_rationale": false,
+            "downstream_extension": false,
+            "current_industry": false,
+            "current_business_progress": false,
+            "project": false
+          },
+          "pre_signal": false,
+          "excluded": false,
+          "static_definition": false,
+          "dropped_financial": false,
+          "candidate": null
+        },
+        {
+          "text": "Agents andInfra",
+          "source_role": "company_filing",
+          "unit_kind": "pptx_image_ocr_line",
+          "length": 15,
+          "topics": [],
+          "operating_fact": {
+            "eligible": false,
+            "topics": [],
+            "reasons": [],
+            "score": 0,
+            "financial_exempt": false
+          },
+          "signals": {
+            "progress": false,
+            "event": false,
+            "positioning": false,
+            "business_risk": false,
+            "direct_capacity_constraint": false,
+            "long_customer_qualification": false,
+            "project_certification_timeline": false,
+            "permit_milestone": false,
+            "new_product_milestone": false,
+            "project_rationale": false,
+            "downstream_extension": false,
+            "current_industry": false,
+            "current_business_progress": false,
+            "project": false
+          },
+          "pre_signal": false,
+          "excluded": false,
+          "static_definition": false,
+          "dropped_financial": false,
+          "candidate": null
+        },
+        {
+          "text": "· Server products now excludes the on-premises portion of GitHub and other developer services which has moved to Microsoft 365",
+          "source_role": "company_filing",
+          "unit_kind": "pptx_image_ocr_line",
+          "length": 126,
+          "topics": [],
+          "operating_fact": {
+            "eligible": false,
+            "topics": [],
+            "reasons": [],
+            "score": 0,
+            "financial_exempt": false
+          },
+          "signals": {
+            "progress": false,
+            "event": false,
+            "positioning": false,
+            "business_risk": false,
+            "direct_capacity_constraint": false,
+            "long_customer_qualification": false,
+            "project_certification_timeline": false,
+            "permit_milestone": false,
+            "new_product_milestone": false,
+            "project_rationale": false,
+            "downstream_extension": false,
+            "current_industry": false,
+            "current_business_progress": false,
+            "project": false
+          },
+          "pre_signal": false,
+          "excluded": false,
+          "static_definition": false,
+          "dropped_financial": false,
+          "candidate": null
+        },
+        {
+          "text": "· Industry solutions products, which is the on-premises portion of these businesses",
+          "source_role": "company_filing",
+          "unit_kind": "pptx_image_ocr_line",
+          "length": 83,
+          "topics": [],
+          "operating_fact": {
+            "eligible": false,
+            "topics": [],
+            "reasons": [],
+            "score": 0,
+            "financial_exempt": false
+          },
+          "signals": {
+            "progress": false,
+            "event": false,
+            "positioning": false,
+            "business_risk": false,
+            "direct_capacity_constraint": false,
+            "long_customer_qualification": false,
+            "project_certification_timeline": false,
+            "permit_milestone": false,
+            "new_product_milestone": false,
+            "project_rationale": false,
+            "downstream_extension": false,
+            "current_industry": false,
+            "current_business_progress": false,
+            "project": false
+          },
+          "pre_signal": false,
+          "excluded": false,
+          "static_definition": false,
+          "dropped_financial": false,
+          "candidate": null
+        },
+        {
+          "text": "Frontier and support services was previously reported as Enterprise and Partner services, but is otherwise unchanged",
+          "source_role": "company_filing",
+          "unit_kind": "pptx_image_ocr_line",
+          "length": 116,
+          "topics": [],
+          "operating_fact": {
+            "eligible": false,
+            "topics": [],
+            "reasons": [],
+            "score": 0,
+            "financial_exempt": false
+          },
+          "signals": {
+            "progress": false,
+            "event": false,
+            "positioning": false,
+            "business_risk": false,
+            "direct_capacity_constraint": false,
+            "long_customer_qualification": false,
+            "project_certification_timeline": false,
+            "permit_milestone": false,
+            "new_product_milestone": false,
+            "project_rationale": false,
+            "downstream_extension": false,
+            "current_industry": false,
+            "current_business_progress": false,
+            "project": false
+          },
+          "pre_signal": false,
+          "excluded": false,
+          "static_definition": false,
+          "dropped_financial": false,
+          "candidate": null
+        },
+        {
+          "text": "The product and service offerings referenced above will be reported in our SEC filings",
+          "source_role": "company_filing",
+          "unit_kind": "pptx_image_ocr_line",
+          "length": 86,
+          "topics": [],
+          "operating_fact": {
+            "eligible": false,
+            "topics": [],
+            "reasons": [],
+            "score": 0,
+            "financial_exempt": false
+          },
+          "signals": {
+            "progress": false,
+            "event": false,
+            "positioning": false,
+            "business_risk": false,
+            "direct_capacity_constraint": false,
+            "long_customer_qualification": false,
+            "project_certification_timeline": false,
+            "permit_milestone": false,
+            "new_product_milestone": false,
+            "project_rationale": false,
+            "downstream_extension": false,
+            "current_industry": false,
+            "current_business_progress": false,
+            "project": false
+          },
+          "pre_signal": false,
+          "excluded": false,
+          "static_definition": false,
+          "dropped_financial": false,
+          "candidate": null
+        }
+      ],
+      "selection": {
+        "status": "needs_review",
+        "candidate_count": 0,
+        "selected_count": 0,
+        "coverage_complete": false,
+        "dropped_financial_count": 0,
+        "visual_groups": 0,
+        "selected_texts": []
+      }
+    },
+    "role_counterfactual_management": {
+      "status": "needs_review",
+      "candidate_count": 0,
+      "selected_count": 0,
+      "coverage_complete": false,
+      "dropped_financial_count": 0,
+      "visual_groups": 0,
+      "selected_texts": []
+    },
+    "role_counterfactual_image_text": {
+      "status": "needs_review",
+      "candidate_count": 0,
+      "selected_count": 0,
+      "coverage_complete": false,
+      "dropped_financial_count": 0,
+      "visual_groups": 0,
+      "selected_texts": []
+    },
+    "joined_existing_definition_classifier_only": {
+      "trace": {
+        "text": "our consulting and support businesses. Devices and Consumer will include our Windows, XBOX, and advertising businesses. With these segment changes and to provide transparency to investors, we are updating our product and services reporting definitions to better represent the businesses as we manage them today, which will be used in our SEC filings going forward.",
+        "source_role": "company_filing",
+        "unit_kind": "pptx_image_ocr_line",
+        "length": 364,
+        "topics": [],
+        "operating_fact": {
+          "eligible": false,
+          "topics": [],
+          "reasons": [],
+          "score": 0,
+          "financial_exempt": false
+        },
+        "signals": {
+          "progress": false,
+          "event": false,
+          "positioning": false,
+          "business_risk": false,
+          "direct_capacity_constraint": false,
+          "long_customer_qualification": false,
+          "project_certification_timeline": false,
+          "permit_milestone": false,
+          "new_product_milestone": false,
+          "project_rationale": false,
+          "downstream_extension": false,
+          "current_industry": false,
+          "current_business_progress": false,
+          "project": false
+        },
+        "pre_signal": false,
+        "excluded": false,
+        "static_definition": false,
+        "dropped_financial": false,
+        "candidate": null
+      },
+      "selection": {
+        "status": "needs_review",
+        "candidate_count": 0,
+        "selected_count": 0,
+        "coverage_complete": false,
+        "dropped_financial_count": 0,
+        "visual_groups": 0,
+        "selected_texts": []
+      }
+    },
+    "complete_actual_scope_change_line_11": {
+      "text": "· Server products now excludes the on-premises portion of GitHub and other developer services which has moved to Microsoft 365",
+      "source_role": "company_filing",
+      "unit_kind": "pptx_image_ocr_line",
+      "length": 126,
+      "topics": [],
+      "operating_fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false
+      },
+      "signals": {
+        "progress": false,
+        "event": false,
+        "positioning": false,
+        "business_risk": false,
+        "direct_capacity_constraint": false,
+        "long_customer_qualification": false,
+        "project_certification_timeline": false,
+        "permit_milestone": false,
+        "new_product_milestone": false,
+        "project_rationale": false,
+        "downstream_extension": false,
+        "current_industry": false,
+        "current_business_progress": false,
+        "project": false
+      },
+      "pre_signal": false,
+      "excluded": false,
+      "static_definition": false,
+      "dropped_financial": false,
+      "candidate": null
+    },
+    "complete_actual_scope_change_line_20": {
+      "text": "Frontier and support services was previously reported as Enterprise and Partner services, but is otherwise unchanged",
+      "source_role": "company_filing",
+      "unit_kind": "pptx_image_ocr_line",
+      "length": 116,
+      "topics": [],
+      "operating_fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false
+      },
+      "signals": {
+        "progress": false,
+        "event": false,
+        "positioning": false,
+        "business_risk": false,
+        "direct_capacity_constraint": false,
+        "long_customer_qualification": false,
+        "project_certification_timeline": false,
+        "permit_milestone": false,
+        "new_product_milestone": false,
+        "project_rationale": false,
+        "downstream_extension": false,
+        "current_industry": false,
+        "current_business_progress": false,
+        "project": false
+      },
+      "pre_signal": false,
+      "excluded": false,
+      "static_definition": false,
+      "dropped_financial": false,
+      "candidate": null
+    },
+    "actual_metric_definition_excerpt": {
+      "text": "cloud revenue growth metric. Linkedln Marketing Solutions and Premium Subscriptions will now be reported in the Search and advertising revenue (ex TAC) growth metric. Quarterly growth rates",
+      "source_role": "company_filing",
+      "unit_kind": "pptx_image_ocr_line",
+      "length": 189,
+      "topics": [],
+      "operating_fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false
+      },
+      "signals": {
+        "progress": false,
+        "event": false,
+        "positioning": false,
+        "business_risk": false,
+        "direct_capacity_constraint": false,
+        "long_customer_qualification": false,
+        "project_certification_timeline": false,
+        "permit_milestone": false,
+        "new_product_milestone": false,
+        "project_rationale": false,
+        "downstream_extension": false,
+        "current_industry": false,
+        "current_business_progress": false,
+        "project": false
+      },
+      "pre_signal": false,
+      "excluded": false,
+      "static_definition": false,
+      "dropped_financial": false,
+      "candidate": null
+    },
+    "synthetic_existing_business_action_split_ocr": {
+      "status": "needs_review",
+      "candidate_count": 0,
+      "selected_count": 0,
+      "coverage_complete": false,
+      "dropped_financial_count": 0,
+      "visual_groups": 0,
+      "selected_texts": []
+    },
+    "synthetic_existing_business_action_joined": {
+      "status": "partial",
+      "candidate_count": 1,
+      "selected_count": 1,
+      "coverage_complete": false,
+      "dropped_financial_count": 0,
+      "visual_groups": 0,
+      "selected_texts": [
+        "We launched a new product for overseas customers."
+      ]
+    },
+    "synthetic_existing_business_action_split_pdf_counterfactual": {
+      "status": "partial",
+      "candidate_count": 2,
+      "selected_count": 2,
+      "coverage_complete": false,
+      "dropped_financial_count": 0,
+      "visual_groups": 1,
+      "selected_texts": [
+        "We launched",
+        "a new product for overseas customers."
+      ]
+    },
+    "synthetic_and_actual_label_negative_controls": [
+      {
+        "trace": {
+          "text": "Microsoft",
+          "source_role": "company_filing",
+          "unit_kind": "pptx_image_ocr_line",
+          "length": 9,
+          "topics": [],
+          "operating_fact": {
+            "eligible": false,
+            "topics": [],
+            "reasons": [],
+            "score": 0,
+            "financial_exempt": false
+          },
+          "signals": {
+            "progress": false,
+            "event": false,
+            "positioning": false,
+            "business_risk": false,
+            "direct_capacity_constraint": false,
+            "long_customer_qualification": false,
+            "project_certification_timeline": false,
+            "permit_milestone": false,
+            "new_product_milestone": false,
+            "project_rationale": false,
+            "downstream_extension": false,
+            "current_industry": false,
+            "current_business_progress": false,
+            "project": false
+          },
+          "pre_signal": false,
+          "excluded": true,
+          "static_definition": false,
+          "dropped_financial": false,
+          "candidate": null
+        },
+        "selection": {
+          "status": "needs_review",
+          "candidate_count": 0,
+          "selected_count": 0,
+          "coverage_complete": false,
+          "dropped_financial_count": 0,
+          "visual_groups": 0,
+          "selected_texts": []
+        }
+      },
+      {
+        "trace": {
+          "text": "FY27 Investor Metrics",
+          "source_role": "company_filing",
+          "unit_kind": "pptx_image_ocr_line",
+          "length": 21,
+          "topics": [],
+          "operating_fact": {
+            "eligible": false,
+            "topics": [],
+            "reasons": [],
+            "score": 0,
+            "financial_exempt": false
+          },
+          "signals": {
+            "progress": false,
+            "event": false,
+            "positioning": false,
+            "business_risk": false,
+            "direct_capacity_constraint": false,
+            "long_customer_qualification": false,
+            "project_certification_timeline": false,
+            "permit_milestone": false,
+            "new_product_milestone": false,
+            "project_rationale": false,
+            "downstream_extension": false,
+            "current_industry": false,
+            "current_business_progress": false,
+            "project": false
+          },
+          "pre_signal": false,
+          "excluded": false,
+          "static_definition": false,
+          "dropped_financial": false,
+          "candidate": null
+        },
+        "selection": {
+          "status": "needs_review",
+          "candidate_count": 0,
+          "selected_count": 0,
+          "coverage_complete": false,
+          "dropped_financial_count": 0,
+          "visual_groups": 0,
+          "selected_texts": []
+        }
+      },
+      {
+        "trace": {
+          "text": "As Restated",
+          "source_role": "company_filing",
+          "unit_kind": "pptx_image_ocr_line",
+          "length": 11,
+          "topics": [],
+          "operating_fact": {
+            "eligible": false,
+            "topics": [],
+            "reasons": [],
+            "score": 0,
+            "financial_exempt": false
+          },
+          "signals": {
+            "progress": false,
+            "event": false,
+            "positioning": false,
+            "business_risk": false,
+            "direct_capacity_constraint": false,
+            "long_customer_qualification": false,
+            "project_certification_timeline": false,
+            "permit_milestone": false,
+            "new_product_milestone": false,
+            "project_rationale": false,
+            "downstream_extension": false,
+            "current_industry": false,
+            "current_business_progress": false,
+            "project": false
+          },
+          "pre_signal": false,
+          "excluded": true,
+          "static_definition": false,
+          "dropped_financial": false,
+          "candidate": null
+        },
+        "selection": {
+          "status": "needs_review",
+          "candidate_count": 0,
+          "selected_count": 0,
+          "coverage_complete": false,
+          "dropped_financial_count": 0,
+          "visual_groups": 0,
+          "selected_texts": []
+        }
+      },
+      {
+        "trace": {
+          "text": "40% 39% 42% 40%",
+          "source_role": "company_filing",
+          "unit_kind": "pptx_image_ocr_line",
+          "length": 15,
+          "topics": [],
+          "operating_fact": {
+            "eligible": false,
+            "topics": [],
+            "reasons": [],
+            "score": 0,
+            "financial_exempt": false
+          },
+          "signals": {
+            "progress": false,
+            "event": false,
+            "positioning": false,
+            "business_risk": false,
+            "direct_capacity_constraint": false,
+            "long_customer_qualification": false,
+            "project_certification_timeline": false,
+            "permit_milestone": false,
+            "new_product_milestone": false,
+            "project_rationale": false,
+            "downstream_extension": false,
+            "current_industry": false,
+            "current_business_progress": false,
+            "project": false
+          },
+          "pre_signal": false,
+          "excluded": false,
+          "static_definition": false,
+          "dropped_financial": false,
+          "candidate": null
+        },
+        "selection": {
+          "status": "needs_review",
+          "candidate_count": 0,
+          "selected_count": 0,
+          "coverage_complete": false,
+          "dropped_financial_count": 0,
+          "visual_groups": 0,
+          "selected_texts": []
+        }
+      },
+      {
+        "trace": {
+          "text": "Microsoft 365 commercial cloud revenue growth",
+          "source_role": "company_filing",
+          "unit_kind": "pptx_image_ocr_line",
+          "length": 45,
+          "topics": [],
+          "operating_fact": {
+            "eligible": false,
+            "topics": [],
+            "reasons": [],
+            "score": 0,
+            "financial_exempt": false
+          },
+          "signals": {
+            "progress": false,
+            "event": false,
+            "positioning": false,
+            "business_risk": false,
+            "direct_capacity_constraint": false,
+            "long_customer_qualification": false,
+            "project_certification_timeline": false,
+            "permit_milestone": false,
+            "new_product_milestone": false,
+            "project_rationale": false,
+            "downstream_extension": false,
+            "current_industry": false,
+            "current_business_progress": false,
+            "project": false
+          },
+          "pre_signal": false,
+          "excluded": false,
+          "static_definition": false,
+          "dropped_financial": false,
+          "candidate": null
+        },
+        "selection": {
+          "status": "needs_review",
+          "candidate_count": 0,
+          "selected_count": 0,
+          "coverage_complete": false,
+          "dropped_financial_count": 0,
+          "visual_groups": 0,
+          "selected_texts": []
+        }
+      },
+      {
+        "trace": {
+          "text": "We increased product revenue by 40% this quarter.",
+          "source_role": "company_filing",
+          "unit_kind": "pptx_image_ocr_line",
+          "length": 49,
+          "topics": [],
+          "operating_fact": {
+            "eligible": false,
+            "topics": [],
+            "reasons": [],
+            "score": 0,
+            "financial_exempt": false
+          },
+          "signals": {
+            "progress": true,
+            "event": false,
+            "positioning": false,
+            "business_risk": false,
+            "direct_capacity_constraint": false,
+            "long_customer_qualification": false,
+            "project_certification_timeline": false,
+            "permit_milestone": false,
+            "new_product_milestone": false,
+            "project_rationale": false,
+            "downstream_extension": false,
+            "current_industry": false,
+            "current_business_progress": false,
+            "project": false
+          },
+          "pre_signal": false,
+          "excluded": false,
+          "static_definition": false,
+          "dropped_financial": false,
+          "candidate": null
+        },
+        "selection": {
+          "status": "needs_review",
+          "candidate_count": 0,
+          "selected_count": 0,
+          "coverage_complete": false,
+          "dropped_financial_count": 0,
+          "visual_groups": 0,
+          "selected_texts": []
+        }
+      }
+    ],
+    "synthetic_financial_row_complete_control": {
+      "trace": {
+        "text": "Revenue 100 120",
+        "source_role": "company_filing",
+        "unit_kind": "pdf_table_row",
+        "length": 15,
+        "topics": [],
+        "operating_fact": {
+          "eligible": false,
+          "topics": [],
+          "reasons": [],
+          "score": 0,
+          "financial_exempt": false
+        },
+        "signals": {
+          "progress": false,
+          "event": false,
+          "positioning": false,
+          "business_risk": false,
+          "direct_capacity_constraint": false,
+          "long_customer_qualification": false,
+          "project_certification_timeline": false,
+          "permit_milestone": false,
+          "new_product_milestone": false,
+          "project_rationale": false,
+          "downstream_extension": false,
+          "current_industry": false,
+          "current_business_progress": false,
+          "project": false
+        },
+        "pre_signal": false,
+        "excluded": false,
+        "static_definition": false,
+        "dropped_financial": true,
+        "candidate": null
+      },
+      "selection": {
+        "status": "skipped_no_narrative",
+        "candidate_count": 0,
+        "selected_count": 0,
+        "coverage_complete": true,
+        "dropped_financial_count": 1,
+        "visual_groups": 0,
+        "selected_texts": []
+      }
+    }
+  }
+}

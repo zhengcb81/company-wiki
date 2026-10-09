@@ -1,0 +1,26 @@
+{
+  "schema_version": "main-ocr-repair-responsibility/1",
+  "status": "RESPONSIBILITY_PASS",
+  "unit_tests": {
+    "passed": 9,
+    "seconds": 0.42
+  },
+  "ruff": "PASS",
+  "actual_same_version_refusal": {
+    "receipt": "runs/mocr-20261009T053108-61c0ce6a/acceptance.json",
+    "exit_code": 2,
+    "reason": "repair_requires_changed_execution_version",
+    "live_batch_executed": false
+  },
+  "actual_positive_repair": "NOT_RUN_PENDING_SELECTOR_UPGRADE",
+  "parent_origin": "C:/Users/郑曾波/AppData/Local/Temp/mOCR-srw9_9oe",
+  "historical_unknown_reservations": 7,
+  "new_model_charge": 0,
+  "cleanup_checks": [
+    "exact owned TEMP and no links",
+    "terminal known settled ledger",
+    "durable and origin receipt SHA equal",
+    "original bytes unchanged"
+  ],
+  "initial_pytest9_root": "ALREADY_ABSENT_AT_CHECK"
+}

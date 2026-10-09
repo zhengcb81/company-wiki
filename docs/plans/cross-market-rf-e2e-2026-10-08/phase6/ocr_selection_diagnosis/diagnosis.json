@@ -1,0 +1,121 @@
+{
+  "schema_version": "ocr-selection-root-cause-diagnosis/1",
+  "status": "ROOT_CAUSES_REPRODUCED_FIX_NOT_IMPLEMENTED",
+  "checked_at": "2026-10-09T05:19:06.358657+00:00",
+  "exact_head": "a40eb065da1bb21d231d2644449e2ecd8a2f98d6",
+  "native_run_id": "mocr-20261009T045902-933be853-first",
+  "native_input_hash": "7ed75daab656b24663959524e1458bfe03a6e32e085c5153be3bcb776726cea7",
+  "origin_root_retained": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-srw9_9oe",
+  "origin_terminal": true,
+  "origin_budget": {
+    "run_id": "mocr-20261009T045902-933be853-first",
+    "charged_tokens": 0,
+    "charged_micro_usd": 0,
+    "charged_output_bytes": 0,
+    "unknown_reservations": 0,
+    "unsettled_reservations": 0
+  },
+  "origin_reservations": [],
+  "deck_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+  "deck_size": 4016522,
+  "deck_SEC_origin_DB_hash_size_mtime_unchanged": true,
+  "findings": [
+    {
+      "id": "SEMANTIC_SCOPE_CHANGE_CLASS_GAP",
+      "actual": "Nine existing true page7 OCR previews select0/financial_dropped0; joined definition stays0; rename/unchanged complete line20 still0.",
+      "root": "Business membership/reporting definition changes are missing from generic candidate facts.",
+      "excluded_causes": [
+        "source_role",
+        "minlen for these nine units",
+        "financial_table filtering",
+        "budget/dedup for zero-candidate projections"
+      ]
+    },
+    {
+      "id": "OCR_GROUP_PORT_GAP",
+      "actual_counterfactual_selected_counts": {
+        "OCR_two_lines": 0,
+        "joined": 1,
+        "PDF_visual_two_members": 2
+      },
+      "root": "PDF-only group/neighbor path ignores pptx_image_ocr_line.",
+      "must_not_alias_OCR_to_PDF": "ocr_box/image pixels differ from bbox/PDF points; existing body cutoffs60/750 are unsafe for OCR."
+    }
+  ],
+  "should_successfully_skip": false,
+  "empty_partial_guard_should_remain": true,
+  "native_full_1067_line_trace_available": false,
+  "1067_count_basis": "Previously delivered parser report, not newly measured native failed attempt.",
+  "offline_probe": {
+    "command": "python -B docs/plans/cross-market-rf-e2e-2026-10-08/phase6/ocr_selection_diagnosis/offline_selector_probe.py",
+    "final_exit_code": 0,
+    "assertions_passed": 10,
+    "actual_preview_units": 9,
+    "is_not_new_OCR_or_provider_receipt": true,
+    "fixture_failures_not_product_RED": [
+      "semver1 was invalid; corrected1.0.0",
+      "synthetic PDF y10/y50 was page top; controlled final y100/y140"
+    ],
+    "diagnostic_trace_inspection_during_fixture_repair": true
+  },
+  "primary_read": {
+    "command": "python -B docs/plans/cross-market-rf-e2e-2026-10-08/phase6/ocr_selection_diagnosis/read_primary_evidence.py",
+    "exit_code": 0,
+    "permissions": "require_escalated; readonly sibling archive/origin and owned single-image TEMP",
+    "page_viewed": 7,
+    "media_images_extracted": 1,
+    "SEC_role": "FY2025 three-segment baseline, not proof of FY27 filing",
+    "owned_TEMP_removed": "mSel-9rcj3glu",
+    "origin_AUTO_retained": "mOCR-srw9_9oe"
+  },
+  "suppliers": 0,
+  "new_OCR_inferences": 0,
+  "raw_normalizations": 0,
+  "whole22_reruns": 0,
+  "AUTO_mutations": 0,
+  "source_code_writes": 0,
+  "PWF_writes": 0,
+  "acceptance_script_writes": 0,
+  "installs": 0,
+  "commits": 0,
+  "TDD_plan": "DIAGNOSIS.md: generic dynamic scope/reporting class and format-neutral bounded OCR member groups; preserve financial/label negatives, future/negation/unchanged, partial and exact locators.",
+  "new_generation_requirements": [
+    "preserve old terminal/zero-reservation proof",
+    "bump selector/generation version",
+    "explicit new run identity",
+    "do not mutate old frozen request/jobs/input hash or blind resume"
+  ],
+  "optional_MAIN_arranged_real_probe": {
+    "page": 7,
+    "media": 1,
+    "initial_plus_selected_replay_inferences_max": 2,
+    "outer_seconds": 60,
+    "suppliers": 0,
+    "questions": [
+      "rename/unchanged line20 selectable with correct reason",
+      "server-products two-line member grouping from true boxes",
+      "missing first line remains partial",
+      "selected original locators exact replay"
+    ],
+    "not_run_here": true
+  },
+  "CodeGraph": "queried first; current merged selector missing/stale; read specific known current files",
+  "source_file_sha256": {
+    "automation/narrative_select.py": "a1a7abac8bec7274776a04001efc9197f1e970f49300b22d76b2435c7dbaeefd",
+    "source_catalog/narrative_candidates.py": "b70e3a23a3f498953de6c0adc7fec88048610bef488acfd7c3f9a62bea654d54",
+    "source_catalog/narrative_evidence.py": "16d9f25832fecc2d5d2c7cf41fa0e9d36b7eabec27e0fe7523992b268949dc5a",
+    "source_catalog/narrative_group_candidates.py": "38d8fb00efe4a74e3a846d31b22c961f397df802b58ab54bdd74812d570bd197",
+    "source_catalog/narrative_pdf_groups.py": "f67b9409cd1158219caa23120e04cd6aa1e7bb7cd8e27b2dcecd8f2f42333ff3",
+    "source_catalog/narrative_neighbors.py": "3c6f735fd034caef8074b4f70673b0708be00e9bb6415043fd6cfd4b958a1ade",
+    "source_catalog/n6_candidate_completion.py": "71cd2996d3cc3a6fa9a4309a7246df2914511717178401d81d68dd00e02391cb",
+    "source_catalog/n6_candidate_operating_facts.py": "3cd5484b6af057260c3a5c51cbce643300a4e501aef55188dc56dfc6d7806adf",
+    "source_catalog/narrative_normalization.py": "bfd1907d80bac196b2a41b0d5d6032a384d46c64672b36dcd96961d7b05cc0b6",
+    "document_normalization/units.py": "e89c0111286cf993f7ac4dfed6f13143f5e1697dc8f8aa4fc7eb5dc804434374"
+  },
+  "actual_report_writer_initial_error": "An aggregation parent calculation pointed outside repo and git exited128; corrected cwd, only diagnostic report affected.",
+  "artifacts": [
+    "DIAGNOSIS.md",
+    "offline_selector_probe.json",
+    "primary_evidence.json"
+  ]
+}

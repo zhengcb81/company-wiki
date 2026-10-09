@@ -1,0 +1,126 @@
+{
+  "schema_version": "ocr-selection-primary-read/1",
+  "status": "PRIMARY_READ_ONLY_COMPLETE_SINGLE_IMAGE_VIEWED_AND_REMOVED",
+  "head": "a40eb065da1bb21d231d2644449e2ecd8a2f98d6",
+  "deck_original": {
+    "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\c0\\c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+    "sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+    "size": 4016522,
+    "mtime_ns": 1791450580109140500
+  },
+  "original_unchanged": true,
+  "page7": {
+    "display_ordinal": 7,
+    "ooxml_slide_id": 262,
+    "slide_part": "ppt/slides/slide7.xml",
+    "image_part": "ppt/media/image7.png",
+    "media_sha256": "d4edf0903db8d061555fc3d0a99409f21c9f034fe8e31df59a37ae69de5f31ea",
+    "owned_image": {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mSel-9rcj3glu\\page7.png",
+      "sha256": "d4edf0903db8d061555fc3d0a99409f21c9f034fe8e31df59a37ae69de5f31ea",
+      "size": 331246,
+      "mtime_ns": 1791522791339557700
+    },
+    "viewing_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mSel-9rcj3glu",
+    "manual_view": {
+      "tool": "view_image(original)",
+      "basis": "unmodified original pixels, not OCR",
+      "confirmed": "FY27 reporting-segment transition and named business/reporting-definition movements and rename/otherwise-unchanged statements.",
+      "first_ocr_line_absence_retained": true,
+      "no_transcription_inserted_into_ocr_or_selector": true
+    },
+    "temporary_root_removed": true,
+    "temporary_cleanup_checks": [
+      "absolute direct child of system TEMP",
+      "marker exact root and owner",
+      "only page7.png + marker.json",
+      "no reparse point entries"
+    ]
+  },
+  "sec": {
+    "url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+    "source_ref": {
+      "byte_size": 8158067,
+      "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "mime_type": "text/html",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"
+    },
+    "original": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\微软\\raw\\financial_reports\\annual\\微软_10-K_2025.htm",
+      "sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "size": 8158067,
+      "mtime_ns": 1784663189616329300
+    },
+    "original_unchanged": true,
+    "paragraphs": [
+      "We operate our business and report our financial performance using three segments: Productivity and Business Processes, Intelligent Cloud, and More Personal Computing. Our segments provide management with a comprehensive financial view of our key businesses. The segments enable the alignment of strategies and objectives across the development, sales, marketing, and services organizations, and they provide a framework for timely and rational allocation of resources within businesses.",
+      "Additional information on our operating segments and geographic and product information is contained in Note 18 – Segment Information and Geographic Data of the Notes to Financial Statements (Part II, Item 8 of this Form 10-K).",
+      "We plan to continue to make significant investments in a broad range of product research and development activities, and as appropriate, we will coordinate our research and development across operating segments and leverage the results across the company. This includes continuing to support fundamental research, which provides us with a unique perspective on future trends and contributes to our innovation."
+    ],
+    "role": "FY2025 baseline reporting-scope context only, not FY27 chronology proof"
+  },
+  "origin_auto": {
+    "root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-srw9_9oe",
+    "database": {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-srw9_9oe\\auto\\first.sqlite3",
+      "sha256": "4f87e8c2e8e883f8656e319447b50dacd56417569469611b0b6fdea1cd310149",
+      "size": 172032,
+      "mtime_ns": 1791522083866987600
+    },
+    "database_unchanged": true,
+    "run_id": "mocr-20261009T045902-933be853-first",
+    "run_input_hash": "7ed75daab656b24663959524e1458bfe03a6e32e085c5153be3bcb776726cea7",
+    "jobs": [
+      {
+        "job_id": "7238c7d1f57f1af3",
+        "job_type": "source.narrative_select",
+        "status": "dead_letter",
+        "last_error_code": "PARSER_INCOMPLETE",
+        "last_error_detail": "empty selection does not have complete coverage"
+      },
+      {
+        "job_id": "d68f89c265eb2007",
+        "job_type": "source.narrative_summarize",
+        "status": "dead_letter",
+        "last_error_code": "DEPENDENCY_TERMINAL",
+        "last_error_detail": "terminal dependencies: 7238c7d1f57f1af3=dead_letter"
+      },
+      {
+        "job_id": "8e61291e26a33151",
+        "job_type": "source.narrative_verify",
+        "status": "dead_letter",
+        "last_error_code": "DEPENDENCY_TERMINAL",
+        "last_error_detail": "terminal dependencies: 7238c7d1f57f1af3=dead_letter"
+      }
+    ],
+    "attempts": [
+      {
+        "job_id": "7238c7d1f57f1af3",
+        "started_at": "2026-10-09T04:59:17Z",
+        "finished_at": "2026-10-09T05:01:23Z",
+        "outcome": "terminal_failure",
+        "error_code": "PARSER_INCOMPLETE",
+        "error_detail": "empty selection does not have complete coverage"
+      }
+    ],
+    "budget": {
+      "run_id": "mocr-20261009T045902-933be853-first",
+      "charged_tokens": 0,
+      "charged_micro_usd": 0,
+      "charged_output_bytes": 0,
+      "unknown_reservations": 0,
+      "unsettled_reservations": 0
+    },
+    "reservations": [],
+    "active_attempts": 0,
+    "terminal": true,
+    "root_exists_after_visual_cleanup": true
+  },
+  "network_calls": 0,
+  "suppliers": 0,
+  "ocr_inferences": 0,
+  "raw_normalizations": 0,
+  "root_retained_for_recovery": true
+}

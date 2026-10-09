@@ -412,3 +412,12 @@ shared交付67b55d72正常合入master979792e0并push，15runtime/test交付SHA�
 MAIN可选source-clock producer真实RED为模块缺失collection（0.87秒），首集中26PASS/12.32秒后修测试unused import，最终含真实CLI28PASS/13.51秒及Ruff通过。root短路径C:/cw-av-green-72fd8c64与C:/cw-av-cli-a3d92517恢复不存在，原件/生产写0；以source_clock_producer_acceptance.json记录。a40eb065 exactCI37886236535成功。RF clock与CWP local reconcile隔离owner分别TDD，OCR只读分组/词类共因诊断等待完整交付；未重启失败旧terminal、不做新随机抽样。
 
 提交hook发现新增拒绝路径测试含固定C盘例值；不是行为测试失败。已改为实际tmp_path绝对路径测试（Windows含drive、其他OS含其真实anchor），保留跨根拒绝语义，不扩baseline、不跳过hook。第一次apply_patch带空hunk被原子拒绝、未写文件，随后已纠正。
+
+
+## 2026-10-09：主线收尾准备与真实拒绝验收
+
+CWP ea76998c 正常提交/推送，精确CI37888084960 SUCCESS。RF source-clock a001995a 责任与实际三源late-read完成、126PASS/18.63s required gate、ruff/mypy绿；最终交接仍待。FF a1e97fa 正常提交独立分支，最终204PASS/2SKIP+39subtests32.49s、ruff/mypy/normal hooks绿；未提前宣称并线/安装完成。CWP legacy及OCR selector owner继续自身隔离包，不写MAIN三PWF。
+
+MAIN repair helper9真RED→9PASS，新增 durable/origin SHA 清理对照后9PASS/0.42秒、Ruff绿。实际 repair 同旧0.4.2版本 exit2，repair_requires_changed_execution_version、live_batch_executed=false，报告mocr-20261009T053108-61c0ce6a；未新建AUTO/收费任务，旧origin ledger/request/marker/acceptance SHA不变。旧22页失败仍FAILED_RETAIN_ORIGIN，不覆盖、不断言已修复。
+
+本次只删除4个一次性FF写入辅助脚本，不交付为项目代码；初始pytest-9短临时根检查已不存在，非执行删除。三份主PWF无效dummy patch因标题不匹配被原子拒绝，未写文件；随后按实际文件追加本记录。真实工程节点与研究节点仍严格区分，目标active，等待整合后继续真实主线验收再loop。

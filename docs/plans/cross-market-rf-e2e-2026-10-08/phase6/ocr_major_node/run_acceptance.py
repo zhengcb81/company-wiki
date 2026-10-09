@@ -252,6 +252,7 @@ def ledger(root, prepared, which):
     require(len(jobs) == len(ids), "origin_run_job_missing")
     return {"status": "read", "run_id": run_id, "state": run.state, "block_reason": run.block_reason,
             "input_hash": run.input_hash, "model_id": run.model_id,
+            "execution_versions": json.loads(run.binding_json or "{}").get("execution_versions"),
             "max_tokens": run.max_tokens, "max_micro_usd": run.max_micro_usd,
             "pricing_version": run.pricing_version, "budget": budget, "reservations": reservations,
             "jobs": [{"job_id": j, "status": s} for j, s in jobs], "active_attempts": active,
@@ -455,7 +456,7 @@ def owned_root(path):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("operation", choices=("preflight", "run", "resume", "cleanup"), nargs="?", default="preflight")
+    parser.add_argument("operation", choices=("preflight", "run", "resume", "repair", "cleanup"), nargs="?", default="preflight")
     parser.add_argument("--project-root", type=Path, default=Path(__file__).resolve().parents[5])
     parser.add_argument("--owned-root", type=Path, help="Existing origin root; required for resume/cleanup")
     args = parser.parse_args()
@@ -472,7 +473,45 @@ def main():
     prepared = None
     try:
         report["head"] = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=project, text=True).strip()
-        if args.operation in {"resume", "cleanup"}:
+        if args.operation == "repair":
+            from repair_origin import derive_repair_baseline
+            from company_wiki.automation.narrative_batch_request import NarrativeBatchRequest
+
+            require(args.owned_root is not None, "repair_parent_owned_root_required")
+            parent_root, parent = owned_root(args.owned_root)
+            require(parent["project_root"] == str(project), "parent_project_binding")
+            saved = load(parent_root / "acceptance.json")
+            require(saved.get("live_batch_executed") is True
+                    and saved.get("status") == "FAILED_RETAIN_ORIGIN", "repair_requires_failed_origin")
+            durable = destination / "runs" / parent["attempt_id"] / "acceptance.json"
+            require(durable.is_file()
+                    and file_identity(durable)["sha256"] == file_identity(parent_root / "acceptance.json")["sha256"],
+                    "repair_parent_durable_evidence_mismatch")
+            prior = [load(p) for p in (destination / "runs").glob("*/acceptance.json")]
+            live = [p for p in prior if p.get("live_batch_executed") is True]
+            require(live and max(live, key=lambda p: p["started_at"])["attempt_id"] == parent["attempt_id"],
+                    "repair_must_use_latest_live_origin")
+            for name, identity in parent["config_hashes"].items():
+                require(file_identity(parent_root / name) == identity, "parent_frozen_config_changed")
+            require(file_identity(parent["source"]["original"]["path"]) == parent["source"]["original"],
+                    "parent_original_changed")
+            observations = {w: ledger(parent_root, parent, w) for w in ("first", "reuse")}
+            versions = NarrativeBatchRequest.from_dict(load(parent_root / "requests/first.json")).execution_versions
+            try:
+                repair = derive_repair_baseline(parent, observations, versions)
+            except ValueError as exc:
+                raise CheckFailed(str(exc)) from exc
+            report["repair_parent"] = {**repair, "receipt": file_identity(durable), "ledgers": observations}
+            root = Path(tempfile.mkdtemp(prefix="mOCR-")).resolve()
+            prepared, env = prepare(project, root, attempt)
+            require(prepared["source"]["original"]["sha256"] == repair["source_sha256"], "repair_source_changed")
+            prepared["budget_baseline"] = repair["budget_baseline"]
+            prepared["repair_parent"] = report["repair_parent"]
+            save(root / "marker.json", prepared)
+            report["preflight"] = free_checks(project, root, prepared, env)
+            report["live_batch_executed"] = True
+            report.update(run_batches(project, root, prepared, env))
+        elif args.operation in {"resume", "cleanup"}:
             require(args.owned_root is not None, "origin_owned_root_required")
             root, prepared = owned_root(args.owned_root)
             report["attempt_id"] = prepared["attempt_id"]
@@ -483,13 +522,17 @@ def main():
                     "original_changed_since_prepare")
             if args.operation == "cleanup":
                 saved = load(root / "acceptance.json")
-                require(saved["status"] == "ENGINEERING_COMPOSITION_PASS", "cleanup_requires_completed_acceptance")
+                require(saved["status"] in {"ENGINEERING_COMPOSITION_PASS", "FAILED_RETAIN_ORIGIN"},
+                        "cleanup_requires_preserved_acceptance")
                 inspected = {w: ledger(root, prepared, w) for w in ("first", "reuse")}
-                require(all(v["terminal"] and v["budget"]["unknown_reservations"] == 0
-                            and v["budget"]["unsettled_reservations"] == 0 for v in inspected.values()),
+                require(all(v.get("status") == "not_created" or (v["terminal"] and v["budget"]["unknown_reservations"] == 0
+                            and v["budget"]["unsettled_reservations"] == 0) for v in inspected.values()),
                         "cleanup_requires_terminal_settled_origin")
                 target = destination / "runs" / prepared["attempt_id"]
                 require((target / "acceptance.json").is_file(), "durable_receipt_missing")
+                require(file_identity(target / "acceptance.json")["sha256"]
+                        == file_identity(root / "acceptance.json")["sha256"],
+                        "cleanup_durable_evidence_mismatch")
                 report.update({"status": "TERMINAL_OWNED_ROOT_CLEANED", "terminal_ledgers": inspected,
                                "removed_owned_root": str(root)})
                 shutil.rmtree(root)

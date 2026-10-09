@@ -243,3 +243,14 @@ shared交付67b55d72正常合入master979792e0并push，15runtime/test交付SHA�
 上述根因处置后再真实节点的新合法generation验收、固定71对照、原三家与新三家真实研究/四独立审查；全部主线完成后公司池loop。大节点增加的是此前未接起来的真实路径，不新增小节点签收。
 
 来源时钟施工细则已交付，RF在隔离 `Projects/_harness_worktrees/cmrf-20261008/rf-inputs` 从e688b0a2实施。MAIN以最小事实接口完成CWP receipt2.2：仅解析既有canonical HTTP DownloadReceipt，实际SHA/时间/URL/大小/MIME一致才给availability上界，其他返回null；默认2.1不变，不加许可。集中28PASS/13.51秒、Ruff绿、2个owned短根恢复不存在，收费调用0。详细限制与实际RED性质见phase6/asof_clock_diagnosis/PRODUCER_IMPLEMENTATION.md。a40eb065精确CI37886236535成功。
+
+
+## 2026-10-09：真实时钟、本地复用、OCR候选根因修复收尾
+
+RF 将 publication/availability 与实际 read/capture/verify 分开，保留未来信息拒绝；实际原三家公司注册原件通过公共 reader Oct9 实读、as-of Oct8 资格成立，各只开原件一次且0下载。旧4.1.0 runtime 重现五族 golden，4.1.1经济字段完全一致。不是伪造旧采集日期。
+
+FF v2 explicit reuse_only 在 source query 真 not_found 后调用 CWP local_prepare，再按原公共query取 pathless SourceRef；FF 不探物理目录/数据库。正常active命中仍两次公共调用，旧v1不变，fetch_if_missing/latest沿CWP ensure共享处理不重复prepare。初次 fixture 请求带不允许的 acquisition_limits，已修 fixture 后取得9FAIL/1PASS的真RED；最终204PASS/2SKIP+39subtests。实际三份SEC季度原件 DEI表单空格须由CWP通用提取处理；CN FY24未知日期/缺完整issuer alias诚实gap，不假造4PASS。
+
+OCR诊断确认经营范围/报告定义变化有价值而原 selector未识别；图片行未进入视觉句子完成，且不能套PDF点坐标。源 partial/漏首行保留，不强选纯数字/标题。独立单页真实 initial+replay 在写收据时因旧字段名失败，保留失败，不新增OCR补测来凑绿；最终以完整公共节点验收。
+
+repair 的职责是版本化重做、父账承接与可追溯失败；不是新的人工许可。真实同版本 repair 拒绝，live=false、protected不变；原失败DB/request/marker/receipt保持。已结算失败可在 durable SHA 对照和原始字节保护后只清理独占测试根，失败记录保留。

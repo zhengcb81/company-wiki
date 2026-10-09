@@ -2,7 +2,7 @@
 
 `run_acceptance.py` 是独立验收脚本。准备阶段只执行真实公开 CLI 的 `--help`、纯请求/既有回执契约验证与本地 SHA 校验，不导入或再次纯解析 22 页原件，不运行 OCR，不请求供应商。
 
-**真实 batch 尚未运行。** `PREPARED_NOT_RUN` 不能代表组合工程通过、产品通过或真实 M2 投资研究通过。共享 normalization composition 的代码接线由另一 owner 负责；脚本不编辑它，真实运行会暴露其实际表现。
+**真实 batch 已运行并失败。** 首次实际节点见 `runs/mocr-20261009T045902-933be853/acceptance.json`：select 在真实 OCR 后因空选择/不完整覆盖拒绝，三项任务 terminal，未进入模型 admission，新增费用为零。原失败和 origin 保留。selector 根因修复发布后用下述 `repair` 建立明确关联的新 generation；工程通过仍不能代替公司研究验收。
 
 ## 固定对象与调用链
 
@@ -53,13 +53,15 @@ resume 保留 origin run ID、AUTO、request 和 frozen config；已完成阶段
 
 本目录已有 live workflow 的 durable receipt 时，`run` 拒绝启动新的 run，要求使用 origin `resume`。`live_batch_executed` 标记是否进入 live workflow；具体 import/batch/read 是否真正执行及成功，以实际 `logs/*.command.json` 和原生 AUTO 为准。
 
-成功也默认保留 root 供复查。仅完整 PASS 且两个 origin run 当前都 terminal、无 active attempts、无 unknown/unsettled，且 durable report 已写入时可清理：
+成功也默认保留 root 供复查。完整 PASS 或已保留的 FAILED，所有已创建 origin run 当前都 terminal、无 active attempts、无 unknown/unsettled，且 durable report 已写入时可清理；未创建的reuse不会阻碍安全收尾，清理不会把失败改成PASS：
 
 ```powershell
 python -B docs/plans/cross-market-rf-e2e-2026-10-08/phase6/ocr_major_node/run_acceptance.py cleanup --owned-root "$env:TEMP/mOCR-实际目录"
 ```
 
 cleanup 验证绝对路径在系统 TEMP 的直接子目录、marker 精确绑定以及树内无 symlink/junction，再删除单个 owned root。失败不自动清理，不要求人工签收。preflight 无 AUTO/任务/推理，help 子进程均退出后仅清理自己的 TEMP。
+
+修复后的代码需要新generation时使用 `repair --owned-root <实际失败origin>`。它先实读最后一次live origin的原生账、冻结版本和原件；已terminal、unknown/unsettled为零且执行版本确实变化，才建立关联的新run。父run/request/jobs与失败报告不改，实际已花token/费用加入新累计baseline一次；不可绕过未知费用。仍恢复旧版本任务时用resume。`run`继续拒绝已有live工作流后的盲新建。当前真实失败为0新增费用，selector修复尚未发布时repair也应拒绝；不能用改run_id冒充版本升级。
 
 ## 证据与限制
 

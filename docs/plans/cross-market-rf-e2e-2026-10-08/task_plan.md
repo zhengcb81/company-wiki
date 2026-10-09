@@ -169,3 +169,12 @@ shared交付67b55d72正常合入master979792e0并push，15runtime/test交付SHA�
 - legacy local reconcile独占CWP隔离包；MAIN随后负责FF薄CLI组合，Dayu零修改。OCR候选归因包只读交接后实施通用选择/分组TDD；需恢复失败节点时保留旧terminal及费用账，合法新generation不得冒充旧attempt复活。
 
 当前Next Step：三个互不抢写的责任包集中实现/整合→真实OCR公共链与固定71→原三家/新三家实际研究四审→冻结NVDA复验及loop。来源准备文件和诊断报告是工程证据，尚无新六家公司研究PASS。
+
+
+## 2026-10-09：三项真实路径共因进入整合（此节为当前行动）
+
+CWP ea76998c 已推 master，精确 CI37888084960 成功。RF source-clock 4.1.1 实现 a001995a 已完成责任测试及真实三源晚读取，待最终交接后合 main/安装；FF a1e97fa 在独立支线上，204PASS/2SKIP+39subtests，待 CWP local reconcile 的四原件实际接口验收后合 main/定点安装。OCR selector 通用经营范围与视觉分组修复在独立 owner 收尾，真实单页试验的收据脚本错误保留，不能计真实节点 PASS。
+
+MAIN 新增 repair 仅为升级后的明确 generation：保留父失败/任务/账，实读 settled ledger，执行版本必须变化，已花费用沿累计 baseline 一次承接；9RED→9GREEN，真实同版本拒绝且无新 AUTO/模型。cleanup 比较 durable/origin receipt SHA，仅清理 owned TEMP，失败状态不变。旧22页 origin 保留，不能盲 resume terminal jobs。
+
+下一步：接收三责任包→正常并线、安装、push→升级后的真实22页 public/read/跨run零调用复用→固定71对照→原三家及四路实际审查→新三家及四路实际审查→恢复冻结NVDA及公司池loop。未完成主线之前不启动新随机样本，不增加小节点人签；原件保护与累计USD20/2M授权沿用。
