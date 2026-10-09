@@ -1,0 +1,27 @@
+{
+  "commit": "d11db2a2020ea329a4fd7dc75033e666c5799d14",
+  "normal_hooks": {
+    "ruff": "passed",
+    "mypy_contract_modules": "passed",
+    "config_doctor": "skipped; no matching paths",
+    "host_assumption_guard": "passed"
+  },
+  "paths": [
+    "src/company_wiki/automation/narrative_batch.py",
+    "src/company_wiki/automation/narrative_formats.py",
+    "src/company_wiki/automation/narrative_generation.py",
+    "src/company_wiki/automation/narrative_replay.py",
+    "src/company_wiki/automation/narrative_runtime.py",
+    "src/company_wiki/automation/narrative_select.py",
+    "src/company_wiki/automation/narrative_transport.py",
+    "src/company_wiki/automation/narrative_verify.py",
+    "src/company_wiki/automation/narrative_worker_factory.py",
+    "src/company_wiki/source_catalog/narrative_language.py",
+    "src/company_wiki/source_catalog/narrative_normalization.py",
+    "tests/integration/test_narrative_generation_candidates.py",
+    "tests/unit/test_narrative_format_pipeline.py",
+    "tests/unit/test_narrative_ocr_composition.py",
+    "tests/unit/test_narrative_versioned_resume.py"
+  ],
+  "bypass": false
+}

@@ -1,0 +1,133 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 51 items
+
+tests\unit\test_narrative_versioned_resume.py ..........FFFFFFFF........ [ 50%]
+FFFF....F.F.                                                             [ 74%]
+tests\unit\test_narrative_format_pipeline.py ..F....F.....               [100%]
+
+================================== FAILURES ===================================
+_ test_resume_observes_current_facts_without_rebinding_frozen_content[scoped-canonical_entity_id-ent-other] _
+tests\unit\test_narrative_versioned_resume.py:138: in test_resume_observes_current_facts_without_rebinding_frozen_content
+    binding, _versions, jobs = batch._resume_binding(
+src\company_wiki\automation\narrative_batch.py:264: in _resume_binding
+    raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
+E   company_wiki.automation.narrative_batch.BatchResumeError: BATCH_FROZEN_BINDING_INVALID
+_ test_resume_observes_current_facts_without_rebinding_frozen_content[scoped-market-HK] _
+tests\unit\test_narrative_versioned_resume.py:138: in test_resume_observes_current_facts_without_rebinding_frozen_content
+    binding, _versions, jobs = batch._resume_binding(
+src\company_wiki\automation\narrative_batch.py:264: in _resume_binding
+    raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
+E   company_wiki.automation.narrative_batch.BatchResumeError: BATCH_FROZEN_BINDING_INVALID
+_ test_resume_observes_current_facts_without_rebinding_frozen_content[scoped-security_id-OTHER] _
+tests\unit\test_narrative_versioned_resume.py:138: in test_resume_observes_current_facts_without_rebinding_frozen_content
+    binding, _versions, jobs = batch._resume_binding(
+src\company_wiki\automation\narrative_batch.py:264: in _resume_binding
+    raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
+E   company_wiki.automation.narrative_batch.BatchResumeError: BATCH_FROZEN_BINDING_INVALID
+_ test_resume_observes_current_facts_without_rebinding_frozen_content[scoped-fiscal_year-2025] _
+tests\unit\test_narrative_versioned_resume.py:138: in test_resume_observes_current_facts_without_rebinding_frozen_content
+    binding, _versions, jobs = batch._resume_binding(
+src\company_wiki\automation\narrative_batch.py:264: in _resume_binding
+    raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
+E   company_wiki.automation.narrative_batch.BatchResumeError: BATCH_FROZEN_BINDING_INVALID
+_ test_resume_observes_current_facts_without_rebinding_frozen_content[scoped-fiscal_period-Q2] _
+tests\unit\test_narrative_versioned_resume.py:138: in test_resume_observes_current_facts_without_rebinding_frozen_content
+    binding, _versions, jobs = batch._resume_binding(
+src\company_wiki\automation\narrative_batch.py:264: in _resume_binding
+    raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
+E   company_wiki.automation.narrative_batch.BatchResumeError: BATCH_FROZEN_BINDING_INVALID
+_ test_resume_observes_current_facts_without_rebinding_frozen_content[scoped-period_end-2026-06-30] _
+tests\unit\test_narrative_versioned_resume.py:138: in test_resume_observes_current_facts_without_rebinding_frozen_content
+    binding, _versions, jobs = batch._resume_binding(
+src\company_wiki\automation\narrative_batch.py:264: in _resume_binding
+    raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
+E   company_wiki.automation.narrative_batch.BatchResumeError: BATCH_FROZEN_BINDING_INVALID
+_ test_resume_observes_current_facts_without_rebinding_frozen_content[scoped-published_date-2026-05-03] _
+tests\unit\test_narrative_versioned_resume.py:138: in test_resume_observes_current_facts_without_rebinding_frozen_content
+    binding, _versions, jobs = batch._resume_binding(
+src\company_wiki\automation\narrative_batch.py:264: in _resume_binding
+    raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
+E   company_wiki.automation.narrative_batch.BatchResumeError: BATCH_FROZEN_BINDING_INVALID
+_ test_resume_observes_current_facts_without_rebinding_frozen_content[scoped-form_type-10-K] _
+tests\unit\test_narrative_versioned_resume.py:138: in test_resume_observes_current_facts_without_rebinding_frozen_content
+    binding, _versions, jobs = batch._resume_binding(
+src\company_wiki\automation\narrative_batch.py:264: in _resume_binding
+    raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
+E   company_wiki.automation.narrative_batch.BatchResumeError: BATCH_FROZEN_BINDING_INVALID
+__ test_resume_rejects_changed_frozen_execution_membership[scoped-job_hash] ___
+tests\unit\test_narrative_versioned_resume.py:171: in test_resume_rejects_changed_frozen_execution_membership
+    with pytest.raises(batch.BatchResumeError, match="BATCH_FROZEN_MEMBERSHIP_INVALID"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'BATCH_FROZEN_MEMBERSHIP_INVALID'
+E     Actual message: 'BATCH_FROZEN_BINDING_INVALID'
+_ test_resume_rejects_changed_frozen_execution_membership[scoped-job_version] _
+tests\unit\test_narrative_versioned_resume.py:171: in test_resume_rejects_changed_frozen_execution_membership
+    with pytest.raises(batch.BatchResumeError, match="BATCH_FROZEN_MEMBERSHIP_INVALID"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'BATCH_FROZEN_MEMBERSHIP_INVALID'
+E     Actual message: 'BATCH_FROZEN_BINDING_INVALID'
+_ test_resume_rejects_changed_frozen_execution_membership[scoped-membership_hash] _
+tests\unit\test_narrative_versioned_resume.py:171: in test_resume_rejects_changed_frozen_execution_membership
+    with pytest.raises(batch.BatchResumeError, match="BATCH_FROZEN_MEMBERSHIP_INVALID"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'BATCH_FROZEN_MEMBERSHIP_INVALID'
+E     Actual message: 'BATCH_FROZEN_BINDING_INVALID'
+_ test_resume_rejects_changed_frozen_execution_membership[scoped-missing_member] _
+tests\unit\test_narrative_versioned_resume.py:171: in test_resume_rejects_changed_frozen_execution_membership
+    with pytest.raises(batch.BatchResumeError, match="BATCH_FROZEN_MEMBERSHIP_INVALID"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'BATCH_FROZEN_MEMBERSHIP_INVALID'
+E     Actual message: 'BATCH_FROZEN_BINDING_INVALID'
+_ test_resume_preserves_original_events_and_usage_for_both_binding_versions[scoped] _
+tests\unit\test_narrative_versioned_resume.py:182: in test_resume_preserves_original_events_and_usage_for_both_binding_versions
+    binding, _versions, jobs = batch._resume_binding(
+src\company_wiki\automation\narrative_batch.py:264: in _resume_binding
+    raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
+E   company_wiki.automation.narrative_batch.BatchResumeError: BATCH_FROZEN_BINDING_INVALID
+___ test_unrelated_root_does_not_gate_either_frozen_binding_version[scoped] ___
+tests\unit\test_narrative_versioned_resume.py:197: in test_unrelated_root_does_not_gate_either_frozen_binding_version
+    binding, _versions, _jobs = batch._resume_binding(
+src\company_wiki\automation\narrative_batch.py:264: in _resume_binding
+    raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
+E   company_wiki.automation.narrative_batch.BatchResumeError: BATCH_FROZEN_BINDING_INVALID
+_ test_formats_use_select_summary_and_verified_publication[application/vnd.openxmlformats-officedocument.presentationml.presentation] _
+tests\unit\test_narrative_format_pipeline.py:64: in test_formats_use_select_summary_and_verified_publication
+    assert selected.parser.version == PARSER_VERSION
+E   AssertionError: assert '1.1.0' == '1.0.0'
+E     
+E     - 1.0.0
+E     + 1.1.0
+_____ test_all_html_spans_replay_with_one_parse_and_reject_forged_locator _____
+tests\unit\test_narrative_format_pipeline.py:111: in test_all_html_spans_replay_with_one_parse_and_reject_forged_locator
+    normalizer = replay.normalize_document
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_replay' has no attribute 'normalize_document'
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_versioned_resume.py::test_resume_observes_current_facts_without_rebinding_frozen_content[scoped-canonical_entity_id-ent-other]
+FAILED tests/unit/test_narrative_versioned_resume.py::test_resume_observes_current_facts_without_rebinding_frozen_content[scoped-market-HK]
+FAILED tests/unit/test_narrative_versioned_resume.py::test_resume_observes_current_facts_without_rebinding_frozen_content[scoped-security_id-OTHER]
+FAILED tests/unit/test_narrative_versioned_resume.py::test_resume_observes_current_facts_without_rebinding_frozen_content[scoped-fiscal_year-2025]
+FAILED tests/unit/test_narrative_versioned_resume.py::test_resume_observes_current_facts_without_rebinding_frozen_content[scoped-fiscal_period-Q2]
+FAILED tests/unit/test_narrative_versioned_resume.py::test_resume_observes_current_facts_without_rebinding_frozen_content[scoped-period_end-2026-06-30]
+FAILED tests/unit/test_narrative_versioned_resume.py::test_resume_observes_current_facts_without_rebinding_frozen_content[scoped-published_date-2026-05-03]
+FAILED tests/unit/test_narrative_versioned_resume.py::test_resume_observes_current_facts_without_rebinding_frozen_content[scoped-form_type-10-K]
+FAILED tests/unit/test_narrative_versioned_resume.py::test_resume_rejects_changed_frozen_execution_membership[scoped-job_hash]
+FAILED tests/unit/test_narrative_versioned_resume.py::test_resume_rejects_changed_frozen_execution_membership[scoped-job_version]
+FAILED tests/unit/test_narrative_versioned_resume.py::test_resume_rejects_changed_frozen_execution_membership[scoped-membership_hash]
+FAILED tests/unit/test_narrative_versioned_resume.py::test_resume_rejects_changed_frozen_execution_membership[scoped-missing_member]
+FAILED tests/unit/test_narrative_versioned_resume.py::test_resume_preserves_original_events_and_usage_for_both_binding_versions[scoped]
+FAILED tests/unit/test_narrative_versioned_resume.py::test_unrelated_root_does_not_gate_either_frozen_binding_version[scoped]
+FAILED tests/unit/test_narrative_format_pipeline.py::test_formats_use_select_summary_and_verified_publication[application/vnd.openxmlformats-officedocument.presentationml.presentation]
+FAILED tests/unit/test_narrative_format_pipeline.py::test_all_html_spans_replay_with_one_parse_and_reject_forged_locator
+======================== 16 failed, 35 passed in 7.13s ========================

@@ -1,0 +1,731 @@
+F401 [*] `dataclasses.replace` imported but unused
+ --> src\company_wiki\automation\narrative_select.py:6:36
+  |
+5 | from collections.abc import Sequence
+6 | from dataclasses import dataclass, replace
+  |                                    ^^^^^^^
+7 | from typing import Any, Protocol
+  |
+help: Remove unused import: `dataclasses.replace`
+
+E702 Multiple statements on one line (semicolon)
+  --> src\company_wiki\source_catalog\narrative_normalization.py:24:27
+   |
+22 |             for k,v in parser_versions.items())):
+23 |             raise ValueError("NARRATIVE_NORMALIZATION_OPTIONS_INVALID")
+24 |         self.config=config;self.deadline=deadline;self.parser_versions=dict(parser_versions or {})
+   |                           ^
+25 |         self._adapter_factory=adapter_factory or dn.LocalOCRAdapter
+26 |         self._adapter=None;self._validated=False
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> src\company_wiki\source_catalog\narrative_normalization.py:24:50
+   |
+22 |             for k,v in parser_versions.items())):
+23 |             raise ValueError("NARRATIVE_NORMALIZATION_OPTIONS_INVALID")
+24 |         self.config=config;self.deadline=deadline;self.parser_versions=dict(parser_versions or {})
+   |                                                  ^
+25 |         self._adapter_factory=adapter_factory or dn.LocalOCRAdapter
+26 |         self._adapter=None;self._validated=False
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> src\company_wiki\source_catalog\narrative_normalization.py:26:27
+   |
+24 |         self.config=config;self.deadline=deadline;self.parser_versions=dict(parser_versions or {})
+25 |         self._adapter_factory=adapter_factory or dn.LocalOCRAdapter
+26 |         self._adapter=None;self._validated=False
+   |                           ^
+27 |
+28 |     @classmethod
+   |
+
+E701 Multiple statements on one line (colon)
+  --> src\company_wiki\source_catalog\narrative_normalization.py:35:44
+   |
+33 |     def from_project(cls,project_root,*,enabled=True,**kwargs):
+34 |         path=Path(project_root)/"config/local_ocr.json"
+35 |         if not enabled or not path.exists():return cls(**kwargs)
+   |                                            ^
+36 |         with path.open("rb") as stream:raw=stream.read(65537)
+37 |         if len(raw)>65536:raise ValueError("OCR_CONFIG_TOO_LARGE")
+   |
+
+E701 Multiple statements on one line (colon)
+  --> src\company_wiki\source_catalog\narrative_normalization.py:36:39
+   |
+34 |         path=Path(project_root)/"config/local_ocr.json"
+35 |         if not enabled or not path.exists():return cls(**kwargs)
+36 |         with path.open("rb") as stream:raw=stream.read(65537)
+   |                                       ^
+37 |         if len(raw)>65536:raise ValueError("OCR_CONFIG_TOO_LARGE")
+38 |         return cls.from_snapshot(json.loads(raw.decode("utf-8")),**kwargs)
+   |
+
+E701 Multiple statements on one line (colon)
+  --> src\company_wiki\source_catalog\narrative_normalization.py:37:26
+   |
+35 |         if not enabled or not path.exists():return cls(**kwargs)
+36 |         with path.open("rb") as stream:raw=stream.read(65537)
+37 |         if len(raw)>65536:raise ValueError("OCR_CONFIG_TOO_LARGE")
+   |                          ^
+38 |         return cls.from_snapshot(json.loads(raw.decode("utf-8")),**kwargs)
+   |
+
+E701 Multiple statements on one line (colon)
+  --> src\company_wiki\source_catalog\narrative_normalization.py:50:31
+   |
+48 |     @property
+49 |     def ocr_adapter(self):
+50 |         if self.config is None:return None
+   |                               ^
+51 |         if self._adapter is None:self._adapter=self._adapter_factory(self.config)
+52 |         return self._adapter
+   |
+
+E701 Multiple statements on one line (colon)
+  --> src\company_wiki\source_catalog\narrative_normalization.py:51:33
+   |
+49 |     def ocr_adapter(self):
+50 |         if self.config is None:return None
+51 |         if self._adapter is None:self._adapter=self._adapter_factory(self.config)
+   |                                 ^
+52 |         return self._adapter
+   |
+
+E701 Multiple statements on one line (colon)
+  --> src\company_wiki\source_catalog\narrative_normalization.py:56:27
+   |
+54 |     def _prepare_ocr(self):
+55 |         adapter=self.ocr_adapter
+56 |         if adapter is None:raise dn.LocalOCRError("OCR_ADAPTER_REQUIRED")
+   |                           ^
+57 |         if not self._validated:
+58 |             adapter.validate_environment();self._validated=True
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> src\company_wiki\source_catalog\narrative_normalization.py:58:43
+   |
+56 |         if adapter is None:raise dn.LocalOCRError("OCR_ADAPTER_REQUIRED")
+57 |         if not self._validated:
+58 |             adapter.validate_environment();self._validated=True
+   |                                           ^
+59 |         return adapter
+   |
+
+E701 Multiple statements on one line (colon)
+  --> src\company_wiki\source_catalog\narrative_normalization.py:67:43
+   |
+65 |             raise ValueError("unsupported normalization parser")
+66 |         use_ocr=pptx and (version=="2.0.0" or version is None and self.config is not None)
+67 |         if use_ocr and self.config is None:raise dn.LocalOCRError("OCR_ADAPTER_REQUIRED")
+   |                                           ^
+68 |         identity=dn.normalization_identity(mime_type,ocr=self.config if use_ocr else None)
+69 |         if version is not None:identity["parser_version"]=version
+   |
+
+E701 Multiple statements on one line (colon)
+  --> src\company_wiki\source_catalog\narrative_normalization.py:69:31
+   |
+67 |         if use_ocr and self.config is None:raise dn.LocalOCRError("OCR_ADAPTER_REQUIRED")
+68 |         identity=dn.normalization_identity(mime_type,ocr=self.config if use_ocr else None)
+69 |         if version is not None:identity["parser_version"]=version
+   |                               ^
+70 |         return identity
+   |
+
+E701 Multiple statements on one line (colon)
+  --> src\company_wiki\source_catalog\narrative_normalization.py:89:56
+   |
+87 |         if not spans:
+88 |             document=self.normalize(data,source_id=source_id,source_sha256=source_sha256,mime_type=mime_type,parser_version=version)
+89 |             if not document.structure.coverage_complete:raise dn.ReplayError("empty selection requires complete source coverage")
+   |                                                        ^
+90 |             return 0
+91 |         adapter=self._prepare_ocr() if version=="2.0.0" else None
+   |
+
+E702 Multiple statements on one line (semicolon)
+   --> src\company_wiki\source_catalog\narrative_normalization.py:98:48
+    |
+ 96 |     def sample_text(self,data,mime_type,*,max_images=3):
+ 97 |         """Use native text first, then at most three verified unique image samples."""
+ 98 |         digest=hashlib.sha256(data).hexdigest();source_id="urn:company-wiki:source:sha256:"+digest
+    |                                                ^
+ 99 |         document=dn.normalize_document(data,source_id=source_id,source_sha256=digest,mime_type=mime_type,
+100 |                                        limits=dn.NormalizationLimits(deadline=self.deadline))
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> src\company_wiki\source_catalog\narrative_normalization.py:104:49
+    |
+102 |         from .narrative_language import detect_narrative_text_language,NarrativeLanguageError
+103 |         try:
+104 |             detect_narrative_text_language(text);return text
+    |                                                 ^
+105 |         except NarrativeLanguageError as exc:
+106 |             if exc.code!="SOURCE_LANGUAGE_UNDETERMINED":raise
+    |
+
+E701 Multiple statements on one line (colon)
+   --> src\company_wiki\source_catalog\narrative_normalization.py:106:56
+    |
+104 |             detect_narrative_text_language(text);return text
+105 |         except NarrativeLanguageError as exc:
+106 |             if exc.code!="SOURCE_LANGUAGE_UNDETERMINED":raise
+    |                                                        ^
+107 |         if self.config is None:return text
+108 |         adapter=self._prepare_ocr();seen=set();total_pixels=0
+    |
+
+E701 Multiple statements on one line (colon)
+   --> src\company_wiki\source_catalog\narrative_normalization.py:107:31
+    |
+105 |         except NarrativeLanguageError as exc:
+106 |             if exc.code!="SOURCE_LANGUAGE_UNDETERMINED":raise
+107 |         if self.config is None:return text
+    |                               ^
+108 |         adapter=self._prepare_ocr();seen=set();total_pixels=0
+109 |         limits=dn.OCRLimits(max_images=max_images,deadline=self.deadline)
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> src\company_wiki\source_catalog\narrative_normalization.py:108:36
+    |
+106 |             if exc.code!="SOURCE_LANGUAGE_UNDETERMINED":raise
+107 |         if self.config is None:return text
+108 |         adapter=self._prepare_ocr();seen=set();total_pixels=0
+    |                                    ^
+109 |         limits=dn.OCRLimits(max_images=max_images,deadline=self.deadline)
+110 |         from company_wiki.document_normalization.local_ocr import image_dimensions
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> src\company_wiki\source_catalog\narrative_normalization.py:108:47
+    |
+106 |             if exc.code!="SOURCE_LANGUAGE_UNDETERMINED":raise
+107 |         if self.config is None:return text
+108 |         adapter=self._prepare_ocr();seen=set();total_pixels=0
+    |                                               ^
+109 |         limits=dn.OCRLimits(max_images=max_images,deadline=self.deadline)
+110 |         from company_wiki.document_normalization.local_ocr import image_dimensions
+    |
+
+E701 Multiple statements on one line (colon)
+   --> src\company_wiki\source_catalog\narrative_normalization.py:112:103
+    |
+110 |         from company_wiki.document_normalization.local_ocr import image_dimensions
+111 |         for asset in document.opaque_assets:
+112 |             if asset.asset_kind!="image" or asset.original_bytes is None or asset.media_sha256 in seen:continue
+    |                                                                                                       ^
+113 |             if len(seen)>=max_images:break
+114 |             seen.add(asset.media_sha256)
+    |
+
+E701 Multiple statements on one line (colon)
+   --> src\company_wiki\source_catalog\narrative_normalization.py:113:37
+    |
+111 |         for asset in document.opaque_assets:
+112 |             if asset.asset_kind!="image" or asset.original_bytes is None or asset.media_sha256 in seen:continue
+113 |             if len(seen)>=max_images:break
+    |                                     ^
+114 |             seen.add(asset.media_sha256)
+115 |             if hashlib.sha256(asset.original_bytes).hexdigest()!=asset.media_sha256:raise dn.LocalOCRError("OCR_MEDIA_SHA_MISMATCH")
+    |
+
+E701 Multiple statements on one line (colon)
+   --> src\company_wiki\source_catalog\narrative_normalization.py:115:84
+    |
+113 |             if len(seen)>=max_images:break
+114 |             seen.add(asset.media_sha256)
+115 |             if hashlib.sha256(asset.original_bytes).hexdigest()!=asset.media_sha256:raise dn.LocalOCRError("OCR_MEDIA_SHA_MISMATCH")
+    |                                                                                    ^
+116 |             width,height=image_dimensions(asset.original_bytes,limits);total_pixels+=width*height
+117 |             limits.require_within("max_total_pixels",total_pixels)
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> src\company_wiki\source_catalog\narrative_normalization.py:116:71
+    |
+114 |             seen.add(asset.media_sha256)
+115 |             if hashlib.sha256(asset.original_bytes).hexdigest()!=asset.media_sha256:raise dn.LocalOCRError("OCR_MEDIA_SHA_MISMATCH")
+116 |             width,height=image_dimensions(asset.original_bytes,limits);total_pixels+=width*height
+    |                                                                       ^
+117 |             limits.require_within("max_total_pixels",total_pixels)
+118 |             try:
+    |
+
+E701 Multiple statements on one line (colon)
+   --> src\company_wiki\source_catalog\narrative_normalization.py:123:33
+    |
+121 |                 continue
+122 |             text+="\n"+"\n".join(line.text for line in result.lines if line.confidence>=self.config.low_confidence_threshold)
+123 |             if len(text)>=100000:break
+    |                                 ^
+124 |         return text[:100000]
+    |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\unit\test_narrative_ocr_composition.py:38:30
+   |
+36 |     models={}
+37 |     for name in ("det","cls","rec"):
+38 |         p=root/(name+".onnx");p.write_bytes(("owned tiny model "+name).encode())
+   |                              ^
+39 |         models[name]={"path":str(p.resolve()),"sha256":hashlib.sha256(p.read_bytes()).hexdigest()}
+40 |     return {"schema_version":"cwp-local-ocr-config/1","models":models,"engine_version":"fixture-engine/1",
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\unit\test_narrative_ocr_composition.py:47:27
+   |
+45 | class FakeOCR:
+46 |     def __init__(self,config,*,confidence=.95,blank=False):
+47 |         self.config=config;self.identity_manifest=config.identity_manifest;self.fingerprint=config.fingerprint
+   |                           ^
+48 |         self.calls=0;self.validations=0;self.confidence=confidence;self.blank=blank
+49 |     def validate_environment(self):
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\unit\test_narrative_ocr_composition.py:47:75
+   |
+45 | class FakeOCR:
+46 |     def __init__(self,config,*,confidence=.95,blank=False):
+47 |         self.config=config;self.identity_manifest=config.identity_manifest;self.fingerprint=config.fingerprint
+   |                                                                           ^
+48 |         self.calls=0;self.validations=0;self.confidence=confidence;self.blank=blank
+49 |     def validate_environment(self):
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\unit\test_narrative_ocr_composition.py:48:21
+   |
+46 |     def __init__(self,config,*,confidence=.95,blank=False):
+47 |         self.config=config;self.identity_manifest=config.identity_manifest;self.fingerprint=config.fingerprint
+48 |         self.calls=0;self.validations=0;self.confidence=confidence;self.blank=blank
+   |                     ^
+49 |     def validate_environment(self):
+50 |         self.validations+=1
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\unit\test_narrative_ocr_composition.py:48:40
+   |
+46 |     def __init__(self,config,*,confidence=.95,blank=False):
+47 |         self.config=config;self.identity_manifest=config.identity_manifest;self.fingerprint=config.fingerprint
+48 |         self.calls=0;self.validations=0;self.confidence=confidence;self.blank=blank
+   |                                        ^
+49 |     def validate_environment(self):
+50 |         self.validations+=1
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\unit\test_narrative_ocr_composition.py:48:67
+   |
+46 |     def __init__(self,config,*,confidence=.95,blank=False):
+47 |         self.config=config;self.identity_manifest=config.identity_manifest;self.fingerprint=config.fingerprint
+48 |         self.calls=0;self.validations=0;self.confidence=confidence;self.blank=blank
+   |                                                                   ^
+49 |     def validate_environment(self):
+50 |         self.validations+=1
+   |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_narrative_ocr_composition.py:51:40
+   |
+49 |     def validate_environment(self):
+50 |         self.validations+=1
+51 |         for name in ("det","cls","rec"):getattr(self.config,name).verify()
+   |                                        ^
+52 |     def transcribe(self,data,*,limits):
+53 |         limits.check_deadline();self.calls+=1
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\unit\test_narrative_ocr_composition.py:53:32
+   |
+51 |         for name in ("det","cls","rec"):getattr(self.config,name).verify()
+52 |     def transcribe(self,data,*,limits):
+53 |         limits.check_deadline();self.calls+=1
+   |                                ^
+54 |         return dn.ImageOCRResult(1,1,() if self.blank else (dn.OCRLine(
+55 |             "We launched a new product and expanded overseas production capacity for customers.",
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\unit\test_narrative_ocr_composition.py:60:21
+   |
+59 | def port(root,**adapter_options):
+60 |     module=_module();instances=[]
+   |                     ^
+61 |     def factory(value):
+62 |         adapter=FakeOCR(value,**adapter_options);instances.append(adapter);return adapter
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\unit\test_narrative_ocr_composition.py:62:49
+   |
+60 |     module=_module();instances=[]
+61 |     def factory(value):
+62 |         adapter=FakeOCR(value,**adapter_options);instances.append(adapter);return adapter
+   |                                                 ^
+63 |     return module.NarrativeNormalization(dn.LocalOCRConfig.from_dict(config(root)),adapter_factory=factory),instances
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\unit\test_narrative_ocr_composition.py:62:75
+   |
+60 |     module=_module();instances=[]
+61 |     def factory(value):
+62 |         adapter=FakeOCR(value,**adapter_options);instances.append(adapter);return adapter
+   |                                                                           ^
+63 |     return module.NarrativeNormalization(dn.LocalOCRConfig.from_dict(config(root)),adapter_factory=factory),instances
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\unit\test_narrative_ocr_composition.py:78:23
+   |
+76 | def test_generation_uses_actual_normalization_identity_and_overrides_parser_component():
+77 |     from unit.test_narrative_batch import _request, Reader, _module as batch
+78 |     request=_request();event=batch().build_batch_events(request,Reader(),now="2026-10-09T00:00:00Z").events[0]
+   |                       ^
+79 |     wire=json.loads(event.payload_json);wire["source_ref"]["mime_type"]=MIME;wire["source_metadata"]["source_class"]="filing"
+80 |     payload=SourceRevisionEventPayload.from_dict(wire)
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\unit\test_narrative_ocr_composition.py:79:40
+   |
+77 |     from unit.test_narrative_batch import _request, Reader, _module as batch
+78 |     request=_request();event=batch().build_batch_events(request,Reader(),now="2026-10-09T00:00:00Z").events[0]
+79 |     wire=json.loads(event.payload_json);wire["source_ref"]["mime_type"]=MIME;wire["source_metadata"]["source_class"]="filing"
+   |                                        ^
+80 |     payload=SourceRevisionEventPayload.from_dict(wire)
+81 |     identity={"parser_name":dn.PARSER_NAME,"parser_version":"2.0.0","format":"pptx","ocr_fingerprint":"b"*64}
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\unit\test_narrative_ocr_composition.py:79:77
+   |
+77 |     from unit.test_narrative_batch import _request, Reader, _module as batch
+78 |     request=_request();event=batch().build_batch_events(request,Reader(),now="2026-10-09T00:00:00Z").events[0]
+79 |     wire=json.loads(event.payload_json);wire["source_ref"]["mime_type"]=MIME;wire["source_metadata"]["source_class"]="filing"
+   |                                                                             ^
+80 |     payload=SourceRevisionEventPayload.from_dict(wire)
+81 |     identity={"parser_name":dn.PARSER_NAME,"parser_version":"2.0.0","format":"pptx","ocr_fingerprint":"b"*64}
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\unit\test_narrative_ocr_composition.py:88:21
+   |
+87 | def test_snapshot_is_frozen_pathless_causal_and_each_port_owns_its_adapter(tmp_path):
+88 |     module=_module();value,adapters=port(tmp_path/"models")
+   |                     ^
+89 |     identity=value.identity(MIME);snapshot=value.snapshot()
+90 |     assert adapters==[] and identity["parser_version"]=="2.0.0"
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\unit\test_narrative_ocr_composition.py:89:34
+   |
+87 | def test_snapshot_is_frozen_pathless_causal_and_each_port_owns_its_adapter(tmp_path):
+88 |     module=_module();value,adapters=port(tmp_path/"models")
+89 |     identity=value.identity(MIME);snapshot=value.snapshot()
+   |                                  ^
+90 |     assert adapters==[] and identity["parser_version"]=="2.0.0"
+91 |     assert str(tmp_path) not in json.dumps(identity)
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\unit\test_narrative_ocr_composition.py:92:28
+   |
+90 |     assert adapters==[] and identity["parser_version"]=="2.0.0"
+91 |     assert str(tmp_path) not in json.dumps(identity)
+92 |     root=tmp_path/"project";(root/"config").mkdir(parents=True)
+   |                            ^
+93 |     (root/"config/local_ocr.json").write_text(json.dumps(snapshot),encoding="utf-8")
+94 |     frozen=module.NarrativeNormalization.from_project(root,enabled=True,adapter_factory=FakeOCR)
+   |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_narrative_ocr_composition.py:107:32
+    |
+105 |     module=_module()
+106 |     assert module.NarrativeNormalization.from_project(tmp_path,enabled=True).identity(MIME)["parser_version"]=="1.1.0"
+107 |     (tmp_path/"config").mkdir();(tmp_path/"config/local_ocr.json").write_text("invalid",encoding="utf-8")
+    |                                ^
+108 |     pure=module.NarrativeNormalization.from_project(tmp_path,enabled=False)
+109 |     assert pure.identity("text/html")==dn.normalization_identity("text/html")
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_narrative_ocr_composition.py:133:24
+    |
+131 | def test_historical_pure_replay_ignores_current_ocr_and_preserves_en(tmp_path,version):
+132 |     value,adapters=port(tmp_path/"models")
+133 |     data=fixture_deck();digest=hashlib.sha256(data).hexdigest()
+    |                        ^
+134 |     document=dn.normalize_document(data,source_id="urn:company-wiki:source:sha256:"+digest,source_sha256=digest,mime_type=MIME,parser…
+135 |     span=replace(document.units[0],language="en").to_evidence_span(topics=["business_progress"],selection_reasons=["source_text"])
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_narrative_ocr_composition.py:154:59
+    |
+152 |     deck=Presentation()
+153 |     for index in range(images):
+154 |         slide=deck.slides.add_slide(deck.slide_layouts[6]);pixels=BytesIO()
+    |                                                           ^
+155 |         Image.new("RGB",(1,1),(index*30,0,0)).save(pixels,format="PNG")
+156 |         slide.shapes.add_picture(BytesIO(pixels.getvalue()),0,0)
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_narrative_ocr_composition.py:157:21
+    |
+155 |         Image.new("RGB",(1,1),(index*30,0,0)).save(pixels,format="PNG")
+156 |         slide.shapes.add_picture(BytesIO(pixels.getvalue()),0,0)
+157 |     output=BytesIO();deck.save(output);return output.getvalue()
+    |                     ^
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_narrative_ocr_composition.py:157:39
+    |
+155 |         Image.new("RGB",(1,1),(index*30,0,0)).save(pixels,format="PNG")
+156 |         slide.shapes.add_picture(BytesIO(pixels.getvalue()),0,0)
+157 |     output=BytesIO();deck.save(output);return output.getvalue()
+    |                                       ^
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_narrative_ocr_composition.py:181:23
+    |
+179 | def test_changed_config_fingerprint_cannot_replay_old_selected_media(tmp_path):
+180 |     value,adapters=port(tmp_path/"models")
+181 |     data=image_deck(1);document=normalize(value,data)
+    |                       ^
+182 |     spans=[replace(unit,language="en").to_evidence_span(topics=["business_progress"],selection_reasons=["original_text"])
+183 |            for unit in document.units]
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_narrative_ocr_composition.py:192:35
+    |
+190 | @pytest.mark.parametrize("field,value",[("low_confidence_threshold",2),("engine_version",""),("base_config_sha256","bad")])
+191 | def test_invalid_explicit_config_is_refused_without_inference(tmp_path,field,value):
+192 |     wire=config(tmp_path/"models");wire[field]=value
+    |                                   ^
+193 |     with pytest.raises(ValueError):_module().NarrativeNormalization.from_snapshot(wire)
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_narrative_ocr_composition.py:193:35
+    |
+191 | def test_invalid_explicit_config_is_refused_without_inference(tmp_path,field,value):
+192 |     wire=config(tmp_path/"models");wire[field]=value
+193 |     with pytest.raises(ValueError):_module().NarrativeNormalization.from_snapshot(wire)
+    |                                   ^
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_narrative_ocr_composition.py:205:43
+    |
+203 |     from company_wiki.source_catalog.source_reader import SourceRef
+204 |     from company_wiki.automation.models import canonical_json
+205 |     value,adapters=port(tmp_path/"models");data=image_deck(1)
+    |                                           ^
+206 |     wire=_payload(data,title="Company business update",document_kind="investor_relations",language="en",mime_type=MIME)
+207 |     selected_raw=NarrativeSelectHandler(reader=FakeReader(wire,data),normalization=value)(_context(wire,lambda:None))
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_narrative_ocr_composition.py:208:66
+    |
+206 |     wire=_payload(data,title="Company business update",document_kind="investor_relations",language="en",mime_type=MIME)
+207 |     selected_raw=NarrativeSelectHandler(reader=FakeReader(wire,data),normalization=value)(_context(wire,lambda:None))
+208 |     selected=NarrativeSelectResult.from_dict(selected_raw.result);summary=verifying._summary(selected)
+    |                                                                  ^
+209 |     source_reader=verifying.FakeReader(selected,data)
+210 |     verified=NarrativeVerifyHandler(reader=source_reader,normalization=value)(verifying._context(selected,summary))
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_narrative_ocr_composition.py:213:50
+    |
+211 |     assert verified.outcome is HandlerOutcome.SUCCEEDED,verified.error
+212 |     bundle=NarrativeBundle.from_dict(verified.result)
+213 |     raw=canonical_json(bundle.to_dict()).encode();digest=hashlib.sha256(raw).hexdigest()
+    |                                                  ^
+214 |     ref=SourceRef(**bundle.source_ref.to_dict())
+215 |     manifest={**asdict(ref),**source_reader.metadata,"canonical_entity_id":None,"market":"US","security_id":"ACME",
+    |
+
+F811 Redefinition of unused `run_state` from line 246
+   --> tests\unit\test_narrative_ocr_composition.py:249:77
+    |
+249 | def test_worker_factory_uses_frozen_snapshot_without_reading_current_config(run_state,tmp_path,monkeypatch):
+    |                                                                             ^^^^^^^^^ `run_state` redefined here
+250 |     from unit import test_narrative_worker_factory as factory_fixture
+251 |     factory=factory_fixture._factory();module=_module();captured=[]
+    |
+   ::: tests\unit\test_narrative_ocr_composition.py:246:48
+    |
+245 | # The production factory test's fixture supplies a real AUTO/catalog scope.
+246 | from unit.test_narrative_worker_factory import run_state  # noqa: E402,F401
+    |                                                --------- previous definition of `run_state` here
+    |
+help: Remove definition: `run_state`
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_narrative_ocr_composition.py:251:39
+    |
+249 | def test_worker_factory_uses_frozen_snapshot_without_reading_current_config(run_state,tmp_path,monkeypatch):
+250 |     from unit import test_narrative_worker_factory as factory_fixture
+251 |     factory=factory_fixture._factory();module=_module();captured=[]
+    |                                       ^
+252 |     wire=config(tmp_path/"models");options={**run_state.options,"normalization_config":wire}
+253 |     local=run_state.root/"config/local_ocr.json";local.parent.mkdir(exist_ok=True);local.write_text("not the snapshot",encoding="utf-…
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_narrative_ocr_composition.py:251:56
+    |
+249 | def test_worker_factory_uses_frozen_snapshot_without_reading_current_config(run_state,tmp_path,monkeypatch):
+250 |     from unit import test_narrative_worker_factory as factory_fixture
+251 |     factory=factory_fixture._factory();module=_module();captured=[]
+    |                                                        ^
+252 |     wire=config(tmp_path/"models");options={**run_state.options,"normalization_config":wire}
+253 |     local=run_state.root/"config/local_ocr.json";local.parent.mkdir(exist_ok=True);local.write_text("not the snapshot",encoding="utf-…
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_narrative_ocr_composition.py:252:35
+    |
+250 |     from unit import test_narrative_worker_factory as factory_fixture
+251 |     factory=factory_fixture._factory();module=_module();captured=[]
+252 |     wire=config(tmp_path/"models");options={**run_state.options,"normalization_config":wire}
+    |                                   ^
+253 |     local=run_state.root/"config/local_ocr.json";local.parent.mkdir(exist_ok=True);local.write_text("not the snapshot",encoding="utf-…
+254 |     monkeypatch.setattr(module.NarrativeNormalization,"from_project",classmethod(lambda cls,*a,**k:pytest.fail("child reread deployme…
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_narrative_ocr_composition.py:253:49
+    |
+251 |     factory=factory_fixture._factory();module=_module();captured=[]
+252 |     wire=config(tmp_path/"models");options={**run_state.options,"normalization_config":wire}
+253 |     local=run_state.root/"config/local_ocr.json";local.parent.mkdir(exist_ok=True);local.write_text("not the snapshot",encoding="utf-…
+    |                                                 ^
+254 |     monkeypatch.setattr(module.NarrativeNormalization,"from_project",classmethod(lambda cls,*a,**k:pytest.fail("child reread deployme…
+255 |     monkeypatch.setattr(dn,"LocalOCRAdapter",FakeOCR)
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_narrative_ocr_composition.py:253:83
+    |
+251 |     factory=factory_fixture._factory();module=_module();captured=[]
+252 |     wire=config(tmp_path/"models");options={**run_state.options,"normalization_config":wire}
+253 |     local=run_state.root/"config/local_ocr.json";local.parent.mkdir(exist_ok=True);local.write_text("not the snapshot",encoding="utf-…
+    |                                                                                   ^
+254 |     monkeypatch.setattr(module.NarrativeNormalization,"from_project",classmethod(lambda cls,*a,**k:pytest.fail("child reread deployme…
+255 |     monkeypatch.setattr(dn,"LocalOCRAdapter",FakeOCR)
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_narrative_ocr_composition.py:258:52
+    |
+256 |     register=factory.register_narrative_handlers
+257 |     def capture(registrar,dependencies):
+258 |         captured.append(dependencies.normalization);return register(registrar,dependencies)
+    |                                                    ^
+259 |     monkeypatch.setattr(factory,"register_narrative_handlers",capture)
+260 |     for _ in range(2):factory.create_runtime(factory_fixture._spec(run_state,options=options))
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_narrative_ocr_composition.py:260:22
+    |
+258 |         captured.append(dependencies.normalization);return register(registrar,dependencies)
+259 |     monkeypatch.setattr(factory,"register_narrative_handlers",capture)
+260 |     for _ in range(2):factory.create_runtime(factory_fixture._spec(run_state,options=options))
+    |                      ^
+261 |     assert captured[0].snapshot()==captured[1].snapshot()==wire
+262 |     assert captured[0] is not captured[1] and captured[0].ocr_adapter is not captured[1].ocr_adapter
+    |
+
+F811 Redefinition of unused `frozen_run` from line 265
+   --> tests\unit\test_narrative_ocr_composition.py:268:72
+    |
+268 | def test_declared_binding3_without_manifest_is_rejected_not_downgraded(frozen_run):
+    |                                                                        ^^^^^^^^^^ `frozen_run` redefined here
+269 |     from company_wiki.automation import narrative_batch as batch
+270 |     from company_wiki.automation.models import canonical_json,canonical_json_hash
+    |
+   ::: tests\unit\test_narrative_ocr_composition.py:265:50
+    |
+265 | from unit.test_narrative_versioned_resume import frozen_run  # noqa: E402,F401
+    |                                                  ---------- previous definition of `frozen_run` here
+    |
+help: Remove definition: `frozen_run`
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_narrative_ocr_composition.py:291:28
+    |
+289 |     from unit.test_narrative_batch import _request, Reader
+290 |     binding=batch.build_batch_events(_request(),Reader(),now="2026-10-09T00:00:00Z")
+291 |     event=binding.events[0];wire=json.loads(event.payload_json)
+    |                            ^
+292 |     wire["source_ref"]["mime_type"]=MIME;wire["source_metadata"]["source_class"]="filing"
+293 |     binding=replace(binding,events=(replace(event,payload_json=canonical_json(wire)),))
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_narrative_ocr_composition.py:292:41
+    |
+290 |     binding=batch.build_batch_events(_request(),Reader(),now="2026-10-09T00:00:00Z")
+291 |     event=binding.events[0];wire=json.loads(event.payload_json)
+292 |     wire["source_ref"]["mime_type"]=MIME;wire["source_metadata"]["source_class"]="filing"
+    |                                         ^
+293 |     binding=replace(binding,events=(replace(event,payload_json=canonical_json(wire)),))
+294 |     assert batch._normalization_parsers(binding,{"document_normalization":"1.0.0"})=={event.subject_id:"1.0.0"}
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_narrative_ocr_composition.py:301:43
+    |
+299 |     from unit.test_narrative_batch import _request
+300 |     from company_wiki.automation import narrative_batch as batch
+301 |     value,adapters=port(tmp_path/"models");data=image_deck(1)
+    |                                           ^
+302 |     wire=_payload(data,title="Business update",document_kind="investor_relations",language="en",mime_type=MIME)
+303 |     payload=SourceRevisionEventPayload.from_dict(wire)
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_narrative_ocr_composition.py:310:28
+    |
+308 |     binding=replace(binding,generation_manifests={payload.source_ref.document_id:generation},normalization_config=snapshot)
+309 |     assert json.loads(batch._frozen_binding(request,binding))["schema_version"]=="narrative-run-binding/3"
+310 |     if corruption=="config":snapshot["text_score"]=.7
+    |                            ^
+311 |     else:generation["parser_components"]["ocr_fingerprint"]="f"*64
+312 |     with pytest.raises(batch.BatchResumeError,match="BATCH_FROZEN_BINDING_INVALID"):
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_narrative_ocr_composition.py:311:9
+    |
+309 |     assert json.loads(batch._frozen_binding(request,binding))["schema_version"]=="narrative-run-binding/3"
+310 |     if corruption=="config":snapshot["text_score"]=.7
+311 |     else:generation["parser_components"]["ocr_fingerprint"]="f"*64
+    |         ^
+312 |     with pytest.raises(batch.BatchResumeError,match="BATCH_FROZEN_BINDING_INVALID"):
+313 |         batch._frozen_binding(request,binding)
+    |
+
+Found 67 errors.
+[*] 1 fixable with the `--fix` option.

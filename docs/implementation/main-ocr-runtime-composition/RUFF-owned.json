@@ -1,0 +1,39 @@
+{
+  "name": "RUFF-owned",
+  "command": [
+    "ruff",
+    "check",
+    "--no-cache",
+    "src/company_wiki/source_catalog/narrative_normalization.py",
+    "src/company_wiki/source_catalog/narrative_language.py",
+    "src/company_wiki/automation/narrative_formats.py",
+    "src/company_wiki/automation/narrative_runtime.py",
+    "src/company_wiki/automation/narrative_worker_factory.py",
+    "src/company_wiki/automation/narrative_select.py",
+    "src/company_wiki/automation/narrative_replay.py",
+    "src/company_wiki/automation/narrative_verify.py",
+    "src/company_wiki/automation/narrative_transport.py",
+    "src/company_wiki/automation/narrative_generation.py",
+    "src/company_wiki/automation/narrative_batch.py",
+    "tests/unit/test_narrative_ocr_composition.py",
+    "tests/unit/test_narrative_format_pipeline.py",
+    "tests/unit/test_narrative_versioned_resume.py",
+    "tests/integration/test_narrative_generation_candidates.py",
+    "docs/implementation/main-ocr-runtime-composition/validate.py"
+  ],
+  "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+  "temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\ocr-cmp-d_gncsdg",
+  "temp_initial": "absent; created exclusively",
+  "supplier_requests": 0,
+  "protected_before": {
+    "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+  },
+  "exit_code": 1,
+  "elapsed_seconds": 0.05,
+  "protected_after": {
+    "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+  },
+  "temp_final": "absent"
+}

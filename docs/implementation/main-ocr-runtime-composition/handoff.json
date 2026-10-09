@@ -1,0 +1,171 @@
+{
+  "schema_version": "main-ocr-runtime-composition-handoff/1",
+  "owner": "main_official_flow_finish",
+  "status": "ready_for_main_integration",
+  "branch": "codex/main-ocr-runtime-composition-20261009",
+  "worktree": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+  "base_commit": "824ab778e2187b5ae5967ab05f6fb22731ade912",
+  "parser_dependency_commit": "238e053e3003045113efc9cc7afb1390657cb9a6",
+  "dependency_merge_commit": "bdebb894690400476f667d6185b63f8021b42b9d",
+  "implementation_commit": "d11db2a2020ea329a4fd7dc75033e666c5799d14",
+  "delivery_commit": "containing commit; exact hash reported after normal commit",
+  "owned_file_sha256": {
+    "src/company_wiki/automation/narrative_batch.py": "a06a221621fa19a79734abcadbffa2b8c8777888c3ead3b2ebd2cc4a5b94d595",
+    "src/company_wiki/automation/narrative_formats.py": "8470f79d7862e3c7a8febed83503a22d9be159ab18455ae977d7226012e18689",
+    "src/company_wiki/automation/narrative_generation.py": "645e92aa155c74871df56ac6c17fae1a2334304fb24729fc82cfae0ec8787852",
+    "src/company_wiki/automation/narrative_replay.py": "7961a70c9319461e8fe1db002ca75511b47f91b0a7a7f61a6bba1be2ddd6ef60",
+    "src/company_wiki/automation/narrative_runtime.py": "17f26b318da1d0e5127eb3adb9beef316049b4159e3a90ed7400ee5d091f3d27",
+    "src/company_wiki/automation/narrative_select.py": "a1a7abac8bec7274776a04001efc9197f1e970f49300b22d76b2435c7dbaeefd",
+    "src/company_wiki/automation/narrative_transport.py": "275352c84a5576630a7d9759bf0be0d108f1663f3bc7fe5d6503e2484b0c4372",
+    "src/company_wiki/automation/narrative_verify.py": "da548916a29253c620f45f9b7fd4764dcf58e4dce53e3badd6fc599a974aa01f",
+    "src/company_wiki/automation/narrative_worker_factory.py": "0336ea409a12773bfbf9e093bd59ba66fc83c5cc421feb41831ef8873d112d01",
+    "src/company_wiki/source_catalog/narrative_language.py": "f99832e57b1523f54d7f4c9f45ec824552b6545fd590493d03216ba69de588df",
+    "src/company_wiki/source_catalog/narrative_normalization.py": "bfd1907d80bac196b2a41b0d5d6032a384d46c64672b36dcd96961d7b05cc0b6",
+    "tests/integration/test_narrative_generation_candidates.py": "fa426ac3ee89a6a7cf70496d75a125768e545f5904f6ac9d5be9374b556376d2",
+    "tests/unit/test_narrative_format_pipeline.py": "e574cd3a841c578e7f3345d63aebd5ff755d9ccdaed88517694e6e594eb7a7b3",
+    "tests/unit/test_narrative_ocr_composition.py": "28e131cfb796b95cf701844d4f93add57803d6c2762096d542867f8960164dd0",
+    "tests/unit/test_narrative_versioned_resume.py": "c0ee87e732a647994a6114a2905da2a56a190b7b47eeba1aa702b4045a876a33"
+  },
+  "accepted_proofs": [
+    {
+      "receipt": "GREEN-responsibility-final.json",
+      "output": "GREEN-responsibility-final.txt",
+      "exit_code": 0,
+      "passed": 215,
+      "pytest_seconds": 32.47,
+      "runner_seconds": 35.228,
+      "supplier_requests": 0,
+      "temp_final": "absent"
+    },
+    {
+      "receipt": "GREEN-causal-and-frozen-resume.json",
+      "output": "GREEN-causal-and-frozen-resume.txt",
+      "exit_code": 0,
+      "passed": 76,
+      "pytest_seconds": 11.42,
+      "runner_seconds": 14.156,
+      "supplier_requests": 0,
+      "temp_final": "absent"
+    },
+    {
+      "receipt": "GREEN-configured-carriers.json",
+      "output": "GREEN-configured-carriers.txt",
+      "exit_code": 0,
+      "passed": 3,
+      "pytest_seconds": 29.31,
+      "runner_seconds": 32.033,
+      "supplier_requests": 0,
+      "temp_final": "absent"
+    },
+    {
+      "receipt": "RUFF-owned-final.json",
+      "output": "RUFF-owned-final.txt",
+      "exit_code": 0,
+      "passed": null,
+      "pytest_seconds": null,
+      "runner_seconds": 0.061,
+      "supplier_requests": 0,
+      "temp_final": "absent"
+    }
+  ],
+  "failed_receipts_retained": [
+    {
+      "receipt": "GREEN-concentrated-node.json",
+      "exit_code": 1,
+      "accepted": false,
+      "temp_final": "absent"
+    },
+    {
+      "receipt": "GREEN-core-and-known-compat.json",
+      "exit_code": 1,
+      "accepted": false,
+      "temp_final": "absent"
+    },
+    {
+      "receipt": "GREEN-first-composition.json",
+      "exit_code": 1,
+      "accepted": false,
+      "temp_final": "absent"
+    },
+    {
+      "receipt": "GREEN-node-repaired.json",
+      "exit_code": 1,
+      "accepted": false,
+      "temp_final": "absent"
+    },
+    {
+      "receipt": "GREEN-responsibility.json",
+      "exit_code": 4,
+      "accepted": false,
+      "temp_final": "absent"
+    },
+    {
+      "receipt": "RED-causal-binding.json",
+      "exit_code": 1,
+      "accepted": false,
+      "temp_final": "absent"
+    },
+    {
+      "receipt": "RED-composition.json",
+      "exit_code": 1,
+      "accepted": false,
+      "temp_final": "absent"
+    },
+    {
+      "receipt": "RED-known-ci-compat.json",
+      "exit_code": 1,
+      "accepted": false,
+      "temp_final": "absent"
+    },
+    {
+      "receipt": "RUFF-owned.json",
+      "exit_code": 1,
+      "accepted": false,
+      "temp_final": "absent"
+    }
+  ],
+  "supplier_requests": 0,
+  "paid_model_requests": 0,
+  "real_22_page_deck_run": false,
+  "budget_overlay_used": false,
+  "parser_dependency_files_edited": false,
+  "runtime_config_published_here": false,
+  "known_main_follow_through": [
+    "Actual configured major OCR/publicbatch node at adequate remaining deadline",
+    "RF public source_preparation min30s cap: MAIN owns remaining-deadline correction"
+  ],
+  "evidence_file_sha256": {
+    "COMMIT-code.json": "465a6c3fc826bff533ace410aa7fc18d0a92f30576baabe6d5ff6ce5c8aa06e0",
+    "findings.md": "0f125d6149e65b36e044c8a8466468f628bb5fe23cfad789bacb75df8cd5ea50",
+    "GREEN-causal-and-frozen-resume.json": "bf8e02c5d86006d4bd3eefeba58ea62df72f4a2284a9b5affeac71d2eb3f94bc",
+    "GREEN-causal-and-frozen-resume.txt": "570a77fc0d9605d07189b9a118c0933a3a4ca92bf130bd53a56a1883a58622e8",
+    "GREEN-concentrated-node.json": "60a6c3eb9ba8320b88653635daf875f9f3118e0c107b05de7453fd4f3b3d9f81",
+    "GREEN-concentrated-node.txt": "54919d1a259f4ecfb0dbcaa4270708a7e8ee81f8d80c224b6280a5c406d2b1a5",
+    "GREEN-configured-carriers.json": "313170c8e752dc0a6c8fe50c7b8c55bef8df811caaa958f4e9fa9951e4f9571a",
+    "GREEN-configured-carriers.txt": "323bda04c7b0c9d3903e83a61684663d6f6bb96ff2825586da1cb7a0988fdf6a",
+    "GREEN-core-and-known-compat.json": "04e0ac777c79dfb43d3bc2fbecd5833d7951985e8c755bd5cac8664af72c6a2f",
+    "GREEN-core-and-known-compat.txt": "8a969bd6a934700cff1d526bcb9b6fd78adc8be74ae33117361e7a6b178472d5",
+    "GREEN-first-composition.json": "42b37bf67cd8c5003c6f34bf063db52977790f87c690cc9d68da3d62829c091e",
+    "GREEN-first-composition.txt": "eceac322ecbd5d46f53929f0a2c76f3ad802f7ef02eddd7675ffc345ef4b2d04",
+    "GREEN-node-repaired.json": "7bb6c7578ce56da5bafcd4fd8f372f47e7f8eae5693822314c1adc5a93b64d4d",
+    "GREEN-node-repaired.txt": "2b982a33dd293e70f22fbaad3dd01941d998a74cff43e002a144450971374a9e",
+    "GREEN-responsibility-final.json": "05a29c26fe8a5178c3303444689d6ed1244ddfeb862a6286a5e0b1ac3aba5098",
+    "GREEN-responsibility-final.txt": "077ca2d7f1e91d27880c9cf2445ba8fd92b8a174b44dec411daba6f72ca746d2",
+    "GREEN-responsibility.json": "b81c3dc34e850bbbbea624606af1b61203f4d3eaa169aa33a0b4ade3ee370400",
+    "GREEN-responsibility.txt": "a69e56c4af064daaae805b8dfe211730909c97e0a8214145159ac020ca1e4fde",
+    "HANDOFF.md": "b696c944db699cdfc9bb231372613854bec181a908d1d99ac100c658154438c4",
+    "progress.md": "e8b76c6d3a1e3af19fa1bd392c29e93ca450537d89d24a46d031fb1644ec2506",
+    "RED-causal-binding.json": "9ce11316f63f60b85aaee988239effb14d9a563540bd78626e5ea998c46f54e2",
+    "RED-causal-binding.txt": "28715b8c8de023c6522ca21099070f4b2235dca6e15b3410af442a115236bc05",
+    "RED-composition.json": "b8e7dc895053ba3aacd9d75697f79978bcf92856dad1d4c3e80bf9b63d3a4d2e",
+    "RED-composition.txt": "33733f934d94c81d5d630a6832b4dfafd4c1e0b7318d954765594d86f5e94d4d",
+    "RED-known-ci-compat.json": "b0796e0175b6e1d2901bed6fa11437fe000ab35e472a889cef70176f604c0919",
+    "RED-known-ci-compat.txt": "3db033e33a1c1f7d5d1b915027dc96938958e78f114005cfe94a7ad84e139e15",
+    "RUFF-owned-final.json": "038eb8b756fb1872fd2cd7d46dd1fa0f53d08fcade70c05ba1a01851e2fa294f",
+    "RUFF-owned-final.txt": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "RUFF-owned.json": "ba11af398439f48ad42e867942702018017f066d691a250dfd4fda9b9d71d9e1",
+    "RUFF-owned.txt": "6dd04b1a6f921fe1d993304d8d9c97cbca493694673f072f1f720025e68fd517",
+    "task_plan.md": "a0f6a0d34b0e5c406d68ecd20e69ee3e777728462265220fcae102047b51e28b",
+    "validate.py": "a312543199d0cb218258089a67392b323647607526b8488c09c4acaf4bb92c9b"
+  }
+}
