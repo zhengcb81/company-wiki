@@ -20,6 +20,7 @@ from company_wiki.source_catalog.narrative_artifact_store import (
 )
 from company_wiki.source_catalog.source_reader import SourceReadError, SourceRef, SourceVersionReader
 from company_wiki.source_catalog.reader import CatalogReaderUnavailable
+from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization, PPTX_MIME
 from company_wiki.source_catalog.qualification import qualify_source
 
 from .models import canonical_json, require_canonical_json
@@ -117,10 +118,11 @@ class NarrativeTransportReader:
 
     def __init__(
         self, artifacts: NarrativeArtifactStore | NarrativeArtifactReader,
-        reader: SourceVersionReader,
+        reader: SourceVersionReader, *, normalization: NarrativeNormalization | None = None,
     ):
         self._artifacts = artifacts
         self._reader = reader
+        self._normalization = normalization
 
     def _current_ref(self, value: SourceRefValue) -> SourceRef:
         current = self._reader.query_ref(
@@ -189,7 +191,9 @@ class NarrativeTransportReader:
         # facts once and replays locators against the one actually verified buffer.
         opened, manifest = self._reader.open_described_version(current, purpose="source_export")
         _require_manifest(manifest, request, bundle)
-        locator_count = replay_narrative_evidence(opened.data, bundle)
+        normalization = self._normalization or NarrativeNormalization.from_reader(
+            self._reader, enabled=source.mime_type == PPTX_MIME and bundle.versions.parser == "2.0.0")
+        locator_count = replay_narrative_evidence(opened.data, bundle, normalization=normalization)
         receipt = {
             "schema_version": NARRATIVE_READ_RECEIPT_SCHEMA,
             "status": "ok", "narrative_ref": reference.to_dict(),

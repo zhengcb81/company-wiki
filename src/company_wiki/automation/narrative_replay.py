@@ -15,7 +15,7 @@ from company_wiki.source_catalog.transcript_text_extract import (
     extract_transcript_material,
 )
 from company_wiki.source_contract import EvidenceSpan
-from company_wiki.document_normalization import normalize_document
+from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization
 
 from .narrative_contracts import NarrativeBundle, NarrativeSelectResult, TranscriptByteBinding
 from .narrative_formats import NORMALIZED_MIME_TYPES, parser_component
@@ -94,29 +94,20 @@ def _replay_transcript(
     _require_full_replay(selected.evidence_spans, verified, failed)
 
 
-def _replay_normalized(data: bytes, selected: NarrativeSelectResult | NarrativeBundle) -> None:
-    """Parse once, then match every selected locator against actual source units."""
+def _replay_normalized(data, selected, normalization=None):
+    """Dispatch recorded parser identity and replay all selected media once."""
     source = selected.source_ref
-    name, version = parser_component(source.mime_type)
-    if isinstance(selected, NarrativeSelectResult):
-        if (selected.parser.name, selected.parser.version) != (name, version):
-            raise NarrativeReplayError("unsupported normalization parser")
-    elif selected.versions.parser != version:
+    version = selected.parser.version if isinstance(selected, NarrativeSelectResult) else selected.versions.parser
+    name = selected.parser.name if isinstance(selected, NarrativeSelectResult) else None
+    port = normalization or NarrativeNormalization()
+    expected_name, _ = parser_component(source.mime_type, normalization=port, parser_version=version)
+    if name is not None and name != expected_name:
         raise NarrativeReplayError("unsupported normalization parser")
-    document = normalize_document(data, source_id=source.source_id,
-                                  source_sha256=source.content_sha256, mime_type=source.mime_type)
-    if not document.structure.coverage_complete:
-        raise NarrativeReplayError("source normalization is incomplete")
-    by_locator = {unit.metadata["source_locator"]: unit for unit in document.units}
-    for span in selected.evidence_spans:
-        unit = by_locator.get(span.structured_value.get("source_locator"))
-        if (unit is None or span.parser_name != name or span.parser_version != version
-                or span.coordinates != unit.coordinates or span.raw_text != unit.raw_text
-                or span.source_id != source.source_id
-                or span.structured_value.get("unit_kind") != unit.unit_kind
-                or span.structured_value.get("source_role") != unit.source_role
-                or any(span.structured_value.get(key) != value for key, value in unit.metadata.items())):
-            raise NarrativeReplayError("selected locator differs from original normalized unit")
+    if any(span.parser_version != version for span in selected.evidence_spans):
+        raise NarrativeReplayError("selected span parser differs from bound generation")
+    port.replay(data, source_id=source.source_id, source_sha256=source.content_sha256,
+                mime_type=source.mime_type, evidence_spans=selected.evidence_spans,
+                parser_version=version, language=selected.source_metadata.language)
 
 
 def replay_narrative_evidence(
@@ -124,6 +115,7 @@ def replay_narrative_evidence(
     selected: NarrativeSelectResult | NarrativeBundle,
     *,
     pdf_replayer: PdfEvidenceReplayer | None = None,
+    normalization: NarrativeNormalization | None = None,
 ) -> int:
     """Replay all selected locators; quality diagnostics remain unchanged."""
     source = selected.source_ref
@@ -132,7 +124,7 @@ def replay_narrative_evidence(
     try:
         if selected.source_metadata.source_class == "filing":
             if source.mime_type in NORMALIZED_MIME_TYPES:
-                _replay_normalized(data, selected)
+                _replay_normalized(data, selected, normalization)
                 return len(selected.evidence_spans)
             replayer = pdf_replayer or verify_pdf_evidence_spans_bytes
             verified, failed = replayer(

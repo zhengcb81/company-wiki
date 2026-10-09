@@ -1,0 +1,199 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 88 items
+
+tests\unit\test_narrative_ocr_composition.py .................F          [ 20%]
+tests\unit\test_narrative_versioned_resume.py .......................... [ 50%]
+EEEEEEEE........EEEE..E..E                                               [ 79%]
+tests\unit\test_narrative_format_pipeline.py .............               [ 94%]
+tests\integration\test_narrative_generation_candidates.py .....          [100%]
+
+=================================== ERRORS ====================================
+_ ERROR at setup of test_resume_observes_current_facts_without_rebinding_frozen_content[generation-canonical_entity_id-ent-other] _
+tests\unit\test_narrative_versioned_resume.py:104: in frozen_run
+    frozen_json = batch._frozen_binding(request, binding)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:178: in _frozen_binding
+    frozen.update(**_freeze_generations(binding.generation_manifests),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:188: in _freeze_generations
+    common = {key: value for key, value in manifest.items() if key not in _GENERATION_SOURCE_FIELDS}
+                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_GENERATION_SOURCE_FIELDS' is not defined
+_ ERROR at setup of test_resume_observes_current_facts_without_rebinding_frozen_content[generation-market-HK] _
+tests\unit\test_narrative_versioned_resume.py:104: in frozen_run
+    frozen_json = batch._frozen_binding(request, binding)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:178: in _frozen_binding
+    frozen.update(**_freeze_generations(binding.generation_manifests),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:188: in _freeze_generations
+    common = {key: value for key, value in manifest.items() if key not in _GENERATION_SOURCE_FIELDS}
+                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_GENERATION_SOURCE_FIELDS' is not defined
+_ ERROR at setup of test_resume_observes_current_facts_without_rebinding_frozen_content[generation-security_id-OTHER] _
+tests\unit\test_narrative_versioned_resume.py:104: in frozen_run
+    frozen_json = batch._frozen_binding(request, binding)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:178: in _frozen_binding
+    frozen.update(**_freeze_generations(binding.generation_manifests),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:188: in _freeze_generations
+    common = {key: value for key, value in manifest.items() if key not in _GENERATION_SOURCE_FIELDS}
+                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_GENERATION_SOURCE_FIELDS' is not defined
+_ ERROR at setup of test_resume_observes_current_facts_without_rebinding_frozen_content[generation-fiscal_year-2025] _
+tests\unit\test_narrative_versioned_resume.py:104: in frozen_run
+    frozen_json = batch._frozen_binding(request, binding)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:178: in _frozen_binding
+    frozen.update(**_freeze_generations(binding.generation_manifests),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:188: in _freeze_generations
+    common = {key: value for key, value in manifest.items() if key not in _GENERATION_SOURCE_FIELDS}
+                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_GENERATION_SOURCE_FIELDS' is not defined
+_ ERROR at setup of test_resume_observes_current_facts_without_rebinding_frozen_content[generation-fiscal_period-Q2] _
+tests\unit\test_narrative_versioned_resume.py:104: in frozen_run
+    frozen_json = batch._frozen_binding(request, binding)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:178: in _frozen_binding
+    frozen.update(**_freeze_generations(binding.generation_manifests),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:188: in _freeze_generations
+    common = {key: value for key, value in manifest.items() if key not in _GENERATION_SOURCE_FIELDS}
+                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_GENERATION_SOURCE_FIELDS' is not defined
+_ ERROR at setup of test_resume_observes_current_facts_without_rebinding_frozen_content[generation-period_end-2026-06-30] _
+tests\unit\test_narrative_versioned_resume.py:104: in frozen_run
+    frozen_json = batch._frozen_binding(request, binding)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:178: in _frozen_binding
+    frozen.update(**_freeze_generations(binding.generation_manifests),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:188: in _freeze_generations
+    common = {key: value for key, value in manifest.items() if key not in _GENERATION_SOURCE_FIELDS}
+                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_GENERATION_SOURCE_FIELDS' is not defined
+_ ERROR at setup of test_resume_observes_current_facts_without_rebinding_frozen_content[generation-published_date-2026-05-03] _
+tests\unit\test_narrative_versioned_resume.py:104: in frozen_run
+    frozen_json = batch._frozen_binding(request, binding)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:178: in _frozen_binding
+    frozen.update(**_freeze_generations(binding.generation_manifests),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:188: in _freeze_generations
+    common = {key: value for key, value in manifest.items() if key not in _GENERATION_SOURCE_FIELDS}
+                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_GENERATION_SOURCE_FIELDS' is not defined
+_ ERROR at setup of test_resume_observes_current_facts_without_rebinding_frozen_content[generation-form_type-10-K] _
+tests\unit\test_narrative_versioned_resume.py:104: in frozen_run
+    frozen_json = batch._frozen_binding(request, binding)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:178: in _frozen_binding
+    frozen.update(**_freeze_generations(binding.generation_manifests),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:188: in _freeze_generations
+    common = {key: value for key, value in manifest.items() if key not in _GENERATION_SOURCE_FIELDS}
+                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_GENERATION_SOURCE_FIELDS' is not defined
+_ ERROR at setup of test_resume_rejects_changed_frozen_execution_membership[generation-job_hash] _
+tests\unit\test_narrative_versioned_resume.py:104: in frozen_run
+    frozen_json = batch._frozen_binding(request, binding)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:178: in _frozen_binding
+    frozen.update(**_freeze_generations(binding.generation_manifests),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:188: in _freeze_generations
+    common = {key: value for key, value in manifest.items() if key not in _GENERATION_SOURCE_FIELDS}
+                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_GENERATION_SOURCE_FIELDS' is not defined
+_ ERROR at setup of test_resume_rejects_changed_frozen_execution_membership[generation-job_version] _
+tests\unit\test_narrative_versioned_resume.py:104: in frozen_run
+    frozen_json = batch._frozen_binding(request, binding)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:178: in _frozen_binding
+    frozen.update(**_freeze_generations(binding.generation_manifests),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:188: in _freeze_generations
+    common = {key: value for key, value in manifest.items() if key not in _GENERATION_SOURCE_FIELDS}
+                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_GENERATION_SOURCE_FIELDS' is not defined
+_ ERROR at setup of test_resume_rejects_changed_frozen_execution_membership[generation-membership_hash] _
+tests\unit\test_narrative_versioned_resume.py:104: in frozen_run
+    frozen_json = batch._frozen_binding(request, binding)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:178: in _frozen_binding
+    frozen.update(**_freeze_generations(binding.generation_manifests),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:188: in _freeze_generations
+    common = {key: value for key, value in manifest.items() if key not in _GENERATION_SOURCE_FIELDS}
+                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_GENERATION_SOURCE_FIELDS' is not defined
+_ ERROR at setup of test_resume_rejects_changed_frozen_execution_membership[generation-missing_member] _
+tests\unit\test_narrative_versioned_resume.py:104: in frozen_run
+    frozen_json = batch._frozen_binding(request, binding)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:178: in _frozen_binding
+    frozen.update(**_freeze_generations(binding.generation_manifests),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:188: in _freeze_generations
+    common = {key: value for key, value in manifest.items() if key not in _GENERATION_SOURCE_FIELDS}
+                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_GENERATION_SOURCE_FIELDS' is not defined
+_ ERROR at setup of test_resume_preserves_original_events_and_usage_for_both_binding_versions[generation] _
+tests\unit\test_narrative_versioned_resume.py:104: in frozen_run
+    frozen_json = batch._frozen_binding(request, binding)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:178: in _frozen_binding
+    frozen.update(**_freeze_generations(binding.generation_manifests),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:188: in _freeze_generations
+    common = {key: value for key, value in manifest.items() if key not in _GENERATION_SOURCE_FIELDS}
+                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_GENERATION_SOURCE_FIELDS' is not defined
+_ ERROR at setup of test_unrelated_root_does_not_gate_either_frozen_binding_version[generation] _
+tests\unit\test_narrative_versioned_resume.py:104: in frozen_run
+    frozen_json = batch._frozen_binding(request, binding)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:178: in _frozen_binding
+    frozen.update(**_freeze_generations(binding.generation_manifests),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:188: in _freeze_generations
+    common = {key: value for key, value in manifest.items() if key not in _GENERATION_SOURCE_FIELDS}
+                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_GENERATION_SOURCE_FIELDS' is not defined
+================================== FAILURES ===================================
+_____ test_declared_binding3_without_manifest_is_rejected_not_downgraded ______
+tests\unit\test_narrative_ocr_composition.py:262: in test_declared_binding3_without_manifest_is_rejected_not_downgraded
+    binding=batch.build_batch_events(request,Reader(),now="2026-10-09T00:00:00Z")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:138: in build_batch_events
+    payloads, facts = _current_sources(request, reader, deadline=deadline)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:98: in _current_sources
+    raise ValueError("SOURCE_REF_CHANGED")
+E   ValueError: SOURCE_REF_CHANGED
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_ocr_composition.py::test_declared_binding3_without_manifest_is_rejected_not_downgraded
+ERROR tests/unit/test_narrative_versioned_resume.py::test_resume_observes_current_facts_without_rebinding_frozen_content[generation-canonical_entity_id-ent-other]
+ERROR tests/unit/test_narrative_versioned_resume.py::test_resume_observes_current_facts_without_rebinding_frozen_content[generation-market-HK]
+ERROR tests/unit/test_narrative_versioned_resume.py::test_resume_observes_current_facts_without_rebinding_frozen_content[generation-security_id-OTHER]
+ERROR tests/unit/test_narrative_versioned_resume.py::test_resume_observes_current_facts_without_rebinding_frozen_content[generation-fiscal_year-2025]
+ERROR tests/unit/test_narrative_versioned_resume.py::test_resume_observes_current_facts_without_rebinding_frozen_content[generation-fiscal_period-Q2]
+ERROR tests/unit/test_narrative_versioned_resume.py::test_resume_observes_current_facts_without_rebinding_frozen_content[generation-period_end-2026-06-30]
+ERROR tests/unit/test_narrative_versioned_resume.py::test_resume_observes_current_facts_without_rebinding_frozen_content[generation-published_date-2026-05-03]
+ERROR tests/unit/test_narrative_versioned_resume.py::test_resume_observes_current_facts_without_rebinding_frozen_content[generation-form_type-10-K]
+ERROR tests/unit/test_narrative_versioned_resume.py::test_resume_rejects_changed_frozen_execution_membership[generation-job_hash]
+ERROR tests/unit/test_narrative_versioned_resume.py::test_resume_rejects_changed_frozen_execution_membership[generation-job_version]
+ERROR tests/unit/test_narrative_versioned_resume.py::test_resume_rejects_changed_frozen_execution_membership[generation-membership_hash]
+ERROR tests/unit/test_narrative_versioned_resume.py::test_resume_rejects_changed_frozen_execution_membership[generation-missing_member]
+ERROR tests/unit/test_narrative_versioned_resume.py::test_resume_preserves_original_events_and_usage_for_both_binding_versions[generation]
+ERROR tests/unit/test_narrative_versioned_resume.py::test_unrelated_root_does_not_gate_either_frozen_binding_version[generation]
+================== 1 failed, 73 passed, 14 errors in 11.35s ===================

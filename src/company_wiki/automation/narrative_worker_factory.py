@@ -10,6 +10,7 @@ from typing import Any
 from company_wiki.source_catalog import SourceCatalog
 from company_wiki.source_catalog.config import load_catalog_config
 from company_wiki.source_catalog.source_reader import SourceVersionReader
+from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization
 
 from .migrations import InvalidDatabasePathError
 from .narrative_http_model import NarrativeHTTPModel
@@ -45,7 +46,7 @@ def _options(spec: WorkerProcessSpec) -> tuple[dict[str, Any], dict[str, Any]]:
         options = json.loads(spec.runtime_options_json)
     except (ValueError, TypeError):
         raise ValueError("NARRATIVE_RUNTIME_OPTIONS_INVALID") from None
-    if not isinstance(options, dict) or not _OPTION_FIELDS <= options.keys() or not options.keys() <= (_OPTION_FIELDS | {"max_final_bytes"}):
+    if not isinstance(options, dict) or not _OPTION_FIELDS <= options.keys() or not options.keys() <= (_OPTION_FIELDS | {"max_final_bytes", "normalization_config", "normalization_parsers", "normalization_deadline"}):
         raise ValueError("NARRATIVE_RUNTIME_OPTIONS_INVALID")
     final_bytes = options.get("max_final_bytes", 2 * 1024 * 1024)
     if type(final_bytes) is not int or not 0 < final_bytes <= 2 * 1024 * 1024:
@@ -98,6 +99,9 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
     config_path = Path(options["catalog_config_path"])
     catalog = SourceCatalog(load_catalog_config(config_path, project_root=project_root))
     reader = SourceVersionReader(catalog)
+    normalization = NarrativeNormalization.from_snapshot(
+        options.get("normalization_config"), deadline=options.get("normalization_deadline"),
+        parser_versions=options.get("normalization_parsers"))
     model = None
     caller = None
     if spec.role in {"model", "mixed"}:
@@ -111,7 +115,7 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
     executor = HandlerExecutor()
     register_narrative_handlers(
         executor,
-        NarrativeRuntimeDependencies(reader=reader, model=model, model_caller=caller),
+        NarrativeRuntimeDependencies(reader=reader, model=model, model_caller=caller, normalization=normalization),
     )
     runtime = WorkerRuntime(registry=registry, executor=executor, model_client=model)
     validate_runtime(runtime, role=spec.role, allowed_job_types=spec.allowed_job_types)

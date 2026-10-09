@@ -21,6 +21,7 @@ from company_wiki.source_catalog.narrative_artifact_store import (
     LocalNarrativeObjectStore, NarrativeArtifactNotVisibleError, NarrativeArtifactReader, NarrativeArtifactStore,
 )
 from company_wiki.source_catalog.narrative_language import detect_narrative_language
+from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization, PPTX_MIME
 from company_wiki.source_catalog.source_reader import SourceVersionReader
 from company_wiki.source_catalog.source_read_policy import (
     EXACT_READ_POLICY_FINGERPRINT_SCHEMA_VERSION, READ_POLICY_FINGERPRINT_SCHEMA_VERSION,
@@ -59,6 +60,7 @@ class BatchEvents:
     source_facts: tuple[dict[str, Any], ...] = ()
     generation_manifests: dict = field(default_factory=dict)
     reused_artifact_pins: dict = field(default_factory=dict)
+    normalization_config: dict | None = None
 
 
 _NARRATIVE_JOB_TYPES = ("source.narrative_select", "source.narrative_summarize", "source.narrative_verify")
@@ -84,7 +86,7 @@ def _check_preparation_deadline(deadline: float | None) -> None:
         raise BatchPreparationDeadlineExceeded("BATCH_PREPARATION_DEADLINE_EXCEEDED")
 
 
-def _current_sources(request, reader, *, deadline=None):
+def _current_sources(request, reader, *, deadline=None, normalization=None):
     """Read current identity/period and exact version admission without writing."""
     _check_preparation_deadline(deadline)
     payloads = []
@@ -116,7 +118,7 @@ def _current_sources(request, reader, *, deadline=None):
                 if exc.code == "SOURCE_HASH_MISMATCH":
                     raise ValueError("SOURCE_LANGUAGE_SOURCE_MISMATCH") from exc
                 raise
-            language = detect_narrative_language(opened.data, current.mime_type)
+            language = detect_narrative_language(opened.data, current.mime_type, normalization=normalization)
             _check_preparation_deadline(deadline)
         payloads.append(SourceRevisionEventPayload.from_dict({
             "schema_version": "source-revision-event/2.0", "source_ref": ref.to_dict(),
@@ -158,16 +160,25 @@ def _frozen_binding(request, binding):
     policies = {payload.source_ref.document_id: payload.expected_read_policy_sha256
                 for event in binding.events
                 for payload in [SourceRevisionEventPayload.from_dict(json.loads(event.payload_json))]}
-    return canonical_json({
-        "schema_version": "narrative-run-binding/3", "request_sha256": request.request_sha256,
+    reusable = bool(binding.generation_manifests)
+    if reusable and set(binding.generation_manifests) != {ref.document_id for ref in request.sources}:
+        raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
+    if binding.reused_artifact_pins and not reusable:
+        raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
+    frozen = {
+        "schema_version": "narrative-run-binding/3" if reusable else "narrative-run-binding/2",
+        "request_sha256": request.request_sha256,
         "execution_versions": _execution_versions(request),
         "read_policy_schema_version": EXACT_READ_POLICY_FINGERPRINT_SCHEMA_VERSION,
         "read_policy_sha256": canonical_json_hash(policies),
         "source_read_policies": policies,
         "source_facts": list(binding.source_facts),
-        **_freeze_generations(binding.generation_manifests),
-        "reused_artifact_pins": binding.reused_artifact_pins,
-    })
+    }
+    if reusable:
+        _validate_normalization_binding(binding.generation_manifests, binding.normalization_config)
+        frozen.update(**_freeze_generations(binding.generation_manifests),
+            reused_artifact_pins=binding.reused_artifact_pins, normalization_config=binding.normalization_config)
+    return canonical_json(frozen)
 
 
 _GENERATION_SOURCE_FIELDS = frozenset({"source_ref", "source_metadata", "parser_component",
@@ -205,6 +216,28 @@ def _thaw_generations(frozen):
             raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
         manifests[document] = manifest
     return manifests
+
+
+def _validate_normalization_binding(manifests, snapshot):
+    """Check frozen causal identity without deployment reads or adapter inference."""
+    from .narrative_formats import NORMALIZED_MIME_TYPES
+
+    try:
+        for manifest in manifests.values():
+            mime = manifest["source_ref"]["mime_type"]
+            if mime not in NORMALIZED_MIME_TYPES or manifest["source_metadata"]["source_class"] != "filing":
+                continue
+            component = manifest["parser_component"]
+            components = manifest.get("parser_components")
+            ocr = mime == PPTX_MIME and component["version"] == "2.0.0"
+            if components is None and not ocr:
+                continue  # Legal historical pure manifests carry only the parser tuple.
+            port = NarrativeNormalization.from_snapshot(snapshot if ocr else None)
+            actual = port.identity(mime, parser_version=component["version"])
+            if components != actual or component != {"name": actual["parser_name"], "version": actual["parser_version"]}:
+                raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
+    except (KeyError, TypeError, ValueError) as exc:
+        raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID") from exc
 
 
 def _resume_binding(request, reader, store, runs, run, *, deadline, prepared_sources=None):
@@ -251,6 +284,8 @@ def _resume_binding(request, reader, store, runs, run, *, deadline, prepared_sou
             policies = {document: frozen["read_policy_sha256"] for document in documents}
         pins = frozen["reused_artifact_pins"] if reusable else {}
         manifests = _thaw_generations(frozen) if reusable else {}
+        if reusable:
+            _validate_normalization_binding(manifests, frozen.get("normalization_config"))
         payload_wires = {document: {"schema_version": "source-revision-event/2.0",
             "source_ref": manifest["source_ref"], "source_metadata": manifest["source_metadata"],
             "expected_read_policy_sha256": policies[document]}
@@ -334,7 +369,7 @@ def _resume_binding(request, reader, store, runs, run, *, deadline, prepared_sou
             if saved_wire != current_wire:
                 raise BatchResumeError("BATCH_SOURCE_FACTS_CHANGED")
             ordered_events.append(saved_event)
-        return BatchEvents(run.input_hash, tuple(ordered_events), current_facts, manifests, pins), versions, jobs
+        return BatchEvents(run.input_hash, tuple(ordered_events), current_facts, manifests, pins, frozen.get("normalization_config")), versions, jobs
     except (KeyError, TypeError, json.JSONDecodeError) as exc:
         raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID") from exc
 
@@ -488,7 +523,14 @@ def _run_owned(request, catalog, project_root, config_path, db_path, work_dir, *
         raise ValueError("BATCH_WORK_DIRECTORY_NOT_EMPTY")
     # Complete pure source preparation before AUTO can initialize or migrate.
     # Reuse these facts on resume; code upgrades never re-sign persisted jobs.
-    prepared_sources = _current_sources(request, reader, deadline=deadline)
+    previous = NarrativeRunStore(db_path).get_run(request.run_id) if db_path.is_file() else None
+    if previous is not None and previous.binding_json is not None:
+        frozen = json.loads(previous.binding_json)
+        normalization = NarrativeNormalization.from_snapshot(frozen.get("normalization_config"), deadline=deadline)
+    else:
+        normalization = NarrativeNormalization.from_project(project_root,
+            enabled=any(ref.mime_type == PPTX_MIME for ref in request.sources), deadline=deadline)
+    prepared_sources = _current_sources(request, reader, deadline=deadline, normalization=normalization)
     for payload in prepared_sources[0]:
         _check_preparation_deadline(deadline)
         opened = reader.open_version(source_ref(payload), purpose="narrative_derivation",
@@ -499,7 +541,10 @@ def _run_owned(request, catalog, project_root, config_path, db_path, work_dir, *
         _check_preparation_deadline(deadline)
     _check_preparation_deadline(deadline)
     manifests = {payload.source_ref.document_id: generation_manifest(
-        request, payload, execution_versions=_execution_versions(request)) for payload in prepared_sources[0]}
+        request, payload, execution_versions=_execution_versions(request),
+        parser_components=normalization.identity(payload.source_ref.mime_type)
+            if payload.source_ref.mime_type == PPTX_MIME
+               and payload.source_metadata.source_class == "filing" else None) for payload in prepared_sources[0]}
     lock_dir = catalog.config.catalog_dir / "narrative-generations"
     lock_dir.mkdir(parents=True, exist_ok=True)
     with ExitStack() as locks:
@@ -511,11 +556,11 @@ def _run_owned(request, catalog, project_root, config_path, db_path, work_dir, *
             except FileMutexLockedError as exc:
                 raise BatchResumeError("BATCH_GENERATION_BUSY") from exc
         return _run_prepared(request, catalog, project_root, config_path, db_path, work_dir,
-                             deadline=deadline, prepared_sources=prepared_sources, manifests=manifests)
+                             deadline=deadline, prepared_sources=prepared_sources, manifests=manifests, normalization=normalization)
 
 
 def _run_prepared(request, catalog, project_root, config_path, db_path, work_dir, *, deadline,
-                  prepared_sources, manifests):
+                  prepared_sources, manifests, normalization):
     reader = SourceVersionReader(catalog)
     store = AutomationStore(db_path) if db_path.exists() else None
     runs = NarrativeRunStore(db_path) if store is not None else None
@@ -538,7 +583,7 @@ def _run_prepared(request, catalog, project_root, config_path, db_path, work_dir
                 document = payload.source_ref.document_id
                 pointer = _generation_pointer(catalog, manifests[document])
                 try:
-                    candidate = (find_reuse_pin(readonly_artifacts, reader, payload, manifests[document], facts[document])
+                    candidate = (find_reuse_pin(readonly_artifacts, reader, payload, manifests[document], facts[document], normalization=normalization)
                                  if not request.refresh or pointer.exists() else None)
                 except ValueError as exc:
                     raise BatchResumeError("BATCH_REUSE_ARTIFACT_INVALID") from exc
@@ -556,7 +601,7 @@ def _run_prepared(request, catalog, project_root, config_path, db_path, work_dir
                     _check_generation_owner(pointer, db_path, request.run_id)
         finally:
             readonly_artifacts.close()
-        binding = BatchEvents(binding.input_hash, binding.events, binding.source_facts, manifests, pins)
+        binding = BatchEvents(binding.input_hash, binding.events, binding.source_facts, manifests, pins, normalization.snapshot())
         misses = len(request.sources) - len(pins)
         if misses:
             _preflight_storage(request, source_count=misses)
@@ -578,7 +623,7 @@ def _run_prepared(request, catalog, project_root, config_path, db_path, work_dir
             catalog.config.database_path, LocalNarrativeObjectStore(catalog.config.catalog_dir))
         try:
             documents = _final_documents(request, binding, store, runs, readonly_artifacts,
-                                         read_only=True, job_ids=previous.job_ids, reader=reader)
+                                         read_only=True, job_ids=previous.job_ids, reader=reader, normalization=normalization)
         finally:
             readonly_artifacts.close()
         if all(document["status"] not in {"activation_pending", "succeeded"} for document in documents):
@@ -636,7 +681,7 @@ def _run_prepared(request, catalog, project_root, config_path, db_path, work_dir
                 catalog.config.database_path, LocalNarrativeObjectStore(catalog.config.catalog_dir))
             try:
                 documents = _final_documents(request, binding, store, runs, readonly_artifacts,
-                                             read_only=True, job_ids=(), reader=reader)
+                                             read_only=True, job_ids=(), reader=reader, normalization=normalization)
                 try:
                     guard.check()
                 except ValueError as exc:
@@ -658,7 +703,10 @@ def _run_prepared(request, catalog, project_root, config_path, db_path, work_dir
             runtime_factory_path="company_wiki.automation.narrative_worker_factory:create_runtime",
             runtime_options_json=canonical_json({"project_root": str(project_root), "catalog_config_path": str(config_path),
                 "run_id": run.run_id, "expected_run_input_hash": run.input_hash, "model": request.model_options,
-                "max_final_bytes": request.max_final_bytes}),
+                "max_final_bytes": request.max_final_bytes,
+                "normalization_config": binding.normalization_config,
+                "normalization_parsers": _normalization_parsers(binding, versions or _execution_versions(request)),
+                "normalization_deadline": deadline}),
             compute_job_types=("source.narrative_select", "source.narrative_verify"),
             model_job_types=("source.narrative_summarize",), allowed_job_ids=run.job_ids,
             heartbeat_interval_seconds=1, lease_seconds=15, idle_sleep_seconds=0.05,
@@ -732,7 +780,7 @@ def _run_prepared(request, catalog, project_root, config_path, db_path, work_dir
                 current = store.read_runtime_gate()
                 if current.control_generation == generation:
                     store.set_runtime_gate(RuntimeState.PAUSED, updated_at=_now(), expected_generation=generation)
-    documents = _final_documents(request, binding, store, runs, artifacts, job_ids=run.job_ids, reader=reader)
+    documents = _final_documents(request, binding, store, runs, artifacts, job_ids=run.job_ids, reader=reader, normalization=normalization)
     for document in documents:
         manifest = binding.generation_manifests.get(document["document_id"])
         if manifest is not None:
@@ -742,6 +790,19 @@ def _run_prepared(request, catalog, project_root, config_path, db_path, work_dir
     if status == "completed" and any(document["status"] != "completed" for document in documents):
         status = "partial"
     return _receipt(run.run_id, status, documents, runs, guard)
+
+
+def _normalization_parsers(binding, versions):
+    """Use exact recorded versions, including pre-generation legacy PPTX runs."""
+    parsers = {}
+    for event in binding.events:
+        payload = SourceRevisionEventPayload.from_dict(json.loads(event.payload_json))
+        if payload.source_metadata.source_class != "filing" or payload.source_ref.mime_type not in {"text/html", "application/xhtml+xml", PPTX_MIME}:
+            continue
+        manifest = binding.generation_manifests.get(event.subject_id)
+        parsers[event.subject_id] = (manifest["parser_component"]["version"] if manifest else
+            versions.get("document_normalization", "1.0.0"))
+    return parsers
 
 
 def _generation_pointer(catalog, manifest):
@@ -815,7 +876,7 @@ def _receipt(run_id, status, documents, runs, guard):
         "storage": {"persistent_added_bytes": storage.persistent_added_bytes, "scratch_peak_bytes": storage.scratch_peak_bytes}}
 
 
-def _final_documents(request, binding, store, runs, artifacts, *, read_only=False, job_ids=None, reader=None):
+def _final_documents(request, binding, store, runs, artifacts, *, read_only=False, job_ids=None, reader=None, normalization=None):
     documents = []
     all_jobs = store.list_jobs(job_ids=job_ids, event_ids=tuple(event.event_id for event in binding.events))
     facts = {item["document_id"]: item for item in binding.source_facts}
@@ -824,7 +885,7 @@ def _final_documents(request, binding, store, runs, artifacts, *, read_only=Fals
         ref = payload.source_ref
         pin = binding.reused_artifact_pins.get(ref.document_id)
         if pin is not None:
-            if reader is None or not read_reuse_pin(artifacts, reader, payload, pin, facts[ref.document_id], binding.generation_manifests.get(ref.document_id)):
+            if reader is None or not read_reuse_pin(artifacts, reader, payload, pin, facts[ref.document_id], binding.generation_manifests.get(ref.document_id), normalization=normalization):
                 raise BatchResumeError("BATCH_REUSE_ARTIFACT_INVALID")
             documents.append({"document_id": ref.document_id, "status": "completed",
                               "artifact_ref": pin, "errors": [], "generation_status": "reused"})

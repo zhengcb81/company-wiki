@@ -61,8 +61,10 @@ def _decode_sample(data: bytes) -> str:
     raise NarrativeLanguageError("SOURCE_LANGUAGE_TEXT_INVALID")
 
 
-def _text_for_mime(data: bytes, mime_type: str) -> str:
+def _text_for_mime(data: bytes, mime_type: str, *, normalization=None) -> str:
     if mime_type == "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+        if normalization is not None:
+            return normalization.sample_text(data, mime_type)
         from company_wiki.document_normalization import normalize_document
         try:
             digest = hashlib.sha256(data).hexdigest()
@@ -134,11 +136,15 @@ def _script_counts(text: str) -> Counter[str]:
     return counts
 
 
-def detect_narrative_language(data: bytes, mime_type: str) -> str:
+def detect_narrative_language(data: bytes, mime_type: str, *, normalization=None) -> str:
     """Return ``zh``, ``en``, or ``mixed``; never guess from entity or market."""
     if not isinstance(data, bytes) or not data:
         raise NarrativeLanguageError("SOURCE_LANGUAGE_TEXT_INVALID")
-    text = _text_for_mime(data, mime_type)
+    return detect_narrative_text_language(_text_for_mime(data, mime_type, normalization=normalization))
+
+
+def detect_narrative_text_language(text: str) -> str:
+    """Classify a bounded actual native/OCR sample, without entity guesses."""
     counts = _script_counts(text)
     chinese = counts["zh"]
     english = counts["en"]

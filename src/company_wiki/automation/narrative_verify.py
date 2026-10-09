@@ -25,6 +25,7 @@ from .models import (
     make_effect_key,
 )
 from .narrative_formats import parser_component
+from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization
 from .narrative_contracts import (
     BUNDLE_SCHEMA,
     ContractSizeError,
@@ -132,6 +133,7 @@ def _validate_dependency_identity(
     payload: SourceRevisionEventPayload,
     selected: NarrativeSelectResult,
     summary: NarrativeSummaryResult,
+    normalization=None,
 ) -> None:
     if (
         selected.source_ref.to_dict() != payload.source_ref.to_dict()
@@ -147,6 +149,7 @@ def _validate_dependency_identity(
         )
     parser_name, parser_version = parser_component(
         selected.source_ref.mime_type, selected.source_metadata.source_class,
+        normalization=normalization, parser_version=selected.parser.version,
     )
     if (
         selected.parser.name != parser_name
@@ -171,9 +174,11 @@ class NarrativeVerifyHandler:
         *,
         reader: NarrativeSourceReader,
         pdf_replayer: PdfEvidenceReplayer | None = None,
+        normalization: NarrativeNormalization | None = None,
     ) -> None:
         self._reader = reader
         self._pdf_replayer = pdf_replayer
+        self._normalization = normalization or NarrativeNormalization()
 
     def __call__(self, context: JobExecutionContext) -> HandlerResult:
         try:
@@ -195,7 +200,7 @@ class NarrativeVerifyHandler:
         context.checkpoint()
         payload = self._payload(context)
         selected, summary = _dependencies(context)
-        _validate_dependency_identity(payload, selected, summary)
+        _validate_dependency_identity(payload, selected, summary, self._normalization)
         ref = source_ref(payload)
         opened = self._reader.open_version(
             ref,
@@ -250,7 +255,7 @@ class NarrativeVerifyHandler:
 
     def _replay(self, data: bytes, selected: NarrativeSelectResult) -> None:
         try:
-            replay_narrative_evidence(data, selected, pdf_replayer=self._pdf_replayer)
+            replay_narrative_evidence(data, selected, pdf_replayer=self._pdf_replayer, normalization=self._normalization)
         except NarrativeReplayError as exc:
             raise _VerifyFailure(
                 "LOCATOR_REPLAY_FAILED",

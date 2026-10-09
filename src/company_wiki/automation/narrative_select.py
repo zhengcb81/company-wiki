@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Sequence
-from dataclasses import dataclass, replace
+from dataclasses import dataclass
 from typing import Any, Protocol
 
 from company_wiki.source_catalog.narrative_document import (
@@ -28,7 +28,7 @@ from company_wiki.source_catalog.transcript_text_extract import (
     extract_transcript_material,
 )
 from company_wiki.source_contract import EvidenceSpan
-from company_wiki.document_normalization import normalize_document
+from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization
 
 from .execution_context import JobExecutionContext
 from .narrative_formats import NORMALIZED_MIME_TYPES, parser_component
@@ -96,6 +96,7 @@ class _SelectionWork:
     parsed: NarrativeParseResult
     package: NarrativeEvidencePackage
     material: TranscriptMaterial | None
+    parser_identity: tuple[str, str] | None = None
 
 
 def _failure(code: str, outcome: HandlerOutcome, detail: str) -> HandlerResult:
@@ -199,10 +200,12 @@ class NarrativeSelectHandler:
         reader: NarrativeSourceReader,
         pdf_parser: PdfBytesParser = parse_pdf_bytes,
         selector: NarrativeSelector | None = None,
+        normalization: NarrativeNormalization | None = None,
     ) -> None:
         self._reader = reader
         self._pdf_parser = pdf_parser
         self._selector = selector or select_narrative_evidence
+        self._normalization = normalization or NarrativeNormalization()
 
     def __call__(self, context: JobExecutionContext) -> HandlerResult:
         try:
@@ -299,10 +302,11 @@ class NarrativeSelectHandler:
         context: JobExecutionContext,
     ) -> _SelectionWork:
         try:
-            document = normalize_document(
+            document = self._normalization.normalize(
                 data, source_id=payload.source_ref.source_id,
                 source_sha256=payload.source_ref.content_sha256,
                 mime_type=payload.source_ref.mime_type,
+                document_id=payload.source_ref.document_id,
             )
         except (RuntimeError, ValueError) as exc:
             raise _SelectFailure(
@@ -310,12 +314,11 @@ class NarrativeSelectHandler:
                 "verified filing format cannot be parsed completely",
             ) from exc
         language = payload.source_metadata.language
-        parsed = replace(document.structure, language=language,
-                         units=tuple(replace(unit, language=language) for unit in document.units))
+        parsed = self._normalization.language_structure(document, language)
         context.checkpoint()
         package = self._run_selector(payload, parsed)
-        self._require_usable_selection(parsed, package)
-        return _SelectionWork(parsed, package, None)
+        self._require_usable_selection(parsed, package, normalized=True)
+        return _SelectionWork(parsed, package, None, (document.parser_name, document.parser_version))
 
     def _select_pdf(
         self,
@@ -401,9 +404,9 @@ class NarrativeSelectHandler:
 
     @staticmethod
     def _require_usable_selection(
-        parsed: NarrativeParseResult, package: NarrativeEvidencePackage
+        parsed: NarrativeParseResult, package: NarrativeEvidencePackage, *, normalized=False
     ) -> None:
-        if parsed.errors or parsed.opaque_pages or package.status == "blocked":
+        if (not normalized and (parsed.errors or parsed.opaque_pages)) or package.status == "blocked":
             raise _SelectFailure(
                 "PARSER_INCOMPLETE",
                 HandlerOutcome.TERMINAL_FAILURE,
@@ -434,7 +437,7 @@ class NarrativeSelectHandler:
             if material is not None
             else ()
         )
-        parser_name, parser_version = parser_component(
+        parser_name, parser_version = work.parser_identity or parser_component(
             payload.source_ref.mime_type, payload.source_metadata.source_class,
         )
         return {

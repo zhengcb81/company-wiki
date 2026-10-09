@@ -1,5 +1,4 @@
 """Parser routing and generation identity shared by selection and replay."""
-from company_wiki.document_normalization import PARSER_NAME, PARSER_VERSION
 from company_wiki.source_catalog.narrative_evidence import NARRATIVE_PARSER_NAME, NARRATIVE_PARSER_VERSION
 
 NORMALIZED_MIME_TYPES = frozenset({
@@ -8,9 +7,13 @@ NORMALIZED_MIME_TYPES = frozenset({
 })
 
 
-def parser_component(mime_type: str, source_class: str = "filing") -> tuple[str, str]:
+def parser_component(mime_type: str, source_class: str = "filing", *, normalization=None, parser_version=None) -> tuple[str, str]:
     if source_class == "filing" and mime_type in NORMALIZED_MIME_TYPES:
-        return PARSER_NAME, PARSER_VERSION
+        if normalization is None:
+            from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization
+            normalization = NarrativeNormalization()
+        identity = normalization.identity(mime_type, parser_version=parser_version)
+        return identity["parser_name"], identity["parser_version"]
     return NARRATIVE_PARSER_NAME, NARRATIVE_PARSER_VERSION
 
 
