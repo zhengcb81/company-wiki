@@ -1,0 +1,1212 @@
+{
+  "schema_version": "w03-handoff/1",
+  "package": "W03 official source flow",
+  "status": "engineering_complete_pending_MAIN_integration",
+  "worktree": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+  "branch": "codex/pool-official-source-flow-20261009",
+  "base": "c07852eaf2eb589675b73590e8fc494e1e02ef88",
+  "head": "afc70de1c70fd1ddb208ba249d5334adac2a599f",
+  "feature_commit": "afc70de1c70fd1ddb208ba249d5334adac2a599f",
+  "head_definition": "Exact functional HEAD captured before the documentation-only handoff commit; final documentation commit is reported separately to MAIN.",
+  "feature_changed_paths": [
+    "docs/implementation/pool-w03-official-flow/INTERFACE.md",
+    "docs/implementation/pool-w03-official-flow/flow-proof.json",
+    "docs/implementation/pool-w03-official-flow/html-bundle.json",
+    "docs/implementation/pool-w03-official-flow/html-read-receipt.json",
+    "docs/implementation/pool-w03-official-flow/html-read-request.json",
+    "src/company_wiki/automation/narrative_batch.py",
+    "src/company_wiki/automation/narrative_formats.py",
+    "src/company_wiki/source_catalog/canonical_writer.py",
+    "src/company_wiki/source_catalog/official_discovery.py",
+    "src/company_wiki/source_catalog/official_source_cli.py",
+    "src/company_wiki/source_catalog/official_source_flow.py",
+    "tests/integration/test_official_source_flow.py"
+  ],
+  "feature_file_hashes": [
+    {
+      "path": "docs/implementation/pool-w03-official-flow/INTERFACE.md",
+      "base_blob_sha256": null,
+      "feature_blob_sha256": "d45532e74480642a48426efa929c51b6231b1a4b23becf0311d9e2caee6545c6",
+      "working_sha256": "419d799744183e9e99891f00ed7ed2086a201c7edce16b402e91f0879d695a4b"
+    },
+    {
+      "path": "docs/implementation/pool-w03-official-flow/flow-proof.json",
+      "base_blob_sha256": null,
+      "feature_blob_sha256": "cd722a1eb5fd262eede6b27d609e22ce148d386c4c1b5aecf20df0b9083bd7c8",
+      "working_sha256": "40a7d6fe2eb8bc6bf7a4a383012847187d201d2e30abf8070a7a7af9635930ac"
+    },
+    {
+      "path": "docs/implementation/pool-w03-official-flow/html-bundle.json",
+      "base_blob_sha256": null,
+      "feature_blob_sha256": "1576ae79794ed0a59028441297f99eee1155ffe44d07f06fe7833686937e23ce",
+      "working_sha256": "1576ae79794ed0a59028441297f99eee1155ffe44d07f06fe7833686937e23ce"
+    },
+    {
+      "path": "docs/implementation/pool-w03-official-flow/html-read-receipt.json",
+      "base_blob_sha256": null,
+      "feature_blob_sha256": "e6626cb4e0768a286050ba97f61a7848be2ba0342c0db84a1bf10987e658162e",
+      "working_sha256": "e6626cb4e0768a286050ba97f61a7848be2ba0342c0db84a1bf10987e658162e"
+    },
+    {
+      "path": "docs/implementation/pool-w03-official-flow/html-read-request.json",
+      "base_blob_sha256": null,
+      "feature_blob_sha256": "f7971516fbb5b12eb1b5482da94cd4ac13591210be7ed99bb83c181d768f7a5e",
+      "working_sha256": "4a603bb7f7f5913efb5b03295898f87e1ae19065c3ab14ad5a8c6396420d0a94"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_batch.py",
+      "base_blob_sha256": "a7661110eccc1e27fdf184bf2a28b0fc5e5399fa819e1d82df849472e0380966",
+      "feature_blob_sha256": "9cb465fd85b98af447dbcdd115797a8cebb6d71d73ce37917da8855b5acf99f1",
+      "working_sha256": "2655831dd8f6dfcc9d4d1ef9ab01e3127546002730323bf182b6ed1abe0d5ba2"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_formats.py",
+      "base_blob_sha256": "a5dfad847d8156a2d40c9afa88bb1055ea83dd32550070320ca5d31f91dd9c49",
+      "feature_blob_sha256": "0ede0fb6fd4f52463ae0cf8214a7af884ae6fb67188aacbd0811752a73943548",
+      "working_sha256": "61ab7f6ee0ddbc99faec981253adf507c06a3ef0e48cb7eb38905fde25837524"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/canonical_writer.py",
+      "base_blob_sha256": "5b8831847baa83d296897691de820ed4ed4ef770cfc1e34f8080969e692b4282",
+      "feature_blob_sha256": "cad134aec1aa7ee075a4bc160da11a769c1e3fd279561408fe92753e3d324011",
+      "working_sha256": "b74ad2b7427824818114f92f523aa216072610a67db4ea4779887d14e98a8985"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/official_discovery.py",
+      "base_blob_sha256": null,
+      "feature_blob_sha256": "b2010836bee09e252c5c250c23973e392b8e5dad4197c39add1b49770b8df14c",
+      "working_sha256": "b2010836bee09e252c5c250c23973e392b8e5dad4197c39add1b49770b8df14c"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/official_source_cli.py",
+      "base_blob_sha256": null,
+      "feature_blob_sha256": "3000807300e270b49cdc5afbde4767c06295a1b072801f27e12e5f5edb993af9",
+      "working_sha256": "f8107bd8933fb90e6f0ae54fbcb8e12caf8cb7e78df3ff9314794897c22c87c4"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/official_source_flow.py",
+      "base_blob_sha256": null,
+      "feature_blob_sha256": "e6996e01ff1970d4cb963b884bd020eb4dee372c536d79d2bc1ddd8073f9095d",
+      "working_sha256": "b0a3de84730ec44cc06de4e4bd7161eaa7ce6250c70f79b7e6281abdc1f4aed4"
+    },
+    {
+      "path": "tests/integration/test_official_source_flow.py",
+      "base_blob_sha256": null,
+      "feature_blob_sha256": "3c96644d0ceaf9e138eb916d60b64f3e3ff72e85174e8ec6e603327960ffd218",
+      "working_sha256": "1f9e5af3ff64ef624b2eb03401ed1726073cb9ef62ced146031754becebd16a2"
+    }
+  ],
+  "handoff_documentation_paths": [
+    "docs/implementation/pool-w03-official-flow/COMMIT-feature.json",
+    "docs/implementation/pool-w03-official-flow/COMMIT-feature.txt",
+    "docs/implementation/pool-w03-official-flow/flow-proof.json",
+    "docs/implementation/pool-w03-official-flow/GREEN-core.json",
+    "docs/implementation/pool-w03-official-flow/GREEN-core.txt",
+    "docs/implementation/pool-w03-official-flow/GREEN-final-verified.json",
+    "docs/implementation/pool-w03-official-flow/GREEN-final-verified.txt",
+    "docs/implementation/pool-w03-official-flow/GREEN-finite-regression.json",
+    "docs/implementation/pool-w03-official-flow/GREEN-finite-regression.txt",
+    "docs/implementation/pool-w03-official-flow/GREEN-finite.txt",
+    "docs/implementation/pool-w03-official-flow/GREEN-host-assumptions.json",
+    "docs/implementation/pool-w03-official-flow/GREEN-host-assumptions.txt",
+    "docs/implementation/pool-w03-official-flow/GREEN-iteration1.txt",
+    "docs/implementation/pool-w03-official-flow/GREEN-lint.json",
+    "docs/implementation/pool-w03-official-flow/GREEN-lint.txt",
+    "docs/implementation/pool-w03-official-flow/GREEN-public.txt",
+    "docs/implementation/pool-w03-official-flow/GREEN-responsibilities.txt",
+    "docs/implementation/pool-w03-official-flow/GREEN-storage-regression.json",
+    "docs/implementation/pool-w03-official-flow/GREEN-storage-regression.txt",
+    "docs/implementation/pool-w03-official-flow/html-bundle.json",
+    "docs/implementation/pool-w03-official-flow/html-read-receipt.json",
+    "docs/implementation/pool-w03-official-flow/html-read-request.json",
+    "docs/implementation/pool-w03-official-flow/INTERFACE.md",
+    "docs/implementation/pool-w03-official-flow/ITERATION-final.json",
+    "docs/implementation/pool-w03-official-flow/ITERATION-final.txt",
+    "docs/implementation/pool-w03-official-flow/ITERATION-html-golden-cn.json",
+    "docs/implementation/pool-w03-official-flow/ITERATION-html-golden-cn.txt",
+    "docs/implementation/pool-w03-official-flow/ITERATION-official.json",
+    "docs/implementation/pool-w03-official-flow/ITERATION-official.txt",
+    "docs/implementation/pool-w03-official-flow/ITERATION-responsibility-final.json",
+    "docs/implementation/pool-w03-official-flow/ITERATION-responsibility-final.txt",
+    "docs/implementation/pool-w03-official-flow/RED-finite.txt",
+    "docs/implementation/pool-w03-official-flow/RED-metadata-discovery.json",
+    "docs/implementation/pool-w03-official-flow/RED-metadata-discovery.txt",
+    "docs/implementation/pool-w03-official-flow/RED-period.json",
+    "docs/implementation/pool-w03-official-flow/RED-period.txt",
+    "docs/implementation/pool-w03-official-flow/RED-publisher.json",
+    "docs/implementation/pool-w03-official-flow/RED-publisher.txt",
+    "docs/implementation/pool-w03-official-flow/RED-routing.txt",
+    "docs/implementation/pool-w03-official-flow/RED-takeover.json",
+    "docs/implementation/pool-w03-official-flow/RED-takeover.txt",
+    "docs/implementation/pool-w03-official-flow/RED.txt",
+    "docs/implementation/pool-w03-official-flow/validate.py",
+    "docs/implementation/pool-w03-official-flow/HANDOFF.md",
+    "docs/implementation/pool-w03-official-flow/handoff.json"
+  ],
+  "evidence_sha256": {
+    "COMMIT-feature.json": "f5a9426a492a13ec123367df3a1bc14e038bd7b85fe2c956b472afb1f6ed6e11",
+    "COMMIT-feature.txt": "da67f72fe4810039cb7048c70ab3f631403e93783705f7ab0c9dc4bbcad73ba2",
+    "flow-proof.json": "40a7d6fe2eb8bc6bf7a4a383012847187d201d2e30abf8070a7a7af9635930ac",
+    "GREEN-core.json": "886e637202de82147d5897f0e5949fe2ef73d9fc94c86f6e408694ecb8ff3950",
+    "GREEN-core.txt": "ada90c7e89d6b0dcca8c475a522bfa574c66797f60c3fee4f3d3beb1514df50c",
+    "GREEN-final-verified.json": "d77928bb1966e10506fbea4f205ff3e048d980f27995aead1f853858e304d499",
+    "GREEN-final-verified.txt": "6dc346b667c7d80c1acc0135c700a074aacb0854159a87e695df89f70e65d6f9",
+    "GREEN-finite-regression.json": "8d454cbcca38c0585df2c0f163222c53ed0e887ea990fc2a94e34a12d3599eaa",
+    "GREEN-finite-regression.txt": "1b853b589a9ebb5f9d2afb97a729c2458040897ddb3ac300af1e6e2900b5bf29",
+    "GREEN-finite.txt": "2a3c07243e176fd1dad77c070f00395d81e9903e4dcad9082e8b4314b0f2dfc4",
+    "GREEN-host-assumptions.json": "1819c4fb1282e08b735e787db56997eba90a9e05d88b64b80cb0c281cd6d1b74",
+    "GREEN-host-assumptions.txt": "82df60d9eca6eaa881cda7cbfc6bd758aeb9ba124a572dac486d5ee7145bc4a9",
+    "GREEN-iteration1.txt": "fe881af78df2166c154844861ce1d85d366a76ef6bfeb0106c0e5ebb89e8c36b",
+    "GREEN-lint.json": "dcbdc1838e8229420a55c6ac31852d2002eb4c8d01bae6549c33842a6f90d2c7",
+    "GREEN-lint.txt": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "GREEN-public.txt": "8c5fc79ef28acd1a37e8450e702d0e2630788d7ff7f53bc87f89f2dde7f0d573",
+    "GREEN-responsibilities.txt": "7e030274aee410254892a98e611f819c68bcdc26afd8ebeb00b33f8f43764aa3",
+    "GREEN-storage-regression.json": "be7a7bf6987cb6d1836414c55fceebdc174852ea8bde1880184bbd3481fde3f8",
+    "GREEN-storage-regression.txt": "8275934ada35a75ec962a1bbbf975e3712adbc65bd6ee7ae7da71d393b0f0f49",
+    "html-bundle.json": "1576ae79794ed0a59028441297f99eee1155ffe44d07f06fe7833686937e23ce",
+    "html-read-receipt.json": "e6626cb4e0768a286050ba97f61a7848be2ba0342c0db84a1bf10987e658162e",
+    "html-read-request.json": "4a603bb7f7f5913efb5b03295898f87e1ae19065c3ab14ad5a8c6396420d0a94",
+    "INTERFACE.md": "419d799744183e9e99891f00ed7ed2086a201c7edce16b402e91f0879d695a4b",
+    "ITERATION-final.json": "d081382341b4afee01d737e2e97f1beb670c64564bbed912b064f2d5aecd090d",
+    "ITERATION-final.txt": "98b9b1542ff431a5c393e78ea794c9050e8ad03d00265aec4aca96c04b00d379",
+    "ITERATION-html-golden-cn.json": "eb3ea6777c1d08c787aaf3ecee6302dc3eadb512e0c0f38976b3664a60b3fb3e",
+    "ITERATION-html-golden-cn.txt": "ca956ee87cb742014d2bd31937c193cfee439939c7048473fe64766fa1a98c5e",
+    "ITERATION-official.json": "b52781626fcd6b635b5c01a656d6ffa62da984e2ed7434f88c8b906c6a953637",
+    "ITERATION-official.txt": "3154650963b6fcc0d0829d9c4366e838fb4ab49c6666b418059eda29041d5bb3",
+    "ITERATION-responsibility-final.json": "af7c7b0301f999e13e506c888f0b7788cccabbf9753149e191cac6f2ea32ef11",
+    "ITERATION-responsibility-final.txt": "f4b1553c62ee8b74eba9769ba3f21b534ff876d6d85f832b5e692c250b427560",
+    "RED-finite.txt": "7b45f193ae1f9316e2fc85234632bbe7a497e3040963332c8e0d8efc4314095c",
+    "RED-metadata-discovery.json": "62fe30b164209c82f5398b691fb069dc1514cc879b82ce8493a92610b80363da",
+    "RED-metadata-discovery.txt": "0a22d3ed8271cf46731b34ac5a6b8eb09c7e1083e9d23329ea9930a7c5193551",
+    "RED-period.json": "263cf1422378b73332b415717b2534f1c6b4d45268eb17fe4ee1b1ecb30f32ab",
+    "RED-period.txt": "86450fdb327b31186d73e01de35775740e3c9887e05672cc824b949425df0cf9",
+    "RED-publisher.json": "d36d54ab9d3cedaeaa9bd5b4f642f28bf629d8449971e496cfee3623de0ef799",
+    "RED-publisher.txt": "fcf929fb35e13cd10677dd5d94c84e8ec31cf309bdba3f758893ed5acd4f3dce",
+    "RED-routing.txt": "5f85cb861c1ae0e62bbd1fc87038ce2f70e064b5b54272a08336573a2eaa6ff3",
+    "RED-takeover.json": "f1316d92cf3956d87c73b1c4801433a44dd25a44a9434bba5dd9b56bebe4a12d",
+    "RED-takeover.txt": "078dd6d969e2a04a58ae3cb6f49e3d8daa63f3b7cf44a90fdc44fe37842b4023",
+    "RED.txt": "c4d9b38ff79dcd329014c17831d5c8dff01e8a72dda7fae644269584726817f7",
+    "validate.py": "81468bfb970cc4c1e96609e878c74a4c5dc767d9a0f66559e2a0fb31ecfd92f9"
+  },
+  "self_hash_exclusions": [
+    "HANDOFF.md",
+    "handoff.json"
+  ],
+  "root_causes_fixed": [
+    "Missing composition: local/captured official originals did not use the existing immutable CanonicalSourceWriter/SourceRef/source-facts/finite path.",
+    "Carrier routing: PDF earnings calls were wrongly assigned transcript byte parser; unknown source language did not enter actual-byte detection.",
+    "Capture timezone: a non-UTC instant was formatted as Z without conversion; retrieved_at now converts to UTC.",
+    "Source metadata projection: legacy filing_date alias hid independent published_date/period_end; actual declaration is retained via existing source-facts without changing shared read contracts.",
+    "Dedup metadata: reused source publisher was taken from later request instead of stored original provenance.",
+    "Discovery coverage: exact local byte-cap break omitted later pages while claiming checked coverage; now partial with byte_limit_reached.",
+    "Caller fixtures: read request originally omitted three required expected_source fields, then read caller mistook stdout bundle for stderr receipt. Actual existing protocol is now used; no production transport contract was loosened."
+  ],
+  "contracts": {
+    "source_ref": "2.0 unchanged",
+    "narrative_ref": "narrative-ref/1 unchanged",
+    "read_request": "narrative-read-request/1 unchanged; all six expected_source fields",
+    "read_stdout": "exact narrative-bundle/2.0 bytes",
+    "read_stderr": "narrative-read-receipt/1",
+    "identity_fields": [
+      "canonical_entity_id",
+      "market",
+      "security_id",
+      "document_kind",
+      "fiscal_year",
+      "fiscal_period"
+    ],
+    "unknown_identity": "null, not fabricated fiscal period"
+  },
+  "actual_cli_and_raw_open": {
+    "official_import_module": "company_wiki.source_catalog.official_source_cli",
+    "configured_entrypoint": "scripts/narrative_batch_configured.py",
+    "public_read_module": "company_wiki.source_catalog.narrative_transport_cli",
+    "raw_open": "SourceVersionReader query_ref + open_version source_export returns exact fixture bytes",
+    "proof_file": "flow-proof.json",
+    "golden_files": [
+      "html-bundle.json",
+      "html-read-receipt.json",
+      "html-read-request.json"
+    ],
+    "golden_artifact_sha256": "1576ae79794ed0a59028441297f99eee1155ffe44d07f06fe7833686937e23ce",
+    "proof": {
+      "schema_version": "w03-engineering-proof/1",
+      "fixture_only": true,
+      "supplier_requests": 0,
+      "supplier_cost_usd": "0",
+      "loopback_requests": 3,
+      "simulated_budget": {
+        "estimated_micro_usd": 333,
+        "tokens": 276,
+        "unknown_reservations": 0,
+        "unsettled_reservations": 0
+      },
+      "repeat_budget": {
+        "estimated_micro_usd": 333,
+        "tokens": 276,
+        "unknown_reservations": 0,
+        "unsettled_reservations": 0
+      },
+      "repeat_import_statuses": [
+        "deduplicated",
+        "deduplicated",
+        "deduplicated"
+      ],
+      "canonical_bytes_and_sidecars_unchanged": true,
+      "documents": [
+        {
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d",
+            "source_id": "urn:company-wiki:source:sha256:f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d",
+            "content_sha256": "f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d",
+            "byte_size": 120,
+            "mime_type": "text/html",
+            "schema_version": "2.0"
+          },
+          "narrative_ref": {
+            "artifact_sha256": "1576ae79794ed0a59028441297f99eee1155ffe44d07f06fe7833686937e23ce",
+            "artifact_version_id": "narrative-06b73db157f445a0a77e109d82402636",
+            "byte_size": 3454,
+            "schema_version": "narrative-ref/1",
+            "source_ref": {
+              "byte_size": 120,
+              "content_sha256": "f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d",
+              "document_id": "urn:company-wiki:document:sha256:f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d",
+              "mime_type": "text/html",
+              "schema_version": "2.0",
+              "source_id": "urn:company-wiki:source:sha256:f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d"
+            }
+          },
+          "read_receipt": {
+            "as_of_date": "2026-10-09",
+            "locator_count": 1,
+            "manifest": {
+              "byte_size": 120,
+              "canonical_entity_id": null,
+              "collector_name": "official-original-import",
+              "collector_version": "1.0.0",
+              "content_sha256": "f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d",
+              "display_name": "Acme",
+              "document_id": "urn:company-wiki:document:sha256:f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d",
+              "document_kind": "investor_relations",
+              "fiscal_period": null,
+              "fiscal_year": null,
+              "form_type": null,
+              "language": "en",
+              "market": "US",
+              "mime_type": "text/html",
+              "period_end": null,
+              "provider": "official",
+              "provider_document_id": "f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d",
+              "published_date": "2026-08-26",
+              "retrieved_at": "2026-10-09T00:00:00Z",
+              "security_id": "ACME",
+              "source_id": "urn:company-wiki:source:sha256:f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d",
+              "source_url": "https://official.example/Acme/update",
+              "title": "Acme business update"
+            },
+            "narrative_ref": {
+              "artifact_sha256": "1576ae79794ed0a59028441297f99eee1155ffe44d07f06fe7833686937e23ce",
+              "artifact_version_id": "narrative-06b73db157f445a0a77e109d82402636",
+              "byte_size": 3454,
+              "schema_version": "narrative-ref/1",
+              "source_ref": {
+                "byte_size": 120,
+                "content_sha256": "f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d",
+                "document_id": "urn:company-wiki:document:sha256:f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d",
+                "mime_type": "text/html",
+                "schema_version": "2.0",
+                "source_id": "urn:company-wiki:source:sha256:f0e6296068007db10a3a64122aa194029d65d394433a361ab928633da549289d"
+              }
+            },
+            "quality_status": "needs_review",
+            "read_at": "2026-10-09T03:07:11.988717+00:00",
+            "replay_status": "verified",
+            "schema_version": "narrative-read-receipt/1",
+            "selection_status": "selected",
+            "source_read_policy_sha256": "292626b9b5d382d4bbfb5bbd970bbea157e4bff750312ef29d5dd134b65350cb",
+            "status": "ok"
+          },
+          "parser_versions": {
+            "bundle_producer": "1.0.0",
+            "material": null,
+            "model": "stub-model",
+            "parser": "1.0.0",
+            "prompt": "1.6.0",
+            "selector": "0.4.2"
+          },
+          "summary_language": "en",
+          "translate": false,
+          "locators": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:07b6894caab7b2c7000e4d7a8a81dceef4b525bc82a7697b53dd63faac087882",
+              "locator": "loc:v1/paragraph:1"
+            }
+          ],
+          "selection": {
+            "candidate_count": 1,
+            "coverage_complete": true,
+            "dropped_financial_count": 0,
+            "lines_total": 2,
+            "omitted_candidate_count": 0,
+            "pages_read": 0,
+            "pages_total": 0,
+            "selected_count": 1,
+            "source_units": 2,
+            "status": "selected",
+            "tables_scanned": 0,
+            "tables_total": 0
+          }
+        },
+        {
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:28182e40cd360a995d7c571b57b7c0df933dfee40611b42f4f2710311924f20c",
+            "source_id": "urn:company-wiki:source:sha256:28182e40cd360a995d7c571b57b7c0df933dfee40611b42f4f2710311924f20c",
+            "content_sha256": "28182e40cd360a995d7c571b57b7c0df933dfee40611b42f4f2710311924f20c",
+            "byte_size": 836,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          },
+          "narrative_ref": {
+            "artifact_sha256": "cd61ac8849bfad3e15d592149c4b4832c740221e0270c582eaa07a2f3a8316e5",
+            "artifact_version_id": "narrative-462421f912e04df88d75d1b65f5686e1",
+            "byte_size": 3555,
+            "schema_version": "narrative-ref/1",
+            "source_ref": {
+              "byte_size": 836,
+              "content_sha256": "28182e40cd360a995d7c571b57b7c0df933dfee40611b42f4f2710311924f20c",
+              "document_id": "urn:company-wiki:document:sha256:28182e40cd360a995d7c571b57b7c0df933dfee40611b42f4f2710311924f20c",
+              "mime_type": "application/pdf",
+              "schema_version": "2.0",
+              "source_id": "urn:company-wiki:source:sha256:28182e40cd360a995d7c571b57b7c0df933dfee40611b42f4f2710311924f20c"
+            }
+          },
+          "read_receipt": {
+            "as_of_date": "2026-10-09",
+            "locator_count": 1,
+            "manifest": {
+              "byte_size": 836,
+              "canonical_entity_id": null,
+              "collector_name": "official-original-import",
+              "collector_version": "1.0.0",
+              "content_sha256": "28182e40cd360a995d7c571b57b7c0df933dfee40611b42f4f2710311924f20c",
+              "display_name": "Acme",
+              "document_id": "urn:company-wiki:document:sha256:28182e40cd360a995d7c571b57b7c0df933dfee40611b42f4f2710311924f20c",
+              "document_kind": "investor_call_transcript",
+              "fiscal_period": null,
+              "fiscal_year": null,
+              "form_type": null,
+              "language": "unknown",
+              "market": "US",
+              "mime_type": "application/pdf",
+              "period_end": null,
+              "provider": "official",
+              "provider_document_id": "28182e40cd360a995d7c571b57b7c0df933dfee40611b42f4f2710311924f20c",
+              "published_date": "2026-08-26",
+              "retrieved_at": "2026-10-09T00:00:00Z",
+              "security_id": "ACME",
+              "source_id": "urn:company-wiki:source:sha256:28182e40cd360a995d7c571b57b7c0df933dfee40611b42f4f2710311924f20c",
+              "source_url": "https://official.example/Acme/update",
+              "title": "Acme business update"
+            },
+            "narrative_ref": {
+              "artifact_sha256": "cd61ac8849bfad3e15d592149c4b4832c740221e0270c582eaa07a2f3a8316e5",
+              "artifact_version_id": "narrative-462421f912e04df88d75d1b65f5686e1",
+              "byte_size": 3555,
+              "schema_version": "narrative-ref/1",
+              "source_ref": {
+                "byte_size": 836,
+                "content_sha256": "28182e40cd360a995d7c571b57b7c0df933dfee40611b42f4f2710311924f20c",
+                "document_id": "urn:company-wiki:document:sha256:28182e40cd360a995d7c571b57b7c0df933dfee40611b42f4f2710311924f20c",
+                "mime_type": "application/pdf",
+                "schema_version": "2.0",
+                "source_id": "urn:company-wiki:source:sha256:28182e40cd360a995d7c571b57b7c0df933dfee40611b42f4f2710311924f20c"
+              }
+            },
+            "quality_status": "needs_review",
+            "read_at": "2026-10-09T03:07:13.700834+00:00",
+            "replay_status": "verified",
+            "schema_version": "narrative-read-receipt/1",
+            "selection_status": "selected",
+            "source_read_policy_sha256": "98dfd6a4cfe90b24962ab07df5ed0c15ecdb46187d6d7f805427dcfb1ec1bd7c",
+            "status": "ok"
+          },
+          "parser_versions": {
+            "bundle_producer": "1.0.0",
+            "material": null,
+            "model": "stub-model",
+            "parser": "0.1.1",
+            "prompt": "1.6.0",
+            "selector": "0.4.2"
+          },
+          "summary_language": "en",
+          "translate": false,
+          "locators": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:befad0df57a2d977df9dc15029a4a0f8e0db33987e91603d91dcfe2d08ffbee6",
+              "locator": "loc:v1/page:1/paragraph:0"
+            }
+          ],
+          "selection": {
+            "candidate_count": 1,
+            "coverage_complete": true,
+            "dropped_financial_count": 0,
+            "lines_total": 0,
+            "omitted_candidate_count": 0,
+            "pages_read": 1,
+            "pages_total": 1,
+            "selected_count": 1,
+            "source_units": 1,
+            "status": "selected",
+            "tables_scanned": 1,
+            "tables_total": 1
+          }
+        },
+        {
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc",
+            "source_id": "urn:company-wiki:source:sha256:c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc",
+            "content_sha256": "c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc",
+            "byte_size": 119,
+            "mime_type": "text/plain",
+            "schema_version": "2.0"
+          },
+          "narrative_ref": {
+            "artifact_sha256": "8c748bd41bc5dc9dc230c55cfad26d7a5ac9dd12da8cbbc774adadda1920ce91",
+            "artifact_version_id": "narrative-df27bd9ff9f84f399a9ac8cb97854132",
+            "byte_size": 4146,
+            "schema_version": "narrative-ref/1",
+            "source_ref": {
+              "byte_size": 119,
+              "content_sha256": "c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc",
+              "document_id": "urn:company-wiki:document:sha256:c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc",
+              "mime_type": "text/plain",
+              "schema_version": "2.0",
+              "source_id": "urn:company-wiki:source:sha256:c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc"
+            }
+          },
+          "read_receipt": {
+            "as_of_date": "2026-10-09",
+            "locator_count": 1,
+            "manifest": {
+              "byte_size": 119,
+              "canonical_entity_id": null,
+              "collector_name": "official-original-import",
+              "collector_version": "1.0.0",
+              "content_sha256": "c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc",
+              "display_name": "Acme",
+              "document_id": "urn:company-wiki:document:sha256:c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc",
+              "document_kind": "investor_call_transcript",
+              "fiscal_period": null,
+              "fiscal_year": null,
+              "form_type": null,
+              "language": "zh",
+              "market": "US",
+              "mime_type": "text/plain",
+              "period_end": null,
+              "provider": "official",
+              "provider_document_id": "c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc",
+              "published_date": "2026-08-26",
+              "retrieved_at": "2026-10-09T00:00:00Z",
+              "security_id": "ACME",
+              "source_id": "urn:company-wiki:source:sha256:c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc",
+              "source_url": "https://official.example/Acme/update",
+              "title": "Acme business update"
+            },
+            "narrative_ref": {
+              "artifact_sha256": "8c748bd41bc5dc9dc230c55cfad26d7a5ac9dd12da8cbbc774adadda1920ce91",
+              "artifact_version_id": "narrative-df27bd9ff9f84f399a9ac8cb97854132",
+              "byte_size": 4146,
+              "schema_version": "narrative-ref/1",
+              "source_ref": {
+                "byte_size": 119,
+                "content_sha256": "c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc",
+                "document_id": "urn:company-wiki:document:sha256:c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc",
+                "mime_type": "text/plain",
+                "schema_version": "2.0",
+                "source_id": "urn:company-wiki:source:sha256:c4e6a3d619f7f174b085dd12dbb105bbaf381e192bab2797c4c327bd089b59dc"
+              }
+            },
+            "quality_status": "needs_review",
+            "read_at": "2026-10-09T03:07:15.509507+00:00",
+            "replay_status": "verified",
+            "schema_version": "narrative-read-receipt/1",
+            "selection_status": "selected",
+            "source_read_policy_sha256": "312c7a9cf68d48d6c5e0702cb5b93a2300f092074ee06f8355a04e793d90b76b",
+            "status": "ok"
+          },
+          "parser_versions": {
+            "bundle_producer": "1.0.0",
+            "material": "transcript-original-text/1.0.0",
+            "model": "stub-model",
+            "parser": "0.1.1",
+            "prompt": "1.6.0",
+            "selector": "0.4.2"
+          },
+          "summary_language": "zh",
+          "translate": false,
+          "locators": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:81c05fab6dad2c187048108372dcad9051af3f51f36b4d529613f14b839f34ea",
+              "locator": "loc:v1/paragraph:1/chars:0-27"
+            }
+          ],
+          "selection": {
+            "candidate_count": 1,
+            "coverage_complete": true,
+            "dropped_financial_count": 0,
+            "lines_total": 2,
+            "omitted_candidate_count": 0,
+            "pages_read": 0,
+            "pages_total": 0,
+            "selected_count": 1,
+            "source_units": 1,
+            "status": "selected",
+            "tables_scanned": 0,
+            "tables_total": 0
+          }
+        }
+      ]
+    }
+  },
+  "validation": [
+    {
+      "name": "COMMIT-feature",
+      "command": [
+        "git",
+        "commit",
+        "-m",
+        "feat: connect official originals to finite source narratives"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+      "temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w03f-oyq6fzud",
+      "temp_initial": "absent; created exclusively",
+      "supplier_requests": 0,
+      "protected_before": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 5.731,
+      "protected_after": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "temp_final": "absent",
+      "receipt_file": "COMMIT-feature.json",
+      "output_file": "COMMIT-feature.txt",
+      "summary": " create mode 100644 tests/integration/test_official_source_flow.py"
+    },
+    {
+      "name": "GREEN-core",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/integration/test_official_source_flow.py",
+        "tests/unit/test_source_facts.py",
+        "tests/unit/test_narrative_transport_contracts.py",
+        "tests/document_normalization/test_html.py",
+        "tests/document_normalization/test_replay_and_determinism.py",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+      "temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w03f-z0_4tfab",
+      "temp_initial": "absent; created exclusively",
+      "supplier_requests": 0,
+      "protected_before": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 38.241,
+      "protected_after": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "temp_final": "absent",
+      "receipt_file": "GREEN-core.json",
+      "output_file": "GREEN-core.txt",
+      "summary": "110 passed in 35.20s"
+    },
+    {
+      "name": "GREEN-final-verified",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/integration/test_official_source_flow.py",
+        "tests/unit/test_source_facts.py",
+        "tests/unit/test_narrative_transport_contracts.py",
+        "tests/document_normalization/test_html.py",
+        "tests/document_normalization/test_replay_and_determinism.py",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+      "temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w03f-47oe7l40",
+      "temp_initial": "absent; created exclusively",
+      "supplier_requests": 0,
+      "protected_before": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 41.509,
+      "protected_after": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "temp_final": "absent",
+      "receipt_file": "GREEN-final-verified.json",
+      "output_file": "GREEN-final-verified.txt",
+      "summary": "113 passed in 38.32s"
+    },
+    {
+      "name": "GREEN-finite-regression",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/unit/test_finite_configured_entrypoint_launch.py",
+        "tests/integration/test_narrative_batch_cli_e2e.py",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+      "temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w03f-qkvewp5t",
+      "temp_initial": "absent; created exclusively",
+      "supplier_requests": 0,
+      "protected_before": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 78.07,
+      "protected_after": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "temp_final": "absent",
+      "receipt_file": "GREEN-finite-regression.json",
+      "output_file": "GREEN-finite-regression.txt",
+      "summary": "21 passed, 1 skipped in 75.01s (0:01:15)"
+    },
+    {
+      "name": "GREEN-host-assumptions",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "scripts/host_assumption_guard.py"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+      "temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w03f-7nsof8dh",
+      "temp_initial": "absent; created exclusively",
+      "supplier_requests": 0,
+      "protected_before": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 16.184,
+      "protected_after": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "temp_final": "absent",
+      "receipt_file": "GREEN-host-assumptions.json",
+      "output_file": "GREEN-host-assumptions.txt",
+      "summary": "scanned roots=['tests', 'src']; violations=68; new(not baselined)=0; baseline=62"
+    },
+    {
+      "name": "GREEN-lint",
+      "command": [
+        "ruff",
+        "check",
+        "--no-cache",
+        "src/company_wiki/source_catalog/official_source_flow.py",
+        "src/company_wiki/source_catalog/official_source_cli.py",
+        "src/company_wiki/source_catalog/official_discovery.py",
+        "src/company_wiki/source_catalog/canonical_writer.py",
+        "src/company_wiki/automation/narrative_batch.py",
+        "src/company_wiki/automation/narrative_formats.py",
+        "tests/integration/test_official_source_flow.py",
+        "docs/implementation/pool-w03-official-flow/validate.py"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+      "temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w03f-keiiki7g",
+      "temp_initial": "absent; created exclusively",
+      "supplier_requests": 0,
+      "protected_before": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 0.106,
+      "protected_after": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "temp_final": "absent",
+      "receipt_file": "GREEN-lint.json",
+      "output_file": "GREEN-lint.txt",
+      "summary": "All checks passed!"
+    },
+    {
+      "name": "GREEN-storage-regression",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/contract/test_source_catalog_canonical_writer.py",
+        "tests/unit/test_canonical_import_reference.py",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+      "temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w03f-r6t4h12w",
+      "temp_initial": "absent; created exclusively",
+      "supplier_requests": 0,
+      "protected_before": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 5.317,
+      "protected_after": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "temp_final": "absent",
+      "receipt_file": "GREEN-storage-regression.json",
+      "output_file": "GREEN-storage-regression.txt",
+      "summary": "17 passed in 2.68s"
+    },
+    {
+      "name": "GREEN-final",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/integration/test_official_source_flow.py",
+        "tests/unit/test_source_facts.py",
+        "tests/unit/test_narrative_transport_contracts.py",
+        "tests/document_normalization/test_html.py",
+        "tests/document_normalization/test_replay_and_determinism.py",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+      "temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w03f-x68t13v0",
+      "temp_initial": "absent; created exclusively",
+      "supplier_requests": 0,
+      "protected_before": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "exit_code": 1,
+      "elapsed_seconds": 37.655,
+      "protected_after": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "temp_final": "absent",
+      "receipt_file": "ITERATION-final.json",
+      "output_file": "ITERATION-final.txt",
+      "summary": "1 failed, 112 passed in 34.57s"
+    },
+    {
+      "name": "GREEN-html-golden-cn",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/integration/test_official_source_flow.py",
+        "-k",
+        "configured_official_three or long_cn or other_company",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+      "temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w03f-8l4rm2zf",
+      "temp_initial": "absent; created exclusively",
+      "supplier_requests": 0,
+      "protected_before": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "exit_code": 1,
+      "elapsed_seconds": 25.07,
+      "protected_after": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "temp_final": "absent",
+      "receipt_file": "ITERATION-html-golden-cn.json",
+      "output_file": "ITERATION-html-golden-cn.txt",
+      "summary": "1 failed, 3 passed, 19 deselected in 21.44s"
+    },
+    {
+      "name": "GREEN-official",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/integration/test_official_source_flow.py",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+      "temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w03f-6gjn7nsm",
+      "temp_initial": "absent; created exclusively",
+      "supplier_requests": 0,
+      "protected_before": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "exit_code": 1,
+      "elapsed_seconds": 22.274,
+      "protected_after": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "temp_final": "absent",
+      "receipt_file": "ITERATION-official.json",
+      "output_file": "ITERATION-official.txt",
+      "summary": "1 failed, 20 passed in 19.56s"
+    },
+    {
+      "name": "GREEN-responsibility-final",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/integration/test_official_source_flow.py",
+        "tests/unit/test_source_facts.py",
+        "tests/unit/test_narrative_transport_contracts.py",
+        "tests/document_normalization/test_html.py",
+        "tests/document_normalization/test_replay_and_determinism.py",
+        "tests/contract/test_source_catalog_canonical_writer.py",
+        "tests/unit/test_canonical_import_reference.py",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+      "temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w03f-_g1s4jlq",
+      "temp_initial": "absent; created exclusively",
+      "supplier_requests": 0,
+      "protected_before": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "exit_code": 2,
+      "elapsed_seconds": 5.058,
+      "protected_after": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "temp_final": "absent",
+      "receipt_file": "ITERATION-responsibility-final.json",
+      "output_file": "ITERATION-responsibility-final.txt",
+      "summary": "2 errors in 1.36s"
+    },
+    {
+      "name": "RED-metadata-discovery",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/integration/test_official_source_flow.py",
+        "-k",
+        "capture_offset or discovery_cli",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+      "temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w03f-iyt0wj1r",
+      "temp_initial": "absent; created exclusively",
+      "supplier_requests": 0,
+      "protected_before": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "exit_code": 1,
+      "elapsed_seconds": 5.31,
+      "protected_after": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "temp_final": "absent",
+      "receipt_file": "RED-metadata-discovery.json",
+      "output_file": "RED-metadata-discovery.txt",
+      "summary": "2 failed, 1 passed, 17 deselected in 2.67s"
+    },
+    {
+      "name": "RED-period",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/integration/test_official_source_flow.py",
+        "-k",
+        "capture_offset",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+      "temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w03f-flc0g1xe",
+      "temp_initial": "absent; created exclusively",
+      "supplier_requests": 0,
+      "protected_before": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "exit_code": 1,
+      "elapsed_seconds": 3.73,
+      "protected_after": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "temp_final": "absent",
+      "receipt_file": "RED-period.json",
+      "output_file": "RED-period.txt",
+      "summary": "1 failed, 19 deselected in 1.07s"
+    },
+    {
+      "name": "RED-publisher",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/integration/test_official_source_flow.py",
+        "-k",
+        "reused_original",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+      "temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w03f-6hsav_9h",
+      "temp_initial": "absent; created exclusively",
+      "supplier_requests": 0,
+      "protected_before": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "exit_code": 1,
+      "elapsed_seconds": 4.242,
+      "protected_after": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "temp_final": "absent",
+      "receipt_file": "RED-publisher.json",
+      "output_file": "RED-publisher.txt",
+      "summary": "1 failed, 20 deselected in 1.29s"
+    },
+    {
+      "name": "RED-takeover",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/integration/test_official_source_flow.py",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+      "temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w03f-v9cmwh5k",
+      "temp_initial": "absent; created exclusively",
+      "supplier_requests": 0,
+      "protected_before": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "exit_code": 1,
+      "elapsed_seconds": 15.696,
+      "protected_after": {
+        "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+      },
+      "temp_final": "absent",
+      "receipt_file": "RED-takeover.json",
+      "output_file": "RED-takeover.txt",
+      "summary": "1 failed, 16 passed in 12.68s"
+    }
+  ],
+  "inherited_evidence": {
+    "RED.txt": "8 failed in 0.82s: missing public modules",
+    "RED-routing.txt": "1 failed, 9 passed in 1.99s: unknown language/carrier routing",
+    "RED-finite.txt": "1 failed, 16 passed in 12.97s: incomplete expected_source caller",
+    "GREEN-finite.txt": "historical misnamed failed iteration: read_receipt KeyError",
+    "GREEN-public.txt": "historical misnamed failed iteration: MockTransport pre-buffered body bypassed byte stream budget",
+    "GREEN-responsibilities.txt": "99 passed in 10.50s before final expansion",
+    "original_process_exit_metadata": "not recorded in inherited files; unknown"
+  },
+  "budget": {
+    "new_supplier_requests": 0,
+    "new_supplier_cost_usd": "0",
+    "new_supplier_usage_unknown": 0,
+    "engineering_fixture_only": true,
+    "current_three_source_loopback_requests": 3,
+    "current_simulated_usage": {
+      "estimated_micro_usd": 333,
+      "tokens": 276,
+      "unknown_reservations": 0,
+      "unsettled_reservations": 0
+    },
+    "repeat_simulated_usage": {
+      "estimated_micro_usd": 333,
+      "tokens": 276,
+      "unknown_reservations": 0,
+      "unsettled_reservations": 0
+    },
+    "historical_real_run_budget": "unchanged; not reread or rewritten here",
+    "automation_db": "existing AUTO schema only, isolated fixture DBs removed; no second ledger"
+  },
+  "TEMP": {
+    "creation": "mkdtemp unique owned short w03f-* roots under current TEMP; initial absent by exclusive creation",
+    "restoration": "finally validates resolved parent, owned name and no reparse points; removes only that new root; does not delete global pytest files",
+    "all_recorded_roots_final": "absent",
+    "own_staging_failure": "foreign sentinel and already committed originals preserved; only this call staged temp removed"
+  },
+  "protected_inputs": {
+    "production_config_hashes_unchanged": true,
+    "isolated_original_and_sidecar_bytes_unchanged_after_reimport": true,
+    "production_originals": "no writes, no provider downloads, no main/other-repository mutation; no exhaustive production raw inventory is claimed"
+  },
+  "installation": {
+    "performed": false,
+    "new_sha_is_feature_blob_sha256": true,
+    "old_sha_is_base_blob_sha256": true,
+    "invocation": "Run source modules directly with current src/scripts PYTHONPATH. MAIN owns merge/installation; no skill sync, no production config edit."
+  },
+  "non_goals_confirmed": [
+    "no investment conclusions, targets, valuation, ratings or research-state writer",
+    "no new budget/task DB",
+    "no public/private or policy permission gate",
+    "no push, merge, install, Dayu write, other-company launch, shared PWF write"
+  ],
+  "limitations": [
+    "MAIN owns live M2: no real official supplier retrieval/model call or research completeness is claimed by these fixtures.",
+    "Dynamic and unsupported indexes remain partial and need existing browser/official API capture; known future/old items are excluded, no_documents_claimed is always false.",
+    "Image-only PDF remains PARSER_INCOMPLETE. No OCR or audio transcription is added.",
+    "Repeat within the existing same run is proved. Wider cross-run caching remains the existing Phase 6 owner.",
+    "Existing live-byte/RF-input integration test explicitly skipped without CWP_E2E_TRANSCRIPT_PATH/CWP_RF_PROJECT_ROOT; all ordinary loopback checks ran.",
+    "An aggregate test invocation combining tests/contract and document_normalization hit the existing conftest module namespace collision. Exact failure retained; both responsibility groups passed in independent runs.",
+    "Synthetic HTML golden references its now-deleted owned temporary catalog; it is an actual exported protocol sample, not a durable live source. It includes selected evidence only.",
+    "MAIN-owned FMP extra-provider-metadata fix is separate and is not included in this feature commit.",
+    "Inherited first RED/GREEN text files did not store raw process exit metadata. Their summaries are retained, and their original exit code is unknown; takeover and later runs have exact JSON receipts."
+  ],
+  "replay_commands": [
+    "python -X utf8 -B docs/implementation/pool-w03-official-flow/validate.py GREEN-replay -m pytest tests/integration/test_official_source_flow.py tests/unit/test_source_facts.py tests/unit/test_narrative_transport_contracts.py tests/document_normalization/test_html.py tests/document_normalization/test_replay_and_determinism.py -q -p no:cacheprovider",
+    "python -X utf8 -B docs/implementation/pool-w03-official-flow/validate.py GREEN-storage-replay -m pytest tests/contract/test_source_catalog_canonical_writer.py tests/unit/test_canonical_import_reference.py -q -p no:cacheprovider",
+    "python -X utf8 -B docs/implementation/pool-w03-official-flow/validate.py GREEN-finite-replay -m pytest tests/unit/test_finite_configured_entrypoint_launch.py tests/integration/test_narrative_batch_cli_e2e.py -q -p no:cacheprovider"
+  ],
+  "changed_paths": [
+    "docs/implementation/pool-w03-official-flow/COMMIT-feature.json",
+    "docs/implementation/pool-w03-official-flow/COMMIT-feature.txt",
+    "docs/implementation/pool-w03-official-flow/GREEN-core.json",
+    "docs/implementation/pool-w03-official-flow/GREEN-core.txt",
+    "docs/implementation/pool-w03-official-flow/GREEN-final-verified.json",
+    "docs/implementation/pool-w03-official-flow/GREEN-final-verified.txt",
+    "docs/implementation/pool-w03-official-flow/GREEN-finite-regression.json",
+    "docs/implementation/pool-w03-official-flow/GREEN-finite-regression.txt",
+    "docs/implementation/pool-w03-official-flow/GREEN-finite.txt",
+    "docs/implementation/pool-w03-official-flow/GREEN-host-assumptions.json",
+    "docs/implementation/pool-w03-official-flow/GREEN-host-assumptions.txt",
+    "docs/implementation/pool-w03-official-flow/GREEN-iteration1.txt",
+    "docs/implementation/pool-w03-official-flow/GREEN-lint.json",
+    "docs/implementation/pool-w03-official-flow/GREEN-lint.txt",
+    "docs/implementation/pool-w03-official-flow/GREEN-public.txt",
+    "docs/implementation/pool-w03-official-flow/GREEN-responsibilities.txt",
+    "docs/implementation/pool-w03-official-flow/GREEN-storage-regression.json",
+    "docs/implementation/pool-w03-official-flow/GREEN-storage-regression.txt",
+    "docs/implementation/pool-w03-official-flow/HANDOFF.md",
+    "docs/implementation/pool-w03-official-flow/INTERFACE.md",
+    "docs/implementation/pool-w03-official-flow/ITERATION-final.json",
+    "docs/implementation/pool-w03-official-flow/ITERATION-final.txt",
+    "docs/implementation/pool-w03-official-flow/ITERATION-html-golden-cn.json",
+    "docs/implementation/pool-w03-official-flow/ITERATION-html-golden-cn.txt",
+    "docs/implementation/pool-w03-official-flow/ITERATION-official.json",
+    "docs/implementation/pool-w03-official-flow/ITERATION-official.txt",
+    "docs/implementation/pool-w03-official-flow/ITERATION-responsibility-final.json",
+    "docs/implementation/pool-w03-official-flow/ITERATION-responsibility-final.txt",
+    "docs/implementation/pool-w03-official-flow/RED-finite.txt",
+    "docs/implementation/pool-w03-official-flow/RED-metadata-discovery.json",
+    "docs/implementation/pool-w03-official-flow/RED-metadata-discovery.txt",
+    "docs/implementation/pool-w03-official-flow/RED-period.json",
+    "docs/implementation/pool-w03-official-flow/RED-period.txt",
+    "docs/implementation/pool-w03-official-flow/RED-publisher.json",
+    "docs/implementation/pool-w03-official-flow/RED-publisher.txt",
+    "docs/implementation/pool-w03-official-flow/RED-routing.txt",
+    "docs/implementation/pool-w03-official-flow/RED-takeover.json",
+    "docs/implementation/pool-w03-official-flow/RED-takeover.txt",
+    "docs/implementation/pool-w03-official-flow/RED.txt",
+    "docs/implementation/pool-w03-official-flow/flow-proof.json",
+    "docs/implementation/pool-w03-official-flow/handoff.json",
+    "docs/implementation/pool-w03-official-flow/html-bundle.json",
+    "docs/implementation/pool-w03-official-flow/html-read-receipt.json",
+    "docs/implementation/pool-w03-official-flow/html-read-request.json",
+    "docs/implementation/pool-w03-official-flow/validate.py",
+    "src/company_wiki/automation/narrative_batch.py",
+    "src/company_wiki/automation/narrative_formats.py",
+    "src/company_wiki/source_catalog/canonical_writer.py",
+    "src/company_wiki/source_catalog/official_discovery.py",
+    "src/company_wiki/source_catalog/official_source_cli.py",
+    "src/company_wiki/source_catalog/official_source_flow.py",
+    "tests/integration/test_official_source_flow.py"
+  ],
+  "evidence_sha256_definition": "SHA-256 of actual working-file bytes captured before documentation commit; feature blob hashes are separately recorded for portable Git bytes.",
+  "raw_evidence_whitespace": "Base-to-head git diff --check reports emitted trailing whitespace in preserved pytest .txt failure output; code whitespace is clean. Original failure text retained."
+}

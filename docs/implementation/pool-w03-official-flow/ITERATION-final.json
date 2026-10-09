@@ -1,0 +1,34 @@
+{
+  "name": "GREEN-final",
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/integration/test_official_source_flow.py",
+    "tests/unit/test_source_facts.py",
+    "tests/unit/test_narrative_transport_contracts.py",
+    "tests/document_normalization/test_html.py",
+    "tests/document_normalization/test_replay_and_determinism.py",
+    "-q",
+    "-p",
+    "no:cacheprovider"
+  ],
+  "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+  "temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w03f-x68t13v0",
+  "temp_initial": "absent; created exclusively",
+  "supplier_requests": 0,
+  "protected_before": {
+    "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+  },
+  "exit_code": 1,
+  "elapsed_seconds": 37.655,
+  "protected_after": {
+    "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+  },
+  "temp_final": "absent"
+}

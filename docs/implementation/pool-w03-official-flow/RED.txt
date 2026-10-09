@@ -1,0 +1,61 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 8 items
+
+tests\integration\test_official_source_flow.py FFFFFFFF                  [100%]
+
+================================== FAILURES ===================================
+________ test_official_import_is_pathless_byte_verified_and_idempotent ________
+tests\integration\test_official_source_flow.py:33: in test_official_import_is_pathless_byte_verified_and_idempotent
+    first=_import(catalog,data); assert first['schema_version']=='official-source-import-result/1'
+          ^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_source_flow.py:27: in _import
+    from company_wiki.source_catalog.official_source_flow import import_official_source
+E   ModuleNotFoundError: No module named 'company_wiki.source_catalog.official_source_flow'
+__________ test_other_company_and_unknown_dates_are_never_relabelled __________
+tests\integration\test_official_source_flow.py:50: in test_other_company_and_unknown_dates_are_never_relabelled
+    result=_import(catalog,b'<html><h1>Microsoft</h1><p>Customer demand exceeds available supply.</p></html>',entity='Microsoft',published=None,language='unknown')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_source_flow.py:27: in _import
+    from company_wiki.source_catalog.official_source_flow import import_official_source
+E   ModuleNotFoundError: No module named 'company_wiki.source_catalog.official_source_flow'
+_ test_bad_originals_refused_before_canonical_write[<html><title>Access Denied</title><body>Access Denied</body></html>-text/html-response_is_error] _
+tests\integration\test_official_source_flow.py:59: in test_bad_originals_refused_before_canonical_write
+    from company_wiki.source_catalog.official_source_flow import OfficialSourceError
+E   ModuleNotFoundError: No module named 'company_wiki.source_catalog.official_source_flow'
+_ test_bad_originals_refused_before_canonical_write[%PDF-1.4\n%%EOF-application/pdf-invalid_pdf] _
+tests\integration\test_official_source_flow.py:59: in test_bad_originals_refused_before_canonical_write
+    from company_wiki.source_catalog.official_source_flow import OfficialSourceError
+E   ModuleNotFoundError: No module named 'company_wiki.source_catalog.official_source_flow'
+_ test_bad_originals_refused_before_canonical_write[<html>not a PDF</html>-application/pdf-mime_mismatch] _
+tests\integration\test_official_source_flow.py:59: in test_bad_originals_refused_before_canonical_write
+    from company_wiki.source_catalog.official_source_flow import OfficialSourceError
+E   ModuleNotFoundError: No module named 'company_wiki.source_catalog.official_source_flow'
+______ test_bad_sha_refused_and_failed_import_cleans_only_owned_staging _______
+tests\integration\test_official_source_flow.py:66: in test_bad_sha_refused_and_failed_import_cleans_only_owned_staging
+    from company_wiki.source_catalog.official_source_flow import import_official_source,OfficialSourceError
+E   ModuleNotFoundError: No module named 'company_wiki.source_catalog.official_source_flow'
+________ test_discovery_notice_dynamic_future_and_unknown_are_explicit ________
+tests\integration\test_official_source_flow.py:74: in test_discovery_notice_dynamic_future_and_unknown_are_explicit
+    from company_wiki.source_catalog.official_discovery import discover_official_documents
+E   ModuleNotFoundError: No module named 'company_wiki.source_catalog.official_discovery'
+_______ test_discovery_limits_do_not_turn_truncation_into_no_materials ________
+tests\integration\test_official_source_flow.py:89: in test_discovery_limits_do_not_turn_truncation_into_no_materials
+    from company_wiki.source_catalog.official_discovery import discover_official_documents
+E   ModuleNotFoundError: No module named 'company_wiki.source_catalog.official_discovery'
+=========================== short test summary info ===========================
+FAILED tests/integration/test_official_source_flow.py::test_official_import_is_pathless_byte_verified_and_idempotent
+FAILED tests/integration/test_official_source_flow.py::test_other_company_and_unknown_dates_are_never_relabelled
+FAILED tests/integration/test_official_source_flow.py::test_bad_originals_refused_before_canonical_write[<html><title>Access Denied</title><body>Access Denied</body></html>-text/html-response_is_error]
+FAILED tests/integration/test_official_source_flow.py::test_bad_originals_refused_before_canonical_write[%PDF-1.4\n%%EOF-application/pdf-invalid_pdf]
+FAILED tests/integration/test_official_source_flow.py::test_bad_originals_refused_before_canonical_write[<html>not a PDF</html>-application/pdf-mime_mismatch]
+FAILED tests/integration/test_official_source_flow.py::test_bad_sha_refused_and_failed_import_cleans_only_owned_staging
+FAILED tests/integration/test_official_source_flow.py::test_discovery_notice_dynamic_future_and_unknown_are_explicit
+FAILED tests/integration/test_official_source_flow.py::test_discovery_limits_do_not_turn_truncation_into_no_materials
+============================== 8 failed in 0.82s ==============================
