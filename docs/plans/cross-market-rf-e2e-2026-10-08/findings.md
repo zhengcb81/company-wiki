@@ -1,5 +1,15 @@
 # Findings
 
+## 新研究的共用边界（2026-10-09；尚非研究全绿）
+
+原三家三个独立执行在既有授权下已实际开始。新发现与责任细则见 [IMPLEMENTATION](phase6/fresh_runtime_boundaries/IMPLEMENTATION.md)。已确认 RF targets.py 残留 `checked_date <= as_of` 与 source-clock 原意冲突；rich MIME 白名单漏 PPTX；RF URL 合同比 CWP storage 的 HTTP(S) provenance 更窄。保持真实操作日期、原始 URL 和 source SHA，不能要求人签/回填日期/重复 GET 才通过。
+
+RF先写反例：第一次测试夹具选错日期、键名与默认 TXT golden，属于测试构造错误，不计产品 RED；校正为实际 seeded日期与既有 HTML golden 后3个真实FAIL/12PASS，URL独立导入路径校正后1个真实FAIL/7PASS。实现仅使用现有 source-clock、rich-document locator语义与 public URL校验；193责任测试+2subtests通过/1.54秒，Ruff通过。旧未来材料、错误顺序、TXT/JSON缺lineage及伪占位 URL 仍拒绝；不新增人工许可。
+
+FF installed `filing_contracts.py` 与当前入口不成闭包，首次 MSFT缺报表路径因旧类无upstream_cause崩溃；定点同步两个文件两物理根后原生15文件MATCH，配置SHA保持不变。修后真实reuse-only为local_metadata_gap，仍不是缺报表已下载成功，早期fetch失败HTTP用量未知不能记0。
+
+H1 zh-CN与事件枚举、年报模型截断、ET request_schema、缺报表匹配、官方import长路径假设、IR DOCX未支持等分别保留。Q1首次复用annual work导致BATCH_WORK_DIRECTORY_CONFLICT；合法不同批次独占work子目录后真实摘要成功，原annual截断未消失。腾讯补充官方2025Q2 IR按公共有界fetch→import→RF prepare成功，不伪造DownloadReceipt，获取与入库各自计量。收费母账须从原生receipt/settled export入一次；消息数字暂不是authoritative结算。
+
 ## 当前补漏结论：项目重复授权已清理（2026-10-09 06:40 UTC）
 
 - 不把工具平台自动审批与仓库人工许可混为一谈。当前托管session的reviewer不能由项目代码关闭，也不能换命令/渠道绕过；已授权公司资料处理不再新增项目许可文件。API凭证认证、供应商套餐和真实来源/资源约束分别保留其职责。

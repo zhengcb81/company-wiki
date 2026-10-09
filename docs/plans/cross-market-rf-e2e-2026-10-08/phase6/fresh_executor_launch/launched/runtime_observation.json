@@ -1,0 +1,583 @@
+{
+  "repo_heads_observed": {
+    "CWP": "aa17acd17e17849fc93fd767d9250d3dcd27aaff",
+    "RF": "42382c9b48ef6e2e2f7395a9daca3b7380695a72",
+    "FF": "de09787c1efff9623b12ba162c4bf8325b7d9955",
+    "ET": "fa99f46861616bcebe120914fd3a030a6b8f34b5"
+  },
+  "installed_files": [
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\accounting-boundaries.md",
+      "sha256": "be72df88166b76558e997a9f42138f796fb953933dc4e7e38536622940967f60",
+      "byte_size": 2570
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\backtesting.md",
+      "sha256": "84336ecb1373baecf079949155f891121e70612ad150811532c129c556055196",
+      "byte_size": 10191
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\buy-side-methodology.md",
+      "sha256": "a55381c9519f13fbddd70d21d16d01a1229155d90a6a128fe9529d67ff80f89f",
+      "byte_size": 12669
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\compliance-contract.md",
+      "sha256": "d4509a54459c1471d4523e359eddb74147c84ce8d20138abd8b1107b3e8c7b18",
+      "byte_size": 7697
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\data-governance.md",
+      "sha256": "36ebb6975847b405f4bac19ca5617a1c030aa57ca4888bfd2276061b45708503",
+      "byte_size": 6547
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\evidence-role-calibration.md",
+      "sha256": "a476f7b10c24f5d778dbf0e6cacb77c59d831bb7fb97982dc37d49d549d81aaf",
+      "byte_size": 10059
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\extended-models.md",
+      "sha256": "831cf530a4d3260c25fe5d251f9621afe88b97708575f151bf922016e377c499",
+      "byte_size": 16741
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\growth-driver-tree.md",
+      "sha256": "ce3b57f69dfe269f868187adbf24b1579d5e822dc88cabaf0378c16e8f32c621",
+      "byte_size": 7337
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\industry-lifecycle-routing.md",
+      "sha256": "826953f8adbb26c2ebf71253711fa6d73c3958e55cd7d01f4416ca8eb2a06b5b",
+      "byte_size": 10202
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\input-construction.md",
+      "sha256": "c7ef79311c0be7f1bb63a1ff4213044d8a1f44024b53ade7b9688ebdbdab2d20",
+      "byte_size": 11651
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\input-schema.md",
+      "sha256": "b2d70aa6f97dc3382c4e342c7f449bb8205a4d47f1709656d3ba1eeeecd43607",
+      "byte_size": 19362
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\management-targets.md",
+      "sha256": "85ae3dcaa49d0ee16a35f87f21a13ca16bfed1261c2f0742e9b74d71463c9c15",
+      "byte_size": 7776
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\model-library.md",
+      "sha256": "9b335522a5e956424260cca379e640eb484d52d0688cf3d44486d06ff4f1e921",
+      "byte_size": 14308
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\output-schema.md",
+      "sha256": "fd8628717c5638ddb35e485bcec970f2ae7d8baefff75171fee18d6cd557d75d",
+      "byte_size": 6369
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\research-coverage.md",
+      "sha256": "2c1abb034da0a5e86f71bf0a58414473938c74d474543fef5a1e3781c2d7785d",
+      "byte_size": 9188
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\resource-business-guidance.md",
+      "sha256": "93ebdadcc77a7f1fcc60dd64e7ece640b238b53e28fa93c793d84eddba7f27ba",
+      "byte_size": 6263
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\schema-migration-3.4-to-3.5.md",
+      "sha256": "efee17cbaf33c688b23d2d32aca32d918c8e0a7e6dc734c4e59cc338b5408c04",
+      "byte_size": 2927
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\schema-migration-3.5-to-3.6.md",
+      "sha256": "e7b1a589de8dce4bb319da8f62f6e903d31ade44c02da954eee968cf37701cbe",
+      "byte_size": 2177
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\schema-migration-3.6-to-3.7.md",
+      "sha256": "a292acf48db79f96071a81f286fb56d0abad35752c222499d649a0baabd1ad1d",
+      "byte_size": 2149
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\target-measurement-comparison.md",
+      "sha256": "2a41d45f566f7a30508bf9bbf718f54b2182d426ecb33cf7d9b888a98dcd5464",
+      "byte_size": 5537
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\__init__.py",
+      "sha256": "f7343866b80251c3d2105c6d34446898784ef6272ed9310dfee7cbecf8db3459",
+      "byte_size": 35
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\analysis\\__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\analysis\\confidence.py",
+      "sha256": "0413b4d07ed19b976820d358c80d86f2780e9fe38113138ceb43ede5119cf05f",
+      "byte_size": 14476
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\analysis\\sensitivity.py",
+      "sha256": "da033d45f616ce547d71c1f2189cd6fd639eb992dc0336e0e3de6daa374056b9",
+      "byte_size": 11450
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\asset_ownership.py",
+      "sha256": "2dc8931451b88f410de5011bac2e80cc74f838e11e94c5627170a6e0ab891ed0",
+      "byte_size": 10622
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\commercial_terms.py",
+      "sha256": "6596d4492fcfb31cb73efaf75fb482d90156f2fbc91ab29be272e24745546005",
+      "byte_size": 4795
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_contracts.py",
+      "sha256": "6bd0c0b4220ddc9fe1d5be9c271f87568a96bb23701d519f63283367ce7dc83a",
+      "byte_size": 26232
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_posix.py",
+      "sha256": "669d268667d9e08a3d98ee1eec44ecc26fb4f142dd6d7310191169deba5dc852",
+      "byte_size": 2824
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_process.py",
+      "sha256": "9664696ac23699ecf6b234cec3aa93ce475127d36a4bddf680edb711ccf92e3d",
+      "byte_size": 8500
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_reader.py",
+      "sha256": "8ff1cf553a8849330a41f74ae27bfcacd2515186b5fa58168cead91b6cfa7508",
+      "byte_size": 3348
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_narrative_tree.py",
+      "sha256": "561f921d20636532ec13d4c2a116af120a88a2b56e55de6fbadf61f137bef8ba",
+      "byte_size": 6960
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_source.py",
+      "sha256": "e6e1df861ea25d2a23ada3e7ca9e5c1c68fdfd25cea620bdd9354d553d3f1111",
+      "byte_size": 20953
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_source_reader_v2.py",
+      "sha256": "01c92f37bee005b36aca0e114eb8974ccd03a6608461800890808548e4ed702d",
+      "byte_size": 16225
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_source_v2.py",
+      "sha256": "72bc240db60de62cabf0ca8018930fc5af5b01fe1964e1c9cffe7153dd6c9d6f",
+      "byte_size": 16188
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\confidence_policy.py",
+      "sha256": "a2444c1ebb7f7ed9144e0db0199d1055da20b126b3026f90e114c55817ed822f",
+      "byte_size": 7843
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\constants.py",
+      "sha256": "bf051f719c27ed455d2826f5e03b391d7643c596dadfcf741aadf7562d0309de",
+      "byte_size": 6200
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\document.py",
+      "sha256": "adbdbb903611108ea4fdc022b64ab0440147c67c9bc360edb5b52d309aa57d1c",
+      "byte_size": 48461
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\evidence.py",
+      "sha256": "20b4d30bda6c5045b720c36f789051ad6b885325e5e03a65e2a112b4cf0bf616",
+      "byte_size": 15861
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\source_clock.py",
+      "sha256": "194abc751640892bd38d0ad84ee482ac6797859cf27508abb88131fcf3376c3b",
+      "byte_size": 9677
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_fetch_client.py",
+      "sha256": "b08b1535b45b31c9161edb4f2186a04f848acf5b180a6c4387159e0c5da27580",
+      "byte_size": 16897
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_upstream_cause.py",
+      "sha256": "2aeff1700a051c538347eb2adae64c9aabffc9b1038c1a5f8884d1914186e0aa",
+      "byte_size": 3184
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\fix_hashes.py",
+      "sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "byte_size": 8484
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\forecast\\calc.py",
+      "sha256": "853baa0bb208c91be0c3983d9256cb42b76f61221b19ad11c11bc37db79ae049",
+      "byte_size": 15509
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\forecast\\segments.py",
+      "sha256": "7b0dac5d5b6f19aba2305a7cb5d9d0ecddb1e5a31a6833285c5f81259018f002",
+      "byte_size": 29773
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\generate_input_template.py",
+      "sha256": "f7e7f44a00203035002e4814adae9a9aaaf67bc053e8a001c80d7e100ae87a38",
+      "byte_size": 13109
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\internal_flow.py",
+      "sha256": "05814b9286889088278fc5cf0c47a40452026bbc926f8f382db7e70de38a1355",
+      "byte_size": 4841
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\lint_input.py",
+      "sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "byte_size": 21589
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\mine_year_operation.py",
+      "sha256": "602255c766897dcabf8c5107c0ba3116686aab7dca683066fdffc70b88628986",
+      "byte_size": 4670
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\mixed_recognition.py",
+      "sha256": "04ed62e0b61af523818aeff961cebc34eadc3df4b1b7756e5a32c9f8e432f232",
+      "byte_size": 4034
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\model_extensions.py",
+      "sha256": "c5c15d782834546cf1d58a0a9c2d664db79898b6cc9517c657bcfac743ce2f92",
+      "byte_size": 16009
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\model_registry.py",
+      "sha256": "62f864b9ab3f144eacff43448897d2c31abc217e17ed3b0e3f58894cdd985081",
+      "byte_size": 30116
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\narrative_source_preparation.py",
+      "sha256": "4d848e286ca318f427d9001bb6243b98d9f91886f7931d7eb4796cf4cc4c2e72",
+      "byte_size": 2400
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\processed_artifact_canary.py",
+      "sha256": "19869b02cb370add57b5910d360e3ae864b870a2825d76894ea36530a9ccacfc",
+      "byte_size": 4639
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\processing_demand.py",
+      "sha256": "fcdfcad8ebd1fc20febf3c157dcd20ad92708fd69d00373ef9a943e5a820afc1",
+      "byte_size": 8231
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\publication_registry.py",
+      "sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+      "byte_size": 10936
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\reconciliation.py",
+      "sha256": "c4b69e4ee1f3dc9822aed05b9facfd5bb44575b6b51b706dede46277ee5996f5",
+      "byte_size": 4224
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\communication_scope.py",
+      "sha256": "ef802da4ed1e10778070fdc36c51098851322e8996fbd003e12d716049ee1994",
+      "byte_size": 5435
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\coverage.py",
+      "sha256": "ae6519cc18fea823dcc9d5e47956a2aea6da3270f1041b28d7bf1b783cd4b470",
+      "byte_size": 5801
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\drivers.py",
+      "sha256": "656c50b3d3e7fc52a8637b9fe587e22fc1f0a894bfb7b343aed2ee53afd85e22",
+      "byte_size": 21671
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\evidence_roles.py",
+      "sha256": "bad8c09dde16590d3f56f979051dc814629c8b8b7fc750b66adfba51ecbf21b2",
+      "byte_size": 13610
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\input_evidence.py",
+      "sha256": "4cec4c2c4d43fea578be1261449724edb118cfeb18e08019effea27debfc1865",
+      "byte_size": 14093
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\input_quantities.py",
+      "sha256": "0217ce20bd3456122349d59dd49f4b471c4e6fc844878e561141d95a28d11f1a",
+      "byte_size": 9970
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\input_targets.py",
+      "sha256": "0abaf3c3771250730dadf7f13294cc9c22eec586e014ebeade851361f6e7a45f",
+      "byte_size": 14221
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\native_dependencies.py",
+      "sha256": "6096e2065d9036235a7960b367bbf9e7ed2ae2c7c5a766cc20f0a11d63045931",
+      "byte_size": 4517
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\target_measurement.py",
+      "sha256": "4009b0ad2ac60b5e7bc9f38c3c9f4d60e39c602c56bd712da902aeba112d1e4e",
+      "byte_size": 12423
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\targets.py",
+      "sha256": "24e2642d39593b71c82d11af386441d98b68deea1eded0850793a94d89457340",
+      "byte_size": 35613
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\timing_bridge.py",
+      "sha256": "1df60466342836611709c2e4d6d158dcf6fe8bc90301308e263c24908d4b186d",
+      "byte_size": 5578
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_backtest.py",
+      "sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "byte_size": 29070
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_constraints.py",
+      "sha256": "6ce99c1d59fa3858213e31bf9dadc351591ef0eda006d957f07cf1a839e57374",
+      "byte_size": 15064
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_core.py",
+      "sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+      "byte_size": 25879
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+      "sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "byte_size": 5324
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_publication.py",
+      "sha256": "bc2bb4a33e36ed9ad82bc4ffe33e57de8999002c2c7910b9c8b9d1565678fcd0",
+      "byte_size": 24917
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_report.py",
+      "sha256": "a41c850f9171a294c66eb402c6086cd4745840e5acb3a2726d636d0481a7db61",
+      "byte_size": 80134
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\rolling_backtest.py",
+      "sha256": "80de3bfbf47d1dc6b59fc8de94733f996463edb5d749923b6ab7039875d4ec8b",
+      "byte_size": 8900
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\schema_compatibility.py",
+      "sha256": "90bf360c78818783d52e68f7e3429f27ef1e1a2ae02c70589659ee4203d88ace",
+      "byte_size": 3671
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\schema_fields.py",
+      "sha256": "54276494dcb280b23791c3a7614eb2090997a68e1116d78f6efdf02edf52a01c",
+      "byte_size": 1526
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\schema_optin.py",
+      "sha256": "6a3e01ea8ab95e5d705ff21c86274db6fc16b3569a19d74c2d1558cd3cf6b3a3",
+      "byte_size": 2263
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_narrative_context.py",
+      "sha256": "c499ae024e9013c165aa98650df624b9567dd8ee67465a7826a06b35cfc18bde",
+      "byte_size": 6124
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_period_semantics.py",
+      "sha256": "d1c155189ccd631037e85f2f2005a8cf04cbe24c20497ede157a0d33e3d4c1ff",
+      "byte_size": 423
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+      "sha256": "ffe4a9c52c73639b4a9441c00a086624883f1e1d1c6bfa2c9bc94de0a27bc715",
+      "byte_size": 22028
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\trust_anchor.py",
+      "sha256": "9abdcec55a524574b55e0111f513338f79a486f536985d036b94b4a71ba1310c",
+      "byte_size": 1634
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\SKILL.md",
+      "sha256": "f849e43cc693cfc224a187914666de396eafd2b0b49a988deeb4a4609403a264",
+      "byte_size": 31561
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\references\\contract-ownership.md",
+      "sha256": "ca731d27679d728df86598ff3eb7eb836556f945da0a673c4fcccdf899ab80c7",
+      "byte_size": 2026
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\references\\identity.md",
+      "sha256": "ae83b6215c8c1cd0d60fac31f7c69446a2c57d9e945a6f58a709640e51aedd64",
+      "byte_size": 2038
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\et_v2_contract.py",
+      "sha256": "f692465c195dbebf23906007e27a1a98dcca9cbcdfb766f4029f831cc0ae0fe8",
+      "byte_size": 8214
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\fetch_filing.py",
+      "sha256": "6c2c2a181188819af83a5f4da01b9bc01239d92659f628d21ce2d0d7bee9b9d1",
+      "byte_size": 71079
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\ff_local_source_prepare.py",
+      "sha256": "417540c65b8c6d83e438aa60db29c3a4ea35f4ae9d1a44d26e1402e1c424ce71",
+      "byte_size": 4002
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\ff_process_transport.py",
+      "sha256": "a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a",
+      "byte_size": 11655
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\ff_process_tree.py",
+      "sha256": "4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f",
+      "byte_size": 4837
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\ff_provider_cause.py",
+      "sha256": "7dc4a63344e78c0f482cc4604f43397540e4ed1e4ee755ddffb049212e8cdf7a",
+      "byte_size": 13312
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\ff_v2_envelope.py",
+      "sha256": "8a08d234fa5659bf7108a6b6631728ca77d123b4e96489cf6241c2a44c31d4dd",
+      "byte_size": 6667
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\filing_contracts.py",
+      "sha256": "a16e44ce43e3035938905c8618d422f13807085722bae250d7de42330f3f9fbb",
+      "byte_size": 29192
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\transcript_companion.py",
+      "sha256": "b84e00c2e42331e709189ee0b66be978ee48f2270ecada2ac108fb31498b1a75",
+      "byte_size": 8018
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\transcript_tool_transport.py",
+      "sha256": "bcc9c5f33d7a249d851f6f43557c95eb0f821e710224eeb13f977888592d3f59",
+      "byte_size": 25346
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\SKILL.md",
+      "sha256": "f9d493871dcf9c81dd38dfb05a48990c8e935888c09099454005d63102eb654d",
+      "byte_size": 22631
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\references\\artifact-contract.md",
+      "sha256": "297f75cbb21d0ca720b07e99649c566153c200626bf0dc16deac1cee841af485",
+      "byte_size": 9795
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\references\\company-pool-loop.md",
+      "sha256": "8e96452ccb94b458832171855200b29214f2a106265a33eb3610d9292493794c",
+      "byte_size": 11301
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\references\\executor.md",
+      "sha256": "9d45642ad59f547054b23823ae2ecf2a75d86cd98bc01199ebfa10f3e12ada54",
+      "byte_size": 3045
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\references\\remediation.md",
+      "sha256": "6f67653523f0774c49285f30099adcbd1a2b63568798320fd9b94916fd7db3e4",
+      "byte_size": 5071
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\references\\review-analyst.md",
+      "sha256": "90855852d17571c27568e2e26ecbc482a05a803ee869fad17dab2208ceadbe9c",
+      "byte_size": 2702
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\references\\review-fetch.md",
+      "sha256": "d083b5956f939e782479e352d90cc71df013daa25d51e2bf14d98c1225778218",
+      "byte_size": 3055
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\references\\review-process.md",
+      "sha256": "696863868745cb8025ed4bb2e86e94cf0e77b7ce724bcee2ba34babe8e968667",
+      "byte_size": 3147
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\references\\review-storage.md",
+      "sha256": "e297f393725b2b43a92f7c0769a6140c4bbfbfa4aa560bf99542221d9e8b68ca",
+      "byte_size": 3009
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\references\\rf-checkpoints.md",
+      "sha256": "0f8f69a4257d1c34a30ac1ecfc9432e0c49be4280546a56e0289efce6e731459",
+      "byte_size": 5969
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\references\\workflow.md",
+      "sha256": "5db61c28c64278ec2e08734503227500a6e2ad79462f7dc462069d349961a719",
+      "byte_size": 7936
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+      "sha256": "00c2c95ce1902192ce72970e927f91d1171a73612b8ba8d302853254f8e3135e",
+      "byte_size": 28641
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\scripts\\numeric_audit.py",
+      "sha256": "39cb4f8f561f14f406b5c79639f7395af915e1f9027b15a0e2ac8e0c40949aec",
+      "byte_size": 5633
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\SKILL.md",
+      "sha256": "994175cfbd7c41b8a0ce4a717d77405c2e251651fe172ff5fa8497baa01cbe67",
+      "byte_size": 7901
+    }
+  ],
+  "protected_production_configs": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml",
+      "sha256": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+      "byte_size": 3602
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "byte_size": 866
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_acquisition.yaml",
+      "sha256": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585",
+      "byte_size": 1656
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\local_ocr.json",
+      "sha256": "9b8a7df81ca62ebc4bb9c2d60d45c247b291564a4a38f5648e5f4b3edb59889b",
+      "byte_size": 943
+    }
+  ],
+  "credential_value_logged": false
+}

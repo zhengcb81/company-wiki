@@ -1,5 +1,32 @@
 # Progress
 
+## 2026-10-09：新RF主线发布/真实重试
+
+RF f88ace5a正常合main79139534并push，快速prepush126PASS+Ruff/mypy，exact CI37900018978成功。六个runtime/指引文件实装到两个物理root，原始执行路径字节已实核，.claude沿现有alias。安装第一次把--destination完整skill路径误当父目录，实际只创建本次六文件嵌套副本；原错误回执保留，纠正参数后验证每个实际执行文件、精确owned副本清单/SHA，再清理两个嵌套副本。自己的工程工作树干净并线后恢复不存在；原件删除0。不能把首次虚假的nested check MATCH称安装成功。
+
+真实重试：CN H1/Q1/IPO三个HTTP原件publicprepare成功、0重下载；Q1六条span→claim→used parameter→公式实际消费、formal lint/hash/validate/compute/render/immutable snapshot/registry通过；whole研究仍partial，留年报/H1/FY24等gap。US PPTX公共读取实际成功，仍15/16 selected和partial coverage；HK真实Q1已由RF→FF→Dayu→CWP下载865653B并入库，GMTN招股性质文件3478243B/664页标准import成功；首次长文件名失败原样留证，不改Dayu。实际来源与费用均由独立执行者记录，四审未完成。
+
+母账已实读四收费native run（CN失败annual和Q1、HK两摘要一个run、US PPTX）：累计236614tokens/151565microUSD估计，旧unknown7/FX2764保持，不清零/重复加；HTTP次数未观察为null，US早期fetch未知用量仍单列。新共因敏感性：HK/US祖先参数被仅direct-ID gate拒绝；已有共享expanded DAG未被sensitivity采用，且shock不重算derived descendants、generic ratio bounds可能错误限制负growth delta。后续专家需整体DAG/重算/量纲方案，不能放行一个ID后假算0impact；此次native支持的替代敏感性须标注经济含义差别。
+
+## 2026-10-09：真实执行边界继续根因修复
+
+重复项目授权清理已提交CWP aa17acd1并push，RF/FF/ET已正常发布，StockWiki无remote如实保留。主线研究仍进行中，未暂停。
+
+三个 fresh executor actual capture暴露RF日期/MIME/URL共因及FF installed closure drift。FF原生定点install two files/two physical roots完成、full15-file check MATCH；旧scope/capture保持，新增版本过渡receipt。RF独占codex/fresh-runtime-boundaries-20261009工作树先3+1真实RED再193PASS+2subtests/1.54秒，Ruff通过。工作树已收窄工程范围（首次默认checkout历史记录后立即sparse，非生产原件删除）；先测约4.04MiB，后仅增加必需runtime/e2e目录，合并后清理。当前准备正常合main/定点安装，再由原执行agent实际重试，不以工程绿冒充四审通过。
+
+真实已知操作：CN年报截断收费保留，Q1不同source首次work conflict为0付费；独占子目录后Q1摘要真实成功。HK2025Q2 IR520839B标准有界获取/入库/prepare成功，HTTP与import分别保留原生事件。ET request_schema0HTTP与MSFT旧fetch未知HTTP分别列，不误当套餐/权限问题。DOCX/locale/年报打包等待根因责任施工。母账下一步实读原生结果再统一更新，不猜费用。
+
+施工工具错误也保留：一次跨文件apply验证失败无写；RF只读git在sandbox报permission，正常OS后成功；首次新tests夹具日期/键名/默认golden错误及缺scripts导入与GBK打印失败已校正，不计产品反例。没关hook、没改生产来源/配置、没有Dayu改动。
+
+## 2026-10-09 06:50 UTC — 原三家全新研究实际启动
+
+- 审批补漏交接/PWF正常提交aa17acd17e17849fc93fd767d9250d3dcd27aaff并推origin/master，普通hooks/pre-push通过。新SHA只读CI查询发现当前shell没有gh命令；先前精确代码SHA三仓CI成功事实不变，未伪称本次新文档commit的CI成功。
+- MAIN用原生audit init实际建立fresh-20261009T065028-{cn-688012,hk-00700,us-msft}；研究run在revenue-forecast-audit/runs，来源仍mFresh三独占root。freeze_original_cohort.py仅当前配置/安装/HEAD观察与初始化，无provider/model/parse动作，不是新许可文件/门禁。完整20SourceRefs/旧raw引用和原生产配置保留，未复制整库。
+- 当前配置DeepSeek/deepseek-flash；已有R3保守peak/CNY floor6代理计价沿用（非账单）。2026-10-09官方primary USD峰值cache-miss/output0.3/1.2低于代理0.333334/1.333334，见https://api-docs.deepseek.com/quick_start/pricing/。本轮不猜MiMo/Minimax另一供应商价格；之前实际多供应商工程记录保留。母known207042tokens/119671microUSD、历史unknown7、FX2764均原样；每公司120k/USD2包含该公司所有收费动作，三家最大360k/USD6，仍在原USD20/2M内。
+- 真正派出3个全新executor：/root/fresh_cn_native_executor、/root/fresh_hk_native_executor、/root/fresh_us_native_executor。完整指令只给当前scope/技能/真实候选，不给旧forecast或reviewer答案；禁止自行改仓库/安装/主PWF、四审前清raw或自己签收。各公司两小时有限caller deadline，实际capture/event留证，未知费用不盲重试。微软缺FY26 10-K须真实RF→FF→CWP-owned Dayu新下载再复用，不能直接网页下载替代。
+- 当前是已启动而非已完成。下一步接收封存执行包，四独立review分批调度；没有新增逐资料/逐供应商授权。母目标仍active。
+
+
 ## 2026-10-09 06:40 UTC — 审批补漏并线收尾
 
 - 收到用户“一律取消类似过度审批”的指令后完成逐层实际阻断盘点，不只改措辞。CWP许可hash/TTL取消，旧人工提案写链无IO退役；77不同测试PASS，2 opt-in真实样本测试未执行。四个独占测试根均恢复不存在，原件/配置未改，模型/下载调用0。

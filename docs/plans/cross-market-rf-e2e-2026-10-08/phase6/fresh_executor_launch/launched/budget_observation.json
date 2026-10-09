@@ -1,0 +1,83 @@
+{
+  "schema_version": "main-cumulative-budget-observation/1",
+  "checked_at": "2026-10-09T07:41:55.927841+00:00",
+  "baseline_receipt": "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_budget_preparation.json",
+  "baseline_tokens": 207042,
+  "baseline_estimated_micro_usd": 119671,
+  "new_native_settled_receipts": [
+    {
+      "company": "CN-688012",
+      "native_run_id": "fresh-20261009T065028-cn-688012-annual-native",
+      "capture_id": "0c6f5a13a9c5481bba65ea0cb4a9225c",
+      "receipt": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\roles\\executor\\commands\\0c6f5a13a9c5481bba65ea0cb4a9225c\\stdout.txt",
+      "receipt_sha256": "f609814ae4336978d97609f335d0706f876e85d0ef9bf7462e0baafe55131698",
+      "actual_status": "failed",
+      "charged_tokens": 10908,
+      "estimated_micro_usd": 11829,
+      "unknown_reservations": 0,
+      "unsettled_reservations": 0,
+      "http_request_count": null
+    },
+    {
+      "company": "CN-688012",
+      "native_run_id": "fresh-20261009T065028-cn-688012-q1-native",
+      "capture_id": "bb3e0020cbb94292bdda6e67cfc160cb",
+      "receipt": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\roles\\executor\\commands\\bb3e0020cbb94292bdda6e67cfc160cb\\stdout.txt",
+      "receipt_sha256": "e231d181b300baeef0d2c8e930db8435049ba63140a723c5562e6322115bb30e",
+      "actual_status": "completed",
+      "charged_tokens": 6425,
+      "estimated_micro_usd": 6988,
+      "unknown_reservations": 0,
+      "unsettled_reservations": 0,
+      "http_request_count": null
+    },
+    {
+      "company": "HK-00700",
+      "native_run_id": "fresh-20261009T065028-hk-00700-narrative-01",
+      "capture_id": "091b8a77e047491d9bb8526dd1a3f979",
+      "receipt": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\roles\\executor\\commands\\091b8a77e047491d9bb8526dd1a3f979\\stdout.txt",
+      "receipt_sha256": "9552f669042686a01ccd50489ab5adcfe21ab065ee69b6ed34aea1b5029702d7",
+      "actual_status": "completed",
+      "charged_tokens": 7134,
+      "estimated_micro_usd": 7347,
+      "unknown_reservations": 0,
+      "unsettled_reservations": 0,
+      "http_request_count": null
+    },
+    {
+      "company": "US-MSFT",
+      "native_run_id": "fresh-20261009T065028-us-msft-narrative",
+      "receipt": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\execution\\narrative\\native-usage.json",
+      "receipt_sha256": "788b85dd9e2807ae522ceacd7695c610698fab43a2b1d875f0c56172fdf4ec21",
+      "charged_tokens": 5105,
+      "estimated_micro_usd": 5730,
+      "unknown_reservations": 0,
+      "unsettled_reservations": 0,
+      "native_attempt_ids": [
+        "9e1e9eb9bb574b2aae67fe33b5397bfb"
+      ],
+      "http_request_count": null
+    }
+  ],
+  "native_runs_counted_once": true,
+  "includes_failed_paid_annual": true,
+  "cumulative_tokens": 236614,
+  "cumulative_estimated_micro_usd": 151565,
+  "historical_unknown_reservations": 7,
+  "new_observed_unknown_reservations": 0,
+  "new_observed_unsettled_reservations": 0,
+  "retained_fx_guard_micro_usd": 2764,
+  "effective_cap_tokens": 2000000,
+  "effective_cap_micro_usd": 20000000,
+  "remaining_tokens_after_known_usage": 1763386,
+  "remaining_micro_usd_after_known_estimate_and_retained_fx_guard": 19845671,
+  "cost_is_configured_versioned_estimate_not_invoice": true,
+  "unobserved_acquisition_usage": [
+    {
+      "run": "fresh-20261009T065028-us-msft",
+      "capture_id": "1fc320db8942401694de2c53d2e5cc23",
+      "reason": "failed legacy FF fetch has no native HTTP usage receipt; not claimed zero"
+    }
+  ],
+  "is_final_company_settlement": false
+}

@@ -1,0 +1,99 @@
+FF........F....                                                          [100%]
+================================== FAILURES ===================================
+_ test_native_forecast_keeps_actual_management_checks_after_information_cutoff _
+
+    def test_native_forecast_keeps_actual_management_checks_after_information_cutoff():
+        data = forecast_document()
+        for record in data["management_communication_coverage"]:
+            record["checked_date"] = "2026-07-13"
+>       result = run_forecast(data)
+                 ^^^^^^^^^^^^^^^^^^
+
+tests\test_management_operation_clock.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\revenue_core.py:446: in run_forecast
+    result = _build_forecast_draft(data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\revenue_core.py:63: in _build_forecast_draft
+    validated = validate_document(data)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+scripts\contracts\document.py:1075: in validate_document
+    management_target_coverage = validate_management_target_coverage(
+scripts\research\targets.py:99: in validate_management_target_coverage
+    require(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False
+message = 'management communication checked after as_of_date: latest_annual_filing'
+
+    def require(condition: Any, message: str) -> None:
+        # Truthiness gate (bool in intent); data-validation callers pass
+        # isinstance()/fullmatch() results, so the parameter is Any.
+        """Raise ``ForecastInputError`` when *condition* is falsy.
+    
+        When a :class:`Collector` is active for the current context (set via
+        :func:`collect_mode`), a falsy *condition* appends to that collector instead
+        of raising, enabling a single collect-all pass. With no collector active the
+        behavior is unchanged (raise on the first violation).
+        """
+        if condition:
+            return
+        collector = _COLLECTOR.get()
+        if collector is not None:
+            collector.add(message)
+        else:
+>           raise ForecastInputError(message)
+E           contracts.evidence.ForecastInputError: management communication checked after as_of_date: latest_annual_filing
+
+scripts\contracts\evidence.py:98: ForecastInputError
+_______ test_management_check_cannot_precede_its_actual_source_capture ________
+
+    def test_management_check_cannot_precede_its_actual_source_capture():
+        data = forecast_document()
+        for record in data["management_communication_coverage"]:
+            if record.get("source_ids"):
+                record["checked_date"] = "2026-06-30"
+>       with pytest.raises(ForecastInputError, match="source_clock_conflict"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_management_operation_clock.py:29: Failed
+_ test_supported_rich_document_public_export_does_not_need_transcript_lineage[application/vnd.openxmlformats-officedocument.presentationml.presentation] _
+
+mime = 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+
+    @pytest.mark.parametrize("mime", ["application/pdf", "text/html", "application/xhtml+xml", PPTX])
+    def test_supported_rich_document_public_export_does_not_need_transcript_lineage(mime):
+        request, body, raw = _wire(mime)
+>       context = validate_narrative_response(request, body, raw).to_dict()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_narrative_container_lineage.py:26: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\company_wiki_narrative_contracts.py:510: in validate_narrative_response
+    return _validated_response(request, body, receipt_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\company_wiki_narrative_contracts.py:495: in _validated_response
+    bundle = _bundle(body, request, receipt, manifest)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\company_wiki_narrative_contracts.py:430: in _bundle
+    _bundle_contents(bundle, receipt, manifest)
+scripts\company_wiki_narrative_contracts.py:443: in _bundle_contents
+    _lineage(bundle, bundle["source_ref"], set(by_id))
+scripts\company_wiki_narrative_contracts.py:369: in _lineage
+    _require(not bindings and source["mime_type"] in {
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, reason = 'missing_transcript_lineage'
+
+    def _require(condition: bool, reason: str) -> None:
+        if not condition:
+>           raise NarrativeTransportError("blocked", reason)
+E           company_wiki_narrative_contracts.NarrativeTransportError: blocked: missing_transcript_lineage
+
+scripts\company_wiki_narrative_contracts.py:64: NarrativeTransportError
+=========================== short test summary info ===========================
+FAILED tests/test_management_operation_clock.py::test_native_forecast_keeps_actual_management_checks_after_information_cutoff
+FAILED tests/test_management_operation_clock.py::test_management_check_cannot_precede_its_actual_source_capture
+FAILED tests/test_narrative_container_lineage.py::test_supported_rich_document_public_export_does_not_need_transcript_lineage[application/vnd.openxmlformats-officedocument.presentationml.presentation]
+3 failed, 12 passed in 0.64s

@@ -1,0 +1,75 @@
+{
+  "operation": "native scoped closure install, not source/provider retry",
+  "before_plan": {
+    "argv": [
+      "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tools\\sync_installs_b3.py",
+      "--plan",
+      "--json"
+    ],
+    "exit_code": 0,
+    "seconds": 0.28,
+    "stdout": "{\"schema_version\": \"ff-install-plan/1\", \"scope\": [\"CHANGELOG.md\", \"SKILL.md\", \"config/company_wiki.json\", \"references/contract-ownership.md\", \"references/identity.md\", \"scripts/et_v2_contract.py\", \"scripts/fetch_filing.py\", \"scripts/ff_local_source_prepare.py\", \"scripts/ff_process_transport.py\", \"scripts/ff_process_tree.py\", \"scripts/ff_provider_cause.py\", \"scripts/ff_v2_envelope.py\", \"scripts/filing_contracts.py\", \"scripts/transcript_companion.py\", \"scripts/transcript_tool_transport.py\"], \"source_sha256\": {\"CHANGELOG.md\": \"abc739adbfc402c53df056a87a105520f30dea3d9adb10cbe425b7380ec53825\", \"SKILL.md\": \"f9d493871dcf9c81dd38dfb05a48990c8e935888c09099454005d63102eb654d\", \"config/company_wiki.json\": \"aa694c41f4c9a40a11285dcd813fe0090e2a9a20658b9d290daccae1ddf9a5e3\", \"references/contract-ownership.md\": \"ca731d27679d728df86598ff3eb7eb836556f945da0a673c4fcccdf899ab80c7\", \"references/identity.md\": \"ae83b6215c8c1cd0d60fac31f7c69446a2c57d9e945a6f58a709640e51aedd64\", \"scripts/et_v2_contract.py\": \"f692465c195dbebf23906007e27a1a98dcca9cbcdfb766f4029f831cc0ae0fe8\", \"scripts/fetch_filing.py\": \"6c2c2a181188819af83a5f4da01b9bc01239d92659f628d21ce2d0d7bee9b9d1\", \"scripts/ff_local_source_prepare.py\": \"417540c65b8c6d83e438aa60db29c3a4ea35f4ae9d1a44d26e1402e1c424ce71\", \"scripts/ff_process_transport.py\": \"a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a\", \"scripts/ff_process_tree.py\": \"4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f\", \"scripts/ff_provider_cause.py\": \"7dc4a63344e78c0f482cc4604f43397540e4ed1e4ee755ddffb049212e8cdf7a\", \"scripts/ff_v2_envelope.py\": \"8a08d234fa5659bf7108a6b6631728ca77d123b4e96489cf6241c2a44c31d4dd\", \"scripts/filing_contracts.py\": \"0c010dbaac305fbe32b3129e6af23def4c4f8d15cd143fb0d10190f94777fce7\", \"scripts/transcript_companion.py\": \"b84e00c2e42331e709189ee0b66be978ee48f2270ecada2ac108fb31498b1a75\", \"scripts/transcript_tool_transport.py\": \"bcc9c5f33d7a249d851f6f43557c95eb0f821e710224eeb13f977888592d3f59\"}, \"targets\": [{\"physical_target\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\.agents\\\\skills\\\\filing-fetch\", \"destinations\": [\"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\.agents\\\\skills\", \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\.claude\\\\skills\"], \"needs_update\": [\"CHANGELOG.md\", \"scripts/filing_contracts.py\"], \"preserved_config\": [\"config/company_wiki.json\"], \"before_sha256\": {\"CHANGELOG.md\": \"a2045915f3822dc22672596fb13a481c5ef74516ef64b8ad4975eaa103a899b5\", \"SKILL.md\": \"f9d493871dcf9c81dd38dfb05a48990c8e935888c09099454005d63102eb654d\", \"references/contract-ownership.md\": \"ca731d27679d728df86598ff3eb7eb836556f945da0a673c4fcccdf899ab80c7\", \"references/identity.md\": \"ae83b6215c8c1cd0d60fac31f7c69446a2c57d9e945a6f58a709640e51aedd64\", \"scripts/et_v2_contract.py\": \"f692465c195dbebf23906007e27a1a98dcca9cbcdfb766f4029f831cc0ae0fe8\", \"scripts/fetch_filing.py\": \"6c2c2a181188819af83a5f4da01b9bc01239d92659f628d21ce2d0d7bee9b9d1\", \"scripts/ff_local_source_prepare.py\": \"417540c65b8c6d83e438aa60db29c3a4ea35f4ae9d1a44d26e1402e1c424ce71\", \"scripts/ff_process_transport.py\": \"a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a\", \"scripts/ff_process_tree.py\": \"4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f\", \"scripts/ff_provider_cause.py\": \"7dc4a63344e78c0f482cc4604f43397540e4ed1e4ee755ddffb049212e8cdf7a\", \"scripts/ff_v2_envelope.py\": \"8a08d234fa5659bf7108a6b6631728ca77d123b4e96489cf6241c2a44c31d4dd\", \"scripts/filing_contracts.py\": \"a16e44ce43e3035938905c8618d422f13807085722bae250d7de42330f3f9fbb\", \"scripts/transcript_companion.py\": \"b84e00c2e42331e709189ee0b66be978ee48f2270ecada2ac108fb31498b1a75\", \"scripts/transcript_tool_transport.py\": \"bcc9c5f33d7a249d851f6f43557c95eb0f821e710224eeb13f977888592d3f59\"}, \"errors\": []}, {\"physical_target\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\.codex\\\\skills\\\\filing-fetch\", \"destinations\": [\"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\.codex\\\\skills\"], \"needs_update\": [\"CHANGELOG.md\", \"scripts/filing_contracts.py\"], \"preserved_config\": [\"config/company_wiki.json\"], \"before_sha256\": {\"CHANGELOG.md\": \"a2045915f3822dc22672596fb13a481c5ef74516ef64b8ad4975eaa103a899b5\", \"SKILL.md\": \"f9d493871dcf9c81dd38dfb05a48990c8e935888c09099454005d63102eb654d\", \"references/contract-ownership.md\": \"ca731d27679d728df86598ff3eb7eb836556f945da0a673c4fcccdf899ab80c7\", \"references/identity.md\": \"ae83b6215c8c1cd0d60fac31f7c69446a2c57d9e945a6f58a709640e51aedd64\", \"scripts/et_v2_contract.py\": \"f692465c195dbebf23906007e27a1a98dcca9cbcdfb766f4029f831cc0ae0fe8\", \"scripts/fetch_filing.py\": \"6c2c2a181188819af83a5f4da01b9bc01239d92659f628d21ce2d0d7bee9b9d1\", \"scripts/ff_local_source_prepare.py\": \"417540c65b8c6d83e438aa60db29c3a4ea35f4ae9d1a44d26e1402e1c424ce71\", \"scripts/ff_process_transport.py\": \"a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a\", \"scripts/ff_process_tree.py\": \"4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f\", \"scripts/ff_provider_cause.py\": \"7dc4a63344e78c0f482cc4604f43397540e4ed1e4ee755ddffb049212e8cdf7a\", \"scripts/ff_v2_envelope.py\": \"8a08d234fa5659bf7108a6b6631728ca77d123b4e96489cf6241c2a44c31d4dd\", \"scripts/filing_contracts.py\": \"a16e44ce43e3035938905c8618d422f13807085722bae250d7de42330f3f9fbb\", \"scripts/transcript_companion.py\": \"b84e00c2e42331e709189ee0b66be978ee48f2270ecada2ac108fb31498b1a75\", \"scripts/transcript_tool_transport.py\": \"bcc9c5f33d7a249d851f6f43557c95eb0f821e710224eeb13f977888592d3f59\"}, \"errors\": []}]}\n",
+    "stderr": ""
+  },
+  "before_public_error_observation": {
+    "argv": [
+      "-c",
+      "import sys;sys.path.insert(0,sys.argv[1]);import filing_contracts as f; e=f.FilingFetchError('source unavailable', code='not_found');print(__import__('json').dumps({'has_upstream_cause':hasattr(e,'upstream_cause')}))",
+      "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts"
+    ],
+    "exit_code": 0,
+    "seconds": 0.2,
+    "stdout": "{\"has_upstream_cause\": false}\n",
+    "stderr": ""
+  },
+  "production_config_sha256_before": {
+    "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\config\\company_wiki.json": "73917689a14c1b17e69066b0837b0ad3ac1062c440243bc58fef34eb3e043ab0",
+    "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\config\\company_wiki.json": "73917689a14c1b17e69066b0837b0ad3ac1062c440243bc58fef34eb3e043ab0"
+  },
+  "provider_calls": 0,
+  "source_downloads": 0,
+  "install": {
+    "argv": [
+      "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tools\\sync_installs_b3.py",
+      "--install",
+      "--file",
+      "scripts/filing_contracts.py",
+      "--file",
+      "CHANGELOG.md",
+      "--json"
+    ],
+    "exit_code": 0,
+    "seconds": 0.336,
+    "stdout": "{\"schema_version\": \"ff-install-result/1\", \"status\": \"completed\", \"scope\": [\"CHANGELOG.md\", \"scripts/filing_contracts.py\"], \"targets\": [{\"physical_target\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\.agents\\\\skills\\\\filing-fetch\", \"destinations\": [\"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\.agents\\\\skills\", \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\.claude\\\\skills\"], \"written\": [\"CHANGELOG.md\", \"scripts/filing_contracts.py\"], \"not_written\": [], \"conflicts\": [], \"preserved_config\": [], \"errors\": []}, {\"physical_target\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\.codex\\\\skills\\\\filing-fetch\", \"destinations\": [\"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\.codex\\\\skills\"], \"written\": [\"CHANGELOG.md\", \"scripts/filing_contracts.py\"], \"not_written\": [], \"conflicts\": [], \"preserved_config\": [], \"errors\": []}]}\n",
+    "stderr": ""
+  },
+  "full_runtime_closure_check": {
+    "argv": [
+      "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tools\\sync_installs_b3.py",
+      "--check",
+      "--json"
+    ],
+    "exit_code": 0,
+    "seconds": 0.35,
+    "stdout": "{\"schema_version\": \"ff-install-plan/1\", \"scope\": [\"CHANGELOG.md\", \"SKILL.md\", \"config/company_wiki.json\", \"references/contract-ownership.md\", \"references/identity.md\", \"scripts/et_v2_contract.py\", \"scripts/fetch_filing.py\", \"scripts/ff_local_source_prepare.py\", \"scripts/ff_process_transport.py\", \"scripts/ff_process_tree.py\", \"scripts/ff_provider_cause.py\", \"scripts/ff_v2_envelope.py\", \"scripts/filing_contracts.py\", \"scripts/transcript_companion.py\", \"scripts/transcript_tool_transport.py\"], \"source_sha256\": {\"CHANGELOG.md\": \"abc739adbfc402c53df056a87a105520f30dea3d9adb10cbe425b7380ec53825\", \"SKILL.md\": \"f9d493871dcf9c81dd38dfb05a48990c8e935888c09099454005d63102eb654d\", \"config/company_wiki.json\": \"aa694c41f4c9a40a11285dcd813fe0090e2a9a20658b9d290daccae1ddf9a5e3\", \"references/contract-ownership.md\": \"ca731d27679d728df86598ff3eb7eb836556f945da0a673c4fcccdf899ab80c7\", \"references/identity.md\": \"ae83b6215c8c1cd0d60fac31f7c69446a2c57d9e945a6f58a709640e51aedd64\", \"scripts/et_v2_contract.py\": \"f692465c195dbebf23906007e27a1a98dcca9cbcdfb766f4029f831cc0ae0fe8\", \"scripts/fetch_filing.py\": \"6c2c2a181188819af83a5f4da01b9bc01239d92659f628d21ce2d0d7bee9b9d1\", \"scripts/ff_local_source_prepare.py\": \"417540c65b8c6d83e438aa60db29c3a4ea35f4ae9d1a44d26e1402e1c424ce71\", \"scripts/ff_process_transport.py\": \"a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a\", \"scripts/ff_process_tree.py\": \"4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f\", \"scripts/ff_provider_cause.py\": \"7dc4a63344e78c0f482cc4604f43397540e4ed1e4ee755ddffb049212e8cdf7a\", \"scripts/ff_v2_envelope.py\": \"8a08d234fa5659bf7108a6b6631728ca77d123b4e96489cf6241c2a44c31d4dd\", \"scripts/filing_contracts.py\": \"0c010dbaac305fbe32b3129e6af23def4c4f8d15cd143fb0d10190f94777fce7\", \"scripts/transcript_companion.py\": \"b84e00c2e42331e709189ee0b66be978ee48f2270ecada2ac108fb31498b1a75\", \"scripts/transcript_tool_transport.py\": \"bcc9c5f33d7a249d851f6f43557c95eb0f821e710224eeb13f977888592d3f59\"}, \"targets\": [{\"physical_target\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\.agents\\\\skills\\\\filing-fetch\", \"destinations\": [\"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\.agents\\\\skills\", \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\.claude\\\\skills\"], \"needs_update\": [], \"preserved_config\": [\"config/company_wiki.json\"], \"before_sha256\": {\"CHANGELOG.md\": \"abc739adbfc402c53df056a87a105520f30dea3d9adb10cbe425b7380ec53825\", \"SKILL.md\": \"f9d493871dcf9c81dd38dfb05a48990c8e935888c09099454005d63102eb654d\", \"references/contract-ownership.md\": \"ca731d27679d728df86598ff3eb7eb836556f945da0a673c4fcccdf899ab80c7\", \"references/identity.md\": \"ae83b6215c8c1cd0d60fac31f7c69446a2c57d9e945a6f58a709640e51aedd64\", \"scripts/et_v2_contract.py\": \"f692465c195dbebf23906007e27a1a98dcca9cbcdfb766f4029f831cc0ae0fe8\", \"scripts/fetch_filing.py\": \"6c2c2a181188819af83a5f4da01b9bc01239d92659f628d21ce2d0d7bee9b9d1\", \"scripts/ff_local_source_prepare.py\": \"417540c65b8c6d83e438aa60db29c3a4ea35f4ae9d1a44d26e1402e1c424ce71\", \"scripts/ff_process_transport.py\": \"a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a\", \"scripts/ff_process_tree.py\": \"4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f\", \"scripts/ff_provider_cause.py\": \"7dc4a63344e78c0f482cc4604f43397540e4ed1e4ee755ddffb049212e8cdf7a\", \"scripts/ff_v2_envelope.py\": \"8a08d234fa5659bf7108a6b6631728ca77d123b4e96489cf6241c2a44c31d4dd\", \"scripts/filing_contracts.py\": \"0c010dbaac305fbe32b3129e6af23def4c4f8d15cd143fb0d10190f94777fce7\", \"scripts/transcript_companion.py\": \"b84e00c2e42331e709189ee0b66be978ee48f2270ecada2ac108fb31498b1a75\", \"scripts/transcript_tool_transport.py\": \"bcc9c5f33d7a249d851f6f43557c95eb0f821e710224eeb13f977888592d3f59\"}, \"errors\": []}, {\"physical_target\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\.codex\\\\skills\\\\filing-fetch\", \"destinations\": [\"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\.codex\\\\skills\"], \"needs_update\": [], \"preserved_config\": [\"config/company_wiki.json\"], \"before_sha256\": {\"CHANGELOG.md\": \"abc739adbfc402c53df056a87a105520f30dea3d9adb10cbe425b7380ec53825\", \"SKILL.md\": \"f9d493871dcf9c81dd38dfb05a48990c8e935888c09099454005d63102eb654d\", \"references/contract-ownership.md\": \"ca731d27679d728df86598ff3eb7eb836556f945da0a673c4fcccdf899ab80c7\", \"references/identity.md\": \"ae83b6215c8c1cd0d60fac31f7c69446a2c57d9e945a6f58a709640e51aedd64\", \"scripts/et_v2_contract.py\": \"f692465c195dbebf23906007e27a1a98dcca9cbcdfb766f4029f831cc0ae0fe8\", \"scripts/fetch_filing.py\": \"6c2c2a181188819af83a5f4da01b9bc01239d92659f628d21ce2d0d7bee9b9d1\", \"scripts/ff_local_source_prepare.py\": \"417540c65b8c6d83e438aa60db29c3a4ea35f4ae9d1a44d26e1402e1c424ce71\", \"scripts/ff_process_transport.py\": \"a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a\", \"scripts/ff_process_tree.py\": \"4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f\", \"scripts/ff_provider_cause.py\": \"7dc4a63344e78c0f482cc4604f43397540e4ed1e4ee755ddffb049212e8cdf7a\", \"scripts/ff_v2_envelope.py\": \"8a08d234fa5659bf7108a6b6631728ca77d123b4e96489cf6241c2a44c31d4dd\", \"scripts/filing_contracts.py\": \"0c010dbaac305fbe32b3129e6af23def4c4f8d15cd143fb0d10190f94777fce7\", \"scripts/transcript_companion.py\": \"b84e00c2e42331e709189ee0b66be978ee48f2270ecada2ac108fb31498b1a75\", \"scripts/transcript_tool_transport.py\": \"bcc9c5f33d7a249d851f6f43557c95eb0f821e710224eeb13f977888592d3f59\"}, \"errors\": []}]}\n",
+    "stderr": ""
+  },
+  "after_public_error_observation": {
+    "argv": [
+      "-c",
+      "import sys;sys.path.insert(0,sys.argv[1]);import filing_contracts as f; e=f.FilingFetchError('source unavailable', code='not_found');print(__import__('json').dumps({'has_upstream_cause':hasattr(e,'upstream_cause')}))",
+      "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts"
+    ],
+    "exit_code": 0,
+    "seconds": 0.184,
+    "stdout": "{\"has_upstream_cause\": true}\n",
+    "stderr": ""
+  },
+  "production_config_sha256_after": {
+    "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\config\\company_wiki.json": "73917689a14c1b17e69066b0837b0ad3ac1062c440243bc58fef34eb3e043ab0",
+    "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\config\\company_wiki.json": "73917689a14c1b17e69066b0837b0ad3ac1062c440243bc58fef34eb3e043ab0"
+  },
+  "status": "SCOPED_INSTALL_COMPLETE_FULL_FF_RUNTIME_CLOSURE_MATCH",
+  "changed_runtime_file": "scripts/filing_contracts.py",
+  "canonical_head": "de09787c1efff9623b12ba162c4bf8325b7d9955"
+}

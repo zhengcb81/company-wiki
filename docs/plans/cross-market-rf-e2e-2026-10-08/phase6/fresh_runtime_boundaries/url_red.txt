@@ -1,0 +1,38 @@
+F.......                                                                 [100%]
+================================== FAILURES ===================================
+_ test_original_public_url_is_preserved_after_actual_verified_local_read[http] _
+
+scheme = 'http'
+
+    @pytest.mark.parametrize("scheme", ["http", "https"])
+    def test_original_public_url_is_preserved_after_actual_verified_local_read(scheme):
+        ref, receipt, manifest = deepcopy(_inputs())
+        url = scheme + "://static.cninfo.com.cn/finalpage/2025-08-29/1224606011.PDF"
+        manifest["source_url"] = url
+>       result = build_revenue_source_record_from_verified_read(
+            source_ref=ref, read_receipt=receipt, source_bytes=BODY,
+            source_manifest=manifest, source_candidate=_candidate(ref, manifest),
+            as_of_date="2026-10-08", source_type="regulatory_filing",
+            publisher="Official issuer disclosure", page_or_section="Business overview",
+        )
+
+tests\test_source_url_provenance.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\company_wiki_source_v2.py:307: in build_revenue_source_record_from_verified_read
+    manifest, information = _validate_manifest(source_manifest, ref, as_of,
+scripts\company_wiki_source_v2.py:222: in _validate_manifest
+    _validate_manifest_url(manifest)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+manifest = {'document_id': 'urn:company-wiki:document:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb', '...44d48b740', 'content_sha256': '90c4f96e0727f7bc7b1c2eeab61091d021d0fe8db243e64d7408fd844d48b740', 'byte_size': 35, ...}
+
+    def _validate_manifest_url(manifest: dict[str, Any]) -> None:
+        source_url = _required_text(manifest.get("source_url"), "source manifest source_url")
+        if not valid_source_url(source_url):
+>           raise CompanyWikiSourceError("source manifest source_url is invalid")
+E           company_wiki_source.CompanyWikiSourceError: source manifest source_url is invalid
+
+scripts\company_wiki_source_v2.py:208: CompanyWikiSourceError
+=========================== short test summary info ===========================
+FAILED tests/test_source_url_provenance.py::test_original_public_url_is_preserved_after_actual_verified_local_read[http]
+1 failed, 7 passed in 0.47s

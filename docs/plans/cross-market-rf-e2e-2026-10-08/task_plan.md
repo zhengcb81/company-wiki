@@ -7,7 +7,9 @@
 - 真实四原件联调：3份MSFT季度零下载复用/公共实读通过；CN FY24保留来源日期不足gap，不假造恢复。固定71回放43PASS/2FAIL/1BLOCKED/18NOT_RUN/7NA，155.345秒；三市场来源准备改善，0退步，独占测试根恢复。
 - 真实22页OCR→精选摘要→公共回放→另AUTO零调用复用已完成工程组合验收：15个实际locator，48,804B产物，首轮7,508tokens/$0.008934，第二AUTO精确pin复用、0新reservation/费用。原件/配置保护通过；source全文coverage仍partial，不代表研究验收。
 - **最新优先项已收尾**：[取消审批残留结果](phase6/permission_residue_cleanup/CLOSEOUT.md)。旧hash/TTL许可、提案人工批准写链、FF/RF/ET重复授权指引和StockWiki手输启动token已取消；沿用既有永久授权。CWP 77项、StockWiki 35项责任测试通过；FF/RF/CWP已推主线且实际CI通过，ET已推主线但没有Actions，StockWiki本地主线已并且无remote。工具平台自动审批不受仓库控制，不伪称关闭或绕过。
-- **当前下一项**：原三家全新研究/四独立审查；新三家同样验收；再恢复NVDA与loop。离线fixture配置隔离包18b9956b已并CWP 91f7bb26并通过远端CI。三家公司隔离准备已完成，20SourceRefs/7必要原件副本/15.02MiB，无研究启动，不复制222MB整库。MAIN按当前安装与母账冻结scope后启动；不新增小节点签收或逐材料授权。
+- **当前下一项**：原三家全新研究/四独立审查正在执行；新三家同样验收；再恢复NVDA与loop。离线fixture配置隔离包18b9956b已并CWP 91f7bb26并通过远端CI。三家公司隔离初始准备20SourceRefs/7必要原件副本/15.02MiB，不复制222MB整库，不新增小节点签收或逐材料授权。
+- **06:50 UTC已实际启动原三家新研究**：`fresh_executor_launch/launched/cohort.json`记录三个原生audit run及独立执行agent（中微/腾讯/微软）。scope用当前安装、既有母账、独占环境；每公司累计120k tokens/USD2，三家合计上限360k/USD6，并非已花费。均明确配置DeepSeek Flash，避免猜其他provider计价；不新增许可。MAIN等待各执行封存后调度四路独立审查，尚无研究验收结论。
+- **真实研究新增共因**：[边界施工细则](phase6/fresh_runtime_boundaries/IMPLEMENTATION.md)。FF实装旧 `filing_contracts.py` 已定点修复，15-file原生closure check MATCH；RF日期/MIME/URL三项经4真实RED后193PASS+2subtests/1.54秒，已正常并main79139534/push/定点安装，精确CI37900018978成功。CN三HTTP来源0重下载、US PPTX public reader实际通过；CN正式compute/render/snapshot/registry已成功，整包仍partial待四审。H1 locale、年报输出截断、ET配置/请求、缺报表 metadata gap、import路径、DOCX与敏感性DAG遗漏仍分别调查，不能宣称全部研究通过。不同finite batch须用各自独占work子目录，不另造任务库。
 - 具体记录：`phase6/main_integrated_clock_local_ocr.json`、`phase6/full_replay_clock_local_comparison.json`。不重复已交付工程包、不以CI或结构check替代研究、不新增小节点人签。
 
 ## 目标与边界
@@ -48,7 +50,7 @@
 
 ## Next Step
 
-冻结现有三公司隔离scope/当前安装与母账，启动原三家真实独立执行与四审。审批补漏、replay配置隔离均已并线；无需重复工程验收。后文多份旧Next Step是历史证据，页首当前状态优先。工程CI通过不能代替两组真实研究验收。
+推进已经启动的原三家独立执行；接收完整执行包后调度四路独立审查，归总共因修复。审批补漏、replay配置隔离均已并线，无需重复工程验收。后文多份旧Next Step是历史证据，页首当前状态优先。工程CI通过不能代替两组真实研究验收。
 
 ### Phase 5: 固化三市场回归套件（2026-10-08 新请求）
 **Status:** complete

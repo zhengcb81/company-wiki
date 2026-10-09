@@ -1,0 +1,116 @@
+{
+  "canonical": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\revenue-forecast",
+  "schema": "rf-install-plan/1",
+  "selected": [
+    "CHANGELOG.md",
+    "SKILL.md",
+    "references/data-governance.md",
+    "scripts/company_wiki_narrative_contracts.py",
+    "scripts/contracts/evidence.py",
+    "scripts/research/targets.py"
+  ],
+  "targets": [
+    {
+      "destination": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\revenue-forecast",
+      "files": [
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "CHANGELOG.md",
+          "size": 24258,
+          "source_sha256": "8d5d5bf0b2fdd94faf93b6514b8851eb6b735341821c70fa9a7ba387c6c18531"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "SKILL.md",
+          "size": 31765,
+          "source_sha256": "f559ff51caacaea5c3b420e27b5c95ce1ae9cd55c55b24f46e63e74be1727c4e"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "references/data-governance.md",
+          "size": 6695,
+          "source_sha256": "be56cd9fdb60b326b328e5a970edcc8c63ce375ee322b1dbf1004c7ea9a864c9"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/company_wiki_narrative_contracts.py",
+          "size": 26500,
+          "source_sha256": "87217f45ac810b572f4fba114b1ee0574ea437de5e973ea23374365c1384fecf"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/contracts/evidence.py",
+          "size": 15959,
+          "source_sha256": "cf200313135108d23ed803f6089bc2be7778a3a3ff4c91e892f461abd8bbaa6a"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/research/targets.py",
+          "size": 36535,
+          "source_sha256": "59c0019d1855bb43000aa59718d2a907a0185679397169c773690aa315e19a21"
+        }
+      ],
+      "installed": false,
+      "selected_drift": 6,
+      "target": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\revenue-forecast\\revenue-forecast",
+      "unselected_drift": 0
+    },
+    {
+      "destination": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\revenue-forecast",
+      "files": [
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "CHANGELOG.md",
+          "size": 24258,
+          "source_sha256": "8d5d5bf0b2fdd94faf93b6514b8851eb6b735341821c70fa9a7ba387c6c18531"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "SKILL.md",
+          "size": 31765,
+          "source_sha256": "f559ff51caacaea5c3b420e27b5c95ce1ae9cd55c55b24f46e63e74be1727c4e"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "references/data-governance.md",
+          "size": 6695,
+          "source_sha256": "be56cd9fdb60b326b328e5a970edcc8c63ce375ee322b1dbf1004c7ea9a864c9"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/company_wiki_narrative_contracts.py",
+          "size": 26500,
+          "source_sha256": "87217f45ac810b572f4fba114b1ee0574ea437de5e973ea23374365c1384fecf"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/contracts/evidence.py",
+          "size": 15959,
+          "source_sha256": "cf200313135108d23ed803f6089bc2be7778a3a3ff4c91e892f461abd8bbaa6a"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/research/targets.py",
+          "size": 36535,
+          "source_sha256": "59c0019d1855bb43000aa59718d2a907a0185679397169c773690aa315e19a21"
+        }
+      ],
+      "installed": false,
+      "selected_drift": 6,
+      "target": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\revenue-forecast\\revenue-forecast",
+      "unselected_drift": 0
+    }
+  ]
+}

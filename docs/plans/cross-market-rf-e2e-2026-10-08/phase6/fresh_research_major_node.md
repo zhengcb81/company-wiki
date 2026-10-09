@@ -1,6 +1,6 @@
 # 主线工程完成后的真实研究大节点
 
-状态：施工准备，尚未启动执行/审查。触发条件是当前 RF W04–W06、跨run复用、本机PPTX能力及MAIN共享接线完成、并主线/安装且责任测试通过。先原三家，再固定新三家，最后恢复公司池loop；不以旧预测或CI绿色替代本节点。
+状态：原三家全新执行已于2026-10-09 06:50 UTC实际启动，四审待执行封存。工程前置已合并发布；本轮新增RF日期/MIME/URL共因经TDD并main79139534/安装/精确CI成功，执行者新增真实版本过渡capture，旧scope/失败不重写。见 `fresh_executor_launch/launched/cohort.json` 和 `fresh_runtime_boundaries/acceptance.json`。先原三家，再固定新三家，最后恢复公司池loop；不以旧预测或CI绿色替代本节点。
 
 ## 样本与环境
 
@@ -38,6 +38,8 @@
 只使用 `scripts/narrative_batch_configured.py` 读取实际Config，明确支持的provider选择；读当前配置的模型/endpoint/生成参数和价格，不从记忆改MiMo/DeepSeek/MiniMax。工程本机OCR不计supplier POST。沿用本活动既有永久资料外发/配置供应商授权，不逐材料/供应商/小步骤再要人签。付费前使用当前AUTO及`main_budget_preparation.json`：2026-10-09真实OCR节点后累计207042tokens/119671microUSD，历史unknown7、FX guard2764保留；原生产r3和新OCR均各计一次。实际变化后以真实账更新，不能清零/重复加减。累计上限仍USD20/2M，不新建费用数据库或授权许可证。
 
 三公司并发时MAIN先分配加总不超过剩余额度的单轮上限；单公司默认最多120000tokens/USD2且遵守更低配置界限，未知收费不自动重试。原三家和新三家共六轮的上限可容纳于当前已知余量，但实际旧账/unknown有变化时以实读为准。只有原工具的known receipt能结算，失联保留unknown并恢复原run，不能重开run绕账。
+
+2026-10-09已实读四个native收费run，最新预算观测 `fresh_executor_launch/launched/budget_observation.json` 为累计236614tokens/151565microUSD估计，含失败年报费用、旧unknown7和FX2764保持；这不是最终settlement。相同AUTO可以承载多个finite批次，但每个不同input_hash必须在scope既有work父目录下分配独占子目录，自己的storage-baseline只由自己的run恢复使用。不跨批次覆盖baseline、不复制整套AUTO、不改模型配置来隐藏错误。
 
 下载每请求采用当前能力支持的实际字节/时间/费用上限；不得沿用已弃用body/operation混淆。根据资料大小设有界值，超限保留读到的真实字节，失败不入库、不夹带无限历史下载。
 

@@ -1,0 +1,110 @@
+{
+  "schema_version": "fresh-rf-boundary-acceptance/1",
+  "checked_at": "2026-10-09T07:46:42.633843+00:00",
+  "status": "ENGINEERING_PASS_RESEARCH_RUNNING",
+  "patch_commit": "f88ace5a82f94e8b8acdabda66761f36bae2e040",
+  "main_commit": "79139534375f7eb523a768202f34aedf58538051",
+  "pushed": true,
+  "ci": [
+    {
+      "id": 37900018978,
+      "head_sha": "79139534375f7eb523a768202f34aedf58538051",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/37900018978"
+    }
+  ],
+  "real_red": {
+    "operation_and_mime": 3,
+    "public_url": 1,
+    "not_counted_as_product_red": "First test fixture/key/date/import mistakes corrected before real RED; no implementation change during fixture correction."
+  },
+  "responsibility_tests_passed": 193,
+  "subtests_passed": 2,
+  "responsibility_elapsed_seconds": 1.54,
+  "normal_pre_push_tests_passed": 126,
+  "ruff_and_mypy": "PASS",
+  "installed_runtime_file_rows": [
+    {
+      "execution_root": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "relative_file": "scripts/research/targets.py",
+      "source_and_installed_sha256": "59c0019d1855bb43000aa59718d2a907a0185679397169c773690aa315e19a21",
+      "actual_bytes_match": true
+    },
+    {
+      "execution_root": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "relative_file": "scripts/company_wiki_narrative_contracts.py",
+      "source_and_installed_sha256": "87217f45ac810b572f4fba114b1ee0574ea437de5e973ea23374365c1384fecf",
+      "actual_bytes_match": true
+    },
+    {
+      "execution_root": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "relative_file": "scripts/contracts/evidence.py",
+      "source_and_installed_sha256": "cf200313135108d23ed803f6089bc2be7778a3a3ff4c91e892f461abd8bbaa6a",
+      "actual_bytes_match": true
+    },
+    {
+      "execution_root": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "relative_file": "references/data-governance.md",
+      "source_and_installed_sha256": "be56cd9fdb60b326b328e5a970edcc8c63ce375ee322b1dbf1004c7ea9a864c9",
+      "actual_bytes_match": true
+    },
+    {
+      "execution_root": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "relative_file": "SKILL.md",
+      "source_and_installed_sha256": "f559ff51caacaea5c3b420e27b5c95ce1ae9cd55c55b24f46e63e74be1727c4e",
+      "actual_bytes_match": true
+    },
+    {
+      "execution_root": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "relative_file": "CHANGELOG.md",
+      "source_and_installed_sha256": "8d5d5bf0b2fdd94faf93b6514b8851eb6b735341821c70fa9a7ba387c6c18531",
+      "actual_bytes_match": true
+    },
+    {
+      "execution_root": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "relative_file": "scripts/research/targets.py",
+      "source_and_installed_sha256": "59c0019d1855bb43000aa59718d2a907a0185679397169c773690aa315e19a21",
+      "actual_bytes_match": true
+    },
+    {
+      "execution_root": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "relative_file": "scripts/company_wiki_narrative_contracts.py",
+      "source_and_installed_sha256": "87217f45ac810b572f4fba114b1ee0574ea437de5e973ea23374365c1384fecf",
+      "actual_bytes_match": true
+    },
+    {
+      "execution_root": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "relative_file": "scripts/contracts/evidence.py",
+      "source_and_installed_sha256": "cf200313135108d23ed803f6089bc2be7778a3a3ff4c91e892f461abd8bbaa6a",
+      "actual_bytes_match": true
+    },
+    {
+      "execution_root": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "relative_file": "references/data-governance.md",
+      "source_and_installed_sha256": "be56cd9fdb60b326b328e5a970edcc8c63ce375ee322b1dbf1004c7ea9a864c9",
+      "actual_bytes_match": true
+    },
+    {
+      "execution_root": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "relative_file": "SKILL.md",
+      "source_and_installed_sha256": "f559ff51caacaea5c3b420e27b5c95ce1ae9cd55c55b24f46e63e74be1727c4e",
+      "actual_bytes_match": true
+    },
+    {
+      "execution_root": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "relative_file": "CHANGELOG.md",
+      "source_and_installed_sha256": "8d5d5bf0b2fdd94faf93b6514b8851eb6b735341821c70fa9a7ba387c6c18531",
+      "actual_bytes_match": true
+    }
+  ],
+  "claude_is_agents_alias": true,
+  "config_and_output_replaced": false,
+  "wrong_parent_installation_error": "First destination argument included skill name, creating only six owned files in a nested skill. Error receipts retained. Corrected parent paths and verified exact owned set/bytes before native cleanup. Actual execution paths then checked byte-equal.",
+  "owned_wrong_nested_roots_restored_absent": true,
+  "new_engineering_worktree_restored_absent": true,
+  "raw_originals_deleted": 0,
+  "new_paid_model_calls_for_engineering": 0,
+  "new_downloads_for_engineering": 0,
+  "native_research_retries": "Original executor agents notified of real version transition; old scopes/captures retained. Company review not yet complete."
+}
