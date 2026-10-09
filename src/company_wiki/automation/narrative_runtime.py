@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from typing import Protocol
 
 from .execution_context import JobExecutionContext
+from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization
 from .models import HandlerResult
 from .narrative_model import NarrativeModel
 from .narrative_model_caller import NarrativeModelCaller
@@ -33,6 +34,7 @@ class NarrativeRuntimeDependencies:
     reader: NarrativeSourceReader
     model: NarrativeModel | None
     model_caller: NarrativeModelCaller | None = None
+    normalization: NarrativeNormalization | None = None
 
 
 def register_narrative_handlers(
@@ -43,7 +45,7 @@ def register_narrative_handlers(
 
     registrar.register(
         "source.narrative_select",
-        NarrativeSelectHandler(reader=dependencies.reader),
+        NarrativeSelectHandler(reader=dependencies.reader, normalization=dependencies.normalization),
     )
     registrar.register(
         "source.narrative_summarize",
@@ -51,7 +53,7 @@ def register_narrative_handlers(
     )
     registrar.register(
         "source.narrative_verify",
-        NarrativeVerifyHandler(reader=dependencies.reader),
+        NarrativeVerifyHandler(reader=dependencies.reader, normalization=dependencies.normalization),
     )
 
 

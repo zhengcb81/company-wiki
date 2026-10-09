@@ -13,6 +13,7 @@ from company_wiki.automation.models import HandlerOutcome
 from company_wiki.automation.narrative_contracts import NarrativeBundle, NarrativeSelectResult
 from company_wiki.automation.narrative_replay import NarrativeReplayError, replay_narrative_evidence
 from company_wiki.document_normalization import PARSER_NAME, PARSER_VERSION
+from company_wiki import document_normalization as dn
 from company_wiki.source_contract import EvidenceSpan
 
 
@@ -61,14 +62,15 @@ def test_formats_use_select_summary_and_verified_publication(mime):
     data = _pptx_bytes() if mime == PPTX_MIME else f"<html><body><p>{BUSINESS}</p></body></html>".encode()
     selected = _selected(data, mime)
     assert selected.parser.name == PARSER_NAME
-    assert selected.parser.version == PARSER_VERSION
+    expected_version = "1.1.0" if mime == PPTX_MIME else "1.0.0"
+    assert selected.parser.version == expected_version
     assert selected.selection.coverage_complete
     assert all(span.structured_value["language"] == "en" for span in selected.evidence_spans)
     result = verifying._run(data, selected, verifying._summary(selected))
     assert result.outcome is HandlerOutcome.SUCCEEDED, result.error
     bundle = NarrativeBundle.from_dict(result.result)
     assert bundle.replay.locator_count == len(selected.evidence_spans)
-    assert bundle.versions.parser == PARSER_VERSION
+    assert bundle.versions.parser == expected_version
     assert replay_narrative_evidence(data, bundle) == len(selected.evidence_spans)
 
 
@@ -103,19 +105,18 @@ def test_image_only_deck_is_named_incomplete_without_model_or_skip():
 
 
 def test_all_html_spans_replay_with_one_parse_and_reject_forged_locator(monkeypatch):
-    from company_wiki.automation import narrative_replay as replay
     data = (f"<html><body><p>{BUSINESS}</p><p>We signed a new supply agreement with "
             "customers and expanded our production line.</p></body></html>").encode()
     selected = _selected(data, "text/html")
     assert len(selected.evidence_spans) >= 2
-    normalizer = replay.normalize_document
+    normalizer = dn.normalize_document
     calls = []
 
     def counted(*args, **kwargs):
         calls.append(1)
         return normalizer(*args, **kwargs)
 
-    monkeypatch.setattr(replay, "normalize_document", counted)
+    monkeypatch.setattr(dn, "normalize_document", counted)
     assert replay_narrative_evidence(data, selected) == len(selected.evidence_spans)
     assert len(calls) == 1
     span = selected.evidence_spans[0]

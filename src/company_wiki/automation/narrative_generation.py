@@ -39,6 +39,9 @@ def generation_manifest(
     parser_name, parser_version = parser_component(
         payload.source_ref.mime_type, payload.source_metadata.source_class
     )
+    if normalized and parser_components is not None:
+        parser_name = parser_components["parser_name"]
+        parser_version = parser_components["parser_version"]
     model = request.model_options
     generation_fields = (
         "model_id",
@@ -95,7 +98,7 @@ def artifact_pin(version):
     }
 
 
-def read_reuse_pin(artifacts, reader, payload, pin, facts, manifest=None):
+def read_reuse_pin(artifacts, reader, payload, pin, facts, manifest=None, *, normalization=None):
     """The public reader owns byte/hash/current-source and one locator replay."""
     ref = payload.source_ref
     if (pin["document_id"], pin["source_id"], pin["source_sha256"]) != (
@@ -104,7 +107,7 @@ def read_reuse_pin(artifacts, reader, payload, pin, facts, manifest=None):
         ref.content_sha256,
     ):
         raise ValueError("BATCH_REUSE_PIN_SOURCE_MISMATCH")
-    result = NarrativeTransportReader(artifacts, reader).read(
+    result = NarrativeTransportReader(artifacts, reader, normalization=normalization).read(
         NarrativeReadRequest.from_dict(
             {
                 "schema_version": "narrative-read-request/1",
@@ -149,17 +152,28 @@ def read_reuse_pin(artifacts, reader, payload, pin, facts, manifest=None):
             )
         ):
             raise ValueError("BATCH_REUSE_BUNDLE_GENERATION_MISMATCH")
-    complete = bundle.selection.coverage_complete and (
-        (bundle.selection.status == "selected" and bundle.summary.status == "completed")
-        or (
-            bundle.selection.status == "skipped_no_narrative"
-            and bundle.summary.status == "summary_not_needed"
-        )
+        if bundle.versions.parser == "2.0.0":
+            fingerprint = manifest.get("parser_components", {}).get("ocr_fingerprint")
+            if not isinstance(fingerprint, str) or len(fingerprint) != 64 or any(
+                span.structured_value.get("ocr_fingerprint") != fingerprint
+                for span in bundle.evidence_spans
+            ):
+                raise ValueError("BATCH_REUSE_BUNDLE_GENERATION_MISMATCH")
+    return (
+        bundle.selection.status in {"selected", "partial"}
+        and bundle.summary.status == "completed"
+        and bool(bundle.evidence_spans)
+        and not any({"low_ocr_confidence", "locator_unstable"}.intersection(span.quality_flags)
+                    for span in bundle.evidence_spans)
+    ) or (
+        bundle.selection.coverage_complete and bundle.selection.status == "skipped_no_narrative"
+        and bundle.summary.status == "summary_not_needed" and not bundle.evidence_spans
+        and bundle.selection.selected_count == 0
     )
-    return complete
 
 
-def find_reuse_pin(artifacts, reader, payload, manifest, facts):
+
+def find_reuse_pin(artifacts, reader, payload, manifest, facts, *, normalization=None):
     digest = generation_sha256(manifest)
     versions = artifacts.visible_generation_candidates(
         document_id=payload.source_ref.document_id,
@@ -173,7 +187,7 @@ def find_reuse_pin(artifacts, reader, payload, manifest, facts):
             raise ValueError("BATCH_REUSE_MANIFEST_INVALID")
         pin = artifact_pin(version)
         try:
-            complete = read_reuse_pin(artifacts, reader, payload, pin, facts, manifest)
+            complete = read_reuse_pin(artifacts, reader, payload, pin, facts, manifest, normalization=normalization)
         except (KeyError, ValueError) as exc:
             # Never treat a corrupt matching artifact as permission to spend again.
             raise ValueError("BATCH_REUSE_ARTIFACT_INVALID") from exc

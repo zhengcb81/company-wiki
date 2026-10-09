@@ -61,7 +61,7 @@ def test_request_identity_detects_changed_model_endpoint_and_source_version() ->
     assert replace(request, sources=(changed_ref,)).request_sha256 != request.request_sha256
 
 
-@pytest.fixture(params=[False, True], ids=["scoped", "legacy-global"])
+@pytest.fixture(params=[False, True, "generation"], ids=["scoped", "legacy-global", "generation"])
 def frozen_run(tmp_path, request):
     """Real indexed source and scheduler membership; no worker or HTTP call."""
     from company_wiki.automation import narrative_batch as batch
@@ -71,7 +71,8 @@ def frozen_run(tmp_path, request):
     from company_wiki.automation.scheduler import AutomationScheduler
     from company_wiki.automation.store import AutomationStore
     from dataclasses import asdict
-    legacy_global = request.param
+    mode = request.param
+    legacy_global = mode is True
     state = prepare_source_catalog(tmp_path, one_source=True, include_policy=False)
     try:
         ref, _language, _kind = next(iter(state.indexed.values()))
@@ -91,6 +92,15 @@ def frozen_run(tmp_path, request):
                 "source_facts": list(facts),
             })
         else:
+            if mode == "generation":
+                # Mirror actual batch's full per-source generation composition;
+                # legacy build_batch_events without it intentionally freezes /2.
+                from company_wiki.automation.narrative_contracts import SourceRevisionEventPayload
+                from company_wiki.automation.narrative_generation import generation_manifest
+                manifests = {event.subject_id: generation_manifest(request,
+                    SourceRevisionEventPayload.from_dict(json.loads(event.payload_json)),
+                    execution_versions=batch._execution_versions(request)) for event in binding.events}
+                binding = replace(binding, generation_manifests=manifests)
             frozen_json = batch._frozen_binding(request, binding)
         store = AutomationStore(tmp_path / "auto.db")
         scheduler = AutomationScheduler(store, create_default_registry(),
