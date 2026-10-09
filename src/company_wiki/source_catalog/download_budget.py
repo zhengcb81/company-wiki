@@ -40,6 +40,10 @@ class AcquisitionBudget:
     response_bytes_used: int = 0
     cost_usd_used: Decimal = field(default=Decimal("0"))
     usage_complete: bool = True
+    # Evidence metadata over the EXISTING counters, not another ledger.
+    provider_started: bool | None = False
+    failure_usage_complete: bool | None = True
+    usage_reported: bool = False
 
     @classmethod
     def from_limits(
@@ -86,6 +90,29 @@ class AcquisitionBudget:
         self.cost_usd_used = _decimal_amount(self.cost_usd_used, "cost_usd_used")
         if not isinstance(self.usage_complete, bool):
             raise TypeError("usage_complete must be bool")
+        if not self.usage_complete:
+            self.failure_usage_complete = False
+            if self.provider_started is False:
+                self.provider_started = None
+        if self.response_bytes_used > 0 or self.cost_usd_used > 0:
+            self.usage_reported = True
+            self.provider_started = True
+
+    def observe_provider(self, *, started: bool | None, complete: bool | None) -> None:
+        """Merge invocation proof monotonically over the whole operation."""
+        if started is True:
+            self.provider_started = True
+        elif started is None and self.provider_started is not True:
+            self.provider_started = None
+        if complete is False:
+            self.failure_usage_complete = False
+        elif complete is None and self.failure_usage_complete is not False:
+            self.failure_usage_complete = None
+        if complete is not True:
+            self.usage_complete = False  # Existing policy: no unknown-charge retry.
+
+    def _reported(self) -> None:
+        self.usage_reported = True
 
     @property
     def remaining_response_bytes(self) -> int:
@@ -137,6 +164,9 @@ class AcquisitionBudget:
         ):
             raise ValueError("response byte count must be a non-negative integer")
         cost = _decimal_amount(cost_usd, "cost")
+        self._reported()
+        if response_bytes > 0 or cost > 0:
+            self.observe_provider(started=True, complete=True)
         self.response_bytes_used += response_bytes
         self.cost_usd_used += cost
         if self.response_bytes_used > self.max_response_bytes:
@@ -152,12 +182,19 @@ class AcquisitionBudget:
         """
         if isinstance(count, bool) or not isinstance(count, int) or count < 0:
             raise ValueError("response byte count must be a non-negative integer")
+        self._reported()
+        if count > 0:
+            self.observe_provider(started=True, complete=True)
         self.response_bytes_used += count
         if self.response_bytes_used > self.max_response_bytes:
             raise AcquisitionBudgetExceeded("response byte budget exceeded")
 
     def consume_cost_usd(self, amount: Decimal | str) -> None:
         """Record reported provider cost, even if the call crossed deadline."""
-        self.cost_usd_used += _decimal_amount(amount, "cost")
+        cost = _decimal_amount(amount, "cost")
+        self._reported()
+        if cost > 0:
+            self.observe_provider(started=True, complete=True)
+        self.cost_usd_used += cost
         if self.cost_usd_used > self.max_cost_usd:
             raise AcquisitionBudgetExceeded("acquisition cost budget exceeded")

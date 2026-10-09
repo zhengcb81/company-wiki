@@ -103,12 +103,17 @@ def is_retryable(code: str) -> bool:
 def structured_error(exc: BaseException) -> dict[str, Any]:
     """The CLI emission shape: {status, error_type, error, retryable}."""
     code, retryable = classify_exception(exc)
-    return {
+    result = {
         "status": "failed",
         "error_type": code,
         "error": str(exc),
         "retryable": retryable,
     }
+    from .acquisition_failure import published_acquisition_failure
+    diagnostic = published_acquisition_failure(exc)
+    if diagnostic is not None:
+        result["acquisition_failure"] = diagnostic
+    return result
 
 
 __all__ = [

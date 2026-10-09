@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from contextlib import contextmanager
 import json
 import os
 from pathlib import Path
@@ -13,6 +14,7 @@ from company_wiki._bounded_process import TransportError, run_json_process
 
 from .acquisition import DownloadCandidate, DownloadReceipt
 from .download_budget import AcquisitionBudget
+from .acquisition_failure import validated_usage
 from .resolver import SourceRequest
 from .store import canonical_json
 
@@ -35,6 +37,7 @@ class AdapterProcessError(RuntimeError):
     acquisition_usage: dict[str, Any] | None = None
     # False means a hard-killed process supplied only a lower-bound checkpoint.
     acquisition_usage_complete: bool | None = None
+    provider_started: bool | None = None
 
     def __init__(self, message: str = "") -> None:
         super().__init__(message)
@@ -66,6 +69,22 @@ def _parse_adapter_failure(
     if not isinstance(adapter_obj, dict) or not isinstance(error_obj, dict):
         return None, None
     return error_obj, adapter_obj
+
+
+@contextmanager
+def _scratch_directory():
+    """Scratch cleanup must not replace the provider/transport primary cause."""
+    directory = TemporaryDirectory(prefix="cwpad-")
+    try:
+        yield directory.name
+    except BaseException as primary:
+        try:
+            directory.cleanup()
+        except Exception as cleanup_error:
+            primary.add_note(f"adapter scratch cleanup failed: {type(cleanup_error).__name__}")
+        raise
+    else:
+        directory.cleanup()
 
 
 class JsonCommandAdapter:
@@ -121,15 +140,7 @@ class JsonCommandAdapter:
         if not isinstance(budget, AcquisitionBudget):
             raise TypeError("budget must be AcquisitionBudget")
         self._ensure_bounded_support()
-        payload, timeout_seconds = self._bounded_request(request.to_dict(), budget)
-        try:
-            response = self._run(
-                "discover", payload, timeout_seconds=timeout_seconds
-            )
-        except AdapterProcessError as exc:
-            self._charge_failure_usage(exc, budget)
-            raise
-        self._charge_bounded_usage(response, budget)
+        response = self._invoke_bounded("discover", request.to_dict(), budget)
         values = response.get("candidates")
         if not isinstance(values, list):
             raise AdapterProcessError("discover response candidates must be an array")
@@ -172,19 +183,9 @@ class JsonCommandAdapter:
         self._ensure_bounded_support()
         staging_dir.mkdir(parents=True, exist_ok=True)
         allocated = staging_dir.resolve(strict=True)
-        payload, timeout_seconds = self._bounded_request(candidate.to_dict(), budget)
         bytes_before_fetch = budget.response_bytes_used
-        try:
-            response = self._run(
-                "fetch",
-                payload,
-                extra_args=("--staging-dir", str(allocated)),
-                timeout_seconds=timeout_seconds,
-            )
-        except AdapterProcessError as exc:
-            self._charge_failure_usage(exc, budget)
-            raise
-        self._charge_bounded_usage(response, budget)
+        response = self._invoke_bounded("fetch", candidate.to_dict(), budget,
+            extra_args=("--staging-dir", str(allocated)))
         value = response.get("receipt")
         if not isinstance(value, dict):
             raise AdapterProcessError("fetch response receipt must be an object")
@@ -218,50 +219,47 @@ class JsonCommandAdapter:
                 f"adapter {self.name} does not support bounded acquisition"
             )
 
-    @staticmethod
-    def _charge_bounded_usage(
-        response: dict[str, Any], budget: AcquisitionBudget
-    ) -> None:
-        usage = response.get("acquisition_usage")
-        if (
-            not isinstance(usage, dict)
-            or set(usage) != {"schema_version", "response_bytes", "cost_usd"}
-            or usage.get("schema_version") != "1.0"
-        ):
-            raise AdapterProcessError(
-                "bounded adapter acquisition_usage is missing or invalid"
-            )
-        response_bytes = usage.get("response_bytes")
-        cost_usd = usage.get("cost_usd")
-        if (
-            isinstance(response_bytes, bool)
-            or not isinstance(response_bytes, int)
-            or response_bytes < 0
-            or not isinstance(cost_usd, str)
-        ):
-            raise AdapterProcessError(
-                "bounded adapter acquisition_usage values are invalid"
-            )
+    def _invoke_bounded(self, action, payload, budget, *, extra_args=()):
+        bounded, timeout = self._bounded_request(payload, budget)
         try:
-            budget.record_reported_usage(
-                response_bytes=response_bytes, cost_usd=cost_usd
-            )
-        except (TypeError, ValueError) as exc:
-            raise AdapterProcessError(
-                "bounded adapter reported an invalid acquisition cost"
-            ) from exc
+            response = self._run(action, bounded, extra_args=extra_args, timeout_seconds=timeout)
+        except AdapterProcessError as exc:
+            self._charge_failure_usage(exc, budget)
+            raise
+        # A schema/identity/version verified final response proves execution,
+        # even when its usage or domain payload subsequently fails validation.
+        usage = validated_usage(response.get("acquisition_usage"))
+        budget.observe_provider(started=True, complete=True if usage is not None else None)
+        self._charge_bounded_usage(response, budget)
+        return response
+
+    @staticmethod
+    def _charge_bounded_usage(response: dict[str, Any], budget: AcquisitionBudget) -> None:
+        raw = response.get("acquisition_usage")
+        usage = validated_usage(raw)
+        if usage is None:
+            message = ("bounded adapter reported an invalid acquisition cost"
+                       if isinstance(raw, dict) and isinstance(raw.get("cost_usd"), str)
+                       and raw.get("response_bytes") is not None
+                       else "bounded adapter acquisition_usage is missing or invalid")
+            exc = AdapterProcessError(message)
+            exc.error_code = "adapter_response_invalid"
+            raise exc
+        budget.record_reported_usage(response_bytes=usage["response_bytes"], cost_usd=usage["cost_usd"])
 
     @classmethod
-    def _charge_failure_usage(
-        cls, exc: AdapterProcessError, budget: AcquisitionBudget
-    ) -> None:
-        if exc.acquisition_usage_complete is not True:
-            budget.usage_complete = False
-            exc.retryable = False  # An unknown final charge cannot fund a retry.
-        if exc.acquisition_usage is not None:
-            cls._charge_bounded_usage(
-                {"acquisition_usage": exc.acquisition_usage}, budget
-            )
+    def _charge_failure_usage(cls, exc: AdapterProcessError, budget: AcquisitionBudget) -> None:
+        usage = validated_usage(exc.acquisition_usage)
+        complete = exc.acquisition_usage_complete
+        # An invalid claimed final is unknown, never a final zero receipt.
+        if exc.acquisition_usage is not None and usage is None:
+            complete = None
+            exc.acquisition_usage_complete = None
+        budget.observe_provider(started=exc.provider_started, complete=complete)
+        if complete is not True:
+            exc.retryable = False  # Preserve the existing unknown-charge policy.
+        if usage is not None:
+            cls._charge_bounded_usage({"acquisition_usage": usage}, budget)
 
     def _run(
         self,
@@ -275,11 +273,12 @@ class JsonCommandAdapter:
         environment = dict(os.environ)
         environment["PYTHONUTF8"] = "1"
         environment["PYTHONDONTWRITEBYTECODE"] = "1"
+        verified_response = None
         try:
             # The parent owns SDK scratch and the complete OS process tree,
             # including Windows venv redirectors. Reap it before removing files.
             # Successful originals must reside in the explicit staging allocation.
-            with TemporaryDirectory(prefix="cwpad-") as scratch:
+            with _scratch_directory() as scratch:
                 environment["CWP_ADAPTER_SCRATCH_ROOT"] = scratch
                 completed = run_json_process(
                     command,
@@ -292,6 +291,8 @@ class JsonCommandAdapter:
                         else min(self.timeout_seconds, timeout_seconds)
                     ),
                 )
+                verified_response = self._decode_response(completed, action)
+                return verified_response
         except subprocess.TimeoutExpired as cause:
             exc = AdapterProcessError(
                 f"adapter {self.name} {action} process failed: deadline exceeded"
@@ -303,23 +304,39 @@ class JsonCommandAdapter:
             if isinstance(detail, bytes):
                 detail = detail.decode("utf-8", errors="replace")
             self._attach_usage_checkpoint(exc, detail)
+            if getattr(cause, "provider_started", None) is False:
+                exc.provider_started = False
+                exc.acquisition_usage_complete = True
+                exc.acquisition_usage = {"schema_version": "1.0", "response_bytes": 0, "cost_usd": "0"}
             raise exc from cause
         except (TransportError, UnicodeError) as cause:
             exc = AdapterProcessError(f"adapter {self.name} {action} violated bounded process lifetime")
             exc.error_code = "adapter_output_limit" if type(cause).__name__ == "OutputLimitExceeded" else "adapter_process_failed"
             exc.retryable = False
-            exc.acquisition_usage_complete = False
+            # Output caps imply a hard stop; generic transport may have failed
+            # during cleanup after a completed invocation, so remains unknown.
+            exc.acquisition_usage_complete = False if exc.error_code == "adapter_output_limit" else None
             detail = getattr(cause, "stderr", b"")
             if isinstance(detail, bytes):
                 detail = detail.decode("utf-8", errors="replace")
             self._attach_usage_checkpoint(exc, detail)
+            if getattr(cause, "provider_started", None) is False:
+                exc.provider_started = False
+                exc.acquisition_usage_complete = True
+                exc.acquisition_usage = {"schema_version": "1.0", "response_bytes": 0, "cost_usd": "0"}
             raise exc from cause
         except OSError as cause:
             exc = AdapterProcessError(
                 f"adapter {self.name} {action} process failed: cannot launch"
             )
             exc.error_code = "adapter_process_failed"
+            if verified_response is not None:
+                exc.provider_started = True
+                exc.acquisition_usage = validated_usage(verified_response.get("acquisition_usage"))
+                exc.acquisition_usage_complete = True if exc.acquisition_usage is not None else None
             raise exc from cause
+
+    def _decode_response(self, completed, action):
         if completed.returncode != 0:
             detail = completed.stderr.strip()
             exc = AdapterProcessError(
@@ -334,16 +351,22 @@ class JsonCommandAdapter:
                 and adapter_obj
                 and adapter_obj.get("name") == self.name
                 and adapter_obj.get("version") == self.version
-                and isinstance(error_obj.get("code"), str)
             ):
-                exc.error_code = str(error_obj["code"])
+                exc.provider_started = True
+                exc.error_code = error_obj.get("code", "adapter_process_failed")
                 retryable_raw = error_obj.get("retryable")
                 if isinstance(retryable_raw, bool):
                     exc.retryable = retryable_raw
+                    exc.reported_retryable = retryable_raw
                 usage_raw = error_obj.get("acquisition_usage")
-                if isinstance(usage_raw, dict):
-                    exc.acquisition_usage = usage_raw
+                usage = validated_usage(usage_raw)
+                if usage is not None:
+                    exc.acquisition_usage = usage
                     exc.acquisition_usage_complete = True
+                elif usage_raw is not None:
+                    exc.acquisition_usage = usage_raw
+                    exc.acquisition_usage_complete = None
+                self._attach_usage_checkpoint(exc, detail, only_if_missing=True)
                 exc.adapter_version = str(adapter_obj["version"])
             else:
                 exc.error_code = "adapter_process_failed"
@@ -366,7 +389,7 @@ class JsonCommandAdapter:
             raise AdapterProcessError("adapter response identity/version mismatch")
         return response
 
-    def _attach_usage_checkpoint(self, exc: AdapterProcessError, detail: str) -> None:
+    def _attach_usage_checkpoint(self, exc: AdapterProcessError, detail: str, *, only_if_missing=False) -> None:
         """Read the last complete progress line, even if kill truncated the next.
 
         A checkpoint reports cumulative usage for THIS subprocess invocation;
@@ -375,6 +398,8 @@ class JsonCommandAdapter:
         after a hard kill, because the final read/flush may have been interrupted.
         Unstructured stderr and URLs are never copied into the public error.
         """
+        if only_if_missing and validated_usage(exc.acquisition_usage) is not None:
+            return
         for line in reversed(detail.splitlines()):
             try:
                 value = json.loads(line)
@@ -386,10 +411,11 @@ class JsonCommandAdapter:
                 value.get("schema_version") != "1.0"
                 or value.get("status") != "progress"
                 or value.get("adapter") != {"name": self.name, "version": self.version}
-                or not isinstance(value.get("acquisition_usage"), dict)
+                or validated_usage(value.get("acquisition_usage")) is None
             ):
                 continue
-            exc.acquisition_usage = value["acquisition_usage"]
+            exc.acquisition_usage = validated_usage(value["acquisition_usage"])
+            exc.provider_started = True
             exc.acquisition_usage_complete = False
             exc.adapter_version = self.version
             return

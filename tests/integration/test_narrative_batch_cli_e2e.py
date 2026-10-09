@@ -231,7 +231,10 @@ def _prepare(
 def _invoke(state, *, llm_config=None, llm_provider=None, launcher=None, timeout_seconds=60,
             expected_run_id="cli-e2e"):
     env = dict(os.environ)
-    env["PYTHONPATH"] = str(Path(__file__).resolve().parents[2] / "src")
+    repo = Path(__file__).resolve().parents[2]
+    # Match the supported configured launch: Config comes from scripts/, which
+    # also activates the real sitecustomize entry classification at startup.
+    env["PYTHONPATH"] = os.pathsep.join((str(repo / "src"), str(repo / "scripts")))
     env["PYTHONDONTWRITEBYTECODE"] = "1"
     env["PYTHONUTF8"] = "1"
     env["PYTHON_DOTENV_DISABLED"] = "1"
@@ -250,6 +253,9 @@ def _invoke(state, *, llm_config=None, llm_provider=None, launcher=None, timeout
         "--request", str(state.request_path),
     ], cwd=state.root, env=env, capture_output=True, text=True, encoding="utf-8", timeout=timeout_seconds)
     assert KEY not in process.stdout + process.stderr
+    assert "LEGACY WRITER BLOCKED" not in process.stdout + process.stderr, (
+        process.returncode, process.stdout, process.stderr,
+    )
     assert process.stdout.strip(), process.stderr
     result = json.loads(process.stdout)
     assert isinstance(result, dict) and result["schema_version"] == "narrative-batch-result/1"

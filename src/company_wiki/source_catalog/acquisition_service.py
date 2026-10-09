@@ -12,7 +12,7 @@ from .acquisition import (
     AcquisitionStatus,
     acquisition_target_sha256,
 )
-from .download_budget import AcquisitionBudget
+from .download_budget import AcquisitionBudget, AcquisitionBudgetExceeded
 from .acquisition_journal import AcquisitionAttempt, AcquisitionJournal
 from .canonical_writer import (
     CanonicalImportResult,
@@ -45,7 +45,7 @@ class SourceEnsureResult:
     canonical_import: CanonicalImportResult | None = None
 
     def to_dict(self) -> dict[str, Any]:
-        return {
+        result = {
             "schema_version": self.schema_version,
             "status": self.status.value,
             "acquisition": self.acquisition.to_dict(),
@@ -55,6 +55,9 @@ class SourceEnsureResult:
                 self.canonical_import.to_dict() if self.canonical_import else None
             ),
         }
+        if self.acquisition.acquisition_failure is not None:
+            result["acquisition_failure"] = self.acquisition.acquisition_failure
+        return result
 
 
 class SourceAcquisitionService:
@@ -127,15 +130,20 @@ class SourceAcquisitionService:
                     return result
             return self._finish(request, acquisition, budget=budget)
         except Exception as exc:
-            self.journal.record(
-                request_id=request.request_id,
-                outcome="failed",
-                reason=failure_reason,
-                error_type=type(exc).__name__,
-                error=str(exc),
-                content_sha256=(acquisition.receipt.content_sha256
-                                if acquisition is not None and acquisition.receipt is not None else None),
-            )
+            from .acquisition_failure import attach_acquisition_failure
+            attach_acquisition_failure(exc, budget=budget, code="acquisition_validation_failed")
+            try:
+                self.journal.record(
+                    request_id=request.request_id,
+                    outcome="failed",
+                    reason=failure_reason,
+                    error_type=type(exc).__name__,
+                    error=str(exc),
+                    content_sha256=(acquisition.receipt.content_sha256
+                                    if acquisition is not None and acquisition.receipt is not None else None),
+                )
+            except Exception as journal_error:
+                exc.add_note(f"acquisition journal failed: {type(journal_error).__name__}")
             raise
 
     def _stage_with_retry(self, request, selected, *, budget=None):
@@ -147,7 +155,11 @@ class SourceAcquisitionService:
             except AdapterProcessError as exc:
                 if not exc.retryable or attempt == 2:
                     raise
-                self.coordinator.cleanup_target(request, selected.candidate)
+                try:
+                    self.coordinator.cleanup_target(request, selected.candidate)
+                except Exception as cleanup_error:
+                    exc.add_note(f"staging cleanup failed: {type(cleanup_error).__name__}")
+                    raise exc
                 if budget is not None:
                     budget.ensure_open()
         raise AssertionError("bounded staging loop did not return or raise")
@@ -225,7 +237,15 @@ class SourceAcquisitionService:
             raise RuntimeError("staged acquisition is missing candidate or receipt")
         if budget is not None:
             budget.ensure_open()
-        imported = self.writer.import_staged(request, candidate, acquisition.receipt, budget=budget)
+        try:
+            imported = self.writer.import_staged(request, candidate, acquisition.receipt, budget=budget)
+        except AcquisitionBudgetExceeded:
+            raise
+        except Exception as exc:
+            # The code is assigned at the actual writer responsibility boundary,
+            # not inferred from every subsequent completion/journal failure.
+            exc.error_code = "canonical_import_failed"
+            raise
         if budget is not None:
             budget.ensure_open()
         final = SourceResolver(self.coordinator.catalog).resolve(

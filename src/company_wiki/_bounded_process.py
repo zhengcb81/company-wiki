@@ -37,6 +37,8 @@ _WINDOWS_BOOTSTRAP = (
 class TransportError(Exception):
     """A bounded transport failed; payloads are never included in its message."""
 
+    provider_started: bool | None = None
+
 
 class OutputLimitExceeded(TransportError):
     """A pipe exceeded its exact byte cap."""
@@ -95,11 +97,16 @@ def _spawn(command, input_bytes, cwd, env):
     try:
         job = _assign_windows_job(proc) if windows else None
     except BaseException:
-        # Bootstrap cannot create user children yet. Even assignment failures are reaped.
-        proc.kill()
-        proc.wait(timeout=_CLEANUP_GRACE_SECONDS)
-        _close_pipes(proc)
-        raise TransportError("could not establish owned process tree") from None
+        # Bootstrap cannot create target children before the barrier release.
+        error = TransportError("could not establish owned process tree")
+        error.provider_started = False
+        try:
+            proc.kill()
+            proc.wait(timeout=_CLEANUP_GRACE_SECONDS)
+            _close_pipes(proc)
+        except Exception as cleanup_error:
+            error.add_note(f"bootstrap cleanup failed: {type(cleanup_error).__name__}")
+        raise error from None
     return proc, job
 
 
@@ -186,7 +193,9 @@ def _validate_timeout(value) -> None:
     if not math.isfinite(value):
         raise ValueError("timeout must be finite")
     if value <= 0:
-        raise ChildTimeout("deadline expired before the child started")
+        error = ChildTimeout("deadline expired before the child started")
+        error.provider_started = False
+        raise error
 
 
 def _validate_caps(*caps) -> None:
@@ -285,10 +294,15 @@ def run_bounded(
             raise ChildTimeout("deadline expired during spawn")
         state.start(proc, input_bytes, stdout_cap_bytes, stderr_cap_bytes)
         _await_lifetime(proc, job, state, deadline)
-    except TransportError as error:
+    except Exception as error:
         failure = error
     finally:
-        _cleanup(proc, job, state)
+        try:
+            _cleanup(proc, job, state)
+        except Exception as cleanup_error:
+            if failure is None:
+                failure = TransportError("owned process cleanup failed")
+            failure.add_note(f"owned process cleanup failed: {type(cleanup_error).__name__}")
     if failure is not None:
         failure.stdout = b"".join(state.chunks["stdout"])
         failure.stderr = b"".join(state.chunks["stderr"])
@@ -340,8 +354,10 @@ def run_json_process(command, *, input, cwd, env, timeout_seconds):
     except ChildFailed as error:
         stdout, stderr, code = error.stdout, error.stderr, error.returncode
     except ChildTimeout as error:
-        raise subprocess.TimeoutExpired(command, timeout_seconds,
-            output=getattr(error, "stdout", b""), stderr=getattr(error, "stderr", b"")) from error
+        timeout = subprocess.TimeoutExpired(command, timeout_seconds,
+            output=getattr(error, "stdout", b""), stderr=getattr(error, "stderr", b""))
+        timeout.provider_started = error.provider_started
+        raise timeout from error
     return subprocess.CompletedProcess(command, code,
         stdout=stdout.decode("utf-8", errors="strict"),
         stderr=stderr.decode("utf-8", errors="strict"))

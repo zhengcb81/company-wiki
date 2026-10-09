@@ -279,9 +279,10 @@ class AcquisitionResult:
     receipt: DownloadReceipt | None = None
     reason: str | None = None
     gap_plan: GapPlan | None = None  # WU-4.2: metadata-only plan (status GAP)
+    acquisition_failure: dict[str, Any] | None = None
 
     def to_dict(self) -> dict[str, Any]:
-        return {
+        result = {
             "schema_version": self.schema_version,
             "status": self.status.value,
             "resolution": self.resolution.to_dict(),
@@ -291,6 +292,9 @@ class AcquisitionResult:
             "reason": self.reason,
             "gap_plan": self.gap_plan.to_dict() if self.gap_plan else None,
         }
+        if self.acquisition_failure is not None:
+            result["acquisition_failure"] = self.acquisition_failure
+        return result
 
 
 def acquisition_target_sha256(request: SourceRequest, candidate: DownloadCandidate) -> str:
@@ -567,6 +571,7 @@ class AcquisitionCoordinator:
         # completeness window. Never guess a fiscal year from the cutoff.
         discovery_request = request
         provider_error: str | None = None
+        acquisition_failure = None
         try:
             if budget is None:
                 discovered = tuple(adapter.discover(discovery_request))
@@ -588,6 +593,9 @@ class AcquisitionCoordinator:
             raise
         except Exception as exc:  # offline / rate-limit / adapter failure
             provider_error = f"{type(exc).__name__}: {exc}"
+            from .acquisition_failure import attach_acquisition_failure, published_acquisition_failure
+            attach_acquisition_failure(exc, budget=budget, code="acquisition_validation_failed")
+            acquisition_failure = published_acquisition_failure(exc)
             discovered = ()
         self._validate_candidates(request, discovered)
         discovered = tuple(c for c in discovered if candidate_scope is None or candidate_scope(c))
@@ -627,6 +635,7 @@ class AcquisitionCoordinator:
             gap_plan=plan,
             candidate=candidate,
             reason=reason,
+            acquisition_failure=acquisition_failure,
         )
 
     @staticmethod
