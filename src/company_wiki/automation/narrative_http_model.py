@@ -121,7 +121,7 @@ class _LLMConfig(Protocol):
     reasoning_split: bool
 
 
-def model_options_from_config(llm: _LLMConfig) -> dict[str, Any]:
+def model_options_from_config(llm: _LLMConfig, *, purpose: str = "narrative") -> dict[str, Any]:
     """Project already loaded its config; copy settings, never credential values.
 
     This is composition, not another config loader or provider defaults table.
@@ -140,6 +140,12 @@ def model_options_from_config(llm: _LLMConfig) -> dict[str, Any]:
     }
     if llm.provider == "minimax" and llm.reasoning_split:
         options["reasoning_split"] = True
+    resolver = getattr(llm, "generation_options", None)
+    generation = resolver(purpose) if callable(resolver) else {}
+    if "thinking" in generation:
+        options["thinking"] = generation["thinking"]["type"]
+    if "reasoning_effort" in generation:
+        options["reasoning_effort"] = generation["reasoning_effort"]
     return options
 
 
@@ -160,6 +166,7 @@ class NarrativeHTTPModel:
         max_response_bytes: int = 262_144,
         allow_local_http: bool = False,
         thinking: str | None = None,
+        reasoning_effort: str | None = None,
         temperature: float | None = None,
         reasoning_split: bool | None = None,
         output_token_field: str = "max_tokens",
@@ -218,10 +225,15 @@ class NarrativeHTTPModel:
         )
         self.timeout_seconds = float(timeout_seconds)
         if thinking is not None and (
-            not isinstance(thinking, str) or thinking not in {"disabled", "adaptive"}
+            not isinstance(thinking, str) or thinking not in {"disabled", "adaptive", "enabled"}
         ):
-            raise ValueError("thinking must be disabled, adaptive or omitted")
+            raise ValueError("thinking must be disabled, adaptive, enabled or omitted")
         self.thinking = thinking
+        if reasoning_effort is not None and (
+            not isinstance(reasoning_effort, str) or reasoning_effort not in {"low", "high", "max"}
+        ):
+            raise ValueError("reasoning_effort must be low, high, max or omitted")
+        self.reasoning_effort = reasoning_effort
         if temperature is not None and (
             isinstance(temperature, bool)
             or not isinstance(temperature, (float, int))
@@ -257,6 +269,8 @@ class NarrativeHTTPModel:
         }
         if self.thinking is not None:
             payload["thinking"] = {"type": self.thinking}
+        if self.reasoning_effort is not None:
+            payload["reasoning_effort"] = self.reasoning_effort
         if self.temperature is not None:
             payload["temperature"] = self.temperature
         if self.reasoning_split is not None:
