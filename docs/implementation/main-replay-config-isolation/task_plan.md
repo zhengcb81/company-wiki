@@ -10,10 +10,10 @@ No src/production config/main PWF/old receipt changes; no supplier/full71/full22
 2. RED complete: 5 genuine responsibility failures, 1.21s.
 3. GREEN complete: 35 concentrated passed 5.93s; final legacy missing-config boundary 6 passed/1 CLI deselected0.89s; Ruff no-cache/diff-check green.
 4. Actual one-page public official import→no-OCR batch complete: expected PARSER_INCOMPLETE BLOCKED capability classification, 0 ledger, 3 terminal jobs, raw/config unchanged, owned root removed. First metadata assertion failure retained separately.
-5. Scoped commit/HANDOFF in progress.
+5. Scoped runtime commit/HANDOFF complete; final documentation commit staged next.
 
 ## Next Step
-Commit only owned tool/tests/docs changes, write exact runtime SHA handoff, and deliver to MAIN without merge or further tests.
+Deliver exact runtime SHA and final branch HEAD to MAIN; no further implementation or testing.
 
 ## Errors Encountered
 - Known-file guesses narrative_normalization.py and old handler/test names did not exist: switched to actual port/public flow using CodeGraph and known imports.
