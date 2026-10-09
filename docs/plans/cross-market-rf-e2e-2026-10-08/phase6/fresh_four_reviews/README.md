@@ -18,14 +18,16 @@
 
 | 角色 | 独立agent | 独占输出 | 当前安排 |
 |---|---|---|---|
-| storage | /root/fresh_storage_reviewer | 每run `roles/storage/`、`reports/storage.json/.md` | 先CN，后续followup补HK/US |
+| storage | /root/fresh_storage_reviewer | 每run `roles/storage/`、`reports/storage.json/.md` | CN已完成7 findings；后续空槽followup补HK/US |
 | fetch | /root/fresh_fetch_reviewer | 每run `roles/fetch/`、`reports/fetch.json/.md` | 三家公司逐个审查 |
 | process | /root/fresh_process_reviewer | 每run `roles/process/`、`reports/process.json/.md` | 三家公司逐个审查 |
-| analyst | 尚未启动 | 每run `roles/analyst/`、`reports/analyst.json/.md` | 上述任一释放槽位后启动独立第四位 |
+| analyst | /root/fresh_analyst_reviewer | 每run `roles/analyst/`、`reports/analyst.json/.md` | CN storage释放槽后已实际启动，覆盖三家公司 |
 
 审查者读取实际安装的audit SKILL、workflow、artifact-contract和自己的review卡；不读其他人的初稿、不改execution、不兼任别的审查角色、不补跑执行冒充当时成功。原件通过公共接口只读打开，本地复算写自己的角色目录。CodeGraph负责结构问题。每家公司均保留四个不同身份，不能用MAIN自评代替。
 
 ## 此节点的检查与后续
+
+实测独占三家公司环境25,649,779B（24.46MiB），另有审计日志/索引32,351,421B（30.85MiB），两类分列；见[空间观察](footprint_observation.json)。没有扫描生产整湖或删除原件。此空间观察不是原件保存质量验收：CN STORAGE-003证实Lam HTML 305877B入库失败后未持久保留，已有财报原件可读与这一失败下载缺口必须分开声明。
 
 1. 各角色依据自己的卡实际查阅全过程，包括失败和替代操作，JSON+Markdown字段按现有audit协议，不新增协议或签字。每个有影响的FAIL/BLOCKED/NOT_RUN关联finding；未知费用不当零，不捏造缺失历史输入字节。
 2. 四份报告齐后MAIN一次运行已有audit check、实际读取四份正文，结构完整与质量结论分列。发现问题时needs_remediation/exit2是预期诊断，不能为了绿色删除finding。

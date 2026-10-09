@@ -2,6 +2,8 @@
 
 ## 新真实执行的审查交接（2026-10-09）
 
+CN storage独立报告已读：12项全覆盖，7 findings。除了locale/年度截断外，实际精选p41漏LPCVD重复订单和300反应台主体行、p62只留下风险标题，部分ESG模板入选；应调查完整语义group/价值排序，而不是仅调公司词表。Lam 305877B下载body未在导入失败后持久化；存储长路径与有界staging失败恢复分别证明，不能以既有raw可打开掩盖这条失败。其他角色尚在独立审查，不提前给完整根因结论。
+
 三家公司正式原生计算/渲染/强验证/快照/注册表完成，whole execution仍partial，HK/US有早期authoring/time留证缺口。旧问题未被换短文档、替代模型或最终校验绿色抹去；当前四路独立审查按phase6/fresh_four_reviews/README.md分批，尚无最终质量结论。
 
 重复授权清理已发布，但真实运行出现另一类职责耦合：source locale值zh-CN与summary枚举冲突、已有季度原件因空标题不能public read、缺报表请求被local_metadata_gap阻断。应优先核实资格与展示字段的职责，而非给每个公司修metadata、加人工许可或关闭真实来源验真。当前是待专家归因的具名症状，不能把全部设定归为权限。

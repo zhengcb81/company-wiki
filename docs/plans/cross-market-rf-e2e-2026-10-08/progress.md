@@ -2,6 +2,8 @@
 
 ## 2026-10-09：原三家封存，独立审查分批启动
 
+最新调度：CN storage已交7 findings（3P1/4P2）和原生event，第四独立analyst随即实际启动；HK/US storage待空槽followup。CN STORAGE-003确认Lam同行HTML已取得305877B却在导入失败后未持久化，既有财报原件仍可读；不能笼统断言所有下载原件保留。MAIN空间观察不再声明all_raw_retained；只声明该观察没有删/改原件。独占环境24.46MiB、完整审计记录30.85MiB分列，无整库克隆。
+
 三个executor已完成formal compute/render/strong validation/snapshot/registry并封存，执行均partial；CN证据包complete、HK/US partial，早期留证缺口真实保留。manifest引用180/375/474项，MAIN只核对manifest实际SHA与文件可用性后写已有协议handoff，没有把hash变成许可证或重复全层原件hash。实际引用与调度见phase6/fresh_four_reviews/README.md。
 
 独立storage/fetch/process三个身份已启动，因4总槽含MAIN，storage先CN完成释放后启动独立analyst，后续同storage followup补HK/US；各角色不读其他初稿。四份报告后专家统一共因施工，不让每个局部错误触发另一个小修/签收流程。第二组三家公司和NVDA loop仍后置。

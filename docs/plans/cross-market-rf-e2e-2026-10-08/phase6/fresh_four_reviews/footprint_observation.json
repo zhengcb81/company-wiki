@@ -1,0 +1,186 @@
+{
+  "schema_version": "fresh-cohort-footprint-observation/1",
+  "observed_at": "2026-10-09T08:18:39.745993+00:00",
+  "companies": [
+    {
+      "company": "CN-688012",
+      "owned_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012",
+      "files": 53,
+      "bytes": 1833632,
+      "cap_bytes": 268435456,
+      "under_cap": true,
+      "bytes_by_extension": {
+        ".sqlite3": 675840,
+        ".sqlite3-shm": 65536,
+        ".sqlite3-wal": 704552,
+        ".lock": 3,
+        ".acquire": 1,
+        ".json": 55334,
+        ".html": 206948,
+        ".yaml": 2585,
+        ".jsonl": 2286,
+        ".py": 120373,
+        ".log": 174
+      },
+      "largest_files": [
+        [
+          704552,
+          "catalog\\catalog.sqlite3-wal"
+        ],
+        [
+          417792,
+          "auto\\narrative.sqlite3"
+        ],
+        [
+          258048,
+          "catalog\\catalog.sqlite3"
+        ],
+        [
+          206948,
+          "companies\\中微公司\\raw\\other\\unknown-date_official_0c5481a9e5f8e9f14348cddef5f60f2212b651685190078520908216c9526116_SEMI July 2026 semiconductor equipment forecast.html"
+        ],
+        [
+          50435,
+          "catalog\\objects\\sha256\\e8\\e8d59d939d26e18298d22fa4858c84e1b45345cccbc0c1a0eef1cc3fd350b3de.json"
+        ],
+        [
+          35654,
+          "temp\\package.py"
+        ]
+      ]
+    },
+    {
+      "company": "HK-00700",
+      "owned_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700",
+      "files": 38,
+      "bytes": 16872199,
+      "cap_bytes": 268435456,
+      "under_cap": true,
+      "bytes_by_extension": {
+        ".sqlite3": 655360,
+        ".sqlite3-shm": 65536,
+        ".sqlite3-wal": 0,
+        ".lock": 3,
+        ".jsonl": 10566,
+        ".acquire": 3,
+        ".json": 49413,
+        ".pdf": 16088651,
+        ".yaml": 2580,
+        ".log": 87
+      },
+      "largest_files": [
+        [
+          5135808,
+          "companies\\騰訊控股\\raw\\financial_reports\\semi_annual\\unknown-date_official_4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639_Tencent Interim Report 2026.pdf"
+        ],
+        [
+          3478243,
+          "temp\\tencent-2026-GMTN-prospectus.pdf"
+        ],
+        [
+          3478243,
+          "companies\\騰訊控股\\raw\\prospectus\\unknown-date_official_1cfbaab885ce9df493e82358d2a07d4dd1ef017c1190f5408081f326b4814fa6_Tencent GMTN Offering Circular 2026.pdf"
+        ],
+        [
+          1676729,
+          "companies\\騰訊控股\\raw\\investor_relations\\unknown-date_official_a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389_Tencent Corporate Overview September 2026.pdf"
+        ],
+        [
+          865653,
+          "companies\\騰訊控股\\raw\\financial_reports\\quarterly\\2026-05-13_hkexnews_12157227_截至二零二六年三月三十一日止三個月業績公佈.pdf"
+        ],
+        [
+          520839,
+          "temp\\tencent-2025Q2-release.pdf"
+        ]
+      ]
+    },
+    {
+      "company": "US-MSFT",
+      "owned_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT",
+      "files": 46,
+      "bytes": 6943948,
+      "cap_bytes": 268435456,
+      "under_cap": true,
+      "bytes_by_extension": {
+        ".sqlite3": 1368064,
+        ".sqlite3-shm": 65536,
+        ".sqlite3-wal": 28872,
+        ".lock": 3,
+        ".jsonl": 2818,
+        ".acquire": 2,
+        ".json": 59907,
+        ".html": 1280461,
+        ".pptx": 4016522,
+        ".yaml": 2575,
+        ".py": 111014,
+        ".bin": 8174,
+        ".log": 0
+      },
+      "largest_files": [
+        [
+          4016522,
+          "companies\\MICROSOFT CORP\\raw\\investor_relations\\unknown-date_official_c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4_FY27 Segments and Investor Metrics.pptx"
+        ],
+        [
+          1097728,
+          "catalog\\catalog.sqlite3"
+        ],
+        [
+          808850,
+          "companies\\MICROSOFT CORP\\raw\\investor_relations\\unknown-date_official_8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e_results official communication.html"
+        ],
+        [
+          273436,
+          "companies\\MICROSOFT CORP\\raw\\investor_relations\\transcripts\\unknown-date_official_bdc90bf78dbf55ec.html"
+        ],
+        [
+          270336,
+          "auto\\narrative.sqlite3"
+        ],
+        [
+          198175,
+          "companies\\MICROSOFT CORP\\raw\\investor_relations\\unknown-date_official_cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6_metrics official communication.html"
+        ]
+      ]
+    }
+  ],
+  "total_bytes": 25649779,
+  "cohort_cap_bytes": 536870912,
+  "note": "Owned research environment only; no production lake scan or raw deletion. Does not count separately retained audit logs as source derivatives.",
+  "audit_logs_observed_at": "2026-10-09T08:19:14.453018+00:00",
+  "audit_run_footprint": [
+    {
+      "run_id": "fresh-20261009T065028-cn-688012",
+      "files": 200,
+      "bytes": 5781082,
+      "observation": "Audit logs/index/report evidence; separate from source-processing owned environment. Reviewers still writing their own role outputs."
+    },
+    {
+      "run_id": "fresh-20261009T065028-hk-00700",
+      "files": 383,
+      "bytes": 15856043,
+      "observation": "Audit logs/index/report evidence; separate from source-processing owned environment. Reviewers still writing their own role outputs."
+    },
+    {
+      "run_id": "fresh-20261009T065028-us-msft",
+      "files": 486,
+      "bytes": 10714296,
+      "observation": "Audit logs/index/report evidence; separate from source-processing owned environment. Reviewers still writing their own role outputs."
+    }
+  ],
+  "audit_total_bytes": 32351421,
+  "combined_observed_bytes": 58001200,
+  "existing_owned_raw_deleted_by_footprint_observation": 0,
+  "production_raw_modified_by_footprint_observation": false,
+  "raw_retention_quality_acceptance": false,
+  "raw_retention_open_issues": [
+    {
+      "run_id": "fresh-20261009T065028-cn-688012",
+      "issue_id": "STORAGE-003",
+      "artifact": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/reports/storage.json",
+      "locator": "findings/STORAGE-003",
+      "detail": "Downloaded Lam HTML 305877-byte body not persisted after import failure; other available raw references remain for review. Footprint observation cannot establish all downloaded originals were retained."
+    }
+  ]
+}
