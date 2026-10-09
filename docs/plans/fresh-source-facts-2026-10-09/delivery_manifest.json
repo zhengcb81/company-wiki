@@ -1,0 +1,178 @@
+{
+  "schema_version": "w06-source-facts-delivery/1",
+  "branch": "codex/fresh-source-facts-20261009",
+  "base": "284328bb6f48677dd2999541c14b4bfb54379a04",
+  "source_commit": "fc1c1c0c8bff1eb6a1a1c499a48dfadeef702a0f",
+  "source_files": [
+    {
+      "path": "src/company_wiki/source_catalog/adapter_dispatch.py",
+      "sha256": "d7ccb6de13131781b62d4f80949569483071a18e4e75ac33b19c953f9fcbecef"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/adapters/company_raw.py",
+      "sha256": "2bf10709e81f9439f0652b38d441936d05d88d9c8d7906cc73fcbec950403d0a"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/adapters/dayu.py",
+      "sha256": "167c6e53a5f3286693aad5fe578970fbc75b0f1f3d5cfb0acb1ce1107077cad8"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/adapters/sidecar.py",
+      "sha256": "b30a5f0a81bdd4f323dcbc87afa777a691f33b3747edefedbf04ff442484ef32"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/assertion_service.py",
+      "sha256": "90a69c3123a2bb8e8e3ced9aa910fc31e0161224e61574645430adc2180e17b9"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/dayu_fiscal_metadata.py",
+      "sha256": "04249d337bbf506fae6ee89df57158f8d27ab46a73906ab4b9d6fadfb43ba27e"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/local_inventory.py",
+      "sha256": "20a1d983a0d7bd519d7981ff045016a72572b339af7daa5d4acdf496752d4eaa"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/local_reconcile.py",
+      "sha256": "113ecf9576fc6d60073775c530f7716296bd99be18a2d508e0ff9a71ee605a1d"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/registration_scope.py",
+      "sha256": "56e43bedb93317f38ad4c9648cfe40b74106dc86e64859ff05d1d7ab9620314f"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/resolver.py",
+      "sha256": "421c714df709265d463c0f286faff0bfeb64993ead8296c48dce4ba4bc372691"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/scanner.py",
+      "sha256": "4a79882979e07097a9996779dee1f642dfe0446a8422b7f2ce6ace2dcbe89846"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/service.py",
+      "sha256": "b308b935067e9a08fd4aee6c8c1cd56964447dadaed9f8401a6fe12fd684b1aa"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/source_group_scope.py",
+      "sha256": "799af6150ab92efb606c58b710a67b50f7f5e8d55f85108c2bd1ed5852b9ae98"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/source_reader.py",
+      "sha256": "b0bfdefc10658c4b768927f2219e5ac34987280cfd141f7bd019444a5085a7bc"
+    },
+    {
+      "path": "tests/contract/test_company_source_layout.py",
+      "sha256": "d57e9abc9a347297c135c781a9f623450aaa376e8aeb74232068486b45014792"
+    },
+    {
+      "path": "tests/contract/test_local_discovery_limits.py",
+      "sha256": "f8acce499202e3025a68abc42189a84deab0a299a346e6cad26236d2f7e1171c"
+    },
+    {
+      "path": "tests/contract/test_local_request_relevance.py",
+      "sha256": "eed489082efac29a5d9cb05c448a4f8b87f325e3df0114f8ea79741b1e569646"
+    },
+    {
+      "path": "tests/contract/test_registration_read_budget.py",
+      "sha256": "8081868005845a367795730bb5bc68429fd2982a2a037fe7a4a90a3e7689e15a"
+    },
+    {
+      "path": "tests/contract/test_title_source_fact.py",
+      "sha256": "5e4ea0811b5e3001539e30856e993660740fd0d19ee3782f572194ee9a769ad8"
+    },
+    {
+      "path": "tests/helpers/source_fact_fixture.py",
+      "sha256": "0890145531d3f2953f41dbefd317654f0c997f74504715ba7a45a74007112a8f"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "docs/plans/fresh-source-facts-2026-10-09/actual_source_receipt.json",
+      "sha256": "900fea918814a3d259221c7da3901c5c7f87018a33c8dd62e5ecee273fcbb040",
+      "bytes": 16163
+    },
+    {
+      "path": "docs/plans/fresh-source-facts-2026-10-09/findings.md",
+      "sha256": "c590476a2ff928a7cc266beba2fc9f3912e2e397b862bfa98d29561885687fff",
+      "bytes": 1404
+    },
+    {
+      "path": "docs/plans/fresh-source-facts-2026-10-09/green_contracts.txt",
+      "sha256": "c80ba6855d7b94df443df74c8e456409855f45223206c53100e19b66908e8696",
+      "bytes": 1439
+    },
+    {
+      "path": "docs/plans/fresh-source-facts-2026-10-09/green_registration_boundary.txt",
+      "sha256": "d86b61038c5eccba3dfb00d8cc6bf85262b4d06f22f485518d3c7476aa6ca192",
+      "bytes": 1358
+    },
+    {
+      "path": "docs/plans/fresh-source-facts-2026-10-09/green_responsibility_regression.txt",
+      "sha256": "7e0393a2a610e42ea521818ac48a6080bfd69dc63665e1f55f9af0925afb104d",
+      "bytes": 2655
+    },
+    {
+      "path": "docs/plans/fresh-source-facts-2026-10-09/HANDOFF.md",
+      "sha256": "4067bbdad50ee9cae23633207641d5fd547bcf6b55cc057bb015249499af26ff",
+      "bytes": 6591
+    },
+    {
+      "path": "docs/plans/fresh-source-facts-2026-10-09/lint.txt",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    {
+      "path": "docs/plans/fresh-source-facts-2026-10-09/progress.md",
+      "sha256": "73b2451764635be583a4ef525f5e7e1e61dbe7307fbd4cb021a984a56834d391",
+      "bytes": 3947
+    },
+    {
+      "path": "docs/plans/fresh-source-facts-2026-10-09/red.txt",
+      "sha256": "f57e39ef72ee7c0c09c7a98d43c75714d87f57f929bee228c5948e9bc5daceae",
+      "bytes": 8890
+    },
+    {
+      "path": "docs/plans/fresh-source-facts-2026-10-09/red_failed_registration.txt",
+      "sha256": "7d9bc1c57e16c00479735460e7fead017ae5416833a6e86e20dbefd54b4c71ff",
+      "bytes": 1784
+    },
+    {
+      "path": "docs/plans/fresh-source-facts-2026-10-09/red_layout_budget.txt",
+      "sha256": "ebffe1c57e5135b6e7f28e81e41f217f99da5122a58aadf2f961bc4245fbec20",
+      "bytes": 12353
+    },
+    {
+      "path": "docs/plans/fresh-source-facts-2026-10-09/red_metadata_budget.txt",
+      "sha256": "a30a920ee1691109ed6e215add71ac1d7b8815e2fc4a1f120f61840f9bbdea7d",
+      "bytes": 2370
+    },
+    {
+      "path": "docs/plans/fresh-source-facts-2026-10-09/red_ready_budget.txt",
+      "sha256": "011b2184cca4c6dc9e069dd991767a5bb355f64c3c7eea2cd6425346e390a35a",
+      "bytes": 2396
+    },
+    {
+      "path": "docs/plans/fresh-source-facts-2026-10-09/replay_actual_sources.py",
+      "sha256": "a56904e19549fc81c945c61fed5a94d796a4eaa19db9617d66a079207d87f665",
+      "bytes": 10788
+    },
+    {
+      "path": "docs/plans/fresh-source-facts-2026-10-09/source_commit.txt",
+      "sha256": "2c0fcab202b448d712252808b38c1fdb5f69be538a8eafaf0823b28992b2914a",
+      "bytes": 1031
+    },
+    {
+      "path": "docs/plans/fresh-source-facts-2026-10-09/task_plan.md",
+      "sha256": "30204877256ce578e99062566ef113c4c5bb8059bd49614578b2433f1f23bbbb",
+      "bytes": 6041
+    }
+  ],
+  "network_requests": 0,
+  "model_requests": 0,
+  "download_events": 0,
+  "production_raw_writes": 0,
+  "production_config_catalog_writes": 0,
+  "published": false,
+  "independent_acceptance_owner": "MAIN",
+  "lane_status": "implementation_and_evidence_committed_pending_MAIN_acceptance"
+}

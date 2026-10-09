@@ -1,0 +1,57 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 24 items
+
+tests\contract\test_source_scope_qualification.py ..F..F..F..F..F.....F. [ 91%]
+..                                                                       [100%]
+
+================================== FAILURES ===================================
+_ test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[open-wrong_company_binding] _
+tests\contract\test_source_scope_qualification.py:32: in test_false_cached_scope_is_rejected_at_every_filing_reuse_entry
+    with pytest.raises(SourceReadError) as error:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE SourceReadError
+_ test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[verify-wrong_company_binding] _
+tests\contract\test_source_scope_qualification.py:32: in test_false_cached_scope_is_rejected_at_every_filing_reuse_entry
+    with pytest.raises(SourceReadError) as error:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE SourceReadError
+_ test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[resolver-wrong_company_binding] _
+tests\contract\test_source_scope_qualification.py:32: in test_false_cached_scope_is_rejected_at_every_filing_reuse_entry
+    with pytest.raises(SourceReadError) as error:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE SourceReadError
+_ test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[ensure-wrong_company_binding] _
+tests\contract\test_source_scope_qualification.py:32: in test_false_cached_scope_is_rejected_at_every_filing_reuse_entry
+    with pytest.raises(SourceReadError) as error:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE SourceReadError
+_ test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[stage-wrong_company_binding] _
+tests\contract\test_source_scope_qualification.py:32: in test_false_cached_scope_is_rejected_at_every_filing_reuse_entry
+    with pytest.raises(SourceReadError) as error:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE SourceReadError
+_ test_complete_original_scope_proof_streams_sha_without_master_or_reparse[prepare] _
+tests\contract\test_source_scope_qualification.py:138: in test_complete_original_scope_proof_streams_sha_without_master_or_reparse
+    assert local_reconcile._prepare_local_source(cat, request(), _budget=budget)["status"] == "ready"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:442: in _prepare_local_source
+    identity = _identity(catalog, request, identity_cache_dir)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\contract\test_source_scope_qualification.py:120: in forbidden
+    raise AssertionError("complete scope proof must not reload master or parse again")
+E   AssertionError: complete scope proof must not reload master or parse again
+=========================== short test summary info ===========================
+FAILED tests/contract/test_source_scope_qualification.py::test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[open-wrong_company_binding]
+FAILED tests/contract/test_source_scope_qualification.py::test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[verify-wrong_company_binding]
+FAILED tests/contract/test_source_scope_qualification.py::test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[resolver-wrong_company_binding]
+FAILED tests/contract/test_source_scope_qualification.py::test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[ensure-wrong_company_binding]
+FAILED tests/contract/test_source_scope_qualification.py::test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[stage-wrong_company_binding]
+FAILED tests/contract/test_source_scope_qualification.py::test_complete_original_scope_proof_streams_sha_without_master_or_reparse[prepare]
+======================== 6 failed, 18 passed in 5.96s =========================

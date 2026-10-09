@@ -1,0 +1,325 @@
+{
+  "controls": [
+    {
+      "label": "labels_A_raw_and_URL_B-open",
+      "entry": "open",
+      "source_import_request": {
+        "schema_version": "official-source-import-request/1",
+        "request_id": "independent-source",
+        "source": {
+          "entity": "Acme",
+          "market": "US",
+          "security_id": "ACME",
+          "document_kind": "annual_report",
+          "title": "independent fixture original",
+          "publisher": "Acme",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/99999/000009999926000007/original.htm",
+          "published_date": "2026-07-30",
+          "filing_date": "2026-07-30",
+          "fiscal_year": 2026,
+          "language": "en"
+        },
+        "content_sha256": "c51b7559ff90c7b26d30cb44587a767818255b7f4446f2eabce91e87d331e605",
+        "mime_type": "text/html",
+        "max_bytes": 4096,
+        "capture_receipt": {
+          "capture_method": "local_document",
+          "tool_name": "independent-fixture",
+          "tool_call_id": "one",
+          "captured_at": "2026-10-09T00:00:00Z",
+          "content_sha256": "c51b7559ff90c7b26d30cb44587a767818255b7f4446f2eabce91e87d331e605",
+          "response_bytes": 448
+        }
+      },
+      "fixture_original_utf8": "<html><head><title>10-K</title></head><body><ix:nonNumeric name=\"dei:EntityCentralIndexKey\">99999</ix:nonNumeric><ix:nonNumeric name=\"dei:DocumentFiscalYearFocus\">2026</ix:nonNumeric><ix:nonNumeric name=\"dei:DocumentFiscalPeriodFocus\">FY</ix:nonNumeric><ix:nonNumeric name=\"dei:DocumentPeriodEndDate\" format=\"\">2026-06-30</ix:nonNumeric><ix:nonNumeric name=\"dei:DocumentType\">10-K</ix:nonNumeric><p>Other issuer B actual original.</p></body></html>",
+      "request": {
+        "entity": "Acme",
+        "document_kind": "annual_report",
+        "as_of_date": "2026-10-09",
+        "market": "US",
+        "security_id": "ACME",
+        "form_type": "10-K",
+        "fiscal_year": 2026,
+        "fiscal_period": "FY",
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": "exact",
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "import_status": "imported_new",
+      "query_status": "found",
+      "known_master_requested_CIK": "12345",
+      "actual_CIK": "99999",
+      "observed": {
+        "error_type": "SourceReadError",
+        "status": "blocked",
+        "reason": "primary_issuer_conflict"
+      },
+      "rejected": true,
+      "passed": true,
+      "fixture_bytes_unchanged": true,
+      "assertions_unchanged": true
+    },
+    {
+      "label": "labels_A_raw_and_URL_B-verify",
+      "entry": "verify",
+      "source_import_request": {
+        "schema_version": "official-source-import-request/1",
+        "request_id": "independent-source",
+        "source": {
+          "entity": "Acme",
+          "market": "US",
+          "security_id": "ACME",
+          "document_kind": "annual_report",
+          "title": "independent fixture original",
+          "publisher": "Acme",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/99999/000009999926000007/original.htm",
+          "published_date": "2026-07-30",
+          "filing_date": "2026-07-30",
+          "fiscal_year": 2026,
+          "language": "en"
+        },
+        "content_sha256": "c51b7559ff90c7b26d30cb44587a767818255b7f4446f2eabce91e87d331e605",
+        "mime_type": "text/html",
+        "max_bytes": 4096,
+        "capture_receipt": {
+          "capture_method": "local_document",
+          "tool_name": "independent-fixture",
+          "tool_call_id": "one",
+          "captured_at": "2026-10-09T00:00:00Z",
+          "content_sha256": "c51b7559ff90c7b26d30cb44587a767818255b7f4446f2eabce91e87d331e605",
+          "response_bytes": 448
+        }
+      },
+      "fixture_original_utf8": "<html><head><title>10-K</title></head><body><ix:nonNumeric name=\"dei:EntityCentralIndexKey\">99999</ix:nonNumeric><ix:nonNumeric name=\"dei:DocumentFiscalYearFocus\">2026</ix:nonNumeric><ix:nonNumeric name=\"dei:DocumentFiscalPeriodFocus\">FY</ix:nonNumeric><ix:nonNumeric name=\"dei:DocumentPeriodEndDate\" format=\"\">2026-06-30</ix:nonNumeric><ix:nonNumeric name=\"dei:DocumentType\">10-K</ix:nonNumeric><p>Other issuer B actual original.</p></body></html>",
+      "request": {
+        "entity": "Acme",
+        "document_kind": "annual_report",
+        "as_of_date": "2026-10-09",
+        "market": "US",
+        "security_id": "ACME",
+        "form_type": "10-K",
+        "fiscal_year": 2026,
+        "fiscal_period": "FY",
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": "exact",
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "import_status": "imported_new",
+      "query_status": "found",
+      "known_master_requested_CIK": "12345",
+      "actual_CIK": "99999",
+      "observed": {
+        "error_type": "SourceReadError",
+        "status": "blocked",
+        "reason": "primary_issuer_conflict"
+      },
+      "rejected": true,
+      "passed": true,
+      "fixture_bytes_unchanged": true,
+      "assertions_unchanged": true
+    },
+    {
+      "label": "labels_A_raw_and_URL_B-resolver",
+      "entry": "resolver",
+      "source_import_request": {
+        "schema_version": "official-source-import-request/1",
+        "request_id": "independent-source",
+        "source": {
+          "entity": "Acme",
+          "market": "US",
+          "security_id": "ACME",
+          "document_kind": "annual_report",
+          "title": "independent fixture original",
+          "publisher": "Acme",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/99999/000009999926000007/original.htm",
+          "published_date": "2026-07-30",
+          "filing_date": "2026-07-30",
+          "fiscal_year": 2026,
+          "language": "en"
+        },
+        "content_sha256": "c51b7559ff90c7b26d30cb44587a767818255b7f4446f2eabce91e87d331e605",
+        "mime_type": "text/html",
+        "max_bytes": 4096,
+        "capture_receipt": {
+          "capture_method": "local_document",
+          "tool_name": "independent-fixture",
+          "tool_call_id": "one",
+          "captured_at": "2026-10-09T00:00:00Z",
+          "content_sha256": "c51b7559ff90c7b26d30cb44587a767818255b7f4446f2eabce91e87d331e605",
+          "response_bytes": 448
+        }
+      },
+      "fixture_original_utf8": "<html><head><title>10-K</title></head><body><ix:nonNumeric name=\"dei:EntityCentralIndexKey\">99999</ix:nonNumeric><ix:nonNumeric name=\"dei:DocumentFiscalYearFocus\">2026</ix:nonNumeric><ix:nonNumeric name=\"dei:DocumentFiscalPeriodFocus\">FY</ix:nonNumeric><ix:nonNumeric name=\"dei:DocumentPeriodEndDate\" format=\"\">2026-06-30</ix:nonNumeric><ix:nonNumeric name=\"dei:DocumentType\">10-K</ix:nonNumeric><p>Other issuer B actual original.</p></body></html>",
+      "request": {
+        "entity": "Acme",
+        "document_kind": "annual_report",
+        "as_of_date": "2026-10-09",
+        "market": "US",
+        "security_id": "ACME",
+        "form_type": "10-K",
+        "fiscal_year": 2026,
+        "fiscal_period": "FY",
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": "exact",
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "import_status": "imported_new",
+      "query_status": "found",
+      "known_master_requested_CIK": "12345",
+      "actual_CIK": "99999",
+      "observed": {
+        "error_type": "SourceReadError",
+        "status": "blocked",
+        "reason": "primary_issuer_conflict"
+      },
+      "rejected": true,
+      "passed": true,
+      "fixture_bytes_unchanged": true,
+      "assertions_unchanged": true
+    },
+    {
+      "label": "labels_A_raw_and_URL_B-ensure",
+      "entry": "ensure",
+      "source_import_request": {
+        "schema_version": "official-source-import-request/1",
+        "request_id": "independent-source",
+        "source": {
+          "entity": "Acme",
+          "market": "US",
+          "security_id": "ACME",
+          "document_kind": "annual_report",
+          "title": "independent fixture original",
+          "publisher": "Acme",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/99999/000009999926000007/original.htm",
+          "published_date": "2026-07-30",
+          "filing_date": "2026-07-30",
+          "fiscal_year": 2026,
+          "language": "en"
+        },
+        "content_sha256": "c51b7559ff90c7b26d30cb44587a767818255b7f4446f2eabce91e87d331e605",
+        "mime_type": "text/html",
+        "max_bytes": 4096,
+        "capture_receipt": {
+          "capture_method": "local_document",
+          "tool_name": "independent-fixture",
+          "tool_call_id": "one",
+          "captured_at": "2026-10-09T00:00:00Z",
+          "content_sha256": "c51b7559ff90c7b26d30cb44587a767818255b7f4446f2eabce91e87d331e605",
+          "response_bytes": 448
+        }
+      },
+      "fixture_original_utf8": "<html><head><title>10-K</title></head><body><ix:nonNumeric name=\"dei:EntityCentralIndexKey\">99999</ix:nonNumeric><ix:nonNumeric name=\"dei:DocumentFiscalYearFocus\">2026</ix:nonNumeric><ix:nonNumeric name=\"dei:DocumentFiscalPeriodFocus\">FY</ix:nonNumeric><ix:nonNumeric name=\"dei:DocumentPeriodEndDate\" format=\"\">2026-06-30</ix:nonNumeric><ix:nonNumeric name=\"dei:DocumentType\">10-K</ix:nonNumeric><p>Other issuer B actual original.</p></body></html>",
+      "request": {
+        "entity": "Acme",
+        "document_kind": "annual_report",
+        "as_of_date": "2026-10-09",
+        "market": "US",
+        "security_id": "ACME",
+        "form_type": "10-K",
+        "fiscal_year": 2026,
+        "fiscal_period": "FY",
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": "exact",
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "import_status": "imported_new",
+      "query_status": "found",
+      "known_master_requested_CIK": "12345",
+      "actual_CIK": "99999",
+      "observed": {
+        "error_type": "SourceReadError",
+        "status": "blocked",
+        "reason": "primary_issuer_conflict"
+      },
+      "rejected": true,
+      "passed": true,
+      "fixture_bytes_unchanged": true,
+      "assertions_unchanged": true
+    },
+    {
+      "label": "labels_A_raw_and_URL_B-stage",
+      "entry": "stage",
+      "source_import_request": {
+        "schema_version": "official-source-import-request/1",
+        "request_id": "independent-source",
+        "source": {
+          "entity": "Acme",
+          "market": "US",
+          "security_id": "ACME",
+          "document_kind": "annual_report",
+          "title": "independent fixture original",
+          "publisher": "Acme",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/99999/000009999926000007/original.htm",
+          "published_date": "2026-07-30",
+          "filing_date": "2026-07-30",
+          "fiscal_year": 2026,
+          "language": "en"
+        },
+        "content_sha256": "c51b7559ff90c7b26d30cb44587a767818255b7f4446f2eabce91e87d331e605",
+        "mime_type": "text/html",
+        "max_bytes": 4096,
+        "capture_receipt": {
+          "capture_method": "local_document",
+          "tool_name": "independent-fixture",
+          "tool_call_id": "one",
+          "captured_at": "2026-10-09T00:00:00Z",
+          "content_sha256": "c51b7559ff90c7b26d30cb44587a767818255b7f4446f2eabce91e87d331e605",
+          "response_bytes": 448
+        }
+      },
+      "fixture_original_utf8": "<html><head><title>10-K</title></head><body><ix:nonNumeric name=\"dei:EntityCentralIndexKey\">99999</ix:nonNumeric><ix:nonNumeric name=\"dei:DocumentFiscalYearFocus\">2026</ix:nonNumeric><ix:nonNumeric name=\"dei:DocumentFiscalPeriodFocus\">FY</ix:nonNumeric><ix:nonNumeric name=\"dei:DocumentPeriodEndDate\" format=\"\">2026-06-30</ix:nonNumeric><ix:nonNumeric name=\"dei:DocumentType\">10-K</ix:nonNumeric><p>Other issuer B actual original.</p></body></html>",
+      "request": {
+        "entity": "Acme",
+        "document_kind": "annual_report",
+        "as_of_date": "2026-10-09",
+        "market": "US",
+        "security_id": "ACME",
+        "form_type": "10-K",
+        "fiscal_year": 2026,
+        "fiscal_period": "FY",
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": "exact",
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "import_status": "imported_new",
+      "query_status": "found",
+      "known_master_requested_CIK": "12345",
+      "actual_CIK": "99999",
+      "observed": {
+        "error_type": "SourceReadError",
+        "status": "blocked",
+        "reason": "primary_issuer_conflict"
+      },
+      "rejected": true,
+      "passed": true,
+      "fixture_bytes_unchanged": true,
+      "assertions_unchanged": true
+    }
+  ],
+  "passes": 5,
+  "count": 5,
+  "fixture_kind": "synthetic normal source APIs; no query/DB mock",
+  "standard_sec_url": "https://www.sec.gov/Archives/edgar/data/99999/000009999926000007/original.htm",
+  "expected_requested_company_CIK": "12345",
+  "actual_raw_and_URL_CIK": "99999",
+  "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w06-identity-five-id8kpapc",
+  "owned_temp_absent": true,
+  "exit_code": 0,
+  "independent_reproducer_sha256": "ca78ffd2ce3e0eb09efcad06b7ca32437f8ae4e2d07baac9a058b44f577746b0",
+  "stderr": ""
+}

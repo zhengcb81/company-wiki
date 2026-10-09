@@ -35,19 +35,48 @@ class SourceRegistrationScope:
         groups = set(matched.values())
         return [item for item in candidates if item.group_key in groups]
 
+    @staticmethod
+    def _company_file(root: Path, company: str, path: Path) -> bool:
+        """Only direct originals or legacy raw descendants; never links/projections."""
+        from .models import DOCUMENT_EXTENSIONS
+
+        try:
+            parts = path.relative_to(root).parts
+            if (len(parts) < 2 or parts[0] != company
+                    or (len(parts) > 2 and parts[1] != "raw")
+                    or path.suffix.lower() not in DOCUMENT_EXTENSIONS):
+                return False
+            current = path
+            while current != root:
+                status = current.lstat()
+                if current.is_symlink() or getattr(status, "st_file_attributes", 0) & 0x400:
+                    return False
+                current = current.parent
+            path.resolve(strict=True).relative_to((root / company).resolve(strict=True))
+            return path.is_file()
+        except (OSError, ValueError):
+            return False
+
+    @classmethod
+    def all_company_paths(cls, root: Path, company: str) -> list[Path]:
+        from .adapters.common import _walk_files
+
+        base = root / company
+        if not base.is_dir() or base.is_symlink():
+            return []
+        paths = list(base.iterdir())
+        raw = base / "raw"
+        if raw.is_dir() and not raw.is_symlink():
+            paths.extend(_walk_files(raw))
+        return sorted(path for path in paths if cls._company_file(root, company, path))
+
     def company_paths(self, root: Path, company: str, sidecar_suffix: str) -> list[Path]:
         selected: set[Path] = set()
         for value in self.relative_paths:
-            if not value.startswith(company + "/raw/"):
-                continue
             primary = value.removesuffix(sidecar_suffix)
             for name in (primary, primary + sidecar_suffix):
                 path = root / name
-                if path.is_file():
-                    try:
-                        path.resolve(strict=True).relative_to(root.resolve(strict=True))
-                    except ValueError as exc:
-                        raise ValueError("registration path escapes configured root") from exc
+                if self._company_file(root, company, path):
                     selected.add(path)
         return sorted(selected)
 

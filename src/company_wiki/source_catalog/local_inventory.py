@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 from dataclasses import dataclass
+import hashlib
+import json
 import os
 from pathlib import Path
 import time
@@ -16,10 +18,16 @@ class LocalPrepareLimits:
     max_candidates: int = 16
     max_bytes: int = 268435456
     timeout_seconds: float = 30.0
+    max_discovery_groups: int = 256
+    max_discovery_entries: int = 4096
 
     def __post_init__(self):
         if type(self.max_candidates) is not int or not 1 <= self.max_candidates <= 256:
             raise ValueError("invalid local candidate limit")
+        if type(self.max_discovery_groups) is not int or not 1 <= self.max_discovery_groups <= 4096:
+            raise ValueError("invalid local discovery group limit")
+        if type(self.max_discovery_entries) is not int or not 1 <= self.max_discovery_entries <= 65536:
+            raise ValueError("invalid local discovery entry limit")
         if type(self.max_bytes) is not int or not 1 <= self.max_bytes <= 1073741824:
             raise ValueError("invalid local byte limit")
         if (
@@ -36,12 +44,134 @@ class LocalReadBudget(_ReadBudget):
             max_candidates=limits.max_candidates, max_bytes=limits.max_bytes
         )
         self.deadline = time.monotonic() + limits.timeout_seconds
+        self.max_discovery_groups = limits.max_discovery_groups
+        self.max_discovery_entries = limits.max_discovery_entries
+        self.discovery_groups = 0
+        self.discovery_entries = 0
 
     def check(self):
         if time.monotonic() >= self.deadline:
             raise SourceReadError("unavailable", "local_prepare_deadline")
         if self.cancelled:
             raise SourceReadError("unavailable", "cancelled")
+
+    def observe_group(self):
+        self.check()
+        self.discovery_groups += 1
+        if self.discovery_groups > self.max_discovery_groups:
+            raise SourceReadError("unavailable", "local_source_group_limit")
+
+    def observe_entry(self):
+        self.check()
+        self.discovery_entries += 1
+        if self.discovery_entries > self.max_discovery_entries:
+            raise SourceReadError("unavailable", "local_discovery_entry_limit")
+
+    def read_metadata_observation(self, path, *, root):
+        """Read one small JSON under the current aggregate byte/deadline ceiling."""
+        self.check()
+        resolved = Path(os.path.realpath(path))
+        try:
+            resolved.relative_to(root.resolve())
+        except ValueError:
+            raise SourceReadError("blocked", "metadata_path_outside_root") from None
+        try:
+            before = resolved.stat()
+        except FileNotFoundError:
+            return None
+        from .resolver import _needs_hydration
+        if _needs_hydration(before):
+            raise SourceReadError("unavailable", "placeholder_not_hydrated")
+        if not resolved.is_file() or before.st_size > 131072:
+            raise SourceReadError("unavailable", "local_metadata_byte_limit")
+        if before.st_size > self.max_bytes - self.bytes_read:
+            raise SourceReadError("unavailable", "budget_exceeded")
+        with resolved.open("rb") as stream:
+            data = stream.read(min(131073, self.max_bytes - self.bytes_read + 1))
+        stop = self.charge(len(data))
+        if stop:
+            raise SourceReadError("unavailable", stop)
+        after = resolved.stat()
+        if len(data) > 131072 or (before.st_size, before.st_mtime_ns) != (after.st_size, after.st_mtime_ns):
+            raise SourceReadError("unavailable", "local_metadata_changed")
+        try:
+            value = json.loads(data)
+        except (ValueError, UnicodeError, RecursionError):
+            raise SourceReadError("blocked", "local_metadata_unreadable") from None
+        if not isinstance(value, dict):
+            raise SourceReadError("blocked", "local_metadata_unreadable")
+        return value, hashlib.sha256(data).hexdigest()
+
+    def metadata_reader(self, root):
+        def read(path):
+            observation = self.read_metadata_observation(path, root=root)
+            return observation[0] if observation is not None else {}
+        return read
+
+    def walk_files(self, root):
+        """Only explicit registration groups; bounded recursive file enumeration."""
+        from .models import DOCUMENT_EXTENSIONS
+        from .resolver import _needs_hydration
+        stack = [root]
+        while stack:
+            directory = stack.pop()
+            self.observe_group()
+            with os.scandir(directory) as entries:
+                for entry in entries:
+                    self.observe_entry()
+                    if entry.is_symlink():
+                        continue
+                    status = entry.stat(follow_symlinks=False)
+                    if getattr(status, "st_file_attributes", 0) & 0x400:
+                        continue
+                    if _needs_hydration(status):
+                        raise SourceReadError("unavailable", "placeholder_not_hydrated")
+                    path = Path(entry.path)
+                    if entry.is_dir(follow_symlinks=False):
+                        from .adapters.common import _SKIP_DIRS
+                        if entry.name not in _SKIP_DIRS:
+                            stack.append(path)
+                    elif path.suffix.lower() in DOCUMENT_EXTENSIONS:
+                        yield path
+
+    def hash_file(self, path, *, root, original=True):
+        """Stream a registration SHA under the same remaining read budget."""
+        self.check()
+        resolved = Path(os.path.realpath(path))
+        try:
+            resolved.relative_to(root.resolve())
+        except ValueError:
+            raise SourceReadError("blocked", "artifact_path_outside_allowed_root") from None
+        before = resolved.stat()
+        from .resolver import _needs_hydration
+        if _needs_hydration(before):
+            raise SourceReadError("unavailable", "placeholder_not_hydrated")
+        if path.is_symlink() or getattr(path.lstat(), "st_file_attributes", 0) & 0x400:
+            raise SourceReadError("blocked", "artifact_path_outside_allowed_root")
+        if before.st_size > self.max_bytes - self.bytes_read:
+            raise SourceReadError("unavailable", "budget_exceeded")
+        if original:
+            stop = self.take_candidate()
+            if stop:
+                raise SourceReadError("unavailable", stop)
+        digest = hashlib.sha256()
+        size = 0
+        with resolved.open("rb") as stream:
+            while True:
+                self.check()
+                chunk = stream.read(min(65536, self.max_bytes - self.bytes_read + 1))
+                if not chunk:
+                    break
+                stop = self.charge(len(chunk))
+                if stop:
+                    raise SourceReadError("unavailable", stop)
+                digest.update(chunk)
+                size += len(chunk)
+        self.check()
+        after = resolved.stat()
+        if (before.st_size, before.st_mtime_ns) != (after.st_size, after.st_mtime_ns) or size != after.st_size:
+            raise SourceReadError("unavailable", "local_source_changed")
+        return digest.hexdigest(), size
 
     def take_candidate(self):
         self.check()
@@ -188,7 +318,7 @@ def verify_registered_original(
         if status:
             failures.append(reason or status)
             if reason in {"cancelled", "budget_exceeded"}:
-                break
+                raise SourceReadError(status, reason, detail)
             continue
         if first is None:
             first = data

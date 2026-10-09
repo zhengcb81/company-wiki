@@ -1,0 +1,6 @@
+2026-10-09 concentrated regression before bound sidecar publication input:
+6 failed /203 passed /2 skipped in26.75s.
+All6: direct/raw/both × scanner v1/company_raw_v1 expected healthy original ready but got blocked local_metadata_gap/publication_date_unknown.
+Raw original includes actual 5 DEI fields and true original scope. Registered .source.json carries known public date, source SHA, entity/market/security_id. It is not append source_fact_patch and cannot be silently promoted as original-body proof.
+Repair responsibility: local_reconcile reads existing ≤128KiB sidecar with same budget, verifies actual raw scope independently, binds sidecar SHA/identity/publication; never derives a public date from filename/mtime/current download day.
+No fixture relaxed, production originals unchanged.
