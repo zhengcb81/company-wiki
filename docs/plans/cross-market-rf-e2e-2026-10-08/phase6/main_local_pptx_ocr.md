@@ -37,3 +37,5 @@ OCR confidence 不是召回率。`pages_read` 表示尝试的页，不自动等�
 本包先完善独立 PWF 三文档，然后实施。保留实际 RED/GREEN 命令、退出码、耗时、版本、模型 SHA、0 网络/外发、临时根恢复和原件保护。正常 scoped commit，不绕 hook；缺 hook 必须诚实写，不伪称已通过。
 
 交付 `docs/implementation/main-local-pptx-ocr/{task_plan,findings,progress,INTERFACE,HANDOFF}.md`、`handoff.json`、小型测试/真样本报告，包含 base/head、changed_files、API/version compatibility、共享接线清单、known gaps。不合主线、不 push、不改其他 owner 文件；MAIN 统一审查、接线、一次集中验收、合并/推送/安装。
+
+MAIN统一接线细则见 [main_ocr_composition.md](main_ocr_composition.md)：实际配置注入、per-format身份、旧版本回放、bounded语言样本、selected-media精确核验与source partial分开。parser owner不改该共享层。

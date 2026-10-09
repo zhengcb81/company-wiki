@@ -191,3 +191,5 @@ ET W02已有128责任测试及实际supervisor/worker五种离线CLI证据，但
 官方PPTX接线补充：存储成功仅证明原件格式和字节保存，不证明文字已提取；文本和全图原件均须可登记，opaque不能成为原件入库许可。先通过现normalization的纯package解析（禁止OCR），页数非零，再走同一个canonical writer；新入口不建writer/数据库。真实PPTX作为隔离manifest登记后才能形成规范EvidenceSpan。
 
 验收工具记录：normal OS默认mypy调用未带本项目既有ignore_missing_imports，fitz无stub报1 import-untyped；已按项目参数复查，不改运行代码来压制类型错误。默认sandbox本机socket集成停止输出，精确pptgreen进程树已终止，正常OS短TEMP补跑，不能把中断当PASS。
+
+OCR真实首次22页1067行/145.549秒，8 selected spans回放4媒体16.570秒，source-level召回仍不完整，关键页7/18漏行；不假装全文已读。跨run包当前把source coverage_complete当完整派生缓存前提，OCR partial会永远重复POST，MAIN已将其作为共享接线责任测试：精选摘要自身完整可用不等于source全文完整；skip仍须完整扫描。结构查询后误读不存在narrative_select_core.py已停用，实际selector在narrative_evidence/finalize，仅读已定位文件。

@@ -1,0 +1,77 @@
+{
+  "schema_version": "rf-w04-w06-engineering-acceptance/1",
+  "review_date": "2026-10-09",
+  "worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/cmrf-20261008/rf-inputs",
+  "branch": "codex/pool-rf-source-context-20261009",
+  "head": "b62161c81d5a343e08aab4bf7d0ca15dd2e8ab8c",
+  "base": "8b48a99f23a19b1fd71a7e051837a55e12bb7d30",
+  "initial_rf_worktree_clean": true,
+  "decision": "RETURN_FOR_REPAIR",
+  "mergeable": false,
+  "findings": [
+    {
+      "id": "F1",
+      "priority": 1,
+      "package": "W05",
+      "kind": "quarterly_target_scope_not_bound_to_native_segment_dag",
+      "location": "scripts/research/target_measurement.py:70",
+      "fixture": "tests/test_target_measurement_comparison.py::quarter_document",
+      "mutation": "management_targets[0].scope.name = Segment B",
+      "native_compute_accepted": true,
+      "strong_output_validation_accepted": true,
+      "actual": {"target_scope": "Segment B", "quarter_parameter": "quarter_base", "quarter_parameter_segment": "Segment A", "modeled_value": 108000.0, "segment_b_annual": {"2026": 55.00000000000001, "2027": 60.50000000000001}},
+      "repair": "Bind quarter parameters to target scope through existing segment/scenario/year driver ancestry; reject contradictory scope or retain not_comparable gap."
+    },
+    {
+      "id": "F2",
+      "priority": 1,
+      "package": "W06",
+      "kind": "positive_observation_not_bound_to_claim_target",
+      "location": "scripts/research/evidence_roles.py:45",
+      "fixture": "tests/test_research_evidence_roles.py::research_document",
+      "mutation": "observation parameter_ids=[1_high_2027], scope=Segment B, period=FY2027; existing claim target remains 0_base_2026",
+      "native_compute_accepted": true,
+      "strong_output_validation_accepted": true,
+      "actual": {"claim_target": "0_base_2026", "claim_period": null, "supported_parameter_ids": ["1_high_2027"]},
+      "repair": "Resolve positive observation via existing claim target/parameter claim links or explicit native dependency; unresolved relationships remain unverified, with counterevidence relations preserved."
+    },
+    {
+      "id": "F3",
+      "priority": 1,
+      "package": "W05",
+      "kind": "numeric_range_skips_claim_unit_and_period_binding",
+      "location": "scripts/research/targets.py:418",
+      "fixture": "tests/test_target_measurement_comparison.py::quarter_document",
+      "mutation": "target claim unit=EUR billion, period=FY2030; raw target remains FY2026/USD",
+      "native_compute_accepted": true,
+      "strong_output_validation_accepted": true,
+      "actual": {"claim_period": "FY2030", "claim_unit": "EUR billion", "comparison_period": "FY2026Q3", "comparison_unit": "USD million", "comparison_status": "comparable", "meets_target": true},
+      "repair": "Preserve claim raw unit and fiscal/measurement-period binding for numeric ranges; missing comparability stays a gap without fabricated endpoints or periods."
+    },
+    {
+      "id": "F4",
+      "priority": 2,
+      "package": "W05",
+      "kind": "typed_and_legacy_measurement_period_disagree",
+      "location": "scripts/research/target_measurement.py:50",
+      "fixture": "tests/test_target_measurement_comparison.py::yoy_document",
+      "mutation": "management_targets[0].measurement_periods=[FY2026]; target_period/comparison_basis.period remain FY2027",
+      "native_compute_accepted": true,
+      "strong_output_validation_accepted": true,
+      "actual": {"measurement_periods": ["FY2026"], "comparison_period": "FY2027"},
+      "repair": "Require typed annual/YoY single annual measurement period to agree with typed period; preserve legacy shape and quarter semantics."
+    }
+  ],
+  "reproduction_script": "rf_w04_w06_acceptance.md#可复制的集中最小复现",
+  "actual_runs": [
+    {"kind": "version_diff_read", "exit": 0},
+    {"kind": "in_memory_probe_batch_1", "exit": 0, "seconds": 1.250, "confirmed_findings": ["F3", "F4"], "excluded": ["synthetic trace exploration", "F2 result-print KeyError, not functional RED"]},
+    {"kind": "in_memory_probe_batch_2", "exit": 0, "seconds": 0.894, "confirmed_findings": ["F1", "F2"], "excluded": ["range-reference exploration rejected after fixture role regeneration"]}
+  ],
+  "positive_handoff_evidence": {"reviewed": true, "independently_rerun": false, "full_suite_rerun": false, "actual_cli_tests_read": true},
+  "budget": {"supplier_calls": 0, "model_calls": 0, "downloads": 0},
+  "changes": {"rf_code": 0, "rf_tests": 0, "production_originals": 0, "production_config": 0, "installation": 0, "shared_pwf": 0},
+  "codegraph": "RF worktree not initialized; known files read without index mutation",
+  "next": "Original RF owner fixes common bindings, then same concentrated independent engineering acceptance on exact new HEAD; preserve legacy and stable-fsum/1, add no access/human approval gate.",
+  "economic_review": "Engineering acceptance is not real M2/M3 or two-cohort business acceptance."
+}
