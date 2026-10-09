@@ -23,3 +23,7 @@
 证据：runs/jobs JSON、hook_audit、historical_repro、historical_selection、selector_review、local_validation。成功全量XML仅保留hash/小摘要并移除362090B冗余输出，测试夹具owned TEMP，原件零修改。
 
 最终正常push与精确远端验收见[CLOSEOUT](CLOSEOUT.md)：CWP d1ce50ee本地2346PASS、CI37910840899成功；FF 23d25644本地553PASS/4SKIP、CI37911571894成功。CI调查已收尾；总体研究改进仍按主PWF推进。
+
+## 新防漏检入口的实际拦截（W02发布，2026-10-09）
+
+正常push对 remote-old→929db846 整批变化执行1940项：1939PASS/1FAIL，108.51秒，推送被拒绝，未产生远端失败。唯一失败是 `test_main_ocr_selection.py::test_selector_version_upgrades_generation_identity` 把0.5.0写死；W02行为升级至0.6.0合理且必须使旧缓存失效。这是测试把发布值误作行为契约，非selector产品回退理由。原单项RED已留存；修复以实际安装版本及合成下一版本验证传播、请求intent稳定、input/generation hash变化及既有manifest不被修改，同时保留0.4.2历史generation失效。两相关模块实际60PASS/1.36秒。pre-commit无需承担pytest；新pre-push已证实能在上传之前拦住这类跨模块旧断言。正常完整push及精确远端结果仍待，不把focused绿当发布绿。

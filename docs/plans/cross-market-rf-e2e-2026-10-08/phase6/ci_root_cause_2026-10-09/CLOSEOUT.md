@@ -28,3 +28,7 @@ JUnit收集失败改为抽真实异常类，私有正文/断言仍不打印到�
 ## 最新只读复核
 
 2026-10-09再次核对精确SHA：CWP2a978b67 [37914735874](https://github.com/zhengcb81/company-wiki/actions/runs/37914735874) SUCCESS，103秒；FF23d25644 [37911571894](https://github.com/zhengcb81/filing-fetch/actions/runs/37911571894) SUCCESS，83秒。后续RF数值共因修复与新增责任测试亦已推8bbb81c7，[37917444152](https://github.com/zhengcb81/revenue-forecast/actions/runs/37917444152) SUCCESS。这些结果是本轮已发布提交的事实，不承诺以后静态或行为检查不会发现新缺陷；仍不把本地未发布W02或待修W04/W07标为通过。
+
+## 新入口实际阻止一次远端失败
+
+W02正常push在本地拦住旧测试的0.5.0写死断言（1939PASS/1FAIL，108.51秒），没有上传929db846。已改为版本传播与generation失效的真实行为测试，相关60PASS/1.36秒；commit仍快速静态，完整正常push与精确远端验收随后补记。没有降回selector版本、删除该测试或绕过hook。

@@ -241,10 +241,11 @@ def test_no_low_confidence_standalone_candidate_or_empty_complete_success():
     assert empty.status == "needs_review" and not empty.coverage_complete
 
 
-def test_selector_version_upgrades_generation_identity():
+def test_selector_version_upgrades_generation_identity(monkeypatch):
     from unit.test_narrative_batch import _request, Reader, _module
     from company_wiki.automation.narrative_generation import generation_manifest
     from company_wiki.automation.narrative_contracts import SourceRevisionEventPayload
+    from company_wiki.automation import narrative_batch_request
     import json
 
     request = _request()
@@ -256,8 +257,8 @@ def test_selector_version_upgrades_generation_identity():
     manifest = generation_manifest(
         request, payload, execution_versions=batch._execution_versions(request)
     )
-    assert selector.NARRATIVE_SELECTOR_VERSION == "0.5.0"
-    assert manifest["execution_versions"]["selector"] == "0.5.0"
+    current_version = selector.NARRATIVE_SELECTOR_VERSION
+    assert manifest["execution_versions"]["selector"] == current_version
     from company_wiki.automation.narrative_generation import generation_sha256
 
     old = {
@@ -265,6 +266,24 @@ def test_selector_version_upgrades_generation_identity():
         "execution_versions": {**manifest["execution_versions"], "selector": "0.4.2"},
     }
     assert generation_sha256(old) != generation_sha256(manifest)
+
+    # Test version propagation and invalidation, independent of release numbers.
+    intent_sha = request.request_sha256
+    input_hash = request.input_hash
+    next_version = f"{current_version}-contract-next"
+    monkeypatch.setattr(narrative_batch_request, "NARRATIVE_SELECTOR_VERSION", next_version)
+    next_event = batch.build_batch_events(
+        request, Reader(), now="2026-10-09T00:00:00Z"
+    ).events[0]
+    next_payload = SourceRevisionEventPayload.from_dict(json.loads(next_event.payload_json))
+    next_manifest = generation_manifest(
+        request, next_payload, execution_versions=batch._execution_versions(request)
+    )
+    assert next_manifest["execution_versions"]["selector"] == next_version
+    assert request.request_sha256 == intent_sha
+    assert request.input_hash != input_hash
+    assert generation_sha256(next_manifest) != generation_sha256(manifest)
+    assert manifest["execution_versions"]["selector"] == current_version
 
 
 def test_real_normalization_interface_with_explicit_synthetic_split_ocr_port(tmp_path):
