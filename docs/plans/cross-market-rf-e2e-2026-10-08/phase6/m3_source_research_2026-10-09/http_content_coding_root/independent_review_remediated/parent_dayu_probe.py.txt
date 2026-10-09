@@ -1,0 +1,43 @@
+import hashlib,json,os,sys,time
+from pathlib import Path
+from decimal import Decimal
+sys.path.insert(0,r'C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki\src')
+from company_wiki.source_catalog.adapter_process import JsonCommandAdapter,AdapterProcessError
+from company_wiki.source_catalog.acquisition import DownloadCandidate
+from company_wiki.source_catalog.download_budget import AcquisitionBudget
+from company_wiki.source_catalog.store import canonical_json
+root=Path(r'C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki')
+temp=Path(r'C:\Users\郑曾波\Projects\company-wiki\.tmp\http-independent-remediated-6cc9959-20261009')
+output=Path(r'C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\m3_source_research_2026-10-09\http_content_coding_root\independent_review_remediated')
+for k in ('TMP','TEMP','TMPDIR'):os.environ[k]=str(temp)
+os.environ.update(PYTHON_DOTENV_DISABLED='1',PYTHONDONTWRITEBYTECODE='1',PYTHONUTF8='1',COMPANY_WIKI_NETWORK='blocked',COMPANY_WIKI_REAL_LLM='0')
+raw=dict(candidate_id='sec:review',provider='sec',provider_document_id='review',market='US',entity='Review',title='Offline fiscal report',source_url='https://www.sec.gov/Archives/review.htm',document_kind='quarterly_report',form_type='10-Q',filing_date='2025-10-25',fiscal_year=2026,fiscal_period='Q1',language='en',amended=False,cik='123',report_date='2025-09-30')
+fields=['candidate_id','provider','provider_document_id','market','entity','title','source_url','document_kind','form_type','filing_date','fiscal_year','fiscal_period','language','amended']
+candidate=DownloadCandidate(**{k:raw[k] for k in fields},adapter_payload_json=canonical_json(raw))
+results=[]
+start=time.monotonic()
+for mode in ['gzip','deflate','raw-deflate','truncated','wrong-year']:
+    state=temp/('state-semver-'+mode); staging=temp/('staging-semver-'+mode)
+    command=[sys.executable,'-X','utf8','-B',str(temp/'offline_dayu_child.py'),mode,'--market','US','--adapter-name','review-dayu','--adapter-version','1.0.0','--provider-state-root',str(state)]
+    adapter=JsonCommandAdapter(name='review-dayu',version='1.0.0',command=command,project_root=root,supports_acquisition_budget=True)
+    b=AcquisitionBudget.from_limits(max_response_bytes=10000,max_seconds=10,max_cost_usd='0')
+    try:
+        receipt=adapter.fetch_bounded(candidate,staging,b)
+        body=Path(receipt.staged_path).read_bytes()
+        assert mode in ['gzip','deflate','raw-deflate']
+        assert b.response_bytes_used==len(body)==receipt.byte_size
+        assert hashlib.sha256(body).hexdigest()==receipt.content_sha256
+        assert b.response_bytes_used>b.wire_response_bytes_used>0 and b.usage_complete and b.wire_usage_complete
+        item={'mode':mode,'status':'PASS','outcome':'original_staged','source_sha256':receipt.content_sha256,'mime':receipt.mime_type}
+    except AdapterProcessError as e:
+        assert mode in ['truncated','wrong-year']
+        assert e.error_code==('incomplete_response' if mode=='truncated' else 'fiscal_period_unresolved')
+        assert not list(staging.glob('*')) and b.wire_response_bytes_used>0 and b.cost_usd_used==0 and b.usage_complete
+        item={'mode':mode,'status':'PASS','outcome':'expected_refusal','error_code':e.error_code,'usage_complete':e.acquisition_usage_complete}
+    item.update(entity_bytes=b.response_bytes_used,wire_bytes=b.wire_response_bytes_used,cost_usd=str(b.cost_usd_used),wire_usage_complete=b.wire_usage_complete,command=command)
+    results.append(item)
+result={'stage':'actual_parent_owned_dayu_cli_offline','results':results,'elapsed_seconds':round(time.monotonic()-start,3),'external_requests':0,'model_calls':0,'real_dayu_imported':False,'real_cwp_parent_child_protocol_executed':True,'mock_provider':True}
+(output/'parent_dayu_probe.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
+print(json.dumps(result,ensure_ascii=False,indent=2))
+
+

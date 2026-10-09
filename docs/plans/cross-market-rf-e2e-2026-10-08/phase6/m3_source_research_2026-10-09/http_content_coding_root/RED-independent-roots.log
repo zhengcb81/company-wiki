@@ -1,0 +1,504 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 89 items / 72 deselected / 17 selected
+
+tests\unit\test_bounded_content_encoding.py FFFFFFFFFFF                  [ 64%]
+tests\unit\test_adapter_process_budget.py FF.                            [ 82%]
+tests\integration\test_official_source_flow.py FFF                       [100%]
+
+================================== FAILURES ===================================
+_____ test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified[1-156] _____
+src\company_wiki\source_catalog\bounded_content_encoding.py:64: in feed
+    output = self._decoder.decompress(pending, limit)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   zlib.error: Error -3 while decompressing data: invalid stored block lengths
+
+The above exception was the direct cause of the following exception:
+src\company_wiki\source_catalog\bounded_http.py:133: in _decode_chunk
+    for entity in decoder.feed(chunk, lambda: budget.remaining_response_bytes + 1):
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\bounded_content_encoding.py:66: in feed
+    raise InvalidContentCoding("invalid compressed entity") from exc
+E   company_wiki.source_catalog.bounded_content_encoding.InvalidContentCoding: invalid compressed entity
+
+The above exception was the direct cause of the following exception:
+tests\unit\test_bounded_content_encoding.py:276: in test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified
+    assert client.get("https://fixture.invalid/ambiguous-framing").content == body
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:1053: in get
+    return self.request(
+C:\Miniconda\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:928: in send
+    raise exc
+C:\Miniconda\Lib\site-packages\httpx\_client.py:922: in send
+    response.read()
+C:\Miniconda\Lib\site-packages\httpx\_models.py:881: in read
+    self._content = b"".join(self.iter_bytes())
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_models.py:897: in iter_bytes
+    for raw_bytes in self.iter_raw():
+                     ^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_models.py:951: in iter_raw
+    for raw_stream_bytes in self.stream:
+                            ^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:153: in __iter__
+    for chunk in self._stream:
+                 ^^^^^^^^^^^^
+src\company_wiki\source_catalog\bounded_http.py:164: in __iter__
+    yield from _decode_chunk(chunk, self.decoder, self.budget, self.checkpoint)
+src\company_wiki\source_catalog\bounded_http.py:137: in _decode_chunk
+    raise ProviderBudgetStop("incomplete_response", "invalid compressed HTTP body") from exc
+E   company_wiki.source_catalog.bounded_http.ProviderBudgetStop: invalid compressed HTTP body
+_____ test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified[1-412] _____
+src\company_wiki\source_catalog\bounded_content_encoding.py:64: in feed
+    output = self._decoder.decompress(pending, limit)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   zlib.error: Error -3 while decompressing data: invalid stored block lengths
+
+The above exception was the direct cause of the following exception:
+src\company_wiki\source_catalog\bounded_http.py:133: in _decode_chunk
+    for entity in decoder.feed(chunk, lambda: budget.remaining_response_bytes + 1):
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\bounded_content_encoding.py:66: in feed
+    raise InvalidContentCoding("invalid compressed entity") from exc
+E   company_wiki.source_catalog.bounded_content_encoding.InvalidContentCoding: invalid compressed entity
+
+The above exception was the direct cause of the following exception:
+tests\unit\test_bounded_content_encoding.py:276: in test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified
+    assert client.get("https://fixture.invalid/ambiguous-framing").content == body
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:1053: in get
+    return self.request(
+C:\Miniconda\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:928: in send
+    raise exc
+C:\Miniconda\Lib\site-packages\httpx\_client.py:922: in send
+    response.read()
+C:\Miniconda\Lib\site-packages\httpx\_models.py:881: in read
+    self._content = b"".join(self.iter_bytes())
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_models.py:897: in iter_bytes
+    for raw_bytes in self.iter_raw():
+                     ^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_models.py:951: in iter_raw
+    for raw_stream_bytes in self.stream:
+                            ^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:153: in __iter__
+    for chunk in self._stream:
+                 ^^^^^^^^^^^^
+src\company_wiki\source_catalog\bounded_http.py:164: in __iter__
+    yield from _decode_chunk(chunk, self.decoder, self.budget, self.checkpoint)
+src\company_wiki\source_catalog\bounded_http.py:137: in _decode_chunk
+    raise ProviderBudgetStop("incomplete_response", "invalid compressed HTTP body") from exc
+E   company_wiki.source_catalog.bounded_http.ProviderBudgetStop: invalid compressed HTTP body
+_____ test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified[1-218] _____
+src\company_wiki\source_catalog\bounded_content_encoding.py:64: in feed
+    output = self._decoder.decompress(pending, limit)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   zlib.error: Error -3 while decompressing data: invalid stored block lengths
+
+The above exception was the direct cause of the following exception:
+src\company_wiki\source_catalog\bounded_http.py:133: in _decode_chunk
+    for entity in decoder.feed(chunk, lambda: budget.remaining_response_bytes + 1):
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\bounded_content_encoding.py:66: in feed
+    raise InvalidContentCoding("invalid compressed entity") from exc
+E   company_wiki.source_catalog.bounded_content_encoding.InvalidContentCoding: invalid compressed entity
+
+The above exception was the direct cause of the following exception:
+tests\unit\test_bounded_content_encoding.py:276: in test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified
+    assert client.get("https://fixture.invalid/ambiguous-framing").content == body
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:1053: in get
+    return self.request(
+C:\Miniconda\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:928: in send
+    raise exc
+C:\Miniconda\Lib\site-packages\httpx\_client.py:922: in send
+    response.read()
+C:\Miniconda\Lib\site-packages\httpx\_models.py:881: in read
+    self._content = b"".join(self.iter_bytes())
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_models.py:897: in iter_bytes
+    for raw_bytes in self.iter_raw():
+                     ^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_models.py:951: in iter_raw
+    for raw_stream_bytes in self.stream:
+                            ^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:153: in __iter__
+    for chunk in self._stream:
+                 ^^^^^^^^^^^^
+src\company_wiki\source_catalog\bounded_http.py:164: in __iter__
+    yield from _decode_chunk(chunk, self.decoder, self.budget, self.checkpoint)
+src\company_wiki\source_catalog\bounded_http.py:137: in _decode_chunk
+    raise ProviderBudgetStop("incomplete_response", "invalid compressed HTTP body") from exc
+E   company_wiki.source_catalog.bounded_http.ProviderBudgetStop: invalid compressed HTTP body
+_____ test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified[2-156] _____
+src\company_wiki\source_catalog\bounded_content_encoding.py:64: in feed
+    output = self._decoder.decompress(pending, limit)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   zlib.error: Error -3 while decompressing data: invalid stored block lengths
+
+The above exception was the direct cause of the following exception:
+src\company_wiki\source_catalog\bounded_http.py:133: in _decode_chunk
+    for entity in decoder.feed(chunk, lambda: budget.remaining_response_bytes + 1):
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\bounded_content_encoding.py:66: in feed
+    raise InvalidContentCoding("invalid compressed entity") from exc
+E   company_wiki.source_catalog.bounded_content_encoding.InvalidContentCoding: invalid compressed entity
+
+The above exception was the direct cause of the following exception:
+tests\unit\test_bounded_content_encoding.py:276: in test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified
+    assert client.get("https://fixture.invalid/ambiguous-framing").content == body
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:1053: in get
+    return self.request(
+C:\Miniconda\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:928: in send
+    raise exc
+C:\Miniconda\Lib\site-packages\httpx\_client.py:922: in send
+    response.read()
+C:\Miniconda\Lib\site-packages\httpx\_models.py:881: in read
+    self._content = b"".join(self.iter_bytes())
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_models.py:897: in iter_bytes
+    for raw_bytes in self.iter_raw():
+                     ^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_models.py:951: in iter_raw
+    for raw_stream_bytes in self.stream:
+                            ^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:153: in __iter__
+    for chunk in self._stream:
+                 ^^^^^^^^^^^^
+src\company_wiki\source_catalog\bounded_http.py:164: in __iter__
+    yield from _decode_chunk(chunk, self.decoder, self.budget, self.checkpoint)
+src\company_wiki\source_catalog\bounded_http.py:137: in _decode_chunk
+    raise ProviderBudgetStop("incomplete_response", "invalid compressed HTTP body") from exc
+E   company_wiki.source_catalog.bounded_http.ProviderBudgetStop: invalid compressed HTTP body
+_____ test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified[2-412] _____
+src\company_wiki\source_catalog\bounded_content_encoding.py:64: in feed
+    output = self._decoder.decompress(pending, limit)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   zlib.error: Error -3 while decompressing data: invalid stored block lengths
+
+The above exception was the direct cause of the following exception:
+src\company_wiki\source_catalog\bounded_http.py:133: in _decode_chunk
+    for entity in decoder.feed(chunk, lambda: budget.remaining_response_bytes + 1):
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\bounded_content_encoding.py:66: in feed
+    raise InvalidContentCoding("invalid compressed entity") from exc
+E   company_wiki.source_catalog.bounded_content_encoding.InvalidContentCoding: invalid compressed entity
+
+The above exception was the direct cause of the following exception:
+tests\unit\test_bounded_content_encoding.py:276: in test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified
+    assert client.get("https://fixture.invalid/ambiguous-framing").content == body
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:1053: in get
+    return self.request(
+C:\Miniconda\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:928: in send
+    raise exc
+C:\Miniconda\Lib\site-packages\httpx\_client.py:922: in send
+    response.read()
+C:\Miniconda\Lib\site-packages\httpx\_models.py:881: in read
+    self._content = b"".join(self.iter_bytes())
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_models.py:897: in iter_bytes
+    for raw_bytes in self.iter_raw():
+                     ^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_models.py:951: in iter_raw
+    for raw_stream_bytes in self.stream:
+                            ^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:153: in __iter__
+    for chunk in self._stream:
+                 ^^^^^^^^^^^^
+src\company_wiki\source_catalog\bounded_http.py:164: in __iter__
+    yield from _decode_chunk(chunk, self.decoder, self.budget, self.checkpoint)
+src\company_wiki\source_catalog\bounded_http.py:137: in _decode_chunk
+    raise ProviderBudgetStop("incomplete_response", "invalid compressed HTTP body") from exc
+E   company_wiki.source_catalog.bounded_http.ProviderBudgetStop: invalid compressed HTTP body
+_____ test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified[2-218] _____
+src\company_wiki\source_catalog\bounded_content_encoding.py:64: in feed
+    output = self._decoder.decompress(pending, limit)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   zlib.error: Error -3 while decompressing data: invalid stored block lengths
+
+The above exception was the direct cause of the following exception:
+src\company_wiki\source_catalog\bounded_http.py:133: in _decode_chunk
+    for entity in decoder.feed(chunk, lambda: budget.remaining_response_bytes + 1):
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\bounded_content_encoding.py:66: in feed
+    raise InvalidContentCoding("invalid compressed entity") from exc
+E   company_wiki.source_catalog.bounded_content_encoding.InvalidContentCoding: invalid compressed entity
+
+The above exception was the direct cause of the following exception:
+tests\unit\test_bounded_content_encoding.py:276: in test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified
+    assert client.get("https://fixture.invalid/ambiguous-framing").content == body
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:1053: in get
+    return self.request(
+C:\Miniconda\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:928: in send
+    raise exc
+C:\Miniconda\Lib\site-packages\httpx\_client.py:922: in send
+    response.read()
+C:\Miniconda\Lib\site-packages\httpx\_models.py:881: in read
+    self._content = b"".join(self.iter_bytes())
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_models.py:897: in iter_bytes
+    for raw_bytes in self.iter_raw():
+                     ^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_models.py:951: in iter_raw
+    for raw_stream_bytes in self.stream:
+                            ^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:153: in __iter__
+    for chunk in self._stream:
+                 ^^^^^^^^^^^^
+src\company_wiki\source_catalog\bounded_http.py:164: in __iter__
+    yield from _decode_chunk(chunk, self.decoder, self.budget, self.checkpoint)
+src\company_wiki\source_catalog\bounded_http.py:137: in _decode_chunk
+    raise ProviderBudgetStop("incomplete_response", "invalid compressed HTTP body") from exc
+E   company_wiki.source_catalog.bounded_http.ProviderBudgetStop: invalid compressed HTTP body
+___ test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified[10000-156] ___
+src\company_wiki\source_catalog\bounded_content_encoding.py:64: in feed
+    output = self._decoder.decompress(pending, limit)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   zlib.error: Error -3 while decompressing data: invalid stored block lengths
+
+The above exception was the direct cause of the following exception:
+src\company_wiki\source_catalog\bounded_http.py:133: in _decode_chunk
+    for entity in decoder.feed(chunk, lambda: budget.remaining_response_bytes + 1):
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\bounded_content_encoding.py:66: in feed
+    raise InvalidContentCoding("invalid compressed entity") from exc
+E   company_wiki.source_catalog.bounded_content_encoding.InvalidContentCoding: invalid compressed entity
+
+The above exception was the direct cause of the following exception:
+tests\unit\test_bounded_content_encoding.py:276: in test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified
+    assert client.get("https://fixture.invalid/ambiguous-framing").content == body
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:1053: in get
+    return self.request(
+C:\Miniconda\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:928: in send
+    raise exc
+C:\Miniconda\Lib\site-packages\httpx\_client.py:922: in send
+    response.read()
+C:\Miniconda\Lib\site-packages\httpx\_models.py:881: in read
+    self._content = b"".join(self.iter_bytes())
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_models.py:897: in iter_bytes
+    for raw_bytes in self.iter_raw():
+                     ^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_models.py:951: in iter_raw
+    for raw_stream_bytes in self.stream:
+                            ^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:153: in __iter__
+    for chunk in self._stream:
+                 ^^^^^^^^^^^^
+src\company_wiki\source_catalog\bounded_http.py:164: in __iter__
+    yield from _decode_chunk(chunk, self.decoder, self.budget, self.checkpoint)
+src\company_wiki\source_catalog\bounded_http.py:137: in _decode_chunk
+    raise ProviderBudgetStop("incomplete_response", "invalid compressed HTTP body") from exc
+E   company_wiki.source_catalog.bounded_http.ProviderBudgetStop: invalid compressed HTTP body
+___ test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified[10000-412] ___
+src\company_wiki\source_catalog\bounded_content_encoding.py:64: in feed
+    output = self._decoder.decompress(pending, limit)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   zlib.error: Error -3 while decompressing data: invalid stored block lengths
+
+The above exception was the direct cause of the following exception:
+src\company_wiki\source_catalog\bounded_http.py:133: in _decode_chunk
+    for entity in decoder.feed(chunk, lambda: budget.remaining_response_bytes + 1):
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\bounded_content_encoding.py:66: in feed
+    raise InvalidContentCoding("invalid compressed entity") from exc
+E   company_wiki.source_catalog.bounded_content_encoding.InvalidContentCoding: invalid compressed entity
+
+The above exception was the direct cause of the following exception:
+tests\unit\test_bounded_content_encoding.py:276: in test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified
+    assert client.get("https://fixture.invalid/ambiguous-framing").content == body
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:1053: in get
+    return self.request(
+C:\Miniconda\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:928: in send
+    raise exc
+C:\Miniconda\Lib\site-packages\httpx\_client.py:922: in send
+    response.read()
+C:\Miniconda\Lib\site-packages\httpx\_models.py:881: in read
+    self._content = b"".join(self.iter_bytes())
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_models.py:897: in iter_bytes
+    for raw_bytes in self.iter_raw():
+                     ^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_models.py:951: in iter_raw
+    for raw_stream_bytes in self.stream:
+                            ^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:153: in __iter__
+    for chunk in self._stream:
+                 ^^^^^^^^^^^^
+src\company_wiki\source_catalog\bounded_http.py:164: in __iter__
+    yield from _decode_chunk(chunk, self.decoder, self.budget, self.checkpoint)
+src\company_wiki\source_catalog\bounded_http.py:137: in _decode_chunk
+    raise ProviderBudgetStop("incomplete_response", "invalid compressed HTTP body") from exc
+E   company_wiki.source_catalog.bounded_http.ProviderBudgetStop: invalid compressed HTTP body
+___ test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified[10000-218] ___
+src\company_wiki\source_catalog\bounded_content_encoding.py:64: in feed
+    output = self._decoder.decompress(pending, limit)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   zlib.error: Error -3 while decompressing data: invalid stored block lengths
+
+The above exception was the direct cause of the following exception:
+src\company_wiki\source_catalog\bounded_http.py:133: in _decode_chunk
+    for entity in decoder.feed(chunk, lambda: budget.remaining_response_bytes + 1):
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\bounded_content_encoding.py:66: in feed
+    raise InvalidContentCoding("invalid compressed entity") from exc
+E   company_wiki.source_catalog.bounded_content_encoding.InvalidContentCoding: invalid compressed entity
+
+The above exception was the direct cause of the following exception:
+tests\unit\test_bounded_content_encoding.py:276: in test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified
+    assert client.get("https://fixture.invalid/ambiguous-framing").content == body
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:1053: in get
+    return self.request(
+C:\Miniconda\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:928: in send
+    raise exc
+C:\Miniconda\Lib\site-packages\httpx\_client.py:922: in send
+    response.read()
+C:\Miniconda\Lib\site-packages\httpx\_models.py:881: in read
+    self._content = b"".join(self.iter_bytes())
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_models.py:897: in iter_bytes
+    for raw_bytes in self.iter_raw():
+                     ^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_models.py:951: in iter_raw
+    for raw_stream_bytes in self.stream:
+                            ^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:153: in __iter__
+    for chunk in self._stream:
+                 ^^^^^^^^^^^^
+src\company_wiki\source_catalog\bounded_http.py:164: in __iter__
+    yield from _decode_chunk(chunk, self.decoder, self.budget, self.checkpoint)
+src\company_wiki\source_catalog\bounded_http.py:137: in _decode_chunk
+    raise ProviderBudgetStop("incomplete_response", "invalid compressed HTTP body") from exc
+E   company_wiki.source_catalog.bounded_http.ProviderBudgetStop: invalid compressed HTTP body
+__ test_consumer_stops_early_closes_owned_active_iterator_immediately[sync] ___
+tests\unit\test_bounded_content_encoding.py:301: in test_consumer_stops_early_closes_owned_active_iterator_immediately
+    assert stream.closed and stream.iterator_closed
+E   assert (True and False)
+E    +  where True = <unit.test_bounded_content_encoding.test_consumer_stops_early_closes_owned_active_iterator_immediately.<locals>.Tracked object at 0x00000216D5A05BE0>.closed
+E    +  and   False = <unit.test_bounded_content_encoding.test_consumer_stops_early_closes_owned_active_iterator_immediately.<locals>.Tracked object at 0x00000216D5A05BE0>.iterator_closed
+__ test_consumer_stops_early_closes_owned_active_iterator_immediately[async] __
+tests\unit\test_bounded_content_encoding.py:324: in test_consumer_stops_early_closes_owned_active_iterator_immediately
+    loop.run_until_complete(exercise())
+C:\Miniconda\Lib\asyncio\base_events.py:725: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+tests\unit\test_bounded_content_encoding.py:321: in exercise
+    assert stream.closed and stream.iterator_closed
+E   assert (True and False)
+E    +  where True = <unit.test_bounded_content_encoding.test_consumer_stops_early_closes_owned_active_iterator_immediately.<locals>.Tracked object at 0x00000216D5A06270>.closed
+E    +  and   False = <unit.test_bounded_content_encoding.test_consumer_stops_early_closes_owned_active_iterator_immediately.<locals>.Tracked object at 0x00000216D5A06270>.iterator_closed
+__ test_handled_failure_does_not_infer_wire_complete_from_body_final[False] ___
+tests\unit\test_adapter_process_budget.py:420: in test_handled_failure_does_not_infer_wire_complete_from_body_final
+    assert b.wire_usage_complete is (complete is True)
+E   AssertionError: assert True is (False is True)
+E    +  where True = AcquisitionBudget(max_response_bytes=100, deadline_monotonic=219781.3581741, max_cost_usd=Decimal('1'), response_bytes...r_started=True, failure_usage_complete=True, usage_reported=True, wire_response_bytes_used=7, wire_usage_complete=True).wire_usage_complete
+___ test_handled_failure_does_not_infer_wire_complete_from_body_final[None] ___
+tests\unit\test_adapter_process_budget.py:420: in test_handled_failure_does_not_infer_wire_complete_from_body_final
+    assert b.wire_usage_complete is (complete is True)
+E   AssertionError: assert True is (None is True)
+E    +  where True = AcquisitionBudget(max_response_bytes=100, deadline_monotonic=219781.3693093, max_cost_usd=Decimal('1'), response_bytes...r_started=True, failure_usage_complete=True, usage_reported=True, wire_response_bytes_used=7, wire_usage_complete=True).wire_usage_complete
+_ test_public_cli_keeps_completed_capture_http_diagnostics_on_import_refusal[mime] _
+tests\integration\test_official_source_flow.py:1394: in test_public_cli_keeps_completed_capture_http_diagnostics_on_import_refusal
+    assert out["http_observation"] == {"status_code": 200, "mime_type": "text/html",
+           ^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'http_observation'
+_ test_public_cli_keeps_completed_capture_http_diagnostics_on_import_refusal[sha] _
+tests\integration\test_official_source_flow.py:1394: in test_public_cli_keeps_completed_capture_http_diagnostics_on_import_refusal
+    assert out["http_observation"] == {"status_code": 200, "mime_type": "text/html",
+           ^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'http_observation'
+_ test_public_cli_keeps_completed_capture_http_diagnostics_on_import_refusal[storage] _
+tests\integration\test_official_source_flow.py:1394: in test_public_cli_keeps_completed_capture_http_diagnostics_on_import_refusal
+    assert out["http_observation"] == {"status_code": 200, "mime_type": "text/html",
+           ^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'http_observation'
+============================== warnings summary ===============================
+tests/integration/test_official_source_flow.py::test_public_cli_keeps_completed_capture_http_diagnostics_on_import_refusal[storage]
+  C:\Miniconda\Lib\asyncio\base_events.py:750: RuntimeWarning: coroutine method 'aclose' of 'Response.aiter_bytes' was never awaited
+    self._ready.clear()
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/integration/test_official_source_flow.py::test_public_cli_keeps_completed_capture_http_diagnostics_on_import_refusal[storage]
+  C:\Miniconda\Lib\asyncio\base_events.py:750: RuntimeWarning: coroutine method 'aclose' of 'Response.aiter_raw' was never awaited
+    self._ready.clear()
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/integration/test_official_source_flow.py::test_public_cli_keeps_completed_capture_http_diagnostics_on_import_refusal[storage]
+  C:\Miniconda\Lib\asyncio\base_events.py:750: RuntimeWarning: coroutine method 'aclose' of 'BoundAsyncStream.__aiter__' was never awaited
+    self._ready.clear()
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/integration/test_official_source_flow.py::test_public_cli_keeps_completed_capture_http_diagnostics_on_import_refusal[storage]
+  C:\Miniconda\Lib\asyncio\base_events.py:750: RuntimeWarning: coroutine method 'aclose' of '_AsyncStream.__aiter__' was never awaited
+    self._ready.clear()
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/integration/test_official_source_flow.py::test_public_cli_keeps_completed_capture_http_diagnostics_on_import_refusal[storage]
+  C:\Miniconda\Lib\asyncio\base_events.py:750: RuntimeWarning: coroutine method 'aclose' of 'test_consumer_stops_early_closes_owned_active_iterator_immediately.<locals>.Tracked.__aiter__' was never awaited
+    self._ready.clear()
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/unit/test_bounded_content_encoding.py::test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified[1-156]
+FAILED tests/unit/test_bounded_content_encoding.py::test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified[1-412]
+FAILED tests/unit/test_bounded_content_encoding.py::test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified[1-218]
+FAILED tests/unit/test_bounded_content_encoding.py::test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified[2-156]
+FAILED tests/unit/test_bounded_content_encoding.py::test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified[2-412]
+FAILED tests/unit/test_bounded_content_encoding.py::test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified[2-218]
+FAILED tests/unit/test_bounded_content_encoding.py::test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified[10000-156]
+FAILED tests/unit/test_bounded_content_encoding.py::test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified[10000-412]
+FAILED tests/unit/test_bounded_content_encoding.py::test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified[10000-218]
+FAILED tests/unit/test_bounded_content_encoding.py::test_consumer_stops_early_closes_owned_active_iterator_immediately[sync]
+FAILED tests/unit/test_bounded_content_encoding.py::test_consumer_stops_early_closes_owned_active_iterator_immediately[async]
+FAILED tests/unit/test_adapter_process_budget.py::test_handled_failure_does_not_infer_wire_complete_from_body_final[False]
+FAILED tests/unit/test_adapter_process_budget.py::test_handled_failure_does_not_infer_wire_complete_from_body_final[None]
+FAILED tests/integration/test_official_source_flow.py::test_public_cli_keeps_completed_capture_http_diagnostics_on_import_refusal[mime]
+FAILED tests/integration/test_official_source_flow.py::test_public_cli_keeps_completed_capture_http_diagnostics_on_import_refusal[sha]
+FAILED tests/integration/test_official_source_flow.py::test_public_cli_keeps_completed_capture_http_diagnostics_on_import_refusal[storage]
+=========== 16 failed, 1 passed, 72 deselected, 5 warnings in 3.90s ===========
+

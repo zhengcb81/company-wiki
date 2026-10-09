@@ -1,0 +1,14 @@
+{
+  "src/company_wiki/source_catalog/download_budget.py": "db73704ff35efecff6ef50ffd49362840511a608ac72b7cd03bb87417e7d0038",
+  "src/company_wiki/source_catalog/bounded_content_encoding.py": "cd23769db0501630e2f0a07bca9d7326079a88d9696075fb977e2568cec9cb40",
+  "src/company_wiki/source_catalog/bounded_http.py": "cd11d3e59be894a66a6dcaf9d70d800857f9bf4b68a37abe57f3408b1904448d",
+  "src/company_wiki/source_catalog/adapter_process.py": "5a0b59ba8a2b3a01907639e52fa031f5384f766dba6d9621e80dad439b27f710",
+  "src/company_wiki/source_catalog/dayu_sdk_cli.py": "3fd47db2fee91973e69d3a798857474f0c371dbaf7759ed4d42cc5018e256bfd",
+  "src/company_wiki/source_catalog/official_source_flow.py": "df475622ae000786f9467459af7010f58aa79b6b1eb447845008a21bcce6a6a1",
+  "src/company_wiki/source_catalog/official_source_cli.py": "fb9f682d3cc90fc1f87f1f96460119aebf24bab78f05554e3e8acf0b89e350a6",
+  "tests/unit/test_adapter_process_budget.py": "d77a61d856566f409d300bc426d41885371e8ddad7c3998a5c1c8a89a54ee67a",
+  "tests/unit/test_bounded_content_encoding.py": "c9c53a9098b051c17923f9009c9fbd8745b44534dcb8e3d568831475bf6e98b6",
+  "tests/unit/test_bounded_http.py": "ef4e0f032f76459445d7f4e6de8a84c3626875992b796ddcc549b1b808dfb10a",
+  "tests/integration/test_official_source_flow.py": "faac989b23e8763fe8e409e51d661c835e1e093686f01e503f91814cb709ab0a",
+  "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+}

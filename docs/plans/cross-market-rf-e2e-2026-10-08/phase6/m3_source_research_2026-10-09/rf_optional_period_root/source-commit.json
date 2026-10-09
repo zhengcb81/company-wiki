@@ -1,0 +1,12 @@
+{
+  "observed_at": "2026-10-09T21:24:45.715987+00:00",
+  "returncode": 0,
+  "elapsed_seconds": 7.127,
+  "head": "ccce3bf4aa8905753565c4cef5905550d394b958",
+  "files": [
+    "scripts/source_preparation.py",
+    "tests/test_source_preparation.py"
+  ],
+  "runtime_sha256": "acb5f63c7200b02a465729b534142eda5e476a2ec9b601fd82a5226542f9f799",
+  "hooks_bypassed": false
+}

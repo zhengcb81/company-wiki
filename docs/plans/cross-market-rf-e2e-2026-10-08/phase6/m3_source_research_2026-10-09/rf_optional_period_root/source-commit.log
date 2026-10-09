@@ -1,0 +1,6 @@
+[codex/m3-optional-period-20261009 ccce3bf4] fix: preserve resolved period when filing request leaves it optional
+ 2 files changed, 46 insertions(+), 4 deletions(-)
+
+ruff check (WU-1.2, mirrors CI).......................................................Passed
+mypy public contracts (FC-1204-c, mirrors CI).....................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test).......................Passed

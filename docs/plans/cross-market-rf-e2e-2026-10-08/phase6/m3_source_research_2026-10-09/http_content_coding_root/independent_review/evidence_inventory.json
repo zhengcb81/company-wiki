@@ -1,0 +1,586 @@
+{
+  "existing_evidence": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\async-iterator-RED.log",
+      "bytes": 3532,
+      "sha256": "36a45c0d6c9d7f3ab58cf727d6e639aeeda946241b46d132e65f2cc5477939bd",
+      "full_content_read": true,
+      "summary": [
+        "======================== 1 failed, 1 warning in 0.68s ========================="
+      ]
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\baseline-targeted-mypy.log",
+      "bytes": 4570,
+      "sha256": "5972f3ec3579861f0a50b28e4c0f86221947016a6b4c227db44e92b878faedc7",
+      "full_content_read": true,
+      "summary": [
+        "Found 28 errors in 4 files (checked 6 source files)"
+      ]
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\bridge-capture-RED.json",
+      "bytes": 658,
+      "sha256": "0c21c64b03e8ffd3cbd95d70830102a8e8b20ffc03a44f7766483864124845e1",
+      "full_content_read": true,
+      "summary": [],
+      "json_parsed": {
+        "observed_at": "2026-10-09T20:38:23.803602+00:00",
+        "stage": "before_bridge_capture_implementation",
+        "command": [
+          "python",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "pytest",
+          "tests/unit/test_adapter_process_budget.py",
+          "tests/integration/test_official_source_flow.py",
+          "-q",
+          "--tb=short",
+          "--basetemp",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-wire-red-asytkfpe\\pytest"
+        ],
+        "returncode": 1,
+        "elapsed_seconds": 30.641,
+        "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-wire-red-asytkfpe",
+        "external_requests": 0,
+        "model_calls": 0,
+        "owned_temp_restored": true
+      }
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\bridge-capture-RED.log",
+      "bytes": 9578,
+      "sha256": "f2949b9eb34f6f20c40b9c7daefb047b4757ec31cd3578006948221b5a3d6377",
+      "full_content_read": true,
+      "summary": [
+        "======================= 13 failed, 34 passed in 28.12s ========================"
+      ]
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\codec-transport-mypy.log",
+      "bytes": 46,
+      "sha256": "c36212e745781927e385ab84e5dc3b849ab3a6f6236a886e9e72dd4790c5c70d",
+      "full_content_read": true,
+      "summary": [
+        "Success: no issues found in 2 source files"
+      ]
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\IMPLEMENTATION.md",
+      "bytes": 7752,
+      "sha256": "74a6161e06e3ad02d9b78571f3cd05357beb0773c7ed8fd8b67dcebbf0ba55bb",
+      "full_content_read": true,
+      "summary": []
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\INVESTIGATION.md",
+      "bytes": 4008,
+      "sha256": "ed5cdbf43cf008b6cb383ae1686ee87e3b0cda817fb332b2b1f7a69202e21a07",
+      "full_content_read": true,
+      "summary": []
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\local-codec-1.json",
+      "bytes": 634,
+      "sha256": "da954bc662b030acfa7a7406425009bba5206d8e8b3bd91f3a51f5cc771a1231",
+      "full_content_read": true,
+      "summary": [],
+      "json_parsed": {
+        "observed_at": "2026-10-09T20:34:47.645905+00:00",
+        "stage": "isolated_codec_initial",
+        "command": [
+          "python",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "pytest",
+          "tests/unit/test_bounded_content_encoding.py",
+          "tests/unit/test_bounded_http.py",
+          "-q",
+          "--tb=short",
+          "--basetemp",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-http-local-th4achqv\\pytest"
+        ],
+        "returncode": 1,
+        "elapsed_seconds": 3.401,
+        "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-http-local-th4achqv",
+        "external_requests": 0,
+        "model_calls": 0,
+        "owned_temp_restored": true
+      }
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\local-codec-1.log",
+      "bytes": 3011,
+      "sha256": "71a48ad06aefb36984afa776553f7408d51e21a0f55104ef5ac9e43b01e09bd7",
+      "full_content_read": true,
+      "summary": [
+        "======================== 2 failed, 32 passed in 0.88s ========================="
+      ]
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\real_sse_after_codec.json",
+      "bytes": 2982,
+      "sha256": "aecc368d0e69aa1593a3f7f0a080be40cf10d440d8a5a6aaf6c29714ee06f4fe",
+      "full_content_read": true,
+      "summary": [],
+      "json_parsed": {
+        "started_at": "2026-10-09T20:45:16.293431+00:00",
+        "purpose": "one isolated genuine SSE public capture then exact raw SourceRef replay and zero-GET reuse; not new executor or review",
+        "request": {
+          "schema_version": "official-source-capture-request/1",
+          "request_id": "root-isolated-sse-compressed-e2e-204516",
+          "source": {
+            "entity": "中微公司",
+            "document_kind": "regulatory_filing",
+            "title": "发行股份及支付现金购买资产并募集配套资金报告书",
+            "publisher": "上海证券交易所",
+            "source_url": "https://static.sse.com.cn/disclosure/listedinfo/announcement/c/new/2026-05-13/688012_20260513_TCLM.pdf",
+            "market": "CN",
+            "security_id": "688012",
+            "published_date": "2026-05-13",
+            "fiscal_year": null,
+            "fiscal_period": null,
+            "language": "zh",
+            "provider": "official"
+          },
+          "max_bytes": 16777216,
+          "max_seconds": 30,
+          "max_cost_usd": "0",
+          "mime_type": "application/pdf"
+        },
+        "request_source": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\requests\\material-0-v2.json",
+        "model_calls": 0,
+        "raw_production_config_written": false,
+        "runtime_root": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+        "outcome": "observed_failure",
+        "exception_type": "OfficialSourceError",
+        "error_code": null,
+        "capture_id": "d9c989c83c804a389a2b040002a3428c",
+        "capture_receipt": {
+          "capture_method": "bounded_http",
+          "tool_name": "company-wiki-official-source",
+          "tool_call_id": "http-7ffaa49dc83847c0868f6d2e03202a28",
+          "http_requests": 1,
+          "started_at": "2026-10-09T20:45:16.466170+00:00",
+          "http_status": 200,
+          "effective_url": "https://static.sse.com.cn/disclosure/listedinfo/announcement/c/new/2026-05-13/688012_20260513_TCLM.pdf",
+          "response_mime_type": "text/html",
+          "http_observation": {
+            "status_code": 200,
+            "mime_type": "text/html",
+            "content_encoding": "gzip",
+            "wire_content_length": null
+          },
+          "captured_at": "2026-10-09T20:45:18.156824+00:00",
+          "response_bytes": 7373,
+          "content_sha256": "cbdc78de675c8fad977aff8e3ef8cb04a0659e67f3a43f87fb59ce22377e9a93",
+          "usage_complete": true,
+          "http_wire_bytes": 3872,
+          "http_wire_usage_complete": true,
+          "acquisition_usage": {
+            "schema_version": "1.0",
+            "response_bytes": 7373,
+            "cost_usd": "0"
+          },
+          "cumulative_acquisition_usage": {
+            "schema_version": "1.0",
+            "response_bytes": 7373,
+            "cost_usd": "0"
+          }
+        },
+        "acquisition_usage": {
+          "schema_version": "1.0",
+          "response_bytes": 7373,
+          "cost_usd": "0"
+        },
+        "acquisition_usage_complete": true,
+        "provider_started": true,
+        "owned_temp_bytes_before_cleanup": 10000,
+        "owned_temp_restored": true,
+        "finished_at": "2026-10-09T20:45:19.131868+00:00",
+        "elapsed_seconds": 2.838
+      }
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\real_sse_headers_probe.json",
+      "bytes": 2388,
+      "sha256": "ed0c607936ac6a5db005e67b7956ef5041c292974032dd5c1b2902cab9610e2e",
+      "full_content_read": true,
+      "summary": [],
+      "json_parsed": {
+        "started_at": "2026-10-09T19:33:46.884759+00:00",
+        "request": {
+          "schema_version": "official-source-capture-request/1",
+          "request_id": "root-sse-encoding-diagnostic-193346",
+          "source": {
+            "entity": "中微公司",
+            "document_kind": "regulatory_filing",
+            "title": "发行股份及支付现金购买资产并募集配套资金报告书",
+            "publisher": "上海证券交易所",
+            "source_url": "https://static.sse.com.cn/disclosure/listedinfo/announcement/c/new/2026-05-13/688012_20260513_TCLM.pdf",
+            "market": "CN",
+            "security_id": "688012",
+            "published_date": "2026-05-13",
+            "fiscal_year": null,
+            "fiscal_period": null,
+            "language": "zh",
+            "provider": "official"
+          },
+          "max_bytes": 65536,
+          "max_seconds": 30,
+          "max_cost_usd": "0",
+          "mime_type": "application/pdf"
+        },
+        "purpose": "Observe actual response encoding through unchanged public CWP capture with header-only small byte cap; no provider/header override; not company execution replay",
+        "request_source": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\requests\\material-0-v2.json",
+        "external_model_calls": 0,
+        "normal_policy_unchanged": true,
+        "outcome": "observed_refusal",
+        "exception_type": "ConnectTimeout",
+        "error_code": null,
+        "error_text": "",
+        "capture_id": "88c5fb93c715416ea41a10986f3d1979",
+        "capture_receipt": {
+          "capture_method": "bounded_http",
+          "tool_name": "company-wiki-official-source",
+          "tool_call_id": "http-c62bfe7ef6804c5f825913631dbdae42",
+          "http_requests": 1,
+          "started_at": "2026-10-09T19:33:47.256928+00:00",
+          "captured_at": "2026-10-09T19:33:52.726129+00:00",
+          "response_bytes": 0,
+          "content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "usage_complete": false,
+          "acquisition_usage": {
+            "schema_version": "1.0",
+            "response_bytes": 0,
+            "cost_usd": "0"
+          }
+        },
+        "acquisition_usage": {
+          "schema_version": "1.0",
+          "response_bytes": 0,
+          "cost_usd": "0"
+        },
+        "acquisition_usage_complete": false,
+        "provider_started": true,
+        "own_temp_bytes_before_cleanup": 2300,
+        "finished_at": "2026-10-09T19:33:52.741857+00:00",
+        "seconds": 5.8571157999977,
+        "response_headers_observed": [],
+        "owned_temp_restored": true,
+        "production_config_raw_DB_written": false
+      }
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\RED-valid-encoded-transport.json",
+      "bytes": 2475,
+      "sha256": "54ebb83e4f66c96db1708e9fd0fd42b909d0223335fb6f62ac13e631a34aa734",
+      "full_content_read": true,
+      "summary": [],
+      "json_parsed": {
+        "schema": "bounded-http-valid-encoding-observation/1",
+        "observed_at": "2026-10-09T20:14:28.273793+00:00",
+        "source_sha256": "55c5be4adacd99ca6492fd5a300ef0632664f0d34f878da00f97d2bc6b2abdab",
+        "runtime_unchanged": true,
+        "external_requests": 0,
+        "external_model_calls": 0,
+        "transport": "Real public bounded sync/async decorators; httpx.MockTransport only",
+        "cases": [
+          {
+            "mode": "sync",
+            "encoding": "identity",
+            "wire_bytes_fixture": 84,
+            "entity_bytes": 84,
+            "cap": 1024,
+            "outcome": "success",
+            "entity_exact": true,
+            "wire_bytes_observed": 84
+          },
+          {
+            "mode": "sync",
+            "encoding": "gzip",
+            "wire_bytes_fixture": 94,
+            "entity_bytes": 84,
+            "cap": 1024,
+            "outcome": "refused",
+            "error_type": "ProviderBudgetStop",
+            "error_code": "unsupported_content_encoding",
+            "wire_bytes_observed": 0
+          },
+          {
+            "mode": "sync",
+            "encoding": "deflate",
+            "wire_bytes_fixture": 82,
+            "entity_bytes": 84,
+            "cap": 1024,
+            "outcome": "refused",
+            "error_type": "ProviderBudgetStop",
+            "error_code": "unsupported_content_encoding",
+            "wire_bytes_observed": 0
+          },
+          {
+            "mode": "async",
+            "encoding": "identity",
+            "wire_bytes_fixture": 84,
+            "entity_bytes": 84,
+            "cap": 1024,
+            "outcome": "success",
+            "entity_exact": true,
+            "wire_bytes_observed": 84
+          },
+          {
+            "mode": "async",
+            "encoding": "gzip",
+            "wire_bytes_fixture": 94,
+            "entity_bytes": 84,
+            "cap": 1024,
+            "outcome": "refused",
+            "error_type": "ProviderBudgetStop",
+            "error_code": "unsupported_content_encoding",
+            "wire_bytes_observed": 0
+          },
+          {
+            "mode": "async",
+            "encoding": "deflate",
+            "wire_bytes_fixture": 82,
+            "entity_bytes": 84,
+            "cap": 1024,
+            "outcome": "refused",
+            "error_type": "ProviderBudgetStop",
+            "error_code": "unsupported_content_encoding",
+            "wire_bytes_observed": 0
+          }
+        ],
+        "previous_attempt": {
+          "session_id": 75074,
+          "outcome": "coordinator interrupted without persisted observation",
+          "scope": "same MockTransport intention under sandbox; no successful proof claimed"
+        },
+        "limits": "Legal gzip/deflate rejection independently reproduced. Does not identify actual SSE encoding, does not implement decoding or certify acquisition."
+      }
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\responsibility-1.json",
+      "bytes": 808,
+      "sha256": "19b7ba055782b9e174ace7c28adb7f77cff129d15dfc316536309c9266959a47",
+      "full_content_read": true,
+      "summary": [],
+      "json_parsed": {
+        "observed_at": "2026-10-09T20:40:25.763494+00:00",
+        "stage": "isolated_shared_responsibility",
+        "command": [
+          "python",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "pytest",
+          "tests/unit/test_bounded_content_encoding.py",
+          "tests/unit/test_bounded_http.py",
+          "tests/unit/test_adapter_process_budget.py",
+          "tests/unit/test_dayu_sdk_fetch.py",
+          "tests/integration/test_official_source_flow.py",
+          "-q",
+          "--tb=short",
+          "--basetemp",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-http-responsibility-m27kz94u\\pytest"
+        ],
+        "returncode": 1,
+        "elapsed_seconds": 38.782,
+        "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-http-responsibility-m27kz94u",
+        "external_requests": 0,
+        "model_calls": 0,
+        "owned_temp_restored": true
+      }
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\responsibility-1.log",
+      "bytes": 3558,
+      "sha256": "a40a486143a83d6d1782e8ec6143ace6384807f4650e4cd62a503a70c78228e7",
+      "full_content_read": true,
+      "summary": [
+        "================== 1 failed, 89 passed, 1 warning in 36.23s ==================="
+      ]
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\responsibility-2.json",
+      "bytes": 790,
+      "sha256": "8f9f919da52fff15b54b62a73e58db20639056ae59411190c03b2d8f881e7f0e",
+      "full_content_read": true,
+      "summary": [],
+      "json_parsed": {
+        "observed_at": "2026-10-09T20:43:02.344009+00:00",
+        "stage": "isolated_shared_responsibility",
+        "command": [
+          "python",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "pytest",
+          "tests/unit/test_bounded_content_encoding.py",
+          "tests/unit/test_bounded_http.py",
+          "tests/unit/test_adapter_process_budget.py",
+          "tests/unit/test_dayu_sdk_fetch.py",
+          "tests/integration/test_official_source_flow.py",
+          "-q",
+          "--tb=short",
+          "--basetemp",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-http-green-rpcdele7\\pytest"
+        ],
+        "returncode": 0,
+        "elapsed_seconds": 33.532,
+        "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-http-green-rpcdele7",
+        "external_requests": 0,
+        "model_calls": 0,
+        "owned_temp_restored": true
+      }
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\responsibility-2.log",
+      "bytes": 2057,
+      "sha256": "ef2a95d985a6981ec8a637abebd09746e22fd473716a42978dc58a6a2ba85be5",
+      "full_content_read": true,
+      "summary": [
+        "============================= 91 passed in 30.51s ============================="
+      ]
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\source-commit.json",
+      "bytes": 1283,
+      "sha256": "c2c6452a0b96e48d835b0e37206d6637d8f85df18b9ffa3b745e539153301ea0",
+      "full_content_read": true,
+      "summary": [],
+      "json_parsed": {
+        "observed_at": "2026-10-09T20:48:41.521919+00:00",
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "fix(source): decode official HTTP content within shared wire and entity limits"
+        ],
+        "returncode": 0,
+        "elapsed_seconds": 18.06,
+        "head": "c8c4dac11898c54d2124bb5ddb66f79b12485e3d",
+        "files": [
+          "src/company_wiki/source_catalog/download_budget.py",
+          "src/company_wiki/source_catalog/bounded_content_encoding.py",
+          "src/company_wiki/source_catalog/bounded_http.py",
+          "src/company_wiki/source_catalog/adapter_process.py",
+          "src/company_wiki/source_catalog/dayu_sdk_cli.py",
+          "src/company_wiki/source_catalog/official_source_flow.py",
+          "src/company_wiki/source_catalog/official_source_cli.py",
+          "tests/unit/test_bounded_content_encoding.py",
+          "tests/unit/test_bounded_http.py",
+          "tests/unit/test_adapter_process_budget.py",
+          "tests/integration/test_official_source_flow.py"
+        ],
+        "pushed": false,
+        "tests": "91 responsibility PASS /30.51s; two targeted new codec/transport mypy PASS; 28 wider legacy diagnostics same as baseline",
+        "real_sse": "gzip observed and decoded; served text/html, original PDF import refused; not original acquisition success",
+        "dayu_changes": 0,
+        "external_model_calls": 0
+      }
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\source-commit.log",
+      "bytes": 794,
+      "sha256": "f655fd3db7f32fff70599e9586019a595c585a4122dbaa56d8d51b89869adcf7",
+      "full_content_read": true,
+      "summary": []
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\source-push.json",
+      "bytes": 328,
+      "sha256": "9cd6f44479b9ac39e2d2ab38bc46e056ab1ae5bbb9f2bd3d354b220f41fb5b8a",
+      "full_content_read": true,
+      "summary": [],
+      "json_parsed": {
+        "observed_at": "2026-10-09T20:52:45.695037+00:00",
+        "command": [
+          "git",
+          "push",
+          "-u",
+          "origin",
+          "codex/m3-http-source-20261009"
+        ],
+        "returncode": 0,
+        "elapsed_seconds": 156.674,
+        "head": "c8c4dac11898c54d2124bb5ddb66f79b12485e3d",
+        "hooks_bypassed": false,
+        "main_merged": false
+      }
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\source-push.log",
+      "bytes": 699,
+      "sha256": "837fbe531b6cf94284703da9471cbe40b7e85f91ca9aef1269bed4584d37ef5e",
+      "full_content_read": true,
+      "summary": [
+        "====================== 2512 passed in 148.18s (0:02:28) ======================="
+      ]
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\targeted-mypy-after.log",
+      "bytes": 4714,
+      "sha256": "02dbf0ae76caae991d0372c823f1d8c4d1398ef704d92594db3b3a56f98fffae",
+      "full_content_read": true,
+      "summary": [
+        "Found 28 errors in 4 files (checked 7 source files)"
+      ]
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\TDD-RED.json",
+      "bytes": 692,
+      "sha256": "afb267bfb9f1f2eccccf44f89f85a27de12ef01b9b7192c23d03329effd326d7",
+      "full_content_read": true,
+      "summary": [],
+      "json_parsed": {
+        "observed_at": "2026-10-09T20:32:41.033203+00:00",
+        "stage": "tests_before_runtime_changes",
+        "command": [
+          "python",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "pytest",
+          "tests/unit/test_bounded_content_encoding.py",
+          "-q",
+          "--tb=short",
+          "--basetemp",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-http-red-96od5ebo\\pytest"
+        ],
+        "repository": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+        "returncode": 1,
+        "elapsed_seconds": 6.254,
+        "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-http-red-96od5ebo",
+        "external_requests": 0,
+        "model_calls": 0,
+        "owned_temp_restored": true
+      }
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\TDD-RED.log",
+      "bytes": 23023,
+      "sha256": "41795ad6ac85cd2b43264d0840c563241ca6d11328999a8e66fbabfc14034144",
+      "full_content_read": true,
+      "summary": [
+        "============================= 21 failed in 1.57s =============================="
+      ]
+    }
+  ],
+  "mypy": {
+    "baseline_error_count": 28,
+    "after_error_count": 28,
+    "normalized_errors_equal": true,
+    "added_errors": [],
+    "removed_errors": [],
+    "new_codec_transport_2_modules": "PASS (supplied log reviewed; not independently re-run)",
+    "independent_type_scope": "existing 28 diagnostics not an introduced gate"
+  }
+}

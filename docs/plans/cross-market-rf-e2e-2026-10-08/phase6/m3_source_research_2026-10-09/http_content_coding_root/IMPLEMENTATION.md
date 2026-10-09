@@ -44,3 +44,24 @@
 - 仍待集中接口独立审查、父桥错误/硬停计量及公共类型失败投影边界核对、正常主线整合/精确CI；不能用91工程PASS核销公告缺口、模型截断或研究FAIL。
 
 独立HTTP整合审查已启动 /root/m3_http_integration_review，限固定11文件接口/TEMP，无公司研究角色替签。首次支线push没有既有远端range而按现有规则跑全Unit；commit仍18.06秒静态，不是每commit跑全套。该分支不在master-only Actions触发范围，不能把无branch CI记录说成绿色。
+
+记录实际UTC：2026-10-09T21:07:55.292346+00:00
+
+## 独立审查后第二轮根修（待TDD，基线c8c4dac1不接受）
+
+独立41PASS/6FAIL归并HTTP-IR-01..04；原91PASS不变。先把四机制反例写进现责任测试，RED原生日志保留，再实现；所有公司执行仍冻结，不改旧失败。该集中节点保持原文/主体/期次/费用/时间上限与三字段usage不变。
+
+1. **DEFLATE格式歧义**：不使用首两字节/固定前瞻宣称某个framing。两候选增量校验标准zlib与raw，在尚不可判定时保留各自解出的有界前缀；候选错误后只交仍合法候选，EOF双合法时按HTTP标准优先zlib。每个候选前缀最多当前剩余实体cap+1，每次zlib输出≤64KiB；自有spool内存阈值64KiB，临时磁盘最坏两份有界前缀，只在这一HTTP响应歧义期间存在，关闭/异常必恢复。候选试解字节不当作两次网络/两份文档；选定实体在SDK交付前按原预算逐块记一次，超限候选至多产生cap+1，不能先膨胀全文。wire每收到chunk先记并拒超量，总deadline也覆盖两个候选内部循环。一般gzip保持原流式路径。
+2. **显式关闭所有者**：sync/async stream持有active底层iterator；正常EOF、预算异常、调用方只读首块便退出、取消/timeout均用同一个幂等关闭路径。关闭候选spool和底层iterator/stream，不依赖GC/event-loop结束；清理失败不得覆盖下载主要异常，不重入正在执行的generator。
+3. **完成下载后的失败观察**：从现capture_receipt统一附有限HTTP观察/计量到原始异常，用于类型/SHA/持久化/import以及recover失败，公共CLI只投影现白名单。没有真实头保持unknown；不能凭请求MIME或本地文件猜网络头。正文已完整与canonical拒绝分开，不丢费用或改变具名拒绝。
+4. **父桥wire completeness**：成功/handled失败/cleanup-after-final/lastcheckpoint均传同一个可选wire完整性字段；body receipt完整不推定wire完整。保持原unknown sticky、last cumulative计一次、已知费用不丢，不增加wire unknown许可门。
+
+测试：raw前缀歧义不同stored长度/1B、2B、全块与异步；标准/原raw既有正例；CRC/EOF/尾垃圾、deflate实体炸弹/共享重试cap/64KiB输出；sync/async首块退出、异常/取消幂等关闭与自有TEMP恢复；实际public CLI完整HTML冒PDF和expectedSHA失败/存储失败/recover失败诊断，secret header不得外露；handled final body完整/wire仅下界及旧无字段负控。集中91既有责任加新反例+独立探针复验后正常commit/push，再大节点整合主线/精确CI。无需逐小节点人签，真实SSE当前HTML限制仍另列。
+
+## 整改后实际节点 2026-10-09 21:27 UTC
+
+四反例16FAIL/1PASS及cleanup主因2产品FAIL已保留；一次模块名错误exit4/0收集和Windows本机socket夹具setup错误分列。110集中PASS/31.21秒/无警告，最后有限观察投影3CLI PASS，ownTEMP全部恢复。source6cc9959f正常commit17.621秒、push2528PASS/141.33秒；整改大节点独立复验正在运行，原c8c失败报告不改、未并主线，不是研究或真实SSE PDF验收。
+
+## 2026-10-09 21:34 UTC：整改复验封存与主线整合
+
+独立报告 INDEPENDENT_REVIEW_REMEDIATED.json SHA965e6ada…、MD2a53308f…已核对。原47原样PASS、新11控制PASS、真实父子5场景PASS；审查未改源码/配置/旧FAIL证据，自有TEMP恢复。仅工程接受，尚无新真实PDF。源码6cc9959f正常并master806818cf，配置SHA及MAIN未提交记录保持，见main-merge.json。正常主线push/精确CI由本发布节点完成，不假称已远端全绿。

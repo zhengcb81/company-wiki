@@ -1,0 +1,19 @@
+{
+  "head": "c8c4dac11898c54d2124bb5ddb66f79b12485e3d",
+  "branch": "codex/m3-http-source-20261009",
+  "status": [],
+  "source_write_set": [
+    "src/company_wiki/source_catalog/adapter_process.py",
+    "src/company_wiki/source_catalog/bounded_content_encoding.py",
+    "src/company_wiki/source_catalog/bounded_http.py",
+    "src/company_wiki/source_catalog/dayu_sdk_cli.py",
+    "src/company_wiki/source_catalog/download_budget.py",
+    "src/company_wiki/source_catalog/official_source_cli.py",
+    "src/company_wiki/source_catalog/official_source_flow.py",
+    "tests/integration/test_official_source_flow.py",
+    "tests/unit/test_adapter_process_budget.py",
+    "tests/unit/test_bounded_content_encoding.py",
+    "tests/unit/test_bounded_http.py"
+  ],
+  "source_mutations_by_reviewer": false
+}

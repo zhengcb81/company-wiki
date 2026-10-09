@@ -1,0 +1,24 @@
+{
+  "observed_at": "2026-10-09T21:09:44.697339+00:00",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "--tb=short",
+    "-p",
+    "no:cacheprovider",
+    "tests/unit/test_bounded_content_encoding.py",
+    "tests/unit/test_adapter_process_budget.py",
+    "tests/integration/test_official_source_flow.py",
+    "-k",
+    "raw_deflate_with_legal_zlib_prefix or consumer_stops_early or handled_failure_does_not_infer or public_cli_keeps_completed"
+  ],
+  "returncode": 1,
+  "elapsed_seconds": 10.563,
+  "owned_temp_restored": true,
+  "baseline": "c8c4dac11898c54d2124bb5ddb66f79b12485e3d"
+}

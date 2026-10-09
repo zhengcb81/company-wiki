@@ -1,0 +1,52 @@
+{
+  "observed_at": "2026-10-09T21:16:43.574881+00:00",
+  "checks": [
+    {
+      "kind": "ruff",
+      "returncode": 0,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "ruff",
+        "check",
+        "src/company_wiki/source_catalog/adapter_process.py",
+        "src/company_wiki/source_catalog/bounded_content_encoding.py",
+        "src/company_wiki/source_catalog/bounded_http.py",
+        "src/company_wiki/source_catalog/official_source_flow.py",
+        "tests/unit/test_adapter_process_budget.py",
+        "tests/unit/test_bounded_content_encoding.py",
+        "tests/integration/test_official_source_flow.py"
+      ]
+    },
+    {
+      "kind": "mypy",
+      "returncode": 0,
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "mypy",
+        "--follow-imports=skip",
+        "--ignore-missing-imports",
+        "--no-incremental",
+        "src/company_wiki/source_catalog/bounded_content_encoding.py",
+        "src/company_wiki/source_catalog/bounded_http.py"
+      ]
+    },
+    {
+      "kind": "diff",
+      "returncode": 0,
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ]
+    }
+  ],
+  "owned_temp_restored": true
+}

@@ -1,0 +1,69 @@
+.FFFFFFFF.........                                                       [100%]
+================================== FAILURES ===================================
+_ test_optional_period_accepts_uniquely_resolved_source_period[False-semi_annual_report-H1] _
+tests\test_source_preparation.py:442: in test_optional_period_accepts_uniquely_resolved_source_period
+    assert _validate_v2_candidate(request, handle) == 2025
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\source_preparation.py:225: in _validate_v2_candidate
+    raise FilingSourcePreparationError("filing-fetch SourceRef fiscal_period mismatch", source_failure_reason="fiscal_period_mismatch")
+E   source_preparation.FilingSourcePreparationError: filing-fetch SourceRef fiscal_period mismatch
+_ test_optional_period_accepts_uniquely_resolved_source_period[False-semi_annual_report-H2] _
+tests\test_source_preparation.py:442: in test_optional_period_accepts_uniquely_resolved_source_period
+    assert _validate_v2_candidate(request, handle) == 2025
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\source_preparation.py:225: in _validate_v2_candidate
+    raise FilingSourcePreparationError("filing-fetch SourceRef fiscal_period mismatch", source_failure_reason="fiscal_period_mismatch")
+E   source_preparation.FilingSourcePreparationError: filing-fetch SourceRef fiscal_period mismatch
+_ test_optional_period_accepts_uniquely_resolved_source_period[False-quarterly_report-Q2] _
+tests\test_source_preparation.py:442: in test_optional_period_accepts_uniquely_resolved_source_period
+    assert _validate_v2_candidate(request, handle) == 2025
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\source_preparation.py:225: in _validate_v2_candidate
+    raise FilingSourcePreparationError("filing-fetch SourceRef fiscal_period mismatch", source_failure_reason="fiscal_period_mismatch")
+E   source_preparation.FilingSourcePreparationError: filing-fetch SourceRef fiscal_period mismatch
+_ test_optional_period_accepts_uniquely_resolved_source_period[False-regulatory_filing-H1] _
+tests\test_source_preparation.py:442: in test_optional_period_accepts_uniquely_resolved_source_period
+    assert _validate_v2_candidate(request, handle) == 2025
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\source_preparation.py:225: in _validate_v2_candidate
+    raise FilingSourcePreparationError("filing-fetch SourceRef fiscal_period mismatch", source_failure_reason="fiscal_period_mismatch")
+E   source_preparation.FilingSourcePreparationError: filing-fetch SourceRef fiscal_period mismatch
+_ test_optional_period_accepts_uniquely_resolved_source_period[True-semi_annual_report-H1] _
+tests\test_source_preparation.py:442: in test_optional_period_accepts_uniquely_resolved_source_period
+    assert _validate_v2_candidate(request, handle) == 2025
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\source_preparation.py:225: in _validate_v2_candidate
+    raise FilingSourcePreparationError("filing-fetch SourceRef fiscal_period mismatch", source_failure_reason="fiscal_period_mismatch")
+E   source_preparation.FilingSourcePreparationError: filing-fetch SourceRef fiscal_period mismatch
+_ test_optional_period_accepts_uniquely_resolved_source_period[True-semi_annual_report-H2] _
+tests\test_source_preparation.py:442: in test_optional_period_accepts_uniquely_resolved_source_period
+    assert _validate_v2_candidate(request, handle) == 2025
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\source_preparation.py:225: in _validate_v2_candidate
+    raise FilingSourcePreparationError("filing-fetch SourceRef fiscal_period mismatch", source_failure_reason="fiscal_period_mismatch")
+E   source_preparation.FilingSourcePreparationError: filing-fetch SourceRef fiscal_period mismatch
+_ test_optional_period_accepts_uniquely_resolved_source_period[True-quarterly_report-Q2] _
+tests\test_source_preparation.py:442: in test_optional_period_accepts_uniquely_resolved_source_period
+    assert _validate_v2_candidate(request, handle) == 2025
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\source_preparation.py:225: in _validate_v2_candidate
+    raise FilingSourcePreparationError("filing-fetch SourceRef fiscal_period mismatch", source_failure_reason="fiscal_period_mismatch")
+E   source_preparation.FilingSourcePreparationError: filing-fetch SourceRef fiscal_period mismatch
+_ test_optional_period_accepts_uniquely_resolved_source_period[True-regulatory_filing-H1] _
+tests\test_source_preparation.py:442: in test_optional_period_accepts_uniquely_resolved_source_period
+    assert _validate_v2_candidate(request, handle) == 2025
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\source_preparation.py:225: in _validate_v2_candidate
+    raise FilingSourcePreparationError("filing-fetch SourceRef fiscal_period mismatch", source_failure_reason="fiscal_period_mismatch")
+E   source_preparation.FilingSourcePreparationError: filing-fetch SourceRef fiscal_period mismatch
+=========================== short test summary info ===========================
+FAILED tests/test_source_preparation.py::test_optional_period_accepts_uniquely_resolved_source_period[False-semi_annual_report-H1]
+FAILED tests/test_source_preparation.py::test_optional_period_accepts_uniquely_resolved_source_period[False-semi_annual_report-H2]
+FAILED tests/test_source_preparation.py::test_optional_period_accepts_uniquely_resolved_source_period[False-quarterly_report-Q2]
+FAILED tests/test_source_preparation.py::test_optional_period_accepts_uniquely_resolved_source_period[False-regulatory_filing-H1]
+FAILED tests/test_source_preparation.py::test_optional_period_accepts_uniquely_resolved_source_period[True-semi_annual_report-H1]
+FAILED tests/test_source_preparation.py::test_optional_period_accepts_uniquely_resolved_source_period[True-semi_annual_report-H2]
+FAILED tests/test_source_preparation.py::test_optional_period_accepts_uniquely_resolved_source_period[True-quarterly_report-Q2]
+FAILED tests/test_source_preparation.py::test_optional_period_accepts_uniquely_resolved_source_period[True-regulatory_filing-H1]
+8 failed, 10 passed, 22 deselected in 0.82s
+

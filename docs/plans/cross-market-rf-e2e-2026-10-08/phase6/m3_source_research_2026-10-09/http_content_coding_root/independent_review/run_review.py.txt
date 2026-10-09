@@ -1,0 +1,26 @@
+import hashlib,json,os,subprocess,sys,time
+from pathlib import Path
+root=Path(r'C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki')
+temp=Path(r'C:\Users\郑曾波\Projects\company-wiki\.tmp\http-independent-c8c4-20261009')
+output=Path(r'C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\m3_source_research_2026-10-09\http_content_coding_root\independent_review')
+paths=['src/company_wiki/source_catalog/'+x for x in ['download_budget.py','bounded_content_encoding.py','bounded_http.py','adapter_process.py','dayu_sdk_cli.py','official_source_flow.py','official_source_cli.py']]+['tests/unit/test_adapter_process_budget.py','tests/unit/test_bounded_content_encoding.py','tests/unit/test_bounded_http.py','tests/integration/test_official_source_flow.py','config/source_catalog.yaml']
+before={p:hashlib.sha256((root/p).read_bytes()).hexdigest() for p in paths}
+(output/'before_hashes.json').write_text(json.dumps(before,indent=2),encoding='utf-8')
+for key in ('OPENAI_API_KEY','DEEPSEEK_API_KEY','MINIMAX_API_KEY','MIMO_API_KEY','TAVILY_API_KEY','ANTHROPIC_API_KEY'):
+    os.environ.pop(key,None)
+for key in ('TMP','TEMP','TMPDIR'):os.environ[key]=str(temp)
+os.environ.update(PYTHONDONTWRITEBYTECODE='1',PYTHONUTF8='1',PYTHON_DOTENV_DISABLED='1',COMPANY_WIKI_NETWORK='blocked',COMPANY_WIKI_REAL_LLM='0')
+commands=[('independent',[sys.executable,'-X','utf8','-B','-m','pytest',str(temp/'test_independent_http.py'),'-q','--tb=short','-p','no:cacheprovider','--basetemp',str(temp/'probes'),'--junitxml',str(output/'independent_junit.xml')]),('responsibility',[sys.executable,'-X','utf8','-B','-m','pytest','tests/unit/test_bounded_content_encoding.py','tests/unit/test_bounded_http.py','tests/unit/test_adapter_process_budget.py','tests/unit/test_dayu_sdk_fetch.py','tests/integration/test_official_source_flow.py','-q','--tb=short','-p','no:cacheprovider','--basetemp',str(temp/'baseline')])]
+results=[]
+for name,cmd in commands:
+    start=time.monotonic()
+    p=subprocess.run(cmd,cwd=root,env=os.environ.copy(),stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,encoding='utf-8',timeout=60)
+    (output/(name+'.log')).write_text(p.stdout,encoding='utf-8')
+    item={'stage':name,'command':cmd,'returncode':p.returncode,'elapsed_seconds':round(time.monotonic()-start,3),'cwd':str(root),'external_requests':0,'model_calls':0,'output_file':name+'.log'}
+    results.append(item)
+    print(json.dumps(item),flush=True)
+    print('\n'.join(p.stdout.splitlines()[-10:]),flush=True)
+after={p:hashlib.sha256((root/p).read_bytes()).hexdigest() for p in paths}
+(output/'after_hashes.json').write_text(json.dumps(after,indent=2),encoding='utf-8')
+(output/'test_commands.json').write_text(json.dumps(results,indent=2),encoding='utf-8')
+print(json.dumps({'source_and_config_unchanged':before==after}),flush=True)

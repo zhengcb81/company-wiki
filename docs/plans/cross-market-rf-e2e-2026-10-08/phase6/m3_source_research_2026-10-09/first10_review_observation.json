@@ -1,0 +1,336 @@
+{
+  "schema_version": "m3-independent-review-observation/1",
+  "observed_at": "2026-10-09T21:34:26.330225+00:00",
+  "reports": [
+    {
+      "company": "hk-00700",
+      "role": "storage",
+      "report": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-hk-00700\\reports\\storage.json",
+      "sha256": "1cb8483a70083f41757dab83856131b422cd8398c001fbfc03fce63983ce2ee4",
+      "checks": 15,
+      "findings": 6,
+      "fail_finding_map": {
+        "S05": [
+          "HK-00700-STORAGE-004"
+        ],
+        "S06": [
+          "HK-00700-STORAGE-001"
+        ],
+        "S08": [
+          "HK-00700-STORAGE-002"
+        ]
+      },
+      "executor_completion": "verified"
+    },
+    {
+      "company": "cn-688012",
+      "role": "fetch",
+      "report": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\reports\\fetch.json",
+      "sha256": "f205a5c554c35480e1c9ff48ffffa4330de83829ac073603d9a477bb4048a6e2",
+      "checks": 23,
+      "findings": 7,
+      "fail_finding_map": {
+        "F04": [
+          "CN688012-FETCH-001"
+        ],
+        "F08-PERIOD": [
+          "CN688012-FETCH-006"
+        ],
+        "F08-JSON": [
+          "CN688012-FETCH-003"
+        ],
+        "F10-RECEIPT": [
+          "CN688012-FETCH-002"
+        ],
+        "F13-PROJECTION": [
+          "CN688012-FETCH-007"
+        ]
+      },
+      "executor_completion": "verified"
+    },
+    {
+      "company": "us-msft",
+      "role": "storage",
+      "report": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-us-msft\\reports\\storage.json",
+      "sha256": "a6b5b29043fca12890d28c96a3034d4d82aa4507539bdf3bfee1de8fba6da8bd",
+      "checks": 21,
+      "findings": 9,
+      "fail_finding_map": {
+        "S05": [
+          "MSFT-STORAGE-005",
+          "MSFT-STORAGE-006"
+        ],
+        "S06": [
+          "MSFT-STORAGE-003",
+          "MSFT-STORAGE-004"
+        ],
+        "S07": [
+          "MSFT-STORAGE-004",
+          "MSFT-STORAGE-005",
+          "MSFT-STORAGE-006"
+        ],
+        "S08": [
+          "MSFT-STORAGE-007",
+          "MSFT-STORAGE-008"
+        ],
+        "S10": [
+          "MSFT-STORAGE-001",
+          "MSFT-STORAGE-002"
+        ],
+        "ENG04": [
+          "MSFT-STORAGE-004"
+        ]
+      },
+      "executor_completion": "verified"
+    },
+    {
+      "company": "hk-00700",
+      "role": "fetch",
+      "report": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-hk-00700\\reports\\fetch.json",
+      "sha256": "46c966ef06c0eaa90dcf542fa353d8ac4b068308ce93ee2fda3082f8f3af3581",
+      "checks": 17,
+      "findings": 7,
+      "fail_finding_map": {
+        "F06a": [
+          "M3-HK-FETCH-002"
+        ],
+        "F08a": [
+          "M3-HK-FETCH-004"
+        ],
+        "F11": [
+          "M3-HK-FETCH-003"
+        ],
+        "F11a": [
+          "M3-HK-FETCH-006"
+        ],
+        "F11b": [
+          "M3-HK-FETCH-005"
+        ]
+      },
+      "executor_completion": "verified"
+    },
+    {
+      "company": "cn-688012",
+      "role": "storage",
+      "report": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\reports\\storage.json",
+      "sha256": "79a9fdafc33cc3875735a3628ebab7d6b252dcbef12b07ace7b6fee647e7f164",
+      "checks": 12,
+      "findings": 8,
+      "fail_finding_map": {
+        "S05": [
+          "M3-CN-STORAGE-004",
+          "M3-CN-STORAGE-005"
+        ],
+        "S06": [
+          "M3-CN-STORAGE-001",
+          "M3-CN-STORAGE-006"
+        ],
+        "S07": [
+          "M3-CN-STORAGE-004",
+          "M3-CN-STORAGE-005",
+          "M3-CN-STORAGE-006"
+        ],
+        "S08": [
+          "M3-CN-STORAGE-002",
+          "M3-CN-STORAGE-003",
+          "M3-CN-STORAGE-008"
+        ]
+      },
+      "executor_completion": "verified"
+    },
+    {
+      "company": "us-msft",
+      "role": "fetch",
+      "report": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-us-msft\\reports\\fetch.json",
+      "sha256": "b48be2b838dafe8cec331ced987100f65ea00932de6aa078f0830ae850651b83",
+      "markdown_sha256": "d7222d0711f46ad250fe585d9871b2bb1f1145cb27dde3386cca0d7a65c26a19",
+      "checks": 15,
+      "findings": 6,
+      "check_status_counts": {
+        "PASS": 8,
+        "FAIL": 3,
+        "BLOCKED": 3,
+        "NOT_RUN": 1
+      },
+      "fail_finding_map": {
+        "F04-SCOPE": [
+          "M3-US-FETCH-001"
+        ],
+        "F08": [
+          "M3-US-FETCH-002"
+        ],
+        "F10": [
+          "M3-US-FETCH-005"
+        ]
+      },
+      "executor_completion": "verified",
+      "evidence_files_rehashed": 31
+    },
+    {
+      "company": "hk-00700",
+      "role": "process",
+      "report": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-hk-00700\\reports\\process.json",
+      "sha256": "f0555ef150d86a377699c3b5e752feae2b57b7daeb7036f8a5648ab3369b94e3",
+      "checks": 25,
+      "findings": 8,
+      "fail_finding_map": {
+        "RF-3": [
+          "M3-HK-PROCESS-003",
+          "M3-HK-PROCESS-005",
+          "M3-HK-PROCESS-007"
+        ],
+        "RF-4": [
+          "M3-HK-PROCESS-002"
+        ],
+        "RF-10": [
+          "M3-HK-PROCESS-008"
+        ],
+        "SOURCE-59": [
+          "M3-HK-PROCESS-003"
+        ],
+        "NARRATIVE-COMPLETE": [
+          "M3-HK-PROCESS-005"
+        ]
+      },
+      "executor_completion": "partial"
+    },
+    {
+      "company": "us-msft",
+      "role": "process",
+      "report": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-us-msft\\reports\\process.json",
+      "sha256": "e4dc72759f6e522f7ac31920d450f45c69e28ee2bbb5b131f3943a92b3e0ec0b",
+      "checks": 25,
+      "findings": 7,
+      "fail_finding_map": {
+        "RF01A": [
+          "M3-US-PROCESS-002"
+        ],
+        "RF01B": [
+          "M3-US-PROCESS-001"
+        ],
+        "RF03": [
+          "M3-US-PROCESS-004"
+        ],
+        "RF06": [
+          "M3-US-PROCESS-001"
+        ],
+        "PROFILE": [
+          "M3-US-PROCESS-003"
+        ],
+        "CAPS": [
+          "M3-US-PROCESS-005"
+        ],
+        "EXTERNAL_FACTS": [
+          "M3-US-PROCESS-006"
+        ],
+        "EXCERPT_FIDELITY": [
+          "M3-US-PROCESS-007"
+        ],
+        "JOINT_TIMING": [
+          "M3-US-PROCESS-001"
+        ]
+      },
+      "executor_completion": "verified"
+    },
+    {
+      "company": "cn-688012",
+      "role": "process",
+      "report": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\reports\\process.json",
+      "sha256": "856912354ee1d990fda7d34a35272bf7d0d40be1a26476f75bbb9b71cae4e46f",
+      "markdown_sha256": "14919b2943ef00c31731694c1951416fc96cf1c3be59ac87734951a9aff3f629",
+      "checks": 35,
+      "findings": 11,
+      "check_status_counts": {
+        "BLOCKED": 9,
+        "PASS": 19,
+        "FAIL": 6,
+        "N/A": 1
+      },
+      "fail_finding_map": {
+        "P06": [
+          "CN688012-PROCESS-002"
+        ],
+        "P08": [
+          "CN688012-PROCESS-004"
+        ],
+        "P09": [
+          "CN688012-PROCESS-005"
+        ],
+        "P11": [
+          "CN688012-PROCESS-007"
+        ],
+        "P12": [
+          "CN688012-PROCESS-008"
+        ],
+        "P13": [
+          "CN688012-PROCESS-009"
+        ]
+      },
+      "executor_completion": "verified",
+      "evidence_files_rehashed": 37,
+      "current_evidence_mismatches": []
+    },
+    {
+      "company": "hk-00700",
+      "role": "analyst",
+      "report": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-hk-00700\\reports\\analyst.json",
+      "sha256": "13d061f137f3c840661fe831e7f030e4588a483e10f716dbb23e06fc89d8e9e0",
+      "markdown_sha256": "5ddd44852df2fd1126a76f32c346a9a17ac188441eeadf7f11ba6f621a5f3035",
+      "checks": 23,
+      "findings": 9,
+      "check_status_counts": {
+        "PASS": 8,
+        "FAIL": 12,
+        "BLOCKED": 2,
+        "N/A": 1
+      },
+      "fail_finding_map": {
+        "A01-PERIOD": [
+          "HK-ANALYST-009"
+        ],
+        "A02": [
+          "HK-ANALYST-001",
+          "HK-ANALYST-003"
+        ],
+        "A03": [
+          "HK-ANALYST-003",
+          "HK-ANALYST-004"
+        ],
+        "A04": [
+          "HK-ANALYST-001"
+        ],
+        "A05": [
+          "HK-ANALYST-001",
+          "HK-ANALYST-003"
+        ],
+        "A07": [
+          "HK-ANALYST-001",
+          "HK-ANALYST-006"
+        ],
+        "A08": [
+          "HK-ANALYST-001"
+        ],
+        "A09": [
+          "HK-ANALYST-002"
+        ],
+        "A11": [
+          "HK-ANALYST-004"
+        ],
+        "A12": [
+          "HK-ANALYST-001"
+        ],
+        "A16-QUOTE": [
+          "HK-ANALYST-007"
+        ],
+        "A17-EVIDENCE-ROLE": [
+          "HK-ANALYST-005"
+        ]
+      },
+      "executor_completion": "verified",
+      "evidence_files_rehashed": 20,
+      "current_evidence_mismatches": []
+    }
+  ],
+  "execution_modified": false,
+  "acceptance": "ten independent company reports delivered; material findings remain; not research PASS"
+}

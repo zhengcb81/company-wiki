@@ -1,0 +1,26 @@
+{
+  "completed_at": "2026-10-09T21:33:37.946967+00:00",
+  "source_main_commit": "0c248d9a07a2dd7a2c756946d88507479d5e9d15",
+  "changes": [
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+      "old_sha256": "bd67489b2099fc15c47879bf87027723a1ef40d6da673b87c26c1e44671ad91d",
+      "new_sha256": "839af5a1413435a769bd342f3fdef62de7c7eda3f94c7ed65f8fe3f5a5f7c073"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+      "old_sha256": "bd67489b2099fc15c47879bf87027723a1ef40d6da673b87c26c1e44671ad91d",
+      "new_sha256": "839af5a1413435a769bd342f3fdef62de7c7eda3f94c7ed65f8fe3f5a5f7c073"
+    }
+  ],
+  "claude_alias": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+  "protected_files_checked": 539,
+  "protected_files_unchanged": true,
+  "attempt1": {
+    "result": "pre-write assertion refused, zero mutation",
+    "cause": "candidate worktree CRLF SHA differs from canonical Git blob LF; full LF-normalized bytes equal",
+    "candidate_crlf_sha256": "acb5f63c7200b02a465729b534142eda5e476a2ec9b601fd82a5226542f9f799",
+    "canonical_git_blob_sha256": "839af5a1413435a769bd342f3fdef62de7c7eda3f94c7ed65f8fe3f5a5f7c073"
+  },
+  "scope": "one runtime file in two physical installed roots, no configuration/output deletion"
+}

@@ -1,0 +1,26 @@
+import sys,asyncio,gzip,httpx
+sys.path.insert(0,r'C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki\src')
+from company_wiki.source_catalog.bounded_http import BudgetedAsyncHTTPTransport
+from company_wiki.source_catalog.download_budget import AcquisitionBudget
+class S(httpx.AsyncByteStream):
+    closed=False
+    iterator_closed=False
+    async def __aiter__(self):
+        try:
+            yield gzip.compress(b'a'*180000)
+            yield b'never'
+        finally:
+            self.iterator_closed=True
+    async def aclose(self): self.closed=True
+async def run():
+    s=S(); b=AcquisitionBudget.from_limits(max_response_bytes=200000,max_seconds=5,max_cost_usd='0')
+    async with httpx.AsyncClient(transport=BudgetedAsyncHTTPTransport(httpx.MockTransport(lambda r:httpx.Response(200,headers={'content-encoding':'gzip'},stream=s)),b)) as c:
+        async with c.stream('GET','https://fixture.invalid/x') as r:
+            outer=r.aiter_bytes()
+            await outer.__anext__()
+        print({'after_response_close':{'stream':s.closed,'iterator':s.iterator_closed}})
+        await outer.aclose()
+        print({'after_outer_iterator_aclose':{'stream':s.closed,'iterator':s.iterator_closed}})
+    await asyncio.sleep(0)
+    print({'after_client_close':{'stream':s.closed,'iterator':s.iterator_closed}})
+asyncio.run(run())

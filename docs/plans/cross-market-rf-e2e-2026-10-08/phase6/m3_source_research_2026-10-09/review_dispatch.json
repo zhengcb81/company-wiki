@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "observed_at": "2026-10-09T20:53:39.537985+00:00",
+  "observed_at": "2026-10-09T21:34:26.330225+00:00",
   "phase": "M3 independent review",
   "execution_outcomes": {
     "CN-688012": "partial",
@@ -23,14 +23,14 @@
     {
       "company": "CN-688012",
       "role": "process",
-      "status": "not_started",
-      "agent": null
+      "status": "completed_report_verified",
+      "agent": "/root/m3_cn_process_review"
     },
     {
       "company": "CN-688012",
       "role": "analyst",
-      "status": "not_started",
-      "agent": null
+      "status": "started",
+      "agent": "/root/m3_cn_analyst_review"
     },
     {
       "company": "HK-00700",
@@ -47,14 +47,14 @@
     {
       "company": "HK-00700",
       "role": "process",
-      "status": "started",
+      "status": "completed_report_verified",
       "agent": "/root/m3_hk_process_review"
     },
     {
       "company": "HK-00700",
       "role": "analyst",
-      "status": "not_started",
-      "agent": null
+      "status": "completed_report_verified",
+      "agent": "/root/m3_hk_analyst_review"
     },
     {
       "company": "US-MSFT",
@@ -65,28 +65,33 @@
     {
       "company": "US-MSFT",
       "role": "fetch",
-      "status": "started",
+      "status": "completed_report_verified",
       "agent": "/root/m3_us_fetch_review"
     },
     {
       "company": "US-MSFT",
       "role": "process",
-      "status": "not_started",
-      "agent": null
+      "status": "completed_report_verified",
+      "agent": "/root/m3_us_process_review"
     },
     {
       "company": "US-MSFT",
       "role": "analyst",
-      "status": "not_started",
-      "agent": null
+      "status": "started",
+      "agent": "/root/m3_us_analyst_review"
     }
   ],
   "acceptance": "pending independent reports/expert; structural package not research PASS",
   "shared_engineering_review": {
-    "status": "started",
+    "status": "remediated_review_pass_main_merged",
     "agent": "/root/m3_http_integration_review",
     "source_sha256_git": "c8c4dac11898c54d2124bb5ddb66f79b12485e3d",
     "scope": "shared HTTP budget/codec/bridge/capture 11 files",
-    "extra_company_role_report": false
+    "extra_company_role_report": false,
+    "report_sha256": "4504345c855ef4b36b5c84f9316863e7cc3e3410b2b8f8226af2b695fe9894d0",
+    "material_roots": 4,
+    "remediated_source_commit": "6cc9959fdb7a74fcb16e92471e9584893747d1a4",
+    "remediated_report_sha256": "965e6ada58bc1085b5bcef63ccb0a0f3354e8e4030dca6a958289663be30ce02",
+    "main_commit": "806818cf67ce188387d4487cf50e449652b70a70"
   }
 }

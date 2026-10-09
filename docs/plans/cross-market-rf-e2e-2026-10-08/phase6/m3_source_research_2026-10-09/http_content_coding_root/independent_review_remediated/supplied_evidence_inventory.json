@@ -1,0 +1,447 @@
+[
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\GREEN-final-projection.log",
+    "bytes": 1146,
+    "sha256": "fd01fe885a41e3f5df9cde7e2c9e3f9f990d31bdf4398fdbb21d2a966ccdc98e",
+    "full_content_read": true,
+    "summary": [
+      "====================== 3 passed, 33 deselected in 0.94s ======================="
+    ]
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\GREEN-independent-roots-attempt1.json",
+    "bytes": 603,
+    "sha256": "b4ca7b50ae6ab54bd21072333e53e37f47454d113da7947bfec3bdf269cdd29b",
+    "full_content_read": true,
+    "summary": [],
+    "parsed_json": {
+      "observed_at": "2026-10-09T21:12:00.855239+00:00",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "--tb=short",
+        "-p",
+        "no:cacheprovider",
+        "tests/unit/test_bounded_content_encoding.py",
+        "tests/unit/test_bounded_http.py",
+        "tests/unit/test_adapter_process_budget.py",
+        "tests/unit/test_dayu_sdk_cli_fetch_boundary.py",
+        "tests/integration/test_official_source_flow.py"
+      ],
+      "returncode": 4,
+      "elapsed_seconds": 2.816,
+      "owned_temp_restored": true,
+      "external_requests": 0,
+      "model_calls": 0
+    }
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\GREEN-independent-roots-attempt1.log",
+    "bytes": 1119,
+    "sha256": "013313acdf2a50cda92c1cd78e1f7a4f163dc7f04aac7a7f5e7cea6fca96d4dc",
+    "full_content_read": true,
+    "summary": []
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\GREEN-independent-roots-attempt2.json",
+    "bytes": 591,
+    "sha256": "6f0f293ace5a715a4b2b966824dcdee6f9713e25f562ecc8c581c4e2626ffe91",
+    "full_content_read": true,
+    "summary": [],
+    "parsed_json": {
+      "observed_at": "2026-10-09T21:12:54.102466+00:00",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "--tb=short",
+        "-p",
+        "no:cacheprovider",
+        "tests/unit/test_bounded_content_encoding.py",
+        "tests/unit/test_bounded_http.py",
+        "tests/unit/test_adapter_process_budget.py",
+        "tests/unit/test_dayu_sdk_fetch.py",
+        "tests/integration/test_official_source_flow.py"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 33.511,
+      "owned_temp_restored": true,
+      "external_requests": 0,
+      "model_calls": 0
+    }
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\GREEN-independent-roots-attempt2.log",
+    "bytes": 2224,
+    "sha256": "397981de6b0ed482fda63416877e4dd89f945423cfe19174ffaf8d6d6c04fbc7",
+    "full_content_read": true,
+    "summary": [
+      "============================== warnings summary ===============================",
+      "  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.",
+      "-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html",
+      "======================= 108 passed, 1 warning in 30.65s ======================="
+    ]
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\GREEN-independent-roots-final.json",
+    "bytes": 591,
+    "sha256": "0e79b8b1d8152534f77d5eb1aa7041ea568ba34d87301050ed67a533975c5dba",
+    "full_content_read": true,
+    "summary": [],
+    "parsed_json": {
+      "observed_at": "2026-10-09T21:15:27.315345+00:00",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "--tb=short",
+        "-p",
+        "no:cacheprovider",
+        "tests/unit/test_bounded_content_encoding.py",
+        "tests/unit/test_bounded_http.py",
+        "tests/unit/test_adapter_process_budget.py",
+        "tests/unit/test_dayu_sdk_fetch.py",
+        "tests/integration/test_official_source_flow.py"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 33.847,
+      "owned_temp_restored": true,
+      "external_requests": 0,
+      "model_calls": 0
+    }
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\GREEN-independent-roots-final.log",
+    "bytes": 1604,
+    "sha256": "e6d054b2cab02338ab902062d2b870eea2a68df6e791c323f52780528e1d10b6",
+    "full_content_read": true,
+    "summary": [
+      "============================ 110 passed in 31.21s ============================="
+    ]
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\IMPLEMENTATION.md",
+    "bytes": 10982,
+    "sha256": "bf6fcb69bf04e60907a51437cc4750e70acbd0df607a36f44ae2f0620ed2c34f",
+    "full_content_read": true,
+    "summary": [
+      "- 新codec先21FAIL；父桥/capture另先13FAIL/34PASS，async实际迭代器关闭另1FAIL/警告，都保留原日志。实现后集中91PASS/30.51秒，无resource warning，自有TEMP恢复、外部模型0、Dayu零改动。新codec/transport额外mypy2模块PASS；扩大的7文件检查28条既有动态异常/外部SDK/Decimal联合类型诊断，与未改主线6文件基线28条相同，未伪称全范围类型绿或加新日常门禁。"
+    ]
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\real_sse_after_codec.json",
+    "bytes": 2982,
+    "sha256": "aecc368d0e69aa1593a3f7f0a080be40cf10d440d8a5a6aaf6c29714ee06f4fe",
+    "full_content_read": true,
+    "summary": [],
+    "parsed_json": {
+      "started_at": "2026-10-09T20:45:16.293431+00:00",
+      "purpose": "one isolated genuine SSE public capture then exact raw SourceRef replay and zero-GET reuse; not new executor or review",
+      "request": {
+        "schema_version": "official-source-capture-request/1",
+        "request_id": "root-isolated-sse-compressed-e2e-204516",
+        "source": {
+          "entity": "中微公司",
+          "document_kind": "regulatory_filing",
+          "title": "发行股份及支付现金购买资产并募集配套资金报告书",
+          "publisher": "上海证券交易所",
+          "source_url": "https://static.sse.com.cn/disclosure/listedinfo/announcement/c/new/2026-05-13/688012_20260513_TCLM.pdf",
+          "market": "CN",
+          "security_id": "688012",
+          "published_date": "2026-05-13",
+          "fiscal_year": null,
+          "fiscal_period": null,
+          "language": "zh",
+          "provider": "official"
+        },
+        "max_bytes": 16777216,
+        "max_seconds": 30,
+        "max_cost_usd": "0",
+        "mime_type": "application/pdf"
+      },
+      "request_source": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\requests\\material-0-v2.json",
+      "model_calls": 0,
+      "raw_production_config_written": false,
+      "runtime_root": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+      "outcome": "observed_failure",
+      "exception_type": "OfficialSourceError",
+      "error_code": null,
+      "capture_id": "d9c989c83c804a389a2b040002a3428c",
+      "capture_receipt": {
+        "capture_method": "bounded_http",
+        "tool_name": "company-wiki-official-source",
+        "tool_call_id": "http-7ffaa49dc83847c0868f6d2e03202a28",
+        "http_requests": 1,
+        "started_at": "2026-10-09T20:45:16.466170+00:00",
+        "http_status": 200,
+        "effective_url": "https://static.sse.com.cn/disclosure/listedinfo/announcement/c/new/2026-05-13/688012_20260513_TCLM.pdf",
+        "response_mime_type": "text/html",
+        "http_observation": {
+          "status_code": 200,
+          "mime_type": "text/html",
+          "content_encoding": "gzip",
+          "wire_content_length": null
+        },
+        "captured_at": "2026-10-09T20:45:18.156824+00:00",
+        "response_bytes": 7373,
+        "content_sha256": "cbdc78de675c8fad977aff8e3ef8cb04a0659e67f3a43f87fb59ce22377e9a93",
+        "usage_complete": true,
+        "http_wire_bytes": 3872,
+        "http_wire_usage_complete": true,
+        "acquisition_usage": {
+          "schema_version": "1.0",
+          "response_bytes": 7373,
+          "cost_usd": "0"
+        },
+        "cumulative_acquisition_usage": {
+          "schema_version": "1.0",
+          "response_bytes": 7373,
+          "cost_usd": "0"
+        }
+      },
+      "acquisition_usage": {
+        "schema_version": "1.0",
+        "response_bytes": 7373,
+        "cost_usd": "0"
+      },
+      "acquisition_usage_complete": true,
+      "provider_started": true,
+      "owned_temp_bytes_before_cleanup": 10000,
+      "owned_temp_restored": true,
+      "finished_at": "2026-10-09T20:45:19.131868+00:00",
+      "elapsed_seconds": 2.838
+    }
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\RED-cleanup-primary-product.log",
+    "bytes": 7258,
+    "sha256": "e720d0c1cf7df30fba6b7b59c49562c9cbdb2add7266dbd2e859b1f87c5b5429",
+    "full_content_read": true,
+    "summary": [
+      "====================== 2 failed, 36 deselected in 0.95s ======================="
+    ]
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\RED-cleanup-primary.log",
+    "bytes": 5846,
+    "sha256": "4004337bb3a62a7c69ddaae6478ebf754d40ff0401f490b44d301841829ead10",
+    "full_content_read": true,
+    "summary": [
+      "============================== warnings summary ===============================",
+      "  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.",
+      "    warnings.warn(pytest.PytestUnraisableExceptionWarning(msg))",
+      "-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html",
+      "================= 36 deselected, 1 warning, 2 errors in 0.82s =================",
+      "See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.",
+      "  warnings.warn(pytest.PytestUnraisableExceptionWarning(msg))"
+    ]
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\RED-independent-roots.json",
+    "bytes": 662,
+    "sha256": "3be126da62c16e56da8f7f4c27852c2eb930875734ec7854737c694113ba77e0",
+    "full_content_read": true,
+    "summary": [],
+    "parsed_json": {
+      "observed_at": "2026-10-09T21:09:44.697339+00:00",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "--tb=short",
+        "-p",
+        "no:cacheprovider",
+        "tests/unit/test_bounded_content_encoding.py",
+        "tests/unit/test_adapter_process_budget.py",
+        "tests/integration/test_official_source_flow.py",
+        "-k",
+        "raw_deflate_with_legal_zlib_prefix or consumer_stops_early or handled_failure_does_not_infer or public_cli_keeps_completed"
+      ],
+      "returncode": 1,
+      "elapsed_seconds": 10.563,
+      "owned_temp_restored": true,
+      "baseline": "c8c4dac11898c54d2124bb5ddb66f79b12485e3d"
+    }
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\RED-independent-roots.log",
+    "bytes": 34197,
+    "sha256": "ab8f8d73e8e6db7d782a0e7e9774c1ac912028b6591eb039e35604b798e46f9b",
+    "full_content_read": true,
+    "summary": [
+      "============================== warnings summary ===============================",
+      "  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.",
+      "  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.",
+      "  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.",
+      "  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.",
+      "  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.",
+      "-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html",
+      "=========== 16 failed, 1 passed, 72 deselected, 5 warnings in 3.90s ==========="
+    ]
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\source-independent-roots-commit.json",
+    "bytes": 672,
+    "sha256": "92065c7d21f1c0a5d974aff8f0e447342f6e8bd17b31a6e8456c3d5d18cec011",
+    "full_content_read": true,
+    "summary": [],
+    "parsed_json": {
+      "observed_at": "2026-10-09T21:17:59.792719+00:00",
+      "returncode": 0,
+      "elapsed_seconds": 17.621,
+      "parent": "c8c4dac11898c54d2124bb5ddb66f79b12485e3d",
+      "head": "6cc9959fdb7a74fcb16e92471e9584893747d1a4",
+      "files": [
+        "src/company_wiki/source_catalog/adapter_process.py",
+        "src/company_wiki/source_catalog/bounded_content_encoding.py",
+        "src/company_wiki/source_catalog/bounded_http.py",
+        "src/company_wiki/source_catalog/official_source_flow.py",
+        "tests/unit/test_adapter_process_budget.py",
+        "tests/unit/test_bounded_content_encoding.py",
+        "tests/integration/test_official_source_flow.py"
+      ],
+      "hooks_bypassed": false
+    }
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\source-independent-roots-commit.log",
+    "bytes": 633,
+    "sha256": "11d60a40cee4c186b728381736c414798cf39632ff7f429bf32b8f0f499c8c8d",
+    "full_content_read": true,
+    "summary": []
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\source-independent-roots-push.json",
+    "bytes": 218,
+    "sha256": "a0a8433c7fa356fce5ccc68ad41845c997c3e5433fec9baf03f089821f4ec59a",
+    "full_content_read": true,
+    "summary": [],
+    "parsed_json": {
+      "observed_at": "2026-10-09T21:21:15.937624+00:00",
+      "returncode": 0,
+      "elapsed_seconds": 155.717,
+      "head": "6cc9959fdb7a74fcb16e92471e9584893747d1a4",
+      "hooks_bypassed": false,
+      "main_merged": false
+    }
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\source-independent-roots-push.log",
+    "bytes": 386,
+    "sha256": "9a6fdd071a4a755f6894ee5b9311ddbaad75526a9ae6dee96335c060654e5711",
+    "full_content_read": true,
+    "summary": [
+      "====================== 2528 passed in 141.33s (0:02:21) ======================="
+    ]
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\static-independent-roots-diff.log",
+    "bytes": 2,
+    "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+    "full_content_read": true,
+    "summary": []
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\static-independent-roots-mypy.log",
+    "bytes": 46,
+    "sha256": "c36212e745781927e385ab84e5dc3b849ab3a6f6236a886e9e72dd4790c5c70d",
+    "full_content_read": true,
+    "summary": [
+      "Success: no issues found in 2 source files"
+    ]
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\static-independent-roots-ruff.log",
+    "bytes": 22,
+    "sha256": "881513cd027e0334026cfcbad052e34fecb3f2c1fef5ab000c86973bc0196cd7",
+    "full_content_read": true,
+    "summary": [
+      "All checks passed!"
+    ]
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\static-independent-roots.json",
+    "bytes": 1312,
+    "sha256": "842d37f46e24489613ff22fd474d10284e738a72aace672b00115edcd2b5cfe5",
+    "full_content_read": true,
+    "summary": [],
+    "parsed_json": {
+      "observed_at": "2026-10-09T21:16:43.574881+00:00",
+      "checks": [
+        {
+          "kind": "ruff",
+          "returncode": 0,
+          "command": [
+            "python",
+            "-X",
+            "utf8",
+            "-B",
+            "-m",
+            "ruff",
+            "check",
+            "src/company_wiki/source_catalog/adapter_process.py",
+            "src/company_wiki/source_catalog/bounded_content_encoding.py",
+            "src/company_wiki/source_catalog/bounded_http.py",
+            "src/company_wiki/source_catalog/official_source_flow.py",
+            "tests/unit/test_adapter_process_budget.py",
+            "tests/unit/test_bounded_content_encoding.py",
+            "tests/integration/test_official_source_flow.py"
+          ]
+        },
+        {
+          "kind": "mypy",
+          "returncode": 0,
+          "command": [
+            "python",
+            "-X",
+            "utf8",
+            "-B",
+            "-m",
+            "mypy",
+            "--follow-imports=skip",
+            "--ignore-missing-imports",
+            "--no-incremental",
+            "src/company_wiki/source_catalog/bounded_content_encoding.py",
+            "src/company_wiki/source_catalog/bounded_http.py"
+          ]
+        },
+        {
+          "kind": "diff",
+          "returncode": 0,
+          "command": [
+            "git",
+            "diff",
+            "--check"
+          ]
+        }
+      ],
+      "owned_temp_restored": true
+    }
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\typecheck-independent-roots-attempt1.log",
+    "bytes": 46,
+    "sha256": "c36212e745781927e385ab84e5dc3b849ab3a6f6236a886e9e72dd4790c5c70d",
+    "full_content_read": true,
+    "summary": [
+      "Success: no issues found in 2 source files"
+    ]
+  }
+]

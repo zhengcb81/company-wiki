@@ -1,0 +1,18 @@
+import os
+import socket
+import sys
+from pathlib import Path
+for key in ('OPENAI_API_KEY','DEEPSEEK_API_KEY','MINIMAX_API_KEY','MIMO_API_KEY','TAVILY_API_KEY','ANTHROPIC_API_KEY'):
+    os.environ.pop(key,None)
+os.environ['PYTHON_DOTENV_DISABLED']='1'
+os.environ['COMPANY_WIKI_NETWORK']='blocked'
+os.environ['COMPANY_WIKI_REAL_LLM']='0'
+sys.path.insert(0,r'C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki\src')
+_connect=socket.socket.connect
+
+def local_only(sock,address):
+    if not isinstance(address,tuple) or address[0] not in ('127.0.0.1','::1'):
+        raise RuntimeError('Independent review forbids external network')
+    return _connect(sock,address)
+socket.socket.connect=local_only
+socket.create_connection=lambda *a,**k:(_ for _ in ()).throw(RuntimeError('Independent review forbids network'))

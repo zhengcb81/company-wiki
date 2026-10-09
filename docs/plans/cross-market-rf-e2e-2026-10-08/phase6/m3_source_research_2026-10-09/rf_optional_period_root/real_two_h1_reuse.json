@@ -1,0 +1,178 @@
+{
+  "observed_at": "2026-10-09T21:24:10.729854+00:00",
+  "results": [
+    {
+      "year": 2025,
+      "observed_at": "2026-10-09T21:24:08.161502+00:00",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py",
+        "--company-wiki-catalog-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\source_catalog.yaml",
+        "--company-wiki-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\filing_fetch_company_wiki.json",
+        "--filing-fetch-root",
+        "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+        "--request-file",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-period-real-6e52_7q3\\request-2025.json",
+        "--result-envelope",
+        "--source-reader-receipt-version",
+        "2.2",
+        "--timeout-seconds",
+        "60"
+      ],
+      "input": {
+        "schema_version": "2.0",
+        "company_query": "688012",
+        "market": "CN",
+        "document_kind": "semi_annual_report",
+        "mode": "exact",
+        "fiscal_year": 2025,
+        "as_of_date": "2026-10-08",
+        "filing_intent": "reuse_only"
+      },
+      "input_sha256": "865c3f974fb6d5136adf717125c52d9e28572cfb26a0e48448fed9c93b372aee",
+      "input_unchanged": true,
+      "returncode": 0,
+      "elapsed_seconds": 2.543,
+      "actual_candidate": {
+        "status": "source_candidate",
+        "source_ref": {
+          "byte_size": 6361468,
+          "content_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+          "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+          "mime_type": "application/pdf",
+          "schema_version": "2.0",
+          "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd"
+        },
+        "byte_verification": "pending_verified_open",
+        "document_kind": "semi_annual_report",
+        "fiscal_year": 2025,
+        "fiscal_period": "H1",
+        "resolution_outcome": "reused_existing",
+        "download_events": 0
+      },
+      "read_receipt": {
+        "availability_evidence": null,
+        "byte_size": 6361468,
+        "content_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "policy_sha256": "5791ac63f0c554e379f203d9b6845831d1ac43cddc0780eb97beef3797472693",
+        "read_at": "2026-10-09T21:24:08.085237+00:00",
+        "review": {
+          "evidence_sha256": null,
+          "policy_hash": null,
+          "reviewed_at": null,
+          "source_sha256": null,
+          "status": "not_reviewed"
+        },
+        "schema_version": "2.2",
+        "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "source_read_policy_sha256": "e3b2149520435d8bcbb9692d9d5f8e0e7b881f41ddd89374edaf7e0f6f8bc547",
+        "status": "ok"
+      },
+      "download_events": 0,
+      "expected_source_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd"
+    },
+    {
+      "year": 2026,
+      "observed_at": "2026-10-09T21:24:10.727935+00:00",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009\\scripts\\source_preparation.py",
+        "--company-wiki-catalog-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\source_catalog.yaml",
+        "--company-wiki-config",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\filing_fetch_company_wiki.json",
+        "--filing-fetch-root",
+        "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+        "--request-file",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-period-real-6e52_7q3\\request-2026.json",
+        "--result-envelope",
+        "--source-reader-receipt-version",
+        "2.2",
+        "--timeout-seconds",
+        "60"
+      ],
+      "input": {
+        "schema_version": "2.0",
+        "company_query": "688012",
+        "market": "CN",
+        "document_kind": "semi_annual_report",
+        "mode": "exact",
+        "fiscal_year": 2026,
+        "as_of_date": "2026-10-08",
+        "filing_intent": "reuse_only"
+      },
+      "input_sha256": "9efbd7ddf58691e6ca83a6c29b7b19bc7c502d6e0b255de504ca6045eca9c7a3",
+      "input_unchanged": true,
+      "returncode": 0,
+      "elapsed_seconds": 2.55,
+      "actual_candidate": {
+        "status": "source_candidate",
+        "source_ref": {
+          "byte_size": 3149962,
+          "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+          "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+          "mime_type": "application/pdf",
+          "schema_version": "2.0",
+          "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+        },
+        "byte_verification": "pending_verified_open",
+        "document_kind": "semi_annual_report",
+        "fiscal_year": 2026,
+        "fiscal_period": "H1",
+        "resolution_outcome": "reused_existing",
+        "download_events": 0
+      },
+      "read_receipt": {
+        "availability_evidence": {
+          "available_by": "2026-10-08",
+          "basis": "prior_verified_capture",
+          "evidence_ref": "source-provenance:urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe:4b8cfb21c55f138416a1df5f0e75804f1ede71c32f265cd296765edf92452cef",
+          "locator": "/receipt/content_sha256 + /receipt/retrieved_at + /receipt/http_status",
+          "schema_version": "source-availability-evidence/1",
+          "source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+        },
+        "byte_size": 3149962,
+        "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "policy_sha256": "5791ac63f0c554e379f203d9b6845831d1ac43cddc0780eb97beef3797472693",
+        "read_at": "2026-10-09T21:24:10.656106+00:00",
+        "review": {
+          "evidence_sha256": null,
+          "policy_hash": null,
+          "reviewed_at": null,
+          "source_sha256": null,
+          "status": "not_reviewed"
+        },
+        "schema_version": "2.2",
+        "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "source_read_policy_sha256": "e3b2149520435d8bcbb9692d9d5f8e0e7b881f41ddd89374edaf7e0f6f8bc547",
+        "status": "ok"
+      },
+      "download_events": 0,
+      "expected_source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+    }
+  ],
+  "protected_sha256_before": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\manifest.json": "33efe76877f539ceb2acb3b81fe5e5fa3b04673ad5453f28ef176e0e22547d25",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\source_catalog.yaml": "08333062d04c94ce4c7d6f079fbff46c861713d89a85328557055c2c7b6df0c4",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\filing_fetch_company_wiki.json": "914b95163a9e4b880d4693c9401efade1efe6675270ad591a6f42e418fedaac7"
+  },
+  "protected_sha256_after": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\manifest.json": "33efe76877f539ceb2acb3b81fe5e5fa3b04673ad5453f28ef176e0e22547d25",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\source_catalog.yaml": "08333062d04c94ce4c7d6f079fbff46c861713d89a85328557055c2c7b6df0c4",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\filing_fetch_company_wiki.json": "914b95163a9e4b880d4693c9401efade1efe6675270ad591a6f42e418fedaac7"
+  },
+  "owned_temp_restored": true,
+  "new_download_events": 0,
+  "new_model_calls": 0,
+  "new_provider_calls": 0,
+  "old_execution_modified": false,
+  "acceptance": true
+}

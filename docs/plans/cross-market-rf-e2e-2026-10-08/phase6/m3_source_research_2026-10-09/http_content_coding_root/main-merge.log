@@ -1,0 +1,15 @@
+Merge made by the 'ort' strategy.
+ src/company_wiki/source_catalog/adapter_process.py |  29 +-
+ .../source_catalog/bounded_content_encoding.py     | 191 +++++++++++
+ src/company_wiki/source_catalog/bounded_http.py    | 214 +++++++++---
+ src/company_wiki/source_catalog/dayu_sdk_cli.py    |   9 +-
+ src/company_wiki/source_catalog/download_budget.py |  53 ++-
+ .../source_catalog/official_source_cli.py          |   3 +-
+ .../source_catalog/official_source_flow.py         |  53 ++-
+ tests/integration/test_official_source_flow.py     | 136 ++++++++
+ tests/unit/test_adapter_process_budget.py          | 113 +++++++
+ tests/unit/test_bounded_content_encoding.py        | 369 +++++++++++++++++++++
+ tests/unit/test_bounded_http.py                    |   7 +-
+ 11 files changed, 1108 insertions(+), 69 deletions(-)
+ create mode 100644 src/company_wiki/source_catalog/bounded_content_encoding.py
+ create mode 100644 tests/unit/test_bounded_content_encoding.py

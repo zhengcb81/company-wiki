@@ -1,0 +1,25 @@
+{
+  "observed_at": "2026-10-09T21:12:54.102466+00:00",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "--tb=short",
+    "-p",
+    "no:cacheprovider",
+    "tests/unit/test_bounded_content_encoding.py",
+    "tests/unit/test_bounded_http.py",
+    "tests/unit/test_adapter_process_budget.py",
+    "tests/unit/test_dayu_sdk_fetch.py",
+    "tests/integration/test_official_source_flow.py"
+  ],
+  "returncode": 0,
+  "elapsed_seconds": 33.511,
+  "owned_temp_restored": true,
+  "external_requests": 0,
+  "model_calls": 0
+}

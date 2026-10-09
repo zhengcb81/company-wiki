@@ -1,0 +1,22 @@
+{
+  "observed_at": "2026-10-09T21:21:17.918847+00:00",
+  "root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009",
+  "head": "43635e5110d69c5ccf04647692ba8ef6ccfb01aa",
+  "clean": true,
+  "protected_owner_sha256": {
+    "assurance\\runs\\daily_alert.jsonl": "24a07e917d13ea300b984c8eb0499c6c04f4a2f0303f6fc8dc6cd6fb4fd0b073",
+    "assurance\\runs\\daily_manifest.json": "e5f0d1d507f7505cfa97ec8c69befdf0e0103cd54790f3911e9fd94ecfbf4c36",
+    "assurance\\runs\\ledger.json": "f4bea6bd4ce692c9d3c3ea9225fc541d1097cab7e80e5ae5d0339fe191c8f044",
+    "assurance\\runs\\legacy_periods.json": "58cd90d3f9abcf9c1df371d04e9d67b5d6c5151c608a97ed08b1ddaafec295ae",
+    "assurance\\runs\\monthly_manifest.json": "c8ee858f0f9f6e131c75c0cae064541be791356c8bf02989305eafd78673d887",
+    "assurance\\runs\\rollback_manifest.json": "cccca42c8507f0a286baf9659634f463dddde79656244bb870854ccf4917d5aa",
+    "assurance\\runs\\slo-fc1303.json": "b715a28fa039536036e128dd95695a27de3b9279634bf3b55ce56d28a1212651",
+    "assurance\\runs\\weekly-run-20260913T194021Z.log": "0869914d3be21e0423d493a96e1252c3df4579d8d32493b8851f18f221e39dfd",
+    "assurance\\runs\\weekly-run-20260913T194234Z.log": "b6d0e563da5c44231f7dac641d920820b58a9ce530eb00a55b3ad494123d610d",
+    "assurance\\runs\\weekly-run-20260920T033000Z.log": "20b255a255214c2d15cd7a346ad360c20418370b5d94149753b799ddef01a77d",
+    "assurance\\runs\\weekly-run-20260927T033001Z.log": "dd9123ea3981de86e0c25fcee1eea4b9b85cd55190dabbb63ccdf027b92e9894",
+    "assurance\\runs\\weekly-run-20261004T033000Z.log": "3df7fa0c18f5624ea09167368590d315ed01743659d2cecc1407359682a1be4e",
+    "assurance\\runs\\weekly_alert.jsonl": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
+    "assurance\\runs\\weekly_manifest.json": "6bd380f1dd1f8d66233f86573b39235b56dd79b6b144b9d5fcdfbd26ae0e6f31"
+  }
+}

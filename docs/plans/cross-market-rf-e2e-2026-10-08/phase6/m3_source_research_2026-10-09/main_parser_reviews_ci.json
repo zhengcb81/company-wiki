@@ -1,0 +1,12 @@
+{
+  "observed_at": "2026-10-09T21:05:16.457081+00:00",
+  "head_sha": "f92666d30608860b2e8bf7126d21aac9bf9ce2cb",
+  "workflow_run_id": 37990453690,
+  "status": "completed",
+  "conclusion": "success",
+  "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/37990453690",
+  "created_at": "2026-10-09T20:57:50Z",
+  "updated_at": "2026-10-09T20:59:35Z",
+  "engineering_only": true,
+  "research_acceptance": false
+}

@@ -1,0 +1,12 @@
+{
+  "owned_temp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\http-independent-c8c4-20261009",
+  "resolved_target_verified": true,
+  "unexpected_links": 0,
+  "files_before_cleanup": 17,
+  "bytes_before_cleanup": 29990.0,
+  "owned_temp_restored": true,
+  "external_requests": 0,
+  "model_calls": 0,
+  "cost_usd": "0",
+  "cleanup_tool": "PowerShell Remove-Item -LiteralPath verified exact owned path -Recurse -Force"
+}

@@ -1,0 +1,31 @@
+import asyncio,gzip,httpx,os,socket,sys,zlib
+from types import ModuleType
+mode=sys.argv.pop(1)
+for key in ('OPENAI_API_KEY','DEEPSEEK_API_KEY','MINIMAX_API_KEY','MIMO_API_KEY','TAVILY_API_KEY','ANTHROPIC_API_KEY'):
+    os.environ.pop(key,None)
+os.environ['PYTHON_DOTENV_DISABLED']='1'
+os.environ['SEC_USER_AGENT']='IndependentOfflineReview (not a real request)'
+_connect=socket.socket.connect
+socket.socket.connect=lambda sock,address:_connect(sock,address) if isinstance(address,tuple) and address[0] in ('127.0.0.1','::1') else (_ for _ in ()).throw(RuntimeError('egress forbidden'))
+socket.create_connection=lambda *a,**k:(_ for _ in ()).throw(RuntimeError('egress forbidden'))
+sys.path.insert(0,r'C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki\src')
+body=b'<html><body><ix:nonNumeric name="dei:DocumentFiscalYearFocus">2026</ix:nonNumeric><ix:nonNumeric name="dei:DocumentFiscalPeriodFocus">Q1</ix:nonNumeric><ix:nonNumeric name="dei:DocumentPeriodEndDate">2025-09-30</ix:nonNumeric><ix:nonNumeric name="dei:EntityCentralIndexKey">0000000123</ix:nonNumeric></body></html>'
+if mode=='wrong-year':body=body.replace(b'>2026<',b'>2025<')
+if mode=='deflate':wire=zlib.compress(body);coding='deflate'
+elif mode=='raw-deflate':
+    d=zlib.compressobj(wbits=-15);wire=d.compress(body)+d.flush();coding='deflate'
+else:wire=gzip.compress(body,mtime=0);coding='gzip'
+if mode=='truncated':wire=wire[:-1]
+class Stream(httpx.AsyncByteStream):
+    async def __aiter__(self):
+        for i in range(0,len(wire),3):yield wire[i:i+3]
+class Downloader:
+    def __init__(self,workspace_root,client):self.client=client
+    async def fetch_file_bytes(self,url):return (await self.client.get(url)).content
+for name in ['dayu','dayu.fins','dayu.fins.downloaders','dayu.fins.pipelines','dayu.fins.downloaders.sec_downloader','dayu.fins.pipelines.sec_filing_collection']:
+    m=ModuleType(name);m.__path__=[];sys.modules[name]=m
+sys.modules['dayu.fins.downloaders.sec_downloader'].SecDownloader=Downloader
+sys.modules['dayu.fins.pipelines.sec_filing_collection'].collect_filings_from_table=None
+httpx.AsyncHTTPTransport=lambda:httpx.MockTransport(lambda r:httpx.Response(200,headers={'content-type':'text/html','content-encoding':coding,'content-length':str(len(wire))},stream=Stream()))
+from company_wiki.source_catalog.dayu_sdk_cli import main
+raise SystemExit(main())

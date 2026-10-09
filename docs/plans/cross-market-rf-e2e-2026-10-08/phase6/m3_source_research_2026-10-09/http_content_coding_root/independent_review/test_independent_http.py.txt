@@ -1,0 +1,241 @@
+"""Independent black-box HTTP responsibility probes. No production or egress."""
+import asyncio
+from contextlib import redirect_stderr
+from decimal import Decimal
+import gzip
+import hashlib
+import io
+import json
+from pathlib import Path
+import socket
+import subprocess
+import sys
+import time
+import zlib
+import pytest
+import httpx
+from company_wiki.source_catalog.bounded_content_encoding import ContentDecoder, InvalidContentCoding
+from company_wiki.source_catalog.bounded_http import BudgetedHTTPTransport, BudgetedAsyncHTTPTransport, ProviderBudgetStop, usage_receipt
+from company_wiki.source_catalog.download_budget import AcquisitionBudget, AcquisitionBudgetExceeded
+from company_wiki.source_catalog.adapter_process import JsonCommandAdapter, AdapterProcessError
+from company_wiki.source_catalog.models import CatalogConfig, RootSpec
+from company_wiki.source_catalog.service import SourceCatalog
+from company_wiki.source_catalog.resolver import SourceRequest
+from company_wiki.source_catalog import official_source_flow as flow, official_source_cli as cli
+
+
+def budget(cap=1000000, seconds=5, cost='1'):
+    return AcquisitionBudget.from_limits(max_response_bytes=cap,max_seconds=seconds,max_cost_usd=cost)
+
+
+class S(httpx.SyncByteStream):
+    def __init__(self, parts, clock=None):
+        self.parts=parts; self.closed=False; self.iterator_closed=False; self.clock=clock
+    def __iter__(self):
+        try:
+            for x in self.parts:
+                if self.clock: self.clock()
+                yield x
+        finally: self.iterator_closed=True
+    def close(self): self.closed=True
+
+
+class A(httpx.AsyncByteStream):
+    def __init__(self, parts, delay=0):
+        self.parts=parts; self.delay=delay; self.closed=False; self.iterator_closed=False
+    async def __aiter__(self):
+        try:
+            for x in self.parts:
+                if self.delay: await asyncio.sleep(self.delay)
+                yield x
+        finally: self.iterator_closed=True
+    async def aclose(self): self.closed=True
+
+
+def raw_body():
+    # Non-final stored block, LEN 156/NLEN 65379, followed by final empty block.
+    # Stored block padding bits are legal: first two bytes coincide with zlib.
+    return bytes.fromhex('789c0063ff')+b'A'*156+bytes.fromhex('010000ffff')
+
+
+@pytest.mark.parametrize('kind',['gzip','multi-gzip','deflate','raw-deflate'])
+@pytest.mark.parametrize('step',[1,2,7,999999])
+def test_valid_compressed_with_independent_oracle_and_chunk_boundaries(kind,step):
+    body=b'<html><body>'+bytes(range(128))*3+b'</body></html>'
+    if kind=='gzip': wire=gzip.compress(body,mtime=0)
+    elif kind=='multi-gzip': wire=gzip.compress(body[:1],mtime=0)+gzip.compress(b'',mtime=0)+gzip.compress(body[1:],mtime=0)
+    elif kind=='deflate': wire=zlib.compress(body)
+    else:
+        c=zlib.compressobj(wbits=-15); wire=c.compress(body)+c.flush()
+    assert (gzip.decompress(wire) if 'gzip' in kind else zlib.decompress(wire,-15 if kind=='raw-deflate' else 15))==body
+    b=budget(); stream=S([wire[i:i+step] for i in range(0,len(wire),step)])
+    with httpx.Client(transport=BudgetedHTTPTransport(httpx.MockTransport(lambda r:httpx.Response(200,headers={'content-encoding':'gzip' if 'gzip' in kind else 'deflate'},stream=stream)),b),trust_env=False) as c:
+        r=c.get('https://fixture.invalid/source')
+    assert r.content==body and hashlib.sha256(r.content).digest()==hashlib.sha256(body).digest()
+    assert b.response_bytes_used==len(body) and b.wire_response_bytes_used==len(wire)
+    assert stream.closed and stream.iterator_closed and 'content-encoding' not in r.headers
+    assert set(usage_receipt(b))=={'schema_version','response_bytes','cost_usd'}
+
+
+@pytest.mark.parametrize('step',[1,2,166])
+def test_legal_raw_deflate_with_zlib_like_prefix_is_accepted(step):
+    wire=raw_body(); expected=zlib.decompress(wire,-15)
+    assert expected==b'A'*156
+    b=budget(); s=S([wire[i:i+step] for i in range(0,len(wire),step)])
+    with httpx.Client(transport=BudgetedHTTPTransport(httpx.MockTransport(lambda r:httpx.Response(200,headers={'content-encoding':'deflate'},stream=s)),b),trust_env=False) as c:
+        assert c.get('https://fixture.invalid/ambiguous-raw').content==expected
+
+
+@pytest.mark.parametrize('kind',['gzip','deflate','raw-deflate'])
+@pytest.mark.parametrize('mutation',['truncate','garbage','checksum'])
+def test_bad_compression_eof_crc_and_trailing_bytes_refused(kind,mutation):
+    body=b'x'*800
+    if kind=='gzip': wire=gzip.compress(body,mtime=0)
+    elif kind=='deflate': wire=zlib.compress(body)
+    else:
+        d=zlib.compressobj(wbits=-15); wire=d.compress(body)+d.flush()
+    if mutation=='truncate': wire=wire[:-1]
+    elif mutation=='garbage': wire+=b'garbage'
+    elif kind=='raw-deflate': wire=bytes([7])+wire[1:] # BTYPE=3 is invalid; raw has no checksum.
+    else: wire=wire[:-1]+bytes([wire[-1]^1])
+    b=budget(); s=S([wire[i:i+1] for i in range(len(wire))])
+    with httpx.Client(transport=BudgetedHTTPTransport(httpx.MockTransport(lambda r:httpx.Response(200,headers={'content-encoding':'gzip' if kind=='gzip' else 'deflate'},stream=s)),b),trust_env=False) as c:
+        with pytest.raises(ProviderBudgetStop) as caught: c.get('https://fixture.invalid/bad')
+    assert caught.value.error_code=='incomplete_response' and s.closed and s.iterator_closed
+    assert b.wire_response_bytes_used<=len(wire)
+
+
+@pytest.mark.parametrize('axis',['wire','entity'])
+def test_overage_preserved_before_delivery_and_prior_fee_retained(axis):
+    b=budget(256); b.consume_cost_usd('0.25')
+    wire=gzip.compress(b'x'*200000,mtime=0) if axis=='entity' else gzip.compress(bytes(range(256)),mtime=0)
+    s=S([wire])
+    with httpx.Client(transport=BudgetedHTTPTransport(httpx.MockTransport(lambda r:httpx.Response(200,headers={'content-encoding':'gzip'},stream=s)),b),trust_env=False) as c:
+        with pytest.raises(ProviderBudgetStop) as caught: c.get('https://fixture.invalid/bomb')
+    assert caught.value.error_code=='byte_budget_exceeded' and b.cost_usd_used==Decimal('0.25')
+    assert b.wire_response_bytes_used==len(wire) and s.closed and s.iterator_closed
+    assert b.response_bytes_used==(257 if axis=='entity' else 0)
+
+
+def test_compressed_redirect_error_retry_share_both_counters():
+    body=b'a'*50; wire=gzip.compress(body,mtime=0); b=budget(120); calls=[]
+    def provider(r):
+        calls.append(r.url.path)
+        return httpx.Response(302 if len(calls)==1 else 429 if len(calls)==2 else 200,
+            headers={'location':'/retry','content-encoding':'gzip'},stream=S([wire]))
+    with httpx.Client(transport=BudgetedHTTPTransport(httpx.MockTransport(provider),b),follow_redirects=True,trust_env=False) as c:
+        assert c.get('https://fixture.invalid/redirect').status_code==429
+        with pytest.raises(ProviderBudgetStop): c.get('https://fixture.invalid/retry')
+    assert calls==['/redirect','/retry','/retry'] and b.response_bytes_used==121 and b.wire_response_bytes_used==3*len(wire)
+
+
+@pytest.mark.parametrize('method,status',[('HEAD',200),('GET',204),('GET',304)])
+def test_bodyless_metadata_is_not_billed(method,status):
+    b=budget(1); s=S([])
+    with httpx.Client(transport=BudgetedHTTPTransport(httpx.MockTransport(lambda r:httpx.Response(status,headers={'content-encoding':'br','content-length':'999999'},stream=s)),b),trust_env=False) as c:
+        assert c.request(method,'https://fixture.invalid/headers').content==b''
+    assert b.response_bytes_used==b.wire_response_bytes_used==0 and s.closed and s.iterator_closed
+
+
+def test_late_sync_compressed_wire_counted_without_entity_delivery():
+    b=budget(); wire=gzip.compress(b'a'*100,mtime=0)
+    s=S([wire],clock=lambda:setattr(b,'deadline_monotonic',time.monotonic()-1))
+    with httpx.Client(transport=BudgetedHTTPTransport(httpx.MockTransport(lambda r:httpx.Response(200,headers={'content-encoding':'gzip'},stream=s)),b),trust_env=False) as c:
+        with pytest.raises(ProviderBudgetStop) as e: c.get('https://fixture.invalid/late')
+    assert e.value.error_code=='deadline_exceeded' and b.wire_response_bytes_used==len(wire) and b.response_bytes_used==0 and s.iterator_closed and s.closed
+
+
+def test_async_timeout_closes_stream_and_active_iterator():
+    async def run():
+        b=budget(seconds=.03); s=A([b'x'],delay=.5)
+        async with httpx.AsyncClient(transport=BudgetedAsyncHTTPTransport(httpx.MockTransport(lambda r:httpx.Response(200,stream=s)),b),trust_env=False) as c:
+            with pytest.raises(ProviderBudgetStop) as e: await c.get('https://fixture.invalid/slow')
+        assert e.value.error_code=='deadline_exceeded' and s.closed and s.iterator_closed and b.response_bytes_used==b.wire_response_bytes_used==0
+    asyncio.run(run())
+
+
+def test_async_response_early_close_closes_active_iterator_immediately():
+    async def run():
+        wire=gzip.compress(b'x'*180000,mtime=0); b=budget(); s=A([wire,b'never-read'])
+        async with httpx.AsyncClient(transport=BudgetedAsyncHTTPTransport(httpx.MockTransport(lambda r:httpx.Response(200,headers={'content-encoding':'gzip'},stream=s)),b),trust_env=False) as c:
+            async with c.stream('GET','https://fixture.invalid/early') as r:
+                outer=r.aiter_bytes(); assert len(await outer.__anext__())<=65536
+            await outer.aclose()
+        assert s.closed and s.iterator_closed
+    asyncio.run(run())
+
+
+def adapter(tmp_path,command=None):
+    return JsonCommandAdapter(name='review',version='1',command=command or [sys.executable,'unused.py'],project_root=tmp_path,supports_acquisition_budget=True)
+
+
+def request():
+    return SourceRequest(entity='Acme',security_id='ACME',market='US',document_kind='annual_report',fiscal_year=2025,as_of_date='2026-10-09',allow_download=True)
+
+
+def test_actual_subprocess_final_charges_once_not_progress(tmp_path):
+    p=tmp_path/'child.py'; p.write_text("import sys,json\nidentity={'name':'review','version':'1'}\nfor e,w in [(1,2),(4,8)]:\n print(json.dumps({'schema_version':'1.0','status':'progress','adapter':identity,'acquisition_usage':{'schema_version':'1.0','response_bytes':e,'cost_usd':'0.1'},'http_wire_bytes':w}),file=sys.stderr,flush=True)\nprint(json.dumps({'schema_version':'1.0','status':'ok','adapter':identity,'acquisition_usage':{'schema_version':'1.0','response_bytes':9,'cost_usd':'0.25'},'http_wire_bytes':18,'candidates':[]}))\n",encoding='utf-8')
+    a=adapter(tmp_path,[sys.executable,'-B',str(p)]); b=budget(100)
+    assert a.discover_bounded(request(),b)==()
+    assert (b.response_bytes_used,b.wire_response_bytes_used,b.cost_usd_used)==(9,18,Decimal('0.25'))
+    assert b.usage_complete and b.wire_usage_complete
+
+
+def test_actual_subprocess_hard_stop_last_checkpoint_is_lower_bound(tmp_path):
+    p=tmp_path/'kill.py'; p.write_text("import sys,json,time\ni={'name':'review','version':'1'}\nfor e,w in [(2,4),(5,10)]:\n print(json.dumps({'schema_version':'1.0','status':'progress','adapter':i,'acquisition_usage':{'schema_version':'1.0','response_bytes':e,'cost_usd':'0.25'},'http_wire_bytes':w}),file=sys.stderr,flush=True)\ntime.sleep(4)\n",encoding='utf-8')
+    a=adapter(tmp_path,[sys.executable,'-B',str(p)]); b=budget(100,seconds=.5)
+    with pytest.raises(AdapterProcessError) as e: a.discover_bounded(request(),b)
+    assert (b.response_bytes_used,b.wire_response_bytes_used,b.cost_usd_used)==(5,10,Decimal('0.25'))
+    assert e.value.retryable is False and not b.usage_complete and not b.wire_usage_complete
+
+
+@pytest.mark.parametrize('optional',[None,True,-1,'12'])
+def test_legacy_or_bad_wire_optional_is_unknown_and_keeps_real_bill(optional):
+    b=budget(100); JsonCommandAdapter._charge_bounded_usage({'acquisition_usage':{'schema_version':'1.0','response_bytes':9,'cost_usd':'0.25'},'http_wire_bytes':optional},b)
+    assert b.response_bytes_used==9 and b.cost_usd_used==Decimal('0.25') and not b.wire_usage_complete
+    b.ensure_new_request()
+
+
+def test_failure_final_partial_wire_observation_preserves_unknown(tmp_path):
+    a=adapter(tmp_path); final={'schema_version':'1.0','status':'failed','adapter':{'name':'review','version':'1'},'http_wire_bytes':7,'http_wire_usage_complete':False,'error':{'code':'provider_failed','retryable':False,'acquisition_usage':{'schema_version':'1.0','response_bytes':9,'cost_usd':'0.25'}}}
+    with pytest.raises(AdapterProcessError) as e: a._decode_response(subprocess.CompletedProcess([],1,'',json.dumps(final)),'fetch')
+    b=budget(100); a._charge_failure_usage(e.value,b)
+    assert b.response_bytes_used==9 and b.wire_response_bytes_used==7 and b.cost_usd_used==Decimal('0.25') and b.usage_complete
+    assert b.wire_usage_complete is False
+
+
+def test_prelaunch_timeout_zero_usage_is_proven_not_unknown(tmp_path,monkeypatch):
+    import company_wiki.source_catalog.adapter_process as module
+    def stopped(*args,**kwargs):
+        e=subprocess.TimeoutExpired('never-started',.1); e.provider_started=False; raise e
+    monkeypatch.setattr(module,'run_json_process',stopped)
+    a=adapter(tmp_path); b=budget(100)
+    with pytest.raises(AdapterProcessError) as e:a.discover_bounded(request(),b)
+    assert e.value.provider_started is False and b.usage_complete and b.wire_usage_complete
+    assert b.response_bytes_used==b.wire_response_bytes_used==0
+
+
+def capture_request():
+    return {'schema_version':'official-source-capture-request/1','request_id':'review-capture','source':{'entity':'Acme','market':'US','security_id':'ACME','document_kind':'regulatory_filing','title':'Acme public filing','publisher':'Acme','source_url':'https://official.example/filing.pdf','published_date':'2026-10-09','language':'en'},'mime_type':'application/pdf','max_bytes':1000000,'max_seconds':5,'max_cost_usd':'0'}
+
+
+@pytest.mark.parametrize('mode',['header-refusal','mime-refusal'])
+def test_public_cli_projects_actual_finite_http_fields_at_every_failure(tmp_path,monkeypatch,mode):
+    root=tmp_path; (root/'companies').mkdir(); cfg=CatalogConfig(project_root=root,catalog_dir=root/'catalog',roots=(RootSpec('company_raw',root/'companies','company_raw'),))
+    original_capture=flow.capture_official_source
+    body=b'<html><body>This is not the requested PDF.</body></html>'; wire=gzip.compress(body,mtime=0)
+    def capture(catalog,**kw):
+        provider=httpx.MockTransport(lambda r:httpx.Response(200,headers={'content-type':'text/html','content-encoding':'br' if mode=='header-refusal' else 'gzip','authorization':'secret-header-must-stay-hidden','x-secret':'do-not-copy'},stream=A([wire])))
+        return original_capture(catalog,transport=provider,**kw)
+    monkeypatch.setattr(cli,'load_catalog_config',lambda *a,**k:cfg)
+    monkeypatch.setattr(cli,'capture_official_source',capture)
+    req=tmp_path/'request.json'; req.write_text(json.dumps(capture_request()),encoding='utf-8')
+    err=io.StringIO()
+    with redirect_stderr(err):rc=cli.main(['--config',str(tmp_path/'fixture.yaml'),'--project-root',str(root),'--operation','capture','--request',str(req)])
+    out=json.loads(err.getvalue())
+    assert rc==2 and out['status']=='failed' and not list((root/'companies').rglob('*'))
+    assert 'secret-header-must-stay-hidden' not in err.getvalue() and 'do-not-copy' not in err.getvalue() and str(tmp_path) not in err.getvalue()
+    assert out['http_observation']=={'status_code':200,'mime_type':'text/html','content_encoding':'br' if mode=='header-refusal' else 'gzip','wire_content_length':None}
+    assert out['http_wire_bytes']==(0 if mode=='header-refusal' else len(wire))
+    assert out['http_wire_usage_complete']==(mode=='mime-refusal')
+    assert out['acquisition_usage']['response_bytes']==(0 if mode=='header-refusal' else len(body))

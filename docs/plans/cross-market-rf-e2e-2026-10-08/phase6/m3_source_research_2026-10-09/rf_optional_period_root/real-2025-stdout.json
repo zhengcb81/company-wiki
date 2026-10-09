@@ -1,0 +1,139 @@
+{
+  "schema_version": "source-preparation-result/1",
+  "source": {
+    "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+    "source_type": "regulatory_filing",
+    "title": "中微公司：2025年半年度报告",
+    "publisher": "company-wiki",
+    "url": "http://static.cninfo.com.cn/finalpage/2025-08-29/1224606011.PDF",
+    "published_date": "2025-08-29",
+    "accessed_date": "2026-10-09",
+    "page_or_section": "1",
+    "capture": {
+      "capture_schema_version": "1.0",
+      "capture_method": "local_document",
+      "tool_name": "company-wiki-source-version-reader",
+      "tool_call_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd|2026-10-09T21:24:08.085237+00:00",
+      "captured_date": "2026-10-09",
+      "snapshot_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "content_treatment": "untrusted_data_only",
+      "prompt_injection_status": "not_reviewed",
+      "host_receipt": {
+        "host_receipt_schema_version": "1.0",
+        "issuer": "company-wiki",
+        "environment": "host-runtime",
+        "tool_name": "company-wiki-source-version-reader",
+        "action": "verified_read",
+        "event_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "timestamp": "2026-10-09T21:24:08.085237+00:00",
+        "receipt_sha256": "15953a87e3f2a6015ea8dce100588f8e6300c26c9e5242609a0f42bb639c137d"
+      },
+      "receipt_sha256": "90468c06aa60500fa1e218a8fd5fa64df28d2ce010a70a7a620fb1b17e2f4cb7"
+    },
+    "company_wiki_trace": {
+      "source_ref": {
+        "byte_size": 6361468,
+        "content_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "mime_type": "application/pdf",
+        "schema_version": "2.0",
+        "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd"
+      },
+      "read_receipt": {
+        "availability_evidence": null,
+        "byte_size": 6361468,
+        "content_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "policy_sha256": "5791ac63f0c554e379f203d9b6845831d1ac43cddc0780eb97beef3797472693",
+        "read_at": "2026-10-09T21:24:08.085237+00:00",
+        "review": {
+          "evidence_sha256": null,
+          "policy_hash": null,
+          "reviewed_at": null,
+          "source_sha256": null,
+          "status": "not_reviewed"
+        },
+        "schema_version": "2.2",
+        "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "source_read_policy_sha256": "e3b2149520435d8bcbb9692d9d5f8e0e7b881f41ddd89374edaf7e0f6f8bc547",
+        "status": "ok"
+      },
+      "source_manifest": {
+        "byte_size": 6361468,
+        "canonical_entity_id": null,
+        "collector_name": null,
+        "collector_version": null,
+        "content_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "display_name": "中微公司",
+        "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "document_kind": "semi_annual_report",
+        "fiscal_period": "H1",
+        "fiscal_year": 2025,
+        "form_type": null,
+        "language": "zh",
+        "market": "CN",
+        "mime_type": "application/pdf",
+        "period_end": "2025-06-30",
+        "provider": null,
+        "provider_document_id": null,
+        "published_date": "2025-08-29",
+        "retrieved_at": null,
+        "security_id": "688012",
+        "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "source_url": "http://static.cninfo.com.cn/finalpage/2025-08-29/1224606011.PDF",
+        "title": "中微公司：2025年半年度报告"
+      },
+      "source_candidate": {
+        "resolution_outcome": "reused_existing",
+        "download_events": 0
+      }
+    },
+    "reuse_receipt": {
+      "parser_calls": null,
+      "llm_calls": null,
+      "download_calls": 0,
+      "outcome": "reused_existing",
+      "policy_hash": "5791ac63f0c554e379f203d9b6845831d1ac43cddc0780eb97beef3797472693",
+      "source_read_policy_sha256": "e3b2149520435d8bcbb9692d9d5f8e0e7b881f41ddd89374edaf7e0f6f8bc547",
+      "prompt_injection_status": "not_reviewed",
+      "artifact_read": [],
+      "producer_events": [],
+      "artifact_read_events": [],
+      "artifact_failed_events": []
+    }
+  },
+  "filing_fetch": {
+    "schema_version": "2.0",
+    "status": "source_candidate",
+    "request_period": {
+      "mode": "exact",
+      "fiscal_year": 2025,
+      "fiscal_period": null,
+      "as_of_date": "2026-10-08"
+    },
+    "filing": {
+      "status": "source_candidate",
+      "source_ref": {
+        "byte_size": 6361468,
+        "content_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "mime_type": "application/pdf",
+        "schema_version": "2.0",
+        "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd"
+      },
+      "byte_verification": "pending_verified_open",
+      "document_kind": "semi_annual_report",
+      "fiscal_year": 2025,
+      "fiscal_period": "H1",
+      "resolution_outcome": "reused_existing",
+      "download_events": 0
+    },
+    "transcript": {
+      "status": "not_requested",
+      "retryable": false
+    },
+    "calls": 2,
+    "downloads": 0
+  },
+  "narrative": null
+}

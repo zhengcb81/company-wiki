@@ -1,0 +1,21 @@
+{
+  "observed_at": "2026-10-09T21:21:39.637276+00:00",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "--tb=short",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_source_preparation.py",
+    "-k",
+    "optional_period or explicit_period_constraint"
+  ],
+  "returncode": 1,
+  "elapsed_seconds": 5.375,
+  "owned_temp_restored": true
+}

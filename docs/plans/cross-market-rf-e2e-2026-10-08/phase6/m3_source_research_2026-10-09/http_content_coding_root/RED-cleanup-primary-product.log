@@ -1,0 +1,116 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 38 items / 36 deselected / 2 selected
+
+tests\unit\test_bounded_content_encoding.py FF                           [100%]
+
+================================== FAILURES ===================================
+_____ test_cleanup_error_does_not_replace_primary_byte_budget_stop[sync] ______
+src\company_wiki\source_catalog\bounded_http.py:115: in _record_http
+    budget.consume_http_bytes(wire_bytes=wire_bytes, response_bytes=response_bytes)
+src\company_wiki\source_catalog\download_budget.py:247: in consume_http_bytes
+    raise AcquisitionBudgetExceeded("response byte budget exceeded")
+E   company_wiki.source_catalog.download_budget.AcquisitionBudgetExceeded: response byte budget exceeded
+
+The above exception was the direct cause of the following exception:
+src\company_wiki\source_catalog\bounded_http.py:173: in __iter__
+    yield from _decode_chunk(chunk, self.decoder, self.budget, self.checkpoint)
+src\company_wiki\source_catalog\bounded_http.py:134: in _decode_chunk
+    _record_http(budget, checkpoint, response_bytes=len(entity))
+src\company_wiki\source_catalog\bounded_http.py:117: in _record_http
+    raise _stop(exc) from exc
+E   company_wiki.source_catalog.bounded_http.ProviderBudgetStop: response byte budget exceeded
+
+During handling of the above exception, another exception occurred:
+tests\unit\test_bounded_content_encoding.py:352: in test_cleanup_error_does_not_replace_primary_byte_budget_stop
+    client.get("https://fixture.invalid/primary-cause")
+C:\Miniconda\Lib\site-packages\httpx\_client.py:1053: in get
+    return self.request(
+C:\Miniconda\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:928: in send
+    raise exc
+C:\Miniconda\Lib\site-packages\httpx\_client.py:922: in send
+    response.read()
+C:\Miniconda\Lib\site-packages\httpx\_models.py:881: in read
+    self._content = b"".join(self.iter_bytes())
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_models.py:897: in iter_bytes
+    for raw_bytes in self.iter_raw():
+                     ^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_models.py:951: in iter_raw
+    for raw_stream_bytes in self.stream:
+                            ^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:153: in __iter__
+    for chunk in self._stream:
+                 ^^^^^^^^^^^^
+src\company_wiki\source_catalog\bounded_http.py:175: in __iter__
+    self.close()
+src\company_wiki\source_catalog\bounded_http.py:189: in close
+    self.stream.close()
+tests\unit\test_bounded_content_encoding.py:346: in close
+    raise RuntimeError("fixture cleanup failed")
+E   RuntimeError: fixture cleanup failed
+_____ test_cleanup_error_does_not_replace_primary_byte_budget_stop[async] _____
+src\company_wiki\source_catalog\bounded_http.py:115: in _record_http
+    budget.consume_http_bytes(wire_bytes=wire_bytes, response_bytes=response_bytes)
+src\company_wiki\source_catalog\download_budget.py:247: in consume_http_bytes
+    raise AcquisitionBudgetExceeded("response byte budget exceeded")
+E   company_wiki.source_catalog.download_budget.AcquisitionBudgetExceeded: response byte budget exceeded
+
+The above exception was the direct cause of the following exception:
+src\company_wiki\source_catalog\bounded_http.py:213: in __aiter__
+    for entity in _decode_chunk(chunk, self.decoder, self.budget, self.checkpoint):
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\bounded_http.py:134: in _decode_chunk
+    _record_http(budget, checkpoint, response_bytes=len(entity))
+src\company_wiki\source_catalog\bounded_http.py:117: in _record_http
+    raise _stop(exc) from exc
+E   company_wiki.source_catalog.bounded_http.ProviderBudgetStop: response byte budget exceeded
+
+During handling of the above exception, another exception occurred:
+tests\unit\test_bounded_content_encoding.py:366: in test_cleanup_error_does_not_replace_primary_byte_budget_stop
+    caught = loop.run_until_complete(exercise())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\asyncio\base_events.py:725: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+tests\unit\test_bounded_content_encoding.py:364: in exercise
+    await client.get("https://fixture.invalid/primary-cause")
+C:\Miniconda\Lib\site-packages\httpx\_client.py:1768: in get
+    return await self.request(
+C:\Miniconda\Lib\site-packages\httpx\_client.py:1540: in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_client.py:1643: in send
+    raise exc
+C:\Miniconda\Lib\site-packages\httpx\_client.py:1637: in send
+    await response.aread()
+C:\Miniconda\Lib\site-packages\httpx\_models.py:979: in aread
+    self._content = b"".join([part async for part in self.aiter_bytes()])
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\httpx\_models.py:997: in aiter_bytes
+    async for raw_bytes in self.aiter_raw():
+C:\Miniconda\Lib\site-packages\httpx\_models.py:1055: in aiter_raw
+    async for raw_stream_bytes in self.stream:
+C:\Miniconda\Lib\site-packages\httpx\_client.py:176: in __aiter__
+    async for chunk in self._stream:
+src\company_wiki\source_catalog\bounded_http.py:216: in __aiter__
+    await self.aclose()
+src\company_wiki\source_catalog\bounded_http.py:230: in aclose
+    await self.stream.aclose()
+tests\unit\test_bounded_content_encoding.py:357: in aclose
+    raise RuntimeError("fixture cleanup failed")
+E   RuntimeError: fixture cleanup failed
+=========================== short test summary info ===========================
+FAILED tests/unit/test_bounded_content_encoding.py::test_cleanup_error_does_not_replace_primary_byte_budget_stop[sync]
+FAILED tests/unit/test_bounded_content_encoding.py::test_cleanup_error_does_not_replace_primary_byte_budget_stop[async]
+====================== 2 failed, 36 deselected in 0.95s =======================
+

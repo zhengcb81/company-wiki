@@ -1,0 +1,38 @@
+{
+  "source": {
+    "src/company_wiki/source_catalog/download_budget.py": "db73704ff35efecff6ef50ffd49362840511a608ac72b7cd03bb87417e7d0038",
+    "src/company_wiki/source_catalog/bounded_content_encoding.py": "1b093ca0dabcc3ee628f30f506cd337107eff31f657aa8998dfef8733072ebc4",
+    "src/company_wiki/source_catalog/bounded_http.py": "3f3c5b87e825eef537c95a0a4b5bfb31cc8718085f5c64d89a6e00e501241381",
+    "src/company_wiki/source_catalog/adapter_process.py": "1ca49837c91e082e74880ffd42a4647b527f084579a65721a9459ca21db7c336",
+    "src/company_wiki/source_catalog/dayu_sdk_cli.py": "3fd47db2fee91973e69d3a798857474f0c371dbaf7759ed4d42cc5018e256bfd",
+    "src/company_wiki/source_catalog/official_source_flow.py": "673d2d795c0c3985dd4356f3e9712586204a4a13483f19155574e59d415b5443",
+    "src/company_wiki/source_catalog/official_source_cli.py": "fb9f682d3cc90fc1f87f1f96460119aebf24bab78f05554e3e8acf0b89e350a6",
+    "tests/unit/test_adapter_process_budget.py": "ee7c869d003492c8f9a81afa518e1e862ab72e7f44ff734407edcd26e278e888",
+    "tests/unit/test_bounded_content_encoding.py": "c42737ef162ceb0a00ab5f2c58b3e49ccb50db4d95253d3bfbb891f42351e323",
+    "tests/unit/test_bounded_http.py": "ef4e0f032f76459445d7f4e6de8a84c3626875992b796ddcc549b1b808dfb10a",
+    "tests/integration/test_official_source_flow.py": "d7a232431623722a75de8a0a5305e3fdb2d955d32d3fac3cca128a88a236312d",
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "immutable_baseline": {
+    "independent_review/after_hashes.json": "178970904f938ae6e0a1a68d0742ca48451e6b7829124555743687f75279baca",
+    "independent_review/before_hashes.json": "178970904f938ae6e0a1a68d0742ca48451e6b7829124555743687f75279baca",
+    "independent_review/cleanup.json": "639bffdfae3631557f6ba9a2c489a464f2f05d48e7b5d00d32694cff536b8815",
+    "independent_review/conftest.py.txt": "8ad64bc7938c2b662f17daa205f8f74da15769a6644b162203143dc40437320c",
+    "independent_review/evidence_inventory.json": "c59106c4d5c2dc4c05d90ed861324f2e73722a5b4cfaf8d4168c269a6fd9d2da",
+    "independent_review/explore.py.txt": "ddb4d6514a96fd7079ea4a2f957f3133094503ea1449d900e3258e42428139a9",
+    "independent_review/final_source_git.json": "da202914bb086de124701907831c0d459d18f94b004c6d9b208bbbf7fc959375",
+    "independent_review/independent.log": "4a5db76f041db0d85092f4fd18c301df219d208b78cad1ec1ae5368d566d7cca",
+    "independent_review/independent_junit.xml": "fae58acf07d8b18fb97d4e99464da9f4abd02c38b4bd3889813b407e9d738e5e",
+    "independent_review/inventory.py.txt": "cb850901215d2b1ff6950e563186e72a9d22222741161279f35321e26deafb99",
+    "independent_review/offline_dayu_child.py.txt": "9bbfb1b7fd583559ffb65e088f2afbffe48653b75486719da8f1f2b04063c291",
+    "independent_review/parent_dayu_probe.json": "c7845b73f90f90ad571863924c7dcb7177ed3db55824285353f5777684b47a53",
+    "independent_review/parent_dayu_probe.py.txt": "d0c3a505e4e86f7b56355a57d34f23095e60bfb52a1b25c3f62267eb9bf2fd47",
+    "independent_review/responsibility.log": "7c570891f8dd01f0f679227eed4752fe33aaa25e9c66431036d7ca13a1f407b4",
+    "independent_review/run_review.py.txt": "a931a257a1b67bf578127e2fbe62d4026865c7dace8142b3c73f11caf97e7697",
+    "independent_review/source_diff.txt": "f9d797097746f0892704af48480bf9142901e67d6d2974091b5455c4ef7dddf0",
+    "independent_review/test_commands.json": "e69e1cf64a7908d73f6877590d2fdc2a522c16b0c350049de5e848548da15ef6",
+    "independent_review/test_independent_http.py.txt": "3f50e3828cea5b9e84905ce177786094abde1ecb697dbd1130c446d84bdf8759",
+    "INDEPENDENT_REVIEW.md": "a46dd494300edfa8628fe6d67a6b5f8b2ccc3b9d81703d61b57fab35351b0a4d",
+    "INDEPENDENT_REVIEW.json": "4504345c855ef4b36b5c84f9316863e7cc3e3410b2b8f8226af2b695fe9894d0"
+  }
+}

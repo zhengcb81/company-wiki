@@ -1,5 +1,32 @@
 # Findings
 
+## 最新 M3 节点（2026-10-09 21:34 UTC；实际事件时间以JSON为准）
+
+**Next Step：** 十份独立公司报告已交付并核对；最后CN/US-analyst两份独立买方审查在跑。12审齐后由独立编程专家整合原64及新增共因，再按责任层完成业务选择、模型配置策略、通用JSON与实际请求scope根修。当前目标未完成，M4/NVDA/池loop/后续八家仅登记未启动。
+
+- HTTP整改独立工程PASS：原47探针、新增11相邻控制、实际父子5场景全部通过；报告/source/config SHA不变，自有TEMP恢复。正常合master `806818cf`；原真实SSE仍返回HTML，未取得新PDF，不能核销旧8unknown或公告缺口。
+- RF可选期次已正常合/推main `0c248d9a`，prepush194PASS/29.47秒，精确CI37993474331成功42秒。CN两真实省略期次H1已成功0下载，CN-process封存后单文件定点安装两物理根完成，539其他文件SHA未变；安装使用主线LF Gitblob，首次CRLF预检查拒绝发生写前且零修改。
+- CN-process197 Decimal核对、HK-analyst主要模型复算通过，但当前研究仍partial；未来幅度校准/三年路径/业务桥接及误标期间等未解决。新两报告57个证据文件实核SHA全部相等，见first10_review_observation.json；结构verified不是研究PASS。
+- 原件/Dayu/production配置/封存run/原64及邻仓owner WIP保护；本节点没有新增供应商/LLM收费。累计USD20/2,000,000tokens及旧unknown/FX不重置。后续固定八家按已登记顺序等待当前goal真正完成。
+
+## 最新 M3 节点（2026-10-09 21:16 UTC；实际时间以JSON为准）
+
+**Next Step：** 七份独立公司报告已交付，CN/US流程、HK买方模型在跑，另两买方模型待槽。HK-process全量806 Decimal复算无差错，未来校准/两拼接引用/读后遗漏/处理与外部缺口仍有物质问题，executor_completion partial不是签研究通过。
+
+- HTTP四根因新增16FAIL/1PASS原生RED，资源清理覆盖预算错另2真实FAIL；根修后110责任PASS/31.21秒，无警告，ownTEMP恢复、外部/model0。一次错误测试文件名exit4/0collected和Windows本机socket-pair夹具setup失败已保留，后者修夹具仍封外网；不把环境失败归项目产品缺陷。隔离新源码待正常commit/push与集中独立复验，再并主线。
+- 实际profile/磁盘cap扩大偏差不以最终占用小核销；CN本次persistent/scratch请求128MiB与冻结32/64MiB不同，US P2/100MB亦不符合P1/32/64MiB。交专家做共用请求边界/技能检查点，不新增材料许可门。
+- 当前goal仍active，最新main f92666d3精确CI37990453690成功；M4/NVDA/池loop/后续八家未开始，原件/Dayu/config/旧unknown预算保护。
+
+
+## 最新 M3 节点（2026-10-09 21:05 UTC；实际时间以JSON为准）
+
+**Next Step：** 六独立公司报告已交付并核对，HK/US流程正在运行，CN流程及三买方模型审查待槽。共用HTTP独立工程探针发现raw-deflate歧义、提前退出iterator、完整正文类型拒绝后诊断投影、handled失败wire完整性四项根因；隔离支线保持未合，先新增RED再修。12审齐后专家归并原64和新共因，M4/NVDA/池loop及后续八家尚未开始。
+
+- 新主线f92666d3已正常推送（2492PASS/138.70秒）；精确CI37990453690成功105秒。该工程发布只包含电话会0.3角色修复和MAIN记录，不核销摘要选择/收费截断/研究校准问题。
+- US-fetch六项finding包括SEC成功usage跨层投影缺失及115B版本差异未调和；已知body大小不是完整网络meter，不补旧unknown为0。最新报告SHA/FAIL与来源证据重哈希见first6_review_observation.json。
+- 后续八家公司目标已登记、当前goal仍active；预算USD20/2,000,000tokens仍累计、不重置。原件/production config/封存run/Dayu/owner WIP保护，无新模型或付费。
+
+
 ## 最新 M3 节点（2026-10-09 20:50 UTC；JSON为实际事件时间）
 
 **Next Step：** 五独立报告已交付（HK存储/采集、CN存储/采集、US存储），全部保留物质问题；US采集/HK流程正在运行，共用HTTP接口独立工程审查占第三槽，其余五公司审查顺次占空槽。MAIN同时TDD修共用代码，不等待逐文件人工签收。12审齐后专家整合原64与本轮新根因；当前goal仍active，M4/NVDA/池loop及后续八家未开始。

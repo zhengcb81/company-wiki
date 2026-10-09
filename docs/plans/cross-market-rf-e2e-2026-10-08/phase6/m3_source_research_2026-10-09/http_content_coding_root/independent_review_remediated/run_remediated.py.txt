@@ -1,0 +1,33 @@
+from datetime import datetime,timezone
+import hashlib,json,os,subprocess,sys,time
+from pathlib import Path
+source=Path(r'C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki')
+node=Path(r'C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\m3_source_research_2026-10-09\http_content_coding_root')
+temp=Path(r'C:\Users\郑曾波\Projects\company-wiki\.tmp\http-independent-remediated-6cc9959-20261009')
+out=node/'independent_review_remediated'
+old=json.loads((node/'independent_review/before_hashes.json').read_text(encoding='utf-8'))
+initial={p:hashlib.sha256((source/p).read_bytes()).hexdigest() for p in old}
+immutable={p.relative_to(node).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in (node/'independent_review').iterdir() if p.is_file()}
+for name in ['INDEPENDENT_REVIEW.md','INDEPENDENT_REVIEW.json']:immutable[name]=hashlib.sha256((node/name).read_bytes()).hexdigest()
+assert immutable['INDEPENDENT_REVIEW.md']=='a46dd494300edfa8628fe6d67a6b5f8b2ccc3b9d81703d61b57fab35351b0a4d'
+assert immutable['INDEPENDENT_REVIEW.json']=='4504345c855ef4b36b5c84f9316863e7cc3e3410b2b8f8226af2b695fe9894d0'
+assert hashlib.sha256((temp/'test_independent_http.py').read_bytes()).hexdigest()==immutable['independent_review/test_independent_http.py.txt']
+(out/'before_hashes.json').write_text(json.dumps({'source':initial,'immutable_baseline':immutable},indent=2),encoding='utf-8')
+for key in ('OPENAI_API_KEY','DEEPSEEK_API_KEY','MINIMAX_API_KEY','MIMO_API_KEY','TAVILY_API_KEY','ANTHROPIC_API_KEY'):os.environ.pop(key,None)
+for key in ('TMP','TEMP','TMPDIR'):os.environ[key]=str(temp)
+os.environ.update(PYTHONDONTWRITEBYTECODE='1',PYTHONUTF8='1',PYTHON_DOTENV_DISABLED='1',COMPANY_WIKI_NETWORK='blocked',COMPANY_WIKI_REAL_LLM='0')
+commands=[('original47',[sys.executable,'-X','utf8','-B','-m','pytest',str(temp/'test_independent_http.py'),'-q','--tb=short','-p','no:cacheprovider','--basetemp',str(temp/'original47'),'--junitxml',str(out/'original47.xml')]),('adjacent',[sys.executable,'-X','utf8','-B','-m','pytest',str(temp/'test_remediated_adjacent.py'),'-q','--tb=short','-p','no:cacheprovider','--basetemp',str(temp/'adjacent'),'--junitxml',str(out/'adjacent.xml')]),('actual_parent_owned_cli',[sys.executable,'-u','-X','utf8','-B',str(temp/'parent_dayu_probe.py')])]
+results=[]
+for name,cmd in commands:
+    start=time.monotonic()
+    p=subprocess.run(cmd,cwd=source,env=os.environ.copy(),stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,encoding='utf-8',timeout=60)
+    (out/(name+'.log')).write_text(p.stdout,encoding='utf-8')
+    item={'stage':name,'command':cmd,'cwd':str(source),'returncode':p.returncode,'elapsed_seconds':round(time.monotonic()-start,3),'external_requests':0,'model_calls':0,'charged_cost_usd':'0','log':name+'.log'}
+    results.append(item);print(json.dumps(item),flush=True);print('\n'.join(p.stdout.splitlines()[-8:]),flush=True)
+after={p:hashlib.sha256((source/p).read_bytes()).hexdigest() for p in old}
+immutable_after={p:hashlib.sha256((node/p).read_bytes()).hexdigest() for p in immutable}
+assert initial==after and immutable==immutable_after
+(out/'after_hashes.json').write_text(json.dumps({'source':after,'immutable_baseline':immutable_after},indent=2),encoding='utf-8')
+(out/'test_commands.json').write_text(json.dumps(results,indent=2),encoding='utf-8')
+print(json.dumps({'source_config_unchanged':True,'old_FAIL_reports_and_evidence_unchanged':True}),flush=True)
+

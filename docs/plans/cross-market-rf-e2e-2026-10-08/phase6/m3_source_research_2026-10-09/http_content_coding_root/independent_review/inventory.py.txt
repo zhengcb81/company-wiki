@@ -1,0 +1,20 @@
+import hashlib,json,re,sys
+from collections import Counter
+from pathlib import Path
+root=Path(r'C:\Users\郑曾波\.codex\worktrees\audit-provider-cause\company-wiki')
+node=Path(r'C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\m3_source_research_2026-10-09\http_content_coding_root')
+output=node/'independent_review'
+inventory=[]
+for p in sorted(node.iterdir()):
+    if not p.is_file() or p.name.startswith('INDEPENDENT_REVIEW'):continue
+    raw=p.read_bytes(); text=raw.decode('utf-8-sig')
+    summary=[line for line in text.splitlines() if re.search(r'\d+ (?:failed|passed)|Found .*errors|Success: no issues|ResourceWarning',line)]
+    entry={'path':str(p),'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest(),'full_content_read':True,'summary':summary}
+    if p.suffix=='.json':entry['json_parsed']=json.loads(text)
+    inventory.append(entry)
+def errors(p):
+    return Counter(re.sub(r':\d+: error:',':LINE: error:',line) for line in p.read_text(encoding='utf-8-sig').splitlines() if ': error:' in line)
+old=errors(node/'baseline-targeted-mypy.log'); new=errors(node/'targeted-mypy-after.log')
+result={'existing_evidence':inventory,'mypy':{'baseline_error_count':sum(old.values()),'after_error_count':sum(new.values()),'normalized_errors_equal':old==new,'added_errors':list((new-old).elements()),'removed_errors':list((old-new).elements()),'new_codec_transport_2_modules':'PASS (supplied log reviewed; not independently re-run)','independent_type_scope':'existing 28 diagnostics not an introduced gate'}}
+(output/'evidence_inventory.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
+print(json.dumps({'evidence_files_fully_read':len(inventory),'mypy':result['mypy']},ensure_ascii=False))

@@ -1,0 +1,1428 @@
+{
+  "schema_version": "independent-engineering-remediation-review/1",
+  "review_id": "cwp-http-6cc9959f-remediated-20261009",
+  "reviewer": "read-only independent engineering agent /root/m3_http_integration_review",
+  "sealed_at": "2026-10-09T21:31:00.447890+00:00",
+  "overall_status": "PASS",
+  "can_integrate_to_main": true,
+  "engineering_scope": "Fixed CWP HTTP content coding and parent-child acquisition chain; no company research or real-PDF-success certification",
+  "source": {
+    "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+    "commit": "6cc9959fdb7a74fcb16e92471e9584893747d1a4",
+    "baseline_commit": "c8c4dac11898c54d2124bb5ddb66f79b12485e3d",
+    "branch": "codex/m3-http-source-20261009",
+    "complete_increment_files": [
+      "src/company_wiki/source_catalog/adapter_process.py",
+      "src/company_wiki/source_catalog/bounded_content_encoding.py",
+      "src/company_wiki/source_catalog/bounded_http.py",
+      "src/company_wiki/source_catalog/official_source_flow.py",
+      "tests/integration/test_official_source_flow.py",
+      "tests/unit/test_adapter_process_budget.py",
+      "tests/unit/test_bounded_content_encoding.py"
+    ],
+    "runtime_increment_files": 4,
+    "test_increment_files": 3,
+    "initial_status": [],
+    "final_status": [],
+    "reviewer_source_write_set": [],
+    "source_config_unchanged": true,
+    "file_sha256_before": {
+      "src/company_wiki/source_catalog/download_budget.py": "db73704ff35efecff6ef50ffd49362840511a608ac72b7cd03bb87417e7d0038",
+      "src/company_wiki/source_catalog/bounded_content_encoding.py": "1b093ca0dabcc3ee628f30f506cd337107eff31f657aa8998dfef8733072ebc4",
+      "src/company_wiki/source_catalog/bounded_http.py": "3f3c5b87e825eef537c95a0a4b5bfb31cc8718085f5c64d89a6e00e501241381",
+      "src/company_wiki/source_catalog/adapter_process.py": "1ca49837c91e082e74880ffd42a4647b527f084579a65721a9459ca21db7c336",
+      "src/company_wiki/source_catalog/dayu_sdk_cli.py": "3fd47db2fee91973e69d3a798857474f0c371dbaf7759ed4d42cc5018e256bfd",
+      "src/company_wiki/source_catalog/official_source_flow.py": "673d2d795c0c3985dd4356f3e9712586204a4a13483f19155574e59d415b5443",
+      "src/company_wiki/source_catalog/official_source_cli.py": "fb9f682d3cc90fc1f87f1f96460119aebf24bab78f05554e3e8acf0b89e350a6",
+      "tests/unit/test_adapter_process_budget.py": "ee7c869d003492c8f9a81afa518e1e862ab72e7f44ff734407edcd26e278e888",
+      "tests/unit/test_bounded_content_encoding.py": "c42737ef162ceb0a00ab5f2c58b3e49ccb50db4d95253d3bfbb891f42351e323",
+      "tests/unit/test_bounded_http.py": "ef4e0f032f76459445d7f4e6de8a84c3626875992b796ddcc549b1b808dfb10a",
+      "tests/integration/test_official_source_flow.py": "d7a232431623722a75de8a0a5305e3fdb2d955d32d3fac3cca128a88a236312d",
+      "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+    },
+    "file_sha256_after": {
+      "src/company_wiki/source_catalog/download_budget.py": "db73704ff35efecff6ef50ffd49362840511a608ac72b7cd03bb87417e7d0038",
+      "src/company_wiki/source_catalog/bounded_content_encoding.py": "1b093ca0dabcc3ee628f30f506cd337107eff31f657aa8998dfef8733072ebc4",
+      "src/company_wiki/source_catalog/bounded_http.py": "3f3c5b87e825eef537c95a0a4b5bfb31cc8718085f5c64d89a6e00e501241381",
+      "src/company_wiki/source_catalog/adapter_process.py": "1ca49837c91e082e74880ffd42a4647b527f084579a65721a9459ca21db7c336",
+      "src/company_wiki/source_catalog/dayu_sdk_cli.py": "3fd47db2fee91973e69d3a798857474f0c371dbaf7759ed4d42cc5018e256bfd",
+      "src/company_wiki/source_catalog/official_source_flow.py": "673d2d795c0c3985dd4356f3e9712586204a4a13483f19155574e59d415b5443",
+      "src/company_wiki/source_catalog/official_source_cli.py": "fb9f682d3cc90fc1f87f1f96460119aebf24bab78f05554e3e8acf0b89e350a6",
+      "tests/unit/test_adapter_process_budget.py": "ee7c869d003492c8f9a81afa518e1e862ab72e7f44ff734407edcd26e278e888",
+      "tests/unit/test_bounded_content_encoding.py": "c42737ef162ceb0a00ab5f2c58b3e49ccb50db4d95253d3bfbb891f42351e323",
+      "tests/unit/test_bounded_http.py": "ef4e0f032f76459445d7f4e6de8a84c3626875992b796ddcc549b1b808dfb10a",
+      "tests/integration/test_official_source_flow.py": "d7a232431623722a75de8a0a5305e3fdb2d955d32d3fac3cca128a88a236312d",
+      "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+    },
+    "direct_readscope": [
+      {
+        "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki\\src\\company_wiki\\source_catalog\\download_budget.py",
+        "sha256": "db73704ff35efecff6ef50ffd49362840511a608ac72b7cd03bb87417e7d0038",
+        "kind": "source_context_and_config_unchanged_during_revalidation"
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki\\src\\company_wiki\\source_catalog\\bounded_content_encoding.py",
+        "sha256": "1b093ca0dabcc3ee628f30f506cd337107eff31f657aa8998dfef8733072ebc4",
+        "kind": "source_context_and_config_unchanged_during_revalidation"
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki\\src\\company_wiki\\source_catalog\\bounded_http.py",
+        "sha256": "3f3c5b87e825eef537c95a0a4b5bfb31cc8718085f5c64d89a6e00e501241381",
+        "kind": "source_context_and_config_unchanged_during_revalidation"
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki\\src\\company_wiki\\source_catalog\\adapter_process.py",
+        "sha256": "1ca49837c91e082e74880ffd42a4647b527f084579a65721a9459ca21db7c336",
+        "kind": "source_context_and_config_unchanged_during_revalidation"
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki\\src\\company_wiki\\source_catalog\\dayu_sdk_cli.py",
+        "sha256": "3fd47db2fee91973e69d3a798857474f0c371dbaf7759ed4d42cc5018e256bfd",
+        "kind": "source_context_and_config_unchanged_during_revalidation"
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki\\src\\company_wiki\\source_catalog\\official_source_flow.py",
+        "sha256": "673d2d795c0c3985dd4356f3e9712586204a4a13483f19155574e59d415b5443",
+        "kind": "source_context_and_config_unchanged_during_revalidation"
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki\\src\\company_wiki\\source_catalog\\official_source_cli.py",
+        "sha256": "fb9f682d3cc90fc1f87f1f96460119aebf24bab78f05554e3e8acf0b89e350a6",
+        "kind": "source_context_and_config_unchanged_during_revalidation"
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki\\tests\\unit\\test_adapter_process_budget.py",
+        "sha256": "ee7c869d003492c8f9a81afa518e1e862ab72e7f44ff734407edcd26e278e888",
+        "kind": "source_context_and_config_unchanged_during_revalidation"
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki\\tests\\unit\\test_bounded_content_encoding.py",
+        "sha256": "c42737ef162ceb0a00ab5f2c58b3e49ccb50db4d95253d3bfbb891f42351e323",
+        "kind": "source_context_and_config_unchanged_during_revalidation"
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki\\tests\\unit\\test_bounded_http.py",
+        "sha256": "ef4e0f032f76459445d7f4e6de8a84c3626875992b796ddcc549b1b808dfb10a",
+        "kind": "source_context_and_config_unchanged_during_revalidation"
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki\\tests\\integration\\test_official_source_flow.py",
+        "sha256": "d7a232431623722a75de8a0a5305e3fdb2d955d32d3fac3cca128a88a236312d",
+        "kind": "source_context_and_config_unchanged_during_revalidation"
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki\\config\\source_catalog.yaml",
+        "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+        "kind": "source_context_and_config_unchanged_during_revalidation"
+      }
+    ],
+    "increment_full_diff": "independent_review_remediated/source_increment_diff.txt",
+    "codegraph": "Retained uninitialized worktree limitation; no init under read-only role"
+  },
+  "original_FAIL_baseline": {
+    "reports_not_rewritten": true,
+    "protected_all_original_evidence": true,
+    "sha256_before": {
+      "independent_review/after_hashes.json": "178970904f938ae6e0a1a68d0742ca48451e6b7829124555743687f75279baca",
+      "independent_review/before_hashes.json": "178970904f938ae6e0a1a68d0742ca48451e6b7829124555743687f75279baca",
+      "independent_review/cleanup.json": "639bffdfae3631557f6ba9a2c489a464f2f05d48e7b5d00d32694cff536b8815",
+      "independent_review/conftest.py.txt": "8ad64bc7938c2b662f17daa205f8f74da15769a6644b162203143dc40437320c",
+      "independent_review/evidence_inventory.json": "c59106c4d5c2dc4c05d90ed861324f2e73722a5b4cfaf8d4168c269a6fd9d2da",
+      "independent_review/explore.py.txt": "ddb4d6514a96fd7079ea4a2f957f3133094503ea1449d900e3258e42428139a9",
+      "independent_review/final_source_git.json": "da202914bb086de124701907831c0d459d18f94b004c6d9b208bbbf7fc959375",
+      "independent_review/independent.log": "4a5db76f041db0d85092f4fd18c301df219d208b78cad1ec1ae5368d566d7cca",
+      "independent_review/independent_junit.xml": "fae58acf07d8b18fb97d4e99464da9f4abd02c38b4bd3889813b407e9d738e5e",
+      "independent_review/inventory.py.txt": "cb850901215d2b1ff6950e563186e72a9d22222741161279f35321e26deafb99",
+      "independent_review/offline_dayu_child.py.txt": "9bbfb1b7fd583559ffb65e088f2afbffe48653b75486719da8f1f2b04063c291",
+      "independent_review/parent_dayu_probe.json": "c7845b73f90f90ad571863924c7dcb7177ed3db55824285353f5777684b47a53",
+      "independent_review/parent_dayu_probe.py.txt": "d0c3a505e4e86f7b56355a57d34f23095e60bfb52a1b25c3f62267eb9bf2fd47",
+      "independent_review/responsibility.log": "7c570891f8dd01f0f679227eed4752fe33aaa25e9c66431036d7ca13a1f407b4",
+      "independent_review/run_review.py.txt": "a931a257a1b67bf578127e2fbe62d4026865c7dace8142b3c73f11caf97e7697",
+      "independent_review/source_diff.txt": "f9d797097746f0892704af48480bf9142901e67d6d2974091b5455c4ef7dddf0",
+      "independent_review/test_commands.json": "e69e1cf64a7908d73f6877590d2fdc2a522c16b0c350049de5e848548da15ef6",
+      "independent_review/test_independent_http.py.txt": "3f50e3828cea5b9e84905ce177786094abde1ecb697dbd1130c446d84bdf8759",
+      "INDEPENDENT_REVIEW.md": "a46dd494300edfa8628fe6d67a6b5f8b2ccc3b9d81703d61b57fab35351b0a4d",
+      "INDEPENDENT_REVIEW.json": "4504345c855ef4b36b5c84f9316863e7cc3e3410b2b8f8226af2b695fe9894d0"
+    },
+    "sha256_after": {
+      "independent_review/after_hashes.json": "178970904f938ae6e0a1a68d0742ca48451e6b7829124555743687f75279baca",
+      "independent_review/before_hashes.json": "178970904f938ae6e0a1a68d0742ca48451e6b7829124555743687f75279baca",
+      "independent_review/cleanup.json": "639bffdfae3631557f6ba9a2c489a464f2f05d48e7b5d00d32694cff536b8815",
+      "independent_review/conftest.py.txt": "8ad64bc7938c2b662f17daa205f8f74da15769a6644b162203143dc40437320c",
+      "independent_review/evidence_inventory.json": "c59106c4d5c2dc4c05d90ed861324f2e73722a5b4cfaf8d4168c269a6fd9d2da",
+      "independent_review/explore.py.txt": "ddb4d6514a96fd7079ea4a2f957f3133094503ea1449d900e3258e42428139a9",
+      "independent_review/final_source_git.json": "da202914bb086de124701907831c0d459d18f94b004c6d9b208bbbf7fc959375",
+      "independent_review/independent.log": "4a5db76f041db0d85092f4fd18c301df219d208b78cad1ec1ae5368d566d7cca",
+      "independent_review/independent_junit.xml": "fae58acf07d8b18fb97d4e99464da9f4abd02c38b4bd3889813b407e9d738e5e",
+      "independent_review/inventory.py.txt": "cb850901215d2b1ff6950e563186e72a9d22222741161279f35321e26deafb99",
+      "independent_review/offline_dayu_child.py.txt": "9bbfb1b7fd583559ffb65e088f2afbffe48653b75486719da8f1f2b04063c291",
+      "independent_review/parent_dayu_probe.json": "c7845b73f90f90ad571863924c7dcb7177ed3db55824285353f5777684b47a53",
+      "independent_review/parent_dayu_probe.py.txt": "d0c3a505e4e86f7b56355a57d34f23095e60bfb52a1b25c3f62267eb9bf2fd47",
+      "independent_review/responsibility.log": "7c570891f8dd01f0f679227eed4752fe33aaa25e9c66431036d7ca13a1f407b4",
+      "independent_review/run_review.py.txt": "a931a257a1b67bf578127e2fbe62d4026865c7dace8142b3c73f11caf97e7697",
+      "independent_review/source_diff.txt": "f9d797097746f0892704af48480bf9142901e67d6d2974091b5455c4ef7dddf0",
+      "independent_review/test_commands.json": "e69e1cf64a7908d73f6877590d2fdc2a522c16b0c350049de5e848548da15ef6",
+      "independent_review/test_independent_http.py.txt": "3f50e3828cea5b9e84905ce177786094abde1ecb697dbd1130c446d84bdf8759",
+      "INDEPENDENT_REVIEW.md": "a46dd494300edfa8628fe6d67a6b5f8b2ccc3b9d81703d61b57fab35351b0a4d",
+      "INDEPENDENT_REVIEW.json": "4504345c855ef4b36b5c84f9316863e7cc3e3410b2b8f8226af2b695fe9894d0"
+    },
+    "markdown_sha256": "a46dd494300edfa8628fe6d67a6b5f8b2ccc3b9d81703d61b57fab35351b0a4d",
+    "json_sha256": "4504345c855ef4b36b5c84f9316863e7cc3e3410b2b8f8226af2b695fe9894d0",
+    "original47_source_sha256": "3f50e3828cea5b9e84905ce177786094abde1ecb697dbd1130c446d84bdf8759",
+    "reexecuted47_source_sha256": "3f50e3828cea5b9e84905ce177786094abde1ecb697dbd1130c446d84bdf8759",
+    "test_assertions_changed": false
+  },
+  "issue_closure": [
+    {
+      "id": "HTTP-IR-01",
+      "original_severity": "P2",
+      "status": "PASS",
+      "mechanism": "Two actual zlib/raw candidates; bounded provisional spools; no speculative SDK delivery; after selection entity accounted once; valid raw no header guessing; standard preference at dual-valid EOF",
+      "unchanged_original_tests": [
+        "test_legal_raw_deflate_with_zlib_like_prefix_is_accepted[1]",
+        "test_legal_raw_deflate_with_zlib_like_prefix_is_accepted[2]",
+        "test_legal_raw_deflate_with_zlib_like_prefix_is_accepted[166]"
+      ],
+      "adjacent_tests": [
+        "test_real_long_ambiguity_no_provisional_delivery_spills_then_selects_exact_raw",
+        "test_long_ambiguity_public_http_body_charged_once_and_spool_closed[513]",
+        "test_long_ambiguity_public_http_body_charged_once_and_spool_closed[65536]",
+        "test_long_ambiguity_public_http_body_charged_once_and_spool_closed[131091]",
+        "test_both_candidate_provisional_allocations_stop_at_allowance_plus_one",
+        "test_total_deadline_callback_interrupts_internal_candidate_loop",
+        "test_long_ambiguity_invalid_eof_or_tail_is_refused_with_spool_cleanup[truncate]",
+        "test_long_ambiguity_invalid_eof_or_tail_is_refused_with_spool_cleanup[garbage]"
+      ]
+    },
+    {
+      "id": "HTTP-IR-02",
+      "original_severity": "P2",
+      "status": "PASS",
+      "mechanism": "Finite typed capture observation applied at persist/import/capture failures and retained import recovery; no arbitrary receipt/header/path copy",
+      "unchanged_original_tests": [
+        "test_public_cli_projects_actual_finite_http_fields_at_every_failure[mime-refusal]"
+      ],
+      "adjacent_tests": [
+        "test_late_import_failure_projection_discards_arbitrary_receipt_fields",
+        "test_public_recover_mime_refusal_retains_exact_finite_http_observation_without_get"
+      ]
+    },
+    {
+      "id": "HTTP-IR-03",
+      "original_severity": "P2",
+      "status": "PASS",
+      "mechanism": "sync/async stream owns active iterator and decoder/spools, idempotent close/aclose; primary exception preserved",
+      "unchanged_original_tests": [
+        "test_async_response_early_close_closes_active_iterator_immediately",
+        "test_async_timeout_closes_stream_and_active_iterator"
+      ],
+      "adjacent_tests": [
+        "test_cancel_during_rolled_ambiguous_response_closes_active_iterator_and_spools"
+      ]
+    },
+    {
+      "id": "HTTP-IR-04",
+      "original_severity": "P3",
+      "status": "PASS",
+      "mechanism": "handled final wire completeness preserved independently of public entity/fee completeness; missing/bad wire observation still unknown, not new permission gate",
+      "unchanged_original_tests": [
+        "test_failure_final_partial_wire_observation_preserves_unknown"
+      ],
+      "supplied_tests": "False/None/True cases inspected in 7-file increment"
+    }
+  ],
+  "new_blocking_findings": [],
+  "validation": {
+    "commands": [
+      {
+        "stage": "original47",
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "pytest",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\http-independent-remediated-6cc9959-20261009\\test_independent_http.py",
+          "-q",
+          "--tb=short",
+          "-p",
+          "no:cacheprovider",
+          "--basetemp",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\http-independent-remediated-6cc9959-20261009\\original47",
+          "--junitxml",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\independent_review_remediated\\original47.xml"
+        ],
+        "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+        "returncode": 0,
+        "elapsed_seconds": 4.668,
+        "external_requests": 0,
+        "model_calls": 0,
+        "charged_cost_usd": "0",
+        "log": "original47.log"
+      },
+      {
+        "stage": "adjacent",
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "pytest",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\http-independent-remediated-6cc9959-20261009\\test_remediated_adjacent.py",
+          "-q",
+          "--tb=short",
+          "-p",
+          "no:cacheprovider",
+          "--basetemp",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\http-independent-remediated-6cc9959-20261009\\adjacent",
+          "--junitxml",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\independent_review_remediated\\adjacent.xml"
+        ],
+        "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+        "returncode": 0,
+        "elapsed_seconds": 3.839,
+        "external_requests": 0,
+        "model_calls": 0,
+        "charged_cost_usd": "0",
+        "log": "adjacent.log"
+      },
+      {
+        "stage": "actual_parent_owned_cli",
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-u",
+          "-X",
+          "utf8",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\http-independent-remediated-6cc9959-20261009\\parent_dayu_probe.py"
+        ],
+        "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+        "returncode": 0,
+        "elapsed_seconds": 5.951,
+        "external_requests": 0,
+        "model_calls": 0,
+        "charged_cost_usd": "0",
+        "log": "actual_parent_owned_cli.log"
+      }
+    ],
+    "original47": {
+      "passed": 47,
+      "failed": 0,
+      "pytest_seconds": 1.77,
+      "cases": [
+        {
+          "name": "test_valid_compressed_with_independent_oracle_and_chunk_boundaries[1-gzip]",
+          "seconds": 0.113,
+          "status": "PASS"
+        },
+        {
+          "name": "test_valid_compressed_with_independent_oracle_and_chunk_boundaries[1-multi-gzip]",
+          "seconds": 0.002,
+          "status": "PASS"
+        },
+        {
+          "name": "test_valid_compressed_with_independent_oracle_and_chunk_boundaries[1-deflate]",
+          "seconds": 0.002,
+          "status": "PASS"
+        },
+        {
+          "name": "test_valid_compressed_with_independent_oracle_and_chunk_boundaries[1-raw-deflate]",
+          "seconds": 0.002,
+          "status": "PASS"
+        },
+        {
+          "name": "test_valid_compressed_with_independent_oracle_and_chunk_boundaries[2-gzip]",
+          "seconds": 0.002,
+          "status": "PASS"
+        },
+        {
+          "name": "test_valid_compressed_with_independent_oracle_and_chunk_boundaries[2-multi-gzip]",
+          "seconds": 0.002,
+          "status": "PASS"
+        },
+        {
+          "name": "test_valid_compressed_with_independent_oracle_and_chunk_boundaries[2-deflate]",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_valid_compressed_with_independent_oracle_and_chunk_boundaries[2-raw-deflate]",
+          "seconds": 0.002,
+          "status": "PASS"
+        },
+        {
+          "name": "test_valid_compressed_with_independent_oracle_and_chunk_boundaries[7-gzip]",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_valid_compressed_with_independent_oracle_and_chunk_boundaries[7-multi-gzip]",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_valid_compressed_with_independent_oracle_and_chunk_boundaries[7-deflate]",
+          "seconds": 0.042,
+          "status": "PASS"
+        },
+        {
+          "name": "test_valid_compressed_with_independent_oracle_and_chunk_boundaries[7-raw-deflate]",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_valid_compressed_with_independent_oracle_and_chunk_boundaries[999999-gzip]",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_valid_compressed_with_independent_oracle_and_chunk_boundaries[999999-multi-gzip]",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_valid_compressed_with_independent_oracle_and_chunk_boundaries[999999-deflate]",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_valid_compressed_with_independent_oracle_and_chunk_boundaries[999999-raw-deflate]",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_legal_raw_deflate_with_zlib_like_prefix_is_accepted[1]",
+          "seconds": 0.002,
+          "status": "PASS"
+        },
+        {
+          "name": "test_legal_raw_deflate_with_zlib_like_prefix_is_accepted[2]",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_legal_raw_deflate_with_zlib_like_prefix_is_accepted[166]",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_bad_compression_eof_crc_and_trailing_bytes_refused[truncate-gzip]",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_bad_compression_eof_crc_and_trailing_bytes_refused[truncate-deflate]",
+          "seconds": 0.002,
+          "status": "PASS"
+        },
+        {
+          "name": "test_bad_compression_eof_crc_and_trailing_bytes_refused[truncate-raw-deflate]",
+          "seconds": 0.002,
+          "status": "PASS"
+        },
+        {
+          "name": "test_bad_compression_eof_crc_and_trailing_bytes_refused[garbage-gzip]",
+          "seconds": 0.002,
+          "status": "PASS"
+        },
+        {
+          "name": "test_bad_compression_eof_crc_and_trailing_bytes_refused[garbage-deflate]",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_bad_compression_eof_crc_and_trailing_bytes_refused[garbage-raw-deflate]",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_bad_compression_eof_crc_and_trailing_bytes_refused[checksum-gzip]",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_bad_compression_eof_crc_and_trailing_bytes_refused[checksum-deflate]",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_bad_compression_eof_crc_and_trailing_bytes_refused[checksum-raw-deflate]",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_overage_preserved_before_delivery_and_prior_fee_retained[wire]",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_overage_preserved_before_delivery_and_prior_fee_retained[entity]",
+          "seconds": 0.002,
+          "status": "PASS"
+        },
+        {
+          "name": "test_compressed_redirect_error_retry_share_both_counters",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_bodyless_metadata_is_not_billed[HEAD-200]",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_bodyless_metadata_is_not_billed[GET-204]",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_bodyless_metadata_is_not_billed[GET-304]",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_late_sync_compressed_wire_counted_without_entity_delivery",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_async_timeout_closes_stream_and_active_iterator",
+          "seconds": 0.035,
+          "status": "PASS"
+        },
+        {
+          "name": "test_async_response_early_close_closes_active_iterator_immediately",
+          "seconds": 0.015,
+          "status": "PASS"
+        },
+        {
+          "name": "test_actual_subprocess_final_charges_once_not_progress",
+          "seconds": 0.277,
+          "status": "PASS"
+        },
+        {
+          "name": "test_actual_subprocess_hard_stop_last_checkpoint_is_lower_bound",
+          "seconds": 0.513,
+          "status": "PASS"
+        },
+        {
+          "name": "test_legacy_or_bad_wire_optional_is_unknown_and_keeps_real_bill[None]",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_legacy_or_bad_wire_optional_is_unknown_and_keeps_real_bill[True]",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_legacy_or_bad_wire_optional_is_unknown_and_keeps_real_bill[-1]",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_legacy_or_bad_wire_optional_is_unknown_and_keeps_real_bill[12]",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_failure_final_partial_wire_observation_preserves_unknown",
+          "seconds": 0.004,
+          "status": "PASS"
+        },
+        {
+          "name": "test_prelaunch_timeout_zero_usage_is_proven_not_unknown",
+          "seconds": 0.008,
+          "status": "PASS"
+        },
+        {
+          "name": "test_public_cli_projects_actual_finite_http_fields_at_every_failure[header-refusal]",
+          "seconds": 0.039,
+          "status": "PASS"
+        },
+        {
+          "name": "test_public_cli_projects_actual_finite_http_fields_at_every_failure[mime-refusal]",
+          "seconds": 0.038,
+          "status": "PASS"
+        }
+      ],
+      "log": "independent_review_remediated/original47.log"
+    },
+    "new_adjacent_controls": {
+      "passed": 11,
+      "failed": 0,
+      "pytest_seconds": 0.74,
+      "cases": [
+        {
+          "name": "test_real_long_ambiguity_no_provisional_delivery_spills_then_selects_exact_raw",
+          "seconds": 0.115,
+          "status": "PASS"
+        },
+        {
+          "name": "test_long_ambiguity_public_http_body_charged_once_and_spool_closed[513]",
+          "seconds": 0.006,
+          "status": "PASS"
+        },
+        {
+          "name": "test_long_ambiguity_public_http_body_charged_once_and_spool_closed[65536]",
+          "seconds": 0.005,
+          "status": "PASS"
+        },
+        {
+          "name": "test_long_ambiguity_public_http_body_charged_once_and_spool_closed[131091]",
+          "seconds": 0.004,
+          "status": "PASS"
+        },
+        {
+          "name": "test_both_candidate_provisional_allocations_stop_at_allowance_plus_one",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_total_deadline_callback_interrupts_internal_candidate_loop",
+          "seconds": 0.001,
+          "status": "PASS"
+        },
+        {
+          "name": "test_long_ambiguity_invalid_eof_or_tail_is_refused_with_spool_cleanup[truncate]",
+          "seconds": 0.003,
+          "status": "PASS"
+        },
+        {
+          "name": "test_long_ambiguity_invalid_eof_or_tail_is_refused_with_spool_cleanup[garbage]",
+          "seconds": 0.003,
+          "status": "PASS"
+        },
+        {
+          "name": "test_cancel_during_rolled_ambiguous_response_closes_active_iterator_and_spools",
+          "seconds": 0.008,
+          "status": "PASS"
+        },
+        {
+          "name": "test_late_import_failure_projection_discards_arbitrary_receipt_fields",
+          "seconds": 0.002,
+          "status": "PASS"
+        },
+        {
+          "name": "test_public_recover_mime_refusal_retains_exact_finite_http_observation_without_get",
+          "seconds": 0.083,
+          "status": "PASS"
+        }
+      ],
+      "log": "independent_review_remediated/adjacent.log",
+      "reason": "New two-candidate buffering and ownership scheme introduced concrete adjacent risks not covered by original47"
+    },
+    "actual_CWP_parent_owned_CLI": {
+      "stage": "actual_parent_owned_dayu_cli_offline",
+      "results": [
+        {
+          "mode": "gzip",
+          "status": "PASS",
+          "outcome": "original_staged",
+          "source_sha256": "70de41eb0ae4468e6c1ea6014dff0db8fcad8ffc4c4238d356e45a22cb740ddb",
+          "mime": "text/html",
+          "entity_bytes": 314,
+          "wire_bytes": 159,
+          "cost_usd": "0",
+          "wire_usage_complete": true,
+          "command": [
+            "C:\\Miniconda\\python.exe",
+            "-X",
+            "utf8",
+            "-B",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\http-independent-remediated-6cc9959-20261009\\offline_dayu_child.py",
+            "gzip",
+            "--market",
+            "US",
+            "--adapter-name",
+            "review-dayu",
+            "--adapter-version",
+            "1.0.0",
+            "--provider-state-root",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\http-independent-remediated-6cc9959-20261009\\state-semver-gzip"
+          ]
+        },
+        {
+          "mode": "deflate",
+          "status": "PASS",
+          "outcome": "original_staged",
+          "source_sha256": "70de41eb0ae4468e6c1ea6014dff0db8fcad8ffc4c4238d356e45a22cb740ddb",
+          "mime": "text/html",
+          "entity_bytes": 314,
+          "wire_bytes": 147,
+          "cost_usd": "0",
+          "wire_usage_complete": true,
+          "command": [
+            "C:\\Miniconda\\python.exe",
+            "-X",
+            "utf8",
+            "-B",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\http-independent-remediated-6cc9959-20261009\\offline_dayu_child.py",
+            "deflate",
+            "--market",
+            "US",
+            "--adapter-name",
+            "review-dayu",
+            "--adapter-version",
+            "1.0.0",
+            "--provider-state-root",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\http-independent-remediated-6cc9959-20261009\\state-semver-deflate"
+          ]
+        },
+        {
+          "mode": "raw-deflate",
+          "status": "PASS",
+          "outcome": "original_staged",
+          "source_sha256": "70de41eb0ae4468e6c1ea6014dff0db8fcad8ffc4c4238d356e45a22cb740ddb",
+          "mime": "text/html",
+          "entity_bytes": 314,
+          "wire_bytes": 141,
+          "cost_usd": "0",
+          "wire_usage_complete": true,
+          "command": [
+            "C:\\Miniconda\\python.exe",
+            "-X",
+            "utf8",
+            "-B",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\http-independent-remediated-6cc9959-20261009\\offline_dayu_child.py",
+            "raw-deflate",
+            "--market",
+            "US",
+            "--adapter-name",
+            "review-dayu",
+            "--adapter-version",
+            "1.0.0",
+            "--provider-state-root",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\http-independent-remediated-6cc9959-20261009\\state-semver-raw-deflate"
+          ]
+        },
+        {
+          "mode": "truncated",
+          "status": "PASS",
+          "outcome": "expected_refusal",
+          "error_code": "incomplete_response",
+          "usage_complete": true,
+          "entity_bytes": 314,
+          "wire_bytes": 158,
+          "cost_usd": "0",
+          "wire_usage_complete": true,
+          "command": [
+            "C:\\Miniconda\\python.exe",
+            "-X",
+            "utf8",
+            "-B",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\http-independent-remediated-6cc9959-20261009\\offline_dayu_child.py",
+            "truncated",
+            "--market",
+            "US",
+            "--adapter-name",
+            "review-dayu",
+            "--adapter-version",
+            "1.0.0",
+            "--provider-state-root",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\http-independent-remediated-6cc9959-20261009\\state-semver-truncated"
+          ]
+        },
+        {
+          "mode": "wrong-year",
+          "status": "PASS",
+          "outcome": "expected_refusal",
+          "error_code": "fiscal_period_unresolved",
+          "usage_complete": true,
+          "entity_bytes": 314,
+          "wire_bytes": 158,
+          "cost_usd": "0",
+          "wire_usage_complete": true,
+          "command": [
+            "C:\\Miniconda\\python.exe",
+            "-X",
+            "utf8",
+            "-B",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\http-independent-remediated-6cc9959-20261009\\offline_dayu_child.py",
+            "wrong-year",
+            "--market",
+            "US",
+            "--adapter-name",
+            "review-dayu",
+            "--adapter-version",
+            "1.0.0",
+            "--provider-state-root",
+            "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\http-independent-remediated-6cc9959-20261009\\state-semver-wrong-year"
+          ]
+        }
+      ],
+      "elapsed_seconds": 5.282,
+      "external_requests": 0,
+      "model_calls": 0,
+      "real_dayu_imported": false,
+      "real_cwp_parent_child_protocol_executed": true,
+      "mock_provider": true
+    },
+    "supplied_responsibility_tests": {
+      "source": "GREEN-independent-roots-final.json/.log",
+      "total": 110,
+      "status": "PASS",
+      "pytest_seconds": 31.21,
+      "warnings": 0,
+      "independently_repeated": false,
+      "reason_not_repeated": "User scoped revalidation to original47, actual parent5 and concrete adjacent controls"
+    },
+    "supplied_public_CLI_projections": {
+      "source": "GREEN-final-projection.log",
+      "selected_cases": 3,
+      "status": "PASS",
+      "paths": [
+        "MIME",
+        "SHA",
+        "storage"
+      ],
+      "independently_repeated": false
+    },
+    "supplied_static": {
+      "two_module_mypy": "PASS",
+      "seven_file_ruff": "PASS",
+      "diff_check": "PASS",
+      "full_old28_type_scope_repeated": false
+    }
+  },
+  "new_dual_candidate_probe": {
+    "wire_bytes": 131091,
+    "oracle_raw_entity_bytes": 131071,
+    "prefix_wire_bytes_before_discriminator": 131081,
+    "provisional_sdk_bytes_before_discriminator": 0,
+    "candidate_states_at_prefix": [
+      "active",
+      "active"
+    ],
+    "provisional_entity_sizes_at_prefix": [
+      131069,
+      131066
+    ],
+    "both_actual_spools_rolled_over": true,
+    "max_delivered_chunk": 65536,
+    "public_http_chunk_splits": [
+      513,
+      65536,
+      131091
+    ],
+    "actual_entity_charged_once": 131071,
+    "spools_closed_after_success_error_cancel": true,
+    "both_candidate_prefix_cap_probe": 257,
+    "deadline_callback_interrupt_at_call": 4,
+    "cancellation_observed_wire_bytes": 131081,
+    "cancellation_selected_entity_bytes": 0,
+    "prior_fixture_cost_preserved": "0.25",
+    "actual_charged_external_cost": "0",
+    "source": "independent_review_remediated/test_remediated_adjacent.py.txt",
+    "oracle": "zlib.decompress(real_raw_bytes,-15)",
+    "dual_valid_polyglot_dynamically_tested": false,
+    "dual_valid_EOF_standard_preference": "source-reviewed candidate order/finish branch"
+  },
+  "read_supplied_evidence": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\GREEN-final-projection.log",
+      "bytes": 1146,
+      "sha256": "fd01fe885a41e3f5df9cde7e2c9e3f9f990d31bdf4398fdbb21d2a966ccdc98e",
+      "full_content_read": true,
+      "summary": [
+        "====================== 3 passed, 33 deselected in 0.94s ======================="
+      ]
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\GREEN-independent-roots-attempt1.json",
+      "bytes": 603,
+      "sha256": "b4ca7b50ae6ab54bd21072333e53e37f47454d113da7947bfec3bdf269cdd29b",
+      "full_content_read": true,
+      "summary": [],
+      "parsed_json": {
+        "observed_at": "2026-10-09T21:12:00.855239+00:00",
+        "command": [
+          "python",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "pytest",
+          "-q",
+          "--tb=short",
+          "-p",
+          "no:cacheprovider",
+          "tests/unit/test_bounded_content_encoding.py",
+          "tests/unit/test_bounded_http.py",
+          "tests/unit/test_adapter_process_budget.py",
+          "tests/unit/test_dayu_sdk_cli_fetch_boundary.py",
+          "tests/integration/test_official_source_flow.py"
+        ],
+        "returncode": 4,
+        "elapsed_seconds": 2.816,
+        "owned_temp_restored": true,
+        "external_requests": 0,
+        "model_calls": 0
+      }
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\GREEN-independent-roots-attempt1.log",
+      "bytes": 1119,
+      "sha256": "013313acdf2a50cda92c1cd78e1f7a4f163dc7f04aac7a7f5e7cea6fca96d4dc",
+      "full_content_read": true,
+      "summary": []
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\GREEN-independent-roots-attempt2.json",
+      "bytes": 591,
+      "sha256": "6f0f293ace5a715a4b2b966824dcdee6f9713e25f562ecc8c581c4e2626ffe91",
+      "full_content_read": true,
+      "summary": [],
+      "parsed_json": {
+        "observed_at": "2026-10-09T21:12:54.102466+00:00",
+        "command": [
+          "python",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "pytest",
+          "-q",
+          "--tb=short",
+          "-p",
+          "no:cacheprovider",
+          "tests/unit/test_bounded_content_encoding.py",
+          "tests/unit/test_bounded_http.py",
+          "tests/unit/test_adapter_process_budget.py",
+          "tests/unit/test_dayu_sdk_fetch.py",
+          "tests/integration/test_official_source_flow.py"
+        ],
+        "returncode": 0,
+        "elapsed_seconds": 33.511,
+        "owned_temp_restored": true,
+        "external_requests": 0,
+        "model_calls": 0
+      }
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\GREEN-independent-roots-attempt2.log",
+      "bytes": 2224,
+      "sha256": "397981de6b0ed482fda63416877e4dd89f945423cfe19174ffaf8d6d6c04fbc7",
+      "full_content_read": true,
+      "summary": [
+        "============================== warnings summary ===============================",
+        "  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.",
+        "-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html",
+        "======================= 108 passed, 1 warning in 30.65s ======================="
+      ]
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\GREEN-independent-roots-final.json",
+      "bytes": 591,
+      "sha256": "0e79b8b1d8152534f77d5eb1aa7041ea568ba34d87301050ed67a533975c5dba",
+      "full_content_read": true,
+      "summary": [],
+      "parsed_json": {
+        "observed_at": "2026-10-09T21:15:27.315345+00:00",
+        "command": [
+          "python",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "pytest",
+          "-q",
+          "--tb=short",
+          "-p",
+          "no:cacheprovider",
+          "tests/unit/test_bounded_content_encoding.py",
+          "tests/unit/test_bounded_http.py",
+          "tests/unit/test_adapter_process_budget.py",
+          "tests/unit/test_dayu_sdk_fetch.py",
+          "tests/integration/test_official_source_flow.py"
+        ],
+        "returncode": 0,
+        "elapsed_seconds": 33.847,
+        "owned_temp_restored": true,
+        "external_requests": 0,
+        "model_calls": 0
+      }
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\GREEN-independent-roots-final.log",
+      "bytes": 1604,
+      "sha256": "e6d054b2cab02338ab902062d2b870eea2a68df6e791c323f52780528e1d10b6",
+      "full_content_read": true,
+      "summary": [
+        "============================ 110 passed in 31.21s ============================="
+      ]
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\IMPLEMENTATION.md",
+      "bytes": 10982,
+      "sha256": "bf6fcb69bf04e60907a51437cc4750e70acbd0df607a36f44ae2f0620ed2c34f",
+      "full_content_read": true,
+      "summary": [
+        "- 新codec先21FAIL；父桥/capture另先13FAIL/34PASS，async实际迭代器关闭另1FAIL/警告，都保留原日志。实现后集中91PASS/30.51秒，无resource warning，自有TEMP恢复、外部模型0、Dayu零改动。新codec/transport额外mypy2模块PASS；扩大的7文件检查28条既有动态异常/外部SDK/Decimal联合类型诊断，与未改主线6文件基线28条相同，未伪称全范围类型绿或加新日常门禁。"
+      ]
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\real_sse_after_codec.json",
+      "bytes": 2982,
+      "sha256": "aecc368d0e69aa1593a3f7f0a080be40cf10d440d8a5a6aaf6c29714ee06f4fe",
+      "full_content_read": true,
+      "summary": [],
+      "parsed_json": {
+        "started_at": "2026-10-09T20:45:16.293431+00:00",
+        "purpose": "one isolated genuine SSE public capture then exact raw SourceRef replay and zero-GET reuse; not new executor or review",
+        "request": {
+          "schema_version": "official-source-capture-request/1",
+          "request_id": "root-isolated-sse-compressed-e2e-204516",
+          "source": {
+            "entity": "中微公司",
+            "document_kind": "regulatory_filing",
+            "title": "发行股份及支付现金购买资产并募集配套资金报告书",
+            "publisher": "上海证券交易所",
+            "source_url": "https://static.sse.com.cn/disclosure/listedinfo/announcement/c/new/2026-05-13/688012_20260513_TCLM.pdf",
+            "market": "CN",
+            "security_id": "688012",
+            "published_date": "2026-05-13",
+            "fiscal_year": null,
+            "fiscal_period": null,
+            "language": "zh",
+            "provider": "official"
+          },
+          "max_bytes": 16777216,
+          "max_seconds": 30,
+          "max_cost_usd": "0",
+          "mime_type": "application/pdf"
+        },
+        "request_source": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\requests\\material-0-v2.json",
+        "model_calls": 0,
+        "raw_production_config_written": false,
+        "runtime_root": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+        "outcome": "observed_failure",
+        "exception_type": "OfficialSourceError",
+        "error_code": null,
+        "capture_id": "d9c989c83c804a389a2b040002a3428c",
+        "capture_receipt": {
+          "capture_method": "bounded_http",
+          "tool_name": "company-wiki-official-source",
+          "tool_call_id": "http-7ffaa49dc83847c0868f6d2e03202a28",
+          "http_requests": 1,
+          "started_at": "2026-10-09T20:45:16.466170+00:00",
+          "http_status": 200,
+          "effective_url": "https://static.sse.com.cn/disclosure/listedinfo/announcement/c/new/2026-05-13/688012_20260513_TCLM.pdf",
+          "response_mime_type": "text/html",
+          "http_observation": {
+            "status_code": 200,
+            "mime_type": "text/html",
+            "content_encoding": "gzip",
+            "wire_content_length": null
+          },
+          "captured_at": "2026-10-09T20:45:18.156824+00:00",
+          "response_bytes": 7373,
+          "content_sha256": "cbdc78de675c8fad977aff8e3ef8cb04a0659e67f3a43f87fb59ce22377e9a93",
+          "usage_complete": true,
+          "http_wire_bytes": 3872,
+          "http_wire_usage_complete": true,
+          "acquisition_usage": {
+            "schema_version": "1.0",
+            "response_bytes": 7373,
+            "cost_usd": "0"
+          },
+          "cumulative_acquisition_usage": {
+            "schema_version": "1.0",
+            "response_bytes": 7373,
+            "cost_usd": "0"
+          }
+        },
+        "acquisition_usage": {
+          "schema_version": "1.0",
+          "response_bytes": 7373,
+          "cost_usd": "0"
+        },
+        "acquisition_usage_complete": true,
+        "provider_started": true,
+        "owned_temp_bytes_before_cleanup": 10000,
+        "owned_temp_restored": true,
+        "finished_at": "2026-10-09T20:45:19.131868+00:00",
+        "elapsed_seconds": 2.838
+      }
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\RED-cleanup-primary-product.log",
+      "bytes": 7258,
+      "sha256": "e720d0c1cf7df30fba6b7b59c49562c9cbdb2add7266dbd2e859b1f87c5b5429",
+      "full_content_read": true,
+      "summary": [
+        "====================== 2 failed, 36 deselected in 0.95s ======================="
+      ]
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\RED-cleanup-primary.log",
+      "bytes": 5846,
+      "sha256": "4004337bb3a62a7c69ddaae6478ebf754d40ff0401f490b44d301841829ead10",
+      "full_content_read": true,
+      "summary": [
+        "============================== warnings summary ===============================",
+        "  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.",
+        "    warnings.warn(pytest.PytestUnraisableExceptionWarning(msg))",
+        "-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html",
+        "================= 36 deselected, 1 warning, 2 errors in 0.82s =================",
+        "See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.",
+        "  warnings.warn(pytest.PytestUnraisableExceptionWarning(msg))"
+      ]
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\RED-independent-roots.json",
+      "bytes": 662,
+      "sha256": "3be126da62c16e56da8f7f4c27852c2eb930875734ec7854737c694113ba77e0",
+      "full_content_read": true,
+      "summary": [],
+      "parsed_json": {
+        "observed_at": "2026-10-09T21:09:44.697339+00:00",
+        "command": [
+          "python",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "pytest",
+          "-q",
+          "--tb=short",
+          "-p",
+          "no:cacheprovider",
+          "tests/unit/test_bounded_content_encoding.py",
+          "tests/unit/test_adapter_process_budget.py",
+          "tests/integration/test_official_source_flow.py",
+          "-k",
+          "raw_deflate_with_legal_zlib_prefix or consumer_stops_early or handled_failure_does_not_infer or public_cli_keeps_completed"
+        ],
+        "returncode": 1,
+        "elapsed_seconds": 10.563,
+        "owned_temp_restored": true,
+        "baseline": "c8c4dac11898c54d2124bb5ddb66f79b12485e3d"
+      }
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\RED-independent-roots.log",
+      "bytes": 34197,
+      "sha256": "ab8f8d73e8e6db7d782a0e7e9774c1ac912028b6591eb039e35604b798e46f9b",
+      "full_content_read": true,
+      "summary": [
+        "============================== warnings summary ===============================",
+        "  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.",
+        "  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.",
+        "  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.",
+        "  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.",
+        "  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.",
+        "-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html",
+        "=========== 16 failed, 1 passed, 72 deselected, 5 warnings in 3.90s ==========="
+      ]
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\source-independent-roots-commit.json",
+      "bytes": 672,
+      "sha256": "92065c7d21f1c0a5d974aff8f0e447342f6e8bd17b31a6e8456c3d5d18cec011",
+      "full_content_read": true,
+      "summary": [],
+      "parsed_json": {
+        "observed_at": "2026-10-09T21:17:59.792719+00:00",
+        "returncode": 0,
+        "elapsed_seconds": 17.621,
+        "parent": "c8c4dac11898c54d2124bb5ddb66f79b12485e3d",
+        "head": "6cc9959fdb7a74fcb16e92471e9584893747d1a4",
+        "files": [
+          "src/company_wiki/source_catalog/adapter_process.py",
+          "src/company_wiki/source_catalog/bounded_content_encoding.py",
+          "src/company_wiki/source_catalog/bounded_http.py",
+          "src/company_wiki/source_catalog/official_source_flow.py",
+          "tests/unit/test_adapter_process_budget.py",
+          "tests/unit/test_bounded_content_encoding.py",
+          "tests/integration/test_official_source_flow.py"
+        ],
+        "hooks_bypassed": false
+      }
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\source-independent-roots-commit.log",
+      "bytes": 633,
+      "sha256": "11d60a40cee4c186b728381736c414798cf39632ff7f429bf32b8f0f499c8c8d",
+      "full_content_read": true,
+      "summary": []
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\source-independent-roots-push.json",
+      "bytes": 218,
+      "sha256": "a0a8433c7fa356fce5ccc68ad41845c997c3e5433fec9baf03f089821f4ec59a",
+      "full_content_read": true,
+      "summary": [],
+      "parsed_json": {
+        "observed_at": "2026-10-09T21:21:15.937624+00:00",
+        "returncode": 0,
+        "elapsed_seconds": 155.717,
+        "head": "6cc9959fdb7a74fcb16e92471e9584893747d1a4",
+        "hooks_bypassed": false,
+        "main_merged": false
+      }
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\source-independent-roots-push.log",
+      "bytes": 386,
+      "sha256": "9a6fdd071a4a755f6894ee5b9311ddbaad75526a9ae6dee96335c060654e5711",
+      "full_content_read": true,
+      "summary": [
+        "====================== 2528 passed in 141.33s (0:02:21) ======================="
+      ]
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\static-independent-roots-diff.log",
+      "bytes": 2,
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+      "full_content_read": true,
+      "summary": []
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\static-independent-roots-mypy.log",
+      "bytes": 46,
+      "sha256": "c36212e745781927e385ab84e5dc3b849ab3a6f6236a886e9e72dd4790c5c70d",
+      "full_content_read": true,
+      "summary": [
+        "Success: no issues found in 2 source files"
+      ]
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\static-independent-roots-ruff.log",
+      "bytes": 22,
+      "sha256": "881513cd027e0334026cfcbad052e34fecb3f2c1fef5ab000c86973bc0196cd7",
+      "full_content_read": true,
+      "summary": [
+        "All checks passed!"
+      ]
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\static-independent-roots.json",
+      "bytes": 1312,
+      "sha256": "842d37f46e24489613ff22fd474d10284e738a72aace672b00115edcd2b5cfe5",
+      "full_content_read": true,
+      "summary": [],
+      "parsed_json": {
+        "observed_at": "2026-10-09T21:16:43.574881+00:00",
+        "checks": [
+          {
+            "kind": "ruff",
+            "returncode": 0,
+            "command": [
+              "python",
+              "-X",
+              "utf8",
+              "-B",
+              "-m",
+              "ruff",
+              "check",
+              "src/company_wiki/source_catalog/adapter_process.py",
+              "src/company_wiki/source_catalog/bounded_content_encoding.py",
+              "src/company_wiki/source_catalog/bounded_http.py",
+              "src/company_wiki/source_catalog/official_source_flow.py",
+              "tests/unit/test_adapter_process_budget.py",
+              "tests/unit/test_bounded_content_encoding.py",
+              "tests/integration/test_official_source_flow.py"
+            ]
+          },
+          {
+            "kind": "mypy",
+            "returncode": 0,
+            "command": [
+              "python",
+              "-X",
+              "utf8",
+              "-B",
+              "-m",
+              "mypy",
+              "--follow-imports=skip",
+              "--ignore-missing-imports",
+              "--no-incremental",
+              "src/company_wiki/source_catalog/bounded_content_encoding.py",
+              "src/company_wiki/source_catalog/bounded_http.py"
+            ]
+          },
+          {
+            "kind": "diff",
+            "returncode": 0,
+            "command": [
+              "git",
+              "diff",
+              "--check"
+            ]
+          }
+        ],
+        "owned_temp_restored": true
+      }
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\http_content_coding_root\\typecheck-independent-roots-attempt1.log",
+      "bytes": 46,
+      "sha256": "c36212e745781927e385ab84e5dc3b849ab3a6f6236a886e9e72dd4790c5c70d",
+      "full_content_read": true,
+      "summary": [
+        "Success: no issues found in 2 source files"
+      ]
+    }
+  ],
+  "permissions_and_writes": {
+    "external_requests": 0,
+    "real_GET_requests": 0,
+    "model_calls": 0,
+    "charged_cost_usd": "0",
+    "Dayu_files_written": false,
+    "production_config_or_raw_or_original_runs_written": false,
+    "StockWiki_written": false,
+    "new_approval_or_budget_gate": false,
+    "public_usage_schema_3_fields_preserved": true,
+    "unknown_wire_or_fee_policy_weakened": false,
+    "permanent_write_set": [
+      "INDEPENDENT_REVIEW_REMEDIATED.md",
+      "INDEPENDENT_REVIEW_REMEDIATED.json",
+      "independent_review_remediated/actual_parent_owned_cli.log",
+      "independent_review_remediated/adjacent.log",
+      "independent_review_remediated/adjacent.xml",
+      "independent_review_remediated/after_hashes.json",
+      "independent_review_remediated/before_hashes.json",
+      "independent_review_remediated/cleanup.json",
+      "independent_review_remediated/conftest.py.txt",
+      "independent_review_remediated/final_source_git.json",
+      "independent_review_remediated/offline_dayu_child.py.txt",
+      "independent_review_remediated/original47.log",
+      "independent_review_remediated/original47.xml",
+      "independent_review_remediated/parent_dayu_probe.json",
+      "independent_review_remediated/parent_dayu_probe.py.txt",
+      "independent_review_remediated/run_remediated.py.txt",
+      "independent_review_remediated/source_increment_diff.txt",
+      "independent_review_remediated/supplied_evidence_inventory.json",
+      "independent_review_remediated/test_commands.json",
+      "independent_review_remediated/test_independent_http.py.txt",
+      "independent_review_remediated/test_remediated_adjacent.py.txt"
+    ],
+    "owned_temp": {
+      "owned_temp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\http-independent-remediated-6cc9959-20261009",
+      "resolved_target_verified": true,
+      "unexpected_links": 0,
+      "bytes_before_cleanup": 36800.0,
+      "files_before_cleanup": 14,
+      "owned_temp_restored": true,
+      "external_requests": 0,
+      "model_calls": 0,
+      "charged_cost_usd": "0",
+      "cleanup_method": "PowerShell Remove-Item -LiteralPath verified exact owned path -Recurse -Force"
+    }
+  },
+  "execution_notes": [
+    {
+      "stage": "runner_before_tests",
+      "outcome": "Reviewer hash-index Windows backslash key raised KeyError before any tests; normalized own relative keys with as_posix only. Original probe bytes/assertions unchanged. Final complete execution succeeded."
+    }
+  ],
+  "limitations": [
+    "Engineering PASS applies only to fixed6cc9959f responsibility chain",
+    "Actual CWP subprocess protocol exercised with fake Dayu SDK and MockTransport; no real external SDK/provider validation",
+    "Real SSE preserved prior gzip HTML3872wire/7373entity refusal, not new PDF; missing original error_code remains unknown",
+    "No original8-source gap, original unknown fee, model truncation or investment/research FAIL is closed",
+    "No fullunit/all-repository suite or expanded old28 mypy repeated",
+    "Dual-valid different-body polyglot tie was source-reviewed rather than additionally physically constructed"
+  ],
+  "real_SSE_preserved": {
+    "new_capture_performed": false,
+    "prior_evidence": "real_sse_after_codec.json",
+    "http_status": 200,
+    "mime_type": "text/html",
+    "content_encoding": "gzip",
+    "wire_bytes": 3872,
+    "entity_bytes": 7373,
+    "cost_usd": "0",
+    "requested_PDF": "refused",
+    "real_new_PDF_obtained": false,
+    "named_error_code": null
+  },
+  "next_authorized_scope": "Normal main integration and precise required CI; real PDF acquisition remains later concrete-source attempt without loosening MIME/identity/period/hash or blind repetition",
+  "artifact_sha256": {
+    "independent_review_remediated/actual_parent_owned_cli.log": {
+      "bytes": 4710,
+      "sha256": "9b729d3ce29db11029b3d2a6bd436dee758cb490746383b47a11a73f50dd5054"
+    },
+    "independent_review_remediated/adjacent.log": {
+      "bytes": 2049,
+      "sha256": "db45079ffb650acd1b4481a916edb3194db6434103bf696722198c6983c453df"
+    },
+    "independent_review_remediated/adjacent.xml": {
+      "bytes": 2387,
+      "sha256": "9fe5cf3e176d734733c90b3acd5e1700aabf4e85a0dcc7ab95440dbe7d3d3bc9"
+    },
+    "independent_review_remediated/after_hashes.json": {
+      "bytes": 3793,
+      "sha256": "6e3ef89b541f4e2ce94188e870bbf8dd42ae30d198afd419ce11123576b0748d"
+    },
+    "independent_review_remediated/before_hashes.json": {
+      "bytes": 3793,
+      "sha256": "6e3ef89b541f4e2ce94188e870bbf8dd42ae30d198afd419ce11123576b0748d"
+    },
+    "independent_review_remediated/cleanup.json": {
+      "bytes": 462,
+      "sha256": "39d86f44dd1455e4cde38bc9c4b95a1f20af093584cc5ab269f00ea8b753bbe8"
+    },
+    "independent_review_remediated/conftest.py.txt": {
+      "bytes": 827,
+      "sha256": "8ad64bc7938c2b662f17daa205f8f74da15769a6644b162203143dc40437320c"
+    },
+    "independent_review_remediated/final_source_git.json": {
+      "bytes": 599,
+      "sha256": "5c2e46f3fbe8d9a92ec50ab2b67d56ee8156880fc47870aed617d1593aac097f"
+    },
+    "independent_review_remediated/offline_dayu_child.py.txt": {
+      "bytes": 2373,
+      "sha256": "9bbfb1b7fd583559ffb65e088f2afbffe48653b75486719da8f1f2b04063c291"
+    },
+    "independent_review_remediated/original47.log": {
+      "bytes": 2050,
+      "sha256": "4ffd9dc963c9a083696e0af48ffee54e2ef43de737eac04727f43ead93a29f47"
+    },
+    "independent_review_remediated/original47.xml": {
+      "bytes": 9032,
+      "sha256": "f9b827a94b39568d98791ba62a128c15609cb8b95901bc2ef27d8fa543ab56dd"
+    },
+    "independent_review_remediated/parent_dayu_probe.json": {
+      "bytes": 4708,
+      "sha256": "c5615f8a8eef017e54eb2832eabcef7efbc016d51b793f12db2e27bdf2304f62"
+    },
+    "independent_review_remediated/parent_dayu_probe.py.txt": {
+      "bytes": 3973,
+      "sha256": "fdbbedea6ff0607f016a8e7dea85118f5d0ef666a800606e25cc28f7270937fd"
+    },
+    "independent_review_remediated/run_remediated.py.txt": {
+      "bytes": 3476,
+      "sha256": "8b4463b1aca0f4334c8f8223943c820493137f25cdfc6acff3164ba82e0e4bc9"
+    },
+    "independent_review_remediated/source_increment_diff.txt": {
+      "bytes": 35223,
+      "sha256": "86924bdf8d1f7fda56b6d124633ac8b6dd4d22fb328016b1e0cfe82cbcab8caf"
+    },
+    "independent_review_remediated/supplied_evidence_inventory.json": {
+      "bytes": 19722,
+      "sha256": "453b3c93051f6e7e9daf9b1999f28afd69e7a9f4f83757375d9fe9d3f346377b"
+    },
+    "independent_review_remediated/test_commands.json": {
+      "bytes": 2664,
+      "sha256": "dd972b9c08b861b210590ca99f83f9c8c0dc5449e687aa7d5c61ba0f3600d14b"
+    },
+    "independent_review_remediated/test_independent_http.py.txt": {
+      "bytes": 15597,
+      "sha256": "3f50e3828cea5b9e84905ce177786094abde1ecb697dbd1130c446d84bdf8759"
+    },
+    "independent_review_remediated/test_remediated_adjacent.py.txt": {
+      "bytes": 9607,
+      "sha256": "6d0b6cffd77f5f775f52fa839bcafc3ae5e725b719824dad581e474fbceb7c46"
+    },
+    "INDEPENDENT_REVIEW_REMEDIATED.md": {
+      "bytes": 6083,
+      "sha256": "2a53308f6ae115ba48f3828d145bc21c2fac113a6b2dc27a11124e1e76be8a36"
+    }
+  },
+  "markdown_report_sha256": "2a53308f6ae115ba48f3828d145bc21c2fac113a6b2dc27a11124e1e76be8a36"
+}

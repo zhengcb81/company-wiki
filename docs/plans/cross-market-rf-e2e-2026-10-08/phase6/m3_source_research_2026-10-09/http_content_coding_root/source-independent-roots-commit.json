@@ -1,0 +1,17 @@
+{
+  "observed_at": "2026-10-09T21:17:59.792719+00:00",
+  "returncode": 0,
+  "elapsed_seconds": 17.621,
+  "parent": "c8c4dac11898c54d2124bb5ddb66f79b12485e3d",
+  "head": "6cc9959fdb7a74fcb16e92471e9584893747d1a4",
+  "files": [
+    "src/company_wiki/source_catalog/adapter_process.py",
+    "src/company_wiki/source_catalog/bounded_content_encoding.py",
+    "src/company_wiki/source_catalog/bounded_http.py",
+    "src/company_wiki/source_catalog/official_source_flow.py",
+    "tests/unit/test_adapter_process_budget.py",
+    "tests/unit/test_bounded_content_encoding.py",
+    "tests/integration/test_official_source_flow.py"
+  ],
+  "hooks_bypassed": false
+}

@@ -1,0 +1,15 @@
+{
+  "head": "6cc9959fdb7a74fcb16e92471e9584893747d1a4",
+  "branch": "codex/m3-http-source-20261009",
+  "status": [],
+  "source_write_set": [
+    "src/company_wiki/source_catalog/adapter_process.py",
+    "src/company_wiki/source_catalog/bounded_content_encoding.py",
+    "src/company_wiki/source_catalog/bounded_http.py",
+    "src/company_wiki/source_catalog/official_source_flow.py",
+    "tests/integration/test_official_source_flow.py",
+    "tests/unit/test_adapter_process_budget.py",
+    "tests/unit/test_bounded_content_encoding.py"
+  ],
+  "source_mutations_by_reviewer": false
+}

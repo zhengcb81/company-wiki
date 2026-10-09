@@ -1,0 +1,27 @@
+{
+  "started_at": "2026-10-09T21:32:44.168400+00:00",
+  "completed_at": "2026-10-09T21:32:45.066530+00:00",
+  "elapsed_seconds": 0.898,
+  "returncode": 0,
+  "source_commit": "6cc9959fdb7a74fcb16e92471e9584893747d1a4",
+  "review_sha256": "965e6ada58bc1085b5bcef63ccb0a0f3354e8e4030dca6a958289663be30ce02",
+  "config_sha256_before": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+  "config_sha256_after": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+  "head": "806818cf67ce188387d4487cf50e449652b70a70",
+  "owner_modified_paths_before": [
+    "docs/plans/cross-market-rf-e2e-2026-10-08/findings.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/REVIEW_HANDOFF.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/http_content_coding_root/IMPLEMENTATION.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/review_dispatch.json",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/progress.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/task_plan.md"
+  ],
+  "remaining_modified_paths": [
+    "docs/plans/cross-market-rf-e2e-2026-10-08/findings.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/REVIEW_HANDOFF.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/http_content_coding_root/IMPLEMENTATION.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/review_dispatch.json",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/progress.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/task_plan.md"
+  ]
+}

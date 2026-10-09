@@ -1,0 +1,733 @@
+diff --git a/src/company_wiki/source_catalog/adapter_process.py b/src/company_wiki/source_catalog/adapter_process.py
+index 146d36ad..dcca9c30 100644
+--- a/src/company_wiki/source_catalog/adapter_process.py
++++ b/src/company_wiki/source_catalog/adapter_process.py
+@@ -39,6 +39,7 @@ class AdapterProcessError(RuntimeError):
+     acquisition_usage_complete: bool | None = None
+     provider_started: bool | None = None
+     http_wire_bytes: int | None = None
++    http_wire_usage_complete: bool | None = None
+ 
+     def __init__(self, message: str = "") -> None:
+         super().__init__(message)
+@@ -269,7 +270,8 @@ class JsonCommandAdapter:
+             if complete is not True:
+                 budget.wire_usage_complete = False
+             cls._charge_bounded_usage({"acquisition_usage": usage,
+-                                       "http_wire_bytes": exc.http_wire_bytes}, budget)
++                                       "http_wire_bytes": exc.http_wire_bytes,
++                                       "http_wire_usage_complete": exc.http_wire_usage_complete}, budget)
+ 
+     def _run(
+         self,
+@@ -319,6 +321,7 @@ class JsonCommandAdapter:
+                 exc.acquisition_usage_complete = True
+                 exc.acquisition_usage = {"schema_version": "1.0", "response_bytes": 0, "cost_usd": "0"}
+                 exc.http_wire_bytes = 0
++                exc.http_wire_usage_complete = True
+             raise exc from cause
+         except (TransportError, UnicodeError) as cause:
+             exc = AdapterProcessError(f"adapter {self.name} {action} violated bounded process lifetime")
+@@ -336,6 +339,7 @@ class JsonCommandAdapter:
+                 exc.acquisition_usage_complete = True
+                 exc.acquisition_usage = {"schema_version": "1.0", "response_bytes": 0, "cost_usd": "0"}
+                 exc.http_wire_bytes = 0
++                exc.http_wire_usage_complete = True
+             raise exc from cause
+         except OSError as cause:
+             exc = AdapterProcessError(
+@@ -346,6 +350,7 @@ class JsonCommandAdapter:
+                 exc.provider_started = True
+                 exc.acquisition_usage = validated_usage(verified_response.get("acquisition_usage"))
+                 exc.http_wire_bytes = verified_response.get("http_wire_bytes")
++                exc.http_wire_usage_complete = verified_response.get("http_wire_usage_complete", True)
+                 exc.acquisition_usage_complete = True if exc.acquisition_usage is not None else None
+             raise exc from cause
+ 
+@@ -373,6 +378,7 @@ class JsonCommandAdapter:
+                     exc.reported_retryable = retryable_raw
+                 final_payload = json.loads(detail.splitlines()[-1])
+                 exc.http_wire_bytes = final_payload.get("http_wire_bytes")
++                exc.http_wire_usage_complete = final_payload.get("http_wire_usage_complete", True)
+                 usage_raw = error_obj.get("acquisition_usage")
+                 usage = validated_usage(usage_raw)
+                 if usage is not None:
+@@ -431,6 +437,7 @@ class JsonCommandAdapter:
+                 continue
+             exc.acquisition_usage = validated_usage(value["acquisition_usage"])
+             exc.http_wire_bytes = value.get("http_wire_bytes")
++            exc.http_wire_usage_complete = False
+             exc.provider_started = True
+             exc.acquisition_usage_complete = False
+             exc.adapter_version = self.version
+diff --git a/src/company_wiki/source_catalog/bounded_content_encoding.py b/src/company_wiki/source_catalog/bounded_content_encoding.py
+index 05727367..482c27b0 100644
+--- a/src/company_wiki/source_catalog/bounded_content_encoding.py
++++ b/src/company_wiki/source_catalog/bounded_content_encoding.py
+@@ -2,8 +2,9 @@
+ from __future__ import annotations
+ 
+ from collections.abc import Callable, Iterator
+-import zlib
++from tempfile import SpooledTemporaryFile
+ from typing import Protocol
++import zlib
+ 
+ 
+ class InvalidContentCoding(Exception):
+@@ -13,46 +14,138 @@ class InvalidContentCoding(Exception):
+ class _Inflater(Protocol):
+     @property
+     def unconsumed_tail(self) -> bytes: ...
+-
+     @property
+     def unused_data(self) -> bytes: ...
+-
+     @property
+     def eof(self) -> bool: ...
+-
+     def decompress(self, data: bytes, max_length: int = 0) -> bytes: ...
+ 
+ 
++class _DeflateCandidate:
++    """Keep only a capped provisional prefix until framing is decidable.
++
++    No speculative bytes go to the SDK. An invalid interpretation cannot
++    later become valid; its peer may then resume ordinary streaming. Temporary
++    prefixes spill after 64 KiB and are closed by the owning response.
++    """
++
++    def __init__(self, framing: int):
++        self.decoder: _Inflater = zlib.decompressobj(framing)
++        self.prefix = SpooledTemporaryFile(max_size=65536, mode="w+b")
++        self.produced = 0
++        self.state = "active"
++
++    def feed(self, data: bytes, ceiling: int, output_limit: Callable[[], int]) -> None:
++        if self.state in {"invalid", "over_cap"}:
++            return
++        if self.state == "complete":
++            if data:
++                self.state = "invalid"
++            return
++        pending, drain = data, False
++        while pending or drain:
++            output_limit()  # Also observes the response's total deadline.
++            limit = max(1, min(65536, ceiling - self.produced))
++            previous = pending
++            try:
++                output = self.decoder.decompress(pending, limit)
++            except zlib.error:
++                self.state = "invalid"
++                return
++            pending = self.decoder.unconsumed_tail
++            drain = len(output) == limit
++            if output:
++                self.prefix.write(output)
++                self.produced += len(output)
++            if self.produced >= ceiling:
++                self.state = "over_cap"
++                return
++            if self.decoder.eof:
++                self.state = "invalid" if self.decoder.unused_data else "complete"
++                return
++            if not output and pending and pending == previous:
++                self.state = "invalid"
++                return
++
++    def finish(self) -> None:
++        if self.state == "active":
++            self.state = "invalid"
++
++    def chunks(self, output_limit: Callable[[], int]) -> Iterator[bytes]:
++        self.prefix.seek(0)
++        try:
++            while True:
++                part = self.prefix.read(max(1, min(65536, output_limit())))
++                if not part:
++                    return
++                yield part
++        finally:
++            self.close()
++
++    def close(self) -> None:
++        self.prefix.close()
++
++
+ class ContentDecoder:
+-    """One response, no unbounded flush or full-body buffering.
++    """One response with bounded working chunks and no unbounded flush.
+ 
+-    Gzip members and CRC are checked by zlib. HTTP deflate accepts standard
+-    zlib framing and legacy raw DEFLATE. The two-byte prefix is bounded and
+-    retained across arbitrary transport chunk boundaries.
++    Gzip members and CRC are checked by zlib. Deflate is tried as both zlib
++    framing and legacy raw DEFLATE: a valid raw stream may have a zlib-looking
++    prefix. Ambiguous prefixes are capped at the current entity allowance;
++    after a candidate fails, its peer streams directly. At EOF, two valid
++    candidates prefer standard framing. The response owns all scratch.
+     """
+ 
+     def __init__(self, coding: str):
+         self.coding = coding
+-        self._prefix = b""
+         self._decoder: _Inflater | None = None
+         self._members = 0
+         self._finished = False
++        self._candidates = ([_DeflateCandidate(zlib.MAX_WBITS),
++                             _DeflateCandidate(-zlib.MAX_WBITS)]
++                            if coding == "deflate" else None)
++        self._scratch = list(self._candidates or [])
++        self._ceiling: int | None = None
++
++    def _choose(self) -> _DeflateCandidate | None:
++        assert self._candidates is not None
++        viable = [c for c in self._candidates if c.state in {"active", "complete"}]
++        if len(viable) == 2:
++            return None
++        if viable:
++            return viable[0]
++        oversized = [c for c in self._candidates if c.state == "over_cap"]
++        if oversized:
++            return oversized[0]  # Delivery records cap+1 before the budget stops.
++        raise InvalidContentCoding("invalid compressed entity")
++
++    def _select(self, candidate: _DeflateCandidate,
++                output_limit: Callable[[], int]) -> Iterator[bytes]:
++        assert self._candidates is not None
++        for other in self._candidates:
++            if other is not candidate:
++                other.close()
++        self._candidates = None
++        self._decoder = candidate.decoder
++        self._finished = candidate.state == "complete"
++        self._members = int(self._finished)
++        return candidate.chunks(output_limit)
+ 
+     def feed(self, data: bytes, output_limit: Callable[[], int]) -> Iterator[bytes]:
+         if self.coding == "identity":
+             if data:
+                 yield data
+             return
+-        pending = data
+-        if self.coding == "deflate" and self._decoder is None:
+-            self._prefix += pending
+-            if len(self._prefix) < 2:
+-                return
+-            pending, self._prefix = self._prefix, b""
+-            a, b = pending[:2]
+-            framed = (a & 15 == 8 and a >> 4 <= 7 and (a * 256 + b) % 31 == 0)
+-            self._decoder = zlib.decompressobj(zlib.MAX_WBITS if framed else -zlib.MAX_WBITS)
+-        drain = False
++        if self._candidates is not None:
++            if self._ceiling is None:
++                self._ceiling = max(1, output_limit())
++            for candidate in self._candidates:
++                candidate.feed(data, self._ceiling, output_limit)
++            chosen = self._choose()
++            if chosen is not None:
++                yield from self._select(chosen, output_limit)
++            return
++        pending, drain = data, False
+         while pending or drain:
+             if self._finished:
+                 raise InvalidContentCoding("compressed entity has trailing bytes")
+@@ -79,8 +172,20 @@ class ContentDecoder:
+             elif pending == previous and pending and self._decoder is not None:
+                 raise InvalidContentCoding("compressed entity made no progress")
+ 
+-    def finish(self) -> None:
+-        if self.coding == "identity":
+-            return
+-        if self._prefix or not self._members or (self._decoder is not None and not self._decoder.eof):
++    def finish(self, output_limit: Callable[[], int] = lambda: 65536) -> Iterator[bytes]:
++        if self._candidates is not None:
++            for candidate in self._candidates:
++                candidate.finish()
++            valid = [c for c in self._candidates if c.state == "complete"]
++            chosen = valid[0] if valid else self._choose()
++            if chosen is None:
++                raise InvalidContentCoding("incomplete compressed entity")
++            return self._select(chosen, output_limit)
++        if self.coding != "identity" and (
++                not self._members or (self._decoder is not None and not self._decoder.eof)):
+             raise InvalidContentCoding("incomplete compressed entity")
++        return iter(())
++
++    def close(self) -> None:
++        for candidate in self._scratch:
++            candidate.close()
+diff --git a/src/company_wiki/source_catalog/bounded_http.py b/src/company_wiki/source_catalog/bounded_http.py
+index a0b9361c..2e75237a 100644
+--- a/src/company_wiki/source_catalog/bounded_http.py
++++ b/src/company_wiki/source_catalog/bounded_http.py
+@@ -13,6 +13,7 @@ from __future__ import annotations
+ import asyncio
+ from collections.abc import Callable, AsyncIterator, Iterator
+ import math
++import sys
+ import time
+ from typing import Any
+ 
+@@ -130,50 +131,81 @@ def _decode_chunk(chunk: bytes, decoder: ContentDecoder, budget, checkpoint) ->
+             yield chunk
+         return
+     try:
+-        for entity in decoder.feed(chunk, lambda: budget.remaining_response_bytes + 1):
++        for entity in decoder.feed(chunk, lambda: _entity_allowance(budget)):
+             _record_http(budget, checkpoint, response_bytes=len(entity))
+             yield entity
+     except InvalidContentCoding as exc:
+         raise ProviderBudgetStop("incomplete_response", "invalid compressed HTTP body") from exc
+ 
+ 
+-def _finish(decoder: ContentDecoder, budget: AcquisitionBudget) -> None:
++def _entity_allowance(budget: AcquisitionBudget) -> int:
++    _deadline(budget)
++    return budget.remaining_response_bytes + 1
++
++
++def _finish(decoder: ContentDecoder, budget: AcquisitionBudget, checkpoint) -> Iterator[bytes]:
+     _deadline(budget)
+     try:
+-        decoder.finish()
++        for entity in decoder.finish(lambda: _entity_allowance(budget)):
++            _record_http(budget, checkpoint, response_bytes=len(entity))
++            yield entity
+     except InvalidContentCoding as exc:
+         raise ProviderBudgetStop("incomplete_response", "incomplete compressed HTTP body") from exc
+ 
+ 
++def _close_preserving(close, primary: BaseException | None) -> None:
++    try:
++        close()
++    except BaseException as cleanup:
++        if primary is None:
++            raise
++        primary.add_note("HTTP stream cleanup failed: " + type(cleanup).__name__)
++
++
++async def _aclose_preserving(close, primary: BaseException | None) -> None:
++    try:
++        await close()
++    except BaseException as cleanup:
++        if primary is None:
++            raise
++        primary.add_note("HTTP stream cleanup failed: " + type(cleanup).__name__)
++
++
+ class _SyncStream(httpx.SyncByteStream):
+     def __init__(self, stream, budget, checkpoint, coding):
+         self.stream, self.budget, self.checkpoint = stream, budget, checkpoint
+         self.decoder = ContentDecoder(coding)
+         self.closed = False
++        self._iterator = None
+ 
+     def __iter__(self) -> Iterator[bytes]:
+         iterator = iter(self.stream)
++        self._iterator = iterator
+         try:
+             while True:
+                 _deadline(self.budget)
+                 try:
+                     chunk = next(iterator)
+                 except StopIteration:
+-                    _finish(self.decoder, self.budget)
++                    yield from _finish(self.decoder, self.budget, self.checkpoint)
+                     return
+                 yield from _decode_chunk(chunk, self.decoder, self.budget, self.checkpoint)
+         finally:
++            _close_preserving(self.close, sys.exception())
++
++    def close(self) -> None:
++        if not self.closed:
++            self.closed = True
++            iterator, self._iterator = self._iterator, None
+             try:
+                 close_iterator = getattr(iterator, "close", None)
+                 if close_iterator is not None:
+                     close_iterator()
+             finally:
+-                self.close()
+-
+-    def close(self) -> None:
+-        if not self.closed:
+-            self.closed = True
+-            self.stream.close()
++                try:
++                    self.decoder.close()
++                finally:
++                    self.stream.close()
+ 
+ 
+ class _AsyncStream(httpx.AsyncByteStream):
+@@ -181,33 +213,40 @@ class _AsyncStream(httpx.AsyncByteStream):
+         self.stream, self.budget, self.checkpoint = stream, budget, checkpoint
+         self.decoder = ContentDecoder(coding)
+         self.closed = False
++        self._iterator = None
+ 
+     async def __aiter__(self) -> AsyncIterator[bytes]:
+         iterator = self.stream.__aiter__()
++        self._iterator = iterator
+         try:
+             while True:
+                 _deadline(self.budget)
+                 try:
+                     chunk = await asyncio.wait_for(iterator.__anext__(), self.budget.remaining_seconds)
+                 except StopAsyncIteration:
+-                    _finish(self.decoder, self.budget)
++                    for entity in _finish(self.decoder, self.budget, self.checkpoint):
++                        yield entity
+                     return
+                 except asyncio.TimeoutError as exc:
+                     raise ProviderBudgetStop("deadline_exceeded", "acquisition deadline exceeded") from exc
+                 for entity in _decode_chunk(chunk, self.decoder, self.budget, self.checkpoint):
+                     yield entity
+         finally:
++            await _aclose_preserving(self.aclose, sys.exception())
++
++    async def aclose(self) -> None:
++        if not self.closed:
++            self.closed = True
++            iterator, self._iterator = self._iterator, None
+             try:
+                 close_iterator = getattr(iterator, "aclose", None)
+                 if close_iterator is not None:
+                     await close_iterator()
+             finally:
+-                await self.aclose()
+-
+-    async def aclose(self) -> None:
+-        if not self.closed:
+-            self.closed = True
+-            await self.stream.aclose()
++                try:
++                    self.decoder.close()
++                finally:
++                    await self.stream.aclose()
+ 
+ 
+ class BudgetedHTTPTransport(httpx.BaseTransport):
+@@ -222,8 +261,8 @@ class BudgetedHTTPTransport(httpx.BaseTransport):
+         response = self.transport.handle_request(request)
+         try:
+             coding = _headers(request, response, self.budget)
+-        except BaseException:
+-            response.close()
++        except BaseException as primary:
++            _close_preserving(response.close, primary)
+             raise
+         response.stream = _SyncStream(response.stream, self.budget, self.checkpoint, coding)
+         return response
+@@ -249,8 +288,8 @@ class BudgetedAsyncHTTPTransport(httpx.AsyncBaseTransport):
+             raise ProviderBudgetStop("deadline_exceeded", "acquisition deadline exceeded") from exc
+         try:
+             coding = _headers(request, response, self.budget)
+-        except BaseException:
+-            await response.aclose()
++        except BaseException as primary:
++            await _aclose_preserving(response.aclose, primary)
+             raise
+         response.stream = _AsyncStream(response.stream, self.budget, self.checkpoint, coding)
+         return response
+diff --git a/src/company_wiki/source_catalog/official_source_flow.py b/src/company_wiki/source_catalog/official_source_flow.py
+index 59fb0fbf..0c1ef083 100644
+--- a/src/company_wiki/source_catalog/official_source_flow.py
++++ b/src/company_wiki/source_catalog/official_source_flow.py
+@@ -48,6 +48,36 @@ class OfficialSourceError(ValueError):
+     """Named source-data refusal, not another permission gate."""
+ 
+ 
++def _attach_capture_http_observation(error: Exception, receipt: dict[str, Any]) -> None:
++    """Project the same finite captured observation at every import failure.
++
++    A completed download may fail SHA/MIME/storage after the network has
++    closed; that must not discard known HTTP usage. Local imports have no
++    such observation, and nothing is inferred from the caller's source MIME.
++    """
++    observed = receipt.get("http_observation")
++    if isinstance(observed, dict):
++        finite = {}
++        status = observed.get("status_code")
++        if type(status) is int and 100 <= status <= 599:
++            finite["status_code"] = status
++        for field in ("mime_type", "content_encoding"):
++            value = observed.get(field)
++            if isinstance(value, str):
++                finite[field] = value[:128]
++        size = observed.get("wire_content_length")
++        if size is None or (type(size) is int and 0 <= size < 10 ** 20):
++            finite["wire_content_length"] = size
++        if finite:
++            setattr(error, "http_observation", finite)
++    wire = receipt.get("http_wire_bytes")
++    if type(wire) is int and wire >= 0:
++        setattr(error, "http_wire_bytes", wire)
++    complete = receipt.get("http_wire_usage_complete")
++    if type(complete) is bool:
++        setattr(error, "http_wire_usage_complete", complete)
++
++
+ def _text(value, field):
+     if (
+         not isinstance(value, str)
+@@ -339,6 +369,7 @@ def _persist_capture(catalog, original, request, *, complete=True):
+         # the named incomplete recovery material; never pretend it is replayable.
+         primary.capture_id = capture_id
+         primary.capture_receipt = dict(request["capture_receipt"])
++        _attach_capture_http_observation(primary, primary.capture_receipt)
+         try:
+             _journal(catalog, state, outcome="failed", reason="capture_persistence_failed",
+                      error_type=type(primary).__name__, canonical_path=str(staged.resolve()),
+@@ -443,6 +474,7 @@ def _import_retained(catalog, staged, descriptor, state, *, bytes_validated=Fals
+     except Exception as primary:
+         primary.capture_id = state["capture_id"]
+         primary.capture_receipt = dict(request["capture_receipt"])
++        _attach_capture_http_observation(primary, primary.capture_receipt)
+         try:
+             _journal(catalog, state, outcome="failed", reason="official_import_failed",
+                      error_type=type(primary).__name__, canonical_path=str(staged.resolve()))
+@@ -824,6 +856,7 @@ def capture_official_source(catalog, *, request, budget=None, transport=None):
+                           "usage_complete": complete, "acquisition_usage": primary.acquisition_usage,
+                           "http_wire_bytes": wire_used, "http_wire_usage_complete": complete}
+         primary.capture_receipt = failed_receipt
++        _attach_capture_http_observation(primary, failed_receipt)
+         failed_request = {"schema_version": IMPORT_REQUEST_SCHEMA, "request_id": request["request_id"],
+                           "source": source, "mime_type": mime, "content_sha256": failed_receipt["content_sha256"],
+                           "max_bytes": cap, "capture_receipt": failed_receipt}
+@@ -859,6 +892,7 @@ def capture_official_source(catalog, *, request, budget=None, transport=None):
+         if state is not None:
+             primary.capture_id = state["capture_id"]
+         primary.capture_receipt = capture
++        _attach_capture_http_observation(primary, capture)
+         primary.acquisition_usage = capture["acquisition_usage"]
+         primary.acquisition_usage_complete = True
+         primary.provider_started = True
+diff --git a/tests/integration/test_official_source_flow.py b/tests/integration/test_official_source_flow.py
+index 4f436fe5..7e827d4d 100644
+--- a/tests/integration/test_official_source_flow.py
++++ b/tests/integration/test_official_source_flow.py
+@@ -1353,3 +1353,48 @@ def test_encoding_header_refusal_preserves_actual_headers_and_no_canonical_origi
+         assert error.http_wire_bytes == 0 and not error.acquisition_usage_complete
+         assert not list((root/"companies").rglob("*.html"))
+         assert error.capture_id  # Failure remains replayable; never adopted as original.
++
++
++@pytest.mark.parametrize("failure", ["mime", "sha", "storage"])
++def test_public_cli_keeps_completed_capture_http_diagnostics_on_import_refusal(monkeypatch, capsys, failure):
++    import gzip
++    import httpx
++    from company_wiki.source_catalog import official_source_cli as cli
++    from company_wiki.source_catalog.official_source_flow import capture_official_source
++    from company_wiki.source_catalog.canonical_writer import CanonicalSourceWriter, CanonicalImportError
++    _mock_local_pair(monkeypatch)
++    body = b"<html><body>Acme new product awaits customer qualification.</body></html>"
++    wire = gzip.compress(body, mtime=0)
++    with owned_lake() as (root, catalog):
++        class EncodedBody(httpx.AsyncByteStream):
++            async def __aiter__(self):
++                yield wire
++        def provider(req):
++            return httpx.Response(200, headers={"content-type": "text/html", "content-encoding": "gzip",
++                "content-length": str(len(wire)), "authorization": "secret-header-never-project"},
++                stream=EncodedBody())
++        def capture(current, **kwargs):
++            return capture_official_source(current, transport=httpx.MockTransport(provider), **kwargs)
++        monkeypatch.setattr(cli, "load_catalog_config", lambda *a, **k: catalog.config)
++        monkeypatch.setattr(cli, "capture_official_source", capture)
++        if failure == "storage":
++            def refuse(*args, **kwargs):
++                raise CanonicalImportError("fixture_storage_refused")
++            monkeypatch.setattr(CanonicalSourceWriter, "import_original_staged", refuse)
++        req = _capture_request(body, "application/pdf" if failure == "mime" else "text/html")
++        if failure == "sha":
++            req["expected_content_sha256"] = "0" * 64
++        path = root / "request.json"
++        path.write_text(json.dumps(req), encoding="utf-8")
++        assert cli.main(["--config", str(root / "fixture.yaml"), "--project-root", str(root),
++                         "--operation", "capture", "--request", str(path)]) == 2
++        encoded_error = capsys.readouterr().err
++        out = json.loads(encoded_error)
++        assert out["error_code"] in {"mime_mismatch", "source_sha_mismatch", "official_source_CanonicalImportError"}
++        assert out["http_observation"] == {"status_code": 200, "mime_type": "text/html",
++            "content_encoding": "gzip", "wire_content_length": len(wire)}
++        assert out["http_wire_bytes"] == len(wire) and out["http_wire_usage_complete"]
++        assert out["acquisition_usage_complete"] and out["provider_started"]
++        assert out["acquisition_usage"]["response_bytes"] == len(body)
++        assert not list((root / "companies").rglob("*.html"))
++        assert "secret-header-never-project" not in encoded_error and str(root) not in encoded_error
+diff --git a/tests/unit/test_adapter_process_budget.py b/tests/unit/test_adapter_process_budget.py
+index 084d83ea..c5412acb 100644
+--- a/tests/unit/test_adapter_process_budget.py
++++ b/tests/unit/test_adapter_process_budget.py
+@@ -395,3 +395,26 @@ def test_hard_kill_checkpoint_charges_last_cumulative_wire_once(tmp_path):
+     assert b.response_bytes_used == 8 and b.wire_response_bytes_used == 15
+     assert not b.usage_complete and not b.wire_usage_complete
+     assert exc.acquisition_usage_complete is False and exc.retryable is False
++
++
++@pytest.mark.parametrize("complete", [False, None, True])
++def test_handled_failure_does_not_infer_wire_complete_from_body_final(tmp_path, complete):
++    import subprocess
++    from decimal import Decimal
++    from company_wiki.source_catalog.adapter_process import JsonCommandAdapter, AdapterProcessError
++    adapter = JsonCommandAdapter(name="bounded-json", version="1.0.0",
++        command=(sys.executable, "unused.py"), project_root=tmp_path,
++        supports_acquisition_budget=True)
++    final = {"schema_version": "1.0", "status": "failed",
++        "adapter": {"name": "bounded-json", "version": "1.0.0"},
++        "http_wire_bytes": 7, "http_wire_usage_complete": complete,
++        "error": {"code": "provider_failed", "retryable": False,
++                  "acquisition_usage": {"schema_version": "1.0", "response_bytes": 9,
++                                        "cost_usd": "0.25"}}}
++    with pytest.raises(AdapterProcessError) as caught:
++        adapter._decode_response(subprocess.CompletedProcess([], 1, "", json.dumps(final)), "fetch")
++    b = AcquisitionBudget.from_limits(max_response_bytes=100, max_seconds=10, max_cost_usd="1")
++    adapter._charge_failure_usage(caught.value, b)
++    assert b.response_bytes_used == 9 and b.wire_response_bytes_used == 7
++    assert b.cost_usd_used == Decimal("0.25") and b.usage_complete
++    assert b.wire_usage_complete is (complete is True)
+diff --git a/tests/unit/test_bounded_content_encoding.py b/tests/unit/test_bounded_content_encoding.py
+index 543ac856..3ad4d134 100644
+--- a/tests/unit/test_bounded_content_encoding.py
++++ b/tests/unit/test_bounded_content_encoding.py
+@@ -4,6 +4,7 @@ from __future__ import annotations
+ import asyncio
+ import gzip
+ import zlib
++import socket
+ 
+ import httpx
+ import pytest
+@@ -14,6 +15,8 @@ from company_wiki.source_catalog.bounded_http import (
+ )
+ from company_wiki.source_catalog.download_budget import AcquisitionBudget
+ 
++_SOCKET_CONNECT = socket.socket.connect
++
+ BODY = b"<html><body><p>New products await customer qualification.</p></body></html>"
+ 
+ 
+@@ -56,10 +59,18 @@ class AsyncChunks(httpx.AsyncByteStream):
+         self.closed = True
+ 
+ 
+-@pytest.fixture(scope="session")
+-def loop():
++@pytest.fixture
++def loop(monkeypatch):
++    # Windows asyncio creates a local socket pair. Only that local connection
++    # is allowed; MockTransport tests still cannot contact a provider.
++    def local_only(sock, address):
++        if address[0] not in {"127.0.0.1", "::1"}:
++            raise RuntimeError("external network forbidden in codec fixture")
++        return _SOCKET_CONNECT(sock, address)
++    monkeypatch.setattr(socket.socket, "connect", local_only)
+     value = asyncio.new_event_loop()
+     yield value
++    value.run_until_complete(value.shutdown_asyncgens())
+     value.close()
+ 
+ 
+@@ -259,3 +270,100 @@ def test_async_budget_stop_closes_the_active_iterator_not_only_transport(loop):
+                 await client.get("https://fixture.invalid/close-iterator")
+     loop.run_until_complete(exercise())
+     assert stream.closed and stream.iterator_closed
++
++
++@pytest.mark.parametrize("length", [156, 412, 218])
++@pytest.mark.parametrize("split", [1, 2, 10000])
++def test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified(length, split):
++    body = b"A" * length
++    wire = bytes([0x78, length & 255, length >> 8, (~length) & 255,
++                  ((~length) >> 8) & 255]) + body + bytes.fromhex("010000ffff")
++    assert zlib.decompress(wire, -zlib.MAX_WBITS) == body
++    b = budget()
++    stream = Chunks([wire[n:n+split] for n in range(0, len(wire), split)])
++    with httpx.Client(transport=BudgetedHTTPTransport(httpx.MockTransport(lambda request:
++        httpx.Response(200, headers=headers("deflate", wire), stream=stream)), b),
++        trust_env=False) as client:
++        assert client.get("https://fixture.invalid/ambiguous-framing").content == body
++    assert b.response_bytes_used == len(body) and b.wire_response_bytes_used == len(wire)
++    assert stream.closed
++
++
++@pytest.mark.parametrize("mode", ["sync", "async"])
++def test_consumer_stops_early_closes_owned_active_iterator_immediately(mode, loop):
++    wire = gzip.compress(b"x" * 180_000, mtime=0)
++    b = budget(200_000)
++    if mode == "sync":
++        class Tracked(Chunks):
++            iterator_closed = False
++            def __iter__(self):
++                try:
++                    yield wire
++                    raise AssertionError("consumer stopped; must not fetch next wire chunk")
++                finally:
++                    self.iterator_closed = True
++        stream = Tracked([])
++        with httpx.Client(transport=BudgetedHTTPTransport(httpx.MockTransport(lambda request:
++            httpx.Response(200, headers=headers("gzip", wire), stream=stream)), b),
++            trust_env=False) as client:
++            with client.stream("GET", "https://fixture.invalid/early-stop") as response:
++                outer = response.iter_bytes()
++                assert len(next(outer)) <= 65536
++            assert stream.closed and stream.iterator_closed
++            response.close()  # Idempotent close without resuming consumer.
++            outer.close()
++    else:
++        class Tracked(AsyncChunks):
++            iterator_closed = False
++            async def __aiter__(self):
++                try:
++                    yield wire
++                    raise AssertionError("consumer stopped; must not fetch next wire chunk")
++                finally:
++                    self.iterator_closed = True
++        stream = Tracked([])
++        async def exercise():
++            async with httpx.AsyncClient(transport=BudgetedAsyncHTTPTransport(httpx.MockTransport(lambda request:
++                httpx.Response(200, headers=headers("gzip", wire), stream=stream)), b),
++                trust_env=False) as client:
++                async with client.stream("GET", "https://fixture.invalid/early-stop") as response:
++                    outer = response.aiter_bytes()
++                    assert len(await outer.__anext__()) <= 65536
++                assert stream.closed and stream.iterator_closed
++                await response.aclose()
++                await outer.aclose()
++        loop.run_until_complete(exercise())
++
++
++@pytest.mark.parametrize("mode", ["sync", "async"])
++def test_cleanup_error_does_not_replace_primary_byte_budget_stop(mode, loop):
++    wire = gzip.compress(b"x" * 100_000, mtime=0)
++    b = budget(256)
++    if mode == "sync":
++        class FailingClose(Chunks):
++            def close(self):
++                self.closed = True
++                raise RuntimeError("fixture cleanup failed")
++        stream = FailingClose([wire])
++        with httpx.Client(transport=BudgetedHTTPTransport(httpx.MockTransport(lambda request:
++            httpx.Response(200, headers=headers("gzip", wire), stream=stream)), b),
++            trust_env=False) as client:
++            with pytest.raises(ProviderBudgetStop) as caught:
++                client.get("https://fixture.invalid/primary-cause")
++    else:
++        class FailingClose(AsyncChunks):
++            async def aclose(self):
++                self.closed = True
++                raise RuntimeError("fixture cleanup failed")
++        stream = FailingClose([wire])
++        async def exercise():
++            async with httpx.AsyncClient(transport=BudgetedAsyncHTTPTransport(httpx.MockTransport(lambda request:
++                httpx.Response(200, headers=headers("gzip", wire), stream=stream)), b),
++                trust_env=False) as client:
++                with pytest.raises(ProviderBudgetStop) as error:
++                    await client.get("https://fixture.invalid/primary-cause")
++                return error
++        caught = loop.run_until_complete(exercise())
++    assert caught.value.error_code == "byte_budget_exceeded"
++    assert any("cleanup" in note for note in caught.value.__notes__)
++    assert b.response_bytes_used == 257 and stream.closed

@@ -1,0 +1,162 @@
+"""Finite adjacent controls for the new two-candidate/spool and cleanup design."""
+import asyncio
+from contextlib import redirect_stderr
+from decimal import Decimal
+import gzip
+import io
+import json
+from pathlib import Path
+import zlib
+import httpx
+import pytest
+from company_wiki.source_catalog import bounded_content_encoding as codec
+from company_wiki.source_catalog.bounded_http import BudgetedHTTPTransport, BudgetedAsyncHTTPTransport, ProviderBudgetStop
+from company_wiki.source_catalog.download_budget import AcquisitionBudget
+from company_wiki.source_catalog import official_source_flow as flow, official_source_cli as cli
+from company_wiki.source_catalog.models import CatalogConfig,RootSpec
+from company_wiki.source_catalog.service import SourceCatalog
+
+
+def long_ambiguous_raw():
+    # Real stored blocks: both raw and zlib remain valid candidates for >64KiB.
+    # Standard view's third block is eventually BTYPE=3; raw view is valid.
+    return (bytes.fromhex('780100feff')+b'\x01'+bytes.fromhex('00ffff0000')+
+            b'A'*65530+bytes.fromhex('00ffff0000')+bytes.fromhex('00ffff0000')+
+            b'B'*65530+b'\x07ZZZZ'+bytes.fromhex('010000ffff'))
+
+
+def budget(cap=200000):
+    return AcquisitionBudget.from_limits(max_response_bytes=cap,max_seconds=10,max_cost_usd='1')
+
+
+class S(httpx.SyncByteStream):
+    def __init__(self,parts):self.parts=parts;self.closed=False;self.iterator_closed=False
+    def __iter__(self):
+        try:yield from self.parts
+        finally:self.iterator_closed=True
+    def close(self):self.closed=True
+
+
+def track_spools(monkeypatch):
+    original=codec.SpooledTemporaryFile; created=[]
+    def create(*a,**k):
+        value=original(*a,**k);created.append(value);return value
+    monkeypatch.setattr(codec,'SpooledTemporaryFile',create)
+    return created
+
+
+def test_real_long_ambiguity_no_provisional_delivery_spills_then_selects_exact_raw():
+    raw=long_ambiguous_raw(); oracle=zlib.decompress(raw,-15)
+    assert len(oracle)==131071
+    d=codec.ContentDecoder('deflate')
+    try:
+        assert list(d.feed(raw[:-10],lambda:200001))==[]
+        assert all(c.state=='active' and c.produced>65536 and c.prefix._rolled for c in d._scratch)
+        output=list(d.feed(raw[-10:],lambda:200001))+list(d.finish())
+        assert b''.join(output)==oracle and max(map(len,output))<=65536
+    finally:d.close()
+    assert all(c.prefix.closed for c in d._scratch)
+
+
+@pytest.mark.parametrize('step',[513,65536,131091])
+def test_long_ambiguity_public_http_body_charged_once_and_spool_closed(monkeypatch,step):
+    raw=long_ambiguous_raw(); spools=track_spools(monkeypatch); b=budget(); b.consume_cost_usd('0.25')
+    s=S([raw[i:i+step] for i in range(0,len(raw),step)])
+    with httpx.Client(transport=BudgetedHTTPTransport(httpx.MockTransport(lambda r:httpx.Response(200,headers={'content-encoding':'deflate'},stream=s)),b),trust_env=False) as c:
+        assert c.get('https://fixture.invalid/long').content==zlib.decompress(raw,-15)
+    assert b.response_bytes_used==131071 and b.wire_response_bytes_used==131091 and b.cost_usd_used==Decimal('0.25')
+    assert s.closed and s.iterator_closed and len(spools)==2 and all(p.closed for p in spools)
+
+
+def test_both_candidate_provisional_allocations_stop_at_allowance_plus_one():
+    d=codec.ContentDecoder('deflate')
+    try:
+        output=list(d.feed(long_ambiguous_raw()[:-10],lambda:257))
+        assert all(c.produced<=257 for c in d._scratch)
+        assert sum(map(len,output))==257 and max(map(len,output))<=257
+    finally:d.close()
+    assert all(c.prefix.closed for c in d._scratch)
+
+
+def test_total_deadline_callback_interrupts_internal_candidate_loop():
+    d=codec.ContentDecoder('deflate');calls=[]
+    def allowance():
+        calls.append(True)
+        if len(calls)==4:raise ProviderBudgetStop('deadline_exceeded','independent deadline probe')
+        return 200001
+    try:
+        with pytest.raises(ProviderBudgetStop) as e:list(d.feed(long_ambiguous_raw(),allowance))
+        assert e.value.error_code=='deadline_exceeded' and len(calls)==4
+        assert all(c.produced<=200001 for c in d._scratch)
+    finally:d.close()
+    assert all(c.prefix.closed for c in d._scratch)
+
+
+@pytest.mark.parametrize('damage',['truncate','garbage'])
+def test_long_ambiguity_invalid_eof_or_tail_is_refused_with_spool_cleanup(monkeypatch,damage):
+    raw=long_ambiguous_raw(); raw=raw[:-1] if damage=='truncate' else raw+b'garbage'
+    spools=track_spools(monkeypatch); b=budget(); s=S([raw])
+    with httpx.Client(transport=BudgetedHTTPTransport(httpx.MockTransport(lambda r:httpx.Response(200,headers={'content-encoding':'deflate'},stream=s)),b),trust_env=False) as c:
+        with pytest.raises(ProviderBudgetStop) as e:c.get('https://fixture.invalid/damaged')
+    assert e.value.error_code=='incomplete_response' and s.closed and s.iterator_closed
+    assert b.wire_response_bytes_used==len(raw) and all(p.closed for p in spools)
+
+
+def test_cancel_during_rolled_ambiguous_response_closes_active_iterator_and_spools(monkeypatch):
+    spools=track_spools(monkeypatch)
+    async def run():
+        waiting=asyncio.Event(); raw=long_ambiguous_raw(); b=budget(); b.consume_cost_usd('0.25')
+        class A(httpx.AsyncByteStream):
+            closed=False; iterator_closed=False
+            async def __aiter__(self):
+                try:
+                    yield raw[:-10]
+                    waiting.set()
+                    await asyncio.sleep(10)
+                    raise AssertionError('cancelled reader must not reach suffix')
+                finally:self.iterator_closed=True
+            async def aclose(self):self.closed=True
+        s=A()
+        async with httpx.AsyncClient(transport=BudgetedAsyncHTTPTransport(httpx.MockTransport(lambda r:httpx.Response(200,headers={'content-encoding':'deflate'},stream=s)),b),trust_env=False) as c:
+            task=asyncio.create_task(c.get('https://fixture.invalid/cancel'))
+            await asyncio.wait_for(waiting.wait(),timeout=2)
+            assert len(spools)==2 and all(p._rolled for p in spools) and b.response_bytes_used==0
+            task.cancel()
+            with pytest.raises(asyncio.CancelledError):await task
+            assert s.closed and s.iterator_closed and all(p.closed for p in spools)
+        assert b.wire_response_bytes_used==len(raw)-10 and b.response_bytes_used==0 and b.cost_usd_used==Decimal('0.25')
+    asyncio.run(run())
+
+
+def test_late_import_failure_projection_discards_arbitrary_receipt_fields():
+    e=ValueError('refusal'); secret='secret-do-not-copy'
+    receipt={'http_observation':{'status_code':True,'mime_type':'text/html'+'x'*1000,'content_encoding':{'authorization':secret},'wire_content_length':-1,'authorization':secret,'effective_url':'https://secret.invalid'},'http_wire_bytes':True,'http_wire_usage_complete':'true','body':secret,'private_path':'C:/secret'}
+    flow._attach_capture_http_observation(e,receipt)
+    assert set(e.http_observation)<= {'status_code','mime_type','content_encoding','wire_content_length'}
+    assert len(e.http_observation['mime_type'])<=128 and 'status_code' not in e.http_observation and 'content_encoding' not in e.http_observation
+    assert not hasattr(e,'http_wire_bytes') and not hasattr(e,'http_wire_usage_complete')
+    assert secret not in json.dumps(e.__dict__) and 'private_path' not in e.__dict__
+
+
+def test_public_recover_mime_refusal_retains_exact_finite_http_observation_without_get(tmp_path,monkeypatch):
+    (tmp_path/'companies').mkdir(); cfg=CatalogConfig(project_root=tmp_path,catalog_dir=tmp_path/'catalog',roots=(RootSpec('company_raw',tmp_path/'companies','company_raw'),))
+    catalog=SourceCatalog(cfg); body=b'<html><body>Not the requested PDF.</body></html>'; wire=gzip.compress(body,mtime=0); calls=[]
+    class A(httpx.AsyncByteStream):
+        async def __aiter__(self):yield wire
+    def provider(r):
+        calls.append(r.url.path)
+        return httpx.Response(200,headers={'content-encoding':'gzip','content-type':'text/html','content-length':str(len(wire)),'authorization':'private-header'},stream=A())
+    req={'schema_version':'official-source-capture-request/1','request_id':'recover-negative','source':{'entity':'Acme','document_kind':'regulatory_filing','title':'Acme filing','publisher':'Acme','source_url':'https://official.example/filing.pdf','language':'en'},'mime_type':'application/pdf','max_bytes':200000,'max_seconds':5,'max_cost_usd':'0'}
+    try:
+        with pytest.raises(flow.OfficialSourceError) as e:flow.capture_official_source(catalog,request=req,transport=httpx.MockTransport(provider))
+        capture_id=e.value.capture_id
+        monkeypatch.setattr(cli,'load_catalog_config',lambda *a,**k:cfg)
+        request_path=tmp_path/'recovery.json';request_path.write_text(json.dumps({'schema_version':'official-source-recovery-request/1','capture_id':capture_id,'max_bytes':200000}),encoding='utf-8')
+        err=io.StringIO()
+        with redirect_stderr(err):rc=cli.main(['--config',str(tmp_path/'fixture.yaml'),'--project-root',str(tmp_path),'--operation','recover','--request',str(request_path)])
+        out=json.loads(err.getvalue()); assert rc==2 and out['error_code']=='mime_mismatch'
+        assert out['http_observation']=={'status_code':200,'mime_type':'text/html','content_encoding':'gzip','wire_content_length':len(wire)}
+        assert out['http_wire_bytes']==len(wire) and out['http_wire_usage_complete'] is True
+        assert len(calls)==1 and not list((tmp_path/'companies').rglob('*'))
+        assert 'private-header' not in err.getvalue() and str(tmp_path) not in err.getvalue()
+    finally:catalog.close()
