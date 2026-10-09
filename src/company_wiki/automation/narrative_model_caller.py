@@ -73,13 +73,15 @@ class NarrativeBudgetCallError(Exception):
         return self.code
 
 
-def _metrics(record: ReservationRecord, duration_ms: int) -> HandlerMetrics:
+def _metrics(record: ReservationRecord, duration_ms: int, *, reasoning_tokens: int | None = None,
+             usage_diagnostic: str | None = None) -> HandlerMetrics:
     # Unknown requests report their conservative reservation; the ledger keeps
     # usage_status so nobody mistakes this estimate for provider billing.
     return HandlerMetrics(
         tokens=record.charged_tokens,
         cost_usd=record.charged_micro_usd / 1_000_000,
         duration_ms=duration_ms,
+        reasoning_tokens=reasoning_tokens, usage_diagnostic=usage_diagnostic,
     )
 
 
@@ -172,7 +174,8 @@ class BudgetedNarrativeCaller:
             usage = None
             http_status = None
             response_stage = provider_code = None
-            finish_reason = content_bytes = None
+            finish_reason = content_bytes = reasoning_tokens = None
+            usage_diagnostic = None
             duration_ms = max(0, int((time.monotonic() - started) * 1000))
             if isinstance(error, ModelTimeoutError):
                 code, outcome = "MODEL_TIMEOUT", HandlerOutcome.RETRYABLE
@@ -196,11 +199,13 @@ class BudgetedNarrativeCaller:
             elif isinstance(error, ModelEnvelopeError):
                 http_status, response_stage, provider_code = error.http_status, error.response_stage, error.provider_code
                 duration_ms = error.duration_ms
+                reasoning_tokens, usage_diagnostic = error.reasoning_tokens, error.usage_diagnostic
                 if error.input_tokens is not None and error.output_tokens is not None:
                     usage = ModelUsage(error.input_tokens, error.output_tokens)
             elif isinstance(error, ModelOutputTruncatedError):
                 code, duration_ms = "MODEL_OUTPUT_TRUNCATED", error.duration_ms
                 finish_reason, content_bytes = error.finish_reason, error.content_bytes
+                reasoning_tokens, usage_diagnostic = error.reasoning_tokens, error.usage_diagnostic
                 if error.input_tokens is not None and error.output_tokens is not None:
                     usage = ModelUsage(error.input_tokens, error.output_tokens)
             elif not isinstance(error, ModelResponseError):
@@ -213,6 +218,7 @@ class BudgetedNarrativeCaller:
                 error_code=code,
                 duration_ms=duration_ms,
                 no_output=True,
+                reasoning_tokens=reasoning_tokens, usage_diagnostic=usage_diagnostic,
             )
             raise NarrativeBudgetCallError(
                 code, outcome, metrics, http_status=http_status,
@@ -230,6 +236,7 @@ class BudgetedNarrativeCaller:
             error_code=None,
             duration_ms=response.duration_ms,
             no_output=False,
+            reasoning_tokens=response.reasoning_tokens, usage_diagnostic=response.usage_diagnostic,
         )
         try:
             if response.model_id != run.model_id:
@@ -266,6 +273,8 @@ class BudgetedNarrativeCaller:
         error_code: str | None,
         duration_ms: int,
         no_output: bool,
+        reasoning_tokens: int | None = None,
+        usage_diagnostic: str | None = None,
     ) -> HandlerMetrics:
         try:
             record = self._store.settle_model_usage(
@@ -284,7 +293,8 @@ class BudgetedNarrativeCaller:
                     output_sha256=None,
                     settled_at=self._clock(),
                 )
-            return _metrics(record, duration_ms)
+            return _metrics(record, duration_ms, reasoning_tokens=reasoning_tokens,
+                            usage_diagnostic=usage_diagnostic)
         except Exception:
             # The original reservation remains if SQLite fails; do not leak a
             # provider exception or pretend the request was free.

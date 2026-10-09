@@ -233,6 +233,18 @@ class NarrativeModelRequest:
             canonical_json_hash({"selected_input_sha256": self.input_sha256, "output_plan": plan}))
 
 
+
+def validate_reasoning_observation(reasoning_tokens: int | None, output_tokens: int | None,
+                                   usage_diagnostic: str | None) -> None:
+    if reasoning_tokens is not None and (
+        type(reasoning_tokens) is not int or reasoning_tokens < 0
+        or output_tokens is None or reasoning_tokens > output_tokens
+    ):
+        raise ModelResponseError("model reasoning usage must be a nonnegative completion subset")
+    if usage_diagnostic not in {None, "reasoning_usage_invalid"}:
+        raise ModelResponseError("model usage diagnostic is invalid")
+
+
 @dataclass(frozen=True)
 class NarrativeModelResponse:
     """Opaque provider bytes plus the minimum immutable model identity."""
@@ -244,6 +256,8 @@ class NarrativeModelResponse:
     input_tokens: int | None = None
     output_tokens: int | None = None
     duration_ms: int = 0
+    reasoning_tokens: int | None = None
+    usage_diagnostic: str | None = None
 
     def __post_init__(self) -> None:
         if not all(
@@ -262,6 +276,7 @@ class NarrativeModelResponse:
             raise ModelResponseError("model response usage must be paired nonnegative integers")
         if type(self.duration_ms) is not int or self.duration_ms < 0:
             raise ModelResponseError("model response duration must be a nonnegative integer")
+        validate_reasoning_observation(self.reasoning_tokens, self.output_tokens, self.usage_diagnostic)
 
     @property
     def response_sha256(self) -> str:

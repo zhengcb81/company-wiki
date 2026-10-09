@@ -28,7 +28,7 @@ T0 = "2026-09-28T22:00:00Z"
 @pytest.fixture
 def loopback_model_server(monkeypatch, hermetic_runtime):
     """Serve one valid prompt-derived draft per actual local HTTP POST."""
-    state = SimpleNamespace(requests=[], errors=[], response_status=200, error_body=b"", response_body=None)
+    state = SimpleNamespace(requests=[], errors=[], response_status=200, error_body=b"", response_body=None, response_usage=None)
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *args):
@@ -49,7 +49,7 @@ def loopback_model_server(monkeypatch, hermetic_runtime):
                 reply = json.dumps({
                     "model": "stub-model", "choices": [{"message": {"content": json.dumps(draft, ensure_ascii=False)},
                                                              "finish_reason": "stop"}],
-                    "usage": {"prompt_tokens": 73, "completion_tokens": 19},
+                    "usage": state.response_usage if state.response_usage is not None else {"prompt_tokens": 73, "completion_tokens": 19},
                 }, ensure_ascii=False).encode("utf-8")
                 if state.response_body is not None:
                     reply = state.response_body

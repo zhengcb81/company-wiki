@@ -142,6 +142,7 @@ class LLMClient:
         self.workload = workload
         self.fallback_client = None
         self.fallback_status = "not_configured"
+        self._generation_options = {}
 
         # 尝试从 config 对象加载
         if config is None and provider is None:
@@ -154,15 +155,20 @@ class LLMClient:
 
         # 从 config 对象提取参数
         if config and hasattr(config, "llm"):
-            self.provider = provider or config.llm.provider
-            self.api_key = api_key or config.llm.api_key
-            self.model = model or config.llm.model
-            self.base_url = base_url or config.llm.base_url
-            self._max_tokens = config.llm.max_tokens
-            self._temperature = config.llm.temperature
+            selector = getattr(config, "llm_for_provider", None)
+            selected = selector(provider) if callable(selector) else config.llm
+            self.provider = provider or selected.provider
+            self.api_key = api_key or selected.api_key
+            self.model = model or selected.model
+            self.base_url = base_url or selected.base_url
+            self._max_tokens = selected.max_tokens
+            self._temperature = selected.temperature
             self._reasoning_split = bool(
-                getattr(config.llm, "reasoning_split", self.provider == "minimax")
+                getattr(selected, "reasoning_split", self.provider == "minimax")
             )
+            resolver = getattr(selected, "generation_options", None)
+            if callable(resolver):
+                self._generation_options = resolver(workload)
         else:
             self.provider = provider or self._detect_provider()
             self.api_key = api_key or self._get_api_key(self.provider)
@@ -186,6 +192,7 @@ class LLMClient:
                     api_key=fallback.api_key,
                     model=fallback.model,
                     base_url=fallback.base_url,
+                    config=config,
                     workload=workload,
                     enable_fallback=False,
                 )
@@ -507,8 +514,13 @@ class LLMClient:
                 kwargs["max_completion_tokens"] = token_limit
             else:
                 kwargs["max_tokens"] = token_limit
+            generation = getattr(self, "_generation_options", {})
+            kwargs.update({key: value for key, value in generation.items() if key != "thinking"})
+            extra = {"thinking": generation["thinking"]} if "thinking" in generation else {}
             if self.provider == "minimax" and self._reasoning_split:
-                kwargs["extra_body"] = {"reasoning_split": True}
+                extra["reasoning_split"] = True
+            if extra:
+                kwargs["extra_body"] = extra
             if json_mode:
                 kwargs["response_format"] = {"type": "json_object"}
 
@@ -565,6 +577,7 @@ class LLMClient:
             payload["max_tokens"] = token_limit
         if self.provider == "minimax" and self._reasoning_split:
             payload["reasoning_split"] = True
+        payload.update(getattr(self, "_generation_options", {}))
         if json_mode:
             payload["response_format"] = {"type": "json_object"}
 

@@ -27,7 +27,7 @@ from company_wiki.source_catalog.source_read_policy import (
     EXACT_READ_POLICY_FINGERPRINT_SCHEMA_VERSION, READ_POLICY_FINGERPRINT_SCHEMA_VERSION,
 )
 
-from .models import Event, Job, JobStatus, RuntimeState, canonical_json, canonical_json_hash
+from .models import Event, HandlerResult, Job, JobStatus, RuntimeState, canonical_json, canonical_json_hash
 from .narrative_batch_request import NarrativeBatchRequest
 from .narrative_contracts import (
     BUNDLE_MAX_BYTES, SELECT_RESULT_MAX_BYTES, SUMMARY_RESULT_MAX_BYTES,
@@ -881,8 +881,37 @@ def _receipt(run_id, status, documents, runs, guard):
         "storage": {"persistent_added_bytes": storage.persistent_added_bytes, "scratch_peak_bytes": storage.scratch_peak_bytes}}
 
 
+
+def _attempt_model_diagnostics(store, reservations, summary_job):
+    """Read optional observed meters; old receipts keep their original shape."""
+    observations = []
+    for attempt in store.list_attempts(summary_job.job_id):
+        raw = attempt.result_json
+        if raw is None or not any(field in raw for field in ('"reasoning_tokens":', '"usage_diagnostic":')):
+            continue
+        try:
+            metrics = HandlerResult.from_dict(json.loads(raw)).metrics
+            if metrics.reasoning_tokens is None and metrics.usage_diagnostic is None:
+                continue
+            reservation = reservations.get(attempt.attempt_id)
+            observations.append({
+                "attempt_id": attempt.attempt_id,
+                "usage_status": reservation.usage_status if reservation else "unknown",
+                "input_tokens": reservation.input_tokens if reservation else None,
+                "output_tokens": reservation.output_tokens if reservation else None,
+                "reasoning_tokens": metrics.reasoning_tokens,
+                "usage_diagnostic": metrics.usage_diagnostic,
+            })
+        except (KeyError, TypeError, ValueError):
+            # Optional diagnostics never change the original job/fee outcome.
+            observations.append({"attempt_id": attempt.attempt_id,
+                                 "diagnostic_status": "stored_observation_unreadable"})
+    return observations
+
+
 def _final_documents(request, binding, store, runs, artifacts, *, read_only=False, job_ids=None, reader=None, normalization=None):
     documents = []
+    reservations = {item.attempt_id: item for item in runs.reservations_for_run(request.run_id)}
     all_jobs = store.list_jobs(job_ids=job_ids, event_ids=tuple(event.event_id for event in binding.events))
     facts = {item["document_id"]: item for item in binding.source_facts}
     for event in binding.events:
@@ -923,8 +952,13 @@ def _final_documents(request, binding, store, runs, artifacts, *, read_only=Fals
                         compacted_at=_now())
             except NarrativeArtifactNotVisibleError:
                 document_status = "activation_pending"
-        documents.append({"document_id": ref.document_id, "status": document_status, "artifact_ref": artifact_ref,
-            "errors": [job.last_error_code for job in jobs if job.last_error_code]})
+        document = {"document_id": ref.document_id, "status": document_status, "artifact_ref": artifact_ref,
+            "errors": [job.last_error_code for job in jobs if job.last_error_code]}
+        summary_job = next(job for job in jobs if job.job_type == "source.narrative_summarize")
+        observations = _attempt_model_diagnostics(store, reservations, summary_job)
+        if observations:
+            document["model_diagnostics"] = observations
+        documents.append(document)
     return documents
 
 

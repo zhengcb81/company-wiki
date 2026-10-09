@@ -275,3 +275,26 @@ def test_rate_limit_keeps_existing_retryable_unknown_settlement():
     assert ledger.settlements[0]["error_code"] == "MODEL_RATE_LIMIT"
     assert error.metrics.tokens == 100
     assert model.calls == 1
+
+
+@pytest.mark.parametrize("failed", [False, True])
+def test_reasoning_usage_survives_budget_caller_without_double_charge(failed):
+    ledger = Ledger()
+    model = Model(ledger)
+    if failed:
+        model.error = ModelOutputTruncatedError(
+            model_id="model", input_tokens=50, output_tokens=10, duration_ms=18,
+            reasoning_tokens=7,
+        )
+        with pytest.raises(NarrativeBudgetCallError) as caught:
+            _caller(ledger, model).generate(_context(), REQUEST)
+        metrics = caught.value.metrics
+    else:
+        response = NarrativeModelResponse("http", "model", REQUEST.prompt_version, b"{}",
+                                          50, 10, 18, reasoning_tokens=7)
+        model.generate = lambda request: response
+        _, metrics = _caller(ledger, model).generate(_context(), REQUEST)
+    assert ledger.settlements[0]["usage"].total_tokens == 60
+    assert metrics.tokens == 60
+    assert metrics.reasoning_tokens == 7
+    assert metrics.usage_diagnostic is None

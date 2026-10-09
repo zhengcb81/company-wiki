@@ -10,6 +10,7 @@
 
 import os
 import copy
+import re
 import yaml
 from dataclasses import dataclass, field, replace
 from pathlib import Path
@@ -101,6 +102,40 @@ class LLMConfig:
     temperature: float = 1.0
     reasoning_split: bool = True
     fallback: LLMFallbackConfig = field(default_factory=LLMFallbackConfig)
+    generation_policy: Dict[str, Dict[str, Dict[str, str]]] = field(default_factory=dict)
+
+    def generation_options(self, purpose: str = "general") -> Dict[str, Any]:
+        """Resolve explicit provider/purpose options without credentials or defaults."""
+        policy = self.generation_policy
+        if not isinstance(policy, dict):
+            raise ValueError("generation_policy must be a provider mapping")
+        if not isinstance(purpose, str) or not re.fullmatch(r"[a-z][a-z0-9_]*", purpose):
+            raise ValueError("generation_policy purpose must be a named workload")
+        for provider, purposes in policy.items():
+            if provider not in {"minimax", "mimo", "deepseek", "openai", "claude"}:
+                raise ValueError("generation_policy contains an unknown provider")
+            if not isinstance(purposes, dict):
+                raise ValueError("generation_policy provider must contain purpose mappings")
+            for name, options in purposes.items():
+                if not isinstance(name, str) or not re.fullmatch(r"[a-z][a-z0-9_]*", name):
+                    raise ValueError("generation_policy purpose must be a named workload")
+                if not isinstance(options, dict) or not options.keys() <= {"thinking", "reasoning_effort"}:
+                    raise ValueError("generation_policy contains unsupported options")
+                thinking_values = {"enabled", "disabled"}
+                if provider != "deepseek":
+                    thinking_values.add("adaptive")
+                for key, values in (("thinking", thinking_values),
+                                    ("reasoning_effort", {"low", "high", "max"})):
+                    if key in options and (not isinstance(options[key], str) or options[key] not in values):
+                        raise ValueError("generation_policy contains an invalid " + key)
+        purposes = policy.get(self.provider, {})
+        selected = {**purposes.get("general", {}), **purposes.get(purpose, {})}
+        wire: Dict[str, Any] = {}
+        if "thinking" in selected:
+            wire["thinking"] = {"type": selected["thinking"]}
+        if "reasoning_effort" in selected:
+            wire["reasoning_effort"] = selected["reasoning_effort"]
+        return wire
 
 
 @dataclass
@@ -214,7 +249,7 @@ class Config:
                            api_key_env=fallback.api_key_env, model=fallback.model,
                            base_url=fallback.base_url)
         generation = {name: getattr(self.llm, name) for name in (
-            "max_tokens", "max_document_chars", "temperature", "reasoning_split")}
+            "max_tokens", "max_document_chars", "temperature", "reasoning_split", "generation_policy")}
         selected = self._build_config({"llm": {"provider": provider, **generation}},
                                       self.paths.wiki_root)
         selected.validate(strict=False)
@@ -284,6 +319,7 @@ class Config:
             temperature=llm_raw.get("temperature", 1.0),
             reasoning_split=bool(llm_raw.get("reasoning_split", True)),
             fallback=fallback,
+            generation_policy=copy.deepcopy(llm_raw.get("generation_policy", {})),
         )
         
         # 搜索配置
@@ -358,6 +394,11 @@ class Config:
             errors.append(
                 f"不支持的备用 LLM usage_scope: {self.llm.fallback.usage_scope}"
             )
+
+        try:
+            self.llm.generation_options()
+        except ValueError as exc:
+            errors.append(str(exc))
 
         # 数值范围验证
         if self.llm.temperature is not None and not (0 <= self.llm.temperature <= 2):
