@@ -52,13 +52,14 @@ from .narrative_routing import (
 
 NARRATIVE_PARSER_NAME = "selective_narrative_parser"
 NARRATIVE_PARSER_VERSION = QA_FRAGMENT_VERSION
-TRANSCRIPT_PARSER_VERSION = "0.2.0"
+TRANSCRIPT_PARSER_VERSION = "0.3.0"
 # Transcript 0.1.0 and 0.1.1 share the original heading/line parser. The PDF
 # QA version is independent: changing it must never reinterpret saved calls.
-_TRANSCRIPT_PARSER_LAYOUTS: dict[str, Literal["legacy", "natural"]] = {
+_TRANSCRIPT_PARSER_LAYOUTS: dict[str, Literal["legacy", "natural", "natural_affiliation"]] = {
     "0.1.0": "legacy",
     "0.1.1": "legacy",
     "0.2.0": "natural",
+    "0.3.0": "natural_affiliation",
 }
 
 
@@ -66,7 +67,7 @@ _TRANSCRIPT_PARSER_LAYOUTS: dict[str, Literal["legacy", "natural"]] = {
 class TranscriptParserContract:
     parser_name: str
     parser_version: str
-    layout: Literal["legacy", "natural"]
+    layout: Literal["legacy", "natural", "natural_affiliation"]
 
 
 def transcript_parser_contract(
@@ -987,10 +988,14 @@ def parse_pdf_bytes(
         )
 
 
-def _speaker_role(name: str, title: str, *, qa_mode: bool, management_speakers: set[str]) -> str:
+def _speaker_role(name: str, title: str, *, qa_mode: bool, management_speakers: set[str],
+                  case_insensitive: bool = False) -> str:
     lowered = f"{name} {title}".casefold()
     if "operator" in lowered or "conference operator" in lowered:
         return "operator"
+    if case_insensitive and any(name.casefold() == actor.casefold()
+                                for actor in management_speakers):
+        return "management"
     if re.search(r"analyst|j\.p\. morgan|ubs|goldman|morgan stanley|barclays", lowered):
         return "analyst"
     if name in management_speakers or re.search(
@@ -1048,6 +1053,7 @@ class _TranscriptParseState:
     active_qa: int | str | None = None
     current_qa_parent: int | None = None
     qa_counter: int = 0
+    qa_question_speaker: str | None = None
 
 
 def _transcript_speaker_fields(stripped: str) -> tuple[str | None, str | None, str | None]:
@@ -1080,18 +1086,21 @@ def _transcript_answer_group(
 
 def _begin_transcript_speaker(
     state: _TranscriptParseState, line_number: int,
-    name: str, title: str, body: str,
+    name: str, title: str, body: str, *, stable_qa: bool = False,
 ) -> None:
     role = _speaker_role(
         name, title, qa_mode=state.qa_mode,
-        management_speakers=state.management_speakers,
+        management_speakers=state.management_speakers, case_insensitive=stable_qa,
     )
     if not state.qa_mode and role == "management":
         state.management_speakers.add(name)
-    if state.qa_mode and role == "analyst":
+    if state.qa_mode and role == "analyst" and (
+        not stable_qa or state.qa_question_speaker != name.casefold()
+    ):
         state.qa_counter += 1
         state.current_qa_parent = state.qa_counter
         state.active_qa = state.current_qa_parent
+        state.qa_question_speaker = name.casefold()
     if state.qa_mode and role == "management":
         _transcript_answer_group(state, name, title, body)
     state.active = {
@@ -1259,18 +1268,20 @@ def parse_transcript_text(
     parser_version: str = TRANSCRIPT_PARSER_VERSION,
     language: str = "en",
 ) -> NarrativeParseResult:
-    """Split proved call layouts; legacy 0.1.0/0.1.1 replay unchanged."""
+    """Versioned call layouts; saved 0.1.x and 0.2.0 replay unchanged."""
     if not isinstance(text, str):
         raise TypeError("transcript text must be a string")
     contract = transcript_parser_contract(parser_version)
     raw_lines = text.splitlines()
     legacy = contract.layout == "legacy"
+    affiliation = contract.layout == "natural_affiliation"
     if legacy:
         heading = next((i for i, line in enumerate(raw_lines) if _TRANSCRIPT_START.match(line.strip())), None)
         start_index = None if heading is None else heading + 1
     else:
         from .transcript_layout import body_start
-        found = body_start(raw_lines, _TRANSCRIPT_START, _transcript_speaker_fields)
+        found = body_start(raw_lines, _TRANSCRIPT_START, _transcript_speaker_fields,
+                           allow_affiliation=affiliation)
         start_index = None if found is None else found[0]
         explicit_heading = False if found is None else found[1]
     if start_index is None:
@@ -1295,9 +1306,11 @@ def parse_transcript_text(
                 state.active = None
                 index += 1
                 continue
-            name, title, body, label_count = speaker_fields(raw_lines,index,_transcript_speaker_fields)
+            name, title, body, label_count = speaker_fields(
+                raw_lines,index,_transcript_speaker_fields, allow_affiliation=affiliation)
             if name:
-                _begin_transcript_speaker(state,index+1,name,title or "",body or "")
+                _begin_transcript_speaker(state,index+1,name,title or "",body or "",
+                                          stable_qa=affiliation)
                 if label_count > 1 and state.active is not None:
                     state.active["line_end"] = index + label_count
                 _enable_transcript_qa(state,bool(_QA_TRANSITION.search(body or "")))
