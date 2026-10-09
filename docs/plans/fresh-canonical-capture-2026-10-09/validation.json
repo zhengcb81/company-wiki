@@ -1,0 +1,212 @@
+{
+  "schema_version": "w04-engineering-acceptance/1",
+  "recorded_at": "2026-10-09T11:08:38.160630+00:00",
+  "base": "ceac91e7e09f615fb217d0fa02604ba96cdea111",
+  "scope": "isolated fixture/loopback M2; not M3 company research acceptance",
+  "external_paid_calls": 0,
+  "production_originals_modified": false,
+  "commands": [
+    {
+      "command": "python -X utf8 -B -m pytest tests/contract/test_official_capture_recovery.py -q --tb=short --basetemp C:/Users/郑曾波/AppData/Local/Temp/cwp-w04-red2-20261009",
+      "exit_code": 1,
+      "failed": 12,
+      "passed": 0,
+      "seconds": 4.25,
+      "note": "Four actual Win32 long-name failures; five stage-removal failures; missing capture/deadline public API. Initial fixture trailing whitespace corrected before interpreting failures."
+    },
+    {
+      "command": "pytest grouped six files (listed below)",
+      "exit_code": 0,
+      "passed": 83,
+      "seconds": 47.1,
+      "phase": "first grouped M2"
+    },
+    {
+      "command": "pytest focused receipt-storage and single-MIME-parse RED",
+      "exit_code": 1,
+      "failed": 2,
+      "seconds": 1.87
+    },
+    {
+      "command": "pytest focused retained known-SHA retry and budget/mismatched-SHA cases",
+      "exit_code": 1,
+      "failed": 1,
+      "passed": 2,
+      "seconds": 4.0
+    },
+    {
+      "command": "python -X utf8 -B -m pytest tests/contract/test_official_capture_recovery.py tests/contract/test_source_catalog_canonical_writer.py tests/unit/test_canonical_import_reference.py tests/unit/test_bounded_http.py tests/unit/test_adapter_process_budget.py tests/integration/test_official_source_flow.py -q --tb=short --basetemp C:/Users/郑曾波/AppData/Local/Temp/cwp-w04-m2-final-20261009",
+      "exit_code": 0,
+      "passed": 88,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 46.79
+    },
+    {
+      "command": "pytest new independent-review controls -k same_capture_id/current_cap/invalid_retained_json_shapes/completion_record_write_failure/completed_result_wrong_shape/completed_replay",
+      "phase": "independent M2 repair RED",
+      "exit_code": 1,
+      "failed": 15,
+      "deselected": 24,
+      "seconds": 6.43
+    },
+    {
+      "command": "pytest complete official_capture_recovery contract file",
+      "phase": "first follow-up focused GREEN",
+      "exit_code": 0,
+      "passed": 39,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 29.69,
+      "relocated_fixture_cleanup": "CW-BASETEMP-CLEANUP removed=true"
+    },
+    {
+      "command": "pytest grouped six files, cwp-w04-m2r-20261009",
+      "phase": "first follow-up grouped M2",
+      "exit_code": 1,
+      "passed": 102,
+      "failed": 1,
+      "seconds": 61.56,
+      "reason": "unchanged bad-SHA test caught new receipt validation error ordering; fixed code, not test"
+    },
+    {
+      "command": "pytest grouped six files, cwp-w04-m2r2-20261009",
+      "phase": "second follow-up grouped M2",
+      "exit_code": 1,
+      "passed": 102,
+      "failed": 1,
+      "seconds": 59.72,
+      "reason": "0.35s includes TLS transport initialization: truthful provider_started=false violated obsolete fixture assumption; MAIN approved observed-progress test correction"
+    },
+    {
+      "command": "python -X utf8 -B -m pytest tests/contract/test_official_capture_recovery.py tests/contract/test_source_catalog_canonical_writer.py tests/unit/test_canonical_import_reference.py tests/unit/test_bounded_http.py tests/unit/test_adapter_process_budget.py tests/integration/test_official_source_flow.py -q --tb=short --basetemp C:/Users/郑曾波/AppData/Local/Temp/cwp-w04-m2r3-20261009",
+      "phase": "final independent-review repair grouped M2",
+      "exit_code": 0,
+      "passed": 103,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 57.93
+    },
+    {
+      "command": "pytest residual completed cleanup contracts (raw/descriptor, diagnostic, cap/SHA guard, changed raw)",
+      "phase": "residual repair RED",
+      "exit_code": 1,
+      "failed": 6,
+      "deselected": 39,
+      "seconds": 4.85
+    },
+    {
+      "command": "pytest keeps_changed_or_unknown and missing_receipt",
+      "phase": "additional unknown-raw RED",
+      "exit_code": 1,
+      "failed": 1,
+      "deselected": 45,
+      "seconds": 1.05
+    },
+    {
+      "command": "python -X utf8 -B -m pytest tests/contract/test_official_capture_recovery.py tests/integration/test_official_source_flow.py -q --tb=short --basetemp C:/Users/郑曾波/AppData/Local/Temp/cwp-w04-res-m2-20261009",
+      "phase": "first concentrated residual M2",
+      "exit_code": 1,
+      "passed": 73,
+      "failed": 1,
+      "seconds": 60.62,
+      "reason": "cold CLI observation incorrectly inferred no provider attempt from no server GET; persisted real attempt1/raw0/usage incomplete proves distinction"
+    },
+    {
+      "command": "python -X utf8 -B -m pytest tests/contract/test_official_capture_recovery.py tests/integration/test_official_source_flow.py -q --tb=short --basetemp C:/Users/郑曾波/AppData/Local/Temp/cwp-w04-res-m2b-20261009",
+      "phase": "final concentrated residual M2 responsibility set",
+      "exit_code": 0,
+      "passed": 74,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 67.45,
+      "note": "46 capture contracts +28 official-flow integration tests; unrelated unchanged full suites not repeated"
+    }
+  ],
+  "checks": {
+    "ruff": "passed",
+    "git_diff_check": "passed",
+    "slow_trickle_real_loopback": "passed",
+    "stalled_read_real_loopback": "passed",
+    "public_cli_capture_recover": "passed",
+    "same_sha_canonical_and_retained_zero_get": "passed",
+    "different_bytes_no_overwrite": "passed",
+    "copy_rename_provenance_catalog_facts_failure_preservation": "passed",
+    "journal_secondary_error_preserves_primary": "passed",
+    "receipt_write_failure_keeps_raw_and_actual_usage": "passed",
+    "partial_download_not_importable": "passed",
+    "public_reader_actual_bytes_sha": "passed",
+    "legacy_journal_and_provider_import": "passed",
+    "lost_response_same_capture_id_public_cli": "passed",
+    "current_cap_retained_canonical_completed_public_cli": "passed",
+    "malformed_retained_and_completed_json_public_cli": "passed",
+    "completion_result_write_failure_preserves_raw": "passed",
+    "completed_replay_public_reader_actual_sha": "passed",
+    "cli_total_deadline_observed_progress": "passed (same 0.35s cap; actual persisted bytes/receipt/usage, genuine mandatory stall/trickle controls unchanged)",
+    "body_deadline_preinitialized_real_transport": "passed (unchanged0.35s, realGET1, stall exactly8, trickle actual partial/SHA)",
+    "cold_cli_attempt_vs_remote_get_vs_received_bytes": "passed (actual persisted evidence, unknown usage stays incomplete)",
+    "completed_pending_raw_and_descriptor_cleanup": "passed",
+    "completed_cleanup_failure_safe_available_result": "passed",
+    "completed_current_cap_and_sha_refusal_no_cleanup": "passed",
+    "changed_and_receipt_unknown_raw_not_deleted": "passed"
+  },
+  "source_file_sha256": {
+    "src/company_wiki/source_catalog/acquisition_journal.py": "cc04595c664dbc3684823d630e77844d719936d140d4fd838456b28d24b46235",
+    "src/company_wiki/source_catalog/canonical_writer.py": "2e5a97ce82c679608008d23127e08bc142e14c373d92102d77ee49a66ec7c4bd",
+    "src/company_wiki/source_catalog/official_source_cli.py": "3ea93e26ff1c3aa297e1af37694071dcb1dedb3179fdc6ad0927f4fc48fe9c37",
+    "src/company_wiki/source_catalog/official_source_flow.py": "30893d528064c5e65b5c23b3e4391b09b9db0e035c2f3a2db07582f466ae8ebd",
+    "tests/contract/test_official_capture_recovery.py": "91be99f92ab6379d5024d2578d6f72a50f7e146d8e2d079b7a16d919e3e7c672",
+    "tests/integration/test_official_source_flow.py": "591c5a1c0d2de7b6b4639144896dd66108e642d69c08dc08f162651c66d2a1aa"
+  },
+  "installation_delta": [],
+  "remaining_main_acceptance": [
+    "MAIN independent exact residual follow-up commit review, then full three-commit W04 chain cherry-pick with normal hooks",
+    "M3 original CN/HK/US fresh attempts via public capture instead of one-off urllib",
+    "Historical lost Lam body remains lost; do not relabel current peer capture as recovery"
+  ],
+  "baseline_delivery_file_sha256": {
+    "src/company_wiki/source_catalog/acquisition_journal.py": "cc04595c664dbc3684823d630e77844d719936d140d4fd838456b28d24b46235",
+    "src/company_wiki/source_catalog/canonical_writer.py": "2e5a97ce82c679608008d23127e08bc142e14c373d92102d77ee49a66ec7c4bd",
+    "src/company_wiki/source_catalog/official_source_cli.py": "279a047ab73ca2eaefee1bae4332f7159fbe3345081f93225acdc1b0c2dc511c",
+    "src/company_wiki/source_catalog/official_source_flow.py": "a8af1e4ed365fa8b274c325a7cc23c8983384aaf96eaef6811d5e4aeae82f78c",
+    "tests/contract/test_official_capture_recovery.py": "bc51685a31e4602c84e9df90b9c5062fb86375e577f9091b16ff7f9783858529",
+    "tests/integration/test_official_source_flow.py": "591c5a1c0d2de7b6b4639144896dd66108e642d69c08dc08f162651c66d2a1aa"
+  },
+  "independent_m2_followup": {
+    "reviewed_commit": "c839af5857dc0d9720a3127f1a2d3028493b50f7",
+    "reviewer_report": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/fresh_root_implementation_2026-10-09/capture_independent_review.md"
+  },
+  "first_followup_delivery_file_sha256": {
+    "src/company_wiki/source_catalog/acquisition_journal.py": "cc04595c664dbc3684823d630e77844d719936d140d4fd838456b28d24b46235",
+    "src/company_wiki/source_catalog/canonical_writer.py": "2e5a97ce82c679608008d23127e08bc142e14c373d92102d77ee49a66ec7c4bd",
+    "src/company_wiki/source_catalog/official_source_cli.py": "3ea93e26ff1c3aa297e1af37694071dcb1dedb3179fdc6ad0927f4fc48fe9c37",
+    "src/company_wiki/source_catalog/official_source_flow.py": "a896580802a14057df97d2da841c82f04749e51545f24d60b80efb504e9fdbdd",
+    "tests/contract/test_official_capture_recovery.py": "0bb95599640f80a9484ae7160298e7b248a99d66c5bad8e4895ad1905f12031d",
+    "tests/integration/test_official_source_flow.py": "591c5a1c0d2de7b6b4639144896dd66108e642d69c08dc08f162651c66d2a1aa"
+  },
+  "independent_residual_followup": {
+    "reviewed_commit": "17e154a757ec0e6534b7b93d8bd599e4f02a8eca",
+    "reviewer_report": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/fresh_root_implementation_2026-10-09/capture_residual_acceptance.md",
+    "write_set_beyond_reviewed_commit": [
+      "src/company_wiki/source_catalog/official_source_flow.py",
+      "tests/contract/test_official_capture_recovery.py",
+      "docs/plans/fresh-canonical-capture-2026-10-09/"
+    ],
+    "installation_delta": [],
+    "initial_failure_actual_receipt_observation": {
+      "http_requests": 1,
+      "remote_gets": 0,
+      "http_status": null,
+      "response_bytes": 0,
+      "persisted_raw_bytes": 0,
+      "usage_complete": false,
+      "provider_started": true,
+      "original_complete": false,
+      "current_acquisition_usage": {
+        "schema_version": "1.0",
+        "response_bytes": 0,
+        "cost_usd": "0"
+      }
+    }
+  }
+}
