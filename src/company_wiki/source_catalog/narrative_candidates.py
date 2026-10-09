@@ -8,6 +8,7 @@ import re
 
 from .n6_candidate_operating_facts import OperatingFact, detect_operating_fact
 from .narrative_document import NarrativeUnit
+from .narrative_visual_units import is_ocr_unit, ocr_identity
 
 
 TopicClassifier = Callable[[str], tuple[str, ...]]
@@ -245,6 +246,8 @@ _EMPTY_FACT = OperatingFact()
 
 def assess_unit(unit: NarrativeUnit, rules: CandidateRules) -> CandidateAssessment:
     """Classify one unit without mutating selection or storage state."""
+    if is_ocr_unit(unit) and ocr_identity(unit) is None:
+        return CandidateAssessment(None)
     if unit.source_role in _EXCLUDED_ROLES:
         return CandidateAssessment(None)
     text = unit.raw_text
@@ -264,7 +267,11 @@ def assess_unit(unit: NarrativeUnit, rules: CandidateRules) -> CandidateAssessme
     # already made the unit eligible. Preserve both reasons for budget policy.
     earned = fact if fact.eligible else _EMPTY_FACT
     topics = _fallback_topics(topics, signals, fact)
-    if _match(rules.static_definition, text):
+    scope_change = any(
+        reason in fact.reasons
+        for reason in ("business_scope_change", "reporting_definition_change", "reporting_rename")
+    )
+    if _match(rules.static_definition, text) and not scope_change:
         return CandidateAssessment(None)
     return CandidateAssessment(
         EvidenceCandidate(

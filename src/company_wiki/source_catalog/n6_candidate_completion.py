@@ -12,6 +12,7 @@ from collections.abc import Callable, Sequence
 import re
 
 from .narrative_document import NarrativeUnit
+from .narrative_visual_units import is_ocr_unit, ocr_continues
 
 
 PROJECT_CHARACTER_WINDOW = 1_600
@@ -26,6 +27,8 @@ def ends_sentence(text: str) -> bool:
 
 
 def linkable(left: NarrativeUnit, right: NarrativeUnit) -> bool:
+    if is_ocr_unit(left) or is_ocr_unit(right):
+        return ocr_continues(left, right)
     return (
         left.source_id == right.source_id
         and left.source_role == right.source_role
@@ -47,6 +50,8 @@ def members_linkable(members: Sequence[NarrativeUnit]) -> bool:
     if not members:
         return False
     first = members[0]
+    if any(is_ocr_unit(member) for member in members):
+        return all(linkable(a, b) for a, b in zip(members, members[1:], strict=False))
     return all(linkable(first, member) for member in members[1:])
 
 

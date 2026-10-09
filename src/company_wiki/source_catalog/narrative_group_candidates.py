@@ -23,6 +23,7 @@ from .n6_candidate_operating_facts import (
 from .narrative_candidates import EvidenceCandidate
 from .narrative_context import PdfContextGroup
 from .narrative_document import NarrativeUnit
+from .narrative_visual_units import is_ocr_unit, join_unit_text
 
 
 TopicClassifier = Callable[[str], tuple[str, ...]]
@@ -233,7 +234,7 @@ def _add_timeline_window(
     rules: GroupCandidateRules,
 ) -> set[str]:
     selection_id = f"{group_id}:certification-timeline:{window_index}"
-    window_text = "".join(unit.raw_text for unit in members)
+    window_text = join_unit_text(members)
     downstream = _match(rules.downstream_center_timeline, window_text)
     added: set[str] = set()
     for unit in members:
@@ -486,7 +487,7 @@ def _add_operating_fact_windows(
     )
     for index, (start, end) in enumerate(windows):
         window_members = members[start : end + 1]
-        window_text = "".join(unit.raw_text for unit in window_members)
+        window_text = join_unit_text(window_members)
         if len(window_text) > PROJECT_CHARACTER_WINDOW:
             continue
         if _invalid_group(window_text, rules):
@@ -556,7 +557,12 @@ def _invalid_group(text: str, rules: GroupCandidateRules) -> bool:
         return True
     if _match(rules.accounting_context, text):
         return True
-    return _match(rules.static_definition, text)
+    scope_fact = rules.operating_facts(text)
+    scope_change = any(
+        reason in scope_fact.reasons
+        for reason in ("business_scope_change", "reporting_definition_change", "reporting_rename")
+    )
+    return _match(rules.static_definition, text) and not scope_change
 
 
 def _general_topics(
@@ -648,6 +654,8 @@ def _general_score(
 
 
 def _outside_page_body(unit: NarrativeUnit) -> bool:
+    if is_ocr_unit(unit):
+        return False
     bbox = unit.metadata.get("bbox")
     if not isinstance(bbox, Sequence) or len(bbox) != 4:
         return False
@@ -656,6 +664,11 @@ def _outside_page_body(unit: NarrativeUnit) -> bool:
 
 
 def _member_reasons(unit: NarrativeUnit, reasons: tuple[str, ...]) -> tuple[str, ...]:
+    if is_ocr_unit(unit):
+        reasons = tuple(
+            "ocr_visual_context_group" if reason == "pdf_visual_context_group" else reason
+            for reason in reasons
+        )
     if unit.source_role == "management":
         return (*reasons, "management_statement")
     return reasons
@@ -711,7 +724,7 @@ def _add_completion_members(
         )
         if not indices:
             continue
-        sentence = "".join(members[index].raw_text for index in indices)
+        sentence = join_unit_text(tuple(members[index] for index in indices))
         fact = rules.operating_facts(sentence)
         candidate_index = store.index(members[hit].unit_id)
         hit_topics = store.candidates[candidate_index].topics if candidate_index is not None else ()

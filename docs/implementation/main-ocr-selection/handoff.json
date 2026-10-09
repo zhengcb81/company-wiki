@@ -1,0 +1,141 @@
+{
+  "schema_version": "main-ocr-selection-handoff/1",
+  "engineering_status": "PASS_155_FOCUSED",
+  "product_status": "NOT_ACCEPTED_MAIN_FINAL_REAL_BATCH_PENDING",
+  "branch": "codex/main-ocr-selection-20261009",
+  "base": "ea76998cc152317f653f101441de69bcb8aeb4fa",
+  "runtime_git_sha": "a1ac491ecfd7da4aadd664215f3c3ce52179d6c1",
+  "runtime_git_sha_role": "Exact code/test commit; subsequent commit contains only this implementation documentation/evidence",
+  "original_parser_branch": "codex/main-local-pptx-ocr-20261009",
+  "original_parser_branch_sha": "238e053e3003045113efc9cc7afb1390657cb9a6",
+  "selector_before": "0.4.2",
+  "selector_after": "0.5.0",
+  "generation_hash_changes_with_selector": true,
+  "runtime_file_sha256": {
+    "src/company_wiki/source_catalog/n6_candidate_completion.py": "6e42c29ae05a8bd904598aba9d5944ec2f90ea01585ede8b21839081cf19ee40",
+    "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": "518440544c7afe7678c34f6d8b7351c738b3ac5357c1272c0e4d5d82d594be63",
+    "src/company_wiki/source_catalog/n6_scope_changes.py": "818e711a1931c09cca106b6dd84079db4c1df8feb3c5e117211e98d5352fa396",
+    "src/company_wiki/source_catalog/narrative_candidates.py": "44d8292f548cedc3ba0c6f7016532dadbe7448ecb62881a38f21746c767bf26e",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "7e01586d7ed91bbdc34975b1c957ac32a821a0611457ebda85229e58b438fa76",
+    "src/company_wiki/source_catalog/narrative_group_candidates.py": "08e945df0ef727ee851393becd8b94f6c70278e3f113c7dd154a9b5e6dba811f",
+    "src/company_wiki/source_catalog/narrative_neighbors.py": "7d5675c8ac217af15589132c784bb246560bd3baa83d14ec7138efcc2f3de34d",
+    "src/company_wiki/source_catalog/narrative_ocr_groups.py": "e2d477858bc893a3b8c59617c500ef49d30d1251d9ec8b0d298929b3474571b8",
+    "src/company_wiki/source_catalog/narrative_visual_units.py": "958625522caecab61ff637dc9538e3e0b2b3955b1df48c1d3bd16a2916f68c3d",
+    "tests/unit/test_main_ocr_selection.py": "23d8cce67fd2112cfd84ada17a497efac36144cf8bf8953948f549189500a0f8"
+  },
+  "tests": {
+    "historical_red": {
+      "command": "python -B -m pytest tests/unit/test_main_ocr_selection.py -q -p no:cacheprovider",
+      "collected": 41,
+      "failed": 24,
+      "passed": 17,
+      "seconds": 2.35,
+      "log": "red.txt"
+    },
+    "final_green": {
+      "command": "python -B -m pytest tests/unit/test_main_ocr_selection.py tests/unit/test_n6_candidate_recall.py tests/unit/test_n6_candidate_main_boundaries.py tests/unit/test_narrative_english_business_recall.py tests/unit/test_narrative_english_operations.py tests/unit/test_narrative_selection_architecture.py -q -p no:cacheprovider",
+      "collected": 155,
+      "passed": 155,
+      "failed": 0,
+      "seconds": 1.86,
+      "log": "focused-green.txt"
+    },
+    "new_responsibility_count": 43,
+    "lint": {
+      "command": "python -B -m ruff check --no-cache <nine changed selector modules> tests/unit/test_main_ocr_selection.py docs/implementation/main-ocr-selection/sample_page7.py",
+      "status": "PASS",
+      "log": "lint.txt"
+    },
+    "synthetic_port_role": "Explicit deterministic test of grouping metadata, selected replay and corrected pure helper serialization; not provider/native live evidence"
+  },
+  "live": {
+    "status": "FAILED_RECEIPT_SERIALIZATION_AFTER_REPLAY_ASSERTIONS",
+    "receipt": "page7_real_receipt.json",
+    "receipt_sha256": "07ca510045a6e9f2aa11049f8a7ca57493c4ee364f931ef37e1a0aed2462924e",
+    "closure": "page7_sample_closure.json",
+    "wall_seconds": 21.959662700013723,
+    "limit_seconds": 60,
+    "terminal": true,
+    "returncode": 1,
+    "timeout": false,
+    "native_receipt_persisted": false,
+    "selected_count": null,
+    "verified_count": null,
+    "actual_ocr_line_count": null,
+    "selected_spans": null,
+    "error": "AttributeError: NarrativeEvidencePackage has no attribute omitted_count",
+    "control_flow_evidence": "Actual traceback reached receipt evaluation after verified == len(spans) and len(calls) == 2 and not denied assertion; not a replacement native receipt or full live PASS",
+    "pure_writer_fix": "selection_receipt uses omitted_candidate_count; checked in existing synthetic port test only",
+    "rerun": false,
+    "full_22_page_ocr": false,
+    "suppliers": 0,
+    "model_tokens": 0,
+    "model_cost_micro_usd": 0,
+    "unknown_provider_usage": 0,
+    "budget_role": "No model/provider/AUTO was invoked in this local CPU sample; no invented AUTO/native ledger",
+    "protected_before_after_identical": true,
+    "owned_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOS-cyk7s302",
+    "owned_root_removed": true,
+    "readonly_copy_restored_before_removal": true,
+    "original_deck_read_only_open": true,
+    "old_origin_auto_retained": true,
+    "old_jobs_requests_edited_or_resumed": false
+  },
+  "bounds": {
+    "max_ocr_group_members": 8,
+    "max_ocr_group_characters": 1200,
+    "identity": [
+      "source_id",
+      "page",
+      "media_sha256",
+      "shape_path",
+      "source_role",
+      "language",
+      "parser_name",
+      "parser_version",
+      "ocr_fingerprint",
+      "coordinate_space=image_pixels",
+      "image_dimensions",
+      "slide_id"
+    ],
+    "barriers": [
+      "nonconsecutive OCR line index",
+      "low_ocr_confidence",
+      "locator_unstable",
+      "cross-column geometry",
+      "vertical gap",
+      "sentence end",
+      "heading",
+      "new bullet"
+    ],
+    "original_text_locator_box_preserved": true,
+    "source_coverage_remains_false": true
+  },
+  "scope": {
+    "changed": [
+      "src/company_wiki/source_catalog/n6_candidate_completion.py",
+      "src/company_wiki/source_catalog/n6_candidate_operating_facts.py",
+      "src/company_wiki/source_catalog/n6_scope_changes.py",
+      "src/company_wiki/source_catalog/narrative_candidates.py",
+      "src/company_wiki/source_catalog/narrative_evidence.py",
+      "src/company_wiki/source_catalog/narrative_group_candidates.py",
+      "src/company_wiki/source_catalog/narrative_neighbors.py",
+      "src/company_wiki/source_catalog/narrative_ocr_groups.py",
+      "src/company_wiki/source_catalog/narrative_visual_units.py",
+      "tests/unit/test_main_ocr_selection.py"
+    ],
+    "unchanged": [
+      "worker",
+      "budget",
+      "completeness gate",
+      "raw source bytes",
+      "production configs",
+      "MAIN script",
+      "MAIN three PWF",
+      "source_reader_cli",
+      "source_availability",
+      "local_reconcile"
+    ]
+  },
+  "main_next_step": "Normal integration of this branch/runtime commit, then MAIN final single real whole-deck batch to prove actual bundle, counts and public exact replay. Old terminal generation stays frozen; new selector identity generates fresh work."
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": "main-ocr-selection-sample-closure/1",
+  "status": "TERMINAL_SERIALIZATION_FAILURE_SAMPLE_RESTORED",
+  "original_failure_receipt": "page7_real_receipt.json",
+  "original_failure_receipt_sha256": "07ca510045a6e9f2aa11049f8a7ca57493c4ee364f931ef37e1a0aed2462924e",
+  "owned_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOS-cyk7s302",
+  "sample_was_readonly": true,
+  "sample_readonly_restored_before_removal": true,
+  "owned_root_removed": true,
+  "checks": [
+    "Resolved absolute direct child of system TEMP",
+    "Exact owner marker and root",
+    "Only three expected files",
+    "No reparse entries",
+    "Child terminal returncode 1 and no timeout"
+  ],
+  "live_complete_pass": false,
+  "native_receipt_persisted": false,
+  "live_selected_count": null,
+  "live_verified_count": null,
+  "live_selected_spans": null,
+  "reached_traceback": "Receipt dict evaluation of selected.omitted_count after the selection and replay assertions",
+  "assertion_executed": "verified == len(spans) and len(calls) == 2 and not denied",
+  "assertion_evidence_role": "Execution control-flow evidence only; never replacement native counts or bundle",
+  "local_ocr_not_repeated": true,
+  "suppliers": 0,
+  "model_tokens": 0,
+  "model_cost_micro_usd": 0,
+  "unknown_provider_usage": 0,
+  "protected_unchanged": true,
+  "origin_auto_retained": true
+}
