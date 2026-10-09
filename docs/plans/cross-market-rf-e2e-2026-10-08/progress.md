@@ -596,3 +596,28 @@ W06正常ensure两早返回、FF query_found→最终open已由作者实证绕�
 ## 2026-10-09 17:47 UTC — 登记下一目标，保持当前目标运行
 
 已创建followup_eight_company_audit.md并在task_plan引用，逐家列表、完整审查/根因处置/技能升级/定点同步及结束条件均登记。当前目标实际完成后先update_goal complete再create_goal新目标；目前不虚报切换、不启动八家付费研究。本次仅规划记录，0新下载/LLM调用，原件/config/Dayu不改。
+
+## 2026-10-09 17:59 UTC — 按证据继续主线而非停在交付计数
+
+- 前一轮用户条件目标已写PWF并提交推送02b6831a；当前goal未完成/未切换。本轮恢复实际工程验收。
+- W06 source4c92b72c/docsd6dd3c83干净交付，260PASS/3明确SKIP，MSFT7原读52,643,200B/11.664s/保护与TEMP通过。但独立正常API发现A标签/B原文仍被复用，故当前独立状态仍FAIL，未合并/安装；作者已复工共同issuer binding根修，保留旧失败。
+- W12 source/test7668ef6e干净交付，无生产改动；MAIN静态读取实际公开pin、计量、失败账目和cleanup逻辑，待W06后一次集中整合复验。两分钟全矩阵仅用于大节点，不加入每commit或快速CI。
+- W09独立源覆盖调查已启动，仅sealed证据及有界官方primary发现/公开事件证明，不调用收费provider/LLM或下载；三executor正式获取与消费留M3。
+- 工具诊断：默认sandbox对两个既有外部worktree git status报must run in a work tree；require_escalated只读证实实际工作树正常/core.bare=false，避免错误reset/重建。MAIN首次错读不存在tools/pre_push_check.py及尚未合并的scope合同，均未改文件；随后CodeGraph正确定位tools/pre_push_gate.py，读source lane真实合同。新事实来源失败与工具路径错误分别记录。
+
+## 2026-10-09 18:03 UTC — 将真实主体回归纳入共享快速入口
+
+MAIN先补两条CI/push路由RED（2FAIL/0.68s），再将W06的短scope合同模块加入同一FAST_CONTRACT_CASES；W12两分钟全变体仍仅大节点运行，不进入commit或快速CI。路由/受影响选择集中39PASS/0.76s、独占TEMP及relocation根均恢复；这只证明路由接线，source合同文件仍待W06正确源码合并后真实收集/运行，当前不提交缺文件的中间状态。
+
+此前直接sandbox跑同一文件6PASS/33setupERROR/2.25s，原因sandbox TEMP无法建pytest编号目录，不是代码断言；换正常OS独占TEMP与显式own fallback后39PASS，未改测试。CI新路由RED、实际green和该环境失败分类均留sourcefacts诊断回执。
+
+
+## 2026-10-09 18:27 UTC — 统一来源绑定与缓存证据集中并线验收
+
+W0690723304/docs e8afcd26完成独立原样标准URL5入口反例、29controls及3相邻合同，全PASS；63manifest SHA/bytes匹配。MAIN正常no-ff merge3ee0a6b2；W12test7668ef6e正常no-ff merge d5855924。实际主线70PASS/0skip/115.20s，原配置及64矩阵SHA/size/mtime不变，独占TEMP删除，外部付费0；W12新receipt明确authoring235与actual main d585不同。长矩阵不进fastCI，短scope模块+39路由已真正收集通过。提交/正常push/新exactCI待。
+
+RF两行finite词表修复5dcd19be正常ff main，MAIN11独立投影PASS/.39s，owner三assurance日志SHA不变；正常push151PASS/26.70s，exactCI37972797793SUCCESS/30s。一文件CAS原子定点到agents/codex两物理根，claude复用agentsjunction，166未选public文件drift0/configoutput不动，2help入口green。原159/P5与新189集中各阶段记录保留；actual W06谓词与synthetic RF wire责任分开。
+
+W09readonly两文件交付，18M3动作、24refs/19原件hash/17匹配，57选定文件SHA/size保护；没有新获取/摘要/研究。纳秒mtime曾经JS数值丢精度，报告删除失真数字且不称精确mtime保护，不以mtime作publication证据。M3/W13、新三家、NVDA和当前池loop未完成；用户八家名单仍queued未激活。
+
+工具路径失误：MAIN在作者尚未写完时读W09交接一次missing；又猜RF acceptance_receipt.json（实际HANDOFF明确concentrated.json）及不存在typed_cause_usage_diagnosis.md。均只是只读路径错误，无源/测试/原件写，不能作产品RED；后续直接用真实交接literal路径。旧FAIL/所有RED不覆盖。

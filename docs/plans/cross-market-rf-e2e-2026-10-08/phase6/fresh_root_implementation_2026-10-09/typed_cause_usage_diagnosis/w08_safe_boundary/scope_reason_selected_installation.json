@@ -1,0 +1,48 @@
+{
+  "recorded_at": "2026-10-09T18:24:16.824693+00:00",
+  "source_commit": "5dcd19be77e8425f88a3d162d21c16b55070d51c",
+  "logical_roots": [
+    "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+    "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast",
+    "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast"
+  ],
+  "physical_roots": [
+    "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+    "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast"
+  ],
+  "selected": [
+    {
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_upstream_cause.py",
+      "before_sha256": "a8c2bf46a74e752fc87be10cb9b91708adb2dcd72b3e2b852c2e1d38808ee311",
+      "after_sha256": "32d2a1d5bc44e0d9abc60452f226e13418ebea4ea16fc7e1124345bfcf3bddbb",
+      "byte_size": 11783
+    },
+    {
+      "destination": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\filing_upstream_cause.py",
+      "before_sha256": "a8c2bf46a74e752fc87be10cb9b91708adb2dcd72b3e2b852c2e1d38808ee311",
+      "after_sha256": "32d2a1d5bc44e0d9abc60452f226e13418ebea4ea16fc7e1124345bfcf3bddbb",
+      "byte_size": 11783
+    }
+  ],
+  "unselected_public_code_drift": 0,
+  "unselected_public_files_checked": 166,
+  "config_output_user_files_written": false,
+  "probes": [
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+      "exit_code": 0,
+      "provider_started": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+      "exit_code": 0,
+      "provider_started": false
+    }
+  ],
+  "external_or_paid_calls": 0,
+  "normal_push": {
+    "passes": 151,
+    "seconds": 26.7
+  },
+  "exact_remote_CI": "pending"
+}

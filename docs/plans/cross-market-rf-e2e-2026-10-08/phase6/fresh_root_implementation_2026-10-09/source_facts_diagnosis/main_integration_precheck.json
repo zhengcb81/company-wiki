@@ -1,0 +1,31 @@
+{
+  "recorded_at": "2026-10-09T18:18:34.534983+00:00",
+  "phase": "pre_integration_not_acceptance",
+  "main_head": "02b6831a18ef7a90a58f31fc8a7405e78b730a3f",
+  "w06_source_commit": "90723304e4c7a0115f825bfee715f9568f2079f6",
+  "w06_handoff_commit": "e8afcd26fe52953b4a3a560d713d5b09c844c8df",
+  "w06_manifest_rows_checked": 63,
+  "mismatched_paths": [],
+  "w12_test_commit": "7668ef6e939769b4b9e2a11bf725c0d256f18367",
+  "protected": [
+    {
+      "path": "config/source_catalog.yaml",
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "byte_size": 866,
+      "mtime_ns": 1790542565101886700
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/fresh_root_remediation_2026-10-09/issue_root_matrix.json",
+      "sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "byte_size": 287424,
+      "mtime_ns": 1791539192739366500
+    }
+  ],
+  "pending": [
+    "independent_company_binding_acceptance",
+    "W06_W12_merge",
+    "combined_major_node",
+    "normal_push_exact_CI"
+  ],
+  "source_provider_model_calls": 0
+}

@@ -1,7 +1,7 @@
 {
   "schema_version": "fresh-main-integration/1",
   "date": "2026-10-09",
-  "status": "W05_W08_W11_ENGINEERING_ACCEPTED_PUBLISHED_OR_INSTALLED_W06_SHARED_SCOPE_REPAIR_W12_STARTED",
+  "status": "W06_W12_M2_INDEPENDENT_AND_COMBINED_ACCEPTED_MAIN_PUSH_PENDING_W09_W13_M3_PENDING",
   "frozen_issue_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
   "W04": {
     "source_tip": "68333bc360eb35b84f0616564953411e306f7610",
@@ -62,12 +62,7 @@
     "network_scope": "No source-provider or LLM calls; Git/GitHub CI publication and read-only observation occur separately."
   },
   "remaining_cards": [
-    "W05",
-    "W06",
-    "W08",
     "W09",
-    "W11",
-    "W12",
     "W13",
     "M3",
     "M4",
@@ -161,7 +156,7 @@
     }
   },
   "W06": {
-    "state": "local_prepare_qualification_211_green_additional_ensure_bypass_RED_shared_entry_diagnosis",
+    "state": "M2_independent_and_main_combined_ACCEPTED_normal_push_pending",
     "real_causes": [
       "legacy_inline_date_transform",
       "wrong_period_failure_classified_target",
@@ -170,7 +165,7 @@
     ],
     "diagnosis": "source_facts_diagnosis/handoff.json",
     "M3": "pending",
-    "review": "source_facts_diagnosis/independent_review.md",
+    "review": "source_facts_diagnosis/qualification_binding_re_review.md",
     "counterexamples": [
       "cached_ready_actual_wrong_CIK",
       "cached_ready_actual_FY2022_declared_FY2026"
@@ -183,9 +178,27 @@
     "actual_replay": {
       "original_reads": 7,
       "bytes": 52643200,
-      "seconds": 9.351
+      "seconds": 8.718,
+      "protected_unchanged": true,
+      "TEMP_absent": true
     },
-    "additional_counterexamples": "actual ensure exact reuse returns before qualification for two wrong cached scopes; source branch not merged"
+    "additional_counterexamples": "Old ensure bypass and standard official-import A-label/B-URL-and-body FAIL retained; fixed in shared source owner, no new consumer identity permission",
+    "prior_stage": "local_prepare_qualification_211_green_additional_ensure_bypass_RED_shared_entry_diagnosis",
+    "source_commit": "90723304e4c7a0115f825bfee715f9568f2079f6",
+    "handoff_commit": "e8afcd26fe52953b4a3a560d713d5b09c844c8df",
+    "main_merge": "3ee0a6b2",
+    "source_responsibility": {
+      "passes": 269,
+      "skipped": 3,
+      "seconds": 32.71
+    },
+    "independent": {
+      "standard_url_api_entries": 5,
+      "controls": 29,
+      "adjacent_contracts": 3,
+      "complete_proof": "master0 parse0 target_SHA1",
+      "missing_company_binding": "existing_master1 parse1 target_SHA1; same remaining budget"
+    }
   },
   "W08": {
     "state": "M2_accepted_both_mains_published_selected_installed",
@@ -212,7 +225,7 @@
       "skipped": 1,
       "seconds": 33.06
     },
-    "RF_followup_independent_review": "pending",
+    "RF_followup_independent_review": "typed_cause_usage_diagnosis/w08_safe_boundary/native_reason_review.md",
     "RF_main_published": "3c3c03792b189734aac5a0c8900b67b2c6f73ca5",
     "RF_followup_independent": {
       "passes": 21,
@@ -225,7 +238,38 @@
       "conclusion": "success",
       "seconds": 37
     },
-    "RF_selected_installation": "typed_cause_usage_diagnosis/w08_safe_boundary/rf_selected_installation_receipt.json"
+    "RF_selected_installation": "typed_cause_usage_diagnosis/w08_safe_boundary/rf_selected_installation_receipt.json",
+    "RF_current_main_published": "5dcd19be77e8425f88a3d162d21c16b55070d51c",
+    "scope_reason_followup": {
+      "source_commit": "5dcd19be77e8425f88a3d162d21c16b55070d51c",
+      "production_delta": "Four existing finite diagnostic tokens, two lines in one file",
+      "tests": {
+        "passes": 189,
+        "existing_windows_skip": 1,
+        "seconds": 61.35,
+        "actual_wire_cases": 22,
+        "producer": "synthetic native wire; real RF reader/preparation CLI"
+      },
+      "MAIN_review": {
+        "passes": 11,
+        "seconds": 0.39,
+        "owner_tracked_WIP_preserved": true
+      },
+      "normal_push": {
+        "passes": 151,
+        "seconds": 26.7
+      },
+      "exact_CI": {
+        "id": 37972797793,
+        "head_sha": "5dcd19be77e8425f88a3d162d21c16b55070d51c",
+        "conclusion": "success",
+        "seconds": 30
+      },
+      "installation": "typed_cause_usage_diagnosis/w08_safe_boundary/scope_reason_selected_installation.json",
+      "physical_files": 2,
+      "unselected_public_code_drift": 0,
+      "M3": "pending"
+    }
   },
   "W11": {
     "state": "M2_independently_accepted_committed_selected_installed",
@@ -251,11 +295,64 @@
   },
   "observed_at": "2026-10-09T17:35:31.738907+00:00",
   "W12": {
-    "state": "offline_cache_behavior_receipts_started",
+    "state": "M2_MAIN_combined_ACCEPTED_normal_push_pending",
     "branch": "codex/fresh-cache-receipts-20261009",
     "source_base": "2350077ac31655d358e67390c6fbda129d80d7dc",
     "owner_plan": "docs/plans/fresh-cache-receipts-2026-10-09",
     "writes": "one new contract/e2e test plus own PWF; production code only after proven RED and MAIN scope assignment",
-    "M3": "pending"
+    "M3": "pending real company same-spec repeats",
+    "test_commit": "7668ef6e939769b4b9e2a11bf725c0d256f18367",
+    "main_merge": "d5855924ec60a1be1d0ce4e3cbaf4331efb26e6b",
+    "production_edits": 0,
+    "author_concentration": {
+      "passes": 4,
+      "skips": 0,
+      "seconds": 112.88
+    },
+    "MAIN_combined": {
+      "passes": 70,
+      "skips": 0,
+      "seconds": 115.2,
+      "receipt": "source_facts_diagnosis/main_combined_acceptance.json",
+      "matrix_receipt": "docs/plans/fresh-cache-receipts-2026-10-09/main-integration-receipt.json",
+      "synthetic_model_POSTs": 14,
+      "actual_spec_hit_model_POSTs": 0,
+      "external_paid_calls": 0,
+      "TEMP_restored": true
+    },
+    "fast_CI": "Long matrix excluded; short source-scope contracts share CI/push entry"
+  },
+  "W09": {
+    "state": "readonly_source_coverage_preparation_delivered_not_M3_ACCEPTED",
+    "report": "w09_material_coverage/initial_investigation.md",
+    "inventory": "w09_material_coverage/initial_inventory.json",
+    "existing_source_refs": 24,
+    "physical_originals_hashed": 19,
+    "matched_originals": 17,
+    "next_execution_items": 18,
+    "provider_model_download_calls": 0,
+    "complete_full_company_QA_and_date_same_SHA": "pending",
+    "important_corrections": [
+      "SSE195 is 21 companies total, not AMEC195",
+      "Different IPO bytes not substituted",
+      "MSFT FY26 SEC index discovery does not equal registered original",
+      "Official H1 event not yet same-SHA proof",
+      "Latest OpenAI amendments must distinguish financing, commitments and realized revenue"
+    ]
+  },
+  "queued_next_goal": {
+    "document": "followup_eight_company_audit.md",
+    "state": "registered_not_activated",
+    "companies": [
+      "阿里巴巴",
+      "小米集团",
+      "药明生物",
+      "药明康德",
+      "药明合联",
+      "微软",
+      "Snowflake",
+      "MongoDB"
+    ],
+    "current_goal_remains_active": true
   }
 }

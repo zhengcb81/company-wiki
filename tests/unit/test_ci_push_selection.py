@@ -164,3 +164,17 @@ def test_published_summary_contracts_run_in_both_ci_and_push(entrypoint, monkeyp
     assert "tests/contract/test_narrative_output_plan.py" in seen[0]
     assert "tests/contract/test_summary_group_coverage.py" in seen[0]
     assert "tests/contract/test_official_transcript_layouts.py" in seen[0]
+
+
+@pytest.mark.parametrize("entrypoint", ["--push-checks", "--fast-contracts-only"])
+def test_source_scope_guard_is_shared_but_full_cache_matrix_is_major_node_only(entrypoint, monkeypatch):
+    seen = []
+    monkeypatch.setattr(sys, "stdin", type("Input", (), {"read": lambda self: "refs"})())
+    monkeypatch.setattr(gate, "changed_paths", lambda root, data: {"docs/report.md"})
+    monkeypatch.setattr(gate, "select_unit_tests", lambda root, files: ([], "documents only"))
+    monkeypatch.setattr(gate, "_run_pytest_gate", lambda cmd, label: seen.append(cmd) or 0)
+
+    assert gate.main([entrypoint]) == 0
+    assert len(seen) == 1
+    assert "tests/contract/test_source_scope_qualification.py" in seen[0]
+    assert "tests/contract/test_fresh_cache_behavior_receipts.py" not in seen[0]

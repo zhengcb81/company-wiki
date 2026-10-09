@@ -1,0 +1,28 @@
+{
+  "schema_version": "ci-source-scope-routing-red/1",
+  "recorded_at": "2026-10-09T18:00:41.386059+00:00",
+  "tested_main_head": "02b6831a",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/unit/test_ci_push_selection.py::test_source_scope_guard_is_shared_but_full_cache_matrix_is_major_node_only",
+    "-p",
+    "no:cacheprovider"
+  ],
+  "exit_code": 1,
+  "failed": 2,
+  "pytest_seconds": 0.68,
+  "red_kind": "critical finite source scope regressions omitted from both shared fast CI and push commands",
+  "entries": [
+    "--push-checks",
+    "--fast-contracts-only"
+  ],
+  "observed_failure_excerpt": "assert \"tests/contract/test_source_scope_qualification.py\" in seen[0]\nAssertionError: assert not in actual collected command",
+  "test_sha256": "e49f719b3d007772b43cdb0166d44e82a641d0ddde76f9aa8295fb4bf7b46941",
+  "limits": "Routing unit tests intentionally mock execution; actual source contract collection and behavior wait for W06 integration. Two-minute W12 cache matrix remains major-node only. No tmp_path fixture requested and no fixture original/config/network/paid calls."
+}

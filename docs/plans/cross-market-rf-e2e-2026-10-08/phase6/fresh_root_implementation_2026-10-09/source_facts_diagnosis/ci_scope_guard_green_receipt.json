@@ -1,0 +1,41 @@
+{
+  "recorded_at": "2026-10-09T18:02:12.753627+00:00",
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/unit/test_ci_push_selection.py",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwci-zdyw49do\\requested"
+  ],
+  "returncode": 0,
+  "wall_seconds": 3.306,
+  "decisions": [
+    {
+      "event": "decision",
+      "requested_basetemp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwci-zdyw49do\\requested",
+      "requested_basetemp_len": 55,
+      "cwd_len": 34,
+      "threshold": 60,
+      "win32_path_limit": 210,
+      "generation_reserve": 150,
+      "relocated": false,
+      "reason": "within-budget"
+    }
+  ],
+  "earlier_sandbox_invocation": {
+    "returncode": 1,
+    "passes": 6,
+    "setup_errors": 33,
+    "pytest_seconds": 2.25,
+    "cause": "sandbox default TEMP numbered directory creation denied; not source or routing assertion failure"
+  },
+  "routing_scope": "39 focused routing/selection tests; actual finite source contracts wait W06 merge; two-minute cache matrix excluded",
+  "owned_temp_absent": true
+}

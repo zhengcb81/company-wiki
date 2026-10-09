@@ -1,0 +1,3013 @@
+{
+  "observed_at": "2026-10-09T18:09:23.602915+00:00",
+  "companies": [
+    {
+      "run_id": "fresh-20261009T065028-cn-688012",
+      "run_root": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012",
+      "identity": {
+        "canonical_name": "中微公司",
+        "market": "CN",
+        "exchange": "SSE",
+        "ticker": "688012",
+        "security_id": "688012",
+        "match_basis": "ticker_exact",
+        "matched_value": "688012",
+        "score": 1,
+        "verified": true,
+        "active": true,
+        "source_name": "cninfo",
+        "source_url": "https://www.cninfo.com.cn/new/data/szse_stock.json",
+        "source_record_id": "9900038991",
+        "identifiers": {
+          "cninfo_category": "A股",
+          "org_id": "9900038991"
+        }
+      },
+      "as_of_date": "2026-10-08",
+      "existing_sources": [
+        {
+          "key": "cn-688012:d64c410832f2",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+            "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+            "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+            "byte_size": 9165875,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          },
+          "sealed_source_fact": {
+            "title": "中微公司：2025年年度报告",
+            "display_name": "中微公司",
+            "market": "CN",
+            "security_id": "688012",
+            "document_kind": "annual_report",
+            "fiscal_year": 2025,
+            "fiscal_period": "FY",
+            "form_type": null,
+            "period_end": "2025-12-31",
+            "published_date": "2026-03-31",
+            "source_url": "https://static.cninfo.com.cn/finalpage/2026-03-31/1225062431.PDF"
+          },
+          "sealed_executor_open": "verified raw read success",
+          "sealed_reviewer_open": {
+            "status": "qualified_and_opened",
+            "bytes_verified": true,
+            "read_at": "2026-10-09T08:17:11.102128+00:00",
+            "receipt_status": "ok"
+          },
+          "sealed_parse": {
+            "parser": "PyMuPDF",
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\execution\\sources\\d64c410832f2-pages.json"
+          },
+          "sealed_summary": "failed: paid MODEL_OUTPUT_TRUNCATED; no narrative artifact",
+          "sealed_research_relevance": {
+            "locator": "PyMuPDF all pages; nativeclaims exact locators",
+            "claim_ids": [],
+            "narrative_binding_locators": [],
+            "used_in_forecast": null,
+            "note": null
+          },
+          "sealed_reference": {
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\roles\\fetch\\review-original-opens.json",
+            "json_pointer": "/originals/0"
+          },
+          "current_physical_paths": [
+            "C:\\Users\\郑曾波\\Dropbox\\Stock\\工业与信息化\\电子\\中微公司\\中微公司：2025年年度报告.pdf"
+          ],
+          "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+        },
+        {
+          "key": "cn-688012:182e2062fed9",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+            "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+            "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+            "byte_size": 3149962,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          },
+          "sealed_source_fact": {
+            "title": "2026年半年度报告",
+            "display_name": "中微公司",
+            "market": "CN",
+            "security_id": "688012",
+            "document_kind": "semi_annual_report",
+            "fiscal_year": 2026,
+            "fiscal_period": "H1",
+            "form_type": "interim_report",
+            "period_end": null,
+            "published_date": "2026-08-20",
+            "source_url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482884.PDF"
+          },
+          "sealed_executor_open": "verified raw read success",
+          "sealed_reviewer_open": {
+            "status": "qualified_and_opened",
+            "bytes_verified": true,
+            "read_at": "2026-10-09T08:17:11.746487+00:00",
+            "receipt_status": "ok"
+          },
+          "sealed_parse": {
+            "parser": "PyMuPDF",
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\execution\\sources\\182e2062fed9-pages.json"
+          },
+          "sealed_summary": "failed: unpaid source_metadata.language contract precheck",
+          "sealed_research_relevance": {
+            "locator": "PyMuPDF all pages; nativeclaims exact locators",
+            "claim_ids": [],
+            "narrative_binding_locators": [],
+            "used_in_forecast": null,
+            "note": null
+          },
+          "sealed_reference": {
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\roles\\fetch\\review-original-opens.json",
+            "json_pointer": "/originals/1"
+          },
+          "current_physical_paths": [],
+          "current_read_claim": "Existing SourceRef and sealed exact-byte reader receipt observed; this investigation did not resolve or native-open this physical file again."
+        },
+        {
+          "key": "cn-688012:91ae4978b694",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+            "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+            "content_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+            "byte_size": 6361468,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          },
+          "sealed_source_fact": {
+            "title": "中微公司：2025年半年度报告",
+            "display_name": "中微公司",
+            "market": "CN",
+            "security_id": "688012",
+            "document_kind": "semi_annual_report",
+            "fiscal_year": 2025,
+            "fiscal_period": "H1",
+            "form_type": null,
+            "period_end": "2025-06-30",
+            "published_date": "2025-08-29",
+            "source_url": "http://static.cninfo.com.cn/finalpage/2025-08-29/1224606011.PDF"
+          },
+          "sealed_executor_open": "verified raw read success",
+          "sealed_reviewer_open": {
+            "status": "qualified_and_opened",
+            "bytes_verified": true,
+            "read_at": "2026-10-09T08:17:12.360961+00:00",
+            "receipt_status": "ok"
+          },
+          "sealed_parse": {
+            "parser": "PyMuPDF",
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\execution\\sources\\91ae4978b694-pages.json"
+          },
+          "sealed_summary": "not_model_summarized; original comparative numbers read",
+          "sealed_research_relevance": {
+            "locator": "PyMuPDF all pages; nativeclaims exact locators",
+            "claim_ids": [],
+            "narrative_binding_locators": [],
+            "used_in_forecast": null,
+            "note": null
+          },
+          "sealed_reference": {
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\roles\\fetch\\review-original-opens.json",
+            "json_pointer": "/originals/2"
+          },
+          "current_physical_paths": [],
+          "current_read_claim": "Existing SourceRef and sealed exact-byte reader receipt observed; this investigation did not resolve or native-open this physical file again."
+        },
+        {
+          "key": "cn-688012:ab7bb0076b2a",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+            "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+            "content_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+            "byte_size": 217264,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          },
+          "sealed_source_fact": {
+            "title": "中微公司：2026年第一季度报告",
+            "display_name": "中微公司",
+            "market": "CN",
+            "security_id": "688012",
+            "document_kind": "quarterly_report",
+            "fiscal_year": 2026,
+            "fiscal_period": "Q1",
+            "form_type": null,
+            "period_end": "2026-03-31",
+            "published_date": "2026-04-28",
+            "source_url": "http://static.cninfo.com.cn/finalpage/2026-04-28/1225215453.PDF"
+          },
+          "sealed_executor_open": "verified raw read success",
+          "sealed_reviewer_open": {
+            "status": "qualified_and_opened",
+            "bytes_verified": true,
+            "read_at": "2026-10-09T08:17:12.995855+00:00",
+            "receipt_status": "ok"
+          },
+          "sealed_parse": {
+            "parser": "PyMuPDF",
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\execution\\sources\\ab7bb0076b2a-pages.json"
+          },
+          "sealed_summary": "completed: original Chinese summary publicly read; two spans consumed into six used parameters, selection partial",
+          "sealed_research_relevance": {
+            "locator": "PyMuPDF all pages; nativeclaims exact locators",
+            "claim_ids": [],
+            "narrative_binding_locators": [],
+            "used_in_forecast": null,
+            "note": null
+          },
+          "sealed_reference": {
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\roles\\fetch\\review-original-opens.json",
+            "json_pointer": "/originals/3"
+          },
+          "current_physical_paths": [],
+          "current_read_claim": "Existing SourceRef and sealed exact-byte reader receipt observed; this investigation did not resolve or native-open this physical file again."
+        },
+        {
+          "key": "cn-688012:19cdb41e03b2",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+            "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+            "content_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+            "byte_size": 11211796,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          },
+          "sealed_source_fact": {
+            "title": "中微公司：首次公开发行股票并在科创板上市招股说明书",
+            "display_name": "中微公司",
+            "market": "CN",
+            "security_id": "688012",
+            "document_kind": "prospectus",
+            "fiscal_year": null,
+            "fiscal_period": null,
+            "form_type": null,
+            "period_end": null,
+            "published_date": "2019-07-16",
+            "source_url": "http://static.cninfo.com.cn/finalpage/2019-07-16/1206447929.PDF"
+          },
+          "sealed_executor_open": "verified raw read success",
+          "sealed_reviewer_open": {
+            "status": "qualified_and_opened",
+            "bytes_verified": true,
+            "read_at": "2026-10-09T08:17:13.583318+00:00",
+            "receipt_status": "ok"
+          },
+          "sealed_parse": {
+            "parser": "PyMuPDF",
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\execution\\sources\\19cdb41e03b2-pages.json"
+          },
+          "sealed_summary": "not_model_summarized; historical qualitative context read",
+          "sealed_research_relevance": {
+            "locator": "PyMuPDF all pages; nativeclaims exact locators",
+            "claim_ids": [],
+            "narrative_binding_locators": [],
+            "used_in_forecast": null,
+            "note": null
+          },
+          "sealed_reference": {
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\roles\\fetch\\review-original-opens.json",
+            "json_pointer": "/originals/4"
+          },
+          "current_physical_paths": [],
+          "current_read_claim": "Existing SourceRef and sealed exact-byte reader receipt observed; this investigation did not resolve or native-open this physical file again."
+        },
+        {
+          "key": "cn-688012:0c5481a9e5f8",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:0c5481a9e5f8e9f14348cddef5f60f2212b651685190078520908216c9526116",
+            "source_id": "urn:company-wiki:source:sha256:0c5481a9e5f8e9f14348cddef5f60f2212b651685190078520908216c9526116",
+            "content_sha256": "0c5481a9e5f8e9f14348cddef5f60f2212b651685190078520908216c9526116",
+            "byte_size": 206948,
+            "mime_type": "text/html",
+            "schema_version": "2.0"
+          },
+          "sealed_source_fact": {
+            "title": "SEMI July 2026 semiconductor equipment forecast",
+            "display_name": "中微公司",
+            "market": "CN",
+            "security_id": "688012",
+            "document_kind": "other",
+            "fiscal_year": null,
+            "fiscal_period": null,
+            "form_type": null,
+            "period_end": null,
+            "published_date": "2026-07-14",
+            "source_url": "https://www.semi.org/en/semi-press-release/global-semiconductor-equipment-sales-forecast-to-reach-a-record-229-billion-dollars-in-2028-semi-reports"
+          },
+          "sealed_executor_open": "verified raw success",
+          "sealed_reviewer_open": {
+            "status": "qualified_and_opened",
+            "bytes_verified": true,
+            "read_at": "2026-10-09T08:17:14.233852+00:00",
+            "receipt_status": "ok"
+          },
+          "sealed_parse": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\execution\\sources\\semi-original-text.json",
+          "sealed_summary": "not_model_summarized; original English evidence used",
+          "sealed_research_relevance": {
+            "locator": "WFE forecast and region prose",
+            "claim_ids": [],
+            "narrative_binding_locators": [],
+            "used_in_forecast": null,
+            "note": null
+          },
+          "sealed_reference": {
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\roles\\fetch\\review-original-opens.json",
+            "json_pointer": "/originals/5"
+          },
+          "current_physical_paths": [
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\companies\\中微公司\\raw\\other\\unknown-date_official_0c5481a9e5f8e9f14348cddef5f60f2212b651685190078520908216c9526116_SEMI July 2026 semiconductor equipment forecast.html"
+          ],
+          "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+        }
+      ],
+      "sealed_matrix_reference": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\execution\\document_matrix.json",
+      "sealed_matrix_document_count": 13,
+      "bounded_existing_gaps": [
+        "Current dated SourceRef query no telephone TXT; SSE2026-09-10 Q&A is separate official management communication, not ET call.",
+        "New 2026Q3 filing excluded until actual publication<=2026-10-08; no future quarter guessed.",
+        "Annual2024 and conditional financing originals need exact primary metadata repair, not re-download."
+      ],
+      "declared_future_targets": [],
+      "other_ledger_sources": []
+    },
+    {
+      "run_id": "fresh-20261009T065028-hk-00700",
+      "run_root": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700",
+      "identity": {
+        "canonical_name": "騰訊控股",
+        "market": "HK",
+        "exchange": "HKEX",
+        "ticker": "00700",
+        "security_id": "00700",
+        "match_basis": "ticker_exact",
+        "matched_value": "00700",
+        "score": 1,
+        "verified": true,
+        "active": true,
+        "source_name": "hkex",
+        "source_url": "https://www1.hkexnews.hk/ncms/script/eds/activestock_sehk_c.json",
+        "source_record_id": "17416",
+        "identifiers": {
+          "hkex_stock_id": "17416"
+        }
+      },
+      "as_of_date": "2026-10-08",
+      "existing_sources": [
+        {
+          "key": "hk-00700:d19f183452e9",
+          "source_ref": {
+            "byte_size": 4428270,
+            "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+            "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+            "mime_type": "application/pdf",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+          },
+          "sealed_source_fact": {
+            "title": "腾讯：2025年年度报告",
+            "display_name": "騰訊控股",
+            "market": "HK",
+            "security_id": "00700",
+            "document_kind": "annual_report",
+            "fiscal_year": 2025,
+            "fiscal_period": null,
+            "form_type": null,
+            "period_end": null,
+            "published_date": "2026-04-09",
+            "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf"
+          },
+          "sealed_executor_open": null,
+          "sealed_reviewer_open": {
+            "status": "qualified_and_opened",
+            "bytes_verified": true,
+            "read_at": "2026-10-09T08:18:10.403537+00:00",
+            "receipt_status": "ok"
+          },
+          "sealed_parse": {
+            "parser": "PyMuPDF 1.26.7",
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\annual-2025-pages.json"
+          },
+          "sealed_summary": {
+            "status": "read",
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\annual-2025-narrative-context.json",
+            "coverage_complete": false
+          },
+          "sealed_research_relevance": {
+            "locator": "company_wiki_trace.source_manifest; exact cited pages in evidence_claims",
+            "claim_ids": [
+              "claim_history_2025",
+              "claim_vas_base",
+              "claim_marketing_base",
+              "claim_fintechbusiness_base",
+              "claim_other_base",
+              "claim_reported_total",
+              "claim_rec_vas",
+              "claim_agent_vas",
+              "claim_rec_marketing",
+              "claim_agent_marketing",
+              "claim_rec_fintechbusiness",
+              "claim_agent_fintechbusiness",
+              "claim_other_h2_low_2026_g_context",
+              "claim_other_low_2027_g_context",
+              "claim_other_low_2028_g_context",
+              "claim_other_h2_base_2026_g_context",
+              "claim_other_base_2027_g_context",
+              "claim_other_base_2028_g_context",
+              "claim_other_h2_high_2026_g_context",
+              "claim_other_high_2027_g_context",
+              "claim_other_high_2028_g_context",
+              "claim_rec_other",
+              "claim_agent_other",
+              "claim_gd_marketing_engagement",
+              "claim_gd_ftb_ai",
+              "claim_gd_other_company",
+              "claim_narrative_cloud_direction",
+              "claim_narrative_payment_direction"
+            ],
+            "narrative_binding_locators": [],
+            "used_in_forecast": null,
+            "note": "Original bytes verified once by public source reader; hashes are identity/integrity, not attestation or economic validation."
+          },
+          "sealed_reference": {
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\roles\\fetch\\review-original-opens.json",
+            "json_pointer": "/originals/0"
+          },
+          "current_physical_paths": [],
+          "current_read_claim": "Existing SourceRef and sealed exact-byte reader receipt observed; this investigation did not resolve or native-open this physical file again."
+        },
+        {
+          "key": "hk-00700:70f529984a87",
+          "source_ref": {
+            "byte_size": 5241364,
+            "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+            "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+            "mime_type": "application/pdf",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0"
+          },
+          "sealed_source_fact": {
+            "title": "腾讯：2024年年度报告",
+            "display_name": "騰訊控股",
+            "market": "HK",
+            "security_id": "00700",
+            "document_kind": "annual_report",
+            "fiscal_year": 2024,
+            "fiscal_period": null,
+            "form_type": null,
+            "period_end": null,
+            "published_date": "2025-04-08",
+            "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0408/2025040800668_c.pdf"
+          },
+          "sealed_executor_open": null,
+          "sealed_reviewer_open": {
+            "status": "qualified_and_opened",
+            "bytes_verified": true,
+            "read_at": "2026-10-09T08:18:11.038908+00:00",
+            "receipt_status": "ok"
+          },
+          "sealed_parse": {
+            "parser": "PyMuPDF 1.26.7",
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\annual-2024-pages.json"
+          },
+          "sealed_summary": {
+            "status": "not_requested",
+            "artifact": null,
+            "coverage_complete": null
+          },
+          "sealed_research_relevance": {
+            "locator": "company_wiki_trace.source_manifest; exact cited pages in evidence_claims",
+            "claim_ids": [
+              "claim_history_2023",
+              "claim_history_2024"
+            ],
+            "narrative_binding_locators": [],
+            "used_in_forecast": null,
+            "note": "Original bytes verified once by public source reader; hashes are identity/integrity, not attestation or economic validation."
+          },
+          "sealed_reference": {
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\roles\\fetch\\review-original-opens.json",
+            "json_pointer": "/originals/1"
+          },
+          "current_physical_paths": [],
+          "current_read_claim": "Existing SourceRef and sealed exact-byte reader receipt observed; this investigation did not resolve or native-open this physical file again."
+        },
+        {
+          "key": "hk-00700:64d8d2038eee",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+            "source_id": "urn:company-wiki:source:sha256:64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+            "content_sha256": "64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+            "byte_size": 412297,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          },
+          "sealed_source_fact": {
+            "title": "Tencent second-quarter and first-half 2026 results",
+            "display_name": "騰訊控股",
+            "market": "HK",
+            "security_id": "00700",
+            "document_kind": "investor_relations",
+            "fiscal_year": 2026,
+            "fiscal_period": "Q2",
+            "form_type": null,
+            "period_end": null,
+            "published_date": "2026-08-12",
+            "source_url": "https://www.tencent.com/wp-content/uploads/2026/08/Tencent-Announces-2026-Second-Quarter-Results.pdf"
+          },
+          "sealed_executor_open": null,
+          "sealed_reviewer_open": {
+            "status": "qualified_and_opened",
+            "bytes_verified": true,
+            "read_at": "2026-10-09T08:18:11.666291+00:00",
+            "receipt_status": "ok"
+          },
+          "sealed_parse": {
+            "parser": "PyMuPDF 1.26.7",
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\release-2026-pages.json"
+          },
+          "sealed_summary": {
+            "status": "read",
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\release-2026-narrative-context.json",
+            "coverage_complete": false
+          },
+          "sealed_research_relevance": {
+            "locator": "company_wiki_trace.source_manifest; exact cited pages in evidence_claims",
+            "claim_ids": [
+              "claim_vas_q1_2026",
+              "claim_vas_q2_2026",
+              "claim_marketing_q1_2026",
+              "claim_marketing_q2_2026",
+              "claim_fintechbusiness_q1_2026",
+              "claim_fintechbusiness_q2_2026",
+              "claim_other_q1_2026",
+              "claim_other_q2_2026",
+              "claim_vas_h2_low_2026_g_0",
+              "claim_vas_low_2027_g_0",
+              "claim_vas_low_2028_g_0",
+              "claim_vas_h2_base_2026_g_0",
+              "claim_vas_base_2027_g_0",
+              "claim_vas_base_2028_g_0",
+              "claim_vas_h2_high_2026_g_0",
+              "claim_vas_high_2027_g_0",
+              "claim_vas_high_2028_g_0",
+              "claim_marketing_h2_low_2026_g_0",
+              "claim_marketing_low_2027_g_0",
+              "claim_marketing_low_2028_g_0",
+              "claim_marketing_h2_base_2026_g_0",
+              "claim_marketing_base_2027_g_0",
+              "claim_marketing_base_2028_g_0",
+              "claim_marketing_h2_high_2026_g_0",
+              "claim_marketing_high_2027_g_0",
+              "claim_marketing_high_2028_g_0",
+              "claim_fintechbusiness_h2_low_2026_g_0",
+              "claim_fintechbusiness_low_2027_g_0",
+              "claim_fintechbusiness_low_2028_g_0",
+              "claim_fintechbusiness_h2_base_2026_g_0",
+              "claim_fintechbusiness_base_2027_g_0",
+              "claim_fintechbusiness_base_2028_g_0",
+              "claim_fintechbusiness_h2_high_2026_g_0",
+              "claim_fintechbusiness_high_2027_g_0",
+              "claim_fintechbusiness_high_2028_g_0",
+              "claim_gd_vas_company",
+              "claim_gd_vas_contrary",
+              "claim_gd_marketing_company",
+              "claim_gd_marketing_counter",
+              "claim_gd_fintechbusiness_company",
+              "claim_gd_ftb_conversion_gap",
+              "claim_target_ai_usage_conversion"
+            ],
+            "narrative_binding_locators": [],
+            "used_in_forecast": null,
+            "note": "Original bytes verified once by public source reader; hashes are identity/integrity, not attestation or economic validation."
+          },
+          "sealed_reference": {
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\roles\\fetch\\review-original-opens.json",
+            "json_pointer": "/originals/2"
+          },
+          "current_physical_paths": [
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\companies\\騰訊控股\\raw\\investor_relations\\unknown-date_official_64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a_Tencent second-quarter and first-half 2026 results.pdf"
+          ],
+          "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+        },
+        {
+          "key": "hk-00700:8bf85e0cc19d",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:8bf85e0cc19d42784ba3faec42c8ddced1b8c378fcdea6f943839fcc51823704",
+            "source_id": "urn:company-wiki:source:sha256:8bf85e0cc19d42784ba3faec42c8ddced1b8c378fcdea6f943839fcc51823704",
+            "content_sha256": "8bf85e0cc19d42784ba3faec42c8ddced1b8c378fcdea6f943839fcc51823704",
+            "byte_size": 520839,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          },
+          "sealed_source_fact": {
+            "title": "Tencent Announces 2025 Second Quarter Results",
+            "display_name": "騰訊控股",
+            "market": "HK",
+            "security_id": "00700",
+            "document_kind": "investor_relations",
+            "fiscal_year": 2025,
+            "fiscal_period": "Q2",
+            "form_type": null,
+            "period_end": null,
+            "published_date": "2025-08-13",
+            "source_url": "https://static.www.tencent.com/uploads/2025/08/13/56af6c5c98acdc7bd757a7bd208d8189.pdf"
+          },
+          "sealed_executor_open": null,
+          "sealed_reviewer_open": {
+            "status": "qualified_and_opened",
+            "bytes_verified": true,
+            "read_at": "2026-10-09T08:18:12.253358+00:00",
+            "receipt_status": "ok"
+          },
+          "sealed_parse": {
+            "parser": "PyMuPDF 1.26.7",
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\release-2025-pages.json"
+          },
+          "sealed_summary": {
+            "status": "not_requested",
+            "artifact": null,
+            "coverage_complete": null
+          },
+          "sealed_research_relevance": {
+            "locator": "company_wiki_trace.source_manifest; exact cited pages in evidence_claims",
+            "claim_ids": [
+              "claim_vas_q1_2025",
+              "claim_vas_q2_2025",
+              "claim_marketing_q1_2025",
+              "claim_marketing_q2_2025",
+              "claim_fintechbusiness_q1_2025",
+              "claim_fintechbusiness_q2_2025",
+              "claim_other_q1_2025",
+              "claim_other_q2_2025"
+            ],
+            "narrative_binding_locators": [],
+            "used_in_forecast": null,
+            "note": "Original bytes verified once by public source reader; hashes are identity/integrity, not attestation or economic validation."
+          },
+          "sealed_reference": {
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\roles\\fetch\\review-original-opens.json",
+            "json_pointer": "/originals/3"
+          },
+          "current_physical_paths": [
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\companies\\騰訊控股\\raw\\investor_relations\\unknown-date_official_8bf85e0cc19d42784ba3faec42c8ddced1b8c378fcdea6f943839fcc51823704_Tencent Announces 2025 Second Quarter Results.pdf"
+          ],
+          "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+        },
+        {
+          "key": "hk-00700:ef3baa5008e1",
+          "source_ref": {
+            "byte_size": 865653,
+            "content_sha256": "ef3baa5008e15b2c58203bc48ec1f8feda6ff34e29f70d484ffeedefd16dc310",
+            "document_id": "urn:company-wiki:document:sha256:ef3baa5008e15b2c58203bc48ec1f8feda6ff34e29f70d484ffeedefd16dc310",
+            "mime_type": "application/pdf",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:ef3baa5008e15b2c58203bc48ec1f8feda6ff34e29f70d484ffeedefd16dc310"
+          },
+          "sealed_source_fact": {
+            "title": "截至二零二六年三月三十一日止三個月業績公佈",
+            "display_name": null,
+            "market": "HK",
+            "security_id": "00700",
+            "document_kind": "quarterly_report",
+            "fiscal_year": 2026,
+            "fiscal_period": "Q1",
+            "form_type": "Q1",
+            "period_end": null,
+            "published_date": "2026-05-13",
+            "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0513/2026051300335_c.pdf"
+          },
+          "sealed_executor_open": null,
+          "sealed_reviewer_open": {
+            "status": "qualified_and_opened",
+            "bytes_verified": true,
+            "read_at": "2026-10-09T08:18:12.823203+00:00",
+            "receipt_status": "ok"
+          },
+          "sealed_parse": {
+            "parser": "PyMuPDF 1.26.7",
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\quarterly-2026Q1-zh-pages.json"
+          },
+          "sealed_summary": {
+            "status": "not_requested",
+            "artifact": null,
+            "coverage_complete": null
+          },
+          "sealed_research_relevance": {
+            "locator": "company_wiki_trace.source_manifest; exact cited pages in evidence_claims",
+            "claim_ids": [
+              "claim_q1_original_vas",
+              "claim_q1_original_marketing",
+              "claim_q1_original_fintechbusiness",
+              "claim_q1_original_other",
+              "claim_gd_vas_recognition_timing"
+            ],
+            "narrative_binding_locators": [],
+            "used_in_forecast": null,
+            "note": "Original bytes verified once by public source reader; hashes are identity/integrity, not attestation or economic validation."
+          },
+          "sealed_reference": {
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\roles\\fetch\\review-original-opens.json",
+            "json_pointer": "/originals/4"
+          },
+          "current_physical_paths": [
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\companies\\騰訊控股\\raw\\financial_reports\\quarterly\\2026-05-13_hkexnews_12157227_截至二零二六年三月三十一日止三個月業績公佈.pdf"
+          ],
+          "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+        },
+        {
+          "key": "hk-00700:1cfbaab885ce",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:1cfbaab885ce9df493e82358d2a07d4dd1ef017c1190f5408081f326b4814fa6",
+            "source_id": "urn:company-wiki:source:sha256:1cfbaab885ce9df493e82358d2a07d4dd1ef017c1190f5408081f326b4814fa6",
+            "content_sha256": "1cfbaab885ce9df493e82358d2a07d4dd1ef017c1190f5408081f326b4814fa6",
+            "byte_size": 3478243,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          },
+          "sealed_source_fact": {
+            "title": "Tencent GMTN Offering Circular 2026",
+            "display_name": "騰訊控股",
+            "market": "HK",
+            "security_id": "00700",
+            "document_kind": "prospectus",
+            "fiscal_year": 2026,
+            "fiscal_period": null,
+            "form_type": null,
+            "period_end": null,
+            "published_date": "2026-06-09",
+            "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0609/2026060900199.pdf"
+          },
+          "sealed_executor_open": null,
+          "sealed_reviewer_open": {
+            "status": "qualified_and_opened",
+            "bytes_verified": true,
+            "read_at": "2026-10-09T08:18:13.675419+00:00",
+            "receipt_status": "ok"
+          },
+          "sealed_parse": {
+            "parser": "PyMuPDF 1.26.7",
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\prospectus-2026-pages.json"
+          },
+          "sealed_summary": {
+            "status": "not_requested",
+            "artifact": null,
+            "coverage_complete": null
+          },
+          "sealed_research_relevance": {
+            "locator": "company_wiki_trace.source_manifest; exact cited pages in evidence_claims",
+            "claim_ids": [
+              "claim_gd_vas_strategy_risk",
+              "claim_gd_marketing_strategy_risk",
+              "claim_gd_marketing_ai_acceptance_risk",
+              "claim_gd_fintechbusiness_strategy_risk",
+              "claim_gd_fintechbusiness_ai_acceptance_risk",
+              "claim_gd_other_strategy_risk"
+            ],
+            "narrative_binding_locators": [],
+            "used_in_forecast": null,
+            "note": "Original bytes verified once by public source reader; hashes are identity/integrity, not attestation or economic validation."
+          },
+          "sealed_reference": {
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\roles\\fetch\\review-original-opens.json",
+            "json_pointer": "/originals/5"
+          },
+          "current_physical_paths": [
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\companies\\騰訊控股\\raw\\prospectus\\unknown-date_official_1cfbaab885ce9df493e82358d2a07d4dd1ef017c1190f5408081f326b4814fa6_Tencent GMTN Offering Circular 2026.pdf"
+          ],
+          "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+        },
+        {
+          "key": "hk-00700:4170f80ec854",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+            "source_id": "urn:company-wiki:source:sha256:4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+            "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+            "byte_size": 5135808,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          },
+          "sealed_source_fact": {
+            "title": "Tencent Interim Report 2026",
+            "display_name": "騰訊控股",
+            "market": "HK",
+            "security_id": "00700",
+            "document_kind": "semi_annual_report",
+            "fiscal_year": 2026,
+            "fiscal_period": "H1",
+            "form_type": null,
+            "period_end": null,
+            "published_date": null,
+            "source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf"
+          },
+          "sealed_executor_open": "RF default2.1 refused unknown publication",
+          "sealed_reviewer_open": {
+            "status": "rf_qualification_failed",
+            "bytes_verified": true,
+            "read_at": null,
+            "receipt_status": null
+          },
+          "sealed_parse": null,
+          "sealed_summary": null,
+          "sealed_research_relevance": {
+            "locator": null,
+            "claim_ids": [],
+            "narrative_binding_locators": [],
+            "used_in_forecast": false,
+            "note": "Archive import/capture/mtime is not prior publication or exact-SHA prior availability proof. No metadata overwrite or redownload repair."
+          },
+          "sealed_reference": {
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\roles\\fetch\\review-original-opens.json",
+            "json_pointer": "/originals/6"
+          },
+          "current_physical_paths": [
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\companies\\騰訊控股\\raw\\financial_reports\\semi_annual\\unknown-date_official_4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639_Tencent Interim Report 2026.pdf"
+          ],
+          "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+        },
+        {
+          "key": "hk-00700:a9b0a5d6c68d",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+            "source_id": "urn:company-wiki:source:sha256:a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+            "content_sha256": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+            "byte_size": 1676729,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          },
+          "sealed_source_fact": {
+            "title": "Tencent Corporate Overview September 2026",
+            "display_name": "騰訊控股",
+            "market": "HK",
+            "security_id": "00700",
+            "document_kind": "investor_relations",
+            "fiscal_year": null,
+            "fiscal_period": null,
+            "form_type": null,
+            "period_end": null,
+            "published_date": null,
+            "source_url": "https://www.tencent.com/wp-content/uploads/2026/09/Corporate-Overview-2Q26-20260916.pdf"
+          },
+          "sealed_executor_open": "RF default2.1 refused unknown publication",
+          "sealed_reviewer_open": {
+            "status": "rf_qualification_failed",
+            "bytes_verified": true,
+            "read_at": null,
+            "receipt_status": null
+          },
+          "sealed_parse": null,
+          "sealed_summary": null,
+          "sealed_research_relevance": {
+            "locator": null,
+            "claim_ids": [],
+            "narrative_binding_locators": [],
+            "used_in_forecast": false,
+            "note": "Archive import/capture/mtime is not prior publication or exact-SHA prior availability proof. No metadata overwrite or redownload repair."
+          },
+          "sealed_reference": {
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\roles\\fetch\\review-original-opens.json",
+            "json_pointer": "/originals/7"
+          },
+          "current_physical_paths": [
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\companies\\騰訊控股\\raw\\investor_relations\\unknown-date_official_a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389_Tencent Corporate Overview September 2026.pdf"
+          ],
+          "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+        }
+      ],
+      "sealed_matrix_reference": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\document_matrix.json",
+      "sealed_matrix_document_count": 15,
+      "bounded_existing_gaps": [
+        "Catalog semi_annual_report not_found is not raw absence: archive122-page English report SHA verified. Do not force zh download when actual en original covers needed period.",
+        "Sealed cases contain capture-date contamination for annual2025/interim/IR published fields. Keep originals; use primary/public metadata, not cases date.",
+        "Old earnings presentation .pdf returned987bytes HTML, not actual PDF; this failure object cannot count as presentation. Official corporate overview is usable alternate document, not successful same-link fetch.",
+        "Latest earnings-call provider path not executed here; official webcast is a separate discovery route."
+      ],
+      "declared_future_targets": [],
+      "other_ledger_sources": [
+        {
+          "ledger_row": 6,
+          "document_kind": "industry_association",
+          "raw_sha256": "d5a6d246b599a1859d2d64e302fa771d82951e51b663321a00972670b84f6840",
+          "original_reference": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\cadpa-2025.html",
+          "status": "HTTP200 original HTML"
+        },
+        {
+          "ledger_row": 7,
+          "document_kind": "industry_association",
+          "raw_sha256": "3443ca2fe1e7680da42c45236255879f835bdf2f15186d129254e66bb992acbf",
+          "original_reference": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\cadpa-2024.html",
+          "status": "HTTP200 original HTML"
+        },
+        {
+          "ledger_row": 8,
+          "document_kind": "company_release",
+          "raw_sha256": "ce477bfa4d2daddb8b47f105aa8ca2a1d5b4d07cf247099d20a1d3797c29879c",
+          "original_reference": {
+            "url": "https://ir.netease.com/news-releases/news-release-details/netease-announces-second-quarter-and-interim-2026-unaudited",
+            "tool_call_id": "turn319view0",
+            "response_representation": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\netease-web-capture.json"
+          },
+          "status": null
+        }
+      ]
+    },
+    {
+      "run_id": "fresh-20261009T065028-us-msft",
+      "run_root": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft",
+      "identity": {
+        "canonical_name": "MICROSOFT CORP",
+        "market": "US",
+        "exchange": "NASDAQ",
+        "ticker": "MSFT",
+        "security_id": "MSFT",
+        "match_basis": "ticker_exact",
+        "matched_value": "MSFT",
+        "score": 1,
+        "verified": true,
+        "active": true,
+        "source_name": "sec_nasdaq",
+        "source_url": "https://www.sec.gov/files/company_tickers.json",
+        "source_record_id": "0000789019",
+        "identifiers": {
+          "cik": "0000789019"
+        }
+      },
+      "as_of_date": "2026-10-08",
+      "existing_sources": [
+        {
+          "key": "us-msft:99d693f6c154",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+            "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+            "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+            "byte_size": 8158067,
+            "mime_type": "text/html",
+            "schema_version": "2.0"
+          },
+          "sealed_source_fact": {
+            "title": "Microsoft 10-K FY2025",
+            "display_name": "MICROSOFT CORP",
+            "market": "US",
+            "security_id": "MSFT",
+            "document_kind": "annual_report",
+            "fiscal_year": 2025,
+            "fiscal_period": null,
+            "form_type": "10-K",
+            "period_end": null,
+            "published_date": "2025-07-30",
+            "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm"
+          },
+          "sealed_executor_open": {
+            "status": "opened_native_receipt",
+            "reason": null
+          },
+          "sealed_reviewer_open": {
+            "status": "qualified_and_opened",
+            "bytes_verified": true,
+            "read_at": "2026-10-09T08:18:16.975035+00:00",
+            "receipt_status": "ok"
+          },
+          "sealed_parse": {
+            "status": "HTML numbered text projection",
+            "full_recall_verified": false
+          },
+          "sealed_summary": {
+            "status": "not_requested",
+            "reason": null
+          },
+          "sealed_research_relevance": {
+            "locator": "1",
+            "claim_ids": [],
+            "narrative_binding_locators": [],
+            "used_in_forecast": null,
+            "note": null
+          },
+          "sealed_reference": {
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\roles\\fetch\\review-original-opens.json",
+            "json_pointer": "/originals/0"
+          },
+          "current_physical_paths": [
+            "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0000950170-25-100235\\msft-20250630.htm"
+          ],
+          "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+        },
+        {
+          "key": "us-msft:43829a12cc9c",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+            "source_id": "urn:company-wiki:source:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+            "content_sha256": "43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+            "byte_size": 6860911,
+            "mime_type": "text/html",
+            "schema_version": "2.0"
+          },
+          "sealed_source_fact": {
+            "title": "Microsoft 10-K FY2024",
+            "display_name": "MICROSOFT CORP",
+            "market": "US",
+            "security_id": "MSFT",
+            "document_kind": "annual_report",
+            "fiscal_year": 2024,
+            "fiscal_period": null,
+            "form_type": "10-K",
+            "period_end": null,
+            "published_date": "2024-07-30",
+            "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017024087843/msft-20240630.htm"
+          },
+          "sealed_executor_open": {
+            "status": "opened_native_receipt",
+            "reason": null
+          },
+          "sealed_reviewer_open": {
+            "status": "qualified_and_opened",
+            "bytes_verified": true,
+            "read_at": "2026-10-09T08:18:19.114771+00:00",
+            "receipt_status": "ok"
+          },
+          "sealed_parse": {
+            "status": "HTML numbered text projection",
+            "full_recall_verified": false
+          },
+          "sealed_summary": {
+            "status": "not_requested",
+            "reason": null
+          },
+          "sealed_research_relevance": {
+            "locator": "1",
+            "claim_ids": [],
+            "narrative_binding_locators": [],
+            "used_in_forecast": null,
+            "note": null
+          },
+          "sealed_reference": {
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\roles\\fetch\\review-original-opens.json",
+            "json_pointer": "/originals/1"
+          },
+          "current_physical_paths": [
+            "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0000950170-24-087843\\msft-20240630.htm"
+          ],
+          "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+        },
+        {
+          "key": "us-msft:c963d7503907",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+            "source_id": "urn:company-wiki:source:sha256:c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+            "content_sha256": "c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+            "byte_size": 5597461,
+            "mime_type": "text/html",
+            "schema_version": "2.0"
+          },
+          "sealed_source_fact": {
+            "title": null,
+            "display_name": "MICROSOFT CORP",
+            "market": "US",
+            "security_id": "MSFT",
+            "document_kind": "regulatory_filing",
+            "fiscal_year": 2026,
+            "fiscal_period": "Q1",
+            "form_type": "10-Q",
+            "period_end": "2025-09-30",
+            "published_date": "2025-10-29",
+            "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312525256321/msft-20250930.htm"
+          },
+          "sealed_executor_open": {
+            "status": "qualification_failed",
+            "reason": "Actual regulatory_filing RF candidate was found; manifest title blank caused public reader rejection."
+          },
+          "sealed_reviewer_open": {
+            "status": "qualified_and_opened",
+            "bytes_verified": true,
+            "read_at": "2026-10-09T08:18:21.524931+00:00",
+            "receipt_status": "ok"
+          },
+          "sealed_parse": {
+            "status": "not_run",
+            "full_recall_verified": false
+          },
+          "sealed_summary": {
+            "status": "not_requested",
+            "reason": null
+          },
+          "sealed_research_relevance": {
+            "locator": null,
+            "claim_ids": [],
+            "narrative_binding_locators": [],
+            "used_in_forecast": null,
+            "note": null
+          },
+          "sealed_reference": {
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\roles\\fetch\\review-original-opens.json",
+            "json_pointer": "/originals/2"
+          },
+          "current_physical_paths": [
+            "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-25-256321\\msft-20250930.htm"
+          ],
+          "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+        },
+        {
+          "key": "us-msft:a60bb6a07479",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+            "source_id": "urn:company-wiki:source:sha256:a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+            "content_sha256": "a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+            "byte_size": 7483278,
+            "mime_type": "text/html",
+            "schema_version": "2.0"
+          },
+          "sealed_source_fact": {
+            "title": null,
+            "display_name": "MICROSOFT CORP",
+            "market": "US",
+            "security_id": "MSFT",
+            "document_kind": "regulatory_filing",
+            "fiscal_year": 2026,
+            "fiscal_period": "Q2",
+            "form_type": "10-Q",
+            "period_end": "2025-12-31",
+            "published_date": "2026-01-28",
+            "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526027207/msft-20251231.htm"
+          },
+          "sealed_executor_open": {
+            "status": "not_opened",
+            "reason": "Frozen candidate manifest title is blank; related Q1 actual failure retained; no unsupported correction or further original read claimed."
+          },
+          "sealed_reviewer_open": {
+            "status": "qualified_and_opened",
+            "bytes_verified": true,
+            "read_at": "2026-10-09T08:18:23.732578+00:00",
+            "receipt_status": "ok"
+          },
+          "sealed_parse": {
+            "status": "not_run",
+            "full_recall_verified": false
+          },
+          "sealed_summary": {
+            "status": "not_requested",
+            "reason": null
+          },
+          "sealed_research_relevance": {
+            "locator": null,
+            "claim_ids": [],
+            "narrative_binding_locators": [],
+            "used_in_forecast": null,
+            "note": null
+          },
+          "sealed_reference": {
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\roles\\fetch\\review-original-opens.json",
+            "json_pointer": "/originals/3"
+          },
+          "current_physical_paths": [
+            "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-26-027207\\msft-20251231.htm"
+          ],
+          "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+        },
+        {
+          "key": "us-msft:76945a2c148a",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+            "source_id": "urn:company-wiki:source:sha256:76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+            "content_sha256": "76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+            "byte_size": 7731948,
+            "mime_type": "text/html",
+            "schema_version": "2.0"
+          },
+          "sealed_source_fact": {
+            "title": null,
+            "display_name": "MICROSOFT CORP",
+            "market": "US",
+            "security_id": "MSFT",
+            "document_kind": "regulatory_filing",
+            "fiscal_year": 2026,
+            "fiscal_period": "Q3",
+            "form_type": "10-Q",
+            "period_end": "2026-03-31",
+            "published_date": "2026-04-29",
+            "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526191507/msft-20260331.htm"
+          },
+          "sealed_executor_open": {
+            "status": "not_opened",
+            "reason": "Frozen candidate manifest title is blank; related Q1 actual failure retained; no unsupported correction or further original read claimed."
+          },
+          "sealed_reviewer_open": {
+            "status": "qualified_and_opened",
+            "bytes_verified": true,
+            "read_at": "2026-10-09T08:18:25.994682+00:00",
+            "receipt_status": "ok"
+          },
+          "sealed_parse": {
+            "status": "not_run",
+            "full_recall_verified": false
+          },
+          "sealed_summary": {
+            "status": "not_requested",
+            "reason": null
+          },
+          "sealed_research_relevance": {
+            "locator": null,
+            "claim_ids": [],
+            "narrative_binding_locators": [],
+            "used_in_forecast": null,
+            "note": null
+          },
+          "sealed_reference": {
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\roles\\fetch\\review-original-opens.json",
+            "json_pointer": "/originals/4"
+          },
+          "current_physical_paths": [
+            "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-26-191507\\msft-20260331.htm"
+          ],
+          "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+        },
+        {
+          "key": "us-msft:8d63b8eaa344",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+            "source_id": "urn:company-wiki:source:sha256:8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+            "content_sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+            "byte_size": 808850,
+            "mime_type": "text/html",
+            "schema_version": "2.0"
+          },
+          "sealed_source_fact": {
+            "title": "results official communication",
+            "display_name": "MICROSOFT CORP",
+            "market": "US",
+            "security_id": "MSFT",
+            "document_kind": "investor_relations",
+            "fiscal_year": 2026,
+            "fiscal_period": "Q4",
+            "form_type": null,
+            "period_end": null,
+            "published_date": "2026-07-29",
+            "source_url": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q4/press-release-webcast"
+          },
+          "sealed_executor_open": {
+            "status": "opened_native_receipt",
+            "reason": null
+          },
+          "sealed_reviewer_open": {
+            "status": "qualified_and_opened",
+            "bytes_verified": true,
+            "read_at": "2026-10-09T08:18:28.065555+00:00",
+            "receipt_status": "ok"
+          },
+          "sealed_parse": {
+            "status": "HTML numbered text projection",
+            "full_recall_verified": false
+          },
+          "sealed_summary": {
+            "status": "not_requested",
+            "reason": null
+          },
+          "sealed_research_relevance": {
+            "locator": "1",
+            "claim_ids": [],
+            "narrative_binding_locators": [],
+            "used_in_forecast": null,
+            "note": null
+          },
+          "sealed_reference": {
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\roles\\fetch\\review-original-opens.json",
+            "json_pointer": "/originals/5"
+          },
+          "current_physical_paths": [
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\companies\\MICROSOFT CORP\\raw\\investor_relations\\unknown-date_official_8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e_results official communication.html"
+          ],
+          "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+        },
+        {
+          "key": "us-msft:bdc90bf78dbf",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+            "source_id": "urn:company-wiki:source:sha256:bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+            "content_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+            "byte_size": 273436,
+            "mime_type": "text/html",
+            "schema_version": "2.0"
+          },
+          "sealed_source_fact": {
+            "title": "call official communication",
+            "display_name": "MICROSOFT CORP",
+            "market": "US",
+            "security_id": "MSFT",
+            "document_kind": "investor_call_transcript",
+            "fiscal_year": 2026,
+            "fiscal_period": "Q4",
+            "form_type": null,
+            "period_end": null,
+            "published_date": "2026-07-29",
+            "source_url": "https://www.microsoft.com/en-us/Investor/events/fy-2026/earnings-fy-2026-q4"
+          },
+          "sealed_executor_open": {
+            "status": "opened_native_receipt",
+            "reason": null
+          },
+          "sealed_reviewer_open": {
+            "status": "qualified_and_opened",
+            "bytes_verified": true,
+            "read_at": "2026-10-09T08:18:28.835715+00:00",
+            "receipt_status": "ok"
+          },
+          "sealed_parse": {
+            "status": "HTML numbered text projection",
+            "full_recall_verified": false
+          },
+          "sealed_summary": {
+            "status": "parser_failed",
+            "reason": "Official call finite narrative parser terminal failure; separately opened original HTML supports research."
+          },
+          "sealed_research_relevance": {
+            "locator": "1",
+            "claim_ids": [],
+            "narrative_binding_locators": [],
+            "used_in_forecast": null,
+            "note": null
+          },
+          "sealed_reference": {
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\roles\\fetch\\review-original-opens.json",
+            "json_pointer": "/originals/6"
+          },
+          "current_physical_paths": [
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\companies\\MICROSOFT CORP\\raw\\investor_relations\\transcripts\\unknown-date_official_bdc90bf78dbf55ec.html"
+          ],
+          "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+        },
+        {
+          "key": "us-msft:cf054968a148",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+            "source_id": "urn:company-wiki:source:sha256:cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+            "content_sha256": "cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+            "byte_size": 198175,
+            "mime_type": "text/html",
+            "schema_version": "2.0"
+          },
+          "sealed_source_fact": {
+            "title": "metrics official communication",
+            "display_name": "MICROSOFT CORP",
+            "market": "US",
+            "security_id": "MSFT",
+            "document_kind": "investor_relations",
+            "fiscal_year": 2026,
+            "fiscal_period": "Q4",
+            "form_type": null,
+            "period_end": null,
+            "published_date": "2026-07-29",
+            "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q4/metrics"
+          },
+          "sealed_executor_open": {
+            "status": "opened_native_receipt",
+            "reason": null
+          },
+          "sealed_reviewer_open": {
+            "status": "qualified_and_opened",
+            "bytes_verified": true,
+            "read_at": "2026-10-09T08:18:29.461714+00:00",
+            "receipt_status": "ok"
+          },
+          "sealed_parse": {
+            "status": "HTML numbered text projection",
+            "full_recall_verified": false
+          },
+          "sealed_summary": {
+            "status": "not_requested",
+            "reason": null
+          },
+          "sealed_research_relevance": {
+            "locator": "1",
+            "claim_ids": [],
+            "narrative_binding_locators": [],
+            "used_in_forecast": null,
+            "note": null
+          },
+          "sealed_reference": {
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\roles\\fetch\\review-original-opens.json",
+            "json_pointer": "/originals/7"
+          },
+          "current_physical_paths": [
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\companies\\MICROSOFT CORP\\raw\\investor_relations\\unknown-date_official_cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6_metrics official communication.html"
+          ],
+          "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+        },
+        {
+          "key": "us-msft:c02f4ea1a271",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+            "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+            "content_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+            "byte_size": 4016522,
+            "mime_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+            "schema_version": "2.0"
+          },
+          "sealed_source_fact": {
+            "title": "FY27 Segments and Investor Metrics",
+            "display_name": "MICROSOFT CORP",
+            "market": "US",
+            "security_id": "MSFT",
+            "document_kind": "investor_relations",
+            "fiscal_year": null,
+            "fiscal_period": null,
+            "form_type": null,
+            "period_end": null,
+            "published_date": "2026-09-02",
+            "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/FY27ExternalKPIs.pptx"
+          },
+          "sealed_executor_open": {
+            "status": "opened_native_receipt",
+            "reason": null
+          },
+          "sealed_reviewer_open": {
+            "status": "qualified_and_opened",
+            "bytes_verified": true,
+            "read_at": "2026-10-09T08:18:30.082571+00:00",
+            "receipt_status": "ok"
+          },
+          "sealed_parse": {
+            "status": "native_PPTX_OCR_selected",
+            "full_recall_verified": false
+          },
+          "sealed_summary": {
+            "status": "consumed",
+            "selection": {
+              "candidate_count": 16,
+              "coverage_complete": false,
+              "dropped_financial_count": 0,
+              "lines_total": 1067,
+              "omitted_candidate_count": 1,
+              "pages_read": 22,
+              "pages_total": 22,
+              "selected_count": 15,
+              "source_units": 1064,
+              "status": "partial",
+              "tables_scanned": 0,
+              "tables_total": 0
+            }
+          },
+          "sealed_research_relevance": {
+            "locator": "1",
+            "claim_ids": [],
+            "narrative_binding_locators": [
+              "loc:v1/page:7/paragraph:8",
+              "loc:v1/page:7/paragraph:9",
+              "loc:v1/page:18/paragraph:81",
+              "loc:v1/page:18/paragraph:82",
+              "loc:v1/page:7/paragraph:20"
+            ],
+            "used_in_forecast": null,
+            "note": null
+          },
+          "sealed_reference": {
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\roles\\fetch\\review-original-opens.json",
+            "json_pointer": "/originals/8"
+          },
+          "current_physical_paths": [
+            "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\companies\\MICROSOFT CORP\\raw\\investor_relations\\unknown-date_official_c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4_FY27 Segments and Investor Metrics.pptx"
+          ],
+          "current_read_claim": "Whole-byte hash reobserved only; sealed native reader status remains historical."
+        },
+        {
+          "key": "us-msft:4ac3b4f0fa1b",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+            "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+            "content_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+            "byte_size": 66324,
+            "mime_type": "text/plain",
+            "schema_version": "2.0"
+          },
+          "sealed_source_fact": {
+            "title": null,
+            "display_name": "Microsoft",
+            "market": "US",
+            "security_id": "MSFT",
+            "document_kind": "investor_call_transcript",
+            "fiscal_year": 2026,
+            "fiscal_period": "Q4",
+            "form_type": null,
+            "period_end": null,
+            "published_date": null,
+            "source_url": null
+          },
+          "sealed_executor_open": {
+            "status": "qualification_failed",
+            "reason": "Unknown exact publication/source URL; default reader2.1 refused. No date borrowed from separate official call HTML."
+          },
+          "sealed_reviewer_open": {
+            "status": "rf_qualification_failed",
+            "bytes_verified": true,
+            "read_at": null,
+            "receipt_status": null
+          },
+          "sealed_parse": {
+            "status": "not_run",
+            "full_recall_verified": false
+          },
+          "sealed_summary": {
+            "status": "not_requested",
+            "reason": null
+          },
+          "sealed_research_relevance": {
+            "locator": null,
+            "claim_ids": [],
+            "narrative_binding_locators": [],
+            "used_in_forecast": null,
+            "note": null
+          },
+          "sealed_reference": {
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\roles\\fetch\\review-original-opens.json",
+            "json_pointer": "/originals/9"
+          },
+          "current_physical_paths": [],
+          "current_read_claim": "Existing SourceRef and sealed exact-byte reader receipt observed; this investigation did not resolve or native-open this physical file again."
+        }
+      ],
+      "sealed_matrix_reference": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\execution\\document_matrix.json",
+      "sealed_matrix_document_count": 18,
+      "bounded_existing_gaps": [
+        "Historical FMP exact ET probe envelope reports provider_entitlement_required, status unavailable. The envelope does not contain HTTP status; preserve known ET402 restriction context without fabricating an HTTP receipt or provider success. No blind retry. Stored motley_fool TXT and official HTML are separate sources.",
+        "FY2026 10-K official primary index verified; web4MiB parser refusal is a tool size limit, not absence at issuer.",
+        "Retired filings are genuine existing bytes with primary iXBRL issuer/period proof; identity conflicts must be corrected by isolated public import, not production flag bypass."
+      ],
+      "declared_future_targets": [
+        {
+          "document_kind": "annual_report",
+          "form_type": "10-K",
+          "fiscal_year": 2026,
+          "fiscal_period": "FY",
+          "period_end": "2026-06-30",
+          "published_date": "2026-07-29",
+          "official_source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+          "publisher_reported_bytes": 8585501,
+          "raw_sha256": null,
+          "status": "download_NOT_RUN",
+          "route": "current RF source_preparation → FF US Dayu → CWP public writer",
+          "absence_evidence": "production annual query onlyFY2024/FY2025; target Dayu file/meta list; both237-entry delivery/archive indexes; all27cases refs/24original objects inspected; no msft-20260630 original identified",
+          "remaining_scope_limit": "absence is bounded to configured roots and explicit archives, not a universal assertion about every machine directory; requery inventory at execution start",
+          "suggested_resource_limit": {
+            "max_bytes": 16777216,
+            "timeout_seconds": 180,
+            "max_cost_usd": null,
+            "budget_source": "MAIN current configured allowance; no new budget implied"
+          }
+        }
+      ],
+      "other_ledger_sources": [
+        {
+          "ledger_row": 10,
+          "document_kind": "annual_report",
+          "raw_sha256": null,
+          "original_reference": {
+            "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+          },
+          "status": "failed"
+        },
+        {
+          "ledger_row": 11,
+          "document_kind": "primary_market_dataset",
+          "raw_sha256": null,
+          "original_reference": {
+            "url": "https://www.srgresearch.com/articles/q2-cloud-market-passes-143-billion-highest-growth-rate-in-eight-years",
+            "returned_text_sha256": "1dff00332e7cc3c6e3301e05ebec7aa0a283108458837dfb8893c904465e5801",
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\execution\\external\\srg-returned.txt"
+          },
+          "status": "returned_primary_tool_text"
+        },
+        {
+          "ledger_row": 12,
+          "document_kind": "company_release",
+          "raw_sha256": null,
+          "original_reference": {
+            "url": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Second-Quarter-Results/default.aspx",
+            "returned_text_sha256": "5c50483991053fd801766df4b9d8924c8715e0a9ffd9b7c3e24af0f23ae11089",
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\execution\\external\\aws-returned.txt"
+          },
+          "status": "returned_primary_tool_text"
+        },
+        {
+          "ledger_row": 13,
+          "document_kind": "specialist_research",
+          "raw_sha256": null,
+          "original_reference": {
+            "url": "https://www.gartner.com/en/newsroom/press-releases/2026-02-26-gartner-says-surging-memory-costs-will-reduce-global-pc-and-smartphone-shipments-in-2026",
+            "returned_text_sha256": "ba11ac6426060994b9ff67b3e068c14f1c1bfe0e28ebda4d2c81d2b610558e5d",
+            "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\execution\\external\\gartner-returned.txt"
+          },
+          "status": "returned_primary_tool_text"
+        }
+      ]
+    }
+  ],
+  "protected_artifact_fingerprints": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\scope.json",
+      "byte_size": 21539,
+      "sha256": "b2fd230b0c1a524f350fa63a54fadc435e4fe7d67aa00aaf3df2ac1cc432672a",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\reports\\fetch.json",
+      "byte_size": 44300,
+      "sha256": "ff0874022ea44308f866755554834f6d3119341aba6bcbea8fb3892e65a5e4e1",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\reports\\storage.json",
+      "byte_size": 32468,
+      "sha256": "a2286445f7463a319f80d788111a620feec8abb56bd4bfdd7dbc95d4a60d7632",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\reports\\process.json",
+      "byte_size": 49291,
+      "sha256": "44722f62a83105082e1d4b5adfdba780e69df23d632d729e8fe4d1db112de3d0",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\execution\\source_ledger.json",
+      "byte_size": 13924,
+      "sha256": "3a1e2995abdf46cfd78384cabce1cf05a0c0618c10428a56acc2460e8f7807c8",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\execution\\document_matrix.json",
+      "byte_size": 10261,
+      "sha256": "8875da2b04c159ad232bf1177dc756bcd640eacbb6ea8781c0a6a80b9bc3c028",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\roles\\fetch\\review-original-opens.json",
+      "byte_size": 30937,
+      "sha256": "4337fe388c367bce703644035e74a9da1b4f99bbec57481369e0f1458ca003bb",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\execution\\management-context-ledger.json",
+      "byte_size": 18290,
+      "sha256": "f46f5cddd90f9fc27f4a01f7db1b4f59f3365924f4d019b813961ee916863b4f",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\execution\\web-tool-observations.json",
+      "byte_size": 1891,
+      "sha256": "0853f7f47b0135c9c288f0024f14f97d6b2ecd60d4d86df33cc995bdaf642f7a",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\execution\\requests\\annual2025.json",
+      "byte_size": 252,
+      "sha256": "ce5021ac6e1a0df3dcb50e0cd4fdfe2fb6136d956c5c14abc65eb9acbc87ff79",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\execution\\requests\\semi2026.json",
+      "byte_size": 257,
+      "sha256": "57d3ae1350a1fbfd81ed694f8bfe83abb99c86bf273ee0563921015266bde06b",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\execution\\requests\\registered-ipo-v2.json",
+      "byte_size": 686,
+      "sha256": "04062301be7efa675cbd741a962d9712be974f13936811fdff7f1e17fff88794",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-cn-688012\\execution\\requests\\lam-import.json",
+      "byte_size": 1477,
+      "sha256": "59b64cf8200c75bed9928e1589c163cbdbfd1e78c9539df5202a4d6095fdf021",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\scope.json",
+      "byte_size": 21475,
+      "sha256": "0d6e5c75f316977ff6d1c16b731f6c38af9795c988bd1e77f2b8f4dcd6e0d6fe",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\reports\\fetch.json",
+      "byte_size": 49963,
+      "sha256": "9d4655497d61dbffccca39695f891114ea169e2424f7aa89fad8d08a91e81ce4",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\reports\\storage.json",
+      "byte_size": 31970,
+      "sha256": "a9896bbe02e5fe8946aebe50dc29a81d73cdac9260c35fb6476b1f6a71b30240",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\reports\\process.json",
+      "byte_size": 45949,
+      "sha256": "56030f692d466db1fd2c216861f09dc145abae969d8529544ec5907016acc29f",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\source_ledger.json",
+      "byte_size": 36444,
+      "sha256": "49fd6196c0079875e4c98804be3e1eb32a627ae21733ec8f138cc7d7f2e73d94",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\document_matrix.json",
+      "byte_size": 12372,
+      "sha256": "fd9a39b9e7dff5f48cfaf6ad7c665a8089d8e69933a35b826a7d6e3e830fce61",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\roles\\fetch\\review-original-opens.json",
+      "byte_size": 46056,
+      "sha256": "7807d4dc5eb3ec070826f724a90f73107bb13308972e3ba77ef966a77b2409fa",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\roles\\storage\\public-original-observation.json",
+      "byte_size": 253583,
+      "sha256": "cd7d5144edf895aa0f7903a8bb3cbaaeebb2ee8ec6ddccfd1bdfb5222e525251",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\hkex-primary-index-web-response.json",
+      "byte_size": 9337,
+      "sha256": "8048cffa9a94041ba7ac0503431fe6629f263eb6cb578dfc401877d3fcf2e77e",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\interim-2026-candidate.json",
+      "byte_size": 693,
+      "sha256": "d4d4ef55182ffd3ae76f3bef03a640f9da89b98bd4b5a7982b505934540b0b5a",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\overview-2026-candidate.json",
+      "byte_size": 693,
+      "sha256": "d3429074e0d9feb84bee2c51154592cd793f833c52e09fa146f96702217037f2",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-hk-00700\\execution\\companion-transcript-request.json",
+      "byte_size": 498,
+      "sha256": "c85eb8dc08462ddc214264e967f7f0afc378eea5b20c29d612db2e478f35a33e",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\scope.json",
+      "byte_size": 31604,
+      "sha256": "3163bd17db8da8bd2f9eb1a94c61aa7b429cc816ea062ca05a733e4525014826",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\reports\\fetch.json",
+      "byte_size": 56937,
+      "sha256": "c45ec33ba2dd1cf7474efa0766d37028c161c660df73502dcff2e238076c2f07",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\reports\\storage.json",
+      "byte_size": 32326,
+      "sha256": "553ddeec3d986db1d320f3a79df9e8d6e3747ecff5ab4d9d0a2992c9e1055034",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\reports\\process.json",
+      "byte_size": 47043,
+      "sha256": "6ff5622cea3d8a7b80fd84ddf2b285fb09299cadc98a8a0466bda0a9b39c6da2",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\execution\\source_ledger.json",
+      "byte_size": 41549,
+      "sha256": "1971067648b145d2cd1e1296df69ea64da6e7449644284df4d43e080c5093fcd",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\execution\\document_matrix.json",
+      "byte_size": 21965,
+      "sha256": "1f6d1c34296f87ad92c784abd46bd6b1e5ad7df08d33a46b1b3f11c265581f49",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\roles\\fetch\\review-original-opens.json",
+      "byte_size": 49552,
+      "sha256": "5568d34a2177aaecd0479d576d38beb1587727ec257d7ae53b3439d21e7e680c",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\roles\\storage\\public-original-observation.json",
+      "byte_size": 202743,
+      "sha256": "b9753162effdfb750e1b7057dfef7c594409f79e1e33f002f33ce0089fc7a4c6",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\execution\\requests\\fy26-fetch.json",
+      "byte_size": 511,
+      "sha256": "b07ccc4156b989e409ac471e2fb6c3b405783a05662793112e41817979c554df",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\execution\\requests\\fy26-reuse.json",
+      "byte_size": 248,
+      "sha256": "6656dcca905f9b6595749c286b57d3ffc8e745be9b0578af0ee3aa0c7459ae3a",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\execution\\research\\management-discovery.json",
+      "byte_size": 1838,
+      "sha256": "85b2fce73dc8df8c4444c4f15cc73bdce623825b73c9160ddf1360ed2d78a4ab",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\execution\\research\\material-discovery-final.json",
+      "byte_size": 7836,
+      "sha256": "587a67751e95a9601a7ba5ffd9ea1ed4820222c54285ac69f4b9b485d41307f6",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\fresh-20261009T065028-us-msft\\execution\\research\\owned-inventory.json",
+      "byte_size": 12680,
+      "sha256": "d59fadd0aee9ed2fb6bf542c83b3212f774f67af8664498e5435ad4d53c930a0",
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    }
+  ],
+  "current_original_observations": [
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\companies\\中微公司\\raw\\other\\unknown-date_official_0c5481a9e5f8e9f14348cddef5f60f2212b651685190078520908216c9526116_SEMI July 2026 semiconductor equipment forecast.html",
+      "byte_size": 206948,
+      "sha256": "0c5481a9e5f8e9f14348cddef5f60f2212b651685190078520908216c9526116",
+      "matches_sealed_source_ref": true,
+      "observation": "direct read-only whole-byte SHA; not a new RF/native open or fresh model consumption",
+      "linked_source_keys": [
+        "cn-688012:0c5481a9e5f8"
+      ],
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\companies\\騰訊控股\\raw\\investor_relations\\unknown-date_official_64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a_Tencent second-quarter and first-half 2026 results.pdf",
+      "byte_size": 412297,
+      "sha256": "64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+      "matches_sealed_source_ref": true,
+      "observation": "direct read-only whole-byte SHA; not a new RF/native open or fresh model consumption",
+      "linked_source_keys": [
+        "hk-00700:64d8d2038eee"
+      ],
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\companies\\騰訊控股\\raw\\investor_relations\\unknown-date_official_8bf85e0cc19d42784ba3faec42c8ddced1b8c378fcdea6f943839fcc51823704_Tencent Announces 2025 Second Quarter Results.pdf",
+      "byte_size": 520839,
+      "sha256": "8bf85e0cc19d42784ba3faec42c8ddced1b8c378fcdea6f943839fcc51823704",
+      "matches_sealed_source_ref": true,
+      "observation": "direct read-only whole-byte SHA; not a new RF/native open or fresh model consumption",
+      "linked_source_keys": [
+        "hk-00700:8bf85e0cc19d"
+      ],
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\companies\\騰訊控股\\raw\\investor_relations\\unknown-date_official_a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389_Tencent Corporate Overview September 2026.pdf",
+      "byte_size": 1676729,
+      "sha256": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+      "matches_sealed_source_ref": true,
+      "observation": "direct read-only whole-byte SHA; not a new RF/native open or fresh model consumption",
+      "linked_source_keys": [
+        "hk-00700:a9b0a5d6c68d"
+      ],
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\companies\\騰訊控股\\raw\\prospectus\\unknown-date_official_1cfbaab885ce9df493e82358d2a07d4dd1ef017c1190f5408081f326b4814fa6_Tencent GMTN Offering Circular 2026.pdf",
+      "byte_size": 3478243,
+      "sha256": "1cfbaab885ce9df493e82358d2a07d4dd1ef017c1190f5408081f326b4814fa6",
+      "matches_sealed_source_ref": true,
+      "observation": "direct read-only whole-byte SHA; not a new RF/native open or fresh model consumption",
+      "linked_source_keys": [
+        "hk-00700:1cfbaab885ce"
+      ],
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\companies\\騰訊控股\\raw\\financial_reports\\quarterly\\2026-05-13_hkexnews_12157227_截至二零二六年三月三十一日止三個月業績公佈.pdf",
+      "byte_size": 865653,
+      "sha256": "ef3baa5008e15b2c58203bc48ec1f8feda6ff34e29f70d484ffeedefd16dc310",
+      "matches_sealed_source_ref": true,
+      "observation": "direct read-only whole-byte SHA; not a new RF/native open or fresh model consumption",
+      "linked_source_keys": [
+        "hk-00700:ef3baa5008e1"
+      ],
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\companies\\騰訊控股\\raw\\financial_reports\\semi_annual\\unknown-date_official_4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639_Tencent Interim Report 2026.pdf",
+      "byte_size": 5135808,
+      "sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "matches_sealed_source_ref": true,
+      "observation": "direct read-only whole-byte SHA; not a new RF/native open or fresh model consumption",
+      "linked_source_keys": [
+        "hk-00700:4170f80ec854"
+      ],
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\companies\\MICROSOFT CORP\\raw\\investor_relations\\unknown-date_official_8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e_results official communication.html",
+      "byte_size": 808850,
+      "sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+      "matches_sealed_source_ref": true,
+      "observation": "direct read-only whole-byte SHA; not a new RF/native open or fresh model consumption",
+      "linked_source_keys": [
+        "us-msft:8d63b8eaa344"
+      ],
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\companies\\MICROSOFT CORP\\raw\\investor_relations\\unknown-date_official_c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4_FY27 Segments and Investor Metrics.pptx",
+      "byte_size": 4016522,
+      "sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "matches_sealed_source_ref": true,
+      "observation": "direct read-only whole-byte SHA; not a new RF/native open or fresh model consumption",
+      "linked_source_keys": [
+        "us-msft:c02f4ea1a271"
+      ],
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\companies\\MICROSOFT CORP\\raw\\investor_relations\\unknown-date_official_cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6_metrics official communication.html",
+      "byte_size": 198175,
+      "sha256": "cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+      "matches_sealed_source_ref": true,
+      "observation": "direct read-only whole-byte SHA; not a new RF/native open or fresh model consumption",
+      "linked_source_keys": [
+        "us-msft:cf054968a148"
+      ],
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\companies\\MICROSOFT CORP\\raw\\investor_relations\\transcripts\\unknown-date_official_bdc90bf78dbf55ec.html",
+      "byte_size": 273436,
+      "sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+      "matches_sealed_source_ref": true,
+      "observation": "direct read-only whole-byte SHA; not a new RF/native open or fresh model consumption",
+      "linked_source_keys": [
+        "us-msft:bdc90bf78dbf"
+      ],
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Dropbox\\Stock\\工业与信息化\\电子\\中微公司\\中微公司：2024年年度报告.pdf",
+      "byte_size": 14285291,
+      "sha256": "3273711fbb79fa6ee5e9a3b2f0eea7d5a1dfa0d305721c61e5af251f9addf399",
+      "matches_sealed_source_ref": false,
+      "observation": "direct read-only whole-byte SHA; not a new RF/native open or fresh model consumption",
+      "linked_source_keys": [],
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Dropbox\\Stock\\工业与信息化\\电子\\中微公司\\中微公司：2025年年度报告.pdf",
+      "byte_size": 9165875,
+      "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "matches_sealed_source_ref": true,
+      "observation": "direct read-only whole-byte SHA; not a new RF/native open or fresh model consumption",
+      "linked_source_keys": [
+        "cn-688012:d64c410832f2"
+      ],
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Dropbox\\Stock\\工业与信息化\\电子\\中微公司\\中微半导体招股说明书.pdf",
+      "byte_size": 9533198,
+      "sha256": "3a9eb0ce69ecdbbdcc8c187f53c0c90ebf54ec9f4760486426318b9b1bc37b6c",
+      "matches_sealed_source_ref": false,
+      "observation": "direct read-only whole-byte SHA; not a new RF/native open or fresh model consumption",
+      "linked_source_keys": [],
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0000950170-25-100235\\msft-20250630.htm",
+      "byte_size": 8158067,
+      "sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "matches_sealed_source_ref": true,
+      "observation": "direct read-only whole-byte SHA; not a new RF/native open or fresh model consumption",
+      "linked_source_keys": [
+        "us-msft:99d693f6c154"
+      ],
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0000950170-24-087843\\msft-20240630.htm",
+      "byte_size": 6860911,
+      "sha256": "43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+      "matches_sealed_source_ref": true,
+      "observation": "direct read-only whole-byte SHA; not a new RF/native open or fresh model consumption",
+      "linked_source_keys": [
+        "us-msft:43829a12cc9c"
+      ],
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-25-256321\\msft-20250930.htm",
+      "byte_size": 5597461,
+      "sha256": "c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+      "matches_sealed_source_ref": true,
+      "observation": "direct read-only whole-byte SHA; not a new RF/native open or fresh model consumption",
+      "linked_source_keys": [
+        "us-msft:c963d7503907"
+      ],
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-26-027207\\msft-20251231.htm",
+      "byte_size": 7483278,
+      "sha256": "a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+      "matches_sealed_source_ref": true,
+      "observation": "direct read-only whole-byte SHA; not a new RF/native open or fresh model consumption",
+      "linked_source_keys": [
+        "us-msft:a60bb6a07479"
+      ],
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-26-191507\\msft-20260331.htm",
+      "byte_size": 7731948,
+      "sha256": "76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+      "matches_sealed_source_ref": true,
+      "observation": "direct read-only whole-byte SHA; not a new RF/native open or fresh model consumption",
+      "linked_source_keys": [
+        "us-msft:76945a2c148a"
+      ],
+      "mtime_note": "Exact baseline nanosecond timestamp was not retained losslessly through JS numeric report transport; SHA/size verification is authoritative here."
+    }
+  ],
+  "schema_version": "w09-source-coverage-preparation/1",
+  "status": "PREPARATION_ONLY_W09_NOT_COMPLETE",
+  "author": "/root/fresh_summary_contract",
+  "authority": "Read-only inventory/handoff to the MAIN M3 executors; neither a new canonical source ledger nor a forecast, acquisition receipt, metadata assertion, or evidence that W09 has passed.",
+  "root_causes": [
+    "RC09",
+    "RC10"
+  ],
+  "fixed_information_cutoff": "2026-10-08",
+  "no_duplicate_download_rule": "First query current configured CWP source inventory and match exact source SHA/type/issuer/period. Reuse existing qualified originals through SourceRef/registered-source public preparation; missing publication proof needs an additive source fact, not an identical file GET. If a source is genuinely absent, perform one bounded configured acquisition in a new M3 attempt, retaining actual usage and capture. A different SHA is a different version even when titles match.",
+  "engineering_dependency": "MAIN reported W06 independent RED: label/request A but raw+URL B accepted by import/query/reuse. The source owner is fixing it. This inventory does not certify that repair and must not be used to bypass it. Full new M3 capture/import/select/consume follows the fixed producer and MAIN major-node acceptance.",
+  "work_items": [
+    {
+      "id": "CN-01",
+      "company": "688012",
+      "category": "FY2024 exact publication",
+      "as_of_date": "2026-10-08",
+      "state": "existing_raw_publication_conflict",
+      "existing_source_keys": [],
+      "official_discovery_urls": [],
+      "next_executor_steps": [
+        "Reuse physical FY2024 original 3273711fbb79fa6ee5e9a3b2f0eea7d5a1dfa0d305721c61e5af251f9addf399, 14285291B, 268 pages; locate it through the current catalog rather than importing a filename as identity.",
+        "Find the issuer/exchange official annual-publication event for these exact bytes; resolve April17 vs April18 with official event+document-link evidence.",
+        "If proved, use W06 existing append-only source-fact API, then exact FY2024 reuse/public preparation; if unproved retain unknown, not today's retrieval date."
+      ],
+      "material_read_checkpoints": [
+        "Standalone FY2024 product history/qualification and revenue recognition; cover and 268-page header were read here, detailed business pages were not."
+      ],
+      "completion_evidence": [
+        "Exact byte SHA and original retained; official publication evidence bound to it; new qualified receipt or named unknown; no duplicate GET."
+      ],
+      "dependency": "W06 source owner acceptance",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/reports/storage.json#findings/STORAGE-007",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/execution/document_matrix.json#documents/12"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "CN-02",
+      "company": "688012",
+      "category": "2026-08-25 official investor-relations DOCX",
+      "as_of_date": "2026-10-08",
+      "state": "official_url_unresolved_no_raw",
+      "existing_source_keys": [],
+      "official_discovery_urls": [
+        "https://open.sseinfo.com/ir2/indexkcb?language=zh_CN&stockCode=688012"
+      ],
+      "next_executor_steps": [
+        "Rediscover exact August25 record from AMEC/SSE issuer IR index in the new attempt; sealed observations recorded mirror DOCX but did not retain a literal official URL.",
+        "Confirm issuer 688012, event date and actual downloadable DOCX; a mirror is not labelled official without publisher provenance.",
+        "Search current source inventory for that byte identity, otherwise acquire once through configured bounded official capture/CWP import; W05 supports DOCX. Preserve bytes/MIME/SHA, no translation."
+      ],
+      "material_read_checkpoints": [
+        "Read entire substantive Q/A and strategy/product qualification/overseas/CMP context; give paragraph or table-cell locators, preserve disclaimers and target periods."
+      ],
+      "completion_evidence": [
+        "Exact official URL+event date+byte SHA+SourceRef; full native DOCX parse/read and selected business summary/public read; RF use or a concrete no-model-value reason."
+      ],
+      "dependency": "W05 and W06; current web access failure is named discovery limit",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/execution/document_matrix.json#documents/7",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/execution/management-context-ledger.json#latest_ir_gap",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/reports/fetch.json#findings/FETCH-001"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "CN-03",
+      "company": "688012",
+      "category": "SSE Sep10 interactive QA complete pagination",
+      "as_of_date": "2026-10-08",
+      "state": "discovered_not_original_captured",
+      "existing_source_keys": [],
+      "official_discovery_urls": [
+        "https://roadshow.sseinfo.com/activityDetails/40766"
+      ],
+      "next_executor_steps": [
+        "Use the official rendered event to discover its actual public body/pagination or documented export; do not invent an endpoint or replace body with a search excerpt.",
+        "The search preview claims 21 companies, 195 interaction records/65 pages at 3 per page; pre-collected questions are separately 29/10 pages. Reconfirm actual totals from original responses.",
+        "Capture complete bounded response pages/order/event IDs/thread IDs/issuer IDs, join question and answer, account for admin/closing entries, then attribute only 688012 records. Do not claim 195 AMEC answers.",
+        "Retain originals once; normalize stable event/thread/Q/A locators via CWP-supported current path. If exact endpoint/rendering cannot be captured, record missing page IDs/count and real blocker."
+      ],
+      "material_read_checkpoints": [
+        "Complete management answers including constraints, conditional targets, timelines and contrary evidence; separate unaffiliated user question from company answer."
+      ],
+      "completion_evidence": [
+        "Reconciled actual page totals and unique record IDs, no missing/collapsed order, issuer attribution; per-Q/A raw locator+SHA; no partial-response coverage_complete."
+      ],
+      "dependency": "W05/W06; official web open returned 0 text lines in this investigation",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/execution/document_matrix.json#documents/8",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/reports/storage.json#findings/STORAGE-005",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/reports/process.json#findings/PROCESS-002"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "CN-04",
+      "company": "688012",
+      "category": "Zhonggui acquisition/issuance agreements",
+      "as_of_date": "2026-10-08",
+      "state": "H1_notes_read_full_transaction_missing",
+      "existing_source_keys": [
+        "cn-688012:182e2062fed9"
+      ],
+      "official_discovery_urls": [
+        "https://www.sse.com.cn/listing/renewal/ma/index_listing_detail.shtml?auditId=d111c13e8f884c24bc2e5008c6337657&bussinesType=1",
+        "https://star.sse.com.cn/disclosure/listedinfo/announcement/c/new/2026-04-29/688012_20260429_2YSG.pdf",
+        "https://static.sse.com.cn/stock/disclosure/announcement/c/202604/688012_20260424_14Q8.pdf"
+      ],
+      "next_executor_steps": [
+        "Official SSE project/index/report URLs are discovery leads; search previews are not full original agreement evidence. Resolve final registered report and latest supplements/implementation notices as of Oct8, using project ID and issuer.",
+        "Enumerate report, purchase agreement and supplement, performance-compensation agreement, valuation/consideration, closing/control and implementation notices. Match exact versions and do not download all appendices mechanically.",
+        "Reuse any exact existing SourceRef; acquire only required missing originals once under current bounds; read agreement clauses including definitions, settlement and conditions, not only H1 summary."
+      ],
+      "material_read_checkpoints": [
+        "H1 physical p176–177: 64.69% control, May31 consolidation, postpurchase revenue and CY2026/27/28 revenue commitments; verify against final agreement accounting perimeter, compensation/contingencies, timelines, target entity, consolidated revenue vs ownership, recognition and feasibility."
+      ],
+      "completion_evidence": [
+        "Final contract/materiality inventory, exact clauses+SourceRef/locators; all discovered amendments accounted for, unknown private clauses named; financial commitment not equated to achieved CWP/RF revenue."
+      ],
+      "dependency": "W04/W06 before new capture/import",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/execution/management-context-ledger.json#contextual_material_items",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/execution/document_matrix.json#documents/6",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/reports/fetch.json#findings/FETCH-002"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "CN-05",
+      "company": "688012",
+      "category": "Annual-to-asof management presentation/announcements",
+      "as_of_date": "2026-10-08",
+      "state": "bounded_search_incomplete",
+      "existing_source_keys": [],
+      "official_discovery_urls": [],
+      "next_executor_steps": [
+        "Bounded official issuer/SSE discovery from annual publication March31 to Oct8; enumerate investor presentation, strategy, issuance/convertible and material acquisition/product notices.",
+        "Record each event/link/category separately; title triage may skip routine formatted records with a concrete no-business-value reason. No blanket absent claim from FY2025 annual's convertible-bond not-applicable box.",
+        "Read selected primary business clauses after one reuse-first capture, then either extract materially new targets/counterevidence or document lack of model effect."
+      ],
+      "material_read_checkpoints": [
+        "Product/qualification/shipment-to-acceptance, overseas constraints, new curves, final acquisition milestones; no future 2026Q3 inferred before publication."
+      ],
+      "completion_evidence": [
+        "Dated bounded interval coverage with actual originals for materially relevant events or named missing candidates and justified skips."
+      ],
+      "dependency": "W04/W05/W06; no new provider",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/execution/document_matrix.json#documents/5",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/execution/document_matrix.json#documents/9",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/reports/process.json#findings/PROCESS-002"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "CN-06",
+      "company": "688012",
+      "category": "Existing annual/H1/IPO processing and additive pointer",
+      "as_of_date": "2026-10-08",
+      "state": "existing_read_summary_failed_or_partial",
+      "existing_source_keys": [
+        "cn-688012:d64c410832f2",
+        "cn-688012:182e2062fed9",
+        "cn-688012:19cdb41e03b2"
+      ],
+      "official_discovery_urls": [],
+      "next_executor_steps": [
+        "Reuse existing annual/H1/IPO SourceRefs; new batch only after W01/W02/W03 installed acceptance. Old annual paid truncation and H1 unpaid language failure remain historical failures.",
+        "Keep old document matrix unchanged; new attempt supersession references real execution/requests/registered-ipo-v2.json, not absent registered-ipo.json.",
+        "Do not replace final IPO SHA19cdb... with Dropbox legacy prospectus SHA3a9eb... merely because titles resemble."
+      ],
+      "material_read_checkpoints": [
+        "Annual p41 LPCVD full product subject/repeat-order context and p62 risk; H1p13 five-year equipment-process product coverage, not corporate market-share/revenue goal; p15/p18 milestones; IPO p44/p116/p251 is 2016–18 historical context."
+      ],
+      "completion_evidence": [
+        "New actual selected-group summary/public read/consumption or justified unused reason, full supporting proposition references; same original SHA, no retry download."
+      ],
+      "dependency": "W01/W02/W03 plus W06",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/execution/source_ledger.json#sources/0",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/execution/source_ledger.json#sources/1",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/execution/requests/registered-ipo-v2.json",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/reports/fetch.json#findings/FETCH-006"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "HK-01",
+      "company": "00700",
+      "category": "2026H1 exact publication of existing E700",
+      "as_of_date": "2026-10-08",
+      "state": "existing_raw_unknown_publication",
+      "existing_source_keys": [
+        "hk-00700:4170f80ec854"
+      ],
+      "official_discovery_urls": [
+        "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+        "https://www.tencent.com/investors/financial-reports/",
+        "https://www1.hkexnews.hk/search/titlesearch.xhtml?category=0&lang=EN&market=SEHK&stockId=1000041953"
+      ],
+      "next_executor_steps": [
+        "Existing E700 122-page 5135808B SHA4170f... is intact. HKEX debt counter40242 lists interim-report event Aug25 16:53; this is a candidate event, not yet same-byte proof.",
+        "Resolve the event's actual PDF URL and issuer linkage; establish exact equality to existing E700 bytes or separate version evidence before W06 metadata assertion.",
+        "Reuse original English after exact fact proof; do not retry zh H1 merely because sealed zh request was not_found."
+      ],
+      "material_read_checkpoints": [
+        "Full H1 recognition/segment/cash-flow/order/AI adoption business terms and subsequent-event/commitment constraints; selected release is not full H1."
+      ],
+      "completion_evidence": [
+        "Exact linked publication event and sameSHA assertion+new public qualified receipt, complete material original read and model relevance; otherwise unknown remains."
+      ],
+      "dependency": "W06 identity/candidate repair; debt counter is not full00700 coverage",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/execution/interim-2026-candidate.json",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/roles/fetch/review-original-opens.json#/originals/6",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/reports/fetch.json#findings/FETCH-002"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "HK-02",
+      "company": "00700",
+      "category": "Existing September corporate overview date",
+      "as_of_date": "2026-10-08",
+      "state": "existing_raw_unknown_publication",
+      "existing_source_keys": [
+        "hk-00700:a9b0a5d6c68d"
+      ],
+      "official_discovery_urls": [
+        "https://www.tencent.com/wp-content/uploads/2026/09/Corporate-Overview-2Q26-20260916.pdf",
+        "https://www.tencent.com/investors/investor-kit-calendar/"
+      ],
+      "next_executor_steps": [
+        "Reuse existing 24-page 1676729B SHAa9b0...; find a publisher dated event/archive linking that exact version.",
+        "Do not infer Sep16 publication from URL basename, PDF internal creation time, retrieval or current investor-kit page. If proof missing keep historical availability unknown and say so.",
+        "After W06 compatible assertion, public prepare/read original; acquisition of same-byte overview is unnecessary."
+      ],
+      "material_read_checkpoints": [
+        "AI/cloud/ads/game/overseas product strategy and actual target periods; token/adoption/procurement metrics are not billed revenue without a bridge."
+      ],
+      "completion_evidence": [
+        "SameSHA dated source proof and new source version/read receipt, or exact named remaining metadata gap; old null manifest remains sealed."
+      ],
+      "dependency": "W06; current investor-kit web open failed",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/execution/overview-2026-candidate.json",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/roles/fetch/review-original-opens.json#/originals/7",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/reports/storage.json#findings/STORAGE-001"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "HK-03",
+      "company": "00700",
+      "category": "Official Q2 earnings presentation",
+      "as_of_date": "2026-10-08",
+      "state": "exact_link_discovered_web_timeout_no_raw",
+      "existing_source_keys": [],
+      "official_discovery_urls": [
+        "https://www.tencent.com/investors/results/",
+        "https://static.www.tencent.com/website-2026-upload/2Q26-earnings-PPT_20260812_1800-88b183.pdf"
+      ],
+      "next_executor_steps": [
+        "Official results page latest Q2 presentation link resolved; actual web open timed out. This is not original capture or SourceRef.",
+        "Query current catalog before one bounded official acquisition in a new M3 attempt; validate PDF signature/MIME/issuer/period and publication event.",
+        "Exclude sealed 987-byte HTML pseudoPDF; overview remains separate source and cannot count as this presentation."
+      ],
+      "material_read_checkpoints": [
+        "Full management targets, quantitative driver bridges, recognition/customer/use context and limitations; compare to full H1/release/call and handle supersession."
+      ],
+      "completion_evidence": [
+        "Actual valid PDF SHA+SourceRef and dated event, complete material slides/notes read; summary/public consumption or justified no new model value."
+      ],
+      "dependency": "W04/W05/W06; actual browser timeout is external/tool boundary",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/execution/document_matrix.json#matrix/9",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/reports/fetch.json#findings/FETCH-004"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "HK-04",
+      "company": "00700",
+      "category": "June9–Oct8 material announcements and official business news",
+      "as_of_date": "2026-10-08",
+      "state": "partial_interval_not_complete",
+      "existing_source_keys": [
+        "hk-00700:1cfbaab885ce"
+      ],
+      "official_discovery_urls": [
+        "https://www.tencent.com/investors/announcements/",
+        "https://www.tencent.com/investors/results/"
+      ],
+      "next_executor_steps": [
+        "Traverse actual00700 equity issuer announcements over entire June9–Oct8 interval, not only first page Sep9–Oct9 or the40242/85070 debt counters. Oct9 is outside cutoff.",
+        "Record pagination/date boundaries and materiality for routine buybacks/monthly forms versus issuance/acquisition/strategy/product/customer constraints.",
+        "Read material original announcement clauses; separately triage issuer news leads (Aug5/28 model launch, Aug20 games, Sep22 esports) from search previews before any model use."
+      ],
+      "material_read_checkpoints": [
+        "Business timing/ads/AI monetization/overseas licence and execution constraints; rights/financing/funding != recognized revenue; generic compliance forms may be skipped with concrete reason."
+      ],
+      "completion_evidence": [
+        "Interval reconciliation, per-selected-event primary locator/SHA, justified skipped categories, specific uncovered pages/events; no statement all latest targets absent."
+      ],
+      "dependency": "W04/W06; official news leads not yet original-opened",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/execution/document_matrix.json#matrix/7",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/execution/document_matrix.json#matrix/12",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/reports/process.json#findings/PROCESS-002"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "HK-05",
+      "company": "00700",
+      "category": "GMTN issue terms after existing June9 circular",
+      "as_of_date": "2026-10-08",
+      "state": "circular_existing_selected_clauses_read_updates_missing",
+      "existing_source_keys": [
+        "hk-00700:1cfbaab885ce"
+      ],
+      "official_discovery_urls": [
+        "https://www1.hkexnews.hk/search/titlesearch.xhtml?category=0&lang=EN&market=SEHK&stockId=1000041953"
+      ],
+      "next_executor_steps": [
+        "Reuse existing 664-page circular SHA1cfb...; full parse is available but only selected substantive pages were read. Do not call all664 pages a full clause audit.",
+        "Resolve June10 pricing and June17 completion/pricing supplements from official event index, deduplicate actualSHA and read relevant final terms only if they alter constraints/availability.",
+        "No mechanical bulk download of all offerings or boilerplate annexes; explicitly account for any applicable convertible/equity documents in the bounded interval."
+      ],
+      "material_read_checkpoints": [
+        "Existing circular physical p24/40/41/46/62/220/227/246/276; check proceeds, debt currency/maturity, licences/AI adoption risks and term amendments. June17 funding is financing, not sales."
+      ],
+      "completion_evidence": [
+        "Existing circular reused; final applicable financing terms/version chain and no-revenue boundary supported with original locators or justified no model effect."
+      ],
+      "dependency": "W04/W06",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/execution/prospectus-2026-compact-import-request.json",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/execution/source_ledger.json#sources/5",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/execution/hkex-primary-index-web-response.json"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "HK-06",
+      "company": "00700",
+      "category": "Original call/Q&A and existing summary rerun",
+      "as_of_date": "2026-10-08",
+      "state": "ET_preHTTP_failure_no_transcript",
+      "existing_source_keys": [],
+      "official_discovery_urls": [
+        "https://www.tencent.com/investors/results/"
+      ],
+      "next_executor_steps": [
+        "W07 identifies actual ET provider market/exchange capability first; unsupported HK is a named provider limit, not a failed paid entitlement or missing user permission.",
+        "Inspect official webcast/IR for original transcript or Q/A export; discovery is separate from ET success, no unconfigured transcription/translation service.",
+        "Reuse existing annual25/release26 originals after W02/W03 for full business groups; material call unavailable remains explicit, with alternate source scope honestly recorded."
+      ],
+      "material_read_checkpoints": [
+        "Games domestic/international timing; ads volume/price vs engagement; Weixin-store technical fees all supporting spans; AI-use-to-billed-revenue conversion; full answer constraints."
+      ],
+      "completion_evidence": [
+        "Actual original call/Q&A SourceRef if publicly available, or reproducible capability/official-source limitation; separate valid annual/release actual rerun and use, not surrogate call acceptance."
+      ],
+      "dependency": "W07 plus W02/W03; later M3 executor only",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/execution/companion-transcript-request.json",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/execution/document_matrix.json#matrix/11",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/reports/fetch.json#findings/FETCH-001"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "US-01",
+      "company": "MSFT",
+      "category": "Latest FY2026 annual 10-K",
+      "as_of_date": "2026-10-08",
+      "state": "primary_event_confirmed_raw_not_registered",
+      "existing_source_keys": [],
+      "official_discovery_urls": [
+        "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/0001193125-26-323660-index.htm",
+        "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+      ],
+      "next_executor_steps": [
+        "SEC index primary body confirms CIK789019, accession0001193125-26-323660, period2026-06-30, filed/accepted July29 and primary10K8585501B. Current sealed ledger has no rawSHA/SourceRef; first failed acquisition cost/bytes cannot be invented.",
+        "After W06 repair, query fresh configured inventory; if truly absent perform one configured RF→FF→CWP exactannual fetch in new isolated M3 root, preserving real cumulative usage.",
+        "Use execution/requests/fy26-fetch.json as v2 field template, current acquisition limits, original-language exact10K/FY2026/asof; do not get36MB complete submission or duplicate exhibits mechanically.",
+        "Immediately public native-open/period/issuer/SHA validate, then repeat same request proves reuse/download_events0. Do not reclassify old failed fetch as success."
+      ],
+      "material_read_checkpoints": [
+        "Latest annual revenue-recognition segment perimeter, RPO/customer concentration/contracts, capacity/capex constraints, contingent customer-financing/commitments, net/gross and currency/unit changes."
+      ],
+      "completion_evidence": [
+        "New actual sourceRef/SHA/typed usage and first-capture then sameSHA reuse receipt; complete material annual read and actual RF use; or honest configured external failure."
+      ],
+      "dependency": "W06 current identity repair and W08 usage propagation; no provider/Dayu code changes",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/execution/requests/fy26-fetch.json",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/execution/source_ledger.json#sources/10",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/reports/fetch.json#findings/FETCH-001"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "US-02",
+      "company": "MSFT",
+      "category": "Existing FY2026 Q1–Q3 10-Q",
+      "as_of_date": "2026-10-08",
+      "state": "existing_raw_reviewer_open_executor_unconsumed",
+      "existing_source_keys": [
+        "us-msft:c963d7503907",
+        "us-msft:a60bb6a07479",
+        "us-msft:76945a2c148a"
+      ],
+      "official_discovery_urls": [],
+      "next_executor_steps": [
+        "Reuse exact three SEC SourceRefs and existing physical originals; correct formal native selection to document_kind regulatory_filing/form10-Q/exactyearandquarter, not fake quarterly_report.",
+        "W06 new qualified preparation/reader should use genuine period/issuer facts even with blank title. Independent sealed reviewer already qualified all3; sealed executor Q1failed/Q2–Q3notopened remains unchanged.",
+        "Read native originals and link relevant interim policy/customer/capacity changes; do not download again to obtain a title."
+      ],
+      "material_read_checkpoints": [
+        "Q1/Q2/Q3 reported/constant-currency and annual vs quarterly period, recognition/commitment disclosures and superseded segment definitions; latest FY26annual ultimately governs annual perimeter."
+      ],
+      "completion_evidence": [
+        "Three actual preparation/open/extraction receipts and model relevance or justified no incremental value, sameSHA/noGET."
+      ],
+      "dependency": "W06",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/roles/fetch/review-original-opens.json#/originals/2-4",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/execution/source_ledger.json#sources/2-4",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/reports/storage.json#findings/STORAGE-001"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "US-03",
+      "company": "MSFT",
+      "category": "Existing official Q4 call/results/metrics and Sep2 deck",
+      "as_of_date": "2026-10-08",
+      "state": "raw_read_native_call_summary_failed_deck_partial",
+      "existing_source_keys": [
+        "us-msft:bdc90bf78dbf",
+        "us-msft:8d63b8eaa344",
+        "us-msft:cf054968a148",
+        "us-msft:c02f4ea1a271"
+      ],
+      "official_discovery_urls": [],
+      "next_executor_steps": [
+        "Reuse four registered official sources; W05 repaired official HTML transcript parser mechanism needs the actual481-line original new M3 native parse/selection/summary/public-read/consume chain.",
+        "Read the entire substantive call incl Q/A, rather than count PPTX summary as call success. Retain actual native call speaker/paragraph locators and original language.",
+        "Deck Sep2 updated guidance supersedes earlier Q1 segment/KPI guidance where expressly stated; preserve both historical sources and supporting whole groups. Requery exact ET USFY26Q4 via W07 only under current zeroincrementalfee bound; its external entitlement outcome remains separate."
+      ],
+      "material_read_checkpoints": [
+        "Management FY27/Q1 guides, currency effects, Azure capacity/demand/RPO conversion; deck page7 paragraph9 full Agents/Infra ownership and page18 product alignment; RPO is not all next-year revenue."
+      ],
+      "completion_evidence": [
+        "Actual new native officialcall chain with its ownSourceRef; complete support/targetperiods; separate ET measured status; valid deck binding without automatic neighbor-ID support."
+      ],
+      "dependency": "W05/W02/W03/W07",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/execution/source_ledger.json#sources/5-8",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/execution/research/management-discovery.json",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/reports/storage.json#findings/STORAGE-002"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "US-04",
+      "company": "MSFT",
+      "category": "Customer financing / OpenAI contract changes",
+      "as_of_date": "2026-10-08",
+      "state": "public_primary_terms_discovered_not_ingested",
+      "existing_source_keys": [],
+      "official_discovery_urls": [
+        "https://openai.com/index/next-chapter-of-microsoft-openai-partnership/",
+        "https://blogs.microsoft.com/blog/2026/04/27/the-next-phase-of-the-microsoft-openai-partnership/"
+      ],
+      "next_executor_steps": [
+        "Read-only primary body opened here: Oct28 2025 definitive-agreement announcement and Apr27 2026 amended agreement. Capture these originals through configured bounded CWP path later; noSourceRef/SHA minted now.",
+        "Use latest annual/call for relevant concentration, enforceability, fulfilment and recognition. Read the old purchasecommitment alongside the Aprilamendment, not old exclusivity alone.",
+        "Discover direct primary customer funding-close/available-cash/compute-purchase sources only if they support a material exposure. Full private contract/cap amount/payment schedule remains unknown if undisclosed; no subscription or inferred facts."
+      ],
+      "material_read_checkpoints": [
+        "Old disclosed additional Azure purchase commitment and investment value are distinct; April amendment changes cloud flexibility/IP exclusivity/revenue-share direction and cap. Financing, equity value, booked commitment and recognized revenue are separate quantities."
+      ],
+      "completion_evidence": [
+        "Dated original publicterms+SHA/SourceRef/locators, supersession mapping and exact known/unknown contractual constraints; all forecast effect sourced or explicitly conditional, not funding-as-sales."
+      ],
+      "dependency": "W04/W06; private/fullterms not established by publicnews",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/reports/storage.json#findings/STORAGE-004",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/execution/document_matrix.json",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/execution/research/management-discovery.json"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "US-05",
+      "company": "MSFT",
+      "category": "Annual-to-asof material communications",
+      "as_of_date": "2026-10-08",
+      "state": "partial_interval_coverage",
+      "existing_source_keys": [],
+      "official_discovery_urls": [],
+      "next_executor_steps": [
+        "Traverse primary Microsoft/SEC material communications from latest annual July29 through Oct8, plus relevant contractual changes since prior baseline July30 2025.",
+        "Reuse sealed research material-discovery-final.json actual observations; Oct7 announcement schedules Oct28 quarterly release, so no futureQ1actuals. Capitaldistribution notices need no forced revenue parameter.",
+        "Read materially relevant AI/customer/product/recognition/security constraints; record original date boundaries and concrete no-model-effect skips."
+      ],
+      "material_read_checkpoints": [
+        "Sep9 educationAI policy if relevant to uptake/adoption; exact strategy/revenue targets vs forecasts; recognition and capacity/counterevidence."
+      ],
+      "completion_evidence": [
+        "Bounded dateinterval materiality inventory with actualoriginal locators or namedunavailable events; no unsupported claim alltargets reviewed."
+      ],
+      "dependency": "W04/W06",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/execution/research/material-discovery-final.json",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/execution/research/management-discovery.json",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/reports/storage.json#findings/STORAGE-004"
+      ],
+      "execution_started_here": false
+    },
+    {
+      "id": "US-06",
+      "company": "MSFT",
+      "category": "Existing ET TXT and outside market references",
+      "as_of_date": "2026-10-08",
+      "state": "intact_TXT_publication_unknown_partial_external_text",
+      "existing_source_keys": [
+        "us-msft:4ac3b4f0fa1b"
+      ],
+      "official_discovery_urls": [],
+      "next_executor_steps": [
+        "Existing 66324B TXT SHA4ac3... has nullsourceURL/pubdate. Keep it; do not borrow dated officialHTML's publication to qualify differentbytes.",
+        "If original TXT source/version can be proved with exactperiod/body/providerprovenance, add compatible fact then reuse; otherwise use separatelyqualified officialHTML and retain TXTunknown. No paidfallback.",
+        "External SRG/AWS/Gartner snapshots are browserpartialtext, not originalHTML/CWPSourceRefs; fetch originals only if needed for a material independent forecast check. Otherwise name analogical/partialscope."
+      ],
+      "material_read_checkpoints": [
+        "Transcript identity/FYQ/year/speaker and currency/billion unit; independent market perimeter vs companyreportedrevenue; no marketbenchmark directly applied as company growth."
+      ],
+      "completion_evidence": [
+        "ExactTXTprovenance receipt or truthfulunusedunknown, no duplicatedcall masquerade; actualoriginalexternalSourceRefs onlywhen material."
+      ],
+      "dependency": "W06/W07; conditional materiality, not mandatory newprovider",
+      "seal_evidence": [
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/execution/source_ledger.json#sources/9",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/roles/fetch/review-original-opens.json#/originals/9",
+        "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/execution/source_ledger.json#sources/11-13"
+      ],
+      "execution_started_here": false
+    }
+  ],
+  "primary_browsing": {
+    "bounds": {
+      "max_search_queries": 8,
+      "max_open_or_click": 12
+    },
+    "observed_counts": {
+      "search_queries": 8,
+      "open_or_click": 12
+    },
+    "request_log": [
+      {
+        "kind": "search",
+        "queries": [
+          {
+            "q": "中微公司 2026年08月 投资者关系 活动记录表 docx",
+            "domains": [
+              "amec-inc.com",
+              "sse.com.cn",
+              "cninfo.com.cn"
+            ]
+          },
+          {
+            "q": "中微公司 2026 9月10日 业绩说明会 195 问答",
+            "domains": [
+              "sseinfo.com",
+              "sse.com.cn"
+            ]
+          },
+          {
+            "q": "中微公司 2024年年度报告 2025 4月17 4月18",
+            "domains": [
+              "sse.com.cn",
+              "cninfo.com.cn",
+              "amec-inc.com"
+            ]
+          }
+        ],
+        "at": "2026-10-09 17:58:42 UTC"
+      },
+      {
+        "kind": "search",
+        "queries": [
+          {
+            "q": "中微公司 众硅 64.69% 发行股份 购买资产 协议 2026",
+            "domains": [
+              "sse.com.cn",
+              "amec-inc.com",
+              "cninfo.com.cn"
+            ]
+          },
+          {
+            "q": "Tencent 2026 interim report Corporate-Overview-2Q26-20260916",
+            "domains": [
+              "tencent.com",
+              "hkexnews.hk"
+            ]
+          },
+          {
+            "q": "Tencent 2026 June September October announcements presentation Q2",
+            "domains": [
+              "tencent.com",
+              "hkexnews.hk"
+            ]
+          }
+        ],
+        "at": "2026-10-09 17:59:01 UTC"
+      },
+      {
+        "kind": "search_and_open",
+        "queries": [
+          {
+            "q": "Microsoft FY 2026 annual report July 29 2026 10-K 000119312526323660",
+            "domains": [
+              "sec.gov",
+              "microsoft.com"
+            ]
+          },
+          {
+            "q": "Microsoft OpenAI customer financing funding 2026 September October cloud agreement",
+            "domains": [
+              "microsoft.com",
+              "openai.com",
+              "coreweave.com"
+            ]
+          }
+        ],
+        "opens": [
+          {
+            "ref_id": "https://roadshow.sseinfo.com/activityDetails/40766"
+          },
+          {
+            "ref_id": "https://www.tencent.com/investors/financial-reports/"
+          },
+          {
+            "ref_id": "https://www.tencent.com/investors/investor-kit-calendar/"
+          }
+        ],
+        "at": "2026-10-09 17:59:15 UTC"
+      },
+      {
+        "kind": "open",
+        "opens": [
+          {
+            "ref_id": "https://open.sseinfo.com/ir2/indexkcb?language=zh_CN&stockCode=688012"
+          },
+          {
+            "ref_id": "https://www1.hkexnews.hk/search/titlesearch.xhtml?category=0&lang=EN&market=SEHK&stockId=1000041953"
+          },
+          {
+            "ref_id": "https://www.tencent.com/investors/results/"
+          },
+          {
+            "ref_id": "https://www.tencent.com/investors/announcements/"
+          },
+          {
+            "ref_id": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/0001193125-26-323660-index.htm"
+          }
+        ],
+        "at": "2026-10-09 17:59:41 UTC"
+      },
+      {
+        "kind": "open",
+        "opens": [
+          {
+            "ref_id": "https://www.sse.com.cn/listing/renewal/ma/index_listing_detail.shtml?auditId=d111c13e8f884c24bc2e5008c6337657&bussinesType=1"
+          },
+          {
+            "ref_id": "https://blogs.microsoft.com/blog/2026/04/27/the-next-phase-of-the-microsoft-openai-partnership/"
+          },
+          {
+            "ref_id": "https://openai.com/index/next-chapter-of-microsoft-openai-partnership/"
+          }
+        ],
+        "at": "2026-10-09 18:00:16 UTC"
+      },
+      {
+        "kind": "click_and_find",
+        "click": [
+          {
+            "ref_id": "https://www.tencent.com/investors/results/",
+            "id": 43
+          }
+        ],
+        "find": [
+          {
+            "ref_id": "https://blogs.microsoft.com/blog/2026/04/27/the-next-phase-of-the-microsoft-openai-partnership/",
+            "pattern": "share"
+          },
+          {
+            "ref_id": "https://openai.com/index/next-chapter-of-microsoft-openai-partnership/",
+            "pattern": "250"
+          }
+        ],
+        "at": "2026-10-09 18:04:22 UTC"
+      },
+      {
+        "kind": "find",
+        "find": [
+          {
+            "ref_id": "https://openai.com/index/next-chapter-of-microsoft-openai-partnership/",
+            "pattern": "agreement"
+          },
+          {
+            "ref_id": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/0001193125-26-323660-index.htm",
+            "pattern": "8585501"
+          },
+          {
+            "ref_id": "https://www1.hkexnews.hk/search/titlesearch.xhtml?category=0&lang=EN&market=SEHK&stockId=1000041953",
+            "pattern": "25/08/2026"
+          }
+        ],
+        "at": "2026-10-09 18:04:35 UTC"
+      }
+    ],
+    "acquisition_or_processing": {
+      "ff_calls": 0,
+      "et_calls": 0,
+      "provider_api_calls": 0,
+      "paid_api_calls": 0,
+      "llm_calls": 0,
+      "local_downloads": 0,
+      "original_imports": 0,
+      "source_fact_assertions": 0,
+      "production_code_config_writes": 0
+    },
+    "limits": [
+      "Public web page rendering may omit dynamic bodies. SSE event actual open yielded 0 lines; search preview is discovery only.",
+      "Tencent official earnings presentation precise URL resolved but opened result timed out.",
+      "HK debtcounter publication event links have not been binary-compared with E700_IR.",
+      "CN Aug25 exact official DOCX URL and FY24 exact publisher date remain unresolved.",
+      "No primary full private customer/agreement terms established; unknowns retained."
+    ],
+    "observations": [
+      {
+        "id": "B-SSE-QA",
+        "url": "https://roadshow.sseinfo.com/activityDetails/40766",
+        "status": "search_preview_discovery_actual_open_empty",
+        "body_lines": 0,
+        "preliminary_preview_counts": {
+          "companies": 21,
+          "interaction_records": 195,
+          "interaction_pages": 65,
+          "records_per_page": 3,
+          "precollected_questions": 29,
+          "precollected_pages": 10
+        },
+        "counts_are_original_verified": false,
+        "no_source_ref": true
+      },
+      {
+        "id": "B-SSE-TX",
+        "url": "https://www.sse.com.cn/listing/renewal/ma/index_listing_detail.shtml?auditId=d111c13e8f884c24bc2e5008c6337657&bussinesType=1",
+        "status": "primary_index_skeleton_opened_dynamic_project_rows_absent",
+        "body_lines": 150,
+        "candidate_pdf_urls": [
+          "https://star.sse.com.cn/disclosure/listedinfo/announcement/c/new/2026-04-29/688012_20260429_2YSG.pdf",
+          "https://static.sse.com.cn/stock/disclosure/announcement/c/202604/688012_20260424_14Q8.pdf"
+        ],
+        "candidate_pdfs_opened": false,
+        "no_source_ref": true
+      },
+      {
+        "id": "B-HK-H1",
+        "url": "https://www1.hkexnews.hk/search/titlesearch.xhtml?category=0&lang=EN&market=SEHK&stockId=1000041953",
+        "status": "primary_index_text_opened",
+        "issuer_counter": "40242 TENCENT N6006 (debt counter, not complete00700 equity list)",
+        "event": {
+          "title": "INTERIM REPORT 2026",
+          "release_time": "2026-08-25 16:53",
+          "displayed_size": "5MB"
+        },
+        "same_sha_as_existing_E700_proved": false,
+        "new_metadata_assertion": false,
+        "body_locator": "primary index lines22-23"
+      },
+      {
+        "id": "B-HK-DEBT",
+        "url": "https://www1.hkexnews.hk/search/titlesearch.xhtml?category=0&lang=EN&market=SEHK&stockId=1000041953",
+        "status": "primary_index_text_opened",
+        "body_locators": [
+          "lines26-35 June17 supplements/completion, June10 pricing, June9 circular"
+        ],
+        "linked_supplement_originals_opened": false
+      },
+      {
+        "id": "B-HK-PRES",
+        "url": "https://www.tencent.com/investors/results/",
+        "status": "primary_page_link_resolved_linked_pdf_timeout",
+        "actual_pdf_url": "https://static.www.tencent.com/website-2026-upload/2Q26-earnings-PPT_20260812_1800-88b183.pdf",
+        "no_raw_sha_or_source_ref": true
+      },
+      {
+        "id": "B-HK-ANN",
+        "url": "https://www.tencent.com/investors/announcements/",
+        "status": "primary_first_page_text_opened",
+        "scope": "Sep9–Oct9 visible; Oct9 excluded by cutoff; earlier interval not traversed",
+        "coverage_complete": false
+      },
+      {
+        "id": "B-US-ANNUAL",
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/0001193125-26-323660-index.htm",
+        "status": "primary_index_text_opened",
+        "issuer": "MICROSOFT CORP CIK0000789019",
+        "accession": "0001193125-26-323660",
+        "filed": "2026-07-29",
+        "accepted": "2026-07-29 16:08:01",
+        "period_end": "2026-06-30",
+        "primary_document": "msft-20260630.htm",
+        "publisher_reported_bytes": 8585501,
+        "body_locators": [
+          "lines9-19",
+          "lines25-34",
+          "lines57-60"
+        ],
+        "raw_sha256": null,
+        "original_body_acquired_here": false
+      },
+      {
+        "id": "B-US-CONTRACT-OLD",
+        "url": "https://openai.com/index/next-chapter-of-microsoft-openai-partnership/",
+        "status": "primary_text_opened",
+        "publication": "2025-10-28",
+        "body_locators": [
+          "lines21-42"
+        ],
+        "materiality": "Disclosed investment value/stake and incremental Azure purchase commitment; these are not recognized revenue. Public announcement is not full private agreement.",
+        "no_raw_sha_or_source_ref": true
+      },
+      {
+        "id": "B-US-CONTRACT-NEW",
+        "url": "https://blogs.microsoft.com/blog/2026/04/27/the-next-phase-of-the-microsoft-openai-partnership/",
+        "status": "primary_text_opened",
+        "publication": "2026-04-27",
+        "body_locators": [
+          "lines4-15"
+        ],
+        "materiality": "Amendment changes cloud flexibility, nonexclusive IP licence and revenue-share direction/time/cap. This disclosure does not supply the complete private cap/amount/payment/fulfilment agreement.",
+        "no_raw_sha_or_source_ref": true
+      }
+    ]
+  },
+  "handoff": {
+    "owners": {
+      "MAIN": "engineering acceptance, installed runtime/configuration and major-node M3 review; merge/push/install only MAIN",
+      "CN_M3": "CN01–06 source discovery/acquisition/read/materiality and additive newattempt source inventory",
+      "HK_M3": "HK01–06 same; official sources distinct from ET capability result",
+      "US_M3": "US01–06 same; exactperiod/type and finance vs revenue"
+    },
+    "required_new_attempt_fields": [
+      "previous_sealed_run_id",
+      "new_attempt_id",
+      "information_cutoff",
+      "company_identity",
+      "request_id",
+      "discovery_event_or_link",
+      "original_source_ref_or_null",
+      "raw_sha256_or_null",
+      "published_fact_proof_or_named_unknown",
+      "original_read_locator",
+      "parse_status",
+      "summary_and_public_read_status",
+      "materiality",
+      "actual_forecast_use_or_specific_unused_reason",
+      "external_limit_or_missing_page",
+      "real_usage_receipt",
+      "supersedes_reference"
+    ],
+    "entry_templates": {
+      "exact_reuse": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/execution/requests/annual2025.json",
+      "registered_source": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/execution/requests/registered-ipo-v2.json",
+      "missing_exact_annual": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-us-msft/execution/requests/fy26-fetch.json",
+      "official_import": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/execution/prospectus-2026-compact-import-request.json"
+    },
+    "invocation": "Use current verified installed RF scripts/source_preparation.py with --company-wiki-catalog-config <new owned isolated catalog> --company-wiki-config <new owned fixture current production-derived nonsecret configuration references> --filing-fetch-root <verified installed FF>; supply exact current v2 request using the existing entry's documented stdin/file mechanism. Registered-source candidate uses the existing registered-source public preparation interface. Do not replay the old TEMP configuration into new live execution without coordinator fingerprints and identity producer acceptance.",
+    "acceptance": "One source coverage/read/model-quality review at M3 major node. No per-material human licence, authorizationJSON, private/public, canary or extra signing chain.",
+    "no_claims": [
+      "No W09 full GREEN",
+      "No latestannual downloaded or imported",
+      "No fullSSE195 body captured",
+      "No H1/overview publication repaired",
+      "No fullprivate contractobtained",
+      "No newRF forecast/paidsummary"
+    ]
+  },
+  "summary_counts": {
+    "existing_source_refs": 24,
+    "sealed_source_ledger_rows": 31,
+    "sealed_document_matrix_rows": 46,
+    "read_only_current_physical_raw_sha_observations": 19,
+    "matching_existing_source_ref_shas": 17,
+    "additional_raws_without_matching_sealed_source_ref": 2,
+    "actionable_work_items": 18,
+    "per_company_work_items": 6
+  },
+  "additional_original_notes": [
+    {
+      "sha256": "3273711fbb79fa6ee5e9a3b2f0eea7d5a1dfa0d305721c61e5af251f9addf399",
+      "title": "中微公司FY2024 annual",
+      "physical_page_count": 268,
+      "byte_size": 14285291,
+      "own_read_scope": "Whole-byte SHA plus physical pages1–2 identity/year header, read-only PyMuPDF; no full material reading or new native qualification.",
+      "source_ref": null,
+      "published_date": null,
+      "publication_gap": "Sealed April17 versusApril18 conflict. Board/signature/meeting-material date is not publication proof."
+    },
+    {
+      "sha256": "3a9eb0ce69ecdbbdcc8c187f53c0c90ebf54ec9f4760486426318b9b1bc37b6c",
+      "title": "Dropbox 中微半导体招股说明书.pdf",
+      "byte_size": 9533198,
+      "own_read_scope": "Whole-byte SHA only; not read or qualified here.",
+      "source_ref": null,
+      "do_not_substitute_for": "cn-688012:19cdb41e03b2",
+      "reason": "Different bytes/size from sealed final prospectus; filename similarity does not establish version identity."
+    }
+  ],
+  "optional_adjacent_sources": [
+    {
+      "company": "688012",
+      "category": "Lam peer HTML",
+      "state": "Sealed GET/import failed and old body lost; no valid SourceRef",
+      "action": "Only if independent peer check remains material, W04 new bounded capture obtains a new version/SHA/usage. Preserve lost-body history; no reconstructed old identity.",
+      "reference": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-cn-688012/execution/requests/lam-import.json"
+    },
+    {
+      "company": "00700",
+      "category": "CADPA original HTML",
+      "state": "Two original HTML hashes retained in sealed execution; CWP SourceRef not asserted",
+      "action": "Reuse cadpa-2025.html and cadpa-2024.html; preserve original-vs-extraction hash and market/company-perimeter distinction.",
+      "reference": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/execution/source_ledger.json#sources/6-7"
+    },
+    {
+      "company": "00700",
+      "category": "NetEase peer release",
+      "state": "Old raw_sha256 field ce477... is browser-response representation; native original HTML GET timed out",
+      "action": "Do not label this a publisher raw hash or nativeSourceRef. Acquire exact primary original only if material; do not rewrite sealed row.",
+      "reference": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/fresh-20261009T065028-hk-00700/execution/source_ledger.json#sources/8"
+    }
+  ],
+  "restoration": {
+    "owned_test_temp_created": false,
+    "new_original_files_created": false,
+    "cleanup_required": false,
+    "output_paths": [
+      "C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/fresh_root_implementation_2026-10-09/w09_material_coverage/initial_investigation.md",
+      "C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/fresh_root_implementation_2026-10-09/w09_material_coverage/initial_inventory.json"
+    ],
+    "verification_scope": "38 selected sealed metadata/report/request files and19 directly hashed originals before/after writing; not all objects in the three run trees.",
+    "verification": {
+      "verified_at": "2026-10-09T18:20:48.054435+00:00",
+      "selected_sealed_artifacts": 38,
+      "physical_originals": 19,
+      "matched_sha_size": 57,
+      "expected_absent_still_absent": 0,
+      "changes": [],
+      "initial_mtime_ns_number_reporting_precision_loss_count": 35,
+      "mtime_restore_claim": "No exact baseline ns claim; JS numeric roundoff is a report transport limitation, not source byte modification. Source SHA/size independently unchanged.",
+      "json_counts_ok": true
+    }
+  }
+}

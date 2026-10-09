@@ -1,0 +1,53 @@
+{
+  "recorded_at": "2026-10-09T18:24:53.242994+00:00",
+  "actual_main_head": "d5855924ec60a1be1d0ce4e3cbaf4331efb26e6b",
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-r",
+    "s",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cw-2qg92ut5\\pytest",
+    "tests/contract/test_source_scope_qualification.py",
+    "tests/unit/test_ci_push_selection.py",
+    "tests/contract/test_fresh_cache_behavior_receipts.py",
+    "tests/integration/test_narrative_generation_reuse.py::test_different_configured_runs_default_to_one_generation_post_and_public_pin"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 118.878,
+  "basetemp_decisions": [
+    {
+      "event": "decision",
+      "requested_basetemp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cw-2qg92ut5\\pytest",
+      "requested_basetemp_len": 50,
+      "cwd_len": 34,
+      "threshold": 60,
+      "win32_path_limit": 210,
+      "generation_reserve": 150,
+      "relocated": false,
+      "reason": "within-budget"
+    }
+  ],
+  "owned_temp_absent": true,
+  "protected": [
+    {
+      "path": "config/source_catalog.yaml",
+      "sha_size_mtime_unchanged": true
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/fresh_root_remediation_2026-10-09/issue_root_matrix.json",
+      "sha_size_mtime_unchanged": true
+    }
+  ],
+  "matrix_authoring_baseline": "2350077a; distinct from actual integration head",
+  "matrix_receipt": "docs\\plans\\fresh-cache-receipts-2026-10-09\\main-integration-receipt.json",
+  "source_provider_or_paid_calls": 0,
+  "scope": "Actual shared original-company/period qualification, same CI/push routing and finite synthetic cache matrix; not M3 real-company research"
+}

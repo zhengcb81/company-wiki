@@ -394,3 +394,18 @@ W06正常ensure两早返回、FF query_found→最终open已由作者实证绕�
 ## 2026-10-09 17:47 UTC — 后续八家公司目标的语义
 
 用户新增的是当前目标完成后的固定名单遍历，非立即替换或随机池抽样。顺序为阿里巴巴、小米集团、药明生物、药明康德、药明合联、微软、Snowflake、MongoDB。每家完成完整审查技能和必要根因修复后，根据真实新问题改进技能的重要风险检查点；下一家用已验证更新版本。默认连续三家干净的随机池停止规则不适用于该名单，微软旧执行不能替代新目标中的新运行。当前goal工具核实仍active，未create/complete。
+
+## 2026-10-09 17:59 UTC — W06 独立发现登记公司与原文公司未绑定
+
+正常 official import 接口以 Acme/ACME（既有master CIK12345）登记，原文DEI及完整SEC URL却都为CIK99999；4c92源码 imported_new/query found/filing_reuse读出448B/SourceResolver A请求reused_equivalent。原文SHA c51b7559ff90c7b26d30cb44587a767818255b7f4446f2eabce91e87d331e605。这不是DB篡改假设；URL与raw一致只能证明该原件自洽，不能证明公司标签正确。主线不接受4c；根修仍由共享来源owner承担，不增加FF/RF身份DTO或人工许可。完整原DEI/issuer binding一致时复用证明，一SHA/no master/no parse；缺绑定时在源边界观察一次既有身份并核对同buffer。裸labels旧正例若用于别名/供应商选择须补真实身份夹具，原业务断言不变。
+
+W12普通提交7668ef6e仅一合同测试与独立PWF，最终4PASS/112.88s；12合成有限run、14loopback模型POST，外部/收费0。相同规格复用0新模型/jobs/reservation/token，仍有locator解析；完整报告约337KB，历史工程证据全包约1MB。未发现生产cache缺陷，不实施虚构缓存重写；post-W06整合及M3真实三家公司repeat仍待。
+
+
+## 2026-10-09 18:27 UTC — 查验职责与真实研究覆盖
+
+正确公司资格现由CWP一次承担：原URL/raw自洽不足以证明A公司标签。完整原DEI/issuer_record绑定能跳过master/parser，只验目标SHA；缺绑定用一次既有身份观察与同buffer解析，prepare复用该观察写真fact，readonly不暗写。五实际复用入口拒B，普通preview/export只验字节仍可看，不新增consumer身份DTO/人签。
+
+实际cache无已证生产缺陷；same-spec有限run复用无新模型与费用，locator回放仍有成本，失败账unknown保持、已发布bundle仍可用。70主线大节点绿不能替代3家公司原语言摘要语义、资料完整度和买方模型四审。W09提供精确复用/缺件清单，不能把primary event/SSE总量/搜索片段直接当获取与消费。
+
+RF既有可选有限source_failure_reason只差四词，导致真实CWP拒绝的原因消失；修复只加诊断词表而无新的阻断或身份层。189集中和11MAINcontrols绿，published5dcd19be CI30s/两文件定点安装一致；各层负责各自级别的数据和传输，不靠重复验证解决诊断损失。

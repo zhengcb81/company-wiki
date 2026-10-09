@@ -1,0 +1,28 @@
+{
+  "recorded_at": "2026-10-09T18:21:28.628301+00:00",
+  "runtime_commit": "5dcd19be77e8425f88a3d162d21c16b55070d51c",
+  "independent_reviewer": "MAIN; different from source author",
+  "source_review": "Only four existing native finite tokens in two lines; no new refusal/permission/DTO/budget behavior",
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rfr-p2_i91lh\\pytest",
+    "tests/test_source_failure_observations.py::test_native_reader_refusal_retains_finite_reason_and_prior_counts"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 3.873,
+  "output": "...........                                                              [100%]\n11 passed in 0.39s\n",
+  "owned_temp_absent": true,
+  "owner_tracked_paths_preserved": true,
+  "model_provider_calls": 0,
+  "actual_source_predicates": "W06 independent reviewer; this RF check only projection responsibility",
+  "push_installation_CI": "pending"
+}

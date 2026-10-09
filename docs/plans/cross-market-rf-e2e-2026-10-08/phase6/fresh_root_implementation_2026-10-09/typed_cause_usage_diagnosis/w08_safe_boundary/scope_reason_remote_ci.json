@@ -1,0 +1,18 @@
+{
+  "observed_at": "2026-10-09T18:24:43.214178+00:00",
+  "repo": "revenue-forecast",
+  "head_sha": "5dcd19be77e8425f88a3d162d21c16b55070d51c",
+  "runs": [
+    {
+      "id": 37972797793,
+      "name": "quality",
+      "head_sha": "5dcd19be77e8425f88a3d162d21c16b55070d51c",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/37972797793",
+      "run_started_at": "2026-10-09T18:22:16Z",
+      "updated_at": "2026-10-09T18:22:46Z"
+    }
+  ],
+  "publication_observation_only": true
+}

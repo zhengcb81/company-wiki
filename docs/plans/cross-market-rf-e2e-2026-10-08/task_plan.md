@@ -1,17 +1,16 @@
 # 三市场真实收入预测端到端审计
 
-## 最新执行节点（2026-10-09 17:45 UTC；优先于下文历史Next Step）
+## 最新执行节点（2026-10-09 18:27 UTC；优先于下文历史Next Step）
 
-**当前 Next Step：** W06在CWP共享来源事实责任层根修cached实际主体/期间与manifest不符，确保open/verify/resolver/ensure/stage五条复用入口走同一资格；集中大节点验收后并线。W12独立执行离线缓存行为测试与计量回执。然后W09资料覆盖/W13研究校准，再原三家M3、新三家M4、冻结NVDA及公司池loop。
+**当前 Next Step：** W06正确公司绑定已独立接受，W06/W12正常并线后的集中70PASS/115.20s。提交共享短scope CI路由、当前PWF及回执，正常push/精确远端CI完成发布；然后按W09已调查18项交接和W13既有研究合同，创建原三家M3完整新执行/四审。新三家M4、冻结NVDA和公司池loop仍待；后续八家目标只登记未激活。
 
-- **CI根因节点已发布并通过远端验收**：CWP源码发布2350077a正常push2450PASS/145.64s，精确CI37966014234成功/98s；文档收尾0504aa9d正常push52PASS/4.02s，最新精确CI37967393014成功/100s。FF41ba0150正常push601PASS/7明确SKIP/78subtests/62.63s，CI37961753941成功/81s；RF3c3c0379正常push151PASS/23.06s，CI37965179206成功/37s。commit仍快速静态；push与CI共用契约入口，不把每次commit变成整套测试。
-- **W05工程接受并主线发布**：0.1.0/0.1.1旧电话会与0.2.0新自然版分别保持真实语义，HTML回放、DOCX和解析版本接线完成；resolver冻结调用者输入快照，原文变化仍每次验SHA。责任集208PASS/1明确optional skip；独立16PASS及17实际controls，MSFT实际41/41分组回放通过。旧2428PASS/3FAIL push及独立FAIL如实保留；真实公司M3仍待，不把回放成功当研究成功。
-- **W08工程接受并发布/定点安装**：FF/RF有限诊断与真实usage跨层保留；RF不再抹掉原文损坏、期间错配等具名原因，不回显任意错误正文。独立21PASS及12实际RF CLI controls通过；FF10/RF8个物理安装文件仅定点同步，未选代码drift=0，配置/output/owner WIP保留。
-- **W06尚未签收/合并**：原独立验收发现cached-ready错CIK、FY2022伪缓存FY2026也能ready；local_prepare修复后又由正常ensure/FF最终读实证旁路。作者现将实读资格集中到assertion_service，五条复用入口共用同一事实责任；新的错误缓存RED已绿，最终集中测试及真实MSFT回放待。不用重复身份层或人工许可解决此问题。
-- **W11工程M2接受、commit并定点安装**：59全suite、15集中、10独立controls、4次真实installed RF native调用；原输入历史与消费副本分离、原子写/cleanup故障因果、trust JSON忠实投影均已验证。源码9b107672及PWF78c2b10已commit；agents/claude两物理根8文件132566B，未选代码drift=0；无remote不虚报推送。M3实际公司记录仍待。
-- **W12进行中，暂无生产缺陷结论**：只用独占临时catalog/AUTO及模型stub测同配置复用、变化后的受影响来源重算，记录模型/解析/OCR调用、时间及scratch/持久空间。缓存粒度为每来源generation；命中可能仍需locator原文回放，不宣称所有解析为0。工程本轮零新增供应商/付费调用，原件、生产catalog/config、Dayu/IQS及邻仓owner WIP保留。
-- W01/W02/W03/W04/W07/W10/W14此前工程接受仍有效；冻结64finding不改。项目整体未完成：W06/W12、W09/W13、原三家公司四审重跑、新三家泛化、NVDA与公司池loop仍在总目标内。
-- [本轮总回执](phase6/fresh_root_implementation_2026-10-09/main_capture_transcript_integration.json)、[昨日CI根因](phase6/ci_root_cause_2026-10-09/CLOSEOUT.md)、[冻结14卡](phase6/fresh_root_remediation_2026-10-09/IMPLEMENTATION.md)为工程证据。总回执内旧失败/旧head是历史事实；本节为最新执行状态。
+- **W06工程M2接受/已并主线，发布待**：原正常API A标签/B原文反例五入口全部拒绝；独立29controls+3相邻合同通过。source90723304/PWF e8afcd26，main merge3ee0a6b2。完整原DEI公司绑定master0/parse0/一SHA，缺绑定源责任层一次既有身份观察/同buffer解析，不增FF/RF许可。责任269PASS/3明确SKIP；真实MSFT7reads/52,643,200B/8.718s，原件/config/库/TEMP保护。旧fc1/4c FAIL及RED保留。
+- **W12工程M2接受/已并主线，发布待**：只有一新离线cache test及ownPWF，无生产缓存重写。test7668ef6e/main merge d5855924；结合scope27、CI路由39、缓存1及既有HTML/PDF/TXT复用3共70PASS/0skip/115.20s。12合成finite runs、14loopback模型POST、外部/收费0；同规格新run无模型/reservation/token，仍回放locators，真实公司repeat留M3。长矩阵不进commit/快速CI，短scope契约共用CI/push。
+- **W08后续RF诊断已发布/定点安装/远端绿**：只补四个CWP既有finite reason，source5dcd19be；189PASS/1既有Windows skip/61.35s、22实际RF wire CLI场景；MAIN11独立投影PASS。正常push151PASS/26.70s，精确CI37972797793成功/30s；一文件到两物理安装根，166未选公共文件drift0，config/output/owner日志保留。synthetic wire不是CWP公司事实校验，也不是M3。
+- **W09只读准备已交**：24既有SourceRef、19物理原件SHA（17匹配）、CN/HK/US各6动作共18项；57选定文件SHA/size不变。SSE195为21家公司总量，不同IPO不可替代，H1事件同SHA/公开日仍待；MSFT FY26发现不等于已下载。真实补齐、解析、摘要消费仍待M3，不假装coverage完成。
+- W05/W11及W01/W02/W03/W04/W07/W10/W14此前工程接受仍有效。最近CWP源码2350077a正常push2450PASS/145.64s及CI37966014234成功/98s、文档0504aa9d CI37967393014成功/100s为历史发布基线，不能冒称此次未推的新代码已远端绿；FF41ba0150 CI37961753941成功/81s保持。
+- 本轮engineering零供应商/付费调用；Git/GitHub发布与W09有限官方浏览分列。原件、生产config、冻结64矩阵、Dayu/IQS及邻仓owner WIP不改。当前goal active，W09/W13→M3→M4→NVDA/池loop未完成。
+- [本轮总回执](phase6/fresh_root_implementation_2026-10-09/main_capture_transcript_integration.json)、[集中主线验收](phase6/fresh_root_implementation_2026-10-09/source_facts_diagnosis/main_combined_acceptance.json)、[冻结14卡](phase6/fresh_root_remediation_2026-10-09/IMPLEMENTATION.md)区分历史FAIL和当前接受。
 
 ## 已登记的下一目标（当前目标完成后激活）
 
