@@ -347,13 +347,16 @@ def test_format_selection_replay_32_spans_parses_original_once(monkeypatch):
     )
     assert len(package.evidence_spans) == 32
     calls = []
-    original = replay.normalize_document
+    from company_wiki import document_normalization as dn
+    from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization
+    port = NarrativeNormalization()
+    original = dn.normalize_document
 
     def counted(*args, **kwargs):
         calls.append(1)
         return original(*args, **kwargs)
 
-    monkeypatch.setattr(replay, "normalize_document", counted)
+    monkeypatch.setattr(dn, "normalize_document", counted)
     name, version = parser_component("text/html")
     selected = SimpleNamespace(
         source_ref=SimpleNamespace(
@@ -362,14 +365,14 @@ def test_format_selection_replay_32_spans_parses_original_once(monkeypatch):
             byte_size=len(data),
             mime_type="text/html",
         ),
-        source_metadata=SimpleNamespace(source_class="filing"),
+        source_metadata=SimpleNamespace(source_class="filing",language=package.evidence_spans[0].structured_value["language"]),
         versions=SimpleNamespace(parser=version),
         evidence_spans=package.evidence_spans,
     )
-    assert replay.replay_narrative_evidence(data, selected) == 32 and len(calls) == 1
+    assert replay.replay_narrative_evidence(data, selected, normalization=port) == 32 and len(calls) == 1
     selected.versions.parser = "different-parser-generation"
     with pytest.raises(replay.NarrativeReplayError):
-        replay.replay_narrative_evidence(data, selected)
+        replay.replay_narrative_evidence(data, selected, normalization=port)
 
 
 @pytest.mark.parametrize(

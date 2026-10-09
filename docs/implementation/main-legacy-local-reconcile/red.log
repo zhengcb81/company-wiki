@@ -1,0 +1,63 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwplr-cda3ea2e\\p", "requested_basetemp_len": 48, "cwd_len": 63, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\.codex\worktrees\audit-provider-cause\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 6 items
+
+tests\integration\test_legacy_local_reconcile.py FFFFFF                  [100%]
+
+================================== FAILURES ===================================
+_____ test_retired_actual_dei_repairs_identity_same_ref_and_is_idempotent _____
+tests\integration\test_legacy_local_reconcile.py:56: in test_retired_actual_dei_repairs_identity_same_ref_and_is_idempotent
+    before=counts(lake); result=prepare(lake)
+                                ^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:47: in prepare
+    from company_wiki.source_catalog.local_reconcile import prepare_local_source
+E   ModuleNotFoundError: No module named 'company_wiki.source_catalog.local_reconcile'
+_ test_untrusted_or_true_retirement_never_restores[issuer withdrew original-source-publisher] _
+tests\integration\test_legacy_local_reconcile.py:68: in test_untrusted_or_true_retirement_never_restores
+    result=prepare(lake)
+           ^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:47: in prepare
+    from company_wiki.source_catalog.local_reconcile import prepare_local_source
+E   ModuleNotFoundError: No module named 'company_wiki.source_catalog.local_reconcile'
+_ test_untrusted_or_true_retirement_never_restores[damaged raw-quality-check] _
+tests\integration\test_legacy_local_reconcile.py:68: in test_untrusted_or_true_retirement_never_restores
+    result=prepare(lake)
+           ^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:47: in prepare
+    from company_wiki.source_catalog.local_reconcile import prepare_local_source
+E   ModuleNotFoundError: No module named 'company_wiki.source_catalog.local_reconcile'
+___ test_untrusted_or_true_retirement_never_restores[metadata gap-unknown] ____
+tests\integration\test_legacy_local_reconcile.py:68: in test_untrusted_or_true_retirement_never_restores
+    result=prepare(lake)
+           ^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:47: in prepare
+    from company_wiki.source_catalog.local_reconcile import prepare_local_source
+E   ModuleNotFoundError: No module named 'company_wiki.source_catalog.local_reconcile'
+_ test_publication_gap_never_becomes_reusable_or_download[None-2026-10-09-publication_date_unknown] _
+tests\integration\test_legacy_local_reconcile.py:76: in test_publication_gap_never_becomes_reusable_or_download
+    result=prepare(lake,as_of_date=asof)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:47: in prepare
+    from company_wiki.source_catalog.local_reconcile import prepare_local_source
+E   ModuleNotFoundError: No module named 'company_wiki.source_catalog.local_reconcile'
+_ test_publication_gap_never_becomes_reusable_or_download[2026-01-28-2026-01-27-publication_after_as_of] _
+tests\integration\test_legacy_local_reconcile.py:76: in test_publication_gap_never_becomes_reusable_or_download
+    result=prepare(lake,as_of_date=asof)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_legacy_local_reconcile.py:47: in prepare
+    from company_wiki.source_catalog.local_reconcile import prepare_local_source
+E   ModuleNotFoundError: No module named 'company_wiki.source_catalog.local_reconcile'
+=========================== short test summary info ===========================
+FAILED tests/integration/test_legacy_local_reconcile.py::test_retired_actual_dei_repairs_identity_same_ref_and_is_idempotent
+FAILED tests/integration/test_legacy_local_reconcile.py::test_untrusted_or_true_retirement_never_restores[issuer withdrew original-source-publisher]
+FAILED tests/integration/test_legacy_local_reconcile.py::test_untrusted_or_true_retirement_never_restores[damaged raw-quality-check]
+FAILED tests/integration/test_legacy_local_reconcile.py::test_untrusted_or_true_retirement_never_restores[metadata gap-unknown]
+FAILED tests/integration/test_legacy_local_reconcile.py::test_publication_gap_never_becomes_reusable_or_download[None-2026-10-09-publication_date_unknown]
+FAILED tests/integration/test_legacy_local_reconcile.py::test_publication_gap_never_becomes_reusable_or_download[2026-01-28-2026-01-27-publication_after_as_of]
+============================== 6 failed in 1.89s ==============================

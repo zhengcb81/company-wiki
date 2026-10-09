@@ -404,6 +404,24 @@ class AcquisitionCoordinator:
                 resolution=resolution,
                 reason=resolution.reason,
             )
+        # Explicit intake may reconcile existing local declarations. A proven
+        # local gap is not byte absence and must not trigger another fetch.
+        from .local_reconcile import prepare_local_source
+        from .local_inventory import LocalPrepareLimits
+        limits = LocalPrepareLimits(timeout_seconds=min(30.0, budget.remaining_seconds)) if budget is not None else None
+        local = prepare_local_source(self.catalog, request, limits=limits)
+        if budget is not None:
+            budget.ensure_open()
+        if local["status"] == "ready":
+            resolution = SourceResolver(self.catalog).resolve(request)
+            if request.mode != "latest_as_of" and candidate_scope is None:
+                return AcquisitionResult(schema_version=ACQUISITION_SCHEMA_VERSION,
+                    status=AcquisitionStatus.REUSED, resolution=resolution,
+                    reason="existing_local_source_reconciled_before_adapter")
+        elif local["blocks_download"]:
+            return AcquisitionResult(schema_version=ACQUISITION_SCHEMA_VERSION,
+                status=AcquisitionStatus.AMBIGUOUS if local["status"] == "ambiguous" else AcquisitionStatus.MISSING,
+                resolution=resolution, reason=local["reason"])
         if request.mode == "latest_as_of":
             return self._gap_plan_result(request, resolution, budget=budget,
                                          candidate_scope=candidate_scope)

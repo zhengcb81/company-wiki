@@ -1,0 +1,548 @@
+{
+  "schema_version": "actual-local-reconcile-node/1",
+  "base": "a40eb065da1bb21d231d2644449e2ecd8a2f98d6",
+  "ff_script": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\ff-diagnostics\\scripts\\fetch_filing.py",
+  "ff_script_sha256": "112bacf7f8b2fd65786390b9ccbe4c830e793fd56aac47d39fa9953e2c017271",
+  "supplier_requests": 0,
+  "model_requests": 0,
+  "download_events": 0,
+  "cases": [
+    {
+      "sha256": "3273711fbb79fa6ee5e9a3b2f0eea7d5a1dfa0d305721c61e5af251f9addf399",
+      "byte_size": 14285291,
+      "request": {
+        "schema_version": "2.0",
+        "company_query": "688012",
+        "market": "CN",
+        "document_kind": "annual_report",
+        "fiscal_year": 2024,
+        "fiscal_period": "FY",
+        "as_of_date": "2026-10-09",
+        "mode": "exact",
+        "filing_intent": "reuse_only"
+      },
+      "ff_exit": 2,
+      "ff": {
+        "schema_version": "2.0",
+        "status": "source_blocked",
+        "request_period": {
+          "mode": "exact",
+          "fiscal_year": 2024,
+          "fiscal_period": "FY",
+          "as_of_date": "2026-10-09"
+        },
+        "filing": {
+          "status": "source_blocked",
+          "reason": "local source preparation blocked: local_metadata_gap",
+          "retryable": false
+        },
+        "transcript": {
+          "status": "not_requested",
+          "retryable": false
+        },
+        "calls": 3,
+        "downloads": 0
+      },
+      "source_status": "retired",
+      "local_prepare": {
+        "schema_version": "local-source-prepare/1",
+        "status": "blocked",
+        "reason": "local_metadata_gap",
+        "source_ref": null,
+        "blocks_download": true,
+        "operations": [],
+        "diagnostics": [
+          {
+            "document_id": "urn:company-wiki:document:sha256:3273711fbb79fa6ee5e9a3b2f0eea7d5a1dfa0d305721c61e5af251f9addf399",
+            "reason": "local_metadata_incomplete",
+            "status": "blocked"
+          }
+        ],
+        "download_events": 0
+      },
+      "honest_publication_gap": true
+    },
+    {
+      "sha256": "c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+      "byte_size": 5597461,
+      "request": {
+        "schema_version": "2.0",
+        "company_query": "MSFT",
+        "market": "US",
+        "document_kind": "regulatory_filing",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q1",
+        "as_of_date": "2026-10-09",
+        "mode": "exact",
+        "filing_intent": "reuse_only"
+      },
+      "ff_exit": 0,
+      "ff": {
+        "schema_version": "2.0",
+        "status": "source_candidate",
+        "request_period": {
+          "mode": "exact",
+          "fiscal_year": 2026,
+          "fiscal_period": "Q1",
+          "as_of_date": "2026-10-09"
+        },
+        "filing": {
+          "status": "source_candidate",
+          "source_ref": {
+            "byte_size": 5597461,
+            "content_sha256": "c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+            "document_id": "urn:company-wiki:document:sha256:c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+            "mime_type": "text/html",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12"
+          },
+          "byte_verification": "pending_verified_open",
+          "document_kind": "regulatory_filing",
+          "fiscal_year": 2026,
+          "fiscal_period": "Q1",
+          "resolution_outcome": "reused_existing",
+          "download_events": 0
+        },
+        "transcript": {
+          "status": "not_requested",
+          "retryable": false
+        },
+        "calls": 4,
+        "downloads": 0
+      },
+      "source_status": "active",
+      "public_read_receipt": {
+        "byte_size": 5597461,
+        "content_sha256": "c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+        "document_id": "urn:company-wiki:document:sha256:c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+        "manifest": {
+          "byte_size": 5597461,
+          "canonical_entity_id": null,
+          "collector_name": null,
+          "collector_version": null,
+          "content_sha256": "c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+          "display_name": "MICROSOFT CORP",
+          "document_id": "urn:company-wiki:document:sha256:c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+          "document_kind": "regulatory_filing",
+          "fiscal_period": "Q1",
+          "fiscal_year": 2026,
+          "form_type": "10-Q",
+          "language": null,
+          "market": "US",
+          "mime_type": "text/html",
+          "period_end": "2025-09-30",
+          "provider": "sec",
+          "provider_document_id": "0001193125-25-256321",
+          "published_date": "2025-10-29",
+          "retrieved_at": null,
+          "security_id": "MSFT",
+          "source_id": "urn:company-wiki:source:sha256:c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312525256321/msft-20250930.htm",
+          "title": null
+        },
+        "policy_sha256": "a51491decc1ea8bbf1d007f6bcad27dc7a3864686c37734f726e75e4418e3376",
+        "read_at": "2026-10-09T05:37:31.311866+00:00",
+        "review": {
+          "evidence_sha256": null,
+          "policy_hash": null,
+          "reviewed_at": null,
+          "source_sha256": null,
+          "status": "not_reviewed"
+        },
+        "schema_version": "2.1",
+        "source_id": "urn:company-wiki:source:sha256:c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+        "source_read_policy_sha256": "74cfb201d285a66e67124df9844044357dfe5b37e799a42313c9391ebfd9e34d",
+        "status": "ok"
+      },
+      "actual_read_sha256": "c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+      "repeat_ff": {
+        "schema_version": "2.0",
+        "status": "source_candidate",
+        "request_period": {
+          "mode": "exact",
+          "fiscal_year": 2026,
+          "fiscal_period": "Q1",
+          "as_of_date": "2026-10-09"
+        },
+        "filing": {
+          "status": "source_candidate",
+          "source_ref": {
+            "byte_size": 5597461,
+            "content_sha256": "c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+            "document_id": "urn:company-wiki:document:sha256:c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+            "mime_type": "text/html",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12"
+          },
+          "byte_verification": "pending_verified_open",
+          "document_kind": "regulatory_filing",
+          "fiscal_year": 2026,
+          "fiscal_period": "Q1",
+          "resolution_outcome": "reused_existing",
+          "download_events": 0
+        },
+        "transcript": {
+          "status": "not_requested",
+          "retryable": false
+        },
+        "calls": 2,
+        "downloads": 0
+      },
+      "repeat_counts_unchanged": true,
+      "outside_as_of": {
+        "as_of_date": "2025-10-28",
+        "exit": 2,
+        "ff": {
+          "schema_version": "2.0",
+          "status": "source_blocked",
+          "request_period": {
+            "mode": "exact",
+            "fiscal_year": 2026,
+            "fiscal_period": "Q1",
+            "as_of_date": "2025-10-28"
+          },
+          "filing": {
+            "status": "source_blocked",
+            "reason": "local source preparation blocked: local_metadata_gap",
+            "retryable": false
+          },
+          "transcript": {
+            "status": "not_requested",
+            "retryable": false
+          },
+          "calls": 3,
+          "downloads": 0
+        }
+      }
+    },
+    {
+      "sha256": "a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+      "byte_size": 7483278,
+      "request": {
+        "schema_version": "2.0",
+        "company_query": "MSFT",
+        "market": "US",
+        "document_kind": "regulatory_filing",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q2",
+        "as_of_date": "2026-10-09",
+        "mode": "exact",
+        "filing_intent": "reuse_only"
+      },
+      "ff_exit": 0,
+      "ff": {
+        "schema_version": "2.0",
+        "status": "source_candidate",
+        "request_period": {
+          "mode": "exact",
+          "fiscal_year": 2026,
+          "fiscal_period": "Q2",
+          "as_of_date": "2026-10-09"
+        },
+        "filing": {
+          "status": "source_candidate",
+          "source_ref": {
+            "byte_size": 7483278,
+            "content_sha256": "a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+            "document_id": "urn:company-wiki:document:sha256:a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+            "mime_type": "text/html",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d"
+          },
+          "byte_verification": "pending_verified_open",
+          "document_kind": "regulatory_filing",
+          "fiscal_year": 2026,
+          "fiscal_period": "Q2",
+          "resolution_outcome": "reused_existing",
+          "download_events": 0
+        },
+        "transcript": {
+          "status": "not_requested",
+          "retryable": false
+        },
+        "calls": 4,
+        "downloads": 0
+      },
+      "source_status": "active",
+      "public_read_receipt": {
+        "byte_size": 7483278,
+        "content_sha256": "a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+        "document_id": "urn:company-wiki:document:sha256:a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+        "manifest": {
+          "byte_size": 7483278,
+          "canonical_entity_id": null,
+          "collector_name": null,
+          "collector_version": null,
+          "content_sha256": "a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+          "display_name": "MICROSOFT CORP",
+          "document_id": "urn:company-wiki:document:sha256:a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+          "document_kind": "regulatory_filing",
+          "fiscal_period": "Q2",
+          "fiscal_year": 2026,
+          "form_type": "10-Q",
+          "language": null,
+          "market": "US",
+          "mime_type": "text/html",
+          "period_end": "2025-12-31",
+          "provider": "sec",
+          "provider_document_id": "0001193125-26-027207",
+          "published_date": "2026-01-28",
+          "retrieved_at": null,
+          "security_id": "MSFT",
+          "source_id": "urn:company-wiki:source:sha256:a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526027207/msft-20251231.htm",
+          "title": null
+        },
+        "policy_sha256": "a51491decc1ea8bbf1d007f6bcad27dc7a3864686c37734f726e75e4418e3376",
+        "read_at": "2026-10-09T05:37:48.912653+00:00",
+        "review": {
+          "evidence_sha256": null,
+          "policy_hash": null,
+          "reviewed_at": null,
+          "source_sha256": null,
+          "status": "not_reviewed"
+        },
+        "schema_version": "2.1",
+        "source_id": "urn:company-wiki:source:sha256:a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+        "source_read_policy_sha256": "74cfb201d285a66e67124df9844044357dfe5b37e799a42313c9391ebfd9e34d",
+        "status": "ok"
+      },
+      "actual_read_sha256": "a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+      "repeat_ff": {
+        "schema_version": "2.0",
+        "status": "source_candidate",
+        "request_period": {
+          "mode": "exact",
+          "fiscal_year": 2026,
+          "fiscal_period": "Q2",
+          "as_of_date": "2026-10-09"
+        },
+        "filing": {
+          "status": "source_candidate",
+          "source_ref": {
+            "byte_size": 7483278,
+            "content_sha256": "a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+            "document_id": "urn:company-wiki:document:sha256:a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+            "mime_type": "text/html",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d"
+          },
+          "byte_verification": "pending_verified_open",
+          "document_kind": "regulatory_filing",
+          "fiscal_year": 2026,
+          "fiscal_period": "Q2",
+          "resolution_outcome": "reused_existing",
+          "download_events": 0
+        },
+        "transcript": {
+          "status": "not_requested",
+          "retryable": false
+        },
+        "calls": 2,
+        "downloads": 0
+      },
+      "repeat_counts_unchanged": true,
+      "outside_as_of": {
+        "as_of_date": "2026-01-27",
+        "exit": 2,
+        "ff": {
+          "schema_version": "2.0",
+          "status": "source_blocked",
+          "request_period": {
+            "mode": "exact",
+            "fiscal_year": 2026,
+            "fiscal_period": "Q2",
+            "as_of_date": "2026-01-27"
+          },
+          "filing": {
+            "status": "source_blocked",
+            "reason": "local source preparation blocked: local_metadata_gap",
+            "retryable": false
+          },
+          "transcript": {
+            "status": "not_requested",
+            "retryable": false
+          },
+          "calls": 3,
+          "downloads": 0
+        }
+      }
+    },
+    {
+      "sha256": "76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+      "byte_size": 7731948,
+      "request": {
+        "schema_version": "2.0",
+        "company_query": "MSFT",
+        "market": "US",
+        "document_kind": "regulatory_filing",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q3",
+        "as_of_date": "2026-10-09",
+        "mode": "exact",
+        "filing_intent": "reuse_only"
+      },
+      "ff_exit": 0,
+      "ff": {
+        "schema_version": "2.0",
+        "status": "source_candidate",
+        "request_period": {
+          "mode": "exact",
+          "fiscal_year": 2026,
+          "fiscal_period": "Q3",
+          "as_of_date": "2026-10-09"
+        },
+        "filing": {
+          "status": "source_candidate",
+          "source_ref": {
+            "byte_size": 7731948,
+            "content_sha256": "76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+            "document_id": "urn:company-wiki:document:sha256:76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+            "mime_type": "text/html",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d"
+          },
+          "byte_verification": "pending_verified_open",
+          "document_kind": "regulatory_filing",
+          "fiscal_year": 2026,
+          "fiscal_period": "Q3",
+          "resolution_outcome": "reused_existing",
+          "download_events": 0
+        },
+        "transcript": {
+          "status": "not_requested",
+          "retryable": false
+        },
+        "calls": 4,
+        "downloads": 0
+      },
+      "source_status": "active",
+      "public_read_receipt": {
+        "byte_size": 7731948,
+        "content_sha256": "76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+        "document_id": "urn:company-wiki:document:sha256:76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+        "manifest": {
+          "byte_size": 7731948,
+          "canonical_entity_id": null,
+          "collector_name": null,
+          "collector_version": null,
+          "content_sha256": "76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+          "display_name": "MICROSOFT CORP",
+          "document_id": "urn:company-wiki:document:sha256:76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+          "document_kind": "regulatory_filing",
+          "fiscal_period": "Q3",
+          "fiscal_year": 2026,
+          "form_type": "10-Q",
+          "language": null,
+          "market": "US",
+          "mime_type": "text/html",
+          "period_end": "2026-03-31",
+          "provider": "sec",
+          "provider_document_id": "0001193125-26-191507",
+          "published_date": "2026-04-29",
+          "retrieved_at": null,
+          "security_id": "MSFT",
+          "source_id": "urn:company-wiki:source:sha256:76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526191507/msft-20260331.htm",
+          "title": null
+        },
+        "policy_sha256": "a51491decc1ea8bbf1d007f6bcad27dc7a3864686c37734f726e75e4418e3376",
+        "read_at": "2026-10-09T05:38:07.023517+00:00",
+        "review": {
+          "evidence_sha256": null,
+          "policy_hash": null,
+          "reviewed_at": null,
+          "source_sha256": null,
+          "status": "not_reviewed"
+        },
+        "schema_version": "2.1",
+        "source_id": "urn:company-wiki:source:sha256:76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+        "source_read_policy_sha256": "74cfb201d285a66e67124df9844044357dfe5b37e799a42313c9391ebfd9e34d",
+        "status": "ok"
+      },
+      "actual_read_sha256": "76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+      "repeat_ff": {
+        "schema_version": "2.0",
+        "status": "source_candidate",
+        "request_period": {
+          "mode": "exact",
+          "fiscal_year": 2026,
+          "fiscal_period": "Q3",
+          "as_of_date": "2026-10-09"
+        },
+        "filing": {
+          "status": "source_candidate",
+          "source_ref": {
+            "byte_size": 7731948,
+            "content_sha256": "76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+            "document_id": "urn:company-wiki:document:sha256:76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+            "mime_type": "text/html",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d"
+          },
+          "byte_verification": "pending_verified_open",
+          "document_kind": "regulatory_filing",
+          "fiscal_year": 2026,
+          "fiscal_period": "Q3",
+          "resolution_outcome": "reused_existing",
+          "download_events": 0
+        },
+        "transcript": {
+          "status": "not_requested",
+          "retryable": false
+        },
+        "calls": 2,
+        "downloads": 0
+      },
+      "repeat_counts_unchanged": true,
+      "outside_as_of": {
+        "as_of_date": "2026-04-28",
+        "exit": 2,
+        "ff": {
+          "schema_version": "2.0",
+          "status": "source_blocked",
+          "request_period": {
+            "mode": "exact",
+            "fiscal_year": 2026,
+            "fiscal_period": "Q3",
+            "as_of_date": "2026-04-28"
+          },
+          "filing": {
+            "status": "source_blocked",
+            "reason": "local source preparation blocked: local_metadata_gap",
+            "retryable": false
+          },
+          "transcript": {
+            "status": "not_requested",
+            "retryable": false
+          },
+          "calls": 3,
+          "downloads": 0
+        }
+      }
+    }
+  ],
+  "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwplocal-olaj8w70",
+  "mode": "real originals read only; isolated historical catalog",
+  "network_attempts": 0,
+  "checks_complete": true,
+  "protected_sources_after": {
+    "C:\\Users\\郑曾波\\Dropbox\\Stock\\工业与信息化\\电子\\中微公司\\中微公司：2024年年度报告.pdf": "3273711fbb79fa6ee5e9a3b2f0eea7d5a1dfa0d305721c61e5af251f9addf399",
+    "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-25-256321\\msft-20250930.htm": "c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+    "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-26-027207\\msft-20251231.htm": "a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+    "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-26-191507\\msft-20260331.htm": "76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+    "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-25-256321\\meta.json": "4c4aabfc64c2d9d881c282217264f11a3a91a5686474de7ac10238b93f16039a",
+    "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-25-256321\\msft-20250930.htm.source.json": "1eb5b03c0ed45d7c4226b5e5d9e412b583839830e90b291b650c142af45bb97e",
+    "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-26-027207\\meta.json": "a1aa582529a171c0729c3ab4080798905d5f990b93913a8c86d519f5fb064089",
+    "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-26-027207\\msft-20251231.htm.source.json": "853d887c23fdadf08aa4d7cfe523befbbf0a689a9dd3a38e098cd3b3b80819ea",
+    "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-26-191507\\meta.json": "0760e6540f78db7281d0e689f188c726133b10d2a0e03ad58e8523bf32b7c4fb",
+    "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-26-191507\\msft-20260331.htm.source.json": "046c46956c9afbe2018b384d5959672192d58228817846976ec3d3f6e1121d12",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\local_ocr.json": "9b8a7df81ca62ebc4bb9c2d60d45c247b291564a4a38f5648e5f4b3edb59889b"
+  },
+  "protected_sources_unchanged": true,
+  "temp_absent": true,
+  "temp_environment_restored": true,
+  "elapsed_seconds": 56.248
+}

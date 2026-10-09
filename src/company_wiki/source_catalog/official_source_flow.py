@@ -229,6 +229,32 @@ def import_official_source(
     except (ValueError, TypeError):
         raise OfficialSourceError("invalid_capture_time") from None
     _validate_bytes(original, mime)
+    # Same byte identity does not imply the first declaration was correct.
+    # Local dedup and new import share the existing append-only fact correction.
+    facts = {key: source[key] for key in SOURCE_FACT_FIELDS if key in source}
+    facts["provider"] = "official"
+    evidence = {key:{"locator":"official-import-declaration:/"+key,
+                     "value":value,"content_sha256":sha}
+                for key,value in facts.items()}
+    from company_wiki.source_contract import source_id_for_sha256
+    from .source_reader import SourceRef, SourceReadError
+    from .assertion_service import restore_document_facts
+    from .local_inventory import observe_document
+    source_id = source_id_for_sha256(sha)
+    document_id = source_id.replace("urn:company-wiki:source:","urn:company-wiki:document:")
+    existing = catalog.reader.exact_source_version(document_id) if catalog.config.database_path.exists() else None
+    if existing is not None:
+        ref = SourceRef(document_id,source_id,sha,len(original),mime)
+        if existing["source_status"] == "active":
+            manifest = SourceVersionReader(catalog).describe_version(ref)
+            if manifest.get("display_name") not in {None,source["entity"]}:
+                raise OfficialSourceError("source_identity_conflict")
+        else:
+            try:
+                restore_document_facts(catalog,ref=ref,facts=facts,evidence=evidence,
+                                       retirement_observation=observe_document(catalog,document_id))
+            except SourceReadError as exc:
+                raise OfficialSourceError(exc.reason) from exc
     writer = CanonicalSourceWriter(catalog)
     writer.staging_root.mkdir(parents=True, exist_ok=True)
     if writer.staging_root.is_symlink():
@@ -268,23 +294,7 @@ def import_official_source(
             retrieved_at=dt.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
             capture_receipt=capture,
         )
-        if result.status.value == "imported_new":
-            facts = {key: source[key] for key in SOURCE_FACT_FIELDS if key in source}
-            facts["provider"] = "official"
-            # These are stored capture declarations, not inferred business facts.
-            # Keep independent publication and filing dates in the existing
-            # source-facts projection; legacy scanner aliases prefer filing_date.
-            evidence = {
-                key: {
-                    "locator": "canonical-provenance:/"
-                    + ("company_name" if key == "entity" else key),
-                    "value": value,
-                }
-                for key, value in facts.items()
-            }
-            catalog.record_source_facts(
-                ref=result.source_ref, facts=facts, evidence=evidence
-            )
+        catalog.record_source_facts(ref=result.source_ref,facts=facts,evidence=evidence)
         manifest = SourceVersionReader(catalog).describe_version(result.source_ref)
         if manifest.get("display_name") not in {None, source["entity"]}:
             raise OfficialSourceError("source_identity_conflict")

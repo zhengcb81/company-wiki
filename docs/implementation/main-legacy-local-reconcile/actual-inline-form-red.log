@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "C:\Users\֣����\.codex\worktrees\audit-provider-cause\company-wiki\docs\implementation\main-legacy-local-reconcile\actual_originals_node.py", line 386, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\֣����\.codex\worktrees\audit-provider-cause\company-wiki\docs\implementation\main-legacy-local-reconcile\actual_originals_node.py", line 234, in main
+    assert exit_code == 0, (exit_code, payload)
+           ^^^^^^^^^^^^^^
+AssertionError: (2, {'schema_version': '2.0', 'status': 'source_blocked', 'request_period': {'mode': 'exact', 'fiscal_year': 2026, 'fiscal_period': 'Q2', 'as_of_date': '2026-10-09'}, 'filing': {'status': 'source_blocked', 'reason': 'local source preparation blocked: local_metadata_gap', 'retryable': False}, 'transcript': {'status': 'not_requested', 'retryable': False}, 'calls': 3, 'downloads': 0})
