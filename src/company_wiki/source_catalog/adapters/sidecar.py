@@ -42,7 +42,7 @@ class SidecarFilingAdapter:
 
     def enumerate(
         self, root_path: Path, *, limit: int | None = None,
-        relative_paths: set[str] | None = None, compute_hash: bool = True
+        relative_paths: set[str] | None = None, compute_hash: bool = True, metadata_reader=None
     ) -> list[NormalizedCandidate]:
         candidates: list[NormalizedCandidate] = []
         paths = (SourceRegistrationScope(self.adapter_id, frozenset(relative_paths)).paired_paths(root_path, self._suffix)
@@ -65,7 +65,7 @@ class SidecarFilingAdapter:
                     )
                 )
                 continue
-            sidecar_payload = _parse_sidecar(sidecar)
+            sidecar_payload = (metadata_reader(sidecar) if metadata_reader else _parse_sidecar(sidecar))
             problems = _validate_sidecar(sidecar_payload, path, verify_hash=compute_hash)
             role = "original_primary" if not problems else "indexed_only"
             candidates.append(

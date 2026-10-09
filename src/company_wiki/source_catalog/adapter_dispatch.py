@@ -82,6 +82,7 @@ def scan_root_via_adapter(
     *,
     progress: Any = None,
     relative_paths: set[str] | None = None,
+    metadata_reader=None, file_walker=None,
 ) -> list[Any]:
     """Run the root's registered adapter and return scanner candidates.
 
@@ -93,7 +94,12 @@ def scan_root_via_adapter(
     adapter = adapter_for(root)
     # Discovery is layout/metadata work. The scanner owns manifest byte
     # verification; adapter digests were discarded here and caused double I/O.
-    candidates = adapter.enumerate(root.path, relative_paths=relative_paths, compute_hash=False)
+    options = {}
+    if metadata_reader is not None:
+        options["metadata_reader"] = metadata_reader
+    if file_walker is not None and isinstance(adapter, DayuAdapter):
+        options["file_walker"] = file_walker
+    candidates = adapter.enumerate(root.path, relative_paths=relative_paths, compute_hash=False, **options)
     converted = []
     for item in candidates:
         if not isinstance(item, NormalizedCandidate):

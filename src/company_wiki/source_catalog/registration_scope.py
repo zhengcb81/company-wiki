@@ -28,7 +28,7 @@ def existing_group_locations(store: CatalogStore, root_id: str,
 
 
 def register_catalog_sources(config: CatalogConfig, store: CatalogStore,
-                             scope: SourceRegistrationScope, *, progress=None) -> ScanReport:
+                             scope: SourceRegistrationScope, *, progress=None, budget=None) -> ScanReport:
     """Register explicit source groups; caller owns the existing catalog lock.
 
     Uses the one scanner normalization/transaction implementation. Root adapter
@@ -42,4 +42,4 @@ def register_catalog_sources(config: CatalogConfig, store: CatalogStore,
         raise ValueError("registration root is not configured")
     return scan_catalog(config, store, root_ids={scope.root_id},
                         relative_paths=set(scope.relative_paths),
-                        v2_scan_shadow=bool(selected.adapter_id), progress=progress)
+                        v2_scan_shadow=bool(selected.adapter_id), progress=progress, budget=budget)

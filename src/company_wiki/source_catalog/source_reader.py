@@ -633,12 +633,13 @@ class SourceVersionReader:
     def verify_version(
         self, ref: SourceRef, *, purpose: str = "source_export",
         expected_read_policy_sha256: str | None = None,
+        budget: _ReadBudget | None = None,
     ) -> VerifiedVersionReceipt:
         """Stream-verify the version with open_version's exact read rules."""
         result = self._verified_version(
             ref, purpose=purpose,
             expected_read_policy_sha256=expected_read_policy_sha256,
-            retain_bytes=False,
+            retain_bytes=False, budget=budget,
         )
         assert isinstance(result, VerifiedVersionReceipt)
         return result
@@ -647,6 +648,7 @@ class SourceVersionReader:
         self, ref: SourceRef, *, purpose: str,
         expected_read_policy_sha256: str | None,
         retain_bytes: bool, current_read_policy_sha256: str | None = None,
+        budget: _ReadBudget | None = None,
     ) -> VerifiedContent | VerifiedVersionReceipt:
         """Verify through the current policy and same-SHA location fallback.
 
@@ -720,8 +722,12 @@ class SourceVersionReader:
             raise SourceReadError("blocked", "root_admission_denied")
         candidates = admitted
 
-        budget = _ReadBudget()
-        budget.begin_request()
+        supplied_budget = budget is not None
+        if budget is None:
+            budget = _ReadBudget()
+            budget.begin_request()
+        elif not isinstance(budget, _ReadBudget):
+            raise TypeError("budget must be a read budget")
         failures: list[str] = []
         policy_sha256, _ = export_policy_2x(config)
         for location in sorted(candidates, key=lambda item: item["candidate_rank"]):
@@ -766,6 +772,8 @@ class SourceVersionReader:
                 )
             failures.append(reason or status or detail or "read_failed")
             if reason in {"cancelled", "budget_exceeded"}:
+                if supplied_budget:
+                    raise SourceReadError("unavailable", reason)
                 break
         raise SourceReadError(
             "unavailable", "no_verified_location", ",".join(sorted(set(failures)))

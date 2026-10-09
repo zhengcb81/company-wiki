@@ -282,7 +282,9 @@ def _scan_root_v1(
     master_identity: dict[str, tuple[str, str]] | None = None,
     portfolio_urls: dict[str, str] | None = None,
     relative_paths: set[str] | None = None,
+    metadata_reader=None, file_walker=None,
 ) -> tuple[list[_Candidate], int, int]:
+    read_metadata = metadata_reader or _load_acquisition_metadata
     candidates: list[_Candidate] = []
     excluded = 0
     policy_excluded = 0
@@ -294,22 +296,19 @@ def _scan_root_v1(
         )
         for company_index, company in enumerate(companies, start=1):
             if relative_paths is not None and not any(
-                value.startswith(company.name + "/raw/") for value in relative_paths
+                value.startswith(company.name + "/") for value in relative_paths
             ):
-                continue
-            raw = company / "raw"
-            if not raw.is_dir():
                 continue
             if progress is not None:
                 progress(
-                    current_path=str(raw.resolve(strict=False)),
+                    current_path=str(company.resolve(strict=False)),
                     current=company_index,
                     total=len(companies),
                     detail=f"enumerating root {root.root_id}",
                 )
             paths = (SourceRegistrationScope(root.root_id, frozenset(relative_paths)).company_paths(
                 root.path, company.name, _ACQUISITION_SIDECAR_SUFFIX)
-                     if relative_paths is not None else sorted(_walk_files(raw)))
+                     if relative_paths is not None else SourceRegistrationScope.all_company_paths(root.path, company.name))
             sidecars = {
                 str(path)[: -len(_ACQUISITION_SIDECAR_SUFFIX)]: path
                 for path in paths
@@ -321,7 +320,7 @@ def _scan_root_v1(
             for path in primary_paths:
                 relative = _relative(path, root.path)
                 sidecar = sidecars.get(str(path))
-                metadata = _load_acquisition_metadata(sidecar) if sidecar else {}
+                metadata = read_metadata(sidecar) if sidecar else {}
                 # Phase 16.1: a sidecar without any source URL is enriched
                 # from the matching dayu portfolio meta.json (by company name).
                 if not metadata.get("source_url") and not metadata.get("https_url"):
@@ -383,7 +382,7 @@ def _scan_root_v1(
                         relative[: -len(_ACQUISITION_SIDECAR_SUFFIX)],
                         "metadata",
                         company.name,
-                        _load_acquisition_metadata(sidecar),
+                        read_metadata(sidecar),
                         "incomplete",
                     )
                 )
@@ -435,7 +434,7 @@ def _scan_root_v1(
                             path.name + _ACQUISITION_SIDECAR_SUFFIX
                         )
                         if sidecar.is_file():
-                            metadata = _load_acquisition_metadata(sidecar)
+                            metadata = read_metadata(sidecar)
                     candidates.append(
                         _Candidate(
                             root,
@@ -463,9 +462,9 @@ def _scan_root_v1(
             for path in primary_paths:
                 relative = _relative(path, root.path)
                 sidecar = sidecars.get(str(path))
-                metadata = _load_acquisition_metadata(sidecar) if sidecar else {}
+                metadata = read_metadata(sidecar) if sidecar else {}
                 if root.kind == "dayu_portfolio":
-                    metadata = _enrich_dayu_portfolio_metadata(path, metadata)
+                    metadata = _enrich_dayu_portfolio_metadata(path, metadata, metadata_reader=metadata_reader)
                 admission = evaluate_admission(
                     root_id=root.root_id,
                     relative_path=relative,
@@ -514,14 +513,14 @@ def _scan_root_v1(
                 orphan_decision = evaluate_admission(
                     root_id=root.root_id,
                     relative_path=_relative(sidecar, root.path),
-                    metadata=_load_acquisition_metadata(sidecar),
+                    metadata=read_metadata(sidecar),
                 )
                 if orphan_decision is not None:
                     policy_excluded += 1
     else:
         raw_groups: dict[str, list[Path]] = defaultdict(list)
         paths_to_visit = (SourceRegistrationScope(root.root_id, frozenset(relative_paths)).filing_paths(
-            root.path, _walk_files) if relative_paths is not None else _walk_files(root.path))
+            root.path, file_walker or _walk_files) if relative_paths is not None else _walk_files(root.path))
         for file_index, path in enumerate(paths_to_visit, start=1):
             if progress is not None and file_index % 100 == 1:
                 progress(
@@ -548,7 +547,7 @@ def _scan_root_v1(
             metadata: dict[str, Any] = {}
             if meta_path.is_file():
                 try:
-                    loaded = json.loads(meta_path.read_text(encoding="utf-8"))
+                    loaded = metadata_reader(meta_path) if metadata_reader else json.loads(meta_path.read_text(encoding="utf-8"))
                     if isinstance(loaded, dict):
                         metadata = loaded
                 except (OSError, UnicodeError, json.JSONDecodeError):
@@ -590,9 +589,9 @@ def _scan_root_v1(
                 entity_meta_path = root.path / ticker / "meta.json"
                 if entity_meta_path.is_file():
                     try:
-                        entity_payload = json.loads(
+                        entity_payload = (metadata_reader(entity_meta_path) if metadata_reader else json.loads(
                             entity_meta_path.read_text(encoding="utf-8")
-                        )
+                        ))
                     except (OSError, UnicodeError, json.JSONDecodeError, ValueError):
                         entity_payload = {}
                     if isinstance(entity_payload, dict):
@@ -673,10 +672,12 @@ def _observe_file(
     document_kind: str,
     source_type: SourceType,
     entity_id: str,
+    budget=None,
 ) -> _ObservedFile:
     stat = candidate.path.stat()
     if (
-        existing is not None
+        budget is None
+        and existing is not None
         and existing["source_id"]
         and existing["manifest_json"]
         and existing["observed_size"] == stat.st_size
@@ -727,9 +728,7 @@ def _observe_file(
             retrieved_at = str(
                 candidate.group_metadata.get("retrieved_at") or retrieved_at
             )
-        manifest = SourceManifest.from_file(
-            root=candidate.root.path,
-            file_path=candidate.path,
+        manifest_values = dict(
             entity_ids=(entity_id,),
             source_type=source_type if candidate.role == "original_primary" else SourceType.OTHER,
             published_date=(
@@ -742,6 +741,22 @@ def _observe_file(
             collector_version=collector_version,
             mime_type=mime_type,
         )
+        if budget is None:
+            manifest = SourceManifest.from_file(root=candidate.root.path,
+                                               file_path=candidate.path, **manifest_values)
+        else:
+            # Budget-mode registration must hash actual bytes, not trust stat/cache.
+            from company_wiki.source_contract.source_manifest import (
+                SOURCE_MANIFEST_SCHEMA_VERSION, ImmutableStatus, source_id_for_sha256,
+            )
+            digest, actual_size = budget.hash_file(candidate.path, root=candidate.root.path,
+                                                   original=candidate.role == "original_primary")
+            manifest = SourceManifest(schema_version=SOURCE_MANIFEST_SCHEMA_VERSION,
+                                      source_id=source_id_for_sha256(digest),
+                                      original_path=candidate.relative_path,
+                                      content_sha256=digest, byte_size=actual_size,
+                                      immutable_status=ImmutableStatus.VERIFIED,
+                                      **manifest_values)
         expected_sha256 = candidate.group_metadata.get("content_sha256")
         if (
             candidate.role == "original_primary"
@@ -750,6 +765,10 @@ def _observe_file(
         ):
             raise ValueError("acquisition sidecar SHA-256 does not match source bytes")
     except Exception as exc:
+        if budget is not None:
+            from .source_reader import SourceReadError
+            if isinstance(exc, SourceReadError):
+                raise
         error = f"{type(exc).__name__}: {exc}"
         known_error = bool(
             existing is not None
@@ -834,6 +853,7 @@ def _scan_catalog_impl(
     scan_time: str | None = None,
     selected_roots: tuple[RootSpec, ...] | None = None,
     scan_run_started: bool = False,
+    budget=None,
 ) -> ScanReport:
     run_id = run_id or "scan-" + uuid.uuid4().hex
     scan_time = scan_time or _utc_now()
@@ -854,6 +874,8 @@ def _scan_catalog_impl(
     portfolio_urls = {} if relative_paths is not None else _load_dayu_portfolio_urls(config)
     strategies: list[tuple[str, str]] = []
     for root in selected_roots:
+        if budget is not None:
+            budget.check()
         if not root.path.is_dir():
             errors += 1
             new_errors += 1
@@ -884,6 +906,7 @@ def _scan_catalog_impl(
                 master_identity=master_identity,
                 portfolio_urls=portfolio_urls,
                 v2_scan_shadow=use_adapter,
+                **({"metadata_reader": budget.metadata_reader(root.path), "file_walker": budget.walk_files} if budget is not None else {}),
                 **({"relative_paths": relative_paths} if relative_paths is not None else {}),
             )
         except ScannerFacadeError as exc:
@@ -945,6 +968,8 @@ def _scan_catalog_impl(
             ),
         )
         for group_index, (group_key, group) in enumerate(group_items, start=1):
+            if budget is not None:
+                budget.check()
             primary_candidate = next((item for item in group if item.role == "original_primary"), None)
             classification_path = primary_candidate.path if primary_candidate else group[0].path
             if progress is not None:
@@ -983,6 +1008,7 @@ def _scan_catalog_impl(
                         document_kind=document_kind,
                         source_type=source_type,
                         entity_id=entity_id,
+                        budget=budget,
                     )
                 except OSError as exc:
                     errors += 1
@@ -2045,6 +2071,7 @@ def scan_catalog(
     progress: Callable[..., None] | None = None,
     v2_scan_shadow: bool = False,
     zero_diff_rounds: int | None = None,
+    budget=None,
 ) -> ScanReport:
     if relative_paths is not None:
         if not root_ids or len(root_ids) != 1:
@@ -2069,6 +2096,7 @@ def scan_catalog(
             relative_paths=relative_paths,
             progress=progress,
             v2_scan_shadow=v2_scan_shadow,
+            budget=budget,
         )
     if store is None:
         raise TypeError("store is required for a non-dry-run scan")
@@ -2090,6 +2118,7 @@ def scan_catalog(
                 scan_time=scan_time,
                 selected_roots=selected_roots,
                 scan_run_started=True,
+                budget=budget,
             )
     except Exception:
         _interrupt_scan_run(store, run_id)
@@ -2112,6 +2141,7 @@ def scan_root_strategy(
     portfolio_urls: dict[str, str] | None = None,
     v2_scan_shadow: bool = False,
     relative_paths: set[str] | None = None,
+    metadata_reader=None, file_walker=None,
 ) -> tuple[list[_Candidate], int, int]:
     """WU-500 + FC-302: scanner facade seam.  Default = v1 with identical
     behavior; v2 shadow dispatches through the registered adapter
@@ -2120,12 +2150,20 @@ def scan_root_strategy(
     if v2_scan_shadow:
         from .adapter_dispatch import AdapterDispatchError, scan_root_via_adapter
 
+        options = {}
+        if metadata_reader is not None:
+            options["metadata_reader"] = metadata_reader
+        if file_walker is not None:
+            options["file_walker"] = file_walker
         try:
-            candidates = scan_root_via_adapter(root, company_names, progress=progress,
+            candidates = scan_root_via_adapter(root, company_names, progress=progress, **options,
                 **({"relative_paths": relative_paths} if relative_paths is not None else {}))
         except AdapterDispatchError as exc:
             raise ScannerFacadeError(f"v2 scanner unavailable (fail closed): {exc}")
         except Exception as exc:  # adapter runtime failure -> fail closed, no v1 fallback
+            from .source_reader import SourceReadError
+            if isinstance(exc, SourceReadError):
+                raise
             raise ScannerFacadeError(
                 f"v2 scanner failed (fail closed, no legacy fallback): "
                 f"{type(exc).__name__}: {exc}"
@@ -2137,5 +2175,7 @@ def scan_root_strategy(
         progress=progress,
         master_identity=master_identity,
         portfolio_urls=portfolio_urls,
+        **({"metadata_reader": metadata_reader} if metadata_reader is not None else {}),
+        **({"file_walker": file_walker} if file_walker is not None else {}),
         **({"relative_paths": relative_paths} if relative_paths is not None else {}),
     )

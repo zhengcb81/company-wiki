@@ -3,8 +3,6 @@
 from __future__ import annotations
 from dataclasses import asdict
 from datetime import date
-import hashlib
-import json
 from pathlib import Path
 import re
 import os
@@ -15,7 +13,7 @@ from .assertion_service import (
     get_verified_assertion,
     restore_document_facts,
 )
-from .dayu_fiscal_metadata import extract_sec_primary, FiscalMetadataError
+from .dayu_fiscal_metadata import extract_sec_scope, complete_sec_primary, FiscalMetadataError
 from .local_inventory import (
     LocalPrepareLimits,
     LocalReadBudget,
@@ -82,37 +80,26 @@ def _identity(catalog, request, cache_dir):
 
 
 def _read_metadata(path, root, budget):
-    """Small local provider cache only; stat refuses hydration before any open."""
-    budget.check()
-    resolved = Path(os.path.realpath(path))
-    if not _inside_configured_roots(resolved, (root,)):
-        raise SourceReadError("blocked", "metadata_path_outside_root")
-    try:
-        before = resolved.stat()
-    except FileNotFoundError:
-        return None
-    if _needs_hydration(before):
-        raise SourceReadError("unavailable", "placeholder_not_hydrated")
-    if not resolved.is_file() or before.st_size > 131072:
-        raise SourceReadError("unavailable", "local_metadata_byte_limit")
-    with resolved.open("rb") as stream:
-        data = stream.read(131073)
-    stop = budget.charge(len(data))
-    if stop:
-        raise SourceReadError("unavailable", stop)
-    after = resolved.stat()
-    if len(data) > 131072 or (before.st_size, before.st_mtime_ns) != (
-        after.st_size,
-        after.st_mtime_ns,
-    ):
-        raise SourceReadError("unavailable", "local_metadata_changed")
-    try:
-        value = json.loads(data)
-    except (ValueError, UnicodeError, RecursionError):
-        raise SourceReadError("blocked", "local_metadata_unreadable") from None
-    if not isinstance(value, dict):
-        raise SourceReadError("blocked", "local_metadata_unreadable")
-    return value, hashlib.sha256(data).hexdigest()
+    """One storage read budget handles provider cache and registration metadata."""
+    return budget.read_metadata_observation(path, root=root.path)
+
+
+def _register_local_sources(catalog, *, root_id, relative_paths, budget):
+    """A quarantined requested original is a gap, not an empty local lake.
+
+    Group attachment diagnostics do not veto a healthy primary. The scanner
+    continues to own hashing/registration; this observes its requested results.
+    """
+    catalog.register_sources(root_id=root_id, relative_paths=relative_paths, budget=budget)
+    for relative in relative_paths:
+        primary = relative.removesuffix(".source.json")
+        row = catalog.reader.fetchone(
+            "SELECT role,source_id,location_status FROM locations WHERE root_id=? AND relative_path=?",
+            (root_id, primary),
+        )
+        if row is None or (row["role"] == "original_primary" and (
+                not row["source_id"] or row["location_status"] not in {"active", "retired"})):
+            raise SourceReadError("unavailable", "local_original_registration_failed")
 
 
 def _sec_cache(original, primary, budget):
@@ -207,7 +194,7 @@ def _proven_facts(catalog, original, identity, request, budget):
         and ref.mime_type in {"text/html", "application/xhtml+xml"}
         and request.document_kind in {"regulatory_filing", "annual_report"}
     ):
-        primary = extract_sec_primary(original.data)
+        primary = extract_sec_scope(original.data)
         cik = identity.identifiers.get("cik")
         if not cik or not cik.isdigit() or str(int(cik)) != primary["cik"]:
             raise SourceReadError("blocked", "primary_issuer_conflict")
@@ -226,6 +213,7 @@ def _proven_facts(catalog, original, identity, request, budget):
             )
         ):
             return None, None
+        primary = complete_sec_primary(primary)
         cache = _sec_cache(original, primary, budget)
         # A prior verified assertion is already hash-bound, but legacy row/filename/mtime is not proof.
         published = (
@@ -242,6 +230,8 @@ def _proven_facts(catalog, original, identity, request, budget):
             "fiscal_year": primary["fiscal_year"],
             "fiscal_period": primary["fiscal_period"],
             "period_end": primary["report_date"],
+            "form_type": primary["form_type"],
+            "title": primary["title"],
             "published_date": published,
             "filing_date": published,
             "source_url": source_url,
@@ -258,6 +248,7 @@ def _proven_facts(catalog, original, identity, request, budget):
                         "period_end": "DocumentPeriodEndDate",
                         "fiscal_year": "DocumentFiscalYearFocus",
                         "fiscal_period": "DocumentFiscalPeriodFocus",
+                        "form_type": "DocumentType",
                     }.get(key, "EntityCentralIndexKey")
                 ),
                 "value": value,
@@ -266,6 +257,7 @@ def _proven_facts(catalog, original, identity, request, budget):
             }
             for key, value in facts.items()
         }
+        evidence["title"]["locator"] = "html:/html/head/title"
         for key in {
             "published_date",
             "filing_date",
@@ -321,16 +313,15 @@ def _proven_facts(catalog, original, identity, request, budget):
 
 
 def _discover_source_groups(catalog, identity, budget):
-    """Only finite issuer groups in configured storage layouts, never a root rescan."""
+    """Finite issuer-layout metadata enumeration, separate from raw verification."""
     from .source_reader import _relative_segments
     from .policy import _effective_reusable
+    from .models import DOCUMENT_EXTENSIONS
 
     targets = []
-    groups_seen = 0
     names = {identity.canonical_name, identity.ticker, identity.security_id}
-    suffixes = {".pdf", ".htm", ".html", ".txt", ".md", ".pptx", ".json"}
 
-    def local_directory(path, root):
+    def local_path(path, root, *, directory):
         budget.check()
         try:
             status = path.lstat()
@@ -340,94 +331,76 @@ def _discover_source_groups(catalog, identity, budget):
             raise SourceReadError("unavailable", "placeholder_not_hydrated")
         if path.is_symlink() or getattr(status, "st_file_attributes", 0) & 0x400:
             return False
-        return path.is_dir() and _inside_configured_roots(
-            Path(os.path.realpath(path)), (root,)
-        )
+        return (path.is_dir() if directory else path.is_file()) and _inside_configured_roots(
+            Path(os.path.realpath(path)), (root,))
 
     for root in catalog.config.roots:
         if not _effective_reusable(root, catalog.config):
             continue
         selected = set()
+        seen_bases = set()
         if root.kind == "dayu_portfolio":
             for ticker in sorted({identity.ticker, identity.security_id}):
                 if _relative_segments(ticker) != (ticker,):
                     continue
                 base = root.path / ticker / "filings"
-                if not local_directory(base, root):
+                if not local_path(base, root, directory=True):
                     continue
                 with os.scandir(base) as entries:
                     for entry in entries:
-                        budget.check()
-                        groups_seen += 1
-                        if groups_seen > budget.max_candidates:
-                            raise SourceReadError(
-                                "unavailable", "local_source_group_limit"
-                            )
+                        budget.observe_entry()
                         group = Path(entry.path)
-                        if not local_directory(group, root):
+                        if not local_path(group, root, directory=True):
                             continue
+                        budget.observe_group()
                         cached = _read_metadata(group / "meta.json", root, budget)
                         if cached is None:
                             continue
                         primary = cached[0].get("primary_document")
-                        if (
-                            not isinstance(primary, str)
-                            or _relative_segments(primary) != (primary,)
-                            or Path(primary).suffix.lower() not in suffixes
-                        ):
+                        if (not isinstance(primary, str) or _relative_segments(primary) != (primary,)
+                                or Path(primary).suffix.lower() not in DOCUMENT_EXTENSIONS):
                             continue
-                        selected.add(
-                            (group / primary).relative_to(root.path).as_posix()
-                        )
+                        path = group / primary
+                        if local_path(path, root, directory=False):
+                            selected.add(path.relative_to(root.path).as_posix())
         elif root.kind == "company_raw":
             for name in sorted(names):
                 if _relative_segments(name) != (name,):
                     continue
-                base = root.path / name / "raw"
-                if not local_directory(base, root):
+                base = root.path / name
+                if not local_path(base, root, directory=True):
                     continue
+                base_key = os.path.normcase(os.path.realpath(base))
+                if base_key in seen_bases:
+                    continue
+                seen_bases.add(base_key)
                 stack = [base]
                 while stack:
                     directory = stack.pop()
-                    groups_seen += 1
-                    if groups_seen > 256:
-                        raise SourceReadError("unavailable", "local_source_group_limit")
+                    budget.observe_group()
                     with os.scandir(directory) as entries:
                         for entry in entries:
-                            budget.check()
+                            budget.observe_entry()
                             path = Path(entry.path)
                             if entry.is_dir(follow_symlinks=False):
-                                if entry.name != ".rejections" and local_directory(
-                                    path, root
-                                ):
+                                # Direct company content plus only the legacy raw tree.
+                                if (directory != base or entry.name == "raw") and entry.name != ".rejections" and local_path(path, root, directory=True):
                                     stack.append(path)
-                            elif (
-                                path.suffix.lower() in suffixes
-                                and not entry.name.endswith(".source.json")
-                                and entry.name != "meta.json"
-                            ):
+                            elif (path.suffix.lower() in DOCUMENT_EXTENSIONS
+                                    and not entry.name.endswith(".source.json") and entry.name != "meta.json"
+                                    and local_path(path, root, directory=False)):
                                 selected.add(path.relative_to(root.path).as_posix())
-                            if len(selected) > budget.max_candidates:
-                                raise SourceReadError(
-                                    "unavailable", "local_source_group_limit"
-                                )
         for relative in sorted(selected):
-            if (
-                catalog.reader.fetchone(
-                    "SELECT 1 FROM locations WHERE root_id=? AND relative_path=?",
-                    (root.root_id, relative),
-                )
-                is None
-            ):
+            if catalog.reader.fetchone("SELECT 1 FROM locations WHERE root_id=? AND relative_path=?", (root.root_id, relative)) is None:
                 targets.append((root.root_id, relative))
                 if len(targets) > budget.max_candidates:
-                    raise SourceReadError("unavailable", "local_source_group_limit")
+                    raise SourceReadError("unavailable", "local_candidate_limit")
     scopes = {}
     for root_id, relative in targets:
         scopes.setdefault(root_id, set()).add(relative)
     for root_id, paths in scopes.items():
         budget.check()
-        catalog.register_sources(root_id=root_id, relative_paths=paths)
+        _register_local_sources(catalog, root_id=root_id, relative_paths=paths, budget=budget)
     return bool(scopes)
 
 
@@ -449,7 +422,7 @@ def _prepare_local_source(
     query = reader.query_local(request)
     if query.status == "found" and not _discovery_done:
         ref = query.matches[0]
-        reader.verify_version(ref, purpose="filing_reuse")
+        reader.verify_version(ref, purpose="filing_reuse", budget=budget)
         return _result("ready", "existing_active_source", ref=ref)
     if query.status == "ambiguous":
         return _result("ambiguous", query.reason, blocks=True)
@@ -460,8 +433,8 @@ def _prepare_local_source(
         raise ValueError("registration scope exceeds local limit")
     for scope in registrations:
         budget.check()
-        catalog.register_sources(
-            root_id=scope.root_id, relative_paths=set(scope.relative_paths)
+        _register_local_sources(catalog,
+            root_id=scope.root_id, relative_paths=set(scope.relative_paths), budget=budget
         )
     try:
         candidates = catalog.query_filing_candidates(
@@ -586,7 +559,7 @@ def _prepare_local_source(
     query = reader.query_local(request)
     if query.status == "found":
         ref = query.matches[0]
-        reader.verify_version(ref, purpose="filing_reuse")
+        reader.verify_version(ref, purpose="filing_reuse", budget=budget)
         return _result(
             "ready",
             "local_source_reconciled",

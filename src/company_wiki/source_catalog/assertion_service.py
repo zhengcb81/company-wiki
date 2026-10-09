@@ -52,7 +52,7 @@ ASSERTION_REQUIRED_FIELDS = frozenset(
 SOURCE_FACT_FIELDS = frozenset({
     "entity", "market", "security_id", "document_kind", "published_date",
     "source_url", "provider", "provider_document_id", "filing_date",
-    "fiscal_year", "fiscal_period", "period_end", "language",
+    "fiscal_year", "fiscal_period", "period_end", "language", "title", "form_type",
 })
 
 
@@ -140,7 +140,7 @@ def _prepare_source_fact_write(catalog, ref, current, facts, evidence):
     values.update(patch)
     assertion = _build_assertion(
         source_id=ref.source_id, document_id=ref.document_id, content_sha256=ref.content_sha256,
-        **{key: value for key, value in values.items() if key not in {"published_date", "language"}},
+        **{key: value for key, value in values.items() if key not in {"published_date", "language", "title"}},
         evidence_basis="source-facts", evidence_json=evidence_payload, decision="verified",
         supersedes_assertion_id=prior["assertion_id"] if prior else None,
         created_by="automated-source-facts",
@@ -151,6 +151,8 @@ def _prepare_source_fact_write(catalog, ref, current, facts, evidence):
         projection.update(document_kind=facts["document_kind"], source_type=SOURCE_FACT_KINDS[facts["document_kind"]])
     if "published_date" in facts:
         projection["published_date"] = facts["published_date"]
+    if facts.get("title") is not None:
+        projection["title"] = facts["title"]
     return assertion, projection, assertion["assertion_id"]
 
 
@@ -251,6 +253,8 @@ def source_fact_projection(connection: Any, *, document_id: str,
         projection.update(document_kind=patch["document_kind"], source_type=SOURCE_FACT_KINDS[patch["document_kind"]])
     if "published_date" in patch:
         projection["published_date"] = patch["published_date"]
+    if patch.get("title") is not None:
+        projection["title"] = patch["title"]
     return projection
 
 

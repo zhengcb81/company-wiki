@@ -1,6 +1,6 @@
 """WU-601: company_raw adapter — mechanically extracted from scanner v1.
 
-Enumerates ``companies/{company}/raw/`` trees with sidecar pairing.  The
+Enumerates company direct originals and legacy ``raw/`` with sidecar pairing.  The
 decision/identity/hash semantics are byte-for-byte what scanner v1 produced
 (parity tests lock this); known-bad behaviors are NOT fixed here — they get
 separate RED owners (WU-603).
@@ -15,7 +15,6 @@ from .common import (
     _ACQUISITION_SIDECAR_SUFFIX,
     _load_acquisition_metadata,
     _relative,
-    _walk_files,
 )
 from .interface import NormalizedCandidate
 from ..source_group_scope import SourceRegistrationScope
@@ -31,19 +30,17 @@ class CompanyRawAdapter:
         self._portfolio_urls = portfolio_urls or {}
 
     def enumerate(self, root_path: Path, *, limit: int | None = None,
-                  relative_paths: set[str] | None = None, compute_hash: bool = True) -> list[NormalizedCandidate]:
+                  relative_paths: set[str] | None = None, compute_hash: bool = True, metadata_reader=None) -> list[NormalizedCandidate]:
+        read_metadata = metadata_reader or _load_acquisition_metadata
         candidates: list[NormalizedCandidate] = []
         for company in sorted(
             ({root_path / value.split("/", 1)[0] for value in relative_paths}
              if relative_paths is not None else {item for item in root_path.iterdir() if item.is_dir()}),
             key=lambda item: item.name,
         ):
-            raw = company / "raw"
-            if not raw.is_dir():
-                continue
             paths = (SourceRegistrationScope(self.adapter_id, frozenset(relative_paths)).company_paths(
                 root_path, company.name, _ACQUISITION_SIDECAR_SUFFIX)
-                if relative_paths is not None else sorted(_walk_files(raw)))
+                if relative_paths is not None else SourceRegistrationScope.all_company_paths(root_path, company.name))
             sidecars = {
                 str(path)[: -len(_ACQUISITION_SIDECAR_SUFFIX)]: path
                 for path in paths
@@ -56,7 +53,7 @@ class CompanyRawAdapter:
             for path in primary_paths:
                 relative = _relative(path, root_path)
                 sidecar = sidecars.get(str(path))
-                metadata = _load_acquisition_metadata(sidecar) if sidecar else {}
+                metadata = read_metadata(sidecar) if sidecar else {}
                 # Phase 16.1: sidecar without URL enriched from dayu meta
                 if not metadata.get("source_url") and not metadata.get("https_url"):
                     portfolio_url = self._portfolio_urls.get(company.name)
@@ -103,7 +100,7 @@ class CompanyRawAdapter:
                     content_sha256=_sha256_file(sidecar) if compute_hash else "",
                     group_key=relative[: -len(_ACQUISITION_SIDECAR_SUFFIX)],
                     role="metadata",
-                    normalized=_load_acquisition_metadata(sidecar),
+                    normalized=read_metadata(sidecar),
                 ))
             if limit is not None and len(candidates) >= limit:
                 break

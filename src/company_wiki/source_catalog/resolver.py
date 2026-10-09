@@ -421,18 +421,37 @@ def _read_verified_bytes(
                     # Cancellation is sticky caller intent: never answer, even
                     # with bytes that are already in hand.
                     return None, B03_ERROR_UNAVAILABLE, "cancelled", str(read)
-                chunk = handle.read(_BYTE_READ_CHUNK)
+                check = getattr(budget, "check", None)
+                if check is not None:
+                    check()
+                remaining = (_CANDIDATE_BYTES_CAP - read) if budget is None else (
+                    budget.max_bytes - budget.bytes_read + max(0, size - read)
+                )
+                chunk = handle.read(min(_BYTE_READ_CHUNK, remaining + 1))
                 if not chunk:
                     break
                 digest.update(chunk)
                 if chunks is not None:
                     chunks.append(chunk)
+                previous_read = read
                 read += len(chunk)
+                if budget is not None:
+                    # Initial stat bytes were reserved above; charge only actual growth.
+                    growth = max(0, read - size) - max(0, previous_read - size)
+                    if growth:
+                        stop = budget.charge(growth)
+                        if stop:
+                            return None, B03_ERROR_UNAVAILABLE, stop, str(read)
+                    if check is not None:
+                        check()
                 if read > _CANDIDATE_BYTES_CAP:
                     # Grew past the ceiling while reading: stop and refuse.
                     return None, B03_ERROR_UNAVAILABLE, "exceeds_candidate_cap", str(read)
     except OSError as exc:
         return None, B03_ERROR_UNAVAILABLE, "read_failed", exc.__class__.__name__
+    check = getattr(budget, "check", None)
+    if check is not None:
+        check()
     if budget is not None and budget.cancelled:
         # TAIL GUARD (B-VR03-04): the in-loop check runs BEFORE each read, so a
         # cancellation that lands inside the read that ends the loop - the one
@@ -2151,5 +2170,5 @@ def _v2_assertion_metadata(
 
             for key, value in patch.items():
                 if key in SOURCE_FACT_FIELDS:
-                    result["display_name" if key == "entity" else key] = value
+                    result[{"entity": "display_name", "title": "source_title"}.get(key, key)] = value
     return result

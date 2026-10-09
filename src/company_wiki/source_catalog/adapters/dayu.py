@@ -20,12 +20,12 @@ from .interface import NormalizedCandidate
 from ..source_group_scope import SourceRegistrationScope, filing_group_key
 
 
-def enrich_dayu_metadata(path: Path, metadata: dict) -> dict:
+def enrich_dayu_metadata(path: Path, metadata: dict, *, metadata_reader=None) -> dict:
     """Merge the rich dayu filing ``meta.json`` (sibling of the primary
     document) into the document metadata (v1 ADR-008 Strategy B)."""
     meta_path = path.parent / "meta.json"
     try:
-        payload = json.loads(meta_path.read_text(encoding="utf-8"))
+        payload = metadata_reader(meta_path) if metadata_reader else json.loads(meta_path.read_text(encoding="utf-8"))
     except (OSError, UnicodeError, json.JSONDecodeError, ValueError):
         return metadata
     if not isinstance(payload, dict):
@@ -57,7 +57,7 @@ def enrich_dayu_metadata(path: Path, metadata: dict) -> dict:
     if not enriched.get("market"):
         entity_meta_path = path.parents[2] / "meta.json"
         try:
-            entity_meta = json.loads(entity_meta_path.read_text(encoding="utf-8"))
+            entity_meta = metadata_reader(entity_meta_path) if metadata_reader else json.loads(entity_meta_path.read_text(encoding="utf-8"))
         except (OSError, UnicodeError, json.JSONDecodeError, ValueError):
             entity_meta = {}
         if isinstance(entity_meta, dict):
@@ -103,10 +103,10 @@ class DayuAdapter:
     version = "1.0.0"
 
     def enumerate(self, root_path: Path, *, limit: int | None = None,
-                  relative_paths: set[str] | None = None, compute_hash: bool = True) -> list[NormalizedCandidate]:
+                  relative_paths: set[str] | None = None, compute_hash: bool = True, metadata_reader=None, file_walker=None) -> list[NormalizedCandidate]:
         candidates: list[NormalizedCandidate] = []
         groups: dict[str, list[Path]] = {}
-        paths_to_visit = (_selected_dayu_paths(root_path, relative_paths)
+        paths_to_visit = (_selected_dayu_paths(root_path, relative_paths, file_walker=file_walker)
                           if relative_paths is not None else sorted(_walk_files(root_path)))
         for path in paths_to_visit:
             groups.setdefault(
@@ -123,7 +123,7 @@ class DayuAdapter:
             meta_path = group_dir / "meta.json"
             if meta_path.is_file():
                 try:
-                    loaded = json.loads(meta_path.read_text(encoding="utf-8"))
+                    loaded = metadata_reader(meta_path) if metadata_reader else json.loads(meta_path.read_text(encoding="utf-8"))
                     if isinstance(loaded, dict):
                         metadata = loaded
                 except (OSError, UnicodeError, json.JSONDecodeError):
@@ -161,7 +161,7 @@ class DayuAdapter:
                 # metadata-only group (no preferred file): never ingest a
                 # byte-less placeholder (v1 Phase 15.4 rule).
                 continue
-            metadata = enrich_dayu_metadata(preferred, metadata)
+            metadata = enrich_dayu_metadata(preferred, metadata, metadata_reader=metadata_reader)
             if not metadata.get("source_url") and not metadata.get("https_url"):
                 edgar_url = construct_edgar_url(metadata)
                 if edgar_url is not None:
@@ -175,9 +175,9 @@ class DayuAdapter:
                 entity_meta_path = root_path / ticker / "meta.json"
                 if entity_meta_path.is_file():
                     try:
-                        entity_payload = json.loads(
+                        entity_payload = (metadata_reader(entity_meta_path) if metadata_reader else json.loads(
                             entity_meta_path.read_text(encoding="utf-8")
-                        )
+                        ))
                     except (OSError, UnicodeError, json.JSONDecodeError, ValueError):
                         entity_payload = {}
                     if isinstance(entity_payload, dict):
@@ -205,9 +205,9 @@ class DayuAdapter:
         return candidates
 
 
-def _selected_dayu_paths(root: Path, paths: set[str]) -> list[Path]:
+def _selected_dayu_paths(root: Path, paths: set[str], *, file_walker=None) -> list[Path]:
     scope = SourceRegistrationScope("dayu", frozenset(paths))
-    return scope.filing_paths(root, _walk_files)
+    return scope.filing_paths(root, file_walker or _walk_files)
 
 
 def _sha256_file(path: Path) -> str:
