@@ -44,6 +44,8 @@ class AcquisitionBudget:
     provider_started: bool | None = False
     failure_usage_complete: bool | None = True
     usage_reported: bool = False
+    wire_response_bytes_used: int = 0
+    wire_usage_complete: bool = True
 
     @classmethod
     def from_limits(
@@ -86,6 +88,14 @@ class AcquisitionBudget:
             or self.response_bytes_used < 0
         ):
             raise ValueError("response_bytes_used must be a non-negative integer")
+        if (isinstance(self.wire_response_bytes_used, bool)
+                or not isinstance(self.wire_response_bytes_used, int)
+                or self.wire_response_bytes_used < 0):
+            raise ValueError("wire byte count must be a non-negative integer")
+        if not isinstance(self.wire_usage_complete, bool):
+            raise TypeError("wire_usage_complete must be bool")
+        if self.response_bytes_used and not self.wire_response_bytes_used:
+            self.wire_usage_complete = False
         self.max_cost_usd = _decimal_amount(self.max_cost_usd, "max_cost_usd")
         self.cost_usd_used = _decimal_amount(self.cost_usd_used, "cost_usd_used")
         if not isinstance(self.usage_complete, bool):
@@ -119,6 +129,14 @@ class AcquisitionBudget:
         return max(0, self.max_response_bytes - self.response_bytes_used)
 
     @property
+    def remaining_wire_bytes(self) -> int:
+        return max(0, self.max_response_bytes - self.wire_response_bytes_used)
+
+    @property
+    def remaining_transport_bytes(self) -> int:
+        return min(self.remaining_response_bytes, self.remaining_wire_bytes)
+
+    @property
     def remaining_cost_usd(self) -> Decimal:
         return max(Decimal("0"), self.max_cost_usd - self.cost_usd_used)
 
@@ -133,13 +151,15 @@ class AcquisitionBudget:
             raise AcquisitionBudgetExceeded("acquisition usage incomplete after provider failure")
         if self.response_bytes_used > self.max_response_bytes:
             raise AcquisitionBudgetExceeded("response byte budget exceeded")
+        if self.wire_response_bytes_used > self.max_response_bytes:
+            raise AcquisitionBudgetExceeded("wire response byte budget exceeded")
         if self.cost_usd_used > self.max_cost_usd:
             raise AcquisitionBudgetExceeded("acquisition cost budget exceeded")
 
     def ensure_new_request(self) -> None:
         """Gate provider work; a zero cost ceiling still allows free requests."""
         self.ensure_open()
-        if self.response_bytes_used >= self.max_response_bytes:
+        if self.remaining_transport_bytes == 0:
             raise AcquisitionBudgetExceeded("response byte budget exhausted")
 
     def ensure_deadline(self) -> None:
@@ -148,7 +168,7 @@ class AcquisitionBudget:
             raise AcquisitionBudgetExceeded("acquisition deadline exceeded")
 
     def record_reported_usage(
-        self, *, response_bytes: int, cost_usd: Decimal | str
+        self, *, response_bytes: int, cost_usd: Decimal | str, wire_bytes: int | None = None
     ) -> None:
         """Record actual usage atomically, then reject an exceeded ceiling.
 
@@ -164,13 +184,22 @@ class AcquisitionBudget:
         ):
             raise ValueError("response byte count must be a non-negative integer")
         cost = _decimal_amount(cost_usd, "cost")
+        if wire_bytes is not None and (isinstance(wire_bytes, bool)
+                or not isinstance(wire_bytes, int) or wire_bytes < 0):
+            raise ValueError("wire byte count must be a non-negative integer")
         self._reported()
         if response_bytes > 0 or cost > 0:
             self.observe_provider(started=True, complete=True)
         self.response_bytes_used += response_bytes
         self.cost_usd_used += cost
+        if wire_bytes is None:
+            self.wire_usage_complete = False
+        else:
+            self.wire_response_bytes_used += wire_bytes
         if self.response_bytes_used > self.max_response_bytes:
             raise AcquisitionBudgetExceeded("response byte budget exceeded")
+        if self.wire_response_bytes_used > self.max_response_bytes:
+            raise AcquisitionBudgetExceeded("wire response byte budget exceeded")
         if self.cost_usd_used > self.max_cost_usd:
             raise AcquisitionBudgetExceeded("acquisition cost budget exceeded")
 
@@ -198,3 +227,23 @@ class AcquisitionBudget:
         self.cost_usd_used += cost
         if self.cost_usd_used > self.max_cost_usd:
             raise AcquisitionBudgetExceeded("acquisition cost budget exceeded")
+
+    def consume_http_bytes(self, *, wire_bytes: int, response_bytes: int = 0) -> None:
+        """Account consumed wire and materialized entity atomically, even late.
+
+        Identity bodies use both counters in one call so an overage never
+        erases their actual entity usage. Compressed wire is accounted before
+        bounded inflation; entity bytes are counted only when materialized.
+        """
+        for count in (wire_bytes, response_bytes):
+            if isinstance(count, bool) or not isinstance(count, int) or count < 0:
+                raise ValueError("HTTP byte count must be a non-negative integer")
+        self._reported()
+        if wire_bytes or response_bytes:
+            self.observe_provider(started=True, complete=True)
+        self.wire_response_bytes_used += wire_bytes
+        self.response_bytes_used += response_bytes
+        if self.response_bytes_used > self.max_response_bytes:
+            raise AcquisitionBudgetExceeded("response byte budget exceeded")
+        if self.wire_response_bytes_used > self.max_response_bytes:
+            raise AcquisitionBudgetExceeded("wire response byte budget exceeded")

@@ -1,9 +1,9 @@
 """CWP-owned HTTPX transport decorators for read-only provider SDKs.
 
 Each SDK operation shares one budget across redirects, retries and response
-bodies, including failures. Force identity encoding so bytes charged here are
-the same bytes used for the eventual immutable file. A read may overshoot by
-one underlying chunk; its actual usage is retained and never accepted as a
+bodies, including failures. Prefer identity encoding, but decode valid gzip
+and deflate before SDK delivery with bounded output. Wire and entity bytes
+share the same configured ceiling. A wire read may overshoot by one chunk; its actual usage is retained and never accepted as a
 successful download. Sync SDKs also require the parent process hard deadline:
 a blocking socket cannot be interrupted by Python's per-chunk checks alone.
 """
@@ -13,12 +13,14 @@ from __future__ import annotations
 import asyncio
 from collections.abc import Callable, AsyncIterator, Iterator
 import math
+import sys
 import time
 from typing import Any
 
 import httpx
 
 from .download_budget import AcquisitionBudget, AcquisitionBudgetExceeded
+from .bounded_content_encoding import ContentDecoder, InvalidContentCoding
 
 
 class ProviderBudgetStop(Exception):
@@ -27,6 +29,7 @@ class ProviderBudgetStop(Exception):
     def __init__(self, error_code: str, message: str):
         super().__init__(message)
         self.error_code = error_code
+        self.http_observation: dict[str, Any] | None = None
 
 
 def usage_receipt(budget: AcquisitionBudget) -> dict[str, Any]:
@@ -71,32 +74,46 @@ def _prepare(request: httpx.Request, budget: AcquisitionBudget) -> None:
     }
 
 
-def _headers(request: httpx.Request, response: httpx.Response, budget: AcquisitionBudget) -> None:
-    _deadline(budget)
-    if request.method == "HEAD" or response.status_code in (204, 304):
-        return
-    if response.headers.get("content-encoding", "identity").strip().lower() not in ("", "identity"):
-        raise ProviderBudgetStop(
-            "unsupported_content_encoding", "provider ignored identity content encoding"
-        )
-    length = response.headers.get("content-length")
-    if length is not None:
-        try:
-            size = int(length)
-        except ValueError:
-            size = -1  # Missing/invalid length is still checked while reading.
-        if size > budget.remaining_response_bytes:
-            raise ProviderBudgetStop(
-                "byte_budget_exceeded", "declared response exceeds remaining byte budget"
-            )
+def response_observation(response: httpx.Response) -> dict[str, Any]:
+    """Only finite public protocol metadata, never arbitrary provider headers."""
+    length = response.headers.get("content-length", "").strip()
+    size = int(length) if length.isascii() and length.isdigit() and len(length) <= 20 else None
+    return {
+        "status_code": response.status_code,
+        "mime_type": response.headers.get("content-type", "").split(";", 1)[0].strip().lower()[:128],
+        "content_encoding": response.headers.get("content-encoding", "identity").strip().lower()[:128],
+        "wire_content_length": size,
+    }
 
 
-def _record(
-    chunk: bytes, budget: AcquisitionBudget,
-    checkpoint: Callable[[dict[str, Any]], None] | None,
+def _headers(request: httpx.Request, response: httpx.Response, budget: AcquisitionBudget) -> str:
+    observed = response_observation(response)
+    response.extensions["cwp_http_observation"] = observed
+    try:
+        _deadline(budget)
+        bodyless = request.method == "HEAD" or response.status_code in (204, 304)
+        coding = "identity" if bodyless else observed["content_encoding"] or "identity"
+        if coding not in ("identity", "gzip", "deflate"):
+            raise ProviderBudgetStop("unsupported_content_encoding", "unsupported HTTP content encoding")
+        size = observed["wire_content_length"]
+        if not bodyless and size is not None and size > budget.remaining_transport_bytes:
+            raise ProviderBudgetStop("byte_budget_exceeded", "declared response exceeds remaining byte budget")
+    except ProviderBudgetStop as exc:
+        exc.http_observation = observed
+        raise
+    if coding != "identity" or bodyless:
+        # The SDK receives the decoded entity; HTTPX must not inflate it again.
+        response.headers.pop("content-encoding", None)
+        response.headers.pop("content-length", None)
+    return coding
+
+
+def _record_http(
+    budget: AcquisitionBudget, checkpoint: Callable[[dict[str, Any]], None] | None,
+    *, wire_bytes: int = 0, response_bytes: int = 0,
 ) -> None:
     try:
-        budget.consume_response_bytes(len(chunk))
+        budget.consume_http_bytes(wire_bytes=wire_bytes, response_bytes=response_bytes)
     except AcquisitionBudgetExceeded as exc:
         raise _stop(exc) from exc
     finally:
@@ -105,44 +122,131 @@ def _record(
     _deadline(budget)
 
 
+def _decode_chunk(chunk: bytes, decoder: ContentDecoder, budget, checkpoint) -> Iterator[bytes]:
+    identity = decoder.coding == "identity"
+    _record_http(budget, checkpoint, wire_bytes=len(chunk),
+                 response_bytes=len(chunk) if identity else 0)
+    if identity:
+        if chunk:
+            yield chunk
+        return
+    try:
+        for entity in decoder.feed(chunk, lambda: _entity_allowance(budget)):
+            _record_http(budget, checkpoint, response_bytes=len(entity))
+            yield entity
+    except InvalidContentCoding as exc:
+        raise ProviderBudgetStop("incomplete_response", "invalid compressed HTTP body") from exc
+
+
+def _entity_allowance(budget: AcquisitionBudget) -> int:
+    _deadline(budget)
+    return budget.remaining_response_bytes + 1
+
+
+def _finish(decoder: ContentDecoder, budget: AcquisitionBudget, checkpoint) -> Iterator[bytes]:
+    _deadline(budget)
+    try:
+        for entity in decoder.finish(lambda: _entity_allowance(budget)):
+            _record_http(budget, checkpoint, response_bytes=len(entity))
+            yield entity
+    except InvalidContentCoding as exc:
+        raise ProviderBudgetStop("incomplete_response", "incomplete compressed HTTP body") from exc
+
+
+def _close_preserving(close, primary: BaseException | None) -> None:
+    try:
+        close()
+    except BaseException as cleanup:
+        if primary is None:
+            raise
+        primary.add_note("HTTP stream cleanup failed: " + type(cleanup).__name__)
+
+
+async def _aclose_preserving(close, primary: BaseException | None) -> None:
+    try:
+        await close()
+    except BaseException as cleanup:
+        if primary is None:
+            raise
+        primary.add_note("HTTP stream cleanup failed: " + type(cleanup).__name__)
+
+
 class _SyncStream(httpx.SyncByteStream):
-    def __init__(self, stream, budget, checkpoint):
+    def __init__(self, stream, budget, checkpoint, coding):
         self.stream, self.budget, self.checkpoint = stream, budget, checkpoint
+        self.decoder = ContentDecoder(coding)
+        self.closed = False
+        self._iterator = None
 
     def __iter__(self) -> Iterator[bytes]:
         iterator = iter(self.stream)
-        while True:
-            _deadline(self.budget)
-            try:
-                chunk = next(iterator)
-            except StopIteration:
-                return
-            _record(chunk, self.budget, self.checkpoint)
-            yield chunk
+        self._iterator = iterator
+        try:
+            while True:
+                _deadline(self.budget)
+                try:
+                    chunk = next(iterator)
+                except StopIteration:
+                    yield from _finish(self.decoder, self.budget, self.checkpoint)
+                    return
+                yield from _decode_chunk(chunk, self.decoder, self.budget, self.checkpoint)
+        finally:
+            _close_preserving(self.close, sys.exception())
 
     def close(self) -> None:
-        self.stream.close()
+        if not self.closed:
+            self.closed = True
+            iterator, self._iterator = self._iterator, None
+            try:
+                close_iterator = getattr(iterator, "close", None)
+                if close_iterator is not None:
+                    close_iterator()
+            finally:
+                try:
+                    self.decoder.close()
+                finally:
+                    self.stream.close()
 
 
 class _AsyncStream(httpx.AsyncByteStream):
-    def __init__(self, stream, budget, checkpoint):
+    def __init__(self, stream, budget, checkpoint, coding):
         self.stream, self.budget, self.checkpoint = stream, budget, checkpoint
+        self.decoder = ContentDecoder(coding)
+        self.closed = False
+        self._iterator = None
 
     async def __aiter__(self) -> AsyncIterator[bytes]:
         iterator = self.stream.__aiter__()
-        while True:
-            _deadline(self.budget)
-            try:
-                chunk = await asyncio.wait_for(iterator.__anext__(), self.budget.remaining_seconds)
-            except StopAsyncIteration:
-                return
-            except asyncio.TimeoutError as exc:
-                raise ProviderBudgetStop("deadline_exceeded", "acquisition deadline exceeded") from exc
-            _record(chunk, self.budget, self.checkpoint)
-            yield chunk
+        self._iterator = iterator
+        try:
+            while True:
+                _deadline(self.budget)
+                try:
+                    chunk = await asyncio.wait_for(iterator.__anext__(), self.budget.remaining_seconds)
+                except StopAsyncIteration:
+                    for entity in _finish(self.decoder, self.budget, self.checkpoint):
+                        yield entity
+                    return
+                except asyncio.TimeoutError as exc:
+                    raise ProviderBudgetStop("deadline_exceeded", "acquisition deadline exceeded") from exc
+                for entity in _decode_chunk(chunk, self.decoder, self.budget, self.checkpoint):
+                    yield entity
+        finally:
+            await _aclose_preserving(self.aclose, sys.exception())
 
     async def aclose(self) -> None:
-        await self.stream.aclose()
+        if not self.closed:
+            self.closed = True
+            iterator, self._iterator = self._iterator, None
+            try:
+                close_iterator = getattr(iterator, "aclose", None)
+                if close_iterator is not None:
+                    await close_iterator()
+            finally:
+                try:
+                    self.decoder.close()
+                finally:
+                    await self.stream.aclose()
 
 
 class BudgetedHTTPTransport(httpx.BaseTransport):
@@ -156,11 +260,11 @@ class BudgetedHTTPTransport(httpx.BaseTransport):
         _prepare(request, self.budget)
         response = self.transport.handle_request(request)
         try:
-            _headers(request, response, self.budget)
-        except BaseException:
-            response.close()
+            coding = _headers(request, response, self.budget)
+        except BaseException as primary:
+            _close_preserving(response.close, primary)
             raise
-        response.stream = _SyncStream(response.stream, self.budget, self.checkpoint)
+        response.stream = _SyncStream(response.stream, self.budget, self.checkpoint, coding)
         return response
 
     def close(self) -> None:
@@ -183,11 +287,11 @@ class BudgetedAsyncHTTPTransport(httpx.AsyncBaseTransport):
         except asyncio.TimeoutError as exc:
             raise ProviderBudgetStop("deadline_exceeded", "acquisition deadline exceeded") from exc
         try:
-            _headers(request, response, self.budget)
-        except BaseException:
-            await response.aclose()
+            coding = _headers(request, response, self.budget)
+        except BaseException as primary:
+            await _aclose_preserving(response.aclose, primary)
             raise
-        response.stream = _AsyncStream(response.stream, self.budget, self.checkpoint)
+        response.stream = _AsyncStream(response.stream, self.budget, self.checkpoint, coding)
         return response
 
     async def aclose(self) -> None:
