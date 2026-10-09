@@ -39,6 +39,7 @@ class AdapterProcessError(RuntimeError):
     acquisition_usage_complete: bool | None = None
     provider_started: bool | None = None
     http_wire_bytes: int | None = None
+    http_wire_usage_complete: bool | None = None
 
     def __init__(self, message: str = "") -> None:
         super().__init__(message)
@@ -269,7 +270,8 @@ class JsonCommandAdapter:
             if complete is not True:
                 budget.wire_usage_complete = False
             cls._charge_bounded_usage({"acquisition_usage": usage,
-                                       "http_wire_bytes": exc.http_wire_bytes}, budget)
+                                       "http_wire_bytes": exc.http_wire_bytes,
+                                       "http_wire_usage_complete": exc.http_wire_usage_complete}, budget)
 
     def _run(
         self,
@@ -319,6 +321,7 @@ class JsonCommandAdapter:
                 exc.acquisition_usage_complete = True
                 exc.acquisition_usage = {"schema_version": "1.0", "response_bytes": 0, "cost_usd": "0"}
                 exc.http_wire_bytes = 0
+                exc.http_wire_usage_complete = True
             raise exc from cause
         except (TransportError, UnicodeError) as cause:
             exc = AdapterProcessError(f"adapter {self.name} {action} violated bounded process lifetime")
@@ -336,6 +339,7 @@ class JsonCommandAdapter:
                 exc.acquisition_usage_complete = True
                 exc.acquisition_usage = {"schema_version": "1.0", "response_bytes": 0, "cost_usd": "0"}
                 exc.http_wire_bytes = 0
+                exc.http_wire_usage_complete = True
             raise exc from cause
         except OSError as cause:
             exc = AdapterProcessError(
@@ -346,6 +350,7 @@ class JsonCommandAdapter:
                 exc.provider_started = True
                 exc.acquisition_usage = validated_usage(verified_response.get("acquisition_usage"))
                 exc.http_wire_bytes = verified_response.get("http_wire_bytes")
+                exc.http_wire_usage_complete = verified_response.get("http_wire_usage_complete", True)
                 exc.acquisition_usage_complete = True if exc.acquisition_usage is not None else None
             raise exc from cause
 
@@ -373,6 +378,7 @@ class JsonCommandAdapter:
                     exc.reported_retryable = retryable_raw
                 final_payload = json.loads(detail.splitlines()[-1])
                 exc.http_wire_bytes = final_payload.get("http_wire_bytes")
+                exc.http_wire_usage_complete = final_payload.get("http_wire_usage_complete", True)
                 usage_raw = error_obj.get("acquisition_usage")
                 usage = validated_usage(usage_raw)
                 if usage is not None:
@@ -431,6 +437,7 @@ class JsonCommandAdapter:
                 continue
             exc.acquisition_usage = validated_usage(value["acquisition_usage"])
             exc.http_wire_bytes = value.get("http_wire_bytes")
+            exc.http_wire_usage_complete = False
             exc.provider_started = True
             exc.acquisition_usage_complete = False
             exc.adapter_version = self.version

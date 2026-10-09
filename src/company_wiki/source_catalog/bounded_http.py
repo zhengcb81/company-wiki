@@ -13,6 +13,7 @@ from __future__ import annotations
 import asyncio
 from collections.abc import Callable, AsyncIterator, Iterator
 import math
+import sys
 import time
 from typing import Any
 
@@ -130,19 +131,44 @@ def _decode_chunk(chunk: bytes, decoder: ContentDecoder, budget, checkpoint) -> 
             yield chunk
         return
     try:
-        for entity in decoder.feed(chunk, lambda: budget.remaining_response_bytes + 1):
+        for entity in decoder.feed(chunk, lambda: _entity_allowance(budget)):
             _record_http(budget, checkpoint, response_bytes=len(entity))
             yield entity
     except InvalidContentCoding as exc:
         raise ProviderBudgetStop("incomplete_response", "invalid compressed HTTP body") from exc
 
 
-def _finish(decoder: ContentDecoder, budget: AcquisitionBudget) -> None:
+def _entity_allowance(budget: AcquisitionBudget) -> int:
+    _deadline(budget)
+    return budget.remaining_response_bytes + 1
+
+
+def _finish(decoder: ContentDecoder, budget: AcquisitionBudget, checkpoint) -> Iterator[bytes]:
     _deadline(budget)
     try:
-        decoder.finish()
+        for entity in decoder.finish(lambda: _entity_allowance(budget)):
+            _record_http(budget, checkpoint, response_bytes=len(entity))
+            yield entity
     except InvalidContentCoding as exc:
         raise ProviderBudgetStop("incomplete_response", "incomplete compressed HTTP body") from exc
+
+
+def _close_preserving(close, primary: BaseException | None) -> None:
+    try:
+        close()
+    except BaseException as cleanup:
+        if primary is None:
+            raise
+        primary.add_note("HTTP stream cleanup failed: " + type(cleanup).__name__)
+
+
+async def _aclose_preserving(close, primary: BaseException | None) -> None:
+    try:
+        await close()
+    except BaseException as cleanup:
+        if primary is None:
+            raise
+        primary.add_note("HTTP stream cleanup failed: " + type(cleanup).__name__)
 
 
 class _SyncStream(httpx.SyncByteStream):
@@ -150,30 +176,36 @@ class _SyncStream(httpx.SyncByteStream):
         self.stream, self.budget, self.checkpoint = stream, budget, checkpoint
         self.decoder = ContentDecoder(coding)
         self.closed = False
+        self._iterator = None
 
     def __iter__(self) -> Iterator[bytes]:
         iterator = iter(self.stream)
+        self._iterator = iterator
         try:
             while True:
                 _deadline(self.budget)
                 try:
                     chunk = next(iterator)
                 except StopIteration:
-                    _finish(self.decoder, self.budget)
+                    yield from _finish(self.decoder, self.budget, self.checkpoint)
                     return
                 yield from _decode_chunk(chunk, self.decoder, self.budget, self.checkpoint)
         finally:
+            _close_preserving(self.close, sys.exception())
+
+    def close(self) -> None:
+        if not self.closed:
+            self.closed = True
+            iterator, self._iterator = self._iterator, None
             try:
                 close_iterator = getattr(iterator, "close", None)
                 if close_iterator is not None:
                     close_iterator()
             finally:
-                self.close()
-
-    def close(self) -> None:
-        if not self.closed:
-            self.closed = True
-            self.stream.close()
+                try:
+                    self.decoder.close()
+                finally:
+                    self.stream.close()
 
 
 class _AsyncStream(httpx.AsyncByteStream):
@@ -181,33 +213,40 @@ class _AsyncStream(httpx.AsyncByteStream):
         self.stream, self.budget, self.checkpoint = stream, budget, checkpoint
         self.decoder = ContentDecoder(coding)
         self.closed = False
+        self._iterator = None
 
     async def __aiter__(self) -> AsyncIterator[bytes]:
         iterator = self.stream.__aiter__()
+        self._iterator = iterator
         try:
             while True:
                 _deadline(self.budget)
                 try:
                     chunk = await asyncio.wait_for(iterator.__anext__(), self.budget.remaining_seconds)
                 except StopAsyncIteration:
-                    _finish(self.decoder, self.budget)
+                    for entity in _finish(self.decoder, self.budget, self.checkpoint):
+                        yield entity
                     return
                 except asyncio.TimeoutError as exc:
                     raise ProviderBudgetStop("deadline_exceeded", "acquisition deadline exceeded") from exc
                 for entity in _decode_chunk(chunk, self.decoder, self.budget, self.checkpoint):
                     yield entity
         finally:
+            await _aclose_preserving(self.aclose, sys.exception())
+
+    async def aclose(self) -> None:
+        if not self.closed:
+            self.closed = True
+            iterator, self._iterator = self._iterator, None
             try:
                 close_iterator = getattr(iterator, "aclose", None)
                 if close_iterator is not None:
                     await close_iterator()
             finally:
-                await self.aclose()
-
-    async def aclose(self) -> None:
-        if not self.closed:
-            self.closed = True
-            await self.stream.aclose()
+                try:
+                    self.decoder.close()
+                finally:
+                    await self.stream.aclose()
 
 
 class BudgetedHTTPTransport(httpx.BaseTransport):
@@ -222,8 +261,8 @@ class BudgetedHTTPTransport(httpx.BaseTransport):
         response = self.transport.handle_request(request)
         try:
             coding = _headers(request, response, self.budget)
-        except BaseException:
-            response.close()
+        except BaseException as primary:
+            _close_preserving(response.close, primary)
             raise
         response.stream = _SyncStream(response.stream, self.budget, self.checkpoint, coding)
         return response
@@ -249,8 +288,8 @@ class BudgetedAsyncHTTPTransport(httpx.AsyncBaseTransport):
             raise ProviderBudgetStop("deadline_exceeded", "acquisition deadline exceeded") from exc
         try:
             coding = _headers(request, response, self.budget)
-        except BaseException:
-            await response.aclose()
+        except BaseException as primary:
+            await _aclose_preserving(response.aclose, primary)
             raise
         response.stream = _AsyncStream(response.stream, self.budget, self.checkpoint, coding)
         return response

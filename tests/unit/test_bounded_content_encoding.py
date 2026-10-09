@@ -4,6 +4,7 @@ from __future__ import annotations
 import asyncio
 import gzip
 import zlib
+import socket
 
 import httpx
 import pytest
@@ -13,6 +14,8 @@ from company_wiki.source_catalog.bounded_http import (
     usage_receipt,
 )
 from company_wiki.source_catalog.download_budget import AcquisitionBudget
+
+_SOCKET_CONNECT = socket.socket.connect
 
 BODY = b"<html><body><p>New products await customer qualification.</p></body></html>"
 
@@ -56,10 +59,18 @@ class AsyncChunks(httpx.AsyncByteStream):
         self.closed = True
 
 
-@pytest.fixture(scope="session")
-def loop():
+@pytest.fixture
+def loop(monkeypatch):
+    # Windows asyncio creates a local socket pair. Only that local connection
+    # is allowed; MockTransport tests still cannot contact a provider.
+    def local_only(sock, address):
+        if address[0] not in {"127.0.0.1", "::1"}:
+            raise RuntimeError("external network forbidden in codec fixture")
+        return _SOCKET_CONNECT(sock, address)
+    monkeypatch.setattr(socket.socket, "connect", local_only)
     value = asyncio.new_event_loop()
     yield value
+    value.run_until_complete(value.shutdown_asyncgens())
     value.close()
 
 
@@ -259,3 +270,100 @@ def test_async_budget_stop_closes_the_active_iterator_not_only_transport(loop):
                 await client.get("https://fixture.invalid/close-iterator")
     loop.run_until_complete(exercise())
     assert stream.closed and stream.iterator_closed
+
+
+@pytest.mark.parametrize("length", [156, 412, 218])
+@pytest.mark.parametrize("split", [1, 2, 10000])
+def test_raw_deflate_with_legal_zlib_prefix_is_not_misclassified(length, split):
+    body = b"A" * length
+    wire = bytes([0x78, length & 255, length >> 8, (~length) & 255,
+                  ((~length) >> 8) & 255]) + body + bytes.fromhex("010000ffff")
+    assert zlib.decompress(wire, -zlib.MAX_WBITS) == body
+    b = budget()
+    stream = Chunks([wire[n:n+split] for n in range(0, len(wire), split)])
+    with httpx.Client(transport=BudgetedHTTPTransport(httpx.MockTransport(lambda request:
+        httpx.Response(200, headers=headers("deflate", wire), stream=stream)), b),
+        trust_env=False) as client:
+        assert client.get("https://fixture.invalid/ambiguous-framing").content == body
+    assert b.response_bytes_used == len(body) and b.wire_response_bytes_used == len(wire)
+    assert stream.closed
+
+
+@pytest.mark.parametrize("mode", ["sync", "async"])
+def test_consumer_stops_early_closes_owned_active_iterator_immediately(mode, loop):
+    wire = gzip.compress(b"x" * 180_000, mtime=0)
+    b = budget(200_000)
+    if mode == "sync":
+        class Tracked(Chunks):
+            iterator_closed = False
+            def __iter__(self):
+                try:
+                    yield wire
+                    raise AssertionError("consumer stopped; must not fetch next wire chunk")
+                finally:
+                    self.iterator_closed = True
+        stream = Tracked([])
+        with httpx.Client(transport=BudgetedHTTPTransport(httpx.MockTransport(lambda request:
+            httpx.Response(200, headers=headers("gzip", wire), stream=stream)), b),
+            trust_env=False) as client:
+            with client.stream("GET", "https://fixture.invalid/early-stop") as response:
+                outer = response.iter_bytes()
+                assert len(next(outer)) <= 65536
+            assert stream.closed and stream.iterator_closed
+            response.close()  # Idempotent close without resuming consumer.
+            outer.close()
+    else:
+        class Tracked(AsyncChunks):
+            iterator_closed = False
+            async def __aiter__(self):
+                try:
+                    yield wire
+                    raise AssertionError("consumer stopped; must not fetch next wire chunk")
+                finally:
+                    self.iterator_closed = True
+        stream = Tracked([])
+        async def exercise():
+            async with httpx.AsyncClient(transport=BudgetedAsyncHTTPTransport(httpx.MockTransport(lambda request:
+                httpx.Response(200, headers=headers("gzip", wire), stream=stream)), b),
+                trust_env=False) as client:
+                async with client.stream("GET", "https://fixture.invalid/early-stop") as response:
+                    outer = response.aiter_bytes()
+                    assert len(await outer.__anext__()) <= 65536
+                assert stream.closed and stream.iterator_closed
+                await response.aclose()
+                await outer.aclose()
+        loop.run_until_complete(exercise())
+
+
+@pytest.mark.parametrize("mode", ["sync", "async"])
+def test_cleanup_error_does_not_replace_primary_byte_budget_stop(mode, loop):
+    wire = gzip.compress(b"x" * 100_000, mtime=0)
+    b = budget(256)
+    if mode == "sync":
+        class FailingClose(Chunks):
+            def close(self):
+                self.closed = True
+                raise RuntimeError("fixture cleanup failed")
+        stream = FailingClose([wire])
+        with httpx.Client(transport=BudgetedHTTPTransport(httpx.MockTransport(lambda request:
+            httpx.Response(200, headers=headers("gzip", wire), stream=stream)), b),
+            trust_env=False) as client:
+            with pytest.raises(ProviderBudgetStop) as caught:
+                client.get("https://fixture.invalid/primary-cause")
+    else:
+        class FailingClose(AsyncChunks):
+            async def aclose(self):
+                self.closed = True
+                raise RuntimeError("fixture cleanup failed")
+        stream = FailingClose([wire])
+        async def exercise():
+            async with httpx.AsyncClient(transport=BudgetedAsyncHTTPTransport(httpx.MockTransport(lambda request:
+                httpx.Response(200, headers=headers("gzip", wire), stream=stream)), b),
+                trust_env=False) as client:
+                with pytest.raises(ProviderBudgetStop) as error:
+                    await client.get("https://fixture.invalid/primary-cause")
+                return error
+        caught = loop.run_until_complete(exercise())
+    assert caught.value.error_code == "byte_budget_exceeded"
+    assert any("cleanup" in note for note in caught.value.__notes__)
+    assert b.response_bytes_used == 257 and stream.closed

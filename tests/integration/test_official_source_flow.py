@@ -1353,3 +1353,48 @@ def test_encoding_header_refusal_preserves_actual_headers_and_no_canonical_origi
         assert error.http_wire_bytes == 0 and not error.acquisition_usage_complete
         assert not list((root/"companies").rglob("*.html"))
         assert error.capture_id  # Failure remains replayable; never adopted as original.
+
+
+@pytest.mark.parametrize("failure", ["mime", "sha", "storage"])
+def test_public_cli_keeps_completed_capture_http_diagnostics_on_import_refusal(monkeypatch, capsys, failure):
+    import gzip
+    import httpx
+    from company_wiki.source_catalog import official_source_cli as cli
+    from company_wiki.source_catalog.official_source_flow import capture_official_source
+    from company_wiki.source_catalog.canonical_writer import CanonicalSourceWriter, CanonicalImportError
+    _mock_local_pair(monkeypatch)
+    body = b"<html><body>Acme new product awaits customer qualification.</body></html>"
+    wire = gzip.compress(body, mtime=0)
+    with owned_lake() as (root, catalog):
+        class EncodedBody(httpx.AsyncByteStream):
+            async def __aiter__(self):
+                yield wire
+        def provider(req):
+            return httpx.Response(200, headers={"content-type": "text/html", "content-encoding": "gzip",
+                "content-length": str(len(wire)), "authorization": "secret-header-never-project"},
+                stream=EncodedBody())
+        def capture(current, **kwargs):
+            return capture_official_source(current, transport=httpx.MockTransport(provider), **kwargs)
+        monkeypatch.setattr(cli, "load_catalog_config", lambda *a, **k: catalog.config)
+        monkeypatch.setattr(cli, "capture_official_source", capture)
+        if failure == "storage":
+            def refuse(*args, **kwargs):
+                raise CanonicalImportError("fixture_storage_refused")
+            monkeypatch.setattr(CanonicalSourceWriter, "import_original_staged", refuse)
+        req = _capture_request(body, "application/pdf" if failure == "mime" else "text/html")
+        if failure == "sha":
+            req["expected_content_sha256"] = "0" * 64
+        path = root / "request.json"
+        path.write_text(json.dumps(req), encoding="utf-8")
+        assert cli.main(["--config", str(root / "fixture.yaml"), "--project-root", str(root),
+                         "--operation", "capture", "--request", str(path)]) == 2
+        encoded_error = capsys.readouterr().err
+        out = json.loads(encoded_error)
+        assert out["error_code"] in {"mime_mismatch", "source_sha_mismatch", "official_source_CanonicalImportError"}
+        assert out["http_observation"] == {"status_code": 200, "mime_type": "text/html",
+            "content_encoding": "gzip", "wire_content_length": len(wire)}
+        assert out["http_wire_bytes"] == len(wire) and out["http_wire_usage_complete"]
+        assert out["acquisition_usage_complete"] and out["provider_started"]
+        assert out["acquisition_usage"]["response_bytes"] == len(body)
+        assert not list((root / "companies").rglob("*.html"))
+        assert "secret-header-never-project" not in encoded_error and str(root) not in encoded_error

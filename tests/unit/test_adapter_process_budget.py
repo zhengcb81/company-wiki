@@ -395,3 +395,26 @@ def test_hard_kill_checkpoint_charges_last_cumulative_wire_once(tmp_path):
     assert b.response_bytes_used == 8 and b.wire_response_bytes_used == 15
     assert not b.usage_complete and not b.wire_usage_complete
     assert exc.acquisition_usage_complete is False and exc.retryable is False
+
+
+@pytest.mark.parametrize("complete", [False, None, True])
+def test_handled_failure_does_not_infer_wire_complete_from_body_final(tmp_path, complete):
+    import subprocess
+    from decimal import Decimal
+    from company_wiki.source_catalog.adapter_process import JsonCommandAdapter, AdapterProcessError
+    adapter = JsonCommandAdapter(name="bounded-json", version="1.0.0",
+        command=(sys.executable, "unused.py"), project_root=tmp_path,
+        supports_acquisition_budget=True)
+    final = {"schema_version": "1.0", "status": "failed",
+        "adapter": {"name": "bounded-json", "version": "1.0.0"},
+        "http_wire_bytes": 7, "http_wire_usage_complete": complete,
+        "error": {"code": "provider_failed", "retryable": False,
+                  "acquisition_usage": {"schema_version": "1.0", "response_bytes": 9,
+                                        "cost_usd": "0.25"}}}
+    with pytest.raises(AdapterProcessError) as caught:
+        adapter._decode_response(subprocess.CompletedProcess([], 1, "", json.dumps(final)), "fetch")
+    b = AcquisitionBudget.from_limits(max_response_bytes=100, max_seconds=10, max_cost_usd="1")
+    adapter._charge_failure_usage(caught.value, b)
+    assert b.response_bytes_used == 9 and b.wire_response_bytes_used == 7
+    assert b.cost_usd_used == Decimal("0.25") and b.usage_complete
+    assert b.wire_usage_complete is (complete is True)

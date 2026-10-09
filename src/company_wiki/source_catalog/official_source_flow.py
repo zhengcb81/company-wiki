@@ -48,6 +48,36 @@ class OfficialSourceError(ValueError):
     """Named source-data refusal, not another permission gate."""
 
 
+def _attach_capture_http_observation(error: Exception, receipt: dict[str, Any]) -> None:
+    """Project the same finite captured observation at every import failure.
+
+    A completed download may fail SHA/MIME/storage after the network has
+    closed; that must not discard known HTTP usage. Local imports have no
+    such observation, and nothing is inferred from the caller's source MIME.
+    """
+    observed = receipt.get("http_observation")
+    if isinstance(observed, dict):
+        finite = {}
+        status = observed.get("status_code")
+        if type(status) is int and 100 <= status <= 599:
+            finite["status_code"] = status
+        for field in ("mime_type", "content_encoding"):
+            value = observed.get(field)
+            if isinstance(value, str):
+                finite[field] = value[:128]
+        size = observed.get("wire_content_length")
+        if size is None or (type(size) is int and 0 <= size < 10 ** 20):
+            finite["wire_content_length"] = size
+        if finite:
+            setattr(error, "http_observation", finite)
+    wire = receipt.get("http_wire_bytes")
+    if type(wire) is int and wire >= 0:
+        setattr(error, "http_wire_bytes", wire)
+    complete = receipt.get("http_wire_usage_complete")
+    if type(complete) is bool:
+        setattr(error, "http_wire_usage_complete", complete)
+
+
 def _text(value, field):
     if (
         not isinstance(value, str)
@@ -339,6 +369,7 @@ def _persist_capture(catalog, original, request, *, complete=True):
         # the named incomplete recovery material; never pretend it is replayable.
         primary.capture_id = capture_id
         primary.capture_receipt = dict(request["capture_receipt"])
+        _attach_capture_http_observation(primary, primary.capture_receipt)
         try:
             _journal(catalog, state, outcome="failed", reason="capture_persistence_failed",
                      error_type=type(primary).__name__, canonical_path=str(staged.resolve()),
@@ -443,6 +474,7 @@ def _import_retained(catalog, staged, descriptor, state, *, bytes_validated=Fals
     except Exception as primary:
         primary.capture_id = state["capture_id"]
         primary.capture_receipt = dict(request["capture_receipt"])
+        _attach_capture_http_observation(primary, primary.capture_receipt)
         try:
             _journal(catalog, state, outcome="failed", reason="official_import_failed",
                      error_type=type(primary).__name__, canonical_path=str(staged.resolve()))
@@ -824,6 +856,7 @@ def capture_official_source(catalog, *, request, budget=None, transport=None):
                           "usage_complete": complete, "acquisition_usage": primary.acquisition_usage,
                           "http_wire_bytes": wire_used, "http_wire_usage_complete": complete}
         primary.capture_receipt = failed_receipt
+        _attach_capture_http_observation(primary, failed_receipt)
         failed_request = {"schema_version": IMPORT_REQUEST_SCHEMA, "request_id": request["request_id"],
                           "source": source, "mime_type": mime, "content_sha256": failed_receipt["content_sha256"],
                           "max_bytes": cap, "capture_receipt": failed_receipt}
@@ -859,6 +892,7 @@ def capture_official_source(catalog, *, request, budget=None, transport=None):
         if state is not None:
             primary.capture_id = state["capture_id"]
         primary.capture_receipt = capture
+        _attach_capture_http_observation(primary, capture)
         primary.acquisition_usage = capture["acquisition_usage"]
         primary.acquisition_usage_complete = True
         primary.provider_started = True
