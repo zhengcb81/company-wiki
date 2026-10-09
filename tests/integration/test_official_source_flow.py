@@ -1262,3 +1262,94 @@ def test_invalid_presentation_refused_before_canonical_write(body):
         with pytest.raises(OfficialSourceError, match="invalid_pptx"):
             _import(catalog, body, mime=mime)
         assert not list((root / "companies").rglob("*"))
+
+
+def _capture_request(body, mime="text/html"):
+    value = request(body, mime=mime)
+    value["schema_version"] = "official-source-capture-request/1"
+    value["max_seconds"] = 5
+    value.pop("capture_receipt")
+    value.pop("content_sha256")
+    return value
+
+
+def _mock_local_pair(monkeypatch):
+    def local_only(sock, address):
+        if address[0] not in {"127.0.0.1", "::1"}:
+            raise RuntimeError("external network forbidden in compressed capture fixture")
+        return _SOCKET_CONNECT(sock, address)
+    monkeypatch.setattr(socket.socket, "connect", local_only)
+
+
+@pytest.mark.parametrize("coding", ["gzip", "deflate"])
+@pytest.mark.parametrize("mime", ["text/html", "application/pdf"])
+def test_compressed_capture_public_original_and_zero_get_reuse(monkeypatch, coding, mime):
+    import gzip
+    import zlib
+    import httpx
+    from company_wiki.source_catalog.official_source_flow import capture_official_source
+    from company_wiki.source_catalog.download_budget import AcquisitionBudget
+    _mock_local_pair(monkeypatch)
+    if mime == "application/pdf":
+        import fitz
+        with fitz.open() as doc:
+            doc.new_page().insert_text((72,72), "Acme business update: new product awaits customer qualification.")
+            body = doc.tobytes()
+    else:
+        body = b"<html><h1>Acme</h1><p>New product awaits customer qualification.</p></html>"
+    wire = gzip.compress(body, mtime=0) if coding == "gzip" else zlib.compress(body)
+    calls = []
+    class Body(httpx.AsyncByteStream):
+        async def __aiter__(self):
+            yield wire[:1]
+            yield wire[1:]
+    def provider(req):
+        calls.append(str(req.url))
+        return httpx.Response(200, headers={"content-type": mime, "content-encoding": coding,
+            "content-length": str(len(wire))}, stream=Body())
+    with owned_lake() as (_, catalog):
+        b = AcquisitionBudget.from_limits(max_response_bytes=1048576, max_seconds=5, max_cost_usd="0")
+        value = _capture_request(body, mime)
+        out = capture_official_source(catalog, request=value, budget=b, transport=httpx.MockTransport(provider))
+        reader = SourceVersionReader(catalog)
+        rawref = out["source_ref"]
+        ref = reader.query_ref(rawref["document_id"], rawref["source_id"], rawref["content_sha256"])
+        assert reader.open_version(ref, purpose="source_export").data == body
+        assert rawref["content_sha256"] == hashlib.sha256(body).hexdigest()
+        assert rawref["byte_size"] == len(body)
+        assert out["acquisition_usage"]["response_bytes"] == len(body)
+        receipt = out["capture_receipt"]
+        assert receipt["http_observation"]["content_encoding"] == coding
+        assert receipt["http_observation"]["wire_content_length"] == len(wire)
+        assert receipt["http_wire_bytes"] == len(wire) and receipt["http_wire_usage_complete"]
+        assert b.wire_response_bytes_used == len(wire)
+        value["expected_content_sha256"] = rawref["content_sha256"]
+        again = capture_official_source(catalog, request=value, transport=httpx.MockTransport(provider))
+        assert again["source_ref"] == rawref and again["download_events"] == 0
+        assert again["acquisition_usage"]["response_bytes"] == 0 and len(calls) == 1
+
+
+def test_encoding_header_refusal_preserves_actual_headers_and_no_canonical_original(monkeypatch):
+    import httpx
+    from company_wiki.source_catalog.official_source_flow import capture_official_source
+    from company_wiki.source_catalog.bounded_http import ProviderBudgetStop
+    _mock_local_pair(monkeypatch)
+    class Body(httpx.AsyncByteStream):
+        async def __aiter__(self):
+            raise AssertionError("unsupported body must not be read")
+            yield b"unread"
+    with owned_lake() as (root, catalog):
+        def provider(req):
+            return httpx.Response(200, headers={"content-type": "text/html", "content-encoding": "br"},
+                stream=Body())
+        with pytest.raises(ProviderBudgetStop) as caught:
+            capture_official_source(catalog, request=_capture_request(b""), transport=httpx.MockTransport(provider))
+        error = caught.value
+        assert error.error_code == "unsupported_content_encoding"
+        assert error.http_observation == {"status_code":200, "mime_type":"text/html", "content_encoding":"br",
+                                          "wire_content_length":None}
+        assert error.capture_receipt["http_observation"] == error.http_observation
+        assert error.capture_receipt["http_status"] == 200
+        assert error.http_wire_bytes == 0 and not error.acquisition_usage_complete
+        assert not list((root/"companies").rglob("*.html"))
+        assert error.capture_id  # Failure remains replayable; never adopted as original.

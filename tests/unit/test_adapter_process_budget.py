@@ -305,3 +305,93 @@ def test_bounded_json_adapter_uses_remaining_time_as_process_deadline(
         adapter.discover_bounded(_request(), budget)
 
     assert time.monotonic() - started < 1.25
+
+
+def test_optional_wire_observation_preserves_entity_receipt_and_shared_remaining_cap(tmp_path):
+    from company_wiki.source_catalog import JsonCommandAdapter
+    project = tmp_path / "compressed"
+    project.mkdir()
+    script = project / "adapter.py"
+    source = _BOUNDED_ADAPTER.replace('        "acquisition_usage": usage,',
+        '        "acquisition_usage": usage, "http_wire_bytes": 32 if args.action == "discover" else 9,')
+    script.write_text(source, encoding="utf-8")
+    log = tmp_path / "calls.jsonl"
+    adapter = JsonCommandAdapter(name="bounded-json", version="1.0.0",
+        command=(sys.executable, str(script), str(log)), project_root=project,
+        timeout_seconds=30, supports_acquisition_budget=True)
+    budget = AcquisitionBudget.from_limits(max_response_bytes=100, max_seconds=10, max_cost_usd="0")
+    candidate = adapter.discover_bounded(_request(), budget)[0]
+    receipt = adapter.fetch_bounded(candidate, tmp_path / "staging", budget)
+    sent = [json.loads(line) for line in log.read_text(encoding="utf-8").splitlines()]
+    assert sent[1]["budget"]["max_response_bytes"] == 68
+    assert budget.response_bytes_used == 17 + receipt.byte_size
+    assert budget.wire_response_bytes_used == 41 and budget.wire_usage_complete
+    assert receipt.byte_size > 9 and Path(receipt.staged_path).read_bytes().startswith(b"%PDF")
+
+
+@pytest.mark.parametrize("wire", [None, True, -1, "12"])
+def test_missing_or_bad_optional_wire_observation_keeps_real_entity_and_cost(wire):
+    from decimal import Decimal
+    from company_wiki.source_catalog.adapter_process import JsonCommandAdapter
+    b = AcquisitionBudget.from_limits(max_response_bytes=100, max_seconds=10, max_cost_usd="1")
+    response = {"acquisition_usage": {"schema_version": "1.0", "response_bytes": 23, "cost_usd": "0.25"}}
+    if wire is not None:
+        response["http_wire_bytes"] = wire
+    JsonCommandAdapter._charge_bounded_usage(response, b)
+    assert b.response_bytes_used == 23 and b.cost_usd_used == Decimal("0.25")
+    assert not b.wire_usage_complete and b.wire_response_bytes_used == 0
+    b.ensure_new_request()  # Missing observation is not a new permission gate.
+
+
+def test_wire_overage_keeps_already_reported_entity_and_fee():
+    from decimal import Decimal
+    from company_wiki.source_catalog.adapter_process import JsonCommandAdapter
+    b = AcquisitionBudget.from_limits(max_response_bytes=100, max_seconds=10, max_cost_usd="1")
+    response = {"acquisition_usage": {"schema_version": "1.0", "response_bytes": 23, "cost_usd": "0.25"},
+                "http_wire_bytes": 101}
+    with pytest.raises(AcquisitionBudgetExceeded, match="byte budget"):
+        JsonCommandAdapter._charge_bounded_usage(response, b)
+    assert b.response_bytes_used == 23 and b.cost_usd_used == Decimal("0.25")
+    assert b.wire_response_bytes_used == 101
+
+
+def test_failure_final_wire_receipt_is_not_replaced_by_earlier_checkpoint(tmp_path):
+    import subprocess
+    from decimal import Decimal
+    from company_wiki.source_catalog.adapter_process import JsonCommandAdapter, AdapterProcessError
+    adapter = JsonCommandAdapter(name="bounded-json", version="1.0.0",
+        command=(sys.executable, "unused.py"), project_root=tmp_path,
+        supports_acquisition_budget=True)
+    identity = {"name": "bounded-json", "version": "1.0.0"}
+    progress = {"schema_version": "1.0", "status": "progress", "adapter": identity,
+        "acquisition_usage": {"schema_version": "1.0", "response_bytes": 8, "cost_usd": "0"},
+        "http_wire_bytes": 15}
+    final = {"schema_version": "1.0", "status": "failed", "adapter": identity,
+        "http_wire_bytes": 31,
+        "error": {"code": "incomplete_response", "retryable": False,
+                  "acquisition_usage": {"schema_version": "1.0", "response_bytes": 23, "cost_usd": "0.25"}}}
+    completed = subprocess.CompletedProcess([], 1, "", json.dumps(progress)+"\n"+json.dumps(final))
+    with pytest.raises(AdapterProcessError) as caught:
+        adapter._decode_response(completed, "fetch")
+    b = AcquisitionBudget.from_limits(max_response_bytes=100, max_seconds=10, max_cost_usd="1")
+    adapter._charge_failure_usage(caught.value, b)
+    assert b.response_bytes_used == 23 and b.cost_usd_used == Decimal("0.25")
+    assert b.wire_response_bytes_used == 31 and b.wire_usage_complete
+
+
+def test_hard_kill_checkpoint_charges_last_cumulative_wire_once(tmp_path):
+    from company_wiki.source_catalog.adapter_process import JsonCommandAdapter, AdapterProcessError
+    adapter = JsonCommandAdapter(name="bounded-json", version="1.0.0",
+        command=(sys.executable, "unused.py"), project_root=tmp_path,
+        supports_acquisition_budget=True)
+    identity = {"name": "bounded-json", "version": "1.0.0"}
+    lines = [json.dumps({"schema_version": "1.0", "status": "progress", "adapter": identity,
+        "acquisition_usage": {"schema_version": "1.0", "response_bytes": entity, "cost_usd": "0"},
+        "http_wire_bytes": wire}) for entity, wire in [(0,0),(5,10),(8,15)]]
+    exc = AdapterProcessError("hard stopped")
+    adapter._attach_usage_checkpoint(exc, "\n".join(lines)+'\n{"truncated":')
+    b = AcquisitionBudget.from_limits(max_response_bytes=100, max_seconds=10, max_cost_usd="0")
+    adapter._charge_failure_usage(exc, b)
+    assert b.response_bytes_used == 8 and b.wire_response_bytes_used == 15
+    assert not b.usage_complete and not b.wire_usage_complete
+    assert exc.acquisition_usage_complete is False and exc.retryable is False

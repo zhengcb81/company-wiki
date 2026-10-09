@@ -200,7 +200,8 @@ def main(argv: list[str] | None = None) -> int:
 
     def checkpoint(usage):
         print(json.dumps({"schema_version": "1.0", "status": "progress", "adapter": identity,
-                          "acquisition_usage": usage}, sort_keys=True), file=sys.stderr, flush=True)
+                          "acquisition_usage": usage,
+                          "http_wire_bytes": budget.wire_response_bytes_used if budget else 0}, sort_keys=True), file=sys.stderr, flush=True)
 
     try:
         payload = json.load(sys.stdin)
@@ -252,10 +253,12 @@ def main(argv: list[str] | None = None) -> int:
         error["acquisition_usage"] = usage_receipt(budget) if budget else {
             "schema_version": "1.0", "response_bytes": 0, "cost_usd": "0"}
         print(json.dumps({"schema_version": "1.0", "status": "failed", "adapter": identity,
-                          "error": error}, sort_keys=True), file=sys.stderr, flush=True)
+                          "error": error,
+                          "http_wire_bytes": budget.wire_response_bytes_used if budget else 0}, sort_keys=True), file=sys.stderr, flush=True)
         return 1
     print(json.dumps({"schema_version": "1.0", "status": "ok", "adapter": identity,
-                      "acquisition_usage": usage_receipt(budget), **result}, sort_keys=True))
+                      "acquisition_usage": usage_receipt(budget),
+                      "http_wire_bytes": budget.wire_response_bytes_used, **result}, sort_keys=True))
     return 0
 
 

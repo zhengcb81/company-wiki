@@ -716,7 +716,7 @@ def capture_official_source(catalog, *, request, budget=None, transport=None):
     """
     import asyncio
     import httpx
-    from .bounded_http import BudgetedAsyncHTTPTransport, ProviderBudgetStop, usage_receipt
+    from .bounded_http import BudgetedAsyncHTTPTransport, ProviderBudgetStop, usage_receipt, response_observation
     from .download_budget import AcquisitionBudget
     if not isinstance(request, dict) or request.get("schema_version") != "official-source-capture-request/1":
         raise OfficialSourceError("invalid_capture_request_schema")
@@ -764,6 +764,7 @@ def capture_official_source(catalog, *, request, budget=None, transport=None):
                 return out
     _staging_root(catalog)  # The existing journal also needs its configured parent.
     before = budget.response_bytes_used
+    wire_before = budget.wire_response_bytes_used
     cost_before = budget.cost_usd_used
     def operation_usage():
         return {"schema_version": "1.0", "response_bytes": budget.response_bytes_used - before,
@@ -778,7 +779,12 @@ def capture_official_source(catalog, *, request, budget=None, transport=None):
         async def handle_async_request(self, http_request):
             capture["http_requests"] += 1
             budget.observe_provider(started=True, complete=True)
-            return await self.inner.handle_async_request(http_request)
+            response = await self.inner.handle_async_request(http_request)
+            # Capture actual finite metadata before outer codec/header refusal.
+            capture.update(http_status=response.status_code, effective_url=str(http_request.url),
+                           response_mime_type=response_observation(response)["mime_type"],
+                           http_observation=response_observation(response))
+            return response
         async def aclose(self):
             await self.inner.aclose()
     async def fetch():
@@ -805,12 +811,18 @@ def capture_official_source(catalog, *, request, budget=None, transport=None):
         started = capture["http_requests"] > 0
         complete = not started
         budget.observe_provider(started=started, complete=complete)
+        wire_used = budget.wire_response_bytes_used - wire_before
+        setattr(primary, "http_wire_bytes", wire_used)
+        setattr(primary, "http_wire_usage_complete", complete)
+        if "http_observation" in capture:
+            setattr(primary, "http_observation", capture["http_observation"])
         primary.acquisition_usage = operation_usage()
         primary.acquisition_usage_complete = complete
         primary.provider_started = started
         failed_receipt = {**capture, "captured_at": datetime.now(timezone.utc).isoformat(),
                           "response_bytes": len(partial), "content_sha256": hashlib.sha256(partial).hexdigest(),
-                          "usage_complete": complete, "acquisition_usage": primary.acquisition_usage}
+                          "usage_complete": complete, "acquisition_usage": primary.acquisition_usage,
+                          "http_wire_bytes": wire_used, "http_wire_usage_complete": complete}
         primary.capture_receipt = failed_receipt
         failed_request = {"schema_version": IMPORT_REQUEST_SCHEMA, "request_id": request["request_id"],
                           "source": source, "mime_type": mime, "content_sha256": failed_receipt["content_sha256"],
@@ -828,6 +840,7 @@ def capture_official_source(catalog, *, request, budget=None, transport=None):
     sha = hashlib.sha256(original).hexdigest()
     capture.update(captured_at=datetime.now(timezone.utc).isoformat(), response_bytes=len(original),
                    content_sha256=sha, usage_complete=True,
+                   http_wire_bytes=budget.wire_response_bytes_used - wire_before, http_wire_usage_complete=True,
                    acquisition_usage=operation_usage(), cumulative_acquisition_usage=usage_receipt(budget))
     local = {"schema_version": IMPORT_REQUEST_SCHEMA, "request_id": request["request_id"],
              "source": source, "mime_type": mime, "content_sha256": sha,

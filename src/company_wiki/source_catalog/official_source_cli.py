@@ -156,7 +156,8 @@ def main(argv=None):
         )
         failure = {"schema_version": "official-source-failure/1", "status": "failed",
                    "error_code": getattr(exc, "error_code", code)}
-        for field in ("capture_id", "acquisition_usage", "acquisition_usage_complete", "provider_started"):
+        for field in ("capture_id", "acquisition_usage", "acquisition_usage_complete", "provider_started",
+                      "http_observation", "http_wire_bytes", "http_wire_usage_complete"):
             value = getattr(exc, field, None)
             if value is not None:
                 failure[field] = value

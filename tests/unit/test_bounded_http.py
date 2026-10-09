@@ -163,8 +163,11 @@ def test_compressed_response_cannot_bypass_budget_by_inflating_after_accounting(
     )) as client:
         with pytest.raises(ProviderBudgetStop) as error:
             client.get("https://example.invalid/compressed")
-    assert error.value.error_code == "unsupported_content_encoding"
-    assert budget.response_bytes_used == 0
+    assert error.value.error_code == ("unsupported_content_encoding" if encoding == "br" else "incomplete_response")
+    # The raw-deflate interpretation produces nine bytes before EOF fails.
+    # Charge those real allocations; malformed content still cannot succeed.
+    assert budget.response_bytes_used == (9 if encoding == "deflate" else 0)
+    assert budget.wire_response_bytes_used == (0 if encoding == "br" else len(b"compressed"))
     assert chunks.closed
 
 
