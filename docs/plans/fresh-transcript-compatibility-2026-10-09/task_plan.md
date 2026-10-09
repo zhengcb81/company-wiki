@@ -16,7 +16,7 @@ Restore exact transcript 0.1.0 / 0.1.1 compatibility and current 0.2.0 replay us
 Only src/company_wiki/automation/narrative_formats.py, src/company_wiki/source_catalog/narrative_evidence.py, src/company_wiki/source_catalog/narrative_retrieval.py, associated tests and this plan. No main/shared plans/config/CI/hooks/raw/installations or cross-repo writes.
 
 ## Next Step
-Commit the focused P2 snapshot-ownership fix with ordinary hooks and update handoff; MAIN repeats independent acceptance.
+MAIN independently reaccepts the latest snapshot-ownership branch tip, then owns merge, normal fullunit push gate and exact CI. This worker follow-up is complete.
 
 ## Errors
 - Sandbox Git status falsely reported not-a-work-tree; normal OS Git status was clean.
@@ -41,6 +41,6 @@ Commit the focused P2 snapshot-ownership fix with ordinary hooks and update hand
 - [x] Reproduce external mutation of nested contract/evidence/locator/SHA after resolver construction and cache population.
 - [x] Freeze constructor snapshot ownership; new resolver still rejects bad external input.
 - [x] Prove same-reader repeated calls parse once, fresh valid legacy packages still replay, and real MSFT remains41/41.
-- [ ] Run concentrated checks, ordinary commit and updated handoff; MAIN repeats independent acceptance.
+- [x] Run concentrated checks, ordinary commit and updated handoff; MAIN repeats independent acceptance.
 
 P2 final checks:ownership/retrieval31PASS1.06s;full concentrated responsibility208PASS/1SKIP4.38s;realMSFT41/41 retained with source bytes/SHA/mtime/TEMP unchanged;mypy retrieval clean;ruff source/test clean;diff-check clean. Earlier evidence preserved.
