@@ -1,0 +1,30 @@
+{
+  "observed_at": "2026-10-09T20:48:41.521919+00:00",
+  "command": [
+    "git",
+    "commit",
+    "-m",
+    "fix(source): decode official HTTP content within shared wire and entity limits"
+  ],
+  "returncode": 0,
+  "elapsed_seconds": 18.06,
+  "head": "c8c4dac11898c54d2124bb5ddb66f79b12485e3d",
+  "files": [
+    "src/company_wiki/source_catalog/download_budget.py",
+    "src/company_wiki/source_catalog/bounded_content_encoding.py",
+    "src/company_wiki/source_catalog/bounded_http.py",
+    "src/company_wiki/source_catalog/adapter_process.py",
+    "src/company_wiki/source_catalog/dayu_sdk_cli.py",
+    "src/company_wiki/source_catalog/official_source_flow.py",
+    "src/company_wiki/source_catalog/official_source_cli.py",
+    "tests/unit/test_bounded_content_encoding.py",
+    "tests/unit/test_bounded_http.py",
+    "tests/unit/test_adapter_process_budget.py",
+    "tests/integration/test_official_source_flow.py"
+  ],
+  "pushed": false,
+  "tests": "91 responsibility PASS /30.51s; two targeted new codec/transport mypy PASS; 28 wider legacy diagnostics same as baseline",
+  "real_sse": "gzip observed and decoded; served text/html, original PDF import refused; not original acquisition success",
+  "dayu_changes": 0,
+  "external_model_calls": 0
+}

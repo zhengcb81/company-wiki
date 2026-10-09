@@ -1,0 +1,35 @@
+src\company_wiki\source_catalog\download_budget.py:123: error: Unsupported operand types for - ("str" and "Decimal")  [operator]
+src\company_wiki\source_catalog\download_budget.py:123: note: Left operand is of type "Decimal | str"
+src\company_wiki\source_catalog\download_budget.py:136: error: Unsupported operand types for > ("Decimal" and "str")  [operator]
+src\company_wiki\source_catalog\download_budget.py:136: note: Right operand is of type "Decimal | str"
+src\company_wiki\source_catalog\download_budget.py:174: error: Unsupported operand types for > ("Decimal" and "str")  [operator]
+src\company_wiki\source_catalog\download_budget.py:174: note: Right operand is of type "Decimal | str"
+src\company_wiki\source_catalog\download_budget.py:199: error: Unsupported operand types for > ("Decimal" and "str")  [operator]
+src\company_wiki\source_catalog\download_budget.py:199: note: Right operand is of type "Decimal | str"
+src\company_wiki\source_catalog\adapter_process.py:360: error: "AdapterProcessError" has no attribute "reported_retryable"  [attr-defined]
+src\company_wiki\source_catalog\official_source_flow.py:126: error: Skipping analyzing "fitz": module is installed, but missing library stubs or py.typed marker  [import-untyped]
+src\company_wiki\source_catalog\official_source_flow.py:340: error: "Exception" has no attribute "capture_id"  [attr-defined]
+src\company_wiki\source_catalog\official_source_flow.py:341: error: "Exception" has no attribute "capture_receipt"  [attr-defined]
+src\company_wiki\source_catalog\official_source_flow.py:444: error: "Exception" has no attribute "capture_id"  [attr-defined]
+src\company_wiki\source_catalog\official_source_flow.py:445: error: "Exception" has no attribute "capture_receipt"  [attr-defined]
+src\company_wiki\source_catalog\official_source_flow.py:779: error: Unsupported operand types for + ("object" and "int")  [operator]
+src\company_wiki\source_catalog\official_source_flow.py:805: error: Unsupported operand types for < ("int" and "object")  [operator]
+src\company_wiki\source_catalog\official_source_flow.py:808: error: "Exception" has no attribute "acquisition_usage"  [attr-defined]
+src\company_wiki\source_catalog\official_source_flow.py:809: error: "Exception" has no attribute "acquisition_usage_complete"  [attr-defined]
+src\company_wiki\source_catalog\official_source_flow.py:810: error: "Exception" has no attribute "provider_started"  [attr-defined]
+src\company_wiki\source_catalog\official_source_flow.py:813: error: "Exception" has no attribute "acquisition_usage"  [attr-defined]
+src\company_wiki\source_catalog\official_source_flow.py:814: error: "Exception" has no attribute "capture_receipt"  [attr-defined]
+src\company_wiki\source_catalog\official_source_flow.py:820: error: "Exception" has no attribute "capture_id"  [attr-defined]
+src\company_wiki\source_catalog\official_source_flow.py:823: error: "Exception" has no attribute "acquisition_usage"  [attr-defined]
+src\company_wiki\source_catalog\official_source_flow.py:847: error: "Exception" has no attribute "capture_id"  [attr-defined]
+src\company_wiki\source_catalog\official_source_flow.py:848: error: "Exception" has no attribute "capture_receipt"  [attr-defined]
+src\company_wiki\source_catalog\official_source_flow.py:849: error: "Exception" has no attribute "acquisition_usage"  [attr-defined]
+src\company_wiki\source_catalog\official_source_flow.py:850: error: "Exception" has no attribute "acquisition_usage_complete"  [attr-defined]
+src\company_wiki\source_catalog\official_source_flow.py:851: error: "Exception" has no attribute "provider_started"  [attr-defined]
+src\company_wiki\source_catalog\dayu_sdk_cli.py:130: error: Cannot find implementation or library stub for module named "dayu.fins.downloaders.sec_downloader"  [import-not-found]
+src\company_wiki\source_catalog\dayu_sdk_cli.py:130: note: See https://mypy.readthedocs.io/en/stable/running_mypy.html#missing-imports
+src\company_wiki\source_catalog\dayu_sdk_cli.py:131: error: Cannot find implementation or library stub for module named "dayu.fins.pipelines.sec_filing_collection"  [import-not-found]
+src\company_wiki\source_catalog\dayu_sdk_cli.py:153: error: Cannot find implementation or library stub for module named "dayu.fins.downloaders.hkexnews_downloader"  [import-not-found]
+src\company_wiki\source_catalog\dayu_sdk_cli.py:154: error: Cannot find implementation or library stub for module named "dayu.fins.pipelines.cn_download_models"  [import-not-found]
+Found 28 errors in 4 files (checked 6 source files)
+

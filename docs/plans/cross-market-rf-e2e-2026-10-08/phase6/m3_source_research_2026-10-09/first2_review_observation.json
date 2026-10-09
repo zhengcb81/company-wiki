@@ -1,0 +1,190 @@
+{
+  "schema_version": "m3-independent-review-observation/1",
+  "observed_at": "2026-10-09T20:40:22.065290+00:00",
+  "reports": [
+    {
+      "company": "hk-00700",
+      "role": "storage",
+      "report": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-hk-00700\\reports\\storage.json",
+      "sha256": "1cb8483a70083f41757dab83856131b422cd8398c001fbfc03fce63983ce2ee4",
+      "executor_completion": "verified",
+      "checks": 15,
+      "findings": 6,
+      "fail_finding_map": {
+        "S05": [
+          "HK-00700-STORAGE-004"
+        ],
+        "S06": [
+          "HK-00700-STORAGE-001"
+        ],
+        "S08": [
+          "HK-00700-STORAGE-002"
+        ]
+      },
+      "status_counts": {
+        "BLOCKED": 2,
+        "FAIL": 3,
+        "N/A": 2,
+        "NOT_RUN": 1,
+        "PASS": 7
+      },
+      "findings_summary": [
+        {
+          "issue_id": "HK-00700-STORAGE-001",
+          "severity": "P1",
+          "category": "code",
+          "summary": "成功叙述包的业务选择漏掉核心增长、转化与约束，同时把财务附注碎片标作新业务。",
+          "root_cause_hypothesis": "推测PDF block分组后的宽泛corporate-development/project/progress触发把融资表整组晋级；主要业务句碎片和财务数值被门槛排除，有限span额度进一步挤占高价值组。须专家检查真实分组/排序而非只调选取数量。",
+          "root_hypothesis": null,
+          "recommendation": "以本轮原件建立预期的业务机制+反例段落清单；审查候选被拒原因和分组排名，修正表格/附注与业务上下文区分。复验年报p5-10及release p1-3同时保留机制、付费/价格/汇率/容量限定，p140融资表不被当新业务；维持有限profile、原文locator和partial范围。"
+        },
+        {
+          "issue_id": "HK-00700-STORAGE-002",
+          "severity": "P2",
+          "category": "data",
+          "summary": "年报摘要c7把特定商誉减值测试的结论扩成“无需其他减值”，缺少限定范围。",
+          "root_cause_hypothesis": "推测生成器将局部否定总结为公司全局否定；结构/证据回放只验证来源匹配，未检验范围与邻页对照。范围其实在同组选中span中可用。",
+          "root_hypothesis": null,
+          "recommendation": "生成结论附资产类别与适用单元，不把局部“无需减值”改写成全局“无其他减值”；用p223/224相邻上下文核验；消费端保持needs_review。复验原语言摘要明确商誉测试范围且与2.77/21.22亿元并存。"
+        },
+        {
+          "issue_id": "HK-00700-STORAGE-003",
+          "severity": "P1",
+          "category": "provider",
+          "summary": "28页真实earnings PPT的已计费摘要尝试截断，叙述产物仍缺失。",
+          "root_cause_hypothesis": "确定为供应商已计量输出长度终止；结构化请求/推理输出占用8192预算的具体内因未知，不能仅凭0content断言模型空回复或本地parser。",
+          "root_hypothesis": null,
+          "recommendation": "保存失败与原输入、预算及计价版本；专家在获授权的有限后续批次内采用更紧凑的主题分组/输出契约并验证供应商实际token字段，不无条件重复同一请求或提高全局预算。复验PPT p7-11、p15、p18-20的计划/实际/广告归属/算力约束，receipt、locator和费用闭合。"
+        },
+        {
+          "issue_id": "HK-00700-STORAGE-004",
+          "severity": "P2",
+          "category": "code",
+          "summary": "H1解析因图片封面/封底两页opaque终止整个叙述链，正文可用但有限摘要缺失。",
+          "root_cause_hypothesis": "确定当前guard会因任一opaque页拒绝；推测PDF叙述路径未对图片封面执行有界OCR/角色分类，无法获得版本化非业务页证据。故障并非H1原件损坏或日期伪造。",
+          "root_hypothesis": null,
+          "recommendation": "在既定OCR/空间/时间限制内提取封面身份、识别联系方式并记录该页角色/质量；无法确定内容时仍明确失败。修复后复验同SHA122页的正文业务选择与完整locator，不修改源字节或把reviewer结果算executor PASS。"
+        },
+        {
+          "issue_id": "HK-00700-STORAGE-005",
+          "severity": "P2",
+          "category": "provider",
+          "summary": "最新业绩电话会问答未取得，call-only目标和约束仍未知。",
+          "root_cause_hypothesis": "外部工具市场能力和官方当前URL可达性限制；初始not_configured为已纠正wrapper问题，不能把它当最终根因。",
+          "root_hypothesis": null,
+          "recommendation": "后续有可用、授权的官方记录路线时只在有限scope内获取原语言问答并登记source_id/locator；尚不可用时继续not_available/unknown，无新增人工许可链、不以其他公司或虚拟问答替代。"
+        },
+        {
+          "issue_id": "HK-00700-STORAGE-006",
+          "severity": "P3",
+          "category": "observability",
+          "summary": "本轮只实测同generation零费用复用，未实测原文/配置/generator变化后的缓存失效。",
+          "root_cause_hypothesis": "本轮有限测试意图覆盖同版本复用，没有失效变更实验；这是覆盖缺口，不是已观察到错误缓存命中。",
+          "root_hypothesis": null,
+          "recommendation": "在专家自己的隔离测试根用有界夹具分别改变原文、配置、generator版本，确认generation/key变化与旧包拒用/新请求计划，避免重新付费和污染executor库。记录各case实际行为后才声明失效已测。"
+        }
+      ]
+    },
+    {
+      "company": "cn-688012",
+      "role": "fetch",
+      "report": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\reports\\fetch.json",
+      "sha256": "f205a5c554c35480e1c9ff48ffffa4330de83829ac073603d9a477bb4048a6e2",
+      "executor_completion": "verified",
+      "checks": 23,
+      "findings": 7,
+      "fail_finding_map": {
+        "F04": [
+          "CN688012-FETCH-001"
+        ],
+        "F08-PERIOD": [
+          "CN688012-FETCH-006"
+        ],
+        "F08-JSON": [
+          "CN688012-FETCH-003"
+        ],
+        "F10-RECEIPT": [
+          "CN688012-FETCH-002"
+        ],
+        "F13-PROJECTION": [
+          "CN688012-FETCH-007"
+        ]
+      },
+      "status_counts": {
+        "BLOCKED": 4,
+        "FAIL": 5,
+        "N/A": 1,
+        "NOT_RUN": 3,
+        "PASS": 10
+      },
+      "findings_summary": [
+        {
+          "issue_id": "CN688012-FETCH-001",
+          "severity": "P1",
+          "category": "code",
+          "summary": "官方公告 collector 拒绝所有非 identity 编码，八件重要原件未取得",
+          "root_cause_hypothesis": "已读 bounded_http.py:76-81：任何非空/non-identity Content-Encoding 在读正文前终止。真实SSE八次的具体编码未保存，不能从本观察推断gzip/br；现行共用能力缺口由真实sync/async+MockTransport gzip/deflate RED四例支持。",
+          "root_hypothesis": null,
+          "recommendation": "在CWP共用有界transport实现明确允许的解码，保留wire/entity独立计量、双字节上限、硬deadline、错误/超限拒绝与原始失败历史。先离线合法/异常/炸弹/截断测试，再新attempt有限重跑八件及优先发行/募投资料，使用CWP校验入库，禁止靠去掉上限或另行无界请求放行。"
+        },
+        {
+          "issue_id": "CN688012-FETCH-002",
+          "severity": "P2",
+          "category": "observability",
+          "summary": "失败收据丢失已观察的 Content-Encoding，零占位不能说明实际零用量",
+          "root_cause_hypothesis": "bounded_http._headers 读头但 ProviderBudgetStop 没带头；official_source_cli.py:160附近只投影capture_id/usage/complete/provider_started，缺已观察传输状态。原始占位与最终未知容易被下游误读。",
+          "root_hypothesis": null,
+          "recommendation": "沿现有失败receipt增加有限白名单传输观察，保存已观察status/type/编码及wire/entity测量basis；未读/不完整usage保持null并独立记录complete=false。不要凭编码错误猜实际传输为0或凭后续known0核销旧unknown。"
+        },
+        {
+          "issue_id": "CN688012-FETCH-003",
+          "severity": "P1",
+          "category": "code",
+          "summary": "官方多公司 SSE JSON 已取得，但当前 CWP 仅能解析单 root content，未形成 SourceRef/EvidenceSpan 链",
+          "root_cause_hypothesis": "现行JSON能力为单电话会content设计，无法承载SSE datas[0].records多记录/分页/归属结构；这属于未支持的规范化能力，不是资料无价值或电话会N/A。",
+          "root_hypothesis": null,
+          "recommendation": "在CWP增加来源保真的一般JSON记录抽取/回放或明确SSE adapter，注册每个原页SHA与locator、正确元数据和有限分页group；保存7回答/1另类发言/15未答/1预征集与2未归属平台记录，不合并TXT冒充original。新attempt对父级数组/duplicate/跨公司/JSONPointer测试并通过RF消费链复验。"
+        },
+        {
+          "issue_id": "CN688012-FETCH-004",
+          "severity": "P1",
+          "category": "data",
+          "summary": "2026年8月真实IR DOCX未获取，最新投资者沟通覆盖仍缺内容",
+          "root_cause_hypothesis": "资料发现链尚未定位可用附件；403是该mirror访问限制，204/小body只是本次特定查询结果，不能推断整个官方源无资料。此审查不声称已找到正确附件URL。",
+          "root_hypothesis": null,
+          "recommendation": "沿已配置官方来源继续有界定位公司ID145565对应发布列表与附件，核对标题/日期/文件格式并入CWP；如仍不可得保留data gap与恢复入口，不能拿年度PDF、SSE活动或snippet替代真实DOCX。与JSON/编码修复合并复验，不新增人工审批链。"
+        },
+        {
+          "issue_id": "CN688012-FETCH-005",
+          "severity": "P2",
+          "category": "data",
+          "summary": "FY24 既有原件元数据仍无精确SHA可用性日期及期间，正式RF复用受阻",
+          "root_cause_hypothesis": "legacy元数据没有可审计source-clock绑定；现有来源资格门正确拒绝，把独立事件日期用于同SHA原件需额外证据。缺口不是另一次下载许可。",
+          "root_hypothesis": null,
+          "recommendation": "在CWP以同SHA官方索引/不可变来源历史恢复确切FY24期间和公开/先前可用证据；无法证明保持unknown。补齐后只做reuse-only本地路径和publicopen复验，期望0下载且不改原件；不抓不同SHA文件后覆盖旧版本日期。"
+        },
+        {
+          "issue_id": "CN688012-FETCH-006",
+          "severity": "P2",
+          "category": "code",
+          "summary": "RF把合法省略的半年报期间与FF已解析H1比较后拒绝",
+          "root_cause_hypothesis": "source_preparation._validate_v2_candidate仅annual_report为省略period处理默认，其他kind直接比较handle H1与request None。失败被标stage=source_reader，实际在verified open前的候选合同检查触发。",
+          "root_hypothesis": null,
+          "recommendation": "统一当前可选请求字段与resolved candidate语义：仅对显式period做严格一致性检查，对可唯一解析的半年度保留已验证H1；未知/歧义/显式错误必须拒绝。以这两份真实冻结请求/FF response作零网络回归，再新attempt RF→FF→CWP reuse-only验证0下载；不要放松错期间保护。"
+        },
+        {
+          "issue_id": "CN688012-FETCH-007",
+          "severity": "P3",
+          "category": "observability",
+          "summary": "交接及outcome文字把致辞算进7条回答，与原页分类及24条总量不一致",
+          "root_cause_hypothesis": "手写可读总结与结构归属表计数未共同生成；未发现底层归属表/7条回答丢失或公司错误归属。",
+          "root_hypothesis": null,
+          "recommendation": "保留封存原文字与本finding；下一attempt从记录类型生成各类计数，明确“回答”与“另类发言”定义，并核验各类加总24。"
+        }
+      ]
+    }
+  ],
+  "acceptance": "report hashes and FAIL mapping verified; research findings require remediation, not PASS",
+  "execution_modified": false,
+  "mapping_note": "Skill permits finding check_ids or check finding_ids; initial coordinator assertion required one shape and failed, corrected without editing reports."
+}

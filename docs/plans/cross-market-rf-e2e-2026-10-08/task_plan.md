@@ -1,5 +1,17 @@
 # 三市场真实收入预测端到端审计
 
+## 最新 M3 节点（2026-10-09 20:50 UTC；JSON为实际事件时间）
+
+**Next Step：** 五独立报告已交付（HK存储/采集、CN存储/采集、US存储），全部保留物质问题；US采集/HK流程正在运行，共用HTTP接口独立工程审查占第三槽，其余五公司审查顺次占空槽。MAIN同时TDD修共用代码，不等待逐文件人工签收。12审齐后专家整合原64与本轮新根因；当前goal仍active，M4/NVDA/池loop及后续八家未开始。
+
+- 电话会parser0.3狭义工程由独立US-storage接受（26责任tests、旧0.2完整指纹、新50locator回放），已正常合本地master cdbdf148。六分析师/六QA父组正确；selected仍4/6QA，安全/多模型/ROI遗漏继续FAIL，未重跑付费摘要或改旧executor。主线推送/精确CI尚待本轮发布，见main-merge.json。
+- 合法压缩原件按wire和entity双计量、统一有界codec+父桥/capture实现，TDD21RED、桥13RED/34PASS、iterator1RED后91责任/联调PASS，全部自有TEMP恢复。source c8c4dac1已正常commit，隔离支线正常push2512PASS/148.18秒已完成；尚未并主运行时，独立工程审查进行中。新codec/transport额外类型PASS，其余扩展类型范围既有28诊断未加新门禁。见[HTTP施工](phase6/m3_source_research_2026-10-09/http_content_coding_root/IMPLEMENTATION.md)。
+- 真实SSE已观察gzip，但实际返回HTTP200 HTML（wire3872、entity7373），PDF入库正确拒绝：编码工程恢复不等于公告原件已取得。此前八次unknown不以新已知0核销，完整真实探针TEMP恢复。关键原件仍需可用官方来源新attempt，不能放松mime/hash。
+- 新审确认：RF可选半年期间None误拒是代码合同错误；不能按executor违规处理。业务选择漏核心内容/过选融资表、H1封面/联系方式opaque阻断、季报累计与季度限定丢失、context_group半句消费均列共用根修。摘要thinking/purpose由现有配置入口控制的施工仍待，不提output cap/不盲重复收费。
+- 已交付报告SHA/FAIL映射见[first5观察](phase6/m3_source_research_2026-10-09/first5_review_observation.json)。HK公告已有web3缺未并入matrix，而非原包丢失；摘录重排/日期helper/矩阵call IDs问题按真实证据区分执行和项目机制，不倒改冻结证据。
+- 当前新增模型/付费0；原件、production config、所有封存run/AUTO/work、原64映射、Dayu/邻仓owner WIP保护。累计USD20/2,000,000tokens继续含旧unknown/FX，后续固定八家仍仅登记，不提前换目标。
+
+
 ## 最新 M3 节点（2026-10-09 20:15 UTC）
 
 **Next Step：** 三executor均已封存partial/完整证据；首批独立HK-storage、CN-fetch、US-storage正在审查，余下九份按槽位分批，随后独立专家整合原64与本轮新问题。本次施工/费用/外部限制不由executor自签PASS；M4/NVDA/池loop及后续八家仍待。

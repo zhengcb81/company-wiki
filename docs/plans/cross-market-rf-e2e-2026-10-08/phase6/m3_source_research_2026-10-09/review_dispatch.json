@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "observed_at": "2026-10-09T20:15:57.279449+00:00",
+  "observed_at": "2026-10-09T20:53:39.537985+00:00",
   "phase": "M3 independent review",
   "execution_outcomes": {
     "CN-688012": "partial",
@@ -11,13 +11,13 @@
     {
       "company": "CN-688012",
       "role": "storage",
-      "status": "not_started",
-      "agent": null
+      "status": "completed_report_verified",
+      "agent": "/root/m3_cn_storage_review"
     },
     {
       "company": "CN-688012",
       "role": "fetch",
-      "status": "started",
+      "status": "completed_report_verified",
       "agent": "/root/m3_cn_fetch_review"
     },
     {
@@ -35,20 +35,20 @@
     {
       "company": "HK-00700",
       "role": "storage",
-      "status": "started",
+      "status": "completed_report_verified",
       "agent": "/root/m3_hk_storage_review"
     },
     {
       "company": "HK-00700",
       "role": "fetch",
-      "status": "not_started",
-      "agent": null
+      "status": "completed_report_verified",
+      "agent": "/root/m3_hk_fetch_review"
     },
     {
       "company": "HK-00700",
       "role": "process",
-      "status": "not_started",
-      "agent": null
+      "status": "started",
+      "agent": "/root/m3_hk_process_review"
     },
     {
       "company": "HK-00700",
@@ -59,14 +59,14 @@
     {
       "company": "US-MSFT",
       "role": "storage",
-      "status": "started",
+      "status": "completed_report_verified",
       "agent": "/root/m3_us_storage_review"
     },
     {
       "company": "US-MSFT",
       "role": "fetch",
-      "status": "not_started",
-      "agent": null
+      "status": "started",
+      "agent": "/root/m3_us_fetch_review"
     },
     {
       "company": "US-MSFT",
@@ -81,5 +81,12 @@
       "agent": null
     }
   ],
-  "acceptance": "pending independent reports/expert; structural package not research PASS"
+  "acceptance": "pending independent reports/expert; structural package not research PASS",
+  "shared_engineering_review": {
+    "status": "started",
+    "agent": "/root/m3_http_integration_review",
+    "source_sha256_git": "c8c4dac11898c54d2124bb5ddb66f79b12485e3d",
+    "scope": "shared HTTP budget/codec/bridge/capture 11 files",
+    "extra_company_role_report": false
+  }
 }

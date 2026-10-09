@@ -1,0 +1,14 @@
+Push unit scope: unknown push range (1 paths)
+
+=== affected units and CI contract smoke ===
+====================== 2512 passed in 148.18s (0:02:28) =======================
+
+pre-push gate GREEN �� safe to push (then self-monitor CI).
+branch 'codex/m3-http-source-20261009' set up to track 'origin/codex/m3-http-source-20261009'.
+
+remote: 
+remote: Create a pull request for 'codex/m3-http-source-20261009' on GitHub by visiting:        
+remote:      https://github.com/zhengcb81/company-wiki/pull/new/codex/m3-http-source-20261009        
+remote: 
+To https://github.com/zhengcb81/company-wiki.git
+ * [new branch]        codex/m3-http-source-20261009 -> codex/m3-http-source-20261009

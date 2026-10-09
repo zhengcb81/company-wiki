@@ -1,0 +1,24 @@
+{
+  "observed_at": "2026-10-09T20:32:41.033203+00:00",
+  "stage": "tests_before_runtime_changes",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/test_bounded_content_encoding.py",
+    "-q",
+    "--tb=short",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-http-red-96od5ebo\\pytest"
+  ],
+  "repository": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+  "returncode": 1,
+  "elapsed_seconds": 6.254,
+  "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-http-red-96od5ebo",
+  "external_requests": 0,
+  "model_calls": 0,
+  "owned_temp_restored": true
+}

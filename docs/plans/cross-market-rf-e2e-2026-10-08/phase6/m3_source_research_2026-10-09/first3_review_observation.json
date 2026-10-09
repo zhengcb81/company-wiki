@@ -1,0 +1,89 @@
+{
+  "schema_version": "m3-independent-review-observation/1",
+  "observed_at": "2026-10-09T20:49:07.998945+00:00",
+  "reports": [
+    {
+      "company": "hk-00700",
+      "role": "storage",
+      "report": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-hk-00700\\reports\\storage.json",
+      "sha256": "1cb8483a70083f41757dab83856131b422cd8398c001fbfc03fce63983ce2ee4",
+      "checks": 15,
+      "findings": 6,
+      "fail_finding_map": {
+        "S05": [
+          "HK-00700-STORAGE-004"
+        ],
+        "S06": [
+          "HK-00700-STORAGE-001"
+        ],
+        "S08": [
+          "HK-00700-STORAGE-002"
+        ]
+      },
+      "executor_completion": "verified"
+    },
+    {
+      "company": "cn-688012",
+      "role": "fetch",
+      "report": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\reports\\fetch.json",
+      "sha256": "f205a5c554c35480e1c9ff48ffffa4330de83829ac073603d9a477bb4048a6e2",
+      "checks": 23,
+      "findings": 7,
+      "fail_finding_map": {
+        "F04": [
+          "CN688012-FETCH-001"
+        ],
+        "F08-PERIOD": [
+          "CN688012-FETCH-006"
+        ],
+        "F08-JSON": [
+          "CN688012-FETCH-003"
+        ],
+        "F10-RECEIPT": [
+          "CN688012-FETCH-002"
+        ],
+        "F13-PROJECTION": [
+          "CN688012-FETCH-007"
+        ]
+      },
+      "executor_completion": "verified"
+    },
+    {
+      "company": "us-msft",
+      "role": "storage",
+      "report": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-us-msft\\reports\\storage.json",
+      "sha256": "a6b5b29043fca12890d28c96a3034d4d82aa4507539bdf3bfee1de8fba6da8bd",
+      "checks": 21,
+      "findings": 9,
+      "fail_finding_map": {
+        "S05": [
+          "MSFT-STORAGE-005",
+          "MSFT-STORAGE-006"
+        ],
+        "S06": [
+          "MSFT-STORAGE-003",
+          "MSFT-STORAGE-004"
+        ],
+        "S07": [
+          "MSFT-STORAGE-004",
+          "MSFT-STORAGE-005",
+          "MSFT-STORAGE-006"
+        ],
+        "S08": [
+          "MSFT-STORAGE-007",
+          "MSFT-STORAGE-008"
+        ],
+        "S10": [
+          "MSFT-STORAGE-001",
+          "MSFT-STORAGE-002"
+        ],
+        "ENG04": [
+          "MSFT-STORAGE-004"
+        ]
+      },
+      "executor_completion": "verified"
+    }
+  ],
+  "execution_modified": false,
+  "acceptance": "three reports delivered and hashes/FAIL links verified; material findings open, not research PASS"
+}

@@ -1,0 +1,24 @@
+{
+  "observed_at": "2026-10-09T20:34:47.645905+00:00",
+  "stage": "isolated_codec_initial",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/test_bounded_content_encoding.py",
+    "tests/unit/test_bounded_http.py",
+    "-q",
+    "--tb=short",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-http-local-th4achqv\\pytest"
+  ],
+  "returncode": 1,
+  "elapsed_seconds": 3.401,
+  "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-http-local-th4achqv",
+  "external_requests": 0,
+  "model_calls": 0,
+  "owned_temp_restored": true
+}

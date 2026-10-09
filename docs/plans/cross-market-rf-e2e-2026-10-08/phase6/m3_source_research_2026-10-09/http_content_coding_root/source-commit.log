@@ -1,0 +1,10 @@
+[codex/m3-http-source-20261009 c8c4dac1] fix(source): decode official HTTP content within shared wire and entity limits
+ 11 files changed, 741 insertions(+), 63 deletions(-)
+ create mode 100644 src/company_wiki/source_catalog/bounded_content_encoding.py
+ create mode 100644 tests/unit/test_bounded_content_encoding.py
+
+runtime dependency declaration parity.............................(no files to check)Skipped
+ruff check (WU-1.2, mirrors CI).......................................................Passed
+mypy contract modules (FC-1204-c, mirrors CI).....................(no files to check)Skipped
+config doctor (WU-7.1, mirrors CI)................................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test).......................Passed

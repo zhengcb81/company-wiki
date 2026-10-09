@@ -1,0 +1,10 @@
+Merge made by the 'ort' strategy.
+ .../source_catalog/narrative_evidence.py           |  35 ++++--
+ .../source_catalog/transcript_layout.py            |  17 ++-
+ tests/contract/test_official_transcript_layouts.py |   5 +-
+ .../test_transcript_speaker_affiliation.py         | 125 +++++++++++++++++++++
+ tests/unit/test_native_document_pipeline.py        |   2 +-
+ tools/pre_push_gate.py                             |   1 +
+ 6 files changed, 169 insertions(+), 16 deletions(-)
+ create mode 100644 tests/contract/test_transcript_speaker_affiliation.py
+

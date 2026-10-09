@@ -1,0 +1,18 @@
+{
+  "observed_at": "2026-10-09T20:43:28.485021+00:00",
+  "command": [
+    "git",
+    "merge",
+    "--no-ff",
+    "codex/m3-transcript-role-20261009",
+    "-m",
+    "Merge generic transcript speaker parser 0.3 after independent review"
+  ],
+  "returncode": 0,
+  "elapsed_seconds": 0.654,
+  "pre_head": "18d635f2857f3189241d3518b5325097c9b21e26",
+  "post_head": "cdbdf148114331afba44a165719e28e9fd8767a6",
+  "independent_review": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-us-msft\\reports\\storage.json",
+  "accepted_scope": "ENG01-03 speaker/QA grouping/version compatibility/locator replay only; ENG04 coverage remains FAIL; no executor rewrite or new paid summary",
+  "pushed": false
+}

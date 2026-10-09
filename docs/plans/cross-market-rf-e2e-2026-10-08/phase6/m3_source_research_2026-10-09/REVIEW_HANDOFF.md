@@ -1,6 +1,6 @@
 # M3封存后四路独立审查交接
 
-状态：HK executor20:01:26、CN20:10:30、US20:10:32 UTC均封存partial/完整证据，协调员核对manifest SHA并创建各共享handoffs/execution.json；首批HK-storage、CN-fetch、US-storage独立reviewer已启动，其余九审未启动。尚无研究接受。三个运行路径、scope、agent与来源任务见cohort.json/README.md，实际调度见review_dispatch.json。只用每家本次独立run；原三家旧报告和64finding保持封存，可作退步比较，不给executor照答案。
+状态：HK executor20:01:26、CN20:10:30、US20:10:32 UTC均封存partial/完整证据，协调员核对manifest SHA并创建各共享handoffs/execution.json；HK-storage、HK-fetch、CN-fetch、CN-storage、US-storage五报告已交付且MAIN核对报告SHA和FAIL对应关系；HK-process、US-fetch继续运行，其余五审未启动。空槽安排共用HTTP整合独立工程审查后继续公司角色，不把其当第十三份公司报告。已交付有物质问题，不是研究接受。尚无研究接受。三个运行路径、scope、agent与来源任务见cohort.json/README.md，实际调度见review_dispatch.json。只用每家本次独立run；原三家旧报告和64finding保持封存，可作退步比较，不给executor照答案。
 
 ## 调度和写集
 
