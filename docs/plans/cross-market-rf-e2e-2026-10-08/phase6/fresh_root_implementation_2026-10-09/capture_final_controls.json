@@ -1,0 +1,34 @@
+{
+  "head": "68333bc360eb35b84f0616564953411e306f7610",
+  "observations": [
+    {
+      "control": "independent_cold_cli",
+      "deadline_seconds": 0.35,
+      "remote_gets": 0,
+      "client_attempts": 1,
+      "received_bytes": 0,
+      "provider_started": true,
+      "usage_complete": false,
+      "actual_receipt_raw_sha_match": true
+    },
+    {
+      "control": "mismatched_capture_filename_not_adopted",
+      "diagnostic": {
+        "status": "retained",
+        "reason": "invalid_retained_capture"
+      },
+      "result_bytes_unchanged": true,
+      "canonical_original_verified": true,
+      "wrong_filename_sentinel_unchanged": true,
+      "restored_descriptor_allows_owned_cleanup": true,
+      "current_delta": {
+        "schema_version": "1.0",
+        "response_bytes": 0,
+        "cost_usd": "0"
+      },
+      "download_events": 0
+    }
+  ],
+  "temp_absent": true,
+  "external_http_calls": 0
+}

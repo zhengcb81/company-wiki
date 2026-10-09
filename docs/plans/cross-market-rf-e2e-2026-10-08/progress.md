@@ -1,5 +1,13 @@
 # Progress
 
+## 2026-10-09：W04本地并线与W07持久入口补齐
+
+W04三提交c839af58→17e154a7→68333bc3完整并入410c456f；实现者74PASS，独立最终10PASS+2实际控验，原全部RED/旧报告保留并准备同步远端。完成后残留清理幂等、currentcap/SHA失败不删、未知/改动副本不删；cold总deadline保留真实attempt/GET/received/unknownusage区别。CWP原始公司资料及生产配置未改，安装delta空，远端CI待。
+
+ETc91f5f54已正常并main/push，owner evalSHA不变、workbuddy保留。FF完整原线已并ca8de49，但正常push590PASS/1FAIL/7SKIP/78subtests拦下旧schema文案断言，未上传；修稳定config_error+allowlist拒绝。MAIN同时查明无临时ETtool变量默认入口不工作，已TDD5FAIL/5PASS后79PASS，44c778b持久工具/密钥位置沿用selectedconfig/boundedview，正独立真实三跳联调。3个explicitETcheckout case是大节点实测、非日常CI环境，不能把SKIP算通过。FF远端/定点安装/真实FMP-M3待。
+
+W03在复用且旧提交已在main的干净worktree同步实施输出规划/语义组引用闭合；不改W04或FF写集。冻结64矩阵SHA未变，剩余工程/研究卡与M3/M4/loop持续ACTIVE，预算/旧unknown不重置。
+
 ## 2026-10-09 10:56 UTC：最新发布与大节点交接
 
 CWP正常push先阻止一条旧版本写死断言（1939PASS/1FAIL），修为generation行为契约后1940PASS/107.99s，b1888522已推master，精确CI37920455948 SUCCESS/102s。昨日CI根因子包closed；commit仍快速static。RF收尾5acad6a1/37919247211 SUCCESS。

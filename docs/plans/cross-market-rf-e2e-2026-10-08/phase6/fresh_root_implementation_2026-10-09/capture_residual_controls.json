@@ -1,0 +1,51 @@
+{
+  "head": "17e154a757ec0e6534b7b93d8bd599e4f02a8eca",
+  "observations": [
+    {
+      "control": "preinitialized_transport_trickle",
+      "deadline_seconds": 0.35,
+      "elapsed_seconds": 0.375,
+      "calls": [
+        "/original"
+      ],
+      "received_bytes": 9,
+      "complete": false,
+      "real_partial_sha_verified": true
+    },
+    {
+      "control": "preinitialized_transport_stall",
+      "deadline_seconds": 0.35,
+      "elapsed_seconds": 0.373,
+      "calls": [
+        "/original"
+      ],
+      "received_bytes": 8,
+      "complete": false,
+      "real_partial_sha_verified": true
+    },
+    {
+      "control": "cleanup_fault_after_durable_result",
+      "recover_status": "imported_new",
+      "download_events": 0,
+      "current_delta": {
+        "schema_version": "1.0",
+        "response_bytes": 0,
+        "cost_usd": "0"
+      },
+      "retained_body_exists_after_successful_replay": true,
+      "retained_descriptor_exists_after_successful_replay": true,
+      "inventory": [
+        {
+          "capture_id": "4d5ce3f96e1a49819924e93083093d39",
+          "request_id": "capture-fixture",
+          "content_sha256": "29406884848d43670f026c76e7cde95e06a4a29c205708c70ead0da6a27d144e",
+          "byte_size": 72,
+          "status": "retained"
+        }
+      ],
+      "retained_body_bytes": 72
+    }
+  ],
+  "temp_absent": true,
+  "external_http_calls": 0
+}

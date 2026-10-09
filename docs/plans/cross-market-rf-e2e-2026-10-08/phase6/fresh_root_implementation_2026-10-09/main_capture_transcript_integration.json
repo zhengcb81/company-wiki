@@ -1,0 +1,47 @@
+{
+  "schema_version": "fresh-main-integration/1",
+  "date": "2026-10-09",
+  "status": "W04_LOCAL_MERGED_PUBLICATION_PENDING_W07_PERSISTENT_LAUNCH_REVIEW",
+  "frozen_issue_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+  "W04": {
+    "source_tip": "68333bc360eb35b84f0616564953411e306f7610",
+    "main_merge": "410c456fa713fb46eca9f7de486f34a021b53673",
+    "implementer_passes": 74,
+    "independent_passes": 10,
+    "independent_actual_controls": 2,
+    "remote_CI": "pending",
+    "M3": "pending",
+    "installation_delta": []
+  },
+  "W07": {
+    "ET_main_published": "c91f5f54bc2a24e7b5d6e648dba3f9d578f5fa52",
+    "FF_local_main": "44c778b",
+    "initial_independent_FF_passes": 67,
+    "initial_independent_ET_passes": 73,
+    "configured_launch_local_passes": 79,
+    "configured_launch_independent": "pending",
+    "remote_CI": "pending",
+    "selected_installation": "pending",
+    "M3": "pending"
+  },
+  "invariants": {
+    "production_raw_modified": false,
+    "production_catalog_config_modified": false,
+    "Dayu_modified": false,
+    "IQS_modified": false,
+    "external_or_paid_calls": 0
+  },
+  "remaining_cards": [
+    "W03",
+    "W05",
+    "W06",
+    "W08",
+    "W09",
+    "W11",
+    "W12",
+    "W13",
+    "M3",
+    "M4",
+    "NVDA_loop"
+  ]
+}

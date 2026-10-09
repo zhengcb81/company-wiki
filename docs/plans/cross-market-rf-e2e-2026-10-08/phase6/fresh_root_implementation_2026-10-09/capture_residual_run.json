@@ -1,0 +1,28 @@
+{
+  "head": "17e154a757ec0e6534b7b93d8bd599e4f02a8eca",
+  "exit": 1,
+  "wall": 24.013,
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/contract/test_official_capture_recovery.py",
+    "-q",
+    "--tb=short",
+    "-k",
+    "same_capture_id or current_cap or invalid_retained_json_shapes or completion_record_write_failure or completed_result_wrong_shape or completed_replay or real_total_deadline or public_stall_cli or public_capture_cli or shared_budget or capture_different_sha",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w4r-oca2ba7i\\pytest",
+    "-o",
+    "cache_dir=C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w4r-oca2ba7i\\cache"
+  ],
+  "stdout": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\w4r-oca2ba7i\\\\pytest\", \"requested_basetemp_len\": 51, \"cwd_len\": 65, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\ncachedir: C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w4r-oca2ba7i\\cache\nrootdir: C:\\Users\\郑曾波\\.codex\\worktrees\\fresh-capture-20261009\\company-wiki\nconfigfile: pytest.ini\ncollected 39 items / 18 deselected / 21 selected\n\ntests\\contract\\test_official_capture_recovery.py F....................   [100%]\n\n================================== FAILURES ===================================\n______ test_real_total_deadline_stops_stream_and_retains_usage[trickle] _______\ntests\\contract\\test_official_capture_recovery.py:197: in test_real_total_deadline_stops_stream_and_retains_usage\n    assert 0 < caught.value.acquisition_usage[\"response_bytes\"] < len(BODY)\nE   assert 0 < 0\n============================== warnings summary ===============================\n..\\..\\..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nFAILED tests/contract/test_official_capture_recovery.py::test_real_total_deadline_stops_stream_and_retains_usage[trickle]\n=========== 1 failed, 20 passed, 18 deselected, 1 warning in 23.57s ===========\n",
+  "stderr": "",
+  "source_file_sha_verified": 6,
+  "temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w4r-oca2ba7i",
+  "temp_absent": true,
+  "production_config_sha_mtime_unchanged": true
+}
