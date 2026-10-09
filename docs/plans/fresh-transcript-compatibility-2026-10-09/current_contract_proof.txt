@@ -1,0 +1,3 @@
+{'fixture_declared': ('selective_narrative_parser', '0.1.1'), 'actual_producer_identity': ('selective_narrative_parser', '0.2.0'), 'produced_group_versions': ['0.2.0']}
+{'correctly_declared_current_package_replayed': '0.2.0', 'same_locators': True}
+owned TEMP restored

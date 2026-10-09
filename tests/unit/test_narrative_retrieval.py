@@ -16,14 +16,13 @@ from company_wiki.source_catalog.narrative_retrieval import (
     NarrativeEvidenceSearchError,
 )
 from company_wiki.source_catalog.narrative_evidence import (
-    NARRATIVE_PARSER_NAME,
-    NARRATIVE_PARSER_VERSION,
     NARRATIVE_SELECTOR_NAME,
     NARRATIVE_SELECTOR_VERSION,
     parse_transcript_text,
     select_narrative_evidence,
 )
 from company_wiki.source_contract import source_id_for_sha256
+from company_wiki.automation.narrative_formats import parser_component
 
 
 def _record(
@@ -95,6 +94,7 @@ def _transcript_bundle(tmp_path: Path) -> tuple[dict[str, Any], Path]:
         title="Example earnings call transcript.txt",
         existing_kind="investor_call_transcript",
     )
+    parser_name, parser_version = parser_component("text/plain", "transcript")
     record = {
         "sample_id": "T-UNIT",
         "title": "Example earnings call transcript.txt",
@@ -105,8 +105,8 @@ def _transcript_bundle(tmp_path: Path) -> tuple[dict[str, Any], Path]:
             "source_format": "transcript_txt",
             "language": "en",
             "existing_kind": "investor_call_transcript",
-            "parser_name": NARRATIVE_PARSER_NAME,
-            "parser_version": NARRATIVE_PARSER_VERSION,
+            "parser_name": parser_name,
+            "parser_version": parser_version,
             "parser_options": {},
             "selector_name": NARRATIVE_SELECTOR_NAME,
             "selector_version": NARRATIVE_SELECTOR_VERSION,

@@ -502,6 +502,7 @@ class NarrativeEvidenceResolver:
             parse_pdf,
             parse_transcript_text,
             select_narrative_evidence,
+            transcript_parser_contract,
         )
 
         summary = record["summary_input"]
@@ -522,6 +523,11 @@ class NarrativeEvidenceResolver:
             raise NarrativeEvidenceResolveError("unsupported narrative parser name")
         language = _required_string(contract, "language")
         source_format = _required_string(contract, "source_format")
+        if source_format in {"transcript_txt", "transcript_html"}:
+            try:
+                transcript_parser_contract(parser_version)
+            except ValueError as exc:
+                raise NarrativeEvidenceResolveError(str(exc)) from exc
         existing_kind = _required_string(contract, "existing_kind")
         max_selected = contract.get("max_selected")
         if isinstance(max_selected, bool) or not isinstance(max_selected, int) or max_selected < 1:
@@ -569,15 +575,30 @@ class NarrativeEvidenceResolver:
                 full_table_scan=full_table_scan,
                 table_pages=table_pages,
             )
-        elif source_format == "transcript_txt":
-            if suffix != ".txt":
-                raise NarrativeEvidenceResolveError("raw file extension differs from replay format")
+        elif source_format in {"transcript_txt", "transcript_html"}:
             if parser_options:
                 raise NarrativeEvidenceResolveError("transcript parser options must be empty")
-            try:
-                raw_text = raw_path.read_bytes().decode("utf-8-sig", errors="strict")
-            except UnicodeError as exc:
-                raise NarrativeEvidenceResolveError("transcript TXT is not valid UTF-8") from exc
+            if source_format == "transcript_txt":
+                if suffix != ".txt":
+                    raise NarrativeEvidenceResolveError("raw file extension differs from replay format")
+                try:
+                    raw_text = raw_path.read_bytes().decode("utf-8-sig", errors="strict")
+                except UnicodeError as exc:
+                    raise NarrativeEvidenceResolveError("transcript TXT is not valid UTF-8") from exc
+            else:
+                if suffix not in {".html", ".htm"}:
+                    raise NarrativeEvidenceResolveError("raw file extension differs from replay format")
+                from .transcript_text_extract import (
+                    TranscriptMaterialError,
+                    extract_transcript_material,
+                )
+                try:
+                    original_bytes = raw_path.read_bytes()
+                    material = extract_transcript_material(original_bytes, mime_type="text/html")
+                    material.verify(original_bytes)
+                except TranscriptMaterialError as exc:
+                    raise NarrativeEvidenceResolveError("transcript HTML byte lineage does not replay") from exc
+                raw_text = material.text_utf8
             parsed = parse_transcript_text(
                 raw_text,
                 source_id=source_id,
