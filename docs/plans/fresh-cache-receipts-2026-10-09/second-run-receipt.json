@@ -1,0 +1,1078 @@
+{
+  "schema_version": "fresh-cache-behavior-receipts/1",
+  "classification": "synthetic engineering observation; not real M3",
+  "source_baseline": "2350077ac31655d358e67390c6fbda129d80d7dc",
+  "test_sha256": "ca0b4bdcc03f8f85e22c01e6994af46fce2a2ebd9786bb96c14ed92b75965360",
+  "production_source_sha256": {
+    "src\\company_wiki\\automation\\narrative_batch.py": "13fe0fd5b33f247e584c5966c36772877e061f55541635adea538b76be2a0edb",
+    "src\\company_wiki\\automation\\narrative_generation.py": "645e92aa155c74871df56ac6c17fae1a2334304fb24729fc82cfae0ec8787852",
+    "src\\company_wiki\\automation\\narrative_formats.py": "58dc81ae9ebdda162c44675bdf613741d4d7e7593533edc0b1f7f4ee69ff8dd6",
+    "src\\company_wiki\\automation\\narrative_worker_factory.py": "0336ea409a12773bfbf9e093bd59ba66fc83c5cc421feb41831ef8873d112d01",
+    "src\\company_wiki\\automation\\narrative_http_model.py": "b1eb34662e52600a7d97d73c6a60032f7bad5dfe7e1168a32498560f7f534184",
+    "src\\company_wiki\\automation\\narrative_run_store.py": "29ca94f79a3e73f30f5c8241d09e8c6365061d24d4162ea5db9f7aa4a1f3cbc2",
+    "src\\company_wiki\\automation\\narrative_transport.py": "275352c84a5576630a7d9759bf0be0d108f1663f3bc7fe5d6503e2484b0c4372",
+    "src\\company_wiki\\source_catalog\\narrative_evidence.py": "fade99dacb8b607e040ca95808d3820679cb3679607728b54d930e0377e7a894"
+  },
+  "runs": [
+    {
+      "run_id": "baseline",
+      "fixture_kind": "synthetic",
+      "pins": {},
+      "request": {
+        "schema_version": "narrative-batch-request/1",
+        "run_id": "baseline",
+        "sources": [
+          {
+            "schema_version": "2.0",
+            "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+            "source_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+            "content_sha256": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+            "byte_size": 95,
+            "mime_type": "text/plain"
+          },
+          {
+            "schema_version": "2.0",
+            "document_id": "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+            "source_id": "urn:company-wiki:source:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+            "content_sha256": "812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+            "byte_size": 98,
+            "mime_type": "text/html"
+          }
+        ],
+        "profile": "P2",
+        "max_seconds": 40.0,
+        "max_tokens": 100000,
+        "max_cost_usd": "1",
+        "model": {
+          "allow_local_http": true,
+          "api_key_env": "W12_SYNTHETIC_MODEL_KEY",
+          "endpoint": "http://127.0.0.1:53342/v1/chat/completions",
+          "max_output_tokens": 400,
+          "max_request_bytes": 262144,
+          "max_response_bytes": 262144,
+          "model_id": "stub-model",
+          "timeout_seconds": 5
+        },
+        "pricing": {
+          "version": "fixture-price/1",
+          "input_micro_usd_per_million_tokens": 1000000,
+          "output_micro_usd_per_million_tokens": 2000000
+        },
+        "max_final_bytes": 2097152,
+        "max_persistent_bytes": 1073741824,
+        "max_scratch_bytes": 2147483648
+      },
+      "batch": {
+        "budget": {
+          "estimated_micro_usd": 222,
+          "tokens": 184,
+          "unknown_reservations": 0,
+          "unsettled_reservations": 0
+        },
+        "documents": [
+          {
+            "artifact_ref": {
+              "artifact_version_id": "narrative-41aa5fe95a5a4bf189eda4652be056f3",
+              "byte_size": 4063,
+              "content_sha256": "a81fad8670b8da5385bb734d81c8276d8ecab788b506a0d1d443846a55c34219",
+              "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "source_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "source_sha256": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8"
+            },
+            "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+            "errors": [],
+            "status": "completed"
+          },
+          {
+            "artifact_ref": {
+              "artifact_version_id": "narrative-32ddf0f7d1c343b1a350e2d8e050a10d",
+              "byte_size": 3533,
+              "content_sha256": "52ad8652d7925232516a1fb4c22f35f1214ec7e78a8edf0c2a996684d9b0e18b",
+              "document_id": "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+              "source_id": "urn:company-wiki:source:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+              "source_sha256": "812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c"
+            },
+            "document_id": "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+            "errors": [],
+            "status": "completed"
+          }
+        ],
+        "run_id": "baseline",
+        "schema_version": "narrative-batch-result/1",
+        "status": "completed",
+        "storage": {
+          "persistent_added_bytes": 303039,
+          "scratch_peak_bytes": 4063
+        }
+      },
+      "wall_seconds": 5.0964712999993935,
+      "batch_calls": {
+        "summarize": 2,
+        "model": 2,
+        "network_connect": 2,
+        "select": 2,
+        "parse": 4,
+        "verify": 2,
+        "replay": 2
+      },
+      "public_read_calls": {
+        "replay": 2,
+        "parse": 2
+      },
+      "duration_seconds": {
+        "batch": {
+          "model_duration": 0.021718400006648153,
+          "parse_duration": 0.011058899981435388,
+          "replay_duration": 0.0017843999958131462,
+          "select_duration": 0.043445800023619086,
+          "summarize_duration": 0.15016719998675399,
+          "verify_duration": 0.04103200000827201
+        },
+        "public_read": {
+          "model_duration": 0,
+          "parse_duration": 0.010077299986733124,
+          "replay_duration": 0.010674599994672462,
+          "select_duration": 0,
+          "summarize_duration": 0,
+          "verify_duration": 0
+        }
+      },
+      "model_http_posts": 2,
+      "source_provider_calls": 0,
+      "external_connections": 0,
+      "model_wire": [
+        {
+          "model": "stub-model",
+          "temperature": null,
+          "max_tokens": 400,
+          "prompt_version": null
+        },
+        {
+          "model": "stub-model",
+          "temperature": null,
+          "max_tokens": 400,
+          "prompt_version": null
+        }
+      ],
+      "reservations": [
+        {
+          "attempt_id": "813311f40a0a46bd8e328a520df7dc71",
+          "run_id": "baseline",
+          "job_id": "3f4c6304b7f11ab9",
+          "request_sha256": "bbfca03a993ebd1872cdef3987b0bcb74a2baaa90071e43c676f65e2c99eb572",
+          "input_tokens_bound": 3883,
+          "max_output_tokens": 400,
+          "output_bytes_bound": 2097152,
+          "reserved_micro_usd": 4683,
+          "usage_status": "known",
+          "input_tokens": 73,
+          "output_tokens": 19,
+          "estimated_micro_usd": 111,
+          "response_sha256": "f1e7efd756cbeee2b39e443e24dda34fb393306311fb16850a2ac986dfd328f4",
+          "error_code": null,
+          "output_bytes": 4063,
+          "output_sha256": "a81fad8670b8da5385bb734d81c8276d8ecab788b506a0d1d443846a55c34219",
+          "reserved_at": "2026-10-09T17:43:38Z",
+          "usage_settled_at": "2026-10-09T17:43:38Z",
+          "output_settled_at": "2026-10-09T17:43:40Z"
+        },
+        {
+          "attempt_id": "d6ed0daa19b842ed8ce55a10ba8a782d",
+          "run_id": "baseline",
+          "job_id": "8094ce3e9be5ceaa",
+          "request_sha256": "7ade0e11add5aee6822297f739d08fed615d76492e775f6f0edcfb9761502327",
+          "input_tokens_bound": 3902,
+          "max_output_tokens": 400,
+          "output_bytes_bound": 2097152,
+          "reserved_micro_usd": 4702,
+          "usage_status": "known",
+          "input_tokens": 73,
+          "output_tokens": 19,
+          "estimated_micro_usd": 111,
+          "response_sha256": "d53dbc2575f529f2201d2966a888c060981e641fcc89348fed239daed887503d",
+          "error_code": null,
+          "output_bytes": 3533,
+          "output_sha256": "52ad8652d7925232516a1fb4c22f35f1214ec7e78a8edf0c2a996684d9b0e18b",
+          "reserved_at": "2026-10-09T17:43:39Z",
+          "usage_settled_at": "2026-10-09T17:43:39Z",
+          "output_settled_at": "2026-10-09T17:43:40Z"
+        }
+      ],
+      "snapshot": {
+        "input_hash": "74c9c3be5688e4a47fada2bf3a492d4b300f419c93c64adbfc97c8025b3645e1",
+        "job_ids": [
+          "0d66c6e73929d81a",
+          "3f4c6304b7f11ab9",
+          "8094ce3e9be5ceaa",
+          "c0d75eb503a8b39d",
+          "d3a37efedd81204e",
+          "e702ce9393d0a233"
+        ],
+        "binding": {
+          "execution_versions": {
+            "adapter": "openai-compatible-http/1",
+            "document_normalization": "1.0.0",
+            "handlers": {
+              "source.narrative_select": "1.1.0",
+              "source.narrative_summarize": "1.1.0",
+              "source.narrative_verify": "1.1.0"
+            },
+            "model_request_schema": "narrative-model-request/1.4",
+            "parser": "0.1.1",
+            "prompt": "1.7.0",
+            "selector": "0.6.0"
+          },
+          "generation_manifests": {
+            "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c": {
+              "generation_sha256": "73856bfca5cd373e19850b2632d41f479fe0d4af91c26255b436608baeaa5454",
+              "settings_sha256": "0467916f2cbe6724542c3c55853226056acad8c95131a0814022343037fe029e",
+              "source_inputs": {
+                "parser_component": {
+                  "name": "cwp_document_normalization",
+                  "version": "1.0.0"
+                },
+                "source_metadata": {
+                  "document_kind": "investor_relations",
+                  "language": "en",
+                  "source_class": "filing",
+                  "title": "Acme business update"
+                },
+                "source_ref": {
+                  "byte_size": 98,
+                  "content_sha256": "812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+                  "document_id": "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+                  "mime_type": "text/html",
+                  "schema_version": "2.0",
+                  "source_id": "urn:company-wiki:source:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c"
+                }
+              }
+            },
+            "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8": {
+              "generation_sha256": "e754823248dda137b001b3c2f9bb445d2ea309ade9cd44f2c0b75db5e109b436",
+              "settings_sha256": "9687b5d8ceae36a2bb65e8f98bee66ff046ddc2d53b041e907c10bc6a83f772b",
+              "source_inputs": {
+                "material_extractor": "transcript-original-text/1.0.0",
+                "parser_component": {
+                  "name": "selective_narrative_parser",
+                  "version": "0.2.0"
+                },
+                "source_metadata": {
+                  "document_kind": "investor_call_transcript",
+                  "language": "en",
+                  "source_class": "transcript",
+                  "title": "Acme business update"
+                },
+                "source_ref": {
+                  "byte_size": 95,
+                  "content_sha256": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+                  "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+                  "mime_type": "text/plain",
+                  "schema_version": "2.0",
+                  "source_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8"
+                }
+              }
+            }
+          },
+          "generation_settings": {
+            "0467916f2cbe6724542c3c55853226056acad8c95131a0814022343037fe029e": {
+              "bundle_producer": "1.0.0",
+              "bundle_schema": "narrative-bundle/2.0",
+              "execution_versions": {
+                "adapter": "openai-compatible-http/1",
+                "handlers": {
+                  "source.narrative_select": "1.1.0",
+                  "source.narrative_summarize": "1.1.0",
+                  "source.narrative_verify": "1.1.0"
+                },
+                "model_request_schema": "narrative-model-request/1.4",
+                "prompt": "1.7.0",
+                "selector": "0.6.0"
+              },
+              "model": {
+                "endpoint": "http://127.0.0.1:53342/v1/chat/completions",
+                "max_output_tokens": 400,
+                "model_id": "stub-model",
+                "output_token_field": "max_tokens"
+              },
+              "profile": "P2",
+              "schema_version": "narrative-generation/1",
+              "select_schema": "narrative-select-result/2.0",
+              "summary_schema": "narrative-summary-result/2.0"
+            },
+            "9687b5d8ceae36a2bb65e8f98bee66ff046ddc2d53b041e907c10bc6a83f772b": {
+              "bundle_producer": "1.0.0",
+              "bundle_schema": "narrative-bundle/2.0",
+              "execution_versions": {
+                "adapter": "openai-compatible-http/1",
+                "handlers": {
+                  "source.narrative_select": "1.1.0",
+                  "source.narrative_summarize": "1.1.0",
+                  "source.narrative_verify": "1.1.0"
+                },
+                "model_request_schema": "narrative-model-request/1.4",
+                "parser": "0.1.1",
+                "prompt": "1.7.0",
+                "selector": "0.6.0"
+              },
+              "model": {
+                "endpoint": "http://127.0.0.1:53342/v1/chat/completions",
+                "max_output_tokens": 400,
+                "model_id": "stub-model",
+                "output_token_field": "max_tokens"
+              },
+              "profile": "P2",
+              "schema_version": "narrative-generation/1",
+              "select_schema": "narrative-select-result/2.0",
+              "summary_schema": "narrative-summary-result/2.0"
+            }
+          },
+          "normalization_config": null,
+          "read_policy_schema_version": "3.0",
+          "read_policy_sha256": "77134db65ac55f88de6debfe0d0bb02472dfde749b1166c004e46551e08ee31f",
+          "request_sha256": "ca9269faaeb4bf3133a27fd25636980cc2f670bff5fabc55da3922dc16ba88a9",
+          "reused_artifact_pins": {},
+          "schema_version": "narrative-run-binding/3",
+          "source_facts": [
+            {
+              "canonical_entity_id": null,
+              "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "document_kind": "investor_call_transcript",
+              "fiscal_period": null,
+              "fiscal_year": null,
+              "form_type": null,
+              "market": "US",
+              "period_end": null,
+              "published_date": "2026-08-26",
+              "security_id": "ACME"
+            },
+            {
+              "canonical_entity_id": null,
+              "document_id": "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+              "document_kind": "investor_relations",
+              "fiscal_period": null,
+              "fiscal_year": null,
+              "form_type": null,
+              "market": "US",
+              "period_end": null,
+              "published_date": "2026-08-26",
+              "security_id": "ACME"
+            }
+          ],
+          "source_read_policies": {
+            "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c": "3d9252a9c84a047fddefe333c29f0bdd7cebbe1c0ab3c945d48e5f398e88f4ef",
+            "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8": "c1b6af97cc4371cf2a0d95afe3879ac0c61e3fdb8ab5144151d2b767cd4806e8"
+          }
+        },
+        "jobs": [
+          {
+            "type": "source.narrative_verify",
+            "status": "succeeded",
+            "error": null,
+            "attempts": 1
+          },
+          {
+            "type": "source.narrative_summarize",
+            "status": "succeeded",
+            "error": null,
+            "attempts": 1
+          },
+          {
+            "type": "source.narrative_summarize",
+            "status": "succeeded",
+            "error": null,
+            "attempts": 1
+          },
+          {
+            "type": "source.narrative_select",
+            "status": "succeeded",
+            "error": null,
+            "attempts": 1
+          },
+          {
+            "type": "source.narrative_verify",
+            "status": "succeeded",
+            "error": null,
+            "attempts": 1
+          },
+          {
+            "type": "source.narrative_select",
+            "status": "succeeded",
+            "error": null,
+            "attempts": 1
+          }
+        ]
+      },
+      "public": {
+        "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8": {
+          "reference": {
+            "schema_version": "narrative-ref/1",
+            "artifact_version_id": "narrative-41aa5fe95a5a4bf189eda4652be056f3",
+            "artifact_sha256": "a81fad8670b8da5385bb734d81c8276d8ecab788b506a0d1d443846a55c34219",
+            "byte_size": 4063,
+            "source_ref": {
+              "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "source_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "content_sha256": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "byte_size": 95,
+              "mime_type": "text/plain",
+              "schema_version": "2.0"
+            }
+          },
+          "bundle_sha256": "a81fad8670b8da5385bb734d81c8276d8ecab788b506a0d1d443846a55c34219",
+          "versions": {
+            "bundle_producer": "1.0.0",
+            "material": "transcript-original-text/1.0.0",
+            "model": "stub-model",
+            "parser": "0.2.0",
+            "prompt": "1.7.0",
+            "selector": "0.6.0"
+          },
+          "replay_receipt": {
+            "as_of_date": "2026-10-09",
+            "locator_count": 1,
+            "manifest": {
+              "byte_size": 95,
+              "canonical_entity_id": null,
+              "collector_name": "official-original-import",
+              "collector_version": "1.0.0",
+              "content_sha256": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "display_name": "Acme",
+              "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "document_kind": "investor_call_transcript",
+              "fiscal_period": null,
+              "fiscal_year": null,
+              "form_type": null,
+              "language": "en",
+              "market": "US",
+              "mime_type": "text/plain",
+              "period_end": null,
+              "provider": "official",
+              "provider_document_id": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "published_date": "2026-08-26",
+              "retrieved_at": "2026-10-09T00:00:00Z",
+              "security_id": "ACME",
+              "source_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "source_url": "https://official.example/Acme/update",
+              "title": "Acme business update"
+            },
+            "narrative_ref": {
+              "artifact_sha256": "a81fad8670b8da5385bb734d81c8276d8ecab788b506a0d1d443846a55c34219",
+              "artifact_version_id": "narrative-41aa5fe95a5a4bf189eda4652be056f3",
+              "byte_size": 4063,
+              "schema_version": "narrative-ref/1",
+              "source_ref": {
+                "byte_size": 95,
+                "content_sha256": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+                "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+                "mime_type": "text/plain",
+                "schema_version": "2.0",
+                "source_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8"
+              }
+            },
+            "quality_status": "needs_review",
+            "read_at": "2026-10-09T17:43:43.408157+00:00",
+            "replay_status": "verified",
+            "schema_version": "narrative-read-receipt/1",
+            "selection_status": "selected",
+            "source_read_policy_sha256": "c1b6af97cc4371cf2a0d95afe3879ac0c61e3fdb8ab5144151d2b767cd4806e8",
+            "status": "ok"
+          }
+        },
+        "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c": {
+          "reference": {
+            "schema_version": "narrative-ref/1",
+            "artifact_version_id": "narrative-32ddf0f7d1c343b1a350e2d8e050a10d",
+            "artifact_sha256": "52ad8652d7925232516a1fb4c22f35f1214ec7e78a8edf0c2a996684d9b0e18b",
+            "byte_size": 3533,
+            "source_ref": {
+              "document_id": "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+              "source_id": "urn:company-wiki:source:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+              "content_sha256": "812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+              "byte_size": 98,
+              "mime_type": "text/html",
+              "schema_version": "2.0"
+            }
+          },
+          "bundle_sha256": "52ad8652d7925232516a1fb4c22f35f1214ec7e78a8edf0c2a996684d9b0e18b",
+          "versions": {
+            "bundle_producer": "1.0.0",
+            "material": null,
+            "model": "stub-model",
+            "parser": "1.0.0",
+            "prompt": "1.7.0",
+            "selector": "0.6.0"
+          },
+          "replay_receipt": {
+            "as_of_date": "2026-10-09",
+            "locator_count": 1,
+            "manifest": {
+              "byte_size": 98,
+              "canonical_entity_id": null,
+              "collector_name": "official-original-import",
+              "collector_version": "1.0.0",
+              "content_sha256": "812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+              "display_name": "Acme",
+              "document_id": "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+              "document_kind": "investor_relations",
+              "fiscal_period": null,
+              "fiscal_year": null,
+              "form_type": null,
+              "language": "en",
+              "market": "US",
+              "mime_type": "text/html",
+              "period_end": null,
+              "provider": "official",
+              "provider_document_id": "812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+              "published_date": "2026-08-26",
+              "retrieved_at": "2026-10-09T00:00:00Z",
+              "security_id": "ACME",
+              "source_id": "urn:company-wiki:source:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+              "source_url": "https://official.example/Acme/update",
+              "title": "Acme business update"
+            },
+            "narrative_ref": {
+              "artifact_sha256": "52ad8652d7925232516a1fb4c22f35f1214ec7e78a8edf0c2a996684d9b0e18b",
+              "artifact_version_id": "narrative-32ddf0f7d1c343b1a350e2d8e050a10d",
+              "byte_size": 3533,
+              "schema_version": "narrative-ref/1",
+              "source_ref": {
+                "byte_size": 98,
+                "content_sha256": "812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+                "document_id": "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+                "mime_type": "text/html",
+                "schema_version": "2.0",
+                "source_id": "urn:company-wiki:source:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c"
+              }
+            },
+            "quality_status": "needs_review",
+            "read_at": "2026-10-09T17:43:45.428004+00:00",
+            "replay_status": "verified",
+            "schema_version": "narrative-read-receipt/1",
+            "selection_status": "selected",
+            "source_read_policy_sha256": "3d9252a9c84a047fddefe333c29f0bdd7cebbe1c0ab3c945d48e5f398e88f4ef",
+            "status": "ok"
+          }
+        }
+      },
+      "current_public_refs": {
+        "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8": {
+          "artifact_sha256": "a81fad8670b8da5385bb734d81c8276d8ecab788b506a0d1d443846a55c34219",
+          "artifact_version_id": "narrative-41aa5fe95a5a4bf189eda4652be056f3",
+          "byte_size": 4063,
+          "schema_version": "narrative-ref/1",
+          "source_ref": {
+            "byte_size": 95,
+            "content_sha256": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+            "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+            "mime_type": "text/plain",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8"
+          }
+        },
+        "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c": {
+          "artifact_sha256": "52ad8652d7925232516a1fb4c22f35f1214ec7e78a8edf0c2a996684d9b0e18b",
+          "artifact_version_id": "narrative-32ddf0f7d1c343b1a350e2d8e050a10d",
+          "byte_size": 3533,
+          "schema_version": "narrative-ref/1",
+          "source_ref": {
+            "byte_size": 98,
+            "content_sha256": "812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+            "document_id": "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+            "mime_type": "text/html",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c"
+          }
+        }
+      },
+      "owned_tree_before_bytes": 469091,
+      "owned_tree_after_bytes": 744421
+    },
+    {
+      "run_id": "same-spec-new-run",
+      "fixture_kind": "synthetic",
+      "pins": {},
+      "request": {
+        "schema_version": "narrative-batch-request/1",
+        "run_id": "same-spec-new-run",
+        "sources": [
+          {
+            "schema_version": "2.0",
+            "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+            "source_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+            "content_sha256": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+            "byte_size": 95,
+            "mime_type": "text/plain"
+          },
+          {
+            "schema_version": "2.0",
+            "document_id": "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+            "source_id": "urn:company-wiki:source:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+            "content_sha256": "812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+            "byte_size": 98,
+            "mime_type": "text/html"
+          }
+        ],
+        "profile": "P2",
+        "max_seconds": 40.0,
+        "max_tokens": 100000,
+        "max_cost_usd": "1",
+        "model": {
+          "allow_local_http": true,
+          "api_key_env": "W12_SYNTHETIC_MODEL_KEY",
+          "endpoint": "http://127.0.0.1:53342/v1/chat/completions",
+          "max_output_tokens": 400,
+          "max_request_bytes": 262144,
+          "max_response_bytes": 262144,
+          "model_id": "stub-model",
+          "timeout_seconds": 5
+        },
+        "pricing": {
+          "version": "fixture-price/1",
+          "input_micro_usd_per_million_tokens": 1000000,
+          "output_micro_usd_per_million_tokens": 2000000
+        },
+        "max_final_bytes": 2097152,
+        "max_persistent_bytes": 1073741824,
+        "max_scratch_bytes": 2147483648
+      },
+      "batch": {
+        "budget": {
+          "estimated_micro_usd": 0,
+          "tokens": 0,
+          "unknown_reservations": 0,
+          "unsettled_reservations": 0
+        },
+        "documents": [
+          {
+            "artifact_ref": {
+              "artifact_version_id": "narrative-41aa5fe95a5a4bf189eda4652be056f3",
+              "byte_size": 4063,
+              "content_sha256": "a81fad8670b8da5385bb734d81c8276d8ecab788b506a0d1d443846a55c34219",
+              "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "source_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "source_sha256": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8"
+            },
+            "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+            "errors": [],
+            "generation_status": "reused",
+            "status": "completed"
+          },
+          {
+            "artifact_ref": {
+              "artifact_version_id": "narrative-32ddf0f7d1c343b1a350e2d8e050a10d",
+              "byte_size": 3533,
+              "content_sha256": "52ad8652d7925232516a1fb4c22f35f1214ec7e78a8edf0c2a996684d9b0e18b",
+              "document_id": "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+              "source_id": "urn:company-wiki:source:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+              "source_sha256": "812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c"
+            },
+            "document_id": "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+            "errors": [],
+            "generation_status": "reused",
+            "status": "completed"
+          }
+        ],
+        "run_id": "same-spec-new-run",
+        "schema_version": "narrative-batch-result/1",
+        "status": "completed",
+        "storage": {
+          "persistent_added_bytes": 135,
+          "scratch_peak_bytes": 0
+        }
+      },
+      "wall_seconds": 1.3212567000009585,
+      "batch_calls": {
+        "replay": 4,
+        "parse": 4
+      },
+      "public_read_calls": {
+        "replay": 2,
+        "parse": 2
+      },
+      "duration_seconds": {
+        "batch": {
+          "parse_duration": 0.01344119998975657,
+          "replay_duration": 0.015219499997328967
+        },
+        "public_read": {
+          "parse_duration": 0.011340700031723827,
+          "replay_duration": 0.011955399997532368
+        }
+      },
+      "model_http_posts": 0,
+      "source_provider_calls": 0,
+      "external_connections": 0,
+      "model_wire": [],
+      "reservations": [],
+      "snapshot": {
+        "input_hash": "3a7c141983309475b61b47139f8dfe0ca09ea6fa5321724912333aba6dde7f49",
+        "job_ids": [],
+        "binding": {
+          "execution_versions": {
+            "adapter": "openai-compatible-http/1",
+            "document_normalization": "1.0.0",
+            "handlers": {
+              "source.narrative_select": "1.1.0",
+              "source.narrative_summarize": "1.1.0",
+              "source.narrative_verify": "1.1.0"
+            },
+            "model_request_schema": "narrative-model-request/1.4",
+            "parser": "0.1.1",
+            "prompt": "1.7.0",
+            "selector": "0.6.0"
+          },
+          "generation_manifests": {
+            "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c": {
+              "generation_sha256": "73856bfca5cd373e19850b2632d41f479fe0d4af91c26255b436608baeaa5454",
+              "settings_sha256": "0467916f2cbe6724542c3c55853226056acad8c95131a0814022343037fe029e",
+              "source_inputs": {
+                "parser_component": {
+                  "name": "cwp_document_normalization",
+                  "version": "1.0.0"
+                },
+                "source_metadata": {
+                  "document_kind": "investor_relations",
+                  "language": "en",
+                  "source_class": "filing",
+                  "title": "Acme business update"
+                },
+                "source_ref": {
+                  "byte_size": 98,
+                  "content_sha256": "812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+                  "document_id": "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+                  "mime_type": "text/html",
+                  "schema_version": "2.0",
+                  "source_id": "urn:company-wiki:source:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c"
+                }
+              }
+            },
+            "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8": {
+              "generation_sha256": "e754823248dda137b001b3c2f9bb445d2ea309ade9cd44f2c0b75db5e109b436",
+              "settings_sha256": "9687b5d8ceae36a2bb65e8f98bee66ff046ddc2d53b041e907c10bc6a83f772b",
+              "source_inputs": {
+                "material_extractor": "transcript-original-text/1.0.0",
+                "parser_component": {
+                  "name": "selective_narrative_parser",
+                  "version": "0.2.0"
+                },
+                "source_metadata": {
+                  "document_kind": "investor_call_transcript",
+                  "language": "en",
+                  "source_class": "transcript",
+                  "title": "Acme business update"
+                },
+                "source_ref": {
+                  "byte_size": 95,
+                  "content_sha256": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+                  "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+                  "mime_type": "text/plain",
+                  "schema_version": "2.0",
+                  "source_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8"
+                }
+              }
+            }
+          },
+          "generation_settings": {
+            "0467916f2cbe6724542c3c55853226056acad8c95131a0814022343037fe029e": {
+              "bundle_producer": "1.0.0",
+              "bundle_schema": "narrative-bundle/2.0",
+              "execution_versions": {
+                "adapter": "openai-compatible-http/1",
+                "handlers": {
+                  "source.narrative_select": "1.1.0",
+                  "source.narrative_summarize": "1.1.0",
+                  "source.narrative_verify": "1.1.0"
+                },
+                "model_request_schema": "narrative-model-request/1.4",
+                "prompt": "1.7.0",
+                "selector": "0.6.0"
+              },
+              "model": {
+                "endpoint": "http://127.0.0.1:53342/v1/chat/completions",
+                "max_output_tokens": 400,
+                "model_id": "stub-model",
+                "output_token_field": "max_tokens"
+              },
+              "profile": "P2",
+              "schema_version": "narrative-generation/1",
+              "select_schema": "narrative-select-result/2.0",
+              "summary_schema": "narrative-summary-result/2.0"
+            },
+            "9687b5d8ceae36a2bb65e8f98bee66ff046ddc2d53b041e907c10bc6a83f772b": {
+              "bundle_producer": "1.0.0",
+              "bundle_schema": "narrative-bundle/2.0",
+              "execution_versions": {
+                "adapter": "openai-compatible-http/1",
+                "handlers": {
+                  "source.narrative_select": "1.1.0",
+                  "source.narrative_summarize": "1.1.0",
+                  "source.narrative_verify": "1.1.0"
+                },
+                "model_request_schema": "narrative-model-request/1.4",
+                "parser": "0.1.1",
+                "prompt": "1.7.0",
+                "selector": "0.6.0"
+              },
+              "model": {
+                "endpoint": "http://127.0.0.1:53342/v1/chat/completions",
+                "max_output_tokens": 400,
+                "model_id": "stub-model",
+                "output_token_field": "max_tokens"
+              },
+              "profile": "P2",
+              "schema_version": "narrative-generation/1",
+              "select_schema": "narrative-select-result/2.0",
+              "summary_schema": "narrative-summary-result/2.0"
+            }
+          },
+          "normalization_config": null,
+          "read_policy_schema_version": "3.0",
+          "read_policy_sha256": "77134db65ac55f88de6debfe0d0bb02472dfde749b1166c004e46551e08ee31f",
+          "request_sha256": "455dbf47d894ebfe877a5198412c0bc424243e5be5cc448ec891f6d593ce3b5b",
+          "reused_artifact_pins": {
+            "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c": {
+              "artifact_version_id": "narrative-32ddf0f7d1c343b1a350e2d8e050a10d",
+              "byte_size": 3533,
+              "content_sha256": "52ad8652d7925232516a1fb4c22f35f1214ec7e78a8edf0c2a996684d9b0e18b",
+              "document_id": "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+              "source_id": "urn:company-wiki:source:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+              "source_sha256": "812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c"
+            },
+            "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8": {
+              "artifact_version_id": "narrative-41aa5fe95a5a4bf189eda4652be056f3",
+              "byte_size": 4063,
+              "content_sha256": "a81fad8670b8da5385bb734d81c8276d8ecab788b506a0d1d443846a55c34219",
+              "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "source_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "source_sha256": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8"
+            }
+          },
+          "schema_version": "narrative-run-binding/3",
+          "source_facts": [
+            {
+              "canonical_entity_id": null,
+              "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "document_kind": "investor_call_transcript",
+              "fiscal_period": null,
+              "fiscal_year": null,
+              "form_type": null,
+              "market": "US",
+              "period_end": null,
+              "published_date": "2026-08-26",
+              "security_id": "ACME"
+            },
+            {
+              "canonical_entity_id": null,
+              "document_id": "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+              "document_kind": "investor_relations",
+              "fiscal_period": null,
+              "fiscal_year": null,
+              "form_type": null,
+              "market": "US",
+              "period_end": null,
+              "published_date": "2026-08-26",
+              "security_id": "ACME"
+            }
+          ],
+          "source_read_policies": {
+            "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c": "3d9252a9c84a047fddefe333c29f0bdd7cebbe1c0ab3c945d48e5f398e88f4ef",
+            "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8": "c1b6af97cc4371cf2a0d95afe3879ac0c61e3fdb8ab5144151d2b767cd4806e8"
+          }
+        },
+        "jobs": []
+      },
+      "public": {
+        "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8": {
+          "reference": {
+            "schema_version": "narrative-ref/1",
+            "artifact_version_id": "narrative-41aa5fe95a5a4bf189eda4652be056f3",
+            "artifact_sha256": "a81fad8670b8da5385bb734d81c8276d8ecab788b506a0d1d443846a55c34219",
+            "byte_size": 4063,
+            "source_ref": {
+              "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "source_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "content_sha256": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "byte_size": 95,
+              "mime_type": "text/plain",
+              "schema_version": "2.0"
+            }
+          },
+          "bundle_sha256": "a81fad8670b8da5385bb734d81c8276d8ecab788b506a0d1d443846a55c34219",
+          "versions": {
+            "bundle_producer": "1.0.0",
+            "material": "transcript-original-text/1.0.0",
+            "model": "stub-model",
+            "parser": "0.2.0",
+            "prompt": "1.7.0",
+            "selector": "0.6.0"
+          },
+          "replay_receipt": {
+            "as_of_date": "2026-10-09",
+            "locator_count": 1,
+            "manifest": {
+              "byte_size": 95,
+              "canonical_entity_id": null,
+              "collector_name": "official-original-import",
+              "collector_version": "1.0.0",
+              "content_sha256": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "display_name": "Acme",
+              "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "document_kind": "investor_call_transcript",
+              "fiscal_period": null,
+              "fiscal_year": null,
+              "form_type": null,
+              "language": "en",
+              "market": "US",
+              "mime_type": "text/plain",
+              "period_end": null,
+              "provider": "official",
+              "provider_document_id": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "published_date": "2026-08-26",
+              "retrieved_at": "2026-10-09T00:00:00Z",
+              "security_id": "ACME",
+              "source_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+              "source_url": "https://official.example/Acme/update",
+              "title": "Acme business update"
+            },
+            "narrative_ref": {
+              "artifact_sha256": "a81fad8670b8da5385bb734d81c8276d8ecab788b506a0d1d443846a55c34219",
+              "artifact_version_id": "narrative-41aa5fe95a5a4bf189eda4652be056f3",
+              "byte_size": 4063,
+              "schema_version": "narrative-ref/1",
+              "source_ref": {
+                "byte_size": 95,
+                "content_sha256": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+                "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+                "mime_type": "text/plain",
+                "schema_version": "2.0",
+                "source_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8"
+              }
+            },
+            "quality_status": "needs_review",
+            "read_at": "2026-10-09T17:43:49.401760+00:00",
+            "replay_status": "verified",
+            "schema_version": "narrative-read-receipt/1",
+            "selection_status": "selected",
+            "source_read_policy_sha256": "c1b6af97cc4371cf2a0d95afe3879ac0c61e3fdb8ab5144151d2b767cd4806e8",
+            "status": "ok"
+          }
+        },
+        "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c": {
+          "reference": {
+            "schema_version": "narrative-ref/1",
+            "artifact_version_id": "narrative-32ddf0f7d1c343b1a350e2d8e050a10d",
+            "artifact_sha256": "52ad8652d7925232516a1fb4c22f35f1214ec7e78a8edf0c2a996684d9b0e18b",
+            "byte_size": 3533,
+            "source_ref": {
+              "document_id": "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+              "source_id": "urn:company-wiki:source:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+              "content_sha256": "812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+              "byte_size": 98,
+              "mime_type": "text/html",
+              "schema_version": "2.0"
+            }
+          },
+          "bundle_sha256": "52ad8652d7925232516a1fb4c22f35f1214ec7e78a8edf0c2a996684d9b0e18b",
+          "versions": {
+            "bundle_producer": "1.0.0",
+            "material": null,
+            "model": "stub-model",
+            "parser": "1.0.0",
+            "prompt": "1.7.0",
+            "selector": "0.6.0"
+          },
+          "replay_receipt": {
+            "as_of_date": "2026-10-09",
+            "locator_count": 1,
+            "manifest": {
+              "byte_size": 98,
+              "canonical_entity_id": null,
+              "collector_name": "official-original-import",
+              "collector_version": "1.0.0",
+              "content_sha256": "812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+              "display_name": "Acme",
+              "document_id": "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+              "document_kind": "investor_relations",
+              "fiscal_period": null,
+              "fiscal_year": null,
+              "form_type": null,
+              "language": "en",
+              "market": "US",
+              "mime_type": "text/html",
+              "period_end": null,
+              "provider": "official",
+              "provider_document_id": "812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+              "published_date": "2026-08-26",
+              "retrieved_at": "2026-10-09T00:00:00Z",
+              "security_id": "ACME",
+              "source_id": "urn:company-wiki:source:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+              "source_url": "https://official.example/Acme/update",
+              "title": "Acme business update"
+            },
+            "narrative_ref": {
+              "artifact_sha256": "52ad8652d7925232516a1fb4c22f35f1214ec7e78a8edf0c2a996684d9b0e18b",
+              "artifact_version_id": "narrative-32ddf0f7d1c343b1a350e2d8e050a10d",
+              "byte_size": 3533,
+              "schema_version": "narrative-ref/1",
+              "source_ref": {
+                "byte_size": 98,
+                "content_sha256": "812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+                "document_id": "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+                "mime_type": "text/html",
+                "schema_version": "2.0",
+                "source_id": "urn:company-wiki:source:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c"
+              }
+            },
+            "quality_status": "needs_review",
+            "read_at": "2026-10-09T17:43:51.853276+00:00",
+            "replay_status": "verified",
+            "schema_version": "narrative-read-receipt/1",
+            "selection_status": "selected",
+            "source_read_policy_sha256": "3d9252a9c84a047fddefe333c29f0bdd7cebbe1c0ab3c945d48e5f398e88f4ef",
+            "status": "ok"
+          }
+        }
+      },
+      "current_public_refs": {
+        "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8": {
+          "artifact_sha256": "a81fad8670b8da5385bb734d81c8276d8ecab788b506a0d1d443846a55c34219",
+          "artifact_version_id": "narrative-41aa5fe95a5a4bf189eda4652be056f3",
+          "byte_size": 4063,
+          "schema_version": "narrative-ref/1",
+          "source_ref": {
+            "byte_size": 95,
+            "content_sha256": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+            "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+            "mime_type": "text/plain",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8"
+          }
+        },
+        "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c": {
+          "artifact_sha256": "52ad8652d7925232516a1fb4c22f35f1214ec7e78a8edf0c2a996684d9b0e18b",
+          "artifact_version_id": "narrative-32ddf0f7d1c343b1a350e2d8e050a10d",
+          "byte_size": 3533,
+          "schema_version": "narrative-ref/1",
+          "source_ref": {
+            "byte_size": 98,
+            "content_sha256": "812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+            "document_id": "urn:company-wiki:document:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c",
+            "mime_type": "text/html",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:812aaf032f26004698c44c4300215d1e10c39382836a72f130bcfac08568400c"
+          }
+        }
+      },
+      "owned_tree_before_bytes": 744421,
+      "owned_tree_after_bytes": 781183
+    }
+  ],
+  "status": "failed",
+  "failure_type": "AssertionError",
+  "cleanup": {
+    "owned_temp_removed": true,
+    "parent_files_restored": true,
+    "environment_unchanged": true,
+    "temp_environment_unchanged": true
+  }
+}

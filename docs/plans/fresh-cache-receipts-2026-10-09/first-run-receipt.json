@@ -1,0 +1,15 @@
+{
+  "schema_version": "fresh-cache-behavior-receipts/1",
+  "classification": "synthetic engineering observation; not real M3",
+  "source_baseline": "2350077ac31655d358e67390c6fbda129d80d7dc",
+  "test_sha256": "7b2a322b5035c42cec7642eb7bf15eccf8314d3dd89d65251875cd16a6f9d9ab",
+  "runs": [],
+  "status": "failed",
+  "failure_type": "AssertionError",
+  "cleanup": {
+    "owned_temp_removed": true,
+    "parent_files_restored": true,
+    "environment_unchanged": true,
+    "temp_environment_unchanged": true
+  }
+}
