@@ -217,3 +217,14 @@ Next Step：shared OCR runtime+上述实际CI反例集中通过→合并master/p
 RF `prepare_source_result` 对 public narrative read 仍 clamp 30秒，旧元数据/raw读取成本与OCR选中media重放成本不同。parser实际8span/4media16.57秒，更多选中media可能超过30秒；需在真实大节点测量，不臆断已失败，不先任意扩大上限。若发生超时，统一按调用方剩余deadline传递责任层，保留有界终止，禁止偷偷重OCR全文或无期限等待。
 
 本轮两个具体路径读取错误：公司池PWF位于audit项目、CI文件为`.github/workflows/ci.yml`，不是猜测的CWP池路径/tests.yml。后续先用文件清单定位；未产生写入。独立agent仅准备验收脚本和来源映射，不重做工程包、不中途发付费请求。
+
+
+## 2026-10-09：shared接线发布与大节点新反例
+
+shared交付67b55d72正常合入master979792e0并push，15runtime/test交付SHA及main Gitblob相等，32回执SHA实核；正常prepushgreen；精确远端CI37885534513成功。9份来源准备证据SHA也已核，未生成新研究。
+
+固定71 fullreplay实际144.37秒：40PASS/2FAIL/4BLOCKED/18NOT_RUN/7NA，67,534,494字节临时根已恢复不存在，收费调用0。新反例归因到责任层：三市场真实source preparation都因当前抓取Oct9晚于固定asofOct8而拒绝，需区分publication/可用时间/当前实读时间，不能伪造captured_at；独立诊断`phase6/asof_clock_diagnosis/`优先。旧HK同excerpt正反角色研究FAIL保留；新研究必须改真正证据角色。PPTX纯无OCR fixture诚实partial/未发布，本就应BLOCKED，旧helper只认failed造成报告FAIL；2RED/1PASS→29GREEN/.28秒，仍不把body未识读说成PASS，未知/其他错误和意外已发布仍拒绝。真实OCR public大节点另跑。
+
+另一个共用效率原因已结构定位：legacy缺URL治理retired原件真实存在、普通scan sticky，不会自动成为reuse候选，可能fetch后才按SHA去重。`phase6/legacy_local_reuse_diagnosis/`独立只读反例进行中；应在真实六家前决定通用零下载reconcile入口，不粗暴active所有退休源或用公司特判隐藏缺陷。Dayu code零改动。
+
+当前Next Step：完成这两个实际共因的责任细则/TDD通用修复；真实22页public batch/read/跨run零调用复用；同一固定71对照（未变研究输入不宣称全绿）；原三家、新三家真实执行+四独立审查；最后恢复冻结NVDA及公司池loop。目标仍active，主线未完成，loop尚未启动。

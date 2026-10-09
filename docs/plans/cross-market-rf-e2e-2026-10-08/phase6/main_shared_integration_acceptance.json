@@ -1,0 +1,55 @@
+{
+  "schema_version": "main-shared-integration-acceptance/1",
+  "recorded_at": "2026-10-09T04:56:03.133764+00:00",
+  "main_head": "979792e0a4105b18aed06dc7053f7bc239de6865",
+  "delivery_head": "67b55d72c6929b4905071730e24c9410045d4298",
+  "owner_runtime_files_sha_verified": 15,
+  "owner_evidence_sha_verified": 32,
+  "delivery_and_main_committed_runtime_blobs_equal": true,
+  "normal_pre_push": "PASS",
+  "remote_ci": {
+    "id": 37885534513,
+    "conclusion": "success",
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/37885534513"
+  },
+  "fixed71_replay": {
+    "status": "FAIL",
+    "seconds": 144.37,
+    "PASS": 40,
+    "FAIL": 2,
+    "BLOCKED": 4,
+    "NOT_RUN": 18,
+    "NOT_APPLICABLE": 7,
+    "owned_final_bytes": 67534494,
+    "restored_absent": true,
+    "external_model_calls": 0,
+    "receipt": "full_replay_979792e0.json"
+  },
+  "new_observed_causes": [
+    "RF current retrieval timestamp incorrectly outside fixed historical as_of at all three source preparation boundaries; investigation ongoing",
+    "old HK sealed input uses one excerpt as support and counterevidence; preserve failure for fresh research",
+    "PPTX no-OCR fixed fixture partial/unpublished is unclassified by old report helper; report-layer correction only, not body-processing PASS"
+  ],
+  "report_helper_tdd": {
+    "RED": {
+      "failed": 2,
+      "passed": 1,
+      "seconds": 0.36
+    },
+    "GREEN": {
+      "passed": 29,
+      "seconds": 0.28
+    },
+    "ruff": "PASS",
+    "retains_blocked_not_pass": true,
+    "preserves_published_or_unrelated_failure_rejection": true,
+    "owned_test_roots_restored_absent": [
+      "C:/cw-fmt-red-7427f9d1",
+      "C:/cw-fmt-green-82b89364"
+    ],
+    "earlier_environment_run": "sandbox TEMP failed for 5 tmp fixtures; not accepted GREEN; genuine 2 assertions independently reproduced in normal OS"
+  },
+  "source_preparation_integrity_files_verified": 9,
+  "real_pptx_supplier_node_started": false,
+  "fresh_six_company_research_started": false
+}

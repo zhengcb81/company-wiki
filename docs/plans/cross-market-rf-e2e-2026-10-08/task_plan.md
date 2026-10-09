@@ -136,3 +136,14 @@ RF四个独立验收finding的共用关系修复在 `a7370517`，owner集中201P
 | 公司池loop | 后置，未重抽 | 冻结NVDA首轮24发现保留；主线全部完成后恢复原attempt责任 |
 
 当前总目标继续active，不停在工程绿。下一步：接收shared最终交付→正常merge/commit/push→精确CI及真实OCR公共链→固定71对照→原三家全新RF研究和四独立审查→固定新三家→公司池loop。只在这些大节点审查；失败保持旧记录，根因修正，不删除检查点、不加人工签收。
+
+
+## 2026-10-09：shared接线发布与大节点新反例
+
+shared交付67b55d72正常合入master979792e0并push，15runtime/test交付SHA及main Gitblob相等，32回执SHA实核；正常prepushgreen；精确远端CI37885534513成功。9份来源准备证据SHA也已核，未生成新研究。
+
+固定71 fullreplay实际144.37秒：40PASS/2FAIL/4BLOCKED/18NOT_RUN/7NA，67,534,494字节临时根已恢复不存在，收费调用0。新反例归因到责任层：三市场真实source preparation都因当前抓取Oct9晚于固定asofOct8而拒绝，需区分publication/可用时间/当前实读时间，不能伪造captured_at；独立诊断`phase6/asof_clock_diagnosis/`优先。旧HK同excerpt正反角色研究FAIL保留；新研究必须改真正证据角色。PPTX纯无OCR fixture诚实partial/未发布，本就应BLOCKED，旧helper只认failed造成报告FAIL；2RED/1PASS→29GREEN/.28秒，仍不把body未识读说成PASS，未知/其他错误和意外已发布仍拒绝。真实OCR public大节点另跑。
+
+另一个共用效率原因已结构定位：legacy缺URL治理retired原件真实存在、普通scan sticky，不会自动成为reuse候选，可能fetch后才按SHA去重。`phase6/legacy_local_reuse_diagnosis/`独立只读反例进行中；应在真实六家前决定通用零下载reconcile入口，不粗暴active所有退休源或用公司特判隐藏缺陷。Dayu code零改动。
+
+当前Next Step：完成这两个实际共因的责任细则/TDD通用修复；真实22页public batch/read/跨run零调用复用；同一固定71对照（未变研究输入不宣称全绿）；原三家、新三家真实执行+四独立审查；最后恢复冻结NVDA及公司池loop。目标仍active，主线未完成，loop尚未启动。

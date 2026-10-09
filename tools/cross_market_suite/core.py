@@ -25,9 +25,11 @@ def format_capability_gap(receipt, *, images_only_checked=False):
     documents = receipt.get("documents")
     unpublished = (isinstance(documents, list) and bool(documents)
                    and all(isinstance(row, dict) and row.get("artifact_ref") is None for row in documents))
-    if receipt.get("status") == "failed" and unpublished:
-        if receipt.get("error") in known:
+    if receipt.get("status") in {"failed", "partial"} and unpublished:
+        if receipt.get("status") == "failed" and receipt.get("error") in known:
             return receipt["error"]
+        if receipt.get("error") is not None:
+            return None
         errors = set()
         for row in documents:
             codes = row.get("errors", [])

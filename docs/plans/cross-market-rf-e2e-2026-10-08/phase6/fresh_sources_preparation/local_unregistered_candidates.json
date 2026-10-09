@@ -1,0 +1,438 @@
+[
+  {
+    "company": "CN-688012",
+    "raw": {
+      "sha256": "3273711fbb79fa6ee5e9a3b2f0eea7d5a1dfa0d305721c61e5af251f9addf399",
+      "byte_size": 14285291,
+      "magic": "%PDF-1.5\r\n%�"
+    },
+    "catalog": {
+      "status": "blocked",
+      "reason": "source_not_active",
+      "source_ref": null
+    },
+    "storage": {
+      "raw_path": "C:\\Users\\郑曾波\\Dropbox\\Stock\\工业与信息化\\电子\\中微公司\\中微公司：2024年年度报告.pdf"
+    },
+    "metadata": {
+      "published_date": null,
+      "fiscal_year": null,
+      "fiscal_period": null,
+      "period_end": null,
+      "source_url": null,
+      "language": "zh"
+    },
+    "metadata_conflicts": [],
+    "evidence": [
+      {
+        "artifact": "actual raw bytes",
+        "locator": "PDF page1 cover",
+        "authority": "bounded direct local inspection; title/year not publication date"
+      }
+    ],
+    "pdf_pages": 268,
+    "cover_observation": "中微半导体设备（上海）股份有限公司2024 年年度报告 1 / 268",
+    "storage_catalog_observation": {
+      "document_kind": "annual_report",
+      "published_date": "2025-04-17",
+      "source_status": "retired",
+      "metadata": {
+        "source_title": null,
+        "market": null,
+        "security_id": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "published_date": null,
+        "source_url": null,
+        "language": null
+      }
+    }
+  },
+  {
+    "company": "CN-688012",
+    "raw": {
+      "sha256": "cf22787332d809eeb3127ac5a0492e4cc7f3a6ced611020b239ee17283d7934e",
+      "byte_size": 834682,
+      "magic": "%PDF-1.5\n%��"
+    },
+    "catalog": {
+      "status": "found",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:cf22787332d809eeb3127ac5a0492e4cc7f3a6ced611020b239ee17283d7934e",
+        "source_id": "urn:company-wiki:source:sha256:cf22787332d809eeb3127ac5a0492e4cc7f3a6ced611020b239ee17283d7934e",
+        "content_sha256": "cf22787332d809eeb3127ac5a0492e4cc7f3a6ced611020b239ee17283d7934e",
+        "byte_size": 834682,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "metadata": {
+        "document_id": "urn:company-wiki:document:sha256:cf22787332d809eeb3127ac5a0492e4cc7f3a6ced611020b239ee17283d7934e",
+        "source_id": "urn:company-wiki:source:sha256:cf22787332d809eeb3127ac5a0492e4cc7f3a6ced611020b239ee17283d7934e",
+        "content_sha256": "cf22787332d809eeb3127ac5a0492e4cc7f3a6ced611020b239ee17283d7934e",
+        "byte_size": 834682,
+        "mime_type": "application/pdf",
+        "title": "中微公司：2020年度向特定对象发行A股股票预案",
+        "document_kind": "other",
+        "published_date": null,
+        "source_url": null,
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": null,
+        "market": "CN",
+        "security_id": "688012",
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "period_end": null,
+        "form_type": null,
+        "provider": null,
+        "provider_document_id": null,
+        "language": null
+      },
+      "verification": {
+        "document_id": "urn:company-wiki:document:sha256:cf22787332d809eeb3127ac5a0492e4cc7f3a6ced611020b239ee17283d7934e",
+        "source_id": "urn:company-wiki:source:sha256:cf22787332d809eeb3127ac5a0492e4cc7f3a6ced611020b239ee17283d7934e",
+        "content_sha256": "cf22787332d809eeb3127ac5a0492e4cc7f3a6ced611020b239ee17283d7934e",
+        "byte_size": 834682,
+        "read_at": "2026-10-09T04:42:23.820565+00:00",
+        "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+        "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+        "review": null,
+        "schema_version": "2.0"
+      }
+    },
+    "storage": {
+      "raw_path": "C:\\Users\\郑曾波\\Dropbox\\Stock\\工业与信息化\\电子\\中微公司\\中微公司：2020年度向特定对象发行A股股票预案.PDF"
+    },
+    "metadata": {
+      "published_date": null,
+      "fiscal_year": null,
+      "fiscal_period": null,
+      "period_end": null,
+      "source_url": null,
+      "language": "zh"
+    },
+    "metadata_conflicts": [],
+    "evidence": [
+      {
+        "artifact": "actual raw bytes",
+        "locator": "PDF page1 cover",
+        "authority": "bounded direct local inspection; title/year not publication date"
+      }
+    ],
+    "pdf_pages": 52,
+    "cover_observation": "证券代码：688012 证券简称：中微公司 中微半导体设备（上海）股份有限公司 （上海市浦东新区金桥出口加工区（南区）泰华路188 号） 2020 年度向特定对象发行A 股股票预案 二〇二〇年八月",
+    "storage_catalog_observation": {
+      "document_kind": "other",
+      "published_date": null,
+      "source_status": "active",
+      "metadata": {
+        "source_title": null,
+        "market": null,
+        "security_id": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "published_date": null,
+        "source_url": null,
+        "language": null
+      }
+    }
+  },
+  {
+    "company": "CN-688012",
+    "raw": {
+      "sha256": "2aed874b36548f181ef7063c12eefea33f57e9eca4069685a91da1f23c72635a",
+      "byte_size": 3096767,
+      "magic": "%PDF-1.7\n%��"
+    },
+    "catalog": {
+      "status": "found",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:2aed874b36548f181ef7063c12eefea33f57e9eca4069685a91da1f23c72635a",
+        "source_id": "urn:company-wiki:source:sha256:2aed874b36548f181ef7063c12eefea33f57e9eca4069685a91da1f23c72635a",
+        "content_sha256": "2aed874b36548f181ef7063c12eefea33f57e9eca4069685a91da1f23c72635a",
+        "byte_size": 3096767,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "metadata": {
+        "document_id": "urn:company-wiki:document:sha256:2aed874b36548f181ef7063c12eefea33f57e9eca4069685a91da1f23c72635a",
+        "source_id": "urn:company-wiki:source:sha256:2aed874b36548f181ef7063c12eefea33f57e9eca4069685a91da1f23c72635a",
+        "content_sha256": "2aed874b36548f181ef7063c12eefea33f57e9eca4069685a91da1f23c72635a",
+        "byte_size": 3096767,
+        "mime_type": "application/pdf",
+        "title": "中微公司：中微半导体设备（上海）股份有限公司发行股份及支付现金购买资产并募集配套资金预案",
+        "document_kind": "other",
+        "published_date": null,
+        "source_url": null,
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": null,
+        "market": "CN",
+        "security_id": "688012",
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "period_end": null,
+        "form_type": null,
+        "provider": null,
+        "provider_document_id": null,
+        "language": null
+      },
+      "verification": {
+        "document_id": "urn:company-wiki:document:sha256:2aed874b36548f181ef7063c12eefea33f57e9eca4069685a91da1f23c72635a",
+        "source_id": "urn:company-wiki:source:sha256:2aed874b36548f181ef7063c12eefea33f57e9eca4069685a91da1f23c72635a",
+        "content_sha256": "2aed874b36548f181ef7063c12eefea33f57e9eca4069685a91da1f23c72635a",
+        "byte_size": 3096767,
+        "read_at": "2026-10-09T04:42:23.877907+00:00",
+        "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+        "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+        "review": null,
+        "schema_version": "2.0"
+      }
+    },
+    "storage": {
+      "raw_path": "C:\\Users\\郑曾波\\Dropbox\\Stock\\工业与信息化\\电子\\中微公司\\中微公司：中微半导体设备（上海）股份有限公司发行股份及支付现金购买资产并募集配套资金预案.pdf"
+    },
+    "metadata": {
+      "published_date": null,
+      "fiscal_year": null,
+      "fiscal_period": null,
+      "period_end": null,
+      "source_url": null,
+      "language": "zh"
+    },
+    "metadata_conflicts": [],
+    "evidence": [
+      {
+        "artifact": "actual raw bytes",
+        "locator": "PDF page1 cover",
+        "authority": "bounded direct local inspection; title/year not publication date"
+      }
+    ],
+    "pdf_pages": 140,
+    "cover_observation": "股票代码：688012.SH 股票简称：中微公司 上市地点：上海证券交易所 中微半导体设备（上海）股份有限公司 发行股份及支付现金购买资产 并募集配套资金预案 交易类型 交易对方名称 发行股份及支付现金 购买资产 杭州众芯硅工贸有限公司、上海宁容海川电子科技合伙企业（有限 合伙）、杭州临安众芯硅企业管理合伙企业（有限合伙）、杭州临 安众硅管理咨询合伙企业（有",
+    "storage_catalog_observation": {
+      "document_kind": "other",
+      "published_date": null,
+      "source_status": "active",
+      "metadata": {
+        "source_title": null,
+        "market": null,
+        "security_id": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "published_date": null,
+        "source_url": null,
+        "language": null
+      }
+    }
+  },
+  {
+    "company": "US-MSFT",
+    "raw": {
+      "sha256": "c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+      "byte_size": 5597461,
+      "magic": "<?xml versio"
+    },
+    "catalog": {
+      "status": "blocked",
+      "reason": "source_not_active",
+      "source_ref": null
+    },
+    "storage": {
+      "raw_path": "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-25-256321\\msft-20250930.htm"
+    },
+    "metadata": {
+      "published_date": "2025-10-29",
+      "fiscal_year": 2026,
+      "fiscal_period": "Q1",
+      "period_end": "2025-09-30",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312525256321/msft-20250930.htm",
+      "language": "en",
+      "form_type": "10-Q",
+      "provider_observed_fiscal_year": 2025
+    },
+    "metadata_conflicts": [
+      "Existing .source.json says market=HK with security_id MSFT; do not consume/copy wrong identity. Register verified issuer/SEC US metadata in isolated catalog."
+    ],
+    "evidence": [
+      {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-25-256321\\meta.json",
+        "locator": "filing_date/report_date/files[primary_document]",
+        "authority": "provider_record; fiscal year not promoted without actual cover"
+      },
+      {
+        "artifact": "raw 10-Q cover and SEC FY2026 primary index",
+        "locator": "period of report / issuer Fiscal Year End 0630",
+        "method": "Microsoft fiscal year ends June 30, proven by exact FY2025 SEC 10-K cover and SEC FY2026 target index FYE0630; FY/Q is calendar mapping, not copied Dayu fiscal_year."
+      },
+      {
+        "artifact": "actual raw SEC HTML bytes",
+        "locator": "dei:DocumentFiscalYearFocus/DocumentFiscalPeriodFocus/DocumentPeriodEndDate/EntityCentralIndexKey",
+        "authority": "original iXBRL cover facts; primary period identity"
+      }
+    ],
+    "cover_observation": "For the Quarterly Period Ended September 30, 2025 OR ☐ TRANSITION REPOR",
+    "storage_catalog_observation": {
+      "document_kind": "regulatory_filing",
+      "published_date": "2025-10-29",
+      "source_status": "retired",
+      "metadata": {
+        "source_title": null,
+        "market": null,
+        "security_id": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "published_date": null,
+        "source_url": null,
+        "language": null
+      }
+    },
+    "raw_ixbrl_identity": {
+      "DocumentFiscalYearFocus": "2026",
+      "DocumentFiscalPeriodFocus": "Q1",
+      "DocumentPeriodEndDate": "September 30, 2025",
+      "EntityCentralIndexKey": "0000789019"
+    }
+  },
+  {
+    "company": "US-MSFT",
+    "raw": {
+      "sha256": "a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+      "byte_size": 7483278,
+      "magic": "<?xml versio"
+    },
+    "catalog": {
+      "status": "blocked",
+      "reason": "source_not_active",
+      "source_ref": null
+    },
+    "storage": {
+      "raw_path": "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-26-027207\\msft-20251231.htm"
+    },
+    "metadata": {
+      "published_date": "2026-01-28",
+      "fiscal_year": 2026,
+      "fiscal_period": "Q2",
+      "period_end": "2025-12-31",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526027207/msft-20251231.htm",
+      "language": "en",
+      "form_type": "10-Q",
+      "provider_observed_fiscal_year": 2025
+    },
+    "metadata_conflicts": [
+      "Existing .source.json says market=HK with security_id MSFT; do not consume/copy wrong identity. Register verified issuer/SEC US metadata in isolated catalog.",
+      "Dayu meta fiscal_year=2025 conflicts with Microsoft FY2026 Q2; leave requested fiscal_year unpromoted until official period/issuer calendar proof."
+    ],
+    "evidence": [
+      {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-26-027207\\meta.json",
+        "locator": "filing_date/report_date/files[primary_document]",
+        "authority": "provider_record; fiscal year not promoted without actual cover"
+      },
+      {
+        "artifact": "raw 10-Q cover and SEC FY2026 primary index",
+        "locator": "period of report / issuer Fiscal Year End 0630",
+        "method": "Microsoft fiscal year ends June 30, proven by exact FY2025 SEC 10-K cover and SEC FY2026 target index FYE0630; FY/Q is calendar mapping, not copied Dayu fiscal_year."
+      },
+      {
+        "artifact": "actual raw SEC HTML bytes",
+        "locator": "dei:DocumentFiscalYearFocus/DocumentFiscalPeriodFocus/DocumentPeriodEndDate/EntityCentralIndexKey",
+        "authority": "original iXBRL cover facts; primary period identity"
+      }
+    ],
+    "storage_catalog_observation": {
+      "document_kind": "regulatory_filing",
+      "published_date": "2026-01-28",
+      "source_status": "retired",
+      "metadata": {
+        "source_title": null,
+        "market": null,
+        "security_id": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "published_date": null,
+        "source_url": null,
+        "language": null
+      }
+    },
+    "cover_observation": null,
+    "raw_ixbrl_identity": {
+      "DocumentFiscalYearFocus": "2026",
+      "DocumentFiscalPeriodFocus": "Q2",
+      "DocumentPeriodEndDate": "December 31, 2025",
+      "EntityCentralIndexKey": "0000789019"
+    }
+  },
+  {
+    "company": "US-MSFT",
+    "raw": {
+      "sha256": "76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+      "byte_size": 7731948,
+      "magic": "<?xml versio"
+    },
+    "catalog": {
+      "status": "blocked",
+      "reason": "source_not_active",
+      "source_ref": null
+    },
+    "storage": {
+      "raw_path": "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-26-191507\\msft-20260331.htm"
+    },
+    "metadata": {
+      "published_date": "2026-04-29",
+      "fiscal_year": 2026,
+      "fiscal_period": "Q3",
+      "period_end": "2026-03-31",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526191507/msft-20260331.htm",
+      "language": "en",
+      "form_type": "10-Q",
+      "provider_observed_fiscal_year": 2026
+    },
+    "metadata_conflicts": [
+      "Existing .source.json says market=HK with security_id MSFT; do not consume/copy wrong identity. Register verified issuer/SEC US metadata in isolated catalog."
+    ],
+    "evidence": [
+      {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-26-191507\\meta.json",
+        "locator": "filing_date/report_date/files[primary_document]",
+        "authority": "provider_record; fiscal year not promoted without actual cover"
+      },
+      {
+        "artifact": "raw 10-Q cover and SEC FY2026 primary index",
+        "locator": "period of report / issuer Fiscal Year End 0630",
+        "method": "Microsoft fiscal year ends June 30, proven by exact FY2025 SEC 10-K cover and SEC FY2026 target index FYE0630; FY/Q is calendar mapping, not copied Dayu fiscal_year."
+      },
+      {
+        "artifact": "actual raw SEC HTML bytes",
+        "locator": "dei:DocumentFiscalYearFocus/DocumentFiscalPeriodFocus/DocumentPeriodEndDate/EntityCentralIndexKey",
+        "authority": "original iXBRL cover facts; primary period identity"
+      }
+    ],
+    "storage_catalog_observation": {
+      "document_kind": "regulatory_filing",
+      "published_date": "2026-04-29",
+      "source_status": "retired",
+      "metadata": {
+        "source_title": null,
+        "market": null,
+        "security_id": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "published_date": null,
+        "source_url": null,
+        "language": null
+      }
+    },
+    "cover_observation": null,
+    "raw_ixbrl_identity": {
+      "DocumentFiscalYearFocus": "2026",
+      "DocumentFiscalPeriodFocus": "Q3",
+      "DocumentPeriodEndDate": "March 31, 2026",
+      "EntityCentralIndexKey": "0000789019"
+    }
+  }
+]

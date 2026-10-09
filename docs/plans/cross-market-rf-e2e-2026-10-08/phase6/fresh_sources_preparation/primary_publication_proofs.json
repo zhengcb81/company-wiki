@@ -1,0 +1,98 @@
+{
+  "schema_version": "fresh-source-primary-observations/1",
+  "observed_at": "2026-10-09T04:48:42.075642+00:00",
+  "web_observations_are_not_retained_original_bytes": true,
+  "proofs": [
+    {
+      "id": "msft_fy26_10k_primary",
+      "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/0001193125-26-323660-index.htm",
+      "observation": "turn282view0",
+      "locator": "Filing Date / Period of Report / document sequence1 / Filer",
+      "facts": {
+        "published_date": "2026-07-29",
+        "period_end": "2026-06-30",
+        "form_type": "10-K",
+        "issuer": "MICROSOFT CORP",
+        "security_id": "MSFT",
+        "cik": "0000789019",
+        "primary_document_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+        "publisher_reported_primary_bytes": 8585501
+      },
+      "limits": "Primary document web open exceeded web4MiB limit; no local original downloaded, local SHA unknown."
+    },
+    {
+      "id": "msft_fy27_deck_date",
+      "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526380280/d291965d8k.htm",
+      "observation": "turn285view1",
+      "locator": "Item7.01; Exhibit99.1",
+      "facts": {
+        "published_date": "2026-09-02",
+        "presentation_title": "FY27 Segments and Investor Metrics"
+      },
+      "retained_prior_proof": "../msft_presentation_publication_investigation.json",
+      "limits": "Official SEC text exhibit is a distinct version/source; current web parsed output does not establish its raw SHA or equivalence to PPTX."
+    },
+    {
+      "id": "msft_fy26q4_release",
+      "url": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q4/press-release-webcast",
+      "observation": "turn280view0",
+      "locator": "release dateline/quarter ended/full fiscal year",
+      "facts": {
+        "published_date": "2026-07-29",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q4",
+        "period_end": "2026-06-30"
+      }
+    },
+    {
+      "id": "msft_fy26q4_official_call",
+      "url": "https://www.microsoft.com/en-us/Investor/events/fy-2026/earnings-fy-2026-q4",
+      "observation": "turn285view2",
+      "locator": "event heading/Transcript date",
+      "facts": {
+        "communication_date": "2026-07-29",
+        "language": "en"
+      },
+      "limits": "Official HTML and stored motley_fool TXT are distinct byte/source identities."
+    },
+    {
+      "id": "tencent_current_official_list",
+      "url": "https://www.tencent.com/investors/financial-reports/",
+      "observation": "turn282view2",
+      "locator": "2026 Interim Report, 2025 Annual Report,2024 Annual Report",
+      "facts": {
+        "available_document_titles": [
+          "2026 Interim Report",
+          "2025 Annual Report",
+          "2024 Annual Report"
+        ]
+      },
+      "limits": "Undated current index does not itself prove exact H1 report publication day. Old capture existed2026-10-08; do not overwrite this with capture day."
+    },
+    {
+      "id": "tencent_2q26_release",
+      "url": "https://www.tencent.com/wp-content/uploads/2026/08/Tencent-Announces-2026-Second-Quarter-Results.pdf",
+      "observation": "turn282view3",
+      "locator": "original9-page release and old supplemental_capture_receipts name results_2q2026",
+      "facts": {
+        "release_date": "2026-08-12",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q2",
+        "language": "en"
+      }
+    },
+    {
+      "id": "amec_official_2026h1",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482884.PDF",
+      "observation": "turn281search12",
+      "locator": "official CNINFO original report; current SourceVersionReader source metadata",
+      "facts": {
+        "published_date": "2026-08-20",
+        "fiscal_year": 2026,
+        "fiscal_period": "H1",
+        "market": "CN",
+        "security_id": "688012"
+      }
+    }
+  ]
+}

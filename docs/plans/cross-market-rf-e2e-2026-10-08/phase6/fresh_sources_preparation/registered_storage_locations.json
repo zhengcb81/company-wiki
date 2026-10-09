@@ -1,0 +1,398 @@
+[
+  {
+    "source_ref": {
+      "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "byte_size": 9165875,
+      "mime_type": "application/pdf",
+      "schema_version": "2.0"
+    },
+    "storage": {
+      "registered_locations": [
+        {
+          "location_id": "urn:company-wiki:location:sha256:c99590b373d511d2c8d54df26c8ab79d86d611655bac863abbc8628eeb543e49",
+          "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "root_id": "company_raw",
+          "relative_path": "中微公司/raw/financial_reports/中微公司：2025年年度报告.pdf",
+          "role": "original_primary",
+          "location_status": "active",
+          "manifest_json": "{\"byte_size\":9165875,\"collector_name\":\"filesystem-catalog-company_raw\",\"collector_version\":\"1.0.0\",\"content_sha256\":\"d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5\",\"entity_ids\":[\"company-name:中微公司\"],\"immutable_status\":\"verified\",\"mime_type\":\"application/pdf\",\"original_path\":\"中微公司/raw/financial_reports/中微公司：2025年年度报告.pdf\",\"published_date\":null,\"retrieved_at\":\"2026-07-25T20:05:24Z\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5\",\"source_type\":\"regulatory_filing\"}"
+        },
+        {
+          "location_id": "urn:company-wiki:location:sha256:6da1e171474ed540710a7b10c8465151823c4388be069cf28b0344510092f701",
+          "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "root_id": "dropbox_stock",
+          "relative_path": "工业与信息化/电子/中微公司/中微公司：2025年年度报告.pdf",
+          "role": "original_primary",
+          "location_status": "active",
+          "manifest_json": "{\"byte_size\":9165875,\"collector_name\":\"filesystem-catalog-dropbox_stock\",\"collector_version\":\"1.0.0\",\"content_sha256\":\"d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5\",\"entity_ids\":[\"company-name:中微公司\"],\"immutable_status\":\"verified\",\"mime_type\":\"application/pdf\",\"original_path\":\"工业与信息化/电子/中微公司/中微公司：2025年年度报告.pdf\",\"published_date\":null,\"retrieved_at\":\"2026-07-26T10:31:10Z\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5\",\"source_type\":\"regulatory_filing\"}"
+        }
+      ]
+    }
+  },
+  {
+    "source_ref": {
+      "document_id": "urn:company-wiki:document:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "content_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "byte_size": 217264,
+      "mime_type": "application/pdf",
+      "schema_version": "2.0"
+    },
+    "storage": {
+      "registered_locations": [
+        {
+          "location_id": "urn:company-wiki:location:sha256:99287847c0603973d1a0dac4fbb0b569c17bf0d79e7816511c55a6572a99c4b4",
+          "document_id": "urn:company-wiki:document:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+          "root_id": "company_raw",
+          "relative_path": "中微公司/raw/financial_reports/中微公司：2026年第一季度报告.pdf",
+          "role": "original_primary",
+          "location_status": "active",
+          "manifest_json": "{\"byte_size\":217264,\"collector_name\":\"filesystem-catalog-company_raw\",\"collector_version\":\"1.0.0\",\"content_sha256\":\"ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268\",\"entity_ids\":[\"company-name:中微公司\"],\"immutable_status\":\"verified\",\"mime_type\":\"application/pdf\",\"original_path\":\"中微公司/raw/financial_reports/中微公司：2026年第一季度报告.pdf\",\"published_date\":null,\"retrieved_at\":\"2026-07-25T20:05:24Z\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268\",\"source_type\":\"regulatory_filing\"}"
+        }
+      ]
+    }
+  },
+  {
+    "source_ref": {
+      "document_id": "urn:company-wiki:document:sha256:c6c8af01f57e6f163951d5473c5f07334d6ee483532d3468c1fd9aa0cd3d4eb4",
+      "source_id": "urn:company-wiki:source:sha256:c6c8af01f57e6f163951d5473c5f07334d6ee483532d3468c1fd9aa0cd3d4eb4",
+      "content_sha256": "c6c8af01f57e6f163951d5473c5f07334d6ee483532d3468c1fd9aa0cd3d4eb4",
+      "byte_size": 429558,
+      "mime_type": "application/pdf",
+      "schema_version": "2.0"
+    },
+    "storage": {
+      "registered_locations": [
+        {
+          "location_id": "urn:company-wiki:location:sha256:cd629aaa690a7ac64acb43738bd15d21e5643abf08a3423fe948bb20f87d9c47",
+          "document_id": "urn:company-wiki:document:sha256:c6c8af01f57e6f163951d5473c5f07334d6ee483532d3468c1fd9aa0cd3d4eb4",
+          "source_id": "urn:company-wiki:source:sha256:c6c8af01f57e6f163951d5473c5f07334d6ee483532d3468c1fd9aa0cd3d4eb4",
+          "root_id": "company_raw",
+          "relative_path": "中微公司/raw/research/中微公司：2022年4月投资者关系活动记录表.pdf",
+          "role": "original_primary",
+          "location_status": "active",
+          "manifest_json": "{\"byte_size\":429558,\"collector_name\":\"filesystem-catalog-company_raw\",\"collector_version\":\"1.0.0\",\"content_sha256\":\"c6c8af01f57e6f163951d5473c5f07334d6ee483532d3468c1fd9aa0cd3d4eb4\",\"entity_ids\":[\"company-name:中微公司\"],\"immutable_status\":\"verified\",\"mime_type\":\"application/pdf\",\"original_path\":\"中微公司/raw/research/中微公司：2022年4月投资者关系活动记录表.pdf\",\"published_date\":null,\"retrieved_at\":\"2026-07-25T20:05:24Z\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:c6c8af01f57e6f163951d5473c5f07334d6ee483532d3468c1fd9aa0cd3d4eb4\",\"source_type\":\"investor_relations\"}"
+        },
+        {
+          "location_id": "urn:company-wiki:location:sha256:ca78069194b0332113dcd08ba859f9c7e9d46419950c4678e33379df250dd362",
+          "document_id": "urn:company-wiki:document:sha256:c6c8af01f57e6f163951d5473c5f07334d6ee483532d3468c1fd9aa0cd3d4eb4",
+          "source_id": "urn:company-wiki:source:sha256:c6c8af01f57e6f163951d5473c5f07334d6ee483532d3468c1fd9aa0cd3d4eb4",
+          "root_id": "dropbox_stock",
+          "relative_path": "工业与信息化/电子/中微公司/中微公司：2022年4月投资者关系活动记录表.PDF",
+          "role": "original_primary",
+          "location_status": "active",
+          "manifest_json": "{\"byte_size\":429558,\"collector_name\":\"filesystem-catalog-dropbox_stock\",\"collector_version\":\"1.0.0\",\"content_sha256\":\"c6c8af01f57e6f163951d5473c5f07334d6ee483532d3468c1fd9aa0cd3d4eb4\",\"entity_ids\":[\"company-name:中微公司\"],\"immutable_status\":\"verified\",\"mime_type\":\"application/pdf\",\"original_path\":\"工业与信息化/电子/中微公司/中微公司：2022年4月投资者关系活动记录表.PDF\",\"published_date\":null,\"retrieved_at\":\"2026-07-26T10:31:10Z\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:c6c8af01f57e6f163951d5473c5f07334d6ee483532d3468c1fd9aa0cd3d4eb4\",\"source_type\":\"investor_relations\"}"
+        }
+      ]
+    }
+  },
+  {
+    "source_ref": {
+      "document_id": "urn:company-wiki:document:sha256:4cd1285cc0c6d7daed25acba34621590327aeb26b362b4b038325dc7552f2f27",
+      "source_id": "urn:company-wiki:source:sha256:4cd1285cc0c6d7daed25acba34621590327aeb26b362b4b038325dc7552f2f27",
+      "content_sha256": "4cd1285cc0c6d7daed25acba34621590327aeb26b362b4b038325dc7552f2f27",
+      "byte_size": 527524,
+      "mime_type": "application/pdf",
+      "schema_version": "2.0"
+    },
+    "storage": {
+      "registered_locations": [
+        {
+          "location_id": "urn:company-wiki:location:sha256:8918ad5a5a4373a9d176fdebc589c77e77b60c169222dda732b62071f31e38c8",
+          "document_id": "urn:company-wiki:document:sha256:4cd1285cc0c6d7daed25acba34621590327aeb26b362b4b038325dc7552f2f27",
+          "source_id": "urn:company-wiki:source:sha256:4cd1285cc0c6d7daed25acba34621590327aeb26b362b4b038325dc7552f2f27",
+          "root_id": "company_raw",
+          "relative_path": "中微公司/raw/research/中微公司：2022年5月投资者关系活动记录表.pdf",
+          "role": "original_primary",
+          "location_status": "active",
+          "manifest_json": "{\"byte_size\":527524,\"collector_name\":\"filesystem-catalog-company_raw\",\"collector_version\":\"1.0.0\",\"content_sha256\":\"4cd1285cc0c6d7daed25acba34621590327aeb26b362b4b038325dc7552f2f27\",\"entity_ids\":[\"company-name:中微公司\"],\"immutable_status\":\"verified\",\"mime_type\":\"application/pdf\",\"original_path\":\"中微公司/raw/research/中微公司：2022年5月投资者关系活动记录表.pdf\",\"published_date\":null,\"retrieved_at\":\"2026-07-25T20:05:24Z\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:4cd1285cc0c6d7daed25acba34621590327aeb26b362b4b038325dc7552f2f27\",\"source_type\":\"investor_relations\"}"
+        },
+        {
+          "location_id": "urn:company-wiki:location:sha256:170bf5d7f7f92469c4175b0b95bde7f37440b28c27db4477006891c6b3118c66",
+          "document_id": "urn:company-wiki:document:sha256:4cd1285cc0c6d7daed25acba34621590327aeb26b362b4b038325dc7552f2f27",
+          "source_id": "urn:company-wiki:source:sha256:4cd1285cc0c6d7daed25acba34621590327aeb26b362b4b038325dc7552f2f27",
+          "root_id": "dropbox_stock",
+          "relative_path": "工业与信息化/电子/中微公司/中微公司：2022年5月投资者关系活动记录表.PDF",
+          "role": "original_primary",
+          "location_status": "active",
+          "manifest_json": "{\"byte_size\":527524,\"collector_name\":\"filesystem-catalog-dropbox_stock\",\"collector_version\":\"1.0.0\",\"content_sha256\":\"4cd1285cc0c6d7daed25acba34621590327aeb26b362b4b038325dc7552f2f27\",\"entity_ids\":[\"company-name:中微公司\"],\"immutable_status\":\"verified\",\"mime_type\":\"application/pdf\",\"original_path\":\"工业与信息化/电子/中微公司/中微公司：2022年5月投资者关系活动记录表.PDF\",\"published_date\":null,\"retrieved_at\":\"2026-07-26T10:31:10Z\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:4cd1285cc0c6d7daed25acba34621590327aeb26b362b4b038325dc7552f2f27\",\"source_type\":\"investor_relations\"}"
+        }
+      ]
+    }
+  },
+  {
+    "source_ref": {
+      "document_id": "urn:company-wiki:document:sha256:66ee21adde8c4c7d54bb5af314c84499a22d0796777fd7ed076e22445e1638fd",
+      "source_id": "urn:company-wiki:source:sha256:66ee21adde8c4c7d54bb5af314c84499a22d0796777fd7ed076e22445e1638fd",
+      "content_sha256": "66ee21adde8c4c7d54bb5af314c84499a22d0796777fd7ed076e22445e1638fd",
+      "byte_size": 455833,
+      "mime_type": "application/pdf",
+      "schema_version": "2.0"
+    },
+    "storage": {
+      "registered_locations": [
+        {
+          "location_id": "urn:company-wiki:location:sha256:350fc2da7cb44381d66e7995639efabf6d93002423f291ffa89d7c430b57d309",
+          "document_id": "urn:company-wiki:document:sha256:66ee21adde8c4c7d54bb5af314c84499a22d0796777fd7ed076e22445e1638fd",
+          "source_id": "urn:company-wiki:source:sha256:66ee21adde8c4c7d54bb5af314c84499a22d0796777fd7ed076e22445e1638fd",
+          "root_id": "company_raw",
+          "relative_path": "中微公司/raw/research/中微公司：2022年6月投资者关系活动记录表.pdf",
+          "role": "original_primary",
+          "location_status": "active",
+          "manifest_json": "{\"byte_size\":455833,\"collector_name\":\"filesystem-catalog-company_raw\",\"collector_version\":\"1.0.0\",\"content_sha256\":\"66ee21adde8c4c7d54bb5af314c84499a22d0796777fd7ed076e22445e1638fd\",\"entity_ids\":[\"company-name:中微公司\"],\"immutable_status\":\"verified\",\"mime_type\":\"application/pdf\",\"original_path\":\"中微公司/raw/research/中微公司：2022年6月投资者关系活动记录表.pdf\",\"published_date\":null,\"retrieved_at\":\"2026-07-25T20:05:24Z\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:66ee21adde8c4c7d54bb5af314c84499a22d0796777fd7ed076e22445e1638fd\",\"source_type\":\"investor_relations\"}"
+        },
+        {
+          "location_id": "urn:company-wiki:location:sha256:d32c587885335b6c18d07d57ddd41cf7ec409b89bbaa6d58d1b71444619e1caf",
+          "document_id": "urn:company-wiki:document:sha256:66ee21adde8c4c7d54bb5af314c84499a22d0796777fd7ed076e22445e1638fd",
+          "source_id": "urn:company-wiki:source:sha256:66ee21adde8c4c7d54bb5af314c84499a22d0796777fd7ed076e22445e1638fd",
+          "root_id": "dropbox_stock",
+          "relative_path": "工业与信息化/电子/中微公司/中微公司：2022年6月投资者关系活动记录表.PDF",
+          "role": "original_primary",
+          "location_status": "active",
+          "manifest_json": "{\"byte_size\":455833,\"collector_name\":\"filesystem-catalog-dropbox_stock\",\"collector_version\":\"1.0.0\",\"content_sha256\":\"66ee21adde8c4c7d54bb5af314c84499a22d0796777fd7ed076e22445e1638fd\",\"entity_ids\":[\"company-name:中微公司\"],\"immutable_status\":\"verified\",\"mime_type\":\"application/pdf\",\"original_path\":\"工业与信息化/电子/中微公司/中微公司：2022年6月投资者关系活动记录表.PDF\",\"published_date\":null,\"retrieved_at\":\"2026-07-26T10:31:10Z\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:66ee21adde8c4c7d54bb5af314c84499a22d0796777fd7ed076e22445e1638fd\",\"source_type\":\"investor_relations\"}"
+        }
+      ]
+    }
+  },
+  {
+    "source_ref": {
+      "document_id": "urn:company-wiki:document:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+      "source_id": "urn:company-wiki:source:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+      "content_sha256": "76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+      "byte_size": 167252,
+      "mime_type": "application/pdf",
+      "schema_version": "2.0"
+    },
+    "storage": {
+      "registered_locations": [
+        {
+          "location_id": "urn:company-wiki:location:sha256:6b11bd1108b7fd56b0cd10a947f0989b400488a2ee0760af936736a3e5b3a702",
+          "document_id": "urn:company-wiki:document:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+          "source_id": "urn:company-wiki:source:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+          "root_id": "company_raw",
+          "relative_path": "中微公司/raw/investor_relations/中微公司：投资者关系管理办法（2025年8月）.pdf",
+          "role": "original_primary",
+          "location_status": "active",
+          "manifest_json": "{\"byte_size\":167252,\"collector_name\":\"filesystem-catalog-company_raw\",\"collector_version\":\"1.0.0\",\"content_sha256\":\"76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678\",\"entity_ids\":[\"company-name:中微公司\"],\"immutable_status\":\"verified\",\"mime_type\":\"application/pdf\",\"original_path\":\"中微公司/raw/investor_relations/中微公司：投资者关系管理办法（2025年8月）.pdf\",\"published_date\":null,\"retrieved_at\":\"2026-07-25T20:05:24Z\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678\",\"source_type\":\"investor_relations\"}"
+        }
+      ]
+    }
+  },
+  {
+    "source_ref": {
+      "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "content_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "byte_size": 11211796,
+      "mime_type": "application/pdf",
+      "schema_version": "2.0"
+    },
+    "storage": {
+      "registered_locations": [
+        {
+          "location_id": "urn:company-wiki:location:sha256:f86358acc1f0a1d8b8b3e1c60e334730a62af4e7a039c472366cba0770dcb26e",
+          "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+          "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+          "root_id": "company_raw",
+          "relative_path": "中微公司/raw/prospectus/中微公司：首次公开发行股票并在科创板上市招股说明书.pdf",
+          "role": "original_primary",
+          "location_status": "active",
+          "manifest_json": "{\"byte_size\":11211796,\"collector_name\":\"filesystem-catalog-company_raw\",\"collector_version\":\"1.0.0\",\"content_sha256\":\"19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67\",\"entity_ids\":[\"company-name:中微公司\"],\"immutable_status\":\"verified\",\"mime_type\":\"application/pdf\",\"original_path\":\"中微公司/raw/prospectus/中微公司：首次公开发行股票并在科创板上市招股说明书.pdf\",\"published_date\":null,\"retrieved_at\":\"2026-07-25T20:05:24Z\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67\",\"source_type\":\"prospectus\"}"
+        }
+      ]
+    }
+  },
+  {
+    "source_ref": {
+      "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "byte_size": 4428270,
+      "mime_type": "application/pdf",
+      "schema_version": "2.0"
+    },
+    "storage": {
+      "registered_locations": [
+        {
+          "location_id": "urn:company-wiki:location:sha256:e13489043ab4d496ca9a5bf73ea6b8f7092462acd887fa1ebc9e56cfd8325b23",
+          "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "root_id": "company_raw",
+          "relative_path": "腾讯/raw/financial_reports/annual/腾讯：2025年年度报告.pdf",
+          "role": "original_primary",
+          "location_status": "active",
+          "manifest_json": "{\"byte_size\":4428270,\"collector_name\":\"filesystem-catalog-company_raw\",\"collector_version\":\"1.0.0\",\"content_sha256\":\"d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7\",\"entity_ids\":[\"company-name:腾讯\"],\"immutable_status\":\"verified\",\"mime_type\":\"application/pdf\",\"original_path\":\"腾讯/raw/financial_reports/annual/腾讯：2025年年度报告.pdf\",\"published_date\":null,\"retrieved_at\":\"2026-07-26T10:31:10Z\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7\",\"source_type\":\"regulatory_filing\"}"
+        }
+      ]
+    }
+  },
+  {
+    "source_ref": {
+      "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+      "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+      "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+      "byte_size": 5241364,
+      "mime_type": "application/pdf",
+      "schema_version": "2.0"
+    },
+    "storage": {
+      "registered_locations": [
+        {
+          "location_id": "urn:company-wiki:location:sha256:955268463d77a84a6f56fd099297271bc0b707f927269bfada789e9e2736b28b",
+          "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "root_id": "company_raw",
+          "relative_path": "腾讯/raw/financial_reports/annual/腾讯：2024年年度报告.pdf",
+          "role": "original_primary",
+          "location_status": "active",
+          "manifest_json": "{\"byte_size\":5241364,\"collector_name\":\"filesystem-catalog-company_raw\",\"collector_version\":\"1.0.0\",\"content_sha256\":\"70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0\",\"entity_ids\":[\"company-name:腾讯\"],\"immutable_status\":\"verified\",\"mime_type\":\"application/pdf\",\"original_path\":\"腾讯/raw/financial_reports/annual/腾讯：2024年年度报告.pdf\",\"published_date\":null,\"retrieved_at\":\"2026-07-26T10:31:10Z\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0\",\"source_type\":\"regulatory_filing\"}"
+        }
+      ]
+    }
+  },
+  {
+    "source_ref": {
+      "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "byte_size": 8158067,
+      "mime_type": "text/html",
+      "schema_version": "2.0"
+    },
+    "storage": {
+      "registered_locations": [
+        {
+          "location_id": "urn:company-wiki:location:sha256:d7daeaaef3aa6bfd02b9833a0099df189032154be46a20ec07491516bbaf706c",
+          "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+          "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+          "root_id": "company_raw",
+          "relative_path": "微软/raw/financial_reports/annual/微软_10-K_2025.htm",
+          "role": "original_primary",
+          "location_status": "active",
+          "manifest_json": "{\"byte_size\":8158067,\"collector_name\":\"filesystem-catalog-company_raw\",\"collector_version\":\"1.0.0\",\"content_sha256\":\"99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe\",\"entity_ids\":[\"company-name:微软\"],\"immutable_status\":\"verified\",\"mime_type\":\"text/html\",\"original_path\":\"微软/raw/financial_reports/annual/微软_10-K_2025.htm\",\"published_date\":null,\"retrieved_at\":\"2026-07-26T06:59:14Z\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe\",\"source_type\":\"regulatory_filing\"}"
+        },
+        {
+          "location_id": "urn:company-wiki:location:sha256:2459184d3ce121088de32b8fdcc70f2250ac056448ef00e161ec7983371ee5e0",
+          "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+          "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+          "root_id": "dayu_portfolio",
+          "relative_path": "MSFT/filings/fil_0000950170-25-100235/msft-20250630.htm",
+          "role": "original_primary",
+          "location_status": "active",
+          "manifest_json": "{\"byte_size\":8158067,\"collector_name\":\"filesystem-catalog-dayu_portfolio\",\"collector_version\":\"1.0.0\",\"content_sha256\":\"99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe\",\"entity_ids\":[\"ticker:MSFT\"],\"immutable_status\":\"verified\",\"mime_type\":\"text/html\",\"original_path\":\"MSFT/filings/fil_0000950170-25-100235/msft-20250630.htm\",\"published_date\":\"2025-07-30\",\"retrieved_at\":\"2026-07-26T10:31:10Z\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe\",\"source_type\":\"regulatory_filing\"}"
+        }
+      ]
+    }
+  },
+  {
+    "source_ref": {
+      "document_id": "urn:company-wiki:document:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+      "source_id": "urn:company-wiki:source:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+      "content_sha256": "43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+      "byte_size": 6860911,
+      "mime_type": "text/html",
+      "schema_version": "2.0"
+    },
+    "storage": {
+      "registered_locations": [
+        {
+          "location_id": "urn:company-wiki:location:sha256:1281aaefd307ff4d5cd8e822e72b9ba8ce7f4088ff5282b58da5469995725582",
+          "document_id": "urn:company-wiki:document:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+          "source_id": "urn:company-wiki:source:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+          "root_id": "company_raw",
+          "relative_path": "微软/raw/financial_reports/annual/微软_10-K_2024.htm",
+          "role": "original_primary",
+          "location_status": "active",
+          "manifest_json": "{\"byte_size\":6860911,\"collector_name\":\"filesystem-catalog-company_raw\",\"collector_version\":\"1.0.0\",\"content_sha256\":\"43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95\",\"entity_ids\":[\"company-name:微软\"],\"immutable_status\":\"verified\",\"mime_type\":\"text/html\",\"original_path\":\"微软/raw/financial_reports/annual/微软_10-K_2024.htm\",\"published_date\":null,\"retrieved_at\":\"2026-07-26T06:59:14Z\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95\",\"source_type\":\"regulatory_filing\"}"
+        },
+        {
+          "location_id": "urn:company-wiki:location:sha256:7bb876dfd212a1f056aaaeb0babf37435736a72262c094f187fcb356840cedf3",
+          "document_id": "urn:company-wiki:document:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+          "source_id": "urn:company-wiki:source:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+          "root_id": "dayu_portfolio",
+          "relative_path": "MSFT/filings/fil_0000950170-24-087843/msft-20240630.htm",
+          "role": "original_primary",
+          "location_status": "active",
+          "manifest_json": "{\"byte_size\":6860911,\"collector_name\":\"filesystem-catalog-dayu_portfolio\",\"collector_version\":\"1.0.0\",\"content_sha256\":\"43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95\",\"entity_ids\":[\"ticker:MSFT\"],\"immutable_status\":\"verified\",\"mime_type\":\"text/html\",\"original_path\":\"MSFT/filings/fil_0000950170-24-087843/msft-20240630.htm\",\"published_date\":\"2024-07-30\",\"retrieved_at\":\"2026-07-26T10:31:10Z\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95\",\"source_type\":\"regulatory_filing\"}"
+        }
+      ]
+    }
+  },
+  {
+    "source_ref": {
+      "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "content_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "byte_size": 66324,
+      "mime_type": "text/plain",
+      "schema_version": "2.0"
+    },
+    "storage": {
+      "registered_locations": [
+        {
+          "location_id": "urn:company-wiki:location:sha256:0869e41e645b79fef6d328af7bf4f0c07cf6fa13a6fa87b2c081f56a78f1dfeb",
+          "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+          "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+          "root_id": "company_raw",
+          "relative_path": "Microsoft/raw/transcripts/MSFT_Q4_2026_earnings_call.txt",
+          "role": "original_primary",
+          "location_status": "active",
+          "manifest_json": "{\"byte_size\":66324,\"collector_name\":\"filesystem-catalog-company_raw\",\"collector_version\":\"1.0.2\",\"content_sha256\":\"4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a\",\"entity_ids\":[\"ticker:MICROSOFT\"],\"immutable_status\":\"verified\",\"mime_type\":\"text/plain\",\"original_path\":\"Microsoft/raw/transcripts/MSFT_Q4_2026_earnings_call.txt\",\"published_date\":null,\"retrieved_at\":\"2026-10-08T00:10:13Z\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a\",\"source_type\":\"investor_relations\"}"
+        }
+      ]
+    }
+  },
+  {
+    "source_ref": {
+      "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "byte_size": 3149962,
+      "mime_type": "application/pdf",
+      "schema_version": "2.0"
+    },
+    "storage": {
+      "registered_locations": [
+        {
+          "location_id": "urn:company-wiki:location:sha256:632cb5390b4473846934a065185398cc5989870101e8e728a2115e1dfdf54691",
+          "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+          "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+          "root_id": "company_raw",
+          "relative_path": "中微公司/raw/financial_reports/semi_annual/2026-08-19_cninfo_1225482884_2026年半年度报告.pdf",
+          "role": "original_primary",
+          "location_status": "active",
+          "manifest_json": "{\"byte_size\":3149962,\"collector_name\":\"stockinfo-cninfo\",\"collector_version\":\"1.3.0\",\"content_sha256\":\"182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe\",\"entity_ids\":[\"company-name:中微公司\"],\"immutable_status\":\"verified\",\"mime_type\":\"application/pdf\",\"original_path\":\"中微公司/raw/financial_reports/semi_annual/2026-08-19_cninfo_1225482884_2026年半年度报告.pdf\",\"published_date\":\"2026-08-19\",\"retrieved_at\":\"2026-10-08T07:17:59Z\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe\",\"source_type\":\"regulatory_filing\"}"
+        }
+      ]
+    }
+  },
+  {
+    "source_ref": {
+      "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "content_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "byte_size": 6361468,
+      "mime_type": "application/pdf",
+      "schema_version": "2.0"
+    },
+    "storage": {
+      "registered_locations": [
+        {
+          "location_id": "urn:company-wiki:location:sha256:259514bd70955d4f7114c84674624c270ea1759856aa263c654d5fc530c01d68",
+          "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+          "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+          "root_id": "company_raw",
+          "relative_path": "中微公司/raw/financial_reports/中微公司：2025年半年度报告.pdf",
+          "role": "original_primary",
+          "location_status": "active",
+          "manifest_json": "{\"byte_size\":6361468,\"collector_name\":\"filesystem-catalog-company_raw\",\"collector_version\":\"1.0.0\",\"content_sha256\":\"91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd\",\"entity_ids\":[\"company-name:中微公司\"],\"immutable_status\":\"verified\",\"mime_type\":\"application/pdf\",\"original_path\":\"中微公司/raw/financial_reports/中微公司：2025年半年度报告.pdf\",\"published_date\":null,\"retrieved_at\":\"2026-07-25T20:05:24Z\",\"schema_version\":\"1.0.0\",\"source_id\":\"urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd\",\"source_type\":\"regulatory_filing\"}"
+        }
+      ]
+    }
+  }
+]

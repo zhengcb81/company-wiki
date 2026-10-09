@@ -1,0 +1,56 @@
+{
+  "schema_version": "fresh-sources-preparation-integrity/1",
+  "created_at": "2026-10-09T04:50:04.389442+00:00",
+  "files": {
+    "catalog_query.json": {
+      "sha256": "32298d08a884490b3098578f5dd05e533c7f3c2eaef1757303b07aedf01255a2",
+      "bytes": 61529
+    },
+    "local_unregistered_candidates.json": {
+      "sha256": "4f1b554886800fc3c85b267f4f3143e81325d14f10c68e476c40387bc84394d4",
+      "bytes": 17948
+    },
+    "manifest.json": {
+      "sha256": "96541f94bb13a05ecf90cac69e9fe52de8c76a398186329be06ddfade6f30c40",
+      "bytes": 47549
+    },
+    "primary_publication_proofs.json": {
+      "sha256": "93e6e06a32683fd068f8121221a09c7ac5254cc7965b87e63a44abc020ff486d",
+      "bytes": 3999
+    },
+    "README.md": {
+      "sha256": "c95a10f5d37e93dbc5a2a12f3fe63b49180ae53db32438da02bc2308bed84e40",
+      "bytes": 7433
+    },
+    "registered_storage_locations.json": {
+      "sha256": "3b7530bc7f9705298eb3260835681c074eb2f9ee0b40fe548de0099ce55f4cb9",
+      "bytes": 33872
+    },
+    "retired_source_diagnosis.json": {
+      "sha256": "841fcf40057a980d2c923b41eeae4c92864182074020c130ea5762e7dba91d82",
+      "bytes": 11201
+    },
+    "sealed_cases_sources.json": {
+      "sha256": "e5a9111508813a7710755a79404d1798130810d9b5b4f9e8104757dae6d63be2",
+      "bytes": 46447
+    },
+    "storage_target_paths.json": {
+      "sha256": "d319ffa21ced4d00f34d1d33c1a19721af7715fcb315a3c90a602b2e5410733e",
+      "bytes": 23549
+    }
+  },
+  "production_config_sha256_after": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+  "production_config_sha256_before": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+  "self_hash_excluded": true,
+  "activity": {
+    "download_events": 0,
+    "provider_calls": 0,
+    "model_calls": 0,
+    "OCR_calls": 0,
+    "catalog_writes": 0,
+    "production_config_writes": 0,
+    "raw_writes": 0,
+    "full_library_scan": false,
+    "consumer_rule": "RF receives public SourceRef and manifests only; all raw paths are storage preparation fields, never RF joins"
+  }
+}

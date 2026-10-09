@@ -1,6 +1,6 @@
 # MAIN：OCR 与有限 Worker / 公共 read 的统一接线
 
-状态：待 parser 包交付后实施；不改变两个 parser/generation owner 的独占文件。单一大节点先责任 RED，再真实 22 页 batch / public read / 默认复用。
+状态：工程接线67b55d72已合master979792e0/push且精确CI成功；215责任、76追加有重叠、3 configured carriers实绿。真实22页batch/public read/默认复用尚未跑，不能称产品完成。
 
 ## 调查后的接口决定
 

@@ -1,0 +1,1538 @@
+{
+  "observed_at": "2026-10-09T04:39:04.833335+00:00",
+  "config_sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+  "roots": [
+    {
+      "root_id": "company_raw",
+      "kind": "company_raw",
+      "storage": {
+        "root_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies"
+      },
+      "exists": true
+    },
+    {
+      "root_id": "dayu_portfolio",
+      "kind": "dayu_portfolio",
+      "storage": {
+        "root_path": "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio"
+      },
+      "exists": true
+    },
+    {
+      "root_id": "dropbox_stock",
+      "kind": "directory",
+      "storage": {
+        "root_path": "C:\\Users\\郑曾波\\Dropbox\\Stock"
+      },
+      "exists": true
+    },
+    {
+      "root_id": "future_lake",
+      "kind": "directory",
+      "storage": {
+        "root_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\future_lake"
+      },
+      "exists": true
+    }
+  ],
+  "queries": [
+    {
+      "company": "CN-688012",
+      "request": {
+        "entity": "中微公司",
+        "document_kind": "annual_report",
+        "as_of_date": "2026-10-08",
+        "market": "CN",
+        "security_id": "688012",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "found",
+        "matches": [
+          {
+            "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+            "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+            "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+            "byte_size": 9165875,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          }
+        ],
+        "reason": "one_local_match",
+        "schema_version": "2.0",
+        "excluded_candidates": []
+      }
+    },
+    {
+      "company": "CN-688012",
+      "request": {
+        "entity": "中微公司",
+        "document_kind": "interim_report",
+        "as_of_date": "2026-10-08",
+        "market": "CN",
+        "security_id": "688012",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "not_found",
+        "matches": [],
+        "reason": "no_local_match",
+        "schema_version": "2.0",
+        "excluded_candidates": []
+      }
+    },
+    {
+      "company": "CN-688012",
+      "request": {
+        "entity": "中微公司",
+        "document_kind": "quarterly_report",
+        "as_of_date": "2026-10-08",
+        "market": "CN",
+        "security_id": "688012",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "found",
+        "matches": [
+          {
+            "document_id": "urn:company-wiki:document:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+            "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+            "content_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+            "byte_size": 217264,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          }
+        ],
+        "reason": "one_local_match",
+        "schema_version": "2.0",
+        "excluded_candidates": []
+      }
+    },
+    {
+      "company": "CN-688012",
+      "request": {
+        "entity": "中微公司",
+        "document_kind": "investor_relations",
+        "as_of_date": "2026-10-08",
+        "market": "CN",
+        "security_id": "688012",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "not_found",
+        "matches": [],
+        "reason": "no_local_match",
+        "schema_version": "2.0",
+        "excluded_candidates": [
+          {
+            "source_ref": {
+              "document_id": "urn:company-wiki:document:sha256:c6c8af01f57e6f163951d5473c5f07334d6ee483532d3468c1fd9aa0cd3d4eb4",
+              "source_id": "urn:company-wiki:source:sha256:c6c8af01f57e6f163951d5473c5f07334d6ee483532d3468c1fd9aa0cd3d4eb4",
+              "content_sha256": "c6c8af01f57e6f163951d5473c5f07334d6ee483532d3468c1fd9aa0cd3d4eb4",
+              "byte_size": 429558,
+              "mime_type": "application/pdf",
+              "schema_version": "2.0"
+            },
+            "qualification": {
+              "publication_status": "unknown",
+              "as_of_date": "2026-10-08",
+              "local_bytes_status": "not_checked",
+              "historical_date_eligible": false,
+              "historical_reuse_eligible": false,
+              "schema_version": "source-qualification/1"
+            }
+          },
+          {
+            "source_ref": {
+              "document_id": "urn:company-wiki:document:sha256:4cd1285cc0c6d7daed25acba34621590327aeb26b362b4b038325dc7552f2f27",
+              "source_id": "urn:company-wiki:source:sha256:4cd1285cc0c6d7daed25acba34621590327aeb26b362b4b038325dc7552f2f27",
+              "content_sha256": "4cd1285cc0c6d7daed25acba34621590327aeb26b362b4b038325dc7552f2f27",
+              "byte_size": 527524,
+              "mime_type": "application/pdf",
+              "schema_version": "2.0"
+            },
+            "qualification": {
+              "publication_status": "unknown",
+              "as_of_date": "2026-10-08",
+              "local_bytes_status": "not_checked",
+              "historical_date_eligible": false,
+              "historical_reuse_eligible": false,
+              "schema_version": "source-qualification/1"
+            }
+          },
+          {
+            "source_ref": {
+              "document_id": "urn:company-wiki:document:sha256:66ee21adde8c4c7d54bb5af314c84499a22d0796777fd7ed076e22445e1638fd",
+              "source_id": "urn:company-wiki:source:sha256:66ee21adde8c4c7d54bb5af314c84499a22d0796777fd7ed076e22445e1638fd",
+              "content_sha256": "66ee21adde8c4c7d54bb5af314c84499a22d0796777fd7ed076e22445e1638fd",
+              "byte_size": 455833,
+              "mime_type": "application/pdf",
+              "schema_version": "2.0"
+            },
+            "qualification": {
+              "publication_status": "unknown",
+              "as_of_date": "2026-10-08",
+              "local_bytes_status": "not_checked",
+              "historical_date_eligible": false,
+              "historical_reuse_eligible": false,
+              "schema_version": "source-qualification/1"
+            }
+          },
+          {
+            "source_ref": {
+              "document_id": "urn:company-wiki:document:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+              "source_id": "urn:company-wiki:source:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+              "content_sha256": "76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+              "byte_size": 167252,
+              "mime_type": "application/pdf",
+              "schema_version": "2.0"
+            },
+            "qualification": {
+              "publication_status": "unknown",
+              "as_of_date": "2026-10-08",
+              "local_bytes_status": "not_checked",
+              "historical_date_eligible": false,
+              "historical_reuse_eligible": false,
+              "schema_version": "source-qualification/1"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "company": "CN-688012",
+      "request": {
+        "entity": "中微公司",
+        "document_kind": "investor_call_transcript",
+        "as_of_date": "2026-10-08",
+        "market": "CN",
+        "security_id": "688012",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "not_found",
+        "matches": [],
+        "reason": "no_local_match",
+        "schema_version": "2.0",
+        "excluded_candidates": []
+      }
+    },
+    {
+      "company": "CN-688012",
+      "request": {
+        "entity": "中微公司",
+        "document_kind": "prospectus",
+        "as_of_date": "2026-10-08",
+        "market": "CN",
+        "security_id": "688012",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "found",
+        "matches": [
+          {
+            "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+            "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+            "content_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+            "byte_size": 11211796,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          }
+        ],
+        "reason": "one_local_match",
+        "schema_version": "2.0",
+        "excluded_candidates": []
+      }
+    },
+    {
+      "company": "CN-688012",
+      "request": {
+        "entity": "中微公司",
+        "document_kind": "announcement",
+        "as_of_date": "2026-10-08",
+        "market": "CN",
+        "security_id": "688012",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "not_found",
+        "matches": [],
+        "reason": "no_local_match",
+        "schema_version": "2.0",
+        "excluded_candidates": []
+      }
+    },
+    {
+      "company": "CN-688012",
+      "request": {
+        "entity": "中微公司",
+        "document_kind": "financial_report",
+        "as_of_date": "2026-10-08",
+        "market": "CN",
+        "security_id": "688012",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "not_found",
+        "matches": [],
+        "reason": "no_local_match",
+        "schema_version": "2.0",
+        "excluded_candidates": []
+      }
+    },
+    {
+      "company": "HK-00700",
+      "request": {
+        "entity": "腾讯",
+        "document_kind": "annual_report",
+        "as_of_date": "2026-10-08",
+        "market": "HK",
+        "security_id": "00700",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "ambiguous",
+        "matches": [
+          {
+            "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+            "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+            "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+            "byte_size": 4428270,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          },
+          {
+            "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+            "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+            "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+            "byte_size": 5241364,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          }
+        ],
+        "reason": "multiple_local_matches",
+        "schema_version": "2.0",
+        "excluded_candidates": []
+      }
+    },
+    {
+      "company": "HK-00700",
+      "request": {
+        "entity": "腾讯",
+        "document_kind": "interim_report",
+        "as_of_date": "2026-10-08",
+        "market": "HK",
+        "security_id": "00700",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "not_found",
+        "matches": [],
+        "reason": "no_local_match",
+        "schema_version": "2.0",
+        "excluded_candidates": []
+      }
+    },
+    {
+      "company": "HK-00700",
+      "request": {
+        "entity": "腾讯",
+        "document_kind": "quarterly_report",
+        "as_of_date": "2026-10-08",
+        "market": "HK",
+        "security_id": "00700",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "not_found",
+        "matches": [],
+        "reason": "no_local_match",
+        "schema_version": "2.0",
+        "excluded_candidates": []
+      }
+    },
+    {
+      "company": "HK-00700",
+      "request": {
+        "entity": "腾讯",
+        "document_kind": "investor_relations",
+        "as_of_date": "2026-10-08",
+        "market": "HK",
+        "security_id": "00700",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "not_found",
+        "matches": [],
+        "reason": "no_local_match",
+        "schema_version": "2.0",
+        "excluded_candidates": []
+      }
+    },
+    {
+      "company": "HK-00700",
+      "request": {
+        "entity": "腾讯",
+        "document_kind": "investor_call_transcript",
+        "as_of_date": "2026-10-08",
+        "market": "HK",
+        "security_id": "00700",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "not_found",
+        "matches": [],
+        "reason": "no_local_match",
+        "schema_version": "2.0",
+        "excluded_candidates": []
+      }
+    },
+    {
+      "company": "HK-00700",
+      "request": {
+        "entity": "腾讯",
+        "document_kind": "prospectus",
+        "as_of_date": "2026-10-08",
+        "market": "HK",
+        "security_id": "00700",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "not_found",
+        "matches": [],
+        "reason": "no_local_match",
+        "schema_version": "2.0",
+        "excluded_candidates": []
+      }
+    },
+    {
+      "company": "HK-00700",
+      "request": {
+        "entity": "腾讯",
+        "document_kind": "announcement",
+        "as_of_date": "2026-10-08",
+        "market": "HK",
+        "security_id": "00700",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "not_found",
+        "matches": [],
+        "reason": "no_local_match",
+        "schema_version": "2.0",
+        "excluded_candidates": []
+      }
+    },
+    {
+      "company": "HK-00700",
+      "request": {
+        "entity": "腾讯",
+        "document_kind": "financial_report",
+        "as_of_date": "2026-10-08",
+        "market": "HK",
+        "security_id": "00700",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "not_found",
+        "matches": [],
+        "reason": "no_local_match",
+        "schema_version": "2.0",
+        "excluded_candidates": []
+      }
+    },
+    {
+      "company": "US-MSFT",
+      "request": {
+        "entity": "MICROSOFT CORP",
+        "document_kind": "annual_report",
+        "as_of_date": "2026-10-08",
+        "market": "US",
+        "security_id": "MSFT",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "ambiguous",
+        "matches": [
+          {
+            "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+            "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+            "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+            "byte_size": 8158067,
+            "mime_type": "text/html",
+            "schema_version": "2.0"
+          },
+          {
+            "document_id": "urn:company-wiki:document:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+            "source_id": "urn:company-wiki:source:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+            "content_sha256": "43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+            "byte_size": 6860911,
+            "mime_type": "text/html",
+            "schema_version": "2.0"
+          }
+        ],
+        "reason": "multiple_local_matches",
+        "schema_version": "2.0",
+        "excluded_candidates": []
+      }
+    },
+    {
+      "company": "US-MSFT",
+      "request": {
+        "entity": "MICROSOFT CORP",
+        "document_kind": "interim_report",
+        "as_of_date": "2026-10-08",
+        "market": "US",
+        "security_id": "MSFT",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "not_found",
+        "matches": [],
+        "reason": "no_local_match",
+        "schema_version": "2.0",
+        "excluded_candidates": []
+      }
+    },
+    {
+      "company": "US-MSFT",
+      "request": {
+        "entity": "MICROSOFT CORP",
+        "document_kind": "quarterly_report",
+        "as_of_date": "2026-10-08",
+        "market": "US",
+        "security_id": "MSFT",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "not_found",
+        "matches": [],
+        "reason": "no_local_match",
+        "schema_version": "2.0",
+        "excluded_candidates": []
+      }
+    },
+    {
+      "company": "US-MSFT",
+      "request": {
+        "entity": "MICROSOFT CORP",
+        "document_kind": "investor_relations",
+        "as_of_date": "2026-10-08",
+        "market": "US",
+        "security_id": "MSFT",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "not_found",
+        "matches": [],
+        "reason": "no_local_match",
+        "schema_version": "2.0",
+        "excluded_candidates": []
+      }
+    },
+    {
+      "company": "US-MSFT",
+      "request": {
+        "entity": "MICROSOFT CORP",
+        "document_kind": "investor_call_transcript",
+        "as_of_date": "2026-10-08",
+        "market": "US",
+        "security_id": "MSFT",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "not_found",
+        "matches": [],
+        "reason": "no_local_match",
+        "schema_version": "2.0",
+        "excluded_candidates": [
+          {
+            "source_ref": {
+              "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+              "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+              "content_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+              "byte_size": 66324,
+              "mime_type": "text/plain",
+              "schema_version": "2.0"
+            },
+            "qualification": {
+              "publication_status": "unknown",
+              "as_of_date": "2026-10-08",
+              "local_bytes_status": "not_checked",
+              "historical_date_eligible": false,
+              "historical_reuse_eligible": false,
+              "schema_version": "source-qualification/1"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "company": "US-MSFT",
+      "request": {
+        "entity": "MICROSOFT CORP",
+        "document_kind": "prospectus",
+        "as_of_date": "2026-10-08",
+        "market": "US",
+        "security_id": "MSFT",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "not_found",
+        "matches": [],
+        "reason": "no_local_match",
+        "schema_version": "2.0",
+        "excluded_candidates": []
+      }
+    },
+    {
+      "company": "US-MSFT",
+      "request": {
+        "entity": "MICROSOFT CORP",
+        "document_kind": "announcement",
+        "as_of_date": "2026-10-08",
+        "market": "US",
+        "security_id": "MSFT",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "not_found",
+        "matches": [],
+        "reason": "no_local_match",
+        "schema_version": "2.0",
+        "excluded_candidates": []
+      }
+    },
+    {
+      "company": "US-MSFT",
+      "request": {
+        "entity": "MICROSOFT CORP",
+        "document_kind": "financial_report",
+        "as_of_date": "2026-10-08",
+        "market": "US",
+        "security_id": "MSFT",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "not_found",
+        "matches": [],
+        "reason": "no_local_match",
+        "schema_version": "2.0",
+        "excluded_candidates": []
+      }
+    },
+    {
+      "company": "CN-688012",
+      "request": {
+        "entity": "中微公司",
+        "document_kind": "semi_annual_report",
+        "as_of_date": "2026-10-08",
+        "market": "CN",
+        "security_id": "688012",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "ambiguous",
+        "matches": [
+          {
+            "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+            "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+            "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+            "byte_size": 3149962,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          },
+          {
+            "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+            "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+            "content_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+            "byte_size": 6361468,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          }
+        ],
+        "reason": "multiple_local_matches",
+        "schema_version": "2.0",
+        "excluded_candidates": []
+      }
+    },
+    {
+      "company": "HK-00700",
+      "request": {
+        "entity": "腾讯",
+        "document_kind": "semi_annual_report",
+        "as_of_date": "2026-10-08",
+        "market": "HK",
+        "security_id": "00700",
+        "form_type": null,
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "language": null,
+        "provider": null,
+        "provider_document_id": null,
+        "mode": null,
+        "allow_download": false,
+        "schema_version": "1.0"
+      },
+      "result": {
+        "status": "not_found",
+        "matches": [],
+        "reason": "no_local_match",
+        "schema_version": "2.0",
+        "excluded_candidates": []
+      }
+    }
+  ],
+  "exact_versions": [
+    {
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "byte_size": 9165875,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "metadata": {
+        "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "byte_size": 9165875,
+        "mime_type": "application/pdf",
+        "title": "中微公司：2025年年度报告",
+        "document_kind": "annual_report",
+        "published_date": "2026-03-31",
+        "source_url": "https://static.cninfo.com.cn/finalpage/2026-03-31/1225062431.PDF",
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": "中微公司",
+        "market": "CN",
+        "security_id": "688012",
+        "fiscal_year": 2025,
+        "fiscal_period": "FY",
+        "period_end": "2025-12-31",
+        "form_type": null,
+        "provider": null,
+        "provider_document_id": null,
+        "language": "zh"
+      },
+      "verification": {
+        "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "byte_size": 9165875,
+        "read_at": "2026-10-09T04:39:05.283433+00:00",
+        "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+        "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+        "review": null,
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "content_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "byte_size": 217264,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "metadata": {
+        "document_id": "urn:company-wiki:document:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "content_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "byte_size": 217264,
+        "mime_type": "application/pdf",
+        "title": "中微公司：2026年第一季度报告",
+        "document_kind": "quarterly_report",
+        "published_date": "2026-04-28",
+        "source_url": "http://static.cninfo.com.cn/finalpage/2026-04-28/1225215453.PDF",
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": "中微公司",
+        "market": "CN",
+        "security_id": "688012",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q1",
+        "period_end": "2026-03-31",
+        "form_type": null,
+        "provider": null,
+        "provider_document_id": null,
+        "language": "zh"
+      },
+      "verification": {
+        "document_id": "urn:company-wiki:document:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "content_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "byte_size": 217264,
+        "read_at": "2026-10-09T04:39:05.331793+00:00",
+        "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+        "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+        "review": null,
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:c6c8af01f57e6f163951d5473c5f07334d6ee483532d3468c1fd9aa0cd3d4eb4",
+        "source_id": "urn:company-wiki:source:sha256:c6c8af01f57e6f163951d5473c5f07334d6ee483532d3468c1fd9aa0cd3d4eb4",
+        "content_sha256": "c6c8af01f57e6f163951d5473c5f07334d6ee483532d3468c1fd9aa0cd3d4eb4",
+        "byte_size": 429558,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "metadata": {
+        "document_id": "urn:company-wiki:document:sha256:c6c8af01f57e6f163951d5473c5f07334d6ee483532d3468c1fd9aa0cd3d4eb4",
+        "source_id": "urn:company-wiki:source:sha256:c6c8af01f57e6f163951d5473c5f07334d6ee483532d3468c1fd9aa0cd3d4eb4",
+        "content_sha256": "c6c8af01f57e6f163951d5473c5f07334d6ee483532d3468c1fd9aa0cd3d4eb4",
+        "byte_size": 429558,
+        "mime_type": "application/pdf",
+        "title": "中微公司：2022年4月投资者关系活动记录表",
+        "document_kind": "investor_relations",
+        "published_date": null,
+        "source_url": null,
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": null,
+        "market": "CN",
+        "security_id": "688012",
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "period_end": null,
+        "form_type": null,
+        "provider": null,
+        "provider_document_id": null,
+        "language": null
+      },
+      "verification": {
+        "document_id": "urn:company-wiki:document:sha256:c6c8af01f57e6f163951d5473c5f07334d6ee483532d3468c1fd9aa0cd3d4eb4",
+        "source_id": "urn:company-wiki:source:sha256:c6c8af01f57e6f163951d5473c5f07334d6ee483532d3468c1fd9aa0cd3d4eb4",
+        "content_sha256": "c6c8af01f57e6f163951d5473c5f07334d6ee483532d3468c1fd9aa0cd3d4eb4",
+        "byte_size": 429558,
+        "read_at": "2026-10-09T04:39:06.677809+00:00",
+        "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+        "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+        "review": null,
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:4cd1285cc0c6d7daed25acba34621590327aeb26b362b4b038325dc7552f2f27",
+        "source_id": "urn:company-wiki:source:sha256:4cd1285cc0c6d7daed25acba34621590327aeb26b362b4b038325dc7552f2f27",
+        "content_sha256": "4cd1285cc0c6d7daed25acba34621590327aeb26b362b4b038325dc7552f2f27",
+        "byte_size": 527524,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "metadata": {
+        "document_id": "urn:company-wiki:document:sha256:4cd1285cc0c6d7daed25acba34621590327aeb26b362b4b038325dc7552f2f27",
+        "source_id": "urn:company-wiki:source:sha256:4cd1285cc0c6d7daed25acba34621590327aeb26b362b4b038325dc7552f2f27",
+        "content_sha256": "4cd1285cc0c6d7daed25acba34621590327aeb26b362b4b038325dc7552f2f27",
+        "byte_size": 527524,
+        "mime_type": "application/pdf",
+        "title": "中微公司：2022年5月投资者关系活动记录表",
+        "document_kind": "investor_relations",
+        "published_date": null,
+        "source_url": null,
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": null,
+        "market": "CN",
+        "security_id": "688012",
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "period_end": null,
+        "form_type": null,
+        "provider": null,
+        "provider_document_id": null,
+        "language": null
+      },
+      "verification": {
+        "document_id": "urn:company-wiki:document:sha256:4cd1285cc0c6d7daed25acba34621590327aeb26b362b4b038325dc7552f2f27",
+        "source_id": "urn:company-wiki:source:sha256:4cd1285cc0c6d7daed25acba34621590327aeb26b362b4b038325dc7552f2f27",
+        "content_sha256": "4cd1285cc0c6d7daed25acba34621590327aeb26b362b4b038325dc7552f2f27",
+        "byte_size": 527524,
+        "read_at": "2026-10-09T04:39:06.701746+00:00",
+        "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+        "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+        "review": null,
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:66ee21adde8c4c7d54bb5af314c84499a22d0796777fd7ed076e22445e1638fd",
+        "source_id": "urn:company-wiki:source:sha256:66ee21adde8c4c7d54bb5af314c84499a22d0796777fd7ed076e22445e1638fd",
+        "content_sha256": "66ee21adde8c4c7d54bb5af314c84499a22d0796777fd7ed076e22445e1638fd",
+        "byte_size": 455833,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "metadata": {
+        "document_id": "urn:company-wiki:document:sha256:66ee21adde8c4c7d54bb5af314c84499a22d0796777fd7ed076e22445e1638fd",
+        "source_id": "urn:company-wiki:source:sha256:66ee21adde8c4c7d54bb5af314c84499a22d0796777fd7ed076e22445e1638fd",
+        "content_sha256": "66ee21adde8c4c7d54bb5af314c84499a22d0796777fd7ed076e22445e1638fd",
+        "byte_size": 455833,
+        "mime_type": "application/pdf",
+        "title": "中微公司：2022年6月投资者关系活动记录表",
+        "document_kind": "investor_relations",
+        "published_date": null,
+        "source_url": null,
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": null,
+        "market": "CN",
+        "security_id": "688012",
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "period_end": null,
+        "form_type": null,
+        "provider": null,
+        "provider_document_id": null,
+        "language": null
+      },
+      "verification": {
+        "document_id": "urn:company-wiki:document:sha256:66ee21adde8c4c7d54bb5af314c84499a22d0796777fd7ed076e22445e1638fd",
+        "source_id": "urn:company-wiki:source:sha256:66ee21adde8c4c7d54bb5af314c84499a22d0796777fd7ed076e22445e1638fd",
+        "content_sha256": "66ee21adde8c4c7d54bb5af314c84499a22d0796777fd7ed076e22445e1638fd",
+        "byte_size": 455833,
+        "read_at": "2026-10-09T04:39:06.725416+00:00",
+        "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+        "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+        "review": null,
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+        "source_id": "urn:company-wiki:source:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+        "content_sha256": "76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+        "byte_size": 167252,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "metadata": {
+        "document_id": "urn:company-wiki:document:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+        "source_id": "urn:company-wiki:source:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+        "content_sha256": "76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+        "byte_size": 167252,
+        "mime_type": "application/pdf",
+        "title": "中微公司：投资者关系管理办法（2025年8月）",
+        "document_kind": "investor_relations",
+        "published_date": null,
+        "source_url": null,
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": null,
+        "market": "CN",
+        "security_id": "688012",
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "period_end": null,
+        "form_type": null,
+        "provider": null,
+        "provider_document_id": null,
+        "language": null
+      },
+      "verification": {
+        "document_id": "urn:company-wiki:document:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+        "source_id": "urn:company-wiki:source:sha256:76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+        "content_sha256": "76e146985388c926f2683e24af47e6a1ab0ce8a156864fb16e7df9a2cc99b678",
+        "byte_size": 167252,
+        "read_at": "2026-10-09T04:39:06.744878+00:00",
+        "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+        "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+        "review": null,
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "content_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "byte_size": 11211796,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "metadata": {
+        "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "content_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "byte_size": 11211796,
+        "mime_type": "application/pdf",
+        "title": "中微公司：首次公开发行股票并在科创板上市招股说明书",
+        "document_kind": "prospectus",
+        "published_date": "2019-07-16",
+        "source_url": "http://static.cninfo.com.cn/finalpage/2019-07-16/1206447929.PDF",
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": "中微公司",
+        "market": "CN",
+        "security_id": "688012",
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "period_end": null,
+        "form_type": null,
+        "provider": null,
+        "provider_document_id": null,
+        "language": "zh"
+      },
+      "verification": {
+        "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "content_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "byte_size": 11211796,
+        "read_at": "2026-10-09T04:39:06.814341+00:00",
+        "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+        "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+        "review": null,
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "byte_size": 4428270,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "metadata": {
+        "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "byte_size": 4428270,
+        "mime_type": "application/pdf",
+        "title": "腾讯：2025年年度报告",
+        "document_kind": "annual_report",
+        "published_date": "2026-04-09",
+        "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": null,
+        "market": "HK",
+        "security_id": "00700",
+        "fiscal_year": 2025,
+        "fiscal_period": null,
+        "period_end": null,
+        "form_type": null,
+        "provider": null,
+        "provider_document_id": null,
+        "language": "zh"
+      },
+      "verification": {
+        "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "byte_size": 4428270,
+        "read_at": "2026-10-09T04:39:06.857398+00:00",
+        "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+        "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+        "review": null,
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "byte_size": 5241364,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "metadata": {
+        "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "byte_size": 5241364,
+        "mime_type": "application/pdf",
+        "title": "腾讯：2024年年度报告",
+        "document_kind": "annual_report",
+        "published_date": "2025-04-08",
+        "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0408/2025040800668_c.pdf",
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": null,
+        "market": "HK",
+        "security_id": "00700",
+        "fiscal_year": 2024,
+        "fiscal_period": null,
+        "period_end": null,
+        "form_type": null,
+        "provider": null,
+        "provider_document_id": null,
+        "language": "zh"
+      },
+      "verification": {
+        "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "byte_size": 5241364,
+        "read_at": "2026-10-09T04:39:06.885196+00:00",
+        "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+        "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+        "review": null,
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "byte_size": 8158067,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "metadata": {
+        "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "byte_size": 8158067,
+        "mime_type": "text/html",
+        "title": "Microsoft 10-K FY2025",
+        "document_kind": "annual_report",
+        "published_date": "2025-07-30",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": null,
+        "market": "US",
+        "security_id": "MSFT",
+        "fiscal_year": 2025,
+        "fiscal_period": null,
+        "period_end": null,
+        "form_type": "10-K",
+        "provider": null,
+        "provider_document_id": null,
+        "language": null
+      },
+      "verification": {
+        "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "byte_size": 8158067,
+        "read_at": "2026-10-09T04:39:07.510438+00:00",
+        "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+        "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+        "review": null,
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+        "source_id": "urn:company-wiki:source:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+        "content_sha256": "43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+        "byte_size": 6860911,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "metadata": {
+        "document_id": "urn:company-wiki:document:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+        "source_id": "urn:company-wiki:source:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+        "content_sha256": "43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+        "byte_size": 6860911,
+        "mime_type": "text/html",
+        "title": "Microsoft 10-K FY2024",
+        "document_kind": "annual_report",
+        "published_date": "2024-07-30",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017024087843/msft-20240630.htm",
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": null,
+        "market": "US",
+        "security_id": "MSFT",
+        "fiscal_year": 2024,
+        "fiscal_period": null,
+        "period_end": null,
+        "form_type": "10-K",
+        "provider": null,
+        "provider_document_id": null,
+        "language": null
+      },
+      "verification": {
+        "document_id": "urn:company-wiki:document:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+        "source_id": "urn:company-wiki:source:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+        "content_sha256": "43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+        "byte_size": 6860911,
+        "read_at": "2026-10-09T04:39:07.632501+00:00",
+        "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+        "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+        "review": null,
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "content_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "byte_size": 66324,
+        "mime_type": "text/plain",
+        "schema_version": "2.0"
+      },
+      "metadata": {
+        "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "content_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "byte_size": 66324,
+        "mime_type": "text/plain",
+        "title": null,
+        "document_kind": "investor_call_transcript",
+        "published_date": null,
+        "source_url": null,
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": "Microsoft",
+        "market": "US",
+        "security_id": "MSFT",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q4",
+        "period_end": null,
+        "form_type": null,
+        "provider": null,
+        "provider_document_id": null,
+        "language": "en"
+      },
+      "verification": {
+        "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "content_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "byte_size": 66324,
+        "read_at": "2026-10-09T04:39:08.104132+00:00",
+        "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+        "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+        "review": null,
+        "schema_version": "2.0"
+      },
+      "bounded_header_observation": {
+        "locator": "original TXT lines1-6",
+        "excerpt": "======================================================================\nEarnings Call Transcript\nCompany: Microsoft (微软)\nTicker: MSFT\nQuarter: Q4 2026\nSource: motley_fool",
+        "not_publication_proof": true
+      }
+    },
+    {
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "byte_size": 3149962,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "metadata": {
+        "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "byte_size": 3149962,
+        "mime_type": "application/pdf",
+        "title": "2026年半年度报告",
+        "document_kind": "semi_annual_report",
+        "published_date": "2026-08-20",
+        "source_url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482884.PDF",
+        "retrieved_at": "2026-10-08T07:17:59Z",
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": null,
+        "market": "CN",
+        "security_id": "688012",
+        "fiscal_year": 2026,
+        "fiscal_period": "H1",
+        "period_end": null,
+        "form_type": "interim_report",
+        "provider": "cninfo",
+        "provider_document_id": "1225482884",
+        "language": "zh-CN"
+      },
+      "verification": {
+        "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "byte_size": 3149962,
+        "read_at": "2026-10-09T04:39:54.037200+00:00",
+        "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+        "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+        "review": null,
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "content_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "byte_size": 6361468,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "metadata": {
+        "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "content_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "byte_size": 6361468,
+        "mime_type": "application/pdf",
+        "title": "中微公司：2025年半年度报告",
+        "document_kind": "semi_annual_report",
+        "published_date": "2025-08-29",
+        "source_url": "http://static.cninfo.com.cn/finalpage/2025-08-29/1224606011.PDF",
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": "中微公司",
+        "market": "CN",
+        "security_id": "688012",
+        "fiscal_year": 2025,
+        "fiscal_period": "H1",
+        "period_end": "2025-06-30",
+        "form_type": null,
+        "provider": null,
+        "provider_document_id": null,
+        "language": "zh"
+      },
+      "verification": {
+        "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "content_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "byte_size": 6361468,
+        "read_at": "2026-10-09T04:39:54.068826+00:00",
+        "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+        "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+        "review": null,
+        "schema_version": "2.0"
+      }
+    }
+  ],
+  "read_api": "SourceVersionReader.query_local/query_ref/describe_version/verify_version; no store/scan"
+}

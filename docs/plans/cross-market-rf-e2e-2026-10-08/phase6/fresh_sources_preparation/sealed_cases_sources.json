@@ -1,0 +1,995 @@
+{
+  "schema_version": "fresh-preparation-sealed-sources/1",
+  "archive_index_sha256": "60c0c8dfd901bfbd8c8dc8604ade1589b6aca61f98afab227ba584c69045f89a",
+  "delivery_index_sha256": "60c0c8dfd901bfbd8c8dc8604ade1589b6aca61f98afab227ba584c69045f89a",
+  "cases_sha256": "88d272f741aca8e53973f02faf2c774befd9085b5d206bdab84607e209bfbeb4",
+  "sources": [
+    {
+      "company": "CN-688012",
+      "legacy_alias": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "sealed_title": "中微公司：2025年年度报告",
+      "official_source_url": "https://static.cninfo.com.cn/finalpage/2026-03-31/1225062431.PDF",
+      "sealed_published_date": "2026-03-31",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/CN-688012/sources/0"
+      },
+      "catalog": {
+        "status": "found",
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "byte_size": 9165875,
+          "mime_type": "application/pdf",
+          "schema_version": "2.0"
+        },
+        "metadata": {
+          "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "byte_size": 9165875,
+          "mime_type": "application/pdf",
+          "title": "中微公司：2025年年度报告",
+          "document_kind": "annual_report",
+          "published_date": "2026-03-31",
+          "source_url": "https://static.cninfo.com.cn/finalpage/2026-03-31/1225062431.PDF",
+          "retrieved_at": null,
+          "collector_name": null,
+          "collector_version": null,
+          "canonical_entity_id": null,
+          "display_name": "中微公司",
+          "market": "CN",
+          "security_id": "688012",
+          "fiscal_year": 2025,
+          "fiscal_period": "FY",
+          "period_end": "2025-12-31",
+          "form_type": null,
+          "provider": null,
+          "provider_document_id": null,
+          "language": "zh"
+        },
+        "verification": {
+          "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "byte_size": 9165875,
+          "read_at": "2026-10-09T04:42:23.406826+00:00",
+          "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+          "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+          "review": null,
+          "schema_version": "2.0"
+        }
+      },
+      "storage": {
+        "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\d6\\d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "exists": true,
+        "verified_actual_bytes": true
+      },
+      "raw": {
+        "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "byte_size": 9165875,
+        "magic": "%PDF-1.7\n%��"
+      },
+      "representation": "original_PDF_or_HTML"
+    },
+    {
+      "company": "CN-688012",
+      "legacy_alias": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "sealed_title": "2026年半年度报告",
+      "official_source_url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482884.PDF",
+      "sealed_published_date": "2026-08-20",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/CN-688012/sources/1"
+      },
+      "catalog": {
+        "status": "found",
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+          "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+          "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+          "byte_size": 3149962,
+          "mime_type": "application/pdf",
+          "schema_version": "2.0"
+        },
+        "metadata": {
+          "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+          "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+          "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+          "byte_size": 3149962,
+          "mime_type": "application/pdf",
+          "title": "2026年半年度报告",
+          "document_kind": "semi_annual_report",
+          "published_date": "2026-08-20",
+          "source_url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482884.PDF",
+          "retrieved_at": "2026-10-08T07:17:59Z",
+          "collector_name": null,
+          "collector_version": null,
+          "canonical_entity_id": null,
+          "display_name": null,
+          "market": "CN",
+          "security_id": "688012",
+          "fiscal_year": 2026,
+          "fiscal_period": "H1",
+          "period_end": null,
+          "form_type": "interim_report",
+          "provider": "cninfo",
+          "provider_document_id": "1225482884",
+          "language": "zh-CN"
+        },
+        "verification": {
+          "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+          "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+          "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+          "byte_size": 3149962,
+          "read_at": "2026-10-09T04:42:23.439837+00:00",
+          "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+          "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+          "review": null,
+          "schema_version": "2.0"
+        }
+      },
+      "storage": {
+        "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\18\\182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "exists": true,
+        "verified_actual_bytes": true
+      },
+      "raw": {
+        "sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "byte_size": 3149962,
+        "magic": "%PDF-1.7\n%��"
+      },
+      "representation": "original_PDF_or_HTML"
+    },
+    {
+      "company": "CN-688012",
+      "legacy_alias": "semi_wfe_20260714",
+      "sha256": "3da627dd2754e73dc70e974dccfdb356e09de9d92d594da2c8879a4e7a2a0e8d",
+      "sealed_title": "SEMI Mid-Year Semiconductor Equipment Forecast",
+      "official_source_url": "https://www.semi.org/en/semi-press-release/global-semiconductor-equipment-sales-forecast-to-reach-a-record-229-billion-dollars-in-2028-semi-reports",
+      "sealed_published_date": "2026-07-14",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/CN-688012/sources/2"
+      },
+      "catalog": {
+        "status": "not_indexed",
+        "reason": "document_not_indexed",
+        "source_ref": null
+      },
+      "storage": {
+        "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\3d\\3da627dd2754e73dc70e974dccfdb356e09de9d92d594da2c8879a4e7a2a0e8d",
+        "exists": true,
+        "verified_actual_bytes": true
+      },
+      "raw": {
+        "sha256": "3da627dd2754e73dc70e974dccfdb356e09de9d92d594da2c8879a4e7a2a0e8d",
+        "byte_size": 15691,
+        "magic": "Global Semic"
+      },
+      "representation": "web_tool_snapshot_not_original_HTML"
+    },
+    {
+      "company": "CN-688012",
+      "legacy_alias": "amec_sse_results_qa_20260910",
+      "sha256": "520684e158f0f10191be84c435cb5600fff0a6cbea8d41442dfee9647d497d6f",
+      "sealed_title": "中微公司2026半年度业绩说明会官方网络问答",
+      "official_source_url": "https://roadshow.sseinfo.com/activityDetails/40766",
+      "sealed_published_date": "2026-09-10",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/CN-688012/sources/3"
+      },
+      "catalog": {
+        "status": "not_indexed",
+        "reason": "document_not_indexed",
+        "source_ref": null
+      },
+      "storage": {
+        "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\52\\520684e158f0f10191be84c435cb5600fff0a6cbea8d41442dfee9647d497d6f",
+        "exists": true,
+        "verified_actual_bytes": true
+      },
+      "raw": {
+        "sha256": "520684e158f0f10191be84c435cb5600fff0a6cbea8d41442dfee9647d497d6f",
+        "byte_size": 557100,
+        "magic": "{\"success\":t"
+      },
+      "representation": "web_tool_snapshot_not_original_HTML"
+    },
+    {
+      "company": "CN-688012",
+      "legacy_alias": "amec_cninfo_1225582793",
+      "sha256": "13675a986cfc976f3ea9d8f4abe82d1ae8058904b556620e0439269cceda9566",
+      "sealed_title": "关于参与设立私募投资基金暨关联交易进展的公告",
+      "official_source_url": "https://static.cninfo.com.cn/finalpage/2026-09-25/1225582793.PDF",
+      "sealed_published_date": "2026-09-25",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/CN-688012/sources/4"
+      },
+      "catalog": {
+        "status": "not_indexed",
+        "reason": "document_not_indexed",
+        "source_ref": null
+      },
+      "storage": {
+        "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\13\\13675a986cfc976f3ea9d8f4abe82d1ae8058904b556620e0439269cceda9566",
+        "exists": true,
+        "verified_actual_bytes": true
+      },
+      "raw": {
+        "sha256": "13675a986cfc976f3ea9d8f4abe82d1ae8058904b556620e0439269cceda9566",
+        "byte_size": 131041,
+        "magic": "%PDF-1.7\n%��"
+      },
+      "representation": "original_PDF_or_HTML"
+    },
+    {
+      "company": "CN-688012",
+      "legacy_alias": "amec_cninfo_1225482911",
+      "sha256": "9a9e6584fdee35342059b37c5645c3b55d143f3145af595c77f82230c0ccc0c3",
+      "sealed_title": "关于公司部分募投项目结项并将节余募集资金永久补充流动资金及部分募投项目延期的公告",
+      "official_source_url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482911.PDF",
+      "sealed_published_date": "2026-08-20",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/CN-688012/sources/5"
+      },
+      "catalog": {
+        "status": "not_indexed",
+        "reason": "document_not_indexed",
+        "source_ref": null
+      },
+      "storage": {
+        "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\9a\\9a9e6584fdee35342059b37c5645c3b55d143f3145af595c77f82230c0ccc0c3",
+        "exists": true,
+        "verified_actual_bytes": true
+      },
+      "raw": {
+        "sha256": "9a9e6584fdee35342059b37c5645c3b55d143f3145af595c77f82230c0ccc0c3",
+        "byte_size": 160451,
+        "magic": "%PDF-1.7\n%��"
+      },
+      "representation": "original_PDF_or_HTML"
+    },
+    {
+      "company": "CN-688012",
+      "legacy_alias": "amec_cninfo_1225482918",
+      "sha256": "4b34335aa53528abe783eeea0af05bfc38e74a3c76fc7acfbc8be9b5f3acfaca",
+      "sealed_title": "关于使用部分募集资金向子公司提供借款以实施募投项目的公告",
+      "official_source_url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482918.PDF",
+      "sealed_published_date": "2026-08-20",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/CN-688012/sources/6"
+      },
+      "catalog": {
+        "status": "not_indexed",
+        "reason": "document_not_indexed",
+        "source_ref": null
+      },
+      "storage": {
+        "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\4b\\4b34335aa53528abe783eeea0af05bfc38e74a3c76fc7acfbc8be9b5f3acfaca",
+        "exists": true,
+        "verified_actual_bytes": true
+      },
+      "raw": {
+        "sha256": "4b34335aa53528abe783eeea0af05bfc38e74a3c76fc7acfbc8be9b5f3acfaca",
+        "byte_size": 128476,
+        "magic": "%PDF-1.7\n%��"
+      },
+      "representation": "original_PDF_or_HTML"
+    },
+    {
+      "company": "CN-688012",
+      "legacy_alias": "amec_cninfo_1225482917",
+      "sha256": "b7b72c3e07eccad9a2781a928ce135851ef37ef3c1ff8ba1aae6aae96c605685",
+      "sealed_title": "关于增加2026年度日常关联交易预计额度的公告",
+      "official_source_url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482917.PDF",
+      "sealed_published_date": "2026-08-20",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/CN-688012/sources/7"
+      },
+      "catalog": {
+        "status": "not_indexed",
+        "reason": "document_not_indexed",
+        "source_ref": null
+      },
+      "storage": {
+        "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\b7\\b7b72c3e07eccad9a2781a928ce135851ef37ef3c1ff8ba1aae6aae96c605685",
+        "exists": true,
+        "verified_actual_bytes": true
+      },
+      "raw": {
+        "sha256": "b7b72c3e07eccad9a2781a928ce135851ef37ef3c1ff8ba1aae6aae96c605685",
+        "byte_size": 141036,
+        "magic": "%PDF-1.7\n%��"
+      },
+      "representation": "original_PDF_or_HTML"
+    },
+    {
+      "company": "CN-688012",
+      "legacy_alias": "amec_cninfo_1225482894",
+      "sha256": "74fc4afd9a509136b96a8e38f12b30192a48c3d44f8a2174b97abbce18ee6d03",
+      "sealed_title": "关于对外投资的公告",
+      "official_source_url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482894.PDF",
+      "sealed_published_date": "2026-08-20",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/CN-688012/sources/8"
+      },
+      "catalog": {
+        "status": "not_indexed",
+        "reason": "document_not_indexed",
+        "source_ref": null
+      },
+      "storage": {
+        "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\74\\74fc4afd9a509136b96a8e38f12b30192a48c3d44f8a2174b97abbce18ee6d03",
+        "exists": true,
+        "verified_actual_bytes": true
+      },
+      "raw": {
+        "sha256": "74fc4afd9a509136b96a8e38f12b30192a48c3d44f8a2174b97abbce18ee6d03",
+        "byte_size": 131654,
+        "magic": "%PDF-1.7\n%��"
+      },
+      "representation": "original_PDF_or_HTML"
+    },
+    {
+      "company": "CN-688012",
+      "legacy_alias": "amec_cninfo_1225482893",
+      "sha256": "a2e4d45ff51d85162531eaa11e68f2f7fef2dd4018d1ad8845ac522ea20f8471",
+      "sealed_title": "关于使用募集资金置换预先投入募投项目及支付发行费用的自筹资金的公告",
+      "official_source_url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482893.PDF",
+      "sealed_published_date": "2026-08-20",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/CN-688012/sources/9"
+      },
+      "catalog": {
+        "status": "not_indexed",
+        "reason": "document_not_indexed",
+        "source_ref": null
+      },
+      "storage": {
+        "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\a2\\a2e4d45ff51d85162531eaa11e68f2f7fef2dd4018d1ad8845ac522ea20f8471",
+        "exists": true,
+        "verified_actual_bytes": true
+      },
+      "raw": {
+        "sha256": "a2e4d45ff51d85162531eaa11e68f2f7fef2dd4018d1ad8845ac522ea20f8471",
+        "byte_size": 131468,
+        "magic": "%PDF-1.7\n%��"
+      },
+      "representation": "original_PDF_or_HTML"
+    },
+    {
+      "company": "CN-688012",
+      "legacy_alias": "amec_cninfo_1225482882",
+      "sha256": "231e464bb176196daff17f0f7281ee8a3c656ae5e92f29f15285dbe371e7e73a",
+      "sealed_title": "关于公司募集资金存放、管理与实际使用情况的专项报告",
+      "official_source_url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482882.PDF",
+      "sealed_published_date": "2026-08-20",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/CN-688012/sources/10"
+      },
+      "catalog": {
+        "status": "not_indexed",
+        "reason": "document_not_indexed",
+        "source_ref": null
+      },
+      "storage": {
+        "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\23\\231e464bb176196daff17f0f7281ee8a3c656ae5e92f29f15285dbe371e7e73a",
+        "exists": true,
+        "verified_actual_bytes": true
+      },
+      "raw": {
+        "sha256": "231e464bb176196daff17f0f7281ee8a3c656ae5e92f29f15285dbe371e7e73a",
+        "byte_size": 214671,
+        "magic": "%PDF-1.7\n%��"
+      },
+      "representation": "original_PDF_or_HTML"
+    },
+    {
+      "company": "CN-688012",
+      "legacy_alias": "amec_cninfo_1225482880",
+      "sha256": "f05bb880cd2324cf1b0cbb06780a00003c4846438d09b4e3825de710af0067aa",
+      "sealed_title": "2026年度“提质增效重回报”专项行动方案的半年度评估报告",
+      "official_source_url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482880.PDF",
+      "sealed_published_date": "2026-08-20",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/CN-688012/sources/11"
+      },
+      "catalog": {
+        "status": "not_indexed",
+        "reason": "document_not_indexed",
+        "source_ref": null
+      },
+      "storage": {
+        "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\f0\\f05bb880cd2324cf1b0cbb06780a00003c4846438d09b4e3825de710af0067aa",
+        "exists": true,
+        "verified_actual_bytes": true
+      },
+      "raw": {
+        "sha256": "f05bb880cd2324cf1b0cbb06780a00003c4846438d09b4e3825de710af0067aa",
+        "byte_size": 309696,
+        "magic": "%PDF-1.7\n%��"
+      },
+      "representation": "original_PDF_or_HTML"
+    },
+    {
+      "company": "HK-00700",
+      "legacy_alias": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "sealed_title": "腾讯：2025年年度报告",
+      "official_source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+      "sealed_published_date": "2026-10-08",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/HK-00700/sources/0"
+      },
+      "catalog": {
+        "status": "found",
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "byte_size": 4428270,
+          "mime_type": "application/pdf",
+          "schema_version": "2.0"
+        },
+        "metadata": {
+          "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "byte_size": 4428270,
+          "mime_type": "application/pdf",
+          "title": "腾讯：2025年年度报告",
+          "document_kind": "annual_report",
+          "published_date": "2026-04-09",
+          "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+          "retrieved_at": null,
+          "collector_name": null,
+          "collector_version": null,
+          "canonical_entity_id": null,
+          "display_name": null,
+          "market": "HK",
+          "security_id": "00700",
+          "fiscal_year": 2025,
+          "fiscal_period": null,
+          "period_end": null,
+          "form_type": null,
+          "provider": null,
+          "provider_document_id": null,
+          "language": "zh"
+        },
+        "verification": {
+          "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+          "byte_size": 4428270,
+          "read_at": "2026-10-09T04:42:23.484628+00:00",
+          "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+          "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+          "review": null,
+          "schema_version": "2.0"
+        }
+      },
+      "raw": {
+        "sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+        "byte_size": 4428270,
+        "mime_type": "application/pdf"
+      },
+      "storage": {
+        "exact_source_ref_storage_resolved_by_public_reader": true
+      },
+      "representation": "original_PDF_or_HTML"
+    },
+    {
+      "company": "HK-00700",
+      "legacy_alias": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+      "sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+      "sealed_title": "腾讯：2024年年度报告",
+      "official_source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0408/2025040800668_c.pdf",
+      "sealed_published_date": "2025-04-08",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/HK-00700/sources/1"
+      },
+      "catalog": {
+        "status": "found",
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "byte_size": 5241364,
+          "mime_type": "application/pdf",
+          "schema_version": "2.0"
+        },
+        "metadata": {
+          "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "byte_size": 5241364,
+          "mime_type": "application/pdf",
+          "title": "腾讯：2024年年度报告",
+          "document_kind": "annual_report",
+          "published_date": "2025-04-08",
+          "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0408/2025040800668_c.pdf",
+          "retrieved_at": null,
+          "collector_name": null,
+          "collector_version": null,
+          "canonical_entity_id": null,
+          "display_name": null,
+          "market": "HK",
+          "security_id": "00700",
+          "fiscal_year": 2024,
+          "fiscal_period": null,
+          "period_end": null,
+          "form_type": null,
+          "provider": null,
+          "provider_document_id": null,
+          "language": "zh"
+        },
+        "verification": {
+          "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+          "byte_size": 5241364,
+          "read_at": "2026-10-09T04:42:23.495225+00:00",
+          "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+          "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+          "review": null,
+          "schema_version": "2.0"
+        }
+      },
+      "raw": {
+        "sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+        "byte_size": 5241364,
+        "mime_type": "application/pdf"
+      },
+      "storage": {
+        "exact_source_ref_storage_resolved_by_public_reader": true
+      },
+      "representation": "original_PDF_or_HTML"
+    },
+    {
+      "company": "HK-00700",
+      "legacy_alias": "tencent_h1_2026_official",
+      "sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+      "sealed_title": "Tencent Interim Report 2026",
+      "official_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+      "sealed_published_date": "2026-10-08",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/HK-00700/sources/2"
+      },
+      "catalog": {
+        "status": "not_indexed",
+        "reason": "document_not_indexed",
+        "source_ref": null
+      },
+      "storage": {
+        "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\41\\4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+        "exists": true,
+        "verified_actual_bytes": true
+      },
+      "raw": {
+        "sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+        "byte_size": 5135808,
+        "magic": "%PDF-1.7\r%��"
+      },
+      "representation": "original_PDF_or_HTML"
+    },
+    {
+      "company": "HK-00700",
+      "legacy_alias": "tencent_results_2q2026",
+      "sha256": "64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+      "sealed_title": "Tencent second-quarter and first-half 2026 results",
+      "official_source_url": "https://www.tencent.com/wp-content/uploads/2026/08/Tencent-Announces-2026-Second-Quarter-Results.pdf",
+      "sealed_published_date": "2026-08-12",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/HK-00700/sources/3"
+      },
+      "catalog": {
+        "status": "not_indexed",
+        "reason": "document_not_indexed",
+        "source_ref": null
+      },
+      "storage": {
+        "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\64\\64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+        "exists": true,
+        "verified_actual_bytes": true
+      },
+      "raw": {
+        "sha256": "64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+        "byte_size": 412297,
+        "magic": "%PDF-1.7\r\n%�"
+      },
+      "representation": "original_PDF_or_HTML"
+    },
+    {
+      "company": "HK-00700",
+      "legacy_alias": "netease_results_2q2026",
+      "sha256": "ba4cd2d0507d5d3211d642a8f6d45aba11e0ac245f5757d58e525223ebde4c98",
+      "sealed_title": "NetEase second-quarter and interim 2026 unaudited results",
+      "official_source_url": "https://ir.netease.com/news-releases/news-release-details/netease-announces-second-quarter-and-interim-2026-unaudited",
+      "sealed_published_date": "2026-08-20",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/HK-00700/sources/4"
+      },
+      "catalog": {
+        "status": "not_indexed",
+        "reason": "document_not_indexed",
+        "source_ref": null
+      },
+      "storage": {
+        "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\ba\\ba4cd2d0507d5d3211d642a8f6d45aba11e0ac245f5757d58e525223ebde4c98",
+        "exists": true,
+        "verified_actual_bytes": true
+      },
+      "raw": {
+        "sha256": "ba4cd2d0507d5d3211d642a8f6d45aba11e0ac245f5757d58e525223ebde4c98",
+        "byte_size": 909908,
+        "magic": "<!DOCTYPE ht"
+      },
+      "representation": "original_PDF_or_HTML"
+    },
+    {
+      "company": "HK-00700",
+      "legacy_alias": "tencent_corporate_overview_sep2026",
+      "sha256": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+      "sealed_title": "Tencent Corporate Overview September 2026",
+      "official_source_url": "https://www.tencent.com/wp-content/uploads/2026/09/Corporate-Overview-2Q26-20260916.pdf",
+      "sealed_published_date": "2026-10-08",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/HK-00700/sources/5"
+      },
+      "catalog": {
+        "status": "not_indexed",
+        "reason": "document_not_indexed",
+        "source_ref": null
+      },
+      "storage": {
+        "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\a9\\a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+        "exists": true,
+        "verified_actual_bytes": true
+      },
+      "raw": {
+        "sha256": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+        "byte_size": 1676729,
+        "magic": "%PDF-1.6\r%��"
+      },
+      "representation": "original_PDF_or_HTML"
+    },
+    {
+      "company": "US-MSFT",
+      "legacy_alias": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "sealed_title": "Microsoft 10-K FY2025",
+      "official_source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+      "sealed_published_date": "2025-07-30",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/US-MSFT/sources/0"
+      },
+      "catalog": {
+        "status": "found",
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+          "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+          "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+          "byte_size": 8158067,
+          "mime_type": "text/html",
+          "schema_version": "2.0"
+        },
+        "metadata": {
+          "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+          "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+          "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+          "byte_size": 8158067,
+          "mime_type": "text/html",
+          "title": "Microsoft 10-K FY2025",
+          "document_kind": "annual_report",
+          "published_date": "2025-07-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+          "retrieved_at": null,
+          "collector_name": null,
+          "collector_version": null,
+          "canonical_entity_id": null,
+          "display_name": null,
+          "market": "US",
+          "security_id": "MSFT",
+          "fiscal_year": 2025,
+          "fiscal_period": null,
+          "period_end": null,
+          "form_type": "10-K",
+          "provider": null,
+          "provider_document_id": null,
+          "language": null
+        },
+        "verification": {
+          "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+          "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+          "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+          "byte_size": 8158067,
+          "read_at": "2026-10-09T04:42:23.558407+00:00",
+          "policy_sha256": "c773099b3dcfa2cc0f8e4b1c3e2f783f9c8f9715a415ba708c12bf79398675dd",
+          "source_read_policy_sha256": "072c80940630d52f0abe706d2f092c5f8ca1ed5c1b5ca3df9d94f5c0bdb5a270",
+          "review": null,
+          "schema_version": "2.0"
+        }
+      },
+      "raw": {
+        "sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "byte_size": 8158067,
+        "mime_type": "text/html"
+      },
+      "storage": {
+        "exact_source_ref_storage_resolved_by_public_reader": true
+      },
+      "representation": "original_PDF_or_HTML"
+    },
+    {
+      "company": "US-MSFT",
+      "legacy_alias": "src_results",
+      "sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+      "sealed_title": "results official communication",
+      "official_source_url": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q4/press-release-webcast",
+      "sealed_published_date": "2026-07-29",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/US-MSFT/sources/1"
+      },
+      "catalog": {
+        "status": "not_indexed",
+        "reason": "document_not_indexed",
+        "source_ref": null
+      },
+      "storage": {
+        "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\8d\\8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+        "exists": true,
+        "verified_actual_bytes": true
+      },
+      "raw": {
+        "sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+        "byte_size": 808850,
+        "magic": "<!DOCTYPE ht"
+      },
+      "representation": "original_PDF_or_HTML"
+    },
+    {
+      "company": "US-MSFT",
+      "legacy_alias": "src_call",
+      "sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+      "sealed_title": "call official communication",
+      "official_source_url": "https://www.microsoft.com/en-us/Investor/events/fy-2026/earnings-fy-2026-q4",
+      "sealed_published_date": "2026-07-29",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/US-MSFT/sources/2"
+      },
+      "catalog": {
+        "status": "not_indexed",
+        "reason": "document_not_indexed",
+        "source_ref": null
+      },
+      "storage": {
+        "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\bd\\bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+        "exists": true,
+        "verified_actual_bytes": true
+      },
+      "raw": {
+        "sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+        "byte_size": 273436,
+        "magic": "<!DOCTYPE ht"
+      },
+      "representation": "original_PDF_or_HTML"
+    },
+    {
+      "company": "US-MSFT",
+      "legacy_alias": "src_metrics",
+      "sha256": "cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+      "sealed_title": "metrics official communication",
+      "official_source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q4/metrics",
+      "sealed_published_date": "2026-07-29",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/US-MSFT/sources/3"
+      },
+      "catalog": {
+        "status": "not_indexed",
+        "reason": "document_not_indexed",
+        "source_ref": null
+      },
+      "storage": {
+        "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\cf\\cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+        "exists": true,
+        "verified_actual_bytes": true
+      },
+      "raw": {
+        "sha256": "cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+        "byte_size": 198175,
+        "magic": "<!DOCTYPE ht"
+      },
+      "representation": "original_PDF_or_HTML"
+    },
+    {
+      "company": "US-MSFT",
+      "legacy_alias": "src_aws",
+      "sha256": "d83bb386a7d20107ec1480472490dab56ab83122e4e7f569fd1f36608c96e5a4",
+      "sealed_title": "aws official communication",
+      "official_source_url": "https://ir.aboutamazon.com/news-release/news-release-details/2026/Amazon-com-Announces-Second-Quarter-Results/default.aspx",
+      "sealed_published_date": "2026-07-30",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/US-MSFT/sources/4"
+      },
+      "catalog": {
+        "status": "not_indexed",
+        "reason": "document_not_indexed",
+        "source_ref": null
+      },
+      "storage": {
+        "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\d8\\d83bb386a7d20107ec1480472490dab56ab83122e4e7f569fd1f36608c96e5a4",
+        "exists": true,
+        "verified_actual_bytes": true
+      },
+      "raw": {
+        "sha256": "d83bb386a7d20107ec1480472490dab56ab83122e4e7f569fd1f36608c96e5a4",
+        "byte_size": 647411,
+        "magic": "<!DOCTYPE HT"
+      },
+      "representation": "original_PDF_or_HTML"
+    },
+    {
+      "company": "US-MSFT",
+      "legacy_alias": "src_presentation",
+      "sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "sealed_title": "FY27 Segments and Investor Metrics",
+      "official_source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/FY27ExternalKPIs.pptx",
+      "sealed_published_date": "2026-09-02",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/US-MSFT/sources/5"
+      },
+      "catalog": {
+        "status": "not_indexed",
+        "reason": "document_not_indexed",
+        "source_ref": null
+      },
+      "storage": {
+        "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\c0\\c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "exists": true,
+        "verified_actual_bytes": true
+      },
+      "raw": {
+        "sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "byte_size": 4016522,
+        "magic": "PK\u0003\u0004\u0014\u0000\u0006\u0000\b\u0000\u0000\u0000"
+      },
+      "representation": "original_binary_PPTX"
+    },
+    {
+      "company": "US-MSFT",
+      "legacy_alias": "src_strategy",
+      "sha256": "a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+      "sealed_title": "introducing-the-new-copilot-with-home-code-and-autopilot",
+      "official_source_url": "https://blogs.microsoft.com/blog/2026/09/25/introducing-the-new-copilot-with-home-code-and-autopilot/",
+      "sealed_published_date": "2026-09-25",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/US-MSFT/sources/6"
+      },
+      "catalog": {
+        "status": "not_indexed",
+        "reason": "document_not_indexed",
+        "source_ref": null
+      },
+      "storage": {
+        "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\a5\\a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+        "exists": true,
+        "verified_actual_bytes": true
+      },
+      "raw": {
+        "sha256": "a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+        "byte_size": 39253,
+        "magic": "\"Microsoft 3"
+      },
+      "representation": "web_tool_snapshot_not_original_HTML"
+    },
+    {
+      "company": "US-MSFT",
+      "legacy_alias": "src_data_innovation",
+      "sha256": "a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+      "sealed_title": "new-microsoft-data-innovations-unlock-what-only-your-business-knows",
+      "official_source_url": "https://blogs.microsoft.com/blog/2026/09/28/new-microsoft-data-innovations-unlock-what-only-your-business-knows/",
+      "sealed_published_date": "2026-09-28",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/US-MSFT/sources/7"
+      },
+      "catalog": {
+        "status": "not_indexed",
+        "reason": "document_not_indexed",
+        "source_ref": null
+      },
+      "storage": {
+        "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\a5\\a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+        "exists": true,
+        "verified_actual_bytes": true
+      },
+      "raw": {
+        "sha256": "a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+        "byte_size": 39253,
+        "magic": "\"Microsoft 3"
+      },
+      "representation": "web_tool_snapshot_not_original_HTML"
+    },
+    {
+      "company": "US-MSFT",
+      "legacy_alias": "src_leadership",
+      "sha256": "a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+      "sealed_title": "microsoft-365-and-linkedin-leadership-update",
+      "official_source_url": "https://blogs.microsoft.com/blog/2026/10/01/microsoft-365-and-linkedin-leadership-update/",
+      "sealed_published_date": "2026-10-01",
+      "publication_date_is_not_promoted_without_primary_proof": true,
+      "evidence": {
+        "artifact": "benchmarks/cross_market_rf/cases.json",
+        "locator": "cases/US-MSFT/sources/8"
+      },
+      "catalog": {
+        "status": "not_indexed",
+        "reason": "document_not_indexed",
+        "source_ref": null
+      },
+      "storage": {
+        "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\a5\\a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+        "exists": true,
+        "verified_actual_bytes": true
+      },
+      "raw": {
+        "sha256": "a5a36af24c3f1d51e33351a40a715e10ce29bf3defb869b18888c0e64ae19fd1",
+        "byte_size": 39253,
+        "magic": "\"Microsoft 3"
+      },
+      "representation": "web_tool_snapshot_not_original_HTML"
+    }
+  ]
+}

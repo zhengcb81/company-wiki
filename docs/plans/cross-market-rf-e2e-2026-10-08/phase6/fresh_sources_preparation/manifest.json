@@ -1,0 +1,899 @@
+{
+  "schema_version": "fresh-sources-preparation/1",
+  "status": "read_only_preparation_complete_fresh_research_NOT_RUN",
+  "observed_at": "2026-10-09T04:48:42.077839+00:00",
+  "as_of_date": "2026-10-08",
+  "environment_references": {
+    "CWP": "a901b67f (parent-provided context; shared integration advancing)",
+    "RF": "e688b0a2 (parent-provided context)",
+    "execution_head_frozen": false,
+    "observed_CWP_HEAD": "e93e074542e5d8a4ff66da681d1c349b0e45e608",
+    "config": "config/source_catalog.yaml",
+    "config_sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "activity": {
+    "download_events": 0,
+    "provider_calls": 0,
+    "model_calls": 0,
+    "OCR_calls": 0,
+    "catalog_writes": 0,
+    "production_config_writes": 0,
+    "raw_writes": 0,
+    "full_library_scan": false,
+    "consumer_rule": "RF receives public SourceRef and manifests only; all raw paths are storage preparation fields, never RF joins"
+  },
+  "companies": [
+    {
+      "company": "CN-688012",
+      "identity_payload": {
+        "entity": "中微半导体设备（上海）股份有限公司",
+        "display_name": "中微公司",
+        "market": "CN",
+        "security_id": "688012",
+        "canonical_entity_id": null
+      },
+      "minimum_registration_group": [
+        {
+          "role": "FY2025 annual/history",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+            "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+            "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+            "byte_size": 9165875,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          },
+          "metadata": {
+            "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+            "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+            "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+            "byte_size": 9165875,
+            "mime_type": "application/pdf",
+            "title": "中微公司：2025年年度报告",
+            "document_kind": "annual_report",
+            "published_date": "2026-03-31",
+            "source_url": "https://static.cninfo.com.cn/finalpage/2026-03-31/1225062431.PDF",
+            "retrieved_at": null,
+            "collector_name": null,
+            "collector_version": null,
+            "canonical_entity_id": null,
+            "display_name": "中微公司",
+            "market": "CN",
+            "security_id": "688012",
+            "fiscal_year": 2025,
+            "fiscal_period": "FY",
+            "period_end": "2025-12-31",
+            "form_type": null,
+            "provider": null,
+            "provider_document_id": null,
+            "language": "zh"
+          },
+          "action": "public query_ref/verify/open or storage register existing original into isolated catalog; zero download",
+          "evidence": "catalog_query.json/exact_versions sha=d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
+        },
+        {
+          "role": "2026H1 latest",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+            "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+            "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+            "byte_size": 3149962,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          },
+          "metadata": {
+            "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+            "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+            "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+            "byte_size": 3149962,
+            "mime_type": "application/pdf",
+            "title": "2026年半年度报告",
+            "document_kind": "semi_annual_report",
+            "published_date": "2026-08-20",
+            "source_url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482884.PDF",
+            "retrieved_at": "2026-10-08T07:17:59Z",
+            "collector_name": null,
+            "collector_version": null,
+            "canonical_entity_id": null,
+            "display_name": null,
+            "market": "CN",
+            "security_id": "688012",
+            "fiscal_year": 2026,
+            "fiscal_period": "H1",
+            "period_end": null,
+            "form_type": "interim_report",
+            "provider": "cninfo",
+            "provider_document_id": "1225482884",
+            "language": "zh-CN"
+          },
+          "action": "public query_ref/verify/open or storage register existing original into isolated catalog; zero download",
+          "evidence": "catalog_query.json/exact_versions sha=182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+        },
+        {
+          "role": "2025H1 comparable",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+            "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+            "content_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+            "byte_size": 6361468,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          },
+          "metadata": {
+            "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+            "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+            "content_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+            "byte_size": 6361468,
+            "mime_type": "application/pdf",
+            "title": "中微公司：2025年半年度报告",
+            "document_kind": "semi_annual_report",
+            "published_date": "2025-08-29",
+            "source_url": "http://static.cninfo.com.cn/finalpage/2025-08-29/1224606011.PDF",
+            "retrieved_at": null,
+            "collector_name": null,
+            "collector_version": null,
+            "canonical_entity_id": null,
+            "display_name": "中微公司",
+            "market": "CN",
+            "security_id": "688012",
+            "fiscal_year": 2025,
+            "fiscal_period": "H1",
+            "period_end": "2025-06-30",
+            "form_type": null,
+            "provider": null,
+            "provider_document_id": null,
+            "language": "zh"
+          },
+          "action": "public query_ref/verify/open or storage register existing original into isolated catalog; zero download",
+          "evidence": "catalog_query.json/exact_versions sha=91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd"
+        },
+        {
+          "role": "2026Q1 native quarter bridge",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+            "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+            "content_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+            "byte_size": 217264,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          },
+          "metadata": {
+            "document_id": "urn:company-wiki:document:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+            "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+            "content_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+            "byte_size": 217264,
+            "mime_type": "application/pdf",
+            "title": "中微公司：2026年第一季度报告",
+            "document_kind": "quarterly_report",
+            "published_date": "2026-04-28",
+            "source_url": "http://static.cninfo.com.cn/finalpage/2026-04-28/1225215453.PDF",
+            "retrieved_at": null,
+            "collector_name": null,
+            "collector_version": null,
+            "canonical_entity_id": null,
+            "display_name": "中微公司",
+            "market": "CN",
+            "security_id": "688012",
+            "fiscal_year": 2026,
+            "fiscal_period": "Q1",
+            "period_end": "2026-03-31",
+            "form_type": null,
+            "provider": null,
+            "provider_document_id": null,
+            "language": "zh"
+          },
+          "action": "public query_ref/verify/open or storage register existing original into isolated catalog; zero download",
+          "evidence": "catalog_query.json/exact_versions sha=ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268"
+        },
+        {
+          "role": "IPO business/product context",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+            "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+            "content_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+            "byte_size": 11211796,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          },
+          "metadata": {
+            "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+            "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+            "content_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+            "byte_size": 11211796,
+            "mime_type": "application/pdf",
+            "title": "中微公司：首次公开发行股票并在科创板上市招股说明书",
+            "document_kind": "prospectus",
+            "published_date": "2019-07-16",
+            "source_url": "http://static.cninfo.com.cn/finalpage/2019-07-16/1206447929.PDF",
+            "retrieved_at": null,
+            "collector_name": null,
+            "collector_version": null,
+            "canonical_entity_id": null,
+            "display_name": "中微公司",
+            "market": "CN",
+            "security_id": "688012",
+            "fiscal_year": null,
+            "fiscal_period": null,
+            "period_end": null,
+            "form_type": null,
+            "provider": null,
+            "provider_document_id": null,
+            "language": "zh"
+          },
+          "action": "public query_ref/verify/open or storage register existing original into isolated catalog; zero download",
+          "evidence": "catalog_query.json/exact_versions sha=19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67"
+        },
+        {
+          "role": "FY2024 annual/history",
+          "raw": {
+            "sha256": "3273711fbb79fa6ee5e9a3b2f0eea7d5a1dfa0d305721c61e5af251f9addf399",
+            "byte_size": 14285291,
+            "magic": "%PDF-1.5\r\n%�"
+          },
+          "source_ref": null,
+          "storage": {
+            "raw_path": "C:\\Users\\郑曾波\\Dropbox\\Stock\\工业与信息化\\电子\\中微公司\\中微公司：2024年年度报告.pdf"
+          },
+          "document_kind": "annual_report",
+          "fiscal_year": 2024,
+          "language": "zh",
+          "published_date": null,
+          "source_url": null,
+          "action": "zero download; storage isolate original and recover official metadata before current as-of selection",
+          "limits": "production retired audit is metadata governance; legacy row date2025-04-17 conflicts with secondary publication lead2025-04-18. Exact primary publication URL/date not verified here; do not invent."
+        },
+        {
+          "role": "latest management communication",
+          "raw": {
+            "sha256": "520684e158f0f10191be84c435cb5600fff0a6cbea8d41442dfee9647d497d6f",
+            "byte_size": 557100,
+            "magic": "{\"success\":t"
+          },
+          "source_ref": null,
+          "storage": {
+            "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\52\\520684e158f0f10191be84c435cb5600fff0a6cbea8d41442dfee9647d497d6f",
+            "exists": true,
+            "verified_actual_bytes": true
+          },
+          "source_url": "https://roadshow.sseinfo.com/activityDetails/40766",
+          "communication_date": "2026-09-10",
+          "representation": "retained API/interactive Q&A JSON snapshot",
+          "action": "inspect public JSON format and capture provenance before official import; do not pretend browser/tool snapshot is original HTML/TXT",
+          "limits": "public importer application/json is transcript_material validation, not arbitrary wrapper acceptance. No source ID minted by preparation."
+        },
+        {
+          "role": "conditional financing/acquisition context",
+          "candidate_sha256s": [
+            "cf22787332d809eeb3127ac5a0492e4cc7f3a6ced611020b239ee17283d7934e",
+            "2aed874b36548f181ef7063c12eefea33f57e9eca4069685a91da1f23c72635a"
+          ],
+          "action": "zero download; existing active other-kind refs are dated unknown; recover official metadata only when this operating context is material",
+          "evidence": "local_unregistered_candidates.json",
+          "not_all_documents_are_required": true
+        }
+      ],
+      "required_real_FF_downloads": [],
+      "zero_download_periods": [
+        "FY2024/FY2025",
+        "2025H1/2026H1",
+        "2026Q1",
+        "2019 IPO prospectus"
+      ],
+      "limitations": [
+        "Current dated SourceRef query no telephone TXT; SSE2026-09-10 Q&A is separate official management communication, not ET call.",
+        "New 2026Q3 filing excluded until actual publication<=2026-10-08; no future quarter guessed.",
+        "Annual2024 and conditional financing originals need exact primary metadata repair, not re-download."
+      ]
+    },
+    {
+      "company": "HK-00700",
+      "identity_payload": {
+        "entity": "腾讯控股有限公司",
+        "display_name": "腾讯",
+        "market": "HK",
+        "security_id": "00700",
+        "canonical_entity_id": null
+      },
+      "minimum_registration_group": [
+        {
+          "role": "FY2025 annual/history",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+            "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+            "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+            "byte_size": 4428270,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          },
+          "metadata": {
+            "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+            "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+            "content_sha256": "d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+            "byte_size": 4428270,
+            "mime_type": "application/pdf",
+            "title": "腾讯：2025年年度报告",
+            "document_kind": "annual_report",
+            "published_date": "2026-04-09",
+            "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040900888_c.pdf",
+            "retrieved_at": null,
+            "collector_name": null,
+            "collector_version": null,
+            "canonical_entity_id": null,
+            "display_name": null,
+            "market": "HK",
+            "security_id": "00700",
+            "fiscal_year": 2025,
+            "fiscal_period": null,
+            "period_end": null,
+            "form_type": null,
+            "provider": null,
+            "provider_document_id": null,
+            "language": "zh"
+          },
+          "action": "public query_ref/verify/open or storage register existing original into isolated catalog; zero download",
+          "evidence": "catalog_query.json/exact_versions sha=d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7"
+        },
+        {
+          "role": "FY2024 annual/history",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+            "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+            "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+            "byte_size": 5241364,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          },
+          "metadata": {
+            "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+            "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+            "content_sha256": "70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+            "byte_size": 5241364,
+            "mime_type": "application/pdf",
+            "title": "腾讯：2024年年度报告",
+            "document_kind": "annual_report",
+            "published_date": "2025-04-08",
+            "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0408/2025040800668_c.pdf",
+            "retrieved_at": null,
+            "collector_name": null,
+            "collector_version": null,
+            "canonical_entity_id": null,
+            "display_name": null,
+            "market": "HK",
+            "security_id": "00700",
+            "fiscal_year": 2024,
+            "fiscal_period": null,
+            "period_end": null,
+            "form_type": null,
+            "provider": null,
+            "provider_document_id": null,
+            "language": "zh"
+          },
+          "action": "public query_ref/verify/open or storage register existing original into isolated catalog; zero download",
+          "evidence": "catalog_query.json/exact_versions sha=70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0"
+        },
+        {
+          "role": "2026H1 latest",
+          "legacy_alias": "tencent_h1_2026_official",
+          "source_ref": null,
+          "raw": {
+            "sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+            "byte_size": 5135808,
+            "magic": "%PDF-1.7\r%��"
+          },
+          "storage": {
+            "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\41\\4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+            "exists": true,
+            "verified_actual_bytes": true
+          },
+          "source_metadata": {
+            "title": "Tencent Interim Report 2026",
+            "source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+            "document_kind": "semi_annual_report",
+            "mime_type": "application/pdf",
+            "language": "en",
+            "fiscal_year": 2026,
+            "fiscal_period": "H1",
+            "published_date": null
+          },
+          "publication_proof": "primary_publication_proofs.json/tencent_current_official_list; old supplemental receipt reports2026-08-12 printed/board/release date, exact report publication day unconfirmed",
+          "action": "public official local import into isolated catalog using exact archive bytes; zero download; writer returns SourceRef",
+          "evidence": "sealed_cases_sources.json alias=tencent_h1_2026_official",
+          "historical_capture_date": "2026-10-08"
+        },
+        {
+          "role": "2026Q2/H1 official earnings communication",
+          "legacy_alias": "tencent_results_2q2026",
+          "source_ref": null,
+          "raw": {
+            "sha256": "64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+            "byte_size": 412297,
+            "magic": "%PDF-1.7\r\n%�"
+          },
+          "storage": {
+            "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\64\\64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+            "exists": true,
+            "verified_actual_bytes": true
+          },
+          "source_metadata": {
+            "title": "Tencent second-quarter and first-half 2026 results",
+            "source_url": "https://www.tencent.com/wp-content/uploads/2026/08/Tencent-Announces-2026-Second-Quarter-Results.pdf",
+            "document_kind": "investor_relations",
+            "mime_type": "application/pdf",
+            "language": "en",
+            "fiscal_year": 2026,
+            "fiscal_period": "Q2",
+            "published_date": "2026-08-12"
+          },
+          "publication_proof": "primary_publication_proofs.json/tencent_2q26_release",
+          "action": "public official local import into isolated catalog using exact archive bytes; zero download; writer returns SourceRef",
+          "evidence": "sealed_cases_sources.json alias=tencent_results_2q2026",
+          "historical_capture_date": "2026-10-08"
+        },
+        {
+          "role": "latest business presentation",
+          "legacy_alias": "tencent_corporate_overview_sep2026",
+          "source_ref": null,
+          "raw": {
+            "sha256": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+            "byte_size": 1676729,
+            "magic": "%PDF-1.6\r%��"
+          },
+          "storage": {
+            "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\a9\\a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+            "exists": true,
+            "verified_actual_bytes": true
+          },
+          "source_metadata": {
+            "title": "Tencent Corporate Overview September 2026",
+            "source_url": "https://www.tencent.com/wp-content/uploads/2026/09/Corporate-Overview-2Q26-20260916.pdf",
+            "document_kind": "investor_relations",
+            "mime_type": "application/pdf",
+            "language": "en",
+            "fiscal_year": null,
+            "fiscal_period": null,
+            "published_date": null
+          },
+          "publication_proof": "old ir_capture_receipt asserts2026-09-16 from dated website filename; cover saysSeptember2026. Preserve asserted filename-date separately until primary publication event proven",
+          "action": "public official local import into isolated catalog using exact archive bytes; zero download; writer returns SourceRef",
+          "evidence": "sealed_cases_sources.json alias=tencent_corporate_overview_sep2026",
+          "historical_capture_date": "2026-10-08"
+        }
+      ],
+      "required_real_FF_downloads": [],
+      "zero_download_periods": [
+        "FY2024/FY2025",
+        "2026H1 English original",
+        "2026Q2 release",
+        "September2026 corporate overview"
+      ],
+      "limitations": [
+        "Catalog semi_annual_report not_found is not raw absence: archive122-page English report SHA verified. Do not force zh download when actual en original covers needed period.",
+        "Sealed cases contain capture-date contamination for annual2025/interim/IR published fields. Keep originals; use primary/public metadata, not cases date.",
+        "Old earnings presentation .pdf returned987bytes HTML, not actual PDF; this failure object cannot count as presentation. Official corporate overview is usable alternate document, not successful same-link fetch.",
+        "Latest earnings-call provider path not executed here; official webcast is a separate discovery route."
+      ]
+    },
+    {
+      "company": "US-MSFT",
+      "identity_payload": {
+        "entity": "MICROSOFT CORP",
+        "display_name": "Microsoft",
+        "market": "US",
+        "security_id": "MSFT",
+        "canonical_entity_id": null,
+        "primary_issuer_cik": "0000789019"
+      },
+      "minimum_registration_group": [
+        {
+          "role": "FY2025 annual/history",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+            "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+            "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+            "byte_size": 8158067,
+            "mime_type": "text/html",
+            "schema_version": "2.0"
+          },
+          "metadata": {
+            "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+            "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+            "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+            "byte_size": 8158067,
+            "mime_type": "text/html",
+            "title": "Microsoft 10-K FY2025",
+            "document_kind": "annual_report",
+            "published_date": "2025-07-30",
+            "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+            "retrieved_at": null,
+            "collector_name": null,
+            "collector_version": null,
+            "canonical_entity_id": null,
+            "display_name": null,
+            "market": "US",
+            "security_id": "MSFT",
+            "fiscal_year": 2025,
+            "fiscal_period": null,
+            "period_end": null,
+            "form_type": "10-K",
+            "provider": null,
+            "provider_document_id": null,
+            "language": null
+          },
+          "action": "public query_ref/verify/open or storage register existing original into isolated catalog; zero download",
+          "evidence": "catalog_query.json/exact_versions sha=99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe"
+        },
+        {
+          "role": "FY2024 existing comparable/optional reference",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+            "source_id": "urn:company-wiki:source:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+            "content_sha256": "43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+            "byte_size": 6860911,
+            "mime_type": "text/html",
+            "schema_version": "2.0"
+          },
+          "metadata": {
+            "document_id": "urn:company-wiki:document:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+            "source_id": "urn:company-wiki:source:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+            "content_sha256": "43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+            "byte_size": 6860911,
+            "mime_type": "text/html",
+            "title": "Microsoft 10-K FY2024",
+            "document_kind": "annual_report",
+            "published_date": "2024-07-30",
+            "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017024087843/msft-20240630.htm",
+            "retrieved_at": null,
+            "collector_name": null,
+            "collector_version": null,
+            "canonical_entity_id": null,
+            "display_name": null,
+            "market": "US",
+            "security_id": "MSFT",
+            "fiscal_year": 2024,
+            "fiscal_period": null,
+            "period_end": null,
+            "form_type": "10-K",
+            "provider": null,
+            "provider_document_id": null,
+            "language": null
+          },
+          "action": "public query_ref/verify/open or storage register existing original into isolated catalog; zero download",
+          "evidence": "catalog_query.json/exact_versions sha=43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95"
+        },
+        {
+          "role": "FY2026 Q1 native quarterly SEC HTML",
+          "source_ref": null,
+          "raw": {
+            "sha256": "c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+            "byte_size": 5597461,
+            "magic": "<?xml versio"
+          },
+          "storage": {
+            "raw_path": "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-25-256321\\msft-20250930.htm"
+          },
+          "source_metadata": {
+            "published_date": "2025-10-29",
+            "fiscal_year": 2026,
+            "fiscal_period": "Q1",
+            "period_end": "2025-09-30",
+            "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312525256321/msft-20250930.htm",
+            "language": "en",
+            "form_type": "10-Q",
+            "provider_observed_fiscal_year": 2025
+          },
+          "raw_ixbrl_identity": {
+            "DocumentFiscalYearFocus": "2026",
+            "DocumentFiscalPeriodFocus": "Q1",
+            "DocumentPeriodEndDate": "September 30, 2025",
+            "EntityCentralIndexKey": "0000789019"
+          },
+          "action": "public official local import exact existing bytes into isolated US catalog; zero download",
+          "metadata_conflicts": [
+            "Existing .source.json says market=HK with security_id MSFT; do not consume/copy wrong identity. Register verified issuer/SEC US metadata in isolated catalog."
+          ],
+          "retired_diagnosis": "retired_source_diagnosis.json"
+        },
+        {
+          "role": "FY2026 Q2 native quarterly SEC HTML",
+          "source_ref": null,
+          "raw": {
+            "sha256": "a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+            "byte_size": 7483278,
+            "magic": "<?xml versio"
+          },
+          "storage": {
+            "raw_path": "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-26-027207\\msft-20251231.htm"
+          },
+          "source_metadata": {
+            "published_date": "2026-01-28",
+            "fiscal_year": 2026,
+            "fiscal_period": "Q2",
+            "period_end": "2025-12-31",
+            "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526027207/msft-20251231.htm",
+            "language": "en",
+            "form_type": "10-Q",
+            "provider_observed_fiscal_year": 2025
+          },
+          "raw_ixbrl_identity": {
+            "DocumentFiscalYearFocus": "2026",
+            "DocumentFiscalPeriodFocus": "Q2",
+            "DocumentPeriodEndDate": "December 31, 2025",
+            "EntityCentralIndexKey": "0000789019"
+          },
+          "action": "public official local import exact existing bytes into isolated US catalog; zero download",
+          "metadata_conflicts": [
+            "Existing .source.json says market=HK with security_id MSFT; do not consume/copy wrong identity. Register verified issuer/SEC US metadata in isolated catalog.",
+            "Dayu meta fiscal_year=2025 conflicts with Microsoft FY2026 Q2; leave requested fiscal_year unpromoted until official period/issuer calendar proof."
+          ],
+          "retired_diagnosis": "retired_source_diagnosis.json"
+        },
+        {
+          "role": "FY2026 Q3 native quarterly SEC HTML",
+          "source_ref": null,
+          "raw": {
+            "sha256": "76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+            "byte_size": 7731948,
+            "magic": "<?xml versio"
+          },
+          "storage": {
+            "raw_path": "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\MSFT\\filings\\fil_0001193125-26-191507\\msft-20260331.htm"
+          },
+          "source_metadata": {
+            "published_date": "2026-04-29",
+            "fiscal_year": 2026,
+            "fiscal_period": "Q3",
+            "period_end": "2026-03-31",
+            "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526191507/msft-20260331.htm",
+            "language": "en",
+            "form_type": "10-Q",
+            "provider_observed_fiscal_year": 2026
+          },
+          "raw_ixbrl_identity": {
+            "DocumentFiscalYearFocus": "2026",
+            "DocumentFiscalPeriodFocus": "Q3",
+            "DocumentPeriodEndDate": "March 31, 2026",
+            "EntityCentralIndexKey": "0000789019"
+          },
+          "action": "public official local import exact existing bytes into isolated US catalog; zero download",
+          "metadata_conflicts": [
+            "Existing .source.json says market=HK with security_id MSFT; do not consume/copy wrong identity. Register verified issuer/SEC US metadata in isolated catalog."
+          ],
+          "retired_diagnosis": "retired_source_diagnosis.json"
+        },
+        {
+          "role": "FY2026Q4/FY2026 release",
+          "legacy_alias": "src_results",
+          "source_ref": null,
+          "raw": {
+            "sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+            "byte_size": 808850,
+            "magic": "<!DOCTYPE ht"
+          },
+          "storage": {
+            "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\8d\\8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+            "exists": true,
+            "verified_actual_bytes": true
+          },
+          "source_metadata": {
+            "title": "results official communication",
+            "source_url": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q4/press-release-webcast",
+            "document_kind": "investor_relations",
+            "mime_type": "text/html",
+            "language": "en",
+            "fiscal_year": 2026,
+            "fiscal_period": "Q4",
+            "published_date": "2026-07-29"
+          },
+          "publication_proof": "primary_publication_proofs.json/msft_fy26q4_release",
+          "action": "public official local import into isolated catalog using exact archive bytes; zero download; writer returns SourceRef",
+          "evidence": "sealed_cases_sources.json alias=src_results",
+          "historical_capture_date": "2026-10-08"
+        },
+        {
+          "role": "FY2026Q4 official complete transcript HTML",
+          "legacy_alias": "src_call",
+          "source_ref": null,
+          "raw": {
+            "sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+            "byte_size": 273436,
+            "magic": "<!DOCTYPE ht"
+          },
+          "storage": {
+            "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\bd\\bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+            "exists": true,
+            "verified_actual_bytes": true
+          },
+          "source_metadata": {
+            "title": "call official communication",
+            "source_url": "https://www.microsoft.com/en-us/Investor/events/fy-2026/earnings-fy-2026-q4",
+            "document_kind": "investor_call_transcript",
+            "mime_type": "text/html",
+            "language": "en",
+            "fiscal_year": 2026,
+            "fiscal_period": "Q4",
+            "published_date": "2026-07-29"
+          },
+          "publication_proof": "primary_publication_proofs.json/msft_fy26q4_official_call",
+          "action": "public official local import into isolated catalog using exact archive bytes; zero download; writer returns SourceRef",
+          "evidence": "sealed_cases_sources.json alias=src_call",
+          "historical_capture_date": "2026-10-08"
+        },
+        {
+          "role": "FY2026Q4 metrics",
+          "legacy_alias": "src_metrics",
+          "source_ref": null,
+          "raw": {
+            "sha256": "cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+            "byte_size": 198175,
+            "magic": "<!DOCTYPE ht"
+          },
+          "storage": {
+            "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\cf\\cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+            "exists": true,
+            "verified_actual_bytes": true
+          },
+          "source_metadata": {
+            "title": "metrics official communication",
+            "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q4/metrics",
+            "document_kind": "investor_relations",
+            "mime_type": "text/html",
+            "language": "en",
+            "fiscal_year": 2026,
+            "fiscal_period": "Q4",
+            "published_date": "2026-07-29"
+          },
+          "publication_proof": "same official dated FY26Q4 earnings event; register document-specific URL",
+          "action": "public official local import into isolated catalog using exact archive bytes; zero download; writer returns SourceRef",
+          "evidence": "sealed_cases_sources.json alias=src_metrics",
+          "historical_capture_date": "2026-10-08"
+        },
+        {
+          "role": "FY27 reporting/metric transition",
+          "legacy_alias": "src_presentation",
+          "source_ref": null,
+          "raw": {
+            "sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+            "byte_size": 4016522,
+            "magic": "PK\u0003\u0004\u0014\u0000\u0006\u0000\b\u0000\u0000\u0000"
+          },
+          "storage": {
+            "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\c0\\c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+            "exists": true,
+            "verified_actual_bytes": true
+          },
+          "source_metadata": {
+            "title": "FY27 Segments and Investor Metrics",
+            "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/FY27ExternalKPIs.pptx",
+            "document_kind": "investor_relations",
+            "mime_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+            "language": "en",
+            "fiscal_year": null,
+            "fiscal_period": null,
+            "published_date": "2026-09-02"
+          },
+          "publication_proof": "../msft_presentation_publication_investigation.json + primary_publication_proofs.json/msft_fy27_deck_date",
+          "action": "public official local import into isolated catalog using exact archive bytes; zero download; writer returns SourceRef",
+          "evidence": "sealed_cases_sources.json alias=src_presentation",
+          "historical_capture_date": "2026-10-08"
+        },
+        {
+          "role": "existing original-language TXT; discovery until exact publication proof",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+            "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+            "content_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+            "byte_size": 66324,
+            "mime_type": "text/plain",
+            "schema_version": "2.0"
+          },
+          "metadata": {
+            "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+            "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+            "content_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+            "byte_size": 66324,
+            "mime_type": "text/plain",
+            "title": null,
+            "document_kind": "investor_call_transcript",
+            "published_date": null,
+            "source_url": null,
+            "retrieved_at": null,
+            "collector_name": null,
+            "collector_version": null,
+            "canonical_entity_id": null,
+            "display_name": "Microsoft",
+            "market": "US",
+            "security_id": "MSFT",
+            "fiscal_year": 2026,
+            "fiscal_period": "Q4",
+            "period_end": null,
+            "form_type": null,
+            "provider": null,
+            "provider_document_id": null,
+            "language": "en"
+          },
+          "action": "public query_ref/verify/open or storage register existing original into isolated catalog; zero download",
+          "evidence": "catalog_query.json/exact_versions sha=4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+          "limits": "Header says source=motley_fool; provider/publication null. Official HTML date/content is not automatically proof of this TXT exact version; no ET success claimed."
+        },
+        {
+          "role": "separate SEC presentation text supplements OCR gaps",
+          "source_ref": null,
+          "raw_sha256": null,
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526380280/d291965dex991.htm",
+          "published_date": "2026-09-02",
+          "publication_proof": "SEC8-K Item7.01/Exhibit99.1",
+          "action": "future bounded official original capture + public official import; separately hash bytes and return distinct SourceRef",
+          "limits": "Not the deck binary SHA; web parsed observation is not original capture. Initial OCR keeps page7/page18 gaps and source partial."
+        }
+      ],
+      "required_real_FF_downloads": [
+        {
+          "document_kind": "annual_report",
+          "form_type": "10-K",
+          "fiscal_year": 2026,
+          "fiscal_period": "FY",
+          "period_end": "2026-06-30",
+          "published_date": "2026-07-29",
+          "official_source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+          "publisher_reported_bytes": 8585501,
+          "raw_sha256": null,
+          "status": "download_NOT_RUN",
+          "route": "current RF source_preparation → FF US Dayu → CWP public writer",
+          "absence_evidence": "production annual query onlyFY2024/FY2025; target Dayu file/meta list; both237-entry delivery/archive indexes; all27cases refs/24original objects inspected; no msft-20260630 original identified",
+          "remaining_scope_limit": "absence is bounded to configured roots and explicit archives, not a universal assertion about every machine directory; requery inventory at execution start",
+          "suggested_resource_limit": {
+            "max_bytes": 16777216,
+            "timeout_seconds": 180,
+            "max_cost_usd": null,
+            "budget_source": "MAIN current configured allowance; no new budget implied"
+          }
+        }
+      ],
+      "zero_download_periods": [
+        "FY2024/FY2025 annuals",
+        "FY2026Q1/Q2/Q3 10-Q",
+        "FY2026Q4 official release/call/metrics",
+        "FY27 deck"
+      ],
+      "limitations": [
+        "Historical FMP exact ET probe envelope reports provider_entitlement_required, status unavailable. The envelope does not contain HTTP status; preserve known ET402 restriction context without fabricating an HTTP receipt or provider success. No blind retry. Stored motley_fool TXT and official HTML are separate sources.",
+        "FY2026 10-K official primary index verified; web4MiB parser refusal is a tool size limit, not absence at issuer.",
+        "Retired filings are genuine existing bytes with primary iXBRL issuer/period proof; identity conflicts must be corrected by isolated public import, not production flag bypass."
+      ]
+    }
+  ],
+  "storage_protocol": {
+    "already_registered": "Public query_ref/describe_version/verify_version; storage may register necessary exact original candidates into isolated root; consumer gets only returned ref.",
+    "archive_extensionless_objects": "Use python -m company_wiki.source_catalog.official_source_cli --config <isolated> --project-root <isolated> --request <actual JSON> --input-file <storage archive absolute path>. Explicit MIME/title/kind/market/security/period/published evidence; no pretend capture-ready register_sources by filename.",
+    "request_schema": "official-source-import-request/1",
+    "request_fields": [
+      "request_id",
+      "max_bytes",
+      "content_sha256",
+      "mime_type",
+      "source",
+      "capture_receipt"
+    ],
+    "capture_receipt_fields": [
+      "content_sha256",
+      "response_bytes",
+      "capture_method",
+      "tool_name",
+      "tool_call_id",
+      "captured_at"
+    ],
+    "capture_semantics": "future local storage import emits real new local capture time/event; original historical capture time/primary publication proof retained separately; no fabricated HTTP receipt",
+    "unknown_metadata": "None stays None; query as-of excludes unknown publication. Primary metadata recovery is outstanding only for affected source.",
+    "retired_sources": "Exact raw SHA does not itself remove source_not_active. Isolated fresh public import from proven correct bytes/issuer/period; MAIN decides whether production reconcile needs separate work."
+  },
+  "evidence_files": [
+    "catalog_query.json",
+    "registered_storage_locations.json",
+    "sealed_cases_sources.json",
+    "local_unregistered_candidates.json",
+    "retired_source_diagnosis.json",
+    "primary_publication_proofs.json",
+    "storage_target_paths.json"
+  ],
+  "fresh_execution_boundary": "No executor, research model, new cohort or company-pool draw created. Existing sources and old RF outputs are provenance/control only, never fresh-model replacements."
+}

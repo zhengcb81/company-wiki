@@ -58,6 +58,25 @@ def test_incomplete_parser_requires_actual_opaque_body_proof_and_no_other_failur
     assert format_capability_gap(receipt, images_only_checked=True) is None
 
 
+def test_partial_unpublished_opaque_parser_remains_blocked_not_pass():
+    from tools.cross_market_suite.core import format_capability_gap
+    receipt = {"status": "partial", "error": None, "documents": [
+        {"artifact_ref": None, "errors": ["PARSER_INCOMPLETE"]}]}
+    assert format_capability_gap(receipt) is None
+    assert format_capability_gap(receipt, images_only_checked=True) == "PARSER_INCOMPLETE"
+    assert summarize(report("BLOCKED")["checks"]) == "PARTIAL"
+    receipt["documents"][0]["artifact_ref"] = "published-despite-incomplete"
+    assert format_capability_gap(receipt, images_only_checked=True) is None
+
+
+@pytest.mark.parametrize("status", ["partial", "failed"])
+def test_opaque_body_does_not_hide_an_unrelated_top_level_failure(status):
+    from tools.cross_market_suite.core import format_capability_gap
+    receipt = {"status": status, "error": "MODEL_TRANSPORT_FAILED", "documents": [
+        {"artifact_ref": None, "errors": ["PARSER_INCOMPLETE"]}]}
+    assert format_capability_gap(receipt, images_only_checked=True) is None
+
+
 @pytest.mark.parametrize("errors", [None, "PARSER_INCOMPLETE", [{"code": "PARSER_INCOMPLETE"}]])
 def test_invalid_document_errors_stay_unclassified(errors):
     from tools.cross_market_suite.core import format_capability_gap
