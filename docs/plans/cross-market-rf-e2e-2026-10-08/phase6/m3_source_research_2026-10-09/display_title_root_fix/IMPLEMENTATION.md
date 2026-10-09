@@ -9,7 +9,7 @@
 ## 实施顺序与写集
 
 1. 复用干净RF隔离工作树，MAIN独占scripts/company_wiki_source_v2.py、tests/test_company_wiki_source_v2.py及现有短CLI集成/共享smoke入口。保护RF owner assurance三文件与output；零生产catalog/config/原件变更。
-2. 先写 nullable/空白title的legacy与minimal候选行为测试，真正源trace维持null/空白而native RF source记录产生明确source-ID显示标签； present标题保持原字节，非字符串metadata仍拒绝。先RED。现有missing title测试改为新责任期望并记录此前设计耦合，不删除真实hash/bytes/错period/未来date拒绝。
+2. 先写 nullable/空白title的legacy与minimal候选行为测试，真正源trace维持null/空白而native RF source记录产生明确source-ID显示标签； present标题仅做显示空白规范化、trace保持原字节，非字符串metadata仍拒绝。先RED。现有missing title测试改为新责任期望并记录此前设计耦合，不删除真实hash/bytes/错period/未来date拒绝。
 3. 共用转换层只将缺标题从资格转为显示fallback（document_kind+SourceRef ID），不猜公司/年度/原件标题，不创建新事实，不写CWP历史。RF既有source schema继续非空title，trace保存真正未知。
 4. 原生RF source_preparation CLI离线有界集成覆盖null标题成功、0download与不漂移来源trace；语义bytes/ref/date/candidate拒绝保留。短责任模块列入当前既有CI/push共用集，长跨仓/真实收费试验不进入commit。
 5. 一次集中责任测试+实际三份原件sealed manifest重放（公共读取，不改旧源）验收；正常commit/push，定点同步这一运行文件，再由executor实际新capture复跑。结构/工程绿不代替四路研究审查。
@@ -17,3 +17,15 @@
 ## 验收与禁止事项
 
 缺标题仍可消费已经资格/字节验证的财报，实际源标题unknown保留，生成显示标签不宣称真实标题；reference/file hash/as-of/dates/候选事实一致性拒绝不弱化。不新增身份DTO、人签、全库扫描、重下载、资金预算、测试按公司特判或原报告覆盖。公开事实丰富是正常独立动作，不成为RF新许可。
+
+## 实际RED补充
+
+7个显示边界RED/4 malformed控制PASS；第一次native夹具误改documents.title=NULL触发NOT NULL约束，产品尚未启动，记录保留。查真实producer后改为普通sidecar缺source_title声明+正常scan，零SQL，真实RF→FF→CWP原生CLI再次exit3/calls2/downloads0，1RED/5.04s。这条真正失败与三份真实MSFT季度一致；不是通过放宽字节/身份/as-of断言求绿。
+
+## 集中验收、发布、安装（2026-10-09 19:20 UTC）
+
+实际正常metadata/scan创建的原生RF→FF→CWP标题缺失用例与责任控制集中88PASS/24.81秒（wrapper27.70秒），自己TEMP已恢复、零SQL/外部调用；旧测试夹具和缺tracked workflow环境失败都保留。真实三季度旧CWP preview2.0 receipt没有冒造为RF reader2.1 receipt；旧manifest仅作原始实测证据，原生新fixture检验真实生产转换入口。
+
+六文件正常commit43635e5110d69c5ccf04647692ba8ef6ccfb01aa已并main/push，常规pre-push177PASS/38.22秒，精确CI37979280816成功/47秒。仅两运行文件到两个物理技能根，共4个CAS定点更新；Claude既有junction相同，config/output/key无写入、RF三个owner日志SHA保持。源与安装SHA见selected_installation.json，三执行者已被告知后续调用版本delta，不改冻结原scope、旧runtime记录或已付费摘要。
+
+本节点工程接受；M3四路研究验收仍待。

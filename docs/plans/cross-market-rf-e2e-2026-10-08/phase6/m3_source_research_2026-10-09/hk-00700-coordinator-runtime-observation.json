@@ -1,0 +1,16 @@
+{
+  "observed_at": "2026-10-09T19:26:41.727841+00:00",
+  "agent_id": "/root/m3_hk_executor",
+  "run_id": "m3-20261009T184946-hk-00700",
+  "executor_started_observed_at": "2026-10-09T19:00:16.586378+00:00",
+  "source_fix_head": "43635e5110d69c5ccf04647692ba8ef6ccfb01aa",
+  "installed_at": "2026-10-09T19:20:26.556034+00:00",
+  "selected_file_sha256": {
+    "scripts/company_wiki_source_v2.py": "f78940d7169b3d572aa29bc731f9efc0f0ac75ee6356b60f5aa0705cbdc9ce58",
+    "refs/data-governance.md": "f2b22f786f8b0289ff7f1d1f075e67aef6315f27f1ceebdca224ea8f5ff37920"
+  },
+  "frozen_scope_changed": false,
+  "old_evidence_changed": false,
+  "research_acceptance": "pending",
+  "executor_notified": true
+}

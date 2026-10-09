@@ -378,5 +378,16 @@
       "MongoDB"
     ],
     "current_goal_remains_active": true
+  },
+  "M3_live": {
+    "observed_at": "2026-10-09T19:26:08.596318+00:00",
+    "status": "THREE_EXECUTORS_RUNNING_FOUR_REVIEWS_PENDING",
+    "cohort": "../m3_source_research_2026-10-09/cohort.json",
+    "display_title_fix_source": "43635e5110d69c5ccf04647692ba8ef6ccfb01aa",
+    "display_title_FIX_CI": 37979280816,
+    "new_tokens_observed": 95401,
+    "new_micro_usd_observed": 99125,
+    "common_summary_issues_investigation": "../m3_source_research_2026-10-09/model_output_runtime_root/INVESTIGATION.md",
+    "old_evidence_rewritten": false
   }
 }

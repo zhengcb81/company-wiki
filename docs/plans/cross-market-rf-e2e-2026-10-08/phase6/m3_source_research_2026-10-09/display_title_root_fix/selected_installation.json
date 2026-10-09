@@ -1,0 +1,51 @@
+{
+  "recorded_at": "2026-10-09T19:20:26.556034+00:00",
+  "source_head": "43635e5110d69c5ccf04647692ba8ef6ccfb01aa",
+  "selected_physical_files": [
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\company_wiki_source_v2.py",
+      "old_sha256": "72bc240db60de62cabf0ca8018930fc5af5b01fe1964e1c9cffe7153dd6c9d6f",
+      "new_sha256": "f78940d7169b3d572aa29bc731f9efc0f0ac75ee6356b60f5aa0705cbdc9ce58",
+      "bytes": 16571
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\data-governance.md",
+      "old_sha256": "be56cd9fdb60b326b328e5a970edcc8c63ce375ee322b1dbf1004c7ea9a864c9",
+      "new_sha256": "f2b22f786f8b0289ff7f1d1f075e67aef6315f27f1ceebdca224ea8f5ff37920",
+      "bytes": 7020
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\company_wiki_source_v2.py",
+      "old_sha256": "72bc240db60de62cabf0ca8018930fc5af5b01fe1964e1c9cffe7153dd6c9d6f",
+      "new_sha256": "f78940d7169b3d572aa29bc731f9efc0f0ac75ee6356b60f5aa0705cbdc9ce58",
+      "bytes": 16571
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\references\\data-governance.md",
+      "old_sha256": "be56cd9fdb60b326b328e5a970edcc8c63ce375ee322b1dbf1004c7ea9a864c9",
+      "new_sha256": "f2b22f786f8b0289ff7f1d1f075e67aef6315f27f1ceebdca224ea8f5ff37920",
+      "bytes": 7020
+    }
+  ],
+  "selected_runtime_files_per_root": 2,
+  "claude_existing_junction_same": true,
+  "config_output_secret_files_written": 0,
+  "normal_RF_pre_push": {
+    "passes": 177,
+    "seconds": 38.22
+  },
+  "concentrated": {
+    "passes": 88,
+    "seconds": 24.81
+  },
+  "remote_CI": {
+    "head_sha": "43635e5110d69c5ccf04647692ba8ef6ccfb01aa",
+    "id": 37979280816,
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-09T19:18:07Z",
+    "updated_at": "2026-10-09T19:18:54Z",
+    "seconds": 47,
+    "url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/37979280816"
+  }
+}

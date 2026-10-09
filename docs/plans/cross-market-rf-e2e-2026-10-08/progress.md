@@ -1,5 +1,15 @@
 # Progress
 
+## 最新 M3 节点（2026-10-09 19:26 UTC；记录实际时间以 JSON 为准）
+
+**Next Step：** 三个独立原公司新执行继续研究，封存后四路独立审查；共用摘要截断/业务表选取/OCR时延问题正在按真实材料查因，见[输出调查](phase6/m3_source_research_2026-10-09/model_output_runtime_root/INVESTIGATION.md)。不增输出上限、不猜配置、不收费盲重试；M4/NVDA/池loop及后续八家目标仍待。
+
+- 显示标题不是来源资格：合法原文title=null/blank现在RF显示document_kind+SourceRef标签，trace保留unknown，字节/hash/真实公司/期次/as-of仍由现有各责任层检查。正常metadata scan的实际三仓CLI先RED后88PASS，旧实测和环境失败保留。
+- RF43635e51正常并main/push177PASS；精确CI37979280816成功47秒，两运行文件×两物理安装根定点同步完成，原配置/输出/owner日志不动。CWP ea3e3bc6 M3准备记录已正常推2479PASS，精确CI37977952790成功103秒。
+- 新M3实时账观察95,401tokens/99,125microUSD；加旧母账已知332,015tokens/250,690microUSD保守估算，历史unknown7/FX2,764/旧acquisition unknown不重置。这是尚未封存的观察，不是最终invoice。真实同规格新AUTO复用三家均已有零model/zero reservation实证。
+- 三家实际摘要CN H1/IPO、HK PPT、US call撞8192输出cap，HK H1与US release/metrics缺可回放精选证据。DeepSeek未显式thinking时供应商当前默认enabled/high是待实证共因，不伪造缺失reasoning计量/失败body；执行profile/caps/env/work等偏差与产品缺陷分开记录。
+
+
 ## 2026-10-09 19:00 UTC：M3三独立新执行启动
 
 实际native init三次exit0，分别cn-688012/hk-00700/us-msft；三个独立agent均已返回真实工具初报，非模拟角色。新run/AUTO/work/TEMP/registry独占，旧source/raw/config只通过既有API复用/追加，不复制全库。准备第一次preflight因FF安装SKILL.md旧字节拒绝，未启动付费；CAS定点同步两份说明后全安装匹配，第二次初始化成功。原预算母账236,614tokens/151,565microUSD估算，历史unknown7和FX2,764及旧acquisition unknown保持，初次准备无新增model/provider。运行期费用待原生AUTO/工具封存，不能继续写0。

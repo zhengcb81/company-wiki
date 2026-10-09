@@ -1,0 +1,21 @@
+{
+  "observed_at": "2026-10-09T19:15:56.187032+00:00",
+  "RF_main_owner_files": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl",
+      "sha256": "0b4539f48602c2428c2e91bc649a803776954dd0fb41b7e50fb302993aff2214",
+      "size": 1671
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl",
+      "sha256": "b617b0b00ff1a758b5b46299e3e5db3115f56efd90d212154abe988e5ea9fee5",
+      "size": 753
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json",
+      "sha256": "6bd380f1dd1f8d66233f86573b39235b56dd79b6b144b9d5fcdfbd26ae0e6f31",
+      "size": 353
+    }
+  ],
+  "untracked_output_present": true
+}

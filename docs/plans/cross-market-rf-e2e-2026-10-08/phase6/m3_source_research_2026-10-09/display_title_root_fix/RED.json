@@ -1,0 +1,28 @@
+{
+  "actual_command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "--tb=short",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-title-red-3eifaq4v\\pytest",
+    "tests/test_company_wiki_source_v2.py",
+    "tests/test_p5_source_default_cli_e2e.py",
+    "-k",
+    "display or missing_title"
+  ],
+  "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009",
+  "recorded_at": "2026-10-09T19:06:42.104434+00:00",
+  "exit_code": 1,
+  "seconds": 4.847768300009193,
+  "actual_output_log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\display_title_root_fix\\RED.log",
+  "external_calls": 0,
+  "fixture_title_SQL_is_owned_test_only": true,
+  "owned_temp_restored": true
+}

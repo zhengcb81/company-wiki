@@ -1,0 +1,62 @@
+{
+  "observed_at": "2026-10-09T19:26:42.015835+00:00",
+  "results": [
+    {
+      "run_id": "m3-20261009T184946-cn-688012",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+        "event",
+        "--run",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012",
+        "--role",
+        "coordinator",
+        "--kind",
+        "executor_runtime_delta_observed",
+        "--data-file",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\cn-688012-coordinator-runtime-observation.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"event_id\": \"a9299a615895481a831acf05f29094e3\", \"events\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\revenue-forecast-audit\\\\runs\\\\m3-20261009T184946-cn-688012\\\\roles\\\\coordinator\\\\events.jsonl\"}\n",
+      "stderr": ""
+    },
+    {
+      "run_id": "m3-20261009T184946-hk-00700",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+        "event",
+        "--run",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-hk-00700",
+        "--role",
+        "coordinator",
+        "--kind",
+        "executor_runtime_delta_observed",
+        "--data-file",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\hk-00700-coordinator-runtime-observation.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"event_id\": \"ce526d6685d8457e8694b58d9fc92727\", \"events\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\revenue-forecast-audit\\\\runs\\\\m3-20261009T184946-hk-00700\\\\roles\\\\coordinator\\\\events.jsonl\"}\n",
+      "stderr": ""
+    },
+    {
+      "run_id": "m3-20261009T184946-us-msft",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+        "event",
+        "--run",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-us-msft",
+        "--role",
+        "coordinator",
+        "--kind",
+        "executor_runtime_delta_observed",
+        "--data-file",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\us-msft-coordinator-runtime-observation.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"event_id\": \"7431bb7cc19448beb94ec73dc111acc3\", \"events\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\revenue-forecast-audit\\\\runs\\\\m3-20261009T184946-us-msft\\\\roles\\\\coordinator\\\\events.jsonl\"}\n",
+      "stderr": ""
+    }
+  ]
+}

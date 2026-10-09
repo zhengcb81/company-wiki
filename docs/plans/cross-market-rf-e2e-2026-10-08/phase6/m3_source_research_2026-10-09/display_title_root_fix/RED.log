@@ -1,0 +1,121 @@
+FFFFFF....FF                                                             [100%]
+================================== FAILURES ===================================
+_ test_missing_display_title_preserves_unknown_and_verified_source[False-None] _
+tests\test_company_wiki_source_v2.py:203: in test_missing_display_title_preserves_unknown_and_verified_source
+    record = _build(ref, receipt, manifest, candidate=candidate)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_company_wiki_source_v2.py:115: in _build
+    return build_revenue_source_record_from_verified_read(
+scripts\company_wiki_source_v2.py:307: in build_revenue_source_record_from_verified_read
+    manifest, information = _validate_manifest(source_manifest, ref, as_of,
+scripts\company_wiki_source_v2.py:219: in _validate_manifest
+    _validate_manifest_metadata(manifest)
+scripts\company_wiki_source_v2.py:171: in _validate_manifest_metadata
+    _required_text(manifest.get("title"), "source manifest title")
+scripts\company_wiki_source.py:74: in _required_text
+    raise CompanyWikiSourceError(f"{field_name} must be non-empty trimmed text")
+E   company_wiki_source.CompanyWikiSourceError: source manifest title must be non-empty trimmed text
+__ test_missing_display_title_preserves_unknown_and_verified_source[False-] ___
+tests\test_company_wiki_source_v2.py:203: in test_missing_display_title_preserves_unknown_and_verified_source
+    record = _build(ref, receipt, manifest, candidate=candidate)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_company_wiki_source_v2.py:115: in _build
+    return build_revenue_source_record_from_verified_read(
+scripts\company_wiki_source_v2.py:307: in build_revenue_source_record_from_verified_read
+    manifest, information = _validate_manifest(source_manifest, ref, as_of,
+scripts\company_wiki_source_v2.py:219: in _validate_manifest
+    _validate_manifest_metadata(manifest)
+scripts\company_wiki_source_v2.py:171: in _validate_manifest_metadata
+    _required_text(manifest.get("title"), "source manifest title")
+scripts\company_wiki_source.py:74: in _required_text
+    raise CompanyWikiSourceError(f"{field_name} must be non-empty trimmed text")
+E   company_wiki_source.CompanyWikiSourceError: source manifest title must be non-empty trimmed text
+_ test_missing_display_title_preserves_unknown_and_verified_source[False- \t\n] _
+tests\test_company_wiki_source_v2.py:203: in test_missing_display_title_preserves_unknown_and_verified_source
+    record = _build(ref, receipt, manifest, candidate=candidate)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_company_wiki_source_v2.py:115: in _build
+    return build_revenue_source_record_from_verified_read(
+scripts\company_wiki_source_v2.py:307: in build_revenue_source_record_from_verified_read
+    manifest, information = _validate_manifest(source_manifest, ref, as_of,
+scripts\company_wiki_source_v2.py:219: in _validate_manifest
+    _validate_manifest_metadata(manifest)
+scripts\company_wiki_source_v2.py:171: in _validate_manifest_metadata
+    _required_text(manifest.get("title"), "source manifest title")
+scripts\company_wiki_source.py:74: in _required_text
+    raise CompanyWikiSourceError(f"{field_name} must be non-empty trimmed text")
+E   company_wiki_source.CompanyWikiSourceError: source manifest title must be non-empty trimmed text
+_ test_missing_display_title_preserves_unknown_and_verified_source[True-None] _
+tests\test_company_wiki_source_v2.py:203: in test_missing_display_title_preserves_unknown_and_verified_source
+    record = _build(ref, receipt, manifest, candidate=candidate)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_company_wiki_source_v2.py:115: in _build
+    return build_revenue_source_record_from_verified_read(
+scripts\company_wiki_source_v2.py:307: in build_revenue_source_record_from_verified_read
+    manifest, information = _validate_manifest(source_manifest, ref, as_of,
+scripts\company_wiki_source_v2.py:219: in _validate_manifest
+    _validate_manifest_metadata(manifest)
+scripts\company_wiki_source_v2.py:171: in _validate_manifest_metadata
+    _required_text(manifest.get("title"), "source manifest title")
+scripts\company_wiki_source.py:74: in _required_text
+    raise CompanyWikiSourceError(f"{field_name} must be non-empty trimmed text")
+E   company_wiki_source.CompanyWikiSourceError: source manifest title must be non-empty trimmed text
+___ test_missing_display_title_preserves_unknown_and_verified_source[True-] ___
+tests\test_company_wiki_source_v2.py:203: in test_missing_display_title_preserves_unknown_and_verified_source
+    record = _build(ref, receipt, manifest, candidate=candidate)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_company_wiki_source_v2.py:115: in _build
+    return build_revenue_source_record_from_verified_read(
+scripts\company_wiki_source_v2.py:307: in build_revenue_source_record_from_verified_read
+    manifest, information = _validate_manifest(source_manifest, ref, as_of,
+scripts\company_wiki_source_v2.py:219: in _validate_manifest
+    _validate_manifest_metadata(manifest)
+scripts\company_wiki_source_v2.py:171: in _validate_manifest_metadata
+    _required_text(manifest.get("title"), "source manifest title")
+scripts\company_wiki_source.py:74: in _required_text
+    raise CompanyWikiSourceError(f"{field_name} must be non-empty trimmed text")
+E   company_wiki_source.CompanyWikiSourceError: source manifest title must be non-empty trimmed text
+_ test_missing_display_title_preserves_unknown_and_verified_source[True- \t\n] _
+tests\test_company_wiki_source_v2.py:203: in test_missing_display_title_preserves_unknown_and_verified_source
+    record = _build(ref, receipt, manifest, candidate=candidate)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_company_wiki_source_v2.py:115: in _build
+    return build_revenue_source_record_from_verified_read(
+scripts\company_wiki_source_v2.py:307: in build_revenue_source_record_from_verified_read
+    manifest, information = _validate_manifest(source_manifest, ref, as_of,
+scripts\company_wiki_source_v2.py:219: in _validate_manifest
+    _validate_manifest_metadata(manifest)
+scripts\company_wiki_source_v2.py:171: in _validate_manifest_metadata
+    _required_text(manifest.get("title"), "source manifest title")
+scripts\company_wiki_source.py:74: in _required_text
+    raise CompanyWikiSourceError(f"{field_name} must be non-empty trimmed text")
+E   company_wiki_source.CompanyWikiSourceError: source manifest title must be non-empty trimmed text
+_____ test_display_whitespace_normalization_keeps_original_title_in_trace _____
+tests\test_company_wiki_source_v2.py:224: in test_display_whitespace_normalization_keeps_original_title_in_trace
+    record = _build(ref, receipt, manifest)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_company_wiki_source_v2.py:115: in _build
+    return build_revenue_source_record_from_verified_read(
+scripts\company_wiki_source_v2.py:307: in build_revenue_source_record_from_verified_read
+    manifest, information = _validate_manifest(source_manifest, ref, as_of,
+scripts\company_wiki_source_v2.py:219: in _validate_manifest
+    _validate_manifest_metadata(manifest)
+scripts\company_wiki_source_v2.py:171: in _validate_manifest_metadata
+    _required_text(manifest.get("title"), "source manifest title")
+scripts\company_wiki_source.py:74: in _required_text
+    raise CompanyWikiSourceError(f"{field_name} must be non-empty trimmed text")
+E   company_wiki_source.CompanyWikiSourceError: source manifest title must be non-empty trimmed text
+__________ test_cli_verified_missing_title_is_display_only_metadata ___________
+tests\test_p5_source_default_cli_e2e.py:230: in test_cli_verified_missing_title_is_display_only_metadata
+    con.execute("UPDATE documents SET title=NULL")
+E   sqlite3.IntegrityError: NOT NULL constraint failed: documents.title
+=========================== short test summary info ===========================
+FAILED tests/test_company_wiki_source_v2.py::test_missing_display_title_preserves_unknown_and_verified_source[False-None]
+FAILED tests/test_company_wiki_source_v2.py::test_missing_display_title_preserves_unknown_and_verified_source[False-]
+FAILED tests/test_company_wiki_source_v2.py::test_missing_display_title_preserves_unknown_and_verified_source[False- \t\n]
+FAILED tests/test_company_wiki_source_v2.py::test_missing_display_title_preserves_unknown_and_verified_source[True-None]
+FAILED tests/test_company_wiki_source_v2.py::test_missing_display_title_preserves_unknown_and_verified_source[True-]
+FAILED tests/test_company_wiki_source_v2.py::test_missing_display_title_preserves_unknown_and_verified_source[True- \t\n]
+FAILED tests/test_company_wiki_source_v2.py::test_display_whitespace_normalization_keeps_original_title_in_trace
+FAILED tests/test_p5_source_default_cli_e2e.py::test_cli_verified_missing_title_is_display_only_metadata
+8 failed, 4 passed, 16 deselected in 1.81s

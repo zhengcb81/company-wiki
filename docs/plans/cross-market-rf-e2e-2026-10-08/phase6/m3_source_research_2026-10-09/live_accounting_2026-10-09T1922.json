@@ -1,0 +1,116 @@
+{
+  "observed_at": "2026-10-09T19:20:21.704812+00:00",
+  "method": "SQLite mode=ro; own new M3 roots only; preexisting mother charged usage is not recounted",
+  "live_not_sealed": true,
+  "per_company": [
+    {
+      "company": "cn-688012",
+      "databases": [
+        {
+          "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\m3\\20261009T184946\\auto\\annual-reuse.sqlite3",
+          "reservation_count": 0,
+          "known_tokens": 0,
+          "known_micro_usd": 0,
+          "unknown_status_count": 0,
+          "truncated_count": 0,
+          "attempt_ids": []
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\m3\\20261009T184946\\auto\\narrative.sqlite3",
+          "reservation_count": 3,
+          "known_tokens": 35713,
+          "known_micro_usd": 35802,
+          "unknown_status_count": 0,
+          "truncated_count": 2,
+          "attempt_ids": [
+            "881a5a34a18545d89db61fbe7e4a1d2a",
+            "e66c1aa489704c5bbbcecfdcc3fd2ee6",
+            "25351685342042a2bfdb7411af89f8a9"
+          ]
+        }
+      ],
+      "known_tokens": 35713,
+      "known_micro_usd": 35802
+    },
+    {
+      "company": "hk-00700",
+      "databases": [
+        {
+          "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\m3\\20261009T184946\\auto\\narrative.sqlite3",
+          "reservation_count": 3,
+          "known_tokens": 24249,
+          "known_micro_usd": 25308,
+          "unknown_status_count": 0,
+          "truncated_count": 1,
+          "attempt_ids": [
+            "ef7415a8e14b458cbdf34b83767a2714",
+            "28dee1a125524528a103b57b1ea7674c",
+            "e6fc2583a870496c8f8952a8fd4a5b2f"
+          ]
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\m3\\20261009T184946\\auto-h1\\narrative.sqlite3",
+          "reservation_count": 0,
+          "known_tokens": 0,
+          "known_micro_usd": 0,
+          "unknown_status_count": 0,
+          "truncated_count": 0,
+          "attempt_ids": []
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\m3\\20261009T184946\\auto-reuse\\narrative.sqlite3",
+          "reservation_count": 0,
+          "known_tokens": 0,
+          "known_micro_usd": 0,
+          "unknown_status_count": 0,
+          "truncated_count": 0,
+          "attempt_ids": []
+        }
+      ],
+      "known_tokens": 24249,
+      "known_micro_usd": 25308
+    },
+    {
+      "company": "us-msft",
+      "databases": [
+        {
+          "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\m3\\20261009T184946\\auto\\narrative-cache.sqlite3",
+          "reservation_count": 0,
+          "known_tokens": 0,
+          "known_micro_usd": 0,
+          "unknown_status_count": 0,
+          "truncated_count": 0,
+          "attempt_ids": []
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\m3\\20261009T184946\\auto\\narrative.sqlite3",
+          "reservation_count": 6,
+          "known_tokens": 35439,
+          "known_micro_usd": 38015,
+          "unknown_status_count": 0,
+          "truncated_count": 1,
+          "attempt_ids": [
+            "4ed183fe41704195a0544973fe0fc5b8",
+            "29ec2abeb6d348b1a6c2eb1aa289a4a3",
+            "99e7dea64dd44aaeaec1d856dbbda4f3",
+            "6665bbb1fe154265ba103524763e43c7",
+            "2c6580b0bdcd4cff89a5b62a73d02def",
+            "b2d9f0a65543439daf07562d1c94f346"
+          ]
+        }
+      ],
+      "known_tokens": 35439,
+      "known_micro_usd": 38015
+    }
+  ],
+  "M3_new_known_tokens": 95401,
+  "M3_new_known_micro_usd": 99125,
+  "historical_unknown_retained": 7,
+  "pricing_is_conservative_estimate_not_provider_invoice": true,
+  "mother_known_tokens_with_M3": 332015,
+  "mother_known_micro_usd_with_M3": 250690,
+  "mother_caps_unchanged": {
+    "tokens": 2000000,
+    "micro_usd": 20000000
+  }
+}

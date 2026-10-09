@@ -1,0 +1,12 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+__________ test_cli_verified_missing_title_is_display_only_metadata ___________
+tests\test_p5_source_default_cli_e2e.py:231: in test_cli_verified_missing_title_is_display_only_metadata
+    assert proc.returncode == 0, proc.stderr[-1000:]
+E   AssertionError: {"error_code": "upstream", "error": "source preparation failed at source_reader", "stage": "source_reader", "calls": 2, "downloads": 0}
+E     
+E   assert 3 == 0
+E    +  where 3 = CompletedProcess(args=['C:\\Miniconda\\python.exe', '-B', 'C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-fresh-dag-20261009...ream", "error": "source preparation failed at source_reader", "stage": "source_reader", "calls": 2, "downloads": 0}\n').returncode
+=========================== short test summary info ===========================
+FAILED tests/test_p5_source_default_cli_e2e.py::test_cli_verified_missing_title_is_display_only_metadata
+1 failed in 5.04s

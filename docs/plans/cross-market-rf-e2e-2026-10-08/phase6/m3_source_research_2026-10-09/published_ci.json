@@ -1,0 +1,24 @@
+{
+  "observed_at": "2026-10-09T19:26:08.596318+00:00",
+  "method": "public GitHub Actions API filtered by exact head_sha",
+  "RF": {
+    "head_sha": "43635e5110d69c5ccf04647692ba8ef6ccfb01aa",
+    "id": 37979280816,
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-09T19:18:07Z",
+    "updated_at": "2026-10-09T19:18:54Z",
+    "seconds": 47,
+    "url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/37979280816"
+  },
+  "CWP": {
+    "head_sha": "ea3e3bc64adf7f9c056f1e8c1c2b041e654fc8d3",
+    "id": 37977952790,
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-09T19:06:35Z",
+    "updated_at": "2026-10-09T19:08:18Z",
+    "seconds": 103,
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/37977952790"
+  }
+}
