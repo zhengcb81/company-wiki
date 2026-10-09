@@ -60,6 +60,8 @@ CURRENT_CI_REGRESSION_CASES = (
 FAST_CONTRACT_CASES = (
     "tests/unit/test_runtime_dependencies.py::test_ci_requirements_include_declared_runtime_dependencies",
     *CURRENT_CI_REGRESSION_CASES,
+    "tests/contract/test_narrative_output_plan.py",
+    "tests/contract/test_summary_group_coverage.py",
     "tests/unit/test_narrative_evidence.py::test_financial_table_rows_are_dropped_but_business_rows_are_selected",
     "tests/unit/test_narrative_evidence.py::test_numbered_project_rationale_heading_survives_a_tight_budget",
     "tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings",

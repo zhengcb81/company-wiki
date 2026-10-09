@@ -149,3 +149,17 @@ def test_push_failure_is_propagated_and_suites_are_not_duplicated(monkeypatch):
     assert seen[0].count("tests/unit") == 1
     assert not any(x.startswith("tests/unit/") for x in seen[0])
     assert any(x.startswith("tests/contract/") for x in seen[0])
+
+
+@pytest.mark.parametrize("entrypoint", ["--push-checks", "--fast-contracts-only"])
+def test_published_summary_contracts_run_in_both_ci_and_push(entrypoint, monkeypatch):
+    seen = []
+    monkeypatch.setattr(sys, "stdin", type("Input", (), {"read": lambda self: "refs"})())
+    monkeypatch.setattr(gate, "changed_paths", lambda root, data: {"docs/report.md"})
+    monkeypatch.setattr(gate, "select_unit_tests", lambda root, files: ([], "documents only"))
+    monkeypatch.setattr(gate, "_run_pytest_gate", lambda cmd, label: seen.append(cmd) or 0)
+
+    assert gate.main([entrypoint]) == 0
+    assert len(seen) == 1
+    assert "tests/contract/test_narrative_output_plan.py" in seen[0]
+    assert "tests/contract/test_summary_group_coverage.py" in seen[0]

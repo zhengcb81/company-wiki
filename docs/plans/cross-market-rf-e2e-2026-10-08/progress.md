@@ -1,5 +1,10 @@
 # Progress
 
+## 2026-10-09 11:35 UTC：W04/W07发布安装完成、W03已并线待推
+
+W04 cba23b8e / exactCI37923124555 SUCCESS94s；FF44c778b4 / exactCI37923517689 SUCCESS87s，ETc91f5f54已main。FF独立持久启动10PASS及真实三跳/双复用通过，五运行文件两物理根定点安装与默认配置无env探测已通过，unselected drift0，未读/复制密钥。W03 source8395299f+docs589439b4已正常合主线；原254PASS/独立89PASS，MAIN共享CI/push责任测试2RED→66PASS，准备正常推送。新日志、失败历史和安装receipt保留。W05独占DOCX/transcript施工、W06只读调查启动。M3/M4/loop及剩余卡未完成；母goal ACTIVE，零原件/config/Dayu/IQS改动、零新增收费。
+
+
 ## 2026-10-09：W04本地并线与W07持久入口补齐
 
 W04三提交c839af58→17e154a7→68333bc3完整并入410c456f；实现者74PASS，独立最终10PASS+2实际控验，原全部RED/旧报告保留并准备同步远端。完成后残留清理幂等、currentcap/SHA失败不删、未知/改动副本不删；cold总deadline保留真实attempt/GET/received/unknownusage区别。CWP原始公司资料及生产配置未改，安装delta空，远端CI待。

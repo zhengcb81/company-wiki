@@ -1,5 +1,10 @@
 # Findings
 
+## 2026-10-09：持久入口和发布边界已闭合，研究仍待真实复验
+
+W07原独立bridge用显式tool注入会掩盖日常默认入口缺临时env的问题；MAIN沿用同一selected config加optional ETtool位置，bounded64KiB读取和4KiB credential入口，不另造配置/授权层。第二独立审查实际默认facade→real ET→real CWP入库/复用，安装两根无临时env也找到tool与原key位置，不读key就可验配置闭合。真实entitlement仍需M3，synthetic GET不可替代。W04冷请求的0GET不能推出provider_started=false；客户端确尝试但DNS/连接未达server时真实attempt/unknown需保留。W03原子group完整引用与原文语义支持区分：显式声明group须覆盖全部成员，没有声明的旧部分claim保持needs_review诊断，不能自动补引伪造支持。新摘要契约纳入CI/push同一清单，避免重现入口覆盖漂移。
+
+
 ## 2026-10-09：CI防漏检已实证，最终M2状态
 
 W02升级selector0.6.0后，旧测试强制0.5.0属于release值与行为契约耦合；新整批pre-push在上传前正确拒绝。现在检验运行版本传播、合成下一版本改变input/generation而intent不变及原manifest稳定，1940PASS且精确远端b1888522 SUCCESS。CI修复没有让每个commit跑完整pytest，也没有移除原文/恢复必要测试。

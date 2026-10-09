@@ -1,0 +1,32 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\w03-ci-red-qg03ao6t", "requested_basetemp_len": 51, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 2 items
+
+tests\unit\test_ci_push_selection.py FF                                  [100%]
+
+================================== FAILURES ===================================
+___ test_published_summary_contracts_run_in_both_ci_and_push[--push-checks] ___
+tests\unit\test_ci_push_selection.py:164: in test_published_summary_contracts_run_in_both_ci_and_push
+    assert "tests/contract/test_narrative_output_plan.py" in seen[0]
+E   AssertionError: assert 'tests/contract/test_narrative_output_plan.py' in ['C:\\Miniconda\\python.exe', '-m', 'pytest', '-q', '--tb=short', '--timeout=180', ...]
+---------------------------- Captured stdout call -----------------------------
+Push unit scope: documents only (0 paths)
+
+pre-push gate GREEN — safe to push (then self-monitor CI).
+_ test_published_summary_contracts_run_in_both_ci_and_push[--fast-contracts-only] _
+tests\unit\test_ci_push_selection.py:164: in test_published_summary_contracts_run_in_both_ci_and_push
+    assert "tests/contract/test_narrative_output_plan.py" in seen[0]
+E   AssertionError: assert 'tests/contract/test_narrative_output_plan.py' in ['C:\\Miniconda\\python.exe', '-m', 'pytest', '-q', '--tb=short', '--timeout=180', ...]
+---------------------------- Captured stdout call -----------------------------
+
+pre-push gate GREEN — safe to push (then self-monitor CI).
+=========================== short test summary info ===========================
+FAILED tests/unit/test_ci_push_selection.py::test_published_summary_contracts_run_in_both_ci_and_push[--push-checks]
+FAILED tests/unit/test_ci_push_selection.py::test_published_summary_contracts_run_in_both_ci_and_push[--fast-contracts-only]
+============================== 2 failed in 0.35s ==============================

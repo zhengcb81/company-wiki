@@ -1,7 +1,7 @@
 {
   "schema_version": "fresh-main-integration/1",
   "date": "2026-10-09",
-  "status": "W04_LOCAL_MERGED_PUBLICATION_PENDING_W07_PERSISTENT_LAUNCH_REVIEW",
+  "status": "W04_W07_PUBLISHED_INSTALLED_W03_MERGED_PUBLICATION_PENDING",
   "frozen_issue_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
   "W04": {
     "source_tip": "68333bc360eb35b84f0616564953411e306f7610",
@@ -9,20 +9,49 @@
     "implementer_passes": 74,
     "independent_passes": 10,
     "independent_actual_controls": 2,
-    "remote_CI": "pending",
+    "remote_CI": {
+      "id": 37923124555,
+      "conclusion": "success",
+      "head_sha": "cba23b8eb27cf63b47517d62539b3fe3d86bd63b",
+      "duration_seconds": 94
+    },
     "M3": "pending",
-    "installation_delta": []
+    "installation_delta": [],
+    "normal_pre_push": {
+      "passes": 2387,
+      "seconds": 142.74
+    }
   },
   "W07": {
     "ET_main_published": "c91f5f54bc2a24e7b5d6e648dba3f9d578f5fa52",
-    "FF_local_main": "44c778b",
     "initial_independent_FF_passes": 67,
     "initial_independent_ET_passes": 73,
     "configured_launch_local_passes": 79,
-    "configured_launch_independent": "pending",
-    "remote_CI": "pending",
-    "selected_installation": "pending",
-    "M3": "pending"
+    "configured_launch_independent": {
+      "passes": 10,
+      "skipped": 0,
+      "seconds": 0.72,
+      "actual_FF_ET_CWP_chain": true,
+      "first_requests": 1,
+      "first_response_bytes": 862,
+      "second_and_third_provider_calls": 0
+    },
+    "remote_CI": {
+      "id": 37923517689,
+      "conclusion": "success",
+      "head_sha": "44c778b4b4f8d5deb7f376ed7016aefde5bb25c9",
+      "duration_seconds": 87
+    },
+    "selected_installation": "transcript_selected_installation.json",
+    "M3": "pending",
+    "FF_main_published": "44c778b4b4f8d5deb7f376ed7016aefde5bb25c9",
+    "normal_pre_push": {
+      "passes": 601,
+      "skipped": 7,
+      "subtests": 78,
+      "seconds": 62.07,
+      "skips_are_not_passes": true
+    }
   },
   "invariants": {
     "production_raw_modified": false,
@@ -32,7 +61,6 @@
     "external_or_paid_calls": 0
   },
   "remaining_cards": [
-    "W03",
     "W05",
     "W06",
     "W08",
@@ -43,5 +71,17 @@
     "M3",
     "M4",
     "NVDA_loop"
-  ]
+  ],
+  "W03": {
+    "source_commit": "8395299f9339dedf600c5638bd69673c2f22c002",
+    "handoff_commit": "589439b4d99a81a6871dc7eadfae899272780268",
+    "main_merge": "09467543139204f3dd222c04e00ab6b5b8cc42ea",
+    "implementer_passes": 254,
+    "independent_passes": 89,
+    "shared_ci_and_push_tdd_red": 2,
+    "shared_gate_green": 66,
+    "runtime_installation_delta": [],
+    "remote_CI": "pending",
+    "M3": "pending"
+  }
 }
