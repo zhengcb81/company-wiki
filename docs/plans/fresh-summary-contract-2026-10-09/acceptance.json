@@ -52,5 +52,13 @@
     "selected runtime installation only if applicable",
     "same original CN/HK/US configured-provider M3 + independent semantic review",
     "W12 same-input reuse/no-new-charge"
-  ]
+  ],
+  "source_commit": "8395299f9339dedf600c5638bd69673c2f22c002",
+  "normal_commit_hooks": {
+    "dependency_parity": "not_applicable",
+    "ruff": "passed",
+    "mypy_contract": "passed",
+    "config_doctor": "not_applicable",
+    "host_assumption_guard": "passed"
+  }
 }

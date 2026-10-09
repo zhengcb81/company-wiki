@@ -1,0 +1,20 @@
+{
+  "schema_version": "fresh-summary-handoff/1",
+  "worktree": "C:\\Users\\郑曾波\\.codex\\worktrees\\audit-provider-cause\\company-wiki",
+  "branch": "codex/fresh-summary-20261009",
+  "base": "d6444ef9fbce1586652bff903a51285ee680964b",
+  "source_commit": "8395299f9339dedf600c5638bd69673c2f22c002",
+  "status": "LOCAL_M2_ACCEPTED_MAIN_PUBLICATION_M3_PENDING",
+  "evidence": "acceptance.json",
+  "independent_report": "final_acceptance.md",
+  "installation_delta": "installation_delta.json",
+  "concentrated_log": "final-green.txt",
+  "new_shared_contract_modules": [
+    "tests/contract/test_narrative_output_plan.py",
+    "tests/contract/test_summary_group_coverage.py"
+  ],
+  "remote_published": false,
+  "installed": false,
+  "external_http_calls": 0,
+  "paid_calls": 0
+}
