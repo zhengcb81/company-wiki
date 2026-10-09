@@ -1,0 +1,34 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "company_wiki.source_catalog.official_source_cli",
+    "--config",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\config\\source_catalog.yaml",
+    "--project-root",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f",
+    "--request",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\requests\\import.json",
+    "--input-file",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\raw-input\\fy2027_segments_metrics.pptx"
+  ],
+  "started_at": "2026-10-09T06:02:10.837440Z",
+  "finished_at": "2026-10-09T06:02:12.226261Z",
+  "elapsed_seconds": 1.389,
+  "exit_code": 0,
+  "outer_timeout": false,
+  "stdout": {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\logs\\official-import-01.stdout",
+    "sha256": "ab79f872ad3af1e2693910a2121a3f0792a0920b746bf6eebf0ec161c5afb7ed",
+    "byte_size": 1948,
+    "mtime_ns": 1791525732165505800
+  },
+  "stderr": {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\logs\\official-import-01.stderr",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "byte_size": 0,
+    "mtime_ns": 1791525730837205800
+  },
+  "stdin_sha256": null
+}

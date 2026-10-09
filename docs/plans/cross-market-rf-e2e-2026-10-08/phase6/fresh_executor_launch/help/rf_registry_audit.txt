@@ -1,0 +1,7 @@
+usage: publication_registry.py audit [-h] [--result RESULT] [--since SINCE]
+
+options:
+  -h, --help       show this help message and exit
+  --result RESULT  result artifact to cross-check
+  --since SINCE    only consider entries registered at/after this ISO
+                   timestamp

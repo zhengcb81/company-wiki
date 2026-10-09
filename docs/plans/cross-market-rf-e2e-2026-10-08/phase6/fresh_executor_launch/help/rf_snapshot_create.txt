@@ -1,0 +1,9 @@
+usage: revenue_backtest.py create [-h] --version VERSION --output OUTPUT input
+
+positional arguments:
+  input
+
+options:
+  -h, --help         show this help message and exit
+  --version VERSION
+  --output OUTPUT

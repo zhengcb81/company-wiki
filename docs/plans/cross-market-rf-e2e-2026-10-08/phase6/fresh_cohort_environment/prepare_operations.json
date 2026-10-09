@@ -1,0 +1,1399 @@
+[
+  {
+    "company": "CN-688012",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\source_catalog.yaml",
+      "register",
+      "--root-id",
+      "existing_company_raw",
+      "--relative-path",
+      "中微公司/raw/financial_reports/中微公司：2025年年度报告.pdf"
+    ],
+    "started_at": "2026-10-09T06:04:06.421312+00:00",
+    "ended_at": "2026-10-09T06:04:08.103184+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "dry_run": false,
+      "error_details": [],
+      "errors": 0,
+      "files_excluded": 0,
+      "files_hashed": 1,
+      "files_reused": 0,
+      "files_seen": 1,
+      "known_quarantined": 0,
+      "locations_active": 1,
+      "locations_missing": 0,
+      "new_errors": 0,
+      "policy_excluded": 0,
+      "run_id": "scan-7241a6cebd184bbc8af642cd93cd8954",
+      "strategy": {
+        "existing_company_raw": "legacy"
+      }
+    },
+    "stderr": ""
+  },
+  {
+    "company": "CN-688012",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\source_catalog.yaml",
+      "source-facts",
+      "--request",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\temp\\source_facts.json"
+    ],
+    "started_at": "2026-10-09T06:04:08.148356+00:00",
+    "ended_at": "2026-10-09T06:04:09.477162+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "assertion_id": "sa-ff5a05286e134126adb94b74c6f1c494",
+      "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "status": "recorded"
+    },
+    "stderr": ""
+  },
+  {
+    "company": "CN-688012",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\source_catalog.yaml",
+      "register",
+      "--root-id",
+      "existing_company_raw",
+      "--relative-path",
+      "中微公司/raw/financial_reports/semi_annual/2026-08-19_cninfo_1225482884_2026年半年度报告.pdf"
+    ],
+    "started_at": "2026-10-09T06:04:09.498438+00:00",
+    "ended_at": "2026-10-09T06:04:11.223803+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "dry_run": false,
+      "error_details": [],
+      "errors": 0,
+      "files_excluded": 0,
+      "files_hashed": 1,
+      "files_reused": 0,
+      "files_seen": 1,
+      "known_quarantined": 0,
+      "locations_active": 2,
+      "locations_missing": 0,
+      "new_errors": 0,
+      "policy_excluded": 0,
+      "run_id": "scan-33bffa6a05f94fafa1e285e4dee01eb4",
+      "strategy": {
+        "existing_company_raw": "legacy"
+      }
+    },
+    "stderr": ""
+  },
+  {
+    "company": "CN-688012",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\source_catalog.yaml",
+      "source-facts",
+      "--request",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\temp\\source_facts.json"
+    ],
+    "started_at": "2026-10-09T06:04:11.229684+00:00",
+    "ended_at": "2026-10-09T06:04:12.562288+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "assertion_id": "sa-599e8a3196ab44509320b27916d488da",
+      "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "status": "recorded"
+    },
+    "stderr": ""
+  },
+  {
+    "company": "CN-688012",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\source_catalog.yaml",
+      "register",
+      "--root-id",
+      "existing_company_raw",
+      "--relative-path",
+      "中微公司/raw/financial_reports/中微公司：2025年半年度报告.pdf"
+    ],
+    "started_at": "2026-10-09T06:04:12.570701+00:00",
+    "ended_at": "2026-10-09T06:04:14.059660+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "dry_run": false,
+      "error_details": [],
+      "errors": 0,
+      "files_excluded": 0,
+      "files_hashed": 1,
+      "files_reused": 0,
+      "files_seen": 1,
+      "known_quarantined": 0,
+      "locations_active": 3,
+      "locations_missing": 0,
+      "new_errors": 0,
+      "policy_excluded": 0,
+      "run_id": "scan-db035c4f086d42aa9723dfa1dcf7955a",
+      "strategy": {
+        "existing_company_raw": "legacy"
+      }
+    },
+    "stderr": ""
+  },
+  {
+    "company": "CN-688012",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\source_catalog.yaml",
+      "source-facts",
+      "--request",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\temp\\source_facts.json"
+    ],
+    "started_at": "2026-10-09T06:04:14.072492+00:00",
+    "ended_at": "2026-10-09T06:04:15.571644+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "assertion_id": "sa-bfb4112397e84a37bee5ae1fa3007b5c",
+      "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+      "status": "recorded"
+    },
+    "stderr": ""
+  },
+  {
+    "company": "CN-688012",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\source_catalog.yaml",
+      "register",
+      "--root-id",
+      "existing_company_raw",
+      "--relative-path",
+      "中微公司/raw/financial_reports/中微公司：2026年第一季度报告.pdf"
+    ],
+    "started_at": "2026-10-09T06:04:15.577811+00:00",
+    "ended_at": "2026-10-09T06:04:17.294267+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "dry_run": false,
+      "error_details": [],
+      "errors": 0,
+      "files_excluded": 0,
+      "files_hashed": 1,
+      "files_reused": 0,
+      "files_seen": 1,
+      "known_quarantined": 0,
+      "locations_active": 4,
+      "locations_missing": 0,
+      "new_errors": 0,
+      "policy_excluded": 0,
+      "run_id": "scan-bcc233ce94c04c1e9c35f2cf57361759",
+      "strategy": {
+        "existing_company_raw": "legacy"
+      }
+    },
+    "stderr": ""
+  },
+  {
+    "company": "CN-688012",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\source_catalog.yaml",
+      "source-facts",
+      "--request",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\temp\\source_facts.json"
+    ],
+    "started_at": "2026-10-09T06:04:17.304565+00:00",
+    "ended_at": "2026-10-09T06:04:18.748961+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "assertion_id": "sa-28ccb00b0ee748fa835fe83af9ed63cb",
+      "document_id": "urn:company-wiki:document:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "status": "recorded"
+    },
+    "stderr": ""
+  },
+  {
+    "company": "CN-688012",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\source_catalog.yaml",
+      "register",
+      "--root-id",
+      "existing_company_raw",
+      "--relative-path",
+      "中微公司/raw/prospectus/中微公司：首次公开发行股票并在科创板上市招股说明书.pdf"
+    ],
+    "started_at": "2026-10-09T06:04:18.759768+00:00",
+    "ended_at": "2026-10-09T06:04:20.488127+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "dry_run": false,
+      "error_details": [],
+      "errors": 0,
+      "files_excluded": 0,
+      "files_hashed": 1,
+      "files_reused": 0,
+      "files_seen": 1,
+      "known_quarantined": 0,
+      "locations_active": 5,
+      "locations_missing": 0,
+      "new_errors": 0,
+      "policy_excluded": 0,
+      "run_id": "scan-5160306525754fafaeeb3e8884af503b",
+      "strategy": {
+        "existing_company_raw": "legacy"
+      }
+    },
+    "stderr": ""
+  },
+  {
+    "company": "CN-688012",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\source_catalog.yaml",
+      "source-facts",
+      "--request",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\temp\\source_facts.json"
+    ],
+    "started_at": "2026-10-09T06:04:20.495956+00:00",
+    "ended_at": "2026-10-09T06:04:21.980083+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "assertion_id": "sa-71870aa9190c4801924de4aadb934eda",
+      "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "status": "recorded"
+    },
+    "stderr": ""
+  },
+  {
+    "company": "HK-00700",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\config\\source_catalog.yaml",
+      "register",
+      "--root-id",
+      "existing_company_raw",
+      "--relative-path",
+      "腾讯/raw/financial_reports/annual/腾讯：2025年年度报告.pdf"
+    ],
+    "started_at": "2026-10-09T06:04:22.387262+00:00",
+    "ended_at": "2026-10-09T06:04:24.065332+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "dry_run": false,
+      "error_details": [],
+      "errors": 0,
+      "files_excluded": 0,
+      "files_hashed": 1,
+      "files_reused": 0,
+      "files_seen": 1,
+      "known_quarantined": 0,
+      "locations_active": 1,
+      "locations_missing": 0,
+      "new_errors": 0,
+      "policy_excluded": 0,
+      "run_id": "scan-03a63ba853c24d7d9ada44d1252adc4c",
+      "strategy": {
+        "existing_company_raw": "legacy"
+      }
+    },
+    "stderr": ""
+  },
+  {
+    "company": "HK-00700",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\config\\source_catalog.yaml",
+      "source-facts",
+      "--request",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\temp\\source_facts.json"
+    ],
+    "started_at": "2026-10-09T06:04:24.077025+00:00",
+    "ended_at": "2026-10-09T06:04:25.530460+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "assertion_id": "sa-f64b28bc27844a9e9eb4889eeae30479",
+      "document_id": "urn:company-wiki:document:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "source_id": "urn:company-wiki:source:sha256:d19f183452e9b8d0c47bcb7543dcbf435b585b2610759b42c0cba7c13f7361c7",
+      "status": "recorded"
+    },
+    "stderr": ""
+  },
+  {
+    "company": "HK-00700",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\config\\source_catalog.yaml",
+      "register",
+      "--root-id",
+      "existing_company_raw",
+      "--relative-path",
+      "腾讯/raw/financial_reports/annual/腾讯：2024年年度报告.pdf"
+    ],
+    "started_at": "2026-10-09T06:04:25.553346+00:00",
+    "ended_at": "2026-10-09T06:04:27.055016+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "dry_run": false,
+      "error_details": [],
+      "errors": 0,
+      "files_excluded": 0,
+      "files_hashed": 1,
+      "files_reused": 0,
+      "files_seen": 1,
+      "known_quarantined": 0,
+      "locations_active": 2,
+      "locations_missing": 0,
+      "new_errors": 0,
+      "policy_excluded": 0,
+      "run_id": "scan-484f53aab1f5458b92a4fcc49d8a902b",
+      "strategy": {
+        "existing_company_raw": "legacy"
+      }
+    },
+    "stderr": ""
+  },
+  {
+    "company": "HK-00700",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\config\\source_catalog.yaml",
+      "source-facts",
+      "--request",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\temp\\source_facts.json"
+    ],
+    "started_at": "2026-10-09T06:04:27.063603+00:00",
+    "ended_at": "2026-10-09T06:04:28.383813+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "assertion_id": "sa-b96640a0423b46e59169973c0ae99199",
+      "document_id": "urn:company-wiki:document:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+      "source_id": "urn:company-wiki:source:sha256:70f529984a87ef7f46d9e1db26bb9ef27eef9c01d29c59aabf69e557b479a6a0",
+      "status": "recorded"
+    },
+    "stderr": ""
+  },
+  {
+    "company": "HK-00700",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.official_source_cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\config\\source_catalog.yaml",
+      "--request",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\temp\\official_import.json",
+      "--input-file",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\41\\4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639"
+    ],
+    "started_at": "2026-10-09T06:04:28.391674+00:00",
+    "ended_at": "2026-10-09T06:04:30.721198+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "schema_version": "official-source-import-result/1",
+      "status": "imported_new",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+        "source_id": "urn:company-wiki:source:sha256:4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+        "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+        "byte_size": 5135808,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "metadata": {
+        "document_id": "urn:company-wiki:document:sha256:4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+        "source_id": "urn:company-wiki:source:sha256:4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+        "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+        "byte_size": 5135808,
+        "mime_type": "application/pdf",
+        "title": "Tencent Interim Report 2026",
+        "document_kind": "semi_annual_report",
+        "published_date": null,
+        "source_url": "https://www.tencent.com/wp-content/uploads/2026/08/E700_IR.pdf",
+        "retrieved_at": "2026-10-09T06:04:28Z",
+        "collector_name": "official-original-import",
+        "collector_version": "1.0.0",
+        "canonical_entity_id": null,
+        "display_name": "騰訊控股",
+        "market": "HK",
+        "security_id": "00700",
+        "fiscal_year": 2026,
+        "fiscal_period": "H1",
+        "period_end": null,
+        "form_type": null,
+        "provider": "official",
+        "provider_document_id": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+        "language": "en",
+        "entity": "騰訊控股",
+        "publisher": null
+      },
+      "capture_receipt": {
+        "capture_method": "local_document",
+        "tool_name": "CWP official_source_cli",
+        "tool_call_id": "HK-00700-local-import-2",
+        "captured_at": "2026-10-09T06:04:28.390391+00:00",
+        "content_sha256": "4170f80ec8548ea2fb92ec04691a4b252a52de20941e48fb516baf3f98082639",
+        "response_bytes": 5135808
+      },
+      "download_events": 0
+    },
+    "stderr": ""
+  },
+  {
+    "company": "HK-00700",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.official_source_cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\config\\source_catalog.yaml",
+      "--request",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\temp\\official_import.json",
+      "--input-file",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\64\\64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a"
+    ],
+    "started_at": "2026-10-09T06:04:30.726909+00:00",
+    "ended_at": "2026-10-09T06:04:32.626511+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "schema_version": "official-source-import-result/1",
+      "status": "imported_new",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+        "source_id": "urn:company-wiki:source:sha256:64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+        "content_sha256": "64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+        "byte_size": 412297,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "metadata": {
+        "document_id": "urn:company-wiki:document:sha256:64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+        "source_id": "urn:company-wiki:source:sha256:64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+        "content_sha256": "64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+        "byte_size": 412297,
+        "mime_type": "application/pdf",
+        "title": "Tencent second-quarter and first-half 2026 results",
+        "document_kind": "investor_relations",
+        "published_date": "2026-08-12",
+        "source_url": "https://www.tencent.com/wp-content/uploads/2026/08/Tencent-Announces-2026-Second-Quarter-Results.pdf",
+        "retrieved_at": "2026-10-09T06:04:30Z",
+        "collector_name": "official-original-import",
+        "collector_version": "1.0.0",
+        "canonical_entity_id": null,
+        "display_name": "騰訊控股",
+        "market": "HK",
+        "security_id": "00700",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q2",
+        "period_end": null,
+        "form_type": null,
+        "provider": "official",
+        "provider_document_id": "64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+        "language": "en",
+        "entity": "騰訊控股",
+        "publisher": null
+      },
+      "capture_receipt": {
+        "capture_method": "local_document",
+        "tool_name": "CWP official_source_cli",
+        "tool_call_id": "HK-00700-local-import-3",
+        "captured_at": "2026-10-09T06:04:30.725785+00:00",
+        "content_sha256": "64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+        "response_bytes": 412297
+      },
+      "download_events": 0
+    },
+    "stderr": ""
+  },
+  {
+    "company": "HK-00700",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.official_source_cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\config\\source_catalog.yaml",
+      "--request",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\temp\\official_import.json",
+      "--input-file",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\a9\\a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389"
+    ],
+    "started_at": "2026-10-09T06:04:32.637412+00:00",
+    "ended_at": "2026-10-09T06:04:34.634314+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "schema_version": "official-source-import-result/1",
+      "status": "imported_new",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+        "source_id": "urn:company-wiki:source:sha256:a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+        "content_sha256": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+        "byte_size": 1676729,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "metadata": {
+        "document_id": "urn:company-wiki:document:sha256:a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+        "source_id": "urn:company-wiki:source:sha256:a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+        "content_sha256": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+        "byte_size": 1676729,
+        "mime_type": "application/pdf",
+        "title": "Tencent Corporate Overview September 2026",
+        "document_kind": "investor_relations",
+        "published_date": null,
+        "source_url": "https://www.tencent.com/wp-content/uploads/2026/09/Corporate-Overview-2Q26-20260916.pdf",
+        "retrieved_at": "2026-10-09T06:04:32Z",
+        "collector_name": "official-original-import",
+        "collector_version": "1.0.0",
+        "canonical_entity_id": null,
+        "display_name": "騰訊控股",
+        "market": "HK",
+        "security_id": "00700",
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "period_end": null,
+        "form_type": null,
+        "provider": "official",
+        "provider_document_id": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+        "language": "en",
+        "entity": "騰訊控股",
+        "publisher": null
+      },
+      "capture_receipt": {
+        "capture_method": "local_document",
+        "tool_name": "CWP official_source_cli",
+        "tool_call_id": "HK-00700-local-import-4",
+        "captured_at": "2026-10-09T06:04:32.634893+00:00",
+        "content_sha256": "a9b0a5d6c68d6ce70b38607b8604d12fc8a150de9dac8bd8dc8679249c586389",
+        "response_bytes": 1676729
+      },
+      "download_events": 0
+    },
+    "stderr": ""
+  },
+  {
+    "company": "US-MSFT",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\config\\source_catalog.yaml",
+      "register",
+      "--root-id",
+      "existing_company_raw",
+      "--relative-path",
+      "微软/raw/financial_reports/annual/微软_10-K_2025.htm"
+    ],
+    "started_at": "2026-10-09T06:04:34.974312+00:00",
+    "ended_at": "2026-10-09T06:04:36.739906+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "dry_run": false,
+      "error_details": [],
+      "errors": 0,
+      "files_excluded": 0,
+      "files_hashed": 1,
+      "files_reused": 0,
+      "files_seen": 1,
+      "known_quarantined": 0,
+      "locations_active": 1,
+      "locations_missing": 0,
+      "new_errors": 0,
+      "policy_excluded": 0,
+      "run_id": "scan-2afa2a4f9ac543f485b8914232d4699d",
+      "strategy": {
+        "existing_company_raw": "legacy"
+      }
+    },
+    "stderr": ""
+  },
+  {
+    "company": "US-MSFT",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\config\\source_catalog.yaml",
+      "source-facts",
+      "--request",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\temp\\source_facts.json"
+    ],
+    "started_at": "2026-10-09T06:04:36.747637+00:00",
+    "ended_at": "2026-10-09T06:04:38.209050+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "assertion_id": "sa-ec904d85cb404c1a85963a6444ed0200",
+      "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "status": "recorded"
+    },
+    "stderr": ""
+  },
+  {
+    "company": "US-MSFT",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\config\\source_catalog.yaml",
+      "register",
+      "--root-id",
+      "existing_company_raw",
+      "--relative-path",
+      "微软/raw/financial_reports/annual/微软_10-K_2024.htm"
+    ],
+    "started_at": "2026-10-09T06:04:38.230066+00:00",
+    "ended_at": "2026-10-09T06:04:40.087350+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "dry_run": false,
+      "error_details": [],
+      "errors": 0,
+      "files_excluded": 0,
+      "files_hashed": 1,
+      "files_reused": 0,
+      "files_seen": 1,
+      "known_quarantined": 0,
+      "locations_active": 2,
+      "locations_missing": 0,
+      "new_errors": 0,
+      "policy_excluded": 0,
+      "run_id": "scan-2ed8f061c6f6462ba14a730962b07f18",
+      "strategy": {
+        "existing_company_raw": "legacy"
+      }
+    },
+    "stderr": ""
+  },
+  {
+    "company": "US-MSFT",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\config\\source_catalog.yaml",
+      "source-facts",
+      "--request",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\temp\\source_facts.json"
+    ],
+    "started_at": "2026-10-09T06:04:40.096424+00:00",
+    "ended_at": "2026-10-09T06:04:41.642701+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "assertion_id": "sa-2700b3d86ee44ad3887192ff66fce090",
+      "document_id": "urn:company-wiki:document:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+      "source_id": "urn:company-wiki:source:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+      "status": "recorded"
+    },
+    "stderr": ""
+  },
+  {
+    "company": "US-MSFT",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\config\\source_catalog.yaml",
+      "register",
+      "--root-id",
+      "existing_dayu_portfolio",
+      "--relative-path",
+      "MSFT/filings/fil_0001193125-25-256321/msft-20250930.htm"
+    ],
+    "started_at": "2026-10-09T06:04:41.654129+00:00",
+    "ended_at": "2026-10-09T06:04:43.303160+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "dry_run": false,
+      "error_details": [],
+      "errors": 0,
+      "files_excluded": 0,
+      "files_hashed": 5,
+      "files_reused": 0,
+      "files_seen": 5,
+      "known_quarantined": 0,
+      "locations_active": 7,
+      "locations_missing": 0,
+      "new_errors": 0,
+      "policy_excluded": 0,
+      "run_id": "scan-d5f17f06df0d496884c7f95faffce0a9",
+      "strategy": {
+        "existing_dayu_portfolio": "legacy"
+      }
+    },
+    "stderr": ""
+  },
+  {
+    "company": "US-MSFT",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.local_prepare_cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\config\\source_catalog.yaml",
+      "--request",
+      "-"
+    ],
+    "started_at": "2026-10-09T06:04:43.304645+00:00",
+    "ended_at": "2026-10-09T06:04:48.397038+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "schema_version": "local-source-prepare/1",
+      "status": "ready",
+      "reason": "local_source_reconciled",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+        "source_id": "urn:company-wiki:source:sha256:c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+        "content_sha256": "c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+        "byte_size": 5597461,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "blocks_download": false,
+      "operations": [
+        {
+          "status": "recorded",
+          "assertion_id": "sa-dc51f6dae2544ac7ad6f8b0904cea86b",
+          "restore_audit_id": null
+        }
+      ],
+      "diagnostics": [],
+      "download_events": 0
+    },
+    "stderr": ""
+  },
+  {
+    "company": "US-MSFT",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\config\\source_catalog.yaml",
+      "register",
+      "--root-id",
+      "existing_dayu_portfolio",
+      "--relative-path",
+      "MSFT/filings/fil_0001193125-26-027207/msft-20251231.htm"
+    ],
+    "started_at": "2026-10-09T06:04:48.404932+00:00",
+    "ended_at": "2026-10-09T06:04:50.101578+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "dry_run": false,
+      "error_details": [],
+      "errors": 0,
+      "files_excluded": 0,
+      "files_hashed": 5,
+      "files_reused": 0,
+      "files_seen": 5,
+      "known_quarantined": 0,
+      "locations_active": 12,
+      "locations_missing": 0,
+      "new_errors": 0,
+      "policy_excluded": 0,
+      "run_id": "scan-bd61e28854fd44a28dba8dca1ef5df37",
+      "strategy": {
+        "existing_dayu_portfolio": "legacy"
+      }
+    },
+    "stderr": ""
+  },
+  {
+    "company": "US-MSFT",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.local_prepare_cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\config\\source_catalog.yaml",
+      "--request",
+      "-"
+    ],
+    "started_at": "2026-10-09T06:04:50.104075+00:00",
+    "ended_at": "2026-10-09T06:04:58.350808+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "schema_version": "local-source-prepare/1",
+      "status": "ready",
+      "reason": "local_source_reconciled",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+        "source_id": "urn:company-wiki:source:sha256:a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+        "content_sha256": "a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+        "byte_size": 7483278,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "blocks_download": false,
+      "operations": [
+        {
+          "status": "recorded",
+          "assertion_id": "sa-c3752ff90469423da97f348b4b7e064c",
+          "restore_audit_id": null
+        }
+      ],
+      "diagnostics": [],
+      "download_events": 0
+    },
+    "stderr": ""
+  },
+  {
+    "company": "US-MSFT",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\config\\source_catalog.yaml",
+      "register",
+      "--root-id",
+      "existing_dayu_portfolio",
+      "--relative-path",
+      "MSFT/filings/fil_0001193125-26-191507/msft-20260331.htm"
+    ],
+    "started_at": "2026-10-09T06:04:58.358765+00:00",
+    "ended_at": "2026-10-09T06:05:00.084093+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "dry_run": false,
+      "error_details": [],
+      "errors": 0,
+      "files_excluded": 0,
+      "files_hashed": 5,
+      "files_reused": 0,
+      "files_seen": 5,
+      "known_quarantined": 0,
+      "locations_active": 17,
+      "locations_missing": 0,
+      "new_errors": 0,
+      "policy_excluded": 0,
+      "run_id": "scan-e876186d3d4049aa9d24f264adc006f7",
+      "strategy": {
+        "existing_dayu_portfolio": "legacy"
+      }
+    },
+    "stderr": ""
+  },
+  {
+    "company": "US-MSFT",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.local_prepare_cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\config\\source_catalog.yaml",
+      "--request",
+      "-"
+    ],
+    "started_at": "2026-10-09T06:05:00.087018+00:00",
+    "ended_at": "2026-10-09T06:05:10.638857+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "schema_version": "local-source-prepare/1",
+      "status": "ready",
+      "reason": "local_source_reconciled",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+        "source_id": "urn:company-wiki:source:sha256:76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+        "content_sha256": "76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+        "byte_size": 7731948,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "blocks_download": false,
+      "operations": [
+        {
+          "status": "recorded",
+          "assertion_id": "sa-73c0bd02feb74fd7b16029cd2df0954f",
+          "restore_audit_id": null
+        }
+      ],
+      "diagnostics": [],
+      "download_events": 0
+    },
+    "stderr": ""
+  },
+  {
+    "company": "US-MSFT",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.official_source_cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\config\\source_catalog.yaml",
+      "--request",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\temp\\official_import.json",
+      "--input-file",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\8d\\8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e"
+    ],
+    "started_at": "2026-10-09T06:05:10.649701+00:00",
+    "ended_at": "2026-10-09T06:05:13.045641+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "schema_version": "official-source-import-result/1",
+      "status": "imported_new",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+        "source_id": "urn:company-wiki:source:sha256:8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+        "content_sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+        "byte_size": 808850,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "metadata": {
+        "document_id": "urn:company-wiki:document:sha256:8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+        "source_id": "urn:company-wiki:source:sha256:8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+        "content_sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+        "byte_size": 808850,
+        "mime_type": "text/html",
+        "title": "results official communication",
+        "document_kind": "investor_relations",
+        "published_date": "2026-07-29",
+        "source_url": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q4/press-release-webcast",
+        "retrieved_at": "2026-10-09T06:05:10Z",
+        "collector_name": "official-original-import",
+        "collector_version": "1.0.0",
+        "canonical_entity_id": null,
+        "display_name": "MICROSOFT CORP",
+        "market": "US",
+        "security_id": "MSFT",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q4",
+        "period_end": null,
+        "form_type": null,
+        "provider": "official",
+        "provider_document_id": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+        "language": "en",
+        "entity": "MICROSOFT CORP",
+        "publisher": null
+      },
+      "capture_receipt": {
+        "capture_method": "local_document",
+        "tool_name": "CWP official_source_cli",
+        "tool_call_id": "US-MSFT-local-import-5",
+        "captured_at": "2026-10-09T06:05:10.646280+00:00",
+        "content_sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+        "response_bytes": 808850
+      },
+      "download_events": 0
+    },
+    "stderr": ""
+  },
+  {
+    "company": "US-MSFT",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.official_source_cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\config\\source_catalog.yaml",
+      "--request",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\temp\\official_import.json",
+      "--input-file",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\bd\\bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656"
+    ],
+    "started_at": "2026-10-09T06:05:13.052573+00:00",
+    "ended_at": "2026-10-09T06:05:15.404906+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "schema_version": "official-source-import-result/1",
+      "status": "imported_new",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+        "source_id": "urn:company-wiki:source:sha256:bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+        "content_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+        "byte_size": 273436,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "metadata": {
+        "document_id": "urn:company-wiki:document:sha256:bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+        "source_id": "urn:company-wiki:source:sha256:bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+        "content_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+        "byte_size": 273436,
+        "mime_type": "text/html",
+        "title": "call official communication",
+        "document_kind": "investor_call_transcript",
+        "published_date": "2026-07-29",
+        "source_url": "https://www.microsoft.com/en-us/Investor/events/fy-2026/earnings-fy-2026-q4",
+        "retrieved_at": "2026-10-09T06:05:13Z",
+        "collector_name": "official-original-import",
+        "collector_version": "1.0.0",
+        "canonical_entity_id": null,
+        "display_name": "MICROSOFT CORP",
+        "market": "US",
+        "security_id": "MSFT",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q4",
+        "period_end": null,
+        "form_type": null,
+        "provider": "official",
+        "provider_document_id": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+        "language": "en",
+        "entity": "MICROSOFT CORP",
+        "publisher": null
+      },
+      "capture_receipt": {
+        "capture_method": "local_document",
+        "tool_name": "CWP official_source_cli",
+        "tool_call_id": "US-MSFT-local-import-6",
+        "captured_at": "2026-10-09T06:05:13.051448+00:00",
+        "content_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+        "response_bytes": 273436
+      },
+      "download_events": 0
+    },
+    "stderr": ""
+  },
+  {
+    "company": "US-MSFT",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.official_source_cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\config\\source_catalog.yaml",
+      "--request",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\temp\\official_import.json",
+      "--input-file",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\cf\\cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6"
+    ],
+    "started_at": "2026-10-09T06:05:15.413406+00:00",
+    "ended_at": "2026-10-09T06:05:17.518990+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "schema_version": "official-source-import-result/1",
+      "status": "imported_new",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+        "source_id": "urn:company-wiki:source:sha256:cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+        "content_sha256": "cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+        "byte_size": 198175,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "metadata": {
+        "document_id": "urn:company-wiki:document:sha256:cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+        "source_id": "urn:company-wiki:source:sha256:cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+        "content_sha256": "cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+        "byte_size": 198175,
+        "mime_type": "text/html",
+        "title": "metrics official communication",
+        "document_kind": "investor_relations",
+        "published_date": "2026-07-29",
+        "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q4/metrics",
+        "retrieved_at": "2026-10-09T06:05:15Z",
+        "collector_name": "official-original-import",
+        "collector_version": "1.0.0",
+        "canonical_entity_id": null,
+        "display_name": "MICROSOFT CORP",
+        "market": "US",
+        "security_id": "MSFT",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q4",
+        "period_end": null,
+        "form_type": null,
+        "provider": "official",
+        "provider_document_id": "cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+        "language": "en",
+        "entity": "MICROSOFT CORP",
+        "publisher": null
+      },
+      "capture_receipt": {
+        "capture_method": "local_document",
+        "tool_name": "CWP official_source_cli",
+        "tool_call_id": "US-MSFT-local-import-7",
+        "captured_at": "2026-10-09T06:05:15.412191+00:00",
+        "content_sha256": "cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+        "response_bytes": 198175
+      },
+      "download_events": 0
+    },
+    "stderr": ""
+  },
+  {
+    "company": "US-MSFT",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.official_source_cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\config\\source_catalog.yaml",
+      "--request",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\temp\\official_import.json",
+      "--input-file",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\c0\\c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4"
+    ],
+    "started_at": "2026-10-09T06:05:17.524346+00:00",
+    "ended_at": "2026-10-09T06:05:19.904712+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "schema_version": "official-source-import-result/1",
+      "status": "imported_new",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "content_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "byte_size": 4016522,
+        "mime_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "schema_version": "2.0"
+      },
+      "metadata": {
+        "document_id": "urn:company-wiki:document:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "content_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "byte_size": 4016522,
+        "mime_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "title": "FY27 Segments and Investor Metrics",
+        "document_kind": "investor_relations",
+        "published_date": "2026-09-02",
+        "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/FY27ExternalKPIs.pptx",
+        "retrieved_at": "2026-10-09T06:05:17Z",
+        "collector_name": "official-original-import",
+        "collector_version": "1.0.0",
+        "canonical_entity_id": null,
+        "display_name": "MICROSOFT CORP",
+        "market": "US",
+        "security_id": "MSFT",
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "period_end": null,
+        "form_type": null,
+        "provider": "official",
+        "provider_document_id": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "language": "en",
+        "entity": "MICROSOFT CORP",
+        "publisher": null
+      },
+      "capture_receipt": {
+        "capture_method": "local_document",
+        "tool_name": "CWP official_source_cli",
+        "tool_call_id": "US-MSFT-local-import-8",
+        "captured_at": "2026-10-09T06:05:17.523192+00:00",
+        "content_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "response_bytes": 4016522
+      },
+      "download_events": 0
+    },
+    "stderr": ""
+  },
+  {
+    "company": "US-MSFT",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\config\\source_catalog.yaml",
+      "register",
+      "--root-id",
+      "existing_company_raw",
+      "--relative-path",
+      "Microsoft/raw/transcripts/MSFT_Q4_2026_earnings_call.txt"
+    ],
+    "started_at": "2026-10-09T06:05:19.909984+00:00",
+    "ended_at": "2026-10-09T06:05:21.424842+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "dry_run": false,
+      "error_details": [],
+      "errors": 0,
+      "files_excluded": 0,
+      "files_hashed": 1,
+      "files_reused": 0,
+      "files_seen": 1,
+      "known_quarantined": 0,
+      "locations_active": 26,
+      "locations_missing": 0,
+      "new_errors": 0,
+      "policy_excluded": 0,
+      "run_id": "scan-3b16f1b4a1fc4d7c96c0ec34b099a781",
+      "strategy": {
+        "existing_company_raw": "legacy"
+      }
+    },
+    "stderr": ""
+  },
+  {
+    "company": "US-MSFT",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\config\\source_catalog.yaml",
+      "source-facts",
+      "--request",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\temp\\source_facts.json"
+    ],
+    "started_at": "2026-10-09T06:05:21.434399+00:00",
+    "ended_at": "2026-10-09T06:05:22.833410+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "assertion_id": "sa-42666fc8027c4f11b05c180ee236d1d7",
+      "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "status": "recorded"
+    },
+    "stderr": ""
+  },
+  {
+    "company": "CN-688012",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\fetch_filing.py",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\filing_fetch_company_wiki.json",
+      "--timeout-seconds",
+      "90"
+    ],
+    "started_at": "2026-10-09T06:05:22.938355+00:00",
+    "ended_at": "2026-10-09T06:05:26.854254+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "schema_version": "2.0",
+      "status": "source_candidate",
+      "request_period": {
+        "mode": "exact",
+        "fiscal_year": 2025,
+        "fiscal_period": null,
+        "as_of_date": "2026-10-08"
+      },
+      "filing": {
+        "status": "source_candidate",
+        "source_ref": {
+          "byte_size": 9165875,
+          "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+          "mime_type": "application/pdf",
+          "schema_version": "2.0",
+          "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
+        },
+        "byte_verification": "pending_verified_open",
+        "document_kind": "annual_report",
+        "fiscal_year": 2025,
+        "fiscal_period": "FY",
+        "resolution_outcome": "reused_existing",
+        "download_events": 0
+      },
+      "transcript": {
+        "status": "not_requested",
+        "retryable": false
+      },
+      "calls": 2,
+      "downloads": 0
+    },
+    "stderr": ""
+  },
+  {
+    "company": "CN-688012",
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.source_reader_cli",
+      "--config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\source_catalog.yaml",
+      "--document-id",
+      "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "--source-id",
+      "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "--content-sha256",
+      "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
+    ],
+    "started_at": "2026-10-09T06:05:26.857031+00:00",
+    "ended_at": "2026-10-09T06:05:28.491210+00:00",
+    "exit_code": 0,
+    "stdout": {
+      "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "byte_size": 9165875
+    },
+    "stderr": "{\"byte_size\":9165875,\"content_sha256\":\"d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5\",\"document_id\":\"urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5\",\"manifest\":{\"byte_size\":9165875,\"canonical_entity_id\":null,\"collector_name\":null,\"collector_version\":null,\"content_sha256\":\"d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5\",\"display_name\":\"\\u4e2d\\u5fae\\u516c\\u53f8\",\"document_id\":\"urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5\",\"document_kind\":\"annual_report\",\"fiscal_period\":\"FY\",\"fiscal_year\":2025,\"form_type\":null,\"language\":\"zh\",\"market\":\"CN\",\"mime_type\":\"application/pdf\",\"period_end\":\"2025-12-31\",\"provider\":null,\"provider_document_id\":null,\"published_date\":\"2026-03-31\",\"retrieved_at\":null,\"security_id\":\"688012\",\"source_id\":\"urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5\",\"source_url\":\"https://static.cninfo.com.cn/finalpage/2026-03-31/1225062431.PDF\",\"title\":\"\\u4e2d\\u5fae\\u516c\\u53f8\\uff1a2025\\u5e74\\u5e74\\u5ea6\\u62a5\\u544a\"},\"policy_sha256\":\"5791ac63f0c554e379f203d9b6845831d1ac43cddc0780eb97beef3797472693\",\"read_at\":\"2026-10-09T06:05:28.348686+00:00\",\"review\":{\"evidence_sha256\":null,\"policy_hash\":null,\"reviewed_at\":null,\"source_sha256\":null,\"status\":\"not_reviewed\"},\"schema_version\":\"2.1\",\"source_id\":\"urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5\",\"source_read_policy_sha256\":\"e3b2149520435d8bcbb9692d9d5f8e0e7b881f41ddd89374edaf7e0f6f8bc547\",\"status\":\"ok\"}\r\n"
+  }
+]

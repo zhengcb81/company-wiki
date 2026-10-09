@@ -1,0 +1,65 @@
+{
+  "schema_version": "fresh-executor-budget-observation/1",
+  "status": "OBSERVED_NATIVE_TERMINAL_RECEIPT_NOT_AN_EXTRA_LEDGER",
+  "historical_baseline": {
+    "receipt":"../main_budget_preparation.json",
+    "observed_at":"2026-10-09T04:20:43.987522+00:00",
+    "tokens":199534,
+    "estimated_micro_usd":110737,
+    "historical_unknown_reservations":7,
+    "already_included_r3_tokens":9499,
+    "already_included_r3_estimated_micro_usd":10235,
+    "count_again":false
+  },
+  "new_terminal_node": {
+    "receipt":"../ocr_major_node/runs/mocr-20261009T060207-905b13f6/acceptance.json",
+    "attempt_id":"mocr-20261009T060207-905b13f6",
+    "status":"ENGINEERING_COMPOSITION_PASS",
+    "finished_at":"2026-10-09T06:07:51.509403Z",
+    "known_added_tokens":7508,
+    "known_added_estimated_micro_usd":8934,
+    "new_unknown_reservations":0,
+    "new_unsettled_reservations":0,
+    "evidence_pointers":["/results/first/ledger/budget","/results/first/ledger/reservations","/cumulative_accounting"],
+    "engineering_pass_is_research_pass":false
+  },
+  "current_observed_cumulative": {
+    "tokens":207042,
+    "estimated_micro_usd":119671,
+    "estimated_usd":"0.119671",
+    "historical_unknown_reservations":7,
+    "new_unknown_reservations":0,
+    "fx_guard_micro_usd":2764,
+    "native_historical_counted_again":false
+  },
+  "authorization_caps": {
+    "mother_tokens":2000000,
+    "mother_micro_usd":20000000,
+    "per_company_tokens":120000,
+    "per_company_micro_usd":2000000,
+    "original_three_company_max_tokens":360000,
+    "original_three_company_max_micro_usd":6000000,
+    "ocr_major_node_tokens":30000,
+    "ocr_major_node_micro_usd":100000,
+    "ocr_allocation_within_mother":true
+  },
+  "arithmetic_known_only": {
+    "remaining_tokens":1792958,
+    "remaining_micro_usd_after_fx":19877565,
+    "remaining_usd_after_fx":"19.877565",
+    "formula_tokens":"2000000 - 207042",
+    "formula_micro_usd":"20000000 - 119671 - 2764",
+    "unknowns_settled_by_this_arithmetic":false,
+    "additional_calls_since_receipt":"MAIN must refresh actual native observation at launch; this package did not call suppliers"
+  },
+  "admission_rules": [
+    "Reuse existing permanent public-material externalization and configured-provider authorization; no new per-material/provider human signature.",
+    "Explicit provider and actual Config model options, finite remaining deadline and matching versioned pricing from MAIN scope.",
+    "All company paid operations share that company's120k/USD2 allocation and mother cap; no per-document duplication of allocation.",
+    "Native AUTO reservations/settlement remain authoritative; do not add a second mutable budget database.",
+    "Historical unknown7 stays unknown under MAIN's existing accounting policy, not zero/free and not silently settled. New unknown/unsettled charges are retained before any retry/admission.",
+    "No R3/native-historical double count; normal reuse has zero new provider admission, but do not infer that from artifact existence alone.",
+    "Platform approval remains enforced and its actual outcomes are recorded; this package does not claim to disable it."
+  ],
+  "precheck_supplier_calls":0
+}

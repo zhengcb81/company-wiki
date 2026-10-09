@@ -1,0 +1,301 @@
+{
+  "schema_version": "executor-public-cli-help/1",
+  "business_runs": 0,
+  "provider_calls": 0,
+  "model_calls": 0,
+  "checks": [
+    {
+      "name": "rf_forecast",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "bytes": 805,
+      "sha256": "9c4c1de69b9bfc5b35a141811f7a9f27245317d686e2263b983250555ed86f67",
+      "help_file": "help/rf_forecast.txt"
+    },
+    {
+      "name": "rf_template",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\generate_input_template.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "bytes": 1209,
+      "sha256": "035e3377fe3e34fc6cb4c7d62390ba8c6f3b21d71e469c505f424374611247d0",
+      "help_file": "help/rf_template.txt"
+    },
+    {
+      "name": "rf_lint",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\lint_input.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "bytes": 761,
+      "sha256": "d7ffcbf3c409f23a88a2f5c6c62cd85ee84e28caa9e56f05c0316c59b079b3ed",
+      "help_file": "help/rf_lint.txt"
+    },
+    {
+      "name": "rf_hashes",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\fix_hashes.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "bytes": 504,
+      "sha256": "440cbe3589eb495717eaecc7537816924e014576c65ff96ec5b914eeed054885",
+      "help_file": "help/rf_hashes.txt"
+    },
+    {
+      "name": "rf_backtest",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_backtest.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "bytes": 245,
+      "sha256": "148900ab0104ed8f1bb51a53b8672fdc3d6055c63dadfbe6de75fcd328223e38",
+      "help_file": "help/rf_backtest.txt"
+    },
+    {
+      "name": "rf_registry",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\publication_registry.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "bytes": 348,
+      "sha256": "a46af353eda6b826ece534f3f85d2fa81bd7997c1a23958fe36a4d06a1b7e94f",
+      "help_file": "help/rf_registry.txt"
+    },
+    {
+      "name": "rf_source_prepare",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "bytes": 1888,
+      "sha256": "4b9be2d3b6ff9625c25d6c0fbd6686f586208a1bad6ed41bfd107e9402e8ed71",
+      "help_file": "help/rf_source_prepare.txt"
+    },
+    {
+      "name": "rf_narrative_read",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\narrative_source_preparation.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "bytes": 916,
+      "sha256": "ccfb72282f936562f3308a8cf0f0933f8963077b308ae3d355d4f3f4f8a1e408",
+      "help_file": "help/rf_narrative_read.txt"
+    },
+    {
+      "name": "ff_fetch",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\fetch_filing.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "bytes": 1746,
+      "sha256": "847c66b500e5f8af59831fcd1108350c5f022e512150125f1575ca7825f4ea37",
+      "help_file": "help/ff_fetch.txt"
+    },
+    {
+      "name": "audit",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "bytes": 270,
+      "sha256": "ec1c22995591907f3f5b96e8933fcc7d87ec8dd0b8e1c725761008bf17d66d7b",
+      "help_file": "help/audit.txt"
+    },
+    {
+      "name": "cwp_batch_configured",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\scripts\\narrative_batch_configured.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "bytes": 965,
+      "sha256": "9e70450a1eda656952b14c3078b19fcccef967134b3c0ab54ff44e6593fa02ad",
+      "help_file": "help/cwp_batch_configured.txt"
+    },
+    {
+      "name": "audit_capture",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+        "capture",
+        "--help"
+      ],
+      "exit_code": 0,
+      "bytes": 557,
+      "sha256": "ac8d911ebc443a06e870ee718826bfa7ba9d34d4b42a5ac424f2df605e220ae5",
+      "help_file": "help/audit_capture.txt"
+    },
+    {
+      "name": "audit_event",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+        "event",
+        "--help"
+      ],
+      "exit_code": 0,
+      "bytes": 389,
+      "sha256": "8f1b4adc519f47235dfdf28afc696dd85b70e0a1c83065a95686c4cc159cc5c5",
+      "help_file": "help/audit_event.txt"
+    },
+    {
+      "name": "audit_check",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+        "check",
+        "--help"
+      ],
+      "exit_code": 0,
+      "bytes": 193,
+      "sha256": "5c8299715e17bea19643771ca98f0272e1ea4f2cc1f28cded0b51706dede495b",
+      "help_file": "help/audit_check.txt"
+    },
+    {
+      "name": "rf_snapshot_create",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_backtest.py",
+        "create",
+        "--help"
+      ],
+      "exit_code": 0,
+      "bytes": 220,
+      "sha256": "99c0816bf5a5e0d5ce584c7a07ed852872044ef900821adfef92e18fcec753ae",
+      "help_file": "help/rf_snapshot_create.txt"
+    },
+    {
+      "name": "rf_backtest_evaluate",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_backtest.py",
+        "evaluate",
+        "--help"
+      ],
+      "exit_code": 0,
+      "bytes": 208,
+      "sha256": "502289a2e94515529c07c9991fcec28c8cdc2d98aa667b2d94db2db35a4ca21f",
+      "help_file": "help/rf_backtest_evaluate.txt"
+    },
+    {
+      "name": "rf_registry_lookup",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\publication_registry.py",
+        "lookup",
+        "--help"
+      ],
+      "exit_code": 0,
+      "bytes": 160,
+      "sha256": "a6891627563b560459fdd1845caadde8705782e2a7daeb73e5b90add92241a8f",
+      "help_file": "help/rf_registry_lookup.txt"
+    },
+    {
+      "name": "rf_registry_audit",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\publication_registry.py",
+        "audit",
+        "--help"
+      ],
+      "exit_code": 0,
+      "bytes": 293,
+      "sha256": "4b6c7953d2d0e61f62593453dca6980700b605bb54711e37ec9a729651835b36",
+      "help_file": "help/rf_registry_audit.txt"
+    },
+    {
+      "name": "ff_routed_canonical",
+      "argv": [
+        "C:/Miniconda/python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:/Users/郑曾波/Projects/filing-fetch/scripts/fetch_filing.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "bytes": 1715,
+      "sha256": "bfbd7e7d38612b52e92d6c68a63ba77543a698212a9ba675a02fc9f0b676e4ed",
+      "help_file": "help/ff_routed_canonical.txt",
+      "note": "Additional exact routed FF root help check; saved text normalized LF."
+    }
+  ]
+}

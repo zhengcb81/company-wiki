@@ -1,0 +1,31 @@
+usage: filing-fetch [-h] [--allow-download] [--config CONFIG]
+                    [--request-file REQUEST_FILE]
+                    [--timeout-seconds TIMEOUT_SECONDS] [--no-pause-worker]
+                    [--worker-graceful-timeout-seconds WORKER_GRACEFUL_TIMEOUT_SECONDS]
+                    [--worker-resume-wait-seconds WORKER_RESUME_WAIT_SECONDS]
+                    [--debug] [--source-ref-v2]
+
+Resolve or download a company filing into company-wiki.
+
+options:
+  -h, --help            show this help message and exit
+  --allow-download      allow a market-routed download if the filing is
+                        missing (default: read-only reuse)
+  --config CONFIG       path to company_wiki.json config
+  --request-file REQUEST_FILE
+                        read JSON request from file instead of stdin
+  --timeout-seconds TIMEOUT_SECONDS
+                        overall deadline for the entire request (default: 900)
+  --no-pause-worker     accepted for compatibility; inert since the company-
+                        wiki worker pause-around was retired upstream (no
+                        worker-status probe, no pause files, no resume)
+  --worker-graceful-timeout-seconds WORKER_GRACEFUL_TIMEOUT_SECONDS
+                        accepted for compatibility; inert (see --no-pause-
+                        worker)
+  --worker-resume-wait-seconds WORKER_RESUME_WAIT_SECONDS
+                        accepted for compatibility; inert (see --no-pause-
+                        worker)
+  --debug               include the per-candidate exclusion trace in the error
+                        response
+  --source-ref-v2       return a pathless source reference for a later
+                        company-wiki read

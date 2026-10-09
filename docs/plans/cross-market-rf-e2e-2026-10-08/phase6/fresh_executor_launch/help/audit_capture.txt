@@ -1,0 +1,15 @@
+usage: audit_run.py capture [-h] --run RUN
+                            --role {executor,storage,fetch,process,analyst,expert,coordinator}
+                            [--max-log-bytes MAX_LOG_BYTES]
+                            [--timeout-seconds TIMEOUT_SECONDS]
+                            ...
+
+positional arguments:
+  command
+
+options:
+  -h, --help            show this help message and exit
+  --run RUN
+  --role {executor,storage,fetch,process,analyst,expert,coordinator}
+  --max-log-bytes MAX_LOG_BYTES
+  --timeout-seconds TIMEOUT_SECONDS

@@ -1,0 +1,24 @@
+usage: generate_input_template.py [-h] --name NAME --base-year BASE_YEAR
+                                  --forecast-years FORECAST_YEARS [FORECAST_YEARS ...]
+                                  [--currency CURRENCY] [--unit UNIT]
+                                  --segments SEGMENTS [SEGMENTS ...]
+                                  [--output OUTPUT]
+                                  [--segment-model SEGMENT=MODEL]
+
+Emit a schema input skeleton pre-filled with correct field names.
+
+options:
+  -h, --help            show this help message and exit
+  --name NAME           company name
+  --base-year BASE_YEAR
+                        base fiscal year (e.g. 2025)
+  --forecast-years FORECAST_YEARS [FORECAST_YEARS ...]
+                        forecast years (e.g. 2026 2027)
+  --currency CURRENCY   currency code (default USD)
+  --unit UNIT           monetary unit (default million)
+  --segments SEGMENTS [SEGMENTS ...]
+                        segment display names
+  --output OUTPUT       write skeleton here (default stdout)
+  --segment-model SEGMENT=MODEL
+                        select a registered revenue model for a segment;
+                        repeat for multiple segments

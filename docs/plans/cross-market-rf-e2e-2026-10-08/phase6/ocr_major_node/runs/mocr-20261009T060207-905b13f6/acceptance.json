@@ -1,0 +1,1021 @@
+{
+  "schema_version": "main-ocr-major-node/1",
+  "operation": "repair",
+  "attempt_id": "mocr-20261009T060207-905b13f6",
+  "started_at": "2026-10-09T06:02:07.093370Z",
+  "live_batch_executed": true,
+  "protected_before": {
+    "config.yaml": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml",
+      "sha256": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+      "byte_size": 3602,
+      "mtime_ns": 1791230922098841600
+    },
+    "config/source_catalog.yaml": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "byte_size": 866,
+      "mtime_ns": 1790542565101886700
+    },
+    "config/local_ocr.json": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\local_ocr.json",
+      "sha256": "9b8a7df81ca62ebc4bb9c2d60d45c247b291564a4a38f5648e5f4b3edb59889b",
+      "byte_size": 943,
+      "mtime_ns": 1791519643945418900
+    },
+    ".env": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.env",
+      "sha256": "8d24dc08b82b41fd7f1c24e0b6f3fb65b0202ee0a38c52a6955f21e0a097c853",
+      "byte_size": 1137,
+      "mtime_ns": 1784406996168687800
+    },
+    "docs/plans/cross-market-rf-e2e-2026-10-08/task_plan.md": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\task_plan.md",
+      "sha256": "075f9a1bb36f1040af8dce11ceaccb8150876e745d2154a8f456a36282c29932",
+      "byte_size": 25210,
+      "mtime_ns": 1791525544825740100
+    },
+    "docs/plans/cross-market-rf-e2e-2026-10-08/findings.md": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\findings.md",
+      "sha256": "774589fb63c5b81e66373499d0a52e1860fe01ffdac8b68bc981b305f3781674",
+      "byte_size": 47691,
+      "mtime_ns": 1791525544838068300
+    },
+    "docs/plans/cross-market-rf-e2e-2026-10-08/progress.md": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\progress.md",
+      "sha256": "69ea520343462fbefeb2c313e603d6b44cf4c609f82528fb8650da64b0f177c2",
+      "byte_size": 70228,
+      "mtime_ns": 1791525544862072800
+    },
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_budget_preparation.json": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_budget_preparation.json",
+      "sha256": "9f3310064333178a97a2fbb318883642694376ad4a8ef0312a9338934bc27782",
+      "byte_size": 1278,
+      "mtime_ns": 1791519643987202800
+    }
+  },
+  "script_file": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\ocr_major_node\\run_acceptance.py",
+    "sha256": "9ec8fc5acd27a6db77ff1fc136f345cd9ec8cc3175564099bbb2f326091b3edb",
+    "byte_size": 39679,
+    "mtime_ns": 1791524533117932200
+  },
+  "head": "9704909f38c2466fd6d13e24de4dcbf5a0137af4",
+  "repair_parent": {
+    "parent_attempt_id": "mocr-20261009T045902-933be853",
+    "parent_input_hash": "7ed75daab656b24663959524e1458bfe03a6e32e085c5153be3bcb776726cea7",
+    "source_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+    "previous_execution_versions": {
+      "adapter": "openai-compatible-http/1",
+      "document_normalization": "1.0.0",
+      "handlers": {
+        "source.narrative_select": "1.1.0",
+        "source.narrative_summarize": "1.1.0",
+        "source.narrative_verify": "1.1.0"
+      },
+      "model_request_schema": "narrative-model-request/1.3",
+      "parser": "0.1.1",
+      "prompt": "1.6.0",
+      "selector": "0.4.2"
+    },
+    "current_execution_versions": {
+      "adapter": "openai-compatible-http/1",
+      "model_request_schema": "narrative-model-request/1.3",
+      "prompt": "1.6.0",
+      "parser": "0.1.1",
+      "selector": "0.5.0",
+      "document_normalization": "1.0.0"
+    },
+    "parent_added_tokens": 0,
+    "parent_added_micro_usd": 0,
+    "budget_baseline": {
+      "schema_version": "main-cumulative-budget-preparation/1",
+      "checked_at": "2026-10-09T04:20:43.987522+00:00",
+      "historical_receipt": "docs/plans/narrative-evidence-pilot-2026-09-26/harness_lanes/results/r3_production_live_batch_2026-10-08.json",
+      "cumulative_tokens": 199534,
+      "cumulative_estimated_micro_usd": 110737,
+      "historical_unknown_reservations": 7,
+      "fx_guard_micro_usd": 2764,
+      "effective_cap_tokens": 2000000,
+      "effective_cap_micro_usd": 20000000,
+      "native_reservations_already_in_historical_total": [
+        {
+          "run_id": "r3-20261008-production-deepseek-01",
+          "usage_status": "known",
+          "input_tokens": 2431,
+          "output_tokens": 7068,
+          "estimated_micro_usd": 10235,
+          "input_tokens_bound": 11001,
+          "max_output_tokens": 8192,
+          "reserved_micro_usd": 14590,
+          "error_code": null
+        }
+      ],
+      "double_counted_native": false,
+      "new_supplier_calls_this_engineering_node": 0,
+      "remaining_tokens": 1800466,
+      "remaining_micro_usd_after_fx": 19886499,
+      "per_company_cap_tokens": 120000,
+      "per_company_cap_micro_usd": 2000000,
+      "six_company_max_allocated_tokens": 720000,
+      "six_company_max_allocated_micro_usd": 12000000,
+      "ocr_major_node_separate_cap_tokens": 30000,
+      "ocr_major_node_separate_cap_micro_usd": 100000
+    },
+    "receipt": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\ocr_major_node\\runs\\mocr-20261009T045902-933be853\\acceptance.json",
+      "sha256": "a4c3541fac29d48a8cf57bad6746cb4d4bb154a627e28ec23ff3a91bcf679377",
+      "byte_size": 18866,
+      "mtime_ns": 1791522084278619700
+    },
+    "ledgers": {
+      "first": {
+        "status": "read",
+        "run_id": "mocr-20261009T045902-933be853-first",
+        "state": "open",
+        "block_reason": null,
+        "input_hash": "7ed75daab656b24663959524e1458bfe03a6e32e085c5153be3bcb776726cea7",
+        "model_id": "deepseek-flash",
+        "execution_versions": {
+          "adapter": "openai-compatible-http/1",
+          "document_normalization": "1.0.0",
+          "handlers": {
+            "source.narrative_select": "1.1.0",
+            "source.narrative_summarize": "1.1.0",
+            "source.narrative_verify": "1.1.0"
+          },
+          "model_request_schema": "narrative-model-request/1.3",
+          "parser": "0.1.1",
+          "prompt": "1.6.0",
+          "selector": "0.4.2"
+        },
+        "max_tokens": 30000,
+        "max_micro_usd": 100000,
+        "pricing_version": "main-ocr-r3-conservative/1",
+        "budget": {
+          "run_id": "mocr-20261009T045902-933be853-first",
+          "charged_tokens": 0,
+          "charged_micro_usd": 0,
+          "charged_output_bytes": 0,
+          "unknown_reservations": 0,
+          "unsettled_reservations": 0
+        },
+        "reservations": [],
+        "jobs": [
+          {
+            "job_id": "7238c7d1f57f1af3",
+            "status": "dead_letter"
+          },
+          {
+            "job_id": "8e61291e26a33151",
+            "status": "dead_letter"
+          },
+          {
+            "job_id": "d68f89c265eb2007",
+            "status": "dead_letter"
+          }
+        ],
+        "active_attempts": 0,
+        "terminal": true
+      },
+      "reuse": {
+        "status": "not_created",
+        "budget": null,
+        "reservations": null,
+        "terminal": false
+      }
+    }
+  },
+  "preflight": {
+    "status": "PREPARED_NOT_RUN",
+    "real_cli_help_commands": [
+      {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-m",
+          "company_wiki.source_catalog.official_source_cli",
+          "--help"
+        ],
+        "started_at": "2026-10-09T06:02:08.166667Z",
+        "finished_at": "2026-10-09T06:02:08.929851Z",
+        "elapsed_seconds": 0.763,
+        "exit_code": 0,
+        "outer_timeout": false,
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\logs\\help-1-01.stdout",
+          "sha256": "706f9131f55fb6a69851d1ae83eeb51775a5cc3d1651f11277f2bf2303812932",
+          "byte_size": 534,
+          "mtime_ns": 1791525728880172700
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\logs\\help-1-01.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "byte_size": 0,
+          "mtime_ns": 1791525728165241900
+        },
+        "stdin_sha256": null
+      },
+      {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\scripts\\narrative_batch_configured.py",
+          "--help"
+        ],
+        "started_at": "2026-10-09T06:02:08.953331Z",
+        "finished_at": "2026-10-09T06:02:09.907119Z",
+        "elapsed_seconds": 0.954,
+        "exit_code": 0,
+        "outer_timeout": false,
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\logs\\help-2-01.stdout",
+          "sha256": "9e70450a1eda656952b14c3078b19fcccef967134b3c0ab54ff44e6593fa02ad",
+          "byte_size": 965,
+          "mtime_ns": 1791525729847791900
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\logs\\help-2-01.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "byte_size": 0,
+          "mtime_ns": 1791525728948632100
+        },
+        "stdin_sha256": null
+      },
+      {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-m",
+          "company_wiki.source_catalog.narrative_transport_cli",
+          "--help"
+        ],
+        "started_at": "2026-10-09T06:02:09.911361Z",
+        "finished_at": "2026-10-09T06:02:10.760045Z",
+        "elapsed_seconds": 0.849,
+        "exit_code": 0,
+        "outer_timeout": false,
+        "stdout": {
+          "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\logs\\help-3-01.stdout",
+          "sha256": "7dca76cf0e91f3e3385fc9f01b0a33d0364e3051c89c75f1bb4e613ef6cb7c22",
+          "byte_size": 873,
+          "mtime_ns": 1791525730698444000
+        },
+        "stderr": {
+          "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\logs\\help-3-01.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "byte_size": 0,
+          "mtime_ns": 1791525729899170200
+        },
+        "stdin_sha256": null
+      }
+    ],
+    "contract_checks": [
+      "catalog-owned-root",
+      "official-source-metadata-and-local-capture",
+      "batch-first",
+      "batch-reuse",
+      "existing-bundle",
+      "reference-request",
+      "read-request"
+    ],
+    "vendor_requests": 0,
+    "deck_normalizations": 0,
+    "ocr_inferences": 0,
+    "existing_fixture_is_not_a_live_import_or_http_receipt": true
+  },
+  "status": "ENGINEERING_COMPOSITION_PASS",
+  "results": {
+    "first": {
+      "batch_receipt": {
+        "budget": {
+          "estimated_micro_usd": 8934,
+          "tokens": 7508,
+          "unknown_reservations": 0,
+          "unsettled_reservations": 0
+        },
+        "documents": [
+          {
+            "artifact_ref": {
+              "artifact_version_id": "narrative-aa0621684549483ea78e1a8d8f6df508",
+              "byte_size": 48804,
+              "content_sha256": "54d429e4c9e2b99d49d39b1b250c0c67599eedffd5eda58d96c3bc7665f6f66d",
+              "document_id": "urn:company-wiki:document:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+              "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+              "source_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4"
+            },
+            "document_id": "urn:company-wiki:document:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+            "errors": [],
+            "status": "completed"
+          }
+        ],
+        "run_id": "mocr-20261009T060207-905b13f6-first",
+        "schema_version": "narrative-batch-result/1",
+        "status": "completed",
+        "storage": {
+          "persistent_added_bytes": 380870,
+          "scratch_peak_bytes": 48804
+        }
+      },
+      "narrative_ref": {
+        "artifact_sha256": "54d429e4c9e2b99d49d39b1b250c0c67599eedffd5eda58d96c3bc7665f6f66d",
+        "artifact_version_id": "narrative-aa0621684549483ea78e1a8d8f6df508",
+        "byte_size": 48804,
+        "schema_version": "narrative-ref/1",
+        "source_ref": {
+          "byte_size": 4016522,
+          "content_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+          "document_id": "urn:company-wiki:document:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+          "mime_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+          "schema_version": "2.0",
+          "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4"
+        }
+      },
+      "read_receipt": {
+        "as_of_date": null,
+        "locator_count": 15,
+        "manifest": {
+          "byte_size": 4016522,
+          "canonical_entity_id": null,
+          "collector_name": "official-original-import",
+          "collector_version": "1.0.0",
+          "content_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+          "display_name": "Microsoft",
+          "document_id": "urn:company-wiki:document:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+          "document_kind": "investor_relations",
+          "fiscal_period": null,
+          "fiscal_year": null,
+          "form_type": null,
+          "language": null,
+          "market": "US",
+          "mime_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+          "period_end": null,
+          "provider": "official",
+          "provider_document_id": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+          "published_date": "2026-09-02",
+          "retrieved_at": "2026-10-09T06:02:10Z",
+          "security_id": "MSFT",
+          "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+          "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/FY27ExternalKPIs.pptx",
+          "title": "FY27 Segments and Investor Metrics"
+        },
+        "narrative_ref": {
+          "artifact_sha256": "54d429e4c9e2b99d49d39b1b250c0c67599eedffd5eda58d96c3bc7665f6f66d",
+          "artifact_version_id": "narrative-aa0621684549483ea78e1a8d8f6df508",
+          "byte_size": 48804,
+          "schema_version": "narrative-ref/1",
+          "source_ref": {
+            "byte_size": 4016522,
+            "content_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+            "document_id": "urn:company-wiki:document:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+            "mime_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4"
+          }
+        },
+        "quality_status": "needs_review",
+        "read_at": "2026-10-09T06:06:16.397672+00:00",
+        "replay_status": "verified",
+        "schema_version": "narrative-read-receipt/1",
+        "selection_status": "partial",
+        "source_read_policy_sha256": "3201acfd986445e0a7788d3df658d59d8c9070ee8bd44deae937a6c6ce6944d9",
+        "status": "ok"
+      },
+      "ledger": {
+        "status": "read",
+        "run_id": "mocr-20261009T060207-905b13f6-first",
+        "state": "open",
+        "block_reason": null,
+        "input_hash": "2ea1d3e1b9fa53f1a945741e8fa2eafa76efee3913c380f601fdc05be278d736",
+        "model_id": "deepseek-flash",
+        "execution_versions": {
+          "adapter": "openai-compatible-http/1",
+          "document_normalization": "1.0.0",
+          "handlers": {
+            "source.narrative_select": "1.1.0",
+            "source.narrative_summarize": "1.1.0",
+            "source.narrative_verify": "1.1.0"
+          },
+          "model_request_schema": "narrative-model-request/1.3",
+          "parser": "0.1.1",
+          "prompt": "1.6.0",
+          "selector": "0.5.0"
+        },
+        "max_tokens": 30000,
+        "max_micro_usd": 100000,
+        "pricing_version": "main-ocr-r3-conservative/1",
+        "budget": {
+          "run_id": "mocr-20261009T060207-905b13f6-first",
+          "charged_tokens": 7508,
+          "charged_micro_usd": 8934,
+          "charged_output_bytes": 48804,
+          "unknown_reservations": 0,
+          "unsettled_reservations": 0
+        },
+        "reservations": [
+          {
+            "attempt_id": "d9ee701e7a404d2bb7df4dc194becc5e",
+            "run_id": "mocr-20261009T060207-905b13f6-first",
+            "job_id": "215137e2ea96c6b5",
+            "request_sha256": "0a6de5a7ab9227ba13261271e31df725e8787038a796ed3fd080816a3ead54cb",
+            "input_tokens_bound": 4892,
+            "max_output_tokens": 8192,
+            "output_bytes_bound": 2097152,
+            "reserved_micro_usd": 12554,
+            "usage_status": "known",
+            "input_tokens": 1077,
+            "output_tokens": 6431,
+            "estimated_micro_usd": 8934,
+            "response_sha256": "5dba6e735e34b238ef0c72fb8ab544306952aed21a852af18731ca6c95244e2d",
+            "error_code": null,
+            "output_bytes": 48804,
+            "output_sha256": "54d429e4c9e2b99d49d39b1b250c0c67599eedffd5eda58d96c3bc7665f6f66d",
+            "reserved_at": "2026-10-09T06:05:31Z",
+            "usage_settled_at": "2026-10-09T06:05:57Z",
+            "output_settled_at": "2026-10-09T06:06:14Z"
+          }
+        ],
+        "jobs": [
+          {
+            "job_id": "215137e2ea96c6b5",
+            "status": "succeeded"
+          },
+          {
+            "job_id": "841260f1904ab052",
+            "status": "succeeded"
+          },
+          {
+            "job_id": "d5d8e6939e1c6904",
+            "status": "succeeded"
+          }
+        ],
+        "active_attempts": 0,
+        "terminal": true
+      },
+      "bundle_identity": {
+        "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\logs\\read-first-01.stdout",
+        "sha256": "54d429e4c9e2b99d49d39b1b250c0c67599eedffd5eda58d96c3bc7665f6f66d",
+        "byte_size": 48804,
+        "mtime_ns": 1791526000159312700
+      },
+      "selection": {
+        "candidate_count": 16,
+        "coverage_complete": false,
+        "dropped_financial_count": 0,
+        "lines_total": 1067,
+        "omitted_candidate_count": 1,
+        "pages_read": 22,
+        "pages_total": 22,
+        "selected_count": 15,
+        "source_units": 1064,
+        "status": "partial",
+        "tables_scanned": 0,
+        "tables_total": 0
+      },
+      "quality_status": "needs_review",
+      "versions": {
+        "bundle_producer": "1.0.0",
+        "material": null,
+        "model": "deepseek-flash",
+        "parser": "2.0.0",
+        "prompt": "1.6.0",
+        "selector": "0.5.0"
+      },
+      "span_count": 15,
+      "span_pages": [
+        7,
+        18
+      ]
+    },
+    "reuse": {
+      "batch_receipt": {
+        "budget": {
+          "estimated_micro_usd": 0,
+          "tokens": 0,
+          "unknown_reservations": 0,
+          "unsettled_reservations": 0
+        },
+        "documents": [
+          {
+            "artifact_ref": {
+              "artifact_version_id": "narrative-aa0621684549483ea78e1a8d8f6df508",
+              "byte_size": 48804,
+              "content_sha256": "54d429e4c9e2b99d49d39b1b250c0c67599eedffd5eda58d96c3bc7665f6f66d",
+              "document_id": "urn:company-wiki:document:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+              "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+              "source_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4"
+            },
+            "document_id": "urn:company-wiki:document:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+            "errors": [],
+            "generation_status": "reused",
+            "status": "completed"
+          }
+        ],
+        "run_id": "mocr-20261009T060207-905b13f6-reuse",
+        "schema_version": "narrative-batch-result/1",
+        "status": "completed",
+        "storage": {
+          "persistent_added_bytes": 200830,
+          "scratch_peak_bytes": 0
+        }
+      },
+      "narrative_ref": {
+        "artifact_sha256": "54d429e4c9e2b99d49d39b1b250c0c67599eedffd5eda58d96c3bc7665f6f66d",
+        "artifact_version_id": "narrative-aa0621684549483ea78e1a8d8f6df508",
+        "byte_size": 48804,
+        "schema_version": "narrative-ref/1",
+        "source_ref": {
+          "byte_size": 4016522,
+          "content_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+          "document_id": "urn:company-wiki:document:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+          "mime_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+          "schema_version": "2.0",
+          "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4"
+        }
+      },
+      "read_receipt": {
+        "as_of_date": null,
+        "locator_count": 15,
+        "manifest": {
+          "byte_size": 4016522,
+          "canonical_entity_id": null,
+          "collector_name": "official-original-import",
+          "collector_version": "1.0.0",
+          "content_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+          "display_name": "Microsoft",
+          "document_id": "urn:company-wiki:document:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+          "document_kind": "investor_relations",
+          "fiscal_period": null,
+          "fiscal_year": null,
+          "form_type": null,
+          "language": null,
+          "market": "US",
+          "mime_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+          "period_end": null,
+          "provider": "official",
+          "provider_document_id": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+          "published_date": "2026-09-02",
+          "retrieved_at": "2026-10-09T06:02:10Z",
+          "security_id": "MSFT",
+          "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+          "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/FY27ExternalKPIs.pptx",
+          "title": "FY27 Segments and Investor Metrics"
+        },
+        "narrative_ref": {
+          "artifact_sha256": "54d429e4c9e2b99d49d39b1b250c0c67599eedffd5eda58d96c3bc7665f6f66d",
+          "artifact_version_id": "narrative-aa0621684549483ea78e1a8d8f6df508",
+          "byte_size": 48804,
+          "schema_version": "narrative-ref/1",
+          "source_ref": {
+            "byte_size": 4016522,
+            "content_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+            "document_id": "urn:company-wiki:document:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+            "mime_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4"
+          }
+        },
+        "quality_status": "needs_review",
+        "read_at": "2026-10-09T06:07:28.231639+00:00",
+        "replay_status": "verified",
+        "schema_version": "narrative-read-receipt/1",
+        "selection_status": "partial",
+        "source_read_policy_sha256": "3201acfd986445e0a7788d3df658d59d8c9070ee8bd44deae937a6c6ce6944d9",
+        "status": "ok"
+      },
+      "ledger": {
+        "status": "read",
+        "run_id": "mocr-20261009T060207-905b13f6-reuse",
+        "state": "open",
+        "block_reason": null,
+        "input_hash": "19c56c04b0adb84347ed06b99a074edfc2cd80f2f8ca781e22c938b4264bc2f8",
+        "model_id": "deepseek-flash",
+        "execution_versions": {
+          "adapter": "openai-compatible-http/1",
+          "document_normalization": "1.0.0",
+          "handlers": {
+            "source.narrative_select": "1.1.0",
+            "source.narrative_summarize": "1.1.0",
+            "source.narrative_verify": "1.1.0"
+          },
+          "model_request_schema": "narrative-model-request/1.3",
+          "parser": "0.1.1",
+          "prompt": "1.6.0",
+          "selector": "0.5.0"
+        },
+        "max_tokens": 1,
+        "max_micro_usd": 0,
+        "pricing_version": "main-ocr-r3-conservative/1",
+        "budget": {
+          "run_id": "mocr-20261009T060207-905b13f6-reuse",
+          "charged_tokens": 0,
+          "charged_micro_usd": 0,
+          "charged_output_bytes": 0,
+          "unknown_reservations": 0,
+          "unsettled_reservations": 0
+        },
+        "reservations": [],
+        "jobs": [],
+        "active_attempts": 0,
+        "terminal": true
+      },
+      "bundle_identity": {
+        "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\logs\\read-reuse-01.stdout",
+        "sha256": "54d429e4c9e2b99d49d39b1b250c0c67599eedffd5eda58d96c3bc7665f6f66d",
+        "byte_size": 48804,
+        "mtime_ns": 1791526071242507000
+      },
+      "selection": {
+        "candidate_count": 16,
+        "coverage_complete": false,
+        "dropped_financial_count": 0,
+        "lines_total": 1067,
+        "omitted_candidate_count": 1,
+        "pages_read": 22,
+        "pages_total": 22,
+        "selected_count": 15,
+        "source_units": 1064,
+        "status": "partial",
+        "tables_scanned": 0,
+        "tables_total": 0
+      },
+      "quality_status": "needs_review",
+      "versions": {
+        "bundle_producer": "1.0.0",
+        "material": null,
+        "model": "deepseek-flash",
+        "parser": "2.0.0",
+        "prompt": "1.6.0",
+        "selector": "0.5.0"
+      },
+      "span_count": 15,
+      "span_pages": [
+        7,
+        18
+      ]
+    }
+  },
+  "cumulative_accounting": {
+    "tokens": 207042,
+    "estimated_micro_usd": 119671,
+    "historical_unknown_reservations": 7,
+    "new_unknown_reservations": 0,
+    "fx_guard_micro_usd": 2764,
+    "native_historical_counted_again": false
+  },
+  "source_download_events": 0,
+  "second_run_provider_admissions": 0,
+  "second_run_new_posts": 0,
+  "second_run_zero_post_evidence": "native_exact_pin_reused_and_zero_reservations",
+  "first_run_http_post_count": null,
+  "first_run_http_post_count_note": "AUTO reservations and usage are recorded; no invented HTTP observer receipt.",
+  "product_or_investment_acceptance": "NOT_PERFORMED",
+  "finished_at": "2026-10-09T06:07:51.509403Z",
+  "protected_after": {
+    "config.yaml": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml",
+      "sha256": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+      "byte_size": 3602,
+      "mtime_ns": 1791230922098841600
+    },
+    "config/source_catalog.yaml": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "byte_size": 866,
+      "mtime_ns": 1790542565101886700
+    },
+    "config/local_ocr.json": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\local_ocr.json",
+      "sha256": "9b8a7df81ca62ebc4bb9c2d60d45c247b291564a4a38f5648e5f4b3edb59889b",
+      "byte_size": 943,
+      "mtime_ns": 1791519643945418900
+    },
+    ".env": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.env",
+      "sha256": "8d24dc08b82b41fd7f1c24e0b6f3fb65b0202ee0a38c52a6955f21e0a097c853",
+      "byte_size": 1137,
+      "mtime_ns": 1784406996168687800
+    },
+    "docs/plans/cross-market-rf-e2e-2026-10-08/task_plan.md": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\task_plan.md",
+      "sha256": "075f9a1bb36f1040af8dce11ceaccb8150876e745d2154a8f456a36282c29932",
+      "byte_size": 25210,
+      "mtime_ns": 1791525544825740100
+    },
+    "docs/plans/cross-market-rf-e2e-2026-10-08/findings.md": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\findings.md",
+      "sha256": "774589fb63c5b81e66373499d0a52e1860fe01ffdac8b68bc981b305f3781674",
+      "byte_size": 47691,
+      "mtime_ns": 1791525544838068300
+    },
+    "docs/plans/cross-market-rf-e2e-2026-10-08/progress.md": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\progress.md",
+      "sha256": "69ea520343462fbefeb2c313e603d6b44cf4c609f82528fb8650da64b0f177c2",
+      "byte_size": 70228,
+      "mtime_ns": 1791525544862072800
+    },
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_budget_preparation.json": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_budget_preparation.json",
+      "sha256": "9f3310064333178a97a2fbb318883642694376ad4a8ef0312a9338934bc27782",
+      "byte_size": 1278,
+      "mtime_ns": 1791519643987202800
+    }
+  },
+  "protected_unchanged": true,
+  "preparation": {
+    "schema_version": "main-ocr-major-node/1",
+    "attempt_id": "mocr-20261009T060207-905b13f6",
+    "created_at": "2026-10-09T06:02:08.129505Z",
+    "owned_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f",
+    "project_root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "source": {
+      "archive_index": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\delivery_archive_index.json",
+        "sha256": "60c0c8dfd901bfbd8c8dc8604ade1589b6aca61f98afab227ba584c69045f89a",
+        "byte_size": 144427,
+        "mtime_ns": 1791450581148860600
+      },
+      "original": {
+        "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\c0\\c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "byte_size": 4016522,
+        "mtime_ns": 1791450580109140500
+      },
+      "filename": "fy2027_segments_metrics.pptx",
+      "title": "FY27 Segments and Investor Metrics",
+      "url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/FY27ExternalKPIs.pptx",
+      "published_date": "2026-09-02",
+      "entity": "Microsoft",
+      "market": "US",
+      "security_id": "MSFT"
+    },
+    "budget_baseline": {
+      "schema_version": "main-cumulative-budget-preparation/1",
+      "checked_at": "2026-10-09T04:20:43.987522+00:00",
+      "historical_receipt": "docs/plans/narrative-evidence-pilot-2026-09-26/harness_lanes/results/r3_production_live_batch_2026-10-08.json",
+      "cumulative_tokens": 199534,
+      "cumulative_estimated_micro_usd": 110737,
+      "historical_unknown_reservations": 7,
+      "fx_guard_micro_usd": 2764,
+      "effective_cap_tokens": 2000000,
+      "effective_cap_micro_usd": 20000000,
+      "native_reservations_already_in_historical_total": [
+        {
+          "run_id": "r3-20261008-production-deepseek-01",
+          "usage_status": "known",
+          "input_tokens": 2431,
+          "output_tokens": 7068,
+          "estimated_micro_usd": 10235,
+          "input_tokens_bound": 11001,
+          "max_output_tokens": 8192,
+          "reserved_micro_usd": 14590,
+          "error_code": null
+        }
+      ],
+      "double_counted_native": false,
+      "new_supplier_calls_this_engineering_node": 0,
+      "remaining_tokens": 1800466,
+      "remaining_micro_usd_after_fx": 19886499,
+      "per_company_cap_tokens": 120000,
+      "per_company_cap_micro_usd": 2000000,
+      "six_company_max_allocated_tokens": 720000,
+      "six_company_max_allocated_micro_usd": 12000000,
+      "ocr_major_node_separate_cap_tokens": 30000,
+      "ocr_major_node_separate_cap_micro_usd": 100000
+    },
+    "budget_baseline_file": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_budget_preparation.json",
+      "sha256": "9f3310064333178a97a2fbb318883642694376ad4a8ef0312a9338934bc27782",
+      "byte_size": 1278,
+      "mtime_ns": 1791519643987202800
+    },
+    "historical_receipt": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\narrative-evidence-pilot-2026-09-26\\harness_lanes\\results\\r3_production_live_batch_2026-10-08.json",
+      "sha256": "56264ae987257798153dbcc8aa4ce9b6a122669038bf758a5312c3f2f6454f4f",
+      "byte_size": 1841,
+      "mtime_ns": 1791440246490717400
+    },
+    "ocr_identity": {
+      "schema_version": "cwp-local-ocr-config/1",
+      "adapter": "rapidocr-cpu/1",
+      "engine_version": "3.8.1",
+      "runtime_version": "1.26.0",
+      "base_config_sha256": "e753d39c0222297f0180e1bdcde1799bc26218f315356763362810846b6afa84",
+      "models": {
+        "det": "d2a7720d45a54257208b1e13e36a8479894cb74155a5efe29462512d42f49da9",
+        "cls": "e47acedf663230f8863ff1ab0e64dd2d82b838fceb5957146dab185a89d6215c",
+        "rec": "48fc40f24f6d2a207a2b1091d3437eb3cc3eb6b676dc3ef9c37384005483683b"
+      },
+      "device": "cpu",
+      "text_score": 0.5,
+      "low_confidence_threshold": 0.8,
+      "max_side_len": 3000,
+      "intra_op_threads": 2,
+      "inter_op_threads": 1,
+      "box_round_decimals": 3,
+      "confidence_round_decimals": 6,
+      "reading_order": "top-left-box/1",
+      "transform": "rapidocr-image-rgb/1"
+    },
+    "ocr_fingerprint": "7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d",
+    "ocr_resources": {
+      "det": {
+        "path": "C:\\Miniconda\\Lib\\site-packages\\rapidocr\\models\\ch_PP-OCRv4_det_mobile.onnx",
+        "sha256": "d2a7720d45a54257208b1e13e36a8479894cb74155a5efe29462512d42f49da9",
+        "byte_size": 4745517,
+        "mtime_ns": 1780351615923907200
+      },
+      "cls": {
+        "path": "C:\\Miniconda\\Lib\\site-packages\\rapidocr\\models\\ch_ppocr_mobile_v2.0_cls_mobile.onnx",
+        "sha256": "e47acedf663230f8863ff1ab0e64dd2d82b838fceb5957146dab185a89d6215c",
+        "byte_size": 585532,
+        "mtime_ns": 1780351617143699400
+      },
+      "rec": {
+        "path": "C:\\Miniconda\\Lib\\site-packages\\rapidocr\\models\\ch_PP-OCRv4_rec_mobile.onnx",
+        "sha256": "48fc40f24f6d2a207a2b1091d3437eb3cc3eb6b676dc3ef9c37384005483683b",
+        "byte_size": 10857958,
+        "mtime_ns": 1780351623755661400
+      }
+    },
+    "model": {
+      "model_id": "deepseek-flash",
+      "endpoint": "https://api.deepseek.com/chat/completions",
+      "api_key_env": "DEEPSEEK_API_KEY",
+      "max_output_tokens": 8192,
+      "temperature": 1.0,
+      "output_token_field": "max_tokens"
+    },
+    "run_ids": {
+      "first": "mocr-20261009T060207-905b13f6-first",
+      "reuse": "mocr-20261009T060207-905b13f6-reuse"
+    },
+    "config_hashes": {
+      "config\\local_ocr.json": {
+        "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\config\\local_ocr.json",
+        "sha256": "3ef4d36adff892e66115271a15e3e73dd20a530af615e24d80cdb35f4cf20105",
+        "byte_size": 968,
+        "mtime_ns": 1791525728094429400
+      },
+      "config\\source_catalog.yaml": {
+        "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\config\\source_catalog.yaml",
+        "sha256": "c9d1797b45035bfc1df107dff08587bc45e0c6804d81e3ccccd915807c1604b8",
+        "byte_size": 371,
+        "mtime_ns": 1791525728095430700
+      },
+      "config.yaml": {
+        "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\config.yaml",
+        "sha256": "626197b5d15d6f7be82f84c283ce33e2992a8aedf6760f70a65e18a0949482d1",
+        "byte_size": 386,
+        "mtime_ns": 1791525728096430900
+      }
+    },
+    "repair_parent": {
+      "parent_attempt_id": "mocr-20261009T045902-933be853",
+      "parent_input_hash": "7ed75daab656b24663959524e1458bfe03a6e32e085c5153be3bcb776726cea7",
+      "source_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "previous_execution_versions": {
+        "adapter": "openai-compatible-http/1",
+        "document_normalization": "1.0.0",
+        "handlers": {
+          "source.narrative_select": "1.1.0",
+          "source.narrative_summarize": "1.1.0",
+          "source.narrative_verify": "1.1.0"
+        },
+        "model_request_schema": "narrative-model-request/1.3",
+        "parser": "0.1.1",
+        "prompt": "1.6.0",
+        "selector": "0.4.2"
+      },
+      "current_execution_versions": {
+        "adapter": "openai-compatible-http/1",
+        "model_request_schema": "narrative-model-request/1.3",
+        "prompt": "1.6.0",
+        "parser": "0.1.1",
+        "selector": "0.5.0",
+        "document_normalization": "1.0.0"
+      },
+      "parent_added_tokens": 0,
+      "parent_added_micro_usd": 0,
+      "budget_baseline": {
+        "schema_version": "main-cumulative-budget-preparation/1",
+        "checked_at": "2026-10-09T04:20:43.987522+00:00",
+        "historical_receipt": "docs/plans/narrative-evidence-pilot-2026-09-26/harness_lanes/results/r3_production_live_batch_2026-10-08.json",
+        "cumulative_tokens": 199534,
+        "cumulative_estimated_micro_usd": 110737,
+        "historical_unknown_reservations": 7,
+        "fx_guard_micro_usd": 2764,
+        "effective_cap_tokens": 2000000,
+        "effective_cap_micro_usd": 20000000,
+        "native_reservations_already_in_historical_total": [
+          {
+            "run_id": "r3-20261008-production-deepseek-01",
+            "usage_status": "known",
+            "input_tokens": 2431,
+            "output_tokens": 7068,
+            "estimated_micro_usd": 10235,
+            "input_tokens_bound": 11001,
+            "max_output_tokens": 8192,
+            "reserved_micro_usd": 14590,
+            "error_code": null
+          }
+        ],
+        "double_counted_native": false,
+        "new_supplier_calls_this_engineering_node": 0,
+        "remaining_tokens": 1800466,
+        "remaining_micro_usd_after_fx": 19886499,
+        "per_company_cap_tokens": 120000,
+        "per_company_cap_micro_usd": 2000000,
+        "six_company_max_allocated_tokens": 720000,
+        "six_company_max_allocated_micro_usd": 12000000,
+        "ocr_major_node_separate_cap_tokens": 30000,
+        "ocr_major_node_separate_cap_micro_usd": 100000
+      },
+      "receipt": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\ocr_major_node\\runs\\mocr-20261009T045902-933be853\\acceptance.json",
+        "sha256": "a4c3541fac29d48a8cf57bad6746cb4d4bb154a627e28ec23ff3a91bcf679377",
+        "byte_size": 18866,
+        "mtime_ns": 1791522084278619700
+      },
+      "ledgers": {
+        "first": {
+          "status": "read",
+          "run_id": "mocr-20261009T045902-933be853-first",
+          "state": "open",
+          "block_reason": null,
+          "input_hash": "7ed75daab656b24663959524e1458bfe03a6e32e085c5153be3bcb776726cea7",
+          "model_id": "deepseek-flash",
+          "execution_versions": {
+            "adapter": "openai-compatible-http/1",
+            "document_normalization": "1.0.0",
+            "handlers": {
+              "source.narrative_select": "1.1.0",
+              "source.narrative_summarize": "1.1.0",
+              "source.narrative_verify": "1.1.0"
+            },
+            "model_request_schema": "narrative-model-request/1.3",
+            "parser": "0.1.1",
+            "prompt": "1.6.0",
+            "selector": "0.4.2"
+          },
+          "max_tokens": 30000,
+          "max_micro_usd": 100000,
+          "pricing_version": "main-ocr-r3-conservative/1",
+          "budget": {
+            "run_id": "mocr-20261009T045902-933be853-first",
+            "charged_tokens": 0,
+            "charged_micro_usd": 0,
+            "charged_output_bytes": 0,
+            "unknown_reservations": 0,
+            "unsettled_reservations": 0
+          },
+          "reservations": [],
+          "jobs": [
+            {
+              "job_id": "7238c7d1f57f1af3",
+              "status": "dead_letter"
+            },
+            {
+              "job_id": "8e61291e26a33151",
+              "status": "dead_letter"
+            },
+            {
+              "job_id": "d68f89c265eb2007",
+              "status": "dead_letter"
+            }
+          ],
+          "active_attempts": 0,
+          "terminal": true
+        },
+        "reuse": {
+          "status": "not_created",
+          "budget": null,
+          "reservations": null,
+          "terminal": false
+        }
+      }
+    }
+  },
+  "original_after": {
+    "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\c0\\c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+    "sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+    "byte_size": 4016522,
+    "mtime_ns": 1791450580109140500
+  },
+  "original_unchanged": true,
+  "origin_owned_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f",
+  "recovery_command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\ocr_major_node\\run_acceptance.py",
+    "resume",
+    "--owned-root",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f"
+  ],
+  "owned_input_observation": {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\raw-input\\fy2027_segments_metrics.pptx",
+    "sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+    "byte_size": 4016522,
+    "mtime_ns": 1791450580109140500
+  }
+}

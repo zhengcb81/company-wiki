@@ -1,0 +1,41 @@
+{
+  "schema_version": "fresh-executor-receipt-timestamp-verification/1",
+  "status": "PURE_DECODE_PASS_PRIOR_DIAGNOSIS_CORRECTED",
+  "original_durable_acceptance_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\ocr_major_node\\runs\\mocr-20261009T060207-905b13f6\\acceptance.json",
+  "original_durable_acceptance_bytes_sha256": "6fa609e9005ee4e2918cda4dc301f891a76cfe5b5496e64abd4438aeaba764ab",
+  "original_durable_acceptance_bytes": 43383,
+  "original_durable_acceptance_unchanged": true,
+  "transport_stderr_original_bytes_reloaded": false,
+  "scope": "Original durable acceptance container and nested receipt strings; no transport/business/source/OCR/model read performed",
+  "receipts": [
+    {
+      "json_pointer": "/results/first/read_receipt/read_at",
+      "actual_value": "2026-10-09T06:06:16.397672+00:00",
+      "original_json_value_type": "str",
+      "consumer_decode_pass": true,
+      "consumer_narrative_utc_pass": true,
+      "source_clock_utc_pass": true,
+      "roundtrip_wire_sha256": "7c67adac75037528a8d9704e4d750d5cc8af8a77c30f5f7e8a2cbd334b53c823",
+      "roundtrip_wire_is_original_transport_bytes": false
+    },
+    {
+      "json_pointer": "/results/reuse/read_receipt/read_at",
+      "actual_value": "2026-10-09T06:07:28.231639+00:00",
+      "original_json_value_type": "str",
+      "consumer_decode_pass": true,
+      "consumer_narrative_utc_pass": true,
+      "source_clock_utc_pass": true,
+      "roundtrip_wire_sha256": "058538d23afb25e7c3e6a508190c05f26fb57aa751a7222d90d7f11df92fd63b",
+      "roundtrip_wire_is_original_transport_bytes": false
+    }
+  ],
+  "withdrawn_diagnosis": {
+    "claimed_value": "2026-10-09T07:06:16.397672+01:00",
+    "cause": "PowerShell ConvertFrom-Json default parsed the ISO string as System.DateTime Local, then ConvertTo-Json emitted local timezone; not original receipt bytes/string",
+    "observed_powershell_type": "System.DateTime",
+    "observed_powershell_kind": "Local",
+    "producer_gap_proven": false,
+    "producer_change_recommended": false,
+    "business_consumption_pass_claimed": false
+  }
+}

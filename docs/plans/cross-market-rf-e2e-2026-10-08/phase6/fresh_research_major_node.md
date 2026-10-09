@@ -35,7 +35,7 @@
 
 ## 配置、预算与恢复
 
-只使用 `scripts/narrative_batch_configured.py` 读取实际Config，明确支持的provider选择；读当前配置的模型/endpoint/生成参数和价格，不从记忆改MiMo/DeepSeek/MiniMax。工程本机OCR不计supplier POST。每次付费前实读既有AUTO及保存的历史收据，历史199534tokens/110737microUSD、unknown7、FX guard2764尚须核对，生产r3的9499tokens/10235microUSD已在前值内，不能重复加减。累计上限仍USD20/2M，不新建费用数据库。
+只使用 `scripts/narrative_batch_configured.py` 读取实际Config，明确支持的provider选择；读当前配置的模型/endpoint/生成参数和价格，不从记忆改MiMo/DeepSeek/MiniMax。工程本机OCR不计supplier POST。沿用本活动既有永久资料外发/配置供应商授权，不逐材料/供应商/小步骤再要人签。付费前使用当前AUTO及`main_budget_preparation.json`：2026-10-09真实OCR节点后累计207042tokens/119671microUSD，历史unknown7、FX guard2764保留；原生产r3和新OCR均各计一次。实际变化后以真实账更新，不能清零/重复加减。累计上限仍USD20/2M，不新建费用数据库或授权许可证。
 
 三公司并发时MAIN先分配加总不超过剩余额度的单轮上限；单公司默认最多120000tokens/USD2且遵守更低配置界限，未知收费不自动重试。原三家和新三家共六轮的上限可容纳于当前已知余量，但实际旧账/unknown有变化时以实读为准。只有原工具的known receipt能结算，失联保留unknown并恢复原run，不能重开run绕账。
 

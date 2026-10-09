@@ -227,18 +227,16 @@ def test_fc701_pending_proposal_is_diagnostic_when_source_bytes_and_identity_mat
            JOIN locations l ON l.document_id = d.document_id
            JOIN sources s ON s.source_id = l.source_id
            WHERE s.content_sha256 = ? LIMIT 1""", (digest,))
-    from company_wiki.source_catalog.remediation import create_proposal
-
-    create_proposal(
-        catalog.store,
-        source_id=row["primary_source_id"],
-        document_id=row["document_id"],
-        content_sha256=digest,
-        field_evidence={"security_id": {"origin": "pdf-text", "source_pointer": "p1"}},
-        proposed_fields={"security_id": "601899"},
-        policy_hash=hashlib.sha256(b"fc701-policy").hexdigest(),
-        proposed_by="fc701-test",
-    )
+    # Existing historical rows remain diagnostic after the writer retires.
+    # Seed that history directly; never revive proposal/approval to set up a test.
+    with catalog.store.transaction() as conn:
+        conn.execute(
+            "INSERT INTO remediation_proposals (proposal_id,source_id,document_id,"
+            "content_sha256,proposal_json,policy_hash,proposed_by,created_at,status) "
+            "VALUES (?,?,?,?,?,?,?,?,?)",
+            ("c" * 32, row["primary_source_id"], row["document_id"], digest,
+             "{}", "historical-policy", "historical-actor", "2026-08-10", "proposed"),
+        )
     result = _resolve(catalog, ident)
     assert result.status is ResolutionStatus.REUSED_EXACT
     assert not any("remediation" in t for t in result.debug_trace)

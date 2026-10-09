@@ -1,0 +1,92 @@
+{
+  "root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT",
+  "files": [
+    {
+      "relative_path": "catalog/catalog.sqlite3",
+      "byte_size": 262144,
+      "sha256": "f152cf6a4c078fd38832665d689b6053577758ba4749209122dc39eff20685cf"
+    },
+    {
+      "relative_path": "catalog/catalog.sqlite3-shm",
+      "byte_size": 32768,
+      "sha256": "dbf41174c6780589b6726a249eea91a9d0489bdfaa1bd575f6e2e5d23864b76d"
+    },
+    {
+      "relative_path": "catalog/catalog.sqlite3-wal",
+      "byte_size": 1227792,
+      "sha256": "35d3110314249020fe3d50bf2f3d04ddd9987d6732a831b1beb5072901503f5c"
+    },
+    {
+      "relative_path": "catalog/operation.lock.acquire",
+      "byte_size": 1,
+      "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+    },
+    {
+      "relative_path": "catalog/security_master/us.json",
+      "byte_size": 731,
+      "sha256": "12e0896eb1dc6b6bab1a508870a2cdb4f827a77bd44cfefb6e3cf1a8bf4d747a"
+    },
+    {
+      "relative_path": "companies/MICROSOFT CORP/raw/investor_relations/transcripts/unknown-date_official_bdc90bf78dbf55ec.html",
+      "byte_size": 273436,
+      "sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656"
+    },
+    {
+      "relative_path": "companies/MICROSOFT CORP/raw/investor_relations/transcripts/unknown-date_official_bdc90bf78dbf55ec.html.source.json",
+      "byte_size": 2570,
+      "sha256": "46bdcdc43e9f47f0f06b8648a26e38595bd795a4e88549d1aab014074073fb79"
+    },
+    {
+      "relative_path": "companies/MICROSOFT CORP/raw/investor_relations/unknown-date_official_8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e_results official communication.html",
+      "byte_size": 808850,
+      "sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e"
+    },
+    {
+      "relative_path": "companies/MICROSOFT CORP/raw/investor_relations/unknown-date_official_8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e_results official communication.html.source.json",
+      "byte_size": 2572,
+      "sha256": "3b7ccc398ec9597ba2f14a63ebf1b4ad9b941e0b4bacebd2af862cdb4c14fd8e"
+    },
+    {
+      "relative_path": "companies/MICROSOFT CORP/raw/investor_relations/unknown-date_official_c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4_FY27 Segments and Investor Metrics.pptx",
+      "byte_size": 4016522,
+      "sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4"
+    },
+    {
+      "relative_path": "companies/MICROSOFT CORP/raw/investor_relations/unknown-date_official_c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4_FY27 Segments and Investor Metrics.pptx.source.json",
+      "byte_size": 2713,
+      "sha256": "7c6723406efd9e9aa1ab9af8b95cc3c859d733e50e6d8110a03fb11ee43ee46b"
+    },
+    {
+      "relative_path": "companies/MICROSOFT CORP/raw/investor_relations/unknown-date_official_cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6_metrics official communication.html",
+      "byte_size": 198175,
+      "sha256": "cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6"
+    },
+    {
+      "relative_path": "companies/MICROSOFT CORP/raw/investor_relations/unknown-date_official_cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6_metrics official communication.html.source.json",
+      "byte_size": 2544,
+      "sha256": "cd6279e9cd62998d88813c4db8603f783a7156d0909f23b1c7d891cfccc92502"
+    },
+    {
+      "relative_path": "config/filing_fetch_company_wiki.json",
+      "byte_size": 129,
+      "sha256": "fb05b3f62fde7de2b49492b6f203d51913d7d2f24e28fc7672bea6cd1b9fed03"
+    },
+    {
+      "relative_path": "config/local_ocr.json",
+      "byte_size": 943,
+      "sha256": "9b8a7df81ca62ebc4bb9c2d60d45c247b291564a4a38f5648e5f4b3edb59889b"
+    },
+    {
+      "relative_path": "config/source_acquisition.yaml",
+      "byte_size": 1786,
+      "sha256": "91bd6ba6b72268665dba7b7c35838e25f3402460472aed54086b4227ba35c5a1"
+    },
+    {
+      "relative_path": "config/source_catalog.yaml",
+      "byte_size": 789,
+      "sha256": "4d416de2dbc7ae3757bbf2aff0f5cb9ef575860ec9e49db82ee0281da8869f95"
+    }
+  ],
+  "total_bytes": 6834465,
+  "raw_hashes_reused_from_actual_preparation_inventory": true
+}

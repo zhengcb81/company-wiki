@@ -1,0 +1,9 @@
+usage: audit_run.py [-h] {init,event,capture,status,check} ...
+
+Persist audit records. Integrity checks never certify research quality.
+
+positional arguments:
+  {init,event,capture,status,check}
+
+options:
+  -h, --help            show this help message and exit

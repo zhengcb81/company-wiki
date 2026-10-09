@@ -1,0 +1,27 @@
+schema_version: '1.0'
+catalog_dir: C:\Users\郑曾波\AppData\Local\Temp\mFresh-me8cejn4\HK-00700\catalog
+reusable_root_kinds:
+- company_raw
+- directory
+- dayu_portfolio
+roots:
+- root_id: company_raw
+  kind: company_raw
+  path: C:\Users\郑曾波\AppData\Local\Temp\mFresh-me8cejn4\HK-00700\companies
+  priority: 10
+  read_only: false
+- root_id: existing_company_raw
+  kind: directory
+  path: C:\Users\郑曾波\Projects\company-wiki\companies
+  priority: 110
+  read_only: true
+- root_id: existing_dayu_portfolio
+  kind: dayu_portfolio
+  path: C:\Users\郑曾波\Projects\dayu-agent\workspace\portfolio
+  priority: 120
+  read_only: true
+- root_id: existing_dropbox_stock
+  kind: directory
+  path: C:\Users\郑曾波\Dropbox\Stock
+  priority: 130
+  read_only: true

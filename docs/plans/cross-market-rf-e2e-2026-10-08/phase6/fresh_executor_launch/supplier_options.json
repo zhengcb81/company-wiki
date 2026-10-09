@@ -1,0 +1,72 @@
+{
+  "schema_version": "executor-supplier-preflight/1",
+  "config_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml",
+  "config_sha256": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+  "options": [
+    {
+      "selection": "default",
+      "selected_provider": "minimax",
+      "model_options": {
+        "model_id": "MiniMax-M3",
+        "endpoint": "https://api.minimaxi.com/v1/chat/completions",
+        "api_key_env": "MINIMAX_API_KEY",
+        "max_output_tokens": 8192,
+        "temperature": 1.0,
+        "output_token_field": "max_completion_tokens",
+        "reasoning_split": true
+      },
+      "credential_env_present": true,
+      "call_performed": false
+    },
+    {
+      "selection": "minimax",
+      "selected_provider": "minimax",
+      "model_options": {
+        "model_id": "MiniMax-M3",
+        "endpoint": "https://api.minimaxi.com/v1/chat/completions",
+        "api_key_env": "MINIMAX_API_KEY",
+        "max_output_tokens": 8192,
+        "temperature": 1.0,
+        "output_token_field": "max_completion_tokens",
+        "reasoning_split": true
+      },
+      "credential_env_present": true,
+      "call_performed": false
+    },
+    {
+      "selection": "mimo",
+      "selected_provider": "mimo",
+      "model_options": {
+        "model_id": "mimo-v2.6-flash",
+        "endpoint": "https://token-plan-cn.xiaomimimo.com/v1/chat/completions",
+        "api_key_env": "MIMO_API_KEY",
+        "max_output_tokens": 8192,
+        "temperature": 1.0,
+        "output_token_field": "max_completion_tokens"
+      },
+      "credential_env_present": true,
+      "call_performed": false
+    },
+    {
+      "selection": "deepseek",
+      "selected_provider": "deepseek",
+      "model_options": {
+        "model_id": "deepseek-flash",
+        "endpoint": "https://api.deepseek.com/chat/completions",
+        "api_key_env": "DEEPSEEK_API_KEY",
+        "max_output_tokens": 8192,
+        "temperature": 1.0,
+        "output_token_field": "max_tokens"
+      },
+      "credential_env_present": true,
+      "call_performed": false
+    },
+    {
+      "selection": "openai",
+      "status": "unavailable_configuration",
+      "exception_type": "ValueError",
+      "call_performed": false
+    }
+  ],
+  "provider_calls": 0
+}

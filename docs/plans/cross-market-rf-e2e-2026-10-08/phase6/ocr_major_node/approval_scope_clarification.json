@@ -1,0 +1,34 @@
+{
+  "schema_version": "main-ocr-approval-scope-clarification/1",
+  "time": "2026-10-09T06:03:48.883384+00:00",
+  "original_rejection": "reviewer interpreted earlier consent as not explicitly naming this PPTX for DeepSeek",
+  "same_action_reconsidered": true,
+  "public_evidence": [
+    "https://www.sec.gov/Archives/edgar/data/789019/000119312526380280/d291965d8k.htm",
+    "https://www.sec.gov/Archives/edgar/data/789019/000119312526380280/d291965dex991.htm"
+  ],
+  "authorization_basis": [
+    "existing user permanent consent",
+    "all public/private allowed external by user",
+    "authorized actual RF E2E research and current cumulative budget"
+  ],
+  "actual_payload": "only bounded source-selector business excerpts; PPTX and full OCR corpus stay local",
+  "destination": "configured DeepSeek https://api.deepseek.com model deepseek-flash",
+  "node_cap_tokens": 30000,
+  "node_cap_micro_usd": 100000,
+  "outcome": "AUTO_REVIEW_APPROVED_SAME_COMMAND",
+  "live_session": 93469,
+  "new_project_permission_or_receipt": false,
+  "question_no_longer_required": true,
+  "terminal_native_usage": {
+    "receipt": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/ocr_major_node/runs/mocr-20261009T060207-905b13f6/acceptance.json",
+    "status": "ENGINEERING_COMPOSITION_PASS",
+    "first_tokens": 7508,
+    "first_micro_usd": 8934,
+    "reuse_tokens": 0,
+    "reuse_micro_usd": 0,
+    "new_unknown": 0,
+    "unsettled": 0
+  },
+  "current_user_direction": "Remove redundant project approvals; preserve existing authorization, configured providers and budget; platform enforcement is external and remains active."
+}

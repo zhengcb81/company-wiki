@@ -1,0 +1,159 @@
+{
+  "schema_version": "no-ocr-fixture-diagnosis/1",
+  "head": "8479b8ad1eae5031ca6d01d5e540824cafa4a60f",
+  "original_report_sha256": "38a15df00e1f3b16469279731495a64617b5db772fb8d4fec7c2b916306b14e5",
+  "actual_check": {
+    "case": "US-MSFT",
+    "id": "format_pptx",
+    "status": "FAIL",
+    "detail": "actual finite Worker outcome: partial; reason=None; document_errors=[[]]"
+  },
+  "actual_pytest_command": {
+    "index": 26,
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\e2e\\test_cross_market_rf_pipeline.py",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-s6dvu716\\pytest",
+      "--junitxml",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-s6dvu716\\worker.xml",
+      "-o",
+      "junit_family=legacy"
+    ],
+    "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "seconds": 107.645,
+    "returncode": 1,
+    "stdout_sha256": "5de5c75247b09be356fbf22f04a412c18c6aa17b4482d77a9a1fae4a80cd703b",
+    "stdout_bytes": 2371,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_bytes": 0,
+    "stderr_excerpt": ""
+  },
+  "actual_pptx_process": {
+    "parent_pid": 103352,
+    "pid": 50512,
+    "argv": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.automation.narrative_batch_cli",
+      "--project-root",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-s6dvu716\\wiki",
+      "--catalog-config",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-s6dvu716\\wiki\\config\\source_catalog.yaml",
+      "--automation-db",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-s6dvu716\\US-MSFT\\format-pptx\\auto.db",
+      "--work-dir",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-s6dvu716\\US-MSFT\\format-pptx\\jobs",
+      "--request",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-s6dvu716\\US-MSFT\\format-pptx\\request.json"
+    ],
+    "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cmrf-s6dvu716\\wiki"
+  },
+  "configuration_proof": {
+    "committed_host_local_ocr_sha256": "9b8a7df81ca62ebc4bb9c2d60d45c247b291564a4a38f5648e5f4b3edb59889b",
+    "inherited_current_config_identity": {
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "2.0.0",
+      "format": "pptx",
+      "ocr_identity": {
+        "adapter": "rapidocr-cpu/1",
+        "base_config_sha256": "e753d39c0222297f0180e1bdcde1799bc26218f315356763362810846b6afa84",
+        "box_round_decimals": 3,
+        "confidence_round_decimals": 6,
+        "device": "cpu",
+        "engine_version": "3.8.1",
+        "inter_op_threads": 1,
+        "intra_op_threads": 2,
+        "low_confidence_threshold": 0.8,
+        "max_side_len": 3000,
+        "models": {
+          "cls": "e47acedf663230f8863ff1ab0e64dd2d82b838fceb5957146dab185a89d6215c",
+          "det": "d2a7720d45a54257208b1e13e36a8479894cb74155a5efe29462512d42f49da9",
+          "rec": "48fc40f24f6d2a207a2b1091d3437eb3cc3eb6b676dc3ef9c37384005483683b"
+        },
+        "reading_order": "top-left-box/1",
+        "runtime_version": "1.26.0",
+        "schema_version": "cwp-local-ocr-config/1",
+        "text_score": 0.5,
+        "transform": "rapidocr-image-rgb/1"
+      },
+      "ocr_fingerprint": "7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d"
+    },
+    "disabled_counterfactual_identity": {
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.1.0",
+      "format": "pptx"
+    },
+    "adapter_created": false,
+    "ocr_calls": 0,
+    "native_engine_initialized": false
+  },
+  "root_cause": "Replay setup exports whole host config, including local_ocr.json; PPTX probe does not disable it. Default runtime chooses OCR2.0.0 under the obsolete30s fixture budget.",
+  "partial_cause_assessment": "Deadline interruption during configured OCR is strongly supported by source composition and145.55s prior whole-deck OCR. Current old report does not retain per-stage/native ledger, so exact interrupted stage cannot be asserted.",
+  "actual_fields_not_retained": {
+    "selection_job_status": null,
+    "summary_job_status": null,
+    "verify_job_status": null,
+    "artifact_ref": null,
+    "model_tokens": null,
+    "model_cost_micro_usd": null,
+    "unknown_reservations": null,
+    "unsettled_reservations": null,
+    "reservations": null,
+    "bundle_quality": null
+  },
+  "null_semantics": "Unknown/unavailable from deleted original AUTO/raw batch receipt, not proof of absence or zero.",
+  "retained_actuals": {
+    "batch_status": "partial",
+    "top_error_observed": null,
+    "document_errors": [
+      []
+    ],
+    "external_model_calls": 0,
+    "project_llm_cost_usd": 0,
+    "test_root_restored_absent": true
+  },
+  "earlier_parser_evidence": {
+    "source_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+    "pure_parser_version": "1.1.0",
+    "pure_units": 0,
+    "pure_pages_read": 22,
+    "pure_opaque_pages": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22
+    ],
+    "prior_real_ocr_seconds": 145.549077
+  },
+  "no_rerun": true,
+  "new_ocr_calls": 0,
+  "new_supplier_calls": 0,
+  "raw_originals_changed": false,
+  "source_code_changed": false
+}

@@ -1,0 +1,6 @@
+usage: audit_run.py check [-h] --run RUN [--review-attempt REVIEW_ATTEMPT]
+
+options:
+  -h, --help            show this help message and exit
+  --run RUN
+  --review-attempt REVIEW_ATTEMPT

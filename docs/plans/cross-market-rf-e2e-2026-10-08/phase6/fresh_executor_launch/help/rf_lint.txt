@@ -1,0 +1,18 @@
+usage: lint_input.py [-h] [--check-conclusion-facts]
+                     [--check-sensitivity-propagation]
+                     input
+
+Collect-all static pre-flight linter for schema inputs.
+
+positional arguments:
+  input                 input JSON path (see
+                        contracts.constants.FORECAST_SCHEMA_VERSION)
+
+options:
+  -h, --help            show this help message and exit
+  --check-conclusion-facts
+                        warn when a coverage conclusion contains digits with
+                        no claim backing (heuristic, opt-in)
+  --check-sensitivity-propagation
+                        warn when a sensitivity shocks an absolute-level
+                        driver before the terminal year (heuristic, opt-in)

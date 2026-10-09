@@ -1,0 +1,39 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\scripts\\narrative_batch_configured.py",
+    "--llm-config",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\config.yaml",
+    "--llm-provider",
+    "deepseek",
+    "--project-root",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f",
+    "--catalog-config",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\config\\source_catalog.yaml",
+    "--automation-db",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\auto\\reuse.sqlite3",
+    "--work-dir",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\work-reuse",
+    "--request",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\requests\\reuse.json"
+  ],
+  "started_at": "2026-10-09T06:06:40.409374Z",
+  "finished_at": "2026-10-09T06:07:26.476839Z",
+  "elapsed_seconds": 46.067,
+  "exit_code": 0,
+  "outer_timeout": false,
+  "stdout": {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\logs\\batch-reuse-01.stdout",
+    "sha256": "01ce73128c86d366aa833c882be282704a37c5bf758f70abf03ea92aa1e742c5",
+    "byte_size": 965,
+    "mtime_ns": 1791526046356933700
+  },
+  "stderr": {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\logs\\batch-reuse-01.stderr",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "byte_size": 0,
+    "mtime_ns": 1791526000406420800
+  },
+  "stdin_sha256": null
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": "official-source-import-request/1",
+  "request_id": "mocr-20261009T060207-905b13f6-import",
+  "source": {
+    "entity": "Microsoft",
+    "market": "US",
+    "security_id": "MSFT",
+    "document_kind": "investor_relations",
+    "title": "FY27 Segments and Investor Metrics",
+    "publisher": "Microsoft",
+    "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/FY27ExternalKPIs.pptx",
+    "published_date": "2026-09-02",
+    "fiscal_year": null,
+    "fiscal_period": null,
+    "language": null
+  },
+  "content_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+  "mime_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+  "max_bytes": 4016522,
+  "capture_receipt": {
+    "capture_method": "local_document",
+    "tool_name": "main-ocr-archive-local-copy",
+    "tool_call_id": "mocr-20261009T060207-905b13f6-archive-observation",
+    "captured_at": "2026-10-09T06:02:10.835304Z",
+    "response_bytes": 4016522,
+    "content_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4"
+  }
+}

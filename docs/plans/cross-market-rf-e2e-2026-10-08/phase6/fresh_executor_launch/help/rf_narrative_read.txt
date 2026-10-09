@@ -1,0 +1,17 @@
+usage: narrative_source_preparation.py [-h]
+                                       --company-wiki-catalog-config COMPANY_WIKI_CATALOG_CONFIG
+                                       [--operation {reference,read}]
+                                       [--timeout-seconds TIMEOUT_SECONDS]
+                                       [--reader-executable READER_EXECUTABLE]
+
+Opt-in narrative source preparation via CWP's published, pathless reader.
+stdin is narrative-read-request/1 (or narrative-reference-request/1). stdout
+is RF's source-only context (or metadata reference), never a forecast.
+
+options:
+  -h, --help            show this help message and exit
+  --company-wiki-catalog-config COMPANY_WIKI_CATALOG_CONFIG
+  --operation {reference,read}
+  --timeout-seconds TIMEOUT_SECONDS
+  --reader-executable READER_EXECUTABLE
+                        explicit installed CWP command; default Python module

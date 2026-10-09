@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\fresh_cohort_environment\prepare_environment.py", line 737, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\fresh_cohort_environment\prepare_environment.py", line 100, in main
+    runtime_guard.mkdir()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Miniconda\Lib\pathlib\_local.py", line 722, in mkdir
+    os.mkdir(self, mode)
+    ~~~~~~~~^^^^^^^^^^^^
+PermissionError: [WinError 5] 拒绝访问。: 'C:\\Users\\郑曾波\\AppData\\Local\\Packages\\sandbox.{c76e7990-4e7f-4b9d-8b14-9a7273421081}\\AC\\Temp\\mFresh-hbng2p6k\\validation_guard'

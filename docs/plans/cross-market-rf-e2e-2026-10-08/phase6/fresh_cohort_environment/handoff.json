@@ -1,0 +1,49 @@
+{
+  "schema_version": "fresh-cohort-handoff/1",
+  "status": "storage_complete_executor_NOT_RUN_budget_pending_MAIN_terminal",
+  "owned_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4",
+  "environment_paths": [
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT"
+  ],
+  "source_refs": 20,
+  "raw_copies": 7,
+  "initial_bytes": 15753513,
+  "observed_peak_bytes": 19525413,
+  "conservative_prepare_peak_bound": 37457342,
+  "per_environment_cap_bytes": 268435456,
+  "cohort_cap_bytes": 536870912,
+  "activity": {
+    "provider_requests": 0,
+    "download_events": 0,
+    "model_requests": 0,
+    "OCR_inferences": 0,
+    "executor_runs": 0
+  },
+  "auto_databases_initialized": false,
+  "public_proof": "public_representative_receipt.json",
+  "manifest": "environment_manifest.json",
+  "scope_drafts": [
+    "environments/CN-688012.scope.draft.json",
+    "environments/HK-00700.scope.draft.json",
+    "environments/US-MSFT.scope.draft.json"
+  ],
+  "retention": "fresh execution plus four reviews; MAIN owns cleanup",
+  "repo_heads_observed": {
+    "CWP": "9704909f38c2466fd6d13e24de4dcbf5a0137af4",
+    "FF": "5ef8056bdba4be9134bb6c90f9bd457ee5f38253",
+    "RF": "28dbb91056c1b16759ab814018e19025415fb4ec"
+  },
+  "commit_owner": "MAIN; this agent has not staged or committed concurrent main changes",
+  "known_limits": [
+    "CN FY24 metadata/SSE wrapper gaps",
+    "HK H1 and overview publication null",
+    "MSFT third-party TXT publication null",
+    "MSFT FY26 10-K future download only",
+    "default receipt2.1; no fake archive availability proof",
+    "executor budget/horizon/install freeze pending MAIN"
+  ],
+  "overlay_or_guard_left": false,
+  "docs": "HANDOFF.md"
+}

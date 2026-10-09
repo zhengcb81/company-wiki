@@ -1,0 +1,12 @@
+{
+  "owned_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4",
+  "environments": [
+    "CN-688012",
+    "HK-00700",
+    "US-MSFT"
+  ],
+  "operations": 35,
+  "environment_retained": true,
+  "process_env_unchanged": true,
+  "network_guard_removed": true
+}

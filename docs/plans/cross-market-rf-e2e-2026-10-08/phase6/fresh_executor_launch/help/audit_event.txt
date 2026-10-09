@@ -1,0 +1,10 @@
+usage: audit_run.py event [-h] --run RUN
+                          --role {executor,storage,fetch,process,analyst,expert,coordinator}
+                          --kind KIND --data-file DATA_FILE
+
+options:
+  -h, --help            show this help message and exit
+  --run RUN
+  --role {executor,storage,fetch,process,analyst,expert,coordinator}
+  --kind KIND
+  --data-file DATA_FILE

@@ -5,7 +5,9 @@
 - **Phase6仍进行中**；公司池loop后置，冻结NVDA不重抽。
 - 通用修复已并主线：CWP `8479b8ad`（OCR候选0.5.0、本地来源prepare）；RF `28dbb910`（4.1.1来源时钟与剩余deadline）；FF `5ef8056`（v2查询miss先本地prepare）。RF24/FF6个文件定点安装，旧SHA核对，配置/输出不动。
 - 真实四原件联调：3份MSFT季度零下载复用/公共实读通过；CN FY24保留来源日期不足gap，不假造恢复。固定71回放43PASS/2FAIL/1BLOCKED/18NOT_RUN/7NA，155.345秒；三市场来源准备改善，0退步，独占测试根恢复。
-- 剩余：真实22页OCR→精选摘要→公共回放→另AUTO零调用复用（平台外发审批暂拒，问题已发，0新费用）；离线fixture意外继承生产OCR配置的隔离修复与真实状态记录；原三家全新研究/四独立审查；新三家同样验收；再恢复NVDA与loop。
+- 真实22页OCR→精选摘要→公共回放→另AUTO零调用复用已完成工程组合验收：15个实际locator，48,804B产物，首轮7,508tokens/$0.008934，第二AUTO精确pin复用、0新reservation/费用。原件/配置保护通过；source全文coverage仍partial，不代表研究验收。
+- **最新优先项**：[取消审批残留施工](phase6/permission_residue_cleanup/IMPLEMENTATION.md)。沿用既有永久授权，清旧hash/TTL许可和提案人工批准写链、FF/RF/ET旧指引、StockWiki手输启动token；工具平台自动审批不受仓库控制，不伪称关闭或绕过。大节点质量审查仍按用户要求执行。
+- 随后：离线fixture配置隔离交付并线；原三家全新研究/四独立审查；新三家同样验收；再恢复NVDA与loop。三家公司隔离准备已完成，20SourceRefs/7必要原件副本/15.02MiB，无研究启动，不复制222MB整库。
 - 具体记录：`phase6/main_integrated_clock_local_ocr.json`、`phase6/full_replay_clock_local_comparison.json`。不重复已交付工程包、不以CI或结构check替代研究、不新增小节点人签。
 
 ## 目标与边界
@@ -46,7 +48,7 @@
 
 ## Next Step
 
-执行入口以本文下方“当前 Next Step（2026-10-09）”及主线恢复实施清单为准。此前 R6、公司池首审和每次回放是保留的历史证据；工程 CI 通过不能代替两组真实研究验收，也不重复派已完成责任包。
+先集中收尾页首“取消审批残留”及已完成replay配置隔离包，正常并线/推送/定点安装；然后冻结现有三公司隔离scope/母账，启动原三家真实独立执行与四审。后文多份旧Next Step是历史证据，页首当前状态优先。工程 CI 通过不能代替两组真实研究验收。
 
 ### Phase 5: 固化三市场回归套件（2026-10-08 新请求）
 **Status:** complete

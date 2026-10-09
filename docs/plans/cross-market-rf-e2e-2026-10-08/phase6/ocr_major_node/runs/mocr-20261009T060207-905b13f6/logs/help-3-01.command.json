@@ -1,0 +1,27 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "company_wiki.source_catalog.narrative_transport_cli",
+    "--help"
+  ],
+  "started_at": "2026-10-09T06:02:09.911361Z",
+  "finished_at": "2026-10-09T06:02:10.760045Z",
+  "elapsed_seconds": 0.849,
+  "exit_code": 0,
+  "outer_timeout": false,
+  "stdout": {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\logs\\help-3-01.stdout",
+    "sha256": "7dca76cf0e91f3e3385fc9f01b0a33d0364e3051c89c75f1bb4e613ef6cb7c22",
+    "byte_size": 873,
+    "mtime_ns": 1791525730698444000
+  },
+  "stderr": {
+    "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-25g8e04f\\logs\\help-3-01.stderr",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "byte_size": 0,
+    "mtime_ns": 1791525729899170200
+  },
+  "stdin_sha256": null
+}

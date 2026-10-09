@@ -1,0 +1,144 @@
+{
+  "schema_version": "fresh-executor-launch-preparation/1",
+  "status": "PREPARED_NOT_EXECUTED",
+  "purpose": "MAIN coordination checklist, not an RF/FF/CWP wire schema or executor research answer",
+  "as_of_date": "2026-10-08",
+  "cohort": [
+    {
+      "label": "中微",
+      "market": "CN",
+      "security_hint": "688012",
+      "identity_dto": "MAIN/storage supplies resolved public standard DTO"
+    },
+    {
+      "label": "腾讯",
+      "market": "HK",
+      "security_hint": "00700",
+      "identity_dto": "MAIN/storage supplies resolved public standard DTO"
+    },
+    {
+      "label": "微软",
+      "market": "US",
+      "security_hint": "MSFT",
+      "identity_dto": "MAIN/storage supplies resolved public standard DTO"
+    }
+  ],
+  "runtime": {
+    "python": "C:/Miniconda/python.exe",
+    "python_options": [
+      "-X",
+      "utf8",
+      "-B"
+    ],
+    "rf_root": "C:/Users/郑曾波/.agents/skills/revenue-forecast",
+    "rf_engine": "4.1.1",
+    "ff_root_routed_by_installed_rf": "C:/Users/郑曾波/Projects/filing-fetch",
+    "ff_skill_root": "C:/Users/郑曾波/.agents/skills/filing-fetch",
+    "audit_root": "C:/Users/郑曾波/.agents/skills/revenue-forecast-audit",
+    "cwp_root": "C:/Users/郑曾波/Projects/company-wiki",
+    "child_pythonpath": "C:/Users/郑曾波/Projects/company-wiki/src",
+    "head_policy": "Record actual canonical HEADs and installed content SHA at launch, do not pin final execution to this observation",
+    "observations": "installed_runtime.json"
+  },
+  "required_main_handoff_per_company": {
+    "identity_and_research_scope": [
+      "identity_dto",
+      "as_of_date",
+      "fiscal_year_end",
+      "base_year",
+      "forecast_years",
+      "currency",
+      "unit",
+      "forecast_version"
+    ],
+    "storage_owned": [
+      "project_root",
+      "catalog_config",
+      "filing_fetch_config",
+      "automation_db",
+      "batch_work_dir",
+      "public_source_candidates",
+      "document_inventory",
+      "local_reuse_vs_genuine_missing_periods"
+    ],
+    "executor_owned_paths": [
+      "audit_run",
+      "attempt_id",
+      "roles_executor_dir",
+      "execution_dir",
+      "rf_registry_file"
+    ],
+    "supplier": [
+      "explicit_provider",
+      "actual_config_model_options",
+      "credential_environment_in_child_without_value_logging",
+      "versioned_matching_pricing",
+      "profile",
+      "company_max_tokens",
+      "company_max_cost_usd",
+      "finite_monotonic_deadline",
+      "finite_log_and_storage_caps"
+    ],
+    "mother_budget": [
+      "current_native_ledger_observation",
+      "historical_unknown_reservations",
+      "active_unsettled_reservations",
+      "fx_guard",
+      "cumulative_known_tokens",
+      "cumulative_estimated_micro_usd",
+      "remaining_admissible_allocation"
+    ]
+  },
+  "authority": {
+    "material_externalization": "Reuse existing permanent authorization for the approved public/source excerpt scope; no document-by-document human signature",
+    "provider": "Use existing authorization and an explicit actually configured provider; no new provider-by-provider signature",
+    "platform_approval": "Platform enforcement remains active; do not claim it can be disabled; retain real approval/rejection outcomes",
+    "raw_and_production": "Protect original bytes and production config/catalog; storage owner supplies mFresh environment",
+    "review": "No per-step signoff; seal research then four independent review roles"
+  },
+  "budgets": {
+    "mother_max_tokens": 2000000,
+    "mother_max_micro_usd": 20000000,
+    "company_max_tokens": 120000,
+    "company_max_micro_usd": 2000000,
+    "three_company_max_allocation_tokens": 360000,
+    "three_company_max_allocation_micro_usd": 6000000,
+    "observation": "budget_observation.json",
+    "policy": "Allocation includes all paid operations for a company. AUTO reserve/settle receipts remain authoritative; known and unknown are distinct. Refresh native mother scope at launch; no R3 double counting or second budget DB."
+  },
+  "deadline": {
+    "source": "Caller monotonic deadline",
+    "propagation": "Pass positive remaining seconds to source preparation, native/public narrative read, finite batch and HTTP transport; bounded outer recorder covers operation and cleanup",
+    "exhausted": "Refuse operation and retain deadline gap; no zero/unbounded or silent new deadline",
+    "failure": "Do not reopen paid batch on public read timeout or automatically retry unknown charge"
+  },
+  "protocol": {
+    "financial_sources": "RF source_preparation result-envelope → actual FF2.0 intent → CWP verified raw source/capture",
+    "official_registered_sources": "prepare_registered_source_result(genuine candidate, explicit catalog, remaining deadline, explicit receipt version)",
+    "source_reader_default": "2.1",
+    "source_availability_opt_in": "2.2, explicit capability; exact-SHA prior proof only where producer can certify it",
+    "narrative": "configured finite batch + public reference/read + selected span→claim→used parameter→native formula receipt",
+    "formal": "lint → fix input-side hashes → validate-only → compute/render → native registry → immutable snapshot",
+    "steps": "steps15.json",
+    "commands": "COMMANDS.md",
+    "schemas": "SCHEMAS.md"
+  },
+  "known_preflight_limitations": [
+    "Generated template is incomplete, not a passed business input; defaults and placeholders must be replaced from real scope/source outputs.",
+    "Unknown publication is not accepted by the current historical narrative-read wire; raw source-reader2.2 proof capability is distinct.",
+    "Observed configuration is not a network success/vision/pricing proof; OpenAI configuration currently unavailable.",
+    "OCR partial source coverage and table/reading-order/omission limitations persist; selected exact replay is not full recall.",
+    "Mother historical unknown reservations remain seven, not free or settled by this preparation."
+  ],
+  "executed_here": {
+    "help_checks": 19,
+    "help_exit_zero": 19,
+    "pure_imports": true,
+    "research_runs": 0,
+    "model_calls": 0,
+    "provider_calls": 0,
+    "downloads": 0,
+    "ocr_runs": 0,
+    "new_catalogs": 0
+  }
+}

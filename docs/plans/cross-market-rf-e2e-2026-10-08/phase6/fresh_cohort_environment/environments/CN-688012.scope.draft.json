@@ -1,0 +1,356 @@
+{
+  "schema_version": "fresh-cohort-scope-draft/1",
+  "status": "storage_prepared_executor_NOT_RUN_budget_pending_MAIN_terminal_node",
+  "company_query": "688012",
+  "resolved_identity": {
+    "canonical_name": "中微公司",
+    "market": "CN",
+    "exchange": "SSE",
+    "ticker": "688012",
+    "security_id": "688012",
+    "match_basis": "ticker_exact",
+    "matched_value": "688012",
+    "score": 1.0,
+    "verified": true,
+    "active": true,
+    "source_name": "cninfo",
+    "source_url": "https://www.cninfo.com.cn/new/data/szse_stock.json",
+    "source_record_id": "9900038991",
+    "identifiers": {
+      "cninfo_category": "A股",
+      "org_id": "9900038991"
+    }
+  },
+  "as_of_date": "2026-10-08",
+  "mode": "fresh_revenue_research",
+  "forecast_horizon": null,
+  "repo_heads_observed": {
+    "CWP": "9704909f38c2466fd6d13e24de4dcbf5a0137af4",
+    "FF": "5ef8056bdba4be9134bb6c90f9bd457ee5f38253",
+    "RF": "28dbb91056c1b16759ab814018e19025415fb4ec"
+  },
+  "repo_roots": {
+    "CWP": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "RF": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+    "FF": "C:\\Users\\郑曾波\\Projects\\filing-fetch"
+  },
+  "skill_paths": {
+    "RF": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+    "FF": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch"
+  },
+  "effective_config_refs": [
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\filing_fetch_company_wiki.json",
+      "sha256": "914b95163a9e4b880d4693c9401efade1efe6675270ad591a6f42e418fedaac7",
+      "secret_values_copied": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\local_ocr.json",
+      "sha256": "9b8a7df81ca62ebc4bb9c2d60d45c247b291564a4a38f5648e5f4b3edb59889b",
+      "secret_values_copied": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\source_acquisition.yaml",
+      "sha256": "31120ab7b37542840be45a0f454708d3376fbd7708f3f366e3b22866bca848e0",
+      "secret_values_copied": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\source_catalog.yaml",
+      "sha256": "08333062d04c94ce4c7d6f079fbff46c861713d89a85328557055c2c7b6df0c4",
+      "secret_values_copied": false
+    }
+  ],
+  "llm_config_reference": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml",
+  "llm_config_contents_copied": false,
+  "secret_environment": [
+    {
+      "variable": "FMP_API_KEY",
+      "present": false
+    }
+  ],
+  "budget_source": {
+    "status": "pending_MAIN_current_mother_node_terminal_then_freeze",
+    "historical_AUTO_refs": "MAIN authoritative current ledger; no copy/reset of historical unknown fees",
+    "cumulative_limit_usd": null,
+    "tokens": null,
+    "per_run_limit_usd": null
+  },
+  "resource_limits": {
+    "environment_max_bytes": 268435456,
+    "cohort_max_bytes": 536870912,
+    "actual_initial_bytes": 826552,
+    "preparation_peak_bound": 1714981
+  },
+  "isolated_roots": {
+    "root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012",
+    "company_raw": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\companies",
+    "catalog": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\catalog",
+    "provider_state": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\provider-state\\dayu",
+    "ff_state": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\state\\ff",
+    "et_state": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\state\\et",
+    "temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\temp",
+    "automation_db": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\auto\\narrative.sqlite3",
+    "work_dir": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\work",
+    "rf_registry": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\rf\\registry",
+    "rf_output": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\rf\\output"
+  },
+  "process_environment": {
+    "PYTHONUTF8": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src",
+    "TEMP": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\temp",
+    "TMP": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\temp",
+    "EARNINGS_TRANSCRIPTS_TOOL": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_tool.py"
+  },
+  "CWP_batch_project_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012",
+  "rf_source_preparation_command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+    "--company-wiki-catalog-config",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\source_catalog.yaml",
+    "--company-wiki-config",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\filing_fetch_company_wiki.json",
+    "--filing-fetch-root",
+    "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch"
+  ],
+  "narrative_configured_entry_reference": "C:\\Users\\郑曾波\\Projects\\company-wiki\\scripts\\narrative_batch_configured.py",
+  "narrative_paths": {
+    "project_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012",
+    "catalog_config": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\config\\source_catalog.yaml",
+    "automation_db": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\auto\\narrative.sqlite3",
+    "work_dir": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\work"
+  },
+  "source_refs": [
+    {
+      "role": "FY2025 annual/history",
+      "status": "registered_existing_readonly",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "byte_size": 9165875,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "manifest": {
+        "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+        "byte_size": 9165875,
+        "mime_type": "application/pdf",
+        "title": "中微公司：2025年年度报告",
+        "document_kind": "annual_report",
+        "published_date": "2026-03-31",
+        "source_url": "https://static.cninfo.com.cn/finalpage/2026-03-31/1225062431.PDF",
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": "中微公司",
+        "market": "CN",
+        "security_id": "688012",
+        "fiscal_year": 2025,
+        "fiscal_period": "FY",
+        "period_end": "2025-12-31",
+        "form_type": null,
+        "provider": null,
+        "provider_document_id": null,
+        "language": "zh"
+      },
+      "reason": null,
+      "publication_proof": null
+    },
+    {
+      "role": "2026H1 latest",
+      "status": "registered_existing_readonly",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "byte_size": 3149962,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "manifest": {
+        "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "byte_size": 3149962,
+        "mime_type": "application/pdf",
+        "title": "2026年半年度报告",
+        "document_kind": "semi_annual_report",
+        "published_date": "2026-08-20",
+        "source_url": "https://static.cninfo.com.cn/finalpage/2026-08-20/1225482884.PDF",
+        "retrieved_at": "2026-10-08T07:17:59Z",
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": "中微公司",
+        "market": "CN",
+        "security_id": "688012",
+        "fiscal_year": 2026,
+        "fiscal_period": "H1",
+        "period_end": null,
+        "form_type": "interim_report",
+        "provider": "cninfo",
+        "provider_document_id": "1225482884",
+        "language": "zh-CN"
+      },
+      "reason": null,
+      "publication_proof": null
+    },
+    {
+      "role": "2025H1 comparable",
+      "status": "registered_existing_readonly",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "content_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "byte_size": 6361468,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "manifest": {
+        "document_id": "urn:company-wiki:document:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "source_id": "urn:company-wiki:source:sha256:91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "content_sha256": "91ae4978b694ef8361195e50a414e00d071c835d1d6e9f60bccc75dc22175cdd",
+        "byte_size": 6361468,
+        "mime_type": "application/pdf",
+        "title": "中微公司：2025年半年度报告",
+        "document_kind": "semi_annual_report",
+        "published_date": "2025-08-29",
+        "source_url": "http://static.cninfo.com.cn/finalpage/2025-08-29/1224606011.PDF",
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": "中微公司",
+        "market": "CN",
+        "security_id": "688012",
+        "fiscal_year": 2025,
+        "fiscal_period": "H1",
+        "period_end": "2025-06-30",
+        "form_type": null,
+        "provider": null,
+        "provider_document_id": null,
+        "language": "zh"
+      },
+      "reason": null,
+      "publication_proof": null
+    },
+    {
+      "role": "2026Q1 native quarter bridge",
+      "status": "registered_existing_readonly",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "content_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "byte_size": 217264,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "manifest": {
+        "document_id": "urn:company-wiki:document:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "source_id": "urn:company-wiki:source:sha256:ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "content_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "byte_size": 217264,
+        "mime_type": "application/pdf",
+        "title": "中微公司：2026年第一季度报告",
+        "document_kind": "quarterly_report",
+        "published_date": "2026-04-28",
+        "source_url": "http://static.cninfo.com.cn/finalpage/2026-04-28/1225215453.PDF",
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": "中微公司",
+        "market": "CN",
+        "security_id": "688012",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q1",
+        "period_end": "2026-03-31",
+        "form_type": null,
+        "provider": null,
+        "provider_document_id": null,
+        "language": "zh"
+      },
+      "reason": null,
+      "publication_proof": null
+    },
+    {
+      "role": "IPO business/product context",
+      "status": "registered_existing_readonly",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "content_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "byte_size": 11211796,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "manifest": {
+        "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "content_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "byte_size": 11211796,
+        "mime_type": "application/pdf",
+        "title": "中微公司：首次公开发行股票并在科创板上市招股说明书",
+        "document_kind": "prospectus",
+        "published_date": "2019-07-16",
+        "source_url": "http://static.cninfo.com.cn/finalpage/2019-07-16/1206447929.PDF",
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": "中微公司",
+        "market": "CN",
+        "security_id": "688012",
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "period_end": null,
+        "form_type": null,
+        "provider": null,
+        "provider_document_id": null,
+        "language": "zh"
+      },
+      "reason": null,
+      "publication_proof": null
+    },
+    {
+      "role": "FY2024 annual/history",
+      "status": "gap",
+      "source_ref": null,
+      "manifest": null,
+      "reason": "production retired audit is metadata governance; legacy row date2025-04-17 conflicts with secondary publication lead2025-04-18. Exact primary publication URL/date not verified here; do not invent.",
+      "publication_proof": null
+    },
+    {
+      "role": "latest management communication",
+      "status": "gap",
+      "source_ref": null,
+      "manifest": null,
+      "reason": "public importer application/json is transcript_material validation, not arbitrary wrapper acceptance. No source ID minted by preparation.",
+      "publication_proof": null
+    },
+    {
+      "role": "conditional financing/acquisition context",
+      "status": "gap",
+      "source_ref": null,
+      "manifest": null,
+      "reason": "zero download; existing active other-kind refs are dated unknown; recover official metadata only when this operating context is material",
+      "publication_proof": null
+    }
+  ],
+  "known_source_gaps": [
+    "Current dated SourceRef query no telephone TXT; SSE2026-09-10 Q&A is separate official management communication, not ET call.",
+    "New 2026Q3 filing excluded until actual publication<=2026-10-08; no future quarter guessed.",
+    "Annual2024 and conditional financing originals need exact primary metadata repair, not re-download."
+  ],
+  "future_download_targets": [],
+  "availability_evidence_policy": "Default public receipt2.1. Known publication as actual facts; unknown remains null. No archive proof adapter/borrowed TXT date.",
+  "review_lifetime": "retain owned environment through fresh execution and all four reviews; MAIN cleans only exact owned root after protected initial inventory comparison",
+  "storage_only": true,
+  "executor_started": false,
+  "AUTO_initialized": false
+}

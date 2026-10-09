@@ -1,14 +1,7 @@
-"""WU-4.3: authorization-bound minimal download (RED first).
+"""Legacy download scope: target and resource caps, without human permits.
 
-The download authorization receipt binds:
-- request_id + gap_plan hash (the plan being authorized),
-- the exact provider + accessions allowed,
-- item/byte caps,
-- an expiry timestamp.
-
-The downloader may only fetch items inside the plan AND allowed by the
-receipt. Tampering with the accession, an expired plan, or exceeding caps
-must be rejected. RED phase: the module does not exist (ImportError).
+Historical digest/expiry fields remain readable, but cannot grant or deny
+execution. Provider/accession and actual resource boundaries still apply.
 """
 
 from __future__ import annotations
@@ -87,14 +80,13 @@ def test_validate_ok_for_allowed_candidate(tmp_path):
     assert error is None
 
 
-def test_validate_rejects_plan_hash_mismatch(tmp_path):
+def test_validate_ignores_legacy_plan_hash_mismatch(tmp_path):
     auth = _auth()
     candidate = _Candidate("acc-2025", 2025)
     error = validate_download_authorization(
         auth, candidate, plan_hash="b" * 64, now="2026-08-08T12:00:00Z"
     )
-    assert error is not None
-    assert "plan" in error
+    assert error is None
 
 
 def test_validate_rejects_unknown_accession(tmp_path):
@@ -120,14 +112,13 @@ def test_validate_rejects_other_provider(tmp_path):
     assert "provider" in error
 
 
-def test_validate_rejects_expired(tmp_path):
+def test_validate_ignores_legacy_expiry(tmp_path):
     auth = _auth(expires_at="2026-08-08T10:00:00Z")
     candidate = _Candidate("acc-2025", 2025)
     error = validate_download_authorization(
         auth, candidate, plan_hash=_plan_hash(), now="2026-08-08T12:00:00Z"
     )
-    assert error is not None
-    assert "expired" in error
+    assert error is None
 
 
 def test_validate_rejects_over_item_cap(tmp_path):
@@ -337,12 +328,9 @@ def test_receipt_hash_binds_policy_hash():
     assert a2.policy_hash == "c" * 64
 
 
-def test_build_requires_policy_hash():
-    """FC-801: policy_hash is mandatory — a receipt without it is invalid."""
-    import pytest
-
-    with pytest.raises(ValueError, match="policy_hash"):
-        build_download_authorization(
+def test_build_does_not_require_policy_permission():
+    """A valid target scope does not need a signed or placeholder policy."""
+    scope = build_download_authorization(
             request_id="req-1",
             gap_plan_hash=_plan_hash(),
             policy_hash="",
@@ -351,4 +339,8 @@ def test_build_requires_policy_hash():
             max_items=1,
             max_bytes=1_000_000,
             expires_at="2099-01-01T00:00:00Z",
-        )
+    )
+    assert scope.policy_hash == ""
+    assert validate_download_authorization(
+        scope, _Candidate("acc", 2025), plan_hash="unrelated", now="2100-01-01"
+    ) is None

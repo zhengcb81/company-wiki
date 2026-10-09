@@ -1,0 +1,18 @@
+usage: revenue_forecast.py [-h] [--output OUTPUT] [--markdown MARKDOWN]
+                           [--validate-only] [--verbose] [--version]
+                           [input]
+
+Calculate a source-traceable revenue-only forecast
+
+positional arguments:
+  input                input JSON document (required unless --version)
+
+options:
+  -h, --help           show this help message and exit
+  --output OUTPUT      JSON output path; stdout when omitted
+  --markdown MARKDOWN  optional Markdown report path
+  --validate-only      validate input and output without writing
+  --verbose            with --validate-only, report every input violation in
+                       one pass
+  --version            print engine version and this installation's manifest
+                       hash (R4.2)

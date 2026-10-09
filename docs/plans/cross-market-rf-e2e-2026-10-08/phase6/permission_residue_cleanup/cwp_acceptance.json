@@ -1,0 +1,53 @@
+{
+  "schema_version": "permission-residue-cleanup/1",
+  "status": "CWP_ENGINEERING_PASS_NEIGHBORS_IN_PROGRESS",
+  "user_direction": "Remove redundant project approvals and reuse existing authorization",
+  "platform_control": "External tool automatic review remains enforced; repository cannot disable it",
+  "removed": [
+    "legacy plan hash and policy hash builder permit",
+    "legacy download TTL permit",
+    "legacy remediation proposal approval shadow writer"
+  ],
+  "preserved": [
+    "historical wire fields and DB rows",
+    "explicit download intent",
+    "provider/accession target scope",
+    "actual resource ceilings",
+    "raw source verification",
+    "major node independent quality reviews"
+  ],
+  "tdd": {
+    "red_failed": 9,
+    "red_passed": 10,
+    "red_seconds": 0.95,
+    "green_passed": 28,
+    "green_skipped": 2,
+    "green_seconds": 3.65,
+    "skip_reason": "opt-in four-real-source integration needs explicit original and consumer roots; not executed"
+  },
+  "read_policy_existing": {
+    "passed": 39,
+    "seconds": 0.97
+  },
+  "historical_compatibility": {
+    "passed": 10,
+    "seconds": 1.24,
+    "history_rows_remain_diagnostic": true,
+    "malformed_historical_proposal_unchanged": true
+  },
+  "raw_downloads": 0,
+  "new_model_calls": 0,
+  "test_roots_cleaned": [
+    "cwperm-09988e01",
+    "cwperm-6680dee5",
+    "cwread-d57b496f",
+    "cwcompat-69b13eb6"
+  ],
+  "remaining_neighbors": [
+    "FF and RF skill wording commit/install",
+    "ET stale README gate wording",
+    "StockWiki UI confirmation token"
+  ],
+  "test_root_cleanup_restored_absent": true,
+  "mypy": "2 source files pass"
+}

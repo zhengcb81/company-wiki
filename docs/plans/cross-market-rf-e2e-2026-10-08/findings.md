@@ -268,3 +268,14 @@ repair 的职责是版本化重做、父账承接与可追溯失败；不是新�
 只读owner定位：runner.setup归档全config，包括已部署的local_ocr.json；原意纯PPTX parser能力探测的request没有显式normalization覆盖，实际默认构建OCR2.0 port，却沿旧30秒batch/40秒wrapper。故本次不能称“无OCR已经跑完却partial”，而是离线fixture受到当前生产OCR设置影响、短时停止尚未完成。实际native JSON/jobs/reservation随TEMP清理未保留，无法补造阶段/count/0账。外部模型调用仍为离线回放0，不把它与OCR CPU工作混为一谈。
 
 通用修复优先：离线fixture显式冻结自身parser配置，不继承host设置；真实live/MAIN配置仍由当前显式snapshot。报告保留小型actual阶段/产物/任务/账诊断，清理后可复查，不留原件副本/DB。独立owner先RED再改tools/cross_market_suite责任，不改产品完整度、不普遍放宽partial、不再全22OCR或整71来诊断。完成后只跑受影响公开fixture节点，MAIN仍保留真实configured大节点。
+
+
+## 2026-10-09：审批责任边界与遗留代码
+
+平台此前将永久授权解释成未点名PPTX/DeepSeek；补充真实payload和公开SEC源后同命令已批准且完成。项目沿用授权，不逐材料重问；仓库无法关闭平台审查，不改通道绕拒绝。技术事实与资源限制是责任层验真，不是人签。
+
+已清主流程：prompt review仅diagnostic，private/public/canary标签不影响exact读，新AUTO不产生blocked_human，旧enum为账目恢复可读。实际漏项是无生产调用的authorization hash/TTL许可和remediation提案批准二次writer；现取消许可、保留legacy target/caps，旧writer无IO退休，历史DB不删，走source-facts/local-prepare，无自动伪签。邻仓实际残留：FF description/docstring、RF下载例与reusable-root、ET双gate说明、SW手输RUN_SCHEDULER_CYCLE，均归独占包。HTTP密钥认证及财务正文里的regulatory approval不属于本清理。
+
+真实22页组合15locators、48,804B产物、same pin第二AUTO0账；新增持久首380870B/复用200830B，没有持久全文MD/页图。source仍partial；母账known207042tokens/$0.119671，unknown7与FX$0.002764保持。两组研究尚未启动。
+
+诊断方法教训：PowerShell JSON往返会把时间字符串转换当地时间对象，不能据其显示断言producer字节错误。实际acceptance SHA6fa609e9005ee4e2918cda4dc301f891a76cfe5b5496e64abd4438aeaba764ab/43383B，json.loads为UTC+00且RF纯decoder接受；无需改正确producer或放宽consumer，这不是业务消费验收。

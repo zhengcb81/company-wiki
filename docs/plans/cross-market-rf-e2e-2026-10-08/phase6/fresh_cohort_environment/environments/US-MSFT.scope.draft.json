@@ -1,0 +1,556 @@
+{
+  "schema_version": "fresh-cohort-scope-draft/1",
+  "status": "storage_prepared_executor_NOT_RUN_budget_pending_MAIN_terminal_node",
+  "company_query": "MSFT",
+  "resolved_identity": {
+    "canonical_name": "MICROSOFT CORP",
+    "market": "US",
+    "exchange": "NASDAQ",
+    "ticker": "MSFT",
+    "security_id": "MSFT",
+    "match_basis": "ticker_exact",
+    "matched_value": "MSFT",
+    "score": 1.0,
+    "verified": true,
+    "active": true,
+    "source_name": "sec_nasdaq",
+    "source_url": "https://www.sec.gov/files/company_tickers.json",
+    "source_record_id": "0000789019",
+    "identifiers": {
+      "cik": "0000789019"
+    }
+  },
+  "as_of_date": "2026-10-08",
+  "mode": "fresh_revenue_research",
+  "forecast_horizon": null,
+  "repo_heads_observed": {
+    "CWP": "9704909f38c2466fd6d13e24de4dcbf5a0137af4",
+    "FF": "5ef8056bdba4be9134bb6c90f9bd457ee5f38253",
+    "RF": "28dbb91056c1b16759ab814018e19025415fb4ec"
+  },
+  "repo_roots": {
+    "CWP": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "RF": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+    "FF": "C:\\Users\\郑曾波\\Projects\\filing-fetch"
+  },
+  "skill_paths": {
+    "RF": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+    "FF": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch"
+  },
+  "effective_config_refs": [
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\config\\filing_fetch_company_wiki.json",
+      "sha256": "fb05b3f62fde7de2b49492b6f203d51913d7d2f24e28fc7672bea6cd1b9fed03",
+      "secret_values_copied": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\config\\local_ocr.json",
+      "sha256": "9b8a7df81ca62ebc4bb9c2d60d45c247b291564a4a38f5648e5f4b3edb59889b",
+      "secret_values_copied": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\config\\source_acquisition.yaml",
+      "sha256": "91bd6ba6b72268665dba7b7c35838e25f3402460472aed54086b4227ba35c5a1",
+      "secret_values_copied": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\config\\source_catalog.yaml",
+      "sha256": "4d416de2dbc7ae3757bbf2aff0f5cb9ef575860ec9e49db82ee0281da8869f95",
+      "secret_values_copied": false
+    }
+  ],
+  "llm_config_reference": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml",
+  "llm_config_contents_copied": false,
+  "secret_environment": [
+    {
+      "variable": "FMP_API_KEY",
+      "present": false
+    }
+  ],
+  "budget_source": {
+    "status": "pending_MAIN_current_mother_node_terminal_then_freeze",
+    "historical_AUTO_refs": "MAIN authoritative current ledger; no copy/reset of historical unknown fees",
+    "cumulative_limit_usd": null,
+    "tokens": null,
+    "per_run_limit_usd": null
+  },
+  "resource_limits": {
+    "environment_max_bytes": 268435456,
+    "cohort_max_bytes": 536870912,
+    "actual_initial_bytes": 6834465,
+    "preparation_peak_bound": 16456481
+  },
+  "isolated_roots": {
+    "root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT",
+    "company_raw": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\companies",
+    "catalog": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\catalog",
+    "provider_state": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\provider-state\\dayu",
+    "ff_state": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\state\\ff",
+    "et_state": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\state\\et",
+    "temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\temp",
+    "automation_db": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\auto\\narrative.sqlite3",
+    "work_dir": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\work",
+    "rf_registry": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\rf\\registry",
+    "rf_output": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\rf\\output"
+  },
+  "process_environment": {
+    "PYTHONUTF8": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src",
+    "TEMP": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\temp",
+    "TMP": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\temp",
+    "EARNINGS_TRANSCRIPTS_TOOL": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_tool.py"
+  },
+  "CWP_batch_project_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT",
+  "rf_source_preparation_command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+    "--company-wiki-catalog-config",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\config\\source_catalog.yaml",
+    "--company-wiki-config",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\config\\filing_fetch_company_wiki.json",
+    "--filing-fetch-root",
+    "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch"
+  ],
+  "narrative_configured_entry_reference": "C:\\Users\\郑曾波\\Projects\\company-wiki\\scripts\\narrative_batch_configured.py",
+  "narrative_paths": {
+    "project_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT",
+    "catalog_config": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\config\\source_catalog.yaml",
+    "automation_db": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\auto\\narrative.sqlite3",
+    "work_dir": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\work"
+  },
+  "source_refs": [
+    {
+      "role": "FY2025 annual/history",
+      "status": "registered_existing_readonly",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "byte_size": 8158067,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "manifest": {
+        "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "byte_size": 8158067,
+        "mime_type": "text/html",
+        "title": "Microsoft 10-K FY2025",
+        "document_kind": "annual_report",
+        "published_date": "2025-07-30",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": "MICROSOFT CORP",
+        "market": "US",
+        "security_id": "MSFT",
+        "fiscal_year": 2025,
+        "fiscal_period": null,
+        "period_end": null,
+        "form_type": "10-K",
+        "provider": null,
+        "provider_document_id": null,
+        "language": null
+      },
+      "reason": null,
+      "publication_proof": null
+    },
+    {
+      "role": "FY2024 existing comparable/optional reference",
+      "status": "registered_existing_readonly",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+        "source_id": "urn:company-wiki:source:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+        "content_sha256": "43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+        "byte_size": 6860911,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "manifest": {
+        "document_id": "urn:company-wiki:document:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+        "source_id": "urn:company-wiki:source:sha256:43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+        "content_sha256": "43829a12cc9cd7198474b3d735c4fc1aba1f871fb637d237aa5979d57e6b8c95",
+        "byte_size": 6860911,
+        "mime_type": "text/html",
+        "title": "Microsoft 10-K FY2024",
+        "document_kind": "annual_report",
+        "published_date": "2024-07-30",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017024087843/msft-20240630.htm",
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": "MICROSOFT CORP",
+        "market": "US",
+        "security_id": "MSFT",
+        "fiscal_year": 2024,
+        "fiscal_period": null,
+        "period_end": null,
+        "form_type": "10-K",
+        "provider": null,
+        "provider_document_id": null,
+        "language": null
+      },
+      "reason": null,
+      "publication_proof": null
+    },
+    {
+      "role": "FY2026 Q1 native quarterly SEC HTML",
+      "status": "registered_existing_sec_facts_corrected",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+        "source_id": "urn:company-wiki:source:sha256:c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+        "content_sha256": "c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+        "byte_size": 5597461,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "manifest": {
+        "document_id": "urn:company-wiki:document:sha256:c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+        "source_id": "urn:company-wiki:source:sha256:c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+        "content_sha256": "c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+        "byte_size": 5597461,
+        "mime_type": "text/html",
+        "title": null,
+        "document_kind": "regulatory_filing",
+        "published_date": "2025-10-29",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312525256321/msft-20250930.htm",
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": "MICROSOFT CORP",
+        "market": "US",
+        "security_id": "MSFT",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q1",
+        "period_end": "2025-09-30",
+        "form_type": "10-Q",
+        "provider": "sec",
+        "provider_document_id": "0001193125-25-256321",
+        "language": null
+      },
+      "reason": null,
+      "publication_proof": null
+    },
+    {
+      "role": "FY2026 Q2 native quarterly SEC HTML",
+      "status": "registered_existing_sec_facts_corrected",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+        "source_id": "urn:company-wiki:source:sha256:a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+        "content_sha256": "a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+        "byte_size": 7483278,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "manifest": {
+        "document_id": "urn:company-wiki:document:sha256:a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+        "source_id": "urn:company-wiki:source:sha256:a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+        "content_sha256": "a60bb6a0747938e4903d5b30f2c73fec2e58cb09edeb34dbacb2c84b19bc448d",
+        "byte_size": 7483278,
+        "mime_type": "text/html",
+        "title": null,
+        "document_kind": "regulatory_filing",
+        "published_date": "2026-01-28",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526027207/msft-20251231.htm",
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": "MICROSOFT CORP",
+        "market": "US",
+        "security_id": "MSFT",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q2",
+        "period_end": "2025-12-31",
+        "form_type": "10-Q",
+        "provider": "sec",
+        "provider_document_id": "0001193125-26-027207",
+        "language": null
+      },
+      "reason": null,
+      "publication_proof": null
+    },
+    {
+      "role": "FY2026 Q3 native quarterly SEC HTML",
+      "status": "registered_existing_sec_facts_corrected",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+        "source_id": "urn:company-wiki:source:sha256:76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+        "content_sha256": "76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+        "byte_size": 7731948,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "manifest": {
+        "document_id": "urn:company-wiki:document:sha256:76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+        "source_id": "urn:company-wiki:source:sha256:76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+        "content_sha256": "76945a2c148afb8521cff13adcd320e99a8c09bcb1a2541b5d0ed5a2b02adf2d",
+        "byte_size": 7731948,
+        "mime_type": "text/html",
+        "title": null,
+        "document_kind": "regulatory_filing",
+        "published_date": "2026-04-29",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526191507/msft-20260331.htm",
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": "MICROSOFT CORP",
+        "market": "US",
+        "security_id": "MSFT",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q3",
+        "period_end": "2026-03-31",
+        "form_type": "10-Q",
+        "provider": "sec",
+        "provider_document_id": "0001193125-26-191507",
+        "language": null
+      },
+      "reason": null,
+      "publication_proof": null
+    },
+    {
+      "role": "FY2026Q4/FY2026 release",
+      "status": "local_official_import",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+        "source_id": "urn:company-wiki:source:sha256:8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+        "content_sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+        "byte_size": 808850,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "manifest": {
+        "document_id": "urn:company-wiki:document:sha256:8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+        "source_id": "urn:company-wiki:source:sha256:8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+        "content_sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+        "byte_size": 808850,
+        "mime_type": "text/html",
+        "title": "results official communication",
+        "document_kind": "investor_relations",
+        "published_date": "2026-07-29",
+        "source_url": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q4/press-release-webcast",
+        "retrieved_at": "2026-10-09T06:05:10Z",
+        "collector_name": "official-original-import",
+        "collector_version": "1.0.0",
+        "canonical_entity_id": null,
+        "display_name": "MICROSOFT CORP",
+        "market": "US",
+        "security_id": "MSFT",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q4",
+        "period_end": null,
+        "form_type": null,
+        "provider": "official",
+        "provider_document_id": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+        "language": "en"
+      },
+      "reason": null,
+      "publication_proof": "primary_publication_proofs.json/msft_fy26q4_release"
+    },
+    {
+      "role": "FY2026Q4 official complete transcript HTML",
+      "status": "local_official_import",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+        "source_id": "urn:company-wiki:source:sha256:bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+        "content_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+        "byte_size": 273436,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "manifest": {
+        "document_id": "urn:company-wiki:document:sha256:bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+        "source_id": "urn:company-wiki:source:sha256:bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+        "content_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+        "byte_size": 273436,
+        "mime_type": "text/html",
+        "title": "call official communication",
+        "document_kind": "investor_call_transcript",
+        "published_date": "2026-07-29",
+        "source_url": "https://www.microsoft.com/en-us/Investor/events/fy-2026/earnings-fy-2026-q4",
+        "retrieved_at": "2026-10-09T06:05:13Z",
+        "collector_name": "official-original-import",
+        "collector_version": "1.0.0",
+        "canonical_entity_id": null,
+        "display_name": "MICROSOFT CORP",
+        "market": "US",
+        "security_id": "MSFT",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q4",
+        "period_end": null,
+        "form_type": null,
+        "provider": "official",
+        "provider_document_id": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+        "language": "en"
+      },
+      "reason": null,
+      "publication_proof": "primary_publication_proofs.json/msft_fy26q4_official_call"
+    },
+    {
+      "role": "FY2026Q4 metrics",
+      "status": "local_official_import",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+        "source_id": "urn:company-wiki:source:sha256:cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+        "content_sha256": "cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+        "byte_size": 198175,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "manifest": {
+        "document_id": "urn:company-wiki:document:sha256:cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+        "source_id": "urn:company-wiki:source:sha256:cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+        "content_sha256": "cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+        "byte_size": 198175,
+        "mime_type": "text/html",
+        "title": "metrics official communication",
+        "document_kind": "investor_relations",
+        "published_date": "2026-07-29",
+        "source_url": "https://www.microsoft.com/en-us/investor/earnings/FY-2026-Q4/metrics",
+        "retrieved_at": "2026-10-09T06:05:15Z",
+        "collector_name": "official-original-import",
+        "collector_version": "1.0.0",
+        "canonical_entity_id": null,
+        "display_name": "MICROSOFT CORP",
+        "market": "US",
+        "security_id": "MSFT",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q4",
+        "period_end": null,
+        "form_type": null,
+        "provider": "official",
+        "provider_document_id": "cf054968a1480ca2a4f85cfa5c378f4fc9afdafd934c6836c1c16e016e8619d6",
+        "language": "en"
+      },
+      "reason": null,
+      "publication_proof": "same official dated FY26Q4 earnings event; register document-specific URL"
+    },
+    {
+      "role": "FY27 reporting/metric transition",
+      "status": "local_official_import",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "content_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "byte_size": 4016522,
+        "mime_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "schema_version": "2.0"
+      },
+      "manifest": {
+        "document_id": "urn:company-wiki:document:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "source_id": "urn:company-wiki:source:sha256:c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "content_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "byte_size": 4016522,
+        "mime_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "title": "FY27 Segments and Investor Metrics",
+        "document_kind": "investor_relations",
+        "published_date": "2026-09-02",
+        "source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/FY27ExternalKPIs.pptx",
+        "retrieved_at": "2026-10-09T06:05:17Z",
+        "collector_name": "official-original-import",
+        "collector_version": "1.0.0",
+        "canonical_entity_id": null,
+        "display_name": "MICROSOFT CORP",
+        "market": "US",
+        "security_id": "MSFT",
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "period_end": null,
+        "form_type": null,
+        "provider": "official",
+        "provider_document_id": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+        "language": "en"
+      },
+      "reason": null,
+      "publication_proof": "../msft_presentation_publication_investigation.json + primary_publication_proofs.json/msft_fy27_deck_date"
+    },
+    {
+      "role": "existing original-language TXT; discovery until exact publication proof",
+      "status": "registered_existing_readonly",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "content_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "byte_size": 66324,
+        "mime_type": "text/plain",
+        "schema_version": "2.0"
+      },
+      "manifest": {
+        "document_id": "urn:company-wiki:document:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "source_id": "urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "content_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "byte_size": 66324,
+        "mime_type": "text/plain",
+        "title": null,
+        "document_kind": "investor_call_transcript",
+        "published_date": null,
+        "source_url": null,
+        "retrieved_at": null,
+        "collector_name": null,
+        "collector_version": null,
+        "canonical_entity_id": null,
+        "display_name": "Microsoft",
+        "market": "US",
+        "security_id": "MSFT",
+        "fiscal_year": 2026,
+        "fiscal_period": "Q4",
+        "period_end": null,
+        "form_type": null,
+        "provider": null,
+        "provider_document_id": null,
+        "language": "en"
+      },
+      "reason": null,
+      "publication_proof": null
+    },
+    {
+      "role": "separate SEC presentation text supplements OCR gaps",
+      "status": "gap",
+      "source_ref": null,
+      "manifest": null,
+      "reason": "Not the deck binary SHA; web parsed observation is not original capture. Initial OCR keeps page7/page18 gaps and source partial.",
+      "publication_proof": null
+    }
+  ],
+  "known_source_gaps": [
+    "Historical FMP exact ET probe envelope reports provider_entitlement_required, status unavailable. The envelope does not contain HTTP status; preserve known ET402 restriction context without fabricating an HTTP receipt or provider success. No blind retry. Stored motley_fool TXT and official HTML are separate sources.",
+    "FY2026 10-K official primary index verified; web4MiB parser refusal is a tool size limit, not absence at issuer.",
+    "Retired filings are genuine existing bytes with primary iXBRL issuer/period proof; identity conflicts must be corrected by isolated public import, not production flag bypass."
+  ],
+  "future_download_targets": [
+    {
+      "document_kind": "annual_report",
+      "form_type": "10-K",
+      "fiscal_year": 2026,
+      "fiscal_period": "FY",
+      "period_end": "2026-06-30",
+      "published_date": "2026-07-29",
+      "official_source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+      "publisher_reported_bytes": 8585501,
+      "raw_sha256": null,
+      "status": "download_NOT_RUN",
+      "route": "current RF source_preparation → FF US Dayu → CWP public writer",
+      "absence_evidence": "production annual query onlyFY2024/FY2025; target Dayu file/meta list; both237-entry delivery/archive indexes; all27cases refs/24original objects inspected; no msft-20260630 original identified",
+      "remaining_scope_limit": "absence is bounded to configured roots and explicit archives, not a universal assertion about every machine directory; requery inventory at execution start",
+      "suggested_resource_limit": {
+        "max_bytes": 16777216,
+        "timeout_seconds": 180,
+        "max_cost_usd": null,
+        "budget_source": "MAIN current configured allowance; no new budget implied"
+      }
+    }
+  ],
+  "availability_evidence_policy": "Default public receipt2.1. Known publication as actual facts; unknown remains null. No archive proof adapter/borrowed TXT date.",
+  "review_lifetime": "retain owned environment through fresh execution and all four reviews; MAIN cleans only exact owned root after protected initial inventory comparison",
+  "storage_only": true,
+  "executor_started": false,
+  "AUTO_initialized": false
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": "fresh-executor-launch-handoff/1",
+  "status": "PREPARED_NOT_EXECUTED",
+  "owner": "main_reuse_ocr_investigation",
+  "write_scope": "C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/fresh_executor_launch",
+  "delivery": [
+    "README.md",
+    "HANDOFF.md",
+    "launch_contract.json",
+    "COMMANDS.md",
+    "SCHEMAS.md",
+    "steps15.json",
+    "budget_observation.json",
+    "help_checks.json",
+    "installed_runtime.json",
+    "supplier_options.json",
+    "help/",
+    "package_manifest.json",
+    "timestamp_verification.json"
+  ],
+  "verification": {
+    "public_help_count": 19,
+    "public_help_exit_zero_count": 19,
+    "pure_runtime_imports": true,
+    "forecast_validation_executed": false,
+    "research_executed": false,
+    "models_called": 0,
+    "providers_called": 0,
+    "downloads": 0,
+    "ocr_runs": 0
+  },
+  "authorization": {
+    "permanent_material_and_configured_provider_authorization_reused": true,
+    "new_per_material_provider_or_step_signatures": false,
+    "platform_approval_disabled": false,
+    "original_bytes_protected": true
+  },
+  "main_actions": [
+    "Take storage owner's mFresh public handoff; provide exclusive execution/audit/registry paths and genuine company/fiscal/horizon scope to each of the original three executors.",
+    "Pin explicit actual configured provider, corresponding versioned pricing, finite caller deadline and actual native mother budget observation at launch; retain historicalunknown7.",
+    "Start fresh executor research only under existing authorization, record real calls and all15steps, then seal for independent review; no old forecast/review-answer reuse."
+  ],
+  "research_pass_claimed": false,
+  "shared_code_or_main_pwf_written": false,
+  "production_catalog_or_config_written": false,
+  "temporary_run_or_catalog_created": false,
+  "timestamp_verification": "timestamp_verification.json; original UTC strings pass pure installed consumer decode; prior PowerShell-local timestamp diagnosis withdrawn"
+}

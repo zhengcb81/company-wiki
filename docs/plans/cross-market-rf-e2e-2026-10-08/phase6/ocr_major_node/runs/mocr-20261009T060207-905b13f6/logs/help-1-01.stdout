@@ -1,0 +1,14 @@
+usage: official_source_cli.py [-h] [--config CONFIG]
+                              [--project-root PROJECT_ROOT]
+                              [--operation {import,discover}]
+                              --request REQUEST [--input-file INPUT_FILE]
+
+Public thin original-import/discovery entry. Canonical paths stay in storage.
+
+options:
+  -h, --help            show this help message and exit
+  --config CONFIG
+  --project-root PROJECT_ROOT
+  --operation {import,discover}
+  --request REQUEST
+  --input-file INPUT_FILE

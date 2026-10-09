@@ -1,0 +1,575 @@
+{
+  "schema_version": "executor-installed-runtime-observation/1",
+  "rf_skill_root": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+  "rf_root_resolved": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+  "ff_skill_root": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+  "ff_root_resolved": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+  "rf_engine": "4.1.1",
+  "rf_schema": "3.7",
+  "functions": {
+    "consume_narrative_input": "(data: 'dict', *, request: 'dict', bindings: 'list[dict]', source_id: 'str', catalog_config: 'Path', timeout_seconds: 'float' = 30, verified_by: 'str' = 'RF narrative reader') -> 'tuple[dict, dict]'",
+    "prepare_registered_source_result": "(candidate: 'dict', *, as_of_date: 'str', company_wiki_catalog_config: 'Path', timeout_seconds: 'float' = 30.0, source_reader_receipt_version: 'str' = '2.1') -> 'dict'",
+    "prepare_source_result": "(request: 'dict', *, allow_download: 'bool' = False, timeout_seconds: 'float' = 900.0, python: 'tuple[str, ...]' = ('C:\\\\Miniconda\\\\python.exe',), company_wiki_config: 'Path | None' = None, filing_fetch_root: 'Path | None' = None, source_reader_v2: 'bool' = True, company_wiki_catalog_config: 'Path | None' = None, narrative_request: 'dict | None' = None, source_reader_receipt_version: 'str' = '2.1') -> 'dict'",
+    "bind_parameter_evidence": "(parameter: 'dict[str, Any]', *, evidence_bindings: 'list[dict[str, Any]]', source: 'dict[str, Any] | None', verified_by: 'str', verified_date: 'str') -> 'dict[str, Any]'",
+    "render_markdown": "(result: 'dict[str, Any]') -> 'str'",
+    "validate_published_forecast": "(result: 'dict[str, Any]', data: 'dict[str, Any] | None') -> 'VerificationContext'",
+    "calculate_sensitivities": "(data: 'dict[str, Any]', result: 'dict[str, Any]') -> 'list[dict[str, Any]]'"
+  },
+  "models": {
+    "direct_growth": {
+      "required": [
+        "growth_rate"
+      ],
+      "dimensions": {
+        "growth_rate": "ratio"
+      }
+    },
+    "direct_revenue": {
+      "required": [
+        "revenue"
+      ],
+      "dimensions": {
+        "revenue": "revenue"
+      }
+    },
+    "unit_sales": {
+      "required": [
+        "units",
+        "unit_revenue"
+      ],
+      "dimensions": {
+        "units": "quantity",
+        "unit_revenue": "revenue_per_unit",
+        "timing_factor": "ratio",
+        "other_revenue": "revenue"
+      }
+    },
+    "capacity_utilization": {
+      "required": [
+        "capacity",
+        "utilization",
+        "yield",
+        "unit_revenue"
+      ],
+      "dimensions": {
+        "capacity": "quantity",
+        "utilization": "ratio",
+        "yield": "ratio",
+        "unit_revenue": "revenue_per_unit",
+        "timing_factor": "ratio",
+        "other_revenue": "revenue"
+      }
+    },
+    "subscription": {
+      "required": [
+        "average_customers",
+        "revenue_per_customer"
+      ],
+      "dimensions": {
+        "average_customers": "quantity",
+        "revenue_per_customer": "revenue_per_unit",
+        "timing_factor": "ratio",
+        "usage_revenue": "revenue"
+      }
+    },
+    "usage_platform": {
+      "required": [
+        "eligible_activity",
+        "monetization_rate"
+      ],
+      "dimensions": {
+        "eligible_activity": "activity",
+        "monetization_rate": "revenue_per_activity",
+        "fixed_revenue": "revenue"
+      }
+    },
+    "services": {
+      "required": [
+        "billable_capacity",
+        "utilization",
+        "billing_rate"
+      ],
+      "dimensions": {
+        "billable_capacity": "activity",
+        "utilization": "ratio",
+        "billing_rate": "revenue_per_activity",
+        "timing_factor": "ratio",
+        "other_revenue": "revenue"
+      }
+    },
+    "project_backlog": {
+      "required": [
+        "opening_backlog",
+        "bookings",
+        "cancellations",
+        "contract_changes",
+        "closing_backlog"
+      ],
+      "dimensions": {
+        "opening_backlog": "backlog",
+        "bookings": "backlog",
+        "cancellations": "backlog",
+        "contract_changes": "backlog",
+        "closing_backlog": "backlog",
+        "backlog_remeasurements": "backlog"
+      }
+    },
+    "resource": {
+      "required": [
+        "saleable_volume",
+        "realized_price"
+      ],
+      "dimensions": {
+        "saleable_volume": "quantity",
+        "realized_price": "revenue_per_unit",
+        "other_revenue": "revenue"
+      }
+    },
+    "reserve_depletion": {
+      "required": [
+        "opening_reserves",
+        "additions",
+        "depletion",
+        "closing_reserves",
+        "recovery_rate",
+        "realized_price"
+      ],
+      "dimensions": {
+        "opening_reserves": "reserve_volume",
+        "additions": "reserve_volume",
+        "depletion": "reserve_volume",
+        "closing_reserves": "reserve_volume",
+        "reserve_revisions": "reserve_volume",
+        "recovery_rate": "ratio",
+        "realized_price": "revenue_per_unit",
+        "other_revenue": "revenue"
+      }
+    },
+    "infrastructure": {
+      "required": [
+        "billable_volume",
+        "tariff"
+      ],
+      "dimensions": {
+        "billable_volume": "activity",
+        "tariff": "revenue_per_activity",
+        "other_revenue": "revenue"
+      }
+    },
+    "bank_revenue": {
+      "required": [
+        "average_earning_assets",
+        "asset_yield",
+        "average_interest_bearing_liabilities",
+        "funding_cost",
+        "fee_revenue"
+      ],
+      "dimensions": {
+        "average_earning_assets": "monetary_balance",
+        "asset_yield": "ratio",
+        "average_interest_bearing_liabilities": "monetary_balance",
+        "funding_cost": "ratio",
+        "fee_revenue": "revenue",
+        "other_revenue": "revenue"
+      }
+    },
+    "asset_management": {
+      "required": [
+        "average_aum",
+        "management_fee_rate"
+      ],
+      "dimensions": {
+        "average_aum": "monetary_balance",
+        "management_fee_rate": "ratio",
+        "performance_fee_revenue": "revenue",
+        "other_revenue": "revenue"
+      }
+    },
+    "retail_franchise": {
+      "required": [
+        "average_owned_stores",
+        "revenue_per_owned_store"
+      ],
+      "dimensions": {
+        "average_owned_stores": "quantity",
+        "revenue_per_owned_store": "revenue_per_unit",
+        "franchise_system_sales": "revenue",
+        "recognized_fee_rate": "ratio",
+        "supply_revenue": "revenue"
+      }
+    },
+    "transport": {
+      "required": [
+        "capacity",
+        "utilization",
+        "yield"
+      ],
+      "dimensions": {
+        "capacity": "quantity",
+        "utilization": "ratio",
+        "yield": "revenue_per_unit",
+        "ancillary_revenue": "revenue"
+      }
+    },
+    "real_estate_rental": {
+      "required": [
+        "average_occupied_area",
+        "rent_per_area"
+      ],
+      "dimensions": {
+        "average_occupied_area": "area",
+        "rent_per_area": "revenue_per_area",
+        "other_revenue": "revenue"
+      }
+    },
+    "licensing_commercial": {
+      "required": [
+        "treated_units",
+        "net_revenue_per_unit"
+      ],
+      "dimensions": {
+        "treated_units": "quantity",
+        "net_revenue_per_unit": "revenue_per_unit",
+        "milestone_revenue": "revenue",
+        "royalty_revenue": "revenue",
+        "service_revenue": "revenue"
+      }
+    },
+    "advertising": {
+      "required": [
+        "eligible_impressions",
+        "fill_rate",
+        "revenue_per_thousand_impressions"
+      ],
+      "dimensions": {
+        "eligible_impressions": "activity",
+        "fill_rate": "ratio",
+        "revenue_per_thousand_impressions": "revenue_per_activity",
+        "other_revenue": "revenue"
+      }
+    },
+    "gaming": {
+      "required": [
+        "active_users",
+        "payer_conversion",
+        "revenue_per_payer"
+      ],
+      "dimensions": {
+        "active_users": "quantity",
+        "payer_conversion": "ratio",
+        "revenue_per_payer": "revenue_per_unit",
+        "other_revenue": "revenue"
+      }
+    },
+    "cohort_subscription": {
+      "required": [
+        "opening_customers",
+        "new_customers",
+        "churned_customers",
+        "ending_customers",
+        "revenue_per_customer"
+      ],
+      "dimensions": {
+        "opening_customers": "quantity",
+        "new_customers": "quantity",
+        "churned_customers": "quantity",
+        "ending_customers": "quantity",
+        "revenue_per_customer": "revenue_per_unit",
+        "timing_factor": "ratio",
+        "usage_revenue": "revenue",
+        "new_customer_revenue_fraction": "ratio",
+        "churned_customer_lost_fraction": "ratio"
+      }
+    },
+    "delivery_pipeline": {
+      "required": [
+        "opening_orders",
+        "new_orders",
+        "cancellations",
+        "deliveries",
+        "ending_orders",
+        "unit_revenue"
+      ],
+      "dimensions": {
+        "opening_orders": "quantity",
+        "new_orders": "quantity",
+        "cancellations": "quantity",
+        "deliveries": "quantity",
+        "ending_orders": "quantity",
+        "unit_revenue": "revenue_per_unit",
+        "timing_factor": "ratio",
+        "other_revenue": "revenue"
+      }
+    },
+    "milestone_royalty": {
+      "required": [
+        "eligible_sales",
+        "royalty_rate"
+      ],
+      "dimensions": {
+        "eligible_sales": "revenue",
+        "royalty_rate": "ratio",
+        "milestone_revenue": "revenue",
+        "service_revenue": "revenue"
+      }
+    },
+    "insurance_service": {
+      "required": [
+        "coverage_units",
+        "revenue_per_coverage_unit"
+      ],
+      "dimensions": {
+        "coverage_units": "coverage_units",
+        "revenue_per_coverage_unit": "revenue_per_unit",
+        "timing_factor": "ratio",
+        "other_revenue": "revenue"
+      }
+    },
+    "subscription_arr_bridge": {
+      "required": [
+        "opening_arr",
+        "expansion_arr",
+        "new_arr",
+        "closing_arr",
+        "gross_retention_rate",
+        "lost_arr_revenue_fraction",
+        "expansion_revenue_fraction",
+        "new_arr_revenue_fraction"
+      ],
+      "dimensions": {
+        "opening_arr": "revenue",
+        "expansion_arr": "revenue",
+        "new_arr": "revenue",
+        "closing_arr": "revenue",
+        "usage_revenue": "revenue",
+        "gross_retention_rate": "ratio",
+        "lost_arr_revenue_fraction": "ratio",
+        "expansion_revenue_fraction": "ratio",
+        "new_arr_revenue_fraction": "ratio"
+      }
+    },
+    "installed_base_aftermarket": {
+      "required": [
+        "opening_installed_units",
+        "new_installed_units",
+        "retired_units",
+        "closing_installed_units",
+        "new_unit_revenue_fraction",
+        "retirement_lost_fraction",
+        "attach_rate",
+        "annual_revenue_per_attached_unit"
+      ],
+      "dimensions": {
+        "opening_installed_units": "quantity",
+        "new_installed_units": "quantity",
+        "retired_units": "quantity",
+        "closing_installed_units": "quantity",
+        "new_unit_revenue_fraction": "ratio",
+        "retirement_lost_fraction": "ratio",
+        "attach_rate": "ratio",
+        "annual_revenue_per_attached_unit": "revenue_per_unit"
+      }
+    },
+    "store_cohorts": {
+      "required": [
+        "opening_stores",
+        "new_stores",
+        "closed_stores",
+        "closing_stores",
+        "new_store_revenue_fraction",
+        "closure_lost_fraction",
+        "new_store_productivity",
+        "annual_revenue_per_mature_store"
+      ],
+      "dimensions": {
+        "opening_stores": "quantity",
+        "new_stores": "quantity",
+        "closed_stores": "quantity",
+        "closing_stores": "quantity",
+        "new_store_revenue_fraction": "ratio",
+        "closure_lost_fraction": "ratio",
+        "new_store_productivity": "ratio",
+        "annual_revenue_per_mature_store": "revenue_per_unit"
+      }
+    },
+    "renewable_generation": {
+      "required": [
+        "average_commissioned_mw",
+        "period_hours",
+        "pre_curtailment_capacity_factor",
+        "curtailment_rate",
+        "contracted_share",
+        "contract_price_per_mwh",
+        "merchant_price_per_mwh"
+      ],
+      "dimensions": {
+        "average_commissioned_mw": "quantity",
+        "period_hours": "activity",
+        "pre_curtailment_capacity_factor": "ratio",
+        "curtailment_rate": "ratio",
+        "contracted_share": "ratio",
+        "contract_price_per_mwh": "revenue_per_unit",
+        "merchant_price_per_mwh": "revenue_per_unit",
+        "other_revenue": "revenue"
+      }
+    },
+    "aum_fee_bridge": {
+      "required": [
+        "opening_aum",
+        "inflows",
+        "outflows",
+        "market_change",
+        "closing_aum",
+        "inflow_revenue_fraction",
+        "outflow_lost_fraction",
+        "market_change_revenue_fraction",
+        "management_fee_rate"
+      ],
+      "dimensions": {
+        "opening_aum": "monetary_balance",
+        "inflows": "monetary_balance",
+        "outflows": "monetary_balance",
+        "market_change": "monetary_balance",
+        "closing_aum": "monetary_balance",
+        "inflow_revenue_fraction": "ratio",
+        "outflow_lost_fraction": "ratio",
+        "market_change_revenue_fraction": "ratio",
+        "management_fee_rate": "ratio",
+        "recognized_performance_fees": "revenue"
+      }
+    },
+    "commercial_launch": {
+      "required": [
+        "eligible_units",
+        "annual_supply_capacity",
+        "adoption_rate",
+        "commercial_year_fraction",
+        "net_revenue_per_unit"
+      ],
+      "dimensions": {
+        "eligible_units": "quantity",
+        "annual_supply_capacity": "quantity",
+        "adoption_rate": "ratio",
+        "commercial_year_fraction": "ratio",
+        "net_revenue_per_unit": "revenue_per_unit"
+      }
+    },
+    "finite_adoption": {
+      "required": [
+        "opening_unserved_market",
+        "new_eligible_units",
+        "removed_eligible_units",
+        "adopted_units",
+        "closing_unserved_market",
+        "net_revenue_per_unit"
+      ],
+      "dimensions": {
+        "opening_unserved_market": "quantity",
+        "new_eligible_units": "quantity",
+        "removed_eligible_units": "quantity",
+        "adopted_units": "quantity",
+        "closing_unserved_market": "quantity",
+        "net_revenue_per_unit": "revenue_per_unit"
+      }
+    },
+    "inventory_sellthrough": {
+      "required": [
+        "opening_inventory",
+        "saleable_production",
+        "purchased_units",
+        "scrapped_units",
+        "sold_units",
+        "closing_inventory",
+        "net_revenue_per_unit"
+      ],
+      "dimensions": {
+        "opening_inventory": "quantity",
+        "saleable_production": "quantity",
+        "purchased_units": "quantity",
+        "scrapped_units": "quantity",
+        "sold_units": "quantity",
+        "closing_inventory": "quantity",
+        "net_revenue_per_unit": "revenue_per_unit"
+      }
+    }
+  },
+  "critical_files": [
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\SKILL.md",
+      "sha256": "4984909259ec83a48b239a8ba8d18e93fd1221d58c4fa20c46588de35471455f",
+      "bytes": 30311
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\constants.py",
+      "sha256": "bf051f719c27ed455d2826f5e03b391d7643c596dadfcf741aadf7562d0309de",
+      "bytes": 6200
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\source_clock.py",
+      "sha256": "194abc751640892bd38d0ad84ee482ac6797859cf27508abb88131fcf3376c3b",
+      "bytes": 9677
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+      "sha256": "ffe4a9c52c73639b4a9441c00a086624883f1e1d1c6bfa2c9bc94de0a27bc715",
+      "bytes": 22028
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_narrative_context.py",
+      "sha256": "c499ae024e9013c165aa98650df624b9567dd8ee67465a7826a06b35cfc18bde",
+      "bytes": 6124
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\input_evidence.py",
+      "sha256": "4cec4c2c4d43fea578be1261449724edb118cfeb18e08019effea27debfc1865",
+      "bytes": 14093
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+      "sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+      "bytes": 5324
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_backtest.py",
+      "sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "bytes": 29070
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\publication_registry.py",
+      "sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+      "bytes": 10936
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\analysis\\sensitivity.py",
+      "sha256": "da033d45f616ce547d71c1f2189cd6fd639eb992dc0336e0e3de6daa374056b9",
+      "bytes": 11450
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\generate_input_template.py",
+      "sha256": "f7e7f44a00203035002e4814adae9a9aaaf67bc053e8a001c80d7e100ae87a38",
+      "bytes": 13109
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\lint_input.py",
+      "sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+      "bytes": 21589
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\fix_hashes.py",
+      "sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+      "bytes": 8484
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\config\\filing_fetch.json",
+      "sha256": "1f5eb57d3e0697ae35fbc9f5d4b6e837459b56ea791508cc6ec5275b349b59b7",
+      "bytes": 94
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\config\\company_wiki.json",
+      "sha256": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+      "bytes": 1443
+    }
+  ],
+  "note": "--version manifest hashes file names; these actual content hashes record runtime bytes; final HEAD/scope chosen by MAIN at launch, not frozen by this package",
+  "business_runs": 0
+}

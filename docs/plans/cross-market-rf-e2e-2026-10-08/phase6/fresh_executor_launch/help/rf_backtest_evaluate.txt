@@ -1,0 +1,9 @@
+usage: revenue_backtest.py evaluate [-h] [--output OUTPUT] snapshot actuals
+
+positional arguments:
+  snapshot
+  actuals
+
+options:
+  -h, --help       show this help message and exit
+  --output OUTPUT

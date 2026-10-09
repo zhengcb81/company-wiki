@@ -437,3 +437,14 @@ CWP9775e402精确CI37890198535、RF28dbb910精确quality37890212555均SUCCESS；
 只读owner定位：runner.setup归档全config，包括已部署的local_ocr.json；原意纯PPTX parser能力探测的request没有显式normalization覆盖，实际默认构建OCR2.0 port，却沿旧30秒batch/40秒wrapper。故本次不能称“无OCR已经跑完却partial”，而是离线fixture受到当前生产OCR设置影响、短时停止尚未完成。实际native JSON/jobs/reservation随TEMP清理未保留，无法补造阶段/count/0账。外部模型调用仍为离线回放0，不把它与OCR CPU工作混为一谈。
 
 通用修复优先：离线fixture显式冻结自身parser配置，不继承host设置；真实live/MAIN配置仍由当前显式snapshot。报告保留小型actual阶段/产物/任务/账诊断，清理后可复查，不留原件副本/DB。独立owner先RED再改tools/cross_market_suite责任，不改产品完整度、不普遍放宽partial、不再全22OCR或整71来诊断。完成后只跑受影响公开fixture节点，MAIN仍保留真实configured大节点。
+
+
+## 2026-10-09：真实OCR组合通过及取消审批残留优先施工
+
+同一真实repair命令经既有永久授权及公开来源证据复核后获平台批准，session93469 exit0；mocr-20261009T060207-905b13f6/acceptance.json为ENGINEERING_COMPOSITION_PASS。15locator公共精确回放、48,804B原语言摘要；首7508tokens/8934microUSD、未知/未结算0；第二AUTO同pin/0reservation/0费，0新POST来自原生复用证据，不伪造首HTTP观察次数。均terminal/active0；原件/生产cfg/主PWF保护不变。母账207042tokens/119671microUSD，unknown7/FX2764保留，余1792958tokens/19877565microUSD。source仍partial/quality needs_review，不称研究通过。
+
+用户要求取消逐材料授权及类似过度审批，优先于研究启动。施工phase6/permission_residue_cleanup/IMPLEMENTATION.md；AGENTS沿用既有授权，不创建许可证。CodeGraph确认旧download build/validate、remediation批准writer没有生产调用。真RED9FAIL/10PASS/.95秒；取消hash/TTL/政策许可、退休人工proposal/shadow writer后28PASS/2SKIP/3.65秒，Ruff绿；2SKIP需显式4真实原件/consumer roots，不称已跑。现有read-policy/current-narrative39PASS/.97秒。删旧227行签收合同，替为6个无catalog IO/无shadow写责任反例，target/caps反例保留。
+
+邻仓owner负责FF/RF技能、ET旧双门指引、SW UI手输token；MAIN独占合并/安装/3PWF，不动Dayu/原件/owner WIP。replay-config owner集中35PASS/5.93秒及legacy6PASS/.89秒，tiny纯PPTX按真实PARSER_INCOMPLETE/未发布/0账保留，待交接。storage已收：20refs/7必要copies/15753513B，AUTO absent、0下载/模型/OCR/研究；保留至四审。
+
+工具错误：apply同路径多操作两次原子拒绝、无写；sandbox pytest11 tmp ERROR非代码RED，正常OS才得9真FAIL；不存在的docs/source_catalog.md/prompt_injection_soft_classification及PS rg wildcard未导致改动，已用实际清单纠正。launch初报非UTC是PowerShell JSON日期转换错误：原字节json.loads为+00，RF pure decode通过；owner纠正诊断、未改正确producer/封存receipt。Next Step集中接收审批残留和replay-config、正常发布安装后冻结scope，启动原三家公司真实研究/四审。Phase6/goal保持进行中。

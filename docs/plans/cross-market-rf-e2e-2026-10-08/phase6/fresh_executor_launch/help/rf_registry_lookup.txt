@@ -1,0 +1,5 @@
+usage: publication_registry.py lookup [-h] --input-sha INPUT_SHA
+
+options:
+  -h, --help            show this help message and exit
+  --input-sha INPUT_SHA

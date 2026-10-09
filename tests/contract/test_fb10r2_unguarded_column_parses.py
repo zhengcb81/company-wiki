@@ -8,8 +8,8 @@ behaviour:
 * `scanner._observe_file` (the size+mtime reuse shortcut) - a manifest that cannot be read is
   not a reuse candidate, so the scan FALLS THROUGH and re-hashes the file.  The batch keeps
   running and the manifest is repaired; nothing is silently served from the damaged value.
-* `remediation.approve_proposal` - the proposal is required evidence; an unreadable one is
-  refused BY NAME (`RemediationError`) instead of a bare `JSONDecodeError`.
+* `remediation.approve_proposal` is retired: even unreadable historical proposal bytes
+  remain unchanged and cannot revive the old approval writer.
 * `activation.rollback_activation` - reading the assertion list as `[]` would report success
   while restoring nothing, so an unreadable value refuses by name (`ActivationError`).
 * `assertion_service.verify_assertion` - evidence that cannot be read must not be copied
@@ -108,7 +108,7 @@ def test_scan_survives_a_damaged_manifest_and_repairs_it(tmp_path: Path) -> None
     assert payload.get("content_sha256"), payload
 
 
-def test_approve_proposal_refuses_by_name_on_an_unreadable_proposal(tmp_path: Path) -> None:
+def test_retired_approval_leaves_unreadable_historical_proposal_unchanged(tmp_path: Path) -> None:
     store = _store(tmp_path)
     with store.transaction() as connection:
         connection.execute(
@@ -120,7 +120,11 @@ def test_approve_proposal_refuses_by_name_on_an_unreadable_proposal(tmp_path: Pa
     with pytest.raises(RemediationError) as excinfo:
         approve_proposal(store, proposal_id="p" * 32, policy_hash=POLICY_HASH,
                          approved_by="owner")
-    assert "unreadable" in str(excinfo.value), str(excinfo.value)
+    assert "legacy_remediation_retired" in str(excinfo.value), str(excinfo.value)
+    assert store.fetchone(
+        "SELECT proposal_json FROM remediation_proposals WHERE proposal_id=?",
+        ("p" * 32,),
+    )[0] == BROKEN
 
 
 def test_rollback_refuses_by_name_on_an_unreadable_assertion_list(tmp_path: Path) -> None:

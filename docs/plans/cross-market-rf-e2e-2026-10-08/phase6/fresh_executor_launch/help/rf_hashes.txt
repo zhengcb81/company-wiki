@@ -1,0 +1,13 @@
+usage: fix_hashes.py [-h] [--output OUTPUT] [--check] [--dry-run] input
+
+Recompute and sync schema input-side hashes.
+
+positional arguments:
+  input            input JSON path (see
+                   contracts.constants.FORECAST_SCHEMA_VERSION)
+
+options:
+  -h, --help       show this help message and exit
+  --output OUTPUT  write fixed JSON here instead of in place
+  --check          report drift only, write nothing (exit 2 on drift)
+  --dry-run        print planned fixes, write nothing

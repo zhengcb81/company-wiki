@@ -1,0 +1,9 @@
+usage: revenue_backtest.py [-h] {create,evaluate} ...
+
+Create immutable revenue forecasts or evaluate them against actual revenue
+
+positional arguments:
+  {create,evaluate}
+
+options:
+  -h, --help         show this help message and exit
