@@ -60,22 +60,37 @@ def source_issuer_identity(catalog, request, cache_dir):
     result = SecurityIdentityResolver(master).identify(
         request.security_id or request.entity, market=request.market
     )
+    def issuer_key(candidate):
+        cik = candidate.identifiers.get("cik")
+        if candidate.market == "US" and isinstance(cik, str) and re.fullmatch(r"[0-9]+", cik):
+            return candidate.market, str(int(cik))
+        return candidate.market, candidate.security_id
+
+    def exact_candidates(observation):
+        if observation.status not in {IdentityStatus.RESOLVED, IdentityStatus.AMBIGUOUS}:
+            return ()
+        return tuple(item for item in observation.candidates
+                     if item.verified and item.active and item.match_basis in
+                     {"ticker_exact", "official_name_exact", "alias_exact"})
+
     identity = result.resolved
-    if (
-        result.status is not IdentityStatus.RESOLVED
-        or identity is None
-        or not identity.verified
-        or not identity.active
-    ):
+    if identity is None:
+        candidates = exact_candidates(result)
+        # Several share classes can be one issuer. Original filing identity is
+        # the issuer CIK, not a requirement to select one of its share classes.
+        if candidates and len({issuer_key(item) for item in candidates}) == 1:
+            identity = candidates[0]
+    if identity is None or not identity.verified or not identity.active:
         raise SourceReadError("blocked", "verified_issuer_unavailable")
-    # A ticker supplied alongside another issuer name must not silently win.
     entity_result = SecurityIdentityResolver(master).identify(
         request.entity, market=request.market
     )
-    if entity_result.resolved is None or (
-        entity_result.resolved.market,
-        entity_result.resolved.security_id,
-    ) != (identity.market, identity.security_id):
+    if entity_result.resolved is not None:
+        entity_candidates = (entity_result.resolved,)
+    else:
+        entity_candidates = exact_candidates(entity_result)
+    if not entity_candidates or any(issuer_key(item) != issuer_key(identity)
+                                    for item in entity_candidates):
         raise SourceReadError("blocked", "requested_issuer_conflict")
     return identity
 
@@ -192,8 +207,9 @@ def _registered_sec_cik(metadata):
     """Read registered issuer provenance, not a claim of raw DEI extraction.
 
     Never reconstruct an archive URL or infer CIK from an accession/ticker.
-    The unchanged source URL is an observed SourceRecord fact. It supplies the
-    issuer to compare with raw scope; it cannot qualify the original by itself.
+    The unchanged source URL is an observed SourceRecord fact. Its CIK is
+    compared with the registered-company binding and raw scope; it is neither
+    that company binding nor evidence of original DEI extraction.
     """
     from .source_reader import SourceReadError
 
@@ -223,7 +239,34 @@ def _registered_sec_cik(metadata):
     return next(iter(ciks), None)
 
 
-def source_scope_qualification(catalog, ref, *, metadata, request=None, identity=None):
+def _proved_sec_issuer(ref, metadata, patch, proof):
+    """Restore the original-to-registered-company binding, not URL identity.
+
+    These are the existing source owner's complete, original DEI observations.
+    They are reusable only while the SHA, field values, locators, issuer record
+    and current labels agree. Import declarations cannot create this binding.
+    """
+    from types import SimpleNamespace
+
+    observation = proof.get("entity")
+    if not isinstance(observation, dict):
+        return None
+    cik = observation.get("primary_cik")
+    record_id = observation.get("issuer_record_id")
+    if (not isinstance(cik, str) or not re.fullmatch(r"[0-9]+", cik)
+            or not isinstance(record_id, str) or not record_id.strip()):
+        return None
+    labels = {"entity": metadata.get("display_name") or metadata.get("entity") or metadata.get("company_name"),
+              "market": metadata.get("market"), "security_id": metadata.get("security_id")}
+    if any(labels.get(key) != patch.get(key) for key in labels):
+        return None
+    identity = SimpleNamespace(canonical_name=patch.get("entity"), market=patch.get("market"),
+                               security_id=patch.get("security_id"), source_record_id=record_id,
+                               identifiers={"cik": str(int(cik))})
+    return identity if _reusable_sec_scope(ref, identity, patch, proof) is not None else None
+
+
+def source_scope_qualification(catalog, ref, *, metadata, request=None, identity=None, identity_cache_dir=None):
     """Build one SourceRecord scope observation, with no original read/write.
 
     Request matching remains the resolver's responsibility. This owner compares
@@ -252,29 +295,23 @@ def source_scope_qualification(catalog, ref, *, metadata, request=None, identity
     patch = previous.get("source_fact_patch") or {}
     proof = previous.get("source_fact_evidence") or {}
     registered_cik = _registered_sec_cik(metadata)
-    if identity is not None:
-        cik = identity.identifiers.get("cik")
-        if registered_cik and (not cik or not cik.isdigit() or str(int(cik)) != registered_cik):
-            raise SourceReadError("blocked", "primary_issuer_conflict")
-    elif registered_cik:
-        # A genuine previous proof's existing issuer-record binding is reused,
-        # not invented from its canonical label or substituted for raw CIK proof.
-        entity_proof = proof.get("entity") or {}
-        identity = SimpleNamespace(
-            canonical_name=metadata.get("display_name") or metadata.get("entity") or metadata.get("company_name") or patch.get("entity"),
-            market=metadata.get("market"), security_id=metadata.get("security_id"),
-            source_record_id=entity_proof.get("issuer_record_id") if isinstance(entity_proof, dict) else None,
-            identifiers={"cik": registered_cik})
-    else:
-        # Older registered sources without provider CIK may use their existing
-        # source identity master. It is not a required second lookup for reads.
+    if identity is None:
+        identity = _proved_sec_issuer(ref, metadata, patch, proof)
+    if identity is None:
+        # URL CIK describes where the bytes came from; it does not prove that
+        # the imported company labels belong to that CIK. Observe the existing
+        # registered company once only when its original binding is missing.
         source_identity = SimpleNamespace(
             entity=metadata.get("display_name") or metadata.get("entity") or metadata.get("company_name") or metadata.get("security_id"),
             market=market, security_id=metadata.get("security_id"))
         try:
-            identity = source_issuer_identity(catalog, source_identity, None)
+            identity = source_issuer_identity(catalog, source_identity, identity_cache_dir)
         except (ValueError, SourceReadError) as exc:
             raise SourceReadError("blocked", "primary_identity_unresolved") from exc
+    cik = identity.identifiers.get("cik")
+    if registered_cik and (not isinstance(cik, str) or not re.fullmatch(r"[0-9]+", cik)
+                           or str(int(cik)) != registered_cik):
+        raise SourceReadError("blocked", "primary_issuer_conflict")
     primary = _reusable_sec_scope(ref, identity, patch, proof)
     return SourceScopeQualification(ref, identity, expected, kind, primary)
 

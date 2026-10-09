@@ -14,7 +14,6 @@ from .assertion_service import (
     restore_document_facts,
     source_issuer_identity,
     source_scope_qualification,
-    _reusable_sec_scope,
     _sec_original,
     SOURCE_SCOPE_METHOD as SEC_SCOPE_METHOD,
 )
@@ -439,19 +438,20 @@ def _prepare_local_source(
             reader.verify_version(ref, purpose="filing_reuse", budget=budget)
             return _result("ready", "existing_active_source", ref=ref)
         try:
-            identity = _identity(catalog, request, identity_cache_dir)
-            patch, proof = _prior_source_facts(catalog, ref)
+            qualification = source_scope_qualification(catalog, ref,
+                metadata=reader.describe_version(ref), request=request, identity_cache_dir=identity_cache_dir)
         except (ValueError, SourceReadError) as exc:
             return _result(getattr(exc, "status", "blocked"),
                            getattr(exc, "reason", "local_fact_validation_failed"), blocks=True)
-        primary = _reusable_sec_scope(ref, identity, patch, proof)
-        if primary is not None and _scope_matches(primary, request):
-            qualification = source_scope_qualification(catalog, ref,
-                metadata=reader.describe_version(ref), request=request, identity=identity)
+        primary = qualification.primary
+        if primary is not None:
             reader._verified_version(ref, purpose="filing_reuse",
                 expected_read_policy_sha256=None, retain_bytes=False, budget=budget,
                 scope_qualification=qualification)
             return _result("ready", "existing_active_source", ref=ref)
+        # The same registered identity observation can drive the existing writer
+        # when proof is missing; it must not resolve another master for this hit.
+        identity = qualification.identity
     if query.status == "ambiguous":
         return _result("ambiguous", query.reason, blocks=True)
     if (

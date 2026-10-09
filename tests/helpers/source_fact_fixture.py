@@ -72,7 +72,7 @@ def html(
 
 
 def imported(
-    cat, data, *, published=None, declared_year=None, title="fixture original", document_kind="annual_report"
+    cat, data, *, published=None, declared_year=None, title="fixture original", document_kind="annual_report", source_url=None
 ):
     sha = hashlib.sha256(data).hexdigest()
     request = {
@@ -85,7 +85,7 @@ def imported(
             "document_kind": document_kind,
             "title": title,
             "publisher": "Acme",
-            "source_url": "https://www.sec.gov/Archives/edgar/data/12345/000001234526000007/original.htm",
+            "source_url": source_url or "https://www.sec.gov/Archives/edgar/data/12345/000001234526000007/original.htm",
             "published_date": published,
             "filing_date": published,
             "fiscal_year": declared_year,

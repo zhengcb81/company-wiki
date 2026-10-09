@@ -152,6 +152,11 @@ def test_resolver_prefers_strong_provider_identity_and_builds_capture_ready_hand
             roots=(RootSpec("company_raw", project / "companies", "company_raw"),),
         )
     )
+    from company_wiki.source_catalog.security_identity import SecurityMasterStore, SecurityRecord
+    SecurityMasterStore(catalog.config.catalog_dir / "security_master").write_market(
+        "US", (SecurityRecord("ACME", "US", "NASDAQ", "ACME", "ACME", (), True,
+                              "sec", "https://www.sec.gov/files/company_tickers.json", "1", {"cik": "1"}),),
+        retrieved_at="2026-07-18T00:00:00Z", sources=("sec",))
     catalog.scan()
     request = SourceRequest(
         entity="ACME",
@@ -542,9 +547,14 @@ def _alphabet_catalog(tmp_path: Path, *, security_id: str):
     )
     security_master = project / ".source_catalog" / "security_master"
     security_master.mkdir(parents=True)
-    (security_master / "us.json").write_text(
-        json.dumps(_ALPHABET_SECURITY_MASTER), encoding="utf-8"
-    )
+    from company_wiki.source_catalog.security_identity import SecurityMasterStore, SecurityRecord
+    SecurityMasterStore(security_master).write_market(
+        "US", tuple(SecurityRecord(record["canonical_name"], "US", "NASDAQ", record["ticker"],
+                                   record["security_id"], tuple(record["aliases"]), True, "sec",
+                                   "https://www.sec.gov/files/company_tickers.json",
+                                   record["source_record_id"], record["identifiers"])
+                    for record in _ALPHABET_SECURITY_MASTER["records"]),
+        retrieved_at="2026-07-18T00:00:00Z", sources=("sec",))
     catalog = SourceCatalog(
         CatalogConfig(
             project_root=project,
