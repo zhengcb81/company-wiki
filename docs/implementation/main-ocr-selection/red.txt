@@ -1,0 +1,152 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\Ö£Ôø²¨\Projects\_harness_worktrees\cmrf-20261008\cwp-formats
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 41 items
+
+tests\unit\test_main_ocr_selection.py FFFFFFFFFFFF............FFFFFFFFFF [ 82%]
+....F.F                                                                  [100%]
+
+================================== FAILURES ===================================
+_ test_concrete_scope_changes_are_candidates_without_growth_claim[We will transition to two reporting segments for FY27.-reporting_definition_change] _
+tests\unit\test_main_ocr_selection.py:57: in test_concrete_scope_changes_are_candidates_without_growth_claim
+    assert hit is not None
+E   assert None is not None
+_ test_concrete_scope_changes_are_candidates_without_growth_claim[Our Devices segment will include Windows, games and advertising businesses.-business_scope_change] _
+tests\unit\test_main_ocr_selection.py:57: in test_concrete_scope_changes_are_candidates_without_growth_claim
+    assert hit is not None
+E   assert None is not None
+_ test_concrete_scope_changes_are_candidates_without_growth_claim[Commercial cloud now includes developer and security offerings previously reported in another segment.-business_scope_change] _
+tests\unit\test_main_ocr_selection.py:57: in test_concrete_scope_changes_are_candidates_without_growth_claim
+    assert hit is not None
+E   assert None is not None
+_ test_concrete_scope_changes_are_candidates_without_growth_claim[Server products now excludes on-premises developer services which have moved to Commercial products.-business_scope_change] _
+tests\unit\test_main_ocr_selection.py:57: in test_concrete_scope_changes_are_candidates_without_growth_claim
+    assert hit is not None
+E   assert None is not None
+_ test_concrete_scope_changes_are_candidates_without_growth_claim[Consumer products has been renamed from Office consumer products, but is otherwise unchanged.-reporting_rename] _
+tests\unit\test_main_ocr_selection.py:57: in test_concrete_scope_changes_are_candidates_without_growth_claim
+    assert hit is not None
+E   assert None is not None
+_ test_concrete_scope_changes_are_candidates_without_growth_claim[Frontier and support services was previously reported as Enterprise and Partner services, but is otherwise unchanged-reporting_rename] _
+tests\unit\test_main_ocr_selection.py:57: in test_concrete_scope_changes_are_candidates_without_growth_claim
+    assert hit is not None
+E   assert None is not None
+_ test_concrete_scope_changes_are_candidates_without_growth_claim[Marketing solutions and Premium subscriptions will now be reported in the Search and advertising revenue growth metric.-reporting_definition_change] _
+tests\unit\test_main_ocr_selection.py:57: in test_concrete_scope_changes_are_candidates_without_growth_claim
+    assert hit is not None
+E   assert None is not None
+_ test_concrete_scope_changes_are_candidates_without_growth_claim[We are updating our product and services reporting definitions to better represent the businesses as we manage them today.-reporting_definition_change] _
+tests\unit\test_main_ocr_selection.py:57: in test_concrete_scope_changes_are_candidates_without_growth_claim
+    assert hit is not None
+E   assert None is not None
+_ test_concrete_scope_changes_are_candidates_without_growth_claim[The customer growth metric will now exclude trial users previously included in subscribers.-business_scope_change] _
+tests\unit\test_main_ocr_selection.py:57: in test_concrete_scope_changes_are_candidates_without_growth_claim
+    assert hit is not None
+E   assert None is not None
+_ test_concrete_scope_changes_are_candidates_without_growth_claim[\u516c\u53f8\u5c06\u628a\u4e91\u670d\u52a1\u4e1a\u52a1\u4ece\u8f6f\u4ef6\u5206\u90e8\u8c03\u6574\u81f3\u667a\u80fd\u57fa\u7840\u8bbe\u65bd\u5206\u90e8\u3002-business_scope_change] _
+tests\unit\test_main_ocr_selection.py:57: in test_concrete_scope_changes_are_candidates_without_growth_claim
+    assert hit is not None
+E   assert None is not None
+_ test_concrete_scope_changes_are_candidates_without_growth_claim[\u6d88\u8d39\u4ea7\u54c1\u73b0\u66f4\u540d\u4e3a\u5bb6\u5ead\u4ea7\u54c1\uff0c\u5176\u4e1a\u52a1\u8303\u56f4\u4fdd\u6301\u4e0d\u53d8\u3002-reporting_rename] _
+tests\unit\test_main_ocr_selection.py:57: in test_concrete_scope_changes_are_candidates_without_growth_claim
+    assert hit is not None
+E   assert None is not None
+_ test_concrete_scope_changes_are_candidates_without_growth_claim[\u6d3b\u8dc3\u7528\u6237\u6307\u6807\u7684\u5b9a\u4e49\u4e3a\u4ed8\u8d39\u53ca\u8bd5\u7528\u7528\u6237\uff0c\u672c\u671f\u53e3\u5f84\u8c03\u6574\u4e3a\u4ec5\u5305\u542b\u4ed8\u8d39\u7528\u6237\u3002-reporting_definition_change] _
+tests\unit\test_main_ocr_selection.py:57: in test_concrete_scope_changes_are_candidates_without_growth_claim
+    assert hit is not None
+E   assert None is not None
+_____ test_split_existing_milestone_uses_pixel_groups_and_original_spans ______
+tests\unit\test_main_ocr_selection.py:81: in test_split_existing_milestone_uses_pixel_groups_and_original_spans
+    assert len(result.evidence_spans) == 2
+E   AssertionError: assert 0 == 2
+E    +  where 0 = len(())
+E    +    where () = NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:ccccccccccccccccccccccccccccccccccccccccccccccccccc...t=96, candidate_count=0, dropped_financial_count=0, source_units=2, omitted_candidate_count=0, coverage_complete=False).evidence_spans
+______ test_definition_fragment_completion_retains_future_and_unchanged _______
+tests\unit\test_main_ocr_selection.py:97: in test_definition_fragment_completion_retains_future_and_unchanged
+    assert len(result.evidence_spans) == 2
+E   AssertionError: assert 0 == 2
+E    +  where 0 = len(())
+E    +    where () = NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:ccccccccccccccccccccccccccccccccccccccccccccccccccc...t=96, candidate_count=0, dropped_financial_count=0, source_units=2, omitted_candidate_count=0, coverage_complete=False).evidence_spans
+_ test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines[metadata0-changes0] _
+tests\unit\test_main_ocr_selection.py:115: in test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines
+    assert not linkable(left, right)
+E   AssertionError: assert not True
+E    +  where True = linkable(NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:600ec5f498481210dc9b76545c2130f92b7ddbdd9191cf553ac93f9d...age_width': 2800, 'image_height': 1600, 'ocr_line_index': 0, 'ocr_confidence': 0.99, 'ocr_box': [95, 804, 2380, 844]})), NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:7bb7e31d3e3bd465290e5768c169cdd28412912c1a5772c5d201083a...age_width': 2800, 'image_height': 1600, 'ocr_line_index': 1, 'ocr_confidence': 0.99, 'ocr_box': [95, 848, 2380, 888]})))
+_ test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines[metadata1-changes1] _
+tests\unit\test_main_ocr_selection.py:115: in test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines
+    assert not linkable(left, right)
+E   AssertionError: assert not True
+E    +  where True = linkable(NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:600ec5f498481210dc9b76545c2130f92b7ddbdd9191cf553ac93f9d...age_width': 2800, 'image_height': 1600, 'ocr_line_index': 0, 'ocr_confidence': 0.99, 'ocr_box': [95, 804, 2380, 844]})), NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:7bb7e31d3e3bd465290e5768c169cdd28412912c1a5772c5d201083a...age_width': 2800, 'image_height': 1600, 'ocr_line_index': 1, 'ocr_confidence': 0.99, 'ocr_box': [95, 848, 2380, 888]})))
+_ test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines[metadata2-changes2] _
+tests\unit\test_main_ocr_selection.py:115: in test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines
+    assert not linkable(left, right)
+E   AssertionError: assert not True
+E    +  where True = linkable(NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:600ec5f498481210dc9b76545c2130f92b7ddbdd9191cf553ac93f9d...age_width': 2800, 'image_height': 1600, 'ocr_line_index': 0, 'ocr_confidence': 0.99, 'ocr_box': [95, 804, 2380, 844]})), NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:7bb7e31d3e3bd465290e5768c169cdd28412912c1a5772c5d201083a...age_width': 2800, 'image_height': 1600, 'ocr_line_index': 1, 'ocr_confidence': 0.99, 'ocr_box': [95, 848, 2380, 888]})))
+_ test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines[metadata3-changes3] _
+tests\unit\test_main_ocr_selection.py:115: in test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines
+    assert not linkable(left, right)
+E   AssertionError: assert not True
+E    +  where True = linkable(NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:600ec5f498481210dc9b76545c2130f92b7ddbdd9191cf553ac93f9d...age_width': 2800, 'image_height': 1600, 'ocr_line_index': 0, 'ocr_confidence': 0.99, 'ocr_box': [95, 804, 2380, 844]})), NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:7bb7e31d3e3bd465290e5768c169cdd28412912c1a5772c5d201083a...age_width': 2800, 'image_height': 1600, 'ocr_line_index': 1, 'ocr_confidence': 0.99, 'ocr_box': [95, 848, 2380, 888]})))
+_ test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines[metadata4-changes4] _
+tests\unit\test_main_ocr_selection.py:115: in test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines
+    assert not linkable(left, right)
+E   AssertionError: assert not True
+E    +  where True = linkable(NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:600ec5f498481210dc9b76545c2130f92b7ddbdd9191cf553ac93f9d...age_width': 2800, 'image_height': 1600, 'ocr_line_index': 0, 'ocr_confidence': 0.99, 'ocr_box': [95, 804, 2380, 844]})), NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:7bb7e31d3e3bd465290e5768c169cdd28412912c1a5772c5d201083a...age_width': 2800, 'image_height': 1600, 'ocr_line_index': 2, 'ocr_confidence': 0.99, 'ocr_box': [95, 848, 2380, 888]})))
+_ test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines[metadata5-changes5] _
+tests\unit\test_main_ocr_selection.py:115: in test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines
+    assert not linkable(left, right)
+E   AssertionError: assert not True
+E    +  where True = linkable(NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:600ec5f498481210dc9b76545c2130f92b7ddbdd9191cf553ac93f9d...age_width': 2800, 'image_height': 1600, 'ocr_line_index': 0, 'ocr_confidence': 0.99, 'ocr_box': [95, 804, 2380, 844]})), NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:7bb7e31d3e3bd465290e5768c169cdd28412912c1a5772c5d201083a...e_width': 2800, 'image_height': 1600, 'ocr_line_index': 1, 'ocr_confidence': 0.99, 'ocr_box': [1800, 848, 2790, 888]})))
+_ test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines[metadata6-changes6] _
+tests\unit\test_main_ocr_selection.py:115: in test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines
+    assert not linkable(left, right)
+E   AssertionError: assert not True
+E    +  where True = linkable(NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:600ec5f498481210dc9b76545c2130f92b7ddbdd9191cf553ac93f9d...age_width': 2800, 'image_height': 1600, 'ocr_line_index': 0, 'ocr_confidence': 0.99, 'ocr_box': [95, 804, 2380, 844]})), NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:7bb7e31d3e3bd465290e5768c169cdd28412912c1a5772c5d201083a...e_width': 2800, 'image_height': 1600, 'ocr_line_index': 1, 'ocr_confidence': 0.99, 'ocr_box': [95, 1000, 2380, 1040]})))
+_ test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines[metadata7-changes7] _
+tests\unit\test_main_ocr_selection.py:115: in test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines
+    assert not linkable(left, right)
+E   AssertionError: assert not True
+E    +  where True = linkable(NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:600ec5f498481210dc9b76545c2130f92b7ddbdd9191cf553ac93f9d...age_width': 2800, 'image_height': 1600, 'ocr_line_index': 0, 'ocr_confidence': 0.99, 'ocr_box': [95, 804, 2380, 844]})), NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:7bb7e31d3e3bd465290e5768c169cdd28412912c1a5772c5d201083a...mage_width': 2800, 'image_height': 1600, 'ocr_line_index': 1, 'ocr_confidence': 0.5, 'ocr_box': [95, 848, 2380, 888]})))
+_______ test_ocr_groups_are_bounded_and_sentence_barriers_stop_context ________
+tests\unit\test_main_ocr_selection.py:125: in test_ocr_groups_are_bounded_and_sentence_barriers_stop_context
+    assert sum(len(members) for _, members, _ in groups) == 9
+E   assert 0 == 9
+E    +  where 0 = sum(<generator object test_ocr_groups_are_bounded_and_sentence_barriers_stop_context.<locals>.<genexpr> at 0x0000021A4457F3E0>)
+_____________ test_selector_version_upgrades_generation_identity ______________
+tests\unit\test_main_ocr_selection.py:150: in test_selector_version_upgrades_generation_identity
+    assert selector.NARRATIVE_SELECTOR_VERSION == "0.5.0"
+E   AssertionError: assert '0.4.2' == '0.5.0'
+E
+E     - 0.5.0
+E     + 0.4.2
+=========================== short test summary info ===========================
+FAILED tests/unit/test_main_ocr_selection.py::test_concrete_scope_changes_are_candidates_without_growth_claim[We will transition to two reporting segments for FY27.-reporting_definition_change]
+FAILED tests/unit/test_main_ocr_selection.py::test_concrete_scope_changes_are_candidates_without_growth_claim[Our Devices segment will include Windows, games and advertising businesses.-business_scope_change]
+FAILED tests/unit/test_main_ocr_selection.py::test_concrete_scope_changes_are_candidates_without_growth_claim[Commercial cloud now includes developer and security offerings previously reported in another segment.-business_scope_change]
+FAILED tests/unit/test_main_ocr_selection.py::test_concrete_scope_changes_are_candidates_without_growth_claim[Server products now excludes on-premises developer services which have moved to Commercial products.-business_scope_change]
+FAILED tests/unit/test_main_ocr_selection.py::test_concrete_scope_changes_are_candidates_without_growth_claim[Consumer products has been renamed from Office consumer products, but is otherwise unchanged.-reporting_rename]
+FAILED tests/unit/test_main_ocr_selection.py::test_concrete_scope_changes_are_candidates_without_growth_claim[Frontier and support services was previously reported as Enterprise and Partner services, but is otherwise unchanged-reporting_rename]
+FAILED tests/unit/test_main_ocr_selection.py::test_concrete_scope_changes_are_candidates_without_growth_claim[Marketing solutions and Premium subscriptions will now be reported in the Search and advertising revenue growth metric.-reporting_definition_change]
+FAILED tests/unit/test_main_ocr_selection.py::test_concrete_scope_changes_are_candidates_without_growth_claim[We are updating our product and services reporting definitions to better represent the businesses as we manage them today.-reporting_definition_change]
+FAILED tests/unit/test_main_ocr_selection.py::test_concrete_scope_changes_are_candidates_without_growth_claim[The customer growth metric will now exclude trial users previously included in subscribers.-business_scope_change]
+FAILED tests/unit/test_main_ocr_selection.py::test_concrete_scope_changes_are_candidates_without_growth_claim[\u516c\u53f8\u5c06\u628a\u4e91\u670d\u52a1\u4e1a\u52a1\u4ece\u8f6f\u4ef6\u5206\u90e8\u8c03\u6574\u81f3\u667a\u80fd\u57fa\u7840\u8bbe\u65bd\u5206\u90e8\u3002-business_scope_change]
+FAILED tests/unit/test_main_ocr_selection.py::test_concrete_scope_changes_are_candidates_without_growth_claim[\u6d88\u8d39\u4ea7\u54c1\u73b0\u66f4\u540d\u4e3a\u5bb6\u5ead\u4ea7\u54c1\uff0c\u5176\u4e1a\u52a1\u8303\u56f4\u4fdd\u6301\u4e0d\u53d8\u3002-reporting_rename]
+FAILED tests/unit/test_main_ocr_selection.py::test_concrete_scope_changes_are_candidates_without_growth_claim[\u6d3b\u8dc3\u7528\u6237\u6307\u6807\u7684\u5b9a\u4e49\u4e3a\u4ed8\u8d39\u53ca\u8bd5\u7528\u7528\u6237\uff0c\u672c\u671f\u53e3\u5f84\u8c03\u6574\u4e3a\u4ec5\u5305\u542b\u4ed8\u8d39\u7528\u6237\u3002-reporting_definition_change]
+FAILED tests/unit/test_main_ocr_selection.py::test_split_existing_milestone_uses_pixel_groups_and_original_spans
+FAILED tests/unit/test_main_ocr_selection.py::test_definition_fragment_completion_retains_future_and_unchanged
+FAILED tests/unit/test_main_ocr_selection.py::test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines[metadata0-changes0]
+FAILED tests/unit/test_main_ocr_selection.py::test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines[metadata1-changes1]
+FAILED tests/unit/test_main_ocr_selection.py::test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines[metadata2-changes2]
+FAILED tests/unit/test_main_ocr_selection.py::test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines[metadata3-changes3]
+FAILED tests/unit/test_main_ocr_selection.py::test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines[metadata4-changes4]
+FAILED tests/unit/test_main_ocr_selection.py::test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines[metadata5-changes5]
+FAILED tests/unit/test_main_ocr_selection.py::test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines[metadata6-changes6]
+FAILED tests/unit/test_main_ocr_selection.py::test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines[metadata7-changes7]
+FAILED tests/unit/test_main_ocr_selection.py::test_ocr_groups_are_bounded_and_sentence_barriers_stop_context
+FAILED tests/unit/test_main_ocr_selection.py::test_selector_version_upgrades_generation_identity
+======================== 24 failed, 17 passed in 2.35s ========================

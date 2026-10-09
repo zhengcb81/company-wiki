@@ -1,0 +1,181 @@
+{
+  "schema_version": "main-ocr-selection-page7/1",
+  "status": "FAILED_RETAIN_SAMPLE",
+  "base": "ea76998cc152317f653f101441de69bcb8aeb4fa",
+  "worktree_head_at_execution": "ea76998cc152317f653f101441de69bcb8aeb4fa",
+  "local_code_uncommitted_at_execution": true,
+  "owned_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOS-cyk7s302",
+  "sample_readonly": true,
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\cwp-formats\\docs\\implementation\\main-ocr-selection\\sample_page7.py",
+    "--main-project",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki"
+  ],
+  "outer_seconds": 21.959662700013723,
+  "deadline_seconds": 60,
+  "execution": {
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\cwp-formats\\docs\\implementation\\main-ocr-selection\\sample_page7.py\", line 350, in <module>\n    child(args.child)\n    ~~~~~^^^^^^^^^^^^\n  File \"C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\cmrf-20261008\\cwp-formats\\docs\\implementation\\main-ocr-selection\\sample_page7.py\", line 181, in child\n    \"omitted_count\": selected.omitted_count,\n                     ^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'NarrativeEvidencePackage' object has no attribute 'omitted_count'\n",
+    "terminated": true,
+    "timeout": false
+  },
+  "protected_before": {
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\c0\\c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4": {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\c0\\c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "size": 4016522,
+      "mtime_ns": 1791450580109140500,
+      "mode": 33206,
+      "file_attributes": 32
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "size": 866,
+      "mtime_ns": 1790542565101886700,
+      "mode": 33206,
+      "file_attributes": 32
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\local_ocr.json": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\local_ocr.json",
+      "sha256": "9b8a7df81ca62ebc4bb9c2d60d45c247b291564a4a38f5648e5f4b3edb59889b",
+      "size": 943,
+      "mtime_ns": 1791519643945418900,
+      "mode": 33206,
+      "file_attributes": 32
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml",
+      "sha256": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+      "size": 3602,
+      "mtime_ns": 1791230922098841600,
+      "mode": 33206,
+      "file_attributes": 32
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\task_plan.md": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\task_plan.md",
+      "sha256": "0088125f0eca3673e4fb08e5ba3c567b233fa0500d652109747474af894ff14c",
+      "size": 22698,
+      "mtime_ns": 1791523112356617800,
+      "mode": 33206,
+      "file_attributes": 32
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\findings.md": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\findings.md",
+      "sha256": "b590be67eeb25366d43a2cba5437a9b101cf7116b2c9f496c332cd0f18981731",
+      "size": 43703,
+      "mtime_ns": 1791523141029107300,
+      "mode": 33206,
+      "file_attributes": 32
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\progress.md": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\progress.md",
+      "sha256": "0fd328d935cb184f167fa9d0f47cbeb8f84b5bb6d89dfe895349f7b01e56bce7",
+      "size": 66429,
+      "mtime_ns": 1791523187410344200,
+      "mode": 33206,
+      "file_attributes": 32
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\ocr_major_node\\run_acceptance.py": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\ocr_major_node\\run_acceptance.py",
+      "sha256": "3daa589970cd0c728d8191ceb1bc2a634e668b77c93dc7c3818a4aa076a729ba",
+      "size": 39464,
+      "mtime_ns": 1791523829076408900,
+      "mode": 33206,
+      "file_attributes": 32
+    },
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-srw9_9oe\\auto\\first.sqlite3": {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-srw9_9oe\\auto\\first.sqlite3",
+      "sha256": "4f87e8c2e8e883f8656e319447b50dacd56417569469611b0b6fdea1cd310149",
+      "size": 172032,
+      "mtime_ns": 1791522083866987600,
+      "mode": 33206,
+      "file_attributes": 32
+    }
+  },
+  "protected_after": {
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\c0\\c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4": {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\output\\cross-market-rf-e2e-2026-10-08\\objects\\c0\\c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "size": 4016522,
+      "mtime_ns": 1791450580109140500,
+      "mode": 33206,
+      "file_attributes": 32
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "size": 866,
+      "mtime_ns": 1790542565101886700,
+      "mode": 33206,
+      "file_attributes": 32
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\local_ocr.json": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\local_ocr.json",
+      "sha256": "9b8a7df81ca62ebc4bb9c2d60d45c247b291564a4a38f5648e5f4b3edb59889b",
+      "size": 943,
+      "mtime_ns": 1791519643945418900,
+      "mode": 33206,
+      "file_attributes": 32
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml",
+      "sha256": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+      "size": 3602,
+      "mtime_ns": 1791230922098841600,
+      "mode": 33206,
+      "file_attributes": 32
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\task_plan.md": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\task_plan.md",
+      "sha256": "0088125f0eca3673e4fb08e5ba3c567b233fa0500d652109747474af894ff14c",
+      "size": 22698,
+      "mtime_ns": 1791523112356617800,
+      "mode": 33206,
+      "file_attributes": 32
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\findings.md": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\findings.md",
+      "sha256": "b590be67eeb25366d43a2cba5437a9b101cf7116b2c9f496c332cd0f18981731",
+      "size": 43703,
+      "mtime_ns": 1791523141029107300,
+      "mode": 33206,
+      "file_attributes": 32
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\progress.md": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\progress.md",
+      "sha256": "0fd328d935cb184f167fa9d0f47cbeb8f84b5bb6d89dfe895349f7b01e56bce7",
+      "size": 66429,
+      "mtime_ns": 1791523187410344200,
+      "mode": 33206,
+      "file_attributes": 32
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\ocr_major_node\\run_acceptance.py": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\ocr_major_node\\run_acceptance.py",
+      "sha256": "3daa589970cd0c728d8191ceb1bc2a634e668b77c93dc7c3818a4aa076a729ba",
+      "size": 39464,
+      "mtime_ns": 1791523829076408900,
+      "mode": 33206,
+      "file_attributes": 32
+    },
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-srw9_9oe\\auto\\first.sqlite3": {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mOCR-srw9_9oe\\auto\\first.sqlite3",
+      "sha256": "4f87e8c2e8e883f8656e319447b50dacd56417569469611b0b6fdea1cd310149",
+      "size": 172032,
+      "mtime_ns": 1791522083866987600,
+      "mode": 33206,
+      "file_attributes": 32
+    }
+  },
+  "protected_unchanged": true,
+  "origin_auto_retained": true,
+  "cleanup": "pending bounded PowerShell cleanup after child terminal",
+  "supplier_calls": 0,
+  "model_tokens": 0,
+  "model_cost_micro_usd": 0,
+  "unknown_provider_usage": 0,
+  "native_local_ocr": null
+}
