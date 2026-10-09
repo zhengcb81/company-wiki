@@ -264,6 +264,7 @@ def _freeze_json(value: Any) -> Any:
     return value
 
 
+@dataclass(frozen=True)
 class StrictModel:
     """Exact-field JSON conversion shared by frozen schema value objects."""
 
@@ -544,8 +545,24 @@ class HandlerMetrics(StrictModel):
     tokens: int
     cost_usd: float
     duration_ms: int
+    reasoning_tokens: int | None = None
+    usage_diagnostic: str | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        # Keep omitted observations byte-compatible with historical receipts.
+        value = super().to_dict()
+        for name in ("reasoning_tokens", "usage_diagnostic"):
+            if value[name] is None:
+                value.pop(name)
+        return value
 
     def __post_init__(self) -> None:
+        if self.reasoning_tokens is not None and (
+            type(self.reasoning_tokens) is not int or self.reasoning_tokens < 0
+        ):
+            raise ValueError("reasoning_tokens must be a nonnegative integer or null")
+        if self.usage_diagnostic not in {None, "reasoning_usage_invalid"}:
+            raise ValueError("invalid usage diagnostic")
         if type(self.tokens) is not int or self.tokens < 0:
             raise ValueError("tokens must be a non-negative integer")
         if isinstance(self.cost_usd, bool) or not isinstance(self.cost_usd, (int, float)):

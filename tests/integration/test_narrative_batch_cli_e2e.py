@@ -657,3 +657,56 @@ def test_cli_invalid_content_keeps_known_usage_and_safe_stage_on_resume(
                 output=process.stdout + process.stderr + again.stdout + again.stderr)
         finally:
             state.catalog.close()
+
+
+@pytest.mark.e2e
+@pytest.mark.parametrize("failed", [False, True])
+def test_reasoning_meter_public_cli_persistence_compaction_and_read_only_resume(
+    tmp_path_factory, loopback_model_server, failed,
+):
+    """Real local POST and spawned workers; no external model, no production writes."""
+    if failed:
+        loopback_model_server.response_body = json.dumps({
+            "model": "stub-model", "choices": [{"finish_reason": "length",
+                "message": {"content": "{partial", "reasoning_content": "NEVER_PERSIST_HIDDEN"}}],
+            "usage": {"prompt_tokens": 73, "completion_tokens": 8194,
+                "completion_tokens_details": {"reasoning_tokens": 8000}},
+        }).encode()
+    else:
+        loopback_model_server.response_usage = {
+            "prompt_tokens": 73, "completion_tokens": 19,
+            "completion_tokens_details": {"reasoning_tokens": 0},
+        }
+    with isolated_batch_directory(tmp_path_factory) as root:
+        state = _prepare(root, loopback_model_server.endpoint, one_source=True)
+        try:
+            request = json.loads(state.request_path.read_text(encoding="utf-8"))
+            request["model"]["max_output_tokens"] = 8192
+            state.request_path.write_text(json.dumps(request), encoding="utf-8")
+            originals = _originals(state)
+            process, receipt = _invoke(state)
+            assert process.returncode == (2 if failed else 0), (process.stderr, receipt)
+            assert len(loopback_model_server.requests) == 1 and loopback_model_server.errors == []
+            observation, = receipt["documents"][0]["model_diagnostics"]
+            assert observation["usage_status"] == "known"
+            assert observation["input_tokens"] == 73
+            assert observation["output_tokens"] == (8194 if failed else 19)
+            assert observation["reasoning_tokens"] == (8000 if failed else 0)
+            assert receipt["budget"]["tokens"] == (8267 if failed else 92)
+            summary, = [job for job in state.store.list_jobs() if job.job_type == "source.narrative_summarize"
+                        and job.job_id in NarrativeRunStore(state.store.db_path).get_run("cli-e2e").job_ids]
+            attempt, = state.store.list_attempts(summary.job_id)
+            stored = json.loads(attempt.result_json)
+            assert stored["metrics"]["reasoning_tokens"] == (8000 if failed else 0)
+            assert "NEVER_PERSIST_HIDDEN" not in attempt.result_json
+            if not failed:
+                assert stored["result"]["schema_version"].startswith("narrative-terminal-receipt/")
+            again, resumed = _invoke(state)
+            assert again.returncode == process.returncode
+            assert resumed["documents"] == receipt["documents"]
+            assert resumed["budget"] == receipt["budget"]
+            assert len(loopback_model_server.requests) == 1
+            assert_originals_and_foreign_jobs_untouched(state, originals,
+                output=process.stdout + process.stderr + again.stdout + again.stderr)
+        finally:
+            state.catalog.close()

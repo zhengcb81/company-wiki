@@ -20,6 +20,7 @@ from .narrative_model import (
     ModelTimeoutError,
     NarrativeModelRequest,
     NarrativeModelResponse,
+    validate_reasoning_observation,
 )
 
 
@@ -69,9 +70,13 @@ class ModelOutputTruncatedError(ModelResponseError):
         output_tokens: int | None,
         duration_ms: int,
         content_bytes: int = 0,
+        reasoning_tokens: int | None = None,
+        usage_diagnostic: str | None = None,
     ) -> None:
         if type(content_bytes) is not int or not 0 <= content_bytes <= MODEL_RESPONSE_MAX_BYTES:
             raise ValueError("invalid truncated content byte count")
+        validate_reasoning_observation(reasoning_tokens, output_tokens, usage_diagnostic)
+        self.reasoning_tokens, self.usage_diagnostic = reasoning_tokens, usage_diagnostic
         self.finish_reason = "length"
         self.content_bytes = content_bytes
         self.model_id = model_id
@@ -89,7 +94,8 @@ class ModelEnvelopeError(ModelResponseError):
 
     def __init__(self, response_stage: str, *, http_status: int = 200,
                  provider_code: int | None = None, input_tokens: int | None = None,
-                 output_tokens: int | None = None, duration_ms: int = 0):
+                 output_tokens: int | None = None, duration_ms: int = 0,
+                 reasoning_tokens: int | None = None, usage_diagnostic: str | None = None):
         if response_stage not in self.stages:
             raise ValueError("invalid response diagnostic stage")
         if type(http_status) is not int or not 100 <= http_status <= 599:
@@ -100,9 +106,26 @@ class ModelEnvelopeError(ModelResponseError):
             type(value) is int and value >= 0 for value in (input_tokens, output_tokens)
         ):
             raise ValueError("invalid paired response usage")
+        validate_reasoning_observation(reasoning_tokens, output_tokens, usage_diagnostic)
+        self.reasoning_tokens, self.usage_diagnostic = reasoning_tokens, usage_diagnostic
         self.response_stage, self.http_status, self.provider_code = response_stage, http_status, provider_code
         self.input_tokens, self.output_tokens, self.duration_ms = input_tokens, output_tokens, duration_ms
         super().__init__("MODEL_RESPONSE_INVALID")
+
+
+
+def _reasoning_observation(usage: Any, output_tokens: int | None) -> tuple[int | None, str | None]:
+    details = usage.get("completion_tokens_details") if isinstance(usage, dict) else None
+    if details is None:
+        return None, None
+    if not isinstance(details, dict):
+        return None, "reasoning_usage_invalid"
+    value = details.get("reasoning_tokens")
+    if value is None:
+        return None, None
+    if type(value) is not int or value < 0 or output_tokens is None or value > output_tokens:
+        return None, "reasoning_usage_invalid"
+    return value, None
 
 
 def _positive_integer(value: int, name: str) -> int:
@@ -358,7 +381,8 @@ class NarrativeHTTPModel:
     def _response(
         self, request: NarrativeModelRequest, body: bytes, started: float, *, http_status: int = 200,
     ) -> NarrativeModelResponse:
-        input_tokens = output_tokens = provider_code = None
+        input_tokens = output_tokens = provider_code = reasoning_tokens = None
+        usage_diagnostic = None
         stage = "json"
         try:
             payload = json.loads(body.decode("utf-8"))
@@ -370,6 +394,7 @@ class NarrativeHTTPModel:
             output_tokens = usage.get("completion_tokens") if isinstance(usage, dict) else None
             if not all(type(value) is int and value >= 0 for value in (input_tokens, output_tokens)):
                 input_tokens = output_tokens = None
+            reasoning_tokens, usage_diagnostic = _reasoning_observation(usage, output_tokens)
             base = payload.get("base_resp")
             numeric_code = base.get("status_code") if isinstance(base, dict) else None
             if type(numeric_code) is int and 0 < numeric_code < 1_000_000:
@@ -403,6 +428,7 @@ class NarrativeHTTPModel:
         ):
             raise ModelEnvelopeError(stage, http_status=http_status, provider_code=provider_code,
                 input_tokens=input_tokens, output_tokens=output_tokens,
+                reasoning_tokens=reasoning_tokens, usage_diagnostic=usage_diagnostic,
                 duration_ms=max(0, int((time.monotonic() - started) * 1000))) from None
         if len(encoded) > MODEL_RESPONSE_MAX_BYTES:
             raise ModelResponseTooLargeError("MODEL_RESPONSE_TOO_LARGE")
@@ -413,11 +439,13 @@ class NarrativeHTTPModel:
                 input_tokens=input_tokens,
                 output_tokens=output_tokens,
                 duration_ms=duration_ms,
-                content_bytes=len(encoded),
+                content_bytes=len(encoded), reasoning_tokens=reasoning_tokens,
+                usage_diagnostic=usage_diagnostic,
             )
         if not encoded:
             raise ModelEnvelopeError("empty_content", http_status=http_status,
-                input_tokens=input_tokens, output_tokens=output_tokens, duration_ms=duration_ms)
+                input_tokens=input_tokens, output_tokens=output_tokens, duration_ms=duration_ms,
+                reasoning_tokens=reasoning_tokens, usage_diagnostic=usage_diagnostic)
         return NarrativeModelResponse(
             adapter_id=self.adapter_id,
             model_id=actual_model,
@@ -426,6 +454,7 @@ class NarrativeHTTPModel:
             input_tokens=input_tokens,
             output_tokens=output_tokens,
             duration_ms=duration_ms,
+            reasoning_tokens=reasoning_tokens, usage_diagnostic=usage_diagnostic,
         )
 
 
