@@ -1,0 +1,28 @@
+{
+  "schema_version": "official-source-date-investigation/1",
+  "observed_at": "2026-10-09T04:31:02.632107+00:00",
+  "binary_source_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+  "binary_source_url": "https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/FY27ExternalKPIs.pptx",
+  "publisher_date": "2026-09-02",
+  "primary_proofs": [
+    {
+      "url": "https://www.microsoft.com/en-us/investor/default",
+      "locator": "Announcements, September 2, 2026 / Fiscal Year 2027 Segments and Investor Metrics / PowerPoint",
+      "actual_web_observation": "turn276view0",
+      "pptx_redirect": "https://aka.ms/KPIFY27 -> officeapps viewer src=existing official PPTX URL",
+      "viewer_access": "web tool cannot parse viewer, redirect reveals exact source URL"
+    },
+    {
+      "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526380280/d291965d8k.htm",
+      "locator": "Item 7.01 / Exhibit 99.1",
+      "actual_web_observation": "turn276view1",
+      "fact": "Issuer explicitly dates presentation publication to September 2, 2026."
+    }
+  ],
+  "related_official_text_source": {
+    "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526380280/d291965dex991.htm",
+    "actual_web_observation": "turn277view1",
+    "observation": "SEC exhibit has accessible presentation text including page7 operating reporting changes; use as separate source through normal CWP official import and actual raw hash, not copied as if same binary SourceRef."
+  },
+  "boundary": "Current primary publication proof is not a stored historical byte capture. Old sealed artifacts/date-null engineering import unchanged. Fresh run must register precise observed metadata via public CWP writer and preserve distinct retrieval time/as-of."
+}

@@ -200,3 +200,20 @@ OCR真实首次22页1067行/145.549秒，8 selected spans回放4媒体16.570秒�
 - 本机OCR只采用配置中已有RapidOCR3.8.1/ORT1.26.0和三ONNX实际SHA，控制面preflight真实成功、0图片推理、0网络，不自动装资源。source partial与selected precision仍分开；未宣称漏行已修。
 - 费用账当前历史199534tokens/110737microUSD含native r3=9499tokens/10235microUSD；核对一致，不能重复加减。unknown7与FXguard2764保留。现有效累计上限2M/USD20，剩1800466tokens/19886499microUSD。给真实OCR节点30k/$0.10独立额度、六公司每家120k/$2加总720k/$12，在已核对余量内；尚未支出。
 - 本轮读取旧猜测 `config/worker_config.json` 失败，已改用实际rg目录清单，当前配置文件是source_catalog_worker.yaml及Config loader；没有据错误路径修改配置。
+
+## 2026-10-09：RF已发布，CWP实际CI兼容缺口并入当前责任包
+
+- RF W04–W06修复原四项独立复验25PASS/0.86秒，可并线；MAIN merge `e688b0a2dceeb7de453e43dad3534061bf346bc9`并normal push。原assurance三个修改与output原样保留。canonical pre-push Ruff、7模块mypy、125责任行为/21.49秒通过；精确远端quality [37883658771](https://github.com/zhengcb81/revenue-forecast/actions/runs/37883658771)成功。
+- 定点安装闭包22文件x2 physical skill roots=44写入，.claude既有junction仍同.agents，config/output未动。交付工作树CRLF与Git LF必须分别记录SHA，MAIN逐文件证明仅换行规范化再同步exact committed blobs；installed smoke两份实际installed revenue_core native quarter→strong validation PASS、非财报null期合法。工程fixtures不计真实公司研究。
+- CWP实际主线是master（不是main）：第一次push不存在main引用已纠正为normal master，a901b67f已远端。精确CI [37883563191](https://github.com/zhengcb81/company-wiki/actions/runs/37883563191)Unit失败；其余lint/mypy/compile/config过。公开annotations指出versioned-resume scoped旧builder生成不完整binding/3、PPTX全格式固定1.0及旧normalize patch。shared owner已实际复现16FAIL/35PASS，按兼容producer/decoder共因修：无generation的合法legacy scoped保持/2，真实完整manifest才/3，坏/3不静默降级；三版freeze/currentfacts/jobhash测试保留，新per-formatparser契约测试迁移。实际风险两文件纳入同shared重大集中节点，不再加每commit全CI/人审。
+- 只读PRIMARY调查已证微软PPTX公开日2026-09-02：官方IR公告链接指向相同FY27ExternalKPIs.pptx，SEC8-K Item7.01说明同日发布。另有同presentation SEC HTML正文可作为独立来源补充OCR漏行；不是同binary SourceRef，必须正常CWP登记/实际SHA再消费。旧null日期工程receipt与封存模型不改。记录phase6/msft_presentation_publication_investigation.json。
+- 源查找路径错误（worker_config.json、FF company_wiki.example.json、cohort proof旧名）未触发修改，已按rg实际目录纠正；安装smoke最初test helper导入canonical模块并试图default registry，沙箱在写前拒绝，修为fixture JSON→fresh installed subprocess+明确owned registry。错误保留，不包装成产品缺陷/成功，owned测试根已恢复。
+
+Next Step：shared OCR runtime+上述实际CI反例集中通过→合并master/push精确CI→一次真实22页public有限batch/read/跨run默认复用及固定71检查→两组新研究/四审→公司池loop。PWF与goal均保持in_progress/active。
+
+
+### 主线大节点的额外待观察项（2026-10-09）
+
+RF `prepare_source_result` 对 public narrative read 仍 clamp 30秒，旧元数据/raw读取成本与OCR选中media重放成本不同。parser实际8span/4media16.57秒，更多选中media可能超过30秒；需在真实大节点测量，不臆断已失败，不先任意扩大上限。若发生超时，统一按调用方剩余deadline传递责任层，保留有界终止，禁止偷偷重OCR全文或无期限等待。
+
+本轮两个具体路径读取错误：公司池PWF位于audit项目、CI文件为`.github/workflows/ci.yml`，不是猜测的CWP池路径/tests.yml。后续先用文件清单定位；未产生写入。独立agent仅准备验收脚本和来源映射，不重做工程包、不中途发付费请求。

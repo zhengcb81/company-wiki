@@ -118,3 +118,21 @@ RF四个独立验收finding的共用关系修复在 `a7370517`，owner集中201P
 当前并行责任清楚：shared OCR runtime composition在隔离branch `codex/main-ocr-runtime-composition-20261009`，独占shared handlers/port与自己的tests/docs；parser停止写，MAIN独占生产配置、预算、主PWF、RF合并安装及真实大节点。部署配置由MAIN实际校验本地CPU资源后写 `config/local_ocr.json`，0OCR推理/0网络，不能把无模型环境说成具备能力。
 
 剩余顺序不变：shared接线→一次真实22页batch/read/默认零调用复用及71项回放→原三家全新RF研究/四独立审查→固定新三家同样验收→恢复冻结NVDA及公司池loop。不启动新随机抽样，工程绿色不替代研究。
+
+最新行动：RF W04–W06已独立复验/merge/push/定点安装，exact CI37883658771成功；当前唯一代码整合项为shared OCR runtime及CWP实际CI versioned-resume/per-format兼容根修。已完成内容不重派、不再次跑201全套；详见本轮progress和phase6/rf_main_install_manifest.json。之后严格按两组三市场真实大节点，再恢复公司池loop。
+
+
+## 当前执行面板：主线先行（2026-10-09，本表覆盖历史 Next Step）
+
+| 工作 | 实际状态 | 证据 / 下一步 |
+|---|---|---|
+| W01 / W02 / W03 / W07 | 已合并发布 | 前述跨仓集中记录；无需重复施工 |
+| RF W04–W06 | 工程完成，已合 main / 安装 / push | `e688b0a2`；独立复验25项；主线125项；远端CI37883658771成功；安装44文件+2个真实installed smoke |
+| CWP 跨run复用 / parser OCR | 已合 master；共享接线仍进行中 | `a901b67f`；真实POST强杀恢复与另AUTO零调用复用1PASS；仅本地工程证明 |
+| CWP shared normalization | 215项责任测试已绿，最后冻结配置关系检查进行中 | 独占owner `main_official_flow_finish`；同一责任节点修实际CI旧binding/per-format反例 |
+| CWP 远端CI | 当前精确HEAD失败，尚未关闭 | 37883563191；不能用215集中绿代替远端结果，修复合并后只验新精确HEAD |
+| 真实22页 public batch/read/复用 | 脚本准备中，未调用供应商 | `phase6/ocr_major_node/`；固定30000tokens/$0.10；原语言且全篇partial如实保留 |
+| 71固定检查 / 原三家新研究 / 新三家 | 待工程接线完成后大节点实施 | `phase6/fresh_research_major_node.md`；实际独立executor及每公司四审查 |
+| 公司池loop | 后置，未重抽 | 冻结NVDA首轮24发现保留；主线全部完成后恢复原attempt责任 |
+
+当前总目标继续active，不停在工程绿。下一步：接收shared最终交付→正常merge/commit/push→精确CI及真实OCR公共链→固定71对照→原三家全新RF研究和四独立审查→固定新三家→公司池loop。只在这些大节点审查；失败保持旧记录，根因修正，不删除检查点、不加人工签收。

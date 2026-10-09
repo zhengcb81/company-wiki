@@ -1,0 +1,33 @@
+{
+  "schema_version": "rf-w04-w06-engineering-reacceptance/1",
+  "review_date": "2026-10-09",
+  "worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/cmrf-20261008/rf-inputs",
+  "branch": "codex/pool-rf-source-context-20261009",
+  "head": "a73705171bf9704b313e2f3ed8fff9fda33233e4",
+  "repair_base": "b62161c81d5a343e08aab4bf7d0ca15dd2e8ab8c",
+  "original_package_base": "8b48a99f23a19b1fd71a7e051837a55e12bb7d30",
+  "functional_repair_commit": "36743282f39e9e6c4a958693a3f22a57380ccab5",
+  "decision": "ENGINEERING_PASS",
+  "mergeable_exact_head": true,
+  "rf_initial_clean": true,
+  "rf_final_clean": true,
+  "handoff_file_hashes_verified": 7,
+  "closed_findings": [
+    {"id": "F1", "status": "PASS", "original_reproduction": "quarter_document target.scope.name=Segment B", "actual_error": "quarter bridge target scope must match its native component ancestry", "positive": "Same segment native ancestry and actual company-quarter composition remain legal."},
+    {"id": "F2", "status": "PASS", "original_reproduction": "research_document observation parameter_ids=[1_high_2027], scope=Segment B, period=FY2027; claim.target_id=0_base_2026", "actual_error": "operating observation parameter binding mismatch", "positive": "Actual cross-year native dependency and exact growth-driver evidence-node binding remain legal; unknown scope remains unverified."},
+    {"id": "F3", "status": "PASS", "original_reproduction": "quarter_document range claim unit=EUR billion, period=FY2030", "actual_error": "management target claim unit mismatch: five_year_revenue_goal", "positive": "Billion-to-million range remains legal; source metadata absence can remain explicit gap; explicit conflicts refuse."},
+    {"id": "F4", "status": "PASS", "original_reproduction": "yoy_document measurement_periods=[FY2026]; typed comparison/target period=FY2027", "actual_error": "typed comparison measurement periods mismatch", "positive": "Correct annual/YoY periods, own-scenario denominators, null zero denominator and legacy annual shape remain legal."}
+  ],
+  "remaining_findings": [],
+  "actual_runs": [
+    {"kind": "original_four_stdin_reproductions", "command": "PowerShell single-quoted here-string | python -X utf8 -B -", "script": "rf_w04_w06_reacceptance.md#原四条-stdin-复验命令", "exit": 0, "seconds": 0.724, "passed": 4, "expected_exception": "ForecastInputError at native input boundary"},
+    {"kind": "focused_binding_and_legal_positives", "command": "python -X utf8 -B -m pytest tests/test_native_research_bindings.py tests/test_target_measurement_comparison.py::test_yoy_uses_each_scenario_denominator_and_separate_derived_dollars tests/test_target_measurement_comparison.py::test_zero_denominator_stays_null_in_native_output tests/test_target_measurement_comparison.py::test_existing_annual_target_keeps_the_original_output_shape tests/test_research_evidence_roles.py::test_optional_diagnostic_separates_documentary_presence_and_unknown_magnitude tests/test_research_evidence_roles.py::test_calibration_recomputes_existing_formula_units_and_keeps_unknown_null tests/test_research_evidence_roles.py::test_declared_history_header_and_pc_weakness_cannot_be_positive_mechanism tests/test_research_evidence_roles.py::test_numeric_historical_baseline_keeps_history_role_without_future_support -q -p no:cacheprovider --basetemp C:/Users/郑曾波/AppData/Local/Temp/rRA-f0321618/p", "exit": 0, "passed": 25, "pytest_seconds": 0.86, "shell_seconds": 3.900, "binding_tests": 17, "existing_positive_and_compatibility_tests": 8},
+    {"kind": "final_exact_head_clean_and_handoff_hashes", "exit": 0, "verified_hash_count": 7}
+  ],
+  "temporary_root": {"path": "C:/Users/郑曾波/AppData/Local/Temp/rRA-f0321618", "initial_absent": true, "final_absent": true, "temp_restored": true, "tmp_restored": true, "registry_raw_equality_in_test_shell": false, "registry_scope": "process only; test shell exited without host environment write", "explicit_absent_restoration_followup": {"initial_state": "absent", "final_state": "absent", "restored": true, "tests_rerun": false}},
+  "budget": {"supplier_calls": 0, "model_calls": 0, "downloads": 0},
+  "boundaries": {"production_original_reads": 0, "production_original_changes": 0, "production_original_deletions": 0, "rf_code_or_test_writes": 0, "production_config_writes": 0, "installation_writes": 0, "shared_pwf_writes": 0, "commits": 0, "merges": 0, "pushes": 0, "new_access_or_human_approval_gates": 0},
+  "not_rerun": ["owner 201-test concentrated suite", "167 subtests", "full suite", "ruff/mypy", "CLI pipeline", "supplier runs", "business-company four-reviewer audits"],
+  "legacy": "Original annual output shape and stable-fsum/1 score/components equality actually checked; owner five golden hashes reviewed but not counted as independent rerun.",
+  "economic_review": "Engineering PASS does not complete real M2/M3, current-company magnitude/calibration or two-cohort independent research acceptance."
+}

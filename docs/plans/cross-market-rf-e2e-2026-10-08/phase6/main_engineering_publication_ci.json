@@ -1,0 +1,27 @@
+{
+  "checked_at": "2026-10-09T04:26:45.399750+00:00",
+  "runs": [
+    {
+      "id": 37883563191,
+      "name": "CI",
+      "head_sha": "a901b67f242d490aca768e83cdd071dd5668b024",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/37883563191",
+      "created_at": "2026-10-09T04:22:20Z",
+      "updated_at": "2026-10-09T04:23:54Z",
+      "repo": "company-wiki"
+    },
+    {
+      "id": 37883658771,
+      "name": "quality",
+      "head_sha": "e688b0a2dceeb7de453e43dad3534061bf346bc9",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/37883658771",
+      "created_at": "2026-10-09T04:23:33Z",
+      "updated_at": "2026-10-09T04:24:24Z",
+      "repo": "revenue-forecast"
+    }
+  ]
+}

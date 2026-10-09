@@ -355,3 +355,32 @@ RF工程独立验收4处错绑已封存 phase6/rf_w04_w06_acceptance.md/.json，
 - RF共用绑定修复a7370517/201PASS已交原独立reviewerfocused复验，尚未并线/安装，报告未伪写。
 - 新研究节点budget真实读历史receipt+AUTO并去重native r3费；有效剩余1800466tokens/$19.886499，unknown7/FXguard2764照记。付费未开始。
 - root计划仍Phase6 in_progress；两个工程owner结束后由shared接线owner继续，MAIN负责RF发布和真实节点，后续先两组六公司，再公司池loop。
+
+## 2026-10-09：RF已发布，CWP实际CI兼容缺口并入当前责任包
+
+- RF W04–W06修复原四项独立复验25PASS/0.86秒，可并线；MAIN merge `e688b0a2dceeb7de453e43dad3534061bf346bc9`并normal push。原assurance三个修改与output原样保留。canonical pre-push Ruff、7模块mypy、125责任行为/21.49秒通过；精确远端quality [37883658771](https://github.com/zhengcb81/revenue-forecast/actions/runs/37883658771)成功。
+- 定点安装闭包22文件x2 physical skill roots=44写入，.claude既有junction仍同.agents，config/output未动。交付工作树CRLF与Git LF必须分别记录SHA，MAIN逐文件证明仅换行规范化再同步exact committed blobs；installed smoke两份实际installed revenue_core native quarter→strong validation PASS、非财报null期合法。工程fixtures不计真实公司研究。
+- CWP实际主线是master（不是main）：第一次push不存在main引用已纠正为normal master，a901b67f已远端。精确CI [37883563191](https://github.com/zhengcb81/company-wiki/actions/runs/37883563191)Unit失败；其余lint/mypy/compile/config过。公开annotations指出versioned-resume scoped旧builder生成不完整binding/3、PPTX全格式固定1.0及旧normalize patch。shared owner已实际复现16FAIL/35PASS，按兼容producer/decoder共因修：无generation的合法legacy scoped保持/2，真实完整manifest才/3，坏/3不静默降级；三版freeze/currentfacts/jobhash测试保留，新per-formatparser契约测试迁移。实际风险两文件纳入同shared重大集中节点，不再加每commit全CI/人审。
+- 只读PRIMARY调查已证微软PPTX公开日2026-09-02：官方IR公告链接指向相同FY27ExternalKPIs.pptx，SEC8-K Item7.01说明同日发布。另有同presentation SEC HTML正文可作为独立来源补充OCR漏行；不是同binary SourceRef，必须正常CWP登记/实际SHA再消费。旧null日期工程receipt与封存模型不改。记录phase6/msft_presentation_publication_investigation.json。
+- 源查找路径错误（worker_config.json、FF company_wiki.example.json、cohort proof旧名）未触发修改，已按rg实际目录纠正；安装smoke最初test helper导入canonical模块并试图default registry，沙箱在写前拒绝，修为fixture JSON→fresh installed subprocess+明确owned registry。错误保留，不包装成产品缺陷/成功，owned测试根已恢复。
+
+Next Step：shared OCR runtime+上述实际CI反例集中通过→合并master/push精确CI→一次真实22页public有限batch/read/跨run默认复用及固定71检查→两组新研究/四审→公司池loop。PWF与goal均保持in_progress/active。
+
+
+### 2026-10-09T04:39:03.567210+00:00 主线恢复协调
+
+
+## 当前执行面板：主线先行（2026-10-09，本表覆盖历史 Next Step）
+
+| 工作 | 实际状态 | 证据 / 下一步 |
+|---|---|---|
+| W01 / W02 / W03 / W07 | 已合并发布 | 前述跨仓集中记录；无需重复施工 |
+| RF W04–W06 | 工程完成，已合 main / 安装 / push | `e688b0a2`；独立复验25项；主线125项；远端CI37883658771成功；安装44文件+2个真实installed smoke |
+| CWP 跨run复用 / parser OCR | 已合 master；共享接线仍进行中 | `a901b67f`；真实POST强杀恢复与另AUTO零调用复用1PASS；仅本地工程证明 |
+| CWP shared normalization | 215项责任测试已绿，最后冻结配置关系检查进行中 | 独占owner `main_official_flow_finish`；同一责任节点修实际CI旧binding/per-format反例 |
+| CWP 远端CI | 当前精确HEAD失败，尚未关闭 | 37883563191；不能用215集中绿代替远端结果，修复合并后只验新精确HEAD |
+| 真实22页 public batch/read/复用 | 脚本准备中，未调用供应商 | `phase6/ocr_major_node/`；固定30000tokens/$0.10；原语言且全篇partial如实保留 |
+| 71固定检查 / 原三家新研究 / 新三家 | 待工程接线完成后大节点实施 | `phase6/fresh_research_major_node.md`；实际独立executor及每公司四审查 |
+| 公司池loop | 后置，未重抽 | 冻结NVDA首轮24发现保留；主线全部完成后恢复原attempt责任 |
+
+当前总目标继续active，不停在工程绿。下一步：接收shared最终交付→正常merge/commit/push→精确CI及真实OCR公共链→固定71对照→原三家全新RF研究和四独立审查→固定新三家→公司池loop。只在这些大节点审查；失败保持旧记录，根因修正，不删除检查点、不加人工签收。

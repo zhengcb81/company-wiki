@@ -1,0 +1,26 @@
+{
+  "schema_version": "rf-installed-runtime-smoke/1",
+  "results": [
+    {
+      "status": "PASS",
+      "installed_root": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "native_module": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_core.py",
+      "native_quarter_and_strong_validation": true,
+      "nonfinancial_period": true,
+      "supplier_calls": 0
+    },
+    {
+      "status": "PASS",
+      "installed_root": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "native_module": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\revenue_core.py",
+      "native_quarter_and_strong_validation": true,
+      "nonfinancial_period": true,
+      "supplier_calls": 0
+    }
+  ],
+  "fixture_generation": "canonical synthetic legal quarter fixture only, not company research",
+  "supplier_calls": 0,
+  "production_registry_writes": 0,
+  "owned_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.test-tmp\\rf-install-cba28e97",
+  "fixture_before_correction": "initial test helper had imported canonical module and default registry; sandbox denied before any production write; corrected fixture emits JSON into fresh installed subprocess with explicit owned registry"
+}
