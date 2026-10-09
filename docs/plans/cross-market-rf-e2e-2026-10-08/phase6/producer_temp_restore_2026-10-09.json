@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "checked_at": "2026-10-09T00:26:14.7831341Z",
+  "scope": "exact two confirmed old producer pytest scratch roots only",
+  "cleanup": [
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\pytest-of-郑曾波\\pytest-218",
+      "files": 374,
+      "bytes": 16216593.0,
+      "created_utc": "2026-10-08T23:50:16.2201944Z",
+      "latest_utc": "2026-10-08T23:50:45.8228578Z",
+      "reparse_points": 0,
+      "owner": "/root/cwp_provider_cause_tdd",
+      "owner_confirmed_2026_10_09": "133 cause and original responsibility tests for218;48 exact cause tests for219",
+      "initial_state": "pytest creates unique absent root",
+      "production_originals_removed": 0,
+      "restored_absent": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\pytest-of-郑曾波\\pytest-219",
+      "files": 49,
+      "bytes": 2276131.0,
+      "created_utc": "2026-10-08T23:52:41.6306654Z",
+      "latest_utc": "2026-10-08T23:52:57.2195347Z",
+      "reparse_points": 0,
+      "owner": "/root/cwp_provider_cause_tdd",
+      "owner_confirmed_2026_10_09": "133 cause and original responsibility tests for218;48 exact cause tests for219",
+      "initial_state": "pytest creates unique absent root",
+      "production_originals_removed": 0,
+      "restored_absent": true
+    }
+  ],
+  "real_nvda_root_preserved": true,
+  "parent_preserved": true
+}

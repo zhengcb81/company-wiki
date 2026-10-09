@@ -286,3 +286,15 @@ CWP candidate d7923191（含producer4c75273a、finite入口65562043）、FF afbe
 NVDA initial storage/fetch/analyst三份报告已封存，均发现实质问题，不计clean；process独立复算正在形成第四报告（已核139产物、32引文与355数值叶子）。四份齐后专家读取原包并逐issue建立独立PWF，再发布修复并原公司新attempt。原财报及生产配置未改，Dayu零代码修改，RF owner assurance/output未碰。
 
 记录工具更正：Windows默认text写入把三个PWF LF重写CRLF，初次diff --check报告整文件尾空白；提交推送前改显式LF并重验，只保留实际内容增量，不改变工程判定。
+
+## 2026-10-09T00:21:02.850808+00:00 — 首轮四路完整交付
+
+NVDA四独立reviewers已全部停止写入，storage5/fetch7/process7/analyst5共24发现（12P1/12P2），原执行partial；正式算术无差错但研究与必要处理链仍未完成，clean为空。process复读实际请求确认FY26主filing与FY27Q2 companion独立，原初稿误判断已由其自身按初始dispatch更正。独立expert已实际启动，独占audit run/diagnosis和remediation/work_packages；完整诊断待交付。记录工具check读取4报告needs_remediation/exit2符合发现真实问题阶段，另有两原生角色JSONL缺重复header的格式可观察性问题，专家一起处理，不能删日志或补造执行时间。来源原件仍留在独立测试根供专家实读，无新的模型费/翻译/Dayu代码写入。
+
+## 2026-10-09T00:28:26.063205+00:00 — 数值门关闭与测试恢复
+
+FF独立工程提交e9b0d088已正常hook推隔离支线，精确远端CI37864557151 SUCCESS，UTC00:23:51→00:25:09（78秒）。旧复杂度14>10的许可已删除，以同算法维护诊断保留分数14、语法/读入真实错误仍非零；新provider cause与acquisition consumer责任测试加入curatedCI，未修改业务实现/抬阈值。实际527PASS/5SKIP/78subtests、53.50秒，显式候选CWP代码根只补跑两个环境skip2PASS/16.65秒；余两个实盘snapshot及一个Windows symlink限制保留，次数不误加总为一个全套。
+
+原producer agent确认pytest218/219为其前次133/48测试的unique自有根，MAIN逐一核实绝对父路径及无Reparse后删除423个临时夹具文件，共18,492,724B；此前MAIN220自有根已恢复。见phase6/producer_temp_restore_2026-10-09.json。真实NVDA根仍保留供专家，生产原件删除0，supplier费0。
+
+专家拟7卡并正在细化真实机制与接口；ET读入预算还能复现overflow响应读过后账却是0B，属于FETCH-007同因计量责任，不忽略为外围问题。根因包未交付前不发布新真实运行版本，不认为当前已clean。

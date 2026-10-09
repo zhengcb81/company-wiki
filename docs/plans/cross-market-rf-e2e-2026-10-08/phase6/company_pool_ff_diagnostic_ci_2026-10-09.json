@@ -1,0 +1,16 @@
+{
+  "checked_at": "2026-10-09T00:27:01.951552+00:00",
+  "candidate_sha": "e9b0d0882f46772e333a5b986c7c414733c284cd",
+  "runs": [
+    {
+      "id": 37864557151,
+      "name": "quality",
+      "head_sha": "e9b0d0882f46772e333a5b986c7c414733c284cd",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/filing-fetch/actions/runs/37864557151",
+      "created_at": "2026-10-09T00:23:51Z",
+      "updated_at": "2026-10-09T00:25:09Z"
+    }
+  ]
+}
