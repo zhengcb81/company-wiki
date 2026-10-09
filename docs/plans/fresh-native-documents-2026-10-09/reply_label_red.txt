@@ -1,0 +1,31 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\֣����\.codex\worktrees\fresh-capture-20261009\company-wiki
+configfile: pytest.ini
+collected 18 items
+
+tests\document_normalization\test_docx.py ..............F...             [100%]
+
+================================== FAILURES ===================================
+_________ test_answer_reply_label_keeps_management_role_in_inline_qa __________
+tests\document_normalization\test_docx.py:263: in test_answer_reply_label_keeps_management_role_in_inline_qa
+    assert [u.source_role for u in doc.units] == ["analyst", "management"]
+E   AssertionError: assert ['analyst', 'company_filing'] == ['analyst', 'management']
+E     
+E     At index 1 diff: 'company_filing' != 'management'
+E     Use -v to get more diff
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+tests/document_normalization/test_docx.py::test_duplicate_zip_member_refused
+  C:\Miniconda\Lib\zipfile\__init__.py:1642: UserWarning: Duplicate name: 'word/document.xml'
+    return self._open_to_write(zinfo, force_zip64=force_zip64)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/document_normalization/test_docx.py::test_answer_reply_label_keeps_management_role_in_inline_qa
+================== 1 failed, 17 passed, 2 warnings in 0.35s ===================

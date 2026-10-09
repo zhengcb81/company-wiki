@@ -1,8 +1,9 @@
 """Parser routing and generation identity shared by selection and replay."""
-from company_wiki.source_catalog.narrative_evidence import NARRATIVE_PARSER_NAME, NARRATIVE_PARSER_VERSION
+from company_wiki.source_catalog.narrative_evidence import NARRATIVE_PARSER_NAME, NARRATIVE_PARSER_VERSION, TRANSCRIPT_PARSER_VERSION
 
 NORMALIZED_MIME_TYPES = frozenset({
     "text/html", "application/xhtml+xml",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     "application/vnd.openxmlformats-officedocument.presentationml.presentation",
 })
 
@@ -14,6 +15,11 @@ def parser_component(mime_type: str, source_class: str = "filing", *, normalizat
             normalization = NarrativeNormalization()
         identity = normalization.identity(mime_type, parser_version=parser_version)
         return identity["parser_name"], identity["parser_version"]
+    if source_class == "transcript":
+        version = parser_version or TRANSCRIPT_PARSER_VERSION
+        if version not in {NARRATIVE_PARSER_VERSION, TRANSCRIPT_PARSER_VERSION}:
+            raise ValueError("unsupported transcript parser version")
+        return NARRATIVE_PARSER_NAME, version
     return NARRATIVE_PARSER_NAME, NARRATIVE_PARSER_VERSION
 
 

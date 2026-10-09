@@ -1,0 +1,30 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\fresh-capture-20261009\company-wiki
+configfile: pytest.ini
+collected 4 items
+
+tests\unit\test_native_document_pipeline.py ...                          [ 75%]
+tests\integration\test_native_document_pipeline.py F                     [100%]
+
+================================== FAILURES ===================================
+____ test_two_native_formats_full_cli_worker_reuse_restores_test_directory ____
+tests\integration\test_native_document_pipeline.py:206: in test_two_native_formats_full_cli_worker_reuse_restores_test_directory
+    _, output = invoke(root, command)
+                ^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_native_document_pipeline.py:64: in invoke
+    assert call.returncode == 0, (
+E   AssertionError: native CLI failed; output retained only by local pytest capture
+E   assert 1 == 0
+E    +  where 1 = CompletedProcess(args=['C:\\Miniconda\\python.exe', '-X', 'utf8', '-B', 'C:\\Users\\郑曾波\\.codex\\worktrees\\fresh-capt...rror":"NARRATIVE_MODEL_CONFIG_INVALID","schema_version":"narrative-batch-result/1","status":"failed"}\r\n', stderr=b'').returncode
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/integration/test_native_document_pipeline.py::test_two_native_formats_full_cli_worker_reuse_restores_test_directory
+=================== 1 failed, 3 passed, 1 warning in 3.96s ====================

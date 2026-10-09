@@ -27,6 +27,8 @@ from .errors import (
     ReplayError,
     UnsupportedFormatError,
 )
+from .docx_parser import SUPPORTED_MIME_TYPES as _DOCX_MIME_TYPES
+from .docx_parser import parse_docx
 from .html_parser import SUPPORTED_MIME_TYPES as _HTML_MIME_TYPES
 from .html_parser import parse_html
 from .limits import DEFAULT_LIMITS, MAX_ZIP_MEMBERS, NormalizationLimits
@@ -43,6 +45,8 @@ from .pptx_parser import SUPPORTED_MIME_TYPES as _PPTX_MIME_TYPES
 from .pptx_parser import parse_pptx
 from .replay import replay_unit, replay_units, replay_evidence_spans
 from .units import (
+    FORMAT_DOCX,
+    DOCX_PARSER_VERSION,
     FORMAT_HTML,
     FORMAT_PPTX,
     NORMALIZATION_SCHEMA,
@@ -54,6 +58,8 @@ from .units import (
 
 __all__ = [
     "DEFAULT_LIMITS",
+    "FORMAT_DOCX",
+    "DOCX_PARSER_VERSION",
     "FORMAT_HTML",
     "FORMAT_PPTX",
     "KNOWN_FORMATS",
@@ -114,6 +120,11 @@ def normalize_document(
             "max_source_bytes", limits.max_source_bytes, f"got {len(original)}"
         )
     mime_main = mime_type.split(";")[0].strip().lower()
+    if mime_main in _DOCX_MIME_TYPES:
+        if parser_version not in {None, DOCX_PARSER_VERSION}:
+            raise ValueError("unsupported DOCX parser_version")
+        return parse_docx(original, source_id=source_id, source_sha256=source_sha256,
+                          mime_type=mime_type, limits=limits)
     if mime_main in _HTML_MIME_TYPES:
         if parser_version not in {None, PARSER_VERSION}:
             raise ValueError("unsupported HTML parser_version")
@@ -153,13 +164,15 @@ def normalize_document(
         return document
     raise UnsupportedFormatError(
         f"unsupported mime_type {mime_type!r}; supported: "
-        f"{sorted(_HTML_MIME_TYPES | _PPTX_MIME_TYPES)}"
+        f"{sorted(_HTML_MIME_TYPES | _PPTX_MIME_TYPES | _DOCX_MIME_TYPES)}"
     )
 
 
 def normalization_identity(mime_type: str, *, ocr=None) -> dict:
     """Pathless derivation identity for MAIN's batch/artifact generation manifest."""
     mime_main = mime_type.split(";")[0].strip().lower()
+    if mime_main in _DOCX_MIME_TYPES:
+        return {"parser_name": PARSER_NAME, "parser_version": DOCX_PARSER_VERSION, "format": FORMAT_DOCX}
     if mime_main in _HTML_MIME_TYPES:
         return {
             "parser_name": PARSER_NAME,

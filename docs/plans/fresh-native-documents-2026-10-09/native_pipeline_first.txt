@@ -1,0 +1,51 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\fresh-capture-20261009\company-wiki
+configfile: pytest.ini
+collected 14 items
+
+tests\unit\test_native_document_pipeline.py F..                          [ 21%]
+tests\integration\test_native_document_pipeline.py F                     [ 28%]
+tests\contract\test_official_transcript_layouts.py ..........            [100%]
+
+================================== FAILURES ===================================
+_ test_native_documents_select_verify_public_replay_and_roles[application/vnd.openxmlformats-officedocument.wordprocessingml.document-investor_relations-zh-docx_business_qa] _
+src\company_wiki\automation\narrative_contracts.py:811: in validate_against
+    validate_summary_draft(
+src\company_wiki\source_catalog\narrative_evidence.py:1659: in validate_summary_draft
+    validate_summary_claim(claim, known, draft.status)
+src\company_wiki\source_catalog\narrative_evidence.py:1685: in validate_summary_claim
+    _validate_claim_roles(claim, known)
+src\company_wiki\source_catalog\narrative_evidence.py:1694: in _validate_claim_roles
+    raise SummaryValidationError("non-company evidence cannot support a company statement")
+E   company_wiki.source_catalog.narrative_evidence.SummaryValidationError: non-company evidence cannot support a company statement
+
+The above exception was the direct cause of the following exception:
+tests\unit\test_native_document_pipeline.py:66: in test_native_documents_select_verify_public_replay_and_roles
+    verified = verifying._run(data, selected, verifying._summary(selected))
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_verify_handler.py:259: in _summary
+    result.validate_against(selected)
+src\company_wiki\automation\narrative_contracts.py:819: in validate_against
+    raise NarrativeContractError(str(exc)) from exc
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: non-company evidence cannot support a company statement
+____ test_two_native_formats_full_cli_worker_reuse_restores_test_directory ____
+tests\integration\test_native_document_pipeline.py:128: in test_two_native_formats_full_cli_worker_reuse_restores_test_directory
+    call, result = invoke(
+tests\integration\test_native_document_pipeline.py:56: in invoke
+    assert call.returncode == 0, (
+E   AssertionError: native CLI failed; output retained only by local pytest capture
+E   assert 2 == 0
+E    +  where 2 = CompletedProcess(args=['C:\\Miniconda\\python.exe', '-X', 'utf8', '-B', '-m', 'company_wiki.source_catalog.official_so...{"schema_version": "official-source-failure/1", "status": "failed", "error_code": "official_source_RuntimeError"}\r\n').returncode
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/unit/test_native_document_pipeline.py::test_native_documents_select_verify_public_replay_and_roles[application/vnd.openxmlformats-officedocument.wordprocessingml.document-investor_relations-zh-docx_business_qa]
+FAILED tests/integration/test_native_document_pipeline.py::test_two_native_formats_full_cli_worker_reuse_restores_test_directory
+=================== 2 failed, 12 passed, 1 warning in 2.08s ===================

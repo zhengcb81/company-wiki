@@ -82,7 +82,8 @@ def _decode_sample(data: bytes) -> str:
 
 
 def _text_for_mime(data: bytes, mime_type: str, *, normalization=None) -> str:
-    if mime_type == "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+    if mime_type in {"application/vnd.openxmlformats-officedocument.presentationml.presentation",
+                     "application/vnd.openxmlformats-officedocument.wordprocessingml.document"}:
         if normalization is not None:
             return normalization.sample_text(data, mime_type)
         from company_wiki.document_normalization import normalize_document

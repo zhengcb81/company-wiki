@@ -1,0 +1,26 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\fresh-capture-20261009\company-wiki
+configfile: pytest.ini
+collected 7 items
+
+tests\contract\test_official_transcript_layouts.py ......F               [100%]
+
+================================== FAILURES ===================================
+___ test_call_page_title_cannot_promote_trace_id_or_navigation_to_a_speaker ___
+tests\contract\test_official_transcript_layouts.py:47: in test_call_page_title_cannot_promote_trace_id_or_navigation_to_a_speaker
+    assert d.units and min(u.metadata['line_start'] for u in d.units)>=6
+E   AssertionError: assert ((NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:18a6e1dd779d074d3e6b460d134796662c708a8dbd065db1b865331...roup_id': None, 'qa_parent_id': None, 'section': 'prepared_remarks', 'speaker': 'ALEX SMITH', 'speaker_title': None}))) and 2 >= 6)
+E    +  where (NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:18a6e1dd779d074d3e6b460d134796662c708a8dbd065db1b865331...roup_id': None, 'qa_parent_id': None, 'section': 'prepared_remarks', 'speaker': 'ALEX SMITH', 'speaker_title': None}))) = DocumentStructure(source_id='urn:company-wiki:source:sha256:54ec26a9cd6cfeef4b38d1d2e2362e24f48b73a8f8f822d2d32f0c6886...), page_count=0, pages_read=0, opaque_pages=(), table_scan_pages=(), deferred_table_pages=(), line_count=11, errors=()).units
+E    +  and   2 = min(<generator object test_call_page_title_cannot_promote_trace_id_or_navigation_to_a_speaker.<locals>.<genexpr> at 0x000001FD1437F1D0>)
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/contract/test_official_transcript_layouts.py::test_call_page_title_cannot_promote_trace_id_or_navigation_to_a_speaker
+=================== 1 failed, 6 passed, 1 warning in 0.75s ====================

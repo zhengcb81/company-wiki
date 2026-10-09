@@ -21,13 +21,14 @@ from company_wiki.source_catalog.narrative_document import (
 
 from .assets import OpaqueAsset
 from .units import (
+    FORMAT_DOCX,
     FORMAT_HTML,
     FORMAT_PPTX,
     PARSER_NAME,
     require_parser_version,
 )
 
-KNOWN_FORMATS = (FORMAT_HTML, FORMAT_PPTX)
+KNOWN_FORMATS = (FORMAT_HTML, FORMAT_PPTX, FORMAT_DOCX)
 
 
 @dataclass(frozen=True)

@@ -1,0 +1,26 @@
+{
+  "schema": "w05-real-transcript-observation/1",
+  "original_sha256": "bdc90bf78dbf55ec3f1d789f1f76ebd2e97c7aab51dcc24a262f5d512fb47656",
+  "byte_size": 273436,
+  "line_count": 481,
+  "parser_version": "0.2.0",
+  "parser_errors": [],
+  "unit_count": 515,
+  "roles": {
+    "management": 457,
+    "operator": 49,
+    "analyst": 9
+  },
+  "first_body_line": 90,
+  "last_body_line": 414,
+  "selection_status": "selected",
+  "selected_count": 41,
+  "replayed_count": 41,
+  "failed_count": 0,
+  "original_sha_mtime_unchanged": true,
+  "download_calls": 0,
+  "paid_calls": 0,
+  "model_summary": "NOT_RUN",
+  "M3_research": "NOT_RUN",
+  "second_issuer_real_original": "NOT_AVAILABLE_IN_ASSIGNED_INPUTS"
+}

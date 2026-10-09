@@ -29,7 +29,9 @@ IMPORT_REQUEST_SCHEMA = "official-source-import-request/1"
 IMPORT_RESULT_SCHEMA = "official-source-import-result/1"
 _MAX_BYTES = 128 * 1024 * 1024
 _PPTX_MIME = "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+_DOCX_MIME = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 _SUPPORTED_MIMES = {
+    _DOCX_MIME,
     "application/pdf",
     "text/html",
     "application/xhtml+xml",
@@ -39,7 +41,7 @@ _SUPPORTED_MIMES = {
 }
 _CAPTURE_SUFFIXES = {"application/pdf": ".pdf", "text/html": ".html",
                      "application/xhtml+xml": ".html", "text/plain": ".txt",
-                     "application/json": ".json", _PPTX_MIME: ".pptx"}
+                     "application/json": ".json", _PPTX_MIME: ".pptx", _DOCX_MIME: ".docx"}
 
 
 class OfficialSourceError(ValueError):
@@ -131,6 +133,8 @@ def _validate_bytes(data, mime):
             raise OfficialSourceError("invalid_pdf") from None
     elif mime == _PPTX_MIME:
         _validate_presentation(data)
+    elif mime == _DOCX_MIME:
+        _validate_docx(data)
     elif mime in {"text/html", "application/xhtml+xml"}:
         from bs4 import BeautifulSoup
 
@@ -187,6 +191,22 @@ def _validate_presentation(data):
             raise ValueError("empty or invalid presentation package")
     except (ValueError, zipfile.BadZipFile):
         raise OfficialSourceError("invalid_pptx") from None
+
+
+def _validate_docx(data):
+    """Validate current visible DOCX body without extracting or fetching parts."""
+    import time
+    from company_wiki.document_normalization import normalize_document, NormalizationLimits
+    from company_wiki.source_contract import source_id_for_sha256
+    sha = hashlib.sha256(data).hexdigest()
+    try:
+        parsed = normalize_document(data, source_id=source_id_for_sha256(sha),
+            source_sha256=sha, mime_type=_DOCX_MIME,
+            limits=NormalizationLimits(max_source_bytes=_MAX_BYTES, deadline=time.monotonic()+15))
+        if not parsed.units:
+            raise ValueError("DOCX has no current visible body")
+    except ValueError:
+        raise OfficialSourceError("invalid_docx") from None
 
 
 def _byte_cap(value):
