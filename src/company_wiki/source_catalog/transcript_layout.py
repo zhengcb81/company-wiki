@@ -44,6 +44,11 @@ _DASH_LABEL = re.compile(
     r"^(?P<name>[A-Z][A-Za-z.\'’ -]{1,75}?)\s*(?:—|–)\s*(?P<title>[^:]{1,80})\s*$"
 )
 
+_AFFILIATION_LABEL = re.compile(
+    r"^(?P<name>[A-Z][A-Za-z.\'’ -]{1,75}?)\s*,\s*"
+    r"(?P<title>[^:\r\n]{1,80}):\s*(?P<body>.*)$"
+)
+
 
 def valid_speaker(name):
     if not name or name.casefold() in _NON_SPEAKER:
@@ -64,12 +69,17 @@ def valid_speaker(name):
     )
 
 
-def speaker_fields(lines, index, legacy_fields):
+def speaker_fields(lines, index, legacy_fields, *, allow_affiliation=False):
     """Return name/title/inline body and source label line count."""
     value = lines[index].strip()
     name, title, body = legacy_fields(value)
     if valid_speaker(name):
         return name, title or "", body or "", 1
+    if allow_affiliation:
+        affiliation = _AFFILIATION_LABEL.fullmatch(value)
+        if affiliation and valid_speaker(affiliation["name"].strip()):
+            return (affiliation["name"].strip(), affiliation["title"].strip(),
+                    affiliation["body"].strip(), 1)
     match = _DASH_LABEL.fullmatch(value)
     if match and valid_speaker(match["name"].strip()) and _ROLE.search(match["title"]):
         return match["name"].strip(), match["title"].strip(), "", 1
@@ -80,7 +90,7 @@ def speaker_fields(lines, index, legacy_fields):
     return None, None, None, 0
 
 
-def body_start(lines, explicit_start, legacy_fields):
+def body_start(lines, explicit_start, legacy_fields, *, allow_affiliation=False):
     """A nearby speaker with actual body is necessary; navigation is insufficient."""
     for heading, line in enumerate(lines):
         explicit = bool(explicit_start.fullmatch(line.strip()))
@@ -90,7 +100,8 @@ def body_start(lines, explicit_start, legacy_fields):
         turns = 0
         substantive = False
         for index in range(heading + 1, min(len(lines), heading + 80)):
-            name, _title, body, count = speaker_fields(lines, index, legacy_fields)
+            name, _title, body, count = speaker_fields(
+                lines, index, legacy_fields, allow_affiliation=allow_affiliation)
             if name:
                 if first is None:
                     if index - heading > 16:
