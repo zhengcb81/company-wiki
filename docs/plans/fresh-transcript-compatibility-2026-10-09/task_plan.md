@@ -10,13 +10,13 @@ Restore exact transcript 0.1.0 / 0.1.1 compatibility and current 0.2.0 replay us
 - [x] Add compact legacy/current retrieval and unknown-version regression coverage.
 - [x] Repair parser identity and retrieval dispatch in assigned files.
 - [x] Run concentrated responsibility tests and read-only real MSFT index/query/resolve replay.
-- [ ] Commit source, tests and this plan with normal hooks and hand off to MAIN.
+- [x] Commit source, tests and this plan with normal hooks and hand off to MAIN.
 
 ## Write boundary
 Only src/company_wiki/automation/narrative_formats.py, src/company_wiki/source_catalog/narrative_evidence.py, src/company_wiki/source_catalog/narrative_retrieval.py, associated tests and this plan. No main/shared plans/config/CI/hooks/raw/installations or cross-repo writes.
 
 ## Next Step
-Commit exact assigned source/tests/own-PWF paths with ordinary hooks; MAIN owns independent acceptance, merge, normal push and exact CI.
+MAIN independently accepts branch codex/fresh-transcript-compat-20261009, then owns merge, normal fullunit push gate and exact CI. This worker is complete.
 
 ## Errors
 - Sandbox Git status falsely reported not-a-work-tree; normal OS Git status was clean.

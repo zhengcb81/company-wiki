@@ -11,3 +11,5 @@ Real MSFT harness succeeded after two harness-only corrections (editable import 
 Focused run203cases:201PASS/1SKIP/1FAIL4.74s. Preserve responsibility_initial_red.txt. Untouched base same PPTX RED proved and TEMP restored; MAIN approved test-only separate declared format-version expectation. Original transport/read/replay/locator/cleanup assertions retained; no PDF/PPTX/normalization source change. New HTML variable shadow mypy error resolved by naming bytes original_bytes. Re-run this same suite to resolve concrete failing gate, then ordinary commit.
 
 Final concentrated responsibility202PASS/1SKIP4.28s. Optional skip only CWP_R6_HTML_SAMPLE absent; synthetic HTML/PPTX transport cases all pass. Focused ruff clean, mypy evidence/retrieval2files clean, diff-check clean. Ordinary commit with exact paths next; no push/merge/install performed.
+
+Normal source/test/evidence commit87cdf733 completed with repository hooks:ruff PASS,mypy contract modules PASS,host assumption guard PASS; dependency/config checks correctly skipped without related files. No hooks disabled. Closing this own PWF only; MAIN independent acceptance and normal push remain its responsibility.
