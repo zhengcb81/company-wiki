@@ -193,3 +193,10 @@ ET W02已有128责任测试及实际supervisor/worker五种离线CLI证据，但
 验收工具记录：normal OS默认mypy调用未带本项目既有ignore_missing_imports，fitz无stub报1 import-untyped；已按项目参数复查，不改运行代码来压制类型错误。默认sandbox本机socket集成停止输出，精确pptgreen进程树已终止，正常OS短TEMP补跑，不能把中断当PASS。
 
 OCR真实首次22页1067行/145.549秒，8 selected spans回放4媒体16.570秒，source-level召回仍不完整，关键页7/18漏行；不假装全文已读。跨run包当前把source coverage_complete当完整派生缓存前提，OCR partial会永远重复POST，MAIN已将其作为共享接线责任测试：精选摘要自身完整可用不等于source全文完整；skip仍须完整扫描。结构查询后误读不存在narrative_select_core.py已停用，实际selector在narrative_evidence/finalize，仅读已定位文件。
+
+## 主线集中整合的实际结果（2026-10-09）
+
+- 真实中断恢复已在包含最终输出槽修复、generation复用和parser的主线2a2bd4d0通过：1PASS/10.93秒。旧unknown费用未退款，恢复后跨AUTO0新POST，公共原语言span实读通过；owned根约数MiB随后恢复不存在，生产配置SHA不变。
+- 本机OCR只采用配置中已有RapidOCR3.8.1/ORT1.26.0和三ONNX实际SHA，控制面preflight真实成功、0图片推理、0网络，不自动装资源。source partial与selected precision仍分开；未宣称漏行已修。
+- 费用账当前历史199534tokens/110737microUSD含native r3=9499tokens/10235microUSD；核对一致，不能重复加减。unknown7与FXguard2764保留。现有效累计上限2M/USD20，剩1800466tokens/19886499microUSD。给真实OCR节点30k/$0.10独立额度、六公司每家120k/$2加总720k/$12，在已核对余量内；尚未支出。
+- 本轮读取旧猜测 `config/worker_config.json` 失败，已改用实际rg目录清单，当前配置文件是source_catalog_worker.yaml及Config loader；没有据错误路径修改配置。

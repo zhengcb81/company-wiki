@@ -340,3 +340,18 @@ CWP f788a07a官方资料功能合并及964886f8协调文档已推master，精确
 RF W04-W06已交付 b62161c8，MAIN派独立工程验收，实际发现四处目标/期间/业务scope与证据错绑反例，暂不合并。原owner将依据证据做责任TDD，不增加人签或许可。真实商业M2与四审仍待工程节点完成。
 
 正常OS官方flow28PASS（23.75秒），Ruff四变更文件PASS，mypy两源码按项目参数PASS。官方PPTX import已足够供OCR owner真实临时manifest登记，0供应商费。
+
+## 共用恢复与独立验收后续
+
+MAIN ce116dddb07184d99fe8fa9661171d2bc4aa88cc 已正常push，pre-push小契约绿。跨run owner用唯一预算模块短overlay实际POST-kill集中1PASS（pytest11.19秒）：原run completed，2 localPOST（失联1/恢复1）、3474tokens/3893microUSD、unknown1/unsettled0，visible4069B；另一AUTO复用同pin、公共six-field read locator1/replay verified/en/不翻译、新budget0/新POST0。overlay finally复原原SHA，原账没退款；实际主线合包后还需复核。
+
+RF工程独立验收4处错绑已封存 phase6/rf_w04_w06_acceptance.md/.json，原owner共用native dependency/scope/period/口径绑定TDD修复，41PASS（3.99秒），具体受影响集中回归在跑，未提前并main。OCR owner真实manifest登记→22页1067行→8span4media重放完成，0外网/0supplier，原件SHA/size/mtime未变、TEMPcatalog恢复；已知关键漏行/双栏/tablecell不可靠保留，待交接后MAIN按main_ocr_composition接线。
+
+## 2026-10-09：主线工程整合与真实恢复测试
+
+- MAIN正常merge跨run branch→824ab778，parser最终238e053e→main2a2bd4d0；原PWF未提交进度保留，原件零改。
+- main真实POST硬中断责任E2E1PASS/10.93秒；原unknown账仍保留，原run完成/单visibleobject，别的AUTO复用0新POST/自身预算0，公共read原语言与locator verified。记录main_generation_kill_{acceptance,proof}.json，owned C:/cw-gen-28bbc3e7用绝对路径/名字/reparse校验后恢复不存在，TEMP/TMP恢复。未调用供应商。
+- 本机显式OCR配置preflight（modelsSHA/runtime/defaults/dictionary/CPU init）通过，0推理/网络。配置identity与交付7834f117指纹相同；MAIN发布config/local_ocr.json，shared owner只负责接线，不写生产配置。
+- RF共用绑定修复a7370517/201PASS已交原独立reviewerfocused复验，尚未并线/安装，报告未伪写。
+- 新研究节点budget真实读历史receipt+AUTO并去重native r3费；有效剩余1800466tokens/$19.886499，unknown7/FXguard2764照记。付费未开始。
+- root计划仍Phase6 in_progress；两个工程owner结束后由shared接线owner继续，MAIN负责RF发布和真实节点，后续先两组六公司，再公司池loop。

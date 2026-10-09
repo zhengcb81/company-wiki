@@ -108,3 +108,13 @@ P1 SDK公开接口/财政证据/实际HTTP回执及原件入库集中117项通�
 3. 跨run派生复用和全图PPTX能力是本主线明确剩余责任，不能用来源工具的新功能替代或遗漏。
 4. 固定原三家、新三家做真实完整执行及独立审查；保留旧失败/未执行基线和全部71检查点，发现共因回责任层修复。
 5. 上述主线完成后启动审计技能loop，沿既有池、seed、预算和冻结NVDA证据恢复，不重新抽样绕开失败，不新增调度数据库或人工签收。
+
+## 当前施工状态：2026-10-09 主线工程集中整合
+
+跨run默认复用已合入main `824ab778`；本机版本化PPTX OCR已合入 `2a2bd4d0`。真实POST后强杀→保留未知账→原run恢复完成→公共读取→另一AUTO默认复用，主线集中1PASS/10.93秒，测试目录恢复。它是本地HTTP工程证据，不冒充供应商或公司研究验收。
+
+RF四个独立验收finding的共用关系修复在 `a7370517`，owner集中201PASS+167subtests/10.20秒，正在原独立审查agent同一节点复验；通过后MAIN负责并线、定点安装、normal push/精确CI。
+
+当前并行责任清楚：shared OCR runtime composition在隔离branch `codex/main-ocr-runtime-composition-20261009`，独占shared handlers/port与自己的tests/docs；parser停止写，MAIN独占生产配置、预算、主PWF、RF合并安装及真实大节点。部署配置由MAIN实际校验本地CPU资源后写 `config/local_ocr.json`，0OCR推理/0网络，不能把无模型环境说成具备能力。
+
+剩余顺序不变：shared接线→一次真实22页batch/read/默认零调用复用及71项回放→原三家全新RF研究/四独立审查→固定新三家同样验收→恢复冻结NVDA及公司池loop。不启动新随机抽样，工程绿色不替代研究。

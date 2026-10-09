@@ -1,0 +1,39 @@
+{
+  "schema_version": "main-local-ocr-configuration/1",
+  "checked_at": "2026-10-09T04:20:43.945941+00:00",
+  "source": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\implementation\\main-local-pptx-ocr\\verified_local_config.json",
+  "target": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\local_ocr.json",
+  "configuration_sha256": "9b8a7df81ca62ebc4bb9c2d60d45c247b291564a4a38f5648e5f4b3edb59889b",
+  "normalization_identity": {
+    "parser_name": "cwp_document_normalization",
+    "parser_version": "2.0.0",
+    "format": "pptx",
+    "ocr_identity": {
+      "adapter": "rapidocr-cpu/1",
+      "base_config_sha256": "e753d39c0222297f0180e1bdcde1799bc26218f315356763362810846b6afa84",
+      "box_round_decimals": 3,
+      "confidence_round_decimals": 6,
+      "device": "cpu",
+      "engine_version": "3.8.1",
+      "inter_op_threads": 1,
+      "intra_op_threads": 2,
+      "low_confidence_threshold": 0.8,
+      "max_side_len": 3000,
+      "models": {
+        "cls": "e47acedf663230f8863ff1ab0e64dd2d82b838fceb5957146dab185a89d6215c",
+        "det": "d2a7720d45a54257208b1e13e36a8479894cb74155a5efe29462512d42f49da9",
+        "rec": "48fc40f24f6d2a207a2b1091d3437eb3cc3eb6b676dc3ef9c37384005483683b"
+      },
+      "reading_order": "top-left-box/1",
+      "runtime_version": "1.26.0",
+      "schema_version": "cwp-local-ocr-config/1",
+      "text_score": 0.5,
+      "transform": "rapidocr-image-rgb/1"
+    },
+    "ocr_fingerprint": "7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d"
+  },
+  "environment_preflight": "actual installed model hashes/runtime/defaults/dictionary/CPU engine initialized",
+  "ocr_inference_calls": 0,
+  "network_calls": 0,
+  "automatic_install_or_fallback": false
+}

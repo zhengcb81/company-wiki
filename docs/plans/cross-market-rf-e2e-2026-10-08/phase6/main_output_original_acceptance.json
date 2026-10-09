@@ -24,7 +24,19 @@
   },
   "supplier_calls": 0,
   "raw_original_edits": 0,
-  "actual_post_kill": "pending_after_integration",
+  "actual_post_kill": {
+    "status": "PASS",
+    "head": "2a2bd4d0181a77a4a5b2db55755fbe15d9092eae",
+    "passed": 1,
+    "seconds": 10.93,
+    "receipt": "phase6/main_generation_kill_acceptance.json",
+    "proof": "phase6/main_generation_kill_proof.json",
+    "local_http_fixture": true,
+    "supplier_calls": 0,
+    "original_fees_retained": true,
+    "other_auto_reuse_new_posts": 0,
+    "temp_final": "absent"
+  },
   "prior_docs_ci": {
     "head_sha": "1d448f1d2bc728d4e39ffe6e59977d569ed744df",
     "id": 37880153364,
@@ -38,5 +50,11 @@
     "default_sandbox_temp_permission",
     "local_socket_test_hang_terminated",
     "mypy_fitz_missing_stubs_wrong_invocation"
-  ]
+  ],
+  "budget_fix_ci": {
+    "head_sha": "ce116dddb07184d99fe8fa9661171d2bc4aa88cc",
+    "id": 37881956616,
+    "conclusion": "success",
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/37881956616"
+  }
 }

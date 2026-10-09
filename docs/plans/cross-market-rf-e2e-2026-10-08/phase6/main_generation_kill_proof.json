@@ -1,0 +1,166 @@
+{
+  "post-kill-other-db-refused": {
+    "local_post_count": 1,
+    "supplier_requests": 0,
+    "batch_result": {
+      "budget": {
+        "estimated_micro_usd": 0,
+        "tokens": 0,
+        "unknown_reservations": 0,
+        "unsettled_reservations": 0
+      },
+      "documents": [
+        {
+          "artifact_ref": null,
+          "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+          "status": "failed"
+        }
+      ],
+      "error": "BATCH_GENERATION_RECOVERY_REQUIRED",
+      "run_id": "other-after-kill",
+      "schema_version": "narrative-batch-result/1",
+      "status": "failed"
+    },
+    "read_receipt": null,
+    "extra": {
+      "new_auto_created": false,
+      "object_count_before_owner_recovery": 0
+    }
+  },
+  "post-kill-owner-recovery": {
+    "local_post_count": 2,
+    "supplier_requests": 0,
+    "batch_result": {
+      "budget": {
+        "estimated_micro_usd": 3893,
+        "tokens": 3474,
+        "unknown_reservations": 1,
+        "unsettled_reservations": 0
+      },
+      "documents": [
+        {
+          "artifact_ref": {
+            "artifact_version_id": "narrative-b0e79618e80a4cb0a50e58defdafa784",
+            "byte_size": 4069,
+            "content_sha256": "9110e0833f1dc3fa44fc2e24faecdc113700210c2682c4e3f18a929d9062a2e8",
+            "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+            "source_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+            "source_sha256": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8"
+          },
+          "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+          "errors": [],
+          "status": "completed"
+        }
+      ],
+      "run_id": "parent-kill",
+      "schema_version": "narrative-batch-result/1",
+      "status": "completed",
+      "storage": {
+        "persistent_added_bytes": 45356,
+        "scratch_peak_bytes": 4069
+      }
+    },
+    "read_receipt": null,
+    "extra": {
+      "charged_output_bytes": 2097152,
+      "run_max_output_bytes": 2097152,
+      "reservation_output_bytes": null,
+      "reservation_output_bound": 2097152,
+      "persisted": {
+        "successful_result_counts": {
+          "source.narrative_select": 1,
+          "source.narrative_summarize": 1,
+          "source.narrative_verify": 1
+        },
+        "effects_count": 1
+      },
+      "object_count": 1
+    }
+  },
+  "post-kill-other-db-reuse": {
+    "local_post_count": 2,
+    "supplier_requests": 0,
+    "batch_result": {
+      "budget": {
+        "estimated_micro_usd": 0,
+        "tokens": 0,
+        "unknown_reservations": 0,
+        "unsettled_reservations": 0
+      },
+      "documents": [
+        {
+          "artifact_ref": {
+            "artifact_version_id": "narrative-b0e79618e80a4cb0a50e58defdafa784",
+            "byte_size": 4069,
+            "content_sha256": "9110e0833f1dc3fa44fc2e24faecdc113700210c2682c4e3f18a929d9062a2e8",
+            "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+            "source_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+            "source_sha256": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8"
+          },
+          "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+          "errors": [],
+          "generation_status": "reused",
+          "status": "completed"
+        }
+      ],
+      "run_id": "other-after-kill",
+      "schema_version": "narrative-batch-result/1",
+      "status": "completed",
+      "storage": {
+        "persistent_added_bytes": 196733,
+        "scratch_peak_bytes": 0
+      }
+    },
+    "read_receipt": {
+      "as_of_date": "2026-10-09",
+      "locator_count": 1,
+      "manifest": {
+        "byte_size": 95,
+        "canonical_entity_id": "ent-acme",
+        "collector_name": "production_e2e_fixture",
+        "collector_version": "1.0.0",
+        "content_sha256": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+        "display_name": "Acme",
+        "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+        "document_kind": "investor_call_transcript",
+        "fiscal_period": "Q1",
+        "fiscal_year": 2026,
+        "form_type": null,
+        "language": "en",
+        "market": "US",
+        "mime_type": "text/plain",
+        "period_end": "2026-03-31",
+        "provider": "fixture",
+        "provider_document_id": "call-en.txt",
+        "published_date": "2026-05-01",
+        "retrieved_at": "2026-05-02T00:00:00Z",
+        "security_id": "ACME",
+        "source_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+        "source_url": "https://fixtures.invalid/call-en.txt",
+        "title": "Acme 2026 Q1 earnings call"
+      },
+      "narrative_ref": {
+        "artifact_sha256": "9110e0833f1dc3fa44fc2e24faecdc113700210c2682c4e3f18a929d9062a2e8",
+        "artifact_version_id": "narrative-b0e79618e80a4cb0a50e58defdafa784",
+        "byte_size": 4069,
+        "schema_version": "narrative-ref/1",
+        "source_ref": {
+          "byte_size": 95,
+          "content_sha256": "c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+          "document_id": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8",
+          "mime_type": "text/plain",
+          "schema_version": "2.0",
+          "source_id": "urn:company-wiki:source:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8"
+        }
+      },
+      "quality_status": "needs_review",
+      "read_at": "2026-10-09T04:19:42.678339+00:00",
+      "replay_status": "verified",
+      "schema_version": "narrative-read-receipt/1",
+      "selection_status": "selected",
+      "source_read_policy_sha256": "338863d11ad8b56be1ac9d31615473c3f91b532f60c7c4ecd408437ae6842df1",
+      "status": "ok"
+    },
+    "extra": null
+  }
+}

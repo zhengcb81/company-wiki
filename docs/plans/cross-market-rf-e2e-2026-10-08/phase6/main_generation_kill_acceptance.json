@@ -1,0 +1,21 @@
+{
+  "head": "2a2bd4d0181a77a4a5b2db55755fbe15d9092eae",
+  "root": "C:\\cw-gen-28bbc3e7",
+  "initial": "absent",
+  "supplier_calls": 0,
+  "local_http_fixture": true,
+  "raw_original_edits": 0,
+  "protected_before": {
+    "config/source_acquisition.yaml": "15D04667DFCE8CD622D669E5AF530D689311EAA41B651C653005AFC30F24A585",
+    "config/source_catalog.yaml": "3D159A4EDC8E0E4D09B83AFA95601C5EC885A18F7BD5D163579F3FF446E3F968"
+  },
+  "exit_code": 0,
+  "seconds": 13.641,
+  "protected_after": {
+    "config/source_acquisition.yaml": "15D04667DFCE8CD622D669E5AF530D689311EAA41B651C653005AFC30F24A585",
+    "config/source_catalog.yaml": "3D159A4EDC8E0E4D09B83AFA95601C5EC885A18F7BD5D163579F3FF446E3F968"
+  },
+  "bytes_before_cleanup": 21.0,
+  "final": "absent",
+  "temp_environment_restored": true
+}
