@@ -1,0 +1,44 @@
+{
+  "checked_at": "2026-10-09T00:05:40.796344+00:00",
+  "candidate_branches_not_main": true,
+  "repositories": [
+    {
+      "repository": "company-wiki",
+      "head_sha": "d7923191977d88dda037782332878d9f4b0a2359",
+      "query_url": "https://api.github.com/repos/zhengcb81/company-wiki/actions/runs?head_sha=d7923191977d88dda037782332878d9f4b0a2359&per_page=10",
+      "runs": []
+    },
+    {
+      "repository": "filing-fetch",
+      "head_sha": "afbef6536d3ee66615beb99a465d3a2a1f648313",
+      "query_url": "https://api.github.com/repos/zhengcb81/filing-fetch/actions/runs?head_sha=afbef6536d3ee66615beb99a465d3a2a1f648313&per_page=10",
+      "runs": [
+        {
+          "id": 37861936346,
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "failure",
+          "head_sha": "afbef6536d3ee66615beb99a465d3a2a1f648313",
+          "url": "https://github.com/zhengcb81/filing-fetch/actions/runs/37861936346",
+          "created_at": "2026-10-08T23:53:52Z"
+        }
+      ]
+    },
+    {
+      "repository": "revenue-forecast",
+      "head_sha": "cf06ba000fe594597c5d32a18aad6040d19a0fa0",
+      "query_url": "https://api.github.com/repos/zhengcb81/revenue-forecast/actions/runs?head_sha=cf06ba000fe594597c5d32a18aad6040d19a0fa0&per_page=10",
+      "runs": [
+        {
+          "id": 37862819961,
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "cf06ba000fe594597c5d32a18aad6040d19a0fa0",
+          "url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/37862819961",
+          "created_at": "2026-10-09T00:03:58Z"
+        }
+      ]
+    }
+  ]
+}

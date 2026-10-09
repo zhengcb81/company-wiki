@@ -134,3 +134,17 @@ R6查收收尾：三分支均已包含于远端主线且代码CI绿；最终完�
 用户要求随机从已有公司池选公司→真实revenue-forecast-audit→四独立审查→专家共用根因PWF→实施及原公司复验→再选下一家，直到无主要问题/改进点。循环协调计划独立放在 C:/Users/郑曾波/Projects/revenue-forecast-audit/docs/plans/company-pool-cycle-2026-10-09/；此处旧工程责任、原两组回归和未完成Phase6仍保留，不重复创建同因施工包。当前goal active，语义已有继续循环，目标工具没有修改objective接口，未伪造新目标或完成旧目标。
 
 重大修复后以三家不同公司连续四路实读clean并覆盖池中A/H/US、复用与真实新下载作收尾证据；BLOCKED/NOT_RUN/旧主要问题不算clean。预算沿现有效累计USD20/2M tokens，unknown照计。只在大的节点测试和审查。当前首轮尚在选样/预算盘点，真实研究未执行。
+
+## 2026-10-08T23:49:07.468765+00:00 — 首轮公司池封存与隔离候选
+
+NVDA 初始真实执行包位于 revenue-forecast-audit/runs/pool-20261009-001-us-nvda；manifest 8a895b3b1744985f654048bdfc3b1b5b9de526c8c40b637ade4e809386002095，139产物/15步骤/9来源。整体partial，正式RF数据产物校验通过不等于研究高标准通过。测试根6.96MB保留供四独立审查；新supplier LLM0，历史unknown7保留。真实FMP1请求账户entitlement拒绝，不盲重试。
+
+有限叙述入口的script policy错误已隔离TDD修复（177相关PASS），CWP/FF producer cause 公共边界并行候选正在集中测试；RF消费候选97442029已提交，focused57PASS+明确三仓1PASS，当前shortCI125PASS/Ruff/mypyPASS。候选未发布main/install；独立四审查按实际初始版本进行，再做整链集中验收并发布。只修公共责任边界，无新门禁/身份检查/费用数据库；Dayu零修改。
+
+## 2026-10-09T00:14:12.625451+00:00 — 共用候选验证与CI真实根因
+
+CWP candidate d7923191（含producer4c75273a、finite入口65562043）、FF afbef65、RF cf06ba00（含97442029）均已推隔离支线，当前main及installed未切换。CWP组合责任146PASS，FF集中239PASS/1实盘master缺SKIP/39subtests，实际FF25检查；RF当前short125PASS，实际三仓公开CLI23PASS。success真实import→SourceRef读取→reuse无再下载保留，handled/returned-GAP安全cause及operation累计用量一致，supplier费用0，短自有TEMP恢复。CWP原push门因checkout深度固定60字符阈值在pytest前失败，3RED→3GREEN后改系统独占TEMP并以实际进程退出判定；正常hook retry成功，不跳测试。
+
+远端RF精确cf06ba00 CI37862819961成功；CWP候选无workflow run，不宣称CI绿；FF afbef65 CI37861936346失败，公开API仅退出码/只读浏览器signed-out无法读log。逐字采用FF quality.yml curated suite本地419PASS/1FAIL/4SKIP/78subtests，58.17s：test_complexity_ratchet.py仅因ff_provider_cause.py复杂度14>10阻断，无对应业务错误。正在由独立工程线按用户既有简化授权将分数门统一改为维护诊断，保留语法/类型与新责任契约。复现本地用CWP当前main，远端用compatibility pin，不冒称环境完全相同。
+
+NVDA initial storage/fetch/analyst三份报告已封存，均发现实质问题，不计clean；process独立复算正在形成第四报告（已核139产物、32引文与355数值叶子）。四份齐后专家读取原包并逐issue建立独立PWF，再发布修复并原公司新attempt。原财报及生产配置未改，Dayu零代码修改，RF owner assurance/output未碰。

@@ -93,4 +93,8 @@ P1 SDK公开接口/财政证据/实际HTTP回执及原件入库集中117项通�
 
 用户要求随机从已有公司池选公司→真实revenue-forecast-audit→四独立审查→专家共用根因PWF→实施及原公司复验→再选下一家，直到无主要问题/改进点。循环协调计划独立放在 C:/Users/郑曾波/Projects/revenue-forecast-audit/docs/plans/company-pool-cycle-2026-10-09/；此处旧工程责任、原两组回归和未完成Phase6仍保留，不重复创建同因施工包。当前goal active，语义已有继续循环，目标工具没有修改objective接口，未伪造新目标或完成旧目标。
 
-重大修复后以三家不同公司连续四路实读clean并覆盖池中A/H/US、复用与真实新下载作收尾证据；BLOCKED/NOT_RUN/旧主要问题不算clean。预算沿现有效累计USD20/2M tokens，unknown照计。只在大的节点测试和审查。当前首轮尚在选样/预算盘点，真实研究未执行。
+重大修复后以三家不同公司连续四路实读clean并覆盖池中A/H/US、复用与真实新下载作收尾证据；BLOCKED/NOT_RUN/旧主要问题不算clean。预算沿现有效累计USD20/2M tokens，unknown照计。只在大的节点测试和审查。当前首轮从202个去重候选随机选定 NVDA，真实执行15步骤/9来源已封存且整体partial，四独立审查分批运行。复用FY25原件和真实新下载FY26/最新季度后再次0下载均有证据；叙述启动、latest期间、电话会entitlement和研究校准仍未解决，不能计clean。
+
+## 当前 Next Step（2026-10-09）
+
+收齐NVDA四独立审查并由专家建根因映射；同时关闭FF纯复杂度CI门失败。候选接口已集中验证，main/install保持原版供初审；随后整合已验证共用修复、真实重跑原NVDA，再推进新公司抽样，不把结构/CI绿当研究验收。
