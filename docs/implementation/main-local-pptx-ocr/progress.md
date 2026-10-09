@@ -27,3 +27,9 @@
 - Normal Git hooks inspection: core.hooksPath resolves worktree .githooks; pre-commit=false and commit-msg=false. Missing hooks recorded; no hook bypass or false pass.
 
 - First scoped git add refused owned documentation outside the existing sparse-checkout definition; no commit ran. Retried staging these explicitly assigned paths with git add --sparse, without changing sparse configuration or bypassing hooks.
+
+## Delivery
+
+- Final Ruff scoped implementation/tests/all3 real runners: exit0, All checks passed. `git diff --check`: exit0.
+- Normal implementation commit: a9534e5fb52e00c60b6b8cc5e015b4990f0eec6c, base 964886f887347c7a789402347f9ecd3172cf8c8c, branch codex/main-local-pptx-ocr-20261009. No hooks were bypassed; required hook files are absent, so no hook pass is claimed.
+- Final documentation follow-up adds HANDOFF/handoff.json and stamps this tested implementation head; its containing commit is the delivery head resolved by Git. This avoids a self-referential commit hash in its own tracked manifest. No code changes after implementation commit. No merge/push/install.

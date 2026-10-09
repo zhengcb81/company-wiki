@@ -12,7 +12,7 @@ Implement versioned PPTX display-page evidence and explicit bounded local CPU OC
 | 2. Ordinals and frozen locators | Current 1.1.0/shape2, old 1.0.0/shape1 retained, HTML unchanged | complete |
 | 3. Bounded local OCR and replay | OCR2.0.0/config SHA/CPU; unique media once; selected 10 spans/2 media=2 calls; final legacy/current-config and no-inference preflight verified | complete |
 | 4. Real 22-page source and visual QA | Real public TEMP import/read;1067lines/145.549s;8spans/4media16.570s;one page18 numeric follow-up;0network;TEMP/raw/models restored; actual gaps retained | complete |
-| 5. Normal scoped commit and interface handoff | INTERFACE/real evidence complete; stamp implementation head and final HANDOFF/manifest after normal commit | in_progress |
+| 5. Normal scoped commit and interface handoff | Implementation committed normally; final HANDOFF/manifest bind the tested implementation head, delivered in a documentation follow-up commit | complete |
 
 ## Evidence and limits
 
