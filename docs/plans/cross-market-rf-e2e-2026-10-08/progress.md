@@ -586,3 +586,9 @@ W06正常ensure两早返回、FF query_found→最终open已由作者实证绕�
 并行W12已从同235基线复用clean既有worktree，新branch codex/fresh-cache-receipts-20261009；仅新cache behavior contract/e2e测试+独立PWF。使用真实catalog/AUTO engine、synthetic model port、measure provider/parse/OCR调用和bytes；目前无已证prod故障，不臆改生成缓存。已知same-spec public回放可有parse/OCR，不能把该成本声称0；零收费调用，M3三家真实repeat留以后。
 
 诊断曾错误猜reader_cli.py及跨仓relative source_reader_cli.py路径，命令读取失败、无写操作；之后按report明确绝对路径成功读取CWP真实source_reader_cli.py和RF公司来源builder，未将shell失败作产品RED。
+
+## 2026-10-09 17:45 UTC — 用户进度说明与最新主线CI
+
+- 已用大白话说明工程完成与真实研究未完成的区别；最新CWP文档head0504aa9d精确CI37967393014 SUCCESS/100s，与源码2350077a CI98s分开记录。FF41ba0150 CI81s、RF3c3c0379 CI37s仍为各仓最新通过依据。
+- task_plan页首清除过时的W05/RF“待推/待独立复审”现状，原FAIL/RED及历史叙述不重写。W06五入口共享事实资格待最终集中交付；W12仅工程缓存计量，不宣称已修未证实的缺陷。
+- 原件/生产config不改；本节点无新增来源供应商/LLM调用。整个goal仍active，M3/M4及loop未执行完成。

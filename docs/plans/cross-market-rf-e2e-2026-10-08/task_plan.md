@@ -1,16 +1,17 @@
 # 三市场真实收入预测端到端审计
 
-## 最新执行节点（2026-10-09 17:00 UTC；优先于下文历史Next Step）
+## 最新执行节点（2026-10-09 17:45 UTC；优先于下文历史Next Step）
 
-**当前 Next Step：** W06在CWP共享来源事实责任层根修cached实际主体/期间与manifest不符，确保ensure与FF最终读也走同一资格；集中大节点验收后并线。W12已独立开工仅做离线缓存行为测试/回执。W05/W08最新精确CI已绿并已发布，W11已commit/定点安装；之后W09/W13，再原三家M3/新三家M4/NVDA loop。
+**当前 Next Step：** W06在CWP共享来源事实责任层根修cached实际主体/期间与manifest不符，确保open/verify/resolver/ensure/stage五条复用入口走同一资格；集中大节点验收后并线。W12独立执行离线缓存行为测试与计量回执。然后W09资料覆盖/W13研究校准，再原三家M3、新三家M4、冻结NVDA及公司池loop。
 
-- 昨日CI根因已发布修复：依赖安装声明不一致、local/remote覆盖入口分叉、旧许可和版本断言、FF复杂度伪门。commit维持快速静态，正常push检查全部未推范围的受影响unit及共享契约；CI/push契约入口一致。不把每次commit变成两分钟整套测试，不宣称静态检查可证明运行行为。
-- 新入口已在上传前拦住CWP W05三个失败（2428PASS/3FAIL，144.26s）：1个真实0.1.0兼容缺口，2个fixture错宣0.1.1而实际解析0.2.0。作者87cdf733/7de4fabb保留旧版本语义、接通HTML回放、修fixture；202PASS/1明确optional skip、实际MSFT41/41回放。独立复审和主线push待，未把7762bfd1称已发布。
-- FF W08 41ba0150已主线发布：正常push601PASS/7明确SKIP/78subtests/62.63s；精确CI37961753941 SUCCESS/81s。RF W08本地主线1a060802尚未发布，正常push147PASS/2FAIL/19.69s：当前来源reader拒绝原因被通用诊断抹去，作者在既有typed cause加optional有限原因投影修复；不回显任意错误正文、不削弱原文SHA/期间拒绝。
-- W06独立验收FAIL：除元数据/候选预算通用修复外，cached-ready只验SHA未验证实际正文主体/期间，实证错CIK与FY2022伪缓存FY2026都ready。原38PASS/1OSskip未覆盖该快速路径；作者已按同一事实责任层补两RED和统一修复，不新增人签/权限或第二账本，暂不合并/安装。
-- W11工程M2独立接受：59全suite、15集中、10独立controls、4次真实installed RF native调用，原输入历史与消费副本分离、原子写/cleanup故障因果、trust JSON忠实投影已验证。源码9b107672和PWF78c2b10已commit；只选4文件安装到agents/claude两物理根8文件132566B，未选代码drift=0，无remote不虚报推送。真实公司M3仍未开始。
-- W03/W04/W07及W01/W02/RF W10/W14工程接受/此前精确CI绿仍有效；64finding冻结矩阵不改。所有本轮工程零新增供应商/付费调用，原件、生产catalog/config、Dayu/IQS及邻仓owner WIP保留。各包旧FAIL/RED证据保留，不以工程绿替代研究。
-- [本轮总回执](phase6/fresh_root_implementation_2026-10-09/main_capture_transcript_integration.json)、[昨日CI根因](phase6/ci_root_cause_2026-10-09/CLOSEOUT.md)、[冻结14卡](phase6/fresh_root_remediation_2026-10-09/IMPLEMENTATION.md)为准。
+- **CI根因节点已发布并通过远端验收**：CWP源码发布2350077a正常push2450PASS/145.64s，精确CI37966014234成功/98s；文档收尾0504aa9d正常push52PASS/4.02s，最新精确CI37967393014成功/100s。FF41ba0150正常push601PASS/7明确SKIP/78subtests/62.63s，CI37961753941成功/81s；RF3c3c0379正常push151PASS/23.06s，CI37965179206成功/37s。commit仍快速静态；push与CI共用契约入口，不把每次commit变成整套测试。
+- **W05工程接受并主线发布**：0.1.0/0.1.1旧电话会与0.2.0新自然版分别保持真实语义，HTML回放、DOCX和解析版本接线完成；resolver冻结调用者输入快照，原文变化仍每次验SHA。责任集208PASS/1明确optional skip；独立16PASS及17实际controls，MSFT实际41/41分组回放通过。旧2428PASS/3FAIL push及独立FAIL如实保留；真实公司M3仍待，不把回放成功当研究成功。
+- **W08工程接受并发布/定点安装**：FF/RF有限诊断与真实usage跨层保留；RF不再抹掉原文损坏、期间错配等具名原因，不回显任意错误正文。独立21PASS及12实际RF CLI controls通过；FF10/RF8个物理安装文件仅定点同步，未选代码drift=0，配置/output/owner WIP保留。
+- **W06尚未签收/合并**：原独立验收发现cached-ready错CIK、FY2022伪缓存FY2026也能ready；local_prepare修复后又由正常ensure/FF最终读实证旁路。作者现将实读资格集中到assertion_service，五条复用入口共用同一事实责任；新的错误缓存RED已绿，最终集中测试及真实MSFT回放待。不用重复身份层或人工许可解决此问题。
+- **W11工程M2接受、commit并定点安装**：59全suite、15集中、10独立controls、4次真实installed RF native调用；原输入历史与消费副本分离、原子写/cleanup故障因果、trust JSON忠实投影均已验证。源码9b107672及PWF78c2b10已commit；agents/claude两物理根8文件132566B，未选代码drift=0；无remote不虚报推送。M3实际公司记录仍待。
+- **W12进行中，暂无生产缺陷结论**：只用独占临时catalog/AUTO及模型stub测同配置复用、变化后的受影响来源重算，记录模型/解析/OCR调用、时间及scratch/持久空间。缓存粒度为每来源generation；命中可能仍需locator原文回放，不宣称所有解析为0。工程本轮零新增供应商/付费调用，原件、生产catalog/config、Dayu/IQS及邻仓owner WIP保留。
+- W01/W02/W03/W04/W07/W10/W14此前工程接受仍有效；冻结64finding不改。项目整体未完成：W06/W12、W09/W13、原三家公司四审重跑、新三家泛化、NVDA与公司池loop仍在总目标内。
+- [本轮总回执](phase6/fresh_root_implementation_2026-10-09/main_capture_transcript_integration.json)、[昨日CI根因](phase6/ci_root_cause_2026-10-09/CLOSEOUT.md)、[冻结14卡](phase6/fresh_root_remediation_2026-10-09/IMPLEMENTATION.md)为工程证据。总回执内旧失败/旧head是历史事实；本节为最新执行状态。
 
 ## 当前施工状态（2026-10-09；历史阶段完成不代表Phase6完成）
 
