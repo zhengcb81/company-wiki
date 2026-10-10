@@ -15,8 +15,10 @@
 Set-Location -LiteralPath 'C:/Users/郑曾波/Projects/_harness_worktrees/p7/cwp'
 $env:PWF_PLAN_ROOT = (Get-Location).Path
 $env:PLAN_ID = 'p7-cwp-projection'
-& 'C:/Users/郑曾波/.agents/skills/planning-with-files/scripts/resolve-plan-dir.ps1'
+& 'C:/Users/郑曾波/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe' -NoProfile -File 'C:/Users/郑曾波/.agents/skills/planning-with-files/scripts/resolve-plan-dir.ps1'
 ```
+
+启动解析使用本机已有 PowerShell 7；旧 Windows PowerShell 5.1 缺 IsPathFullyQualified，会返回空结果，不能据此切换到别的计划。
 
 解析结果必须为本卡 PWF。核对实际 branch/base 与工作目录；新增的本卡启动文档有据可查，除此之外如有其他 owner 改动，保留并报告，不 reset/stash 全树。
 
