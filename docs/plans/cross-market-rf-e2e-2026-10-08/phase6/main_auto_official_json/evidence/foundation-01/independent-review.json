@@ -1,0 +1,15 @@
+{
+  "observed_at": "2026-10-10T21:37:00.220175+00:00",
+  "scope": "subject/public official dispatch foundations only; not AUTO acceptance",
+  "review_agent": "/root/main_json_store_contract_design",
+  "independent_in_memory_probes": 9,
+  "result": "passed",
+  "source_writes": 0,
+  "db_writes": 0,
+  "external_provider_calls": 0,
+  "limitations": [
+    "Full pytest/static owned by MAIN, 164PASS + Ruff0 + mypy0 in foundation observation",
+    "CLI grammar official first, options after official",
+    "AUTO store/batch/model/transport/recovery still pending"
+  ]
+}

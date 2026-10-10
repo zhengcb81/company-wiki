@@ -1,5 +1,12 @@
 # Progress
 
+## MAIN基础身份与public official入口通过；三个P7外包已发出（2026-10-10T21:37:00.220175+00:00）
+
+164责任/兼容PASS、Ruff与neutralcore mypy绿，独立9纯内存探针通过；真实ownedTEMP import→project→reopen/replay/export→原文read逐字节相等且恢复。新增compactneutral subject不复制records、不伪原件、不新库/许可；publicCLI薄委托既有source责任。基础源码待本节点normalcommit/push，AUTO全链尚未完成。
+
+用户已发出P7三包，MAIN不会修改各卡独占源码。MAIN继续[共同接口冻结](phase6/main_auto_official_json/INTERFACES.md)：source adapter、同catalog subject存储、projectiongeneration各不同文件内部TDD，MAIN负责batch/sharedDTO/Worker/pin/terminal/transport。仅大节点审查。原件/config/Dayu/邻仓ownerWIP不动，本轮provider/model/费用0；goal active、原三家四审/新三家/loop和条件八家仍待。
+
+
 ## P7三个独立施工包已准备（2026-10-10T21:12:35.525126+00:00）
 
 唯一分包入口：[P7总卡](phase6/p7_parallel_handoff_2026-10-10/README.md)。只有三卡：CWP JSON投影确定性/快照/旧回放、RF经营校准绑定/可选支持诊断、audit请求与逐文档记录/四路风险协议；不同worktree、源码写集与MAIN AUTO不重叠，可立即并行，不互等。独立PWF与共同格式副本均备齐、正常bootstrap提交；三源码未实施。独立包审查和54项启动/格式/隔离PASS，仅证明施工输入完备，不表示公司研究或产品完成。

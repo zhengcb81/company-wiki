@@ -159,6 +159,9 @@ def _parser() -> argparse.ArgumentParser:
         help="versioned source-catalog YAML configuration",
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
+    subparsers.add_parser(
+        "official", help="import, project, replay, export or read official originals",
+    )
 
     scan = subparsers.add_parser("scan", help="scan and hash configured source roots")
     scan.add_argument(
@@ -789,6 +792,14 @@ def _policy_export_payload(config) -> dict[str, Any]:
 
 
 def main(argv: Sequence[str] | None = None) -> int:
+    # Official operations own their parser, catalog lifecycle and raw-byte output.
+    # Delegate before configuring streams or opening the generic catalog.
+    effective_argv = sys.argv[1:] if argv is None else argv
+    if effective_argv and effective_argv[0] == "official":
+        from .official_source_cli import main as official_main
+
+        return official_main(effective_argv[1:])
+
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     if hasattr(sys.stderr, "reconfigure"):

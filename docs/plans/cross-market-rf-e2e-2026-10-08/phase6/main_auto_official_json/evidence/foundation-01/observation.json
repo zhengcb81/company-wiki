@@ -1,0 +1,57 @@
+{
+  "scope": "foundation only; AUTO full batch/handler/generation/store/transport/pins integration pending",
+  "tests": [
+    {
+      "kind": "green_and_compatibility",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/unit/test_official_json_public_dispatch.py",
+        "tests/unit/test_official_json_narrative_subject.py",
+        "tests/integration/test_official_json_public_cli.py",
+        "tests/unit/test_m3_official_json_parser.py",
+        "tests/contract/test_m3_official_json_contract.py",
+        "tests/integration/test_m3_official_json_projection.py",
+        "tests/integration/test_m3_official_json_acceptance.py",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-main-foundation-x7thnl6p\\pytest",
+        "-q",
+        "--tb=short"
+      ],
+      "exit_code": 0
+    },
+    {
+      "kind": "ruff",
+      "argv": [
+        "ruff",
+        "check",
+        "src/company_wiki/narrative_subject.py",
+        "src/company_wiki/source_catalog/cli.py",
+        "tests/unit/test_official_json_narrative_subject.py",
+        "tests/unit/test_official_json_public_dispatch.py",
+        "tests/integration/test_official_json_public_cli.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "kind": "mypy",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "mypy",
+        "src/company_wiki/narrative_subject.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-main-foundation-x7thnl6p",
+  "restored_initial_absent_temp": true,
+  "new_provider_calls": 0,
+  "new_model_calls": 0,
+  "new_cost_usd": 0,
+  "prior_green_failed_reason": "Test expected a one-key issuer; real source owner normalizes six fields. Corrected test to require exact source issuer object, not to drop its null metadata."
+}

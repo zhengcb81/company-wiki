@@ -1,0 +1,131 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 11 items
+
+tests\unit\test_official_json_public_dispatch.py FFFFFFFFFF              [ 90%]
+tests\integration\test_official_json_public_cli.py F                     [100%]
+
+================================== FAILURES ===================================
+__ test_official_dispatch_before_outer_parser_stream_or_catalog[read-False] ___
+tests\unit\test_official_json_public_dispatch.py:27: in test_official_dispatch_before_outer_parser_stream_or_catalog
+    assert cli.main(None if implicit else arguments) == 17
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\cli.py:796: in main
+    parser = _parser()
+             ^^^^^^^^^
+tests\unit\test_official_json_public_dispatch.py:16: in forbidden
+    raise AssertionError("outer parser/config/catalog must not own official operations")
+E   AssertionError: outer parser/config/catalog must not own official operations
+___ test_official_dispatch_before_outer_parser_stream_or_catalog[read-True] ___
+tests\unit\test_official_json_public_dispatch.py:27: in test_official_dispatch_before_outer_parser_stream_or_catalog
+    assert cli.main(None if implicit else arguments) == 17
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\cli.py:796: in main
+    parser = _parser()
+             ^^^^^^^^^
+tests\unit\test_official_json_public_dispatch.py:16: in forbidden
+    raise AssertionError("outer parser/config/catalog must not own official operations")
+E   AssertionError: outer parser/config/catalog must not own official operations
+_ test_official_dispatch_before_outer_parser_stream_or_catalog[project-False] _
+tests\unit\test_official_json_public_dispatch.py:27: in test_official_dispatch_before_outer_parser_stream_or_catalog
+    assert cli.main(None if implicit else arguments) == 17
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\cli.py:796: in main
+    parser = _parser()
+             ^^^^^^^^^
+tests\unit\test_official_json_public_dispatch.py:16: in forbidden
+    raise AssertionError("outer parser/config/catalog must not own official operations")
+E   AssertionError: outer parser/config/catalog must not own official operations
+_ test_official_dispatch_before_outer_parser_stream_or_catalog[project-True] __
+tests\unit\test_official_json_public_dispatch.py:27: in test_official_dispatch_before_outer_parser_stream_or_catalog
+    assert cli.main(None if implicit else arguments) == 17
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\cli.py:796: in main
+    parser = _parser()
+             ^^^^^^^^^
+tests\unit\test_official_json_public_dispatch.py:16: in forbidden
+    raise AssertionError("outer parser/config/catalog must not own official operations")
+E   AssertionError: outer parser/config/catalog must not own official operations
+_ test_official_dispatch_before_outer_parser_stream_or_catalog[export-False] __
+tests\unit\test_official_json_public_dispatch.py:27: in test_official_dispatch_before_outer_parser_stream_or_catalog
+    assert cli.main(None if implicit else arguments) == 17
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\cli.py:796: in main
+    parser = _parser()
+             ^^^^^^^^^
+tests\unit\test_official_json_public_dispatch.py:16: in forbidden
+    raise AssertionError("outer parser/config/catalog must not own official operations")
+E   AssertionError: outer parser/config/catalog must not own official operations
+__ test_official_dispatch_before_outer_parser_stream_or_catalog[export-True] __
+tests\unit\test_official_json_public_dispatch.py:27: in test_official_dispatch_before_outer_parser_stream_or_catalog
+    assert cli.main(None if implicit else arguments) == 17
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\cli.py:796: in main
+    parser = _parser()
+             ^^^^^^^^^
+tests\unit\test_official_json_public_dispatch.py:16: in forbidden
+    raise AssertionError("outer parser/config/catalog must not own official operations")
+E   AssertionError: outer parser/config/catalog must not own official operations
+_ test_official_dispatch_before_outer_parser_stream_or_catalog[replay-False] __
+tests\unit\test_official_json_public_dispatch.py:27: in test_official_dispatch_before_outer_parser_stream_or_catalog
+    assert cli.main(None if implicit else arguments) == 17
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\cli.py:796: in main
+    parser = _parser()
+             ^^^^^^^^^
+tests\unit\test_official_json_public_dispatch.py:16: in forbidden
+    raise AssertionError("outer parser/config/catalog must not own official operations")
+E   AssertionError: outer parser/config/catalog must not own official operations
+__ test_official_dispatch_before_outer_parser_stream_or_catalog[replay-True] __
+tests\unit\test_official_json_public_dispatch.py:27: in test_official_dispatch_before_outer_parser_stream_or_catalog
+    assert cli.main(None if implicit else arguments) == 17
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\cli.py:796: in main
+    parser = _parser()
+             ^^^^^^^^^
+tests\unit\test_official_json_public_dispatch.py:16: in forbidden
+    raise AssertionError("outer parser/config/catalog must not own official operations")
+E   AssertionError: outer parser/config/catalog must not own official operations
+_____________ test_official_dispatch_does_not_reconfigure_streams _____________
+tests\unit\test_official_json_public_dispatch.py:39: in test_official_dispatch_does_not_reconfigure_streams
+    assert cli.main(["official", "--operation", "read"]) == 0
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\cli.py:793: in main
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+tests\unit\test_official_json_public_dispatch.py:34: in reconfigure
+    raise AssertionError("outer stream mutation before binary original read")
+E   AssertionError: outer stream mutation before binary original read
+____________________ test_root_help_exposes_official_entry ____________________
+tests\unit\test_official_json_public_dispatch.py:46: in test_root_help_exposes_official_entry
+    assert "official" in capsys.readouterr().out
+E   AssertionError: assert 'official' in 'usage: company-wiki-source-catalog [-h] [--config CONFIG]\n                                   {scan,register,source-f...help            show this help message and exit\n  --config CONFIG       versioned source-catalog YAML configuration\n'
+E    +  where 'usage: company-wiki-source-catalog [-h] [--config CONFIG]\n                                   {scan,register,source-f...help            show this help message and exit\n  --config CONFIG       versioned source-catalog YAML configuration\n' = CaptureResult(out='usage: company-wiki-source-catalog [-h] [--config CONFIG]\n                                   {scan...       show this help message and exit\n  --config CONFIG       versioned source-catalog YAML configuration\n', err='').out
+E    +    where CaptureResult(out='usage: company-wiki-source-catalog [-h] [--config CONFIG]\n                                   {scan...       show this help message and exit\n  --config CONFIG       versioned source-catalog YAML configuration\n', err='') = readouterr()
+E    +      where readouterr = <_pytest.capture.CaptureFixture object at 0x00000240691AFE00>.readouterr
+_______ test_real_public_import_project_reopen_read_export_and_failure ________
+tests\integration\test_official_json_public_cli.py:46: in test_real_public_import_project_reopen_read_export_and_failure
+    assert imported.returncode == 0, imported.stderr
+E   AssertionError: b"usage: company-wiki-source-catalog [-h] [--config CONFIG]\r
+E                                        {scan,register,sourc...ime-policy, focus-cleanup, archive-retired-evidence, prune-retired-evidence, duplicate-preview, duplicate-recycle)\r
+E     "
+E   assert 2 == 0
+E    +  where 2 = CompletedProcess(args=['C:\\Miniconda\\python.exe', '-X', 'utf8', '-B', '-m', 'company_wiki.source_catalog.cli', 'offi...me-policy, focus-cleanup, archive-retired-evidence, prune-retired-evidence, duplicate-preview, duplicate-recycle)\r\n").returncode
+=========================== short test summary info ===========================
+FAILED tests/unit/test_official_json_public_dispatch.py::test_official_dispatch_before_outer_parser_stream_or_catalog[read-False]
+FAILED tests/unit/test_official_json_public_dispatch.py::test_official_dispatch_before_outer_parser_stream_or_catalog[read-True]
+FAILED tests/unit/test_official_json_public_dispatch.py::test_official_dispatch_before_outer_parser_stream_or_catalog[project-False]
+FAILED tests/unit/test_official_json_public_dispatch.py::test_official_dispatch_before_outer_parser_stream_or_catalog[project-True]
+FAILED tests/unit/test_official_json_public_dispatch.py::test_official_dispatch_before_outer_parser_stream_or_catalog[export-False]
+FAILED tests/unit/test_official_json_public_dispatch.py::test_official_dispatch_before_outer_parser_stream_or_catalog[export-True]
+FAILED tests/unit/test_official_json_public_dispatch.py::test_official_dispatch_before_outer_parser_stream_or_catalog[replay-False]
+FAILED tests/unit/test_official_json_public_dispatch.py::test_official_dispatch_before_outer_parser_stream_or_catalog[replay-True]
+FAILED tests/unit/test_official_json_public_dispatch.py::test_official_dispatch_does_not_reconfigure_streams
+FAILED tests/unit/test_official_json_public_dispatch.py::test_root_help_exposes_official_entry
+FAILED tests/integration/test_official_json_public_cli.py::test_real_public_import_project_reopen_read_export_and_failure
+============================= 11 failed in 9.22s ==============================

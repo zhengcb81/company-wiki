@@ -1,0 +1,26 @@
+{
+  "scope": "public_official_cli_dispatch_only_not_AUTO_complete",
+  "red_exit_code": 1,
+  "green_exit_code": 0,
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/test_official_json_public_dispatch.py",
+    "tests/integration/test_official_json_public_cli.py",
+    "-q",
+    "--tb=short"
+  ],
+  "source_raw_modified": false,
+  "fixture": "synthetic pytest-owned TEMP; public import/project/read/replay/export run as real subprocesses",
+  "provider_calls": 0,
+  "model_calls": 0,
+  "new_cost_usd": 0,
+  "log_sha256": {
+    "red.log": "37fdb696651c6174a4cb4430f5dd82e0630a7944431d9022a2bdab04dda4ecd1",
+    "green.log": "db19c6ea3966b54c52fa5a06c35bb9e934cba2c5dd4872f1998a3dbd1175acb5"
+  }
+}

@@ -18,7 +18,7 @@
 
 ## Next Step
 
-MAIN 冻结 IMPLEMENTATION.md 中的统一 subject 身份和最小版本集合；在隔离集成工作树先写自动化失败测试。独立只读审查关注 store compaction、effect target、artifact pin 和共享母页的准确读取，不能只验 select 函数。
+基础subject与public official已164PASS及独立审查通过；按INTERFACES.md在隔离树先写batch/event/context失败测试，内部sourceadapter/store/generation不同写集同时TDD。独立只读审查关注 store compaction、effect target、artifact pin 和共享母页的准确读取，不能只验 select 函数。
 
 ## 保留约束
 

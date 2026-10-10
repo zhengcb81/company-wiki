@@ -1,0 +1,21 @@
+{
+  "scope": "internal_subject_identity_only_not_AUTO_complete",
+  "red_exit_code": 2,
+  "red_kind": "new module missing at test collection; no false assertion failure claim",
+  "green_exit_code": 1,
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/test_official_json_narrative_subject.py",
+    "-q",
+    "--tb=short"
+  ],
+  "provider_calls": 0,
+  "model_calls": 0,
+  "new_cost_usd": 0,
+  "contract_refinement": "Before implementation, mutable-input test uses binding dict so P7 may freeze SourceProjection. Duplicate parent observation preserved rather than adding a needless rejection; source coverage retains diagnostic."
+}
