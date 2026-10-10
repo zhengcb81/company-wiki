@@ -1,0 +1,556 @@
+{
+  "schema_version": "m3-lane-handoff/1",
+  "lane_id": "M3-JSON",
+  "observed_at_utc": "2026-10-10T16:41:20.079401+00:00",
+  "owner": "Hermes Agent (external harness takeover of errored built-in agent)",
+  "package_status": "complete",
+  "repos": [
+    {
+      "repository": "company-wiki",
+      "worktree": "C:/Users/郑曾波/.codex/worktrees/m3-official-json-20261010/company-wiki",
+      "branch": "codex/m3-official-json-20261010",
+      "base_head": "3c791e3c2a16c12627cc25d0bd8681cc9458e48b",
+      "head": "8abfad074057ff8d5c89e01aea8f87a73be5405f",
+      "changed_files": [
+        {
+          "path": ".planning/.active_plan",
+          "byte_sha256": "554649f1474858efd3d71699ca0042e4244fa1cc0a519999a5b961fa3154c516",
+          "git_blob_sha": "a182a5e5f0f9f9373bba6f8b5239f519ff0114fd",
+          "runtime": false,
+          "reason": "PWF lane plan/evidence/log or preserved historical W02 seed (non-runtime)"
+        },
+        {
+          "path": ".planning/m3-official-json-20261010/INTERFACE_CHANGE.md",
+          "byte_sha256": "92b350510c4c9b310767c980d952425da958171f032f1171699d6d9e50567603",
+          "git_blob_sha": "f9f0c02754b68a67df2e78cf7df872ab45836b3c",
+          "runtime": false,
+          "reason": "PWF lane plan/evidence/log or preserved historical W02 seed (non-runtime)"
+        },
+        {
+          "path": ".planning/m3-official-json-20261010/baseline_shas.txt",
+          "byte_sha256": "ca5ab77711aaf0e739322136102f7ea4bfb05ee6ec31782df3bc4af87092740d",
+          "git_blob_sha": "db7e401f4937739f9925a7a36b4c7be170c53657",
+          "runtime": false,
+          "reason": "PWF lane plan/evidence/log or preserved historical W02 seed (non-runtime)"
+        },
+        {
+          "path": ".planning/m3-official-json-20261010/findings.md",
+          "byte_sha256": "6b9cf94d566071001356d1c74f7ab348bb1d758a48cc4bcdcb896f1cff123856",
+          "git_blob_sha": "c5f5acc3520cc9d2527badd1b4d27013bb331ffa",
+          "runtime": false,
+          "reason": "PWF lane plan/evidence/log or preserved historical W02 seed (non-runtime)"
+        },
+        {
+          "path": ".planning/m3-official-json-20261010/logs/green_contract_layout.log",
+          "byte_sha256": "c8f699b5ed77ebdd73aa5502ec91cb193679a132955263d7cbe98d1730d124d4",
+          "git_blob_sha": "d07d69cea2d5afa5ce1779c10eff4d867d3fe65a",
+          "runtime": false,
+          "reason": "PWF lane plan/evidence/log or preserved historical W02 seed (non-runtime)"
+        },
+        {
+          "path": ".planning/m3-official-json-20261010/logs/green_final_all.log",
+          "byte_sha256": "a469f00284d9eba5cf82bd23040be8899eaadc6325a5053b99be1f83c1b85e39",
+          "git_blob_sha": "4a1b458583903191f9183be9f37329d4af8a37a9",
+          "runtime": false,
+          "reason": "PWF lane plan/evidence/log or preserved historical W02 seed (non-runtime)"
+        },
+        {
+          "path": ".planning/m3-official-json-20261010/logs/green_integration_chain.log",
+          "byte_sha256": "37cbd23bc6e495b1a7bb540c359d621e090e06bb1c51cf398cc7ba5ee7ff3fed",
+          "git_blob_sha": "7a3abceb71a804af89b4c69356efc34eed99816f",
+          "runtime": false,
+          "reason": "PWF lane plan/evidence/log or preserved historical W02 seed (non-runtime)"
+        },
+        {
+          "path": ".planning/m3-official-json-20261010/logs/green_regression_related.log",
+          "byte_sha256": "30bfe7737cdde2dc59206d5d4b36d6beff7dede96d80f9aea4cba7f1b0c87f7d",
+          "git_blob_sha": "7d1e8f41d56d73951f79c7204055ed68c27a3a66",
+          "runtime": false,
+          "reason": "PWF lane plan/evidence/log or preserved historical W02 seed (non-runtime)"
+        },
+        {
+          "path": ".planning/m3-official-json-20261010/logs/green_unit_parser.log",
+          "byte_sha256": "d7657fb71989e1d3b5fb6fdf5f0c0dad6161247c460a19e1182d8910734da54b",
+          "git_blob_sha": "128a60b2ace35b3d913f04d9e369b813787f8347",
+          "runtime": false,
+          "reason": "PWF lane plan/evidence/log or preserved historical W02 seed (non-runtime)"
+        },
+        {
+          "path": ".planning/m3-official-json-20261010/logs/normal-commit.log",
+          "byte_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "git_blob_sha": "15b53ac39f3cb27ba2a0537840b20b21637a6ffc",
+          "runtime": false,
+          "reason": "PWF lane plan/evidence/log or preserved historical W02 seed (non-runtime)"
+        },
+        {
+          "path": ".planning/m3-official-json-20261010/logs/red_contract_layout.log",
+          "byte_sha256": "e120f6372089c6794f9c81c611ef8102d3ec76ab1cd1b16b34b42457bf932140",
+          "git_blob_sha": "7ef9813bd19ea277ee4b6299726acebcf3bbdb7e",
+          "runtime": false,
+          "reason": "PWF lane plan/evidence/log or preserved historical W02 seed (non-runtime)"
+        },
+        {
+          "path": ".planning/m3-official-json-20261010/logs/red_integration_chain.log",
+          "byte_sha256": "da15eac04d62e6d6238289f3b717f3128c989826a3d17dd3fa1cc23d0b2c55bf",
+          "git_blob_sha": "6d750349b502303651099a6757f97b4c4b1b5be4",
+          "runtime": false,
+          "reason": "PWF lane plan/evidence/log or preserved historical W02 seed (non-runtime)"
+        },
+        {
+          "path": ".planning/m3-official-json-20261010/logs/red_public_cli_import.log",
+          "byte_sha256": "2697dacaa5e6d275bcc11b62f6710266193e30a12f40af69d960b0cd26e2c333",
+          "git_blob_sha": "16f3008cbd1baa9432dfc88193ad80d79b48cd4f",
+          "runtime": false,
+          "reason": "PWF lane plan/evidence/log or preserved historical W02 seed (non-runtime)"
+        },
+        {
+          "path": ".planning/m3-official-json-20261010/logs/red_unit_parser.log",
+          "byte_sha256": "83691c537dca153a9687535dabebb851e098f0e84e9a87dac0e94cd0df4498cf",
+          "git_blob_sha": "884c40bab7d258338cdf78febbee5b28e50184b6",
+          "runtime": false,
+          "reason": "PWF lane plan/evidence/log or preserved historical W02 seed (non-runtime)"
+        },
+        {
+          "path": ".planning/m3-official-json-20261010/logs/static_mypy_changed.log",
+          "byte_sha256": "e2702f9afc4c0f80ff1e8624f77af7a7d2689ca184512114aae5967a76229ba8",
+          "git_blob_sha": "b8a698783fdd9e01847f14071c07e2a6a27d31ee",
+          "runtime": false,
+          "reason": "PWF lane plan/evidence/log or preserved historical W02 seed (non-runtime)"
+        },
+        {
+          "path": ".planning/m3-official-json-20261010/logs/static_ruff_changed.log",
+          "byte_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+          "git_blob_sha": "1f5f344d054fae10f39140fb7199c99321d9190a",
+          "runtime": false,
+          "reason": "PWF lane plan/evidence/log or preserved historical W02 seed (non-runtime)"
+        },
+        {
+          "path": ".planning/m3-official-json-20261010/progress.md",
+          "byte_sha256": "476d156c3f11c5e9fa000695bc21cf6c8c0c38daf6f79eda5592ef42c52b8e4d",
+          "git_blob_sha": "4c49b9566ecb1e592b327c60b9d914484e356053",
+          "runtime": false,
+          "reason": "PWF lane plan/evidence/log or preserved historical W02 seed (non-runtime)"
+        },
+        {
+          "path": ".planning/m3-official-json-20261010/task_plan.md",
+          "byte_sha256": "46e2f24d417549c15c0caddc6e68475b5aba95568631c23383d0bf591290b0fb",
+          "git_blob_sha": "68c450ffdea2651e15cf50942727e1c49a965ebc",
+          "runtime": false,
+          "reason": "PWF lane plan/evidence/log or preserved historical W02 seed (non-runtime)"
+        },
+        {
+          "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_implementation_2026-10-10/W02/findings.md",
+          "byte_sha256": "01f2d50a9165ccb9a864b4e3add065d119d2befc7e709895f1cd0b593bf48f0f",
+          "git_blob_sha": "413348ddb68ed2ec22dbc245cf90d11fffe91e23",
+          "runtime": false,
+          "reason": "PWF lane plan/evidence/log or preserved historical W02 seed (non-runtime)"
+        },
+        {
+          "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_implementation_2026-10-10/W02/progress.md",
+          "byte_sha256": "f2125561eca4889b52205066d15eaddf88be22ebae6882b392bf3c1d46ebe0f6",
+          "git_blob_sha": "231993ebba5ca0e5fb9bb486d2818667bea8ceaa",
+          "runtime": false,
+          "reason": "PWF lane plan/evidence/log or preserved historical W02 seed (non-runtime)"
+        },
+        {
+          "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_implementation_2026-10-10/W02/task_plan.md",
+          "byte_sha256": "0103e9a6642dcda3daa4965f50e780ee2ce880911fece578950dc3ae83ef4994",
+          "git_blob_sha": "99c490eca2c063c3b51a31a393a88ae243a5663b",
+          "runtime": false,
+          "reason": "PWF lane plan/evidence/log or preserved historical W02 seed (non-runtime)"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/canonical_writer.py",
+          "byte_sha256": "4fb4f6020a1ed35a513be497053f2aa7b55d7f663b4fed4cb7e76f90ed6b4d02",
+          "git_blob_sha": "aafa693190a9a938e9846d2a4804d4d2c82ee3cd",
+          "runtime": true,
+          "reason": "shared _shared storage intent for owner-less pages; shared destination + provenance without display owner"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/official_json_import.py",
+          "byte_sha256": "d0111ac8e9d947ab9af0de274bde944209092a90d1b430c1b1f4a5556acbaaa0",
+          "git_blob_sha": "051c349bfb8ca92e12fd359b646e915e7a0f4346",
+          "runtime": true,
+          "reason": "official-source-import-request/2 entry: subject validation, shared raw commit, retained-capture failure, recovery"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/official_json_layout.py",
+          "byte_sha256": "e502b35e0ca80d006784fbaedaf7e16d7dd8603c970f91f2320babff041157a6",
+          "git_blob_sha": "ec3df5a8b29ff29fdc9193904f73686b8261d798",
+          "runtime": true,
+          "reason": "declared layout registry official-json-layout/1 (official-paged-qa, official-flat-list), record classification"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/official_json_projection.py",
+          "byte_sha256": "48e039c0faa07cc4eb865925623e3b0e6abca08af04da6904d074ca71c9da65d",
+          "git_blob_sha": "172532b57dbcfd053f30cd5ba96f07f0ebaa61d7",
+          "runtime": true,
+          "reason": "source-projection-ref/1 build/persist/replay/export and evidence spans over exact parent bytes"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/official_json_structure.py",
+          "byte_sha256": "18bdd332318af5424c58002c9fb962de786492ebd19e41cecf83a230789f4b67",
+          "git_blob_sha": "23be5d9b70c769aca63c81da482c2a8ccf080927",
+          "runtime": true,
+          "reason": "bounded RFC6901 structure parser with token/body byte identity (cwp_json_structure_parser/1.0.0)"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/official_json_subject.py",
+          "byte_sha256": "607d8ba15f7b67e9b623eba9cce2abd4d715458f6630476ec986d6860d9a38b8",
+          "git_blob_sha": "5330101d487ce66c771961e3d27aae62ec9c20d3",
+          "runtime": true,
+          "reason": "typed source subjects (single_issuer/multi_issuer_event/unattributed) and import request/2 validation"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/official_source_cli.py",
+          "byte_sha256": "592aaa59debc01024eeee0e5d7e357b7bebee3e3fec5b4661376903efcafbd18",
+          "git_blob_sha": "7124d90d7da6d084b816f8a1cd6b655d5ba1d5bb",
+          "runtime": true,
+          "reason": "public CLI: /2 import dispatch plus project/read/replay/export operations"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/official_source_flow.py",
+          "byte_sha256": "df7b8bc88d59d64763d011f849cf4fba5e0b65f5548ed743250baff8c3be4bd9",
+          "git_blob_sha": "4c5f9792e980da593f9fba84006e64016ec5c9ef",
+          "runtime": true,
+          "reason": "staging/journal/recovery dispatch for /2 requests; journal tolerates subject-only source; completed capture /2 attachments"
+        },
+        {
+          "path": "src/company_wiki/source_contract/source_manifest.py",
+          "byte_sha256": "46efb68e48035cf638b067cbe007f4a336920a847522303d03de386ba4066f62",
+          "git_blob_sha": "b13790f6efd0c3f47bdb8d62c4e5a73958016e25",
+          "runtime": true,
+          "reason": "SourceSubjectManifest 2.0.0 beside strict 1.0.0 (unknown/partial attribution)"
+        },
+        {
+          "path": "tests/contract/test_m3_official_json_contract.py",
+          "byte_sha256": "43eaebc5d3cdead01d7b844f5347877ff5fd2369dd17bcd227a180c0cf4ea5ad",
+          "git_blob_sha": "3b6ca9d6b9e653779b59d35c69b21168e738f06f",
+          "runtime": false,
+          "reason": "responsibility tests: layout/subject/manifest/projection contracts"
+        },
+        {
+          "path": "tests/contract/test_m3_official_json_frozen_pages.py",
+          "byte_sha256": "823817d4561e0e8fc4755997c050a895cee410c98ea67f6ce360f1b9288c9c9f",
+          "git_blob_sha": "a4383d6eebb248b271dd828bf7c2174bf0fb51be",
+          "runtime": false,
+          "reason": "responsibility tests: read-only frozen 86-page verification"
+        },
+        {
+          "path": "tests/integration/test_m3_official_json_projection.py",
+          "byte_sha256": "0b3d79a5975a26837f91c0d4f5e3a7d4589fed79e0e97ff50de32348439250c1",
+          "git_blob_sha": "3d693d49896ed277baf771ba6e23d1de0c55a550",
+          "runtime": false,
+          "reason": "responsibility tests: public import/project/read/replay/export chain + recovery/idempotency"
+        },
+        {
+          "path": "tests/unit/test_m3_official_json_parser.py",
+          "byte_sha256": "7f8d9d4ae2e7d8da4d7711774aa10d4953ccdad7f109befc2a31c480e634d67c",
+          "git_blob_sha": "af83b957ab2c9bf22cbc048f00c09a6c9bccebd2",
+          "runtime": false,
+          "reason": "responsibility tests: structure parser unit matrix + frozen byte anchors"
+        }
+      ],
+      "git_status_explanation": "Commit 8abfad07 contains exactly the lane write set: 9 runtime source files (source_catalog/official_json_* + official_source_flow/official_source_cli/canonical_writer + source_contract/source_manifest.py), 4 dedicated test files, and non-runtime planning artifacts (PWF .planning/m3-official-json-20261010 incl. logs, preserved W02 seed docs, .active_plan pointer). After the commit only the normal-commit.log (empty: pre-commit hooks silent on success; first failed attempt was overwritten by rerun) and normal-push.log remain as uncommitted evidence files. No production config touched (config/source_catalog.yaml SHA unchanged vs baseline_shas.txt).",
+      "push": {
+        "status": "pass",
+        "evidence": [
+          ".planning/m3-official-json-20261010/logs/normal-push.log",
+          "push output: * [new branch] codex/m3-official-json-20261010 -> codex/m3-official-json-20261010",
+          "pre-push gate: 2637 passed in 238.30s - pre-push gate GREEN"
+        ],
+        "note": "git push -u origin codex/m3-official-json-20261010 exit 0; remote branch created at 8abfad074057ff8d5c89e01aea8f87a73be5405f"
+      },
+      "ci": {
+        "status": "not_available",
+        "evidence": [
+          ".github/workflows/ci.yml on.push.branches=[master], on.pull_request.branches=[master]",
+          "GitHub commit status API for 8abfad07: state=pending total_count=0; check-runs: none",
+          "branch push to codex/* does not trigger any workflow by configuration"
+        ],
+        "note": "No workflow runs on non-master branch pushes by design (ci.yml trigger set). Local pre-push gate ran the affected suites (2637 passed). Exact CI for this SHA will exist only via PR to master; MAIN integration node should observe it then."
+      },
+      "remote_head": "8abfad074057ff8d5c89e01aea8f87a73be5405f",
+      "ci_head": null
+    }
+  ],
+  "interfaces": [
+    "official-source-import-request/2 + official-source-import-result/2 (typed source_subject, shared _shared raw storage)",
+    "official-json-layout/1 registry: official-paged-qa/1.0.0 + official-flat-list/1.0.0 (declared, not hardcoded per company/ticker/page)",
+    "source-projection-ref/1 (projection identity = parent refs + adapter + issuer + as-of + records + coverage; never the parent content_sha256)",
+    "official-json-projection-request/1, official-source-read-request/1 (stdout = exact raw bytes), official-json-replay-request/1, source-projection-export-request/1",
+    "source-projection-export/1 bundle with EvidenceSpan v1 (cwp-json-pointer/1 locators in structured_value.source_locator)",
+    "source-manifest 2.0.0 (SourceSubjectManifest: unknown/partial attribution) alongside strict unchanged 1.0.0",
+    "cwp_json_structure_parser/1.0.0 + cwp_official_json/1.0.0 (structure + layout composition identity)",
+    "MAIN integration contract: see INTERFACE_CHANGE.md (official_json AUTO source class, source+projection dedup key, generation binding)"
+  ],
+  "tests": [
+    {
+      "name": "parser unit RED (module absent)",
+      "phase": "RED",
+      "argv": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_m3_official_json_parser.py"
+      ],
+      "cwd": "C:/Users/郑曾波/.codex/worktrees/m3-official-json-20261010/company-wiki",
+      "exit_code": 2,
+      "log": ".planning/m3-official-json-20261010/logs/red_unit_parser.log",
+      "log_sha256": "83691c537dca153a9687535dabebb851e098f0e84e9a87dac0e94cd0df4498cf",
+      "scope": "unit",
+      "result": "ModuleNotFoundError official_json_structure: honest product RED before implementation"
+    },
+    {
+      "name": "public CLI RED on sealed latest-01 (import/1)",
+      "phase": "RED",
+      "argv": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.official_source_cli",
+        "--operation",
+        "import",
+        "--config",
+        "<TEMP>/config/catalog.json",
+        "--project-root",
+        "<TEMP>",
+        "--request",
+        "<TEMP>/import.json",
+        "--input-file",
+        "<ABSOLUTE_SEALED_RAW>/qa-latest-form-01.raw"
+      ],
+      "cwd": "<TEMP>",
+      "exit_code": 2,
+      "log": ".planning/m3-official-json-20261010/logs/red_public_cli_import.log",
+      "log_sha256": "2697dacaa5e6d275bcc11b62f6710266193e30a12f40af69d960b0cd26e2c333",
+      "scope": "public_cli",
+      "result": "exit 2 official-source-failure/1 invalid_text_original: paged multi-record JSON refused by single-content transcript path"
+    },
+    {
+      "name": "parser unit GREEN",
+      "phase": "GREEN",
+      "argv": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_m3_official_json_parser.py"
+      ],
+      "cwd": "C:/Users/郑曾波/.codex/worktrees/m3-official-json-20261010/company-wiki",
+      "exit_code": 0,
+      "log": ".planning/m3-official-json-20261010/logs/green_unit_parser.log",
+      "log_sha256": "d7657fb71989e1d3b5fb6fdf5f0c0dad6161247c460a19e1182d8910734da54b",
+      "scope": "unit",
+      "result": "57 passed"
+    },
+    {
+      "name": "contract RED (modules absent)",
+      "phase": "RED",
+      "argv": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/contract/test_m3_official_json_contract.py"
+      ],
+      "cwd": "C:/Users/郑曾波/.codex/worktrees/m3-official-json-20261010/company-wiki",
+      "exit_code": 2,
+      "log": ".planning/m3-official-json-20261010/logs/red_contract_layout.log",
+      "log_sha256": "e120f6372089c6794f9c81c611ef8102d3ec76ab1cd1b16b34b42457bf932140",
+      "scope": "contract",
+      "result": "ModuleNotFoundError official_json_layout: honest product RED"
+    },
+    {
+      "name": "contract GREEN",
+      "phase": "GREEN",
+      "argv": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/contract/test_m3_official_json_contract.py"
+      ],
+      "cwd": "C:/Users/郑曾波/.codex/worktrees/m3-official-json-20261010/company-wiki",
+      "exit_code": 0,
+      "log": ".planning/m3-official-json-20261010/logs/green_contract_layout.log",
+      "log_sha256": "c8f699b5ed77ebdd73aa5502ec91cb193679a132955263d7cbe98d1730d124d4",
+      "scope": "contract",
+      "result": "26 passed: layouts, subjects, manifest 2.0.0, projection DTO, roles/times, second unseen layout"
+    },
+    {
+      "name": "integration RED (chain incomplete)",
+      "phase": "RED",
+      "argv": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/integration/test_m3_official_json_projection.py"
+      ],
+      "cwd": "C:/Users/郑曾波/.codex/worktrees/m3-official-json-20261010/company-wiki",
+      "exit_code": 1,
+      "log": ".planning/m3-official-json-20261010/logs/red_integration_chain.log",
+      "log_sha256": "da15eac04d62e6d6238289f3b717f3128c989826a3d17dd3fa1cc23d0b2c55bf",
+      "scope": "integration",
+      "result": "9 failed 1 passed: public chain not implemented yet; v1 compat baseline already green"
+    },
+    {
+      "name": "integration GREEN",
+      "phase": "GREEN",
+      "argv": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/integration/test_m3_official_json_projection.py"
+      ],
+      "cwd": "C:/Users/郑曾波/.codex/worktrees/m3-official-json-20261010/company-wiki",
+      "exit_code": 0,
+      "log": ".planning/m3-official-json-20261010/logs/green_integration_chain.log",
+      "log_sha256": "37cbd23bc6e495b1a7bb540c359d621e090e06bb1c51cf398cc7ba5ee7ff3fed",
+      "scope": "integration",
+      "result": "11 passed incl. multi-page partial pagination honesty and retained-capture recovery"
+    },
+    {
+      "name": "related regression (compatibility of modified entry paths)",
+      "phase": "COMPATIBILITY",
+      "argv": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/contract/test_official_capture_recovery.py",
+        "tests/integration/test_official_source_flow.py",
+        "tests/contract/test_source_manifest_contract.py",
+        "tests/contract/test_official_transcript_layouts.py",
+        "tests/contract/test_source_version_reader.py",
+        "tests/contract/test_source_export_v2.py"
+      ],
+      "cwd": "C:/Users/郑曾波/.codex/worktrees/m3-official-json-20261010/company-wiki",
+      "exit_code": 0,
+      "log": ".planning/m3-official-json-20261010/logs/green_regression_related.log",
+      "log_sha256": "30bfe7737cdde2dc59206d5d4b36d6beff7dede96d80f9aea4cba7f1b0c87f7d",
+      "scope": "integration",
+      "result": "173 passed: old TXT/FMP transcript content contract, manifest 1.0.0, export v2.0.0 unchanged"
+    },
+    {
+      "name": "final responsibility suite (parser+contract+frozen+integration)",
+      "phase": "GREEN",
+      "argv": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_m3_official_json_parser.py",
+        "tests/contract/test_m3_official_json_contract.py",
+        "tests/contract/test_m3_official_json_frozen_pages.py",
+        "tests/integration/test_m3_official_json_projection.py"
+      ],
+      "cwd": "C:/Users/郑曾波/.codex/worktrees/m3-official-json-20261010/company-wiki",
+      "exit_code": 0,
+      "log": ".planning/m3-official-json-20261010/logs/green_final_all.log",
+      "log_sha256": "a469f00284d9eba5cf82bd23040be8899eaadc6325a5053b99be1f83c1b85e39",
+      "scope": "integration",
+      "result": "107 passed"
+    },
+    {
+      "name": "ruff changed scope",
+      "phase": "STATIC",
+      "argv": [
+        "ruff",
+        "check",
+        "src/company_wiki",
+        "tests/unit/test_m3_official_json_parser.py",
+        "tests/contract/test_m3_official_json_contract.py",
+        "tests/contract/test_m3_official_json_frozen_pages.py",
+        "tests/integration/test_m3_official_json_projection.py"
+      ],
+      "cwd": "C:/Users/郑曾波/.codex/worktrees/m3-official-json-20261010/company-wiki",
+      "exit_code": 0,
+      "log": ".planning/m3-official-json-20261010/logs/static_ruff_changed.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "scope": "static",
+      "result": "All checks passed"
+    },
+    {
+      "name": "mypy changed scope",
+      "phase": "STATIC",
+      "argv": [
+        "mypy",
+        "src/company_wiki/source_catalog/official_json_structure.py",
+        "src/company_wiki/source_catalog/official_json_layout.py",
+        "src/company_wiki/source_catalog/official_json_subject.py",
+        "src/company_wiki/source_catalog/official_json_import.py",
+        "src/company_wiki/source_catalog/official_json_projection.py",
+        "src/company_wiki/source_catalog/official_source_cli.py",
+        "src/company_wiki/source_contract/source_manifest.py"
+      ],
+      "cwd": "C:/Users/郑曾波/.codex/worktrees/m3-official-json-20261010/company-wiki",
+      "exit_code": 0,
+      "log": ".planning/m3-official-json-20261010/logs/static_mypy_changed.log",
+      "log_sha256": "e2702f9afc4c0f80ff1e8624f77af7a7d2689ca184512114aae5967a76229ba8",
+      "scope": "static",
+      "result": "Success: no issues found in 7 source files"
+    }
+  ],
+  "restore": {
+    "status": "pass",
+    "evidence": [
+      "all fixtures use pytest tmp_path/tempfile.TemporaryDirectory auto-cleanup (owned TEMP roots only)",
+      "sealed run C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/m3-20261009T184946-cn-688012 opened read-only; 86 pages byte-identical in frozen-page tests at end of run",
+      "config/source_catalog.yaml and config.yaml unchanged (git status clean for config; baseline_shas.txt recorded at start)",
+      "no provider/model/token/cost; no external network calls (tests assert against fixed fixtures)"
+    ],
+    "note": "TEMP-only derived/imported files created inside test-owned roots and deleted with their roots; no initial files outside the owned TEMP were modified or deleted. Retained-capture recovery test proves the /2 failure path leaves its staging bytes recoverable."
+  },
+  "usage": {
+    "external_provider_calls": 0,
+    "external_model_calls": 0,
+    "paid_tokens": 0,
+    "paid_micro_usd": 0,
+    "unknown_preserved": true
+  },
+  "main_integration": {
+    "status": "pending",
+    "evidence": [
+      ".planning/m3-official-json-20261010/INTERFACE_CHANGE.md",
+      "main_auto_integration deliberately pending: automation/* is MAIN-owned and untouched"
+    ],
+    "note": "source_public_api complete; main_auto_integration (AUTO official_json class, select/replay route, batch dedup by source+projection, generation binding) awaits MAIN wiring per INTERFACE_CHANGE.md section 2 and its rerun commands."
+  },
+  "remaining": [
+    "MAIN: wire automation/narrative_formats source_class official_json, narrative_select/replay JSON route, NarrativeBatchRequest dedup by source+projection identity, generation binding to parser/adapter/projection/as-of (INTERFACE_CHANGE.md section 2; rerun the two listed test commands plus AUTO suites).",
+    "MAIN: decide packaged compatibility policy registration for new contracts (manifest 2.0.0 / projection / projection-export) in schemas/source_contract_compatibility.v1.json + SOURCE_CONTRACT_NAMES.",
+    "External unknowns (single-listed, not guessed): server-side companyfilter existence and real request fields (no public probing), provider timezone semantics for crtTime/updTime/auditTime, answer first-publication time and historical revision interface, cross-issuer Q/A real cases, second official real-world layout fixture.",
+    "Real company/research validation and the three-repo real big node run under MAIN (this lane ran zero model calls and no revenue work).",
+    "Exact CI observation: pending PR to master; ci.yml does not run on codex/* pushes (evidence in repos[0].ci)."
+  ]
+}

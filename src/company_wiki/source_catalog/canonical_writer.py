@@ -163,6 +163,47 @@ class _OriginalStorageReceipt:
         return asdict(self)
 
 
+@dataclass(frozen=True)
+class _SharedOriginal:
+    """A source-oriented page with no single company owner.
+
+    The storage layer places shared pages in one shared location inside the
+    configured company root; consumers reach them through SourceRef 2.0 and
+    issuer projections, never through a fabricated company directory.
+    """
+
+    title: str
+    source_url: str
+    document_kind: str
+    publisher: str
+    provider: str
+    provider_document_id: str
+    market: str | None = None
+    language: str | None = None
+    storage_group: str = "_shared"
+    metadata: Mapping[str, Any] = field(default_factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        return {key: value for key, value in asdict(self).items() if key != "metadata"}
+
+
+@dataclass(frozen=True)
+class _SharedImportIntent:
+    """Minimal commit intent for shared pages: an id, no company."""
+
+    request_id: str
+    document_kind: str
+    storage_group: str = "_shared"
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "request_id": self.request_id,
+            "storage_intent": "shared_source",
+            "document_kind": self.document_kind,
+            "storage_group": self.storage_group,
+        }
+
+
 class CanonicalSourceWriter:
     """Own canonical paths, immutable provenance, hash reuse, and catalog registration."""
 
@@ -344,6 +385,41 @@ class CanonicalSourceWriter:
                                   provenance_extensions={"official_capture": dict(capture_receipt)},
                                   reactivate_retired=False, cleanup_staged=cleanup_staged)
 
+    def import_shared_original_staged(
+        self, *, request_id: str, document_kind: str, title: str,
+        source_url: str, publisher: str, staged_path: Path, content_sha256: str,
+        byte_size: int, mime_type: str, retrieved_at: str,
+        capture_receipt: Mapping[str, Any], provenance_extensions: Mapping[str, Any],
+        cleanup_staged: bool = True, market: str | None = None,
+        language: str | None = None, storage_group: str = "_shared",
+    ) -> CanonicalImportResult:
+        """Commit a shared, source-oriented page without a company owner.
+
+        The same immutable commit algorithm as company originals, but the
+        storage intent carries no entity: the destination is one shared group
+        inside the configured company root, chosen here by the storage layer.
+        """
+        staged = staged_path.resolve(strict=True)
+        staged.relative_to(self.staging_root.resolve(strict=True))
+        if (not staged.is_file() or staged.is_symlink() or staged.stat().st_size != byte_size
+                or _hash_file(staged) != content_sha256):
+            raise CanonicalImportError("staged original byte identity mismatch")
+        candidate = _SharedOriginal(
+            title=title, source_url=source_url, document_kind=document_kind,
+            publisher=publisher, provider="official",
+            provider_document_id=content_sha256, market=market,
+            language=language, storage_group=storage_group,
+        )
+        receipt = _OriginalStorageReceipt(str(staged), content_sha256, byte_size,
+                                          mime_type, retrieved_at,
+                                          adapter_name="official-json-import")
+        intent = _SharedImportIntent(request_id=request_id,
+                                     document_kind=document_kind,
+                                     storage_group=storage_group)
+        return self._commit_staged(intent, candidate, receipt, staged,
+                                  provenance_extensions=dict(provenance_extensions),
+                                  reactivate_retired=False, cleanup_staged=cleanup_staged)
+
     def source_ref_for_import(
         self,
         request: SourceRequest,
@@ -443,8 +519,16 @@ class CanonicalSourceWriter:
         # Human title/provider IDs are immutable metadata, never physical names.
         # Count UTF-16 units for the portable Win32 limit and reserve the longest
         # provenance atomic suffix (including a ten-digit PID) before any write.
-        directory = (self.company_root.path / _safe_component(request.entity, limit=80)
-                     / "raw" / _destination_subdirectory(candidate.document_kind)).resolve(strict=False)
+        if isinstance(candidate, _SharedOriginal):
+            directory = (
+                self.company_root.path
+                / _safe_component(candidate.storage_group, limit=80)
+                / "raw"
+                / _destination_subdirectory(candidate.document_kind)
+            ).resolve(strict=False)
+        else:
+            directory = (self.company_root.path / _safe_component(request.entity, limit=80)
+                         / "raw" / _destination_subdirectory(candidate.document_kind)).resolve(strict=False)
         extension = _extension(receipt)
         suffix_reserve = len(".source.json.9999999999.tmp")
         units = len(str(directory).encode("utf-16-le")) // 2
@@ -488,23 +572,23 @@ class CanonicalSourceWriter:
         payload = {
             "schema_version": CANONICAL_IMPORT_SCHEMA_VERSION,
             "request_id": request.request_id,
-            "company_name": request.entity,
+            "company_name": getattr(request, "entity", None),
             # Top-level identity field: the resolver and the scanner's
             # prefer-new metadata merge both read market at top level, while
             # security_id already sits here (portfolio-promotion spike).
             "market": candidate.market,
-            "security_id": request.security_id,
+            "security_id": getattr(request, "security_id", None),
             "source_title": candidate.title,
             "provider": candidate.provider,
             "provider_document_id": candidate.provider_document_id,
             "source_url": candidate.source_url,
             "document_kind": candidate.document_kind,
-            "form_type": candidate.form_type,
-            "filing_date": candidate.filing_date,
-            "fiscal_year": candidate.fiscal_year,
-            "fiscal_period": candidate.fiscal_period,
+            "form_type": getattr(candidate, "form_type", None),
+            "filing_date": getattr(candidate, "filing_date", None),
+            "fiscal_year": getattr(candidate, "fiscal_year", None),
+            "fiscal_period": getattr(candidate, "fiscal_period", None),
             "language": candidate.language,
-            "amended": candidate.amended,
+            "amended": getattr(candidate, "amended", False),
             "content_sha256": receipt.content_sha256,
             "byte_size": receipt.byte_size,
             "mime_type": receipt.mime_type,
@@ -526,6 +610,13 @@ class CanonicalSourceWriter:
                             "collector_version": "1.0.0"})
             if candidate.metadata.get("canonical_entity_id") is not None:
                 payload["canonical_entity_id"] = candidate.metadata["canonical_entity_id"]
+        if isinstance(candidate, _SharedOriginal):
+            # No display owner and no publication guess: shared pages carry
+            # their subject identity in provenance extensions instead.
+            payload.update({"company_name": None,
+                            "publisher": candidate.publisher,
+                            "collector_name": "official-json-import",
+                            "collector_version": "2.0.0"})
         if provenance_extensions is not None:
             payload["provenance_extensions"] = dict(provenance_extensions)
         encoded = (canonical_json(payload) + "\n").encode("utf-8")
