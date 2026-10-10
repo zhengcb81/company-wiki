@@ -1,0 +1,39 @@
+{
+  "observed_at_utc": "2026-10-10T20:27:41.974764+00:00",
+  "status": "accepted_engineering_published",
+  "scope": "M3-JSON / M3-USAGE CWP→FF→RF / M3-FLOW delivered source engineering plus MAIN shared boundary wiring",
+  "root_issue_classes_fixed": 10,
+  "main_source_heads": {
+    "company-wiki": "f94b9ef001f9de5a1f6954c4342709c170deee7f",
+    "filing-fetch": "e1e3ad8679e21264258e48006786fbf01a6991bd",
+    "revenue-forecast": "6883bf00548abb9891eab6762aeaa89e3898b202"
+  },
+  "exact_main_ci_success": {
+    "company-wiki": 38083232923,
+    "filing-fetch": 38083419792,
+    "revenue-forecast": 38083371392
+  },
+  "protected_sha_count": 155,
+  "protected_mutations": 0,
+  "targeted_runtime_files_written": 36,
+  "other_installed_files_unchanged": 554,
+  "installed_independent_fresh_subprocesses": 18,
+  "installed_test_temp_restored": true,
+  "new_model_provider_calls": 0,
+  "new_fees": 0,
+  "goal_complete": false,
+  "pending_MAIN": [
+    "AUTO official JSON source class/projection route/generation binding and public CLI",
+    "W04 bounded final-answer failure diagnostics",
+    "W03 business-focused extraction and W05 execution scope",
+    "W08/W09 model calibration/timing/stress and original three-company real rerun/four reviews each",
+    "unseen A/H/US trio then NVDA/pool loop; conditional eight companies only after current goal truly complete"
+  ],
+  "evidence": {
+    "issues": "root_fix_register.json",
+    "independent_joint": "independent_joint_acceptance.md",
+    "actual_main_remote_ci": "main_remote_protected_check.json",
+    "targeted_install": "targeted_install_receipt.json",
+    "installed_probe": "installed_probe/verification.json"
+  }
+}

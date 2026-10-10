@@ -1,0 +1,20 @@
+Merge made by the 'ort' strategy.
+ .planning/m3-acceptance-main/ACCEPTANCE.md         |   7 +
+ .../m3-acquisition-usage-20261010/findings.md      |   6 +
+ .../m3-acquisition-usage-20261010/progress.md      |   4 +
+ .../m3-acquisition-usage-20261010/task_plan.md     |  16 ++
+ scripts/fetch_filing.py                            |  25 ++-
+ scripts/ff_provider_cause.py                       | 105 +++++++++-
+ scripts/ff_v2_envelope.py                          |  31 ++-
+ scripts/filing_contracts.py                        |  11 +-
+ tests/test_m3_acquisition_usage_acceptance.py      |  47 +++++
+ tests/test_m3_acquisition_usage_ff.py              | 211 +++++++++++++++++++++
+ tools/ci_tests.py                                  |   3 +
+ 11 files changed, 454 insertions(+), 12 deletions(-)
+ create mode 100644 .planning/m3-acceptance-main/ACCEPTANCE.md
+ create mode 100644 .planning/m3-acquisition-usage-20261010/findings.md
+ create mode 100644 .planning/m3-acquisition-usage-20261010/progress.md
+ create mode 100644 .planning/m3-acquisition-usage-20261010/task_plan.md
+ create mode 100644 tests/test_m3_acquisition_usage_acceptance.py
+ create mode 100644 tests/test_m3_acquisition_usage_ff.py
+

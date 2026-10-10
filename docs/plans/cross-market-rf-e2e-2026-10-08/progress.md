@@ -1,5 +1,14 @@
 # Progress
 
+## 三卡正式收尾（2026-10-10T20:30:09.491011+00:00）
+
+M3-JSON/W02、M3-USAGE/W06、M3-FLOW/W07源工程及MAIN共同接线已验收：10类共因TDD修复、独立负/正控重放通过，正常合/推CWP f94b9ef0、FFe1e3ad86、RF6883bf00；精确CI38083232923/38083419792/38083371392全部success，本地与远端SHA一致。原FLOW红CI/no-verify报告保留且未复用为发布依据。
+
+FF4+RF14工程文件定点同步.agents/.codex两个物理根36文件，554其他安装文件未变，.claude junction一致。独立18次fresh -I -B installed子进程真实RF CLI→compute→strong→render/期间正负控及FF成功失败观测通过，590安装文件无测试变更，ownTEMP恢复；MAIN实核全部日志SHA。155保护SHA不变，原件、production config、FF密钥、Dayu和RF assurance/output ownerWIP保留。新增provider/model/费用0，累计USD20/2M及旧unknown不重置。
+
+**Next Step：** 完成本节点PWF正常归档推送，然后继续MAIN AUTO official JSON source class/投影复用/adapter-parser-projection-as-of-profile generation绑定及public CLI；再按原九卡推进W04/W03/W05/W08/W09和真实复验。源工程绿不核销真实三家研究/原157问题全部；当前goal active，原三家四审、新三家泛化、池loop和条件八家公司未完成。[正式验收](phase6/m3_acceptance_2026-10-10/ACCEPTANCE.md)。
+
+
 ## 三卡接收收尾（2026-10-10T20:14:38.894433+00:00）
 
 JSON/USAGE/FLOW三交付已在隔离集成树实质验收并修10类共因；独立重放通过。CWP137快速合同+5模块types，FF646PASS/78subtests/6明确skip，RF260PASS/2subtests+10模块types及Ruff；FLOW年度责任109PASS/46subtests；公共跨进程101PASS包含复用与硬失败。计数有交集不相加。早前失败、FLOW原红CI/no-verify均保留，不作为本次发布依据。

@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "git",
+    "merge",
+    "--no-ff",
+    "codex/m3-acceptance-20261010",
+    "-m",
+    "merge: accept M3 source contracts and independent root regressions"
+  ],
+  "exit_code": 0,
+  "seconds": 0.236,
+  "main_head": "e1e3ad8679e21264258e48006786fbf01a6991bd",
+  "before_status": "?? config/FMP_API_KEY.txt\n"
+}

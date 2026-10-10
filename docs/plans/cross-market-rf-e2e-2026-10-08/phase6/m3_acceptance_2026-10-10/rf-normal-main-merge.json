@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "git",
+    "merge",
+    "--no-ff",
+    "codex/m3-acceptance-20261010",
+    "-m",
+    "merge: accept M3 source contracts and independent root regressions"
+  ],
+  "exit_code": 0,
+  "seconds": 8.592,
+  "main_head": "6883bf00548abb9891eab6762aeaa89e3898b202",
+  "before_status": " M assurance/runs/daily_alert.jsonl\n M assurance/runs/weekly_alert.jsonl\n M assurance/runs/weekly_manifest.json\n?? output/\n"
+}

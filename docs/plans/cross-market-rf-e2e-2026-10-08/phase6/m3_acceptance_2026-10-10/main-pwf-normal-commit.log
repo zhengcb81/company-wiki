@@ -1,0 +1,77 @@
+[master e5d30915] docs(pwf): accept three M3 lanes and record root regression fixes
+ 73 files changed, 18883 insertions(+), 5 deletions(-)
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/cwp-fast-contracts-plugin-fixed.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/cwp-fast-contracts-plugin-fixed.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/cwp-fast-contracts.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/cwp-fast-contracts.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/cwp-final-fast.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/cwp-final-fast.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/cwp-final-types.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/cwp-final-types.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/cwp-integration-normal-commit.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/cwp-integration-normal-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/cwp-types-final.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/cwp-types-final.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/cwp-types.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/cwp-types.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/ff-ci-tests.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/ff-ci-tests.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/ff-final-daily-gate.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/ff-final-daily-gate.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/ff-integration-normal-commit.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/ff-integration-normal-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/findings.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/flow-fact-window-green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/flow-fact-window-green2.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/flow-fact-window-red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/independent_joint_acceptance.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/initial_observation.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/integration_worktrees.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/joint-public-chain.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/joint-public-chain.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/progress.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/protected_before_publish_install.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/public_chain_logs/cn_download.argv.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/public_chain_logs/cn_download.stderr.txt
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/public_chain_logs/cn_download.stdout.txt
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/public_chain_logs/us_download.argv.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/public_chain_logs/us_download.stderr.txt
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/public_chain_logs/us_download.stdout.txt
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/public_chain_logs/us_hard_failure.argv.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/public_chain_logs/us_hard_failure.stderr.txt
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/public_chain_logs/us_hard_failure.stdout.txt
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/public_chain_logs/us_missing.argv.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/public_chain_logs/us_missing.stderr.txt
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/public_chain_logs/us_missing.stdout.txt
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/public_chain_logs/us_reuse.argv.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/public_chain_logs/us_reuse.stderr.txt
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/public_chain_logs/us_reuse.stdout.txt
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/rf-consumers-green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/rf-consumers-red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/rf-daily-gate.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/rf-daily-gate.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/rf-final-daily-gate-green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/rf-final-daily-gate-green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/rf-final-daily-gate.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/rf-final-daily-gate.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/rf-final-stable-daily-gate.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/rf-final-stable-daily-gate.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/rf-integration-normal-commit.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/rf-integration-normal-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/rf-main-wiring-green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/rf-main-wiring-green2.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/root_fix_register.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/task_plan.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_parallel_handoff_2026-10-10/exact-ci-observation.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_parallel_handoff_2026-10-10/normal-commit.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_parallel_handoff_2026-10-10/normal-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_parallel_handoff_2026-10-10/normal-commit.raw
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_parallel_handoff_2026-10-10/normal-push.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_parallel_handoff_2026-10-10/normal-push.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_parallel_handoff_2026-10-10/normal-push.raw
+
+runtime dependency declaration parity.............................(no files to check)Skipped
+ruff check (WU-1.2, mirrors CI)...................................(no files to check)Skipped
+mypy contract modules (FC-1204-c, mirrors CI).....................(no files to check)Skipped
+config doctor (WU-7.1, mirrors CI)................................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test)...(no files to check)Skipped

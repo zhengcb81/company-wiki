@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "git",
+    "merge",
+    "--no-ff",
+    "codex/m3-acceptance-20261010",
+    "-m",
+    "merge: accept M3 source contracts and independent root regressions"
+  ],
+  "exit_code": 0,
+  "seconds": 1.382,
+  "main_head": "f94b9ef001f9de5a1f6954c4342709c170deee7f",
+  "before_status": "?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/ff-normal-main-merge.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/ff-normal-main-merge.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/main-pwf-normal-commit.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/main-pwf-normal-commit.log\n"
+}

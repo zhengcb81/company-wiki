@@ -1,0 +1,68 @@
+{
+  "observed_at_utc": "2026-10-10T20:22:27.402851+00:00",
+  "files_written": 36,
+  "new_provider_model_calls": 0,
+  "fees": 0,
+  "checks": {
+    "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch": {
+      "selected_paths": [
+        "scripts/fetch_filing.py",
+        "scripts/ff_provider_cause.py",
+        "scripts/ff_v2_envelope.py",
+        "scripts/filing_contracts.py"
+      ],
+      "other_files_unchanged": 24,
+      "runtime_sha_match": true
+    },
+    "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch": {
+      "selected_paths": [
+        "scripts/fetch_filing.py",
+        "scripts/ff_provider_cause.py",
+        "scripts/ff_v2_envelope.py",
+        "scripts/filing_contracts.py"
+      ],
+      "other_files_unchanged": 11,
+      "runtime_sha_match": true
+    },
+    "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast": {
+      "selected_paths": [
+        "CHANGELOG.md",
+        "SKILL.md",
+        "references/m3-period-evidence.md",
+        "scripts/contracts/annual_consumption.py",
+        "scripts/contracts/constants.py",
+        "scripts/contracts/document.py",
+        "scripts/contracts/period_flow.py",
+        "scripts/filing_fetch_client.py",
+        "scripts/filing_upstream_cause.py",
+        "scripts/generate_input_template.py",
+        "scripts/research/drivers.py",
+        "scripts/revenue_report.py",
+        "scripts/schema_compatibility.py",
+        "scripts/source_preparation.py"
+      ],
+      "other_files_unchanged": 287,
+      "runtime_sha_match": true
+    },
+    "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast": {
+      "selected_paths": [
+        "CHANGELOG.md",
+        "SKILL.md",
+        "references/m3-period-evidence.md",
+        "scripts/contracts/annual_consumption.py",
+        "scripts/contracts/constants.py",
+        "scripts/contracts/document.py",
+        "scripts/contracts/period_flow.py",
+        "scripts/filing_fetch_client.py",
+        "scripts/filing_upstream_cause.py",
+        "scripts/generate_input_template.py",
+        "scripts/research/drivers.py",
+        "scripts/revenue_report.py",
+        "scripts/schema_compatibility.py",
+        "scripts/source_preparation.py"
+      ],
+      "other_files_unchanged": 232,
+      "runtime_sha_match": true
+    }
+  }
+}

@@ -1,0 +1,638 @@
+{
+  "schema_version": "m3-installed-independent-probe/1",
+  "started_at_utc": "2026-10-10T20:25:09.768869+00:00",
+  "tests": [
+    {
+      "name": "agents-ff-siblings",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "-c",
+        "\nimport copy, json, pathlib, sys\nscripts = pathlib.Path(sys.argv[1]).resolve()\nsys.path.insert(0, str(scripts))\nimport fetch_filing\nfrom ff_provider_cause import build_cause, validated_acquisition_observation\nfrom ff_v2_envelope import success_envelope, error_envelope\nobs = {\"schema_version\":\"acquisition-observation/1\", \"usage_scope\":\"operation\", \"outcome\":\"failed\",\n       \"provider_started\":True, \"usage_complete\":False, \"wire_body_bytes\":101,\n       \"wire_usage_complete\":False, \"entity_body_bytes\":202, \"http_exchanges\":2,\n       \"http_exchanges_complete\":False, \"cost_usd\":None, \"http_observation\":None}\nfailure = {\"schema_version\":\"acquisition-failure/1\", \"code\":\"network_failed\", \"retryable\":False,\n           \"provider_started\":True, \"usage_complete\":False, \"usage_scope\":\"operation\",\n           \"acquisition_usage\":{\"schema_version\":\"1.0\", \"response_bytes\":202, \"cost_usd\":\"0\"}}\ncause = build_cause(\"ensure\", \"network_failed\", provider_started=True, usage_complete=False)\nerrors=[]\nfor cost in (None, \"0.01\"):\n    observation=copy.deepcopy(obs); observation[\"cost_usd\"]=cost\n    error=error_envelope(\"upstream_error\", \"network_failed\", retryable=False,\n        stats={\"calls\":2,\"downloads\":0}, upstream_cause=cause,\n        acquisition_failure=failure, acquisition_observation=observation, stage=\"ensure\", attempts=1)\n    assert error[\"schema_version\"] == \"2.0\"\n    assert error[\"status\"] == error[\"filing\"][\"status\"] == \"upstream_error\"\n    assert error[\"acquisition_observation\"] == observation\n    assert \"acquisition_observation\" not in error[\"filing\"]\n    assert error[\"filing\"][\"acquisition_failure\"] == failure\n    assert error[\"filing\"][\"upstream_cause\"] == cause\n    errors.append(error)\nfor key, value in ((\"outcome\", []), (\"http_exchanges\", None), (\"cost_usd\", \"NaN\")):\n    malformed=copy.deepcopy(obs); malformed[key]=value\n    assert validated_acquisition_observation(malformed) is None\n    error=error_envelope(\"upstream_error\", \"network_failed\", retryable=False,\n        upstream_cause=cause, acquisition_failure=failure, acquisition_observation=malformed)\n    assert error[\"status\"] == \"upstream_error\" and \"acquisition_observation\" not in error\n    assert error[\"filing\"][\"upstream_cause\"] == cause\n    assert error[\"filing\"][\"acquisition_failure\"] == failure\nsha=\"a\"*64\nref={\"schema_version\":\"2.0\", \"document_id\":\"urn:company-wiki:document:sha256:\"+sha,\n     \"source_id\":\"urn:company-wiki:source:sha256:\"+sha, \"content_sha256\":sha,\n     \"byte_size\":3,\"mime_type\":\"application/pdf\"}\nsuccess_obs=copy.deepcopy(obs);success_obs.update(outcome=\"reused_before_download\",provider_started=False,\n    usage_complete=True,wire_body_bytes=0,entity_body_bytes=0,http_exchanges=0,\n    wire_usage_complete=True,http_exchanges_complete=True,cost_usd=None)\nsuccess=success_envelope({}, {\"source_ref\":ref,\"document_kind\":\"annual_report\",\"fiscal_year\":2025,\n    \"fiscal_period\":\"FY\",\"resolution_outcome\":\"reused_before_download\",\"download_events\":0,\n    \"acquisition_observation\":success_obs}, {\"status\":\"not_applicable\"}, {\"calls\":1,\"downloads\":0})\nassert success[\"schema_version\"] == \"2.0\"\nassert success[\"acquisition_observation\"] == success_obs\nassert \"acquisition_observation\" not in success[\"filing\"]\norigins={name:str(pathlib.Path(sys.modules[name].__file__).resolve())\n         for name in (\"fetch_filing\",\"ff_provider_cause\",\"ff_v2_envelope\",\"filing_contracts\")}\nassert all(pathlib.Path(p).is_relative_to(scripts) for p in origins.values()), origins\nprint(json.dumps({\"errors\":errors, \"success\":success,\n                  \"malformed_diagnostic_does_not_mask_error\":True,\"module_origins\":origins},ensure_ascii=False))\n",
+        "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\agents",
+      "started_at_utc": "2026-10-10T20:25:09.770913+00:00",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_log": "agents-ff-siblings.stdout.log",
+      "stdout_sha256": "ac01936af06c2f1c286f114a23f133a9b798050b57dcc655839846a8a6c7e11d",
+      "stderr_log": "agents-ff-siblings.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "agents-rf-version",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "-c",
+        "\nimport json, pathlib, runpy, sys\nscripts = pathlib.Path(sys.argv[1]).resolve()\nsys.path.insert(0, str(scripts))\nsys.argv = sys.argv[2:]\ntry:\n    runpy.run_path(sys.argv[0], run_name=\"__main__\")\nfinally:\n    origins = {name: str(pathlib.Path(sys.modules[name].__file__).resolve())\n               for name in (\"revenue_core\", \"revenue_report\", \"contracts.annual_consumption\",\n                            \"contracts.period_flow\", \"contracts.document\", \"contracts.constants\",\n                            \"schema_compatibility\", \"research.drivers\") if name in sys.modules}\n    assert len(origins) == 8, origins\n    assert all(pathlib.Path(p).is_relative_to(scripts) for p in origins.values()), origins\n    print(\"INSTALL_ORIGINS=\" + json.dumps(origins, ensure_ascii=False), file=sys.stderr)\n",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+        "--version"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\agents",
+      "started_at_utc": "2026-10-10T20:25:09.950619+00:00",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_log": "agents-rf-version.stdout.log",
+      "stdout_sha256": "d8cd6cdcade987bd2740c53494bc0bf2512f7e00d255d9e4243d207204024ef2",
+      "stderr_log": "agents-rf-version.stderr.log",
+      "stderr_sha256": "c7d5c661778bb21e0876013c4ef8167fcc0ee16f8abbe40b7aed0e1ba2838d92"
+    },
+    {
+      "name": "agents-half_0_base_2026",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "-c",
+        "\nimport json, pathlib, runpy, sys\nscripts = pathlib.Path(sys.argv[1]).resolve()\nsys.path.insert(0, str(scripts))\nsys.argv = sys.argv[2:]\ntry:\n    runpy.run_path(sys.argv[0], run_name=\"__main__\")\nfinally:\n    origins = {name: str(pathlib.Path(sys.modules[name].__file__).resolve())\n               for name in (\"revenue_core\", \"revenue_report\", \"contracts.annual_consumption\",\n                            \"contracts.period_flow\", \"contracts.document\", \"contracts.constants\",\n                            \"schema_compatibility\", \"research.drivers\") if name in sys.modules}\n    assert len(origins) == 8, origins\n    assert all(pathlib.Path(p).is_relative_to(scripts) for p in origins.values()), origins\n    print(\"INSTALL_ORIGINS=\" + json.dumps(origins, ensure_ascii=False), file=sys.stderr)\n",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\agents\\half_0_base_2026.json",
+        "--validate-only"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\agents",
+      "started_at_utc": "2026-10-10T20:25:10.263701+00:00",
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "stdout_log": "agents-half_0_base_2026.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": "agents-half_0_base_2026.stderr.log",
+      "stderr_sha256": "57a740c1a482c5597877bccc72f382e876336358c3d28e9953c7f3b2deb2f019"
+    },
+    {
+      "name": "agents-half_segment_a_base",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "-c",
+        "\nimport json, pathlib, runpy, sys\nscripts = pathlib.Path(sys.argv[1]).resolve()\nsys.path.insert(0, str(scripts))\nsys.argv = sys.argv[2:]\ntry:\n    runpy.run_path(sys.argv[0], run_name=\"__main__\")\nfinally:\n    origins = {name: str(pathlib.Path(sys.modules[name].__file__).resolve())\n               for name in (\"revenue_core\", \"revenue_report\", \"contracts.annual_consumption\",\n                            \"contracts.period_flow\", \"contracts.document\", \"contracts.constants\",\n                            \"schema_compatibility\", \"research.drivers\") if name in sys.modules}\n    assert len(origins) == 8, origins\n    assert all(pathlib.Path(p).is_relative_to(scripts) for p in origins.values()), origins\n    print(\"INSTALL_ORIGINS=\" + json.dumps(origins, ensure_ascii=False), file=sys.stderr)\n",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\agents\\half_segment_a_base.json",
+        "--validate-only"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\agents",
+      "started_at_utc": "2026-10-10T20:25:10.599904+00:00",
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "stdout_log": "agents-half_segment_a_base.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": "agents-half_segment_a_base.stderr.log",
+      "stderr_sha256": "487054ce80bc4354f22d2fdfbeab7d94886aff5d1ec5d2b9978f96a559513473"
+    },
+    {
+      "name": "agents-half_reported_total",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "-c",
+        "\nimport json, pathlib, runpy, sys\nscripts = pathlib.Path(sys.argv[1]).resolve()\nsys.path.insert(0, str(scripts))\nsys.argv = sys.argv[2:]\ntry:\n    runpy.run_path(sys.argv[0], run_name=\"__main__\")\nfinally:\n    origins = {name: str(pathlib.Path(sys.modules[name].__file__).resolve())\n               for name in (\"revenue_core\", \"revenue_report\", \"contracts.annual_consumption\",\n                            \"contracts.period_flow\", \"contracts.document\", \"contracts.constants\",\n                            \"schema_compatibility\", \"research.drivers\") if name in sys.modules}\n    assert len(origins) == 8, origins\n    assert all(pathlib.Path(p).is_relative_to(scripts) for p in origins.values()), origins\n    print(\"INSTALL_ORIGINS=\" + json.dumps(origins, ensure_ascii=False), file=sys.stderr)\n",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\agents\\half_reported_total.json",
+        "--validate-only"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\agents",
+      "started_at_utc": "2026-10-10T20:25:10.908256+00:00",
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "stdout_log": "agents-half_reported_total.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": "agents-half_reported_total.stderr.log",
+      "stderr_sha256": "9b8966649f2dd10cda522d177808a5db85d97489abf5f0c8a00ff4d777b2ae05"
+    },
+    {
+      "name": "agents-full-cli",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "-c",
+        "\nimport json, pathlib, runpy, sys\nscripts = pathlib.Path(sys.argv[1]).resolve()\nsys.path.insert(0, str(scripts))\nsys.argv = sys.argv[2:]\ntry:\n    runpy.run_path(sys.argv[0], run_name=\"__main__\")\nfinally:\n    origins = {name: str(pathlib.Path(sys.modules[name].__file__).resolve())\n               for name in (\"revenue_core\", \"revenue_report\", \"contracts.annual_consumption\",\n                            \"contracts.period_flow\", \"contracts.document\", \"contracts.constants\",\n                            \"schema_compatibility\", \"research.drivers\") if name in sys.modules}\n    assert len(origins) == 8, origins\n    assert all(pathlib.Path(p).is_relative_to(scripts) for p in origins.values()), origins\n    print(\"INSTALL_ORIGINS=\" + json.dumps(origins, ensure_ascii=False), file=sys.stderr)\n",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\agents\\full.json",
+        "--output",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\agents\\full-output.json",
+        "--markdown",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\agents\\full.md"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\agents",
+      "started_at_utc": "2026-10-10T20:25:11.235803+00:00",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_log": "agents-full-cli.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": "agents-full-cli.stderr.log",
+      "stderr_sha256": "c7d5c661778bb21e0876013c4ef8167fcc0ee16f8abbe40b7aed0e1ba2838d92"
+    },
+    {
+      "name": "agents-full-compute-strong-render",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "-c",
+        "\nimport copy, json, pathlib, sys\nscripts = pathlib.Path(sys.argv[1]).resolve()\nsys.path.insert(0, str(scripts))\nfrom revenue_core import run_forecast\nfrom revenue_report import render_markdown, validate_published_forecast\nfrom filing_upstream_cause import failure_observation\ndata = json.loads(pathlib.Path(sys.argv[2]).read_text(encoding=\"utf-8\"))\ncli_result = json.loads(pathlib.Path(sys.argv[3]).read_text(encoding=\"utf-8\"))\nresult = run_forecast(copy.deepcopy(data))\nvalidate_published_forecast(result, data)\nvalidate_published_forecast(cli_result, data)\nmarkdown = render_markdown(result)\nassert result[\"schema_version\"] == \"3.9\"\nassert result[\"engine_version\"] == \"4.2.0\"\nassert result[\"consolidated_forecast\"] == cli_result[\"consolidated_forecast\"]\nassert result[\"consolidated_forecast\"][\"base\"][\"annual_revenue\"][\"2026\"] == 165.00000000000003\nassert \"period_flow\" in markdown\nassert \"2026-01-01\" in markdown and \"2026-12-31\" in markdown\nif sys.argv[4] == \"derived\":\n    params = {p[\"parameter_id\"]: p for p in result[\"parameter_trace\"]}\n    assert params[\"source_h1\"][\"value\"] == 60\n    assert params[\"source_h2\"][\"value\"] == 50\n    assert abs(params[\"0_base_2026\"][\"value\"] - 110) < 1e-9\nff = json.loads(pathlib.Path(sys.argv[5]).read_text(encoding=\"utf-8\"))\nfor payload in ff[\"errors\"]:\n    observed = failure_observation(payload)\n    assert observed[\"acquisition_observation\"] == payload[\"acquisition_observation\"]\n    assert observed[\"acquisition_failure\"] == payload[\"filing\"][\"acquisition_failure\"]\nnames = (\"revenue_core\", \"revenue_report\", \"contracts.annual_consumption\",\n         \"contracts.period_flow\", \"contracts.document\", \"contracts.constants\",\n         \"schema_compatibility\", \"research.drivers\", \"filing_upstream_cause\")\norigins = {name: str(pathlib.Path(sys.modules[name].__file__).resolve()) for name in names}\nassert all(pathlib.Path(p).is_relative_to(scripts) for p in origins.values()), origins\nprint(json.dumps({\"schema_version\": result[\"schema_version\"], \"engine_version\": result[\"engine_version\"],\n                  \"compute_strong_render\": \"pass\", \"ff_unknown_and_lower_bound_preserved\": True,\n                  \"module_origins\": origins}, ensure_ascii=False))\n",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\agents\\full.json",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\agents\\full-output.json",
+        "full",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\agents\\ff.json"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\agents",
+      "started_at_utc": "2026-10-10T20:25:11.554740+00:00",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_log": "agents-full-compute-strong-render.stdout.log",
+      "stdout_sha256": "d4badb9efcc2cd160452184eb927c5e73b3a5de5481e2242b853cf5e52a8df19",
+      "stderr_log": "agents-full-compute-strong-render.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "agents-derived-cli",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "-c",
+        "\nimport json, pathlib, runpy, sys\nscripts = pathlib.Path(sys.argv[1]).resolve()\nsys.path.insert(0, str(scripts))\nsys.argv = sys.argv[2:]\ntry:\n    runpy.run_path(sys.argv[0], run_name=\"__main__\")\nfinally:\n    origins = {name: str(pathlib.Path(sys.modules[name].__file__).resolve())\n               for name in (\"revenue_core\", \"revenue_report\", \"contracts.annual_consumption\",\n                            \"contracts.period_flow\", \"contracts.document\", \"contracts.constants\",\n                            \"schema_compatibility\", \"research.drivers\") if name in sys.modules}\n    assert len(origins) == 8, origins\n    assert all(pathlib.Path(p).is_relative_to(scripts) for p in origins.values()), origins\n    print(\"INSTALL_ORIGINS=\" + json.dumps(origins, ensure_ascii=False), file=sys.stderr)\n",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\agents\\derived.json",
+        "--output",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\agents\\derived-output.json",
+        "--markdown",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\agents\\derived.md"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\agents",
+      "started_at_utc": "2026-10-10T20:25:11.937967+00:00",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_log": "agents-derived-cli.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": "agents-derived-cli.stderr.log",
+      "stderr_sha256": "c7d5c661778bb21e0876013c4ef8167fcc0ee16f8abbe40b7aed0e1ba2838d92"
+    },
+    {
+      "name": "agents-derived-compute-strong-render",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "-c",
+        "\nimport copy, json, pathlib, sys\nscripts = pathlib.Path(sys.argv[1]).resolve()\nsys.path.insert(0, str(scripts))\nfrom revenue_core import run_forecast\nfrom revenue_report import render_markdown, validate_published_forecast\nfrom filing_upstream_cause import failure_observation\ndata = json.loads(pathlib.Path(sys.argv[2]).read_text(encoding=\"utf-8\"))\ncli_result = json.loads(pathlib.Path(sys.argv[3]).read_text(encoding=\"utf-8\"))\nresult = run_forecast(copy.deepcopy(data))\nvalidate_published_forecast(result, data)\nvalidate_published_forecast(cli_result, data)\nmarkdown = render_markdown(result)\nassert result[\"schema_version\"] == \"3.9\"\nassert result[\"engine_version\"] == \"4.2.0\"\nassert result[\"consolidated_forecast\"] == cli_result[\"consolidated_forecast\"]\nassert result[\"consolidated_forecast\"][\"base\"][\"annual_revenue\"][\"2026\"] == 165.00000000000003\nassert \"period_flow\" in markdown\nassert \"2026-01-01\" in markdown and \"2026-12-31\" in markdown\nif sys.argv[4] == \"derived\":\n    params = {p[\"parameter_id\"]: p for p in result[\"parameter_trace\"]}\n    assert params[\"source_h1\"][\"value\"] == 60\n    assert params[\"source_h2\"][\"value\"] == 50\n    assert abs(params[\"0_base_2026\"][\"value\"] - 110) < 1e-9\nff = json.loads(pathlib.Path(sys.argv[5]).read_text(encoding=\"utf-8\"))\nfor payload in ff[\"errors\"]:\n    observed = failure_observation(payload)\n    assert observed[\"acquisition_observation\"] == payload[\"acquisition_observation\"]\n    assert observed[\"acquisition_failure\"] == payload[\"filing\"][\"acquisition_failure\"]\nnames = (\"revenue_core\", \"revenue_report\", \"contracts.annual_consumption\",\n         \"contracts.period_flow\", \"contracts.document\", \"contracts.constants\",\n         \"schema_compatibility\", \"research.drivers\", \"filing_upstream_cause\")\norigins = {name: str(pathlib.Path(sys.modules[name].__file__).resolve()) for name in names}\nassert all(pathlib.Path(p).is_relative_to(scripts) for p in origins.values()), origins\nprint(json.dumps({\"schema_version\": result[\"schema_version\"], \"engine_version\": result[\"engine_version\"],\n                  \"compute_strong_render\": \"pass\", \"ff_unknown_and_lower_bound_preserved\": True,\n                  \"module_origins\": origins}, ensure_ascii=False))\n",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\agents\\derived.json",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\agents\\derived-output.json",
+        "derived",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\agents\\ff.json"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\agents",
+      "started_at_utc": "2026-10-10T20:25:12.310004+00:00",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_log": "agents-derived-compute-strong-render.stdout.log",
+      "stdout_sha256": "d4badb9efcc2cd160452184eb927c5e73b3a5de5481e2242b853cf5e52a8df19",
+      "stderr_log": "agents-derived-compute-strong-render.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "codex-ff-siblings",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "-c",
+        "\nimport copy, json, pathlib, sys\nscripts = pathlib.Path(sys.argv[1]).resolve()\nsys.path.insert(0, str(scripts))\nimport fetch_filing\nfrom ff_provider_cause import build_cause, validated_acquisition_observation\nfrom ff_v2_envelope import success_envelope, error_envelope\nobs = {\"schema_version\":\"acquisition-observation/1\", \"usage_scope\":\"operation\", \"outcome\":\"failed\",\n       \"provider_started\":True, \"usage_complete\":False, \"wire_body_bytes\":101,\n       \"wire_usage_complete\":False, \"entity_body_bytes\":202, \"http_exchanges\":2,\n       \"http_exchanges_complete\":False, \"cost_usd\":None, \"http_observation\":None}\nfailure = {\"schema_version\":\"acquisition-failure/1\", \"code\":\"network_failed\", \"retryable\":False,\n           \"provider_started\":True, \"usage_complete\":False, \"usage_scope\":\"operation\",\n           \"acquisition_usage\":{\"schema_version\":\"1.0\", \"response_bytes\":202, \"cost_usd\":\"0\"}}\ncause = build_cause(\"ensure\", \"network_failed\", provider_started=True, usage_complete=False)\nerrors=[]\nfor cost in (None, \"0.01\"):\n    observation=copy.deepcopy(obs); observation[\"cost_usd\"]=cost\n    error=error_envelope(\"upstream_error\", \"network_failed\", retryable=False,\n        stats={\"calls\":2,\"downloads\":0}, upstream_cause=cause,\n        acquisition_failure=failure, acquisition_observation=observation, stage=\"ensure\", attempts=1)\n    assert error[\"schema_version\"] == \"2.0\"\n    assert error[\"status\"] == error[\"filing\"][\"status\"] == \"upstream_error\"\n    assert error[\"acquisition_observation\"] == observation\n    assert \"acquisition_observation\" not in error[\"filing\"]\n    assert error[\"filing\"][\"acquisition_failure\"] == failure\n    assert error[\"filing\"][\"upstream_cause\"] == cause\n    errors.append(error)\nfor key, value in ((\"outcome\", []), (\"http_exchanges\", None), (\"cost_usd\", \"NaN\")):\n    malformed=copy.deepcopy(obs); malformed[key]=value\n    assert validated_acquisition_observation(malformed) is None\n    error=error_envelope(\"upstream_error\", \"network_failed\", retryable=False,\n        upstream_cause=cause, acquisition_failure=failure, acquisition_observation=malformed)\n    assert error[\"status\"] == \"upstream_error\" and \"acquisition_observation\" not in error\n    assert error[\"filing\"][\"upstream_cause\"] == cause\n    assert error[\"filing\"][\"acquisition_failure\"] == failure\nsha=\"a\"*64\nref={\"schema_version\":\"2.0\", \"document_id\":\"urn:company-wiki:document:sha256:\"+sha,\n     \"source_id\":\"urn:company-wiki:source:sha256:\"+sha, \"content_sha256\":sha,\n     \"byte_size\":3,\"mime_type\":\"application/pdf\"}\nsuccess_obs=copy.deepcopy(obs);success_obs.update(outcome=\"reused_before_download\",provider_started=False,\n    usage_complete=True,wire_body_bytes=0,entity_body_bytes=0,http_exchanges=0,\n    wire_usage_complete=True,http_exchanges_complete=True,cost_usd=None)\nsuccess=success_envelope({}, {\"source_ref\":ref,\"document_kind\":\"annual_report\",\"fiscal_year\":2025,\n    \"fiscal_period\":\"FY\",\"resolution_outcome\":\"reused_before_download\",\"download_events\":0,\n    \"acquisition_observation\":success_obs}, {\"status\":\"not_applicable\"}, {\"calls\":1,\"downloads\":0})\nassert success[\"schema_version\"] == \"2.0\"\nassert success[\"acquisition_observation\"] == success_obs\nassert \"acquisition_observation\" not in success[\"filing\"]\norigins={name:str(pathlib.Path(sys.modules[name].__file__).resolve())\n         for name in (\"fetch_filing\",\"ff_provider_cause\",\"ff_v2_envelope\",\"filing_contracts\")}\nassert all(pathlib.Path(p).is_relative_to(scripts) for p in origins.values()), origins\nprint(json.dumps({\"errors\":errors, \"success\":success,\n                  \"malformed_diagnostic_does_not_mask_error\":True,\"module_origins\":origins},ensure_ascii=False))\n",
+        "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\codex",
+      "started_at_utc": "2026-10-10T20:25:12.932155+00:00",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_log": "codex-ff-siblings.stdout.log",
+      "stdout_sha256": "a00fc738ec986b1c72f72316ebf39e9a85e04346418ae15090298a9c57558e65",
+      "stderr_log": "codex-ff-siblings.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "codex-rf-version",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "-c",
+        "\nimport json, pathlib, runpy, sys\nscripts = pathlib.Path(sys.argv[1]).resolve()\nsys.path.insert(0, str(scripts))\nsys.argv = sys.argv[2:]\ntry:\n    runpy.run_path(sys.argv[0], run_name=\"__main__\")\nfinally:\n    origins = {name: str(pathlib.Path(sys.modules[name].__file__).resolve())\n               for name in (\"revenue_core\", \"revenue_report\", \"contracts.annual_consumption\",\n                            \"contracts.period_flow\", \"contracts.document\", \"contracts.constants\",\n                            \"schema_compatibility\", \"research.drivers\") if name in sys.modules}\n    assert len(origins) == 8, origins\n    assert all(pathlib.Path(p).is_relative_to(scripts) for p in origins.values()), origins\n    print(\"INSTALL_ORIGINS=\" + json.dumps(origins, ensure_ascii=False), file=sys.stderr)\n",
+        "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts",
+        "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+        "--version"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\codex",
+      "started_at_utc": "2026-10-10T20:25:13.106070+00:00",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_log": "codex-rf-version.stdout.log",
+      "stdout_sha256": "d8cd6cdcade987bd2740c53494bc0bf2512f7e00d255d9e4243d207204024ef2",
+      "stderr_log": "codex-rf-version.stderr.log",
+      "stderr_sha256": "94fc43b5c584fa61fef724aebccfa78835fbbfcbcd42cf906376f39bcd6b691d"
+    },
+    {
+      "name": "codex-half_0_base_2026",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "-c",
+        "\nimport json, pathlib, runpy, sys\nscripts = pathlib.Path(sys.argv[1]).resolve()\nsys.path.insert(0, str(scripts))\nsys.argv = sys.argv[2:]\ntry:\n    runpy.run_path(sys.argv[0], run_name=\"__main__\")\nfinally:\n    origins = {name: str(pathlib.Path(sys.modules[name].__file__).resolve())\n               for name in (\"revenue_core\", \"revenue_report\", \"contracts.annual_consumption\",\n                            \"contracts.period_flow\", \"contracts.document\", \"contracts.constants\",\n                            \"schema_compatibility\", \"research.drivers\") if name in sys.modules}\n    assert len(origins) == 8, origins\n    assert all(pathlib.Path(p).is_relative_to(scripts) for p in origins.values()), origins\n    print(\"INSTALL_ORIGINS=\" + json.dumps(origins, ensure_ascii=False), file=sys.stderr)\n",
+        "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts",
+        "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\codex\\half_0_base_2026.json",
+        "--validate-only"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\codex",
+      "started_at_utc": "2026-10-10T20:25:13.405610+00:00",
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "stdout_log": "codex-half_0_base_2026.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": "codex-half_0_base_2026.stderr.log",
+      "stderr_sha256": "18a8bb3d35bba94425fea0cc10a8f8e0da4ade873aef4f0feef8a8a40cebb5df"
+    },
+    {
+      "name": "codex-half_segment_a_base",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "-c",
+        "\nimport json, pathlib, runpy, sys\nscripts = pathlib.Path(sys.argv[1]).resolve()\nsys.path.insert(0, str(scripts))\nsys.argv = sys.argv[2:]\ntry:\n    runpy.run_path(sys.argv[0], run_name=\"__main__\")\nfinally:\n    origins = {name: str(pathlib.Path(sys.modules[name].__file__).resolve())\n               for name in (\"revenue_core\", \"revenue_report\", \"contracts.annual_consumption\",\n                            \"contracts.period_flow\", \"contracts.document\", \"contracts.constants\",\n                            \"schema_compatibility\", \"research.drivers\") if name in sys.modules}\n    assert len(origins) == 8, origins\n    assert all(pathlib.Path(p).is_relative_to(scripts) for p in origins.values()), origins\n    print(\"INSTALL_ORIGINS=\" + json.dumps(origins, ensure_ascii=False), file=sys.stderr)\n",
+        "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts",
+        "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\codex\\half_segment_a_base.json",
+        "--validate-only"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\codex",
+      "started_at_utc": "2026-10-10T20:25:13.771376+00:00",
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "stdout_log": "codex-half_segment_a_base.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": "codex-half_segment_a_base.stderr.log",
+      "stderr_sha256": "804ec0bd306ae59225fa575bd3d7aa1b0ee12975a7e6507233be5a4c8b704582"
+    },
+    {
+      "name": "codex-half_reported_total",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "-c",
+        "\nimport json, pathlib, runpy, sys\nscripts = pathlib.Path(sys.argv[1]).resolve()\nsys.path.insert(0, str(scripts))\nsys.argv = sys.argv[2:]\ntry:\n    runpy.run_path(sys.argv[0], run_name=\"__main__\")\nfinally:\n    origins = {name: str(pathlib.Path(sys.modules[name].__file__).resolve())\n               for name in (\"revenue_core\", \"revenue_report\", \"contracts.annual_consumption\",\n                            \"contracts.period_flow\", \"contracts.document\", \"contracts.constants\",\n                            \"schema_compatibility\", \"research.drivers\") if name in sys.modules}\n    assert len(origins) == 8, origins\n    assert all(pathlib.Path(p).is_relative_to(scripts) for p in origins.values()), origins\n    print(\"INSTALL_ORIGINS=\" + json.dumps(origins, ensure_ascii=False), file=sys.stderr)\n",
+        "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts",
+        "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\codex\\half_reported_total.json",
+        "--validate-only"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\codex",
+      "started_at_utc": "2026-10-10T20:25:14.112435+00:00",
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "stdout_log": "codex-half_reported_total.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": "codex-half_reported_total.stderr.log",
+      "stderr_sha256": "7ecb0afed590e590c8bea8918e3757fe99dab0055f40b2c094dd5c6d285636fa"
+    },
+    {
+      "name": "codex-full-cli",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "-c",
+        "\nimport json, pathlib, runpy, sys\nscripts = pathlib.Path(sys.argv[1]).resolve()\nsys.path.insert(0, str(scripts))\nsys.argv = sys.argv[2:]\ntry:\n    runpy.run_path(sys.argv[0], run_name=\"__main__\")\nfinally:\n    origins = {name: str(pathlib.Path(sys.modules[name].__file__).resolve())\n               for name in (\"revenue_core\", \"revenue_report\", \"contracts.annual_consumption\",\n                            \"contracts.period_flow\", \"contracts.document\", \"contracts.constants\",\n                            \"schema_compatibility\", \"research.drivers\") if name in sys.modules}\n    assert len(origins) == 8, origins\n    assert all(pathlib.Path(p).is_relative_to(scripts) for p in origins.values()), origins\n    print(\"INSTALL_ORIGINS=\" + json.dumps(origins, ensure_ascii=False), file=sys.stderr)\n",
+        "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts",
+        "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\codex\\full.json",
+        "--output",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\codex\\full-output.json",
+        "--markdown",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\codex\\full.md"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\codex",
+      "started_at_utc": "2026-10-10T20:25:14.417694+00:00",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_log": "codex-full-cli.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": "codex-full-cli.stderr.log",
+      "stderr_sha256": "94fc43b5c584fa61fef724aebccfa78835fbbfcbcd42cf906376f39bcd6b691d"
+    },
+    {
+      "name": "codex-full-compute-strong-render",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "-c",
+        "\nimport copy, json, pathlib, sys\nscripts = pathlib.Path(sys.argv[1]).resolve()\nsys.path.insert(0, str(scripts))\nfrom revenue_core import run_forecast\nfrom revenue_report import render_markdown, validate_published_forecast\nfrom filing_upstream_cause import failure_observation\ndata = json.loads(pathlib.Path(sys.argv[2]).read_text(encoding=\"utf-8\"))\ncli_result = json.loads(pathlib.Path(sys.argv[3]).read_text(encoding=\"utf-8\"))\nresult = run_forecast(copy.deepcopy(data))\nvalidate_published_forecast(result, data)\nvalidate_published_forecast(cli_result, data)\nmarkdown = render_markdown(result)\nassert result[\"schema_version\"] == \"3.9\"\nassert result[\"engine_version\"] == \"4.2.0\"\nassert result[\"consolidated_forecast\"] == cli_result[\"consolidated_forecast\"]\nassert result[\"consolidated_forecast\"][\"base\"][\"annual_revenue\"][\"2026\"] == 165.00000000000003\nassert \"period_flow\" in markdown\nassert \"2026-01-01\" in markdown and \"2026-12-31\" in markdown\nif sys.argv[4] == \"derived\":\n    params = {p[\"parameter_id\"]: p for p in result[\"parameter_trace\"]}\n    assert params[\"source_h1\"][\"value\"] == 60\n    assert params[\"source_h2\"][\"value\"] == 50\n    assert abs(params[\"0_base_2026\"][\"value\"] - 110) < 1e-9\nff = json.loads(pathlib.Path(sys.argv[5]).read_text(encoding=\"utf-8\"))\nfor payload in ff[\"errors\"]:\n    observed = failure_observation(payload)\n    assert observed[\"acquisition_observation\"] == payload[\"acquisition_observation\"]\n    assert observed[\"acquisition_failure\"] == payload[\"filing\"][\"acquisition_failure\"]\nnames = (\"revenue_core\", \"revenue_report\", \"contracts.annual_consumption\",\n         \"contracts.period_flow\", \"contracts.document\", \"contracts.constants\",\n         \"schema_compatibility\", \"research.drivers\", \"filing_upstream_cause\")\norigins = {name: str(pathlib.Path(sys.modules[name].__file__).resolve()) for name in names}\nassert all(pathlib.Path(p).is_relative_to(scripts) for p in origins.values()), origins\nprint(json.dumps({\"schema_version\": result[\"schema_version\"], \"engine_version\": result[\"engine_version\"],\n                  \"compute_strong_render\": \"pass\", \"ff_unknown_and_lower_bound_preserved\": True,\n                  \"module_origins\": origins}, ensure_ascii=False))\n",
+        "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\codex\\full.json",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\codex\\full-output.json",
+        "full",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\codex\\ff.json"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\codex",
+      "started_at_utc": "2026-10-10T20:25:14.809786+00:00",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_log": "codex-full-compute-strong-render.stdout.log",
+      "stdout_sha256": "56f7b24fa00dec45493ecb0f4a2c75c60c88eaf1fc758754281b1513c0042c27",
+      "stderr_log": "codex-full-compute-strong-render.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "codex-derived-cli",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "-c",
+        "\nimport json, pathlib, runpy, sys\nscripts = pathlib.Path(sys.argv[1]).resolve()\nsys.path.insert(0, str(scripts))\nsys.argv = sys.argv[2:]\ntry:\n    runpy.run_path(sys.argv[0], run_name=\"__main__\")\nfinally:\n    origins = {name: str(pathlib.Path(sys.modules[name].__file__).resolve())\n               for name in (\"revenue_core\", \"revenue_report\", \"contracts.annual_consumption\",\n                            \"contracts.period_flow\", \"contracts.document\", \"contracts.constants\",\n                            \"schema_compatibility\", \"research.drivers\") if name in sys.modules}\n    assert len(origins) == 8, origins\n    assert all(pathlib.Path(p).is_relative_to(scripts) for p in origins.values()), origins\n    print(\"INSTALL_ORIGINS=\" + json.dumps(origins, ensure_ascii=False), file=sys.stderr)\n",
+        "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts",
+        "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\revenue_forecast.py",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\codex\\derived.json",
+        "--output",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\codex\\derived-output.json",
+        "--markdown",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\codex\\derived.md"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\codex",
+      "started_at_utc": "2026-10-10T20:25:15.205367+00:00",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_log": "codex-derived-cli.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": "codex-derived-cli.stderr.log",
+      "stderr_sha256": "94fc43b5c584fa61fef724aebccfa78835fbbfcbcd42cf906376f39bcd6b691d"
+    },
+    {
+      "name": "codex-derived-compute-strong-render",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "-c",
+        "\nimport copy, json, pathlib, sys\nscripts = pathlib.Path(sys.argv[1]).resolve()\nsys.path.insert(0, str(scripts))\nfrom revenue_core import run_forecast\nfrom revenue_report import render_markdown, validate_published_forecast\nfrom filing_upstream_cause import failure_observation\ndata = json.loads(pathlib.Path(sys.argv[2]).read_text(encoding=\"utf-8\"))\ncli_result = json.loads(pathlib.Path(sys.argv[3]).read_text(encoding=\"utf-8\"))\nresult = run_forecast(copy.deepcopy(data))\nvalidate_published_forecast(result, data)\nvalidate_published_forecast(cli_result, data)\nmarkdown = render_markdown(result)\nassert result[\"schema_version\"] == \"3.9\"\nassert result[\"engine_version\"] == \"4.2.0\"\nassert result[\"consolidated_forecast\"] == cli_result[\"consolidated_forecast\"]\nassert result[\"consolidated_forecast\"][\"base\"][\"annual_revenue\"][\"2026\"] == 165.00000000000003\nassert \"period_flow\" in markdown\nassert \"2026-01-01\" in markdown and \"2026-12-31\" in markdown\nif sys.argv[4] == \"derived\":\n    params = {p[\"parameter_id\"]: p for p in result[\"parameter_trace\"]}\n    assert params[\"source_h1\"][\"value\"] == 60\n    assert params[\"source_h2\"][\"value\"] == 50\n    assert abs(params[\"0_base_2026\"][\"value\"] - 110) < 1e-9\nff = json.loads(pathlib.Path(sys.argv[5]).read_text(encoding=\"utf-8\"))\nfor payload in ff[\"errors\"]:\n    observed = failure_observation(payload)\n    assert observed[\"acquisition_observation\"] == payload[\"acquisition_observation\"]\n    assert observed[\"acquisition_failure\"] == payload[\"filing\"][\"acquisition_failure\"]\nnames = (\"revenue_core\", \"revenue_report\", \"contracts.annual_consumption\",\n         \"contracts.period_flow\", \"contracts.document\", \"contracts.constants\",\n         \"schema_compatibility\", \"research.drivers\", \"filing_upstream_cause\")\norigins = {name: str(pathlib.Path(sys.modules[name].__file__).resolve()) for name in names}\nassert all(pathlib.Path(p).is_relative_to(scripts) for p in origins.values()), origins\nprint(json.dumps({\"schema_version\": result[\"schema_version\"], \"engine_version\": result[\"engine_version\"],\n                  \"compute_strong_render\": \"pass\", \"ff_unknown_and_lower_bound_preserved\": True,\n                  \"module_origins\": origins}, ensure_ascii=False))\n",
+        "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\codex\\derived.json",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\codex\\derived-output.json",
+        "derived",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\codex\\ff.json"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3ip-wuetzywb\\codex",
+      "started_at_utc": "2026-10-10T20:25:15.611522+00:00",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout_log": "codex-derived-compute-strong-render.stdout.log",
+      "stdout_sha256": "56f7b24fa00dec45493ecb0f4a2c75c60c88eaf1fc758754281b1513c0042c27",
+      "stderr_log": "codex-derived-compute-strong-render.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "fixture_authoring": "repository test helpers only in parent; JSON-only children",
+  "external_provider_calls": 0,
+  "external_model_calls": 0,
+  "paid_tokens": 0,
+  "paid_micro_usd": 0,
+  "originals_read_or_modified": false,
+  "production_config_modified": false,
+  "fixture_sha256": {
+    "half_0_base_2026": "d74688b68925ce853b45aecd16b13279941b90334104738a45f899b7e114b6bc",
+    "half_segment_a_base": "b6102d006055b09c5d21d5df0ea6f853af6b42eb7b7193508b5b094ec0a5c99c",
+    "half_reported_total": "f9d7051f6c3c836d24ddb4971ee4e1cc53f5d45459298662fd2293bcb1e10125",
+    "full": "5fa38f93a5f898b6f612fbd01f697683443ecc3c6c9764820cd65d065c0dd6eb",
+    "derived": "e8a7683bb9364bf21dbcefc8b26e775cb68fe4aa8a6aa478c91012db17dfbc24"
+  },
+  "test_owned_files_before_cleanup": 22,
+  "owned_temp_removed": true,
+  "installation_files_before": 590,
+  "installation_files_after": 590,
+  "installation_mutations": [],
+  "finished_at_utc": "2026-10-10T20:25:16.229239+00:00",
+  "status": "pass",
+  "independent_selected_installed_sha_matches": [
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\fetch_filing.py",
+      "sha256": "6b12ee17ab2a01f1292eacf3598177ca959d2f5ab306c44b772abec6a648d12c"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\ff_provider_cause.py",
+      "sha256": "966a63d544a7f534e661b163b1b11cdfac07c8965449fe41bf3328a59fe35280"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\ff_v2_envelope.py",
+      "sha256": "c83b92dddba7cad223f64bc1aa573e88312a0676a85e073e05c43f1b9fae9ed3"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\filing_contracts.py",
+      "sha256": "3dfe0a3fb2659acad155660b129f1d4adcfa4664ee3a3bf91df7cccf825493ff"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\CHANGELOG.md",
+      "sha256": "5b4b0d2eed697897ac49c4a44f1d565a70354ebf0f2f11677ec1ef63d49927fc"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\SKILL.md",
+      "sha256": "59929bb32b1fd6a01c9743eb35fe275fe4fa464627fff8a969a41568c34e50ff"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\m3-period-evidence.md",
+      "sha256": "234aad0dd46630ed70f25a926b021ba0881a14c78a5b9a3bd45f9545d2b423f8"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\annual_consumption.py",
+      "sha256": "3861b9920ac46250e75364ef40eb592617cfab4da52ad21689e7bba6ac7b7e15"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\constants.py",
+      "sha256": "aa621c0d12efddce7951ff9a03922a67787db1c82bfa191a755e67ddba26de5c"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\document.py",
+      "sha256": "882a08abba740ba14f17cfcc614e29aa7c40fe68783bf05ee9d73c5891f7769c"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\period_flow.py",
+      "sha256": "0caeb1f1d69778405c1816e1dcddfcc9faac4ddf618c883e70564d6f7ad1e19f"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_fetch_client.py",
+      "sha256": "7f730131f4bad0e22e3e43b0ffac48475dd1c373a4bc8dec40ad21a6b8a1341b"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_upstream_cause.py",
+      "sha256": "ea4df706c2f2ea05c5e36a04574ea464b0ce249255ec4bf3263efcdaba836ae7"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\generate_input_template.py",
+      "sha256": "5507ae1fb484c0d6bef097d1776998155e50d1c0e76fa2a3ac6171e31ab61bf0"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\drivers.py",
+      "sha256": "aebfc5ddcdb56e743efa35f3514b867e2cac6e9a1f335ab1c79bd309ccc8a696"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_report.py",
+      "sha256": "4c35f485d8b028aaf3a3d9d92b203882f1f10ec0ddacf3bad2ffc9eece36a29f"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\schema_compatibility.py",
+      "sha256": "288a64f354e2cefac814b86d9435ff801f5d51c3c2c8dcb8d739ea4ba50cdbd0"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+      "sha256": "e8db267971f5c967ab6cd8e358e23423afe42f7af8ce19847be7b266cc00742d"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\fetch_filing.py",
+      "sha256": "6b12ee17ab2a01f1292eacf3598177ca959d2f5ab306c44b772abec6a648d12c"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\ff_provider_cause.py",
+      "sha256": "966a63d544a7f534e661b163b1b11cdfac07c8965449fe41bf3328a59fe35280"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\ff_v2_envelope.py",
+      "sha256": "c83b92dddba7cad223f64bc1aa573e88312a0676a85e073e05c43f1b9fae9ed3"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\filing_contracts.py",
+      "sha256": "3dfe0a3fb2659acad155660b129f1d4adcfa4664ee3a3bf91df7cccf825493ff"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\CHANGELOG.md",
+      "sha256": "5b4b0d2eed697897ac49c4a44f1d565a70354ebf0f2f11677ec1ef63d49927fc"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\SKILL.md",
+      "sha256": "59929bb32b1fd6a01c9743eb35fe275fe4fa464627fff8a969a41568c34e50ff"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\references\\m3-period-evidence.md",
+      "sha256": "234aad0dd46630ed70f25a926b021ba0881a14c78a5b9a3bd45f9545d2b423f8"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\contracts\\annual_consumption.py",
+      "sha256": "3861b9920ac46250e75364ef40eb592617cfab4da52ad21689e7bba6ac7b7e15"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\contracts\\constants.py",
+      "sha256": "aa621c0d12efddce7951ff9a03922a67787db1c82bfa191a755e67ddba26de5c"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\contracts\\document.py",
+      "sha256": "882a08abba740ba14f17cfcc614e29aa7c40fe68783bf05ee9d73c5891f7769c"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\contracts\\period_flow.py",
+      "sha256": "0caeb1f1d69778405c1816e1dcddfcc9faac4ddf618c883e70564d6f7ad1e19f"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\filing_fetch_client.py",
+      "sha256": "7f730131f4bad0e22e3e43b0ffac48475dd1c373a4bc8dec40ad21a6b8a1341b"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\filing_upstream_cause.py",
+      "sha256": "ea4df706c2f2ea05c5e36a04574ea464b0ce249255ec4bf3263efcdaba836ae7"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\generate_input_template.py",
+      "sha256": "5507ae1fb484c0d6bef097d1776998155e50d1c0e76fa2a3ac6171e31ab61bf0"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\research\\drivers.py",
+      "sha256": "aebfc5ddcdb56e743efa35f3514b867e2cac6e9a1f335ab1c79bd309ccc8a696"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\revenue_report.py",
+      "sha256": "4c35f485d8b028aaf3a3d9d92b203882f1f10ec0ddacf3bad2ffc9eece36a29f"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\schema_compatibility.py",
+      "sha256": "288a64f354e2cefac814b86d9435ff801f5d51c3c2c8dcb8d739ea4ba50cdbd0"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\source_preparation.py",
+      "sha256": "e8db267971f5c967ab6cd8e358e23423afe42f7af8ce19847be7b266cc00742d"
+    }
+  ],
+  "fixture_source_files": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tests\\test_recognition_bridge.py",
+      "sha256": "187ea01e45d144031d34b11e3a76c551b2029556c4d26b0b34983f7d59bcc1a5"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tests\\test_data_contract.py",
+      "sha256": "5fc39c6020fc579a44f2e1e32291880c82dcbbf3c23baba258cd29c21d2fe35c"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tests\\test_m3_period_flow_contract.py",
+      "sha256": "c529396051f463cb802bf14547498efea41a82d03ce21c0d97c7bbfc7a50c22a"
+    }
+  ],
+  "harness_at_execution_sha256": "a9e8ebe1f17d95470fb84b145ec7197e9b4a270165ee831b66ac2682d93b76e0",
+  "current_harness_sha256": "1257b662eca2f6d4dd4bc4f40bca3abd72e1d81aeb7a7a60d313d19d561196b3",
+  "after_execution_edit": "four semicolon-separated outer harness statements split into lines only; child code and assertions unchanged",
+  "static": {
+    "exit_code": 0,
+    "stdout_log": "ruff-final.stdout.log",
+    "stderr_log": "ruff-final.stderr.log",
+    "stdout_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "initial_static_observation": "four E702 style errors before the formatting-only split, corrected; product tests already green"
+  }
+}
