@@ -1,0 +1,15 @@
+{
+  "observed_at_utc": "2026-10-10T20:49:56.082385+00:00",
+  "workspace": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+  "branch": "codex/main-auto-official-json-20261010",
+  "base_head": "f8956d299b52849a4beb06e4071816ec72ddc6a3",
+  "before_checkout_was_clean": true,
+  "checkout_error": "Git Windows MAX_PATH: 8 historical long evidence paths missing; git switch reported success with deleted worktree files",
+  "repair": "enable repository-local core.longpaths and restore only the 8 exact tracked evidence paths from HEAD",
+  "restored_evidence_files": 8,
+  "after_status": "",
+  "source_code_changed": false,
+  "originals_modified": false,
+  "provider_model_calls": 0,
+  "fees": 0
+}

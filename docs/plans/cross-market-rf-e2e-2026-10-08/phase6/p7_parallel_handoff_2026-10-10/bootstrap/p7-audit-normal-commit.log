@@ -1,0 +1,10 @@
+[codex/p7-audit-execution-review a620e86] docs: prepare P7-AUDIT isolated harness plan
+ 8 files changed, 456 insertions(+)
+ create mode 100644 .planning/p7-audit-execution-review/HANDOFF_FORMAT.md
+ create mode 100644 .planning/p7-audit-execution-review/IMPLEMENTATION_CARD.md
+ create mode 100644 .planning/p7-audit-execution-review/INTERFACES.md
+ create mode 100644 .planning/p7-audit-execution-review/findings.md
+ create mode 100644 .planning/p7-audit-execution-review/handoff.example.json
+ create mode 100644 .planning/p7-audit-execution-review/handoff.schema.json
+ create mode 100644 .planning/p7-audit-execution-review/progress.md
+ create mode 100644 .planning/p7-audit-execution-review/task_plan.md

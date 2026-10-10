@@ -1,0 +1,43 @@
+{
+  "observed_at_utc": "2026-10-10T21:11:03.185310+00:00",
+  "problem": "PowerShell5.1 lacks System.IO.Path.IsPathFullyQualified; selected plan stdout empty",
+  "resolution": "explicit existing PowerShell7 executable in startup commands; no installed skill edits",
+  "lanes": [
+    {
+      "card_id": "P7-CWP-PROJECTION",
+      "previous_bootstrap_head": "d76fe9a6c9b20580792d6c8c16668c02195a25ab",
+      "bootstrap_head": "fd250f719ca6234eec50c49d89991025f9610c81",
+      "changed_paths": [
+        ".planning/p7-cwp-projection/IMPLEMENTATION_CARD.md",
+        ".planning/p7-cwp-projection/progress.md"
+      ],
+      "normal_commit_exit_code": 0,
+      "log_path": "bootstrap\\p7-cwp-projection-startup-fix-commit.log",
+      "source_changes": []
+    },
+    {
+      "card_id": "P7-RF",
+      "previous_bootstrap_head": "65b5165a054933acc494923dcde818c29552c1d5",
+      "bootstrap_head": "78d7d3d49ba10842b1b542914d195e9f7b1793a4",
+      "changed_paths": [
+        ".planning/p7-rf-scoped-calibration/IMPLEMENTATION_CARD.md",
+        ".planning/p7-rf-scoped-calibration/progress.md"
+      ],
+      "normal_commit_exit_code": 0,
+      "log_path": "bootstrap\\p7-rf-startup-fix-commit.log",
+      "source_changes": []
+    },
+    {
+      "card_id": "P7-AUDIT",
+      "previous_bootstrap_head": "a620e863b238c86f7ede9759a98e641268ae0d82",
+      "bootstrap_head": "408236829afbc4923d6ce8a5f65f00a9fc9b90ad",
+      "changed_paths": [
+        ".planning/p7-audit-execution-review/IMPLEMENTATION_CARD.md",
+        ".planning/p7-audit-execution-review/progress.md"
+      ],
+      "normal_commit_exit_code": 0,
+      "log_path": "bootstrap\\p7-audit-startup-fix-commit.log",
+      "source_changes": []
+    }
+  ]
+}

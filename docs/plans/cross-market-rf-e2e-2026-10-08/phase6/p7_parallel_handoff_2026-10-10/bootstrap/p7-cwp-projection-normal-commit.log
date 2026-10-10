@@ -1,0 +1,15 @@
+runtime dependency declaration parity.............................(no files to check)Skipped
+ruff check (WU-1.2, mirrors CI)...................................(no files to check)Skipped
+mypy contract modules (FC-1204-c, mirrors CI).....................(no files to check)Skipped
+config doctor (WU-7.1, mirrors CI)................................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test)...(no files to check)Skipped
+[codex/p7-cwp-projection-identity d76fe9a6] docs: prepare P7-CWP-PROJECTION isolated harness plan
+ 8 files changed, 462 insertions(+)
+ create mode 100644 .planning/p7-cwp-projection/HANDOFF_FORMAT.md
+ create mode 100644 .planning/p7-cwp-projection/IMPLEMENTATION_CARD.md
+ create mode 100644 .planning/p7-cwp-projection/INTERFACES.md
+ create mode 100644 .planning/p7-cwp-projection/findings.md
+ create mode 100644 .planning/p7-cwp-projection/handoff.example.json
+ create mode 100644 .planning/p7-cwp-projection/handoff.schema.json
+ create mode 100644 .planning/p7-cwp-projection/progress.md
+ create mode 100644 .planning/p7-cwp-projection/task_plan.md

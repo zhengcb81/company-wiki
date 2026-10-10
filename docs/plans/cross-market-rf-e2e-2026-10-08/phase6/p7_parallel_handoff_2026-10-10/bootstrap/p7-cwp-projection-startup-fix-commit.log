@@ -1,0 +1,7 @@
+runtime dependency declaration parity.............................(no files to check)Skipped
+ruff check (WU-1.2, mirrors CI)...................................(no files to check)Skipped
+mypy contract modules (FC-1204-c, mirrors CI).....................(no files to check)Skipped
+config doctor (WU-7.1, mirrors CI)................................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test)...(no files to check)Skipped
+[codex/p7-cwp-projection-identity fd250f71] docs: pin P7-CWP-PROJECTION startup to PowerShell 7
+ 2 files changed, 5 insertions(+), 1 deletion(-)

@@ -1,0 +1,41 @@
+{
+  "schema_version": "p7-lane-handoff/1",
+  "card_id": "P7-CWP-PROJECTION",
+  "status": "example_only",
+  "base_head": "f8956d299b52849a4beb06e4071816ec72ddc6a3",
+  "delivery_head": "0000000000000000000000000000000000000000",
+  "branch": "codex/p7-example",
+  "changed_paths": [
+    "SYNTHETIC-EXAMPLE-NOT-A-DELIVERY"
+  ],
+  "tests": [
+    {
+      "kind": "green",
+      "argv": [
+        "EXAMPLE_ONLY"
+      ],
+      "expected_exit_code": 0,
+      "exit_code": 0,
+      "log_path": "EXAMPLE_ONLY_NO_REAL_TEST.log"
+    }
+  ],
+  "compatibility": [
+    "EXAMPLE_ONLY; original producer 1.0.1 default retained"
+  ],
+  "cleanup_receipt": "EXAMPLE_ONLY.json",
+  "external_provider_calls": 0,
+  "external_model_calls": 0,
+  "new_cost_usd": 0,
+  "ci": {
+    "state": "not_triggered",
+    "note": "SYNTHETIC EXAMPLE, no release proof"
+  },
+  "install_candidates": [],
+  "main_integration": [
+    "EXAMPLE_ONLY; actual handoff lists concrete remaining integration"
+  ],
+  "remaining": [
+    "This is a formatting example, not implementation"
+  ],
+  "example_only": true
+}

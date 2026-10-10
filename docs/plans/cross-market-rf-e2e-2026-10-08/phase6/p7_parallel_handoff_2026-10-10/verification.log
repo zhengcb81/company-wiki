@@ -1,0 +1,55 @@
+PASS P7-CWP-PROJECTION branch
+PASS P7-CWP-PROJECTION bootstrap HEAD
+PASS P7-CWP-PROJECTION base ancestor
+PASS P7-CWP-PROJECTION clean
+PASS P7-CWP-PROJECTION source untouched
+PASS P7-CWP-PROJECTION equal SHA IMPLEMENTATION_CARD.md
+PASS P7-CWP-PROJECTION equal SHA INTERFACES.md
+PASS P7-CWP-PROJECTION equal SHA HANDOFF_FORMAT.md
+PASS P7-CWP-PROJECTION equal SHA handoff.schema.json
+PASS P7-CWP-PROJECTION equal SHA handoff.example.json
+PASS P7-CWP-PROJECTION actual PWF selected
+PASS P7-CWP-PROJECTION no inter-card API wait
+PASS P7-RF branch
+PASS P7-RF bootstrap HEAD
+PASS P7-RF base ancestor
+PASS P7-RF clean
+PASS P7-RF source untouched
+PASS P7-RF equal SHA IMPLEMENTATION_CARD.md
+PASS P7-RF equal SHA INTERFACES.md
+PASS P7-RF equal SHA HANDOFF_FORMAT.md
+PASS P7-RF equal SHA handoff.schema.json
+PASS P7-RF equal SHA handoff.example.json
+PASS P7-RF actual PWF selected
+PASS P7-RF no inter-card API wait
+PASS P7-AUDIT branch
+PASS P7-AUDIT bootstrap HEAD
+PASS P7-AUDIT base ancestor
+PASS P7-AUDIT clean
+PASS P7-AUDIT source untouched
+PASS P7-AUDIT equal SHA IMPLEMENTATION_CARD.md
+PASS P7-AUDIT equal SHA INTERFACES.md
+PASS P7-AUDIT equal SHA HANDOFF_FORMAT.md
+PASS P7-AUDIT equal SHA handoff.schema.json
+PASS P7-AUDIT equal SHA handoff.example.json
+PASS P7-AUDIT actual PWF selected
+PASS P7-AUDIT no inter-card API wait
+PASS three physical directories distinct
+PASS MAIN physical separation
+PASS CWP write disjoint MAIN src/company_wiki/source_catalog/official_json_projection.py
+PASS CWP write disjoint MAIN src/company_wiki/source_catalog/official_json_snapshot.py
+PASS CWP write disjoint MAIN tests/unit/test_p7_official_projection_identity.py
+PASS CWP write disjoint MAIN tests/integration/test_p7_official_projection_compatibility.py
+PASS CWP write disjoint MAIN tests/fixtures/p7_official_projection/**
+PASS CWP write disjoint MAIN .planning/p7-cwp-projection/**
+PASS schema example only
+PASS negative format card
+PASS negative format hash
+PASS negative format missing tests
+PASS negative format empty tests
+PASS negative format negative calls
+PASS negative format exit type
+PASS negative format duplicate paths
+PASS temporary artifact owned
+PASS package test TEMP restored
+Package/startup only; source implementation/quality not claimed.

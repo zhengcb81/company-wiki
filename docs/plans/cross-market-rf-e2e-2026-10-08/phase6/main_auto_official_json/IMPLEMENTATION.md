@@ -82,3 +82,7 @@ Catalog narrative_artifact_versions 的 document_id/source_id 为真实 document
 三项集中必测：①同页 A/B 独立 subject/DAG/artifact，原件一份，交叉读取拒绝；②两页同 pointer 仍各自母 SHA，第二页字节/状态/绑定变化、问题冒充答案均拒绝，partial/cutoff保持真实；③相同语义精确零调用复用，变任何绑定不能错复用，ACK前/激活前恢复一次结算/发布且旧lease不能完成新generation。首次验证不是永久许可证：publish/后来 public read 在所属 source 边界核当前父页集合，handler 不各自重复解析。仍用现有 AUTO DB，不新增任务账本。
 
 只读审查：/root/m3_usage_acceptance 与 /root/m3_joint_acceptance_review；均未写源码/配置/原件/数据库/安装，provider/model/费用0。这是下一节点接口风险与TDD要求，不是本节点实现完成。
+
+## P7外包边界（2026-10-10）
+
+[三卡总入口](../p7_parallel_handoff_2026-10-10/README.md)已准备，可立即独立启动。MAIN禁止并行修改 source_catalog/official_json_projection.py/new official_json_snapshot.py；该确定性/深快照/旧回放叶责任归P7-CWP-PROJECTION。MAIN先按原1.0.1默认API接线，最终选opt-in1.0.2。RF校准/audit技能也独占外包，MAIN仅最后跨仓集成/版本安装。MAIN的AUTO统一subject/view/store/generation/transport/CLI和责任tests不交叉。无需等待三卡才能写MAIN RED；外包完成后在一个大节点验收接线。

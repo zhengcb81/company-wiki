@@ -1,0 +1,98 @@
+{
+  "schema_version": "p7-workspaces/1",
+  "created_at_utc": "2026-10-10T20:58:00.624904+00:00",
+  "workspaces": [
+    {
+      "card_id": "P7-CWP-PROJECTION",
+      "repository": "company-wiki",
+      "canonical_repository": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "workspace": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\cwp",
+      "branch": "codex/p7-cwp-projection-identity",
+      "base_head": "f8956d299b52849a4beb06e4071816ec72ddc6a3",
+      "status_after_checkout": "clean",
+      "mode": "new_worktree",
+      "copied_raw_lake": false
+    },
+    {
+      "card_id": "P7-RF",
+      "repository": "revenue-forecast",
+      "canonical_repository": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+      "workspace": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast",
+      "branch": "codex/p7-rf-calibration-binding",
+      "base_head": "6883bf00548abb9891eab6762aeaa89e3898b202",
+      "status_after_checkout": "clean",
+      "mode": "reuse_owned_clean_integration_worktree",
+      "avoided_extra_tracked_copy_bytes": 870118781,
+      "copied_raw_lake": false
+    },
+    {
+      "card_id": "P7-AUDIT",
+      "repository": "revenue-forecast-audit",
+      "canonical_repository": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit",
+      "workspace": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit",
+      "branch": "codex/p7-audit-execution-review",
+      "base_head": "78c2b1089200937a9371548f3f8a212c501fdfcd",
+      "status_after_checkout": "clean",
+      "mode": "new_worktree",
+      "remote_configured": false,
+      "copied_raw_lake": false
+    }
+  ],
+  "creation_only_no_implementation_started": true,
+  "preflight_error_preserved": "new RF worktree refused: tracked870118781 bytes, of which .planning844850021; reused existing clean tree instead",
+  "external_provider_calls": 0,
+  "external_model_calls": 0,
+  "fees": 0,
+  "bootstrap": [
+    {
+      "card_id": "P7-CWP-PROJECTION",
+      "base_head": "f8956d299b52849a4beb06e4071816ec72ddc6a3",
+      "bootstrap_head": "d76fe9a6c9b20580792d6c8c16668c02195a25ab",
+      "branch": "codex/p7-cwp-projection-identity",
+      "workspace": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\cwp",
+      "normal_commit_exit_code": 0,
+      "elapsed_seconds": 1.512,
+      "log_path": "bootstrap\\p7-cwp-projection-normal-commit.log",
+      "source_changes": [],
+      "status": "clean"
+    },
+    {
+      "card_id": "P7-RF",
+      "base_head": "6883bf00548abb9891eab6762aeaa89e3898b202",
+      "bootstrap_head": "65b5165a054933acc494923dcde818c29552c1d5",
+      "branch": "codex/p7-rf-calibration-binding",
+      "workspace": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast",
+      "normal_commit_exit_code": 0,
+      "elapsed_seconds": 3.425,
+      "log_path": "bootstrap\\p7-rf-normal-commit.log",
+      "source_changes": [],
+      "status": "clean"
+    },
+    {
+      "card_id": "P7-AUDIT",
+      "base_head": "78c2b1089200937a9371548f3f8a212c501fdfcd",
+      "bootstrap_head": "a620e863b238c86f7ede9759a98e641268ae0d82",
+      "branch": "codex/p7-audit-execution-review",
+      "workspace": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit",
+      "normal_commit_exit_code": 0,
+      "elapsed_seconds": 0.333,
+      "log_path": "bootstrap\\p7-audit-normal-commit.log",
+      "source_changes": [],
+      "status": "clean"
+    }
+  ],
+  "current_bootstrap": [
+    {
+      "card_id": "P7-CWP-PROJECTION",
+      "bootstrap_head": "fd250f719ca6234eec50c49d89991025f9610c81"
+    },
+    {
+      "card_id": "P7-RF",
+      "bootstrap_head": "78d7d3d49ba10842b1b542914d195e9f7b1793a4"
+    },
+    {
+      "card_id": "P7-AUDIT",
+      "bootstrap_head": "408236829afbc4923d6ce8a5f65f00a9fc9b90ad"
+    }
+  ]
+}

@@ -1,0 +1,200 @@
+{
+  "schema_version": "p7-lane-manifest/1",
+  "observed_at_utc": "2026-10-10T21:08:50.751911+00:00",
+  "cards": [
+    {
+      "card_id": "P7-CWP-PROJECTION",
+      "repository": "company-wiki",
+      "canonical_repository": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "workspace": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\cwp",
+      "branch": "codex/p7-cwp-projection-identity",
+      "base_head": "f8956d299b52849a4beb06e4071816ec72ddc6a3",
+      "status_after_checkout": "clean",
+      "mode": "new_worktree",
+      "copied_raw_lake": false,
+      "plan_id": "p7-cwp-projection",
+      "card": "p7_cwp_projection_identity.md",
+      "allowed_paths": [
+        "src/company_wiki/source_catalog/official_json_projection.py",
+        "src/company_wiki/source_catalog/official_json_snapshot.py",
+        "tests/unit/test_p7_official_projection_identity.py",
+        "tests/integration/test_p7_official_projection_compatibility.py",
+        "tests/fixtures/p7_official_projection/**",
+        ".planning/p7-cwp-projection/**"
+      ],
+      "forbidden_prefixes": [
+        "src/company_wiki/automation/",
+        "config/",
+        "companies/"
+      ],
+      "api_dependencies": [],
+      "pwf_dir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\cwp\\.planning\\p7-cwp-projection",
+      "source_implementation_status": "not_started",
+      "state": "ready_for_harness",
+      "bootstrap_head": "fd250f719ca6234eec50c49d89991025f9610c81",
+      "bootstrap_files": [
+        ".planning/p7-cwp-projection/HANDOFF_FORMAT.md",
+        ".planning/p7-cwp-projection/IMPLEMENTATION_CARD.md",
+        ".planning/p7-cwp-projection/INTERFACES.md",
+        ".planning/p7-cwp-projection/findings.md",
+        ".planning/p7-cwp-projection/handoff.example.json",
+        ".planning/p7-cwp-projection/handoff.schema.json",
+        ".planning/p7-cwp-projection/progress.md",
+        ".planning/p7-cwp-projection/task_plan.md"
+      ],
+      "bootstrap_file_sha256": {
+        "findings.md": "042c02e77d053d1461a055152d9fc5b7e11d7c872bc04868adc009849cead179",
+        "handoff.example.json": "52ad0da06db58c42c5b0fbd29259e1c9410aadb5db1153373aa0cc80e090e83f",
+        "handoff.schema.json": "b833c89a7728bbc66031d78cf1efe6233fbf229c853f6f2a32ccc4b221d159ac",
+        "HANDOFF_FORMAT.md": "8dd8cfc83e11cb4ad9379b5c0385fca6d9183b74e9be3976e28d13d3ea1eabda",
+        "IMPLEMENTATION_CARD.md": "c829c35ab5256a7b4f72e15bedc383c3ed64c12ab9bdb46605d44c1c4e3248c8",
+        "INTERFACES.md": "6f2debbfd3981e43936460b20c09d732266734ae846b23ae5a3af6d0e7eef1be",
+        "progress.md": "ee004667134945432b41bb281b63efe10151f2ef2bfb9dcd47203f7f73f6b763",
+        "task_plan.md": "07fe70d0ab17b3672d02c71efb1ba93ffec8c1abc171b46aae9ffd5767c1f413"
+      },
+      "status_after_bootstrap": "clean",
+      "initial_bootstrap_head": "d76fe9a6c9b20580792d6c8c16668c02195a25ab"
+    },
+    {
+      "card_id": "P7-RF",
+      "repository": "revenue-forecast",
+      "canonical_repository": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+      "workspace": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast",
+      "branch": "codex/p7-rf-calibration-binding",
+      "base_head": "6883bf00548abb9891eab6762aeaa89e3898b202",
+      "status_after_checkout": "clean",
+      "mode": "reuse_owned_clean_integration_worktree",
+      "avoided_extra_tracked_copy_bytes": 870118781,
+      "copied_raw_lake": false,
+      "plan_id": "p7-rf-scoped-calibration",
+      "card": "p7_rf_calibration_binding.md",
+      "allowed_paths": [
+        "scripts/research/evidence_roles.py",
+        "scripts/research/native_dependencies.py",
+        "scripts/research/calibration_binding.py",
+        "scripts/research_support_diagnostics.py",
+        "scripts/contracts/constants.py",
+        "CHANGELOG.md",
+        "SKILL.md",
+        "references/evidence-role-calibration.md",
+        "references/research-support-diagnostics.md",
+        "tests/test_research_evidence_roles.py",
+        "tests/test_scoped_calibration_support.py",
+        "tests/test_research_support_diagnostics.py",
+        "tests/fixtures/scoped_calibration_support/**",
+        ".planning/p7-rf-scoped-calibration/**"
+      ],
+      "forbidden_prefixes": [
+        "assurance/",
+        "output/",
+        "artifacts/",
+        "config/",
+        "scripts/contracts/period_flow.py",
+        "scripts/contracts/annual_consumption.py"
+      ],
+      "api_dependencies": [],
+      "pwf_dir": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\.planning\\p7-rf-scoped-calibration",
+      "source_implementation_status": "not_started",
+      "state": "ready_for_harness",
+      "bootstrap_head": "78d7d3d49ba10842b1b542914d195e9f7b1793a4",
+      "bootstrap_files": [
+        ".planning/p7-rf-scoped-calibration/HANDOFF_FORMAT.md",
+        ".planning/p7-rf-scoped-calibration/IMPLEMENTATION_CARD.md",
+        ".planning/p7-rf-scoped-calibration/INTERFACES.md",
+        ".planning/p7-rf-scoped-calibration/findings.md",
+        ".planning/p7-rf-scoped-calibration/handoff.example.json",
+        ".planning/p7-rf-scoped-calibration/handoff.schema.json",
+        ".planning/p7-rf-scoped-calibration/progress.md",
+        ".planning/p7-rf-scoped-calibration/task_plan.md"
+      ],
+      "bootstrap_file_sha256": {
+        "findings.md": "4c25affce6f832ca3e9da168c6869d0cd36eeaa1f0c44fa71d809b8f2dda5c51",
+        "handoff.example.json": "52ad0da06db58c42c5b0fbd29259e1c9410aadb5db1153373aa0cc80e090e83f",
+        "handoff.schema.json": "b833c89a7728bbc66031d78cf1efe6233fbf229c853f6f2a32ccc4b221d159ac",
+        "HANDOFF_FORMAT.md": "8dd8cfc83e11cb4ad9379b5c0385fca6d9183b74e9be3976e28d13d3ea1eabda",
+        "IMPLEMENTATION_CARD.md": "f1221bc03c0da0412bb238a4d10af84d39f0001fd9b191812788bdb88f32da9e",
+        "INTERFACES.md": "6f2debbfd3981e43936460b20c09d732266734ae846b23ae5a3af6d0e7eef1be",
+        "progress.md": "85683aa325c0f739e03efbc17a4c1f02fc74486d0f8421d54c1c5b355305c755",
+        "task_plan.md": "1826aebcc14b0d8f3261e0bb7db6e049667e77cffbb3dbc0bd481701278a13b9"
+      },
+      "status_after_bootstrap": "clean",
+      "initial_bootstrap_head": "65b5165a054933acc494923dcde818c29552c1d5"
+    },
+    {
+      "card_id": "P7-AUDIT",
+      "repository": "revenue-forecast-audit",
+      "canonical_repository": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit",
+      "workspace": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit",
+      "branch": "codex/p7-audit-execution-review",
+      "base_head": "78c2b1089200937a9371548f3f8a212c501fdfcd",
+      "status_after_checkout": "clean",
+      "mode": "new_worktree",
+      "remote_configured": false,
+      "copied_raw_lake": false,
+      "plan_id": "p7-audit-execution-review",
+      "card": "p7_audit_execution_review.md",
+      "allowed_paths": [
+        "skills/revenue-forecast-audit/scripts/**",
+        "skills/revenue-forecast-audit/SKILL.md",
+        "skills/revenue-forecast-audit/references/**",
+        "tests/test_scope_request_binding.py",
+        "tests/test_audit_run.py",
+        "tests/test_numeric_audit.py",
+        "tests/test_precall_input_history.py",
+        "tests/test_document_status_join.py",
+        "tests/test_authoring_provenance.py",
+        "tests/test_review_protocol.py",
+        "tests/fixtures/p7_audit_execution/**",
+        ".planning/p7-audit-execution-review/**"
+      ],
+      "forbidden_prefixes": [
+        "runs/",
+        "docs/plans/skill-build-2026-10-08/",
+        "docs/plans/company-pool-cycle-2026-10-09/"
+      ],
+      "api_dependencies": [],
+      "pwf_dir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\.planning\\p7-audit-execution-review",
+      "source_implementation_status": "not_started",
+      "state": "ready_for_harness",
+      "bootstrap_head": "408236829afbc4923d6ce8a5f65f00a9fc9b90ad",
+      "bootstrap_files": [
+        ".planning/p7-audit-execution-review/HANDOFF_FORMAT.md",
+        ".planning/p7-audit-execution-review/IMPLEMENTATION_CARD.md",
+        ".planning/p7-audit-execution-review/INTERFACES.md",
+        ".planning/p7-audit-execution-review/findings.md",
+        ".planning/p7-audit-execution-review/handoff.example.json",
+        ".planning/p7-audit-execution-review/handoff.schema.json",
+        ".planning/p7-audit-execution-review/progress.md",
+        ".planning/p7-audit-execution-review/task_plan.md"
+      ],
+      "bootstrap_file_sha256": {
+        "findings.md": "c149c0a8d05b586e747ed7e2dae517fb260e34722c539478d8a18784e7b7deff",
+        "handoff.example.json": "52ad0da06db58c42c5b0fbd29259e1c9410aadb5db1153373aa0cc80e090e83f",
+        "handoff.schema.json": "b833c89a7728bbc66031d78cf1efe6233fbf229c853f6f2a32ccc4b221d159ac",
+        "HANDOFF_FORMAT.md": "8dd8cfc83e11cb4ad9379b5c0385fca6d9183b74e9be3976e28d13d3ea1eabda",
+        "IMPLEMENTATION_CARD.md": "34260a3136a4d22045f5e22d620f90f4e825a03e034071d164dceb2e56e77ba1",
+        "INTERFACES.md": "6f2debbfd3981e43936460b20c09d732266734ae846b23ae5a3af6d0e7eef1be",
+        "progress.md": "80eed6f13cc541f9f1b4fa04f02be4cc352e2108b773f3e938f8cf5fb04c0335",
+        "task_plan.md": "9ee5679ff68ebbefb8c0fd6313c5cc27452923262b27a728b4b58e3e61a16106"
+      },
+      "status_after_bootstrap": "clean",
+      "initial_bootstrap_head": "a620e863b238c86f7ede9759a98e641268ae0d82"
+    }
+  ],
+  "MAIN": {
+    "workspace": "C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/company-wiki",
+    "branch": "codex/main-auto-official-json-20261010",
+    "exclusive_source_prefixes": [
+      "src/company_wiki/automation/"
+    ],
+    "exclusive_paths": [
+      "src/company_wiki/source_catalog/cli.py",
+      "src/company_wiki/source_catalog/official_source_cli.py"
+    ],
+    "next_plan": "../main_auto_official_json/task_plan.md"
+  },
+  "only_three_cards": true,
+  "external_provider_calls": 0,
+  "external_model_calls": 0,
+  "new_cost_usd": 0
+}

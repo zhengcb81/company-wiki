@@ -27,3 +27,7 @@ MAIN 冻结 IMPLEMENTATION.md 中的统一 subject 身份和最小版本集合�
 - 下载/模型意图沿已有授权与配置执行；不添加人工许可、签收或 canary。
 - 测试仅 owned TEMP，结束恢复原样；不做完整资料湖恢复演练。
 - 不重复嵌入整页 JSON 或 projection records 到 request/event/binding；空间增长只来自小描述、精选片段和必要回执。
+
+## P7外包边界（2026-10-10）
+
+[三卡总入口](../p7_parallel_handoff_2026-10-10/README.md)已准备，可立即独立启动。MAIN禁止并行修改 source_catalog/official_json_projection.py/new official_json_snapshot.py；该确定性/深快照/旧回放叶责任归P7-CWP-PROJECTION。MAIN先按原1.0.1默认API接线，最终选opt-in1.0.2。RF校准/audit技能也独占外包，MAIN仅最后跨仓集成/版本安装。MAIN的AUTO统一subject/view/store/generation/transport/CLI和责任tests不交叉。无需等待三卡才能写MAIN RED；外包完成后在一个大节点验收接线。

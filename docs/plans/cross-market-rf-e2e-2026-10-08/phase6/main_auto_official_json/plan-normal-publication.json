@@ -1,0 +1,41 @@
+{
+  "started_at_utc": "2026-10-10T20:47:48.961995+00:00",
+  "normal_hooks": true,
+  "staged_paths": [
+    "docs/plans/cross-market-rf-e2e-2026-10-08/findings.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/ACCEPTANCE.json",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/ACCEPTANCE.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/findings.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/probe-supplement-exact-ci-final.json",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/probe-supplement-exact-remote-ci.json",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/probe-supplement-normal-commit.json",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/probe-supplement-normal-commit.log",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/probe-supplement-normal-push.json",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/probe-supplement-normal-push.log",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/probe-supplement-protected-check.json",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/progress.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/task_plan.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_implementation_2026-10-10/coordination.json",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/IMPLEMENTATION.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/findings.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/progress.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/task_plan.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/progress.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/task_plan.md"
+  ],
+  "steps": [
+    {
+      "step": "commit",
+      "exit_code": 0,
+      "elapsed_seconds": 1.246,
+      "log": "plan-normal-commit.log"
+    },
+    {
+      "step": "push",
+      "exit_code": 0,
+      "elapsed_seconds": 24.73,
+      "log": "plan-normal-push.log"
+    }
+  ],
+  "head": "f8956d299b52849a4beb06e4071816ec72ddc6a3"
+}

@@ -1,0 +1,284 @@
+{
+  "schema_version": "p7-package-verification/1",
+  "observed_at_utc": "2026-10-10T21:11:35.834438+00:00",
+  "scope": "construction_package_only_not_source_implementation",
+  "checks": [
+    {
+      "check": "P7-CWP-PROJECTION branch",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "P7-CWP-PROJECTION bootstrap HEAD",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "P7-CWP-PROJECTION base ancestor",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "P7-CWP-PROJECTION clean",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "P7-CWP-PROJECTION source untouched",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "P7-CWP-PROJECTION equal SHA IMPLEMENTATION_CARD.md",
+      "status": "passed",
+      "detail": "c829c35ab5256a7b4f72e15bedc383c3ed64c12ab9bdb46605d44c1c4e3248c8"
+    },
+    {
+      "check": "P7-CWP-PROJECTION equal SHA INTERFACES.md",
+      "status": "passed",
+      "detail": "6f2debbfd3981e43936460b20c09d732266734ae846b23ae5a3af6d0e7eef1be"
+    },
+    {
+      "check": "P7-CWP-PROJECTION equal SHA HANDOFF_FORMAT.md",
+      "status": "passed",
+      "detail": "8dd8cfc83e11cb4ad9379b5c0385fca6d9183b74e9be3976e28d13d3ea1eabda"
+    },
+    {
+      "check": "P7-CWP-PROJECTION equal SHA handoff.schema.json",
+      "status": "passed",
+      "detail": "b833c89a7728bbc66031d78cf1efe6233fbf229c853f6f2a32ccc4b221d159ac"
+    },
+    {
+      "check": "P7-CWP-PROJECTION equal SHA handoff.example.json",
+      "status": "passed",
+      "detail": "52ad0da06db58c42c5b0fbd29259e1c9410aadb5db1153373aa0cc80e090e83f"
+    },
+    {
+      "check": "P7-CWP-PROJECTION actual PWF selected",
+      "status": "passed",
+      "detail": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\cwp\\.planning\\p7-cwp-projection"
+    },
+    {
+      "check": "P7-CWP-PROJECTION no inter-card API wait",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "P7-RF branch",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "P7-RF bootstrap HEAD",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "P7-RF base ancestor",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "P7-RF clean",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "P7-RF source untouched",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "P7-RF equal SHA IMPLEMENTATION_CARD.md",
+      "status": "passed",
+      "detail": "f1221bc03c0da0412bb238a4d10af84d39f0001fd9b191812788bdb88f32da9e"
+    },
+    {
+      "check": "P7-RF equal SHA INTERFACES.md",
+      "status": "passed",
+      "detail": "6f2debbfd3981e43936460b20c09d732266734ae846b23ae5a3af6d0e7eef1be"
+    },
+    {
+      "check": "P7-RF equal SHA HANDOFF_FORMAT.md",
+      "status": "passed",
+      "detail": "8dd8cfc83e11cb4ad9379b5c0385fca6d9183b74e9be3976e28d13d3ea1eabda"
+    },
+    {
+      "check": "P7-RF equal SHA handoff.schema.json",
+      "status": "passed",
+      "detail": "b833c89a7728bbc66031d78cf1efe6233fbf229c853f6f2a32ccc4b221d159ac"
+    },
+    {
+      "check": "P7-RF equal SHA handoff.example.json",
+      "status": "passed",
+      "detail": "52ad0da06db58c42c5b0fbd29259e1c9410aadb5db1153373aa0cc80e090e83f"
+    },
+    {
+      "check": "P7-RF actual PWF selected",
+      "status": "passed",
+      "detail": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\.planning\\p7-rf-scoped-calibration"
+    },
+    {
+      "check": "P7-RF no inter-card API wait",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "P7-AUDIT branch",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "P7-AUDIT bootstrap HEAD",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "P7-AUDIT base ancestor",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "P7-AUDIT clean",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "P7-AUDIT source untouched",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "P7-AUDIT equal SHA IMPLEMENTATION_CARD.md",
+      "status": "passed",
+      "detail": "34260a3136a4d22045f5e22d620f90f4e825a03e034071d164dceb2e56e77ba1"
+    },
+    {
+      "check": "P7-AUDIT equal SHA INTERFACES.md",
+      "status": "passed",
+      "detail": "6f2debbfd3981e43936460b20c09d732266734ae846b23ae5a3af6d0e7eef1be"
+    },
+    {
+      "check": "P7-AUDIT equal SHA HANDOFF_FORMAT.md",
+      "status": "passed",
+      "detail": "8dd8cfc83e11cb4ad9379b5c0385fca6d9183b74e9be3976e28d13d3ea1eabda"
+    },
+    {
+      "check": "P7-AUDIT equal SHA handoff.schema.json",
+      "status": "passed",
+      "detail": "b833c89a7728bbc66031d78cf1efe6233fbf229c853f6f2a32ccc4b221d159ac"
+    },
+    {
+      "check": "P7-AUDIT equal SHA handoff.example.json",
+      "status": "passed",
+      "detail": "52ad0da06db58c42c5b0fbd29259e1c9410aadb5db1153373aa0cc80e090e83f"
+    },
+    {
+      "check": "P7-AUDIT actual PWF selected",
+      "status": "passed",
+      "detail": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\.planning\\p7-audit-execution-review"
+    },
+    {
+      "check": "P7-AUDIT no inter-card API wait",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "three physical directories distinct",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "MAIN physical separation",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "CWP write disjoint MAIN src/company_wiki/source_catalog/official_json_projection.py",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "CWP write disjoint MAIN src/company_wiki/source_catalog/official_json_snapshot.py",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "CWP write disjoint MAIN tests/unit/test_p7_official_projection_identity.py",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "CWP write disjoint MAIN tests/integration/test_p7_official_projection_compatibility.py",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "CWP write disjoint MAIN tests/fixtures/p7_official_projection/**",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "CWP write disjoint MAIN .planning/p7-cwp-projection/**",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "schema example only",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "negative format card",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "negative format hash",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "negative format missing tests",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "negative format empty tests",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "negative format negative calls",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "negative format exit type",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "negative format duplicate paths",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "temporary artifact owned",
+      "status": "passed",
+      "detail": null
+    },
+    {
+      "check": "package test TEMP restored",
+      "status": "passed",
+      "detail": null
+    }
+  ],
+  "passed": 54,
+  "three_lanes_ready": true,
+  "provider_calls": 0,
+  "model_calls": 0,
+  "new_cost_usd": 0,
+  "source_implementation_started": false,
+  "initial_failed_attempt": "PowerShell5.1 resolver stdout empty; startup_fix.json records actual root and PowerShell7 remedy"
+}

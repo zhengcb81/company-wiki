@@ -1,5 +1,13 @@
 # 三市场真实收入预测端到端审计
 
+## P7三个独立施工包已准备（2026-10-10T21:12:35.525126+00:00）
+
+唯一分包入口：[P7总卡](phase6/p7_parallel_handoff_2026-10-10/README.md)。只有三卡：CWP JSON投影确定性/快照/旧回放、RF经营校准绑定/可选支持诊断、audit请求与逐文档记录/四路风险协议；不同worktree、源码写集与MAIN AUTO不重叠，可立即并行，不互等。独立PWF与共同格式副本均备齐、正常bootstrap提交；三源码未实施。独立包审查和54项启动/格式/隔离PASS，仅证明施工输入完备，不表示公司研究或产品完成。
+
+RF复用干净旧集成树，避免870MB额外复制；其中旧.planning约845MB另待盘点，不在施工包删原件/冻结证据。PWF恢复明确PowerShell7，修正5.1返回空问题；原件/config/Dayu/邻仓ownerWIP不写，项目provider/model/新增费用0。此前CWP f8956d29精确CI38085172861 success。
+
+**当前 Next Step：** 用户可分发三卡，MAIN继续[统一AUTO官方JSON接线](phase6/main_auto_official_json/task_plan.md)的独占TDD。MAIN不写三卡源码，最后归总、并线、定点安装和跨仓大节点联调。原三家真实修后四审、新三家、NVDA/池loop和条件八家仍待，原goal继续active，累计USD20/2M含旧unknown不重置。本轮中央文档正常发布的真实HEAD/结果由P7的publication.json/exact-ci.json记录，不用历史CI代替新HEAD。
+
 ## 三卡收尾已完成；进入 MAIN 共同接线（2026-10-10T20:47:25.734282+00:00）
 
 M3-JSON/W02、M3-USAGE/W06、M3-FLOW/W07 已验收、合主线、正常提交推送并定点安装。CWP最新验收补充 98e02174 的精确CI38084803229 success；FFe1e3ad86/CI38083419792、RF6883bf00/CI38083371392 success，三仓remote/local相等。CWP正常补充push2744PASS/145.04秒，总153.41秒；未跳过hooks。10类产品共因和1类测试证据保留共因已修，原失败与旧封存记录保留。155保护SHA无变化，本轮provider/model/新增费用0；邻仓ownerWIP与密钥未提交。
