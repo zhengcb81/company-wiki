@@ -28,6 +28,10 @@ def project_operation_result(
     diagnostic = failure_from_result(payload)
     if diagnostic is not None:
         result["acquisition_failure"] = diagnostic
+    from .acquisition_observation import observation_from_result
+    observation = observation_from_result(payload)
+    if observation is not None:
+        result["acquisition_observation"] = observation
     return result
 
 

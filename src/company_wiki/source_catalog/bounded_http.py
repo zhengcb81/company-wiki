@@ -89,6 +89,9 @@ def response_observation(response: httpx.Response) -> dict[str, Any]:
 def _headers(request: httpx.Request, response: httpx.Response, budget: AcquisitionBudget) -> str:
     observed = response_observation(response)
     response.extensions["cwp_http_observation"] = observed
+    # One observed request/response exchange; counting never implies a
+    # complete usage receipt (M3-USAGE).
+    budget.record_http_exchange(observed)
     try:
         _deadline(budget)
         bodyless = request.method == "HEAD" or response.status_code in (204, 304)

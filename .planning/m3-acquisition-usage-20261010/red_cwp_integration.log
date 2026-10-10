@@ -1,0 +1,69 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acquisition-usage-20261010\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 9 items
+
+tests\integration\test_m3_acquisition_usage_cwp.py FFFFFFFFF             [100%]
+
+================================== FAILURES ===================================
+__ test_success_operation_observation_accumulates_two_metadata_and_gzip_body __
+tests\integration\test_m3_acquisition_usage_cwp.py:305: in test_success_operation_observation_accumulates_two_metadata_and_gzip_body
+    observation = value["acquisition_observation"]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'acquisition_observation'
+________________ test_reuse_after_import_performs_no_body_get _________________
+tests\integration\test_m3_acquisition_usage_cwp.py:342: in test_reuse_after_import_performs_no_body_get
+    observation = b["acquisition_observation"]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'acquisition_observation'
+______________________ test_second_market_same_semantics ______________________
+tests\integration\test_m3_acquisition_usage_cwp.py:355: in test_second_market_same_semantics
+    observation = value["acquisition_observation"]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'acquisition_observation'
+________ test_metadata_error_keeps_observed_usage_and_safe_projection _________
+tests\integration\test_m3_acquisition_usage_cwp.py:367: in test_metadata_error_keeps_observed_usage_and_safe_projection
+    observation = value["acquisition_observation"]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'acquisition_observation'
+______ test_mid_body_truncation_keeps_partial_wire_lower_bound_semantics ______
+tests\integration\test_m3_acquisition_usage_cwp.py:385: in test_mid_body_truncation_keeps_partial_wire_lower_bound_semantics
+    observation = value["acquisition_observation"]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'acquisition_observation'
+_________________ test_post_send_timeout_is_never_marked_free _________________
+tests\integration\test_m3_acquisition_usage_cwp.py:400: in test_post_send_timeout_is_never_marked_free
+    observation = value["acquisition_observation"]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'acquisition_observation'
+___________ test_timeout_without_receipt_keeps_fee_unknown_not_zero ___________
+tests\integration\test_m3_acquisition_usage_cwp.py:416: in test_timeout_without_receipt_keeps_fee_unknown_not_zero
+    observation = value["acquisition_observation"]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'acquisition_observation'
+______________ test_legacy_receipts_degrade_to_unknown_not_zero _______________
+tests\integration\test_m3_acquisition_usage_cwp.py:430: in test_legacy_receipts_degrade_to_unknown_not_zero
+    observation = value["acquisition_observation"]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'acquisition_observation'
+________ test_pre_launch_failure_proves_zero_exchanges_and_unknown_fee ________
+tests\integration\test_m3_acquisition_usage_cwp.py:444: in test_pre_launch_failure_proves_zero_exchanges_and_unknown_fee
+    observation = value["acquisition_observation"]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'acquisition_observation'
+=========================== short test summary info ===========================
+FAILED tests/integration/test_m3_acquisition_usage_cwp.py::test_success_operation_observation_accumulates_two_metadata_and_gzip_body
+FAILED tests/integration/test_m3_acquisition_usage_cwp.py::test_reuse_after_import_performs_no_body_get
+FAILED tests/integration/test_m3_acquisition_usage_cwp.py::test_second_market_same_semantics
+FAILED tests/integration/test_m3_acquisition_usage_cwp.py::test_metadata_error_keeps_observed_usage_and_safe_projection
+FAILED tests/integration/test_m3_acquisition_usage_cwp.py::test_mid_body_truncation_keeps_partial_wire_lower_bound_semantics
+FAILED tests/integration/test_m3_acquisition_usage_cwp.py::test_post_send_timeout_is_never_marked_free
+FAILED tests/integration/test_m3_acquisition_usage_cwp.py::test_timeout_without_receipt_keeps_fee_unknown_not_zero
+FAILED tests/integration/test_m3_acquisition_usage_cwp.py::test_legacy_receipts_degrade_to_unknown_not_zero
+FAILED tests/integration/test_m3_acquisition_usage_cwp.py::test_pre_launch_failure_proves_zero_exchanges_and_unknown_fee
+============================= 9 failed in 28.54s ==============================
