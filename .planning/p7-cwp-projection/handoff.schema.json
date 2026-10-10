@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "P7 independent lane delivery",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "card_id",
+    "status",
+    "base_head",
+    "delivery_head",
+    "branch",
+    "changed_paths",
+    "tests",
+    "compatibility",
+    "cleanup_receipt",
+    "external_provider_calls",
+    "external_model_calls",
+    "new_cost_usd",
+    "ci",
+    "main_integration",
+    "remaining"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "p7-lane-handoff/1"
+    },
+    "card_id": {
+      "enum": [
+        "P7-CWP-PROJECTION",
+        "P7-RF",
+        "P7-AUDIT"
+      ]
+    },
+    "status": {
+      "enum": [
+        "engineering_complete",
+        "partial",
+        "example_only"
+      ]
+    },
+    "base_head": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "delivery_head": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "branch": {
+      "type": "string",
+      "pattern": "^codex/p7-"
+    },
+    "changed_paths": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "tests": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kind",
+          "argv",
+          "expected_exit_code",
+          "exit_code",
+          "log_path"
+        ],
+        "properties": {
+          "kind": {
+            "enum": [
+              "red",
+              "green",
+              "e2e",
+              "compatibility",
+              "static",
+              "independent_review"
+            ]
+          },
+          "argv": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "expected_exit_code": {
+            "type": "integer"
+          },
+          "exit_code": {
+            "type": "integer"
+          },
+          "log_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "log_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "compatibility": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "root_dispositions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "root_id",
+          "state",
+          "evidence"
+        ],
+        "properties": {
+          "root_id": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "cleanup_receipt": {
+      "type": "string",
+      "minLength": 1
+    },
+    "external_provider_calls": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "external_model_calls": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "new_cost_usd": {
+      "type": [
+        "number",
+        "string",
+        "null"
+      ]
+    },
+    "ci": {
+      "type": "object",
+      "required": [
+        "state"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "passed",
+            "failed",
+            "pending",
+            "not_triggered",
+            "no_remote"
+          ]
+        },
+        "head": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "install_candidates": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "main_integration": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "remaining": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "example_only": {
+      "type": "boolean"
+    }
+  }
+}

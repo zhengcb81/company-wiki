@@ -1,0 +1,123 @@
+{
+  "schema_version": "p7-lane-handoff/1",
+  "card_id": "P7-CWP-PROJECTION",
+  "status": "engineering_complete",
+  "base_head": "f8956d299b52849a4beb06e4071816ec72ddc6a3",
+  "delivery_head": "1c11ef0b5a838655559e91fab9a7bf38f1533d89",
+  "branch": "codex/p7-cwp-projection-identity",
+  "changed_paths": [
+    "src/company_wiki/source_catalog/official_json_projection.py",
+    "tests/unit/test_p7_official_projection_identity.py",
+    "tests/integration/test_p7_official_projection_compatibility.py",
+    ".planning/p7-cwp-projection/task_plan.md",
+    ".planning/p7-cwp-projection/findings.md",
+    ".planning/p7-cwp-projection/progress.md",
+    ".planning/p7-cwp-projection/evidence/m1_baseline_20261010",
+    ".planning/p7-cwp-projection/evidence/m1_red_20261010",
+    ".planning/p7-cwp-projection/evidence/m2_green_20261010",
+    ".planning/p7-cwp-projection/evidence/m3_e2e_20261010",
+    ".planning/p7-cwp-projection/evidence/m3_final_20261010"
+  ],
+  "tests": [
+    {
+      "kind": "green",
+      "argv": ["python", "-X", "utf8", "-B", "-m", "pytest", "tests/unit/test_m3_official_json_parser.py", "tests/contract/test_m3_official_json_contract.py", "tests/integration/test_m3_official_json_projection.py", "tests/integration/test_m3_official_json_acceptance.py", "-q"],
+      "expected_exit_code": 0,
+      "exit_code": 0,
+      "log_path": "evidence/m1_baseline_20261010/baseline_m3_tests.log",
+      "log_sha256": "39876bde7167b4bd70c9cd539845a03319e6a5213bd67c23682045186c21278a",
+      "note": "pre-change baseline: 139 passed"
+    },
+    {
+      "kind": "red",
+      "argv": ["python", "-X", "utf8", "-B", "-m", "pytest", "tests/unit/test_p7_official_projection_identity.py", "tests/integration/test_p7_official_projection_compatibility.py", "-q"],
+      "expected_exit_code": 1,
+      "exit_code": 1,
+      "log_path": "evidence/m1_red_20261010/red_new_tests.log",
+      "log_sha256": "4f9e3fba0654c1de3d97f4aa26e732e5e2fa5de9d23532f84555fbbfe2b0406e",
+      "note": "24 failed / 2 passed; failures are the target behaviour (projection_version kwarg, canonical order, freeze, producer dispatch)"
+    },
+    {
+      "kind": "green",
+      "argv": ["python", "-X", "utf8", "-B", "-m", "pytest", "tests/unit/test_p7_official_projection_identity.py", "tests/integration/test_p7_official_projection_compatibility.py", "-q"],
+      "expected_exit_code": 0,
+      "exit_code": 0,
+      "log_path": "evidence/m2_green_20261010/green_new_tests.log",
+      "log_sha256": "5a625cd83ebc542480a30fd490806b1bab6cea825d6116f1aeb73dd4a612d5a1",
+      "note": "26 passed (27 after review fix)"
+    },
+    {
+      "kind": "green",
+      "argv": ["python", "-X", "utf8", "-B", "-m", "pytest", "tests/unit/test_m3_official_json_parser.py", "tests/contract/test_m3_official_json_contract.py", "tests/integration/test_m3_official_json_projection.py", "tests/integration/test_m3_official_json_acceptance.py", "tests/unit/test_p7_official_projection_identity.py", "tests/integration/test_p7_official_projection_compatibility.py", "-q"],
+      "expected_exit_code": 0,
+      "exit_code": 0,
+      "log_path": "evidence/m3_final_20261010/green_all_post_review.log",
+      "log_sha256": "e57536c02cf835d365e94fb27371e665a7d159ebb6302a75208de0acbdfcc020",
+      "note": "concentrated GREEN: 166 passed = 27 new + 139 existing M3; no existing golden/assertion changed"
+    },
+    {
+      "kind": "static",
+      "argv": ["python", "-m", "ruff", "check", "src/company_wiki/source_catalog/official_json_projection.py", "tests/unit/test_p7_official_projection_identity.py", "tests/integration/test_p7_official_projection_compatibility.py"],
+      "expected_exit_code": 0,
+      "exit_code": 0,
+      "log_path": "evidence/m3_final_20261010/static_ruff.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "kind": "static",
+      "argv": ["python", "-m", "mypy", "src/company_wiki/source_catalog/official_json_projection.py"],
+      "expected_exit_code": 0,
+      "exit_code": 0,
+      "log_path": "evidence/m3_final_20261010/static_mypy.log",
+      "log_sha256": "8e63ae22e8213e327a5e9cbd584067681681bd8ef7f25c869877887ccdcfc4ff"
+    },
+    {
+      "kind": "e2e",
+      "argv": ["python", "-X", "utf8", "-B", ".planning/p7-cwp-projection/evidence/m3_e2e_20261010/e2e_projection_chain.py"],
+      "expected_exit_code": 0,
+      "exit_code": 0,
+      "log_path": "evidence/m3_e2e_20261010/e2e.log",
+      "log_sha256": "1100f42e3f3f8ccf75a6d083fe3a7c02e06489e766e54f2cf642ac44a7353b5a",
+      "note": "import/2 -> builders -> persist -> close/reopen -> load -> replay -> export; 2 layouts, multi-issuer, 2 pages covered, 3-page all-permutation identity; receipt evidence/m3_e2e_20261010/e2e_receipt.json (sha256 760a72a114ef70b1a72b1fa5246e21d9def87a883f5ba9be2305026ccdd6fedb); TEMP restored"
+    },
+    {
+      "kind": "independent_review",
+      "argv": ["independent-read-only-agent", "three-invariants", "order-deep-freeze-legacy-replay"],
+      "expected_exit_code": 0,
+      "exit_code": 0,
+      "log_path": "evidence/m3_final_20261010/independent_review.md",
+      "log_sha256": "95940eecba28bca9c1d2d200ac490bee670f55226386657fdcfdcfb842be7a73",
+      "note": "verdict NO_BLOCKER; two minors: FieldBinding freeze gap (fixed + contract test), _FrozenDict._data private-attribute bypass (recorded)"
+    }
+  ],
+  "compatibility": [
+    "default producer cwp_official_json/1.0.1 byte-identical: golden df3f6502845450a90d28e82d1690e3bbd42dc326002ee19595917ca50fdbcee5 pinned and cross-checked against HEAD replay; page enumeration order retained for 1.0.1",
+    "opt-in projection_version='1.0.2' on both builders; keyword-only, default unchanged; unknown version -> unsupported_projection_version",
+    "old functions/positions/args/DTOs retained: build_source_projection, build_projection_from_refs, projection_from_dict, persist_projection, load_projection, replay_projection, build_projection_export",
+    "SourceRef 2.0, source-projection-ref/1, source-projection-export/1 field semantics unchanged; record/field pointer/byte ranges unchanged; structure parser stays 1.0.1, layout stays 1.0.0",
+    "replay/export dispatch on sealed adapter.parser producer, never the current default; structure 1.0.0 -> unsupported_parser_version; unknown producer -> unsupported_producer_version; raw bytes remain readable",
+    "evidence spans carry the real producer version (1.0.1 or 1.0.2); to_dict still returns plain independent JSON dicts/lists (no MappingProxy leak)",
+    "persist validates payload/hash/id agreement (projection_payload_mismatch on mismatch, never silent re-hash); repeated persist is one small derived file per projection, raw pages stored once"
+  ],
+  "cleanup_receipt": "evidence/m3_e2e_20261010/e2e_receipt.json — own TEMP root initial 0 / final 0 files, temp_restored=true, 43 test artifacts removed with root; repo git status identical before/after (evidence/m3_e2e_20261010/repo_status_before_e2e.txt); pytest tmp_path own-managed; production config/raw/DB/sealed untouched",
+  "external_provider_calls": 0,
+  "external_model_calls": 0,
+  "new_cost_usd": 0,
+  "ci": {
+    "state": "not_triggered",
+    "head": "1c11ef0b5a838655559e91fab9a7bf38f1533d89",
+    "url": null,
+    "note": "repo workflows trigger on push to master and pull_request only; branch push does not run CI. exact delivery-HEAD CI to be verified by MAIN after merge; not claimed green"
+  },
+  "install_candidates": [],
+  "main_integration": [
+    "MAIN keeps wiring AUTO on the unchanged 1.0.1 default API; final new generation opts in explicitly with projection_version='1.0.2'",
+    "MAIN owns opt-in selection, AUTO A/B subject, generation, publish/read/recovery, targeted install and real company research — not part of this card and not claimed here",
+    "source module frozen for this card: MAIN must not concurrently edit official_json_projection.py or new official_json_snapshot.py (snapshot responsibility folded into official_json_projection.py instead of a new file)"
+  ],
+  "remaining": [
+    "exact HEAD 1c11ef0b CI not triggered on branch push; MAIN verifies after merge",
+    "_FrozenDict._data private-attribute bypass recorded (Python immutability general bypass; persist/replay refuse drifted objects)",
+    "1.0.1 legacy path intentionally stays page-order sensitive (sealed semantics; forward/reverse of the same set differ) — cannot be fixed without breaking sealed identities"
+  ]
+}
