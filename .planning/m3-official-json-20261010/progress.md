@@ -23,3 +23,10 @@
 14. 最终责任命令：tests/unit/test_m3_official_json_parser.py + tests/contract/test_m3_official_json_contract.py + tests/contract/test_m3_official_json_frozen_pages.py + tests/integration/test_m3_official_json_projection.py = 107 passed → logs/green_final_all.log。
 15. INTERFACE_CHANGE.md 写就（§1 新公开接口、§2 MAIN 接线包+重跑命令、§3 未定决策、§4 文件清单）。
 16. 隔离：所有测试夹具用 pytest tmp_path/TemporaryDirectory 自动清理；手工 RED 脚本用 TemporaryDirectory；封存 run 全程只读；生产 config 未动（baseline_shas.txt 可对）。新增 provider/model/token/cost = 0。
+
+2026-10-10 收尾：
+
+17. 提交 A=8abfad074057ff8d5c89e01aea8f87a73be5405f（运行时+测试+PWF），push exit 0（pre-push 门 2637 passed，logs/normal-push.log）。FC-1307-a host assumption guard 曾拦 4 个测试文件的宿主机绝对路径，改为 Path.home() 拼接 + M3_SEALED_RUN 环境变量覆盖后 new=0。
+18. handoff.json 按 handoff.schema.json 通过 jsonschema 校验（lane M3-JSON、package_status=complete、main_integration=pending、usage 全 0）；HANDOFF.md 按 HANDOFF_TEMPLATE 七节成文。INTERFACE_CHANGE.md 为 MAIN 接线包。
+19. 提交 B=3a5087696d29c8dbaca2232738c62a1d6e0ee9eb（HANDOFF.md/handoff.json/build_handoff.py/normal-push.log），push exit 0（pre-push 门 2637 passed）。分支 remote head=3a5087696d29c8dbaca2232738c62a1d6e0ee9eb；交接的运行时代码头=8abfad07（handoff 文件无法内含其载体提交的 SHA，此为自引用边界，以本条为准）。
+20. CI：ci.yml 只在 master push/PR 触发，codex/* 分支推送无 workflow——精确 CI 记录 not_available（触发证据+GitHub API 观测在 handoff.json repos[0].ci），MAIN 经 PR 上线时观测。
