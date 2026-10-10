@@ -1,0 +1,26 @@
+{
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "-p",
+    "pytest_timeout",
+    "-p",
+    "pytest_asyncio.plugin",
+    "-o",
+    "addopts=",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-ledger-prompt-green-pwuf_vjn\\pytest",
+    "tests/unit/test_official_json_run_prompt_admission.py",
+    "tests/unit/test_narrative_run_store.py"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 11.522053799999412,
+  "external_calls": 0
+}

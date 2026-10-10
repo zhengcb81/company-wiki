@@ -1,0 +1,146 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-official-handler-red-ymtu3co5\\pytest", "requested_basetemp_len": 72, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-215251-ca64bc6b", "effective_basetemp_len": 75}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+collected 13 items
+
+tests\integration\test_official_json_select_handler.py FFFFFFFFFFFFF     [100%]
+
+================================== FAILURES ===================================
+___ test_real_two_parent_select_public_dto_roles_locators_and_single_export ___
+tests\integration\test_official_json_select_handler.py:131: in test_real_two_parent_select_public_dto_roles_locators_and_single_export
+    result = handler(catalog)(make_context(projection))
+             ^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_select_handler.py:109: in handler
+    return NarrativeSelectHandler(reader=NoRawReader(), projection_catalog=catalog)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: NarrativeSelectHandler.__init__() got an unexpected keyword argument 'projection_catalog'
+____ test_shared_raw_two_issuers_native_language_and_translation_exclusion ____
+tests\integration\test_official_json_select_handler.py:179: in test_shared_raw_two_issuers_native_language_and_translation_exclusion
+    result = handler(catalog)(make_context(projection, language=language))
+             ^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_select_handler.py:109: in handler
+    return NarrativeSelectHandler(reader=NoRawReader(), projection_catalog=catalog)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: NarrativeSelectHandler.__init__() got an unexpected keyword argument 'projection_catalog'
+__________ test_partial_positive_selection_never_signs_full_coverage __________
+tests\integration\test_official_json_select_handler.py:195: in test_partial_positive_selection_never_signs_full_coverage
+    result = handler(catalog)(make_context(persist(catalog, [ref])))
+             ^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_select_handler.py:109: in handler
+    return NarrativeSelectHandler(reader=NoRawReader(), projection_catalog=catalog)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: NarrativeSelectHandler.__init__() got an unexpected keyword argument 'projection_catalog'
+____ test_second_real_parent_current_change_refuses_with_zero_model[bytes] ____
+tests\integration\test_official_json_select_handler.py:214: in test_second_real_parent_current_change_refuses_with_zero_model
+    result = handler(catalog)(context)
+             ^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_select_handler.py:109: in handler
+    return NarrativeSelectHandler(reader=NoRawReader(), projection_catalog=catalog)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: NarrativeSelectHandler.__init__() got an unexpected keyword argument 'projection_catalog'
+___ test_second_real_parent_current_change_refuses_with_zero_model[status] ____
+tests\integration\test_official_json_select_handler.py:221: in test_second_real_parent_current_change_refuses_with_zero_model
+    result = handler(catalog)(context)
+             ^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_select_handler.py:109: in handler
+    return NarrativeSelectHandler(reader=NoRawReader(), projection_catalog=catalog)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: NarrativeSelectHandler.__init__() got an unexpected keyword argument 'projection_catalog'
+_ test_no_native_fields_is_explicit_language_failure_not_fake_complete[True] __
+tests\integration\test_official_json_select_handler.py:235: in test_no_native_fields_is_explicit_language_failure_not_fake_complete
+    projection = persist(catalog, [ref])
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_select_handler.py:79: in persist
+    projection = build_projection_from_refs(catalog, refs=refs, layout_id=layout,
+src\company_wiki\source_catalog\official_json_projection.py:637: in build_projection_from_refs
+    return build_source_projection(
+src\company_wiki\source_catalog\official_json_projection.py:349: in build_source_projection
+    raise ProjectionError("issuer_not_on_page")
+E   company_wiki.source_catalog.official_json_projection.ProjectionError: issuer_not_on_page
+_ test_no_native_fields_is_explicit_language_failure_not_fake_complete[False] _
+tests\integration\test_official_json_select_handler.py:235: in test_no_native_fields_is_explicit_language_failure_not_fake_complete
+    projection = persist(catalog, [ref])
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_select_handler.py:79: in persist
+    projection = build_projection_from_refs(catalog, refs=refs, layout_id=layout,
+src\company_wiki\source_catalog\official_json_projection.py:637: in build_projection_from_refs
+    return build_source_projection(
+src\company_wiki\source_catalog\official_json_projection.py:349: in build_source_projection
+    raise ProjectionError("issuer_not_on_page")
+E   company_wiki.source_catalog.official_json_projection.ProjectionError: issuer_not_on_page
+_________ test_event_cannot_relabel_true_projection_context[language] _________
+tests\integration\test_official_json_select_handler.py:259: in test_event_cannot_relabel_true_projection_context
+    result = handler(catalog)(make_context(projection, language=language, subject_override=binding))
+             ^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_select_handler.py:109: in handler
+    return NarrativeSelectHandler(reader=NoRawReader(), projection_catalog=catalog)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: NarrativeSelectHandler.__init__() got an unexpected keyword argument 'projection_catalog'
+__________ test_event_cannot_relabel_true_projection_context[issuer] __________
+tests\integration\test_official_json_select_handler.py:259: in test_event_cannot_relabel_true_projection_context
+    result = handler(catalog)(make_context(projection, language=language, subject_override=binding))
+             ^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_select_handler.py:109: in handler
+    return NarrativeSelectHandler(reader=NoRawReader(), projection_catalog=catalog)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: NarrativeSelectHandler.__init__() got an unexpected keyword argument 'projection_catalog'
+_________ test_event_cannot_relabel_true_projection_context[coverage] _________
+tests\integration\test_official_json_select_handler.py:259: in test_event_cannot_relabel_true_projection_context
+    result = handler(catalog)(make_context(projection, language=language, subject_override=binding))
+             ^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_select_handler.py:109: in handler
+    return NarrativeSelectHandler(reader=NoRawReader(), projection_catalog=catalog)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: NarrativeSelectHandler.__init__() got an unexpected keyword argument 'projection_catalog'
+_ test_missing_projection_dependency_has_typed_failure_no_transcript_fallback _
+tests\integration\test_official_json_select_handler.py:270: in test_missing_projection_dependency_has_typed_failure_no_transcript_fallback
+    result = NarrativeSelectHandler(reader=NoRawReader())(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:212: in __call__
+    return self._execute(context)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_select.py:252: in _execute
+    opened = self._reader.open_version(
+tests\integration\test_official_json_select_handler.py:35: in open_version
+    pytest.fail("official projection must use source projection export, never raw anchor reader")
+E   Failed: official projection must use source projection export, never raw anchor reader
+____ test_unknown_layout_source_port_refusal_has_typed_failure_no_fallback ____
+C:\Miniconda\Lib\site-packages\_pytest\monkeypatch.py:95: in annotated_getattr
+    obj = getattr(obj, name)
+          ^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_select' has no attribute 'open_verified_projection'
+
+The above exception was the direct cause of the following exception:
+tests\integration\test_official_json_select_handler.py:282: in test_unknown_layout_source_port_refusal_has_typed_failure_no_fallback
+    monkeypatch.setattr("company_wiki.automation.narrative_select.open_verified_projection", refuse)
+C:\Miniconda\Lib\site-packages\_pytest\monkeypatch.py:109: in derive_importpath
+    annotated_getattr(target, attr, ann=module)
+C:\Miniconda\Lib\site-packages\_pytest\monkeypatch.py:97: in annotated_getattr
+    raise AttributeError(
+E   AttributeError: 'module' object at company_wiki.automation.narrative_select has no attribute 'open_verified_projection'
+______ test_output_nested_mutation_does_not_change_event_or_next_select _______
+tests\integration\test_official_json_select_handler.py:294: in test_output_nested_mutation_does_not_change_event_or_next_select
+    runner = handler(catalog)
+             ^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_select_handler.py:109: in handler
+    return NarrativeSelectHandler(reader=NoRawReader(), projection_catalog=catalog)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: NarrativeSelectHandler.__init__() got an unexpected keyword argument 'projection_catalog'
+=========================== short test summary info ===========================
+FAILED tests/integration/test_official_json_select_handler.py::test_real_two_parent_select_public_dto_roles_locators_and_single_export
+FAILED tests/integration/test_official_json_select_handler.py::test_shared_raw_two_issuers_native_language_and_translation_exclusion
+FAILED tests/integration/test_official_json_select_handler.py::test_partial_positive_selection_never_signs_full_coverage
+FAILED tests/integration/test_official_json_select_handler.py::test_second_real_parent_current_change_refuses_with_zero_model[bytes]
+FAILED tests/integration/test_official_json_select_handler.py::test_second_real_parent_current_change_refuses_with_zero_model[status]
+FAILED tests/integration/test_official_json_select_handler.py::test_no_native_fields_is_explicit_language_failure_not_fake_complete[True]
+FAILED tests/integration/test_official_json_select_handler.py::test_no_native_fields_is_explicit_language_failure_not_fake_complete[False]
+FAILED tests/integration/test_official_json_select_handler.py::test_event_cannot_relabel_true_projection_context[language]
+FAILED tests/integration/test_official_json_select_handler.py::test_event_cannot_relabel_true_projection_context[issuer]
+FAILED tests/integration/test_official_json_select_handler.py::test_event_cannot_relabel_true_projection_context[coverage]
+FAILED tests/integration/test_official_json_select_handler.py::test_missing_projection_dependency_has_typed_failure_no_transcript_fallback
+FAILED tests/integration/test_official_json_select_handler.py::test_unknown_layout_source_port_refusal_has_typed_failure_no_fallback
+FAILED tests/integration/test_official_json_select_handler.py::test_output_nested_mutation_does_not_change_event_or_next_select
+======================== 13 failed, 1 warning in 5.44s ========================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-215251-ca64bc6b", "existed": true, "removed": true}

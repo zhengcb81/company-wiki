@@ -1,0 +1,7 @@
+{
+  "exit_code": 1,
+  "real_cli": true,
+  "loopback_requests": 1,
+  "external_calls": 0,
+  "temporary_entry_point_only": true
+}

@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "<stdin>", line 16, in <module>
+  File "C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki\src\company_wiki\automation\narrative_batch.py", line 707, in run_batch
+    return _run_owned(request, catalog, project_root, catalog_config_path, db_path, work_dir,
+                      deadline=deadline)
+  File "C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki\src\company_wiki\automation\narrative_batch.py", line 756, in _run_owned
+    return _run_prepared(request, catalog, project_root, config_path, db_path, work_dir,
+                         deadline=deadline, prepared_sources=prepared_sources, manifests=manifests, normalization=normalization)
+  File "C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki\src\company_wiki\automation\narrative_batch.py", line 898, in _run_prepared
+    dispatcher = NarrativeEffectDispatcher(store, artifacts, allowed_job_ids=run.job_ids,
+                                           generation_manifests=binding.generation_manifests, projection_loader=_projection_loader(catalog))
+TypeError: NarrativeEffectDispatcher.__init__() got an unexpected keyword argument 'projection_loader'
+
+LOCAL_HTTP_CALLS 0
+LOCAL_HTTP_ERRORS []
+TEMP_RESTORED True

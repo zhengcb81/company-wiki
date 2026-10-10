@@ -1,0 +1,2 @@
+src\company_wiki\source_catalog\narrative_artifact_store.py:613: error: Incompatible types in assignment (expression has type "tuple[dict[str, Any], ...]", variable has type "tuple[dict[str, str]]")  [assignment]
+Found 1 error in 1 file (checked 28 source files)

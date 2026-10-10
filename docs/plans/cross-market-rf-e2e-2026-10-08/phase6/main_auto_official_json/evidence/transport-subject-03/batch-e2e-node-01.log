@@ -1,0 +1,61 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-mixed-cli-final-wzk8mopp\\pytest", "requested_basetemp_len": 67, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-221614-d7807645", "effective_basetemp_len": 75}
+F...F                                                                    [100%]
+================================== FAILURES ===================================
+_ test_public_mixed_batch_has_real_three_job_flow_resume_reuse_refresh_and_restores_originals _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-221614-d7807645/test_public_mixed_batch_has_re0')
+official_json_loopback_model = namespace(requests=[{'default_quality_flags': [], 'default_source_role': 'management', 'evidence': [['e1', 'We launche...338e322f8', 'title': 'Acme 2026 Q1 earnings call'}}], errors=[], endpoint='http://127.0.0.1:61270/v1/chat/completions')
+
+    def test_public_mixed_batch_has_real_three_job_flow_resume_reuse_refresh_and_restores_originals(
+        tmp_path, official_json_loopback_model
+    ):
+        server = official_json_loopback_model
+        with official_batch_state(tmp_path) as state:
+            path = request_for(state, server.endpoint, "mixed-first")
+            process, first = invoke_batch(state, path, "mixed-first")
+>           assert process.returncode == 0 and first["status"] == "completed", (
+                first,
+                process.stderr,
+            )
+E           AssertionError: ({'budget': {'estimated_micro_usd': 111, 'tokens': 92, 'unknown_reservations': 0, 'unsettled_reservations': 0}, 'items...1217d338e322f8', 'kind': 'raw', ...}], 'run_id': 'mixed-first', 'schema_version': 'narrative-batch-result/2', ...}, '')
+E           assert (2 == 0)
+E            +  where 2 = CompletedProcess(args=['C:\\Miniconda\\python.exe', '-B', '-m', 'company_wiki.automation.narrative_batch_cli', '--proj...lt/2","status":"budget_exhausted","storage":{"persistent_added_bytes":303872,"scratch_peak_bytes":4063}}\n', stderr='').returncode
+
+tests\integration\test_official_json_batch_e2e.py:156: AssertionError
+---------------------------- Captured stdout call -----------------------------
+OFFICIAL-CLI-FAILURE {"exit_code": 2, "error": null, "status": "budget_exhausted", "items": [{"item_key": "urn:company-wiki:source-projection:sha256:8947fe14c922259cbf69209c9ddbadcf9b45a1f167bf437b181ec5405b999809", "status": "dead_letter", "errors": ["DEPENDENCY_TERMINAL", "MODEL_BUDGET_DENIED"]}, {"item_key": "urn:company-wiki:source-projection:sha256:e4fa826a55594e80604785aae363b99cb28907f7bd5ccdd63eac73b506a0334a", "status": "dead_letter", "errors": ["DEPENDENCY_TERMINAL", "MODEL_BUDGET_DENIED"]}, {"item_key": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8", "status": "completed", "errors": []}], "budget": {"estimated_micro_usd": 111, "tokens": 92, "unknown_reservations": 0, "unsettled_reservations": 0}}
+_ test_mixed_batch_only_missing_items_pay_and_keeps_preexisting_projection_pin _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-221614-d7807645/test_mixed_batch_only_missing_0')
+official_json_loopback_model = namespace(requests=[], errors=[], endpoint='http://127.0.0.1:61305/v1/chat/completions')
+
+    def test_mixed_batch_only_missing_items_pay_and_keeps_preexisting_projection_pin(
+        tmp_path, official_json_loopback_model
+    ):
+        server = official_json_loopback_model
+        with official_batch_state(tmp_path) as state:
+            a, b = state.subjects
+            only_a = [
+                {
+                    "kind": "official_json",
+                    "projection_id": a.item_key,
+                    "projection_sha256": a.subject_sha256,
+                }
+            ]
+            first_path = request_for(
+                state, server.endpoint, "only-projection-a", items=only_a
+            )
+            first_process, first = invoke_batch(state, first_path, "only-projection-a")
+>           assert first_process.returncode == 0 and first["status"] == "completed", first
+E           AssertionError: {'budget': {'estimated_micro_usd': 0, 'tokens': 0, 'unknown_reservations': 0, 'unsettled_reservations': 0}, 'items': [...809', 'kind': 'official_json', ...}], 'run_id': 'only-projection-a', 'schema_version': 'narrative-batch-result/2', ...}
+E           assert (2 == 0)
+E            +  where 2 = CompletedProcess(args=['C:\\Miniconda\\python.exe', '-B', '-m', 'company_wiki.automation.narrative_batch_cli', '--proj...esult/2","status":"budget_exhausted","storage":{"persistent_added_bytes":213115,"scratch_peak_bytes":0}}\n', stderr='').returncode
+
+tests\integration\test_official_json_batch_e2e.py:280: AssertionError
+---------------------------- Captured stdout call -----------------------------
+OFFICIAL-CLI-FAILURE {"exit_code": 2, "error": null, "status": "budget_exhausted", "items": [{"item_key": "urn:company-wiki:source-projection:sha256:8947fe14c922259cbf69209c9ddbadcf9b45a1f167bf437b181ec5405b999809", "status": "dead_letter", "errors": ["MODEL_BUDGET_DENIED", "DEPENDENCY_TERMINAL"]}], "budget": {"estimated_micro_usd": 0, "tokens": 0, "unknown_reservations": 0, "unsettled_reservations": 0}}
+=========================== short test summary info ===========================
+FAILED tests/integration/test_official_json_batch_e2e.py::test_public_mixed_batch_has_real_three_job_flow_resume_reuse_refresh_and_restores_originals
+FAILED tests/integration/test_official_json_batch_e2e.py::test_mixed_batch_only_missing_items_pay_and_keeps_preexisting_projection_pin
+2 failed, 3 passed in 21.99s
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-221614-d7807645", "existed": true, "removed": true}

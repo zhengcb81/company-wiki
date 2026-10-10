@@ -1,0 +1,11 @@
+{
+  "source_path": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\_harness_worktrees\\p7\\cwp\\src\\company_wiki\\source_catalog\\official_json_projection.py",
+  "source_sha256": "3a0f7844f86eb07876812e5b8015c5179022762a3c25adc59b565a4f4f010adf",
+  "code_delivery_head": "1c11ef0b5a838655559e91fab9a7bf38f1533d89",
+  "observed_head": "4f2c05c92f3aed9cdf91808a60e1c5d38adce6ee",
+  "verdict": "source_leaf_PASS_NO_BLOCKER",
+  "source_writes": 0,
+  "external_provider_calls": 0,
+  "external_model_calls": 0,
+  "new_cost_usd": 0
+}

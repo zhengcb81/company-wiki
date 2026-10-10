@@ -1,0 +1,24 @@
+{
+  "exit_code": 1,
+  "duration_seconds": 7.908,
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-p",
+    "pytest_timeout",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-official-verify-red-vml9_brn\\pytest",
+    "-q",
+    "--disable-warnings",
+    "tests/integration/test_official_json_verify_handler.py"
+  ],
+  "log_sha256": "9965b274474b85d8dc4b03522e204667aee0a2b93e1a6e6e8dd50aed8c731172",
+  "external_calls": 0,
+  "owned_temp_removed": true
+}

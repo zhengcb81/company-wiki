@@ -1,0 +1,443 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-projection-model-red-4kx0yt9c\\pytest", "requested_basetemp_len": 72, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-215346-5d661a46", "effective_basetemp_len": 75}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+collected 33 items
+
+tests\unit\test_official_json_model_subject.py FFFFFFFFFFFFFFFFFFFFFFF   [ 69%]
+tests\unit\test_official_json_summarize_subject.py FFFFFFFFFF            [100%]
+
+================================== FAILURES ===================================
+______ test_projection_versions_are_explicit_and_raw_versions_unchanged _______
+tests\unit\test_official_json_model_subject.py:75: in test_projection_versions_are_explicit_and_raw_versions_unchanged
+    assert model.PROJECTION_MODEL_REQUEST_SCHEMA == "narrative-model-request/2"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_model' has no attribute 'PROJECTION_MODEL_REQUEST_SCHEMA'
+____ test_subject_header_is_explicit_multi_parent_and_no_fake_raw_identity ____
+tests\unit\test_official_json_model_subject.py:82: in test_subject_header_is_explicit_multi_parent_and_no_fake_raw_identity
+    selected=selection(); before=selected.to_dict()
+             ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+_ test_full_subject_binding_changes_model_request_even_if_same_anchor_and_text[issuer] _
+tests\unit\test_official_json_model_subject.py:97: in test_full_subject_binding_changes_model_request_even_if_same_anchor_and_text
+    original=selection(); changed=binding()
+             ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+_ test_full_subject_binding_changes_model_request_even_if_same_anchor_and_text[as_of] _
+tests\unit\test_official_json_model_subject.py:97: in test_full_subject_binding_changes_model_request_even_if_same_anchor_and_text
+    original=selection(); changed=binding()
+             ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+_ test_full_subject_binding_changes_model_request_even_if_same_anchor_and_text[parent_two] _
+tests\unit\test_official_json_model_subject.py:97: in test_full_subject_binding_changes_model_request_even_if_same_anchor_and_text
+    original=selection(); changed=binding()
+             ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+_ test_full_subject_binding_changes_model_request_even_if_same_anchor_and_text[layout] _
+tests\unit\test_official_json_model_subject.py:97: in test_full_subject_binding_changes_model_request_even_if_same_anchor_and_text
+    original=selection(); changed=binding()
+             ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+_ test_full_subject_binding_changes_model_request_even_if_same_anchor_and_text[parser] _
+tests\unit\test_official_json_model_subject.py:97: in test_full_subject_binding_changes_model_request_even_if_same_anchor_and_text
+    original=selection(); changed=binding()
+             ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+______ test_rows_preserve_every_field_role_and_groups_only_list_members _______
+tests\unit\test_official_json_model_subject.py:109: in test_rows_preserve_every_field_role_and_groups_only_list_members
+    data=json.loads(model.NarrativeModelRequest.from_selection(selection()).data_json)
+                                                               ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+_ test_alias_restore_uses_actual_parent_spans_and_question_preserves_modality _
+tests\unit\test_official_json_model_subject.py:119: in test_alias_restore_uses_actual_parent_spans_and_question_preserves_modality
+    selected=selection()
+             ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+_ test_invalid_roles_and_context_closure_reject_whole_claim[ids0-company_statement-actual-groups0] _
+tests\unit\test_official_json_model_subject.py:137: in test_invalid_roles_and_context_closure_reject_whole_claim
+    selected=selection()
+             ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+_ test_invalid_roles_and_context_closure_reject_whole_claim[ids1-company_statement-actual-groups1] _
+tests\unit\test_official_json_model_subject.py:137: in test_invalid_roles_and_context_closure_reject_whole_claim
+    selected=selection()
+             ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+_ test_invalid_roles_and_context_closure_reject_whole_claim[ids2-analyst_question-actual-groups2] _
+tests\unit\test_official_json_model_subject.py:137: in test_invalid_roles_and_context_closure_reject_whole_claim
+    selected=selection()
+             ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+_ test_invalid_roles_and_context_closure_reject_whole_claim[ids3-company_statement-actual-groups3] _
+tests\unit\test_official_json_model_subject.py:137: in test_invalid_roles_and_context_closure_reject_whole_claim
+    selected=selection()
+             ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+_ test_invalid_roles_and_context_closure_reject_whole_claim[ids4-company_statement-actual-groups4] _
+tests\unit\test_official_json_model_subject.py:137: in test_invalid_roles_and_context_closure_reject_whole_claim
+    selected=selection()
+             ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+_ test_narrow_answer_is_allowed_but_partial_context_and_quality_are_diagnostics _
+tests\unit\test_official_json_model_subject.py:143: in test_narrow_answer_is_allowed_but_partial_context_and_quality_are_diagnostics
+    selected=selection(flags=("locator_unstable",))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+_ test_global_subject_identity_mismatch_cannot_be_recovered_per_claim[override0] _
+tests\unit\test_official_json_model_subject.py:152: in test_global_subject_identity_mismatch_cannot_be_recovered_per_claim
+    selected=selection()
+             ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+_ test_global_subject_identity_mismatch_cannot_be_recovered_per_claim[override1] _
+tests\unit\test_official_json_model_subject.py:152: in test_global_subject_identity_mismatch_cannot_be_recovered_per_claim
+    selected=selection()
+             ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+_ test_global_subject_identity_mismatch_cannot_be_recovered_per_claim[override2] _
+tests\unit\test_official_json_model_subject.py:152: in test_global_subject_identity_mismatch_cannot_be_recovered_per_claim
+    selected=selection()
+             ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+___ test_decoder_expected_prompt_depends_on_subject_and_rejects_raw_prompt ____
+tests\unit\test_official_json_model_subject.py:158: in test_decoder_expected_prompt_depends_on_subject_and_rejects_raw_prompt
+    selected=selection()
+             ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+_______ test_unknown_extensions_drop_but_translation_rejected_globally ________
+tests\unit\test_official_json_model_subject.py:165: in test_unknown_extensions_drop_but_translation_rejected_globally
+    selected=selection()
+             ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+___ test_configured_output_budget_applies_to_new_schema_without_model_call ____
+tests\unit\test_official_json_model_subject.py:173: in test_configured_output_budget_applies_to_new_schema_without_model_call
+    request=model.NarrativeModelRequest.from_selection(selection())
+                                                       ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+______ test_no_model_request_without_evidence_or_real_language[options0] ______
+tests\unit\test_official_json_model_subject.py:183: in test_no_model_request_without_evidence_or_real_language
+    model.NarrativeModelRequest.from_selection(selection(**options))
+                                               ^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+______ test_no_model_request_without_evidence_or_real_language[options1] ______
+tests\unit\test_official_json_model_subject.py:183: in test_no_model_request_without_evidence_or_real_language
+    model.NarrativeModelRequest.from_selection(selection(**options))
+                                               ^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+_ test_projection_full_handler_uses_strict_subject_summary_without_fake_source _
+tests\unit\test_official_json_summarize_subject.py:48: in test_projection_full_handler_uses_strict_subject_summary_without_fake_source
+    selected=selection(); model=ReplaySubjectModel()
+             ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+_ test_same_anchor_different_complete_subject_fails_before_model_or_fee[issuer] _
+tests\unit\test_official_json_summarize_subject.py:62: in test_same_anchor_different_complete_subject_fails_before_model_or_fee
+    selected=selection(); changed=binding()
+             ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+_ test_same_anchor_different_complete_subject_fails_before_model_or_fee[as_of] _
+tests\unit\test_official_json_summarize_subject.py:62: in test_same_anchor_different_complete_subject_fails_before_model_or_fee
+    selected=selection(); changed=binding()
+             ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+_ test_same_anchor_different_complete_subject_fails_before_model_or_fee[layout] _
+tests\unit\test_official_json_summarize_subject.py:62: in test_same_anchor_different_complete_subject_fails_before_model_or_fee
+    selected=selection(); changed=binding()
+             ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+_ test_same_anchor_different_complete_subject_fails_before_model_or_fee[parent_two] _
+tests\unit\test_official_json_summarize_subject.py:62: in test_same_anchor_different_complete_subject_fails_before_model_or_fee
+    selected=selection(); changed=binding()
+             ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+_____ test_unavailable_model_input_has_typed_zero_call_zero_fee[options0] _____
+tests\unit\test_official_json_summarize_subject.py:76: in test_unavailable_model_input_has_typed_zero_call_zero_fee
+    selected=selection(**options); model=ReplaySubjectModel()
+             ^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+_____ test_unavailable_model_input_has_typed_zero_call_zero_fee[options1] _____
+tests\unit\test_official_json_summarize_subject.py:76: in test_unavailable_model_input_has_typed_zero_call_zero_fee
+    selected=selection(**options); model=ReplaySubjectModel()
+             ^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+_________ test_complete_skip_unknown_language_is_valid_without_model __________
+tests\unit\test_official_json_summarize_subject.py:84: in test_complete_skip_unknown_language_is_valid_without_model
+    selected=selection(skipped=True,language="unknown"); model=ReplaySubjectModel()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+_ test_existing_metered_caller_receives_same_context_once_and_metrics_preserved _
+tests\unit\test_official_json_summarize_subject.py:92: in test_existing_metered_caller_receives_same_context_once_and_metrics_preserved
+    selected=selection(); ctx=context(selected); model=ReplaySubjectModel(); seen=[]
+             ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+______ test_global_response_identity_error_preserves_fee_and_static_rule ______
+tests\unit\test_official_json_summarize_subject.py:104: in test_global_response_identity_error_preserves_fee_and_static_rule
+    selected=selection(); ctx=context(selected); model=ReplaySubjectModel(subject_id="secret-provider-value")
+             ^^^^^^^^^^^
+tests\unit\test_official_json_model_subject.py:43: in selection
+    return NarrativeSelectResult.from_dict({
+src\company_wiki\automation\narrative_contracts.py:597: in from_dict
+    metadata = SourceMetadataValue.from_dict(item["source_metadata"], projected=projected)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:243: in from_dict
+    raise NarrativeContractError("source_metadata.source_class is invalid")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source_metadata.source_class is invalid
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/unit/test_official_json_model_subject.py::test_projection_versions_are_explicit_and_raw_versions_unchanged
+FAILED tests/unit/test_official_json_model_subject.py::test_subject_header_is_explicit_multi_parent_and_no_fake_raw_identity
+FAILED tests/unit/test_official_json_model_subject.py::test_full_subject_binding_changes_model_request_even_if_same_anchor_and_text[issuer]
+FAILED tests/unit/test_official_json_model_subject.py::test_full_subject_binding_changes_model_request_even_if_same_anchor_and_text[as_of]
+FAILED tests/unit/test_official_json_model_subject.py::test_full_subject_binding_changes_model_request_even_if_same_anchor_and_text[parent_two]
+FAILED tests/unit/test_official_json_model_subject.py::test_full_subject_binding_changes_model_request_even_if_same_anchor_and_text[layout]
+FAILED tests/unit/test_official_json_model_subject.py::test_full_subject_binding_changes_model_request_even_if_same_anchor_and_text[parser]
+FAILED tests/unit/test_official_json_model_subject.py::test_rows_preserve_every_field_role_and_groups_only_list_members
+FAILED tests/unit/test_official_json_model_subject.py::test_alias_restore_uses_actual_parent_spans_and_question_preserves_modality
+FAILED tests/unit/test_official_json_model_subject.py::test_invalid_roles_and_context_closure_reject_whole_claim[ids0-company_statement-actual-groups0]
+FAILED tests/unit/test_official_json_model_subject.py::test_invalid_roles_and_context_closure_reject_whole_claim[ids1-company_statement-actual-groups1]
+FAILED tests/unit/test_official_json_model_subject.py::test_invalid_roles_and_context_closure_reject_whole_claim[ids2-analyst_question-actual-groups2]
+FAILED tests/unit/test_official_json_model_subject.py::test_invalid_roles_and_context_closure_reject_whole_claim[ids3-company_statement-actual-groups3]
+FAILED tests/unit/test_official_json_model_subject.py::test_invalid_roles_and_context_closure_reject_whole_claim[ids4-company_statement-actual-groups4]
+FAILED tests/unit/test_official_json_model_subject.py::test_narrow_answer_is_allowed_but_partial_context_and_quality_are_diagnostics
+FAILED tests/unit/test_official_json_model_subject.py::test_global_subject_identity_mismatch_cannot_be_recovered_per_claim[override0]
+FAILED tests/unit/test_official_json_model_subject.py::test_global_subject_identity_mismatch_cannot_be_recovered_per_claim[override1]
+FAILED tests/unit/test_official_json_model_subject.py::test_global_subject_identity_mismatch_cannot_be_recovered_per_claim[override2]
+FAILED tests/unit/test_official_json_model_subject.py::test_decoder_expected_prompt_depends_on_subject_and_rejects_raw_prompt
+FAILED tests/unit/test_official_json_model_subject.py::test_unknown_extensions_drop_but_translation_rejected_globally
+FAILED tests/unit/test_official_json_model_subject.py::test_configured_output_budget_applies_to_new_schema_without_model_call
+FAILED tests/unit/test_official_json_model_subject.py::test_no_model_request_without_evidence_or_real_language[options0]
+FAILED tests/unit/test_official_json_model_subject.py::test_no_model_request_without_evidence_or_real_language[options1]
+FAILED tests/unit/test_official_json_summarize_subject.py::test_projection_full_handler_uses_strict_subject_summary_without_fake_source
+FAILED tests/unit/test_official_json_summarize_subject.py::test_same_anchor_different_complete_subject_fails_before_model_or_fee[issuer]
+FAILED tests/unit/test_official_json_summarize_subject.py::test_same_anchor_different_complete_subject_fails_before_model_or_fee[as_of]
+FAILED tests/unit/test_official_json_summarize_subject.py::test_same_anchor_different_complete_subject_fails_before_model_or_fee[layout]
+FAILED tests/unit/test_official_json_summarize_subject.py::test_same_anchor_different_complete_subject_fails_before_model_or_fee[parent_two]
+FAILED tests/unit/test_official_json_summarize_subject.py::test_unavailable_model_input_has_typed_zero_call_zero_fee[options0]
+FAILED tests/unit/test_official_json_summarize_subject.py::test_unavailable_model_input_has_typed_zero_call_zero_fee[options1]
+FAILED tests/unit/test_official_json_summarize_subject.py::test_complete_skip_unknown_language_is_valid_without_model
+FAILED tests/unit/test_official_json_summarize_subject.py::test_existing_metered_caller_receives_same_context_once_and_metrics_preserved
+FAILED tests/unit/test_official_json_summarize_subject.py::test_global_response_identity_error_preserves_fee_and_static_rule
+======================== 33 failed, 1 warning in 3.78s ========================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-215346-5d661a46", "existed": true, "removed": true}

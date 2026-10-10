@@ -1,0 +1,18 @@
+F541 [*] f-string without any placeholders
+  --> src\company_wiki\source_catalog\narrative_artifact_store.py:48:25
+   |
+46 |       FROM documents AS d LEFT JOIN sources AS s ON s.source_id=d.primary_source_id
+47 |       WHERE d.document_id=?"""
+48 |   _CURRENT_ARTIFACT_SQL = f"""SELECT 1 FROM narrative_artifact_versions AS v
+   |  _________________________^
+49 | |     JOIN documents AS d ON d.document_id=v.document_id
+50 | |     JOIN sources AS s ON s.source_id=d.primary_source_id
+51 | |     WHERE v.artifact_version_id=? AND v.status='visible'
+52 | |       AND d.primary_source_id=? AND d.source_status='active' AND s.content_sha256=?
+53 | |       AND COALESCE(json_extract(v.metadata_json, '$.subject_binding.kind'), 'raw')='raw'"""
+   | |___________________________________________________________________________________________^
+   |
+help: Remove extraneous `f` prefix
+
+Found 1 error.
+[*] 1 fixable with the `--fix` option.

@@ -1,0 +1,323 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-transport-red-integration-lbtg91zn\\pytest", "requested_basetemp_len": 77, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-215607-e3df2907", "effective_basetemp_len": 75}
+.......................................FFFFFFFFFFFFFFFFF                 [100%]
+================================== FAILURES ===================================
+_____ test_shared_anchor_exact_subject_generation_and_one_verified_export _____
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-215607-e3df2907/test_shared_anchor_exact_subje0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000013287430E50>
+
+    def test_shared_anchor_exact_subject_generation_and_one_verified_export(tmp_path, monkeypatch):
+        with owned_state(tmp_path) as state:
+            a, b = state.subjects
+            va, ga, pa = publish(state, a, "a-one")
+            va2, ga2, pa2 = publish(state, a, "a-two")
+            vb, gb, pb = publish(state, b, "b-one")
+            assert va.document_id == vb.document_id
+            raw = NarrativeSubject.from_raw(state.refs[0])
+            vr, _, _ = publish(state, raw, "legacy-raw", {"fixture": "old raw"})
+>           calls = []; transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog), projection_loader=loader_for(state, calls))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: NarrativeTransportReader.__init__() got an unexpected keyword argument 'projection_loader'
+
+tests\integration\test_official_json_transport_subject.py:164: TypeError
+______ test_wrong_read_context_refuses_without_reopening_source[issuer] _______
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-215607-e3df2907/test_wrong_read_context_refuse0')
+bad = 'issuer'
+
+    @pytest.mark.parametrize("bad", ["issuer", "cutoff", "generation", "binding", "artifact_hash", "artifact_size"])
+    def test_wrong_read_context_refuses_without_reopening_source(tmp_path, bad):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]; _, generation, _ = publish(state, a, "context")
+>           calls = []; transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog), projection_loader=loader_for(state,calls))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: NarrativeTransportReader.__init__() got an unexpected keyword argument 'projection_loader'
+
+tests\integration\test_official_json_transport_subject.py:198: TypeError
+______ test_wrong_read_context_refuses_without_reopening_source[cutoff] _______
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-215607-e3df2907/test_wrong_read_context_refuse1')
+bad = 'cutoff'
+
+    @pytest.mark.parametrize("bad", ["issuer", "cutoff", "generation", "binding", "artifact_hash", "artifact_size"])
+    def test_wrong_read_context_refuses_without_reopening_source(tmp_path, bad):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]; _, generation, _ = publish(state, a, "context")
+>           calls = []; transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog), projection_loader=loader_for(state,calls))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: NarrativeTransportReader.__init__() got an unexpected keyword argument 'projection_loader'
+
+tests\integration\test_official_json_transport_subject.py:198: TypeError
+____ test_wrong_read_context_refuses_without_reopening_source[generation] _____
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-215607-e3df2907/test_wrong_read_context_refuse2')
+bad = 'generation'
+
+    @pytest.mark.parametrize("bad", ["issuer", "cutoff", "generation", "binding", "artifact_hash", "artifact_size"])
+    def test_wrong_read_context_refuses_without_reopening_source(tmp_path, bad):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]; _, generation, _ = publish(state, a, "context")
+>           calls = []; transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog), projection_loader=loader_for(state,calls))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: NarrativeTransportReader.__init__() got an unexpected keyword argument 'projection_loader'
+
+tests\integration\test_official_json_transport_subject.py:198: TypeError
+______ test_wrong_read_context_refuses_without_reopening_source[binding] ______
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-215607-e3df2907/test_wrong_read_context_refuse3')
+bad = 'binding'
+
+    @pytest.mark.parametrize("bad", ["issuer", "cutoff", "generation", "binding", "artifact_hash", "artifact_size"])
+    def test_wrong_read_context_refuses_without_reopening_source(tmp_path, bad):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]; _, generation, _ = publish(state, a, "context")
+>           calls = []; transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog), projection_loader=loader_for(state,calls))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: NarrativeTransportReader.__init__() got an unexpected keyword argument 'projection_loader'
+
+tests\integration\test_official_json_transport_subject.py:198: TypeError
+___ test_wrong_read_context_refuses_without_reopening_source[artifact_hash] ___
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-215607-e3df2907/test_wrong_read_context_refuse4')
+bad = 'artifact_hash'
+
+    @pytest.mark.parametrize("bad", ["issuer", "cutoff", "generation", "binding", "artifact_hash", "artifact_size"])
+    def test_wrong_read_context_refuses_without_reopening_source(tmp_path, bad):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]; _, generation, _ = publish(state, a, "context")
+>           calls = []; transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog), projection_loader=loader_for(state,calls))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: NarrativeTransportReader.__init__() got an unexpected keyword argument 'projection_loader'
+
+tests\integration\test_official_json_transport_subject.py:198: TypeError
+___ test_wrong_read_context_refuses_without_reopening_source[artifact_size] ___
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-215607-e3df2907/test_wrong_read_context_refuse5')
+bad = 'artifact_size'
+
+    @pytest.mark.parametrize("bad", ["issuer", "cutoff", "generation", "binding", "artifact_hash", "artifact_size"])
+    def test_wrong_read_context_refuses_without_reopening_source(tmp_path, bad):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]; _, generation, _ = publish(state, a, "context")
+>           calls = []; transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog), projection_loader=loader_for(state,calls))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: NarrativeTransportReader.__init__() got an unexpected keyword argument 'projection_loader'
+
+tests\integration\test_official_json_transport_subject.py:198: TypeError
+__________ test_second_parent_is_revalidated_by_owning_layers[bytes] __________
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-215607-e3df2907/test_second_parent_is_revalida0')
+change = 'bytes'
+
+    @pytest.mark.parametrize("change", ["bytes", "status", "primary"])
+    def test_second_parent_is_revalidated_by_owning_layers(tmp_path, change):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]; _, generation, _ = publish(state, a, "second-parent")
+>           calls = []; transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog), projection_loader=loader_for(state,calls))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: NarrativeTransportReader.__init__() got an unexpected keyword argument 'projection_loader'
+
+tests\integration\test_official_json_transport_subject.py:215: TypeError
+_________ test_second_parent_is_revalidated_by_owning_layers[status] __________
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-215607-e3df2907/test_second_parent_is_revalida1')
+change = 'status'
+
+    @pytest.mark.parametrize("change", ["bytes", "status", "primary"])
+    def test_second_parent_is_revalidated_by_owning_layers(tmp_path, change):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]; _, generation, _ = publish(state, a, "second-parent")
+>           calls = []; transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog), projection_loader=loader_for(state,calls))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: NarrativeTransportReader.__init__() got an unexpected keyword argument 'projection_loader'
+
+tests\integration\test_official_json_transport_subject.py:215: TypeError
+_________ test_second_parent_is_revalidated_by_owning_layers[primary] _________
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-215607-e3df2907/test_second_parent_is_revalida2')
+change = 'primary'
+
+    @pytest.mark.parametrize("change", ["bytes", "status", "primary"])
+    def test_second_parent_is_revalidated_by_owning_layers(tmp_path, change):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]; _, generation, _ = publish(state, a, "second-parent")
+>           calls = []; transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog), projection_loader=loader_for(state,calls))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: NarrativeTransportReader.__init__() got an unexpected keyword argument 'projection_loader'
+
+tests\integration\test_official_json_transport_subject.py:215: TypeError
+________ test_artifact_corruption_is_not_a_cache_miss_or_a_source_read ________
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-215607-e3df2907/test_artifact_corruption_is_no0')
+
+    def test_artifact_corruption_is_not_a_cache_miss_or_a_source_read(tmp_path):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]; version, generation, payload = publish(state,a,"corrupt")
+>           calls = []; transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog), projection_loader=loader_for(state,calls))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: NarrativeTransportReader.__init__() got an unexpected keyword argument 'projection_loader'
+
+tests\integration\test_official_json_transport_subject.py:233: TypeError
+_ test_resigned_artifact_can_never_fabricate_verified_native_field[raw_text] __
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-215607-e3df2907/test_resigned_artifact_can_nev0')
+change = 'raw_text'
+
+    @pytest.mark.parametrize("change", ["raw_text", "encoded_token_sha256", "coordinates", "parser"])
+    def test_resigned_artifact_can_never_fabricate_verified_native_field(tmp_path,change):
+        with owned_state(tmp_path) as state:
+            a=state.subjects[0];wire=bundle_for(state,a);original=EvidenceSpan.from_dict(wire["evidence_spans"][0])
+            metadata=deepcopy(original.to_dict()["structured_value"]);text=original.raw_text;coordinates=original.coordinates;parser=original.parser_name
+            if change=="raw_text":
+                text="Fabricated product revenue growth.";metadata["text_sha256"]=digest(text.encode())
+            elif change=="encoded_token_sha256":metadata[change]="f"*64
+            elif change=="coordinates":
+                from dataclasses import replace
+                coordinates=replace(coordinates,paragraph_index=999)
+            else:parser="invented"
+            forged=EvidenceSpan.create(source_id=original.source_id,coordinates=coordinates,raw_text=text,structured_value=metadata,
+                parser_name=parser,parser_version=original.parser_version,parse_status=original.parse_status,quality_flags=original.quality_flags)
+            wire["evidence_spans"][0]=forged.to_dict()
+            for claim in wire["summary"]["draft"]["claims"]:
+                claim["evidence_ids"]=[forged.span_id if x==original.span_id else x for x in claim["evidence_ids"]]
+            wire=NarrativeBundle.from_dict(wire).to_dict()
+            _,generation,_=publish(state,a,"forged-"+change,wire)
+>           calls=[];transport=NarrativeTransportReader(state.artifacts,SourceVersionReader(state.catalog),projection_loader=loader_for(state,calls))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: NarrativeTransportReader.__init__() got an unexpected keyword argument 'projection_loader'
+
+tests\integration\test_official_json_transport_subject.py:260: TypeError
+_ test_resigned_artifact_can_never_fabricate_verified_native_field[encoded_token_sha256] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-215607-e3df2907/test_resigned_artifact_can_nev1')
+change = 'encoded_token_sha256'
+
+    @pytest.mark.parametrize("change", ["raw_text", "encoded_token_sha256", "coordinates", "parser"])
+    def test_resigned_artifact_can_never_fabricate_verified_native_field(tmp_path,change):
+        with owned_state(tmp_path) as state:
+            a=state.subjects[0];wire=bundle_for(state,a);original=EvidenceSpan.from_dict(wire["evidence_spans"][0])
+            metadata=deepcopy(original.to_dict()["structured_value"]);text=original.raw_text;coordinates=original.coordinates;parser=original.parser_name
+            if change=="raw_text":
+                text="Fabricated product revenue growth.";metadata["text_sha256"]=digest(text.encode())
+            elif change=="encoded_token_sha256":metadata[change]="f"*64
+            elif change=="coordinates":
+                from dataclasses import replace
+                coordinates=replace(coordinates,paragraph_index=999)
+            else:parser="invented"
+            forged=EvidenceSpan.create(source_id=original.source_id,coordinates=coordinates,raw_text=text,structured_value=metadata,
+                parser_name=parser,parser_version=original.parser_version,parse_status=original.parse_status,quality_flags=original.quality_flags)
+            wire["evidence_spans"][0]=forged.to_dict()
+            for claim in wire["summary"]["draft"]["claims"]:
+                claim["evidence_ids"]=[forged.span_id if x==original.span_id else x for x in claim["evidence_ids"]]
+            wire=NarrativeBundle.from_dict(wire).to_dict()
+            _,generation,_=publish(state,a,"forged-"+change,wire)
+>           calls=[];transport=NarrativeTransportReader(state.artifacts,SourceVersionReader(state.catalog),projection_loader=loader_for(state,calls))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: NarrativeTransportReader.__init__() got an unexpected keyword argument 'projection_loader'
+
+tests\integration\test_official_json_transport_subject.py:260: TypeError
+_ test_resigned_artifact_can_never_fabricate_verified_native_field[coordinates] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-215607-e3df2907/test_resigned_artifact_can_nev2')
+change = 'coordinates'
+
+    @pytest.mark.parametrize("change", ["raw_text", "encoded_token_sha256", "coordinates", "parser"])
+    def test_resigned_artifact_can_never_fabricate_verified_native_field(tmp_path,change):
+        with owned_state(tmp_path) as state:
+            a=state.subjects[0];wire=bundle_for(state,a);original=EvidenceSpan.from_dict(wire["evidence_spans"][0])
+            metadata=deepcopy(original.to_dict()["structured_value"]);text=original.raw_text;coordinates=original.coordinates;parser=original.parser_name
+            if change=="raw_text":
+                text="Fabricated product revenue growth.";metadata["text_sha256"]=digest(text.encode())
+            elif change=="encoded_token_sha256":metadata[change]="f"*64
+            elif change=="coordinates":
+                from dataclasses import replace
+                coordinates=replace(coordinates,paragraph_index=999)
+            else:parser="invented"
+            forged=EvidenceSpan.create(source_id=original.source_id,coordinates=coordinates,raw_text=text,structured_value=metadata,
+                parser_name=parser,parser_version=original.parser_version,parse_status=original.parse_status,quality_flags=original.quality_flags)
+            wire["evidence_spans"][0]=forged.to_dict()
+            for claim in wire["summary"]["draft"]["claims"]:
+                claim["evidence_ids"]=[forged.span_id if x==original.span_id else x for x in claim["evidence_ids"]]
+            wire=NarrativeBundle.from_dict(wire).to_dict()
+            _,generation,_=publish(state,a,"forged-"+change,wire)
+>           calls=[];transport=NarrativeTransportReader(state.artifacts,SourceVersionReader(state.catalog),projection_loader=loader_for(state,calls))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: NarrativeTransportReader.__init__() got an unexpected keyword argument 'projection_loader'
+
+tests\integration\test_official_json_transport_subject.py:260: TypeError
+__ test_resigned_artifact_can_never_fabricate_verified_native_field[parser] ___
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-215607-e3df2907/test_resigned_artifact_can_nev3')
+change = 'parser'
+
+    @pytest.mark.parametrize("change", ["raw_text", "encoded_token_sha256", "coordinates", "parser"])
+    def test_resigned_artifact_can_never_fabricate_verified_native_field(tmp_path,change):
+        with owned_state(tmp_path) as state:
+            a=state.subjects[0];wire=bundle_for(state,a);original=EvidenceSpan.from_dict(wire["evidence_spans"][0])
+            metadata=deepcopy(original.to_dict()["structured_value"]);text=original.raw_text;coordinates=original.coordinates;parser=original.parser_name
+            if change=="raw_text":
+                text="Fabricated product revenue growth.";metadata["text_sha256"]=digest(text.encode())
+            elif change=="encoded_token_sha256":metadata[change]="f"*64
+            elif change=="coordinates":
+                from dataclasses import replace
+                coordinates=replace(coordinates,paragraph_index=999)
+            else:parser="invented"
+            forged=EvidenceSpan.create(source_id=original.source_id,coordinates=coordinates,raw_text=text,structured_value=metadata,
+                parser_name=parser,parser_version=original.parser_version,parse_status=original.parse_status,quality_flags=original.quality_flags)
+            wire["evidence_spans"][0]=forged.to_dict()
+            for claim in wire["summary"]["draft"]["claims"]:
+                claim["evidence_ids"]=[forged.span_id if x==original.span_id else x for x in claim["evidence_ids"]]
+            wire=NarrativeBundle.from_dict(wire).to_dict()
+            _,generation,_=publish(state,a,"forged-"+change,wire)
+>           calls=[];transport=NarrativeTransportReader(state.artifacts,SourceVersionReader(state.catalog),projection_loader=loader_for(state,calls))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: NarrativeTransportReader.__init__() got an unexpected keyword argument 'projection_loader'
+
+tests\integration\test_official_json_transport_subject.py:260: TypeError
+____ test_missing_or_wrong_loader_refuses_without_faking_anchor_projection ____
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-215607-e3df2907/test_missing_or_wrong_loader_r0')
+
+    def test_missing_or_wrong_loader_refuses_without_faking_anchor_projection(tmp_path):
+        with owned_state(tmp_path) as state:
+            a,b=state.subjects;_,generation,_=publish(state,a,"wrong-loader")
+            transport=NarrativeTransportReader(state.artifacts,SourceVersionReader(state.catalog))
+>           reference=transport.reference_subject(a,generation_sha256=generation)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'NarrativeTransportReader' object has no attribute 'reference_subject'
+
+tests\integration\test_official_json_transport_subject.py:270: AttributeError
+______ test_wrong_subject_generation_discovery_never_uses_anchor_latest _______
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-215607-e3df2907/test_wrong_subject_generation_0')
+
+    def test_wrong_subject_generation_discovery_never_uses_anchor_latest(tmp_path):
+        with owned_state(tmp_path) as state:
+            a,b=state.subjects;_,generation,_=publish(state,a,"only-a")
+            transport=NarrativeTransportReader(state.artifacts,SourceVersionReader(state.catalog))
+            for subject,gen in [(b,generation),(a,"f"*64)]:
+>               with pytest.raises(NarrativeTransportError) as error:transport.reference_subject(subject,generation_sha256=gen)
+                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               AttributeError: 'NarrativeTransportReader' object has no attribute 'reference_subject'
+
+tests\integration\test_official_json_transport_subject.py:284: AttributeError
+=========================== short test summary info ===========================
+FAILED tests/integration/test_official_json_transport_subject.py::test_shared_anchor_exact_subject_generation_and_one_verified_export
+FAILED tests/integration/test_official_json_transport_subject.py::test_wrong_read_context_refuses_without_reopening_source[issuer]
+FAILED tests/integration/test_official_json_transport_subject.py::test_wrong_read_context_refuses_without_reopening_source[cutoff]
+FAILED tests/integration/test_official_json_transport_subject.py::test_wrong_read_context_refuses_without_reopening_source[generation]
+FAILED tests/integration/test_official_json_transport_subject.py::test_wrong_read_context_refuses_without_reopening_source[binding]
+FAILED tests/integration/test_official_json_transport_subject.py::test_wrong_read_context_refuses_without_reopening_source[artifact_hash]
+FAILED tests/integration/test_official_json_transport_subject.py::test_wrong_read_context_refuses_without_reopening_source[artifact_size]
+FAILED tests/integration/test_official_json_transport_subject.py::test_second_parent_is_revalidated_by_owning_layers[bytes]
+FAILED tests/integration/test_official_json_transport_subject.py::test_second_parent_is_revalidated_by_owning_layers[status]
+FAILED tests/integration/test_official_json_transport_subject.py::test_second_parent_is_revalidated_by_owning_layers[primary]
+FAILED tests/integration/test_official_json_transport_subject.py::test_artifact_corruption_is_not_a_cache_miss_or_a_source_read
+FAILED tests/integration/test_official_json_transport_subject.py::test_resigned_artifact_can_never_fabricate_verified_native_field[raw_text]
+FAILED tests/integration/test_official_json_transport_subject.py::test_resigned_artifact_can_never_fabricate_verified_native_field[encoded_token_sha256]
+FAILED tests/integration/test_official_json_transport_subject.py::test_resigned_artifact_can_never_fabricate_verified_native_field[coordinates]
+FAILED tests/integration/test_official_json_transport_subject.py::test_resigned_artifact_can_never_fabricate_verified_native_field[parser]
+FAILED tests/integration/test_official_json_transport_subject.py::test_missing_or_wrong_loader_refuses_without_faking_anchor_projection
+FAILED tests/integration/test_official_json_transport_subject.py::test_wrong_subject_generation_discovery_never_uses_anchor_latest
+17 failed, 39 passed in 18.06s
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-215607-e3df2907", "existed": true, "removed": true}

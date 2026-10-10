@@ -14,7 +14,10 @@ from company_wiki.source_catalog.narrative_normalization import NarrativeNormali
 
 from .migrations import InvalidDatabasePathError
 from .narrative_http_model import NarrativeHTTPModel
-from .narrative_model import NARRATIVE_PROMPT_VERSION
+from .narrative_model import (
+    NARRATIVE_PROMPT_VERSION, PROJECTION_NARRATIVE_PROMPT_VERSION, PROJECTION_MODEL_REQUEST_SCHEMA,
+)
+from .narrative_official_json import NARRATIVE_OFFICIAL_JSON_ADAPTER_VERSION
 from .narrative_model_caller import BudgetedNarrativeCaller
 from .narrative_run_store import NarrativeRunError, NarrativeRunStore
 from .narrative_runtime import NarrativeRuntimeDependencies, register_narrative_handlers
@@ -30,7 +33,7 @@ _OPTION_FIELDS = {
 _MODEL_FIELDS = {
     "model_id", "endpoint", "api_key_env", "max_output_tokens", "timeout_seconds",
     "max_request_bytes", "max_response_bytes", "allow_local_http", "thinking",
-    "temperature", "reasoning_split", "output_token_field",
+    "temperature", "reasoning_split", "output_token_field", "reasoning_effort",
 }
 _JOB_TYPES = {"source.narrative_select", "source.narrative_summarize", "source.narrative_verify"}
 
@@ -66,6 +69,57 @@ def _options(spec: WorkerProcessSpec) -> tuple[dict[str, Any], dict[str, Any]]:
     return options, model
 
 
+def _contains_projected_work(binding: dict[str, Any], manifests: dict) -> bool:
+    """Classify actual frozen source inputs, not the request container version."""
+    settings = binding.get("generation_settings", {})
+    for manifest in manifests.values():
+        if not isinstance(manifest, dict):
+            continue
+        inputs = manifest.get("source_inputs", manifest)
+        subject = inputs.get("subject_binding") if isinstance(inputs, dict) else None
+        if isinstance(subject, dict) and subject.get("kind") == "official_json":
+            return True
+        if manifest.get("schema_version") == "narrative-generation/2":
+            return True
+        common = settings.get(manifest.get("settings_sha256")) if isinstance(settings, dict) else None
+        if isinstance(common, dict) and common.get("schema_version") == "narrative-generation/2":
+            return True
+    return False
+
+
+def _generation_values(binding_json: str | None) -> dict[str, str]:
+    """Read the coordinator-frozen snapshot; do not repeat manifest signing/parsing."""
+    if binding_json is None:
+        return {}
+    try:
+        binding = json.loads(binding_json)
+        versions = binding.get("execution_versions", {})
+        manifests = binding.get("generation_manifests", {})
+        if not isinstance(manifests, dict):
+            raise ValueError("NARRATIVE_RUN_GENERATION_INVALID")
+        if binding.get("schema_version") == "narrative-run-binding/4":
+            if not isinstance(versions, dict):
+                raise ValueError("NARRATIVE_RUN_EXECUTION_MISMATCH")
+            if _contains_projected_work(binding, manifests):
+                current = {
+                    "projection_prompt": PROJECTION_NARRATIVE_PROMPT_VERSION,
+                    "projection_model_request_schema": PROJECTION_MODEL_REQUEST_SCHEMA,
+                    "official_json_adapter": NARRATIVE_OFFICIAL_JSON_ADAPTER_VERSION,
+                }
+                if any(versions.get(key) != value for key, value in current.items()):
+                    raise ValueError("NARRATIVE_RUN_EXECUTION_MISMATCH")
+        values = {}
+        for item_key, manifest in manifests.items():
+            value = manifest.get("generation_sha256") if isinstance(manifest, dict) else None
+            if (not isinstance(item_key, str) or not item_key
+                    or not isinstance(value, str) or re.fullmatch(r"[0-9a-f]{64}", value) is None):
+                raise ValueError("NARRATIVE_RUN_GENERATION_INVALID")
+            values[item_key] = value
+        return values
+    except (AttributeError, TypeError, json.JSONDecodeError):
+        raise ValueError("NARRATIVE_RUN_GENERATION_INVALID") from None
+
+
 def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
     """Verify run identity, then construct ports inside the owning worker child.
 
@@ -95,6 +149,7 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
     if spec.role in {"model", "mixed"} and run.blocked:
         raise ValueError("NARRATIVE_RUN_BLOCKED")
 
+    generation_values = _generation_values(run.binding_json)
     project_root = Path(options["project_root"])
     config_path = Path(options["catalog_config_path"])
     catalog = SourceCatalog(load_catalog_config(config_path, project_root=project_root))
@@ -115,7 +170,9 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
     executor = HandlerExecutor()
     register_narrative_handlers(
         executor,
-        NarrativeRuntimeDependencies(reader=reader, model=model, model_caller=caller, normalization=normalization),
+        NarrativeRuntimeDependencies(reader=reader, model=model, model_caller=caller, normalization=normalization,
+            projection_catalog=catalog,
+            generation_sha256=(lambda subject: generation_values[subject.item_key]) if generation_values else None),
     )
     runtime = WorkerRuntime(registry=registry, executor=executor, model_client=model)
     validate_runtime(runtime, role=spec.role, allowed_job_types=spec.allowed_job_types)

@@ -29,9 +29,13 @@ def _failure_receipt(request, db_path, status, error):
                           "unknown_reservations": actual.unknown_reservations, "unsettled_reservations": actual.unsettled_reservations}
         except Exception:
             budget = {field: None for field in budget}
-    return {"schema_version": "narrative-batch-result/1", "run_id": request.run_id, "status": status, "error": error,
-            "documents": [{"document_id": ref.document_id, "status": status, "artifact_ref": None} for ref in request.sources],
-            "budget": budget}
+    projected = request.schema_version == "narrative-batch-request/2"
+    return {"schema_version": "narrative-batch-result/2" if projected else "narrative-batch-result/1",
+            "run_id": request.run_id, "status": status, "error": error,
+            **({"items":[{"item_key":item.item_key,"kind":item.kind,"status":status,"artifact_ref":None,"errors":[error]}
+                         for item in request.work_items]} if projected else
+               {"documents":[{"document_id":ref.document_id,"status":status,"artifact_ref":None} for ref in request.sources]}),
+            "budget":budget}
 
 
 def main(

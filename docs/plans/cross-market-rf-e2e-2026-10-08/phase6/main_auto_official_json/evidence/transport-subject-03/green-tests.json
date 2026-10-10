@@ -1,0 +1,29 @@
+{
+  "argv": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "-p",
+    "pytest_timeout",
+    "-p",
+    "pytest_asyncio.plugin",
+    "-o",
+    "addopts=",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-transport-green-517uysnr\\pytest",
+    "tests/unit/test_official_json_transport_subject_contracts.py",
+    "tests/integration/test_official_json_transport_subject.py",
+    "tests/unit/test_narrative_transport_contracts.py",
+    "tests/integration/test_narrative_transport.py"
+  ],
+  "exit_code": 1,
+  "elapsed_seconds": 43.99934149999899,
+  "external_provider_calls": 0,
+  "external_model_calls": 0
+}

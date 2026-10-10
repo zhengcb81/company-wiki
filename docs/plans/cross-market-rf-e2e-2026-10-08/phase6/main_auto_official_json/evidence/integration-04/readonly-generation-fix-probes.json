@@ -1,0 +1,29 @@
+{
+  "R1_fixed": {
+    "raw_low_max_distinct": true,
+    "raw_none_omitted_identical": true
+  },
+  "R2_fixed": {
+    "public_request_accepts": true,
+    "actual_projection_generation_thinking": "adaptive"
+  },
+  "frozen_real_model_job_prompts": {
+    "model_job_count": 2,
+    "projection_and_raw_prompts": [
+      "1.7.0",
+      "official-json/1.0.0"
+    ],
+    "resume_preserves_exact_frozen_manifest": true,
+    "resume_event_bytes_unchanged": true,
+    "thaw_equals_manifests": true
+  },
+  "frozen_wrong_prompt_refused": "BATCH_FROZEN_BINDING_INVALID",
+  "historical_effort_omission_probe": {
+    "constructed_legacy_generation1_with_explicit_request_effort": "low",
+    "all_manifest_wrapper_hashes_recomputed_consistently": true,
+    "resume_result": "BATCH_FROZEN_BINDING_INVALID",
+    "note": "constructed faithful old generation manifest; not a claim a production run already has this shape"
+  },
+  "external_calls": 0,
+  "owned_temp_removed": true
+}

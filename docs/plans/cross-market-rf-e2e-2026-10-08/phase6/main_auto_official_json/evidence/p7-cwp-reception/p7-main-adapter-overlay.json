@@ -1,0 +1,25 @@
+{
+  "mode": "in-memory P7 source leaf + MAIN actual modules; no merge/source edits",
+  "first_probe_note": "all source/select/summary/verify/replay assertions passed; output serialization needed selected.result.to_dict for internal mappingproxy",
+  "producer": "cwp_official_json/1.0.2",
+  "source_structure_parser_version": "1.0.1",
+  "selected_parser": {
+    "name": "cwp_official_json",
+    "version": "1.0.2"
+  },
+  "bundle_parser_version": "1.0.2",
+  "generation_parser_component": {
+    "name": "cwp_official_json",
+    "version": "1.0.2"
+  },
+  "native_unit_versions": [
+    "1.0.2"
+  ],
+  "two_page_order_invariant": true,
+  "selection_status": "selected",
+  "summary_status": "completed",
+  "replayed_locator_count": 4,
+  "originals_unchanged": true,
+  "model_transport_calls": 0,
+  "owned_temp_removed": true
+}

@@ -1,0 +1,41 @@
+{
+  "checks": [
+    {
+      "name": "ruff",
+      "exit_code": 0,
+      "duration_seconds": 0.248,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "ruff",
+        "check",
+        "--no-cache",
+        "src/company_wiki/automation/narrative_verify.py",
+        "src/company_wiki/automation/narrative_runtime.py",
+        "src/company_wiki/automation/narrative_worker_factory.py",
+        "tests/integration/test_official_json_verify_handler.py"
+      ],
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "name": "mypy",
+      "exit_code": 0,
+      "duration_seconds": 33.342,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "mypy",
+        "--follow-imports=silent",
+        "--cache-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-official-verify-static-q7r_zgwg\\mypy",
+        "src/company_wiki/automation/narrative_verify.py",
+        "src/company_wiki/automation/narrative_runtime.py",
+        "src/company_wiki/automation/narrative_worker_factory.py"
+      ],
+      "log_sha256": "281a094c39385b4d7b53e5db635f52158036861433c2a4975b9039e77a627a24"
+    }
+  ],
+  "owned_temp_removed": true
+}

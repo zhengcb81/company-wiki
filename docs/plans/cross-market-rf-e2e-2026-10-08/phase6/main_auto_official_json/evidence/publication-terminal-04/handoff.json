@@ -1,0 +1,161 @@
+{
+  "scope": [
+    "src/company_wiki/automation/narrative_projection.py",
+    "src/company_wiki/automation/terminal_receipt_contracts.py",
+    "src/company_wiki/automation/terminal_receipts.py",
+    "src/company_wiki/automation/store.py",
+    "tests/integration/test_official_json_publication_terminal.py"
+  ],
+  "file_sha256": {
+    "src/company_wiki/automation/narrative_projection.py": "2702bb3be33878f617785987b342dfc7088616866e703c034a1b1fb3a4fd806c",
+    "src/company_wiki/automation/terminal_receipt_contracts.py": "80cb6444edde9d6ce2858f72647954bd67de7c7a8899b1123169b0fc94b14394",
+    "src/company_wiki/automation/terminal_receipts.py": "8b03189848d6618a617c48f1f1b1a65b57280642a7311c05b0db516dc5e3080e",
+    "src/company_wiki/automation/store.py": "9d8e61322e942deb283696e316bfe0ea26ae64d6b5b07a5a289912419543f311",
+    "tests/integration/test_official_json_publication_terminal.py": "8eae9cf92c390843d3af8a7cdefaeff2ad0353c885c0816bb72cbba15523c967"
+  },
+  "red": {
+    "exit_code": 1,
+    "seconds": 13.87,
+    "owned_temp_removed": true,
+    "external_calls": 0,
+    "command": [
+      "python",
+      "-X",
+      "utf8",
+      "-B",
+      "-m",
+      "pytest",
+      "-p",
+      "pytest_timeout",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-publish-red-cfo6qd3f/pytest",
+      "-q",
+      "tests/integration/test_official_json_publication_terminal.py"
+    ]
+  },
+  "green": {
+    "exit_code": 0,
+    "seconds": 35.47,
+    "command": [
+      "python",
+      "-X",
+      "utf8",
+      "-B",
+      "-m",
+      "pytest",
+      "-p",
+      "pytest_timeout",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-publish-final-3fwvuphc/pytest",
+      "-q",
+      "tests/integration/test_official_json_publication_terminal.py",
+      "tests/unit/test_automation_store.py",
+      "tests/unit/test_automation_store_atomic.py",
+      "tests/integration/test_narrative_runtime_e2e.py::test_prepared_legacy_publication_recovers_without_rebinding_its_work_key"
+    ],
+    "external_calls": 0,
+    "owned_temp_removed": true
+  },
+  "static": {
+    "results": [
+      {
+        "name": "ruff",
+        "exit_code": 0
+      },
+      {
+        "name": "mypy",
+        "exit_code": 0
+      }
+    ],
+    "owned_temp_removed": true
+  },
+  "prior_raw_terminal_test_count": 21,
+  "distinct_passed_test_count": 82,
+  "external_calls": 0,
+  "commit": null,
+  "interfaces": {
+    "projected_terminal_schema": "narrative-terminal-receipt/2.0",
+    "projection_manifest_schema": "narrative-generation/2",
+    "public_projection_pin_fields": [
+      "effect_id",
+      "artifact_version_id",
+      "artifact_sha256",
+      "byte_size",
+      "subject_binding",
+      "generation_sha256"
+    ],
+    "generation_map_key": "bundle.item_key",
+    "projection_loader": "Callable[[NarrativeSubject], VerifiedProjectionView]"
+  },
+  "integrated_final": {
+    "results": [
+      {
+        "name": "pytest",
+        "exit_code": 0,
+        "seconds": 19.72,
+        "command": [
+          "python",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "pytest",
+          "-p",
+          "pytest_timeout",
+          "-p",
+          "no:cacheprovider",
+          "--basetemp",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-publish-integrated-ci7spuwc/pytest",
+          "-q",
+          "tests/integration/test_official_json_publication_terminal.py",
+          "tests/integration/test_narrative_runtime_e2e.py::test_prepared_legacy_publication_recovers_without_rebinding_its_work_key"
+        ]
+      },
+      {
+        "name": "ruff",
+        "exit_code": 0,
+        "seconds": 0.17,
+        "command": [
+          "python",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "ruff",
+          "check",
+          "--no-cache",
+          "src/company_wiki/automation/narrative_projection.py",
+          "src/company_wiki/automation/terminal_receipt_contracts.py",
+          "src/company_wiki/automation/terminal_receipts.py",
+          "src/company_wiki/automation/store.py",
+          "tests/integration/test_official_json_publication_terminal.py"
+        ]
+      },
+      {
+        "name": "mypy",
+        "exit_code": 0,
+        "seconds": 2.03,
+        "command": [
+          "python",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "mypy",
+          "--cache-dir",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-publish-integrated-ci7spuwc/mypy",
+          "src/company_wiki/automation/narrative_projection.py",
+          "src/company_wiki/automation/terminal_receipt_contracts.py",
+          "src/company_wiki/automation/terminal_receipts.py",
+          "src/company_wiki/automation/store.py"
+        ]
+      }
+    ],
+    "owned_temp_removed": true,
+    "external_calls": 0
+  }
+}

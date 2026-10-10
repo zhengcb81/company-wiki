@@ -1,0 +1,23 @@
+{
+  "status": "generation_helper_complete_pending_main_integration",
+  "files": [
+    {
+      "path": "src/company_wiki/automation/narrative_generation.py",
+      "sha256": "3b1168f739ea973c08c36cba49abb1d32c13957fdbb4ce16f3a4f6ad8bb5b8e6"
+    },
+    {
+      "path": "tests/unit/test_official_json_projection_generation.py",
+      "sha256": "de94d39db3a4e2932bf5ce79c0ddce693dea8e08eca7d43a78d360382145f6c2"
+    }
+  ],
+  "external_provider_calls": 0,
+  "external_model_calls": 0,
+  "new_cost_usd": "0",
+  "commit_created": false,
+  "whole_project_complete": false,
+  "remaining": [
+    "MAIN new transport and reuse integration",
+    "projection events and handler chain",
+    "concentrated public E2E/recovery/compatibility review"
+  ]
+}

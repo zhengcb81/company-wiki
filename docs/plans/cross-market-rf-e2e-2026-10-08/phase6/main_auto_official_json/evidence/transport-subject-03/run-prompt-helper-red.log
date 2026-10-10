@@ -1,0 +1,85 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-model-prompt-helper-red-5clf6swm\\pytest", "requested_basetemp_len": 75, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-222814-ad65eb4a", "effective_basetemp_len": 75}
+FFFFF                                                                    [100%]
+================================== FAILURES ===================================
+__ test_shared_model_prompt_lookup_uses_exact_job_and_preserves_old_fallback __
+
+    def test_shared_model_prompt_lookup_uses_exact_job_and_preserves_old_fallback():
+        binding = canonical_json(
+            {"job_prompt_versions": {"raw": RAW_PROMPT, "projected": PROJECTION_PROMPT}}
+        )
+        assert (
+>           run_module.model_prompt_version(binding, job_id="raw", default_prompt="unused")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            == RAW_PROMPT
+        )
+E       AttributeError: module 'company_wiki.automation.narrative_run_store' has no attribute 'model_prompt_version'
+
+tests\unit\test_official_json_run_prompt_admission.py:294: AttributeError
+________ test_shared_model_prompt_lookup_does_not_default_unbound_job _________
+
+    def test_shared_model_prompt_lookup_does_not_default_unbound_job():
+        binding = canonical_json({"job_prompt_versions": {"projected": PROJECTION_PROMPT}})
+        with pytest.raises(RunScopeError):
+>           run_module.model_prompt_version(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                binding, job_id="outside", default_prompt=RAW_PROMPT
+            )
+E           AttributeError: module 'company_wiki.automation.narrative_run_store' has no attribute 'model_prompt_version'
+
+tests\unit\test_official_json_run_prompt_admission.py:315: AttributeError
+_______ test_shared_model_prompt_lookup_refuses_malformed_binding[None] _______
+
+value = None
+
+    @pytest.mark.parametrize("value", [None, [], {"projected": True}])
+    def test_shared_model_prompt_lookup_refuses_malformed_binding(value):
+        with pytest.raises(RunConflictError):
+>           run_module.model_prompt_version(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                canonical_json({"job_prompt_versions": value}),
+                job_id="projected",
+                default_prompt=RAW_PROMPT,
+            )
+E           AttributeError: module 'company_wiki.automation.narrative_run_store' has no attribute 'model_prompt_version'
+
+tests\unit\test_official_json_run_prompt_admission.py:323: AttributeError
+______ test_shared_model_prompt_lookup_refuses_malformed_binding[value1] ______
+
+value = []
+
+    @pytest.mark.parametrize("value", [None, [], {"projected": True}])
+    def test_shared_model_prompt_lookup_refuses_malformed_binding(value):
+        with pytest.raises(RunConflictError):
+>           run_module.model_prompt_version(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                canonical_json({"job_prompt_versions": value}),
+                job_id="projected",
+                default_prompt=RAW_PROMPT,
+            )
+E           AttributeError: module 'company_wiki.automation.narrative_run_store' has no attribute 'model_prompt_version'
+
+tests\unit\test_official_json_run_prompt_admission.py:323: AttributeError
+______ test_shared_model_prompt_lookup_refuses_malformed_binding[value2] ______
+
+value = {'projected': True}
+
+    @pytest.mark.parametrize("value", [None, [], {"projected": True}])
+    def test_shared_model_prompt_lookup_refuses_malformed_binding(value):
+        with pytest.raises(RunConflictError):
+>           run_module.model_prompt_version(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                canonical_json({"job_prompt_versions": value}),
+                job_id="projected",
+                default_prompt=RAW_PROMPT,
+            )
+E           AttributeError: module 'company_wiki.automation.narrative_run_store' has no attribute 'model_prompt_version'
+
+tests\unit\test_official_json_run_prompt_admission.py:323: AttributeError
+=========================== short test summary info ===========================
+FAILED tests/unit/test_official_json_run_prompt_admission.py::test_shared_model_prompt_lookup_uses_exact_job_and_preserves_old_fallback
+FAILED tests/unit/test_official_json_run_prompt_admission.py::test_shared_model_prompt_lookup_does_not_default_unbound_job
+FAILED tests/unit/test_official_json_run_prompt_admission.py::test_shared_model_prompt_lookup_refuses_malformed_binding[None]
+FAILED tests/unit/test_official_json_run_prompt_admission.py::test_shared_model_prompt_lookup_refuses_malformed_binding[value1]
+FAILED tests/unit/test_official_json_run_prompt_admission.py::test_shared_model_prompt_lookup_refuses_malformed_binding[value2]
+5 failed, 24 deselected in 0.41s
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-222814-ad65eb4a", "existed": true, "removed": true}

@@ -1,5 +1,37 @@
 # Findings
 
+## MAIN与P7-CWP集中验收通过，待正常主线发布（2026-10-10T22:53:13.182893+00:00）
+
+P7-CWP source `1c11ef0b5a838655559e91fab9a7bf38f1533d89`/handoff `4f2c05c92f3aed9cdf91808a60e1c5d38adce6ee` 独立166责任测试与两布局真实导入/保存/回放、旧Git blob逐字节比对全部PASS，已正常合入隔离MAIN `3f2ed5cb1b95492717652cba64eae35c9686a1a0`。独占叶源码未追加改动。
+
+统一AUTO的最终9场景集中 **PASS/80.38秒**：mixed5、完整空内容1、历史effort兼容3。真实公共CLI/子进程/loopback HTTP→select/summary/verify→publish/read→resume/reuse/refresh/部分命中全部成立，同一账本/lease/outbox/预算，没有第二任务库；终态只保存小pin，单attempt<16KiB。原3次synthetic POST后完全复用零新增调用，部分命中仅缺项；空叙述零调用。历史已完成run不重签、不重计费，不finished/未交付/不可见仍明确拒绝；锁目录可有控制文件，不将SQL/原件不变夸成全盘零写。
+
+P7公开入口独立3完整场景 **PASS/46.79秒**，再只跑3新非字符串负控 **PASS/8.76秒**：显式1.0.2跨顺序同身份、persist/reopen/replay/export、AUTO→read2、反序重建精确零调用复用；缺省和显式1.0.1旧身份保持，非法版本typed拒绝。真实MSFT 66,324B原件fixture及parser0.3.1共57责任/真实搜索回放PASS，旧0.3.0封存解释保留。最终changed Ruff及4个最新改动模块mypy绿；先前28模块mypy唯一tuple注解问题已定点修绿。集中责任240首轮239PASS/1FAIL是新P7禁止源容器修改，修为assert TypeError后该1项PASS，保留原失败，不把它叫代码弱化。各组存在重叠，不相加。
+
+同批多prompt账本/terminal收缩、generation遗漏明确reasoning_effort、raw-only binding4被误作投影、TXT正文/END边界、公开参数忽略及裸TypeError均有真实RED→责任层修复→GREEN记录。保留实际原件SHA/身份/期间/as-of和实际限额，未增加材料许可、人工签收或canary。原件/config/Dayu/邻仓owner WIP不动，自有TEMP恢复。本节点外部供应商/模型调用与费用0；synthetic账本数字仅工程断言，不计真实费用，累计USD20/2M与旧unknown不重置。
+
+**Next Step：** 归档最终独立报告与候选SHA，正常commit→canonical master fast-forward→push→精确HEAD CI；随后继续W04/W03/W05/W08/W09及原三家真实修后四审、新三家泛化与loop。P7-RF/P7-AUDIT仍由外部harness施工，MAIN未接到完成通知，不碰其源。goal active、原研究与条件八家目标未完成。验收：[MAIN ACCEPTANCE](phase6/main_auto_official_json/ACCEPTANCE.md)。
+
+## MAIN 集中联调查根因；P7-CWP 已接收待验（2026-10-10T22:25:47.581615+00:00）
+
+真实 mixed public CLI→子进程→loopbackHTTP 首轮3PASS/2FAIL：官方项被 MODEL_BUDGET_DENIED 拒绝、raw正常。已证实不是费用耗尽，而是 run 固定raw提示1.7与官方提示official-json/1.0冲突，被 caller 一律误报。实施同一不可变run内逐模型job实际prompt小映射（既有binding4、同DB/lease/账本，无新许可/表）；预留仍受实际总额限制，配置/范围/存储错误分别诊断。
+
+独立探针与TDD另证实 raw generation 缺明确reasoning_effort、官方generation错拒真实HTTP支持的adaptive。6FAIL/1PASS后已修；缺省/null effort仍保留旧wire，显式effort改变生成身份，历史产物不重签。真实MSFT TXT 66324B/SHA4ac3b4f0…fixture路径已独立；解析器roster抢正文与带说话人end漏认在新增版本修根因，旧版本可回放，不skip真实断言。
+
+用户交P7-CWP-PROJECTION，工作树clean、source1c11ef0b/head4f2c05c9，仅许可叶文件/两tests/ownPWF，独立166责任和两layoutE2E进行中；未并线。其余P7仍由外部harness负责，MAIN不写其源。本轮供应商调用/费用0；原件/config/Dayu和邻仓WIP不动。AUTO大节点尚未绿，真实研究/四审/新三家/loop与条件八家继续待，goal active。
+
+**Next Step：** 同批次实际prompt账本、TXT新边界与模型语义修复集中GREEN；独立审查后正常提交/推送/精确CI，再接P7叶版本并显式opt-in联调。仅大节点集中测试，不增加小节点人工门。
+
+
+## MAIN共同接线根因补充（2026-10-10T22:12:18.696619+00:00）
+
+基础节点de24d31c远端精确CI38088848993 success。完整JSON投影不能借第一parent冒充全部来源：事件、摘要头、生成键、公共ref/查询、terminal pin均使用完整subject；数据库真实anchor仅维持existingFK。adapter原strip会改变首尾空白并使回放失配，已在适配责任层保留原生字段展示；Unicode展示仍遵守source-owned EvidenceSpan已有NFC契约，decoded SHA继续验证原字段。不新增对上游版本的猜测。
+
+正文有效locator不保证语义标签正确：transport回放也校验真实语言和parser；questions不能作为公司statement。通用source-only检索需要按每个真实parent生成hit，禁止把一个manifest覆盖全部母页。真实title/document_kind是模型输入，必须纳入projection生成键；未知语言可有诊断/无叙述skip，不能推断为中文或触发模型。factory遗漏合法reasoning_effort会拒绝已配置模型，属于配置传递共因。
+
+历史长报告读取测试bootstrap使用copy-all证据的ReplayModel，违反已有当前短摘要边界：修test stub为有界200字符，保留legacy真实长正文和读取断言；不扩大产品claim cap。共享数据库idempotent helper的object typing要反映to_dict能力，不能用ignore掩盖静态错误。
+
+
 ## MAIN基础身份与public official入口通过；三个P7外包已发出（2026-10-10T21:37:00.220175+00:00）
 
 164责任/兼容PASS、Ruff与neutralcore mypy绿，独立9纯内存探针通过；真实ownedTEMP import→project→reopen/replay/export→原文read逐字节相等且恢复。新增compactneutral subject不复制records、不伪原件、不新库/许可；publicCLI薄委托既有source责任。基础源码待本节点normalcommit/push，AUTO全链尚未完成。
@@ -581,3 +613,11 @@ W12普通提交7668ef6e仅一合同测试与独立PWF，最终4PASS/112.88s；12
 实际cache无已证生产缺陷；same-spec有限run复用无新模型与费用，locator回放仍有成本，失败账unknown保持、已发布bundle仍可用。70主线大节点绿不能替代3家公司原语言摘要语义、资料完整度和买方模型四审。W09提供精确复用/缺件清单，不能把primary event/SSE总量/搜索片段直接当获取与消费。
 
 RF既有可选有限source_failure_reason只差四词，导致真实CWP拒绝的原因消失；修复只加诊断词表而无新的阻断或身份层。189集中和11MAINcontrols绿，published5dcd19be CI30s/两文件定点安装一致；各层负责各自级别的数据和传输，不靠重复验证解决诊断损失。
+
+## 正常hook收尾与P7-RF接收（2026-10-10T23:03:31.329644+00:00）
+
+正常pre-commit首次真实阻提交：mypy在raw source guard发现persisted lineage参数新DTO可空而旧函数注解str；函数实际上只做byte/identity检验、该参数不承担二次许可，因此将注解准确改str|None，不新增阻断。host规则还误把两处JSON Pointer当文件路径，另外4处纯负控使用硬编码示例物理路径；正在按AST字段语义修classifier，4类路径负控改跨平台PurePath/stdlib构造、实际未知path键用tmp_path，10个原拒绝断言全部PASS。没有绕过hook、基线许可或删除断言。原第一次commit失败stdout/metadata保留独立attempt，之后正常重试。
+
+归档时Git自动换行使原生CR/CRLF日志和审查Markdown的已记录SHA变化，已按evidence角色设置-text/-diff，原始内容零修改；暂存280份原始回执/fixture逐byte相同，源码/PWF whitespace检查绿。仅保存必要失败记录，本次候选源码/测试/PWF/证据约2.5MB，未产生全湖/完整备份。
+
+用户已交P7-RF，独立只读接收验收启动；P7-AUDIT仍未收到完成通知，各卡写集继续隔离。CWP主线提交待hook收尾，不将前面工程绿冒称已远端发布。goal active、0外部供应商/模型费用、原件/config/Dayu及邻仓WIP不动。

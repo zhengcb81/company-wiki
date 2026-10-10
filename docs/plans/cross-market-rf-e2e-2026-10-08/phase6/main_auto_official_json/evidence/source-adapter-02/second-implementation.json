@@ -1,0 +1,31 @@
+{
+  "phase": "GREEN+legacy_selector",
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-p",
+    "pytest_timeout",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-adapter-green-ombzgo98\\pytest",
+    "-q",
+    "--disable-warnings",
+    "tests/unit/test_official_json_narrative_adapter.py",
+    "tests/integration/test_official_json_narrative_adapter.py",
+    "tests/unit/test_narrative_evidence.py"
+  ],
+  "exit_code": 1,
+  "duration_seconds": 11.771,
+  "temp_removed": true,
+  "external_provider_calls": 0,
+  "external_model_calls": 0,
+  "new_cost_usd": 0,
+  "captured_output_sha256": "e17a155895c74d13af0e27c1481dd29db865ff32e70d8d8bca4839db4f5a77fe",
+  "log_sha256": "3c8f7d988d6b14c19e317d1ca1ce4c1844df653cae4e28bb546f4782607a8f94",
+  "log_file": "second-implementation.log"
+}

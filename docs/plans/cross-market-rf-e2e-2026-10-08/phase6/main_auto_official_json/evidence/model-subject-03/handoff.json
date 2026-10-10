@@ -1,0 +1,34 @@
+{
+  "write_set": [
+    "src/company_wiki/automation/narrative_model.py",
+    "src/company_wiki/automation/narrative_summarize.py",
+    "tests/unit/test_official_json_model_subject.py",
+    "tests/unit/test_official_json_summarize_subject.py"
+  ],
+  "sha256": {
+    "src/company_wiki/automation/narrative_model.py": "f695509c13d3f775aa5eaea7c019a22bb484ca64b7cf917ffb67bf0a0e849a54",
+    "src/company_wiki/automation/narrative_summarize.py": "4127b3093252ca633f1f9bb827e65260bff7f407c07b431555483344a034caa9",
+    "tests/unit/test_official_json_model_subject.py": "650b1f7cb6375b1f464e44f111bd2c27e82899cb6a627d3080b0bdbac7dccaca",
+    "tests/unit/test_official_json_summarize_subject.py": "0a656defb74f14c33060ff587234d843c468a13ee9e2eea42e9524f07b60bd01"
+  },
+  "constants": {
+    "raw_model_request_schema": "narrative-model-request/1.4",
+    "raw_prompt_version": "1.7.0",
+    "projection_model_request_schema": "narrative-model-request/2",
+    "projection_prompt_version": "official-json/1.0.0"
+  },
+  "new_tests": 42,
+  "legacy_regression_tests": 103,
+  "total_passed": 145,
+  "ruff_exit_code": 0,
+  "mypy_exit_code": 0,
+  "owned_temp_removed": true,
+  "external_api_calls": 0,
+  "cost_usd": 0,
+  "committed": false,
+  "known_warning": "pytest plugin autoload disabled => existing asyncio_mode unknown option",
+  "root_integration_needed": [
+    "bind projection prompt/model request schema in generation versions",
+    "select adapter, verify, batch, transport and projection-specific reuse remain MAIN-owned"
+  ]
+}

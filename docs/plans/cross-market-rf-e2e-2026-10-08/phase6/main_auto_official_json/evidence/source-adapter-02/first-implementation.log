@@ -1,0 +1,20 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-adapter-green-xd_vpauh\\pytest", "requested_basetemp_len": 65, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-214019-67f02243", "effective_basetemp_len": 75}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+collected 23 items
+
+tests\unit\test_official_json_narrative_adapter.py .............F        [ 60%]
+tests\integration\test_official_json_narrative_adapter.py .........      [100%]
+
+================================== FAILURES ===================================
+___________ test_real_selector_still_uses_legacy_pdf_txt_entrypoint ___________
+tests\unit\test_official_json_narrative_adapter.py:205: in test_real_selector_still_uses_legacy_pdf_txt_entrypoint
+    assert package.evidence_spans
+E   AssertionError: assert ()
+E    +  where () = NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:6c9daeb2a93b3e0421afa1d0f88c313aca245ae075ec17ad415...t=96, candidate_count=0, dropped_financial_count=0, source_units=0, omitted_candidate_count=0, coverage_complete=False).evidence_spans
+=========================== short test summary info ===========================
+FAILED tests/unit/test_official_json_narrative_adapter.py::test_real_selector_still_uses_legacy_pdf_txt_entrypoint
+=================== 1 failed, 22 passed, 1 warning in 4.53s ===================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-214019-67f02243", "existed": true, "removed": true}

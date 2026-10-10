@@ -1,0 +1,32 @@
+{
+  "exit_code": 1,
+  "duration_seconds": 10.279,
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-p",
+    "pytest_timeout",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-native-field-green-gswk9wx8\\pytest",
+    "-q",
+    "--disable-warnings",
+    "tests/integration/test_official_json_select_handler.py",
+    "tests/unit/test_narrative_select_handler.py",
+    "tests/unit/test_official_json_narrative_adapter.py",
+    "tests/integration/test_official_json_narrative_adapter.py"
+  ],
+  "log_sha256": "0e6953405e1ae9b6bdb943acd37e0d27bf8e7c2de1ecedcc92b8b058b0585de6",
+  "external_calls": 0,
+  "owned_temp_removed": true,
+  "files": {
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\src\\company_wiki\\automation\\narrative_official_json.py": "fb78b6a5989bf6813b2082d6f8493850228d672284e47c181664813812f4aab5",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\tests\\unit\\test_official_json_narrative_adapter.py": "447ea5ba71bbdb832e0523a75c3cd372cd36d0bc08242c2c7d19a30fb7e04b6c",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\tests\\integration\\test_official_json_narrative_adapter.py": "b5328d2396fa783cb42c41ec707b54781aafd51054ad06197a02769139e21e1d"
+  }
+}

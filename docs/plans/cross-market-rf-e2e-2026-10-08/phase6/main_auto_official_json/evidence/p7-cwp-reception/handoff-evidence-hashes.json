@@ -1,0 +1,10 @@
+{
+  "evidence/m1_baseline_20261010/baseline_m3_tests.log": true,
+  "evidence/m1_red_20261010/red_new_tests.log": true,
+  "evidence/m2_green_20261010/green_new_tests.log": true,
+  "evidence/m3_final_20261010/green_all_post_review.log": true,
+  "evidence/m3_final_20261010/static_ruff.log": true,
+  "evidence/m3_final_20261010/static_mypy.log": true,
+  "evidence/m3_e2e_20261010/e2e.log": true,
+  "evidence/m3_final_20261010/independent_review.md": true
+}

@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "ruff",
+    "check",
+    "--no-cache",
+    "src/company_wiki/automation/narrative_transport_contracts.py",
+    "src/company_wiki/automation/narrative_transport.py",
+    "src/company_wiki/automation/narrative_replay.py",
+    "tests/unit/test_official_json_transport_subject_contracts.py",
+    "tests/integration/test_official_json_transport_subject.py"
+  ],
+  "exit_code": 1,
+  "elapsed_seconds": 0.16334460000143736,
+  "external_provider_calls": 0,
+  "external_model_calls": 0
+}

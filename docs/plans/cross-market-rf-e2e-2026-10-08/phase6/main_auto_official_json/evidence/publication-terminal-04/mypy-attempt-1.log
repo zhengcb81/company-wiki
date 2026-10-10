@@ -1,0 +1,3 @@
+src\company_wiki\automation\store.py:521: error: "object" has no attribute "to_dict"  [attr-defined]
+src\company_wiki\automation\store.py:522: error: "object" has no attribute "to_dict"  [attr-defined]
+Found 2 errors in 1 file (checked 4 source files)

@@ -1,0 +1,112 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-host-pointer-red-81l73v_8\\pytest", "requested_basetemp_len": 68, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-230324-4797184f", "effective_basetemp_len": 75}
+FFFF..........F                                                          [100%]
+================================== FAILURES ===================================
+_ test_json_pointer_data_fields_are_not_host_paths[record_pointer-'/data/0'] __
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-230324-4797184f/test_json_pointer_data_fields_0')
+key = 'record_pointer', expression = "'/data/0'"
+
+    @pytest.mark.parametrize("key, expression", [
+        ("record_pointer", repr(_abs("", "data", "0"))),
+        ("field_pointer", repr(_abs("", "data", "0", "")) + " + str(index)"),
+        ("record_pointer", repr(_abs("", "data", "escaped~0tilde~1slash"))),
+        ("field_pointer", repr(_abs("", "data", "", "unicode-\u516c\u53f8"))),
+    ])
+    def test_json_pointer_data_fields_are_not_host_paths(tmp_path, key, expression):
+        body = f"index = 1\nspan = {{'structured_value': {{{key!r}: {expression}}}}}\n"
+>       assert _rules(tmp_path, body) == []
+E       AssertionError: assert ['host-absolute-path'] == []
+E         
+E         Left contains one more item: 'host-absolute-path'
+E         Use -v to get more diff
+
+tests\contract\test_fc1307_host_assumption_gate.py:139: AssertionError
+_ test_json_pointer_data_fields_are_not_host_paths[field_pointer-'/data/0/' + str(index)] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-230324-4797184f/test_json_pointer_data_fields_1')
+key = 'field_pointer', expression = "'/data/0/' + str(index)"
+
+    @pytest.mark.parametrize("key, expression", [
+        ("record_pointer", repr(_abs("", "data", "0"))),
+        ("field_pointer", repr(_abs("", "data", "0", "")) + " + str(index)"),
+        ("record_pointer", repr(_abs("", "data", "escaped~0tilde~1slash"))),
+        ("field_pointer", repr(_abs("", "data", "", "unicode-\u516c\u53f8"))),
+    ])
+    def test_json_pointer_data_fields_are_not_host_paths(tmp_path, key, expression):
+        body = f"index = 1\nspan = {{'structured_value': {{{key!r}: {expression}}}}}\n"
+>       assert _rules(tmp_path, body) == []
+E       AssertionError: assert ['host-absolute-path'] == []
+E         
+E         Left contains one more item: 'host-absolute-path'
+E         Use -v to get more diff
+
+tests\contract\test_fc1307_host_assumption_gate.py:139: AssertionError
+_ test_json_pointer_data_fields_are_not_host_paths[record_pointer-'/data/escaped~0tilde~1slash'] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-230324-4797184f/test_json_pointer_data_fields_2')
+key = 'record_pointer', expression = "'/data/escaped~0tilde~1slash'"
+
+    @pytest.mark.parametrize("key, expression", [
+        ("record_pointer", repr(_abs("", "data", "0"))),
+        ("field_pointer", repr(_abs("", "data", "0", "")) + " + str(index)"),
+        ("record_pointer", repr(_abs("", "data", "escaped~0tilde~1slash"))),
+        ("field_pointer", repr(_abs("", "data", "", "unicode-\u516c\u53f8"))),
+    ])
+    def test_json_pointer_data_fields_are_not_host_paths(tmp_path, key, expression):
+        body = f"index = 1\nspan = {{'structured_value': {{{key!r}: {expression}}}}}\n"
+>       assert _rules(tmp_path, body) == []
+E       AssertionError: assert ['host-absolute-path'] == []
+E         
+E         Left contains one more item: 'host-absolute-path'
+E         Use -v to get more diff
+
+tests\contract\test_fc1307_host_assumption_gate.py:139: AssertionError
+_ test_json_pointer_data_fields_are_not_host_paths[field_pointer-'/data//unicode-\u516c\u53f8'] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-230324-4797184f/test_json_pointer_data_fields_3')
+key = 'field_pointer', expression = "'/data//unicode-公司'"
+
+    @pytest.mark.parametrize("key, expression", [
+        ("record_pointer", repr(_abs("", "data", "0"))),
+        ("field_pointer", repr(_abs("", "data", "0", "")) + " + str(index)"),
+        ("record_pointer", repr(_abs("", "data", "escaped~0tilde~1slash"))),
+        ("field_pointer", repr(_abs("", "data", "", "unicode-\u516c\u53f8"))),
+    ])
+    def test_json_pointer_data_fields_are_not_host_paths(tmp_path, key, expression):
+        body = f"index = 1\nspan = {{'structured_value': {{{key!r}: {expression}}}}}\n"
+>       assert _rules(tmp_path, body) == []
+E       AssertionError: assert ['host-absolute-path'] == []
+E         
+E         Left contains one more item: 'host-absolute-path'
+E         Use -v to get more diff
+
+tests\contract\test_fc1307_host_assumption_gate.py:139: AssertionError
+___ test_json_pointer_data_does_not_exempt_real_path_calls_or_capabilities ____
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-230324-4797184f/test_json_pointer_data_does_no0')
+
+    def test_json_pointer_data_does_not_exempt_real_path_calls_or_capabilities(tmp_path):
+        pointer = repr(_abs("", "data", "0"))
+        body = (
+            "from pathlib import Path\n"
+            "def test_link(tmp_path):\n"
+            f"    span = {{'record_pointer': {pointer}}}\n"
+            f"    path = Path({pointer})\n"
+            "    path.symlink_to(tmp_path / 'target')\n"
+        )
+>       assert _rules(tmp_path, body) == [guard.RULE_PATHS, guard.RULE_CAPABILITY]
+E       AssertionError: assert ['host-absolu...without-skip'] == ['host-absolu...without-skip']
+E         
+E         At index 1 diff: 'host-absolute-path' != 'host-capability-without-skip'
+E         Left contains one more item: 'host-capability-without-skip'
+E         Use -v to get more diff
+
+tests\contract\test_fc1307_host_assumption_gate.py:174: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/contract/test_fc1307_host_assumption_gate.py::test_json_pointer_data_fields_are_not_host_paths[record_pointer-'/data/0']
+FAILED tests/contract/test_fc1307_host_assumption_gate.py::test_json_pointer_data_fields_are_not_host_paths[field_pointer-'/data/0/' + str(index)]
+FAILED tests/contract/test_fc1307_host_assumption_gate.py::test_json_pointer_data_fields_are_not_host_paths[record_pointer-'/data/escaped~0tilde~1slash']
+FAILED tests/contract/test_fc1307_host_assumption_gate.py::test_json_pointer_data_fields_are_not_host_paths[field_pointer-'/data//unicode-\u516c\u53f8']
+FAILED tests/contract/test_fc1307_host_assumption_gate.py::test_json_pointer_data_does_not_exempt_real_path_calls_or_capabilities
+5 failed, 10 passed, 28 deselected in 1.10s
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-230324-4797184f", "existed": true, "removed": true}

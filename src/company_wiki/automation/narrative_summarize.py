@@ -17,6 +17,7 @@ from .narrative_contracts import (
     PhysicalPathLeakError,
     PromptReviewValue,
     SUMMARY_RESULT_SCHEMA,
+    PROJECTED_SUMMARY_RESULT_SCHEMA,
     SourceRevisionEventPayload,
 )
 from .narrative_model import (
@@ -50,6 +51,10 @@ def _summary_contract_rule(error: NarrativeContractError) -> str:
         "summary claim needs_review must be boolean": "CLAIM_REVIEW_TYPE",
         "summary draft source differs from source_ref": "SOURCE_IDENTITY",
         "summary source identity/hash does not match": "SOURCE_IDENTITY",
+        "summary subject identity/hash does not match": "SUBJECT_IDENTITY",
+        "summary draft subject differs from selection": "SUBJECT_IDENTITY",
+        "subject summary status is invalid": "DRAFT_STATUS",
+        "summary language must match the selected language": "SOURCE_LANGUAGE",
         "summary draft language differs from result": "SOURCE_LANGUAGE",
         "summary language must match the source language": "SOURCE_LANGUAGE",
         "summary draft must contain at least one claim": "CLAIMS_EMPTY",
@@ -75,6 +80,9 @@ def _summary_contract_rule(error: NarrativeContractError) -> str:
         ("summary claim missing fields:", "CLAIM_FIELDS"),
         ("summary claim text must", "CLAIM_TEXT"),
         ("summary draft source_sha256 must", "SOURCE_HASH_FORMAT"),
+        ("subject summary SHA must", "SUBJECT_HASH_FORMAT"),
+        ("subject summary draft unknown fields:", "DRAFT_FIELDS"),
+        ("subject summary draft missing fields:", "DRAFT_FIELDS"),
     ):
         if message.startswith(prefix):
             return rule
@@ -139,7 +147,7 @@ def _validate_dependency_identity(
     selected: NarrativeSelectResult,
 ) -> None:
     if (
-        selected.source_ref.to_dict() != payload.source_ref.to_dict()
+        selected.subject.to_dict() != payload.subject.to_dict()
         or selected.source_metadata.to_dict() != payload.source_metadata.to_dict()
         or selected.expected_read_policy_sha256 != payload.expected_read_policy_sha256
     ):
@@ -148,6 +156,13 @@ def _validate_dependency_identity(
             HandlerOutcome.TERMINAL_FAILURE,
             "select dependency identity differs from the source event",
         )
+
+
+def _summary_identity_wire(selected: NarrativeSelectResult) -> dict[str, Any]:
+    if selected.subject.kind == "official_json":
+        return {"schema_version": PROJECTED_SUMMARY_RESULT_SCHEMA,
+                "subject_binding": selected.subject.to_dict()}
+    return {"schema_version": SUMMARY_RESULT_SCHEMA, "source_ref": selected.source_ref.to_dict()}
 
 
 class NarrativeSummarizeHandler:
@@ -217,6 +232,11 @@ class NarrativeSummarizeHandler:
         _validate_dependency_identity(payload, selected)
         if selected.selection.status == "skipped_no_narrative":
             return _success(self._skip_result(selected))
+        if not selected.evidence_spans or selected.source_metadata.language not in {"zh", "en", "mixed"}:
+            raise _SummaryFailure(
+                "SUMMARY_INPUT_UNAVAILABLE", HandlerOutcome.TERMINAL_FAILURE,
+                "selected evidence or original language is unavailable",
+            )
         if self._model is None and self._model_caller is None:
             raise _SummaryFailure(
                 "MODEL_NOT_CONFIGURED",
@@ -267,8 +287,7 @@ class NarrativeSummarizeHandler:
     @staticmethod
     def _skip_result(selected: NarrativeSelectResult) -> NarrativeSummaryResult:
         raw = {
-            "schema_version": SUMMARY_RESULT_SCHEMA,
-            "source_ref": selected.source_ref.to_dict(),
+            **_summary_identity_wire(selected),
             "language": selected.source_metadata.language,
             "translate": False,
             "status": "summary_not_needed",
@@ -307,8 +326,7 @@ class NarrativeSummarizeHandler:
                 f"(rule={_summary_contract_rule(exc)})",
             ) from exc
         raw: Mapping[str, Any] = {
-            "schema_version": SUMMARY_RESULT_SCHEMA,
-            "source_ref": selected.source_ref.to_dict(),
+            **_summary_identity_wire(selected),
             "language": selected.source_metadata.language,
             "translate": False,
             "status": "completed",

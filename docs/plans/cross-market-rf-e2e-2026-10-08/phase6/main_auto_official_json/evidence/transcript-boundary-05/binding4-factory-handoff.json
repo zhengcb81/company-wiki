@@ -1,0 +1,122 @@
+{
+  "status": "implementation_complete_source_stable",
+  "changed_source": "src/company_wiki/automation/narrative_worker_factory.py",
+  "changed_source_sha256": "69733204127ac7b1e7d76c2d3c3b206d9f1cf32c4f43a9d4007f4364b022457e",
+  "regression_test_owned_by_source_agent": "tests/integration/test_narrative_legacy_effort_history.py",
+  "regression_test_sha256_at_handoff": "57828622b410a6e54020027085e9def2b3d61a98a52eaa74a4599e0978283412",
+  "red_node": "tests/integration/test_narrative_legacy_effort_history.py::test_completed_real_legacy_binding_reads_without_resigning_or_model[2]",
+  "red": {
+    "command": [
+      "python",
+      "-X",
+      "utf8",
+      "-B",
+      "-m",
+      "pytest",
+      "-p",
+      "pytest_timeout",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-binding4-raw-red-dzf8of7j/pytest",
+      "-q",
+      "tests/integration/test_narrative_legacy_effort_history.py::test_completed_real_legacy_binding_reads_without_resigning_or_model[2]"
+    ],
+    "exit_code": 1,
+    "seconds": 18.02,
+    "external_calls": 0,
+    "owned_temp_removed": true
+  },
+  "scope_proof": {
+    "matrix": [
+      {
+        "name": "raw_only_binding4_no_projection_versions",
+        "result": "accepted"
+      },
+      {
+        "name": "projected_missing_all_versions",
+        "result": "refused",
+        "code": "NARRATIVE_RUN_EXECUTION_MISMATCH"
+      },
+      {
+        "name": "projected_current_versions",
+        "result": "accepted"
+      },
+      {
+        "name": "projected_wrong_projection_prompt",
+        "result": "refused",
+        "code": "NARRATIVE_RUN_EXECUTION_MISMATCH"
+      },
+      {
+        "name": "projected_missing_projection_prompt",
+        "result": "refused",
+        "code": "NARRATIVE_RUN_EXECUTION_MISMATCH"
+      },
+      {
+        "name": "projected_wrong_projection_model_request_schema",
+        "result": "refused",
+        "code": "NARRATIVE_RUN_EXECUTION_MISMATCH"
+      },
+      {
+        "name": "projected_missing_projection_model_request_schema",
+        "result": "refused",
+        "code": "NARRATIVE_RUN_EXECUTION_MISMATCH"
+      },
+      {
+        "name": "projected_wrong_official_json_adapter",
+        "result": "refused",
+        "code": "NARRATIVE_RUN_EXECUTION_MISMATCH"
+      },
+      {
+        "name": "projected_missing_official_json_adapter",
+        "result": "refused",
+        "code": "NARRATIVE_RUN_EXECUTION_MISMATCH"
+      },
+      {
+        "name": "mixed_missing_projection_versions",
+        "result": "refused",
+        "code": "NARRATIVE_RUN_EXECUTION_MISMATCH"
+      },
+      {
+        "name": "mixed_actual_projection_current_versions",
+        "result": "accepted"
+      },
+      {
+        "name": "referenced_projection_schema_cannot_bypass_versions",
+        "result": "refused",
+        "code": "NARRATIVE_RUN_EXECUTION_MISMATCH"
+      },
+      {
+        "name": "raw_invalid_generation_still_refused",
+        "result": "refused",
+        "code": "NARRATIVE_RUN_GENERATION_INVALID"
+      },
+      {
+        "name": "legacy_no_binding",
+        "result": "accepted"
+      },
+      {
+        "name": "raw_malformed_versions_container_still_refused",
+        "result": "refused",
+        "code": "NARRATIVE_RUN_EXECUTION_MISMATCH"
+      }
+    ],
+    "static": [
+      {
+        "name": "ruff",
+        "exit_code": 0
+      },
+      {
+        "name": "mypy",
+        "exit_code": 0
+      }
+    ],
+    "owned_temp_removed": true,
+    "external_calls": 0,
+    "factory_sha256": "69733204127ac7b1e7d76c2d3c3b206d9f1cf32c4f43a9d4007f4364b022457e"
+  },
+  "actual_final_regression_owner": "/root/main_json_source_adapter_design",
+  "final_global_static_owner": "/root",
+  "external_vendor_calls": 0,
+  "commit": null
+}

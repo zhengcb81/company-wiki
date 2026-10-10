@@ -1,0 +1,143 @@
+{
+  "schema_version": "p7-projection-e2e/1",
+  "cases": [
+    {
+      "case": "paged-alpha",
+      "producer": "cwp_official_json/1.0.2",
+      "projection_id": "urn:company-wiki:source-projection:sha256:1027c52630b66406e460774f8eba48d8654430bd3bfc8452e374350ac5558cda",
+      "projection_sha256": "1027c52630b66406e460774f8eba48d8654430bd3bfc8452e374350ac5558cda",
+      "selected_records": [
+        101,
+        103
+      ],
+      "pages": [
+        {
+          "content_sha256": "f946cde554609b8cb6412116e9e1c67c8453298e0c4fe284e388bd31f1396220",
+          "byte_size": 609,
+          "sha256_recomputed": "f946cde554609b8cb6412116e9e1c67c8453298e0c4fe284e388bd31f1396220",
+          "source_id": "urn:company-wiki:source:sha256:f946cde554609b8cb6412116e9e1c67c8453298e0c4fe284e388bd31f1396220"
+        },
+        {
+          "content_sha256": "3896e153f7ad220dd004be56223ca6b7fdd1981f5d4c8aa1f2f65cdd409089bd",
+          "byte_size": 609,
+          "sha256_recomputed": "3896e153f7ad220dd004be56223ca6b7fdd1981f5d4c8aa1f2f65cdd409089bd",
+          "source_id": "urn:company-wiki:source:sha256:3896e153f7ad220dd004be56223ca6b7fdd1981f5d4c8aa1f2f65cdd409089bd"
+        }
+      ],
+      "pagination_complete": true
+    },
+    {
+      "case": "paged-beta",
+      "producer": "cwp_official_json/1.0.2",
+      "projection_id": "urn:company-wiki:source-projection:sha256:f36d0eebcf214883d9f802ebc5c002c6d66ed8b1c22dba8448dd95c27783c054",
+      "projection_sha256": "f36d0eebcf214883d9f802ebc5c002c6d66ed8b1c22dba8448dd95c27783c054",
+      "selected_records": [
+        102,
+        104
+      ],
+      "pages": [
+        {
+          "content_sha256": "f946cde554609b8cb6412116e9e1c67c8453298e0c4fe284e388bd31f1396220",
+          "byte_size": 609,
+          "sha256_recomputed": "f946cde554609b8cb6412116e9e1c67c8453298e0c4fe284e388bd31f1396220",
+          "source_id": "urn:company-wiki:source:sha256:f946cde554609b8cb6412116e9e1c67c8453298e0c4fe284e388bd31f1396220"
+        },
+        {
+          "content_sha256": "3896e153f7ad220dd004be56223ca6b7fdd1981f5d4c8aa1f2f65cdd409089bd",
+          "byte_size": 609,
+          "sha256_recomputed": "3896e153f7ad220dd004be56223ca6b7fdd1981f5d4c8aa1f2f65cdd409089bd",
+          "source_id": "urn:company-wiki:source:sha256:3896e153f7ad220dd004be56223ca6b7fdd1981f5d4c8aa1f2f65cdd409089bd"
+        }
+      ],
+      "pagination_complete": true
+    },
+    {
+      "case": "paged-alpha-legacy-1.0.1",
+      "producer": "cwp_official_json/1.0.1",
+      "projection_id": "urn:company-wiki:source-projection:sha256:df3f6502845450a90d28e82d1690e3bbd42dc326002ee19595917ca50fdbcee5",
+      "projection_sha256": "df3f6502845450a90d28e82d1690e3bbd42dc326002ee19595917ca50fdbcee5",
+      "selected_records": [
+        101,
+        103
+      ],
+      "pages": [
+        {
+          "content_sha256": "f946cde554609b8cb6412116e9e1c67c8453298e0c4fe284e388bd31f1396220",
+          "byte_size": 609,
+          "sha256_recomputed": "f946cde554609b8cb6412116e9e1c67c8453298e0c4fe284e388bd31f1396220",
+          "source_id": "urn:company-wiki:source:sha256:f946cde554609b8cb6412116e9e1c67c8453298e0c4fe284e388bd31f1396220"
+        },
+        {
+          "content_sha256": "3896e153f7ad220dd004be56223ca6b7fdd1981f5d4c8aa1f2f65cdd409089bd",
+          "byte_size": 609,
+          "sha256_recomputed": "3896e153f7ad220dd004be56223ca6b7fdd1981f5d4c8aa1f2f65cdd409089bd",
+          "source_id": "urn:company-wiki:source:sha256:3896e153f7ad220dd004be56223ca6b7fdd1981f5d4c8aa1f2f65cdd409089bd"
+        }
+      ],
+      "pagination_complete": true
+    },
+    {
+      "case": "flat-alpha-1.0.2",
+      "producer": "cwp_official_json/1.0.2",
+      "projection_id": "urn:company-wiki:source-projection:sha256:1e055f5e5dc11b82c85dbd41b87cf264be0f117ee186fa44d9ecd1d718088728",
+      "projection_sha256": "1e055f5e5dc11b82c85dbd41b87cf264be0f117ee186fa44d9ecd1d718088728",
+      "selected_records": [
+        601,
+        602
+      ],
+      "pagination_complete": true
+    }
+  ],
+  "checks": [
+    {
+      "check": "reopen-load-replay-export",
+      "case": "alpha",
+      "projection_id": "urn:company-wiki:source-projection:sha256:1027c52630b66406e460774f8eba48d8654430bd3bfc8452e374350ac5558cda",
+      "producer": "cwp_official_json/1.0.2",
+      "span_parser_versions": [
+        "1.0.2"
+      ],
+      "verified_records": 2,
+      "evidence_spans": 4,
+      "bundle_sha256": "957997191676715a028dee8108a0b39437e89866ba202eae84c731d945c6aa9f"
+    },
+    {
+      "check": "reopen-load-replay-export",
+      "case": "beta",
+      "projection_id": "urn:company-wiki:source-projection:sha256:f36d0eebcf214883d9f802ebc5c002c6d66ed8b1c22dba8448dd95c27783c054",
+      "producer": "cwp_official_json/1.0.2",
+      "span_parser_versions": [
+        "1.0.2"
+      ],
+      "verified_records": 2,
+      "evidence_spans": 4,
+      "bundle_sha256": "1360d20e3042ca1d45cfc1ac3c51a204f069b65c08d23bfbd43ffcdb36c280b7"
+    },
+    {
+      "check": "reopen-load-replay-export",
+      "case": "legacy",
+      "projection_id": "urn:company-wiki:source-projection:sha256:df3f6502845450a90d28e82d1690e3bbd42dc326002ee19595917ca50fdbcee5",
+      "producer": "cwp_official_json/1.0.1",
+      "span_parser_versions": [
+        "1.0.1"
+      ],
+      "verified_records": 2,
+      "evidence_spans": 4,
+      "bundle_sha256": "65b76c4c04410be099bff28916311246e7d4c50a2a6235d66b406fed294425ea"
+    },
+    {
+      "check": "three-page-all-permutations-one-identity",
+      "projection_id": "urn:company-wiki:source-projection:sha256:c70deb5bead95cff6829fade45311546d63893de34d4702e0918ea0c68877845"
+    }
+  ],
+  "temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-cwp-e2e-vf40k9a7",
+  "temp_initial_files": 0,
+  "paged_catalog_files": 15,
+  "paged_catalog_bytes": 447140,
+  "paged_raw_page_files": 2,
+  "paged_derived_files": 3,
+  "status": "passed",
+  "temp_final_files": 0,
+  "temp_restored": true,
+  "temp_files_removed": 43
+}

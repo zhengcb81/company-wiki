@@ -1,0 +1,15 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\readonly-main-contracts-9x1em_3g\\pytest", "requested_basetemp_len": 71, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-222042-0210c958", "effective_basetemp_len": 75}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+collected 53 items
+
+tests\unit\test_official_json_batch_identity.py ................         [ 30%]
+tests\unit\test_official_json_subject_contracts.py ...............       [ 58%]
+tests\integration\test_official_json_evidence_view.py ...                [ 64%]
+tests\integration\test_official_json_transport_subject.py .............. [ 90%]
+.....                                                                    [100%]
+
+======================= 53 passed, 1 warning in 17.09s ========================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-222042-0210c958", "existed": true, "removed": true}

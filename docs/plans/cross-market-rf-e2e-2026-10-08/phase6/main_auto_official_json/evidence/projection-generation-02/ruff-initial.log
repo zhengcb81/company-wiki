@@ -1,0 +1,225 @@
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_projection_generation.py:73:28
+   |
+71 | def test_every_bound_projection_identity_change_changes_generation(mutation):
+72 |     binding = _binding()
+73 |     if mutation == "issuer": binding["issuer"]["provider_company_id"] = 902
+   |                            ^
+74 |     elif mutation == "as_of": binding["as_of_date"] = "2026-10-09"
+75 |     elif mutation == "projection":
+   |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_projection_generation.py:74:29
+   |
+72 |     binding = _binding()
+73 |     if mutation == "issuer": binding["issuer"]["provider_company_id"] = 902
+74 |     elif mutation == "as_of": binding["as_of_date"] = "2026-10-09"
+   |                             ^
+75 |     elif mutation == "projection":
+76 |         binding["subject_sha256"] = "e" * 64
+   |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_projection_generation.py:81:32
+   |
+79 |         parent = binding["parent_source_refs"][mutation == "second_parent"]
+80 |         parent.update(content_sha256="f" * 64, source_id="urn:company-wiki:source:sha256:" + "f" * 64)
+81 |     elif mutation == "coverage": binding["coverage"]["pagination_complete"] = False
+   |                                ^
+82 |     else:
+83 |         field = {"structure_parser": "structure_parser_version", "parser": "parser", "layout_id": "layout_id",
+   |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_projection_generation.py:102:27
+    |
+100 | def test_actual_execution_components_are_bound(field):
+101 |     versions = _versions()
+102 |     if field == "handlers": versions[field]["source.narrative_verify"] = "3.0.1"
+    |                           ^
+103 |     else: versions[field] = "changed-producer"
+104 |     assert generation.generation_sha256(_manifest(versions=versions)) != generation.generation_sha256(_manifest())
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_projection_generation.py:103:9
+    |
+101 |     versions = _versions()
+102 |     if field == "handlers": versions[field]["source.narrative_verify"] = "3.0.1"
+103 |     else: versions[field] = "changed-producer"
+    |         ^
+104 |     assert generation.generation_sha256(_manifest(versions=versions)) != generation.generation_sha256(_manifest())
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_official_json_projection_generation.py:109:25
+    |
+107 | def test_profile_language_bundle_and_narrative_adapter_are_bound():
+108 |     expected = generation.generation_sha256(_manifest())
+109 |     request = _request(); request.profile = "P4"
+    |                         ^
+110 |     assert generation.generation_sha256(_manifest(request=request)) != expected
+111 |     args = dict(execution_versions=_versions(), bundle_producer="2.0.0", narrative_adapter_version="official-json-narrative/1")
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_official_json_projection_generation.py:120:31
+    |
+118 |     request = _request(api_key_env="OTHER_KEY_NAME", api_key="synthetic-secret-must-not-persist",
+119 |         timeout_seconds=9, max_request_bytes=10000, max_response_bytes=12000, allow_local_http=True)
+120 |     request.run_id = "another"; request.max_tokens = 1; request.max_seconds = 1; request.max_cost_usd = "0"
+    |                               ^
+121 |     request.refresh = True
+122 |     versions = {**_versions(), "parser": "raw-parser-irrelevant", "document_normalization": "raw-ocr-irrelevant"}
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_official_json_projection_generation.py:120:55
+    |
+118 |     request = _request(api_key_env="OTHER_KEY_NAME", api_key="synthetic-secret-must-not-persist",
+119 |         timeout_seconds=9, max_request_bytes=10000, max_response_bytes=12000, allow_local_http=True)
+120 |     request.run_id = "another"; request.max_tokens = 1; request.max_seconds = 1; request.max_cost_usd = "0"
+    |                                                       ^
+121 |     request.refresh = True
+122 |     versions = {**_versions(), "parser": "raw-parser-irrelevant", "document_normalization": "raw-ocr-irrelevant"}
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_official_json_projection_generation.py:120:80
+    |
+118 |     request = _request(api_key_env="OTHER_KEY_NAME", api_key="synthetic-secret-must-not-persist",
+119 |         timeout_seconds=9, max_request_bytes=10000, max_response_bytes=12000, allow_local_http=True)
+120 |     request.run_id = "another"; request.max_tokens = 1; request.max_seconds = 1; request.max_cost_usd = "0"
+    |                                                                                ^
+121 |     request.refresh = True
+122 |     versions = {**_versions(), "parser": "raw-parser-irrelevant", "document_normalization": "raw-ocr-irrelevant"}
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_official_json_projection_generation.py:140:25
+    |
+139 | def test_result_is_deeply_detached_from_every_caller_and_subject_snapshot():
+140 |     binding = _binding(); subject = NarrativeSubject.from_dict(binding); request = _request(); versions = _versions()
+    |                         ^
+141 |     one = generation.projection_generation_manifest(request, subject, language="en", execution_versions=versions,
+142 |         bundle_producer="2.0.0", narrative_adapter_version="official-json-narrative/1")
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_official_json_projection_generation.py:140:72
+    |
+139 | def test_result_is_deeply_detached_from_every_caller_and_subject_snapshot():
+140 |     binding = _binding(); subject = NarrativeSubject.from_dict(binding); request = _request(); versions = _versions()
+    |                                                                        ^
+141 |     one = generation.projection_generation_manifest(request, subject, language="en", execution_versions=versions,
+142 |         bundle_producer="2.0.0", narrative_adapter_version="official-json-narrative/1")
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_official_json_projection_generation.py:140:94
+    |
+139 | def test_result_is_deeply_detached_from_every_caller_and_subject_snapshot():
+140 |     binding = _binding(); subject = NarrativeSubject.from_dict(binding); request = _request(); versions = _versions()
+    |                                                                                              ^
+141 |     one = generation.projection_generation_manifest(request, subject, language="en", execution_versions=versions,
+142 |         bundle_producer="2.0.0", narrative_adapter_version="official-json-narrative/1")
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_projection_generation.py:157:35
+    |
+155 | @pytest.mark.parametrize("value", [float("nan"), float("inf"), -float("inf"), object()])
+156 | def test_nonfinite_or_nonjson_semantic_model_values_are_rejected(value):
+157 |     with pytest.raises(ValueError): _manifest(request=_request(temperature=value))
+    |                                   ^
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_official_json_projection_generation.py:162:25
+    |
+160 | @pytest.mark.parametrize("path", ["C:/Users/example/source", r"\\server\share\source", "file:///tmp/source", "/tmp/source"])
+161 | def test_physical_locations_cannot_enter_semantic_binding(path):
+162 |     binding = _binding(); binding["issuer"]["canonical_name"] = path
+    |                         ^
+163 |     with pytest.raises(ValueError): _manifest(binding=binding)
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_projection_generation.py:163:35
+    |
+161 | def test_physical_locations_cannot_enter_semantic_binding(path):
+162 |     binding = _binding(); binding["issuer"]["canonical_name"] = path
+163 |     with pytest.raises(ValueError): _manifest(binding=binding)
+    |                                   ^
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_official_json_projection_generation.py:168:25
+    |
+166 | @pytest.mark.parametrize("location", ["adapter", "issuer", "coverage"])
+167 | def test_full_record_payloads_are_forbidden_but_coverage_record_counts_are_valid(location):
+168 |     binding = _binding(); binding[location]["records"] = [{"raw_text": "full-record-copy"}]
+    |                         ^
+169 |     with pytest.raises(ValueError): _manifest(binding=binding)
+170 |     assert _manifest()["subject_binding"]["coverage"]["pages"][0]["records"] == 1
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_projection_generation.py:169:35
+    |
+167 | def test_full_record_payloads_are_forbidden_but_coverage_record_counts_are_valid(location):
+168 |     binding = _binding(); binding[location]["records"] = [{"raw_text": "full-record-copy"}]
+169 |     with pytest.raises(ValueError): _manifest(binding=binding)
+    |                                   ^
+170 |     assert _manifest()["subject_binding"]["coverage"]["pages"][0]["records"] == 1
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_official_json_projection_generation.py:175:27
+    |
+173 | @pytest.mark.parametrize("field", ["selector", "adapter", "prompt"])
+174 | def test_required_actual_execution_versions_cannot_default_to_raw_globals(field):
+175 |     versions = _versions(); versions.pop(field)
+    |                           ^
+176 |     with pytest.raises(ValueError): _manifest(versions=versions)
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_projection_generation.py:176:35
+    |
+174 | def test_required_actual_execution_versions_cannot_default_to_raw_globals(field):
+175 |     versions = _versions(); versions.pop(field)
+176 |     with pytest.raises(ValueError): _manifest(versions=versions)
+    |                                   ^
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_official_json_projection_generation.py:183:27
+    |
+181 |         generation.projection_generation_manifest(_request(), NarrativeSubject.from_raw(_binding()["parent_source_refs"][0]),
+182 |             language="en", execution_versions=_versions(), bundle_producer="2.0.0", narrative_adapter_version="official-json-narrativ…
+183 |     versions = _versions(); versions["handlers"]["api_key_env"] = "SYNTHETIC_KEY"
+    |                           ^
+184 |     with pytest.raises(ValueError): _manifest(versions=versions)
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_projection_generation.py:184:35
+    |
+182 |             language="en", execution_versions=_versions(), bundle_producer="2.0.0", narrative_adapter_version="official-json-narrativ…
+183 |     versions = _versions(); versions["handlers"]["api_key_env"] = "SYNTHETIC_KEY"
+184 |     with pytest.raises(ValueError): _manifest(versions=versions)
+    |                                   ^
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_projection_generation.py:190:35
+    |
+188 |     ("model_id", ""), ("max_output_tokens", True), ("max_output_tokens", 0)])
+189 | def test_invalid_generation_essentials_fail_before_identity_can_be_used(field, value):
+190 |     with pytest.raises(ValueError): _manifest(request=_request(**{field: value}))
+    |                                   ^
+    |
+
+Found 22 errors.

@@ -1,0 +1,32 @@
+{
+  "exit_code": 0,
+  "duration_seconds": 20.011,
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-p",
+    "pytest_timeout",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-official-verify-final-nkosrxuk\\pytest",
+    "-q",
+    "--disable-warnings",
+    "tests/integration/test_official_json_verify_handler.py",
+    "tests/unit/test_narrative_verify_handler.py",
+    "tests/unit/test_narrative_worker_factory.py"
+  ],
+  "log_sha256": "3d97715fe26fb7be8081e0e0c49922d08904db56c36b7f161f84cb70262959eb",
+  "external_calls": 0,
+  "owned_temp_removed": true,
+  "files": {
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\src\\company_wiki\\automation\\narrative_verify.py": "28c3ffdd41ccc9da8dd924e7a7ea550ba38b23b844ad020d7a92749f538a0f99",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\src\\company_wiki\\automation\\narrative_runtime.py": "4fde54ea255ccf9dbe37fae6d90c4e850cd76ecbda8d7cffd9da784ed7286eb1",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\src\\company_wiki\\automation\\narrative_worker_factory.py": "acd65734952912eeae2280a4b7f6f505b90a3a004bc49165934c091899f21c32",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\tests\\integration\\test_official_json_verify_handler.py": "f34f35bea1ab81070cdadbd612676d782c6bd225040e5c01b02e2c0de2920901"
+  }
+}

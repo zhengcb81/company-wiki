@@ -1,0 +1,35 @@
+{
+  "checks": [
+    {
+      "name": "ruff",
+      "argv": [
+        "python",
+        "-B",
+        "-m",
+        "ruff",
+        "check",
+        "--no-cache",
+        "src/company_wiki/automation/narrative_generation.py",
+        "tests/unit/test_official_json_projection_generation.py"
+      ],
+      "exit_code": 1
+    },
+    {
+      "name": "mypy",
+      "argv": [
+        "python",
+        "-B",
+        "-m",
+        "mypy",
+        "--no-incremental",
+        "--cache-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-projection-generation-static-_331gscg\\mypy-cache",
+        "src/company_wiki/automation/narrative_generation.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "owned_temp_removed": true,
+  "external_provider_calls": 0,
+  "external_model_calls": 0
+}

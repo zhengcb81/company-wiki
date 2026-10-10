@@ -42,7 +42,9 @@ class Ledger:
     def reserve_model_attempt(self, **arguments):
         self.events.append(("reserve", arguments))
         if self.fail_reserve:
-            raise ValueError("test budget exhausted")
+            from company_wiki.automation.narrative_run_store import RunBudgetExceededError
+
+            raise RunBudgetExceededError("test budget exhausted")
         return SimpleNamespace(
             may_send_http=self.may_send, record=self._record(100, 30)
         )
@@ -298,3 +300,26 @@ def test_reasoning_usage_survives_budget_caller_without_double_charge(failed):
     assert metrics.tokens == 60
     assert metrics.reasoning_tokens == 7
     assert metrics.usage_diagnostic is None
+
+
+@pytest.mark.parametrize("error_type,expected,outcome", [
+    ("budget", "MODEL_BUDGET_DENIED", HandlerOutcome.TERMINAL_FAILURE),
+    ("binding", "MODEL_RUN_BINDING_CONFLICT", HandlerOutcome.TERMINAL_FAILURE),
+    ("scope", "MODEL_RUN_SCOPE_MISMATCH", HandlerOutcome.TERMINAL_FAILURE),
+    ("storage", "MODEL_ADMISSION_UNAVAILABLE", HandlerOutcome.RETRYABLE),
+    ("invalid", "MODEL_ADMISSION_INVALID", HandlerOutcome.TERMINAL_FAILURE),
+])
+def test_actual_admission_error_is_not_mislabeled_as_budget_exhaustion(error_type, expected, outcome):
+    from company_wiki.automation.narrative_run_store import RunBudgetExceededError, RunConflictError, RunScopeError
+    error = {"budget": RunBudgetExceededError, "binding": RunConflictError, "scope": RunScopeError,
+             "storage": OSError, "invalid": ValueError}[error_type]
+    ledger = Ledger()
+    def refuse(**arguments):
+        raise error("sensitive diagnostic must not escape")
+    ledger.reserve_model_attempt = refuse
+    model = Model(ledger)
+    with pytest.raises(NarrativeBudgetCallError) as caught:
+        _caller(ledger, model).generate(_context(), REQUEST)
+    assert caught.value.code == expected and caught.value.outcome == outcome
+    assert model.calls == 0 and not ledger.settlements
+    assert "sensitive" not in str(caught.value)

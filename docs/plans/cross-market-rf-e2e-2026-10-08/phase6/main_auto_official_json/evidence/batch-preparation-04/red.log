@@ -1,0 +1,41 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-bprep-wom54bta\\p", "requested_basetemp_len": 52, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 4 items
+
+tests\integration\test_official_json_batch_preparation.py FFFF           [100%]
+
+================================== FAILURES ===================================
+_______ test_two_issuers_sharing_parents_produce_distinct_bound_events ________
+tests\integration\test_official_json_batch_preparation.py:24: in test_two_issuers_sharing_parents_produce_distinct_bound_events
+    binding=build_batch_events(request,SourceVersionReader(state.catalog),now="2026-10-10T00:00:00Z",projection_catalog=state.catalog)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: build_batch_events() got an unexpected keyword argument 'projection_catalog'
+_ test_projected_preparation_has_explicit_catalog_port_and_never_falls_back_to_anchor _
+tests\integration\test_official_json_batch_preparation.py:39: in test_projected_preparation_has_explicit_catalog_port_and_never_falls_back_to_anchor
+    with pytest.raises(ValueError,match="PROJECTION_SOURCE_PORT_UNAVAILABLE"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+_ test_projection_request_execution_identity_pins_active_native_adapter_and_prompt _
+tests\integration\test_official_json_batch_preparation.py:48: in test_projection_request_execution_identity_pins_active_native_adapter_and_prompt
+    assert versions["official_json_adapter"]==NARRATIVE_OFFICIAL_JSON_ADAPTER_VERSION
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'official_json_adapter'
+_ test_projection_generation_freeze_roundtrip_keeps_subject_in_per_item_inputs _
+tests\integration\test_official_json_batch_preparation.py:62: in test_projection_generation_freeze_roundtrip_keeps_subject_in_per_item_inputs
+    assert _thaw_generations(frozen)==manifests
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch.py:218: in _thaw_generations
+    raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
+E   company_wiki.automation.narrative_batch.BatchResumeError: BATCH_FROZEN_BINDING_INVALID
+=========================== short test summary info ===========================
+FAILED tests/integration/test_official_json_batch_preparation.py::test_two_issuers_sharing_parents_produce_distinct_bound_events
+FAILED tests/integration/test_official_json_batch_preparation.py::test_projected_preparation_has_explicit_catalog_port_and_never_falls_back_to_anchor
+FAILED tests/integration/test_official_json_batch_preparation.py::test_projection_request_execution_identity_pins_active_native_adapter_and_prompt
+FAILED tests/integration/test_official_json_batch_preparation.py::test_projection_generation_freeze_roundtrip_keeps_subject_in_per_item_inputs
+============================== 4 failed in 4.02s ==============================

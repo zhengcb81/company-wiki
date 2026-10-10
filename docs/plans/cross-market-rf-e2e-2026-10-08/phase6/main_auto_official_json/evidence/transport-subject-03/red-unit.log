@@ -1,0 +1,649 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-transport-subject-tf3i3log\\pytest", "requested_basetemp_len": 69, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-215333-911b5b45", "effective_basetemp_len": 75}
+F.......FFFF........FFFFFFFFFFFFFFFFFFF                                  [100%]
+================================== FAILURES ===================================
+__________ test_ref2_and_read2_exact_round_trip_and_detached_subject __________
+
+    def test_ref2_and_read2_exact_round_trip_and_detached_subject():
+        value = reference_wire()
+>       reference = NarrativeRef.from_dict(value)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_official_json_transport_subject_contracts.py:35: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\company_wiki\automation\narrative_transport_contracts.py:78: in from_dict
+    item = _exact(value, _REF_FIELDS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+value = {'schema_version': 'narrative-ref/2', 'artifact_version_id': 'projection-version-1', 'artifact_sha256': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'byte_size': 1024, ...}
+fields = frozenset({'artifact_sha256', 'artifact_version_id', 'byte_size', 'schema_version', 'source_ref'})
+
+    def _exact(value: object, fields: frozenset[str]) -> dict[str, Any]:
+        if not isinstance(value, dict) or set(value) != fields:
+>           raise NarrativeContractError("narrative transport fields are not exact")
+E           company_wiki.automation.narrative_contracts.NarrativeContractError: narrative transport fields are not exact
+
+src\company_wiki\automation\narrative_transport_contracts.py:47: NarrativeContractError
+________ test_read2_supports_explicit_issuer_partial_constraints[None] ________
+
+issuer = None
+
+    @pytest.mark.parametrize("issuer", [None, {"provider_company_id": 1}, {"provider_company_id": "1"}, {"market": "CN", "security_id": "688012"}])
+    def test_read2_supports_explicit_issuer_partial_constraints(issuer):
+        value = read_wire(); value["expected_issuer"] = issuer
+>       assert NarrativeReadRequest.from_dict(value).to_dict() == value
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_official_json_transport_subject_contracts.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\company_wiki\automation\narrative_transport_contracts.py:114: in from_dict
+    item = _exact(value, frozenset({
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+value = {'schema_version': 'narrative-read-request/2', 'narrative_ref': {'schema_version': 'narrative-ref/2', 'artifact_versio...aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'byte_size': 1024, ...}, 'as_of_date': '2026-10-08', 'expected_issuer': None}
+fields = frozenset({'as_of_date', 'expected_source', 'narrative_ref', 'schema_version'})
+
+    def _exact(value: object, fields: frozenset[str]) -> dict[str, Any]:
+        if not isinstance(value, dict) or set(value) != fields:
+>           raise NarrativeContractError("narrative transport fields are not exact")
+E           company_wiki.automation.narrative_contracts.NarrativeContractError: narrative transport fields are not exact
+
+src\company_wiki\automation\narrative_transport_contracts.py:47: NarrativeContractError
+______ test_read2_supports_explicit_issuer_partial_constraints[issuer1] _______
+
+issuer = {'provider_company_id': 1}
+
+    @pytest.mark.parametrize("issuer", [None, {"provider_company_id": 1}, {"provider_company_id": "1"}, {"market": "CN", "security_id": "688012"}])
+    def test_read2_supports_explicit_issuer_partial_constraints(issuer):
+        value = read_wire(); value["expected_issuer"] = issuer
+>       assert NarrativeReadRequest.from_dict(value).to_dict() == value
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_official_json_transport_subject_contracts.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\company_wiki\automation\narrative_transport_contracts.py:114: in from_dict
+    item = _exact(value, frozenset({
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+value = {'schema_version': 'narrative-read-request/2', 'narrative_ref': {'schema_version': 'narrative-ref/2', 'artifact_versio...aaaaaaaaaaaaaaaaa', 'byte_size': 1024, ...}, 'as_of_date': '2026-10-08', 'expected_issuer': {'provider_company_id': 1}}
+fields = frozenset({'as_of_date', 'expected_source', 'narrative_ref', 'schema_version'})
+
+    def _exact(value: object, fields: frozenset[str]) -> dict[str, Any]:
+        if not isinstance(value, dict) or set(value) != fields:
+>           raise NarrativeContractError("narrative transport fields are not exact")
+E           company_wiki.automation.narrative_contracts.NarrativeContractError: narrative transport fields are not exact
+
+src\company_wiki\automation\narrative_transport_contracts.py:47: NarrativeContractError
+______ test_read2_supports_explicit_issuer_partial_constraints[issuer2] _______
+
+issuer = {'provider_company_id': '1'}
+
+    @pytest.mark.parametrize("issuer", [None, {"provider_company_id": 1}, {"provider_company_id": "1"}, {"market": "CN", "security_id": "688012"}])
+    def test_read2_supports_explicit_issuer_partial_constraints(issuer):
+        value = read_wire(); value["expected_issuer"] = issuer
+>       assert NarrativeReadRequest.from_dict(value).to_dict() == value
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_official_json_transport_subject_contracts.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\company_wiki\automation\narrative_transport_contracts.py:114: in from_dict
+    item = _exact(value, frozenset({
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+value = {'schema_version': 'narrative-read-request/2', 'narrative_ref': {'schema_version': 'narrative-ref/2', 'artifact_versio...aaaaaaaaaaaaaaa', 'byte_size': 1024, ...}, 'as_of_date': '2026-10-08', 'expected_issuer': {'provider_company_id': '1'}}
+fields = frozenset({'as_of_date', 'expected_source', 'narrative_ref', 'schema_version'})
+
+    def _exact(value: object, fields: frozenset[str]) -> dict[str, Any]:
+        if not isinstance(value, dict) or set(value) != fields:
+>           raise NarrativeContractError("narrative transport fields are not exact")
+E           company_wiki.automation.narrative_contracts.NarrativeContractError: narrative transport fields are not exact
+
+src\company_wiki\automation\narrative_transport_contracts.py:47: NarrativeContractError
+______ test_read2_supports_explicit_issuer_partial_constraints[issuer3] _______
+
+issuer = {'market': 'CN', 'security_id': '688012'}
+
+    @pytest.mark.parametrize("issuer", [None, {"provider_company_id": 1}, {"provider_company_id": "1"}, {"market": "CN", "security_id": "688012"}])
+    def test_read2_supports_explicit_issuer_partial_constraints(issuer):
+        value = read_wire(); value["expected_issuer"] = issuer
+>       assert NarrativeReadRequest.from_dict(value).to_dict() == value
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_official_json_transport_subject_contracts.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\company_wiki\automation\narrative_transport_contracts.py:114: in from_dict
+    item = _exact(value, frozenset({
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+value = {'schema_version': 'narrative-read-request/2', 'narrative_ref': {'schema_version': 'narrative-ref/2', 'artifact_versio...aa', 'byte_size': 1024, ...}, 'as_of_date': '2026-10-08', 'expected_issuer': {'market': 'CN', 'security_id': '688012'}}
+fields = frozenset({'as_of_date', 'expected_source', 'narrative_ref', 'schema_version'})
+
+    def _exact(value: object, fields: frozenset[str]) -> dict[str, Any]:
+        if not isinstance(value, dict) or set(value) != fields:
+>           raise NarrativeContractError("narrative transport fields are not exact")
+E           company_wiki.automation.narrative_contracts.NarrativeContractError: narrative transport fields are not exact
+
+src\company_wiki\automation\narrative_transport_contracts.py:47: NarrativeContractError
+_ test_reference2_parser_requires_exact_subject_generation_and_keeps_old_parser _
+
+    def test_reference2_parser_requires_exact_subject_generation_and_keeps_old_parser():
+        view = view_fixture()
+        wire = {"schema_version": "narrative-reference-request/2",
+            "subject_binding": view.subject.to_dict(), "generation_sha256": "b"*64}
+>       subject, generation = contracts.parse_projected_reference_request(wire)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'company_wiki.automation.narrative_transport_contracts' has no attribute 'parse_projected_reference_request'
+
+tests\unit\test_official_json_transport_subject_contracts.py:88: AttributeError
+___________ test_projected_replay_accepts_only_selector_annotations ___________
+
+    def test_projected_replay_accepts_only_selector_annotations():
+        view = view_fixture()
+        package = select_verified_projection(view, title="Business development Q&A")
+        selected = SimpleNamespace(subject=view.subject, evidence_spans=package.evidence_spans)
+>       assert replay.replay_verified_projection(view, selected) == len(package.evidence_spans)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'company_wiki.automation.narrative_replay' has no attribute 'replay_verified_projection'
+
+tests\unit\test_official_json_transport_subject_contracts.py:99: AttributeError
+_ test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[parent_content_sha256] _
+
+field = 'parent_content_sha256'
+
+    @pytest.mark.parametrize("field", ["parent_content_sha256", "pointer", "token_range", "encoded_token_sha256", "role", "source_role", "language", "original_role", "raw_text", "coordinates", "parser", "text_sha256", "unit_kind", "unknown_metadata", "missing_metadata"])
+    def test_resigned_locator_mutations_are_refused_even_with_valid_span_hash(field):
+        view = view_fixture()
+        package = select_verified_projection(view, title="Business development Q&A")
+        original = package.evidence_spans[0]
+        metadata = deepcopy(original.to_dict()["structured_value"])
+        raw_text, coordinates, parser = original.raw_text, original.coordinates, original.parser_name
+        if field == "raw_text": raw_text = "Fabricated growth."
+        elif field == "coordinates":
+            from dataclasses import replace
+            coordinates = replace(coordinates, paragraph_index=999)
+        elif field == "parser": parser = "invented"
+        elif field == "unknown_metadata": metadata["fabricated_source_fact"] = True
+        elif field == "missing_metadata": metadata.pop("record_times")
+        elif field == "token_range": metadata[field] = [1, 2]
+        elif field in {"encoded_token_sha256", "parent_content_sha256", "text_sha256"}: metadata[field] = "f"*64
+        else: metadata[field] = "invented"
+        forged = EvidenceSpan.create(source_id=original.source_id, coordinates=coordinates, raw_text=raw_text,
+            structured_value=metadata, parser_name=parser, parser_version=original.parser_version,
+            parse_status=original.parse_status, quality_flags=original.quality_flags)
+        selected = SimpleNamespace(subject=view.subject, evidence_spans=(forged,))
+>       with pytest.raises(replay.NarrativeReplayError): replay.replay_verified_projection(view, selected)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'company_wiki.automation.narrative_replay' has no attribute 'replay_verified_projection'
+
+tests\unit\test_official_json_transport_subject_contracts.py:123: AttributeError
+_ test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[pointer] _
+
+field = 'pointer'
+
+    @pytest.mark.parametrize("field", ["parent_content_sha256", "pointer", "token_range", "encoded_token_sha256", "role", "source_role", "language", "original_role", "raw_text", "coordinates", "parser", "text_sha256", "unit_kind", "unknown_metadata", "missing_metadata"])
+    def test_resigned_locator_mutations_are_refused_even_with_valid_span_hash(field):
+        view = view_fixture()
+        package = select_verified_projection(view, title="Business development Q&A")
+        original = package.evidence_spans[0]
+        metadata = deepcopy(original.to_dict()["structured_value"])
+        raw_text, coordinates, parser = original.raw_text, original.coordinates, original.parser_name
+        if field == "raw_text": raw_text = "Fabricated growth."
+        elif field == "coordinates":
+            from dataclasses import replace
+            coordinates = replace(coordinates, paragraph_index=999)
+        elif field == "parser": parser = "invented"
+        elif field == "unknown_metadata": metadata["fabricated_source_fact"] = True
+        elif field == "missing_metadata": metadata.pop("record_times")
+        elif field == "token_range": metadata[field] = [1, 2]
+        elif field in {"encoded_token_sha256", "parent_content_sha256", "text_sha256"}: metadata[field] = "f"*64
+        else: metadata[field] = "invented"
+        forged = EvidenceSpan.create(source_id=original.source_id, coordinates=coordinates, raw_text=raw_text,
+            structured_value=metadata, parser_name=parser, parser_version=original.parser_version,
+            parse_status=original.parse_status, quality_flags=original.quality_flags)
+        selected = SimpleNamespace(subject=view.subject, evidence_spans=(forged,))
+>       with pytest.raises(replay.NarrativeReplayError): replay.replay_verified_projection(view, selected)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'company_wiki.automation.narrative_replay' has no attribute 'replay_verified_projection'
+
+tests\unit\test_official_json_transport_subject_contracts.py:123: AttributeError
+_ test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[token_range] _
+
+field = 'token_range'
+
+    @pytest.mark.parametrize("field", ["parent_content_sha256", "pointer", "token_range", "encoded_token_sha256", "role", "source_role", "language", "original_role", "raw_text", "coordinates", "parser", "text_sha256", "unit_kind", "unknown_metadata", "missing_metadata"])
+    def test_resigned_locator_mutations_are_refused_even_with_valid_span_hash(field):
+        view = view_fixture()
+        package = select_verified_projection(view, title="Business development Q&A")
+        original = package.evidence_spans[0]
+        metadata = deepcopy(original.to_dict()["structured_value"])
+        raw_text, coordinates, parser = original.raw_text, original.coordinates, original.parser_name
+        if field == "raw_text": raw_text = "Fabricated growth."
+        elif field == "coordinates":
+            from dataclasses import replace
+            coordinates = replace(coordinates, paragraph_index=999)
+        elif field == "parser": parser = "invented"
+        elif field == "unknown_metadata": metadata["fabricated_source_fact"] = True
+        elif field == "missing_metadata": metadata.pop("record_times")
+        elif field == "token_range": metadata[field] = [1, 2]
+        elif field in {"encoded_token_sha256", "parent_content_sha256", "text_sha256"}: metadata[field] = "f"*64
+        else: metadata[field] = "invented"
+        forged = EvidenceSpan.create(source_id=original.source_id, coordinates=coordinates, raw_text=raw_text,
+            structured_value=metadata, parser_name=parser, parser_version=original.parser_version,
+            parse_status=original.parse_status, quality_flags=original.quality_flags)
+        selected = SimpleNamespace(subject=view.subject, evidence_spans=(forged,))
+>       with pytest.raises(replay.NarrativeReplayError): replay.replay_verified_projection(view, selected)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'company_wiki.automation.narrative_replay' has no attribute 'replay_verified_projection'
+
+tests\unit\test_official_json_transport_subject_contracts.py:123: AttributeError
+_ test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[encoded_token_sha256] _
+
+field = 'encoded_token_sha256'
+
+    @pytest.mark.parametrize("field", ["parent_content_sha256", "pointer", "token_range", "encoded_token_sha256", "role", "source_role", "language", "original_role", "raw_text", "coordinates", "parser", "text_sha256", "unit_kind", "unknown_metadata", "missing_metadata"])
+    def test_resigned_locator_mutations_are_refused_even_with_valid_span_hash(field):
+        view = view_fixture()
+        package = select_verified_projection(view, title="Business development Q&A")
+        original = package.evidence_spans[0]
+        metadata = deepcopy(original.to_dict()["structured_value"])
+        raw_text, coordinates, parser = original.raw_text, original.coordinates, original.parser_name
+        if field == "raw_text": raw_text = "Fabricated growth."
+        elif field == "coordinates":
+            from dataclasses import replace
+            coordinates = replace(coordinates, paragraph_index=999)
+        elif field == "parser": parser = "invented"
+        elif field == "unknown_metadata": metadata["fabricated_source_fact"] = True
+        elif field == "missing_metadata": metadata.pop("record_times")
+        elif field == "token_range": metadata[field] = [1, 2]
+        elif field in {"encoded_token_sha256", "parent_content_sha256", "text_sha256"}: metadata[field] = "f"*64
+        else: metadata[field] = "invented"
+        forged = EvidenceSpan.create(source_id=original.source_id, coordinates=coordinates, raw_text=raw_text,
+            structured_value=metadata, parser_name=parser, parser_version=original.parser_version,
+            parse_status=original.parse_status, quality_flags=original.quality_flags)
+        selected = SimpleNamespace(subject=view.subject, evidence_spans=(forged,))
+>       with pytest.raises(replay.NarrativeReplayError): replay.replay_verified_projection(view, selected)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'company_wiki.automation.narrative_replay' has no attribute 'replay_verified_projection'
+
+tests\unit\test_official_json_transport_subject_contracts.py:123: AttributeError
+_ test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[role] _
+
+field = 'role'
+
+    @pytest.mark.parametrize("field", ["parent_content_sha256", "pointer", "token_range", "encoded_token_sha256", "role", "source_role", "language", "original_role", "raw_text", "coordinates", "parser", "text_sha256", "unit_kind", "unknown_metadata", "missing_metadata"])
+    def test_resigned_locator_mutations_are_refused_even_with_valid_span_hash(field):
+        view = view_fixture()
+        package = select_verified_projection(view, title="Business development Q&A")
+        original = package.evidence_spans[0]
+        metadata = deepcopy(original.to_dict()["structured_value"])
+        raw_text, coordinates, parser = original.raw_text, original.coordinates, original.parser_name
+        if field == "raw_text": raw_text = "Fabricated growth."
+        elif field == "coordinates":
+            from dataclasses import replace
+            coordinates = replace(coordinates, paragraph_index=999)
+        elif field == "parser": parser = "invented"
+        elif field == "unknown_metadata": metadata["fabricated_source_fact"] = True
+        elif field == "missing_metadata": metadata.pop("record_times")
+        elif field == "token_range": metadata[field] = [1, 2]
+        elif field in {"encoded_token_sha256", "parent_content_sha256", "text_sha256"}: metadata[field] = "f"*64
+        else: metadata[field] = "invented"
+        forged = EvidenceSpan.create(source_id=original.source_id, coordinates=coordinates, raw_text=raw_text,
+            structured_value=metadata, parser_name=parser, parser_version=original.parser_version,
+            parse_status=original.parse_status, quality_flags=original.quality_flags)
+        selected = SimpleNamespace(subject=view.subject, evidence_spans=(forged,))
+>       with pytest.raises(replay.NarrativeReplayError): replay.replay_verified_projection(view, selected)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'company_wiki.automation.narrative_replay' has no attribute 'replay_verified_projection'
+
+tests\unit\test_official_json_transport_subject_contracts.py:123: AttributeError
+_ test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[source_role] _
+
+field = 'source_role'
+
+    @pytest.mark.parametrize("field", ["parent_content_sha256", "pointer", "token_range", "encoded_token_sha256", "role", "source_role", "language", "original_role", "raw_text", "coordinates", "parser", "text_sha256", "unit_kind", "unknown_metadata", "missing_metadata"])
+    def test_resigned_locator_mutations_are_refused_even_with_valid_span_hash(field):
+        view = view_fixture()
+        package = select_verified_projection(view, title="Business development Q&A")
+        original = package.evidence_spans[0]
+        metadata = deepcopy(original.to_dict()["structured_value"])
+        raw_text, coordinates, parser = original.raw_text, original.coordinates, original.parser_name
+        if field == "raw_text": raw_text = "Fabricated growth."
+        elif field == "coordinates":
+            from dataclasses import replace
+            coordinates = replace(coordinates, paragraph_index=999)
+        elif field == "parser": parser = "invented"
+        elif field == "unknown_metadata": metadata["fabricated_source_fact"] = True
+        elif field == "missing_metadata": metadata.pop("record_times")
+        elif field == "token_range": metadata[field] = [1, 2]
+        elif field in {"encoded_token_sha256", "parent_content_sha256", "text_sha256"}: metadata[field] = "f"*64
+        else: metadata[field] = "invented"
+        forged = EvidenceSpan.create(source_id=original.source_id, coordinates=coordinates, raw_text=raw_text,
+            structured_value=metadata, parser_name=parser, parser_version=original.parser_version,
+            parse_status=original.parse_status, quality_flags=original.quality_flags)
+        selected = SimpleNamespace(subject=view.subject, evidence_spans=(forged,))
+>       with pytest.raises(replay.NarrativeReplayError): replay.replay_verified_projection(view, selected)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'company_wiki.automation.narrative_replay' has no attribute 'replay_verified_projection'
+
+tests\unit\test_official_json_transport_subject_contracts.py:123: AttributeError
+_ test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[language] _
+
+field = 'language'
+
+    @pytest.mark.parametrize("field", ["parent_content_sha256", "pointer", "token_range", "encoded_token_sha256", "role", "source_role", "language", "original_role", "raw_text", "coordinates", "parser", "text_sha256", "unit_kind", "unknown_metadata", "missing_metadata"])
+    def test_resigned_locator_mutations_are_refused_even_with_valid_span_hash(field):
+        view = view_fixture()
+        package = select_verified_projection(view, title="Business development Q&A")
+        original = package.evidence_spans[0]
+        metadata = deepcopy(original.to_dict()["structured_value"])
+        raw_text, coordinates, parser = original.raw_text, original.coordinates, original.parser_name
+        if field == "raw_text": raw_text = "Fabricated growth."
+        elif field == "coordinates":
+            from dataclasses import replace
+            coordinates = replace(coordinates, paragraph_index=999)
+        elif field == "parser": parser = "invented"
+        elif field == "unknown_metadata": metadata["fabricated_source_fact"] = True
+        elif field == "missing_metadata": metadata.pop("record_times")
+        elif field == "token_range": metadata[field] = [1, 2]
+        elif field in {"encoded_token_sha256", "parent_content_sha256", "text_sha256"}: metadata[field] = "f"*64
+        else: metadata[field] = "invented"
+        forged = EvidenceSpan.create(source_id=original.source_id, coordinates=coordinates, raw_text=raw_text,
+            structured_value=metadata, parser_name=parser, parser_version=original.parser_version,
+            parse_status=original.parse_status, quality_flags=original.quality_flags)
+        selected = SimpleNamespace(subject=view.subject, evidence_spans=(forged,))
+>       with pytest.raises(replay.NarrativeReplayError): replay.replay_verified_projection(view, selected)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'company_wiki.automation.narrative_replay' has no attribute 'replay_verified_projection'
+
+tests\unit\test_official_json_transport_subject_contracts.py:123: AttributeError
+_ test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[original_role] _
+
+field = 'original_role'
+
+    @pytest.mark.parametrize("field", ["parent_content_sha256", "pointer", "token_range", "encoded_token_sha256", "role", "source_role", "language", "original_role", "raw_text", "coordinates", "parser", "text_sha256", "unit_kind", "unknown_metadata", "missing_metadata"])
+    def test_resigned_locator_mutations_are_refused_even_with_valid_span_hash(field):
+        view = view_fixture()
+        package = select_verified_projection(view, title="Business development Q&A")
+        original = package.evidence_spans[0]
+        metadata = deepcopy(original.to_dict()["structured_value"])
+        raw_text, coordinates, parser = original.raw_text, original.coordinates, original.parser_name
+        if field == "raw_text": raw_text = "Fabricated growth."
+        elif field == "coordinates":
+            from dataclasses import replace
+            coordinates = replace(coordinates, paragraph_index=999)
+        elif field == "parser": parser = "invented"
+        elif field == "unknown_metadata": metadata["fabricated_source_fact"] = True
+        elif field == "missing_metadata": metadata.pop("record_times")
+        elif field == "token_range": metadata[field] = [1, 2]
+        elif field in {"encoded_token_sha256", "parent_content_sha256", "text_sha256"}: metadata[field] = "f"*64
+        else: metadata[field] = "invented"
+        forged = EvidenceSpan.create(source_id=original.source_id, coordinates=coordinates, raw_text=raw_text,
+            structured_value=metadata, parser_name=parser, parser_version=original.parser_version,
+            parse_status=original.parse_status, quality_flags=original.quality_flags)
+        selected = SimpleNamespace(subject=view.subject, evidence_spans=(forged,))
+>       with pytest.raises(replay.NarrativeReplayError): replay.replay_verified_projection(view, selected)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'company_wiki.automation.narrative_replay' has no attribute 'replay_verified_projection'
+
+tests\unit\test_official_json_transport_subject_contracts.py:123: AttributeError
+_ test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[raw_text] _
+
+field = 'raw_text'
+
+    @pytest.mark.parametrize("field", ["parent_content_sha256", "pointer", "token_range", "encoded_token_sha256", "role", "source_role", "language", "original_role", "raw_text", "coordinates", "parser", "text_sha256", "unit_kind", "unknown_metadata", "missing_metadata"])
+    def test_resigned_locator_mutations_are_refused_even_with_valid_span_hash(field):
+        view = view_fixture()
+        package = select_verified_projection(view, title="Business development Q&A")
+        original = package.evidence_spans[0]
+        metadata = deepcopy(original.to_dict()["structured_value"])
+        raw_text, coordinates, parser = original.raw_text, original.coordinates, original.parser_name
+        if field == "raw_text": raw_text = "Fabricated growth."
+        elif field == "coordinates":
+            from dataclasses import replace
+            coordinates = replace(coordinates, paragraph_index=999)
+        elif field == "parser": parser = "invented"
+        elif field == "unknown_metadata": metadata["fabricated_source_fact"] = True
+        elif field == "missing_metadata": metadata.pop("record_times")
+        elif field == "token_range": metadata[field] = [1, 2]
+        elif field in {"encoded_token_sha256", "parent_content_sha256", "text_sha256"}: metadata[field] = "f"*64
+        else: metadata[field] = "invented"
+        forged = EvidenceSpan.create(source_id=original.source_id, coordinates=coordinates, raw_text=raw_text,
+            structured_value=metadata, parser_name=parser, parser_version=original.parser_version,
+            parse_status=original.parse_status, quality_flags=original.quality_flags)
+        selected = SimpleNamespace(subject=view.subject, evidence_spans=(forged,))
+>       with pytest.raises(replay.NarrativeReplayError): replay.replay_verified_projection(view, selected)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'company_wiki.automation.narrative_replay' has no attribute 'replay_verified_projection'
+
+tests\unit\test_official_json_transport_subject_contracts.py:123: AttributeError
+_ test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[coordinates] _
+
+field = 'coordinates'
+
+    @pytest.mark.parametrize("field", ["parent_content_sha256", "pointer", "token_range", "encoded_token_sha256", "role", "source_role", "language", "original_role", "raw_text", "coordinates", "parser", "text_sha256", "unit_kind", "unknown_metadata", "missing_metadata"])
+    def test_resigned_locator_mutations_are_refused_even_with_valid_span_hash(field):
+        view = view_fixture()
+        package = select_verified_projection(view, title="Business development Q&A")
+        original = package.evidence_spans[0]
+        metadata = deepcopy(original.to_dict()["structured_value"])
+        raw_text, coordinates, parser = original.raw_text, original.coordinates, original.parser_name
+        if field == "raw_text": raw_text = "Fabricated growth."
+        elif field == "coordinates":
+            from dataclasses import replace
+            coordinates = replace(coordinates, paragraph_index=999)
+        elif field == "parser": parser = "invented"
+        elif field == "unknown_metadata": metadata["fabricated_source_fact"] = True
+        elif field == "missing_metadata": metadata.pop("record_times")
+        elif field == "token_range": metadata[field] = [1, 2]
+        elif field in {"encoded_token_sha256", "parent_content_sha256", "text_sha256"}: metadata[field] = "f"*64
+        else: metadata[field] = "invented"
+        forged = EvidenceSpan.create(source_id=original.source_id, coordinates=coordinates, raw_text=raw_text,
+            structured_value=metadata, parser_name=parser, parser_version=original.parser_version,
+            parse_status=original.parse_status, quality_flags=original.quality_flags)
+        selected = SimpleNamespace(subject=view.subject, evidence_spans=(forged,))
+>       with pytest.raises(replay.NarrativeReplayError): replay.replay_verified_projection(view, selected)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'company_wiki.automation.narrative_replay' has no attribute 'replay_verified_projection'
+
+tests\unit\test_official_json_transport_subject_contracts.py:123: AttributeError
+_ test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[parser] _
+
+field = 'parser'
+
+    @pytest.mark.parametrize("field", ["parent_content_sha256", "pointer", "token_range", "encoded_token_sha256", "role", "source_role", "language", "original_role", "raw_text", "coordinates", "parser", "text_sha256", "unit_kind", "unknown_metadata", "missing_metadata"])
+    def test_resigned_locator_mutations_are_refused_even_with_valid_span_hash(field):
+        view = view_fixture()
+        package = select_verified_projection(view, title="Business development Q&A")
+        original = package.evidence_spans[0]
+        metadata = deepcopy(original.to_dict()["structured_value"])
+        raw_text, coordinates, parser = original.raw_text, original.coordinates, original.parser_name
+        if field == "raw_text": raw_text = "Fabricated growth."
+        elif field == "coordinates":
+            from dataclasses import replace
+            coordinates = replace(coordinates, paragraph_index=999)
+        elif field == "parser": parser = "invented"
+        elif field == "unknown_metadata": metadata["fabricated_source_fact"] = True
+        elif field == "missing_metadata": metadata.pop("record_times")
+        elif field == "token_range": metadata[field] = [1, 2]
+        elif field in {"encoded_token_sha256", "parent_content_sha256", "text_sha256"}: metadata[field] = "f"*64
+        else: metadata[field] = "invented"
+        forged = EvidenceSpan.create(source_id=original.source_id, coordinates=coordinates, raw_text=raw_text,
+            structured_value=metadata, parser_name=parser, parser_version=original.parser_version,
+            parse_status=original.parse_status, quality_flags=original.quality_flags)
+        selected = SimpleNamespace(subject=view.subject, evidence_spans=(forged,))
+>       with pytest.raises(replay.NarrativeReplayError): replay.replay_verified_projection(view, selected)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'company_wiki.automation.narrative_replay' has no attribute 'replay_verified_projection'
+
+tests\unit\test_official_json_transport_subject_contracts.py:123: AttributeError
+_ test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[text_sha256] _
+
+field = 'text_sha256'
+
+    @pytest.mark.parametrize("field", ["parent_content_sha256", "pointer", "token_range", "encoded_token_sha256", "role", "source_role", "language", "original_role", "raw_text", "coordinates", "parser", "text_sha256", "unit_kind", "unknown_metadata", "missing_metadata"])
+    def test_resigned_locator_mutations_are_refused_even_with_valid_span_hash(field):
+        view = view_fixture()
+        package = select_verified_projection(view, title="Business development Q&A")
+        original = package.evidence_spans[0]
+        metadata = deepcopy(original.to_dict()["structured_value"])
+        raw_text, coordinates, parser = original.raw_text, original.coordinates, original.parser_name
+        if field == "raw_text": raw_text = "Fabricated growth."
+        elif field == "coordinates":
+            from dataclasses import replace
+            coordinates = replace(coordinates, paragraph_index=999)
+        elif field == "parser": parser = "invented"
+        elif field == "unknown_metadata": metadata["fabricated_source_fact"] = True
+        elif field == "missing_metadata": metadata.pop("record_times")
+        elif field == "token_range": metadata[field] = [1, 2]
+        elif field in {"encoded_token_sha256", "parent_content_sha256", "text_sha256"}: metadata[field] = "f"*64
+        else: metadata[field] = "invented"
+        forged = EvidenceSpan.create(source_id=original.source_id, coordinates=coordinates, raw_text=raw_text,
+            structured_value=metadata, parser_name=parser, parser_version=original.parser_version,
+            parse_status=original.parse_status, quality_flags=original.quality_flags)
+        selected = SimpleNamespace(subject=view.subject, evidence_spans=(forged,))
+>       with pytest.raises(replay.NarrativeReplayError): replay.replay_verified_projection(view, selected)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'company_wiki.automation.narrative_replay' has no attribute 'replay_verified_projection'
+
+tests\unit\test_official_json_transport_subject_contracts.py:123: AttributeError
+_ test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[unit_kind] _
+
+field = 'unit_kind'
+
+    @pytest.mark.parametrize("field", ["parent_content_sha256", "pointer", "token_range", "encoded_token_sha256", "role", "source_role", "language", "original_role", "raw_text", "coordinates", "parser", "text_sha256", "unit_kind", "unknown_metadata", "missing_metadata"])
+    def test_resigned_locator_mutations_are_refused_even_with_valid_span_hash(field):
+        view = view_fixture()
+        package = select_verified_projection(view, title="Business development Q&A")
+        original = package.evidence_spans[0]
+        metadata = deepcopy(original.to_dict()["structured_value"])
+        raw_text, coordinates, parser = original.raw_text, original.coordinates, original.parser_name
+        if field == "raw_text": raw_text = "Fabricated growth."
+        elif field == "coordinates":
+            from dataclasses import replace
+            coordinates = replace(coordinates, paragraph_index=999)
+        elif field == "parser": parser = "invented"
+        elif field == "unknown_metadata": metadata["fabricated_source_fact"] = True
+        elif field == "missing_metadata": metadata.pop("record_times")
+        elif field == "token_range": metadata[field] = [1, 2]
+        elif field in {"encoded_token_sha256", "parent_content_sha256", "text_sha256"}: metadata[field] = "f"*64
+        else: metadata[field] = "invented"
+        forged = EvidenceSpan.create(source_id=original.source_id, coordinates=coordinates, raw_text=raw_text,
+            structured_value=metadata, parser_name=parser, parser_version=original.parser_version,
+            parse_status=original.parse_status, quality_flags=original.quality_flags)
+        selected = SimpleNamespace(subject=view.subject, evidence_spans=(forged,))
+>       with pytest.raises(replay.NarrativeReplayError): replay.replay_verified_projection(view, selected)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'company_wiki.automation.narrative_replay' has no attribute 'replay_verified_projection'
+
+tests\unit\test_official_json_transport_subject_contracts.py:123: AttributeError
+_ test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[unknown_metadata] _
+
+field = 'unknown_metadata'
+
+    @pytest.mark.parametrize("field", ["parent_content_sha256", "pointer", "token_range", "encoded_token_sha256", "role", "source_role", "language", "original_role", "raw_text", "coordinates", "parser", "text_sha256", "unit_kind", "unknown_metadata", "missing_metadata"])
+    def test_resigned_locator_mutations_are_refused_even_with_valid_span_hash(field):
+        view = view_fixture()
+        package = select_verified_projection(view, title="Business development Q&A")
+        original = package.evidence_spans[0]
+        metadata = deepcopy(original.to_dict()["structured_value"])
+        raw_text, coordinates, parser = original.raw_text, original.coordinates, original.parser_name
+        if field == "raw_text": raw_text = "Fabricated growth."
+        elif field == "coordinates":
+            from dataclasses import replace
+            coordinates = replace(coordinates, paragraph_index=999)
+        elif field == "parser": parser = "invented"
+        elif field == "unknown_metadata": metadata["fabricated_source_fact"] = True
+        elif field == "missing_metadata": metadata.pop("record_times")
+        elif field == "token_range": metadata[field] = [1, 2]
+        elif field in {"encoded_token_sha256", "parent_content_sha256", "text_sha256"}: metadata[field] = "f"*64
+        else: metadata[field] = "invented"
+        forged = EvidenceSpan.create(source_id=original.source_id, coordinates=coordinates, raw_text=raw_text,
+            structured_value=metadata, parser_name=parser, parser_version=original.parser_version,
+            parse_status=original.parse_status, quality_flags=original.quality_flags)
+        selected = SimpleNamespace(subject=view.subject, evidence_spans=(forged,))
+>       with pytest.raises(replay.NarrativeReplayError): replay.replay_verified_projection(view, selected)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'company_wiki.automation.narrative_replay' has no attribute 'replay_verified_projection'
+
+tests\unit\test_official_json_transport_subject_contracts.py:123: AttributeError
+_ test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[missing_metadata] _
+
+field = 'missing_metadata'
+
+    @pytest.mark.parametrize("field", ["parent_content_sha256", "pointer", "token_range", "encoded_token_sha256", "role", "source_role", "language", "original_role", "raw_text", "coordinates", "parser", "text_sha256", "unit_kind", "unknown_metadata", "missing_metadata"])
+    def test_resigned_locator_mutations_are_refused_even_with_valid_span_hash(field):
+        view = view_fixture()
+        package = select_verified_projection(view, title="Business development Q&A")
+        original = package.evidence_spans[0]
+        metadata = deepcopy(original.to_dict()["structured_value"])
+        raw_text, coordinates, parser = original.raw_text, original.coordinates, original.parser_name
+        if field == "raw_text": raw_text = "Fabricated growth."
+        elif field == "coordinates":
+            from dataclasses import replace
+            coordinates = replace(coordinates, paragraph_index=999)
+        elif field == "parser": parser = "invented"
+        elif field == "unknown_metadata": metadata["fabricated_source_fact"] = True
+        elif field == "missing_metadata": metadata.pop("record_times")
+        elif field == "token_range": metadata[field] = [1, 2]
+        elif field in {"encoded_token_sha256", "parent_content_sha256", "text_sha256"}: metadata[field] = "f"*64
+        else: metadata[field] = "invented"
+        forged = EvidenceSpan.create(source_id=original.source_id, coordinates=coordinates, raw_text=raw_text,
+            structured_value=metadata, parser_name=parser, parser_version=original.parser_version,
+            parse_status=original.parse_status, quality_flags=original.quality_flags)
+        selected = SimpleNamespace(subject=view.subject, evidence_spans=(forged,))
+>       with pytest.raises(replay.NarrativeReplayError): replay.replay_verified_projection(view, selected)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'company_wiki.automation.narrative_replay' has no attribute 'replay_verified_projection'
+
+tests\unit\test_official_json_transport_subject_contracts.py:123: AttributeError
+____ test_projected_replay_requires_whole_subject_not_only_projection_hash ____
+
+    def test_projected_replay_requires_whole_subject_not_only_projection_hash():
+        from company_wiki.narrative_subject import NarrativeSubject
+        view = view_fixture(); wire = view.subject.to_dict(); wire["issuer"]["provider_company_id"] = 999
+        selected = SimpleNamespace(subject=NarrativeSubject.from_dict(wire), evidence_spans=view.evidence_spans)
+>       with pytest.raises(replay.NarrativeReplayError): replay.replay_verified_projection(view, selected)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'company_wiki.automation.narrative_replay' has no attribute 'replay_verified_projection'
+
+tests\unit\test_official_json_transport_subject_contracts.py:130: AttributeError
+____________ test_legacy_ref_subject_does_not_add_any_ref2_fields _____________
+
+    def test_legacy_ref_subject_does_not_add_any_ref2_fields():
+        from company_wiki.narrative_subject import NarrativeSubject
+        raw = view_fixture().subject.anchor_ref
+        wire = {"schema_version": "narrative-ref/1", "artifact_version_id": "raw-version",
+            "artifact_sha256": hashlib.sha256(b"legacy").hexdigest(), "byte_size": 100, "source_ref": raw}
+        reference = NarrativeRef.from_dict(wire)
+>       assert reference.subject == NarrativeSubject.from_raw(raw)
+               ^^^^^^^^^^^^^^^^^
+E       AttributeError: 'NarrativeRef' object has no attribute 'subject'
+
+tests\unit\test_official_json_transport_subject_contracts.py:139: AttributeError
+=========================== short test summary info ===========================
+FAILED tests/unit/test_official_json_transport_subject_contracts.py::test_ref2_and_read2_exact_round_trip_and_detached_subject
+FAILED tests/unit/test_official_json_transport_subject_contracts.py::test_read2_supports_explicit_issuer_partial_constraints[None]
+FAILED tests/unit/test_official_json_transport_subject_contracts.py::test_read2_supports_explicit_issuer_partial_constraints[issuer1]
+FAILED tests/unit/test_official_json_transport_subject_contracts.py::test_read2_supports_explicit_issuer_partial_constraints[issuer2]
+FAILED tests/unit/test_official_json_transport_subject_contracts.py::test_read2_supports_explicit_issuer_partial_constraints[issuer3]
+FAILED tests/unit/test_official_json_transport_subject_contracts.py::test_reference2_parser_requires_exact_subject_generation_and_keeps_old_parser
+FAILED tests/unit/test_official_json_transport_subject_contracts.py::test_projected_replay_accepts_only_selector_annotations
+FAILED tests/unit/test_official_json_transport_subject_contracts.py::test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[parent_content_sha256]
+FAILED tests/unit/test_official_json_transport_subject_contracts.py::test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[pointer]
+FAILED tests/unit/test_official_json_transport_subject_contracts.py::test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[token_range]
+FAILED tests/unit/test_official_json_transport_subject_contracts.py::test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[encoded_token_sha256]
+FAILED tests/unit/test_official_json_transport_subject_contracts.py::test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[role]
+FAILED tests/unit/test_official_json_transport_subject_contracts.py::test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[source_role]
+FAILED tests/unit/test_official_json_transport_subject_contracts.py::test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[language]
+FAILED tests/unit/test_official_json_transport_subject_contracts.py::test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[original_role]
+FAILED tests/unit/test_official_json_transport_subject_contracts.py::test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[raw_text]
+FAILED tests/unit/test_official_json_transport_subject_contracts.py::test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[coordinates]
+FAILED tests/unit/test_official_json_transport_subject_contracts.py::test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[parser]
+FAILED tests/unit/test_official_json_transport_subject_contracts.py::test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[text_sha256]
+FAILED tests/unit/test_official_json_transport_subject_contracts.py::test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[unit_kind]
+FAILED tests/unit/test_official_json_transport_subject_contracts.py::test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[unknown_metadata]
+FAILED tests/unit/test_official_json_transport_subject_contracts.py::test_resigned_locator_mutations_are_refused_even_with_valid_span_hash[missing_metadata]
+FAILED tests/unit/test_official_json_transport_subject_contracts.py::test_projected_replay_requires_whole_subject_not_only_projection_hash
+FAILED tests/unit/test_official_json_transport_subject_contracts.py::test_legacy_ref_subject_does_not_add_any_ref2_fields
+24 failed, 15 passed in 2.23s
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-215333-911b5b45", "existed": true, "removed": true}

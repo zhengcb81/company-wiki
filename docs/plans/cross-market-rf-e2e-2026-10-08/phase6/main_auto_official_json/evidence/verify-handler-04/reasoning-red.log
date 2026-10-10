@@ -1,0 +1,69 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-config-effort-red-7ockbdbg\\pytest", "requested_basetemp_len": 69, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-221036-97609f21", "effective_basetemp_len": 75}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+collected 26 items / 19 deselected / 7 selected
+
+tests\integration\test_official_json_verify_handler.py FFFFFFF           [100%]
+
+================================== FAILURES ===================================
+_ test_configured_reasoning_effort_reaches_real_model_factory_without_overrides[None] _
+tests\integration\test_official_json_verify_handler.py:441: in test_configured_reasoning_effort_reaches_real_model_factory_without_overrides
+    parsed_options, parsed_model = factory._options(spec)
+                                   ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_worker_factory.py:67: in _options
+    raise ValueError("NARRATIVE_RUNTIME_OPTIONS_INVALID")
+E   ValueError: NARRATIVE_RUNTIME_OPTIONS_INVALID
+_ test_configured_reasoning_effort_reaches_real_model_factory_without_overrides[low] _
+tests\integration\test_official_json_verify_handler.py:441: in test_configured_reasoning_effort_reaches_real_model_factory_without_overrides
+    parsed_options, parsed_model = factory._options(spec)
+                                   ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_worker_factory.py:67: in _options
+    raise ValueError("NARRATIVE_RUNTIME_OPTIONS_INVALID")
+E   ValueError: NARRATIVE_RUNTIME_OPTIONS_INVALID
+_ test_configured_reasoning_effort_reaches_real_model_factory_without_overrides[high] _
+tests\integration\test_official_json_verify_handler.py:441: in test_configured_reasoning_effort_reaches_real_model_factory_without_overrides
+    parsed_options, parsed_model = factory._options(spec)
+                                   ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_worker_factory.py:67: in _options
+    raise ValueError("NARRATIVE_RUNTIME_OPTIONS_INVALID")
+E   ValueError: NARRATIVE_RUNTIME_OPTIONS_INVALID
+_ test_configured_reasoning_effort_reaches_real_model_factory_without_overrides[max] _
+tests\integration\test_official_json_verify_handler.py:441: in test_configured_reasoning_effort_reaches_real_model_factory_without_overrides
+    parsed_options, parsed_model = factory._options(spec)
+                                   ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_worker_factory.py:67: in _options
+    raise ValueError("NARRATIVE_RUNTIME_OPTIONS_INVALID")
+E   ValueError: NARRATIVE_RUNTIME_OPTIONS_INVALID
+_ test_configured_reasoning_effort_reaches_real_model_factory_without_overrides[medium] _
+tests\integration\test_official_json_verify_handler.py:441: in test_configured_reasoning_effort_reaches_real_model_factory_without_overrides
+    parsed_options, parsed_model = factory._options(spec)
+                                   ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_worker_factory.py:67: in _options
+    raise ValueError("NARRATIVE_RUNTIME_OPTIONS_INVALID")
+E   ValueError: NARRATIVE_RUNTIME_OPTIONS_INVALID
+_ test_configured_reasoning_effort_reaches_real_model_factory_without_overrides[True] _
+tests\integration\test_official_json_verify_handler.py:441: in test_configured_reasoning_effort_reaches_real_model_factory_without_overrides
+    parsed_options, parsed_model = factory._options(spec)
+                                   ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_worker_factory.py:67: in _options
+    raise ValueError("NARRATIVE_RUNTIME_OPTIONS_INVALID")
+E   ValueError: NARRATIVE_RUNTIME_OPTIONS_INVALID
+_ test_configured_reasoning_effort_reaches_real_model_factory_without_overrides[1] _
+tests\integration\test_official_json_verify_handler.py:441: in test_configured_reasoning_effort_reaches_real_model_factory_without_overrides
+    parsed_options, parsed_model = factory._options(spec)
+                                   ^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_worker_factory.py:67: in _options
+    raise ValueError("NARRATIVE_RUNTIME_OPTIONS_INVALID")
+E   ValueError: NARRATIVE_RUNTIME_OPTIONS_INVALID
+=========================== short test summary info ===========================
+FAILED tests/integration/test_official_json_verify_handler.py::test_configured_reasoning_effort_reaches_real_model_factory_without_overrides[None]
+FAILED tests/integration/test_official_json_verify_handler.py::test_configured_reasoning_effort_reaches_real_model_factory_without_overrides[low]
+FAILED tests/integration/test_official_json_verify_handler.py::test_configured_reasoning_effort_reaches_real_model_factory_without_overrides[high]
+FAILED tests/integration/test_official_json_verify_handler.py::test_configured_reasoning_effort_reaches_real_model_factory_without_overrides[max]
+FAILED tests/integration/test_official_json_verify_handler.py::test_configured_reasoning_effort_reaches_real_model_factory_without_overrides[medium]
+FAILED tests/integration/test_official_json_verify_handler.py::test_configured_reasoning_effort_reaches_real_model_factory_without_overrides[True]
+FAILED tests/integration/test_official_json_verify_handler.py::test_configured_reasoning_effort_reaches_real_model_factory_without_overrides[1]
+================= 7 failed, 19 deselected, 1 warning in 4.59s =================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-221036-97609f21", "existed": true, "removed": true}

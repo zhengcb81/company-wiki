@@ -1,0 +1,34 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\readonly-main-integration-zguvycjn\\pytest", "requested_basetemp_len": 73, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-221845-e79e7ee3", "effective_basetemp_len": 75}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+collected 24 items
+
+tests\integration\test_official_json_batch_preparation.py ....           [ 16%]
+tests\integration\test_official_json_batch_e2e.py F...F                  [ 37%]
+tests\integration\test_official_json_publication_terminal.py ........... [ 83%]
+....                                                                     [100%]
+
+================================== FAILURES ===================================
+_ test_public_mixed_batch_has_real_three_job_flow_resume_reuse_refresh_and_restores_originals _
+tests\integration\test_official_json_batch_e2e.py:156: in test_public_mixed_batch_has_real_three_job_flow_resume_reuse_refresh_and_restores_originals
+    assert process.returncode == 0 and first["status"] == "completed", (
+E   AssertionError: ({'budget': {'estimated_micro_usd': 111, 'tokens': 92, 'unknown_reservations': 0, 'unsettled_reservations': 0}, 'items...1217d338e322f8', 'kind': 'raw', ...}], 'run_id': 'mixed-first', 'schema_version': 'narrative-batch-result/2', ...}, '')
+E   assert (2 == 0)
+E    +  where 2 = CompletedProcess(args=['C:\\Miniconda\\python.exe', '-B', '-m', 'company_wiki.automation.narrative_batch_cli', '--proj...lt/2","status":"budget_exhausted","storage":{"persistent_added_bytes":299776,"scratch_peak_bytes":4063}}\n', stderr='').returncode
+---------------------------- Captured stdout call -----------------------------
+OFFICIAL-CLI-FAILURE {"exit_code": 2, "error": null, "status": "budget_exhausted", "items": [{"item_key": "urn:company-wiki:source-projection:sha256:8947fe14c922259cbf69209c9ddbadcf9b45a1f167bf437b181ec5405b999809", "status": "dead_letter", "errors": ["DEPENDENCY_TERMINAL", "MODEL_BUDGET_DENIED"]}, {"item_key": "urn:company-wiki:source-projection:sha256:e4fa826a55594e80604785aae363b99cb28907f7bd5ccdd63eac73b506a0334a", "status": "dead_letter", "errors": ["MODEL_BUDGET_DENIED", "DEPENDENCY_TERMINAL"]}, {"item_key": "urn:company-wiki:document:sha256:c75f6fa7e4a7485d8396b2c944a7601793102be1a82f3da3d91217d338e322f8", "status": "completed", "errors": []}], "budget": {"estimated_micro_usd": 111, "tokens": 92, "unknown_reservations": 0, "unsettled_reservations": 0}}
+_ test_mixed_batch_only_missing_items_pay_and_keeps_preexisting_projection_pin _
+tests\integration\test_official_json_batch_e2e.py:280: in test_mixed_batch_only_missing_items_pay_and_keeps_preexisting_projection_pin
+    assert first_process.returncode == 0 and first["status"] == "completed", first
+E   AssertionError: {'budget': {'estimated_micro_usd': 0, 'tokens': 0, 'unknown_reservations': 0, 'unsettled_reservations': 0}, 'items': [...809', 'kind': 'official_json', ...}], 'run_id': 'only-projection-a', 'schema_version': 'narrative-batch-result/2', ...}
+E   assert (2 == 0)
+E    +  where 2 = CompletedProcess(args=['C:\\Miniconda\\python.exe', '-B', '-m', 'company_wiki.automation.narrative_batch_cli', '--proj...esult/2","status":"budget_exhausted","storage":{"persistent_added_bytes":213115,"scratch_peak_bytes":0}}\n', stderr='').returncode
+---------------------------- Captured stdout call -----------------------------
+OFFICIAL-CLI-FAILURE {"exit_code": 2, "error": null, "status": "budget_exhausted", "items": [{"item_key": "urn:company-wiki:source-projection:sha256:8947fe14c922259cbf69209c9ddbadcf9b45a1f167bf437b181ec5405b999809", "status": "dead_letter", "errors": ["DEPENDENCY_TERMINAL", "MODEL_BUDGET_DENIED"]}], "budget": {"estimated_micro_usd": 0, "tokens": 0, "unknown_reservations": 0, "unsettled_reservations": 0}}
+=========================== short test summary info ===========================
+FAILED tests/integration/test_official_json_batch_e2e.py::test_public_mixed_batch_has_real_three_job_flow_resume_reuse_refresh_and_restores_originals
+FAILED tests/integration/test_official_json_batch_e2e.py::test_mixed_batch_only_missing_items_pay_and_keeps_preexisting_projection_pin
+================== 2 failed, 22 passed, 1 warning in 50.13s ===================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-221845-e79e7ee3", "existed": true, "removed": true}

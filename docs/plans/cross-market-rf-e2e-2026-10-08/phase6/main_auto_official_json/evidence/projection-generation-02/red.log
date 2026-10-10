@@ -1,0 +1,447 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-projection-generation-red-1sxuhll_\\pytest", "requested_basetemp_len": 77, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-213928-585755fd", "effective_basetemp_len": 75}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+collected 49 items
+
+tests\unit\test_official_json_projection_generation.py FFFFFFFFFFFFFFFFF [ 34%]
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF.                                         [100%]
+
+================================== FAILURES ===================================
+_________ test_exact_subject_and_model_have_stable_canonical_identity _________
+tests\unit\test_official_json_projection_generation.py:56: in test_exact_subject_and_model_have_stable_canonical_identity
+    one = _manifest()
+          ^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+___ test_every_bound_projection_identity_change_changes_generation[issuer] ____
+tests\unit\test_official_json_projection_generation.py:87: in test_every_bound_projection_identity_change_changes_generation
+    assert generation.generation_sha256(_manifest(binding=binding)) != generation.generation_sha256(_manifest())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+____ test_every_bound_projection_identity_change_changes_generation[as_of] ____
+tests\unit\test_official_json_projection_generation.py:87: in test_every_bound_projection_identity_change_changes_generation
+    assert generation.generation_sha256(_manifest(binding=binding)) != generation.generation_sha256(_manifest())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_ test_every_bound_projection_identity_change_changes_generation[projection] __
+tests\unit\test_official_json_projection_generation.py:87: in test_every_bound_projection_identity_change_changes_generation
+    assert generation.generation_sha256(_manifest(binding=binding)) != generation.generation_sha256(_manifest())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_ test_every_bound_projection_identity_change_changes_generation[first_parent] _
+tests\unit\test_official_json_projection_generation.py:87: in test_every_bound_projection_identity_change_changes_generation
+    assert generation.generation_sha256(_manifest(binding=binding)) != generation.generation_sha256(_manifest())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_ test_every_bound_projection_identity_change_changes_generation[second_parent] _
+tests\unit\test_official_json_projection_generation.py:87: in test_every_bound_projection_identity_change_changes_generation
+    assert generation.generation_sha256(_manifest(binding=binding)) != generation.generation_sha256(_manifest())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+___ test_every_bound_projection_identity_change_changes_generation[parser] ____
+tests\unit\test_official_json_projection_generation.py:87: in test_every_bound_projection_identity_change_changes_generation
+    assert generation.generation_sha256(_manifest(binding=binding)) != generation.generation_sha256(_manifest())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_ test_every_bound_projection_identity_change_changes_generation[structure_parser] _
+tests\unit\test_official_json_projection_generation.py:87: in test_every_bound_projection_identity_change_changes_generation
+    assert generation.generation_sha256(_manifest(binding=binding)) != generation.generation_sha256(_manifest())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+__ test_every_bound_projection_identity_change_changes_generation[layout_id] __
+tests\unit\test_official_json_projection_generation.py:87: in test_every_bound_projection_identity_change_changes_generation
+    assert generation.generation_sha256(_manifest(binding=binding)) != generation.generation_sha256(_manifest())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_ test_every_bound_projection_identity_change_changes_generation[layout_version] _
+tests\unit\test_official_json_projection_generation.py:87: in test_every_bound_projection_identity_change_changes_generation
+    assert generation.generation_sha256(_manifest(binding=binding)) != generation.generation_sha256(_manifest())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_ test_every_bound_projection_identity_change_changes_generation[layout_fingerprint] _
+tests\unit\test_official_json_projection_generation.py:87: in test_every_bound_projection_identity_change_changes_generation
+    assert generation.generation_sha256(_manifest(binding=binding)) != generation.generation_sha256(_manifest())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+__ test_every_bound_projection_identity_change_changes_generation[coverage] ___
+tests\unit\test_official_json_projection_generation.py:87: in test_every_bound_projection_identity_change_changes_generation
+    assert generation.generation_sha256(_manifest(binding=binding)) != generation.generation_sha256(_manifest())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+__ test_every_actual_http_generation_option_is_bound[model_id-another-model] __
+tests\unit\test_official_json_projection_generation.py:96: in test_every_actual_http_generation_option_is_bound
+    assert generation.generation_sha256(_manifest(request=_request(**{field: value}))) != generation.generation_sha256(_manifest())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_ test_every_actual_http_generation_option_is_bound[endpoint-https://other.invalid/v1/chat/completions] _
+tests\unit\test_official_json_projection_generation.py:96: in test_every_actual_http_generation_option_is_bound
+    assert generation.generation_sha256(_manifest(request=_request(**{field: value}))) != generation.generation_sha256(_manifest())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+__ test_every_actual_http_generation_option_is_bound[max_output_tokens-1000] __
+tests\unit\test_official_json_projection_generation.py:96: in test_every_actual_http_generation_option_is_bound
+    assert generation.generation_sha256(_manifest(request=_request(**{field: value}))) != generation.generation_sha256(_manifest())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_____ test_every_actual_http_generation_option_is_bound[thinking-enabled] _____
+tests\unit\test_official_json_projection_generation.py:96: in test_every_actual_http_generation_option_is_bound
+    assert generation.generation_sha256(_manifest(request=_request(**{field: value}))) != generation.generation_sha256(_manifest())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+__ test_every_actual_http_generation_option_is_bound[reasoning_effort-high] ___
+tests\unit\test_official_json_projection_generation.py:96: in test_every_actual_http_generation_option_is_bound
+    assert generation.generation_sha256(_manifest(request=_request(**{field: value}))) != generation.generation_sha256(_manifest())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_____ test_every_actual_http_generation_option_is_bound[temperature-0.8] ______
+tests\unit\test_official_json_projection_generation.py:96: in test_every_actual_http_generation_option_is_bound
+    assert generation.generation_sha256(_manifest(request=_request(**{field: value}))) != generation.generation_sha256(_manifest())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+___ test_every_actual_http_generation_option_is_bound[reasoning_split-True] ___
+tests\unit\test_official_json_projection_generation.py:96: in test_every_actual_http_generation_option_is_bound
+    assert generation.generation_sha256(_manifest(request=_request(**{field: value}))) != generation.generation_sha256(_manifest())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_ test_every_actual_http_generation_option_is_bound[output_token_field-max_tokens] _
+tests\unit\test_official_json_projection_generation.py:96: in test_every_actual_http_generation_option_is_bound
+    assert generation.generation_sha256(_manifest(request=_request(**{field: value}))) != generation.generation_sha256(_manifest())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+____________ test_actual_execution_components_are_bound[selector] _____________
+tests\unit\test_official_json_projection_generation.py:104: in test_actual_execution_components_are_bound
+    assert generation.generation_sha256(_manifest(versions=versions)) != generation.generation_sha256(_manifest())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_____________ test_actual_execution_components_are_bound[adapter] _____________
+tests\unit\test_official_json_projection_generation.py:104: in test_actual_execution_components_are_bound
+    assert generation.generation_sha256(_manifest(versions=versions)) != generation.generation_sha256(_manifest())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_____________ test_actual_execution_components_are_bound[prompt] ______________
+tests\unit\test_official_json_projection_generation.py:104: in test_actual_execution_components_are_bound
+    assert generation.generation_sha256(_manifest(versions=versions)) != generation.generation_sha256(_manifest())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+______ test_actual_execution_components_are_bound[model_request_schema] _______
+tests\unit\test_official_json_projection_generation.py:104: in test_actual_execution_components_are_bound
+    assert generation.generation_sha256(_manifest(versions=versions)) != generation.generation_sha256(_manifest())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+____________ test_actual_execution_components_are_bound[handlers] _____________
+tests\unit\test_official_json_projection_generation.py:104: in test_actual_execution_components_are_bound
+    assert generation.generation_sha256(_manifest(versions=versions)) != generation.generation_sha256(_manifest())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+________ test_profile_language_bundle_and_narrative_adapter_are_bound _________
+tests\unit\test_official_json_projection_generation.py:108: in test_profile_language_bundle_and_narrative_adapter_are_bound
+    expected = generation.generation_sha256(_manifest())
+                                            ^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_ test_execution_only_resources_credentials_and_raw_parser_do_not_change_identity _
+tests\unit\test_official_json_projection_generation.py:123: in test_execution_only_resources_credentials_and_raw_parser_do_not_change_identity
+    assert _manifest(request=request, versions=versions) == _manifest()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_ test_none_optional_http_fields_equal_omitted_fields_and_token_default_matches_adapter _
+tests\unit\test_official_json_projection_generation.py:134: in test_none_optional_http_fields_equal_omitted_fields_and_token_default_matches_adapter
+    assert _manifest(request=request) == _manifest(request=without)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+____ test_result_is_deeply_detached_from_every_caller_and_subject_snapshot ____
+tests\unit\test_official_json_projection_generation.py:141: in test_result_is_deeply_detached_from_every_caller_and_subject_snapshot
+    one = generation.projection_generation_manifest(request, subject, language="en", execution_versions=versions,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+______ test_nonfinite_or_nonjson_semantic_model_values_are_rejected[nan] ______
+tests\unit\test_official_json_projection_generation.py:157: in test_nonfinite_or_nonjson_semantic_model_values_are_rejected
+    with pytest.raises(ValueError): _manifest(request=_request(temperature=value))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+______ test_nonfinite_or_nonjson_semantic_model_values_are_rejected[inf] ______
+tests\unit\test_official_json_projection_generation.py:157: in test_nonfinite_or_nonjson_semantic_model_values_are_rejected
+    with pytest.raises(ValueError): _manifest(request=_request(temperature=value))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_____ test_nonfinite_or_nonjson_semantic_model_values_are_rejected[-inf] ______
+tests\unit\test_official_json_projection_generation.py:157: in test_nonfinite_or_nonjson_semantic_model_values_are_rejected
+    with pytest.raises(ValueError): _manifest(request=_request(temperature=value))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+____ test_nonfinite_or_nonjson_semantic_model_values_are_rejected[value3] _____
+tests\unit\test_official_json_projection_generation.py:157: in test_nonfinite_or_nonjson_semantic_model_values_are_rejected
+    with pytest.raises(ValueError): _manifest(request=_request(temperature=value))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_ test_physical_locations_cannot_enter_semantic_binding[C:/Users/example/source] _
+tests\unit\test_official_json_projection_generation.py:163: in test_physical_locations_cannot_enter_semantic_binding
+    with pytest.raises(ValueError): _manifest(binding=binding)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_ test_physical_locations_cannot_enter_semantic_binding[\\\\server\\share\\source] _
+tests\unit\test_official_json_projection_generation.py:163: in test_physical_locations_cannot_enter_semantic_binding
+    with pytest.raises(ValueError): _manifest(binding=binding)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+__ test_physical_locations_cannot_enter_semantic_binding[file:///tmp/source] __
+tests\unit\test_official_json_projection_generation.py:163: in test_physical_locations_cannot_enter_semantic_binding
+    with pytest.raises(ValueError): _manifest(binding=binding)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_____ test_physical_locations_cannot_enter_semantic_binding[/tmp/source] ______
+tests\unit\test_official_json_projection_generation.py:163: in test_physical_locations_cannot_enter_semantic_binding
+    with pytest.raises(ValueError): _manifest(binding=binding)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_ test_full_record_payloads_are_forbidden_but_coverage_record_counts_are_valid[adapter] _
+tests\unit\test_official_json_projection_generation.py:169: in test_full_record_payloads_are_forbidden_but_coverage_record_counts_are_valid
+    with pytest.raises(ValueError): _manifest(binding=binding)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_ test_full_record_payloads_are_forbidden_but_coverage_record_counts_are_valid[issuer] _
+tests\unit\test_official_json_projection_generation.py:169: in test_full_record_payloads_are_forbidden_but_coverage_record_counts_are_valid
+    with pytest.raises(ValueError): _manifest(binding=binding)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_ test_full_record_payloads_are_forbidden_but_coverage_record_counts_are_valid[coverage] _
+tests\unit\test_official_json_projection_generation.py:169: in test_full_record_payloads_are_forbidden_but_coverage_record_counts_are_valid
+    with pytest.raises(ValueError): _manifest(binding=binding)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_ test_required_actual_execution_versions_cannot_default_to_raw_globals[selector] _
+tests\unit\test_official_json_projection_generation.py:176: in test_required_actual_execution_versions_cannot_default_to_raw_globals
+    with pytest.raises(ValueError): _manifest(versions=versions)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_ test_required_actual_execution_versions_cannot_default_to_raw_globals[adapter] _
+tests\unit\test_official_json_projection_generation.py:176: in test_required_actual_execution_versions_cannot_default_to_raw_globals
+    with pytest.raises(ValueError): _manifest(versions=versions)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_ test_required_actual_execution_versions_cannot_default_to_raw_globals[prompt] _
+tests\unit\test_official_json_projection_generation.py:176: in test_required_actual_execution_versions_cannot_default_to_raw_globals
+    with pytest.raises(ValueError): _manifest(versions=versions)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+__ test_projection_helper_refuses_raw_subject_and_secret_component_metadata ___
+tests\unit\test_official_json_projection_generation.py:181: in test_projection_helper_refuses_raw_subject_and_secret_component_metadata
+    generation.projection_generation_manifest(_request(), NarrativeSubject.from_raw(_binding()["parent_source_refs"][0]),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_ test_invalid_generation_essentials_fail_before_identity_can_be_used[endpoint-https://username:password@model.invalid/v1] _
+tests\unit\test_official_json_projection_generation.py:190: in test_invalid_generation_essentials_fail_before_identity_can_be_used
+    with pytest.raises(ValueError): _manifest(request=_request(**{field: value}))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_ test_invalid_generation_essentials_fail_before_identity_can_be_used[model_id-] _
+tests\unit\test_official_json_projection_generation.py:190: in test_invalid_generation_essentials_fail_before_identity_can_be_used
+    with pytest.raises(ValueError): _manifest(request=_request(**{field: value}))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_ test_invalid_generation_essentials_fail_before_identity_can_be_used[max_output_tokens-True] _
+tests\unit\test_official_json_projection_generation.py:190: in test_invalid_generation_essentials_fail_before_identity_can_be_used
+    with pytest.raises(ValueError): _manifest(request=_request(**{field: value}))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+_ test_invalid_generation_essentials_fail_before_identity_can_be_used[max_output_tokens-0] _
+tests\unit\test_official_json_projection_generation.py:190: in test_invalid_generation_essentials_fail_before_identity_can_be_used
+    with pytest.raises(ValueError): _manifest(request=_request(**{field: value}))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_official_json_projection_generation.py:51: in _manifest
+    return generation.projection_generation_manifest(request or _request(),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_generation' has no attribute 'projection_generation_manifest'
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/unit/test_official_json_projection_generation.py::test_exact_subject_and_model_have_stable_canonical_identity
+FAILED tests/unit/test_official_json_projection_generation.py::test_every_bound_projection_identity_change_changes_generation[issuer]
+FAILED tests/unit/test_official_json_projection_generation.py::test_every_bound_projection_identity_change_changes_generation[as_of]
+FAILED tests/unit/test_official_json_projection_generation.py::test_every_bound_projection_identity_change_changes_generation[projection]
+FAILED tests/unit/test_official_json_projection_generation.py::test_every_bound_projection_identity_change_changes_generation[first_parent]
+FAILED tests/unit/test_official_json_projection_generation.py::test_every_bound_projection_identity_change_changes_generation[second_parent]
+FAILED tests/unit/test_official_json_projection_generation.py::test_every_bound_projection_identity_change_changes_generation[parser]
+FAILED tests/unit/test_official_json_projection_generation.py::test_every_bound_projection_identity_change_changes_generation[structure_parser]
+FAILED tests/unit/test_official_json_projection_generation.py::test_every_bound_projection_identity_change_changes_generation[layout_id]
+FAILED tests/unit/test_official_json_projection_generation.py::test_every_bound_projection_identity_change_changes_generation[layout_version]
+FAILED tests/unit/test_official_json_projection_generation.py::test_every_bound_projection_identity_change_changes_generation[layout_fingerprint]
+FAILED tests/unit/test_official_json_projection_generation.py::test_every_bound_projection_identity_change_changes_generation[coverage]
+FAILED tests/unit/test_official_json_projection_generation.py::test_every_actual_http_generation_option_is_bound[model_id-another-model]
+FAILED tests/unit/test_official_json_projection_generation.py::test_every_actual_http_generation_option_is_bound[endpoint-https://other.invalid/v1/chat/completions]
+FAILED tests/unit/test_official_json_projection_generation.py::test_every_actual_http_generation_option_is_bound[max_output_tokens-1000]
+FAILED tests/unit/test_official_json_projection_generation.py::test_every_actual_http_generation_option_is_bound[thinking-enabled]
+FAILED tests/unit/test_official_json_projection_generation.py::test_every_actual_http_generation_option_is_bound[reasoning_effort-high]
+FAILED tests/unit/test_official_json_projection_generation.py::test_every_actual_http_generation_option_is_bound[temperature-0.8]
+FAILED tests/unit/test_official_json_projection_generation.py::test_every_actual_http_generation_option_is_bound[reasoning_split-True]
+FAILED tests/unit/test_official_json_projection_generation.py::test_every_actual_http_generation_option_is_bound[output_token_field-max_tokens]
+FAILED tests/unit/test_official_json_projection_generation.py::test_actual_execution_components_are_bound[selector]
+FAILED tests/unit/test_official_json_projection_generation.py::test_actual_execution_components_are_bound[adapter]
+FAILED tests/unit/test_official_json_projection_generation.py::test_actual_execution_components_are_bound[prompt]
+FAILED tests/unit/test_official_json_projection_generation.py::test_actual_execution_components_are_bound[model_request_schema]
+FAILED tests/unit/test_official_json_projection_generation.py::test_actual_execution_components_are_bound[handlers]
+FAILED tests/unit/test_official_json_projection_generation.py::test_profile_language_bundle_and_narrative_adapter_are_bound
+FAILED tests/unit/test_official_json_projection_generation.py::test_execution_only_resources_credentials_and_raw_parser_do_not_change_identity
+FAILED tests/unit/test_official_json_projection_generation.py::test_none_optional_http_fields_equal_omitted_fields_and_token_default_matches_adapter
+FAILED tests/unit/test_official_json_projection_generation.py::test_result_is_deeply_detached_from_every_caller_and_subject_snapshot
+FAILED tests/unit/test_official_json_projection_generation.py::test_nonfinite_or_nonjson_semantic_model_values_are_rejected[nan]
+FAILED tests/unit/test_official_json_projection_generation.py::test_nonfinite_or_nonjson_semantic_model_values_are_rejected[inf]
+FAILED tests/unit/test_official_json_projection_generation.py::test_nonfinite_or_nonjson_semantic_model_values_are_rejected[-inf]
+FAILED tests/unit/test_official_json_projection_generation.py::test_nonfinite_or_nonjson_semantic_model_values_are_rejected[value3]
+FAILED tests/unit/test_official_json_projection_generation.py::test_physical_locations_cannot_enter_semantic_binding[C:/Users/example/source]
+FAILED tests/unit/test_official_json_projection_generation.py::test_physical_locations_cannot_enter_semantic_binding[\\\\server\\share\\source]
+FAILED tests/unit/test_official_json_projection_generation.py::test_physical_locations_cannot_enter_semantic_binding[file:///tmp/source]
+FAILED tests/unit/test_official_json_projection_generation.py::test_physical_locations_cannot_enter_semantic_binding[/tmp/source]
+FAILED tests/unit/test_official_json_projection_generation.py::test_full_record_payloads_are_forbidden_but_coverage_record_counts_are_valid[adapter]
+FAILED tests/unit/test_official_json_projection_generation.py::test_full_record_payloads_are_forbidden_but_coverage_record_counts_are_valid[issuer]
+FAILED tests/unit/test_official_json_projection_generation.py::test_full_record_payloads_are_forbidden_but_coverage_record_counts_are_valid[coverage]
+FAILED tests/unit/test_official_json_projection_generation.py::test_required_actual_execution_versions_cannot_default_to_raw_globals[selector]
+FAILED tests/unit/test_official_json_projection_generation.py::test_required_actual_execution_versions_cannot_default_to_raw_globals[adapter]
+FAILED tests/unit/test_official_json_projection_generation.py::test_required_actual_execution_versions_cannot_default_to_raw_globals[prompt]
+FAILED tests/unit/test_official_json_projection_generation.py::test_projection_helper_refuses_raw_subject_and_secret_component_metadata
+FAILED tests/unit/test_official_json_projection_generation.py::test_invalid_generation_essentials_fail_before_identity_can_be_used[endpoint-https://username:password@model.invalid/v1]
+FAILED tests/unit/test_official_json_projection_generation.py::test_invalid_generation_essentials_fail_before_identity_can_be_used[model_id-]
+FAILED tests/unit/test_official_json_projection_generation.py::test_invalid_generation_essentials_fail_before_identity_can_be_used[max_output_tokens-True]
+FAILED tests/unit/test_official_json_projection_generation.py::test_invalid_generation_essentials_fail_before_identity_can_be_used[max_output_tokens-0]
+=================== 48 failed, 1 passed, 1 warning in 4.80s ===================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-213928-585755fd", "existed": true, "removed": true}

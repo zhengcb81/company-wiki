@@ -1,0 +1,36 @@
+{
+  "legacy": [
+    {
+      "count": 1,
+      "role": "company_filing",
+      "flags": [],
+      "prompt_version": "1.7.0",
+      "input_sha256": "62335658a349f454f5bc0ac701b4ca78185e69ae4ca8b4cac5254c006ccc2e1f",
+      "data_sha256": "6fcd741b867c9af85c36719a68857ec15dd04c9d358a849535062c92aa1f9c56",
+      "instruction_sha256": "3fe540d3e9977921c42aeaf5c73e6952975991096cc7942db9ab4f932b6b5255",
+      "draft_sha256": "e2600747e64ccad2cb1193c57a2301516c9fe07aac447d72a017539ea0aeda93"
+    },
+    {
+      "count": 3,
+      "role": "analyst",
+      "flags": [
+        "locator_unstable"
+      ],
+      "prompt_version": "1.7.0",
+      "input_sha256": "a3632680ba09c8a600b9d78efa43554173dac945e38cf8d05acb9ea7e8c928fd",
+      "data_sha256": "7ed74c3dbe44f43ee8a39e02717a60e8144280533f63bdd8894faba9b3a4cdd4",
+      "instruction_sha256": "3fe540d3e9977921c42aeaf5c73e6952975991096cc7942db9ab4f932b6b5255",
+      "draft_sha256": "b527469b4a6e48e30b47d7fa4922ca9bdb2e798905f8d73e3c6e5fbd6356861f"
+    },
+    {
+      "count": 160,
+      "role": "company_filing",
+      "flags": [],
+      "prompt_version": "1.7.0",
+      "input_sha256": "2508a64812acff984a413e060e54285902ca35f4807ec1e213687d8a8e7c34d4",
+      "data_sha256": "92e5b7862e867b78782baf2aabd997a786f21d21b5fffc9f846552cfc5f1cb70",
+      "instruction_sha256": "3fe540d3e9977921c42aeaf5c73e6952975991096cc7942db9ab4f932b6b5255",
+      "draft_sha256": "e2600747e64ccad2cb1193c57a2301516c9fe07aac447d72a017539ea0aeda93"
+    }
+  ]
+}

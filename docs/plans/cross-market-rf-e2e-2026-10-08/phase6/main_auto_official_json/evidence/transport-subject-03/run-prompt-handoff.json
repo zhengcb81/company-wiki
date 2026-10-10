@@ -1,0 +1,34 @@
+{
+  "status": "ledger foundation and integrated public mixed CLI GREEN",
+  "files": {
+    "src/company_wiki/automation/narrative_run_store.py": "0286049a1a7f1b07ed595de1129bdb5b6733c610e91a00e46ab2a8ba03e3b420",
+    "tests/unit/test_official_json_run_prompt_admission.py": "266eed38942144aaba9b5b401fbac2e171ecfa6cc2b1731b06374aba226d7871"
+  },
+  "api": "model_prompt_version(binding_json: str | None, *, job_id: str, default_prompt: str) -> str",
+  "schema_changes": false,
+  "database_count": "same existing AUTO database",
+  "red": {
+    "evidence": "run-prompt-red.log",
+    "failed": 17,
+    "passed": 7
+  },
+  "helper_red": {
+    "evidence": "run-prompt-helper-red.log",
+    "failed": 5
+  },
+  "green": {
+    "evidence": "run-prompt-final-green.log",
+    "passed": 51,
+    "elapsed_seconds": 9.63
+  },
+  "ruff_exit_code": 0,
+  "mypy_exit_code": 0,
+  "external_calls": 0,
+  "commit_created": false,
+  "public_cli_green": {
+    "evidence": "batch-e2e-node-04.log",
+    "passed": 5,
+    "elapsed_seconds": 80.38,
+    "external_calls": 0
+  }
+}

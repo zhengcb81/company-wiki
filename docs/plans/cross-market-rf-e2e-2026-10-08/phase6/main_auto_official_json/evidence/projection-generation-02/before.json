@@ -1,0 +1,11 @@
+{
+  "existing_function_sha256": {
+    "generation_manifest": "c0ae5c57a99b85b4eac79af485573b9cbb2f2eec454fd598bde2d54c8049d96b",
+    "generation_sha256": "d086a63f1d874d1155b7fe004dbeefaff86385fbdf0c39f8f91577591b2b3ea6",
+    "artifact_pin": "9bd95c32b515c56cd14bf19937d4936c05de8173e8adfbb3f51a7557f6a7a490",
+    "read_reuse_pin": "f36a23491dc0d97602f953116933e067dab8bab5ec205808414c540f5cc15228",
+    "find_reuse_pin": "8ae5dd1560b5aecf5bed7b48897f72dfa4160444acf79758e5529855ea6d6a8e"
+  },
+  "external_provider_calls": 0,
+  "external_model_calls": 0
+}

@@ -1,0 +1,5 @@
+COMMAND python -X utf8 -B -m ruff check --no-cache src/company_wiki/automation/narrative_batch.py tests/integration/test_narrative_legacy_effort_history.py
+All checks passed!
+
+COMMAND python -X utf8 -B -m mypy --cache-dir C:\Users\郑曾波\AppData\Local\Temp\cwp-effort-static-bh1d3aw0\mypy src/company_wiki/automation/narrative_batch.py
+Success: no issues found in 1 source file

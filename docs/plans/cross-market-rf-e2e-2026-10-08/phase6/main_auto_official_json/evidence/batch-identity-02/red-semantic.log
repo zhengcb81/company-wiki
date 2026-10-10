@@ -1,0 +1,70 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-batch-red-k9tl_6_v\\pytest", "requested_basetemp_len": 61, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-214219-7a277dc3", "effective_basetemp_len": 75}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 16 items
+
+tests\unit\test_official_json_batch_identity.py FFF......FF....F         [100%]
+
+================================== FAILURES ===================================
+____ test_new_batch_keeps_shared_parent_issuers_as_distinct_compact_items _____
+tests\unit\test_official_json_batch_identity.py:54: in test_new_batch_keeps_shared_parent_issuers_as_distinct_compact_items
+    request=NarrativeBatchRequest.from_dict(projected_request())
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch_request.py:76: in from_dict
+    raise ValueError("unsupported narrative batch request schema")
+E   ValueError: unsupported narrative batch request schema
+_________ test_identical_items_fold_without_merging_distinct_issuers __________
+tests\unit\test_official_json_batch_identity.py:68: in test_identical_items_fold_without_merging_distinct_issuers
+    expected=NarrativeBatchRequest.from_dict(raw)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_batch_request.py:76: in from_dict
+    raise ValueError("unsupported narrative batch request schema")
+E   ValueError: unsupported narrative batch request schema
+_____ test_old_request_gets_common_raw_items_without_changing_public_wire _____
+tests\unit\test_official_json_batch_identity.py:78: in test_old_request_gets_common_raw_items_without_changing_public_wire
+    assert request.work_items[0].item_key==request.sources[0].document_id
+           ^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'NarrativeBatchRequest' object has no attribute 'work_items'
+_ test_projection_event_has_one_identity_and_real_anchor_without_public_fake_source _
+tests\unit\test_official_json_batch_identity.py:99: in test_projection_event_has_one_identity_and_real_anchor_without_public_fake_source
+    payload=SourceRevisionEventPayload.from_dict(event_payload())
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_contracts.py:277: in from_dict
+    item = _exact(
+src\company_wiki\automation\narrative_contracts.py:83: in _exact
+    raise NarrativeContractError(f"{name} unknown fields: {sorted(unknown)}")
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: source revision event unknown fields: ['subject_binding']
+__________ test_old_event_identity_accessor_preserves_exact_2_0_wire __________
+tests\unit\test_official_json_batch_identity.py:112: in test_old_event_identity_accessor_preserves_exact_2_0_wire
+    assert payload.item_key==original["source_ref"]["document_id"]
+           ^^^^^^^^^^^^^^^^
+E   AttributeError: 'SourceRevisionEventPayload' object has no attribute 'item_key'
+__________ test_context_uses_projection_item_key_not_anchor_document __________
+tests\unit\test_official_json_batch_identity.py:130: in test_context_uses_projection_item_key_not_anchor_document
+    job=replace(snapshot.job,subject_type=event.subject_type,subject_id=event.subject_id,input_hash=event.input_hash)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\dataclasses.py:1596: in replace
+    return _replace(obj, **changes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\dataclasses.py:1630: in _replace
+    return self.__class__(**changes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+<string>:21: in __init__
+    ???
+src\company_wiki\automation\models.py:368: in __post_init__
+    raise ValueError("job_key does not match the frozen identity formula")
+E   ValueError: job_key does not match the frozen identity formula
+=========================== short test summary info ===========================
+FAILED tests/unit/test_official_json_batch_identity.py::test_new_batch_keeps_shared_parent_issuers_as_distinct_compact_items
+FAILED tests/unit/test_official_json_batch_identity.py::test_identical_items_fold_without_merging_distinct_issuers
+FAILED tests/unit/test_official_json_batch_identity.py::test_old_request_gets_common_raw_items_without_changing_public_wire
+FAILED tests/unit/test_official_json_batch_identity.py::test_projection_event_has_one_identity_and_real_anchor_without_public_fake_source
+FAILED tests/unit/test_official_json_batch_identity.py::test_old_event_identity_accessor_preserves_exact_2_0_wire
+FAILED tests/unit/test_official_json_batch_identity.py::test_context_uses_projection_item_key_not_anchor_document
+======================== 6 failed, 10 passed in 3.15s =========================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-214219-7a277dc3", "existed": true, "removed": true}

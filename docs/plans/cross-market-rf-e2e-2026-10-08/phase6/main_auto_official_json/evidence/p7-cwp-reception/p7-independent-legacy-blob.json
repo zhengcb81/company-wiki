@@ -1,0 +1,7 @@
+{
+  "base_blob_sha256": "2d7d78caa326ec1184b721872f957df6f92ad510cf403cebdf22b78447e82da6",
+  "base_default_new_default_payload_identical": true,
+  "base_default_new_explicit_legacy_DTO_identical": true,
+  "legacy_projection_sha256": "df3f6502845450a90d28e82d1690e3bbd42dc326002ee19595917ca50fdbcee5",
+  "new_default_projection_sha256": "df3f6502845450a90d28e82d1690e3bbd42dc326002ee19595917ca50fdbcee5"
+}

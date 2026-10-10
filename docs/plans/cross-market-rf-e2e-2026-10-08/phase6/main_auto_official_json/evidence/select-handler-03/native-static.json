@@ -1,0 +1,38 @@
+{
+  "checks": [
+    {
+      "name": "native-ruff",
+      "exit_code": 0,
+      "duration_seconds": 0.194,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "ruff",
+        "check",
+        "--no-cache",
+        "src/company_wiki/automation/narrative_official_json.py",
+        "tests/unit/test_official_json_narrative_adapter.py",
+        "tests/integration/test_official_json_narrative_adapter.py"
+      ],
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "name": "native-mypy",
+      "exit_code": 0,
+      "duration_seconds": 21.818,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "mypy",
+        "--follow-imports=silent",
+        "--cache-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-native-field-static-edny4cpm\\mypy",
+        "src/company_wiki/automation/narrative_official_json.py"
+      ],
+      "log_sha256": "8e63ae22e8213e327a5e9cbd584067681681bd8ef7f25c869877887ccdcfc4ff"
+    }
+  ],
+  "owned_temp_removed": true
+}

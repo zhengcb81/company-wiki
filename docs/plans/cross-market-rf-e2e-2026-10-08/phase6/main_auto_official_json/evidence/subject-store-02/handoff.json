@@ -1,0 +1,25 @@
+{
+  "source_base_head": "de24d31c107785e902132c421371e92ac89aa59b",
+  "owned_files_sha256": {
+    "src/company_wiki/source_catalog/narrative_artifact_store.py": "2dde21da86bf23a3a54465211cf25857e6ce6e446370c331e3076fd138348ab3",
+    "tests/integration/test_official_json_subject_artifacts.py": "b643228e7ecf209656647af23db33d2c0efc4f907035ee69f257714826f7dbaa"
+  },
+  "red": {
+    "exit_code": 1,
+    "failed": 24
+  },
+  "green": {
+    "exit_code": 0,
+    "passed": 72,
+    "seconds_pytest": 52.45
+  },
+  "static_final_ruff_exit": 0,
+  "mypy_exit": 0,
+  "new_test_count": 29,
+  "compatibility_test_count": 43,
+  "external_provider_calls": 0,
+  "external_model_calls": 0,
+  "cost_usd": 0,
+  "implementation_status": "catalog subject relationships only; AUTO integration not complete",
+  "no_commit_per_parent_instruction": true
+}

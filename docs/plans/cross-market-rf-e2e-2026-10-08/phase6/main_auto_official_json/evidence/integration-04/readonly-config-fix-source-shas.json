@@ -1,0 +1,10 @@
+{
+  "observed_at": "2026-10-10T22:32:45.009019+00:00",
+  "scope": "ROOT current config/exception/frozen prompt fix snapshot; active integration",
+  "files": {
+    "src/company_wiki/automation/narrative_generation.py": "b293fc26a8e3fec5a42a634e53d70ee8bf88582de45fc938e70dcf693b434dfa",
+    "src/company_wiki/automation/narrative_model_caller.py": "844e10de77884a14efc89c2449bd5099fe3ab745f7931a485c340c899cb10c30",
+    "src/company_wiki/automation/narrative_run_store.py": "0286049a1a7f1b07ed595de1129bdb5b6733c610e91a00e46ab2a8ba03e3b420",
+    "src/company_wiki/automation/narrative_batch.py": "d0b0c28485807318fdbb6a6c6142931d971d85c18294948f7781cb81e9c9b583"
+  }
+}

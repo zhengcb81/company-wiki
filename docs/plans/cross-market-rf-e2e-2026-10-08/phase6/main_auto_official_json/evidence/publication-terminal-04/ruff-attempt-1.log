@@ -1,0 +1,256 @@
+E701 Multiple statements on one line (colon)
+  --> tests\integration\test_official_json_publication_terminal.py:79:53
+   |
+77 |     summary.validate_against(selected)
+78 |     wire=selected.to_dict()
+79 |     for key in ("parser","selector","summary_scope"):wire.pop(key)
+   |                                                     ^
+80 |     wire.update(schema_version="narrative-bundle/3.0",quality_status="verified",
+81 |         summary={key:summary.to_dict()[key] for key in ("status","translate","draft","model")},
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\integration\test_official_json_publication_terminal.py:85:43
+   |
+83 |             "prompt":"official-json/1.0.0","bundle_producer":"3.0.0"},
+84 |         replay={"required":True,"locator_count":count})
+85 |     bundle=NarrativeBundle.from_dict(wire);bundle.validate_against(selected,summary)
+   |                                           ^
+86 |     return selected,summary,bundle
+   |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\integration\test_official_json_publication_terminal.py:121:32
+    |
+119 |             created_from_event_id=event.event_id,created_at=T0,updated_at=T0,
+120 |             last_error_code=None,last_error_detail=None)
+121 |         state.auto.put_job(job);jobs.append(job)
+    |                                ^
+122 |     for child,parent in ((1,0),(2,0),(2,1)):state.auto.add_job_dependency(jobs[child].job_id,jobs[parent].job_id)
+123 |     job_ids=tuple(job.job_id for job in jobs)
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_publication_terminal.py:122:44
+    |
+120 |             last_error_code=None,last_error_detail=None)
+121 |         state.auto.put_job(job);jobs.append(job)
+122 |     for child,parent in ((1,0),(2,0),(2,1)):state.auto.add_job_dependency(jobs[child].job_id,jobs[parent].job_id)
+    |                                            ^
+123 |     job_ids=tuple(job.job_id for job in jobs)
+124 |     ledger=NarrativeRunStore(state.auto.db_path)
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_publication_terminal.py:154:23
+    |
+152 |         state.runtime_generation=state.auto.set_runtime_gate(RuntimeState.ENABLED,updated_at=T0).control_generation
+153 |         state.item=install_dag(state,tamper=tamper)
+154 |         if subject_two:state.other=install_dag(state,subject=state.subjects[1],label="b")
+    |                       ^
+155 |         state.loads=[]
+156 |         def loader(subject):
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_publication_terminal.py:188:8
+    |
+186 | def body_snapshot(state):
+187 |     conn=state.auto._connect()
+188 |     try:return tuple(tuple(row) for row in conn.execute("SELECT attempt_id,result_json FROM attempts ORDER BY attempt_id"))
+    |        ^
+189 |     finally:conn.close()
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_publication_terminal.py:189:12
+    |
+187 |     conn=state.auto._connect()
+188 |     try:return tuple(tuple(row) for row in conn.execute("SELECT attempt_id,result_json FROM attempts ORDER BY attempt_id"))
+189 |     finally:conn.close()
+    |            ^
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\integration\test_official_json_publication_terminal.py:200:50
+    |
+198 | def test_projection_pin_has_subject_and_generation_without_anchor_identity():
+199 |     from unit.test_official_json_model_subject import binding
+200 |     subject=NarrativeSubject.from_dict(binding());anchor=subject.anchor_ref
+    |                                                  ^
+201 |     pin=FinalArtifactPin("e","a","a"*64,12,anchor["document_id"],anchor["source_id"],anchor["content_sha256"],
+202 |         subject_binding=subject,generation_sha256="f"*64)
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_publication_terminal.py:206:35
+    |
+204 |         "subject_binding","generation_sha256"}
+205 |     assert pin.to_dict()["subject_binding"] == subject.to_dict()
+206 |     with pytest.raises(ValueError):replace(pin,generation_sha256=None)
+    |                                   ^
+207 |     with pytest.raises(ValueError):replace(pin,source_sha256="e"*64)
+208 |     assert is_terminal_receipt({"schema_version":"narrative-terminal-receipt/2.0"})
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_publication_terminal.py:207:35
+    |
+205 |     assert pin.to_dict()["subject_binding"] == subject.to_dict()
+206 |     with pytest.raises(ValueError):replace(pin,generation_sha256=None)
+207 |     with pytest.raises(ValueError):replace(pin,source_sha256="e"*64)
+    |                                   ^
+208 |     assert is_terminal_receipt({"schema_version":"narrative-terminal-receipt/2.0"})
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_publication_terminal.py:225:61
+    |
+223 |         assert state.loads == [state.item.subject.item_key]*2
+224 |         anchor=state.item.subject.anchor_ref
+225 |         with pytest.raises(NarrativeArtifactNotVisibleError):reader.read(document_id=anchor["document_id"],
+    |                                                             ^
+226 |             source_id=anchor["source_id"],source_sha256=anchor["content_sha256"])
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\integration\test_official_json_publication_terminal.py:261:33
+    |
+259 | def test_ack_committed_then_crash_reconciles_without_reclaiming_or_model_work(tmp_path,monkeypatch):
+260 |     with publication_state(tmp_path) as state:
+261 |         worker=dispatcher(state);actual=state.auto.ack_outbox
+    |                                 ^
+262 |         def crash_after_ack(**values):actual(**values);raise RuntimeError("fixture crash after ACK")
+263 |         monkeypatch.setattr(state.auto,"ack_outbox",crash_after_ack)
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\integration\test_official_json_publication_terminal.py:262:55
+    |
+260 |     with publication_state(tmp_path) as state:
+261 |         worker=dispatcher(state);actual=state.auto.ack_outbox
+262 |         def crash_after_ack(**values):actual(**values);raise RuntimeError("fixture crash after ACK")
+    |                                                       ^
+263 |         monkeypatch.setattr(state.auto,"ack_outbox",crash_after_ack)
+264 |         result=dispatch(state,worker)
+    |
+
+E731 Do not assign a `lambda` expression, use a `def`
+   --> tests\integration\test_official_json_publication_terminal.py:274:9
+    |
+272 | def test_wrong_current_projection_blocks_visibility_then_fresh_reconcile_recovers(tmp_path):
+273 |     with publication_state(tmp_path,subject_two=True) as state:
+274 |         wrong=lambda subject:state.other.view
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+275 |         worker=dispatcher(state,projection_loader=wrong)
+276 |         assert dispatch(state,worker).status=="activation_pending"
+    |
+help: Rewrite `wrong` as a `def`
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_publication_terminal.py:277:61
+    |
+275 |         worker=dispatcher(state,projection_loader=wrong)
+276 |         assert dispatch(state,worker).status=="activation_pending"
+277 |         with pytest.raises(NarrativeArtifactNotVisibleError):state.artifacts.visible_version_for_effect(state.item.effect.effect_id)
+    |                                                             ^
+278 |         worker=dispatcher(state)
+279 |         assert worker.reconcile_prepared(activated_at=T3)==(state.item.effect.effect_id,)
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_publication_terminal.py:288:61
+    |
+286 |         assert dispatch(state,worker).status=="activation_pending"
+287 |         assert worker.reconcile_prepared(activated_at=T3)==()
+288 |         with pytest.raises(NarrativeArtifactNotVisibleError):state.artifacts.visible_version_for_effect(state.item.effect.effect_id)
+    |                                                             ^
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_publication_terminal.py:308:16
+    |
+306 |                     final_artifact=pin_for(state),compacted_at=T3,projection_loader=state.loader)
+307 |             assert body_snapshot(state)==before
+308 |         finally:path.write_bytes(original)
+    |                ^
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_publication_terminal.py:316:28
+    |
+314 |         assert dispatch(state).status=="visible"
+315 |         pin=pin_for(state)
+316 |         if fault=="subject":pin=replace(pin,subject_binding=state.other.subject)
+    |                            ^
+317 |         elif fault=="generation":pin=replace(pin,generation_sha256="f"*64)
+318 |         else:
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_publication_terminal.py:317:33
+    |
+315 |         pin=pin_for(state)
+316 |         if fault=="subject":pin=replace(pin,subject_binding=state.other.subject)
+317 |         elif fault=="generation":pin=replace(pin,generation_sha256="f"*64)
+    |                                 ^
+318 |         else:
+319 |             def damage(conn):
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_publication_terminal.py:320:40
+    |
+318 |         else:
+319 |             def damage(conn):
+320 |                 if fault=="job_subject":conn.execute("UPDATE jobs SET subject_id=? WHERE job_id=?",
+    |                                        ^
+321 |                     (state.item.subject.anchor_ref["document_id"],state.item.job_ids[0]))
+322 |                 else:conn.execute("UPDATE jobs SET status='running' WHERE job_id=?",(state.item.job_ids[0],))
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_publication_terminal.py:322:21
+    |
+320 |                 if fault=="job_subject":conn.execute("UPDATE jobs SET subject_id=? WHERE job_id=?",
+321 |                     (state.item.subject.anchor_ref["document_id"],state.item.job_ids[0]))
+322 |                 else:conn.execute("UPDATE jobs SET status='running' WHERE job_id=?",(state.item.job_ids[0],))
+    |                     ^
+323 |             state.auto._write_transaction(damage)
+324 |         before=body_snapshot(state)
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_publication_terminal.py:325:52
+    |
+323 |             state.auto._write_transaction(damage)
+324 |         before=body_snapshot(state)
+325 |         with pytest.raises(IntegrityViolationError):state.auto.compact_terminal_narrative_jobs(
+    |                                                    ^
+326 |             job_ids=state.item.job_ids,final_artifact=pin,compacted_at=T3)
+327 |         assert body_snapshot(state)==before
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\integration\test_official_json_publication_terminal.py:333:27
+    |
+331 |     with publication_state(tmp_path) as state:
+332 |         assert dispatch(state).status=="visible"
+333 |         pin=pin_for(state);reader=NarrativeBundleReader(state.artifacts,projection_loader=state.loader)
+    |                           ^
+334 |         with pytest.raises(NarrativeArtifactConflictError):reader.read_subject(subject=state.item.subject,
+335 |             generation_sha256="f"*64,artifact_version_id=pin.artifact_version_id)
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_publication_terminal.py:334:59
+    |
+332 |         assert dispatch(state).status=="visible"
+333 |         pin=pin_for(state);reader=NarrativeBundleReader(state.artifacts,projection_loader=state.loader)
+334 |         with pytest.raises(NarrativeArtifactConflictError):reader.read_subject(subject=state.item.subject,
+    |                                                           ^
+335 |             generation_sha256="f"*64,artifact_version_id=pin.artifact_version_id)
+    |
+
+Found 24 errors.
+No fixes available (1 hidden fix can be enabled with the `--unsafe-fixes` option).

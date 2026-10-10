@@ -1,0 +1,62 @@
+{
+  "steps": [
+    {
+      "name": "green",
+      "exit_code": 0,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/unit/test_official_json_subject_contracts.py",
+        "tests/unit/test_narrative_job_contracts.py",
+        "tests/unit/test_narrative_quality_projection.py",
+        "tests/unit/test_official_json_batch_identity.py",
+        "tests/unit/test_narrative_batch_request.py",
+        "tests/unit/test_automation_execution_context.py",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-main-contract-36am5sg6\\pytest",
+        "-q",
+        "--tb=short"
+      ]
+    },
+    {
+      "name": "ruff",
+      "exit_code": 1,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "--no-cache",
+        "src/company_wiki/automation/narrative_contracts.py",
+        "src/company_wiki/automation/narrative_batch_request.py",
+        "src/company_wiki/automation/execution_context.py",
+        "src/company_wiki/source_catalog/narrative_evidence.py",
+        "tests/unit/test_official_json_subject_contracts.py",
+        "tests/unit/test_official_json_batch_identity.py"
+      ]
+    },
+    {
+      "name": "mypy",
+      "exit_code": 0,
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-m",
+        "mypy",
+        "--cache-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-main-contract-36am5sg6\\mypy",
+        "src/company_wiki/automation/narrative_contracts.py",
+        "src/company_wiki/automation/narrative_batch_request.py",
+        "src/company_wiki/automation/execution_context.py"
+      ]
+    }
+  ],
+  "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-main-contract-36am5sg6",
+  "restored_initial_absent": true,
+  "provider_calls": 0,
+  "model_calls": 0,
+  "cost_usd": 0
+}

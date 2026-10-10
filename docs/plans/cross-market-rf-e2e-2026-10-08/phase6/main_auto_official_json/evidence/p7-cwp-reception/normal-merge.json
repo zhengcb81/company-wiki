@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-10T22:39:04.976625+00:00",
+  "argv": [
+    "git",
+    "merge",
+    "--no-ff",
+    "codex/p7-cwp-projection-identity",
+    "-m",
+    "Merge P7 deterministic official JSON projection and immutable snapshots"
+  ],
+  "exit_code": 0,
+  "copied_verified_evidence_files": 68
+}

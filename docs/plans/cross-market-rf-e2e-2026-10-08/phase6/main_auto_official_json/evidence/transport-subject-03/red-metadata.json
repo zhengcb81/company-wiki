@@ -1,0 +1,26 @@
+{
+  "argv": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "-p",
+    "pytest_timeout",
+    "-p",
+    "pytest_asyncio.plugin",
+    "-o",
+    "addopts=",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-metadata-red-141e9g4z\\pytest",
+    "tests/integration/test_official_json_transport_subject.py",
+    "-k",
+    "misstate"
+  ],
+  "exit_code": 1,
+  "elapsed_seconds": 2.7943196999985958
+}

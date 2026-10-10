@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "mypy",
+    "--cache-dir",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-transport-green-517uysnr\\mypy",
+    "src/company_wiki/automation/narrative_transport_contracts.py",
+    "src/company_wiki/automation/narrative_transport.py",
+    "src/company_wiki/automation/narrative_replay.py"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 2.361116600000969,
+  "external_provider_calls": 0,
+  "external_model_calls": 0
+}

@@ -1,0 +1,273 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-publish-red-o6si1pg3\\pytest", "requested_basetemp_len": 63, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-220516-343ddde7", "effective_basetemp_len": 75}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+collected 15 items
+
+tests\integration\test_official_json_publication_terminal.py .FFFFFFFFFF [ 73%]
+FFFF                                                                     [100%]
+
+================================== FAILURES ===================================
+___ test_projection_pin_has_subject_and_generation_without_anchor_identity ____
+tests\integration\test_official_json_publication_terminal.py:196: in test_projection_pin_has_subject_and_generation_without_anchor_identity
+    pin=FinalArtifactPin("e","a","a"*64,12,anchor["document_id"],anchor["source_id"],anchor["content_sha256"],
+E   TypeError: FinalArtifactPin.__init__() got an unexpected keyword argument 'subject_binding'
+_ test_publish_subject_generation_and_read_uses_one_fresh_view_per_operation __
+tests\integration\test_official_json_publication_terminal.py:207: in test_publish_subject_generation_and_read_uses_one_fresh_view_per_operation
+    with publication_state(tmp_path) as state:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:148: in publication_state
+    state.item=install_dag(state,tamper=tamper)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:90: in install_dag
+    view=open_verified_projection(state.catalog,projection_id=subject.item_key,
+src\company_wiki\automation\narrative_official_json.py:175: in open_verified_projection
+    projection = load_projection(catalog, projection_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_json_projection.py:684: in load_projection
+    raise ProjectionError("projection_not_found")
+E   company_wiki.source_catalog.official_json_projection.ProjectionError: projection_not_found
+_ test_generation_manifest_must_bind_complete_subject_before_any_object_write[missing] _
+tests\integration\test_official_json_publication_terminal.py:226: in test_generation_manifest_must_bind_complete_subject_before_any_object_write
+    with publication_state(tmp_path,subject_two=True) as state:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:148: in publication_state
+    state.item=install_dag(state,tamper=tamper)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:90: in install_dag
+    view=open_verified_projection(state.catalog,projection_id=subject.item_key,
+src\company_wiki\automation\narrative_official_json.py:175: in open_verified_projection
+    projection = load_projection(catalog, projection_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_json_projection.py:684: in load_projection
+    raise ProjectionError("projection_not_found")
+E   company_wiki.source_catalog.official_json_projection.ProjectionError: projection_not_found
+_ test_generation_manifest_must_bind_complete_subject_before_any_object_write[wrong_subject] _
+tests\integration\test_official_json_publication_terminal.py:226: in test_generation_manifest_must_bind_complete_subject_before_any_object_write
+    with publication_state(tmp_path,subject_two=True) as state:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:148: in publication_state
+    state.item=install_dag(state,tamper=tamper)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:90: in install_dag
+    view=open_verified_projection(state.catalog,projection_id=subject.item_key,
+src\company_wiki\automation\narrative_official_json.py:175: in open_verified_projection
+    projection = load_projection(catalog, projection_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_json_projection.py:684: in load_projection
+    raise ProjectionError("projection_not_found")
+E   company_wiki.source_catalog.official_json_projection.ProjectionError: projection_not_found
+__ test_two_issuers_sharing_exact_parents_publish_and_compact_independently ___
+tests\integration\test_official_json_publication_terminal.py:234: in test_two_issuers_sharing_exact_parents_publish_and_compact_independently
+    with publication_state(tmp_path,subject_two=True) as state:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:148: in publication_state
+    state.item=install_dag(state,tamper=tamper)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:90: in install_dag
+    view=open_verified_projection(state.catalog,projection_id=subject.item_key,
+src\company_wiki\automation\narrative_official_json.py:175: in open_verified_projection
+    projection = load_projection(catalog, projection_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_json_projection.py:684: in load_projection
+    raise ProjectionError("projection_not_found")
+E   company_wiki.source_catalog.official_json_projection.ProjectionError: projection_not_found
+__ test_ack_committed_then_crash_reconciles_without_reclaiming_or_model_work __
+tests\integration\test_official_json_publication_terminal.py:255: in test_ack_committed_then_crash_reconciles_without_reclaiming_or_model_work
+    with publication_state(tmp_path) as state:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:148: in publication_state
+    state.item=install_dag(state,tamper=tamper)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:90: in install_dag
+    view=open_verified_projection(state.catalog,projection_id=subject.item_key,
+src\company_wiki\automation\narrative_official_json.py:175: in open_verified_projection
+    projection = load_projection(catalog, projection_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_json_projection.py:684: in load_projection
+    raise ProjectionError("projection_not_found")
+E   company_wiki.source_catalog.official_json_projection.ProjectionError: projection_not_found
+_ test_wrong_current_projection_blocks_visibility_then_fresh_reconcile_recovers _
+tests\integration\test_official_json_publication_terminal.py:268: in test_wrong_current_projection_blocks_visibility_then_fresh_reconcile_recovers
+    with publication_state(tmp_path,subject_two=True) as state:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:148: in publication_state
+    state.item=install_dag(state,tamper=tamper)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:90: in install_dag
+    view=open_verified_projection(state.catalog,projection_id=subject.item_key,
+src\company_wiki\automation\narrative_official_json.py:175: in open_verified_projection
+    projection = load_projection(catalog, projection_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_json_projection.py:684: in load_projection
+    raise ProjectionError("projection_not_found")
+E   company_wiki.source_catalog.official_json_projection.ProjectionError: projection_not_found
+_________ test_stale_or_tampered_selected_field_cannot_become_visible _________
+tests\integration\test_official_json_publication_terminal.py:279: in test_stale_or_tampered_selected_field_cannot_become_visible
+    with publication_state(tmp_path,tamper=True) as state:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:148: in publication_state
+    state.item=install_dag(state,tamper=tamper)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:90: in install_dag
+    view=open_verified_projection(state.catalog,projection_id=subject.item_key,
+src\company_wiki\automation\narrative_official_json.py:175: in open_verified_projection
+    projection = load_projection(catalog, projection_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_json_projection.py:684: in load_projection
+    raise ProjectionError("projection_not_found")
+E   company_wiki.source_catalog.official_json_projection.ProjectionError: projection_not_found
+______ test_nonanchor_original_byte_corruption_blocks_reconcile_and_read ______
+tests\integration\test_official_json_publication_terminal.py:287: in test_nonanchor_original_byte_corruption_blocks_reconcile_and_read
+    with publication_state(tmp_path) as state:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:148: in publication_state
+    state.item=install_dag(state,tamper=tamper)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:90: in install_dag
+    view=open_verified_projection(state.catalog,projection_id=subject.item_key,
+src\company_wiki\automation\narrative_official_json.py:175: in open_verified_projection
+    projection = load_projection(catalog, projection_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_json_projection.py:684: in load_projection
+    raise ProjectionError("projection_not_found")
+E   company_wiki.source_catalog.official_json_projection.ProjectionError: projection_not_found
+_ test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes[subject] _
+tests\integration\test_official_json_publication_terminal.py:308: in test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes
+    with publication_state(tmp_path,subject_two=True) as state:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:148: in publication_state
+    state.item=install_dag(state,tamper=tamper)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:90: in install_dag
+    view=open_verified_projection(state.catalog,projection_id=subject.item_key,
+src\company_wiki\automation\narrative_official_json.py:175: in open_verified_projection
+    projection = load_projection(catalog, projection_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_json_projection.py:684: in load_projection
+    raise ProjectionError("projection_not_found")
+E   company_wiki.source_catalog.official_json_projection.ProjectionError: projection_not_found
+_ test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes[generation] _
+tests\integration\test_official_json_publication_terminal.py:308: in test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes
+    with publication_state(tmp_path,subject_two=True) as state:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:148: in publication_state
+    state.item=install_dag(state,tamper=tamper)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:90: in install_dag
+    view=open_verified_projection(state.catalog,projection_id=subject.item_key,
+src\company_wiki\automation\narrative_official_json.py:175: in open_verified_projection
+    projection = load_projection(catalog, projection_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_json_projection.py:684: in load_projection
+    raise ProjectionError("projection_not_found")
+E   company_wiki.source_catalog.official_json_projection.ProjectionError: projection_not_found
+_ test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes[job_subject] _
+tests\integration\test_official_json_publication_terminal.py:308: in test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes
+    with publication_state(tmp_path,subject_two=True) as state:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:148: in publication_state
+    state.item=install_dag(state,tamper=tamper)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:90: in install_dag
+    view=open_verified_projection(state.catalog,projection_id=subject.item_key,
+src\company_wiki\automation\narrative_official_json.py:175: in open_verified_projection
+    projection = load_projection(catalog, projection_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_json_projection.py:684: in load_projection
+    raise ProjectionError("projection_not_found")
+E   company_wiki.source_catalog.official_json_projection.ProjectionError: projection_not_found
+_ test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes[unfinished] _
+tests\integration\test_official_json_publication_terminal.py:308: in test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes
+    with publication_state(tmp_path,subject_two=True) as state:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:148: in publication_state
+    state.item=install_dag(state,tamper=tamper)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:90: in install_dag
+    view=open_verified_projection(state.catalog,projection_id=subject.item_key,
+src\company_wiki\automation\narrative_official_json.py:175: in open_verified_projection
+    projection = load_projection(catalog, projection_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_json_projection.py:684: in load_projection
+    raise ProjectionError("projection_not_found")
+E   company_wiki.source_catalog.official_json_projection.ProjectionError: projection_not_found
+_______ test_exact_generation_reader_rejects_wrong_artifact_generation ________
+tests\integration\test_official_json_publication_terminal.py:326: in test_exact_generation_reader_rejects_wrong_artifact_generation
+    with publication_state(tmp_path) as state:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:148: in publication_state
+    state.item=install_dag(state,tamper=tamper)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:90: in install_dag
+    view=open_verified_projection(state.catalog,projection_id=subject.item_key,
+src\company_wiki\automation\narrative_official_json.py:175: in open_verified_projection
+    projection = load_projection(catalog, projection_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_json_projection.py:684: in load_projection
+    raise ProjectionError("projection_not_found")
+E   company_wiki.source_catalog.official_json_projection.ProjectionError: projection_not_found
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/integration/test_official_json_publication_terminal.py::test_projection_pin_has_subject_and_generation_without_anchor_identity
+FAILED tests/integration/test_official_json_publication_terminal.py::test_publish_subject_generation_and_read_uses_one_fresh_view_per_operation
+FAILED tests/integration/test_official_json_publication_terminal.py::test_generation_manifest_must_bind_complete_subject_before_any_object_write[missing]
+FAILED tests/integration/test_official_json_publication_terminal.py::test_generation_manifest_must_bind_complete_subject_before_any_object_write[wrong_subject]
+FAILED tests/integration/test_official_json_publication_terminal.py::test_two_issuers_sharing_exact_parents_publish_and_compact_independently
+FAILED tests/integration/test_official_json_publication_terminal.py::test_ack_committed_then_crash_reconciles_without_reclaiming_or_model_work
+FAILED tests/integration/test_official_json_publication_terminal.py::test_wrong_current_projection_blocks_visibility_then_fresh_reconcile_recovers
+FAILED tests/integration/test_official_json_publication_terminal.py::test_stale_or_tampered_selected_field_cannot_become_visible
+FAILED tests/integration/test_official_json_publication_terminal.py::test_nonanchor_original_byte_corruption_blocks_reconcile_and_read
+FAILED tests/integration/test_official_json_publication_terminal.py::test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes[subject]
+FAILED tests/integration/test_official_json_publication_terminal.py::test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes[generation]
+FAILED tests/integration/test_official_json_publication_terminal.py::test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes[job_subject]
+FAILED tests/integration/test_official_json_publication_terminal.py::test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes[unfinished]
+FAILED tests/integration/test_official_json_publication_terminal.py::test_exact_generation_reader_rejects_wrong_artifact_generation
+=================== 14 failed, 1 passed, 1 warning in 7.19s ===================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-220516-343ddde7", "existed": true, "removed": true}

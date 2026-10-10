@@ -1,0 +1,39 @@
+{
+  "phase": "GREEN+legacy_selector",
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-p",
+    "pytest_timeout",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-adapter-green-y33k15oi\\pytest",
+    "-q",
+    "--disable-warnings",
+    "tests/unit/test_official_json_narrative_adapter.py",
+    "tests/integration/test_official_json_narrative_adapter.py",
+    "tests/unit/test_narrative_evidence.py"
+  ],
+  "exit_code": 0,
+  "duration_seconds": 12.942,
+  "temp_removed": true,
+  "log_sha256": "7cedda05aec14bae948cc7a24164fa41645c6f91bb5362a215c45fa660b7ed0d",
+  "captured_output_sha256": "7cedda05aec14bae948cc7a24164fa41645c6f91bb5362a215c45fa660b7ed0d",
+  "log_file": "green.log",
+  "external_provider_calls": 0,
+  "external_model_calls": 0,
+  "new_cost_usd": 0,
+  "new_responsibility_tests": 26,
+  "legacy_selector_tests": 46,
+  "adapter_version": "1.0.0",
+  "files": {
+    "src/company_wiki/automation/narrative_official_json.py": "e36b5fcfe9e9eb223461112411da2e614f48d0f0a1c7c4fee97568272760bbff",
+    "tests/unit/test_official_json_narrative_adapter.py": "b40898a740703374fd9303ee1879a6332f3e7c0bf2eb101ff926c14164bbc35b",
+    "tests/integration/test_official_json_narrative_adapter.py": "5445e906b0243e907cb2180cacab030c42dff9bb87637866cc1ec99ce32da618"
+  }
+}

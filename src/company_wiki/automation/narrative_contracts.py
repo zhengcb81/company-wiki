@@ -11,6 +11,7 @@ from company_wiki.source_catalog.narrative_evidence import (
     SummaryClaim,
     SummaryValidationError,
     validate_summary_draft,
+    validate_summary_claim,
 )
 from company_wiki.source_contract import EvidenceSpan, source_id_for_sha256
 from company_wiki.source_catalog.narrative_language import (
@@ -18,13 +19,19 @@ from company_wiki.source_catalog.narrative_language import (
     narrative_language_family,
 )
 
+from company_wiki.narrative_subject import NarrativeSubject, SubjectBindingError
+
 from .models import canonical_json, canonical_json_hash
 
 
 SOURCE_REVISION_EVENT_SCHEMA = "source-revision-event/2.0"
+PROJECTED_SOURCE_REVISION_EVENT_SCHEMA = "source-revision-event/3.0"
 SELECT_RESULT_SCHEMA = "narrative-select-result/2.0"
+PROJECTED_SELECT_RESULT_SCHEMA = "narrative-select-result/3.0"
 SUMMARY_RESULT_SCHEMA = "narrative-summary-result/2.0"
+PROJECTED_SUMMARY_RESULT_SCHEMA = "narrative-summary-result/3.0"
 BUNDLE_SCHEMA = "narrative-bundle/2.0"
+PROJECTED_BUNDLE_SCHEMA = "narrative-bundle/3.0"
 SELECT_RESULT_MAX_BYTES = 1024 * 1024
 SUMMARY_RESULT_MAX_BYTES = 64 * 1024
 BUNDLE_MAX_BYTES = 1280 * 1024
@@ -48,12 +55,8 @@ _SOURCE_CLASSES = frozenset({"filing", "transcript"})
 _SELECTION_STATUSES = frozenset(
     {"selected", "partial", "skipped_no_narrative", "needs_review", "blocked"}
 )
-_QUALITY_STATUSES = frozenset(
-    {"verified", "needs_review", "skipped_no_narrative"}
-)
-_REVIEW_STATUSES = frozenset(
-    {"not_detected", "detected_and_ignored", "not_reviewed"}
-)
+_QUALITY_STATUSES = frozenset({"verified", "needs_review", "skipped_no_narrative"})
+_REVIEW_STATUSES = frozenset({"not_detected", "detected_and_ignored", "not_reviewed"})
 
 
 class NarrativeContractError(ValueError):
@@ -183,8 +186,12 @@ class SourceRefValue:
         item = _exact(
             value,
             {
-                "schema_version", "document_id", "source_id", "content_sha256",
-                "byte_size", "mime_type",
+                "schema_version",
+                "document_id",
+                "source_id",
+                "content_sha256",
+                "byte_size",
+                "mime_type",
             },
             "source_ref",
         )
@@ -194,7 +201,9 @@ class SourceRefValue:
         digest = _sha(item["content_sha256"], "source_ref.content_sha256")
         source_id = _text(item["source_id"], "source_ref.source_id")
         if source_id != source_id_for_sha256(digest):
-            raise NarrativeContractError("source_ref.source_id does not match content hash")
+            raise NarrativeContractError(
+                "source_ref.source_id does not match content hash"
+            )
         return cls(
             schema,
             _text(item["document_id"], "source_ref.document_id"),
@@ -224,26 +233,42 @@ class SourceMetadataValue:
     declared_language: str | None = None
 
     @classmethod
-    def from_dict(cls, value: object) -> "SourceMetadataValue":
+    def from_dict(
+        cls, value: object, *, projected: bool = False
+    ) -> "SourceMetadataValue":
         item = _exact(
-            value, {"source_class", "title", "document_kind", "language"}
-            | ({"declared_language"} if isinstance(value, Mapping) and "declared_language" in value else set()),
+            value,
+            {"source_class", "title", "document_kind", "language"}
+            | (
+                {"declared_language"}
+                if isinstance(value, Mapping) and "declared_language" in value
+                else set()
+            ),
             "source_metadata",
         )
         source_class = _text(item["source_class"], "source_metadata.source_class")
-        if source_class not in _SOURCE_CLASSES:
+        classes = {"official_json"} if projected else _SOURCE_CLASSES
+        if source_class not in classes:
             raise NarrativeContractError("source_metadata.source_class is invalid")
         language = _text(item["language"], "source_metadata.language")
-        if language not in _LANGUAGES:
+        if language not in (_LANGUAGES | {"unknown"} if projected else _LANGUAGES):
             raise NarrativeContractError("source_metadata.language is invalid")
-        declared = _text(item.get("declared_language"), "source_metadata.declared_language", optional=True)
+        declared = _text(
+            item.get("declared_language"),
+            "source_metadata.declared_language",
+            optional=True,
+        )
         if declared is not None:
             try:
                 family = narrative_language_family(declared)
             except NarrativeLanguageError as exc:
-                raise NarrativeContractError("source_metadata.declared_language is invalid") from exc
+                raise NarrativeContractError(
+                    "source_metadata.declared_language is invalid"
+                ) from exc
             if family != language:
-                raise NarrativeContractError("source_metadata.language does not match declared_language")
+                raise NarrativeContractError(
+                    "source_metadata.language does not match declared_language"
+                )
         return cls(
             source_class,
             _text(item["title"], "source_metadata.title", optional=True),
@@ -267,32 +292,71 @@ class SourceMetadataValue:
 @dataclass(frozen=True)
 class SourceRevisionEventPayload:
     schema_version: str
-    source_ref: SourceRefValue
-    expected_read_policy_sha256: str
+    source_ref: SourceRefValue  # Real FK anchor; public projection DTO never labels it as the subject.
+    expected_read_policy_sha256: str | None
     source_metadata: SourceMetadataValue
+    subject_binding: NarrativeSubject | None = None
 
     @classmethod
     def from_dict(cls, value: object) -> "SourceRevisionEventPayload":
         assert_no_physical_paths(value)
+        if (
+            isinstance(value, Mapping)
+            and value.get("schema_version") == PROJECTED_SOURCE_REVISION_EVENT_SCHEMA
+        ):
+            item = _exact(
+                value,
+                {"schema_version", "subject_binding", "source_metadata"},
+                "source projection event",
+            )
+            try:
+                subject = NarrativeSubject.from_dict(item["subject_binding"])
+            except SubjectBindingError as exc:
+                raise NarrativeContractError(
+                    "invalid source projection subject"
+                ) from exc
+            if subject.kind != "official_json":
+                raise NarrativeContractError(
+                    "projection event requires projection subject"
+                )
+            return cls(
+                PROJECTED_SOURCE_REVISION_EVENT_SCHEMA,
+                SourceRefValue.from_dict(subject.anchor_ref),
+                None,
+                SourceMetadataValue.from_dict(item["source_metadata"], projected=True),
+                subject,
+            )
         item = _exact(
             value,
             {
-                "schema_version", "source_ref", "expected_read_policy_sha256",
+                "schema_version",
+                "source_ref",
+                "expected_read_policy_sha256",
                 "source_metadata",
             },
             "source revision event",
         )
         if item["schema_version"] != SOURCE_REVISION_EVENT_SCHEMA:
             raise NarrativeContractError("unsupported source revision event schema")
-        metadata = SourceMetadataValue.from_dict(item["source_metadata"])
         return cls(
             SOURCE_REVISION_EVENT_SCHEMA,
             SourceRefValue.from_dict(item["source_ref"]),
-            _sha(
-                item["expected_read_policy_sha256"],
-                "expected_read_policy_sha256",
-            ),
-            metadata,
+            _sha(item["expected_read_policy_sha256"], "expected_read_policy_sha256"),
+            SourceMetadataValue.from_dict(item["source_metadata"]),
+        )
+
+    @property
+    def subject(self) -> NarrativeSubject:
+        return self.subject_binding or NarrativeSubject.from_raw(
+            self.source_ref.to_dict()
+        )
+
+    @property
+    def item_key(self) -> str:
+        return (
+            self.subject_binding.item_key
+            if self.subject_binding is not None
+            else self.source_ref.document_id
         )
 
     @property
@@ -300,6 +364,12 @@ class SourceRevisionEventPayload:
         return cast(str, canonical_json_hash(self.to_dict()))
 
     def to_dict(self) -> dict[str, Any]:
+        if self.subject_binding is not None:
+            return {
+                "schema_version": self.schema_version,
+                "subject_binding": self.subject_binding.to_dict(),
+                "source_metadata": self.source_metadata.to_dict(),
+            }
         return {
             "schema_version": self.schema_version,
             "source_ref": self.source_ref.to_dict(),
@@ -320,7 +390,13 @@ class PromptReviewValue:
     def from_dict(cls, value: object) -> "PromptReviewValue":
         item = _exact(
             value,
-            {"status", "source_sha256", "evidence_sha256", "policy_hash", "reviewed_at"},
+            {
+                "status",
+                "source_sha256",
+                "evidence_sha256",
+                "policy_hash",
+                "reviewed_at",
+            },
             "prompt_review",
         )
         status = _text(item["status"], "prompt_review.status")
@@ -328,14 +404,20 @@ class PromptReviewValue:
             raise NarrativeContractError("prompt_review.status is invalid")
         fields = (
             _sha(item["source_sha256"], "prompt_review.source_sha256", optional=True),
-            _sha(item["evidence_sha256"], "prompt_review.evidence_sha256", optional=True),
+            _sha(
+                item["evidence_sha256"], "prompt_review.evidence_sha256", optional=True
+            ),
             _sha(item["policy_hash"], "prompt_review.policy_hash", optional=True),
             _text(item["reviewed_at"], "prompt_review.reviewed_at", optional=True),
         )
         if status == "not_reviewed" and any(part is not None for part in fields):
-            raise NarrativeContractError("not_reviewed prompt_review must have null bindings")
+            raise NarrativeContractError(
+                "not_reviewed prompt_review must have null bindings"
+            )
         if status != "not_reviewed" and any(part is None for part in fields):
-            raise NarrativeContractError("reviewed prompt_review requires complete bindings")
+            raise NarrativeContractError(
+                "reviewed prompt_review requires complete bindings"
+            )
         return cls(status, *fields)
 
     def to_dict(self) -> dict[str, Any]:
@@ -348,8 +430,13 @@ class PromptReviewValue:
         }
 
     def validate_source(self, source: SourceRefValue) -> None:
-        if self.status != "not_reviewed" and self.source_sha256 != source.content_sha256:
-            raise NarrativeContractError("prompt_review source hash differs from source_ref")
+        if (
+            self.status != "not_reviewed"
+            and self.source_sha256 != source.content_sha256
+        ):
+            raise NarrativeContractError(
+                "prompt_review source hash differs from source_ref"
+            )
 
 
 @dataclass(frozen=True)
@@ -360,7 +447,10 @@ class ComponentValue:
     @classmethod
     def from_dict(cls, value: object, name: str) -> "ComponentValue":
         item = _exact(value, {"name", "version"}, name)
-        return cls(_text(item["name"], f"{name}.name"), _text(item["version"], f"{name}.version"))
+        return cls(
+            _text(item["name"], f"{name}.name"),
+            _text(item["version"], f"{name}.version"),
+        )
 
     def to_dict(self) -> dict[str, str]:
         return {"name": self.name, "version": self.version}
@@ -384,9 +474,17 @@ class SelectionValue:
     @classmethod
     def from_dict(cls, value: object) -> "SelectionValue":
         keys = {
-            "status", "coverage_complete", "source_units", "candidate_count",
-            "selected_count", "omitted_candidate_count", "dropped_financial_count",
-            "pages_total", "pages_read", "lines_total", "tables_total",
+            "status",
+            "coverage_complete",
+            "source_units",
+            "candidate_count",
+            "selected_count",
+            "omitted_candidate_count",
+            "dropped_financial_count",
+            "pages_total",
+            "pages_read",
+            "lines_total",
+            "tables_total",
             "tables_scanned",
         }
         item = _exact(value, keys, "selection")
@@ -399,7 +497,9 @@ class SelectionValue:
             status=status,
             coverage_complete=item["coverage_complete"],
             source_units=_integer(item["source_units"], "selection.source_units"),
-            candidate_count=_integer(item["candidate_count"], "selection.candidate_count"),
+            candidate_count=_integer(
+                item["candidate_count"], "selection.candidate_count"
+            ),
             selected_count=_integer(item["selected_count"], "selection.selected_count"),
             omitted_candidate_count=_integer(
                 item["omitted_candidate_count"], "selection.omitted_candidate_count"
@@ -413,7 +513,10 @@ class SelectionValue:
             tables_total=_integer(item["tables_total"], "selection.tables_total"),
             tables_scanned=_integer(item["tables_scanned"], "selection.tables_scanned"),
         )
-        if result.pages_read > result.pages_total or result.tables_scanned > result.tables_total:
+        if (
+            result.pages_read > result.pages_total
+            or result.tables_scanned > result.tables_total
+        ):
             raise NarrativeContractError("selection scan counters exceed totals")
         if result.selected_count > result.candidate_count:
             raise NarrativeContractError("selection selected_count exceeds candidates")
@@ -437,7 +540,9 @@ class SelectionValue:
 
 
 def _evidence(value: object) -> tuple[EvidenceSpan, ...]:
-    spans = tuple(EvidenceSpan.from_dict(item) for item in _array(value, "evidence_spans"))
+    spans = tuple(
+        EvidenceSpan.from_dict(item) for item in _array(value, "evidence_spans")
+    )
     ids = [span.span_id for span in spans]
     if len(ids) != len(set(ids)):
         raise NarrativeContractError("evidence_spans contain duplicate IDs")
@@ -451,9 +556,15 @@ class TranscriptLineageValue:
     @classmethod
     def from_dict(cls, value: object) -> "TranscriptLineageValue":
         keys = {
-            "schema_version", "original_source_id", "original_sha256",
-            "original_mime_type", "original_byte_size", "text_sha256",
-            "text_byte_size", "extractor_version", "line_count",
+            "schema_version",
+            "original_source_id",
+            "original_sha256",
+            "original_mime_type",
+            "original_byte_size",
+            "text_sha256",
+            "text_byte_size",
+            "extractor_version",
+            "line_count",
         }
         item = _exact(value, keys, "transcript_lineage")
         checked = dict(item)
@@ -464,7 +575,9 @@ class TranscriptLineageValue:
         for key in ("original_sha256", "text_sha256"):
             checked[key] = _sha(checked[key], f"transcript_lineage.{key}")
         for key in ("original_byte_size", "text_byte_size", "line_count"):
-            checked[key] = _integer(checked[key], f"transcript_lineage.{key}", positive=True)
+            checked[key] = _integer(
+                checked[key], f"transcript_lineage.{key}", positive=True
+            )
         return cls(checked)
 
     def to_dict(self) -> dict[str, Any]:
@@ -482,10 +595,17 @@ class TranscriptByteBinding:
     def from_dict(cls, value: object) -> "TranscriptByteBinding":
         item = _exact(
             value,
-            {"evidence_id", "material_line_start", "material_line_end", "source_byte_ranges"},
+            {
+                "evidence_id",
+                "material_line_start",
+                "material_line_end",
+                "source_byte_ranges",
+            },
             "transcript byte binding",
         )
-        start = _integer(item["material_line_start"], "material_line_start", positive=True)
+        start = _integer(
+            item["material_line_start"], "material_line_start", positive=True
+        )
         end = _integer(item["material_line_end"], "material_line_end", positive=True)
         if end < start:
             raise NarrativeContractError("transcript material line range is invalid")
@@ -512,11 +632,56 @@ class TranscriptByteBinding:
         }
 
 
+def _projection_subject(value: object) -> NarrativeSubject:
+    try:
+        subject = NarrativeSubject.from_dict(value)
+    except SubjectBindingError as exc:
+        raise NarrativeContractError("invalid projection subject binding") from exc
+    if subject.kind != "official_json":
+        raise NarrativeContractError("projection schema requires projection subject")
+    return subject
+
+
+def _validate_projection_evidence(
+    subject: NarrativeSubject, spans: Sequence[EvidenceSpan], selection: SelectionValue
+) -> None:
+    parents = {
+        (ref["source_id"], ref["content_sha256"]) for ref in subject.parent_source_refs
+    }
+    for span in spans:
+        binding = span.structured_value
+        if (
+            span.source_id,
+            binding.get("parent_content_sha256"),
+        ) not in parents or binding.get("projection_id") != subject.item_key:
+            raise NarrativeContractError(
+                "selected evidence differs from projection parents or identity"
+            )
+    coverage = subject.to_dict()["coverage"]
+    if selection.coverage_complete and not (
+        coverage.get("pagination_complete") is True
+        and coverage.get("page_envelope_complete") is True
+    ):
+        raise NarrativeContractError(
+            "selection cannot promote partial projection coverage"
+        )
+
+
+def _subject_wire(
+    value: dict[str, Any], subject: NarrativeSubject | None, *, remove: Sequence[str]
+) -> dict[str, Any]:
+    if subject is not None:
+        for key in remove:
+            value.pop(key, None)
+        value["subject_binding"] = subject.to_dict()
+    return value
+
+
 @dataclass(frozen=True)
 class NarrativeSelectResult:
     schema_version: str
     source_ref: SourceRefValue
-    expected_read_policy_sha256: str
+    expected_read_policy_sha256: str | None
     source_metadata: SourceMetadataValue
     parser: ComponentValue
     selector: ComponentValue
@@ -527,41 +692,86 @@ class NarrativeSelectResult:
     transcript_byte_bindings: tuple[TranscriptByteBinding, ...]
     summary_scope: str
     encoded_size: int
+    subject_binding: NarrativeSubject | None = None
 
     @classmethod
     def from_dict(cls, value: object) -> "NarrativeSelectResult":
         assert_no_physical_paths(value)
         keys = {
-            "schema_version", "source_ref", "expected_read_policy_sha256",
-            "source_metadata", "parser", "selector", "selection",
-            "evidence_spans", "prompt_review", "transcript_lineage",
-            "transcript_byte_bindings", "summary_scope",
+            "schema_version",
+            "source_ref",
+            "expected_read_policy_sha256",
+            "source_metadata",
+            "parser",
+            "selector",
+            "selection",
+            "evidence_spans",
+            "prompt_review",
+            "transcript_lineage",
+            "transcript_byte_bindings",
+            "summary_scope",
         }
+        projected = (
+            isinstance(value, Mapping)
+            and value.get("schema_version") == PROJECTED_SELECT_RESULT_SCHEMA
+        )
+        if projected:
+            keys = (
+                keys
+                - {
+                    "source_ref",
+                    "expected_read_policy_sha256",
+                    "transcript_lineage",
+                    "transcript_byte_bindings",
+                }
+            ) | {"subject_binding"}
         item = _exact(value, keys, "narrative select result")
-        if item["schema_version"] != SELECT_RESULT_SCHEMA:
+        if item["schema_version"] not in {
+            SELECT_RESULT_SCHEMA,
+            PROJECTED_SELECT_RESULT_SCHEMA,
+        }:
             raise NarrativeContractError("unsupported narrative select schema")
-        source = SourceRefValue.from_dict(item["source_ref"])
-        metadata = SourceMetadataValue.from_dict(item["source_metadata"])
+        subject = _projection_subject(item["subject_binding"]) if projected else None
+        source = SourceRefValue.from_dict(
+            subject.anchor_ref if subject is not None else item["source_ref"]
+        )
+        metadata = SourceMetadataValue.from_dict(
+            item["source_metadata"], projected=projected
+        )
         selection = SelectionValue.from_dict(item["selection"])
         spans = _evidence(item["evidence_spans"])
         review = PromptReviewValue.from_dict(item["prompt_review"])
         review.validate_source(source)
         lineage = (
-            None if item["transcript_lineage"] is None
+            None
+            if projected or item["transcript_lineage"] is None
             else TranscriptLineageValue.from_dict(item["transcript_lineage"])
         )
         bindings = tuple(
             TranscriptByteBinding.from_dict(raw)
-            for raw in _array(item["transcript_byte_bindings"], "transcript_byte_bindings")
+            for raw in _array(
+                item.get("transcript_byte_bindings", []), "transcript_byte_bindings"
+            )
         )
         result = cls(
-            SELECT_RESULT_SCHEMA, source,
-            _sha(item["expected_read_policy_sha256"], "expected_read_policy_sha256"),
+            item["schema_version"],
+            source,
+            None
+            if projected
+            else _sha(
+                item["expected_read_policy_sha256"], "expected_read_policy_sha256"
+            ),
             metadata,
             ComponentValue.from_dict(item["parser"], "parser"),
             ComponentValue.from_dict(item["selector"], "selector"),
-            selection, spans, review, lineage, bindings,
-            _text(item["summary_scope"], "summary_scope"), 0,
+            selection,
+            spans,
+            review,
+            lineage,
+            bindings,
+            _text(item["summary_scope"], "summary_scope"),
+            0,
+            subject,
         )
         result._validate()
         size = _enforce_cap(result.to_dict(), SELECT_RESULT_MAX_BYTES, "select")
@@ -572,18 +782,32 @@ class NarrativeSelectResult:
         if self.summary_scope != "selected_evidence_only":
             raise NarrativeContractError("summary_scope must be selected_evidence_only")
         if self.selection.selected_count != len(self.evidence_spans):
-            raise NarrativeContractError("selection selected_count differs from evidence")
-        if any(span.source_id != self.source_ref.source_id for span in self.evidence_spans):
-            raise NarrativeContractError("selected evidence source differs from source_ref")
+            raise NarrativeContractError(
+                "selection selected_count differs from evidence"
+            )
+        if self.subject_binding is not None:
+            _validate_projection_evidence(
+                self.subject_binding, self.evidence_spans, self.selection
+            )
+        elif any(
+            span.source_id != self.source_ref.source_id for span in self.evidence_spans
+        ):
+            raise NarrativeContractError(
+                "selected evidence source differs from source_ref"
+            )
         if self.selection.status == "skipped_no_narrative":
             if self.evidence_spans or not self.selection.coverage_complete:
-                raise NarrativeContractError("skip requires complete coverage and no evidence")
+                raise NarrativeContractError(
+                    "skip requires complete coverage and no evidence"
+                )
         self._validate_transcript_fields()
 
     def _validate_transcript_fields(self) -> None:
-        if self.source_metadata.source_class == "filing":
+        if self.source_metadata.source_class in {"filing", "official_json"}:
             if self.transcript_lineage or self.transcript_byte_bindings:
-                raise NarrativeContractError("filing result cannot contain transcript fields")
+                raise NarrativeContractError(
+                    "filing result cannot contain transcript fields"
+                )
             return
         if self.transcript_lineage is None:
             raise NarrativeContractError("transcript result requires source lineage")
@@ -596,10 +820,26 @@ class NarrativeSelectResult:
         bound = {binding.evidence_id for binding in self.transcript_byte_bindings}
         selected = {span.span_id for span in self.evidence_spans}
         if bound != selected:
-            raise NarrativeContractError("transcript bindings must match selected evidence")
+            raise NarrativeContractError(
+                "transcript bindings must match selected evidence"
+            )
+
+    @property
+    def subject(self) -> NarrativeSubject:
+        return self.subject_binding or NarrativeSubject.from_raw(
+            self.source_ref.to_dict()
+        )
+
+    @property
+    def item_key(self) -> str:
+        return (
+            self.subject_binding.item_key
+            if self.subject_binding is not None
+            else self.source_ref.document_id
+        )
 
     def to_dict(self) -> dict[str, Any]:
-        return {
+        value = {
             "schema_version": self.schema_version,
             "source_ref": self.source_ref.to_dict(),
             "expected_read_policy_sha256": self.expected_read_policy_sha256,
@@ -609,10 +849,24 @@ class NarrativeSelectResult:
             "selection": self.selection.to_dict(),
             "evidence_spans": [span.to_dict() for span in self.evidence_spans],
             "prompt_review": self.prompt_review.to_dict(),
-            "transcript_lineage": self.transcript_lineage.to_dict() if self.transcript_lineage else None,
-            "transcript_byte_bindings": [item.to_dict() for item in self.transcript_byte_bindings],
+            "transcript_lineage": self.transcript_lineage.to_dict()
+            if self.transcript_lineage
+            else None,
+            "transcript_byte_bindings": [
+                item.to_dict() for item in self.transcript_byte_bindings
+            ],
             "summary_scope": self.summary_scope,
         }
+        return _subject_wire(
+            value,
+            self.subject_binding,
+            remove=(
+                "source_ref",
+                "expected_read_policy_sha256",
+                "transcript_lineage",
+                "transcript_byte_bindings",
+            ),
+        )
 
 
 def _claim_from_dict(value: object) -> SummaryClaim:
@@ -650,9 +904,7 @@ def _claim_from_dict(value: object) -> SummaryClaim:
         text=_text(item["text"], "summary claim text"),
         evidence_ids=evidence_ids,
         claim_type=cast(
-            Literal[
-                "company_statement", "analyst_question", "editorial", "uncertain"
-            ],
+            Literal["company_statement", "analyst_question", "editorial", "uncertain"],
             claim_type,
         ),
         modality=cast(
@@ -672,10 +924,13 @@ def _claim_from_dict(value: object) -> SummaryClaim:
 
 def _draft_from_dict(value: object) -> SourceSummaryDraft:
     item = _exact(
-        value, {"source_id", "source_sha256", "language", "claims", "status"},
+        value,
+        {"source_id", "source_sha256", "language", "claims", "status"},
         "summary draft",
     )
-    claims = tuple(_claim_from_dict(raw) for raw in _array(item["claims"], "summary claims"))
+    claims = tuple(
+        _claim_from_dict(raw) for raw in _array(item["claims"], "summary claims")
+    )
     status = _text(item["status"], "summary draft status")
     if status not in {"draft", "needs_review"}:
         raise NarrativeContractError("summary draft status is invalid")
@@ -709,6 +964,94 @@ def _draft_to_dict(value: SourceSummaryDraft) -> dict[str, Any]:
 
 
 @dataclass(frozen=True)
+class SubjectSummaryDraft:
+    subject_id: str
+    subject_sha256: str
+    language: str
+    claims: tuple[SummaryClaim, ...]
+    status: Literal["draft", "needs_review"] = "draft"
+
+
+def subject_draft_from_dict(value: object) -> SubjectSummaryDraft:
+    item = _exact(
+        value,
+        {"subject_id", "subject_sha256", "language", "claims", "status"},
+        "subject summary draft",
+    )
+    status = _text(item["status"], "subject summary status")
+    if status not in {"draft", "needs_review"}:
+        raise NarrativeContractError("subject summary status is invalid")
+    return SubjectSummaryDraft(
+        _text(item["subject_id"], "subject summary ID"),
+        _sha(item["subject_sha256"], "subject summary SHA"),
+        _text(item["language"], "subject summary language"),
+        tuple(
+            _claim_from_dict(raw) for raw in _array(item["claims"], "summary claims")
+        ),
+        cast(Literal["draft", "needs_review"], status),
+    )
+
+
+def subject_draft_to_dict(value: SubjectSummaryDraft) -> dict[str, Any]:
+    return {
+        "subject_id": value.subject_id,
+        "subject_sha256": value.subject_sha256,
+        "language": value.language,
+        "status": value.status,
+        "claims": [
+            {
+                "claim_id": c.claim_id,
+                "text": c.text,
+                "evidence_ids": list(c.evidence_ids),
+                "claim_type": c.claim_type,
+                "modality": c.modality,
+                "needs_review": c.needs_review,
+            }
+            for c in value.claims
+        ],
+    }
+
+
+def validate_subject_summary_identity(
+    draft: SubjectSummaryDraft, *, subject: NarrativeSubject, language: str
+) -> None:
+    if (
+        draft.subject_id != subject.item_key
+        or draft.subject_sha256 != subject.subject_sha256
+    ):
+        raise SummaryValidationError("summary subject identity/hash does not match")
+    if draft.language != language:
+        raise SummaryValidationError(
+            "summary language must match the selected language"
+        )
+
+
+def validate_subject_summary_draft(
+    draft: SubjectSummaryDraft,
+    *,
+    subject: NarrativeSubject,
+    language: str,
+    evidence_spans: Sequence[EvidenceSpan],
+) -> None:
+    validate_subject_summary_identity(draft, subject=subject, language=language)
+    if not draft.claims:
+        raise SummaryValidationError("summary draft must contain at least one claim")
+    known = {span.span_id: span for span in evidence_spans}
+    for claim in draft.claims:
+        validate_summary_claim(claim, known, draft.status)
+
+
+def _summary_draft_dict(
+    value: SourceSummaryDraft | SubjectSummaryDraft,
+) -> dict[str, Any]:
+    return (
+        subject_draft_to_dict(value)
+        if isinstance(value, SubjectSummaryDraft)
+        else _draft_to_dict(value)
+    )
+
+
+@dataclass(frozen=True)
 class ModelValue:
     adapter_id: str
     model_id: str
@@ -718,7 +1061,8 @@ class ModelValue:
     @classmethod
     def from_dict(cls, value: object) -> "ModelValue":
         item = _exact(
-            value, {"adapter_id", "model_id", "prompt_version", "response_sha256"},
+            value,
+            {"adapter_id", "model_id", "prompt_version", "response_sha256"},
             "model",
         )
         return cls(
@@ -744,44 +1088,79 @@ class NarrativeSummaryResult:
     language: str
     translate: bool
     status: str
-    draft: SourceSummaryDraft | None
+    draft: SourceSummaryDraft | SubjectSummaryDraft | None
     model: ModelValue | None
     prompt_review: PromptReviewValue
     encoded_size: int
+    subject_binding: NarrativeSubject | None = None
 
     @classmethod
     def from_dict(cls, value: object) -> "NarrativeSummaryResult":
         assert_no_physical_paths(value)
-        item = _exact(
-            value,
-            {
-                "schema_version", "source_ref", "language", "translate", "status",
-                "draft", "model", "prompt_review",
-            },
-            "narrative summary result",
+        projected = (
+            isinstance(value, Mapping)
+            and value.get("schema_version") == PROJECTED_SUMMARY_RESULT_SCHEMA
         )
-        if item["schema_version"] != SUMMARY_RESULT_SCHEMA:
+        keys = {
+            "schema_version",
+            "source_ref",
+            "language",
+            "translate",
+            "status",
+            "draft",
+            "model",
+            "prompt_review",
+        }
+        if projected:
+            keys = (keys - {"source_ref"}) | {"subject_binding"}
+        item = _exact(value, keys, "narrative summary result")
+        if item["schema_version"] not in {
+            SUMMARY_RESULT_SCHEMA,
+            PROJECTED_SUMMARY_RESULT_SCHEMA,
+        }:
             raise NarrativeContractError("unsupported narrative summary schema")
         if item["translate"] is not False:
             raise NarrativeContractError("translate must be false")
-        source = SourceRefValue.from_dict(item["source_ref"])
+        subject = _projection_subject(item["subject_binding"]) if projected else None
+        source = SourceRefValue.from_dict(
+            subject.anchor_ref if subject is not None else item["source_ref"]
+        )
         language = _text(item["language"], "summary language")
-        if language not in _LANGUAGES:
-            raise NarrativeContractError("summary language is invalid")
         status = _text(item["status"], "summary status")
-        draft = None if item["draft"] is None else _draft_from_dict(item["draft"])
+        unknown_skip = (
+            projected and language == "unknown" and status == "summary_not_needed"
+        )
+        if language not in _LANGUAGES and not unknown_skip:
+            raise NarrativeContractError("summary language is invalid")
+        draft = (
+            None
+            if item["draft"] is None
+            else subject_draft_from_dict(item["draft"])
+            if projected
+            else _draft_from_dict(item["draft"])
+        )
         model = None if item["model"] is None else ModelValue.from_dict(item["model"])
         if status == "completed" and (draft is None or model is None):
             raise NarrativeContractError("completed summary requires draft and model")
         if status == "summary_not_needed" and (draft is not None or model is not None):
-            raise NarrativeContractError("summary_not_needed must not contain draft or model")
+            raise NarrativeContractError(
+                "summary_not_needed must not contain draft or model"
+            )
         if status not in {"completed", "summary_not_needed"}:
             raise NarrativeContractError("summary status is invalid")
         review = PromptReviewValue.from_dict(item["prompt_review"])
         review.validate_source(source)
         result = cls(
-            SUMMARY_RESULT_SCHEMA, source, language, False, status, draft, model,
-            review, 0,
+            item["schema_version"],
+            source,
+            language,
+            False,
+            status,
+            draft,
+            model,
+            review,
+            0,
+            subject,
         )
         result._validate_identity()
         size = _enforce_cap(result.to_dict(), SUMMARY_RESULT_MAX_BYTES, "summary")
@@ -791,7 +1170,19 @@ class NarrativeSummaryResult:
     def _validate_identity(self) -> None:
         if self.draft is None:
             return
-        if (
+        if self.subject_binding is not None:
+            if not isinstance(self.draft, SubjectSummaryDraft):
+                raise NarrativeContractError(
+                    "projection summary requires subject draft"
+                )
+            if (
+                self.draft.subject_id != self.subject_binding.item_key
+                or self.draft.subject_sha256 != self.subject_binding.subject_sha256
+            ):
+                raise NarrativeContractError(
+                    "summary draft subject differs from selection"
+                )
+        elif not isinstance(self.draft, SourceSummaryDraft) or (
             self.draft.source_id != self.source_ref.source_id
             or self.draft.source_sha256 != self.source_ref.content_sha256
         ):
@@ -800,63 +1191,105 @@ class NarrativeSummaryResult:
             raise NarrativeContractError("summary draft language differs from result")
 
     def validate_against(self, selected: NarrativeSelectResult) -> None:
-        if self.source_ref != selected.source_ref or self.language != selected.source_metadata.language:
-            raise NarrativeContractError("summary source or language differs from selection")
+        if (
+            self.subject != selected.subject
+            or self.language != selected.source_metadata.language
+        ):
+            raise NarrativeContractError(
+                "summary source or language differs from selection"
+            )
         skipped = selected.selection.status == "skipped_no_narrative"
         if skipped != (self.status == "summary_not_needed"):
             raise NarrativeContractError("summary status differs from selection")
         if self.status == "completed":
             assert self.draft is not None
             try:
-                validate_summary_draft(
-                    self.draft,
-                    source_id=selected.source_ref.source_id,
-                    source_sha256=selected.source_ref.content_sha256,
-                    language=selected.source_metadata.language,
-                    evidence_spans=selected.evidence_spans,
-                )
+                if isinstance(self.draft, SubjectSummaryDraft):
+                    validate_subject_summary_draft(
+                        self.draft,
+                        subject=selected.subject,
+                        language=selected.source_metadata.language,
+                        evidence_spans=selected.evidence_spans,
+                    )
+                else:
+                    validate_summary_draft(
+                        self.draft,
+                        source_id=selected.source_ref.source_id,
+                        source_sha256=selected.source_ref.content_sha256,
+                        language=selected.source_metadata.language,
+                        evidence_spans=selected.evidence_spans,
+                    )
             except SummaryValidationError as exc:
                 raise NarrativeContractError(str(exc)) from exc
 
+    @property
+    def subject(self) -> NarrativeSubject:
+        return self.subject_binding or NarrativeSubject.from_raw(
+            self.source_ref.to_dict()
+        )
+
+    @property
+    def item_key(self) -> str:
+        return (
+            self.subject_binding.item_key
+            if self.subject_binding is not None
+            else self.source_ref.document_id
+        )
+
     def to_dict(self) -> dict[str, Any]:
-        return {
+        value = {
             "schema_version": self.schema_version,
             "source_ref": self.source_ref.to_dict(),
             "language": self.language,
             "translate": self.translate,
             "status": self.status,
-            "draft": _draft_to_dict(self.draft) if self.draft else None,
+            "draft": _summary_draft_dict(self.draft) if self.draft else None,
             "model": self.model.to_dict() if self.model else None,
             "prompt_review": self.prompt_review.to_dict(),
         }
+        return _subject_wire(value, self.subject_binding, remove=("source_ref",))
 
 
 @dataclass(frozen=True)
 class BundleSummaryValue:
     status: str
     translate: bool
-    draft: SourceSummaryDraft | None
+    draft: SourceSummaryDraft | SubjectSummaryDraft | None
     model: ModelValue | None
 
     @classmethod
-    def from_dict(cls, value: object) -> "BundleSummaryValue":
-        item = _exact(value, {"status", "translate", "draft", "model"}, "bundle summary")
+    def from_dict(
+        cls, value: object, *, projected: bool = False
+    ) -> "BundleSummaryValue":
+        item = _exact(
+            value, {"status", "translate", "draft", "model"}, "bundle summary"
+        )
         if item["translate"] is not False:
             raise NarrativeContractError("bundle summary translate must be false")
         status = _text(item["status"], "bundle summary status")
-        draft = None if item["draft"] is None else _draft_from_dict(item["draft"])
+        draft = (
+            None
+            if item["draft"] is None
+            else subject_draft_from_dict(item["draft"])
+            if projected
+            else _draft_from_dict(item["draft"])
+        )
         model = None if item["model"] is None else ModelValue.from_dict(item["model"])
         if status == "completed" and (draft is None or model is None):
-            raise NarrativeContractError("completed bundle summary requires draft and model")
+            raise NarrativeContractError(
+                "completed bundle summary requires draft and model"
+            )
         if status == "summary_not_needed" and (draft is not None or model is not None):
-            raise NarrativeContractError("summary_not_needed bundle cannot contain model")
+            raise NarrativeContractError(
+                "summary_not_needed bundle cannot contain model"
+            )
         return cls(status, False, draft, model)
 
     def to_dict(self) -> dict[str, Any]:
         return {
             "status": self.status,
             "translate": self.translate,
-            "draft": _draft_to_dict(self.draft) if self.draft else None,
+            "draft": _summary_draft_dict(self.draft) if self.draft else None,
             "model": self.model.to_dict() if self.model else None,
         }
 
@@ -917,7 +1350,7 @@ class ReplayValue:
 class NarrativeBundle:
     schema_version: str
     source_ref: SourceRefValue
-    expected_read_policy_sha256: str
+    expected_read_policy_sha256: str | None
     source_metadata: SourceMetadataValue
     quality_status: str
     selection: SelectionValue
@@ -929,46 +1362,101 @@ class NarrativeBundle:
     versions: VersionsValue
     replay: ReplayValue
     encoded_size: int
+    subject_binding: NarrativeSubject | None = None
 
     @classmethod
     def from_dict(cls, value: object) -> "NarrativeBundle":
         assert_no_physical_paths(value)
         keys = {
-            "schema_version", "source_ref", "expected_read_policy_sha256",
-            "source_metadata", "quality_status", "selection", "evidence_spans",
-            "summary", "prompt_review", "transcript_lineage",
-            "transcript_byte_bindings", "versions", "replay",
+            "schema_version",
+            "source_ref",
+            "expected_read_policy_sha256",
+            "source_metadata",
+            "quality_status",
+            "selection",
+            "evidence_spans",
+            "summary",
+            "prompt_review",
+            "transcript_lineage",
+            "transcript_byte_bindings",
+            "versions",
+            "replay",
         }
+        projected = (
+            isinstance(value, Mapping)
+            and value.get("schema_version") == PROJECTED_BUNDLE_SCHEMA
+        )
+        if projected:
+            keys = (
+                keys
+                - {
+                    "source_ref",
+                    "expected_read_policy_sha256",
+                    "transcript_lineage",
+                    "transcript_byte_bindings",
+                }
+            ) | {"subject_binding"}
         item = _exact(value, keys, "narrative bundle")
-        if item["schema_version"] != BUNDLE_SCHEMA:
+        if item["schema_version"] not in {BUNDLE_SCHEMA, PROJECTED_BUNDLE_SCHEMA}:
             raise NarrativeContractError("unsupported narrative bundle schema")
         quality = _text(item["quality_status"], "quality_status")
         if quality not in _QUALITY_STATUSES:
             raise NarrativeContractError("quality_status is invalid")
-        source = SourceRefValue.from_dict(item["source_ref"])
+        subject = _projection_subject(item["subject_binding"]) if projected else None
+        source = SourceRefValue.from_dict(
+            subject.anchor_ref if subject is not None else item["source_ref"]
+        )
         review = PromptReviewValue.from_dict(item["prompt_review"])
         review.validate_source(source)
         result = cls(
-            BUNDLE_SCHEMA, source,
-            _sha(item["expected_read_policy_sha256"], "expected_read_policy_sha256"),
-            SourceMetadataValue.from_dict(item["source_metadata"]), quality,
-            SelectionValue.from_dict(item["selection"]), _evidence(item["evidence_spans"]),
-            BundleSummaryValue.from_dict(item["summary"]), review,
-            None if item["transcript_lineage"] is None else TranscriptLineageValue.from_dict(item["transcript_lineage"]),
-            tuple(TranscriptByteBinding.from_dict(raw) for raw in _array(item["transcript_byte_bindings"], "transcript_byte_bindings")),
-            VersionsValue.from_dict(item["versions"]), ReplayValue.from_dict(item["replay"]), 0,
+            item["schema_version"],
+            source,
+            None
+            if projected
+            else _sha(
+                item["expected_read_policy_sha256"], "expected_read_policy_sha256"
+            ),
+            SourceMetadataValue.from_dict(item["source_metadata"], projected=projected),
+            quality,
+            SelectionValue.from_dict(item["selection"]),
+            _evidence(item["evidence_spans"]),
+            BundleSummaryValue.from_dict(item["summary"], projected=projected),
+            review,
+            None
+            if projected or item["transcript_lineage"] is None
+            else TranscriptLineageValue.from_dict(item["transcript_lineage"]),
+            tuple(
+                TranscriptByteBinding.from_dict(raw)
+                for raw in _array(
+                    item.get("transcript_byte_bindings", []), "transcript_byte_bindings"
+                )
+            ),
+            VersionsValue.from_dict(item["versions"]),
+            ReplayValue.from_dict(item["replay"]),
+            0,
+            subject,
         )
         result._validate()
-        cap = SKIP_BUNDLE_MAX_BYTES if quality == "skipped_no_narrative" else BUNDLE_MAX_BYTES
+        cap = (
+            SKIP_BUNDLE_MAX_BYTES
+            if quality == "skipped_no_narrative"
+            else BUNDLE_MAX_BYTES
+        )
         size = _enforce_cap(result.to_dict(), cap, "bundle")
         object.__setattr__(result, "encoded_size", size)
         return result
 
     def _validate(self) -> None:
+        if self.subject_binding is not None:
+            _validate_projection_evidence(
+                self.subject_binding, self.evidence_spans, self.selection
+            )
         if self.selection.selected_count != len(self.evidence_spans):
             raise NarrativeContractError("bundle selected_count differs from evidence")
         if self.replay.locator_count != len(self.evidence_spans):
-            raise NarrativeContractError("bundle replay locator count differs from evidence")
+            raise NarrativeContractError(
+                "bundle replay locator count differs from evidence"
+            )
         skipped = self.quality_status == "skipped_no_narrative"
         if skipped and (
             self.selection.status != "skipped_no_narrative"
@@ -988,22 +1476,32 @@ class NarrativeBundle:
         if self.summary.status != "completed" or self.summary.draft is None:
             raise NarrativeContractError("unsupported narrative bundle summary status")
         try:
-            validate_summary_draft(
-                self.summary.draft,
-                source_id=self.source_ref.source_id,
-                source_sha256=self.source_ref.content_sha256,
-                language=self.source_metadata.language,
-                evidence_spans=self.evidence_spans,
-            )
+            if isinstance(self.summary.draft, SubjectSummaryDraft):
+                validate_subject_summary_draft(
+                    self.summary.draft,
+                    subject=self.subject,
+                    language=self.source_metadata.language,
+                    evidence_spans=self.evidence_spans,
+                )
+            else:
+                validate_summary_draft(
+                    self.summary.draft,
+                    source_id=self.source_ref.source_id,
+                    source_sha256=self.source_ref.content_sha256,
+                    language=self.source_metadata.language,
+                    evidence_spans=self.evidence_spans,
+                )
         except SummaryValidationError as exc:
-            raise NarrativeContractError("bundle summary does not bind its evidence") from exc
+            raise NarrativeContractError(
+                "bundle summary does not bind its evidence"
+            ) from exc
 
     def validate_against(
         self, selected: NarrativeSelectResult, summary: NarrativeSummaryResult
     ) -> None:
         summary.validate_against(selected)
         if (
-            self.source_ref != selected.source_ref
+            self.subject != selected.subject
             or self.expected_read_policy_sha256 != selected.expected_read_policy_sha256
             or self.source_metadata != selected.source_metadata
             or self.selection != selected.selection
@@ -1018,10 +1516,26 @@ class NarrativeBundle:
         if self.transcript_lineage != selected.transcript_lineage or (
             self.transcript_byte_bindings != selected.transcript_byte_bindings
         ):
-            raise NarrativeContractError("bundle transcript lineage differs from selection")
+            raise NarrativeContractError(
+                "bundle transcript lineage differs from selection"
+            )
+
+    @property
+    def subject(self) -> NarrativeSubject:
+        return self.subject_binding or NarrativeSubject.from_raw(
+            self.source_ref.to_dict()
+        )
+
+    @property
+    def item_key(self) -> str:
+        return (
+            self.subject_binding.item_key
+            if self.subject_binding is not None
+            else self.source_ref.document_id
+        )
 
     def to_dict(self) -> dict[str, Any]:
-        return {
+        value = {
             "schema_version": self.schema_version,
             "source_ref": self.source_ref.to_dict(),
             "expected_read_policy_sha256": self.expected_read_policy_sha256,
@@ -1031,11 +1545,25 @@ class NarrativeBundle:
             "evidence_spans": [span.to_dict() for span in self.evidence_spans],
             "summary": self.summary.to_dict(),
             "prompt_review": self.prompt_review.to_dict(),
-            "transcript_lineage": self.transcript_lineage.to_dict() if self.transcript_lineage else None,
-            "transcript_byte_bindings": [item.to_dict() for item in self.transcript_byte_bindings],
+            "transcript_lineage": self.transcript_lineage.to_dict()
+            if self.transcript_lineage
+            else None,
+            "transcript_byte_bindings": [
+                item.to_dict() for item in self.transcript_byte_bindings
+            ],
             "versions": self.versions.to_dict(),
             "replay": self.replay.to_dict(),
         }
+        return _subject_wire(
+            value,
+            self.subject_binding,
+            remove=(
+                "source_ref",
+                "expected_read_policy_sha256",
+                "transcript_lineage",
+                "transcript_byte_bindings",
+            ),
+        )
 
 
 __all__ = [

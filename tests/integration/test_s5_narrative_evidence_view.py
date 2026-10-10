@@ -240,8 +240,7 @@ def test_query_keeps_source_replay_and_exact_version_refusals(tmp_path, fault, r
 
 
 def test_real_transcript_search_lookup_and_directory_restoration(tmp_path):
-    original = (REPO.parent / "earnings-transcripts/earnings-transcripts/transcripts/MSFT"
-                / "MSFT_Q4_2026_earnings_call.txt")
+    original = REPO / "tests/fixtures/narrative_real_transcript/MSFT_Q4_2026_earnings_call.txt"
     data = original.read_bytes()
     digest = "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a"
     assert hashlib.sha256(data).hexdigest() == digest

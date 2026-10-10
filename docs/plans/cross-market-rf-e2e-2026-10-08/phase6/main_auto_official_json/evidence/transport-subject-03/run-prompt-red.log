@@ -1,0 +1,505 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-ledger-prompt-red-aqpqeq64\\pytest", "requested_basetemp_len": 69, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-222400-d6a0bd78", "effective_basetemp_len": 75}
+F.F..FFFFFFFFFFFF...FFF.                                                 [100%]
+================================== FAILURES ===================================
+______ test_mixed_prompts_reserve_once_in_same_run_and_share_exact_caps _______
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-222400-d6a0bd78/test_mixed_prompts_reserve_onc0')
+
+    def test_mixed_prompts_reserve_once_in_same_run_and_share_exact_caps(tmp_path):
+        auto, ledger, generation, jobs = state(tmp_path)
+        run = create_run(ledger, jobs, prompts=prompts(jobs))
+        assert run.prompt_version == RAW_PROMPT
+        raw, projected = (claim(auto, generation, j) for j in jobs[:2])
+        a = reserve(ledger, raw, RAW_PROMPT)
+>       b = reserve(ledger, projected, PROJECTION_PROMPT)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_official_json_run_prompt_admission.py:154: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_official_json_run_prompt_admission.py:145: in reserve
+    return ledger.reserve_model_attempt(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:667: in reserve_model_attempt
+    return self._write(write)
+           ^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:316: in _write
+    result = operation(connection)
+             ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+connection = <sqlite3.Connection object at 0x000001E8758C86D0>
+
+    def write(connection):
+        run = _required_run(connection, run_id)
+        if (model_id, prompt_version, pricing_version) != (
+            run.model_id,
+            run.prompt_version,
+            run.pricing_version,
+        ):
+>           raise RunConflictError(
+                "model, prompt or pricing differs from the immutable run"
+            )
+E           company_wiki.automation.narrative_run_store.RunConflictError: model, prompt or pricing differs from the immutable run
+
+src\company_wiki\automation\narrative_run_store.py:580: RunConflictError
+_ test_incorrect_frozen_prompt_or_model_pricing_never_inserts_reservation[projection] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-222400-d6a0bd78/test_incorrect_frozen_prompt_o1')
+which = 'projection'
+
+    @pytest.mark.parametrize("which", ["raw", "projection", "model", "pricing"])
+    def test_incorrect_frozen_prompt_or_model_pricing_never_inserts_reservation(
+        tmp_path, which
+    ):
+        auto, ledger, generation, jobs = state(tmp_path)
+        create_run(ledger, jobs, prompts=prompts(jobs))
+        index = 0 if which == "raw" else 1
+        work = claim(auto, generation, jobs[index])
+        expected = RAW_PROMPT if index == 0 else PROJECTION_PROMPT
+        wrong = PROJECTION_PROMPT if index == 0 else RAW_PROMPT
+        changes = (
+            {"model_id": "other"}
+            if which == "model"
+            else {"pricing_version": "other"}
+            if which == "pricing"
+            else {}
+        )
+        before = ledger.budget_snapshot("mixed")
+>       with pytest.raises(RunConflictError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE RunConflictError
+
+tests\unit\test_official_json_run_prompt_admission.py:183: Failed
+_____ test_invalid_map_or_version_is_typed_and_does_not_create_run[None] ______
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-222400-d6a0bd78/test_invalid_map_or_version_is0')
+bad = None
+
+    @pytest.mark.parametrize(
+        "bad",
+        [
+            None,
+            [],
+            "wrong",
+            {"raw-summary": True},
+            {"raw-summary": 1},
+            {"raw-summary": ""},
+            {"raw-summary": " padded"},
+        ],
+    )
+    def test_invalid_map_or_version_is_typed_and_does_not_create_run(tmp_path, bad):
+        auto, ledger, _, jobs = state(tmp_path)
+>       with pytest.raises(RunConflictError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE RunConflictError
+
+tests\unit\test_official_json_run_prompt_admission.py:204: Failed
+_____ test_invalid_map_or_version_is_typed_and_does_not_create_run[bad1] ______
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-222400-d6a0bd78/test_invalid_map_or_version_is1')
+bad = []
+
+    @pytest.mark.parametrize(
+        "bad",
+        [
+            None,
+            [],
+            "wrong",
+            {"raw-summary": True},
+            {"raw-summary": 1},
+            {"raw-summary": ""},
+            {"raw-summary": " padded"},
+        ],
+    )
+    def test_invalid_map_or_version_is_typed_and_does_not_create_run(tmp_path, bad):
+        auto, ledger, _, jobs = state(tmp_path)
+>       with pytest.raises(RunConflictError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE RunConflictError
+
+tests\unit\test_official_json_run_prompt_admission.py:204: Failed
+_____ test_invalid_map_or_version_is_typed_and_does_not_create_run[wrong] _____
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-222400-d6a0bd78/test_invalid_map_or_version_is2')
+bad = 'wrong'
+
+    @pytest.mark.parametrize(
+        "bad",
+        [
+            None,
+            [],
+            "wrong",
+            {"raw-summary": True},
+            {"raw-summary": 1},
+            {"raw-summary": ""},
+            {"raw-summary": " padded"},
+        ],
+    )
+    def test_invalid_map_or_version_is_typed_and_does_not_create_run(tmp_path, bad):
+        auto, ledger, _, jobs = state(tmp_path)
+>       with pytest.raises(RunConflictError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE RunConflictError
+
+tests\unit\test_official_json_run_prompt_admission.py:204: Failed
+_____ test_invalid_map_or_version_is_typed_and_does_not_create_run[bad3] ______
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-222400-d6a0bd78/test_invalid_map_or_version_is3')
+bad = {'raw-summary': True}
+
+    @pytest.mark.parametrize(
+        "bad",
+        [
+            None,
+            [],
+            "wrong",
+            {"raw-summary": True},
+            {"raw-summary": 1},
+            {"raw-summary": ""},
+            {"raw-summary": " padded"},
+        ],
+    )
+    def test_invalid_map_or_version_is_typed_and_does_not_create_run(tmp_path, bad):
+        auto, ledger, _, jobs = state(tmp_path)
+>       with pytest.raises(RunConflictError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE RunConflictError
+
+tests\unit\test_official_json_run_prompt_admission.py:204: Failed
+_____ test_invalid_map_or_version_is_typed_and_does_not_create_run[bad4] ______
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-222400-d6a0bd78/test_invalid_map_or_version_is4')
+bad = {'raw-summary': 1}
+
+    @pytest.mark.parametrize(
+        "bad",
+        [
+            None,
+            [],
+            "wrong",
+            {"raw-summary": True},
+            {"raw-summary": 1},
+            {"raw-summary": ""},
+            {"raw-summary": " padded"},
+        ],
+    )
+    def test_invalid_map_or_version_is_typed_and_does_not_create_run(tmp_path, bad):
+        auto, ledger, _, jobs = state(tmp_path)
+>       with pytest.raises(RunConflictError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE RunConflictError
+
+tests\unit\test_official_json_run_prompt_admission.py:204: Failed
+_____ test_invalid_map_or_version_is_typed_and_does_not_create_run[bad5] ______
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-222400-d6a0bd78/test_invalid_map_or_version_is5')
+bad = {'raw-summary': ''}
+
+    @pytest.mark.parametrize(
+        "bad",
+        [
+            None,
+            [],
+            "wrong",
+            {"raw-summary": True},
+            {"raw-summary": 1},
+            {"raw-summary": ""},
+            {"raw-summary": " padded"},
+        ],
+    )
+    def test_invalid_map_or_version_is_typed_and_does_not_create_run(tmp_path, bad):
+        auto, ledger, _, jobs = state(tmp_path)
+>       with pytest.raises(RunConflictError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE RunConflictError
+
+tests\unit\test_official_json_run_prompt_admission.py:204: Failed
+_____ test_invalid_map_or_version_is_typed_and_does_not_create_run[bad6] ______
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-222400-d6a0bd78/test_invalid_map_or_version_is6')
+bad = {'raw-summary': ' padded'}
+
+    @pytest.mark.parametrize(
+        "bad",
+        [
+            None,
+            [],
+            "wrong",
+            {"raw-summary": True},
+            {"raw-summary": 1},
+            {"raw-summary": ""},
+            {"raw-summary": " padded"},
+        ],
+    )
+    def test_invalid_map_or_version_is_typed_and_does_not_create_run(tmp_path, bad):
+        auto, ledger, _, jobs = state(tmp_path)
+>       with pytest.raises(RunConflictError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE RunConflictError
+
+tests\unit\test_official_json_run_prompt_admission.py:204: Failed
+________ test_prompt_map_keys_exactly_match_scoped_model_jobs[missing] ________
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-222400-d6a0bd78/test_prompt_map_keys_exactly_m0')
+change = 'missing'
+
+    @pytest.mark.parametrize("change", ["missing", "extra", "non_model_job", "empty"])
+    def test_prompt_map_keys_exactly_match_scoped_model_jobs(tmp_path, change):
+        _, ledger, _, jobs = state(tmp_path)
+        mapping = prompts(jobs)
+        if change == "missing":
+            del mapping[jobs[1].job_id]
+        elif change == "extra":
+            mapping["outside-job"] = RAW_PROMPT
+        elif change == "non_model_job":
+            mapping[jobs[2].job_id] = RAW_PROMPT
+        else:
+            mapping = {}
+>       with pytest.raises(RunScopeError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE RunScopeError
+
+tests\unit\test_official_json_run_prompt_admission.py:222: Failed
+_________ test_prompt_map_keys_exactly_match_scoped_model_jobs[extra] _________
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-222400-d6a0bd78/test_prompt_map_keys_exactly_m1')
+change = 'extra'
+
+    @pytest.mark.parametrize("change", ["missing", "extra", "non_model_job", "empty"])
+    def test_prompt_map_keys_exactly_match_scoped_model_jobs(tmp_path, change):
+        _, ledger, _, jobs = state(tmp_path)
+        mapping = prompts(jobs)
+        if change == "missing":
+            del mapping[jobs[1].job_id]
+        elif change == "extra":
+            mapping["outside-job"] = RAW_PROMPT
+        elif change == "non_model_job":
+            mapping[jobs[2].job_id] = RAW_PROMPT
+        else:
+            mapping = {}
+>       with pytest.raises(RunScopeError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE RunScopeError
+
+tests\unit\test_official_json_run_prompt_admission.py:222: Failed
+_____ test_prompt_map_keys_exactly_match_scoped_model_jobs[non_model_job] _____
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-222400-d6a0bd78/test_prompt_map_keys_exactly_m2')
+change = 'non_model_job'
+
+    @pytest.mark.parametrize("change", ["missing", "extra", "non_model_job", "empty"])
+    def test_prompt_map_keys_exactly_match_scoped_model_jobs(tmp_path, change):
+        _, ledger, _, jobs = state(tmp_path)
+        mapping = prompts(jobs)
+        if change == "missing":
+            del mapping[jobs[1].job_id]
+        elif change == "extra":
+            mapping["outside-job"] = RAW_PROMPT
+        elif change == "non_model_job":
+            mapping[jobs[2].job_id] = RAW_PROMPT
+        else:
+            mapping = {}
+>       with pytest.raises(RunScopeError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE RunScopeError
+
+tests\unit\test_official_json_run_prompt_admission.py:222: Failed
+_________ test_prompt_map_keys_exactly_match_scoped_model_jobs[empty] _________
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-222400-d6a0bd78/test_prompt_map_keys_exactly_m3')
+change = 'empty'
+
+    @pytest.mark.parametrize("change", ["missing", "extra", "non_model_job", "empty"])
+    def test_prompt_map_keys_exactly_match_scoped_model_jobs(tmp_path, change):
+        _, ledger, _, jobs = state(tmp_path)
+        mapping = prompts(jobs)
+        if change == "missing":
+            del mapping[jobs[1].job_id]
+        elif change == "extra":
+            mapping["outside-job"] = RAW_PROMPT
+        elif change == "non_model_job":
+            mapping[jobs[2].job_id] = RAW_PROMPT
+        else:
+            mapping = {}
+>       with pytest.raises(RunScopeError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE RunScopeError
+
+tests\unit\test_official_json_run_prompt_admission.py:222: Failed
+_________ test_model_map_does_not_default_non_model_job_to_run_prompt _________
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-222400-d6a0bd78/test_model_map_does_not_defaul0')
+
+    def test_model_map_does_not_default_non_model_job_to_run_prompt(tmp_path):
+        auto, ledger, generation, jobs = state(tmp_path)
+        create_run(ledger, jobs, prompts=prompts(jobs))
+        work = claim(auto, generation, jobs[2])
+>       with pytest.raises(RunScopeError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE RunScopeError
+
+tests\unit\test_official_json_run_prompt_admission.py:231: Failed
+____ test_mixed_prompts_cannot_bypass_shared_remaining_budget[max_tokens] _____
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-222400-d6a0bd78/test_mixed_prompts_cannot_bypa0')
+cap = 'max_tokens'
+
+    @pytest.mark.parametrize("cap", ["max_tokens", "max_micro_usd", "max_output_bytes"])
+    def test_mixed_prompts_cannot_bypass_shared_remaining_budget(tmp_path, cap):
+        auto, ledger, generation, jobs = state(tmp_path)
+        create_run(
+            ledger,
+            jobs,
+            prompts=prompts(jobs),
+            **{cap: {"max_tokens": 150, "max_micro_usd": 90, "max_output_bytes": 100}[cap]},
+        )
+        raw, projected = (claim(auto, generation, j) for j in jobs[:2])
+        reserve(ledger, raw, RAW_PROMPT)
+        before = ledger.budget_snapshot("mixed")
+        with pytest.raises(RunBudgetExceededError):
+>           reserve(ledger, projected, PROJECTION_PROMPT)
+
+tests\unit\test_official_json_run_prompt_admission.py:276: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_official_json_run_prompt_admission.py:145: in reserve
+    return ledger.reserve_model_attempt(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:667: in reserve_model_attempt
+    return self._write(write)
+           ^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:316: in _write
+    result = operation(connection)
+             ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+connection = <sqlite3.Connection object at 0x000001E875999990>
+
+    def write(connection):
+        run = _required_run(connection, run_id)
+        if (model_id, prompt_version, pricing_version) != (
+            run.model_id,
+            run.prompt_version,
+            run.pricing_version,
+        ):
+>           raise RunConflictError(
+                "model, prompt or pricing differs from the immutable run"
+            )
+E           company_wiki.automation.narrative_run_store.RunConflictError: model, prompt or pricing differs from the immutable run
+
+src\company_wiki\automation\narrative_run_store.py:580: RunConflictError
+___ test_mixed_prompts_cannot_bypass_shared_remaining_budget[max_micro_usd] ___
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-222400-d6a0bd78/test_mixed_prompts_cannot_bypa1')
+cap = 'max_micro_usd'
+
+    @pytest.mark.parametrize("cap", ["max_tokens", "max_micro_usd", "max_output_bytes"])
+    def test_mixed_prompts_cannot_bypass_shared_remaining_budget(tmp_path, cap):
+        auto, ledger, generation, jobs = state(tmp_path)
+        create_run(
+            ledger,
+            jobs,
+            prompts=prompts(jobs),
+            **{cap: {"max_tokens": 150, "max_micro_usd": 90, "max_output_bytes": 100}[cap]},
+        )
+        raw, projected = (claim(auto, generation, j) for j in jobs[:2])
+        reserve(ledger, raw, RAW_PROMPT)
+        before = ledger.budget_snapshot("mixed")
+        with pytest.raises(RunBudgetExceededError):
+>           reserve(ledger, projected, PROJECTION_PROMPT)
+
+tests\unit\test_official_json_run_prompt_admission.py:276: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_official_json_run_prompt_admission.py:145: in reserve
+    return ledger.reserve_model_attempt(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:667: in reserve_model_attempt
+    return self._write(write)
+           ^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:316: in _write
+    result = operation(connection)
+             ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+connection = <sqlite3.Connection object at 0x000001E8759E0F40>
+
+    def write(connection):
+        run = _required_run(connection, run_id)
+        if (model_id, prompt_version, pricing_version) != (
+            run.model_id,
+            run.prompt_version,
+            run.pricing_version,
+        ):
+>           raise RunConflictError(
+                "model, prompt or pricing differs from the immutable run"
+            )
+E           company_wiki.automation.narrative_run_store.RunConflictError: model, prompt or pricing differs from the immutable run
+
+src\company_wiki\automation\narrative_run_store.py:580: RunConflictError
+_ test_mixed_prompts_cannot_bypass_shared_remaining_budget[max_output_bytes] __
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-222400-d6a0bd78/test_mixed_prompts_cannot_bypa2')
+cap = 'max_output_bytes'
+
+    @pytest.mark.parametrize("cap", ["max_tokens", "max_micro_usd", "max_output_bytes"])
+    def test_mixed_prompts_cannot_bypass_shared_remaining_budget(tmp_path, cap):
+        auto, ledger, generation, jobs = state(tmp_path)
+        create_run(
+            ledger,
+            jobs,
+            prompts=prompts(jobs),
+            **{cap: {"max_tokens": 150, "max_micro_usd": 90, "max_output_bytes": 100}[cap]},
+        )
+        raw, projected = (claim(auto, generation, j) for j in jobs[:2])
+        reserve(ledger, raw, RAW_PROMPT)
+        before = ledger.budget_snapshot("mixed")
+        with pytest.raises(RunBudgetExceededError):
+>           reserve(ledger, projected, PROJECTION_PROMPT)
+
+tests\unit\test_official_json_run_prompt_admission.py:276: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\unit\test_official_json_run_prompt_admission.py:145: in reserve
+    return ledger.reserve_model_attempt(**options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:667: in reserve_model_attempt
+    return self._write(write)
+           ^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_run_store.py:316: in _write
+    result = operation(connection)
+             ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+connection = <sqlite3.Connection object at 0x000001E875A0E200>
+
+    def write(connection):
+        run = _required_run(connection, run_id)
+        if (model_id, prompt_version, pricing_version) != (
+            run.model_id,
+            run.prompt_version,
+            run.pricing_version,
+        ):
+>           raise RunConflictError(
+                "model, prompt or pricing differs from the immutable run"
+            )
+E           company_wiki.automation.narrative_run_store.RunConflictError: model, prompt or pricing differs from the immutable run
+
+src\company_wiki\automation\narrative_run_store.py:580: RunConflictError
+=========================== short test summary info ===========================
+FAILED tests/unit/test_official_json_run_prompt_admission.py::test_mixed_prompts_reserve_once_in_same_run_and_share_exact_caps
+FAILED tests/unit/test_official_json_run_prompt_admission.py::test_incorrect_frozen_prompt_or_model_pricing_never_inserts_reservation[projection]
+FAILED tests/unit/test_official_json_run_prompt_admission.py::test_invalid_map_or_version_is_typed_and_does_not_create_run[None]
+FAILED tests/unit/test_official_json_run_prompt_admission.py::test_invalid_map_or_version_is_typed_and_does_not_create_run[bad1]
+FAILED tests/unit/test_official_json_run_prompt_admission.py::test_invalid_map_or_version_is_typed_and_does_not_create_run[wrong]
+FAILED tests/unit/test_official_json_run_prompt_admission.py::test_invalid_map_or_version_is_typed_and_does_not_create_run[bad3]
+FAILED tests/unit/test_official_json_run_prompt_admission.py::test_invalid_map_or_version_is_typed_and_does_not_create_run[bad4]
+FAILED tests/unit/test_official_json_run_prompt_admission.py::test_invalid_map_or_version_is_typed_and_does_not_create_run[bad5]
+FAILED tests/unit/test_official_json_run_prompt_admission.py::test_invalid_map_or_version_is_typed_and_does_not_create_run[bad6]
+FAILED tests/unit/test_official_json_run_prompt_admission.py::test_prompt_map_keys_exactly_match_scoped_model_jobs[missing]
+FAILED tests/unit/test_official_json_run_prompt_admission.py::test_prompt_map_keys_exactly_match_scoped_model_jobs[extra]
+FAILED tests/unit/test_official_json_run_prompt_admission.py::test_prompt_map_keys_exactly_match_scoped_model_jobs[non_model_job]
+FAILED tests/unit/test_official_json_run_prompt_admission.py::test_prompt_map_keys_exactly_match_scoped_model_jobs[empty]
+FAILED tests/unit/test_official_json_run_prompt_admission.py::test_model_map_does_not_default_non_model_job_to_run_prompt
+FAILED tests/unit/test_official_json_run_prompt_admission.py::test_mixed_prompts_cannot_bypass_shared_remaining_budget[max_tokens]
+FAILED tests/unit/test_official_json_run_prompt_admission.py::test_mixed_prompts_cannot_bypass_shared_remaining_budget[max_micro_usd]
+FAILED tests/unit/test_official_json_run_prompt_admission.py::test_mixed_prompts_cannot_bypass_shared_remaining_budget[max_output_bytes]
+17 failed, 7 passed in 6.94s
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-222400-d6a0bd78", "existed": true, "removed": true}

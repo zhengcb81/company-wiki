@@ -1,0 +1,30 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-view-repair-6mcuozo5\\p", "requested_basetemp_len": 58, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 6 items
+
+tests\integration\test_s5_narrative_evidence_view.py F                   [ 16%]
+tests\unit\test_narrative_transport_cli_output.py .                      [ 33%]
+tests\integration\test_official_json_evidence_view.py ...                [ 83%]
+tests\integration\test_narrative_transport.py .                          [100%]
+
+================================== FAILURES ===================================
+________ test_real_transcript_search_lookup_and_directory_restoration _________
+tests\integration\test_s5_narrative_evidence_view.py:248: in test_real_transcript_search_lookup_and_directory_restoration
+    with published_fixture(tmp_path, source_spec={"data": data, "title": "MSFT Q4 2026 earnings call"}) as fixture:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+tests\support\narrative_transport_fixture.py:139: in published_fixture
+    assert _drain(worker, scheduler) == 3, [
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: [('source.narrative_summarize', 'DEPENDENCY_TERMINAL', 'terminal dependencies: 2274283a29c8ac5d=dead_letter'), ('source.narrative_select', 'PARSER_INCOMPLETE', 'source parsing is incomplete'), ('source.narrative_verify', 'DEPENDENCY_TERMINAL', 'terminal dependencies: 2274283a29c8ac5d=dead_letter')]
+=========================== short test summary info ===========================
+FAILED tests/integration/test_s5_narrative_evidence_view.py::test_real_transcript_search_lookup_and_directory_restoration
+======================== 1 failed, 5 passed in 11.74s =========================

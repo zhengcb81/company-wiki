@@ -1,0 +1,45 @@
+{
+  "status": "GREEN in two bounded nodes; no redundant full rerun",
+  "file": "tests/integration/test_official_json_canonical_cli_e2e.py",
+  "file_sha256": "41e2df64544fca6f36465359aa2f75be95c420c8e95561720534e06a8948d741",
+  "test_functions": 3,
+  "final_cases": 6,
+  "public_canonical_node": {
+    "evidence": "canonical-cli-green.log",
+    "metadata": "canonical-cli-green.json",
+    "passed": 3,
+    "elapsed_seconds": 46.79,
+    "loopback_http_calls": 1,
+    "external_calls": 0
+  },
+  "new_shape_node": {
+    "evidence": "canonical-cli-shape-green.log",
+    "metadata": "canonical-cli-shape-green.json",
+    "passed": 3,
+    "elapsed_seconds": 8.76,
+    "loopback_http_calls": 0,
+    "external_calls": 0
+  },
+  "red_history": [
+    {
+      "evidence": "canonical-cli-red.log",
+      "failed": 2,
+      "passed": 1,
+      "cause": "public CLI ignored explicit version and unsupported string"
+    },
+    {
+      "evidence": "canonical-cli-shape-red.log",
+      "failed": 2,
+      "passed": 1,
+      "cause": "list/dict leaked unhashable TypeError; null already typed refusal"
+    }
+  ],
+  "default_version_unchanged": "1.0.1",
+  "explicit_new_producer": "cwp_official_json/1.0.2",
+  "structure_parser_version": "1.0.1",
+  "support_fixture_changed": false,
+  "production_source_changed_by_this_task": false,
+  "originals_and_config_unchanged": true,
+  "owned_temp_restored": true,
+  "commit_created": false
+}

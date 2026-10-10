@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "-p",
+    "pytest_timeout",
+    "-p",
+    "pytest_asyncio.plugin",
+    "-o",
+    "addopts=",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-canonical-cli-red-tnna3mmz\\pytest",
+    "tests/integration/test_official_json_canonical_cli_e2e.py"
+  ],
+  "exit_code": 1,
+  "elapsed_seconds": 12.669816500001616,
+  "external_calls": 0
+}

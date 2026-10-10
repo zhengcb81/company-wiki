@@ -1,0 +1,125 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-transport-green-517uysnr\\pytest", "requested_basetemp_len": 67, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-215723-dac8852c", "effective_basetemp_len": 75}
+........................................................................ [ 62%]
+......................F....................                              [100%]
+================================== FAILURES ===================================
+__ test_current_reader_preserves_older_summary_above_new_generation_targets ___
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-215723-dac8852c/test_current_reader_preserves_0')
+
+    def test_current_reader_preserves_older_summary_above_new_generation_targets(tmp_path: Path) -> None:
+        """Private short-output targets must not become public read-time gates."""
+        # Every statement is backed by a distinct, replayable management paragraph.
+        statements = [
+            f"We launched a new product for customer segment {index} with "
+            + "customer validation continuing under limited pilot availability and " * 4
+            + "further rollout subject to completed validation."
+            for index in range(25)
+        ]
+        source = ("Full Conference Call Transcript\nCEO: " + "\n".join(statements)).encode()
+>       with published_fixture(tmp_path, source_spec={"data": source}) as fixture:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_narrative_transport.py:130: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Miniconda\Lib\contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-215723-dac8852c/test_current_reader_preserves_0')
+kind = 'txt', published = True
+source_spec = {'data': b'Full Conference Call Transcript\nCEO: We launched a new product for customer segment 0 with customer valida... customer validation continuing under limited pilot availability and further rollout subject to completed validation.'}
+scoped_policy = False
+
+    @contextmanager
+    def published_fixture(
+        tmp_path: Path, *, kind: str = "txt", published: bool = True,
+        source_spec: dict[str, object] | None = None, scoped_policy: bool = False,
+    ) -> Iterator[TransportFixture]:
+        """Create only scratch raw/catalog, publish through the real three-job DAG.
+    
+        All files, including SQLite side files and CLI-created files, are removed on
+        exit. PDF is deliberately labelled synthetic; it is not a filing oracle.
+        """
+        baseline = tuple(sorted(p.name for p in tmp_path.iterdir()))
+        root = tmp_path / "nt"
+        assert not root.exists()
+        root.mkdir()
+        catalog = None
+        try:
+            transcript = kind in {"txt", "json"}
+            if kind == "json":
+                data = json.dumps([{
+                    "symbol": "ACME", "year": 2026, "quarter": 2,
+                    "date": "2026-08-01 12:00:00",
+                    "content": TXT.decode("utf-8"),
+                }], ensure_ascii=False).encode("utf-8")
+            elif kind in {"pdf", "skip"}:
+                data = _pdf_bytes(
+                    "This policy describes meeting administration procedures."
+                    if kind == "skip" else
+                    "Company launched a new product and expanded overseas capacity for customers."
+                )
+            else:
+                data = TXT
+            suffix = "json" if kind == "json" else "txt" if transcript else "pdf"
+            source_kind = "investor_call_transcript" if transcript else (
+                "ir_policy" if kind == "skip" else "annual_report"
+            )
+            title = "投资者关系管理办法（2025年8月）.pdf" if kind == "skip" else "ACME business update"
+            spec = {
+                "name": f"source.{suffix}", "data": data, "title": title,
+                "document_kind": source_kind,
+                "sidecar_overrides": {"fiscal_period": "Q2" if transcript else "FY"},
+            }
+            if source_spec is not None:
+                spec.update(source_spec)
+                data = spec["data"]
+                assert isinstance(data, bytes)
+                if "language" in spec:
+                    spec["sidecar_overrides"] = {
+                        **dict(spec.get("sidecar_overrides") or {}), "language": spec["language"],
+                    }
+                transcript = spec["document_kind"] == "investor_call_transcript"
+            catalog, reader, indexed = _new_catalog(root, [spec])
+            _, source = next(iter(indexed.values()))
+            source_ref = SourceRefValue.from_dict({
+                "schema_version": source.schema_version,
+                "document_id": source.document_id, "source_id": source.source_id,
+                "content_sha256": source.content_sha256, "byte_size": source.byte_size,
+                "mime_type": source.mime_type,
+            })
+            metadata = reader.describe_version(source)
+            value = {
+                "schema_version": "source-revision-event/2.0",
+                "source_ref": source_ref.to_dict(),
+                "expected_read_policy_sha256": reader.read_policy_sha256(source if scoped_policy else None),
+                "source_metadata": {
+                    "source_class": "transcript" if transcript else "filing",
+                    "title": metadata["title"], "document_kind": metadata["document_kind"],
+                    "language": metadata["language"],
+                },
+            }
+            parsed = SourceRevisionEventPayload.from_dict(value)
+            event = Event(
+                event_id="transport-event", event_type="source.revision_registered",
+                subject_type="source_revision", subject_id=source.document_id,
+                input_hash=parsed.input_hash, payload_json=canonical_json(value),
+                policy_version="narrative-v1", occurred_at="2026-09-28T22:00:00Z",
+                observed_at="2026-09-28T22:00:00Z",
+            )
+            automation, scheduler, worker = _runtime(root, reader, ReplayNarrativeModel())
+            automation.put_event(event)
+            scheduler.materialize_event(event)
+>           assert _drain(worker, scheduler) == 3, [
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                (job.job_type, job.last_error_code, job.last_error_detail)
+                for job in automation.list_jobs()
+            ]
+E           AssertionError: [('source.narrative_summarize', 'SUMMARY_INVALID', 'model draft violates the summary contract (rule=CLAIM_TEXT)'), ('source.narrative_select', None, None), ('source.narrative_verify', 'DEPENDENCY_TERMINAL', 'terminal dependencies: 07eb93de681ca705=dead_letter')]
+
+tests\support\narrative_transport_fixture.py:139: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/integration/test_narrative_transport.py::test_current_reader_preserves_older_summary_above_new_generation_targets
+1 failed, 114 passed in 40.62s
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-215723-dac8852c", "existed": true, "removed": true}

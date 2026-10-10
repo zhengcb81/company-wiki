@@ -1,0 +1,27 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-projection-model-green-5n20qxem\\pytest", "requested_basetemp_len": 74, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-215844-71ebdd10", "effective_basetemp_len": 75}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+collected 145 items
+
+tests\unit\test_official_json_model_subject.py ......................... [ 17%]
+.......                                                                  [ 22%]
+tests\unit\test_official_json_summarize_subject.py ..........            [ 28%]
+tests\unit\test_narrative_model_request.py ........                      [ 34%]
+tests\unit\test_narrative_model_aliases.py .........                     [ 40%]
+tests\unit\test_narrative_summarize_handler.py ......................... [ 57%]
+..............                                                           [ 67%]
+tests\unit\test_narrative_partial_summary.py ........................... [ 86%]
+.....                                                                    [ 89%]
+tests\unit\test_narrative_model_usage.py ...............                 [100%]
+
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 145 passed, 1 warning in 5.25s ========================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-215844-71ebdd10", "existed": true, "removed": true}

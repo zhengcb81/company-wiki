@@ -1,0 +1,26 @@
+{
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "-p",
+    "pytest_timeout",
+    "-p",
+    "pytest_asyncio.plugin",
+    "-o",
+    "addopts=",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-mixed-cli-node03-1x_iwd3a\\pytest",
+    "tests/integration/test_official_json_batch_e2e.py"
+  ],
+  "exit_code": 1,
+  "elapsed_seconds": 52.23339090000081,
+  "model_destination": "127.0.0.1 only",
+  "external_calls": 0
+}

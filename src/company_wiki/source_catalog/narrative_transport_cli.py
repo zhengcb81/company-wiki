@@ -25,6 +25,8 @@ from company_wiki.automation.narrative_transport_contracts import (
     MAX_RECEIPT_BYTES,
     MAX_REQUEST_BYTES,
     NARRATIVE_READ_RECEIPT_SCHEMA,
+    NARRATIVE_PROJECTED_READ_RECEIPT_SCHEMA,
+    parse_projected_reference_request,
     NarrativeReadRequest,
     NarrativeTransportError,
     parse_reference_request,
@@ -88,23 +90,38 @@ def _refusal(status: str, reason: str) -> int:
 
 
 def _dispatch(
-    operation: str, request: object, reader: NarrativeTransportReader,
-    *, view_query: NarrativeEvidenceViewQuery | None = None,
+    operation: str,
+    request: object,
+    reader: NarrativeTransportReader,
+    *,
+    view_query: NarrativeEvidenceViewQuery | None = None,
 ) -> tuple[bytes, dict[str, Any]]:
     if (operation in EVIDENCE_VIEW_OPERATIONS and view_query is None) or (
         view_query is not None and view_query.operation != operation
     ):
         raise ValueError("evidence operation and filters differ")
     if operation == "reference":
-        ref = reader.reference(parse_reference_request(request))
+        projected = (
+            isinstance(request, dict)
+            and request.get("schema_version") == "narrative-reference-request/2"
+        )
+        if projected:
+            subject, generation = parse_projected_reference_request(request)
+            ref = reader.reference_subject(subject, generation_sha256=generation)
+        else:
+            ref = reader.reference(parse_reference_request(request))
         return canonical_json(ref.to_dict()).encode("utf-8"), {
-            "schema_version": NARRATIVE_READ_RECEIPT_SCHEMA,
-            "status": "metadata_only", "narrative_ref": ref.to_dict(),
+            "schema_version": NARRATIVE_PROJECTED_READ_RECEIPT_SCHEMA
+            if projected
+            else NARRATIVE_READ_RECEIPT_SCHEMA,
+            "status": "metadata_only",
+            "narrative_ref": ref.to_dict(),
         }
     parsed = NarrativeReadRequest.from_dict(request)
     result = (
         NarrativeEvidenceViewReader(reader).read(parsed, view_query)
-        if view_query is not None else reader.read(parsed)
+        if view_query is not None
+        else reader.read(parsed)
     )
     return result.data, result.receipt
 
@@ -112,7 +129,11 @@ def _dispatch(
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _JsonArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
-    parser.add_argument("--operation", choices=("reference", "read", *EVIDENCE_VIEW_OPERATIONS), default="read")
+    parser.add_argument(
+        "--operation",
+        choices=("reference", "read", *EVIDENCE_VIEW_OPERATIONS),
+        default="read",
+    )
     parser.add_argument("--limit", type=int)
     parser.add_argument("--offset", type=int)
     parser.add_argument("--span-id")
@@ -122,7 +143,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     artifacts: NarrativeArtifactReader | None = None
     try:
         args = parser.parse_args(argv)
-        filters = {name: getattr(args, name) for name in ("limit", "offset", "span_id", "locator", "query")}
+        filters = {
+            name: getattr(args, name)
+            for name in ("limit", "offset", "span_id", "locator", "query")
+        }
         view_query = None
         if args.operation in EVIDENCE_VIEW_OPERATIONS:
             view_query = NarrativeEvidenceViewQuery(args.operation, **filters)
@@ -132,14 +156,31 @@ def main(argv: Sequence[str] | None = None) -> int:
         config = load_catalog_config(args.config)
         catalog = SourceCatalog(config)
         artifacts = NarrativeArtifactStore.for_reading(
-            config.database_path, LocalNarrativeObjectStore(config.catalog_dir),
+            config.database_path,
+            LocalNarrativeObjectStore(config.catalog_dir),
         )
-        reader = NarrativeTransportReader(artifacts, SourceVersionReader(catalog))
+        from company_wiki.automation.narrative_official_json import (
+            open_verified_projection,
+        )
+
+        def projection_loader(subject):
+            return open_verified_projection(
+                catalog,
+                projection_id=subject.item_key,
+                expected_projection_sha256=subject.subject_sha256,
+            )
+
+        reader = (NarrativeTransportReader(artifacts, SourceVersionReader(catalog), projection_loader=projection_loader)
+                  if isinstance(request,dict) and request.get("schema_version") in {
+                      "narrative-reference-request/2","narrative-read-request/2"}
+                  else NarrativeTransportReader(artifacts, SourceVersionReader(catalog)))
         # Some PDF backends print optional-package notices. The two protocol
         # streams belong exclusively to artifact bytes and the JSON receipt.
         with open(os.devnull, "w", encoding="utf-8") as quiet:
             with redirect_stdout(quiet), redirect_stderr(quiet):
-                data, receipt = _dispatch(args.operation, request, reader, view_query=view_query)
+                data, receipt = _dispatch(
+                    args.operation, request, reader, view_query=view_query
+                )
         # Validate the receipt's budget before any successful stdout is exposed.
         if len(canonical_json(receipt).encode("utf-8")) + 1 > MAX_RECEIPT_BYTES:
             raise NarrativeTransportError("blocked", "receipt_too_large")
@@ -151,7 +192,13 @@ def main(argv: Sequence[str] | None = None) -> int:
         return _refusal(exc.status, exc.reason)
     except (CatalogConfigError, CatalogReaderUnavailable, OSError, sqlite3.Error):
         return _refusal("unavailable", "narrative_reader_unavailable")
-    except (NarrativeContractError, TypeError, UnicodeError, ValueError, RecursionError):
+    except (
+        NarrativeContractError,
+        TypeError,
+        UnicodeError,
+        ValueError,
+        RecursionError,
+    ):
         return _refusal("blocked", "invalid_request")
     finally:
         if artifacts is not None:

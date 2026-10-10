@@ -1,0 +1,23 @@
+{
+  "exit_code": 1,
+  "seconds": 48.71,
+  "owned_temp_removed": true,
+  "external_calls": 0,
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-p",
+    "pytest_timeout",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-publish-green-dmqgj2ye/pytest",
+    "-q",
+    "tests/integration/test_official_json_publication_terminal.py",
+    "tests/unit/test_terminal_narrative_receipts.py"
+  ]
+}

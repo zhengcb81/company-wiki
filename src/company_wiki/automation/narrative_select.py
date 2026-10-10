@@ -18,6 +18,8 @@ from company_wiki.source_catalog.narrative_evidence import (
     parse_transcript_text,
     select_narrative_evidence,
 )
+from company_wiki.source_catalog.narrative_language import NarrativeLanguageError
+from company_wiki.source_catalog.official_json_projection import ProjectionError
 from company_wiki.source_catalog.source_reader import (
     SourceReadError,
 )
@@ -32,6 +34,12 @@ from company_wiki.source_catalog.narrative_normalization import NarrativeNormali
 
 from .execution_context import JobExecutionContext
 from .narrative_formats import NORMALIZED_MIME_TYPES, parser_component
+from .narrative_official_json import (
+    OfficialProjectionAdapterError,
+    VerifiedProjectionView,
+    open_verified_projection,
+    select_verified_projection,
+)
 from .models import (
     HandlerError,
     HandlerMetrics,
@@ -201,17 +209,33 @@ class NarrativeSelectHandler:
         pdf_parser: PdfBytesParser = parse_pdf_bytes,
         selector: NarrativeSelector | None = None,
         normalization: NarrativeNormalization | None = None,
+        projection_catalog: Any | None = None,
     ) -> None:
         self._reader = reader
         self._pdf_parser = pdf_parser
         self._selector = selector or select_narrative_evidence
         self._normalization = normalization or NarrativeNormalization()
+        self._projection_catalog = projection_catalog
 
     def __call__(self, context: JobExecutionContext) -> HandlerResult:
         try:
             return self._execute(context)
         except SourceReadError as exc:
             return _read_error_result(exc)
+        except ProjectionError as exc:
+            return _failure(
+                "SOURCE_UNAVAILABLE" if exc.code == "projection_not_found" else "PARSER_INCOMPLETE",
+                HandlerOutcome.TERMINAL_FAILURE,
+                exc.code,
+            )
+        except OfficialProjectionAdapterError as exc:
+            return _failure(
+                "SOURCE_HASH_MISMATCH" if str(exc) == "projection_hash_mismatch" else "INPUT_SCHEMA_INVALID",
+                HandlerOutcome.TERMINAL_FAILURE,
+                str(exc),
+            )
+        except NarrativeLanguageError as exc:
+            return _failure(exc.code, HandlerOutcome.TERMINAL_FAILURE, str(exc))
         except ContractSizeError:
             return _failure(
                 "RESULT_TOO_LARGE",
@@ -248,6 +272,8 @@ class NarrativeSelectHandler:
     def _execute(self, context: JobExecutionContext) -> HandlerResult:
         context.checkpoint()
         payload = self._payload(context)
+        if payload.subject.kind == "official_json":
+            return self._execute_projection(payload, context)
         ref = source_ref(payload)
         opened = self._reader.open_version(
             ref,
@@ -270,6 +296,92 @@ class NarrativeSelectHandler:
             metrics=HandlerMetrics(tokens=0, cost_usd=0.0, duration_ms=0),
             error=None,
         )
+
+    def _execute_projection(
+        self, payload: SourceRevisionEventPayload, context: JobExecutionContext
+    ) -> HandlerResult:
+        if self._projection_catalog is None:
+            raise _SelectFailure(
+                "SOURCE_UNAVAILABLE", HandlerOutcome.TERMINAL_FAILURE,
+                "official projection source port is not configured",
+            )
+        view = open_verified_projection(
+            self._projection_catalog, projection_id=payload.subject.item_key,
+            expected_projection_sha256=payload.subject.subject_sha256,
+        )
+        # The source port already checked all parents' bytes/state/layout. This
+        # binds the requested issuer/as-of/coverage to that verified operation.
+        if view.subject != payload.subject:
+            raise _SelectFailure(
+                "SOURCE_HASH_MISMATCH", HandlerOutcome.TERMINAL_FAILURE,
+                "event subject differs from the verified projection",
+            )
+        context.checkpoint()
+        package = select_verified_projection(
+            view, title=payload.source_metadata.title or "untitled", selector=self._selector,
+        )
+        if view.language is None and package.status != "skipped_no_narrative":
+            raise _SelectFailure(
+                "SOURCE_LANGUAGE_UNDETERMINED", HandlerOutcome.TERMINAL_FAILURE,
+                "official projection has no classifiable native-language fields",
+            )
+        if payload.source_metadata.language != (view.language or "unknown"):
+            raise _SelectFailure(
+                "INPUT_SCHEMA_INVALID", HandlerOutcome.TERMINAL_FAILURE,
+                "event language differs from verified native-language fields",
+            )
+        if package.status == "blocked" or (
+            not package.evidence_spans
+            and (not package.coverage_complete or package.status != "skipped_no_narrative")
+        ):
+            raise _SelectFailure(
+                "PARSER_INCOMPLETE", HandlerOutcome.TERMINAL_FAILURE,
+                "official projection has no usable selected evidence",
+            )
+        parser_name, parser_version = self._projection_parser_identity(view)
+        review = PromptReviewValue("not_reviewed", None, None, None, None)
+        page_count = len(view.subject.parent_source_refs)
+        selection = SelectionValue.from_dict({
+            "status": package.status, "coverage_complete": package.coverage_complete,
+            "source_units": package.source_units, "candidate_count": package.candidate_count,
+            "selected_count": len(package.evidence_spans),
+            "omitted_candidate_count": package.omitted_candidate_count,
+            "dropped_financial_count": package.dropped_financial_count,
+            # These count the captured API pages actually opened by the source
+            # export; missing provider pages remain explicit partial coverage.
+            "pages_total": page_count, "pages_read": page_count,
+            "lines_total": 0, "tables_total": 0, "tables_scanned": 0,
+        })
+        result = NarrativeSelectResult.from_dict({
+            "schema_version": "narrative-select-result/3.0",
+            "subject_binding": view.subject.to_dict(),
+            "source_metadata": payload.source_metadata.to_dict(),
+            "parser": {"name": parser_name, "version": parser_version},
+            "selector": {"name": NARRATIVE_SELECTOR_NAME, "version": NARRATIVE_SELECTOR_VERSION},
+            "selection": selection.to_dict(),
+            "evidence_spans": [span.to_dict() for span in package.evidence_spans],
+            "prompt_review": review.to_dict(), "summary_scope": "selected_evidence_only",
+        })
+        context.checkpoint()
+        return HandlerResult(
+            outcome=HandlerOutcome.SUCCEEDED, result=result.to_dict(), artifacts=(), effects=(),
+            metrics=HandlerMetrics(tokens=0, cost_usd=0.0, duration_ms=0), error=None,
+        )
+
+    @staticmethod
+    def _projection_parser_identity(view: VerifiedProjectionView) -> tuple[str, str]:
+        producers = {(span.parser_name, span.parser_version) for span in view.evidence_spans}
+        if not producers and view.coverage_complete:
+            # An empty, verified projection still has its source-owned producer.
+            # This is only parser identity, never guessed language or content.
+            name, _, version = view.subject.to_dict()["adapter"]["parser"].rpartition("/")
+            return name, version
+        if len(producers) != 1:
+            raise _SelectFailure(
+                "PARSER_INCOMPLETE", HandlerOutcome.TERMINAL_FAILURE,
+                "official projection has no single source parser identity",
+            )
+        return next(iter(producers))
 
     @staticmethod
     def _payload(context: JobExecutionContext) -> SourceRevisionEventPayload:

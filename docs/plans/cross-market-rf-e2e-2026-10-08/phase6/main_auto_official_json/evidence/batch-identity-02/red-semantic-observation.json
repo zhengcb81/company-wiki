@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/test_official_json_batch_identity.py",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-batch-red-k9tl_6_v\\pytest",
+    "-q",
+    "--tb=short"
+  ],
+  "exit_code": 1,
+  "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-batch-red-k9tl_6_v",
+  "restored_initial_absent": true,
+  "external_provider_calls": 0,
+  "model_calls": 0,
+  "cost_usd": 0,
+  "prior_collection_failure": "Fixture import lacked unit namespace; preserved original red.log; this rerun precedes source implementation"
+}

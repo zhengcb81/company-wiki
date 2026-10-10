@@ -1,0 +1,111 @@
+{
+  "scope": [
+    "src/company_wiki/source_catalog/transcript_versions.py",
+    "src/company_wiki/source_catalog/transcript_layout.py",
+    "src/company_wiki/source_catalog/narrative_evidence.py",
+    "tests/unit/test_transcript_boundary_versions.py",
+    "tests/contract/test_official_transcript_layouts.py"
+  ],
+  "file_sha256": {
+    "src/company_wiki/source_catalog/transcript_versions.py": "9d809abd3e686b38040b99918eae240bee3f9f11f5bd3d79ab57b6a029c45c24",
+    "src/company_wiki/source_catalog/transcript_layout.py": "7f7d3471daca667edd99dde7c4b04992c50beda1e91aab5bd958dc7c0cccd00e",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "5c2a3fbf2620e1db4a26312a633643ecd8e4a7eb3d353dfc5ff2a87a25b76956",
+    "tests/unit/test_transcript_boundary_versions.py": "4ec7a457094e2dc4e76a04d4384c4ad5972565e4bd10828c494ab10d0c7cada3",
+    "tests/contract/test_official_transcript_layouts.py": "245f824f104ac8b1390b1255c71318f84b6ceca3555b106c409b0f0cc67f64bf"
+  },
+  "current_version": "0.3.1",
+  "preserved_versions": [
+    "0.1.0",
+    "0.1.1",
+    "0.2.0",
+    "0.3.0"
+  ],
+  "original_fixture_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+  "saved_030_units_sha256": "2acb887d51d0aa1ffeab9bb775419624ef68a9d63c83700402c8f20c0ffa238b",
+  "real_result": {
+    "material_lines": 175,
+    "body_line_start": 68,
+    "body_line_end": 171,
+    "units": 489,
+    "roles": {
+      "management": 447,
+      "analyst": 30,
+      "operator": 12
+    },
+    "errors": [],
+    "coverage_complete": true,
+    "selected_spans": 51,
+    "replayed_spans": 51
+  },
+  "final": {
+    "results": [
+      {
+        "name": "pytest",
+        "exit_code": 0,
+        "seconds": 10.0,
+        "command": [
+          "python",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "pytest",
+          "-p",
+          "pytest_timeout",
+          "-p",
+          "no:cacheprovider",
+          "--basetemp",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-transcript-final-ap8u1742/pytest",
+          "-q",
+          "tests/unit/test_transcript_boundary_versions.py",
+          "tests/unit/test_transcript_parser_compatibility.py",
+          "tests/contract/test_official_transcript_layouts.py",
+          "tests/contract/test_transcript_speaker_affiliation.py",
+          "tests/integration/test_s5_narrative_evidence_view.py::test_real_transcript_search_lookup_and_directory_restoration"
+        ]
+      },
+      {
+        "name": "ruff",
+        "exit_code": 0,
+        "seconds": 0.18,
+        "command": [
+          "python",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "ruff",
+          "check",
+          "--no-cache",
+          "src/company_wiki/source_catalog/transcript_versions.py",
+          "src/company_wiki/source_catalog/transcript_layout.py",
+          "src/company_wiki/source_catalog/narrative_evidence.py",
+          "tests/unit/test_transcript_boundary_versions.py",
+          "tests/contract/test_official_transcript_layouts.py"
+        ]
+      },
+      {
+        "name": "mypy",
+        "exit_code": 0,
+        "seconds": 3.31,
+        "command": [
+          "python",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "mypy",
+          "--cache-dir",
+          "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-transcript-final-ap8u1742/mypy",
+          "src/company_wiki/source_catalog/transcript_versions.py",
+          "src/company_wiki/source_catalog/transcript_layout.py",
+          "src/company_wiki/source_catalog/narrative_evidence.py"
+        ]
+      }
+    ],
+    "owned_temp_removed": true,
+    "external_calls": 0
+  },
+  "external_calls": 0,
+  "commit": null
+}

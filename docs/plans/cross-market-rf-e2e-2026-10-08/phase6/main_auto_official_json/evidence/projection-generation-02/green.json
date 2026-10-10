@@ -1,0 +1,62 @@
+{
+  "checks": [
+    {
+      "name": "green",
+      "argv": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "-p",
+        "pytest_timeout",
+        "tests/unit/test_official_json_projection_generation.py",
+        "tests/unit/test_narrative_generation.py",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-projection-generation-final-q_ugwsp3\\pytest"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "name": "ruff",
+      "argv": [
+        "python",
+        "-B",
+        "-m",
+        "ruff",
+        "check",
+        "--no-cache",
+        "src/company_wiki/automation/narrative_generation.py",
+        "tests/unit/test_official_json_projection_generation.py"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "name": "mypy",
+      "argv": [
+        "python",
+        "-B",
+        "-m",
+        "mypy",
+        "--no-incremental",
+        "--cache-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-projection-generation-final-q_ugwsp3\\mypy-cache",
+        "src/company_wiki/automation/narrative_generation.py"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0
+    }
+  ],
+  "owned_temp_removed": true,
+  "external_provider_calls": 0,
+  "external_model_calls": 0,
+  "new_cost_usd": "0",
+  "legacy_function_bodies_unchanged": true,
+  "implementation_scope": "generation helper only; no public chain/reuse implementation"
+}

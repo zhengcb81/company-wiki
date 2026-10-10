@@ -1,0 +1,21 @@
+{
+  "observed_at": "2026-10-10T22:25:06.782682+00:00",
+  "phase": "RED-observed",
+  "tool_chunks": [
+    "80a5cb",
+    "6ccc62"
+  ],
+  "exit_code": 1,
+  "counts": {
+    "failed": 6,
+    "passed": 1
+  },
+  "proven_root_causes": [
+    "raw generation identity omits explicit reasoning_effort",
+    "projection generation rejects configured adaptive thinking",
+    "pre-HTTP configuration/scope/storage errors reported as budget exhaustion"
+  ],
+  "supplier_calls": 0,
+  "new_supplier_cost_usd": 0,
+  "note": "Exact pytest failure was observed in tool output. No reconstructed full log is supplied. Following green uses a unique file."
+}

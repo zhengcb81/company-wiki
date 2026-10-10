@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "-p",
+    "pytest_timeout",
+    "-p",
+    "pytest_asyncio.plugin",
+    "-o",
+    "addopts=",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-cli-red-detail-k20vi_xd\\pytest",
+    "tests/integration/test_official_json_batch_e2e.py",
+    "-k",
+    "real_three_job"
+  ],
+  "exit_code": 1,
+  "elapsed_seconds": 5.297027500000695,
+  "external_calls": 0
+}

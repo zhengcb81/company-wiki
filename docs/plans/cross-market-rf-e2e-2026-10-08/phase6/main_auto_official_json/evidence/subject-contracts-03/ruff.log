@@ -1,0 +1,356 @@
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_batch_identity.py:86:23
+   |
+84 | def test_invalid_items_fail_before_any_source_or_model_operation(change):
+85 |     raw=projected_request()
+86 |     if change=="empty": raw["items"]=[]
+   |                       ^
+87 |     elif change=="wrong_hash": raw["items"][1]["projection_sha256"]="a"*64
+88 |     elif change=="raw_conflict":
+   |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_batch_identity.py:87:30
+   |
+85 |     raw=projected_request()
+86 |     if change=="empty": raw["items"]=[]
+87 |     elif change=="wrong_hash": raw["items"][1]["projection_sha256"]="a"*64
+   |                              ^
+88 |     elif change=="raw_conflict":
+89 |         other=deepcopy(raw["items"][0]);other["source_ref"].update(
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\unit\test_official_json_batch_identity.py:89:40
+   |
+87 |     elif change=="wrong_hash": raw["items"][1]["projection_sha256"]="a"*64
+88 |     elif change=="raw_conflict":
+89 |         other=deepcopy(raw["items"][0]);other["source_ref"].update(
+   |                                        ^
+90 |             source_id="urn:company-wiki:source:sha256:"+"b"*64,content_sha256="b"*64)
+91 |         raw["items"].append(other)
+   |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_batch_identity.py:92:27
+   |
+90 |             source_id="urn:company-wiki:source:sha256:"+"b"*64,content_sha256="b"*64)
+91 |         raw["items"].append(other)
+92 |     elif change=="records": raw["items"][1]["records"]=[{}]
+   |                           ^
+93 |     elif change=="unknown_kind": raw["items"][1]["kind"]="mystery"
+94 |     else: raw["items"][1]["path"]="C:/production/raw.json"
+   |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_batch_identity.py:93:32
+   |
+91 |         raw["items"].append(other)
+92 |     elif change=="records": raw["items"][1]["records"]=[{}]
+93 |     elif change=="unknown_kind": raw["items"][1]["kind"]="mystery"
+   |                                ^
+94 |     else: raw["items"][1]["path"]="C:/production/raw.json"
+95 |     with pytest.raises(ValueError): NarrativeBatchRequest.from_dict(raw)
+   |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_batch_identity.py:94:9
+   |
+92 |     elif change=="records": raw["items"][1]["records"]=[{}]
+93 |     elif change=="unknown_kind": raw["items"][1]["kind"]="mystery"
+94 |     else: raw["items"][1]["path"]="C:/production/raw.json"
+   |         ^
+95 |     with pytest.raises(ValueError): NarrativeBatchRequest.from_dict(raw)
+   |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_batch_identity.py:95:35
+   |
+93 |     elif change=="unknown_kind": raw["items"][1]["kind"]="mystery"
+94 |     else: raw["items"][1]["path"]="C:/production/raw.json"
+95 |     with pytest.raises(ValueError): NarrativeBatchRequest.from_dict(raw)
+   |                                   ^
+   |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_official_json_batch_identity.py:111:24
+    |
+109 | def test_old_event_identity_accessor_preserves_exact_2_0_wire():
+110 |     from unit.test_automation_execution_context import _payload
+111 |     original=_payload();payload=SourceRevisionEventPayload.from_dict(original)
+    |                        ^
+112 |     assert payload.to_dict()==original
+113 |     assert payload.item_key==original["source_ref"]["document_id"]
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_batch_identity.py:120:31
+    |
+118 | def test_event_versions_cannot_relabel_raw_or_projection(mutation):
+119 |     raw=event_payload()
+120 |     if mutation=="raw_under_3": raw["subject_binding"]=NarrativeSubject.from_raw(subject().anchor_ref).to_dict()
+    |                               ^
+121 |     elif mutation=="projection_under_2": raw["schema_version"]="source-revision-event/2.0"
+122 |     elif mutation=="fake_source": raw["source_ref"]=subject().anchor_ref
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_batch_identity.py:121:40
+    |
+119 |     raw=event_payload()
+120 |     if mutation=="raw_under_3": raw["subject_binding"]=NarrativeSubject.from_raw(subject().anchor_ref).to_dict()
+121 |     elif mutation=="projection_under_2": raw["schema_version"]="source-revision-event/2.0"
+    |                                        ^
+122 |     elif mutation=="fake_source": raw["source_ref"]=subject().anchor_ref
+123 |     else: raw["source_metadata"]["source_class"]="transcript"
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_batch_identity.py:122:33
+    |
+120 |     if mutation=="raw_under_3": raw["subject_binding"]=NarrativeSubject.from_raw(subject().anchor_ref).to_dict()
+121 |     elif mutation=="projection_under_2": raw["schema_version"]="source-revision-event/2.0"
+122 |     elif mutation=="fake_source": raw["source_ref"]=subject().anchor_ref
+    |                                 ^
+123 |     else: raw["source_metadata"]["source_class"]="transcript"
+124 |     with pytest.raises(NarrativeContractError): SourceRevisionEventPayload.from_dict(raw)
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_batch_identity.py:123:9
+    |
+121 |     elif mutation=="projection_under_2": raw["schema_version"]="source-revision-event/2.0"
+122 |     elif mutation=="fake_source": raw["source_ref"]=subject().anchor_ref
+123 |     else: raw["source_metadata"]["source_class"]="transcript"
+    |         ^
+124 |     with pytest.raises(NarrativeContractError): SourceRevisionEventPayload.from_dict(raw)
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_batch_identity.py:124:47
+    |
+122 |     elif mutation=="fake_source": raw["source_ref"]=subject().anchor_ref
+123 |     else: raw["source_metadata"]["source_class"]="transcript"
+124 |     with pytest.raises(NarrativeContractError): SourceRevisionEventPayload.from_dict(raw)
+    |                                               ^
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_official_json_batch_identity.py:128:28
+    |
+127 | def test_context_uses_projection_item_key_not_anchor_document():
+128 |     payload=event_payload();s=subject();snapshot=_snapshot("source.narrative_select",())
+    |                            ^
+129 |     event=replace(snapshot.event,subject_type="narrative_subject",subject_id=s.item_key,
+130 |         input_hash=canonical_json_hash(payload),payload_json=canonical_json(payload))
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_official_json_batch_identity.py:128:40
+    |
+127 | def test_context_uses_projection_item_key_not_anchor_document():
+128 |     payload=event_payload();s=subject();snapshot=_snapshot("source.narrative_select",())
+    |                                        ^
+129 |     event=replace(snapshot.event,subject_type="narrative_subject",subject_id=s.item_key,
+130 |         input_hash=canonical_json_hash(payload),payload_json=canonical_json(payload))
+    |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\unit\test_official_json_subject_contracts.py:66:20
+   |
+65 | def test_selected_native_fields_bind_projection_and_each_real_parent():
+66 |     raw=selection();selected=NarrativeSelectResult.from_dict(raw)
+   |                    ^
+67 |     assert selected.to_dict()==raw
+68 |     assert selected.subject.item_key==raw["subject_binding"]["item_key"]
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\unit\test_official_json_subject_contracts.py:78:20
+   |
+77 | def test_summary_draft_uses_explicit_subject_identity_and_shared_claim_validation():
+78 |     raw=selection();selected=NarrativeSelectResult.from_dict(raw)
+   |                    ^
+79 |     output=summary(raw);summarized=NarrativeSummaryResult.from_dict(output)
+80 |     summarized.validate_against(selected)
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\unit\test_official_json_subject_contracts.py:79:24
+   |
+77 | def test_summary_draft_uses_explicit_subject_identity_and_shared_claim_validation():
+78 |     raw=selection();selected=NarrativeSelectResult.from_dict(raw)
+79 |     output=summary(raw);summarized=NarrativeSummaryResult.from_dict(output)
+   |                        ^
+80 |     summarized.validate_against(selected)
+81 |     assert summarized.to_dict()==output
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\unit\test_official_json_subject_contracts.py:88:20
+   |
+87 | def test_bundle_round_trip_binds_whole_subject_and_dependencies():
+88 |     raw=selection();summarized=summary(raw);output=bundle(raw,summarized)
+   |                    ^
+89 |     selected=NarrativeSelectResult.from_dict(raw);summary_value=NarrativeSummaryResult.from_dict(summarized)
+90 |     result=NarrativeBundle.from_dict(output);result.validate_against(selected,summary_value)
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\unit\test_official_json_subject_contracts.py:88:44
+   |
+87 | def test_bundle_round_trip_binds_whole_subject_and_dependencies():
+88 |     raw=selection();summarized=summary(raw);output=bundle(raw,summarized)
+   |                                            ^
+89 |     selected=NarrativeSelectResult.from_dict(raw);summary_value=NarrativeSummaryResult.from_dict(summarized)
+90 |     result=NarrativeBundle.from_dict(output);result.validate_against(selected,summary_value)
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\unit\test_official_json_subject_contracts.py:89:50
+   |
+87 | def test_bundle_round_trip_binds_whole_subject_and_dependencies():
+88 |     raw=selection();summarized=summary(raw);output=bundle(raw,summarized)
+89 |     selected=NarrativeSelectResult.from_dict(raw);summary_value=NarrativeSummaryResult.from_dict(summarized)
+   |                                                  ^
+90 |     result=NarrativeBundle.from_dict(output);result.validate_against(selected,summary_value)
+91 |     assert result.to_dict()==output and result.subject==selected.subject
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\unit\test_official_json_subject_contracts.py:90:45
+   |
+88 |     raw=selection();summarized=summary(raw);output=bundle(raw,summarized)
+89 |     selected=NarrativeSelectResult.from_dict(raw);summary_value=NarrativeSummaryResult.from_dict(summarized)
+90 |     result=NarrativeBundle.from_dict(output);result.validate_against(selected,summary_value)
+   |                                             ^
+91 |     assert result.to_dict()==output and result.subject==selected.subject
+92 |     assert "source_ref" not in result.to_dict()
+   |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_subject_contracts.py:98:21
+    |
+ 96 | def test_bad_selected_identity_is_refused_as_contract_consistency(bad):
+ 97 |     raw=selection()
+ 98 |     if bad=="parent": raw["evidence_spans"][0]["source_id"]="urn:company-wiki:source:sha256:"+"f"*64
+    |                     ^
+ 99 |     elif bad=="projection": raw["evidence_spans"][0]["structured_value"]["projection_id"]="urn:wrong"
+100 |     elif bad=="fake_ref": raw["source_ref"]=raw["subject_binding"]["parent_source_refs"][0]
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_subject_contracts.py:99:27
+    |
+ 97 |     raw=selection()
+ 98 |     if bad=="parent": raw["evidence_spans"][0]["source_id"]="urn:company-wiki:source:sha256:"+"f"*64
+ 99 |     elif bad=="projection": raw["evidence_spans"][0]["structured_value"]["projection_id"]="urn:wrong"
+    |                           ^
+100 |     elif bad=="fake_ref": raw["source_ref"]=raw["subject_binding"]["parent_source_refs"][0]
+101 |     elif bad=="transcript": raw["source_metadata"]["source_class"]="transcript"
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_subject_contracts.py:100:25
+    |
+ 98 |     if bad=="parent": raw["evidence_spans"][0]["source_id"]="urn:company-wiki:source:sha256:"+"f"*64
+ 99 |     elif bad=="projection": raw["evidence_spans"][0]["structured_value"]["projection_id"]="urn:wrong"
+100 |     elif bad=="fake_ref": raw["source_ref"]=raw["subject_binding"]["parent_source_refs"][0]
+    |                         ^
+101 |     elif bad=="transcript": raw["source_metadata"]["source_class"]="transcript"
+102 |     else: raw["source_metadata"]["language"]="invalid"
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_subject_contracts.py:101:27
+    |
+ 99 |     elif bad=="projection": raw["evidence_spans"][0]["structured_value"]["projection_id"]="urn:wrong"
+100 |     elif bad=="fake_ref": raw["source_ref"]=raw["subject_binding"]["parent_source_refs"][0]
+101 |     elif bad=="transcript": raw["source_metadata"]["source_class"]="transcript"
+    |                           ^
+102 |     else: raw["source_metadata"]["language"]="invalid"
+103 |     with pytest.raises(ValueError): NarrativeSelectResult.from_dict(raw)
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_subject_contracts.py:102:9
+    |
+100 |     elif bad=="fake_ref": raw["source_ref"]=raw["subject_binding"]["parent_source_refs"][0]
+101 |     elif bad=="transcript": raw["source_metadata"]["source_class"]="transcript"
+102 |     else: raw["source_metadata"]["language"]="invalid"
+    |         ^
+103 |     with pytest.raises(ValueError): NarrativeSelectResult.from_dict(raw)
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_subject_contracts.py:103:35
+    |
+101 |     elif bad=="transcript": raw["source_metadata"]["source_class"]="transcript"
+102 |     else: raw["source_metadata"]["language"]="invalid"
+103 |     with pytest.raises(ValueError): NarrativeSelectResult.from_dict(raw)
+    |                                   ^
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_official_json_subject_contracts.py:108:20
+    |
+106 | @pytest.mark.parametrize("bad",["raw_header","wrong_subject","wrong_language","question_as_statement"])
+107 | def test_wrong_summary_header_or_role_cannot_be_accepted(bad):
+108 |     raw=selection();selected=NarrativeSelectResult.from_dict(raw);output=summary(raw)
+    |                    ^
+109 |     if bad=="raw_header":
+110 |         output["draft"]["source_id"]=output["draft"].pop("subject_id")
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_official_json_subject_contracts.py:108:66
+    |
+106 | @pytest.mark.parametrize("bad",["raw_header","wrong_subject","wrong_language","question_as_statement"])
+107 | def test_wrong_summary_header_or_role_cannot_be_accepted(bad):
+108 |     raw=selection();selected=NarrativeSelectResult.from_dict(raw);output=summary(raw)
+    |                                                                  ^
+109 |     if bad=="raw_header":
+110 |         output["draft"]["source_id"]=output["draft"].pop("subject_id")
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_subject_contracts.py:112:30
+    |
+110 |         output["draft"]["source_id"]=output["draft"].pop("subject_id")
+111 |         output["draft"]["source_sha256"]=output["draft"].pop("subject_sha256")
+112 |     elif bad=="wrong_subject": output["draft"]["subject_id"]="urn:wrong"
+    |                              ^
+113 |     elif bad=="wrong_language": output["draft"]["language"]="en"
+114 |     else:
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_subject_contracts.py:113:31
+    |
+111 |         output["draft"]["source_sha256"]=output["draft"].pop("subject_sha256")
+112 |     elif bad=="wrong_subject": output["draft"]["subject_id"]="urn:wrong"
+113 |     elif bad=="wrong_language": output["draft"]["language"]="en"
+    |                               ^
+114 |     else:
+115 |         question=next(span for span in raw["evidence_spans"] if span["structured_value"]["source_role"]=="investor_question")
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_subject_contracts.py:117:47
+    |
+115 |         question=next(span for span in raw["evidence_spans"] if span["structured_value"]["source_role"]=="investor_question")
+116 |         output["draft"]["claims"][0]["evidence_ids"]=[question["span_id"]]
+117 |     with pytest.raises(NarrativeContractError): NarrativeSummaryResult.from_dict(output).validate_against(selected)
+    |                                               ^
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_subject_contracts.py:125:47
+    |
+123 |     raw=selection() if parser is NarrativeSelectResult else summary() if parser is NarrativeSummaryResult else bundle()
+124 |     raw["schema_version"]=schema
+125 |     with pytest.raises(NarrativeContractError): parser.from_dict(raw)
+    |                                               ^
+    |
+
+Found 34 errors.

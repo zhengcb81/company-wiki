@@ -1,0 +1,21 @@
+{
+  "head": "de24d31c107785e902132c421371e92ac89aa59b",
+  "files": {
+    "src/company_wiki/automation/narrative_transport_contracts.py": "9bb13eb9b0479d482659554cc48dc137c68534420f0dd0dbe7eb1655d8c7344c",
+    "src/company_wiki/automation/narrative_transport.py": "0f237fd79a6f160cb2c28d43d8dc7c143604975fd4c725812eade28780bb7c3e",
+    "src/company_wiki/automation/narrative_replay.py": "ccd9e588eb85ef01687131283caac1ef9823fabe58a9fc198360f8fe9331d872",
+    "tests/unit/test_official_json_transport_subject_contracts.py": "9c6c5e12308169652bbb57cb66647f11bdc7f12e4198c317663b0269ba3aab6d",
+    "tests/integration/test_official_json_transport_subject.py": "31eddee8f96ce1c230b1c1f82e2f87ba867932a666d5b12a363c60273f458179"
+  },
+  "status": "owned_tests_green_shared_legacy_fixture_pending",
+  "tests": "116 passed, 1 explicitly deselected known shared model fixture",
+  "red_unit": "24 failed /15 passed",
+  "red_integration": "17 failed /39 passed",
+  "red_metadata": "2 genuine failures",
+  "ruff_exit": 0,
+  "mypy_exit": 0,
+  "external_provider_calls": 0,
+  "external_model_calls": 0,
+  "temp_restored": true,
+  "not_committed": true
+}

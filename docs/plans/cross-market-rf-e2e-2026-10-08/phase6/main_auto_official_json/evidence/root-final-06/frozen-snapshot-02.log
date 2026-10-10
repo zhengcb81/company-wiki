@@ -1,0 +1,3 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-final06b-fqxdfl55\\pytest", "requested_basetemp_len": 59, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+.                                                                        [100%]
+1 passed in 3.04s

@@ -6,6 +6,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import UTC, datetime
 import hashlib
+import sqlite3
 import time
 from typing import Protocol, TYPE_CHECKING
 
@@ -106,7 +107,11 @@ class BudgetedNarrativeCaller:
     def generate(
         self, context: JobExecutionContext, request: NarrativeModelRequest
     ) -> tuple[NarrativeModelResponse, HandlerMetrics]:
-        from .narrative_run_store import ModelUsage
+        from .narrative_run_store import (
+            ModelUsage, RunBudgetExceededError, RunConflictError,
+            RunScopeError, ReservationConflictError,
+        )
+        from .store import LeaseLostError, StoreBusyError
 
         try:
             body = self._model.request_bytes(request)
@@ -119,7 +124,9 @@ class BudgetedNarrativeCaller:
         try:
             run = self._store.get_run(self._run_id)
             if run is None:
-                raise ValueError("narrative run is missing")
+                raise NarrativeBudgetCallError(
+                    "MODEL_RUN_MISSING", HandlerOutcome.TERMINAL_FAILURE, _ZERO
+                )
             admission = self._store.reserve_model_attempt(
                 run_id=self._run_id,
                 job_id=context.job.job_id,
@@ -139,10 +146,23 @@ class BudgetedNarrativeCaller:
                 output_bytes_bound=self._output_bound,
                 now=self._clock(),
             )
-        except Exception:
-            raise NarrativeBudgetCallError(
-                "MODEL_BUDGET_DENIED", HandlerOutcome.TERMINAL_FAILURE, _ZERO
-            ) from None
+        except NarrativeBudgetCallError:
+            raise
+        except Exception as error:
+            # Admission failures occur before HTTP. Only genuine cap exhaustion
+            # is a budget denial; binding and storage faults keep safe diagnostics.
+            code, outcome = "MODEL_ADMISSION_INVALID", HandlerOutcome.TERMINAL_FAILURE
+            if isinstance(error, RunBudgetExceededError):
+                code = "MODEL_BUDGET_DENIED"
+            elif isinstance(error, (RunConflictError, ReservationConflictError)):
+                code = "MODEL_RUN_BINDING_CONFLICT"
+            elif isinstance(error, RunScopeError):
+                code = "MODEL_RUN_SCOPE_MISMATCH"
+            elif isinstance(error, LeaseLostError):
+                code, outcome = "LEASE_LOST", HandlerOutcome.RETRYABLE
+            elif isinstance(error, (StoreBusyError, sqlite3.Error, OSError)):
+                code, outcome = "MODEL_ADMISSION_UNAVAILABLE", HandlerOutcome.RETRYABLE
+            raise NarrativeBudgetCallError(code, outcome, _ZERO) from None
         if not admission.may_send_http:
             raise NarrativeBudgetCallError(
                 "MODEL_REQUEST_ALREADY_RESERVED",

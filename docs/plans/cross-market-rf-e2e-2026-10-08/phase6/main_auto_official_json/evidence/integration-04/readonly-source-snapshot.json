@@ -1,0 +1,15 @@
+{
+  "observed_at": "2026-10-10T22:22:08.853022+00:00",
+  "scope": "read-only; active integration snapshot, not an immutable commit",
+  "files": {
+    "src/company_wiki/automation/narrative_batch_request.py": "85b9e0ddca2c368da8145b986bc5df215be2df2603bc2df4c1b91fb41e8f3fc5",
+    "src/company_wiki/automation/narrative_batch.py": "e2898958619abf764f14f55b6434c5ede4bc201fd42cfe8def9c84d5f8b495b4",
+    "src/company_wiki/automation/narrative_generation.py": "cfdf0e9c71bcf0f254e7bd32b2aafeb26105c6bb7363b977a376f3b5889bb62e",
+    "src/company_wiki/automation/narrative_projection.py": "2702bb3be33878f617785987b342dfc7088616866e703c034a1b1fb3a4fd806c",
+    "src/company_wiki/automation/narrative_transport.py": "0f237fd79a6f160cb2c28d43d8dc7c143604975fd4c725812eade28780bb7c3e",
+    "src/company_wiki/automation/narrative_evidence_view.py": "7860f3925ae09e09d2edec82df52618268ff785bcc437e9d2b50e9847ec5eb68",
+    "src/company_wiki/automation/narrative_run_store.py": "29ca94f79a3e73f30f5c8241d09e8c6365061d24d4162ea5db9f7aa4a1f3cbc2",
+    "src/company_wiki/automation/terminal_receipts.py": "8b03189848d6618a617c48f1f1b1a65b57280642a7311c05b0db516dc5e3080e",
+    "src/company_wiki/source_catalog/narrative_artifact_store.py": "2dde21da86bf23a3a54465211cf25857e6ce6e446370c331e3076fd138348ab3"
+  }
+}

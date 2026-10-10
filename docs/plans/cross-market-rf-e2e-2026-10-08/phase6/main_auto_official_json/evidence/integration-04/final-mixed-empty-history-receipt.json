@@ -1,0 +1,29 @@
+{
+  "schema_version": "main-final-functional-review/1",
+  "test_files": [
+    "tests/integration/test_official_json_batch_e2e.py",
+    "tests/integration/test_official_json_empty_batch_e2e.py",
+    "tests/integration/test_narrative_legacy_effort_history.py"
+  ],
+  "distinct_test_count_expected": 9,
+  "exit_code": 0,
+  "elapsed_seconds": 81.262,
+  "owned_temp_removed": true,
+  "external_provider_calls": 0,
+  "external_model_calls": 0,
+  "log_sha256": "4b7869cfc15e74ff433d6f08ba4c6ee83867c673b87f15529a7901f3966fd6fe",
+  "source_sha256_before": {
+    "src/company_wiki/automation/narrative_batch.py": "7e17b29becfee0dbd22a753a0123e58ad7206130dfc5e2ba01009b26cae08dfd",
+    "src/company_wiki/automation/narrative_worker_factory.py": "69733204127ac7b1e7d76c2d3c3b206d9f1cf32c4f43a9d4007f4364b022457e",
+    "tests/integration/test_narrative_legacy_effort_history.py": "57828622b410a6e54020027085e9def2b3d61a98a52eaa74a4599e0978283412",
+    "tests/integration/test_official_json_batch_e2e.py": "a65e9adc35178bf3d6847797cb5f2f182916e96220d464be5c03b65055f2f3a3",
+    "tests/integration/test_official_json_empty_batch_e2e.py": "36caeee6b1d29268ec135f426394060b82ccbfb0c1ca43b18553706924798703"
+  },
+  "source_sha256_after": {
+    "src/company_wiki/automation/narrative_batch.py": "7e17b29becfee0dbd22a753a0123e58ad7206130dfc5e2ba01009b26cae08dfd",
+    "src/company_wiki/automation/narrative_worker_factory.py": "69733204127ac7b1e7d76c2d3c3b206d9f1cf32c4f43a9d4007f4364b022457e",
+    "tests/integration/test_narrative_legacy_effort_history.py": "57828622b410a6e54020027085e9def2b3d61a98a52eaa74a4599e0978283412",
+    "tests/integration/test_official_json_batch_e2e.py": "a65e9adc35178bf3d6847797cb5f2f182916e96220d464be5c03b65055f2f3a3",
+    "tests/integration/test_official_json_empty_batch_e2e.py": "36caeee6b1d29268ec135f426394060b82ccbfb0c1ca43b18553706924798703"
+  }
+}

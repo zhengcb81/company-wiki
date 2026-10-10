@@ -1,0 +1,129 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-transcript-red-7kjqo503\\pytest", "requested_basetemp_len": 66, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-222500-c44cacc7", "effective_basetemp_len": 75}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+collected 13 items
+
+tests\unit\test_transcript_boundary_versions.py FFFFFFFF....F            [100%]
+
+================================== FAILURES ===================================
+____________ test_current_parser_identity_and_public_imports_agree ____________
+tests\unit\test_transcript_boundary_versions.py:43: in test_current_parser_identity_and_public_imports_agree
+    assert transcript_parser_contract().parser_version == NEW_VERSION
+E   AssertionError: assert '0.3.0' == '0.3.1'
+E     
+E     - 0.3.1
+E     ?     ^
+E     + 0.3.0
+E     ?     ^
+_ test_real_fixture_excludes_editorial_roster_and_footer_and_replays_every_span _
+tests\unit\test_transcript_boundary_versions.py:56: in test_real_fixture_excludes_editorial_roster_and_footer_and_replays_every_span
+    result = parsed(material.text_utf8)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_transcript_boundary_versions.py:30: in parsed
+    return parse_transcript_text(text, source_id=source_id_for_sha256(digest),
+src\company_wiki\source_catalog\narrative_evidence.py:1274: in parse_transcript_text
+    contract = transcript_parser_contract(parser_version)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_evidence.py:79: in transcript_parser_contract
+    raise ValueError("unsupported transcript parser version")
+E   ValueError: unsupported transcript parser version
+______________ test_saved_030_real_fixture_is_not_reinterpreted _______________
+tests\unit\test_transcript_boundary_versions.py:84: in test_saved_030_real_fixture_is_not_reinterpreted
+    assert unit_snapshot(result) == OLD_030_UNITS_SHA
+E   AssertionError: assert '44911fbb8a24...3e664beab3c95' == '2acb887d51d0...8f20c0ffa238b'
+E     
+E     - 2acb887d51d0aa1ffeab9bb775419624ef68a9d63c83700402c8f20c0ffa238b
+E     + 44911fbb8a24d3ecefa229232332b1ea1ab8b5959029976baa83e664beab3c95
+_____ test_explicit_body_takes_precedence_over_roster_like_speaker_labels _____
+tests\unit\test_transcript_boundary_versions.py:94: in test_explicit_body_takes_precedence_over_roster_like_speaker_labels
+    result = parsed(text)
+             ^^^^^^^^^^^^
+tests\unit\test_transcript_boundary_versions.py:30: in parsed
+    return parse_transcript_text(text, source_id=source_id_for_sha256(digest),
+src\company_wiki\source_catalog\narrative_evidence.py:1274: in parse_transcript_text
+    contract = transcript_parser_contract(parser_version)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_evidence.py:79: in transcript_parser_contract
+    raise ValueError("unsupported transcript parser version")
+E   ValueError: unsupported transcript parser version
+_ test_natural_body_end_marker_stops_on_any_recognized_speaker_line[Alex Host, Operator: This concludes today's conference call. You may disconnect.] _
+tests\unit\test_transcript_boundary_versions.py:108: in test_natural_body_end_marker_stops_on_any_recognized_speaker_line
+    result = parsed(text)
+             ^^^^^^^^^^^^
+tests\unit\test_transcript_boundary_versions.py:30: in parsed
+    return parse_transcript_text(text, source_id=source_id_for_sha256(digest),
+src\company_wiki\source_catalog\narrative_evidence.py:1274: in parse_transcript_text
+    contract = transcript_parser_contract(parser_version)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_evidence.py:79: in transcript_parser_contract
+    raise ValueError("unsupported transcript parser version")
+E   ValueError: unsupported transcript parser version
+_ test_natural_body_end_marker_stops_on_any_recognized_speaker_line[Alex Host \u2014 Operator\nThis concludes today's conference call. You may disconnect.] _
+tests\unit\test_transcript_boundary_versions.py:108: in test_natural_body_end_marker_stops_on_any_recognized_speaker_line
+    result = parsed(text)
+             ^^^^^^^^^^^^
+tests\unit\test_transcript_boundary_versions.py:30: in parsed
+    return parse_transcript_text(text, source_id=source_id_for_sha256(digest),
+src\company_wiki\source_catalog\narrative_evidence.py:1274: in parse_transcript_text
+    contract = transcript_parser_contract(parser_version)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_evidence.py:79: in transcript_parser_contract
+    raise ValueError("unsupported transcript parser version")
+E   ValueError: unsupported transcript parser version
+_ test_natural_body_end_marker_stops_on_any_recognized_speaker_line[CEO: You may now disconnect your lines.] _
+tests\unit\test_transcript_boundary_versions.py:108: in test_natural_body_end_marker_stops_on_any_recognized_speaker_line
+    result = parsed(text)
+             ^^^^^^^^^^^^
+tests\unit\test_transcript_boundary_versions.py:30: in parsed
+    return parse_transcript_text(text, source_id=source_id_for_sha256(digest),
+src\company_wiki\source_catalog\narrative_evidence.py:1274: in parse_transcript_text
+    contract = transcript_parser_contract(parser_version)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_evidence.py:79: in transcript_parser_contract
+    raise ValueError("unsupported transcript parser version")
+E   ValueError: unsupported transcript parser version
+____________ test_natural_fallback_without_end_is_still_incomplete ____________
+tests\unit\test_transcript_boundary_versions.py:115: in test_natural_fallback_without_end_is_still_incomplete
+    result = parsed("Transcript\nCEO: " + BUSINESS + "\nCFO: Customer demand continues to exceed supply.")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_transcript_boundary_versions.py:30: in parsed
+    return parse_transcript_text(text, source_id=source_id_for_sha256(digest),
+src\company_wiki\source_catalog\narrative_evidence.py:1274: in parse_transcript_text
+    contract = transcript_parser_contract(parser_version)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_evidence.py:79: in transcript_parser_contract
+    raise ValueError("unsupported transcript parser version")
+E   ValueError: unsupported transcript parser version
+____ test_explicit_legacy_format_retains_its_existing_eof_semantics[0.3.1] ____
+tests\unit\test_transcript_boundary_versions.py:124: in test_explicit_legacy_format_retains_its_existing_eof_semantics
+    result = parsed("Full Conference Call Transcript\nCEO: " + BUSINESS, version)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_transcript_boundary_versions.py:30: in parsed
+    return parse_transcript_text(text, source_id=source_id_for_sha256(digest),
+src\company_wiki\source_catalog\narrative_evidence.py:1274: in parse_transcript_text
+    contract = transcript_parser_contract(parser_version)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_evidence.py:79: in transcript_parser_contract
+    raise ValueError("unsupported transcript parser version")
+E   ValueError: unsupported transcript parser version
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/unit/test_transcript_boundary_versions.py::test_current_parser_identity_and_public_imports_agree
+FAILED tests/unit/test_transcript_boundary_versions.py::test_real_fixture_excludes_editorial_roster_and_footer_and_replays_every_span
+FAILED tests/unit/test_transcript_boundary_versions.py::test_saved_030_real_fixture_is_not_reinterpreted
+FAILED tests/unit/test_transcript_boundary_versions.py::test_explicit_body_takes_precedence_over_roster_like_speaker_labels
+FAILED tests/unit/test_transcript_boundary_versions.py::test_natural_body_end_marker_stops_on_any_recognized_speaker_line[Alex Host, Operator: This concludes today's conference call. You may disconnect.]
+FAILED tests/unit/test_transcript_boundary_versions.py::test_natural_body_end_marker_stops_on_any_recognized_speaker_line[Alex Host \u2014 Operator\nThis concludes today's conference call. You may disconnect.]
+FAILED tests/unit/test_transcript_boundary_versions.py::test_natural_body_end_marker_stops_on_any_recognized_speaker_line[CEO: You may now disconnect your lines.]
+FAILED tests/unit/test_transcript_boundary_versions.py::test_natural_fallback_without_end_is_still_incomplete
+FAILED tests/unit/test_transcript_boundary_versions.py::test_explicit_legacy_format_retains_its_existing_eof_semantics[0.3.1]
+=================== 9 failed, 4 passed, 1 warning in 2.77s ====================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-222500-c44cacc7", "existed": true, "removed": true}

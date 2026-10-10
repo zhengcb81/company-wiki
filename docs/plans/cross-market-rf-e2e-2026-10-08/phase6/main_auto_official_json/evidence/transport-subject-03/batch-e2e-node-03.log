@@ -1,0 +1,258 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-mixed-cli-node03-1x_iwd3a\\pytest", "requested_basetemp_len": 68, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-222922-ef956925", "effective_basetemp_len": 75}
+F...F                                                                    [100%]
+================================== FAILURES ===================================
+_ test_public_mixed_batch_has_real_three_job_flow_resume_reuse_refresh_and_restores_originals _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-222922-ef956925/test_public_mixed_batch_has_re0')
+official_json_loopback_model = namespace(requests=[{'default_quality_flags': [], 'default_source_role': 'management', 'evidence': [['e1', 'We launche...3b506a0334a', 'title': 'offline-batch-fixture:42'}}], errors=[], endpoint='http://127.0.0.1:54219/v1/chat/completions')
+
+    def test_public_mixed_batch_has_real_three_job_flow_resume_reuse_refresh_and_restores_originals(
+        tmp_path, official_json_loopback_model
+    ):
+        server = official_json_loopback_model
+        with official_batch_state(tmp_path) as state:
+            path = request_for(state, server.endpoint, "mixed-first")
+            process, first = invoke_batch(state, path, "mixed-first")
+            assert process.returncode == 0 and first["status"] == "completed", (
+                first,
+                process.stderr,
+            )
+            assert server.errors == [] and len(server.requests) == 3
+            identity_keys = [
+                data["subject"]["subject_id"]
+                if "subject" in data
+                else data["source"]["source_id"]
+                for data in server.requests
+            ]
+            assert Counter(identity_keys) == Counter(
+                {
+                    state.subjects[0].item_key: 1,
+                    state.subjects[1].item_key: 1,
+                    state.raw_ref["source_id"]: 1,
+                }
+            )
+            assert_paid(first, 3)
+            keys = set(items_by_key(first))
+            assert_terminal_jobs(state, "mixed-first", keys)
+>           assert_actual_public_reads(state, first)
+
+tests\integration\test_official_json_batch_e2e.py:177: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\integration\test_official_json_batch_e2e.py:102: in assert_actual_public_reads
+    wire, read_receipt = invoke_read(state, ref, issuer=subject.issuer)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+state = namespace(root=WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-222922-ef956925/test_public_mi...2', 'status': 'completed', 'storage': {'persistent_added_bytes': 469818, 'scratch_peak_bytes': 13311}}, 'stderr': ''}])
+reference = {'artifact_sha256': 'ade9c683e5de47ea43d80308fa8e0f0af4cef9f1ffc69d374bd3e90fc7e6609d', 'artifact_version_id': 'narrat...588', 'byte_size': 13233, 'generation_sha256': '5c8d8d56490e70df37353f3446ccadb034c8b4060baee8b3c1c5aba6c4ef509f', ...}
+issuer = {'canonical_name': None, 'entity_name': None, 'market': None, 'provider_activity_company_id': None, ...}
+
+    def invoke_read(state, reference, *, issuer=None):
+        projected = reference["schema_version"] == "narrative-ref/2"
+        if projected:
+            reference_request = {
+                "schema_version": "narrative-reference-request/2",
+                "subject_binding": reference["subject_binding"],
+                "generation_sha256": reference["generation_sha256"],
+            }
+            discovery = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    "-m",
+                    "company_wiki.source_catalog.narrative_transport_cli",
+                    "--config",
+                    str(state.config_path),
+                    "--operation",
+                    "reference",
+                ],
+                input=encoded(reference_request),
+                cwd=state.root,
+                env=subprocess_env(),
+                capture_output=True,
+                timeout=30,
+            )
+            assert discovery.returncode == 0, discovery.stderr.decode(errors="replace")
+            assert json.loads(discovery.stdout) == reference, (
+                "public discovery must use exact subject/generation, never shared anchor latest"
+            )
+            assert json.loads(discovery.stderr)["status"] == "metadata_only"
+        wire = {
+            "schema_version": "narrative-read-request/2"
+            if projected
+            else "narrative-read-request/1",
+            "narrative_ref": reference,
+            "as_of_date": "2026-10-08",
+        }
+        if projected:
+            wire["expected_issuer"] = issuer
+        else:
+            wire["expected_source"] = {
+                key: None
+                for key in (
+                    "canonical_entity_id",
+                    "market",
+                    "security_id",
+                    "document_kind",
+                    "fiscal_year",
+                    "fiscal_period",
+                )
+            }
+        process = subprocess.run(
+            [
+                sys.executable,
+                "-B",
+                "-m",
+                "company_wiki.source_catalog.narrative_transport_cli",
+                "--config",
+                str(state.config_path),
+                "--operation",
+                "read",
+            ],
+            input=encoded(wire),
+            cwd=state.root,
+            env=subprocess_env(),
+            capture_output=True,
+            timeout=45,
+        )
+>       assert process.returncode == 0, (process.stderr.decode(errors="replace"), reference)
+               ^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: ('{"reason":"invalid_request","schema_version":"narrative-read-receipt/1","status":"blocked"}\n', {'artifact_sha256': 'ade9c683e5de47ea43d80308fa8e0f0af4cef9f1ffc69d374bd3e90fc7e6609d', 'artifact_version_id': 'narrative-e009d3bc5d5f4c02a5707ee4e24a6588', 'byte_size': 13233, 'generation_sha256': '5c8d8d56490e70df37353f3446ccadb034c8b4060baee8b3c1c5aba6c4ef509f', 'schema_version': 'narrative-ref/2', 'subject_binding': {'adapter': {'layout_fingerprint': '8bd33122aba90026cecba77077f889d4d96084bff614fdebd2b2ae13f31c9eb8', 'layout_id': 'official-paged-qa', 'layout_version': '1.0.0', 'parser': 'cwp_official_json/1.0.1', 'structure_parser_version': '1.0.1'}, 'as_of_date': '2026-10-08', 'coverage': {'as_of_excluded_records': 0, 'conflicting_record_ids': 0, 'diagnostics': [], 'duplicate_record_occurrences': 0, 'issuer_records_selected': 2, 'missing_record_ids': 0, 'other_issuer_records': 2, 'page_envelope_complete': True, 'pages': [{'byte_size': 1216, 'content_sha256': '0d678613fbc9f21530ba0f1cd5ef2764b17c4d37cb5c5bf513e746fbced70e81', 'envelope_status': 'ok', 'pagination': {'current': 1, 'pages': 2, 'size': 2, 'total': 4}, 'records': 2}, {'byte_size': 1216, 'content_sha256': 'f8c3fa57ceaac0e31e1d2189c4cacf6e6a5bafe01beb1b6ce12d74023945cc52', 'envelope_status': 'ok', 'pagination': {'current': 2, 'pages': 2, 'size': 2, 'total': 4}, 'records': 2}], 'pagination_complete': True, 'total_records': 4, 'unattributed_records': 0, 'unique_record_ids': 4}, 'issuer': {'canonical_name': None, 'entity_name': None, 'market': None, 'provider_activity_company_id': None, 'provider_company_id': 1, 'security_id': None}, 'item_key': 'urn:company-wiki:source-projection:sha256:8947fe14c922259cbf69209c9ddbadcf9b45a1f167bf437b181ec5405b999809', 'kind': 'official_json', 'parent_source_refs': [{'byte_size': 1216, 'content_sha256': '0d678613fbc9f21530ba0f1cd5ef2764b17c4d37cb5c5bf513e746fbced70e81', 'document_id': 'urn:company-wiki:document:sha256:0d678613fbc9f21530ba0f1cd5ef2764b17c4d37cb5c5bf513e746fbced70e81', 'mime_type': 'application/json', 'schema_version': '2.0', 'source_id': 'urn:company-wiki:source:sha256:0d678613fbc9f21530ba0f1cd5ef2764b17c4d37cb5c5bf513e746fbced70e81'}, {'byte_size': 1216, 'content_sha256': 'f8c3fa57ceaac0e31e1d2189c4cacf6e6a5bafe01beb1b6ce12d74023945cc52', 'document_id': 'urn:company-wiki:document:sha256:f8c3fa57ceaac0e31e1d2189c4cacf6e6a5bafe01beb1b6ce12d74023945cc52', 'mime_type': 'application/json', 'schema_version': '2.0', 'source_id': 'urn:company-wiki:source:sha256:f8c3fa57ceaac0e31e1d2189c4cacf6e6a5bafe01beb1b6ce12d74023945cc52'}], 'subject_sha256': '8947fe14c922259cbf69209c9ddbadcf9b45a1f167bf437b181ec5405b999809'}})
+
+tests\support\official_json_batch_fixture.py:483: AssertionError
+_ test_mixed_batch_only_missing_items_pay_and_keeps_preexisting_projection_pin _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-222922-ef956925/test_mixed_batch_only_missing_0')
+official_json_loopback_model = namespace(requests=[{'default_quality_flags': [], 'default_source_role': 'management', 'evidence': [['e1', '公司新产品完成客户验...338e322f8', 'title': 'Acme 2026 Q1 earnings call'}}], errors=[], endpoint='http://127.0.0.1:64584/v1/chat/completions')
+
+    def test_mixed_batch_only_missing_items_pay_and_keeps_preexisting_projection_pin(
+        tmp_path, official_json_loopback_model
+    ):
+        server = official_json_loopback_model
+        with official_batch_state(tmp_path) as state:
+            a, b = state.subjects
+            only_a = [
+                {
+                    "kind": "official_json",
+                    "projection_id": a.item_key,
+                    "projection_sha256": a.subject_sha256,
+                }
+            ]
+            first_path = request_for(
+                state, server.endpoint, "only-projection-a", items=only_a
+            )
+            first_process, first = invoke_batch(state, first_path, "only-projection-a")
+            assert first_process.returncode == 0 and first["status"] == "completed", first
+            assert len(server.requests) == 1 and server.errors == []
+            assert_paid(first, 1)
+            assert_terminal_jobs(state, "only-projection-a", {a.item_key})
+            saved_ref = items_by_key(first)[a.item_key]["artifact_ref"]
+            mixed_path = request_for(state, server.endpoint, "partial-reuse-mixed")
+            mixed_process, mixed = invoke_batch(state, mixed_path, "partial-reuse-mixed")
+            assert mixed_process.returncode == 0 and mixed["status"] == "completed", mixed
+            assert len(server.requests) == 3 and server.errors == []
+            assert_paid(mixed, 2)
+            assert items_by_key(mixed)[a.item_key]["artifact_ref"] == saved_ref
+            assert_terminal_jobs(
+                state, "partial-reuse-mixed", {b.item_key, state.raw_ref["document_id"]}
+            )
+            keys = [
+                data["subject"]["subject_id"]
+                if "subject" in data
+                else data["source"]["source_id"]
+                for data in server.requests
+            ]
+            assert Counter(keys) == Counter(
+                {a.item_key: 1, b.item_key: 1, state.raw_ref["source_id"]: 1}
+            )
+>           assert_actual_public_reads(state, mixed)
+
+tests\integration\test_official_json_batch_e2e.py:303: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\integration\test_official_json_batch_e2e.py:102: in assert_actual_public_reads
+    wire, read_receipt = invoke_read(state, ref, issuer=subject.issuer)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+state = namespace(root=WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-222922-ef956925/test_mixed_bat...2', 'status': 'completed', 'storage': {'persistent_added_bytes': 173710, 'scratch_peak_bytes': 13311}}, 'stderr': ''}])
+reference = {'artifact_sha256': 'ade9c683e5de47ea43d80308fa8e0f0af4cef9f1ffc69d374bd3e90fc7e6609d', 'artifact_version_id': 'narrat...04f', 'byte_size': 13233, 'generation_sha256': 'd135c05bc2cec6baa99e0a892d24c43847732e90f31e41b9d07d71221037c431', ...}
+issuer = {'canonical_name': None, 'entity_name': None, 'market': None, 'provider_activity_company_id': None, ...}
+
+    def invoke_read(state, reference, *, issuer=None):
+        projected = reference["schema_version"] == "narrative-ref/2"
+        if projected:
+            reference_request = {
+                "schema_version": "narrative-reference-request/2",
+                "subject_binding": reference["subject_binding"],
+                "generation_sha256": reference["generation_sha256"],
+            }
+            discovery = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    "-m",
+                    "company_wiki.source_catalog.narrative_transport_cli",
+                    "--config",
+                    str(state.config_path),
+                    "--operation",
+                    "reference",
+                ],
+                input=encoded(reference_request),
+                cwd=state.root,
+                env=subprocess_env(),
+                capture_output=True,
+                timeout=30,
+            )
+            assert discovery.returncode == 0, discovery.stderr.decode(errors="replace")
+            assert json.loads(discovery.stdout) == reference, (
+                "public discovery must use exact subject/generation, never shared anchor latest"
+            )
+            assert json.loads(discovery.stderr)["status"] == "metadata_only"
+        wire = {
+            "schema_version": "narrative-read-request/2"
+            if projected
+            else "narrative-read-request/1",
+            "narrative_ref": reference,
+            "as_of_date": "2026-10-08",
+        }
+        if projected:
+            wire["expected_issuer"] = issuer
+        else:
+            wire["expected_source"] = {
+                key: None
+                for key in (
+                    "canonical_entity_id",
+                    "market",
+                    "security_id",
+                    "document_kind",
+                    "fiscal_year",
+                    "fiscal_period",
+                )
+            }
+        process = subprocess.run(
+            [
+                sys.executable,
+                "-B",
+                "-m",
+                "company_wiki.source_catalog.narrative_transport_cli",
+                "--config",
+                str(state.config_path),
+                "--operation",
+                "read",
+            ],
+            input=encoded(wire),
+            cwd=state.root,
+            env=subprocess_env(),
+            capture_output=True,
+            timeout=45,
+        )
+>       assert process.returncode == 0, (process.stderr.decode(errors="replace"), reference)
+               ^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: ('{"reason":"invalid_request","schema_version":"narrative-read-receipt/1","status":"blocked"}\n', {'artifact_sha256': 'ade9c683e5de47ea43d80308fa8e0f0af4cef9f1ffc69d374bd3e90fc7e6609d', 'artifact_version_id': 'narrative-94b95aac70b243f09e36d4ba0711e04f', 'byte_size': 13233, 'generation_sha256': 'd135c05bc2cec6baa99e0a892d24c43847732e90f31e41b9d07d71221037c431', 'schema_version': 'narrative-ref/2', 'subject_binding': {'adapter': {'layout_fingerprint': '8bd33122aba90026cecba77077f889d4d96084bff614fdebd2b2ae13f31c9eb8', 'layout_id': 'official-paged-qa', 'layout_version': '1.0.0', 'parser': 'cwp_official_json/1.0.1', 'structure_parser_version': '1.0.1'}, 'as_of_date': '2026-10-08', 'coverage': {'as_of_excluded_records': 0, 'conflicting_record_ids': 0, 'diagnostics': [], 'duplicate_record_occurrences': 0, 'issuer_records_selected': 2, 'missing_record_ids': 0, 'other_issuer_records': 2, 'page_envelope_complete': True, 'pages': [{'byte_size': 1216, 'content_sha256': '0d678613fbc9f21530ba0f1cd5ef2764b17c4d37cb5c5bf513e746fbced70e81', 'envelope_status': 'ok', 'pagination': {'current': 1, 'pages': 2, 'size': 2, 'total': 4}, 'records': 2}, {'byte_size': 1216, 'content_sha256': 'f8c3fa57ceaac0e31e1d2189c4cacf6e6a5bafe01beb1b6ce12d74023945cc52', 'envelope_status': 'ok', 'pagination': {'current': 2, 'pages': 2, 'size': 2, 'total': 4}, 'records': 2}], 'pagination_complete': True, 'total_records': 4, 'unattributed_records': 0, 'unique_record_ids': 4}, 'issuer': {'canonical_name': None, 'entity_name': None, 'market': None, 'provider_activity_company_id': None, 'provider_company_id': 1, 'security_id': None}, 'item_key': 'urn:company-wiki:source-projection:sha256:8947fe14c922259cbf69209c9ddbadcf9b45a1f167bf437b181ec5405b999809', 'kind': 'official_json', 'parent_source_refs': [{'byte_size': 1216, 'content_sha256': '0d678613fbc9f21530ba0f1cd5ef2764b17c4d37cb5c5bf513e746fbced70e81', 'document_id': 'urn:company-wiki:document:sha256:0d678613fbc9f21530ba0f1cd5ef2764b17c4d37cb5c5bf513e746fbced70e81', 'mime_type': 'application/json', 'schema_version': '2.0', 'source_id': 'urn:company-wiki:source:sha256:0d678613fbc9f21530ba0f1cd5ef2764b17c4d37cb5c5bf513e746fbced70e81'}, {'byte_size': 1216, 'content_sha256': 'f8c3fa57ceaac0e31e1d2189c4cacf6e6a5bafe01beb1b6ce12d74023945cc52', 'document_id': 'urn:company-wiki:document:sha256:f8c3fa57ceaac0e31e1d2189c4cacf6e6a5bafe01beb1b6ce12d74023945cc52', 'mime_type': 'application/json', 'schema_version': '2.0', 'source_id': 'urn:company-wiki:source:sha256:f8c3fa57ceaac0e31e1d2189c4cacf6e6a5bafe01beb1b6ce12d74023945cc52'}], 'subject_sha256': '8947fe14c922259cbf69209c9ddbadcf9b45a1f167bf437b181ec5405b999809'}})
+
+tests\support\official_json_batch_fixture.py:483: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/integration/test_official_json_batch_e2e.py::test_public_mixed_batch_has_real_three_job_flow_resume_reuse_refresh_and_restores_originals
+FAILED tests/integration/test_official_json_batch_e2e.py::test_mixed_batch_only_missing_items_pay_and_keeps_preexisting_projection_pin
+2 failed, 3 passed in 50.52s
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-222922-ef956925", "existed": true, "removed": true}

@@ -2,7 +2,12 @@
 
 from __future__ import annotations
 import json
+import math
+from collections.abc import Mapping, Sequence
 from typing import Any
+from urllib.parse import urlsplit
+
+from company_wiki.narrative_subject import NarrativeSubject
 from .models import canonical_json_hash
 from .narrative_contracts import (
     NarrativeBundle,
@@ -52,6 +57,10 @@ def generation_manifest(
         "reasoning_split",
     )
     effective_model = {key: model[key] for key in generation_fields if key in model}
+    # An omitted/null effort preserves historical generation identity.
+    # Explicit effort affects the real HTTP request and must invalidate reuse.
+    if model.get("reasoning_effort") is not None:
+        effective_model["reasoning_effort"] = model["reasoning_effort"]
     effective_model["output_token_field"] = model.get(
         "output_token_field", "max_tokens"
     )
@@ -81,6 +90,233 @@ def generation_manifest(
         assert_no_physical_paths(parser_components)
         result["parser_components"] = json.loads(json.dumps(parser_components))
     return result
+
+
+def _projection_identity_json(value: Any) -> Any:
+    """Detach finite, compact semantic JSON without storing original records."""
+    from .narrative_contracts import assert_no_physical_paths
+
+    forbidden = {
+        "api_key",
+        "api_key_env",
+        "api_token",
+        "access_token",
+        "authorization",
+        "password",
+        "secret",
+        "credentials",
+        "evidence_spans",
+        "raw_text",
+    }
+
+    def plain(child: Any) -> Any:
+        if isinstance(child, Mapping):
+            output = {}
+            for key, item in child.items():
+                if not isinstance(key, str) or key.lower() in forbidden:
+                    raise ValueError(
+                        "projection generation contains non-semantic or secret fields"
+                    )
+                # Source coverage legitimately has integer per-page record counts.
+                # Lists/objects under this name would copy the full projection.
+                if key == "records" and type(item) is not int:
+                    raise ValueError(
+                        "projection generation cannot contain original records"
+                    )
+                output[key] = plain(item)
+            return output
+        if isinstance(child, Sequence) and not isinstance(child, (str, bytes)):
+            return [plain(item) for item in child]
+        if isinstance(child, str) and child.startswith(("/", "~/", "~\\")):
+            raise ValueError("projection generation cannot contain filesystem paths")
+        return child
+
+    try:
+        assert_no_physical_paths(value)
+        detached = plain(value)
+        encoded = json.dumps(
+            detached,
+            sort_keys=True,
+            ensure_ascii=False,
+            separators=(",", ":"),
+            allow_nan=False,
+        )
+        encoded.encode("utf-8")
+        return json.loads(encoded)
+    except (TypeError, ValueError, RecursionError, UnicodeError) as exc:
+        raise ValueError(
+            "projection generation must be finite pathless compact JSON"
+        ) from exc
+
+
+def _projection_identity_text(value: Any, name: str) -> str:
+    if not isinstance(value, str) or not value or value.strip() != value:
+        raise ValueError(f"projection generation {name} must be nonempty trimmed text")
+    return value
+
+
+def _projection_effective_model(options: Mapping[str, Any]) -> dict[str, Any]:
+    """Bind exactly the fields emitted by the existing HTTP generation adapter."""
+    model_id = _projection_identity_text(options.get("model_id"), "model_id")
+    endpoint = _projection_identity_text(options.get("endpoint"), "endpoint")
+    try:
+        parsed = urlsplit(endpoint)
+        if (
+            parsed.scheme not in {"http", "https"}
+            or not parsed.hostname
+            or parsed.username is not None
+            or parsed.password is not None
+            or "?" in endpoint
+            or "#" in endpoint
+            or any(char.isspace() for char in endpoint)
+        ):
+            raise ValueError("invalid endpoint")
+        parsed.port  # Validate malformed/out-of-range ports without opening a connection.
+    except ValueError as exc:
+        raise ValueError(
+            "projection generation requires a credential-free HTTP endpoint"
+        ) from exc
+    limit = options.get("max_output_tokens")
+    if type(limit) is not int or limit <= 0:
+        raise ValueError(
+            "projection generation max_output_tokens must be a positive integer"
+        )
+    token_field = options.get("output_token_field", "max_tokens")
+    if not isinstance(token_field, str) or token_field not in {
+        "max_tokens",
+        "max_completion_tokens",
+    }:
+        raise ValueError("projection generation output_token_field is unsupported")
+    result = {
+        "model_id": model_id,
+        "endpoint": endpoint,
+        "max_output_tokens": limit,
+        "output_token_field": token_field,
+    }
+    for key in ("thinking", "reasoning_effort", "temperature", "reasoning_split"):
+        value = options.get(key)
+        if value is None:
+            continue  # The HTTP adapter omits null optional generation fields.
+        if key == "thinking" and (
+            not isinstance(value, str) or value not in {"enabled", "disabled", "adaptive"}
+        ):
+            raise ValueError("projection generation thinking is unsupported")
+        if key == "reasoning_effort" and (
+            not isinstance(value, str) or value not in {"low", "high", "max"}
+        ):
+            raise ValueError("projection generation reasoning_effort is unsupported")
+        if key == "temperature" and (
+            isinstance(value, bool)
+            or not isinstance(value, (int, float))
+            or not math.isfinite(value)
+            or not 0 <= value <= 2
+        ):
+            raise ValueError(
+                "projection generation temperature must be finite within [0, 2]"
+            )
+        if key == "reasoning_split" and type(value) is not bool:
+            raise ValueError("projection generation reasoning_split must be boolean")
+        result[key] = value
+    return result
+
+
+def projection_generation_manifest(
+    request: Any,
+    subject: NarrativeSubject,
+    *,
+    language: str,
+    execution_versions: Mapping[str, Any],
+    bundle_producer: str,
+    narrative_adapter_version: str,
+    source_metadata: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Bind one official projection's semantic generation inputs.
+
+    Source identity is a detached neutral binding, not current-byte proof.
+    The source port owns that verification. Explicit projection prompt/handler
+    identities come from the caller; raw-global versions are never substituted.
+    Runtime caps, credential names and unrelated raw parsers are not content
+    inputs. Historical raw generations with omitted effort retain their identity.
+    """
+    if not isinstance(subject, NarrativeSubject) or subject.kind != "official_json":
+        raise ValueError("projection generation requires an official JSON subject")
+    if not isinstance(language, str) or language not in {
+        "zh",
+        "en",
+        "mixed",
+        "unknown",
+    }:
+        raise ValueError("projection generation language is unsupported")
+    profile = _projection_identity_text(request.profile, "profile")
+    if profile not in {"P1", "P2", "P4"}:
+        raise ValueError("projection generation profile is unsupported")
+    if not isinstance(execution_versions, Mapping):
+        raise ValueError("projection generation execution_versions must be a mapping")
+    versions = dict(execution_versions)
+    versions.pop("parser", None)
+    versions.pop("document_normalization", None)
+    for key in ("selector", "adapter", "prompt"):
+        _projection_identity_text(versions.get(key), key)
+    for key in ("model_request_schema",):
+        if key in versions:
+            _projection_identity_text(versions[key], key)
+    if "handlers" in versions and (
+        not isinstance(versions["handlers"], Mapping)
+        or any(
+            not isinstance(key, str)
+            or not isinstance(value, str)
+            or not value
+            or value.strip() != value
+            for key, value in versions["handlers"].items()
+        )
+    ):
+        raise ValueError("projection generation handler versions must be explicit text")
+    binding = _projection_identity_json(subject.to_dict())
+    source_adapter = binding["adapter"]
+    for key in (
+        "parser",
+        "structure_parser_version",
+        "layout_id",
+        "layout_version",
+        "layout_fingerprint",
+    ):
+        _projection_identity_text(source_adapter.get(key), key)
+    parser_name, separator, parser_version = source_adapter["parser"].rpartition("/")
+    if not separator or not parser_name or not parser_version:
+        raise ValueError(
+            "projection generation source parser must include its producer version"
+        )
+    if not isinstance(request.model_options, Mapping):
+        raise ValueError("projection generation model_options must be a mapping")
+    result = {
+        "schema_version": "narrative-generation/2",
+        "subject_binding": binding,
+        "source_adapter": source_adapter,
+        "language": language,
+        "execution_versions": versions,
+        "bundle_schema": "narrative-bundle/3.0",
+        "select_schema": "narrative-select-result/3.0",
+        "summary_schema": "narrative-summary-result/3.0",
+        "parser_component": {"name": parser_name, "version": parser_version},
+        "bundle_producer": _projection_identity_text(
+            bundle_producer, "bundle_producer"
+        ),
+        "narrative_adapter_version": _projection_identity_text(
+            narrative_adapter_version, "narrative_adapter_version"
+        ),
+        "profile": profile,
+        "model": _projection_effective_model(request.model_options),
+    }
+    if source_metadata is not None:
+        from .narrative_contracts import SourceMetadataValue
+
+        metadata = SourceMetadataValue.from_dict(
+            source_metadata, projected=True
+        ).to_dict()
+        if metadata["language"] != language:
+            raise ValueError("projection generation metadata language differs")
+        result["source_metadata"] = metadata
+    return _projection_identity_json(result)
 
 
 def generation_sha256(manifest):

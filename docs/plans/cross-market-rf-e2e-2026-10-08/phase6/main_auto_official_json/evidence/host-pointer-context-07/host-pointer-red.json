@@ -1,0 +1,29 @@
+{
+  "stage": "RED",
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "-p",
+    "pytest_timeout",
+    "-p",
+    "pytest_asyncio.plugin",
+    "-o",
+    "addopts=",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-host-pointer-red-81l73v_8\\pytest",
+    "tests/contract/test_fc1307_host_assumption_gate.py",
+    "-k",
+    "json_pointer"
+  ],
+  "exit_code": 1,
+  "elapsed_seconds": 2.773,
+  "external_provider_calls": 0,
+  "baseline_modified": false
+}

@@ -1,0 +1,31 @@
+{
+  "phase": "RED",
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-p",
+    "pytest_timeout",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-adapter-red-ckxbtuzf\\pytest",
+    "-q",
+    "--disable-warnings",
+    "tests/unit/test_official_json_narrative_adapter.py",
+    "tests/integration/test_official_json_narrative_adapter.py"
+  ],
+  "exit_code": 2,
+  "duration_seconds": 3.248,
+  "temp_removed": true,
+  "source_implementation_present": false,
+  "external_provider_calls": 0,
+  "external_model_calls": 0,
+  "new_cost_usd": 0,
+  "captured_output_sha256": "d5d59b50c80567db214c412fa2373657782f2e54ab746722a880e5c20fdc4441",
+  "log_sha256": "cc63af1a03b8966a1afb631777184969856b2aac0a437a055890b62abbeb3799",
+  "log_file": "red.log"
+}

@@ -1,0 +1,86 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-canonical-shape-red-xgyozb72\\pytest", "requested_basetemp_len": 71, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-224758-5092049b", "effective_basetemp_len": 75}
+FF.                                                                      [100%]
+================================== FAILURES ===================================
+_ test_public_project_refuses_unsupported_version_without_persisting_or_processing[list] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-224758-5092049b/test_public_project_refuses_un0')
+projection_version = []
+
+    @pytest.mark.parametrize(
+        "projection_version",
+        [
+            pytest.param("9.9.9", id="unsupported"),
+            pytest.param([], id="list"),
+            pytest.param({}, id="dict"),
+            pytest.param(None, id="null"),
+        ],
+    )
+    def test_public_project_refuses_unsupported_version_without_persisting_or_processing(
+        tmp_path,
+        projection_version,
+    ):
+        with official_batch_state(tmp_path) as state:
+            catalog_dir = Path(state.catalog.config.catalog_dir)
+            before = {path: path.read_bytes() for path in catalog_dir.rglob("*.json")}
+            process = official(
+                state,
+                "project",
+                {
+                    "schema_version": "official-json-projection-request/1",
+                    "parent_source_refs": list(state.parent_refs),
+                    "layout_id": "official-paged-qa",
+                    "issuer": {"provider_company_id": 1},
+                    "as_of_date": "2026-10-08",
+                    "persist": True,
+                    "projection_version": projection_version,
+                },
+            )
+>           assert process.returncode == 2 and process.stdout == b""
+E           AssertionError: assert (1 == 2)
+E            +  where 1 = CompletedProcess(args=['C:\\Miniconda\\python.exe', '-X', 'utf8', '-B', '-m', 'company_wiki.source_catalog.cli', 'offi...:\r\n       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nTypeError: unhashable type: \'list\'\r\n').returncode
+
+tests\integration\test_official_json_canonical_cli_e2e.py:290: AssertionError
+_ test_public_project_refuses_unsupported_version_without_persisting_or_processing[dict] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-224758-5092049b/test_public_project_refuses_un1')
+projection_version = {}
+
+    @pytest.mark.parametrize(
+        "projection_version",
+        [
+            pytest.param("9.9.9", id="unsupported"),
+            pytest.param([], id="list"),
+            pytest.param({}, id="dict"),
+            pytest.param(None, id="null"),
+        ],
+    )
+    def test_public_project_refuses_unsupported_version_without_persisting_or_processing(
+        tmp_path,
+        projection_version,
+    ):
+        with official_batch_state(tmp_path) as state:
+            catalog_dir = Path(state.catalog.config.catalog_dir)
+            before = {path: path.read_bytes() for path in catalog_dir.rglob("*.json")}
+            process = official(
+                state,
+                "project",
+                {
+                    "schema_version": "official-json-projection-request/1",
+                    "parent_source_refs": list(state.parent_refs),
+                    "layout_id": "official-paged-qa",
+                    "issuer": {"provider_company_id": 1},
+                    "as_of_date": "2026-10-08",
+                    "persist": True,
+                    "projection_version": projection_version,
+                },
+            )
+>           assert process.returncode == 2 and process.stdout == b""
+E           AssertionError: assert (1 == 2)
+E            +  where 1 = CompletedProcess(args=['C:\\Miniconda\\python.exe', '-X', 'utf8', '-B', '-m', 'company_wiki.source_catalog.cli', 'offi...:\r\n       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nTypeError: unhashable type: \'dict\'\r\n').returncode
+
+tests\integration\test_official_json_canonical_cli_e2e.py:290: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/integration/test_official_json_canonical_cli_e2e.py::test_public_project_refuses_unsupported_version_without_persisting_or_processing[list]
+FAILED tests/integration/test_official_json_canonical_cli_e2e.py::test_public_project_refuses_unsupported_version_without_persisting_or_processing[dict]
+2 failed, 1 passed in 10.48s
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-224758-5092049b", "existed": true, "removed": true}

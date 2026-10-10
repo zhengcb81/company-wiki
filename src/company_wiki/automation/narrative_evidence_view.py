@@ -94,66 +94,121 @@ class NarrativeEvidenceViewReader:
         self._transport = transport
 
     def read(
-        self, request: NarrativeReadRequest, query: NarrativeEvidenceViewQuery,
+        self,
+        request: NarrativeReadRequest,
+        query: NarrativeEvidenceViewQuery,
     ) -> NarrativeTransportRead:
         if not isinstance(query, NarrativeEvidenceViewQuery):
             raise ValueError("a validated evidence view query is required")
         verified = self._transport.read(request)
         bundle = NarrativeBundle.from_dict(json.loads(verified.data))
         items = self._items(bundle, query)
+        projected = bundle.subject.kind == "official_json"
         view = {
-            "schema_version": EVIDENCE_VIEW_SCHEMA, "operation": query.operation,
+            "schema_version": "narrative-evidence-view/2"
+            if projected
+            else EVIDENCE_VIEW_SCHEMA,
+            "operation": query.operation,
             "narrative_ref": request.narrative_ref.to_dict(),
             "source_metadata": bundle.source_metadata.to_dict(),
-            "manifest": verified.receipt["manifest"],
-            "selection": bundle.selection.to_dict(), "quality_status": bundle.quality_status,
-            "versions": bundle.versions.to_dict(), "total": len(items),
-            "limit": query.page_limit, "offset": query.page_offset,
-            "items": items[query.page_offset:query.page_offset + query.page_limit],
+            **(
+                {
+                    "subject_binding": bundle.subject.to_dict(),
+                    "parent_source_refs": list(bundle.subject.parent_source_refs),
+                }
+                if projected
+                else {"manifest": verified.receipt["manifest"]}
+            ),
+            "selection": bundle.selection.to_dict(),
+            "quality_status": bundle.quality_status,
+            "versions": bundle.versions.to_dict(),
+            "total": len(items),
+            "limit": query.page_limit,
+            "offset": query.page_offset,
+            "items": items[query.page_offset : query.page_offset + query.page_limit],
         }
         data = canonical_json(view).encode("utf-8")
         if len(data) > MAX_EVIDENCE_VIEW_BYTES:
             raise NarrativeTransportError("blocked", "evidence_view_too_large")
         receipt = {
-            "schema_version": EVIDENCE_VIEW_RECEIPT_SCHEMA, "status": "ok",
-            "view_sha256": hashlib.sha256(data).hexdigest(), "byte_size": len(data),
-            "narrative_ref": request.narrative_ref.to_dict(), "as_of_date": request.as_of_date,
-            "source_read_policy_sha256": verified.receipt["source_read_policy_sha256"],
+            "schema_version": "narrative-evidence-read-receipt/2"
+            if projected
+            else EVIDENCE_VIEW_RECEIPT_SCHEMA,
+            "status": "ok",
+            "view_sha256": hashlib.sha256(data).hexdigest(),
+            "byte_size": len(data),
+            "narrative_ref": request.narrative_ref.to_dict(),
+            "as_of_date": request.as_of_date,
+            **(
+                {"observed_at": verified.receipt["observed_at"]}
+                if projected
+                else {
+                    "source_read_policy_sha256": verified.receipt[
+                        "source_read_policy_sha256"
+                    ]
+                }
+            ),
             "replay_status": verified.receipt["replay_status"],
             "locator_count": verified.receipt["locator_count"],
         }
         return NarrativeTransportRead(data=data, receipt=receipt)
 
     @staticmethod
-    def _items(bundle: NarrativeBundle, query: NarrativeEvidenceViewQuery) -> list[dict[str, Any]]:
+    def _items(
+        bundle: NarrativeBundle, query: NarrativeEvidenceViewQuery
+    ) -> list[dict[str, Any]]:
         if query.operation == "evidence-lookup":
             matches = [
-                span for span in bundle.evidence_spans
+                span
+                for span in bundle.evidence_spans
                 if (query.span_id is not None and span.span_id == query.span_id)
                 or (query.locator is not None and span.locator == query.locator)
             ]
             if not matches:
-                raise NarrativeTransportError("not_found", "narrative_evidence_not_found")
+                raise NarrativeTransportError(
+                    "not_found", "narrative_evidence_not_found"
+                )
             if len(matches) != 1:
-                raise NarrativeTransportError("unavailable", "narrative_evidence_ambiguous")
+                raise NarrativeTransportError(
+                    "unavailable", "narrative_evidence_ambiguous"
+                )
             return [matches[0].to_dict()]
         if query.operation == "evidence-list":
             return [span.to_dict() for span in bundle.evidence_spans]
-        search = NarrativeEvidenceSearch({
-            "schema_version": NARRATIVE_EVIDENCE_BUNDLE_SCHEMA_VERSION,
-            "sources": [{
-                "selection_status": bundle.selection.status,
-                "coverage_complete": bundle.selection.coverage_complete,
-                "summary_input": selected_summary_input(
-                    source_id=bundle.source_ref.source_id,
-                    source_sha256=bundle.source_ref.content_sha256,
-                    document_kind=bundle.source_metadata.document_kind,
-                    evidence_spans=bundle.evidence_spans,
-                ),
-            }],
-        })
+        # Index each true parent independently. A projection is a logical
+        # subject, so it must never turn the first parent into every hit's source.
+        parents = {
+            (ref["source_id"], ref["content_sha256"]): ref
+            for ref in bundle.subject.parent_source_refs
+        }
+        search = NarrativeEvidenceSearch(
+            {
+                "schema_version": NARRATIVE_EVIDENCE_BUNDLE_SCHEMA_VERSION,
+                "sources": [
+                    {
+                        "selection_status": bundle.selection.status,
+                        "coverage_complete": bundle.selection.coverage_complete,
+                        "summary_input": selected_summary_input(
+                            source_id=source_id,
+                            source_sha256=sha,
+                            document_kind=bundle.source_metadata.document_kind,
+                            evidence_spans=tuple(
+                                span
+                                for span in bundle.evidence_spans
+                                if span.source_id == source_id
+                            ),
+                        ),
+                    }
+                    for source_id, sha in parents
+                ],
+            }
+        )
         assert query.query is not None
         # Count all matches in this one bounded final, then take the requested page.
-        return [hit.to_dict() for hit in search.search(
-            query.query, limit=max(1, search.indexed_group_count),
-        )]
+        return [
+            hit.to_dict()
+            for hit in search.search(
+                query.query,
+                limit=max(1, search.indexed_group_count),
+            )
+        ]

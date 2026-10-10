@@ -6,11 +6,13 @@ from dataclasses import asdict, dataclass
 from typing import Any, Mapping
 
 from company_wiki._id_scope import normalize_id_scope
+from company_wiki.narrative_subject import NarrativeSubject
 
 from .models import require_sha256
 
 
 TERMINAL_RECEIPT_SCHEMA = "narrative-terminal-receipt/1.0"
+PROJECTED_TERMINAL_RECEIPT_SCHEMA = "narrative-terminal-receipt/2.0"
 
 
 @dataclass(frozen=True)
@@ -22,6 +24,8 @@ class FinalArtifactPin:
     document_id: str
     source_id: str
     source_sha256: str
+    subject_binding: NarrativeSubject | None = None
+    generation_sha256: str | None = None
 
     def __post_init__(self) -> None:
         for name in ("effect_id", "artifact_version_id", "document_id", "source_id"):
@@ -33,8 +37,29 @@ class FinalArtifactPin:
         if type(self.byte_size) is not int or not 0 < self.byte_size <= 2 * 1024 * 1024:
             raise ValueError("byte_size must be a positive bounded final artifact size")
 
+        if self.subject_binding is not None:
+            if not isinstance(self.subject_binding, NarrativeSubject) or self.subject_binding.kind != "official_json":
+                raise ValueError("projected final pin requires an official JSON subject")
+            if self.generation_sha256 is None:
+                raise ValueError("projected final pin requires a generation SHA")
+            require_sha256(self.generation_sha256, field_name="generation_sha256")
+            anchor = self.subject_binding.anchor_ref
+            if (self.document_id, self.source_id, self.source_sha256) != (
+                    anchor["document_id"], anchor["source_id"], anchor["content_sha256"]):
+                raise ValueError("final pin anchor differs from its actual parent")
+        elif self.generation_sha256 is not None:
+            raise ValueError("generation SHA requires a projected final subject")
+
     def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
+        if self.subject_binding is not None:
+            return {"effect_id": self.effect_id, "artifact_version_id": self.artifact_version_id,
+                    "artifact_sha256": self.artifact_sha256, "byte_size": self.byte_size,
+                    "subject_binding": self.subject_binding.to_dict(),
+                    "generation_sha256": self.generation_sha256}
+        value = asdict(self)
+        value.pop("subject_binding")
+        value.pop("generation_sha256")
+        return value
 
 
 @dataclass(frozen=True)
@@ -56,7 +81,7 @@ def terminal_job_scope(job_ids: tuple[str, ...]) -> tuple[str, ...]:
 
 
 def is_terminal_receipt(result: Mapping[str, Any]) -> bool:
-    return result.get("schema_version") == TERMINAL_RECEIPT_SCHEMA
+    return result.get("schema_version") in {TERMINAL_RECEIPT_SCHEMA, PROJECTED_TERMINAL_RECEIPT_SCHEMA}
 
 
-__all__ = ["FinalArtifactPin", "TerminalCompactionResult", "TERMINAL_RECEIPT_SCHEMA"]
+__all__ = ["FinalArtifactPin", "TerminalCompactionResult", "TERMINAL_RECEIPT_SCHEMA", "PROJECTED_TERMINAL_RECEIPT_SCHEMA"]

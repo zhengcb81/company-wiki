@@ -34,7 +34,9 @@ class ExecutionSnapshotStore(Protocol):
 
 def _freeze_json(value: Any) -> Any:
     if isinstance(value, dict):
-        return MappingProxyType({key: _freeze_json(child) for key, child in value.items()})
+        return MappingProxyType(
+            {key: _freeze_json(child) for key, child in value.items()}
+        )
     if isinstance(value, list):
         return tuple(_freeze_json(child) for child in value)
     return value
@@ -104,7 +106,9 @@ def _dependency_mapping(snapshot: ExecutionSnapshot) -> dict[str, HandlerResult]
     values: dict[str, HandlerResult] = {}
     for dependency in snapshot.dependencies:
         if dependency.job_type in values:
-            raise ExecutionContextError("narrative dependencies contain duplicate job types")
+            raise ExecutionContextError(
+                "narrative dependencies contain duplicate job types"
+            )
         values[dependency.job_type] = dependency.result
     return values
 
@@ -126,14 +130,23 @@ def _source_revision(
     try:
         parsed = SourceRevisionEventPayload.from_dict(payload)
     except NarrativeContractError as exc:
-        raise ExecutionContextError(f"source revision payload is invalid: {exc}") from exc
+        raise ExecutionContextError(
+            f"source revision payload is invalid: {exc}"
+        ) from exc
     if (
         event.event_type != "source.revision_registered"
-        or event.subject_type != "source_revision"
-        or event.subject_id != parsed.source_ref.document_id
+        or event.subject_type
+        != (
+            "narrative_subject"
+            if parsed.subject.kind == "official_json"
+            else "source_revision"
+        )
+        or event.subject_id != parsed.item_key
         or event.input_hash != parsed.input_hash
     ):
-        raise ExecutionContextError("source revision event identity differs from payload")
+        raise ExecutionContextError(
+            "source revision event identity differs from payload"
+        )
     return parsed
 
 

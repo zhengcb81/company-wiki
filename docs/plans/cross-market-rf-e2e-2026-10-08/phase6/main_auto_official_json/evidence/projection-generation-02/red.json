@@ -1,0 +1,24 @@
+{
+  "phase": "RED",
+  "argv": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "-p",
+    "pytest_timeout",
+    "tests/unit/test_official_json_projection_generation.py",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-projection-generation-red-1sxuhll_\\pytest"
+  ],
+  "exit_code": 1,
+  "expected_exit_code": 1,
+  "external_provider_calls": 0,
+  "external_model_calls": 0,
+  "owned_temp_removed": true
+}

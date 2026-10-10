@@ -246,3 +246,17 @@ def test_new_control_locators_are_measured_and_legacy_storage_baseline_is_not_re
         _request(), catalog, tmp_path / "auto.sqlite", work, digest, read_only=True
     )
     assert len(old_guard.paths) == 8 and legacy.read_bytes() == original
+
+
+def test_raw_reasoning_effort_is_causal_without_resigning_legacy_omissions():
+    request = _request()
+    model = request.model_options
+    model.pop("reasoning_effort", None)
+    omitted = replace(request, model_options_json=canonical_json(model))
+    old = manifest(omitted)
+    null = replace(omitted, model_options_json=canonical_json({**model, "reasoning_effort": None}))
+    assert manifest(null) == old
+    low = manifest(replace(omitted, model_options_json=canonical_json({**model, "reasoning_effort": "low"})))
+    high = manifest(replace(omitted, model_options_json=canonical_json({**model, "reasoning_effort": "high"})))
+    assert low["model"]["reasoning_effort"] == "low"
+    assert low != high and low != old

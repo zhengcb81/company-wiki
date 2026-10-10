@@ -1,0 +1,1460 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+FFFFFFFFFFFFFFFFFFFFFFFF...........................................      [100%]
+================================== FAILURES ===================================
+___ test_shared_projection_versions_never_pollute_legacy_raw_reads[missing] ___
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_shared_projection_version0')
+raw_binding = 'missing'
+
+    @pytest.mark.parametrize("raw_binding", ["missing", "null", "raw"])
+    def test_shared_projection_versions_never_pollute_legacy_raw_reads(tmp_path, raw_binding):
+        with owned_state(tmp_path) as state:
+            raw = NarrativeSubject.from_raw(state.refs[0])
+            label = "raw"
+            generation = digest((label + "-generation").encode())
+            metadata = {"generation_sha256": generation}
+            if raw_binding != "missing":
+                metadata["subject_binding"] = None if raw_binding == "null" else raw.to_dict()
+            old, _, old_payload = publish(state, raw, label, metadata_override=metadata)
+            a, _, _ = publish(state, state.subjects[0], "project-a",
+                metadata_override={"subject_binding": state.subjects[0].to_dict(), "generation_sha256": generation})
+            publish(state, state.subjects[1], "project-b")
+            anchor = raw.anchor_ref
+            kwargs = dict(document_id=anchor["document_id"], source_id=anchor["source_id"],
+                source_sha256=anchor["content_sha256"])
+            with readers(state) as accessors:
+                for accessor in accessors:
+                    assert accessor.latest_visible_version(**kwargs).artifact_version_id == old.artifact_version_id
+                    assert accessor.read_exact(artifact_version_id=old.artifact_version_id, **kwargs)[1] == old_payload
+                    with pytest.raises(NarrativeArtifactNotVisibleError):
+                        accessor.read_exact(artifact_version_id=a.artifact_version_id, **kwargs)
+>               assert accessors[1].visible_generation_candidates(generation_sha256=generation, **kwargs) == (old,)
+E               AssertionError: assert (NarrativeArt...T00:00:01Z'),) == (NarrativeArt...ted_at=None),)
+E                 
+E                 At index 0 diff: NarrativeArtifactVersion(artifact_version_id='narrative-d721f22fa5924499acb1c01b4fb1886a', work_key='d7439bee24773bcbfa2d0a97947ee36227b10d1022b1a55847e928965bb6bfde', effect_id='raw', document_id='urn:company-wiki:document:sha256:0a64a5447a23690f0dfa84e3afb987da04a1f58b6d1c440a22ed310bda0039e2', source_id='urn:company-wiki:source:sha256:0a64a5447a23690f0dfa84e3afb987da04a1f58b6d1c440a22ed310bda0039e2', source_sha256='0a64a5447a23690f0dfa84e3afb987da04a1f58b6d1c440a22ed310bda0039e2', artifact_role='narrative_bundle', object_key='objects/sha256/61/614d8d...
+E                 
+E                 ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests\integration\test_official_json_subject_artifacts.py:139: AssertionError
+____ test_shared_projection_versions_never_pollute_legacy_raw_reads[null] _____
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_shared_projection_version1')
+raw_binding = 'null'
+
+    @pytest.mark.parametrize("raw_binding", ["missing", "null", "raw"])
+    def test_shared_projection_versions_never_pollute_legacy_raw_reads(tmp_path, raw_binding):
+        with owned_state(tmp_path) as state:
+            raw = NarrativeSubject.from_raw(state.refs[0])
+            label = "raw"
+            generation = digest((label + "-generation").encode())
+            metadata = {"generation_sha256": generation}
+            if raw_binding != "missing":
+                metadata["subject_binding"] = None if raw_binding == "null" else raw.to_dict()
+            old, _, old_payload = publish(state, raw, label, metadata_override=metadata)
+            a, _, _ = publish(state, state.subjects[0], "project-a",
+                metadata_override={"subject_binding": state.subjects[0].to_dict(), "generation_sha256": generation})
+            publish(state, state.subjects[1], "project-b")
+            anchor = raw.anchor_ref
+            kwargs = dict(document_id=anchor["document_id"], source_id=anchor["source_id"],
+                source_sha256=anchor["content_sha256"])
+            with readers(state) as accessors:
+                for accessor in accessors:
+                    assert accessor.latest_visible_version(**kwargs).artifact_version_id == old.artifact_version_id
+                    assert accessor.read_exact(artifact_version_id=old.artifact_version_id, **kwargs)[1] == old_payload
+                    with pytest.raises(NarrativeArtifactNotVisibleError):
+                        accessor.read_exact(artifact_version_id=a.artifact_version_id, **kwargs)
+>               assert accessors[1].visible_generation_candidates(generation_sha256=generation, **kwargs) == (old,)
+E               AssertionError: assert (NarrativeArt...T00:00:01Z'),) == (NarrativeArt...ted_at=None),)
+E                 
+E                 At index 0 diff: NarrativeArtifactVersion(artifact_version_id='narrative-a8cb8d8a871e4d35aded37d2a9006396', work_key='d7439bee24773bcbfa2d0a97947ee36227b10d1022b1a55847e928965bb6bfde', effect_id='raw', document_id='urn:company-wiki:document:sha256:0a64a5447a23690f0dfa84e3afb987da04a1f58b6d1c440a22ed310bda0039e2', source_id='urn:company-wiki:source:sha256:0a64a5447a23690f0dfa84e3afb987da04a1f58b6d1c440a22ed310bda0039e2', source_sha256='0a64a5447a23690f0dfa84e3afb987da04a1f58b6d1c440a22ed310bda0039e2', artifact_role='narrative_bundle', object_key='objects/sha256/61/614d8d...
+E                 
+E                 ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests\integration\test_official_json_subject_artifacts.py:139: AssertionError
+_____ test_shared_projection_versions_never_pollute_legacy_raw_reads[raw] _____
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_shared_projection_version2')
+raw_binding = 'raw'
+
+    @pytest.mark.parametrize("raw_binding", ["missing", "null", "raw"])
+    def test_shared_projection_versions_never_pollute_legacy_raw_reads(tmp_path, raw_binding):
+        with owned_state(tmp_path) as state:
+            raw = NarrativeSubject.from_raw(state.refs[0])
+            label = "raw"
+            generation = digest((label + "-generation").encode())
+            metadata = {"generation_sha256": generation}
+            if raw_binding != "missing":
+                metadata["subject_binding"] = None if raw_binding == "null" else raw.to_dict()
+            old, _, old_payload = publish(state, raw, label, metadata_override=metadata)
+            a, _, _ = publish(state, state.subjects[0], "project-a",
+                metadata_override={"subject_binding": state.subjects[0].to_dict(), "generation_sha256": generation})
+            publish(state, state.subjects[1], "project-b")
+            anchor = raw.anchor_ref
+            kwargs = dict(document_id=anchor["document_id"], source_id=anchor["source_id"],
+                source_sha256=anchor["content_sha256"])
+            with readers(state) as accessors:
+                for accessor in accessors:
+                    assert accessor.latest_visible_version(**kwargs).artifact_version_id == old.artifact_version_id
+                    assert accessor.read_exact(artifact_version_id=old.artifact_version_id, **kwargs)[1] == old_payload
+                    with pytest.raises(NarrativeArtifactNotVisibleError):
+                        accessor.read_exact(artifact_version_id=a.artifact_version_id, **kwargs)
+>               assert accessors[1].visible_generation_candidates(generation_sha256=generation, **kwargs) == (old,)
+E               AssertionError: assert (NarrativeArt...T00:00:01Z'),) == (NarrativeArt...ted_at=None),)
+E                 
+E                 At index 0 diff: NarrativeArtifactVersion(artifact_version_id='narrative-4789c1ff4cf745cdb3668940650eba92', work_key='d7439bee24773bcbfa2d0a97947ee36227b10d1022b1a55847e928965bb6bfde', effect_id='raw', document_id='urn:company-wiki:document:sha256:0a64a5447a23690f0dfa84e3afb987da04a1f58b6d1c440a22ed310bda0039e2', source_id='urn:company-wiki:source:sha256:0a64a5447a23690f0dfa84e3afb987da04a1f58b6d1c440a22ed310bda0039e2', source_sha256='0a64a5447a23690f0dfa84e3afb987da04a1f58b6d1c440a22ed310bda0039e2', artifact_role='narrative_bundle', object_key='objects/sha256/61/614d8d...
+E                 
+E                 ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests\integration\test_official_json_subject_artifacts.py:139: AssertionError
+____ test_exact_subject_and_generation_survive_reopen_without_fake_sources ____
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_exact_subject_and_generat0')
+
+    def test_exact_subject_and_generation_survive_reopen_without_fake_sources(tmp_path):
+        with owned_state(tmp_path) as state:
+            a, b = state.subjects
+            va, ga, pa = publish(state, a, "a-generation-one")
+            va2, ga2, _ = publish(state, a, "a-generation-two")
+            vb, gb, pb = publish(state, b, "b-generation-one")
+            assert va.document_id == vb.document_id == a.anchor_ref["document_id"]
+            assert va.source_id == vb.source_id == a.anchor_ref["source_id"]
+            with readers(state) as accessors:
+                for accessor in accessors:
+>                   assert accessor.visible_subject_generation_candidates(subject=a, generation_sha256=ga) == (va,)
+E                   AssertionError: assert (NarrativeArt...T00:00:01Z'),) == (NarrativeArt...ted_at=None),)
+E                     
+E                     At index 0 diff: NarrativeArtifactVersion(artifact_version_id='narrative-7dbfa55bb219493dba1764b670c86830', work_key='162f84ef87a17531a4029b02535c3396d6192bbefd73ec28ed3a795435354083', effect_id='a-generation-one', document_id='urn:company-wiki:document:sha256:0a64a5447a23690f0dfa84e3afb987da04a1f58b6d1c440a22ed310bda0039e2', source_id='urn:company-wiki:source:sha256:0a64a5447a23690f0dfa84e3afb987da04a1f58b6d1c440a22ed310bda0039e2', source_sha256='0a64a5447a23690f0dfa84e3afb987da04a1f58b6d1c440a22ed310bda0039e2', artifact_role='narrative_bundle', object_key='objects/sha...
+E                     
+E                     ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests\integration\test_official_json_subject_artifacts.py:153: AssertionError
+__ test_nonanchor_parent_change_rejects_every_state_boundary[status-prepare] __
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r0')
+stage = 'prepare', mutation = 'status'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+>       with owned_state(tmp_path) as state:
+             ^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_official_json_subject_artifacts.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Miniconda\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r0')
+
+    @contextmanager
+    def owned_state(tmp_path):
+        before = tuple(tmp_path.iterdir())
+        with TemporaryDirectory(prefix="subject-artifacts-", dir=tmp_path) as name:
+            root = Path(name)
+            (root / "companies").mkdir()
+            catalog = SourceCatalog(CatalogConfig(project_root=root, catalog_dir=root / "catalog",
+                roots=(RootSpec("company_raw", root / "companies", "company_raw"),)))
+            refs, original = [], []
+            try:
+                for page in (1, 2):
+                    body = encoded({"ok": True, "result": {"page": page, "page_size": 2,
+                        "page_count": 2, "item_total": 4, "items": [
+                        {"ref": page * 10 + company, "org_id": company, "org_name": "Company " + str(company),
+                         "q": "New business delivery?", "a": "Q4 delivery", "answered": True,
+                         "created_at": "2026-09-01 10:00:00", "updated_at": "2026-09-01 10:00:00"}
+                        for company in (1, 2)]}})
+                    request = {"schema_version": "official-source-import-request/2",
+                        "request_id": "subject-page-" + str(page), "max_bytes": 1048576,
+                        "content_sha256": digest(body), "mime_type": "application/json",
+                        "document_kind": "investor_relations", "source_subject": {
+                            "kind": "multi_issuer_event", "event_namespace": "fixture",
+                            "event_id": "901", "issuer_refs": [], "attribution_status": "partial"},
+                        "capture_receipt": {"capture_method": "local_document", "tool_name": "synthetic",
+                            "tool_call_id": "page-" + str(page), "captured_at": T0,
+                            "response_bytes": len(body), "content_sha256": digest(body)}}
+                    result = import_official_json_source(catalog, original=body, request=request)
+                    refs.append(result["source_ref"])
+                    original.append(body)
+                subjects = tuple(NarrativeSubject.from_projection(build_projection_from_refs(catalog,
+                    refs=refs, layout_id="official-flat-list", issuer={"provider_company_id": company},
+                    as_of_date="2026-10-08")) for company in (1, 2))
+                objects = LocalNarrativeObjectStore(catalog.config.catalog_dir)
+                artifacts = NarrativeArtifactStore(catalog.store, objects)
+                state = SimpleNamespace(root=root, catalog=catalog, refs=refs, original=original,
+                    subjects=subjects, artifacts=artifacts, objects=objects)
+                yield state
+                files = [p for p in (root / "companies").rglob("*.json") if not p.name.endswith(".source.json")]
+                assert len(files) == 2
+                assert sorted(digest(p.read_bytes()) for p in files) == sorted(digest(b) for b in original)
+                with catalog.store.transaction() as connection:
+                    assert connection.execute("SELECT count(*) FROM documents").fetchone()[0] == 2
+>                   assert connection.execute("SELECT count(*) FROM sources").fetchone()[0] == 2
+E                   assert 4 == 2
+
+tests\integration\test_official_json_subject_artifacts.py:81: AssertionError
+_ test_nonanchor_parent_change_rejects_every_state_boundary[status-activate] __
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r1')
+stage = 'activate', mutation = 'status'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+>       with owned_state(tmp_path) as state:
+             ^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_official_json_subject_artifacts.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Miniconda\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r1')
+
+    @contextmanager
+    def owned_state(tmp_path):
+        before = tuple(tmp_path.iterdir())
+        with TemporaryDirectory(prefix="subject-artifacts-", dir=tmp_path) as name:
+            root = Path(name)
+            (root / "companies").mkdir()
+            catalog = SourceCatalog(CatalogConfig(project_root=root, catalog_dir=root / "catalog",
+                roots=(RootSpec("company_raw", root / "companies", "company_raw"),)))
+            refs, original = [], []
+            try:
+                for page in (1, 2):
+                    body = encoded({"ok": True, "result": {"page": page, "page_size": 2,
+                        "page_count": 2, "item_total": 4, "items": [
+                        {"ref": page * 10 + company, "org_id": company, "org_name": "Company " + str(company),
+                         "q": "New business delivery?", "a": "Q4 delivery", "answered": True,
+                         "created_at": "2026-09-01 10:00:00", "updated_at": "2026-09-01 10:00:00"}
+                        for company in (1, 2)]}})
+                    request = {"schema_version": "official-source-import-request/2",
+                        "request_id": "subject-page-" + str(page), "max_bytes": 1048576,
+                        "content_sha256": digest(body), "mime_type": "application/json",
+                        "document_kind": "investor_relations", "source_subject": {
+                            "kind": "multi_issuer_event", "event_namespace": "fixture",
+                            "event_id": "901", "issuer_refs": [], "attribution_status": "partial"},
+                        "capture_receipt": {"capture_method": "local_document", "tool_name": "synthetic",
+                            "tool_call_id": "page-" + str(page), "captured_at": T0,
+                            "response_bytes": len(body), "content_sha256": digest(body)}}
+                    result = import_official_json_source(catalog, original=body, request=request)
+                    refs.append(result["source_ref"])
+                    original.append(body)
+                subjects = tuple(NarrativeSubject.from_projection(build_projection_from_refs(catalog,
+                    refs=refs, layout_id="official-flat-list", issuer={"provider_company_id": company},
+                    as_of_date="2026-10-08")) for company in (1, 2))
+                objects = LocalNarrativeObjectStore(catalog.config.catalog_dir)
+                artifacts = NarrativeArtifactStore(catalog.store, objects)
+                state = SimpleNamespace(root=root, catalog=catalog, refs=refs, original=original,
+                    subjects=subjects, artifacts=artifacts, objects=objects)
+                yield state
+                files = [p for p in (root / "companies").rglob("*.json") if not p.name.endswith(".source.json")]
+                assert len(files) == 2
+                assert sorted(digest(p.read_bytes()) for p in files) == sorted(digest(b) for b in original)
+                with catalog.store.transaction() as connection:
+                    assert connection.execute("SELECT count(*) FROM documents").fetchone()[0] == 2
+>                   assert connection.execute("SELECT count(*) FROM sources").fetchone()[0] == 2
+E                   assert 4 == 2
+
+tests\integration\test_official_json_subject_artifacts.py:81: AssertionError
+___ test_nonanchor_parent_change_rejects_every_state_boundary[status-read] ____
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r2')
+stage = 'read', mutation = 'status'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+>       with owned_state(tmp_path) as state:
+             ^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_official_json_subject_artifacts.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Miniconda\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r2')
+
+    @contextmanager
+    def owned_state(tmp_path):
+        before = tuple(tmp_path.iterdir())
+        with TemporaryDirectory(prefix="subject-artifacts-", dir=tmp_path) as name:
+            root = Path(name)
+            (root / "companies").mkdir()
+            catalog = SourceCatalog(CatalogConfig(project_root=root, catalog_dir=root / "catalog",
+                roots=(RootSpec("company_raw", root / "companies", "company_raw"),)))
+            refs, original = [], []
+            try:
+                for page in (1, 2):
+                    body = encoded({"ok": True, "result": {"page": page, "page_size": 2,
+                        "page_count": 2, "item_total": 4, "items": [
+                        {"ref": page * 10 + company, "org_id": company, "org_name": "Company " + str(company),
+                         "q": "New business delivery?", "a": "Q4 delivery", "answered": True,
+                         "created_at": "2026-09-01 10:00:00", "updated_at": "2026-09-01 10:00:00"}
+                        for company in (1, 2)]}})
+                    request = {"schema_version": "official-source-import-request/2",
+                        "request_id": "subject-page-" + str(page), "max_bytes": 1048576,
+                        "content_sha256": digest(body), "mime_type": "application/json",
+                        "document_kind": "investor_relations", "source_subject": {
+                            "kind": "multi_issuer_event", "event_namespace": "fixture",
+                            "event_id": "901", "issuer_refs": [], "attribution_status": "partial"},
+                        "capture_receipt": {"capture_method": "local_document", "tool_name": "synthetic",
+                            "tool_call_id": "page-" + str(page), "captured_at": T0,
+                            "response_bytes": len(body), "content_sha256": digest(body)}}
+                    result = import_official_json_source(catalog, original=body, request=request)
+                    refs.append(result["source_ref"])
+                    original.append(body)
+                subjects = tuple(NarrativeSubject.from_projection(build_projection_from_refs(catalog,
+                    refs=refs, layout_id="official-flat-list", issuer={"provider_company_id": company},
+                    as_of_date="2026-10-08")) for company in (1, 2))
+                objects = LocalNarrativeObjectStore(catalog.config.catalog_dir)
+                artifacts = NarrativeArtifactStore(catalog.store, objects)
+                state = SimpleNamespace(root=root, catalog=catalog, refs=refs, original=original,
+                    subjects=subjects, artifacts=artifacts, objects=objects)
+                yield state
+                files = [p for p in (root / "companies").rglob("*.json") if not p.name.endswith(".source.json")]
+                assert len(files) == 2
+                assert sorted(digest(p.read_bytes()) for p in files) == sorted(digest(b) for b in original)
+                with catalog.store.transaction() as connection:
+                    assert connection.execute("SELECT count(*) FROM documents").fetchone()[0] == 2
+>                   assert connection.execute("SELECT count(*) FROM sources").fetchone()[0] == 2
+E                   assert 4 == 2
+
+tests\integration\test_official_json_subject_artifacts.py:81: AssertionError
+_ test_nonanchor_parent_change_rejects_every_state_boundary[status-candidate] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r3')
+stage = 'candidate', mutation = 'status'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+>       with owned_state(tmp_path) as state:
+             ^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_official_json_subject_artifacts.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Miniconda\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r3')
+
+    @contextmanager
+    def owned_state(tmp_path):
+        before = tuple(tmp_path.iterdir())
+        with TemporaryDirectory(prefix="subject-artifacts-", dir=tmp_path) as name:
+            root = Path(name)
+            (root / "companies").mkdir()
+            catalog = SourceCatalog(CatalogConfig(project_root=root, catalog_dir=root / "catalog",
+                roots=(RootSpec("company_raw", root / "companies", "company_raw"),)))
+            refs, original = [], []
+            try:
+                for page in (1, 2):
+                    body = encoded({"ok": True, "result": {"page": page, "page_size": 2,
+                        "page_count": 2, "item_total": 4, "items": [
+                        {"ref": page * 10 + company, "org_id": company, "org_name": "Company " + str(company),
+                         "q": "New business delivery?", "a": "Q4 delivery", "answered": True,
+                         "created_at": "2026-09-01 10:00:00", "updated_at": "2026-09-01 10:00:00"}
+                        for company in (1, 2)]}})
+                    request = {"schema_version": "official-source-import-request/2",
+                        "request_id": "subject-page-" + str(page), "max_bytes": 1048576,
+                        "content_sha256": digest(body), "mime_type": "application/json",
+                        "document_kind": "investor_relations", "source_subject": {
+                            "kind": "multi_issuer_event", "event_namespace": "fixture",
+                            "event_id": "901", "issuer_refs": [], "attribution_status": "partial"},
+                        "capture_receipt": {"capture_method": "local_document", "tool_name": "synthetic",
+                            "tool_call_id": "page-" + str(page), "captured_at": T0,
+                            "response_bytes": len(body), "content_sha256": digest(body)}}
+                    result = import_official_json_source(catalog, original=body, request=request)
+                    refs.append(result["source_ref"])
+                    original.append(body)
+                subjects = tuple(NarrativeSubject.from_projection(build_projection_from_refs(catalog,
+                    refs=refs, layout_id="official-flat-list", issuer={"provider_company_id": company},
+                    as_of_date="2026-10-08")) for company in (1, 2))
+                objects = LocalNarrativeObjectStore(catalog.config.catalog_dir)
+                artifacts = NarrativeArtifactStore(catalog.store, objects)
+                state = SimpleNamespace(root=root, catalog=catalog, refs=refs, original=original,
+                    subjects=subjects, artifacts=artifacts, objects=objects)
+                yield state
+                files = [p for p in (root / "companies").rglob("*.json") if not p.name.endswith(".source.json")]
+                assert len(files) == 2
+                assert sorted(digest(p.read_bytes()) for p in files) == sorted(digest(b) for b in original)
+                with catalog.store.transaction() as connection:
+                    assert connection.execute("SELECT count(*) FROM documents").fetchone()[0] == 2
+>                   assert connection.execute("SELECT count(*) FROM sources").fetchone()[0] == 2
+E                   assert 4 == 2
+
+tests\integration\test_official_json_subject_artifacts.py:81: AssertionError
+__ test_nonanchor_parent_change_rejects_every_state_boundary[status-effect] ___
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r4')
+stage = 'effect', mutation = 'status'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+>       with owned_state(tmp_path) as state:
+             ^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_official_json_subject_artifacts.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Miniconda\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r4')
+
+    @contextmanager
+    def owned_state(tmp_path):
+        before = tuple(tmp_path.iterdir())
+        with TemporaryDirectory(prefix="subject-artifacts-", dir=tmp_path) as name:
+            root = Path(name)
+            (root / "companies").mkdir()
+            catalog = SourceCatalog(CatalogConfig(project_root=root, catalog_dir=root / "catalog",
+                roots=(RootSpec("company_raw", root / "companies", "company_raw"),)))
+            refs, original = [], []
+            try:
+                for page in (1, 2):
+                    body = encoded({"ok": True, "result": {"page": page, "page_size": 2,
+                        "page_count": 2, "item_total": 4, "items": [
+                        {"ref": page * 10 + company, "org_id": company, "org_name": "Company " + str(company),
+                         "q": "New business delivery?", "a": "Q4 delivery", "answered": True,
+                         "created_at": "2026-09-01 10:00:00", "updated_at": "2026-09-01 10:00:00"}
+                        for company in (1, 2)]}})
+                    request = {"schema_version": "official-source-import-request/2",
+                        "request_id": "subject-page-" + str(page), "max_bytes": 1048576,
+                        "content_sha256": digest(body), "mime_type": "application/json",
+                        "document_kind": "investor_relations", "source_subject": {
+                            "kind": "multi_issuer_event", "event_namespace": "fixture",
+                            "event_id": "901", "issuer_refs": [], "attribution_status": "partial"},
+                        "capture_receipt": {"capture_method": "local_document", "tool_name": "synthetic",
+                            "tool_call_id": "page-" + str(page), "captured_at": T0,
+                            "response_bytes": len(body), "content_sha256": digest(body)}}
+                    result = import_official_json_source(catalog, original=body, request=request)
+                    refs.append(result["source_ref"])
+                    original.append(body)
+                subjects = tuple(NarrativeSubject.from_projection(build_projection_from_refs(catalog,
+                    refs=refs, layout_id="official-flat-list", issuer={"provider_company_id": company},
+                    as_of_date="2026-10-08")) for company in (1, 2))
+                objects = LocalNarrativeObjectStore(catalog.config.catalog_dir)
+                artifacts = NarrativeArtifactStore(catalog.store, objects)
+                state = SimpleNamespace(root=root, catalog=catalog, refs=refs, original=original,
+                    subjects=subjects, artifacts=artifacts, objects=objects)
+                yield state
+                files = [p for p in (root / "companies").rglob("*.json") if not p.name.endswith(".source.json")]
+                assert len(files) == 2
+                assert sorted(digest(p.read_bytes()) for p in files) == sorted(digest(b) for b in original)
+                with catalog.store.transaction() as connection:
+                    assert connection.execute("SELECT count(*) FROM documents").fetchone()[0] == 2
+>                   assert connection.execute("SELECT count(*) FROM sources").fetchone()[0] == 2
+E                   assert 4 == 2
+
+tests\integration\test_official_json_subject_artifacts.py:81: AssertionError
+_ test_nonanchor_parent_change_rejects_every_state_boundary[primary-prepare] __
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r5')
+stage = 'prepare', mutation = 'primary'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+>       with owned_state(tmp_path) as state:
+             ^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_official_json_subject_artifacts.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Miniconda\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r5')
+
+    @contextmanager
+    def owned_state(tmp_path):
+        before = tuple(tmp_path.iterdir())
+        with TemporaryDirectory(prefix="subject-artifacts-", dir=tmp_path) as name:
+            root = Path(name)
+            (root / "companies").mkdir()
+            catalog = SourceCatalog(CatalogConfig(project_root=root, catalog_dir=root / "catalog",
+                roots=(RootSpec("company_raw", root / "companies", "company_raw"),)))
+            refs, original = [], []
+            try:
+                for page in (1, 2):
+                    body = encoded({"ok": True, "result": {"page": page, "page_size": 2,
+                        "page_count": 2, "item_total": 4, "items": [
+                        {"ref": page * 10 + company, "org_id": company, "org_name": "Company " + str(company),
+                         "q": "New business delivery?", "a": "Q4 delivery", "answered": True,
+                         "created_at": "2026-09-01 10:00:00", "updated_at": "2026-09-01 10:00:00"}
+                        for company in (1, 2)]}})
+                    request = {"schema_version": "official-source-import-request/2",
+                        "request_id": "subject-page-" + str(page), "max_bytes": 1048576,
+                        "content_sha256": digest(body), "mime_type": "application/json",
+                        "document_kind": "investor_relations", "source_subject": {
+                            "kind": "multi_issuer_event", "event_namespace": "fixture",
+                            "event_id": "901", "issuer_refs": [], "attribution_status": "partial"},
+                        "capture_receipt": {"capture_method": "local_document", "tool_name": "synthetic",
+                            "tool_call_id": "page-" + str(page), "captured_at": T0,
+                            "response_bytes": len(body), "content_sha256": digest(body)}}
+                    result = import_official_json_source(catalog, original=body, request=request)
+                    refs.append(result["source_ref"])
+                    original.append(body)
+                subjects = tuple(NarrativeSubject.from_projection(build_projection_from_refs(catalog,
+                    refs=refs, layout_id="official-flat-list", issuer={"provider_company_id": company},
+                    as_of_date="2026-10-08")) for company in (1, 2))
+                objects = LocalNarrativeObjectStore(catalog.config.catalog_dir)
+                artifacts = NarrativeArtifactStore(catalog.store, objects)
+                state = SimpleNamespace(root=root, catalog=catalog, refs=refs, original=original,
+                    subjects=subjects, artifacts=artifacts, objects=objects)
+                yield state
+                files = [p for p in (root / "companies").rglob("*.json") if not p.name.endswith(".source.json")]
+                assert len(files) == 2
+                assert sorted(digest(p.read_bytes()) for p in files) == sorted(digest(b) for b in original)
+                with catalog.store.transaction() as connection:
+                    assert connection.execute("SELECT count(*) FROM documents").fetchone()[0] == 2
+>                   assert connection.execute("SELECT count(*) FROM sources").fetchone()[0] == 2
+E                   assert 4 == 2
+
+tests\integration\test_official_json_subject_artifacts.py:81: AssertionError
+_ test_nonanchor_parent_change_rejects_every_state_boundary[primary-activate] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r6')
+stage = 'activate', mutation = 'primary'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+>       with owned_state(tmp_path) as state:
+             ^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_official_json_subject_artifacts.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Miniconda\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r6')
+
+    @contextmanager
+    def owned_state(tmp_path):
+        before = tuple(tmp_path.iterdir())
+        with TemporaryDirectory(prefix="subject-artifacts-", dir=tmp_path) as name:
+            root = Path(name)
+            (root / "companies").mkdir()
+            catalog = SourceCatalog(CatalogConfig(project_root=root, catalog_dir=root / "catalog",
+                roots=(RootSpec("company_raw", root / "companies", "company_raw"),)))
+            refs, original = [], []
+            try:
+                for page in (1, 2):
+                    body = encoded({"ok": True, "result": {"page": page, "page_size": 2,
+                        "page_count": 2, "item_total": 4, "items": [
+                        {"ref": page * 10 + company, "org_id": company, "org_name": "Company " + str(company),
+                         "q": "New business delivery?", "a": "Q4 delivery", "answered": True,
+                         "created_at": "2026-09-01 10:00:00", "updated_at": "2026-09-01 10:00:00"}
+                        for company in (1, 2)]}})
+                    request = {"schema_version": "official-source-import-request/2",
+                        "request_id": "subject-page-" + str(page), "max_bytes": 1048576,
+                        "content_sha256": digest(body), "mime_type": "application/json",
+                        "document_kind": "investor_relations", "source_subject": {
+                            "kind": "multi_issuer_event", "event_namespace": "fixture",
+                            "event_id": "901", "issuer_refs": [], "attribution_status": "partial"},
+                        "capture_receipt": {"capture_method": "local_document", "tool_name": "synthetic",
+                            "tool_call_id": "page-" + str(page), "captured_at": T0,
+                            "response_bytes": len(body), "content_sha256": digest(body)}}
+                    result = import_official_json_source(catalog, original=body, request=request)
+                    refs.append(result["source_ref"])
+                    original.append(body)
+                subjects = tuple(NarrativeSubject.from_projection(build_projection_from_refs(catalog,
+                    refs=refs, layout_id="official-flat-list", issuer={"provider_company_id": company},
+                    as_of_date="2026-10-08")) for company in (1, 2))
+                objects = LocalNarrativeObjectStore(catalog.config.catalog_dir)
+                artifacts = NarrativeArtifactStore(catalog.store, objects)
+                state = SimpleNamespace(root=root, catalog=catalog, refs=refs, original=original,
+                    subjects=subjects, artifacts=artifacts, objects=objects)
+                yield state
+                files = [p for p in (root / "companies").rglob("*.json") if not p.name.endswith(".source.json")]
+                assert len(files) == 2
+                assert sorted(digest(p.read_bytes()) for p in files) == sorted(digest(b) for b in original)
+                with catalog.store.transaction() as connection:
+                    assert connection.execute("SELECT count(*) FROM documents").fetchone()[0] == 2
+>                   assert connection.execute("SELECT count(*) FROM sources").fetchone()[0] == 2
+E                   assert 4 == 2
+
+tests\integration\test_official_json_subject_artifacts.py:81: AssertionError
+___ test_nonanchor_parent_change_rejects_every_state_boundary[primary-read] ___
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r7')
+stage = 'read', mutation = 'primary'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+>       with owned_state(tmp_path) as state:
+             ^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_official_json_subject_artifacts.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Miniconda\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r7')
+
+    @contextmanager
+    def owned_state(tmp_path):
+        before = tuple(tmp_path.iterdir())
+        with TemporaryDirectory(prefix="subject-artifacts-", dir=tmp_path) as name:
+            root = Path(name)
+            (root / "companies").mkdir()
+            catalog = SourceCatalog(CatalogConfig(project_root=root, catalog_dir=root / "catalog",
+                roots=(RootSpec("company_raw", root / "companies", "company_raw"),)))
+            refs, original = [], []
+            try:
+                for page in (1, 2):
+                    body = encoded({"ok": True, "result": {"page": page, "page_size": 2,
+                        "page_count": 2, "item_total": 4, "items": [
+                        {"ref": page * 10 + company, "org_id": company, "org_name": "Company " + str(company),
+                         "q": "New business delivery?", "a": "Q4 delivery", "answered": True,
+                         "created_at": "2026-09-01 10:00:00", "updated_at": "2026-09-01 10:00:00"}
+                        for company in (1, 2)]}})
+                    request = {"schema_version": "official-source-import-request/2",
+                        "request_id": "subject-page-" + str(page), "max_bytes": 1048576,
+                        "content_sha256": digest(body), "mime_type": "application/json",
+                        "document_kind": "investor_relations", "source_subject": {
+                            "kind": "multi_issuer_event", "event_namespace": "fixture",
+                            "event_id": "901", "issuer_refs": [], "attribution_status": "partial"},
+                        "capture_receipt": {"capture_method": "local_document", "tool_name": "synthetic",
+                            "tool_call_id": "page-" + str(page), "captured_at": T0,
+                            "response_bytes": len(body), "content_sha256": digest(body)}}
+                    result = import_official_json_source(catalog, original=body, request=request)
+                    refs.append(result["source_ref"])
+                    original.append(body)
+                subjects = tuple(NarrativeSubject.from_projection(build_projection_from_refs(catalog,
+                    refs=refs, layout_id="official-flat-list", issuer={"provider_company_id": company},
+                    as_of_date="2026-10-08")) for company in (1, 2))
+                objects = LocalNarrativeObjectStore(catalog.config.catalog_dir)
+                artifacts = NarrativeArtifactStore(catalog.store, objects)
+                state = SimpleNamespace(root=root, catalog=catalog, refs=refs, original=original,
+                    subjects=subjects, artifacts=artifacts, objects=objects)
+                yield state
+                files = [p for p in (root / "companies").rglob("*.json") if not p.name.endswith(".source.json")]
+                assert len(files) == 2
+                assert sorted(digest(p.read_bytes()) for p in files) == sorted(digest(b) for b in original)
+                with catalog.store.transaction() as connection:
+                    assert connection.execute("SELECT count(*) FROM documents").fetchone()[0] == 2
+>                   assert connection.execute("SELECT count(*) FROM sources").fetchone()[0] == 2
+E                   assert 4 == 2
+
+tests\integration\test_official_json_subject_artifacts.py:81: AssertionError
+_ test_nonanchor_parent_change_rejects_every_state_boundary[primary-candidate] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r8')
+stage = 'candidate', mutation = 'primary'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+>       with owned_state(tmp_path) as state:
+             ^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_official_json_subject_artifacts.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Miniconda\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r8')
+
+    @contextmanager
+    def owned_state(tmp_path):
+        before = tuple(tmp_path.iterdir())
+        with TemporaryDirectory(prefix="subject-artifacts-", dir=tmp_path) as name:
+            root = Path(name)
+            (root / "companies").mkdir()
+            catalog = SourceCatalog(CatalogConfig(project_root=root, catalog_dir=root / "catalog",
+                roots=(RootSpec("company_raw", root / "companies", "company_raw"),)))
+            refs, original = [], []
+            try:
+                for page in (1, 2):
+                    body = encoded({"ok": True, "result": {"page": page, "page_size": 2,
+                        "page_count": 2, "item_total": 4, "items": [
+                        {"ref": page * 10 + company, "org_id": company, "org_name": "Company " + str(company),
+                         "q": "New business delivery?", "a": "Q4 delivery", "answered": True,
+                         "created_at": "2026-09-01 10:00:00", "updated_at": "2026-09-01 10:00:00"}
+                        for company in (1, 2)]}})
+                    request = {"schema_version": "official-source-import-request/2",
+                        "request_id": "subject-page-" + str(page), "max_bytes": 1048576,
+                        "content_sha256": digest(body), "mime_type": "application/json",
+                        "document_kind": "investor_relations", "source_subject": {
+                            "kind": "multi_issuer_event", "event_namespace": "fixture",
+                            "event_id": "901", "issuer_refs": [], "attribution_status": "partial"},
+                        "capture_receipt": {"capture_method": "local_document", "tool_name": "synthetic",
+                            "tool_call_id": "page-" + str(page), "captured_at": T0,
+                            "response_bytes": len(body), "content_sha256": digest(body)}}
+                    result = import_official_json_source(catalog, original=body, request=request)
+                    refs.append(result["source_ref"])
+                    original.append(body)
+                subjects = tuple(NarrativeSubject.from_projection(build_projection_from_refs(catalog,
+                    refs=refs, layout_id="official-flat-list", issuer={"provider_company_id": company},
+                    as_of_date="2026-10-08")) for company in (1, 2))
+                objects = LocalNarrativeObjectStore(catalog.config.catalog_dir)
+                artifacts = NarrativeArtifactStore(catalog.store, objects)
+                state = SimpleNamespace(root=root, catalog=catalog, refs=refs, original=original,
+                    subjects=subjects, artifacts=artifacts, objects=objects)
+                yield state
+                files = [p for p in (root / "companies").rglob("*.json") if not p.name.endswith(".source.json")]
+                assert len(files) == 2
+                assert sorted(digest(p.read_bytes()) for p in files) == sorted(digest(b) for b in original)
+                with catalog.store.transaction() as connection:
+                    assert connection.execute("SELECT count(*) FROM documents").fetchone()[0] == 2
+>                   assert connection.execute("SELECT count(*) FROM sources").fetchone()[0] == 2
+E                   assert 4 == 2
+
+tests\integration\test_official_json_subject_artifacts.py:81: AssertionError
+__ test_nonanchor_parent_change_rejects_every_state_boundary[primary-effect] __
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r9')
+stage = 'effect', mutation = 'primary'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+>       with owned_state(tmp_path) as state:
+             ^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_official_json_subject_artifacts.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Miniconda\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r9')
+
+    @contextmanager
+    def owned_state(tmp_path):
+        before = tuple(tmp_path.iterdir())
+        with TemporaryDirectory(prefix="subject-artifacts-", dir=tmp_path) as name:
+            root = Path(name)
+            (root / "companies").mkdir()
+            catalog = SourceCatalog(CatalogConfig(project_root=root, catalog_dir=root / "catalog",
+                roots=(RootSpec("company_raw", root / "companies", "company_raw"),)))
+            refs, original = [], []
+            try:
+                for page in (1, 2):
+                    body = encoded({"ok": True, "result": {"page": page, "page_size": 2,
+                        "page_count": 2, "item_total": 4, "items": [
+                        {"ref": page * 10 + company, "org_id": company, "org_name": "Company " + str(company),
+                         "q": "New business delivery?", "a": "Q4 delivery", "answered": True,
+                         "created_at": "2026-09-01 10:00:00", "updated_at": "2026-09-01 10:00:00"}
+                        for company in (1, 2)]}})
+                    request = {"schema_version": "official-source-import-request/2",
+                        "request_id": "subject-page-" + str(page), "max_bytes": 1048576,
+                        "content_sha256": digest(body), "mime_type": "application/json",
+                        "document_kind": "investor_relations", "source_subject": {
+                            "kind": "multi_issuer_event", "event_namespace": "fixture",
+                            "event_id": "901", "issuer_refs": [], "attribution_status": "partial"},
+                        "capture_receipt": {"capture_method": "local_document", "tool_name": "synthetic",
+                            "tool_call_id": "page-" + str(page), "captured_at": T0,
+                            "response_bytes": len(body), "content_sha256": digest(body)}}
+                    result = import_official_json_source(catalog, original=body, request=request)
+                    refs.append(result["source_ref"])
+                    original.append(body)
+                subjects = tuple(NarrativeSubject.from_projection(build_projection_from_refs(catalog,
+                    refs=refs, layout_id="official-flat-list", issuer={"provider_company_id": company},
+                    as_of_date="2026-10-08")) for company in (1, 2))
+                objects = LocalNarrativeObjectStore(catalog.config.catalog_dir)
+                artifacts = NarrativeArtifactStore(catalog.store, objects)
+                state = SimpleNamespace(root=root, catalog=catalog, refs=refs, original=original,
+                    subjects=subjects, artifacts=artifacts, objects=objects)
+                yield state
+                files = [p for p in (root / "companies").rglob("*.json") if not p.name.endswith(".source.json")]
+                assert len(files) == 2
+                assert sorted(digest(p.read_bytes()) for p in files) == sorted(digest(b) for b in original)
+                with catalog.store.transaction() as connection:
+                    assert connection.execute("SELECT count(*) FROM documents").fetchone()[0] == 2
+>                   assert connection.execute("SELECT count(*) FROM sources").fetchone()[0] == 2
+E                   assert 4 == 2
+
+tests\integration\test_official_json_subject_artifacts.py:81: AssertionError
+_ test_nonanchor_parent_change_rejects_every_state_boundary[catalog_sha-prepare] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r10')
+stage = 'prepare', mutation = 'catalog_sha'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+>       with owned_state(tmp_path) as state:
+             ^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_official_json_subject_artifacts.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Miniconda\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r10')
+
+    @contextmanager
+    def owned_state(tmp_path):
+        before = tuple(tmp_path.iterdir())
+        with TemporaryDirectory(prefix="subject-artifacts-", dir=tmp_path) as name:
+            root = Path(name)
+            (root / "companies").mkdir()
+            catalog = SourceCatalog(CatalogConfig(project_root=root, catalog_dir=root / "catalog",
+                roots=(RootSpec("company_raw", root / "companies", "company_raw"),)))
+            refs, original = [], []
+            try:
+                for page in (1, 2):
+                    body = encoded({"ok": True, "result": {"page": page, "page_size": 2,
+                        "page_count": 2, "item_total": 4, "items": [
+                        {"ref": page * 10 + company, "org_id": company, "org_name": "Company " + str(company),
+                         "q": "New business delivery?", "a": "Q4 delivery", "answered": True,
+                         "created_at": "2026-09-01 10:00:00", "updated_at": "2026-09-01 10:00:00"}
+                        for company in (1, 2)]}})
+                    request = {"schema_version": "official-source-import-request/2",
+                        "request_id": "subject-page-" + str(page), "max_bytes": 1048576,
+                        "content_sha256": digest(body), "mime_type": "application/json",
+                        "document_kind": "investor_relations", "source_subject": {
+                            "kind": "multi_issuer_event", "event_namespace": "fixture",
+                            "event_id": "901", "issuer_refs": [], "attribution_status": "partial"},
+                        "capture_receipt": {"capture_method": "local_document", "tool_name": "synthetic",
+                            "tool_call_id": "page-" + str(page), "captured_at": T0,
+                            "response_bytes": len(body), "content_sha256": digest(body)}}
+                    result = import_official_json_source(catalog, original=body, request=request)
+                    refs.append(result["source_ref"])
+                    original.append(body)
+                subjects = tuple(NarrativeSubject.from_projection(build_projection_from_refs(catalog,
+                    refs=refs, layout_id="official-flat-list", issuer={"provider_company_id": company},
+                    as_of_date="2026-10-08")) for company in (1, 2))
+                objects = LocalNarrativeObjectStore(catalog.config.catalog_dir)
+                artifacts = NarrativeArtifactStore(catalog.store, objects)
+                state = SimpleNamespace(root=root, catalog=catalog, refs=refs, original=original,
+                    subjects=subjects, artifacts=artifacts, objects=objects)
+                yield state
+                files = [p for p in (root / "companies").rglob("*.json") if not p.name.endswith(".source.json")]
+                assert len(files) == 2
+                assert sorted(digest(p.read_bytes()) for p in files) == sorted(digest(b) for b in original)
+                with catalog.store.transaction() as connection:
+                    assert connection.execute("SELECT count(*) FROM documents").fetchone()[0] == 2
+>                   assert connection.execute("SELECT count(*) FROM sources").fetchone()[0] == 2
+E                   assert 4 == 2
+
+tests\integration\test_official_json_subject_artifacts.py:81: AssertionError
+_ test_nonanchor_parent_change_rejects_every_state_boundary[catalog_sha-activate] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r11')
+stage = 'activate', mutation = 'catalog_sha'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+>       with owned_state(tmp_path) as state:
+             ^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_official_json_subject_artifacts.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Miniconda\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r11')
+
+    @contextmanager
+    def owned_state(tmp_path):
+        before = tuple(tmp_path.iterdir())
+        with TemporaryDirectory(prefix="subject-artifacts-", dir=tmp_path) as name:
+            root = Path(name)
+            (root / "companies").mkdir()
+            catalog = SourceCatalog(CatalogConfig(project_root=root, catalog_dir=root / "catalog",
+                roots=(RootSpec("company_raw", root / "companies", "company_raw"),)))
+            refs, original = [], []
+            try:
+                for page in (1, 2):
+                    body = encoded({"ok": True, "result": {"page": page, "page_size": 2,
+                        "page_count": 2, "item_total": 4, "items": [
+                        {"ref": page * 10 + company, "org_id": company, "org_name": "Company " + str(company),
+                         "q": "New business delivery?", "a": "Q4 delivery", "answered": True,
+                         "created_at": "2026-09-01 10:00:00", "updated_at": "2026-09-01 10:00:00"}
+                        for company in (1, 2)]}})
+                    request = {"schema_version": "official-source-import-request/2",
+                        "request_id": "subject-page-" + str(page), "max_bytes": 1048576,
+                        "content_sha256": digest(body), "mime_type": "application/json",
+                        "document_kind": "investor_relations", "source_subject": {
+                            "kind": "multi_issuer_event", "event_namespace": "fixture",
+                            "event_id": "901", "issuer_refs": [], "attribution_status": "partial"},
+                        "capture_receipt": {"capture_method": "local_document", "tool_name": "synthetic",
+                            "tool_call_id": "page-" + str(page), "captured_at": T0,
+                            "response_bytes": len(body), "content_sha256": digest(body)}}
+                    result = import_official_json_source(catalog, original=body, request=request)
+                    refs.append(result["source_ref"])
+                    original.append(body)
+                subjects = tuple(NarrativeSubject.from_projection(build_projection_from_refs(catalog,
+                    refs=refs, layout_id="official-flat-list", issuer={"provider_company_id": company},
+                    as_of_date="2026-10-08")) for company in (1, 2))
+                objects = LocalNarrativeObjectStore(catalog.config.catalog_dir)
+                artifacts = NarrativeArtifactStore(catalog.store, objects)
+                state = SimpleNamespace(root=root, catalog=catalog, refs=refs, original=original,
+                    subjects=subjects, artifacts=artifacts, objects=objects)
+                yield state
+                files = [p for p in (root / "companies").rglob("*.json") if not p.name.endswith(".source.json")]
+                assert len(files) == 2
+                assert sorted(digest(p.read_bytes()) for p in files) == sorted(digest(b) for b in original)
+                with catalog.store.transaction() as connection:
+                    assert connection.execute("SELECT count(*) FROM documents").fetchone()[0] == 2
+>                   assert connection.execute("SELECT count(*) FROM sources").fetchone()[0] == 2
+E                   assert 4 == 2
+
+tests\integration\test_official_json_subject_artifacts.py:81: AssertionError
+_ test_nonanchor_parent_change_rejects_every_state_boundary[catalog_sha-read] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r12')
+stage = 'read', mutation = 'catalog_sha'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+>       with owned_state(tmp_path) as state:
+             ^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_official_json_subject_artifacts.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Miniconda\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r12')
+
+    @contextmanager
+    def owned_state(tmp_path):
+        before = tuple(tmp_path.iterdir())
+        with TemporaryDirectory(prefix="subject-artifacts-", dir=tmp_path) as name:
+            root = Path(name)
+            (root / "companies").mkdir()
+            catalog = SourceCatalog(CatalogConfig(project_root=root, catalog_dir=root / "catalog",
+                roots=(RootSpec("company_raw", root / "companies", "company_raw"),)))
+            refs, original = [], []
+            try:
+                for page in (1, 2):
+                    body = encoded({"ok": True, "result": {"page": page, "page_size": 2,
+                        "page_count": 2, "item_total": 4, "items": [
+                        {"ref": page * 10 + company, "org_id": company, "org_name": "Company " + str(company),
+                         "q": "New business delivery?", "a": "Q4 delivery", "answered": True,
+                         "created_at": "2026-09-01 10:00:00", "updated_at": "2026-09-01 10:00:00"}
+                        for company in (1, 2)]}})
+                    request = {"schema_version": "official-source-import-request/2",
+                        "request_id": "subject-page-" + str(page), "max_bytes": 1048576,
+                        "content_sha256": digest(body), "mime_type": "application/json",
+                        "document_kind": "investor_relations", "source_subject": {
+                            "kind": "multi_issuer_event", "event_namespace": "fixture",
+                            "event_id": "901", "issuer_refs": [], "attribution_status": "partial"},
+                        "capture_receipt": {"capture_method": "local_document", "tool_name": "synthetic",
+                            "tool_call_id": "page-" + str(page), "captured_at": T0,
+                            "response_bytes": len(body), "content_sha256": digest(body)}}
+                    result = import_official_json_source(catalog, original=body, request=request)
+                    refs.append(result["source_ref"])
+                    original.append(body)
+                subjects = tuple(NarrativeSubject.from_projection(build_projection_from_refs(catalog,
+                    refs=refs, layout_id="official-flat-list", issuer={"provider_company_id": company},
+                    as_of_date="2026-10-08")) for company in (1, 2))
+                objects = LocalNarrativeObjectStore(catalog.config.catalog_dir)
+                artifacts = NarrativeArtifactStore(catalog.store, objects)
+                state = SimpleNamespace(root=root, catalog=catalog, refs=refs, original=original,
+                    subjects=subjects, artifacts=artifacts, objects=objects)
+                yield state
+                files = [p for p in (root / "companies").rglob("*.json") if not p.name.endswith(".source.json")]
+                assert len(files) == 2
+                assert sorted(digest(p.read_bytes()) for p in files) == sorted(digest(b) for b in original)
+                with catalog.store.transaction() as connection:
+                    assert connection.execute("SELECT count(*) FROM documents").fetchone()[0] == 2
+>                   assert connection.execute("SELECT count(*) FROM sources").fetchone()[0] == 2
+E                   assert 4 == 2
+
+tests\integration\test_official_json_subject_artifacts.py:81: AssertionError
+_ test_nonanchor_parent_change_rejects_every_state_boundary[catalog_sha-candidate] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r13')
+stage = 'candidate', mutation = 'catalog_sha'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+>       with owned_state(tmp_path) as state:
+             ^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_official_json_subject_artifacts.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Miniconda\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r13')
+
+    @contextmanager
+    def owned_state(tmp_path):
+        before = tuple(tmp_path.iterdir())
+        with TemporaryDirectory(prefix="subject-artifacts-", dir=tmp_path) as name:
+            root = Path(name)
+            (root / "companies").mkdir()
+            catalog = SourceCatalog(CatalogConfig(project_root=root, catalog_dir=root / "catalog",
+                roots=(RootSpec("company_raw", root / "companies", "company_raw"),)))
+            refs, original = [], []
+            try:
+                for page in (1, 2):
+                    body = encoded({"ok": True, "result": {"page": page, "page_size": 2,
+                        "page_count": 2, "item_total": 4, "items": [
+                        {"ref": page * 10 + company, "org_id": company, "org_name": "Company " + str(company),
+                         "q": "New business delivery?", "a": "Q4 delivery", "answered": True,
+                         "created_at": "2026-09-01 10:00:00", "updated_at": "2026-09-01 10:00:00"}
+                        for company in (1, 2)]}})
+                    request = {"schema_version": "official-source-import-request/2",
+                        "request_id": "subject-page-" + str(page), "max_bytes": 1048576,
+                        "content_sha256": digest(body), "mime_type": "application/json",
+                        "document_kind": "investor_relations", "source_subject": {
+                            "kind": "multi_issuer_event", "event_namespace": "fixture",
+                            "event_id": "901", "issuer_refs": [], "attribution_status": "partial"},
+                        "capture_receipt": {"capture_method": "local_document", "tool_name": "synthetic",
+                            "tool_call_id": "page-" + str(page), "captured_at": T0,
+                            "response_bytes": len(body), "content_sha256": digest(body)}}
+                    result = import_official_json_source(catalog, original=body, request=request)
+                    refs.append(result["source_ref"])
+                    original.append(body)
+                subjects = tuple(NarrativeSubject.from_projection(build_projection_from_refs(catalog,
+                    refs=refs, layout_id="official-flat-list", issuer={"provider_company_id": company},
+                    as_of_date="2026-10-08")) for company in (1, 2))
+                objects = LocalNarrativeObjectStore(catalog.config.catalog_dir)
+                artifacts = NarrativeArtifactStore(catalog.store, objects)
+                state = SimpleNamespace(root=root, catalog=catalog, refs=refs, original=original,
+                    subjects=subjects, artifacts=artifacts, objects=objects)
+                yield state
+                files = [p for p in (root / "companies").rglob("*.json") if not p.name.endswith(".source.json")]
+                assert len(files) == 2
+                assert sorted(digest(p.read_bytes()) for p in files) == sorted(digest(b) for b in original)
+                with catalog.store.transaction() as connection:
+                    assert connection.execute("SELECT count(*) FROM documents").fetchone()[0] == 2
+>                   assert connection.execute("SELECT count(*) FROM sources").fetchone()[0] == 2
+E                   assert 4 == 2
+
+tests\integration\test_official_json_subject_artifacts.py:81: AssertionError
+_ test_nonanchor_parent_change_rejects_every_state_boundary[catalog_sha-effect] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r14')
+stage = 'effect', mutation = 'catalog_sha'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+>       with owned_state(tmp_path) as state:
+             ^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_official_json_subject_artifacts.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Miniconda\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_nonanchor_parent_change_r14')
+
+    @contextmanager
+    def owned_state(tmp_path):
+        before = tuple(tmp_path.iterdir())
+        with TemporaryDirectory(prefix="subject-artifacts-", dir=tmp_path) as name:
+            root = Path(name)
+            (root / "companies").mkdir()
+            catalog = SourceCatalog(CatalogConfig(project_root=root, catalog_dir=root / "catalog",
+                roots=(RootSpec("company_raw", root / "companies", "company_raw"),)))
+            refs, original = [], []
+            try:
+                for page in (1, 2):
+                    body = encoded({"ok": True, "result": {"page": page, "page_size": 2,
+                        "page_count": 2, "item_total": 4, "items": [
+                        {"ref": page * 10 + company, "org_id": company, "org_name": "Company " + str(company),
+                         "q": "New business delivery?", "a": "Q4 delivery", "answered": True,
+                         "created_at": "2026-09-01 10:00:00", "updated_at": "2026-09-01 10:00:00"}
+                        for company in (1, 2)]}})
+                    request = {"schema_version": "official-source-import-request/2",
+                        "request_id": "subject-page-" + str(page), "max_bytes": 1048576,
+                        "content_sha256": digest(body), "mime_type": "application/json",
+                        "document_kind": "investor_relations", "source_subject": {
+                            "kind": "multi_issuer_event", "event_namespace": "fixture",
+                            "event_id": "901", "issuer_refs": [], "attribution_status": "partial"},
+                        "capture_receipt": {"capture_method": "local_document", "tool_name": "synthetic",
+                            "tool_call_id": "page-" + str(page), "captured_at": T0,
+                            "response_bytes": len(body), "content_sha256": digest(body)}}
+                    result = import_official_json_source(catalog, original=body, request=request)
+                    refs.append(result["source_ref"])
+                    original.append(body)
+                subjects = tuple(NarrativeSubject.from_projection(build_projection_from_refs(catalog,
+                    refs=refs, layout_id="official-flat-list", issuer={"provider_company_id": company},
+                    as_of_date="2026-10-08")) for company in (1, 2))
+                objects = LocalNarrativeObjectStore(catalog.config.catalog_dir)
+                artifacts = NarrativeArtifactStore(catalog.store, objects)
+                state = SimpleNamespace(root=root, catalog=catalog, refs=refs, original=original,
+                    subjects=subjects, artifacts=artifacts, objects=objects)
+                yield state
+                files = [p for p in (root / "companies").rglob("*.json") if not p.name.endswith(".source.json")]
+                assert len(files) == 2
+                assert sorted(digest(p.read_bytes()) for p in files) == sorted(digest(b) for b in original)
+                with catalog.store.transaction() as connection:
+                    assert connection.execute("SELECT count(*) FROM documents").fetchone()[0] == 2
+>                   assert connection.execute("SELECT count(*) FROM sources").fetchone()[0] == 2
+E                   assert 4 == 2
+
+tests\integration\test_official_json_subject_artifacts.py:81: AssertionError
+_________ test_parent_change_during_artifact_open_is_rechecked[store] _________
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_parent_change_during_arti0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000025FD3E28C50>
+reader_kind = 'store'
+
+    @pytest.mark.parametrize("reader_kind", ["store", "readonly"])
+    def test_parent_change_during_artifact_open_is_rechecked(tmp_path, monkeypatch, reader_kind):
+>       with owned_state(tmp_path) as state:
+             ^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_official_json_subject_artifacts.py:217: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Miniconda\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_parent_change_during_arti0')
+
+    @contextmanager
+    def owned_state(tmp_path):
+        before = tuple(tmp_path.iterdir())
+        with TemporaryDirectory(prefix="subject-artifacts-", dir=tmp_path) as name:
+            root = Path(name)
+            (root / "companies").mkdir()
+            catalog = SourceCatalog(CatalogConfig(project_root=root, catalog_dir=root / "catalog",
+                roots=(RootSpec("company_raw", root / "companies", "company_raw"),)))
+            refs, original = [], []
+            try:
+                for page in (1, 2):
+                    body = encoded({"ok": True, "result": {"page": page, "page_size": 2,
+                        "page_count": 2, "item_total": 4, "items": [
+                        {"ref": page * 10 + company, "org_id": company, "org_name": "Company " + str(company),
+                         "q": "New business delivery?", "a": "Q4 delivery", "answered": True,
+                         "created_at": "2026-09-01 10:00:00", "updated_at": "2026-09-01 10:00:00"}
+                        for company in (1, 2)]}})
+                    request = {"schema_version": "official-source-import-request/2",
+                        "request_id": "subject-page-" + str(page), "max_bytes": 1048576,
+                        "content_sha256": digest(body), "mime_type": "application/json",
+                        "document_kind": "investor_relations", "source_subject": {
+                            "kind": "multi_issuer_event", "event_namespace": "fixture",
+                            "event_id": "901", "issuer_refs": [], "attribution_status": "partial"},
+                        "capture_receipt": {"capture_method": "local_document", "tool_name": "synthetic",
+                            "tool_call_id": "page-" + str(page), "captured_at": T0,
+                            "response_bytes": len(body), "content_sha256": digest(body)}}
+                    result = import_official_json_source(catalog, original=body, request=request)
+                    refs.append(result["source_ref"])
+                    original.append(body)
+                subjects = tuple(NarrativeSubject.from_projection(build_projection_from_refs(catalog,
+                    refs=refs, layout_id="official-flat-list", issuer={"provider_company_id": company},
+                    as_of_date="2026-10-08")) for company in (1, 2))
+                objects = LocalNarrativeObjectStore(catalog.config.catalog_dir)
+                artifacts = NarrativeArtifactStore(catalog.store, objects)
+                state = SimpleNamespace(root=root, catalog=catalog, refs=refs, original=original,
+                    subjects=subjects, artifacts=artifacts, objects=objects)
+                yield state
+                files = [p for p in (root / "companies").rglob("*.json") if not p.name.endswith(".source.json")]
+                assert len(files) == 2
+                assert sorted(digest(p.read_bytes()) for p in files) == sorted(digest(b) for b in original)
+                with catalog.store.transaction() as connection:
+                    assert connection.execute("SELECT count(*) FROM documents").fetchone()[0] == 2
+>                   assert connection.execute("SELECT count(*) FROM sources").fetchone()[0] == 2
+E                   assert 4 == 2
+
+tests\integration\test_official_json_subject_artifacts.py:81: AssertionError
+_______ test_parent_change_during_artifact_open_is_rechecked[readonly] ________
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_parent_change_during_arti1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000025FD68940D0>
+reader_kind = 'readonly'
+
+    @pytest.mark.parametrize("reader_kind", ["store", "readonly"])
+    def test_parent_change_during_artifact_open_is_rechecked(tmp_path, monkeypatch, reader_kind):
+>       with owned_state(tmp_path) as state:
+             ^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_official_json_subject_artifacts.py:217: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Miniconda\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_parent_change_during_arti1')
+
+    @contextmanager
+    def owned_state(tmp_path):
+        before = tuple(tmp_path.iterdir())
+        with TemporaryDirectory(prefix="subject-artifacts-", dir=tmp_path) as name:
+            root = Path(name)
+            (root / "companies").mkdir()
+            catalog = SourceCatalog(CatalogConfig(project_root=root, catalog_dir=root / "catalog",
+                roots=(RootSpec("company_raw", root / "companies", "company_raw"),)))
+            refs, original = [], []
+            try:
+                for page in (1, 2):
+                    body = encoded({"ok": True, "result": {"page": page, "page_size": 2,
+                        "page_count": 2, "item_total": 4, "items": [
+                        {"ref": page * 10 + company, "org_id": company, "org_name": "Company " + str(company),
+                         "q": "New business delivery?", "a": "Q4 delivery", "answered": True,
+                         "created_at": "2026-09-01 10:00:00", "updated_at": "2026-09-01 10:00:00"}
+                        for company in (1, 2)]}})
+                    request = {"schema_version": "official-source-import-request/2",
+                        "request_id": "subject-page-" + str(page), "max_bytes": 1048576,
+                        "content_sha256": digest(body), "mime_type": "application/json",
+                        "document_kind": "investor_relations", "source_subject": {
+                            "kind": "multi_issuer_event", "event_namespace": "fixture",
+                            "event_id": "901", "issuer_refs": [], "attribution_status": "partial"},
+                        "capture_receipt": {"capture_method": "local_document", "tool_name": "synthetic",
+                            "tool_call_id": "page-" + str(page), "captured_at": T0,
+                            "response_bytes": len(body), "content_sha256": digest(body)}}
+                    result = import_official_json_source(catalog, original=body, request=request)
+                    refs.append(result["source_ref"])
+                    original.append(body)
+                subjects = tuple(NarrativeSubject.from_projection(build_projection_from_refs(catalog,
+                    refs=refs, layout_id="official-flat-list", issuer={"provider_company_id": company},
+                    as_of_date="2026-10-08")) for company in (1, 2))
+                objects = LocalNarrativeObjectStore(catalog.config.catalog_dir)
+                artifacts = NarrativeArtifactStore(catalog.store, objects)
+                state = SimpleNamespace(root=root, catalog=catalog, refs=refs, original=original,
+                    subjects=subjects, artifacts=artifacts, objects=objects)
+                yield state
+                files = [p for p in (root / "companies").rglob("*.json") if not p.name.endswith(".source.json")]
+                assert len(files) == 2
+                assert sorted(digest(p.read_bytes()) for p in files) == sorted(digest(b) for b in original)
+                with catalog.store.transaction() as connection:
+                    assert connection.execute("SELECT count(*) FROM documents").fetchone()[0] == 2
+>                   assert connection.execute("SELECT count(*) FROM sources").fetchone()[0] == 2
+E                   assert 4 == 2
+
+tests\integration\test_official_json_subject_artifacts.py:81: AssertionError
+_____ test_inconsistent_subject_draft_is_typed_and_never_written[anchor] ______
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_inconsistent_subject_draf0')
+damage = 'anchor'
+
+    @pytest.mark.parametrize("damage", ["anchor", "binding", "generation"])
+    def test_inconsistent_subject_draft_is_typed_and_never_written(tmp_path, damage):
+>       with owned_state(tmp_path) as state:
+             ^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_official_json_subject_artifacts.py:235: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Miniconda\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_inconsistent_subject_draf0')
+
+    @contextmanager
+    def owned_state(tmp_path):
+        before = tuple(tmp_path.iterdir())
+        with TemporaryDirectory(prefix="subject-artifacts-", dir=tmp_path) as name:
+            root = Path(name)
+            (root / "companies").mkdir()
+            catalog = SourceCatalog(CatalogConfig(project_root=root, catalog_dir=root / "catalog",
+                roots=(RootSpec("company_raw", root / "companies", "company_raw"),)))
+            refs, original = [], []
+            try:
+                for page in (1, 2):
+                    body = encoded({"ok": True, "result": {"page": page, "page_size": 2,
+                        "page_count": 2, "item_total": 4, "items": [
+                        {"ref": page * 10 + company, "org_id": company, "org_name": "Company " + str(company),
+                         "q": "New business delivery?", "a": "Q4 delivery", "answered": True,
+                         "created_at": "2026-09-01 10:00:00", "updated_at": "2026-09-01 10:00:00"}
+                        for company in (1, 2)]}})
+                    request = {"schema_version": "official-source-import-request/2",
+                        "request_id": "subject-page-" + str(page), "max_bytes": 1048576,
+                        "content_sha256": digest(body), "mime_type": "application/json",
+                        "document_kind": "investor_relations", "source_subject": {
+                            "kind": "multi_issuer_event", "event_namespace": "fixture",
+                            "event_id": "901", "issuer_refs": [], "attribution_status": "partial"},
+                        "capture_receipt": {"capture_method": "local_document", "tool_name": "synthetic",
+                            "tool_call_id": "page-" + str(page), "captured_at": T0,
+                            "response_bytes": len(body), "content_sha256": digest(body)}}
+                    result = import_official_json_source(catalog, original=body, request=request)
+                    refs.append(result["source_ref"])
+                    original.append(body)
+                subjects = tuple(NarrativeSubject.from_projection(build_projection_from_refs(catalog,
+                    refs=refs, layout_id="official-flat-list", issuer={"provider_company_id": company},
+                    as_of_date="2026-10-08")) for company in (1, 2))
+                objects = LocalNarrativeObjectStore(catalog.config.catalog_dir)
+                artifacts = NarrativeArtifactStore(catalog.store, objects)
+                state = SimpleNamespace(root=root, catalog=catalog, refs=refs, original=original,
+                    subjects=subjects, artifacts=artifacts, objects=objects)
+                yield state
+                files = [p for p in (root / "companies").rglob("*.json") if not p.name.endswith(".source.json")]
+                assert len(files) == 2
+                assert sorted(digest(p.read_bytes()) for p in files) == sorted(digest(b) for b in original)
+                with catalog.store.transaction() as connection:
+                    assert connection.execute("SELECT count(*) FROM documents").fetchone()[0] == 2
+>                   assert connection.execute("SELECT count(*) FROM sources").fetchone()[0] == 2
+E                   assert 4 == 2
+
+tests\integration\test_official_json_subject_artifacts.py:81: AssertionError
+_____ test_inconsistent_subject_draft_is_typed_and_never_written[binding] _____
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_inconsistent_subject_draf1')
+damage = 'binding'
+
+    @pytest.mark.parametrize("damage", ["anchor", "binding", "generation"])
+    def test_inconsistent_subject_draft_is_typed_and_never_written(tmp_path, damage):
+>       with owned_state(tmp_path) as state:
+             ^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_official_json_subject_artifacts.py:235: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Miniconda\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_inconsistent_subject_draf1')
+
+    @contextmanager
+    def owned_state(tmp_path):
+        before = tuple(tmp_path.iterdir())
+        with TemporaryDirectory(prefix="subject-artifacts-", dir=tmp_path) as name:
+            root = Path(name)
+            (root / "companies").mkdir()
+            catalog = SourceCatalog(CatalogConfig(project_root=root, catalog_dir=root / "catalog",
+                roots=(RootSpec("company_raw", root / "companies", "company_raw"),)))
+            refs, original = [], []
+            try:
+                for page in (1, 2):
+                    body = encoded({"ok": True, "result": {"page": page, "page_size": 2,
+                        "page_count": 2, "item_total": 4, "items": [
+                        {"ref": page * 10 + company, "org_id": company, "org_name": "Company " + str(company),
+                         "q": "New business delivery?", "a": "Q4 delivery", "answered": True,
+                         "created_at": "2026-09-01 10:00:00", "updated_at": "2026-09-01 10:00:00"}
+                        for company in (1, 2)]}})
+                    request = {"schema_version": "official-source-import-request/2",
+                        "request_id": "subject-page-" + str(page), "max_bytes": 1048576,
+                        "content_sha256": digest(body), "mime_type": "application/json",
+                        "document_kind": "investor_relations", "source_subject": {
+                            "kind": "multi_issuer_event", "event_namespace": "fixture",
+                            "event_id": "901", "issuer_refs": [], "attribution_status": "partial"},
+                        "capture_receipt": {"capture_method": "local_document", "tool_name": "synthetic",
+                            "tool_call_id": "page-" + str(page), "captured_at": T0,
+                            "response_bytes": len(body), "content_sha256": digest(body)}}
+                    result = import_official_json_source(catalog, original=body, request=request)
+                    refs.append(result["source_ref"])
+                    original.append(body)
+                subjects = tuple(NarrativeSubject.from_projection(build_projection_from_refs(catalog,
+                    refs=refs, layout_id="official-flat-list", issuer={"provider_company_id": company},
+                    as_of_date="2026-10-08")) for company in (1, 2))
+                objects = LocalNarrativeObjectStore(catalog.config.catalog_dir)
+                artifacts = NarrativeArtifactStore(catalog.store, objects)
+                state = SimpleNamespace(root=root, catalog=catalog, refs=refs, original=original,
+                    subjects=subjects, artifacts=artifacts, objects=objects)
+                yield state
+                files = [p for p in (root / "companies").rglob("*.json") if not p.name.endswith(".source.json")]
+                assert len(files) == 2
+                assert sorted(digest(p.read_bytes()) for p in files) == sorted(digest(b) for b in original)
+                with catalog.store.transaction() as connection:
+                    assert connection.execute("SELECT count(*) FROM documents").fetchone()[0] == 2
+>                   assert connection.execute("SELECT count(*) FROM sources").fetchone()[0] == 2
+E                   assert 4 == 2
+
+tests\integration\test_official_json_subject_artifacts.py:81: AssertionError
+___ test_inconsistent_subject_draft_is_typed_and_never_written[generation] ____
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_inconsistent_subject_draf2')
+damage = 'generation'
+
+    @pytest.mark.parametrize("damage", ["anchor", "binding", "generation"])
+    def test_inconsistent_subject_draft_is_typed_and_never_written(tmp_path, damage):
+>       with owned_state(tmp_path) as state:
+             ^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_official_json_subject_artifacts.py:235: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Miniconda\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-162/test_inconsistent_subject_draf2')
+
+    @contextmanager
+    def owned_state(tmp_path):
+        before = tuple(tmp_path.iterdir())
+        with TemporaryDirectory(prefix="subject-artifacts-", dir=tmp_path) as name:
+            root = Path(name)
+            (root / "companies").mkdir()
+            catalog = SourceCatalog(CatalogConfig(project_root=root, catalog_dir=root / "catalog",
+                roots=(RootSpec("company_raw", root / "companies", "company_raw"),)))
+            refs, original = [], []
+            try:
+                for page in (1, 2):
+                    body = encoded({"ok": True, "result": {"page": page, "page_size": 2,
+                        "page_count": 2, "item_total": 4, "items": [
+                        {"ref": page * 10 + company, "org_id": company, "org_name": "Company " + str(company),
+                         "q": "New business delivery?", "a": "Q4 delivery", "answered": True,
+                         "created_at": "2026-09-01 10:00:00", "updated_at": "2026-09-01 10:00:00"}
+                        for company in (1, 2)]}})
+                    request = {"schema_version": "official-source-import-request/2",
+                        "request_id": "subject-page-" + str(page), "max_bytes": 1048576,
+                        "content_sha256": digest(body), "mime_type": "application/json",
+                        "document_kind": "investor_relations", "source_subject": {
+                            "kind": "multi_issuer_event", "event_namespace": "fixture",
+                            "event_id": "901", "issuer_refs": [], "attribution_status": "partial"},
+                        "capture_receipt": {"capture_method": "local_document", "tool_name": "synthetic",
+                            "tool_call_id": "page-" + str(page), "captured_at": T0,
+                            "response_bytes": len(body), "content_sha256": digest(body)}}
+                    result = import_official_json_source(catalog, original=body, request=request)
+                    refs.append(result["source_ref"])
+                    original.append(body)
+                subjects = tuple(NarrativeSubject.from_projection(build_projection_from_refs(catalog,
+                    refs=refs, layout_id="official-flat-list", issuer={"provider_company_id": company},
+                    as_of_date="2026-10-08")) for company in (1, 2))
+                objects = LocalNarrativeObjectStore(catalog.config.catalog_dir)
+                artifacts = NarrativeArtifactStore(catalog.store, objects)
+                state = SimpleNamespace(root=root, catalog=catalog, refs=refs, original=original,
+                    subjects=subjects, artifacts=artifacts, objects=objects)
+                yield state
+                files = [p for p in (root / "companies").rglob("*.json") if not p.name.endswith(".source.json")]
+                assert len(files) == 2
+                assert sorted(digest(p.read_bytes()) for p in files) == sorted(digest(b) for b in original)
+                with catalog.store.transaction() as connection:
+                    assert connection.execute("SELECT count(*) FROM documents").fetchone()[0] == 2
+>                   assert connection.execute("SELECT count(*) FROM sources").fetchone()[0] == 2
+E                   assert 4 == 2
+
+tests\integration\test_official_json_subject_artifacts.py:81: AssertionError
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_shared_projection_versions_never_pollute_legacy_raw_reads[missing]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_shared_projection_versions_never_pollute_legacy_raw_reads[null]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_shared_projection_versions_never_pollute_legacy_raw_reads[raw]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_exact_subject_and_generation_survive_reopen_without_fake_sources
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[status-prepare]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[status-activate]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[status-read]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[status-candidate]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[status-effect]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[primary-prepare]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[primary-activate]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[primary-read]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[primary-candidate]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[primary-effect]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[catalog_sha-prepare]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[catalog_sha-activate]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[catalog_sha-read]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[catalog_sha-candidate]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[catalog_sha-effect]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_parent_change_during_artifact_open_is_rechecked[store]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_parent_change_during_artifact_open_is_rechecked[readonly]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_inconsistent_subject_draft_is_typed_and_never_written[anchor]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_inconsistent_subject_draft_is_typed_and_never_written[binding]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_inconsistent_subject_draft_is_typed_and_never_written[generation]
+24 failed, 43 passed, 1 warning in 42.22s

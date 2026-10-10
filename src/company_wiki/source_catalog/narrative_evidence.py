@@ -49,37 +49,16 @@ from .narrative_routing import (
     route_document,
 )
 
+# Explicit aliases preserve existing public imports from this module.
+from .transcript_versions import (
+    TRANSCRIPT_PARSER_VERSION as TRANSCRIPT_PARSER_VERSION,
+    TranscriptParserContract as TranscriptParserContract,
+    transcript_parser_contract as transcript_parser_contract,
+)
+
 
 NARRATIVE_PARSER_NAME = "selective_narrative_parser"
 NARRATIVE_PARSER_VERSION = QA_FRAGMENT_VERSION
-TRANSCRIPT_PARSER_VERSION = "0.3.0"
-# Transcript 0.1.0 and 0.1.1 share the original heading/line parser. The PDF
-# QA version is independent: changing it must never reinterpret saved calls.
-_TRANSCRIPT_PARSER_LAYOUTS: dict[str, Literal["legacy", "natural", "natural_affiliation"]] = {
-    "0.1.0": "legacy",
-    "0.1.1": "legacy",
-    "0.2.0": "natural",
-    "0.3.0": "natural_affiliation",
-}
-
-
-@dataclass(frozen=True)
-class TranscriptParserContract:
-    parser_name: str
-    parser_version: str
-    layout: Literal["legacy", "natural", "natural_affiliation"]
-
-
-def transcript_parser_contract(
-    parser_version: str | None = None,
-) -> TranscriptParserContract:
-    """Return the exact call parser shared by generation, parsing and replay."""
-    version = TRANSCRIPT_PARSER_VERSION if parser_version is None else parser_version
-    if not isinstance(version, str) or version not in _TRANSCRIPT_PARSER_LAYOUTS:
-        raise ValueError("unsupported transcript parser version")
-    return TranscriptParserContract(
-        NARRATIVE_PARSER_NAME, version, _TRANSCRIPT_PARSER_LAYOUTS[version]
-    )
 
 
 NARRATIVE_SELECTOR_NAME = "select_narrative_evidence"
@@ -1268,20 +1247,22 @@ def parse_transcript_text(
     parser_version: str = TRANSCRIPT_PARSER_VERSION,
     language: str = "en",
 ) -> NarrativeParseResult:
-    """Versioned call layouts; saved 0.1.x and 0.2.0 replay unchanged."""
+    """Versioned call layouts; saved versions retain their original boundaries."""
     if not isinstance(text, str):
         raise TypeError("transcript text must be a string")
     contract = transcript_parser_contract(parser_version)
     raw_lines = text.splitlines()
     legacy = contract.layout == "legacy"
-    affiliation = contract.layout == "natural_affiliation"
+    stable_boundaries = contract.layout == "natural_affiliation_boundary"
+    affiliation = contract.layout in {"natural_affiliation", "natural_affiliation_boundary"}
     if legacy:
         heading = next((i for i, line in enumerate(raw_lines) if _TRANSCRIPT_START.match(line.strip())), None)
         start_index = None if heading is None else heading + 1
     else:
         from .transcript_layout import body_start
         found = body_start(raw_lines, _TRANSCRIPT_START, _transcript_speaker_fields,
-                           allow_affiliation=affiliation)
+                           allow_affiliation=affiliation,
+                           prefer_explicit=stable_boundaries)
         start_index = None if found is None else found[0]
         explicit_heading = False if found is None else found[1]
     if start_index is None:
@@ -1314,6 +1295,11 @@ def parse_transcript_text(
                 if label_count > 1 and state.active is not None:
                     state.active["line_end"] = index + label_count
                 _enable_transcript_qa(state,bool(_QA_TRANSITION.search(body or "")))
+                # Inline speaker turns may contain the real end control too.
+                # Old parser versions keep their saved boundary semantics.
+                if stable_boundaries and END.search(line.strip()):
+                    finished = True
+                    break
                 index += label_count
                 continue
         if legacy:
@@ -1741,35 +1727,50 @@ def _validate_claim_roles(claim: SummaryClaim, known: Mapping[str, EvidenceSpan]
 
 
 def project_summary_quality(
-    draft: SourceSummaryDraft, *, evidence_spans: Sequence[EvidenceSpan],
+    draft: SourceSummaryDraft,
+    *,
+    evidence_spans: Sequence[EvidenceSpan],
     discarded_claims: bool = False,
 ) -> SourceSummaryDraft:
-    """Compute quality once after claim recovery, without a manual review gate.
+    """Project source-oriented quality without adding permission or truth claims."""
+    claims, status = project_summary_claim_quality(
+        draft.claims, evidence_spans=evidence_spans, discarded_claims=discarded_claims
+    )
+    return replace(draft, claims=claims, status=status)
 
-    Model uncertainty remains in claim_type/modality. Redundant model status
-    labels cannot invalidate grounded content or declare it verified. This is
-    a diagnostic projection; publication still requires original-byte replay
-    of every selected locator in the verify handler.
-    """
+
+def project_summary_claim_quality(
+    claims: Sequence[SummaryClaim],
+    *,
+    evidence_spans: Sequence[EvidenceSpan],
+    discarded_claims: bool = False,
+) -> tuple[tuple[SummaryClaim, ...], Literal["draft", "needs_review"]]:
+    """Shared evidence/claim quality, independent of raw or projected draft identity."""
     known = {span.span_id: span for span in evidence_spans}
     projected = []
-    for claim in draft.claims:
-        validate_summary_claim(claim, known, draft.status)
+    for claim in claims:
+        validate_summary_claim(claim, known, "draft")
         cited = [known[evidence_id] for evidence_id in claim.evidence_ids]
         needs_review = (
-            claim.claim_type == "uncertain" or claim.modality == "uncertain"
-            or any(span.quality_flags or span.parse_status != "parsed" for span in cited)
-            or any(span.structured_value.get("source_role", "unknown") == "unknown"
-                   for span in cited)
+            claim.claim_type == "uncertain"
+            or claim.modality == "uncertain"
+            or any(
+                span.quality_flags or span.parse_status != "parsed" for span in cited
+            )
+            or any(
+                span.structured_value.get("source_role", "unknown") == "unknown"
+                for span in cited
+            )
         )
         projected.append(replace(claim, needs_review=needs_review))
     # All selected spans remain in the exported bundle and are replayed, even
     # when the compact summary does not repeat each span as a separate claim.
     review_required = (
-        discarded_claims or any(claim.needs_review for claim in projected)
-        or any(span.quality_flags or span.parse_status != "parsed" for span in evidence_spans)
+        discarded_claims
+        or any(claim.needs_review for claim in projected)
+        or any(
+            span.quality_flags or span.parse_status != "parsed"
+            for span in evidence_spans
+        )
     )
-    return replace(
-        draft, claims=tuple(projected),
-        status="needs_review" if review_required else "draft",
-    )
+    return tuple(projected), "needs_review" if review_required else "draft"

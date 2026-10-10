@@ -1,0 +1,37 @@
+runtime dependency declaration parity.............................(no files to check)Skipped
+ruff check (WU-1.2, mirrors CI)...................................(no files to check)Skipped
+mypy contract modules (FC-1204-c, mirrors CI).....................(no files to check)Skipped
+config doctor (WU-7.1, mirrors CI)................................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test)...(no files to check)Skipped
+[master a034b3eb] docs: prepare three isolated P7 harness packages
+ 35 files changed, 3358 insertions(+), 1733 deletions(-)
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/implementation_worktree.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/plan-exact-ci-final.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/plan-exact-ci.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/plan-normal-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/plan-normal-publication.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/plan-normal-push.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/HANDOFF_FORMAT.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/INTERFACES.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/README.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/bootstrap.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/bootstrap/p7-audit-normal-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/bootstrap/p7-audit-startup-fix-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/bootstrap/p7-cwp-projection-normal-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/bootstrap/p7-cwp-projection-startup-fix-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/bootstrap/p7-rf-normal-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/bootstrap/p7-rf-startup-fix-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/findings.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/handoff.example.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/handoff.schema.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/independent_package_review.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/lanes.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/p7_audit_execution_review.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/p7_cwp_projection_identity.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/p7_rf_calibration_binding.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/progress.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/startup_fix.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/task_plan.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/verification.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/verification.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/workspaces.json

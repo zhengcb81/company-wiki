@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "-p",
+    "pytest_timeout",
+    "-o",
+    "addopts=",
+    "tests/integration/test_official_json_subject_artifacts.py"
+  ],
+  "exit_code": 1,
+  "seconds": 19.2,
+  "cost_usd": 0,
+  "external_provider_calls": 0,
+  "external_model_calls": 0
+}

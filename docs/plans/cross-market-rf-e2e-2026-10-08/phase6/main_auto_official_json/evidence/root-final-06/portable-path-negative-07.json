@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-10T23:01:43.895046+00:00",
+  "argv": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/test_official_json_batch_identity.py::test_invalid_items_fail_before_any_source_or_model_operation",
+    "tests/unit/test_official_json_projection_generation.py::test_physical_locations_cannot_enter_semantic_binding",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "-o",
+    "addopts=",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cw-hook07-0m0qjdu0\\pytest"
+  ],
+  "exit_code": 0,
+  "seconds": 13.956,
+  "log_sha256": "9546c4a62f761bc1ef3ca4d1791f403e80097082a3c65246513d27280671d790",
+  "owned_temp_removed": true,
+  "supplier_calls": 0
+}

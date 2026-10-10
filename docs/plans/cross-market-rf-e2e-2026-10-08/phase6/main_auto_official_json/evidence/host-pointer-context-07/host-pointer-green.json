@@ -1,0 +1,35 @@
+{
+  "stage": "GREEN",
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "-p",
+    "pytest_timeout",
+    "-p",
+    "pytest_asyncio.plugin",
+    "-o",
+    "addopts=",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-host-pointer-green-l50wj9l5\\pytest",
+    "tests/contract/test_fc1307_host_assumption_gate.py",
+    "-k",
+    "not the_repository_has_no_new_host_assumptions"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 2.267,
+  "external_provider_calls": 0,
+  "baseline_modified": false,
+  "tests_scope": "entire guard responsibility file excluding repository-wide scan",
+  "ruff_exit_code": 0,
+  "motivating_file_scan": {
+    "file": "tests\\unit\\test_official_json_model_subject.py",
+    "violations": []
+  }
+}

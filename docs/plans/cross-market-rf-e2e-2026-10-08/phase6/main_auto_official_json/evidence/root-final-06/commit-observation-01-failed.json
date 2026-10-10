@@ -1,0 +1,11 @@
+{
+  "at": "2026-10-10T22:58:26.299456+00:00",
+  "exit_code": 1,
+  "head": "3f2ed5cb1b95492717652cba64eae35c9686a1a0",
+  "staged_files": 350,
+  "seconds": 27.689,
+  "normal_hook_used": true,
+  "log_sha256": "276dcacb82f98b7995ece32160f99f0bd99ae62fc5cc9cb73323c62eb804ea9a",
+  "stage_temp_removed": true,
+  "archive_bytes_verified": 280
+}

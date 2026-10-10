@@ -1,0 +1,78 @@
+warning: in the working copy of 'src/company_wiki/automation/execution_context.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/company_wiki/automation/narrative_batch.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/company_wiki/automation/narrative_batch_cli.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/company_wiki/automation/narrative_batch_request.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/company_wiki/automation/narrative_contracts.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/company_wiki/automation/narrative_evidence_view.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/company_wiki/automation/narrative_generation.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/company_wiki/automation/narrative_projection.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/company_wiki/automation/store.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/company_wiki/source_catalog/narrative_evidence.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/company_wiki/source_catalog/narrative_transport_cli.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/company_wiki/source_catalog/transcript_layout.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/contract/test_official_transcript_layouts.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/integration/test_s5_narrative_evidence_view.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/support/narrative_model_fixture.py', LF will be replaced by CRLF the next time Git touches it
+Merge made by the 'ort' strategy.
+ .planning/p7-cwp-projection/HANDOFF.md             | 100 ++++++
+ .planning/p7-cwp-projection/HANDOFF_FORMAT.md      |  22 ++
+ .planning/p7-cwp-projection/IMPLEMENTATION_CARD.md | 101 ++++++
+ .planning/p7-cwp-projection/INTERFACES.md          |  38 +++
+ .../m1_baseline_20261010/baseline_m3_tests.log     |  19 ++
+ .../evidence/m1_red_20261010/red_new_tests.log     | 210 ++++++++++++
+ .../evidence/m2_green_20261010/green_all.log       |  21 ++
+ .../evidence/m2_green_20261010/green_all_final.log |  21 ++
+ .../m2_green_20261010/green_m3_regressions.log     |  28 ++
+ .../evidence/m2_green_20261010/green_new_tests.log |  14 +
+ .../evidence/m2_green_20261010/static_mypy.log     |   1 +
+ .../evidence/m2_green_20261010/static_ruff.log     |   1 +
+ .../evidence/m3_e2e_20261010/e2e.log               |   1 +
+ .../evidence/m3_e2e_20261010/e2e_first.log         |   1 +
+ .../m3_e2e_20261010/e2e_projection_chain.py        | 289 +++++++++++++++++
+ .../evidence/m3_e2e_20261010/e2e_receipt.json      | 143 +++++++++
+ .../m3_e2e_20261010/e2e_receipt_first.json         | 143 +++++++++
+ .../m3_e2e_20261010/repo_status_before_e2e.txt     |   4 +
+ .../m3_final_20261010/green_all_post_review.log    |  21 ++
+ .../m3_final_20261010/independent_review.md        |  35 ++
+ .../evidence/m3_final_20261010/static_mypy.log     |   1 +
+ .../evidence/m3_final_20261010/static_ruff.log     |   1 +
+ .planning/p7-cwp-projection/findings.md            |  17 +
+ .planning/p7-cwp-projection/handoff.example.json   |  41 +++
+ .planning/p7-cwp-projection/handoff.json           | 123 ++++++++
+ .planning/p7-cwp-projection/handoff.schema.json    | 219 +++++++++++++
+ .planning/p7-cwp-projection/progress.md            |  14 +
+ .planning/p7-cwp-projection/task_plan.md           |  29 ++
+ .../source_catalog/official_json_projection.py     | 224 +++++++++++--
+ .../test_p7_official_projection_compatibility.py   | 284 +++++++++++++++++
+ tests/unit/test_p7_official_projection_identity.py | 351 +++++++++++++++++++++
+ 31 files changed, 2488 insertions(+), 29 deletions(-)
+ create mode 100644 .planning/p7-cwp-projection/HANDOFF.md
+ create mode 100644 .planning/p7-cwp-projection/HANDOFF_FORMAT.md
+ create mode 100644 .planning/p7-cwp-projection/IMPLEMENTATION_CARD.md
+ create mode 100644 .planning/p7-cwp-projection/INTERFACES.md
+ create mode 100644 .planning/p7-cwp-projection/evidence/m1_baseline_20261010/baseline_m3_tests.log
+ create mode 100644 .planning/p7-cwp-projection/evidence/m1_red_20261010/red_new_tests.log
+ create mode 100644 .planning/p7-cwp-projection/evidence/m2_green_20261010/green_all.log
+ create mode 100644 .planning/p7-cwp-projection/evidence/m2_green_20261010/green_all_final.log
+ create mode 100644 .planning/p7-cwp-projection/evidence/m2_green_20261010/green_m3_regressions.log
+ create mode 100644 .planning/p7-cwp-projection/evidence/m2_green_20261010/green_new_tests.log
+ create mode 100644 .planning/p7-cwp-projection/evidence/m2_green_20261010/static_mypy.log
+ create mode 100644 .planning/p7-cwp-projection/evidence/m2_green_20261010/static_ruff.log
+ create mode 100644 .planning/p7-cwp-projection/evidence/m3_e2e_20261010/e2e.log
+ create mode 100644 .planning/p7-cwp-projection/evidence/m3_e2e_20261010/e2e_first.log
+ create mode 100644 .planning/p7-cwp-projection/evidence/m3_e2e_20261010/e2e_projection_chain.py
+ create mode 100644 .planning/p7-cwp-projection/evidence/m3_e2e_20261010/e2e_receipt.json
+ create mode 100644 .planning/p7-cwp-projection/evidence/m3_e2e_20261010/e2e_receipt_first.json
+ create mode 100644 .planning/p7-cwp-projection/evidence/m3_e2e_20261010/repo_status_before_e2e.txt
+ create mode 100644 .planning/p7-cwp-projection/evidence/m3_final_20261010/green_all_post_review.log
+ create mode 100644 .planning/p7-cwp-projection/evidence/m3_final_20261010/independent_review.md
+ create mode 100644 .planning/p7-cwp-projection/evidence/m3_final_20261010/static_mypy.log
+ create mode 100644 .planning/p7-cwp-projection/evidence/m3_final_20261010/static_ruff.log
+ create mode 100644 .planning/p7-cwp-projection/findings.md
+ create mode 100644 .planning/p7-cwp-projection/handoff.example.json
+ create mode 100644 .planning/p7-cwp-projection/handoff.json
+ create mode 100644 .planning/p7-cwp-projection/handoff.schema.json
+ create mode 100644 .planning/p7-cwp-projection/progress.md
+ create mode 100644 .planning/p7-cwp-projection/task_plan.md
+ create mode 100644 tests/integration/test_p7_official_projection_compatibility.py
+ create mode 100644 tests/unit/test_p7_official_projection_identity.py

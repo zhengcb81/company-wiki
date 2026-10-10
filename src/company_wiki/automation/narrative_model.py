@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from collections import Counter
 import hashlib
 import json
@@ -10,19 +10,22 @@ from typing import Any, NoReturn, Protocol
 
 from .models import canonical_json, canonical_json_hash
 from company_wiki.source_catalog.narrative_evidence import (
-    SummaryValidationError, project_summary_quality, validate_summary_claim,
+    SummaryValidationError, project_summary_claim_quality, validate_summary_claim,
     validate_summary_identity,
 )
 from company_wiki.source_catalog.narrative_document import selected_summary_input
 
 from .narrative_contracts import (
     NarrativeContractError, NarrativeSelectResult, _claim_from_dict, _draft_from_dict,
-    assert_no_physical_paths,
+    assert_no_physical_paths, _draft_to_dict, SubjectSummaryDraft,
+    subject_draft_from_dict, subject_draft_to_dict, validate_subject_summary_identity,
 )
 
 
 MODEL_REQUEST_SCHEMA = "narrative-model-request/1.4"
 NARRATIVE_PROMPT_VERSION = "1.7.0"
+PROJECTION_MODEL_REQUEST_SCHEMA = "narrative-model-request/2"
+PROJECTION_NARRATIVE_PROMPT_VERSION = "official-json/1.0.0"
 MODEL_RESPONSE_MAX_BYTES = 128 * 1024
 _GROUP_DECLARATION_ABSENT = object()
 
@@ -44,6 +47,11 @@ _INSTRUCTION = (
     "declare evidence_group_ids and explicitly cite every supplied member in evidence_ids. "
     "For a narrower proposition declare [] and cite only its actual support; do not add "
     "unrelated neighbors. Group closure is mechanical, never proof of entailment."
+)
+
+
+_PROJECTION_INSTRUCTION = _INSTRUCTION.replace(
+    "Keep source identity/language.", "Keep subject identity/language. Each row keeps its own role."
 )
 
 
@@ -108,6 +116,17 @@ def _citation_mapping(selected: NarrativeSelectResult) -> dict[str, str]:
 
 def _group_mapping(selected: NarrativeSelectResult) -> dict[str, tuple[str, tuple[str, ...]]]:
     """Project the existing source read model; this is not another group registry."""
+    if selected.subject.kind == "official_json":
+        # Membership is separate from quotes and roles. Identical record labels
+        # from different immutable parents must never create a shared group.
+        members: dict[tuple[str, str], list[str]] = {}
+        for span in selected.evidence_spans:
+            group_id = span.structured_value.get("selection_group_id", span.span_id)
+            if not isinstance(group_id, str) or not group_id:
+                group_id = span.span_id
+            members.setdefault((span.source_id, group_id), []).append(span.span_id)
+        return {f"g{index}": (canonical_json(list(key)), tuple(ids))
+                for index, (key, ids) in enumerate(members.items(), start=1)}
     view = selected_summary_input(
         source_id=selected.source_ref.source_id,
         source_sha256=selected.source_ref.content_sha256,
@@ -132,8 +151,14 @@ def _output_plan(evidence_count: int, max_output_tokens: int | None = None) -> d
             "coverage": "selected_excerpts_only", "planning": "compact_target_not_token_estimate"}
 
 
-def _response_schema(evidence_count: int) -> dict[str, Any]:
+def _response_schema(evidence_count: int, *, projected: bool = False) -> dict[str, Any]:
     schema = json.loads(json.dumps(_RESPONSE_SCHEMA))
+    if projected:
+        draft = schema["properties"]["draft"]
+        draft["required"] = ["subject_id", "subject_sha256", "language", "claims"]
+        properties = draft["properties"]
+        properties["subject_id"] = properties.pop("source_id")
+        properties["subject_sha256"] = properties.pop("source_sha256")
     # Accepted atomic groups can have more than eight original fragments.
     # Explicit citations stay bounded by the actual pinned selection and existing
     # transport/result caps rather than making valid group closure impossible.
@@ -154,6 +179,11 @@ class NarrativeModelRequest:
 
     @classmethod
     def from_selection(cls, selected: NarrativeSelectResult) -> "NarrativeModelRequest":
+        projected = selected.subject.kind == "official_json"
+        if projected and (not selected.evidence_spans or selected.source_metadata.language not in {"zh", "en", "mixed"}):
+            raise ModelResponseError("SUMMARY_INPUT_UNAVAILABLE")
+        prompt_version = PROJECTION_NARRATIVE_PROMPT_VERSION if projected else NARRATIVE_PROMPT_VERSION
+        instruction = _PROJECTION_INSTRUCTION if projected else _INSTRUCTION
         mapping = _citation_mapping(selected)
         groups = _group_mapping(selected)
         aliases = {span_id: alias for alias, span_id in mapping.items()}
@@ -163,10 +193,10 @@ class NarrativeModelRequest:
         flags = [span.quality_flags for span in selected.evidence_spans]
         default_flags = Counter(flags).most_common(1)[0][0] if flags else ()
         envelope = {
-            "schema_version": MODEL_REQUEST_SCHEMA,
-            "source": {
-                "source_id": selected.source_ref.source_id,
-                "source_sha256": selected.source_ref.content_sha256,
+            "schema_version": PROJECTION_MODEL_REQUEST_SCHEMA if projected else MODEL_REQUEST_SCHEMA,
+            "subject" if projected else "source": {
+                "subject_id" if projected else "source_id": selected.subject.item_key if projected else selected.source_ref.source_id,
+                "subject_sha256" if projected else "source_sha256": selected.subject.subject_sha256 if projected else selected.source_ref.content_sha256,
                 "language": selected.source_metadata.language,
                 "title": selected.source_metadata.title,
                 "document_kind": selected.source_metadata.document_kind,
@@ -189,21 +219,23 @@ class NarrativeModelRequest:
             "output_plan": _output_plan(len(mapping)),
             "selection": {key: selected.selection.to_dict()[key] for key in
                           ("status", "coverage_complete", "omitted_candidate_count")},
-            "response_schema": _response_schema(len(mapping)),
+            "response_schema": _response_schema(len(mapping), projected=projected),
         }
         data_json = canonical_json(envelope)
         identity = {
-            "prompt_version": NARRATIVE_PROMPT_VERSION,
-            "instruction": _INSTRUCTION,
+            "prompt_version": prompt_version,
+            "instruction": instruction,
             "data_json": data_json,
             "citation_mapping": mapping,
             "group_mapping": {alias: [group_id, list(members)]
                               for alias, (group_id, members) in groups.items()},
             "selection": selected.selection.to_dict(),
         }
+        if projected:
+            identity["subject_binding"] = selected.subject.to_dict()
         return cls(
-            NARRATIVE_PROMPT_VERSION,
-            _INSTRUCTION,
+            prompt_version,
+            instruction,
             data_json,
             canonical_json_hash(identity),
         )
@@ -219,7 +251,7 @@ class NarrativeModelRequest:
             envelope = json.loads(self.data_json)
         except (ValueError, TypeError):
             return self
-        if not isinstance(envelope, dict) or envelope.get("schema_version") != MODEL_REQUEST_SCHEMA:
+        if not isinstance(envelope, dict) or envelope.get("schema_version") not in {MODEL_REQUEST_SCHEMA, PROJECTION_MODEL_REQUEST_SCHEMA}:
             return self
         evidence = envelope.get("evidence")
         if not isinstance(evidence, list):
@@ -311,7 +343,9 @@ def decode_model_draft(
     evidence and claim uncertainty. Legacy model labels are optional and never
     act as permission; the canonical public wire shape remains unchanged.
     """
-    if response.prompt_version != NARRATIVE_PROMPT_VERSION:
+    projected_subject = selected.subject.kind == "official_json"
+    expected_prompt = PROJECTION_NARRATIVE_PROMPT_VERSION if projected_subject else NARRATIVE_PROMPT_VERSION
+    if response.prompt_version != expected_prompt:
         raise ModelResponseError("model response prompt version differs from request")
     try:
         decoded = response.response_bytes.decode("utf-8")
@@ -322,18 +356,24 @@ def decode_model_draft(
     if not isinstance(payload, dict) or "draft" not in payload:
         raise ModelResponseError("model response must contain a draft")
     _reject_translation(payload)
-    draft = _model_projection(payload["draft"], list(_RESPONSE_SCHEMA["properties"]["draft"]["properties"]), "summary draft")
+    schema = _response_schema(len(selected.evidence_spans), projected=projected_subject)
+    draft = _model_projection(payload["draft"], list(schema["properties"]["draft"]["properties"]), "summary draft")
     draft.setdefault("status", "draft")
     claims = draft.get("claims")
     if not isinstance(claims, list):
         raise NarrativeContractError("summary claims must be an array")
     if len(claims) > 20:
         raise NarrativeContractError("summary claims exceed twenty")
-    header = _draft_from_dict({**draft, "claims": []})
+    header = (subject_draft_from_dict({**draft, "claims": []}) if projected_subject
+              else _draft_from_dict({**draft, "claims": []}))
     try:
-        validate_summary_identity(header, source_id=selected.source_ref.source_id,
-                                  source_sha256=selected.source_ref.content_sha256,
-                                  language=selected.source_metadata.language)
+        if isinstance(header, SubjectSummaryDraft):
+            validate_subject_summary_identity(header, subject=selected.subject,
+                                              language=selected.source_metadata.language)
+        else:
+            validate_summary_identity(header, source_id=selected.source_ref.source_id,
+                                      source_sha256=selected.source_ref.content_sha256,
+                                      language=selected.source_metadata.language)
     except SummaryValidationError as exc:
         raise NarrativeContractError(str(exc)) from exc
     mapping = _citation_mapping(selected)
@@ -387,14 +427,16 @@ def decode_model_draft(
             raise first_error
         raise NarrativeContractError("summary draft must contain at least one claim")
     draft["claims"] = retained
-    projected = project_summary_quality(
-        _draft_from_dict(draft), evidence_spans=selected.evidence_spans,
+    typed_draft = subject_draft_from_dict(draft) if projected_subject else _draft_from_dict(draft)
+    quality_claims, quality_status = project_summary_claim_quality(
+        typed_draft.claims, evidence_spans=selected.evidence_spans,
         discarded_claims=len(retained) != len(claims),
     )
-    for claim, quality in zip(retained, projected.claims, strict=True):
-        claim["needs_review"] = quality.needs_review or quality.claim_id in partial_context_ids
-    draft["status"] = "needs_review" if partial_context_ids else projected.status
-    return draft
+    quality_claims = tuple(replace(claim, needs_review=claim.needs_review or claim.claim_id in partial_context_ids)
+                           for claim in quality_claims)
+    projected = replace(typed_draft, claims=quality_claims,
+                        status="needs_review" if partial_context_ids else quality_status)
+    return subject_draft_to_dict(projected) if isinstance(projected, SubjectSummaryDraft) else _draft_to_dict(projected)
 
 
 def _validate_group_declarations(
@@ -428,6 +470,8 @@ __all__ = [
     "MODEL_REQUEST_SCHEMA",
     "MODEL_RESPONSE_MAX_BYTES",
     "NARRATIVE_PROMPT_VERSION",
+    "PROJECTION_MODEL_REQUEST_SCHEMA",
+    "PROJECTION_NARRATIVE_PROMPT_VERSION",
     "ModelRateLimitError",
     "ModelResponseError",
     "ModelTimeoutError",

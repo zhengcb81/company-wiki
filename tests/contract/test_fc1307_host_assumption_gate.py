@@ -127,6 +127,53 @@ def test_fc1307a_widened_posix_roots_are_flagged(tmp_path, literal):
     assert guard.RULE_PATHS in _rules(tmp_path, f'HOST = "{literal}"\n')
 
 
+# JSON pointers are source coordinates, not filesystem paths.
+@pytest.mark.parametrize("key, expression", [
+    ("record_pointer", repr(_abs("", "data", "0"))),
+    ("field_pointer", repr(_abs("", "data", "0", "")) + " + str(index)"),
+    ("record_pointer", repr(_abs("", "data", "escaped~0tilde~1slash"))),
+    ("field_pointer", repr(_abs("", "data", "", "unicode-\u516c\u53f8"))),
+])
+def test_json_pointer_data_fields_are_not_host_paths(tmp_path, key, expression):
+    body = f"index = 1\nspan = {{'structured_value': {{{key!r}: {expression}}}}}\n"
+    assert _rules(tmp_path, body) == []
+
+
+@pytest.mark.parametrize("key, expression", [
+    ("path", repr(_abs("", "data", "0"))),
+    ("pointer", repr(_abs("", "data", "0"))),
+    ("record_pointer", "Path(" + repr(_abs("", "data", "0")) + ")"),
+    ("field_pointer", "open(" + repr(_abs("", "data", "0")) + ")"),
+    ("record_pointer", "[" + repr(_abs("", "data", "0")) + "]"),
+    ("field_pointer", repr(_abs("", "data", "bad~2escape"))),
+    ("record_pointer", repr(_abs("", "data", "trailing~"))),
+    ("field_pointer", repr(_abs("C:", "Users", "someone", "record.json"))),
+    ("path", repr(_abs("", "etc", "passwd"))),
+])
+def test_json_pointer_context_does_not_hide_filesystem_or_invalid_values(
+    tmp_path, key, expression,
+):
+    body = f"span = {{'structured_value': {{{key!r}: {expression}}}}}\n"
+    assert _rules(tmp_path, body) == [guard.RULE_PATHS]
+
+
+def test_a_json_pointer_shaped_standalone_literal_is_still_a_host_path(tmp_path):
+    body = "HOST = " + repr(_abs("", "data", "0")) + "\n"
+    assert _rules(tmp_path, body) == [guard.RULE_PATHS]
+
+
+def test_json_pointer_data_does_not_exempt_real_path_calls_or_capabilities(tmp_path):
+    pointer = repr(_abs("", "data", "0"))
+    body = (
+        "from pathlib import Path\n"
+        "def test_link(tmp_path):\n"
+        f"    span = {{'record_pointer': {pointer}}}\n"
+        f"    path = Path({pointer})\n"
+        "    path.symlink_to(tmp_path / 'target')\n"
+    )
+    assert _rules(tmp_path, body) == [guard.RULE_PATHS, guard.RULE_CAPABILITY]
+
+
 # ---------------------------------------------------------------------------
 # Rule 2 - host capabilities without a guard in the same function
 # ---------------------------------------------------------------------------

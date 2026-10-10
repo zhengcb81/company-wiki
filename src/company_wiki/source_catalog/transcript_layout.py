@@ -90,9 +90,18 @@ def speaker_fields(lines, index, legacy_fields, *, allow_affiliation=False):
     return None, None, None, 0
 
 
-def body_start(lines, explicit_start, legacy_fields, *, allow_affiliation=False):
+def body_start(lines, explicit_start, legacy_fields, *, allow_affiliation=False,
+               prefer_explicit=False):
     """A nearby speaker with actual body is necessary; navigation is insufficient."""
-    for heading, line in enumerate(lines):
+    headings = list(enumerate(lines))
+    if prefer_explicit:
+        explicit_headings = [(index, line) for index, line in headings
+                             if explicit_start.fullmatch(line.strip())]
+        # An actual transcript marker wins over a wrapper title and roster.
+        # If that explicit body cannot be verified, do not relabel the roster.
+        if explicit_headings:
+            headings = explicit_headings
+    for heading, line in headings:
         explicit = bool(explicit_start.fullmatch(line.strip()))
         if not explicit and not NATURAL_START.fullmatch(line.strip()):
             continue

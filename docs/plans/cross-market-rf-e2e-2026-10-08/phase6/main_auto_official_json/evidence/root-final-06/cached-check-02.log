@@ -1,0 +1,1084 @@
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:1: trailing whitespace.
++# Final functional acceptance and immutable legacy-effort history
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:2: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:3: trailing whitespace.
++Date: 2026-10-10. Status: PASS for this responsibility boundary.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:4: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:5: trailing whitespace.
++## Scope
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:6: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:7: trailing whitespace.
++- MAIN isolated worktree: `C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/company-wiki`.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:8: trailing whitespace.
++- Source write set: only `src/company_wiki/automation/narrative_batch.py`, at the two resume expected/manifest comparisons and their small comparison/read-history helpers.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:9: trailing whitespace.
++- Test write set: only `tests/integration/test_narrative_legacy_effort_history.py`.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:10: trailing whitespace.
++- ROOT owns staging, merging, PWF status and project completion. No commit/merge/install/production/config/original modification was performed by this task.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:11: trailing whitespace.
++- This is real public CLI functional validation, not an independent component review of this agent's earlier adapter/select/verify implementations.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:12: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:13: trailing whitespace.
++## Root cause and narrow fix
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:14: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:15: trailing whitespace.
++The previous gen1 producer omitted `reasoning_effort` from the generation manifest while HTTP could receive an explicitly configured effort. The fixed producer binds actual effort, so a completed old run's immutable manifest no longer equals a recomputation. Old records must remain unknown, not be rewritten to current effort.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:16: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:17: trailing whitespace.
++`_completed_history_generation_matches(expected, manifest, *, completed_history)` is a pure comparator. It permits only the missing gen1 model field, only for completed read history. It copies the expected model before removing the field and leaves both inputs unchanged. Generation2, existing/null effort fields, other model fields, source inputs and all other generation fields remain exact comparisons.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:18: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:19: trailing whitespace.
++`_completed_read_history(reader, store, jobs)` requires:
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:20: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:21: trailing whitespace.
++1. Every scoped job is already terminal under the existing coordinator's terminal semantics.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:22: trailing whitespace.
++2. Every existing effect has an actual delivered outbox and verified/applied effect state; a missing outbox is refused.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:23: trailing whitespace.
++3. Every succeeded verify job has a publication effect.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:24: trailing whitespace.
++4. Each publication is actually visible through the source artifact reader. ACK without activation is refused, so history normalization cannot enter the `activation_pending` worker path.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:25: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:26: trailing whitespace.
++Both resume paths preserve the saved manifest/hash, event, pin, execution binding and fee ledger. Active model work, undelivered outbox and prepared-only artifacts still raise typed `BatchResumeError(BATCH_FROZEN_BINDING_INVALID)` before worker/model execution. New low/max runs retain distinct generation SHA and cannot reuse an effort-unknown old artifact.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:27: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:28: trailing whitespace.
++## TDD and responsibility evidence
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:29: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:30: trailing whitespace.
++- True RED: real raw source import/catalog -> actual worker/model loopback -> publication/terminal compaction -> frozen old gen1 binding -> current resume rejected `BATCH_FROZEN_BINDING_INVALID`. The producer omission was reproduced through a test-only monkeypatch before generation creation; no old production record was edited. See `legacy-effort-red.log`.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:31: trailing whitespace.
++- Initial focused GREEN: raw1 history + narrow comparator. The subsequent final run covers both public request versions.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:32: trailing whitespace.
++- Existing historical-version compatibility: `test_narrative_batch_budget_and_resume.py`, **1 PASS / 51.12s**, see `legacy-effort-old-resume-compat.log`. This is separate responsibility compatibility evidence and is not added to the final 9-case count.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:33: trailing whitespace.
++- Static: Ruff 0; mypy 0 on batch source. See `legacy-effort-static.log`.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:34: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:35: trailing whitespace.
++A separate real raw-only request2/binding4 failure was identified during RED: the factory required projected execution versions based on the container schema despite having only raw work. The factory owner fixed classification from actual frozen projected work and supplied projected-version negative controls. Actual raw-only request2 worker/publish/history recovery is GREEN in this final run. The factory write was performed by the other owner, not this task.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:36: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:37: trailing whitespace.
++## Final concentrated functional acceptance
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:38: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:39: trailing whitespace.
++Exactly **9 distinct pytest cases PASS / 80.38s** in one concentrated invocation:
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:40: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:41: trailing whitespace.
++| Responsibility | Cases | Assertions |
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:42: trailing whitespace.
++|---|---:|---|
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:43: trailing whitespace.
++| Mixed public CLI | 5 | Two issuer projections share complete parents plus raw TXT; first execution, same-run resume, cross-run reuse, refresh, partial reuse, real public bytes/evidence/terminal records; changed second-parent bytes, inactive second parent and wrong projection SHA refuse before model/AUTO initialization |
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:44: trailing whitespace.
++| Complete empty-native public CLI | 1 | Real import/worker/publish/public read/evidence-list/compaction/reuse; explicit unknown language, complete zero evidence, 0 POST and 0 model reservation |
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:45: trailing whitespace.
++| Legacy history | 3 | Both public request versions; actual low HTTP config; original old field absent; public history resume adds no POST; all AUTO/catalog table dumps, manifests/events/pins/fees and raw bytes unchanged; old/low/max keys distinct and old artifact not reused; active/pending/non-visible rejection; strict pure comparator and mutation isolation |
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:46: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:47: trailing whitespace.
++`final-mixed-empty-history.log` and `final-mixed-empty-history-receipt.json` are authoritative invocation evidence. Prior partial GREEN, the separate old test, and other agent responsibility suites are not cumulatively added to this count.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:48: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:49: trailing whitespace.
++All HTTP was loopback. External provider calls: 0. External model calls/fees: 0. Fixture synthetic pricing remains measured in the test ledger and is asserted. Owned TEMP and Windows relocated basetemp were removed; the fixture's preexisting file and original test directory were restored. Source/test SHA snapshots before and after were identical.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:50: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:51: trailing whitespace.
++The existing coordinator may create/acquire an empty generation `.lock` control file during history reads. ROOT explicitly accepted this control-file exception; no claim of zero filesystem control writes is made. Original documents, catalog/AUTO records, manifests, artifact bytes and charges remain unchanged.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:52: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:53: trailing whitespace.
++## Frozen final SHA
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:54: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:55: trailing whitespace.
++- `src/company_wiki/automation/narrative_batch.py`: `7e17b29becfee0dbd22a753a0123e58ad7206130dfc5e2ba01009b26cae08dfd`
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:56: trailing whitespace.
++- `src/company_wiki/automation/narrative_worker_factory.py`: `69733204127ac7b1e7d76c2d3c3b206d9f1cf32c4f43a9d4007f4364b022457e`
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:57: trailing whitespace.
++- `tests/integration/test_narrative_legacy_effort_history.py`: `57828622b410a6e54020027085e9def2b3d61a98a52eaa74a4599e0978283412`
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:58: trailing whitespace.
++- `tests/integration/test_official_json_batch_e2e.py`: `a65e9adc35178bf3d6847797cb5f2f182916e96220d464be5c03b65055f2f3a3`
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:59: trailing whitespace.
++- `tests/integration/test_official_json_empty_batch_e2e.py`: `36caeee6b1d29268ec135f426394060b82ccbfb0c1ca43b18553706924798703`
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:60: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md:61: trailing whitespace.
++No unresolved blocker was found in the final responsibility suite. This does not claim the whole AUTO/PWF project is complete or expand approval gates. Source writes are now stopped; ROOT may integrate.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:1: trailing whitespace.
++# MAIN 官方 JSON 接线独立只读审查
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:2: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:3: trailing whitespace.
++日期：2026-10-10。审查者：main_json_source_adapter_design。工作树：`C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/company-wiki`。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:4: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:5: trailing whitespace.
++## 范围和结论
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:6: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:7: trailing whitespace.
++独立审查 ROOT 的 batch request/items、generation、freeze/thaw/resume、reuse、public transport/evidence view 以及 publication/terminal 接线。本人此前实现的 adapter/select/verify/runtime/factory 不作为本次独立验收对象，只作真实上游依赖。源码与生产配置只读；零外部 provider/LLM、零费用；探针及测试全部独占 TEMP，结束恢复。P7 叶模块验收另记。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:8: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:9: trailing whitespace.
++**当前结论：身份、父页、公开视图和 publication/terminal 的责任测试通过；全公共 mixed CLI 尚未验收通过。** 首轮 24 项中 22 PASS、2 FAIL，后续 53 项全部 PASS。不能用责任层局部绿宣称 AUTO 全链完成。ROOT 已接收以下三个共因，修复完成后必须重跑对应大节点，而非增加逐小步骤签收。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:10: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:11: trailing whitespace.
++## 已确认问题及最小反例
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:12: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:13: trailing whitespace.
++### R1：raw generation 遗漏 reasoning_effort（配置/复用共因）
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:14: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:15: trailing whitespace.
++用真实 `NarrativeBatchRequest.from_dict` 构造同一原文、同模型/endpoint/profile 两份请求，仅 reasoning_effort 从 low 改为 max；分别调用真实 `_item_generation`。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:16: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:17: trailing whitespace.
++- request SHA 不同。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:18: trailing whitespace.
++- raw `narrative-generation/1` SHA **相同**，effective model keys 为 model_id、endpoint、max_output_tokens、output_token_field。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:19: trailing whitespace.
++- 相同两请求的 projected `narrative-generation/2` SHA 不同。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:20: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:21: trailing whitespace.
++所以跨 run raw exact-generation lookup 能错误复用另一 reasoning_effort 配置的结果。建议新 raw 请求显式包含此字段时将其绑定为因果输入；历史无此字段的封存 manifest 保持原字节和原解释，不能恢复时重签。ROOT 已确认修复；本报告暂不将其记为修复后 PASS。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:22: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:23: trailing whitespace.
++### R2：projection generation 拒绝模型层已支持的 adaptive
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:24: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:25: trailing whitespace.
++真实公共请求 model.thinking='adaptive' 经 `NarrativeBatchRequest.from_dict` / `NarrativeHTTPModel` 配置验证成功，随后 `_item_generation(request, official_payload)` 抛 `projection generation thinking is unsupported`。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:26: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:27: trailing whitespace.
++这是同一配置字段在不同责任层支持集合不一致；应跟真实模型配置契约一致，不能改模型配置或默认值绕过。ROOT 已确认修复，待集中验收。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:28: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:29: trailing whitespace.
++### R3：单一 run prompt 被错误当成每个 mixed item 的 prompt
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:30: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:31: trailing whitespace.
++实际公共 CLI 首轮 mixed 三项运行：raw 完成并记账 92 tokens/111 micro-USD；两个 projection 在 HTTP 前因 `MODEL_BUDGET_DENIED` 终止。单个 projection 请求也 0 收费失败。底层 `reserve_model_attempt` 把 item 的 official-json/1.0.0 与 run 的旧 raw 1.7.0 硬比较；调用层又将 RunConflictError 误报为预算不足。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:32: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:33: trailing whitespace.
++ROOT/store agent 同时独立确认共因，ROOT 正在按冻结的 item generation prompt 修复。保留旧 raw run 治理版本、每项实际 prompt 从 binding4 generation 取得；不能放松成任意 prompt 可进入，也不能按 subject 前缀猜版本。还须保留 unknown reservation 的保守收费和幂等恢复。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:34: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:35: trailing whitespace.
++## 已验证的不变量
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:36: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:37: trailing whitespace.
++独立真实 source import/2 + persist + catalog 探针：
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:38: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:39: trailing whitespace.
++- 两个不同 issuer 的 projection 共享**两个相同真实 parent**，再加一个旧 TXT raw，共 3 个 distinct item_key、3 个独立 event。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:40: trailing whitespace.
++- 新 binding4 freeze/thaw 完整还原每项 manifest；raw read-policy map 只有真实 raw item，不为 projection 伪造 policy。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:41: trailing whitespace.
++- 真实 source_metadata.title 或 document_kind 单独变化，均改变 projected generation SHA。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:42: trailing whitespace.
++- 原 TXT bytes 与 catalog config bytes 不变；TEMP 移除；零外部调用。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:43: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:44: trailing whitespace.
++源码责任核对：
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:45: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:46: trailing whitespace.
++- `_item_generation` 的 raw 路径剔除 projection_prompt/projection_model_request_schema/official_json_adapter，防止官方适配器变化无谓重算旧 raw。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:47: trailing whitespace.
++- 官方 source preparation/dispatcher/read/compaction 均通过 source view/loader；artifact layer 只核 parent 关系，source port 核当前真实字节及语义；没有把 anchor document 当成完整 projection。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:48: trailing whitespace.
++- exact subject/generation 发现与 public ref/read 按完整 subject、generation 和实际 object SHA/byte_size，raw latest 查询排除 projection。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:49: trailing whitespace.
++- resume 的 binding4 保存 request SHA、版本、generation 设置/每项 source_inputs、job membership 与 reuse pin；恢复用旧 manifest 验真，不重新签 persisted events/jobs。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:50: trailing whitespace.
++- generation recovery pointer 对非 known reservation 保留恢复要求，不把未知费用退款或静默开始同 generation 的新收费。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:51: trailing whitespace.
++- final publication 使用完整 projection subject + generation target；终态压缩前读取和哈希真实 visible artifact，复核源 view 后保留紧凑 receipt。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:52: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:53: trailing whitespace.
++这些源码观察不代替修复后真实 whole-batch E2E。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:54: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:55: trailing whitespace.
++## 实际运行记录
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:56: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:57: trailing whitespace.
++1. `readonly-main-integration-tests.log`：真实 preparation + mixed subprocess/HTTP loopback + publication/terminal，**22 PASS / 2 FAIL**，pytest 50.13 秒。15 项 publication/terminal 全绿，覆盖 ACK 后崩溃/reconcile、第二母页损坏、不同 issuer 同母页独立发布/压缩、generation/原文字段伪造拒绝。2 FAIL 均为 R3。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:58: trailing whitespace.
++2. `readonly-main-contracts-views.log`：ROOT batch identity/subject contracts/evidence view + transport，**53 PASS**，pytest 17.09 秒。包含上下文/旧 raw wire、3.0 身份、每个真实父页检索、错误 issuer/as-of/generation、artifact 损坏不能当缓存 miss、重签文本/metadata 不能伪造回放。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:59: trailing whitespace.
++3. `readonly-source-snapshot.json`：报告时实际源码 SHA。ROOT 正在并行修复，因此是带时间的观察快照，不冒充一个封存 commit。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:60: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:61: trailing whitespace.
++测试环境：Python 3.13.9；禁第三方 autoload，显式 pytest_timeout、禁 cacheprovider、独占 basetemp。Windows 路径插件实际 relocation/cleanup 均 removed=true；外层 TemporaryDirectory 移除。唯一 pytest warning 是禁插件后现有配置项提示，不是断言失败。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:62: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:63: trailing whitespace.
++## 余项（大节点，不增许可）
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:64: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:65: trailing whitespace.
++- ROOT 修复 R1/R2/R3 后，重跑 public mixed 初次/同 run 恢复/跨 run reuse/部分 reuse/refresh，以及已冻结 request/实际 prompt/model body 变更的正负控。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:66: trailing whitespace.
++- 补/运行 projected model attempt unknown 使用量及恢复测试，确认同 attempt 不重复 HTTP、费用保留、真预算耗尽与配置/身份冲突各自报真实原因。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:67: trailing whitespace.
++- 全链绿后再看最终 retained-byte/terminal receipts、旧 raw 七参 pin wire、原件/config 一致和 TEMP 恢复；本轮 source-only/P7 通过不代表这一步完成。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:68: trailing whitespace.
++- 没有把施工期间缺参数/未落地接口当最终产品漏洞；没有创建人工签收/新审批链。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:69: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:70: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:71: trailing whitespace.
++## 追加：ROOT 修复后的独立责任验收
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:72: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:73: trailing whitespace.
++R1、R2 已通过实际重验，**可关闭配置根因项**。运行 generation + caller + run-store + preparation 集中责任组：**101 PASS / 12.00秒**，日志 readonly-generation-caller-fix.log。caller 真预算耗尽、run binding、scope、lease、busy SQLite 各自保留静态诊断，0 HTTP 前拒绝；unknown 使用量继续按保守界记账，不退款。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:74: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:75: trailing whitespace.
++真实 public request→TEMP source catalog→AUTO scheduler/materialized jobs→create run→freeze/resume 探针（readonly-generation-fix-probes.json）：
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:76: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:77: trailing whitespace.
++- raw low/max generation SHA 现不同，None/省略保持相同历史无字段身份。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:78: trailing whitespace.
++- public adaptive 请求及实际 projected generation 同时接受。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:79: trailing whitespace.
++- mixed 两个真实 model job 分别冻结1.7.0和official-json/1.0.0；run ledger不导入source模型语义，由coordinator提供不可变job→prompt映射，create_run精确覆盖scoped summarize jobs。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:80: trailing whitespace.
++- resume保持原manifest和event字节，thaw一致；改一个job prompt被BATCH_FROZEN_BINDING_INVALID拒绝，不默认/猜别的prompt。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:81: trailing whitespace.
++- 全部临时目录移除，0外部调用。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:82: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:83: trailing whitespace.
++历史兼容补充观察：构造忠实旧 generation1（explicit-low请求但封存manifest中无effort），一致重算wrapper所有settings/generation hash后，真实mixed resume仍报BATCH_FROZEN_BINDING_INVALID。不能据此说生产库已经有此类run；这是可复现的兼容边界。ROOT已收到，若承诺这种旧历史可读取，应只在封存缺字段时保持旧比较语义，新run继续新键，不能重签。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:84: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md:85: trailing whitespace.
++R3 per-job prompt admission的责任组已通过；ROOT/store agent报告实际mixed已发3次loopback POST并准确计量。当前whole-batch终态compaction仍在修同一旧run-prompt假设；本报告保留最终公共CLI/恢复/终态大节点待验，不将101局部绿当AUTO全部完成。后续由ROOT一次集中最终验收，不增加小节点许可。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:1: trailing whitespace.
++# MAIN model / summarize subject integration 03
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:2: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:3: trailing whitespace.
++## Delivery scope
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:4: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:5: trailing whitespace.
++Worktree: `C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/company-wiki`.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:6: trailing whitespace.
++Only `automation/narrative_model.py`, `automation/narrative_summarize.py`, two new owned tests, and this evidence directory were written. No contracts, batch, source adapter, quality helper, verification, catalog, transport, PWF shared file, P7, RF or audit changes. No commit.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:7: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:8: trailing whitespace.
++## Frozen API / versions
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:9: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:10: trailing whitespace.
++- `PROJECTION_MODEL_REQUEST_SCHEMA = "narrative-model-request/2"`
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:11: trailing whitespace.
++- `PROJECTION_NARRATIVE_PROMPT_VERSION = "official-json/1.0.0"`
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:12: trailing whitespace.
++- `NarrativeModelRequest.from_selection` accepts shared `NarrativeSelectResult` 2.0/3.0. Official JSON gets an explicit `subject` header: `subject_id`, `subject_sha256`, `language`, `title`, `document_kind`. It never uses a projected ID as `source_id`.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:13: trailing whitespace.
++- `decode_model_draft` expects the prompt version for the selected subject, parses the new `SubjectSummaryDraft`, and validates its whole identity before recovering individual claims. Actual parent-span citations are restored through the existing alias map. Both draft types use shared `project_summary_claim_quality`; each own typed draft is replaced independently.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:14: trailing whitespace.
++- `NarrativeSummarizeHandler` compares full subject bindings plus metadata and uses the existing caller/context once; supplied billing metrics survive successful and invalid-result outcomes unchanged. It emits strict summary3 for official JSON and summary2 for raw.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:15: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:16: trailing whitespace.
++MAIN generation must pass the new prompt/schema constants as the actual projection execution versions. This leaf does not select a provider, recreate a ledger/Worker, or introduce reuse/publication authorization.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:17: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:18: trailing whitespace.
++## Semantics
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:19: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:20: trailing whitespace.
++Every selected span keeps its field-level role. Compact default roles have per-row overrides; a question cannot become a company statement by group membership. Groups contain only member aliases, without joining quotations, and group membership is isolated by actual parent source plus selected group identity. A narrower answer is valid with partial-context diagnostic; full-group declaration requires all members, then ordinary role validation still applies. Unknown provider extensions are dropped; translation contradictions and whole-subject identity mismatches remain failures. Language stays original.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:21: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:22: trailing whitespace.
++For official JSON, no evidence or `unknown` language returns typed `SUMMARY_INPUT_UNAVAILABLE` before model configuration/call. A genuine complete `skipped_no_narrative` produces `summary_not_needed` without a model; shared contracts allow `unknown` only in that projection skip case. Completed model drafts require real `zh`, `en`, or `mixed`.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:23: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:24: trailing whitespace.
++## TDD and validation
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:25: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:26: trailing whitespace.
++`red.log` records the initial 33-test RED with a fixture source-class mismatch. After aligning the fixture with strict 3.0 actual parent/projection and coverage fields, `red-contract-aligned.log` records 27 failures / 6 passes before implementation. Some original negative controls passed via the old wrong-prompt rejection; the final tests were strengthened to match specific role/citation/group errors. Nine more targeted controls were added for language, cross-parent group labels, complete mixed-role group, actual HTTP request serialization, and raw byte-canonical goldens.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:27: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:28: trailing whitespace.
++Final `green.log`: **145 PASS**, 5.25 seconds; **42 new** and **103 directly affected legacy** tests. `ruff.log`: exit0. `mypy.log`: exit0, two source files. Three pre-change raw fixtures retain exact input SHA, JSON SHA, instruction SHA and decoded draft SHA (1, 3 and 160 spans), recorded in `before.json` and permanent tests.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:29: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:30: trailing whitespace.
++Only owned temporary test/cache directories were used and removed. The repository's Windows basetemp relocation explicitly logged `removed=true`. Zero provider/LLM calls, zero dollars, no production writes. One pre-existing `asyncio_mode` warning results from deliberately disabled plugin autoload; no configuration was changed.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:31: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:32: trailing whitespace.
++Reproduce from worktree:
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:33: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:34: trailing whitespace.
++```powershell
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:35: trailing whitespace.
++$env:PYTHONDONTWRITEBYTECODE = "1"
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:36: trailing whitespace.
++$env:PYTEST_DISABLE_PLUGIN_AUTOLOAD = "1"
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:37: trailing whitespace.
++python -B -m pytest -p pytest_timeout -p no:cacheprovider -q tests/unit/test_official_json_model_subject.py tests/unit/test_official_json_summarize_subject.py tests/unit/test_narrative_model_request.py tests/unit/test_narrative_model_aliases.py tests/unit/test_narrative_summarize_handler.py tests/unit/test_narrative_partial_summary.py tests/unit/test_narrative_model_usage.py
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:38: trailing whitespace.
++python -B -m ruff check --no-cache src/company_wiki/automation/narrative_model.py src/company_wiki/automation/narrative_summarize.py tests/unit/test_official_json_model_subject.py tests/unit/test_official_json_summarize_subject.py
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:39: trailing whitespace.
++```
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:40: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md:41: trailing whitespace.
++For mypy, use an owned TEMP cache and clean it, as captured in `static.json`. MAIN should rerun its major-node integrated tests after its other concurrent pieces land. This leaf proves typed model/summarize and offline HTTP serialization; it does not claim real end-to-end provider execution or complete publication/reuse correctness.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:1: trailing whitespace.
++# P7-CWP-PROJECTION 独立接收验收
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:2: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:3: trailing whitespace.
++日期：2026-10-10。验收者：main_json_source_adapter_design。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:4: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:5: trailing whitespace.
++## 结论
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:6: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:7: trailing whitespace.
++**source 叶模块接收：PASS / NO_BLOCKER。** 只验收构造确定性、深层快照所有权、存储/旧回放、新 producer 分派及 MAIN adapter 接口相容。不称 AUTO 全链或真实公司研究已经完成；未 merge、未 commit、未修改源码/P7 PWF/安装/原件/config/DB，未触其他 P7 仓。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:8: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:9: trailing whitespace.
++## 实际交付与写集
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:10: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:11: trailing whitespace.
++- 工作目录：`C:/Users/郑曾波/Projects/_harness_worktrees/p7/cwp`。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:12: trailing whitespace.
++- source base：`f8956d299b52849a4beb06e4071816ec72ddc6a3`。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:13: trailing whitespace.
++- code delivery：`1c11ef0b5a838655559e91fab9a7bf38f1533d89`。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:14: trailing whitespace.
++- 接收时 HEAD：`4f2c05c92f3aed9cdf91808a60e1c5d38adce6ee`，其后仅交接 PWF 文档提交，代码仍为上述 delivery。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:15: trailing whitespace.
++- `git diff --name-status base HEAD` 实际唯一生产修改为 official_json_projection.py，新增两份 P7 责任测试，其余仅独占 .planning/p7-cwp-projection。未触 automation、source reader、CLI、structure/layout/import、config/raw/生产数据库和安装副本。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:16: trailing whitespace.
++- 前后 `git status --short` 均为空。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:17: trailing whitespace.
++- 原 HANDOFF.md/handoff.json 与 source commit、API、范围相符。8 份交接证据文件实际 SHA 全匹配声明，见 handoff-evidence-hashes.json。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:18: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:19: trailing whitespace.
++## 独立验证
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:20: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:21: trailing whitespace.
++### 1. 新旧责任测试
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:22: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:23: trailing whitespace.
++再次实际运行两份新 P7 测试及四份既有 M3 parser/contract/projection/acceptance 文件：**166 PASS**，pytest 35.46 秒。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:24: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:25: trailing whitespace.
++日志：p7-independent-166-tests.log。全部在独占 basetemp；禁 cacheprovider，显式 pytest_timeout。Windows relocation 清理 removed=true，外层 TEMP 删除。无修改旧测试/golden。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:26: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:27: trailing whitespace.
++### 2. 真实离线 E2E
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:28: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:29: trailing whitespace.
++只读加载已检查的交付 E2E 程序，将其 receipt 目录显式重定向自己的 TEMP，避免覆盖交付证据；源码未改。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:30: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:31: trailing whitespace.
++实际 import/2→build 1.0.2→persist→catalog close/reopen→load→replay→export，覆盖 official-paged-qa 和 official-flat-list、多 issuer、两真实母页、三页全部排列。**PASS，4 cases/4 checks，temp_restored=true**。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:32: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:33: trailing whitespace.
++证据：p7-independent-e2e-receipt.json。原页每份 1 个文件、小投影独立存储、没有按公司复制整页。receipt 还记录原始 SHA、producer、span version、文件体积。零外部 provider/model，USD0。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:34: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:35: trailing whitespace.
++### 3. 旧字节独立比对（不用新 golden 自证）
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:36: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:37: trailing whitespace.
++`git show f8956d...:src/company_wiki/source_catalog/official_json_projection.py` 读取真实已验收 base blob，在内存执行旧构造；同一小 fixture 与新默认和新显式1.0.1比较。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:38: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:39: trailing whitespace.
++- canonical payload **逐字节相同**。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:40: trailing whitespace.
++- to_dict DTO **完全相同**。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:41: trailing whitespace.
++- 三者 SHA 均为 `df3f6502845450a90d28e82d1690e3bbd42dc326002ee19595917ca50fdbcee5`。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:42: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:43: trailing whitespace.
++证据：p7-independent-legacy-blob.json。未 checkout/reset 或重签旧投影。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:44: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:45: trailing whitespace.
++### 4. MAIN 接口兼容（内存覆层，不冒充已合并）
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:46: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:47: trailing whitespace.
++仅在独占 Python 进程，将唯一 P7 official_json_projection 叶模块以真实模块名加载，其他模块均使用 MAIN 工作树源码。真实两页 import/persist，调用 MAIN open_verified_projection→真实 selector/select handler→实际本地 prompt/decode summary→verify→replay/generation。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:48: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:49: trailing whitespace.
++**PASS：**
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:50: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:51: trailing whitespace.
++- 新 producer cwp_official_json/1.0.2；structure parser 仍1.0.1。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:52: trailing whitespace.
++- select.parser、native EvidenceSpan、bundle.versions.parser、generation.parser_component 都是1.0.2，没有硬编码回退到1.0.1。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:53: trailing whitespace.
++- 正倒序同 projection ID；真实 replay 4 locators；原件未变；0 HTTP/外部模型。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:54: trailing whitespace.
++- 本地离线模型只生成 prompt-derived fixture draft，不能作为真实模型质量或 whole batch 通过的证明。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:55: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:56: trailing whitespace.
++证据：p7-main-adapter-overlay.json。首次探针所有流程断言已通过，最后打印内部 mappingproxy 出错；探针改用公开 to_dict 重新跑成功。这是探针输出错误，没有改生产代码或调整产品契约。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:57: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:58: trailing whitespace.
++## 三不变量源码核对
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:59: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:60: trailing whitespace.
++1. 默认1.0.1保留输入页顺序和封存身份；只有两个 builder keyword-only projection_version='1.0.2' 才做 canonical 页排序。可靠正页号优先、SHA tie-break；页内真实 record/field 顺序不改。缺/重复页与冲突仍 partial，未凭排序补齐。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:61: trailing whitespace.
++2. Projection/Record/FieldBinding 对输入/DTO 中嵌套 dict/list/range 做所有权隔离，to_dict 返回普通独立 JSON；persist 拒绝 payload/hash/ID 漂移，不静默重哈希。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:62: trailing whitespace.
++3. load/replay/export 按 sealed adapter.parser 分派1.0.1/1.0.2；未知 producer、structure1.0.0明确拒绝；EvidenceSpan携实际producer版本。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:63: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:64: trailing whitespace.
++已披露的 `_FrozenDict._data` 私属性旁路仍可由蓄意访问内部容器触达；不属于公开 DTO 修改路径，persist/replay会拒绝漂移，按交付记录保留限制，不新增个人项目权限/人工审查链。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:65: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:66: trailing whitespace.
++## MAIN 下一步与边界
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:67: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:68: trailing whitespace.
++- ROOT 可按授权集成代码 delivery；不需要再重跑完整166组作为逐小门。本次真实 source责任组已经集中通过。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:69: trailing whitespace.
++- MAIN 新构造调用可显式 opt-in1.0.2；旧 sealed1.0.1继续封存解释，不能批量重排/重签。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:70: trailing whitespace.
++- MAIN source稳定后，最终集中重跑 mixed AUTO CLI/public read/费用/恢复/终态责任组即可。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md:71: trailing whitespace.
++- 原交付 exact HEAD CI 为 not_triggered（分支push未触master-only workflow），本验收只确认本地真实测试；不伪称远端 CI green。安装候选仍空。
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:1: trailing whitespace.
++# projection-generation-02 — MAIN generation helper
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:2: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:3: trailing whitespace.
++## Status and exact write ownership
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:4: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:5: trailing whitespace.
++Implemented only `src/company_wiki/automation/narrative_generation.py`, new `tests/unit/test_official_json_projection_generation.py`, and this evidence directory. No commit. No P7 leaf, contracts, adapters, catalog, public transport, or shared PWF edits. Existing five raw generation/reuse function bodies retain their pre-change SHA256. The fixed legacy raw contract still binds selective_narrative_parser/0.1.1 and bundle_producer/1.0.0; no silent old generation change.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:6: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:7: trailing whitespace.
++## API
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:8: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:9: trailing whitespace.
++```python
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:10: trailing whitespace.
++projection_generation_manifest(
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:11: trailing whitespace.
++    request,
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:12: trailing whitespace.
++    subject: company_wiki.narrative_subject.NarrativeSubject,
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:13: trailing whitespace.
++    *, language: str,
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:14: trailing whitespace.
++    execution_versions: Mapping[str, Any],
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:15: trailing whitespace.
++    bundle_producer: str,
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:16: trailing whitespace.
++    narrative_adapter_version: str,
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:17: trailing whitespace.
++) -> dict[str, Any]
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:18: trailing whitespace.
++```
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:19: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:20: trailing whitespace.
++`subject.kind` must be `official_json`. `subject_binding` is the complete detached neutral compact identity, including issuer, cutoff, every real parent ref, source adapter and coverage. It contains no record bodies and is not evidence of current-byte verification.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:21: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:22: trailing whitespace.
++Caller supplies actual projection selector/model adapter/prompt (required), optional model_request_schema and actual handler versions. It must not substitute raw-global prompt. Raw parser/document_normalization entries are omitted because the real source parser/layout come from `subject.to_dict()['adapter']`. Other supplied actual component versions remain bound. Caller owns current-byte/issuer/layout semantic verification.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:23: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:24: trailing whitespace.
++Manifest is `narrative-generation/2`, with explicit `narrative-bundle/3.0`, `narrative-select-result/3.0`, `narrative-summary-result/3.0`. `parser_component` splits the actual source adapter producer/version. `source_adapter` preserves the actual adapter including structure parser, layout ID/version/fingerprint. `language`, `profile`, explicit bundle producer and explicit narrative adapter version are causal inputs.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:25: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:26: trailing whitespace.
++Model semantic fields exactly cover the present HTTP adapter: model_id, endpoint, max_output_tokens, output_token_field, thinking, reasoning_effort, temperature, reasoning_split. Null optional generation options equal omission because HTTP omits them. Missing output_token_field uses the existing HTTP adapter's max_tokens default. No inference/default for model_id/endpoint/max_output_tokens. Credential env names/values, timing/bytes/fee/token budgets, run IDs, refresh and other batch membership never enter the manifest. URLs containing login credentials/query/fragment are refused; no actual URL opening occurs.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:27: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:28: trailing whitespace.
++All snapshots are detached recursively finite UTF-8 JSON. Physical Windows/UNC/file URLs and Unix filesystem path values, full record arrays and secret-keyed component metadata are refused. Numeric coverage page `records` counts remain legitimate. No human permission/receipt/policy/canary was added.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:29: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:30: trailing whitespace.
++## TDD and evidence
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:31: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:32: trailing whitespace.
++- `red.log` / `red.json`: real missing-API RED, 48 failed + 1 existing raw compatibility passed; exit 1.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:33: trailing whitespace.
++- `green.log` / `green.json`: final 54 new + 11 existing raw tests = 65 passed, exit 0; old function bodies SHA unchanged.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:34: trailing whitespace.
++- `ruff.log`: final Ruff exit 0 for only assigned source/new test.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:35: trailing whitespace.
++- `mypy.log`: final mypy exit 0 for only assigned source.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:36: trailing whitespace.
++- Initial style failure and first GREEN are retained separately; the style errors were in new test formatting only.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:37: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:38: trailing whitespace.
++Pytest emitted one existing configuration warning: plugin autoload was disabled for isolation and pytest.ini still contains asyncio_mode, although this synchronous unit package needs only pytest_timeout. It is not a test failure. No unrelated pytest configuration was changed.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:39: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:40: trailing whitespace.
++All pytest/mypy owned TEMP directories were removed; repository basetemp relocation cleanup explicitly reported removed=true. No catalogs or original document copies were created. External provider calls=0, external model calls=0, new cost USD0.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:41: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:42: trailing whitespace.
++Ruff format used its default cache once and updated the existing ignored `.ruff_cache/0.15.18/4368123618240361633` cache containing several other MAIN tests. Its newly added entry is this unit test; the shared cache was not deleted/restored because it belongs to concurrent MAIN activity. All verification Ruff commands use --no-cache. This small cache is not a product/config/source artifact.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:43: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:44: trailing whitespace.
++## Remaining MAIN work
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:45: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md:46: trailing whitespace.
++This helper does not implement new reuse_pin, public transport/reference/read, Worker projection events, source publication/current-parent checks, or actual LLM quality. MAIN must integrate it with projection-specific actual execution versions, exact subject artifact index/metadata, and the common handler chain; use the root concentrated offline E2E/recovery/compatibility review before publication. Unit green does not accept real company forecasts or claim whole PWF completion.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:1: trailing whitespace.
++# MAIN official JSON select handler — isolated TDD handoff
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:2: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:3: trailing whitespace.
++## Owned write set
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:4: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:5: trailing whitespace.
++- Worktree `C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/company-wiki`.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:6: trailing whitespace.
++- `src/company_wiki/automation/narrative_select.py` SHA256 `285230cade8ea127cd731b1b1fea68266ccee21c6a2f386ce62c682376a22c74`.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:7: trailing whitespace.
++- `tests/integration/test_official_json_select_handler.py` SHA256 `128974509656dffaf492bfd1525b3bcb27dca297603dd43875fd49b82f61e7f0`.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:8: trailing whitespace.
++- This evidence directory only. No commit; ROOT owns staging and MAIN composition.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:9: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:10: trailing whitespace.
++## Actual API and responsibility boundary
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:11: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:12: trailing whitespace.
++`NarrativeSelectHandler(*, reader, pdf_parser=parse_pdf_bytes, selector=None, normalization=None, projection_catalog: Any | None = None)`.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:13: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:14: trailing whitespace.
++Only an actual event subject `kind=official_json` opens `open_verified_projection(projection_catalog, projection_id=subject.item_key, expected_projection_sha256=subject.subject_sha256)`. This source adapter loads and exports once. Source ports verify all current parent bytes/state/layout/issuer/as-of. The handler does no direct SQL/path access and does not reread the first parent as the entire subject. Full verified `NarrativeSubject` is compared with event binding. No PDF or transcript fallback for projections.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:15: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:16: trailing whitespace.
++`select_verified_projection` calls the unchanged real selector over per-field native evidence. Result public DTO is exact `narrative-select-result/3.0`: schema_version, subject_binding, source_metadata, parser, selector, selection, evidence_spans, prompt_review, summary_scope. Parser identity comes from actual source span `parser_name/parser_version`, currently `cwp_official_json/1.0.1`; no invented adapter key or pin. Native original role, source_role, true parent, locator, record group, times, and source_evidence_id survive selector processing. No provider translations enter selected evidence.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:17: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:18: trailing whitespace.
++Captured and actually exported parent API pages count as pages_total/pages_read; no guessed TXT lines or tables. Missing pages remain coverage_complete=false/status=partial. `view.language=None` gives typed SOURCE_LANGUAGE_UNDETERMINED and zero model use; projected event metadata may explicitly say unknown, never defaults to zh/en. Prompt review is not_reviewed with null bindings: diagnostic, not an invented whole-parent review receipt. Old raw result/reader/normalizer/PDF/TXT wire remains unchanged.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:19: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:20: trailing whitespace.
++## Actual validation
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:21: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:22: trailing whitespace.
++- Initial RED: 13 failures before implementation, includes two new-fixture errors recorded honestly in red.log.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:23: trailing whitespace.
++- Fixture-corrected RED: 13 failures from missing projection dependency/import/branch (red-fixture-corrected.log). Empty native fields use a present attributable issuer record, not an impossible empty issuer page.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:24: trailing whitespace.
++- First implementation: 66 PASS / 1 new-test failure. Existing HandlerResult is a mappingproxy; corrected test to assert immutable direct access and detached to_dict output isolation, no product relaxation.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:25: trailing whitespace.
++- GREEN: 67 PASS in pytest 7.65s (13 new integration responsibilities, 28 unchanged legacy select handler responsibilities, 26 source adapter responsibilities).
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:26: trailing whitespace.
++- Ruff exit0, 0.177s; mypy exit0, 23.942s, exact own source only.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:27: trailing whitespace.
++- All test/source catalogs are owned TemporaryDirectory environments. Runner own TEMP and Windows path-budget plugin TEMP both report removal. No production source/config/DB writes. 0 external API/LLM calls and $0 cost.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:28: trailing whitespace.
++- Green saved-log SHA256 `c7a7db8bc33dd82e51b200c0c574fdfc0e92a153d65fc767114e0086d9a6c4f2` (bytes-preserving receipt).
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:29: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:30: trailing whitespace.
++## Test checkpoints
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:31: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:32: trailing whitespace.
++Real official source import, parser, projection persistence, source catalog, event contract, ExecutionSnapshot/JobExecutionContext, and actual selector execute together. Tests cover two true parents opened once each, answer-before-question, actual parser identity, public DTO shape, native two-issuer separation, translation exclusion, full and partial coverage, changed bytes or retired second parent refusal, no native-language fields, event relabeling (issuer/coverage/language) refusal, missing configured projection port, typed unknown layout port refusal with no fallback, and nested mutation isolation. The unknown-layout handler case deliberately injects the source port's named refusal; impossible layout persistence is not faked.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:33: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:34: trailing whitespace.
++## Remaining MAIN work
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:35: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:36: trailing whitespace.
++ROOT owns production catalog factory composition and the rest of the DAG (summary/replay/verify/batch). P7 leaf implementation remains independently owned; its final parser producer version must receive the combined major-node rerun. This node is selected-evidence handler completion only and is not a claim that AUTO or full end-to-end integration is complete.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:37: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:38: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:39: trailing whitespace.
++## Follow-up: exact native whitespace and source NFC display
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:40: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:41: trailing whitespace.
++Transport review identified that the initial adapter trimmed JSON fields while retaining full-field source locators. An old new-unit test even expected this trimming, exposing a responsibility-test gap. New byte-backed replay tests first failed, then the adapter introduced its private `_NativeProjectionUnit`: source-export text keeps all leading/trailing spaces, tabs, CRLF, newlines and NBSP. Existing PDF/TXT normalized unit rules remain unchanged. The real selector's transient matching representation is restored to original native evidence before export.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:42: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:43: trailing whitespace.
++Source EvidenceSpan v1 explicitly displays NFC text; original decoded source identity remains pinned by decoded_sha256. An additional decomposed-Unicode test asserts that exact distinction and that this adapter makes no further rewrite. Replayed original decoded text, source locator, original decoded SHA and existing NFC display remain separately verified; comparison is not bypassed.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:44: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:45: trailing whitespace.
++Adapter version is now `NARRATIVE_OFFICIAL_JSON_ADAPTER_VERSION=1.0.1` to prevent generations from reusing the prior trim semantics. Source SHA `fb78b6a5989bf6813b2082d6f8493850228d672284e47c181664813812f4aab5`. Adapter unit-test SHA `4896cf3df0c8cbd8e1c99567c2a25fa3780e42891ef13aeb7b582643c9f9eb31`; integration adapter-test SHA `b5328d2396fa783cb42c41ec707b54781aafd51054ad06197a02769139e21e1d`.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:46: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md:47: trailing whitespace.
++Final isolated result: 71 PASS / Ruff0 / mypy0, pytest9.65s and mypy21.818s; all owned TEMP removed, 0 external calls. See native-text-red.log, native-text-green.log (records old incorrect trim expectation), native-text-final-green.log/json and native-static.json. No commit. This supersedes source-adapter-02's 1.0.0 text behavior while leaving select.py wire SHA unchanged.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:1: trailing whitespace.
++# MAIN subject artifact storage node
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:2: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:3: trailing whitespace.
++## Delivery scope
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:4: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:5: trailing whitespace.
++Only source_catalog/narrative_artifact_store.py and tests/integration/test_official_json_subject_artifacts.py changed by this lane. No AUTO/contracts/CLI/projection leaf/config/installation/shared PWF changes. No commit.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:6: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:7: trailing whitespace.
++## Frozen interfaces (Store and ReadonlyReader)
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:8: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:9: trailing whitespace.
++- visible_subject_generation_candidates(*, subject: NarrativeSubject, generation_sha256: str, limit: int = 32) -> tuple[NarrativeArtifactVersion, ...]
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:10: trailing whitespace.
++- read_current_subject(*, artifact_version_id: str, subject: NarrativeSubject, generation_sha256: str, expected_sha256: str | None = None, expected_size: int | None = None) -> tuple[NarrativeArtifactVersion, bytes]
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:11: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:12: trailing whitespace.
++## Actual metadata contract
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:13: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:14: trailing whitespace.
++Projection metadata requires subject_binding equal to NarrativeSubject.to_dict() (kind official_json) and generation_sha256. Existing raw metadata with missing/null subject binding remains compatible; optional explicit raw subject binding is also supported. The catalog treats generation SHA as opaque causal identity, not a model authorization or a proof that generation_manifest matches current model settings. AUTO remains responsible for building/verifying generation_manifest and its SHA; the source port remains responsible for original bytes, projection replay and issuer semantics.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:15: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:16: trailing whitespace.
++Real first parent is only the existing document/source/SHA FK anchor. Prepare, activate, effect metadata read, subject candidate discovery and subject exact read all verify every declared parent remains active primary with its catalog SHA. Exact reads check every parent before and after opening artifact bytes. Full subject context is matched, not merely projection ID/SHA. Repeated parent observations are retained; duplicate relation checks are deduplicated locally.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:17: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:18: trailing whitespace.
++Legacy raw latest/read_exact/read_visible and generation candidates exclude official_json artifacts. There is no virtual source/document, new table, migration, task ledger, permit or receipt gate. New Store methods reuse the existing readonly reader implementation; no writer transaction spans an object read. Subject candidate limits retain the existing 32 default / 100 maximum. JSON subject candidate lookup currently has no expression index; do not claim a large-library benchmark from this tiny fixture.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:19: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:20: trailing whitespace.
++## Evidence
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:21: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:22: trailing whitespace.
++- red.log/red.json: 24 real failures before implementation. The separately retained launcher-error-01 was a pytest argv construction error, not RED evidence.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:23: trailing whitespace.
++- green.log/green.json: 72 passed in 52.45 seconds (29 new subject tests, 43 pre-existing raw/generation/terminal/layering tests).
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:24: trailing whitespace.
++- static-final-ruff.log: Ruff exit 0 over final source and test.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:25: trailing whitespace.
++- static-2.log/static.json: mypy exit 0 over the unchanged final source.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:26: trailing whitespace.
++- handoff.json: current owned file hashes and base HEAD.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:27: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:28: trailing whitespace.
++The first GREEN attempt exposed a test-fixture assumption: public importer also registers provenance sidecars, so two original pages have four sources. The fixture now compares the full actual pre-operation source/document ID inventory rather than guessing a source count. A second fixture mistake returned the prepared snapshot after activation; it now returns activate's real visible snapshot. Product assertions were not weakened. Those failed attempts are retained.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:29: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:30: trailing whitespace.
++Every new test uses real official import and projection parsing in an owned temporary catalog, then exercises the actual SQLite/object store. Originals remain exactly two files with matching bytes, and the source/document ID inventories cannot grow during artifact work. The final runner's requested TEMP is removed; pytest's path-budget relocation also explicitly reports cleanup removed=true. No external provider/model calls or new API charges. Local replay models appear only in the pre-existing compatibility tests.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:31: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:32: trailing whitespace.
++## Next MAIN integration
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:33: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md:34: trailing whitespace.
++Use the subject-aware methods for projection pin/reuse/final read, keep raw methods for historical raw DTOs. Pass the exact generation SHA. Final bundle/effect/pin must use the same neutral subject and generation; dispatcher/publish/public read must still verify source bytes and semantics at their source-owned boundaries. This node does not implement or sign those AUTO steps.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:1: trailing whitespace.
++# Mixed official JSON public CLI E2E — final handoff
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:2: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:3: trailing whitespace.
++## Result and boundary
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:4: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:5: trailing whitespace.
++Five actual public production CLI E2E tests PASS in80.38 seconds, NODE04. No external provider/model destination was used: nine total real HTTP POSTs went only to127.0.0.1. This validates the mixed batch source/worker/ledger/publication/transport node with independent synthetic originals; it does not claim real-provider, full-production AUTO or every remaining MAIN plan is complete. No commits were created.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:6: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:7: trailing whitespace.
++Files: tests/integration/test_official_json_batch_e2e.py and tests/support/official_json_batch_fixture.py. Their exact SHA256 and result are in batch-e2e-handoff.json. Root/pipeline owners integrated production sources; the separately delegated common ledger repair is documented in RUN_PROMPT_HANDOFF.md.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:8: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:9: trailing whitespace.
++## Reproduce
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:10: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:11: trailing whitespace.
++Use the repository isolated pytest runner with plugin autoload disabled, explicit timeout/async plugins, bytecode/cache disabled and owned TEMP basetemp. The exact successful argv and time are saved in batch-e2e-node-04.json. Selected test: tests/integration/test_official_json_batch_e2e.py. Run this at the large integration node; do not add every spawned-worker scenario as a commit permission.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:12: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:13: trailing whitespace.
++The fixture scans one real TXT, imports two actual shared official JSON pages containing two issuers through the production importer and persists both actual projections. It writes config/catalog.json and all request/DB/work artifacts under an owned TEMP project. Real public batch subprocesses run the same select/summarize/verify workers and AUTO store. A local HTTP endpoint checks actual raw model-request1.4 vs projected model-request2 inputs and responds from actual supplied evidence; there are no fabricated HandlerResults or hand-mutated successful jobs.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:14: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:15: trailing whitespace.
++## Verified checkpoints
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:16: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:17: trailing whitespace.
++- First mixed A+B+TXT run: exactly one POST per missing item, three successful jobs per item, correctly compacted projection terminal2/raw terminal1, actual synthetic ledger276 tokens/333 micro-USD. No unsettled or unknown reservations.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:18: trailing whitespace.
++- Public projected reference2 discovery and read2: exact subject/generation/ref pins, artifact full SHA and byte size, verified original locator replay. Full expected issuer identity stores unknown fields, while request constraints retain the concrete actual provider company ID.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:19: trailing whitespace.
++- Source semantics: each issuer selects native spans from both real mother pages, preserves management/investor_question roles and original zh/en language, excludes provider translations, and never mixes the other issuer's record IDs. Raw TXT still returns the legacy ref1/bundle2.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:20: trailing whitespace.
++- Resume of the exact completed run: no new POST, unchanged ledger and refs, no repeated paid request. Separate identical run: zero POST, zero newly charged usage, zero new jobs and identical published refs.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:21: trailing whitespace.
++- Explicit refresh: three new POSTs and newly visible artifact versions; terminal and public replay checks repeat. Partial hit: initial A costs one POST, mixed A+B+TXT then costs only B/raw two POSTs, retains A's artifact pin and creates six jobs.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:22: trailing whitespace.
++- Preparation negatives: changed second-parent bytes, inactive second parent, valid but absent projection identity. Each fails before any model POST or AUTO DB materialization and reports no published artifact/zero charges.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:23: trailing whitespace.
++- Every case: original raw+sidecar bytes and config unchanged, mutation fixture explicitly restored, whole owned project removed, prior test directory contents restored. Pytest effective basetemp cleanup reports removed:true.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:24: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:25: trailing whitespace.
++The nine synthetic HTTP calls account for828 tokens/999 micro-USD under test pricing across separately charged runs; these are test ledger values, not external supplier charges.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:26: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:27: trailing whitespace.
++## RED history and systemic corrections
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:28: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:29: trailing whitespace.
++Initial transitional RED was1FAIL/3PASS while dispatcher lacked projection_loader; the temporary constructor mismatch was fixed by the owner. Stable NODE01 then exposed the true common ledger defect: run.prompt_version raw1.7.0 was compared to projection official-json/1.0.0 and a binding conflict was mislabeled as budget exhaustion. Ledger now derives each job's exact prompt from immutable binding.job_prompt_versions, preserving old absent-map behavior and real caps.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:30: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:31: trailing whitespace.
++NODE02 made correct HTTP calls and settled usage, then failed terminal compaction. A temporary sys.settrace entry point around the actual public CLI captured store._compact_terminal_narrative's identical single-prompt assumption; source owners made terminal compaction and reservation share the pure model_prompt_version helper. Trace stores code location and safe synthetic exception message only; no locals/credentials or complete temporary database are retained.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:32: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:33: trailing whitespace.
++NODE03 passed processing/compaction/partial reuse but the test's read2 request included null issuer constraints. The fixture now sends actual concrete constraints and validates shape with NarrativeReadRequest before the public subprocess. No production safety or source/issuer/replay assertion was relaxed. NODE04 passes all five tests. Original RED, NODE01/02/03 logs and code-only trace remain alongside the final result.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:34: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:35: trailing whitespace.
++## Static verification
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:36: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md:37: trailing whitespace.
++Final Ruff check on the two E2E files, unique ledger source and new ledger responsibility test passes. Ledger51 new+old tests and mypy also pass; see RUN_PROMPT_HANDOFF.md. No provider, production configuration, installation copies or shared PWF were changed by this package.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:1: trailing whitespace.
++# P7 explicit canonical producer public CLI E2E
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:2: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:3: trailing whitespace.
++## Delivery and result
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:4: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:5: trailing whitespace.
++Unique new file: tests/integration/test_official_json_canonical_cli_e2e.py. Three test functions, six final cases. No production or support fixture edits by this task, no commits, no vendor calls. Existing support creates owned TEMP originals/catalogs and loopback HTTP. Final file SHA is in canonical-cli-handoff.json.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:6: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:7: trailing whitespace.
++The original three full public cross-boundary cases PASS in46.79 seconds. After root requested shape coverage, only the three new list/dict/null parameter cases ran and PASS in8.76 seconds. The already passing full canonical processing/reuse path was not redundantly repeated. Exact argv, actual receipts of test execution and TEMP cleanup are saved in canonical-cli-green.log/json and canonical-cli-shape-green.log/json.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:8: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:9: trailing whitespace.
++## Actual public boundary checks
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:10: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:11: trailing whitespace.
++The test invokes source_catalog.cli official project with explicit projection_version1.0.2 over two genuine imported shared pages. Forward and reverse parent inputs produce identical complete public response bytes, projection ID and digest. The projection is persisted by the production CLI; separate new CLI processes reopen it by ID for replay and export. Both true parents are present, selected record count is two, exported EvidenceSpan producer is cwp_official_json1.0.2, while the sealed JSON structure parser remains1.0.1.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:12: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:13: trailing whitespace.
++The resulting neutral subject enters the real production batch CLI. One actual loopback model POST consumes the real model-request2; select/summarize/verify all succeed in the same AUTO store and compact to terminal2 pins. Actual synthetic usage is92 tokens/111 micro-USD, no unknown/unsettled reservations. Public metadata reference2 discovery and read2 validate exact subject/generation/artifact SHA and size, both true mother pages and original replay. Read bundle and actual selected spans report producer1.0.2; subject.adapter structure_parser_version remains1.0.1.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:14: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:15: trailing whitespace.
++A third public reverse-order construction returns identical bytes and identity. Another batch run reuses the exact earlier artifact ref, creates no jobs and makes zero new model calls or newly charged usage. This proves canonical identity survives public CLI, persistence, source adaptation, generation, publication, public read and exact generation reuse.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:16: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:17: trailing whitespace.
++The legacy test keeps default omission and explicit1.0.1 byte-equivalent for the same input order; reversing pages retains historical distinct IDs and parent enumeration order. The initial fixture's sealed old projection ID remains unchanged.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:18: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:19: trailing whitespace.
++The parameter negative test refuses unsupported string9.9.9 and non-string list/dict/null with typed exit2, empty stdout and bounded failure JSON, no raw traceback/path leak, no new projection JSON or AUTO DB. This is input shape correctness, not a permission or artificial approval gate.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:20: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:21: trailing whitespace.
++## TDD evidence
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:22: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:23: trailing whitespace.
++Initial canonical RED:2 FAIL/1 PASS,11.85 seconds. Actual public CLI ignored1.0.2 and returned1.0.1; unsupported9.9.9 was likewise ignored. Root passed only an explicitly present projection_version to the producer, leaving omission/default/old wire unchanged.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:24: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:25: trailing whitespace.
++New shape RED:2 FAIL/1 PASS,10.48 seconds. List/dict actually returned exit1 and unhashable TypeError traceback; null already produced a typed refusal. Root added a pre-builder string shape guard raising ProjectionError invalid_projection_version, keeping source-owned producer validation for strings. Only these three new negatives reran after that fix. All RED logs remain.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:26: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:27: trailing whitespace.
++## Restoration and test placement
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:28: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md:29: trailing whitespace.
++Every test snapshots original raw/sidecar/config bytes, restores owned fixture state and removes the whole owned project directory. Effective pytest basetemp cleanup reports removed:true. No original migration, provider capture, live LLM, installed skill or shared PWF edits occur. These spawned-worker/public subprocess checks belong to a large integration node, not a repeated commit permission. Ruff on the unique new file passes; root separately owns source static/consolidated verification. This test delivery does not claim full project or every AUTO plan is complete.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:1: trailing whitespace.
++# Transport subject foundation handoff
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:2: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:3: trailing whitespace.
++Scope: only the three transport/replay source files and two new tests in handoff.json. No commit, provider/model request, config/install/database write outside owned TEMP. This is not acceptance of full AUTO.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:4: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:5: trailing whitespace.
++## Frozen APIs
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:6: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:7: trailing whitespace.
++- `NarrativeRef`: old first five constructor positions retained; optional `source_ref`, appended typed `subject_binding: NarrativeSubject | None` and `generation_sha256: str | None`. `.subject` derives neutral raw binding for ref1. Ref2 exact wire excludes raw anchor.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:8: trailing whitespace.
++- `NarrativeReadRequest`: old positions retained; appended `expected_issuer`. Read2 exact wire accepts null or partial concrete six issuer keys; no fiscal identity.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:9: trailing whitespace.
++- `parse_projected_reference_request(value) -> tuple[NarrativeSubject, str]`; old parser unchanged.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:10: trailing whitespace.
++- `NarrativeTransportReader(..., projection_loader: Callable[[NarrativeSubject], VerifiedProjectionView] | None = None)`.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:11: trailing whitespace.
++- `reference_subject(subject, *, generation_sha256)` uses exact subject/generation catalog query. Metadata-only discovery does not open source/model.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:12: trailing whitespace.
++- `read` branches on ref version. Ref2 uses `read_current_subject` exact artifact/hash/size/generation/current all-parent SQL relationships; then one source-owned loader/export; exact full subject and verified original native spans replay.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:13: trailing whitespace.
++- `replay_verified_projection(view, selected) -> int` is shared by public read and future verify handler. It does not export/open parents again. Only selector annotations may be added. Rawtext/token/pointer/parents/parser/role/language/coordinates/quality/source facts must match. Text hash and unit kind annotations are checked, as are actual DTO source language and parser generation.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:14: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:15: trailing whitespace.
++Receipt2 exact keys: schema_version, status, narrative_ref, subject_binding, parent_source_refs, as_of_date, observed_at, locator_count, selection_status, quality_status, replay_status. observed_at is this read event clock, not an invented parent-source timestamp. No whole records, paths, financial identity, review approval, or policy receipt.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:16: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:17: trailing whitespace.
++## TDD and verification
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:18: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:19: trailing whitespace.
++RED unit: 24 fail/15 pass; RED integration: 17 fail/39 pass; additional re-signed metadata RED: 2 genuine failures. Final 116 passed/1 explicitly deselected in 29.54s; Ruff zero; mypy zero in three source files. New 58 tests all green; legacy 58 green.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:20: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:21: trailing whitespace.
++Known excluded legacy test `test_current_reader_preserves_older_summary_above_new_generation_targets` fails during published_fixture's model step before any transport call: ReplayNarrativeModel emits >280 character evidence as claim, summary model rejects CLAIM_TEXT. Parent owns shared model/fixture resolution. Initial full failure retained in green-tests.log; no test weakened/removed. This is not a full-green claim. Re-run complete 117 after that parent fix.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:22: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:23: trailing whitespace.
++Integration uses real import request2, persisted projections, two shared parents/two issuers, artifact prepare/activate and source export. It checks exact generation, A/B isolation, legacy latest exclusion, second-parent bytes/state/primary refusal, corruption non-cache-miss, source loader once per read, issuer/cutoff prechecks, re-signed locators and language/parser false metadata, all original raw bytes and document/source ID inventories retained. TEMP and relocated pytest directory cleanup evidence is in logs. Synthetic bundles are constructed locally; tests do not evaluate model summary quality or full three-job DAG.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:24: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:25: trailing whitespace.
++## Next owner steps
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:26: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md:27: trailing whitespace.
++Connect public CLI/verify handler and mixed batch runner to these same APIs. Add genuine loopback HTTP three-job E2E, then whole MAIN integration node. Ref2 source_ref is None: consumers must branch before raw access and must never publish an anchor as the projection identity. Source port owns actual all-parent bytes/issuer/as-of verification; catalog owns SQL state, transport owns exact ref/locator replay; do not repeat source exports.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/RUN_PROMPT_HANDOFF.md:1: trailing whitespace.
++# Mixed model prompt admission foundation
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/RUN_PROMPT_HANDOFF.md:2: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/RUN_PROMPT_HANDOFF.md:3: trailing whitespace.
++## Actual root cause
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/RUN_PROMPT_HANDOFF.md:4: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/RUN_PROMPT_HANDOFF.md:5: trailing whitespace.
++The first true mixed public CLI node rejected projected model requests before HTTP because run.prompt_version stored the raw1.7.0 while projection requests use official-json/1.0.0. The caller collapsed a RunConflictError into budget denial. After that admission repair, NODE02 made exactly the correct HTTP calls and settled actual usage, then genuine sys.settrace at the public CLI found the same single-version assumption in store._compact_terminal_narrative. Original RED logs and the safe code-position-only trace are retained. This handoff concerns the ledger foundation; root owns batch binding/caller classification/terminal integration.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/RUN_PROMPT_HANDOFF.md:6: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/RUN_PROMPT_HANDOFF.md:7: trailing whitespace.
++## Frozen API and storage
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/RUN_PROMPT_HANDOFF.md:8: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/RUN_PROMPT_HANDOFF.md:9: trailing whitespace.
++`model_prompt_version(binding_json: str | None, *, job_id: str, default_prompt: str) -> str` is a pure shared lookup. No database, source, model or provider reads. Optional immutable binding_json.job_prompt_versions maps model job IDs to nonempty unpadded prompt strings. Missing map preserves old strict default_prompt. Present map with no requested job raises RunScopeError rather than silently using raw default; malformed values raise RunConflictError.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/RUN_PROMPT_HANDOFF.md:10: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/RUN_PROMPT_HANDOFF.md:11: trailing whitespace.
++create_run's existing scope query also reads job_type, and optional map keys must exactly equal the scoped source.narrative_summarize jobs. Zero model jobs allow an empty map. Validation precedes run/member insertion in the same transaction. reserve_model_attempt uses the shared helper and retains existing model/pricing, membership, active lease/generation, request replay and all budget caps. Table layout and public method signatures are unchanged. This ledger validates the binding's declared prompts; the batch owner derives and freezes them from the actual execution manifests. It does not infer issuer/source meaning or re-open original bytes.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/RUN_PROMPT_HANDOFF.md:12: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/RUN_PROMPT_HANDOFF.md:13: trailing whitespace.
++## TDD and responsible tests
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/RUN_PROMPT_HANDOFF.md:14: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/RUN_PROMPT_HANDOFF.md:15: trailing whitespace.
++Unique source: src/company_wiki/automation/narrative_run_store.py. Unique new test: tests/unit/test_official_json_run_prompt_admission.py. Initial24 tests:17 FAIL/7 PASS before implementation. Shared helper5 tests initially FAIL before the helper existed. Final29 new plus22 existing ledger tests:51 PASS in9.63 seconds. Ruff and mypy report0 issues. See run-prompt-red.log, run-prompt-helper-red.log, run-prompt-final-green.log/json and run-prompt-final-mypy.log.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/RUN_PROMPT_HANDOFF.md:16: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/RUN_PROMPT_HANDOFF.md:17: trailing whitespace.
++The tests use real owned TEMP SQLite runs/jobs/attempt leases. Same run admits raw and projected correct prompts, charges the same token/cost/output budget and prevents request replay from sending again. Swapped prompt/model/pricing, malformed/missing/extra/non-model map scopes and non-model reservations fail without inserting or charging. Old no-map runs retain strict single-prompt behavior, frozen maps cannot change on resume, and token/cost/output caps cannot be bypassed by selecting another prompt. TEMP cleanup is recorded. No HTTP or external provider is called in this ledger suite, and no commits were created.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/RUN_PROMPT_HANDOFF.md:18: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/RUN_PROMPT_HANDOFF.md:19: trailing whitespace.
++Root separately connects immutable batch binding4 and terminal compaction to this helper; full mixed public CLI acceptance is reported separately in BATCH_E2E_HANDOFF.md after the final genuine node.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:1: trailing whitespace.
++# MAIN official JSON verify/runtime/factory — TDD handoff
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:2: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:3: trailing whitespace.
++## Owned changes (no commit)
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:4: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:5: trailing whitespace.
++Worktree: `C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/company-wiki`.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:6: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:7: trailing whitespace.
++| File | SHA256 |
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:8: trailing whitespace.
++| --- | --- |
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:9: trailing whitespace.
++| src/company_wiki/automation/narrative_verify.py | 28c3ffdd41ccc9da8dd924e7a7ea550ba38b23b844ad020d7a92749f538a0f99 |
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:10: trailing whitespace.
++| src/company_wiki/automation/narrative_runtime.py | 4fde54ea255ccf9dbe37fae6d90c4e850cd76ecbda8d7cffd9da784ed7286eb1 |
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:11: trailing whitespace.
++| src/company_wiki/automation/narrative_worker_factory.py | acd65734952912eeae2280a4b7f6f505b90a3a004bc49165934c091899f21c32 |
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:12: trailing whitespace.
++| tests/integration/test_official_json_verify_handler.py | f34f35bea1ab81070cdadbd612676d782c6bd225040e5c01b02e2c0de2920901 |
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:13: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:14: trailing whitespace.
++Only these owned files and this evidence directory were changed in this node. Source parser/layout/projection leaves, root PWF, contracts, batch and transport remain owned by their other agents. ROOT stages integration.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:15: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:16: trailing whitespace.
++## Frozen actual APIs
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:17: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:18: trailing whitespace.
++`NarrativeVerifyHandler(*, reader, pdf_replayer=None, normalization=None, projection_catalog: Any | None = None, generation_sha256: Callable[[NarrativeSubject], str] | None = None)`.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:19: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:20: trailing whitespace.
++`NarrativeRuntimeDependencies(reader, model, model_caller=None, normalization=None, projection_catalog=None, generation_sha256=None)` passes the same child-local source catalog into selection and verification; only verification consumes the frozen generation resolver.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:21: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:22: trailing whitespace.
++Official subjects alone call `open_verified_projection(catalog, projection_id=subject.item_key, expected_projection_sha256=subject.subject_sha256)` and actual `automation.narrative_replay.replay_verified_projection(view, selected) -> int`. The source port opens and verifies each real parent once; the handler does not replay+export twice, read direct source paths, query SQL, or substitute first-parent anchor identity. It checks the complete requested/dependency/verified subject, actual source span parser identity, active selector and projection-specific `official-json/1.0.0` prompt before building the exact public narrative-bundle/3.0. Prompt review remains diagnostic and is not a new receipt gate.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:23: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:24: trailing whitespace.
++Effect target uses existing neutral `publication_target(bundle.subject, generation_sha256)`: `urn:company-wiki:narrative-projection-bundle:{projection_sha256}:{generation_sha256}`. The SHA is injected from run binding, never guessed or replaced with source/anchor SHA. Missing/invalid resolver output gives typed DEPENDENCY_INVALID with no effect. Raw bundle2 and legacy raw target are unchanged.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:25: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:26: trailing whitespace.
++Factory reads the coordinator-frozen `run.binding_json`: binding/4 execution_versions.projection_prompt, projection_model_request_schema and official_json_adapter must match current implemented constants; it copies `generation_manifests[item_key].generation_sha256` into the child resolver. It does not re-sign wrappers, parse parents or repeat coordinator manifest semantics. Current adapter version is 1.0.1 after native whitespace repair. Old raw runs with no binding remain compatible.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:27: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:28: trailing whitespace.
++## Config issue found during MAIN integration
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:29: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:30: trailing whitespace.
++HTTPModel already accepted configured reasoning_effort (low/high/max/omitted), while factory _MODEL_FIELDS rejected it. Seven constructor-level controls first all failed at _options (reasoning-red.log). The factory now accepts this existing option unchanged. Actual HTTPModel keeps validation responsibility: invalid medium/bool/number settings fail NARRATIVE_MODEL_CONFIG_INVALID; valid configured values and model identity reach the real model object unchanged. No default model/config override and no request was sent. Test credentials are synthetic and do not enter production.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:31: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:32: trailing whitespace.
++## Actual evidence
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:33: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:34: trailing whitespace.
++- Original verify/runtime/factory RED: 18 expected failures. Real importer/parser/catalog/projection/selected evidence and actual local model prompt/decode succeeded; old verify rejected projection via old component assumptions and new source/generation injection was absent.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:35: trailing whitespace.
++- First implementation: 55 PASS (18 new, 20 old verify, 17 old worker factory), pytest14.30s.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:36: trailing whitespace.
++- Added one necessary real transport replay test for the just-discovered native whitespace/source NFC boundary; added seven configured reasoning-effort controls with their own actual RED before the field fix.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:37: trailing whitespace.
++- Final GREEN: **63 PASS** (26 new responsibilities plus 37 unchanged legacy responsibilities), pytest17.95s. Exact saved stdout SHA256 `3d97715fe26fb7be8081e0e0c49922d08904db56c36b7f161f84cb70262959eb`.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:38: trailing whitespace.
++- Ruff final exit0; mypy final exit0 for 3 source files, 24.241s. See static-final.json.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:39: trailing whitespace.
++- Runner-owned TEMP and repository Windows path-budget TEMP both removed. Every source fixture catalog lives in an owned restored directory, with byte mutation restored in finally. 0 external API/LLM requests and $0 cost. Existing factory regression includes a spawned compute worker with no network/credential access.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:40: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:41: trailing whitespace.
++## Test responsibilities and limits
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:42: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:43: trailing whitespace.
++New tests cover real source→select→deterministic local model→decode/summary→verify contracts, two parents opened once, parser and projection prompt identity, strict public bundle3 shape, selected-field replay, second-parent bytes/state changes, issuer rebinding despite identical raw anchor, parser/prompt/text/role tampering, generation absence or changed target, shared runtime source-port wiring, true factory config/catalog plus frozen binding snapshot, valid/invalid reasoning config, and whitespace/NFC replay.
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:44: trailing whitespace.
++
+docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md:45: trailing whitespace.
++Factory composition tests explicitly fake only RunStore retrieval; source config/catalog and handlers are real. They are seam tests, not claimed full production run-store E2E. ROOT owns the combined batch/4 execution and terminal/outbox acceptance suite. The local model is a deterministic zero-transport fixture, not a paid LLM quality check. P7 final producer versions still need the final combined major-node run. This handoff completes the owned handler/composition slice, not all AUTO or the entire project.

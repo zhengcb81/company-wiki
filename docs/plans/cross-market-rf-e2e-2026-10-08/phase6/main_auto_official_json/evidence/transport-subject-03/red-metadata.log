@@ -1,0 +1,60 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-metadata-red-141e9g4z\\pytest", "requested_basetemp_len": 64, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-215900-da3eab5c", "effective_basetemp_len": 75}
+FF                                                                       [100%]
+================================== FAILURES ===================================
+_ test_resigned_artifact_cannot_misstate_verified_projection_metadata[language] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-215900-da3eab5c/test_resigned_artifact_cannot_0')
+change = 'language'
+
+    @pytest.mark.parametrize("change", ["language", "generation_parser"])
+    def test_resigned_artifact_cannot_misstate_verified_projection_metadata(tmp_path, change):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]
+            wire = bundle_for(state, a)
+            if change == "language":
+                wire["source_metadata"]["language"] = "zh"
+                wire["summary"]["draft"]["language"] = "zh"
+            else:
+                wire["versions"]["parser"] = "999.0.0"
+            wire = NarrativeBundle.from_dict(wire).to_dict()
+            _, generation, _ = publish(state, a, "metadata-" + change, wire)
+            calls = []
+            transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog),
+                projection_loader=loader_for(state, calls))
+            reference = transport.reference_subject(a, generation_sha256=generation)
+>           with pytest.raises(NarrativeTransportError) as error:
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           Failed: DID NOT RAISE NarrativeTransportError
+
+tests\integration\test_official_json_transport_subject.py:623: Failed
+_ test_resigned_artifact_cannot_misstate_verified_projection_metadata[generation_parser] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-215900-da3eab5c/test_resigned_artifact_cannot_1')
+change = 'generation_parser'
+
+    @pytest.mark.parametrize("change", ["language", "generation_parser"])
+    def test_resigned_artifact_cannot_misstate_verified_projection_metadata(tmp_path, change):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]
+            wire = bundle_for(state, a)
+            if change == "language":
+                wire["source_metadata"]["language"] = "zh"
+                wire["summary"]["draft"]["language"] = "zh"
+            else:
+                wire["versions"]["parser"] = "999.0.0"
+            wire = NarrativeBundle.from_dict(wire).to_dict()
+            _, generation, _ = publish(state, a, "metadata-" + change, wire)
+            calls = []
+            transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog),
+                projection_loader=loader_for(state, calls))
+            reference = transport.reference_subject(a, generation_sha256=generation)
+>           with pytest.raises(NarrativeTransportError) as error:
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           Failed: DID NOT RAISE NarrativeTransportError
+
+tests\integration\test_official_json_transport_subject.py:623: Failed
+=========================== short test summary info ===========================
+FAILED tests/integration/test_official_json_transport_subject.py::test_resigned_artifact_cannot_misstate_verified_projection_metadata[language]
+FAILED tests/integration/test_official_json_transport_subject.py::test_resigned_artifact_cannot_misstate_verified_projection_metadata[generation_parser]
+2 failed, 17 deselected in 2.00s
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-215900-da3eab5c", "existed": true, "removed": true}

@@ -1,0 +1,60 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-canonical-cli-red-tnna3mmz\\pytest", "requested_basetemp_len": 69, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-224223-91e1c4fb", "effective_basetemp_len": 75}
+F.F                                                                      [100%]
+================================== FAILURES ===================================
+_ test_explicit_canonical_cli_persists_replays_publishes_and_reversed_rebuild_reuses _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-224223-91e1c4fb/test_explicit_canonical_cli_pe0')
+official_json_loopback_model = namespace(requests=[], errors=[], endpoint='http://127.0.0.1:49365/v1/chat/completions')
+
+    def test_explicit_canonical_cli_persists_replays_publishes_and_reversed_rebuild_reuses(
+        tmp_path,
+        official_json_loopback_model,
+    ):
+        server = official_json_loopback_model
+        with official_batch_state(tmp_path) as state:
+            forward_bytes, forward = project(state, state.parent_refs, version="1.0.2")
+>           assert forward["adapter"]["parser"] == "cwp_official_json/1.0.2", (
+                "the public CLI must pass the explicit projection_version to its producer"
+            )
+E           AssertionError: the public CLI must pass the explicit projection_version to its producer
+E           assert 'cwp_official_json/1.0.1' == 'cwp_official_json/1.0.2'
+E             
+E             - cwp_official_json/1.0.2
+E             ?                       ^
+E             + cwp_official_json/1.0.1
+E             ?                       ^
+
+tests\integration\test_official_json_canonical_cli_e2e.py:103: AssertionError
+_ test_public_project_refuses_unsupported_version_without_persisting_or_processing _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-224223-91e1c4fb/test_public_project_refuses_un0')
+
+    def test_public_project_refuses_unsupported_version_without_persisting_or_processing(
+        tmp_path,
+    ):
+        with official_batch_state(tmp_path) as state:
+            catalog_dir = Path(state.catalog.config.catalog_dir)
+            before = {path: path.read_bytes() for path in catalog_dir.rglob("*.json")}
+            process = official(
+                state,
+                "project",
+                {
+                    "schema_version": "official-json-projection-request/1",
+                    "parent_source_refs": list(state.parent_refs),
+                    "layout_id": "official-paged-qa",
+                    "issuer": {"provider_company_id": 1},
+                    "as_of_date": "2026-10-08",
+                    "persist": True,
+                    "projection_version": "9.9.9",
+                },
+            )
+>           assert process.returncode == 2 and process.stdout == b""
+E           assert (0 == 2)
+E            +  where 0 = CompletedProcess(args=['C:\\Miniconda\\python.exe', '-X', 'utf8', '-B', '-m', 'company_wiki.source_catalog.cli', 'offi...ords":2,"unattributed_records":0,"as_of_excluded_records":0,"total_records":4}},"selected_records":2}\r\n', stderr=b'').returncode
+
+tests\integration\test_official_json_canonical_cli_e2e.py:277: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/integration/test_official_json_canonical_cli_e2e.py::test_explicit_canonical_cli_persists_replays_publishes_and_reversed_rebuild_reuses
+FAILED tests/integration/test_official_json_canonical_cli_e2e.py::test_public_project_refuses_unsupported_version_without_persisting_or_processing
+2 failed, 1 passed in 11.85s
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-224223-91e1c4fb", "existed": true, "removed": true}

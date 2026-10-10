@@ -1,0 +1,30 @@
+{
+  "phase": "first_implementation",
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-p",
+    "pytest_timeout",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-adapter-green-xd_vpauh\\pytest",
+    "-q",
+    "--disable-warnings",
+    "tests/unit/test_official_json_narrative_adapter.py",
+    "tests/integration/test_official_json_narrative_adapter.py"
+  ],
+  "exit_code": 1,
+  "duration_seconds": 5.331,
+  "temp_removed": true,
+  "external_provider_calls": 0,
+  "external_model_calls": 0,
+  "new_cost_usd": 0,
+  "captured_output_sha256": "ef5b4dc052edd9f76614649e670d8244a15b6cd78bbf089be02a5f56b002e528",
+  "log_sha256": "6ca170cca628dbeacab055c75464f8f603b370c07483e0ed5c2e2089a14e4537",
+  "log_file": "first-implementation.log"
+}

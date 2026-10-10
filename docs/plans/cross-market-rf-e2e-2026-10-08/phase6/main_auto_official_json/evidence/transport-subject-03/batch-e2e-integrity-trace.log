@@ -1,0 +1,15 @@
+{"budget":{"estimated_micro_usd":111,"tokens":92,"unknown_reservations":0,"unsettled_reservations":0},"error":"NARRATIVE_BATCH_IntegrityViolationError","items":[{"artifact_ref":null,"errors":["NARRATIVE_BATCH_IntegrityViolationError"],"item_key":"urn:company-wiki:source-projection:sha256:8947fe14c922259cbf69209c9ddbadcf9b45a1f167bf437b181ec5405b999809","kind":"official_json","status":"failed"}],"run_id":"integrity-trace","schema_version":"narrative-batch-result/2","status":"failed"}
+INTEGRITY-TRACE {"file": "src\\company_wiki\\automation\\store.py", "function": "_compact_terminal_narrative", "line": 765, "message": "final model/prompt differs from the immutable run"}
+INTEGRITY-TRACE {"file": "src\\company_wiki\\automation\\store.py", "function": "<lambda>", "line": 1592, "message": "final model/prompt differs from the immutable run"}
+INTEGRITY-TRACE {"file": "src\\company_wiki\\automation\\store.py", "function": "_write_transaction", "line": 873, "message": "final model/prompt differs from the immutable run"}
+INTEGRITY-TRACE {"file": "src\\company_wiki\\automation\\store.py", "function": "compact_terminal_narrative_jobs", "line": 1592, "message": "final model/prompt differs from the immutable run"}
+INTEGRITY-TRACE {"file": "src\\company_wiki\\automation\\terminal_receipts.py", "function": "compact_terminal_narrative_jobs", "line": 122, "message": "final model/prompt differs from the immutable run"}
+INTEGRITY-TRACE {"file": "src\\company_wiki\\automation\\narrative_batch.py", "function": "_final_documents", "line": 1976, "message": "final model/prompt differs from the immutable run"}
+INTEGRITY-TRACE {"file": "src\\company_wiki\\automation\\narrative_batch.py", "function": "_run_prepared", "line": 1633, "message": "final model/prompt differs from the immutable run"}
+INTEGRITY-TRACE {"file": "src\\company_wiki\\automation\\narrative_batch.py", "function": "_run_owned", "line": 1208, "message": "final model/prompt differs from the immutable run"}
+INTEGRITY-TRACE {"file": "src\\company_wiki\\_file_mutex.py", "function": "os_file_mutex", "line": 42, "message": "final model/prompt differs from the immutable run"}
+INTEGRITY-TRACE {"file": "contextlib.py", "function": "__exit__", "line": 162, "message": "final model/prompt differs from the immutable run"}
+INTEGRITY-TRACE {"file": "src\\company_wiki\\automation\\narrative_batch.py", "function": "run_batch", "line": 1114, "message": "final model/prompt differs from the immutable run"}
+INTEGRITY-TRACE {"file": "src\\company_wiki\\_file_mutex.py", "function": "os_file_mutex", "line": 42, "message": "final model/prompt differs from the immutable run"}
+INTEGRITY-TRACE {"file": "contextlib.py", "function": "__exit__", "line": 162, "message": "final model/prompt differs from the immutable run"}
+INTEGRITY-TRACE {"file": "src\\company_wiki\\automation\\narrative_batch_cli.py", "function": "main", "line": 70, "message": "final model/prompt differs from the immutable run"}

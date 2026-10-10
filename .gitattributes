@@ -4,3 +4,10 @@
 /.githooks/** text eol=lf
 /tests/golden/source_v2/*.json text eol=lf
 /tests/fixtures/narrative_transport_v1/*.json text eol=lf
+
+# Native test receipts are byte evidence, not formatted source. Preserve their
+# declared SHA through staging/checkout; CR/CRLF from Windows subprocess logs
+# must not become whitespace defects or silently normalized bytes.
+/docs/plans/**/*.log -text -diff
+/docs/plans/**/evidence/** -text -diff
+/tests/fixtures/narrative_real_transcript/*.txt -text -diff

@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/test_official_json_batch_identity.py::test_context_uses_projection_item_key_not_anchor_document",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-context-red-xz5iumo4\\pytest",
+    "-q",
+    "--tb=short"
+  ],
+  "exit_code": 1,
+  "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-context-red-xz5iumo4",
+  "restored_initial_absent": true,
+  "scope": "After correct frozen job key; context still rejects projection event before implementation",
+  "provider_calls": 0,
+  "model_calls": 0,
+  "cost_usd": 0
+}

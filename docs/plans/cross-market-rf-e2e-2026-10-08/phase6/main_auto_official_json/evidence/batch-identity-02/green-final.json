@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/test_official_json_batch_identity.py",
+    "tests/unit/test_narrative_batch_request.py",
+    "tests/unit/test_automation_execution_context.py",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-main-dto-_2se5b45\\pytest",
+    "-q",
+    "--tb=short"
+  ],
+  "exit_code": 0,
+  "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-main-dto-_2se5b45",
+  "restored_initial_absent": true,
+  "provider_calls": 0,
+  "model_calls": 0,
+  "cost_usd": 0,
+  "scope": "DTO contract foundation only, AUTO full chain pending"
+}

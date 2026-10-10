@@ -1,0 +1,746 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+FFFFFFFFFFFFFFFFFFFFFFFF                                                 [100%]
+================================== FAILURES ===================================
+___ test_shared_projection_versions_never_pollute_legacy_raw_reads[missing] ___
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-157/test_shared_projection_version0')
+raw_binding = 'missing'
+
+    @pytest.mark.parametrize("raw_binding", ["missing", "null", "raw"])
+    def test_shared_projection_versions_never_pollute_legacy_raw_reads(tmp_path, raw_binding):
+        with owned_state(tmp_path) as state:
+            raw = NarrativeSubject.from_raw(state.refs[0])
+            label = "raw"
+            generation = digest((label + "-generation").encode())
+            metadata = {"generation_sha256": generation}
+            if raw_binding != "missing":
+                metadata["subject_binding"] = None if raw_binding == "null" else raw.to_dict()
+            old, _, old_payload = publish(state, raw, label, metadata_override=metadata)
+            a, _, _ = publish(state, state.subjects[0], "project-a",
+                metadata_override={"subject_binding": state.subjects[0].to_dict(), "generation_sha256": generation})
+            publish(state, state.subjects[1], "project-b")
+            anchor = raw.anchor_ref
+            kwargs = dict(document_id=anchor["document_id"], source_id=anchor["source_id"],
+                source_sha256=anchor["content_sha256"])
+            with readers(state) as accessors:
+                for accessor in accessors:
+>                   assert accessor.latest_visible_version(**kwargs).artifact_version_id == old.artifact_version_id
+E                   AssertionError: assert 'narrative-e9...bdaa0653b8c7e' == 'narrative-58...60d99d2919a7d'
+E                     
+E                     - narrative-58f891ca9d2446cfa3460d99d2919a7d
+E                     + narrative-e9fc75504d334516b73bdaa0653b8c7e
+
+tests\integration\test_official_json_subject_artifacts.py:135: AssertionError
+____ test_shared_projection_versions_never_pollute_legacy_raw_reads[null] _____
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-157/test_shared_projection_version1')
+raw_binding = 'null'
+
+    @pytest.mark.parametrize("raw_binding", ["missing", "null", "raw"])
+    def test_shared_projection_versions_never_pollute_legacy_raw_reads(tmp_path, raw_binding):
+        with owned_state(tmp_path) as state:
+            raw = NarrativeSubject.from_raw(state.refs[0])
+            label = "raw"
+            generation = digest((label + "-generation").encode())
+            metadata = {"generation_sha256": generation}
+            if raw_binding != "missing":
+                metadata["subject_binding"] = None if raw_binding == "null" else raw.to_dict()
+            old, _, old_payload = publish(state, raw, label, metadata_override=metadata)
+            a, _, _ = publish(state, state.subjects[0], "project-a",
+                metadata_override={"subject_binding": state.subjects[0].to_dict(), "generation_sha256": generation})
+            publish(state, state.subjects[1], "project-b")
+            anchor = raw.anchor_ref
+            kwargs = dict(document_id=anchor["document_id"], source_id=anchor["source_id"],
+                source_sha256=anchor["content_sha256"])
+            with readers(state) as accessors:
+                for accessor in accessors:
+>                   assert accessor.latest_visible_version(**kwargs).artifact_version_id == old.artifact_version_id
+E                   AssertionError: assert 'narrative-b0...0f33f8fe52784' == 'narrative-80...1916ef0393b94'
+E                     
+E                     - narrative-802209b20ecf4cbfba91916ef0393b94
+E                     + narrative-b051d311769d4693ad10f33f8fe52784
+
+tests\integration\test_official_json_subject_artifacts.py:135: AssertionError
+_____ test_shared_projection_versions_never_pollute_legacy_raw_reads[raw] _____
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-157/test_shared_projection_version2')
+raw_binding = 'raw'
+
+    @pytest.mark.parametrize("raw_binding", ["missing", "null", "raw"])
+    def test_shared_projection_versions_never_pollute_legacy_raw_reads(tmp_path, raw_binding):
+        with owned_state(tmp_path) as state:
+            raw = NarrativeSubject.from_raw(state.refs[0])
+            label = "raw"
+            generation = digest((label + "-generation").encode())
+            metadata = {"generation_sha256": generation}
+            if raw_binding != "missing":
+                metadata["subject_binding"] = None if raw_binding == "null" else raw.to_dict()
+            old, _, old_payload = publish(state, raw, label, metadata_override=metadata)
+            a, _, _ = publish(state, state.subjects[0], "project-a",
+                metadata_override={"subject_binding": state.subjects[0].to_dict(), "generation_sha256": generation})
+            publish(state, state.subjects[1], "project-b")
+            anchor = raw.anchor_ref
+            kwargs = dict(document_id=anchor["document_id"], source_id=anchor["source_id"],
+                source_sha256=anchor["content_sha256"])
+            with readers(state) as accessors:
+                for accessor in accessors:
+>                   assert accessor.latest_visible_version(**kwargs).artifact_version_id == old.artifact_version_id
+E                   AssertionError: assert 'narrative-ff...403ced3bdff0d' == 'narrative-4f...743bfa92617e6'
+E                     
+E                     - narrative-4fd370bd53e54208b50743bfa92617e6
+E                     + narrative-ff56cf5ab85c45e9a0f403ced3bdff0d
+
+tests\integration\test_official_json_subject_artifacts.py:135: AssertionError
+____ test_exact_subject_and_generation_survive_reopen_without_fake_sources ____
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-157/test_exact_subject_and_generat0')
+
+    def test_exact_subject_and_generation_survive_reopen_without_fake_sources(tmp_path):
+        with owned_state(tmp_path) as state:
+            a, b = state.subjects
+            va, ga, pa = publish(state, a, "a-generation-one")
+            va2, ga2, _ = publish(state, a, "a-generation-two")
+            vb, gb, pb = publish(state, b, "b-generation-one")
+            assert va.document_id == vb.document_id == a.anchor_ref["document_id"]
+            assert va.source_id == vb.source_id == a.anchor_ref["source_id"]
+            with readers(state) as accessors:
+                for accessor in accessors:
+>                   assert accessor.visible_subject_generation_candidates(subject=a, generation_sha256=ga) == (va,)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   AttributeError: 'NarrativeArtifactStore' object has no attribute 'visible_subject_generation_candidates'
+
+tests\integration\test_official_json_subject_artifacts.py:153: AttributeError
+__ test_nonanchor_parent_change_rejects_every_state_boundary[status-prepare] __
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-157/test_nonanchor_parent_change_r0')
+stage = 'prepare', mutation = 'status'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]
+            draft, generation = draft_for(state, a, "second-parent")
+            payload = encoded({"subject_binding": a.to_dict()})
+            version = None
+            if stage != "prepare":
+                version = state.artifacts.prepare(draft, payload)
+            if stage not in {"prepare", "activate"}:
+                state.artifacts.activate(draft.effect_id, verified_after_hash=version.content_sha256, activated_at=T1)
+            change_second_parent(state, mutation)
+            if stage == "prepare":
+>               with pytest.raises(NarrativeSourceNotCurrentError):
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               Failed: DID NOT RAISE NarrativeSourceNotCurrentError
+
+tests\integration\test_official_json_subject_artifacts.py:196: Failed
+_ test_nonanchor_parent_change_rejects_every_state_boundary[status-activate] __
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-157/test_nonanchor_parent_change_r1')
+stage = 'activate', mutation = 'status'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]
+            draft, generation = draft_for(state, a, "second-parent")
+            payload = encoded({"subject_binding": a.to_dict()})
+            version = None
+            if stage != "prepare":
+                version = state.artifacts.prepare(draft, payload)
+            if stage not in {"prepare", "activate"}:
+                state.artifacts.activate(draft.effect_id, verified_after_hash=version.content_sha256, activated_at=T1)
+            change_second_parent(state, mutation)
+            if stage == "prepare":
+                with pytest.raises(NarrativeSourceNotCurrentError):
+                    state.artifacts.prepare(draft, payload)
+                assert not list((state.root / "catalog" / "objects").rglob("*.json"))
+            elif stage == "activate":
+>               with pytest.raises(NarrativeSourceNotCurrentError):
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               Failed: DID NOT RAISE NarrativeSourceNotCurrentError
+
+tests\integration\test_official_json_subject_artifacts.py:200: Failed
+___ test_nonanchor_parent_change_rejects_every_state_boundary[status-read] ____
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-157/test_nonanchor_parent_change_r2')
+stage = 'read', mutation = 'status'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]
+            draft, generation = draft_for(state, a, "second-parent")
+            payload = encoded({"subject_binding": a.to_dict()})
+            version = None
+            if stage != "prepare":
+                version = state.artifacts.prepare(draft, payload)
+            if stage not in {"prepare", "activate"}:
+                state.artifacts.activate(draft.effect_id, verified_after_hash=version.content_sha256, activated_at=T1)
+            change_second_parent(state, mutation)
+            if stage == "prepare":
+                with pytest.raises(NarrativeSourceNotCurrentError):
+                    state.artifacts.prepare(draft, payload)
+                assert not list((state.root / "catalog" / "objects").rglob("*.json"))
+            elif stage == "activate":
+                with pytest.raises(NarrativeSourceNotCurrentError):
+                    state.artifacts.activate(draft.effect_id, verified_after_hash=version.content_sha256, activated_at=T1)
+            else:
+                with readers(state) as accessors:
+                    for accessor in accessors:
+                        with pytest.raises(NarrativeSourceNotCurrentError):
+                            if stage == "read":
+>                               accessor.read_current_subject(artifact_version_id=version.artifact_version_id,
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                               AttributeError: 'NarrativeArtifactStore' object has no attribute 'read_current_subject'
+
+tests\integration\test_official_json_subject_artifacts.py:207: AttributeError
+_ test_nonanchor_parent_change_rejects_every_state_boundary[status-candidate] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-157/test_nonanchor_parent_change_r3')
+stage = 'candidate', mutation = 'status'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]
+            draft, generation = draft_for(state, a, "second-parent")
+            payload = encoded({"subject_binding": a.to_dict()})
+            version = None
+            if stage != "prepare":
+                version = state.artifacts.prepare(draft, payload)
+            if stage not in {"prepare", "activate"}:
+                state.artifacts.activate(draft.effect_id, verified_after_hash=version.content_sha256, activated_at=T1)
+            change_second_parent(state, mutation)
+            if stage == "prepare":
+                with pytest.raises(NarrativeSourceNotCurrentError):
+                    state.artifacts.prepare(draft, payload)
+                assert not list((state.root / "catalog" / "objects").rglob("*.json"))
+            elif stage == "activate":
+                with pytest.raises(NarrativeSourceNotCurrentError):
+                    state.artifacts.activate(draft.effect_id, verified_after_hash=version.content_sha256, activated_at=T1)
+            else:
+                with readers(state) as accessors:
+                    for accessor in accessors:
+                        with pytest.raises(NarrativeSourceNotCurrentError):
+                            if stage == "read":
+                                accessor.read_current_subject(artifact_version_id=version.artifact_version_id,
+                                    subject=a, generation_sha256=generation)
+                            elif stage == "candidate":
+>                               accessor.visible_subject_generation_candidates(subject=a, generation_sha256=generation)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                               AttributeError: 'NarrativeArtifactStore' object has no attribute 'visible_subject_generation_candidates'
+
+tests\integration\test_official_json_subject_artifacts.py:210: AttributeError
+__ test_nonanchor_parent_change_rejects_every_state_boundary[status-effect] ___
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-157/test_nonanchor_parent_change_r4')
+stage = 'effect', mutation = 'status'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]
+            draft, generation = draft_for(state, a, "second-parent")
+            payload = encoded({"subject_binding": a.to_dict()})
+            version = None
+            if stage != "prepare":
+                version = state.artifacts.prepare(draft, payload)
+            if stage not in {"prepare", "activate"}:
+                state.artifacts.activate(draft.effect_id, verified_after_hash=version.content_sha256, activated_at=T1)
+            change_second_parent(state, mutation)
+            if stage == "prepare":
+                with pytest.raises(NarrativeSourceNotCurrentError):
+                    state.artifacts.prepare(draft, payload)
+                assert not list((state.root / "catalog" / "objects").rglob("*.json"))
+            elif stage == "activate":
+                with pytest.raises(NarrativeSourceNotCurrentError):
+                    state.artifacts.activate(draft.effect_id, verified_after_hash=version.content_sha256, activated_at=T1)
+            else:
+                with readers(state) as accessors:
+                    for accessor in accessors:
+>                       with pytest.raises(NarrativeSourceNotCurrentError):
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                       Failed: DID NOT RAISE NarrativeSourceNotCurrentError
+
+tests\integration\test_official_json_subject_artifacts.py:205: Failed
+_ test_nonanchor_parent_change_rejects_every_state_boundary[primary-prepare] __
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-157/test_nonanchor_parent_change_r5')
+stage = 'prepare', mutation = 'primary'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]
+            draft, generation = draft_for(state, a, "second-parent")
+            payload = encoded({"subject_binding": a.to_dict()})
+            version = None
+            if stage != "prepare":
+                version = state.artifacts.prepare(draft, payload)
+            if stage not in {"prepare", "activate"}:
+                state.artifacts.activate(draft.effect_id, verified_after_hash=version.content_sha256, activated_at=T1)
+            change_second_parent(state, mutation)
+            if stage == "prepare":
+>               with pytest.raises(NarrativeSourceNotCurrentError):
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               Failed: DID NOT RAISE NarrativeSourceNotCurrentError
+
+tests\integration\test_official_json_subject_artifacts.py:196: Failed
+_ test_nonanchor_parent_change_rejects_every_state_boundary[primary-activate] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-157/test_nonanchor_parent_change_r6')
+stage = 'activate', mutation = 'primary'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]
+            draft, generation = draft_for(state, a, "second-parent")
+            payload = encoded({"subject_binding": a.to_dict()})
+            version = None
+            if stage != "prepare":
+                version = state.artifacts.prepare(draft, payload)
+            if stage not in {"prepare", "activate"}:
+                state.artifacts.activate(draft.effect_id, verified_after_hash=version.content_sha256, activated_at=T1)
+            change_second_parent(state, mutation)
+            if stage == "prepare":
+                with pytest.raises(NarrativeSourceNotCurrentError):
+                    state.artifacts.prepare(draft, payload)
+                assert not list((state.root / "catalog" / "objects").rglob("*.json"))
+            elif stage == "activate":
+>               with pytest.raises(NarrativeSourceNotCurrentError):
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               Failed: DID NOT RAISE NarrativeSourceNotCurrentError
+
+tests\integration\test_official_json_subject_artifacts.py:200: Failed
+___ test_nonanchor_parent_change_rejects_every_state_boundary[primary-read] ___
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-157/test_nonanchor_parent_change_r7')
+stage = 'read', mutation = 'primary'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]
+            draft, generation = draft_for(state, a, "second-parent")
+            payload = encoded({"subject_binding": a.to_dict()})
+            version = None
+            if stage != "prepare":
+                version = state.artifacts.prepare(draft, payload)
+            if stage not in {"prepare", "activate"}:
+                state.artifacts.activate(draft.effect_id, verified_after_hash=version.content_sha256, activated_at=T1)
+            change_second_parent(state, mutation)
+            if stage == "prepare":
+                with pytest.raises(NarrativeSourceNotCurrentError):
+                    state.artifacts.prepare(draft, payload)
+                assert not list((state.root / "catalog" / "objects").rglob("*.json"))
+            elif stage == "activate":
+                with pytest.raises(NarrativeSourceNotCurrentError):
+                    state.artifacts.activate(draft.effect_id, verified_after_hash=version.content_sha256, activated_at=T1)
+            else:
+                with readers(state) as accessors:
+                    for accessor in accessors:
+                        with pytest.raises(NarrativeSourceNotCurrentError):
+                            if stage == "read":
+>                               accessor.read_current_subject(artifact_version_id=version.artifact_version_id,
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                               AttributeError: 'NarrativeArtifactStore' object has no attribute 'read_current_subject'
+
+tests\integration\test_official_json_subject_artifacts.py:207: AttributeError
+_ test_nonanchor_parent_change_rejects_every_state_boundary[primary-candidate] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-157/test_nonanchor_parent_change_r8')
+stage = 'candidate', mutation = 'primary'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]
+            draft, generation = draft_for(state, a, "second-parent")
+            payload = encoded({"subject_binding": a.to_dict()})
+            version = None
+            if stage != "prepare":
+                version = state.artifacts.prepare(draft, payload)
+            if stage not in {"prepare", "activate"}:
+                state.artifacts.activate(draft.effect_id, verified_after_hash=version.content_sha256, activated_at=T1)
+            change_second_parent(state, mutation)
+            if stage == "prepare":
+                with pytest.raises(NarrativeSourceNotCurrentError):
+                    state.artifacts.prepare(draft, payload)
+                assert not list((state.root / "catalog" / "objects").rglob("*.json"))
+            elif stage == "activate":
+                with pytest.raises(NarrativeSourceNotCurrentError):
+                    state.artifacts.activate(draft.effect_id, verified_after_hash=version.content_sha256, activated_at=T1)
+            else:
+                with readers(state) as accessors:
+                    for accessor in accessors:
+                        with pytest.raises(NarrativeSourceNotCurrentError):
+                            if stage == "read":
+                                accessor.read_current_subject(artifact_version_id=version.artifact_version_id,
+                                    subject=a, generation_sha256=generation)
+                            elif stage == "candidate":
+>                               accessor.visible_subject_generation_candidates(subject=a, generation_sha256=generation)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                               AttributeError: 'NarrativeArtifactStore' object has no attribute 'visible_subject_generation_candidates'
+
+tests\integration\test_official_json_subject_artifacts.py:210: AttributeError
+__ test_nonanchor_parent_change_rejects_every_state_boundary[primary-effect] __
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-157/test_nonanchor_parent_change_r9')
+stage = 'effect', mutation = 'primary'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]
+            draft, generation = draft_for(state, a, "second-parent")
+            payload = encoded({"subject_binding": a.to_dict()})
+            version = None
+            if stage != "prepare":
+                version = state.artifacts.prepare(draft, payload)
+            if stage not in {"prepare", "activate"}:
+                state.artifacts.activate(draft.effect_id, verified_after_hash=version.content_sha256, activated_at=T1)
+            change_second_parent(state, mutation)
+            if stage == "prepare":
+                with pytest.raises(NarrativeSourceNotCurrentError):
+                    state.artifacts.prepare(draft, payload)
+                assert not list((state.root / "catalog" / "objects").rglob("*.json"))
+            elif stage == "activate":
+                with pytest.raises(NarrativeSourceNotCurrentError):
+                    state.artifacts.activate(draft.effect_id, verified_after_hash=version.content_sha256, activated_at=T1)
+            else:
+                with readers(state) as accessors:
+                    for accessor in accessors:
+>                       with pytest.raises(NarrativeSourceNotCurrentError):
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                       Failed: DID NOT RAISE NarrativeSourceNotCurrentError
+
+tests\integration\test_official_json_subject_artifacts.py:205: Failed
+_ test_nonanchor_parent_change_rejects_every_state_boundary[catalog_sha-prepare] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-157/test_nonanchor_parent_change_r10')
+stage = 'prepare', mutation = 'catalog_sha'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]
+            draft, generation = draft_for(state, a, "second-parent")
+            payload = encoded({"subject_binding": a.to_dict()})
+            version = None
+            if stage != "prepare":
+                version = state.artifacts.prepare(draft, payload)
+            if stage not in {"prepare", "activate"}:
+                state.artifacts.activate(draft.effect_id, verified_after_hash=version.content_sha256, activated_at=T1)
+            change_second_parent(state, mutation)
+            if stage == "prepare":
+>               with pytest.raises(NarrativeSourceNotCurrentError):
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               Failed: DID NOT RAISE NarrativeSourceNotCurrentError
+
+tests\integration\test_official_json_subject_artifacts.py:196: Failed
+_ test_nonanchor_parent_change_rejects_every_state_boundary[catalog_sha-activate] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-157/test_nonanchor_parent_change_r11')
+stage = 'activate', mutation = 'catalog_sha'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]
+            draft, generation = draft_for(state, a, "second-parent")
+            payload = encoded({"subject_binding": a.to_dict()})
+            version = None
+            if stage != "prepare":
+                version = state.artifacts.prepare(draft, payload)
+            if stage not in {"prepare", "activate"}:
+                state.artifacts.activate(draft.effect_id, verified_after_hash=version.content_sha256, activated_at=T1)
+            change_second_parent(state, mutation)
+            if stage == "prepare":
+                with pytest.raises(NarrativeSourceNotCurrentError):
+                    state.artifacts.prepare(draft, payload)
+                assert not list((state.root / "catalog" / "objects").rglob("*.json"))
+            elif stage == "activate":
+>               with pytest.raises(NarrativeSourceNotCurrentError):
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               Failed: DID NOT RAISE NarrativeSourceNotCurrentError
+
+tests\integration\test_official_json_subject_artifacts.py:200: Failed
+_ test_nonanchor_parent_change_rejects_every_state_boundary[catalog_sha-read] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-157/test_nonanchor_parent_change_r12')
+stage = 'read', mutation = 'catalog_sha'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]
+            draft, generation = draft_for(state, a, "second-parent")
+            payload = encoded({"subject_binding": a.to_dict()})
+            version = None
+            if stage != "prepare":
+                version = state.artifacts.prepare(draft, payload)
+            if stage not in {"prepare", "activate"}:
+                state.artifacts.activate(draft.effect_id, verified_after_hash=version.content_sha256, activated_at=T1)
+            change_second_parent(state, mutation)
+            if stage == "prepare":
+                with pytest.raises(NarrativeSourceNotCurrentError):
+                    state.artifacts.prepare(draft, payload)
+                assert not list((state.root / "catalog" / "objects").rglob("*.json"))
+            elif stage == "activate":
+                with pytest.raises(NarrativeSourceNotCurrentError):
+                    state.artifacts.activate(draft.effect_id, verified_after_hash=version.content_sha256, activated_at=T1)
+            else:
+                with readers(state) as accessors:
+                    for accessor in accessors:
+                        with pytest.raises(NarrativeSourceNotCurrentError):
+                            if stage == "read":
+>                               accessor.read_current_subject(artifact_version_id=version.artifact_version_id,
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                               AttributeError: 'NarrativeArtifactStore' object has no attribute 'read_current_subject'
+
+tests\integration\test_official_json_subject_artifacts.py:207: AttributeError
+_ test_nonanchor_parent_change_rejects_every_state_boundary[catalog_sha-candidate] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-157/test_nonanchor_parent_change_r13')
+stage = 'candidate', mutation = 'catalog_sha'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]
+            draft, generation = draft_for(state, a, "second-parent")
+            payload = encoded({"subject_binding": a.to_dict()})
+            version = None
+            if stage != "prepare":
+                version = state.artifacts.prepare(draft, payload)
+            if stage not in {"prepare", "activate"}:
+                state.artifacts.activate(draft.effect_id, verified_after_hash=version.content_sha256, activated_at=T1)
+            change_second_parent(state, mutation)
+            if stage == "prepare":
+                with pytest.raises(NarrativeSourceNotCurrentError):
+                    state.artifacts.prepare(draft, payload)
+                assert not list((state.root / "catalog" / "objects").rglob("*.json"))
+            elif stage == "activate":
+                with pytest.raises(NarrativeSourceNotCurrentError):
+                    state.artifacts.activate(draft.effect_id, verified_after_hash=version.content_sha256, activated_at=T1)
+            else:
+                with readers(state) as accessors:
+                    for accessor in accessors:
+                        with pytest.raises(NarrativeSourceNotCurrentError):
+                            if stage == "read":
+                                accessor.read_current_subject(artifact_version_id=version.artifact_version_id,
+                                    subject=a, generation_sha256=generation)
+                            elif stage == "candidate":
+>                               accessor.visible_subject_generation_candidates(subject=a, generation_sha256=generation)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                               AttributeError: 'NarrativeArtifactStore' object has no attribute 'visible_subject_generation_candidates'
+
+tests\integration\test_official_json_subject_artifacts.py:210: AttributeError
+_ test_nonanchor_parent_change_rejects_every_state_boundary[catalog_sha-effect] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-157/test_nonanchor_parent_change_r14')
+stage = 'effect', mutation = 'catalog_sha'
+
+    @pytest.mark.parametrize("stage", ["prepare", "activate", "read", "candidate", "effect"])
+    @pytest.mark.parametrize("mutation", ["status", "primary", "catalog_sha"])
+    def test_nonanchor_parent_change_rejects_every_state_boundary(tmp_path, stage, mutation):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]
+            draft, generation = draft_for(state, a, "second-parent")
+            payload = encoded({"subject_binding": a.to_dict()})
+            version = None
+            if stage != "prepare":
+                version = state.artifacts.prepare(draft, payload)
+            if stage not in {"prepare", "activate"}:
+                state.artifacts.activate(draft.effect_id, verified_after_hash=version.content_sha256, activated_at=T1)
+            change_second_parent(state, mutation)
+            if stage == "prepare":
+                with pytest.raises(NarrativeSourceNotCurrentError):
+                    state.artifacts.prepare(draft, payload)
+                assert not list((state.root / "catalog" / "objects").rglob("*.json"))
+            elif stage == "activate":
+                with pytest.raises(NarrativeSourceNotCurrentError):
+                    state.artifacts.activate(draft.effect_id, verified_after_hash=version.content_sha256, activated_at=T1)
+            else:
+                with readers(state) as accessors:
+                    for accessor in accessors:
+>                       with pytest.raises(NarrativeSourceNotCurrentError):
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                       Failed: DID NOT RAISE NarrativeSourceNotCurrentError
+
+tests\integration\test_official_json_subject_artifacts.py:205: Failed
+_________ test_parent_change_during_artifact_open_is_rechecked[store] _________
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-157/test_parent_change_during_arti0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001E47FE7AC50>
+reader_kind = 'store'
+
+    @pytest.mark.parametrize("reader_kind", ["store", "readonly"])
+    def test_parent_change_during_artifact_open_is_rechecked(tmp_path, monkeypatch, reader_kind):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]
+            version, generation, _ = publish(state, a, "race")
+            original_read = state.objects.read
+            def changing_read(*args, **kwargs):
+                data = original_read(*args, **kwargs)
+                change_second_parent(state, "status")
+                return data
+            monkeypatch.setattr(state.objects, "read", changing_read)
+            with readers(state) as accessors:
+                accessor = accessors[0 if reader_kind == "store" else 1]
+                with pytest.raises(NarrativeSourceNotCurrentError):
+>                   accessor.read_current_subject(artifact_version_id=version.artifact_version_id,
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        subject=a, generation_sha256=generation)
+E                   AttributeError: 'NarrativeArtifactStore' object has no attribute 'read_current_subject'
+
+tests\integration\test_official_json_subject_artifacts.py:229: AttributeError
+_______ test_parent_change_during_artifact_open_is_rechecked[readonly] ________
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-157/test_parent_change_during_arti1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001E47FD55350>
+reader_kind = 'readonly'
+
+    @pytest.mark.parametrize("reader_kind", ["store", "readonly"])
+    def test_parent_change_during_artifact_open_is_rechecked(tmp_path, monkeypatch, reader_kind):
+        with owned_state(tmp_path) as state:
+            a = state.subjects[0]
+            version, generation, _ = publish(state, a, "race")
+            original_read = state.objects.read
+            def changing_read(*args, **kwargs):
+                data = original_read(*args, **kwargs)
+                change_second_parent(state, "status")
+                return data
+            monkeypatch.setattr(state.objects, "read", changing_read)
+            with readers(state) as accessors:
+                accessor = accessors[0 if reader_kind == "store" else 1]
+                with pytest.raises(NarrativeSourceNotCurrentError):
+>                   accessor.read_current_subject(artifact_version_id=version.artifact_version_id,
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        subject=a, generation_sha256=generation)
+E                   AttributeError: 'NarrativeArtifactReader' object has no attribute 'read_current_subject'
+
+tests\integration\test_official_json_subject_artifacts.py:229: AttributeError
+_____ test_inconsistent_subject_draft_is_typed_and_never_written[anchor] ______
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-157/test_inconsistent_subject_draf0')
+damage = 'anchor'
+
+    @pytest.mark.parametrize("damage", ["anchor", "binding", "generation"])
+    def test_inconsistent_subject_draft_is_typed_and_never_written(tmp_path, damage):
+        with owned_state(tmp_path) as state:
+            subject = state.subjects[0]
+            draft, _ = draft_for(state, subject, "invalid")
+            if damage == "anchor":
+                second = state.refs[1]
+                draft = replace(draft, document_id=second["document_id"], source_id=second["source_id"], source_sha256=second["content_sha256"])
+            else:
+                metadata = json.loads(draft.metadata_json)
+                if damage == "binding":
+                    metadata["subject_binding"]["item_key"] = "urn:invalid"
+                else:
+                    metadata["generation_sha256"] = "no-hash"
+                draft = replace(draft, metadata_json=encoded(metadata).decode())
+>           with pytest.raises(NarrativeArtifactConflictError):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           Failed: DID NOT RAISE NarrativeArtifactConflictError
+
+tests\integration\test_official_json_subject_artifacts.py:248: Failed
+_____ test_inconsistent_subject_draft_is_typed_and_never_written[binding] _____
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-157/test_inconsistent_subject_draf1')
+damage = 'binding'
+
+    @pytest.mark.parametrize("damage", ["anchor", "binding", "generation"])
+    def test_inconsistent_subject_draft_is_typed_and_never_written(tmp_path, damage):
+        with owned_state(tmp_path) as state:
+            subject = state.subjects[0]
+            draft, _ = draft_for(state, subject, "invalid")
+            if damage == "anchor":
+                second = state.refs[1]
+                draft = replace(draft, document_id=second["document_id"], source_id=second["source_id"], source_sha256=second["content_sha256"])
+            else:
+                metadata = json.loads(draft.metadata_json)
+                if damage == "binding":
+                    metadata["subject_binding"]["item_key"] = "urn:invalid"
+                else:
+                    metadata["generation_sha256"] = "no-hash"
+                draft = replace(draft, metadata_json=encoded(metadata).decode())
+>           with pytest.raises(NarrativeArtifactConflictError):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           Failed: DID NOT RAISE NarrativeArtifactConflictError
+
+tests\integration\test_official_json_subject_artifacts.py:248: Failed
+___ test_inconsistent_subject_draft_is_typed_and_never_written[generation] ____
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-157/test_inconsistent_subject_draf2')
+damage = 'generation'
+
+    @pytest.mark.parametrize("damage", ["anchor", "binding", "generation"])
+    def test_inconsistent_subject_draft_is_typed_and_never_written(tmp_path, damage):
+        with owned_state(tmp_path) as state:
+            subject = state.subjects[0]
+            draft, _ = draft_for(state, subject, "invalid")
+            if damage == "anchor":
+                second = state.refs[1]
+                draft = replace(draft, document_id=second["document_id"], source_id=second["source_id"], source_sha256=second["content_sha256"])
+            else:
+                metadata = json.loads(draft.metadata_json)
+                if damage == "binding":
+                    metadata["subject_binding"]["item_key"] = "urn:invalid"
+                else:
+                    metadata["generation_sha256"] = "no-hash"
+                draft = replace(draft, metadata_json=encoded(metadata).decode())
+>           with pytest.raises(NarrativeArtifactConflictError):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           Failed: DID NOT RAISE NarrativeArtifactConflictError
+
+tests\integration\test_official_json_subject_artifacts.py:248: Failed
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_shared_projection_versions_never_pollute_legacy_raw_reads[missing]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_shared_projection_versions_never_pollute_legacy_raw_reads[null]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_shared_projection_versions_never_pollute_legacy_raw_reads[raw]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_exact_subject_and_generation_survive_reopen_without_fake_sources
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[status-prepare]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[status-activate]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[status-read]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[status-candidate]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[status-effect]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[primary-prepare]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[primary-activate]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[primary-read]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[primary-candidate]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[primary-effect]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[catalog_sha-prepare]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[catalog_sha-activate]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[catalog_sha-read]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[catalog_sha-candidate]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_nonanchor_parent_change_rejects_every_state_boundary[catalog_sha-effect]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_parent_change_during_artifact_open_is_rechecked[store]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_parent_change_during_artifact_open_is_rechecked[readonly]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_inconsistent_subject_draft_is_typed_and_never_written[anchor]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_inconsistent_subject_draft_is_typed_and_never_written[binding]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_inconsistent_subject_draft_is_typed_and_never_written[generation]
+24 failed, 1 warning in 17.68s

@@ -7,6 +7,7 @@ from company_wiki.source_catalog.transcript_text_extract import (
     extract_transcript_material,
 )
 from company_wiki.source_catalog.narrative_evidence import (
+    TRANSCRIPT_PARSER_VERSION,
     parse_transcript_text,
     select_narrative_evidence,
     verify_transcript_evidence_spans,
@@ -136,7 +137,7 @@ def test_legacy_version_replays_original_heading_layout_and_new_identity_is_sepa
     assert len(verified) == len(old_spans) and not failed
     assert parser_component("text/html", "transcript") == (
         "selective_narrative_parser",
-        "0.3.0",
+        TRANSCRIPT_PARSER_VERSION,
     )
     assert parser_component("text/html", "transcript", parser_version="0.2.0") == (
         "selective_narrative_parser", "0.2.0",

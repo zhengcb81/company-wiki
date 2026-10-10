@@ -1,0 +1,29 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-effort-red-wqd3_ode\\pytest", "requested_basetemp_len": 62, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-224408-d44203d5", "effective_basetemp_len": 75}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+collected 3 items / 1 deselected / 2 selected
+
+tests\integration\test_narrative_legacy_effort_history.py FF             [100%]
+
+================================== FAILURES ===================================
+___ test_completed_real_legacy_binding_reads_without_resigning_or_model[1] ____
+tests\integration\test_narrative_legacy_effort_history.py:124: in test_completed_real_legacy_binding_reads_without_resigning_or_model
+    binding, _versions, jobs = _resume(state, request)
+                               ^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_narrative_legacy_effort_history.py:68: in _resume
+    return batch._resume_binding(
+src\company_wiki\automation\narrative_batch.py:602: in _resume_binding
+    raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
+E   company_wiki.automation.narrative_batch.BatchResumeError: BATCH_FROZEN_BINDING_INVALID
+____________ test_history_comparator_is_narrow_and_does_not_mutate ____________
+tests\integration\test_narrative_legacy_effort_history.py:197: in test_history_comparator_is_narrow_and_does_not_mutate
+    compare = batch._completed_history_generation_matches
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.automation.narrative_batch' has no attribute '_completed_history_generation_matches'
+=========================== short test summary info ===========================
+FAILED tests/integration/test_narrative_legacy_effort_history.py::test_completed_real_legacy_binding_reads_without_resigning_or_model[1]
+FAILED tests/integration/test_narrative_legacy_effort_history.py::test_history_comparator_is_narrow_and_does_not_mutate
+================= 2 failed, 1 deselected, 1 warning in 6.15s ==================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-224408-d44203d5", "existed": true, "removed": true}

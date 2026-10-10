@@ -1,0 +1,26 @@
+{
+  "exit_code": 1,
+  "duration_seconds": 6.604,
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-p",
+    "pytest_timeout",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-config-effort-red-7ockbdbg\\pytest",
+    "-q",
+    "--disable-warnings",
+    "tests/integration/test_official_json_verify_handler.py",
+    "-k",
+    "reasoning_effort"
+  ],
+  "log_sha256": "c48f9b752582d13f3890b50f48b16096bb1394c30f9ef5762473589ea20f90d8",
+  "external_calls": 0,
+  "owned_temp_removed": true
+}

@@ -1,0 +1,35 @@
+{
+  "results": [
+    {
+      "name": "ruff",
+      "exit_code": 0,
+      "command": [
+        "python",
+        "-B",
+        "-m",
+        "ruff",
+        "check",
+        "--no-cache",
+        "src/company_wiki/automation/narrative_model.py",
+        "src/company_wiki/automation/narrative_summarize.py",
+        "tests/unit/test_official_json_model_subject.py",
+        "tests/unit/test_official_json_summarize_subject.py"
+      ]
+    },
+    {
+      "name": "mypy",
+      "exit_code": 0,
+      "command": [
+        "python",
+        "-B",
+        "-m",
+        "mypy",
+        "--cache-dir",
+        "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-model-mypy-w_q4uyiw/cache",
+        "src/company_wiki/automation/narrative_model.py",
+        "src/company_wiki/automation/narrative_summarize.py"
+      ]
+    }
+  ],
+  "owned_temp_removed": true
+}

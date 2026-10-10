@@ -124,11 +124,38 @@ def _docstring_nodes(tree: ast.AST) -> set[int]:
     return lines
 
 
+def _is_json_pointer_data_literal(node: ast.Constant, parents: dict[int, ast.AST]) -> bool:
+    """Classify literal source coordinates, without exempting filesystem calls.
+
+    Only the two explicit pointer data fields qualify.  A literal may be a
+    string-concatenation operand, but calls or containers between it and the
+    dictionary value stop the classification.  RFC 6901 permits only ~0 and ~1
+    escapes; this checks the literal, not the runtime value of a computed pointer.
+    """
+    value = node.value
+    if not isinstance(value, str) or (value and not value.startswith("/")):
+        return False
+    if re.search(r"~(?![01])", value):
+        return False
+    current: ast.AST = node
+    parent = parents.get(id(current))
+    while isinstance(parent, ast.BinOp) and isinstance(parent.op, ast.Add):
+        current = parent
+        parent = parents.get(id(current))
+    if not isinstance(parent, ast.Dict):
+        return False
+    for key, item in zip(parent.keys, parent.values):
+        if item is current and isinstance(key, ast.Constant):
+            return key.value in ("record_pointer", "field_pointer")
+    return False
+
+
 def _string_literals(tree: ast.AST, doc_lines: set[int]) -> list[tuple[str, int]]:
     out: list[tuple[str, int]] = []
+    parents = _parents(tree)
     for node in ast.walk(tree):
         if isinstance(node, ast.Constant) and isinstance(node.value, str):
-            if node.lineno in doc_lines:
+            if node.lineno in doc_lines or _is_json_pointer_data_literal(node, parents):
                 continue
             out.append((node.value, node.lineno))
         elif isinstance(node, ast.JoinedStr):

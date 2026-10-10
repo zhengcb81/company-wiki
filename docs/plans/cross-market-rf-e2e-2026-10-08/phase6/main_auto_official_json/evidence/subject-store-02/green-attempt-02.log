@@ -1,0 +1,137 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\subject-store-verification-o2u70z4r\\pytest", "requested_basetemp_len": 74, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-214316-a721b656", "effective_basetemp_len": 75}
+FFFF.................................................................... [100%]
+================================== FAILURES ===================================
+___ test_shared_projection_versions_never_pollute_legacy_raw_reads[missing] ___
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-214316-a721b656/test_shared_projection_version0')
+raw_binding = 'missing'
+
+    @pytest.mark.parametrize("raw_binding", ["missing", "null", "raw"])
+    def test_shared_projection_versions_never_pollute_legacy_raw_reads(tmp_path, raw_binding):
+        with owned_state(tmp_path) as state:
+            raw = NarrativeSubject.from_raw(state.refs[0])
+            label = "raw"
+            generation = digest((label + "-generation").encode())
+            metadata = {"generation_sha256": generation}
+            if raw_binding != "missing":
+                metadata["subject_binding"] = None if raw_binding == "null" else raw.to_dict()
+            old, _, old_payload = publish(state, raw, label, metadata_override=metadata)
+            a, _, _ = publish(state, state.subjects[0], "project-a",
+                metadata_override={"subject_binding": state.subjects[0].to_dict(), "generation_sha256": generation})
+            publish(state, state.subjects[1], "project-b")
+            anchor = raw.anchor_ref
+            kwargs = dict(document_id=anchor["document_id"], source_id=anchor["source_id"],
+                source_sha256=anchor["content_sha256"])
+            with readers(state) as accessors:
+                for accessor in accessors:
+                    assert accessor.latest_visible_version(**kwargs).artifact_version_id == old.artifact_version_id
+                    assert accessor.read_exact(artifact_version_id=old.artifact_version_id, **kwargs)[1] == old_payload
+                    with pytest.raises(NarrativeArtifactNotVisibleError):
+                        accessor.read_exact(artifact_version_id=a.artifact_version_id, **kwargs)
+>               assert accessors[1].visible_generation_candidates(generation_sha256=generation, **kwargs) == (old,)
+E               AssertionError: assert (NarrativeArt...T00:00:01Z'),) == (NarrativeArt...ted_at=None),)
+E                 
+E                 At index 0 diff: NarrativeArtifactVersion(artifact_version_id='narrative-d59fdb1b02d542cabd8496b335a91066', work_key='d7439bee24773bcbfa2d0a97947ee36227b10d1022b1a55847e928965bb6bfde', effect_id='raw', document_id='urn:company-wiki:document:sha256:0a64a5447a23690f0dfa84e3afb987da04a1f58b6d1c440a22ed310bda0039e2', source_id='urn:company-wiki:source:sha256:0a64a5447a23690f0dfa84e3afb987da04a1f58b6d1c440a22ed310bda0039e2', source_sha256='0a64a5447a23690f0dfa84e3afb987da04a1f58b6d1c440a22ed310bda0039e2', artifact_role='narrative_bundle', object_key='objects/sha256/61/614d8d...
+E                 
+E                 ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests\integration\test_official_json_subject_artifacts.py:145: AssertionError
+____ test_shared_projection_versions_never_pollute_legacy_raw_reads[null] _____
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-214316-a721b656/test_shared_projection_version1')
+raw_binding = 'null'
+
+    @pytest.mark.parametrize("raw_binding", ["missing", "null", "raw"])
+    def test_shared_projection_versions_never_pollute_legacy_raw_reads(tmp_path, raw_binding):
+        with owned_state(tmp_path) as state:
+            raw = NarrativeSubject.from_raw(state.refs[0])
+            label = "raw"
+            generation = digest((label + "-generation").encode())
+            metadata = {"generation_sha256": generation}
+            if raw_binding != "missing":
+                metadata["subject_binding"] = None if raw_binding == "null" else raw.to_dict()
+            old, _, old_payload = publish(state, raw, label, metadata_override=metadata)
+            a, _, _ = publish(state, state.subjects[0], "project-a",
+                metadata_override={"subject_binding": state.subjects[0].to_dict(), "generation_sha256": generation})
+            publish(state, state.subjects[1], "project-b")
+            anchor = raw.anchor_ref
+            kwargs = dict(document_id=anchor["document_id"], source_id=anchor["source_id"],
+                source_sha256=anchor["content_sha256"])
+            with readers(state) as accessors:
+                for accessor in accessors:
+                    assert accessor.latest_visible_version(**kwargs).artifact_version_id == old.artifact_version_id
+                    assert accessor.read_exact(artifact_version_id=old.artifact_version_id, **kwargs)[1] == old_payload
+                    with pytest.raises(NarrativeArtifactNotVisibleError):
+                        accessor.read_exact(artifact_version_id=a.artifact_version_id, **kwargs)
+>               assert accessors[1].visible_generation_candidates(generation_sha256=generation, **kwargs) == (old,)
+E               AssertionError: assert (NarrativeArt...T00:00:01Z'),) == (NarrativeArt...ted_at=None),)
+E                 
+E                 At index 0 diff: NarrativeArtifactVersion(artifact_version_id='narrative-d0ca5a364cb54a4cb6ffa2b4b9f41023', work_key='d7439bee24773bcbfa2d0a97947ee36227b10d1022b1a55847e928965bb6bfde', effect_id='raw', document_id='urn:company-wiki:document:sha256:0a64a5447a23690f0dfa84e3afb987da04a1f58b6d1c440a22ed310bda0039e2', source_id='urn:company-wiki:source:sha256:0a64a5447a23690f0dfa84e3afb987da04a1f58b6d1c440a22ed310bda0039e2', source_sha256='0a64a5447a23690f0dfa84e3afb987da04a1f58b6d1c440a22ed310bda0039e2', artifact_role='narrative_bundle', object_key='objects/sha256/61/614d8d...
+E                 
+E                 ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests\integration\test_official_json_subject_artifacts.py:145: AssertionError
+_____ test_shared_projection_versions_never_pollute_legacy_raw_reads[raw] _____
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-214316-a721b656/test_shared_projection_version2')
+raw_binding = 'raw'
+
+    @pytest.mark.parametrize("raw_binding", ["missing", "null", "raw"])
+    def test_shared_projection_versions_never_pollute_legacy_raw_reads(tmp_path, raw_binding):
+        with owned_state(tmp_path) as state:
+            raw = NarrativeSubject.from_raw(state.refs[0])
+            label = "raw"
+            generation = digest((label + "-generation").encode())
+            metadata = {"generation_sha256": generation}
+            if raw_binding != "missing":
+                metadata["subject_binding"] = None if raw_binding == "null" else raw.to_dict()
+            old, _, old_payload = publish(state, raw, label, metadata_override=metadata)
+            a, _, _ = publish(state, state.subjects[0], "project-a",
+                metadata_override={"subject_binding": state.subjects[0].to_dict(), "generation_sha256": generation})
+            publish(state, state.subjects[1], "project-b")
+            anchor = raw.anchor_ref
+            kwargs = dict(document_id=anchor["document_id"], source_id=anchor["source_id"],
+                source_sha256=anchor["content_sha256"])
+            with readers(state) as accessors:
+                for accessor in accessors:
+                    assert accessor.latest_visible_version(**kwargs).artifact_version_id == old.artifact_version_id
+                    assert accessor.read_exact(artifact_version_id=old.artifact_version_id, **kwargs)[1] == old_payload
+                    with pytest.raises(NarrativeArtifactNotVisibleError):
+                        accessor.read_exact(artifact_version_id=a.artifact_version_id, **kwargs)
+>               assert accessors[1].visible_generation_candidates(generation_sha256=generation, **kwargs) == (old,)
+E               AssertionError: assert (NarrativeArt...T00:00:01Z'),) == (NarrativeArt...ted_at=None),)
+E                 
+E                 At index 0 diff: NarrativeArtifactVersion(artifact_version_id='narrative-6ec746a3e66649b099dc65c5315e65af', work_key='d7439bee24773bcbfa2d0a97947ee36227b10d1022b1a55847e928965bb6bfde', effect_id='raw', document_id='urn:company-wiki:document:sha256:0a64a5447a23690f0dfa84e3afb987da04a1f58b6d1c440a22ed310bda0039e2', source_id='urn:company-wiki:source:sha256:0a64a5447a23690f0dfa84e3afb987da04a1f58b6d1c440a22ed310bda0039e2', source_sha256='0a64a5447a23690f0dfa84e3afb987da04a1f58b6d1c440a22ed310bda0039e2', artifact_role='narrative_bundle', object_key='objects/sha256/61/614d8d...
+E                 
+E                 ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests\integration\test_official_json_subject_artifacts.py:145: AssertionError
+____ test_exact_subject_and_generation_survive_reopen_without_fake_sources ____
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261010-214316-a721b656/test_exact_subject_and_generat0')
+
+    def test_exact_subject_and_generation_survive_reopen_without_fake_sources(tmp_path):
+        with owned_state(tmp_path) as state:
+            a, b = state.subjects
+            va, ga, pa = publish(state, a, "a-generation-one")
+            va2, ga2, _ = publish(state, a, "a-generation-two")
+            vb, gb, pb = publish(state, b, "b-generation-one")
+            assert va.document_id == vb.document_id == a.anchor_ref["document_id"]
+            assert va.source_id == vb.source_id == a.anchor_ref["source_id"]
+            with readers(state) as accessors:
+                for accessor in accessors:
+>                   assert accessor.visible_subject_generation_candidates(subject=a, generation_sha256=ga) == (va,)
+E                   AssertionError: assert (NarrativeArt...T00:00:01Z'),) == (NarrativeArt...ted_at=None),)
+E                     
+E                     At index 0 diff: NarrativeArtifactVersion(artifact_version_id='narrative-3147bb8c8ff7402097af4d4a11c6878a', work_key='162f84ef87a17531a4029b02535c3396d6192bbefd73ec28ed3a795435354083', effect_id='a-generation-one', document_id='urn:company-wiki:document:sha256:0a64a5447a23690f0dfa84e3afb987da04a1f58b6d1c440a22ed310bda0039e2', source_id='urn:company-wiki:source:sha256:0a64a5447a23690f0dfa84e3afb987da04a1f58b6d1c440a22ed310bda0039e2', source_sha256='0a64a5447a23690f0dfa84e3afb987da04a1f58b6d1c440a22ed310bda0039e2', artifact_role='narrative_bundle', object_key='objects/sha...
+E                     
+E                     ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests\integration\test_official_json_subject_artifacts.py:159: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_shared_projection_versions_never_pollute_legacy_raw_reads[missing]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_shared_projection_versions_never_pollute_legacy_raw_reads[null]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_shared_projection_versions_never_pollute_legacy_raw_reads[raw]
+FAILED tests/integration/test_official_json_subject_artifacts.py::test_exact_subject_and_generation_survive_reopen_without_fake_sources
+4 failed, 68 passed in 55.96s
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-214316-a721b656", "existed": true, "removed": true}

@@ -1,0 +1,28 @@
+{
+  "exit_code": 1,
+  "duration_seconds": 8.423,
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-p",
+    "pytest_timeout",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-official-handler-green-pd2svhyq\\pytest",
+    "-q",
+    "--disable-warnings",
+    "tests/integration/test_official_json_select_handler.py",
+    "tests/unit/test_narrative_select_handler.py",
+    "tests/unit/test_official_json_narrative_adapter.py",
+    "tests/integration/test_official_json_narrative_adapter.py"
+  ],
+  "log_sha256": "e3227a7b8b9d9495e7e89621c1c090ee83a7b6579fe320207e808a9f3c3a5f23",
+  "external_calls": 0,
+  "cost_usd": 0,
+  "owned_temp_removed": true
+}

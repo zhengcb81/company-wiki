@@ -1,0 +1,33 @@
+{
+  "head": "de24d31c107785e902132c421371e92ac89aa59b",
+  "elapsed_seconds": 30.748877199999697,
+  "staged_files": [
+    "src/company_wiki/narrative_subject.py",
+    "src/company_wiki/source_catalog/cli.py",
+    "tests/unit/test_official_json_narrative_subject.py",
+    "tests/unit/test_official_json_public_dispatch.py",
+    "tests/integration/test_official_json_public_cli.py",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/task_plan.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/findings.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/progress.md",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\IMPLEMENTATION.md",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\INTERFACES.md",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\task_plan.md",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\findings.md",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\progress.md",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\evidence\\cli-dispatch-01\\green.log",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\evidence\\cli-dispatch-01\\observation.json",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\evidence\\cli-dispatch-01\\red.log",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\evidence\\subject-core-01\\green.log",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\evidence\\subject-core-01\\observation.json",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\evidence\\subject-core-01\\red.log",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\evidence\\foundation-01\\green.log",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\evidence\\foundation-01\\independent-review.json",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\evidence\\foundation-01\\mypy.log",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\evidence\\foundation-01\\observation.json",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\evidence\\foundation-01\\ruff.log"
+  ],
+  "normal_hooks": true,
+  "scope": "foundation, AUTO integration pending",
+  "prepublication_amend_reason": "Preserve previous MAIN planning history and avoid CRLF-only full-file churn; normal hooks"
+}

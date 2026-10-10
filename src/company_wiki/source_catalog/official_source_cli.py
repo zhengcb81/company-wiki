@@ -69,10 +69,18 @@ def _json_projection_operation(catalog, operation, request) -> dict | bytes:
         refs = request.get("parent_source_refs")
         if not isinstance(refs, list) or not refs:
             raise ProjectionError("invalid_projection_request")
+        # An explicit producer is passed to the source owner. Omission preserves
+        # the historical default and wire; unknown versions cannot be ignored.
+        if "projection_version" in request and not isinstance(request["projection_version"], str):
+            raise ProjectionError("invalid_projection_version")
+        version_options = (
+            {"projection_version": request["projection_version"]}
+            if "projection_version" in request else {}
+        )
         projection = build_projection_from_refs(
             catalog, refs=refs, layout_id=request.get("layout_id"),
             issuer=request.get("issuer") or {},
-            as_of_date=request.get("as_of_date"))
+            as_of_date=request.get("as_of_date"), **version_options)
         if request.get("persist"):
             persist_projection(catalog, projection)
         return {

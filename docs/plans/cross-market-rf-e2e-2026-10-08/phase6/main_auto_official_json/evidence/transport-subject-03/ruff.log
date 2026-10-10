@@ -1,0 +1,718 @@
+E702 Multiple statements on one line (semicolon)
+   --> tests\integration\test_official_json_transport_subject.py:164:19
+    |
+162 | …     raw = NarrativeSubject.from_raw(state.refs[0])
+163 | …     vr, _, _ = publish(state, raw, "legacy-raw", {"fixture": "old raw"})
+164 | …     calls = []; transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog), projection_loader=loader_…
+    |                 ^
+165 | …     opened = []; real_open = SourceVersionReader.open_version
+166 | …     def count_open(reader, source, **kwargs):
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\integration\test_official_json_transport_subject.py:165:20
+    |
+163 | …     vr, _, _ = publish(state, raw, "legacy-raw", {"fixture": "old raw"})
+164 | …     calls = []; transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog), projection_loader=loader_…
+165 | …     opened = []; real_open = SourceVersionReader.open_version
+    |                  ^
+166 | …     def count_open(reader, source, **kwargs):
+167 | …         opened.append(source.content_sha256); return real_open(reader, source, **kwargs)
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\integration\test_official_json_transport_subject.py:167:49
+    |
+165 |         opened = []; real_open = SourceVersionReader.open_version
+166 |         def count_open(reader, source, **kwargs):
+167 |             opened.append(source.content_sha256); return real_open(reader, source, **kwargs)
+    |                                                 ^
+168 |         monkeypatch.setattr(SourceVersionReader, "open_version", count_open)
+169 |         ra = transport.reference_subject(a, generation_sha256=ga)
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\integration\test_official_json_transport_subject.py:197:30
+    |
+195 | def test_wrong_read_context_refuses_without_reopening_source(tmp_path, bad):
+196 |     with owned_state(tmp_path) as state:
+197 |         a = state.subjects[0]; _, generation, _ = publish(state, a, "context")
+    |                              ^
+198 |         calls = []; transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog), projection_loader=loade…
+199 |         reference = transport.reference_subject(a, generation_sha256=generation)
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\integration\test_official_json_transport_subject.py:198:19
+    |
+196 |     with owned_state(tmp_path) as state:
+197 |         a = state.subjects[0]; _, generation, _ = publish(state, a, "context")
+198 |         calls = []; transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog), projection_loader=loade…
+    |                   ^
+199 |         reference = transport.reference_subject(a, generation_sha256=generation)
+200 |         wire = request(reference).to_dict()
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_transport_subject.py:201:27
+    |
+199 |         reference = transport.reference_subject(a, generation_sha256=generation)
+200 |         wire = request(reference).to_dict()
+201 |         if bad == "issuer": wire["expected_issuer"] = {"provider_company_id":2}
+    |                           ^
+202 |         elif bad == "cutoff": wire["as_of_date"] = "2026-10-07"
+203 |         elif bad == "generation": wire["narrative_ref"]["generation_sha256"] = "f"*64
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_transport_subject.py:202:29
+    |
+200 |         wire = request(reference).to_dict()
+201 |         if bad == "issuer": wire["expected_issuer"] = {"provider_company_id":2}
+202 |         elif bad == "cutoff": wire["as_of_date"] = "2026-10-07"
+    |                             ^
+203 |         elif bad == "generation": wire["narrative_ref"]["generation_sha256"] = "f"*64
+204 |         elif bad == "binding": wire["narrative_ref"]["subject_binding"]["issuer"]["provider_company_id"] = 2
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_transport_subject.py:203:33
+    |
+201 |         if bad == "issuer": wire["expected_issuer"] = {"provider_company_id":2}
+202 |         elif bad == "cutoff": wire["as_of_date"] = "2026-10-07"
+203 |         elif bad == "generation": wire["narrative_ref"]["generation_sha256"] = "f"*64
+    |                                 ^
+204 |         elif bad == "binding": wire["narrative_ref"]["subject_binding"]["issuer"]["provider_company_id"] = 2
+205 |         elif bad == "artifact_hash": wire["narrative_ref"]["artifact_sha256"] = "f"*64
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_transport_subject.py:204:30
+    |
+202 |         elif bad == "cutoff": wire["as_of_date"] = "2026-10-07"
+203 |         elif bad == "generation": wire["narrative_ref"]["generation_sha256"] = "f"*64
+204 |         elif bad == "binding": wire["narrative_ref"]["subject_binding"]["issuer"]["provider_company_id"] = 2
+    |                              ^
+205 |         elif bad == "artifact_hash": wire["narrative_ref"]["artifact_sha256"] = "f"*64
+206 |         else: wire["narrative_ref"]["byte_size"] += 1
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_transport_subject.py:205:36
+    |
+203 |         elif bad == "generation": wire["narrative_ref"]["generation_sha256"] = "f"*64
+204 |         elif bad == "binding": wire["narrative_ref"]["subject_binding"]["issuer"]["provider_company_id"] = 2
+205 |         elif bad == "artifact_hash": wire["narrative_ref"]["artifact_sha256"] = "f"*64
+    |                                    ^
+206 |         else: wire["narrative_ref"]["byte_size"] += 1
+207 |         with pytest.raises(NarrativeTransportError): transport.read(NarrativeReadRequest.from_dict(wire))
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_transport_subject.py:206:13
+    |
+204 |         elif bad == "binding": wire["narrative_ref"]["subject_binding"]["issuer"]["provider_company_id"] = 2
+205 |         elif bad == "artifact_hash": wire["narrative_ref"]["artifact_sha256"] = "f"*64
+206 |         else: wire["narrative_ref"]["byte_size"] += 1
+    |             ^
+207 |         with pytest.raises(NarrativeTransportError): transport.read(NarrativeReadRequest.from_dict(wire))
+208 |         assert calls == []
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_transport_subject.py:207:52
+    |
+205 |         elif bad == "artifact_hash": wire["narrative_ref"]["artifact_sha256"] = "f"*64
+206 |         else: wire["narrative_ref"]["byte_size"] += 1
+207 |         with pytest.raises(NarrativeTransportError): transport.read(NarrativeReadRequest.from_dict(wire))
+    |                                                    ^
+208 |         assert calls == []
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\integration\test_official_json_transport_subject.py:214:30
+    |
+212 | def test_second_parent_is_revalidated_by_owning_layers(tmp_path, change):
+213 |     with owned_state(tmp_path) as state:
+214 |         a = state.subjects[0]; _, generation, _ = publish(state, a, "second-parent")
+    |                              ^
+215 |         calls = []; transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog), projection_loader=loade…
+216 |         reference = transport.reference_subject(a, generation_sha256=generation)
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\integration\test_official_json_transport_subject.py:215:19
+    |
+213 |     with owned_state(tmp_path) as state:
+214 |         a = state.subjects[0]; _, generation, _ = publish(state, a, "second-parent")
+215 |         calls = []; transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog), projection_loader=loade…
+    |                   ^
+216 |         reference = transport.reference_subject(a, generation_sha256=generation)
+217 |         target = next(p for p in (state.root/"companies").rglob("*.json") if not p.name.endswith(".source.json") and p.read_bytes()==…
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_transport_subject.py:219:33
+    |
+217 | …     target = next(p for p in (state.root/"companies").rglob("*.json") if not p.name.endswith(".source.json") and p.read_bytes()==st…
+218 | …     try:
+219 | …         if change == "bytes": target.write_bytes(state.original[1].replace(b"fourth", b"fifth",1))
+    |                               ^
+220 | …         else:
+221 | …             with state.catalog.store.transaction() as connection:
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_transport_subject.py:222:42
+    |
+220 | …     else:
+221 | …         with state.catalog.store.transaction() as connection:
+222 | …             if change == "status": connection.execute("UPDATE documents SET source_status='retired' WHERE document_id=?",(state.ref…
+    |                                    ^
+223 | …             else: connection.execute("UPDATE documents SET primary_source_id=NULL WHERE document_id=?",(state.refs[1]["document_id"…
+224 | …     with pytest.raises(NarrativeTransportError): transport.read(request(reference))
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_transport_subject.py:223:25
+    |
+221 | …         with state.catalog.store.transaction() as connection:
+222 | …             if change == "status": connection.execute("UPDATE documents SET source_status='retired' WHERE document_id=?",(state.ref…
+223 | …             else: connection.execute("UPDATE documents SET primary_source_id=NULL WHERE document_id=?",(state.refs[1]["document_id"…
+    |                   ^
+224 | …     with pytest.raises(NarrativeTransportError): transport.read(request(reference))
+225 | …     assert len(calls) == (1 if change == "bytes" else 0)
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_transport_subject.py:224:56
+    |
+222 | …                 if change == "status": connection.execute("UPDATE documents SET source_status='retired' WHERE document_id=?",(state…
+223 | …                 else: connection.execute("UPDATE documents SET primary_source_id=NULL WHERE document_id=?",(state.refs[1]["document…
+224 | …         with pytest.raises(NarrativeTransportError): transport.read(request(reference))
+    |                                                      ^
+225 | …         assert len(calls) == (1 if change == "bytes" else 0)
+226 | …     finally:
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_transport_subject.py:227:33
+    |
+225 |             assert len(calls) == (1 if change == "bytes" else 0)
+226 |         finally:
+227 |             if change == "bytes": target.write_bytes(state.original[1])
+    |                                 ^
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\integration\test_official_json_transport_subject.py:232:30
+    |
+230 | def test_artifact_corruption_is_not_a_cache_miss_or_a_source_read(tmp_path):
+231 |     with owned_state(tmp_path) as state:
+232 |         a = state.subjects[0]; version, generation, payload = publish(state,a,"corrupt")
+    |                              ^
+233 |         calls = []; transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog), projection_loader=loade…
+234 |         reference = transport.reference_subject(a,generation_sha256=generation)
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\integration\test_official_json_transport_subject.py:233:19
+    |
+231 |     with owned_state(tmp_path) as state:
+232 |         a = state.subjects[0]; version, generation, payload = publish(state,a,"corrupt")
+233 |         calls = []; transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog), projection_loader=loade…
+    |                   ^
+234 |         reference = transport.reference_subject(a,generation_sha256=generation)
+235 |         target = state.catalog.config.catalog_dir/version.object_key
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_transport_subject.py:237:61
+    |
+235 |         target = state.catalog.config.catalog_dir/version.object_key
+236 |         target.write_bytes(b"X"*len(payload))
+237 |         with pytest.raises(NarrativeTransportError) as error: transport.read(request(reference))
+    |                                                             ^
+238 |         assert error.value.reason == "narrative_artifact_corrupt" and calls == []
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\integration\test_official_json_transport_subject.py:244:28
+    |
+242 | def test_resigned_artifact_can_never_fabricate_verified_native_field(tmp_path,change):
+243 |     with owned_state(tmp_path) as state:
+244 |         a=state.subjects[0];wire=bundle_for(state,a);original=EvidenceSpan.from_dict(wire["evidence_spans"][0])
+    |                            ^
+245 |         metadata=deepcopy(original.to_dict()["structured_value"]);text=original.raw_text;coordinates=original.coordinates;parser=orig…
+246 |         if change=="raw_text":
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\integration\test_official_json_transport_subject.py:244:53
+    |
+242 | def test_resigned_artifact_can_never_fabricate_verified_native_field(tmp_path,change):
+243 |     with owned_state(tmp_path) as state:
+244 |         a=state.subjects[0];wire=bundle_for(state,a);original=EvidenceSpan.from_dict(wire["evidence_spans"][0])
+    |                                                     ^
+245 |         metadata=deepcopy(original.to_dict()["structured_value"]);text=original.raw_text;coordinates=original.coordinates;parser=orig…
+246 |         if change=="raw_text":
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\integration\test_official_json_transport_subject.py:245:66
+    |
+243 |     with owned_state(tmp_path) as state:
+244 |         a=state.subjects[0];wire=bundle_for(state,a);original=EvidenceSpan.from_dict(wire["evidence_spans"][0])
+245 |         metadata=deepcopy(original.to_dict()["structured_value"]);text=original.raw_text;coordinates=original.coordinates;parser=orig…
+    |                                                                  ^
+246 |         if change=="raw_text":
+247 |             text="Fabricated product revenue growth.";metadata["text_sha256"]=digest(text.encode())
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\integration\test_official_json_transport_subject.py:245:89
+    |
+243 |     with owned_state(tmp_path) as state:
+244 |         a=state.subjects[0];wire=bundle_for(state,a);original=EvidenceSpan.from_dict(wire["evidence_spans"][0])
+245 |         metadata=deepcopy(original.to_dict()["structured_value"]);text=original.raw_text;coordinates=original.coordinates;parser=orig…
+    |                                                                                         ^
+246 |         if change=="raw_text":
+247 |             text="Fabricated product revenue growth.";metadata["text_sha256"]=digest(text.encode())
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\integration\test_official_json_transport_subject.py:245:122
+    |
+243 |     with owned_state(tmp_path) as state:
+244 |         a=state.subjects[0];wire=bundle_for(state,a);original=EvidenceSpan.from_dict(wire["evidence_spans"][0])
+245 |         metadata=deepcopy(original.to_dict()["structured_value"]);text=original.raw_text;coordinates=original.coordinates;parser=orig…
+    |                                                                                                                          ^
+246 |         if change=="raw_text":
+247 |             text="Fabricated product revenue growth.";metadata["text_sha256"]=digest(text.encode())
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\integration\test_official_json_transport_subject.py:247:54
+    |
+245 | …     metadata=deepcopy(original.to_dict()["structured_value"]);text=original.raw_text;coordinates=original.coordinates;parser=origin…
+246 | …     if change=="raw_text":
+247 | …         text="Fabricated product revenue growth.";metadata["text_sha256"]=digest(text.encode())
+    |                                                    ^
+248 | …     elif change=="encoded_token_sha256":metadata[change]="f"*64
+249 | …     elif change=="coordinates":
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_transport_subject.py:248:44
+    |
+246 |         if change=="raw_text":
+247 |             text="Fabricated product revenue growth.";metadata["text_sha256"]=digest(text.encode())
+248 |         elif change=="encoded_token_sha256":metadata[change]="f"*64
+    |                                            ^
+249 |         elif change=="coordinates":
+250 |             from dataclasses import replace
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_transport_subject.py:252:13
+    |
+250 | …         from dataclasses import replace
+251 | …         coordinates=replace(coordinates,paragraph_index=999)
+252 | …     else:parser="invented"
+    |           ^
+253 | …     forged=EvidenceSpan.create(source_id=original.source_id,coordinates=coordinates,raw_text=text,structured_value=metadata,
+254 | …         parser_name=parser,parser_version=original.parser_version,parse_status=original.parse_status,quality_flags=original.quality…
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\integration\test_official_json_transport_subject.py:260:17
+    |
+258 | …     wire=NarrativeBundle.from_dict(wire).to_dict()
+259 | …     _,generation,_=publish(state,a,"forged-"+change,wire)
+260 | …     calls=[];transport=NarrativeTransportReader(state.artifacts,SourceVersionReader(state.catalog),projection_loader=loader_for(sta…
+    |               ^
+261 | …     reference=transport.reference_subject(a,generation_sha256=generation)
+262 | …     with pytest.raises(NarrativeTransportError) as error:transport.read(request(reference))
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_transport_subject.py:262:61
+    |
+260 | …     calls=[];transport=NarrativeTransportReader(state.artifacts,SourceVersionReader(state.catalog),projection_loader=loader_for(sta…
+261 | …     reference=transport.reference_subject(a,generation_sha256=generation)
+262 | …     with pytest.raises(NarrativeTransportError) as error:transport.read(request(reference))
+    |                                                           ^
+263 | …     assert error.value.reason=="locator_replay_failed" and calls==[a]
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\integration\test_official_json_transport_subject.py:268:27
+    |
+266 | def test_missing_or_wrong_loader_refuses_without_faking_anchor_projection(tmp_path):
+267 |     with owned_state(tmp_path) as state:
+268 |         a,b=state.subjects;_,generation,_=publish(state,a,"wrong-loader")
+    |                           ^
+269 |         transport=NarrativeTransportReader(state.artifacts,SourceVersionReader(state.catalog))
+270 |         reference=transport.reference_subject(a,generation_sha256=generation)
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_transport_subject.py:271:61
+    |
+269 |         transport=NarrativeTransportReader(state.artifacts,SourceVersionReader(state.catalog))
+270 |         reference=transport.reference_subject(a,generation_sha256=generation)
+271 |         with pytest.raises(NarrativeTransportError) as error:transport.read(request(reference))
+    |                                                             ^
+272 |         assert error.value.reason=="projection_loader_unavailable"
+273 |         other=loader_for(state,[])(b)
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_transport_subject.py:275:61
+    |
+273 |         other=loader_for(state,[])(b)
+274 |         transport=NarrativeTransportReader(state.artifacts,SourceVersionReader(state.catalog),projection_loader=lambda subject:other)
+275 |         with pytest.raises(NarrativeTransportError) as error:transport.read(request(reference))
+    |                                                             ^
+276 |         assert error.value.reason=="projection_identity_mismatch"
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\integration\test_official_json_transport_subject.py:281:27
+    |
+279 | def test_wrong_subject_generation_discovery_never_uses_anchor_latest(tmp_path):
+280 |     with owned_state(tmp_path) as state:
+281 |         a,b=state.subjects;_,generation,_=publish(state,a,"only-a")
+    |                           ^
+282 |         transport=NarrativeTransportReader(state.artifacts,SourceVersionReader(state.catalog))
+283 |         for subject,gen in [(b,generation),(a,"f"*64)]:
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\integration\test_official_json_transport_subject.py:284:65
+    |
+282 |         transport=NarrativeTransportReader(state.artifacts,SourceVersionReader(state.catalog))
+283 |         for subject,gen in [(b,generation),(a,"f"*64)]:
+284 |             with pytest.raises(NarrativeTransportError) as error:transport.reference_subject(subject,generation_sha256=gen)
+    |                                                                 ^
+285 |             assert error.value.reason=="narrative_artifact_not_visible"
+    |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_transport_subject_contracts.py:50:30
+   |
+48 | def test_ref2_rejects_mixed_or_inconsistent_wire(change):
+49 |     value = reference_wire()
+50 |     if change == "source_ref": value["source_ref"] = view_fixture().subject.anchor_ref
+   |                              ^
+51 |     elif change == "missing_generation": value.pop("generation_sha256")
+52 |     elif change == "bad_generation": value["generation_sha256"] = "ABC"
+   |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_transport_subject_contracts.py:51:40
+   |
+49 |     value = reference_wire()
+50 |     if change == "source_ref": value["source_ref"] = view_fixture().subject.anchor_ref
+51 |     elif change == "missing_generation": value.pop("generation_sha256")
+   |                                        ^
+52 |     elif change == "bad_generation": value["generation_sha256"] = "ABC"
+53 |     elif change == "raw_subject":
+   |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_transport_subject_contracts.py:52:36
+   |
+50 |     if change == "source_ref": value["source_ref"] = view_fixture().subject.anchor_ref
+51 |     elif change == "missing_generation": value.pop("generation_sha256")
+52 |     elif change == "bad_generation": value["generation_sha256"] = "ABC"
+   |                                    ^
+53 |     elif change == "raw_subject":
+54 |         from company_wiki.narrative_subject import NarrativeSubject
+   |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_transport_subject_contracts.py:56:31
+   |
+54 |         from company_wiki.narrative_subject import NarrativeSubject
+55 |         value["subject_binding"] = NarrativeSubject.from_raw(view_fixture().subject.anchor_ref).to_dict()
+56 |     elif change == "size_bool": value["byte_size"] = True
+   |                               ^
+57 |     elif change == "extra": value["authorization"] = "not-a-transport-field"
+58 |     else: value["schema_version"] = "narrative-ref/1"
+   |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_transport_subject_contracts.py:57:27
+   |
+55 |         value["subject_binding"] = NarrativeSubject.from_raw(view_fixture().subject.anchor_ref).to_dict()
+56 |     elif change == "size_bool": value["byte_size"] = True
+57 |     elif change == "extra": value["authorization"] = "not-a-transport-field"
+   |                           ^
+58 |     else: value["schema_version"] = "narrative-ref/1"
+59 |     with pytest.raises(ValueError): NarrativeRef.from_dict(value)
+   |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_transport_subject_contracts.py:58:9
+   |
+56 |     elif change == "size_bool": value["byte_size"] = True
+57 |     elif change == "extra": value["authorization"] = "not-a-transport-field"
+58 |     else: value["schema_version"] = "narrative-ref/1"
+   |         ^
+59 |     with pytest.raises(ValueError): NarrativeRef.from_dict(value)
+   |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_transport_subject_contracts.py:59:35
+   |
+57 |     elif change == "extra": value["authorization"] = "not-a-transport-field"
+58 |     else: value["schema_version"] = "narrative-ref/1"
+59 |     with pytest.raises(ValueError): NarrativeRef.from_dict(value)
+   |                                   ^
+   |
+
+E702 Multiple statements on one line (semicolon)
+  --> tests\unit\test_official_json_transport_subject_contracts.py:64:24
+   |
+62 | @pytest.mark.parametrize("issuer", [None, {"provider_company_id": 1}, {"provider_company_id": "1"}, {"market": "CN", "security_id": "6…
+63 | def test_read2_supports_explicit_issuer_partial_constraints(issuer):
+64 |     value = read_wire(); value["expected_issuer"] = issuer
+   |                        ^
+65 |     assert NarrativeReadRequest.from_dict(value).to_dict() == value
+   |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_transport_subject_contracts.py:71:35
+   |
+69 | def test_read2_cannot_fall_back_to_raw_identity_or_invalid_cutoff(change):
+70 |     value = read_wire()
+71 |     if change == "expected_source": value["expected_source"] = {}
+   |                                   ^
+72 |     elif change == "fiscal": value["expected_issuer"] = {"fiscal_year": 2026}
+73 |     elif change == "unknown_issuer": value["expected_issuer"] = {"provider": "fake"}
+   |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_transport_subject_contracts.py:72:28
+   |
+70 |     value = read_wire()
+71 |     if change == "expected_source": value["expected_source"] = {}
+72 |     elif change == "fiscal": value["expected_issuer"] = {"fiscal_year": 2026}
+   |                            ^
+73 |     elif change == "unknown_issuer": value["expected_issuer"] = {"provider": "fake"}
+74 |     elif change == "boolean_id": value["expected_issuer"] = {"provider_company_id": True}
+   |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_transport_subject_contracts.py:73:36
+   |
+71 |     if change == "expected_source": value["expected_source"] = {}
+72 |     elif change == "fiscal": value["expected_issuer"] = {"fiscal_year": 2026}
+73 |     elif change == "unknown_issuer": value["expected_issuer"] = {"provider": "fake"}
+   |                                    ^
+74 |     elif change == "boolean_id": value["expected_issuer"] = {"provider_company_id": True}
+75 |     elif change == "null_id": value["expected_issuer"] = {"provider_company_id": None}
+   |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_transport_subject_contracts.py:74:32
+   |
+72 |     elif change == "fiscal": value["expected_issuer"] = {"fiscal_year": 2026}
+73 |     elif change == "unknown_issuer": value["expected_issuer"] = {"provider": "fake"}
+74 |     elif change == "boolean_id": value["expected_issuer"] = {"provider_company_id": True}
+   |                                ^
+75 |     elif change == "null_id": value["expected_issuer"] = {"provider_company_id": None}
+76 |     elif change == "invalid_date": value["as_of_date"] = "2026-02-30"
+   |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_transport_subject_contracts.py:75:29
+   |
+73 |     elif change == "unknown_issuer": value["expected_issuer"] = {"provider": "fake"}
+74 |     elif change == "boolean_id": value["expected_issuer"] = {"provider_company_id": True}
+75 |     elif change == "null_id": value["expected_issuer"] = {"provider_company_id": None}
+   |                             ^
+76 |     elif change == "invalid_date": value["as_of_date"] = "2026-02-30"
+77 |     elif change == "missing_date": value.pop("as_of_date")
+   |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_transport_subject_contracts.py:76:34
+   |
+74 |     elif change == "boolean_id": value["expected_issuer"] = {"provider_company_id": True}
+75 |     elif change == "null_id": value["expected_issuer"] = {"provider_company_id": None}
+76 |     elif change == "invalid_date": value["as_of_date"] = "2026-02-30"
+   |                                  ^
+77 |     elif change == "missing_date": value.pop("as_of_date")
+78 |     else:
+   |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_transport_subject_contracts.py:77:34
+   |
+75 |     elif change == "null_id": value["expected_issuer"] = {"provider_company_id": None}
+76 |     elif change == "invalid_date": value["as_of_date"] = "2026-02-30"
+77 |     elif change == "missing_date": value.pop("as_of_date")
+   |                                  ^
+78 |     else:
+79 |         value["narrative_ref"] = {"schema_version": "narrative-ref/1", "artifact_version_id": "raw-version",
+   |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_transport_subject_contracts.py:81:35
+   |
+79 |         value["narrative_ref"] = {"schema_version": "narrative-ref/1", "artifact_version_id": "raw-version",
+80 |             "artifact_sha256": "a"*64, "byte_size": 1024, "source_ref": view_fixture().subject.anchor_ref}
+81 |     with pytest.raises(ValueError): NarrativeReadRequest.from_dict(value)
+   |                                   ^
+   |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_transport_subject_contracts.py:90:35
+   |
+88 |     subject, generation = contracts.parse_projected_reference_request(wire)
+89 |     assert subject == view.subject and generation == "b"*64
+90 |     with pytest.raises(ValueError): parse_reference_request(wire)
+   |                                   ^
+91 |     with pytest.raises(ValueError): contracts.parse_projected_reference_request({**wire, "source_ref": view.subject.anchor_ref})
+92 |     with pytest.raises(ValueError): contracts.parse_projected_reference_request({**wire, "generation_sha256": "bad"})
+   |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_transport_subject_contracts.py:91:35
+   |
+89 |     assert subject == view.subject and generation == "b"*64
+90 |     with pytest.raises(ValueError): parse_reference_request(wire)
+91 |     with pytest.raises(ValueError): contracts.parse_projected_reference_request({**wire, "source_ref": view.subject.anchor_ref})
+   |                                   ^
+92 |     with pytest.raises(ValueError): contracts.parse_projected_reference_request({**wire, "generation_sha256": "bad"})
+   |
+
+E701 Multiple statements on one line (colon)
+  --> tests\unit\test_official_json_transport_subject_contracts.py:92:35
+   |
+90 |     with pytest.raises(ValueError): parse_reference_request(wire)
+91 |     with pytest.raises(ValueError): contracts.parse_projected_reference_request({**wire, "source_ref": view.subject.anchor_ref})
+92 |     with pytest.raises(ValueError): contracts.parse_projected_reference_request({**wire, "generation_sha256": "bad"})
+   |                                   ^
+   |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_transport_subject_contracts.py:109:27
+    |
+107 |     metadata = deepcopy(original.to_dict()["structured_value"])
+108 |     raw_text, coordinates, parser = original.raw_text, original.coordinates, original.parser_name
+109 |     if field == "raw_text": raw_text = "Fabricated growth."
+    |                           ^
+110 |     elif field == "coordinates":
+111 |         from dataclasses import replace
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_transport_subject_contracts.py:113:27
+    |
+111 |         from dataclasses import replace
+112 |         coordinates = replace(coordinates, paragraph_index=999)
+113 |     elif field == "parser": parser = "invented"
+    |                           ^
+114 |     elif field == "unknown_metadata": metadata["fabricated_source_fact"] = True
+115 |     elif field == "missing_metadata": metadata.pop("record_times")
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_transport_subject_contracts.py:114:37
+    |
+112 |         coordinates = replace(coordinates, paragraph_index=999)
+113 |     elif field == "parser": parser = "invented"
+114 |     elif field == "unknown_metadata": metadata["fabricated_source_fact"] = True
+    |                                     ^
+115 |     elif field == "missing_metadata": metadata.pop("record_times")
+116 |     elif field == "token_range": metadata[field] = [1, 2]
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_transport_subject_contracts.py:115:37
+    |
+113 |     elif field == "parser": parser = "invented"
+114 |     elif field == "unknown_metadata": metadata["fabricated_source_fact"] = True
+115 |     elif field == "missing_metadata": metadata.pop("record_times")
+    |                                     ^
+116 |     elif field == "token_range": metadata[field] = [1, 2]
+117 |     elif field in {"encoded_token_sha256", "parent_content_sha256", "text_sha256"}: metadata[field] = "f"*64
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_transport_subject_contracts.py:116:32
+    |
+114 |     elif field == "unknown_metadata": metadata["fabricated_source_fact"] = True
+115 |     elif field == "missing_metadata": metadata.pop("record_times")
+116 |     elif field == "token_range": metadata[field] = [1, 2]
+    |                                ^
+117 |     elif field in {"encoded_token_sha256", "parent_content_sha256", "text_sha256"}: metadata[field] = "f"*64
+118 |     else: metadata[field] = "invented"
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_transport_subject_contracts.py:117:83
+    |
+115 |     elif field == "missing_metadata": metadata.pop("record_times")
+116 |     elif field == "token_range": metadata[field] = [1, 2]
+117 |     elif field in {"encoded_token_sha256", "parent_content_sha256", "text_sha256"}: metadata[field] = "f"*64
+    |                                                                                   ^
+118 |     else: metadata[field] = "invented"
+119 |     forged = EvidenceSpan.create(source_id=original.source_id, coordinates=coordinates, raw_text=raw_text,
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_transport_subject_contracts.py:118:9
+    |
+116 |     elif field == "token_range": metadata[field] = [1, 2]
+117 |     elif field in {"encoded_token_sha256", "parent_content_sha256", "text_sha256"}: metadata[field] = "f"*64
+118 |     else: metadata[field] = "invented"
+    |         ^
+119 |     forged = EvidenceSpan.create(source_id=original.source_id, coordinates=coordinates, raw_text=raw_text,
+120 |         structured_value=metadata, parser_name=parser, parser_version=original.parser_version,
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_transport_subject_contracts.py:123:52
+    |
+121 |         parse_status=original.parse_status, quality_flags=original.quality_flags)
+122 |     selected = SimpleNamespace(subject=view.subject, evidence_spans=(forged,))
+123 |     with pytest.raises(replay.NarrativeReplayError): replay.replay_verified_projection(view, selected)
+    |                                                    ^
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_official_json_transport_subject_contracts.py:128:26
+    |
+126 | def test_projected_replay_requires_whole_subject_not_only_projection_hash():
+127 |     from company_wiki.narrative_subject import NarrativeSubject
+128 |     view = view_fixture(); wire = view.subject.to_dict(); wire["issuer"]["provider_company_id"] = 999
+    |                          ^
+129 |     selected = SimpleNamespace(subject=NarrativeSubject.from_dict(wire), evidence_spans=view.evidence_spans)
+130 |     with pytest.raises(replay.NarrativeReplayError): replay.replay_verified_projection(view, selected)
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests\unit\test_official_json_transport_subject_contracts.py:128:57
+    |
+126 | def test_projected_replay_requires_whole_subject_not_only_projection_hash():
+127 |     from company_wiki.narrative_subject import NarrativeSubject
+128 |     view = view_fixture(); wire = view.subject.to_dict(); wire["issuer"]["provider_company_id"] = 999
+    |                                                         ^
+129 |     selected = SimpleNamespace(subject=NarrativeSubject.from_dict(wire), evidence_spans=view.evidence_spans)
+130 |     with pytest.raises(replay.NarrativeReplayError): replay.replay_verified_projection(view, selected)
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests\unit\test_official_json_transport_subject_contracts.py:130:52
+    |
+128 |     view = view_fixture(); wire = view.subject.to_dict(); wire["issuer"]["provider_company_id"] = 999
+129 |     selected = SimpleNamespace(subject=NarrativeSubject.from_dict(wire), evidence_spans=view.evidence_spans)
+130 |     with pytest.raises(replay.NarrativeReplayError): replay.replay_verified_projection(view, selected)
+    |                                                    ^
+    |
+
+Found 67 errors.

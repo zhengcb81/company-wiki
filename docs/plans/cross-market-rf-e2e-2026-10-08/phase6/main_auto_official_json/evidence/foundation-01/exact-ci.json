@@ -1,0 +1,17 @@
+{
+  "observed_at": "2026-10-10T22:01:00.554834+00:00",
+  "head": "de24d31c107785e902132c421371e92ac89aa59b",
+  "runs": [
+    {
+      "id": 38088848993,
+      "name": "CI",
+      "head_sha": "de24d31c107785e902132c421371e92ac89aa59b",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/38088848993",
+      "created_at": "2026-10-10T21:45:37Z",
+      "updated_at": "2026-10-10T21:47:24Z"
+    }
+  ],
+  "all_completed_success": true
+}

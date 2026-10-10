@@ -1,0 +1,46 @@
+{
+  "status": "public_mixed_cli_five_tests_GREEN",
+  "files": {
+    "tests/integration/test_official_json_batch_e2e.py": "a65e9adc35178bf3d6847797cb5f2f182916e96220d464be5c03b65055f2f3a3",
+    "tests/support/official_json_batch_fixture.py": "ad8ce82d1e590e2037c586983b62a57159c9d6ba5b745110a34c604bbfaf1e89"
+  },
+  "new_test_cases": 5,
+  "initial_red": "1 failed /3 passed",
+  "initial_failure": "NarrativeEffectDispatcher lacks projection_loader during concurrent implementation",
+  "later_partial_reuse_test": "passed in NODE04: existing A pin retained; only B/raw paid",
+  "external_provider_calls": 0,
+  "model_destination": "127.0.0.1 loopback only",
+  "cleanup": "all original/config bytes unchanged; owned TMP exact restore and base removed:true in NODE04",
+  "ruff_exit": 0,
+  "scope": "E2E test files and owned evidence only; ledger repair delivered separately; no shared PWF/config/installation writes or commit",
+  "latest_joint_node": {
+    "evidence": "batch-e2e-node-04.log",
+    "metadata": "batch-e2e-node-04.json",
+    "passed": 5,
+    "failed": 0,
+    "elapsed_seconds": 80.38,
+    "external_calls": 0,
+    "loopback_http_calls": 9,
+    "status": "GREEN",
+    "originals_unchanged": true,
+    "config_unchanged": true,
+    "owned_temp_restored": true
+  },
+  "historical_nodes": [
+    {
+      "node": 1,
+      "result": "2FAIL/3PASS",
+      "cause": "single run raw prompt rejects projected prompt before HTTP"
+    },
+    {
+      "node": 2,
+      "result": "2FAIL/3PASS",
+      "cause": "terminal compaction repeats single run prompt assumption; genuine public CLI trace proves it"
+    },
+    {
+      "node": 3,
+      "result": "2FAIL/3PASS",
+      "cause": "test read request included unknown null issuer constraints; concrete actual provider company ID now retained"
+    }
+  ]
+}

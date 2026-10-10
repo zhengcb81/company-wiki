@@ -1,0 +1,32 @@
+{
+  "exit_code": 0,
+  "duration_seconds": 8.467,
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-p",
+    "pytest_timeout",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-official-handler-green-iem2duv9\\pytest",
+    "-q",
+    "--disable-warnings",
+    "tests/integration/test_official_json_select_handler.py",
+    "tests/unit/test_narrative_select_handler.py",
+    "tests/unit/test_official_json_narrative_adapter.py",
+    "tests/integration/test_official_json_narrative_adapter.py"
+  ],
+  "log_sha256": "c7a7db8bc33dd82e51b200c0c574fdfc0e92a153d65fc767114e0086d9a6c4f2",
+  "external_calls": 0,
+  "cost_usd": 0,
+  "owned_temp_removed": true,
+  "files": {
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\src\\company_wiki\\automation\\narrative_select.py": "285230cade8ea127cd731b1b1fea68266ccee21c6a2f386ce62c682376a22c74",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\tests\\integration\\test_official_json_select_handler.py": "128974509656dffaf492bfd1525b3bcb27dca297603dd43875fd49b82f61e7f0"
+  }
+}

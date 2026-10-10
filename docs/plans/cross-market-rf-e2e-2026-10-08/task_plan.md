@@ -1,5 +1,37 @@
 # 三市场真实收入预测端到端审计
 
+## MAIN与P7-CWP集中验收通过，待正常主线发布（2026-10-10T22:53:13.182893+00:00）
+
+P7-CWP source `1c11ef0b5a838655559e91fab9a7bf38f1533d89`/handoff `4f2c05c92f3aed9cdf91808a60e1c5d38adce6ee` 独立166责任测试与两布局真实导入/保存/回放、旧Git blob逐字节比对全部PASS，已正常合入隔离MAIN `3f2ed5cb1b95492717652cba64eae35c9686a1a0`。独占叶源码未追加改动。
+
+统一AUTO的最终9场景集中 **PASS/80.38秒**：mixed5、完整空内容1、历史effort兼容3。真实公共CLI/子进程/loopback HTTP→select/summary/verify→publish/read→resume/reuse/refresh/部分命中全部成立，同一账本/lease/outbox/预算，没有第二任务库；终态只保存小pin，单attempt<16KiB。原3次synthetic POST后完全复用零新增调用，部分命中仅缺项；空叙述零调用。历史已完成run不重签、不重计费，不finished/未交付/不可见仍明确拒绝；锁目录可有控制文件，不将SQL/原件不变夸成全盘零写。
+
+P7公开入口独立3完整场景 **PASS/46.79秒**，再只跑3新非字符串负控 **PASS/8.76秒**：显式1.0.2跨顺序同身份、persist/reopen/replay/export、AUTO→read2、反序重建精确零调用复用；缺省和显式1.0.1旧身份保持，非法版本typed拒绝。真实MSFT 66,324B原件fixture及parser0.3.1共57责任/真实搜索回放PASS，旧0.3.0封存解释保留。最终changed Ruff及4个最新改动模块mypy绿；先前28模块mypy唯一tuple注解问题已定点修绿。集中责任240首轮239PASS/1FAIL是新P7禁止源容器修改，修为assert TypeError后该1项PASS，保留原失败，不把它叫代码弱化。各组存在重叠，不相加。
+
+同批多prompt账本/terminal收缩、generation遗漏明确reasoning_effort、raw-only binding4被误作投影、TXT正文/END边界、公开参数忽略及裸TypeError均有真实RED→责任层修复→GREEN记录。保留实际原件SHA/身份/期间/as-of和实际限额，未增加材料许可、人工签收或canary。原件/config/Dayu/邻仓owner WIP不动，自有TEMP恢复。本节点外部供应商/模型调用与费用0；synthetic账本数字仅工程断言，不计真实费用，累计USD20/2M与旧unknown不重置。
+
+**Next Step：** 归档最终独立报告与候选SHA，正常commit→canonical master fast-forward→push→精确HEAD CI；随后继续W04/W03/W05/W08/W09及原三家真实修后四审、新三家泛化与loop。P7-RF/P7-AUDIT仍由外部harness施工，MAIN未接到完成通知，不碰其源。goal active、原研究与条件八家目标未完成。验收：[MAIN ACCEPTANCE](phase6/main_auto_official_json/ACCEPTANCE.md)。
+
+## MAIN 集中联调查根因；P7-CWP 已接收待验（2026-10-10T22:25:47.581615+00:00）
+
+真实 mixed public CLI→子进程→loopbackHTTP 首轮3PASS/2FAIL：官方项被 MODEL_BUDGET_DENIED 拒绝、raw正常。已证实不是费用耗尽，而是 run 固定raw提示1.7与官方提示official-json/1.0冲突，被 caller 一律误报。实施同一不可变run内逐模型job实际prompt小映射（既有binding4、同DB/lease/账本，无新许可/表）；预留仍受实际总额限制，配置/范围/存储错误分别诊断。
+
+独立探针与TDD另证实 raw generation 缺明确reasoning_effort、官方generation错拒真实HTTP支持的adaptive。6FAIL/1PASS后已修；缺省/null effort仍保留旧wire，显式effort改变生成身份，历史产物不重签。真实MSFT TXT 66324B/SHA4ac3b4f0…fixture路径已独立；解析器roster抢正文与带说话人end漏认在新增版本修根因，旧版本可回放，不skip真实断言。
+
+用户交P7-CWP-PROJECTION，工作树clean、source1c11ef0b/head4f2c05c9，仅许可叶文件/两tests/ownPWF，独立166责任和两layoutE2E进行中；未并线。其余P7仍由外部harness负责，MAIN不写其源。本轮供应商调用/费用0；原件/config/Dayu和邻仓WIP不动。AUTO大节点尚未绿，真实研究/四审/新三家/loop与条件八家继续待，goal active。
+
+**Next Step：** 同批次实际prompt账本、TXT新边界与模型语义修复集中GREEN；独立审查后正常提交/推送/精确CI，再接P7叶版本并显式opt-in联调。仅大节点集中测试，不增加小节点人工门。
+
+
+## MAIN 同一AUTO批次接线实施中（2026-10-10T22:12:18.696619+00:00）
+
+用户已将P7三个包交给外部harness，MAIN继续独占AUTO共享写集，不修改P7叶投影、RF校准和audit执行源。基础节点已正常并线/推送 de24d31c107785e902132c421371e92ac89aa59b，精确CI38088848993 success；正常pre-push 2768PASS/315.69秒，未跳过hook。
+
+同一批次request2/item身份、event3、select/summary/bundle3、逐字段source view、generation2、同catalog subject artifact及公开read2在隔离树实施。ROOT shared契约81PASS、准备/生成75PASS；各分片有实际RED/绿色责任报告，计数有交集，不相加。空白/NFC展示、实际parent和Q/A角色、title/generation、工厂reasoning_effort、检索单manifest假设均按所属共用责任层修。尚待完整混合public CLI→真实子进程→loopbackHTTP→publish→read→reuse/refresh/resume/terminal大节点与独立审查；不能称AUTO已完成。
+
+**Next Step：** 接通同一账本/lease/outbox/终态收缩，集中执行隔离E2E及兼容/恢复正负控，正常提交推送并核对新HEAD CI。原件/config/Dayu/邻仓WIP不动；本轮供应商调用/收费0，loopback不算真实公司研究。原三家四审/新三家/loop及条件八家公司仍待；目标active，USD20/2M含旧unknown不重置。详细记录：[MAIN](phase6/main_auto_official_json/task_plan.md)。
+
+
 ## MAIN基础身份与public official入口通过；三个P7外包已发出（2026-10-10T21:37:00.220175+00:00）
 
 164责任/兼容PASS、Ruff与neutralcore mypy绿，独立9纯内存探针通过；真实ownedTEMP import→project→reopen/replay/export→原文read逐字节相等且恢复。新增compactneutral subject不复制records、不伪原件、不新库/许可；publicCLI薄委托既有source责任。基础源码待本节点normalcommit/push，AUTO全链尚未完成。

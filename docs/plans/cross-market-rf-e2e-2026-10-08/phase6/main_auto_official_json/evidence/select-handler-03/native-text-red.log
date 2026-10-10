@@ -1,0 +1,52 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-native-field-red-ka_uosy_\\pytest", "requested_basetemp_len": 68, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-215822-2447383b", "effective_basetemp_len": 75}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+collected 12 items / 9 deselected / 3 selected
+
+tests\integration\test_official_json_narrative_adapter.py FFF            [100%]
+
+================================== FAILURES ===================================
+_ test_original_field_whitespace_and_unicode_survive_selector_and_real_replay[  -  ] _
+tests\integration\test_official_json_narrative_adapter.py:233: in test_original_field_whitespace_and_unicode_survive_selector_and_real_replay
+    assert {span.raw_text for span in package.evidence_spans} == {original_answer, original_question}
+E   AssertionError: assert {'Our new pro...ments begin?'} == {'  Our new p...nts begin?  '}
+E     
+E     Extra items in the left set:
+E     'Our new product has completed customer qualification and overseas shipments begin in the fourth quarter. Our café product line is expanding.'
+E     'When do the new product qualification and overseas shipments begin?'
+E     Extra items in the right set:
+E     '  When do the new product qualification and overseas shipments begin?  '
+E     '  Our new product has completed customer qualification and overseas shipments begin in the fourth quarter. Our café product line is expanding.  '
+E     Use -v to get more diff
+_ test_original_field_whitespace_and_unicode_survive_selector_and_real_replay[\t-\r\n] _
+tests\integration\test_official_json_narrative_adapter.py:233: in test_original_field_whitespace_and_unicode_survive_selector_and_real_replay
+    assert {span.raw_text for span in package.evidence_spans} == {original_answer, original_question}
+E   AssertionError: assert {'Our new pro...ments begin?'} == {'\tOur new p...nts begin?\t'}
+E     
+E     Extra items in the left set:
+E     'Our new product has completed customer qualification and overseas shipments begin in the fourth quarter. Our café product line is expanding.'
+E     'When do the new product qualification and overseas shipments begin?'
+E     Extra items in the right set:
+E     '\r\nWhen do the new product qualification and overseas shipments begin?\t'
+E     '\tOur new product has completed customer qualification and overseas shipments begin in the fourth quarter. Our café product line is expanding.\r\n'
+E     Use -v to get more diff
+_ test_original_field_whitespace_and_unicode_survive_selector_and_real_replay[\n\xa0-\xa0\n] _
+tests\integration\test_official_json_narrative_adapter.py:233: in test_original_field_whitespace_and_unicode_survive_selector_and_real_replay
+    assert {span.raw_text for span in package.evidence_spans} == {original_answer, original_question}
+E   AssertionError: assert {'Our new pro...ments begin?'} == {'\n\xa0Our n...begin?\n\xa0'}
+E     
+E     Extra items in the left set:
+E     'Our new product has completed customer qualification and overseas shipments begin in the fourth quarter. Our café product line is expanding.'
+E     'When do the new product qualification and overseas shipments begin?'
+E     Extra items in the right set:
+E     '\n\xa0Our new product has completed customer qualification and overseas shipments begin in the fourth quarter. Our café product line is expanding.\xa0\n'
+E     '\xa0\nWhen do the new product qualification and overseas shipments begin?\n\xa0'
+E     Use -v to get more diff
+=========================== short test summary info ===========================
+FAILED tests/integration/test_official_json_narrative_adapter.py::test_original_field_whitespace_and_unicode_survive_selector_and_real_replay[  -  ]
+FAILED tests/integration/test_official_json_narrative_adapter.py::test_original_field_whitespace_and_unicode_survive_selector_and_real_replay[\t-\r\n]
+FAILED tests/integration/test_official_json_narrative_adapter.py::test_original_field_whitespace_and_unicode_survive_selector_and_real_replay[\n\xa0-\xa0\n]
+================= 3 failed, 9 deselected, 1 warning in 2.66s ==================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-215822-2447383b", "existed": true, "removed": true}

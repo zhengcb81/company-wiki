@@ -4,7 +4,9 @@ from __future__ import annotations
 
 from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Protocol
+from typing import Any, Protocol
+
+from company_wiki.narrative_subject import NarrativeSubject
 
 from .execution_context import JobExecutionContext
 from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization
@@ -35,6 +37,8 @@ class NarrativeRuntimeDependencies:
     model: NarrativeModel | None
     model_caller: NarrativeModelCaller | None = None
     normalization: NarrativeNormalization | None = None
+    projection_catalog: Any | None = None
+    generation_sha256: Callable[[NarrativeSubject], str] | None = None
 
 
 def register_narrative_handlers(
@@ -45,7 +49,8 @@ def register_narrative_handlers(
 
     registrar.register(
         "source.narrative_select",
-        NarrativeSelectHandler(reader=dependencies.reader, normalization=dependencies.normalization),
+        NarrativeSelectHandler(reader=dependencies.reader, normalization=dependencies.normalization,
+            projection_catalog=dependencies.projection_catalog),
     )
     registrar.register(
         "source.narrative_summarize",
@@ -53,7 +58,8 @@ def register_narrative_handlers(
     )
     registrar.register(
         "source.narrative_verify",
-        NarrativeVerifyHandler(reader=dependencies.reader, normalization=dependencies.normalization),
+        NarrativeVerifyHandler(reader=dependencies.reader, normalization=dependencies.normalization,
+            projection_catalog=dependencies.projection_catalog, generation_sha256=dependencies.generation_sha256),
     )
 
 

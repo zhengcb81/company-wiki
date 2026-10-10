@@ -1,0 +1,47 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-publish-green-dmqgj2ye\\pytest", "requested_basetemp_len": 65, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-220917-e34f3726", "effective_basetemp_len": 75}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+collected 36 items
+
+tests\integration\test_official_json_publication_terminal.py ........... [ 30%]
+.F..                                                                     [ 41%]
+tests\unit\test_terminal_narrative_receipts.py .....................     [100%]
+
+================================== FAILURES ===================================
+_ test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes[job_subject] _
+tests\integration\test_official_json_publication_terminal.py:325: in test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes
+    with pytest.raises(IntegrityViolationError):state.auto.compact_terminal_narrative_jobs(
+src\company_wiki\automation\store.py:1586: in compact_terminal_narrative_jobs
+    result = self._write_transaction(lambda conn: _compact_terminal_narrative(
+src\company_wiki\automation\store.py:867: in _write_transaction
+    result = operation(conn)
+             ^^^^^^^^^^^^^^^
+src\company_wiki\automation\store.py:1586: in <lambda>
+    result = self._write_transaction(lambda conn: _compact_terminal_narrative(
+src\company_wiki\automation\store.py:647: in _compact_terminal_narrative
+    jobs = [_job_from_row(_job_row(connection, job_id)) for job_id in scope]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\store.py:169: in _job_from_row
+    return Job.from_dict(dict(row))
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\models.py:301: in from_dict
+    return cls(**cls._prepare_dict(data))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<string>:21: in __init__
+    ???
+src\company_wiki\automation\models.py:368: in __post_init__
+    raise ValueError("job_key does not match the frozen identity formula")
+E   ValueError: job_key does not match the frozen identity formula
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/integration/test_official_json_publication_terminal.py::test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes[job_subject]
+================== 1 failed, 35 passed, 1 warning in 47.26s ===================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-220917-e34f3726", "existed": true, "removed": true}

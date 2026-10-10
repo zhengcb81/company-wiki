@@ -1,0 +1,24 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-final06-0iacfwib\\pytest", "requested_basetemp_len": 58, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+........................................................................ [ 30%]
+................F....................................................... [ 60%]
+........................................................................ [ 90%]
+........................                                                 [100%]
+================================== FAILURES ===================================
+_______ test_export_input_and_all_returned_context_are_deeply_detached ________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000228014E3700>
+
+    def test_export_input_and_all_returned_context_are_deeply_detached(monkeypatch):
+        view, projection, payload, _calls, _catalog = open_fixture(monkeypatch)
+        original = view.export_dict()
+        payload["projection"]["issuer"]["provider_company_id"] = 999
+        payload["projection"]["coverage"]["pages"][0]["pagination"]["pages"] = 999
+        payload["evidence_spans"][0]["raw_text"] = "mutated"
+>       projection.issuer["provider_company_id"] = 888
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: '_FrozenDict' object does not support item assignment
+
+tests\unit\test_official_json_narrative_adapter.py:99: TypeError
+=========================== short test summary info ===========================
+FAILED tests/unit/test_official_json_narrative_adapter.py::test_export_input_and_all_returned_context_are_deeply_detached
+1 failed, 239 passed in 154.17s (0:02:34)

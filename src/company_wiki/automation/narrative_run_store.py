@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
+import json
 import sqlite3
 from typing import Callable, TypeVar
 
@@ -53,6 +54,47 @@ class RunOwnershipError(NarrativeRunError):
 def _name(value: str, name: str) -> None:
     if not isinstance(value, str) or not value or value.strip() != value:
         raise ValueError(f"{name} must be non-empty unpadded text")
+
+
+def _job_prompt_versions(binding_json: str | None) -> dict[str, str] | None:
+    """Optional immutable model-job prompts; old bindings keep the run default.
+
+    This ledger knows only job IDs, types and accounting. The owner of a run
+    binding chooses the actual prompt version; source/model modules are not
+    imported or interpreted here.
+    """
+    if binding_json is None:
+        return None
+    try:
+        binding = json.loads(binding_json)
+        if not isinstance(binding, dict) or "job_prompt_versions" not in binding:
+            return None
+        versions = binding["job_prompt_versions"]
+        if not isinstance(versions, dict):
+            raise ValueError("job_prompt_versions must be an object")
+        for job_id, prompt in versions.items():
+            _name(job_id, "job_prompt_versions job_id")
+            _name(prompt, "job_prompt_versions prompt")
+        return versions
+    except (TypeError, ValueError) as exc:
+        raise RunConflictError("invalid immutable job prompt binding") from exc
+
+
+def model_prompt_version(
+    binding_json: str | None, *, job_id: str, default_prompt: str,
+) -> str:
+    """Resolve one frozen model job prompt without database or source reads.
+
+    Admission and terminal compaction must use the same binding. A map that
+    exists never falls back for an unbound job; only legacy absent maps use
+    the immutable run default.
+    """
+    versions = _job_prompt_versions(binding_json)
+    if versions is None:
+        return default_prompt
+    if job_id not in versions:
+        raise RunScopeError("job has no immutable model prompt binding")
+    return versions[job_id]
 
 
 def _integer(value: int, name: str) -> None:
@@ -477,6 +519,7 @@ class NarrativeRunStore:
         if scope is None:
             raise TypeError("job_ids must be a tuple")
         scope = tuple(sorted(scope))
+        job_prompt_versions = _job_prompt_versions(binding_json)
         values = dict(
             run_id=run_id,
             input_hash=input_hash,
@@ -517,7 +560,7 @@ class NarrativeRunStore:
             if scope:
                 placeholders = ",".join("?" for _ in scope)
                 jobs = connection.execute(
-                    f"SELECT job_id,input_hash,handler_version FROM jobs WHERE job_id IN ({placeholders})",
+                    f"SELECT job_id,input_hash,handler_version,job_type FROM jobs WHERE job_id IN ({placeholders})",
                     scope,
                 ).fetchall()
                 if len(jobs) != len(scope):
@@ -528,6 +571,15 @@ class NarrativeRunStore:
                 ).fetchone():
                     raise RunConflictError(
                         "a job already belongs to another budget run"
+                    )
+            if job_prompt_versions is not None:
+                model_job_ids = {
+                    job["job_id"] for job in jobs
+                    if job["job_type"] == "source.narrative_summarize"
+                }
+                if set(job_prompt_versions) != model_job_ids:
+                    raise RunScopeError(
+                        "job prompt binding must exactly cover scoped model jobs"
                     )
             columns = tuple(values)
             connection.execute(
@@ -572,9 +624,12 @@ class NarrativeRunStore:
 
         def write(connection):
             run = _required_run(connection, run_id)
+            expected_prompt = model_prompt_version(
+                run.binding_json, job_id=job_id, default_prompt=run.prompt_version,
+            )
             if (model_id, prompt_version, pricing_version) != (
                 run.model_id,
-                run.prompt_version,
+                expected_prompt,
                 run.pricing_version,
             ):
                 raise RunConflictError(

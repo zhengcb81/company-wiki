@@ -1,0 +1,167 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-publish-red-cfo6qd3f\\pytest", "requested_basetemp_len": 63, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-220548-dc7ba13a", "effective_basetemp_len": 75}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+collected 15 items
+
+tests\integration\test_official_json_publication_terminal.py .FFFFFFFFFF [ 73%]
+FFFF                                                                     [100%]
+
+================================== FAILURES ===================================
+___ test_projection_pin_has_subject_and_generation_without_anchor_identity ____
+tests\integration\test_official_json_publication_terminal.py:201: in test_projection_pin_has_subject_and_generation_without_anchor_identity
+    pin=FinalArtifactPin("e","a","a"*64,12,anchor["document_id"],anchor["source_id"],anchor["content_sha256"],
+E   TypeError: FinalArtifactPin.__init__() got an unexpected keyword argument 'subject_binding'
+_ test_publish_subject_generation_and_read_uses_one_fresh_view_per_operation __
+tests\integration\test_official_json_publication_terminal.py:213: in test_publish_subject_generation_and_read_uses_one_fresh_view_per_operation
+    result=dispatch(state)
+           ^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:173: in dispatch
+    return (worker or dispatcher(state)).dispatch_next(worker_id="projector",now=T2,lease_until=T9,
+                      ^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:169: in dispatcher
+    return NarrativeEffectDispatcher(state.auto,state.artifacts,**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: NarrativeEffectDispatcher.__init__() got an unexpected keyword argument 'projection_loader'
+_ test_generation_manifest_must_bind_complete_subject_before_any_object_write[missing] _
+tests\integration\test_official_json_publication_terminal.py:233: in test_generation_manifest_must_bind_complete_subject_before_any_object_write
+    result=dispatch(state,dispatcher(state,generation_manifests=manifests))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:169: in dispatcher
+    return NarrativeEffectDispatcher(state.auto,state.artifacts,**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: NarrativeEffectDispatcher.__init__() got an unexpected keyword argument 'projection_loader'
+_ test_generation_manifest_must_bind_complete_subject_before_any_object_write[wrong_subject] _
+tests\integration\test_official_json_publication_terminal.py:233: in test_generation_manifest_must_bind_complete_subject_before_any_object_write
+    result=dispatch(state,dispatcher(state,generation_manifests=manifests))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:169: in dispatcher
+    return NarrativeEffectDispatcher(state.auto,state.artifacts,**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: NarrativeEffectDispatcher.__init__() got an unexpected keyword argument 'projection_loader'
+__ test_two_issuers_sharing_exact_parents_publish_and_compact_independently ___
+tests\integration\test_official_json_publication_terminal.py:241: in test_two_issuers_sharing_exact_parents_publish_and_compact_independently
+    assert dispatch(state).status=="visible"
+           ^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:173: in dispatch
+    return (worker or dispatcher(state)).dispatch_next(worker_id="projector",now=T2,lease_until=T9,
+                      ^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:169: in dispatcher
+    return NarrativeEffectDispatcher(state.auto,state.artifacts,**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: NarrativeEffectDispatcher.__init__() got an unexpected keyword argument 'projection_loader'
+__ test_ack_committed_then_crash_reconciles_without_reclaiming_or_model_work __
+tests\integration\test_official_json_publication_terminal.py:261: in test_ack_committed_then_crash_reconciles_without_reclaiming_or_model_work
+    worker=dispatcher(state);actual=state.auto.ack_outbox
+           ^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:169: in dispatcher
+    return NarrativeEffectDispatcher(state.auto,state.artifacts,**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: NarrativeEffectDispatcher.__init__() got an unexpected keyword argument 'projection_loader'
+_ test_wrong_current_projection_blocks_visibility_then_fresh_reconcile_recovers _
+tests\integration\test_official_json_publication_terminal.py:275: in test_wrong_current_projection_blocks_visibility_then_fresh_reconcile_recovers
+    worker=dispatcher(state,projection_loader=wrong)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:169: in dispatcher
+    return NarrativeEffectDispatcher(state.auto,state.artifacts,**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: NarrativeEffectDispatcher.__init__() got an unexpected keyword argument 'projection_loader'
+_________ test_stale_or_tampered_selected_field_cannot_become_visible _________
+tests\integration\test_official_json_publication_terminal.py:285: in test_stale_or_tampered_selected_field_cannot_become_visible
+    worker=dispatcher(state)
+           ^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:169: in dispatcher
+    return NarrativeEffectDispatcher(state.auto,state.artifacts,**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: NarrativeEffectDispatcher.__init__() got an unexpected keyword argument 'projection_loader'
+______ test_nonanchor_original_byte_corruption_blocks_reconcile_and_read ______
+tests\integration\test_official_json_publication_terminal.py:293: in test_nonanchor_original_byte_corruption_blocks_reconcile_and_read
+    assert dispatch(state).status=="visible"
+           ^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:173: in dispatch
+    return (worker or dispatcher(state)).dispatch_next(worker_id="projector",now=T2,lease_until=T9,
+                      ^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:169: in dispatcher
+    return NarrativeEffectDispatcher(state.auto,state.artifacts,**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: NarrativeEffectDispatcher.__init__() got an unexpected keyword argument 'projection_loader'
+_ test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes[subject] _
+tests\integration\test_official_json_publication_terminal.py:314: in test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes
+    assert dispatch(state).status=="visible"
+           ^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:173: in dispatch
+    return (worker or dispatcher(state)).dispatch_next(worker_id="projector",now=T2,lease_until=T9,
+                      ^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:169: in dispatcher
+    return NarrativeEffectDispatcher(state.auto,state.artifacts,**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: NarrativeEffectDispatcher.__init__() got an unexpected keyword argument 'projection_loader'
+_ test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes[generation] _
+tests\integration\test_official_json_publication_terminal.py:314: in test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes
+    assert dispatch(state).status=="visible"
+           ^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:173: in dispatch
+    return (worker or dispatcher(state)).dispatch_next(worker_id="projector",now=T2,lease_until=T9,
+                      ^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:169: in dispatcher
+    return NarrativeEffectDispatcher(state.auto,state.artifacts,**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: NarrativeEffectDispatcher.__init__() got an unexpected keyword argument 'projection_loader'
+_ test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes[job_subject] _
+tests\integration\test_official_json_publication_terminal.py:314: in test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes
+    assert dispatch(state).status=="visible"
+           ^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:173: in dispatch
+    return (worker or dispatcher(state)).dispatch_next(worker_id="projector",now=T2,lease_until=T9,
+                      ^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:169: in dispatcher
+    return NarrativeEffectDispatcher(state.auto,state.artifacts,**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: NarrativeEffectDispatcher.__init__() got an unexpected keyword argument 'projection_loader'
+_ test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes[unfinished] _
+tests\integration\test_official_json_publication_terminal.py:314: in test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes
+    assert dispatch(state).status=="visible"
+           ^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:173: in dispatch
+    return (worker or dispatcher(state)).dispatch_next(worker_id="projector",now=T2,lease_until=T9,
+                      ^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:169: in dispatcher
+    return NarrativeEffectDispatcher(state.auto,state.artifacts,**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: NarrativeEffectDispatcher.__init__() got an unexpected keyword argument 'projection_loader'
+_______ test_exact_generation_reader_rejects_wrong_artifact_generation ________
+tests\integration\test_official_json_publication_terminal.py:332: in test_exact_generation_reader_rejects_wrong_artifact_generation
+    assert dispatch(state).status=="visible"
+           ^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:173: in dispatch
+    return (worker or dispatcher(state)).dispatch_next(worker_id="projector",now=T2,lease_until=T9,
+                      ^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_publication_terminal.py:169: in dispatcher
+    return NarrativeEffectDispatcher(state.auto,state.artifacts,**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: NarrativeEffectDispatcher.__init__() got an unexpected keyword argument 'projection_loader'
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/integration/test_official_json_publication_terminal.py::test_projection_pin_has_subject_and_generation_without_anchor_identity
+FAILED tests/integration/test_official_json_publication_terminal.py::test_publish_subject_generation_and_read_uses_one_fresh_view_per_operation
+FAILED tests/integration/test_official_json_publication_terminal.py::test_generation_manifest_must_bind_complete_subject_before_any_object_write[missing]
+FAILED tests/integration/test_official_json_publication_terminal.py::test_generation_manifest_must_bind_complete_subject_before_any_object_write[wrong_subject]
+FAILED tests/integration/test_official_json_publication_terminal.py::test_two_issuers_sharing_exact_parents_publish_and_compact_independently
+FAILED tests/integration/test_official_json_publication_terminal.py::test_ack_committed_then_crash_reconciles_without_reclaiming_or_model_work
+FAILED tests/integration/test_official_json_publication_terminal.py::test_wrong_current_projection_blocks_visibility_then_fresh_reconcile_recovers
+FAILED tests/integration/test_official_json_publication_terminal.py::test_stale_or_tampered_selected_field_cannot_become_visible
+FAILED tests/integration/test_official_json_publication_terminal.py::test_nonanchor_original_byte_corruption_blocks_reconcile_and_read
+FAILED tests/integration/test_official_json_publication_terminal.py::test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes[subject]
+FAILED tests/integration/test_official_json_publication_terminal.py::test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes[generation]
+FAILED tests/integration/test_official_json_publication_terminal.py::test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes[job_subject]
+FAILED tests/integration/test_official_json_publication_terminal.py::test_compaction_rejects_wrong_subject_generation_or_nonterminal_dag_without_writes[unfinished]
+FAILED tests/integration/test_official_json_publication_terminal.py::test_exact_generation_reader_rejects_wrong_artifact_generation
+================== 14 failed, 1 passed, 1 warning in 13.11s ===================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-220548-dc7ba13a", "existed": true, "removed": true}

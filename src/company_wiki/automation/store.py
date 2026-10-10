@@ -13,7 +13,7 @@ import json
 import hashlib
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Generic, TypeVar
+from typing import Any, Generic, Protocol, TypeVar
 
 from company_wiki._id_scope import normalize_id_scope
 
@@ -517,7 +517,13 @@ def _require_outbox_lease(
 # --------------------------------------------------------------------------- #
 # Idempotency helpers.
 # --------------------------------------------------------------------------- #
-def _idempotent_match(existing: object, new: object, ignore_key: str) -> bool:
+class _IdempotencyModel(Protocol):
+    def to_dict(self) -> dict[str, Any]: ...
+
+
+def _idempotent_match(
+    existing: _IdempotencyModel, new: _IdempotencyModel, ignore_key: str
+) -> bool:
     d1 = {k: v for k, v in existing.to_dict().items() if k != ignore_key}
     d2 = {k: v for k, v in new.to_dict().items() if k != ignore_key}
     return d1 == d2
@@ -615,11 +621,15 @@ def _compact_terminal_narrative(
     write: bool,
 ) -> TerminalCompactionResult | None:
     """Derive and validate all AUTO facts in the caller's transaction."""
+    from company_wiki.narrative_subject import publication_target
+    from .narrative_contracts import SourceRevisionEventPayload
+    from .terminal_receipt_contracts import PROJECTED_TERMINAL_RECEIPT_SCHEMA
+    receipt_schema = PROJECTED_TERMINAL_RECEIPT_SCHEMA if pin.subject_binding is not None else TERMINAL_RECEIPT_SCHEMA
     placeholders = ",".join("?" for _ in scope)
     if not write and connection.execute(
         f"SELECT 1 FROM attempts WHERE job_id IN ({placeholders}) "
         "AND instr(result_json,?) > 0 LIMIT 1",
-        scope + (f'"schema_version":"{TERMINAL_RECEIPT_SCHEMA}"',),
+        scope + (f'"schema_version":"{receipt_schema}"',),
     ).fetchone() is None:
         # The normal path avoids decoding large bodies in its no-op preflight.
         return None
@@ -655,19 +665,30 @@ def _compact_terminal_narrative(
     if event_row is None:
         raise IntegrityViolationError("terminal narrative event is missing")
     event = _event_from_row(event_row)
-    if (event.event_type, event.subject_type) != ("source.revision_registered", "source_revision") or any(
+    expected_subject_type = "narrative_subject" if pin.subject_binding is not None else "source_revision"
+    if (event.event_type, event.subject_type) != ("source.revision_registered", expected_subject_type) or any(
         (job.input_hash, job.policy_version, job.subject_type, job.subject_id) !=
         (event.input_hash, event.policy_version, event.subject_type, event.subject_id) for job in jobs
     ):
         raise IntegrityViolationError("terminal narrative event/input pins differ")
     payload = json.loads(event.payload_json)
-    source = payload.get("source_ref", {}) if isinstance(payload, dict) else {}
-    if not isinstance(source, dict):
-        raise IntegrityViolationError("terminal event source is invalid")
-    if (source.get("document_id"), source.get("source_id"), source.get("content_sha256")) != (
-        pin.document_id, pin.source_id, pin.source_sha256
-    ):
-        raise IntegrityViolationError("terminal event source differs from final artifact")
+    if pin.subject_binding is not None:
+        try:
+            parsed_event = SourceRevisionEventPayload.from_dict(payload)
+        except (TypeError, ValueError) as exc:
+            raise IntegrityViolationError("terminal projection event is invalid") from exc
+        if (parsed_event.subject.to_dict() != pin.subject_binding.to_dict()
+                or parsed_event.input_hash != event.input_hash
+                or event.subject_id != pin.subject_binding.item_key):
+            raise IntegrityViolationError("terminal event subject differs from final artifact")
+    else:
+        source = payload.get("source_ref", {}) if isinstance(payload, dict) else {}
+        if not isinstance(source, dict):
+            raise IntegrityViolationError("terminal event source is invalid")
+        if (source.get("document_id"), source.get("source_id"), source.get("content_sha256")) != (
+            pin.document_id, pin.source_id, pin.source_sha256
+        ):
+            raise IntegrityViolationError("terminal event source differs from final artifact")
     members = connection.execute(
         "SELECT run_id,job_id,input_hash,handler_version FROM narrative_run_jobs "
         f"WHERE job_id IN ({placeholders})", scope,
@@ -685,6 +706,15 @@ def _compact_terminal_narrative(
     select = kinds["source.narrative_select"].job_id
     summary = kinds["source.narrative_summarize"].job_id
     verify = kinds["source.narrative_verify"].job_id
+    # Admission and terminal accounting share the same frozen model-job prompt.
+    # The ledger owns this pure lookup; source data is not reread here.
+    from .narrative_run_store import NarrativeRunError, model_prompt_version
+    try:
+        expected_prompt = model_prompt_version(
+            run["binding_json"], job_id=summary, default_prompt=run["prompt_version"]
+        )
+    except NarrativeRunError as exc:
+        raise IntegrityViolationError("terminal model prompt binding is invalid") from exc
     edges = connection.execute(
         f"SELECT job_id,depends_on_job_id,required_status FROM job_dependencies WHERE job_id IN ({placeholders})", scope,
     ).fetchall()
@@ -706,10 +736,13 @@ def _compact_terminal_narrative(
     if len(effects) != 1:
         raise IntegrityViolationError("terminal narrative DAG does not have one final effect")
     effect = _effect_from_row(effects[0])
+    expected_target = (publication_target(pin.subject_binding, pin.generation_sha256)
+                       if pin.subject_binding is not None else
+                       f"urn:company-wiki:narrative-bundle:{pin.document_id}:{pin.source_sha256}")
     if (effect.effect_id, effect.job_id, effect.effect_type, effect.target, effect.status,
         effect.intended_after_hash, effect.actual_after_hash) != (
         pin.effect_id, verify, "narrative_bundle.publish",
-        f"urn:company-wiki:narrative-bundle:{pin.document_id}:{pin.source_sha256}",
+        expected_target,
         EffectStatus.VERIFIED, pin.artifact_sha256, pin.artifact_sha256
     ) or effect.verified_at is None:
         raise IntegrityViolationError("final effect is not acknowledged with the pinned hash")
@@ -723,7 +756,7 @@ def _compact_terminal_narrative(
         if result is None:
             continue
         if is_terminal_receipt(result.result):
-            receipt = result.result
+            receipt = result.to_dict()["result"]
             if (dict(receipt.get("final_artifact", {})), receipt.get("run_id"), receipt.get("event_id"),
                 receipt.get("input_hash"), receipt.get("job_id"), receipt.get("attempt_id")) != (
                 pin.to_dict(), run_id, event_id, event.input_hash, row["job_id"], row["attempt_id"]
@@ -737,10 +770,10 @@ def _compact_terminal_narrative(
             if len(data) != pin.byte_size or hashlib.sha256(data).hexdigest() != pin.artifact_sha256:
                 raise IntegrityViolationError("verify result bytes differ from the final artifact")
             versions = result.result.get("versions", {})
-            if versions.get("prompt") not in (None, run["prompt_version"]) or versions.get("model") not in (None, run["model_id"]):
+            if versions.get("prompt") not in (None, expected_prompt) or versions.get("model") not in (None, run["model_id"]):
                 raise IntegrityViolationError("final model/prompt differs from the immutable run")
         original = row["result_json"].encode("utf-8")
-        receipt = {"schema_version": TERMINAL_RECEIPT_SCHEMA, "final_artifact": pin.to_dict(),
+        receipt = {"schema_version": receipt_schema, "final_artifact": pin.to_dict(),
                    "run_id": run_id, "event_id": event_id, "input_hash": event.input_hash,
                    "job_id": row["job_id"], "attempt_id": row["attempt_id"],
                    "original_result_sha256": hashlib.sha256(original).hexdigest(),

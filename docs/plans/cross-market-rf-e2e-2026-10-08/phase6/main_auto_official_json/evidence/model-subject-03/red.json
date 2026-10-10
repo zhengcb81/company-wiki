@@ -1,0 +1,23 @@
+{
+  "exit_code": 1,
+  "seconds": 4.68,
+  "owned_temp_removed": true,
+  "external_calls": 0,
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-p",
+    "pytest_timeout",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-projection-model-red-4kx0yt9c/pytest",
+    "-q",
+    "tests/unit/test_official_json_model_subject.py",
+    "tests/unit/test_official_json_summarize_subject.py"
+  ]
+}

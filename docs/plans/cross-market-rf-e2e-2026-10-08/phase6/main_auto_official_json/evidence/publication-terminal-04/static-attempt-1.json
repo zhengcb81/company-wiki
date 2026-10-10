@@ -1,0 +1,13 @@
+{
+  "results": [
+    {
+      "name": "ruff",
+      "exit_code": 1
+    },
+    {
+      "name": "mypy",
+      "exit_code": 1
+    }
+  ],
+  "owned_temp_removed": true
+}

@@ -2,7 +2,14 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass
+import re
+from typing import Any
+
+from company_wiki.narrative_subject import NarrativeSubject, publication_target
+from company_wiki.source_catalog.narrative_language import NarrativeLanguageError
+from company_wiki.source_catalog.official_json_projection import ProjectionError
 
 from company_wiki.source_catalog.narrative_evidence import (
     NARRATIVE_SELECTOR_NAME,
@@ -28,6 +35,7 @@ from .narrative_formats import parser_component
 from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization
 from .narrative_contracts import (
     BUNDLE_SCHEMA,
+    PROJECTED_BUNDLE_SCHEMA,
     ContractSizeError,
     NarrativeBundle,
     NarrativeContractError,
@@ -37,11 +45,13 @@ from .narrative_contracts import (
     PromptReviewValue,
     SourceRevisionEventPayload,
 )
-from .narrative_model import NARRATIVE_PROMPT_VERSION
+from .narrative_model import NARRATIVE_PROMPT_VERSION, PROJECTION_NARRATIVE_PROMPT_VERSION
+from .narrative_official_json import OfficialProjectionAdapterError, open_verified_projection
 from .narrative_replay import (
     NarrativeReplayError,
     PdfEvidenceReplayer,
     replay_narrative_evidence,
+    replay_verified_projection,
 )
 from .narrative_source_guard import (
     NarrativeSourceGuardError,
@@ -136,36 +146,36 @@ def _validate_dependency_identity(
     normalization=None,
 ) -> None:
     if (
-        selected.source_ref.to_dict() != payload.source_ref.to_dict()
+        selected.subject != payload.subject
         or selected.source_metadata.to_dict() != payload.source_metadata.to_dict()
-        or selected.expected_read_policy_sha256
-        != payload.expected_read_policy_sha256
-        or summary.source_ref != selected.source_ref
+        or selected.expected_read_policy_sha256 != payload.expected_read_policy_sha256
+        or summary.subject != selected.subject
     ):
         raise _VerifyFailure(
-            "DEPENDENCY_INVALID",
-            HandlerOutcome.TERMINAL_FAILURE,
+            "DEPENDENCY_INVALID", HandlerOutcome.TERMINAL_FAILURE,
             "dependency identity differs from the source event",
         )
-    parser_name, parser_version = parser_component(
-        selected.source_ref.mime_type, selected.source_metadata.source_class,
-        normalization=normalization, parser_version=selected.parser.version,
-    )
+    projected = selected.subject.kind == "official_json"
+    parser_current = True
+    if not projected:
+        parser_name, parser_version = parser_component(
+            selected.source_ref.mime_type, selected.source_metadata.source_class,
+            normalization=normalization, parser_version=selected.parser.version,
+        )
+        parser_current = selected.parser.name == parser_name and selected.parser.version == parser_version
+    active_prompt = PROJECTION_NARRATIVE_PROMPT_VERSION if projected else NARRATIVE_PROMPT_VERSION
     if (
-        selected.parser.name != parser_name
-        or selected.parser.version != parser_version
+        not parser_current
         or selected.selector.name != NARRATIVE_SELECTOR_NAME
         or selected.selector.version != NARRATIVE_SELECTOR_VERSION
-        or (
-            summary.model is not None
-            and summary.model.prompt_version != NARRATIVE_PROMPT_VERSION
-        )
+        or (summary.model is not None and summary.model.prompt_version != active_prompt)
     ):
         raise _VerifyFailure(
-            "DEPENDENCY_INVALID",
-            HandlerOutcome.TERMINAL_FAILURE,
+            "DEPENDENCY_INVALID", HandlerOutcome.TERMINAL_FAILURE,
             "dependency component version is not the active version",
         )
+
+
 class NarrativeVerifyHandler:
     """Replay all locators and emit one logical publication effect."""
 
@@ -175,16 +185,32 @@ class NarrativeVerifyHandler:
         reader: NarrativeSourceReader,
         pdf_replayer: PdfEvidenceReplayer | None = None,
         normalization: NarrativeNormalization | None = None,
+        projection_catalog: Any | None = None,
+        generation_sha256: Callable[[NarrativeSubject], str] | None = None,
     ) -> None:
         self._reader = reader
         self._pdf_replayer = pdf_replayer
         self._normalization = normalization or NarrativeNormalization()
+        self._projection_catalog = projection_catalog
+        self._generation_sha256 = generation_sha256
 
     def __call__(self, context: JobExecutionContext) -> HandlerResult:
         try:
             return self._execute(context)
         except SourceReadError as exc:
             return _read_error_result(exc)
+        except ProjectionError as exc:
+            return _failure(
+                "SOURCE_UNAVAILABLE" if exc.code == "projection_not_found" else "LOCATOR_REPLAY_FAILED",
+                HandlerOutcome.TERMINAL_FAILURE, exc.code,
+            )
+        except OfficialProjectionAdapterError as exc:
+            return _failure(
+                "SOURCE_HASH_MISMATCH" if str(exc) == "projection_hash_mismatch" else "LOCATOR_REPLAY_FAILED",
+                HandlerOutcome.TERMINAL_FAILURE, str(exc),
+            )
+        except NarrativeLanguageError as exc:
+            return _failure(exc.code, HandlerOutcome.TERMINAL_FAILURE, str(exc))
         except NarrativeSourceGuardError as exc:
             return _failure(exc.code, HandlerOutcome.TERMINAL_FAILURE, exc.detail)
         except _VerifyFailure as exc:
@@ -201,6 +227,8 @@ class NarrativeVerifyHandler:
         payload = self._payload(context)
         selected, summary = _dependencies(context)
         _validate_dependency_identity(payload, selected, summary, self._normalization)
+        if payload.subject.kind == "official_json":
+            return self._execute_projection(context, payload, selected, summary)
         ref = source_ref(payload)
         opened = self._reader.open_version(
             ref,
@@ -223,6 +251,62 @@ class NarrativeVerifyHandler:
             metrics=HandlerMetrics(tokens=0, cost_usd=0.0, duration_ms=0),
             error=None,
         )
+
+    def _execute_projection(
+        self, context: JobExecutionContext, payload: SourceRevisionEventPayload,
+        selected: NarrativeSelectResult, summary: NarrativeSummaryResult,
+    ) -> HandlerResult:
+        if self._projection_catalog is None:
+            raise _VerifyFailure(
+                "SOURCE_UNAVAILABLE", HandlerOutcome.TERMINAL_FAILURE,
+                "official projection source port is not configured",
+            )
+        view = open_verified_projection(
+            self._projection_catalog, projection_id=payload.subject.item_key,
+            expected_projection_sha256=payload.subject.subject_sha256,
+        )
+        if view.subject != selected.subject:
+            raise _VerifyFailure(
+                "DEPENDENCY_INVALID", HandlerOutcome.TERMINAL_FAILURE,
+                "dependency subject differs from the verified projection",
+            )
+        if any((span.parser_name, span.parser_version) != (selected.parser.name, selected.parser.version)
+               for span in view.evidence_spans):
+            raise _VerifyFailure(
+                "DEPENDENCY_INVALID", HandlerOutcome.TERMINAL_FAILURE,
+                "dependency parser differs from the real official source producer",
+            )
+        review = self._current_review(selected, summary)
+        context.checkpoint()
+        try:
+            replay_verified_projection(view, selected)
+        except NarrativeReplayError as exc:
+            raise _VerifyFailure(
+                "LOCATOR_REPLAY_FAILED", HandlerOutcome.TERMINAL_FAILURE,
+                "selected official fields differ from the verified source view",
+            ) from exc
+        bundle = self._bundle(selected, summary, review)
+        generation = self._projection_generation(selected.subject)
+        context.checkpoint()
+        effect = self._effect(context, bundle, generation_sha256=generation)
+        return HandlerResult(
+            outcome=HandlerOutcome.SUCCEEDED, result=bundle.to_dict(), artifacts=(), effects=(effect,),
+            metrics=HandlerMetrics(tokens=0, cost_usd=0.0, duration_ms=0), error=None,
+        )
+
+    def _projection_generation(self, subject: NarrativeSubject) -> str:
+        try:
+            if self._generation_sha256 is None:
+                raise ValueError("missing generation resolver")
+            generation = self._generation_sha256(subject)
+            if not isinstance(generation, str) or re.fullmatch(r"[0-9a-f]{64}", generation) is None:
+                raise ValueError("invalid generation SHA")
+            return generation
+        except (KeyError, TypeError, ValueError) as exc:
+            raise _VerifyFailure(
+                "DEPENDENCY_INVALID", HandlerOutcome.TERMINAL_FAILURE,
+                "official projection has no exact frozen generation SHA",
+            ) from exc
 
     @staticmethod
     def _payload(context: JobExecutionContext) -> SourceRevisionEventPayload:
@@ -321,6 +405,11 @@ class NarrativeVerifyHandler:
                 "locator_count": len(selected.evidence_spans),
             },
         }
+        if selected.subject.kind == "official_json":
+            raw["schema_version"] = PROJECTED_BUNDLE_SCHEMA
+            raw["subject_binding"] = selected.subject.to_dict()
+            for key in ("source_ref", "expected_read_policy_sha256", "transcript_lineage", "transcript_byte_bindings"):
+                raw.pop(key)
         try:
             bundle = NarrativeBundle.from_dict(raw)
             bundle.validate_against(selected, summary)
@@ -345,12 +434,9 @@ class NarrativeVerifyHandler:
             ) from exc
 
     @staticmethod
-    def _effect(context: JobExecutionContext, bundle: NarrativeBundle) -> Effect:
+    def _effect(context: JobExecutionContext, bundle: NarrativeBundle, *, generation_sha256: str | None = None) -> Effect:
         bundle_hash = canonical_json_hash(bundle.to_dict())
-        target = (
-            "urn:company-wiki:narrative-bundle:"
-            f"{bundle.source_ref.document_id}:{bundle.source_ref.content_sha256}"
-        )
+        target = publication_target(bundle.subject, generation_sha256)
         effect_key = make_effect_key(
             EFFECT_TYPE,
             target,

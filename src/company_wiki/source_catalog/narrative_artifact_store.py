@@ -16,8 +16,10 @@ import re
 import sqlite3
 import tempfile
 import uuid
+from typing import Any, Callable
 
 from company_wiki._id_scope import normalize_id_scope
+from company_wiki.narrative_subject import NarrativeSubject, SubjectBindingError
 
 from .store import CatalogStore
 from .reader import ReadOnlyCatalogReader
@@ -31,12 +33,14 @@ _SELECTION_STATUSES = frozenset(
 _QUALITY_STATUSES = frozenset(
     {"verified", "needs_review", "skipped_no_narrative"}
 )
-_LATEST_VISIBLE_SQL = """SELECT * FROM narrative_artifact_versions
+_RAW_SUBJECT_SQL = "COALESCE(json_extract(metadata_json, '$.subject_binding.kind'), 'raw')='raw'"
+_LATEST_VISIBLE_SQL = f"""SELECT * FROM narrative_artifact_versions
     WHERE document_id=? AND source_id=? AND source_sha256=? AND status='visible'
+      AND {_RAW_SUBJECT_SQL}
     ORDER BY activated_at DESC, created_at DESC, artifact_version_id DESC LIMIT 1"""
-_EXACT_VISIBLE_SQL = """SELECT * FROM narrative_artifact_versions
+_EXACT_VISIBLE_SQL = f"""SELECT * FROM narrative_artifact_versions
     WHERE artifact_version_id=? AND document_id=? AND source_id=?
-      AND source_sha256=? AND status='visible'"""
+      AND source_sha256=? AND status='visible' AND {_RAW_SUBJECT_SQL}"""
 _EFFECT_VISIBLE_SQL = "SELECT * FROM narrative_artifact_versions WHERE effect_id=? AND status='visible'"
 _CURRENT_SOURCE_SQL = """SELECT d.primary_source_id, d.source_status, s.content_sha256
     FROM documents AS d LEFT JOIN sources AS s ON s.source_id=d.primary_source_id
@@ -45,7 +49,8 @@ _CURRENT_ARTIFACT_SQL = """SELECT 1 FROM narrative_artifact_versions AS v
     JOIN documents AS d ON d.document_id=v.document_id
     JOIN sources AS s ON s.source_id=d.primary_source_id
     WHERE v.artifact_version_id=? AND v.status='visible'
-      AND d.primary_source_id=? AND d.source_status='active' AND s.content_sha256=?"""
+      AND d.primary_source_id=? AND d.source_status='active' AND s.content_sha256=?
+      AND COALESCE(json_extract(v.metadata_json, '$.subject_binding.kind'), 'raw')='raw'"""
 
 
 class NarrativeArtifactError(ValueError):
@@ -241,8 +246,10 @@ class NarrativeArtifactStore:
 
         content_sha256 = hashlib.sha256(payload).hexdigest()
         with self._catalog.transaction() as connection:
-            self._require_source_identity(
-                connection, draft.document_id, draft.source_id, draft.source_sha256
+            _require_bound_current(
+                document_id=draft.document_id, source_id=draft.source_id,
+                source_sha256=draft.source_sha256, metadata_json=draft.metadata_json,
+                fetchone=lambda sql, params: connection.execute(sql, params).fetchone(),
             )
             existing = self._existing(connection, draft, content_sha256)
             if existing is not None:
@@ -253,8 +260,10 @@ class NarrativeArtifactStore:
         # object; no catalog lock is held while the filesystem is written.
         object_key = self._objects.put(payload)
         with self._catalog.transaction() as connection:
-            self._require_source_identity(
-                connection, draft.document_id, draft.source_id, draft.source_sha256
+            _require_bound_current(
+                document_id=draft.document_id, source_id=draft.source_id,
+                source_sha256=draft.source_sha256, metadata_json=draft.metadata_json,
+                fetchone=lambda sql, params: connection.execute(sql, params).fetchone(),
             )
             existing = self._existing(connection, draft, content_sha256)
             if existing is not None:
@@ -506,6 +515,32 @@ class NarrativeArtifactStore:
                 )
         return version, self._read_current_payload(version)
 
+    def visible_subject_generation_candidates(
+        self, *, subject: NarrativeSubject, generation_sha256: str, limit: int = 32,
+    ) -> tuple[NarrativeArtifactVersion, ...]:
+        reader = self.for_reading(self._catalog.database_path, self._objects)
+        try:
+            return reader.visible_subject_generation_candidates(
+                subject=subject, generation_sha256=generation_sha256, limit=limit,
+            )
+        finally:
+            reader.close()
+
+    def read_current_subject(
+        self, *, artifact_version_id: str, subject: NarrativeSubject,
+        generation_sha256: str, expected_sha256: str | None = None,
+        expected_size: int | None = None,
+    ) -> tuple[NarrativeArtifactVersion, bytes]:
+        reader = self.for_reading(self._catalog.database_path, self._objects)
+        try:
+            return reader.read_current_subject(
+                artifact_version_id=artifact_version_id, subject=subject,
+                generation_sha256=generation_sha256,
+                expected_sha256=expected_sha256, expected_size=expected_size,
+            )
+        finally:
+            reader.close()
+
     def _read_current_payload(self, version: NarrativeArtifactVersion) -> bytes:
         payload = self._objects.read(
             version.object_key,
@@ -527,11 +562,11 @@ class NarrativeArtifactStore:
     def _require_current_source(
         connection: sqlite3.Connection, row: sqlite3.Row
     ) -> None:
-        source = connection.execute(
-            _CURRENT_SOURCE_SQL,
-            (row["document_id"],),
-        ).fetchone()
-        _require_current_identity(row, source)
+        _require_bound_current(
+            document_id=row["document_id"], source_id=row["source_id"],
+            source_sha256=row["source_sha256"], metadata_json=row["metadata_json"],
+            fetchone=lambda sql, params: connection.execute(sql, params).fetchone(),
+        )
 
 
 def _require_current_identity(row: sqlite3.Row, source: sqlite3.Row | None) -> None:
@@ -544,6 +579,71 @@ def _require_current_identity(row: sqlite3.Row, source: sqlite3.Row | None) -> N
         raise NarrativeSourceNotCurrentError(
             "artifact source is no longer the active primary"
         )
+
+
+def _metadata_binding(metadata_json: str) -> tuple[dict[str, Any], NarrativeSubject | None]:
+    try:
+        metadata = json.loads(metadata_json)
+        if not isinstance(metadata, dict):
+            raise ValueError("artifact metadata is not an object")
+        binding = metadata.get("subject_binding")
+        subject = None if binding is None else NarrativeSubject.from_dict(binding)
+        if subject is not None and subject.kind == "official_json":
+            _require_generation_sha(metadata.get("generation_sha256"))
+    except (TypeError, ValueError, SubjectBindingError) as exc:
+        raise NarrativeArtifactConflictError("artifact subject binding is inconsistent") from exc
+    return metadata, subject
+
+
+def _require_generation_sha(value: object) -> None:
+    if not isinstance(value, str) or _SHA256.fullmatch(value) is None:
+        raise ValueError("generation SHA must be lowercase SHA-256")
+
+
+def _require_bound_current(
+    *, document_id: str, source_id: str, source_sha256: str, metadata_json: str,
+    fetchone: Callable[[str, tuple[str, ...]], sqlite3.Row | None],
+) -> None:
+    """Validate all declared parent relations without opening or parsing raw files."""
+    _, subject = _metadata_binding(metadata_json)
+    refs: tuple[dict[str, Any], ...]
+    if subject is None:
+        refs = ({"document_id": document_id, "source_id": source_id,
+                 "content_sha256": source_sha256},)
+    else:
+        refs = subject.parent_source_refs
+        anchor = refs[0]
+        if (document_id, source_id, source_sha256) != (
+            anchor["document_id"], anchor["source_id"], anchor["content_sha256"],
+        ):
+            raise NarrativeArtifactConflictError("artifact anchor differs from its real first parent")
+    seen = set()
+    for ref in refs:
+        identity = (ref["document_id"], ref["source_id"], ref["content_sha256"])
+        if identity in seen:
+            continue
+        seen.add(identity)
+        current = fetchone(_CURRENT_SOURCE_SQL, (ref["document_id"],))
+        if (current is None or current["primary_source_id"] != ref["source_id"]
+                or current["content_sha256"] != ref["content_sha256"]
+                or current["source_status"] != "active"):
+            raise NarrativeSourceNotCurrentError("artifact parent is no longer the active primary")
+
+
+def _require_subject_match(
+    row: sqlite3.Row, subject: NarrativeSubject, generation_sha256: str,
+) -> None:
+    metadata, stored = _metadata_binding(row["metadata_json"])
+    if stored is None:
+        anchor = subject.anchor_ref
+        if subject.kind != "raw" or (
+            row["document_id"], row["source_id"], row["source_sha256"],
+        ) != (anchor["document_id"], anchor["source_id"], anchor["content_sha256"]):
+            raise NarrativeArtifactConflictError("exact artifact belongs to another subject")
+    elif stored.to_dict() != subject.to_dict():
+        raise NarrativeArtifactConflictError("exact artifact belongs to another subject")
+    if metadata.get("generation_sha256") != generation_sha256:
+        raise NarrativeArtifactConflictError("exact artifact belongs to another generation")
 
 
 class NarrativeArtifactReader:
@@ -573,9 +673,84 @@ class NarrativeArtifactReader:
         row = self._fetchone(sql, params)
         if row is None:
             raise NarrativeArtifactNotVisibleError("the narrative artifact is not visible")
-        source = self._fetchone(_CURRENT_SOURCE_SQL, (row["document_id"],))
-        _require_current_identity(row, source)
+        self._require_row_current(row)
         return NarrativeArtifactVersion.from_row(row)
+
+    def _require_row_current(self, row: sqlite3.Row) -> None:
+        _require_bound_current(
+            document_id=row["document_id"], source_id=row["source_id"],
+            source_sha256=row["source_sha256"], metadata_json=row["metadata_json"],
+            fetchone=self._fetchone,
+        )
+
+    def _fetchall(self, sql: str, params: tuple[object, ...]) -> list[sqlite3.Row]:
+        if self._connection is not None:
+            return self._connection.execute(sql, params).fetchall()
+        assert self._reader is not None
+        return self._reader.fetchall(sql, params)
+
+    def visible_subject_generation_candidates(
+        self, *, subject: NarrativeSubject, generation_sha256: str, limit: int = 32,
+    ) -> tuple[NarrativeArtifactVersion, ...]:
+        """Find exact subject generations; matching corruption is an error, not a miss."""
+        if not isinstance(subject, NarrativeSubject):
+            raise TypeError("subject must be NarrativeSubject")
+        _require_generation_sha(generation_sha256)
+        if type(limit) is not int or not 1 <= limit <= 100:
+            raise ValueError("generation candidate limit must be 1 to 100")
+        if subject.kind == "raw":
+            anchor = subject.anchor_ref
+            sql = f"""SELECT * FROM narrative_artifact_versions
+                WHERE document_id=? AND source_id=? AND source_sha256=? AND status='visible'
+                  AND {_RAW_SUBJECT_SQL} AND json_extract(metadata_json, '$.generation_sha256')=?
+                ORDER BY activated_at DESC, created_at DESC, artifact_version_id DESC LIMIT ?"""
+            params = (anchor["document_id"], anchor["source_id"], anchor["content_sha256"],
+                      generation_sha256, limit)
+        else:
+            sql = """SELECT * FROM narrative_artifact_versions WHERE status='visible'
+                AND json_extract(metadata_json, '$.subject_binding.kind')=?
+                AND json_extract(metadata_json, '$.subject_binding.item_key')=?
+                AND json_extract(metadata_json, '$.subject_binding.subject_sha256')=?
+                AND json_extract(metadata_json, '$.generation_sha256')=?
+                ORDER BY activated_at DESC, created_at DESC, artifact_version_id DESC LIMIT ?"""
+            params = (subject.kind, subject.item_key, subject.subject_sha256, generation_sha256, limit)
+        rows = self._fetchall(sql, params)
+        for row in rows:
+            _require_subject_match(row, subject, generation_sha256)
+            self._require_row_current(row)
+        return tuple(NarrativeArtifactVersion.from_row(row) for row in rows)
+
+    def read_current_subject(
+        self, *, artifact_version_id: str, subject: NarrativeSubject,
+        generation_sha256: str, expected_sha256: str | None = None,
+        expected_size: int | None = None,
+    ) -> tuple[NarrativeArtifactVersion, bytes]:
+        """Read an exact generation and recheck every parent after the object open."""
+        if not isinstance(subject, NarrativeSubject):
+            raise TypeError("subject must be NarrativeSubject")
+        if not isinstance(artifact_version_id, str) or not artifact_version_id.strip():
+            raise ValueError("artifact_version_id must be non-empty text")
+        _require_generation_sha(generation_sha256)
+        sql = "SELECT * FROM narrative_artifact_versions WHERE artifact_version_id=? AND status='visible'"
+        row = self._fetchone(sql, (artifact_version_id,))
+        if row is None:
+            raise NarrativeArtifactNotVisibleError("the exact subject artifact is not visible")
+        _require_subject_match(row, subject, generation_sha256)
+        self._require_row_current(row)
+        version = NarrativeArtifactVersion.from_row(row)
+        if ((expected_sha256 is not None and version.content_sha256 != expected_sha256)
+                or (expected_size is not None and version.byte_size != expected_size)):
+            raise NarrativeArtifactConflictError("exact artifact differs from its reference")
+        data = self._objects.read(version.object_key,
+            expected_sha256=version.content_sha256, expected_size=version.byte_size)
+        current = self._fetchone(sql, (artifact_version_id,))
+        if current is None:
+            raise NarrativeArtifactNotVisibleError("the exact artifact changed while reading")
+        _require_subject_match(current, subject, generation_sha256)
+        self._require_row_current(current)
+        if NarrativeArtifactVersion.from_row(current) != version:
+            raise NarrativeArtifactConflictError("exact artifact metadata changed while reading")
+        return version, data
 
     def visible_generation_candidates(
         self, *, document_id: str, source_id: str, source_sha256: str,
@@ -586,9 +761,9 @@ class NarrativeArtifactReader:
             raise ValueError("generation/source SHA must be lowercase SHA-256")
         if type(limit) is not int or not 1 <= limit <= 100:
             raise ValueError("generation candidate limit must be 1 to 100")
-        sql = """SELECT * FROM narrative_artifact_versions
+        sql = f"""SELECT * FROM narrative_artifact_versions
             WHERE document_id=? AND source_id=? AND source_sha256=? AND status='visible'
-              AND json_extract(metadata_json, '$.generation_sha256')=?
+              AND {_RAW_SUBJECT_SQL} AND json_extract(metadata_json, '$.generation_sha256')=?
             ORDER BY activated_at DESC, created_at DESC, artifact_version_id DESC LIMIT ?"""
         params = (document_id, source_id, source_sha256, generation_sha256, limit)
         if self._connection is not None:

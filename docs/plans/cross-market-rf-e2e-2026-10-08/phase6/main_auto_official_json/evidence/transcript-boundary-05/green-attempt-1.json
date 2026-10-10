@@ -1,0 +1,26 @@
+{
+  "exit_code": 1,
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-p",
+    "pytest_timeout",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-transcript-green-1wiw_0i8/pytest",
+    "-q",
+    "tests/unit/test_transcript_boundary_versions.py",
+    "tests/unit/test_transcript_parser_compatibility.py",
+    "tests/contract/test_official_transcript_layouts.py",
+    "tests/contract/test_transcript_speaker_affiliation.py",
+    "tests/integration/test_s5_narrative_evidence_view.py::test_real_transcript_search_lookup_and_directory_restoration"
+  ],
+  "seconds": 11.54,
+  "external_calls": 0,
+  "owned_temp_removed": true
+}

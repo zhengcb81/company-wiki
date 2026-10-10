@@ -1,0 +1,153 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-official-verify-red-vml9_brn\\pytest", "requested_basetemp_len": 71, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-220608-2d09c2b1", "effective_basetemp_len": 75}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+collected 18 items
+
+tests\integration\test_official_json_verify_handler.py FFFFFFFFFFFFFFFFF [ 94%]
+F                                                                        [100%]
+
+================================== FAILURES ===================================
+____ test_real_all_parents_replayed_once_and_projection_generation_effect _____
+tests\integration\test_official_json_verify_handler.py:183: in test_real_all_parents_replayed_once_and_projection_generation_effect
+    result = verifier(catalog)(verification_context(projection, dependencies))
+             ^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_verify_handler.py:167: in verifier
+    return NarrativeVerifyHandler(reader=NoRawReader(), projection_catalog=catalog,
+E   TypeError: NarrativeVerifyHandler.__init__() got an unexpected keyword argument 'projection_catalog'
+______ test_changed_second_parent_after_select_refuses_no_effect[bytes] _______
+tests\integration\test_official_json_verify_handler.py:214: in test_changed_second_parent_after_select_refuses_no_effect
+    result = verifier(catalog)(context)
+             ^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_verify_handler.py:167: in verifier
+    return NarrativeVerifyHandler(reader=NoRawReader(), projection_catalog=catalog,
+E   TypeError: NarrativeVerifyHandler.__init__() got an unexpected keyword argument 'projection_catalog'
+______ test_changed_second_parent_after_select_refuses_no_effect[status] ______
+tests\integration\test_official_json_verify_handler.py:221: in test_changed_second_parent_after_select_refuses_no_effect
+    result = verifier(catalog)(context)
+             ^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_verify_handler.py:167: in verifier
+    return NarrativeVerifyHandler(reader=NoRawReader(), projection_catalog=catalog,
+E   TypeError: NarrativeVerifyHandler.__init__() got an unexpected keyword argument 'projection_catalog'
+_ test_renamed_issuer_in_event_and_dependencies_cannot_alias_same_raw_anchor __
+tests\integration\test_official_json_verify_handler.py:236: in test_renamed_issuer_in_event_and_dependencies_cannot_alias_same_raw_anchor
+    result = verifier(catalog)(verification_context(projection, dependencies, subject_override=binding))
+             ^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_verify_handler.py:167: in verifier
+    return NarrativeVerifyHandler(reader=NoRawReader(), projection_catalog=catalog,
+E   TypeError: NarrativeVerifyHandler.__init__() got an unexpected keyword argument 'projection_catalog'
+_ test_selected_or_summary_semantic_tampering_refuses_projection_publish[parser] _
+tests\integration\test_official_json_verify_handler.py:277: in test_selected_or_summary_semantic_tampering_refuses_projection_publish
+    result = verifier(catalog)(verification_context(projection, dependencies))
+             ^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_verify_handler.py:167: in verifier
+    return NarrativeVerifyHandler(reader=NoRawReader(), projection_catalog=catalog,
+E   TypeError: NarrativeVerifyHandler.__init__() got an unexpected keyword argument 'projection_catalog'
+_ test_selected_or_summary_semantic_tampering_refuses_projection_publish[prompt] _
+tests\integration\test_official_json_verify_handler.py:277: in test_selected_or_summary_semantic_tampering_refuses_projection_publish
+    result = verifier(catalog)(verification_context(projection, dependencies))
+             ^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_verify_handler.py:167: in verifier
+    return NarrativeVerifyHandler(reader=NoRawReader(), projection_catalog=catalog,
+E   TypeError: NarrativeVerifyHandler.__init__() got an unexpected keyword argument 'projection_catalog'
+_ test_selected_or_summary_semantic_tampering_refuses_projection_publish[text] _
+tests\integration\test_official_json_verify_handler.py:277: in test_selected_or_summary_semantic_tampering_refuses_projection_publish
+    result = verifier(catalog)(verification_context(projection, dependencies))
+             ^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_verify_handler.py:167: in verifier
+    return NarrativeVerifyHandler(reader=NoRawReader(), projection_catalog=catalog,
+E   TypeError: NarrativeVerifyHandler.__init__() got an unexpected keyword argument 'projection_catalog'
+_ test_selected_or_summary_semantic_tampering_refuses_projection_publish[role] _
+tests\integration\test_official_json_verify_handler.py:277: in test_selected_or_summary_semantic_tampering_refuses_projection_publish
+    result = verifier(catalog)(verification_context(projection, dependencies))
+             ^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_verify_handler.py:167: in verifier
+    return NarrativeVerifyHandler(reader=NoRawReader(), projection_catalog=catalog,
+E   TypeError: NarrativeVerifyHandler.__init__() got an unexpected keyword argument 'projection_catalog'
+_ test_projection_generation_is_required_with_no_anchor_target_fallback[None] _
+tests\integration\test_official_json_verify_handler.py:289: in test_projection_generation_is_required_with_no_anchor_target_fallback
+    result = verifier(catalog, generation)(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_verify_handler.py:167: in verifier
+    return NarrativeVerifyHandler(reader=NoRawReader(), projection_catalog=catalog,
+E   TypeError: NarrativeVerifyHandler.__init__() got an unexpected keyword argument 'projection_catalog'
+___ test_projection_generation_is_required_with_no_anchor_target_fallback[] ___
+tests\integration\test_official_json_verify_handler.py:289: in test_projection_generation_is_required_with_no_anchor_target_fallback
+    result = verifier(catalog, generation)(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_verify_handler.py:167: in verifier
+    return NarrativeVerifyHandler(reader=NoRawReader(), projection_catalog=catalog,
+E   TypeError: NarrativeVerifyHandler.__init__() got an unexpected keyword argument 'projection_catalog'
+_ test_projection_generation_is_required_with_no_anchor_target_fallback[invalid] _
+tests\integration\test_official_json_verify_handler.py:289: in test_projection_generation_is_required_with_no_anchor_target_fallback
+    result = verifier(catalog, generation)(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_verify_handler.py:167: in verifier
+    return NarrativeVerifyHandler(reader=NoRawReader(), projection_catalog=catalog,
+E   TypeError: NarrativeVerifyHandler.__init__() got an unexpected keyword argument 'projection_catalog'
+________ test_new_generation_cannot_reuse_old_projection_effect_target ________
+tests\integration\test_official_json_verify_handler.py:300: in test_new_generation_cannot_reuse_old_projection_effect_target
+    first = verifier(catalog)(context)
+            ^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_verify_handler.py:167: in verifier
+    return NarrativeVerifyHandler(reader=NoRawReader(), projection_catalog=catalog,
+E   TypeError: NarrativeVerifyHandler.__init__() got an unexpected keyword argument 'projection_catalog'
+____ test_projection_verify_without_source_port_is_typed_not_raw_dispatch _____
+tests\integration\test_official_json_verify_handler.py:314: in test_projection_verify_without_source_port_is_typed_not_raw_dispatch
+    assert result.error.code == "SOURCE_UNAVAILABLE"
+E   AssertionError: assert 'DEPENDENCY_INVALID' == 'SOURCE_UNAVAILABLE'
+E     
+E     - SOURCE_UNAVAILABLE
+E     + DEPENDENCY_INVALID
+_ test_runtime_registers_shared_catalog_and_generation_resolver_for_real_handlers _
+tests\integration\test_official_json_verify_handler.py:328: in test_runtime_registers_shared_catalog_and_generation_resolver_for_real_handlers
+    dependencies = NarrativeRuntimeDependencies(reader=NoRawReader(), model=OfflineProjectionModel(),
+E   TypeError: NarrativeRuntimeDependencies.__init__() got an unexpected keyword argument 'projection_catalog'
+_ test_factory_reads_frozen_generation_binding_and_checks_actual_execution_versions[None] _
+tests\integration\test_official_json_verify_handler.py:393: in test_factory_reads_frozen_generation_binding_and_checks_actual_execution_versions
+    assert captured[0].generation_sha256(subject) == GENERATION
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'NarrativeRuntimeDependencies' object has no attribute 'generation_sha256'
+
+During handling of the above exception, another exception occurred:
+tests\integration\test_official_json_verify_handler.py:398: in test_factory_reads_frozen_generation_binding_and_checks_actual_execution_versions
+    captured[0].projection_catalog.close()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'NarrativeRuntimeDependencies' object has no attribute 'projection_catalog'
+_ test_factory_reads_frozen_generation_binding_and_checks_actual_execution_versions[projection_prompt] _
+tests\integration\test_official_json_verify_handler.py:385: in test_factory_reads_frozen_generation_binding_and_checks_actual_execution_versions
+    with pytest.raises(ValueError, match="NARRATIVE_RUN_EXECUTION_MISMATCH"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+_ test_factory_reads_frozen_generation_binding_and_checks_actual_execution_versions[projection_model_request_schema] _
+tests\integration\test_official_json_verify_handler.py:385: in test_factory_reads_frozen_generation_binding_and_checks_actual_execution_versions
+    with pytest.raises(ValueError, match="NARRATIVE_RUN_EXECUTION_MISMATCH"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+_ test_factory_reads_frozen_generation_binding_and_checks_actual_execution_versions[official_json_adapter] _
+tests\integration\test_official_json_verify_handler.py:385: in test_factory_reads_frozen_generation_binding_and_checks_actual_execution_versions
+    with pytest.raises(ValueError, match="NARRATIVE_RUN_EXECUTION_MISMATCH"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+=========================== short test summary info ===========================
+FAILED tests/integration/test_official_json_verify_handler.py::test_real_all_parents_replayed_once_and_projection_generation_effect
+FAILED tests/integration/test_official_json_verify_handler.py::test_changed_second_parent_after_select_refuses_no_effect[bytes]
+FAILED tests/integration/test_official_json_verify_handler.py::test_changed_second_parent_after_select_refuses_no_effect[status]
+FAILED tests/integration/test_official_json_verify_handler.py::test_renamed_issuer_in_event_and_dependencies_cannot_alias_same_raw_anchor
+FAILED tests/integration/test_official_json_verify_handler.py::test_selected_or_summary_semantic_tampering_refuses_projection_publish[parser]
+FAILED tests/integration/test_official_json_verify_handler.py::test_selected_or_summary_semantic_tampering_refuses_projection_publish[prompt]
+FAILED tests/integration/test_official_json_verify_handler.py::test_selected_or_summary_semantic_tampering_refuses_projection_publish[text]
+FAILED tests/integration/test_official_json_verify_handler.py::test_selected_or_summary_semantic_tampering_refuses_projection_publish[role]
+FAILED tests/integration/test_official_json_verify_handler.py::test_projection_generation_is_required_with_no_anchor_target_fallback[None]
+FAILED tests/integration/test_official_json_verify_handler.py::test_projection_generation_is_required_with_no_anchor_target_fallback[]
+FAILED tests/integration/test_official_json_verify_handler.py::test_projection_generation_is_required_with_no_anchor_target_fallback[invalid]
+FAILED tests/integration/test_official_json_verify_handler.py::test_new_generation_cannot_reuse_old_projection_effect_target
+FAILED tests/integration/test_official_json_verify_handler.py::test_projection_verify_without_source_port_is_typed_not_raw_dispatch
+FAILED tests/integration/test_official_json_verify_handler.py::test_runtime_registers_shared_catalog_and_generation_resolver_for_real_handlers
+FAILED tests/integration/test_official_json_verify_handler.py::test_factory_reads_frozen_generation_binding_and_checks_actual_execution_versions[None]
+FAILED tests/integration/test_official_json_verify_handler.py::test_factory_reads_frozen_generation_binding_and_checks_actual_execution_versions[projection_prompt]
+FAILED tests/integration/test_official_json_verify_handler.py::test_factory_reads_frozen_generation_binding_and_checks_actual_execution_versions[projection_model_request_schema]
+FAILED tests/integration/test_official_json_verify_handler.py::test_factory_reads_frozen_generation_binding_and_checks_actual_execution_versions[official_json_adapter]
+======================== 18 failed, 1 warning in 6.89s ========================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-220608-2d09c2b1", "existed": true, "removed": true}

@@ -1,0 +1,14 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-official-verify-final-nkosrxuk\\pytest", "requested_basetemp_len": 73, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-221115-49beaf6e", "effective_basetemp_len": 75}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+collected 63 items
+
+tests\integration\test_official_json_verify_handler.py ................. [ 26%]
+.........                                                                [ 41%]
+tests\unit\test_narrative_verify_handler.py ....................         [ 73%]
+tests\unit\test_narrative_worker_factory.py .................            [100%]
+
+======================= 63 passed, 1 warning in 17.95s ========================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261010-221115-49beaf6e", "existed": true, "removed": true}

@@ -1,0 +1,29 @@
+{
+  "status": "source_stable_ready_for_root_commit",
+  "changed_source_and_tests": [
+    "scripts/host_assumption_guard.py",
+    "tests/contract/test_fc1307_host_assumption_gate.py"
+  ],
+  "sha256": {
+    "scripts/host_assumption_guard.py": "27f6ce586804e616a74c496b014df630e2ec356780896bb7608ee8c3baa0fb20",
+    "tests/contract/test_fc1307_host_assumption_gate.py": "a08f4244a3fc2d864f12cec4a244a51a5660a19e4d7662a97af33f020cc648bf",
+    "tests/contract/host_assumption_baseline.json": "a98ea04fa76caf4f7d18cf35c25c123c2c84b17d95b7d1ed4cd3bb53505780b6"
+  },
+  "baseline_git_diff_head": [],
+  "red": {
+    "failed": 5,
+    "passed": 10,
+    "deselected": 28
+  },
+  "green": {
+    "passed": 42,
+    "deselected": 1,
+    "pytest_seconds": 1.16
+  },
+  "ruff_exit_code": 0,
+  "motivating_file_violations": 0,
+  "external_provider_calls": 0,
+  "archived_logs_modified": false,
+  "owned_temp_cleanup": "removed:true in pytest log; TemporaryDirectory removed",
+  "commit_performed": false
+}

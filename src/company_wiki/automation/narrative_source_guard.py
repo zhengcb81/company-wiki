@@ -67,7 +67,7 @@ def validate_opened_source(
     source: SourceRef,
     opened: VerifiedContent,
     *,
-    expected_read_policy_sha256: str,
+    expected_read_policy_sha256: str | None,
 ) -> None:
     if (
         opened.document_id != source.document_id

@@ -1,0 +1,45 @@
+{
+  "at": "2026-10-10T22:48:10.883141+00:00",
+  "results": [
+    {
+      "label": "frozen-snapshot-02",
+      "argv": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/unit/test_official_json_narrative_adapter.py::test_export_input_and_all_returned_context_are_deeply_detached",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "-o",
+        "addopts=",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cw-final06b-fqxdfl55\\pytest"
+      ],
+      "exit_code": 0,
+      "seconds": 12.611,
+      "log_sha256": "974d15286874b0f600bfbe11d735d43901acc587b3ae9e3bc71d3764f45f72b0"
+    },
+    {
+      "label": "artifact-types-02",
+      "argv": [
+        "python",
+        "-m",
+        "mypy",
+        "--cache-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cw-final06b-fqxdfl55\\mypy",
+        "--follow-imports=silent",
+        "src/company_wiki/source_catalog/narrative_artifact_store.py"
+      ],
+      "exit_code": 0,
+      "seconds": 26.916,
+      "log_sha256": "8e63ae22e8213e327a5e9cbd584067681681bd8ef7f25c869877887ccdcfc4ff"
+    }
+  ],
+  "owned_temp_removed": true,
+  "supplier_calls": 0,
+  "supplier_cost_usd": 0
+}
