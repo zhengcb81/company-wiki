@@ -28,7 +28,7 @@ import time
 from typing import Any
 from urllib.parse import quote
 
-CWP_JSON_STRUCTURE_PARSER_VERSION = "1.0.0"
+CWP_JSON_STRUCTURE_PARSER_VERSION = "1.0.1"
 LOCATOR_SCHEMA = "cwp-json-pointer/1"
 LOCATOR_TRANSFORM_VERSION = "json-string-decode/1"
 
@@ -318,6 +318,7 @@ class _Scanner:
         if raw[self.pos:self.pos + 1] == b"}":
             self.pos += 1
             node.token_range = (start, self.pos)
+            node.encoded_token_sha256 = hashlib.sha256(raw[start:self.pos]).hexdigest()
             return node
         while True:
             self._tick()
@@ -343,6 +344,7 @@ class _Scanner:
             if separator == b"}":
                 self.pos += 1
                 node.token_range = (start, self.pos)
+                node.encoded_token_sha256 = hashlib.sha256(raw[start:self.pos]).hexdigest()
                 return node
             raise JsonStructureError("invalid_json_syntax")
 
@@ -358,6 +360,7 @@ class _Scanner:
         if raw[self.pos:self.pos + 1] == b"]":
             self.pos += 1
             node.token_range = (start, self.pos)
+            node.encoded_token_sha256 = hashlib.sha256(raw[start:self.pos]).hexdigest()
             return node
         index = 0
         while True:
@@ -373,6 +376,7 @@ class _Scanner:
             if separator == b"]":
                 self.pos += 1
                 node.token_range = (start, self.pos)
+                node.encoded_token_sha256 = hashlib.sha256(raw[start:self.pos]).hexdigest()
                 return node
             raise JsonStructureError("invalid_json_syntax")
 

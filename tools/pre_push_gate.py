@@ -58,6 +58,7 @@ CURRENT_CI_REGRESSION_CASES = (
     "tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files",
 )
 FAST_CONTRACT_CASES = (
+    "tests/integration/test_m3_official_json_acceptance.py",
     "tests/unit/test_runtime_dependencies.py::test_ci_requirements_include_declared_runtime_dependencies",
     *CURRENT_CI_REGRESSION_CASES,
     "tests/contract/test_narrative_output_plan.py",

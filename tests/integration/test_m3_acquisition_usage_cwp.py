@@ -108,7 +108,8 @@ def usage(cost):
 def extra():
     if a.mode == "legacy":
         return {}
-    return {"http_wire_bytes": meter.wire, "http_wire_usage_complete": True,
+    return {"acquisition_cost_observed": True,
+            "http_wire_bytes": meter.wire, "http_wire_usage_complete": True,
             "http_exchanges": meter.exchanges, "http_observation": meter.last}
 
 

@@ -1,0 +1,77 @@
+{
+  "observed_at_utc": "2026-10-10T20:01:07.858846+00:00",
+  "tests": [
+    {
+      "name": "pagination-final-responsibility",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-json-coverage-ssqg4448\\pytest",
+        "tests/unit/test_m3_official_json_parser.py",
+        "tests/contract/test_m3_official_json_contract.py",
+        "tests/contract/test_m3_official_json_frozen_pages.py",
+        "tests/integration/test_m3_official_json_projection.py",
+        "tests/integration/test_m3_official_json_acceptance.py"
+      ],
+      "started_at_utc": "2026-10-10T20:00:47.196350+00:00",
+      "exit_code": 0,
+      "log": ".planning/m3-acceptance-json-fixes/pagination-final-responsibility.log",
+      "log_sha256": "e62c61a12363e7c5fd5a7a0a8ba579be021905acbdd28b71454159f9356c0d67"
+    },
+    {
+      "name": "pagination-mypy",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "mypy",
+        "--cache-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-json-coverage-ssqg4448\\mypy",
+        "src/company_wiki/source_catalog/official_json_structure.py",
+        "src/company_wiki/source_catalog/official_json_layout.py",
+        "src/company_wiki/source_catalog/official_json_projection.py"
+      ],
+      "started_at_utc": "2026-10-10T20:01:06.349369+00:00",
+      "exit_code": 0,
+      "log": ".planning/m3-acceptance-json-fixes/pagination-mypy.log",
+      "log_sha256": "281a094c39385b4d7b53e5db635f52158036861433c2a4975b9039e77a627a24"
+    },
+    {
+      "name": "pagination-ruff",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "ruff",
+        "check",
+        "--no-cache",
+        "src/company_wiki/source_catalog/official_json_structure.py",
+        "src/company_wiki/source_catalog/official_json_layout.py",
+        "src/company_wiki/source_catalog/official_json_projection.py",
+        "tests/integration/test_m3_official_json_acceptance.py"
+      ],
+      "started_at_utc": "2026-10-10T20:01:07.730843+00:00",
+      "exit_code": 0,
+      "log": ".planning/m3-acceptance-json-fixes/pagination-ruff.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    }
+  ],
+  "owned_temp_removed": true,
+  "external_provider_calls": 0,
+  "external_model_calls": 0,
+  "paid_tokens": 0,
+  "paid_micro_usd": 0,
+  "old_unknown_preserved": true
+}

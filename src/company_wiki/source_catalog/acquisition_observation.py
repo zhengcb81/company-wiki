@@ -18,8 +18,8 @@ Honesty rules frozen in INTERFACE_CHANGE.md (M3-USAGE, 2026-10-10):
 * ``cost_usd`` is null unless a provider fee receipt actually arrived. A zero
   cost cap, initial zero counters, or a provider without receipts never prove
   a final fee of zero.
-* ``http_exchanges`` counts observed request/response exchanges only; null
-  means the adapter never reported a count.
+* ``http_exchanges`` always carries a non-negative integer observation;
+  ``http_exchanges_complete=None`` means the adapter never reported a count.
 """
 from __future__ import annotations
 
@@ -59,7 +59,7 @@ def validated_http_observation(value: Any) -> dict[str, Any] | None:
     status = value.get("status_code")
     if isinstance(status, bool) or not isinstance(status, int) or status < 0:
         return None
-    observation = {"status_code": status}
+    observation: dict[str, Any] = {"status_code": status}
     for key in ("mime_type", "content_encoding"):
         text = value.get(key)
         if not isinstance(text, str) or not text or len(text) > 128:
@@ -99,7 +99,7 @@ def validated_observation(value: Any) -> dict[str, Any] | None:
             or value.get("usage_scope") != USAGE_SCOPE):
         return None
     outcome = value.get("outcome")
-    if outcome not in OBSERVATION_OUTCOMES:
+    if not isinstance(outcome, str) or outcome not in OBSERVATION_OUTCOMES:
         return None
     result: dict[str, Any] = {
         "schema_version": ACQUISITION_OBSERVATION_SCHEMA,
@@ -117,8 +117,7 @@ def validated_observation(value: Any) -> dict[str, Any] | None:
             return None
         result[key] = count
     exchanges = value.get("http_exchanges")
-    if exchanges is not None and (isinstance(exchanges, bool)
-                                  or not isinstance(exchanges, int) or exchanges < 0):
+    if isinstance(exchanges, bool) or not isinstance(exchanges, int) or exchanges < 0:
         return None
     result["http_exchanges"] = exchanges
     cost = _validated_cost(value.get("cost_usd"))
@@ -142,14 +141,18 @@ def observation_from_budget(budget, *, outcome: str) -> dict[str, Any] | None:
     operation total.
     """
     from .download_budget import AcquisitionBudget
-    if not isinstance(budget, AcquisitionBudget) or outcome not in OBSERVATION_OUTCOMES:
+    if (not isinstance(budget, AcquisitionBudget) or not isinstance(outcome, str)
+            or outcome not in OBSERVATION_OUTCOMES):
         return None
     return {
         "schema_version": ACQUISITION_OBSERVATION_SCHEMA,
         "usage_scope": USAGE_SCOPE,
         "outcome": outcome,
         "provider_started": budget.provider_started,
-        "usage_complete": budget.usage_complete,
+        # Keep a known fee lower bound when another invocation lacked fee proof.
+        # This observation does not change acquisition/retry budget policy.
+        "usage_complete": budget.usage_complete and (
+            not budget.cost_reported or budget.cost_usage_complete),
         "wire_body_bytes": budget.wire_response_bytes_used,
         "wire_usage_complete": budget.wire_usage_complete,
         "entity_body_bytes": budget.response_bytes_used,

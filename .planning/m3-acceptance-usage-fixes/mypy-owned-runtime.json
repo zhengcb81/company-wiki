@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "mypy",
+    "--no-incremental",
+    "--cache-dir",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3uf-i4kt1eoh\\mypy",
+    "src/company_wiki/source_catalog/acquisition_observation.py",
+    "src/company_wiki/source_catalog/adapter_process.py",
+    "src/company_wiki/source_catalog/download_budget.py",
+    "src/company_wiki/source_catalog/dayu_sdk_cli.py"
+  ],
+  "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+  "exit_code": 1,
+  "raw_log_sha256": "b53696474921da8d4d4f7c6a7bf80ad969f53483ae81953f638f2146f71c131a",
+  "temp_restored": true
+}

@@ -1,0 +1,15 @@
+src\company_wiki\source_catalog\download_budget.py:165: error: Unsupported operand types for - ("str" and "Decimal")  [operator]
+src\company_wiki\source_catalog\download_budget.py:165: note: Left operand is of type "Decimal | str"
+src\company_wiki\source_catalog\download_budget.py:180: error: Unsupported operand types for > ("Decimal" and "str")  [operator]
+src\company_wiki\source_catalog\download_budget.py:180: note: Right operand is of type "Decimal | str"
+src\company_wiki\source_catalog\download_budget.py:251: error: Unsupported operand types for > ("Decimal" and "str")  [operator]
+src\company_wiki\source_catalog\download_budget.py:251: note: Right operand is of type "Decimal | str"
+src\company_wiki\source_catalog\download_budget.py:292: error: Unsupported operand types for > ("Decimal" and "str")  [operator]
+src\company_wiki\source_catalog\download_budget.py:292: note: Right operand is of type "Decimal | str"
+src\company_wiki\source_catalog\adapter_process.py:426: error: "AdapterProcessError" has no attribute "reported_retryable"  [attr-defined]
+src\company_wiki\source_catalog\dayu_sdk_cli.py:130: error: Cannot find implementation or library stub for module named "dayu.fins.downloaders.sec_downloader"  [import-not-found]
+src\company_wiki\source_catalog\dayu_sdk_cli.py:130: note: See https://mypy.readthedocs.io/en/stable/running_mypy.html#missing-imports
+src\company_wiki\source_catalog\dayu_sdk_cli.py:131: error: Cannot find implementation or library stub for module named "dayu.fins.pipelines.sec_filing_collection"  [import-not-found]
+src\company_wiki\source_catalog\dayu_sdk_cli.py:153: error: Cannot find implementation or library stub for module named "dayu.fins.downloaders.hkexnews_downloader"  [import-not-found]
+src\company_wiki\source_catalog\dayu_sdk_cli.py:154: error: Cannot find implementation or library stub for module named "dayu.fins.pipelines.cn_download_models"  [import-not-found]
+Found 9 errors in 3 files (checked 4 source files)

@@ -201,6 +201,7 @@ def main(argv: list[str] | None = None) -> int:
     def checkpoint(usage):
         print(json.dumps({"schema_version": "1.0", "status": "progress", "adapter": identity,
                           "acquisition_usage": usage,
+                          "acquisition_cost_observed": budget.cost_reported if budget else False,
                           "http_wire_bytes": budget.wire_response_bytes_used if budget else 0,
                           "http_exchanges": budget.http_exchanges_used if budget else 0,
                           "http_observation": budget.last_http_observation if budget else None}, sort_keys=True), file=sys.stderr, flush=True)
@@ -256,12 +257,14 @@ def main(argv: list[str] | None = None) -> int:
             "schema_version": "1.0", "response_bytes": 0, "cost_usd": "0"}
         print(json.dumps({"schema_version": "1.0", "status": "failed", "adapter": identity,
                           "error": error,
+                          "acquisition_cost_observed": budget.cost_reported if budget else False,
                           "http_wire_bytes": budget.wire_response_bytes_used if budget else 0,
                           "http_exchanges": budget.http_exchanges_used if budget else 0,
                           "http_observation": budget.last_http_observation if budget else None}, sort_keys=True), file=sys.stderr, flush=True)
         return 1
     print(json.dumps({"schema_version": "1.0", "status": "ok", "adapter": identity,
                       "acquisition_usage": usage_receipt(budget),
+                      "acquisition_cost_observed": budget.cost_reported,
                       "http_wire_bytes": budget.wire_response_bytes_used,
                       "http_exchanges": budget.http_exchanges_used,
                       "http_observation": budget.last_http_observation, **result}, sort_keys=True))

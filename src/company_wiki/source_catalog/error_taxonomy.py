@@ -113,6 +113,10 @@ def structured_error(exc: BaseException) -> dict[str, Any]:
     diagnostic = published_acquisition_failure(exc)
     if diagnostic is not None:
         result["acquisition_failure"] = diagnostic
+    from .acquisition_observation import published_acquisition_observation
+    observation = published_acquisition_observation(exc)
+    if observation is not None:
+        result["acquisition_observation"] = observation
     return result
 
 

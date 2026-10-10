@@ -1,0 +1,189 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+____ test_full_chain_hard_failure_preserves_primary_cause_and_unknown_cost ____
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/m3uf-objqp0tz/pytest/test_full_chain_hard_failure_p0')
+roots = (WindowsPath('C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/filing-fetch'), WindowsPath('C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/company-wiki'))
+loopback = <http.server.ThreadingHTTPServer object at 0x0000025442EC63C0>
+
+    def test_full_chain_hard_failure_preserves_primary_cause_and_unknown_cost(tmp_path, roots, loopback):
+        ff_root, cwp_root = roots
+        log_root = Path(os.environ["M3_E2E_LOG_ROOT"]) if os.environ.get("M3_E2E_LOG_ROOT") else None
+        _Handler.server_mode = "metadata-error"
+        base_url = f"http://127.0.0.1:{loopback.server_address[1]}"
+        env = _env(cwp_root / "src", base_url)
+        wiki, calls = _wiki(tmp_path, ff_root, cwp_root, "metadata-error", loopback.server_address[1])
+        request = tmp_path / "request.json"
+        request.write_text(json.dumps(_request("US", "AAPL", "Apple Inc.")), encoding="utf-8")
+        argv = [sys.executable, "-X", "utf8", "-B", str(RF_ROOT / "scripts" / "source_preparation.py"),
+                "--request-file", str(request), "--result-envelope", "--allow-download",
+                "--filing-fetch-root", str(ff_root),
+                "--company-wiki-config", str(wiki.root / "company_wiki.json"),
+                "--company-wiki-catalog-config", str(wiki.config_path), "--timeout-seconds", "120"]
+        result = _run("us_hard_failure", argv, env, tmp_path, log_root)
+>       assert result.returncode == 3, result.stderr + result.stdout
+E       AssertionError: {
+E           "schema_version": "source-preparation-result/1",
+E           "source": {
+E             "source_id": "urn:company-wiki:source:sha256:00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+E             "source_type": "regulatory_filing",
+E             "title": "Fixture Annual Report",
+E             "publisher": "company-wiki",
+E             "url": "https://fixture.invalid/report.txt",
+E             "published_date": "2026-03-20",
+E             "accessed_date": "2026-10-10",
+E             "page_or_section": "1",
+E             "capture": {
+E               "capture_schema_version": "1.0",
+E               "capture_method": "local_document",
+E               "tool_name": "company-wiki-source-version-reader",
+E               "tool_call_id": "urn:company-wiki:source:sha256:00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d|2026-10-10T19:48:52.682841+00:00",
+E               "captured_date": "2026-10-10",
+E               "snapshot_sha256": "00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+E               "content_treatment": "untrusted_data_only",
+E               "prompt_injection_status": "not_reviewed",
+E               "host_receipt": {
+E                 "host_receipt_schema_version": "1.0",
+E                 "issuer": "company-wiki",
+E                 "environment": "host-runtime",
+E                 "tool_name": "company-wiki-source-version-reader",
+E                 "action": "verified_read",
+E                 "event_sha256": "00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+E                 "timestamp": "2026-10-10T19:48:52.682841+00:00",
+E                 "receipt_sha256": "bd1de78e85efe3dac8c366ad67864cfb07c486a87014971a5951672149a6c476"
+E               },
+E               "receipt_sha256": "d9c50bcbeb20e73e1857dd13ecceb48643fdfb50598907bdaac19442a48f11f6"
+E             },
+E             "company_wiki_trace": {
+E               "source_ref": {
+E                 "byte_size": 4440,
+E                 "content_sha256": "00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+E                 "document_id": "urn:company-wiki:document:sha256:00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+E                 "mime_type": "text/plain",
+E                 "schema_version": "2.0",
+E                 "source_id": "urn:company-wiki:source:sha256:00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d"
+E               },
+E               "read_receipt": {
+E                 "byte_size": 4440,
+E                 "content_sha256": "00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+E                 "document_id": "urn:company-wiki:document:sha256:00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+E                 "policy_sha256": "b3426c73eeb7b68695e60f41755627cb7cb3f8894eaf466d80b5e05655f16866",
+E                 "read_at": "2026-10-10T19:48:52.682841+00:00",
+E                 "review": {
+E                   "evidence_sha256": null,
+E                   "policy_hash": null,
+E                   "reviewed_at": null,
+E                   "source_sha256": null,
+E                   "status": "not_reviewed"
+E                 },
+E                 "schema_version": "2.1",
+E                 "source_id": "urn:company-wiki:source:sha256:00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+E                 "source_read_policy_sha256": "f79b17b589c73d01ed046ec579e9293037401b42e30b6bceed589f8edb2e567e",
+E                 "status": "ok"
+E               },
+E               "source_manifest": {
+E                 "byte_size": 4440,
+E                 "canonical_entity_id": null,
+E                 "collector_name": null,
+E                 "collector_version": null,
+E                 "content_sha256": "00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+E                 "display_name": null,
+E                 "document_id": "urn:company-wiki:document:sha256:00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+E                 "document_kind": "annual_report",
+E                 "fiscal_period": "FY",
+E                 "fiscal_year": 2025,
+E                 "form_type": "10-K",
+E                 "language": "en",
+E                 "market": "US",
+E                 "mime_type": "text/plain",
+E                 "period_end": null,
+E                 "provider": "loopback",
+E                 "provider_document_id": "accession-one",
+E                 "published_date": "2026-03-20",
+E                 "retrieved_at": "2026-10-10T00:00:00Z",
+E                 "security_id": "AAPL",
+E                 "source_id": "urn:company-wiki:source:sha256:00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+E                 "source_url": "https://fixture.invalid/report.txt",
+E                 "title": "Fixture Annual Report"
+E               },
+E               "source_candidate": {
+E                 "resolution_outcome": "downloaded_new",
+E                 "download_events": 1
+E               }
+E             },
+E             "reuse_receipt": {
+E               "parser_calls": null,
+E               "llm_calls": null,
+E               "download_calls": 1,
+E               "outcome": "downloaded_new",
+E               "policy_hash": "b3426c73eeb7b68695e60f41755627cb7cb3f8894eaf466d80b5e05655f16866",
+E               "source_read_policy_sha256": "f79b17b589c73d01ed046ec579e9293037401b42e30b6bceed589f8edb2e567e",
+E               "prompt_injection_status": "not_reviewed",
+E               "artifact_read": [],
+E               "producer_events": [],
+E               "artifact_read_events": [],
+E               "artifact_failed_events": []
+E             }
+E           },
+E           "filing_fetch": {
+E             "schema_version": "2.0",
+E             "status": "source_candidate",
+E             "request_period": {
+E               "mode": "exact",
+E               "fiscal_year": 2025,
+E               "fiscal_period": null,
+E               "as_of_date": "2026-10-10"
+E             },
+E             "filing": {
+E               "status": "source_candidate",
+E               "source_ref": {
+E                 "byte_size": 4440,
+E                 "content_sha256": "00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+E                 "document_id": "urn:company-wiki:document:sha256:00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+E                 "mime_type": "text/plain",
+E                 "schema_version": "2.0",
+E                 "source_id": "urn:company-wiki:source:sha256:00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d"
+E               },
+E               "byte_verification": "pending_verified_open",
+E               "document_kind": "annual_report",
+E               "fiscal_year": 2025,
+E               "fiscal_period": "FY",
+E               "resolution_outcome": "downloaded_new",
+E               "download_events": 1
+E             },
+E             "transcript": {
+E               "status": "not_requested",
+E               "retryable": false
+E             },
+E             "calls": 2,
+E             "downloads": 1,
+E             "acquisition_observation": {
+E               "schema_version": "acquisition-observation/1",
+E               "usage_scope": "operation",
+E               "outcome": "downloaded_new",
+E               "provider_started": true,
+E               "usage_complete": true,
+E               "wire_usage_complete": true,
+E               "http_exchanges_complete": true,
+E               "wire_body_bytes": 191,
+E               "entity_body_bytes": 4553,
+E               "http_exchanges": 3,
+E               "cost_usd": "0.0009",
+E               "http_observation": {
+E                 "status_code": 200,
+E                 "mime_type": "text/plain",
+E                 "content_encoding": "gzip",
+E                 "wire_content_length": 78
+E               }
+E             }
+E           },
+E           "narrative": null
+E         }
+E         
+E       assert 0 == 3
+E        +  where 0 = CompletedProcess(args=['C:\\Miniconda\\python.exe', '-X', 'utf8', '-B', 'C:\\Users\\郑曾波\\.codex\\worktrees\\m3-accepta...tent_encoding": "gzip",\n        "wire_content_length": 78\n      }\n    }\n  },\n  "narrative": null\n}\n', stderr='').returncode
+
+tests\test_m3_acquisition_usage_e2e.py:338: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_m3_acquisition_usage_e2e.py::test_full_chain_hard_failure_preserves_primary_cause_and_unknown_cost
+1 failed in 4.42s

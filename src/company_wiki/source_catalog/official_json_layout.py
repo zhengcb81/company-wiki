@@ -363,8 +363,9 @@ def _describe_record(layout: JsonLayout, node: JsonStructureNode
     members = node.members()
     provider_id: Any = None
     id_node = members.get(layout.record_id_field)
-    if id_node is not None and id_node.kind in {"number", "string"}:
-        provider_id = id_node.value
+    if id_node is not None:
+        if id_node.kind == "string" or (id_node.kind == "number" and type(id_node.value) is int):
+            provider_id = id_node.value
 
     issuer_observed: dict[str, Any] = {
         "provider_company_ids": [],
@@ -376,15 +377,15 @@ def _describe_record(layout: JsonLayout, node: JsonStructureNode
     primary_activity: int | None = None
     for name in layout.activity_issuer_fields:
         member = members.get(name)
-        if member is not None and member.kind == "number":
-            value = int(member.value)
+        if member is not None and member.kind == "number" and type(member.value) is int:
+            value = member.value
             activity_ids.append(value)
             if name == layout.activity_issuer_fields[0] and primary_activity is None:
                 primary_activity = value
     for name in layout.company_issuer_fields:
         member = members.get(name)
-        if member is not None and member.kind == "number":
-            issuer_observed["provider_company_id"] = int(member.value)
+        if member is not None and member.kind == "number" and type(member.value) is int:
+            issuer_observed["provider_company_id"] = member.value
     if layout.stock_code_field:
         member = members.get(layout.stock_code_field)
         if member is not None and member.kind == "string" and member.decoded:

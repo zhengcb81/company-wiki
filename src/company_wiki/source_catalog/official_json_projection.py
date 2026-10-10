@@ -38,7 +38,7 @@ from .official_json_structure import (
 
 PROJECTION_SCHEMA_VERSION = "source-projection-ref/1"
 PROJECTION_ID_PREFIX = "urn:company-wiki:source-projection:sha256:"
-CWP_OFFICIAL_JSON_PARSER_ID = "cwp_official_json/1.0.0"
+CWP_OFFICIAL_JSON_PARSER_ID = "cwp_official_json/1.0.1"
 _PAGE_TIME_FORMATS = ("%Y-%m-%d %H:%M:%S", "%Y-%m-%dT%H:%M:%S")
 _ISSUER_FIELDS = frozenset({
     "market", "security_id", "provider_company_id",
@@ -107,6 +107,7 @@ class FieldBinding:
 
 @dataclass(frozen=True)
 class ProjectionRecord:
+    parent_content_sha256: str
     record_pointer: str
     provider_record_id: Any
     record_token_sha256: str
@@ -124,6 +125,7 @@ class ProjectionRecord:
 
     def to_dict(self) -> dict[str, Any]:
         return {
+            "parent_content_sha256": self.parent_content_sha256,
             "record_pointer": self.record_pointer,
             "provider_record_id": self.provider_record_id,
             "record_token_sha256": self.record_token_sha256,
@@ -231,6 +233,11 @@ def _record_proves_issuer(record: RecordObservation, issuer: dict[str, Any]) -> 
     requested_canonical = issuer.get("canonical_name")
 
     activity_ids = observed.get("provider_company_ids") or []
+    # Distinct question/answer issuer IDs are separate subjects. A record-level
+    # projection cannot safely claim either issuer owns every field. Retain
+    # the raw record, but never merge those IDs into an answer ownership proof.
+    if len(set(activity_ids)) > 1:
+        return False
     if requested_activity is not None:
         if activity_ids:
             if requested_activity in activity_ids:
@@ -255,6 +262,8 @@ def _record_proves_issuer(record: RecordObservation, issuer: dict[str, Any]) -> 
         normalized = {name.casefold() for name in names}
         if requested_canonical.casefold() in normalized:
             matched_any = True
+        else:
+            return False
     return matched_any
 
 
@@ -283,6 +292,10 @@ def build_source_projection(
         raise ProjectionError("invalid_issuer")
     if not isinstance(as_of_date, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", as_of_date):
         raise ProjectionError("invalid_as_of_date")
+    try:
+        datetime.strptime(as_of_date, "%Y-%m-%d")
+    except ValueError:
+        raise ProjectionError("invalid_as_of_date") from None
     layout = registered_layout(layout_id)
 
     pages: list[dict[str, Any]] = []
@@ -290,6 +303,8 @@ def build_source_projection(
     for sha, size, doc in parent_pages:
         if not isinstance(sha, str) or not _SHA256_RE.fullmatch(sha):
             raise ProjectionError("invalid_parent_sha")
+        if size != len(doc.raw) or hashlib.sha256(doc.raw).hexdigest() != sha:
+            raise ProjectionError("parent_version_mismatch")
         try:
             observation = describe_layout_page(layout_id, doc)
         except OfficialJsonLayoutError as exc:
@@ -302,6 +317,24 @@ def build_source_projection(
             "pagination": dict(observation.pagination),
             "records": len(observation.records),
         })
+
+    # Keep every observed record occurrence; overlap is a coverage diagnostic,
+    # not a reason to reject or erase a captured page. Exact copies may be
+    # selected once; conflicting versions of one provider ID stay unselected.
+    record_id_counts: dict[str, int] = {}
+    record_id_hashes: dict[str, set[str]] = {}
+    missing_record_ids = 0
+    for _, observation in observations:
+        for record in observation.records:
+            if record.provider_record_id is None:
+                missing_record_ids += 1
+                continue
+            key = _canonical_json(record.provider_record_id)
+            record_id_counts[key] = record_id_counts.get(key, 0) + 1
+            record_id_hashes.setdefault(key, set()).add(record.record_token_sha256)
+    conflicting_ids = {key for key, hashes in record_id_hashes.items() if len(hashes) > 1}
+    duplicate_occurrences = sum(count - 1 for count in record_id_counts.values())
+    seen_record_ids: set[str] = set()
 
     proof_found = False
     for _, observation in observations:
@@ -320,17 +353,33 @@ def build_source_projection(
     other_issuer = 0
     unattributed = 0
     as_of_excluded = 0
-    for _, observation in observations:
+    for parent_sha, observation in observations:
         for record in observation.records:
             kind = classify_record(layout, record)
+            record_key = (_canonical_json(record.provider_record_id)
+                          if record.provider_record_id is not None else None)
+            repeated_id = record_key is not None and record_key in seen_record_ids
+            if record_key is not None:
+                seen_record_ids.add(record_key)
             proves = _record_proves_issuer(record, issuer)
             created = _parse_page_time(record.times.get("crtTime"))
             if created is None:
                 created = _parse_page_time(
                     record.times.get("created_at"))
-            if created is not None and created > as_of_date:
+            # A current capture may contain a post-cutoff revision of a much
+            # older question. Creation time is not answer publication time.
+            record_times = {key: value for key, value in record.times.items()
+                            if key not in {"questionDate", "questionUpdDate"}}
+            parsed_times = [_parse_page_time(value) for value in record_times.values()]
+            availability = max((value for value in parsed_times if value is not None), default=None)
+            unknown_revision = any(value is None for value in parsed_times)
+            answer_revision_known = any(
+                _parse_page_time(record.times.get(key)) is not None
+                for key in ("updTime", "auditTime", "updated_at"))
+            if availability is not None and availability > as_of_date:
                 eligibility = "after_as_of"
-            elif created is None:
+            elif (created is None or unknown_revision
+                  or (kind == "precollected_question_with_answer" and not answer_revision_known)):
                 eligibility = "unknown"
             else:
                 eligibility = "eligible"
@@ -348,6 +397,9 @@ def build_source_projection(
                     unattributed += 1
                     reason = "unattributed"
                 selected = False
+            elif record_key in conflicting_ids:
+                selected = False
+                reason = "record_id_conflict"
             elif eligibility == "after_as_of":
                 as_of_excluded += 1
                 selected = False
@@ -355,11 +407,15 @@ def build_source_projection(
             elif eligibility == "unknown":
                 selected = False
                 reason = "record_time_unknown"
+            elif repeated_id:
+                selected = False
+                reason = "duplicate_record_overlap"
             else:
                 selected = True
                 selected_count += 1
                 reason = "issuer_and_as_of_eligible"
             projection_records.append(ProjectionRecord(
+                parent_content_sha256=parent_sha,
                 record_pointer=record.pointer,
                 provider_record_id=record.provider_record_id,
                 record_token_sha256=record.record_token_sha256,
@@ -376,23 +432,50 @@ def build_source_projection(
                 as_of_eligibility=eligibility,
             ))
 
-    pagination_complete = bool(pages) and all(
-        page["envelope_status"] == "ok" and page["pagination"] for page in pages)
-    if pagination_complete:
-        declared = pages[0]["pagination"].get("pages")
-        total = pages[0]["pagination"].get("total")
-        currents = [page["pagination"].get("current") for page in pages]
-        pagination_complete = (
-            isinstance(declared, int) and isinstance(total, int)
-            and len(pages) == declared
-            and currents == list(range(1, declared + 1))
-            and sum(page["records"] for page in pages) == total
-        )
+    diagnostics: list[str] = []
+    if not all(page["envelope_status"] == "ok" for page in pages):
+        diagnostics.append("page_envelope_incomplete")
+    pagination_valid = all(
+        all(type(page["pagination"].get(key)) is int
+            and page["pagination"][key] >= (0 if key == "total" else 1)
+            for key in ("current", "size", "pages", "total"))
+        for page in pages)
+    if not pagination_valid:
+        diagnostics.append("pagination_metadata_invalid")
+    metadata_consistent = pagination_valid and all(
+        all(page["pagination"][key] == pages[0]["pagination"][key]
+            for key in ("size", "pages", "total")) for page in pages)
+    if pagination_valid and not metadata_consistent:
+        diagnostics.append("pagination_metadata_conflict")
+    sequence_complete = False
+    count_matches = False
+    if metadata_consistent:
+        declared = pages[0]["pagination"]["pages"]
+        total = pages[0]["pagination"]["total"]
+        currents = [page["pagination"]["current"] for page in pages]
+        sequence_complete = len(pages) == declared and sorted(currents) == list(range(1, declared + 1))
+        count_matches = sum(page["records"] for page in pages) == total
+        if not sequence_complete:
+            diagnostics.append("pagination_page_sequence_incomplete")
+        if not count_matches:
+            diagnostics.append("pagination_record_count_mismatch")
+    if missing_record_ids:
+        diagnostics.append("pagination_record_ids_missing")
+    if duplicate_occurrences:
+        diagnostics.append("pagination_record_id_overlap")
+    if conflicting_ids:
+        diagnostics.append("pagination_record_id_conflict")
+    pagination_complete = bool(pages) and not diagnostics and sequence_complete and count_matches
     coverage = {
         "pages": pages,
         "page_envelope_complete": all(
             page["envelope_status"] == "ok" for page in pages),
         "pagination_complete": pagination_complete,
+        "diagnostics": diagnostics,
+        "unique_record_ids": len(record_id_counts),
+        "duplicate_record_occurrences": duplicate_occurrences,
+        "conflicting_record_ids": len(conflicting_ids),
+        "missing_record_ids": missing_record_ids,
         "issuer_records_selected": selected_count,
         "other_issuer_records": other_issuer,
         "unattributed_records": unattributed,
@@ -440,6 +523,16 @@ def build_source_projection(
 
 
 def projection_from_dict(value: Any) -> SourceProjection:
+    """Decode a DTO without leaking incidental KeyError/TypeError on bad input."""
+    try:
+        return _projection_from_dict(value)
+    except ProjectionError:
+        raise
+    except (KeyError, TypeError, AttributeError, ValueError):
+        raise ProjectionError("invalid_projection_payload") from None
+
+
+def _projection_from_dict(value: Any) -> SourceProjection:
     if not isinstance(value, dict):
         raise ProjectionError("invalid_projection_payload")
     required = {"schema_version", "projection_id", "projection_sha256",
@@ -449,6 +542,15 @@ def projection_from_dict(value: Any) -> SourceProjection:
         raise ProjectionError("invalid_projection_payload")
     if value["schema_version"] != PROJECTION_SCHEMA_VERSION:
         raise ProjectionError("unsupported_projection_version")
+    adapter = value.get("adapter")
+    if (not isinstance(adapter, dict)
+            or not isinstance(adapter.get("structure_parser_version"), str)):
+        raise ProjectionError("invalid_projection_payload")
+    if adapter["structure_parser_version"] != CWP_JSON_STRUCTURE_PARSER_VERSION:
+        # The sealed 1.0.0 parser produced empty container hashes and omitted
+        # per-record parent binding. Never silently reinterpret that identity
+        # using 1.0.1; the parent raw bytes remain readable independently.
+        raise ProjectionError("unsupported_parser_version")
     records = []
     for item in value["records"]:
         bindings = tuple(
@@ -465,6 +567,7 @@ def projection_from_dict(value: Any) -> SourceProjection:
             )
             for binding in item["fields"])
         records.append(ProjectionRecord(
+            parent_content_sha256=item["parent_content_sha256"],
             record_pointer=item["record_pointer"],
             provider_record_id=item["provider_record_id"],
             record_token_sha256=item["record_token_sha256"],
@@ -551,7 +654,7 @@ def persist_projection(catalog, projection: SourceProjection) -> str:
     if projection.projection_id != PROJECTION_ID_PREFIX + projection.projection_sha256:
         raise ProjectionError("projection_id_mismatch")
     path = _projections_root(catalog) / (projection.projection_sha256 + ".json")
-    encoded = projection.canonical_json().encode("utf-8")
+    encoded = _canonical_json(projection.to_dict()).encode("utf-8")
     if path.exists():
         if path.read_bytes() != encoded + b"\n":
             raise ProjectionError("projection_store_conflict")
@@ -586,6 +689,29 @@ def load_projection(catalog, projection_id: str) -> SourceProjection:
     return projection_from_dict(payload)
 
 
+def _verify_projection_from_parents(catalog, projection: SourceProjection) -> dict[str, JsonStructureDocument]:
+    if projection.adapter.get("structure_parser_version") != CWP_JSON_STRUCTURE_PARSER_VERSION:
+        raise ProjectionError("unsupported_parser_version")
+    docs: dict[str, JsonStructureDocument] = {}
+    pages = []
+    reader = _reader(catalog)
+    for value in projection.parent_source_refs:
+        ref = _ref_from_dict(value)
+        content = reader.open_version(ref, purpose="source_export")
+        doc = parse_json_structure(content.data)
+        docs[ref.content_sha256] = doc
+        pages.append((ref.content_sha256, ref.byte_size, doc))
+    layout_id = projection.adapter.get("layout_id")
+    if not isinstance(layout_id, str):
+        raise ProjectionError("invalid_projection_payload")
+    rebuilt = build_source_projection(
+        parent_pages=pages, layout_id=layout_id,
+        issuer=projection.issuer, as_of_date=projection.as_of_date)
+    if rebuilt.to_dict() != projection.to_dict():
+        raise ProjectionError("projection_semantics_mismatch")
+    return docs
+
+
 def replay_projection(catalog, projection: SourceProjection,
                       *, record_pointer: str | None = None) -> dict[str, Any]:
     """Verify parents, pointers, byte slices, hashes and roles before display.
@@ -594,30 +720,19 @@ def replay_projection(catalog, projection: SourceProjection,
     against the exact original bytes through the normal reader, its recorded
     parser identity, and the recorded role and issuer attribution.
     """
-    if projection.adapter.get("structure_parser_version") != (
-            CWP_JSON_STRUCTURE_PARSER_VERSION):
-        raise ProjectionError("unsupported_parser_version")
-    reader = _reader(catalog)
-    docs: dict[str, Any] = {}
-    for ref_value in projection.parent_source_refs:
-        ref = _ref_from_dict(ref_value)
-        content = reader.open_version(ref, purpose="source_export")
-        docs[ref.content_sha256] = parse_json_structure(content.data)
+    docs = _verify_projection_from_parents(catalog, projection)
     verified: list[dict[str, Any]] = []
     for record in projection.records:
         if record_pointer is not None and record.record_pointer != record_pointer:
             continue
-        node = None
-        doc = None
-        for sha, candidate_doc in docs.items():
-            try:
-                candidate = candidate_doc.at_pointer(record.record_pointer)
-            except JsonStructureError:
-                continue
-            if candidate.encoded_token_sha256 == record.record_token_sha256:
-                node, doc = candidate, candidate_doc
-                break
-        if node is None or doc is None:
+        doc = docs.get(record.parent_content_sha256)
+        if doc is None:
+            raise ProjectionError("parent_record_binding_mismatch")
+        try:
+            node = doc.at_pointer(record.record_pointer)
+        except JsonStructureError as exc:
+            raise ProjectionError("pointer_replay_failed") from exc
+        if node.encoded_token_sha256 != record.record_token_sha256:
             raise ProjectionError("pointer_replay_failed")
         fields: list[dict[str, Any]] = []
         for binding in record.fields:
@@ -647,6 +762,7 @@ def replay_projection(catalog, projection: SourceProjection,
                 "translation_of": binding.translation_of,
             })
         verified.append({
+            "parent_content_sha256": record.parent_content_sha256,
             "record_pointer": record.record_pointer,
             "provider_record_id": record.provider_record_id,
             "record_kind": record.record_kind,
@@ -682,11 +798,15 @@ def evidence_span_for_field(projection: SourceProjection, record: ProjectionReco
         EvidenceSpan,
         ParseStatus,
     )
-    parent = projection.parent_source_refs[0]
+    parent = next((ref for ref in projection.parent_source_refs
+                   if ref["content_sha256"] == record.parent_content_sha256), None)
+    if parent is None:
+        raise ProjectionError("parent_record_binding_mismatch")
     structured = {
         "source_locator": binding.locator,
         "pointer": record.record_pointer + "/" + binding.field,
         "record_pointer": record.record_pointer,
+        "parent_content_sha256": record.parent_content_sha256,
         "provider_record_id": record.provider_record_id,
         "record_kind": record.record_kind,
         "role": binding.role,
@@ -703,7 +823,7 @@ def evidence_span_for_field(projection: SourceProjection, record: ProjectionReco
         raw_text=unicodedata.normalize("NFC", decoded_text),
         structured_value=structured,
         parser_name="cwp_official_json",
-        parser_version="1.0.0",
+        parser_version="1.0.1",
         parse_status=ParseStatus.PARSED,
         quality_flags=[],
     )
@@ -715,28 +835,22 @@ SOURCE_PROJECTION_EXPORT_ID_PREFIX = "urn:company-wiki:source-projection-export:
 
 def build_projection_export(catalog, projection: SourceProjection) -> dict[str, Any]:
     """Versioned projection export: refs, projection and evidence spans."""
-    reader = _reader(catalog)
-    parents: dict[str, bytes] = {}
-    for ref_value in projection.parent_source_refs:
-        ref = _ref_from_dict(ref_value)
-        content = reader.open_version(ref, purpose="source_export")
-        parents[ref.content_sha256] = content.data
-    texts: dict[str, str] = {}
-    for ref_value in projection.parent_source_refs:
-        doc = parse_json_structure(parents[ref_value["content_sha256"]])
-        for node in _iter_string_nodes(doc.root):
-            if node.decoded is not None:
-                texts[node.decoded_sha256] = node.decoded
+    docs = _verify_projection_from_parents(catalog, projection)
+    ordinals = {
+        sha: {node.pointer: ordinal for ordinal, node in enumerate(_iter_string_nodes(doc.root), 1)}
+        for sha, doc in docs.items()
+    }
     spans: list[dict[str, Any]] = []
-    paragraph = 0
     for record in projection.records:
         if not record.selected:
             continue
+        doc = docs[record.parent_content_sha256]
         for binding in record.fields:
-            paragraph += 1
+            node = doc.at_pointer(record.record_pointer + "/" + binding.field)
             span = evidence_span_for_field(
-                projection, record, binding, paragraph_index=paragraph,
-                decoded_text=texts.get(binding.decoded_sha256, ""))
+                projection, record, binding,
+                paragraph_index=ordinals[record.parent_content_sha256][node.pointer],
+                decoded_text=node.decoded or "")
             spans.append(span.to_dict())
     payload = {
         "schema_version": SOURCE_PROJECTION_EXPORT_SCHEMA,

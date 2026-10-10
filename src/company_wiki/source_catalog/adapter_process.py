@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from contextlib import contextmanager
+from decimal import Decimal
 import json
 import os
 from pathlib import Path
@@ -45,6 +46,10 @@ class AdapterProcessError(RuntimeError):
     http_observation: dict[str, Any] | None = None
     # CWP's own never-launched proof, not a provider fee statement.
     synthetic_zero_receipt: bool = False
+    # Certainty of the new sibling is separate from the old 1.0 counter.
+    # Legacy positive figures are reported lower bounds; initial zero is
+    # unknown unless a producer supplies explicit fee proof.
+    acquisition_cost_observed: bool | None = None
 
     def __init__(self, message: str = "") -> None:
         super().__init__(message)
@@ -263,11 +268,17 @@ class JsonCommandAdapter:
         http_observation = validated_http_observation(response.get("http_observation"))
         if response.get("http_wire_usage_complete", True) is not True:
             budget.wire_usage_complete = False
+        fee_proof = response.get("acquisition_cost_observed")
+        explicit_fee = fee_proof is True
+        # A positive legacy figure retains reported evidence, but cannot prove
+        # complete operation fees. A producer's false proof remains unknown.
+        reported_fee = fee_proof is not False and Decimal(usage["cost_usd"]) > 0
         budget.record_reported_usage(response_bytes=usage["response_bytes"],
                                      cost_usd=usage["cost_usd"], wire_bytes=wire,
                                      http_exchanges=exchanges,
                                      http_observation=http_observation,
-                                     cost_observed=not synthetic_cost)
+                                     cost_observed=(not synthetic_cost and (explicit_fee or reported_fee)),
+                                     cost_complete=(not synthetic_cost and explicit_fee))
 
     @classmethod
     def _charge_failure_usage(cls, exc: AdapterProcessError, budget: AcquisitionBudget) -> None:
@@ -292,7 +303,8 @@ class JsonCommandAdapter:
                                        "http_wire_bytes": exc.http_wire_bytes,
                                        "http_wire_usage_complete": exc.http_wire_usage_complete,
                                        "http_exchanges": exc.http_exchanges,
-                                       "http_observation": exc.http_observation}, budget,
+                                       "http_observation": exc.http_observation,
+                                       "acquisition_cost_observed": exc.acquisition_cost_observed}, budget,
                                       synthetic_cost=exc.synthetic_zero_receipt)
 
     def _run(
@@ -379,6 +391,8 @@ class JsonCommandAdapter:
             if verified_response is not None:
                 exc.provider_started = True
                 exc.acquisition_usage = validated_usage(verified_response.get("acquisition_usage"))
+                exc.acquisition_cost_observed = (verified_response.get("acquisition_cost_observed")
+                                                if type(verified_response.get("acquisition_cost_observed")) is bool else None)
                 exc.http_wire_bytes = verified_response.get("http_wire_bytes")
                 exc.http_wire_usage_complete = verified_response.get("http_wire_usage_complete", True)
                 exchanges = verified_response.get("http_exchanges")
@@ -411,6 +425,8 @@ class JsonCommandAdapter:
                     exc.retryable = retryable_raw
                     exc.reported_retryable = retryable_raw
                 final_payload = json.loads(detail.splitlines()[-1])
+                exc.acquisition_cost_observed = (final_payload.get("acquisition_cost_observed")
+                                                if type(final_payload.get("acquisition_cost_observed")) is bool else None)
                 exc.http_wire_bytes = final_payload.get("http_wire_bytes")
                 exc.http_wire_usage_complete = final_payload.get("http_wire_usage_complete", True)
                 exchanges = final_payload.get("http_exchanges")
@@ -474,6 +490,8 @@ class JsonCommandAdapter:
             ):
                 continue
             exc.acquisition_usage = validated_usage(value["acquisition_usage"])
+            exc.acquisition_cost_observed = (value.get("acquisition_cost_observed")
+                                                if type(value.get("acquisition_cost_observed")) is bool else None)
             exc.http_wire_bytes = value.get("http_wire_bytes")
             exc.http_wire_usage_complete = False
             checkpoint_exchanges = value.get("http_exchanges")

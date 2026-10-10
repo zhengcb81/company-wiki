@@ -1,0 +1,28 @@
+{
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/test_m3_acquisition_usage_acceptance.py",
+    "tests/test_m3_acquisition_usage_ff.py",
+    "tests/test_failure_usage_continuity.py",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3uf-1u2pqzsp\\pytest"
+  ],
+  "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\filing-fetch",
+  "exit_code": 0,
+  "raw_log": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\.planning\\m3-acceptance-usage-fixes\\green-filing-fetch.log",
+  "raw_log_sha256": "89419223416660b05352d3bb3f52472493e9d2d7014729c755269bec91802fa4",
+  "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3uf-1u2pqzsp",
+  "temp_restored": true,
+  "external_calls": 0,
+  "model_calls": 0,
+  "paid_tokens": 0,
+  "paid_micro_usd": 0
+}
