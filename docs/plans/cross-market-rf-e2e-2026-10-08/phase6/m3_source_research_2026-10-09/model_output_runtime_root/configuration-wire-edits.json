@@ -1,0 +1,27 @@
+{
+  "observed_at": "2026-10-09T21:50:00.687617+00:00",
+  "worktree": "C:\\Users\\郑曾波\\.codex\\worktrees\\fresh-capture-20261009\\company-wiki",
+  "changes": [
+    {
+      "path": "scripts/config.py",
+      "old_lf_sha256": "321d82e37adbdcd3267d880e197bacc1f2b87dc51f2a6584cf626c6f8c32f117",
+      "new_lf_sha256": "ced9fb0a0bb3a9892d52dfccac88a23387116857ab902cdde663b8bd456a92d4"
+    },
+    {
+      "path": "scripts/llm_client.py",
+      "old_lf_sha256": "2535da48d4774c879698600d93d1a850b0ac383ba19d666bd43db97f12a2d49b",
+      "new_lf_sha256": "7cc9532259d49c7acb6c053b6e322f980971293b2a18212447a11822a0523ebd"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_http_model.py",
+      "old_lf_sha256": "6c14c8d15fb349acc8dd35a6fadad15bd91ce483b273435b46f9b8fe7d8b278f",
+      "new_lf_sha256": "1cfa089d9424a34ff4bd9c6d60b3e5bf684fab598931827a1425a7fafe75abfc"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_batch_request.py",
+      "old_lf_sha256": "6f1367ec5431c61e0ce8a48c9bbfe2bb3d78ca4d67fb10b1e06521be65c8be44",
+      "new_lf_sha256": "b766441914a7c744e5ae7c3ad01f4d44aba4553519bc85eb59206f0af2c40c00"
+    }
+  ],
+  "production_config_changed": false
+}

@@ -1,0 +1,30 @@
+{
+  "observed_at": "2026-10-09T21:53:32.166348+00:00",
+  "started_at": "2026-10-09T21:53:22.257636+00:00",
+  "elapsed_seconds": 9.909,
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "pytest_asyncio.plugin",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-policy-compat-33e_2i31\\pytest",
+    "tests/unit/test_llm_client.py",
+    "tests/unit/test_llm_defaults.py",
+    "tests/unit/test_narrative_batch_request.py",
+    "tests/unit/test_narrative_model_request.py"
+  ],
+  "returncode": 0,
+  "own_temp_restored_absent": true,
+  "production_config_unchanged": true,
+  "provider_calls": 0,
+  "paid_model_calls": 0,
+  "log_sha256": "abd0f9b91f7c61cfec454d174e8900c276baa0a2d6bc995375a5caa50b220552"
+}

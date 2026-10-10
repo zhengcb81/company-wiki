@@ -1,0 +1,587 @@
+{
+  "status": "factual current disposition; original matrix unchanged",
+  "original_roots": 30,
+  "original_company_findings": 64,
+  "expert_findings_separate": 2,
+  "dispositions": [
+    {
+      "old_root_cause_id": "RC01",
+      "old_type": "code",
+      "original_mechanism": "Catalog locale is passed unnormalized into a narrower narrative language contract.",
+      "old_report_issue_keys": [
+        "cn-688012/storage/STORAGE-001",
+        "cn-688012/process/PROCESS-003"
+      ],
+      "new_root_ids": [
+        "R02"
+      ],
+      "current_disposition": "published locale fix; M3 entered model; no reconstruction",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W01"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC02",
+      "old_type": "code",
+      "original_mechanism": "Configured model output limit is exhausted despite existing twenty-claim schema; bounded output planning/model compliance is not established.",
+      "old_report_issue_keys": [
+        "cn-688012/storage/STORAGE-002",
+        "cn-688012/process/PROCESS-004"
+      ],
+      "new_root_ids": [
+        "R06",
+        "R07"
+      ],
+      "current_disposition": "still real truncation; MAIN policy wire candidate only; runtime/meter pending",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W04"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC03",
+      "old_type": "code",
+      "original_mechanism": "General canonical filenames depend on long title/provider ID, unlike the existing short transcript branch, and atomic suffix exceeds Windows path capacity.",
+      "old_report_issue_keys": [
+        "cn-688012/storage/STORAGE-003",
+        "cn-688012/fetch/FETCH-004",
+        "cn-688012/process/PROCESS-006",
+        "hk-00700/storage/STORAGE-002",
+        "hk-00700/fetch/FETCH-003"
+      ],
+      "new_root_ids": [
+        "R01"
+      ],
+      "current_disposition": "short canonical path engineering accepted; no duplicate construction",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W01"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC04",
+      "old_type": "code",
+      "original_mechanism": "Official import deletes its staged byte copy on all outcomes; in-memory capture callers have no durable recovery body after a failed write.",
+      "old_report_issue_keys": [
+        "cn-688012/storage/STORAGE-003",
+        "cn-688012/fetch/FETCH-004",
+        "cn-688012/process/PROCESS-006"
+      ],
+      "new_root_ids": [
+        "R01"
+      ],
+      "current_disposition": "durable stage/resume engineering accepted; old lost response not recovered",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W01"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC05",
+      "old_type": "code",
+      "original_mechanism": "Candidate matching predominantly uses Simplified Chinese forms without a source-preserving Traditional Chinese match representation.",
+      "old_report_issue_keys": [
+        "hk-00700/storage/STORAGE-003"
+      ],
+      "new_root_ids": [
+        "R04"
+      ],
+      "current_disposition": "Traditional matching initial engineering accepted; M3 business recall remains R04",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W03"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC06",
+      "old_type": "code",
+      "original_mechanism": "Minimal matching windows and bounded completion operate on physical fragments rather than preserving complete subject/action/qualification groups.",
+      "old_report_issue_keys": [
+        "cn-688012/storage/STORAGE-004",
+        "hk-00700/storage/STORAGE-003",
+        "us-msft/storage/STORAGE-003"
+      ],
+      "new_root_ids": [
+        "R04"
+      ],
+      "current_disposition": "initial semantic groups accepted; M3 subject/qualification gaps remain R04",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W03"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC07",
+      "old_type": "code",
+      "original_mechanism": "Prompt rows omit semantic group membership; claim validation checks citation ID membership and roles, not coverage of all propositions stated in a merged claim.",
+      "old_report_issue_keys": [
+        "hk-00700/storage/STORAGE-005",
+        "us-msft/storage/STORAGE-003"
+      ],
+      "new_root_ids": [
+        "R05"
+      ],
+      "current_disposition": "initial group/citation wire accepted; proposition/period/perimeter remains R05",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W04"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC08",
+      "old_type": "code",
+      "original_mechanism": "Official MIME and deterministic normalization dispatch do not support DOCX IR originals.",
+      "old_report_issue_keys": [
+        "cn-688012/storage/STORAGE-005",
+        "cn-688012/fetch/FETCH-001",
+        "cn-688012/process/PROCESS-002",
+        "cn-688012/analyst/ANALYST-003"
+      ],
+      "new_root_ids": [
+        "R03"
+      ],
+      "current_disposition": "DOCX/native formats engineering accepted; latest IR body still unavailable",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W03"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC09",
+      "old_type": "research",
+      "original_mechanism": "The execution workflow records discovered/partially searched management materials but does not complete materiality-based official-source coverage and target inventory.",
+      "old_report_issue_keys": [
+        "cn-688012/storage/STORAGE-005",
+        "cn-688012/fetch/FETCH-001",
+        "cn-688012/fetch/FETCH-002",
+        "cn-688012/process/PROCESS-002",
+        "cn-688012/analyst/ANALYST-003",
+        "hk-00700/storage/STORAGE-004",
+        "hk-00700/fetch/FETCH-004",
+        "hk-00700/process/PROCESS-002",
+        "hk-00700/analyst/ANALYST-003",
+        "us-msft/storage/STORAGE-004",
+        "us-msft/analyst/ANALYST-003"
+      ],
+      "new_root_ids": [
+        "R14",
+        "R15"
+      ],
+      "current_disposition": "new sources/reads partially improved; material coverage/external gaps remain",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W08"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC10",
+      "old_type": "data",
+      "original_mechanism": "Exact primary publication/historical availability evidence is absent or contradictory for intact existing originals. Strict historical selection correctly refuses an unknown fact.",
+      "old_report_issue_keys": [
+        "cn-688012/storage/STORAGE-007",
+        "cn-688012/fetch/FETCH-003",
+        "cn-688012/process/PROCESS-007",
+        "hk-00700/storage/STORAGE-001",
+        "hk-00700/fetch/FETCH-002",
+        "hk-00700/fetch/FETCH-004",
+        "hk-00700/process/PROCESS-002",
+        "hk-00700/analyst/ANALYST-003"
+      ],
+      "new_root_ids": [
+        "R08"
+      ],
+      "current_disposition": "HK H1 exact-SHA dated and used; CN FY24/overview unknown remains",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W01"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC11",
+      "old_type": "code",
+      "original_mechanism": "Title-null source manifests block RF preparation, while current generic source fact correction omits title.",
+      "old_report_issue_keys": [
+        "us-msft/storage/STORAGE-001",
+        "us-msft/fetch/FETCH-002",
+        "us-msft/process/PROCESS-002"
+      ],
+      "new_root_ids": [
+        "R08"
+      ],
+      "current_disposition": "title/form facts plus consumer display fixed; SEC M3 sources used",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W01"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC12",
+      "old_type": "code",
+      "original_mechanism": "FF exchange normalization sends hkex into an ET request schema whose capabilities accept only auto/nasdaq/nyse.",
+      "old_report_issue_keys": [
+        "hk-00700/storage/STORAGE-004",
+        "hk-00700/fetch/FETCH-001",
+        "hk-00700/process/PROCESS-002",
+        "hk-00700/analyst/ANALYST-003"
+      ],
+      "new_root_ids": [
+        "R15"
+      ],
+      "current_disposition": "HK exchange request repaired; actual ET unsupported_market external remains",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W08"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC13",
+      "old_type": "config",
+      "original_mechanism": "Configured credential file presence does not propagate credentials into the ET child process, which currently inherits os.environ.",
+      "old_report_issue_keys": [
+        "us-msft/fetch/FETCH-003"
+      ],
+      "new_root_ids": [
+        "R15"
+      ],
+      "current_disposition": "configured credential launch repaired; actual US entitlement external remains",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W08"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC14",
+      "old_type": "observability",
+      "original_mechanism": "Typed local_metadata_gap/cause is preserved by current FF in some paths but RF surfaces only generic source_blocked/not_found.",
+      "old_report_issue_keys": [
+        "hk-00700/fetch/FETCH-005",
+        "us-msft/fetch/FETCH-001",
+        "us-msft/fetch/FETCH-004"
+      ],
+      "new_root_ids": [
+        "R11"
+      ],
+      "current_disposition": "finite safe cause/native refusal propagated and independently accepted; new success usage R11 remains",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W06"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC15",
+      "old_type": "code",
+      "original_mechanism": "Ad hoc official GET uses socket timeout and checks total deadline only after a single complete body read.",
+      "old_report_issue_keys": [
+        "cn-688012/storage/STORAGE-003",
+        "cn-688012/fetch/FETCH-005"
+      ],
+      "new_root_ids": [
+        "R01"
+      ],
+      "current_disposition": "common bounded deadline engineering accepted; no duplicate HTTP redesign",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W01"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC16",
+      "old_type": "code",
+      "original_mechanism": "Sensitivity validates only directly referenced base parameters, mutates stored parameter value, and reruns without descendant DAG refresh.",
+      "old_report_issue_keys": [
+        "hk-00700/process/PROCESS-003",
+        "us-msft/process/PROCESS-003"
+      ],
+      "new_root_ids": [
+        "R21"
+      ],
+      "current_disposition": "native DAG ancestor/descendant fix accepted; M3 numeric/sensitivity independently PASS",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W07"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC17",
+      "old_type": "observability",
+      "original_mechanism": "Authoring repeatedly overwrites input paths instead of freezing each call input; late semantic reconstruction cannot recover initial bytes or absent tool timing.",
+      "old_report_issue_keys": [
+        "hk-00700/storage/STORAGE-007",
+        "hk-00700/process/PROCESS-004",
+        "us-msft/storage/STORAGE-006",
+        "us-msft/process/PROCESS-005"
+      ],
+      "new_root_ids": [
+        "R12"
+      ],
+      "current_disposition": "precall binding/history engineering accepted; old absent exact bytes remain null",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W05"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC18",
+      "old_type": "observability",
+      "original_mechanism": "Fresh company executions have one generation/read and fingerprints but lack behavior evidence for repeat reuse and source/config/generator invalidation.",
+      "old_report_issue_keys": [
+        "cn-688012/storage/STORAGE-006",
+        "hk-00700/storage/STORAGE-006",
+        "us-msft/storage/STORAGE-005"
+      ],
+      "new_root_ids": [
+        "R26"
+      ],
+      "current_disposition": "M3 same-generation zero calls/token/fee observed; invalidation still NOT_RUN",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W03"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC19",
+      "old_type": "research",
+      "original_mechanism": "Future level/delta assumptions have qualitative or mismatched historical references but no source/period/scope-consistent magnitude conversion; input labels/structural gates cannot supply it.",
+      "old_report_issue_keys": [
+        "cn-688012/process/PROCESS-001",
+        "cn-688012/analyst/ANALYST-001",
+        "cn-688012/analyst/ANALYST-004",
+        "hk-00700/process/PROCESS-001",
+        "hk-00700/analyst/ANALYST-001",
+        "us-msft/process/PROCESS-001",
+        "us-msft/analyst/ANALYST-001"
+      ],
+      "new_root_ids": [
+        "R16"
+      ],
+      "current_disposition": "future magnitude/3-year research not accepted; historical factor fallback insufficient",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W09"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC20",
+      "old_type": "research",
+      "original_mechanism": "Single-parameter sensitivities and scenario ordering do not quantify common causal demand/supply/acceptance risk.",
+      "old_report_issue_keys": [
+        "cn-688012/analyst/ANALYST-002",
+        "hk-00700/analyst/ANALYST-002",
+        "us-msft/analyst/ANALYST-002"
+      ],
+      "new_root_ids": [
+        "R17"
+      ],
+      "current_disposition": "joint arithmetic now recomputes; economics/exposure/timing uncalibrated",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W09"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC21",
+      "old_type": "research",
+      "original_mechanism": "Cross-product thin-film/EPI/ALD evidence is attributed to isolated LPCVD flows without matching product scope.",
+      "old_report_issue_keys": [
+        "cn-688012/process/PROCESS-005",
+        "cn-688012/analyst/ANALYST-001"
+      ],
+      "new_root_ids": [
+        "R04",
+        "R18"
+      ],
+      "current_disposition": "old LPCVD wrong product scope corrected partly; selection subject/research inventory still remaining",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W03",
+        "W09"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC22",
+      "old_type": "research",
+      "original_mechanism": "CMP conditional ramp does not have independent order/acceptance/time anchors for seven-month consolidated recognition and unverified eliminations.",
+      "old_report_issue_keys": [
+        "cn-688012/fetch/FETCH-002",
+        "cn-688012/analyst/ANALYST-004"
+      ],
+      "new_root_ids": [
+        "R18"
+      ],
+      "current_disposition": "M3 control date/ownership/current acquired revenue correctly separate; future yearly target/group bridge remains",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W09"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC23",
+      "old_type": "observability",
+      "original_mechanism": "Delivery artifacts are authored manually without referential integrity/current required readable trust statement.",
+      "old_report_issue_keys": [
+        "cn-688012/fetch/FETCH-006",
+        "hk-00700/process/PROCESS-005"
+      ],
+      "new_root_ids": [
+        "R12"
+      ],
+      "current_disposition": "current immutable recorder/link mechanism available; new HK formal trust co-location remains",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W05"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC24",
+      "old_type": "research",
+      "original_mechanism": "A derived percentage in prose was truncated without declared rounding semantics.",
+      "old_report_issue_keys": [
+        "cn-688012/process/PROCESS-008"
+      ],
+      "new_root_ids": [
+        "R13"
+      ],
+      "current_disposition": "simple new authoring rounding correction; do not rewrite old report or raw",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W05"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC25",
+      "old_type": "observability",
+      "original_mechanism": "Failed provider/authoring paths lost measured usage/timing receipts; configured ceilings and later zero-download attempts cannot reconstruct old cost.",
+      "old_report_issue_keys": [
+        "hk-00700/storage/STORAGE-007",
+        "us-msft/storage/STORAGE-006",
+        "us-msft/fetch/FETCH-005"
+      ],
+      "new_root_ids": [
+        "R11"
+      ],
+      "current_disposition": "old unknown fees/counts persist; new SEC success usage still missing at consumer",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W06"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC26",
+      "old_type": "code",
+      "original_mechanism": "Keyword relevance/ranking admits generic ESG/internal anti-fraud boilerplate while concrete business material lacks candidate priority.",
+      "old_report_issue_keys": [
+        "cn-688012/storage/STORAGE-004",
+        "hk-00700/storage/STORAGE-003"
+      ],
+      "new_root_ids": [
+        "R04"
+      ],
+      "current_disposition": "candidate boilerplate rank remains a business quality issue in M3",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W03"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC27",
+      "old_type": "code",
+      "original_mechanism": "Official transcript natural heading/speaker layout is incompatible with three exact transcript-start markers.",
+      "old_report_issue_keys": [
+        "us-msft/storage/STORAGE-002",
+        "us-msft/process/PROCESS-004",
+        "us-msft/analyst/ANALYST-003"
+      ],
+      "new_root_ids": [
+        "R03",
+        "R23",
+        "R04"
+      ],
+      "current_disposition": "HTML start + actor0.3 engineering accepted; real QA5/6 selection and model summary remain",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W03"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC28",
+      "old_type": "data",
+      "original_mechanism": "Latest annual source chain ends in local_metadata_gap; exact local original identity/metadata reconciliation reason needs producer evidence before deciding reuse, repair, or fetch.",
+      "old_report_issue_keys": [
+        "us-msft/storage/STORAGE-004",
+        "us-msft/fetch/FETCH-001",
+        "us-msft/process/PROCESS-002",
+        "us-msft/analyst/ANALYST-003"
+      ],
+      "new_root_ids": [
+        "R08",
+        "R14"
+      ],
+      "current_disposition": "M3 latest SEC annual acquired/qualified/used; earlier absent-source failure superseded only in new attempt; 115-byte unknown separate",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W01",
+        "W08"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC29",
+      "old_type": "code",
+      "original_mechanism": "Published reconstruction omits baseline/foundation parameter IDs and constraints, which may alter model-role classification or output assurance.",
+      "old_report_issue_keys": [],
+      "new_root_ids": [
+        "R22"
+      ],
+      "current_disposition": "current implementation observed; original output owner supplies prior independent roundtrip acceptance, no duplicate edits",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W07"
+      ]
+    },
+    {
+      "old_root_cause_id": "RC30",
+      "old_type": "code",
+      "original_mechanism": "Output opening-base guard omits lawful signed base adjustments and authored reconciliation tolerance that input contract permits.",
+      "old_report_issue_keys": [],
+      "new_root_ids": [
+        "R22"
+      ],
+      "current_disposition": "current signed opening adjustment/tolerance/residual strong recompute observed; original owner acceptance reference pending",
+      "history_preserved": true,
+      "old_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+      "work_packages": [
+        "W07"
+      ]
+    }
+  ],
+  "evidence_base": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\fresh_root_implementation_2026-10-09"
+}

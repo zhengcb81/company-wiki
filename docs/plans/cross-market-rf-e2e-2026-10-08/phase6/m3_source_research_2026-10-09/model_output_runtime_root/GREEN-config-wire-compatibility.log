@@ -1,0 +1,15 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\m3-policy-compat-33e_2i31\\pytest", "requested_basetemp_len": 64, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\m3-policy-compat-33e_2i31\\cw-pytest-basetemp\\20261009-215323-5422e51a", "effective_basetemp_len": 101}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\fresh-capture-20261009\company-wiki
+configfile: pytest.ini
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 55 items
+
+tests\unit\test_llm_client.py .....................                      [ 38%]
+tests\unit\test_llm_defaults.py .........                                [ 54%]
+tests\unit\test_narrative_batch_request.py .................             [ 85%]
+tests\unit\test_narrative_model_request.py ........                      [100%]
+
+============================= 55 passed in 8.32s ==============================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\m3-policy-compat-33e_2i31\\cw-pytest-basetemp\\20261009-215323-5422e51a", "existed": true, "removed": true}

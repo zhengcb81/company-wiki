@@ -1,0 +1,128 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\m3-policy-tdd-1s8c3b3r\\pytest", "requested_basetemp_len": 61, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\m3-policy-tdd-1s8c3b3r\\cw-pytest-basetemp\\20261009-214825-a7433d71", "effective_basetemp_len": 98}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\fresh-capture-20261009\company-wiki
+configfile: pytest.ini
+collected 19 items
+
+tests\unit\test_generation_policy.py FFF..FFFFFFFFFFFFFF                 [100%]
+
+================================== FAILURES ===================================
+__ test_narrative_policy_reaches_wire_for_each_configured_selection[primary] __
+tests\unit\test_generation_policy.py:50: in test_narrative_policy_reaches_wire_for_each_configured_selection
+    assert options.get("thinking") == "disabled"
+E   AssertionError: assert None == 'disabled'
+E    +  where None = <built-in method get of dict object at 0x0000023B36216140>('thinking')
+E    +    where <built-in method get of dict object at 0x0000023B36216140> = {'model_id': 'deepseek-flash', 'endpoint': 'https://api.deepseek.com/chat/completions', 'api_key_env': 'DEEPSEEK_API_KEY', 'max_output_tokens': 8192, ...}.get
+_ test_narrative_policy_reaches_wire_for_each_configured_selection[fallback] __
+tests\unit\test_generation_policy.py:50: in test_narrative_policy_reaches_wire_for_each_configured_selection
+    assert options.get("thinking") == "disabled"
+E   AssertionError: assert None == 'disabled'
+E    +  where None = <built-in method get of dict object at 0x0000023B36360D00>('thinking')
+E    +    where <built-in method get of dict object at 0x0000023B36360D00> = {'model_id': 'configured-deepseek-model', 'endpoint': 'https://configured.example/v1/chat/completions', 'api_key_env': 'DEEPSEEK_API_KEY', 'max_output_tokens': 8192, ...}.get
+_ test_narrative_policy_reaches_wire_for_each_configured_selection[explicit] __
+tests\unit\test_generation_policy.py:50: in test_narrative_policy_reaches_wire_for_each_configured_selection
+    assert options.get("thinking") == "disabled"
+E   AssertionError: assert None == 'disabled'
+E    +  where None = <built-in method get of dict object at 0x0000023B36368F40>('thinking')
+E    +    where <built-in method get of dict object at 0x0000023B36368F40> = {'model_id': 'deepseek-flash', 'endpoint': 'https://api.deepseek.com/chat/completions', 'api_key_env': 'DEEPSEEK_API_KEY', 'max_output_tokens': 8192, ...}.get
+______________ test_purpose_policy_is_fresh_and_provider_scoped _______________
+tests\unit\test_generation_policy.py:89: in test_purpose_policy_is_fresh_and_provider_scoped
+    narrative = config.llm.generation_options("narrative")
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'LLMConfig' object has no attribute 'generation_options'
+____ test_invalid_or_unverified_policy_is_named_before_transport[policy0] _____
+tests\unit\test_generation_policy.py:109: in test_invalid_or_unverified_policy_is_named_before_transport
+    with pytest.raises(ValueError, match="generation_policy"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+______ test_invalid_or_unverified_policy_is_named_before_transport[None] ______
+tests\unit\test_generation_policy.py:109: in test_invalid_or_unverified_policy_is_named_before_transport
+    with pytest.raises(ValueError, match="generation_policy"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+____ test_invalid_or_unverified_policy_is_named_before_transport[policy2] _____
+tests\unit\test_generation_policy.py:109: in test_invalid_or_unverified_policy_is_named_before_transport
+    with pytest.raises(ValueError, match="generation_policy"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+____ test_invalid_or_unverified_policy_is_named_before_transport[policy3] _____
+tests\unit\test_generation_policy.py:109: in test_invalid_or_unverified_policy_is_named_before_transport
+    with pytest.raises(ValueError, match="generation_policy"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+____ test_invalid_or_unverified_policy_is_named_before_transport[policy4] _____
+tests\unit\test_generation_policy.py:109: in test_invalid_or_unverified_policy_is_named_before_transport
+    with pytest.raises(ValueError, match="generation_policy"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+____ test_invalid_or_unverified_policy_is_named_before_transport[policy5] _____
+tests\unit\test_generation_policy.py:109: in test_invalid_or_unverified_policy_is_named_before_transport
+    with pytest.raises(ValueError, match="generation_policy"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+____ test_invalid_or_unverified_policy_is_named_before_transport[policy6] _____
+tests\unit\test_generation_policy.py:109: in test_invalid_or_unverified_policy_is_named_before_transport
+    with pytest.raises(ValueError, match="generation_policy"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+____ test_invalid_or_unverified_policy_is_named_before_transport[policy7] _____
+tests\unit\test_generation_policy.py:109: in test_invalid_or_unverified_policy_is_named_before_transport
+    with pytest.raises(ValueError, match="generation_policy"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+____ test_invalid_or_unverified_policy_is_named_before_transport[policy8] _____
+tests\unit\test_generation_policy.py:109: in test_invalid_or_unverified_policy_is_named_before_transport
+    with pytest.raises(ValueError, match="generation_policy"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+____ test_invalid_or_unverified_policy_is_named_before_transport[policy9] _____
+tests\unit\test_generation_policy.py:109: in test_invalid_or_unverified_policy_is_named_before_transport
+    with pytest.raises(ValueError, match="generation_policy"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+________ test_sdk_urllib_and_narrative_use_same_selected_configuration ________
+tests\unit\test_generation_policy.py:129: in test_sdk_urllib_and_narrative_use_same_selected_configuration
+    assert (client.model, client.base_url, client.api_key) == (
+E   AssertionError: assert ('MiniMax-M3'...a-credential') == ('configured-...a-credential')
+E     
+E     At index 0 diff: 'MiniMax-M3' != 'configured-deepseek-model'
+E     Use -v to get more diff
+______________ test_fallback_keeps_loaded_generation_and_purpose ______________
+tests\unit\test_generation_policy.py:182: in test_fallback_keeps_loaded_generation_and_purpose
+    assert fallback._max_tokens == 8192 and fallback._temperature == 0.7
+E   assert (1024 == 8192)
+E    +  where 1024 = <llm_client.LLMClient object at 0x0000023B36325950>._max_tokens
+___ test_batch_identity_tracks_thinking_and_effort_without_changing_source ____
+tests\unit\test_generation_policy.py:205: in test_batch_identity_tracks_thinking_and_effort_without_changing_source
+    assert changed.input_hash != old.input_hash
+E   AssertionError: assert '1dcb8eb5ff5e9bd39b845a701cadff7bb48979bf1c4a514760c01db05666113f' != '1dcb8eb5ff5e9bd39b845a701cadff7bb48979bf1c4a514760c01db05666113f'
+E    +  where '1dcb8eb5ff5e9bd39b845a701cadff7bb48979bf1c4a514760c01db05666113f' = NarrativeBatchRequest(run_id='generation-test', sources=(SourceRefValue(schema_version='2.0', document_id='doc-prompt-...er_million_tokens=1, max_final_bytes=2097152, max_persistent_bytes=33554432, max_scratch_bytes=67108864, refresh=False).input_hash
+E    +  and   '1dcb8eb5ff5e9bd39b845a701cadff7bb48979bf1c4a514760c01db05666113f' = NarrativeBatchRequest(run_id='generation-test', sources=(SourceRefValue(schema_version='2.0', document_id='doc-prompt-...er_million_tokens=1, max_final_bytes=2097152, max_persistent_bytes=33554432, max_scratch_bytes=67108864, refresh=False).input_hash
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/unit/test_generation_policy.py::test_narrative_policy_reaches_wire_for_each_configured_selection[primary]
+FAILED tests/unit/test_generation_policy.py::test_narrative_policy_reaches_wire_for_each_configured_selection[fallback]
+FAILED tests/unit/test_generation_policy.py::test_narrative_policy_reaches_wire_for_each_configured_selection[explicit]
+FAILED tests/unit/test_generation_policy.py::test_purpose_policy_is_fresh_and_provider_scoped
+FAILED tests/unit/test_generation_policy.py::test_invalid_or_unverified_policy_is_named_before_transport[policy0]
+FAILED tests/unit/test_generation_policy.py::test_invalid_or_unverified_policy_is_named_before_transport[None]
+FAILED tests/unit/test_generation_policy.py::test_invalid_or_unverified_policy_is_named_before_transport[policy2]
+FAILED tests/unit/test_generation_policy.py::test_invalid_or_unverified_policy_is_named_before_transport[policy3]
+FAILED tests/unit/test_generation_policy.py::test_invalid_or_unverified_policy_is_named_before_transport[policy4]
+FAILED tests/unit/test_generation_policy.py::test_invalid_or_unverified_policy_is_named_before_transport[policy5]
+FAILED tests/unit/test_generation_policy.py::test_invalid_or_unverified_policy_is_named_before_transport[policy6]
+FAILED tests/unit/test_generation_policy.py::test_invalid_or_unverified_policy_is_named_before_transport[policy7]
+FAILED tests/unit/test_generation_policy.py::test_invalid_or_unverified_policy_is_named_before_transport[policy8]
+FAILED tests/unit/test_generation_policy.py::test_invalid_or_unverified_policy_is_named_before_transport[policy9]
+FAILED tests/unit/test_generation_policy.py::test_sdk_urllib_and_narrative_use_same_selected_configuration
+FAILED tests/unit/test_generation_policy.py::test_fallback_keeps_loaded_generation_and_purpose
+FAILED tests/unit/test_generation_policy.py::test_batch_identity_tracks_thinking_and_effort_without_changing_source
+=================== 17 failed, 2 passed, 1 warning in 1.87s ===================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\m3-policy-tdd-1s8c3b3r\\cw-pytest-basetemp\\20261009-214825-a7433d71", "existed": true, "removed": true}

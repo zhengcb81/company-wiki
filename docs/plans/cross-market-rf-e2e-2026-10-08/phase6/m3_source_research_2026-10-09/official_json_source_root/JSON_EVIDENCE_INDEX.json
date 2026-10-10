@@ -1,0 +1,479 @@
+{
+  "schema_version": "official-json-investigation-evidence-index/1",
+  "status": "read_only_observation_not_runtime_projection",
+  "baseline_commit": "13a7648cee20362fc082f68248e286468837612d",
+  "sealed_run": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012",
+  "execution_manifest_sha256": "33efe76877f539ceb2acb3b81fe5e5fa3b04673ad5453f28ef176e0e22547d25",
+  "offset_contract": "zero-based half-open offsets in exact UTF-8 raw bytes; token ranges include JSON delimiters; encoded string body excludes quotes",
+  "offset_verification": "strict JSON pointer traversal + independent byte-slice JSON decode; no original rewrites",
+  "stream_counts": {
+    "latest": {
+      "pages": 65,
+      "records": 195,
+      "unique_record_ids": 195,
+      "all_page_byte_hashes_reverified": true
+    },
+    "questions": {
+      "pages": 11,
+      "records": 33,
+      "unique_record_ids": 33,
+      "all_page_byte_hashes_reverified": true
+    },
+    "precollect": {
+      "pages": 10,
+      "records": 29,
+      "unique_record_ids": 29,
+      "all_page_byte_hashes_reverified": true
+    }
+  },
+  "successful_page_byte_total": 668749,
+  "issuer_projection_observed_counts": {
+    "latest_qa_answer_records": 7,
+    "latest_closing_remark_records": 1,
+    "questions_unanswered_records": 15,
+    "precollect_question_with_answer_records": 1
+  },
+  "known_documentation_locator_correction": {
+    "document": "IMPLEMENTATION.md",
+    "incorrect_original_example": {
+      "page": "qa-latest-form-01.raw",
+      "pointer": "/datas/0/records/2",
+      "claimed_id": 2508385
+    },
+    "actual_id_at_original_pointer": 2508409,
+    "actual_issuer_at_original_pointer": "清溢光电",
+    "correct_page_for_claimed_id": "qa-latest-form-18.raw",
+    "correct_page_sha256": "fc1c2a8ebb7cb44b3cf6f82a5ecfa5641cf81478ed35e615c0928f36a2a389fe",
+    "correct_pointer": "/datas/0/records/2"
+  },
+  "selected_pages": [
+    {
+      "relative_path": "execution/sources/qa-latest-form-01.raw",
+      "content_sha256": "416542b0c8f72400800edf69832df1bd3b48e50cf19c0019c647af445b97760b",
+      "byte_size": 5119,
+      "envelope": {
+        "success": true,
+        "code": 200
+      },
+      "pagination": {
+        "current": 1,
+        "size": 3,
+        "pages": 65,
+        "total": 195
+      }
+    },
+    {
+      "relative_path": "execution/sources/qa-latest-form-18.raw",
+      "content_sha256": "fc1c2a8ebb7cb44b3cf6f82a5ecfa5641cf81478ed35e615c0928f36a2a389fe",
+      "byte_size": 7316,
+      "envelope": {
+        "success": true,
+        "code": 200
+      },
+      "pagination": {
+        "current": 18,
+        "size": 3,
+        "pages": 65,
+        "total": 195
+      }
+    },
+    {
+      "relative_path": "execution/sources/qa-questions-form-01.raw",
+      "content_sha256": "509bcbcdde98e1ac46464453ed1a7a339134107b67fb5370269639e8192bb2e0",
+      "byte_size": 5925,
+      "envelope": {
+        "success": true,
+        "code": 200
+      },
+      "pagination": {
+        "current": 1,
+        "size": 3,
+        "pages": 11,
+        "total": 33
+      }
+    },
+    {
+      "relative_path": "execution/sources/qa-precollect-form-10.raw",
+      "content_sha256": "784217fbfdddc06cd53235b3bef8159250b1d4209761092577d35ebb0f313234",
+      "byte_size": 3871,
+      "envelope": {
+        "success": true,
+        "code": 200
+      },
+      "pagination": {
+        "current": 10,
+        "size": 3,
+        "pages": 10,
+        "total": 29
+      }
+    }
+  ],
+  "sample_records": [
+    {
+      "page_sha256": "416542b0c8f72400800edf69832df1bd3b48e50cf19c0019c647af445b97760b",
+      "record_pointer": "/datas/0/records/0",
+      "record_token_byte_range": [
+        61,
+        1141
+      ],
+      "provider_record_id": 2508509,
+      "observed_role": "event_remark_unattributed",
+      "identity_fields": {
+        "activityId": 40766
+      },
+      "state_fields": {
+        "questionType": 4,
+        "isAnswered": false,
+        "crtTime": "2026-09-10 17:26:23",
+        "updTime": "2026-09-10 17:26:23"
+      },
+      "fields": [
+        {
+          "pointer": "/datas/0/records/0/content",
+          "token_byte_range": [
+            193,
+            458
+          ],
+          "encoded_string_body_byte_range": [
+            194,
+            457
+          ],
+          "encoded_token_sha256": "d076becb8e4c3800eeb7fad809c999bd44e4c1cbaeb91616d3edff4b92f122e0",
+          "decoded_utf8_sha256": "867efb169b6d008051428057f448603cb9071fb7222e4750f906c1f086135444",
+          "decoded_character_count": 91
+        }
+      ]
+    },
+    {
+      "page_sha256": "416542b0c8f72400800edf69832df1bd3b48e50cf19c0019c647af445b97760b",
+      "record_pointer": "/datas/0/records/1",
+      "record_token_byte_range": [
+        1142,
+        2900
+      ],
+      "provider_record_id": 2508406,
+      "observed_role": "company_closing_remark_not_answer",
+      "identity_fields": {
+        "activityId": 40766,
+        "activityCompanyId": 57790,
+        "aactivityCompanyId": 57790,
+        "companyId": 145565,
+        "guestCompanyName": "中微公司"
+      },
+      "state_fields": {
+        "questionType": 3,
+        "isAnswered": false,
+        "crtTime": "2026-09-10 16:46:54",
+        "updTime": "2026-09-10 17:24:16",
+        "auditTime": "2026-09-10 17:24:16"
+      },
+      "fields": [
+        {
+          "pointer": "/datas/0/records/1/content",
+          "token_byte_range": [
+            1450,
+            1810
+          ],
+          "encoded_string_body_byte_range": [
+            1451,
+            1809
+          ],
+          "encoded_token_sha256": "03201a3fe9d7c08bf1ca81aef677be50c614846ebedf8268ec7fff5ed1fa23b7",
+          "decoded_utf8_sha256": "8e3792316873f941ad3a0f2befec0493c6babf78eb6b0ce4b125cfce27f36791",
+          "decoded_character_count": 120
+        }
+      ]
+    },
+    {
+      "page_sha256": "416542b0c8f72400800edf69832df1bd3b48e50cf19c0019c647af445b97760b",
+      "record_pointer": "/datas/0/records/2",
+      "record_token_byte_range": [
+        2901,
+        5071
+      ],
+      "provider_record_id": 2508409,
+      "observed_role": "other_issuer_closing_remark",
+      "identity_fields": {
+        "activityId": 40766,
+        "activityCompanyId": 57808,
+        "aactivityCompanyId": 57808,
+        "companyId": 152341,
+        "guestCompanyName": "清溢光电"
+      },
+      "state_fields": {
+        "questionType": 3,
+        "isAnswered": false,
+        "crtTime": "2026-09-10 16:47:51",
+        "updTime": "2026-09-10 17:24:14",
+        "auditTime": "2026-09-10 17:24:14"
+      },
+      "fields": [
+        {
+          "pointer": "/datas/0/records/2/content",
+          "token_byte_range": [
+            3176,
+            3718
+          ],
+          "encoded_string_body_byte_range": [
+            3177,
+            3717
+          ],
+          "encoded_token_sha256": "9d52b4034395ac137ca6f3895ae4712d67da0c806012de7fa96fbe8290f16978",
+          "decoded_utf8_sha256": "746f0978a2a3b307085b03bd1a846c00e0542f0cfb8d5beb05a1f6d1f7db2e1a",
+          "decoded_character_count": 185
+        }
+      ]
+    },
+    {
+      "page_sha256": "fc1c2a8ebb7cb44b3cf6f82a5ecfa5641cf81478ed35e615c0928f36a2a389fe",
+      "record_pointer": "/datas/0/records/2",
+      "record_token_byte_range": [
+        4653,
+        7267
+      ],
+      "provider_record_id": 2508385,
+      "observed_role": "answered_qa",
+      "identity_fields": {
+        "activityId": 40766,
+        "activityCompanyId": 57790,
+        "aactivityCompanyId": 57790,
+        "qactivityCompanyId": 57790,
+        "companyId": 145565,
+        "guestCompanyName": "中微公司"
+      },
+      "state_fields": {
+        "questionType": 2,
+        "questionId": 2508367,
+        "isAnswered": true,
+        "crtTime": "2026-09-10 16:37:15",
+        "updTime": "2026-09-10 16:37:39",
+        "questionDate": "2026-09-10 16:33:47",
+        "questionUpdDate": "2026-09-10 16:33:47",
+        "auditTime": "2026-09-10 16:37:39"
+      },
+      "fields": [
+        {
+          "pointer": "/datas/0/records/2/questionContent",
+          "token_byte_range": [
+            6702,
+            6767
+          ],
+          "encoded_string_body_byte_range": [
+            6703,
+            6766
+          ],
+          "encoded_token_sha256": "1ee9a3dc4a8532a52b9ee96a7b12a7f27ca93ed30f9fce8ccb26ea0ad1a3c6f0",
+          "decoded_utf8_sha256": "ed02a544bd8ed06c260b11864d1fbf0b5f0059483fe7bc7bb56e8c85c91cc420",
+          "decoded_character_count": 21
+        },
+        {
+          "pointer": "/datas/0/records/2/content",
+          "token_byte_range": [
+            5036,
+            5558
+          ],
+          "encoded_string_body_byte_range": [
+            5037,
+            5557
+          ],
+          "encoded_token_sha256": "700ff1dd808f4c33cd8d2b9f6fbcc24e947558b3b9737ac856121f9782a31654",
+          "decoded_utf8_sha256": "4eca7542d876555b935206a6b45d619f40a3b80606a9218130fbd254cc2147af",
+          "decoded_character_count": 188
+        }
+      ]
+    },
+    {
+      "page_sha256": "509bcbcdde98e1ac46464453ed1a7a339134107b67fb5370269639e8192bb2e0",
+      "record_pointer": "/datas/0/records/0",
+      "record_token_byte_range": [
+        61,
+        1514
+      ],
+      "provider_record_id": 2508424,
+      "observed_role": "unanswered_question",
+      "identity_fields": {
+        "activityId": 40766,
+        "activityCompanyId": 57790,
+        "companyId": 145565,
+        "stockCode": "688012",
+        "companyName": "中微半导体设备(上海)股份有限公司",
+        "guestCompanyName": "中微公司"
+      },
+      "state_fields": {
+        "questionType": 1,
+        "isAnswered": false,
+        "crtTime": "2026-09-10 16:52:58",
+        "updTime": "2026-09-10 17:06:51",
+        "auditTime": "2026-09-10 17:06:51"
+      },
+      "fields": [
+        {
+          "pointer": "/datas/0/records/0/content",
+          "token_byte_range": [
+            429,
+            645
+          ],
+          "encoded_string_body_byte_range": [
+            430,
+            644
+          ],
+          "encoded_token_sha256": "147a232f4f560340787284173f5900d797a2cfb872a98e876d17986352f08066",
+          "decoded_utf8_sha256": "e19df33fe8e4e29649f56121a8ab832fd0addb7a68c52c6cbfae75329cc71d1a",
+          "decoded_character_count": 74
+        }
+      ]
+    },
+    {
+      "page_sha256": "784217fbfdddc06cd53235b3bef8159250b1d4209761092577d35ebb0f313234",
+      "record_pointer": "/datas/0/records/1",
+      "record_token_byte_range": [
+        1514,
+        3823
+      ],
+      "provider_record_id": 36395,
+      "observed_role": "precollected_question_with_answer",
+      "identity_fields": {
+        "activityId": 40766,
+        "companyId": 145565,
+        "stockCode": "688012",
+        "companyName": "中微半导体设备(上海)股份有限公司",
+        "shortName": "中微公司"
+      },
+      "state_fields": {
+        "collectType": 1,
+        "crtTime": "2026-09-04 18:55:49",
+        "updTime": "2026-09-10 15:19:54"
+      },
+      "fields": [
+        {
+          "pointer": "/datas/0/records/1/question",
+          "token_byte_range": [
+            1672,
+            2862
+          ],
+          "encoded_string_body_byte_range": [
+            1673,
+            2861
+          ],
+          "encoded_token_sha256": "a4055c0a61d21401956fa08e7cafb85c562c0ef6aaec8fcd1515b8a01bd1bdd0",
+          "decoded_utf8_sha256": "efb900613f9c947bd8343d8049f3084eff8e775e782ed1f6480c96e7936fd876",
+          "decoded_character_count": 420
+        },
+        {
+          "pointer": "/datas/0/records/1/answer",
+          "token_byte_range": [
+            2872,
+            3384
+          ],
+          "encoded_string_body_byte_range": [
+            2873,
+            3383
+          ],
+          "encoded_token_sha256": "d87c7993c06d52a2534600bb6569a6cec494901535c489fd10e4bbbab2c2f589",
+          "decoded_utf8_sha256": "9f5972116c4da37a6661cd321572fd106cee4f5d9911045753799f98e730bc1c",
+          "decoded_character_count": 172
+        }
+      ]
+    }
+  ],
+  "native_capture": {
+    "call_id": "0be19f4759db4457a8a7c25442630277",
+    "call_ledger_path": "execution/call_ledger.json",
+    "call_ledger_sha256": "aac3b4605e42e3480657eca105420b7c055334860c098af31d8558f93bd9b97d",
+    "input_complete": true,
+    "output_complete": true,
+    "exit_code": 0,
+    "http_method_observed": "POST",
+    "media_type_observed": "application/x-www-form-urlencoded; list fields repeated",
+    "wire_request_bytes_captured": false,
+    "artifacts": [
+      {
+        "relative_path": "roles/executor/commands/0be19f4759db4457a8a7c25442630277/input-0001-9f49897ab92e.json",
+        "sha256": "9f49897ab92e8146fa07cfc66b168320b738b31316070344a5338869bf6147f6",
+        "byte_size": 1115
+      },
+      {
+        "relative_path": "roles/executor/commands/0be19f4759db4457a8a7c25442630277/consume-0001-9f49897ab92e.json",
+        "sha256": "9f49897ab92e8146fa07cfc66b168320b738b31316070344a5338869bf6147f6",
+        "byte_size": 1115
+      },
+      {
+        "relative_path": "roles/executor/commands/0be19f4759db4457a8a7c25442630277/stdout.txt",
+        "sha256": "5bc4757d3c71abee7fd7e1241a4d7a225e97ed5a8102d179412533fb2a53d845",
+        "byte_size": 2193
+      },
+      {
+        "relative_path": "roles/executor/commands/0be19f4759db4457a8a7c25442630277/stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "byte_size": 0
+      }
+    ]
+  },
+  "error_payload_controls": [
+    {
+      "relative_path": "execution/sources/qa-latest-01.raw",
+      "content_sha256": "a8cba1d7a9ec887b601bc625b1f5a62a8e079ba92b9fe32cf95e98947f121bf9",
+      "byte_size": 138,
+      "status": 500,
+      "error": "Internal Server Error",
+      "business_evidence": false
+    },
+    {
+      "relative_path": "execution/sources/qa-questions-01.raw",
+      "content_sha256": "3306218ce79d979440289ead27d82ac44191d5008ddde168224d4b1fc2b9c34b",
+      "byte_size": 138,
+      "status": 500,
+      "error": "Internal Server Error",
+      "business_evidence": false
+    },
+    {
+      "relative_path": "execution/sources/qa-precollect-01.raw",
+      "content_sha256": "ad03f8d740aea41dfd4e1b8a5385929630836c612c7ec2995d84cf65051a245c",
+      "byte_size": 141,
+      "status": 500,
+      "error": "Internal Server Error",
+      "business_evidence": false
+    }
+  ],
+  "public_network_requests_this_investigation": 0,
+  "supplier_model_calls_this_investigation": 0,
+  "sealed_manifest_matching_raw_page_entries": 86,
+  "sealed_manifest_matching_native_capture_entries": 4,
+  "frontend_readonly_observation": {
+    "relative_path": "execution/sources/qa-chunks-3.raw",
+    "content_sha256": "fe9a81a9242d87bbcb1d5df45675694ac1e96a868875266fba1a1b72e3d785ec",
+    "byte_size": 153140,
+    "functions": [
+      {
+        "name": "getQuesList",
+        "function_start_byte_offset": 94340,
+        "observed_request_fields": [
+          "pageNo",
+          "pageSize",
+          "questionType",
+          "questionTypeList",
+          "activityId",
+          "askTypes"
+        ]
+      },
+      {
+        "name": "getPreSolicitation",
+        "function_start_byte_offset": 122271,
+        "observed_request_fields": [
+          "activityId",
+          "pageNo",
+          "pageSize"
+        ]
+      }
+    ],
+    "server_company_filter_proven": false,
+    "limit": "Only examined frozen functions/captured requests; absence here does not prove API cannot support filtering."
+  },
+  "target_projection_records_pointer_id_and_raw_record_replayed": 24,
+  "all_reconciliation_record_ids_and_pointers_replayed": 257,
+  "raw_identity_field_distribution_recomputed": {
+    "target": 24,
+    "other": 231,
+    "unattributed": 2
+  }
+}

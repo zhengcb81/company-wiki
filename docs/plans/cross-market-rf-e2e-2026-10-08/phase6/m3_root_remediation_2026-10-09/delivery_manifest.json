@@ -1,0 +1,162 @@
+{
+  "schema_version": "m3-root-plan-delivery/1",
+  "frozen_at_utc": "2026-10-10T14:05:10.405861+00:00",
+  "status": "FROZEN_DIAGNOSTIC_PLAN_ONLY_IMPLEMENTATION_AND_RESEARCH_NOT_COMPLETE",
+  "owner": "/root/m3_common_root_expert",
+  "write_scope": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_root_remediation_2026-10-09",
+  "formal_payload_files": 23,
+  "total_files_including_manifest": 24,
+  "payload_aggregate_algorithm": "SHA256 of sorted UTF-8 relative_path|bytes|sha256 LF records; manifest excluded to avoid self-reference",
+  "payload_aggregate_sha256": "02305a148e42ebf26b21b350b973180e16b5581f095a4fcf7613ddf3efecc085",
+  "coverage": {
+    "old_company_findings": 64,
+    "M3_company_findings": 91,
+    "company_total": 155,
+    "original_expert_carryover": 2,
+    "composite_keys": 157,
+    "unmapped": 0,
+    "duplicates": 0,
+    "roots": 26,
+    "cards": 9,
+    "M3_reports": 12,
+    "M3_checks": 246,
+    "M3_P1": 41,
+    "M3_P2": 48,
+    "M3_P3": 2
+  },
+  "original_matrix_sha256": "f7e76df7eb8e7346f570866c39cd69f10133db3b00481e78b9c67d4c41a643bb",
+  "runtime_observation": {
+    "published_CWP_at_start": "13a7648cee20362fc082f68248e286468837612d",
+    "MAIN_candidate_engineering": "62770fea",
+    "MAIN_local_merged": "45533e881b98fe8782b0e496abf7a4bb2904114e",
+    "remote_main_push_and_exact_CI": "PENDING",
+    "production_three_config_SHAs": "unchanged per MAIN handoff; no DS generation policy production value added",
+    "failed_final_prefix_16KiB": "NOT_IMPLEMENTED",
+    "policy_public_cli_reuse_real_paid_data_reacceptance_research": "NOT_COMPLETE"
+  },
+  "retained_tool": "verify_package.py defaults read-only; --write-receipts only writes owned receipts; do not rerun writer against frozen delivery",
+  "removed_one_time_helpers": [
+    "build_plan.py",
+    "read_report.py"
+  ],
+  "new_http_provider_model_calls": 0,
+  "new_paid_tokens": 0,
+  "new_paid_micro_usd": 0,
+  "files": [
+    {
+      "relative_path": "INTERFACES.md",
+      "bytes": 11277,
+      "sha256": "048f0e649ca667ba89f9dc0b595ed07f6e8e40244f755fa5b7335caa6dc0811a"
+    },
+    {
+      "relative_path": "MAJOR_NODE.md",
+      "bytes": 7399,
+      "sha256": "b56be25141e555b63c9a8bd543db373da45f3399c569247cb16bf5ae2eb3aac1"
+    },
+    {
+      "relative_path": "SKILL_CHECKPOINTS.md",
+      "bytes": 3506,
+      "sha256": "01011bb7cfdc927e5691e52cd69e4ace6cf8f1d90f592c10819e49edd0b6784c"
+    },
+    {
+      "relative_path": "coverage.json",
+      "bytes": 521894,
+      "sha256": "bf523eaa37bb28b1e414ae3e6d6c09e38e0ba2d65638bf25ef6776fb134df64a"
+    },
+    {
+      "relative_path": "coverage.md",
+      "bytes": 19558,
+      "sha256": "a9dfbd6681231d781b6211d6829a72a2c841f29d68d844a8dfc0c77d8dd83ab3"
+    },
+    {
+      "relative_path": "evidence_observation.json",
+      "bytes": 31899,
+      "sha256": "aaac5b5fe8e8f770d17e78be9de55dbd67c4e9b7e60f470c017e00f455527fb2"
+    },
+    {
+      "relative_path": "findings.md",
+      "bytes": 5435,
+      "sha256": "22f5a9f51b5ea2bf759147b1f5152eb337d6bee10d32459c7b8ed82d4892b941"
+    },
+    {
+      "relative_path": "old_root_dispositions.json",
+      "bytes": 23302,
+      "sha256": "27c61fda51dbfb97b08c6bf453124127a312cd218f0cc8bb39c5f3627de71b9f"
+    },
+    {
+      "relative_path": "progress.md",
+      "bytes": 4001,
+      "sha256": "e4deaa45adcf700e93d446a4ce9e1d52e363d1a7cac7d0d0c7ed9131b0fdd38d"
+    },
+    {
+      "relative_path": "report_inventory.json",
+      "bytes": 16811,
+      "sha256": "a172ba7f27bd555a90a88b156431dfb159c19ffd9caedde6a5bde857cfe3db0e"
+    },
+    {
+      "relative_path": "root_causes.json",
+      "bytes": 33359,
+      "sha256": "4881a4fa5966e068b8d05ef1fe65f2cd2e0ce1a5b16da924a411604a95496d90"
+    },
+    {
+      "relative_path": "task_plan.md",
+      "bytes": 3626,
+      "sha256": "e9524af5dba4b9d743d4afe9e01660d4961567aa19e77f88ee6573e8c100b37f"
+    },
+    {
+      "relative_path": "verification.json",
+      "bytes": 610,
+      "sha256": "6b531d9a5ab813e4f1b98d909f6441767fc745b41ab8ca58e176ba184e839151"
+    },
+    {
+      "relative_path": "verify_package.py",
+      "bytes": 6349,
+      "sha256": "f14a5581e5381b11a935eaa0a5a4649a6544d935e0d5503cfc0068a216b2b4a1"
+    },
+    {
+      "relative_path": "work_packages/W01.md",
+      "bytes": 1819,
+      "sha256": "5c59a5ec2baef5dcf24fbe29c515c0324f5ed4978167ad326e62f5c53f60f660"
+    },
+    {
+      "relative_path": "work_packages/W02.md",
+      "bytes": 2735,
+      "sha256": "95bc64b7c86d53fda787d71d27f9afe600725130dce3f1978d1a8547b5d81798"
+    },
+    {
+      "relative_path": "work_packages/W03.md",
+      "bytes": 2608,
+      "sha256": "e75ceb1380686703908eedee81c429172c4ce67c7674da1f30f58532e231bc36"
+    },
+    {
+      "relative_path": "work_packages/W04.md",
+      "bytes": 4240,
+      "sha256": "2dfe7e1c3893c3b38281df677ad754a744ab012ae928bfad024f5db4a4ef8e77"
+    },
+    {
+      "relative_path": "work_packages/W05.md",
+      "bytes": 2881,
+      "sha256": "fd35a3aca8a4f7d74f030b1e7dae11de3f3beecfe3284651a6b5050354711c6f"
+    },
+    {
+      "relative_path": "work_packages/W06.md",
+      "bytes": 2691,
+      "sha256": "3b32da0eeacaaefe851e9d8229693f40a0229393f37ef897b633258011bdb506"
+    },
+    {
+      "relative_path": "work_packages/W07.md",
+      "bytes": 3395,
+      "sha256": "d43df502115aacf3c19d8892b1096be23cbccfaa5b4686ee35887688346aba2c"
+    },
+    {
+      "relative_path": "work_packages/W08.md",
+      "bytes": 2665,
+      "sha256": "d87d4314ad6074a257f5664b03b339d7f449abbdb1b1ed482dd3e8b34a4b0869"
+    },
+    {
+      "relative_path": "work_packages/W09.md",
+      "bytes": 4672,
+      "sha256": "818cb26ef7b8bc7e92af1db26cad38306cc5c3a391732149d03f8cb3ae5153da"
+    }
+  ]
+}

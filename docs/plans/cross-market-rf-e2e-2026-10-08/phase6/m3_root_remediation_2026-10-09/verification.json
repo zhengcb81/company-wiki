@@ -1,0 +1,22 @@
+{
+  "status": "PASS_DIAGNOSTIC_MAPPING_ONLY",
+  "company_findings": 155,
+  "expert_carryover": 2,
+  "composite_keys": 157,
+  "unmapped": 0,
+  "duplicates": 0,
+  "roots": 26,
+  "work_packages": 9,
+  "old_matrix_sha_unchanged": true,
+  "report_original_finding_fields_match": true,
+  "M3_reports": 12,
+  "M3_checks": 246,
+  "M3_findings": 91,
+  "M3_severity": {
+    "P1": 41,
+    "P2": 48,
+    "P3": 2
+  },
+  "semantic_root_review": "expert diagnosis; code/actual frozen evidence reviewed; tests and real company reacceptance remain planned",
+  "engineering_or_research_completed": false
+}

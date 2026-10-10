@@ -1,0 +1,208 @@
+"""Isolated contract probe; no provider calls or production YAML writes."""
+import json
+from types import SimpleNamespace
+
+import pytest
+import yaml
+
+from config import Config
+from company_wiki.automation.narrative_http_model import (
+    NarrativeHTTPModel,
+    model_options_from_config,
+)
+from company_wiki.automation.narrative_model import NarrativeModelRequest
+from support.narrative_model_request_fixture import selection
+
+
+@pytest.fixture
+def configured(tmp_path, monkeypatch):
+    for name in ("MINIMAX_API_KEY", "MIMO_API_KEY", "DEEPSEEK_API_KEY"):
+        monkeypatch.setenv(name, "local-fixture-key-not-a-credential")
+    path = tmp_path / "config.yaml"
+
+    def load(llm, provider=None):
+        path.write_text(yaml.safe_dump({"llm": llm}), encoding="utf-8")
+        original = path.read_bytes()
+        config = Config.load(path, llm_provider=provider)
+        assert path.read_bytes() == original
+        return config
+
+    return load
+
+
+@pytest.mark.parametrize("route", ["primary", "fallback", "explicit"])
+def test_narrative_policy_reaches_wire_for_each_configured_selection(configured, route):
+    llm = {
+        "provider": "deepseek" if route == "primary" else "minimax",
+        "max_tokens": 8192,
+        "generation_policy": {"deepseek": {"narrative": {"thinking": "disabled"}}},
+    }
+    if route == "fallback":
+        llm["fallback"] = {
+            "provider": "deepseek", "model": "configured-deepseek-model",
+            "base_url": "https://configured.example/v1", "enabled": True,
+        }
+    config = configured(llm, None if route == "primary" else "deepseek")
+    options = model_options_from_config(config.llm)
+    assert options["max_output_tokens"] == 8192
+    assert options["model_id"] == config.llm.model
+    assert options["endpoint"] == config.llm.base_url.rstrip("/") + "/chat/completions"
+    assert options.get("thinking") == "disabled"
+    body = json.loads(NarrativeHTTPModel(**options).request_bytes(
+        NarrativeModelRequest.from_selection(selection())))
+    assert body["thinking"] == {"type": "disabled"}
+    assert body["max_tokens"] == 8192
+    assert "local-fixture-key" not in json.dumps(body)
+
+
+def test_omitted_policy_preserves_existing_wire(configured):
+    config = configured({"provider": "deepseek", "max_tokens": 8192})
+    options = model_options_from_config(config.llm)
+    body = json.loads(NarrativeHTTPModel(**options).request_bytes(
+        NarrativeModelRequest.from_selection(selection())))
+    assert "thinking" not in options and "thinking" not in body
+
+
+def test_deepseek_policy_does_not_change_primary_or_mimo(configured):
+    config = configured({
+        "provider": "minimax",
+        "generation_policy": {"deepseek": {"narrative": {"thinking": "disabled"}}},
+    })
+    for llm in (config.llm, config.llm_for_provider("mimo")):
+        options = model_options_from_config(llm)
+        body = json.loads(NarrativeHTTPModel(**options).request_bytes(
+            NarrativeModelRequest.from_selection(selection())))
+        assert "thinking" not in options and "thinking" not in body
+
+
+def test_purpose_policy_is_fresh_and_provider_scoped(configured):
+    config = configured({
+        "provider": "deepseek",
+        "generation_policy": {
+            "deepseek": {
+                "general": {"reasoning_effort": "low"},
+                "research": {"thinking": "enabled", "reasoning_effort": "max"},
+                "narrative": {"thinking": "disabled"},
+            },
+        },
+    })
+    narrative = config.llm.generation_options("narrative")
+    assert narrative == {"thinking": {"type": "disabled"}, "reasoning_effort": "low"}
+    narrative["thinking"]["type"] = "enabled"
+    assert config.llm.generation_options("narrative")["thinking"] == {"type": "disabled"}
+    assert config.llm.generation_options("research") == {
+        "thinking": {"type": "enabled"}, "reasoning_effort": "max",
+    }
+    options = model_options_from_config(config.llm, purpose="research")
+    assert options["thinking"] == "enabled" and options["reasoning_effort"] == "max"
+
+
+@pytest.mark.parametrize("policy", [
+    [], None, {"deepsek": {}}, {"deepseek": []}, {"deepseek": {"narrative": []}},
+    {"deepseek": {"narrative": {"unknown_option": "low"}}},
+    {"deepseek": {"narrative": {"thinking": True}}},
+    {"deepseek": {"narrative": {"thinking": "adaptive"}}},
+    {"deepseek": {"narrative": {"reasoning_effort": "unbounded"}}},
+    {"mimo": {"narrative": {"thinking": "disabled"}}},
+])
+def test_invalid_or_unverified_policy_is_named_before_transport(configured, policy):
+    with pytest.raises(ValueError, match="generation_policy"):
+        configured({"provider": "deepseek", "generation_policy": policy})
+
+
+def test_sdk_urllib_and_narrative_use_same_selected_configuration(configured, monkeypatch):
+    from llm_client import LLMClient
+    config = configured({
+        "provider": "minimax", "max_tokens": 8192, "temperature": 0.7,
+        "fallback": {
+            "provider": "deepseek", "model": "configured-deepseek-model",
+            "base_url": "https://configured.example/v1", "enabled": True,
+        },
+        "generation_policy": {"deepseek": {
+            "narrative": {"thinking": "disabled", "reasoning_effort": "low"},
+        }},
+    })
+    monkeypatch.setattr(LLMClient, "_init_sdk_client", lambda _self: None)
+    monkeypatch.setattr(LLMClient, "_log_cost", lambda *_args: None)
+    client = LLMClient(config=config, provider="deepseek", workload="narrative", enable_fallback=False)
+    selected = config.llm_for_provider("deepseek")
+    assert (client.model, client.base_url, client.api_key) == (
+        selected.model, selected.base_url, selected.api_key,
+    )
+    sdk_kwargs = []
+
+    def create(**kwargs):
+        sdk_kwargs.append(kwargs)
+        return SimpleNamespace(
+            choices=[SimpleNamespace(message=SimpleNamespace(content="{}"), finish_reason="stop")],
+            usage=SimpleNamespace(prompt_tokens=1, completion_tokens=2, total_tokens=3),
+        )
+
+    client._sdk_client = SimpleNamespace(chat=SimpleNamespace(completions=SimpleNamespace(create=create)))
+    assert client._call_with_sdk([], False).success
+    urllib_bodies = []
+
+    class Response:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *_args):
+            return False
+
+        def read(self):
+            return json.dumps({
+                "choices": [{"message": {"content": "{}"}, "finish_reason": "stop"}],
+                "usage": {"prompt_tokens": 1, "completion_tokens": 2, "total_tokens": 3},
+            }).encode()
+
+    def urlopen(request, **_kwargs):
+        urllib_bodies.append(json.loads(request.data))
+        return Response()
+
+    monkeypatch.setattr("urllib.request.urlopen", urlopen)
+    assert client._call_with_urllib([], False).success
+    body = json.loads(NarrativeHTTPModel(**model_options_from_config(selected)).request_bytes(
+        NarrativeModelRequest.from_selection(selection())))
+    assert sdk_kwargs[0]["extra_body"]["thinking"] == urllib_bodies[0]["thinking"] == body["thinking"] == {"type": "disabled"}
+    assert sdk_kwargs[0]["reasoning_effort"] == urllib_bodies[0]["reasoning_effort"] == body["reasoning_effort"] == "low"
+    assert sdk_kwargs[0]["max_tokens"] == urllib_bodies[0]["max_tokens"] == body["max_tokens"] == 8192
+
+
+def test_fallback_keeps_loaded_generation_and_purpose(configured, monkeypatch):
+    from llm_client import LLMClient
+    config = configured({
+        "provider": "minimax", "max_tokens": 8192, "temperature": 0.7,
+        "fallback": {"provider": "deepseek", "enabled": True},
+        "generation_policy": {"deepseek": {"narrative": {"thinking": "disabled"}}},
+    })
+    monkeypatch.setattr(LLMClient, "_init_sdk_client", lambda _self: None)
+    client = LLMClient(config=config, workload="narrative")
+    assert client.fallback_status == "ready"
+    fallback = client.fallback_client
+    assert fallback._max_tokens == 8192 and fallback._temperature == 0.7
+    assert fallback._generation_options["thinking"] == {"type": "disabled"}
+
+
+def test_batch_identity_tracks_thinking_and_effort_without_changing_source(configured):
+    from company_wiki.automation.narrative_batch_request import NarrativeBatchRequest
+    llm = {"provider": "deepseek", "max_tokens": 8192}
+    original = model_options_from_config(configured(llm).llm)
+    request = {
+        "schema_version": "narrative-batch-request/1", "run_id": "generation-test",
+        "sources": [selection().source_ref.to_dict()], "profile": "P1",
+        "max_seconds": 30, "max_tokens": 60000, "max_cost_usd": "0.10",
+        "model": original,
+        "max_persistent_bytes": 33554432, "max_scratch_bytes": 67108864,
+        "pricing": {"version": "fixture", "input_micro_usd_per_million_tokens": 1,
+                    "output_micro_usd_per_million_tokens": 1},
+    }
+    old = NarrativeBatchRequest.from_dict(request)
+    llm["generation_policy"] = {"deepseek": {"narrative": {
+        "thinking": "enabled", "reasoning_effort": "low",
+    }}}
+    request["model"] = model_options_from_config(configured(llm).llm)
+    changed = NarrativeBatchRequest.from_dict(request)
+    assert changed.input_hash != old.input_hash
+    assert changed.sources == old.sources
+    request["model"]["reasoning_effort"] = "max"
+    assert NarrativeBatchRequest.from_dict(request).input_hash != changed.input_hash

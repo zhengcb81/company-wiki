@@ -1,0 +1,91 @@
+FFF..                                                                    [100%]
+================================== FAILURES ===================================
+__ test_narrative_policy_reaches_wire_for_each_configured_selection[primary] __
+
+configured = <function configured.<locals>.load at 0x000001B057C6B920>
+route = 'primary'
+
+    @pytest.mark.parametrize("route", ["primary", "fallback", "explicit"])
+    def test_narrative_policy_reaches_wire_for_each_configured_selection(configured, route):
+        llm = {
+            "provider": "deepseek" if route == "primary" else "minimax",
+            "max_tokens": 8192,
+            "generation_policy": {"deepseek": {"narrative": {"thinking": "disabled"}}},
+        }
+        if route == "fallback":
+            llm["fallback"] = {
+                "provider": "deepseek", "model": "configured-deepseek-model",
+                "base_url": "https://configured.example/v1", "enabled": True,
+            }
+        config = configured(llm, None if route == "primary" else "deepseek")
+        options = model_options_from_config(config.llm)
+        assert options["max_output_tokens"] == 8192
+        assert options["model_id"] == config.llm.model
+        assert options["endpoint"] == config.llm.base_url.rstrip("/") + "/chat/completions"
+>       assert options.get("thinking") == "disabled"
+E       AssertionError: assert None == 'disabled'
+E        +  where None = <built-in method get of dict object at 0x000001B056B971C0>('thinking')
+E        +    where <built-in method get of dict object at 0x000001B056B971C0> = {'model_id': 'deepseek-flash', 'endpoint': 'https://api.deepseek.com/chat/completions', 'api_key_env': 'DEEPSEEK_API_KEY', 'max_output_tokens': 8192, ...}.get
+
+..\..\AppData\Local\Temp\m3-policy-red-2w9s0w6y\test_generation_policy_probe.py:49: AssertionError
+_ test_narrative_policy_reaches_wire_for_each_configured_selection[fallback] __
+
+configured = <function configured.<locals>.load at 0x000001B057C6B060>
+route = 'fallback'
+
+    @pytest.mark.parametrize("route", ["primary", "fallback", "explicit"])
+    def test_narrative_policy_reaches_wire_for_each_configured_selection(configured, route):
+        llm = {
+            "provider": "deepseek" if route == "primary" else "minimax",
+            "max_tokens": 8192,
+            "generation_policy": {"deepseek": {"narrative": {"thinking": "disabled"}}},
+        }
+        if route == "fallback":
+            llm["fallback"] = {
+                "provider": "deepseek", "model": "configured-deepseek-model",
+                "base_url": "https://configured.example/v1", "enabled": True,
+            }
+        config = configured(llm, None if route == "primary" else "deepseek")
+        options = model_options_from_config(config.llm)
+        assert options["max_output_tokens"] == 8192
+        assert options["model_id"] == config.llm.model
+        assert options["endpoint"] == config.llm.base_url.rstrip("/") + "/chat/completions"
+>       assert options.get("thinking") == "disabled"
+E       AssertionError: assert None == 'disabled'
+E        +  where None = <built-in method get of dict object at 0x000001B056BF5980>('thinking')
+E        +    where <built-in method get of dict object at 0x000001B056BF5980> = {'model_id': 'configured-deepseek-model', 'endpoint': 'https://configured.example/v1/chat/completions', 'api_key_env': 'DEEPSEEK_API_KEY', 'max_output_tokens': 8192, ...}.get
+
+..\..\AppData\Local\Temp\m3-policy-red-2w9s0w6y\test_generation_policy_probe.py:49: AssertionError
+_ test_narrative_policy_reaches_wire_for_each_configured_selection[explicit] __
+
+configured = <function configured.<locals>.load at 0x000001B057C6BC40>
+route = 'explicit'
+
+    @pytest.mark.parametrize("route", ["primary", "fallback", "explicit"])
+    def test_narrative_policy_reaches_wire_for_each_configured_selection(configured, route):
+        llm = {
+            "provider": "deepseek" if route == "primary" else "minimax",
+            "max_tokens": 8192,
+            "generation_policy": {"deepseek": {"narrative": {"thinking": "disabled"}}},
+        }
+        if route == "fallback":
+            llm["fallback"] = {
+                "provider": "deepseek", "model": "configured-deepseek-model",
+                "base_url": "https://configured.example/v1", "enabled": True,
+            }
+        config = configured(llm, None if route == "primary" else "deepseek")
+        options = model_options_from_config(config.llm)
+        assert options["max_output_tokens"] == 8192
+        assert options["model_id"] == config.llm.model
+        assert options["endpoint"] == config.llm.base_url.rstrip("/") + "/chat/completions"
+>       assert options.get("thinking") == "disabled"
+E       AssertionError: assert None == 'disabled'
+E        +  where None = <built-in method get of dict object at 0x000001B056BE1CC0>('thinking')
+E        +    where <built-in method get of dict object at 0x000001B056BE1CC0> = {'model_id': 'deepseek-flash', 'endpoint': 'https://api.deepseek.com/chat/completions', 'api_key_env': 'DEEPSEEK_API_KEY', 'max_output_tokens': 8192, ...}.get
+
+..\..\AppData\Local\Temp\m3-policy-red-2w9s0w6y\test_generation_policy_probe.py:49: AssertionError
+=========================== short test summary info ===========================
+FAILED ..\..\AppData\Local\Temp\m3-policy-red-2w9s0w6y\test_generation_policy_probe.py::test_narrative_policy_reaches_wire_for_each_configured_selection[primary]
+FAILED ..\..\AppData\Local\Temp\m3-policy-red-2w9s0w6y\test_generation_policy_probe.py::test_narrative_policy_reaches_wire_for_each_configured_selection[fallback]
+FAILED ..\..\AppData\Local\Temp\m3-policy-red-2w9s0w6y\test_generation_policy_probe.py::test_narrative_policy_reaches_wire_for_each_configured_selection[explicit]
+3 failed, 2 passed in 6.73s

@@ -1,0 +1,8 @@
+Push unit scope: dynamic execution changed (1 paths)
+
+=== affected units and CI contract smoke ===
+====================== 2541 passed in 138.57s (0:02:18) =======================
+
+pre-push gate GREEN �� safe to push (then self-monitor CI).
+To https://github.com/zhengcb81/company-wiki.git
+   f92666d3..13a7648c  master -> master

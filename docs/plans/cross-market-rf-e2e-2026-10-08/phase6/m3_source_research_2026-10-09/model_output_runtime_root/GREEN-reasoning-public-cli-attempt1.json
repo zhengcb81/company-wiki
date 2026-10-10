@@ -1,0 +1,26 @@
+{
+  "observed_at": "2026-10-09T22:10:26.392948+00:00",
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "pytest_asyncio.plugin",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-meter-cli-green-_pybjfyd\\pytest",
+    "tests/integration/test_narrative_batch_cli_e2e.py",
+    "tests/unit/test_automation_models.py",
+    "-k",
+    "reasoning_meter_public or not test_narrative_batch_cli_e2e"
+  ],
+  "returncode": 0,
+  "elapsed_seconds": 12.043,
+  "own_temp_restored_absent": true,
+  "external_model_calls": 0
+}

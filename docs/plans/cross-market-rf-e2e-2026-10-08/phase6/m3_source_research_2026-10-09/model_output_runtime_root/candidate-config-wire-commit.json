@@ -1,0 +1,16 @@
+{
+  "observed_at": "2026-10-09T22:03:36.247801+00:00",
+  "returncode": 0,
+  "elapsed_seconds": 20.334,
+  "head": "272973ebf576162acc31daec8f544e5e84bd2c04",
+  "normal_hooks": true,
+  "files": [
+    "scripts/config.py",
+    "scripts/llm_client.py",
+    "src/company_wiki/automation/narrative_http_model.py",
+    "src/company_wiki/automation/narrative_batch_request.py",
+    "tests/unit/test_generation_policy.py"
+  ],
+  "production_config_modified": false,
+  "published_main": false
+}

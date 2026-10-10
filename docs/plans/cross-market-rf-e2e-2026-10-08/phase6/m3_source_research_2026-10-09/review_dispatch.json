@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "observed_at": "2026-10-09T21:34:26.330225+00:00",
+  "observed_at": "2026-10-09T21:52:02.477732+00:00",
   "phase": "M3 independent review",
   "execution_outcomes": {
     "CN-688012": "partial",
@@ -29,7 +29,7 @@
     {
       "company": "CN-688012",
       "role": "analyst",
-      "status": "started",
+      "status": "completed_report_verified",
       "agent": "/root/m3_cn_analyst_review"
     },
     {
@@ -77,11 +77,11 @@
     {
       "company": "US-MSFT",
       "role": "analyst",
-      "status": "started",
+      "status": "completed_report_verified",
       "agent": "/root/m3_us_analyst_review"
     }
   ],
-  "acceptance": "pending independent reports/expert; structural package not research PASS",
+  "acceptance": "12 independent reports and expert diagnostic plan delivered; implementation and research not complete",
   "shared_engineering_review": {
     "status": "remediated_review_pass_main_merged",
     "agent": "/root/m3_http_integration_review",
@@ -93,5 +93,10 @@
     "remediated_source_commit": "6cc9959fdb7a74fcb16e92471e9584893747d1a4",
     "remediated_report_sha256": "965e6ada58bc1085b5bcef63ccb0a0f3354e8e4030dca6a958289663be30ce02",
     "main_commit": "806818cf67ce188387d4487cf50e449652b70a70"
-  }
+  },
+  "expert_status": "completed_frozen_diagnostic_plan_verified",
+  "expert_agent": "/root/m3_common_root_expert",
+  "expert_package": "phase6/m3_root_remediation_2026-10-09",
+  "coordination_observed_at": "2026-10-10T14:09:19.972711+00:00",
+  "expert_manifest_sha256": "9d3f849df1a74652f2cad3e8a9f5884eacd83737fb99870020109f26a49150cb"
 }

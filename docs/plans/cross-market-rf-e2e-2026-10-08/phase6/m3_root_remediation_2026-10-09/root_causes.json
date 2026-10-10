@@ -1,0 +1,546 @@
+{
+  "schema_version": "m3-common-roots/1",
+  "roots": [
+    {
+      "root_cause_id": "R01",
+      "type": "code",
+      "owner_work_package": "W01",
+      "mechanism": "bounded capture、短 canonical 路径与失败 staged 原字节恢复",
+      "diagnosis_and_remaining": "原 RC03/04/15 已有独立工程接受；M3 不再要求重复施工。旧未保留的响应不能由重下载追溯补造。",
+      "code_boundary": "src/company_wiki/source_catalog/{canonical_writer,official_source_flow,bounded_http}.py",
+      "issue_keys": [
+        "fresh-20261009T065028-cn-688012/storage/STORAGE-003",
+        "fresh-20261009T065028-cn-688012/fetch/FETCH-004",
+        "fresh-20261009T065028-cn-688012/fetch/FETCH-005",
+        "fresh-20261009T065028-cn-688012/process/PROCESS-006",
+        "fresh-20261009T065028-hk-00700/storage/STORAGE-002",
+        "fresh-20261009T065028-hk-00700/fetch/FETCH-003"
+      ],
+      "mapped_count": 6,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    },
+    {
+      "root_cause_id": "R02",
+      "type": "code",
+      "owner_work_package": "W01",
+      "mechanism": "catalog locale 到原语言 narrative 的标准化",
+      "diagnosis_and_remaining": "原 RC01 已修且 M3 CN 年度/H1 进入模型；保留旧失败，非法语言仍有限拒绝。",
+      "code_boundary": "src/company_wiki/source_catalog/narrative_language.py",
+      "issue_keys": [
+        "fresh-20261009T065028-cn-688012/storage/STORAGE-001",
+        "fresh-20261009T065028-cn-688012/process/PROCESS-003"
+      ],
+      "mapped_count": 2,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    },
+    {
+      "root_cause_id": "R03",
+      "type": "code",
+      "owner_work_package": "W03",
+      "mechanism": "格式规范化与可用正文/未知部分的分离",
+      "diagnosis_and_remaining": "DOCX 与 HTML transcript 初始能力已修。HK H1 封面/联系页不透明、US release/metrics 定义正文仍导致整文 PARSER_INCOMPLETE；应依据正文可读性和未知范围报告 partial，不能跳过有业务价值的未知页。",
+      "code_boundary": "src/company_wiki/document_normalization/; src/company_wiki/automation/narrative_select.py",
+      "issue_keys": [
+        "fresh-20261009T065028-cn-688012/storage/STORAGE-005",
+        "fresh-20261009T065028-cn-688012/fetch/FETCH-001",
+        "fresh-20261009T065028-cn-688012/process/PROCESS-002",
+        "fresh-20261009T065028-cn-688012/analyst/ANALYST-003",
+        "fresh-20261009T065028-us-msft/storage/STORAGE-002",
+        "fresh-20261009T065028-us-msft/process/PROCESS-004",
+        "fresh-20261009T065028-us-msft/analyst/ANALYST-003",
+        "m3-20261009T184946-hk-00700/storage/HK-00700-STORAGE-004",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-005",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-008",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-006",
+        "m3-20261009T184946-us-msft/fetch/M3-US-FETCH-002",
+        "m3-20261009T184946-us-msft/process/M3-US-PROCESS-004"
+      ],
+      "mapped_count": 13,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    },
+    {
+      "root_cause_id": "R04",
+      "type": "code",
+      "owner_work_package": "W03",
+      "mechanism": "业务选择在语义组而非关键词/物理碎片上保持主体、限定和覆盖",
+      "diagnosis_and_remaining": "CN CVD/HAR/ALD 钨与 LPCVD 主体混淆、新品/300反应台及 IPO 客户限定漏选；HK 年报/英文 release 漏变现、云定价，融资段占新业务；MSFT actor0.3 后 QA5/6 仍缺，deck 消费首片段缺定义尾部。",
+      "code_boundary": "src/company_wiki/source_catalog/narrative_{evidence,group_candidates,context}.py",
+      "issue_keys": [
+        "fresh-20261009T065028-cn-688012/storage/STORAGE-004",
+        "fresh-20261009T065028-cn-688012/process/PROCESS-005",
+        "fresh-20261009T065028-cn-688012/analyst/ANALYST-001",
+        "fresh-20261009T065028-hk-00700/storage/STORAGE-003",
+        "fresh-20261009T065028-us-msft/storage/STORAGE-002",
+        "fresh-20261009T065028-us-msft/storage/STORAGE-003",
+        "fresh-20261009T065028-us-msft/process/PROCESS-004",
+        "fresh-20261009T065028-us-msft/analyst/ANALYST-003",
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-001",
+        "m3-20261009T184946-hk-00700/storage/HK-00700-STORAGE-001",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-004",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-006",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-007"
+      ],
+      "mapped_count": 13,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    },
+    {
+      "root_cause_id": "R05",
+      "type": "code",
+      "owner_work_package": "W04",
+      "mechanism": "摘要命题保留会计范围、期间和引用覆盖",
+      "diagnosis_and_remaining": "引用 ID 成员合法不等于语义完整。HK goodwill 局部无减值被扩大，MSFT 3月与6月率合并；CN 相对今年失去目标年/预测 vintage。不靠补全所有相邻引用制造支持。",
+      "code_boundary": "src/company_wiki/automation/narrative_model.py; src/company_wiki/source_catalog/narrative_evidence.py",
+      "issue_keys": [
+        "fresh-20261009T065028-hk-00700/storage/STORAGE-005",
+        "fresh-20261009T065028-us-msft/storage/STORAGE-003",
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-008",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-009",
+        "m3-20261009T184946-hk-00700/storage/HK-00700-STORAGE-002",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-008",
+        "m3-20261009T184946-us-msft/analyst/ANALYST-004"
+      ],
+      "mapped_count": 7,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    },
+    {
+      "root_cause_id": "R06",
+      "type": "config",
+      "owner_work_package": "W04",
+      "mechanism": "实际 provider/purpose 配置到模型预算与完整输出",
+      "diagnosis_and_remaining": "96/160 spans 对应31/41组仍 length=8192，HK presentation PDF 与 US call 同样失败。是否隐藏 reasoning 耗尽属未证实机制；按实际 generation_policy 配置运行，再实测。MAIN policy wire 候选不代表截断全修。",
+      "code_boundary": "scripts/config.py; scripts/llm_client.py; src/company_wiki/automation/narrative_{http_model,batch_request,model}.py",
+      "issue_keys": [
+        "fresh-20261009T065028-cn-688012/storage/STORAGE-002",
+        "fresh-20261009T065028-cn-688012/process/PROCESS-004",
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-002",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-002",
+        "m3-20261009T184946-hk-00700/storage/HK-00700-STORAGE-003",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-005",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-008",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-005",
+        "m3-20261009T184946-us-msft/fetch/M3-US-FETCH-002",
+        "m3-20261009T184946-us-msft/process/M3-US-PROCESS-004"
+      ],
+      "mapped_count": 10,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    },
+    {
+      "root_cause_id": "R07",
+      "type": "observability",
+      "owner_work_package": "W04",
+      "mechanism": "失败响应 final-content 与 reasoning token 子计量在原 attempt 中留痕",
+      "diagnosis_and_remaining": "发布13a旧HTTP length只留content_bytes/caller response_sha=null，旧响应无法恢复。MAIN62770fea reason贯通候选工程接受、支线push成功、normalmerge localmain45533e881b98fe8782b0e496abf7a4bb2904114e；remote mainpush/exactCI待，生产三配置SHA不变。final16KiB/策略公共CLI复用/真实收费仍缺；HandlerResult/attempt.result_json/Metrics复用，无新库。",
+      "code_boundary": "src/company_wiki/automation/models.py; narrative_http_model.py; narrative_model_caller.py; existing result/store/compaction consumers",
+      "issue_keys": [
+        "fresh-20261009T065028-cn-688012/storage/STORAGE-002",
+        "fresh-20261009T065028-cn-688012/process/PROCESS-004",
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-002",
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-003",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-002",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-003",
+        "m3-20261009T184946-hk-00700/storage/HK-00700-STORAGE-003",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-007",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-005"
+      ],
+      "mapped_count": 9,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    },
+    {
+      "root_cause_id": "R08",
+      "type": "data",
+      "owner_work_package": "W01",
+      "mechanism": "来源资格的精确版本身份、期间、真实公开日期",
+      "diagnosis_and_remaining": "CN FY24 raw 存在但 exact SHA 的身份/date 无证据，不能借活动日；HK H1 和 MSFT SEC 原 title/period 已被来源事实修复并在 M3 实用，保留 overview/TXT 等真正 unknown。",
+      "code_boundary": "src/company_wiki/source_catalog/{assertion_service,qualification,local_reconcile,source_reader}.py",
+      "issue_keys": [
+        "fresh-20261009T065028-cn-688012/storage/STORAGE-007",
+        "fresh-20261009T065028-cn-688012/fetch/FETCH-003",
+        "fresh-20261009T065028-cn-688012/process/PROCESS-007",
+        "fresh-20261009T065028-hk-00700/storage/STORAGE-001",
+        "fresh-20261009T065028-hk-00700/fetch/FETCH-002",
+        "fresh-20261009T065028-hk-00700/fetch/FETCH-004",
+        "fresh-20261009T065028-hk-00700/process/PROCESS-002",
+        "fresh-20261009T065028-hk-00700/analyst/ANALYST-003",
+        "fresh-20261009T065028-us-msft/storage/STORAGE-001",
+        "fresh-20261009T065028-us-msft/storage/STORAGE-004",
+        "fresh-20261009T065028-us-msft/fetch/FETCH-001",
+        "fresh-20261009T065028-us-msft/fetch/FETCH-002",
+        "fresh-20261009T065028-us-msft/process/PROCESS-002",
+        "fresh-20261009T065028-us-msft/analyst/ANALYST-003",
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-007",
+        "m3-20261009T184946-cn-688012/fetch/CN688012-FETCH-005",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-010"
+      ],
+      "mapped_count": 17,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    },
+    {
+      "root_cause_id": "R09",
+      "type": "code",
+      "owner_work_package": "W02",
+      "mechanism": "多 issuer official JSON 的 raw subject、结构投影与 AUTO 独立路由",
+      "diagnosis_and_remaining": "当前 admission 单 content transcript、单公司存储 metadata、MIME JSON transcript routing 三层共同错位。257记录24目标与36395非空 answer需保留；纯结构 parser/registered layout、共享raw、projection lineage，禁止公司 if。",
+      "code_boundary": "src/company_wiki/source_catalog/{official_source_flow,contracts,canonical_writer}.py; new official_json modules and existing AUTO routing",
+      "issue_keys": [
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-004",
+        "m3-20261009T184946-cn-688012/fetch/CN688012-FETCH-003",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-006"
+      ],
+      "mapped_count": 3,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    },
+    {
+      "root_cause_id": "R10",
+      "type": "execution",
+      "owner_work_package": "W05",
+      "mechanism": "scope/profile/caps/env 与实际冻结请求一致",
+      "diagnosis_and_remaining": "scope P1 实跑 P2；32/64MiB 实传128/128MiB或100000000；HK初始wrapper未继承配置。请求构造/执行偏差，不是新增资格许可门。修请求生成和记录，空间实际小不能证明原上限生效。",
+      "code_boundary": "revenue-forecast-audit/skills/revenue-forecast-audit/ and new executor request builder",
+      "issue_keys": [
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-004",
+        "m3-20261009T184946-hk-00700/fetch/M3-HK-FETCH-002",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-001",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-002",
+        "m3-20261009T184946-us-msft/fetch/M3-US-FETCH-001",
+        "m3-20261009T184946-us-msft/process/M3-US-PROCESS-003",
+        "m3-20261009T184946-us-msft/process/M3-US-PROCESS-005"
+      ],
+      "mapped_count": 7,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    },
+    {
+      "root_cause_id": "R11",
+      "type": "observability",
+      "owner_work_package": "W06",
+      "mechanism": "跨边界实际状态、call ID 和 acquisition usage 保真",
+      "diagnosis_and_remaining": "失败响应已知 status/type/encoding不能漏；successful SEC metadata GET 也计量，raw bytes!=network bytes；FF/RF success不得丢 DTO。HK matrix复制7call到14source、只写stdout保留不足，矩阵由W05消费真实业务状态。",
+      "code_boundary": "CWP dayu_sdk_cli.py/tools/dayu_sdk_bridge.py + FF scripts + RF acquisition projection",
+      "issue_keys": [
+        "fresh-20261009T065028-hk-00700/storage/STORAGE-007",
+        "fresh-20261009T065028-hk-00700/fetch/FETCH-005",
+        "fresh-20261009T065028-us-msft/storage/STORAGE-006",
+        "fresh-20261009T065028-us-msft/fetch/FETCH-001",
+        "fresh-20261009T065028-us-msft/fetch/FETCH-004",
+        "fresh-20261009T065028-us-msft/fetch/FETCH-005",
+        "m3-20261009T184946-cn-688012/fetch/CN688012-FETCH-002",
+        "m3-20261009T184946-hk-00700/fetch/M3-HK-FETCH-003",
+        "m3-20261009T184946-us-msft/fetch/M3-US-FETCH-005",
+        "m3-20261009T184946-us-msft/fetch/M3-US-FETCH-006"
+      ],
+      "mapped_count": 10,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    },
+    {
+      "root_cause_id": "R12",
+      "type": "observability",
+      "owner_work_package": "W05",
+      "mechanism": "预调用字节历史、正式交付链接与信任边界",
+      "diagnosis_and_remaining": "W11 recorder 现已独立接受，M3原输入保留；旧字节缺口仍 unknown。HK central TRUST_BOUNDARY 存在但正式产物旁缺链接/statement，补新交付索引，不改旧manifest。",
+      "code_boundary": "audit scripts/audit_run.py; references/artifact-contract.md; new run delivery only",
+      "issue_keys": [
+        "fresh-20261009T065028-cn-688012/fetch/FETCH-006",
+        "fresh-20261009T065028-hk-00700/storage/STORAGE-007",
+        "fresh-20261009T065028-hk-00700/process/PROCESS-004",
+        "fresh-20261009T065028-hk-00700/process/PROCESS-005",
+        "fresh-20261009T065028-us-msft/storage/STORAGE-006",
+        "fresh-20261009T065028-us-msft/process/PROCESS-005",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-008"
+      ],
+      "mapped_count": 7,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    },
+    {
+      "root_cause_id": "R13",
+      "type": "data",
+      "owner_work_package": "W05",
+      "mechanism": "研究 authoring 的逐字证据与计数/日期来源",
+      "diagnosis_and_remaining": "HK两claim重复重排不连续；CADPA猜年度末date/helper无source_ref批次崩溃；CN QA答复/结束/precollect混淆；MSFT Total/年份/单位表头省略，Gartner正文未冻结不等于full read。新attempt纠错，旧报告不倒改。",
+      "code_boundary": "audit execution helpers and references; new research inputs only",
+      "issue_keys": [
+        "fresh-20261009T065028-cn-688012/process/PROCESS-008",
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-008",
+        "m3-20261009T184946-cn-688012/fetch/CN688012-FETCH-007",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-008",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-009",
+        "m3-20261009T184946-hk-00700/fetch/M3-HK-FETCH-005",
+        "m3-20261009T184946-hk-00700/fetch/M3-HK-FETCH-006",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-003",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-006",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-007",
+        "m3-20261009T184946-us-msft/process/M3-US-PROCESS-006",
+        "m3-20261009T184946-us-msft/process/M3-US-PROCESS-007",
+        "m3-20261009T184946-us-msft/analyst/ANALYST-006"
+      ],
+      "mapped_count": 13,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    },
+    {
+      "root_cause_id": "R14",
+      "type": "research",
+      "owner_work_package": "W08",
+      "mechanism": "资料覆盖从发现、原件、全读到重要性与模型消费闭环",
+      "diagnosis_and_remaining": "179公告titles不等于全文，M&A标的审计/proforma不能按暂未进入公式就判行政；HK79组+另21组需合并而非1802全覆盖；SourceRef/read/covered_by需要精确ledger。",
+      "code_boundary": "new run document/source/materiality ledgers through CWP public APIs",
+      "issue_keys": [
+        "fresh-20261009T065028-cn-688012/storage/STORAGE-005",
+        "fresh-20261009T065028-cn-688012/fetch/FETCH-001",
+        "fresh-20261009T065028-cn-688012/fetch/FETCH-002",
+        "fresh-20261009T065028-cn-688012/process/PROCESS-002",
+        "fresh-20261009T065028-cn-688012/analyst/ANALYST-003",
+        "fresh-20261009T065028-hk-00700/storage/STORAGE-004",
+        "fresh-20261009T065028-hk-00700/fetch/FETCH-004",
+        "fresh-20261009T065028-hk-00700/process/PROCESS-002",
+        "fresh-20261009T065028-hk-00700/analyst/ANALYST-003",
+        "fresh-20261009T065028-us-msft/storage/STORAGE-004",
+        "fresh-20261009T065028-us-msft/fetch/FETCH-001",
+        "fresh-20261009T065028-us-msft/process/PROCESS-002",
+        "fresh-20261009T065028-us-msft/analyst/ANALYST-003",
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-005",
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-006",
+        "m3-20261009T184946-cn-688012/fetch/CN688012-FETCH-004",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-011",
+        "m3-20261009T184946-cn-688012/analyst/ANALYST-CN688012-005",
+        "m3-20261009T184946-hk-00700/fetch/M3-HK-FETCH-004",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-009",
+        "m3-20261009T184946-us-msft/fetch/M3-US-FETCH-003",
+        "m3-20261009T184946-us-msft/analyst/ANALYST-006"
+      ],
+      "mapped_count": 22,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    },
+    {
+      "root_cause_id": "R15",
+      "type": "provider",
+      "owner_work_package": "W08",
+      "mechanism": "真实外部能力/拒绝与替代原件的边界",
+      "diagnosis_and_remaining": "HK ET unsupported_market/official404，US FMP entitlement及8业务primary403，CN IR204/403、小响应、SSE gzip HTML：均不能伪称不存在或新成功。已修内部配置/transport不等于外部条件改变。Dayu零改。",
+      "code_boundary": "configured external providers (read-only); CWP public bounded capture/import",
+      "issue_keys": [
+        "fresh-20261009T065028-cn-688012/storage/STORAGE-005",
+        "fresh-20261009T065028-cn-688012/fetch/FETCH-001",
+        "fresh-20261009T065028-cn-688012/fetch/FETCH-002",
+        "fresh-20261009T065028-cn-688012/process/PROCESS-002",
+        "fresh-20261009T065028-cn-688012/analyst/ANALYST-003",
+        "fresh-20261009T065028-hk-00700/storage/STORAGE-004",
+        "fresh-20261009T065028-hk-00700/fetch/FETCH-001",
+        "fresh-20261009T065028-hk-00700/fetch/FETCH-004",
+        "fresh-20261009T065028-hk-00700/process/PROCESS-002",
+        "fresh-20261009T065028-hk-00700/analyst/ANALYST-003",
+        "fresh-20261009T065028-us-msft/storage/STORAGE-004",
+        "fresh-20261009T065028-us-msft/fetch/FETCH-003",
+        "fresh-20261009T065028-us-msft/analyst/ANALYST-003",
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-005",
+        "m3-20261009T184946-cn-688012/fetch/CN688012-FETCH-001",
+        "m3-20261009T184946-cn-688012/fetch/CN688012-FETCH-004",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-005",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-011",
+        "m3-20261009T184946-cn-688012/analyst/ANALYST-CN688012-005",
+        "m3-20261009T184946-hk-00700/storage/HK-00700-STORAGE-005",
+        "m3-20261009T184946-hk-00700/fetch/M3-HK-FETCH-001",
+        "m3-20261009T184946-hk-00700/fetch/M3-HK-FETCH-007",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-004",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-006",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-008",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-009",
+        "m3-20261009T184946-us-msft/fetch/M3-US-FETCH-003",
+        "m3-20261009T184946-us-msft/fetch/M3-US-FETCH-004",
+        "m3-20261009T184946-us-msft/process/M3-US-PROCESS-006",
+        "m3-20261009T184946-us-msft/analyst/ANALYST-006"
+      ],
+      "mapped_count": 30,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    },
+    {
+      "root_cause_id": "R16",
+      "type": "research",
+      "owner_work_package": "W09",
+      "mechanism": "未来幅度校准、支持期与请求三年 horizon",
+      "diagnosis_and_remaining": "历史季节性/增量系数/flat roll不是未来收入因果校准；条件标签/confidence0/算术PASS不能接受研究。CN2026-28、US2027-29缺后两年，HKflat后两年不能作为有证核心forecast。",
+      "code_boundary": "new RF research inputs and source-only research notes; RF methodology skill checkpoints",
+      "issue_keys": [
+        "fresh-20261009T065028-cn-688012/process/PROCESS-001",
+        "fresh-20261009T065028-cn-688012/analyst/ANALYST-001",
+        "fresh-20261009T065028-cn-688012/analyst/ANALYST-004",
+        "fresh-20261009T065028-hk-00700/process/PROCESS-001",
+        "fresh-20261009T065028-hk-00700/analyst/ANALYST-001",
+        "fresh-20261009T065028-us-msft/process/PROCESS-001",
+        "fresh-20261009T065028-us-msft/analyst/ANALYST-001",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-001",
+        "m3-20261009T184946-cn-688012/analyst/ANALYST-CN688012-001",
+        "m3-20261009T184946-cn-688012/analyst/ANALYST-CN688012-004",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-001",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-001",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-002",
+        "m3-20261009T184946-us-msft/process/M3-US-PROCESS-001",
+        "m3-20261009T184946-us-msft/analyst/ANALYST-001",
+        "m3-20261009T184946-us-msft/analyst/ANALYST-002"
+      ],
+      "mapped_count": 16,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    },
+    {
+      "root_cause_id": "R17",
+      "type": "research",
+      "owner_work_package": "W09",
+      "mechanism": "共享约束的物理曝光、时点、延期/取消/恢复",
+      "diagnosis_and_remaining": "现联合DAG/min算式绿仅证明计算；CN joint全1等于Low，HK/US示例90%/95%无独立界。不能用USD收入pool替代物理算力分配，订阅/用量/供给与需求关联要有可复查依据。",
+      "code_boundary": "new RF research operating_research/revenue_constraints inputs",
+      "issue_keys": [
+        "fresh-20261009T065028-cn-688012/analyst/ANALYST-002",
+        "fresh-20261009T065028-hk-00700/analyst/ANALYST-002",
+        "fresh-20261009T065028-us-msft/analyst/ANALYST-002",
+        "m3-20261009T184946-cn-688012/analyst/ANALYST-CN688012-003",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-003",
+        "m3-20261009T184946-us-msft/process/M3-US-PROCESS-001",
+        "m3-20261009T184946-us-msft/analyst/ANALYST-005"
+      ],
+      "mapped_count": 7,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    },
+    {
+      "root_cause_id": "R18",
+      "type": "research",
+      "owner_work_package": "W09",
+      "mechanism": "经营生命周期、目标反证和并购控制/抵销的最小桥",
+      "diagnosis_and_remaining": "CN产品/chambers mixed proxy不是ASP，众硅全年承诺与购后/group不同且2027/28不能沿用2026prepurchase理由；HK Ximalaya/混合业务/Others；MSFT Windows/Xbox/许可转折、M36517CC/18adjusted/FX、RPO/付费/注册/preview阶段不能混加。",
+      "code_boundary": "new RF operating inventory/management targets/formula inputs",
+      "issue_keys": [
+        "fresh-20261009T065028-cn-688012/fetch/FETCH-002",
+        "fresh-20261009T065028-cn-688012/process/PROCESS-005",
+        "fresh-20261009T065028-cn-688012/analyst/ANALYST-001",
+        "fresh-20261009T065028-cn-688012/analyst/ANALYST-004",
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-006",
+        "m3-20261009T184946-cn-688012/analyst/ANALYST-CN688012-002",
+        "m3-20261009T184946-cn-688012/analyst/ANALYST-CN688012-006",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-002",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-003",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-004",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-006",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-007",
+        "m3-20261009T184946-us-msft/process/M3-US-PROCESS-002",
+        "m3-20261009T184946-us-msft/analyst/ANALYST-001",
+        "m3-20261009T184946-us-msft/analyst/ANALYST-003",
+        "m3-20261009T184946-us-msft/analyst/ANALYST-004",
+        "m3-20261009T184946-us-msft/analyst/ANALYST-007"
+      ],
+      "mapped_count": 17,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    },
+    {
+      "root_cause_id": "R19",
+      "type": "code",
+      "owner_work_package": "W07",
+      "mechanism": "triangulated 的证据角色语义",
+      "diagnosis_and_remaining": "research/drivers.py 仅排 peer_analogy，history_base/融资历史可因两来源两类型误得triangulated。应按各node实际claim observation role/scope区分机制支持、历史、方向、幅度；不新增人签或硬阈值造信心。",
+      "code_boundary": "RF scripts/research/drivers.py; scripts/contracts/constants.py (role semantics only)",
+      "issue_keys": [
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-005"
+      ],
+      "mapped_count": 1,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    },
+    {
+      "root_cause_id": "R20",
+      "type": "code",
+      "owner_work_package": "W07",
+      "mechanism": "半年/季度 flow 的类型化期间语义",
+      "diagnosis_and_remaining": "TIME_BASES当前只有annual/point_in_time，HK10H1+5H2与CN3H1至少18个半年flow被标annual。扩展版本化期间流语义和渲染/强校验，旧产物按旧emitter只读验证，不只令研究改字。",
+      "code_boundary": "RF scripts/contracts/{constants,document}.py; references/input-schema.md; affected pure consumers",
+      "issue_keys": [
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-001",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-009"
+      ],
+      "mapped_count": 2,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    },
+    {
+      "root_cause_id": "R21",
+      "type": "code",
+      "owner_work_package": "W07",
+      "mechanism": "DAG祖先shock与派生后裔重算",
+      "diagnosis_and_remaining": "旧 RC16 已修且M3原生敏感性/算术独立PASS；保留证据，不重写或再跑整套。新半年度flow需保留正确H1+H2闭包。",
+      "code_boundary": "RF scripts/forecast/ and existing sensitivity modules; existing owner reserved",
+      "issue_keys": [
+        "fresh-20261009T065028-hk-00700/process/PROCESS-003",
+        "fresh-20261009T065028-us-msft/process/PROCESS-003"
+      ],
+      "mapped_count": 2,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    },
+    {
+      "root_cause_id": "R22",
+      "type": "code",
+      "owner_work_package": "W07",
+      "mechanism": "输出重建绑定foundation/constraints及合法signed opening bridge",
+      "diagnosis_and_remaining": "原专家2条独立carryover；current revenue_report.py已有signed adjustments/tolerance/opening residual强重算，需引用既有owner接受证据，不重复修改assurance/output。输入绑定与角色保真仍由原owner复核。",
+      "code_boundary": "RF scripts/revenue_report.py; forecast/calc.py; existing assurance/output owner",
+      "issue_keys": [
+        "fresh-root-expert-20261009/output/EXPERT-001",
+        "fresh-root-expert-20261009/output/EXPERT-002"
+      ],
+      "mapped_count": 2,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    },
+    {
+      "root_cause_id": "R23",
+      "type": "code",
+      "owner_work_package": "W03",
+      "mechanism": "电话会 actor 与 affiliation 的可重放解析",
+      "diagnosis_and_remaining": "0.2 comma affiliation角色错配已由0.3独立工程接受并发布；旧冻结0.2不重算。此根只演员解析，QA业务选择R04另计。",
+      "code_boundary": "src/company_wiki/source_catalog/transcript_layout.py and transcript parser",
+      "issue_keys": [
+        "fresh-20261009T065028-us-msft/storage/STORAGE-002",
+        "fresh-20261009T065028-us-msft/process/PROCESS-004",
+        "fresh-20261009T065028-us-msft/analyst/ANALYST-003",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-003"
+      ],
+      "mapped_count": 4,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    },
+    {
+      "root_cause_id": "R24",
+      "type": "code",
+      "owner_work_package": "W01",
+      "mechanism": "HTTP content encoding 解码受界与实际MIME",
+      "diagnosis_and_remaining": "6cc9959f独立工程PASS/main806818cf；实际SSE200gzip HTML依然不是PDF，旧8unknown不能核销。只有新真实正确原件可关闭资料缺口。",
+      "code_boundary": "src/company_wiki/source_catalog/bounded_http.py",
+      "issue_keys": [
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-005",
+        "m3-20261009T184946-cn-688012/fetch/CN688012-FETCH-001",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-005"
+      ],
+      "mapped_count": 3,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    },
+    {
+      "root_cause_id": "R25",
+      "type": "code",
+      "owner_work_package": "W01",
+      "mechanism": "optional fiscal_period 省略与具体候选期间比较",
+      "diagnosis_and_remaining": "RF sourceccce3bf4/main0c248d9a已发布；两旧真实请求省略期间均H1复用0GET。无需重复施工/再跑全套，显式wrong period负例仍拒绝。",
+      "code_boundary": "RF scripts/company_wiki_source_reader_v2.py (published single-file fix)",
+      "issue_keys": [
+        "m3-20261009T184946-cn-688012/fetch/CN688012-FETCH-006",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-007"
+      ],
+      "mapped_count": 2,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    },
+    {
+      "root_cause_id": "R26",
+      "type": "observability",
+      "owner_work_package": "W03",
+      "mechanism": "cache generation复用与source/config/generator失效",
+      "diagnosis_and_remaining": "M3同generation cache 0new model/token/fee已实际证明；source/config/generator变更还未执行。下一大节点在自有TEMP用真实版本变化分别验一回，非追加许可canary。",
+      "code_boundary": "CWP existing narrative cache/generation keys; owned TEMP only",
+      "issue_keys": [
+        "fresh-20261009T065028-cn-688012/storage/STORAGE-006",
+        "fresh-20261009T065028-hk-00700/storage/STORAGE-006",
+        "fresh-20261009T065028-us-msft/storage/STORAGE-005",
+        "m3-20261009T184946-hk-00700/storage/HK-00700-STORAGE-006"
+      ],
+      "mapped_count": 4,
+      "implementation_state": "prior fixes / proposed remaining responsibilities are separated in each card"
+    }
+  ]
+}

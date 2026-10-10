@@ -1,0 +1,695 @@
+{
+  "status": "read_only_local_expert_verification_not_engineering_or_research_acceptance",
+  "m3_reports": 12,
+  "checks": 246,
+  "findings": 91,
+  "all_report_json_and_markdown_shas_rechecked": true,
+  "raw_pages_reparsed_and_byte_hash_checked": [
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-01.raw",
+      "bytes": 5119,
+      "sha256": "416542b0c8f72400800edf69832df1bd3b48e50cf19c0019c647af445b97760b",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-02.raw",
+      "bytes": 7170,
+      "sha256": "7eb53720b0b2aa85e433748b42505c612270e26c585c0ec1b144dce62addde03",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-03.raw",
+      "bytes": 9973,
+      "sha256": "a2003f7a010e5f55767b7a1f0cd07c61e1bcc2a5d5012d0a0a582b99e60e5566",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-04.raw",
+      "bytes": 6544,
+      "sha256": "cce060ad59a167881016ab5d29742afb07a27244f78120a6613007f6799355b7",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-05.raw",
+      "bytes": 7352,
+      "sha256": "b331b4bfec14e4208a126f6017900eca3970aabea10468ac605572a221e6d774",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-06.raw",
+      "bytes": 11314,
+      "sha256": "489b7cc5bd3496034d650feaa1efd331ea1993672a865408a47c4ca9fc03e7ce",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-07.raw",
+      "bytes": 7628,
+      "sha256": "72a05c44d29d3980c545629d5ae2961339c5f78e701ff4e23db7fcfd209ed80f",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-08.raw",
+      "bytes": 8433,
+      "sha256": "a5a35cb827c05b12eb5cb16564268fe5501c495b9b76d656371b6a7965fdf0f0",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-09.raw",
+      "bytes": 11124,
+      "sha256": "3db91cca49b6ae9e0ee2bb28066b355e2425a56963c27a11c8cb972ea0a075a0",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-10.raw",
+      "bytes": 8082,
+      "sha256": "e78b7e1addec86aa275efd2ae2d2bf4a4a0e1a1d2b425cc7bb2659ff7567ae2f",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-11.raw",
+      "bytes": 8545,
+      "sha256": "3937363633fa8af29fe0587c19111d6d91802ae7c2666b089266f8ace412c5ba",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-12.raw",
+      "bytes": 11684,
+      "sha256": "b9b68aa3c5d2f6fb0d6e2ad985cb412b94fd1facdd1a6f3c430c7255d276949c",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-13.raw",
+      "bytes": 7827,
+      "sha256": "b968a303bf36970f3fb4aa2475d8d707b49d8943b86240552e67b9a973752bc7",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-14.raw",
+      "bytes": 9524,
+      "sha256": "942fc96f57eecd29c44c0081c908cddc05d0d1551a52c910ad8aa0274ae55797",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-15.raw",
+      "bytes": 18349,
+      "sha256": "90bde0073173f1bfdc60e64a3922504294cf4fbb0481e6afd3ff42d5613b63af",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-16.raw",
+      "bytes": 14408,
+      "sha256": "abe9c08f390fb09890558d8048115a6f403dfa8179d55fc22401d5fa940f54e9",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-17.raw",
+      "bytes": 7436,
+      "sha256": "3db078aaea731d046baa36a5b7cc0e242028f4fd5ac082f4d119238774dcb906",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-18.raw",
+      "bytes": 7316,
+      "sha256": "fc1c2a8ebb7cb44b3cf6f82a5ecfa5641cf81478ed35e615c0928f36a2a389fe",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-19.raw",
+      "bytes": 10993,
+      "sha256": "3774397d42bb642268e3b5abd972da2733fa0e2dcf6514c85c7250cd62cac472",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-20.raw",
+      "bytes": 8035,
+      "sha256": "0ea43713b836a35ba38c36feb14f48b40c32198e2a7f42f76c927141328e0820",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-21.raw",
+      "bytes": 9865,
+      "sha256": "59df28d9835b78dfb0fba6ae6253a2c3a5d534766e2399624d33ea2b91bc897b",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-22.raw",
+      "bytes": 6310,
+      "sha256": "0efec9b0ea0635e301f9d2b8d4748063f78f3fced19f3958a7103cdec3a0be05",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-23.raw",
+      "bytes": 8773,
+      "sha256": "d6f04848d2e130f23cb63dcd8a20a1028512e573f4204302518b36a37cb9d956",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-24.raw",
+      "bytes": 8104,
+      "sha256": "b74e381c3d99674939964eb7ec2e6c6029bf294df762078de80e0765e37a6f51",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-25.raw",
+      "bytes": 7186,
+      "sha256": "e5b3fbbf67acc9a243b47cccf4dbb51b7639ee1f005d6ebfa59a29cb4b793852",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-26.raw",
+      "bytes": 7323,
+      "sha256": "bae8403d7352c736cc1592117b434675d93d00f4a9b4eb1efad5379b44e2bff3",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-27.raw",
+      "bytes": 8280,
+      "sha256": "1017c84b4865c655b4277fbb3344bcad0d2e5e650f0d79a042241b552fd89884",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-28.raw",
+      "bytes": 9954,
+      "sha256": "442dad1ec4f9cadbc04166fe356121dbb060bfe4ed59d2276f940d164b13da3e",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-29.raw",
+      "bytes": 7291,
+      "sha256": "d5e6874a434eb6e57f41793a607d721349432ff1e2db13fe70c9a07fcc474ad8",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-30.raw",
+      "bytes": 8224,
+      "sha256": "cd45846ac81b9ee78ff9fef31d7063eb7b05f1359c7e46233aa4b663e4dd4698",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-31.raw",
+      "bytes": 7798,
+      "sha256": "87bac141d87d232f9008aa6b86723f4a626b522ea678e935ec6996b9692ec5c7",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-32.raw",
+      "bytes": 15960,
+      "sha256": "c04d30b511aa40bf81a9cb91e231e9023efee3b474c437fee56c315b90e97919",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-33.raw",
+      "bytes": 9947,
+      "sha256": "8e89b6a2c73ce3b23d3c06f91613200e1745b8171e2e2c4af4cec46f1769f98f",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-34.raw",
+      "bytes": 8802,
+      "sha256": "dccea2c832adcb9e7fec20fa1b8c5653f41c60d6e26984ae90c6ef0b2d1d3417",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-35.raw",
+      "bytes": 7417,
+      "sha256": "da42633864271c92ec865e95cc42014ae23ecc0d23f747fb981efff5ef2c9a08",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-36.raw",
+      "bytes": 6775,
+      "sha256": "e3157093bcbd58f580f0e290f98695f56af655c4827dffe64bdad239c9fb3ebe",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-37.raw",
+      "bytes": 8874,
+      "sha256": "9e48d106bdb023f4e7c57583d12f91cd1bcb574e77df571e060d5662142aa651",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-38.raw",
+      "bytes": 7314,
+      "sha256": "b92840e54db0cdb2fc10a989905c29458d29e23e05dd0f3c7a236abc146e3989",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-39.raw",
+      "bytes": 6982,
+      "sha256": "33f1c4a24f806c27f635b1c9d72f7e7c76c3690666e281dd61fface1ec7cf123",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-40.raw",
+      "bytes": 8987,
+      "sha256": "40b4352cc5d39f721a2bebe67e5dff3ace41688444c7b3aa4d47c5cfb72731b1",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-41.raw",
+      "bytes": 6445,
+      "sha256": "40a5179d8a37705f241c9f983bf215f0d7edc83e4da328fdc8960a5252bd25e8",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-42.raw",
+      "bytes": 7154,
+      "sha256": "9c793eeb63eac7a07176deb7f2f20ca81805ac0acebb3e5efa508b29792d1192",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-43.raw",
+      "bytes": 6046,
+      "sha256": "73b2c6be46e052c35acb01a5f2911fdf49e15953b979ad92d44c66e0d1b9ffa2",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-44.raw",
+      "bytes": 10005,
+      "sha256": "0818203966590c65cc0c2ed80a96fd69ab258d7f4e69fdf5bb8f70c31e3ee7f5",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-45.raw",
+      "bytes": 9267,
+      "sha256": "9b95813f6acce809348cb72b57aac62d161886ca2a29d24d734a0b4288d69394",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-46.raw",
+      "bytes": 10455,
+      "sha256": "18544b611a640b0e9c3fbfb681606ab5e206f4a70ce2e23b8c50ece95146a714",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-47.raw",
+      "bytes": 7541,
+      "sha256": "92d212f2297d2615da8042d2d643641d5737ef68d52c91807dc358ae22a3c235",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-48.raw",
+      "bytes": 7118,
+      "sha256": "bfe4baa14b779d64aa3d4f5d48c0e86b7288de4cba8bb2a9d7351676372f15dc",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-49.raw",
+      "bytes": 6866,
+      "sha256": "bdda4e25cdc29629cc0b172ceb4fe602a3e5c03f51bc8f3b6c67a22408fdbdd4",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-50.raw",
+      "bytes": 9163,
+      "sha256": "4d5ee82f892a3d494550bfed276305a0fc49d40c2295504037b45014a7ea56a1",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-51.raw",
+      "bytes": 5399,
+      "sha256": "e536602abc798b276ea65955e98c16d30f9ea59f0bd38bb36f3db0b7c6bc84af",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-52.raw",
+      "bytes": 5071,
+      "sha256": "be9e4ad9b679a85bc60f47d625d1189e413bc00c90d3adcd25afb12aac5d0b4f",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-53.raw",
+      "bytes": 12425,
+      "sha256": "f75e24f12690edefaaff4c8b116e5d460bdf7a20e8fa2b8bb80106d0221d03e3",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-54.raw",
+      "bytes": 7102,
+      "sha256": "c620093812d9e420a4847ea0348906e5d167b9dc429a181f223c730c00064271",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-55.raw",
+      "bytes": 10236,
+      "sha256": "1eaa025ae7e0fabc6d384ee2db0184a0a50e2934df7fd098002f6a0885d9c7b7",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-56.raw",
+      "bytes": 8870,
+      "sha256": "a988c6d06815c6518b208c450d58450ab8ae3716570416be188fa5bfe143df9e",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-57.raw",
+      "bytes": 8482,
+      "sha256": "428f8ec70bea1832bca08c49e4663644d178a75b97dc55daf26899298bbdcfc5",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-58.raw",
+      "bytes": 7181,
+      "sha256": "9ce280de95ef8b037296bcd042db43051fb17d2f33f3d751410e1eb41201079d",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-59.raw",
+      "bytes": 7213,
+      "sha256": "f1e96713bf11e3c46958d324812390fb399ac59cfcc4c07524d3a8744214868d",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-60.raw",
+      "bytes": 7774,
+      "sha256": "973613c6958b6f1876cb16a65d8289f33efc67e3dcc9b699d1355aecd931e8c1",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-61.raw",
+      "bytes": 9693,
+      "sha256": "a272e02159147b4e475b512eb4c8dcb835bd7a03dcf7754d3eec738b4d2e013e",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-62.raw",
+      "bytes": 8523,
+      "sha256": "098d3d5f156514e33e59995cdbf7ba562349a90361defb7103184d278ff499d8",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-63.raw",
+      "bytes": 6337,
+      "sha256": "d82b3bf687d6cce9e10e6e0a1d0ae23b491dcf1f307fb0e43ad67d6187e09821",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-64.raw",
+      "bytes": 11407,
+      "sha256": "9750187231972200c6242fd7222a99e63e5462dbe4d8783ef8496e2d2d3a5edf",
+      "records": 3
+    },
+    {
+      "stream": "latest",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-65.raw",
+      "bytes": 11272,
+      "sha256": "96e159af9531039de4b6ec33e3433d9a4bb3022dd81f241cc0e834e4f4f1be23",
+      "records": 3
+    },
+    {
+      "stream": "questions",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-questions-form-01.raw",
+      "bytes": 5925,
+      "sha256": "509bcbcdde98e1ac46464453ed1a7a339134107b67fb5370269639e8192bb2e0",
+      "records": 3
+    },
+    {
+      "stream": "questions",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-questions-form-02.raw",
+      "bytes": 4765,
+      "sha256": "922bb55c7505a77368322a4e0239c01185742377c96e8f8dcc0f6b25c15aa733",
+      "records": 3
+    },
+    {
+      "stream": "questions",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-questions-form-03.raw",
+      "bytes": 5441,
+      "sha256": "44163295d6d9ef96f898c3d11ee59e53d0db4ebe51b15eead086f60c8684d699",
+      "records": 3
+    },
+    {
+      "stream": "questions",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-questions-form-04.raw",
+      "bytes": 5203,
+      "sha256": "3da709f67150df1df567f93fc900cd498d4fb7b67328e8cdf6a50de10f268dba",
+      "records": 3
+    },
+    {
+      "stream": "questions",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-questions-form-05.raw",
+      "bytes": 4497,
+      "sha256": "7be36610ac907cd0f76280059ef89b8fc223e83db199f0129ef8b1867a5ac673",
+      "records": 3
+    },
+    {
+      "stream": "questions",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-questions-form-06.raw",
+      "bytes": 3839,
+      "sha256": "e7ca1d308a4e232a7aaf897e7528c342c4f3bb66a9171b54ca60621af2f38f47",
+      "records": 3
+    },
+    {
+      "stream": "questions",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-questions-form-07.raw",
+      "bytes": 3956,
+      "sha256": "cce606317359314e25b78035dad7d44c9f0a13bb63a282cc6eeeb386c36256c2",
+      "records": 3
+    },
+    {
+      "stream": "questions",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-questions-form-08.raw",
+      "bytes": 4199,
+      "sha256": "3a8058e19f8f21a7ba5bda0e26a409f41971fa8703b6a5be50865b6c7b17e7a3",
+      "records": 3
+    },
+    {
+      "stream": "questions",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-questions-form-09.raw",
+      "bytes": 4929,
+      "sha256": "35ba3f83ac6e1f4b8b4050e90c4e86bc1aeeacf018dbd625d3711804d22b2b99",
+      "records": 3
+    },
+    {
+      "stream": "questions",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-questions-form-10.raw",
+      "bytes": 7256,
+      "sha256": "11643544b288ea04c1923596c6cb6b2bb75e84be256afef0b501393450d82039",
+      "records": 3
+    },
+    {
+      "stream": "questions",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-questions-form-11.raw",
+      "bytes": 7287,
+      "sha256": "a2118c8e1333ef37df00b44cd6b30bdcc7ca0aab96c47f927eb1faece7d02539",
+      "records": 3
+    },
+    {
+      "stream": "precollect",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-precollect-form-01.raw",
+      "bytes": 5085,
+      "sha256": "f890ba0c4f075797188a93205f2346d3f838f17a2d802a3c8ed11d84c02cfaf0",
+      "records": 3
+    },
+    {
+      "stream": "precollect",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-precollect-form-02.raw",
+      "bytes": 4364,
+      "sha256": "931e8438c367edc75d4bae274c1b77273eb310efcd01edfc647b721e546a328c",
+      "records": 3
+    },
+    {
+      "stream": "precollect",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-precollect-form-03.raw",
+      "bytes": 3947,
+      "sha256": "118abcaa9883bd2aab23fd2b89d856d56e338a307972a51a6faa308192c9acb7",
+      "records": 3
+    },
+    {
+      "stream": "precollect",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-precollect-form-04.raw",
+      "bytes": 4538,
+      "sha256": "621eeef81cc7e5a80ed3231d9d24c07f123d52de3f92251a629b11b0d7aa4357",
+      "records": 3
+    },
+    {
+      "stream": "precollect",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-precollect-form-05.raw",
+      "bytes": 3915,
+      "sha256": "08d2f438308d015d83a3afeef324c886757c512dc6c226b862f85c02f85fbc78",
+      "records": 3
+    },
+    {
+      "stream": "precollect",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-precollect-form-06.raw",
+      "bytes": 6657,
+      "sha256": "fe5138e7b8270629a4cd4dd34cf9b22127244bb63800d203b878f1fddb6b56f1",
+      "records": 3
+    },
+    {
+      "stream": "precollect",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-precollect-form-07.raw",
+      "bytes": 5421,
+      "sha256": "9c29223f4e1fbff9b3c6811a61741dc7d447bf2ea9cdcf3e8985d344a915e2dc",
+      "records": 3
+    },
+    {
+      "stream": "precollect",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-precollect-form-08.raw",
+      "bytes": 5154,
+      "sha256": "badbf360188e86033e368ab41c12a61503d1045d54aec0cb9b97a621ff1690b6",
+      "records": 3
+    },
+    {
+      "stream": "precollect",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-precollect-form-09.raw",
+      "bytes": 4433,
+      "sha256": "d4c4b239fb71f572ed6af815629e853b3e10004f03a553d1ee100afd17e8d659",
+      "records": 3
+    },
+    {
+      "stream": "precollect",
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-precollect-form-10.raw",
+      "bytes": 3871,
+      "sha256": "784217fbfdddc06cd53235b3bef8159250b1d4209761092577d35ebb0f313234",
+      "records": 2
+    }
+  ],
+  "raw_totals": {
+    "pages": 86,
+    "bytes": 668749,
+    "records": 257,
+    "target_records": 24
+  },
+  "record_correction": {
+    "first_page_pointer_id": 2508409,
+    "correct_page_pointer_id": 2508385,
+    "precollect_answer_id": 36395,
+    "precollect_answer_contains_800_cumulative_reaction_chambers": true
+  },
+  "primary_guidance_page21": {
+    "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-us-msft\\execution\\deck_images\\p21-image21.png",
+    "sha256": "fa3b238c348236c19d17948f68815f56250a946a3bbe93d755a207441c12bddf",
+    "review": "Expert visually inspected frozen original image: adjusted Azure Q1 44-45% constant currency, FX reduces revenue less than one point. Reported 43-45% is analyst conditional endpoint envelope, not original reported guidance."
+  },
+  "official_contract_files": {
+    "DATA_CONTRACT.md": "2d80afeeac0946f91e18dccc6008eab734dcb1d727aac6f2dbe2870e7b4f08b3",
+    "JSON_EVIDENCE_INDEX.json": "4969a5239e15b71f2e8d83e3107dd7a9f80ab78b9673b710a2158906b35285fc"
+  },
+  "code_bytes_at_read_only_verification": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_select.py",
+      "sha256": "a1a7abac8bec7274776a04001efc9197f1e970f49300b22d76b2435c7dbaeefd",
+      "bytes": 17353
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_http_model.py",
+      "sha256": "d108b491685d0df24eff3e6536d607a2f47109a9bc93f23f868c86e3771e2955",
+      "bytes": 20679
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_model_caller.py",
+      "sha256": "bfca6873f4a0e3eda1f3b2ac8edc35ada0a11f828ed09e614459e085bd3d9c3e",
+      "bytes": 13234
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\bounded_http.py",
+      "sha256": "3f3c5b87e825eef537c95a0a4b5bfb31cc8718085f5c64d89a6e00e501241381",
+      "bytes": 12474
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\official_source_flow.py",
+      "sha256": "673d2d795c0c3985dd4356f3e9712586204a4a13483f19155574e59d415b5443",
+      "bytes": 47800
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\transcript_json_extract.py",
+      "sha256": "85433d1745929cb16851461a42c55f0e70905740831d384893f1aef7b24e918e",
+      "bytes": 4163
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\drivers.py",
+      "sha256": "656c50b3d3e7fc52a8637b9fe587e22fc1f0a894bfb7b343aed2ee53afd85e22",
+      "bytes": 21671
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\constants.py",
+      "sha256": "bf051f719c27ed455d2826f5e03b391d7643c596dadfcf741aadf7562d0309de",
+      "bytes": 6200
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\document.py",
+      "sha256": "daea670c80f441c6ff60627bf9f87cd27d0113cd1cc8b3baa9248fea05ecdd63",
+      "bytes": 48537
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_report.py",
+      "sha256": "36653f60aa98e76db9a31b33fd8e254de38d6534c29e1410eb7969242f2d5188",
+      "bytes": 81537
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_source_reader_v2.py",
+      "sha256": "dd238da96383da706a147fcea18f84ba54c84b2909a63ca9d2e5c59ab29fa025",
+      "bytes": 17186
+    }
+  ],
+  "network_requests": 0,
+  "model_calls": 0,
+  "new_paid_tokens": 0,
+  "new_paid_micro_usd": 0,
+  "old_matrix_sha_unchanged": true,
+  "protected_source_bytes_sha_unchanged": true
+}

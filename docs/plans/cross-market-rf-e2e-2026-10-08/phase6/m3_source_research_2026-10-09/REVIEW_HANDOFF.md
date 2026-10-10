@@ -1,6 +1,10 @@
 # M3封存后四路独立审查交接
 
-状态：三executor仍partial；十公司报告已核对，最后CN/US-analyst在跑。HTTP整改独立PASS并master806818cf，正常主线push待本节点记录提交后执行。RF0c248d9a正常推194PASS、精确CI成功；单文件两物理根安装已完成，539其他文件SHA未变。12审齐后独立专家共因整合，旧失败及研究缺口保留。最新first10_review_observation.json/调度JSON为准。
+## MAIN最新交付状态（2026-10-10T14:09:19.972711+00:00）
+
+12份独立报告已完成，专家诊断包已冻结且23份内容SHA全部实核；157项/26共因/9卡。计划交付已接受，工程及研究目标未完成。本地master45533e88的配置/计量改进待主线发布与精确CI；失败正文及真实再验仍待。详见root_plan_main_delivery_observation.json及../m3_root_remediation_2026-10-09/task_plan.md。
+
+状态：三executor仍partial；12审齐、246检查/91finding实核，独立专家新根包待最终冻结。CWP原发布13a精确CI绿；新配置/计量13文件正常合本地master45533e88，remote main push/精确CI待归总。生产配置未变、失败final及真实复验未完成。RF0c248d9a已正常发布/安装。当前goal active，后续八家仅登记。
 
 ## 调度和写集
 

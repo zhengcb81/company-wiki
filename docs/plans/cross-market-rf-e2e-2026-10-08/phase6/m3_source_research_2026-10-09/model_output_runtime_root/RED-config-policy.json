@@ -1,0 +1,33 @@
+{
+  "observed_at": "2026-10-09T21:43:23.907400+00:00",
+  "started_at": "2026-10-09T21:43:16.763347+00:00",
+  "elapsed_seconds": 7.144,
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-policy-red-2w9s0w6y\\pytest-tmp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-policy-red-2w9s0w6y\\test_generation_policy_probe.py"
+  ],
+  "returncode": 1,
+  "log_sha256": "2287f2b8d663391f8d560e98d60caec82286b99c8ee8a178f55941e1c69e25fb",
+  "own_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-policy-red-2w9s0w6y",
+  "own_temp_restored_absent": true,
+  "production_configs_unchanged": true,
+  "product_source_modified": false,
+  "generation_calls": 0,
+  "provider_downloads": 0,
+  "setup_attempt0": {
+    "attempt0": "sandbox temp write failed before pytest, not product RED",
+    "own_empty_directory": "C:/Users/郑曾波/AppData/Local/Packages/sandbox.{47a77986-ab1a-434a-bff8-7da55e7d3a39}/AC/Temp/m3-policy-red-fnt35wo6",
+    "cleanup": "owned empty directory absent"
+  },
+  "scope": "configured primary/fallback/explicit provider policy projection; omitted and non-target compatibility"
+}

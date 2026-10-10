@@ -1,5 +1,33 @@
 # Findings
 
+## 最新归总（2026-10-10T14:09:19.972711+00:00）
+
+原三家（中微、腾讯、微软）四路12份独立审查已完成；246项检查、本轮91项发现。独立专家共因PWF现已冻结并由MAIN实核23份内容SHA及aggregate：旧64+新91+2专家carryover共157唯一项，26共因、9施工卡，无遗漏。此处只接受诊断计划，不表示157项已修复或研究已通过。
+
+已完成的配置/计量源码合入本地master45533e88，当前比origin/master多3个commit，待正常主线推送与精确CI；此前HTTP修复及RF期次修复已推送且对应CI通过。失败final正文留存、业务精选/摘要语义、通用官方JSON接入、期间和研究假设校准等仍需施工与真实复验。
+
+**Next Step：** 提交本节点PWF交付记录并发布已有主线代码，核对精确CI；继续W04模型失败诊断及W02/W03/W06/W07责任层根修，再统一原三家真实全链四审、新三家泛化、NVDA/公司池loop。只在当前goal真正完成后激活已登记八家公司顺序审查，当前仍active。原件、三生产配置、Dayu及邻仓owner WIP保护；本节点无新增模型调用或费用。
+
+入口：[新共因施工计划](phase6/m3_root_remediation_2026-10-09/task_plan.md)，MAIN交付回执见phase6/m3_source_research_2026-10-09/root_plan_main_delivery_observation.json。历史失败与partial结论继续保留。
+
+## 最新实施补充（2026-10-09T22:23:21.280615+00:00)
+
+配置/计量已正常支线发布62770fea并合入本地master45533e88（13文件；三生产配置SHA不变），待本轮PWF归总commit后一并正常push并查精确main CI。policy21、计量144、CLI/压缩/恢复与模型合同31PASS、四公共模块mypy及changed Ruff均通过；旧空frozen dataclass基类typing问题已用真实声明修正，原static失败日志保留。
+
+首次支线push记录程序Windows输出UTF8解码失败，远端ls-remote确认实际成功且工作树clean；丢失stdout没有补造prepush精确计数。该支线exactAPI暂无workflow，不能冒称CI绿。16KiB失败final正文、AUTO策略变化公共CLI、真实材料/研究复验仍未完成；goal active，后续八家仍未启动。
+
+## 最新 M3 节点（2026-10-09T21:59:36.563250+00:00；优先于历史状态）
+
+补充：配置候选272973eb正常commit；计量责任144PASS，公共CLI/压缩/恢复实际2场景与模型合同共31PASS。仍为独立候选，失败正文与真实复验未完成；新共因包草案旧64+新91及2旧专家carryover共157键、26机制/9卡待专家冻结。
+
+**Next Step：** 原三家公司四路12份独立报告已全部封存并实核，共246检查、91个finding。独立编程专家正在归并原64项及本轮问题，形成新的责任层PWF；不能用工程绿核销研究缺口。当前goal仍active，M4/NVDA/公司池loop及后续八家均未启动。
+
+- HTTP根修和集中证据已正常发布CWP master `13a7648cee20362fc082f68248e286468837612d`；normal push 2541PASS/138.57秒，精确CI37994757469成功/74秒。真实SSE的HTTP200仍是HTML，未取得新PDF；旧unknown费用和公告缺口保留。
+- RF期次根修main `0c248d9a`已发布、精确CI成功，并定点安装；生产配置、原件、邻仓owner WIP保留。
+- 模型配置/SDK/urllib/叙述HTTP候选在独立worktree完成114+55责任与兼容PASS，ruff及两公共模块mypy通过。这里只完成配置投影第一部分，推理计量、失败最终答案回查、AUTO复用及真实截断复验仍待；生产配置未改，无新增模型费用。配置“供应商未核实”阻断经接口审查判定为多余限制，按实际adapter合法字段透传修正，保留真实API错误。
+- JSON只读契约已交付：86原页SHA、257记录定位重放；发现旧2508385页定位错误及precollect36395已含答复。原封存run/report不改，新责任契约与复验修正解释；GET/POST和官方companyfilter仍未公网验证。
+- `first12_review_observation.json`、精确发布CI记录及两新JSON契约是本节点事实依据。预算仍累计USD20/2,000,000tokens，旧unknown/FX不重置。
+
 ## 最新 M3 节点（2026-10-09 21:34 UTC；实际事件时间以JSON为准）
 
 **Next Step：** 十份独立公司报告已交付并核对；最后CN/US-analyst两份独立买方审查在跑。12审齐后由独立编程专家整合原64及新增共因，再按责任层完成业务选择、模型配置策略、通用JSON与实际请求scope根修。当前目标未完成，M4/NVDA/池loop/后续八家仅登记未启动。

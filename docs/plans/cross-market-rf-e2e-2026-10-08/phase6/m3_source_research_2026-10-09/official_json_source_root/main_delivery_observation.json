@@ -1,0 +1,11 @@
+{
+  "observed_at": "2026-10-09T22:03:11.416310+00:00",
+  "delivered_sha_verified": {
+    "DATA_CONTRACT.md": "2d80afeeac0946f91e18dccc6008eab734dcb1d727aac6f2dbe2870e7b4f08b3",
+    "JSON_EVIDENCE_INDEX.json": "4969a5239e15b71f2e8d83e3107dd7a9f80ab78b9673b710a2158906b35285fc"
+  },
+  "files": 2,
+  "read_only_contract": true,
+  "implementation_complete": false,
+  "external_calls": 0
+}

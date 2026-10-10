@@ -1,0 +1,27 @@
+{
+  "observed_at": "2026-10-09T22:07:40.082406+00:00",
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "pytest_asyncio.plugin",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-reasoning-green-90fv_cp2\\pytest",
+    "tests/unit/test_narrative_reasoning_usage.py",
+    "tests/unit/test_narrative_model_usage.py",
+    "tests/unit/test_narrative_http_model.py",
+    "tests/unit/test_narrative_model_caller.py",
+    "tests/unit/test_narrative_summarize_handler.py"
+  ],
+  "returncode": 0,
+  "elapsed_seconds": 4.111,
+  "own_temp_restored_absent": true,
+  "external_model_calls": 0
+}

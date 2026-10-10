@@ -1,0 +1,4 @@
+src\company_wiki\automation\models.py:276: error: Argument 1 to "fields" has incompatible type "type[StrictModel]"; expected "DataclassInstance | type[DataclassInstance]"  [arg-type]
+src\company_wiki\automation\models.py:283: error: Argument 1 to "fields" has incompatible type "type[StrictModel]"; expected "DataclassInstance | type[DataclassInstance]"  [arg-type]
+src\company_wiki\automation\models.py:303: error: Argument 1 to "fields" has incompatible type "StrictModel"; expected "DataclassInstance | type[DataclassInstance]"  [arg-type]
+Found 3 errors in 1 file (checked 4 source files)

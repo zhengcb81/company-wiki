@@ -1,0 +1,18 @@
+{
+  "observed_at": "2026-10-09T21:41:24.199843+00:00",
+  "query": "https://api.github.com/repos/zhengcb81/company-wiki/actions/runs?head_sha=13a7648cee20362fc082f68248e286468837612d&per_page=3",
+  "expected_head_sha": "13a7648cee20362fc082f68248e286468837612d",
+  "runs": [
+    {
+      "id": 37994757469,
+      "name": "CI",
+      "head_sha": "13a7648cee20362fc082f68248e286468837612d",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/37994757469",
+      "created_at": "2026-10-09T21:39:31Z",
+      "updated_at": "2026-10-09T21:40:45Z",
+      "run_started_at": "2026-10-09T21:39:31Z"
+    }
+  ]
+}

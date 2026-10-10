@@ -1,0 +1,59 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\m3-policy-explicit-llukd_yk\\pytest", "requested_basetemp_len": 66, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\m3-policy-explicit-llukd_yk\\cw-pytest-basetemp\\20261009-220012-d5b95057", "effective_basetemp_len": 103}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\fresh-capture-20261009\company-wiki
+configfile: pytest.ini
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 21 items / 18 deselected / 3 selected
+
+tests\unit\test_generation_policy.py FFF                                 [100%]
+
+================================== FAILURES ===================================
+_ test_explicit_adapter_options_are_config_not_verification_permission[mimo-disabled] _
+tests\unit\test_generation_policy.py:214: in test_explicit_adapter_options_are_config_not_verification_permission
+    config = configured({
+tests\unit\test_generation_policy.py:26: in load
+    config = Config.load(path, llm_provider=provider)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\config.py:229: in load
+    config.validate(strict=not is_test)
+scripts\config.py:427: in validate
+    raise ValueError(error_msg)
+E   ValueError: 配置验证失败:
+E     - generation_policy options are not verified for this provider
+E   
+E   请检查 config.yaml 或设置环境变量
+_ test_explicit_adapter_options_are_config_not_verification_permission[minimax-adaptive] _
+tests\unit\test_generation_policy.py:214: in test_explicit_adapter_options_are_config_not_verification_permission
+    config = configured({
+tests\unit\test_generation_policy.py:26: in load
+    config = Config.load(path, llm_provider=provider)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\config.py:229: in load
+    config.validate(strict=not is_test)
+scripts\config.py:427: in validate
+    raise ValueError(error_msg)
+E   ValueError: 配置验证失败:
+E     - generation_policy options are not verified for this provider
+E   
+E   请检查 config.yaml 或设置环境变量
+_ test_explicit_adapter_options_are_config_not_verification_permission[openai-enabled] _
+tests\unit\test_generation_policy.py:214: in test_explicit_adapter_options_are_config_not_verification_permission
+    config = configured({
+tests\unit\test_generation_policy.py:26: in load
+    config = Config.load(path, llm_provider=provider)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\config.py:229: in load
+    config.validate(strict=not is_test)
+scripts\config.py:427: in validate
+    raise ValueError(error_msg)
+E   ValueError: 配置验证失败:
+E     - generation_policy options are not verified for this provider
+E   
+E   请检查 config.yaml 或设置环境变量
+=========================== short test summary info ===========================
+FAILED tests/unit/test_generation_policy.py::test_explicit_adapter_options_are_config_not_verification_permission[mimo-disabled]
+FAILED tests/unit/test_generation_policy.py::test_explicit_adapter_options_are_config_not_verification_permission[minimax-adaptive]
+FAILED tests/unit/test_generation_policy.py::test_explicit_adapter_options_are_config_not_verification_permission[openai-enabled]
+====================== 3 failed, 18 deselected in 1.36s =======================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\m3-policy-explicit-llukd_yk\\cw-pytest-basetemp\\20261009-220012-d5b95057", "existed": true, "removed": true}

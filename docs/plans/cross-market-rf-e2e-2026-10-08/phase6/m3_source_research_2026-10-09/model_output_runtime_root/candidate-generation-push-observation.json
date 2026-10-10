@@ -1,0 +1,51 @@
+{
+  "observed_at": "2026-10-09T22:19:43.777043+00:00",
+  "first_push_capture_encoding_failed": true,
+  "actual_push_status_not_inferred": true,
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "ls-remote",
+        "--heads",
+        "origin",
+        "codex/m3-generation-policy-20261009"
+      ],
+      "returncode": 0,
+      "stdout": "62770fea77627d4e9bab328be8e8534b4d73f0e4\trefs/heads/codex/m3-generation-policy-20261009\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "--git-path",
+        "hooks/pre-push"
+      ],
+      "returncode": 0,
+      "stdout": ".githooks/pre-push\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "--get",
+        "core.hooksPath"
+      ],
+      "returncode": 0,
+      "stdout": ".githooks\n",
+      "stderr": ""
+    }
+  ]
+}

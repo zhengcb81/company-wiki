@@ -1,0 +1,17 @@
+Merge made by the 'ort' strategy.
+ scripts/config.py                                  |  43 +++-
+ scripts/llm_client.py                              |  29 ++-
+ src/company_wiki/automation/models.py              |  17 ++
+ src/company_wiki/automation/narrative_batch.py     |  40 +++-
+ .../automation/narrative_batch_request.py          |   2 +-
+ .../automation/narrative_http_model.py             |  57 +++++-
+ src/company_wiki/automation/narrative_model.py     |  15 ++
+ .../automation/narrative_model_caller.py           |  16 +-
+ tests/integration/test_narrative_batch_cli_e2e.py  |  53 +++++
+ tests/support/narrative_batch_fixtures.py          |   4 +-
+ tests/unit/test_generation_policy.py               | 222 +++++++++++++++++++++
+ tests/unit/test_narrative_model_caller.py          |  23 +++
+ tests/unit/test_narrative_reasoning_usage.py       |  75 +++++++
+ 13 files changed, 571 insertions(+), 25 deletions(-)
+ create mode 100644 tests/unit/test_generation_policy.py
+ create mode 100644 tests/unit/test_narrative_reasoning_usage.py

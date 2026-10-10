@@ -1,10 +1,18 @@
 # 原三家 M3：当前修复后的真实新执行
 
-状态：三executor均封存partial/完整证据，HK-storage、CN-fetch、US-storage首批独立审查启动；尚无四审结论或研究接受。MAIN 独占本目录及根 PWF；三 executor 的独占运行目录与实际 agent ID 由 `cohort.json` 指定。这里是现有根计划的 M3 交接，不另建任务库或审批流程。
+## MAIN最新交付状态（2026-10-10T14:09:19.972711+00:00）
+
+12份独立报告已完成，专家诊断包已冻结且23份内容SHA全部实核；157项/26共因/9卡。计划交付已接受，工程及研究目标未完成。本地master45533e88的配置/计量改进待主线发布与精确CI；失败正文及真实再验仍待。详见root_plan_main_delivery_observation.json及../m3_root_remediation_2026-10-09/task_plan.md。
+
+状态：三executor封存partial，12独立报告已齐；共因专家正在冻结新9卡包。已发布CWP13a/RF0c精确CI绿；模型配置/计量候选62770fea正常支线发布并合本地main45533e88，remote main/精确CI待归总。生产配置不变、失败final/真实及研究复验未完成，当前goal active。
+
+## 最新协调状态（2026-10-09T22:17:16.174061+00:00)
+
+以 first12_review_observation.json、当前task_plan/findings/progress和新根因包为准。下面来源执行与预算部分是本M3实际冻结交接，不能把它当后来修复已重跑。新JSON契约/index已核对SHA，并纠正2508385旧定位及36395非空answer。新共用包以独立专家最终交付为准，草案不代表施工完成。
 
 ## 已封存交接与当前工程调查
 
-- 腾讯：[executor交接](C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/m3-20261009T184946-hk-00700/execution/execution_handoff.json)、[manifest](C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/m3-20261009T184946-hk-00700/execution/manifest.json)、[协调员只读封存观察](hk_executor_seal_observation.json)。manifest SHA2b6b9d56e6e59b47a7316266149efefe36bb67351281a026d92fe5dd041d6252，执行partial/554引用，四审pending不是PASS。
+- 腾讯：[executor交接](C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/m3-20261009T184946-hk-00700/execution/execution_handoff.json)、[manifest](C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/m3-20261009T184946-hk-00700/execution/manifest.json)、[协调员只读封存观察](hk_executor_seal_observation.json)。manifest SHA2b6b9d56e6e59b47a7316266149efefe36bb67351281a026d92fe5dd041d6252，执行partial/554引用，四审已交付、研究仍partial。
 - 中微：[executor交接](C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/m3-20261009T184946-cn-688012/roles/executor/handoff.md)、[manifest](C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/m3-20261009T184946-cn-688012/execution/manifest.json)、[协调员观察](cn-688012_executor_seal_observation.json)，605文件/partial。
 - 微软：[executor交接](C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/m3-20261009T184946-us-msft/execution/handoff.json)、[manifest](C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/m3-20261009T184946-us-msft/execution/manifest.json)、[协调员观察](us-msft_executor_seal_observation.json)，218项/108capture/partial。
 - [十二审查调度](review_dispatch.json)记录实际agent与尚未启动的角色，不代表接受。

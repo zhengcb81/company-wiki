@@ -1,0 +1,20 @@
+{
+  "observed_at": "2026-10-09T22:15:37.255488+00:00",
+  "returncode": 0,
+  "elapsed_seconds": 8.19,
+  "head": "62770fea77627d4e9bab328be8e8534b4d73f0e4",
+  "normal_hooks": true,
+  "files": [
+    "src/company_wiki/automation/models.py",
+    "src/company_wiki/automation/narrative_model.py",
+    "src/company_wiki/automation/narrative_http_model.py",
+    "src/company_wiki/automation/narrative_model_caller.py",
+    "src/company_wiki/automation/narrative_batch.py",
+    "tests/unit/test_narrative_reasoning_usage.py",
+    "tests/unit/test_narrative_model_caller.py",
+    "tests/integration/test_narrative_batch_cli_e2e.py",
+    "tests/support/narrative_batch_fixtures.py"
+  ],
+  "production_config_modified": false,
+  "published_main": false
+}

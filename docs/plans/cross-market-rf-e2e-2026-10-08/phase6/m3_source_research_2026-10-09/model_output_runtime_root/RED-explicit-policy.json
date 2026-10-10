@@ -1,0 +1,30 @@
+{
+  "observed_at": "2026-10-09T22:00:13.525119+00:00",
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "pytest_asyncio.plugin",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-policy-explicit-llukd_yk\\pytest",
+    "tests/unit/test_generation_policy.py",
+    "-k",
+    "explicit_adapter_options"
+  ],
+  "returncode": 1,
+  "elapsed_seconds": 3.708,
+  "own_temp_restored_absent": true,
+  "production_config_sha_unchanged": true,
+  "production_config_sha": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "external_model_calls": 0
+}

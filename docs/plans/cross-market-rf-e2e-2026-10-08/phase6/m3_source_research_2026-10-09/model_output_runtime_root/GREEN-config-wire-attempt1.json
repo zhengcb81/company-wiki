@@ -1,0 +1,28 @@
+{
+  "observed_at": "2026-10-09T21:50:48.278940+00:00",
+  "started_at": "2026-10-09T21:50:44.193276+00:00",
+  "elapsed_seconds": 4.086,
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-policy-green-mro2vll2\\pytest",
+    "tests/unit/test_generation_policy.py",
+    "tests/unit/test_config.py",
+    "tests/unit/test_narrative_model_config.py",
+    "tests/unit/test_narrative_http_model.py"
+  ],
+  "returncode": 0,
+  "own_temp_restored_absent": true,
+  "production_config_unchanged": true,
+  "provider_calls": 0,
+  "paid_model_calls": 0,
+  "log_sha256": "a8da8ed558c2aec519a67b74d9c9a123010ed7c85b61176f9f63887ea1f4463b"
+}

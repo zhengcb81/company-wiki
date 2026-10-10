@@ -1,0 +1,103 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\m3-reasoning-red-x_o578d6\\pytest", "requested_basetemp_len": 64, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\m3-reasoning-red-x_o578d6\\cw-pytest-basetemp\\20261009-220629-ce78252e", "effective_basetemp_len": 101}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\fresh-capture-20261009\company-wiki
+configfile: pytest.ini
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 31 items / 13 deselected / 18 selected
+
+tests\unit\test_narrative_reasoning_usage.py FFFFFFFFFFFFF...            [ 88%]
+tests\unit\test_narrative_model_caller.py FF                             [100%]
+
+================================== FAILURES ===================================
+_ test_success_usage_keeps_valid_totals_and_optional_reasoning[detail0-0-None] _
+tests\unit\test_narrative_reasoning_usage.py:41: in test_success_usage_keeps_valid_totals_and_optional_reasoning
+    assert response.reasoning_tokens == expected
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'NarrativeModelResponse' object has no attribute 'reasoning_tokens'
+_ test_success_usage_keeps_valid_totals_and_optional_reasoning[detail1-20-None] _
+tests\unit\test_narrative_reasoning_usage.py:41: in test_success_usage_keeps_valid_totals_and_optional_reasoning
+    assert response.reasoning_tokens == expected
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'NarrativeModelResponse' object has no attribute 'reasoning_tokens'
+_ test_success_usage_keeps_valid_totals_and_optional_reasoning[detail2-None-None] _
+tests\unit\test_narrative_reasoning_usage.py:41: in test_success_usage_keeps_valid_totals_and_optional_reasoning
+    assert response.reasoning_tokens == expected
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'NarrativeModelResponse' object has no attribute 'reasoning_tokens'
+_ test_success_usage_keeps_valid_totals_and_optional_reasoning[None-None-None] _
+tests\unit\test_narrative_reasoning_usage.py:41: in test_success_usage_keeps_valid_totals_and_optional_reasoning
+    assert response.reasoning_tokens == expected
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'NarrativeModelResponse' object has no attribute 'reasoning_tokens'
+_ test_success_usage_keeps_valid_totals_and_optional_reasoning[detail4-None-reasoning_usage_invalid] _
+tests\unit\test_narrative_reasoning_usage.py:41: in test_success_usage_keeps_valid_totals_and_optional_reasoning
+    assert response.reasoning_tokens == expected
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'NarrativeModelResponse' object has no attribute 'reasoning_tokens'
+_ test_success_usage_keeps_valid_totals_and_optional_reasoning[detail5-None-reasoning_usage_invalid] _
+tests\unit\test_narrative_reasoning_usage.py:41: in test_success_usage_keeps_valid_totals_and_optional_reasoning
+    assert response.reasoning_tokens == expected
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'NarrativeModelResponse' object has no attribute 'reasoning_tokens'
+_ test_success_usage_keeps_valid_totals_and_optional_reasoning[detail6-None-reasoning_usage_invalid] _
+tests\unit\test_narrative_reasoning_usage.py:41: in test_success_usage_keeps_valid_totals_and_optional_reasoning
+    assert response.reasoning_tokens == expected
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'NarrativeModelResponse' object has no attribute 'reasoning_tokens'
+_ test_success_usage_keeps_valid_totals_and_optional_reasoning[detail7-None-reasoning_usage_invalid] _
+tests\unit\test_narrative_reasoning_usage.py:41: in test_success_usage_keeps_valid_totals_and_optional_reasoning
+    assert response.reasoning_tokens == expected
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'NarrativeModelResponse' object has no attribute 'reasoning_tokens'
+_ test_success_usage_keeps_valid_totals_and_optional_reasoning[detail8-None-reasoning_usage_invalid] _
+tests\unit\test_narrative_reasoning_usage.py:41: in test_success_usage_keeps_valid_totals_and_optional_reasoning
+    assert response.reasoning_tokens == expected
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'NarrativeModelResponse' object has no attribute 'reasoning_tokens'
+___ test_paid_failure_retains_actual_completion_and_reasoning[length_empty] ___
+tests\unit\test_narrative_reasoning_usage.py:56: in test_paid_failure_retains_actual_completion_and_reasoning
+    assert (error.input_tokens, error.output_tokens, error.reasoning_tokens) == (11, 8194, 8000)
+                                                     ^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'ModelOutputTruncatedError' object has no attribute 'reasoning_tokens'
+___ test_paid_failure_retains_actual_completion_and_reasoning[length_mixed] ___
+tests\unit\test_narrative_reasoning_usage.py:56: in test_paid_failure_retains_actual_completion_and_reasoning
+    assert (error.input_tokens, error.output_tokens, error.reasoning_tokens) == (11, 8194, 8000)
+                                                     ^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'ModelOutputTruncatedError' object has no attribute 'reasoning_tokens'
+_ test_paid_failure_retains_actual_completion_and_reasoning[invalid_envelope] _
+tests\unit\test_narrative_reasoning_usage.py:56: in test_paid_failure_retains_actual_completion_and_reasoning
+    assert (error.input_tokens, error.output_tokens, error.reasoning_tokens) == (11, 8194, 8000)
+                                                     ^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'ModelEnvelopeError' object has no attribute 'reasoning_tokens'
+_ test_reasoning_observation_survives_handler_wire_and_old_bytes_remain_identical _
+tests\unit\test_narrative_reasoning_usage.py:64: in test_reasoning_observation_survives_handler_wire_and_old_bytes_remain_identical
+    metrics = HandlerMetrics(31, 0.001, 5, reasoning_tokens=0)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: HandlerMetrics.__init__() got an unexpected keyword argument 'reasoning_tokens'
+__ test_reasoning_usage_survives_budget_caller_without_double_charge[False] ___
+tests\unit\test_narrative_model_caller.py:293: in test_reasoning_usage_survives_budget_caller_without_double_charge
+    response = NarrativeModelResponse("http", "model", REQUEST.prompt_version, b"{}",
+E   TypeError: NarrativeModelResponse.__init__() got an unexpected keyword argument 'reasoning_tokens'
+___ test_reasoning_usage_survives_budget_caller_without_double_charge[True] ___
+tests\unit\test_narrative_model_caller.py:285: in test_reasoning_usage_survives_budget_caller_without_double_charge
+    model.error = ModelOutputTruncatedError(
+E   TypeError: ModelOutputTruncatedError.__init__() got an unexpected keyword argument 'reasoning_tokens'
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_reasoning_usage.py::test_success_usage_keeps_valid_totals_and_optional_reasoning[detail0-0-None]
+FAILED tests/unit/test_narrative_reasoning_usage.py::test_success_usage_keeps_valid_totals_and_optional_reasoning[detail1-20-None]
+FAILED tests/unit/test_narrative_reasoning_usage.py::test_success_usage_keeps_valid_totals_and_optional_reasoning[detail2-None-None]
+FAILED tests/unit/test_narrative_reasoning_usage.py::test_success_usage_keeps_valid_totals_and_optional_reasoning[None-None-None]
+FAILED tests/unit/test_narrative_reasoning_usage.py::test_success_usage_keeps_valid_totals_and_optional_reasoning[detail4-None-reasoning_usage_invalid]
+FAILED tests/unit/test_narrative_reasoning_usage.py::test_success_usage_keeps_valid_totals_and_optional_reasoning[detail5-None-reasoning_usage_invalid]
+FAILED tests/unit/test_narrative_reasoning_usage.py::test_success_usage_keeps_valid_totals_and_optional_reasoning[detail6-None-reasoning_usage_invalid]
+FAILED tests/unit/test_narrative_reasoning_usage.py::test_success_usage_keeps_valid_totals_and_optional_reasoning[detail7-None-reasoning_usage_invalid]
+FAILED tests/unit/test_narrative_reasoning_usage.py::test_success_usage_keeps_valid_totals_and_optional_reasoning[detail8-None-reasoning_usage_invalid]
+FAILED tests/unit/test_narrative_reasoning_usage.py::test_paid_failure_retains_actual_completion_and_reasoning[length_empty]
+FAILED tests/unit/test_narrative_reasoning_usage.py::test_paid_failure_retains_actual_completion_and_reasoning[length_mixed]
+FAILED tests/unit/test_narrative_reasoning_usage.py::test_paid_failure_retains_actual_completion_and_reasoning[invalid_envelope]
+FAILED tests/unit/test_narrative_reasoning_usage.py::test_reasoning_observation_survives_handler_wire_and_old_bytes_remain_identical
+FAILED tests/unit/test_narrative_model_caller.py::test_reasoning_usage_survives_budget_caller_without_double_charge[False]
+FAILED tests/unit/test_narrative_model_caller.py::test_reasoning_usage_survives_budget_caller_without_double_charge[True]
+================= 15 failed, 3 passed, 13 deselected in 0.84s =================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\m3-reasoning-red-x_o578d6\\cw-pytest-basetemp\\20261009-220629-ce78252e", "existed": true, "removed": true}

@@ -1,0 +1,28 @@
+{
+  "observed_at_utc": "2026-10-10T14:09:19.972711+00:00",
+  "status": "ACCEPTED_DIAGNOSTIC_PLAN_ONLY",
+  "manifest_sha256": "9d3f849df1a74652f2cad3e8a9f5884eacd83737fb99870020109f26a49150cb",
+  "payload_files_verified": 23,
+  "payload_aggregate_sha256": "02305a148e42ebf26b21b350b973180e16b5581f095a4fcf7613ddf3efecc085",
+  "coverage": {
+    "old_company_findings": 64,
+    "M3_company_findings": 91,
+    "company_total": 155,
+    "original_expert_carryover": 2,
+    "composite_keys": 157,
+    "unmapped": 0,
+    "duplicates": 0,
+    "roots": 26,
+    "cards": 9,
+    "M3_reports": 12,
+    "M3_checks": 246,
+    "M3_P1": 41,
+    "M3_P2": 48,
+    "M3_P3": 2
+  },
+  "implementation_complete": false,
+  "research_complete": false,
+  "current_goal_complete": false,
+  "new_provider_or_model_calls": 0,
+  "new_paid_tokens": 0
+}

@@ -1,0 +1,12 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\m3-policy-fixed-82ibk0al\\pytest", "requested_basetemp_len": 63, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\m3-policy-fixed-82ibk0al\\cw-pytest-basetemp\\20261009-220041-9ec7bb32", "effective_basetemp_len": 100}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\fresh-capture-20261009\company-wiki
+configfile: pytest.ini
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 21 items
+
+tests\unit\test_generation_policy.py .....................               [100%]
+
+============================= 21 passed in 1.17s ==============================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\m3-policy-fixed-82ibk0al\\cw-pytest-basetemp\\20261009-220041-9ec7bb32", "existed": true, "removed": true}

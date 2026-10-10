@@ -1,0 +1,19 @@
+{
+  "observed_at": "2026-10-09T21:55:11.071616+00:00",
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "mypy",
+    "--cache-dir",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-policy-types-sfwg5lhm\\mypy",
+    "--follow-imports=silent",
+    "src/company_wiki/automation/narrative_http_model.py",
+    "src/company_wiki/automation/narrative_batch_request.py"
+  ],
+  "returncode": 0,
+  "elapsed_seconds": 15.71,
+  "own_temp_restored_absent": true
+}

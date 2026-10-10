@@ -1,0 +1,26 @@
+{
+  "observed_at": "2026-10-09T22:22:38.566033+00:00",
+  "argv": [
+    "git",
+    "merge",
+    "--no-ff",
+    "codex/m3-generation-policy-20261009",
+    "-m",
+    "merge: configurable model generation and durable usage observations"
+  ],
+  "returncode": 0,
+  "elapsed_seconds": 0.73,
+  "head": "45533e881b98fe8782b0e496abf7a4bb2904114e",
+  "base": "13a7648cee20362fc082f68248e286468837612d",
+  "source": "62770fea77627d4e9bab328be8e8534b4d73f0e4",
+  "normal_hooks": true,
+  "output_decode": "utf-8",
+  "production_config_sha_unchanged": true,
+  "production_config_sha": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_acquisition.yaml": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585"
+  },
+  "published_remote_main": false,
+  "whole_model_root_complete": false
+}

@@ -1,0 +1,23 @@
+{
+  "observed_at": "2026-10-09T22:00:42.754460+00:00",
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "pytest_asyncio.plugin",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-policy-fixed-82ibk0al\\pytest",
+    "tests/unit/test_generation_policy.py"
+  ],
+  "returncode": 0,
+  "elapsed_seconds": 1.661,
+  "own_temp_restored_absent": true,
+  "external_model_calls": 0
+}

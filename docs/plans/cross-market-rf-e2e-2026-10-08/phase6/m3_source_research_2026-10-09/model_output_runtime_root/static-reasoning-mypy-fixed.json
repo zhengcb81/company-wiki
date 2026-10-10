@@ -1,0 +1,38 @@
+{
+  "observed_at": "2026-10-09T22:14:58.861214+00:00",
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "mypy",
+    "--cache-dir",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-meter-types-fixed-hf947l8e\\mypy",
+    "--follow-imports=silent",
+    "src/company_wiki/automation/models.py",
+    "src/company_wiki/automation/narrative_model.py",
+    "src/company_wiki/automation/narrative_http_model.py",
+    "src/company_wiki/automation/narrative_model_caller.py"
+  ],
+  "returncode": 0,
+  "core_argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "pytest_asyncio.plugin",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-meter-types-fixed-hf947l8e\\pytest",
+    "tests/unit/test_automation_models.py"
+  ],
+  "core_returncode": 0,
+  "elapsed_seconds": 7.865,
+  "own_temp_restored_absent": true
+}

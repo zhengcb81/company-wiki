@@ -1,0 +1,18 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\m3-reasoning-green-90fv_cp2\\pytest", "requested_basetemp_len": 66, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\m3-reasoning-green-90fv_cp2\\cw-pytest-basetemp\\20261009-220736-0f0713a0", "effective_basetemp_len": 103}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\fresh-capture-20261009\company-wiki
+configfile: pytest.ini
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 144 items
+
+tests\unit\test_narrative_reasoning_usage.py ................            [ 11%]
+tests\unit\test_narrative_model_usage.py ...............                 [ 21%]
+tests\unit\test_narrative_http_model.py ................................ [ 43%]
+...........................                                              [ 62%]
+tests\unit\test_narrative_model_caller.py ...............                [ 72%]
+tests\unit\test_narrative_summarize_handler.py ......................... [ 90%]
+..............                                                           [100%]
+
+============================= 144 passed in 3.40s =============================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\m3-reasoning-green-90fv_cp2\\cw-pytest-basetemp\\20261009-220736-0f0713a0", "existed": true, "removed": true}

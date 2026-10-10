@@ -1,0 +1,21 @@
+{
+  "observed_at": "2026-10-09T22:13:09.697848+00:00",
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "mypy",
+    "--cache-dir",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-meter-types-u80hy4my\\mypy",
+    "--follow-imports=silent",
+    "src/company_wiki/automation/models.py",
+    "src/company_wiki/automation/narrative_model.py",
+    "src/company_wiki/automation/narrative_http_model.py",
+    "src/company_wiki/automation/narrative_model_caller.py"
+  ],
+  "returncode": 1,
+  "elapsed_seconds": 11.633,
+  "own_temp_restored_absent": true
+}

@@ -1,0 +1,26 @@
+{
+  "observed_at": "2026-10-09T21:48:27.812826+00:00",
+  "started_at": "2026-10-09T21:48:25.414872+00:00",
+  "elapsed_seconds": 2.398,
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-policy-tdd-1s8c3b3r\\pytest",
+    "tests/unit/test_generation_policy.py"
+  ],
+  "returncode": 1,
+  "own_temp_restored_absent": true,
+  "production_config_unchanged": true,
+  "source_changed": false,
+  "provider_calls": 0,
+  "model_calls": 0,
+  "log_sha256": "72b5d2350eb71835c4ed2baa4f0ed6e360d816c842a9d1bd58a45f29411fc126"
+}

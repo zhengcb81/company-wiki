@@ -1,0 +1,17 @@
+{
+  "observed_at": "2026-10-09T21:45:37.464616+00:00",
+  "reused_attached_worktree": "C:\\Users\\郑曾波\\.codex\\worktrees\\fresh-capture-20261009\\company-wiki",
+  "prior_commit": "3f3f55c1c3ebfae55279a963eefadfdf13ec8c0f",
+  "branch": "codex/m3-generation-policy-20261009",
+  "base_main_commit": "13a7648cee20362fc082f68248e286468837612d",
+  "head": "13a7648cee20362fc082f68248e286468837612d",
+  "source_owner": "MAIN generation policy only",
+  "production_config_owner": "MAIN later after common-root integration, current config unchanged",
+  "write_set": [
+    "scripts/config.py",
+    "scripts/llm_client.py",
+    "src/company_wiki/automation/narrative_http_model.py",
+    "src/company_wiki/automation/narrative_batch_request.py",
+    "tests/unit/test_generation_policy.py"
+  ]
+}
