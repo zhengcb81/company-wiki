@@ -42,11 +42,74 @@ def _read_json(path):
     )
 
 
+def _load_projection_argument(catalog, request):
+    from company_wiki.source_catalog.official_json_projection import (
+        ProjectionError,
+        load_projection,
+        projection_from_dict,
+    )
+    if request.get("projection_id") is not None:
+        return load_projection(catalog, request["projection_id"])
+    if request.get("projection") is not None:
+        return projection_from_dict(request["projection"])
+    raise ProjectionError("invalid_projection_request")
+
+
+def _json_projection_operation(catalog, operation, request) -> dict | bytes:
+    from company_wiki.source_catalog.official_json_projection import (
+        ProjectionError,
+        build_projection_export,
+        build_projection_from_refs,
+        persist_projection,
+        replay_projection,
+    )
+    if operation == "project":
+        if request.get("schema_version") != "official-json-projection-request/1":
+            raise ProjectionError("invalid_projection_request_schema")
+        refs = request.get("parent_source_refs")
+        if not isinstance(refs, list) or not refs:
+            raise ProjectionError("invalid_projection_request")
+        projection = build_projection_from_refs(
+            catalog, refs=refs, layout_id=request.get("layout_id"),
+            issuer=request.get("issuer") or {},
+            as_of_date=request.get("as_of_date"))
+        if request.get("persist"):
+            persist_projection(catalog, projection)
+        return {
+            "schema_version": "official-json-projection-result/1",
+            "projection": projection.to_dict(),
+            "selected_records": projection.coverage["issuer_records_selected"],
+        }
+    if operation == "read":
+        if request.get("schema_version") != "official-source-read-request/1":
+            raise ValueError("invalid_read_request_schema")
+        ref = request.get("source_ref")
+        if not isinstance(ref, dict):
+            raise ValueError("invalid_read_request")
+        from company_wiki.source_catalog.source_reader import SourceRef, SourceVersionReader
+        content = SourceVersionReader(catalog).open_version(
+            SourceRef(**ref), purpose="source_export")
+        return content.data
+    if operation == "replay":
+        if request.get("schema_version") != "official-json-replay-request/1":
+            raise ProjectionError("invalid_replay_request_schema")
+        projection = _load_projection_argument(catalog, request)
+        return replay_projection(catalog, projection)
+    if operation == "export":
+        if request.get("schema_version") != "source-projection-export-request/1":
+            raise ProjectionError("invalid_export_request_schema")
+        projection = _load_projection_argument(catalog, request)
+        return build_projection_export(catalog, projection)
+    raise ValueError("unknown_operation")
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path)
     parser.add_argument("--project-root", type=Path)
-    parser.add_argument("--operation", choices=("import", "discover", "capture", "recover"), default="import")
+    parser.add_argument("--operation", choices=(
+        "import", "discover", "capture", "recover", "project", "read", "replay", "export"),
+        default="import")
     parser.add_argument("--request", type=Path, required=True)
     parser.add_argument("--input-file", type=Path)
     args = parser.parse_args(argv)
@@ -55,6 +118,7 @@ def main(argv=None):
         request = _read_json(args.request)
         if not isinstance(request, dict):
             raise ValueError("invalid_request")
+        result: dict
         if args.operation == "import":
             if (
                 args.config is None
@@ -69,7 +133,30 @@ def main(argv=None):
                 original = handle.read(cap + 1)
             root = args.project_root or args.config.resolve().parents[1]
             catalog = SourceCatalog(load_catalog_config(args.config, project_root=root))
-            result = import_official_source(catalog, original=original, request=request)
+            if request.get("schema_version") == "official-source-import-request/2":
+                from .official_json_import import import_official_json_source
+                result = import_official_json_source(
+                    catalog, original=original, request=request)
+            else:
+                result = import_official_source(catalog, original=original, request=request)
+        elif args.operation in {"project", "read", "replay", "export"}:
+            if args.config is None:
+                raise ValueError("explicit_config_required")
+            root = args.project_root or args.config.resolve().parents[1]
+            catalog = SourceCatalog(load_catalog_config(args.config, project_root=root))
+            projection_result = _json_projection_operation(
+                catalog, args.operation, request)
+            if args.operation == "read":
+                # The public read contract: stdout carries exactly the
+                # original bytes and nothing else.
+                if not isinstance(projection_result, bytes):
+                    raise ValueError("invalid_read_request")
+                sys.stdout.buffer.write(projection_result)
+                sys.stdout.buffer.flush()
+                return 0
+            if not isinstance(projection_result, dict):
+                raise ValueError("invalid_projection_result")
+            result = projection_result
         elif args.operation in {"capture", "recover"}:
             if args.config is None:
                 raise ValueError("explicit_config_required")

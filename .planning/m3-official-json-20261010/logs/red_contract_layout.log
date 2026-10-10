@@ -1,0 +1,8 @@
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\contract\test_m3_official_json_contract.py:17: in <module>
+    from company_wiki.source_catalog.official_json_layout import (
+E   ModuleNotFoundError: No module named 'company_wiki.source_catalog.official_json_layout'
+=========================== short test summary info ===========================
+ERROR tests/contract/test_m3_official_json_contract.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+============================== 1 error in 1.20s ===============================

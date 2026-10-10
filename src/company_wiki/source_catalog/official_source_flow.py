@@ -383,11 +383,12 @@ def _persist_capture(catalog, original, request, *, complete=True):
 
 def _journal(catalog, state, *, outcome, reason=None, error_type=None, canonical_path=None, error=None):
     request = state["request"]
-    source = request["source"]
+    source = request.get("source") or {}
     return AcquisitionJournal(catalog.config.catalog_dir).record(
         request_id=request["request_id"], outcome=outcome,
         adapter_name="official-original-import", provider="official",
-        provider_document_id=source.get("provider_document_id"), source_url=source["source_url"],
+        provider_document_id=source.get("provider_document_id"),
+        source_url=source.get("source_url"),
         content_sha256=request["content_sha256"],
         canonical_path=canonical_path, reason=reason, error_type=error_type, error=error,
     )
@@ -395,6 +396,9 @@ def _journal(catalog, state, *, outcome, reason=None, error_type=None, canonical
 
 def _import_retained(catalog, staged, descriptor, state, *, bytes_validated=False, max_bytes=None):
     request = state["request"]
+    if request.get("schema_version") == "official-source-import-request/2":
+        from .official_json_import import import_official_json_staged
+        return import_official_json_staged(catalog, staged, descriptor, state)
     try:
         if not state.get("complete", True):
             raise OfficialSourceError("incomplete_capture_requires_new_request")
@@ -536,8 +540,16 @@ def _load_retained(catalog, capture_id, *, require_original=True):
                 or not isinstance(name, str)
                 or not re.fullmatch(capture_id + r"\.[a-z0-9]{1,10}", name)):
             raise OfficialSourceError("invalid_retained_capture")
-        _validate_import_header(state.get("request"))
         request = state["request"]
+        if (isinstance(request, dict)
+                and request.get("schema_version") == "official-source-import-request/2"):
+            from .official_json_subject import SourceSubjectError, validate_import_request_v2
+            try:
+                validate_import_request_v2(request)
+            except SourceSubjectError as exc:
+                raise OfficialSourceError(exc.code) from exc
+        else:
+            _validate_import_header(request)
         _validate_capture_receipt(request.get("capture_receipt"), sha=request["content_sha256"])
         if name != capture_id + _CAPTURE_SUFFIXES[request["mime_type"]]:
             raise OfficialSourceError("invalid_retained_capture")
@@ -563,6 +575,10 @@ def _persist_completed(catalog, state, out, *, journal_attempt_id):
               "source_ref": out["source_ref"], "status": out["status"],
               "max_bytes": state["request"]["max_bytes"],
               "capture_receipt": out["capture_receipt"]}
+    if out.get("schema_version") == "official-source-import-result/2":
+        record["import_schema_version"] = "official-source-import-request/2"
+        record["source_subject"] = out.get("source_subject")
+        record["layout"] = out.get("layout")
     encoded = canonical_json(record).encode("utf-8")
     if len(encoded) > 65536:
         raise OfficialSourceError("capture_receipt_limit")
@@ -633,6 +649,13 @@ def _replay_completed(catalog, capture_id, *, max_bytes=None):
                         "publisher": persisted.get("publisher")},
            "capture_receipt": dict(record["capture_receipt"]), "download_events": 0,
            "acquisition_usage": {"schema_version": "1.0", "response_bytes": 0, "cost_usd": "0"}}
+    if record.get("import_schema_version") == "official-source-import-request/2":
+        out = {"schema_version": "official-source-import-result/2",
+               "status": record["status"], "source_ref": asdict(ref),
+               "source_subject": record.get("source_subject"),
+               "layout": record.get("layout"),
+               "capture_receipt": dict(record["capture_receipt"]), "download_events": 0,
+               "acquisition_usage": {"schema_version": "1.0", "response_bytes": 0, "cost_usd": "0"}}
     cleanup = _cleanup_completed_staging(catalog, capture_id, record)
     if cleanup is not None:
         out["staging_cleanup"] = cleanup

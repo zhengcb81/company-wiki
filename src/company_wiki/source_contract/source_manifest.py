@@ -13,6 +13,7 @@ from typing import Any
 
 
 SOURCE_MANIFEST_SCHEMA_VERSION = "1.0.0"
+SOURCE_SUBJECT_MANIFEST_SCHEMA_VERSION = "2.0.0"
 SOURCE_ID_PREFIX = "urn:company-wiki:source:sha256:"
 
 _SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
@@ -324,3 +325,152 @@ class SourceManifest:
             raise SourceManifestMismatchError("source byte_size no longer matches manifest")
         if _hash_file(resolved) != self.content_sha256:
             raise SourceManifestMismatchError("source SHA-256 no longer matches manifest")
+
+
+_SUBJECT_KINDS = frozenset({"single_issuer", "multi_issuer_event", "unattributed"})
+_SUBJECT_ATTRIBUTIONS = frozenset({"none", "partial", "full", "unknown"})
+_SUBJECT_FIELDS = frozenset({
+    "kind", "attribution_status", "event_namespace", "event_id", "issuer_refs",
+})
+_SUBJECT_ISSUER_REF_FIELDS = frozenset({
+    "provider_company_id", "provider_activity_company_id", "stock_code",
+    "company_name", "market", "security_id", "canonical_name",
+})
+_SUBJECT_MANIFEST_FIELDS = frozenset({
+    "schema_version", "source_id", "subject", "original_path",
+    "content_sha256", "mime_type", "byte_size", "collector_name",
+    "collector_version", "retrieved_at", "published_date",
+})
+
+
+def _validate_subject(value: Any) -> dict[str, Any]:
+    """Structural subject validation without importing the catalog layer.
+
+    v2.0.0 exists because manifest 1.0.0 requires at least one entity id:
+    shared pages with unknown or partial attribution need an honest subject
+    instead of a fabricated entity.  Issuer refs stay associated subjects,
+    never owners.
+    """
+    if not isinstance(value, dict) or not set(value) <= _SUBJECT_FIELDS:
+        raise SourceManifestError("subject fields are invalid")
+    kind = value.get("kind")
+    if kind not in _SUBJECT_KINDS:
+        raise SourceManifestError("subject kind is invalid")
+    attribution = value.get("attribution_status")
+    if attribution not in _SUBJECT_ATTRIBUTIONS:
+        raise SourceManifestError("subject attribution_status is invalid")
+    refs = value.get("issuer_refs", [])
+    if not isinstance(refs, list):
+        raise SourceManifestError("subject issuer_refs must be an array")
+    normalized_refs = []
+    for ref in refs:
+        if not isinstance(ref, dict) or not set(ref) <= _SUBJECT_ISSUER_REF_FIELDS:
+            raise SourceManifestError("subject issuer_ref fields are invalid")
+        normalized_refs.append(dict(ref))
+    if kind == "single_issuer" and len(normalized_refs) != 1:
+        raise SourceManifestError("single_issuer subject requires one issuer ref")
+    if kind == "unattributed" and normalized_refs:
+        raise SourceManifestError("unattributed subject has no issuer refs")
+    payload: dict[str, Any] = {
+        "kind": kind,
+        "attribution_status": attribution,
+        "issuer_refs": normalized_refs,
+    }
+    if kind == "multi_issuer_event":
+        for name in ("event_namespace", "event_id"):
+            payload[name] = _require_text(value.get(name), "subject " + name)
+    return payload
+
+
+@dataclass(frozen=True)
+class SourceSubjectManifest:
+    """Manifest 2.0.0: byte identity plus an honest, typed source subject.
+
+    Old manifests stay 1.0.0 and strictly unchanged; fully identified legacy
+    sources are not rewritten.
+    """
+
+    schema_version: str
+    source_id: str
+    subject: dict[str, Any]
+    original_path: str
+    content_sha256: str
+    mime_type: str
+    byte_size: int
+    collector_name: str
+    collector_version: str
+    retrieved_at: str
+    published_date: str | None
+
+    def __post_init__(self) -> None:
+        if self.schema_version != SOURCE_SUBJECT_MANIFEST_SCHEMA_VERSION:
+            raise SourceManifestError(
+                f"schema_version must be {SOURCE_SUBJECT_MANIFEST_SCHEMA_VERSION}"
+            )
+        content_sha256 = _require_sha256(self.content_sha256, "content_sha256")
+        if (not isinstance(self.source_id, str)
+                or not _SOURCE_ID_RE.fullmatch(self.source_id)
+                or self.source_id != source_id_for_sha256(content_sha256)):
+            raise SourceManifestError("source_id must match content_sha256")
+        object.__setattr__(self, "subject", _validate_subject(self.subject))
+        object.__setattr__(
+            self, "original_path", _require_original_path(self.original_path))
+        object.__setattr__(
+            self, "published_date", _require_published_date(self.published_date))
+        object.__setattr__(self, "retrieved_at", _require_retrieved_at(self.retrieved_at))
+        object.__setattr__(
+            self, "collector_name", _require_text(self.collector_name, "collector_name"))
+        object.__setattr__(
+            self, "collector_version", _require_semver(self.collector_version))
+        object.__setattr__(self, "mime_type", _require_mime(self.mime_type))
+        if isinstance(self.byte_size, bool) or not isinstance(self.byte_size, int):
+            raise TypeError("byte_size must be an integer")
+        if self.byte_size <= 0:
+            raise SourceManifestError("byte_size must be positive; empty sources are invalid")
+
+    @classmethod
+    def from_dict(cls, data: Mapping[str, Any]) -> "SourceSubjectManifest":
+        if not isinstance(data, Mapping):
+            raise TypeError("source subject manifest input must be an object")
+        supplied = set(data)
+        unknown = supplied - _SUBJECT_MANIFEST_FIELDS
+        if unknown:
+            raise SourceManifestError(
+                f"source subject manifest unknown fields: {sorted(unknown)}")
+        missing = _SUBJECT_MANIFEST_FIELDS - supplied
+        if missing:
+            raise SourceManifestError(
+                f"source subject manifest missing fields: {sorted(missing)}")
+        return cls(**dict(data))
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "schema_version": self.schema_version,
+            "source_id": self.source_id,
+            "subject": {
+                "kind": self.subject["kind"],
+                "attribution_status": self.subject["attribution_status"],
+                "issuer_refs": [dict(ref) for ref in self.subject["issuer_refs"]],
+                **({
+                    "event_namespace": self.subject["event_namespace"],
+                    "event_id": self.subject["event_id"],
+                } if self.subject["kind"] == "multi_issuer_event" else {}),
+            },
+            "original_path": self.original_path,
+            "content_sha256": self.content_sha256,
+            "mime_type": self.mime_type,
+            "byte_size": self.byte_size,
+            "collector_name": self.collector_name,
+            "collector_version": self.collector_version,
+            "retrieved_at": self.retrieved_at,
+            "published_date": self.published_date,
+        }
+
+    def canonical_json(self) -> str:
+        return json.dumps(
+            self.to_dict(),
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+            allow_nan=False,
+        )

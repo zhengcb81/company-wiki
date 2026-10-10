@@ -1,0 +1,4 @@
+argv: ['C:\\Miniconda\\python.exe', '-X', 'utf8', '-B', '-m', 'company_wiki.source_catalog.official_source_cli', '--operation', 'import', '--config', 'C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3json-red-9h1t_pv6\\config\\catalog.json', '--project-root', 'C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3json-red-9h1t_pv6', '--request', 'C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3json-red-9h1t_pv6\\import.json', '--input-file', 'C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\m3-20261009T184946-cn-688012\\execution\\sources\\qa-latest-form-01.raw']
+exit: 2
+stdout: 
+stderr: {"schema_version": "official-source-failure/1", "status": "failed", "error_code": "invalid_text_original"}
