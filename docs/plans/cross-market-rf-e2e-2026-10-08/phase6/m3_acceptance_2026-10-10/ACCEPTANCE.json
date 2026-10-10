@@ -45,7 +45,11 @@
     "sealed_root_files_sha_unchanged": 40,
     "installation_files_unchanged": 590,
     "temp_restored": true,
-    "receipt": "installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/output_directory_checks.json"
+    "receipt": "installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/output_directory_checks.json",
+    "published_head": "98e0217472d9ca231f143d57f8eb6ea99bbfcfbd",
+    "exact_ci_success": 38084803229,
+    "normal_push_units_passed": 2744,
+    "normal_push_unit_seconds": 145.04
   },
   "pwf_publication_confirmed": {
     "head": "04f45c86052c493c3503e57eecc0a29c54bd275a",

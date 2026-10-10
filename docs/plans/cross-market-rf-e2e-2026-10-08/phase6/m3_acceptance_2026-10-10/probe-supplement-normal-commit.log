@@ -1,0 +1,53 @@
+[master 98e02174] test: preserve independent acceptance evidence across reruns
+ 57 files changed, 875 insertions(+), 13 deletions(-)
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/final-pwf-exact-ci.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/final-pwf-normal-commit.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/final-pwf-normal-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/final-pwf-normal-push.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/final-pwf-normal-push.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/.probe-output.claim
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/agents-derived-cli.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/agents-derived-cli.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/agents-derived-compute-strong-render.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/agents-derived-compute-strong-render.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/agents-ff-siblings.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/agents-ff-siblings.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/agents-full-cli.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/agents-full-cli.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/agents-full-compute-strong-render.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/agents-full-compute-strong-render.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/agents-half_0_base_2026.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/agents-half_0_base_2026.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/agents-half_reported_total.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/agents-half_reported_total.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/agents-half_segment_a_base.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/agents-half_segment_a_base.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/agents-rf-version.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/agents-rf-version.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/codex-derived-cli.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/codex-derived-cli.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/codex-derived-compute-strong-render.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/codex-derived-compute-strong-render.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/codex-ff-siblings.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/codex-ff-siblings.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/codex-full-cli.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/codex-full-cli.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/codex-full-compute-strong-render.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/codex-full-compute-strong-render.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/codex-half_0_base_2026.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/codex-half_0_base_2026.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/codex-half_reported_total.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/codex-half_reported_total.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/codex-half_segment_a_base.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/codex-half_segment_a_base.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/codex-rf-version.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/codex-rf-version.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/coordinator.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/coordinator.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/output_directory_checks.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/verification.json
+runtime dependency declaration parity.............................(no files to check)Skipped
+ruff check (WU-1.2, mirrors CI)...................................(no files to check)Skipped
+mypy contract modules (FC-1204-c, mirrors CI).....................(no files to check)Skipped
+config doctor (WU-7.1, mirrors CI)................................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test)...(no files to check)Skipped

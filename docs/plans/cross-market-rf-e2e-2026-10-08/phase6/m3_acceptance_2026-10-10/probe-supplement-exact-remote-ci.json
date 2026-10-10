@@ -1,0 +1,75 @@
+{
+  "observed_at_utc": "2026-10-10T20:43:10.569346+00:00",
+  "repos": {
+    "company-wiki": {
+      "branch": "master",
+      "local_head": "98e0217472d9ca231f143d57f8eb6ea99bbfcfbd",
+      "remote_head": "98e0217472d9ca231f143d57f8eb6ea99bbfcfbd",
+      "exact_equal": true,
+      "ci": [
+        {
+          "id": 38084803229,
+          "name": "CI",
+          "head_sha": "98e0217472d9ca231f143d57f8eb6ea99bbfcfbd",
+          "status": "in_progress",
+          "conclusion": null,
+          "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/38084803229",
+          "created_at": "2026-10-10T20:42:36Z",
+          "updated_at": "2026-10-10T20:42:40Z"
+        }
+      ],
+      "remaining_worktree_status": [
+        "?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/probe-supplement-normal-commit.json",
+        "?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/probe-supplement-normal-commit.log",
+        "?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/probe-supplement-normal-push.json",
+        "?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/probe-supplement-normal-push.log",
+        "?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/probe-supplement-protected-check.json"
+      ]
+    },
+    "filing-fetch": {
+      "branch": "main",
+      "local_head": "e1e3ad8679e21264258e48006786fbf01a6991bd",
+      "remote_head": "e1e3ad8679e21264258e48006786fbf01a6991bd",
+      "exact_equal": true,
+      "ci": [
+        {
+          "id": 38083419792,
+          "name": "quality",
+          "head_sha": "e1e3ad8679e21264258e48006786fbf01a6991bd",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/filing-fetch/actions/runs/38083419792",
+          "created_at": "2026-10-10T20:21:19Z",
+          "updated_at": "2026-10-10T20:22:28Z"
+        }
+      ],
+      "remaining_worktree_status": [
+        "?? config/FMP_API_KEY.txt"
+      ]
+    },
+    "revenue-forecast": {
+      "branch": "main",
+      "local_head": "6883bf00548abb9891eab6762aeaa89e3898b202",
+      "remote_head": "6883bf00548abb9891eab6762aeaa89e3898b202",
+      "exact_equal": true,
+      "ci": [
+        {
+          "id": 38083371392,
+          "name": "quality",
+          "head_sha": "6883bf00548abb9891eab6762aeaa89e3898b202",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/38083371392",
+          "created_at": "2026-10-10T20:20:36Z",
+          "updated_at": "2026-10-10T20:21:16Z"
+        }
+      ],
+      "remaining_worktree_status": [
+        " M assurance/runs/daily_alert.jsonl",
+        " M assurance/runs/weekly_alert.jsonl",
+        " M assurance/runs/weekly_manifest.json",
+        "?? output/"
+      ]
+    }
+  }
+}

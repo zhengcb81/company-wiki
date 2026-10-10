@@ -1,10 +1,10 @@
 {
   "observed_at_utc": "2026-10-10T14:24:54.285052+00:00",
-  "main_head": "f94b9ef001f9de5a1f6954c4342709c170deee7f",
+  "main_head": "98e0217472d9ca231f143d57f8eb6ea99bbfcfbd",
   "main_ci": {
-    "run": 38083232923,
+    "run": 38084803229,
     "conclusion": "success",
-    "head": "f94b9ef001f9de5a1f6954c4342709c170deee7f"
+    "head": "98e0217472d9ca231f143d57f8eb6ea99bbfcfbd"
   },
   "goal_complete": false,
   "agents": {
@@ -71,5 +71,13 @@
   "other_installed_files_unchanged": 554,
   "acceptance_completed_at_utc": "2026-10-10T20:30:09.491011+00:00",
   "installed_fresh_probes": 18,
-  "remaining_MAIN_auto_json_integration": true
+  "remaining_MAIN_auto_json_integration": true,
+  "test_harness_supplement_published": {
+    "head": "98e0217472d9ca231f143d57f8eb6ea99bbfcfbd",
+    "exact_ci_success": 38084803229,
+    "checks": 11,
+    "fresh_installed": 18
+  },
+  "next_MAIN_plan": "../main_auto_official_json/task_plan.md",
+  "next_MAIN_status": "interface_freeze_and_TDD_pending"
 }

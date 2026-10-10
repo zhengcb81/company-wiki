@@ -1,5 +1,12 @@
 # 三市场真实收入预测端到端审计
 
+## 三卡收尾已完成；进入 MAIN 共同接线（2026-10-10T20:47:25.734282+00:00）
+
+M3-JSON/W02、M3-USAGE/W06、M3-FLOW/W07 已验收、合主线、正常提交推送并定点安装。CWP最新验收补充 98e02174 的精确CI38084803229 success；FFe1e3ad86/CI38083419792、RF6883bf00/CI38083371392 success，三仓remote/local相等。CWP正常补充push2744PASS/145.04秒，总153.41秒；未跳过hooks。10类产品共因和1类测试证据保留共因已修，原失败与旧封存记录保留。155保护SHA无变化，本轮provider/model/新增费用0；邻仓ownerWIP与密钥未提交。
+
+**当前 Next Step：** 按[MAIN官方JSON共同接线细则](phase6/main_auto_official_json/task_plan.md)冻结最小subject/DTO/store接口，先写真实路由、角色、同母页多issuer、多parent、复用和终态compaction的RED，再实施。独立调查确认JSON误路由、role/source_role错配、document_id去重、artifact真实FK/单primary约束，以及新投影构造顺序和深冻结view需求。不新增provider/人工许可/第二任务库，不将完整records重复嵌入request/events。源工程绿不是公司研究通过，原三家四审、新三家、W04/W03/W05/W08/W09、NVDA/池loop和条件八家仍未完成；goal继续active。
+
+
 ## 三卡验收收尾与复跑证据自动保留（2026-10-10T20:39:25.463148+00:00）
 
 三卡源工程已正常合并发布并定点安装，CWP f94b9ef0/FFe1e3ad86/RF6883bf00精确CI全success；原PWF04f45c86的精确CI38084232316也success。额外发现测试脚本复跑覆盖旧日志，现自动唯一attempt输出，11项分配检查和fresh18 installed复跑PASS，MAIN实核40封存文件SHA未变、590安装文件无mutation、TEMP已恢复，0新增provider/model/费用。10类产品共因+1类测试证据保留共因分开记，不扩大人工门禁。
