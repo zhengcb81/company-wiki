@@ -46,3 +46,10 @@ MAIN 接线清单（不混入本线 commit）：
 1. CWP error_taxonomy.structured_error 3 行（发布异常 acquisition_observation 到 stderr）。
 2. FF tools/ci_tests.py CI_TESTS 加 tests/test_m3_acquisition_usage_ff.py。
 3. source_catalog/cli.py 总入口无需改动（观察经 to_dict+facade 随 --source-ref-v2 出口）。
+
+Phase 9 完成：
+- 提交（正常 hooks）：CWP d65e421c → FF f0f4e363 → RF 741f7c01，均 push 新分支 codex/m3-acquisition-usage-20261010。
+- exactCI：FF/RF quality@exact head success；CWP ci.yml 仅 master 触发 → not_available（exact_ci_observation.json）。
+- 交接物：HANDOFF.md、handoff.json（过 handoff.schema.json 校验）、runtime_file_closure.json（15 runtime 文件 SHA 闭包）、
+  INTERFACE_CHANGE.md、red_*/green_* 日志、restore_receipt.json、e2e_logs/。
+- MAIN patch 清单 3 项（error_taxonomy 3行、FF CI_TESTS、cli.py 无需改）；真实三公司大节点由 MAIN 核对。

@@ -53,7 +53,7 @@ Seed 来源：W06 前期骨架（docs/plans/.../m3_root_implementation_2026-10-1
 - TEMP 初始目录逐 SHA 恢复，额外原件清除，restore receipt。
 
 ### Phase 9: 提交/推送/交接
-**Status:** in_progress
+**Status:** complete
 - CWP→FF→RF 顺序正常 commit/push 自己分支，核 exactCI；runtime SHA 闭包；HANDOFF.md/handoff.json。
 
 ## 排他边界（提醒）
@@ -67,4 +67,4 @@ source_catalog/cli.py 总入口留 MAIN；只交 source_operation 的 DTO 及 CL
 |-------|---------|------------|
 
 ## Next Step
-Phase 9：CWP→FF→RF commit/push/exactCI + HANDOFF。
+无（lane complete；MAIN 集成与真实大节点见 HANDOFF §7）。
