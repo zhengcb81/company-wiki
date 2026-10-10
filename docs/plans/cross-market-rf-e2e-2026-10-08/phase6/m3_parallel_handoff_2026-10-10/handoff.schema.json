@@ -1,0 +1,445 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "M3 isolated lane handoff",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "lane_id",
+    "observed_at_utc",
+    "owner",
+    "package_status",
+    "repos",
+    "interfaces",
+    "tests",
+    "restore",
+    "usage",
+    "main_integration",
+    "remaining"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "m3-lane-handoff/1"
+    },
+    "lane_id": {
+      "enum": [
+        "M3-JSON",
+        "M3-USAGE",
+        "M3-FLOW"
+      ]
+    },
+    "observed_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "owner": {
+      "type": "string",
+      "minLength": 1
+    },
+    "package_status": {
+      "enum": [
+        "complete",
+        "partial",
+        "failed"
+      ]
+    },
+    "repos": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "repository",
+          "worktree",
+          "branch",
+          "base_head",
+          "head",
+          "changed_files",
+          "git_status_explanation",
+          "push",
+          "ci",
+          "remote_head",
+          "ci_head"
+        ],
+        "properties": {
+          "repository": {
+            "enum": [
+              "company-wiki",
+              "filing-fetch",
+              "revenue-forecast"
+            ]
+          },
+          "worktree": {
+            "type": "string",
+            "minLength": 1
+          },
+          "branch": {
+            "type": "string",
+            "pattern": "^codex/"
+          },
+          "base_head": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{40}$"
+          },
+          "head": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{40}$"
+          },
+          "changed_files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/file"
+            }
+          },
+          "git_status_explanation": {
+            "type": "string"
+          },
+          "push": {
+            "$ref": "#/$defs/observation"
+          },
+          "ci": {
+            "$ref": "#/$defs/observation"
+          },
+          "remote_head": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[0-9a-f]{40}$"
+          },
+          "ci_head": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[0-9a-f]{40}$"
+          }
+        }
+      }
+    },
+    "interfaces": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tests": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "phase",
+          "argv",
+          "cwd",
+          "exit_code",
+          "log",
+          "log_sha256",
+          "scope",
+          "result"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "phase": {
+            "enum": [
+              "RED",
+              "GREEN",
+              "STATIC",
+              "COMPATIBILITY",
+              "RESTORE"
+            ]
+          },
+          "argv": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "cwd": {
+            "type": "string"
+          },
+          "exit_code": {
+            "type": "integer"
+          },
+          "log": {
+            "type": "string"
+          },
+          "log_sha256": {
+            "$ref": "#/$defs/sha256"
+          },
+          "scope": {
+            "enum": [
+              "unit",
+              "contract",
+              "integration",
+              "public_cli",
+              "static",
+              "restore"
+            ]
+          },
+          "result": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "restore": {
+      "$ref": "#/$defs/observation"
+    },
+    "usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "external_provider_calls",
+        "external_model_calls",
+        "paid_tokens",
+        "paid_micro_usd",
+        "unknown_preserved"
+      ],
+      "properties": {
+        "external_provider_calls": {
+          "const": 0
+        },
+        "external_model_calls": {
+          "const": 0
+        },
+        "paid_tokens": {
+          "const": 0
+        },
+        "paid_micro_usd": {
+          "const": 0
+        },
+        "unknown_preserved": {
+          "const": true
+        }
+      }
+    },
+    "main_integration": {
+      "$ref": "#/$defs/observation"
+    },
+    "remaining": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "byte_sha256",
+        "git_blob_sha",
+        "runtime",
+        "reason"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "byte_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "git_blob_sha": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "runtime": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "evidence",
+        "note"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "pass",
+            "fail",
+            "pending",
+            "not_run",
+            "not_available"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "lane_id": {
+            "const": "M3-JSON"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "repos": {
+            "minItems": 1,
+            "maxItems": 1,
+            "items": {
+              "properties": {
+                "repository": {
+                  "enum": [
+                    "company-wiki"
+                  ]
+                }
+              }
+            },
+            "allOf": [
+              {
+                "contains": {
+                  "properties": {
+                    "repository": {
+                      "const": "company-wiki"
+                    }
+                  }
+                },
+                "minContains": 1,
+                "maxContains": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lane_id": {
+            "const": "M3-USAGE"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "repos": {
+            "minItems": 3,
+            "maxItems": 3,
+            "items": {
+              "properties": {
+                "repository": {
+                  "enum": [
+                    "company-wiki",
+                    "filing-fetch",
+                    "revenue-forecast"
+                  ]
+                }
+              }
+            },
+            "allOf": [
+              {
+                "contains": {
+                  "properties": {
+                    "repository": {
+                      "const": "company-wiki"
+                    }
+                  }
+                },
+                "minContains": 1,
+                "maxContains": 1
+              },
+              {
+                "contains": {
+                  "properties": {
+                    "repository": {
+                      "const": "filing-fetch"
+                    }
+                  }
+                },
+                "minContains": 1,
+                "maxContains": 1
+              },
+              {
+                "contains": {
+                  "properties": {
+                    "repository": {
+                      "const": "revenue-forecast"
+                    }
+                  }
+                },
+                "minContains": 1,
+                "maxContains": 1
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lane_id": {
+            "const": "M3-FLOW"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "repos": {
+            "minItems": 1,
+            "maxItems": 1,
+            "items": {
+              "properties": {
+                "repository": {
+                  "enum": [
+                    "revenue-forecast"
+                  ]
+                }
+              }
+            },
+            "allOf": [
+              {
+                "contains": {
+                  "properties": {
+                    "repository": {
+                      "const": "revenue-forecast"
+                    }
+                  }
+                },
+                "minContains": 1,
+                "maxContains": 1
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

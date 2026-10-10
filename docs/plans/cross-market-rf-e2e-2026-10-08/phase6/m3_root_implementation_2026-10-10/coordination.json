@@ -1,0 +1,39 @@
+{
+  "observed_at_utc": "2026-10-10T14:24:54.285052+00:00",
+  "main_head": "3c791e3c2a16c12627cc25d0bd8681cc9458e48b",
+  "main_ci": {
+    "run": 38058744767,
+    "conclusion": "success"
+  },
+  "goal_complete": false,
+  "agents": {
+    "W02": "/root/m3_official_json_implementation",
+    "W06": "/root/m3_acquisition_usage_implementation",
+    "W07": "/root/m3_rf_flow_role_implementation",
+    "W04": "/root"
+  },
+  "handoff_observed_at_utc": "2026-10-10T14:38:17.251621+00:00",
+  "external_handoff": {
+    "W02": {
+      "internal_agent_status": "terminal_errored_usage_limit",
+      "source_changes_observed": 0,
+      "external_status": "ready_not_claimed",
+      "restart_internal_agent": false,
+      "card": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_parallel_handoff_2026-10-10\\official_json_projection.md"
+    },
+    "W06": {
+      "internal_agent_status": "terminal_errored_usage_limit",
+      "source_changes_observed": 0,
+      "external_status": "ready_not_claimed",
+      "restart_internal_agent": false,
+      "card": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_parallel_handoff_2026-10-10\\acquisition_usage_chain.md"
+    },
+    "W07": {
+      "internal_agent_status": "terminal_errored_usage_limit",
+      "source_changes_observed": 0,
+      "external_status": "ready_not_claimed",
+      "restart_internal_agent": false,
+      "card": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_parallel_handoff_2026-10-10\\rf_period_evidence_contract.md"
+    }
+  }
+}

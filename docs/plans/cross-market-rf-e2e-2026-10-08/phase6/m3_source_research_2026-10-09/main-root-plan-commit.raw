@@ -1,0 +1,85 @@
+runtime dependency declaration parity.............................(no files to check)Skipped
+ruff check (WU-1.2, mirrors CI)...................................(no files to check)Skipped
+mypy contract modules (FC-1204-c, mirrors CI).....................(no files to check)Skipped
+config doctor (WU-7.1, mirrors CI)................................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test)...(no files to check)Skipped
+[master 3c791e3c] docs(pwf): accept complete M3 root remediation handoff
+ 85 files changed, 14637 insertions(+), 85 deletions(-)
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_remediation_2026-10-09/INTERFACES.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_remediation_2026-10-09/MAJOR_NODE.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_remediation_2026-10-09/SKILL_CHECKPOINTS.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_remediation_2026-10-09/coverage.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_remediation_2026-10-09/coverage.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_remediation_2026-10-09/delivery_manifest.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_remediation_2026-10-09/evidence_observation.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_remediation_2026-10-09/findings.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_remediation_2026-10-09/old_root_dispositions.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_remediation_2026-10-09/progress.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_remediation_2026-10-09/report_inventory.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_remediation_2026-10-09/root_causes.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_remediation_2026-10-09/task_plan.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_remediation_2026-10-09/verification.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_remediation_2026-10-09/verify_package.py
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_remediation_2026-10-09/work_packages/W01.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_remediation_2026-10-09/work_packages/W02.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_remediation_2026-10-09/work_packages/W03.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_remediation_2026-10-09/work_packages/W04.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_remediation_2026-10-09/work_packages/W05.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_remediation_2026-10-09/work_packages/W06.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_remediation_2026-10-09/work_packages/W07.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_remediation_2026-10-09/work_packages/W08.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_remediation_2026-10-09/work_packages/W09.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/first12_review_observation.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/main-http-records-ci.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/main-http-records-commit.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/main-http-records-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/main-http-records-push.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/main-http-records-push.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/GREEN-config-wire-attempt1.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/GREEN-config-wire-attempt1.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/GREEN-config-wire-compatibility.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/GREEN-config-wire-compatibility.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/GREEN-explicit-policy.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/GREEN-explicit-policy.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/GREEN-frozen-model-base.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/GREEN-reasoning-observation-attempt1.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/GREEN-reasoning-observation-attempt1.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/GREEN-reasoning-public-cli-attempt1.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/GREEN-reasoning-public-cli-attempt1.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/IMPLEMENTATION_CONTRACT.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/RED-config-policy.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/RED-config-policy.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/RED-config-wire.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/RED-config-wire.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/RED-explicit-policy.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/RED-explicit-policy.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/RED-reasoning-observation.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/RED-reasoning-observation.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/RED-reasoning-public-cli.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/RED-reasoning-public-cli.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/candidate-config-wire-commit.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/candidate-config-wire-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/candidate-generation-ci.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/candidate-generation-push-observation.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/candidate-reasoning-commit.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/candidate-reasoning-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/configuration-wire-edits.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/isolated-worktree.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/main-generation-merge.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/main-generation-merge.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/main-generation-merge.raw
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/static-config-wire-mypy.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/static-config-wire-mypy.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/static-config-wire-ruff-attempt1.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/static-config-wire-ruff-final.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/static-reasoning-mypy-fixed.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/static-reasoning-mypy-fixed.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/static-reasoning-mypy.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/static-reasoning-mypy.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/static-reasoning-ruff-final.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/static-reasoning-ruff.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/model_output_runtime_root/test_generation_policy_probe.py.txt
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/official_json_source_root/DATA_CONTRACT.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/official_json_source_root/JSON_EVIDENCE_INDEX.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/official_json_source_root/main_delivery_observation.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/root_plan_main_delivery_observation.json

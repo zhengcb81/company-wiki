@@ -1,0 +1,10 @@
+{
+  "started_at_utc": "2026-10-10T14:10:38.796784+00:00",
+  "finished_at_utc": "2026-10-10T14:13:15.433102+00:00",
+  "elapsed_seconds": 156.636,
+  "returncode": 0,
+  "HEAD": "3c791e3c2a16c12627cc25d0bd8681cc9458e48b",
+  "output_codec": "gb18030 replacement fallback",
+  "raw_sha256": "47d96142706e871c2c7e8a1a7bc99863c0bf1ae0ee7f71e0e17cdfa26a54cc9f",
+  "remote_head": "3c791e3c2a16c12627cc25d0bd8681cc9458e48b"
+}

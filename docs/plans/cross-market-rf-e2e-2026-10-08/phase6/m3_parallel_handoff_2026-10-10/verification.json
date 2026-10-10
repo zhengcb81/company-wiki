@@ -1,0 +1,28 @@
+{
+  "observed_at_utc": "2026-10-10T14:37:11.727313+00:00",
+  "scope": "handoff schema and physical separation only, not product implementation acceptance",
+  "status": "PASS",
+  "draft202012_schema_valid": true,
+  "synthetic_valid_controls": 3,
+  "synthetic_invalid_controls_rejected": 7,
+  "invalid_controls": [
+    "duplicate repository",
+    "wrong lane repository",
+    "missing chain repository",
+    "missing exact ci head field",
+    "rewritten unknown",
+    "out of engineering call scope",
+    "unknown top field"
+  ],
+  "distinct_physical_worktrees": 5,
+  "cards": [
+    "official_json_projection.md",
+    "acquisition_usage_chain.md",
+    "rf_period_evidence_contract.md"
+  ],
+  "internal_agents_authoritatively_terminal": true,
+  "implementation_complete": false,
+  "external_provider_model_calls": 0,
+  "new_paid_tokens": 0,
+  "new_paid_micro_usd": 0
+}

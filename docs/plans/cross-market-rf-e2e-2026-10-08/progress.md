@@ -1,5 +1,19 @@
 # Progress
 
+## 独立施工包交接（2026-10-10T14:38:17.251621+00:00）
+
+已将当前 W02/W06/W07 细化为三张可立即启动的外部harness接管卡：[总入口](phase6/m3_parallel_handoff_2026-10-10/README.md)。只有这三张，不新增另一组需求。原三内置agent已authoritative terminal errored（账号额度），实查无源码改动、只有各自计划；MAIN不会同时重启同写集内置agent。外部harness尚未声称启动。
+
+5个物理工作树彼此不同，CWP/FF/RF source write sets排他；AUTO模型/总CLI/RF output公共接线归MAIN。交接有固定schema，3正常和7负控验证通过；这只验证任务包接口，不表示实现或研究完成。各卡已指定唯一PWF目录/恢复pin和独立test包，日志/恢复/费用及exactHEAD CI一起交；不新增逐小节点人审或授权。
+
+**Next Step：** MAIN继续W04失败final诊断，接收三卡DTO后在一个大节点顺序集成；不再自行并行改三卡专属source。原三家公司四审/新三家泛化/NVDA/池loop仍待，当前goal active。原件/config/Dayu/邻仓WIP不变；施工包制作外部model/provider和费用0。已发布3c791e3c精确CI38058744767 success。
+
+## 最新发布（2026-10-10T14:14:03.408384+00:00）
+
+配置/推理计量源码及完整共因PWF现已正常推至远端master3c791e3c2a16c12627cc25d0bd8681cc9458e48b，ls-remote精确一致。正常commit1.616秒；pre-push2580PASS/147.28秒，整次push156.636秒。原始输出按bytes保存，Windows非UTF8使用gb18030展示，未丢日志。精确CI38058744767在14:13:38观察仍in_progress，不能称已绿；历史HTTP/RF期次CI成功仍只代表各自旧HEAD。
+
+**Next Step：** 核对本次精确CI结论，再继续W04失败final诊断及其他已冻结责任卡；原三家修后真实四审、新三家泛化、NVDA/池loop仍待。目标未完成，固定八家仍只登记。发布原生回执见phase6/m3_source_research_2026-10-09/main-root-plan-{commit,push,ci}.json，提交后产生的回执自然留待下一施工节点归档，不为了回执递归发布。本节点外部模型调用/新增收费0。
+
 ## 最新归总（2026-10-10T14:09:19.972711+00:00）
 
 原三家（中微、腾讯、微软）四路12份独立审查已完成；246项检查、本轮91项发现。独立专家共因PWF现已冻结并由MAIN实核23份内容SHA及aggregate：旧64+新91+2专家carryover共157唯一项，26共因、9施工卡，无遗漏。此处只接受诊断计划，不表示157项已修复或研究已通过。

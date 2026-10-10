@@ -1,0 +1,47 @@
+{
+  "schema_version": "m3-harness-card-bundle/1",
+  "observed_at_utc": "2026-10-10T14:37:11.727313+00:00",
+  "scope": "three independent task cards and supporting interface templates; code implementation not delivered",
+  "files": [
+    {
+      "path": "acquisition_usage_chain.md",
+      "bytes": 7008,
+      "sha256": "ed0d776fd8db945ae0f2644da356cb623ceaefff7753602d33bab3ee67aeae5d"
+    },
+    {
+      "path": "handoff.schema.json",
+      "bytes": 9893,
+      "sha256": "4c20bbc411e77f07682c6390a7fc3cced34356ee228f1bcc68973f794e19ca48"
+    },
+    {
+      "path": "HANDOFF_TEMPLATE.md",
+      "bytes": 2180,
+      "sha256": "0fae8f2e408547f6b7b2f17ea5ff0c8359836cf3f966b31c58f95225b9d1674b"
+    },
+    {
+      "path": "INTERFACES.md",
+      "bytes": 5969,
+      "sha256": "5aebf938fb38f5c3eb38057809102d0767e0b21d5008512ae6df4a4b1d725735"
+    },
+    {
+      "path": "official_json_projection.md",
+      "bytes": 7283,
+      "sha256": "35f45bc71191998079d512d4fbe063157419814cbb85311dbc07b778e0d9378f"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2992,
+      "sha256": "869bc2d4e552402c0f702551ee0a04be867d297fd9025346fad39efd25cf2033"
+    },
+    {
+      "path": "rf_period_evidence_contract.md",
+      "bytes": 6545,
+      "sha256": "f60facd730e2bca5cc36a8b2377c12fbc3b6ab4393b97d1a41241441ee9057c7"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 894,
+      "sha256": "ebb6630daa637f205fbbfdeb4289c84a09c2dd5e0057e0d8f6c93d001a01f412"
+    }
+  ]
+}
