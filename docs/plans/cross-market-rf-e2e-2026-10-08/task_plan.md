@@ -1,5 +1,23 @@
 # 三市场真实收入预测端到端审计
 
+## 三卡源工程验收完成，正常发布进行中（2026-10-10T20:14:38.894433+00:00）
+
+JSON/USAGE/FLOW三交付已在隔离集成树实质验收并修10类共因；独立重放通过。CWP137快速合同+5模块types，FF646PASS/78subtests/6明确skip，RF260PASS/2subtests+10模块types及Ruff；FLOW年度责任109PASS/46subtests；公共跨进程101PASS包含复用与硬失败。计数有交集不相加。早前失败、FLOW原红CI/no-verify均保留，不作为本次发布依据。
+
+已正常commit CWP aae266a3、FF0c06e72d、RFc3e39184，MAIN共享接线/4.2.0与3.9合同已接。原件、production config、Dayu、邻仓assurance/output ownerWIP及155保护SHA无变化；本轮provider/model/费用0，USD20/2M预算含旧unknown不重置。
+
+**Next Step：** 正常主线merge/push、精确CI与两个物理技能根定点安装/恢复检查；之后继续AUTO JSON公共路由、W04失败诊断与W03/W05/W08/W09原计划。源工程接受不等于三家公司研究通过，当前goal仍active，原三家四审/新三家泛化/池loop及后续八家未完成。[验收入口](phase6/m3_acceptance_2026-10-10/task_plan.md)。
+
+
+## 三条施工线接收与集中验收（2026-10-10T19:41:49.735913+00:00）
+
+三线代码及交接已实查：JSON 4fc9ee1b、USAGE CWP704c374f/FFf0f4e363/RF741f7c01、FLOW f8ae0488。前三个独立只读验收agent分别审查，MAIN负责共享接线。JSON/USAGE报告工程complete，FLOW明确partial，版本接线未应用且分支CI红；正常发布前必须本地/远端绿，不沿用分包的no-verify方式。上一MAIN17f8b074精确CI38060488582已success。
+
+初查JSON保存/重读、多页EvidenceSpan和as-of，以及FLOW混合角色来源计数有候选根因，先最小反例复现再TDD修，不能用已有绿计数替代消费者可用性。主线/外包报告、冻结157问题包、原件、配置、Dayu和RF assurance/output WIP均保留。此轮工程验收0外部provider/model/付费；预算USD20/2M及旧unknown继续累计。
+
+**Next Step：** 复现责任层问题，在独立集成工作树修根因并应用MAIN公共接线，集中离线全链测试绿后正常并线、提交推送、精确CI和定点安装。AUTO新JSON路由及真实三家研究仍未完成；goal active。证据：[验收节点](phase6/m3_acceptance_2026-10-10/initial_observation.json)。
+
+
 ## 独立施工包交接（2026-10-10T14:38:17.251621+00:00）
 
 已将当前 W02/W06/W07 细化为三张可立即启动的外部harness接管卡：[总入口](phase6/m3_parallel_handoff_2026-10-10/README.md)。只有这三张，不新增另一组需求。原三内置agent已authoritative terminal errored（账号额度），实查无源码改动、只有各自计划；MAIN不会同时重启同写集内置agent。外部harness尚未声称启动。

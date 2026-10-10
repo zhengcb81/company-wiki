@@ -1,0 +1,8 @@
+Push unit scope: no behavior changes (0 paths)
+
+=== affected units and CI contract smoke ===
+============================= 92 passed in 12.92s =============================
+
+pre-push gate GREEN — safe to push (then self-monitor CI).
+To https://github.com/zhengcb81/company-wiki.git
+   3c791e3c..17f8b074  master -> master

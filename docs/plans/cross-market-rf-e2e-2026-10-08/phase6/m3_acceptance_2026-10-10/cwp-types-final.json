@@ -1,0 +1,19 @@
+{
+  "observed_at_utc": "2026-10-10T19:55:17.666323+00:00",
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "mypy",
+    "src/company_wiki/source_catalog/official_json_structure.py",
+    "src/company_wiki/source_catalog/official_json_projection.py",
+    "src/company_wiki/source_catalog/source_operation.py",
+    "src/company_wiki/source_catalog/error_taxonomy.py",
+    "src/company_wiki/source_catalog/acquisition_observation.py"
+  ],
+  "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+  "exit_code": 0,
+  "seconds": 2.619
+}

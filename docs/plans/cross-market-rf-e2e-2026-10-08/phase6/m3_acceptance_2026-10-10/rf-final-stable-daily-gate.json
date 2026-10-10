@@ -1,0 +1,12 @@
+{
+  "args": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "tools/pre_push_gate.py"
+  ],
+  "exit_code": 0,
+  "seconds": 28.757,
+  "source_stable": true,
+  "external_calls": 0,
+  "fees": 0
+}

@@ -1,0 +1,17 @@
+{
+  "args": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "mypy",
+    "src/company_wiki/source_catalog/acquisition_observation.py",
+    "src/company_wiki/source_catalog/official_json_structure.py",
+    "src/company_wiki/source_catalog/official_json_layout.py",
+    "src/company_wiki/source_catalog/official_json_projection.py",
+    "src/company_wiki/source_catalog/error_taxonomy.py"
+  ],
+  "cwd": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+  "exit_code": 0,
+  "seconds": 0.754,
+  "new_external_calls": 0
+}

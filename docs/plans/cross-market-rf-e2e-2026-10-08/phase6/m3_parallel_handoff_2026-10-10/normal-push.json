@@ -1,0 +1,9 @@
+{
+  "observed_at_utc": "2026-10-10T14:39:35.399024+00:00",
+  "elapsed_seconds": 21.252,
+  "returncode": 0,
+  "HEAD": "17f8b0747247a99b4357ecd6e093b0297149cd78",
+  "output_codec": "gb18030 replacement fallback",
+  "raw_sha256": "a6159a90901936f201bbc26ea8d62b43d0088773a0003c9192c2c117b9060a2c",
+  "remote_head": "17f8b0747247a99b4357ecd6e093b0297149cd78"
+}

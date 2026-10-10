@@ -1,0 +1,46 @@
+[codex/m3-acceptance-20261010 c3e39184] fix(forecast): enforce fiscal flow semantics across modern consumers
+ 55 files changed, 5619 insertions(+), 56 deletions(-)
+ create mode 100644 .planning/m3-acceptance-flow-fixes/ACCEPTANCE.md
+ create mode 100644 .planning/m3-acceptance-flow-fixes/ANNUAL_ACCEPTANCE.md
+ create mode 100644 .planning/m3-acceptance-flow-fixes/acceptance.json
+ create mode 100644 .planning/m3-acceptance-flow-fixes/annual-acceptance.json
+ create mode 100644 .planning/m3-acceptance-flow-fixes/annual-final-green.json
+ create mode 100644 .planning/m3-acceptance-flow-fixes/annual-final-green.log
+ create mode 100644 .planning/m3-acceptance-flow-fixes/annual-final-green2.json
+ create mode 100644 .planning/m3-acceptance-flow-fixes/annual-final-green2.log
+ create mode 100644 .planning/m3-acceptance-flow-fixes/annual-final-static.log
+ create mode 100644 .planning/m3-acceptance-flow-fixes/annual-final-static2.log
+ create mode 100644 .planning/m3-acceptance-flow-fixes/annual-green.json
+ create mode 100644 .planning/m3-acceptance-flow-fixes/annual-green.log
+ create mode 100644 .planning/m3-acceptance-flow-fixes/annual-red.json
+ create mode 100644 .planning/m3-acceptance-flow-fixes/annual-red.log
+ create mode 100644 .planning/m3-acceptance-flow-fixes/annual-role-red.json
+ create mode 100644 .planning/m3-acceptance-flow-fixes/annual-role-red.log
+ create mode 100644 .planning/m3-acceptance-flow-fixes/annual-static-0.log
+ create mode 100644 .planning/m3-acceptance-flow-fixes/annual-static-1.log
+ create mode 100644 .planning/m3-acceptance-flow-fixes/annual-static.json
+ create mode 100644 .planning/m3-acceptance-flow-fixes/annual-unit-green.json
+ create mode 100644 .planning/m3-acceptance-flow-fixes/annual-unit-green.log
+ create mode 100644 .planning/m3-acceptance-flow-fixes/before.json
+ create mode 100644 .planning/m3-acceptance-flow-fixes/final-green.json
+ create mode 100644 .planning/m3-acceptance-flow-fixes/final-green.log
+ create mode 100644 .planning/m3-acceptance-flow-fixes/mechanism-green.json
+ create mode 100644 .planning/m3-acceptance-flow-fixes/mechanism-green.log
+ create mode 100644 .planning/m3-acceptance-flow-fixes/period-green.json
+ create mode 100644 .planning/m3-acceptance-flow-fixes/period-green.log
+ create mode 100644 .planning/m3-acceptance-flow-fixes/period-red.json
+ create mode 100644 .planning/m3-acceptance-flow-fixes/period-red.log
+ create mode 100644 .planning/m3-acceptance-flow-fixes/red.json
+ create mode 100644 .planning/m3-acceptance-flow-fixes/red.log
+ create mode 100644 .planning/m3-acceptance-flow-fixes/static-0.log
+ create mode 100644 .planning/m3-acceptance-flow-fixes/static-1.log
+ create mode 100644 .planning/m3-acceptance-flow-fixes/static.json
+ create mode 100644 .planning/m3-acceptance-main/ACCEPTANCE.md
+ create mode 100644 scripts/contracts/annual_consumption.py
+ create mode 100644 tests/test_m3_acquisition_usage_acceptance.py
+ create mode 100644 tests/test_m3_period_flow_annual_consumers.py
+ create mode 100644 tests/test_m3_period_flow_consumers.py
+
+ruff check (WU-1.2, mirrors CI).......................................................Passed
+mypy public contracts (FC-1204-c, mirrors CI).........................................Passed
+host assumption guard (FC-1307-a, mirrors the CI contract test).......................Passed

@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "git",
+    "commit",
+    "-m",
+    "fix(source): validate raw JSON replay and preserve acquisition uncertainty"
+  ],
+  "exit_code": 0,
+  "seconds": 16.019
+}

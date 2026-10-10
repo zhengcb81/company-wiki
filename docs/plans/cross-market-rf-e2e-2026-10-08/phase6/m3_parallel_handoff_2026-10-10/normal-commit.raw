@@ -1,0 +1,27 @@
+runtime dependency declaration parity.............................(no files to check)Skipped
+ruff check (WU-1.2, mirrors CI)...................................(no files to check)Skipped
+mypy contract modules (FC-1204-c, mirrors CI).....................(no files to check)Skipped
+config doctor (WU-7.1, mirrors CI)................................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test)...(no files to check)Skipped
+[master 17f8b074] docs(pwf): hand off three isolated M3 implementation lanes
+ 23 files changed, 1167 insertions(+)
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_parallel_handoff_2026-10-10/HANDOFF_TEMPLATE.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_parallel_handoff_2026-10-10/INTERFACES.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_parallel_handoff_2026-10-10/README.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_parallel_handoff_2026-10-10/acquisition_usage_chain.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_parallel_handoff_2026-10-10/delivery_manifest.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_parallel_handoff_2026-10-10/handoff.schema.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_parallel_handoff_2026-10-10/official_json_projection.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_parallel_handoff_2026-10-10/rf_period_evidence_contract.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_parallel_handoff_2026-10-10/verification.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_implementation_2026-10-10/coordination.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_implementation_2026-10-10/findings.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_implementation_2026-10-10/progress.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_implementation_2026-10-10/task_plan.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/main-root-plan-ci.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/main-root-plan-commit.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/main-root-plan-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/main-root-plan-commit.raw
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/main-root-plan-push.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/main-root-plan-push.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/main-root-plan-push.raw

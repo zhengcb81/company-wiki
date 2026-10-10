@@ -1,0 +1,3 @@
+src\company_wiki\source_catalog\acquisition_observation.py:67: error: Incompatible types in assignment (expression has type "str", target has type "int")  [assignment]
+src\company_wiki\source_catalog\acquisition_observation.py:72: error: Incompatible types in assignment (expression has type "Any | None", target has type "int")  [assignment]
+Found 2 errors in 1 file (checked 5 source files)

@@ -1,0 +1,106 @@
+FF.                                                                      [100%]
+================================== FAILURES ===================================
+_ test_parameter_fact_conflict_identity_includes_the_actual_time_window[second_window0-65-True] _
+
+second_window = ('2025-07-01', '2025-12-31'), second_value = 65, allowed = True
+
+    @pytest.mark.parametrize("second_window,second_value,allowed", [
+        (("2025-07-01", "2025-12-31"), 65, True),
+        (("2025-01-01", "2025-03-31"), 25, True),
+        (("2025-01-01", "2025-06-30"), 65, False),
+    ])
+    def test_parameter_fact_conflict_identity_includes_the_actual_time_window(second_window, second_value, allowed):
+        from revenue_core import validate_document
+        data = forecast_document()
+        data["schema_version"] = "3.9"
+        definition = "Segment A recognized revenue"
+        add_flow_parameter(data, "window_first", 55, "2025-01-01", "2025-06-30", 2025, definition=definition)
+        add_flow_parameter(data, "window_second", second_value, *second_window, 2025, definition=definition)
+        if allowed:
+>           validated = validate_document(data)
+                        ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_m3_period_flow_consumers.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\contracts\document.py:1067: in validate_document
+    parameter_index = validate_parameters(data, source_index)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\contracts\document.py:555: in validate_parameters
+    _validate_conflict_resolution(group, key)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+group = [{'parameter_id': 'window_first', 'kind': 'reported_fact', 'value': 55.0, 'unit': 'USD million', ...}, {'parameter_id': 'window_second', 'kind': 'reported_fact', 'value': 65.0, 'unit': 'USD million', ...}]
+key = ('segment a recognized revenue', 'FY2025', 'USD million', 'None')
+
+    def _validate_conflict_resolution(
+        group: list[dict[str, Any]], key: tuple[str, str, str, str]
+    ) -> None:
+        """ZR-604: dual-assertion conflict resolution.
+    
+        When parameters with the same semantic key carry different values,
+        ALL must carry ``resolution_status`` and at most one is ``accepted``
+        — otherwise the original hard-fail applies (no silent overwrite).
+        """
+        all_resolved = all("resolution_status" in item for item in group)
+        if not all_resolved:
+            ids = ", ".join(item["parameter_id"] for item in group)
+>           raise ForecastInputError(
+                f"unresolved conflicting parameters for {key}: {ids}"
+            )
+E           contracts.evidence.ForecastInputError: unresolved conflicting parameters for ('segment a recognized revenue', 'FY2025', 'USD million', 'None'): window_first, window_second
+
+scripts\contracts\document.py:358: ForecastInputError
+_ test_parameter_fact_conflict_identity_includes_the_actual_time_window[second_window1-25-True] _
+
+second_window = ('2025-01-01', '2025-03-31'), second_value = 25, allowed = True
+
+    @pytest.mark.parametrize("second_window,second_value,allowed", [
+        (("2025-07-01", "2025-12-31"), 65, True),
+        (("2025-01-01", "2025-03-31"), 25, True),
+        (("2025-01-01", "2025-06-30"), 65, False),
+    ])
+    def test_parameter_fact_conflict_identity_includes_the_actual_time_window(second_window, second_value, allowed):
+        from revenue_core import validate_document
+        data = forecast_document()
+        data["schema_version"] = "3.9"
+        definition = "Segment A recognized revenue"
+        add_flow_parameter(data, "window_first", 55, "2025-01-01", "2025-06-30", 2025, definition=definition)
+        add_flow_parameter(data, "window_second", second_value, *second_window, 2025, definition=definition)
+        if allowed:
+>           validated = validate_document(data)
+                        ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_m3_period_flow_consumers.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\contracts\document.py:1067: in validate_document
+    parameter_index = validate_parameters(data, source_index)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\contracts\document.py:555: in validate_parameters
+    _validate_conflict_resolution(group, key)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+group = [{'parameter_id': 'window_first', 'kind': 'reported_fact', 'value': 55.0, 'unit': 'USD million', ...}, {'parameter_id': 'window_second', 'kind': 'reported_fact', 'value': 25.0, 'unit': 'USD million', ...}]
+key = ('segment a recognized revenue', 'FY2025', 'USD million', 'None')
+
+    def _validate_conflict_resolution(
+        group: list[dict[str, Any]], key: tuple[str, str, str, str]
+    ) -> None:
+        """ZR-604: dual-assertion conflict resolution.
+    
+        When parameters with the same semantic key carry different values,
+        ALL must carry ``resolution_status`` and at most one is ``accepted``
+        — otherwise the original hard-fail applies (no silent overwrite).
+        """
+        all_resolved = all("resolution_status" in item for item in group)
+        if not all_resolved:
+            ids = ", ".join(item["parameter_id"] for item in group)
+>           raise ForecastInputError(
+                f"unresolved conflicting parameters for {key}: {ids}"
+            )
+E           contracts.evidence.ForecastInputError: unresolved conflicting parameters for ('segment a recognized revenue', 'FY2025', 'USD million', 'None'): window_first, window_second
+
+scripts\contracts\document.py:358: ForecastInputError
+=========================== short test summary info ===========================
+FAILED tests/test_m3_period_flow_consumers.py::test_parameter_fact_conflict_identity_includes_the_actual_time_window[second_window0-65-True]
+FAILED tests/test_m3_period_flow_consumers.py::test_parameter_fact_conflict_identity_includes_the_actual_time_window[second_window1-25-True]
+2 failed, 1 passed, 22 deselected in 0.39s

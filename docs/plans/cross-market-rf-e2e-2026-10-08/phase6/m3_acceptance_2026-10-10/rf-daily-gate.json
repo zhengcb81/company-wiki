@@ -1,0 +1,16 @@
+{
+  "observed_at_utc": "2026-10-10T19:49:57.137712+00:00",
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "tools/pre_push_gate.py"
+  ],
+  "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast",
+  "exit_code": 0,
+  "roots": {
+    "FF": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\filing-fetch",
+    "CWP": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki"
+  }
+}

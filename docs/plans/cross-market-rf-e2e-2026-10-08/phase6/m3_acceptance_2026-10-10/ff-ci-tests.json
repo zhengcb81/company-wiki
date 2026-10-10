@@ -1,0 +1,13 @@
+{
+  "observed_at_utc": "2026-10-10T19:56:27.787895+00:00",
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "tools/ci_tests.py"
+  ],
+  "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\filing-fetch",
+  "exit_code": 0,
+  "seconds": 70.121
+}

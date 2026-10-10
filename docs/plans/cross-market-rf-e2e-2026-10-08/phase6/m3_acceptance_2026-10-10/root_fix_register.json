@@ -1,0 +1,139 @@
+{
+  "observed_at_utc": "2026-10-10T20:02:32.976159+00:00",
+  "issues": [
+    {
+      "id": "A-JSON-01",
+      "root": "persisted projection metadata/parent-byte replay differs from claimed contract",
+      "examples": [
+        "persist canonical excludes id/SHA but load requires them",
+        "container tokens hash empty slice",
+        "second page spans bind first source",
+        "changed role/issuer/as-of fields accepted after rehash"
+      ],
+      "owner": "JSON",
+      "state": "TDD_green_independent_replay_pass_source_engineering_accepted"
+    },
+    {
+      "id": "A-USAGE-01",
+      "root": "provider fee certainty lost between owned adapter and parent aggregation",
+      "examples": [
+        "initial fee counter0 becomes known provider cost0",
+        "mixed known/unknown multi-invocation total certainty"
+      ],
+      "owner": "USAGE",
+      "state": "TDD_green_independent_replay_pass_source_engineering_accepted"
+    },
+    {
+      "id": "A-USAGE-02",
+      "root": "three validators disagree or throw while projecting diagnostic",
+      "examples": [
+        "outcome []/{} TypeError",
+        "http_exchanges null accepted only CWP"
+      ],
+      "owner": "USAGE",
+      "state": "TDD_green_independent_replay_pass_source_engineering_accepted"
+    },
+    {
+      "id": "A-FLOW-01",
+      "root": "node-level source set mistaken for actual mechanism claim source set",
+      "examples": [
+        "history source for mixed node counts as independent mechanism",
+        "peer node exclusion loses valid mechanism claim"
+      ],
+      "owner": "FLOW",
+      "state": "TDD_green_independent_replay_pass_source_engineering_accepted"
+    },
+    {
+      "id": "A-FLOW-02",
+      "root": "output feature checks equal default schema instead of additive capability",
+      "examples": [
+        "3.8 and3.9 skip model/receipt/target/source/constraint recompute",
+        "partial-year period absent from rendered report"
+      ],
+      "owner": "MAIN",
+      "state": "TDD_green_independent_replay_pass_source_engineering_accepted"
+    },
+    {
+      "id": "A-FLOW-03",
+      "root": "approximate average days used for whole calendar month contract",
+      "examples": [
+        "non whole-quarter dates accepted under 0.2month tolerance"
+      ],
+      "owner": "FLOW",
+      "state": "TDD_green_independent_replay_pass_source_engineering_accepted"
+    },
+    {
+      "id": "A-JSON-02",
+      "root": "pagination completeness uses first-page declaration without all-page consistency",
+      "examples": [
+        "page2 conflicting total/pages still complete",
+        "overlapping identifiers on adjacent pages must not falsely prove complete"
+      ],
+      "owner": "JSON",
+      "state": "TDD_green_independent_replay_pass_source_engineering_accepted"
+    },
+    {
+      "id": "A-JSON-03",
+      "root": "fractional/numeric identity coerced through int loses raw evidence",
+      "examples": [
+        "raw org_id1.9 becomes identity1",
+        "fractional pagination counts may become integer completeness evidence"
+      ],
+      "owner": "JSON",
+      "state": "TDD_green_independent_replay_pass_source_engineering_accepted"
+    },
+    {
+      "id": "A-FLOW-04",
+      "root": "semantic fact conflict key excludes actual dated window",
+      "examples": [
+        "H1/H2 same business definition falsely conflict"
+      ],
+      "owner": "MAIN",
+      "state": "TDD_green_independent_replay_pass_source_engineering_accepted"
+    },
+    {
+      "id": "A-FLOW-05",
+      "root": "annual consumers accept partial-year period_flow amounts",
+      "examples": [
+        "H1 110 used directly as annual revenue",
+        "H1 company and segment bases accepted as full-year bases"
+      ],
+      "owner": "FLOW",
+      "state": "TDD_green_independent_replay_pass_source_engineering_accepted"
+    }
+  ],
+  "failures_preserved": [
+    "rf-consumers-red.log (15fail7pass)",
+    "rf-consumers-green.log (3version pins fail92pass)",
+    "rf-main-wiring-green.log (72fail112pass missing import residue)",
+    "patch first check failed CRLF, no patch applied; normalized exact4 target files and applied successfully",
+    "flow-fact-window-red.log:distinct scope falsely conflict; next actual regression88PASS7subtests",
+    "rf-final-daily-gate.log:2 variable tuple typing errors; fixed explicit tuple[str,...]",
+    "rf-final-daily-gate-green.log:actual exit1/2FAIL258PASS2subtests despite historical filename; new role regressions still RED during simultaneous helper work"
+  ],
+  "latest_main_test": "rf-main-wiring-green2.log:181pass6subtests/4.99sec",
+  "schema_scope": "3.7/3.8/3.9; legacy semantics retained",
+  "fees": 0,
+  "goal_complete": false,
+  "latest_actual_gates": {
+    "RF": "228PASS31.53seconds",
+    "CWP_fast_contract": "118PASS18.47seconds",
+    "CWP_types": "5modulesPASS",
+    "FF_actual_ci": "642PASS6SKIP78subtests69.41s",
+    "MAIN_public_subprocess_chain": "101PASS45.84s includes new hardfailure;isolated loopback only",
+    "CWP_final_fast_contract": "137PASS18.12seconds",
+    "FF_final_daily": "646PASS6SKIP78subtests69.16seconds",
+    "FLOW_annual": "109PASS46subtests2.30seconds",
+    "CWP_final_types": "5modulesPASS",
+    "RF_final_stable_daily": "260PASS2subtests27.66seconds;Ruff/types10sourcePASS"
+  },
+  "independent_reviewer": {
+    "JSON": "pagination consistency/ID overlap/precision/name proof verified",
+    "USAGE": "256 malformed DTO variations consistent",
+    "FLOW": "H1 direct annual driver/segment/company rejected; matching input+trace+SHA strong boundary rejected; fullFY/derived/stock/rate controls passed",
+    "new_calls": 0,
+    "fees": 0,
+    "temp_restored": true
+  },
+  "next_step": "normal publish main exact CI and targeted runtime installation; AUTO JSON integration and real research still pending"
+}

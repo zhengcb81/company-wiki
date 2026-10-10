@@ -1,0 +1,16 @@
+{
+  "observed_at_utc": "2026-10-10T19:53:17.266997+00:00",
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "tools/pre_push_gate.py",
+    "--fast-contracts-only"
+  ],
+  "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+  "exit_code": 0,
+  "seconds": 19.24,
+  "log_sha256": "9de031c0e82e5afb9c9a94d6e70aae94700a67f8db86b86b88f872cd3cac88f3",
+  "required_pytest_plugin": "pytest_timeout"
+}

@@ -1,0 +1,11 @@
+
+=== ruff ===
+All checks passed!
+
+=== public contract types ===
+scripts\contracts\document.py:508: error: Incompatible types in assignment (expression has type "tuple[Any, Any, Any, str, Any, Any, Any]", variable has type "tuple[Any, Any, Any, str]")  [assignment]
+scripts\contracts\document.py:560: error: Incompatible types in assignment (expression has type "tuple[str, ...]", variable has type "tuple[Any, Any, Any, str]")  [assignment]
+Found 2 errors in 1 file (checked 10 source files)
+
+FAILED: public contract types
+

@@ -1,0 +1,13 @@
+
+=== CI fast contract smoke set ===
+
+ERROR: usage: python -m pytest [options] [file_or_dir] [file_or_dir] [...]
+python -m pytest: error: unrecognized arguments: --timeout=180
+  inifile: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki\pytest.ini
+  rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+
+
+FAILED: CI fast contract smoke set
+
+GATE RED at: CI fast contract smoke set
+Fix the root cause (see revenue-forecast ci_root_fix.md), do not bypass.

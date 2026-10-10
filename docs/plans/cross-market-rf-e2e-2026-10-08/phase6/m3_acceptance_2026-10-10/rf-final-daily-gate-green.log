@@ -1,0 +1,33 @@
+
+=== ruff ===
+All checks passed!
+
+=== public contract types ===
+Success: no issues found in 10 source files
+
+=== current source and forecast behavior ===
+...................................................F.F................ [ 26%]
+........................................................................ [ 54%]
+........................................................................ [ 82%]
+..............................................                           [100%]
+================================== FAILURES ===================================
+_ test_flow_roles_do_not_become_stocks_only_because_dimensions_match[aum_fee_bridge-inflows-monetary_balance] _
+tests\test_m3_period_flow_annual_consumers.py:182: in test_flow_roles_do_not_become_stocks_only_because_dimensions_match
+    with pytest.raises(ForecastInputError, match="annual"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ForecastInputError
+___ test_average_operating_power_is_a_stock_even_when_dimension_is_quantity ___
+tests\test_m3_period_flow_annual_consumers.py:194: in test_average_operating_power_is_a_stock_even_when_dimension_is_quantity
+    validate_annual_consumption(data, parameters)
+scripts\contracts\annual_consumption.py:115: in validate_annual_consumption
+    require(basis == PERIOD_FLOW_TIME_BASIS,
+scripts\contracts\evidence.py:98: in require
+    raise ForecastInputError(message)
+E   contracts.evidence.ForecastInputError: power: annual model renewable_generation.average_commissioned_mw requires annual flow coverage, not point_in_time
+=========================== short test summary info ===========================
+FAILED tests/test_m3_period_flow_annual_consumers.py::test_flow_roles_do_not_become_stocks_only_because_dimensions_match[aum_fee_bridge-inflows-monetary_balance]
+FAILED tests/test_m3_period_flow_annual_consumers.py::test_average_operating_power_is_a_stock_even_when_dimension_is_quantity
+2 failed, 258 passed, 2 subtests passed in 31.52s
+
+FAILED: current source and forecast behavior
+

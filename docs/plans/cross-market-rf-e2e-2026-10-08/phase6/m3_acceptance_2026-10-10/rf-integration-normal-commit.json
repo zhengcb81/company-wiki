@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "git",
+    "commit",
+    "-m",
+    "fix(forecast): enforce fiscal flow semantics across modern consumers"
+  ],
+  "exit_code": 0,
+  "seconds": 5.674
+}

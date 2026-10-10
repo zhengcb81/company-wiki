@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "tools/pre_push_gate.py",
+    "--skip-install-sync",
+    "--ci-tests"
+  ],
+  "root": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\worktrees\\m3-acceptance-20261010\\filing-fetch",
+  "exit_code": 0,
+  "seconds": 73.77,
+  "new_provider_model_calls": 0,
+  "fees": 0
+}

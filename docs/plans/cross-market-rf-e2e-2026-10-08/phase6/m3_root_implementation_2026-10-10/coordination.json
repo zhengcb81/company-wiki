@@ -2,8 +2,9 @@
   "observed_at_utc": "2026-10-10T14:24:54.285052+00:00",
   "main_head": "3c791e3c2a16c12627cc25d0bd8681cc9458e48b",
   "main_ci": {
-    "run": 38058744767,
-    "conclusion": "success"
+    "run": 38060488582,
+    "conclusion": "success",
+    "head": "17f8b0747247a99b4357ecd6e093b0297149cd78"
   },
   "goal_complete": false,
   "agents": {
@@ -17,23 +18,43 @@
     "W02": {
       "internal_agent_status": "terminal_errored_usage_limit",
       "source_changes_observed": 0,
-      "external_status": "ready_not_claimed",
+      "external_status": "source_engineering_accepted",
       "restart_internal_agent": false,
       "card": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_parallel_handoff_2026-10-10\\official_json_projection.md"
     },
     "W06": {
       "internal_agent_status": "terminal_errored_usage_limit",
       "source_changes_observed": 0,
-      "external_status": "ready_not_claimed",
+      "external_status": "source_engineering_accepted",
       "restart_internal_agent": false,
       "card": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_parallel_handoff_2026-10-10\\acquisition_usage_chain.md"
     },
     "W07": {
       "internal_agent_status": "terminal_errored_usage_limit",
       "source_changes_observed": 0,
-      "external_status": "ready_not_claimed",
+      "external_status": "source_engineering_accepted",
       "restart_internal_agent": false,
       "card": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_parallel_handoff_2026-10-10\\rf_period_evidence_contract.md"
     }
+  },
+  "acceptance_observed_at_utc": "2026-10-10T19:41:49.735913+00:00",
+  "delivered_heads": {
+    "M3-JSON": {
+      "company-wiki": "4fc9ee1b1623901807fb2d69509f138a94df64eb"
+    },
+    "M3-USAGE": {
+      "company-wiki": "704c374fbf5ecb1086e9d9a5db85415d02128b79",
+      "filing-fetch": "f0f4e36319d6b3afc17e896f12a2aa1b183894b0",
+      "revenue-forecast": "741f7c01fc2e13d42f919aa0fc8053eb8cabfe08"
+    },
+    "M3-FLOW": {
+      "revenue-forecast": "f8ae04884237c39d204689883c8756ee7d33a0a9"
+    }
+  },
+  "acceptance_status": "source_engineering_accepted_normal_publish_in_progress",
+  "integration_fix_heads": {
+    "company-wiki": "aae266a366eeefe3574360216e1e1e655bd503a0",
+    "filing-fetch": "0c06e72dd4c82c5b321262a7d00a44a3f7fc46b8",
+    "revenue-forecast": "c3e39184"
   }
 }

@@ -1,0 +1,41 @@
+........................................................F.FF............ [ 75%]
+.......................                                                  [100%]
+================================== FAILURES ===================================
+_ SchemaCompatibilityRegistryTests.test_registry_matches_supported_schema_set _
+
+self = <test_schema_compatibility.SchemaCompatibilityRegistryTests testMethod=test_registry_matches_supported_schema_set>
+
+    def test_registry_matches_supported_schema_set(self) -> None:
+>       self.assertEqual(
+            supported_schema_versions(),
+            {"3.0", "3.1", "3.2", "3.3", "3.4", "3.5", "3.6", FORECAST_SCHEMA_VERSION, OPT_IN_SCHEMA_VERSION},
+        )
+E       AssertionError: frozenset({'3.9', '3.5', '3.3', '3.0', '3[35 chars].2'}) != {'3.5', '3.3', '3.1', '3.0', '3.6', '3.8'[17 chars]3.2'}
+
+tests\test_schema_compatibility.py:75: AssertionError
+_ SchemaCompatibilityRegistryTests.test_source_clock_version_emit_and_validation_matrix _
+
+self = <test_schema_compatibility.SchemaCompatibilityRegistryTests testMethod=test_source_clock_version_emit_and_validation_matrix>
+
+    def test_source_clock_version_emit_and_validation_matrix(self) -> None:
+>       self.assertEqual(ENGINE_VERSION, "4.1.1")
+E       AssertionError: '4.2.0' != '4.1.1'
+E       - 4.2.0
+E       + 4.1.1
+
+tests\test_schema_compatibility.py:28: AssertionError
+______ SchemaCompatibilityRegistryTests.test_unknown_schema_fails_closed ______
+
+self = <test_schema_compatibility.SchemaCompatibilityRegistryTests testMethod=test_unknown_schema_fails_closed>
+
+    def test_unknown_schema_fails_closed(self) -> None:
+        self.assertFalse(validating_engine_allowed("2.0", ENGINE_VERSION, "output"))
+>       self.assertFalse(validating_engine_allowed("3.9", ENGINE_VERSION, "snapshot"))
+E       AssertionError: True is not false
+
+tests\test_schema_compatibility.py:68: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_schema_compatibility.py::SchemaCompatibilityRegistryTests::test_registry_matches_supported_schema_set
+FAILED tests/test_schema_compatibility.py::SchemaCompatibilityRegistryTests::test_source_clock_version_emit_and_validation_matrix
+FAILED tests/test_schema_compatibility.py::SchemaCompatibilityRegistryTests::test_unknown_schema_fails_closed
+3 failed, 92 passed in 2.97s

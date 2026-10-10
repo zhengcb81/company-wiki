@@ -1,0 +1,33 @@
+{
+  "started_at_utc": "2026-10-10T14:38:56.177720+00:00",
+  "finished_at_utc": "2026-10-10T14:38:57.769393+00:00",
+  "elapsed_seconds": 1.591,
+  "returncode": 0,
+  "files": [
+    "docs/plans/cross-market-rf-e2e-2026-10-08/findings.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_parallel_handoff_2026-10-10/HANDOFF_TEMPLATE.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_parallel_handoff_2026-10-10/INTERFACES.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_parallel_handoff_2026-10-10/README.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_parallel_handoff_2026-10-10/acquisition_usage_chain.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_parallel_handoff_2026-10-10/delivery_manifest.json",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_parallel_handoff_2026-10-10/handoff.schema.json",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_parallel_handoff_2026-10-10/official_json_projection.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_parallel_handoff_2026-10-10/rf_period_evidence_contract.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_parallel_handoff_2026-10-10/verification.json",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_implementation_2026-10-10/coordination.json",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_implementation_2026-10-10/findings.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_implementation_2026-10-10/progress.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_implementation_2026-10-10/task_plan.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/main-root-plan-ci.json",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/main-root-plan-commit.json",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/main-root-plan-commit.log",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/main-root-plan-commit.raw",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/main-root-plan-push.json",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/main-root-plan-push.log",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_source_research_2026-10-09/main-root-plan-push.raw",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/progress.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/task_plan.md"
+  ],
+  "raw_sha256": "bec02c198b382a48ccd6af50d400d09b44b1231ec55a38395221468331039055",
+  "HEAD": "17f8b0747247a99b4357ecd6e093b0297149cd78"
+}

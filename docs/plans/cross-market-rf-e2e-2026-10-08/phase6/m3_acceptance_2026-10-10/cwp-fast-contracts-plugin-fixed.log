@@ -1,0 +1,5 @@
+
+=== CI fast contract smoke set ===
+======================= 118 passed, 1 warning in 18.47s =======================
+
+pre-push gate GREEN — safe to push (then self-monitor CI).

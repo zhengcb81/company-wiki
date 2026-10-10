@@ -1,0 +1,15 @@
+{
+  "observed_at_utc": "2026-10-10T19:52:17.602300+00:00",
+  "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "tools/pre_push_gate.py",
+    "--fast-contracts-only"
+  ],
+  "exit_code": 4,
+  "seconds": 0.48,
+  "log_sha256": "3fdf4b4d645e41a0c6fd765b5fc45a81092df4559cff16e84642b0158ad11391"
+}

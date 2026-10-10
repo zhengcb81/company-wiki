@@ -1,0 +1,29 @@
+{
+  "observed_at_utc": "2026-10-10T19:58:05.569862+00:00",
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3-joint-public-chain-ylf7itd_\\pytest",
+    "tests/test_m3_acquisition_usage_e2e.py",
+    "tests/test_m3_acquisition_usage_rf.py",
+    "tests/test_source_failure_observations.py"
+  ],
+  "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast",
+  "exit_code": 0,
+  "TEMP_removed_on_exit": true,
+  "external_provider_calls": 0,
+  "external_model_calls": 0,
+  "paid_micro_usd": 0,
+  "roots": {
+    "FF_V2_CODE_ROOT": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\filing-fetch",
+    "CWP_V2_CODE_ROOT": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki"
+  }
+}

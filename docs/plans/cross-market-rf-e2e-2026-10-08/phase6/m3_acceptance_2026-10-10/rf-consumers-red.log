@@ -1,0 +1,403 @@
+.FF.FF.FF.FF.FF.FF.FFF                                                   [100%]
+================================== FAILURES ===================================
+_ test_modern_output_consumers_reject_rehashed_semantic_mutations[missing_growth-3.8] _
+
+schema = '3.8', mutation = 'missing_growth'
+
+    @pytest.mark.parametrize("schema", ["3.7", "3.8", "3.9"])
+    @pytest.mark.parametrize("mutation", ["missing_growth", "invalid_growth", "missing_workflow", "forged_workflow", "missing_management", "forged_management"])
+    def test_modern_output_consumers_reject_rehashed_semantic_mutations(schema, mutation):
+        data = forecast_document()
+        data["schema_version"] = schema
+        result = run_forecast(data)
+        if mutation == "missing_growth":
+            del result["growth_driver_analysis"]
+        elif mutation == "invalid_growth":
+            result["growth_driver_analysis"]["status"] = "fabricated"
+        elif mutation == "missing_workflow":
+            del result["workflow_compliance_receipt"]
+        elif mutation == "forged_workflow":
+            result["workflow_compliance_receipt"]["freeform_formal_output_allowed"] = True
+        elif mutation == "missing_management":
+            del result["management_target_coverage"]
+        elif mutation == "forged_management":
+            result["management_target_coverage"]["counts"]["targets_total"] += 1
+        result["result_sha256"] = canonical_sha256({k:v for k,v in result.items() if k != "result_sha256"})
+>       with pytest.raises(ForecastInputError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_m3_period_flow_consumers.py:32: Failed
+_ test_modern_output_consumers_reject_rehashed_semantic_mutations[missing_growth-3.9] _
+
+schema = '3.9', mutation = 'missing_growth'
+
+    @pytest.mark.parametrize("schema", ["3.7", "3.8", "3.9"])
+    @pytest.mark.parametrize("mutation", ["missing_growth", "invalid_growth", "missing_workflow", "forged_workflow", "missing_management", "forged_management"])
+    def test_modern_output_consumers_reject_rehashed_semantic_mutations(schema, mutation):
+        data = forecast_document()
+        data["schema_version"] = schema
+        result = run_forecast(data)
+        if mutation == "missing_growth":
+            del result["growth_driver_analysis"]
+        elif mutation == "invalid_growth":
+            result["growth_driver_analysis"]["status"] = "fabricated"
+        elif mutation == "missing_workflow":
+            del result["workflow_compliance_receipt"]
+        elif mutation == "forged_workflow":
+            result["workflow_compliance_receipt"]["freeform_formal_output_allowed"] = True
+        elif mutation == "missing_management":
+            del result["management_target_coverage"]
+        elif mutation == "forged_management":
+            result["management_target_coverage"]["counts"]["targets_total"] += 1
+        result["result_sha256"] = canonical_sha256({k:v for k,v in result.items() if k != "result_sha256"})
+>       with pytest.raises(ForecastInputError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_m3_period_flow_consumers.py:32: Failed
+_ test_modern_output_consumers_reject_rehashed_semantic_mutations[invalid_growth-3.8] _
+
+schema = '3.8', mutation = 'invalid_growth'
+
+    @pytest.mark.parametrize("schema", ["3.7", "3.8", "3.9"])
+    @pytest.mark.parametrize("mutation", ["missing_growth", "invalid_growth", "missing_workflow", "forged_workflow", "missing_management", "forged_management"])
+    def test_modern_output_consumers_reject_rehashed_semantic_mutations(schema, mutation):
+        data = forecast_document()
+        data["schema_version"] = schema
+        result = run_forecast(data)
+        if mutation == "missing_growth":
+            del result["growth_driver_analysis"]
+        elif mutation == "invalid_growth":
+            result["growth_driver_analysis"]["status"] = "fabricated"
+        elif mutation == "missing_workflow":
+            del result["workflow_compliance_receipt"]
+        elif mutation == "forged_workflow":
+            result["workflow_compliance_receipt"]["freeform_formal_output_allowed"] = True
+        elif mutation == "missing_management":
+            del result["management_target_coverage"]
+        elif mutation == "forged_management":
+            result["management_target_coverage"]["counts"]["targets_total"] += 1
+        result["result_sha256"] = canonical_sha256({k:v for k,v in result.items() if k != "result_sha256"})
+>       with pytest.raises(ForecastInputError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_m3_period_flow_consumers.py:32: Failed
+_ test_modern_output_consumers_reject_rehashed_semantic_mutations[invalid_growth-3.9] _
+
+schema = '3.9', mutation = 'invalid_growth'
+
+    @pytest.mark.parametrize("schema", ["3.7", "3.8", "3.9"])
+    @pytest.mark.parametrize("mutation", ["missing_growth", "invalid_growth", "missing_workflow", "forged_workflow", "missing_management", "forged_management"])
+    def test_modern_output_consumers_reject_rehashed_semantic_mutations(schema, mutation):
+        data = forecast_document()
+        data["schema_version"] = schema
+        result = run_forecast(data)
+        if mutation == "missing_growth":
+            del result["growth_driver_analysis"]
+        elif mutation == "invalid_growth":
+            result["growth_driver_analysis"]["status"] = "fabricated"
+        elif mutation == "missing_workflow":
+            del result["workflow_compliance_receipt"]
+        elif mutation == "forged_workflow":
+            result["workflow_compliance_receipt"]["freeform_formal_output_allowed"] = True
+        elif mutation == "missing_management":
+            del result["management_target_coverage"]
+        elif mutation == "forged_management":
+            result["management_target_coverage"]["counts"]["targets_total"] += 1
+        result["result_sha256"] = canonical_sha256({k:v for k,v in result.items() if k != "result_sha256"})
+>       with pytest.raises(ForecastInputError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_m3_period_flow_consumers.py:32: Failed
+_ test_modern_output_consumers_reject_rehashed_semantic_mutations[missing_workflow-3.8] _
+
+schema = '3.8', mutation = 'missing_workflow'
+
+    @pytest.mark.parametrize("schema", ["3.7", "3.8", "3.9"])
+    @pytest.mark.parametrize("mutation", ["missing_growth", "invalid_growth", "missing_workflow", "forged_workflow", "missing_management", "forged_management"])
+    def test_modern_output_consumers_reject_rehashed_semantic_mutations(schema, mutation):
+        data = forecast_document()
+        data["schema_version"] = schema
+        result = run_forecast(data)
+        if mutation == "missing_growth":
+            del result["growth_driver_analysis"]
+        elif mutation == "invalid_growth":
+            result["growth_driver_analysis"]["status"] = "fabricated"
+        elif mutation == "missing_workflow":
+            del result["workflow_compliance_receipt"]
+        elif mutation == "forged_workflow":
+            result["workflow_compliance_receipt"]["freeform_formal_output_allowed"] = True
+        elif mutation == "missing_management":
+            del result["management_target_coverage"]
+        elif mutation == "forged_management":
+            result["management_target_coverage"]["counts"]["targets_total"] += 1
+        result["result_sha256"] = canonical_sha256({k:v for k,v in result.items() if k != "result_sha256"})
+>       with pytest.raises(ForecastInputError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_m3_period_flow_consumers.py:32: Failed
+_ test_modern_output_consumers_reject_rehashed_semantic_mutations[missing_workflow-3.9] _
+
+schema = '3.9', mutation = 'missing_workflow'
+
+    @pytest.mark.parametrize("schema", ["3.7", "3.8", "3.9"])
+    @pytest.mark.parametrize("mutation", ["missing_growth", "invalid_growth", "missing_workflow", "forged_workflow", "missing_management", "forged_management"])
+    def test_modern_output_consumers_reject_rehashed_semantic_mutations(schema, mutation):
+        data = forecast_document()
+        data["schema_version"] = schema
+        result = run_forecast(data)
+        if mutation == "missing_growth":
+            del result["growth_driver_analysis"]
+        elif mutation == "invalid_growth":
+            result["growth_driver_analysis"]["status"] = "fabricated"
+        elif mutation == "missing_workflow":
+            del result["workflow_compliance_receipt"]
+        elif mutation == "forged_workflow":
+            result["workflow_compliance_receipt"]["freeform_formal_output_allowed"] = True
+        elif mutation == "missing_management":
+            del result["management_target_coverage"]
+        elif mutation == "forged_management":
+            result["management_target_coverage"]["counts"]["targets_total"] += 1
+        result["result_sha256"] = canonical_sha256({k:v for k,v in result.items() if k != "result_sha256"})
+>       with pytest.raises(ForecastInputError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_m3_period_flow_consumers.py:32: Failed
+_ test_modern_output_consumers_reject_rehashed_semantic_mutations[forged_workflow-3.8] _
+
+schema = '3.8', mutation = 'forged_workflow'
+
+    @pytest.mark.parametrize("schema", ["3.7", "3.8", "3.9"])
+    @pytest.mark.parametrize("mutation", ["missing_growth", "invalid_growth", "missing_workflow", "forged_workflow", "missing_management", "forged_management"])
+    def test_modern_output_consumers_reject_rehashed_semantic_mutations(schema, mutation):
+        data = forecast_document()
+        data["schema_version"] = schema
+        result = run_forecast(data)
+        if mutation == "missing_growth":
+            del result["growth_driver_analysis"]
+        elif mutation == "invalid_growth":
+            result["growth_driver_analysis"]["status"] = "fabricated"
+        elif mutation == "missing_workflow":
+            del result["workflow_compliance_receipt"]
+        elif mutation == "forged_workflow":
+            result["workflow_compliance_receipt"]["freeform_formal_output_allowed"] = True
+        elif mutation == "missing_management":
+            del result["management_target_coverage"]
+        elif mutation == "forged_management":
+            result["management_target_coverage"]["counts"]["targets_total"] += 1
+        result["result_sha256"] = canonical_sha256({k:v for k,v in result.items() if k != "result_sha256"})
+>       with pytest.raises(ForecastInputError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_m3_period_flow_consumers.py:32: Failed
+_ test_modern_output_consumers_reject_rehashed_semantic_mutations[forged_workflow-3.9] _
+
+schema = '3.9', mutation = 'forged_workflow'
+
+    @pytest.mark.parametrize("schema", ["3.7", "3.8", "3.9"])
+    @pytest.mark.parametrize("mutation", ["missing_growth", "invalid_growth", "missing_workflow", "forged_workflow", "missing_management", "forged_management"])
+    def test_modern_output_consumers_reject_rehashed_semantic_mutations(schema, mutation):
+        data = forecast_document()
+        data["schema_version"] = schema
+        result = run_forecast(data)
+        if mutation == "missing_growth":
+            del result["growth_driver_analysis"]
+        elif mutation == "invalid_growth":
+            result["growth_driver_analysis"]["status"] = "fabricated"
+        elif mutation == "missing_workflow":
+            del result["workflow_compliance_receipt"]
+        elif mutation == "forged_workflow":
+            result["workflow_compliance_receipt"]["freeform_formal_output_allowed"] = True
+        elif mutation == "missing_management":
+            del result["management_target_coverage"]
+        elif mutation == "forged_management":
+            result["management_target_coverage"]["counts"]["targets_total"] += 1
+        result["result_sha256"] = canonical_sha256({k:v for k,v in result.items() if k != "result_sha256"})
+>       with pytest.raises(ForecastInputError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_m3_period_flow_consumers.py:32: Failed
+_ test_modern_output_consumers_reject_rehashed_semantic_mutations[missing_management-3.8] _
+
+schema = '3.8', mutation = 'missing_management'
+
+    @pytest.mark.parametrize("schema", ["3.7", "3.8", "3.9"])
+    @pytest.mark.parametrize("mutation", ["missing_growth", "invalid_growth", "missing_workflow", "forged_workflow", "missing_management", "forged_management"])
+    def test_modern_output_consumers_reject_rehashed_semantic_mutations(schema, mutation):
+        data = forecast_document()
+        data["schema_version"] = schema
+        result = run_forecast(data)
+        if mutation == "missing_growth":
+            del result["growth_driver_analysis"]
+        elif mutation == "invalid_growth":
+            result["growth_driver_analysis"]["status"] = "fabricated"
+        elif mutation == "missing_workflow":
+            del result["workflow_compliance_receipt"]
+        elif mutation == "forged_workflow":
+            result["workflow_compliance_receipt"]["freeform_formal_output_allowed"] = True
+        elif mutation == "missing_management":
+            del result["management_target_coverage"]
+        elif mutation == "forged_management":
+            result["management_target_coverage"]["counts"]["targets_total"] += 1
+        result["result_sha256"] = canonical_sha256({k:v for k,v in result.items() if k != "result_sha256"})
+>       with pytest.raises(ForecastInputError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_m3_period_flow_consumers.py:32: Failed
+_ test_modern_output_consumers_reject_rehashed_semantic_mutations[missing_management-3.9] _
+
+schema = '3.9', mutation = 'missing_management'
+
+    @pytest.mark.parametrize("schema", ["3.7", "3.8", "3.9"])
+    @pytest.mark.parametrize("mutation", ["missing_growth", "invalid_growth", "missing_workflow", "forged_workflow", "missing_management", "forged_management"])
+    def test_modern_output_consumers_reject_rehashed_semantic_mutations(schema, mutation):
+        data = forecast_document()
+        data["schema_version"] = schema
+        result = run_forecast(data)
+        if mutation == "missing_growth":
+            del result["growth_driver_analysis"]
+        elif mutation == "invalid_growth":
+            result["growth_driver_analysis"]["status"] = "fabricated"
+        elif mutation == "missing_workflow":
+            del result["workflow_compliance_receipt"]
+        elif mutation == "forged_workflow":
+            result["workflow_compliance_receipt"]["freeform_formal_output_allowed"] = True
+        elif mutation == "missing_management":
+            del result["management_target_coverage"]
+        elif mutation == "forged_management":
+            result["management_target_coverage"]["counts"]["targets_total"] += 1
+        result["result_sha256"] = canonical_sha256({k:v for k,v in result.items() if k != "result_sha256"})
+>       with pytest.raises(ForecastInputError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_m3_period_flow_consumers.py:32: Failed
+_ test_modern_output_consumers_reject_rehashed_semantic_mutations[forged_management-3.8] _
+
+schema = '3.8', mutation = 'forged_management'
+
+    @pytest.mark.parametrize("schema", ["3.7", "3.8", "3.9"])
+    @pytest.mark.parametrize("mutation", ["missing_growth", "invalid_growth", "missing_workflow", "forged_workflow", "missing_management", "forged_management"])
+    def test_modern_output_consumers_reject_rehashed_semantic_mutations(schema, mutation):
+        data = forecast_document()
+        data["schema_version"] = schema
+        result = run_forecast(data)
+        if mutation == "missing_growth":
+            del result["growth_driver_analysis"]
+        elif mutation == "invalid_growth":
+            result["growth_driver_analysis"]["status"] = "fabricated"
+        elif mutation == "missing_workflow":
+            del result["workflow_compliance_receipt"]
+        elif mutation == "forged_workflow":
+            result["workflow_compliance_receipt"]["freeform_formal_output_allowed"] = True
+        elif mutation == "missing_management":
+            del result["management_target_coverage"]
+        elif mutation == "forged_management":
+            result["management_target_coverage"]["counts"]["targets_total"] += 1
+        result["result_sha256"] = canonical_sha256({k:v for k,v in result.items() if k != "result_sha256"})
+>       with pytest.raises(ForecastInputError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_m3_period_flow_consumers.py:32: Failed
+_ test_modern_output_consumers_reject_rehashed_semantic_mutations[forged_management-3.9] _
+
+schema = '3.9', mutation = 'forged_management'
+
+    @pytest.mark.parametrize("schema", ["3.7", "3.8", "3.9"])
+    @pytest.mark.parametrize("mutation", ["missing_growth", "invalid_growth", "missing_workflow", "forged_workflow", "missing_management", "forged_management"])
+    def test_modern_output_consumers_reject_rehashed_semantic_mutations(schema, mutation):
+        data = forecast_document()
+        data["schema_version"] = schema
+        result = run_forecast(data)
+        if mutation == "missing_growth":
+            del result["growth_driver_analysis"]
+        elif mutation == "invalid_growth":
+            result["growth_driver_analysis"]["status"] = "fabricated"
+        elif mutation == "missing_workflow":
+            del result["workflow_compliance_receipt"]
+        elif mutation == "forged_workflow":
+            result["workflow_compliance_receipt"]["freeform_formal_output_allowed"] = True
+        elif mutation == "missing_management":
+            del result["management_target_coverage"]
+        elif mutation == "forged_management":
+            result["management_target_coverage"]["counts"]["targets_total"] += 1
+        result["result_sha256"] = canonical_sha256({k:v for k,v in result.items() if k != "result_sha256"})
+>       with pytest.raises(ForecastInputError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_m3_period_flow_consumers.py:32: Failed
+_______ test_modern_output_needs_bound_input_in_all_consumer_paths[3.8] _______
+
+schema = '3.8'
+
+    @pytest.mark.parametrize("schema", ["3.7", "3.8", "3.9"])
+    def test_modern_output_needs_bound_input_in_all_consumer_paths(schema):
+        data = forecast_document()
+        data["schema_version"] = schema
+        result = run_forecast(data)
+        result.pop("input_document", None)
+>       with pytest.raises(ForecastInputError, match="bound input"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'bound input'
+E         Actual message: 'forecast result hash mismatch'
+
+tests\test_m3_period_flow_consumers.py:41: AssertionError
+_______ test_modern_output_needs_bound_input_in_all_consumer_paths[3.9] _______
+
+schema = '3.9'
+
+    @pytest.mark.parametrize("schema", ["3.7", "3.8", "3.9"])
+    def test_modern_output_needs_bound_input_in_all_consumer_paths(schema):
+        data = forecast_document()
+        data["schema_version"] = schema
+        result = run_forecast(data)
+        result.pop("input_document", None)
+>       with pytest.raises(ForecastInputError, match="bound input"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'bound input'
+E         Actual message: 'forecast result hash mismatch'
+
+tests\test_m3_period_flow_consumers.py:41: AssertionError
+________ test_report_discloses_partial_year_window_without_annualizing ________
+
+    def test_report_discloses_partial_year_window_without_annualizing():
+        data = forecast_document()
+        data["schema_version"] = "3.9"
+        add_flow_parameter(data, "half_year_observation", 55, "2026-01-01", "2026-06-30", 2026)
+        result = run_forecast(copy.deepcopy(data))
+        before = copy.deepcopy(result["consolidated_forecast"])
+        text = render_markdown(result)
+        row = next(line for line in text.splitlines() if "half_year_observation" in line)
+>       assert "period_flow" in row
+E       AssertionError: assert 'period_flow' in '| half_year_observation | reported_fact | 55.00 | FY2026 | revenue | claim_parameter_half_year_observation | filing | exact_value | Revenue note | Checked excerpt supporting half_year_observation. |'
+
+tests\test_m3_period_flow_consumers.py:52: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_m3_period_flow_consumers.py::test_modern_output_consumers_reject_rehashed_semantic_mutations[missing_growth-3.8]
+FAILED tests/test_m3_period_flow_consumers.py::test_modern_output_consumers_reject_rehashed_semantic_mutations[missing_growth-3.9]
+FAILED tests/test_m3_period_flow_consumers.py::test_modern_output_consumers_reject_rehashed_semantic_mutations[invalid_growth-3.8]
+FAILED tests/test_m3_period_flow_consumers.py::test_modern_output_consumers_reject_rehashed_semantic_mutations[invalid_growth-3.9]
+FAILED tests/test_m3_period_flow_consumers.py::test_modern_output_consumers_reject_rehashed_semantic_mutations[missing_workflow-3.8]
+FAILED tests/test_m3_period_flow_consumers.py::test_modern_output_consumers_reject_rehashed_semantic_mutations[missing_workflow-3.9]
+FAILED tests/test_m3_period_flow_consumers.py::test_modern_output_consumers_reject_rehashed_semantic_mutations[forged_workflow-3.8]
+FAILED tests/test_m3_period_flow_consumers.py::test_modern_output_consumers_reject_rehashed_semantic_mutations[forged_workflow-3.9]
+FAILED tests/test_m3_period_flow_consumers.py::test_modern_output_consumers_reject_rehashed_semantic_mutations[missing_management-3.8]
+FAILED tests/test_m3_period_flow_consumers.py::test_modern_output_consumers_reject_rehashed_semantic_mutations[missing_management-3.9]
+FAILED tests/test_m3_period_flow_consumers.py::test_modern_output_consumers_reject_rehashed_semantic_mutations[forged_management-3.8]
+FAILED tests/test_m3_period_flow_consumers.py::test_modern_output_consumers_reject_rehashed_semantic_mutations[forged_management-3.9]
+FAILED tests/test_m3_period_flow_consumers.py::test_modern_output_needs_bound_input_in_all_consumer_paths[3.8]
+FAILED tests/test_m3_period_flow_consumers.py::test_modern_output_needs_bound_input_in_all_consumer_paths[3.9]
+FAILED tests/test_m3_period_flow_consumers.py::test_report_discloses_partial_year_window_without_annualizing
+15 failed, 7 passed in 1.20s

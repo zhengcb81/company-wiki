@@ -1,0 +1,12 @@
+{
+  "args": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "tools/pre_push_gate.py",
+    "--fast-contracts-only"
+  ],
+  "cwd": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+  "exit_code": 0,
+  "seconds": 18.882,
+  "new_external_calls": 0
+}
