@@ -100,6 +100,18 @@
       ],
       "owner": "FLOW",
       "state": "TDD_green_independent_replay_pass_source_engineering_accepted"
+    },
+    {
+      "id": "A-TEST-01",
+      "root": "reusable installed probe writes new results over sealed campaign evidence",
+      "examples": [
+        "default repeat replaces verification.json and raw logs",
+        "manual retain/copy requirement instead of automatic attempt isolation"
+      ],
+      "owner": "MAIN/independent probe",
+      "state": "green_independent_11_allocator_checks_and_fresh18_pass_sealed40_unchanged",
+      "scope": "test harness only; product engineering release remains accepted",
+      "evidence": "installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/output_directory_checks.json"
     }
   ],
   "failures_preserved": [
@@ -135,5 +147,15 @@
     "fees": 0,
     "temp_restored": true
   },
-  "next_step": "normal publish main exact CI and targeted runtime installation; AUTO JSON integration and real research still pending"
+  "next_step": "three source releases and installation accepted; archive nonclobber test harness supplement then MAIN AUTO official JSON integration",
+  "test_harness_supplement": {
+    "observed_at_utc": "2026-10-10T20:39:25.463148+00:00",
+    "checks": 11,
+    "fresh_installed_checks": 18,
+    "sealed_root_files_unchanged": 40,
+    "installation_files_unchanged": 590,
+    "temp_restored": true,
+    "provider_model_calls": 0,
+    "fees": 0
+  }
 }

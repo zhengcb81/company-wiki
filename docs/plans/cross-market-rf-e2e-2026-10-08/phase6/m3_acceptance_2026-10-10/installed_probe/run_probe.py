@@ -7,6 +7,7 @@ by any child. Originals, production configs, and installations are read-only.
 """
 from __future__ import annotations
 
+import argparse
 import copy
 from datetime import datetime, timezone
 import hashlib
@@ -16,9 +17,10 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+from uuid import uuid4
 
 
-REPORT_ROOT = Path(__file__).resolve().parent
+PACKAGE_ROOT = Path(__file__).resolve().parent
 RF_SOURCE = Path.home() / "Projects" / "revenue-forecast"
 INSTALL_BASES = (Path.home() / ".agents" / "skills", Path.home() / ".codex" / "skills")
 
@@ -143,6 +145,41 @@ def sha(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def allocate_report_dir(requested: Path | None = None, *, package_root: Path = PACKAGE_ROOT) -> Path:
+    """Claim a fresh output directory without replacing prior evidence.
+
+    Explicit paths stay within this package and must be new or empty. The
+    exclusive claim prevents two runs from sharing an otherwise empty directory.
+    Existing attempts are never reused, including failed or incomplete attempts.
+    """
+    package_root = package_root.resolve(strict=True)
+    if requested is None:
+        name = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ") + "-" + uuid4().hex
+        target = package_root / "attempts" / name
+    else:
+        target = requested if requested.is_absolute() else package_root / requested
+    if target.is_symlink() or (hasattr(target, "is_junction") and target.is_junction()):
+        raise ValueError("report directory must not be a symlink or junction")
+    target = target.resolve()
+    if target == package_root or not target.is_relative_to(package_root):
+        raise ValueError("report directory must be a descendant of this probe package")
+    if target.exists():
+        if not target.is_dir() or any(target.iterdir()):
+            raise ValueError("report directory already exists and is not empty; prior evidence is preserved")
+    else:
+        target.mkdir(parents=True, exist_ok=False)
+    # Exclusive creation also detects a concurrent run that just claimed the path.
+    with (target / ".probe-output.claim").open("x", encoding="utf-8") as stream:
+        stream.write(json.dumps({"pid": os.getpid(), "created_at_utc": datetime.now(timezone.utc).isoformat()}) + "\n")
+    return target
+
+
+def write_new(path: Path, payload: bytes) -> None:
+    """Evidence writes must fail if another writer already created the file."""
+    with path.open("xb") as stream:
+        stream.write(payload)
+
+
 def installed_manifest() -> dict[str, str]:
     result={}
     for base in INSTALL_BASES:
@@ -184,15 +221,22 @@ def fixture_documents() -> dict[str, dict]:
     return documents
 
 
-def main() -> int:
-    REPORT_ROOT.mkdir(parents=True,exist_ok=True)
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--report-dir", type=Path, help="New or empty output directory inside this probe package; default: unique attempts/<UTC>-<UUID>")
+    args = parser.parse_args(argv)
+    try:
+        report_root = allocate_report_dir(args.report_dir)
+    except (ValueError, OSError) as error:
+        parser.error(str(error))
     documents=fixture_documents()
     before=installed_manifest()
     evidence={"schema_version":"m3-installed-independent-probe/1",
         "started_at_utc":datetime.now(timezone.utc).isoformat(),"tests":[],
         "fixture_authoring":"repository test helpers only in parent; JSON-only children",
         "external_provider_calls":0,"external_model_calls":0,"paid_tokens":0,"paid_micro_usd":0,
-        "originals_read_or_modified":False,"production_config_modified":False}
+        "originals_read_or_modified":False,"production_config_modified":False,
+        "report_directory":str(report_root),"harness_sha256":sha(Path(__file__).read_bytes())}
     temp_parent=Path.home()/"AppData"/"Local"/"Temp"
     with tempfile.TemporaryDirectory(prefix="m3ip-",dir=temp_parent) as directory:
         temp=Path(directory).resolve()
@@ -213,7 +257,7 @@ def main() -> int:
                 result=subprocess.run(argv,cwd=owned,env=env,capture_output=True,timeout=90)
                 log_name=lane+"-"+name
                 for stream,data in (("stdout",result.stdout),("stderr",result.stderr)):
-                    (REPORT_ROOT/(log_name+"."+stream+".log")).write_bytes(data)
+                    write_new(report_root/(log_name+"."+stream+".log"), data)
                 evidence["tests"].append({"name":log_name,"argv":argv,"cwd":str(owned),
                     "started_at_utc":started,"exit_code":result.returncode,"expected_exit_code":expected,
                     "stdout_log":log_name+".stdout.log","stdout_sha256":sha(result.stdout),
@@ -251,10 +295,10 @@ def main() -> int:
     assert evidence["owned_temp_removed"] and not evidence["installation_mutations"]
     evidence["finished_at_utc"]=datetime.now(timezone.utc).isoformat()
     evidence["status"]="pass"
-    (REPORT_ROOT/"verification.json").write_text(json.dumps(evidence,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    write_new(report_root/"verification.json", (json.dumps(evidence,ensure_ascii=False,indent=2)+"\n").encode("utf-8"))
     print(json.dumps({"status":evidence["status"],"tests":len(evidence["tests"]),
         "installation_mutations":evidence["installation_mutations"],"owned_temp_removed":evidence["owned_temp_removed"],
-        "report":str(REPORT_ROOT/"verification.json")},ensure_ascii=False))
+        "report":str(report_root/"verification.json")},ensure_ascii=False))
     return 0
 
 

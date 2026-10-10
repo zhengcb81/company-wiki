@@ -1,5 +1,12 @@
 # Progress
 
+## 三卡验收收尾与复跑证据自动保留（2026-10-10T20:39:25.463148+00:00）
+
+三卡源工程已正常合并发布并定点安装，CWP f94b9ef0/FFe1e3ad86/RF6883bf00精确CI全success；原PWF04f45c86的精确CI38084232316也success。额外发现测试脚本复跑覆盖旧日志，现自动唯一attempt输出，11项分配检查和fresh18 installed复跑PASS，MAIN实核40封存文件SHA未变、590安装文件无mutation、TEMP已恢复，0新增provider/model/费用。10类产品共因+1类测试证据保留共因分开记，不扩大人工门禁。
+
+**当前 Next Step：** 正常提交推送测试证据保留补充，核对精确HEAD CI后进入MAIN AUTO official JSON统一source class/投影复用/generation绑定/public CLI接线。原三家研究四审、新三家泛化、W04/W03/W05/W08/W09与NVDA/池loop及条件八家仍未完成；goal继续active，累计USD20/2M含旧unknown不重置。原件/config/Dayu/邻仓WIP不动。[三卡验收与后续边界](phase6/m3_acceptance_2026-10-10/ACCEPTANCE.md)。
+
+
 ## 三卡正式收尾（2026-10-10T20:30:09.491011+00:00）
 
 M3-JSON/W02、M3-USAGE/W06、M3-FLOW/W07源工程及MAIN共同接线已验收：10类共因TDD修复、独立负/正控重放通过，正常合/推CWP f94b9ef0、FFe1e3ad86、RF6883bf00；精确CI38083232923/38083419792/38083371392全部success，本地与远端SHA一致。原FLOW红CI/no-verify报告保留且未复用为发布依据。

@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "git",
+    "push",
+    "origin",
+    "master"
+  ],
+  "exit_code": 0,
+  "seconds": 172.765,
+  "head": "04f45c86052c493c3503e57eecc0a29c54bd275a"
+}

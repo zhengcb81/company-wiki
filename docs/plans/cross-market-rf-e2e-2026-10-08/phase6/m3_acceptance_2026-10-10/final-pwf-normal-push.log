@@ -1,0 +1,9 @@
+Push unit scope: deleted or unknown dependency (1 paths)
+
+=== affected units and CI contract smoke ===
+================= 2744 passed, 1 warning in 167.52s (0:02:47) =================
+
+pre-push gate GREEN — safe to push (then self-monitor CI).
+
+To https://github.com/zhengcb81/company-wiki.git
+   f94b9ef0..04f45c86  master -> master

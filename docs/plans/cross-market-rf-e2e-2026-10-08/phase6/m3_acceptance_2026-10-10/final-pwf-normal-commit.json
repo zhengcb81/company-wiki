@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "git",
+    "commit",
+    "-m",
+    "docs(pwf): close M3 acceptance with exact CI and installed runtime proof"
+  ],
+  "exit_code": 0,
+  "seconds": 1.037,
+  "head": "04f45c86052c493c3503e57eecc0a29c54bd275a"
+}

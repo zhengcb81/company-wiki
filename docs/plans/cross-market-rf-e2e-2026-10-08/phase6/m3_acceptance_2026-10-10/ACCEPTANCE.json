@@ -35,5 +35,22 @@
     "actual_main_remote_ci": "main_remote_protected_check.json",
     "targeted_install": "targeted_install_receipt.json",
     "installed_probe": "installed_probe/verification.json"
+  },
+  "test_harness_issue_classes_fixed": 1,
+  "test_harness_supplement": {
+    "status": "accepted",
+    "observation": "2026-10-10T20:39:25.463148+00:00",
+    "allocation_checks_passed": 11,
+    "fresh_installed_checks_passed": 18,
+    "sealed_root_files_sha_unchanged": 40,
+    "installation_files_unchanged": 590,
+    "temp_restored": true,
+    "receipt": "installed_probe/attempts/20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525/output_directory_checks.json"
+  },
+  "pwf_publication_confirmed": {
+    "head": "04f45c86052c493c3503e57eecc0a29c54bd275a",
+    "ci_id": 38084232316,
+    "conclusion": "success",
+    "evidence": "final-pwf-exact-ci.json"
   }
 }

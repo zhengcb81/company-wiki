@@ -1,0 +1,73 @@
+[master 04f45c86] docs(pwf): close M3 acceptance with exact CI and installed runtime proof
+ 72 files changed, 2769 insertions(+), 10 deletions(-)
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/ACCEPTANCE.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/ACCEPTANCE.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/ci-tooling-note.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/company-wiki-exact-main-ci.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/cwp-normal-main-merge.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/cwp-normal-main-merge.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/cwp-normal-main-push.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/cwp-normal-main-push.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/ff-normal-main-merge.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/ff-normal-main-merge.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/ff-normal-main-push.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/ff-normal-main-push.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/filing-fetch-exact-main-ci.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/ACCEPTANCE.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/README.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/agents-derived-cli.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/agents-derived-cli.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/agents-derived-compute-strong-render.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/agents-derived-compute-strong-render.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/agents-ff-siblings.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/agents-ff-siblings.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/agents-full-cli.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/agents-full-cli.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/agents-full-compute-strong-render.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/agents-full-compute-strong-render.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/agents-half_0_base_2026.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/agents-half_0_base_2026.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/agents-half_reported_total.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/agents-half_reported_total.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/agents-half_segment_a_base.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/agents-half_segment_a_base.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/agents-rf-version.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/agents-rf-version.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/codex-derived-cli.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/codex-derived-cli.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/codex-derived-compute-strong-render.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/codex-derived-compute-strong-render.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/codex-ff-siblings.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/codex-ff-siblings.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/codex-full-cli.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/codex-full-cli.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/codex-full-compute-strong-render.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/codex-full-compute-strong-render.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/codex-half_0_base_2026.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/codex-half_0_base_2026.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/codex-half_reported_total.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/codex-half_reported_total.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/codex-half_segment_a_base.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/codex-half_segment_a_base.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/codex-rf-version.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/codex-rf-version.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/ruff-final.stderr.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/ruff-final.stdout.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/run_probe.py
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/installed_probe/verification.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/main-pwf-normal-commit.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/main-pwf-normal-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/main_remote_protected_check.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/revenue-forecast-exact-main-ci.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/rf-normal-main-merge.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/rf-normal-main-merge.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/rf-normal-main-push.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/rf-normal-main-push.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/targeted_install_plan.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_acceptance_2026-10-10/targeted_install_receipt.json
+
+runtime dependency declaration parity.............................(no files to check)Skipped
+ruff check (WU-1.2, mirrors CI)...................................(no files to check)Skipped
+mypy contract modules (FC-1204-c, mirrors CI).....................(no files to check)Skipped
+config doctor (WU-7.1, mirrors CI)................................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test)...(no files to check)Skipped

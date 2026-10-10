@@ -1,0 +1,110 @@
+{
+  "schema_version": "m3-installed-output-preservation/1",
+  "started_at_utc": "2026-10-10T20:35:21.252036+00:00",
+  "finished_at_utc": "2026-10-10T20:35:27.751262+00:00",
+  "checks": [
+    {
+      "name": "default_unique_attempts",
+      "status": "pass"
+    },
+    {
+      "name": "explicit_new_and_empty_allowed",
+      "status": "pass"
+    },
+    {
+      "name": "nonempty_refused_before_write",
+      "status": "pass"
+    },
+    {
+      "name": "already_claimed_refused_before_write",
+      "status": "pass"
+    },
+    {
+      "name": "file_refused_before_write",
+      "status": "pass"
+    },
+    {
+      "name": "package_root_refused_before_write",
+      "status": "pass"
+    },
+    {
+      "name": "outside_package_refused_before_write",
+      "status": "pass"
+    },
+    {
+      "name": "exclusive_evidence_write",
+      "status": "pass"
+    },
+    {
+      "name": "public_cli_existing_package_refused_before_product_run",
+      "status": "pass",
+      "exit_code": 2
+    },
+    {
+      "name": "sealed_campaign_files_unchanged_after_fresh18",
+      "status": "pass",
+      "files": 40
+    },
+    {
+      "name": "owned_allocator_temp_removed",
+      "status": "pass"
+    }
+  ],
+  "sealed_root_file_sha256": {
+    "ACCEPTANCE.md": "baa19251ffd63f9273db14a2249c2fdbcd8b9b2aa9f0980e2be165034dc84109",
+    "agents-derived-cli.stderr.log": "c7d5c661778bb21e0876013c4ef8167fcc0ee16f8abbe40b7aed0e1ba2838d92",
+    "agents-derived-cli.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agents-derived-compute-strong-render.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agents-derived-compute-strong-render.stdout.log": "d4badb9efcc2cd160452184eb927c5e73b3a5de5481e2242b853cf5e52a8df19",
+    "agents-ff-siblings.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agents-ff-siblings.stdout.log": "ac01936af06c2f1c286f114a23f133a9b798050b57dcc655839846a8a6c7e11d",
+    "agents-full-cli.stderr.log": "c7d5c661778bb21e0876013c4ef8167fcc0ee16f8abbe40b7aed0e1ba2838d92",
+    "agents-full-cli.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agents-full-compute-strong-render.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agents-full-compute-strong-render.stdout.log": "d4badb9efcc2cd160452184eb927c5e73b3a5de5481e2242b853cf5e52a8df19",
+    "agents-half_0_base_2026.stderr.log": "57a740c1a482c5597877bccc72f382e876336358c3d28e9953c7f3b2deb2f019",
+    "agents-half_0_base_2026.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agents-half_reported_total.stderr.log": "9b8966649f2dd10cda522d177808a5db85d97489abf5f0c8a00ff4d777b2ae05",
+    "agents-half_reported_total.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agents-half_segment_a_base.stderr.log": "487054ce80bc4354f22d2fdfbeab7d94886aff5d1ec5d2b9978f96a559513473",
+    "agents-half_segment_a_base.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agents-rf-version.stderr.log": "c7d5c661778bb21e0876013c4ef8167fcc0ee16f8abbe40b7aed0e1ba2838d92",
+    "agents-rf-version.stdout.log": "d8cd6cdcade987bd2740c53494bc0bf2512f7e00d255d9e4243d207204024ef2",
+    "codex-derived-cli.stderr.log": "94fc43b5c584fa61fef724aebccfa78835fbbfcbcd42cf906376f39bcd6b691d",
+    "codex-derived-cli.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "codex-derived-compute-strong-render.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "codex-derived-compute-strong-render.stdout.log": "56f7b24fa00dec45493ecb0f4a2c75c60c88eaf1fc758754281b1513c0042c27",
+    "codex-ff-siblings.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "codex-ff-siblings.stdout.log": "a00fc738ec986b1c72f72316ebf39e9a85e04346418ae15090298a9c57558e65",
+    "codex-full-cli.stderr.log": "94fc43b5c584fa61fef724aebccfa78835fbbfcbcd42cf906376f39bcd6b691d",
+    "codex-full-cli.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "codex-full-compute-strong-render.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "codex-full-compute-strong-render.stdout.log": "56f7b24fa00dec45493ecb0f4a2c75c60c88eaf1fc758754281b1513c0042c27",
+    "codex-half_0_base_2026.stderr.log": "18a8bb3d35bba94425fea0cc10a8f8e0da4ade873aef4f0feef8a8a40cebb5df",
+    "codex-half_0_base_2026.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "codex-half_reported_total.stderr.log": "7ecb0afed590e590c8bea8918e3757fe99dab0055f40b2c094dd5c6d285636fa",
+    "codex-half_reported_total.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "codex-half_segment_a_base.stderr.log": "804ec0bd306ae59225fa575bd3d7aa1b0ee12975a7e6507233be5a4c8b704582",
+    "codex-half_segment_a_base.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "codex-rf-version.stderr.log": "94fc43b5c584fa61fef724aebccfa78835fbbfcbcd42cf906376f39bcd6b691d",
+    "codex-rf-version.stdout.log": "d8cd6cdcade987bd2740c53494bc0bf2512f7e00d255d9e4243d207204024ef2",
+    "ruff-final.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ruff-final.stdout.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "verification.json": "a1fe9c32e5610cb110bbede7f0261d9388918647a6c383bf0198a1e166b5c70b"
+  },
+  "sealed_root_unchanged": true,
+  "allocator_temp_removed": true,
+  "fresh_run_summary": {
+    "status": "pass",
+    "tests": 18,
+    "installation_mutations": [],
+    "owned_temp_removed": true,
+    "report": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_acceptance_2026-10-10\\installed_probe\\attempts\\20261010T203521373000Z-5517ba96006c41b9be5a9581419e1525\\verification.json"
+  },
+  "fresh_verification_sha256": "f4056554c97cc068a2da86a65c3ffd8fbf320975ad90ebb7049c4c6d7be92c7c",
+  "fresh_harness_sha256": "eb3d85a353b1d33c294a905bb47e2b6c1835e20c9d6141f7ba8f7f5d476e0362",
+  "external_provider_calls": 0,
+  "external_model_calls": 0,
+  "paid_tokens": 0,
+  "paid_micro_usd": 0
+}
