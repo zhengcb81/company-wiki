@@ -100,6 +100,13 @@ def attach_acquisition_failure(exc: BaseException, *, budget=None, code: str | N
     setattr(exc, "acquisition_failure", {"schema_version": ACQUISITION_FAILURE_SCHEMA, "code": _safe_code(error_code),
         "retryable": retryable, "provider_started": started, "usage_complete": complete,
         "acquisition_usage": usage, "usage_scope": "operation"})
+    # M3-USAGE: the observed-usage sibling rides the same exception without
+    # touching the closed failure DTO above. Budget/cleanup secondary errors
+    # only add notes, so this projection is never erased by later failures.
+    from .acquisition_observation import observation_from_budget
+    observation = observation_from_budget(budget, outcome="failed")
+    if observation is not None:
+        setattr(exc, "acquisition_observation", observation)
 
 
 def published_acquisition_failure(exc: BaseException) -> dict[str, Any] | None:

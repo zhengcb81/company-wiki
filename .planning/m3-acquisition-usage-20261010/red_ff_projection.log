@@ -1,0 +1,551 @@
+FFFFFFFFFFFFFFFFFFFFF                                                    [100%]
+================================== FAILURES ===================================
+________ TestValidatedObservation.test_passes_producer_values_verbatim ________
+
+self = <test_m3_acquisition_usage_ff.TestValidatedObservation object at 0x0000021AC6DB6490>
+
+    def test_passes_producer_values_verbatim(self):
+        published = observation()
+>       assert cause.validated_acquisition_observation(published) == published
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'ff_provider_cause' has no attribute 'validated_acquisition_observation'
+
+tests\test_m3_acquisition_usage_ff.py:89: AttributeError
+___________ TestValidatedObservation.test_absent_value_stays_absent ___________
+
+self = <test_m3_acquisition_usage_ff.TestValidatedObservation object at 0x0000021AC6DB6850>
+
+    def test_absent_value_stays_absent(self):
+>       assert cause.validated_acquisition_observation(None) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'ff_provider_cause' has no attribute 'validated_acquisition_observation'
+
+tests\test_m3_acquisition_usage_ff.py:92: AttributeError
+_ TestValidatedObservation.test_any_deviation_drops_the_whole_object[<lambda>0] _
+
+self = <test_m3_acquisition_usage_ff.TestValidatedObservation object at 0x0000021AC6E11480>
+mutate = <function TestValidatedObservation.<lambda> at 0x0000021AC6F16A20>
+
+    @pytest.mark.parametrize("mutate", [
+        lambda v: v.pop("cost_usd"),
+        lambda v: v.update(extra=1),
+        lambda v: v.update(schema_version="acquisition-observation/2"),
+        lambda v: v.update(usage_scope="invocation"),
+        lambda v: v.update(outcome="invented"),
+        lambda v: v.update(wire_body_bytes=-3),
+        lambda v: v.update(http_exchanges=True),
+        lambda v: v.update(cost_usd="NaN"),
+        lambda v: v.update(cost_usd=0.01),
+        lambda v: v.update(http_observation={"status_code": 200, "authorization": "Bearer secret"}),
+    ])
+    def test_any_deviation_drops_the_whole_object(self, mutate):
+        value = observation()
+        mutate(value)
+>       assert cause.validated_acquisition_observation(value) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'ff_provider_cause' has no attribute 'validated_acquisition_observation'
+
+tests\test_m3_acquisition_usage_ff.py:109: AttributeError
+_ TestValidatedObservation.test_any_deviation_drops_the_whole_object[<lambda>1] _
+
+self = <test_m3_acquisition_usage_ff.TestValidatedObservation object at 0x0000021AC6E115B0>
+mutate = <function TestValidatedObservation.<lambda> at 0x0000021AC6F16AC0>
+
+    @pytest.mark.parametrize("mutate", [
+        lambda v: v.pop("cost_usd"),
+        lambda v: v.update(extra=1),
+        lambda v: v.update(schema_version="acquisition-observation/2"),
+        lambda v: v.update(usage_scope="invocation"),
+        lambda v: v.update(outcome="invented"),
+        lambda v: v.update(wire_body_bytes=-3),
+        lambda v: v.update(http_exchanges=True),
+        lambda v: v.update(cost_usd="NaN"),
+        lambda v: v.update(cost_usd=0.01),
+        lambda v: v.update(http_observation={"status_code": 200, "authorization": "Bearer secret"}),
+    ])
+    def test_any_deviation_drops_the_whole_object(self, mutate):
+        value = observation()
+        mutate(value)
+>       assert cause.validated_acquisition_observation(value) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'ff_provider_cause' has no attribute 'validated_acquisition_observation'
+
+tests\test_m3_acquisition_usage_ff.py:109: AttributeError
+_ TestValidatedObservation.test_any_deviation_drops_the_whole_object[<lambda>2] _
+
+self = <test_m3_acquisition_usage_ff.TestValidatedObservation object at 0x0000021AC6EF44D0>
+mutate = <function TestValidatedObservation.<lambda> at 0x0000021AC6F16B60>
+
+    @pytest.mark.parametrize("mutate", [
+        lambda v: v.pop("cost_usd"),
+        lambda v: v.update(extra=1),
+        lambda v: v.update(schema_version="acquisition-observation/2"),
+        lambda v: v.update(usage_scope="invocation"),
+        lambda v: v.update(outcome="invented"),
+        lambda v: v.update(wire_body_bytes=-3),
+        lambda v: v.update(http_exchanges=True),
+        lambda v: v.update(cost_usd="NaN"),
+        lambda v: v.update(cost_usd=0.01),
+        lambda v: v.update(http_observation={"status_code": 200, "authorization": "Bearer secret"}),
+    ])
+    def test_any_deviation_drops_the_whole_object(self, mutate):
+        value = observation()
+        mutate(value)
+>       assert cause.validated_acquisition_observation(value) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'ff_provider_cause' has no attribute 'validated_acquisition_observation'
+
+tests\test_m3_acquisition_usage_ff.py:109: AttributeError
+_ TestValidatedObservation.test_any_deviation_drops_the_whole_object[<lambda>3] _
+
+self = <test_m3_acquisition_usage_ff.TestValidatedObservation object at 0x0000021AC6DEF460>
+mutate = <function TestValidatedObservation.<lambda> at 0x0000021AC6F16C00>
+
+    @pytest.mark.parametrize("mutate", [
+        lambda v: v.pop("cost_usd"),
+        lambda v: v.update(extra=1),
+        lambda v: v.update(schema_version="acquisition-observation/2"),
+        lambda v: v.update(usage_scope="invocation"),
+        lambda v: v.update(outcome="invented"),
+        lambda v: v.update(wire_body_bytes=-3),
+        lambda v: v.update(http_exchanges=True),
+        lambda v: v.update(cost_usd="NaN"),
+        lambda v: v.update(cost_usd=0.01),
+        lambda v: v.update(http_observation={"status_code": 200, "authorization": "Bearer secret"}),
+    ])
+    def test_any_deviation_drops_the_whole_object(self, mutate):
+        value = observation()
+        mutate(value)
+>       assert cause.validated_acquisition_observation(value) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'ff_provider_cause' has no attribute 'validated_acquisition_observation'
+
+tests\test_m3_acquisition_usage_ff.py:109: AttributeError
+_ TestValidatedObservation.test_any_deviation_drops_the_whole_object[<lambda>4] _
+
+self = <test_m3_acquisition_usage_ff.TestValidatedObservation object at 0x0000021AC6DEF570>
+mutate = <function TestValidatedObservation.<lambda> at 0x0000021AC6F16CA0>
+
+    @pytest.mark.parametrize("mutate", [
+        lambda v: v.pop("cost_usd"),
+        lambda v: v.update(extra=1),
+        lambda v: v.update(schema_version="acquisition-observation/2"),
+        lambda v: v.update(usage_scope="invocation"),
+        lambda v: v.update(outcome="invented"),
+        lambda v: v.update(wire_body_bytes=-3),
+        lambda v: v.update(http_exchanges=True),
+        lambda v: v.update(cost_usd="NaN"),
+        lambda v: v.update(cost_usd=0.01),
+        lambda v: v.update(http_observation={"status_code": 200, "authorization": "Bearer secret"}),
+    ])
+    def test_any_deviation_drops_the_whole_object(self, mutate):
+        value = observation()
+        mutate(value)
+>       assert cause.validated_acquisition_observation(value) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'ff_provider_cause' has no attribute 'validated_acquisition_observation'
+
+tests\test_m3_acquisition_usage_ff.py:109: AttributeError
+_ TestValidatedObservation.test_any_deviation_drops_the_whole_object[<lambda>5] _
+
+self = <test_m3_acquisition_usage_ff.TestValidatedObservation object at 0x0000021AC6DAF650>
+mutate = <function TestValidatedObservation.<lambda> at 0x0000021AC6F16D40>
+
+    @pytest.mark.parametrize("mutate", [
+        lambda v: v.pop("cost_usd"),
+        lambda v: v.update(extra=1),
+        lambda v: v.update(schema_version="acquisition-observation/2"),
+        lambda v: v.update(usage_scope="invocation"),
+        lambda v: v.update(outcome="invented"),
+        lambda v: v.update(wire_body_bytes=-3),
+        lambda v: v.update(http_exchanges=True),
+        lambda v: v.update(cost_usd="NaN"),
+        lambda v: v.update(cost_usd=0.01),
+        lambda v: v.update(http_observation={"status_code": 200, "authorization": "Bearer secret"}),
+    ])
+    def test_any_deviation_drops_the_whole_object(self, mutate):
+        value = observation()
+        mutate(value)
+>       assert cause.validated_acquisition_observation(value) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'ff_provider_cause' has no attribute 'validated_acquisition_observation'
+
+tests\test_m3_acquisition_usage_ff.py:109: AttributeError
+_ TestValidatedObservation.test_any_deviation_drops_the_whole_object[<lambda>6] _
+
+self = <test_m3_acquisition_usage_ff.TestValidatedObservation object at 0x0000021AC6DAF950>
+mutate = <function TestValidatedObservation.<lambda> at 0x0000021AC6F16DE0>
+
+    @pytest.mark.parametrize("mutate", [
+        lambda v: v.pop("cost_usd"),
+        lambda v: v.update(extra=1),
+        lambda v: v.update(schema_version="acquisition-observation/2"),
+        lambda v: v.update(usage_scope="invocation"),
+        lambda v: v.update(outcome="invented"),
+        lambda v: v.update(wire_body_bytes=-3),
+        lambda v: v.update(http_exchanges=True),
+        lambda v: v.update(cost_usd="NaN"),
+        lambda v: v.update(cost_usd=0.01),
+        lambda v: v.update(http_observation={"status_code": 200, "authorization": "Bearer secret"}),
+    ])
+    def test_any_deviation_drops_the_whole_object(self, mutate):
+        value = observation()
+        mutate(value)
+>       assert cause.validated_acquisition_observation(value) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'ff_provider_cause' has no attribute 'validated_acquisition_observation'
+
+tests\test_m3_acquisition_usage_ff.py:109: AttributeError
+_ TestValidatedObservation.test_any_deviation_drops_the_whole_object[<lambda>7] _
+
+self = <test_m3_acquisition_usage_ff.TestValidatedObservation object at 0x0000021AC6E5C320>
+mutate = <function TestValidatedObservation.<lambda> at 0x0000021AC6F16E80>
+
+    @pytest.mark.parametrize("mutate", [
+        lambda v: v.pop("cost_usd"),
+        lambda v: v.update(extra=1),
+        lambda v: v.update(schema_version="acquisition-observation/2"),
+        lambda v: v.update(usage_scope="invocation"),
+        lambda v: v.update(outcome="invented"),
+        lambda v: v.update(wire_body_bytes=-3),
+        lambda v: v.update(http_exchanges=True),
+        lambda v: v.update(cost_usd="NaN"),
+        lambda v: v.update(cost_usd=0.01),
+        lambda v: v.update(http_observation={"status_code": 200, "authorization": "Bearer secret"}),
+    ])
+    def test_any_deviation_drops_the_whole_object(self, mutate):
+        value = observation()
+        mutate(value)
+>       assert cause.validated_acquisition_observation(value) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'ff_provider_cause' has no attribute 'validated_acquisition_observation'
+
+tests\test_m3_acquisition_usage_ff.py:109: AttributeError
+_ TestValidatedObservation.test_any_deviation_drops_the_whole_object[<lambda>8] _
+
+self = <test_m3_acquisition_usage_ff.TestValidatedObservation object at 0x0000021AC6E5C410>
+mutate = <function TestValidatedObservation.<lambda> at 0x0000021AC6F16F20>
+
+    @pytest.mark.parametrize("mutate", [
+        lambda v: v.pop("cost_usd"),
+        lambda v: v.update(extra=1),
+        lambda v: v.update(schema_version="acquisition-observation/2"),
+        lambda v: v.update(usage_scope="invocation"),
+        lambda v: v.update(outcome="invented"),
+        lambda v: v.update(wire_body_bytes=-3),
+        lambda v: v.update(http_exchanges=True),
+        lambda v: v.update(cost_usd="NaN"),
+        lambda v: v.update(cost_usd=0.01),
+        lambda v: v.update(http_observation={"status_code": 200, "authorization": "Bearer secret"}),
+    ])
+    def test_any_deviation_drops_the_whole_object(self, mutate):
+        value = observation()
+        mutate(value)
+>       assert cause.validated_acquisition_observation(value) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'ff_provider_cause' has no attribute 'validated_acquisition_observation'
+
+tests\test_m3_acquisition_usage_ff.py:109: AttributeError
+_ TestValidatedObservation.test_any_deviation_drops_the_whole_object[<lambda>9] _
+
+self = <test_m3_acquisition_usage_ff.TestValidatedObservation object at 0x0000021AC6F5F3F0>
+mutate = <function TestValidatedObservation.<lambda> at 0x0000021AC6F16FC0>
+
+    @pytest.mark.parametrize("mutate", [
+        lambda v: v.pop("cost_usd"),
+        lambda v: v.update(extra=1),
+        lambda v: v.update(schema_version="acquisition-observation/2"),
+        lambda v: v.update(usage_scope="invocation"),
+        lambda v: v.update(outcome="invented"),
+        lambda v: v.update(wire_body_bytes=-3),
+        lambda v: v.update(http_exchanges=True),
+        lambda v: v.update(cost_usd="NaN"),
+        lambda v: v.update(cost_usd=0.01),
+        lambda v: v.update(http_observation={"status_code": 200, "authorization": "Bearer secret"}),
+    ])
+    def test_any_deviation_drops_the_whole_object(self, mutate):
+        value = observation()
+        mutate(value)
+>       assert cause.validated_acquisition_observation(value) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'ff_provider_cause' has no attribute 'validated_acquisition_observation'
+
+tests\test_m3_acquisition_usage_ff.py:109: AttributeError
+_________ TestValidatedObservation.test_null_cost_is_unknown_not_zero _________
+
+self = <test_m3_acquisition_usage_ff.TestValidatedObservation object at 0x0000021AC6F5F770>
+
+    def test_null_cost_is_unknown_not_zero(self):
+>       assert cause.validated_acquisition_observation(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            observation(cost_usd=None))["cost_usd"] is None
+E       AttributeError: module 'ff_provider_cause' has no attribute 'validated_acquisition_observation'
+
+tests\test_m3_acquisition_usage_ff.py:112: AttributeError
+_ TestEnvelopeProjection.test_gap_envelope_keeps_observation_alongside_receipt _
+
+self = <test_m3_acquisition_usage_ff.TestEnvelopeProjection object at 0x0000021AC6DB6710>
+
+    def test_gap_envelope_keeps_observation_alongside_receipt(self):
+        dto, obs = diagnostic(), observation(outcome="gap_plan")
+>       handle = fetch._pathless_operation_gap(gap_payload(dto, obs), operation="ensure")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_m3_acquisition_usage_ff.py:119: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\fetch_filing.py:974: in _pathless_operation_gap
+    result = _validated_operation(payload, operation)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+payload = {'operation_schema_version': '1.0', 'operation': 'ensure', 'status': 'gap', 'request_id': 'synthetic-one', ...}
+operation = 'ensure'
+
+    def _validated_operation(payload: dict[str, Any], operation: str) -> dict[str, Any]:
+        if not isinstance(payload, dict):
+            raise FilingFetchError(
+                "company-wiki operation result must be an object", code="upstream_error",
+                upstream_cause=ff_provider_cause.source_condition(operation, "invalid_producer_schema"),
+            )
+        upstream_cause = ff_provider_cause.diagnose_acquisition_failure(
+            operation, payload.get("acquisition_failure")
+        )
+        receipt = ff_provider_cause.validated_acquisition_failure(payload.get("acquisition_failure"))
+        if (
+            payload.get("operation_schema_version") != _SOURCE_OPERATION_VERSION
+            or payload.get("operation") != operation
+            or not set(payload) <= _SOURCE_OPERATION_FIELDS
+        ):
+>           raise FilingFetchError(
+                "company-wiki operation contract is unsupported", code="upstream_error",
+                upstream_cause=upstream_cause or ff_provider_cause.source_condition(operation, "invalid_producer_schema"),
+                acquisition_failure=receipt,
+            )
+E           filing_contracts.FilingFetchError: company-wiki operation contract is unsupported
+
+scripts\fetch_filing.py:927: FilingFetchError
+___ TestEnvelopeProjection.test_source_candidate_envelope_keeps_observation ___
+
+self = <test_m3_acquisition_usage_ff.TestEnvelopeProjection object at 0x0000021AC6DB6C10>
+
+    def test_source_candidate_envelope_keeps_observation(self):
+        obs = observation()
+>       handle = fetch._pathless_operation_handle(
+            completed_payload(obs), operation="ensure", request=REQUEST,
+            company_identity=IDENTITY, stats={"calls": 0, "downloads": 0})
+
+tests\test_m3_acquisition_usage_ff.py:128: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\fetch_filing.py:1020: in _pathless_operation_handle
+    result = _validated_operation(payload, operation)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+payload = {'operation_schema_version': '1.0', 'operation': 'ensure', 'status': 'completed', 'request_id': 'synthetic-one', ...}
+operation = 'ensure'
+
+    def _validated_operation(payload: dict[str, Any], operation: str) -> dict[str, Any]:
+        if not isinstance(payload, dict):
+            raise FilingFetchError(
+                "company-wiki operation result must be an object", code="upstream_error",
+                upstream_cause=ff_provider_cause.source_condition(operation, "invalid_producer_schema"),
+            )
+        upstream_cause = ff_provider_cause.diagnose_acquisition_failure(
+            operation, payload.get("acquisition_failure")
+        )
+        receipt = ff_provider_cause.validated_acquisition_failure(payload.get("acquisition_failure"))
+        if (
+            payload.get("operation_schema_version") != _SOURCE_OPERATION_VERSION
+            or payload.get("operation") != operation
+            or not set(payload) <= _SOURCE_OPERATION_FIELDS
+        ):
+>           raise FilingFetchError(
+                "company-wiki operation contract is unsupported", code="upstream_error",
+                upstream_cause=upstream_cause or ff_provider_cause.source_condition(operation, "invalid_producer_schema"),
+                acquisition_failure=receipt,
+            )
+E           filing_contracts.FilingFetchError: company-wiki operation contract is unsupported
+
+scripts\fetch_filing.py:927: FilingFetchError
+_________ TestEnvelopeProjection.test_absent_observation_adds_no_key __________
+
+self = <test_m3_acquisition_usage_ff.TestEnvelopeProjection object at 0x0000021AC6E11810>
+
+    def test_absent_observation_adds_no_key(self):
+>       handle = fetch._pathless_operation_handle(
+            completed_payload(None), operation="ensure", request=REQUEST,
+            company_identity=IDENTITY, stats={"calls": 0, "downloads": 0})
+
+tests\test_m3_acquisition_usage_ff.py:138: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\fetch_filing.py:1020: in _pathless_operation_handle
+    result = _validated_operation(payload, operation)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+payload = {'operation_schema_version': '1.0', 'operation': 'ensure', 'status': 'completed', 'request_id': 'synthetic-one', ...}
+operation = 'ensure'
+
+    def _validated_operation(payload: dict[str, Any], operation: str) -> dict[str, Any]:
+        if not isinstance(payload, dict):
+            raise FilingFetchError(
+                "company-wiki operation result must be an object", code="upstream_error",
+                upstream_cause=ff_provider_cause.source_condition(operation, "invalid_producer_schema"),
+            )
+        upstream_cause = ff_provider_cause.diagnose_acquisition_failure(
+            operation, payload.get("acquisition_failure")
+        )
+        receipt = ff_provider_cause.validated_acquisition_failure(payload.get("acquisition_failure"))
+        if (
+            payload.get("operation_schema_version") != _SOURCE_OPERATION_VERSION
+            or payload.get("operation") != operation
+            or not set(payload) <= _SOURCE_OPERATION_FIELDS
+        ):
+>           raise FilingFetchError(
+                "company-wiki operation contract is unsupported", code="upstream_error",
+                upstream_cause=upstream_cause or ff_provider_cause.source_condition(operation, "invalid_producer_schema"),
+                acquisition_failure=receipt,
+            )
+E           filing_contracts.FilingFetchError: company-wiki operation contract is unsupported
+
+scripts\fetch_filing.py:927: FilingFetchError
+________ TestEnvelopeProjection.test_error_envelope_keeps_observation _________
+
+self = <test_m3_acquisition_usage_ff.TestEnvelopeProjection object at 0x0000021AC6E11940>
+
+    def test_error_envelope_keeps_observation(self):
+        obs = observation(outcome="failed")
+>       error = fetch.FilingFetchError("safe fixed text", code="fatal", stage="ensure",
+                                       attempts=1, acquisition_observation=obs)
+E       TypeError: FilingFetchError.__init__() got an unexpected keyword argument 'acquisition_observation'
+
+tests\test_m3_acquisition_usage_ff.py:147: TypeError
+_ TestEnvelopeProjection.test_malformed_observation_never_rides_the_envelope __
+
+self = <test_m3_acquisition_usage_ff.TestEnvelopeProjection object at 0x0000021AC6EF5B50>
+
+    def test_malformed_observation_never_rides_the_envelope(self):
+        obs = observation(cost_usd="Infinity")
+>       handle = fetch._pathless_operation_gap(gap_payload(None, obs), operation="ensure")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_m3_acquisition_usage_ff.py:157: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\fetch_filing.py:974: in _pathless_operation_gap
+    result = _validated_operation(payload, operation)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+payload = {'operation_schema_version': '1.0', 'operation': 'ensure', 'status': 'gap', 'request_id': 'synthetic-one', ...}
+operation = 'ensure'
+
+    def _validated_operation(payload: dict[str, Any], operation: str) -> dict[str, Any]:
+        if not isinstance(payload, dict):
+            raise FilingFetchError(
+                "company-wiki operation result must be an object", code="upstream_error",
+                upstream_cause=ff_provider_cause.source_condition(operation, "invalid_producer_schema"),
+            )
+        upstream_cause = ff_provider_cause.diagnose_acquisition_failure(
+            operation, payload.get("acquisition_failure")
+        )
+        receipt = ff_provider_cause.validated_acquisition_failure(payload.get("acquisition_failure"))
+        if (
+            payload.get("operation_schema_version") != _SOURCE_OPERATION_VERSION
+            or payload.get("operation") != operation
+            or not set(payload) <= _SOURCE_OPERATION_FIELDS
+        ):
+>           raise FilingFetchError(
+                "company-wiki operation contract is unsupported", code="upstream_error",
+                upstream_cause=upstream_cause or ff_provider_cause.source_condition(operation, "invalid_producer_schema"),
+                acquisition_failure=receipt,
+            )
+E           filing_contracts.FilingFetchError: company-wiki operation contract is unsupported
+
+scripts\fetch_filing.py:927: FilingFetchError
+_ TestEnvelopeProjection.test_invalid_observation_on_error_is_dropped_not_raised _
+
+self = <test_m3_acquisition_usage_ff.TestEnvelopeProjection object at 0x0000021AC6DEF680>
+
+    def test_invalid_observation_on_error_is_dropped_not_raised(self):
+>       error = fetch.FilingFetchError("safe fixed text", code="fatal",
+                                       acquisition_observation={"schema_version": "x"})
+E       TypeError: FilingFetchError.__init__() got an unexpected keyword argument 'acquisition_observation'
+
+tests\test_m3_acquisition_usage_ff.py:164: TypeError
+_ TestActualChildChannel.test_child_failure_keeps_observation_without_replay __
+
+self = <test_m3_acquisition_usage_ff.TestActualChildChannel object at 0x0000021AC6DB6D50>
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-133/test_child_failure_keeps_obser0')
+
+    def test_child_failure_keeps_observation_without_replay(self, tmp_path):
+        dto, obs = diagnostic(), observation(outcome="failed")
+        output = {"status": "failed", "error_type": "fatal",
+                  "error": "https://invalid/?api_key=synthetic-m3-secret",
+                  "acquisition_failure": dto, "acquisition_observation": obs}
+        marker = tmp_path / "attempts.txt"
+        script = tmp_path / "producer.py"
+        script.write_text(
+            "import sys\nfrom pathlib import Path\n"
+            "p=Path(" + repr(str(marker)) + ")\n"
+            "p.write_text(p.read_text()+'x' if p.exists() else 'x')\n"
+            "sys.stderr.write(" + repr(json.dumps(output)) + ")\nraise SystemExit(1)\n",
+            encoding="utf-8")
+        stats = {"calls": 0, "downloads": 0}
+        with pytest.raises(fetch.FilingFetchError) as caught:
+            fetch._run_company_wiki_json_retry(
+                command=[sys.executable, "-B", str(script)], root=tmp_path,
+                action="ensure", deadline=time.monotonic() + 10, stats=stats)
+        error = caught.value
+>       assert error.acquisition_observation == obs
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'FilingFetchError' object has no attribute 'acquisition_observation'
+
+tests\test_m3_acquisition_usage_ff.py:189: AttributeError
+_ TestActualChildChannel.test_child_malformed_observation_keeps_independent_receipt _
+
+self = <test_m3_acquisition_usage_ff.TestActualChildChannel object at 0x0000021AC6DB6E90>
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-133/test_child_malformed_observati0')
+
+    def test_child_malformed_observation_keeps_independent_receipt(self, tmp_path):
+        dto = diagnostic()
+        output = {"status": "failed", "error_type": "fatal", "error": "safe text",
+                  "acquisition_failure": dto,
+                  "acquisition_observation": observation(http_exchanges="three")}
+        script = tmp_path / "producer.py"
+        script.write_text(
+            "import sys\nsys.stderr.write(" + repr(json.dumps(output)) + ")\nraise SystemExit(1)\n",
+            encoding="utf-8")
+        stats = {"calls": 0, "downloads": 0}
+        with pytest.raises(fetch.FilingFetchError) as caught:
+            fetch._run_company_wiki_json_retry(
+                command=[sys.executable, "-B", str(script)], root=tmp_path,
+                action="ensure", deadline=time.monotonic() + 10, stats=stats)
+        error = caught.value
+>       assert error.acquisition_observation is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'FilingFetchError' object has no attribute 'acquisition_observation'
+
+tests\test_m3_acquisition_usage_ff.py:210: AttributeError
+=========================== short test summary info ===========================
+FAILED tests/test_m3_acquisition_usage_ff.py::TestValidatedObservation::test_passes_producer_values_verbatim
+FAILED tests/test_m3_acquisition_usage_ff.py::TestValidatedObservation::test_absent_value_stays_absent
+FAILED tests/test_m3_acquisition_usage_ff.py::TestValidatedObservation::test_any_deviation_drops_the_whole_object[<lambda>0]
+FAILED tests/test_m3_acquisition_usage_ff.py::TestValidatedObservation::test_any_deviation_drops_the_whole_object[<lambda>1]
+FAILED tests/test_m3_acquisition_usage_ff.py::TestValidatedObservation::test_any_deviation_drops_the_whole_object[<lambda>2]
+FAILED tests/test_m3_acquisition_usage_ff.py::TestValidatedObservation::test_any_deviation_drops_the_whole_object[<lambda>3]
+FAILED tests/test_m3_acquisition_usage_ff.py::TestValidatedObservation::test_any_deviation_drops_the_whole_object[<lambda>4]
+FAILED tests/test_m3_acquisition_usage_ff.py::TestValidatedObservation::test_any_deviation_drops_the_whole_object[<lambda>5]
+FAILED tests/test_m3_acquisition_usage_ff.py::TestValidatedObservation::test_any_deviation_drops_the_whole_object[<lambda>6]
+FAILED tests/test_m3_acquisition_usage_ff.py::TestValidatedObservation::test_any_deviation_drops_the_whole_object[<lambda>7]
+FAILED tests/test_m3_acquisition_usage_ff.py::TestValidatedObservation::test_any_deviation_drops_the_whole_object[<lambda>8]
+FAILED tests/test_m3_acquisition_usage_ff.py::TestValidatedObservation::test_any_deviation_drops_the_whole_object[<lambda>9]
+FAILED tests/test_m3_acquisition_usage_ff.py::TestValidatedObservation::test_null_cost_is_unknown_not_zero
+FAILED tests/test_m3_acquisition_usage_ff.py::TestEnvelopeProjection::test_gap_envelope_keeps_observation_alongside_receipt
+FAILED tests/test_m3_acquisition_usage_ff.py::TestEnvelopeProjection::test_source_candidate_envelope_keeps_observation
+FAILED tests/test_m3_acquisition_usage_ff.py::TestEnvelopeProjection::test_absent_observation_adds_no_key
+FAILED tests/test_m3_acquisition_usage_ff.py::TestEnvelopeProjection::test_error_envelope_keeps_observation
+FAILED tests/test_m3_acquisition_usage_ff.py::TestEnvelopeProjection::test_malformed_observation_never_rides_the_envelope
+FAILED tests/test_m3_acquisition_usage_ff.py::TestEnvelopeProjection::test_invalid_observation_on_error_is_dropped_not_raised
+FAILED tests/test_m3_acquisition_usage_ff.py::TestActualChildChannel::test_child_failure_keeps_observation_without_replay
+FAILED tests/test_m3_acquisition_usage_ff.py::TestActualChildChannel::test_child_malformed_observation_keeps_independent_receipt
+21 failed in 0.89s

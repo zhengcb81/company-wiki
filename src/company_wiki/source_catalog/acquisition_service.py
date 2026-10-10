@@ -43,6 +43,8 @@ class SourceEnsureResult:
     resolution: ResolutionResult
     attempt: AcquisitionAttempt | None
     canonical_import: CanonicalImportResult | None = None
+    # M3-USAGE: observed operation usage sibling; absent when no budget ran.
+    acquisition_observation: dict[str, Any] | None = None
 
     def to_dict(self) -> dict[str, Any]:
         result = {
@@ -57,7 +59,34 @@ class SourceEnsureResult:
         }
         if self.acquisition.acquisition_failure is not None:
             result["acquisition_failure"] = self.acquisition.acquisition_failure
+        if self.acquisition_observation is not None:
+            result["acquisition_observation"] = self.acquisition_observation
         return result
+
+
+def _observation_outcome(status: SourceEnsureStatus, *, candidate, gap_plan) -> str:
+    if status is SourceEnsureStatus.REUSED:
+        return "reused_after_discovery" if candidate is not None else "reused_before_download"
+    if status is SourceEnsureStatus.IMPORTED:
+        return "downloaded_new"
+    if status is SourceEnsureStatus.DEDUPLICATED:
+        return "deduplicated_after_download"
+    if status is SourceEnsureStatus.MISSING:
+        return "missing"
+    if status is SourceEnsureStatus.AMBIGUOUS:
+        return "ambiguous"
+    if gap_plan is not None and getattr(gap_plan, "provider_unavailable", False):
+        return "gap_plan_provider_unavailable"
+    return "gap_plan"
+
+
+def _observed(budget, *, status: SourceEnsureStatus, candidate, gap_plan) -> dict[str, Any] | None:
+    from .acquisition_observation import observation_from_budget
+    if budget is None:
+        return None
+    return observation_from_budget(
+        budget, outcome=_observation_outcome(status, candidate=candidate, gap_plan=gap_plan),
+    )
 
 
 class SourceAcquisitionService:
@@ -197,6 +226,8 @@ class SourceAcquisitionService:
                 acquisition=acquisition,
                 resolution=acquisition.resolution,
                 attempt=attempt,
+                acquisition_observation=_observed(budget, status=SourceEnsureStatus.REUSED,
+                    candidate=acquisition.candidate, gap_plan=None),
             )
         if acquisition.status is AcquisitionStatus.MISSING:
             attempt = record_attempt("missing")
@@ -206,6 +237,8 @@ class SourceAcquisitionService:
                 acquisition=acquisition,
                 resolution=acquisition.resolution,
                 attempt=attempt,
+                acquisition_observation=_observed(budget, status=SourceEnsureStatus.MISSING,
+                    candidate=acquisition.candidate, gap_plan=None),
             )
         if acquisition.status is AcquisitionStatus.AMBIGUOUS:
             attempt = record_attempt("ambiguous")
@@ -215,6 +248,8 @@ class SourceAcquisitionService:
                 acquisition=acquisition,
                 resolution=acquisition.resolution,
                 attempt=attempt,
+                acquisition_observation=_observed(budget, status=SourceEnsureStatus.AMBIGUOUS,
+                    candidate=acquisition.candidate, gap_plan=None),
             )
         if acquisition.status is AcquisitionStatus.GAP:
             # Metadata diagnostic only; a plan hash does not grant permission.
@@ -232,6 +267,8 @@ class SourceAcquisitionService:
                 acquisition=acquisition,
                 resolution=acquisition.resolution,
                 attempt=attempt,
+                acquisition_observation=_observed(budget, status=SourceEnsureStatus.GAP,
+                    candidate=acquisition.candidate, gap_plan=plan),
             )
         if candidate is None or acquisition.receipt is None:
             raise RuntimeError("staged acquisition is missing candidate or receipt")
@@ -283,6 +320,8 @@ class SourceAcquisitionService:
             resolution=final,
             attempt=attempt,
             canonical_import=imported,
+            acquisition_observation=_observed(budget, status=status,
+                candidate=acquisition.candidate, gap_plan=None),
         )
 
 

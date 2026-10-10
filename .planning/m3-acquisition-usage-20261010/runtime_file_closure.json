@@ -1,0 +1,125 @@
+{
+  "schema": "m3-usage-runtime-closure/1",
+  "repos": {
+    "company-wiki": {
+      "head": "d65e421cbd48e4f8622b5af19b9239ef0a878d8e",
+      "runtime_files": [
+        {
+          "path": "src/company_wiki/source_catalog/acquisition_observation.py",
+          "byte_sha256": "6c19aa5178c465331de05349e78f6350300a65757e14cce05791f59e5e9506b9",
+          "git_blob_sha": "2087f4a76763faa7b3825f0a7f58786b3c6c581a",
+          "runtime": true,
+          "reason": "CWP producer: acquisition-observation/1 sibling DTO, budget exchange/fee evidence, adapter receipt extensions"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/acquisition_failure.py",
+          "byte_sha256": "b509eeb73464b13d1771e50888d2ff4e2e90dab4ca126c7483f25f64f1ae49fe",
+          "git_blob_sha": "4d06d06ca6fe211951165594c92f879b67ce268c",
+          "runtime": true,
+          "reason": "CWP producer: acquisition-observation/1 sibling DTO, budget exchange/fee evidence, adapter receipt extensions"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/acquisition_service.py",
+          "byte_sha256": "dd72c788716c48583964c7cc032801b2192600ad12b31c7f8ea6d4c1ec6e3e6c",
+          "git_blob_sha": "6217b399b47fe9693e471df6e8687d3b1a661991",
+          "runtime": true,
+          "reason": "CWP producer: acquisition-observation/1 sibling DTO, budget exchange/fee evidence, adapter receipt extensions"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/adapter_process.py",
+          "byte_sha256": "65d73046c04a142890e8a8b8b028eb46e109afe72481e96bb5c91ef7826c0132",
+          "git_blob_sha": "2df19fe41431bcfbd1f0cd4a820787a6457857ad",
+          "runtime": true,
+          "reason": "CWP producer: acquisition-observation/1 sibling DTO, budget exchange/fee evidence, adapter receipt extensions"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/bounded_http.py",
+          "byte_sha256": "a63b63faffbd11ae669c31bd3772130af36258f66151a004c6b73526259597d5",
+          "git_blob_sha": "ed67c4e16ba06e6cfb9d2a494a9273928e43f265",
+          "runtime": true,
+          "reason": "CWP producer: acquisition-observation/1 sibling DTO, budget exchange/fee evidence, adapter receipt extensions"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/dayu_sdk_cli.py",
+          "byte_sha256": "2791e88b614387e9617fa635c218c9f686a3003300f6052f5303c43646fd27ce",
+          "git_blob_sha": "83278a664cf428e4ef186dc08731ea8d1e0132fa",
+          "runtime": true,
+          "reason": "CWP producer: acquisition-observation/1 sibling DTO, budget exchange/fee evidence, adapter receipt extensions"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/download_budget.py",
+          "byte_sha256": "44e0c84e03bf999a15b90f1aac03a8177c60b08e308c7e59db2146eaaf41ee9e",
+          "git_blob_sha": "09925e0361604ff1b40f880e2c47dd548d10d9c0",
+          "runtime": true,
+          "reason": "CWP producer: acquisition-observation/1 sibling DTO, budget exchange/fee evidence, adapter receipt extensions"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/source_operation.py",
+          "byte_sha256": "ffcdbd035547a9cbc42c65efe04a0731d8ad55eef60d8b925eeb303bd722d5b3",
+          "git_blob_sha": "ccba8bf39b1fc4d202bd81a1e31ed0537b16e1a5",
+          "runtime": true,
+          "reason": "CWP producer: acquisition-observation/1 sibling DTO, budget exchange/fee evidence, adapter receipt extensions"
+        }
+      ]
+    },
+    "filing-fetch": {
+      "head": "f0f4e36319d6b3afc17e896f12a2aa1b183894b0",
+      "runtime_files": [
+        {
+          "path": "scripts/fetch_filing.py",
+          "byte_sha256": "6b12ee17ab2a01f1292eacf3598177ca959d2f5ab306c44b772abec6a648d12c",
+          "git_blob_sha": "83211ccbca8767b3e338f894263f2c51a01fa51c",
+          "runtime": true,
+          "reason": "FF faithful pass-through: validated sibling on the v2 envelope top level"
+        },
+        {
+          "path": "scripts/ff_provider_cause.py",
+          "byte_sha256": "f9bfec3c4659cb9e537435690fdfc7c3b2de126ccecaef04e96790d35edd2a43",
+          "git_blob_sha": "cacb75a809416b7909df4a6453ef3aa2522d6dd4",
+          "runtime": true,
+          "reason": "FF faithful pass-through: validated sibling on the v2 envelope top level"
+        },
+        {
+          "path": "scripts/ff_v2_envelope.py",
+          "byte_sha256": "c83b92dddba7cad223f64bc1aa573e88312a0676a85e073e05c43f1b9fae9ed3",
+          "git_blob_sha": "e704df22dd52a57e8dfcc8a8f391fea9ad3d4c18",
+          "runtime": true,
+          "reason": "FF faithful pass-through: validated sibling on the v2 envelope top level"
+        },
+        {
+          "path": "scripts/filing_contracts.py",
+          "byte_sha256": "3dfe0a3fb2659acad155660b129f1d4adcfa4664ee3a3bf91df7cccf825493ff",
+          "git_blob_sha": "f32b4c3fae0c9d4c3593c4b70c7fd66ee977d902",
+          "runtime": true,
+          "reason": "FF faithful pass-through: validated sibling on the v2 envelope top level"
+        }
+      ]
+    },
+    "revenue-forecast": {
+      "head": "741f7c01fc2e13d42f919aa0fc8053eb8cabfe08",
+      "runtime_files": [
+        {
+          "path": "scripts/filing_fetch_client.py",
+          "byte_sha256": "7f730131f4bad0e22e3e43b0ffac48475dd1c373a4bc8dec40ad21a6b8a1341b",
+          "git_blob_sha": "c72d54fc729ec4182a06a66143f42e5e46e846b4",
+          "runtime": true,
+          "reason": "RF pass-through: failure_observation projection, client/preparation error documents, cross-repo E2E"
+        },
+        {
+          "path": "scripts/filing_upstream_cause.py",
+          "byte_sha256": "03a704077d8c065478eca5a4a58e88daf1b739448d4a3c51ad5784f8c68a959f",
+          "git_blob_sha": "533e0ddc3127b29a7993e1b48a486ab3a1f813c4",
+          "runtime": true,
+          "reason": "RF pass-through: failure_observation projection, client/preparation error documents, cross-repo E2E"
+        },
+        {
+          "path": "scripts/source_preparation.py",
+          "byte_sha256": "e8db267971f5c967ab6cd8e358e23423afe42f7af8ce19847be7b266cc00742d",
+          "git_blob_sha": "43ec74dad96fa6eead17707622bb4aea1f5ba8bc",
+          "runtime": true,
+          "reason": "RF pass-through: failure_observation projection, client/preparation error documents, cross-repo E2E"
+        }
+      ]
+    }
+  }
+}

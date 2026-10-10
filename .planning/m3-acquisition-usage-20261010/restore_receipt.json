@@ -1,0 +1,55 @@
+{
+  "schema": "m3-usage-restore-receipt/1",
+  "date": "2026-10-10",
+  "production_config": {
+    "path": "config/source_catalog.yaml",
+    "main_worktree_sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "cwp_worktree_sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "note": "R4.1/N-05 conftest production_config_integrity asserted unchanged across every test session"
+  },
+  "repos": {
+    "company-wiki": {
+      "head": "3c791e3c2a16c12627cc25d0bd8681cc9458e48b",
+      "status_porcelain": [
+        " M src/company_wiki/source_catalog/acquisition_failure.py",
+        " M src/company_wiki/source_catalog/acquisition_service.py",
+        " M src/company_wiki/source_catalog/adapter_process.py",
+        " M src/company_wiki/source_catalog/bounded_http.py",
+        " M src/company_wiki/source_catalog/dayu_sdk_cli.py",
+        " M src/company_wiki/source_catalog/download_budget.py",
+        " M src/company_wiki/source_catalog/source_operation.py",
+        "?? .planning/m3-acquisition-usage-20261010/",
+        "?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/m3_root_implementation_2026-10-10/",
+        "?? src/company_wiki/source_catalog/acquisition_observation.py",
+        "?? tests/integration/test_m3_acquisition_usage_cwp.py",
+        "?? tests/unit/test_m3_acquisition_usage_observation.py"
+      ]
+    },
+    "filing-fetch": {
+      "head": "41ba0150c9c634f6021c9346744cada391ec2c4c",
+      "status_porcelain": [
+        " M scripts/fetch_filing.py",
+        " M scripts/ff_provider_cause.py",
+        " M scripts/ff_v2_envelope.py",
+        " M scripts/filing_contracts.py",
+        "?? tests/test_m3_acquisition_usage_ff.py"
+      ]
+    },
+    "revenue-forecast": {
+      "head": "0c248d9a07a2dd7a2c756946d88507479d5e9d15",
+      "status_porcelain": [
+        " M scripts/filing_fetch_client.py",
+        " M scripts/filing_upstream_cause.py",
+        " M scripts/source_preparation.py",
+        "?? tests/test_m3_acquisition_usage_e2e.py",
+        "?? tests/test_m3_acquisition_usage_rf.py"
+      ]
+    }
+  },
+  "temp_policy": {
+    "pytest_basetemp": "pytest-of-郑曾波, wiped per-run by pytest tmp management",
+    "owned_temp": "all fixtures used TemporaryDirectory contexts inside pytest tmp_path; exited contexts delete them",
+    "loopback_servers": "bound 127.0.0.1 ephemeral ports, shut down in fixtures",
+    "extra_originals": "none created outside pytest tmp; companies/raw untouched in all three worktrees"
+  }
+}

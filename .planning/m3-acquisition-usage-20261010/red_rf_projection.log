@@ -1,0 +1,322 @@
+FFFFFFFFFFFFF.F...F                                                      [100%]
+================================== FAILURES ===================================
+________________ TestValidatedObservation.test_passes_verbatim ________________
+
+self = <test_m3_acquisition_usage_rf.TestValidatedObservation object at 0x00000296EEA96710>
+
+    def test_passes_verbatim(self):
+        published = observation()
+>       assert cause.validated_acquisition_observation(published) == published
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'filing_upstream_cause' has no attribute 'validated_acquisition_observation'
+
+tests\test_m3_acquisition_usage_rf.py:119: AttributeError
+_ TestValidatedObservation.test_any_deviation_drops_the_whole_object[<lambda>0] _
+
+self = <test_m3_acquisition_usage_rf.TestValidatedObservation object at 0x00000296EEA96D50>
+mutate = <function TestValidatedObservation.<lambda> at 0x00000296EEB92B60>
+
+    @pytest.mark.parametrize("mutate", [
+        lambda v: v.pop("http_observation"),
+        lambda v: v.update(extra=None),
+        lambda v: v.update(usage_scope="invocation"),
+        lambda v: v.update(outcome="invented"),
+        lambda v: v.update(wire_body_bytes="2841"),
+        lambda v: v.update(http_exchanges=-1),
+        lambda v: v.update(cost_usd="Infinity"),
+        lambda v: v.update(cost_usd=0.0004),
+        lambda v: v.update(http_observation={"status_code": 200, "set-cookie": SECRET}),
+    ])
+    def test_any_deviation_drops_the_whole_object(self, mutate):
+        value = observation()
+        mutate(value)
+>       assert cause.validated_acquisition_observation(value) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'filing_upstream_cause' has no attribute 'validated_acquisition_observation'
+
+tests\test_m3_acquisition_usage_rf.py:135: AttributeError
+_ TestValidatedObservation.test_any_deviation_drops_the_whole_object[<lambda>1] _
+
+self = <test_m3_acquisition_usage_rf.TestValidatedObservation object at 0x00000296EEB1B950>
+mutate = <function TestValidatedObservation.<lambda> at 0x00000296EEB92C00>
+
+    @pytest.mark.parametrize("mutate", [
+        lambda v: v.pop("http_observation"),
+        lambda v: v.update(extra=None),
+        lambda v: v.update(usage_scope="invocation"),
+        lambda v: v.update(outcome="invented"),
+        lambda v: v.update(wire_body_bytes="2841"),
+        lambda v: v.update(http_exchanges=-1),
+        lambda v: v.update(cost_usd="Infinity"),
+        lambda v: v.update(cost_usd=0.0004),
+        lambda v: v.update(http_observation={"status_code": 200, "set-cookie": SECRET}),
+    ])
+    def test_any_deviation_drops_the_whole_object(self, mutate):
+        value = observation()
+        mutate(value)
+>       assert cause.validated_acquisition_observation(value) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'filing_upstream_cause' has no attribute 'validated_acquisition_observation'
+
+tests\test_m3_acquisition_usage_rf.py:135: AttributeError
+_ TestValidatedObservation.test_any_deviation_drops_the_whole_object[<lambda>2] _
+
+self = <test_m3_acquisition_usage_rf.TestValidatedObservation object at 0x00000296EEB1BBB0>
+mutate = <function TestValidatedObservation.<lambda> at 0x00000296EEB92CA0>
+
+    @pytest.mark.parametrize("mutate", [
+        lambda v: v.pop("http_observation"),
+        lambda v: v.update(extra=None),
+        lambda v: v.update(usage_scope="invocation"),
+        lambda v: v.update(outcome="invented"),
+        lambda v: v.update(wire_body_bytes="2841"),
+        lambda v: v.update(http_exchanges=-1),
+        lambda v: v.update(cost_usd="Infinity"),
+        lambda v: v.update(cost_usd=0.0004),
+        lambda v: v.update(http_observation={"status_code": 200, "set-cookie": SECRET}),
+    ])
+    def test_any_deviation_drops_the_whole_object(self, mutate):
+        value = observation()
+        mutate(value)
+>       assert cause.validated_acquisition_observation(value) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'filing_upstream_cause' has no attribute 'validated_acquisition_observation'
+
+tests\test_m3_acquisition_usage_rf.py:135: AttributeError
+_ TestValidatedObservation.test_any_deviation_drops_the_whole_object[<lambda>3] _
+
+self = <test_m3_acquisition_usage_rf.TestValidatedObservation object at 0x00000296EEB567B0>
+mutate = <function TestValidatedObservation.<lambda> at 0x00000296EEB92D40>
+
+    @pytest.mark.parametrize("mutate", [
+        lambda v: v.pop("http_observation"),
+        lambda v: v.update(extra=None),
+        lambda v: v.update(usage_scope="invocation"),
+        lambda v: v.update(outcome="invented"),
+        lambda v: v.update(wire_body_bytes="2841"),
+        lambda v: v.update(http_exchanges=-1),
+        lambda v: v.update(cost_usd="Infinity"),
+        lambda v: v.update(cost_usd=0.0004),
+        lambda v: v.update(http_observation={"status_code": 200, "set-cookie": SECRET}),
+    ])
+    def test_any_deviation_drops_the_whole_object(self, mutate):
+        value = observation()
+        mutate(value)
+>       assert cause.validated_acquisition_observation(value) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'filing_upstream_cause' has no attribute 'validated_acquisition_observation'
+
+tests\test_m3_acquisition_usage_rf.py:135: AttributeError
+_ TestValidatedObservation.test_any_deviation_drops_the_whole_object[<lambda>4] _
+
+self = <test_m3_acquisition_usage_rf.TestValidatedObservation object at 0x00000296EEADB570>
+mutate = <function TestValidatedObservation.<lambda> at 0x00000296EEB92DE0>
+
+    @pytest.mark.parametrize("mutate", [
+        lambda v: v.pop("http_observation"),
+        lambda v: v.update(extra=None),
+        lambda v: v.update(usage_scope="invocation"),
+        lambda v: v.update(outcome="invented"),
+        lambda v: v.update(wire_body_bytes="2841"),
+        lambda v: v.update(http_exchanges=-1),
+        lambda v: v.update(cost_usd="Infinity"),
+        lambda v: v.update(cost_usd=0.0004),
+        lambda v: v.update(http_observation={"status_code": 200, "set-cookie": SECRET}),
+    ])
+    def test_any_deviation_drops_the_whole_object(self, mutate):
+        value = observation()
+        mutate(value)
+>       assert cause.validated_acquisition_observation(value) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'filing_upstream_cause' has no attribute 'validated_acquisition_observation'
+
+tests\test_m3_acquisition_usage_rf.py:135: AttributeError
+_ TestValidatedObservation.test_any_deviation_drops_the_whole_object[<lambda>5] _
+
+self = <test_m3_acquisition_usage_rf.TestValidatedObservation object at 0x00000296EEADB790>
+mutate = <function TestValidatedObservation.<lambda> at 0x00000296EEB92E80>
+
+    @pytest.mark.parametrize("mutate", [
+        lambda v: v.pop("http_observation"),
+        lambda v: v.update(extra=None),
+        lambda v: v.update(usage_scope="invocation"),
+        lambda v: v.update(outcome="invented"),
+        lambda v: v.update(wire_body_bytes="2841"),
+        lambda v: v.update(http_exchanges=-1),
+        lambda v: v.update(cost_usd="Infinity"),
+        lambda v: v.update(cost_usd=0.0004),
+        lambda v: v.update(http_observation={"status_code": 200, "set-cookie": SECRET}),
+    ])
+    def test_any_deviation_drops_the_whole_object(self, mutate):
+        value = observation()
+        mutate(value)
+>       assert cause.validated_acquisition_observation(value) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'filing_upstream_cause' has no attribute 'validated_acquisition_observation'
+
+tests\test_m3_acquisition_usage_rf.py:135: AttributeError
+_ TestValidatedObservation.test_any_deviation_drops_the_whole_object[<lambda>6] _
+
+self = <test_m3_acquisition_usage_rf.TestValidatedObservation object at 0x00000296EEA82F50>
+mutate = <function TestValidatedObservation.<lambda> at 0x00000296EEB92F20>
+
+    @pytest.mark.parametrize("mutate", [
+        lambda v: v.pop("http_observation"),
+        lambda v: v.update(extra=None),
+        lambda v: v.update(usage_scope="invocation"),
+        lambda v: v.update(outcome="invented"),
+        lambda v: v.update(wire_body_bytes="2841"),
+        lambda v: v.update(http_exchanges=-1),
+        lambda v: v.update(cost_usd="Infinity"),
+        lambda v: v.update(cost_usd=0.0004),
+        lambda v: v.update(http_observation={"status_code": 200, "set-cookie": SECRET}),
+    ])
+    def test_any_deviation_drops_the_whole_object(self, mutate):
+        value = observation()
+        mutate(value)
+>       assert cause.validated_acquisition_observation(value) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'filing_upstream_cause' has no attribute 'validated_acquisition_observation'
+
+tests\test_m3_acquisition_usage_rf.py:135: AttributeError
+_ TestValidatedObservation.test_any_deviation_drops_the_whole_object[<lambda>7] _
+
+self = <test_m3_acquisition_usage_rf.TestValidatedObservation object at 0x00000296EEA83150>
+mutate = <function TestValidatedObservation.<lambda> at 0x00000296EEB92FC0>
+
+    @pytest.mark.parametrize("mutate", [
+        lambda v: v.pop("http_observation"),
+        lambda v: v.update(extra=None),
+        lambda v: v.update(usage_scope="invocation"),
+        lambda v: v.update(outcome="invented"),
+        lambda v: v.update(wire_body_bytes="2841"),
+        lambda v: v.update(http_exchanges=-1),
+        lambda v: v.update(cost_usd="Infinity"),
+        lambda v: v.update(cost_usd=0.0004),
+        lambda v: v.update(http_observation={"status_code": 200, "set-cookie": SECRET}),
+    ])
+    def test_any_deviation_drops_the_whole_object(self, mutate):
+        value = observation()
+        mutate(value)
+>       assert cause.validated_acquisition_observation(value) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'filing_upstream_cause' has no attribute 'validated_acquisition_observation'
+
+tests\test_m3_acquisition_usage_rf.py:135: AttributeError
+_ TestValidatedObservation.test_any_deviation_drops_the_whole_object[<lambda>8] _
+
+self = <test_m3_acquisition_usage_rf.TestValidatedObservation object at 0x00000296EEB98410>
+mutate = <function TestValidatedObservation.<lambda> at 0x00000296EEB93060>
+
+    @pytest.mark.parametrize("mutate", [
+        lambda v: v.pop("http_observation"),
+        lambda v: v.update(extra=None),
+        lambda v: v.update(usage_scope="invocation"),
+        lambda v: v.update(outcome="invented"),
+        lambda v: v.update(wire_body_bytes="2841"),
+        lambda v: v.update(http_exchanges=-1),
+        lambda v: v.update(cost_usd="Infinity"),
+        lambda v: v.update(cost_usd=0.0004),
+        lambda v: v.update(http_observation={"status_code": 200, "set-cookie": SECRET}),
+    ])
+    def test_any_deviation_drops_the_whole_object(self, mutate):
+        value = observation()
+        mutate(value)
+>       assert cause.validated_acquisition_observation(value) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'filing_upstream_cause' has no attribute 'validated_acquisition_observation'
+
+tests\test_m3_acquisition_usage_rf.py:135: AttributeError
+_________ TestValidatedObservation.test_null_cost_is_unknown_not_zero _________
+
+self = <test_m3_acquisition_usage_rf.TestValidatedObservation object at 0x00000296EEB988C0>
+
+    def test_null_cost_is_unknown_not_zero(self):
+>       assert cause.validated_acquisition_observation(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            observation(cost_usd=None))["cost_usd"] is None
+E       AttributeError: module 'filing_upstream_cause' has no attribute 'validated_acquisition_observation'
+
+tests\test_m3_acquisition_usage_rf.py:138: AttributeError
+_ TestFailureObservation.test_projects_sibling_from_envelope_top_level_and_flat _
+
+self = <test_m3_acquisition_usage_rf.TestFailureObservation object at 0x00000296EEA96990>
+
+    def test_projects_sibling_from_envelope_top_level_and_flat(self):
+        obs = observation()
+        v2 = cause.failure_observation(failure_envelope(obs))
+>       assert v2["acquisition_observation"] == obs
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'acquisition_observation'
+
+tests\test_m3_acquisition_usage_rf.py:146: KeyError
+___ TestFailureObservation.test_detail_fallback_keeps_older_shapes_readable ___
+
+self = <test_m3_acquisition_usage_rf.TestFailureObservation object at 0x00000296EEA96E90>
+
+    def test_detail_fallback_keeps_older_shapes_readable(self):
+        obs = observation()
+        payload = failure_envelope(None)
+        payload["filing"]["acquisition_observation"] = obs
+>       assert cause.failure_observation(payload)["acquisition_observation"] == obs
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'acquisition_observation'
+
+tests\test_m3_acquisition_usage_rf.py:154: KeyError
+_ TestActualCliBoundary.test_preparation_cli_keeps_observation_counts_and_cause _
+
+self = <test_m3_acquisition_usage_rf.TestActualCliBoundary object at 0x00000296EEA96FD0>
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-134/test_preparation_cli_keeps_obs0')
+
+    def test_preparation_cli_keeps_observation_counts_and_cause(self, tmp_path):
+        obs = observation()
+        root = fake(tmp_path, failure_envelope(obs))
+        value = actual_cli(root, tmp_path)
+>       assert value["acquisition_observation"] == obs
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'acquisition_observation'
+
+tests\test_m3_acquisition_usage_rf.py:170: KeyError
+_ TestReaderStageRetention.test_reader_failure_retains_prior_observation_without_replay _
+
+self = <test_m3_acquisition_usage_rf.TestReaderStageRetention object at 0x00000296EEA97250>
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-134/test_reader_failure_retains_pr0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000296EEC35F30>
+
+    def test_reader_failure_retains_prior_observation_without_replay(self, tmp_path, monkeypatch):
+        obs = observation(outcome="downloaded_new", usage_complete=True)
+        envelope = success_envelope(obs)
+        config = tmp_path / "catalog.yaml"
+        config.write_text("schema_version: '1.0'\n", encoding="utf-8")
+        calls = []
+        monkeypatch.setattr(prep, "_run_filing_fetch",
+                            lambda *args: calls.append(1) or envelope)
+        monkeypatch.setattr(prep, "_prepare_source_ref_v2",
+                            lambda *args, **kw: (_ for _ in ()).throw(RuntimeError("reader refused")))
+        with pytest.raises(prep.FilingSourcePreparationError) as caught:
+            prep.prepare_source_result({}, company_wiki_catalog_config=config)
+        error = caught.value
+        # The real reader-stage path re-runs failure_observation on the
+        # successful FF envelope; the sibling survives alongside counts.
+>       assert error.acquisition_observation == obs
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'FilingSourcePreparationError' object has no attribute 'acquisition_observation'
+
+tests\test_m3_acquisition_usage_rf.py:229: AttributeError
+=========================== short test summary info ===========================
+FAILED tests/test_m3_acquisition_usage_rf.py::TestValidatedObservation::test_passes_verbatim
+FAILED tests/test_m3_acquisition_usage_rf.py::TestValidatedObservation::test_any_deviation_drops_the_whole_object[<lambda>0]
+FAILED tests/test_m3_acquisition_usage_rf.py::TestValidatedObservation::test_any_deviation_drops_the_whole_object[<lambda>1]
+FAILED tests/test_m3_acquisition_usage_rf.py::TestValidatedObservation::test_any_deviation_drops_the_whole_object[<lambda>2]
+FAILED tests/test_m3_acquisition_usage_rf.py::TestValidatedObservation::test_any_deviation_drops_the_whole_object[<lambda>3]
+FAILED tests/test_m3_acquisition_usage_rf.py::TestValidatedObservation::test_any_deviation_drops_the_whole_object[<lambda>4]
+FAILED tests/test_m3_acquisition_usage_rf.py::TestValidatedObservation::test_any_deviation_drops_the_whole_object[<lambda>5]
+FAILED tests/test_m3_acquisition_usage_rf.py::TestValidatedObservation::test_any_deviation_drops_the_whole_object[<lambda>6]
+FAILED tests/test_m3_acquisition_usage_rf.py::TestValidatedObservation::test_any_deviation_drops_the_whole_object[<lambda>7]
+FAILED tests/test_m3_acquisition_usage_rf.py::TestValidatedObservation::test_any_deviation_drops_the_whole_object[<lambda>8]
+FAILED tests/test_m3_acquisition_usage_rf.py::TestValidatedObservation::test_null_cost_is_unknown_not_zero
+FAILED tests/test_m3_acquisition_usage_rf.py::TestFailureObservation::test_projects_sibling_from_envelope_top_level_and_flat
+FAILED tests/test_m3_acquisition_usage_rf.py::TestFailureObservation::test_detail_fallback_keeps_older_shapes_readable
+FAILED tests/test_m3_acquisition_usage_rf.py::TestActualCliBoundary::test_preparation_cli_keeps_observation_counts_and_cause
+FAILED tests/test_m3_acquisition_usage_rf.py::TestReaderStageRetention::test_reader_failure_retains_prior_observation_without_replay
+15 failed, 4 passed in 1.30s

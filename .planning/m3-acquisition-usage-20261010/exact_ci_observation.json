@@ -1,0 +1,37 @@
+{
+  "schema": "m3-usage-exact-ci/1",
+  "observed_at_utc": "2026-10-10T18:03:43Z",
+  "repos": {
+    "company-wiki": {
+      "head_sha": "d65e421cbd48e4f8622b5af19b9239ef0a878d8e",
+      "run_count": 0,
+      "runs": [],
+      "status": "not_available",
+      "note": "ci.yml triggers on master only; codex/* pushes produce no runs"
+    },
+    "filing-fetch": {
+      "head_sha": "f0f4e36319d6b3afc17e896f12a2aa1b183894b0",
+      "run_count": 1,
+      "runs": [
+        {
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/filing-fetch/actions/runs/38074142454"
+        }
+      ]
+    },
+    "revenue-forecast": {
+      "head_sha": "741f7c01fc2e13d42f919aa0fc8053eb8cabfe08",
+      "run_count": 1,
+      "runs": [
+        {
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/38074171676"
+        }
+      ]
+    }
+  }
+}
