@@ -1,0 +1,8 @@
+FAILED tests/integration/test_m3_official_json_projection.py::test_one_raw_two_issuer_projections_do_not_recopy_or_conflict
+FAILED tests/integration/test_m3_official_json_projection.py::test_replay_verifies_parent_bytes_pointers_and_roles
+FAILED tests/integration/test_m3_official_json_projection.py::test_projection_export_bundle_carries_refs_and_spans
+FAILED tests/integration/test_m3_official_json_projection.py::test_invalid_json_is_retained_but_not_indexed
+FAILED tests/integration/test_m3_official_json_projection.py::test_unknown_layout_registers_raw_and_refuses_projection
+FAILED tests/integration/test_m3_official_json_projection.py::test_import_v2_failure_retains_capture_and_recovers
+FAILED tests/integration/test_m3_official_json_projection.py::test_public_cli_import_project_read_replay_export
+========================= 9 failed, 1 passed in 4.34s =========================

@@ -1,0 +1,441 @@
+{
+  "schema_version": "m3-lane-handoff/1",
+  "lane_id": "M3-USAGE",
+  "observed_at_utc": "2026-10-10T18:07:55Z",
+  "owner": "harness agent (external takeover after built-in terminal error)",
+  "package_status": "complete",
+  "repos": [
+    {
+      "repository": "company-wiki",
+      "worktree": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acquisition-usage-20261010\\company-wiki",
+      "branch": "codex/m3-acquisition-usage-20261010",
+      "base_head": "3c791e3c2a16c12627cc25d0bd8681cc9458e48b",
+      "head": "d65e421cbd48e4f8622b5af19b9239ef0a878d8e",
+      "changed_files": [
+        {
+          "path": "src/company_wiki/source_catalog/acquisition_observation.py",
+          "byte_sha256": "6c19aa5178c465331de05349e78f6350300a65757e14cce05791f59e5e9506b9",
+          "git_blob_sha": "2087f4a76763faa7b3825f0a7f58786b3c6c581a",
+          "runtime": true,
+          "reason": "CWP producer: acquisition-observation/1 sibling DTO, budget exchange/fee evidence, adapter receipt extensions"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/acquisition_failure.py",
+          "byte_sha256": "b509eeb73464b13d1771e50888d2ff4e2e90dab4ca126c7483f25f64f1ae49fe",
+          "git_blob_sha": "4d06d06ca6fe211951165594c92f879b67ce268c",
+          "runtime": true,
+          "reason": "CWP producer: acquisition-observation/1 sibling DTO, budget exchange/fee evidence, adapter receipt extensions"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/acquisition_service.py",
+          "byte_sha256": "dd72c788716c48583964c7cc032801b2192600ad12b31c7f8ea6d4c1ec6e3e6c",
+          "git_blob_sha": "6217b399b47fe9693e471df6e8687d3b1a661991",
+          "runtime": true,
+          "reason": "CWP producer: acquisition-observation/1 sibling DTO, budget exchange/fee evidence, adapter receipt extensions"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/adapter_process.py",
+          "byte_sha256": "65d73046c04a142890e8a8b8b028eb46e109afe72481e96bb5c91ef7826c0132",
+          "git_blob_sha": "2df19fe41431bcfbd1f0cd4a820787a6457857ad",
+          "runtime": true,
+          "reason": "CWP producer: acquisition-observation/1 sibling DTO, budget exchange/fee evidence, adapter receipt extensions"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/bounded_http.py",
+          "byte_sha256": "a63b63faffbd11ae669c31bd3772130af36258f66151a004c6b73526259597d5",
+          "git_blob_sha": "ed67c4e16ba06e6cfb9d2a494a9273928e43f265",
+          "runtime": true,
+          "reason": "CWP producer: acquisition-observation/1 sibling DTO, budget exchange/fee evidence, adapter receipt extensions"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/dayu_sdk_cli.py",
+          "byte_sha256": "2791e88b614387e9617fa635c218c9f686a3003300f6052f5303c43646fd27ce",
+          "git_blob_sha": "83278a664cf428e4ef186dc08731ea8d1e0132fa",
+          "runtime": true,
+          "reason": "CWP producer: acquisition-observation/1 sibling DTO, budget exchange/fee evidence, adapter receipt extensions"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/download_budget.py",
+          "byte_sha256": "44e0c84e03bf999a15b90f1aac03a8177c60b08e308c7e59db2146eaaf41ee9e",
+          "git_blob_sha": "09925e0361604ff1b40f880e2c47dd548d10d9c0",
+          "runtime": true,
+          "reason": "CWP producer: acquisition-observation/1 sibling DTO, budget exchange/fee evidence, adapter receipt extensions"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/source_operation.py",
+          "byte_sha256": "ffcdbd035547a9cbc42c65efe04a0731d8ad55eef60d8b925eeb303bd722d5b3",
+          "git_blob_sha": "ccba8bf39b1fc4d202bd81a1e31ed0537b16e1a5",
+          "runtime": true,
+          "reason": "CWP producer: acquisition-observation/1 sibling DTO, budget exchange/fee evidence, adapter receipt extensions"
+        },
+        {
+          "path": "tests/unit/test_m3_acquisition_usage_observation.py",
+          "byte_sha256": "ed8ce676020a60640316c295f6c0bc30aa4ffde622a58fcc8cbfe4811f137dc4",
+          "git_blob_sha": "317c2d30564c2e97fc615f656d96eab4aff6278f",
+          "runtime": false,
+          "reason": "lane test evidence"
+        },
+        {
+          "path": "tests/integration/test_m3_acquisition_usage_cwp.py",
+          "byte_sha256": "188c2585447ae7f0fecb07b474045531ec695dba3117e8c9efcef30e4307794d",
+          "git_blob_sha": "85c3ce645010b506bab018a1acedf58c7b041cfc",
+          "runtime": false,
+          "reason": "lane test evidence"
+        }
+      ],
+      "git_status_explanation": "clean except untracked pre-existing docs/plans/.../m3_root_implementation_2026-10-10/ (W06 seed records, left read-only per card)",
+      "push": {
+        "status": "pass",
+        "evidence": [
+          "git push -u origin codex/m3-acquisition-usage-20261010 (new branch)"
+        ],
+        "note": "pushed in CWP->FF->RF order"
+      },
+      "ci": {
+        "status": "not_available",
+        "evidence": [
+          "GitHub API head_sha=d65e421c query -> 0 runs",
+          ".github/workflows/ci.yml on.push.branches=[master] only"
+        ],
+        "note": "workflow does not trigger on codex/* branches; exact CI not_available for this head"
+      },
+      "remote_head": "d65e421cbd48e4f8622b5af19b9239ef0a878d8e",
+      "ci_head": null
+    },
+    {
+      "repository": "filing-fetch",
+      "worktree": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acquisition-usage-20261010\\filing-fetch",
+      "branch": "codex/m3-acquisition-usage-20261010",
+      "base_head": "41ba0150c9c634f6021c9346744cada391ec2c4c",
+      "head": "f0f4e36319d6b3afc17e896f12a2aa1b183894b0",
+      "changed_files": [
+        {
+          "path": "scripts/fetch_filing.py",
+          "byte_sha256": "6b12ee17ab2a01f1292eacf3598177ca959d2f5ab306c44b772abec6a648d12c",
+          "git_blob_sha": "83211ccbca8767b3e338f894263f2c51a01fa51c",
+          "runtime": true,
+          "reason": "FF faithful pass-through: validated sibling on the v2 envelope top level"
+        },
+        {
+          "path": "scripts/ff_provider_cause.py",
+          "byte_sha256": "f9bfec3c4659cb9e537435690fdfc7c3b2de126ccecaef04e96790d35edd2a43",
+          "git_blob_sha": "cacb75a809416b7909df4a6453ef3aa2522d6dd4",
+          "runtime": true,
+          "reason": "FF faithful pass-through: validated sibling on the v2 envelope top level"
+        },
+        {
+          "path": "scripts/ff_v2_envelope.py",
+          "byte_sha256": "c83b92dddba7cad223f64bc1aa573e88312a0676a85e073e05c43f1b9fae9ed3",
+          "git_blob_sha": "e704df22dd52a57e8dfcc8a8f391fea9ad3d4c18",
+          "runtime": true,
+          "reason": "FF faithful pass-through: validated sibling on the v2 envelope top level"
+        },
+        {
+          "path": "scripts/filing_contracts.py",
+          "byte_sha256": "3dfe0a3fb2659acad155660b129f1d4adcfa4664ee3a3bf91df7cccf825493ff",
+          "git_blob_sha": "f32b4c3fae0c9d4c3593c4b70c7fd66ee977d902",
+          "runtime": true,
+          "reason": "FF faithful pass-through: validated sibling on the v2 envelope top level"
+        },
+        {
+          "path": "tests/test_m3_acquisition_usage_ff.py",
+          "byte_sha256": "58d0f6b8ef81efbfd2c3b872498bef95f5e87cfef41ab5b02e8e2465ad07adfa",
+          "git_blob_sha": "9b586636cce37c04227f3818d793f9e7afec060b",
+          "runtime": false,
+          "reason": "lane test evidence"
+        }
+      ],
+      "git_status_explanation": "clean; only lane source/tests/.planning records changed",
+      "push": {
+        "status": "pass",
+        "evidence": [
+          "git push -u origin codex/m3-acquisition-usage-20261010 (new branch)"
+        ],
+        "note": "pushed in CWP->FF->RF order"
+      },
+      "ci": {
+        "status": "pass",
+        "evidence": [
+          "quality workflow completed success at head f0f4e36319d6 (GitHub API head_sha query)"
+        ],
+        "note": "exact-head run"
+      },
+      "remote_head": "f0f4e36319d6b3afc17e896f12a2aa1b183894b0",
+      "ci_head": "f0f4e36319d6b3afc17e896f12a2aa1b183894b0"
+    },
+    {
+      "repository": "revenue-forecast",
+      "worktree": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acquisition-usage-20261010\\revenue-forecast",
+      "branch": "codex/m3-acquisition-usage-20261010",
+      "base_head": "0c248d9a07a2dd7a2c756946d88507479d5e9d15",
+      "head": "741f7c01fc2e13d42f919aa0fc8053eb8cabfe08",
+      "changed_files": [
+        {
+          "path": "scripts/filing_fetch_client.py",
+          "byte_sha256": "7f730131f4bad0e22e3e43b0ffac48475dd1c373a4bc8dec40ad21a6b8a1341b",
+          "git_blob_sha": "c72d54fc729ec4182a06a66143f42e5e46e846b4",
+          "runtime": true,
+          "reason": "RF pass-through: failure_observation projection, client/preparation error documents, cross-repo E2E"
+        },
+        {
+          "path": "scripts/filing_upstream_cause.py",
+          "byte_sha256": "03a704077d8c065478eca5a4a58e88daf1b739448d4a3c51ad5784f8c68a959f",
+          "git_blob_sha": "533e0ddc3127b29a7993e1b48a486ab3a1f813c4",
+          "runtime": true,
+          "reason": "RF pass-through: failure_observation projection, client/preparation error documents, cross-repo E2E"
+        },
+        {
+          "path": "scripts/source_preparation.py",
+          "byte_sha256": "e8db267971f5c967ab6cd8e358e23423afe42f7af8ce19847be7b266cc00742d",
+          "git_blob_sha": "43ec74dad96fa6eead17707622bb4aea1f5ba8bc",
+          "runtime": true,
+          "reason": "RF pass-through: failure_observation projection, client/preparation error documents, cross-repo E2E"
+        },
+        {
+          "path": "tests/test_m3_acquisition_usage_rf.py",
+          "byte_sha256": "9dee9726211f8a6e162ea58f1c6d967b492206fc022a98e48c15174827754464",
+          "git_blob_sha": "929b036189b72c714f31a9713c8a220e9a554eba",
+          "runtime": false,
+          "reason": "lane test evidence"
+        },
+        {
+          "path": "tests/test_m3_acquisition_usage_e2e.py",
+          "byte_sha256": "60b05ab61ccbb7dd4f6851bfc59fc28cb1c8ab6ab981013dc927ed068e8cc3e6",
+          "git_blob_sha": "04443caa29ee3bf856aa8f6f1997c3e8ab9a2ff3",
+          "runtime": false,
+          "reason": "lane test evidence"
+        }
+      ],
+      "git_status_explanation": "clean; only lane source/tests/.planning records changed",
+      "push": {
+        "status": "pass",
+        "evidence": [
+          "git push -u origin codex/m3-acquisition-usage-20261010 (new branch)"
+        ],
+        "note": "pushed in CWP->FF->RF order"
+      },
+      "ci": {
+        "status": "pass",
+        "evidence": [
+          "quality workflow completed success at head 741f7c01fc2e (GitHub API head_sha query)"
+        ],
+        "note": "exact-head run"
+      },
+      "remote_head": "741f7c01fc2e13d42f919aa0fc8053eb8cabfe08",
+      "ci_head": "741f7c01fc2e13d42f919aa0fc8053eb8cabfe08"
+    }
+  ],
+  "interfaces": [
+    "acquisition-observation/1 (new sibling DTO; closed 12-key shape; usage_scope=operation)",
+    "acquisition_usage/1.0 unchanged (response_bytes + cost_usd strict)",
+    "acquisition-failure/1 unchanged (7-key closed DTO)",
+    "operation DTO 1.0 additive optional acquisition_observation key (subset-tolerant consumers)",
+    "FF v2 envelope 2.0 additive top-level acquisition_observation (success/gap/error; filing shape untouched)",
+    "RF failure_observation projects the sibling (top-level first, detail fallback)"
+  ],
+  "tests": [
+    {
+      "name": "CWP integration RED at base",
+      "phase": "RED",
+      "argv": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/integration/test_m3_acquisition_usage_cwp.py",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acquisition-usage-20261010\\company-wiki",
+      "exit_code": 1,
+      "log": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acquisition-usage-20261010\\company-wiki\\.planning\\m3-acquisition-usage-20261010\\red_cwp_integration.log",
+      "log_sha256": "26e6e7222fcd999eae8670787313e9d41445b98f3e7de8b874e6e6d799d2065d",
+      "scope": "integration",
+      "result": "9 failed, all KeyError acquisition_observation (product: no observation channel at base)"
+    },
+    {
+      "name": "CWP unit+integration GREEN",
+      "phase": "GREEN",
+      "argv": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_m3_acquisition_usage_observation.py",
+        "tests/integration/test_m3_acquisition_usage_cwp.py",
+        "plus 8 responsibility suites",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acquisition-usage-20261010\\company-wiki",
+      "exit_code": 0,
+      "log": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acquisition-usage-20261010\\company-wiki\\.planning\\m3-acquisition-usage-20261010\\green_cwp_final.log",
+      "log_sha256": "5900ba56da2b6f547ddf92675e6b4f27697b986ab9d0b55bdca45af0a5697a9f",
+      "scope": "integration",
+      "result": "146 passed (20 new + 126 responsibility incl. acquisition-failure diagnostics/recovery/adapter budget/CLI e2e)"
+    },
+    {
+      "name": "FF projection RED at base",
+      "phase": "RED",
+      "argv": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_m3_acquisition_usage_ff.py",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acquisition-usage-20261010\\filing-fetch",
+      "exit_code": 1,
+      "log": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acquisition-usage-20261010\\company-wiki\\.planning\\m3-acquisition-usage-20261010\\red_ff_projection.log",
+      "log_sha256": "3b4452c2949513fd025af7f22221ae7eed63188b3dd21db068c7cd23ebac6653",
+      "scope": "contract",
+      "result": "21 failed (product: no validated sibling / envelope projection at base)"
+    },
+    {
+      "name": "FF contract GREEN",
+      "phase": "GREEN",
+      "argv": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_m3_acquisition_usage_ff.py",
+        "plus 6 responsibility suites",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acquisition-usage-20261010\\filing-fetch",
+      "exit_code": 0,
+      "log": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acquisition-usage-20261010\\company-wiki\\.planning\\m3-acquisition-usage-20261010\\green_ff_final.log",
+      "log_sha256": "0db244e9df927dbe6563c43d8ed6fd96ad12bc932a2f657d5a631fcd3873c391",
+      "scope": "contract",
+      "result": "167 passed (21 new + 146 responsibility incl. test_failure_usage_continuity)"
+    },
+    {
+      "name": "RF projection RED at base",
+      "phase": "RED",
+      "argv": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_m3_acquisition_usage_rf.py",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acquisition-usage-20261010\\revenue-forecast",
+      "exit_code": 1,
+      "log": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acquisition-usage-20261010\\company-wiki\\.planning\\m3-acquisition-usage-20261010\\red_rf_projection.log",
+      "log_sha256": "86874c88f054924973147cb45d62d1ef45ad3d5ae34ad58c186153a39d42c26b",
+      "scope": "contract",
+      "result": "15 failed / 4 passed (product: observation never projected at base)"
+    },
+    {
+      "name": "RF contract GREEN",
+      "phase": "GREEN",
+      "argv": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_m3_acquisition_usage_rf.py",
+        "plus 5 responsibility suites",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acquisition-usage-20261010\\revenue-forecast",
+      "exit_code": 0,
+      "log": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acquisition-usage-20261010\\company-wiki\\.planning\\m3-acquisition-usage-20261010\\green_rf_final.log",
+      "log_sha256": "84109b05c05ad167fc699c47e36ac03e6282c266cc5ee1d4919517c73c410da2",
+      "scope": "contract",
+      "result": "187 passed (19 new + 168 responsibility incl. test_source_failure_observations)"
+    },
+    {
+      "name": "Cross-repo public E2E",
+      "phase": "GREEN",
+      "argv": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_m3_acquisition_usage_e2e.py",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acquisition-usage-20261010\\revenue-forecast",
+      "exit_code": 0,
+      "log": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acquisition-usage-20261010\\company-wiki\\.planning\\m3-acquisition-usage-20261010\\green_e2e_final.log",
+      "log_sha256": "569079b50dbcc2b8bf697b6cb5b3529a55e3af6e0aa513de34123d68047897b0",
+      "scope": "public_cli",
+      "result": "2 passed: real subprocess RF preparation -> FF CLI -> CWP CLI -> loopback provider; us_download (3 exchanges, wire 191 < entity 4553, cost 0.0009), us_reuse (0 body GET), cn_download (second market), us_missing (RF exit 3 keeps full observation); argv/stdout/stderr/exit saved in e2e_logs/"
+    },
+    {
+      "name": "TEMP restore",
+      "phase": "RESTORE",
+      "argv": [
+        "python",
+        "-c",
+        "<restore receipt generator>"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acquisition-usage-20261010\\company-wiki",
+      "exit_code": 0,
+      "log": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acquisition-usage-20261010\\company-wiki\\.planning\\m3-acquisition-usage-20261010\\restore_receipt.json",
+      "log_sha256": "0d2e8e86b0e4e40f757553fabadc98d46581f56c7a49cfb44a25ae8255de3ef4",
+      "scope": "restore",
+      "result": "production config source_catalog.yaml byte-identical (3d159a4e...) across worktrees; all fixtures in TemporaryDirectory contexts; no extra originals; loopback servers shut down"
+    }
+  ],
+  "restore": {
+    "status": "pass",
+    "evidence": [
+      "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acquisition-usage-20261010\\company-wiki\\.planning\\m3-acquisition-usage-20261010\\restore_receipt.json",
+      "conftest production_config_integrity asserted in every suite"
+    ],
+    "note": "pytest tmp trees auto-managed; nothing left in companies/raw/config"
+  },
+  "usage": {
+    "external_provider_calls": 0,
+    "external_model_calls": 0,
+    "paid_tokens": 0,
+    "paid_micro_usd": 0,
+    "unknown_preserved": true
+  },
+  "main_integration": {
+    "status": "pending",
+    "evidence": [
+      "MAIN patch list in INTERFACE_CHANGE.md section 6",
+      "runtime SHA closure in runtime_file_closure.json"
+    ],
+    "note": "shared entry integration and real-company major node are MAIN's task; not run by this lane"
+  },
+  "remaining": [
+    "MAIN patch 1: CWP error_taxonomy.structured_error 3-line sibling publication (INTERFACE_CHANGE.md section 6.1); without it hard-failure stderr carries no observation (returned-gap/operation channels work today)",
+    "MAIN patch 2: add tests/test_m3_acquisition_usage_ff.py to FF tools/ci_tests.py CI_TESTS list",
+    "MAIN patch 3: none for source_catalog/cli.py (observation rides to_dict + facade under --source-ref-v2)",
+    "MAIN major node: shared-entry integration and real three-company SEC/ET/official capture verification (this lane did not run public providers; 0 paid calls)",
+    "Old 7 unknown model + 1 old FF unknown acquisition remain unknown; not backfilled, not netted (contract)"
+  ]
+}

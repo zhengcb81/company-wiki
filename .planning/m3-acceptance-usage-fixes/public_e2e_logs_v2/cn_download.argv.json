@@ -1,0 +1,25 @@
+{
+  "label": "cn_download",
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\scripts\\source_preparation.py",
+    "--request-file",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3uf-_0yf4v6y\\pytest\\test_full_chain_download_reuse0\\request_cn.json",
+    "--result-envelope",
+    "--allow-download",
+    "--filing-fetch-root",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\filing-fetch",
+    "--company-wiki-config",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3uf-_0yf4v6y\\pytest\\test_full_chain_download_reuse0\\cn\\wiki\\company_wiki.json",
+    "--company-wiki-catalog-config",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3uf-_0yf4v6y\\pytest\\test_full_chain_download_reuse0\\cn\\wiki\\config\\source_catalog.yaml",
+    "--timeout-seconds",
+    "120"
+  ],
+  "cwd": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\m3uf-_0yf4v6y\\pytest\\test_full_chain_download_reuse0",
+  "exit_code": 0,
+  "stdout_sha256": "21dbe8e1ac6e2703f887fe0147cc6a6dbaba424274314ad6f5e4589ed3fdc118",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

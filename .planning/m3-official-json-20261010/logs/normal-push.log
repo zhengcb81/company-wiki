@@ -1,0 +1,13 @@
+Push unit scope: unknown push range (1 paths)
+
+=== affected units and CI contract smoke ===
+====================== 2637 passed in 238.30s (0:03:58) =======================
+
+pre-push gate GREEN — safe to push (then self-monitor CI).
+remote: 
+remote: Create a pull request for 'codex/m3-official-json-20261010' on GitHub by visiting:        
+remote:      https://github.com/zhengcb81/company-wiki/pull/new/codex/m3-official-json-20261010        
+remote: 
+branch 'codex/m3-official-json-20261010' set up to track 'origin/codex/m3-official-json-20261010'.
+To https://github.com/zhengcb81/company-wiki.git
+ * [new branch]        codex/m3-official-json-20261010 -> codex/m3-official-json-20261010

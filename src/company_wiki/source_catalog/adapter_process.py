@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from contextlib import contextmanager
+from decimal import Decimal
 import json
 import os
 from pathlib import Path
@@ -40,6 +41,15 @@ class AdapterProcessError(RuntimeError):
     provider_started: bool | None = None
     http_wire_bytes: int | None = None
     http_wire_usage_complete: bool | None = None
+    # M3-USAGE: optional observed exchange count and HTTP protocol metadata.
+    http_exchanges: int | None = None
+    http_observation: dict[str, Any] | None = None
+    # CWP's own never-launched proof, not a provider fee statement.
+    synthetic_zero_receipt: bool = False
+    # Certainty of the new sibling is separate from the old 1.0 counter.
+    # Legacy positive figures are reported lower bounds; initial zero is
+    # unknown unless a producer supplies explicit fee proof.
+    acquisition_cost_observed: bool | None = None
 
     def __init__(self, message: str = "") -> None:
         super().__init__(message)
@@ -236,7 +246,8 @@ class JsonCommandAdapter:
         return response
 
     @staticmethod
-    def _charge_bounded_usage(response: dict[str, Any], budget: AcquisitionBudget) -> None:
+    def _charge_bounded_usage(response: dict[str, Any], budget: AcquisitionBudget, *,
+                              synthetic_cost: bool = False) -> None:
         raw = response.get("acquisition_usage")
         usage = validated_usage(raw)
         if usage is None:
@@ -250,10 +261,24 @@ class JsonCommandAdapter:
         wire = response.get("http_wire_bytes")
         if type(wire) is not int or wire < 0:
             wire = None  # Optional legacy observation is unknown, not a refusal.
+        exchanges = response.get("http_exchanges")
+        if type(exchanges) is not int or exchanges < 0:
+            exchanges = None  # Legacy receipts never turn the count into zero.
+        from .acquisition_observation import validated_http_observation
+        http_observation = validated_http_observation(response.get("http_observation"))
         if response.get("http_wire_usage_complete", True) is not True:
             budget.wire_usage_complete = False
+        fee_proof = response.get("acquisition_cost_observed")
+        explicit_fee = fee_proof is True
+        # A positive legacy figure retains reported evidence, but cannot prove
+        # complete operation fees. A producer's false proof remains unknown.
+        reported_fee = fee_proof is not False and Decimal(usage["cost_usd"]) > 0
         budget.record_reported_usage(response_bytes=usage["response_bytes"],
-                                     cost_usd=usage["cost_usd"], wire_bytes=wire)
+                                     cost_usd=usage["cost_usd"], wire_bytes=wire,
+                                     http_exchanges=exchanges,
+                                     http_observation=http_observation,
+                                     cost_observed=(not synthetic_cost and (explicit_fee or reported_fee)),
+                                     cost_complete=(not synthetic_cost and explicit_fee))
 
     @classmethod
     def _charge_failure_usage(cls, exc: AdapterProcessError, budget: AcquisitionBudget) -> None:
@@ -266,12 +291,21 @@ class JsonCommandAdapter:
         budget.observe_provider(started=exc.provider_started, complete=complete)
         if complete is not True:
             exc.retryable = False  # Preserve the existing unknown-charge policy.
+            # Incomplete invocation evidence degrades every observed counter
+            # to a lower bound, never a complete zero (M3-USAGE).
+            budget.wire_usage_complete = False
+            budget.http_exchanges_complete = False
         if usage is not None:
-            if complete is not True:
-                budget.wire_usage_complete = False
+            # A synthetic never-launched zero proves byte counts only; its
+            # "0" cost is not a provider fee statement, so it can neither
+            # mark the fee observed nor clear an earlier real receipt.
             cls._charge_bounded_usage({"acquisition_usage": usage,
                                        "http_wire_bytes": exc.http_wire_bytes,
-                                       "http_wire_usage_complete": exc.http_wire_usage_complete}, budget)
+                                       "http_wire_usage_complete": exc.http_wire_usage_complete,
+                                       "http_exchanges": exc.http_exchanges,
+                                       "http_observation": exc.http_observation,
+                                       "acquisition_cost_observed": exc.acquisition_cost_observed}, budget,
+                                      synthetic_cost=exc.synthetic_zero_receipt)
 
     def _run(
         self,
@@ -322,6 +356,8 @@ class JsonCommandAdapter:
                 exc.acquisition_usage = {"schema_version": "1.0", "response_bytes": 0, "cost_usd": "0"}
                 exc.http_wire_bytes = 0
                 exc.http_wire_usage_complete = True
+                exc.http_exchanges = 0
+                exc.synthetic_zero_receipt = True
             raise exc from cause
         except (TransportError, UnicodeError) as cause:
             exc = AdapterProcessError(f"adapter {self.name} {action} violated bounded process lifetime")
@@ -340,17 +376,29 @@ class JsonCommandAdapter:
                 exc.acquisition_usage = {"schema_version": "1.0", "response_bytes": 0, "cost_usd": "0"}
                 exc.http_wire_bytes = 0
                 exc.http_wire_usage_complete = True
+                exc.http_exchanges = 0
+                exc.synthetic_zero_receipt = True
             raise exc from cause
         except OSError as cause:
             exc = AdapterProcessError(
                 f"adapter {self.name} {action} process failed: cannot launch"
             )
             exc.error_code = "adapter_process_failed"
+            # A bare OSError may be cleanup after a completed execution; only a
+            # post-response verified receipt proves anything. Without one the
+            # invocation stays unknown, never a synthetic zero (pinned contract:
+            # test_no_target_execution_evidence_stays_unknown_not_zero).
             if verified_response is not None:
                 exc.provider_started = True
                 exc.acquisition_usage = validated_usage(verified_response.get("acquisition_usage"))
+                exc.acquisition_cost_observed = (verified_response.get("acquisition_cost_observed")
+                                                if type(verified_response.get("acquisition_cost_observed")) is bool else None)
                 exc.http_wire_bytes = verified_response.get("http_wire_bytes")
                 exc.http_wire_usage_complete = verified_response.get("http_wire_usage_complete", True)
+                exchanges = verified_response.get("http_exchanges")
+                exc.http_exchanges = exchanges if type(exchanges) is int and exchanges >= 0 else None
+                from .acquisition_observation import validated_http_observation
+                exc.http_observation = validated_http_observation(verified_response.get("http_observation"))
                 exc.acquisition_usage_complete = True if exc.acquisition_usage is not None else None
             raise exc from cause
 
@@ -377,8 +425,14 @@ class JsonCommandAdapter:
                     exc.retryable = retryable_raw
                     exc.reported_retryable = retryable_raw
                 final_payload = json.loads(detail.splitlines()[-1])
+                exc.acquisition_cost_observed = (final_payload.get("acquisition_cost_observed")
+                                                if type(final_payload.get("acquisition_cost_observed")) is bool else None)
                 exc.http_wire_bytes = final_payload.get("http_wire_bytes")
                 exc.http_wire_usage_complete = final_payload.get("http_wire_usage_complete", True)
+                exchanges = final_payload.get("http_exchanges")
+                exc.http_exchanges = exchanges if type(exchanges) is int and exchanges >= 0 else None
+                from .acquisition_observation import validated_http_observation
+                exc.http_observation = validated_http_observation(final_payload.get("http_observation"))
                 usage_raw = error_obj.get("acquisition_usage")
                 usage = validated_usage(usage_raw)
                 if usage is not None:
@@ -436,8 +490,15 @@ class JsonCommandAdapter:
             ):
                 continue
             exc.acquisition_usage = validated_usage(value["acquisition_usage"])
+            exc.acquisition_cost_observed = (value.get("acquisition_cost_observed")
+                                                if type(value.get("acquisition_cost_observed")) is bool else None)
             exc.http_wire_bytes = value.get("http_wire_bytes")
             exc.http_wire_usage_complete = False
+            checkpoint_exchanges = value.get("http_exchanges")
+            exc.http_exchanges = (checkpoint_exchanges if type(checkpoint_exchanges) is int
+                                  and checkpoint_exchanges >= 0 else None)
+            from .acquisition_observation import validated_http_observation
+            exc.http_observation = validated_http_observation(value.get("http_observation"))
             exc.provider_started = True
             exc.acquisition_usage_complete = False
             exc.adapter_version = self.version

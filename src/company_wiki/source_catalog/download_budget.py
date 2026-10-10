@@ -46,6 +46,16 @@ class AcquisitionBudget:
     usage_reported: bool = False
     wire_response_bytes_used: int = 0
     wire_usage_complete: bool = True
+    # M3-USAGE observation evidence over the same counters. A provider fee
+    # receipt is the only proof of an observed cost; byte measurement alone
+    # never makes the initial zero a final fee.
+    cost_reported: bool = False
+    # Observation completeness is separate from acquisition/retry policy.
+    # Once an invocation lacks fee proof, later receipts cannot erase that gap.
+    cost_usage_complete: bool = True
+    http_exchanges_used: int = 0
+    http_exchanges_complete: bool | None = True
+    last_http_observation: dict | None = None
 
     @classmethod
     def from_limits(
@@ -94,6 +104,20 @@ class AcquisitionBudget:
             raise ValueError("wire byte count must be a non-negative integer")
         if not isinstance(self.wire_usage_complete, bool):
             raise TypeError("wire_usage_complete must be bool")
+        if not isinstance(self.cost_reported, bool):
+            raise TypeError("cost_reported must be bool")
+        if not isinstance(self.cost_usage_complete, bool):
+            raise TypeError("cost_usage_complete must be bool")
+        if (isinstance(self.http_exchanges_used, bool)
+                or not isinstance(self.http_exchanges_used, int)
+                or self.http_exchanges_used < 0):
+            raise ValueError("HTTP exchange count must be a non-negative integer")
+        if self.http_exchanges_complete is not None and not isinstance(
+                self.http_exchanges_complete, bool):
+            raise TypeError("http_exchanges_complete must be bool or None")
+        if self.last_http_observation is not None and not isinstance(
+                self.last_http_observation, dict):
+            raise TypeError("last_http_observation must be a dict or None")
         if self.response_bytes_used and not self.wire_response_bytes_used:
             self.wire_usage_complete = False
         self.max_cost_usd = _decimal_amount(self.max_cost_usd, "max_cost_usd")
@@ -168,7 +192,9 @@ class AcquisitionBudget:
             raise AcquisitionBudgetExceeded("acquisition deadline exceeded")
 
     def record_reported_usage(
-        self, *, response_bytes: int, cost_usd: Decimal | str, wire_bytes: int | None = None
+        self, *, response_bytes: int, cost_usd: Decimal | str, wire_bytes: int | None = None,
+        http_exchanges: int | None = None, http_observation: dict | None = None,
+        cost_observed: bool = True, cost_complete: bool = True,
     ) -> None:
         """Record actual usage atomically, then reject an exceeded ceiling.
 
@@ -176,6 +202,9 @@ class AcquisitionBudget:
         cost cannot be undone. A failed budget may therefore retain an overage.
         Both values are validated before either counter changes, and both are
         recorded even when one exceeds its cap. Never clamp actual usage.
+        A provider fee figure arriving here is the only ``cost_reported``
+        proof; byte measurements alone never make the cost observed. Receipts
+        without an exchange count leave the count unknown, never zero.
         """
         if (
             isinstance(response_bytes, bool)
@@ -187,7 +216,18 @@ class AcquisitionBudget:
         if wire_bytes is not None and (isinstance(wire_bytes, bool)
                 or not isinstance(wire_bytes, int) or wire_bytes < 0):
             raise ValueError("wire byte count must be a non-negative integer")
+        if http_exchanges is not None and (isinstance(http_exchanges, bool)
+                or not isinstance(http_exchanges, int) or http_exchanges < 0):
+            raise ValueError("HTTP exchange count must be a non-negative integer")
+        if http_observation is not None and not isinstance(http_observation, dict):
+            raise TypeError("http_observation must be a dict or None")
+        if not isinstance(cost_observed, bool) or not isinstance(cost_complete, bool):
+            raise TypeError("cost observation flags must be bool")
         self._reported()
+        if cost_observed:
+            self.cost_reported = True
+        if not cost_observed or not cost_complete:
+            self.cost_usage_complete = False
         if response_bytes > 0 or cost > 0:
             self.observe_provider(started=True, complete=True)
         self.response_bytes_used += response_bytes
@@ -196,12 +236,35 @@ class AcquisitionBudget:
             self.wire_usage_complete = False
         else:
             self.wire_response_bytes_used += wire_bytes
+        if http_exchanges is None:
+            # Legacy receipts make the count unmeasurable, never zero-final.
+            if self.http_exchanges_complete is not False:
+                self.http_exchanges_complete = None
+        else:
+            self.http_exchanges_used += http_exchanges
+        if http_observation is not None:
+            self.last_http_observation = dict(http_observation)
         if self.response_bytes_used > self.max_response_bytes:
             raise AcquisitionBudgetExceeded("response byte budget exceeded")
         if self.wire_response_bytes_used > self.max_response_bytes:
             raise AcquisitionBudgetExceeded("wire response byte budget exceeded")
         if self.cost_usd_used > self.max_cost_usd:
             raise AcquisitionBudgetExceeded("acquisition cost budget exceeded")
+
+    def record_http_exchange(self, http_observation: dict | None = None) -> None:
+        """Count one observed HTTP request/response exchange.
+
+        Counting an exchange is not a usage receipt: it neither marks usage
+        reported nor touches completeness flags, so an in-flight response can
+        never turn initial zero counters into a final receipt.
+        """
+        # Even a HEAD/bodyless response proves the provider started. Keep
+        # counting observed responses when completeness is only a lower bound;
+        # uncertainty must not discard new observations or reset its flag.
+        self.observe_provider(started=True, complete=True)
+        self.http_exchanges_used += 1
+        if http_observation is not None:
+            self.last_http_observation = dict(http_observation)
 
     def consume_response_bytes(self, count: int) -> None:
         """Record response bytes already consumed by the provider.
@@ -222,6 +285,7 @@ class AcquisitionBudget:
         """Record reported provider cost, even if the call crossed deadline."""
         cost = _decimal_amount(amount, "cost")
         self._reported()
+        self.cost_reported = True
         if cost > 0:
             self.observe_provider(started=True, complete=True)
         self.cost_usd_used += cost

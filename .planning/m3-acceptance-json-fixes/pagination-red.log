@@ -1,0 +1,46 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 32 items / 26 deselected / 6 selected
+
+tests\integration\test_m3_official_json_acceptance.py FFFFFF             [100%]
+
+================================== FAILURES ===================================
+_ test_pagination_metadata_drift_is_partial_without_losing_originals[changed0] _
+tests\integration\test_m3_official_json_acceptance.py:225: in test_pagination_metadata_drift_is_partial_without_losing_originals
+    assert derived.coverage["pagination_complete"] is False
+E   assert True is False
+_ test_pagination_metadata_drift_is_partial_without_losing_originals[changed1] _
+tests\integration\test_m3_official_json_acceptance.py:225: in test_pagination_metadata_drift_is_partial_without_losing_originals
+    assert derived.coverage["pagination_complete"] is False
+E   assert True is False
+_ test_repeated_record_across_adjacent_pages_is_not_complete_or_double_selected _
+tests\integration\test_m3_official_json_acceptance.py:241: in test_repeated_record_across_adjacent_pages_is_not_complete_or_double_selected
+    assert derived.coverage["pagination_complete"] is False
+E   assert True is False
+_ test_conflicting_revisions_under_one_record_id_do_not_select_arbitrary_version _
+tests\integration\test_m3_official_json_acceptance.py:257: in test_conflicting_revisions_under_one_record_id_do_not_select_arbitrary_version
+    assert derived.coverage["pagination_complete"] is False
+E   assert True is False
+___ test_missing_record_id_is_observed_but_cannot_prove_full_page_coverage ____
+tests\integration\test_m3_official_json_acceptance.py:273: in test_missing_record_id_is_observed_but_cannot_prove_full_page_coverage
+    assert derived.coverage["pagination_complete"] is False
+E   assert True is False
+_____ test_consistent_complete_collection_can_arrive_in_either_page_order _____
+tests\integration\test_m3_official_json_acceptance.py:286: in test_consistent_complete_collection_can_arrive_in_either_page_order
+    assert derived.coverage["diagnostics"] == []
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'diagnostics'
+=========================== short test summary info ===========================
+FAILED tests/integration/test_m3_official_json_acceptance.py::test_pagination_metadata_drift_is_partial_without_losing_originals[changed0]
+FAILED tests/integration/test_m3_official_json_acceptance.py::test_pagination_metadata_drift_is_partial_without_losing_originals[changed1]
+FAILED tests/integration/test_m3_official_json_acceptance.py::test_repeated_record_across_adjacent_pages_is_not_complete_or_double_selected
+FAILED tests/integration/test_m3_official_json_acceptance.py::test_conflicting_revisions_under_one_record_id_do_not_select_arbitrary_version
+FAILED tests/integration/test_m3_official_json_acceptance.py::test_missing_record_id_is_observed_but_cannot_prove_full_page_coverage
+FAILED tests/integration/test_m3_official_json_acceptance.py::test_consistent_complete_collection_can_arrive_in_either_page_order
+====================== 6 failed, 26 deselected in 2.55s =======================

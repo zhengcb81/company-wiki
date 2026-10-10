@@ -1,0 +1,2 @@
+src\company_wiki\source_catalog\official_json_projection.py:640: error: Argument "layout_id" to "build_source_projection" has incompatible type "Any | None"; expected "str"  [arg-type]
+Found 1 error in 1 file (checked 2 source files)

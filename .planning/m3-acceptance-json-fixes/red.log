@@ -1,0 +1,118 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 15 items
+
+tests\integration\test_m3_official_json_acceptance.py FFFFFFFFFFFFFFF    [100%]
+
+================================== FAILURES ===================================
+____________ test_persisted_projection_is_loadable_and_idempotent _____________
+tests\integration\test_m3_official_json_acceptance.py:85: in test_persisted_projection_is_loadable_and_idempotent
+    loaded = load_projection(catalog, identity)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_json_projection.py:586: in load_projection
+    return projection_from_dict(payload)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_json_projection.py:449: in projection_from_dict
+    raise ProjectionError("invalid_projection_payload")
+E   company_wiki.source_catalog.official_json_projection.ProjectionError: invalid_projection_payload
+__________________ test_public_cli_reloads_by_projection_id ___________________
+tests\integration\test_m3_official_json_acceptance.py:108: in test_public_cli_reloads_by_projection_id
+    assert result.returncode == 0, result.stderr
+E   AssertionError: b'{"schema_version": "official-source-failure/1", "status": "failed", "error_code": "official_source_ProjectionError"}\r
+E     '
+E   assert 2 == 0
+E    +  where 2 = CompletedProcess(args=['C:\\Miniconda\\python.exe', '-X', 'utf8', '-B', '-m', 'company_wiki.source_catalog.official_so...chema_version": "official-source-failure/1", "status": "failed", "error_code": "official_source_ProjectionError"}\r\n').returncode
+_____________ test_multi_page_spans_are_bound_to_their_own_parent _____________
+tests\integration\test_m3_official_json_acceptance.py:119: in test_multi_page_spans_are_bound_to_their_own_parent
+    assert sources == {101: first["source_id"], 202: second["source_id"]}
+E   AssertionError: assert {101: 'urn:co...5cc58b5332ca'} == {101: 'urn:co...254a64dcf1c5'}
+E     
+E     Omitting 1 identical items, use -vv to show
+E     Differing items:
+E     {202: 'urn:company-wiki:source:sha256:15b5a2824ddcef54d0f67f684822c9a332e491bedfbf0d4254e15cc58b5332ca'} != {202: 'urn:company-wiki:source:sha256:27ffbfc98d9eb95127021a34138bd76cdf544d2f4721c2c68bf6254a64dcf1c5'}
+E     Use -v to get more diff
+___ test_latest_record_revision_cannot_leak_past_as_of[2026-10-09 10:00:00] ___
+tests\integration\test_m3_official_json_acceptance.py:128: in test_latest_record_revision_cannot_leak_past_as_of
+    assert not derived.records[0].selected
+E   AssertionError: assert not True
+E    +  where True = ProjectionRecord(record_pointer='/result/items/0', provider_record_id=101, record_token_sha256='e3b0c44298fc1c149afbf4..._as_of_eligible', answer_first_publication_known=False, record_created_date='2026-09-01', as_of_eligibility='eligible').selected
+_______ test_latest_record_revision_cannot_leak_past_as_of[unparseable] _______
+tests\integration\test_m3_official_json_acceptance.py:128: in test_latest_record_revision_cannot_leak_past_as_of
+    assert not derived.records[0].selected
+E   AssertionError: assert not True
+E    +  where True = ProjectionRecord(record_pointer='/result/items/0', provider_record_id=101, record_token_sha256='e3b0c44298fc1c149afbf4..._as_of_eligible', answer_first_publication_known=False, record_created_date='2026-09-01', as_of_eligibility='eligible').selected
+_____ test_precollected_answer_without_answer_availability_stays_unknown ______
+tests\integration\test_m3_official_json_acceptance.py:141: in test_precollected_answer_without_answer_availability_stays_unknown
+    assert derived.records[0].as_of_eligibility == "unknown"
+E   AssertionError: assert 'eligible' == 'unknown'
+E     
+E     - unknown
+E     + eligible
+_ test_self_hashed_derivative_claims_must_match_parent_semantics[role-replay_projection] _
+tests\integration\test_m3_official_json_acceptance.py:160: in test_self_hashed_derivative_claims_must_match_parent_semantics
+    with pytest.raises(ProjectionError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ProjectionError
+_ test_self_hashed_derivative_claims_must_match_parent_semantics[role-build_projection_export] _
+tests\integration\test_m3_official_json_acceptance.py:160: in test_self_hashed_derivative_claims_must_match_parent_semantics
+    with pytest.raises(ProjectionError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ProjectionError
+_ test_self_hashed_derivative_claims_must_match_parent_semantics[selected-replay_projection] _
+tests\integration\test_m3_official_json_acceptance.py:160: in test_self_hashed_derivative_claims_must_match_parent_semantics
+    with pytest.raises(ProjectionError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ProjectionError
+_ test_self_hashed_derivative_claims_must_match_parent_semantics[selected-build_projection_export] _
+tests\integration\test_m3_official_json_acceptance.py:160: in test_self_hashed_derivative_claims_must_match_parent_semantics
+    with pytest.raises(ProjectionError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ProjectionError
+_ test_self_hashed_derivative_claims_must_match_parent_semantics[times-replay_projection] _
+tests\integration\test_m3_official_json_acceptance.py:160: in test_self_hashed_derivative_claims_must_match_parent_semantics
+    with pytest.raises(ProjectionError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ProjectionError
+_ test_self_hashed_derivative_claims_must_match_parent_semantics[times-build_projection_export] _
+tests\integration\test_m3_official_json_acceptance.py:160: in test_self_hashed_derivative_claims_must_match_parent_semantics
+    with pytest.raises(ProjectionError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ProjectionError
+_ test_self_hashed_derivative_claims_must_match_parent_semantics[issuer-replay_projection] _
+tests\integration\test_m3_official_json_acceptance.py:160: in test_self_hashed_derivative_claims_must_match_parent_semantics
+    with pytest.raises(ProjectionError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ProjectionError
+_ test_self_hashed_derivative_claims_must_match_parent_semantics[issuer-build_projection_export] _
+tests\integration\test_m3_official_json_acceptance.py:160: in test_self_hashed_derivative_claims_must_match_parent_semantics
+    with pytest.raises(ProjectionError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ProjectionError
+__________ test_distinct_question_and_answer_issuers_are_not_merged ___________
+tests\integration\test_m3_official_json_acceptance.py:179: in test_distinct_question_and_answer_issuers_are_not_merged
+    assert not derived.records[0].selected
+E   AssertionError: assert not True
+E    +  where True = ProjectionRecord(record_pointer='/datas/0/records/0', provider_record_id=303, record_token_sha256='e3b0c44298fc1c149af..._as_of_eligible', answer_first_publication_known=False, record_created_date='2026-09-01', as_of_eligibility='eligible').selected
+=========================== short test summary info ===========================
+FAILED tests/integration/test_m3_official_json_acceptance.py::test_persisted_projection_is_loadable_and_idempotent
+FAILED tests/integration/test_m3_official_json_acceptance.py::test_public_cli_reloads_by_projection_id
+FAILED tests/integration/test_m3_official_json_acceptance.py::test_multi_page_spans_are_bound_to_their_own_parent
+FAILED tests/integration/test_m3_official_json_acceptance.py::test_latest_record_revision_cannot_leak_past_as_of[2026-10-09 10:00:00]
+FAILED tests/integration/test_m3_official_json_acceptance.py::test_latest_record_revision_cannot_leak_past_as_of[unparseable]
+FAILED tests/integration/test_m3_official_json_acceptance.py::test_precollected_answer_without_answer_availability_stays_unknown
+FAILED tests/integration/test_m3_official_json_acceptance.py::test_self_hashed_derivative_claims_must_match_parent_semantics[role-replay_projection]
+FAILED tests/integration/test_m3_official_json_acceptance.py::test_self_hashed_derivative_claims_must_match_parent_semantics[role-build_projection_export]
+FAILED tests/integration/test_m3_official_json_acceptance.py::test_self_hashed_derivative_claims_must_match_parent_semantics[selected-replay_projection]
+FAILED tests/integration/test_m3_official_json_acceptance.py::test_self_hashed_derivative_claims_must_match_parent_semantics[selected-build_projection_export]
+FAILED tests/integration/test_m3_official_json_acceptance.py::test_self_hashed_derivative_claims_must_match_parent_semantics[times-replay_projection]
+FAILED tests/integration/test_m3_official_json_acceptance.py::test_self_hashed_derivative_claims_must_match_parent_semantics[times-build_projection_export]
+FAILED tests/integration/test_m3_official_json_acceptance.py::test_self_hashed_derivative_claims_must_match_parent_semantics[issuer-replay_projection]
+FAILED tests/integration/test_m3_official_json_acceptance.py::test_self_hashed_derivative_claims_must_match_parent_semantics[issuer-build_projection_export]
+FAILED tests/integration/test_m3_official_json_acceptance.py::test_distinct_question_and_answer_issuers_are_not_merged
+============================= 15 failed in 5.11s ==============================

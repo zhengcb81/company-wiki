@@ -1,0 +1,89 @@
+{
+  "observed_at_utc": "2026-10-10T19:59:16.118760+00:00",
+  "stage": "engineering_responsibility_green_main_publication_pending",
+  "source_files": [
+    {
+      "repository": "company-wiki",
+      "path": "src/company_wiki/source_catalog/acquisition_observation.py",
+      "byte_sha256": "863cda524571ba25ba659ffcef9ad77a2a7bdd2afddfee6de7519118b06cb878"
+    },
+    {
+      "repository": "company-wiki",
+      "path": "src/company_wiki/source_catalog/adapter_process.py",
+      "byte_sha256": "4a7fa34f3f8c1c6499ba3097e600cc663e6d1f2c486361da82f0aaa96000f600"
+    },
+    {
+      "repository": "company-wiki",
+      "path": "src/company_wiki/source_catalog/download_budget.py",
+      "byte_sha256": "11e3572d75d12fb961b5468473974ba24e20527b879128469a4a694c3bafa8e1"
+    },
+    {
+      "repository": "company-wiki",
+      "path": "src/company_wiki/source_catalog/dayu_sdk_cli.py",
+      "byte_sha256": "106e1c4cb6f779fe433dc6a9d6cc4dd983590a138eae1321d1601f7a31a1a8d4"
+    },
+    {
+      "repository": "company-wiki",
+      "path": "tests/unit/test_m3_acquisition_usage_acceptance.py",
+      "byte_sha256": "fbfc137bf1addc8e64d00790cd64d32620cb5ae5e0900df38ecc51bddc06bfc1"
+    },
+    {
+      "repository": "company-wiki",
+      "path": "tests/integration/test_m3_acquisition_usage_cwp.py",
+      "byte_sha256": "984ae230092a170a8b840ed0a1e8fbb77d08ad3943abb9845c68e79d8e54ebbb"
+    },
+    {
+      "repository": "filing-fetch",
+      "path": "scripts/ff_provider_cause.py",
+      "byte_sha256": "966a63d544a7f534e661b163b1b11cdfac07c8965449fe41bf3328a59fe35280"
+    },
+    {
+      "repository": "filing-fetch",
+      "path": "tests/test_m3_acquisition_usage_acceptance.py",
+      "byte_sha256": "c1de41cafa7551fadec657988377eea0005b7d400cb220d40d69865dedb89f29"
+    },
+    {
+      "repository": "revenue-forecast",
+      "path": "scripts/filing_upstream_cause.py",
+      "byte_sha256": "ea4df706c2f2ea05c5e36a04574ea464b0ce249255ec4bf3263efcdaba836ae7"
+    },
+    {
+      "repository": "revenue-forecast",
+      "path": "tests/test_m3_acquisition_usage_acceptance.py",
+      "byte_sha256": "0cb76c40b06876cfabd7668283df233697507cdda340c15dd5a8f0caa9266c62"
+    },
+    {
+      "repository": "revenue-forecast",
+      "path": "tests/test_m3_acquisition_usage_e2e.py",
+      "byte_sha256": "c1c45d30c1d2db69ffc69b44399bf98f49cd27e19a38adf127ddfc7ce3c0515c"
+    }
+  ],
+  "source_configs": [
+    {
+      "path": "config.yaml",
+      "integration_sha256": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+      "production_sha256": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+      "match": true
+    },
+    {
+      "path": "config/source_catalog.yaml",
+      "integration_sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "production_sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "match": true
+    },
+    {
+      "path": "config/source_acquisition.yaml",
+      "integration_sha256": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585",
+      "production_sha256": "15d04667dfce8cd622d669e5af530d689311eaa41b651c653005afc30f24a585",
+      "match": true
+    }
+  ],
+  "external_calls": 0,
+  "model_calls": 0,
+  "paid_micro_usd": 0,
+  "paid_tokens": 0,
+  "originals_modified": false,
+  "external_dayu_modified": false,
+  "stockinfo_modified": false,
+  "committed": false
+}

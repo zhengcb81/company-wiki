@@ -1,0 +1,60 @@
+FF.                                                                      [100%]
+================================== FAILURES ===================================
+_ test_unhashable_outcome_is_dropped_without_masking_primary_error[outcome0] __
+
+outcome = []
+
+    @pytest.mark.parametrize("outcome", [[], {}])
+    def test_unhashable_outcome_is_dropped_without_masking_primary_error(outcome):
+>       assert validate(_observation(outcome=outcome)) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_m3_acquisition_usage_acceptance.py:26: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+value = {'schema_version': 'acquisition-observation/1', 'usage_scope': 'operation', 'outcome': [], 'provider_started': True, ...}
+
+    def validated_acquisition_observation(value: Any) -> dict[str, Any] | None:
+        """Copy the producer operation observation; any deviation drops it whole."""
+        if not isinstance(value, dict) or set(value) != _ACQUISITION_OBSERVATION_KEYS:
+            return None
+        if (value["schema_version"] != ACQUISITION_OBSERVATION_SCHEMA
+                or value["usage_scope"] != "operation"):
+            return None
+        outcome = value.get("outcome")
+>       if outcome not in _OBSERVATION_OUTCOMES:
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: unhashable type: 'list'
+
+scripts\ff_provider_cause.py:287: TypeError
+_ test_unhashable_outcome_is_dropped_without_masking_primary_error[outcome1] __
+
+outcome = {}
+
+    @pytest.mark.parametrize("outcome", [[], {}])
+    def test_unhashable_outcome_is_dropped_without_masking_primary_error(outcome):
+>       assert validate(_observation(outcome=outcome)) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_m3_acquisition_usage_acceptance.py:26: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+value = {'schema_version': 'acquisition-observation/1', 'usage_scope': 'operation', 'outcome': {}, 'provider_started': True, ...}
+
+    def validated_acquisition_observation(value: Any) -> dict[str, Any] | None:
+        """Copy the producer operation observation; any deviation drops it whole."""
+        if not isinstance(value, dict) or set(value) != _ACQUISITION_OBSERVATION_KEYS:
+            return None
+        if (value["schema_version"] != ACQUISITION_OBSERVATION_SCHEMA
+                or value["usage_scope"] != "operation"):
+            return None
+        outcome = value.get("outcome")
+>       if outcome not in _OBSERVATION_OUTCOMES:
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: unhashable type: 'dict'
+
+scripts\ff_provider_cause.py:287: TypeError
+=========================== short test summary info ===========================
+FAILED tests/test_m3_acquisition_usage_acceptance.py::test_unhashable_outcome_is_dropped_without_masking_primary_error[outcome0]
+FAILED tests/test_m3_acquisition_usage_acceptance.py::test_unhashable_outcome_is_dropped_without_masking_primary_error[outcome1]
+2 failed, 1 passed in 0.45s

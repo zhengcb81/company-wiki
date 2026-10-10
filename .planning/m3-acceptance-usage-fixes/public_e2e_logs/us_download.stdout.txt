@@ -1,0 +1,157 @@
+{
+  "schema_version": "source-preparation-result/1",
+  "source": {
+    "source_id": "urn:company-wiki:source:sha256:00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+    "source_type": "regulatory_filing",
+    "title": "Fixture Annual Report",
+    "publisher": "company-wiki",
+    "url": "https://fixture.invalid/report.txt",
+    "published_date": "2026-03-20",
+    "accessed_date": "2026-10-10",
+    "page_or_section": "1",
+    "capture": {
+      "capture_schema_version": "1.0",
+      "capture_method": "local_document",
+      "tool_name": "company-wiki-source-version-reader",
+      "tool_call_id": "urn:company-wiki:source:sha256:00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d|2026-10-10T19:49:24.960482+00:00",
+      "captured_date": "2026-10-10",
+      "snapshot_sha256": "00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+      "content_treatment": "untrusted_data_only",
+      "prompt_injection_status": "not_reviewed",
+      "host_receipt": {
+        "host_receipt_schema_version": "1.0",
+        "issuer": "company-wiki",
+        "environment": "host-runtime",
+        "tool_name": "company-wiki-source-version-reader",
+        "action": "verified_read",
+        "event_sha256": "00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+        "timestamp": "2026-10-10T19:49:24.960482+00:00",
+        "receipt_sha256": "2e40da56c138db63adcfba8fe8e5dff546247d9ae28bbd4e73c88aa5ce880be6"
+      },
+      "receipt_sha256": "1f417b830344c3a2146b5bd42b731cca26cbefd08c6812b8fd373e5480bfcdc2"
+    },
+    "company_wiki_trace": {
+      "source_ref": {
+        "byte_size": 4440,
+        "content_sha256": "00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+        "document_id": "urn:company-wiki:document:sha256:00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+        "mime_type": "text/plain",
+        "schema_version": "2.0",
+        "source_id": "urn:company-wiki:source:sha256:00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d"
+      },
+      "read_receipt": {
+        "byte_size": 4440,
+        "content_sha256": "00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+        "document_id": "urn:company-wiki:document:sha256:00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+        "policy_sha256": "bc4ef7ce68d2cde7b295870ead8c1eb17d9882059248755009251300f05bd131",
+        "read_at": "2026-10-10T19:49:24.960482+00:00",
+        "review": {
+          "evidence_sha256": null,
+          "policy_hash": null,
+          "reviewed_at": null,
+          "source_sha256": null,
+          "status": "not_reviewed"
+        },
+        "schema_version": "2.1",
+        "source_id": "urn:company-wiki:source:sha256:00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+        "source_read_policy_sha256": "bd85d02f6ed9d44967077c7a8aa0eab5f318ca4562c70ee96dba0c8b0ab54df4",
+        "status": "ok"
+      },
+      "source_manifest": {
+        "byte_size": 4440,
+        "canonical_entity_id": null,
+        "collector_name": null,
+        "collector_version": null,
+        "content_sha256": "00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+        "display_name": null,
+        "document_id": "urn:company-wiki:document:sha256:00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+        "document_kind": "annual_report",
+        "fiscal_period": "FY",
+        "fiscal_year": 2025,
+        "form_type": "10-K",
+        "language": "en",
+        "market": "US",
+        "mime_type": "text/plain",
+        "period_end": null,
+        "provider": "loopback",
+        "provider_document_id": "accession-one",
+        "published_date": "2026-03-20",
+        "retrieved_at": "2026-10-10T00:00:00Z",
+        "security_id": "AAPL",
+        "source_id": "urn:company-wiki:source:sha256:00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+        "source_url": "https://fixture.invalid/report.txt",
+        "title": "Fixture Annual Report"
+      },
+      "source_candidate": {
+        "resolution_outcome": "downloaded_new",
+        "download_events": 1
+      }
+    },
+    "reuse_receipt": {
+      "parser_calls": null,
+      "llm_calls": null,
+      "download_calls": 1,
+      "outcome": "downloaded_new",
+      "policy_hash": "bc4ef7ce68d2cde7b295870ead8c1eb17d9882059248755009251300f05bd131",
+      "source_read_policy_sha256": "bd85d02f6ed9d44967077c7a8aa0eab5f318ca4562c70ee96dba0c8b0ab54df4",
+      "prompt_injection_status": "not_reviewed",
+      "artifact_read": [],
+      "producer_events": [],
+      "artifact_read_events": [],
+      "artifact_failed_events": []
+    }
+  },
+  "filing_fetch": {
+    "schema_version": "2.0",
+    "status": "source_candidate",
+    "request_period": {
+      "mode": "exact",
+      "fiscal_year": 2025,
+      "fiscal_period": null,
+      "as_of_date": "2026-10-10"
+    },
+    "filing": {
+      "status": "source_candidate",
+      "source_ref": {
+        "byte_size": 4440,
+        "content_sha256": "00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+        "document_id": "urn:company-wiki:document:sha256:00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d",
+        "mime_type": "text/plain",
+        "schema_version": "2.0",
+        "source_id": "urn:company-wiki:source:sha256:00d23755dabb6e6b2861f221da9695414db0bf1ee762aea4e2eea023c468bd9d"
+      },
+      "byte_verification": "pending_verified_open",
+      "document_kind": "annual_report",
+      "fiscal_year": 2025,
+      "fiscal_period": "FY",
+      "resolution_outcome": "downloaded_new",
+      "download_events": 1
+    },
+    "transcript": {
+      "status": "not_requested",
+      "retryable": false
+    },
+    "calls": 2,
+    "downloads": 1,
+    "acquisition_observation": {
+      "schema_version": "acquisition-observation/1",
+      "usage_scope": "operation",
+      "outcome": "downloaded_new",
+      "provider_started": true,
+      "usage_complete": true,
+      "wire_usage_complete": true,
+      "http_exchanges_complete": true,
+      "wire_body_bytes": 191,
+      "entity_body_bytes": 4553,
+      "http_exchanges": 3,
+      "cost_usd": "0.0009",
+      "http_observation": {
+        "status_code": 200,
+        "mime_type": "text/plain",
+        "content_encoding": "gzip",
+        "wire_content_length": 78
+      }
+    }
+  },
+  "narrative": null
+}
