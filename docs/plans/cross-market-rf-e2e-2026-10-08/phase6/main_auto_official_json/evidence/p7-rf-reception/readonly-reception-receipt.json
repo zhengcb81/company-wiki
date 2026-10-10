@@ -1,0 +1,1759 @@
+{
+  "schema_version": "p7-rf-readonly-reception/1",
+  "head": "183c9534b90549c094fc32a51ff6ada1e9cb5227",
+  "base": "6883bf00548abb9891eab6762aeaa89e3898b202",
+  "status_before": "",
+  "provider_calls": 0,
+  "model_calls": 0,
+  "new_cost_usd": 0,
+  "runs": [
+    {
+      "name": "concentrated-responsibility",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-p",
+        "pytest_timeout",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\pytest",
+        "--timeout=60",
+        "-q",
+        "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\tests\\test_scoped_calibration_support.py",
+        "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\tests\\test_research_support_diagnostics.py",
+        "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\tests\\test_research_evidence_roles.py"
+      ],
+      "exit_code": 0,
+      "seconds": 15.027983700001641,
+      "stdout": ".........................                                                [100%]\n25 passed in 9.23s\n",
+      "stderr": "",
+      "registry": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\registry\\publications.jsonl"
+    },
+    {
+      "name": "positive-assemble",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\tools\\build_auditable_case.py",
+        "--company",
+        "independent synthetic",
+        "--input",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\positive\\input.json",
+        "--research",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\positive\\research.json",
+        "--preparation",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\positive\\preparation.json",
+        "--discovery",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\positive\\discovery.json",
+        "--as-of",
+        "2026-07-12",
+        "--output-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\positive\\assembled"
+      ],
+      "exit_code": 0,
+      "seconds": 0.35694600000351784,
+      "stdout": "{\"status\": \"assembled\", \"input_sha256\": \"32458c4f141e67e4542c9ea5c48ecee7e4cb8430bcea5299406c7ab74f97ab0d\", \"narrative_status\": \"not_consumed\", \"economic_review\": \"not_inferred\"}\n",
+      "stderr": "",
+      "registry": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\registry\\publications.jsonl"
+    },
+    {
+      "name": "positive-native",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\tools\\run_target_measurement_e2e.py",
+        "--input",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\positive\\assembled\\linked-input.json",
+        "--output-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\positive\\native"
+      ],
+      "exit_code": 0,
+      "seconds": 1.5263759999979811,
+      "stdout": "{\"status\": \"completed\", \"commands\": 3}\n",
+      "stderr": "",
+      "registry": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\registry\\publications.jsonl"
+    },
+    {
+      "name": "positive-diagnostic",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\scripts\\research_support_diagnostics.py",
+        "--input",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\positive\\assembled\\linked-input.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4809544999989157,
+      "stdout": "{\n \"schema_version\": \"economic-support-diagnostics/1\",\n \"input_sha256\": \"d002858846b5a045231d730d46d6016586b37eae6c92a2bd487073f30b80a9b6\",\n \"requested_years\": [\n  \"2026\",\n  \"2027\"\n ],\n \"company\": \"Test Co\",\n \"segments\": [\n  {\n   \"segment\": \"Segment A\",\n   \"entries\": [\n    {\n     \"scenario\": \"low\",\n     \"year\": \"2026\",\n     \"status\": \"supported\",\n     \"reasons\": [],\n     \"supported_parameter_ids\": [\n      \"0_low_2026\"\n     ],\n     \"unsupported_parameter_ids\": [],\n     \"calibration_ids\": [\n      \"reference_bridge\"\n     ],\n     \"claim_ids\": [\n      \"claim_parameter_reference_lower\",\n      \"claim_parameter_reference_upper\"\n     ]\n    },\n    {\n     \"scenario\": \"low\",\n     \"year\": \"2027\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:0_low_2027\",\n      \"calibration_scope_not_covering:reference_bridge:Segment A\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"0_low_2027\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    },\n    {\n     \"scenario\": \"base\",\n     \"year\": \"2026\",\n     \"status\": \"supported\",\n     \"reasons\": [],\n     \"supported_parameter_ids\": [\n      \"0_base_2026\"\n     ],\n     \"unsupported_parameter_ids\": [],\n     \"calibration_ids\": [\n      \"reference_bridge\"\n     ],\n     \"claim_ids\": [\n      \"claim_parameter_reference_lower\",\n      \"claim_parameter_reference_upper\"\n     ]\n    },\n    {\n     \"scenario\": \"base\",\n     \"year\": \"2027\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:0_base_2027\",\n      \"calibration_scope_not_covering:reference_bridge:Segment A\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"0_base_2027\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    },\n    {\n     \"scenario\": \"high\",\n     \"year\": \"2026\",\n     \"status\": \"supported\",\n     \"reasons\": [],\n     \"supported_parameter_ids\": [\n      \"0_high_2026\"\n     ],\n     \"unsupported_parameter_ids\": [],\n     \"calibration_ids\": [\n      \"reference_bridge\"\n     ],\n     \"claim_ids\": [\n      \"claim_parameter_reference_lower\",\n      \"claim_parameter_reference_upper\"\n     ]\n    },\n    {\n     \"scenario\": \"high\",\n     \"year\": \"2027\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:0_high_2027\",\n      \"calibration_scope_not_covering:reference_bridge:Segment A\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"0_high_2027\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    }\n   ]\n  },\n  {\n   \"segment\": \"Segment B\",\n   \"entries\": [\n    {\n     \"scenario\": \"low\",\n     \"year\": \"2026\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:1_low_2026\",\n      \"calibration_scope_not_covering:reference_bridge:Segment B\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"1_low_2026\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    },\n    {\n     \"scenario\": \"low\",\n     \"year\": \"2027\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:1_low_2027\",\n      \"calibration_scope_not_covering:reference_bridge:Segment B\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"1_low_2027\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    },\n    {\n     \"scenario\": \"base\",\n     \"year\": \"2026\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:1_base_2026\",\n      \"calibration_scope_not_covering:reference_bridge:Segment B\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"1_base_2026\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    },\n    {\n     \"scenario\": \"base\",\n     \"year\": \"2027\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:1_base_2027\",\n      \"calibration_scope_not_covering:reference_bridge:Segment B\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"1_base_2027\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    },\n    {\n     \"scenario\": \"high\",\n     \"year\": \"2026\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:1_high_2026\",\n      \"calibration_scope_not_covering:reference_bridge:Segment B\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"1_high_2026\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    },\n    {\n     \"scenario\": \"high\",\n     \"year\": \"2027\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:1_high_2027\",\n      \"calibration_scope_not_covering:reference_bridge:Segment B\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"1_high_2027\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    }\n   ]\n  }\n ],\n \"economic_truth_inferred\": false\n}\n",
+      "stderr": "",
+      "registry": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\registry\\publications.jsonl"
+    },
+    {
+      "name": "observation-period-negative-assemble",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\tools\\build_auditable_case.py",
+        "--company",
+        "independent synthetic",
+        "--input",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\observation-period-negative\\input.json",
+        "--research",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\observation-period-negative\\research.json",
+        "--preparation",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\observation-period-negative\\preparation.json",
+        "--discovery",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\observation-period-negative\\discovery.json",
+        "--as-of",
+        "2026-07-12",
+        "--output-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\observation-period-negative\\assembled"
+      ],
+      "exit_code": 0,
+      "seconds": 0.267616299999645,
+      "stdout": "{\"status\": \"assembled\", \"input_sha256\": \"fd4625567909d455f32e9a7678febde6bccc5b68277cec7796a03f133c433240\", \"narrative_status\": \"not_consumed\", \"economic_review\": \"not_inferred\"}\n",
+      "stderr": "",
+      "registry": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\registry\\publications.jsonl"
+    },
+    {
+      "name": "observation-period-negative-native",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\tools\\run_target_measurement_e2e.py",
+        "--input",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\observation-period-negative\\assembled\\linked-input.json",
+        "--output-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\observation-period-negative\\native"
+      ],
+      "exit_code": 0,
+      "seconds": 1.0757371999970928,
+      "stdout": "{\"status\": \"completed\", \"commands\": 3}\n",
+      "stderr": "",
+      "registry": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\registry\\publications.jsonl"
+    },
+    {
+      "name": "observation-period-negative-diagnostic",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\scripts\\research_support_diagnostics.py",
+        "--input",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\observation-period-negative\\assembled\\linked-input.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.2215442000015173,
+      "stdout": "{\n \"schema_version\": \"economic-support-diagnostics/1\",\n \"input_sha256\": \"22ab31d7dc1260afee47151559e15b0fce75a99c91edd97f3613fc0ee4758d04\",\n \"requested_years\": [\n  \"2026\",\n  \"2027\"\n ],\n \"company\": \"Test Co\",\n \"segments\": [\n  {\n   \"segment\": \"Segment A\",\n   \"entries\": [\n    {\n     \"scenario\": \"low\",\n     \"year\": \"2026\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:0_low_2026\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_base:claim_parameter_conversion_base\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_high:claim_parameter_conversion_high\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_low:claim_parameter_conversion_low\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"0_low_2026\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    },\n    {\n     \"scenario\": \"low\",\n     \"year\": \"2027\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:0_low_2027\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_base:claim_parameter_conversion_base\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_high:claim_parameter_conversion_high\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_low:claim_parameter_conversion_low\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"0_low_2027\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    },\n    {\n     \"scenario\": \"base\",\n     \"year\": \"2026\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:0_base_2026\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_base:claim_parameter_conversion_base\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_high:claim_parameter_conversion_high\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_low:claim_parameter_conversion_low\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"0_base_2026\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    },\n    {\n     \"scenario\": \"base\",\n     \"year\": \"2027\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:0_base_2027\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_base:claim_parameter_conversion_base\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_high:claim_parameter_conversion_high\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_low:claim_parameter_conversion_low\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"0_base_2027\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    },\n    {\n     \"scenario\": \"high\",\n     \"year\": \"2026\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:0_high_2026\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_base:claim_parameter_conversion_base\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_high:claim_parameter_conversion_high\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_low:claim_parameter_conversion_low\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"0_high_2026\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    },\n    {\n     \"scenario\": \"high\",\n     \"year\": \"2027\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:0_high_2027\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_base:claim_parameter_conversion_base\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_high:claim_parameter_conversion_high\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_low:claim_parameter_conversion_low\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"0_high_2027\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    }\n   ]\n  },\n  {\n   \"segment\": \"Segment B\",\n   \"entries\": [\n    {\n     \"scenario\": \"low\",\n     \"year\": \"2026\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:1_low_2026\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_base:claim_parameter_conversion_base\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_high:claim_parameter_conversion_high\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_low:claim_parameter_conversion_low\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"1_low_2026\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    },\n    {\n     \"scenario\": \"low\",\n     \"year\": \"2027\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:1_low_2027\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_base:claim_parameter_conversion_base\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_high:claim_parameter_conversion_high\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_low:claim_parameter_conversion_low\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"1_low_2027\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    },\n    {\n     \"scenario\": \"base\",\n     \"year\": \"2026\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:1_base_2026\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_base:claim_parameter_conversion_base\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_high:claim_parameter_conversion_high\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_low:claim_parameter_conversion_low\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"1_base_2026\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    },\n    {\n     \"scenario\": \"base\",\n     \"year\": \"2027\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:1_base_2027\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_base:claim_parameter_conversion_base\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_high:claim_parameter_conversion_high\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_low:claim_parameter_conversion_low\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"1_base_2027\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    },\n    {\n     \"scenario\": \"high\",\n     \"year\": \"2026\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:1_high_2026\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_base:claim_parameter_conversion_base\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_high:claim_parameter_conversion_high\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_low:claim_parameter_conversion_low\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"1_high_2026\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    },\n    {\n     \"scenario\": \"high\",\n     \"year\": \"2027\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:1_high_2027\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_base:claim_parameter_conversion_base\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_high:claim_parameter_conversion_high\",\n      \"calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_low:claim_parameter_conversion_low\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"1_high_2027\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    }\n   ]\n  }\n ],\n \"economic_truth_inferred\": false\n}\n",
+      "stderr": "",
+      "registry": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\registry\\publications.jsonl"
+    },
+    {
+      "name": "synchronized-future-conversion-period-assemble",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\tools\\build_auditable_case.py",
+        "--company",
+        "independent synthetic",
+        "--input",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\synchronized-future-conversion-period\\input.json",
+        "--research",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\synchronized-future-conversion-period\\research.json",
+        "--preparation",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\synchronized-future-conversion-period\\preparation.json",
+        "--discovery",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\synchronized-future-conversion-period\\discovery.json",
+        "--as-of",
+        "2026-07-12",
+        "--output-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\synchronized-future-conversion-period\\assembled"
+      ],
+      "exit_code": 0,
+      "seconds": 0.4573640999988129,
+      "stdout": "{\"status\": \"assembled\", \"input_sha256\": \"9a156c1da195b17f0c1796965c4891336e4145e9f0ab20207569198af2ea9d88\", \"narrative_status\": \"not_consumed\", \"economic_review\": \"not_inferred\"}\n",
+      "stderr": "",
+      "registry": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\registry\\publications.jsonl"
+    },
+    {
+      "name": "synchronized-future-conversion-period-native",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\tools\\run_target_measurement_e2e.py",
+        "--input",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\synchronized-future-conversion-period\\assembled\\linked-input.json",
+        "--output-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\synchronized-future-conversion-period\\native"
+      ],
+      "exit_code": 0,
+      "seconds": 1.0449050000024727,
+      "stdout": "{\"status\": \"completed\", \"commands\": 3}\n",
+      "stderr": "",
+      "registry": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\registry\\publications.jsonl"
+    },
+    {
+      "name": "synchronized-future-conversion-period-diagnostic",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\scripts\\research_support_diagnostics.py",
+        "--input",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\synchronized-future-conversion-period\\assembled\\linked-input.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.22461630000179866,
+      "stdout": "{\n \"schema_version\": \"economic-support-diagnostics/1\",\n \"input_sha256\": \"8a56407edc787a26927853dfd3ba934a98f91abe928999ff4d659bd9a5de7b79\",\n \"requested_years\": [\n  \"2026\",\n  \"2027\"\n ],\n \"company\": \"Test Co\",\n \"segments\": [\n  {\n   \"segment\": \"Segment A\",\n   \"entries\": [\n    {\n     \"scenario\": \"low\",\n     \"year\": \"2026\",\n     \"status\": \"supported\",\n     \"reasons\": [],\n     \"supported_parameter_ids\": [\n      \"0_low_2026\"\n     ],\n     \"unsupported_parameter_ids\": [],\n     \"calibration_ids\": [\n      \"reference_bridge\"\n     ],\n     \"claim_ids\": [\n      \"claim_parameter_reference_lower\",\n      \"claim_parameter_reference_upper\"\n     ]\n    },\n    {\n     \"scenario\": \"low\",\n     \"year\": \"2027\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:0_low_2027\",\n      \"calibration_scope_not_covering:reference_bridge:Segment A\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"0_low_2027\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    },\n    {\n     \"scenario\": \"base\",\n     \"year\": \"2026\",\n     \"status\": \"supported\",\n     \"reasons\": [],\n     \"supported_parameter_ids\": [\n      \"0_base_2026\"\n     ],\n     \"unsupported_parameter_ids\": [],\n     \"calibration_ids\": [\n      \"reference_bridge\"\n     ],\n     \"claim_ids\": [\n      \"claim_parameter_reference_lower\",\n      \"claim_parameter_reference_upper\"\n     ]\n    },\n    {\n     \"scenario\": \"base\",\n     \"year\": \"2027\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:0_base_2027\",\n      \"calibration_scope_not_covering:reference_bridge:Segment A\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"0_base_2027\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    },\n    {\n     \"scenario\": \"high\",\n     \"year\": \"2026\",\n     \"status\": \"supported\",\n     \"reasons\": [],\n     \"supported_parameter_ids\": [\n      \"0_high_2026\"\n     ],\n     \"unsupported_parameter_ids\": [],\n     \"calibration_ids\": [\n      \"reference_bridge\"\n     ],\n     \"claim_ids\": [\n      \"claim_parameter_reference_lower\",\n      \"claim_parameter_reference_upper\"\n     ]\n    },\n    {\n     \"scenario\": \"high\",\n     \"year\": \"2027\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:0_high_2027\",\n      \"calibration_scope_not_covering:reference_bridge:Segment A\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"0_high_2027\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    }\n   ]\n  },\n  {\n   \"segment\": \"Segment B\",\n   \"entries\": [\n    {\n     \"scenario\": \"low\",\n     \"year\": \"2026\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:1_low_2026\",\n      \"calibration_scope_not_covering:reference_bridge:Segment B\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"1_low_2026\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    },\n    {\n     \"scenario\": \"low\",\n     \"year\": \"2027\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:1_low_2027\",\n      \"calibration_scope_not_covering:reference_bridge:Segment B\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"1_low_2027\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    },\n    {\n     \"scenario\": \"base\",\n     \"year\": \"2026\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:1_base_2026\",\n      \"calibration_scope_not_covering:reference_bridge:Segment B\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"1_base_2026\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    },\n    {\n     \"scenario\": \"base\",\n     \"year\": \"2027\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:1_base_2027\",\n      \"calibration_scope_not_covering:reference_bridge:Segment B\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"1_base_2027\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    },\n    {\n     \"scenario\": \"high\",\n     \"year\": \"2026\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:1_high_2026\",\n      \"calibration_scope_not_covering:reference_bridge:Segment B\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"1_high_2026\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    },\n    {\n     \"scenario\": \"high\",\n     \"year\": \"2027\",\n     \"status\": \"unsupported\",\n     \"reasons\": [\n      \"parameter_without_referenced_range_calibration:1_high_2027\",\n      \"calibration_scope_not_covering:reference_bridge:Segment B\"\n     ],\n     \"supported_parameter_ids\": [],\n     \"unsupported_parameter_ids\": [\n      \"1_high_2027\"\n     ],\n     \"calibration_ids\": [],\n     \"claim_ids\": []\n    }\n   ]\n  }\n ],\n \"economic_truth_inferred\": false\n}\n",
+      "stderr": "",
+      "registry": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\registry\\publications.jsonl"
+    },
+    {
+      "name": "scenario-output-crossborrow",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\scripts\\research_support_diagnostics.py",
+        "--input",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\scenario-output-crossborrow.json"
+      ],
+      "exit_code": 2,
+      "seconds": 0.22234620000017458,
+      "stdout": "",
+      "stderr": "input rejected: calibration output scenario mismatch\n",
+      "registry": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\registry\\publications.jsonl"
+    },
+    {
+      "name": "stale-claim-excerpt-sha",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\scripts\\research_support_diagnostics.py",
+        "--input",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\stale-claim-excerpt-sha.json"
+      ],
+      "exit_code": 2,
+      "seconds": 0.2157093999994686,
+      "stdout": "",
+      "stderr": "input rejected: claim excerpt hash mismatch: claim_parameter_reported_total\n",
+      "registry": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\registry\\publications.jsonl"
+    }
+  ],
+  "cases": [
+    {
+      "name": "positive",
+      "assembly_supplier_calls": 0,
+      "assembly_model_calls": 0,
+      "calibration_status": "referenced_range",
+      "calibration_reasons": [],
+      "engine_version": "4.2.1",
+      "confidence_calculation_version": "stable-fsum/1",
+      "confidence_score": 49.0,
+      "consolidated_forecast": {
+        "low": {
+          "segment_bridge": [
+            {
+              "name": "Segment A",
+              "annual_revenue": {
+                "2026": 100.0,
+                "2027": 100.0
+              }
+            },
+            {
+              "name": "Segment B",
+              "annual_revenue": {
+                "2026": 50.0,
+                "2027": 50.0
+              }
+            }
+          ],
+          "adjustment_bridge": [],
+          "segment_subtotal": {
+            "2026": 150.0,
+            "2027": 150.0
+          },
+          "adjustment_total": {
+            "2026": 0.0,
+            "2027": 0.0
+          },
+          "annual_revenue": {
+            "2026": 150.0,
+            "2027": 150.0
+          },
+          "annual_growth": {
+            "2026": 0.0,
+            "2027": 0.0
+          },
+          "terminal_revenue": 150.0,
+          "cagr": 0.0,
+          "incremental_revenue": 0.0,
+          "incremental_contribution": {
+            "segments": [
+              {
+                "name": "Segment A",
+                "terminal_incremental_revenue": 0.0
+              },
+              {
+                "name": "Segment B",
+                "terminal_incremental_revenue": 0.0
+              }
+            ],
+            "adjustments": 0.0,
+            "total": 0.0
+          }
+        },
+        "base": {
+          "segment_bridge": [
+            {
+              "name": "Segment A",
+              "annual_revenue": {
+                "2026": 110.00000000000001,
+                "2027": 121.00000000000001
+              }
+            },
+            {
+              "name": "Segment B",
+              "annual_revenue": {
+                "2026": 55.00000000000001,
+                "2027": 60.50000000000001
+              }
+            }
+          ],
+          "adjustment_bridge": [],
+          "segment_subtotal": {
+            "2026": 165.00000000000003,
+            "2027": 181.50000000000003
+          },
+          "adjustment_total": {
+            "2026": 0.0,
+            "2027": 0.0
+          },
+          "annual_revenue": {
+            "2026": 165.00000000000003,
+            "2027": 181.50000000000003
+          },
+          "annual_growth": {
+            "2026": 0.10000000000000009,
+            "2027": 0.10000000000000009
+          },
+          "terminal_revenue": 181.50000000000003,
+          "cagr": 0.10000000000000009,
+          "incremental_revenue": 31.50000000000003,
+          "incremental_contribution": {
+            "segments": [
+              {
+                "name": "Segment A",
+                "terminal_incremental_revenue": 21.000000000000014
+              },
+              {
+                "name": "Segment B",
+                "terminal_incremental_revenue": 10.500000000000007
+              }
+            ],
+            "adjustments": 0.0,
+            "total": 31.50000000000002
+          }
+        },
+        "high": {
+          "segment_bridge": [
+            {
+              "name": "Segment A",
+              "annual_revenue": {
+                "2026": 120.0,
+                "2027": 144.0
+              }
+            },
+            {
+              "name": "Segment B",
+              "annual_revenue": {
+                "2026": 60.0,
+                "2027": 72.0
+              }
+            }
+          ],
+          "adjustment_bridge": [],
+          "segment_subtotal": {
+            "2026": 180.0,
+            "2027": 216.0
+          },
+          "adjustment_total": {
+            "2026": 0.0,
+            "2027": 0.0
+          },
+          "annual_revenue": {
+            "2026": 180.0,
+            "2027": 216.0
+          },
+          "annual_growth": {
+            "2026": 0.19999999999999996,
+            "2027": 0.19999999999999996
+          },
+          "terminal_revenue": 216.0,
+          "cagr": 0.19999999999999996,
+          "incremental_revenue": 66.0,
+          "incremental_contribution": {
+            "segments": [
+              {
+                "name": "Segment A",
+                "terminal_incremental_revenue": 44.0
+              },
+              {
+                "name": "Segment B",
+                "terminal_incremental_revenue": 22.0
+              }
+            ],
+            "adjustments": 0.0,
+            "total": 66.0
+          }
+        }
+      },
+      "magnitude_ids": [
+        "0_base_2026",
+        "0_high_2026",
+        "0_low_2026"
+      ],
+      "source_ref": {
+        "byte_size": 62,
+        "content_sha256": "d9b0df81476e5c29dedd8acc8438f0dcfd8f45585a4f246e1cbc243ed4dd4de3",
+        "document_id": "urn:company-wiki:document:sha256:d9b0df81476e5c29dedd8acc8438f0dcfd8f45585a4f246e1cbc243ed4dd4de3",
+        "mime_type": "text/plain",
+        "schema_version": "2.0",
+        "source_id": "urn:company-wiki:source:sha256:d9b0df81476e5c29dedd8acc8438f0dcfd8f45585a4f246e1cbc243ed4dd4de3"
+      },
+      "diagnostic": {
+        "schema_version": "economic-support-diagnostics/1",
+        "input_sha256": "d002858846b5a045231d730d46d6016586b37eae6c92a2bd487073f30b80a9b6",
+        "requested_years": [
+          "2026",
+          "2027"
+        ],
+        "company": "Test Co",
+        "segments": [
+          {
+            "segment": "Segment A",
+            "entries": [
+              {
+                "scenario": "low",
+                "year": "2026",
+                "status": "supported",
+                "reasons": [],
+                "supported_parameter_ids": [
+                  "0_low_2026"
+                ],
+                "unsupported_parameter_ids": [],
+                "calibration_ids": [
+                  "reference_bridge"
+                ],
+                "claim_ids": [
+                  "claim_parameter_reference_lower",
+                  "claim_parameter_reference_upper"
+                ]
+              },
+              {
+                "scenario": "low",
+                "year": "2027",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:0_low_2027",
+                  "calibration_scope_not_covering:reference_bridge:Segment A"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "0_low_2027"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              },
+              {
+                "scenario": "base",
+                "year": "2026",
+                "status": "supported",
+                "reasons": [],
+                "supported_parameter_ids": [
+                  "0_base_2026"
+                ],
+                "unsupported_parameter_ids": [],
+                "calibration_ids": [
+                  "reference_bridge"
+                ],
+                "claim_ids": [
+                  "claim_parameter_reference_lower",
+                  "claim_parameter_reference_upper"
+                ]
+              },
+              {
+                "scenario": "base",
+                "year": "2027",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:0_base_2027",
+                  "calibration_scope_not_covering:reference_bridge:Segment A"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "0_base_2027"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              },
+              {
+                "scenario": "high",
+                "year": "2026",
+                "status": "supported",
+                "reasons": [],
+                "supported_parameter_ids": [
+                  "0_high_2026"
+                ],
+                "unsupported_parameter_ids": [],
+                "calibration_ids": [
+                  "reference_bridge"
+                ],
+                "claim_ids": [
+                  "claim_parameter_reference_lower",
+                  "claim_parameter_reference_upper"
+                ]
+              },
+              {
+                "scenario": "high",
+                "year": "2027",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:0_high_2027",
+                  "calibration_scope_not_covering:reference_bridge:Segment A"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "0_high_2027"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              }
+            ]
+          },
+          {
+            "segment": "Segment B",
+            "entries": [
+              {
+                "scenario": "low",
+                "year": "2026",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:1_low_2026",
+                  "calibration_scope_not_covering:reference_bridge:Segment B"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "1_low_2026"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              },
+              {
+                "scenario": "low",
+                "year": "2027",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:1_low_2027",
+                  "calibration_scope_not_covering:reference_bridge:Segment B"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "1_low_2027"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              },
+              {
+                "scenario": "base",
+                "year": "2026",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:1_base_2026",
+                  "calibration_scope_not_covering:reference_bridge:Segment B"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "1_base_2026"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              },
+              {
+                "scenario": "base",
+                "year": "2027",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:1_base_2027",
+                  "calibration_scope_not_covering:reference_bridge:Segment B"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "1_base_2027"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              },
+              {
+                "scenario": "high",
+                "year": "2026",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:1_high_2026",
+                  "calibration_scope_not_covering:reference_bridge:Segment B"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "1_high_2026"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              },
+              {
+                "scenario": "high",
+                "year": "2027",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:1_high_2027",
+                  "calibration_scope_not_covering:reference_bridge:Segment B"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "1_high_2027"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              }
+            ]
+          }
+        ],
+        "economic_truth_inferred": false
+      },
+      "sha256": {
+        "discovery.json": "9c5baf1b070d1b8ddce60e072e86ba4ac3e22d14340a15a9f42d656d9eadf34e",
+        "input.json": "89c9577297aa93ab9edac269a27c7b90ccb81fefb250e379b57bafd0d9c4f33a",
+        "preparation.json": "c97af2e312a551b93f88a03d08418b48dc391fb04f34124d0da392a4837ddd02",
+        "research.json": "87380c31e5adc1e7cba9fd9eeff032a6a498c3019e9117fca0610c569441d1fb",
+        "assembled\\assembly.json": "56010e2c73c5349a4bbb29d9dcc459aadbee4d1b6e1189394251d2ec85433bfc",
+        "assembled\\calibration.json": "f8318fee5a5859024ee350a9ecc57ee955124921cbcf444f73090def1d07c65a",
+        "assembled\\inventory.json": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+        "assembled\\linked-input.json": "d002858846b5a045231d730d46d6016586b37eae6c92a2bd487073f30b80a9b6",
+        "assembled\\research-adequacy.json": "52249c181509c2909772c9f3957f30869b94aced5b7552937327884ea34530be",
+        "native\\commands.json": "eaaaa95e32f7e12926f4891e1d758c2a58d226db8589093027ec43e4f75a9536",
+        "native\\forecast.json": "c9bd1963be70e53249a6c7aa8c3e80c60d051af9fc3f6f1aa56c3a718396d405",
+        "native\\forecast.md": "836162a3afd8f6d3a001d450cfd226eee2390d68cfa51adb7868df6b5d2d6011",
+        "native\\publications.jsonl": "a9c9127fedf506392fe681ae6a41cc27e7e945aed201349a52df1976bff70fe5",
+        "native\\snapshot.json": "bcc7b07a26db4b58eb5121aab178ad5e42e2ab142fd10f52b73035124e2f7160"
+      },
+      "registry_inside_owned": true,
+      "real_snapshot": true,
+      "report_matches_diagnostic": true,
+      "native_events": {
+        "schema_version": "native-target-measurement-run/1",
+        "created_at": "2026-10-10T23:10:32.848191+00:00",
+        "events": [
+          {
+            "command": [
+              "C:\\Miniconda\\python.exe",
+              "-X",
+              "utf8",
+              "-B",
+              "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\scripts\\revenue_forecast.py",
+              "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\positive\\assembled\\linked-input.json",
+              "--validate-only",
+              "--verbose"
+            ],
+            "exit_code": 0,
+            "seconds": 0.411197399997036,
+            "stdout": "valid\n",
+            "stderr": ""
+          },
+          {
+            "command": [
+              "C:\\Miniconda\\python.exe",
+              "-X",
+              "utf8",
+              "-B",
+              "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\scripts\\revenue_forecast.py",
+              "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\positive\\assembled\\linked-input.json",
+              "--output",
+              "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\positive\\native\\forecast.json",
+              "--markdown",
+              "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\positive\\native\\forecast.md"
+            ],
+            "exit_code": 0,
+            "seconds": 0.4615544000007503,
+            "stdout": "",
+            "stderr": ""
+          },
+          {
+            "command": [
+              "C:\\Miniconda\\python.exe",
+              "-X",
+              "utf8",
+              "-B",
+              "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\scripts\\revenue_backtest.py",
+              "create",
+              "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\positive\\assembled\\linked-input.json",
+              "--version",
+              "2026-07-12-v1",
+              "--output",
+              "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\positive\\native\\snapshot.json"
+            ],
+            "exit_code": 0,
+            "seconds": 0.4325630000021192,
+            "stdout": "",
+            "stderr": ""
+          }
+        ],
+        "supplier_calls": 0,
+        "model_calls": 0
+      }
+    },
+    {
+      "name": "observation-period-negative",
+      "assembly_supplier_calls": 0,
+      "assembly_model_calls": 0,
+      "calibration_status": "unverified",
+      "calibration_reasons": [
+        "conversion_observation_unverified_period:conversion_base:claim_parameter_conversion_base",
+        "conversion_observation_unverified_period:conversion_high:claim_parameter_conversion_high",
+        "conversion_observation_unverified_period:conversion_low:claim_parameter_conversion_low"
+      ],
+      "engine_version": "4.2.1",
+      "confidence_calculation_version": "stable-fsum/1",
+      "confidence_score": 49.0,
+      "consolidated_forecast": {
+        "low": {
+          "segment_bridge": [
+            {
+              "name": "Segment A",
+              "annual_revenue": {
+                "2026": 100.0,
+                "2027": 100.0
+              }
+            },
+            {
+              "name": "Segment B",
+              "annual_revenue": {
+                "2026": 50.0,
+                "2027": 50.0
+              }
+            }
+          ],
+          "adjustment_bridge": [],
+          "segment_subtotal": {
+            "2026": 150.0,
+            "2027": 150.0
+          },
+          "adjustment_total": {
+            "2026": 0.0,
+            "2027": 0.0
+          },
+          "annual_revenue": {
+            "2026": 150.0,
+            "2027": 150.0
+          },
+          "annual_growth": {
+            "2026": 0.0,
+            "2027": 0.0
+          },
+          "terminal_revenue": 150.0,
+          "cagr": 0.0,
+          "incremental_revenue": 0.0,
+          "incremental_contribution": {
+            "segments": [
+              {
+                "name": "Segment A",
+                "terminal_incremental_revenue": 0.0
+              },
+              {
+                "name": "Segment B",
+                "terminal_incremental_revenue": 0.0
+              }
+            ],
+            "adjustments": 0.0,
+            "total": 0.0
+          }
+        },
+        "base": {
+          "segment_bridge": [
+            {
+              "name": "Segment A",
+              "annual_revenue": {
+                "2026": 110.00000000000001,
+                "2027": 121.00000000000001
+              }
+            },
+            {
+              "name": "Segment B",
+              "annual_revenue": {
+                "2026": 55.00000000000001,
+                "2027": 60.50000000000001
+              }
+            }
+          ],
+          "adjustment_bridge": [],
+          "segment_subtotal": {
+            "2026": 165.00000000000003,
+            "2027": 181.50000000000003
+          },
+          "adjustment_total": {
+            "2026": 0.0,
+            "2027": 0.0
+          },
+          "annual_revenue": {
+            "2026": 165.00000000000003,
+            "2027": 181.50000000000003
+          },
+          "annual_growth": {
+            "2026": 0.10000000000000009,
+            "2027": 0.10000000000000009
+          },
+          "terminal_revenue": 181.50000000000003,
+          "cagr": 0.10000000000000009,
+          "incremental_revenue": 31.50000000000003,
+          "incremental_contribution": {
+            "segments": [
+              {
+                "name": "Segment A",
+                "terminal_incremental_revenue": 21.000000000000014
+              },
+              {
+                "name": "Segment B",
+                "terminal_incremental_revenue": 10.500000000000007
+              }
+            ],
+            "adjustments": 0.0,
+            "total": 31.50000000000002
+          }
+        },
+        "high": {
+          "segment_bridge": [
+            {
+              "name": "Segment A",
+              "annual_revenue": {
+                "2026": 120.0,
+                "2027": 144.0
+              }
+            },
+            {
+              "name": "Segment B",
+              "annual_revenue": {
+                "2026": 60.0,
+                "2027": 72.0
+              }
+            }
+          ],
+          "adjustment_bridge": [],
+          "segment_subtotal": {
+            "2026": 180.0,
+            "2027": 216.0
+          },
+          "adjustment_total": {
+            "2026": 0.0,
+            "2027": 0.0
+          },
+          "annual_revenue": {
+            "2026": 180.0,
+            "2027": 216.0
+          },
+          "annual_growth": {
+            "2026": 0.19999999999999996,
+            "2027": 0.19999999999999996
+          },
+          "terminal_revenue": 216.0,
+          "cagr": 0.19999999999999996,
+          "incremental_revenue": 66.0,
+          "incremental_contribution": {
+            "segments": [
+              {
+                "name": "Segment A",
+                "terminal_incremental_revenue": 44.0
+              },
+              {
+                "name": "Segment B",
+                "terminal_incremental_revenue": 22.0
+              }
+            ],
+            "adjustments": 0.0,
+            "total": 66.0
+          }
+        }
+      },
+      "magnitude_ids": [],
+      "source_ref": {
+        "byte_size": 62,
+        "content_sha256": "d9b0df81476e5c29dedd8acc8438f0dcfd8f45585a4f246e1cbc243ed4dd4de3",
+        "document_id": "urn:company-wiki:document:sha256:d9b0df81476e5c29dedd8acc8438f0dcfd8f45585a4f246e1cbc243ed4dd4de3",
+        "mime_type": "text/plain",
+        "schema_version": "2.0",
+        "source_id": "urn:company-wiki:source:sha256:d9b0df81476e5c29dedd8acc8438f0dcfd8f45585a4f246e1cbc243ed4dd4de3"
+      },
+      "diagnostic": {
+        "schema_version": "economic-support-diagnostics/1",
+        "input_sha256": "22ab31d7dc1260afee47151559e15b0fce75a99c91edd97f3613fc0ee4758d04",
+        "requested_years": [
+          "2026",
+          "2027"
+        ],
+        "company": "Test Co",
+        "segments": [
+          {
+            "segment": "Segment A",
+            "entries": [
+              {
+                "scenario": "low",
+                "year": "2026",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:0_low_2026",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_base:claim_parameter_conversion_base",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_high:claim_parameter_conversion_high",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_low:claim_parameter_conversion_low"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "0_low_2026"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              },
+              {
+                "scenario": "low",
+                "year": "2027",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:0_low_2027",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_base:claim_parameter_conversion_base",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_high:claim_parameter_conversion_high",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_low:claim_parameter_conversion_low"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "0_low_2027"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              },
+              {
+                "scenario": "base",
+                "year": "2026",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:0_base_2026",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_base:claim_parameter_conversion_base",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_high:claim_parameter_conversion_high",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_low:claim_parameter_conversion_low"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "0_base_2026"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              },
+              {
+                "scenario": "base",
+                "year": "2027",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:0_base_2027",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_base:claim_parameter_conversion_base",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_high:claim_parameter_conversion_high",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_low:claim_parameter_conversion_low"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "0_base_2027"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              },
+              {
+                "scenario": "high",
+                "year": "2026",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:0_high_2026",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_base:claim_parameter_conversion_base",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_high:claim_parameter_conversion_high",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_low:claim_parameter_conversion_low"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "0_high_2026"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              },
+              {
+                "scenario": "high",
+                "year": "2027",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:0_high_2027",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_base:claim_parameter_conversion_base",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_high:claim_parameter_conversion_high",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_low:claim_parameter_conversion_low"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "0_high_2027"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              }
+            ]
+          },
+          {
+            "segment": "Segment B",
+            "entries": [
+              {
+                "scenario": "low",
+                "year": "2026",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:1_low_2026",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_base:claim_parameter_conversion_base",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_high:claim_parameter_conversion_high",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_low:claim_parameter_conversion_low"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "1_low_2026"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              },
+              {
+                "scenario": "low",
+                "year": "2027",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:1_low_2027",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_base:claim_parameter_conversion_base",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_high:claim_parameter_conversion_high",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_low:claim_parameter_conversion_low"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "1_low_2027"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              },
+              {
+                "scenario": "base",
+                "year": "2026",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:1_base_2026",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_base:claim_parameter_conversion_base",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_high:claim_parameter_conversion_high",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_low:claim_parameter_conversion_low"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "1_base_2026"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              },
+              {
+                "scenario": "base",
+                "year": "2027",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:1_base_2027",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_base:claim_parameter_conversion_base",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_high:claim_parameter_conversion_high",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_low:claim_parameter_conversion_low"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "1_base_2027"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              },
+              {
+                "scenario": "high",
+                "year": "2026",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:1_high_2026",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_base:claim_parameter_conversion_base",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_high:claim_parameter_conversion_high",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_low:claim_parameter_conversion_low"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "1_high_2026"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              },
+              {
+                "scenario": "high",
+                "year": "2027",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:1_high_2027",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_base:claim_parameter_conversion_base",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_high:claim_parameter_conversion_high",
+                  "calibration_not_referenced_range:reference_bridge:conversion_observation_unverified_period:conversion_low:claim_parameter_conversion_low"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "1_high_2027"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              }
+            ]
+          }
+        ],
+        "economic_truth_inferred": false
+      },
+      "sha256": {
+        "discovery.json": "9c5baf1b070d1b8ddce60e072e86ba4ac3e22d14340a15a9f42d656d9eadf34e",
+        "input.json": "89c9577297aa93ab9edac269a27c7b90ccb81fefb250e379b57bafd0d9c4f33a",
+        "preparation.json": "c97af2e312a551b93f88a03d08418b48dc391fb04f34124d0da392a4837ddd02",
+        "research.json": "fb68e78266cc9258c29cf85f7a29b644e5b6a5c9c146fcb47f25ea87ee779f28",
+        "assembled\\assembly.json": "5363ff6b2f0717b980e5f166c38a25aaa1425f31144ffb272f2ad0abf281d672",
+        "assembled\\calibration.json": "7734763a0071001824a8858dd7650ff37498950bfc6395490491acf2195fc5f6",
+        "assembled\\inventory.json": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+        "assembled\\linked-input.json": "22ab31d7dc1260afee47151559e15b0fce75a99c91edd97f3613fc0ee4758d04",
+        "assembled\\research-adequacy.json": "d131a554883c3a0e8f3c4809b02382ccb18dea5f24724d9a157a71004a625cf6",
+        "native\\commands.json": "bc9bf285dc718d9a8aaa8d1c258a5c34cfdb55d4fe4ca4172ac2fa06b4c67f68",
+        "native\\forecast.json": "efd349ee7c902e989629c35cf9d37666cb793bafb54e15132e17a3dfa76deb3b",
+        "native\\forecast.md": "c7a42d7ec05012f75fd4672e3b7916774519c39e723c003de7363b3cc27ce99e",
+        "native\\publications.jsonl": "fff02ba992a1ca6fc876acd382b9d6a9c19a020fd6f3d50254614c7a8e7e6813",
+        "native\\snapshot.json": "3b2f007393b668ff85e7b4c8ede21146374a3407c9d8bc625c8a01b0d888dfc1"
+      },
+      "registry_inside_owned": true,
+      "real_snapshot": true,
+      "report_matches_diagnostic": true,
+      "native_events": {
+        "schema_version": "native-target-measurement-run/1",
+        "created_at": "2026-10-10T23:10:34.796503+00:00",
+        "events": [
+          {
+            "command": [
+              "C:\\Miniconda\\python.exe",
+              "-X",
+              "utf8",
+              "-B",
+              "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\scripts\\revenue_forecast.py",
+              "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\observation-period-negative\\assembled\\linked-input.json",
+              "--validate-only",
+              "--verbose"
+            ],
+            "exit_code": 0,
+            "seconds": 0.2957760999997845,
+            "stdout": "valid\n",
+            "stderr": ""
+          },
+          {
+            "command": [
+              "C:\\Miniconda\\python.exe",
+              "-X",
+              "utf8",
+              "-B",
+              "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\scripts\\revenue_forecast.py",
+              "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\observation-period-negative\\assembled\\linked-input.json",
+              "--output",
+              "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\observation-period-negative\\native\\forecast.json",
+              "--markdown",
+              "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\observation-period-negative\\native\\forecast.md"
+            ],
+            "exit_code": 0,
+            "seconds": 0.28959739999845624,
+            "stdout": "",
+            "stderr": ""
+          },
+          {
+            "command": [
+              "C:\\Miniconda\\python.exe",
+              "-X",
+              "utf8",
+              "-B",
+              "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\scripts\\revenue_backtest.py",
+              "create",
+              "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\observation-period-negative\\assembled\\linked-input.json",
+              "--version",
+              "2026-07-12-v1",
+              "--output",
+              "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\observation-period-negative\\native\\snapshot.json"
+            ],
+            "exit_code": 0,
+            "seconds": 0.30964229999881354,
+            "stdout": "",
+            "stderr": ""
+          }
+        ],
+        "supplier_calls": 0,
+        "model_calls": 0
+      }
+    },
+    {
+      "name": "synchronized-future-conversion-period",
+      "assembly_supplier_calls": 0,
+      "assembly_model_calls": 0,
+      "calibration_status": "referenced_range",
+      "calibration_reasons": [],
+      "engine_version": "4.2.1",
+      "confidence_calculation_version": "stable-fsum/1",
+      "confidence_score": 49.0,
+      "consolidated_forecast": {
+        "low": {
+          "segment_bridge": [
+            {
+              "name": "Segment A",
+              "annual_revenue": {
+                "2026": 100.0,
+                "2027": 100.0
+              }
+            },
+            {
+              "name": "Segment B",
+              "annual_revenue": {
+                "2026": 50.0,
+                "2027": 50.0
+              }
+            }
+          ],
+          "adjustment_bridge": [],
+          "segment_subtotal": {
+            "2026": 150.0,
+            "2027": 150.0
+          },
+          "adjustment_total": {
+            "2026": 0.0,
+            "2027": 0.0
+          },
+          "annual_revenue": {
+            "2026": 150.0,
+            "2027": 150.0
+          },
+          "annual_growth": {
+            "2026": 0.0,
+            "2027": 0.0
+          },
+          "terminal_revenue": 150.0,
+          "cagr": 0.0,
+          "incremental_revenue": 0.0,
+          "incremental_contribution": {
+            "segments": [
+              {
+                "name": "Segment A",
+                "terminal_incremental_revenue": 0.0
+              },
+              {
+                "name": "Segment B",
+                "terminal_incremental_revenue": 0.0
+              }
+            ],
+            "adjustments": 0.0,
+            "total": 0.0
+          }
+        },
+        "base": {
+          "segment_bridge": [
+            {
+              "name": "Segment A",
+              "annual_revenue": {
+                "2026": 110.00000000000001,
+                "2027": 121.00000000000001
+              }
+            },
+            {
+              "name": "Segment B",
+              "annual_revenue": {
+                "2026": 55.00000000000001,
+                "2027": 60.50000000000001
+              }
+            }
+          ],
+          "adjustment_bridge": [],
+          "segment_subtotal": {
+            "2026": 165.00000000000003,
+            "2027": 181.50000000000003
+          },
+          "adjustment_total": {
+            "2026": 0.0,
+            "2027": 0.0
+          },
+          "annual_revenue": {
+            "2026": 165.00000000000003,
+            "2027": 181.50000000000003
+          },
+          "annual_growth": {
+            "2026": 0.10000000000000009,
+            "2027": 0.10000000000000009
+          },
+          "terminal_revenue": 181.50000000000003,
+          "cagr": 0.10000000000000009,
+          "incremental_revenue": 31.50000000000003,
+          "incremental_contribution": {
+            "segments": [
+              {
+                "name": "Segment A",
+                "terminal_incremental_revenue": 21.000000000000014
+              },
+              {
+                "name": "Segment B",
+                "terminal_incremental_revenue": 10.500000000000007
+              }
+            ],
+            "adjustments": 0.0,
+            "total": 31.50000000000002
+          }
+        },
+        "high": {
+          "segment_bridge": [
+            {
+              "name": "Segment A",
+              "annual_revenue": {
+                "2026": 120.0,
+                "2027": 144.0
+              }
+            },
+            {
+              "name": "Segment B",
+              "annual_revenue": {
+                "2026": 60.0,
+                "2027": 72.0
+              }
+            }
+          ],
+          "adjustment_bridge": [],
+          "segment_subtotal": {
+            "2026": 180.0,
+            "2027": 216.0
+          },
+          "adjustment_total": {
+            "2026": 0.0,
+            "2027": 0.0
+          },
+          "annual_revenue": {
+            "2026": 180.0,
+            "2027": 216.0
+          },
+          "annual_growth": {
+            "2026": 0.19999999999999996,
+            "2027": 0.19999999999999996
+          },
+          "terminal_revenue": 216.0,
+          "cagr": 0.19999999999999996,
+          "incremental_revenue": 66.0,
+          "incremental_contribution": {
+            "segments": [
+              {
+                "name": "Segment A",
+                "terminal_incremental_revenue": 44.0
+              },
+              {
+                "name": "Segment B",
+                "terminal_incremental_revenue": 22.0
+              }
+            ],
+            "adjustments": 0.0,
+            "total": 66.0
+          }
+        }
+      },
+      "magnitude_ids": [
+        "0_base_2026",
+        "0_high_2026",
+        "0_low_2026"
+      ],
+      "source_ref": {
+        "byte_size": 62,
+        "content_sha256": "d9b0df81476e5c29dedd8acc8438f0dcfd8f45585a4f246e1cbc243ed4dd4de3",
+        "document_id": "urn:company-wiki:document:sha256:d9b0df81476e5c29dedd8acc8438f0dcfd8f45585a4f246e1cbc243ed4dd4de3",
+        "mime_type": "text/plain",
+        "schema_version": "2.0",
+        "source_id": "urn:company-wiki:source:sha256:d9b0df81476e5c29dedd8acc8438f0dcfd8f45585a4f246e1cbc243ed4dd4de3"
+      },
+      "diagnostic": {
+        "schema_version": "economic-support-diagnostics/1",
+        "input_sha256": "8a56407edc787a26927853dfd3ba934a98f91abe928999ff4d659bd9a5de7b79",
+        "requested_years": [
+          "2026",
+          "2027"
+        ],
+        "company": "Test Co",
+        "segments": [
+          {
+            "segment": "Segment A",
+            "entries": [
+              {
+                "scenario": "low",
+                "year": "2026",
+                "status": "supported",
+                "reasons": [],
+                "supported_parameter_ids": [
+                  "0_low_2026"
+                ],
+                "unsupported_parameter_ids": [],
+                "calibration_ids": [
+                  "reference_bridge"
+                ],
+                "claim_ids": [
+                  "claim_parameter_reference_lower",
+                  "claim_parameter_reference_upper"
+                ]
+              },
+              {
+                "scenario": "low",
+                "year": "2027",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:0_low_2027",
+                  "calibration_scope_not_covering:reference_bridge:Segment A"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "0_low_2027"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              },
+              {
+                "scenario": "base",
+                "year": "2026",
+                "status": "supported",
+                "reasons": [],
+                "supported_parameter_ids": [
+                  "0_base_2026"
+                ],
+                "unsupported_parameter_ids": [],
+                "calibration_ids": [
+                  "reference_bridge"
+                ],
+                "claim_ids": [
+                  "claim_parameter_reference_lower",
+                  "claim_parameter_reference_upper"
+                ]
+              },
+              {
+                "scenario": "base",
+                "year": "2027",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:0_base_2027",
+                  "calibration_scope_not_covering:reference_bridge:Segment A"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "0_base_2027"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              },
+              {
+                "scenario": "high",
+                "year": "2026",
+                "status": "supported",
+                "reasons": [],
+                "supported_parameter_ids": [
+                  "0_high_2026"
+                ],
+                "unsupported_parameter_ids": [],
+                "calibration_ids": [
+                  "reference_bridge"
+                ],
+                "claim_ids": [
+                  "claim_parameter_reference_lower",
+                  "claim_parameter_reference_upper"
+                ]
+              },
+              {
+                "scenario": "high",
+                "year": "2027",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:0_high_2027",
+                  "calibration_scope_not_covering:reference_bridge:Segment A"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "0_high_2027"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              }
+            ]
+          },
+          {
+            "segment": "Segment B",
+            "entries": [
+              {
+                "scenario": "low",
+                "year": "2026",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:1_low_2026",
+                  "calibration_scope_not_covering:reference_bridge:Segment B"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "1_low_2026"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              },
+              {
+                "scenario": "low",
+                "year": "2027",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:1_low_2027",
+                  "calibration_scope_not_covering:reference_bridge:Segment B"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "1_low_2027"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              },
+              {
+                "scenario": "base",
+                "year": "2026",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:1_base_2026",
+                  "calibration_scope_not_covering:reference_bridge:Segment B"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "1_base_2026"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              },
+              {
+                "scenario": "base",
+                "year": "2027",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:1_base_2027",
+                  "calibration_scope_not_covering:reference_bridge:Segment B"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "1_base_2027"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              },
+              {
+                "scenario": "high",
+                "year": "2026",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:1_high_2026",
+                  "calibration_scope_not_covering:reference_bridge:Segment B"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "1_high_2026"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              },
+              {
+                "scenario": "high",
+                "year": "2027",
+                "status": "unsupported",
+                "reasons": [
+                  "parameter_without_referenced_range_calibration:1_high_2027",
+                  "calibration_scope_not_covering:reference_bridge:Segment B"
+                ],
+                "supported_parameter_ids": [],
+                "unsupported_parameter_ids": [
+                  "1_high_2027"
+                ],
+                "calibration_ids": [],
+                "claim_ids": []
+              }
+            ]
+          }
+        ],
+        "economic_truth_inferred": false
+      },
+      "sha256": {
+        "discovery.json": "9c5baf1b070d1b8ddce60e072e86ba4ac3e22d14340a15a9f42d656d9eadf34e",
+        "input.json": "be68c698c732a8b1f87b02437998ec93d2947870e3a62d2373b98cd514312422",
+        "preparation.json": "c97af2e312a551b93f88a03d08418b48dc391fb04f34124d0da392a4837ddd02",
+        "research.json": "fb68e78266cc9258c29cf85f7a29b644e5b6a5c9c146fcb47f25ea87ee779f28",
+        "assembled\\assembly.json": "718f899afea678b1510d9df1054020a062c84650930dbdc4dadb47590d851881",
+        "assembled\\calibration.json": "f8318fee5a5859024ee350a9ecc57ee955124921cbcf444f73090def1d07c65a",
+        "assembled\\inventory.json": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+        "assembled\\linked-input.json": "8a56407edc787a26927853dfd3ba934a98f91abe928999ff4d659bd9a5de7b79",
+        "assembled\\research-adequacy.json": "dd5c4bd514153b55f4e7bf74cd5092cd702663154604e89ef0f03862dc376905",
+        "native\\commands.json": "4a02dc2019cd35da92bac0fda6f9bb08ffe2449f9f0cba330ca641186fe3c348",
+        "native\\forecast.json": "07d2dd6c52951dbd6f94da5154eda8d785fcafb2bbca2e3c9af163dc24f9a4b8",
+        "native\\forecast.md": "99b1e25ec4939e0719b94f3cb04f9878f4b474dbb9ce1fd45c78b01540ee851a",
+        "native\\publications.jsonl": "286fc918d2850f18b2821d10387162174a21b1a2cbbdf4231e8cbbb1640b8900",
+        "native\\snapshot.json": "61485ec1502e1673c56cb2726a3bbfa9ef733372b4a92b4e60eb9a16073f9b88"
+      },
+      "registry_inside_owned": true,
+      "real_snapshot": true,
+      "report_matches_diagnostic": true,
+      "native_events": {
+        "schema_version": "native-target-measurement-run/1",
+        "created_at": "2026-10-10T23:10:36.635519+00:00",
+        "events": [
+          {
+            "command": [
+              "C:\\Miniconda\\python.exe",
+              "-X",
+              "utf8",
+              "-B",
+              "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\scripts\\revenue_forecast.py",
+              "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\synchronized-future-conversion-period\\assembled\\linked-input.json",
+              "--validate-only",
+              "--verbose"
+            ],
+            "exit_code": 0,
+            "seconds": 0.265940799999953,
+            "stdout": "valid\n",
+            "stderr": ""
+          },
+          {
+            "command": [
+              "C:\\Miniconda\\python.exe",
+              "-X",
+              "utf8",
+              "-B",
+              "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\scripts\\revenue_forecast.py",
+              "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\synchronized-future-conversion-period\\assembled\\linked-input.json",
+              "--output",
+              "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\synchronized-future-conversion-period\\native\\forecast.json",
+              "--markdown",
+              "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\synchronized-future-conversion-period\\native\\forecast.md"
+            ],
+            "exit_code": 0,
+            "seconds": 0.27793039999960456,
+            "stdout": "",
+            "stderr": ""
+          },
+          {
+            "command": [
+              "C:\\Miniconda\\python.exe",
+              "-X",
+              "utf8",
+              "-B",
+              "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\scripts\\revenue_backtest.py",
+              "create",
+              "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\synchronized-future-conversion-period\\assembled\\linked-input.json",
+              "--version",
+              "2026-07-12-v1",
+              "--output",
+              "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t\\synchronized-future-conversion-period\\native\\snapshot.json"
+            ],
+            "exit_code": 0,
+            "seconds": 0.3298553999993601,
+            "stdout": "",
+            "stderr": ""
+          }
+        ],
+        "supplier_calls": 0,
+        "model_calls": 0
+      }
+    }
+  ],
+  "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-readonly-reception-srbdhd4t",
+  "cli_probes": [
+    {
+      "name": "unknown-range",
+      "status": "unverified",
+      "range": null,
+      "reasons": [
+        "observed_range_unknown"
+      ]
+    },
+    {
+      "name": "stress",
+      "status": "stress",
+      "range": {
+        "lower": 100,
+        "upper": 120,
+        "unit": "USD million"
+      },
+      "reasons": []
+    },
+    {
+      "name": "scenario-output-crossborrow",
+      "rejected": true,
+      "error": "input rejected: calibration output scenario mismatch\n"
+    },
+    {
+      "name": "stale-claim-excerpt-sha",
+      "rejected": true,
+      "error": "input rejected: claim excerpt hash mismatch: claim_parameter_reported_total\n"
+    }
+  ],
+  "responsibility": "25 PASS",
+  "synchronized_period_expectation": {
+    "expected": "unverified",
+    "actual": "referenced_range",
+    "met": false,
+    "original_output_period": "FY2026",
+    "conversion_parameter_claim_observation_period": "FY2031"
+  },
+  "emitter_compatibility": {
+    "3.7": {
+      "4.2.0": false,
+      "4.2.1": true
+    },
+    "3.8": {
+      "4.2.0": false,
+      "4.2.1": true
+    },
+    "3.9": {
+      "4.2.0": true,
+      "4.2.1": true
+    }
+  },
+  "status": "source_partial",
+  "tracked_sha_unchanged": true,
+  "tracked_sha_count": 107,
+  "sha_scope": "all runtime scripts/config, delivery paths and actual CLI/test fixture dependency files; full tracked status checked without hashing historical planning records",
+  "status_after": "",
+  "head_after": "183c9534b90549c094fc32a51ff6ada1e9cb5227",
+  "seconds": 25.844727700001386,
+  "cleanup": {
+    "removed": true,
+    "environment_restored": true,
+    "no_rf_repository_write": true
+  }
+}

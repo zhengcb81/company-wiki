@@ -1,0 +1,1125 @@
+{
+  "status": "PASS",
+  "immutable_entries": 279,
+  "unchanged_entries": [
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-identity-02/green-final.json",
+      "sha256": "4b781295606fc1a6106cce742eb6b314a4fcfdb4c69232165dba3fd51329d93c"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-identity-02/green-final.log",
+      "sha256": "fe848d8c5f55948b65b9b821035a71ea8c24ac58da6932a9e4f614d506e81f40"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-identity-02/green-observation.json",
+      "sha256": "aea0faeefa8fc2390950da8beeb59803c6e43b7e3ecabc57a0c5578babbbbce0"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-identity-02/green.log",
+      "sha256": "b4596b8e47571288ba2e9b7a108dcc97f9e9fa3b0f0fa92484d0d93d47357ee0"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-identity-02/red-context-observation.json",
+      "sha256": "e64c488cf2ac998373c74f50f8ce8b2a46d61d2709b3294254613096e53fe408"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-identity-02/red-context.log",
+      "sha256": "cbd900db12a98856178abda99bad5182e45fd7715fed0685f9f37663bd2b9be0"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-identity-02/red-observation.json",
+      "sha256": "04d625619f14ea97c0bc27f64816aa6f4ba84f1f3db900b762e4eea7c9c9ed0c"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-identity-02/red-semantic-observation.json",
+      "sha256": "29ab98c515c4e9f8fd6d72a34afa84849bb56be3af08788f5b299a7ad17e9c2e"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-identity-02/red-semantic.log",
+      "sha256": "a02d6aa6836eb8a363ba0fc5fccf9e459b2223cc6270586425010a6230d13477"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-identity-02/red.log",
+      "sha256": "301d8904e4cc13cadc4108045f93a3ddda96fc1d590232d0c6278b45894a1244"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-preparation-04/green.json",
+      "sha256": "2f25e3292b59ef79e4cec2a2da48e4e4f8bf719a31c827e50e8ca04b1b260149"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-preparation-04/green.log",
+      "sha256": "3be5bc023b3587b7d3f9ea1958751f260e91ee5bc1d61dab2ad89f6b2e8ee2c7"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-preparation-04/red.json",
+      "sha256": "2e1ba71b21f9726443a08f13ce93241b0f4d73b0c0531bdd809b221ed606bea7"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-preparation-04/red.log",
+      "sha256": "aa0a8d44dee9b4154e80d8517c0ecc10073e833ffaed72b7dae8953f2bfcd9b8"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/evidence-view-04/green.json",
+      "sha256": "701e2441b0fa132836536cea644ec7a06f5912c721518ba664f33ab44ab10dd3"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/evidence-view-04/green.log",
+      "sha256": "6f38be59c07d46d8ecf1419de9858db06feb277b17d87453b0bfc64f3bb5db03"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/evidence-view-04/red.json",
+      "sha256": "2e1ba71b21f9726443a08f13ce93241b0f4d73b0c0531bdd809b221ed606bea7"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/evidence-view-04/red.log",
+      "sha256": "9d32a89c7175c4a5b3fdf0787915ab323802dc92bc87465eb09d928f831779fb"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/evidence-view-04/repair-green.json",
+      "sha256": "940e582735fba2af0ee567bff9d7e422e1572adc793a1c7479cbb12931f7b34b"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/evidence-view-04/repair-green.log",
+      "sha256": "a49d4df05fcc7c731044035cee456095f991a776928cc64d77ea04a844af512d"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/foundation-01/commit-observation.json",
+      "sha256": "68a1a6c14f567d80bd2369b84152cfa76c5aa0adfca1953f356086fa6c7f173f"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/foundation-01/exact-ci.json",
+      "sha256": "6d72f8dbd884a7f64b5ff7fd9b7c2263aec279507297f24c3b42c68505c90d62"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/foundation-01/normal-commit.log",
+      "sha256": "46b902ffc1ffb2ec0b193e8834bbf74d28cd2380f625c7b857c96b4521796c9c"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/foundation-01/normal-push.log",
+      "sha256": "984c349524aac65eb562ca6ef6a3ff1e1b3d6a34c43206d5769928167f9af4c4"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/foundation-01/publication.json",
+      "sha256": "7810a51dca7a272547431bc348934cc9fc1bb1022829dfbf341e6c8187e3ed5a"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/final-mixed-empty-history-receipt.json",
+      "sha256": "66b269ce4fad1480360d6aab994e3ed78c3554f9840da2b486b568e7ded79620"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/final-mixed-empty-history.log",
+      "sha256": "4b7869cfc15e74ff433d6f08ba4c6ee83867c673b87f15529a7901f3966fd6fe"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-green.log",
+      "sha256": "31d348e2241cf1177966ccb660c29b2827eaaac257f92d11552b455976564b56"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md",
+      "sha256": "9ab337180ede482a533679ce30dc55360e6167cb080a9bbae8b3200f986b7ec4"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-old-resume-compat.log",
+      "sha256": "6e968d0c258124921896d0d361f63f4d3c80c6f34a22835ce13fd550a76198f1"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-red.log",
+      "sha256": "65a0b2a686cf44093ee192821fdab261ed6fc8fcf7cbf22156b23ca370fbc4ad"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-static.log",
+      "sha256": "f473d7c4228930cedaab75c5d50501683c66fc12894a6718f263e357f5ba084d"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/mypy.log",
+      "sha256": "914a6f4e3356ba67f8a8d80cf8d96e26319abc72f76392c8261b2272d31542af"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-config-fix-source-shas.json",
+      "sha256": "f8a8019c81a4c0c6f8f96c31539a0444828c3885d7597bcaf2e65f7433d5249d"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-generation-caller-fix.log",
+      "sha256": "4353471868e4e45e26c1ff2756c5e7272d6362c92608de21b4fa742f89e10a37"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-generation-fix-probes.json",
+      "sha256": "6c48ba5781fd924aa36a354ee089517965ef56ed7c15de40727d5763ff5baa30"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-main-contracts-views.log",
+      "sha256": "2b650dda116e9c9068ee2cedd88d454bc2ec43491420695bfdf2985b5dda6cdc"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-main-integration-tests.log",
+      "sha256": "e36eb99535ab65874bd8eede3bd8c899928806eaa9915c0967d60cac0f8dab32"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md",
+      "sha256": "e45456e53dde3ef046d4e842395cacee128f772ba39725e4419d4d748a9c55a1"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-source-snapshot.json",
+      "sha256": "9f281b61d4c44016b90a0e9822df50af38660f8bf9c931599836adbf97bb4e86"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/ruff.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/static.json",
+      "sha256": "960c3566ac96c39989b9246912c5b97dc5783ef9a1be30e3c2b9c64586982e2a"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md",
+      "sha256": "24d4fbac66566042ff15127a47a08fe304ef414435fac3d4240e47f81406eaf3"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/before.json",
+      "sha256": "7a340b35d2230af876988ce20381396e46cc7d364511e62f41c2aec8a10be71b"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/green-attempt-1.json",
+      "sha256": "c8c355cb5523ce8f9de9a41a94d2208efec0120c3f53d293e6afdc60a235c6fa"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/green-attempt-1.log",
+      "sha256": "9ada4edcc716b131dea0136912825eed423ff53bf5d143470b5cf6e06d3e64cf"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/green-attempt-2.json",
+      "sha256": "44e6c01d5dfc4a3416a7ec7a347be5e6edf855ef5de779174369948e55a0f4b8"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/green-attempt-2.log",
+      "sha256": "70126a179f84710691902d1ee058f6e44d419a7b0a4bab7fa7d26515f950fc7f"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/green.json",
+      "sha256": "0994b1e381744a70ab970ac6048178b419967bb87a2e91b8ae8d2e119135bdc1"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/green.log",
+      "sha256": "3d87ac838dfb5fb8f2c5ebc077aa2377c094cb7b2d937ed083acbbe87965e159"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/handoff.json",
+      "sha256": "dab24f518cc4d43926355b28a6f9b795fc82524befb1c743b3d6be87bef50133"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/mypy.log",
+      "sha256": "0c37c4158c91ef55c724ba017bf6465f26018199badb08e3ff13f98acdf056c2"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/red-contract-aligned.json",
+      "sha256": "c5a2a6f06ee2f7e50b667e93bf3097c613e848d3876865b2d48157aaf08195a5"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/red-contract-aligned.log",
+      "sha256": "57fcf638ec3222dad614d22af258f2795c4d67144f26abedea8c5fe17223f13a"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/red.json",
+      "sha256": "638c19202ce4422ebbd8de2dc75bd6321b085528a72cfccceee2e3e690d910a0"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/red.log",
+      "sha256": "632e4eee8a0dade7f43881d870e720f26c224c17fd68d8fa90c5b5379a864766"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/ruff.log",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/source-diff.log",
+      "sha256": "54809872ae6236306978853d526026f691a6bdcd632386c9d9e6afd050ac80be"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/static.json",
+      "sha256": "995e9f35df552a149606a068e5a7b3724c28b44ea6d7ceb02af458771fdaca0d"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/handoff-evidence-hashes.json",
+      "sha256": "38c49f793f008d85da424e982dd8c0fec56a8dafde5ae4074efa821f9543f3a0"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/normal-merge.json",
+      "sha256": "47b79943e82583bd384c413b190c73fffef6a3eeed72776bd5b6e7a2b685c19e"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/normal-merge.log",
+      "sha256": "92e3341e7618d0e26291f3e833a89f2d5142adb2ac6e1435e2ba98059b9321cc"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/p7-independent-166-tests.log",
+      "sha256": "31aefc092ab6ad7cd6ef6af4a5ca3c88e07b965c6f0634adfe8abbdf72b4ee0f"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/p7-independent-e2e-receipt.json",
+      "sha256": "b3f48c1089b3ab3e60ba70adce0c7ffa349bce8050e136df777c5f92780b5101"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/p7-independent-legacy-blob.json",
+      "sha256": "ca466c9f2cf0d45c8f8b67cbf53683e0cb1215026132ef4cba2ef9763ca9819c"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/p7-main-adapter-overlay.json",
+      "sha256": "167757e93e0af48f81bf2608e44d246316678c59034491dd4d6477b560a7768e"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md",
+      "sha256": "389f6cee1da1d739197023fa19cac47f60a03f85d786b476b72c5b2f63b1ba3d"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/reception-source-sha.json",
+      "sha256": "0f6f22eee1187d07bf5f9b1afa6acc521a2d9abbb8e3cfeaf7d42ebca7c41f0e"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md",
+      "sha256": "5c8bc9d6b1a662e9027a020744fd15276a1892d40b04c6c22aa504bd962bd8da"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/before.json",
+      "sha256": "909490e994e875555a016dc18859b9fe9dd0fb8c01bd8056e32c4e972ebd4735"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/green-initial.json",
+      "sha256": "4607c6e6a9a04a382aa8c48fd24eb3c0ee9de558cb63f88f40d3e4f5051d7a13"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/green-initial.log",
+      "sha256": "da3832bf920df5a2f4efc8fca73ec051c33ec5d145523c4e5104c79d5895d46a"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/green.json",
+      "sha256": "61217677410d142fcaa0f299a8bc13e45c0bab3257eeb59699a67ab5d995a9c6"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/green.log",
+      "sha256": "a3329a551ca3999fb61a979ffda9b5f084523c892f1645cb97a337179e1884ec"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/handoff.json",
+      "sha256": "84189f1e43437438bd464accf827c6a20f80e80134fb09d248b29e93233439fd"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/mypy-initial.log",
+      "sha256": "cd1da032f8b74cd93d1232b7660b7a7419bc39af0bece7847f5bad142b30f124"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/mypy.log",
+      "sha256": "cd1da032f8b74cd93d1232b7660b7a7419bc39af0bece7847f5bad142b30f124"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/red.json",
+      "sha256": "65b5a7ed96177ae65aa60d535c9a1a962d9f30cea863ff2b4e32fa34a2e9edaa"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/red.log",
+      "sha256": "1d31680b17ed6d90656b370f18414e392693fbe6a633a90c1c92cabf83daba9a"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/ruff-initial.log",
+      "sha256": "e1f081af77deeaab719b171e65df161e5d2c5904607f8d4fad3f85403b24f37d"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/ruff.log",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/static-initial.json",
+      "sha256": "1d6b34342afe637b0eabeb99c9d70bbdfa8d1d6d0cae440e22cf58828c08f355"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/static.json",
+      "sha256": "653cdefcda0c8115dc5b49191057b10d94fc8639108179df3a7c456e92646d34"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/test-format.log",
+      "sha256": "d9d79976036ac55b771b47f6cecaa66a30fe59749dba207bd67b2104ca5c29d7"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/HANDOFF.md",
+      "sha256": "03fb29d8dcdcdfc3d9d9db5bd01be9a25fadc6c281c70175cc8d4963539cd4a2"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/green-attempt-1.json",
+      "sha256": "6d338df85f3213123ef89046730049061a1b2a9d3a3aa628ad2ed4d0ca0d2019"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/green-attempt-1.log",
+      "sha256": "57eab0972ad6bc5ab99300370651192a3a8281696ba692483c56a55bfd12acd9"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/green-final.json",
+      "sha256": "49cb743bdbc0fe34bdcf303bdaf39bb9c90d5e4275f0a91d377473ef89012dcf"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/green-final.log",
+      "sha256": "ec15eb56caf08bf8281664a4ff5aa8923628e6e8492c25484e92349fa4d9e591"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/handoff.json",
+      "sha256": "cce6d97a623be57b09fc4ca68942bb7008688b0f3271647436c3c4b598913936"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/integrated-final.json",
+      "sha256": "671630badaa2dfdc1d79ff0df6971f23625c17867d7aeafbf296186e96fb8d7b"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/mypy-attempt-1.log",
+      "sha256": "850b999bf6bf5c1712992c7ca865c86b0283f56c7378839848888875ad84722c"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/mypy-final.log",
+      "sha256": "d9a5631f7d87a741fbecc3236286d1792d22d349ff13846d71cdc9217307bb76"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/mypy-integrated.log",
+      "sha256": "d9a5631f7d87a741fbecc3236286d1792d22d349ff13846d71cdc9217307bb76"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/pytest-integrated.log",
+      "sha256": "40f3e0d58cb5394ff021ade5d46891ae3a82077dfa7a180f5fb8a96acbd349fb"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/red-fixture-aligned.json",
+      "sha256": "eae2c50795988cf7a68a4c132486d56725350bccfd411f6828b94cce4263a2a8"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/red-fixture-aligned.log",
+      "sha256": "106b461d4938d61f9bf2a0b4e3e0da4ff18fe2d684bcafc833fdc29927141ca6"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/red.json",
+      "sha256": "7e439cc26525d7557e7534b7661164a6ce2d2b4bbe6f0a7646572c50da931d6f"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/red.log",
+      "sha256": "7b8bcfc97a2c1c8c281c5e52590ba4ffc74f6389fe54ce941b9ad1252200e3b0"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/ruff-attempt-1.log",
+      "sha256": "50db7d0df62037c0401ce10d8f83c7299ca85384601d34e663732c06da30b32e"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/ruff-final.log",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/ruff-integrated.log",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/static-attempt-1.json",
+      "sha256": "a1da2b6692d727871d1c6e1f699595949a7e7609a499eac40133a6a541187da5"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/static-final.json",
+      "sha256": "2ff7602af0c3e14f1a52acbce9fb8c55e08988bb68da9d8e229c7e6e234e79cd"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/artifact-types-02.log",
+      "sha256": "8e63ae22e8213e327a5e9cbd584067681681bd8ef7f25c869877887ccdcfc4ff"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/canonical-evidence-copy.json",
+      "sha256": "de72a0a170ff38564c62214e39f46217679bacd0603ce382ab580f34e033733f"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/frozen-snapshot-02.log",
+      "sha256": "974d15286874b0f600bfbe11d735d43901acc587b3ae9e3bc71d3764f45f72b0"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/mypy-01.log",
+      "sha256": "b8c744060840e2872d7d2d343470dac8d2b8c87a1670f4a31148be64520094ab"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/mypy-final-03.log",
+      "sha256": "d9a5631f7d87a741fbecc3236286d1792d22d349ff13846d71cdc9217307bb76"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/normal-stage.log",
+      "sha256": "2490349eeeb61547e71d6a6b00d3efba72e0e24a7111b48ccc60f5464da7e5b3"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/preflight-missing-suite.json",
+      "sha256": "fa3cd04bb60ba6203d47b1148a155b0267d1141a58fc130c46d24b9bcb29376b"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/responsibility-tests-01.json",
+      "sha256": "9b1b75af42e9f06de4329c83e131718fb2f8dadfea1eb77e57cd05abbcd7f00b"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/responsibility-tests-01.log",
+      "sha256": "3cebea9584462f4fb42f46b293bab29eb047d7e13780d5c55a1f10b125791bf5"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/ruff-01.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/ruff-final-03.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/specific-fixes-02.json",
+      "sha256": "2fbd5def46aeeca89812b3e920bc7950cb13ca60f55bac76f8414bb9fa84318f"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/static-01.json",
+      "sha256": "7919361e827253aa599f273a549c014d69e8b8a6f7ed45e9ab311255d74a7b34"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/static-final-03.json",
+      "sha256": "004d1386ba408aee2a2eac6375b62c507ea3ed2e81482102f142701ce99bce01"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-model-binding-05/red-observation.json",
+      "sha256": "95c10e47e352d4dcacb47d306c33a360c081ebc32b7e599b25be4729eef61f76"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md",
+      "sha256": "ac9533c6544606350342ee1335321a3dae9bd5483f013c81b64eb66bac13dfba"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/first-implementation.json",
+      "sha256": "e43166408226ad57088b9e55c53cfa21b9efcef75fa2d5d54522c545bf302769"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/first-implementation.log",
+      "sha256": "e3227a7b8b9d9495e7e89621c1c090ee83a7b6579fe320207e808a9f3c3a5f23"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/green.json",
+      "sha256": "c69f22a2264b3b94ea018d357ed9335a3cbc9d9c69ff32a99925cffd6d8d559b"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/green.log",
+      "sha256": "c7a7db8bc33dd82e51b200c0c574fdfc0e92a153d65fc767114e0086d9a6c4f2"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/mypy.log",
+      "sha256": "8e63ae22e8213e327a5e9cbd584067681681bd8ef7f25c869877887ccdcfc4ff"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/native-mypy.log",
+      "sha256": "8e63ae22e8213e327a5e9cbd584067681681bd8ef7f25c869877887ccdcfc4ff"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/native-ruff.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/native-static.json",
+      "sha256": "5bf8c5eeafea4274a321e007a811a3cd20a6e5cd84c94a491fa5a6918ee97d50"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/native-text-final-green.json",
+      "sha256": "6c3b7a33ca33084d634acdc05be8269e8733d9012be086a301d161614905e71b"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/native-text-final-green.log",
+      "sha256": "ac3210762d7d7359f8d75d2235bc64f2c169bfce7626513464ec99bdf4a0e406"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/native-text-green.json",
+      "sha256": "59dca15f4d6fdec219547e80fe619dd4ae7caf28034d24dc000fe602aa072b61"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/native-text-green.log",
+      "sha256": "0e6953405e1ae9b6bdb943acd37e0d27bf8e7c2de1ecedcc92b8b058b0585de6"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/native-text-red.json",
+      "sha256": "37e6ddc178ed384edb7aff1c7fe8e56efb0e955107ded1b46ff14202f4095ccb"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/native-text-red.log",
+      "sha256": "7d49b61bf175ff29eae1648d8286bd8a5ce9028784db60587f768df36b270afd"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/red-fixture-corrected.json",
+      "sha256": "e30656f22426b4b60f63cd939a68b3146af8031c8af72e42a16277b93fe71ebf"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/red-fixture-corrected.log",
+      "sha256": "19440d4bfff0456a482c2c03ce60725c0cf37a22abcfc1a5ad23c59281ea1984"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/red.json",
+      "sha256": "6f8cbb727f6bb068770bb307ff0229ceec931ebeb898a8a84fdd1b9f7d8dec28"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/red.log",
+      "sha256": "ae9f610d57e4f6105d1dce9c280170bd6ad59fd9d38b1715d69e50d97c22d21e"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/ruff.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/static.json",
+      "sha256": "49522edea10362ac6a6e0417704918b83067e5573b50acbfb7cb90840b83d917"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/HANDOFF.md",
+      "sha256": "63925c3a1289081cd53905c4ac68f94150d21566874d9db2b900f1c448ab80e8"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/first-implementation.json",
+      "sha256": "f1631c2217f2e10f855b42ffe9c2e5c5374519e56c3f10711d01534b306d4fea"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/first-implementation.log",
+      "sha256": "6ca170cca628dbeacab055c75464f8f603b370c07483e0ed5c2e2089a14e4537"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/green.json",
+      "sha256": "b8daf94fc6088bdca7685e060546ff22690f20f73f543ad3a4f43542582d38a3"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/green.log",
+      "sha256": "7cedda05aec14bae948cc7a24164fa41645c6f91bb5362a215c45fa660b7ed0d"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/mypy.log",
+      "sha256": "8e63ae22e8213e327a5e9cbd584067681681bd8ef7f25c869877887ccdcfc4ff"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/pre-constant-green.json",
+      "sha256": "7e75f5dc1aeed4f04489136682f4619e3f636b3033edbd056962f434da116dab"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/pre-constant-green.log",
+      "sha256": "6ca219508bbb46c9c886465edbf9a7daac81f2666e308ca313ec019a43c69f50"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/red.json",
+      "sha256": "15f187ac425a1b3965e72933170dc7406ebc0b57ec6404fed79e4fbcde329150"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/red.log",
+      "sha256": "cc63af1a03b8966a1afb631777184969856b2aac0a437a055890b62abbeb3799"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/ruff.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/second-implementation.json",
+      "sha256": "e758759bf448b23bbe040f818ea5f99f72c995b19136bdf4f7e028face3b6346"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/second-implementation.log",
+      "sha256": "3c8f7d988d6b14c19e317d1ca1ce4c1844df653cae4e28bb546f4782607a8f94"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/static.json",
+      "sha256": "0d77b5884b7cd2e0126f811282fcc4ab1abf896dc1b049a1fd54bcf4c308f3e5"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-contracts-03/green.json",
+      "sha256": "dfa80c8341b39e47cee359a2d941bafe34c83c2fc5d673b4c0773abb7f3b5e9c"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-contracts-03/green.log",
+      "sha256": "358be924b5a0230dce135f713cb2104a5e01c5dda5f0b7ace54810723f8482bc"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-contracts-03/mypy.log",
+      "sha256": "281a094c39385b4d7b53e5db635f52158036861433c2a4975b9039e77a627a24"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-contracts-03/red.json",
+      "sha256": "ed575c1b1598322dec8fbe31bfd3567f6cd2c463505c964a5ae3fb518852e219"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-contracts-03/red.log",
+      "sha256": "cd2529656ae1c31b2c8a3796eb8563f685d1111f18d7b5b934fae26846785e40"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-contracts-03/ruff.log",
+      "sha256": "0f1756262f7ea8cd2744bec87809a607202303c2ca2b23c7882da20b6986c8e0"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md",
+      "sha256": "d001a87cdbca28c48b9b6f36ece828b54ff0fcff90f1e7c20f9961f23846208e"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/green-attempt-01.json",
+      "sha256": "cb4dec02fe08533721521e00aa7d55b1d339b51dc0c93aae6f67550dfd417508"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/green-attempt-01.log",
+      "sha256": "11f125d9e7e4b9a2023b0a61dd85fed7724f10d6023364a4599db541e9823a76"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/green-attempt-02.json",
+      "sha256": "b4d9d79e1789b7d5148fe40ee3d8590ca7e5ac70b1fa3de21cf5f63931aae64c"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/green-attempt-02.log",
+      "sha256": "5519b797e3d72ba57f856449d823b6a2df670cadb00817392fe1551b211b63d3"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/green.json",
+      "sha256": "0014d3d947035342f5ca0fbcbae0266b17b94ec69967258cb55d9f4a903a98e3"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/green.log",
+      "sha256": "8f5bd21b52346d99828382da24faaebb04f103a3c368e7fb6fd4bd71f941440f"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/handoff.json",
+      "sha256": "ab4f711fa34b12a0aaf198cc16b63a51719fe1e9a8f59627fe9e075e36b5e6d7"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/red-launcher-error-01.json",
+      "sha256": "a0ced6e720de36bc7a3695dcf1560f90df157e154a804d625436ca998d682e6a"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/red-launcher-error-01.log",
+      "sha256": "03dde20e9a7e604853415bb322cd86a2f0c3547c517c194aae00ee62fb988e93"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/red.json",
+      "sha256": "9a1aa1c2495a6b70db08cac9b433e8187c2ecdb98c439ea0f5142f640bf5487e"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/red.log",
+      "sha256": "2b68def327a2198f5df2e8057f100ac5e07768811c728e11bf165f1e2a985887"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/static-1.log",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/static-2.log",
+      "sha256": "cd1da032f8b74cd93d1232b7660b7a7419bc39af0bece7847f5bad142b30f124"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/static-attempt-01-static-1.log",
+      "sha256": "7efc7512b6ef4f4fbd635071d87bd89690243311f99df2db40503c8296e04a40"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/static-attempt-01-static-2.log",
+      "sha256": "cd1da032f8b74cd93d1232b7660b7a7419bc39af0bece7847f5bad142b30f124"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/static-attempt-01-static.json",
+      "sha256": "5f034ce377687a8c2bc4b4172105e0340d5000e5843443c172f351101ebc0ac8"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/static-final-ruff.log",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/static.json",
+      "sha256": "ebdc150736ce3874fbbbce5e8a62e095f75d692134a88a6babd8663dac99f106"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/HANDOFF.md",
+      "sha256": "ee93b456df9441c131b110c813a307f4f49bc56dde9cfb7c25d75fb3954923e1"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/binding4-factory-HANDOFF.md",
+      "sha256": "364682a18799a6b573fa4367364d6dae88dcbc6df1f50103270ca8b2e43fae31"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/binding4-factory-handoff.json",
+      "sha256": "36e2918da9eb13ca3de8a1aea4e45ff24f9480237df0c29868a8f42976c41975"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/binding4-factory-scope-proof.json",
+      "sha256": "4924c3dc01ad0893c9dd4b326a8dec30d43dc0edc27bb0a35ae11b9e231562e6"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/binding4-raw-red.json",
+      "sha256": "da48c1c8263cc2b7d21b38b979ab7ba8c1ca2788bf5b61e18a96b3a87e681104"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/binding4-raw-red.log",
+      "sha256": "7022ea730233e7670ac60858d943d11254fe9c5d192ac3281bd94191b8a79fd9"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/final.json",
+      "sha256": "51e838a20560db1fa233006c4fef754756025c038f14502742af1695d53c31f9"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/green-attempt-1.json",
+      "sha256": "cc183cc10976f85898a0b1af33f3c6013ed0466df11ee11e2c679385042e5df5"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/green-attempt-1.log",
+      "sha256": "b2e55585451eb8f30ca4eabde190df8d4cdea3a3a0394e5c4e0f55973f4919d0"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/handoff.json",
+      "sha256": "d6e7b365d773a8281b1ce557092384cece99a1a0bf61ee068014d55210f7c18f"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/mypy-attempt-1.log",
+      "sha256": "281a094c39385b4d7b53e5db635f52158036861433c2a4975b9039e77a627a24"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/mypy-final.log",
+      "sha256": "281a094c39385b4d7b53e5db635f52158036861433c2a4975b9039e77a627a24"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/pytest-final.log",
+      "sha256": "3b967684deaada075727515d5d549f8b1f01195279601bc8ce142322d5f7916d"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/red-aligned.json",
+      "sha256": "a239803b06667de4c6035e2ec47a0162ebd887939803accba586283539ba8531"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/red-aligned.log",
+      "sha256": "3c62a55aa4f67655b3fd51ec70209cb36b12cbc25c97fcfbdf86c2f5a2f0861e"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/red.json",
+      "sha256": "3e331d3cc253b0a8af5e5782e4a866e7e26a30be86fef9400d6448ebc9ae1c39"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/red.log",
+      "sha256": "bf9afe6dffd616405c078d8657c0b6819214c0db5f4d81c5535a5ecf530d7e99"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/ruff-attempt-1.log",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/ruff-final.log",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/static-attempt-1.json",
+      "sha256": "2ff7602af0c3e14f1a52acbce9fb8c55e08988bb68da9d8e229c7e6e234e79cd"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md",
+      "sha256": "fd4ad3e175d73cf17aa15e283412ec23ee3db93f140fec76e9953f10752f3def"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md",
+      "sha256": "d82a1f25d5a1f5d83fd0609650f8385a337a6a339c67d7c25f34d3be843895c1"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md",
+      "sha256": "7934d0453b8647c28f992dc2b52a974cba35854866f5fa6604f5de47278d27c5"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/RUN_PROMPT_HANDOFF.md",
+      "sha256": "4a20827c367c453ce973ed521c29d28543e0d02c1e3d4208b6b880880edb92d5"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-handoff.json",
+      "sha256": "976c8d7d6d3e03ea800478ce682cfd42fd45438b0bfcf3b3343fda62e458f6c8"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-integrity-trace.json",
+      "sha256": "1bb615496f94abcf4b201836b9b50e0de956cc2ef3fbf968e1d2aebc3aa12f65"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-integrity-trace.log",
+      "sha256": "4506f3bcecd79105c4a3e172a4ce8119adea2aa5ead242d320e62e2ab4c609ec"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-node-01.json",
+      "sha256": "d5de602ae179edf6f7170d29496d83b4d1f5f939570537905a6b6101c0851982"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-node-01.log",
+      "sha256": "a1ba5113c0f78e23ca89f6a7734cb92028ca94745f01df7e8481e328489760b3"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-node-02.json",
+      "sha256": "f529feb4aa6ba5e73d32bef0d7a31626e6b8f5bc19a226e387c4470fcd424dd6"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-node-02.log",
+      "sha256": "9bd291b610e121652f8281478ca18e0af6a491bdfd817f5a871bc8dc6623cbc9"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-node-03.json",
+      "sha256": "259762fc97ea88e38fd51eaed480bea2a954448836492fa95a7d99274001a2a9"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-node-03.log",
+      "sha256": "9072b7fb46a1296f55b2f6223e9b0b4c0f6318b8b1d589bc878081f3869c178e"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-node-04.json",
+      "sha256": "a1e74099825bf88c9cdc6b5fbef2c8340f8d36857453c9922263064a29bb92db"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-node-04.log",
+      "sha256": "63dd434830e56ddf4fb369756e168637b4085727aaf079d8c73264525aad0b9f"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-red-detail.json",
+      "sha256": "9d0f49c6fa0bae4381f959949e5f724fa04c8202822ee1313d41c12071a13c77"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-red-detail.log",
+      "sha256": "66c77d9078059d4f37627fc0c544049078e8b4c41b5f1b86919c76dfec322b71"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-red.json",
+      "sha256": "110765775369d9b92f92937c04bacfb1648a772f63c889f71843de820d202e07"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-red.log",
+      "sha256": "c196e55a64fad18b34e09fc448cc09eec0ed92187d2a0afdfc7009920c017cb2"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-transition-trace.log",
+      "sha256": "d2fb2fb8cd75f59a04dac7402c01200f4d6b39d89e949ecd2acf1a4a318deff8"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-ledger-final-ruff.log",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/canonical-cli-green.json",
+      "sha256": "796a5a866eb1261fd10dd0ff93686f84c2f47417f9aaaef4cc6998bf92d32dbe"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/canonical-cli-green.log",
+      "sha256": "23d3c30078409a9f853b9421cef0d7ce3a2cc8a79d2b30db880a22b057cda415"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/canonical-cli-handoff.json",
+      "sha256": "3e4d9d23b23e07f2cb7830fc629a2081567e39f82d4011cbe06c5cfbbffe491a"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/canonical-cli-red.json",
+      "sha256": "2918c2c45dc7bab27f4207930182b46aeaacf2d3abdc080a111db3c514b4e775"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/canonical-cli-red.log",
+      "sha256": "1f371a657dd41c79c04769d6f7361b26aa6816f4367c8f62aaca7d03ef57e3e2"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/canonical-cli-ruff.log",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/canonical-cli-shape-green.json",
+      "sha256": "bd8b2c50fe925182259065bef17a378c83538cf8738b76faeda78b7c13689768"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/canonical-cli-shape-green.log",
+      "sha256": "a78d0e17f80aea62f4d3379e145c6d7c49f9bfc13411a99e208af6f48a24ff0f"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/canonical-cli-shape-red.json",
+      "sha256": "8273bf0b97a67795ecc4bc88a4a759b645d3af0af43f1da1b7e933bc1c5e9a24"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/canonical-cli-shape-red.log",
+      "sha256": "2ee82711d3374426e5819c6b900d3d6430ca15b385ba4e17368bf081cbac7d31"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/green-owned-and-compat.json",
+      "sha256": "073a88187d31398ba9bb0eb14b32040179bb96b6d33a15d40fe32c94dce25189"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/green-owned-and-compat.log",
+      "sha256": "6e7e3500268c11e7cb4cee41bef2f6e3c87f65c8e57995f3373c3041cb29cc0c"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/green-tests.json",
+      "sha256": "3b2d60a1d1752a44e958a6e3515a91defed0d04854981d038f20d0ffa751aa46"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/green-tests.log",
+      "sha256": "7251196397fee180052f5296be0c1b6a63436b1462a61b91753f6e55b4179673"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/handoff.json",
+      "sha256": "50af320de90799d738b3dfe3c46db8765ed3de143f083648632ba32f98dab487"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/mypy-final.json",
+      "sha256": "a3ec20fb164bb9ed110447d60643639b92c43b60291f6c9d511ec1bc7ed5ebc3"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/mypy-final.log",
+      "sha256": "281a094c39385b4d7b53e5db635f52158036861433c2a4975b9039e77a627a24"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/mypy.json",
+      "sha256": "7cbe30b68cee2b3a5f5d0704e44c8cc744fa622fd297c9a6aaa81ebb6eb65485"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/mypy.log",
+      "sha256": "281a094c39385b4d7b53e5db635f52158036861433c2a4975b9039e77a627a24"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/red-integration.json",
+      "sha256": "5a2e439f6ebcf0e34dfe99320ef49c8e24f3b0c4ec1c80331741a90a4c68a192"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/red-integration.log",
+      "sha256": "6c4f404d13a5ff0667121afec0081f1e847b5e54d14cdf223416feb24887e111"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/red-metadata.json",
+      "sha256": "a70052bc7ed8d85858f8a85e1c1b0cc27ec92413114682db2321b8bcf0d30e31"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/red-metadata.log",
+      "sha256": "e823798bc2aa5130d2d24374d9e7c398838c634801779a4f4524545a78d9779b"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/red-unit.json",
+      "sha256": "a753678218ad8e99156642e54e0fc9c437a823355002c2e7a2aea145af5acf09"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/red-unit.log",
+      "sha256": "10516e224fc4b219609d79258bad9542e063cdafb1319ccbd4f3c43a1affcfad"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/ruff-final.json",
+      "sha256": "cb9fc6d2406750eed773913dc8aa4c550b3cac9411ef5f49521092782568e987"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/ruff-final.log",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/ruff.json",
+      "sha256": "36c1d1b1f018ef9c964be55eeb383e570e0c1b52bda4fac628c853fb67c12a7c"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/ruff.log",
+      "sha256": "a22bb802b1bb77c0c2c69e87d1af83f72fa7e9dff19a57a1b7e670e961adf7ed"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/run-prompt-final-green.json",
+      "sha256": "e2b171500c73e764b4ad9fcb8e42b822d4ea66893ee106e9147af06ffb9d3394"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/run-prompt-final-green.log",
+      "sha256": "0c5096f5ff0bb87348c79f7ae998bfc182d061cecedf6fb43d5ab31e90d7e026"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/run-prompt-final-mypy.log",
+      "sha256": "8e63ae22e8213e327a5e9cbd584067681681bd8ef7f25c869877887ccdcfc4ff"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/run-prompt-green.json",
+      "sha256": "5f0bff0e8b1b58ca489e15845a6735636ac77ea12016a39d17f38bfc3fb322f3"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/run-prompt-green.log",
+      "sha256": "d2d6bedcdf6d4961fd023397ee5f6c21e1903dc9fe2e768e04b6200fa1d1065e"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/run-prompt-handoff.json",
+      "sha256": "c8c5da172713543c762554ca2f08a5a827b70b03bfe6015dd24ae1d4aeec45d2"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/run-prompt-helper-red.log",
+      "sha256": "fec4c4631aeb57e63b75eadf788d8ee8b1c754c0cbd8e8877ef61a8bfcbdea55"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/run-prompt-mypy.log",
+      "sha256": "8e63ae22e8213e327a5e9cbd584067681681bd8ef7f25c869877887ccdcfc4ff"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/run-prompt-red.json",
+      "sha256": "2af476880ba4df6d62d24de39b1351a544244288f6abc2c3482ebf119f0286ce"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/run-prompt-red.log",
+      "sha256": "71f69a624c54777213f482805cc108bcf71c1838ccfab71775051312fd0a7acc"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md",
+      "sha256": "545a70ab4363d24d48270f7eb05dd7428cb1d89eda7db3be889f3c136a212101"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/first-implementation.json",
+      "sha256": "9ba2fda23b0a7cbb315e8defa44b10165201dfd715c9c8128a2be8a50d1c9dd2"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/first-implementation.log",
+      "sha256": "1ef9d677d4370f11d167fcf58e02ac6f730adb47543a0c37bf4dc5473d73dbd6"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/green.json",
+      "sha256": "e5fb1baa3cb3377d720e59afc721871b7ecaf0c8cecfa46f1c67c3ee0c6d985f"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/green.log",
+      "sha256": "3d97715fe26fb7be8081e0e0c49922d08904db56c36b7f161f84cb70262959eb"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/mypy-final.log",
+      "sha256": "281a094c39385b4d7b53e5db635f52158036861433c2a4975b9039e77a627a24"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/mypy.log",
+      "sha256": "281a094c39385b4d7b53e5db635f52158036861433c2a4975b9039e77a627a24"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/reasoning-red.json",
+      "sha256": "53802b1ec0c976f5c0f27b225884f315aa2884b52719ce17e278bfc7b2429f89"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/reasoning-red.log",
+      "sha256": "c48f9b752582d13f3890b50f48b16096bb1394c30f9ef5762473589ea20f90d8"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/red.json",
+      "sha256": "c143069dfdc0209eb9e154fdb65c493a80e2f025236c2f6848fe345764d7a892"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/red.log",
+      "sha256": "9965b274474b85d8dc4b03522e204667aee0a2b93e1a6e6e8dd50aed8c731172"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/ruff-final.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/ruff.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/static-final.json",
+      "sha256": "1ebe4ba32c7c3ef44272ce717570620db7764dbcb69faf0f27e78b81186c5c13"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/static.json",
+      "sha256": "7789fb83b8a71cf9968292d4a88823ceb471c6f1365e4cd025c0dd2929bfd4fd"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/normal-commit.log",
+      "sha256": "53c916d428ea2b37677486b4c854a55832716b19edca8e0189afa9cb3175c098"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/normal-push.log",
+      "sha256": "568361b45a425d811787f5847f8363fe6db86205a5903b30bcd9541349087a23"
+    },
+    {
+      "path": "tests/fixtures/narrative_real_transcript/MSFT_Q4_2026_earnings_call.txt",
+      "sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/cached-check-02.log",
+      "sha256": "a00668d66a9ee2c32d47f94a39aea7da81b3d75bb1afa07b9faf9c275c5f975d"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/normal-restage.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "candidate_inventory": "controlled inventory was updated after the prior staging check; current working/canonical/795a076d Git blob are byte-identical",
+  "candidate_inventory_sha256": "f4f7ba0a59dd7b2d87b6063e902eb160c6d37194fe31046a1f742d7e1480b367",
+  "prior_compare": "only intentionally regenerated inventory differs from earlier archive receipt, not raw evidence"
+}

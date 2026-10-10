@@ -841,3 +841,9 @@ W09readonly两文件交付，18M3动作、24refs/19原件hash/17匹配，57选�
 归档时Git自动换行使原生CR/CRLF日志和审查Markdown的已记录SHA变化，已按evidence角色设置-text/-diff，原始内容零修改；暂存280份原始回执/fixture逐byte相同，源码/PWF whitespace检查绿。仅保存必要失败记录，本次候选源码/测试/PWF/证据约2.5MB，未产生全湖/完整备份。
 
 用户已交P7-RF，独立只读接收验收启动；P7-AUDIT仍未收到完成通知，各卡写集继续隔离。CWP主线提交待hook收尾，不将前面工程绿冒称已远端发布。goal active、0外部供应商/模型费用、原件/config/Dayu及邻仓WIP不动。
+
+## 2026-10-10T23:15:40.078596+00:00 — P7-RF独立接收与MAIN后续修复
+
+P7-RF HEAD183c9534、源码05aa2661已接收。独立25责任测试PASS，真实build→validate/compute/Markdown/snapshot→diagnostics发现FY2031 conversion参数/claim/observation同步改期而实际FY2026输出仍错误supported；记source_partial。MAIN接手原写集，先同反例RED，再在calibration/native依赖责任层诊断直接conversion适用期→实际output/消费单元，不设来源披露日相等/跨期禁止门，不改算术/confidence、旧optional空输入和有效历史reference；实际native跨期桥按已可复查关系处理。复用现成MAIN4.2.1兼容patch，正常静态、责任与一次公共离线E2E复验后合线/发布/安装；旧交接记录保留。独立验收报告：[P7 RF reception](phase6/main_auto_official_json/evidence/p7-rf-reception/readonly-reception.md)。P7-AUDIT仍未交付，写集不动。
+
+CWP795a076d正常commit及canonical master fast-forward完成，push正常门3019PASS/1FAIL（268.61秒）仅native HTML测试固定旧parser0.3.0，默认已明示0.3.1；保留旧0.3.0全units fingerprint回放与原件SHA检查，只更新默认新版本断言。原失败push回执保留，不重写、不no-verify。下一步正常补充commit/ff/push与精确HEAD CI；RF接线并行。0外部provider/model/费用，原件/config/Dayu/邻仓WIP不动，goal active。

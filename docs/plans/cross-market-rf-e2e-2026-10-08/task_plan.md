@@ -1,5 +1,11 @@
 # 三市场真实收入预测端到端审计
 
+## 2026-10-10T23:15:40.078596+00:00 — P7-RF独立接收与MAIN后续修复
+
+P7-RF HEAD183c9534、源码05aa2661已接收。独立25责任测试PASS，真实build→validate/compute/Markdown/snapshot→diagnostics发现FY2031 conversion参数/claim/observation同步改期而实际FY2026输出仍错误supported；记source_partial。MAIN接手原写集，先同反例RED，再在calibration/native依赖责任层诊断直接conversion适用期→实际output/消费单元，不设来源披露日相等/跨期禁止门，不改算术/confidence、旧optional空输入和有效历史reference；实际native跨期桥按已可复查关系处理。复用现成MAIN4.2.1兼容patch，正常静态、责任与一次公共离线E2E复验后合线/发布/安装；旧交接记录保留。独立验收报告：[P7 RF reception](phase6/main_auto_official_json/evidence/p7-rf-reception/readonly-reception.md)。P7-AUDIT仍未交付，写集不动。
+
+CWP795a076d正常commit及canonical master fast-forward完成，push正常门3019PASS/1FAIL（268.61秒）仅native HTML测试固定旧parser0.3.0，默认已明示0.3.1；保留旧0.3.0全units fingerprint回放与原件SHA检查，只更新默认新版本断言。原失败push回执保留，不重写、不no-verify。下一步正常补充commit/ff/push与精确HEAD CI；RF接线并行。0外部provider/model/费用，原件/config/Dayu/邻仓WIP不动，goal active。
+
 ## MAIN与P7-CWP集中验收通过，待正常主线发布（2026-10-10T22:53:13.182893+00:00）
 
 P7-CWP source `1c11ef0b5a838655559e91fab9a7bf38f1533d89`/handoff `4f2c05c92f3aed9cdf91808a60e1c5d38adce6ee` 独立166责任测试与两布局真实导入/保存/回放、旧Git blob逐字节比对全部PASS，已正常合入隔离MAIN `3f2ed5cb1b95492717652cba64eae35c9686a1a0`。独占叶源码未追加改动。

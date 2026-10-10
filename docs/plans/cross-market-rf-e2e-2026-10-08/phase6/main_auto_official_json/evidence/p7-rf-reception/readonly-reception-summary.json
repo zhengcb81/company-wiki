@@ -1,0 +1,65 @@
+{
+  "schema_version": "p7-rf-reception-summary/1",
+  "status": "source_partial",
+  "actual_head": "183c9534b90549c094fc32a51ff6ada1e9cb5227",
+  "source_delivery_head": "05aa2661c9cdc34cb7e9ce3cf7e83b43bee7f556",
+  "base_head": "6883bf00548abb9891eab6762aeaa89e3898b202",
+  "branch": "codex/p7-rf-calibration-binding",
+  "source_sha256": {
+    "scripts/research/evidence_roles.py": "99fbda969af68f3ab0e5e7b223fce3b9c412c943e9d4d3d64b6d750ea471eea3",
+    "scripts/research/native_dependencies.py": "e208ade2e18c44086baad89a9aa5abcfda566bf2a02caace9406388f33477bfa",
+    "scripts/research_support_diagnostics.py": "f8dbe997c6fea585cc9ca3cf2ca1c564ea43733de70a46b373b684353c221f7e",
+    "scripts/contracts/constants.py": "728f4e6ffc1417c37e155ea0191c3a28b804db601f279c11649e481e0075da74",
+    "tests/test_scoped_calibration_support.py": "da954ea95e182b94c7055862123fa49d3c7e6b66d1c891d8c3b9fddf6d5339a0",
+    "tests/test_research_support_diagnostics.py": "09961806969b57d3fbfa1603abfaa02a1d060f932f7dc770635ab6ac0b0581f5"
+  },
+  "delivery_evidence": [
+    {
+      "path": "attempts/m1/red_test_scoped_calibration_support.log",
+      "sha256": "97a2d362ca451c72e6b3135ba6d6f3bb2da716bb784c7c16acf03ba889828ca2",
+      "matches_handoff": true
+    },
+    {
+      "path": "attempts/m1/red_test_research_support_diagnostics.log",
+      "sha256": "6da049c1cc1c9985aeb3f66fa47e65231511074d2946cd2e7675b9bb490d7f66",
+      "matches_handoff": true
+    },
+    {
+      "path": "attempts/m2/green_responsibility.log",
+      "sha256": "2225ce4c3db2d5a8c50fb68b883c00f2e5e31a89484c2f70e8266546382ca95e",
+      "matches_handoff": true
+    },
+    {
+      "path": "attempts/m2/static.log",
+      "sha256": "fc315d60c8e4094da0aecc5cfb9bebc2a68d139a5d506d305ae025f72b891254",
+      "matches_handoff": true
+    },
+    {
+      "path": "attempts/m3_e2e.log",
+      "sha256": "da721f7c012ddbe50a2296d3e19e614f248c3a86654a4b751d66c727482e8065",
+      "matches_handoff": true
+    },
+    {
+      "path": "attempts/m2/compatibility_main_patch_trial.log",
+      "sha256": "9803fcd742ce2532b685eaad306beb0dd382d04bfb4664866f8ef93162cf2cf5",
+      "matches_handoff": true
+    },
+    {
+      "path": "attempts/m3/independent_review.md",
+      "sha256": "0638561e3c11df3babaa55e1751513eef1f3bfb5fe5a02f75ca52835921a0fd7",
+      "matches_handoff": true
+    }
+  ],
+  "pre_push_sha256": "9721807ab2371ec4d8a5659224f501361d513032cc45478bca3fb38c9e86405a",
+  "reception_receipt_sha256": "ccf13fc6f708571dd874c400855ae5b11a206fba355829bb34693cc0ce689e3f",
+  "driver_sha256": "3eb1ae77bd5985d30e85d7b7386b94840aa0b4745f28956f83185ed3375226ae",
+  "main_integration_patch_sha256": "9335ad102f8c8764bdaa55ff6c669a9cb9b423e562edfd1429062df2e6848338",
+  "external_provider_calls": 0,
+  "external_model_calls": 0,
+  "next_main_interface": [
+    "conversion applicability to actual output/consumed target period: diagnostic relation, never general source-date equality gate",
+    "apply existing MAIN patch: schema emitter registry + 5 assertions across 4 test files",
+    "keep economic-support-diagnostics/1 optional and economic_truth_inferred=false",
+    "keep R16/R17/R18/W09 research remaining open"
+  ]
+}

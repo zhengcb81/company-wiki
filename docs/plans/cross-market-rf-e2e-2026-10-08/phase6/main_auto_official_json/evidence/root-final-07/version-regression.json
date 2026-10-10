@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/test_native_document_pipeline.py",
+    "tests/unit/test_transcript_boundary_versions.py",
+    "tests/unit/test_transcript_parser_compatibility.py",
+    "-q"
+  ],
+  "exit": 0,
+  "elapsed_seconds": 7.908,
+  "log_sha256": "8ebf553b4eabf5c5e771edc66b7b38b3af438efb8c3d9b362ba8700c485034b3",
+  "external_calls": 0
+}

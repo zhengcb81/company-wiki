@@ -1,0 +1,753 @@
+Updating de24d31c..795a076d
+Fast-forward
+ .gitattributes                                     |    7 +
+ .planning/p7-cwp-projection/HANDOFF.md             |  100 ++
+ .planning/p7-cwp-projection/HANDOFF_FORMAT.md      |   22 +
+ .planning/p7-cwp-projection/IMPLEMENTATION_CARD.md |  101 ++
+ .planning/p7-cwp-projection/INTERFACES.md          |   38 +
+ .../m1_baseline_20261010/baseline_m3_tests.log     |   19 +
+ .../evidence/m1_red_20261010/red_new_tests.log     |  210 +++
+ .../evidence/m2_green_20261010/green_all.log       |   21 +
+ .../evidence/m2_green_20261010/green_all_final.log |   21 +
+ .../m2_green_20261010/green_m3_regressions.log     |   28 +
+ .../evidence/m2_green_20261010/green_new_tests.log |   14 +
+ .../evidence/m2_green_20261010/static_mypy.log     |    1 +
+ .../evidence/m2_green_20261010/static_ruff.log     |    1 +
+ .../evidence/m3_e2e_20261010/e2e.log               |    1 +
+ .../evidence/m3_e2e_20261010/e2e_first.log         |    1 +
+ .../m3_e2e_20261010/e2e_projection_chain.py        |  289 ++++
+ .../evidence/m3_e2e_20261010/e2e_receipt.json      |  143 ++
+ .../m3_e2e_20261010/e2e_receipt_first.json         |  143 ++
+ .../m3_e2e_20261010/repo_status_before_e2e.txt     |    4 +
+ .../m3_final_20261010/green_all_post_review.log    |   21 +
+ .../m3_final_20261010/independent_review.md        |   35 +
+ .../evidence/m3_final_20261010/static_mypy.log     |    1 +
+ .../evidence/m3_final_20261010/static_ruff.log     |    1 +
+ .planning/p7-cwp-projection/findings.md            |   17 +
+ .planning/p7-cwp-projection/handoff.example.json   |   41 +
+ .planning/p7-cwp-projection/handoff.json           |  123 ++
+ .planning/p7-cwp-projection/handoff.schema.json    |  219 +++
+ .planning/p7-cwp-projection/progress.md            |   14 +
+ .planning/p7-cwp-projection/task_plan.md           |   29 +
+ .../cross-market-rf-e2e-2026-10-08/findings.md     |   40 +
+ .../phase6/main_auto_official_json/ACCEPTANCE.md   |   49 +
+ .../phase6/main_auto_official_json/INTERFACES.md   |  107 +-
+ .../evidence/batch-identity-02/green-final.json    |  Bin 0 -> 661 bytes
+ .../evidence/batch-identity-02/green-final.log     |  Bin 0 -> 1410 bytes
+ .../batch-identity-02/green-observation.json       |  Bin 0 -> 697 bytes
+ .../evidence/batch-identity-02/green.log           |  Bin 0 -> 3971 bytes
+ .../batch-identity-02/red-context-observation.json |  Bin 0 -> 658 bytes
+ .../evidence/batch-identity-02/red-context.log     |  Bin 0 -> 3476 bytes
+ .../batch-identity-02/red-observation.json         |  Bin 0 -> 517 bytes
+ .../red-semantic-observation.json                  |  Bin 0 -> 640 bytes
+ .../evidence/batch-identity-02/red-semantic.log    |  Bin 0 -> 5961 bytes
+ .../evidence/batch-identity-02/red.log             |  Bin 0 -> 2547 bytes
+ .../evidence/batch-preparation-04/green.json       |  Bin 0 -> 183 bytes
+ .../evidence/batch-preparation-04/green.log        |  Bin 0 -> 1489 bytes
+ .../evidence/batch-preparation-04/red.json         |  Bin 0 -> 88 bytes
+ .../evidence/batch-preparation-04/red.log          |  Bin 0 -> 3928 bytes
+ .../evidence/evidence-view-04/green.json           |  Bin 0 -> 547 bytes
+ .../evidence/evidence-view-04/green.log            |  Bin 0 -> 3394 bytes
+ .../evidence/evidence-view-04/red.json             |  Bin 0 -> 88 bytes
+ .../evidence/evidence-view-04/red.log              |  Bin 0 -> 3489 bytes
+ .../evidence/evidence-view-04/repair-green.json    |  Bin 0 -> 632 bytes
+ .../evidence/evidence-view-04/repair-green.log     |  Bin 0 -> 2785 bytes
+ .../evidence/foundation-01/commit-observation.json |  Bin 0 -> 2625 bytes
+ .../evidence/foundation-01/exact-ci.json           |  Bin 0 -> 529 bytes
+ .../evidence/foundation-01/normal-commit.log       |  Bin 0 -> 2470 bytes
+ .../evidence/foundation-01/normal-push.log         |  Bin 0 -> 335 bytes
+ .../evidence/foundation-01/publication.json        |  Bin 0 -> 342 bytes
+ .../evidence/host-pointer-context-07/HANDOFF.md    |  Bin 0 -> 2661 bytes
+ .../host-pointer-green.json                        |  Bin 0 -> 868 bytes
+ .../host-pointer-context-07/host-pointer-green.log |  Bin 0 -> 793 bytes
+ .../host-pointer-handoff.json                      |  Bin 0 -> 1013 bytes
+ .../host-pointer-context-07/host-pointer-red.json  |  Bin 0 -> 599 bytes
+ .../host-pointer-context-07/host-pointer-red.log   |  Bin 0 -> 7251 bytes
+ .../host-pointer-context-07/host-pointer-ruff.log  |  Bin 0 -> 20 bytes
+ .../final-mixed-empty-history-receipt.json         |  Bin 0 -> 1899 bytes
+ .../integration-04/final-mixed-empty-history.log   |  Bin 0 -> 1265 bytes
+ .../integration-04/legacy-effort-green.log         |  Bin 0 -> 1133 bytes
+ .../legacy-effort-history-final-review.md          |  Bin 0 -> 6638 bytes
+ .../legacy-effort-old-resume-compat.log            |  Bin 0 -> 1105 bytes
+ .../evidence/integration-04/legacy-effort-red.log  |  Bin 0 -> 2660 bytes
+ .../integration-04/legacy-effort-static.log        |  Bin 0 -> 382 bytes
+ .../evidence/integration-04/mypy.log               |  Bin 0 -> 424 bytes
+ .../readonly-config-fix-source-shas.json           |  Bin 0 -> 676 bytes
+ .../readonly-generation-caller-fix.log             |  Bin 0 -> 1438 bytes
+ .../readonly-generation-fix-probes.json            |  Bin 0 -> 986 bytes
+ .../readonly-main-contracts-views.log              |  Bin 0 -> 1437 bytes
+ .../readonly-main-integration-tests.log            |  Bin 0 -> 4881 bytes
+ .../evidence/integration-04/readonly-review.md     |  Bin 0 -> 8745 bytes
+ .../integration-04/readonly-source-snapshot.json   |  Bin 0 -> 1311 bytes
+ .../evidence/integration-04/ruff.log               |  Bin 0 -> 19 bytes
+ .../evidence/integration-04/static.json            |  Bin 0 -> 4079 bytes
+ .../evidence/model-subject-03/HANDOFF.md           |  Bin 0 -> 5029 bytes
+ .../evidence/model-subject-03/before.json          |  Bin 0 -> 1521 bytes
+ .../evidence/model-subject-03/green-attempt-1.json |  Bin 0 -> 771 bytes
+ .../evidence/model-subject-03/green-attempt-1.log  |  Bin 0 -> 4501 bytes
+ .../evidence/model-subject-03/green-attempt-2.json |  Bin 0 -> 772 bytes
+ .../evidence/model-subject-03/green-attempt-2.log  |  Bin 0 -> 5132 bytes
+ .../evidence/model-subject-03/green.json           |  Bin 0 -> 798 bytes
+ .../evidence/model-subject-03/green.log            |  Bin 0 -> 2278 bytes
+ .../evidence/model-subject-03/handoff.json         |  Bin 0 -> 1554 bytes
+ .../evidence/model-subject-03/mypy.log             |  Bin 0 -> 44 bytes
+ .../model-subject-03/red-contract-aligned.json     |  Bin 0 -> 510 bytes
+ .../model-subject-03/red-contract-aligned.log      |  Bin 0 -> 34649 bytes
+ .../evidence/model-subject-03/red.json             |  Bin 0 -> 510 bytes
+ .../evidence/model-subject-03/red.log              |  Bin 0 -> 36090 bytes
+ .../evidence/model-subject-03/ruff.log             |  Bin 0 -> 20 bytes
+ .../evidence/model-subject-03/source-diff.log      |  Bin 0 -> 16690 bytes
+ .../evidence/model-subject-03/static.json          |  Bin 0 -> 891 bytes
+ .../p7-cwp-reception/handoff-evidence-hashes.json  |  Bin 0 -> 462 bytes
+ .../evidence/p7-cwp-reception/normal-merge.json    |  Bin 0 -> 302 bytes
+ .../evidence/p7-cwp-reception/normal-merge.log     |  Bin 0 -> 6695 bytes
+ .../p7-cwp-reception/p7-independent-166-tests.log  |  Bin 0 -> 1742 bytes
+ .../p7-independent-e2e-receipt.json                |  Bin 0 -> 6063 bytes
+ .../p7-independent-legacy-blob.json                |  Bin 0 -> 411 bytes
+ .../p7-cwp-reception/p7-main-adapter-overlay.json  |  Bin 0 -> 844 bytes
+ .../p7-cwp-reception/readonly-reception.md         |  Bin 0 -> 5430 bytes
+ .../p7-cwp-reception/reception-source-sha.json     |  Bin 0 -> 531 bytes
+ .../evidence/projection-generation-02/HANDOFF.md   |  Bin 0 -> 4844 bytes
+ .../evidence/projection-generation-02/before.json  |  Bin 0 -> 567 bytes
+ .../projection-generation-02/green-initial.json    |  Bin 0 -> 618 bytes
+ .../projection-generation-02/green-initial.log     |  Bin 0 -> 1735 bytes
+ .../evidence/projection-generation-02/green.json   |  Bin 0 -> 1612 bytes
+ .../evidence/projection-generation-02/green.log    |  Bin 0 -> 1735 bytes
+ .../evidence/projection-generation-02/handoff.json |  Bin 0 -> 762 bytes
+ .../projection-generation-02/mypy-initial.log      |  Bin 0 -> 44 bytes
+ .../evidence/projection-generation-02/mypy.log     |  Bin 0 -> 44 bytes
+ .../evidence/projection-generation-02/red.json     |  Bin 0 -> 521 bytes
+ .../evidence/projection-generation-02/red.log      |  Bin 0 -> 42385 bytes
+ .../projection-generation-02/ruff-initial.log      |  Bin 0 -> 11895 bytes
+ .../evidence/projection-generation-02/ruff.log     |  Bin 0 -> 20 bytes
+ .../projection-generation-02/static-initial.json   |  Bin 0 -> 822 bytes
+ .../evidence/projection-generation-02/static.json  |  Bin 0 -> 822 bytes
+ .../projection-generation-02/test-format.log       |  Bin 0 -> 20 bytes
+ .../evidence/publication-terminal-04/HANDOFF.md    |  Bin 0 -> 8233 bytes
+ .../publication-terminal-04/green-attempt-1.json   |  Bin 0 -> 514 bytes
+ .../publication-terminal-04/green-attempt-1.log    |  Bin 0 -> 3522 bytes
+ .../publication-terminal-04/green-final.json       |  Bin 0 -> 677 bytes
+ .../publication-terminal-04/green-final.log        |  Bin 0 -> 1863 bytes
+ .../evidence/publication-terminal-04/handoff.json  |  Bin 0 -> 5052 bytes
+ .../publication-terminal-04/integrated-final.json  |  Bin 0 -> 1864 bytes
+ .../publication-terminal-04/mypy-attempt-1.log     |  Bin 0 -> 255 bytes
+ .../publication-terminal-04/mypy-final.log         |  Bin 0 -> 44 bytes
+ .../publication-terminal-04/mypy-integrated.log    |  Bin 0 -> 44 bytes
+ .../publication-terminal-04/pytest-integrated.log  |  Bin 0 -> 1706 bytes
+ .../red-fixture-aligned.json                       |  Bin 0 -> 457 bytes
+ .../red-fixture-aligned.log                        |  Bin 0 -> 14653 bytes
+ .../evidence/publication-terminal-04/red.json      |  Bin 0 -> 456 bytes
+ .../evidence/publication-terminal-04/red.log       |  Bin 0 -> 20312 bytes
+ .../publication-terminal-04/ruff-attempt-1.log     |  Bin 0 -> 12652 bytes
+ .../publication-terminal-04/ruff-final.log         |  Bin 0 -> 20 bytes
+ .../publication-terminal-04/ruff-integrated.log    |  Bin 0 -> 20 bytes
+ .../publication-terminal-04/static-attempt-1.json  |  Bin 0 -> 175 bytes
+ .../publication-terminal-04/static-final.json      |  Bin 0 -> 177 bytes
+ .../evidence/root-final-06/archive-byte-check.json |  Bin 0 -> 66552 bytes
+ .../evidence/root-final-06/artifact-types-02.log   |  Bin 0 -> 43 bytes
+ .../evidence/root-final-06/cached-check-02.log     |  Bin 0 -> 142288 bytes
+ .../root-final-06/candidate-inventory.json         |  Bin 0 -> 90647 bytes
+ .../root-final-06/canonical-evidence-copy.json     |  Bin 0 -> 19410 bytes
+ .../commit-observation-01-failed.json              |  Bin 0 -> 349 bytes
+ .../evidence/root-final-06/commit-observation.json |  Bin 0 -> 349 bytes
+ .../evidence/root-final-06/frozen-snapshot-02.log  |  Bin 0 -> 412 bytes
+ .../evidence/root-final-06/mypy-01.log             |  Bin 0 -> 265 bytes
+ .../evidence/root-final-06/mypy-final-03.log       |  Bin 0 -> 44 bytes
+ .../root-final-06/normal-commit-01-failed.log      |  Bin 0 -> 1733 bytes
+ .../evidence/root-final-06/normal-commit.log       |  Bin 0 -> 1733 bytes
+ .../evidence/root-final-06/normal-restage.log      |  Bin
+ .../evidence/root-final-06/normal-stage.log        |  Bin 0 -> 3748 bytes
+ .../root-final-06/portable-path-negative-07.json   |  Bin 0 -> 734 bytes
+ .../root-final-06/portable-path-negative-07.log    |  Bin 0 -> 411 bytes
+ .../root-final-06/preflight-missing-suite.json     |  Bin 0 -> 194 bytes
+ .../root-final-06/responsibility-tests-01.json     |  Bin 0 -> 1185 bytes
+ .../root-final-06/responsibility-tests-01.log      |  Bin 0 -> 1796 bytes
+ .../evidence/root-final-06/ruff-01.log             |  Bin 0 -> 19 bytes
+ .../evidence/root-final-06/ruff-final-03.log       |  Bin 0 -> 19 bytes
+ .../evidence/root-final-06/specific-fixes-02.json  |  Bin 0 -> 1280 bytes
+ .../evidence/root-final-06/static-01.json          |  Bin 0 -> 4324 bytes
+ .../evidence/root-final-06/static-final-03.json    |  Bin 0 -> 4753 bytes
+ .../root-model-binding-05/red-observation.json     |  Bin 0 -> 656 bytes
+ .../evidence/select-handler-03/HANDOFF.md          |  Bin 0 -> 6435 bytes
+ .../select-handler-03/first-implementation.json    |  Bin 0 -> 786 bytes
+ .../select-handler-03/first-implementation.log     |  Bin 0 -> 2342 bytes
+ .../evidence/select-handler-03/green.json          |  Bin 0 -> 1223 bytes
+ .../evidence/select-handler-03/green.log           |  Bin 0 -> 1440 bytes
+ .../evidence/select-handler-03/mypy.log            |  Bin 0 -> 43 bytes
+ .../evidence/select-handler-03/native-mypy.log     |  Bin 0 -> 43 bytes
+ .../evidence/select-handler-03/native-ruff.log     |  Bin 0 -> 19 bytes
+ .../evidence/select-handler-03/native-static.json  |  Bin 0 -> 1120 bytes
+ .../select-handler-03/native-text-final-green.json |  Bin 0 -> 1420 bytes
+ .../select-handler-03/native-text-final-green.log  |  Bin 0 -> 1436 bytes
+ .../select-handler-03/native-text-green.json       |  Bin 0 -> 1420 bytes
+ .../select-handler-03/native-text-green.log        |  Bin 0 -> 2432 bytes
+ .../select-handler-03/native-text-red.json         |  Bin 0 -> 633 bytes
+ .../evidence/select-handler-03/native-text-red.log |  Bin 0 -> 4802 bytes
+ .../select-handler-03/red-fixture-corrected.json   |  Bin 0 -> 607 bytes
+ .../select-handler-03/red-fixture-corrected.log    |  Bin 0 -> 12079 bytes
+ .../evidence/select-handler-03/red.json            |  Bin 0 -> 705 bytes
+ .../evidence/select-handler-03/red.log             |  Bin 0 -> 12381 bytes
+ .../evidence/select-handler-03/ruff.log            |  Bin 0 -> 19 bytes
+ .../evidence/select-handler-03/static.json         |  Bin 0 -> 1030 bytes
+ .../evidence/source-adapter-02/HANDOFF.md          |  Bin 0 -> 4380 bytes
+ .../source-adapter-02/first-implementation.json    |  Bin 0 -> 847 bytes
+ .../source-adapter-02/first-implementation.log     |  Bin 0 -> 2025 bytes
+ .../evidence/source-adapter-02/green.json          |  Bin 0 -> 1380 bytes
+ .../evidence/source-adapter-02/green.log           |  Bin 0 -> 1350 bytes
+ .../evidence/source-adapter-02/mypy.log            |  Bin 0 -> 43 bytes
+ .../source-adapter-02/pre-constant-green.json      |  Bin 0 -> 956 bytes
+ .../source-adapter-02/pre-constant-green.log       |  Bin 0 -> 1364 bytes
+ .../evidence/source-adapter-02/red.json            |  Bin 0 -> 853 bytes
+ .../evidence/source-adapter-02/red.log             |  Bin 0 -> 3064 bytes
+ .../evidence/source-adapter-02/ruff.log            |  Bin 0 -> 19 bytes
+ .../source-adapter-02/second-implementation.json   |  Bin 0 -> 895 bytes
+ .../source-adapter-02/second-implementation.log    |  Bin 0 -> 2240 bytes
+ .../evidence/source-adapter-02/static.json         |  Bin 0 -> 1146 bytes
+ .../evidence/subject-contracts-03/green.json       |  Bin 0 -> 1960 bytes
+ .../evidence/subject-contracts-03/green.log        |  Bin 0 -> 2013 bytes
+ .../evidence/subject-contracts-03/mypy.log         |  Bin 0 -> 44 bytes
+ .../evidence/subject-contracts-03/red.json         |  Bin 0 -> 559 bytes
+ .../evidence/subject-contracts-03/red.log          |  Bin 0 -> 8019 bytes
+ .../evidence/subject-contracts-03/ruff.log         |  Bin 0 -> 17128 bytes
+ .../evidence/subject-store-02/HANDOFF.md           |  Bin 0 -> 4226 bytes
+ .../subject-store-02/green-attempt-01.json         |  Bin 0 -> 703 bytes
+ .../evidence/subject-store-02/green-attempt-01.log |  Bin 0 -> 103509 bytes
+ .../subject-store-02/green-attempt-02.json         |  Bin 0 -> 996 bytes
+ .../evidence/subject-store-02/green-attempt-02.log |  Bin 0 -> 12113 bytes
+ .../evidence/subject-store-02/green.json           |  Bin 0 -> 1212 bytes
+ .../evidence/subject-store-02/green.log            |  Bin 0 -> 788 bytes
+ .../evidence/subject-store-02/handoff.json         |  Bin 0 -> 852 bytes
+ .../subject-store-02/red-launcher-error-01.json    |  Bin 0 -> 374 bytes
+ .../subject-store-02/red-launcher-error-01.log     |  Bin 0 -> 142 bytes
+ .../evidence/subject-store-02/red.json             |  Bin 0 -> 392 bytes
+ .../evidence/subject-store-02/red.log              |  Bin 0 -> 48494 bytes
+ .../evidence/subject-store-02/static-1.log         |  Bin 0 -> 20 bytes
+ .../evidence/subject-store-02/static-2.log         |  Bin 0 -> 44 bytes
+ .../static-attempt-01-static-1.log                 |  Bin 0 -> 952 bytes
+ .../static-attempt-01-static-2.log                 |  Bin 0 -> 44 bytes
+ .../subject-store-02/static-attempt-01-static.json |  Bin 0 -> 814 bytes
+ .../subject-store-02/static-final-ruff.log         |  Bin 0 -> 20 bytes
+ .../evidence/subject-store-02/static.json          |  Bin 0 -> 814 bytes
+ .../evidence/transcript-boundary-05/HANDOFF.md     |  Bin 0 -> 6849 bytes
+ .../binding4-factory-HANDOFF.md                    |  Bin 0 -> 2917 bytes
+ .../binding4-factory-handoff.json                  |  Bin 0 -> 3880 bytes
+ .../binding4-factory-scope-proof.json              |  Bin 0 -> 2348 bytes
+ .../transcript-boundary-05/binding4-raw-red.json   |  Bin 0 -> 524 bytes
+ .../transcript-boundary-05/binding4-raw-red.log    |  Bin 0 -> 11268 bytes
+ .../evidence/transcript-boundary-05/final.json     |  Bin 0 -> 1989 bytes
+ .../transcript-boundary-05/green-attempt-1.json    |  Bin 0 -> 745 bytes
+ .../transcript-boundary-05/green-attempt-1.log     |  Bin 0 -> 2632 bytes
+ .../evidence/transcript-boundary-05/handoff.json   |  Bin 0 -> 3811 bytes
+ .../transcript-boundary-05/mypy-attempt-1.log      |  Bin 0 -> 44 bytes
+ .../evidence/transcript-boundary-05/mypy-final.log |  Bin 0 -> 44 bytes
+ .../transcript-boundary-05/pytest-final.log        |  Bin 0 -> 1866 bytes
+ .../transcript-boundary-05/red-aligned.json        |  Bin 0 -> 439 bytes
+ .../transcript-boundary-05/red-aligned.log         |  Bin 0 -> 9488 bytes
+ .../evidence/transcript-boundary-05/red.json       |  Bin 0 -> 439 bytes
+ .../evidence/transcript-boundary-05/red.log        |  Bin 0 -> 10030 bytes
+ .../transcript-boundary-05/ruff-attempt-1.log      |  Bin 0 -> 20 bytes
+ .../evidence/transcript-boundary-05/ruff-final.log |  Bin 0 -> 20 bytes
+ .../transcript-boundary-05/static-attempt-1.json   |  Bin 0 -> 177 bytes
+ .../transport-subject-03/BATCH_E2E_HANDOFF.md      |  Bin 0 -> 5429 bytes
+ .../transport-subject-03/CANONICAL_CLI_HANDOFF.md  |  Bin 0 -> 4140 bytes
+ .../evidence/transport-subject-03/HANDOFF.md       |  Bin 0 -> 3910 bytes
+ .../transport-subject-03/RUN_PROMPT_HANDOFF.md     |  Bin 0 -> 3189 bytes
+ .../transport-subject-03/batch-e2e-handoff.json    |  Bin 0 -> 1844 bytes
+ .../batch-e2e-integrity-trace.json                 |  Bin 0 -> 135 bytes
+ .../batch-e2e-integrity-trace.log                  |  Bin 0 -> 2971 bytes
+ .../transport-subject-03/batch-e2e-node-01.json    |  Bin 0 -> 540 bytes
+ .../transport-subject-03/batch-e2e-node-01.log     |  Bin 0 -> 6121 bytes
+ .../transport-subject-03/batch-e2e-node-02.json    |  Bin 0 -> 561 bytes
+ .../transport-subject-03/batch-e2e-node-02.log     |  Bin 0 -> 6386 bytes
+ .../transport-subject-03/batch-e2e-node-03.json    |  Bin 0 -> 561 bytes
+ .../transport-subject-03/batch-e2e-node-03.log     |  Bin 0 -> 18689 bytes
+ .../transport-subject-03/batch-e2e-node-04.json    |  Bin 0 -> 561 bytes
+ .../transport-subject-03/batch-e2e-node-04.log     |  Bin 0 -> 787 bytes
+ .../transport-subject-03/batch-e2e-red-detail.json |  Bin 0 -> 530 bytes
+ .../transport-subject-03/batch-e2e-red-detail.log  |  Bin 0 -> 3513 bytes
+ .../transport-subject-03/batch-e2e-red.json        |  Bin 0 -> 537 bytes
+ .../transport-subject-03/batch-e2e-red.log         |  Bin 0 -> 2667 bytes
+ .../batch-e2e-transition-trace.log                 |  Bin 0 -> 1296 bytes
+ .../batch-ledger-final-ruff.log                    |  Bin 0 -> 20 bytes
+ .../transport-subject-03/canonical-cli-green.json  |  Bin 0 -> 572 bytes
+ .../transport-subject-03/canonical-cli-green.log   |  Bin 0 -> 780 bytes
+ .../canonical-cli-handoff.json                     |  Bin 0 -> 1458 bytes
+ .../transport-subject-03/canonical-cli-red.json    |  Bin 0 -> 529 bytes
+ .../transport-subject-03/canonical-cli-red.log     |  Bin 0 -> 4132 bytes
+ .../transport-subject-03/canonical-cli-ruff.log    |  Bin 0 -> 20 bytes
+ .../canonical-cli-shape-green.json                 |  Bin 0 -> 969 bytes
+ .../canonical-cli-shape-green.log                  |  Bin 0 -> 781 bytes
+ .../canonical-cli-shape-red.json                   |  Bin 0 -> 968 bytes
+ .../canonical-cli-shape-red.log                    |  Bin 0 -> 5090 bytes
+ .../green-owned-and-compat.json                    |  Bin 0 -> 928 bytes
+ .../green-owned-and-compat.log                     |  Bin 0 -> 873 bytes
+ .../evidence/transport-subject-03/green-tests.json |  Bin 0 -> 724 bytes
+ .../evidence/transport-subject-03/green-tests.log  |  Bin 0 -> 7846 bytes
+ .../evidence/transport-subject-03/handoff.json     |  Bin 0 -> 1157 bytes
+ .../evidence/transport-subject-03/mypy-final.json  |  Bin 0 -> 552 bytes
+ .../evidence/transport-subject-03/mypy-final.log   |  Bin 0 -> 44 bytes
+ .../evidence/transport-subject-03/mypy.json        |  Bin 0 -> 509 bytes
+ .../evidence/transport-subject-03/mypy.log         |  Bin 0 -> 44 bytes
+ .../transport-subject-03/red-integration.json      |  Bin 0 -> 624 bytes
+ .../transport-subject-03/red-integration.log       |  Bin 0 -> 26293 bytes
+ .../transport-subject-03/red-metadata.json         |  Bin 0 -> 507 bytes
+ .../evidence/transport-subject-03/red-metadata.log |  Bin 0 -> 4158 bytes
+ .../evidence/transport-subject-03/red-unit.json    |  Bin 0 -> 550 bytes
+ .../evidence/transport-subject-03/red-unit.log     |  Bin 0 -> 49346 bytes
+ .../evidence/transport-subject-03/ruff-final.json  |  Bin 0 -> 613 bytes
+ .../evidence/transport-subject-03/ruff-final.log   |  Bin 0 -> 20 bytes
+ .../evidence/transport-subject-03/ruff.json        |  Bin 0 -> 572 bytes
+ .../evidence/transport-subject-03/ruff.log         |  Bin 0 -> 38881 bytes
+ .../run-prompt-final-green.json                    |  Bin 0 -> 574 bytes
+ .../run-prompt-final-green.log                     |  Bin 0 -> 780 bytes
+ .../transport-subject-03/run-prompt-final-mypy.log |  Bin 0 -> 43 bytes
+ .../transport-subject-03/run-prompt-green.json     |  Bin 0 -> 574 bytes
+ .../transport-subject-03/run-prompt-green.log      |  Bin 0 -> 781 bytes
+ .../transport-subject-03/run-prompt-handoff.json   |  Bin 0 -> 1080 bytes
+ .../transport-subject-03/run-prompt-helper-red.log |  Bin 0 -> 5213 bytes
+ .../transport-subject-03/run-prompt-mypy.log       |  Bin 0 -> 43 bytes
+ .../transport-subject-03/run-prompt-red.json       |  Bin 0 -> 524 bytes
+ .../transport-subject-03/run-prompt-red.log        |  Bin 0 -> 24043 bytes
+ .../evidence/verify-handler-04/HANDOFF.md          |  Bin 0 -> 5960 bytes
+ .../verify-handler-04/first-implementation.json    |  Bin 0 -> 694 bytes
+ .../verify-handler-04/first-implementation.log     |  Bin 0 -> 1358 bytes
+ .../evidence/verify-handler-04/green.json          |  Bin 0 -> 1553 bytes
+ .../evidence/verify-handler-04/green.log           |  Bin 0 -> 1358 bytes
+ .../evidence/verify-handler-04/mypy-final.log      |  Bin 0 -> 44 bytes
+ .../evidence/verify-handler-04/mypy.log            |  Bin 0 -> 44 bytes
+ .../evidence/verify-handler-04/reasoning-red.json  |  Bin 0 -> 622 bytes
+ .../evidence/verify-handler-04/reasoning-red.log   |  Bin 0 -> 6056 bytes
+ .../evidence/verify-handler-04/red.json            |  Bin 0 -> 588 bytes
+ .../evidence/verify-handler-04/red.log             |  Bin 0 -> 13927 bytes
+ .../evidence/verify-handler-04/ruff-final.log      |  Bin 0 -> 19 bytes
+ .../evidence/verify-handler-04/ruff.log            |  Bin 0 -> 19 bytes
+ .../evidence/verify-handler-04/static-final.json   |  Bin 0 -> 1299 bytes
+ .../evidence/verify-handler-04/static.json         |  Bin 0 -> 1287 bytes
+ .../phase6/main_auto_official_json/task_plan.md    |   12 +-
+ .../p7_parallel_handoff_2026-10-10/README.md       |   13 +
+ .../p7_parallel_handoff_2026-10-10/exact-ci.json   |   16 +
+ .../p7_parallel_handoff_2026-10-10/findings.md     |   27 +-
+ .../normal-commit.log                              |  Bin 0 -> 4274 bytes
+ .../p7_parallel_handoff_2026-10-10/normal-push.log |  Bin 0 -> 329 bytes
+ .../p7_parallel_handoff_2026-10-10/progress.md     |   25 +-
+ .../publication.json                               |   57 +
+ .../p7_parallel_handoff_2026-10-10/task_plan.md    |   13 +
+ .../cross-market-rf-e2e-2026-10-08/progress.md     |   41 +
+ .../cross-market-rf-e2e-2026-10-08/task_plan.md    |   32 +
+ scripts/host_assumption_guard.py                   |   29 +-
+ src/company_wiki/automation/execution_context.py   |   25 +-
+ src/company_wiki/automation/narrative_batch.py     | 1604 +++++++++++++++++---
+ src/company_wiki/automation/narrative_batch_cli.py |   10 +-
+ .../automation/narrative_batch_request.py          |  265 +++-
+ src/company_wiki/automation/narrative_contracts.py |  808 ++++++++--
+ .../automation/narrative_evidence_view.py          |  117 +-
+ .../automation/narrative_generation.py             |  236 +++
+ src/company_wiki/automation/narrative_model.py     |   96 +-
+ .../automation/narrative_model_caller.py           |   32 +-
+ .../automation/narrative_official_json.py          |  262 ++++
+ .../automation/narrative_projection.py             |  137 +-
+ src/company_wiki/automation/narrative_replay.py    |  139 +-
+ src/company_wiki/automation/narrative_run_store.py |   59 +-
+ src/company_wiki/automation/narrative_runtime.py   |   12 +-
+ src/company_wiki/automation/narrative_select.py    |  112 ++
+ .../automation/narrative_source_guard.py           |    2 +-
+ src/company_wiki/automation/narrative_summarize.py |   28 +-
+ src/company_wiki/automation/narrative_transport.py |  238 ++-
+ .../automation/narrative_transport_contracts.py    |  278 +++-
+ src/company_wiki/automation/narrative_verify.py    |  134 +-
+ .../automation/narrative_worker_factory.py         |   63 +-
+ src/company_wiki/automation/store.py               |   63 +-
+ .../automation/terminal_receipt_contracts.py       |   31 +-
+ src/company_wiki/automation/terminal_receipts.py   |   45 +-
+ .../source_catalog/narrative_artifact_store.py     |  209 ++-
+ .../source_catalog/narrative_evidence.py           |  101 +-
+ .../source_catalog/narrative_transport_cli.py      |   71 +-
+ .../source_catalog/official_json_projection.py     |  224 ++-
+ .../source_catalog/official_source_cli.py          |   10 +-
+ .../source_catalog/transcript_layout.py            |   13 +-
+ .../source_catalog/transcript_versions.py          |   36 +
+ tests/contract/test_fc1307_host_assumption_gate.py |   47 +
+ tests/contract/test_official_transcript_layouts.py |    3 +-
+ .../MSFT_Q4_2026_earnings_call.txt                 |  Bin 0 -> 66324 bytes
+ tests/fixtures/narrative_real_transcript/README.md |    5 +
+ .../test_narrative_legacy_effort_history.py        |  214 +++
+ tests/integration/test_official_json_batch_e2e.py  |  303 ++++
+ .../test_official_json_batch_preparation.py        |  124 ++
+ .../test_official_json_canonical_cli_e2e.py        |  301 ++++
+ .../test_official_json_empty_batch_e2e.py          |  163 ++
+ .../test_official_json_evidence_view.py            |   65 +
+ .../test_official_json_narrative_adapter.py        |  272 ++++
+ .../test_official_json_publication_terminal.py     |  734 +++++++++
+ .../test_official_json_select_handler.py           |  334 ++++
+ .../test_official_json_subject_artifacts.py        |  283 ++++
+ .../test_official_json_transport_subject.py        |  630 ++++++++
+ .../test_official_json_verify_handler.py           |  462 ++++++
+ .../test_p7_official_projection_compatibility.py   |  284 ++++
+ .../integration/test_s5_narrative_evidence_view.py |    3 +-
+ tests/support/narrative_model_fixture.py           |    4 +-
+ tests/support/official_json_batch_fixture.py       |  496 ++++++
+ tests/unit/test_narrative_generation.py            |   14 +
+ tests/unit/test_narrative_model_caller.py          |   27 +-
+ tests/unit/test_official_json_batch_identity.py    |  261 ++++
+ tests/unit/test_official_json_model_subject.py     |  491 ++++++
+ tests/unit/test_official_json_narrative_adapter.py |  236 +++
+ .../test_official_json_projection_generation.py    |  456 ++++++
+ .../test_official_json_run_prompt_admission.py     |  327 ++++
+ tests/unit/test_official_json_subject_contracts.py |  235 +++
+ tests/unit/test_official_json_summarize_subject.py |  226 +++
+ ...st_official_json_transport_subject_contracts.py |  277 ++++
+ tests/unit/test_p7_official_projection_identity.py |  351 +++++
+ tests/unit/test_transcript_boundary_versions.py    |  150 ++
+ 398 files changed, 14532 insertions(+), 832 deletions(-)
+ create mode 100644 .planning/p7-cwp-projection/HANDOFF.md
+ create mode 100644 .planning/p7-cwp-projection/HANDOFF_FORMAT.md
+ create mode 100644 .planning/p7-cwp-projection/IMPLEMENTATION_CARD.md
+ create mode 100644 .planning/p7-cwp-projection/INTERFACES.md
+ create mode 100644 .planning/p7-cwp-projection/evidence/m1_baseline_20261010/baseline_m3_tests.log
+ create mode 100644 .planning/p7-cwp-projection/evidence/m1_red_20261010/red_new_tests.log
+ create mode 100644 .planning/p7-cwp-projection/evidence/m2_green_20261010/green_all.log
+ create mode 100644 .planning/p7-cwp-projection/evidence/m2_green_20261010/green_all_final.log
+ create mode 100644 .planning/p7-cwp-projection/evidence/m2_green_20261010/green_m3_regressions.log
+ create mode 100644 .planning/p7-cwp-projection/evidence/m2_green_20261010/green_new_tests.log
+ create mode 100644 .planning/p7-cwp-projection/evidence/m2_green_20261010/static_mypy.log
+ create mode 100644 .planning/p7-cwp-projection/evidence/m2_green_20261010/static_ruff.log
+ create mode 100644 .planning/p7-cwp-projection/evidence/m3_e2e_20261010/e2e.log
+ create mode 100644 .planning/p7-cwp-projection/evidence/m3_e2e_20261010/e2e_first.log
+ create mode 100644 .planning/p7-cwp-projection/evidence/m3_e2e_20261010/e2e_projection_chain.py
+ create mode 100644 .planning/p7-cwp-projection/evidence/m3_e2e_20261010/e2e_receipt.json
+ create mode 100644 .planning/p7-cwp-projection/evidence/m3_e2e_20261010/e2e_receipt_first.json
+ create mode 100644 .planning/p7-cwp-projection/evidence/m3_e2e_20261010/repo_status_before_e2e.txt
+ create mode 100644 .planning/p7-cwp-projection/evidence/m3_final_20261010/green_all_post_review.log
+ create mode 100644 .planning/p7-cwp-projection/evidence/m3_final_20261010/independent_review.md
+ create mode 100644 .planning/p7-cwp-projection/evidence/m3_final_20261010/static_mypy.log
+ create mode 100644 .planning/p7-cwp-projection/evidence/m3_final_20261010/static_ruff.log
+ create mode 100644 .planning/p7-cwp-projection/findings.md
+ create mode 100644 .planning/p7-cwp-projection/handoff.example.json
+ create mode 100644 .planning/p7-cwp-projection/handoff.json
+ create mode 100644 .planning/p7-cwp-projection/handoff.schema.json
+ create mode 100644 .planning/p7-cwp-projection/progress.md
+ create mode 100644 .planning/p7-cwp-projection/task_plan.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/ACCEPTANCE.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-identity-02/green-final.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-identity-02/green-final.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-identity-02/green-observation.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-identity-02/green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-identity-02/red-context-observation.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-identity-02/red-context.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-identity-02/red-observation.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-identity-02/red-semantic-observation.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-identity-02/red-semantic.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-identity-02/red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-preparation-04/green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-preparation-04/green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-preparation-04/red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/batch-preparation-04/red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/evidence-view-04/green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/evidence-view-04/green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/evidence-view-04/red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/evidence-view-04/red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/evidence-view-04/repair-green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/evidence-view-04/repair-green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/foundation-01/commit-observation.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/foundation-01/exact-ci.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/foundation-01/normal-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/foundation-01/normal-push.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/foundation-01/publication.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/host-pointer-context-07/HANDOFF.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/host-pointer-context-07/host-pointer-green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/host-pointer-context-07/host-pointer-green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/host-pointer-context-07/host-pointer-handoff.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/host-pointer-context-07/host-pointer-red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/host-pointer-context-07/host-pointer-red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/host-pointer-context-07/host-pointer-ruff.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/final-mixed-empty-history-receipt.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/final-mixed-empty-history.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-history-final-review.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-old-resume-compat.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/legacy-effort-static.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/mypy.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-config-fix-source-shas.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-generation-caller-fix.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-generation-fix-probes.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-main-contracts-views.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-main-integration-tests.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-review.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/readonly-source-snapshot.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/ruff.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/integration-04/static.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/HANDOFF.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/before.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/green-attempt-1.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/green-attempt-1.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/green-attempt-2.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/green-attempt-2.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/handoff.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/mypy.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/red-contract-aligned.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/red-contract-aligned.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/ruff.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/source-diff.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/model-subject-03/static.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/handoff-evidence-hashes.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/normal-merge.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/normal-merge.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/p7-independent-166-tests.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/p7-independent-e2e-receipt.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/p7-independent-legacy-blob.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/p7-main-adapter-overlay.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/readonly-reception.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-cwp-reception/reception-source-sha.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/HANDOFF.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/before.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/green-initial.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/green-initial.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/handoff.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/mypy-initial.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/mypy.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/ruff-initial.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/ruff.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/static-initial.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/static.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/projection-generation-02/test-format.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/HANDOFF.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/green-attempt-1.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/green-attempt-1.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/green-final.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/green-final.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/handoff.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/integrated-final.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/mypy-attempt-1.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/mypy-final.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/mypy-integrated.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/pytest-integrated.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/red-fixture-aligned.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/red-fixture-aligned.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/ruff-attempt-1.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/ruff-final.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/ruff-integrated.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/static-attempt-1.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/publication-terminal-04/static-final.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/archive-byte-check.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/artifact-types-02.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/cached-check-02.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/candidate-inventory.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/canonical-evidence-copy.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/commit-observation-01-failed.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/commit-observation.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/frozen-snapshot-02.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/mypy-01.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/mypy-final-03.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/normal-commit-01-failed.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/normal-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/normal-restage.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/normal-stage.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/portable-path-negative-07.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/portable-path-negative-07.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/preflight-missing-suite.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/responsibility-tests-01.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/responsibility-tests-01.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/ruff-01.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/ruff-final-03.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/specific-fixes-02.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/static-01.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/static-final-03.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-model-binding-05/red-observation.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/HANDOFF.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/first-implementation.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/first-implementation.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/mypy.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/native-mypy.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/native-ruff.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/native-static.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/native-text-final-green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/native-text-final-green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/native-text-green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/native-text-green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/native-text-red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/native-text-red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/red-fixture-corrected.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/red-fixture-corrected.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/ruff.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/select-handler-03/static.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/HANDOFF.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/first-implementation.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/first-implementation.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/mypy.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/pre-constant-green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/pre-constant-green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/ruff.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/second-implementation.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/second-implementation.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-adapter-02/static.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-contracts-03/green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-contracts-03/green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-contracts-03/mypy.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-contracts-03/red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-contracts-03/red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-contracts-03/ruff.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/HANDOFF.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/green-attempt-01.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/green-attempt-01.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/green-attempt-02.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/green-attempt-02.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/handoff.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/red-launcher-error-01.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/red-launcher-error-01.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/static-1.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/static-2.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/static-attempt-01-static-1.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/static-attempt-01-static-2.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/static-attempt-01-static.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/static-final-ruff.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/subject-store-02/static.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/HANDOFF.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/binding4-factory-HANDOFF.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/binding4-factory-handoff.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/binding4-factory-scope-proof.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/binding4-raw-red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/binding4-raw-red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/final.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/green-attempt-1.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/green-attempt-1.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/handoff.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/mypy-attempt-1.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/mypy-final.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/pytest-final.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/red-aligned.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/red-aligned.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/ruff-attempt-1.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/ruff-final.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transcript-boundary-05/static-attempt-1.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/BATCH_E2E_HANDOFF.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/CANONICAL_CLI_HANDOFF.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/HANDOFF.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/RUN_PROMPT_HANDOFF.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-handoff.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-integrity-trace.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-integrity-trace.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-node-01.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-node-01.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-node-02.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-node-02.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-node-03.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-node-03.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-node-04.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-node-04.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-red-detail.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-red-detail.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-e2e-transition-trace.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/batch-ledger-final-ruff.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/canonical-cli-green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/canonical-cli-green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/canonical-cli-handoff.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/canonical-cli-red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/canonical-cli-red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/canonical-cli-ruff.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/canonical-cli-shape-green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/canonical-cli-shape-green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/canonical-cli-shape-red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/canonical-cli-shape-red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/green-owned-and-compat.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/green-owned-and-compat.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/green-tests.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/green-tests.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/handoff.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/mypy-final.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/mypy-final.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/mypy.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/mypy.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/red-integration.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/red-integration.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/red-metadata.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/red-metadata.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/red-unit.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/red-unit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/ruff-final.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/ruff-final.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/ruff.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/ruff.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/run-prompt-final-green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/run-prompt-final-green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/run-prompt-final-mypy.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/run-prompt-green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/run-prompt-green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/run-prompt-handoff.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/run-prompt-helper-red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/run-prompt-mypy.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/run-prompt-red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/transport-subject-03/run-prompt-red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/HANDOFF.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/first-implementation.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/first-implementation.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/mypy-final.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/mypy.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/reasoning-red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/reasoning-red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/ruff-final.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/ruff.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/static-final.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/verify-handler-04/static.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/exact-ci.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/normal-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/normal-push.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/p7_parallel_handoff_2026-10-10/publication.json
+ create mode 100644 src/company_wiki/automation/narrative_official_json.py
+ create mode 100644 src/company_wiki/source_catalog/transcript_versions.py
+ create mode 100644 tests/fixtures/narrative_real_transcript/MSFT_Q4_2026_earnings_call.txt
+ create mode 100644 tests/fixtures/narrative_real_transcript/README.md
+ create mode 100644 tests/integration/test_narrative_legacy_effort_history.py
+ create mode 100644 tests/integration/test_official_json_batch_e2e.py
+ create mode 100644 tests/integration/test_official_json_batch_preparation.py
+ create mode 100644 tests/integration/test_official_json_canonical_cli_e2e.py
+ create mode 100644 tests/integration/test_official_json_empty_batch_e2e.py
+ create mode 100644 tests/integration/test_official_json_evidence_view.py
+ create mode 100644 tests/integration/test_official_json_narrative_adapter.py
+ create mode 100644 tests/integration/test_official_json_publication_terminal.py
+ create mode 100644 tests/integration/test_official_json_select_handler.py
+ create mode 100644 tests/integration/test_official_json_subject_artifacts.py
+ create mode 100644 tests/integration/test_official_json_transport_subject.py
+ create mode 100644 tests/integration/test_official_json_verify_handler.py
+ create mode 100644 tests/integration/test_p7_official_projection_compatibility.py
+ create mode 100644 tests/support/official_json_batch_fixture.py
+ create mode 100644 tests/unit/test_official_json_batch_identity.py
+ create mode 100644 tests/unit/test_official_json_model_subject.py
+ create mode 100644 tests/unit/test_official_json_narrative_adapter.py
+ create mode 100644 tests/unit/test_official_json_projection_generation.py
+ create mode 100644 tests/unit/test_official_json_run_prompt_admission.py
+ create mode 100644 tests/unit/test_official_json_subject_contracts.py
+ create mode 100644 tests/unit/test_official_json_summarize_subject.py
+ create mode 100644 tests/unit/test_official_json_transport_subject_contracts.py
+ create mode 100644 tests/unit/test_p7_official_projection_identity.py
+ create mode 100644 tests/unit/test_transcript_boundary_versions.py
