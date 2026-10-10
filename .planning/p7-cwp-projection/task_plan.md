@@ -18,9 +18,9 @@
 | 节点 | 内容 | 状态 |
 |---|---|---|
 | 准备 | 工作树/源码基线、独立PWF与施工卡/公共交接副本 | complete |
-| M1 | 读实际接口、固定输入输出样例、责任RED与真实日志 | pending |
-| M2 | 共用实现与集中GREEN、旧兼容、边界内静态检查 | pending |
-| M3 | 自有TEMP离线公共E2E、恢复、独立关键不变量审查、正常commit与交接 | pending |
+| M1 | 读实际接口、固定输入输出样例、责任RED与真实日志 | complete |
+| M2 | 共用实现与集中GREEN、旧兼容、边界内静态检查 | complete |
+| M3 | 自有TEMP离线公共E2E、恢复、独立关键不变量审查、正常commit与交接 | complete |
 
 只有三个施工大节点，技术断言/诊断不是额外人工审批。分支CI未触发记录not_triggered，无remote记录no_remote，不伪造green。不关闭MAIN真实公司研究。
 

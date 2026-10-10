@@ -1,0 +1,210 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\Projects\_harness_worktrees\p7\cwp
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 26 items
+
+tests\unit\test_p7_official_projection_identity.py FFFFFFFFFFFFFFF.FF    [ 69%]
+tests\integration\test_p7_official_projection_compatibility.py F.FFFFFF  [100%]
+
+================================== FAILURES ===================================
+________ test_two_page_projection_identity_is_input_order_independent _________
+tests\unit\test_p7_official_projection_identity.py:118: in test_two_page_projection_identity_is_input_order_independent
+    forward = build(pages, ISSUER_A, version="1.0.2")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_p7_official_projection_identity.py:97: in build
+    return build_source_projection(
+E   TypeError: build_source_projection() got an unexpected keyword argument 'projection_version'
+________ test_three_page_all_permutations_share_one_canonical_identity ________
+tests\unit\test_p7_official_projection_identity.py:127: in test_three_page_all_permutations_share_one_canonical_identity
+    identities = {build(list(order), ISSUER_A, version="1.0.2").projection_id
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_p7_official_projection_identity.py:97: in build
+    return build_source_projection(
+E   TypeError: build_source_projection() got an unexpected keyword argument 'projection_version'
+_________ test_new_version_changes_identity_and_old_default_is_pinned _________
+tests\unit\test_p7_official_projection_identity.py:135: in test_new_version_changes_identity_and_old_default_is_pinned
+    canonical = build(pages, ISSUER_A, version="1.0.2")
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_p7_official_projection_identity.py:97: in build
+    return build_source_projection(
+E   TypeError: build_source_projection() got an unexpected keyword argument 'projection_version'
+______________ test_unknown_projection_version_is_named_refusal _______________
+tests\unit\test_p7_official_projection_identity.py:144: in test_unknown_projection_version_is_named_refusal
+    build(standard_two_pages(), ISSUER_A, version="1.0.3")
+tests\unit\test_p7_official_projection_identity.py:97: in build
+    return build_source_projection(
+E   TypeError: build_source_projection() got an unexpected keyword argument 'projection_version'
+__________ test_declared_pages_order_first_and_unreliable_pages_last __________
+tests\unit\test_p7_official_projection_identity.py:151: in test_declared_pages_order_first_and_unreliable_pages_last
+    forward = build([good, broken], ISSUER_A, version="1.0.2")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_p7_official_projection_identity.py:97: in build
+    return build_source_projection(
+E   TypeError: build_source_projection() got an unexpected keyword argument 'projection_version'
+__________ test_exact_duplicate_record_selects_canonical_first_copy ___________
+tests\unit\test_p7_official_projection_identity.py:162: in test_exact_duplicate_record_selects_canonical_first_copy
+    forward = build([first, second], ISSUER_A, version="1.0.2")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_p7_official_projection_identity.py:97: in build
+    return build_source_projection(
+E   TypeError: build_source_projection() got an unexpected keyword argument 'projection_version'
+________ test_conflicting_record_ids_stay_unselected_with_diagnostics _________
+tests\unit\test_p7_official_projection_identity.py:177: in test_conflicting_record_ids_stay_unselected_with_diagnostics
+    forward = build([first, second], ISSUER_A, version="1.0.2")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_p7_official_projection_identity.py:97: in build
+    return build_source_projection(
+E   TypeError: build_source_projection() got an unexpected keyword argument 'projection_version'
+_____________ test_missing_record_id_stays_reported_not_invented ______________
+tests\unit\test_p7_official_projection_identity.py:192: in test_missing_record_id_stays_reported_not_invented
+    projection = build([page], ISSUER_A, version="1.0.2")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_p7_official_projection_identity.py:97: in build
+    return build_source_projection(
+E   TypeError: build_source_projection() got an unexpected keyword argument 'projection_version'
+________________ test_records_and_fields_keep_real_page_order _________________
+tests\unit\test_p7_official_projection_identity.py:203: in test_records_and_fields_keep_real_page_order
+    projection = build([page], ISSUER_A, version="1.0.2")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_p7_official_projection_identity.py:97: in build
+    return build_source_projection(
+E   TypeError: build_source_projection() got an unexpected keyword argument 'projection_version'
+______ test_same_pages_two_issuers_independent_and_wrong_issuer_refused _______
+tests\unit\test_p7_official_projection_identity.py:212: in test_same_pages_two_issuers_independent_and_wrong_issuer_refused
+    alpha = build(pages, ISSUER_A, version="1.0.2")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_p7_official_projection_identity.py:97: in build
+    return build_source_projection(
+E   TypeError: build_source_projection() got an unexpected keyword argument 'projection_version'
+________________ test_projection_objects_refuse_deep_mutation _________________
+tests\unit\test_p7_official_projection_identity.py:226: in test_projection_objects_refuse_deep_mutation
+    projection = build(standard_two_pages(), ISSUER_A, version="1.0.2")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_p7_official_projection_identity.py:97: in build
+    return build_source_projection(
+E   TypeError: build_source_projection() got an unexpected keyword argument 'projection_version'
+___________________ test_to_dict_is_plain_independent_json ____________________
+tests\unit\test_p7_official_projection_identity.py:248: in test_to_dict_is_plain_independent_json
+    projection = build(standard_two_pages(), ISSUER_A, version="1.0.2")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_p7_official_projection_identity.py:97: in build
+    return build_source_projection(
+E   TypeError: build_source_projection() got an unexpected keyword argument 'projection_version'
+______________ test_decoded_payload_is_isolated_from_input_dict _______________
+tests\unit\test_p7_official_projection_identity.py:271: in test_decoded_payload_is_isolated_from_input_dict
+    projection = build(standard_two_pages(), ISSUER_A, version="1.0.2")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_p7_official_projection_identity.py:97: in build
+    return build_source_projection(
+E   TypeError: build_source_projection() got an unexpected keyword argument 'projection_version'
+__________________ test_builder_input_containers_are_copied ___________________
+tests\unit\test_p7_official_projection_identity.py:284: in test_builder_input_containers_are_copied
+    projection = build(pages, issuer, version="1.0.2")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_p7_official_projection_identity.py:97: in build
+    return build_source_projection(
+E   TypeError: build_source_projection() got an unexpected keyword argument 'projection_version'
+_________ test_unknown_producer_payload_is_refused_not_reinterpreted __________
+tests\unit\test_p7_official_projection_identity.py:296: in test_unknown_producer_payload_is_refused_not_reinterpreted
+    projection = build(standard_two_pages(), ISSUER_A, version="1.0.2")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_p7_official_projection_identity.py:97: in build
+    return build_source_projection(
+E   TypeError: build_source_projection() got an unexpected keyword argument 'projection_version'
+______________ test_evidence_span_records_real_producer_version _______________
+tests\unit\test_p7_official_projection_identity.py:316: in test_evidence_span_records_real_producer_version
+    projection = build(standard_two_pages(), ISSUER_A, version="1.0.2")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_p7_official_projection_identity.py:97: in build
+    return build_source_projection(
+E   TypeError: build_source_projection() got an unexpected keyword argument 'projection_version'
+___________ test_projection_payload_mapping_roundtrip_is_json_only ____________
+tests\unit\test_p7_official_projection_identity.py:333: in test_projection_payload_mapping_roundtrip_is_json_only
+    projection = build(standard_two_pages(), ISSUER_A, version="1.0.2")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_p7_official_projection_identity.py:97: in build
+    return build_source_projection(
+E   TypeError: build_source_projection() got an unexpected keyword argument 'projection_version'
+_______ test_projection_102_roundtrip_is_order_independent_and_replays ________
+tests\integration\test_p7_official_projection_compatibility.py:129: in test_projection_102_roundtrip_is_order_independent_and_replays
+    forward = build(catalog, [page1, page2], ISSUER_A, version="1.0.2")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_p7_official_projection_compatibility.py:100: in build
+    return build_projection_from_refs(
+E   TypeError: build_projection_from_refs() got an unexpected keyword argument 'projection_version'
+_________________ test_persist_refuses_payload_hash_mismatch __________________
+tests\integration\test_p7_official_projection_compatibility.py:190: in test_persist_refuses_payload_hash_mismatch
+    persist_projection(catalog, tampered)
+src\company_wiki\source_catalog\official_json_projection.py:657: in persist_projection
+    encoded = _canonical_json(projection.to_dict()).encode("utf-8")
+                              ^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_json_projection.py:167: in to_dict
+    "records": [record.to_dict() for record in self.records],
+                ^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\official_json_projection.py:135: in to_dict
+    "fields": [item.to_dict() for item in self.fields],
+               ^^^^^^^^^^^^
+E   AttributeError: 'dict' object has no attribute 'to_dict'
+_____________ test_forged_binding_cannot_replay_102_even_rehashed _____________
+tests\integration\test_p7_official_projection_compatibility.py:198: in test_forged_binding_cannot_replay_102_even_rehashed
+    projection = build(catalog, [ref], ISSUER_A, version="1.0.2")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_p7_official_projection_compatibility.py:100: in build
+    return build_projection_from_refs(
+E   TypeError: build_projection_from_refs() got an unexpected keyword argument 'projection_version'
+__________ test_second_page_byte_change_refuses_replay_then_restores __________
+tests\integration\test_p7_official_projection_compatibility.py:213: in test_second_page_byte_change_refuses_replay_then_restores
+    projection = build(catalog, [page1, page2], ISSUER_A, version="1.0.2")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_p7_official_projection_compatibility.py:100: in build
+    return build_projection_from_refs(
+E   TypeError: build_projection_from_refs() got an unexpected keyword argument 'projection_version'
+________________ test_unknown_producer_file_is_refused_on_load ________________
+tests\integration\test_p7_official_projection_compatibility.py:228: in test_unknown_producer_file_is_refused_on_load
+    projection = build(catalog, [ref], ISSUER_A, version="1.0.2")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_p7_official_projection_compatibility.py:100: in build
+    return build_projection_from_refs(
+E   TypeError: build_projection_from_refs() got an unexpected keyword argument 'projection_version'
+______ test_repeated_canonical_persist_keeps_one_derived_per_projection _______
+tests\integration\test_p7_official_projection_compatibility.py:245: in test_repeated_canonical_persist_keeps_one_derived_per_projection
+    alpha = build(catalog, [page1, page2], ISSUER_A, version="1.0.2")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_p7_official_projection_compatibility.py:100: in build
+    return build_projection_from_refs(
+E   TypeError: build_projection_from_refs() got an unexpected keyword argument 'projection_version'
+________________ test_flat_layout_102_is_canonical_and_replays ________________
+tests\integration\test_p7_official_projection_compatibility.py:270: in test_flat_layout_102_is_canonical_and_replays
+    forward = build_projection_from_refs(
+E   TypeError: build_projection_from_refs() got an unexpected keyword argument 'projection_version'
+=========================== short test summary info ===========================
+FAILED tests/unit/test_p7_official_projection_identity.py::test_two_page_projection_identity_is_input_order_independent
+FAILED tests/unit/test_p7_official_projection_identity.py::test_three_page_all_permutations_share_one_canonical_identity
+FAILED tests/unit/test_p7_official_projection_identity.py::test_new_version_changes_identity_and_old_default_is_pinned
+FAILED tests/unit/test_p7_official_projection_identity.py::test_unknown_projection_version_is_named_refusal
+FAILED tests/unit/test_p7_official_projection_identity.py::test_declared_pages_order_first_and_unreliable_pages_last
+FAILED tests/unit/test_p7_official_projection_identity.py::test_exact_duplicate_record_selects_canonical_first_copy
+FAILED tests/unit/test_p7_official_projection_identity.py::test_conflicting_record_ids_stay_unselected_with_diagnostics
+FAILED tests/unit/test_p7_official_projection_identity.py::test_missing_record_id_stays_reported_not_invented
+FAILED tests/unit/test_p7_official_projection_identity.py::test_records_and_fields_keep_real_page_order
+FAILED tests/unit/test_p7_official_projection_identity.py::test_same_pages_two_issuers_independent_and_wrong_issuer_refused
+FAILED tests/unit/test_p7_official_projection_identity.py::test_projection_objects_refuse_deep_mutation
+FAILED tests/unit/test_p7_official_projection_identity.py::test_to_dict_is_plain_independent_json
+FAILED tests/unit/test_p7_official_projection_identity.py::test_decoded_payload_is_isolated_from_input_dict
+FAILED tests/unit/test_p7_official_projection_identity.py::test_builder_input_containers_are_copied
+FAILED tests/unit/test_p7_official_projection_identity.py::test_unknown_producer_payload_is_refused_not_reinterpreted
+FAILED tests/unit/test_p7_official_projection_identity.py::test_evidence_span_records_real_producer_version
+FAILED tests/unit/test_p7_official_projection_identity.py::test_projection_payload_mapping_roundtrip_is_json_only
+FAILED tests/integration/test_p7_official_projection_compatibility.py::test_projection_102_roundtrip_is_order_independent_and_replays
+FAILED tests/integration/test_p7_official_projection_compatibility.py::test_persist_refuses_payload_hash_mismatch
+FAILED tests/integration/test_p7_official_projection_compatibility.py::test_forged_binding_cannot_replay_102_even_rehashed
+FAILED tests/integration/test_p7_official_projection_compatibility.py::test_second_page_byte_change_refuses_replay_then_restores
+FAILED tests/integration/test_p7_official_projection_compatibility.py::test_unknown_producer_file_is_refused_on_load
+FAILED tests/integration/test_p7_official_projection_compatibility.py::test_repeated_canonical_persist_keeps_one_derived_per_projection
+FAILED tests/integration/test_p7_official_projection_compatibility.py::test_flat_layout_102_is_canonical_and_replays
+======================== 24 failed, 2 passed in 6.34s =========================

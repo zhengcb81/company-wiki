@@ -9,6 +9,7 @@ the only way to obtain the original bytes.
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 from datetime import datetime
 import hashlib
@@ -38,7 +39,19 @@ from .official_json_structure import (
 
 PROJECTION_SCHEMA_VERSION = "source-projection-ref/1"
 PROJECTION_ID_PREFIX = "urn:company-wiki:source-projection:sha256:"
+CWP_OFFICIAL_JSON_PARSER_NAME = "cwp_official_json"
+# Legacy producer identity, kept byte for byte: every sealed 1.0.1
+# projection and its recorded identity depend on it.
 CWP_OFFICIAL_JSON_PARSER_ID = "cwp_official_json/1.0.1"
+CWP_OFFICIAL_JSON_PRODUCER_VERSIONS = {
+    "1.0.1": "cwp_official_json/1.0.1",
+    "1.0.2": "cwp_official_json/1.0.2",
+}
+DEFAULT_PROJECTION_VERSION = "1.0.1"
+_PRODUCER_TO_VERSION = {
+    producer_id: version
+    for version, producer_id in CWP_OFFICIAL_JSON_PRODUCER_VERSIONS.items()
+}
 _PAGE_TIME_FORMATS = ("%Y-%m-%d %H:%M:%S", "%Y-%m-%dT%H:%M:%S")
 _ISSUER_FIELDS = frozenset({
     "market", "security_id", "provider_company_id",
@@ -53,6 +66,78 @@ class ProjectionError(ValueError):
     def __init__(self, code: str):
         super().__init__(code)
         self.code = code
+
+
+class _FrozenDict(Mapping):
+    """A read-only mapping over a private snapshot, never a caller's view."""
+
+    __slots__ = ("_data",)
+    _data: dict[str, Any]
+
+    def __init__(self, data):
+        object.__setattr__(self, "_data", dict(data))
+
+    def __getitem__(self, key):
+        return self._data[key]
+
+    def __iter__(self):
+        return iter(self._data)
+
+    def __len__(self):
+        return len(self._data)
+
+    def __contains__(self, key):
+        return key in self._data
+
+    def __eq__(self, other):
+        if isinstance(other, _FrozenDict):
+            return self._data == other._data
+        if isinstance(other, Mapping):
+            return self._data == dict(other)
+        return NotImplemented
+
+    def __repr__(self):
+        return f"_FrozenDict({self._data!r})"
+
+
+class _FrozenList(tuple):
+    """An immutable sequence that still compares equal to plain lists."""
+
+    __slots__ = ()
+
+    def __eq__(self, other):
+        if isinstance(other, (list, tuple)):
+            return tuple(self) == tuple(other)
+        return NotImplemented
+
+    def __ne__(self, other):
+        result = self.__eq__(other)
+        if result is NotImplemented:
+            return result
+        return not result
+
+    __hash__ = tuple.__hash__
+
+
+def _freeze(value: Any) -> Any:
+    """Detach ``value`` from its owner: dicts become frozen mappings and
+    lists become tuples, recursively; scalars pass through."""
+    if isinstance(value, dict):
+        return _FrozenDict((key, _freeze(item)) for key, item in value.items())
+    if isinstance(value, (list, tuple)):
+        return _FrozenList(_freeze(item) for item in value)
+    return value
+
+
+def _unfreeze(value: Any) -> Any:
+    """Return a plain, independently mutable JSON dict/list tree."""
+    if isinstance(value, _FrozenDict):
+        return {key: _unfreeze(item) for key, item in value._data.items()}
+    if isinstance(value, dict):
+        return {key: _unfreeze(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_unfreeze(item) for item in value]
+    return value
 
 
 def _canonical_json(value: Any) -> str:
@@ -90,6 +175,11 @@ class FieldBinding:
     speaker_known: bool
     translation_of: str | None
 
+    def __post_init__(self):
+        object.__setattr__(self, "token_range", _freeze(self.token_range))
+        object.__setattr__(self, "encoded_body_range",
+                           _freeze(self.encoded_body_range))
+
     def to_dict(self) -> dict[str, Any]:
         return {
             "field": self.field,
@@ -123,18 +213,28 @@ class ProjectionRecord:
     record_created_date: str | None
     as_of_eligibility: str
 
+    def __post_init__(self):
+        # Snapshot ownership: a record owns deep-frozen copies of everything
+        # mutable the caller handed in, so no later mutation can leak in.
+        object.__setattr__(self, "provider_record_id",
+                           _freeze(self.provider_record_id))
+        object.__setattr__(self, "issuer_observed", _freeze(self.issuer_observed))
+        object.__setattr__(self, "fields", _freeze(self.fields))
+        object.__setattr__(self, "times", _freeze(self.times))
+        object.__setattr__(self, "state", _freeze(self.state))
+
     def to_dict(self) -> dict[str, Any]:
         return {
             "parent_content_sha256": self.parent_content_sha256,
             "record_pointer": self.record_pointer,
-            "provider_record_id": self.provider_record_id,
+            "provider_record_id": _unfreeze(self.provider_record_id),
             "record_token_sha256": self.record_token_sha256,
             "record_kind": self.record_kind,
             "attributed": self.attributed,
-            "issuer_observed": dict(self.issuer_observed),
+            "issuer_observed": _unfreeze(self.issuer_observed),
             "fields": [item.to_dict() for item in self.fields],
-            "times": dict(self.times),
-            "state": dict(self.state),
+            "times": _unfreeze(self.times),
+            "state": _unfreeze(self.state),
             "selected": self.selected,
             "selection_reason": self.selection_reason,
             "answer_first_publication_known": self.answer_first_publication_known,
@@ -155,17 +255,28 @@ class SourceProjection:
     records: tuple[ProjectionRecord, ...]
     coverage: dict[str, Any] = field(default_factory=dict)
 
+    def __post_init__(self):
+        # Snapshot ownership: the projection deep-freezes every nested
+        # container so the published identity cannot be mutated in place.
+        object.__setattr__(self, "parent_source_refs",
+                           _freeze(self.parent_source_refs))
+        object.__setattr__(self, "adapter", _freeze(self.adapter))
+        object.__setattr__(self, "issuer", _freeze(self.issuer))
+        object.__setattr__(self, "records", _freeze(self.records))
+        object.__setattr__(self, "coverage", _freeze(self.coverage))
+
     def to_dict(self) -> dict[str, Any]:
         return {
             "schema_version": self.schema_version,
             "projection_id": self.projection_id,
             "projection_sha256": self.projection_sha256,
-            "parent_source_refs": [dict(item) for item in self.parent_source_refs],
-            "adapter": dict(self.adapter),
-            "issuer": dict(self.issuer),
+            "parent_source_refs": [_unfreeze(item)
+                                   for item in self.parent_source_refs],
+            "adapter": _unfreeze(self.adapter),
+            "issuer": _unfreeze(self.issuer),
             "as_of_date": self.as_of_date,
             "records": [record.to_dict() for record in self.records],
-            "coverage": dict(self.coverage),
+            "coverage": _unfreeze(self.coverage),
         }
 
     def _payload_dict(self) -> dict[str, Any]:
@@ -221,7 +332,8 @@ def _binding(record_kind: str, observation: FieldObservation) -> FieldBinding | 
     )
 
 
-def _record_proves_issuer(record: RecordObservation, issuer: dict[str, Any]) -> bool:
+def _record_proves_issuer(record: RecordObservation,
+                          issuer: Mapping[str, Any]) -> bool:
     """Every issuer identity field present on the record must agree, and at
     least one must match.  Question and answer issuers never overwrite each
     other: the check is per record, on observed fields only."""
@@ -278,17 +390,38 @@ def _source_ref(sha: str, size: int) -> dict[str, Any]:
     }
 
 
+def _canonical_page_key(triple: tuple[str, int, PageObservation]):
+    """Canonical page order: declared page numbers first, then pages with
+    unreliable or missing numbers ordered by parent SHA.  Never used to
+    hide diagnostics — an invalid page number still stays a real one."""
+    sha, _, observation = triple
+    current = observation.pagination.get("current")
+    if type(current) is int and current >= 1:
+        return (0, current, sha)
+    return (1, 0, sha)
+
+
 def build_source_projection(
     *,
     parent_pages: list[tuple[str, int, JsonStructureDocument]],
     layout_id: str,
-    issuer: dict[str, Any],
+    issuer: Mapping[str, Any],
     as_of_date: str,
+    projection_version: str = DEFAULT_PROJECTION_VERSION,
 ) -> SourceProjection:
-    """Build one issuer projection over one or more exact parent pages."""
+    """Build one issuer projection over one or more exact parent pages.
+
+    ``projection_version`` selects the producer algorithm: the historical
+    ``1.0.1`` default keeps the caller's page enumeration order and its
+    recorded identity byte for byte; the opt-in ``1.0.2`` producer derives
+    one canonical identity for the same legal page set, whatever order the
+    pages arrive in, while keeping the real record order inside each page.
+    """
+    if projection_version not in CWP_OFFICIAL_JSON_PRODUCER_VERSIONS:
+        raise ProjectionError("unsupported_projection_version")
     if not parent_pages:
         raise ProjectionError("no_parent_pages")
-    if not isinstance(issuer, dict) or not set(issuer) <= _ISSUER_FIELDS:
+    if not isinstance(issuer, Mapping) or not set(issuer) <= _ISSUER_FIELDS:
         raise ProjectionError("invalid_issuer")
     if not isinstance(as_of_date, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", as_of_date):
         raise ProjectionError("invalid_as_of_date")
@@ -298,8 +431,7 @@ def build_source_projection(
         raise ProjectionError("invalid_as_of_date") from None
     layout = registered_layout(layout_id)
 
-    pages: list[dict[str, Any]] = []
-    observations: list[tuple[str, PageObservation]] = []
+    triples: list[tuple[str, int, PageObservation]] = []
     for sha, size, doc in parent_pages:
         if not isinstance(sha, str) or not _SHA256_RE.fullmatch(sha):
             raise ProjectionError("invalid_parent_sha")
@@ -309,14 +441,21 @@ def build_source_projection(
             observation = describe_layout_page(layout_id, doc)
         except OfficialJsonLayoutError as exc:
             raise ProjectionError(exc.code) from exc
-        observations.append((sha, observation))
-        pages.append({
+        triples.append((sha, size, observation))
+    if projection_version == "1.0.2":
+        triples.sort(key=_canonical_page_key)
+    observations: list[tuple[str, PageObservation]] = [
+        (sha, observation) for sha, _, observation in triples]
+    pages: list[dict[str, Any]] = [
+        {
             "content_sha256": sha,
             "byte_size": size,
             "envelope_status": observation.envelope_status,
             "pagination": dict(observation.pagination),
             "records": len(observation.records),
-        })
+        }
+        for sha, size, observation in triples
+    ]
 
     # Keep every observed record occurrence; overlap is a coverage diagnostic,
     # not a reason to reject or erase a captured page. Exact copies may be
@@ -484,7 +623,7 @@ def build_source_projection(
     }
 
     adapter = {
-        "parser": CWP_OFFICIAL_JSON_PARSER_ID,
+        "parser": CWP_OFFICIAL_JSON_PRODUCER_VERSIONS[projection_version],
         "structure_parser_version": CWP_JSON_STRUCTURE_PARSER_VERSION,
         "layout_id": layout.layout_id,
         "layout_version": layout.layout_version,
@@ -492,7 +631,7 @@ def build_source_projection(
     }
     issuer_view = {key: issuer.get(key) for key in sorted(_ISSUER_FIELDS)}
     parent_ref_list: list[dict[str, Any]] = [
-        _source_ref(sha, size) for sha, size, _ in parent_pages]
+        _source_ref(sha, size) for sha, size, _ in triples]
     payload = {
         "schema_version": PROJECTION_SCHEMA_VERSION,
         "parent_source_refs": parent_ref_list,
@@ -551,6 +690,11 @@ def _projection_from_dict(value: Any) -> SourceProjection:
         # per-record parent binding. Never silently reinterpret that identity
         # using 1.0.1; the parent raw bytes remain readable independently.
         raise ProjectionError("unsupported_parser_version")
+    producer_id = adapter.get("parser")
+    if not isinstance(producer_id, str) or producer_id not in _PRODUCER_TO_VERSION:
+        # An unknown or retired producer must never be reinterpreted by the
+        # currently preferred algorithm; the raw bytes stay readable.
+        raise ProjectionError("unsupported_producer_version")
     records = []
     for item in value["records"]:
         bindings = tuple(
@@ -594,8 +738,7 @@ def _projection_from_dict(value: Any) -> SourceProjection:
         records=tuple(records),
         coverage=dict(value["coverage"]),
     )
-    if hashlib.sha256(projection.canonical_json().encode("utf-8")).hexdigest() != (
-            projection.projection_sha256):
+    if _payload_sha256(projection) != projection.projection_sha256:
         raise ProjectionError("projection_hash_mismatch")
     if projection.projection_id != PROJECTION_ID_PREFIX + projection.projection_sha256:
         raise ProjectionError("projection_id_mismatch")
@@ -605,6 +748,14 @@ def _projection_from_dict(value: Any) -> SourceProjection:
 # --- catalog integration -----------------------------------------------------
 
 
+def _payload_sha256(projection: SourceProjection) -> str:
+    """The identity implied by the projection's own payload right now."""
+    payload = projection.to_dict()
+    del payload["projection_id"]
+    del payload["projection_sha256"]
+    return hashlib.sha256(_canonical_json(payload).encode("utf-8")).hexdigest()
+
+
 def _reader(catalog):
     from .source_reader import SourceVersionReader
     return SourceVersionReader(catalog)
@@ -612,7 +763,7 @@ def _reader(catalog):
 
 def _ref_from_dict(value: Any):
     from .source_reader import SourceRef
-    if not isinstance(value, dict):
+    if not isinstance(value, Mapping):
         raise ProjectionError("invalid_parent_source_ref")
     try:
         return SourceRef(**value)
@@ -621,7 +772,8 @@ def _ref_from_dict(value: Any):
 
 
 def build_projection_from_refs(
-    catalog, *, refs, layout_id: str, issuer: dict[str, Any], as_of_date: str,
+    catalog, *, refs, layout_id: str, issuer: Mapping[str, Any], as_of_date: str,
+    projection_version: str = DEFAULT_PROJECTION_VERSION,
 ) -> SourceProjection:
     """Open exact parent versions, parse them, and build one issuer projection."""
     pages: list[tuple[str, int, Any]] = []
@@ -636,7 +788,7 @@ def build_projection_from_refs(
         pages.append((ref.content_sha256, ref.byte_size, doc))
     return build_source_projection(
         parent_pages=pages, layout_id=layout_id, issuer=issuer,
-        as_of_date=as_of_date)
+        as_of_date=as_of_date, projection_version=projection_version)
 
 
 _PROJECTIONS_DIRNAME = "projections"
@@ -653,6 +805,10 @@ def persist_projection(catalog, projection: SourceProjection) -> str:
     """Idempotent projection store under the store-owned catalog directory."""
     if projection.projection_id != PROJECTION_ID_PREFIX + projection.projection_sha256:
         raise ProjectionError("projection_id_mismatch")
+    if _payload_sha256(projection) != projection.projection_sha256:
+        # Payload, hash and id must agree before anything is sealed; a
+        # mismatch is a named refusal, never a silent re-hash.
+        raise ProjectionError("projection_payload_mismatch")
     path = _projections_root(catalog) / (projection.projection_sha256 + ".json")
     encoded = _canonical_json(projection.to_dict()).encode("utf-8")
     if path.exists():
@@ -690,6 +846,9 @@ def load_projection(catalog, projection_id: str) -> SourceProjection:
 
 
 def _verify_projection_from_parents(catalog, projection: SourceProjection) -> dict[str, JsonStructureDocument]:
+    producer_id = projection.adapter.get("parser")
+    if not isinstance(producer_id, str) or producer_id not in _PRODUCER_TO_VERSION:
+        raise ProjectionError("unsupported_producer_version")
     if projection.adapter.get("structure_parser_version") != CWP_JSON_STRUCTURE_PARSER_VERSION:
         raise ProjectionError("unsupported_parser_version")
     docs: dict[str, JsonStructureDocument] = {}
@@ -704,9 +863,12 @@ def _verify_projection_from_parents(catalog, projection: SourceProjection) -> di
     layout_id = projection.adapter.get("layout_id")
     if not isinstance(layout_id, str):
         raise ProjectionError("invalid_projection_payload")
+    # Replay rebuilds with the sealed producer version, never with whatever
+    # the current default happens to be.
     rebuilt = build_source_projection(
         parent_pages=pages, layout_id=layout_id,
-        issuer=projection.issuer, as_of_date=projection.as_of_date)
+        issuer=projection.issuer, as_of_date=projection.as_of_date,
+        projection_version=_PRODUCER_TO_VERSION[producer_id])
     if rebuilt.to_dict() != projection.to_dict():
         raise ProjectionError("projection_semantics_mismatch")
     return docs
@@ -764,7 +926,7 @@ def replay_projection(catalog, projection: SourceProjection,
         verified.append({
             "parent_content_sha256": record.parent_content_sha256,
             "record_pointer": record.record_pointer,
-            "provider_record_id": record.provider_record_id,
+            "provider_record_id": _unfreeze(record.provider_record_id),
             "record_kind": record.record_kind,
             "selected": record.selected,
             "selection_reason": record.selection_reason,
@@ -798,6 +960,10 @@ def evidence_span_for_field(projection: SourceProjection, record: ProjectionReco
         EvidenceSpan,
         ParseStatus,
     )
+    producer_id = projection.adapter.get("parser")
+    if not isinstance(producer_id, str) or producer_id not in _PRODUCER_TO_VERSION:
+        raise ProjectionError("unsupported_producer_version")
+    parser_name, _, parser_version = producer_id.partition("/")
     parent = next((ref for ref in projection.parent_source_refs
                    if ref["content_sha256"] == record.parent_content_sha256), None)
     if parent is None:
@@ -807,7 +973,7 @@ def evidence_span_for_field(projection: SourceProjection, record: ProjectionReco
         "pointer": record.record_pointer + "/" + binding.field,
         "record_pointer": record.record_pointer,
         "parent_content_sha256": record.parent_content_sha256,
-        "provider_record_id": record.provider_record_id,
+        "provider_record_id": _unfreeze(record.provider_record_id),
         "record_kind": record.record_kind,
         "role": binding.role,
         "token_range": list(binding.token_range),
@@ -822,8 +988,8 @@ def evidence_span_for_field(projection: SourceProjection, record: ProjectionReco
         coordinates=EvidenceCoordinates(paragraph_index=paragraph_index),
         raw_text=unicodedata.normalize("NFC", decoded_text),
         structured_value=structured,
-        parser_name="cwp_official_json",
-        parser_version="1.0.1",
+        parser_name=parser_name,
+        parser_version=parser_version,
         parse_status=ParseStatus.PARSED,
         quality_flags=[],
     )
