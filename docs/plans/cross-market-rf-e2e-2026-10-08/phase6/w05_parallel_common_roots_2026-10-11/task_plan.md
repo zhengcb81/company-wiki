@@ -1,3 +1,9 @@
+## 当前：IN_PROGRESS（2026-10-11T09:22:06.853114+00:00）
+
+只读核对三树已有各自PWF，Audit已有pool_progress和测试WIP。原READY收据是开工前快照，不作为未分派新卡。遵守原排他写集，不清理他人未提交内容。新W06三包见[总计划](../w06_parallel_verification_2026-10-11/task_plan.md)，写集不重叠。
+
+以下为历史记录。
+
 # W05 独立施工总计划
 
 状态：READY，可立即分派；协调员 ROOT；母计划 `cross-market-rf-e2e-2026-10-08` 继续 active。

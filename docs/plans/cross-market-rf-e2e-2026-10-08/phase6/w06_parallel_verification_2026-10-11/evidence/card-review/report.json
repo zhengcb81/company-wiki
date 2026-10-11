@@ -1,0 +1,305 @@
+{
+  "schema_version": "w06-independent-construction-card-review/1",
+  "reviewer": "/root/w04_major_config_review",
+  "date": "2026-10-11",
+  "verdict": "NO_DESIGN_BLOCKER_FOUND",
+  "scope": "One readonly construction-card trial read, not future product verification or 0.8 source reacceptance.",
+  "prior_selector_review": "Frozen stage73ca514d/budgetb9eb0be5 FAIL retained; this card review does not reverse it.",
+  "preparation_observed": {
+    "first_status": "CREATED_CLEAN_INPUTS_PENDING",
+    "last_status": "READY",
+    "three_inputs_present": true,
+    "frozen_packet_metadata": [
+      {
+        "lane": "W06-AUDIT-MEASURES",
+        "sha256": "022c7c33d26f105a8f146dfaadf2a490b3ee544293758f09fbb7d9a1dbf02bad",
+        "bytes": 4447,
+        "references_count": 6
+      },
+      {
+        "lane": "W06-FF-MATRIX",
+        "sha256": "9ab29e07ca0ff74e45cf5a72961408371cb3c12966a474caaf1e9101feb3cc7f",
+        "bytes": 11682,
+        "references_count": 21
+      },
+      {
+        "lane": "W06-CWP-PORTABILITY",
+        "sha256": "46119404b7088666e7b41af6dadd93881d9f5d14ef5a62cd3a23ab631a56d770",
+        "bytes": 5717,
+        "references_count": 9
+      }
+    ],
+    "physical_and_git_blob_fingerprints": "Each frozen references entry declares physical sha256/bytes and git_blob_sha256/git_blob_bytes/committed_equivalent. EOL differences are separately recorded, not assumed implementation changes.",
+    "qualification": "Only receipt/manifest/target-code read. Worktree runtime imports, all archive recovery and future product behavior remain NOT_RUN."
+  },
+  "input_inventory": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\task_plan.md",
+      "sha256": "980967d4753815ee5ec84f5c92f177339b7cf2d3a5c6238737498191c542be5d",
+      "bytes": 3739
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\handoff_contract.md",
+      "sha256": "593f1b15464db6dc5de382570c11196921c1997251c36ac4c452afd275d86173",
+      "bytes": 3345
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\cards\\W06-CWP-PORTABILITY.md",
+      "sha256": "d3f73a4e421335159d53b2d1ff7bfdebd0296b2a999f13f132cda8ae023bbe22",
+      "bytes": 6135
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\cards\\W06-FF-MATRIX.md",
+      "sha256": "27e66f0b7d3b3a5e9a12b2f5ff898d97accf58176c6f8607faebbafa4a394e0d",
+      "bytes": 7102
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\cards\\W06-AUDIT-MEASURES.md",
+      "sha256": "f06a8cc1eb53c2d2294e0f563293a88cb0ca0cdc528a6df6e48d8fa1d85410e3",
+      "bytes": 5941
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\workspace-receipt.json",
+      "sha256": "0a4fd5fcc9529a463a4a0a98a66547a0696aaa478119ff264ee2c4e2038337f7",
+      "bytes": 2204
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\cards\\W05-CWP-OCR.md",
+      "sha256": "75affd54f2f27a6926f83508a1568b689c76c2b50941ff512a122db91c64edcb",
+      "bytes": 6307
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\cards\\W05-RF-FLOW.md",
+      "sha256": "f17002ffad055ce0e878545c9d71877390788e766419c03ca1c403bd87c65231",
+      "bytes": 6847
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\cards\\W05-AUDIT-LOOP.md",
+      "sha256": "b59545a3bc2449952033e489e77cd460d356252b3c694726b790c812f23ec71d",
+      "bytes": 8569
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/ROOT_INTERFACE_AMENDMENT.md",
+      "sha256": "b874c266a4cd37cb823fcbfda556606754fbcef9294ada5919a023a7844bb9bb",
+      "bytes": 2220
+    }
+  ],
+  "source_inventory_physical_sha256": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures\\AGENTS.md",
+      "sha256": "fe506bcf5e87570747c035dd05e6b6b46b11075fa7bd3f844b8edff0500d9d37",
+      "bytes": 1378
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures\\skills\\revenue-forecast-audit\\SKILL.md",
+      "sha256": "340a6174fdffe6b075faec0c68abf71ad32523afd8f4a29f77ee3588c984bfb7",
+      "bytes": 9141
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures\\skills\\revenue-forecast-audit\\scripts\\numeric_audit.py",
+      "sha256": "39cb4f8f561f14f406b5c79639f7395af915e1f9027b15a0e2ac8e0c40949aec",
+      "bytes": 5633
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures\\skills\\revenue-forecast-audit\\scripts\\audit_contracts.py",
+      "sha256": "751c233fc08523ff2cf3ae9c4d95591637afd34b26f82c192317f33948f4615d",
+      "bytes": 5168
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+      "sha256": "bcac81b8fdd2c08362f84a0da70ad48b5c1c3f825e0b7be84585717c8ce222ca",
+      "bytes": 53804
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix\\scripts\\transcript_tool_transport.py",
+      "sha256": "013c905b88e4d936d9fd0d2f88a67bb8204378a7e091b29f5ccfb58bed30e847",
+      "bytes": 34930
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix\\scripts\\fetch_filing.py",
+      "sha256": "ccdb9bff89b35dce0066df2804a716649213762017e3992f9a0c81896233f331",
+      "bytes": 75954
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix\\scripts\\filing_contracts.py",
+      "sha256": "18745e3fb395c398e7b00530b5228c8ccdce0bdf6fc876c609d71cd97e3b3245",
+      "bytes": 32231
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix\\tests\\test_et_s0b_contract.py",
+      "sha256": "ad693a85cc26ed343e25f6ba625b87e9a175f2f10ca4af945764a502ca0f0564",
+      "bytes": 3374
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix\\tests\\e2e_support\\isolated_wiki.py",
+      "sha256": "7ce57213c5d67172f431c69eb9e47c69dbcd18fe476c0a1d1b8131bbfac3f402",
+      "bytes": 16358
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\cwp-portability\\src\\company_wiki\\source_catalog\\source_reader.py",
+      "sha256": "be753a61cafd1b5d876f59c7e3f63f5f3724dc537d18e9cac58ff35795fab472",
+      "bytes": 35904
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\cwp-portability\\src\\company_wiki\\source_catalog\\service.py",
+      "sha256": "b308b935067e9a08fd4aee6c8c1cd56964447dadaed9f8401a6fe12fd684b1aa",
+      "bytes": 62571
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\cwp-portability\\src\\company_wiki\\source_catalog\\config.py",
+      "sha256": "beb07a6d0e97942c81c0ab7a1f82904d0fdcb3ef5447f01659773431b2839064",
+      "bytes": 11841
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\cwp-portability\\src\\company_wiki\\source_catalog\\registration_scope.py",
+      "sha256": "56e43bedb93317f38ad4c9648cfe40b74106dc86e64859ff05d1d7ab9620314f",
+      "bytes": 2196
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\cwp-portability\\src\\company_wiki\\source_catalog\\source_export_v2_cli.py",
+      "sha256": "41e1ab1d7b9d62f5467c564ae42b748f1fb93d2d9cbe57f0f98d9c9942c4fa61",
+      "bytes": 4139
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\cwp-portability\\src\\company_wiki\\source_contract\\source_export_v2.py",
+      "sha256": "95d245dd3ab72e9af1451f9dab4163954ab08ecf8655ecd280b3e215b33e5211",
+      "bytes": 14286
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_tool.py",
+      "sha256": "1684c922c8bff9a6ecc26fa5502a5abdc147e6c273619c5817e16325d7449003",
+      "bytes": 11966
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\retrieval_runtime.py",
+      "sha256": "2655bbadeccc98e74c51df1f3e49171f0a827f7699abee0afc4e7d665ffb1957",
+      "bytes": 10809
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\retrieval_worker.py",
+      "sha256": "8ec0836b061e48c172a92c3e2b02afc155c921c4a85660211df88ef4df7c94d5",
+      "bytes": 6428
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\tests\\test_retrieval_cli_e2e.py",
+      "sha256": "66de3e3c825dc2b4ddb25d167e9420b62719e8a42a4e4581bdbf2a6efc8f465f",
+      "bytes": 12670
+    }
+  ],
+  "checks": [
+    {
+      "id": "WRITE_ISOLATION",
+      "status": "PASS_STATIC",
+      "detail": "Three new physical workdirs and independent branches. W06 additive paths do not overlap W05 OCR source/tests, W05 RF contracts/forecast/report, W05 pool_progress/tests, or ROOT narrative/config/readers/adapters. Shared docs/handoffs prefix does not grant permission to overwrite readonly input/."
+    },
+    {
+      "id": "FF_TRUE_LAYER_CHAIN",
+      "status": "PASS_DESIGN",
+      "detail": "Final card names actual scripts/fetch_filing.py, EarningsTranscriptsTransport, ET main/private retrieval launcher, real supervisor/worker/API and actual CWP import/open_version. Whole-layer fake stdout/import/SourceRef expressly prohibited. Runtime still NOT_RUN."
+    },
+    {
+      "id": "FF_IMPORT_BINDING",
+      "status": "PASS_DESIGN",
+      "detail": "Existing IsolatedWiki editable/production fallback identified; final card requires supplied CWP src/PYTHONPATH, child __file__/SHA, scratch cwd/config/company_wiki_root and owned ET snapshot, avoiding that fallback. _wiki_env/import CLI and configured transcript_tool path support this."
+    },
+    {
+      "id": "ET_PRIVATE_SEAM",
+      "status": "PASS_STATIC",
+      "detail": "transcript_tool.main accepts _retrieval_launcher/_retrieval_spec/_retrieval_temp_root; supervised production branch forwards them to run_retrieval; retrieval_worker imports private factory and calls actual transcript_api. Offline worker HTTP replacement does not require producer rewrite or public flag."
+    },
+    {
+      "id": "CWP_ACTUAL_STORAGE",
+      "status": "PASS_DESIGN",
+      "detail": "register_sources exists; query_ref returns SourceRef identity, open_version actually retains verified bytes; source_export_v2_cli builds bundle with real SourceVersionReader. Card now names open_version and distinguishes stable content/reference versus unsupported document-ID promises."
+    },
+    {
+      "id": "PORTABILITY_NO_FAKE_E2E",
+      "status": "PASS_DESIGN",
+      "detail": "Small valid synthetic files, real registration/current config/root re-map/read/export, new short-lived consumer process, no cached buffer or mock byte verification. Damaged/absent raw cannot claim verified content; legacy physical debug paths explicitly distinguished from public consumer refs."
+    },
+    {
+      "id": "MEASURES_REAL_GAP",
+      "status": "PASS_STATIC",
+      "detail": "numeric_audit.verify_row checks explicit Decimal scale/FX only and explicitly disclaims truth/definition; additive typed observations/relations fill a real generic diagnostic gap. currency helper accepts explicit 3-letter form only, new tool owns unknown/alias/definition interpretation and tighter rounding."
+    },
+    {
+      "id": "NO_DUPLICATE_OLD_PACKAGE",
+      "status": "PASS_STATIC",
+      "detail": "FF old goldens frozen ET contract and IsolatedWiki are not a connected true three-layer chain; CWP N5 content quality differs from root migration; W05 pool recovery differs from typed financial relations. No requirement to rerun old 645 tests or duplicate N5 source quality package."
+    },
+    {
+      "id": "NO_NEW_PERMISSION_OR_GATE",
+      "status": "PASS_STATIC",
+      "detail": "No new authorization receipt/private-public/canary/manual signing. Actual hashes, bounds, explicit owned scratch, safe cleanup and single ROOT major acceptance preserve data/testing correctness. These tools are diagnostics/manual major runners, not every-commit mandatory long gates."
+    },
+    {
+      "id": "WEAK_MODEL_EXECUTABILITY",
+      "status": "PASS_STATIC",
+      "detail": "Cards plus bound ROOT amendment have exact workdirs/bases/write paths, readonly boundaries, public commands, real seams, valid root-ID examples, assumption/reference distinction, aggregate status/CLI exit mapping, synthetic labels, bounded budgets/timeout, RED/GREEN differences, fixed oracle requirements and PARTIAL handling."
+    },
+    {
+      "id": "ROOT_WIRING_AND_CLEANUP",
+      "status": "PASS_DESIGN",
+      "detail": "ROOT owns shared src adapters/fixes, final module binding and compatibility replay, process reviewer/skill integration, fast CI selection, install and main push. Sentinel baseline, close/reap/finally, resolved owned path boundaries, absence restoration and output retention limits are explicit."
+    },
+    {
+      "id": "FUTURE_TEST_OR_ECONOMIC_ACCEPTANCE",
+      "status": "NOT_RUN",
+      "detail": "No product tests, provider calls or future implementation probes executed. Three-layer engineering PASS and real-source/summary/forecast/buy-side quality remain distinct."
+    },
+    {
+      "id": "ASSUMPTION_AND_METADATA_CONTRACT",
+      "status": "PASS_DESIGN",
+      "detail": "Amendment allows analyst assumptions/stress source_ref=null with rationale and explicit roles, while reported/guidance require source_id+locator. Future target periods distinct from available-by/as-of; valid assumptions are not forced into invented source facts. Simple root IDs prevent copying slash-separated prose as schema values."
+    }
+  ],
+  "findings": [
+    {
+      "id": "W06-P2-EXACT-API-NAMES",
+      "priority": "P2",
+      "blocker": false,
+      "status": "RESOLVED_DURING_TRIAL_READ",
+      "detail": "Initial FF class label and CWP open_verified reference were imprecise. ROOT corrected final cards to EarningsTranscriptsTransport/fetch_filing.py/SourceVersionReader.open_version; observed final card SHA retained."
+    },
+    {
+      "id": "W06-P2-MODULE-PIN",
+      "priority": "P2",
+      "blocker": false,
+      "status": "RESOLVED_DURING_TRIAL_READ",
+      "detail": "Existing IsolatedWiki can use editable/prod paths. Final FF card explicitly binds supplied source and scratch state plus child module SHA. Runtime enforcement is future tool responsibility; no fake PASS signed now."
+    },
+    {
+      "id": "W06-P2-STATUS-CONTRACT",
+      "priority": "P2",
+      "blocker": false,
+      "status": "RESOLVED_IN_ROOT_INTERFACE_AMENDMENT",
+      "detail": "ROOT supplement explicitly defines INVALID > FAIL > UNRESOLVED > PASS and CLI 2/1/3/0. Required NOT_CHECKED relations imply UNRESOLVED. Implementation/tests remain future work in already-planned contract node; no extra approval."
+    }
+  ],
+  "no_scope_expansion": true,
+  "execution": {
+    "future_tests": 0,
+    "provider_calls": 0,
+    "model_calls": 0,
+    "paid_usd": 0,
+    "product_writes": 0,
+    "shared_pwf_writes": 0,
+    "old_evidence_writes": 0,
+    "temporary_test_files": 0
+  },
+  "recommendations_to_root": [
+    "No design blocker remains for dispatch of the prepared independent cards.",
+    "Preserve existing frozen 0.8 FAIL separately; do not interpret W06 plan PASS as source release or research PASS.",
+    "Implement the already-written ROOT amendment at each lane's planned contract/test node; no new review node or permission chain."
+  ],
+  "stop": true,
+  "interface_amendment": {
+    "observed": true,
+    "path": "C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/ROOT_INTERFACE_AMENDMENT.md",
+    "sha256": "b874c266a4cd37cb823fcbfda556606754fbcef9294ada5919a023a7844bb9bb",
+    "bytes": 2220,
+    "changes": "Explicit audit overall/exit codes, assumption null source refs with rationale/roles, actual FF scratch launch config fields, valid simple CWP root IDs and exact open_version. Frozen original card/input bytes preserved; static read only."
+  },
+  "report_observer_note": "One owned report Update attempt used Delete+Add for the same path and apply_patch rejected it before mutation; resolved with Update File. No product tests or shared files affected."
+}
+

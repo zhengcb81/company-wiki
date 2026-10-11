@@ -1,0 +1,143 @@
+{
+  "schema_version": "w06-dispatch-inputs/1",
+  "lanes": [
+    {
+      "lane": "W06-AUDIT-MEASURES",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures",
+      "input_dir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures\\docs\\handoffs\\w06-audit-measures\\input",
+      "input_files": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures\\docs\\handoffs\\w06-audit-measures\\input\\amendment_manifest.json",
+          "sha256": "4c8c1afe3af90d21623d046290fe8e2c06e947ca132005d7d485992ea81ec9ad",
+          "bytes": 374
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures\\docs\\handoffs\\w06-audit-measures\\input\\construction_card.md",
+          "sha256": "f06a8cc1eb53c2d2294e0f563293a88cb0ca0cdc528a6df6e48d8fa1d85410e3",
+          "bytes": 5941
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures\\docs\\handoffs\\w06-audit-measures\\input\\handoff_contract.md",
+          "sha256": "593f1b15464db6dc5de382570c11196921c1997251c36ac4c452afd275d86173",
+          "bytes": 3345
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures\\docs\\handoffs\\w06-audit-measures\\input\\inputs.json",
+          "sha256": "022c7c33d26f105a8f146dfaadf2a490b3ee544293758f09fbb7d9a1dbf02bad",
+          "bytes": 4447
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures\\docs\\handoffs\\w06-audit-measures\\input\\manifest.json",
+          "sha256": "5e9b17c43073afaa7f653ea1d6b91407757679f0b1c730463e1b524ae3d8f2e4",
+          "bytes": 551
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures\\docs\\handoffs\\w06-audit-measures\\input\\ROOT_INTERFACE_AMENDMENT.md",
+          "sha256": "b874c266a4cd37cb823fcbfda556606754fbcef9294ada5919a023a7844bb9bb",
+          "bytes": 2220
+        }
+      ],
+      "source_reference_count": 6,
+      "write_prefixes": [
+        "skills/revenue-forecast-audit/scripts/financial_measure_audit.py",
+        "skills/revenue-forecast-audit/references/financial-measure-audit.md",
+        "tests/test_financial_measure_audit.py",
+        "tests/test_financial_measure_audit_cli.py",
+        "tests/fixtures/financial_measures/",
+        "tools/run_financial_measure_e2e.py",
+        ".planning/w06-audit-measures/",
+        "docs/handoffs/w06-audit-measures/"
+      ]
+    },
+    {
+      "lane": "W06-FF-MATRIX",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix",
+      "input_dir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix\\docs\\handoffs\\w06-ff-matrix\\input",
+      "input_files": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix\\docs\\handoffs\\w06-ff-matrix\\input\\amendment_manifest.json",
+          "sha256": "79277b90d41ae32fb0b0773655f82dad8cde81c2183c09fd1858de7281e15e16",
+          "bytes": 374
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix\\docs\\handoffs\\w06-ff-matrix\\input\\construction_card.md",
+          "sha256": "27e66f0b7d3b3a5e9a12b2f5ff898d97accf58176c6f8607faebbafa4a394e0d",
+          "bytes": 7102
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix\\docs\\handoffs\\w06-ff-matrix\\input\\handoff_contract.md",
+          "sha256": "593f1b15464db6dc5de382570c11196921c1997251c36ac4c452afd275d86173",
+          "bytes": 3345
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix\\docs\\handoffs\\w06-ff-matrix\\input\\inputs.json",
+          "sha256": "9ab29e07ca0ff74e45cf5a72961408371cb3c12966a474caaf1e9101feb3cc7f",
+          "bytes": 11682
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix\\docs\\handoffs\\w06-ff-matrix\\input\\manifest.json",
+          "sha256": "6a919bdba4cb9b7090f9bbe734075d83e5fbbdfc1cf48f5d4a0b56933fb33e5c",
+          "bytes": 547
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix\\docs\\handoffs\\w06-ff-matrix\\input\\ROOT_INTERFACE_AMENDMENT.md",
+          "sha256": "b874c266a4cd37cb823fcbfda556606754fbcef9294ada5919a023a7844bb9bb",
+          "bytes": 2220
+        }
+      ],
+      "source_reference_count": 21,
+      "write_prefixes": [
+        "tools/offline_contract_matrix/",
+        "tests/test_w06_contract_matrix.py",
+        "tests/fixtures/w06_contract_matrix/",
+        ".planning/w06-ff-matrix/",
+        "docs/handoffs/w06-ff-matrix/"
+      ]
+    },
+    {
+      "lane": "W06-CWP-PORTABILITY",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\cwp-portability",
+      "input_dir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\cwp-portability\\docs\\handoffs\\w06-cwp-portability\\input",
+      "input_files": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\cwp-portability\\docs\\handoffs\\w06-cwp-portability\\input\\amendment_manifest.json",
+          "sha256": "320a27c9a60250eed7a46c0b2fed5ddba41baf104b67dcc2f7e1af56a9367891",
+          "bytes": 374
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\cwp-portability\\docs\\handoffs\\w06-cwp-portability\\input\\construction_card.md",
+          "sha256": "d3f73a4e421335159d53b2d1ff7bfdebd0296b2a999f13f132cda8ae023bbe22",
+          "bytes": 6135
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\cwp-portability\\docs\\handoffs\\w06-cwp-portability\\input\\handoff_contract.md",
+          "sha256": "593f1b15464db6dc5de382570c11196921c1997251c36ac4c452afd275d86173",
+          "bytes": 3345
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\cwp-portability\\docs\\handoffs\\w06-cwp-portability\\input\\inputs.json",
+          "sha256": "46119404b7088666e7b41af6dadd93881d9f5d14ef5a62cd3a23ab631a56d770",
+          "bytes": 5717
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\cwp-portability\\docs\\handoffs\\w06-cwp-portability\\input\\manifest.json",
+          "sha256": "56baa2ebe06c16e3b1264c0fe94850dda89e52fa94423a8788b49f57341a6a97",
+          "bytes": 552
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\cwp-portability\\docs\\handoffs\\w06-cwp-portability\\input\\ROOT_INTERFACE_AMENDMENT.md",
+          "sha256": "b874c266a4cd37cb823fcbfda556606754fbcef9294ada5919a023a7844bb9bb",
+          "bytes": 2220
+        }
+      ],
+      "source_reference_count": 9,
+      "write_prefixes": [
+        "tools/source_root_portability/",
+        "tests/unit/test_w06_root_portability_oracle.py",
+        "tests/integration/test_w06_root_portability.py",
+        ".planning/w06-cwp-portability/",
+        "docs/handoffs/w06-cwp-portability/"
+      ]
+    }
+  ]
+}

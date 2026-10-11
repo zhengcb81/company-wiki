@@ -1,0 +1,46 @@
+{
+  "schema_version": "w06-ready-validation/1",
+  "status": "PASS",
+  "at": "2026-10-11T09:24:00.123721+00:00",
+  "checks": [
+    {
+      "lane": "W06-AUDIT-MEASURES",
+      "branch": "codex/w06-audit-measures",
+      "head": "c0993332623637d53f059350a382d99a95ef731d",
+      "status": [
+        "?? docs/handoffs/"
+      ],
+      "input_files": 6,
+      "card_exact": true,
+      "handoff_exact": true
+    },
+    {
+      "lane": "W06-FF-MATRIX",
+      "branch": "codex/w06-ff-contract-matrix",
+      "head": "08ec85b27133cdf8a8d3b38fdba15255fc1ebac2",
+      "status": [
+        "?? docs/handoffs/"
+      ],
+      "input_files": 6,
+      "card_exact": true,
+      "handoff_exact": true
+    },
+    {
+      "lane": "W06-CWP-PORTABILITY",
+      "branch": "codex/w06-cwp-portability",
+      "head": "01ea86a37edb5506d6269b6e10d9cb56a1270efd",
+      "status": [
+        "?? docs/handoffs/"
+      ],
+      "input_files": 6,
+      "card_exact": true,
+      "handoff_exact": true
+    }
+  ],
+  "links_checked": 4,
+  "fixed_input_files": 18,
+  "product_tests": "NOT_RUN",
+  "raw_copies": 0,
+  "real_provider_calls": 0,
+  "model_calls": 0
+}
